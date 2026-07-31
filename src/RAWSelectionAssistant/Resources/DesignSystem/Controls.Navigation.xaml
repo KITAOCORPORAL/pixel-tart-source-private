@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="NavButton" TargetType="Button" BasedOn="{StaticResource GhostButton}">
+        <Setter Property="Height" Value="{DynamicResource SidebarButtonHeight}" />
+        <Setter Property="MinHeight" Value="{DynamicResource SidebarButtonHeight}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource SidebarButtonMargin}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="{DynamicResource SidebarSelectedBorderThickness}" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+    <Style x:Key="SidebarNavButton" TargetType="Button" BasedOn="{StaticResource NavButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonSurface"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True">
+                        <Grid ClipToBounds="False">
+                            <Grid x:Name="ExpandedContent" Margin="10,0,9,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource SidebarIconColumnWidth}" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Viewbox Width="{DynamicResource SidebarIconSize}" Height="{DynamicResource SidebarIconSize}"
+                                         Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                         SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                    <Path Data="{TemplateBinding Tag}" Stretch="Uniform" Fill="Transparent"
+                                          Stroke="{TemplateBinding Foreground}" StrokeThickness="1.6"
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                          SnapsToDevicePixels="True" />
+                                </Viewbox>
+                                <TextBlock Grid.Column="2" Text="{TemplateBinding Content}" VerticalAlignment="Center"
+                                           TextTrimming="None" TextWrapping="NoWrap" />
+                            </Grid>
+                            <Grid x:Name="CollapsedContent" Width="{DynamicResource SidebarIconContainerSize}"
+                                  Height="{DynamicResource SidebarIconContainerSize}" HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" Visibility="Collapsed">
+                                <Viewbox Width="{DynamicResource SidebarIconSize}" Height="{DynamicResource SidebarIconSize}"
+                                         Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                         SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                    <Path Data="{TemplateBinding Tag}" Stretch="Uniform" Fill="Transparent"
+                                          Stroke="{TemplateBinding Foreground}" StrokeThickness="1.6"
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                          SnapsToDevicePixels="True" />
+                                </Viewbox>
+                            </Grid>
+                            <Border x:Name="KeyboardFocusRing" Margin="2" CornerRadius="4" BorderThickness="1"
+                                    BorderBrush="{DynamicResource AccentBrush}" Visibility="Collapsed"
+                                    IsHitTestVisible="False" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
+                            <Setter TargetName="ExpandedContent" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="CollapsedContent" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="KeyboardFocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ButtonSurface" Property="Opacity" Value="0.42" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SelectedNavButton" TargetType="Button" BasedOn="{StaticResource SidebarNavButton}">
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="3,0,0,0" />
+    </Style>
+    <Style x:Key="WorkflowStepButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="MinWidth" Value="122" /><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style x:Key="SidebarSectionLabel" TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource TextTertiaryBrush}" /><Setter Property="FontSize" Value="11" /><Setter Property="Margin" Value="16,10,0,4" /></Style>
+    <Style x:Key="SidebarIcon" TargetType="Path"><Setter Property="Width" Value="18" /><Setter Property="Height" Value="18" /><Setter Property="Stretch" Value="Uniform" /><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="StrokeThickness" Value="1.6" /><Setter Property="StrokeLineJoin" Value="Round" /><Setter Property="StrokeStartLineCap" Value="Round" /><Setter Property="StrokeEndLineCap" Value="Round" /><Setter Property="SnapsToDevicePixels" Value="True" /><Setter Property="Margin" Value="0" /></Style>
+    <Style x:Key="QuickActionButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Height" Value="106" /><Setter Property="MinHeight" Value="106" /><Setter Property="MinWidth" Value="104" /><Setter Property="Margin" Value="5,0" /><Setter Property="Padding" Value="12" /><Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" /><Setter Property="BorderThickness" Value="1" /></Style>
+    <Style x:Key="QuickActionIcon" TargetType="Path" BasedOn="{StaticResource SidebarIcon}"><Setter Property="Width" Value="24" /><Setter Property="Height" Value="24" /><Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Margin" Value="0,0,0,10" /></Style>
+    <Style x:Key="ToolEntryButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Width" Value="124" /><Setter Property="Height" Value="94" /><Setter Property="Padding" Value="10" /><Setter Property="Margin" Value="5" /><Setter Property="Background" Value="{DynamicResource ToolTileBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" /><Setter Property="BorderThickness" Value="1" /></Style>
+    <Style x:Key="ToolEntryIcon" TargetType="Path" BasedOn="{StaticResource SidebarIcon}"><Setter Property="Width" Value="24" /><Setter Property="Height" Value="24" /><Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Margin" Value="0,0,0,9" /></Style>
+    <Style x:Key="ToolCatalogCard" TargetType="Button" BasedOn="{StaticResource GhostButton}">
+        <Setter Property="Height" Value="128" /><Setter Property="MinWidth" Value="250" /><Setter Property="Margin" Value="0,0,20,20" />
+        <Setter Property="Padding" Value="18" /><Setter Property="HorizontalContentAlignment" Value="Stretch" /><Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" /><Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style x:Key="ToolCatalogIcon" TargetType="Path" BasedOn="{StaticResource SidebarIcon}"><Setter Property="Width" Value="30" /><Setter Property="Height" Value="30" /><Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Margin" Value="0" /></Style>
+</ResourceDictionary>
