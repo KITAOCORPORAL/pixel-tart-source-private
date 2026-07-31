@@ -1,5 +1,6 @@
 param(
-    [string]$OutputDirectory = ''
+    [string]$OutputDirectory = '',
+    [switch]$SkipBuild
 )
 
 $ErrorActionPreference = 'Stop'
@@ -12,8 +13,10 @@ if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
 }
 
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
-& $dotnet build $project -c Release -p:UiReviewBuild=true -p:Platform=x64 --no-restore
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+if (-not $SkipBuild) {
+    & $dotnet build $project -c Release -p:UiReviewBuild=true -p:Platform=x64 --no-restore
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 
 $captures = @(
     @{ File='01_Workbench_Dark_1600x920.png'; State='Workbench'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
@@ -22,7 +25,7 @@ $captures = @(
     @{ File='04_Toolbox_FullPage.png'; State='ToolboxFullPage'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
     @{ File='05_RecentProjects.png'; State='RecentProjects'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
     @{ File='06_TaskCenter_WithTasks.png'; State='TaskCenterWithTasks'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
-    @{ File='07_TaskCenter_Empty.png'; State='TaskCenterEmpty'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
+    @{ File='07_TaskCenter_Empty.png'; State='CompletedProjectsEmpty'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
     @{ File='08_Settings_Dark.png'; State='Settings'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
     @{ File='09_Workbench_Light.png'; State='Workbench'; Theme='Light'; Width=1600; Height=920; Collapsed=$false },
     @{ File='10_Compact_1280.png'; State='Workbench'; Theme='Dark'; Width=1280; Height=720; Collapsed=$false },

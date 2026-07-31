@@ -4,6 +4,7 @@
     <SolidColorBrush x:Key="ContentBackgroundBrush" Color="{x:Static SystemColors.WindowColor}" />
     <SolidColorBrush x:Key="SurfacePrimaryBrush" Color="{x:Static SystemColors.WindowColor}" />
     <SolidColorBrush x:Key="SurfaceSecondaryBrush" Color="{x:Static SystemColors.ControlColor}" />
+    <SolidColorBrush x:Key="RaisedSurfaceBrush" Color="{x:Static SystemColors.ControlColor}" />
     <SolidColorBrush x:Key="SurfaceHoverBrush" Color="{x:Static SystemColors.HighlightColor}" />
     <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="{x:Static SystemColors.WindowColor}" />
     <SolidColorBrush x:Key="BorderBrush" Color="{x:Static SystemColors.WindowTextColor}" />
@@ -42,5 +43,12 @@
     <SolidColorBrush x:Key="TaskCenterBackgroundBrush" Color="{x:Static SystemColors.WindowColor}" />
     <SolidColorBrush x:Key="ToolTileBrush" Color="{x:Static SystemColors.ControlColor}" />
     <SolidColorBrush x:Key="WorkbenchCardBrush" Color="{x:Static SystemColors.WindowColor}" />
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{x:Static SystemColors.WindowColor}" />
+    <SolidColorBrush x:Key="InputBorderBrush" Color="{x:Static SystemColors.WindowTextColor}" />
+    <SolidColorBrush x:Key="InputForegroundBrush" Color="{x:Static SystemColors.WindowTextColor}" />
+    <SolidColorBrush x:Key="DropdownBackgroundBrush" Color="{x:Static SystemColors.MenuColor}" />
+    <SolidColorBrush x:Key="DropdownHoverBrush" Color="{x:Static SystemColors.HighlightColor}" />
+    <SolidColorBrush x:Key="DropdownSelectedBrush" Color="{x:Static SystemColors.HighlightColor}" />
+    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{x:Static SystemColors.InfoColor}" />
     <SolidColorBrush x:Key="WorkbenchHeroBrush" Color="{x:Static SystemColors.WindowColor}" />
 </ResourceDictionary>

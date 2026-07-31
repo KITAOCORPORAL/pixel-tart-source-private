@@ -375,6 +375,10 @@ public partial class MainWindow : Window
         }
 
         var tab = RecentAllTab;
+        if (string.Equals(reviewState, "CompletedProjectsEmpty", StringComparison.OrdinalIgnoreCase))
+        {
+            tab = FindVisualChildren<Button>(RecentProjectsArea).FirstOrDefault(button => string.Equals(button.Tag?.ToString(), "Completed", StringComparison.Ordinal));
+        }
         if (tab is not null) RecentProjectTab_Click(tab, new RoutedEventArgs());
         RootGrid.UpdateLayout();
         UpdateWorkbenchResponsiveLayout();
@@ -388,7 +392,7 @@ public partial class MainWindow : Window
             Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, () => _viewModel.FeedbackCommand.Execute(null));
             return;
         }
-        if (!string.IsNullOrWhiteSpace(outputPath))
+        if (!string.IsNullOrWhiteSpace(outputPath) && !string.Equals(outputPath, "KEEP_OPEN", StringComparison.OrdinalIgnoreCase))
         {
             Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, () => CaptureUiReviewFrame(outputPath));
         }

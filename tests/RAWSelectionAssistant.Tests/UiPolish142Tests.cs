@@ -13,7 +13,7 @@ public sealed class UiPolish142Tests
     [TestMethod] public void EditionUpgrade_IsInsideSidebarFooter() => Contains(MainXaml(), "x:Name=\"EditionStatusArea\"", "Content=\"升级\"", "CommandParameter=\"Activation\"");
     [TestMethod] public void CancelTask_IsLocalWorkflowAction() => Contains(MainXaml(), "x:Name=\"CancelButton\" Content=\"取消当前任务\"", "Style=\"{StaticResource DangerButton}\"");
     [TestMethod] public void ThemesStillProvideSemanticSurfaceResources() { Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Light.xaml"), "WorkbenchCardBrush", "DividerBrush"); Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Dark.xaml"), "WorkbenchCardBrush", "DividerBrush"); }
-    [TestMethod] public void VersionIs203() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.0.3\"");
+    [TestMethod] public void VersionIs2031() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.0.3.1\"");
     [TestMethod] public void WinExeRemainsEnabled() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");

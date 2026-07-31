@@ -2,22 +2,32 @@ namespace RAWSelectionAssistant.Core.Models;
 
 public static class QuickToolsService
 {
-    public const int MaximumPinnedTools = 4;
+    // “工具箱”始终独立可达，不占工作台普通快捷位。
+    public const int MaximumPinnedTools = 3;
 
-    public static IReadOnlyList<string> DefaultPinnedTools { get; } = ["Workflow", "PhotoOrganize", "BatchCompress", "Toolbox"];
+    public static IReadOnlyList<string> DefaultPinnedTools { get; } =
+        [ToolId.Workflow.ToString(), ToolId.PhotoOrganize.ToString(), ToolId.BatchCompress.ToString()];
 
     public static List<string> Normalize(IEnumerable<string>? values)
     {
-        var allowed = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        var source = values ?? DefaultPinnedTools;
+        var result = new List<string>();
+        var seen = new HashSet<ToolId>();
+
+        foreach (var value in source)
         {
-            "LocalSplit", "Workflow", "PhotoOrganize", "BatchCompress", "Watermark",
-            "DeleteRejects", "FtpTool", "BatchRename", "BatchConvert", "Collage", "Toolbox"
-        };
-        var result = (values ?? DefaultPinnedTools)
-            .Where(allowed.Contains)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .Take(MaximumPinnedTools)
-            .ToList();
+            if (!ToolRegistry.TryGet(value, out var definition) || !definition.CanPin || !seen.Add(definition.Id))
+            {
+                continue;
+            }
+
+            result.Add(definition.SettingsId);
+            if (result.Count == MaximumPinnedTools)
+            {
+                break;
+            }
+        }
+
         return result;
     }
 }

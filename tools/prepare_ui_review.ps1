@@ -3,7 +3,7 @@ param(
     [string]$Theme = 'Dark',
     [int]$Width = 1600,
     [int]$Height = 920,
-    [ValidateSet('Workbench', 'ToolboxPopup', 'ToolboxFullPage', 'RecentProjects', 'TaskCenterWithTasks', 'TaskCenterEmpty', 'Settings', 'Feedback')]
+    [ValidateSet('Workbench', 'ToolboxPopup', 'ToolboxFullPage', 'RecentProjects', 'CompletedProjectsEmpty', 'TaskCenterWithTasks', 'TaskCenterEmpty', 'Settings', 'Feedback')]
     [string]$State = 'Workbench',
     [string]$OutputPath = '',
     [switch]$SidebarCollapsed

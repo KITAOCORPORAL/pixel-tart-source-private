@@ -14,23 +14,23 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void ComboItems_AreThemed() => Contains(Inputs(), "TargetType=\"ComboBoxItem\"", "DropdownHoverBrush", "DropdownSelectedBrush");
     [TestMethod] public void TextPasswordListAndTooltip_AreThemed() => Contains(Inputs(), "TargetType=\"PasswordBox\"", "TargetType=\"ListBoxItem\"", "TargetType=\"ToolTip\"", "TooltipBackgroundBrush");
     [TestMethod] public void LightTheme_HasParallelInputTokens() => Contains(Light(), "InputBackgroundBrush", "DropdownBackgroundBrush", "TooltipBackgroundBrush");
-    [TestMethod] public void QuickTools_DefaultsAreCorrect() => CollectionAssert.AreEqual(new[] { "Workflow", "PhotoOrganize", "BatchCompress", "Toolbox" }, QuickToolsService.DefaultPinnedTools.ToArray());
-    [TestMethod] public void QuickTools_MaximumIsFour() { var values = QuickToolsService.Normalize(["Workflow", "PhotoOrganize", "BatchCompress", "Toolbox", "Collage"]); Assert.HasCount(QuickToolsService.MaximumPinnedTools, values); }
+    [TestMethod] public void QuickTools_DefaultsAreCorrect() => CollectionAssert.AreEqual(new[] { "Workflow", "PhotoOrganize", "BatchCompress" }, QuickToolsService.DefaultPinnedTools.ToArray());
+    [TestMethod] public void QuickTools_MaximumIsThreeAndToolboxDoesNotConsumeSlot() { var values = QuickToolsService.Normalize(["Workflow", "PhotoOrganize", "BatchCompress", "Toolbox", "Collage"]); Assert.HasCount(QuickToolsService.MaximumPinnedTools, values); CollectionAssert.DoesNotContain(values, "Toolbox"); }
     [TestMethod] public void QuickTools_NormalizesDuplicatesAndUnknowns() => CollectionAssert.AreEqual(new[] { "Collage", "PhotoOrganize" }, QuickToolsService.Normalize(["Collage", "Collage", "bad", "PhotoOrganize"]));
     [TestMethod] public void QuickTools_AllowsEmptyExplicitSelection() => CollectionAssert.AreEqual(Array.Empty<string>(), QuickToolsService.Normalize(Array.Empty<string>()));
     [TestMethod] public async Task QuickTools_PersistAndReload() { using var temp = new TempDirectory(); var service = new SettingsService(new TestLogService(), temp.Combine("settings.json")); var settings = new AppSettings { PinnedQuickTools = ["Collage", "PhotoOrganize", "Toolbox"] }; await service.SaveAsync(settings); var loaded = await service.LoadAsync(); CollectionAssert.AreEqual(settings.PinnedQuickTools, loaded.PinnedQuickTools); }
     [TestMethod] public void QuickTools_ViewModelSupportsToggleAndCapacity() => Contains(ViewModel(), "TogglePinnedToolCommand", "快捷工具已满", "Settings.PinnedQuickTools", "SaveSettingsAsync");
     [TestMethod] public void QuickTools_HomeUpdatesFromPinnedCollection() => Contains(MainXaml(), "ItemsSource=\"{Binding PinnedToolboxItems}\"", "UniformGrid Columns=\"3\"");
-    [TestMethod] public void Toolbox_RemainsFixedEntry() => Contains(ViewModel(), "工具箱固定保留在快捷区", "item.Id != \"Toolbox\"");
-    [TestMethod] public void ToolboxPopup_HasGroupingAndCollage() => Contains(Popup(), "CommandParameter=\"PhotoGrouping\"", "CommandParameter=\"Collage\"", "整理图片", "拼图", "TogglePinnedToolCommand");
-    [TestMethod] public void ToolboxFullPage_HasGroupingAndCollage() => Contains(MainXaml(), "CommandParameter=\"PhotoGrouping\"", "CommandParameter=\"Collage\"", "固定 / 取消固定");
-    [TestMethod] public void GroupingPage_IsCompleteShell() => Contains(MainXaml(), "IsPhotoGroupingPage", "整理图片工具", "已分组", "新建分组", "批量创建文件夹", "缩略图");
-    [TestMethod] public void CollagePage_IsCompleteShell() => Contains(MainXaml(), "IsCollagePage", "拼图模式", "模板与参数", "2 图左右", "1 主图 + 2 副图", "支持 JPG、PNG");
+    [TestMethod] public void Toolbox_RemainsFixedEntry() => Contains(ViewModel(), "工具箱始终可从工作台和侧栏打开", "ToolCatalogItems", "ToolId.Toolbox");
+    [TestMethod] public void ToolboxPopup_HasGroupingAndCollage() => Contains(Popup(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "TogglePinnedToolCommand", "ResourceKeyToGeometryConverter");
+    [TestMethod] public void ToolboxFullPage_HasGroupingAndCollage() => Contains(MainXaml(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "UniformGrid Columns=\"3\"", "ToolCatalogCard", "PinActionLabel");
+    [TestMethod] public void GroupingPage_IsCompleteShell() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "分组整理", "新建分组", "批量创建文件夹", "缩略图");
+    [TestMethod] public void CollagePage_IsCompleteShell() => Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板与参数", "TemplateCategories", "6 张", "背景颜色", "不会生成或修改文件");
     [TestMethod] public void Navigation_AllowsNewToolPages() => Contains(ViewModel(), "\"PhotoGrouping\"", "\"Collage\"", "IsPhotoGroupingPage", "IsCollagePage");
     [TestMethod] public void ExistingSettingsAndToolboxFixesRemain() => Contains(MainXaml(), "SidebarSettingsButton", "OpenSettingsCommand", "ViewAllToolsButton", "OpenToolboxPage_Click");
     [TestMethod] public void SidebarCollapseFixRemains() => Contains(MainXaml(), "SidebarNavButton", "IconExpand", "SidebarCollapseButton");
     [TestMethod] public void ReleaseProviderAndWinExeRemain() { Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\""); Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>"); Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false"); }
-    [TestMethod] public void VersionAndInstallerAre203() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.0.3"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3\"", "像素蛋挞_Setup_2.0.3_x64"); }
+    [TestMethod] public void VersionAndInstallerAre2031() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.0.3.1"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3.1\"", "像素蛋挞_Setup_2.0.3.1_x64"); }
 
     private static string Popup() { var text = MainXaml(); var start = text.IndexOf("WorkbenchToolboxPopup", StringComparison.Ordinal); var end = text.IndexOf("</Popup>", start, StringComparison.Ordinal); return text[start..end]; }
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");

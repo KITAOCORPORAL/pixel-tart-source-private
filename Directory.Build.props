@@ -1,6 +1,9 @@
 <Project>
+  <Import Project="build\Version.props" />
   <PropertyGroup>
-    <Version>2.0.3</Version>
+    <Version>$(PixelTartVersion)</Version>
+    <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
+    <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
     <Company>像素蛋挞</Company>
     <Product>像素蛋挞</Product>
     <AssemblyTitle>像素蛋挞</AssemblyTitle>
