@@ -5,12 +5,12 @@ namespace RAWSelectionAssistant.Tests;
 [TestClass]
 public sealed class WorkbenchVisualCorrection201Tests
 {
-    [TestMethod] public void Version_Is203() => Contains(Branding(), "ProductVersion = \"2.0.3\"");
+    [TestMethod] public void Version_Is2031() => Contains(Branding(), "ProductVersion = \"2.0.3.1\"");
     [TestMethod] public void DefaultTheme_IsDark() => Assert.AreEqual(ThemeMode.Dark, new AppearanceSettings().Theme);
     [TestMethod] public void DefaultWindow_Is1600By920() => Contains(MainXaml(), "Width=\"1600\" Height=\"920\"", "MinWidth=\"1180\"");
     [TestMethod] public void WorkbenchDefaultDarkResources_AreComplete() => Contains(Dark(), "#0B0C0E", "#141518", "#18191C", "#202226", "#24262A", "#2A2D32", "#E3A93B", "#20C985");
     [TestMethod] public void Workbench_UsesThreeColumnShell() => Contains(MainXaml(), "x:Name=\"SidebarContainer\"", "x:Name=\"WorkbenchShell\"", "x:Name=\"TaskCenterPanel\"", "Width=\"320\"");
-    [TestMethod] public void Sidebar_IsCompactAndGrouped() => Contains(MainXaml(), "Text=\"工作台\" Style=\"{StaticResource SidebarSectionLabel}\"", "Text=\"应用\"", "Content=\"工具箱\"", "Content=\"使用教程\"", "Content=\"问题反馈\"");
+    [TestMethod] public void Sidebar_IsCompactAndGrouped() => Contains(MainXaml(), "Text=\"工作台\" Style=\"{StaticResource SidebarSectionLabel}\"", "Text=\"应用\"", "ToolboxEntry.DisplayName", "Content=\"使用教程\"", "Content=\"问题反馈\"");
     [TestMethod] public void Sidebar_DoesNotKeepSevenToolLongList() { var xaml = MainXaml(); var start = xaml.IndexOf("x:Name=\"SidebarContainer\"", StringComparison.Ordinal); var end = xaml.IndexOf("x:Name=\"WorkbenchShell\"", start, StringComparison.Ordinal); DoesNotContain(xaml[start..end], "CommandParameter=\"BatchCompress\"", "CommandParameter=\"Watermark\"", "CommandParameter=\"DeleteRejects\"", "CommandParameter=\"FtpTool\"", "CommandParameter=\"PhotoOrganize\"", "CommandParameter=\"BatchRename\"", "CommandParameter=\"BatchConvert\""); }
     [TestMethod] public void SidebarCollapsedMode_KeepsIcons() { Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "SidebarLayoutMetrics.CollapsedWidth", "width < 1100"); Contains(Text("src/RAWSelectionAssistant.Core/Models/SidebarLayoutMetrics.cs"), "CollapsedWidth = 60d"); }
     [TestMethod] public void SidebarRows_AreFortyPixels() => Contains(Navigation(), "SidebarButtonHeight", "MinHeight");
@@ -25,8 +25,7 @@ public sealed class WorkbenchVisualCorrection201Tests
         var start = xaml.IndexOf("x:Name=\"WorkbenchToolboxPopup\"", StringComparison.Ordinal);
         var end = xaml.IndexOf("</Popup>", start, StringComparison.Ordinal);
         var popup = xaml[start..end];
-        Assert.AreEqual(9, Count(popup, "Style=\"{StaticResource ToolEntryButton}\""));
-        Contains(popup, "本地分片", "批量压缩", "批量水印", "删废片", "FTP 工具", "整理图片", "拼图", "批量重命名", "批量转档");
+        Contains(popup, "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "ResourceKeyToGeometryConverter");
     }
 
     [TestMethod] public void ToolboxEscape_ClosesPopup() => Contains(CodeBehind(), "e.Key == Key.Escape && WorkbenchToolboxPopup.IsOpen", "WorkbenchToolboxPopup.IsOpen = false");
@@ -55,7 +54,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void ReleaseProvider_RemainsNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void ReleaseMock_RemainsDisabled() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");
     [TestMethod] public void Source_DoesNotUseLocalhost() { foreach (var file in Directory.EnumerateFiles(Path.Combine(Root(), "src"), "*.*", SearchOption.AllDirectories).Where(path => path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))) DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1"); }
-    [TestMethod] public void Installer_IsNamedFor203() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3\"", "像素蛋挞_Setup_2.0.3_x64");
+    [TestMethod] public void Installer_IsNamedFor2031() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3.1\"", "像素蛋挞_Setup_2.0.3.1_x64");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
     private static string CodeBehind() => Text("src/RAWSelectionAssistant/MainWindow.xaml.cs");

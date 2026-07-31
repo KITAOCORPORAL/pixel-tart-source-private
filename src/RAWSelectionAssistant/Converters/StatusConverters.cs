@@ -72,3 +72,13 @@ public sealed class FileSizeConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
 }
+
+public sealed class ResourceKeyToGeometryConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+        value is string key && Application.Current?.TryFindResource(key) is Geometry geometry
+            ? geometry
+            : Geometry.Empty;
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+}

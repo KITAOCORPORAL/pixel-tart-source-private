@@ -192,6 +192,9 @@
         </Setter>
     </Style>
 
+    <Style TargetType="TabControl"><Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /></Style>
+    <Style TargetType="TabItem"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="Padding" Value="10,7" /><Setter Property="MinHeight" Value="34" /><Style.Triggers><Trigger Property="IsSelected" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource MenuItemHoverBrush}" /></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55" /></Trigger></Style.Triggers></Style>
+
     <Style TargetType="Separator">
         <Setter Property="Margin" Value="6,4" />
         <Setter Property="Template">

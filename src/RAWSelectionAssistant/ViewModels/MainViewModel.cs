@@ -172,6 +172,7 @@ public sealed class MainViewModel : ObservableObject
         SelectionView = CollectionViewSource.GetDefaultView(Selections);
         SelectionView.Filter = FilterSelection;
         Selections.CollectionChanged += (_, _) => { UpdateStatistics(); SelectionView.Refresh(); RefreshCommands(); };
+        RefreshToolPinState();
         RegenerateOutputFolderName();
     }
 
@@ -186,6 +187,8 @@ public sealed class MainViewModel : ObservableObject
         set => SetProperty(ref _isSettingsModalOpen, value);
     }
     public AppSettings Settings { get; private set; } = new();
+    public OrganizePhotosViewModel OrganizePhotosPage { get; } = new();
+    public CollageViewModel CollagePage { get; } = new();
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -398,23 +401,18 @@ public sealed class MainViewModel : ObservableObject
     public bool IsPhotoGroupingPage => CurrentPage == "PhotoGrouping";
     public bool IsCollagePage => CurrentPage == "Collage";
     public bool IsToolboxPage => CurrentPage == "Toolbox";
-    public ObservableCollection<ToolboxItemDefinition> ToolboxItems { get; } = new(
-    [
-        new("LocalSplit", "本地分片", "匹配本地 JPG、RAW 及相关文件。", "LocalSplit"),
-        new("Workflow", "归片工作区", "核对 JPG、RAW、冲突与复制结果。", "Workflow"),
-        new("PhotoOrganize", "整理图片", "按组名、缩略图和图片数量整理照片。", "PhotoGrouping"),
-        new("BatchCompress", "批量压缩", "预设尺寸、质量与元数据保留方式。", "BatchCompress"),
-        new("Collage", "拼图", "使用常见模板合成照片。", "Collage"),
-        new("Watermark", "批量水印", "为交付照片配置文字或图片水印。", "Watermark"),
-        new("DeleteRejects", "删废片", "浏览、标记并安全确认待删除照片。", "DeleteRejects"),
-        new("FtpTool", "FTP 工具", "配置本地文件和远程目录传输任务。", "FtpTool"),
-        new("BatchRename", "批量重命名", "按模板预览并统一重命名照片。", "BatchRename"),
-        new("BatchConvert", "批量转档", "统一输出 JPEG、PNG 或 TIFF 格式。", "BatchConvert"),
-        new("Toolbox", "工具箱", "打开完整工具集合。", "Toolbox")
-    ]);
-    public IReadOnlyList<ToolboxItemDefinition> PinnedToolboxItems => ToolboxItems.Where(item => item.Id != "Toolbox" && Settings.PinnedQuickTools.Contains(item.Id, StringComparer.OrdinalIgnoreCase)).Take(QuickToolsService.MaximumPinnedTools - 1).ToList();
-    public bool IsToolPinned(string id) => Settings.PinnedQuickTools.Contains(id, StringComparer.OrdinalIgnoreCase);
-    public bool CanPinTool(string id) => IsToolPinned(id) || Settings.PinnedQuickTools.Count < QuickToolsService.MaximumPinnedTools;
+    public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
+        new(ToolRegistry.All.Select(definition => new ToolboxItemViewModel(definition)));
+    public IReadOnlyList<ToolboxItemViewModel> ToolCatalogItems =>
+        ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox).ToList();
+    public IReadOnlyList<ToolDefinition> ToolMenuItems => ToolRegistry.All;
+    public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
+    public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems =>
+        ToolboxItems.Where(item => item.IsPinned).Take(QuickToolsService.MaximumPinnedTools).ToList();
+    public bool IsToolPinned(string id) => ToolRegistry.TryGet(id, out var definition) &&
+        Settings.PinnedQuickTools.Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase);
+    public bool CanPinTool(string id) => ToolRegistry.TryGet(id, out var definition) && definition.CanPin &&
+        (IsToolPinned(id) || QuickToolsService.Normalize(Settings.PinnedQuickTools).Count < QuickToolsService.MaximumPinnedTools);
     public string LocalSplitHelpText => "导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。";
     public string SearchQuery
     {
@@ -775,6 +773,8 @@ public sealed class MainViewModel : ObservableObject
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+        RefreshToolPinState();
+        OnPropertyChanged(nameof(PinnedToolboxItems));
         _appearanceService.Initialize(Settings.Appearance);
         var existingUserDetector = new ExistingUserDetectionService();
         var currentTutorialInProgress = existingUserDetector.IsCurrentTutorialInProgress(
@@ -1712,33 +1712,49 @@ public sealed class MainViewModel : ObservableObject
         }
         if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
-        CurrentPage = page == "ProjectCenter" ? "Workbench" : page;
+        CurrentPage = page switch
+        {
+            "ProjectCenter" => "Workbench",
+            "PhotoOrganize" => "PhotoGrouping",
+            _ => page
+        };
     }
 
     private void TogglePinnedTool(string? id)
     {
-        if (string.IsNullOrWhiteSpace(id)) return;
-        if (string.Equals(id, "Toolbox", StringComparison.OrdinalIgnoreCase))
+        if (!ToolRegistry.TryGet(id, out var definition)) return;
+        if (!definition.CanPin)
         {
-            ShowToast("工具箱固定保留在快捷区");
+            ShowToast("工具箱始终可从工作台和侧栏打开，不占快捷位");
             return;
         }
-        if (IsToolPinned(id))
+        if (IsToolPinned(definition.SettingsId))
         {
-            Settings.PinnedQuickTools.RemoveAll(value => string.Equals(value, id, StringComparison.OrdinalIgnoreCase));
+            Settings.PinnedQuickTools.RemoveAll(value => string.Equals(value, definition.SettingsId, StringComparison.OrdinalIgnoreCase));
         }
-        else if (Settings.PinnedQuickTools.Count >= QuickToolsService.MaximumPinnedTools)
+        else if (QuickToolsService.Normalize(Settings.PinnedQuickTools).Count >= QuickToolsService.MaximumPinnedTools)
         {
             ShowToast("快捷工具已满，请先取消固定一个工具");
             return;
         }
         else
         {
-            Settings.PinnedQuickTools.Add(id);
+            Settings.PinnedQuickTools.Add(definition.SettingsId);
         }
         Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
         _ = SaveSettingsAsync();
+    }
+
+    private void RefreshToolPinState()
+    {
+        var normalized = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        Settings.PinnedQuickTools = normalized;
+        foreach (var item in ToolboxItems)
+        {
+            item.SetPinned(normalized.Contains(item.Id, StringComparer.OrdinalIgnoreCase));
+        }
     }
 
     private void GoToWorkflowStep(object? parameter)
