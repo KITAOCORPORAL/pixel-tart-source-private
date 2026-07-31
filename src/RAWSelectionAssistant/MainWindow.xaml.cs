@@ -356,6 +356,7 @@ public partial class MainWindow : Window
 
         _viewModel.IsSettingsModalOpen = false;
         _viewModel.NavigateCommand.Execute("Workbench");
+        RecentAllTab.Content = "最近项目";
         TaskCenterRuntimeContent.Visibility = Visibility.Visible;
         TaskCenterReviewContent.Visibility = Visibility.Collapsed;
         WorkbenchToolboxPopup.IsOpen = false;
@@ -372,6 +373,10 @@ public partial class MainWindow : Window
         {
             TaskCenterRuntimeContent.Visibility = Visibility.Collapsed;
             TaskCenterReviewContent.Visibility = Visibility.Visible;
+        }
+        else if (string.Equals(reviewState, "RecentProjects", StringComparison.OrdinalIgnoreCase))
+        {
+            RecentAllTab.Content = "最近项目 · 演示数据";
         }
 
         var tab = RecentAllTab;
