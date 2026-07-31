@@ -1,0 +1,21 @@
+<Window x:Class="RAWSelectionAssistant.Views.UpgradeTutorialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="像素蛋挞" Width="470" Height="250" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Icon="../Assets/AppIcon.ico" Background="{DynamicResource WindowBackgroundBrush}">
+    <Grid Margin="28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="全新的交互式新手教程" FontSize="21" FontWeight="SemiBold" />
+        <TextBlock Grid.Row="1" Margin="0,16,0,0" TextWrapping="Wrap" LineHeight="23"
+                   Foreground="{DynamicResource TextSecondaryBrush}"
+                   Text="像素蛋挞已经加入完整归片演示。教程只使用内置示例文件，不会读取或修改你的真实照片；稍后也可随时从帮助中查看。" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="稍后在帮助中查看" Style="{StaticResource SecondaryButton}" Click="Later_Click" IsCancel="True" />
+            <Button Content="立即体验教程" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0" Click="Start_Click" IsDefault="True" />
+        </StackPanel>
+    </Grid>
+</Window>

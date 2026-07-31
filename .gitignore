@@ -1,0 +1,72 @@
+**/bin/
+**/obj/
+.vs/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Generated release, verification and media artifacts
+artifacts/**
+!artifacts/releases/
+!artifacts/releases/**/
+!artifacts/releases/**/release-manifest.json
+artifacts/acceptance/
+artifacts/publish/
+artifacts/installer/
+artifacts/install-verification/
+artifacts/ui-review/
+artifacts/final-review/
+artifacts/final-manual-review/
+artifacts/tests/
+artifacts/releases/**/publish/
+artifacts/releases/**/installer/
+artifacts/releases/**/*.exe
+artifacts/releases/**/*.msi
+artifacts/releases/**/*.msix
+artifacts/releases/**/*.zip
+
+# External references, migration bundles and customer material
+reference/
+迁移输出/
+samples/customer-data/
+samples/customer-photos/
+customer-data/
+customer-photos/
+
+# Local settings, credentials and license material
+settings.json
+**/settings.json
+!settings.example.json
+appsettings.license.local.json
+**/appsettings.license.local.json
+*.secrets.json
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+*.license
+activation*.json
+
+# Runtime logs and local application copies
+*.log
+logs/
+LocalAppData/
+AppData/
+
+# Generated installers and archives outside the versioned manifest folders
+*.exe
+*.msi
+*.msix
+*.appx
+*.zip
+*.7z
+
+# IDE and user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.idea/
