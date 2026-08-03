@@ -1,0 +1,26 @@
+using System.Text.Json;
+using System.IO;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Services;
+
+if (args.Length != 3) throw new ArgumentException("input, organize output and collage output required");
+var input = Path.GetFullPath(args[0]); var organizeOutput = Path.GetFullPath(args[1]); var collageOutput = Path.GetFullPath(args[2]);
+Directory.CreateDirectory(organizeOutput); Directory.CreateDirectory(collageOutput);
+var files = Directory.GetFiles(input, "DPI_TEST_*.png").OrderBy(x => x).ToArray();
+var before = files.ToDictionary(path => Path.GetFileName(path)!, Hash, StringComparer.OrdinalIgnoreCase);
+var organize = new OrganizeService();
+var photos = await organize.ScanAsync(files, CancellationToken.None);
+var groups = organize.Group(photos, new OrganizeRule(OrganizeRuleType.FileFormat));
+var plan = organize.BuildPlan(photos, groups, new[]{input}, organizeOutput, new OrganizeRule(OrganizeRuleType.FileFormat), OrganizeOperationType.Copy, OrganizeConflictPolicy.AutoNumber, true);
+var organized = await organize.ExecuteAsync(plan);
+var project = new CollageProject { Mode=CollageMode.Template, TemplateId="4-grid" };
+for(var index=0; index<files.Length; index++) project.Images.Add(new CollageImageState { SourcePath=files[index], SlotId=(index+1).ToString() });
+project.Export.PixelWidth=1200; project.Export.PixelHeight=1200;
+var collage = new CollageExportService();
+project.Export.Format="JPG"; var jpg=await collage.ExportAsync(project,Path.Combine(collageOutput,"installed-collage.jpg"));
+project.Export.Format="PNG"; var png=await collage.ExportAsync(project,Path.Combine(collageOutput,"installed-collage.png"));
+var after = files.ToDictionary(path => Path.GetFileName(path)!, Hash, StringComparer.OrdinalIgnoreCase);
+var result = new { Passed=organized.Succeeded==4 && File.Exists(jpg.OutputPath) && File.Exists(png.OutputPath) && before.All(x=>after[x.Key]==x.Value), OrganizeCopiedCount=organized.Succeeded, CollageJpg=jpg.OutputPath, CollagePng=png.OutputPath, SourceIntegrity=before.All(x=>after[x.Key]==x.Value) };
+Console.WriteLine(JsonSerializer.Serialize(result));
+static string Hash(string path)=>Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)));

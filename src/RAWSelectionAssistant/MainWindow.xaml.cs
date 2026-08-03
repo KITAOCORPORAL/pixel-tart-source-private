@@ -425,6 +425,7 @@ public partial class MainWindow : Window
         var collapsed = root.GetProperty("SidebarCollapsed").GetBoolean();
         var reviewState = root.GetProperty("State").GetString();
         var outputPath = root.GetProperty("OutputPath").GetString();
+        ConfigureAutomatedDpiAcceptance(root);
 
         WindowState = WindowState.Normal;
         Width = width;
@@ -448,7 +449,9 @@ public partial class MainWindow : Window
         TaskCenterReviewContent.Visibility = Visibility.Collapsed;
         WorkbenchToolboxPopup.IsOpen = false;
 
-        if (string.Equals(reviewState, "ToolboxFullPage", StringComparison.OrdinalIgnoreCase))
+        var automatedStateHandled = await PrepareAutomatedDpiAcceptanceStateAsync(reviewState);
+
+        if (!automatedStateHandled && string.Equals(reviewState, "ToolboxFullPage", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("Toolbox");
         }
@@ -487,6 +490,7 @@ public partial class MainWindow : Window
         if (tab is not null) RecentProjectTab_Click(tab, new RoutedEventArgs());
         RootGrid.UpdateLayout();
         UpdateWorkbenchResponsiveLayout();
+        FinalizeAutomatedDpiAcceptanceState(reviewState);
 
         if (string.Equals(reviewState, "ToolboxPopup", StringComparison.OrdinalIgnoreCase))
         {
@@ -514,6 +518,11 @@ public partial class MainWindow : Window
 
     private void CaptureUiReviewFrame(string outputPath)
     {
+        if (_automatedDpiAcceptanceEnabled)
+        {
+            CaptureAutomatedDpiFrame(outputPath);
+            return;
+        }
         RootGrid.UpdateLayout();
         if (RootGrid.ActualWidth <= 0 || RootGrid.ActualHeight <= 0) return;
 
