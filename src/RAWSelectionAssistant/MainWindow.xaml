@@ -406,7 +406,7 @@
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
-                                        <Button Content="管理快捷工具" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Margin="5,7,5,0" Command="{Binding ManageQuickToolsCommand}" AutomationProperties.Name="管理快捷工具" />
+                                        <Button Content="管理快捷工具" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Margin="5,7,5,0" Click="ManageQuickTools_Click" AutomationProperties.Name="管理快捷工具" />
                                         <Button x:Name="ViewAllToolsButton" Content="查看全部工具" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Margin="5,4,5,2" Click="OpenToolboxPage_Click" AutomationProperties.Name="查看全部工具" />
                                     </StackPanel>
                                 </Border>

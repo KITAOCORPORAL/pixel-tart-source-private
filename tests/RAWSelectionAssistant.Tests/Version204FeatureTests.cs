@@ -224,6 +224,14 @@ public sealed class Version204FeatureTests
         }
     }
 
+    [TestMethod]
+    public void ToolboxPopup_UsesExplicitQuickToolsManagerClickHandler()
+    {
+        var xaml=File.ReadAllText(Path.Combine(Root(),"src/RAWSelectionAssistant/MainWindow.xaml"));
+        StringAssert.Contains(xaml,"Content=\"管理快捷工具\"");
+        StringAssert.Contains(xaml,"Click=\"ManageQuickTools_Click\"");
+    }
+
     private static string Root()
     {
         var directory=new DirectoryInfo(AppContext.BaseDirectory);
