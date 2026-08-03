@@ -264,6 +264,17 @@ function Complete-FileDialog {
     Invoke-Element $button
     Start-Sleep -Milliseconds 500
 }
+function Select-SaveDialogFilter {
+    param([System.Windows.Automation.AutomationElement]$Dialog, [string]$Extension)
+    if ($Extension -ne '.png') { return }
+    $combo = Get-AllElements $Dialog | Where-Object { try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::ComboBox -and -not $_.Current.IsOffscreen } catch { $false } } | Sort-Object { $_.Current.BoundingRectangle.Top } -Descending | Select-Object -First 1
+    if ($null -eq $combo) { throw 'Save dialog file type selector was not found.' }
+    Expand-Element $combo
+    Start-Sleep -Milliseconds 250
+    $pngItem = Get-AllElements $combo | Where-Object { try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::ListItem -and $_.Current.Name -like '*PNG*' } catch { $false } } | Select-Object -First 1
+    if ($null -eq $pngItem) { throw 'PNG save filter was not found.' }
+    Select-Element $pngItem
+}
 function Confirm-MessageBox {
     param([int]$ProcessId, [int]$MainHandle, [string]$ButtonAutomationId, [int]$TimeoutSeconds = 15)
     $dialog = Wait-NativeDialog -ExcludedHandles @($MainHandle) -ProcessId $ProcessId -TimeoutSeconds $TimeoutSeconds
@@ -479,6 +490,7 @@ try {
         }
         Invoke-Element $exportButton
         $saveDialog = Wait-NativeDialog -ExcludedHandles @($mainHandle) -ProcessId $process.Id -TimeoutSeconds 12
+        Select-SaveDialogFilter -Dialog $saveDialog -Extension ([IO.Path]::GetExtension($exportPath))
         Complete-FileDialog -Dialog $saveDialog -Paths @($exportPath) -OwnerHandle ([IntPtr]$mainHandle)
         Confirm-MessageBox -ProcessId $process.Id -MainHandle $mainHandle -ButtonAutomationId '6'
         $deadline = [DateTime]::UtcNow.AddSeconds(30)
