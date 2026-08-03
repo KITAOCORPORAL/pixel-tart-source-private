@@ -30,7 +30,10 @@ $captures = @(
     @{ File='09_Workbench_Light.png'; State='Workbench'; Theme='Light'; Width=1600; Height=920; Collapsed=$false },
     @{ File='10_Compact_1280.png'; State='Workbench'; Theme='Dark'; Width=1280; Height=720; Collapsed=$false },
     @{ File='11_Sidebar_Collapsed.png'; State='Workbench'; Theme='Dark'; Width=1600; Height=920; Collapsed=$true },
-    @{ File='12_Feedback_Dialog.png'; State='Feedback'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false }
+    @{ File='12_Feedback_Dialog.png'; State='Feedback'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
+    @{ File='13_OrganizePhotos_Dark.png'; State='OrganizePhotos'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
+    @{ File='14_Collage_Dark.png'; State='Collage'; Theme='Dark'; Width=1600; Height=920; Collapsed=$false },
+    @{ File='15_QuickTools_Overflow_1280.png'; State='QuickToolsOverflow'; Theme='Dark'; Width=1280; Height=720; Collapsed=$false }
 )
 
 foreach ($capture in $captures) {

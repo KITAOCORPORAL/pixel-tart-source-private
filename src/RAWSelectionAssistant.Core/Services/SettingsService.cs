@@ -39,6 +39,8 @@ public sealed class SettingsService
             using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json));
             var settings = await JsonSerializer.DeserializeAsync<AppSettings>(stream, _options, cancellationToken).ConfigureAwait(false)
                            ?? new AppSettings();
+            if (!document.RootElement.TryGetProperty(nameof(AppSettings.QuickToolLayout), out _))
+                settings.QuickToolLayout = new QuickToolLayout { OrderedToolIds = QuickToolsService.Normalize(settings.PinnedQuickTools) };
             if (WasLegacySettings) settings.OnboardingLegacyUser = true;
             Upgrade(settings);
             return settings;
@@ -77,6 +79,11 @@ public sealed class SettingsService
         settings.Appearance ??= new AppearanceSettings();
         settings.ReportSettings ??= new ReportSettings();
         settings.PinnedQuickTools = QuickToolsService.Normalize(settings.PinnedQuickTools);
+        settings.QuickToolLayout ??= new QuickToolLayout();
+        settings.QuickToolLayout.SchemaVersion = QuickToolLayout.CurrentSchemaVersion;
+        settings.QuickToolLayout.OrderedToolIds = QuickToolsService.Normalize(
+            settings.QuickToolLayout.OrderedToolIds.Count > 0 ? settings.QuickToolLayout.OrderedToolIds : settings.PinnedQuickTools);
+        settings.PinnedQuickTools = settings.QuickToolLayout.OrderedToolIds.ToList();
         settings.Appearance.CustomAccentColor = NormalizeAccent(settings.Appearance.CustomAccentColor);
         if (!Enum.IsDefined(settings.Appearance.Theme)) settings.Appearance.Theme = ThemeMode.System;
         if (!Enum.IsDefined(settings.Appearance.Accent)) settings.Appearance.Accent = AccentPreset.KitaoBlue;

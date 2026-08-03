@@ -1,5 +1,5 @@
 #define MyAppName "像素蛋挞"
-#define MyAppVersion "2.0.3.1"
+#define MyAppVersion "2.0.4"
 #define MyAppPublisher "像素蛋挞"
 #define MyAppExeName "KitaoPhotoSelector.exe"
 #define MyPublishDir "..\artifacts\publish\win-x64"
@@ -33,9 +33,9 @@ UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 OutputDir=..\artifacts\installer
 #ifdef TestBuild
-OutputBaseFilename=像素蛋挞_Test_Setup_2.0.3.1_x64
+OutputBaseFilename=像素蛋挞_Test_Setup_2.0.4_x64
 #else
-OutputBaseFilename=像素蛋挞_Setup_2.0.3.1_x64
+OutputBaseFilename=像素蛋挞_Setup_2.0.4_x64
 #endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64

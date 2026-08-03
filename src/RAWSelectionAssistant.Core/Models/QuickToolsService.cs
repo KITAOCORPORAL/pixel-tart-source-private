@@ -30,4 +30,27 @@ public static class QuickToolsService
 
         return result;
     }
+
+    public static List<string> Move(IEnumerable<string>? values, string toolId, int offset)
+    {
+        var result = Normalize(values);
+        var index = result.FindIndex(x => string.Equals(x, toolId, StringComparison.OrdinalIgnoreCase));
+        if (index < 0) return result;
+        var destination = Math.Clamp(index + offset, 0, result.Count - 1);
+        if (destination == index) return result;
+        (result[index], result[destination]) = (result[destination], result[index]);
+        return result;
+    }
+
+    public static List<string> Remove(IEnumerable<string>? values, string toolId) =>
+        Normalize(values).Where(x => !string.Equals(x, toolId, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    public static List<string> Add(IEnumerable<string>? values, string toolId)
+    {
+        var result = Normalize(values);
+        if (result.Count >= MaximumPinnedTools || result.Contains(toolId, StringComparer.OrdinalIgnoreCase) ||
+            !ToolRegistry.TryGet(toolId, out var definition) || !definition.CanPin) return result;
+        result.Add(definition.SettingsId);
+        return result;
+    }
 }

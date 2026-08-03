@@ -3,20 +3,27 @@ param(
     [string]$Theme = 'Dark',
     [int]$Width = 1600,
     [int]$Height = 920,
-    [ValidateSet('Workbench', 'ToolboxPopup', 'ToolboxFullPage', 'RecentProjects', 'CompletedProjectsEmpty', 'TaskCenterWithTasks', 'TaskCenterEmpty', 'Settings', 'Feedback')]
+    [ValidateSet('Workbench', 'ToolboxPopup', 'ToolboxFullPage', 'RecentProjects', 'CompletedProjectsEmpty', 'TaskCenterWithTasks', 'TaskCenterEmpty', 'Settings', 'Feedback', 'OrganizePhotos', 'Collage', 'QuickToolsOverflow')]
     [string]$State = 'Workbench',
     [string]$OutputPath = '',
     [switch]$SidebarCollapsed
 )
 
+$root = Split-Path $PSScriptRoot -Parent
 $sourceRoot = Join-Path $env:LOCALAPPDATA 'KitaoPhotoSelector'
 $reviewRoot = Join-Path $env:LOCALAPPDATA 'KitaoPhotoSelector.UiReview'
 $sourceSettings = Join-Path $sourceRoot 'settings.json'
 $reviewSettings = Join-Path $reviewRoot 'settings.json'
 $reviewProjects = Join-Path $reviewRoot 'Projects\projects.json'
+$reviewImages = Join-Path $reviewRoot 'DemoImages'
 
 New-Item -ItemType Directory -Force -Path $reviewRoot | Out-Null
 New-Item -ItemType Directory -Force -Path (Split-Path $reviewProjects) | Out-Null
+New-Item -ItemType Directory -Force -Path $reviewImages | Out-Null
+$demoSource = Join-Path $root 'src\RAWSelectionAssistant\Assets\WorkbenchProjectCover.png'
+if (Test-Path $demoSource) {
+    1..4 | ForEach-Object { Copy-Item -LiteralPath $demoSource -Destination (Join-Path $reviewImages "demo-$_.png") -Force }
+}
 
 if (Test-Path $sourceSettings) {
     $settings = Get-Content -LiteralPath $sourceSettings -Raw | ConvertFrom-Json
@@ -41,6 +48,8 @@ if ($null -eq $settings.PSObject.Properties['Appearance']) {
 
 Set-ReviewProperty $settings.Appearance 'Theme' $(if ($Theme -eq 'Dark') { 2 } else { 1 })
 Set-ReviewProperty $settings.Appearance 'SidebarCollapsed' ([bool]$SidebarCollapsed)
+Set-ReviewProperty $settings 'PinnedQuickTools' @('Workflow', 'PhotoOrganize', 'BatchCompress')
+Set-ReviewProperty $settings 'QuickToolLayout' ([pscustomobject]@{ SchemaVersion = '1.0'; OrderedToolIds = @('Workflow', 'PhotoOrganize', 'BatchCompress') })
 Set-ReviewProperty $settings 'WindowWidth' $Width
 Set-ReviewProperty $settings 'WindowHeight' $Height
 Set-ReviewProperty $settings 'WindowLeft' $null

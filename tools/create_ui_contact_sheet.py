@@ -11,10 +11,11 @@ def main() -> int:
     source = Path(sys.argv[1])
     output = Path(sys.argv[2])
     images = sorted(source.glob("[0-9][0-9]_*.png"))
-    if len(images) != 12:
-        raise RuntimeError(f"Expected 12 screenshots, found {len(images)}")
+    if not images:
+        raise RuntimeError("No UI screenshots found")
 
-    columns, rows = 3, 4
+    columns = 3
+    rows = (len(images) + columns - 1) // columns
     thumb_width, thumb_height = 520, 300
     label_height, margin = 32, 14
     sheet = Image.new("RGB", (columns * thumb_width + (columns + 1) * margin,

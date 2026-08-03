@@ -46,23 +46,25 @@ public sealed class Baseline2031AcceptanceTests
     }
 
     [TestMethod]
-    public void ToolPages_StayFrameworkOnly()
+    public void ToolPages_AreUsableAndPreserveSources()
     {
         var organize = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml".Replace('/', Path.DirectorySeparatorChar)));
         var collage = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/CollageView.xaml".Replace('/', Path.DirectorySeparatorChar)));
-        StringAssert.Contains(organize, "不会执行文件复制、移动、重命名或删除");
-        StringAssert.Contains(collage, "不会生成或修改文件");
-        StringAssert.Contains(collage, "IsEnabled=\"False\"");
+        StringAssert.Contains(organize, "生成并预览操作清单");
+        StringAssert.Contains(organize, "目标默认 CreateNew");
+        StringAssert.Contains(collage, "导出重新读取原图");
+        StringAssert.Contains(collage, "源照片不会被修改");
+        StringAssert.Contains(collage, "默认不覆盖");
     }
 
     [TestMethod]
-    public void VersionChain_Uses2031Everywhere()
+    public void VersionChain_Uses204Everywhere()
     {
         var root = Root();
         foreach (var path in new[] { "build/Version.props", "src/RAWSelectionAssistant.Core/Models/Branding.cs", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "src/RAWSelectionAssistant/app.manifest", "installer/RAWSelectionAssistant.iss" })
         {
             var text = File.ReadAllText(Path.Combine(root, path.Replace('/', Path.DirectorySeparatorChar)));
-            StringAssert.Contains(text, "2.0.3.1");
+            StringAssert.Contains(text, "2.0.4");
         }
     }
 

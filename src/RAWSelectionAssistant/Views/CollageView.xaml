@@ -1,70 +1,29 @@
 <UserControl x:Class="RAWSelectionAssistant.Views.CollageView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"
-             d:DesignWidth="1100" d:DesignHeight="720"
-             AutomationProperties.Name="拼图页面">
-    <Grid Margin="28">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid>
-            <StackPanel>
-                <TextBlock Text="{Binding PageTitle}" Style="{StaticResource PageTitleText}" />
-                <TextBlock Text="选择 2 至 6 张模板并预览画布参数；真实导出能力尚未启用。"
-                           Style="{StaticResource CaptionText}" Margin="0,7,0,18" />
-            </StackPanel>
-            <Button Content="导出拼图（开发中）" Style="{StaticResource PrimaryButton}"
-                    HorizontalAlignment="Right" IsEnabled="False" AutomationProperties.Name="导出拼图，开发中" />
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="460" />
-                <ColumnDefinition Width="300" />
-            </Grid.ColumnDefinitions>
-            <Border Style="{StaticResource ToolPanelCard}" Background="{DynamicResource CanvasBrush}">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Path Width="64" Height="64" Stretch="Uniform" Stroke="{DynamicResource TextTertiaryBrush}"
-                          StrokeThickness="1.4" Data="{StaticResource ToolIconCollage}" />
-                    <TextBlock Text="拼图画布" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,0" />
-                    <TextBlock Text="尚未导入图片 · 不会生成或修改文件" Style="{StaticResource CaptionText}"
-                               HorizontalAlignment="Center" Margin="0,7,0,0" />
-                    <Button Content="添加图片（开发中）" Style="{StaticResource SecondaryButton}"
-                            IsEnabled="False" Margin="0,16,0,0" />
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Column="1" Style="{StaticResource PanelBorder}" Margin="14,0,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Text="模板与参数" Style="{StaticResource SectionTitleText}" />
-                        <TextBlock Text="图片数量" Style="{StaticResource CaptionText}" Margin="0,14,0,5" />
-                        <ComboBox ItemsSource="{Binding TemplateCategories}"
-                                  SelectedItem="{Binding SelectedTemplateCategory}"
-                                  AutomationProperties.Name="拼图图片数量" />
-                        <TextBlock Text="模板" Style="{StaticResource CaptionText}" Margin="0,14,0,5" />
-                        <ComboBox ItemsSource="{Binding TemplateOptions}" SelectedIndex="0"
-                                  AutomationProperties.Name="拼图模板" />
-                        <TextBlock Text="背景颜色" Style="{StaticResource CaptionText}" Margin="0,14,0,5" />
-                        <TextBox Text="{Binding BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                                 AutomationProperties.Name="拼图背景颜色" />
-                        <TextBlock Text="边框" Style="{StaticResource CaptionText}" Margin="0,14,0,5" />
-                        <Slider Minimum="0" Maximum="40" Value="8" AutomationProperties.Name="拼图边框" />
-                        <TextBlock Text="间距" Style="{StaticResource CaptionText}" Margin="0,12,0,5" />
-                        <Slider Minimum="0" Maximum="40" Value="8" AutomationProperties.Name="拼图间距" />
-                        <TextBlock Text="圆角" Style="{StaticResource CaptionText}" Margin="0,12,0,5" />
-                        <Slider Minimum="0" Maximum="32" Value="6" AutomationProperties.Name="拼图圆角" />
-                        <Border Style="{StaticResource InfoCard}" Margin="0,16,0,0">
-                            <TextBlock Text="此页面仅提供模板和参数壳子，不会伪造导出文件。"
-                                       TextWrapping="Wrap" />
-                        </Border>
-                    </StackPanel>
-                </ScrollViewer>
-            </Border>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AllowDrop="True" DragOver="OnDragOver" Drop="OnDrop" AutomationProperties.Name="拼图页面">
+    <Grid Margin="22"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <Grid><StackPanel Orientation="Horizontal"><TextBlock Text="{Binding PageTitle}" Style="{StaticResource PageTitleText}" VerticalAlignment="Center"/><Button Content="新建" Style="{StaticResource GhostButton}" Command="{Binding ClearCommand}" Margin="22,0,0,0"/><Button Content="导入照片" Style="{StaticResource SecondaryButton}" Command="{Binding AddPhotosCommand}" Margin="6,0,0,0"/><Button Content="清空" Style="{StaticResource GhostButton}" Command="{Binding ClearCommand}" Margin="6,0,0,0"/><Button Content="撤销" Style="{StaticResource GhostButton}" Command="{Binding UndoCommand}" Margin="6,0,0,0"/><Button Content="重做" Style="{StaticResource GhostButton}" Command="{Binding RedoCommand}" Margin="6,0,0,0"/><Button Content="适合窗口" Style="{StaticResource GhostButton}" Click="Fit_Click" Margin="6,0,0,0"/></StackPanel><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><TextBlock Text="{Binding StatusMessage}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="0,0,12,0"/><Button Content="导出" Style="{StaticResource PrimaryButton}" Command="{Binding ExportCommand}"/><Button Content="取消" Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Margin="7,0,0,0"/></StackPanel></Grid>
+        <Grid Grid.Row="1" Margin="0,14,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" MinWidth="500"/><ColumnDefinition Width="326"/></Grid.ColumnDefinitions>
+            <Border Style="{StaticResource ToolPanelCard}" Background="{DynamicResource CanvasBrush}"><Grid><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="126"/></Grid.RowDefinitions>
+                <ScrollViewer x:Name="CanvasScroller" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"><Grid><Image x:Name="PreviewImage" Stretch="Uniform" MinWidth="480" MinHeight="360" MouseWheel="PreviewImage_MouseWheel" AutomationProperties.Name="拼图画布预览"/><TextBlock x:Name="EmptyCanvasText" Text="拖入照片或点击导入照片" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource EmptyStateTitle}" IsHitTestVisible="False"/></Grid></ScrollViewer>
+                <ListBox Grid.Row="1" ItemsSource="{Binding Images}" SelectedItem="{Binding SelectedImage}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"><ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ListBox.ItemsPanel><ListBox.ItemTemplate><DataTemplate><Border Width="92" Margin="0,0,8,0" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="6" Padding="5"><Grid><Grid.RowDefinitions><RowDefinition Height="76"/><RowDefinition Height="Auto"/></Grid.RowDefinitions><Image Source="{Binding Thumbnail}" Stretch="UniformToFill"/><TextBlock Grid.Row="1" Text="{Binding FileName}" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,4,0,0"/></Grid></Border></DataTemplate></ListBox.ItemTemplate></ListBox>
+            </Grid></Border>
+            <Border Grid.Column="1" Style="{StaticResource PanelBorder}" Margin="12,0,0,0"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel>
+                <TextBlock Text="模板和参数" Style="{StaticResource SectionTitleText}"/>
+                <TextBlock Text="模式" Style="{StaticResource CaptionText}" Margin="0,12,0,5"/><ComboBox ItemsSource="{Binding Modes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode}"/>
+                <TextBlock Text="模板" Style="{StaticResource CaptionText}" Margin="0,12,0,5"/><ComboBox ItemsSource="{Binding Templates}" DisplayMemberPath="DisplayName" SelectedItem="{Binding SelectedTemplate}"/>
+                <TextBlock Text="画布比例" Style="{StaticResource CaptionText}" Margin="0,12,0,5"/><ComboBox ItemsSource="{Binding AspectRatios}" SelectedItem="{Binding AspectRatio}"/>
+                <TextBlock Text="{Binding MarginText}" Style="{StaticResource CaptionText}" Margin="0,12,0,4"/><Slider Minimum="0" Maximum="160" Value="{Binding OuterMargin}"/>
+                <TextBlock Text="{Binding SpacingText}" Style="{StaticResource CaptionText}" Margin="0,9,0,4"/><Slider Minimum="0" Maximum="100" Value="{Binding Spacing}"/>
+                <TextBlock Text="{Binding CornerText}" Style="{StaticResource CaptionText}" Margin="0,9,0,4"/><Slider Minimum="0" Maximum="80" Value="{Binding CornerRadius}"/>
+                <TextBlock Text="边框宽度" Style="{StaticResource CaptionText}" Margin="0,9,0,4"/><Slider Minimum="0" Maximum="30" Value="{Binding BorderWidth}"/>
+                <Grid Margin="0,9,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="背景颜色" Style="{StaticResource CaptionText}"/><TextBox Text="{Binding BackgroundColor,UpdateSourceTrigger=PropertyChanged}" Margin="0,4,4,0"/></StackPanel><StackPanel Grid.Column="1"><TextBlock Text="边框颜色" Style="{StaticResource CaptionText}"/><TextBox Text="{Binding BorderColor,UpdateSourceTrigger=PropertyChanged}" Margin="4,4,0,0"/></StackPanel></Grid>
+                <WrapPanel Margin="0,10,0,0"><CheckBox Content="透明背景" IsChecked="{Binding TransparentBackground}"/><CheckBox Content="阴影" IsChecked="{Binding Shadow}" Margin="14,0,0,0"/></WrapPanel>
+                <TextBlock Text="所选照片" Style="{StaticResource CaptionText}" Margin="0,14,0,5"/><ComboBox ItemsSource="{Binding FitModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedFitMode}"/><TextBlock Text="缩放" Style="{StaticResource CaptionText}" Margin="0,8,0,3"/><Slider Minimum="0.2" Maximum="8" Value="{Binding SelectedZoom}"/><TextBlock Text="水平构图" Style="{StaticResource CaptionText}" Margin="0,6,0,3"/><Slider Minimum="-0.5" Maximum="0.5" Value="{Binding SelectedOffsetX}"/><TextBlock Text="垂直构图" Style="{StaticResource CaptionText}" Margin="0,6,0,3"/><Slider Minimum="-0.5" Maximum="0.5" Value="{Binding SelectedOffsetY}"/><WrapPanel Margin="0,7,0,0"><Button Content="← 交换" Style="{StaticResource GhostButton}" Command="{Binding SwapLeftCommand}"/><Button Content="交换 →" Style="{StaticResource GhostButton}" Command="{Binding SwapRightCommand}"/><Button Content="替换" Style="{StaticResource GhostButton}" Command="{Binding ReplaceCommand}"/><Button Content="旋转 90°" Style="{StaticResource GhostButton}" Command="{Binding RotateCommand}"/><Button Content="水平翻转" Style="{StaticResource GhostButton}" Command="{Binding FlipHorizontalCommand}"/><Button Content="垂直翻转" Style="{StaticResource GhostButton}" Command="{Binding FlipVerticalCommand}"/><Button Content="重置" Style="{StaticResource GhostButton}" Command="{Binding ResetImageCommand}"/><Button Content="删除" Style="{StaticResource DangerButton}" Command="{Binding RemoveCommand}"/></WrapPanel>
+                <TextBlock Text="JPG 质量" Style="{StaticResource CaptionText}" Margin="0,12,0,4"/><Slider Minimum="1" Maximum="100" Value="{Binding JpegQuality}"/>
+                <ProgressBar Value="{Binding Progress}" Height="5" Margin="0,12,0,0"/>
+                <Border Style="{StaticResource InfoCard}" Margin="0,14,0,0"><TextBlock Text="编辑使用代理缩略图；导出重新读取原图。输出默认不覆盖，冲突时自动编号，源照片不会被修改。" TextWrapping="Wrap"/></Border>
+            </StackPanel></ScrollViewer></Border>
         </Grid>
     </Grid>
 </UserControl>
