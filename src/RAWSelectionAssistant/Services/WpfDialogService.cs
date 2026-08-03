@@ -24,6 +24,24 @@ public sealed class WpfDialogService : IDialogService
         return dialog.ShowDialog(Application.Current.MainWindow) == true ? dialog.FolderName : null;
     }
 
+    public IReadOnlyList<string> ChooseFiles(string title, string filter, bool multiselect = true)
+    {
+        var dialog = new OpenFileDialog { Title = title, Filter = filter, Multiselect = multiselect, CheckFileExists = true };
+        return dialog.ShowDialog(Application.Current.MainWindow) == true ? dialog.FileNames : [];
+    }
+
+    public string? ChooseSaveFile(string title, string filter, string defaultExtension, string? suggestedFileName = null)
+    {
+        var dialog = new SaveFileDialog { Title = title, Filter = filter, DefaultExt = defaultExtension, AddExtension = true, OverwritePrompt = false, FileName = suggestedFileName ?? string.Empty };
+        return dialog.ShowDialog(Application.Current.MainWindow) == true ? dialog.FileName : null;
+    }
+
+    public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> currentToolIds)
+    {
+        var dialog = new QuickToolsManagerWindow(currentToolIds) { Owner = Application.Current.MainWindow };
+        return dialog.ShowDialog() == true ? dialog.ResultToolIds : null;
+    }
+
     public void ShowInfo(string message) =>
         MessageBox.Show(Application.Current.MainWindow, message, Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
 

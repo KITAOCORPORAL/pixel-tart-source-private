@@ -8,6 +8,7 @@ public sealed class AppSettings
     [JsonPropertyName("reportSettings")]
     public ReportSettings ReportSettings { get; set; } = new();
     public List<string> PinnedQuickTools { get; set; } = QuickToolsService.DefaultPinnedTools.ToList();
+    public QuickToolLayout QuickToolLayout { get; set; } = new();
     public List<string> RecentRawDirectories { get; set; } = [];
     public string RecentOutputDirectory { get; set; } = string.Empty;
     public OutputMode OutputMode { get; set; } = OutputMode.ByFileCategory;

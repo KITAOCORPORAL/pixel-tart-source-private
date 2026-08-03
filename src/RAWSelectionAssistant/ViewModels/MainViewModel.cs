@@ -79,6 +79,7 @@ public sealed class MainViewModel : ObservableObject
     private bool _exportJsonForCurrentProject;
     private bool _exportLogForCurrentProject;
     private bool _isSettingsModalOpen;
+    private bool _quickToolsCompact;
 
     public MainViewModel(
         FileNameNormalizer normalizer,
@@ -118,6 +119,8 @@ public sealed class MainViewModel : ObservableObject
         _outputPresetService = outputPresetService;
         _batchProjectService = batchProjectService;
         _appearanceService = appearanceService;
+        OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService);
+        CollagePage = new CollageViewModel(new CollageExportService(), dialogService);
         _licenseService.LicenseChanged += (_, _) => OnLicenseChanged();
 
         AddSourceCommand = new RelayCommand(_ => AddSource(), _ => !IsBusy && CanTutorial(TutorialAction.AddSourceDirectory));
@@ -148,6 +151,11 @@ public sealed class MainViewModel : ObservableObject
         OpenSettingsCommand = new RelayCommand(_ => IsSettingsModalOpen = true);
         OpenToolboxPageCommand = new RelayCommand(_ => CurrentPage = "Toolbox");
         TogglePinnedToolCommand = new RelayCommand(parameter => TogglePinnedTool(parameter?.ToString()));
+        MovePinnedToolLeftCommand = new RelayCommand(parameter => MovePinnedTool(parameter?.ToString(), -1));
+        MovePinnedToolRightCommand = new RelayCommand(parameter => MovePinnedTool(parameter?.ToString(), 1));
+        RemovePinnedToolCommand = new RelayCommand(parameter => RemovePinnedTool(parameter?.ToString()));
+        ResetQuickToolsCommand = new RelayCommand(_ => ResetQuickTools());
+        ManageQuickToolsCommand = new RelayCommand(_ => ManageQuickTools());
         GoToWorkflowStepCommand = new RelayCommand(GoToWorkflowStep, _ => !IsBusy);
         NewProjectCommand = new RelayCommand(_ => StartNewProject(), _ => !IsBusy && !IsOnboardingRequired);
         ContinueProjectCommand = new AsyncRelayCommand(ContinueProjectAsync, _ => !IsBusy && ProjectHistory.Count > 0 && !IsOnboardingRequired);
@@ -187,8 +195,8 @@ public sealed class MainViewModel : ObservableObject
         set => SetProperty(ref _isSettingsModalOpen, value);
     }
     public AppSettings Settings { get; private set; } = new();
-    public OrganizePhotosViewModel OrganizePhotosPage { get; } = new();
-    public CollageViewModel CollagePage { get; } = new();
+    public OrganizePhotosViewModel OrganizePhotosPage { get; }
+    public CollageViewModel CollagePage { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -407,8 +415,14 @@ public sealed class MainViewModel : ObservableObject
         ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox).ToList();
     public IReadOnlyList<ToolDefinition> ToolMenuItems => ToolRegistry.All;
     public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
-    public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems =>
-        ToolboxItems.Where(item => item.IsPinned).Take(QuickToolsService.MaximumPinnedTools).ToList();
+    public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => Settings.PinnedQuickTools
+        .Select(id => ToolboxItems.FirstOrDefault(item => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
+        .Where(item => item is not null && item.IsPinned)
+        .Cast<ToolboxItemViewModel>()
+        .Take(QuickToolsService.MaximumPinnedTools)
+        .ToList();
+    public IReadOnlyList<ToolboxItemViewModel> DisplayedPinnedToolboxItems => _quickToolsCompact ? PinnedToolboxItems.Take(2).ToList() : PinnedToolboxItems;
+    public IReadOnlyList<ToolboxItemViewModel> OverflowPinnedToolboxItems => _quickToolsCompact ? PinnedToolboxItems.Skip(2).ToList() : [];
     public bool IsToolPinned(string id) => ToolRegistry.TryGet(id, out var definition) &&
         Settings.PinnedQuickTools.Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase);
     public bool CanPinTool(string id) => ToolRegistry.TryGet(id, out var definition) && definition.CanPin &&
@@ -747,6 +761,11 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand OpenSettingsCommand { get; }
     public RelayCommand OpenToolboxPageCommand { get; }
     public RelayCommand TogglePinnedToolCommand { get; }
+    public RelayCommand MovePinnedToolLeftCommand { get; }
+    public RelayCommand MovePinnedToolRightCommand { get; }
+    public RelayCommand RemovePinnedToolCommand { get; }
+    public RelayCommand ResetQuickToolsCommand { get; }
+    public RelayCommand ManageQuickToolsCommand { get; }
     public RelayCommand GoToWorkflowStepCommand { get; }
     public RelayCommand NewProjectCommand { get; }
     public AsyncRelayCommand ContinueProjectCommand { get; }
@@ -773,8 +792,11 @@ public sealed class MainViewModel : ObservableObject
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+        Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.QuickToolLayout.OrderedToolIds);
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
+        OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
+        OnPropertyChanged(nameof(OverflowPinnedToolboxItems));
         _appearanceService.Initialize(Settings.Appearance);
         var existingUserDetector = new ExistingUserDetectionService();
         var currentTutorialInProgress = existingUserDetector.IsCurrentTutorialInProgress(
@@ -1742,8 +1764,68 @@ public sealed class MainViewModel : ObservableObject
             Settings.PinnedQuickTools.Add(definition.SettingsId);
         }
         Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
+        OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
+        OnPropertyChanged(nameof(OverflowPinnedToolboxItems));
+        _ = SaveSettingsAsync();
+    }
+
+    public void MovePinnedTool(string? id, int offset)
+    {
+        if (string.IsNullOrWhiteSpace(id)) return;
+        var moved = QuickToolsService.Move(Settings.PinnedQuickTools, id, offset);
+        if (moved.SequenceEqual(Settings.PinnedQuickTools, StringComparer.OrdinalIgnoreCase)) return;
+        ApplyQuickToolLayout(moved, "快捷工具顺序已保存");
+    }
+
+    public void SetQuickToolsCompact(bool compact)
+    {
+        if (_quickToolsCompact == compact) return;
+        _quickToolsCompact = compact;
+        OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
+        OnPropertyChanged(nameof(OverflowPinnedToolboxItems));
+    }
+
+    public void MovePinnedToolTo(string? sourceId, string? targetId)
+    {
+        if (string.IsNullOrWhiteSpace(sourceId) || string.IsNullOrWhiteSpace(targetId) || string.Equals(sourceId, targetId, StringComparison.OrdinalIgnoreCase)) return;
+        var values = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        var sourceIndex = values.FindIndex(x => string.Equals(x, sourceId, StringComparison.OrdinalIgnoreCase));
+        var targetIndex = values.FindIndex(x => string.Equals(x, targetId, StringComparison.OrdinalIgnoreCase));
+        if (sourceIndex < 0 || targetIndex < 0) return;
+        var value = values[sourceIndex];
+        values.RemoveAt(sourceIndex);
+        values.Insert(targetIndex, value);
+        ApplyQuickToolLayout(values, "快捷工具拖拽顺序已保存");
+    }
+
+    private void RemovePinnedTool(string? id)
+    {
+        if (string.IsNullOrWhiteSpace(id)) return;
+        ApplyQuickToolLayout(QuickToolsService.Remove(Settings.PinnedQuickTools, id), "已从快捷工具移除");
+    }
+
+    private void ResetQuickTools() => ApplyQuickToolLayout(QuickToolsService.DefaultPinnedTools, "已恢复默认快捷布局");
+
+    private void ManageQuickTools()
+    {
+        var result = _dialogService.ManageQuickTools(Settings.PinnedQuickTools);
+        if (result is null) return;
+        ApplyQuickToolLayout(result, "快捷工具布局已保存");
+    }
+
+    private void ApplyQuickToolLayout(IEnumerable<string> toolIds, string message)
+    {
+        Settings.PinnedQuickTools = QuickToolsService.Normalize(toolIds);
+        Settings.QuickToolLayout.SchemaVersion = QuickToolLayout.CurrentSchemaVersion;
+        Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
+        RefreshToolPinState();
+        OnPropertyChanged(nameof(PinnedToolboxItems));
+        OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
+        OnPropertyChanged(nameof(OverflowPinnedToolboxItems));
+        ShowToast(message);
         _ = SaveSettingsAsync();
     }
 
@@ -1751,6 +1833,7 @@ public sealed class MainViewModel : ObservableObject
     {
         var normalized = QuickToolsService.Normalize(Settings.PinnedQuickTools);
         Settings.PinnedQuickTools = normalized;
+        Settings.QuickToolLayout.OrderedToolIds = normalized.ToList();
         foreach (var item in ToolboxItems)
         {
             item.SetPinned(normalized.Contains(item.Id, StringComparer.OrdinalIgnoreCase));
