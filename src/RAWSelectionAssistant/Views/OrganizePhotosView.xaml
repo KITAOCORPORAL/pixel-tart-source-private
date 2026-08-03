@@ -30,7 +30,7 @@
                 <Button Content="排除所选照片" Style="{StaticResource GhostButton}" Command="{Binding ExcludeSelectedCommand}" Margin="0,8,0,0"/>
                 <Button Content="撤销移动整理" Style="{StaticResource SecondaryButton}" Command="{Binding UndoMoveCommand}" Margin="0,16,0,0"/>
                 <Button Content="导出 CSV / JSON / TXT 报告" Style="{StaticResource SecondaryButton}" Command="{Binding ExportReportsCommand}" Margin="0,8,0,0"/>
-                <ProgressBar Value="{Binding Progress}" Height="5" Margin="0,18,0,0"/><TextBlock Text="{Binding StatusMessage}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                <ProgressBar Value="{Binding Progress, Mode=OneWay}" Height="5" Margin="0,18,0,0"/><TextBlock Text="{Binding StatusMessage}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0"/>
                 <Button Content="取消当前操作" Style="{StaticResource DangerButton}" Command="{Binding CancelCommand}" Margin="0,12,0,0"/>
                 <Border Style="{StaticResource WarningCard}" Margin="0,16,0,0"><TextBlock Text="移动模式会先复制、校验，再删除源文件；删除分组只删除定义，不删除照片。" TextWrapping="Wrap"/></Border>
             </StackPanel></Border>

@@ -213,6 +213,17 @@ public sealed class Version204FeatureTests
         foreach(var value in new[]{"TargetType=\"ScrollBar\"","TargetType=\"DataGrid\"","TargetType=\"DataGridColumnHeader\"","TargetType=\"DataGridCell\""})StringAssert.Contains(tables,value);
     }
 
+    [TestMethod]
+    public void ToolProgressBars_ReadFromViewModelsWithOneWayBindings()
+    {
+        var root=Root();
+        foreach(var file in new[]{"OrganizePhotosView.xaml","CollageView.xaml"})
+        {
+            var xaml=File.ReadAllText(Path.Combine(root,"src/RAWSelectionAssistant/Views",file));
+            StringAssert.Contains(xaml,"Value=\"{Binding Progress, Mode=OneWay}\"");
+        }
+    }
+
     private static string Root()
     {
         var directory=new DirectoryInfo(AppContext.BaseDirectory);
