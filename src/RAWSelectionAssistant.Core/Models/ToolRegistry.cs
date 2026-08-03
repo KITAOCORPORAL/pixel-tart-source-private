@@ -6,8 +6,8 @@ public static class ToolRegistry
     [
         new(ToolId.LocalSplit, "本地分片", "匹配本地 JPG、RAW 及相关文件。", "ToolIconLocalSplit", "LocalSplit", true, true, ToolMaturity.Available, ToolMenuGroup.Workflow, 10),
         new(ToolId.Workflow, "归片工作区", "核对 JPG、RAW、冲突与复制结果。", "ToolIconWorkflow", "Workflow", true, true, ToolMaturity.Available, ToolMenuGroup.Workflow, 20),
-        new(ToolId.PhotoOrganize, "整理图片", "按分组预览图片的组名、缩略图与数量。", "ToolIconOrganize", "PhotoGrouping", true, true, ToolMaturity.Preview, ToolMenuGroup.Organize, 30),
-        new(ToolId.Collage, "拼图", "使用 2 至 6 张图片模板预览组合画布。", "ToolIconCollage", "Collage", true, true, ToolMaturity.Preview, ToolMenuGroup.Organize, 40),
+        new(ToolId.PhotoOrganize, "整理图片", "按日期、相机、格式或自定义规则安全分组并复制照片。", "ToolIconOrganize", "PhotoGrouping", true, true, ToolMaturity.Available, ToolMenuGroup.Organize, 30),
+        new(ToolId.Collage, "拼图", "使用数据驱动模板制作拼图、纵向长图和横向长图。", "ToolIconCollage", "Collage", true, true, ToolMaturity.Available, ToolMenuGroup.Organize, 40),
         new(ToolId.BatchCompress, "批量压缩", "预设尺寸、质量与元数据保留方式。", "ToolIconBatchCompress", "BatchCompress", true, true, ToolMaturity.Preview, ToolMenuGroup.Output, 50),
         new(ToolId.Watermark, "批量水印", "为交付照片配置文字或图片水印。", "ToolIconWatermark", "Watermark", true, true, ToolMaturity.Preview, ToolMenuGroup.Output, 60),
         new(ToolId.DeleteRejects, "删废片", "浏览、标记并安全确认待删除照片。", "ToolIconDeleteRejects", "DeleteRejects", true, true, ToolMaturity.Preview, ToolMenuGroup.Organize, 70),

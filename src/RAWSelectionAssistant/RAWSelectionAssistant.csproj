@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <Target Name="ValidateProductVersion" BeforeTargets="BeforeBuild">
-    <Error Condition="'$(PixelTartVersion)' != '2.0.3.1'" Text="PixelTartVersion 必须为 2.0.3.1。" />
+    <Error Condition="'$(PixelTartVersion)' != '2.0.4'" Text="PixelTartVersion 必须为 2.0.4。" />
     <Error Condition="'$(Version)' != '$(PixelTartVersion)'" Text="项目 Version 与统一版本不一致。" />
     <Error Condition="'$(AssemblyVersion)' != '$(PixelTartAssemblyVersion)'" Text="程序集版本与统一版本不一致。" />
   </Target>

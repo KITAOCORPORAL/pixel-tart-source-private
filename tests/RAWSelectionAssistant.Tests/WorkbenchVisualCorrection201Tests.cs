@@ -5,7 +5,7 @@ namespace RAWSelectionAssistant.Tests;
 [TestClass]
 public sealed class WorkbenchVisualCorrection201Tests
 {
-    [TestMethod] public void Version_Is2031() => Contains(Branding(), "ProductVersion = \"2.0.3.1\"");
+    [TestMethod] public void Version_Is204() => Contains(Branding(), "ProductVersion = \"2.0.4\"");
     [TestMethod] public void DefaultTheme_IsDark() => Assert.AreEqual(ThemeMode.Dark, new AppearanceSettings().Theme);
     [TestMethod] public void DefaultWindow_Is1600By920() => Contains(MainXaml(), "Width=\"1600\" Height=\"920\"", "MinWidth=\"1180\"");
     [TestMethod] public void WorkbenchDefaultDarkResources_AreComplete() => Contains(Dark(), "#0B0C0E", "#141518", "#18191C", "#202226", "#24262A", "#2A2D32", "#E3A93B", "#20C985");
@@ -15,7 +15,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void SidebarCollapsedMode_KeepsIcons() { Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "SidebarLayoutMetrics.CollapsedWidth", "width < 1100"); Contains(Text("src/RAWSelectionAssistant.Core/Models/SidebarLayoutMetrics.cs"), "CollapsedWidth = 60d"); }
     [TestMethod] public void SidebarRows_AreFortyPixels() => Contains(Navigation(), "SidebarButtonHeight", "MinHeight");
     [TestMethod] public void TopPrimaryEntry_Exists() => Contains(MainXaml(), "x:Name=\"StartLocalSplitCard\"", "开始本地分片", "Content=\"?\"", "ToolTip=\"{Binding LocalSplitHelpText}\"", "WorkbenchHeroBrush");
-    [TestMethod] public void TopHasFourQuickTools() => Contains(MainXaml(), "ItemsSource=\"{Binding PinnedToolboxItems}\"", "UniformGrid Columns=\"3\"", "x:Name=\"ToolboxQuickButton\"");
+    [TestMethod] public void TopHasFourQuickTools() => Contains(MainXaml(), "ItemsSource=\"{Binding DisplayedPinnedToolboxItems}\"", "WrapPanel ItemWidth=\"116\"", "x:Name=\"ToolboxQuickButton\"");
     [TestMethod] public void ToolboxPopup_Exists() => Contains(MainXaml(), "x:Name=\"WorkbenchToolboxPopup\"", "Placement=\"Bottom\"", "StaysOpen=\"False\"", "PopupAnimation=\"Fade\"");
 
     [TestMethod]
@@ -54,7 +54,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void ReleaseProvider_RemainsNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void ReleaseMock_RemainsDisabled() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");
     [TestMethod] public void Source_DoesNotUseLocalhost() { foreach (var file in Directory.EnumerateFiles(Path.Combine(Root(), "src"), "*.*", SearchOption.AllDirectories).Where(path => path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))) DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1"); }
-    [TestMethod] public void Installer_IsNamedFor2031() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3.1\"", "像素蛋挞_Setup_2.0.3.1_x64");
+    [TestMethod] public void Installer_IsNamedFor204() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.4\"", "像素蛋挞_Setup_2.0.4_x64");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
     private static string CodeBehind() => Text("src/RAWSelectionAssistant/MainWindow.xaml.cs");

@@ -27,6 +27,9 @@ public partial class MainWindow : Window
     private MainViewModel? _viewModel;
     private TutorialTarget? _lastTutorialTarget;
     private bool _taskCenterDrawerOpen;
+    private Point _quickDragStart;
+    private string? _quickDraggedId;
+    private Button? _quickInsertionTarget;
 #if UI_REVIEW_BUILD
     private DispatcherTimer? _uiReviewTimer;
     private string _uiReviewStateContent = string.Empty;
@@ -170,6 +173,7 @@ public partial class MainWindow : Window
         StartUiReviewController();
 #endif
         _viewModel?.UpdateSidebarForWidth(ActualWidth);
+        _viewModel?.SetQuickToolsCompact(ActualWidth <= 1280);
         UpdateWorkbenchResponsiveLayout();
         ScheduleTutorialLayout();
         if (_viewModel?.NeedsUpgradeTutorialOffer == true)
@@ -253,6 +257,85 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
+    private void QuickToolsOverflowButton_Click(object sender, RoutedEventArgs e)
+    {
+        QuickToolsOverflowPopup.IsOpen = !QuickToolsOverflowPopup.IsOpen;
+        e.Handled = true;
+    }
+
+    private void PinnedQuickTools_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        _quickDragStart = e.GetPosition(PinnedQuickToolsList);
+        _quickDraggedId = FindAncestor<Button>(e.OriginalSource as DependencyObject)?.DataContext is ToolboxItemViewModel item ? item.Id : null;
+    }
+
+    private void PinnedQuickTools_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed || string.IsNullOrWhiteSpace(_quickDraggedId)) return;
+        var point = e.GetPosition(PinnedQuickToolsList);
+        if (Math.Abs(point.X - _quickDragStart.X) < SystemParameters.MinimumHorizontalDragDistance && Math.Abs(point.Y - _quickDragStart.Y) < SystemParameters.MinimumVerticalDragDistance) return;
+        DragDrop.DoDragDrop(PinnedQuickToolsList, _quickDraggedId, DragDropEffects.Move);
+        ClearQuickInsertionIndicator();
+        _quickDraggedId = null;
+    }
+
+    private void PinnedQuickTools_DragOver(object sender, DragEventArgs e)
+    {
+        var target = FindAncestor<Button>(e.OriginalSource as DependencyObject);
+        if (target?.DataContext is ToolboxItemViewModel)
+        {
+            if (!ReferenceEquals(target, _quickInsertionTarget))
+            {
+                ClearQuickInsertionIndicator();
+                _quickInsertionTarget = target;
+                target.BorderBrush = FindResource("AccentBrush") as Brush;
+                target.BorderThickness = new Thickness(2);
+            }
+            e.Effects = DragDropEffects.Move;
+        }
+        else e.Effects = DragDropEffects.None;
+        e.Handled = true;
+    }
+
+    private void PinnedQuickTools_Drop(object sender, DragEventArgs e)
+    {
+        var sourceId = e.Data.GetData(typeof(string)) as string;
+        var targetId = FindAncestor<Button>(e.OriginalSource as DependencyObject)?.DataContext is ToolboxItemViewModel target ? target.Id : null;
+        _viewModel?.MovePinnedToolTo(sourceId, targetId);
+        ClearQuickInsertionIndicator();
+        e.Handled = true;
+    }
+
+    private void PinnedQuickTools_KeyDown(object sender, KeyEventArgs e)
+    {
+        if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 || FindAncestor<Button>(e.OriginalSource as DependencyObject)?.DataContext is not ToolboxItemViewModel item) return;
+        if (e.Key == Key.Left) { _viewModel?.MovePinnedTool(item.Id, -1); e.Handled = true; }
+        else if (e.Key == Key.Right) { _viewModel?.MovePinnedTool(item.Id, 1); e.Handled = true; }
+    }
+
+    private void MovePinnedToolLeft_Click(object sender, RoutedEventArgs e) => _viewModel?.MovePinnedTool((sender as FrameworkElement)?.Tag?.ToString(), -1);
+    private void MovePinnedToolRight_Click(object sender, RoutedEventArgs e) => _viewModel?.MovePinnedTool((sender as FrameworkElement)?.Tag?.ToString(), 1);
+    private void RemovePinnedTool_Click(object sender, RoutedEventArgs e) => _viewModel?.RemovePinnedToolCommand.Execute((sender as FrameworkElement)?.Tag?.ToString());
+    private void ManageQuickTools_Click(object sender, RoutedEventArgs e) => _viewModel?.ManageQuickToolsCommand.Execute(null);
+
+    private void ClearQuickInsertionIndicator()
+    {
+        if (_quickInsertionTarget is null) return;
+        _quickInsertionTarget.ClearValue(Border.BorderBrushProperty);
+        _quickInsertionTarget.ClearValue(Border.BorderThicknessProperty);
+        _quickInsertionTarget = null;
+    }
+
+    private static T? FindAncestor<T>(DependencyObject? value) where T : DependencyObject
+    {
+        while (value is not null)
+        {
+            if (value is T found) return found;
+            value = value is Visual ? VisualTreeHelper.GetParent(value) : LogicalTreeHelper.GetParent(value);
+        }
+        return null;
+    }
+
     private void TaskDrawerButton_Click(object sender, RoutedEventArgs e)
     {
         _taskCenterDrawerOpen = !_taskCenterDrawerOpen;
@@ -280,6 +363,10 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         var compact = ActualWidth < 1350;
+        var quickOverflow = ActualWidth <= 1280;
+        _viewModel?.SetQuickToolsCompact(quickOverflow);
+        QuickToolsOverflowButton.Visibility = quickOverflow ? Visibility.Visible : Visibility.Collapsed;
+        Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 2 : 3);
         WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(320);
         TaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(TaskCenterPanel, compact ? 0 : 1);
@@ -310,7 +397,7 @@ public partial class MainWindow : Window
         ApplyUiReviewState();
     }
 
-    private void ApplyUiReviewState()
+    private async void ApplyUiReviewState()
     {
         var path = System.IO.Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -338,6 +425,7 @@ public partial class MainWindow : Window
         var collapsed = root.GetProperty("SidebarCollapsed").GetBoolean();
         var reviewState = root.GetProperty("State").GetString();
         var outputPath = root.GetProperty("OutputPath").GetString();
+        ConfigureAutomatedDpiAcceptance(root);
 
         WindowState = WindowState.Normal;
         Width = width;
@@ -361,7 +449,9 @@ public partial class MainWindow : Window
         TaskCenterReviewContent.Visibility = Visibility.Collapsed;
         WorkbenchToolboxPopup.IsOpen = false;
 
-        if (string.Equals(reviewState, "ToolboxFullPage", StringComparison.OrdinalIgnoreCase))
+        var automatedStateHandled = await PrepareAutomatedDpiAcceptanceStateAsync(reviewState);
+
+        if (!automatedStateHandled && string.Equals(reviewState, "ToolboxFullPage", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("Toolbox");
         }
@@ -378,6 +468,19 @@ public partial class MainWindow : Window
         {
             RecentAllTab.Content = "最近项目 · 演示数据";
         }
+        else if (string.Equals(reviewState, "OrganizePhotos", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("PhotoGrouping");
+            var demoDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.UiReview", "DemoImages");
+            await _viewModel.OrganizePhotosPage.AddPathsAsync(System.IO.Directory.Exists(demoDirectory) ? System.IO.Directory.GetFiles(demoDirectory, "*.png") : []);
+        }
+        else if (string.Equals(reviewState, "Collage", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("Collage");
+            var demoDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.UiReview", "DemoImages");
+            _viewModel.CollagePage.AddPaths(System.IO.Directory.Exists(demoDirectory) ? System.IO.Directory.GetFiles(demoDirectory, "*.png") : []);
+            _viewModel.CollagePage.SelectedTemplate = CollageTemplateCatalog.Get("4-grid");
+        }
 
         var tab = RecentAllTab;
         if (string.Equals(reviewState, "CompletedProjectsEmpty", StringComparison.OrdinalIgnoreCase))
@@ -387,24 +490,39 @@ public partial class MainWindow : Window
         if (tab is not null) RecentProjectTab_Click(tab, new RoutedEventArgs());
         RootGrid.UpdateLayout();
         UpdateWorkbenchResponsiveLayout();
+        FinalizeAutomatedDpiAcceptanceState(reviewState);
 
         if (string.Equals(reviewState, "ToolboxPopup", StringComparison.OrdinalIgnoreCase))
         {
             WorkbenchToolboxPopup.IsOpen = true;
         }
+        if (string.Equals(reviewState, "QuickToolsOverflow", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.SetQuickToolsCompact(true);
+            QuickToolsOverflowButton.Visibility = Visibility.Visible;
+            Grid.SetColumnSpan(PinnedQuickToolsList, 2);
+            QuickToolsOverflowPopup.IsOpen = true;
+        }
         if (string.Equals(reviewState, "Feedback", StringComparison.OrdinalIgnoreCase))
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, () => _viewModel.FeedbackCommand.Execute(null));
+            _ = Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, () => _viewModel.FeedbackCommand.Execute(null));
             return;
         }
         if (!string.IsNullOrWhiteSpace(outputPath) && !string.Equals(outputPath, "KEEP_OPEN", StringComparison.OrdinalIgnoreCase))
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, () => CaptureUiReviewFrame(outputPath));
+            var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(550) };
+            captureTimer.Tick += (_, _) => { captureTimer.Stop(); CaptureUiReviewFrame(outputPath); };
+            captureTimer.Start();
         }
     }
 
     private void CaptureUiReviewFrame(string outputPath)
     {
+        if (_automatedDpiAcceptanceEnabled)
+        {
+            CaptureAutomatedDpiFrame(outputPath);
+            return;
+        }
         RootGrid.UpdateLayout();
         if (RootGrid.ActualWidth <= 0 || RootGrid.ActualHeight <= 0) return;
 
@@ -428,6 +546,17 @@ public partial class MainWindow : Window
                 var screenPoint = popupChild.PointToScreen(new Point(0, 0));
                 var rootPoint = RootGrid.PointFromScreen(screenPoint);
                 drawing.DrawImage(popupBitmap, new Rect(rootPoint.X, rootPoint.Y, popupChild.ActualWidth, popupChild.ActualHeight));
+            }
+            if (QuickToolsOverflowPopup.IsOpen && QuickToolsOverflowPopup.Child is FrameworkElement overflowChild && overflowChild.ActualWidth > 0)
+            {
+                overflowChild.UpdateLayout();
+                var popupWidth = Math.Max(1, (int)Math.Ceiling(overflowChild.ActualWidth * dpi.DpiScaleX));
+                var popupHeight = Math.Max(1, (int)Math.Ceiling(overflowChild.ActualHeight * dpi.DpiScaleY));
+                var popupBitmap = new RenderTargetBitmap(popupWidth, popupHeight, 96 * dpi.DpiScaleX, 96 * dpi.DpiScaleY, PixelFormats.Pbgra32);
+                popupBitmap.Render(overflowChild);
+                var screenPoint = overflowChild.PointToScreen(new Point(0, 0));
+                var rootPoint = RootGrid.PointFromScreen(screenPoint);
+                drawing.DrawImage(popupBitmap, new Rect(rootPoint.X, rootPoint.Y, overflowChild.ActualWidth, overflowChild.ActualHeight));
             }
         }
 
