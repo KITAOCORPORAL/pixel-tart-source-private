@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "product": "像素蛋挞",
+  "version": "2.0.4",
+  "releaseStatus": "released",
+  "releaseEligible": true,
+  "branch": "release/2.0.4",
+  "formalTag": "v2.0.4",
+  "mergedToMain": true,
+  "build": {
+    "configuration": "Release",
+    "runtime": "win-x64",
+    "selfContained": true,
+    "winExe": true,
+    "warnings": 0,
+    "errors": 0,
+    "publishPath": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.0.4\\publish\\win-x64",
+    "publishFileCount": 261,
+    "mainExeSha256": "39FD0F5D620EE57D37AE7EBBB34EB4D66175054655B9D12D449A0A5258528CAE"
+  },
+  "tests": {
+    "total": 490,
+    "passed": 490,
+    "failed": 0,
+    "skipped": 0,
+    "core": 458,
+    "logicalDpi": 27,
+    "wpfExport": 5,
+    "navigationSafetyTests": 20
+  },
+  "dpiValidation": {
+    "dpiValidationMode": "automated-logical-simulation",
+    "physicalDpiManuallyTested": false,
+    "automatedDpiCompatibilityPassed": true,
+    "scalesPassed": [125, 150, 200],
+    "blockingOverflow": 0,
+    "blockingOverlap": 0,
+    "blockingTextClipping": 0,
+    "evidence": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\automated-dpi-review\\2.0.4\\AutomatedDpiResults.json"
+  },
+  "installer": {
+    "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.0.4\\installer\\像素蛋挞_Setup_2.0.4_x64.exe",
+    "sizeBytes": 48791104,
+    "sha256": "8F2131EBF6E13EDF990639F57FE8BEB189BD4829464382CADEF682CDEFAAFEFD",
+    "builtAt": "2026-08-03T16:41:08.3908890+08:00"
+  },
+  "isolatedAcceptance": {
+    "passed": true,
+    "installedInteractionTested": true,
+    "isolationMethod": "Win32 CreateDesktopW",
+    "userCurrentDesktopOperated": false,
+    "acceptanceRunId": "c7bd9d0cf878473c841abebc0ff9a8ea",
+    "navigationPassed": true,
+    "navigationDeduplicated": true,
+    "quickToolsPersistencePassed": true,
+    "organizeCopyPassed": true,
+    "collageDuplicateGuardPassed": true,
+    "collageImportReentryGuardPassed": true,
+    "collageJpgExportPassed": true,
+    "collagePngExportPassed": true,
+    "sourceFileIntegrityVerified": true,
+    "providerNone": true,
+    "releaseMockDisabled": true,
+    "winExeNoConsole": true,
+    "installExitCode": 0,
+    "uninstallExitCode": 0,
+    "installDirectoryRemoved": true,
+    "evidence": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\diagnostics\\2.0.4\\isolated-desktop-acceptance\\latest-result.json"
+  },
+  "olderInstallersPreserved": true,
+  "knownLimitations": [
+    "physicalDpiManuallyTested=false；2.0.4 以已批准的自动化逻辑 DPI 兼容性结果封版。"
+  ],
+  "workCalendarRoadmapVersion": "2.2.0",
+  "recommendSeal204": true,
+  "recommendEnter210": true,
+  "generatedAt": "2026-08-03T18:58:00+08:00"
+}

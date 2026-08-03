@@ -20,17 +20,17 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void QuickTools_AllowsEmptyExplicitSelection() => CollectionAssert.AreEqual(Array.Empty<string>(), QuickToolsService.Normalize(Array.Empty<string>()));
     [TestMethod] public async Task QuickTools_PersistAndReload() { using var temp = new TempDirectory(); var service = new SettingsService(new TestLogService(), temp.Combine("settings.json")); var settings = new AppSettings { PinnedQuickTools = ["Collage", "PhotoOrganize", "Toolbox"] }; await service.SaveAsync(settings); var loaded = await service.LoadAsync(); CollectionAssert.AreEqual(settings.PinnedQuickTools, loaded.PinnedQuickTools); }
     [TestMethod] public void QuickTools_ViewModelSupportsToggleAndCapacity() => Contains(ViewModel(), "TogglePinnedToolCommand", "快捷工具已满", "Settings.PinnedQuickTools", "SaveSettingsAsync");
-    [TestMethod] public void QuickTools_HomeUpdatesFromPinnedCollection() => Contains(MainXaml(), "ItemsSource=\"{Binding PinnedToolboxItems}\"", "UniformGrid Columns=\"3\"");
+    [TestMethod] public void QuickTools_HomeUpdatesFromPinnedCollection() => Contains(MainXaml(), "ItemsSource=\"{Binding DisplayedPinnedToolboxItems}\"", "WrapPanel ItemWidth=\"116\"");
     [TestMethod] public void Toolbox_RemainsFixedEntry() => Contains(ViewModel(), "工具箱始终可从工作台和侧栏打开", "ToolCatalogItems", "ToolId.Toolbox");
     [TestMethod] public void ToolboxPopup_HasGroupingAndCollage() => Contains(Popup(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "TogglePinnedToolCommand", "ResourceKeyToGeometryConverter");
     [TestMethod] public void ToolboxFullPage_HasGroupingAndCollage() => Contains(MainXaml(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "UniformGrid Columns=\"3\"", "ToolCatalogCard", "PinActionLabel");
-    [TestMethod] public void GroupingPage_IsCompleteShell() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "分组整理", "新建分组", "批量创建文件夹", "缩略图");
-    [TestMethod] public void CollagePage_IsCompleteShell() => Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板与参数", "TemplateCategories", "6 张", "背景颜色", "不会生成或修改文件");
+    [TestMethod] public void GroupingPage_IsUsable() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "来源和分组规则", "新建组", "生成并预览操作清单", "执行当前清单");
+    [TestMethod] public void CollagePage_IsUsable() { Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板和参数", "背景颜色", "导出重新读取原图"); Contains(Text("src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs"), "纵向长图", "横向长图"); }
     [TestMethod] public void Navigation_AllowsNewToolPages() => Contains(ViewModel(), "\"PhotoGrouping\"", "\"Collage\"", "IsPhotoGroupingPage", "IsCollagePage");
     [TestMethod] public void ExistingSettingsAndToolboxFixesRemain() => Contains(MainXaml(), "SidebarSettingsButton", "OpenSettingsCommand", "ViewAllToolsButton", "OpenToolboxPage_Click");
     [TestMethod] public void SidebarCollapseFixRemains() => Contains(MainXaml(), "SidebarNavButton", "IconExpand", "SidebarCollapseButton");
     [TestMethod] public void ReleaseProviderAndWinExeRemain() { Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\""); Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>"); Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false"); }
-    [TestMethod] public void VersionAndInstallerAre2031() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.0.3.1"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.3.1\"", "像素蛋挞_Setup_2.0.3.1_x64"); }
+    [TestMethod] public void VersionAndInstallerAre204() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.0.4"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.4\"", "像素蛋挞_Setup_2.0.4_x64"); }
 
     private static string Popup() { var text = MainXaml(); var start = text.IndexOf("WorkbenchToolboxPopup", StringComparison.Ordinal); var end = text.IndexOf("</Popup>", start, StringComparison.Ordinal); return text[start..end]; }
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
