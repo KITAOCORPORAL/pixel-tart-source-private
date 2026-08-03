@@ -78,17 +78,17 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     public OptionItem<OrganizeRuleType> SelectedRule { get => _selectedRule; set { if(SetProperty(ref _selectedRule,value)) Regroup(); } }
     public OptionItem<OrganizeOperationType> SelectedOperation { get => _selectedOperation; set { if(SetProperty(ref _selectedOperation,value)) InvalidatePlan(); } }
     public OptionItem<OrganizeConflictPolicy> SelectedConflict { get => _selectedConflict; set { if(SetProperty(ref _selectedConflict,value)) InvalidatePlan(); } }
-    public OrganizePhotoItem? SelectedPhoto { get=>_selectedPhoto; set=>SetProperty(ref _selectedPhoto,value); }
-    public PhotoGroupDefinition? SelectedGroup { get=>_selectedGroup; set=>SetProperty(ref _selectedGroup,value); }
+    public OrganizePhotoItem? SelectedPhoto { get=>_selectedPhoto; set { if(SetProperty(ref _selectedPhoto,value)) RefreshCommandStates(); } }
+    public PhotoGroupDefinition? SelectedGroup { get=>_selectedGroup; set { if(SetProperty(ref _selectedGroup,value)) RefreshCommandStates(); } }
     public string OutputPath { get=>_outputPath; set { if(SetProperty(ref _outputPath,value)) InvalidatePlan(); } }
     public string CustomParameter { get=>_customParameter; set { if(SetProperty(ref _customParameter,value)) Regroup(); } }
     public int FixedCount { get=>_fixedCount; set { if(SetProperty(ref _fixedCount,Math.Max(1,value))) Regroup(); } }
     public bool VerifySha256 { get=>_verifySha256; set { if(SetProperty(ref _verifySha256,value)) InvalidatePlan(); } }
-    public bool IsBusy { get=>_isBusy; private set=>SetProperty(ref _isBusy,value); }
+    public bool IsBusy { get=>_isBusy; private set { if(SetProperty(ref _isBusy,value)) RefreshCommandStates(); } }
     public double Progress { get=>_progress; private set=>SetProperty(ref _progress,value); }
     public string StatusMessage { get=>_statusMessage; private set=>SetProperty(ref _statusMessage,value); }
-    public OrganizePlan? CurrentPlan { get=>_currentPlan; private set { if(SetProperty(ref _currentPlan,value)) { OnPropertyChanged(nameof(PlanSummary)); OnPropertyChanged(nameof(RiskSummary)); } } }
-    public OrganizeExecutionResult? LastResult { get=>_lastResult; private set=>SetProperty(ref _lastResult,value); }
+    public OrganizePlan? CurrentPlan { get=>_currentPlan; private set { if(SetProperty(ref _currentPlan,value)) { OnPropertyChanged(nameof(PlanSummary)); OnPropertyChanged(nameof(RiskSummary)); RefreshCommandStates(); } } }
+    public OrganizeExecutionResult? LastResult { get=>_lastResult; private set { if(SetProperty(ref _lastResult,value)) RefreshCommandStates(); } }
     public string PlanSummary => CurrentPlan is null ? "尚未生成操作清单" : $"来源 {Photos.Count} · 有效 {CurrentPlan.Items.Count} · 分组 {CurrentPlan.Groups.Count} · 元数据缺失 {CurrentPlan.MetadataMissingCount} · 预计 {FormatBytes(CurrentPlan.EstimatedOutputBytes)}";
     public string RiskSummary => CurrentPlan is null ? "默认复制、不覆盖、不删除源文件" : $"操作：{SelectedOperation.Label}；冲突：{SelectedConflict.Label}；重名风险 {CurrentPlan.ConflictRiskCount}";
 
@@ -130,7 +130,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     private Task AddPhotosAsync()=>AddPathsAsync(_dialogs.ChooseFiles("选择要整理的照片","照片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.webp;*.heic;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng;*.rw2;*.orf;*.pef|所有文件|*.*"));
     private Task AddFolderAsync(){var folder=_dialogs.ChooseFolder("选择要整理的照片文件夹");return folder is null?Task.CompletedTask:AddPathsAsync([folder]);}
     private void BrowseOutput(){var folder=_dialogs.ChooseFolder("选择整理输出目录",OutputPath);if(folder is not null)OutputPath=folder;}
-    private void Regroup(){if(Photos.Count==0)return;Groups.Clear();foreach(var group in _service.Group(Photos,new OrganizeRule(SelectedRule.Value,CustomParameter,FixedCount)))Groups.Add(group);InvalidatePlan();StatusMessage=$"已生成 {Groups.Count} 个分组";}
+    private void Regroup(){if(Photos.Count==0){RefreshCommandStates();return;}Groups.Clear();foreach(var group in _service.Group(Photos,new OrganizeRule(SelectedRule.Value,CustomParameter,FixedCount)))Groups.Add(group);InvalidatePlan();StatusMessage=$"已生成 {Groups.Count} 个分组";RefreshCommandStates();}
     private void PreviewPlan(){try{CurrentPlan=_service.BuildPlan(Photos,Groups,SourceInputs,OutputPath,new OrganizeRule(SelectedRule.Value,CustomParameter,FixedCount),SelectedOperation.Value,SelectedConflict.Value,VerifySha256);StatusMessage="操作清单已生成，请核对摘要后执行";}catch(Exception ex){_dialogs.ShowError(ex.Message);}}
     private async Task ExecuteAsync(){if(CurrentPlan is null)return;var sourceSummary=string.Join("；",CurrentPlan.SourceRoots.Take(3));var message=$"{PlanSummary}\n{RiskSummary}\n来源：{sourceSummary}\n输出：{(string.IsNullOrWhiteSpace(CurrentPlan.OutputRoot)?"仅保存方案，不写照片":CurrentPlan.OutputRoot)}\n\n用户确认的是当前具体清单。是否继续？";if(!_dialogs.Confirm(message,"确认整理操作"))return;if(CurrentPlan.OperationType==OrganizeOperationType.SavePlan){var planPath=_dialogs.ChooseSaveFile("保存整理方案","像素蛋挞整理方案|*.json",".json",$"整理方案_{DateTime.Now:yyyyMMdd_HHmm}.json");if(planPath is null)return;StatusMessage=$"整理方案已保存：{await _service.SavePlanAsync(CurrentPlan,planPath)}";return;}if(CurrentPlan.OperationType==OrganizeOperationType.Move&&!_dialogs.Confirm($"将移动 {CurrentPlan.Items.Count} 个文件。目标校验成功后才删除源文件，是否继续？","移动文件二次确认"))return;if(CurrentPlan.ConflictPolicy==OrganizeConflictPolicy.Overwrite&&!_dialogs.Confirm("覆盖会替换已有目标文件。是否明确允许覆盖？","覆盖额外确认"))return;IsBusy=true;_cancellation=new();StatusMessage="正在执行整理清单…";try{var progress=new Progress<OrganizeExecutionProgress>(x=>{Progress=x.Total==0?0:x.Completed*100d/x.Total;StatusMessage=string.IsNullOrWhiteSpace(x.CurrentFile)?"整理完成":$"正在处理 {Path.GetFileName(x.CurrentFile)}";});LastResult=await _service.ExecuteAsync(CurrentPlan,CurrentPlan.OperationType==OrganizeOperationType.Move,CurrentPlan.ConflictPolicy==OrganizeConflictPolicy.Overwrite,_cancellation.Token,progress);await _service.ExportReportsAsync(LastResult.Manifest,CurrentPlan.OutputRoot);StatusMessage=$"完成 {LastResult.Succeeded}，失败 {LastResult.Failed}，跳过 {LastResult.Skipped}";}finally{IsBusy=false;_cancellation.Dispose();_cancellation=null;Progress=0;}}
     private async Task ExportReportsAsync(){if(LastResult is null)return;var folder=_dialogs.ChooseFolder("选择报告输出目录",OutputPath);if(folder is null)return;await _service.ExportReportsAsync(LastResult.Manifest,folder);StatusMessage="CSV、JSON 和 TXT 报告已导出";}
@@ -155,6 +155,12 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     private void SetCover(){if(SelectedGroup is null||SelectedPhoto is null)return;SelectedGroup.CoverSourcePath=SelectedPhoto.SourcePath;StatusMessage=$"已将 {SelectedPhoto.FileName} 设为分组封面";}
     private void SortGroups(){var ordered=Groups.OrderBy(x=>x.Name,StringComparer.CurrentCultureIgnoreCase).ToArray();Groups.Clear();foreach(var group in ordered)Groups.Add(group);InvalidatePlan();}
     private void InvalidatePlan(){CurrentPlan=null;}
+    private void RefreshCommandStates()
+    {
+        BrowseOutputCommand.RaiseCanExecuteChanged(); GroupCommand.RaiseCanExecuteChanged(); PreviewPlanCommand.RaiseCanExecuteChanged(); CancelCommand.RaiseCanExecuteChanged(); ExcludeSelectedCommand.RaiseCanExecuteChanged();
+        NewGroupCommand.RaiseCanExecuteChanged(); DeleteEmptyGroupsCommand.RaiseCanExecuteChanged(); MergeGroupCommand.RaiseCanExecuteChanged(); SplitGroupCommand.RaiseCanExecuteChanged(); DeleteGroupCommand.RaiseCanExecuteChanged();
+        SetCoverCommand.RaiseCanExecuteChanged(); SortGroupsCommand.RaiseCanExecuteChanged(); AddPhotosCommand.RaiseCanExecuteChanged(); AddFolderCommand.RaiseCanExecuteChanged(); ExecuteCommand.RaiseCanExecuteChanged(); ExportReportsCommand.RaiseCanExecuteChanged(); UndoMoveCommand.RaiseCanExecuteChanged();
+    }
     private static string FormatBytes(long bytes)=>bytes>=1024L*1024*1024?$"{bytes/1024d/1024/1024:0.##} GB":$"{bytes/1024d/1024:0.##} MB";
 }
 
