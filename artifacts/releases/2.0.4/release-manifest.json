@@ -1,0 +1,78 @@
+﻿{
+    "schemaVersion":  "1.0",
+    "product":  "像素蛋挞",
+    "version":  "2.0.4",
+    "releaseStatus":  "candidate-blocked",
+    "releaseEligible":  false,
+    "branch":  "release/2.0.4",
+    "sourceCommit":  "20d5d5bf385a7636ca645e5bf84aabfcc11eb449",
+    "baselineTag":  "v2.0.3.1",
+    "baselineCommit":  "19536e891c5677e88f8704d305c07a70804a22bc",
+    "formalTag":  null,
+    "mergedToMain":  false,
+    "build":  {
+                  "configuration":  "Release",
+                  "runtime":  "win-x64",
+                  "selfContained":  true,
+                  "winExe":  true,
+                  "warnings":  0,
+                  "errors":  0,
+                  "publishPath":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.0.4\\publish\\win-x64",
+                  "publishFileCount":  261,
+                  "mainExeSha256":  "39FD0F5D620EE57D37AE7EBBB34EB4D66175054655B9D12D449A0A5258528CAE"
+              },
+    "tests":  {
+                  "total":  441,
+                  "passed":  441,
+                  "failed":  0,
+                  "skipped":  0,
+                  "core":  438,
+                  "wpfExport":  3,
+                  "summary":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\tests\\2.0.4\\test-summary.json",
+                  "coreTrx":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\tests\\2.0.4\\2.0.4-core.trx",
+                  "wpfTrx":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\tests\\2.0.4\\2.0.4-wpf.trx"
+              },
+    "uiReview":  {
+                     "directory":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\ui-review\\2.0.4",
+                     "screenshotCount":  15,
+                     "uniqueScreenshotHashes":  15,
+                     "contactSheet":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\ui-review\\2.0.4\\像素蛋挞_2.0.4_UI验收总览.png",
+                     "contactSheetSha256":  "534DBCEC86A229763718B3CBF208D5A2EF5358A15C390A9DB39259383A7E7332",
+                     "screenshotCommit":  "427bd8399324553cc34a45ff7814d84adc06938b",
+                     "finalCommitVisualChange":  "仅将工具箱 Popup 的“管理快捷工具”由 Command 绑定改为 Click 处理器，视觉属性未变化；按用户要求未重拍。"
+                 },
+    "physicalDpi":  {
+                        "125Percent":  "pending",
+                        "150Percent":  "pending",
+                        "200Percent":  "pending",
+                        "verified":  false,
+                        "checklist":  "D:\\AI AGENT\\RAWSelectionAssistant\\docs\\release\\像素蛋挞_2.0.4真实DPI人工复核清单.md"
+                    },
+    "installer":  {
+                      "path":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.0.4\\installer\\像素蛋挞_Setup_2.0.4_x64.exe",
+                      "sizeBytes":  48796563,
+                      "sha256":  "72CF771D7BEE5E9AC2D09C1EF8F79E709721001A0445CAED1A854FDE76342127",
+                      "builtAt":  "2026-08-03T11:37:36.8658418+08:00"
+                  },
+    "installVerification":  {
+                                "installExitCode":  0,
+                                "fileVersion":  "2.0.4.0",
+                                "windowTitle":  "像素蛋挞",
+                                "mainWindowVisible":  true,
+                                "quickToolsManagerOpened":  true,
+                                "quickToolsRestartRetained":  true,
+                                "organizePageOpened":  true,
+                                "collagePageOpened":  true,
+                                "uninstallExitCode":  0,
+                                "installDirectoryRemoved":  true,
+                                "userSettingsPreserved":  true,
+                                "evidenceDirectory":  "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\install-verification\\2.0.4"
+                            },
+    "olderInstallersPreserved":  true,
+    "knownIssues":  [
+                        "真实 Windows 125%/150%/200% 物理 DPI 人工矩阵尚未完成。",
+                        "最终点击绑定修复后未重拍 UI Review；现有截图与最终版视觉一致，但截图提交不是最终提交。"
+                    ],
+    "recommendEnter210":  false,
+    "generatedAt":  "2026-08-03T11:49:35.3126259+08:00"
+}
