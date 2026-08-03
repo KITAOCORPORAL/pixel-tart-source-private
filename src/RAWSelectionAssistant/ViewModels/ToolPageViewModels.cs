@@ -183,6 +183,7 @@ public sealed class CollageViewModel : ObservableObject
     private CollageMode _mode;
     private string _aspectRatio="1:1";
     private bool _isBusy;
+    private bool _isImporting;
     private double _progress;
     private string _statusMessage="导入照片后选择模板";
     private CancellationTokenSource? _cancellation;
@@ -192,7 +193,7 @@ public sealed class CollageViewModel : ObservableObject
     public CollageViewModel(CollageExportService exportService, IDialogService dialogs)
     {
         _exportService=exportService;_dialogs=dialogs;_selectedTemplate=CollageTemplateCatalog.All[0];
-        AddPhotosCommand=new RelayCommand(_=>AddPhotos(),_=>!IsBusy);ClearCommand=new RelayCommand(_=>Clear(),_=>!IsBusy&&Images.Count>0);RemoveCommand=new RelayCommand(_=>RemoveSelected(),_=>!IsBusy&&SelectedImage is not null);ReplaceCommand=new RelayCommand(_=>ReplaceSelected(),_=>!IsBusy&&SelectedImage is not null);SwapLeftCommand=new RelayCommand(_=>MoveSelected(-1),_=>SelectedImage is not null);SwapRightCommand=new RelayCommand(_=>MoveSelected(1),_=>SelectedImage is not null);RotateCommand=new RelayCommand(_=>TransformSelected("rotate"),_=>SelectedImage is not null);FlipHorizontalCommand=new RelayCommand(_=>TransformSelected("flipH"),_=>SelectedImage is not null);FlipVerticalCommand=new RelayCommand(_=>TransformSelected("flipV"),_=>SelectedImage is not null);ResetImageCommand=new RelayCommand(_=>TransformSelected("reset"),_=>SelectedImage is not null);UndoCommand=new RelayCommand(_=>Undo());RedoCommand=new RelayCommand(_=>Redo());ExportCommand=new AsyncRelayCommand(_=>ExportAsync(),_=>!IsBusy&&Images.Count>0);CancelCommand=new RelayCommand(_=>_cancellation?.Cancel(),_=>IsBusy);
+        AddPhotosCommand=new RelayCommand(_=>AddPhotos(),_=>!IsBusy&&!_isImporting);ClearCommand=new RelayCommand(_=>Clear(),_=>!IsBusy&&Images.Count>0);RemoveCommand=new RelayCommand(_=>RemoveSelected(),_=>!IsBusy&&SelectedImage is not null);ReplaceCommand=new RelayCommand(_=>ReplaceSelected(),_=>!IsBusy&&SelectedImage is not null);SwapLeftCommand=new RelayCommand(_=>MoveSelected(-1),_=>SelectedImage is not null);SwapRightCommand=new RelayCommand(_=>MoveSelected(1),_=>SelectedImage is not null);RotateCommand=new RelayCommand(_=>TransformSelected("rotate"),_=>SelectedImage is not null);FlipHorizontalCommand=new RelayCommand(_=>TransformSelected("flipH"),_=>SelectedImage is not null);FlipVerticalCommand=new RelayCommand(_=>TransformSelected("flipV"),_=>SelectedImage is not null);ResetImageCommand=new RelayCommand(_=>TransformSelected("reset"),_=>SelectedImage is not null);UndoCommand=new RelayCommand(_=>Undo());RedoCommand=new RelayCommand(_=>Redo());ExportCommand=new AsyncRelayCommand(_=>ExportAsync(),_=>!IsBusy&&Images.Count>0);CancelCommand=new RelayCommand(_=>_cancellation?.Cancel(),_=>IsBusy);
     }
 
     public string PageTitle=>ToolRegistry.Get(ToolId.Collage).DisplayName;
@@ -230,7 +231,14 @@ public sealed class CollageViewModel : ObservableObject
     public RelayCommand AddPhotosCommand{get;} public RelayCommand ClearCommand{get;} public RelayCommand RemoveCommand{get;} public RelayCommand ReplaceCommand{get;} public RelayCommand SwapLeftCommand{get;} public RelayCommand SwapRightCommand{get;} public RelayCommand RotateCommand{get;} public RelayCommand FlipHorizontalCommand{get;} public RelayCommand FlipVerticalCommand{get;} public RelayCommand ResetImageCommand{get;} public RelayCommand UndoCommand{get;} public RelayCommand RedoCommand{get;} public RelayCommand CancelCommand{get;} public AsyncRelayCommand ExportCommand{get;}
 
     public void AddPaths(IEnumerable<string> paths){var values=paths.Where(File.Exists).Distinct(StringComparer.OrdinalIgnoreCase).Where(path=>Project.Images.All(x=>!string.Equals(x.SourcePath,path,StringComparison.OrdinalIgnoreCase))).ToArray();if(values.Length==0)return;PushUndo();foreach(var path in values){var state=new CollageImageState{SourcePath=Path.GetFullPath(path),SlotId=(Project.Images.Count+1).ToString()};Project.Images.Add(state);Images.Add(new CollageImageViewModel(state));}AssignSlots();StatusMessage=$"已导入 {Images.Count} 张照片";NotifyPreview();RefreshCommandStates();}
-    private void AddPhotos()=>AddPaths(_dialogs.ChooseFiles("选择拼图照片","照片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp|所有文件|*.*"));
+    private void AddPhotos()
+    {
+        if (_isImporting) return;
+        _isImporting = true;
+        RefreshCommandStates();
+        try { AddPaths(_dialogs.ChooseFiles("选择拼图照片", "照片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp|所有文件|*.*")); }
+        finally { _isImporting = false; RefreshCommandStates(); }
+    }
     private void Clear(){PushUndo();Project.Images.Clear();Images.Clear();SelectedImage=null;StatusMessage="画布已清空";NotifyPreview();RefreshCommandStates();}
     private void RemoveSelected(){if(SelectedImage is null)return;PushUndo();Project.Images.Remove(SelectedImage.State);Images.Remove(SelectedImage);SelectedImage=null;AssignSlots();NotifyPreview();}
     private void ReplaceSelected(){if(SelectedImage is null)return;var path=_dialogs.ChooseFiles("替换所选照片","照片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp|所有文件|*.*",false).FirstOrDefault();if(path is null)return;PushUndo();var index=Images.IndexOf(SelectedImage);var state=CloneState(SelectedImage.State);state.SourcePath=Path.GetFullPath(path);Project.Images[index]=state;Images[index]=new CollageImageViewModel(state);SelectedImage=Images[index];NotifyPreview();}

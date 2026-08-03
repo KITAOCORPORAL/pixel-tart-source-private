@@ -1734,12 +1734,16 @@ public sealed class MainViewModel : ObservableObject
         }
         if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
-        CurrentPage = page switch
+        var targetPage = page switch
         {
             "ProjectCenter" => "Workbench",
             "PhotoOrganize" => "PhotoGrouping",
             _ => page
         };
+        if (string.Equals(CurrentPage, targetPage, StringComparison.Ordinal)) return;
+        var navigationCorrelationId = Guid.NewGuid().ToString("N");
+        _logService.Info($"导航请求[{navigationCorrelationId}]：{CurrentPage} -> {targetPage}");
+        CurrentPage = targetPage;
     }
 
     private void TogglePinnedTool(string? id)

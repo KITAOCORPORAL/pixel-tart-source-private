@@ -24,7 +24,14 @@ public sealed class UiFix141Tests
 
     [TestMethod] public void NavigationIcons_AreThemeAwareLinearPaths() => Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Navigation.xaml"), "SidebarIcon", "StrokeThickness\" Value=\"1.6", "DynamicResource TextSecondaryBrush");
     [TestMethod] public void NavigationIcons_AreMergedIntoApplication() => Contains(Text("src/RAWSelectionAssistant/App.xaml"), "Icons.Navigation.xaml");
-    [TestMethod] public void SidebarButtons_HaveTooltipsAndAutomationNames() => Contains(Text("src/RAWSelectionAssistant/MainWindow.xaml"), "ToolTip=\"工作台\" AutomationProperties.Name=\"工作台\"", "ToolTip=\"本地分片\" AutomationProperties.Name=\"本地分片\"", "ToolTip=\"归片工作区\" AutomationProperties.Name=\"归片工作区\"", "ToolTip=\"帮助\" AutomationProperties.Name=\"帮助\"");
+    [TestMethod] public void SidebarButtons_HaveTooltipsAndAutomationNames()
+    {
+        var xaml = Text("src/RAWSelectionAssistant/MainWindow.xaml");
+        Contains(xaml, "ToolTip=\"工作台\" AutomationProperties.Name=\"工作台\"", "ToolTip=\"归片工作区\" AutomationProperties.Name=\"归片工作区\"", "ToolTip=\"帮助\" AutomationProperties.Name=\"帮助\"");
+        var sidebarStart = xaml.IndexOf("x:Name=\"SidebarContainer\"", StringComparison.Ordinal);
+        var sidebarEnd = xaml.IndexOf("<Grid Grid.Column=\"1\">", sidebarStart, StringComparison.Ordinal);
+        Assert.IsFalse(xaml[sidebarStart..sidebarEnd].Contains("Content=\"本地分片\"", StringComparison.Ordinal));
+    }
 
     [TestMethod]
     public void GlobalAppBar_IsRemovedWithoutRestoringBrokenSquareIcons()

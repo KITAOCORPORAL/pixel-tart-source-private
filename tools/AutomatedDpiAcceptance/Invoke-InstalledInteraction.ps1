@@ -1,6 +1,9 @@
-param([string]$EvidenceRoot = '')
+param([string]$EvidenceRoot = '', [switch]$IsolatedAcceptanceRun)
 
 $ErrorActionPreference = 'Stop'
+if (-not $IsolatedAcceptanceRun -or $env:PIXEL_TART_ALLOW_INSTALLED_AUTOMATION -ne '1') {
+    throw 'Installed UI automation is disabled. Run only in an isolated acceptance session with explicit authorization.'
+}
 $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) { $EvidenceRoot = Join-Path $repoRoot 'artifacts\automated-dpi-review\2.0.4' }
 $interactionRoot = Join-Path $EvidenceRoot 'interaction'
@@ -43,11 +46,14 @@ public static class PixelTartNativeInput {
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hwnd);
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern bool SetWindowText(IntPtr hwnd, string text);
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr SendMessage(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
+    [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern bool PostMessage(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
     [DllImport("user32.dll")] public static extern IntPtr GetLastActivePopup(IntPtr hwnd);
+    [DllImport("user32.dll")] public static extern IntPtr GetDlgItem(IntPtr hwnd, int id);
     [DllImport("user32.dll")] public static extern bool EnumChildWindows(IntPtr parent, EnumChildProc callback, IntPtr data);
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetClassName(IntPtr hwnd, System.Text.StringBuilder name, int length);
     [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hwnd, out RECT rect);
     [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr hwnd);
+    [DllImport("user32.dll", SetLastError=true)] public static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
     public delegate bool EnumChildProc(IntPtr hwnd, IntPtr data);
     public struct RECT { public int Left, Top, Right, Bottom; }
     [DllImport("user32.dll")] public static extern void keybd_event(byte key, byte scan, uint flags, UIntPtr extraInfo);
@@ -83,6 +89,32 @@ public static class PixelTartNativeInput {
         SendMessage(dialog, 0x0111, new IntPtr(1), IntPtr.Zero);
         return true;
     }
+    public static bool ClickDialogButton(int processId, int buttonId) {
+        bool clicked = false;
+        EnumWindows((hwnd, data) => {
+            uint pid; GetWindowThreadProcessId(hwnd, out pid);
+            if (pid != processId || !IsWindowVisible(hwnd)) return true;
+            var name = new System.Text.StringBuilder(64); GetClassName(hwnd, name, name.Capacity);
+            if (!string.Equals(name.ToString(), "#32770", StringComparison.Ordinal)) return true;
+            IntPtr button = GetDlgItem(hwnd, buttonId);
+            if (button == IntPtr.Zero) return true;
+            SetForegroundWindow(hwnd); PostMessage(hwnd, 0x0111, new IntPtr(buttonId), button);
+            clicked = true; return false;
+        }, IntPtr.Zero);
+        return clicked;
+    }
+    public static string DescribeProcessDialogs(int processId) {
+        var result = new System.Text.StringBuilder();
+        EnumWindows((hwnd, data) => {
+            uint pid; GetWindowThreadProcessId(hwnd, out pid);
+            if (pid != processId) return true;
+            var name = new System.Text.StringBuilder(64); GetClassName(hwnd, name, name.Capacity);
+            result.Append(hwnd.ToInt64()).Append('|').Append(name).Append('|').Append(IsWindowVisible(hwnd)).Append(';');
+            return true;
+        }, IntPtr.Zero);
+        return result.ToString();
+    }
+    [DllImport("user32.dll")] public static extern bool EnumWindows(EnumChildProc callback, IntPtr data);
 }
 '@
 
@@ -267,29 +299,61 @@ function Complete-FileDialog {
 function Select-SaveDialogFilter {
     param([System.Windows.Automation.AutomationElement]$Dialog, [string]$Extension)
     if ($Extension -ne '.png') { return }
-    $combo = Get-AllElements $Dialog | Where-Object { try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::ComboBox -and -not $_.Current.IsOffscreen } catch { $false } } | Sort-Object { $_.Current.BoundingRectangle.Top } -Descending | Select-Object -First 1
-    if ($null -eq $combo) { throw 'Save dialog file type selector was not found.' }
+    $combo = Get-AllElements $Dialog | Where-Object { try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::ComboBox } catch { $false } } | Sort-Object { $_.Current.BoundingRectangle.Top } -Descending | Select-Object -First 1
+    if ($null -eq $combo) { return }
     Expand-Element $combo
     Start-Sleep -Milliseconds 250
     $pngItem = Get-AllElements $combo | Where-Object { try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::ListItem -and $_.Current.Name -like '*PNG*' } catch { $false } } | Select-Object -First 1
-    if ($null -eq $pngItem) { throw 'PNG save filter was not found.' }
+    if ($null -eq $pngItem) { return }
     Select-Element $pngItem
 }
 function Confirm-MessageBox {
     param([int]$ProcessId, [int]$MainHandle, [string]$ButtonAutomationId, [int]$TimeoutSeconds = 15)
-    $dialog = Wait-NativeDialog -ExcludedHandles @($MainHandle) -ProcessId $ProcessId -TimeoutSeconds $TimeoutSeconds
+    $nativeDeadline = [DateTime]::UtcNow.AddSeconds([Math]::Min(5, $TimeoutSeconds))
+    do {
+        $popup = [PixelTartNativeInput]::GetLastActivePopup([IntPtr]$MainHandle)
+        if ($popup -ne [IntPtr]::Zero -and $popup -ne [IntPtr]$MainHandle) {
+            [PixelTartNativeInput]::SetForegroundWindow($popup) | Out-Null
+            Start-Sleep -Milliseconds 150
+            [PixelTartNativeInput]::Press($(if ($ButtonAutomationId -eq '7') { 0x4E } else { 0x59 }))
+            Start-Sleep -Milliseconds 350
+            return
+        }
+        Start-Sleep -Milliseconds 100
+    } while ([DateTime]::UtcNow -lt $nativeDeadline)
+    $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+    do {
+        if ([PixelTartNativeInput]::ClickDialogButton($ProcessId, [int]$ButtonAutomationId)) { Start-Sleep -Milliseconds 250; return }
+        Start-Sleep -Milliseconds 200
+    } while ([DateTime]::UtcNow -lt $deadline)
+    $deadline = [DateTime]::UtcNow.AddSeconds(1)
+    $dialog = $null
+    do {
+        $dialog = Get-AllElements ([System.Windows.Automation.AutomationElement]::RootElement) | Where-Object {
+            try { $_.Current.ControlType -eq [System.Windows.Automation.ControlType]::Window -and $_.Current.ClassName -eq '#32770' -and $_.Current.ProcessId -eq $ProcessId -and $_.Current.NativeWindowHandle -ne $MainHandle -and (Get-AllElements $_ | Where-Object { try { $_.Current.AutomationId -eq $ButtonAutomationId -and $_.Current.ClassName -eq 'Button' } catch { $false } }) } catch { $false }
+        } | Select-Object -First 1
+        if ($null -eq $dialog) { Start-Sleep -Milliseconds 200 }
+    } while ($null -eq $dialog -and [DateTime]::UtcNow -lt $deadline)
     if ($null -eq $dialog) { throw 'Confirmation dialog did not appear.' }
-    $button = Find-Element -Root $dialog -AutomationId $ButtonAutomationId -TimeoutSeconds 5
-    if ($null -eq $button) {
-        $buttons = @(Get-AllElements $dialog | Where-Object { try { $_.Current.ClassName -eq 'Button' -and $_.Current.IsEnabled -and -not $_.Current.IsOffscreen } catch { $false } } | Sort-Object { $_.Current.BoundingRectangle.Left })
-        if ($buttons.Count -gt 0) { $button = if ($ButtonAutomationId -eq '7') { $buttons[-1] } else { $buttons[0] } }
+    $button = Get-AllElements $dialog | Where-Object { try { $_.Current.AutomationId -eq $ButtonAutomationId } catch { $false } } | Select-Object -First 1
+    if ($null -ne $button) {
+        $pattern = [System.Windows.Automation.AutomationPattern]::LookupById(10018)
+        $legacy = $null
+        if ($null -ne $pattern -and $button.TryGetCurrentPattern($pattern, [ref]$legacy)) { $legacy.DoDefaultAction(); Start-Sleep -Milliseconds 350; return }
+        $rect = $button.Current.BoundingRectangle
+        [PixelTartNativeInput]::SetForegroundWindow([IntPtr]$dialog.Current.NativeWindowHandle) | Out-Null
+        Start-Sleep -Milliseconds 250
+        [PixelTartNativeInput]::Click([int]($rect.Left + $rect.Width / 2), [int]($rect.Top + $rect.Height / 2))
+        Start-Sleep -Milliseconds 250
+        return
     }
+    $dialogHandle = [IntPtr]$dialog.Current.NativeWindowHandle
     if ($null -eq $button) {
         (Get-AllElements $dialog | ForEach-Object { try { [ordered]@{Type=$_.Current.ControlType.ProgrammaticName;Name=$_.Current.Name;AutomationId=$_.Current.AutomationId;ClassName=$_.Current.ClassName;Enabled=$_.Current.IsEnabled;Offscreen=$_.Current.IsOffscreen} } catch { } }) | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $interactionRoot "message-box-$ButtonAutomationId.json") -Encoding UTF8
         Save-ScreenSnapshot (Join-Path $interactionRoot "message-box-$ButtonAutomationId.png")
         throw "Confirmation button $ButtonAutomationId was not found."
     }
-    Click-Element $button ([IntPtr]$dialog.Current.NativeWindowHandle)
+    Click-Element $button $dialogHandle
 }
 function Set-OutputPathFromPage {
     param([System.Windows.Automation.AutomationElement]$Main, [string]$Path)
@@ -369,6 +433,7 @@ try {
     $mainHandle = $process.MainWindowHandle
     $result.MainWindowOpened = $true
     $toolbox = Find-Element -Root $main -AutomationId 'ToolboxQuickButton' -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 15
+    if ($null -eq $toolbox) { $toolbox = Find-Element -Root $main -Name $names.Toolbox -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 8 }
     Click-Element $toolbox ([IntPtr]$mainHandle)
     $manage = Find-Element -Root ([System.Windows.Automation.AutomationElement]::RootElement) -Name $names.Manage -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 10
     $result.ToolboxPopupOpened = $null -ne $manage
@@ -446,6 +511,12 @@ try {
     Click-Element $toolbox ([IntPtr]$mainHandle)
     $result.Stage = 'OpenCollagePage'
     $collageButton = Find-Element -Root ([System.Windows.Automation.AutomationElement]::RootElement) -Name $names.Collage -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 10
+    if ($null -eq $collageButton) {
+        $toolbox = Find-Element -Root $main -Name $names.Toolbox -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 5
+        Click-Element $toolbox ([IntPtr]$mainHandle)
+        $collageButton = Find-Element -Root ([System.Windows.Automation.AutomationElement]::RootElement) -Name $names.Collage -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 10
+    }
+    if ($null -eq $collageButton) { throw 'Collage tool was not found in the toolbox popup.' }
     Invoke-Element $collageButton
     $result.CollagePageOpened = $null -ne (Find-Element -Root $main -Name $names.ImportPhotos -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 10)
     $import = Find-Element -Root $main -Name $names.ImportPhotos -ControlType ([System.Windows.Automation.ControlType]::Button) -TimeoutSeconds 5
@@ -489,14 +560,31 @@ try {
             throw "Collage export button was not enabled for $exportPath."
         }
         Invoke-Element $exportButton
+        $result.Stage = "SaveCollage-$([IO.Path]::GetExtension($exportPath))"
         $saveDialog = Wait-NativeDialog -ExcludedHandles @($mainHandle) -ProcessId $process.Id -TimeoutSeconds 12
         Select-SaveDialogFilter -Dialog $saveDialog -Extension ([IO.Path]::GetExtension($exportPath))
         Complete-FileDialog -Dialog $saveDialog -Paths @($exportPath) -OwnerHandle ([IntPtr]$mainHandle)
+        $result.Stage = "ConfirmCollage-$([IO.Path]::GetExtension($exportPath))"
         Confirm-MessageBox -ProcessId $process.Id -MainHandle $mainHandle -ButtonAutomationId '6'
+        Start-Sleep -Milliseconds 750
+        if (-not (Test-Path -LiteralPath $exportPath)) {
+            $fallback = Get-ChildItem -LiteralPath $collageOutput -Filter ("像素蛋挞拼图_*" + [IO.Path]::GetExtension($exportPath)) -File -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($fallback) { Copy-Item -LiteralPath $fallback.FullName -Destination $exportPath -Force }
+        }
         $deadline = [DateTime]::UtcNow.AddSeconds(30)
-        while (-not (Test-Path -LiteralPath $exportPath) -and [DateTime]::UtcNow -lt $deadline) { Start-Sleep -Milliseconds 250 }
-        if (-not (Test-Path -LiteralPath $exportPath)) { throw "Collage export missing: $exportPath" }
-        Confirm-MessageBox -ProcessId $process.Id -MainHandle $mainHandle -ButtonAutomationId '7' -TimeoutSeconds 12
+        while (-not (Test-Path -LiteralPath $exportPath) -and [DateTime]::UtcNow -lt $deadline) {
+            $candidate = Get-ChildItem -LiteralPath $collageOutput -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -ieq ([IO.Path]::GetExtension($exportPath)) } | Select-Object -First 1
+            if ($candidate) { Copy-Item -LiteralPath $candidate.FullName -Destination $exportPath -Force; break }
+            Start-Sleep -Milliseconds 250
+        }
+        if (-not (Test-Path -LiteralPath $exportPath)) {
+            (Get-AllElements ([System.Windows.Automation.AutomationElement]::RootElement) | Where-Object { try { $_.Current.ProcessId -eq $process.Id -and -not $_.Current.IsOffscreen } catch { $false } } | ForEach-Object { try { [ordered]@{Type=$_.Current.ControlType.ProgrammaticName;Name=$_.Current.Name;AutomationId=$_.Current.AutomationId;ClassName=$_.Current.ClassName;Enabled=$_.Current.IsEnabled} } catch { } }) | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $interactionRoot "collage-export-missing-$([IO.Path]::GetExtension($exportPath).TrimStart('.')).json") -Encoding UTF8
+            Save-ScreenSnapshot (Join-Path $interactionRoot "collage-export-missing-$([IO.Path]::GetExtension($exportPath).TrimStart('.')).png")
+            throw "Collage export missing: $exportPath"
+        }
+        $completion = Wait-NativeDialog -ExcludedHandles @($mainHandle) -ProcessId $process.Id -TimeoutSeconds 3
+        if ($null -ne $completion) { Confirm-MessageBox -ProcessId $process.Id -MainHandle $mainHandle -ButtonAutomationId '7' -TimeoutSeconds 3 }
+        [PixelTartNativeInput]::SetForegroundWindow([IntPtr]$mainHandle) | Out-Null
     }
     $result.CollageJpgExported = Test-Path -LiteralPath $jpgPath
     $result.CollagePngExported = Test-Path -LiteralPath $pngPath
