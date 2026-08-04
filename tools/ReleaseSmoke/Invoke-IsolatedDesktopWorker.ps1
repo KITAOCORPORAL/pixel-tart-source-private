@@ -38,7 +38,8 @@ if (-not $resolvedAcceptanceRoot.StartsWith($resolvedLocalAppData + [IO.Path]::D
 if(Test-Path $acceptanceSettingsRoot){Remove-Item $acceptanceSettingsRoot -Recurse -Force}
 New-Item -ItemType Directory -Force -Path $acceptanceSettingsRoot | Out-Null
 $completedAt = [DateTimeOffset]::UtcNow
-$completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.2.0|$($completedAt.ToString('O'))"
+$completedAtText = $completedAt.ToString('O')
+$completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.2.0|$completedAtText"
 $sha256 = [Security.Cryptography.SHA256]::Create()
 try { $completionProof = ([BitConverter]::ToString($sha256.ComputeHash([Text.Encoding]::UTF8.GetBytes($completionValue)))).Replace('-', '') }
 finally { $sha256.Dispose() }
@@ -47,7 +48,7 @@ $acceptanceSettings = @{
     PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress')
     onboardingCompleted=$true
     onboardingVersion='2.2.0'
-    onboardingCompletedAt=$completedAt
+    onboardingCompletedAt=$completedAtText
     onboardingCurrentStep=22
     onboardingLegacyUser=$false
     onboardingUpgradeOfferShown=$true
