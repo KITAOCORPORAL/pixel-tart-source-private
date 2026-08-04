@@ -6,7 +6,7 @@ using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
 
-if (args.Length != 1) throw new ArgumentException("isolated stage-D root required");
+if (args.Length is < 1 or > 2) throw new ArgumentException("isolated stage-D root and optional UI database required");
 var root = Path.GetFullPath(args[0]);
 Directory.CreateDirectory(root);
 var database = new PixelTartDatabase(Path.Combine(root, "data", "pixel-tart.db"));
@@ -123,9 +123,20 @@ await using var versionCommand = integrityConnection.CreateCommand();
 versionCommand.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
 var schemaVersion = Convert.ToInt32(await versionCommand.ExecuteScalarAsync());
 
+var uiReminderEnabled = true;
+if (args.Length == 2)
+{
+    var uiDatabasePath = Path.GetFullPath(args[1]);
+    var uiDatabase = new PixelTartDatabase(uiDatabasePath);
+    await using var uiConnection = await uiDatabase.OpenConnectionAsync();
+    await using var uiReminderCommand = uiConnection.CreateCommand();
+    uiReminderCommand.CommandText = "SELECT COUNT(*) FROM BookingReminders WHERE IsEnabled = 1 AND Status = 'Scheduled';";
+    uiReminderEnabled = Convert.ToInt64(await uiReminderCommand.ExecuteScalarAsync()) > 0;
+}
+
 var passed = migration.CurrentVersion == 2 && schemaVersion == 2 && reminderDefaultOff && reminderEnabled && reminderTriggeredOnce &&
     linked && missing && relocated.Status == BookingDocumentRelocationStatus.Relocated && removeKeptFile && copyKeptSource && recoveryVisible && recoveryRetried &&
-    workbenchVisible && weatherDisabled && weatherAvailable && archiveRestoreSafe && integrity;
+    workbenchVisible && weatherDisabled && weatherAvailable && archiveRestoreSafe && integrity && uiReminderEnabled;
 Console.WriteLine(JsonSerializer.Serialize(new
 {
     Passed = passed,
@@ -133,6 +144,7 @@ Console.WriteLine(JsonSerializer.Serialize(new
     ReminderDefaultOff = reminderDefaultOff,
     ReminderEnabled = reminderEnabled,
     ReminderTriggeredOnce = reminderTriggeredOnce,
+    UiReminderEnabled = uiReminderEnabled,
     WorkbenchVisible = workbenchVisible,
     DocumentReferenceAdded = linked,
     MissingDetected = missing,
