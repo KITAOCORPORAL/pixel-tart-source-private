@@ -38,8 +38,8 @@ public sealed class UsabilityFix151Tests
         Assert.IsGreaterThanOrEqualTo(24d * scale, 28d * scale);
     }
 
-    [TestMethod] public void Version_Is204() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.0.4\"");
-    [TestMethod] public void Installer_IsNamedFor204() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.0.4\"", "像素蛋挞_Setup_2.0.4_x64");
+    [TestMethod] public void Version_Is210() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.1.0\"");
+    [TestMethod] public void Installer_IsNamedFor210() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.1.0\"", "像素蛋挞_Setup_2.1.0_x64");
     [TestMethod] public void Release_RemainsWinExeSelfContained() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");

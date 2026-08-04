@@ -4,6 +4,7 @@ using System.Text.Json;
 using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services;
 
@@ -180,6 +181,8 @@ public sealed class OrganizeService(ILogService? logService = null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var item = manifest.Items[index];
+                if (TaskExecutionAmbient.CurrentContext.Value is { } taskContext)
+                    await taskContext.SafeBoundaryAsync("整理图片", index, item.SourcePath, cancellationToken).ConfigureAwait(false);
                 string? overwriteBackupPath = null;
                 progress?.Report(new(index, manifest.Items.Count, item.SourcePath));
                 try
@@ -299,6 +302,8 @@ public sealed class OrganizeService(ILogService? logService = null)
         foreach (var item in manifest.Items.Where(x => x.State == OrganizeItemState.Moved))
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (TaskExecutionAmbient.CurrentContext.Value is { } taskContext)
+                await taskContext.SafeBoundaryAsync("校验撤销前提", manifest.Items.IndexOf(item), item.DestinationPath, cancellationToken).ConfigureAwait(false);
             if (!File.Exists(item.DestinationPath) || File.Exists(item.SourcePath)) return false;
             if (new FileInfo(item.DestinationPath).Length != item.ExpectedSourceSize) return false;
             if (!string.IsNullOrWhiteSpace(item.OptionalSourceHash) &&
@@ -306,6 +311,8 @@ public sealed class OrganizeService(ILogService? logService = null)
         }
         foreach (var item in manifest.Items.Where(x => x.State == OrganizeItemState.Moved).Reverse())
         {
+            if (TaskExecutionAmbient.CurrentContext.Value is { } taskContext)
+                await taskContext.SafeBoundaryAsync("撤销移动", manifest.Items.IndexOf(item), item.DestinationPath, cancellationToken).ConfigureAwait(false);
             System.IO.Directory.CreateDirectory(Path.GetDirectoryName(item.SourcePath)!);
             await CopyOneAsync(item.DestinationPath, item.SourcePath, FileMode.CreateNew, cancellationToken).ConfigureAwait(false);
             if (new FileInfo(item.SourcePath).Length != item.ExpectedSourceSize) return false;

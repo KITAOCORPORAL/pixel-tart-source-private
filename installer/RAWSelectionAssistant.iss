@@ -1,8 +1,8 @@
 #define MyAppName "像素蛋挞"
-#define MyAppVersion "2.0.4"
+#define MyAppVersion "2.1.0"
 #define MyAppPublisher "像素蛋挞"
 #define MyAppExeName "KitaoPhotoSelector.exe"
-#define MyPublishDir "..\artifacts\releases\2.0.4\publish\win-x64"
+#define MyPublishDir "..\artifacts\releases\2.1.0\publish\win-x64"
 #ifdef TestBuild
   #undef MyAppName
   #define MyAppName "像素蛋挞 验收测试"
@@ -31,11 +31,11 @@ DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
-OutputDir=..\artifacts\releases\2.0.4\installer
+OutputDir=..\artifacts\releases\2.1.0\installer
 #ifdef TestBuild
-OutputBaseFilename=像素蛋挞_Test_Setup_2.0.4_x64
+OutputBaseFilename=像素蛋挞_Test_Setup_2.1.0_x64
 #else
-OutputBaseFilename=像素蛋挞_Setup_2.0.4_x64
+OutputBaseFilename=像素蛋挞_Setup_2.1.0_x64
 #endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64
@@ -109,7 +109,7 @@ begin
   DeleteUserDataCheckBox.Left := UninstallProgressForm.StatusLabel.Left;
   DeleteUserDataCheckBox.Top := UninstallProgressForm.StatusLabel.Top + UninstallProgressForm.StatusLabel.Height + ScaleY(28);
   DeleteUserDataCheckBox.Width := UninstallProgressForm.ClientWidth - (DeleteUserDataCheckBox.Left * 2);
-  DeleteUserDataCheckBox.Caption := '同时删除用户设置、索引和历史日志';
+  DeleteUserDataCheckBox.Caption := '同时删除用户设置、项目数据库、索引和历史日志';
   DeleteUserDataCheckBox.Checked := False;
 end;
 

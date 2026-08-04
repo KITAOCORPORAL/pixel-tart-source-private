@@ -369,10 +369,15 @@ public partial class MainWindow : Window
         Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 2 : 3);
         WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(320);
         TaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
+        UnifiedTaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(TaskCenterPanel, compact ? 0 : 1);
+        Grid.SetColumn(UnifiedTaskCenterPanel, compact ? 0 : 1);
         Grid.SetColumnSpan(TaskCenterPanel, compact ? 2 : 1);
+        Grid.SetColumnSpan(UnifiedTaskCenterPanel, compact ? 2 : 1);
         TaskCenterPanel.Width = compact ? 320 : double.NaN;
+        UnifiedTaskCenterPanel.Width = compact ? 320 : double.NaN;
         TaskCenterPanel.HorizontalAlignment = compact ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
+        UnifiedTaskCenterPanel.HorizontalAlignment = compact ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
         TaskDrawerButton.Visibility = compact ? Visibility.Visible : Visibility.Collapsed;
         WorkbenchQuickActions.Margin = compact ? new Thickness(0, 0, 116, 0) : new Thickness(0);
         TaskDrawerButton.Content = _taskCenterDrawerOpen ? "收起任务中心" : "任务中心";

@@ -5,6 +5,8 @@ using System.Windows.Data;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Core.Services.Tasks;
+using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 
@@ -30,6 +32,9 @@ public sealed class MainViewModel : ObservableObject
     private readonly OutputPresetService _outputPresetService;
     private readonly BatchProjectService _batchProjectService;
     private readonly IAppearanceService _appearanceService;
+    private readonly TaskOperationBridge _taskOperationBridge;
+    private readonly IQuickToolsRepository _quickToolsRepository;
+    private readonly IMatchDecisionRepository _matchDecisionRepository;
     private CancellationTokenSource? _operationCancellation;
     private MediaIndexSnapshot _mediaIndex = new();
     private SourceDirectoryEntry? _selectedSource;
@@ -99,7 +104,11 @@ public sealed class MainViewModel : ObservableObject
         ProjectHistoryService projectHistoryService,
         OutputPresetService outputPresetService,
         BatchProjectService batchProjectService,
-        IAppearanceService appearanceService)
+        IAppearanceService appearanceService,
+        TaskCenterViewModel taskCenter,
+        TaskOperationBridge taskOperationBridge,
+        IQuickToolsRepository quickToolsRepository,
+        IMatchDecisionRepository matchDecisionRepository)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -119,8 +128,12 @@ public sealed class MainViewModel : ObservableObject
         _outputPresetService = outputPresetService;
         _batchProjectService = batchProjectService;
         _appearanceService = appearanceService;
-        OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService);
-        CollagePage = new CollageViewModel(new CollageExportService(), dialogService);
+        TaskCenter = taskCenter;
+        _taskOperationBridge = taskOperationBridge;
+        _quickToolsRepository = quickToolsRepository;
+        _matchDecisionRepository = matchDecisionRepository;
+        OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService, taskOperationBridge);
+        CollagePage = new CollageViewModel(new CollageExportService(), dialogService, taskOperationBridge);
         _licenseService.LicenseChanged += (_, _) => OnLicenseChanged();
 
         AddSourceCommand = new RelayCommand(_ => AddSource(), _ => !IsBusy && CanTutorial(TutorialAction.AddSourceDirectory));
@@ -188,6 +201,7 @@ public sealed class MainViewModel : ObservableObject
     public ObservableCollection<MediaSelectionItem> Selections { get; } = [];
     public ICollectionView SelectionView { get; }
     public ObservableCollection<PhotoProjectRecord> ProjectHistory { get; } = [];
+    public TaskCenterViewModel TaskCenter { get; }
     public ObservableCollection<OutputPreset> OutputPresets { get; } = [];
     public bool IsSettingsModalOpen
     {
@@ -792,6 +806,12 @@ public sealed class MainViewModel : ObservableObject
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+        var databaseQuickTools = await _quickToolsRepository.LoadAsync();
+        if (databaseQuickTools.Count > 0)
+        {
+            Settings.PinnedQuickTools = QuickToolsService.Normalize(databaseQuickTools);
+            Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
+        }
         Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.QuickToolLayout.OrderedToolIds);
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
@@ -900,11 +920,13 @@ public sealed class MainViewModel : ObservableObject
         Settings.WindowTop = top;
     }
 
-    public Task SaveSettingsAsync()
+    public async Task SaveSettingsAsync()
     {
         if (IsOnboardingActive)
         {
-            return _settingsService.SaveAsync(Settings);
+            await _settingsService.SaveAsync(Settings);
+            await _quickToolsRepository.SaveAsync(Settings.PinnedQuickTools);
+            return;
         }
 
         Settings.RecentRawDirectories = Sources.Select(x => x.Path).ToList();
@@ -918,7 +940,8 @@ public sealed class MainViewModel : ObservableObject
         Settings.AllowCustomerJpegFallback = CustomerJpegMode == CustomerJpegHandlingMode.AllowCustomerFile;
         var custom = MediaExtensionPolicy.ParseCustomExtensions(CustomExtensionsText);
         if (custom.IsValid) Settings.CustomExtensions = custom.Extensions.ToList();
-        return _settingsService.SaveAsync(Settings);
+        await _settingsService.SaveAsync(Settings);
+        await _quickToolsRepository.SaveAsync(Settings.PinnedQuickTools);
     }
 
     private void AddSource()
@@ -1105,6 +1128,7 @@ public sealed class MainViewModel : ObservableObject
             StatusMessage = $"匹配完成：完整 {CompleteMatchedCount:N0}，部分 {PartialMatchedCount:N0}，冲突 {ConflictCount:N0}，未找到 {NotFoundCount:N0}";
             _currentProject.Status = PhotoProjectStatus.Ready;
             await SaveCurrentProjectAsync();
+            await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
         });
         if (IsOnboardingActive) await AdvanceTutorialAsync(TutorialAction.MatchFiles, CreateTutorialContext());
     }
@@ -1141,6 +1165,7 @@ public sealed class MainViewModel : ObservableObject
             _currentProject.Status = PhotoProjectStatus.Completed;
             _currentProject.CompletedAt = DateTimeOffset.UtcNow;
             await SaveCurrentProjectAsync();
+            await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
             OnPropertyChanged(nameof(OutputDirectory));
             RefreshCommands();
         });
@@ -2208,7 +2233,19 @@ public sealed class MainViewModel : ObservableObject
         ProgressPercent = 0;
         try
         {
-            await operation(_operationCancellation.Token);
+            var writeRoot = stage.Contains("复制", StringComparison.Ordinal) || stage.Contains("导出", StringComparison.Ordinal)
+                ? $"write-root:{OutputDirectory}"
+                : string.Empty;
+            await _taskOperationBridge.RunAsync(stage, async (context, taskToken) =>
+            {
+                using var linked = CancellationTokenSource.CreateLinkedTokenSource(taskToken, _operationCancellation.Token);
+                await context.SafeBoundaryAsync("开始", 0, cancellationToken: linked.Token);
+                await operation(linked.Token);
+                var succeeded = ProcessedCount > 0 ? (int)Math.Min(int.MaxValue, ProcessedCount) : 1;
+                var summary = new TaskResultSummary(succeeded, succeeded, 0, 0, 0, 0, 0, 0);
+                await context.ReportProgressAsync(100, "完成", CurrentItem, summary, linked.Token);
+                return summary;
+            }, _currentProject.Id == Guid.Empty ? null : _currentProject.Id, writeRoot, _operationCancellation.Token);
         }
         catch (OperationCanceledException)
         {
