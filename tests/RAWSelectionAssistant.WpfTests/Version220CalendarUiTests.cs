@@ -133,6 +133,27 @@ public sealed class Version220CalendarUiTests
         Assert.AreEqual("CNY 25.00", vm.BalanceText);
     }
 
+    [TestMethod] public async Task Details_LoadRefreshesEditAndArchiveCommandState()
+    {
+        var service = new StubBookingService();
+        var booking = Booking();
+        service.Bookings[booking.Id] = booking;
+        var vm = new ShootBookingDetailsViewModel(service);
+        Assert.IsFalse(vm.EditCommand.CanExecute(null));
+        Assert.IsFalse(vm.ArchiveCommand.CanExecute(null));
+        var editChanged = 0;
+        var archiveChanged = 0;
+        vm.EditCommand.CanExecuteChanged += (_, _) => editChanged++;
+        vm.ArchiveCommand.CanExecuteChanged += (_, _) => archiveChanged++;
+
+        await vm.LoadAsync(booking.Id);
+
+        Assert.IsTrue(vm.EditCommand.CanExecute(null));
+        Assert.IsTrue(vm.ArchiveCommand.CanExecute(null));
+        Assert.IsGreaterThan(0, editChanged);
+        Assert.IsGreaterThan(0, archiveChanged);
+    }
+
     [TestMethod] public void Requirements_SupportAddRemoveAndReorder()
     {
         var vm = new ShootRequirementsViewModel();

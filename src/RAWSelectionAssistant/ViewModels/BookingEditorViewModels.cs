@@ -116,6 +116,8 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private void NotifyBooking()
     {
         foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
+        (EditCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (ArchiveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         NotifyMoney();
     }
 
