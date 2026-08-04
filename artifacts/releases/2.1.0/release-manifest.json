@@ -1,7 +1,15 @@
 {
+  "status": "released",
+  "releaseEligible": true,
   "version": "2.1.0",
   "sourceCommit": "1b43960e8f04ffc0de89efd52a0de6c2c4aa516a",
+  "sourceCommitMeaning": "binary-source-commit",
   "sourceTag": "v2.1.0",
+  "releaseTag": "v2.1.0",
+  "releaseTagTarget": "33b1885841e8433253fac2918a3638263a92836c",
+  "releaseTagTargetMeaning": "local-tag-target-recorded-before-the-one-time-metadata-correction",
+  "originalReleaseTagTarget": "33b1885841e8433253fac2918a3638263a92836c",
+  "metadataCorrectionApplied": true,
   "builtAtUtc": "2026-08-04T02:55:21.1884722Z",
   "configuration": "Release",
   "runtime": "win-x64",
@@ -21,6 +29,7 @@
   "knownLimitations": [
     "当前授权 Provider 为 None，未连接生产授权平台。",
     "工作日历仅预留本地提醒与项目关系接口，未提供页面、后台提醒或业务表。",
+    "2.1.0 未新增物理 DPI 人工测试，沿用 2.0.4 已封版物理 DPI 门禁并通过逻辑 DPI 自动化测试。",
     "桌面采集组件对当前 WPF 窗口返回 SetIsBorderRequired 不支持接口，因此未新增前台截图；已通过隔离安装后的真实进程启动、标题、响应状态和运行日志验证。",
     "安装包未进行代码签名。"
   ]
