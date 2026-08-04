@@ -38,11 +38,9 @@ public sealed class AuditLogService(IPixelTartDatabase database) : IAuditLogServ
     public static string Sanitize(string message)
     {
         if (string.IsNullOrWhiteSpace(message)) return string.Empty;
-        var sanitized = WindowsPath.Replace(message, match =>
-        {
-            var fileName = Path.GetFileName(match.Value.TrimEnd('.', ',', ';'));
-            return string.IsNullOrWhiteSpace(fileName) ? "[路径已隐藏]" : $"[路径已隐藏]\\{fileName}";
-        });
+        var sanitized = WindowsPath.Replace(message, "[路径已隐藏]");
+        sanitized = Regex.Replace(sanitized, @"(?i)(displayname|filename|documentname|optionalhash|documenthash)\s*[:=]\s*(?:""[^""]*""|\S+)", "$1=[已隐藏]");
+        sanitized = Regex.Replace(sanitized, @"(?<![A-Fa-f0-9])[A-Fa-f0-9]{64}(?![A-Fa-f0-9])", "[哈希已隐藏]");
         sanitized = Regex.Replace(sanitized, @"(?i)(license|token|secret|key)\s*[:=]\s*\S+", "$1=[已隐藏]");
         return sanitized.Length <= 2000 ? sanitized : sanitized[..2000];
     }

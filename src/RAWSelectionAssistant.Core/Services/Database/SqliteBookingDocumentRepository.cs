@@ -28,6 +28,27 @@ public sealed class SqliteBookingDocumentRepository(IPixelTartDatabase database)
         return await reader.ReadAsync(cancellationToken).ConfigureAwait(false) ? Read(reader) : null;
     }
 
+    public async Task<BookingDocumentRecord?> GetByNormalizedPathAsync(Guid bookingId, string normalizedPath, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = Select + " WHERE BookingId=$booking AND NormalizedPath=$path;";
+        command.Parameters.AddWithValue("$booking", bookingId.ToString("D"));
+        command.Parameters.AddWithValue("$path", normalizedPath);
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        return await reader.ReadAsync(cancellationToken).ConfigureAwait(false) ? Read(reader) : null;
+    }
+
+    public async Task<BookingDocumentRecord?> GetByNormalizedPathAsync(string normalizedPath, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = Select + " WHERE NormalizedPath=$path LIMIT 1;";
+        command.Parameters.AddWithValue("$path", normalizedPath);
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        return await reader.ReadAsync(cancellationToken).ConfigureAwait(false) ? Read(reader) : null;
+    }
+
     public async Task<IReadOnlyList<BookingDocumentRecord>> ListByBookingAsync(Guid bookingId, CancellationToken cancellationToken = default)
     {
         var result = new List<BookingDocumentRecord>();
@@ -64,6 +85,17 @@ public sealed class SqliteBookingDocumentRepository(IPixelTartDatabase database)
         command.Parameters.AddWithValue("$id", id.ToString("D"));
         command.Parameters.AddWithValue("$missing", isMissing ? 1 : 0);
         command.Parameters.AddWithValue("$verified", Utc(verifiedAtUtc));
+        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task UpdateHashAsync(Guid id, string? optionalHash, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "UPDATE BookingDocuments SET OptionalHash=$hash,UpdatedAtUtc=$at WHERE Id=$id;";
+        command.Parameters.AddWithValue("$id", id.ToString("D"));
+        command.Parameters.AddWithValue("$hash", (object?)optionalHash ?? DBNull.Value);
+        command.Parameters.AddWithValue("$at", Utc(updatedAtUtc));
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 

@@ -265,6 +265,11 @@ public sealed class Version220CalendarUiTests
                 view.Measure(viewport); view.Arrange(new Rect(viewport)); view.UpdateLayout();
                 Assert.IsFalse(double.IsNaN(view.ActualWidth)); Assert.IsFalse(double.IsNaN(view.ActualHeight));
                 Assert.IsLessThanOrEqualTo(viewport.Width, view.ActualWidth); Assert.IsLessThanOrEqualTo(viewport.Height, view.ActualHeight);
+
+                var documentPanel = new BookingDocumentsPanel { Width = viewport.Width, Height = viewport.Height };
+                documentPanel.Measure(viewport); documentPanel.Arrange(new Rect(viewport)); documentPanel.UpdateLayout();
+                Assert.IsFalse(double.IsNaN(documentPanel.ActualWidth)); Assert.IsFalse(double.IsNaN(documentPanel.ActualHeight));
+                Assert.IsLessThanOrEqualTo(viewport.Width, documentPanel.ActualWidth); Assert.IsLessThanOrEqualTo(viewport.Height, documentPanel.ActualHeight);
             }
         }
         finally { app.Shutdown(); }

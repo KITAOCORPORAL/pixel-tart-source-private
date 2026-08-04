@@ -4,6 +4,7 @@ using System.Windows.Input;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
@@ -32,7 +33,8 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private bool _isDetailsOpen;
     private bool _isArchivedPaneOpen;
 
-    public WorkCalendarViewModel(IShootBookingService bookingService, RAWSelectionAssistant.Core.Services.Database.IProjectRepository projectRepository)
+    public WorkCalendarViewModel(IShootBookingService bookingService, RAWSelectionAssistant.Core.Services.Database.IProjectRepository projectRepository,
+        IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
@@ -56,7 +58,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
         DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync);
-        Details = new ShootBookingDetailsViewModel(bookingService);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.EditRequested += (_, bookingId) => _ = RequestEditorAsync(bookingId, null);
         Details.Archived += (_, _) => _ = RefreshAsync();
