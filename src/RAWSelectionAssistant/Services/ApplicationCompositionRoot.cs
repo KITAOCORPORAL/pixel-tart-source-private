@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
@@ -19,6 +20,7 @@ public sealed class ApplicationCompositionRoot
         IAuditLogService auditLog,
         IFileOperationPlanner fileOperationPlanner,
         IFileOperationExecutor fileOperationExecutor,
+        IFileVerificationService fileVerificationService,
         IUndoJournalService undoJournalService)
     {
         Database = database;
@@ -31,11 +33,24 @@ public sealed class ApplicationCompositionRoot
         AuditLog = auditLog;
         FileOperationPlanner = fileOperationPlanner;
         FileOperationExecutor = fileOperationExecutor;
+        FileVerificationService = fileVerificationService;
         UndoJournalService = undoJournalService;
         ProjectRepository = new SqliteProjectRepository(database);
         MediaIndexRepository = new SqliteMediaIndexRepository(database);
         QuickToolsRepository = new SqliteQuickToolsRepository(database);
         MatchDecisionRepository = new SqliteMatchDecisionRepository(database);
+        ShootBookingRepository = new SqliteShootBookingRepository(database);
+        BookingConflictDetector = new BookingConflictDetector(ShootBookingRepository);
+        ShootBookingService = new ShootBookingService(ShootBookingRepository, BookingConflictDetector, auditLog);
+        BookingDocumentRepository = new SqliteBookingDocumentRepository(database);
+        BookingDocumentService = new BookingDocumentService(BookingDocumentRepository);
+        BookingDocumentWorkflowService = new BookingDocumentWorkflowService(BookingDocumentRepository, ShootBookingService, ProjectRepository,
+            FileOperationPlanner, FileOperationExecutor, FileVerificationService, UndoJournalService, OperationBridge, AuditLog, database);
+        ReminderRepository = new SqliteReminderRepository(database);
+        BookingReminderService = new BookingReminderService(ReminderRepository, ShootBookingService, auditLog);
+        BookingReminderNotificationService = new BookingReminderNotificationService(notificationCenter);
+        BookingReminderScheduler = new BookingReminderScheduler(ReminderRepository, ShootBookingService, BookingReminderNotificationService, auditLog);
+        WorkbenchScheduleService = new WorkbenchScheduleService(ShootBookingService, BookingDocumentRepository, ReminderRepository, projectRepository: ProjectRepository);
     }
 
     public PixelTartDatabase Database { get; }
@@ -48,16 +63,28 @@ public sealed class ApplicationCompositionRoot
     public IAuditLogService AuditLog { get; }
     public IFileOperationPlanner FileOperationPlanner { get; }
     public IFileOperationExecutor FileOperationExecutor { get; }
+    public IFileVerificationService FileVerificationService { get; }
     public IUndoJournalService UndoJournalService { get; }
     public IProjectRepository ProjectRepository { get; }
     public IMediaIndexRepository MediaIndexRepository { get; }
     public IQuickToolsRepository QuickToolsRepository { get; }
     public IMatchDecisionRepository MatchDecisionRepository { get; }
+    public IShootBookingRepository ShootBookingRepository { get; }
+    public IBookingConflictDetector BookingConflictDetector { get; }
+    public IShootBookingService ShootBookingService { get; }
+    public IBookingDocumentRepository BookingDocumentRepository { get; }
+    public IBookingDocumentService BookingDocumentService { get; }
+    public IBookingDocumentWorkflowService BookingDocumentWorkflowService { get; }
+    public IReminderRepository ReminderRepository { get; }
+    public IBookingReminderService BookingReminderService { get; }
+    public IBookingReminderNotificationService BookingReminderNotificationService { get; }
+    public IBookingReminderScheduler BookingReminderScheduler { get; }
+    public IWorkbenchScheduleService WorkbenchScheduleService { get; }
 
     public static async Task<ApplicationCompositionRoot> CreateAsync(CancellationToken cancellationToken = default)
     {
         var database = new PixelTartDatabase();
-        var backup = new DatabaseBackupService(database);
+        var backup = new DatabaseBackupService(database, RAWSelectionAssistant.Core.Utilities.AppDataPaths.MigrationBackupDirectory);
         var migrator = new DatabaseMigrator(database, backup);
         var migration = await migrator.MigrateAsync(cancellationToken);
         if (!migration.Success)
@@ -79,6 +106,6 @@ public sealed class ApplicationCompositionRoot
         var recovery = new RecoveryCoordinator(database, repository, executor, undo, audit);
         var taskCenter = new TaskCenterViewModel(engine, recovery);
         await taskCenter.InitializeAsync(cancellationToken);
-        return new(database, migration, jsonMigration, bridge, engine, taskCenter, notifications, audit, planner, executor, undo);
+        return new(database, migration, jsonMigration, bridge, engine, taskCenter, notifications, audit, planner, executor, verification, undo);
     }
 }

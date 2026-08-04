@@ -12,8 +12,8 @@ public sealed class UiSimplification144Tests
     [TestMethod] public void WorkbenchPrimaryAction_HasExplicitTextAndIconColumns() => Contains(MainXaml(), "<ColumnDefinition Width=\"48\" />", "开始本地分片", "IconLocalSplit");
     [TestMethod] public void RecentProjectTile_UsesCoverAndInformationPanel() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "<RowDefinition Height=\"190\" />", "继续处理");
     [TestMethod] public void Workbench_UsesBalancedModuleSpacing() => Contains(MainXaml(), "Margin=\"22,20,20,18\"", "<RowDefinition Height=\"16\" />", "Grid.Column=\"2\" Style=\"{StaticResource DashboardPanelCard}\"");
-    [TestMethod] public void Version_Is210() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.1.0\"");
-    [TestMethod] public void Installer_IsNamedFor210() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.1.0\"", "像素蛋挞_Setup_2.1.0_x64");
+    [TestMethod] public void Version_Is220() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.2.0\"");
+    [TestMethod] public void Installer_IsNamedFor220() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.2.0\"", "像素蛋挞_Setup_2.2.0_x64");
     [TestMethod] public void Release_RemainsWinExeSelfContainedX64() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");
     [TestMethod] public void ReleaseLicense_RemainsProviderNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void ReleaseStartup_StillForbidsMockProvider() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");

@@ -38,11 +38,9 @@ public sealed class AuditLogService(IPixelTartDatabase database) : IAuditLogServ
     public static string Sanitize(string message)
     {
         if (string.IsNullOrWhiteSpace(message)) return string.Empty;
-        var sanitized = WindowsPath.Replace(message, match =>
-        {
-            var fileName = Path.GetFileName(match.Value.TrimEnd('.', ',', ';'));
-            return string.IsNullOrWhiteSpace(fileName) ? "[路径已隐藏]" : $"[路径已隐藏]\\{fileName}";
-        });
+        var sanitized = WindowsPath.Replace(message, "[路径已隐藏]");
+        sanitized = Regex.Replace(sanitized, @"(?i)(displayname|filename|documentname|optionalhash|documenthash)\s*[:=]\s*(?:""[^""]*""|\S+)", "$1=[已隐藏]");
+        sanitized = Regex.Replace(sanitized, @"(?<![A-Fa-f0-9])[A-Fa-f0-9]{64}(?![A-Fa-f0-9])", "[哈希已隐藏]");
         sanitized = Regex.Replace(sanitized, @"(?i)(license|token|secret|key)\s*[:=]\s*\S+", "$1=[已隐藏]");
         return sanitized.Length <= 2000 ? sanitized : sanitized[..2000];
     }
@@ -52,6 +50,7 @@ public interface INotificationCenter
 {
     event EventHandler<NotificationMessage>? Published;
     Task PublishAsync(NotificationMessage message, CancellationToken cancellationToken = default);
+    void NotifyPersisted(NotificationMessage message);
     Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default);
     Task MarkReadAsync(Guid id, CancellationToken cancellationToken = default);
 }
@@ -94,7 +93,18 @@ public sealed class NotificationCenter(IPixelTartDatabase database, TimeSpan? th
         command.Parameters.AddWithValue("$expires", (object?)message.ExpiresAt?.ToString("O") ?? DBNull.Value);
         command.Parameters.AddWithValue("$dedupe", (object?)message.DeduplicationKey ?? DBNull.Value);
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        Published?.Invoke(this, message);
+        NotifyPersisted(message);
+    }
+
+    public void NotifyPersisted(NotificationMessage message)
+    {
+        var handlers = Published?.GetInvocationList();
+        if (handlers is null) return;
+        foreach (EventHandler<NotificationMessage> handler in handlers)
+        {
+            try { handler(this, message); }
+            catch { /* A UI subscriber must not invalidate an already persisted notification. */ }
+        }
     }
 
     public async Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default)

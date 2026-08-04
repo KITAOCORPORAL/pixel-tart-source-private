@@ -6,10 +6,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 if ([string]::IsNullOrWhiteSpace($Installer)) {
-    $Installer = (Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.0.4\installer') -Filter '*Setup_2.0.4_x64.exe' -File | Select-Object -First 1).FullName
+    $Installer = (Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.2.0\rc\installer') -Filter '*RC_Setup_2.2.0_x64.exe' -File | Select-Object -First 1).FullName
 }
 if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) {
-    $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.0.4\isolated-desktop-acceptance'
+    $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.2.0\isolated-desktop-acceptance'
 }
 $runId = [Guid]::NewGuid().ToString('N')
 $runRoot = Join-Path $EvidenceRoot $runId
@@ -21,6 +21,8 @@ $inputRoot = Join-Path $runRoot 'input'
 $collageOutput = Join-Path $runRoot 'collage-output'
 $organizeOutput = Join-Path $runRoot 'organize-output'
 New-Item -ItemType Directory -Force -Path $localAppData,$inputRoot,$collageOutput,$organizeOutput | Out-Null
+$workspaceDotnet = Join-Path (Split-Path $repoRoot -Parent) '.dotnet\dotnet.exe'
+$dotnetPath = if (Test-Path -LiteralPath $workspaceDotnet) { $workspaceDotnet } else { Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet-sdk-10\dotnet.exe' }
 $sourceFiles = @(Get-ChildItem (Join-Path $repoRoot 'artifacts\automated-dpi-review\2.0.4\interaction\input') -Filter 'DPI_TEST_*.png' -File | Sort-Object Name)
 if ($sourceFiles.Count -ne 4) { throw "Expected four existing acceptance images, found $($sourceFiles.Count)." }
 foreach ($source in $sourceFiles) { Copy-Item $source.FullName (Join-Path $inputRoot $source.Name) }
@@ -28,7 +30,7 @@ $context = [ordered]@{
     RunId=$runId; RepoRoot=$repoRoot; Installer=[IO.Path]::GetFullPath($Installer)
     EvidenceRoot=$runRoot; LocalAppData=$localAppData; InstallRoot=$installRoot
     InputRoot=$inputRoot; CollageOutput=$collageOutput; OrganizeOutput=$organizeOutput
-    DotnetPath=(Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet-sdk-10\dotnet.exe')
+    DotnetPath=$dotnetPath
     StartedAt=[DateTimeOffset]::Now.ToString('O')
 }
 $context | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $contextPath -Encoding UTF8

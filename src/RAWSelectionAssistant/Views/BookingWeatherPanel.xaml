@@ -1,0 +1,39 @@
+<UserControl x:Class="RAWSelectionAssistant.Views.BookingWeatherPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.Name="拍摄天气参考"
+             AutomationProperties.HelpText="天气为可选联网参考，不会自动修改或取消排期">
+    <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
+    <Border Style="{StaticResource InfoCard}" Padding="12">
+        <StackPanel>
+            <Grid>
+                <StackPanel><TextBlock Text="拍摄天气参考" FontWeight="SemiBold" /><TextBlock Text="默认关闭；启用后仅在你搜索或刷新时联网。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
+                <CheckBox Content="启用天气" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" VerticalAlignment="Top" AutomationProperties.Name="启用可选天气查询" />
+            </Grid>
+            <TextBlock Text="尚未启用天气" Margin="0,10,0,0" Visibility="{Binding IsDisabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <StackPanel Margin="0,10,0,0" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <WrapPanel>
+                    <TextBox Width="180" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="搜索天气城市或地区" />
+                    <Button Content="搜索地点" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding SearchCommand}" />
+                </WrapPanel>
+                <ComboBox ItemsSource="{Binding Candidates}" SelectedItem="{Binding SelectedCandidate}" DisplayMemberPath="DisplayName" Margin="0,7,0,0" AutomationProperties.Name="天气地点候选" />
+                <WrapPanel Margin="0,7,0,0">
+                    <Button Content="确认地点" Style="{StaticResource SecondaryButton}" Command="{Binding ConfirmLocationCommand}" />
+                    <Button Content="手动刷新" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding RefreshCommand}" />
+                    <Button Content="清除天气缓存" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding ClearCacheCommand}" />
+                </WrapPanel>
+                <TextBlock Text="{Binding LocationText}" FontWeight="SemiBold" Margin="0,10,0,0" />
+                <Grid Margin="0,7,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="天气情况" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding ConditionText}" /></Grid>
+                <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="温度 / 体感" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding TemperatureText}" /></Grid>
+                <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="降雨概率 / 量" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding PrecipitationText}" /></Grid>
+                <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="风速 / 阵风" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding WindText}" /></Grid>
+                <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="湿度 / 云量 / 能见度" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding AtmosphereText}" TextWrapping="Wrap" /></Grid>
+                <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="日出 / 日落" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding SunText}" /></Grid>
+                <Border Style="{StaticResource WarningCard}" Margin="0,8,0,0"><TextBlock Text="{Binding RiskText}" TextWrapping="Wrap" /></Border>
+                <TextBlock Text="{Binding UpdatedText}" Style="{StaticResource CaptionText}" Margin="0,8,0,0" />
+                <TextBlock Text="{Binding ProviderText}" Style="{StaticResource CaptionText}" />
+            </StackPanel>
+            <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Margin="0,8,0,0" AutomationProperties.LiveSetting="Polite" />
+        </StackPanel>
+    </Border>
+</UserControl>

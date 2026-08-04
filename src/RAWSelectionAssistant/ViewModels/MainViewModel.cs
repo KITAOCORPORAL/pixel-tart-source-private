@@ -35,6 +35,7 @@ public sealed class MainViewModel : ObservableObject
     private readonly TaskOperationBridge _taskOperationBridge;
     private readonly IQuickToolsRepository _quickToolsRepository;
     private readonly IMatchDecisionRepository _matchDecisionRepository;
+    private readonly WeatherFeatureState? _weatherState;
     private CancellationTokenSource? _operationCancellation;
     private MediaIndexSnapshot _mediaIndex = new();
     private SourceDirectoryEntry? _selectedSource;
@@ -108,7 +109,11 @@ public sealed class MainViewModel : ObservableObject
         TaskCenterViewModel taskCenter,
         TaskOperationBridge taskOperationBridge,
         IQuickToolsRepository quickToolsRepository,
-        IMatchDecisionRepository matchDecisionRepository)
+        IMatchDecisionRepository matchDecisionRepository,
+        WorkCalendarViewModel workCalendarPage,
+        WorkbenchScheduleViewModel? workbenchSchedule = null,
+        ReminderNotificationCenterViewModel? reminderNotifications = null,
+        WeatherFeatureState? weatherState = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -132,6 +137,13 @@ public sealed class MainViewModel : ObservableObject
         _taskOperationBridge = taskOperationBridge;
         _quickToolsRepository = quickToolsRepository;
         _matchDecisionRepository = matchDecisionRepository;
+        _weatherState = weatherState;
+        WorkCalendarPage = workCalendarPage;
+        WorkbenchSchedule = workbenchSchedule;
+        ReminderNotifications = reminderNotifications;
+        if (ReminderNotifications is not null) ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+        if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+        if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenCalendarRequested += WorkbenchSchedule_OpenCalendarRequested;
         OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService, taskOperationBridge);
         CollagePage = new CollageViewModel(new CollageExportService(), dialogService, taskOperationBridge);
         _licenseService.LicenseChanged += (_, _) => OnLicenseChanged();
@@ -211,6 +223,9 @@ public sealed class MainViewModel : ObservableObject
     public AppSettings Settings { get; private set; } = new();
     public OrganizePhotosViewModel OrganizePhotosPage { get; }
     public CollageViewModel CollagePage { get; }
+    public WorkCalendarViewModel WorkCalendarPage { get; }
+    public WorkbenchScheduleViewModel? WorkbenchSchedule { get; }
+    public ReminderNotificationCenterViewModel? ReminderNotifications { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -390,6 +405,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsLocalSplitPage));
             OnPropertyChanged(nameof(IsWorkflowPage));
             OnPropertyChanged(nameof(IsHistoryPage));
+            OnPropertyChanged(nameof(IsWorkCalendarPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
             OnPropertyChanged(nameof(IsHelpPage));
@@ -403,6 +419,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsPhotoGroupingPage));
             OnPropertyChanged(nameof(IsCollagePage));
             OnPropertyChanged(nameof(IsToolboxPage));
+            if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
         }
     }
     public bool IsWorkbenchPage => CurrentPage is "Workbench" or "ProjectCenter";
@@ -410,6 +427,7 @@ public sealed class MainViewModel : ObservableObject
     public bool IsLocalSplitPage => CurrentPage == "LocalSplit";
     public bool IsWorkflowPage => CurrentPage == "Workflow";
     public bool IsHistoryPage => CurrentPage == "History";
+    public bool IsWorkCalendarPage => CurrentPage == "WorkCalendar";
     public bool IsActivationPage => CurrentPage == "Activation";
     public bool IsSettingsPage => CurrentPage == "Settings";
     public bool IsHelpPage => CurrentPage == "Help";
@@ -806,6 +824,7 @@ public sealed class MainViewModel : ObservableObject
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+        _weatherState?.Apply(Settings.Weather);
         var databaseQuickTools = await _quickToolsRepository.LoadAsync();
         if (databaseQuickTools.Count > 0)
         {
@@ -863,6 +882,7 @@ public sealed class MainViewModel : ObservableObject
         foreach (var project in await _projectHistoryService.LoadVisibleAsync()) ProjectHistory.Add(project);
         OutputPresets.Clear();
         foreach (var preset in await _outputPresetService.LoadAsync()) OutputPresets.Add(preset);
+        if (WorkbenchSchedule is not null) await WorkbenchSchedule.InitializeAsync();
         if (ProjectHistory.FirstOrDefault() is { } recent) _currentProject = recent;
         RegenerateOutputFolderName();
         _initialized = true;
@@ -882,6 +902,14 @@ public sealed class MainViewModel : ObservableObject
         OnLicenseChanged();
         if (_onboardingService.NeedsUpgradeOffer) UpgradeTutorialOfferRequested?.Invoke(this, EventArgs.Empty);
     }
+
+    private async void ReminderNotifications_OpenBookingRequested(object? sender, Guid bookingId)
+    {
+        CurrentPage = "WorkCalendar";
+        await WorkCalendarPage.OpenBookingDetailsAsync(bookingId).ConfigureAwait(true);
+    }
+
+    private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => CurrentPage = "WorkCalendar";
 
     public async Task HandleDropAsync(string[]? paths, string? text)
     {
@@ -922,6 +950,7 @@ public sealed class MainViewModel : ObservableObject
 
     public async Task SaveSettingsAsync()
     {
+        if (_weatherState is not null) Settings.Weather = _weatherState.Snapshot();
         if (IsOnboardingActive)
         {
             await _settingsService.SaveAsync(Settings);
@@ -1757,7 +1786,7 @@ public sealed class MainViewModel : ObservableObject
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "Activation" or "Settings" or "Help" or
+        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
         var targetPage = page switch
         {

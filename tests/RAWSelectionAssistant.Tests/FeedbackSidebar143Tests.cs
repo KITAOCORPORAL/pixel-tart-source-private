@@ -38,7 +38,7 @@ public sealed class FeedbackSidebar143Tests
     [TestMethod] public void WinExe_RemainsEnabled() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>");
     [TestMethod] public void ReleaseProvider_RemainsNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void Release_DoesNotEnableMockProvider() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");
-    [TestMethod] public void Version_Is210() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.1.0\"");
+    [TestMethod] public void Version_Is220() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.2.0\"");
 
     private static FeedbackRequest Request() => new FeedbackRequestBuilder().Build("Windows 11 测试版");
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");

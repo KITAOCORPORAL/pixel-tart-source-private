@@ -7,10 +7,10 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 if ([string]::IsNullOrWhiteSpace($Installer))
 {
-    $installerDirectory = Join-Path $repoRoot 'artifacts\releases\2.0.4\installer'
-    $Installer = (Get-ChildItem -LiteralPath $installerDirectory -Filter '*Setup_2.0.4_x64.exe' -File | Select-Object -First 1).FullName
+    $installerDirectory = Join-Path $repoRoot 'artifacts\releases\2.2.0\rc\installer'
+    $Installer = (Get-ChildItem -LiteralPath $installerDirectory -Filter '*RC_Setup_2.2.0_x64.exe' -File | Select-Object -First 1).FullName
 }
-if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) { $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.0.4\isolated-install-smoke' }
+if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) { $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.2.0\isolated-install-smoke' }
 $installRoot = Join-Path $EvidenceRoot 'installed'
 $settingsPath = Join-Path $env:LOCALAPPDATA 'KitaoPhotoSelector\settings.json'
 $settingsBackup = Join-Path $EvidenceRoot 'settings.before.json'

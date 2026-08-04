@@ -30,7 +30,7 @@ public sealed class Version210NotificationAuditTests
     [TestMethod]
     public void AuditSanitizer_HidesFullPathsAndSecrets()
     {
-        var value=AuditLogService.Sanitize(@"copy C:\Customers\Alice\portrait.jpg token=abcdef license:123456");Assert.IsFalse(value.Contains("Customers",StringComparison.OrdinalIgnoreCase));Assert.IsFalse(value.Contains("abcdef",StringComparison.Ordinal));Assert.IsTrue(value.Contains("portrait.jpg",StringComparison.Ordinal));
+        var value=AuditLogService.Sanitize(@"copy C:\Customers\Alice\portrait.jpg token=abcdef license:123456");Assert.IsFalse(value.Contains("Customers",StringComparison.OrdinalIgnoreCase));Assert.IsFalse(value.Contains("abcdef",StringComparison.Ordinal));Assert.IsFalse(value.Contains("portrait.jpg",StringComparison.Ordinal));
     }
 
     [TestMethod]
