@@ -106,7 +106,7 @@ public sealed class Version220StageCDocumentUiArchitectureTests
     {
         var source = Text("src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs");
         Contains(source, "BookingId={bookingId:D};DocumentType={type};Operation={operation};Result={result}");
-        var auditMethod = Slice(source, "private Task WriteAuditAsync", "}", includeEnd: true);
+        var auditMethod = Slice(source, "private async Task WriteAuditAsync", "}", includeEnd: true);
         DoesNotContain(auditMethod, "FilePath", "DisplayName", "OptionalHash", "ClientDisplayName", "ContactPhone");
     }
 

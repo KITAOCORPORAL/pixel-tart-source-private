@@ -77,6 +77,23 @@ public sealed class SqliteBookingDocumentRepository(IPixelTartDatabase database)
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task UpdateLocationAndHashAsync(Guid id, string filePath, string normalizedPath, string fileExtension, long? fileSize, DateTimeOffset? modifiedAtUtc, string? optionalHash, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "UPDATE BookingDocuments SET FilePath=$path,NormalizedPath=$normalized,FileExtension=$extension,FileSize=$size,LastKnownModifiedAtUtc=$modified,OptionalHash=$hash,IsMissing=$missing,MissingSinceAtUtc=CASE WHEN $missing=1 THEN COALESCE(MissingSinceAtUtc,$verified) ELSE NULL END,LastVerifiedAtUtc=$verified,UpdatedAtUtc=$verified WHERE Id=$id;";
+        command.Parameters.AddWithValue("$id", id.ToString("D"));
+        command.Parameters.AddWithValue("$path", filePath);
+        command.Parameters.AddWithValue("$normalized", normalizedPath);
+        command.Parameters.AddWithValue("$extension", fileExtension);
+        command.Parameters.AddWithValue("$size", Db(fileSize));
+        command.Parameters.AddWithValue("$modified", Db(modifiedAtUtc));
+        command.Parameters.AddWithValue("$hash", Db(optionalHash));
+        command.Parameters.AddWithValue("$missing", isMissing ? 1 : 0);
+        command.Parameters.AddWithValue("$verified", Utc(verifiedAtUtc));
+        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     public async Task SetMissingAsync(Guid id, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);

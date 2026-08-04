@@ -15,6 +15,7 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public const string SupportedFileFilter = "支持的资料|*.pdf;*.doc;*.docx;*.ppt;*.pptx;*.xls;*.xlsx;*.txt;*.jpg;*.jpeg;*.png|所有文件|*.*";
     private readonly IBookingDocumentWorkflowService _workflow;
     private readonly IDialogService _dialogs;
+    private readonly Dictionary<Guid, List<PendingDocumentActionViewModel>> _pendingByBooking = [];
     private Guid _bookingId;
     private Guid? _projectId;
     private bool _isArchived;
@@ -38,16 +39,16 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         AddReferenceCommand = new AsyncRelayCommand(_ => ChooseAndAddReferencesAsync(), _ => CanModify);
         CopyAndAssociateCommand = new AsyncRelayCommand(_ => ChooseAndCopyAsync(), _ => CanModify);
         CheckAllCommand = new AsyncRelayCommand(_ => CheckAllAsync(), _ => !IsBusy);
-        OpenCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? OpenAsync(item, reveal: false) : Task.CompletedTask);
-        RevealCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? OpenAsync(item, reveal: true) : Task.CompletedTask);
-        CheckCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? CheckAsync(item) : Task.CompletedTask);
-        RelocateCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? RelocateAsync(item) : Task.CompletedTask, _ => CanModify);
-        RemoveAssociationCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? RemoveAsync(item) : Task.CompletedTask, _ => CanModify);
+        OpenCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? ExecuteSafelyAsync(() => OpenAsync(item, reveal: false)) : Task.CompletedTask);
+        RevealCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? ExecuteSafelyAsync(() => OpenAsync(item, reveal: true)) : Task.CompletedTask);
+        CheckCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? ExecuteSafelyAsync(() => CheckAsync(item)) : Task.CompletedTask);
+        RelocateCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? ExecuteSafelyAsync(() => RelocateAsync(item)) : Task.CompletedTask, _ => CanModify);
+        RemoveAssociationCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? ExecuteSafelyAsync(() => RemoveAsync(item)) : Task.CompletedTask, _ => CanModify);
         TogglePathCommand = new RelayCommand(parameter => { if (parameter is BookingDocumentItemViewModel item) item.IsPathExpanded = !item.IsPathExpanded; });
-        RetryAssociationCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? RetryAsync(item) : Task.CompletedTask);
-        UndoCopyCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? UndoAsync(item) : Task.CompletedTask);
+        RetryAssociationCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? ExecuteSafelyAsync(() => RetryAsync(item)) : Task.CompletedTask);
+        UndoCopyCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? ExecuteSafelyAsync(() => UndoAsync(item)) : Task.CompletedTask);
         OpenOutputDirectoryCommand = new RelayCommand(parameter => { if (parameter is PendingDocumentActionViewModel item) RevealDirectoryRequested?.Invoke(this, item.Pending.DestinationPath); });
-        AbandonAssociationCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? AbandonAsync(item) : Task.CompletedTask);
+        AbandonAssociationCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? ExecuteSafelyAsync(() => AbandonAsync(item)) : Task.CompletedTask);
     }
 
     public event EventHandler<string>? OpenFileRequested;
@@ -77,11 +78,32 @@ public sealed class BookingDocumentsViewModel : ObservableObject
 
     public async Task LoadAsync(Guid bookingId, Guid? projectId, bool isArchived, CancellationToken cancellationToken = default)
     {
+        StorePendingActions();
         _bookingId = bookingId;
         _projectId = projectId;
         IsArchived = isArchived;
         _sessionDestinationPreference = null;
-        await RefreshAndVerifyAsync(cancellationToken).ConfigureAwait(true);
+        Items.Clear();
+        PendingActions.Clear();
+        if (_pendingByBooking.TryGetValue(bookingId, out var pending))
+            foreach (var item in pending) PendingActions.Add(item);
+        try { await RefreshAndVerifyAsync(cancellationToken).ConfigureAwait(true); }
+        catch (Exception ex)
+        {
+            StatusText = "本地资料暂时无法加载。";
+            _dialogs.ShowError(PrivacySafeMessage(ex));
+        }
+    }
+
+    public void Reset()
+    {
+        StorePendingActions();
+        _bookingId = Guid.Empty;
+        _projectId = null;
+        IsArchived = true;
+        Items.Clear();
+        PendingActions.Clear();
+        StatusText = "尚未关联本地资料";
     }
 
     public async Task HandleDroppedFilesAsync(IReadOnlyList<string> paths, BookingDocumentLinkMode mode)
@@ -169,6 +191,7 @@ public sealed class BookingDocumentsViewModel : ObservableObject
             foreach (var item in Items.ToArray()) await CheckAsync(item).ConfigureAwait(true);
             StatusText = $"已检查 {Items.Count} 份资料";
         }
+        catch (Exception ex) { _dialogs.ShowError(PrivacySafeMessage(ex)); }
         finally { IsBusy = false; }
     }
 
@@ -222,6 +245,7 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         item.StatusText = result.Message;
         if (!result.Succeeded) return;
         PendingActions.Remove(item);
+        StorePendingActions();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -229,13 +253,18 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     {
         var summary = await _workflow.UndoCopiedFileAsync(item.Pending).ConfigureAwait(true);
         item.StatusText = summary.Succeeded == 1 ? "本次复制已安全撤销。" : "文件已变化或被其他关联使用，未删除并转为等待确认。";
-        if (summary.Succeeded == 1) PendingActions.Remove(item);
+        if (summary.Succeeded == 1)
+        {
+            PendingActions.Remove(item);
+            StorePendingActions();
+        }
     }
 
     private async Task AbandonAsync(PendingDocumentActionViewModel item)
     {
         await _workflow.AbandonAssociationAsync(item.Pending).ConfigureAwait(true);
         PendingActions.Remove(item);
+        StorePendingActions();
         StatusText = "已保留复制文件并放弃创建关联。";
     }
 
@@ -244,7 +273,21 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         foreach (var outcome in result.Items.Where(item => item.PendingAssociation is not null))
             if (!PendingActions.Any(item => item.Pending.TaskId == outcome.PendingAssociation!.TaskId && string.Equals(item.Pending.DestinationPath, outcome.PendingAssociation.DestinationPath, StringComparison.OrdinalIgnoreCase)))
                 PendingActions.Add(new(outcome.PendingAssociation!, outcome.Message));
+        StorePendingActions();
         StatusText = $"总数 {result.Summary.Total} · 成功 {result.Successful} · 失败 {result.Failed} · 跳过 {result.Skipped} · 等待确认 {result.WaitingForAttention}";
+    }
+
+    private async Task ExecuteSafelyAsync(Func<Task> operation)
+    {
+        try { await operation().ConfigureAwait(true); }
+        catch (Exception ex) { _dialogs.ShowError(PrivacySafeMessage(ex)); }
+    }
+
+    private void StorePendingActions()
+    {
+        if (_bookingId == Guid.Empty) return;
+        if (PendingActions.Count == 0) _pendingByBooking.Remove(_bookingId);
+        else _pendingByBooking[_bookingId] = [.. PendingActions];
     }
 
     private void RefreshCommands()
