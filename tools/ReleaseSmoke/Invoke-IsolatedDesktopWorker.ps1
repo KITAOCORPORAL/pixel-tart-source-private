@@ -89,6 +89,7 @@ $result = [ordered]@{
     OrganizeCopyCompleted=$false; OrganizeCopiedCount=0; SourceFileIntegrityVerified=$false; ProviderNone=$false; ReleaseMockDisabled=$false
     WinExeNoConsole=$false; UninstallExitCode=$null; InstallDirectoryRemoved=$false; StartedAt=[DateTimeOffset]::Now.ToString('O')
     StageDInstalledProbePassed=$false; StageDInstalledProbe=$null
+    CleanupError=''
     Stage='Initialize'
 }
 $process = $null
@@ -261,5 +262,22 @@ try {
     $result.CollageNoAutomaticImport=$result.NoAutomaticImport
     $result.CollageNoAutomaticTemplate=$result.NoAutomaticTemplate
     $result.Passed=$result.InstallExitCode -eq 0 -and $result.DefaultWorkbench -and $result.WorkCalendarOpened -and $result.MonthViewOpened -and $result.WeekViewOpened -and $result.DayViewOpened -and $result.BookingCreated -and $result.BookingEdited -and $result.ReminderDefaultOffVisible -and $result.ReminderEnabledByUser -and $result.WeatherDefaultOffVisible -and $result.StageDInstalledProbePassed -and $result.LocalSplitWizardOpened -and $result.LocalSplitWizardClosed -and $result.WorkflowOpened -and $result.WorkflowDistinctFromWizard -and $result.SidebarLocalSplitAbsent -and $result.HistoryOpened -and $result.ToolboxPopupOpened -and $result.ToolboxFullPageOpened -and $result.SettingsOpened -and $result.SettingsClosed -and $result.NavigationDeduplicated -and $result.QuickToolsManagerOpened -and $result.QuickToolsOrderChanged -and $result.QuickToolsPersistedAfterRestart -and $result.QuickToolsReset -and $result.OrganizeOpened -and $result.OrganizeImportedCount -eq 4 -and $result.OrganizeFileFormatRuleSelected -and $result.OrganizePlanPreviewed -and $result.OrganizeCopyCompleted -and $result.CollageOpened -and $result.CollageSingleInstance -and $result.CollageNoAutomaticFileDialog -and $result.CollageReentryGuardPassed -and $result.CollageImportedCount -eq 4 -and $result.CollageTemplate2x2Selected -and $result.CollageJpgExported -and $result.CollagePngExported -and $result.ExportedFilesParseable -and $result.ProviderNone -and $result.ReleaseMockDisabled -and $result.WinExeNoConsole -and $result.UninstallExitCode -eq 0 -and $result.InstallDirectoryRemoved -and $result.SourceFileIntegrityVerified
-} catch { $result.Error=$_.Exception.ToString(); if($null -ne $main){Save-UiTree $main (Join-Path $evidence 'failure-ui-tree.json')} } finally { if($process -and -not $process.HasExited){Stop-Process $process.Id -Force -ErrorAction SilentlyContinue};if(Test-Path $acceptanceSettingsRoot){Remove-Item $acceptanceSettingsRoot -Recurse -Force};$result.CompletedAt=[DateTimeOffset]::Now.ToString('O');$result|ConvertTo-Json -Depth 15|Set-Content (Join-Path $evidence 'result.json') -Encoding UTF8 }
+} catch {
+    $result.Error=$_.Exception.ToString()
+    if($null -ne $main){Save-UiTree $main (Join-Path $evidence 'failure-ui-tree.json')}
+} finally {
+    if($process -and -not $process.HasExited){
+        Stop-Process $process.Id -Force -ErrorAction SilentlyContinue
+        try { $process.WaitForExit(10000) | Out-Null } catch {}
+    }
+    if(Test-Path $acceptanceSettingsRoot){
+        $cleaned=$false
+        for($attempt=1;$attempt -le 5 -and -not $cleaned;$attempt++){
+            try { Remove-Item $acceptanceSettingsRoot -Recurse -Force -ErrorAction Stop; $cleaned=$true }
+            catch { if($attempt -eq 5){$result.CleanupError=$_.Exception.Message;$result.Passed=$false}else{Start-Sleep -Milliseconds 500} }
+        }
+    }
+    $result.CompletedAt=[DateTimeOffset]::Now.ToString('O')
+    $result|ConvertTo-Json -Depth 15|Set-Content (Join-Path $evidence 'result.json') -Encoding UTF8
+}
 Get-Content (Join-Path $evidence 'result.json') -Raw; if(-not $result.Passed){exit 1}
