@@ -1,10 +1,22 @@
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.FileOperations;
+using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services;
 
-public sealed class MediaCopyService(ILogService logService)
+public sealed class MediaCopyService
 {
     private const int BufferSize = 1024 * 1024;
+    private readonly ILogService _logService;
+    private readonly IFileOperationExecutor? _fileOperationExecutor;
+    private readonly IFileConflictResolver? _fileConflictResolver;
+
+    public MediaCopyService(ILogService logService, IFileOperationExecutor? fileOperationExecutor = null, IFileConflictResolver? fileConflictResolver = null)
+    {
+        _logService = logService;
+        _fileOperationExecutor = fileOperationExecutor;
+        _fileConflictResolver = fileConflictResolver;
+    }
 
     public Task<MediaCopySummary> CopyAsync(
         IEnumerable<MediaSelectionItem> selectionItems,
@@ -22,6 +34,9 @@ public sealed class MediaCopyService(ILogService logService)
             .Select(group => group.First())
             .ToList();
         if (copyEntries.Count == 0) throw new InvalidOperationException("没有可复制的已匹配文件。仍有冲突的格式不会被复制。");
+
+        if (_fileOperationExecutor is not null && _fileConflictResolver is not null)
+            return await CopyWithPlanAsync(copyEntries, outputDirectory, outputMode, progress, cancellationToken).ConfigureAwait(false);
 
         Directory.CreateDirectory(outputDirectory);
         EnsureWritable(outputDirectory);
@@ -55,7 +70,7 @@ public sealed class MediaCopyService(ILogService logService)
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or DirectoryNotFoundException or FileNotFoundException or PathTooLongException)
             {
-                logService.Error($"复制照片文件失败：{entry.File.FullPath}", ex);
+                _logService.Error($"复制照片文件失败：{entry.File.FullPath}", ex);
                 summary.Outcomes.Add(new MediaCopyOutcome(entry.Item.Id, entry.Result.Key, entry.File.FullPath, destination, MatchStatus.CopyFailed, Friendly(ex), operationTime));
                 if (destinationCreated) TryDelete(destination);
             }
@@ -63,6 +78,45 @@ public sealed class MediaCopyService(ILogService logService)
         progress?.Report(new OperationProgress("复制完成", $"成功 {summary.CopiedCount}，失败 {summary.FailedCount}", copyEntries.Count, copyEntries.Count, 100));
         return summary;
     }, cancellationToken);
+
+    private async Task<MediaCopySummary> CopyWithPlanAsync(IReadOnlyList<CopyEntry> copyEntries, string outputDirectory, OutputMode outputMode, IProgress<OperationProgress>? progress, CancellationToken cancellationToken)
+    {
+        var reserved = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var items = new List<FileOperationItem>(copyEntries.Count);
+        for (var index = 0; index < copyEntries.Count; index++)
+        {
+            var entry = copyEntries[index];
+            var desired = BuildDestinationPath(outputDirectory, entry.File, outputMode);
+            var destination = _fileConflictResolver!.ResolveDestination(desired, FileConflictPolicy.AutoNumber, reserved);
+            reserved.Add(destination);
+            items.Add(new FileOperationItem(Guid.NewGuid(), index, entry.File.FullPath, destination, FileOperationType.Copy, FileConflictPolicy.AutoNumber, entry.File.Size, entry.File.LastWriteTimeUtc));
+        }
+        var taskId = TaskExecutionAmbient.CurrentTaskId.Value ?? Guid.NewGuid();
+        var commonRoot = copyEntries.Select(x => Path.GetFullPath(x.File.SourceRoot)).OrderBy(x => x.Length).FirstOrDefault() ?? Path.GetDirectoryName(copyEntries[0].File.FullPath)!;
+        var plan = new FileOperationPlan(1, Guid.NewGuid(), taskId, null, FileOperationType.Copy, commonRoot, Path.GetFullPath(outputDirectory), FileConflictPolicy.AutoNumber, items, copyEntries.Sum(x => x.File.Size), FileOperationRiskLevel.Low, DateTimeOffset.UtcNow);
+        var ambientContext = TaskExecutionAmbient.CurrentContext.Value;
+        var bridgeProgress = new Progress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
+        {
+            progress?.Report(new OperationProgress("复制已匹配文件", value.CurrentFile, value.Summary.Succeeded + value.Summary.Failed, value.Summary.Total, value.Progress));
+            if (ambientContext is not null) _ = ambientContext.ReportProgressAsync(value.Progress, "复制已匹配文件", value.CurrentFile, value.Summary, cancellationToken);
+        });
+        var execution = await _fileOperationExecutor!.ExecuteAsync(plan,
+            safeBoundary: ambientContext is null ? null : ambientContext.SafeBoundaryAsync,
+            progress: bridgeProgress,
+            cancellationToken: cancellationToken).ConfigureAwait(false);
+        var byId = execution.Items.ToDictionary(x => x.ItemId);
+        var summary = new MediaCopySummary();
+        for (var index = 0; index < copyEntries.Count; index++)
+        {
+            var entry = copyEntries[index];
+            var item = items[index];
+            if (byId.TryGetValue(item.Id, out var result) && result.State == FileOperationItemState.Completed)
+                summary.Outcomes.Add(new MediaCopyOutcome(entry.Item.Id, entry.Result.Key, entry.File.FullPath, result.DestinationPath ?? item.DestinationPath, MatchStatus.Copied, string.Empty, DateTime.Now));
+            else
+                summary.Outcomes.Add(new MediaCopyOutcome(entry.Item.Id, entry.Result.Key, entry.File.FullPath, item.DestinationPath, MatchStatus.CopyFailed, byId.TryGetValue(item.Id, out var failed) ? failed.ErrorMessage ?? ErrorCodeCatalog.Describe(failed.ErrorCode) : "文件未完成复制。", DateTime.Now));
+        }
+        return summary;
+    }
 
     private static string BuildDestinationPath(string root, MediaFileRecord file, OutputMode mode)
     {

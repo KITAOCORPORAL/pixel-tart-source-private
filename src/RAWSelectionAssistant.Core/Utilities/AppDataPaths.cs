@@ -22,6 +22,10 @@ public static class AppDataPaths
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
     public static string ProjectDirectory => Path.Combine(Root, "Projects");
+    public static string DataDirectory => Path.Combine(Root, "Data");
+    public static string DatabaseFile => Path.Combine(DataDirectory, "pixel-tart.db");
+    public static string DatabaseBackupDirectory => Path.Combine(Root, "Backups", "Database");
+    public static string MigrationBackupDirectory => Path.Combine(Root, "Backups", "Migration");
 
     public static void EnsureCreated()
     {
@@ -31,5 +35,8 @@ public static class AppDataPaths
         Directory.CreateDirectory(CacheDirectory);
         Directory.CreateDirectory(LicenseDirectory);
         Directory.CreateDirectory(ProjectDirectory);
+        Directory.CreateDirectory(DataDirectory);
+        Directory.CreateDirectory(DatabaseBackupDirectory);
+        Directory.CreateDirectory(MigrationBackupDirectory);
     }
 }

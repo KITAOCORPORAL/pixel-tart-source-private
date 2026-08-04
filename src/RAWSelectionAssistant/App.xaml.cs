@@ -4,6 +4,7 @@ using System.Net.Http;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
@@ -16,6 +17,7 @@ public partial class App : Application
     private FileLogService? _logService;
     private MainViewModel? _mainViewModel;
     private IAppearanceService? _appearanceService;
+    private ApplicationCompositionRoot? _compositionRoot;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -37,6 +39,7 @@ public partial class App : Application
 
         try
         {
+            _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
             var normalizer = new FileNameNormalizer();
             var inputParser = new InputParserService(_logService);
             var licenseConfiguration = new LicenseConfigurationService().Load();
@@ -54,7 +57,7 @@ public partial class App : Application
             await licenseService.InitializeAsync();
             var featureGateService = new FeatureGateService(licenseService);
             var projectEntitlementService = new ProjectEntitlementService(normalizer, featureGateService);
-            var projectHistoryService = new ProjectHistoryService(featureGateService, _logService);
+            var projectHistoryService = new ProjectHistoryService(featureGateService, _logService, repository: _compositionRoot.ProjectRepository);
             var outputPresetService = new OutputPresetService(featureGateService, _logService);
             var batchProjectService = new BatchProjectService(featureGateService);
             var jpegMetadataService = new JpegMetadataService(_logService);
@@ -63,9 +66,9 @@ public partial class App : Application
             var indexPath = File.Exists(Path.Combine(AppDataPaths.IndexDirectory, "media-index.json"))
                 ? Path.Combine(AppDataPaths.IndexDirectory, "media-index.json")
                 : File.Exists(legacyIndex) ? legacyIndex : null;
-            var indexService = new MediaIndexService(normalizer, _logService, cacheFilePath: indexPath, jpegMetadataService: jpegMetadataService, featureGateService: featureGateService);
+            var indexService = new MediaIndexService(normalizer, _logService, cacheFilePath: indexPath, jpegMetadataService: jpegMetadataService, featureGateService: featureGateService, repository: _compositionRoot.MediaIndexRepository);
             var matchService = new MediaMatchService(normalizer, jpegMetadataService, jpegAssessmentService, featureGateService);
-            var copyService = new MediaCopyService(_logService);
+            var copyService = new MediaCopyService(_logService, _compositionRoot.FileOperationExecutor, new FileConflictResolver());
             var reportService = new MediaReportService(_logService);
             var legacySettings = Path.Combine(AppDataPaths.LegacyRoot, "settings.json");
             var settingsPath = File.Exists(AppDataPaths.SettingsFile)
@@ -101,7 +104,11 @@ public partial class App : Application
                 projectHistoryService,
                 outputPresetService,
                 batchProjectService,
-                _appearanceService);
+                _appearanceService,
+                _compositionRoot.TaskCenter,
+                _compositionRoot.OperationBridge,
+                _compositionRoot.QuickToolsRepository,
+                _compositionRoot.MatchDecisionRepository);
 
             await _mainViewModel.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };

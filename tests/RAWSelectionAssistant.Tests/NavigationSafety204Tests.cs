@@ -69,10 +69,10 @@ public sealed class NavigationSafety204Tests
     public void CollageImportCommandCannotReenter()
     {
         var source = Text("src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs");
-        StringAssert.Contains(source, "AddPhotosCommand=new RelayCommand(_=>AddPhotos(),_=>!IsBusy&&!_isImporting)");
+        StringAssert.Contains(source, "AddPhotosCommand = new RelayCommand(_ => AddPhotos(), _ => !IsBusy && !_isImporting)");
         StringAssert.Contains(source, "if (_isImporting) return;");
         StringAssert.Contains(source, "finally { _isImporting = false; RefreshCommandStates(); }");
-        StringAssert.Contains(source, "ExportCommand=new AsyncRelayCommand(_=>ExportAsync(),_=>!IsBusy&&Images.Count>0)");
+        StringAssert.Contains(source, "ExportCommand = new AsyncRelayCommand(_ => ExportAsync(), _ => !IsBusy && Images.Count > 0)");
     }
 
     [TestMethod]

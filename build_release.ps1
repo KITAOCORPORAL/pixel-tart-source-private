@@ -3,11 +3,12 @@
 $ErrorActionPreference = 'Stop'
 $dotnet = Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet-sdk-10\dotnet.exe'
 if (-not (Test-Path $dotnet)) {
-    $dotnet = (Get-Command dotnet -ErrorAction Stop).Source
+    $workspaceDotnet = Join-Path (Split-Path $PSScriptRoot -Parent) '.dotnet\dotnet.exe'
+    $dotnet = if (Test-Path $workspaceDotnet) { $workspaceDotnet } else { (Get-Command dotnet -ErrorAction Stop).Source }
 }
 $solution = Join-Path $PSScriptRoot 'RAWSelectionAssistant.sln'
-$publishDirectory = Join-Path $PSScriptRoot 'artifacts\releases\2.0.4\publish\win-x64'
-$publishRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'artifacts\releases\2.0.4\publish'))
+$publishDirectory = Join-Path $PSScriptRoot 'artifacts\releases\2.1.0\publish\win-x64'
+$publishRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'artifacts\releases\2.1.0\publish'))
 $resolvedPublishDirectory = [System.IO.Path]::GetFullPath($publishDirectory)
 if (-not $resolvedPublishDirectory.StartsWith($publishRoot + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw 'Refusing to clean a publish path outside the project artifacts directory.'

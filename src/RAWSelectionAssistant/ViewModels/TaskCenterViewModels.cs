@@ -1,0 +1,172 @@
+using System.Collections.ObjectModel;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Database;
+using RAWSelectionAssistant.Core.Services.Tasks;
+using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Utilities;
+
+namespace RAWSelectionAssistant.ViewModels;
+
+public sealed class TaskCenterViewModel : ObservableObject
+{
+    private readonly ITaskEngine _engine;
+    private readonly IRecoveryCoordinator? _recovery;
+    private readonly SynchronizationContext? _context;
+    private TaskSnapshotViewModel? _selectedTask;
+
+    public TaskCenterViewModel(ITaskEngine engine, IRecoveryCoordinator? recovery = null)
+    {
+        _engine = engine;
+        _recovery = recovery;
+        _context = SynchronizationContext.Current;
+        foreach (var snapshot in engine.Current) Upsert(snapshot);
+        engine.SnapshotChanged += (_, snapshot) => Dispatch(() => Upsert(snapshot));
+        PauseCommand = new AsyncRelayCommand(parameter => ActAsync(parameter, _engine.PauseAsync), parameter => Resolve(parameter)?.CanPause == true);
+        ResumeCommand = new AsyncRelayCommand(parameter => ActAsync(parameter, _engine.ResumeAsync), parameter => Resolve(parameter)?.CanResume == true);
+        CancelCommand = new AsyncRelayCommand(parameter => ActAsync(parameter, _engine.CancelAsync), parameter => Resolve(parameter)?.CanCancel == true);
+        RetryCommand = new AsyncRelayCommand(RetryAsync, parameter => Resolve(parameter)?.CanRetry == true);
+        ResolveAttentionCommand = new AsyncRelayCommand(parameter => ResolveAttentionAsync(parameter), parameter => Resolve(parameter)?.CanResolveAttention == true);
+        RollbackCommand = new AsyncRelayCommand(RollbackAsync, parameter => Resolve(parameter)?.CanRollback == true && _recovery is not null);
+        AbandonCommand = new AsyncRelayCommand(AbandonAsync, parameter => Resolve(parameter)?.CanAbandon == true && _recovery is not null);
+        ClearCompletedCommand = new RelayCommand(_ => ClearCompleted(), _ => Tasks.Any(x => x.IsTerminal));
+    }
+
+    public ObservableCollection<TaskSnapshotViewModel> Tasks { get; } = [];
+    public TaskSnapshotViewModel? SelectedTask { get => _selectedTask; set => SetProperty(ref _selectedTask, value); }
+    public int ActiveCount => Tasks.Count(x => !x.IsTerminal);
+    public int AttentionCount => Tasks.Count(x => x.State == TaskLifecycleState.NeedsAttention);
+    public bool HasTasks => Tasks.Count > 0;
+    public bool HasNoTasks => !HasTasks;
+    public string EmptyMessage => "暂无待处理任务";
+    public AsyncRelayCommand PauseCommand { get; }
+    public AsyncRelayCommand ResumeCommand { get; }
+    public AsyncRelayCommand CancelCommand { get; }
+    public AsyncRelayCommand RetryCommand { get; }
+    public AsyncRelayCommand ResolveAttentionCommand { get; }
+    public AsyncRelayCommand RollbackCommand { get; }
+    public AsyncRelayCommand AbandonCommand { get; }
+    public RelayCommand ClearCompletedCommand { get; }
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var runtime in await _engine.LoadHistoryAsync(200, cancellationToken))
+        {
+            Upsert(new TaskProgressSnapshot(runtime.Definition.Id, runtime.Definition.ProjectId, runtime.Definition.DisplayName, runtime.State, runtime.Progress, runtime.CurrentStep, runtime.CurrentFile, runtime.ResultSummary, null, null, runtime.LastErrorCode, runtime.LastErrorMessage, runtime.LastUpdatedAt));
+        }
+    }
+
+    private async Task ActAsync(object? parameter, Func<Guid, CancellationToken, Task> action)
+    {
+        var item = Resolve(parameter);
+        if (item is null) return;
+        await action(item.Id, CancellationToken.None);
+    }
+
+    private TaskSnapshotViewModel? Resolve(object? parameter) => parameter as TaskSnapshotViewModel ?? SelectedTask;
+
+    private async Task RetryAsync(object? parameter)
+    {
+        var item = Resolve(parameter);
+        if (item is null) return;
+        if (item.State == TaskLifecycleState.Interrupted && _recovery is not null) await _recovery.RetryFailedAsync(item.Id, false, CancellationToken.None);
+        else await _engine.RetryAsync(item.Id, CancellationToken.None);
+        await InitializeAsync();
+    }
+
+    private async Task RollbackAsync(object? parameter)
+    {
+        var item = Resolve(parameter);
+        if (item is null || _recovery is null) return;
+        await _recovery.RollbackSafeOutputsAsync(item.Id, CancellationToken.None);
+        await InitializeAsync();
+    }
+
+    private async Task AbandonAsync(object? parameter)
+    {
+        var item = Resolve(parameter);
+        if (item is null || _recovery is null) return;
+        await _recovery.AbandonAsync(item.Id, CancellationToken.None);
+        await InitializeAsync();
+    }
+
+    private async Task ResolveAttentionAsync(object? parameter)
+    {
+        var item = Resolve(parameter);
+        if (item is null) return;
+        try { await _engine.ResolveAttentionAsync(item.Id, "continue", CancellationToken.None); }
+        catch (KeyNotFoundException) when (_recovery is not null) { await _recovery.RetryFailedAsync(item.Id, false, CancellationToken.None); }
+        await InitializeAsync();
+    }
+
+    private void Upsert(TaskProgressSnapshot snapshot)
+    {
+        var item = Tasks.FirstOrDefault(x => x.Id == snapshot.TaskId);
+        if (item is null)
+        {
+            item = new TaskSnapshotViewModel(snapshot);
+            Tasks.Insert(0, item);
+        }
+        else item.Update(snapshot);
+        SelectedTask ??= item;
+        OnPropertyChanged(nameof(ActiveCount));
+        OnPropertyChanged(nameof(AttentionCount));
+        OnPropertyChanged(nameof(HasTasks));
+        OnPropertyChanged(nameof(HasNoTasks));
+        RaiseCommands();
+    }
+
+    private void ClearCompleted()
+    {
+        foreach (var item in Tasks.Where(x => x.IsTerminal).ToArray()) Tasks.Remove(item);
+        SelectedTask = Tasks.FirstOrDefault();
+        OnPropertyChanged(nameof(ActiveCount));
+        OnPropertyChanged(nameof(AttentionCount));
+        OnPropertyChanged(nameof(HasTasks));
+        OnPropertyChanged(nameof(HasNoTasks));
+        RaiseCommands();
+    }
+
+    private void RaiseCommands()
+    {
+        PauseCommand.RaiseCanExecuteChanged(); ResumeCommand.RaiseCanExecuteChanged(); CancelCommand.RaiseCanExecuteChanged(); RetryCommand.RaiseCanExecuteChanged(); ResolveAttentionCommand.RaiseCanExecuteChanged(); RollbackCommand.RaiseCanExecuteChanged(); AbandonCommand.RaiseCanExecuteChanged(); ClearCompletedCommand.RaiseCanExecuteChanged();
+    }
+    private void Dispatch(Action action) { if (_context is null || SynchronizationContext.Current == _context) action(); else _context.Post(_ => action(), null); }
+}
+
+public sealed class TaskSnapshotViewModel : ObservableObject
+{
+    private TaskProgressSnapshot _snapshot;
+    public TaskSnapshotViewModel(TaskProgressSnapshot snapshot) => _snapshot = snapshot;
+    public Guid Id => _snapshot.TaskId;
+    public string DisplayName => _snapshot.DisplayName;
+    public TaskLifecycleState State => _snapshot.State;
+    public string StateLabel => State switch { TaskLifecycleState.NeedsAttention => "等待确认", TaskLifecycleState.PartiallyCompleted => "部分完成", TaskLifecycleState.Interrupted => "已中断", _ => State.ToString() };
+    public double Progress => _snapshot.Progress;
+    public string CurrentStep => _snapshot.CurrentStep;
+    public string CurrentFile => string.IsNullOrWhiteSpace(_snapshot.CurrentFile) ? string.Empty : Path.GetFileName(_snapshot.CurrentFile);
+    public string ResultText => $"成功 {_snapshot.Summary.Succeeded} · 失败 {_snapshot.Summary.Failed} · 跳过 {_snapshot.Summary.Skipped}";
+    public string ErrorSummary => _snapshot.ErrorMessage ?? string.Empty;
+    public bool IsTerminal => TaskStateMachine.IsTerminal(State);
+    public bool CanPause => State is TaskLifecycleState.Running or TaskLifecycleState.Scanning;
+    public bool CanResume => State == TaskLifecycleState.Paused;
+    public bool CanCancel => !IsTerminal && State != TaskLifecycleState.Cancelling;
+    public bool CanRetry => State is TaskLifecycleState.Failed or TaskLifecycleState.PartiallyCompleted or TaskLifecycleState.Cancelled or TaskLifecycleState.Interrupted;
+    public bool CanResolveAttention => State == TaskLifecycleState.NeedsAttention;
+    public bool CanRollback => State is TaskLifecycleState.Interrupted or TaskLifecycleState.Failed or TaskLifecycleState.PartiallyCompleted;
+    public bool CanAbandon => State is TaskLifecycleState.Interrupted or TaskLifecycleState.NeedsAttention;
+    public void Update(TaskProgressSnapshot snapshot) { _snapshot = snapshot; OnPropertyChanged(string.Empty); }
+}
+
+public sealed class TaskDetailsViewModel(TaskSnapshotViewModel task) { public TaskSnapshotViewModel Task { get; } = task; }
+public sealed class RecoveryCenterViewModel { public ObservableCollection<TaskSnapshotViewModel> InterruptedTasks { get; } = []; }
+public sealed class NotificationCenterViewModel(INotificationCenter center) { public INotificationCenter Center { get; } = center; }
+public sealed class DatabaseRecoveryViewModel(IDatabaseRecoveryService recoveryService) { public IDatabaseRecoveryService RecoveryService { get; } = recoveryService; }
+
+public interface INavigationService { string CurrentPage { get; } void Navigate(string page); }
+public sealed class NavigationService : ObservableObject, INavigationService
+{
+    private string _currentPage = "Workbench";
+    public string CurrentPage => _currentPage;
+    public void Navigate(string page) { if (string.IsNullOrWhiteSpace(page) || _currentPage == page) return; _currentPage = page; OnPropertyChanged(nameof(CurrentPage)); }
+}

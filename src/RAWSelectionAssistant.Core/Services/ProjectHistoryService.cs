@@ -1,6 +1,7 @@
 using System.Text.Json;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Core.Services.Database;
 
 namespace RAWSelectionAssistant.Core.Services;
 
@@ -10,20 +11,28 @@ public sealed class ProjectHistoryService
     private readonly ILogService _logService;
     private readonly string _historyFilePath;
     private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+    private readonly IProjectRepository? _repository;
 
     public ProjectHistoryService(
         IFeatureGateService featureGateService,
         ILogService logService,
-        string? historyFilePath = null)
+        string? historyFilePath = null,
+        IProjectRepository? repository = null)
     {
         _featureGateService = featureGateService;
         _logService = logService;
         _historyFilePath = historyFilePath ?? Path.Combine(AppDataPaths.ProjectDirectory, "projects.json");
+        _repository = repository;
         AppDataPaths.EnsureCreated();
     }
 
     public async Task UpsertAsync(PhotoProjectRecord project, CancellationToken cancellationToken = default)
     {
+        if (_repository is not null)
+        {
+            await _repository.UpsertAsync(project, cancellationToken).ConfigureAwait(false);
+            return;
+        }
         var projects = (await LoadAllAsync(cancellationToken).ConfigureAwait(false)).ToList();
         project.UpdatedAt = DateTimeOffset.UtcNow;
         var index = projects.FindIndex(x => x.Id == project.Id);
@@ -42,6 +51,7 @@ public sealed class ProjectHistoryService
 
     public async Task<IReadOnlyList<PhotoProjectRecord>> LoadAllAsync(CancellationToken cancellationToken = default)
     {
+        if (_repository is not null) return await _repository.ListAsync(cancellationToken).ConfigureAwait(false);
         try
         {
             if (!File.Exists(_historyFilePath)) return [];

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Core.Services.Database;
 
 namespace RAWSelectionAssistant.Core.Services;
 
@@ -13,6 +14,7 @@ public sealed class MediaIndexService
     private readonly IFeatureGateService? _featureGateService;
     private readonly string _cacheFilePath;
     private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+    private readonly IMediaIndexRepository? _repository;
 
     public MediaIndexService(
         FileNameNormalizer normalizer,
@@ -20,13 +22,15 @@ public sealed class MediaIndexService
         IRawFileSystem? fileSystem = null,
         string? cacheFilePath = null,
         IJpegMetadataService? jpegMetadataService = null,
-        IFeatureGateService? featureGateService = null)
+        IFeatureGateService? featureGateService = null,
+        IMediaIndexRepository? repository = null)
     {
         _normalizer = normalizer;
         _logService = logService;
         _fileSystem = fileSystem ?? new SystemRawFileSystem();
         _jpegMetadataService = jpegMetadataService ?? new JpegMetadataService(logService);
         _featureGateService = featureGateService;
+        _repository = repository;
         _cacheFilePath = cacheFilePath ?? Path.Combine(AppDataPaths.IndexDirectory, "media-index.json");
         AppDataPaths.EnsureCreated();
     }
@@ -156,6 +160,11 @@ public sealed class MediaIndexService
     public async Task<MediaIndexSnapshot?> LoadCacheAsync(CancellationToken cancellationToken = default)
     {
         if (!CanUsePersistentIndex) return null;
+        if (_repository is not null)
+        {
+            var media = await _repository.LoadAsync(cancellationToken).ConfigureAwait(false);
+            return media.Count == 0 ? null : MediaIndexSnapshot.Create(media);
+        }
         try
         {
             if (!File.Exists(_cacheFilePath)) return null;
@@ -175,6 +184,11 @@ public sealed class MediaIndexService
 
     private async Task SaveCacheAsync(MediaIndexSnapshot snapshot, CancellationToken cancellationToken)
     {
+        if (_repository is not null)
+        {
+            await _repository.ReplaceAsync(snapshot.Files, cancellationToken).ConfigureAwait(false);
+            return;
+        }
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(_cacheFilePath)!);
