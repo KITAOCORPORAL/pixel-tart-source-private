@@ -91,6 +91,25 @@ public sealed class Version220DocumentPanelViewModelTests
         StringAssert.Contains(vm.StatusText, "等待确认 1");
     }
 
+    [TestMethod] public async Task PendingRecoveryActionsStayWithTheirOwnBookingWhenDetailsSwitch()
+    {
+        var firstBooking = Guid.NewGuid();
+        var secondBooking = Guid.NewGuid();
+        var workflow = new StubWorkflow();
+        var pending = new PendingDocumentAssociation(Guid.NewGuid(), firstBooking, null, BookingDocumentType.Other, "C:\\isolated\\copy.pdf", new string('A', 64), 1);
+        workflow.CopyResult = new(pending.TaskId, BookingDocumentBatchStatus.NeedsAttention, new(1, 1, 0, 0, 0, 1, 1, 1),
+            [new("source.pdf", pending.DestinationPath, BookingDocumentFileState.PartiallyCompleted, null, pending, ErrorCodeCatalog.DatabaseUnavailable, "待恢复")]);
+        var vm = new BookingDocumentsViewModel(workflow, new StubDialogs());
+        await vm.LoadAsync(firstBooking, null, false);
+        await vm.HandleDroppedFilesAsync(["C:\\isolated\\source.pdf"], BookingDocumentLinkMode.ManagedCopy);
+        Assert.HasCount(1, vm.PendingActions);
+        await vm.LoadAsync(secondBooking, null, false);
+        Assert.IsEmpty(vm.PendingActions);
+        await vm.LoadAsync(firstBooking, null, false);
+        Assert.HasCount(1, vm.PendingActions);
+        Assert.AreEqual(firstBooking, vm.PendingActions[0].Pending.BookingId);
+    }
+
     [TestMethod] public void MissingModifiedAndManagedStatesHaveTextLabels()
     {
         var item = new BookingDocumentItemViewModel(Document("资料.pdf"));

@@ -101,6 +101,35 @@ public sealed class Version220DocumentWorkflowTests
     }
 
     [TestMethod]
+    public async Task Copy_MixedValidAndInvalidFilesCompletesValidItemsAndReportsPartialResult()
+    {
+        using var setup = await SetupAsync();
+        var valid = setup.Temp.CreateFile("来源/有效报价.pdf", [1, 2, 3]);
+        var missing = setup.Temp.Combine("来源", "已断开资料.pdf");
+        var result = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Quotation, [valid, missing], setup.Temp.Combine("目标")));
+        Assert.AreEqual(BookingDocumentBatchStatus.PartiallyCompleted, result.Status);
+        Assert.AreEqual(1, result.Successful);
+        Assert.AreEqual(1, result.Failed);
+        Assert.AreEqual(2, result.Summary.Total);
+        Assert.IsTrue(File.Exists(result.Items.Single(item => item.Document is not null).Document!.FilePath));
+        Assert.IsTrue(File.Exists(valid));
+        Assert.AreEqual(TaskLifecycleState.PartiallyCompleted, (await WaitForTerminalAsync(setup.Tasks, result.TaskId!.Value)).State);
+    }
+
+    [TestMethod]
+    public async Task Copy_NormalizedDuplicateInputIsCopiedOnlyOnce()
+    {
+        using var setup = await SetupAsync();
+        var source = setup.Temp.CreateFile("来源/同一资料.pdf", [1, 2]);
+        var alternateSpelling = Path.Combine(Path.GetDirectoryName(source)!, ".", Path.GetFileName(source));
+        var result = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source, alternateSpelling], setup.Temp.Combine("目标")));
+        Assert.AreEqual(1, result.Successful);
+        Assert.AreEqual(1, result.Skipped);
+        Assert.HasCount(1, await setup.Documents.ListByBookingAsync(setup.BookingId));
+        Assert.HasCount(1, Directory.GetFiles(setup.Temp.Combine("目标")));
+    }
+
+    [TestMethod]
     public async Task Copy_DefaultConflictPolicyAutoNumbersAndNeverOverwrites()
     {
         using var setup = await SetupAsync();
@@ -256,6 +285,20 @@ public sealed class Version220DocumentWorkflowTests
     }
 
     [TestMethod]
+    public async Task Relocate_DuplicateTargetLeavesBothAssociationsUnchanged()
+    {
+        using var setup = await SetupAsync();
+        var firstPath = setup.Temp.CreateFile("资料/第一份.pdf", [1]);
+        var secondPath = setup.Temp.CreateFile("资料/第二份.pdf", [2]);
+        var added = await setup.Workflow.AddReferencesAsync(new(setup.BookingId, null, BookingDocumentType.Other, [firstPath, secondPath]));
+        var first = added.Items.Single(item => item.Document!.FilePath == Path.GetFullPath(firstPath)).Document!;
+        var result = await setup.Workflow.RelocateAsync(first.Id, secondPath);
+        Assert.AreEqual(BookingDocumentRelocationStatus.Failed, result.Status);
+        Assert.AreEqual(Path.GetFullPath(firstPath), (await setup.Documents.GetAsync(first.Id))!.FilePath);
+        Assert.HasCount(2, await setup.Documents.ListByBookingAsync(setup.BookingId));
+    }
+
+    [TestMethod]
     public async Task RemoveAssociation_NeverDeletesReferenceOrManagedCopy()
     {
         using var setup = await SetupAsync();
@@ -283,6 +326,20 @@ public sealed class Version220DocumentWorkflowTests
     }
 
     [TestMethod]
+    public async Task ArchivedBookingBlocksRetryingAPendingAssociation()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/待恢复.pdf", [1, 2, 3]);
+        var result = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标")));
+        var pending = result.Items.Single().PendingAssociation!;
+        Assert.IsTrue(await setup.Bookings.ArchiveAsync(setup.BookingId));
+        var retry = await setup.CreateWorkflow(setup.Documents).RetryAssociationAsync(pending);
+        Assert.IsFalse(retry.Succeeded);
+        Assert.IsEmpty(await setup.Documents.ListByBookingAsync(setup.BookingId));
+        Assert.IsTrue(File.Exists(pending.DestinationPath));
+    }
+
+    [TestMethod]
     public async Task Copy_FileLockedReturnsSafeFailureAndKeepsSource()
     {
         using var setup = await SetupAsync();
@@ -305,6 +362,7 @@ public sealed class Version220DocumentWorkflowTests
         Assert.AreEqual(ErrorCodeCatalog.PermissionDenied, result.Items.Single().ErrorCode);
         Assert.IsTrue(File.Exists(source));
         Assert.IsEmpty(await setup.Documents.ListByBookingAsync(setup.BookingId));
+        Assert.AreEqual(TaskLifecycleState.Failed, (await WaitForTerminalAsync(setup.Tasks, result.TaskId!.Value)).State);
     }
 
     [TestMethod]
@@ -319,6 +377,7 @@ public sealed class Version220DocumentWorkflowTests
         Assert.AreEqual(ErrorCodeCatalog.DiskSpaceInsufficient, result.Items.Single().ErrorCode);
         Assert.IsTrue(File.Exists(source));
         Assert.IsEmpty(await setup.Documents.ListByBookingAsync(setup.BookingId));
+        Assert.AreEqual(TaskLifecycleState.NeedsAttention, (await WaitForStateAsync(setup.Tasks, result.TaskId!.Value, TaskLifecycleState.NeedsAttention)).State);
     }
 
     [TestMethod]
@@ -389,6 +448,18 @@ public sealed class Version220DocumentWorkflowTests
         {
             var state = await repository.GetAsync(taskId);
             if (state is not null && TaskStateMachine.IsTerminal(state.State)) return state;
+            await Task.Delay(20);
+        }
+        return (await repository.GetAsync(taskId))!;
+    }
+
+    private static async Task<TaskRuntimeState> WaitForStateAsync(ITaskRepository repository, Guid taskId, TaskLifecycleState expected)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(5);
+        while (DateTime.UtcNow < deadline)
+        {
+            var state = await repository.GetAsync(taskId);
+            if (state?.State == expected) return state;
             await Task.Delay(20);
         }
         return (await repository.GetAsync(taskId))!;
@@ -469,6 +540,7 @@ public sealed class Version220DocumentWorkflowTests
         public Task<BookingDocumentRecord?> GetByNormalizedPathAsync(string normalizedPath, CancellationToken cancellationToken = default) => inner.GetByNormalizedPathAsync(normalizedPath, cancellationToken);
         public Task<IReadOnlyList<BookingDocumentRecord>> ListByBookingAsync(Guid bookingId, CancellationToken cancellationToken = default) => inner.ListByBookingAsync(bookingId, cancellationToken);
         public Task UpdateLocationAsync(Guid id, string filePath, string normalizedPath, string fileExtension, long? fileSize, DateTimeOffset? modifiedAtUtc, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default) => inner.UpdateLocationAsync(id, filePath, normalizedPath, fileExtension, fileSize, modifiedAtUtc, isMissing, verifiedAtUtc, cancellationToken);
+        public Task UpdateLocationAndHashAsync(Guid id, string filePath, string normalizedPath, string fileExtension, long? fileSize, DateTimeOffset? modifiedAtUtc, string? optionalHash, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default) => inner.UpdateLocationAndHashAsync(id, filePath, normalizedPath, fileExtension, fileSize, modifiedAtUtc, optionalHash, isMissing, verifiedAtUtc, cancellationToken);
         public Task SetMissingAsync(Guid id, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default) => inner.SetMissingAsync(id, isMissing, verifiedAtUtc, cancellationToken);
         public Task UpdateHashAsync(Guid id, string? optionalHash, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default) => inner.UpdateHashAsync(id, optionalHash, updatedAtUtc, cancellationToken);
         public Task<bool> RemoveAssociationAsync(Guid id, CancellationToken cancellationToken = default) => inner.RemoveAssociationAsync(id, cancellationToken);

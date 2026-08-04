@@ -40,6 +40,12 @@ public sealed class TaskOperationBridge : ITaskHandler
             try { summary = await pending.InvokeAsync(context, cancellationToken); }
             finally { TaskExecutionAmbient.CurrentTaskId.Value = previous; TaskExecutionAmbient.CurrentContext.Value = previousContext; }
             pending.Completion.TrySetResult(summary);
+            if (summary.WaitingForAttention > 0 && summary.Succeeded == 0)
+                return new(TaskLifecycleState.NeedsAttention, summary, ErrorCodeCatalog.NeedsUserDecision, "任务需要用户确认后继续。");
+            if (summary.Failed > 0 && summary.Succeeded == 0)
+                return new(TaskLifecycleState.Failed, summary, ErrorCodeCatalog.DestinationNotWritable, "任务未产生可用输出。");
+            if (summary.Cancelled > 0 && summary.Succeeded == 0)
+                return new(TaskLifecycleState.Cancelled, summary, ErrorCodeCatalog.CancelledByUser, "任务已取消。");
             return summary.IsPartial ? new(TaskLifecycleState.PartiallyCompleted, summary) : TaskExecutionResult.Completed(summary);
         }
         catch (OperationCanceledException)

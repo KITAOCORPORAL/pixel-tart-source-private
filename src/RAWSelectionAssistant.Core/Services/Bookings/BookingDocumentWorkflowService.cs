@@ -35,7 +35,8 @@ public sealed class BookingDocumentWorkflowService(
 
     public async Task<BookingDocumentBatchResult> AddReferencesAsync(BookingDocumentAddRequest request, CancellationToken cancellationToken = default)
     {
-        await EnsureBookingEditableAsync(request.BookingId, cancellationToken).ConfigureAwait(false);
+        var booking = await EnsureBookingEditableAsync(request.BookingId, cancellationToken).ConfigureAwait(false);
+        var projectId = booking.ProjectId;
         var outcomes = new List<BookingDocumentItemOutcome>();
         foreach (var path in request.FilePaths)
         {
@@ -50,21 +51,21 @@ public sealed class BookingDocumentWorkflowService(
                     outcomes.Add(new(fullPath, null, BookingDocumentFileState.Normal, existing, null, ErrorCodeCatalog.DuplicateConflict, "该文件已关联到当前拍摄，已跳过重复记录。"));
                     continue;
                 }
-                var document = BuildDocument(request.BookingId, request.ProjectId, request.DocumentType, fullPath, BookingDocumentLinkMode.Reference, null, null);
+                var document = BuildDocument(request.BookingId, projectId, request.DocumentType, fullPath, BookingDocumentLinkMode.Reference, null, null);
                 await repository.AddAsync(document, cancellationToken).ConfigureAwait(false);
                 outcomes.Add(new(fullPath, null, BookingDocumentFileState.Normal, document, null, null, "已关联原位置，电脑文件未被修改。"));
-                await WriteAuditAsync(request.BookingId, request.ProjectId, request.DocumentType, "ReferenceAdded", "Succeeded", null, null, cancellationToken).ConfigureAwait(false);
+                await WriteAuditAsync(request.BookingId, projectId, request.DocumentType, "ReferenceAdded", "Succeeded", null, null, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex) when (ex is ArgumentException or FileNotFoundException or NotSupportedException or IOException or UnauthorizedAccessException)
             {
                 var code = MapFileError(ex);
                 outcomes.Add(new(path, null, BookingDocumentFileState.Failed, null, null, code, ErrorCodeCatalog.Describe(code)));
-                await WriteAuditAsync(request.BookingId, request.ProjectId, request.DocumentType, "ReferenceAdded", "Failed", null, code, cancellationToken).ConfigureAwait(false);
+                await WriteAuditAsync(request.BookingId, projectId, request.DocumentType, "ReferenceAdded", "Failed", null, code, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
                 outcomes.Add(new(path, null, BookingDocumentFileState.Failed, null, null, ErrorCodeCatalog.DatabaseUnavailable, "关联记录未保存，原文件保持不变。"));
-                await WriteAuditAsync(request.BookingId, request.ProjectId, request.DocumentType, "ReferenceAdded", "Failed", null, ErrorCodeCatalog.DatabaseUnavailable, cancellationToken).ConfigureAwait(false);
+                await WriteAuditAsync(request.BookingId, projectId, request.DocumentType, "ReferenceAdded", "Failed", null, ErrorCodeCatalog.DatabaseUnavailable, cancellationToken).ConfigureAwait(false);
             }
         }
         return BuildBatchResult(null, outcomes, 0, 0);
@@ -72,13 +73,33 @@ public sealed class BookingDocumentWorkflowService(
 
     public async Task<BookingDocumentBatchResult> CopyAndAssociateAsync(BookingDocumentCopyRequest request, CancellationToken cancellationToken = default)
     {
-        await EnsureBookingEditableAsync(request.BookingId, cancellationToken).ConfigureAwait(false);
+        var booking = await EnsureBookingEditableAsync(request.BookingId, cancellationToken).ConfigureAwait(false);
+        var projectId = booking.ProjectId;
         if (request.FilePaths.Count == 0) return new(null, BookingDocumentBatchStatus.Completed, TaskResultSummary.Empty, []);
         var destinationRoot = ValidateDestination(request.DestinationRoot);
-        var duplicateInputs = request.FilePaths.GroupBy(path => NormalizeLoose(path), StringComparer.OrdinalIgnoreCase).Where(group => group.Count() > 1).SelectMany(group => group.Skip(1)).ToArray();
-        var sourcePaths = request.FilePaths.Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-        var initialOutcomes = duplicateInputs.Select(path => new BookingDocumentItemOutcome(path, null, BookingDocumentFileState.Normal, null, null, ErrorCodeCatalog.DuplicateConflict, "同一次添加中存在重复文件，已跳过。" )).ToList();
-        foreach (var source in sourcePaths) ValidateSupportedFile(source);
+        var initialOutcomes = new List<BookingDocumentItemOutcome>();
+        var sourcePaths = new List<string>();
+        var seenPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var path in request.FilePaths)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            try
+            {
+                var fullPath = ValidateSupportedFile(path);
+                if (!seenPaths.Add(Normalize(fullPath)))
+                {
+                    initialOutcomes.Add(new(path, null, BookingDocumentFileState.Normal, null, null, ErrorCodeCatalog.DuplicateConflict, "同一次添加中存在重复文件，已跳过。"));
+                    continue;
+                }
+                sourcePaths.Add(fullPath);
+            }
+            catch (Exception ex) when (ex is ArgumentException or FileNotFoundException or NotSupportedException or IOException or UnauthorizedAccessException)
+            {
+                var code = MapFileError(ex);
+                initialOutcomes.Add(new(path, null, BookingDocumentFileState.Failed, null, null, code, ErrorCodeCatalog.Describe(code)));
+            }
+        }
+        if (sourcePaths.Count == 0) return BuildBatchResult(null, initialOutcomes, 0, 0);
 
         BookingDocumentBatchResult? completedResult = null;
         Guid? taskId = null;
@@ -87,17 +108,25 @@ public sealed class BookingDocumentWorkflowService(
             taskId = await operationBridge.RunAsync("复制拍摄资料", async (context, token) =>
             {
                 var operationTaskId = context.Definition.Id;
-                var sourceRoot = Path.GetDirectoryName(Path.GetFullPath(sourcePaths[0])) ?? Path.GetPathRoot(Path.GetFullPath(sourcePaths[0]))!;
-                var plan = await planner.CreateAsync(operationTaskId, request.ProjectId, FileOperationType.Copy, sourceRoot, destinationRoot, sourcePaths, FileConflictPolicy.AutoNumber, token).ConfigureAwait(false);
+                var sourceRoot = Path.GetDirectoryName(sourcePaths[0]) ?? Path.GetPathRoot(sourcePaths[0])!;
+                var plan = await planner.CreateAsync(operationTaskId, projectId, FileOperationType.Copy, sourceRoot, destinationRoot, sourcePaths, FileConflictPolicy.AutoNumber, token).ConfigureAwait(false);
                 if (request.VerifySha256)
                 {
                     var hashed = new List<FileOperationItem>(plan.Items.Count);
                     foreach (var item in plan.Items)
                     {
-                        var hash = await verification.ComputeSha256Async(item.SourcePath, token).ConfigureAwait(false);
-                        hashed.Add(item with { OptionalSourceHash = hash });
+                        try
+                        {
+                            var hash = await verification.ComputeSha256Async(item.SourcePath, token).ConfigureAwait(false);
+                            hashed.Add(item with { OptionalSourceHash = hash });
+                        }
+                        catch (Exception ex) when (ex is FileNotFoundException or DirectoryNotFoundException or IOException or UnauthorizedAccessException)
+                        {
+                            var code = MapFileError(ex);
+                            initialOutcomes.Add(new(item.SourcePath, null, BookingDocumentFileState.Failed, null, null, code, ErrorCodeCatalog.Describe(code)));
+                        }
                     }
-                    plan = plan with { Items = hashed };
+                    plan = plan with { Items = hashed, EstimatedBytes = hashed.Sum(item => item.ExpectedSourceSize ?? 0) };
                 }
 
                 var progress = new Progress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
@@ -105,9 +134,10 @@ public sealed class BookingDocumentWorkflowService(
                 var execution = await executor.ExecuteAsync(plan, context.SafeBoundaryAsync, progress, token).ConfigureAwait(false);
                 var outcomes = new List<BookingDocumentItemOutcome>(initialOutcomes);
                 var associated = 0;
-                var failed = 0;
-                var skipped = initialOutcomes.Count;
-                var waiting = 0;
+                var failed = initialOutcomes.Count(item => item.State == BookingDocumentFileState.Failed);
+                var skipped = initialOutcomes.Count(item => item.ErrorCode == ErrorCodeCatalog.DuplicateConflict);
+                var waiting = initialOutcomes.Count(item => item.PendingAssociation is not null || item.State == BookingDocumentFileState.WaitingForConfirmation);
+                var copiedPendingAssociation = initialOutcomes.Count(item => item.PendingAssociation is not null);
                 foreach (var item in plan.Items.OrderBy(item => item.Sequence))
                 {
                     var itemResult = execution.Items.FirstOrDefault(result => result.ItemId == item.Id);
@@ -130,32 +160,33 @@ public sealed class BookingDocumentWorkflowService(
                             outcomes.Add(new(item.SourcePath, itemResult.DestinationPath, BookingDocumentFileState.Normal, existing, null, ErrorCodeCatalog.DuplicateConflict, "目标文件已关联，未创建重复记录。"));
                             continue;
                         }
-                        var document = BuildDocument(request.BookingId, request.ProjectId, request.DocumentType, itemResult.DestinationPath, BookingDocumentLinkMode.ManagedCopy, operationTaskId, itemResult.Hash);
+                        var document = BuildDocument(request.BookingId, projectId, request.DocumentType, itemResult.DestinationPath, BookingDocumentLinkMode.ManagedCopy, operationTaskId, itemResult.Hash);
                         await repository.AddAsync(document, token).ConfigureAwait(false);
                         associated++;
                         outcomes.Add(new(item.SourcePath, itemResult.DestinationPath, BookingDocumentFileState.Normal, document, null, null, "文件已安全复制并关联。"));
-                        await WriteAuditAsync(request.BookingId, request.ProjectId, request.DocumentType, "ManagedCopyAssociated", "Succeeded", operationTaskId, null, token).ConfigureAwait(false);
+                        await WriteAuditAsync(request.BookingId, projectId, request.DocumentType, "ManagedCopyAssociated", "Succeeded", operationTaskId, null, token).ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
                         waiting++;
+                        copiedPendingAssociation++;
                         var info = new FileInfo(itemResult.DestinationPath);
-                        var pending = new PendingDocumentAssociation(operationTaskId, request.BookingId, request.ProjectId, request.DocumentType, itemResult.DestinationPath, itemResult.Hash, info.Exists ? info.Length : null);
+                        var pending = new PendingDocumentAssociation(operationTaskId, request.BookingId, projectId, request.DocumentType, itemResult.DestinationPath, itemResult.Hash, info.Exists ? info.Length : null);
                         outcomes.Add(new(item.SourcePath, itemResult.DestinationPath, BookingDocumentFileState.PartiallyCompleted, null, pending, ErrorCodeCatalog.DatabaseUnavailable,
                             "文件已复制，但关联记录未保存；源文件仍安全。"));
-                        await WriteAuditAsync(request.BookingId, request.ProjectId, request.DocumentType, "ManagedCopyAssociated", "PartiallyCompleted", operationTaskId, ErrorCodeCatalog.DatabaseUnavailable, token).ConfigureAwait(false);
+                        await WriteAuditAsync(request.BookingId, projectId, request.DocumentType, "ManagedCopyAssociated", "PartiallyCompleted", operationTaskId, ErrorCodeCatalog.DatabaseUnavailable, token).ConfigureAwait(false);
                     }
                 }
 
-                var summary = new TaskResultSummary(plan.Items.Count + initialOutcomes.Count, associated + waiting, failed, skipped, 0, waiting,
+                var summary = new TaskResultSummary(plan.Items.Count + initialOutcomes.Count, associated + copiedPendingAssociation, failed, skipped, 0, waiting,
                     execution.Summary.BytesProcessed, execution.Summary.BytesWritten);
                 completedResult = BuildBatchResult(operationTaskId, outcomes, execution.Summary.BytesProcessed, execution.Summary.BytesWritten, summary);
                 return summary;
-            }, request.ProjectId, "booking-document-copy", cancellationToken).ConfigureAwait(false);
+            }, projectId, $"booking-document-copy;booking={request.BookingId:D};type={request.DocumentType}", cancellationToken).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
         {
-            var summary = new TaskResultSummary(sourcePaths.Length, 0, 0, initialOutcomes.Count, sourcePaths.Length, 0, 0, 0);
+            var summary = new TaskResultSummary(request.FilePaths.Count, 0, initialOutcomes.Count(item => item.State == BookingDocumentFileState.Failed), initialOutcomes.Count(item => item.ErrorCode == ErrorCodeCatalog.DuplicateConflict), sourcePaths.Count, 0, 0, 0);
             return new(taskId, BookingDocumentBatchStatus.Cancelled, summary, initialOutcomes);
         }
         catch (Exception)
@@ -211,6 +242,13 @@ public sealed class BookingDocumentWorkflowService(
         try
         {
             var fullPath = ValidateSupportedFile(newFilePath);
+            var normalizedPath = Normalize(fullPath);
+            var duplicate = await repository.GetByNormalizedPathAsync(document.BookingId, normalizedPath, cancellationToken).ConfigureAwait(false);
+            if (duplicate is not null && duplicate.Id != document.Id)
+            {
+                await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "NeedsAttention", document.ImportTaskId, ErrorCodeCatalog.DuplicateConflict, cancellationToken).ConfigureAwait(false);
+                return new(BookingDocumentRelocationStatus.Failed, document, false, "所选文件已经关联到当前拍摄，未修改现有记录。" );
+            }
             string? newHash = null;
             if (!string.IsNullOrWhiteSpace(document.OptionalHash))
             {
@@ -223,10 +261,10 @@ public sealed class BookingDocumentWorkflowService(
             }
             var info = new FileInfo(fullPath);
             var now = DateTimeOffset.UtcNow;
-            await repository.UpdateLocationAsync(document.Id, fullPath, Normalize(fullPath), info.Extension.ToLowerInvariant(), info.Length, new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), false, now, cancellationToken).ConfigureAwait(false);
-            if (acceptHashMismatch && newHash is not null) await repository.UpdateHashAsync(document.Id, newHash, now, cancellationToken).ConfigureAwait(false);
-            var relocated = document with { FilePath = fullPath, NormalizedPath = Normalize(fullPath), FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
-                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), OptionalHash = acceptHashMismatch && newHash is not null ? newHash : document.OptionalHash,
+            var updatedHash = acceptHashMismatch && newHash is not null ? newHash : document.OptionalHash;
+            await repository.UpdateLocationAndHashAsync(document.Id, fullPath, normalizedPath, info.Extension.ToLowerInvariant(), info.Length, new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), updatedHash, false, now, cancellationToken).ConfigureAwait(false);
+            var relocated = document with { FilePath = fullPath, NormalizedPath = normalizedPath, FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
+                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), OptionalHash = updatedHash,
                 IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
             await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "Succeeded", document.ImportTaskId, null, cancellationToken).ConfigureAwait(false);
             return new(BookingDocumentRelocationStatus.Relocated, relocated, false, "文件位置已更新。" );
@@ -236,6 +274,11 @@ public sealed class BookingDocumentWorkflowService(
             var code = MapFileError(ex);
             await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "Failed", document.ImportTaskId, code, cancellationToken).ConfigureAwait(false);
             return new(BookingDocumentRelocationStatus.Failed, document, false, ErrorCodeCatalog.Describe(code));
+        }
+        catch (Exception)
+        {
+            await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "Failed", document.ImportTaskId, ErrorCodeCatalog.DatabaseUnavailable, cancellationToken).ConfigureAwait(false);
+            return new(BookingDocumentRelocationStatus.Failed, document, false, "文件位置未更新，原关联记录保持不变。" );
         }
     }
 
@@ -254,6 +297,7 @@ public sealed class BookingDocumentWorkflowService(
     {
         try
         {
+            var booking = await EnsureBookingEditableAsync(pending.BookingId, cancellationToken).ConfigureAwait(false);
             if (!File.Exists(pending.DestinationPath)) return new(false, null, pending, ErrorCodeCatalog.SourceNotFound, "已复制文件当前不存在，无法重试关联。" );
             var info = new FileInfo(pending.DestinationPath);
             if (pending.OutputSize is long size && info.Length != size) return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。" );
@@ -261,7 +305,7 @@ public sealed class BookingDocumentWorkflowService(
                 return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。" );
             var existing = await repository.GetByNormalizedPathAsync(pending.BookingId, Normalize(pending.DestinationPath), cancellationToken).ConfigureAwait(false);
             if (existing is not null) return new(true, existing, null, null, "关联记录已经存在。" );
-            var document = BuildDocument(pending.BookingId, pending.ProjectId, pending.DocumentType, pending.DestinationPath, BookingDocumentLinkMode.ManagedCopy, pending.TaskId, pending.OutputHash);
+            var document = BuildDocument(pending.BookingId, booking.ProjectId, pending.DocumentType, pending.DestinationPath, BookingDocumentLinkMode.ManagedCopy, pending.TaskId, pending.OutputHash);
             await repository.AddAsync(document, cancellationToken).ConfigureAwait(false);
             await WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationRetried", "Succeeded", pending.TaskId, null, cancellationToken).ConfigureAwait(false);
             return new(true, document, null, null, "关联记录已保存。" );
@@ -290,10 +334,11 @@ public sealed class BookingDocumentWorkflowService(
     public Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default) =>
         WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationAbandoned", "FileKept", pending.TaskId, null, cancellationToken);
 
-    private async Task EnsureBookingEditableAsync(Guid bookingId, CancellationToken cancellationToken)
+    private async Task<ShootBooking> EnsureBookingEditableAsync(Guid bookingId, CancellationToken cancellationToken)
     {
         var booking = await bookingService.GetAsync(bookingId, includeArchived: true, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("拍摄排期不存在。" );
         if (booking.IsArchived) throw new InvalidOperationException("已归档排期不能修改文档关联。" );
+        return booking;
     }
 
     private static BookingDocumentRecord BuildDocument(Guid bookingId, Guid? projectId, BookingDocumentType type, string filePath, BookingDocumentLinkMode mode, Guid? taskId, string? hash)
@@ -361,7 +406,6 @@ public sealed class BookingDocumentWorkflowService(
     }
 
     private static string Normalize(string path) => Path.GetFullPath(path).ToUpperInvariant();
-    private static string NormalizeLoose(string path) { try { return Normalize(path); } catch { return path.Trim().ToUpperInvariant(); } }
     private static string CategoryFolder(BookingDocumentType type) => type switch
     {
         BookingDocumentType.PhotographyPlan => "摄影策划",
@@ -385,7 +429,16 @@ public sealed class BookingDocumentWorkflowService(
         _ => ErrorCodeCatalog.DestinationNotWritable
     };
 
-    private Task WriteAuditAsync(Guid bookingId, Guid? projectId, BookingDocumentType type, string operation, string result, Guid? taskId, string? errorCode, CancellationToken cancellationToken) =>
-        auditLog.WriteAsync("BookingDocument", operation, result is "Succeeded" or "FileKept" ? "Information" : "Warning",
-            $"BookingId={bookingId:D};DocumentType={type};Operation={operation};Result={result}", taskId, projectId, errorCode, taskId?.ToString("N") ?? Guid.NewGuid().ToString("N"), cancellationToken);
+    private async Task WriteAuditAsync(Guid bookingId, Guid? projectId, BookingDocumentType type, string operation, string result, Guid? taskId, string? errorCode, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await auditLog.WriteAsync("BookingDocument", operation, result is "Succeeded" or "FileKept" ? "Information" : "Warning",
+                $"BookingId={bookingId:D};DocumentType={type};Operation={operation};Result={result}", taskId, projectId, errorCode, taskId?.ToString("N") ?? Guid.NewGuid().ToString("N"), cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception) when (!cancellationToken.IsCancellationRequested)
+        {
+            // Audit persistence must never turn a safe file result into a second file operation or a false failure.
+        }
+    }
 }

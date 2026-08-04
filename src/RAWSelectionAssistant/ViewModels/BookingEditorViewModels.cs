@@ -73,6 +73,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     {
         IsBusy = true;
         AmountsVisible = false;
+        Documents?.Reset();
         try
         {
             Booking = await _service.GetAsync(bookingId, includeArchived).ConfigureAwait(true);
