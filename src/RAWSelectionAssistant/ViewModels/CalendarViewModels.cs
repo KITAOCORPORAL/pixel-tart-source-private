@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -19,6 +20,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 {
     private readonly IShootBookingService _bookingService;
     private readonly RAWSelectionAssistant.Core.Services.Database.IProjectRepository _projectRepository;
+    private readonly IBookingReminderScheduler? _reminderScheduler;
     private CancellationTokenSource? _queryCancellation;
     private bool _initialized;
     private bool _isBusy;
@@ -34,10 +36,12 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private bool _isArchivedPaneOpen;
 
     public WorkCalendarViewModel(IShootBookingService bookingService, RAWSelectionAssistant.Core.Services.Database.IProjectRepository projectRepository,
-        IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null)
+        IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
+        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
+        _reminderScheduler = reminderScheduler;
         StatusOptions =
         [
             new("全部状态", null), new("待确定", ShootBookingStatus.Tentative), new("已确认", ShootBookingStatus.Confirmed),
@@ -58,7 +62,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
         DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync);
-        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.EditRequested += (_, bookingId) => _ = RequestEditorAsync(bookingId, null);
         Details.Archived += (_, _) => _ = RefreshAsync();
@@ -274,6 +278,8 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         IsDetailsOpen = Details.Booking is not null;
     }
 
+    public Task OpenBookingDetailsAsync(Guid bookingId, bool includeArchived = false) => OpenBookingAsync(bookingId, includeArchived);
+
     private Task OpenBookingAsync(ShootBookingSummary item) => OpenBookingAsync(item.Id);
 
     private async Task RequestEditorAsync(Guid? bookingId, DateTime? suggestedStart)
@@ -283,6 +289,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         editor.Saved += async (_, saved) =>
         {
             await RefreshAsync().ConfigureAwait(true);
+            if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
             await OpenBookingAsync(saved.Id).ConfigureAwait(true);
         };
         EditorRequested?.Invoke(this, new BookingEditorRequestEventArgs(editor));

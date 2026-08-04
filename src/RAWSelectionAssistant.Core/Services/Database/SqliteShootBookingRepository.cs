@@ -85,6 +85,18 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        await using (var reminders = connection.CreateCommand())
+        {
+            reminders.Transaction = transaction;
+            reminders.CommandText = booking.Status == ShootBookingStatus.Cancelled
+                ? "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;"
+                : "UPDATE BookingReminders SET TriggerAtUtc=strftime('%Y-%m-%dT%H:%M:%fZ',$start, '-' || OffsetMinutes || ' minutes'),UpdatedAtUtc=$updated WHERE BookingId=$booking AND TriggerKind='RelativeToBookingStart' AND OffsetMinutes IS NOT NULL AND Status IN ('Scheduled','Disabled');";
+            reminders.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
+            reminders.Parameters.AddWithValue("$updated", Utc(booking.UpdatedAtUtc));
+            if (booking.Status != ShootBookingStatus.Cancelled) reminders.Parameters.AddWithValue("$start", Utc(booking.StartAtUtc));
+            await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
     }
 

@@ -50,6 +50,7 @@ public interface INotificationCenter
 {
     event EventHandler<NotificationMessage>? Published;
     Task PublishAsync(NotificationMessage message, CancellationToken cancellationToken = default);
+    void NotifyPersisted(NotificationMessage message);
     Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default);
     Task MarkReadAsync(Guid id, CancellationToken cancellationToken = default);
 }
@@ -92,7 +93,18 @@ public sealed class NotificationCenter(IPixelTartDatabase database, TimeSpan? th
         command.Parameters.AddWithValue("$expires", (object?)message.ExpiresAt?.ToString("O") ?? DBNull.Value);
         command.Parameters.AddWithValue("$dedupe", (object?)message.DeduplicationKey ?? DBNull.Value);
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        Published?.Invoke(this, message);
+        NotifyPersisted(message);
+    }
+
+    public void NotifyPersisted(NotificationMessage message)
+    {
+        var handlers = Published?.GetInvocationList();
+        if (handlers is null) return;
+        foreach (EventHandler<NotificationMessage> handler in handlers)
+        {
+            try { handler(this, message); }
+            catch { /* A UI subscriber must not invalidate an already persisted notification. */ }
+        }
     }
 
     public async Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default)

@@ -6,8 +6,10 @@ namespace RAWSelectionAssistant.Core.Services.Bookings;
 public sealed class ShootBookingService(
     IShootBookingRepository repository,
     IBookingConflictDetector conflictDetector,
-    IAuditLogService? auditLog = null) : IShootBookingService
+    IAuditLogService? auditLog = null) : IShootBookingService, IBookingChangeNotifier
 {
+    public event EventHandler<Guid>? BookingChanged;
+
     public async Task<BookingSaveResult> SaveAsync(ShootBookingDraft draft, BookingConflictResolution conflictResolution = BookingConflictResolution.None, CancellationToken cancellationToken = default)
     {
         var money = BookingMoneyCalculator.Calculate(draft.TotalAmountMinor, draft.DepositAmountMinor, draft.PaidAmountMinor);
@@ -73,6 +75,7 @@ public sealed class ShootBookingService(
         await repository.SaveAsync(booking, requirements, cancellationToken).ConfigureAwait(false);
         if (auditLog is not null)
             await auditLog.WriteAsync("Booking", previous is null ? "Created" : "Updated", "Information", "拍摄排期记录已保存。", projectId: booking.ProjectId, cancellationToken: cancellationToken).ConfigureAwait(false);
+        BookingChanged?.Invoke(this, booking.Id);
         return new(BookingSaveStatus.Saved, booking, money, conflicts, []);
     }
 
@@ -96,6 +99,7 @@ public sealed class ShootBookingService(
         var archived = await repository.ArchiveAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
         if (archived && auditLog is not null)
             await auditLog.WriteAsync("Booking", "Archived", "Information", "拍摄排期记录已归档，关联提醒已禁用。", cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (archived) BookingChanged?.Invoke(this, id);
         return archived;
     }
 
@@ -104,6 +108,7 @@ public sealed class ShootBookingService(
         var restored = await repository.RestoreAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
         if (restored && auditLog is not null)
             await auditLog.WriteAsync("Booking", "Restored", "Information", "拍摄排期记录已恢复，提醒保持关闭。", cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (restored) BookingChanged?.Invoke(this, id);
         return restored;
     }
 

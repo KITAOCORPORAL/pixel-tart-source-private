@@ -17,3 +17,38 @@ public sealed record ReminderDefinition(
     DateTimeOffset? CreatedAt = null,
     DateTimeOffset? UpdatedAt = null);
 
+public sealed record ReminderDispatch(
+    ReminderDefinition Reminder,
+    ShootBooking Booking,
+    DateTimeOffset PlannedAtUtc,
+    DateTimeOffset TriggeredAtUtc,
+    bool IsMissed);
+
+public sealed record ReminderPublishedEvent(ReminderDispatch Dispatch, NotificationMessage Notification);
+
+public sealed record WorkbenchScheduleItem(
+    Guid BookingId,
+    Guid? ProjectId,
+    string Title,
+    DateTimeOffset StartAtUtc,
+    DateTimeOffset EndAtUtc,
+    string TimeZoneId,
+    ShootBookingStatus Status,
+    bool IsAllDay,
+    bool IsOngoing,
+    bool HasLocation,
+    bool HasEnabledReminder,
+    int DocumentCount,
+    string ProjectName,
+    string LocationDisplay,
+    int RequirementCompleted,
+    int RequirementTotal);
+
+public sealed record WorkbenchScheduleDay(DateOnly Date, IReadOnlyList<WorkbenchScheduleItem> Items);
+
+public sealed record WorkbenchScheduleSnapshot(
+    IReadOnlyList<WorkbenchScheduleItem> Today,
+    IReadOnlyList<WorkbenchScheduleDay> FutureSevenDays,
+    DateOnly LocalDate,
+    int FutureTotalCount);
+

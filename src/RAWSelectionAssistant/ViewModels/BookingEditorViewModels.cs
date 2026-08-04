@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
@@ -18,15 +19,19 @@ public sealed record ShootingTypeEditorOption(string Value, string Label);
 public sealed class ShootBookingDetailsViewModel : ObservableObject
 {
     private readonly IShootBookingService _service;
+    private readonly IBookingReminderScheduler? _reminderScheduler;
     private ShootBooking? _booking;
     private bool _amountsVisible;
     private bool _isBusy;
     private string _statusText = string.Empty;
 
-    public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null)
+    public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
+        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null)
     {
         _service = service;
+        _reminderScheduler = reminderScheduler;
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
+        if (reminderService is not null) Reminders = new BookingRemindersViewModel(reminderService, reminderScheduler);
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
@@ -38,7 +43,9 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public event EventHandler<Guid>? Archived;
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
     public BookingDocumentsViewModel? Documents { get; }
+    public BookingRemindersViewModel? Reminders { get; }
     public bool HasDocumentsPanel => Documents is not null;
+    public bool HasRemindersPanel => Reminders is not null;
     public ICommand ToggleAmountsCommand { get; }
     public ICommand CloseCommand { get; }
     public ICommand EditCommand { get; }
@@ -82,6 +89,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
             {
                 foreach (var item in await _service.GetRequirementsAsync(bookingId).ConfigureAwait(true)) Requirements.Add(item);
                 if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
+                if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
             }
             StatusText = Booking is null ? "排期不存在或已归档" : string.Empty;
         }
@@ -94,6 +102,8 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         if (Booking is null || !await _service.ArchiveAsync(Booking.Id).ConfigureAwait(true)) return;
         Booking = Booking with { IsArchived = true, ArchivedAtUtc = DateTimeOffset.UtcNow };
         if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, isArchived: true).ConfigureAwait(true);
+        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: true).ConfigureAwait(true);
+        if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
         StatusText = "排期已归档；提醒已关闭，关联数据与电脑文件均已保留。";
         Archived?.Invoke(this, Booking.Id);
     }

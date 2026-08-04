@@ -3,6 +3,7 @@ using System.Windows.Threading;
 using System.Net.Http;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Services;
@@ -86,6 +87,19 @@ public partial class App : Application
             var clipboardService = new WpfClipboardService();
             _appearanceService = new AppearanceService();
 
+            var calendarViewModel = new WorkCalendarViewModel(
+                _compositionRoot.ShootBookingService,
+                _compositionRoot.ProjectRepository,
+                _compositionRoot.BookingDocumentWorkflowService,
+                dialogService,
+                _compositionRoot.BookingReminderService,
+                _compositionRoot.BookingReminderScheduler);
+            var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier);
+            var reminderNotifications = new ReminderNotificationCenterViewModel(
+                _compositionRoot.BookingReminderNotificationService,
+                _compositionRoot.NotificationCenter,
+                _compositionRoot.BookingReminderService);
+
             _mainViewModel = new MainViewModel(
                 normalizer,
                 inputParser,
@@ -109,13 +123,16 @@ public partial class App : Application
                 _compositionRoot.OperationBridge,
                 _compositionRoot.QuickToolsRepository,
                 _compositionRoot.MatchDecisionRepository,
-                new WorkCalendarViewModel(_compositionRoot.ShootBookingService, _compositionRoot.ProjectRepository, _compositionRoot.BookingDocumentWorkflowService, dialogService));
+                calendarViewModel,
+                workbenchSchedule,
+                reminderNotifications);
 
             await _mainViewModel.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };
             window.ApplySavedBounds(_mainViewModel.Settings);
             MainWindow = window;
             window.Show();
+            await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
         }
         catch (Exception ex)
@@ -131,6 +148,7 @@ public partial class App : Application
     {
         try
         {
+            _compositionRoot?.BookingReminderScheduler.StopAsync().GetAwaiter().GetResult();
             _mainViewModel?.SaveSettingsAsync().GetAwaiter().GetResult();
         }
         catch (Exception ex)
@@ -139,6 +157,9 @@ public partial class App : Application
         }
 
         _singleInstance?.Dispose();
+        _mainViewModel?.WorkbenchSchedule?.Dispose();
+        _mainViewModel?.ReminderNotifications?.Dispose();
+        if (_compositionRoot is not null) _compositionRoot.BookingReminderScheduler.DisposeAsync().AsTask().GetAwaiter().GetResult();
         _appearanceService?.Dispose();
         _logService?.Info("应用程序已退出。");
         base.OnExit(e);

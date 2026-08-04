@@ -270,6 +270,14 @@ public sealed class Version220CalendarUiTests
                 documentPanel.Measure(viewport); documentPanel.Arrange(new Rect(viewport)); documentPanel.UpdateLayout();
                 Assert.IsFalse(double.IsNaN(documentPanel.ActualWidth)); Assert.IsFalse(double.IsNaN(documentPanel.ActualHeight));
                 Assert.IsLessThanOrEqualTo(viewport.Width, documentPanel.ActualWidth); Assert.IsLessThanOrEqualTo(viewport.Height, documentPanel.ActualHeight);
+
+                foreach (var stageDControl in new FrameworkElement[] { new BookingRemindersPanel(), new WorkbenchScheduleView(), new ReminderNotificationHost() })
+                {
+                    stageDControl.Width = viewport.Width; stageDControl.Height = viewport.Height;
+                    stageDControl.Measure(viewport); stageDControl.Arrange(new Rect(viewport)); stageDControl.UpdateLayout();
+                    Assert.IsFalse(double.IsNaN(stageDControl.ActualWidth)); Assert.IsFalse(double.IsNaN(stageDControl.ActualHeight));
+                    Assert.IsLessThanOrEqualTo(viewport.Width, stageDControl.ActualWidth); Assert.IsLessThanOrEqualTo(viewport.Height, stageDControl.ActualHeight);
+                }
             }
         }
         finally { app.Shutdown(); }

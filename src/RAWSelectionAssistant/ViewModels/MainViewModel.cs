@@ -109,7 +109,9 @@ public sealed class MainViewModel : ObservableObject
         TaskOperationBridge taskOperationBridge,
         IQuickToolsRepository quickToolsRepository,
         IMatchDecisionRepository matchDecisionRepository,
-        WorkCalendarViewModel workCalendarPage)
+        WorkCalendarViewModel workCalendarPage,
+        WorkbenchScheduleViewModel? workbenchSchedule = null,
+        ReminderNotificationCenterViewModel? reminderNotifications = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -134,6 +136,11 @@ public sealed class MainViewModel : ObservableObject
         _quickToolsRepository = quickToolsRepository;
         _matchDecisionRepository = matchDecisionRepository;
         WorkCalendarPage = workCalendarPage;
+        WorkbenchSchedule = workbenchSchedule;
+        ReminderNotifications = reminderNotifications;
+        if (ReminderNotifications is not null) ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+        if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+        if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenCalendarRequested += WorkbenchSchedule_OpenCalendarRequested;
         OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService, taskOperationBridge);
         CollagePage = new CollageViewModel(new CollageExportService(), dialogService, taskOperationBridge);
         _licenseService.LicenseChanged += (_, _) => OnLicenseChanged();
@@ -214,6 +221,8 @@ public sealed class MainViewModel : ObservableObject
     public OrganizePhotosViewModel OrganizePhotosPage { get; }
     public CollageViewModel CollagePage { get; }
     public WorkCalendarViewModel WorkCalendarPage { get; }
+    public WorkbenchScheduleViewModel? WorkbenchSchedule { get; }
+    public ReminderNotificationCenterViewModel? ReminderNotifications { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -407,6 +416,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsPhotoGroupingPage));
             OnPropertyChanged(nameof(IsCollagePage));
             OnPropertyChanged(nameof(IsToolboxPage));
+            if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
         }
     }
     public bool IsWorkbenchPage => CurrentPage is "Workbench" or "ProjectCenter";
@@ -868,6 +878,7 @@ public sealed class MainViewModel : ObservableObject
         foreach (var project in await _projectHistoryService.LoadVisibleAsync()) ProjectHistory.Add(project);
         OutputPresets.Clear();
         foreach (var preset in await _outputPresetService.LoadAsync()) OutputPresets.Add(preset);
+        if (WorkbenchSchedule is not null) await WorkbenchSchedule.InitializeAsync();
         if (ProjectHistory.FirstOrDefault() is { } recent) _currentProject = recent;
         RegenerateOutputFolderName();
         _initialized = true;
@@ -887,6 +898,14 @@ public sealed class MainViewModel : ObservableObject
         OnLicenseChanged();
         if (_onboardingService.NeedsUpgradeOffer) UpgradeTutorialOfferRequested?.Invoke(this, EventArgs.Empty);
     }
+
+    private async void ReminderNotifications_OpenBookingRequested(object? sender, Guid bookingId)
+    {
+        CurrentPage = "WorkCalendar";
+        await WorkCalendarPage.OpenBookingDetailsAsync(bookingId).ConfigureAwait(true);
+    }
+
+    private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => CurrentPage = "WorkCalendar";
 
     public async Task HandleDropAsync(string[]? paths, string? text)
     {
