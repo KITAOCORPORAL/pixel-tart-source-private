@@ -58,13 +58,13 @@ public sealed class Baseline2031AcceptanceTests
     }
 
     [TestMethod]
-    public void VersionChain_Uses210Everywhere()
+    public void VersionChain_Uses220Everywhere()
     {
         var root = Root();
         foreach (var path in new[] { "build/Version.props", "src/RAWSelectionAssistant.Core/Models/Branding.cs", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "src/RAWSelectionAssistant/app.manifest", "installer/RAWSelectionAssistant.iss" })
         {
             var text = File.ReadAllText(Path.Combine(root, path.Replace('/', Path.DirectorySeparatorChar)));
-            StringAssert.Contains(text, "2.1.0");
+            StringAssert.Contains(text, "2.2.0");
         }
     }
 

@@ -30,7 +30,7 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void ExistingSettingsAndToolboxFixesRemain() => Contains(MainXaml(), "SidebarSettingsButton", "OpenSettingsCommand", "ViewAllToolsButton", "OpenToolboxPage_Click");
     [TestMethod] public void SidebarCollapseFixRemains() => Contains(MainXaml(), "SidebarNavButton", "IconExpand", "SidebarCollapseButton");
     [TestMethod] public void ReleaseProviderAndWinExeRemain() { Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\""); Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>"); Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false"); }
-    [TestMethod] public void VersionAndInstallerAre210() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.1.0"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.1.0\"", "像素蛋挞_Setup_2.1.0_x64"); }
+    [TestMethod] public void VersionAndInstallerAre220() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.2.0"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.2.0\"", "像素蛋挞_Setup_2.2.0_x64"); }
 
     private static string Popup() { var text = MainXaml(); var start = text.IndexOf("WorkbenchToolboxPopup", StringComparison.Ordinal); var end = text.IndexOf("</Popup>", start, StringComparison.Ordinal); return text[start..end]; }
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
