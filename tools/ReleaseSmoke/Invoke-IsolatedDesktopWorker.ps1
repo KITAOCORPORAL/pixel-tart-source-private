@@ -39,7 +39,9 @@ if(Test-Path $acceptanceSettingsRoot){Remove-Item $acceptanceSettingsRoot -Recur
 New-Item -ItemType Directory -Force -Path $acceptanceSettingsRoot | Out-Null
 $completedAt = [DateTimeOffset]::UtcNow
 $completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.2.0|$($completedAt.ToString('O'))"
-$completionProof = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($completionValue)))
+$sha256 = [Security.Cryptography.SHA256]::Create()
+try { $completionProof = ([BitConverter]::ToString($sha256.ComputeHash([Text.Encoding]::UTF8.GetBytes($completionValue)))).Replace('-', '') }
+finally { $sha256.Dispose() }
 $acceptanceSettings = @{
     Appearance=@{ Theme=2; SidebarCollapsed=$false }
     PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress')
