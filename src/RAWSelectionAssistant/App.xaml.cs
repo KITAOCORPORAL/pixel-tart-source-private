@@ -108,7 +108,8 @@ public partial class App : Application
                 _compositionRoot.TaskCenter,
                 _compositionRoot.OperationBridge,
                 _compositionRoot.QuickToolsRepository,
-                _compositionRoot.MatchDecisionRepository);
+                _compositionRoot.MatchDecisionRepository,
+                new WorkCalendarViewModel(_compositionRoot.ShootBookingService, _compositionRoot.ProjectRepository));
 
             await _mainViewModel.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };

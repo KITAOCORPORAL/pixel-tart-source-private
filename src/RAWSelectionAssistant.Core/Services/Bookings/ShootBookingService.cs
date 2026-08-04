@@ -88,6 +88,9 @@ public sealed class ShootBookingService(
     public Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default) =>
         repository.SearchAllUnarchivedAsync(request with { PageSize = Math.Clamp(request.PageSize, 1, 100) }, cancellationToken);
 
+    public Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default) =>
+        repository.SearchArchivedAsync(request with { PageSize = Math.Clamp(request.PageSize, 1, 100) }, cancellationToken);
+
     public async Task<bool> ArchiveAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var archived = await repository.ArchiveAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);

@@ -108,7 +108,8 @@ public sealed class MainViewModel : ObservableObject
         TaskCenterViewModel taskCenter,
         TaskOperationBridge taskOperationBridge,
         IQuickToolsRepository quickToolsRepository,
-        IMatchDecisionRepository matchDecisionRepository)
+        IMatchDecisionRepository matchDecisionRepository,
+        WorkCalendarViewModel workCalendarPage)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -132,6 +133,7 @@ public sealed class MainViewModel : ObservableObject
         _taskOperationBridge = taskOperationBridge;
         _quickToolsRepository = quickToolsRepository;
         _matchDecisionRepository = matchDecisionRepository;
+        WorkCalendarPage = workCalendarPage;
         OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService, taskOperationBridge);
         CollagePage = new CollageViewModel(new CollageExportService(), dialogService, taskOperationBridge);
         _licenseService.LicenseChanged += (_, _) => OnLicenseChanged();
@@ -211,6 +213,7 @@ public sealed class MainViewModel : ObservableObject
     public AppSettings Settings { get; private set; } = new();
     public OrganizePhotosViewModel OrganizePhotosPage { get; }
     public CollageViewModel CollagePage { get; }
+    public WorkCalendarViewModel WorkCalendarPage { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -390,6 +393,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsLocalSplitPage));
             OnPropertyChanged(nameof(IsWorkflowPage));
             OnPropertyChanged(nameof(IsHistoryPage));
+            OnPropertyChanged(nameof(IsWorkCalendarPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
             OnPropertyChanged(nameof(IsHelpPage));
@@ -410,6 +414,7 @@ public sealed class MainViewModel : ObservableObject
     public bool IsLocalSplitPage => CurrentPage == "LocalSplit";
     public bool IsWorkflowPage => CurrentPage == "Workflow";
     public bool IsHistoryPage => CurrentPage == "History";
+    public bool IsWorkCalendarPage => CurrentPage == "WorkCalendar";
     public bool IsActivationPage => CurrentPage == "Activation";
     public bool IsSettingsPage => CurrentPage == "Settings";
     public bool IsHelpPage => CurrentPage == "Help";
@@ -1757,7 +1762,7 @@ public sealed class MainViewModel : ObservableObject
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "Activation" or "Settings" or "Help" or
+        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
         var targetPage = page switch
         {

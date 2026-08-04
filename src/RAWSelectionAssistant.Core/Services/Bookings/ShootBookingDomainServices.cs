@@ -92,7 +92,7 @@ public sealed class BookingConflictDetector(IShootBookingRepository repository) 
             var overlapStart = item.StartAtUtc > startAtUtc ? item.StartAtUtc : startAtUtc;
             var overlapEnd = item.EndAtUtc < endAtUtc ? item.EndAtUtc : endAtUtc;
             return new BookingConflict(item.Id, item.Title, item.ClientDisplayName, item.StartAtUtc, item.EndAtUtc,
-                item.Location, overlapEnd - overlapStart, item.AllowOverlap, !allowOverlap && !item.AllowOverlap);
+                item.Location, item.Status, overlapEnd - overlapStart, item.AllowOverlap, !allowOverlap && !item.AllowOverlap);
         }).ToArray();
     }
 }

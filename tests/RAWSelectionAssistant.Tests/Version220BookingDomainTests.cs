@@ -177,6 +177,31 @@ public sealed class Version220BookingDomainTests
     }
 
     [TestMethod]
+    public async Task ArchivedSearch_IsCursorPagedAtFiftyAndExcludesActiveBookings()
+    {
+        using var setup = await SetupAsync();
+        await SeedArchivedAsync(setup.Database, 55);
+        await setup.Service.SaveAsync(Draft(DateTimeOffset.UtcNow.AddDays(100), DateTimeOffset.UtcNow.AddDays(100).AddHours(1)) with { Title = "归档分页项目-未归档" });
+        var first = await setup.Service.SearchArchivedAsync(new(Keyword: "归档分页项目"));
+        Assert.HasCount(50, first.Items);
+        Assert.IsNotNull(first.NextCursor);
+        var second = await setup.Service.SearchArchivedAsync(new(Keyword: "归档分页项目", Cursor: first.NextCursor));
+        Assert.HasCount(5, second.Items);
+        Assert.IsNull(second.NextCursor);
+        Assert.IsTrue(first.Items.Concat(second.Items).All(item => item.IsArchived));
+    }
+
+    [TestMethod]
+    public async Task ConflictResult_IncludesExistingBookingStatusForUi()
+    {
+        using var setup = await SetupAsync();
+        var start = DateTimeOffset.UtcNow.AddDays(1);
+        await setup.Service.SaveAsync(Draft(start, start.AddHours(2)) with { Status = ShootBookingStatus.Confirmed });
+        var result = await setup.Service.SaveAsync(Draft(start.AddMinutes(30), start.AddHours(3)) with { Title = "状态冲突" });
+        Assert.AreEqual(ShootBookingStatus.Confirmed, result.Conflicts.Single().Status);
+    }
+
+    [TestMethod]
     public async Task SearchSupportsKeywordStatusAndTypeFilters()
     {
         using var setup = await SetupAsync();
@@ -223,6 +248,23 @@ public sealed class Version220BookingDomainTests
             command.Transaction = transaction;
             command.CommandText = "INSERT INTO ShootBookings(Id,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,ShootingType,CurrencyCode,CurrencyScale,AllowOverlap,ConflictOverride,CreatedAtUtc,UpdatedAtUtc,IsArchived) VALUES($id,$title,'客户',$start,$end,'UTC',0,'Tentative','Portrait','CNY',2,0,0,$created,$created,0);";
             command.Parameters.AddWithValue("$id", Guid.NewGuid().ToString("D")); command.Parameters.AddWithValue("$title", $"分页项目{index:D3}");
+            command.Parameters.AddWithValue("$start", start.ToString("O")); command.Parameters.AddWithValue("$end", start.AddHours(1).ToString("O")); command.Parameters.AddWithValue("$created", DateTimeOffset.UtcNow.ToString("O"));
+            await command.ExecuteNonQueryAsync();
+        }
+        await transaction.CommitAsync();
+    }
+
+    private static async Task SeedArchivedAsync(PixelTartDatabase database, int count)
+    {
+        await using var connection = await database.OpenConnectionAsync(write: true);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync();
+        for (var index = 0; index < count; index++)
+        {
+            var start = DateTimeOffset.UtcNow.AddDays(index);
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = "INSERT INTO ShootBookings(Id,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,ShootingType,CurrencyCode,CurrencyScale,AllowOverlap,ConflictOverride,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc) VALUES($id,$title,'客户',$start,$end,'UTC',0,'Tentative','Portrait','CNY',2,0,0,$created,$created,1,$created);";
+            command.Parameters.AddWithValue("$id", Guid.NewGuid().ToString("D")); command.Parameters.AddWithValue("$title", $"归档分页项目{index:D3}");
             command.Parameters.AddWithValue("$start", start.ToString("O")); command.Parameters.AddWithValue("$end", start.AddHours(1).ToString("O")); command.Parameters.AddWithValue("$created", DateTimeOffset.UtcNow.ToString("O"));
             await command.ExecuteNonQueryAsync();
         }
