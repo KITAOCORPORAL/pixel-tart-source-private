@@ -96,6 +96,20 @@ public sealed class Version220StageCDocumentUiArchitectureTests
         DoesNotContain(source, "Microsoft.Data.Sqlite", "SqliteConnection", "File.Copy", "File.Move", "File.Delete");
     }
 
+    [TestMethod] public void RelocationMetadataAndHashUpdateUsesOneParameterizedSqlStatement()
+    {
+        var contracts = Text("src/RAWSelectionAssistant.Core/Services/Bookings/BookingContracts.cs");
+        var workflow = Text("src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs");
+        var repository = Text("src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs");
+        Contains(contracts, "UpdateLocationAndHashAsync");
+        Contains(workflow, "repository.UpdateLocationAndHashAsync");
+        var method = Slice(repository, "public async Task UpdateLocationAndHashAsync", "public async Task SetMissingAsync");
+        Contains(method, "command.CommandText", "FilePath=$path", "NormalizedPath=$normalized", "FileSize=$size", "LastKnownModifiedAtUtc=$modified", "OptionalHash=$hash", "IsMissing=$missing", "LastVerifiedAtUtc=$verified");
+        foreach (var parameter in new[] { "$id", "$path", "$normalized", "$extension", "$size", "$modified", "$hash", "$missing", "$verified" })
+            Contains(method, $"AddWithValue(\"{parameter}\"");
+        DoesNotContain(method, "$\"UPDATE", "+ filePath", "+ normalizedPath", "+ optionalHash");
+    }
+
     [TestMethod] public void DocumentContentIsNeverParsedOrIndexed()
     {
         var source = Text("src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs") + Text("src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs");

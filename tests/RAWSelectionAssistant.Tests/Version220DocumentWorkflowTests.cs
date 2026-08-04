@@ -285,6 +285,53 @@ public sealed class Version220DocumentWorkflowTests
     }
 
     [TestMethod]
+    public async Task Relocate_AtomicallyPersistsPathMetadataHashAndVerificationState()
+    {
+        using var setup = await SetupAsync();
+        var original = setup.Temp.CreateFile("旧/原始策划.pdf", [1, 2, 3]);
+        var originalHash = await setup.Verification.ComputeSha256Async(original);
+        var document = Document(setup.BookingId, original, BookingDocumentLinkMode.ManagedCopy, originalHash) with
+        {
+            IsMissing = true,
+            MissingSinceAtUtc = DateTimeOffset.UtcNow.AddHours(-2),
+            LastVerifiedAtUtc = DateTimeOffset.UtcNow.AddHours(-1)
+        };
+        await setup.Documents.AddAsync(document);
+
+        var replacement = setup.Temp.CreateFile("新位置/客户 策划修订.pdf", [9, 8, 7, 6]);
+        var expectedModifiedUtc = DateTime.UtcNow.AddMinutes(-5);
+        File.SetLastWriteTimeUtc(replacement, expectedModifiedUtc);
+        var expectedHash = await setup.Verification.ComputeSha256Async(replacement);
+
+        var result = await setup.Workflow.RelocateAsync(document.Id, replacement, acceptHashMismatch: true);
+        var persisted = await setup.Documents.GetAsync(document.Id);
+
+        Assert.AreEqual(BookingDocumentRelocationStatus.Relocated, result.Status);
+        Assert.IsNotNull(persisted);
+        Assert.AreEqual(Path.GetFullPath(replacement), persisted.FilePath);
+        Assert.AreEqual(Path.GetFullPath(replacement).ToUpperInvariant(), persisted.NormalizedPath);
+        Assert.AreEqual(4L, persisted.FileSize);
+        Assert.IsNotNull(persisted.LastKnownModifiedAtUtc);
+        Assert.IsLessThan(1d, Math.Abs((persisted.LastKnownModifiedAtUtc.Value.UtcDateTime - File.GetLastWriteTimeUtc(replacement)).TotalSeconds));
+        Assert.AreEqual(expectedHash, persisted.OptionalHash);
+        Assert.IsFalse(persisted.IsMissing);
+        Assert.IsNull(persisted.MissingSinceAtUtc);
+        Assert.IsNotNull(persisted.LastVerifiedAtUtc);
+        Assert.IsGreaterThan(document.LastVerifiedAtUtc!.Value, persisted.LastVerifiedAtUtc.Value);
+        Assert.AreEqual(result.Document!.LastVerifiedAtUtc, persisted.LastVerifiedAtUtc);
+    }
+
+    [TestMethod]
+    public async Task DocumentProjectIdAlwaysComesFromTheBooking()
+    {
+        using var setup = await SetupAsync();
+        var path = setup.Temp.CreateFile("资料/策划.pdf", [1]);
+        var unrelatedProjectId = Guid.NewGuid();
+        var document = (await setup.Workflow.AddReferencesAsync(new(setup.BookingId, unrelatedProjectId, BookingDocumentType.PhotographyPlan, [path]))).Items.Single().Document!;
+        Assert.IsNull(document.ProjectId);
+    }
+
+    [TestMethod]
     public async Task Relocate_DuplicateTargetLeavesBothAssociationsUnchanged()
     {
         using var setup = await SetupAsync();
