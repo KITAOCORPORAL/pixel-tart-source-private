@@ -107,12 +107,18 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
     }
 
     public async Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default)
+        => await SearchAsync(request, isArchived: false, cancellationToken).ConfigureAwait(false);
+
+    public async Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default)
+        => await SearchAsync(request, isArchived: true, cancellationToken).ConfigureAwait(false);
+
+    private async Task<ShootBookingPage> SearchAsync(ShootBookingSearchRequest request, bool isArchived, CancellationToken cancellationToken)
     {
         var pageSize = Math.Clamp(request.PageSize, 1, 100);
         var result = new List<ShootBookingSummary>(pageSize + 1);
         await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
-        var sql = new StringBuilder(SummarySelect).Append(" WHERE IsArchived=0");
+        var sql = new StringBuilder(SummarySelect).Append(isArchived ? " WHERE IsArchived=1" : " WHERE IsArchived=0");
         AddFilters(sql, command, request.Status, request.ShootingType, request.Keyword);
         if (request.Cursor is not null)
         {

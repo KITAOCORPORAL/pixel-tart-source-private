@@ -9,6 +9,7 @@ public interface IShootBookingRepository
     Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ShootBookingSummary>> QueryCurrentViewAsync(ShootBookingQuery query, CancellationToken cancellationToken = default);
     Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);
+    Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ShootBookingSummary>> FindOverlappingAsync(DateTimeOffset startAtUtc, DateTimeOffset endAtUtc, Guid? excludeBookingId = null, CancellationToken cancellationToken = default);
     Task<bool> ArchiveAsync(Guid id, DateTimeOffset archivedAtUtc, CancellationToken cancellationToken = default);
     Task<bool> RestoreAsync(Guid id, DateTimeOffset restoredAtUtc, CancellationToken cancellationToken = default);
@@ -21,6 +22,7 @@ public interface IShootBookingService
     Task<IReadOnlyList<ShootRequirementItem>> GetRequirementsAsync(Guid bookingId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ShootBookingSummary>> QueryCurrentViewAsync(ShootBookingQuery query, CancellationToken cancellationToken = default);
     Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);
+    Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);
     Task<bool> ArchiveAsync(Guid id, CancellationToken cancellationToken = default);
     Task<bool> RestoreAsync(Guid id, CancellationToken cancellationToken = default);
 }

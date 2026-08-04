@@ -1,0 +1,32 @@
+<UserControl x:Class="RAWSelectionAssistant.Views.ShootBookingDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.Name="拍摄排期详情" AutomationProperties.HelpText="金额默认遮罩，归档不会删除任何电脑文件">
+    <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
+    <Border Style="{StaticResource PanelBorder}" Padding="0">
+        <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+            <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="14"><Grid><StackPanel><TextBlock Text="{Binding Title}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding BookingStatusText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel><Button Content="×" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding CloseCommand}" AutomationProperties.Name="关闭排期详情" /></Grid></Border>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel Margin="14">
+                <TextBlock Text="客户" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ClientDisplayName}" Margin="0,2,0,10" />
+                <TextBlock Text="时间" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding TimeText}" TextWrapping="Wrap" Margin="0,2,0,2" /><TextBlock Text="{Binding TimeZoneText}" Style="{StaticResource CaptionText}" Margin="0,0,0,10" />
+                <TextBlock Text="地点 / 类型" Style="{StaticResource CaptionText}" /><TextBlock Margin="0,2,0,10"><Run Text="{Binding LocationText, Mode=OneWay}" /><Run Text=" · " /><Run Text="{Binding ShootingTypeText, Mode=OneWay}" /></TextBlock>
+                <Separator />
+                <TextBlock Text="具体拍摄要求" FontWeight="SemiBold" Margin="0,8,0,3" /><TextBlock Text="{Binding ShootingRequirementsText}" TextWrapping="Wrap" />
+                <TextBlock Text="准备说明" FontWeight="SemiBold" Margin="0,12,0,3" /><TextBlock Text="{Binding PreparationNotesText}" TextWrapping="Wrap" />
+                <TextBlock Text="准备清单" FontWeight="SemiBold" Margin="0,12,0,3" />
+                <ItemsControl ItemsSource="{Binding Requirements}"><ItemsControl.ItemTemplate><DataTemplate><Grid Margin="0,2"><Grid.ColumnDefinitions><ColumnDefinition Width="26" /><ColumnDefinition Width="*" /><ColumnDefinition Width="70" /></Grid.ColumnDefinitions><TextBlock Text="{Binding IsCompleted, StringFormat={}{0}}" /><TextBlock Grid.Column="1" Text="{Binding ItemText}" TextWrapping="Wrap" /><TextBlock Grid.Column="2" Text="{Binding Priority}" Style="{StaticResource CaptionText}" /></Grid></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                <Separator Margin="0,12" />
+                <Grid><TextBlock Text="本地金额记录" FontWeight="SemiBold" /><Button Content="{Binding AmountVisibilityText}" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding ToggleAmountsCommand}" AutomationProperties.Name="切换金额显示" /></Grid>
+                <Grid Margin="0,8,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="拍摄总金额" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding TotalAmountText}" /></Grid>
+                <Grid Margin="0,5,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="定金" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding DepositAmountText}" /></Grid>
+                <Grid Margin="0,5,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="已收金额" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding PaidAmountText}" /></Grid>
+                <Grid Margin="0,5,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="{Binding BalanceLabel}" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding BalanceText}" /></Grid>
+                <Border Style="{StaticResource WarningCard}" Margin="0,8,0,0" Visibility="{Binding HasMoneyWarning, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="{Binding MoneyWarningText}" TextWrapping="Wrap" /></Border>
+                <TextBlock Text="内部备注" FontWeight="SemiBold" Margin="0,14,0,3" /><TextBlock Text="{Binding NotesText}" TextWrapping="Wrap" />
+                <Border Style="{StaticResource InfoCard}" Margin="0,12,0,0" Visibility="{Binding IsArchived, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="此排期已归档，只提供查看和恢复；没有永久删除入口。" TextWrapping="Wrap" /></Border>
+                <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
+            </StackPanel></ScrollViewer>
+            <Border Grid.Row="2" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" Padding="12"><WrapPanel HorizontalAlignment="Right"><Button Content="归档" Style="{StaticResource SecondaryButton}" Command="{Binding ArchiveCommand}" AutomationProperties.Name="归档排期" AutomationProperties.HelpText="归档后隐藏常规日历、关闭提醒并保留全部关联数据和电脑文件" /><Button Content="编辑" Style="{StaticResource PrimaryButton}" Margin="7,0,0,0" Command="{Binding EditCommand}" AutomationProperties.Name="编辑排期" /></WrapPanel></Border>
+        </Grid>
+    </Border>
+</UserControl>

@@ -165,6 +165,7 @@ public sealed record BookingConflict(
     DateTimeOffset StartAtUtc,
     DateTimeOffset EndAtUtc,
     string? Location,
+    ShootBookingStatus Status,
     TimeSpan Overlap,
     bool ExistingAllowsOverlap,
     bool IsBlocking);
