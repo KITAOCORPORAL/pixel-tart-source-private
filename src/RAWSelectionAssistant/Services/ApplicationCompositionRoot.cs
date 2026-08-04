@@ -47,6 +47,10 @@ public sealed class ApplicationCompositionRoot
         BookingDocumentWorkflowService = new BookingDocumentWorkflowService(BookingDocumentRepository, ShootBookingService, ProjectRepository,
             FileOperationPlanner, FileOperationExecutor, FileVerificationService, UndoJournalService, OperationBridge, AuditLog);
         ReminderRepository = new SqliteReminderRepository(database);
+        BookingReminderService = new BookingReminderService(ReminderRepository, ShootBookingService, auditLog);
+        BookingReminderNotificationService = new BookingReminderNotificationService(notificationCenter);
+        BookingReminderScheduler = new BookingReminderScheduler(ReminderRepository, ShootBookingService, BookingReminderNotificationService, auditLog);
+        WorkbenchScheduleService = new WorkbenchScheduleService(ShootBookingService, BookingDocumentRepository, ReminderRepository, projectRepository: ProjectRepository);
     }
 
     public PixelTartDatabase Database { get; }
@@ -72,6 +76,10 @@ public sealed class ApplicationCompositionRoot
     public IBookingDocumentService BookingDocumentService { get; }
     public IBookingDocumentWorkflowService BookingDocumentWorkflowService { get; }
     public IReminderRepository ReminderRepository { get; }
+    public IBookingReminderService BookingReminderService { get; }
+    public IBookingReminderNotificationService BookingReminderNotificationService { get; }
+    public IBookingReminderScheduler BookingReminderScheduler { get; }
+    public IWorkbenchScheduleService WorkbenchScheduleService { get; }
 
     public static async Task<ApplicationCompositionRoot> CreateAsync(CancellationToken cancellationToken = default)
     {

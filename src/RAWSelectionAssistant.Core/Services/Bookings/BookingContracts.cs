@@ -27,6 +27,11 @@ public interface IShootBookingService
     Task<bool> RestoreAsync(Guid id, CancellationToken cancellationToken = default);
 }
 
+public interface IBookingChangeNotifier
+{
+    event EventHandler<Guid>? BookingChanged;
+}
+
 public interface IBookingConflictDetector
 {
     Task<IReadOnlyList<BookingConflict>> DetectAsync(Guid? bookingId, DateTimeOffset startAtUtc, DateTimeOffset endAtUtc, bool allowOverlap, CancellationToken cancellationToken = default);

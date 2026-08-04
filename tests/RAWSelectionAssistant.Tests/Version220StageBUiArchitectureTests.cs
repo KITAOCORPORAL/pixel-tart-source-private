@@ -107,7 +107,7 @@ public sealed class Version220StageBUiArchitectureTests
     public void StageBDoesNotAddForbiddenFeatureSurfaces()
     {
         var newSurface = CalendarSources() + string.Join("\n", Directory.GetFiles(Path.Combine(Root, "src", "RAWSelectionAssistant", "Views"), "*Calendar*.xaml").Select(File.ReadAllText));
-        foreach (var forbidden in new[] { "ProjectRelationships", "IProjectRelationshipService", "BookingDocumentsPanel", "ReminderScheduler", "今日拍摄", "未来7天", "项目模板", "状态机", "本地选片", "精修回匹配", "联系表", "交付包", "文件夹监听", "在线支付", "云同步" }) DoesNotContain(newSurface, forbidden);
+        foreach (var forbidden in new[] { "ProjectRelationships", "IProjectRelationshipService", "项目模板", "状态机", "本地选片", "精修回匹配", "联系表", "交付包", "文件夹监听", "在线支付", "云同步" }) DoesNotContain(newSurface, forbidden);
     }
 
     [TestMethod]

@@ -1,0 +1,55 @@
+<UserControl x:Class="RAWSelectionAssistant.Views.BookingRemindersPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.Name="排期提醒"
+             AutomationProperties.HelpText="提醒默认关闭，仅在像素蛋挞运行期间触发。">
+    <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
+    <Border Style="{StaticResource InfoCard}" Padding="12">
+        <StackPanel>
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="排期提醒" FontWeight="SemiBold" />
+                    <TextBlock Text="仅本机、仅软件运行期间提醒；新提醒默认关闭。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" />
+                </StackPanel>
+                <Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RefreshCommand}" AutomationProperties.Name="刷新排期提醒" />
+            </Grid>
+            <Border Margin="0,10,0,0" Visibility="{Binding CanEdit, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel>
+                    <WrapPanel>
+                        <ComboBox Width="150" ItemsSource="{Binding Presets}" SelectedItem="{Binding SelectedPreset}" DisplayMemberPath="Label" AutomationProperties.Name="提醒时间" />
+                        <DatePicker Width="132" Margin="8,0,0,0" SelectedDate="{Binding CustomDate}" Visibility="{Binding IsCustomPreset, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="自定义提醒日期" />
+                        <TextBox Width="72" Margin="8,0,0,0" Text="{Binding CustomTimeText, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding IsCustomPreset, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="自定义提醒时间" />
+                    </WrapPanel>
+                    <WrapPanel Margin="0,8,0,0">
+                        <CheckBox Content="保存后立即启用" IsChecked="{Binding NewReminderEnabled}" VerticalAlignment="Center" AutomationProperties.Name="保存后立即启用提醒" />
+                        <Button Content="{Binding SaveButtonText}" Style="{StaticResource SecondaryButton}" Margin="12,0,0,0" Command="{Binding AddCommand}" AutomationProperties.Name="保存排期提醒" />
+                        <Button Content="取消编辑" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding CancelEditCommand}" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="取消编辑提醒" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+            <ItemsControl ItemsSource="{Binding Items}" Margin="0,10,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" Padding="0,9">
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock><Run Text="{Binding TypeText}" FontWeight="SemiBold" /><Run Text="  ·  " /><Run Text="{Binding StatusText}" /></TextBlock>
+                                    <TextBlock Text="{Binding PlannedTimeText}" Margin="0,3,0,0" />
+                                    <TextBlock Text="{Binding RelativeTimeText}" Style="{StaticResource CaptionText}" />
+                                    <TextBlock Text="{Binding LastTriggeredText, StringFormat=上次触发：{0}}" Style="{StaticResource CaptionText}" />
+                                </StackPanel>
+                                <WrapPanel Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Button Content="编辑" Style="{StaticResource GhostButton}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" AutomationProperties.Name="编辑提醒" />
+                                    <Button Content="启用/关闭" Style="{StaticResource GhostButton}" IsEnabled="{Binding CanToggle}" Command="{Binding DataContext.ToggleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" AutomationProperties.Name="切换提醒状态" />
+                                    <Button Content="移除" Style="{StaticResource GhostButton}" Margin="5,0,0,0" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" AutomationProperties.Name="移除提醒记录" />
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Margin="0,8,0,0" AutomationProperties.LiveSetting="Polite" />
+        </StackPanel>
+    </Border>
+</UserControl>
