@@ -37,7 +37,20 @@ $resolvedLocalAppData = [IO.Path]::GetFullPath($context.LocalAppData).TrimEnd([I
 if (-not $resolvedAcceptanceRoot.StartsWith($resolvedLocalAppData + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Acceptance settings escaped the isolated LocalAppData root.' }
 if(Test-Path $acceptanceSettingsRoot){Remove-Item $acceptanceSettingsRoot -Recurse -Force}
 New-Item -ItemType Directory -Force -Path $acceptanceSettingsRoot | Out-Null
-$acceptanceSettings = @{ OnboardingLegacyUser=$true; OnboardingCompleted=$false; OnboardingUpgradeOfferShown=$true; Theme='Dark'; SidebarCollapsed=$false; PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress') } | ConvertTo-Json -Depth 5
+$completedAt = [DateTimeOffset]::UtcNow
+$completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.2.0|$($completedAt.ToString('O'))"
+$completionProof = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($completionValue)))
+$acceptanceSettings = @{
+    Appearance=@{ Theme=2; SidebarCollapsed=$false }
+    PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress')
+    onboardingCompleted=$true
+    onboardingVersion='2.2.0'
+    onboardingCompletedAt=$completedAt
+    onboardingCurrentStep=22
+    onboardingLegacyUser=$false
+    onboardingUpgradeOfferShown=$true
+    onboardingCompletionProof=$completionProof
+} | ConvertTo-Json -Depth 5
 $acceptanceSettings | Set-Content (Join-Path $acceptanceSettingsRoot 'settings.json') -Encoding UTF8
 $env:PIXEL_TART_ACCEPTANCE_RUN_ID = $context.RunId
 $evidence = $context.EvidenceRoot
