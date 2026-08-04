@@ -122,7 +122,16 @@ function Find-ChildWindow([int]$processId,[int]$excludedHandle=0,[string]$name='
 }
 function Invoke-Control($element) {
     if($null -eq $element){throw 'Missing UI Automation control.'}; $p=$null
-    if($element.TryGetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern,[ref]$p)){$p.Invoke();return}
+    $wasEnabled=$element.Current.IsEnabled
+    if(-not $wasEnabled){throw "UI Automation control is disabled: $($element.Current.Name)"}
+    if($element.TryGetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern,[ref]$p)){
+        try{$p.Invoke();return}
+        catch{
+            $invocationError=$_.Exception
+            if($wasEnabled -and ($invocationError -is [System.Windows.Automation.ElementNotEnabledException] -or $invocationError.InnerException -is [System.Windows.Automation.ElementNotEnabledException])){return}
+            throw
+        }
+    }
     if($element.TryGetCurrentPattern([System.Windows.Automation.SelectionItemPattern]::Pattern,[ref]$p)){$p.Select();return}
     throw "Control is not invokable: $($element.Current.Name)"
 }
