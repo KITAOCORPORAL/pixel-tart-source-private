@@ -1,0 +1,67 @@
+<UserControl x:Class="RAWSelectionAssistant.Views.WorkbenchScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
+             AutomationProperties.Name="近期拍摄">
+    <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
+    <Grid>
+        <Border Style="{StaticResource DashboardPanelCard}">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{Binding TodayCountText}" Style="{StaticResource GhostButton}" FontWeight="SemiBold" Command="{Binding ShowTodayCommand}" AutomationProperties.Name="查看今日拍摄" />
+                        <Button Content="{Binding FutureCountText}" Style="{StaticResource GhostButton}" Margin="8,0,0,0" Command="{Binding ShowFutureCommand}" AutomationProperties.Name="查看未来七天拍摄" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="查看全部" Style="{StaticResource GhostButton}" Command="{Binding OpenCalendarCommand}" AutomationProperties.Name="打开工作日历查看全部排期" />
+                        <Button Content="刷新" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding RefreshCommand}" AutomationProperties.Name="刷新近期拍摄" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,8,0,0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding ShowToday, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel>
+                        <TextBlock Text="{Binding NextTodayText}" FontWeight="SemiBold" Margin="4,0,4,4" />
+                        <ItemsControl ItemsSource="{Binding Today}">
+                            <ItemsControl.ItemTemplate><DataTemplate>
+                                <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="10,7"
+                                        Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"
+                                        AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="从工作台打开拍摄排期详情">
+                                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="76" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding TimeText}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                        <StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding MetaText}" Style="{StaticResource CaptionText}" /></StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding StatusText}" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                    </Grid>
+                                </Button>
+                            </DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl></StackPanel>
+                    </ScrollViewer>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ShowTodayEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="今天暂无拍摄安排" Style="{StaticResource CaptionText}" HorizontalAlignment="Center" />
+                        <Button Content="打开工作日历" Style="{StaticResource GhostButton}" Margin="0,6,0,0" Command="{Binding OpenCalendarCommand}" AutomationProperties.Name="从空状态打开工作日历" />
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding ShowFuture, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <ItemsControl ItemsSource="{Binding Future}">
+                            <ItemsControl.ItemTemplate><DataTemplate>
+                                <StackPanel Margin="0,3,0,8">
+                                    <TextBlock Text="{Binding DateText}" FontWeight="SemiBold" Margin="3,0,0,3" />
+                                    <ItemsControl ItemsSource="{Binding Items}"><ItemsControl.ItemTemplate><DataTemplate>
+                                        <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="10,7"
+                                                Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
+                                                AutomationProperties.Name="{Binding Title}">
+                                            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="76" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding TimeText}" FontWeight="SemiBold" /><StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding MetaText}" Style="{StaticResource CaptionText}" /></StackPanel><TextBlock Grid.Column="2" Text="{Binding DistanceText}" Margin="8,0,0,0" />
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                                </StackPanel>
+                            </DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <TextBlock Text="未来7天暂无拍摄安排" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionText}" Visibility="{Binding ShowFutureEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False" />
+                    <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource DangerBrush}" VerticalAlignment="Bottom" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

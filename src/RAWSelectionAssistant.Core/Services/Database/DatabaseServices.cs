@@ -82,7 +82,7 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
     {
         _database = database;
         _backupService = backupService;
-        _migrations = (migrations ?? [new InitialSchemaMigration()]).OrderBy(x => x.Version).ToArray();
+        _migrations = (migrations ?? [new InitialSchemaMigration(), new CalendarSchemaMigration()]).OrderBy(x => x.Version).ToArray();
         if (_migrations.Select(x => x.Version).Distinct().Count() != _migrations.Count ||
             _migrations.Select(x => x.Version).Where((version, index) => version != index + 1).Any())
             throw new InvalidOperationException("Database migrations must be unique, contiguous and start at version 1.");
@@ -121,6 +121,7 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
                 try
                 {
                     await migration.ApplyAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
+                    await ValidateMigrationAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
                     await using var record = connection.CreateCommand();
                     record.Transaction = transaction;
                     record.CommandText = "INSERT INTO SchemaInfo(Version, AppliedAt, ApplicationVersion, MigrationName) VALUES($version,$at,$app,$name);";
@@ -158,5 +159,24 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT COALESCE(MAX(Version), 0) FROM SchemaInfo;";
         return Convert.ToInt32(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+    }
+
+    private static async Task ValidateMigrationAsync(SqliteConnection connection, SqliteTransaction transaction, CancellationToken cancellationToken)
+    {
+        await using (var foreignKeys = connection.CreateCommand())
+        {
+            foreignKeys.Transaction = transaction;
+            foreignKeys.CommandText = "PRAGMA foreign_key_check;";
+            await using var reader = await foreignKeys.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            if (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                throw new InvalidOperationException("Database migration produced a foreign-key violation.");
+        }
+
+        await using var integrity = connection.CreateCommand();
+        integrity.Transaction = transaction;
+        integrity.CommandText = "PRAGMA quick_check;";
+        var result = Convert.ToString(await integrity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+        if (!string.Equals(result, "ok", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("Database migration integrity verification failed.");
     }
 }

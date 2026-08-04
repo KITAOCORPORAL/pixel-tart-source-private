@@ -35,13 +35,13 @@ public sealed class Version210DatabaseTests
     }
 
     [TestMethod] public async Task InitialMigration_CreatesDatabaseAtRequestedPath() { using var temp = new TempDirectory(); var (db, migrator) = Create(temp); var result = await migrator.MigrateAsync(); Assert.IsTrue(result.Success); Assert.IsTrue(File.Exists(db.DatabasePath)); }
-    [TestMethod] public async Task InitialMigration_RecordsSchemaVersionOne() { using var temp = new TempDirectory(); var (db, migrator) = Create(temp); await migrator.MigrateAsync(); await using var connection = await db.OpenConnectionAsync(); await using var command=connection.CreateCommand();command.CommandText="SELECT MAX(Version) FROM SchemaInfo;";Assert.AreEqual(1L,(long)(await command.ExecuteScalarAsync())!); }
-    [TestMethod] public async Task RepeatedMigration_DoesNotRunTwice() { using var temp = new TempDirectory(); var (_, migrator) = Create(temp); await migrator.MigrateAsync(); var second=await migrator.MigrateAsync(); Assert.IsTrue(second.Success); Assert.AreEqual(0,second.AppliedMigrations.Count);Assert.AreEqual(1,second.CurrentVersion); }
+    [TestMethod] public async Task InitialMigration_RecordsSchemaVersionOne() { using var temp = new TempDirectory(); var db=new PixelTartDatabase(temp.Combine("data","pixel-tart.db"));var migrator=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration()]); await migrator.MigrateAsync(); await using var connection = await db.OpenConnectionAsync(); await using var command=connection.CreateCommand();command.CommandText="SELECT MAX(Version) FROM SchemaInfo;";Assert.AreEqual(1L,(long)(await command.ExecuteScalarAsync())!); }
+    [TestMethod] public async Task RepeatedMigration_DoesNotRunTwice() { using var temp = new TempDirectory(); var (_, migrator) = Create(temp); await migrator.MigrateAsync(); var second=await migrator.MigrateAsync(); Assert.IsTrue(second.Success); Assert.AreEqual(0,second.AppliedMigrations.Count);Assert.AreEqual(2,second.CurrentVersion); }
 
     [TestMethod]
     public async Task MigrationBeforeUpgrade_CreatesBackup()
     {
-        using var temp = new TempDirectory(); var (db, initial)=Create(temp); await initial.MigrateAsync();
+        using var temp = new TempDirectory(); var db=new PixelTartDatabase(temp.Combine("data","pixel-tart.db")); var initial=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration()]); await initial.MigrateAsync();
         var backup=new DatabaseBackupService(db,temp.Combine("backups")); var migrator=new DatabaseMigrator(db,backup,[new InitialSchemaMigration(),new AddProbeMigration()]);
         var result=await migrator.MigrateAsync();Assert.IsTrue(result.Success);Assert.IsNotNull(result.BackupPath);Assert.IsTrue(File.Exists(result.BackupPath));Assert.AreEqual(2,result.CurrentVersion);
     }
@@ -49,7 +49,7 @@ public sealed class Version210DatabaseTests
     [TestMethod]
     public async Task FailedMigration_RollsBackAndKeepsOriginal()
     {
-        using var temp=new TempDirectory();var(db,initial)=Create(temp);await initial.MigrateAsync();var migrator=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration(),new FailingMigration()]);var result=await migrator.MigrateAsync();Assert.IsFalse(result.Success);Assert.IsTrue(File.Exists(db.DatabasePath));
+        using var temp=new TempDirectory();var db=new PixelTartDatabase(temp.Combine("data","pixel-tart.db"));var initial=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration()]);await initial.MigrateAsync();var migrator=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration(),new FailingMigration()]);var result=await migrator.MigrateAsync();Assert.IsFalse(result.Success);Assert.IsTrue(File.Exists(db.DatabasePath));
         var check=new PixelTartDatabase(db.DatabasePath);await using var connection=await check.OpenConnectionAsync();await using var command=connection.CreateCommand();command.CommandText="SELECT count(*) FROM sqlite_master WHERE type='table' AND name='ShouldRollback';";Assert.AreEqual(0L,(long)(await command.ExecuteScalarAsync())!);
     }
 

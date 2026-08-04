@@ -1,0 +1,18 @@
+<UserControl x:Class="RAWSelectionAssistant.Views.ShootRequirementsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.Name="拍摄准备清单">
+    <StackPanel>
+        <Grid><TextBlock Text="准备清单" FontWeight="SemiBold" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><TextBlock Text="{Binding CompletionText}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="0,0,8,0" /><Button Content="＋ 添加" Style="{StaticResource SecondaryButton}" Command="{Binding AddCommand}" AutomationProperties.Name="添加准备项" /></StackPanel></Grid>
+        <ItemsControl ItemsSource="{Binding Items}" Margin="0,8,0,0"><ItemsControl.ItemTemplate><DataTemplate>
+            <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="105" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding IsCompleted}" VerticalAlignment="Center" AutomationProperties.Name="完成准备项" />
+                <TextBox Grid.Column="1" Text="{Binding ItemText, UpdateSourceTrigger=PropertyChanged}" Margin="6,0" AutomationProperties.Name="准备项内容" />
+                <ComboBox Grid.Column="2" ItemsSource="{Binding DataContext.PriorityOptions, RelativeSource={RelativeSource AncestorType=ItemsControl}}" SelectedItem="{Binding Priority}" AutomationProperties.Name="准备项优先级" />
+                <Button Grid.Column="3" Content="↑" Style="{StaticResource GhostButton}" Command="{Binding DataContext.MoveUpCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="准备项上移" />
+                <Button Grid.Column="4" Content="↓" Style="{StaticResource GhostButton}" Command="{Binding DataContext.MoveDownCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="准备项下移" />
+                <Button Grid.Column="5" Content="移除" Style="{StaticResource GhostButton}" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="移除准备项" />
+            </Grid>
+        </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+    </StackPanel>
+</UserControl>

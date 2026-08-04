@@ -222,6 +222,44 @@ public sealed class UndoJournalService(IUndoJournalRepository repository, IFileV
         return new(entries.Count, succeeded, failed, 0, 0, attention, bytes, 0);
     }
 
+    public async Task<TaskResultSummary> UndoFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default)
+    {
+        var fullDestination = Path.GetFullPath(destinationPath);
+        var entries = await repository.ListAsync(taskId, cancellationToken).ConfigureAwait(false);
+        var entry = entries.FirstOrDefault(item => item.State == UndoJournalState.Pending && item.ReverseOperation == FileOperationType.DeleteCreatedOutput &&
+            string.Equals(Path.GetFullPath(item.DestinationPath), fullDestination, StringComparison.OrdinalIgnoreCase));
+        if (entry is null) return new(1, 0, 0, 0, 0, 1, 0, 0);
+        try
+        {
+            if (!File.Exists(fullDestination) || entry.ExpectedCurrentSize is long size && new FileInfo(fullDestination).Length != size ||
+                !string.IsNullOrWhiteSpace(entry.ExpectedCurrentHash) && !string.Equals(entry.ExpectedCurrentHash, await verification.ComputeSha256Async(fullDestination, cancellationToken).ConfigureAwait(false), StringComparison.OrdinalIgnoreCase))
+            {
+                await repository.UpdateStateAsync(entry.Id, UndoJournalState.Rejected, null, cancellationToken).ConfigureAwait(false);
+                return new(1, 0, 0, 0, 0, 1, 0, 0);
+            }
+            var bytes = new FileInfo(fullDestination).Length;
+            File.Delete(fullDestination);
+            await repository.UpdateStateAsync(entry.Id, UndoJournalState.Applied, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+            return new(1, 1, 0, 0, 0, 0, bytes, 0);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await repository.UpdateStateAsync(entry.Id, UndoJournalState.Failed, null, cancellationToken).ConfigureAwait(false);
+            return new(1, 0, 1, 0, 0, 0, 0, 0);
+        }
+    }
+
+    public async Task<bool> AbandonFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default)
+    {
+        var fullDestination = Path.GetFullPath(destinationPath);
+        var entries = await repository.ListAsync(taskId, cancellationToken).ConfigureAwait(false);
+        var entry = entries.FirstOrDefault(item => item.State == UndoJournalState.Pending && item.ReverseOperation == FileOperationType.DeleteCreatedOutput &&
+            string.Equals(Path.GetFullPath(item.DestinationPath), fullDestination, StringComparison.OrdinalIgnoreCase));
+        if (entry is null) return false;
+        await repository.UpdateStateAsync(entry.Id, UndoJournalState.Rejected, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        return true;
+    }
+
     private static async Task CopyCreateNewAsync(string sourcePath, string destinationPath, CancellationToken cancellationToken)
     {
         await using var source = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read, 131072, FileOptions.Asynchronous | FileOptions.SequentialScan);

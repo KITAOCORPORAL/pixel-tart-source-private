@@ -5,20 +5,20 @@ public static class AppDataPaths
     private static readonly string ProcessName = Path.GetFileNameWithoutExtension(Environment.ProcessPath ?? string.Empty);
     private static readonly bool IsAcceptanceBuild = ProcessName.EndsWith(".Acceptance", StringComparison.OrdinalIgnoreCase);
     private static readonly bool IsUiReviewBuild = ProcessName.EndsWith(".UiReview", StringComparison.OrdinalIgnoreCase);
+    private static readonly string? AcceptanceRootOverride = IsAcceptanceBuild
+        ? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")
+        : null;
 
-    public static string Root { get; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        IsUiReviewBuild ? "KitaoPhotoSelector.UiReview" : IsAcceptanceBuild ? "KitaoPhotoSelector.Acceptance" : "KitaoPhotoSelector");
+    public static string Root { get; } = ResolveRoot();
 
-    public static string LegacyRoot { get; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        IsUiReviewBuild ? "RAWSelectionAssistant.UiReview" : IsAcceptanceBuild ? "RAWSelectionAssistant.Acceptance" : "RAWSelectionAssistant");
+    public static string LegacyRoot { get; } = ResolveLegacyRoot();
 
     public static string SettingsFile => Path.Combine(Root, "settings.json");
     public static string IndexDirectory => Path.Combine(Root, "Indexes");
     public static string IndexFile => Path.Combine(IndexDirectory, "raw-index.json");
     public static string LogDirectory => Path.Combine(Root, "Logs");
     public static string CacheDirectory => Path.Combine(Root, "Cache");
+    public static string WeatherCacheDirectory => Path.Combine(CacheDirectory, "Weather");
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
     public static string ProjectDirectory => Path.Combine(Root, "Projects");
@@ -26,6 +26,24 @@ public static class AppDataPaths
     public static string DatabaseFile => Path.Combine(DataDirectory, "pixel-tart.db");
     public static string DatabaseBackupDirectory => Path.Combine(Root, "Backups", "Database");
     public static string MigrationBackupDirectory => Path.Combine(Root, "Backups", "Migration");
+
+    private static string ResolveRoot()
+    {
+        if (!string.IsNullOrWhiteSpace(AcceptanceRootOverride) && Path.IsPathFullyQualified(AcceptanceRootOverride))
+            return Path.GetFullPath(AcceptanceRootOverride);
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            IsUiReviewBuild ? "KitaoPhotoSelector.UiReview" : IsAcceptanceBuild ? "KitaoPhotoSelector.Acceptance" : "KitaoPhotoSelector");
+    }
+
+    private static string ResolveLegacyRoot()
+    {
+        if (!string.IsNullOrWhiteSpace(AcceptanceRootOverride) && Path.IsPathFullyQualified(AcceptanceRootOverride))
+            return Path.Combine(Path.GetDirectoryName(Path.GetFullPath(AcceptanceRootOverride))!, "RAWSelectionAssistant.Acceptance");
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            IsUiReviewBuild ? "RAWSelectionAssistant.UiReview" : IsAcceptanceBuild ? "RAWSelectionAssistant.Acceptance" : "RAWSelectionAssistant");
+    }
 
     public static void EnsureCreated()
     {
