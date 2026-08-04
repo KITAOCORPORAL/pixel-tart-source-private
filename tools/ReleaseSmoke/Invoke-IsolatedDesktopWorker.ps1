@@ -55,6 +55,7 @@ $acceptanceSettings = @{
     onboardingCompletionProof=$completionProof
 } | ConvertTo-Json -Depth 5
 $acceptanceSettings | Set-Content (Join-Path $acceptanceSettingsRoot 'settings.json') -Encoding UTF8
+$env:PIXEL_TART_ACCEPTANCE_ROOT = $acceptanceSettingsRoot
 $env:PIXEL_TART_ACCEPTANCE_RUN_ID = $context.RunId
 $evidence = $context.EvidenceRoot
 function Decode([string]$value) { [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($value)) }
