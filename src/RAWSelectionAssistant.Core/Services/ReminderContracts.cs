@@ -14,6 +14,9 @@ public interface IReminderRepository
     Task SaveAsync(ReminderDefinition reminder, CancellationToken cancellationToken = default);
     Task<ReminderDefinition?> GetAsync(Guid id, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ReminderDefinition>> ListAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<ReminderDefinition>> ListByBookingAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<ReminderDefinition>> ListDueAsync(DateTimeOffset fromUtc, DateTimeOffset untilUtc, int limit = 100, CancellationToken cancellationToken = default);
+    Task DisableForBookingAsync(Guid bookingId, CancellationToken cancellationToken = default);
 }
 
 public interface IProjectRelationshipService

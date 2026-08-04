@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
@@ -36,6 +37,12 @@ public sealed class ApplicationCompositionRoot
         MediaIndexRepository = new SqliteMediaIndexRepository(database);
         QuickToolsRepository = new SqliteQuickToolsRepository(database);
         MatchDecisionRepository = new SqliteMatchDecisionRepository(database);
+        ShootBookingRepository = new SqliteShootBookingRepository(database);
+        BookingConflictDetector = new BookingConflictDetector(ShootBookingRepository);
+        ShootBookingService = new ShootBookingService(ShootBookingRepository, BookingConflictDetector, auditLog);
+        BookingDocumentRepository = new SqliteBookingDocumentRepository(database);
+        BookingDocumentService = new BookingDocumentService(BookingDocumentRepository);
+        ReminderRepository = new SqliteReminderRepository(database);
     }
 
     public PixelTartDatabase Database { get; }
@@ -53,11 +60,17 @@ public sealed class ApplicationCompositionRoot
     public IMediaIndexRepository MediaIndexRepository { get; }
     public IQuickToolsRepository QuickToolsRepository { get; }
     public IMatchDecisionRepository MatchDecisionRepository { get; }
+    public IShootBookingRepository ShootBookingRepository { get; }
+    public IBookingConflictDetector BookingConflictDetector { get; }
+    public IShootBookingService ShootBookingService { get; }
+    public IBookingDocumentRepository BookingDocumentRepository { get; }
+    public IBookingDocumentService BookingDocumentService { get; }
+    public IReminderRepository ReminderRepository { get; }
 
     public static async Task<ApplicationCompositionRoot> CreateAsync(CancellationToken cancellationToken = default)
     {
         var database = new PixelTartDatabase();
-        var backup = new DatabaseBackupService(database);
+        var backup = new DatabaseBackupService(database, RAWSelectionAssistant.Core.Utilities.AppDataPaths.MigrationBackupDirectory);
         var migrator = new DatabaseMigrator(database, backup);
         var migration = await migrator.MigrateAsync(cancellationToken);
         if (!migration.Success)

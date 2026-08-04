@@ -23,7 +23,7 @@ public sealed class Version210UiArchitectureTests
     [TestMethod] public void RecoveryAndNotificationViewModelsExist(){StringAssert.Contains(TaskVm,"RecoveryCenterViewModel");StringAssert.Contains(TaskVm,"NotificationCenterViewModel");StringAssert.Contains(TaskVm,"DatabaseRecoveryViewModel");}
     [TestMethod] public void NavigationServiceExists()=>StringAssert.Contains(TaskVm,"class NavigationService");
     [TestMethod] public void CalendarPageIsNotAdded()=>Assert.IsFalse(MainXaml.Contains("工作日历",StringComparison.Ordinal));
-    [TestMethod] public void VersionIs210(){var version=File.ReadAllText(Path.Combine(Root,"build","Version.props"));StringAssert.Contains(version,"<PixelTartVersion>2.1.0</PixelTartVersion>");StringAssert.Contains(version,"<PixelTartAssemblyVersion>2.1.0.0</PixelTartAssemblyVersion>");}
+    [TestMethod] public void VersionIs220(){var version=File.ReadAllText(Path.Combine(Root,"build","Version.props"));StringAssert.Contains(version,"<PixelTartVersion>2.2.0</PixelTartVersion>");StringAssert.Contains(version,"<PixelTartAssemblyVersion>2.2.0.0</PixelTartAssemblyVersion>");}
     [TestMethod] public void ReleaseStillDisallowsMockProvider(){var app=File.ReadAllText(Path.Combine(Root,"src","RAWSelectionAssistant","App.xaml.cs"));StringAssert.Contains(app,"allowMockProvider: false");}
 
     private static int Count(string text,string value){var count=0;var start=0;while((start=text.IndexOf(value,start,StringComparison.Ordinal))>=0){count++;start+=value.Length;}return count;}
