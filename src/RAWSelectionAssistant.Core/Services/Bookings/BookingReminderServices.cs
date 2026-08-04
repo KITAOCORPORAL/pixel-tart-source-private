@@ -92,7 +92,7 @@ public sealed class BookingReminderNotificationService(
         var message = $"{type}；计划提醒 {plannedLocal:MM-dd HH:mm}；拍摄 {startLocal:MM-dd HH:mm}–{endLocal:HH:mm}；{location}";
         return new NotificationMessage(
             Guid.NewGuid(), NotificationType.Toast, dispatch.IsMissed ? NotificationSeverity.Warning : NotificationSeverity.Information,
-            dispatch.IsMissed ? "错过的拍摄提醒" : "拍摄排期提醒", message, null, dispatch.Booking.ProjectId,
+            dispatch.IsMissed ? "错过的拍摄提醒" : "拍摄排期提醒", message, dispatch.Booking.Id, dispatch.Booking.ProjectId,
             [new("open", "打开排期"), new("later", "稍后查看"), new("ack", "知道了")], false, dispatch.TriggeredAtUtc,
             dispatch.TriggeredAtUtc.AddDays(7), $"booking-reminder:{dispatch.Reminder.Id:D}");
     }
@@ -129,6 +129,7 @@ public sealed class BookingReminderNotificationService(
         30 => "提前30分钟",
         60 => "提前1小时",
         120 => "提前2小时",
+        180 => "提前3小时",
         1440 => "提前1天",
         { } minutes => $"提前{minutes:0}分钟",
         _ => "排期提醒"
@@ -244,7 +245,7 @@ public sealed class BookingReminderScheduler(
     private async Task CheckDueSafelyAsync()
     {
         try { await CheckDueAsync().ConfigureAwait(false); }
-        catch (Exception ex) { await auditLog.WriteAsync("BookingReminder", "SchedulerFailed", "Warning", $"Scheduler check failed: {ex.GetType().Name}", errorCode: "REMINDER_SCHEDULER_FAILED").ConfigureAwait(false); }
+        catch { await auditLog.WriteAsync("BookingReminder", "SchedulerFailed", "Warning", "Operation=SchedulerCheck;Result=Failed", errorCode: "REMINDER_SCHEDULER_FAILED").ConfigureAwait(false); }
     }
 
     private void BookingChanged(object? sender, Guid bookingId) => _ = CheckDueSafelyAsync();
@@ -284,7 +285,8 @@ public sealed class WorkbenchScheduleService(
             .OrderBy(item => item.StartAtUtc)
             .ThenBy(item => item.BookingId)
             .ToArray();
-        var future = futureItems
+        var visibleFutureItems = futureItems.Take(5).ToArray();
+        var future = visibleFutureItems
             .GroupBy(item => DateOnly.FromDateTime(TimeZoneInfo.ConvertTime(item.StartAtUtc, _localTimeZone).DateTime))
             .OrderBy(group => group.Key)
             .Select(group => new WorkbenchScheduleDay(group.Key, group.OrderBy(item => item.StartAtUtc).ToArray())).ToArray();

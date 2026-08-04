@@ -226,10 +226,12 @@ public sealed class Version220BookingDomainTests
         Assert.HasCount(1, await setup.Service.GetRequirementsAsync(saved.Booking.Id));
         var archivedReminder = (await reminder.ListByBookingAsync(saved.Booking.Id)).Single();
         Assert.IsFalse(archivedReminder.IsEnabled);
-        Assert.AreEqual(ReminderStatus.Cancelled, archivedReminder.Status);
+        Assert.AreEqual(ReminderStatus.Disabled, archivedReminder.Status);
         Assert.IsTrue(await setup.Service.RestoreAsync(saved.Booking.Id));
         Assert.IsNotNull(await setup.Service.GetAsync(saved.Booking.Id));
-        Assert.IsFalse((await reminder.ListByBookingAsync(saved.Booking.Id)).Single().IsEnabled);
+        var restoredReminder = (await reminder.ListByBookingAsync(saved.Booking.Id)).Single();
+        Assert.IsFalse(restoredReminder.IsEnabled);
+        Assert.AreEqual(ReminderStatus.Disabled, restoredReminder.Status);
     }
 
     private static ShootBookingDraft Draft(DateTimeOffset start, DateTimeOffset end) => new()

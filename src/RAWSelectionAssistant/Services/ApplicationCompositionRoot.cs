@@ -45,7 +45,7 @@ public sealed class ApplicationCompositionRoot
         BookingDocumentRepository = new SqliteBookingDocumentRepository(database);
         BookingDocumentService = new BookingDocumentService(BookingDocumentRepository);
         BookingDocumentWorkflowService = new BookingDocumentWorkflowService(BookingDocumentRepository, ShootBookingService, ProjectRepository,
-            FileOperationPlanner, FileOperationExecutor, FileVerificationService, UndoJournalService, OperationBridge, AuditLog);
+            FileOperationPlanner, FileOperationExecutor, FileVerificationService, UndoJournalService, OperationBridge, AuditLog, database);
         ReminderRepository = new SqliteReminderRepository(database);
         BookingReminderService = new BookingReminderService(ReminderRepository, ShootBookingService, auditLog);
         BookingReminderNotificationService = new BookingReminderNotificationService(notificationCenter);

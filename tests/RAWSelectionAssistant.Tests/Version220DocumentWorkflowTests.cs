@@ -225,6 +225,105 @@ public sealed class Version220DocumentWorkflowTests
     }
 
     [TestMethod]
+    public async Task PendingAssociation_IsRecoveredFromPersistedTaskAfterRestart()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/跨重启策划.pdf", [1, 2, 3, 4]);
+        var result = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.PhotographyPlan, [source], setup.Temp.Combine("目标"), true));
+        var original = result.Items.Single().PendingAssociation!;
+
+        var restarted = setup.CreateRestartedWorkflow();
+        var recovered = await restarted.ListPendingAssociationsAsync(setup.BookingId);
+
+        Assert.HasCount(1, recovered);
+        Assert.AreEqual(original.TaskId, recovered[0].TaskId);
+        Assert.AreEqual(original.DestinationPath, recovered[0].DestinationPath);
+        Assert.AreEqual(original.OutputSize, recovered[0].OutputSize);
+        Assert.AreEqual(original.OutputHash, recovered[0].OutputHash);
+        Assert.IsTrue(File.Exists(recovered[0].DestinationPath));
+    }
+
+    [TestMethod]
+    public async Task RestartRecovery_IsIsolatedByBookingId()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/隔离协议.pdf", [8, 9]);
+        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.ShootAgreement, [source], setup.Temp.Combine("目标")));
+        var other = await setup.Bookings.SaveAsync(new ShootBookingDraft { Title = "其他排期", ClientDisplayName = "其他客户", StartAt = DateTimeOffset.UtcNow.AddDays(3), EndAt = DateTimeOffset.UtcNow.AddDays(3).AddHours(1), TimeZoneId = TimeZoneInfo.Utc.Id, ShootingType = "Portrait", AllowOverlap = true });
+
+        var restarted = setup.CreateRestartedWorkflow();
+        Assert.HasCount(1, await restarted.ListPendingAssociationsAsync(setup.BookingId));
+        Assert.IsEmpty(await restarted.ListPendingAssociationsAsync(other.Booking!.Id));
+    }
+
+    [TestMethod]
+    public async Task RecoveredAssociation_CanRetryAndDoesNotAppearAgain()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/重试报价.pdf", [4, 5, 6]);
+        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Quotation, [source], setup.Temp.Combine("目标"), true));
+        var restarted = setup.CreateRestartedWorkflow();
+        var recovered = (await restarted.ListPendingAssociationsAsync(setup.BookingId)).Single();
+
+        var retry = await restarted.RetryAssociationAsync(recovered);
+
+        Assert.IsTrue(retry.Succeeded);
+        Assert.IsNotNull(retry.Document);
+        Assert.IsEmpty(await restarted.ListPendingAssociationsAsync(setup.BookingId));
+        Assert.IsTrue(File.Exists(recovered.DestinationPath));
+    }
+
+    [TestMethod]
+    public async Task RecoveredAssociation_SafeUndoVerifiesHashAndSize()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/撤销授权.pdf", [3, 1, 4, 1, 5]);
+        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.ModelRelease, [source], setup.Temp.Combine("目标"), true));
+        var restarted = setup.CreateRestartedWorkflow();
+        var recovered = (await restarted.ListPendingAssociationsAsync(setup.BookingId)).Single();
+
+        var undo = await restarted.UndoCopiedFileAsync(recovered);
+
+        Assert.AreEqual(1, undo.Succeeded);
+        Assert.IsFalse(File.Exists(recovered.DestinationPath));
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsEmpty(await restarted.ListPendingAssociationsAsync(setup.BookingId));
+    }
+
+    [TestMethod]
+    public async Task RecoveredAssociation_RejectsUndoAfterUserModification()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/修改后撤销.pdf", [7, 7, 7]);
+        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var restarted = setup.CreateRestartedWorkflow();
+        var recovered = (await restarted.ListPendingAssociationsAsync(setup.BookingId)).Single();
+        await File.AppendAllTextAsync(recovered.DestinationPath, "changed");
+
+        var undo = await restarted.UndoCopiedFileAsync(recovered);
+
+        Assert.AreEqual(1, undo.WaitingForAttention);
+        Assert.IsTrue(File.Exists(recovered.DestinationPath));
+        Assert.IsTrue(File.Exists(source));
+    }
+
+    [TestMethod]
+    public async Task RecoveredAssociation_AbandonPersistsAndNeverDeletesFile()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/放弃关联.pdf", [2, 7, 1, 8]);
+        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var restarted = setup.CreateRestartedWorkflow();
+        var recovered = (await restarted.ListPendingAssociationsAsync(setup.BookingId)).Single();
+
+        await restarted.AbandonAssociationAsync(recovered);
+
+        Assert.IsTrue(File.Exists(recovered.DestinationPath));
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsEmpty(await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+    }
+
+    [TestMethod]
     public async Task Verify_MissingOrDisconnectedFileIsMarkedWithoutException()
     {
         using var setup = await SetupAsync();
@@ -565,7 +664,20 @@ public sealed class Version220DocumentWorkflowTests
         public AuditLogService Audit { get; }
         public BookingDocumentWorkflowService Workflow { get; set; } = null!;
         public BookingDocumentWorkflowService CreateWorkflow(IBookingDocumentRepository repository, IFileOperationExecutor? executor = null) =>
-            new(repository, Bookings, Projects, Planner, executor ?? Executor, Verification, Undo, Bridge, Audit);
+            new(repository, Bookings, Projects, Planner, executor ?? Executor, Verification, Undo, Bridge, Audit, Database);
+        public BookingDocumentWorkflowService CreateRestartedWorkflow()
+        {
+            var database = new PixelTartDatabase(Database.DatabasePath);
+            var bookingRepository = new SqliteShootBookingRepository(database);
+            var bookings = new ShootBookingService(bookingRepository, new BookingConflictDetector(bookingRepository));
+            var documents = new SqliteBookingDocumentRepository(database);
+            var projects = new SqliteProjectRepository(database);
+            var verification = new FileVerificationService();
+            var journals = new SqliteUndoJournalRepository(database);
+            return new BookingDocumentWorkflowService(documents, bookings, projects, new FileOperationPlanner(new FileConflictResolver()),
+                new FileOperationExecutor(new FileOperationValidator(), verification, journals, database), verification,
+                new UndoJournalService(journals, verification), new TaskOperationBridge(), new AuditLogService(database), database);
+        }
         public IFileOperationExecutor CreateRejectedExecutor(string errorCode, bool requiresAttention) =>
             new FileOperationExecutor(new RejectedFileOperationValidator(errorCode, requiresAttention), Verification, new SqliteUndoJournalRepository(Database), Database);
         public void Dispose() { SqliteTestIsolation.ClearPool(Database); Temp.Dispose(); }

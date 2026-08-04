@@ -69,6 +69,7 @@ public interface IBookingDocumentWorkflowService
     Task<BookingDocumentRelocationResult> RelocateAsync(Guid documentId, string newFilePath, bool acceptHashMismatch = false, CancellationToken cancellationToken = default);
     Task<bool> RemoveAssociationAsync(Guid documentId, CancellationToken cancellationToken = default);
     Task<BookingDocumentRetryResult> RetryAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<PendingDocumentAssociation>> ListPendingAssociationsAsync(Guid bookingId, CancellationToken cancellationToken = default);
     Task<TaskResultSummary> UndoCopiedFileAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
     Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
 }

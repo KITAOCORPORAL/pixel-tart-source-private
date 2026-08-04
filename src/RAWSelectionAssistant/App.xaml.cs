@@ -19,6 +19,8 @@ public partial class App : Application
     private MainViewModel? _mainViewModel;
     private IAppearanceService? _appearanceService;
     private ApplicationCompositionRoot? _compositionRoot;
+    private HttpClient? _weatherHttpClient;
+    private WeatherFeatureState? _weatherState;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -76,6 +78,19 @@ public partial class App : Application
                 ? AppDataPaths.SettingsFile
                 : File.Exists(legacySettings) ? legacySettings : null;
             var settingsService = new SettingsService(_logService, settingsPath);
+            var startupSettings = await settingsService.LoadAsync();
+            _weatherState = new WeatherFeatureState();
+            _weatherState.Apply(startupSettings.Weather);
+            _weatherHttpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
+            var weatherOptions = new OpenMeteoOptions(
+                startupSettings.Weather.WeatherApiBaseUrl,
+                startupSettings.Weather.GeocodingApiBaseUrl,
+                string.IsNullOrWhiteSpace(startupSettings.Weather.ApiKey) ? null : startupSettings.Weather.ApiKey);
+            var weatherService = new WeatherForecastService(
+                new OpenMeteoWeatherProvider(_weatherHttpClient, weatherOptions),
+                new OpenMeteoGeocodingProvider(_weatherHttpClient, weatherOptions),
+                new JsonWeatherCacheStore(), _weatherState,
+                _compositionRoot.NotificationCenter, _compositionRoot.AuditLog);
             var tutorialDataService = new TutorialDataService();
             var onboardingService = new OnboardingService(settingsService, tutorialDataService, _logService);
             var feedbackService = new FeedbackService(
@@ -93,8 +108,10 @@ public partial class App : Application
                 _compositionRoot.BookingDocumentWorkflowService,
                 dialogService,
                 _compositionRoot.BookingReminderService,
-                _compositionRoot.BookingReminderScheduler);
-            var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier);
+                _compositionRoot.BookingReminderScheduler,
+                weatherService,
+                _weatherState);
+            var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,
                 _compositionRoot.NotificationCenter,
@@ -125,9 +142,11 @@ public partial class App : Application
                 _compositionRoot.MatchDecisionRepository,
                 calendarViewModel,
                 workbenchSchedule,
-                reminderNotifications);
+                reminderNotifications,
+                _weatherState);
 
             await _mainViewModel.InitializeAsync();
+            await reminderNotifications.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };
             window.ApplySavedBounds(_mainViewModel.Settings);
             MainWindow = window;
@@ -160,6 +179,7 @@ public partial class App : Application
         _mainViewModel?.WorkbenchSchedule?.Dispose();
         _mainViewModel?.ReminderNotifications?.Dispose();
         if (_compositionRoot is not null) _compositionRoot.BookingReminderScheduler.DisposeAsync().AsTask().GetAwaiter().GetResult();
+        _weatherHttpClient?.Dispose();
         _appearanceService?.Dispose();
         _logService?.Info("应用程序已退出。");
         base.OnExit(e);

@@ -177,7 +177,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         {
             await using var reminders = connection.CreateCommand();
             reminders.Transaction = transaction;
-            reminders.CommandText = "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id;";
+            reminders.CommandText = "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id;";
             reminders.Parameters.AddWithValue("$id", id.ToString("D"));
             reminders.Parameters.AddWithValue("$at", Utc(archivedAtUtc));
             await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);

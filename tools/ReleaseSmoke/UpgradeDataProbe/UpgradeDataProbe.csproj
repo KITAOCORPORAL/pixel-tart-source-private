@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RAWSelectionAssistant.Core"><HintPath>$(InstalledAppRoot)\RAWSelectionAssistant.Core.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Microsoft.Data.Sqlite"><HintPath>$(InstalledAppRoot)\Microsoft.Data.Sqlite.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2"><HintPath>$(InstalledAppRoot)\SQLitePCLRaw.batteries_v2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SQLitePCLRaw.core"><HintPath>$(InstalledAppRoot)\SQLitePCLRaw.core.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3"><HintPath>$(InstalledAppRoot)\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath><Private>true</Private></Reference>
+    <None Include="$(InstalledAppRoot)\e_sqlite3.dll" Link="e_sqlite3.dll" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

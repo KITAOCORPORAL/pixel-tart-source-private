@@ -21,6 +21,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private readonly IShootBookingService _bookingService;
     private readonly RAWSelectionAssistant.Core.Services.Database.IProjectRepository _projectRepository;
     private readonly IBookingReminderScheduler? _reminderScheduler;
+    private readonly IWeatherForecastService? _weatherService;
+    private readonly WeatherFeatureState? _weatherState;
+    private IReadOnlyDictionary<Guid, BookingWeatherSummary?> _currentWeather = new Dictionary<Guid, BookingWeatherSummary?>();
     private CancellationTokenSource? _queryCancellation;
     private bool _initialized;
     private bool _isBusy;
@@ -37,11 +40,14 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 
     public WorkCalendarViewModel(IShootBookingService bookingService, RAWSelectionAssistant.Core.Services.Database.IProjectRepository projectRepository,
         IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
-        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null)
+        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
+        IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
         _reminderScheduler = reminderScheduler;
+        _weatherService = weatherService;
+        _weatherState = weatherState;
         StatusOptions =
         [
             new("全部状态", null), new("待确定", ShootBookingStatus.Tentative), new("已确认", ShootBookingStatus.Confirmed),
@@ -62,7 +68,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
         DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync);
-        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.EditRequested += (_, bookingId) => _ = RequestEditorAsync(bookingId, null);
         Details.Archived += (_, _) => _ = RefreshAsync();
@@ -203,7 +209,8 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             var range = ShootBookingTimeRules.CreateAllDayRange(DateOnly.FromDateTime(startDate), DateOnly.FromDateTime(endDateExclusive), TimeZoneInfo.Local.Id);
             var items = await _bookingService.QueryCurrentViewAsync(new ShootBookingQuery(
                 range.StartAtUtc, range.EndAtUtc, SelectedStatus.Value, SelectedType.Value, SearchText), cancellationToken).ConfigureAwait(true);
-            ApplyCurrentView(items);
+            _currentWeather = await LoadCachedWeatherAsync(items, cancellationToken).ConfigureAwait(true);
+            ApplyCurrentView(items, _currentWeather);
             _nextCursor = null;
             OnPropertyChanged(nameof(HasMoreGlobalResults));
             StatusText = $"当前视图 {items.Count} 条排期";
@@ -243,12 +250,35 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         finally { if (!cancellationToken.IsCancellationRequested) IsBusy = false; }
     }
 
-    private void ApplyCurrentView(IReadOnlyList<ShootBookingSummary> items)
+    private void ApplyCurrentView(IReadOnlyList<ShootBookingSummary> items, IReadOnlyDictionary<Guid, BookingWeatherSummary?> weather)
     {
-        Month.Configure(SelectedDate, items, SelectedDate);
-        Week.Configure(StartOfWeek(SelectedDate), items, SelectedDate);
-        Day.Configure(SelectedDate, items);
-        DaySchedule.Configure(SelectedDate, ItemsOnDate(items, SelectedDate));
+        Month.Configure(SelectedDate, items, SelectedDate, weather);
+        Week.Configure(StartOfWeek(SelectedDate), items, SelectedDate, weather);
+        Day.Configure(SelectedDate, items, weather);
+        DaySchedule.Configure(SelectedDate, ItemsOnDate(items, SelectedDate), weather);
+    }
+
+    private async Task<IReadOnlyDictionary<Guid, BookingWeatherSummary?>> LoadCachedWeatherAsync(
+        IReadOnlyList<ShootBookingSummary> items, CancellationToken cancellationToken)
+    {
+        if (_weatherService is null || _weatherState is null || !_weatherState.Enabled)
+            return new Dictionary<Guid, BookingWeatherSummary?>();
+
+        var results = new Dictionary<Guid, BookingWeatherSummary?>();
+        foreach (var item in items)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            try
+            {
+                results[item.Id] = await _weatherService.TryGetCachedBookingWeatherAsync(
+                    item.Id, item.StartAtUtc, item.EndAtUtc, cancellationToken).ConfigureAwait(true);
+            }
+            catch
+            {
+                results[item.Id] = null;
+            }
+        }
+        return results;
     }
 
     private static IReadOnlyList<ShootBookingSummary> ItemsOnDate(IEnumerable<ShootBookingSummary> items, DateTime date) =>
@@ -265,8 +295,8 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             _ = RefreshAsync();
             return;
         }
-        Month.Configure(_selectedDate, Month.AllItems, _selectedDate);
-        DaySchedule.Configure(SelectedDate, Month.AllItems.Where(item => CalendarBookingItemViewModel.SpansDate(item, SelectedDate)).ToArray());
+        Month.Configure(_selectedDate, Month.AllItems, _selectedDate, _currentWeather);
+        DaySchedule.Configure(SelectedDate, Month.AllItems.Where(item => CalendarBookingItemViewModel.SpansDate(item, SelectedDate)).ToArray(), _currentWeather);
     }
 
     private void CreateForDate(DateTime date) => _ = RequestEditorAsync(null, DefaultStart(date));
@@ -288,6 +318,18 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         await editor.InitializeAsync().ConfigureAwait(true);
         editor.Saved += async (_, saved) =>
         {
+            _weatherState?.MarkNeedsRefresh(saved.Id);
+            if (_weatherService is not null && _weatherState?.AutoRefreshEnabled == true)
+            {
+                try
+                {
+                    await _weatherService.GetBookingWeatherAsync(saved.Id, saved.StartAtUtc, saved.EndAtUtc, true).ConfigureAwait(true);
+                }
+                catch
+                {
+                    // Optional weather must never block saving or opening a booking.
+                }
+            }
             await RefreshAsync().ConfigureAwait(true);
             if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
             await OpenBookingAsync(saved.Id).ConfigureAwait(true);
@@ -375,15 +417,17 @@ public sealed class BookingEditorRequestEventArgs(ShootBookingEditorViewModel ed
 
 public sealed class CalendarBookingItemViewModel
 {
-    public CalendarBookingItemViewModel(ShootBookingSummary booking)
+    public CalendarBookingItemViewModel(ShootBookingSummary booking, BookingWeatherSummary? weather = null)
     {
         Booking = booking;
+        Weather = weather;
         var zone = ResolveZone(booking.TimeZoneId);
         LocalStart = TimeZoneInfo.ConvertTime(booking.StartAtUtc, zone).DateTime;
         LocalEnd = TimeZoneInfo.ConvertTime(booking.EndAtUtc, zone).DateTime;
     }
 
     public ShootBookingSummary Booking { get; }
+    public BookingWeatherSummary? Weather { get; }
     public Guid Id => Booking.Id;
     public string Title => Booking.Title;
     public string ClientDisplayName => Booking.ClientDisplayName;
@@ -393,7 +437,22 @@ public sealed class CalendarBookingItemViewModel
     public string TimeText => IsAllDay ? "全天" : $"{LocalStart:HH:mm}–{LocalEnd:HH:mm}";
     public string StatusText => CalendarText.Status(Booking.Status);
     public string StatusGlyph => Booking.Status switch { ShootBookingStatus.Completed => "✓", ShootBookingStatus.Cancelled => "×", ShootBookingStatus.Confirmed => "●", ShootBookingStatus.Preparing => "◆", ShootBookingStatus.Shooting => "▶", ShootBookingStatus.Postponed => "↷", _ => "○" };
-    public string AccessibilityName => $"{Title}，{ClientDisplayName}，{TimeText}，{StatusText}";
+    public string WeatherIcon => WeatherIconFor(Weather?.RepresentativeHour?.WeatherCode ?? Weather?.Day?.WeatherCode);
+    public string MonthWeatherIcon => Weather is null ? string.Empty : WeatherIcon;
+    public string WeatherText
+    {
+        get
+        {
+            if (Weather?.RepresentativeHour is { } hour)
+                return $"{WeatherIcon} {hour.TemperatureC:0}° · 降雨 {hour.PrecipitationProbability}% · 风 {hour.WindSpeedKph:0} km/h";
+            if (Weather?.Day is { } day)
+                return $"{WeatherIcon} {day.MinimumTemperatureC:0}–{day.MaximumTemperatureC:0}° · 降雨 {day.PrecipitationProbability}%";
+            return string.Empty;
+        }
+    }
+    public string AccessibilityName => string.IsNullOrEmpty(WeatherText)
+        ? $"{Title}，{ClientDisplayName}，{TimeText}，{StatusText}"
+        : $"{Title}，{ClientDisplayName}，{TimeText}，{StatusText}，{WeatherText}";
 
     public static bool SpansDate(ShootBookingSummary booking, DateTime date)
     {
@@ -406,6 +465,22 @@ public sealed class CalendarBookingItemViewModel
     {
         try { return TimeZoneInfo.FindSystemTimeZoneById(id); }
         catch { return TimeZoneInfo.Local; }
+    }
+
+    public static string WeatherIconFor(string? code)
+    {
+        if (!int.TryParse(code, out var value)) return "☁";
+        return value switch
+        {
+            0 => "☀",
+            1 or 2 => "🌤",
+            3 => "☁",
+            45 or 48 => "🌫",
+            51 or 53 or 55 or 56 or 57 or 61 or 63 or 65 or 66 or 67 or 80 or 81 or 82 => "🌧",
+            71 or 73 or 75 or 77 or 85 or 86 => "🌨",
+            95 or 96 or 99 => "⛈",
+            _ => "☁"
+        };
     }
 }
 
@@ -439,7 +514,8 @@ public sealed class MonthCalendarViewModel
     public ICommand SelectDateCommand { get; }
     public ICommand CreateBookingCommand { get; }
 
-    public void Configure(DateTime month, IReadOnlyList<ShootBookingSummary> items, DateTime selectedDate)
+    public void Configure(DateTime month, IReadOnlyList<ShootBookingSummary> items, DateTime selectedDate,
+        IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
     {
         AllItems = items;
         Days.Clear();
@@ -447,7 +523,9 @@ public sealed class MonthCalendarViewModel
         for (var offset = 0; offset < 42; offset++)
         {
             var date = start.AddDays(offset);
-            var matches = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date)).Select(item => new CalendarBookingItemViewModel(item)).OrderBy(item => item.LocalStart).ToArray();
+            var matches = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date))
+                .Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id)))
+                .OrderBy(item => item.LocalStart).ToArray();
             var day = new MonthDayViewModel { Date = date, IsCurrentMonth = date.Month == month.Month && date.Year == month.Year, IsSelected = date == selectedDate.Date, OverflowCount = Math.Max(0, matches.Length - 3) };
             foreach (var match in matches.Take(3)) day.VisibleBookings.Add(match);
             Days.Add(day);
@@ -483,14 +561,17 @@ public sealed class WeekCalendarViewModel
     public ICommand OpenBookingCommand { get; }
     public ICommand CreateBookingCommand { get; }
 
-    public void Configure(DateTime weekStart, IReadOnlyList<ShootBookingSummary> items, DateTime selectedDate)
+    public void Configure(DateTime weekStart, IReadOnlyList<ShootBookingSummary> items, DateTime selectedDate,
+        IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
     {
         Days.Clear();
         for (var i = 0; i < 7; i++)
         {
             var date = weekStart.AddDays(i);
             var day = new CalendarDayColumnViewModel { Date = date };
-            foreach (var source in items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date)).Select(item => new CalendarBookingItemViewModel(item)).OrderBy(item => item.LocalStart))
+            foreach (var source in items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date))
+                         .Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id)))
+                         .OrderBy(item => item.LocalStart))
             {
                 if (source.IsAllDay || source.LocalStart.Date != source.LocalEnd.Date) day.AllDayBookings.Add(source);
                 else day.TimedBookings.Add(source);
@@ -529,12 +610,14 @@ public sealed class DayCalendarViewModel
     public ICommand OpenBookingCommand { get; }
     public ICommand CreateAtCommand { get; }
 
-    public void Configure(DateTime date, IReadOnlyList<ShootBookingSummary> items)
+    public void Configure(DateTime date, IReadOnlyList<ShootBookingSummary> items,
+        IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
     {
         Date = date.Date;
         AllDayBookings.Clear();
         TimeSlots.Clear();
-        var wrappers = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, Date)).Select(item => new CalendarBookingItemViewModel(item)).ToArray();
+        var wrappers = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, Date))
+            .Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id))).ToArray();
         foreach (var item in wrappers.Where(item => item.IsAllDay || item.LocalStart.Date != item.LocalEnd.Date)) AllDayBookings.Add(item);
         for (var hour = 0; hour < 24; hour++)
         {
@@ -554,11 +637,12 @@ public sealed class DaySchedulePanelViewModel : ObservableObject
     public string Title => $"{Date:M月d日} 当天排期";
     public ObservableCollection<CalendarBookingItemViewModel> Bookings { get; } = [];
     public ICommand OpenBookingCommand { get; }
-    public void Configure(DateTime date, IReadOnlyList<ShootBookingSummary> items)
+    public void Configure(DateTime date, IReadOnlyList<ShootBookingSummary> items,
+        IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
     {
         Date = date.Date;
         Bookings.Clear();
-        foreach (var item in items.Select(item => new CalendarBookingItemViewModel(item)).OrderBy(item => item.LocalStart)) Bookings.Add(item);
+        foreach (var item in items.Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id))).OrderBy(item => item.LocalStart)) Bookings.Add(item);
     }
 }
 

@@ -35,6 +35,7 @@ public sealed class MainViewModel : ObservableObject
     private readonly TaskOperationBridge _taskOperationBridge;
     private readonly IQuickToolsRepository _quickToolsRepository;
     private readonly IMatchDecisionRepository _matchDecisionRepository;
+    private readonly WeatherFeatureState? _weatherState;
     private CancellationTokenSource? _operationCancellation;
     private MediaIndexSnapshot _mediaIndex = new();
     private SourceDirectoryEntry? _selectedSource;
@@ -111,7 +112,8 @@ public sealed class MainViewModel : ObservableObject
         IMatchDecisionRepository matchDecisionRepository,
         WorkCalendarViewModel workCalendarPage,
         WorkbenchScheduleViewModel? workbenchSchedule = null,
-        ReminderNotificationCenterViewModel? reminderNotifications = null)
+        ReminderNotificationCenterViewModel? reminderNotifications = null,
+        WeatherFeatureState? weatherState = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -135,6 +137,7 @@ public sealed class MainViewModel : ObservableObject
         _taskOperationBridge = taskOperationBridge;
         _quickToolsRepository = quickToolsRepository;
         _matchDecisionRepository = matchDecisionRepository;
+        _weatherState = weatherState;
         WorkCalendarPage = workCalendarPage;
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
@@ -821,6 +824,7 @@ public sealed class MainViewModel : ObservableObject
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+        _weatherState?.Apply(Settings.Weather);
         var databaseQuickTools = await _quickToolsRepository.LoadAsync();
         if (databaseQuickTools.Count > 0)
         {
@@ -946,6 +950,7 @@ public sealed class MainViewModel : ObservableObject
 
     public async Task SaveSettingsAsync()
     {
+        if (_weatherState is not null) Settings.Weather = _weatherState.Snapshot();
         if (IsOnboardingActive)
         {
             await _settingsService.SaveAsync(Settings);

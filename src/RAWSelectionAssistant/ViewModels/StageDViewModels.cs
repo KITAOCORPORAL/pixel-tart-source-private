@@ -205,7 +205,8 @@ public sealed class BookingRemindersViewModel : ObservableObject
     }
 }
 
-public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, TimeZoneInfo localTimeZone, TimeProvider timeProvider)
+public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, TimeZoneInfo localTimeZone, TimeProvider timeProvider,
+    BookingWeatherSummary? weather = null, bool preferDailyWeather = false)
 {
     public Guid BookingId => item.BookingId;
     public string Title => string.IsNullOrWhiteSpace(item.ProjectName) ? item.Title : item.ProjectName;
@@ -224,6 +225,12 @@ public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, T
     public string PreparationText => item.RequirementTotal == 0 ? "准备清单未设置" : $"准备 {item.RequirementCompleted}/{item.RequirementTotal}";
     public string ReminderText => item.HasEnabledReminder ? "提醒已开" : "提醒关闭";
     public string DocumentText => $"文档 {item.DocumentCount}";
+    public string WeatherIcon => CalendarBookingItemViewModel.WeatherIconFor(weather?.RepresentativeHour?.WeatherCode ?? weather?.Day?.WeatherCode);
+    public string WeatherText => preferDailyWeather && weather?.Day is { } futureDay
+        ? $"{WeatherIcon} {futureDay.MinimumTemperatureC:0.#}–{futureDay.MaximumTemperatureC:0.#}°C · 降雨 {futureDay.PrecipitationProbability}%"
+        : weather?.RepresentativeHour is { } hour
+            ? $"{WeatherIcon} {hour.TemperatureC:0.#}°C · 降雨 {hour.PrecipitationProbability}% · 风 {hour.WindSpeedKph:0.#} km/h{(weather.Risks.Any(risk => risk.Code == "StrongWind") ? " · 强风风险" : string.Empty)}"
+            : weather?.Day is { } day ? $"{WeatherIcon} {day.MinimumTemperatureC:0.#}–{day.MaximumTemperatureC:0.#}°C · 降雨 {day.PrecipitationProbability}%" : string.Empty;
     public string DistanceText
     {
         get
@@ -234,13 +241,13 @@ public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, T
             return span.TotalDays >= 1 ? $"还有 {span.TotalDays:0.#} 天" : span.TotalHours >= 1 ? $"还有 {span.TotalHours:0.#} 小时" : $"还有 {Math.Max(1, span.TotalMinutes):0} 分钟";
         }
     }
-    public string MetaText => string.Join(" · ", new[] { LocationText, ReminderText, DocumentText, PreparationText }.Where(value => !string.IsNullOrWhiteSpace(value)));
+    public string MetaText => string.Join(" · ", new[] { LocationText, ReminderText, DocumentText, PreparationText, WeatherText }.Where(value => !string.IsNullOrWhiteSpace(value)));
 }
 
-public sealed class WorkbenchScheduleDayViewModel(WorkbenchScheduleDay day, TimeZoneInfo localTimeZone, TimeProvider timeProvider)
+public sealed class WorkbenchScheduleDayViewModel(WorkbenchScheduleDay day, TimeZoneInfo localTimeZone, TimeProvider timeProvider, IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
 {
     public string DateText => day.Date.ToDateTime(TimeOnly.MinValue).ToString("M月d日 dddd", CultureInfo.GetCultureInfo("zh-CN"));
-    public IReadOnlyList<WorkbenchScheduleItemViewModel> Items { get; } = day.Items.Select(x => new WorkbenchScheduleItemViewModel(x, localTimeZone, timeProvider)).ToArray();
+    public IReadOnlyList<WorkbenchScheduleItemViewModel> Items { get; } = day.Items.Select(x => new WorkbenchScheduleItemViewModel(x, localTimeZone, timeProvider, weather is not null && weather.TryGetValue(x.BookingId, out var summary) ? summary : null, true)).ToArray();
 }
 
 public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
@@ -249,6 +256,7 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
     private readonly TimeProvider _timeProvider;
     private readonly TimeZoneInfo _localTimeZone;
     private readonly IBookingChangeNotifier? _bookingChanges;
+    private readonly IWeatherForecastService? _weatherService;
     private ITimer? _timer;
     private bool _showFuture;
     private bool _isBusy;
@@ -256,12 +264,13 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
     private DateOnly _loadedDate;
     private int _futureTotalCount;
 
-    public WorkbenchScheduleViewModel(IWorkbenchScheduleService service, IBookingChangeNotifier? bookingChanges = null, TimeProvider? timeProvider = null, TimeZoneInfo? localTimeZone = null)
+    public WorkbenchScheduleViewModel(IWorkbenchScheduleService service, IBookingChangeNotifier? bookingChanges = null, TimeProvider? timeProvider = null, TimeZoneInfo? localTimeZone = null, IWeatherForecastService? weatherService = null)
     {
         _service = service;
         _timeProvider = timeProvider ?? TimeProvider.System;
         _localTimeZone = localTimeZone ?? TimeZoneInfo.Local;
         _bookingChanges = bookingChanges;
+        _weatherService = weatherService;
         if (_bookingChanges is not null) _bookingChanges.BookingChanged += BookingChanges_BookingChanged;
         ShowTodayCommand = new RelayCommand(_ => ShowFuture = false);
         ShowFutureCommand = new RelayCommand(_ => ShowFuture = true);
@@ -301,10 +310,14 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
         try
         {
             var snapshot = await _service.LoadAsync().ConfigureAwait(true);
+            var all = snapshot.Today.Concat(snapshot.FutureSevenDays.SelectMany(day => day.Items)).DistinctBy(item => item.BookingId).ToArray();
+            var weatherPairs = await Task.WhenAll(all.Select(async item => new KeyValuePair<Guid, BookingWeatherSummary?>(item.BookingId,
+                await TryGetCachedWeatherAsync(item).ConfigureAwait(true)))).ConfigureAwait(true);
+            var weather = weatherPairs.ToDictionary(pair => pair.Key, pair => pair.Value);
             Today.Clear();
-            foreach (var item in snapshot.Today) Today.Add(new(item, _localTimeZone, _timeProvider));
+            foreach (var item in snapshot.Today) Today.Add(new(item, _localTimeZone, _timeProvider, weather.GetValueOrDefault(item.BookingId)));
             Future.Clear();
-            foreach (var day in snapshot.FutureSevenDays) Future.Add(new(day, _localTimeZone, _timeProvider));
+            foreach (var day in snapshot.FutureSevenDays) Future.Add(new(day, _localTimeZone, _timeProvider, weather));
             _futureTotalCount = snapshot.FutureTotalCount;
             _loadedDate = snapshot.LocalDate;
             StatusText = string.Empty;
@@ -332,6 +345,13 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
         await Task.CompletedTask;
     }
 
+    private async Task<BookingWeatherSummary?> TryGetCachedWeatherAsync(WorkbenchScheduleItem item)
+    {
+        if (_weatherService is null) return null;
+        try { return await _weatherService.TryGetCachedBookingWeatherAsync(item.BookingId, item.StartAtUtc, item.EndAtUtc).ConfigureAwait(true); }
+        catch { return null; }
+    }
+
     private static Task RunOnUiAsync(Func<Task> action)
     {
         var dispatcher = Application.Current?.Dispatcher;
@@ -350,18 +370,28 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
 
 public sealed class WorkbenchCalendarSummaryViewModel : WorkbenchScheduleViewModel
 {
-    public WorkbenchCalendarSummaryViewModel(IWorkbenchScheduleService service, IBookingChangeNotifier? bookingChanges = null, TimeProvider? timeProvider = null, TimeZoneInfo? localTimeZone = null)
-        : base(service, bookingChanges, timeProvider, localTimeZone) { }
+    public WorkbenchCalendarSummaryViewModel(IWorkbenchScheduleService service, IBookingChangeNotifier? bookingChanges = null, TimeProvider? timeProvider = null, TimeZoneInfo? localTimeZone = null, IWeatherForecastService? weatherService = null)
+        : base(service, bookingChanges, timeProvider, localTimeZone, weatherService) { }
 }
 
-public sealed class ReminderNotificationItemViewModel(ReminderPublishedEvent published)
+public sealed class ReminderNotificationItemViewModel
 {
-    public ReminderPublishedEvent Published { get; } = published;
-    public Guid NotificationId => Published.Notification.Id;
-    public Guid BookingId => Published.Dispatch.Booking.Id;
-    public Guid ReminderId => Published.Dispatch.Reminder.Id;
-    public string Title => Published.Notification.Title;
-    public string Message => Published.Notification.Message;
+    public ReminderNotificationItemViewModel(ReminderPublishedEvent published)
+        : this(published.Notification, published.Dispatch.Booking.Id, published.Dispatch.Reminder.Id) { }
+
+    public ReminderNotificationItemViewModel(NotificationMessage notification, Guid bookingId, Guid reminderId)
+    {
+        Notification = notification;
+        BookingId = bookingId;
+        ReminderId = reminderId;
+    }
+
+    public NotificationMessage Notification { get; }
+    public Guid NotificationId => Notification.Id;
+    public Guid BookingId { get; }
+    public Guid ReminderId { get; }
+    public string Title => Notification.Title;
+    public string Message => Notification.Message;
 }
 
 public sealed class ReminderNotificationCenterViewModel : ObservableObject, IDisposable
@@ -386,6 +416,16 @@ public sealed class ReminderNotificationCenterViewModel : ObservableObject, IDis
     public ICommand OpenCommand { get; }
     public ICommand LaterCommand { get; }
     public ICommand AcknowledgeCommand { get; }
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        Items.Clear();
+        foreach (var notification in await _notificationCenter.GetHistoryAsync(100, cancellationToken).ConfigureAwait(true))
+        {
+            if (notification.IsRead || notification.TaskId is not { } bookingId || !TryReminderId(notification.DeduplicationKey, out var reminderId)) continue;
+            Items.Add(new(notification, bookingId, reminderId));
+        }
+    }
 
     private void Publisher_ReminderPublished(object? sender, ReminderPublishedEvent e)
     {
@@ -413,6 +453,13 @@ public sealed class ReminderNotificationCenterViewModel : ObservableObject, IDis
         await _notificationCenter.MarkReadAsync(item.NotificationId).ConfigureAwait(true);
         await _reminderService.DismissAsync(item.ReminderId).ConfigureAwait(true);
         Items.Remove(item);
+    }
+
+    private static bool TryReminderId(string? key, out Guid reminderId)
+    {
+        reminderId = Guid.Empty;
+        const string prefix = "booking-reminder:";
+        return key?.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) == true && Guid.TryParse(key[prefix.Length..], out reminderId);
     }
 
     public void Dispose() => _publisher.ReminderPublished -= Publisher_ReminderPublished;

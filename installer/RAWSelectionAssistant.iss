@@ -3,13 +3,17 @@
 #define MyAppPublisher "像素蛋挞"
 #define MyAppExeName "KitaoPhotoSelector.exe"
 #define MyPublishDir "..\artifacts\releases\2.2.0\publish\win-x64"
+#ifdef CandidateBuild
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.2.0\rc\publish\win-x64"
+#endif
 #ifdef TestBuild
   #undef MyAppName
   #define MyAppName "像素蛋挞 验收测试"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
-  #define MyPublishDir "..\artifacts\publish\acceptance-win-x64"
+  #define MyPublishDir "..\artifacts\releases\2.2.0\rc\publish\win-x64"
 #endif
 
 [Setup]
@@ -31,11 +35,17 @@ DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
-OutputDir=..\artifacts\releases\2.2.0\installer
 #ifdef TestBuild
+OutputDir=..\artifacts\releases\2.2.0\rc\installer
 OutputBaseFilename=像素蛋挞_Test_Setup_2.2.0_x64
 #else
+#ifdef CandidateBuild
+OutputDir=..\artifacts\releases\2.2.0\rc\installer
+OutputBaseFilename=像素蛋挞_RC_Setup_2.2.0_x64
+#else
+OutputDir=..\artifacts\releases\2.2.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.2.0_x64
+#endif
 #endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64

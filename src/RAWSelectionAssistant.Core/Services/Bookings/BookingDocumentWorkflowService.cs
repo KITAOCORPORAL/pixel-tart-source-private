@@ -15,7 +15,8 @@ public sealed class BookingDocumentWorkflowService(
     IFileVerificationService verification,
     IUndoJournalService undoJournal,
     TaskOperationBridge operationBridge,
-    IAuditLogService auditLog) : IBookingDocumentWorkflowService
+    IAuditLogService auditLog,
+    IPixelTartDatabase? database = null) : IBookingDocumentWorkflowService
 {
     private static readonly HashSet<string> AllowedExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -317,6 +318,46 @@ public sealed class BookingDocumentWorkflowService(
         }
     }
 
+    public async Task<IReadOnlyList<PendingDocumentAssociation>> ListPendingAssociationsAsync(Guid bookingId, CancellationToken cancellationToken = default)
+    {
+        if (database is null) return [];
+        var candidates = new List<PendingDocumentAssociation>();
+        await using (var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+        await using (var command = connection.CreateCommand())
+        {
+            command.CommandText = """
+                SELECT t.Id,t.ProjectId,t.InputSnapshot,oi.DestinationPath,oi.OptionalOutputHash,oi.ActualOutputSize
+                FROM Tasks t
+                JOIN OperationItems oi ON oi.TaskId=t.Id AND oi.State='Completed'
+                JOIN UndoJournals u ON u.TaskId=oi.TaskId AND u.Sequence=oi.Sequence
+                    AND u.ReverseOperation='DeleteCreatedOutput' AND u.State='Pending'
+                WHERE t.State IN ('PartiallyCompleted','NeedsAttention')
+                  AND t.InputSnapshot LIKE 'booking-document-copy;%'
+                ORDER BY t.LastUpdatedAt DESC,oi.Sequence;
+                """;
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+            {
+                if (!TryParseDocumentSnapshot(reader.GetString(2), out var snapshotBookingId, out var documentType) || snapshotBookingId != bookingId) continue;
+                candidates.Add(new PendingDocumentAssociation(
+                    Guid.Parse(reader.GetString(0)), bookingId, reader.IsDBNull(1) ? null : Guid.Parse(reader.GetString(1)), documentType,
+                    reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), reader.IsDBNull(5) ? null : reader.GetInt64(5)));
+            }
+        }
+
+        var result = new List<PendingDocumentAssociation>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var pending in candidates)
+        {
+            string normalized;
+            try { normalized = Normalize(pending.DestinationPath); }
+            catch (Exception ex) when (ex is ArgumentException or NotSupportedException or PathTooLongException) { continue; }
+            if (!seen.Add(normalized)) continue;
+            if (await repository.GetByNormalizedPathAsync(bookingId, normalized, cancellationToken).ConfigureAwait(false) is null) result.Add(pending);
+        }
+        return result;
+    }
+
     public async Task<TaskResultSummary> UndoCopiedFileAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default)
     {
         var associated = await repository.GetByNormalizedPathAsync(Normalize(pending.DestinationPath), cancellationToken).ConfigureAwait(false);
@@ -331,8 +372,30 @@ public sealed class BookingDocumentWorkflowService(
         return summary;
     }
 
-    public Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default) =>
-        WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationAbandoned", "FileKept", pending.TaskId, null, cancellationToken);
+    public async Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default)
+    {
+        await undoJournal.AbandonFileAsync(pending.TaskId, pending.DestinationPath, cancellationToken).ConfigureAwait(false);
+        await WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationAbandoned", "FileKept", pending.TaskId, null, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static bool TryParseDocumentSnapshot(string snapshot, out Guid bookingId, out BookingDocumentType documentType)
+    {
+        bookingId = Guid.Empty;
+        documentType = BookingDocumentType.Other;
+        if (string.IsNullOrWhiteSpace(snapshot)) return false;
+        var values = snapshot.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (!values[0].Equals("booking-document-copy", StringComparison.OrdinalIgnoreCase)) return false;
+        foreach (var value in values.Skip(1))
+        {
+            var separator = value.IndexOf('=');
+            if (separator <= 0) continue;
+            var key = value[..separator];
+            var content = value[(separator + 1)..];
+            if (key.Equals("booking", StringComparison.OrdinalIgnoreCase)) Guid.TryParse(content, out bookingId);
+            else if (key.Equals("type", StringComparison.OrdinalIgnoreCase)) Enum.TryParse(content, ignoreCase: true, out documentType);
+        }
+        return bookingId != Guid.Empty;
+    }
 
     private async Task<ShootBooking> EnsureBookingEditableAsync(Guid bookingId, CancellationToken cancellationToken)
     {
