@@ -19,6 +19,7 @@ public static class AppDataPaths
     public static string IndexFile => Path.Combine(IndexDirectory, "raw-index.json");
     public static string LogDirectory => Path.Combine(Root, "Logs");
     public static string CacheDirectory => Path.Combine(Root, "Cache");
+    public static string WeatherCacheDirectory => Path.Combine(CacheDirectory, "Weather");
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
     public static string ProjectDirectory => Path.Combine(Root, "Projects");

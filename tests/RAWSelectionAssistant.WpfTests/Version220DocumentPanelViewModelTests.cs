@@ -152,6 +152,7 @@ public sealed class Version220DocumentPanelViewModelTests
         public Task<BookingDocumentRelocationResult> RelocateAsync(Guid documentId, string newFilePath, bool acceptHashMismatch = false, CancellationToken cancellationToken = default) => Task.FromResult(new BookingDocumentRelocationResult(BookingDocumentRelocationStatus.NotFound, null, false, "not found"));
         public Task<bool> RemoveAssociationAsync(Guid documentId, CancellationToken cancellationToken = default) { RemoveCalls++; Documents.RemoveAll(item => item.Id == documentId); return Task.FromResult(true); }
         public Task<BookingDocumentRetryResult> RetryAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default) => Task.FromResult(new BookingDocumentRetryResult(false, null, pending, ErrorCodeCatalog.DatabaseUnavailable, "failed"));
+        public Task<IReadOnlyList<PendingDocumentAssociation>> ListPendingAssociationsAsync(Guid bookingId, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<PendingDocumentAssociation>>([]);
         public Task<TaskResultSummary> UndoCopiedFileAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default) => Task.FromResult(new TaskResultSummary(1, 0, 0, 0, 0, 1, 0, 0));
         public Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default) => Task.CompletedTask;
     }

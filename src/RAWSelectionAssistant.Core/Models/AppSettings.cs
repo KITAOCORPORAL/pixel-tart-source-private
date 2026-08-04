@@ -5,6 +5,7 @@ namespace RAWSelectionAssistant.Core.Models;
 public sealed class AppSettings
 {
     public AppearanceSettings Appearance { get; set; } = new();
+    public WeatherSettings Weather { get; set; } = new();
     [JsonPropertyName("reportSettings")]
     public ReportSettings ReportSettings { get; set; } = new();
     public List<string> PinnedQuickTools { get; set; } = QuickToolsService.DefaultPinnedTools.ToList();
@@ -46,4 +47,15 @@ public sealed class AppSettings
     public string OnboardingCompletionProof { get; set; } = string.Empty;
     [JsonPropertyName("onboardingTutorialOutputDirectory")]
     public string OnboardingTutorialOutputDirectory { get; set; } = string.Empty;
+}
+
+public sealed class WeatherSettings
+{
+    public bool Enabled { get; set; }
+    public bool AutoRefreshEnabled { get; set; }
+    public string Provider { get; set; } = "OpenMeteo";
+    public string WeatherApiBaseUrl { get; set; } = "https://api.open-meteo.com/v1/forecast";
+    public string GeocodingApiBaseUrl { get; set; } = "https://geocoding-api.open-meteo.com/v1/search";
+    public string ApiKey { get; set; } = string.Empty;
+    public Dictionary<string, WeatherLocation> BookingLocations { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 }

@@ -89,6 +89,40 @@ public sealed class Version220StageDReminderWorkbenchTests
     }
 
     [TestMethod]
+    public async Task NotificationInsertFailure_RollsBackReminderTriggerInSameTransaction()
+    {
+        using var s = await SetupAsync();
+        var id = await s.AddReminderAsync(s.Now.AddMinutes(-1));
+        await using (var connection = await s.Database.OpenConnectionAsync(write: true))
+        await using (var command = connection.CreateCommand())
+        {
+            command.CommandText = "CREATE TRIGGER fail_stage_d_notification BEFORE INSERT ON Notifications BEGIN SELECT RAISE(ABORT,'forced notification failure'); END;";
+            await command.ExecuteNonQueryAsync();
+        }
+        var message = new NotificationMessage(Guid.NewGuid(), NotificationType.Toast, NotificationSeverity.Information, "提醒", "已脱敏", null, null, [], false, s.Now);
+        await Assert.ThrowsExactlyAsync<Microsoft.Data.Sqlite.SqliteException>(() => s.Reminders.TryTriggerWithNotificationAsync(id, s.Now, message));
+        var reminder = await s.Reminders.GetAsync(id);
+        Assert.AreEqual(ReminderStatus.Scheduled, reminder!.Status);
+        Assert.IsTrue(reminder.IsEnabled);
+        Assert.IsNull(reminder.LastTriggeredAt);
+        Assert.IsEmpty(await new NotificationCenter(s.Database, TimeSpan.Zero).GetHistoryAsync());
+    }
+
+    [TestMethod]
+    public async Task ConcurrentSchedulers_StillPersistExactlyOneNotification()
+    {
+        using var s = await SetupAsync();
+        await s.AddReminderAsync(s.Now.AddMinutes(-1));
+        var center = new NotificationCenter(s.Database, TimeSpan.Zero);
+        var first = new BookingReminderScheduler(s.Reminders, s.Bookings, new BookingReminderNotificationService(center, TimeZoneInfo.Utc), s.Audit, s.Time);
+        var second = new BookingReminderScheduler(s.Reminders, s.Bookings, new BookingReminderNotificationService(center, TimeZoneInfo.Utc), s.Audit, s.Time);
+        await Task.WhenAll(first.ProcessMissedAsync(), second.ProcessMissedAsync());
+        Assert.HasCount(1, await center.GetHistoryAsync());
+        await first.DisposeAsync();
+        await second.DisposeAsync();
+    }
+
+    [TestMethod]
     public async Task MissedReminder_InsideTwentyFourHours_IsReported()
     {
         using var s = await SetupAsync();
@@ -98,6 +132,30 @@ public sealed class Version220StageDReminderWorkbenchTests
         await scheduler.ProcessMissedAsync();
         Assert.HasCount(1, notifications.Dispatches);
         Assert.IsTrue(notifications.Dispatches[0].IsMissed);
+        await scheduler.DisposeAsync();
+    }
+
+    [TestMethod]
+    public async Task MissedReminder_AtTwentyFourHourBoundary_IsReported()
+    {
+        using var s = await SetupAsync();
+        await s.AddReminderAsync(s.Now.AddHours(-24));
+        var notifications = new RecordingReminderNotification();
+        var scheduler = s.CreateScheduler(notifications);
+        await scheduler.ProcessMissedAsync();
+        Assert.HasCount(1, notifications.Dispatches);
+        await scheduler.DisposeAsync();
+    }
+
+    [TestMethod]
+    public async Task MissedReminder_AtTwentyThreeHoursFiftyNineMinutes_IsReported()
+    {
+        using var s = await SetupAsync();
+        await s.AddReminderAsync(s.Now.AddHours(-23).AddMinutes(-59));
+        var notifications = new RecordingReminderNotification();
+        var scheduler = s.CreateScheduler(notifications);
+        await scheduler.ProcessMissedAsync();
+        Assert.HasCount(1, notifications.Dispatches);
         await scheduler.DisposeAsync();
     }
 
@@ -261,6 +319,21 @@ public sealed class Version220StageDReminderWorkbenchTests
     }
 
     [TestMethod]
+    public async Task BookingTimeEdit_DoesNotChangeCustomAbsoluteOrTriggeredReminder()
+    {
+        using var s = await SetupAsync();
+        var absoluteAt = s.Now.AddMinutes(20);
+        var absolute = await s.AddReminderAsync(absoluteAt);
+        var triggered = await s.AddReminderAsync(s.Now.AddMinutes(-1), TimeSpan.FromHours(1));
+        Assert.IsTrue(await s.Reminders.TryClaimTriggeredAsync(triggered, s.Now));
+        var triggeredAt = (await s.Reminders.GetAsync(triggered))!.Trigger.At;
+        var booking = await s.Bookings.GetAsync(s.BookingId, true);
+        await s.Bookings.SaveAsync(Draft(booking! with { StartAtUtc = booking.StartAtUtc.AddDays(1), EndAtUtc = booking.EndAtUtc.AddDays(1) }));
+        Assert.AreEqual(absoluteAt, (await s.Reminders.GetAsync(absolute))!.Trigger.At);
+        Assert.AreEqual(triggeredAt, (await s.Reminders.GetAsync(triggered))!.Trigger.At);
+    }
+
+    [TestMethod]
     public async Task BookingChanges_NotifyWorkbenchAndSchedulerRefreshHooks()
     {
         using var s = await SetupAsync();
@@ -285,6 +358,21 @@ public sealed class Version220StageDReminderWorkbenchTests
         var saved = await s.Reminders.GetAsync(id);
         Assert.IsFalse(saved!.IsEnabled);
         Assert.AreEqual(ReminderStatus.Cancelled, saved.Status);
+    }
+
+    [TestMethod]
+    public async Task ArchiveDisablesReminder_AndRestoreKeepsItOff()
+    {
+        using var s = await SetupAsync();
+        var id = await s.AddReminderAsync(s.Now.AddHours(1));
+        Assert.IsTrue(await s.Bookings.ArchiveAsync(s.BookingId));
+        var archived = await s.Reminders.GetAsync(id);
+        Assert.IsFalse(archived!.IsEnabled);
+        Assert.AreEqual(ReminderStatus.Disabled, archived.Status);
+        Assert.IsTrue(await s.Bookings.RestoreAsync(s.BookingId));
+        var restored = await s.Reminders.GetAsync(id);
+        Assert.IsFalse(restored!.IsEnabled);
+        Assert.AreEqual(ReminderStatus.Disabled, restored.Status);
     }
 
     [TestMethod]
@@ -354,6 +442,37 @@ public sealed class Version220StageDReminderWorkbenchTests
         CollectionAssert.Contains(titles, "明天");
         CollectionAssert.Contains(titles, "第七天");
         CollectionAssert.DoesNotContain(titles, "第八天");
+    }
+
+    [TestMethod]
+    public async Task WorkbenchFuture_ShowsAtMostFiveButKeepsTrueTotal()
+    {
+        using var s = await SetupAsync();
+        for (var index = 0; index < 7; index++)
+            await s.CreateBookingAsync($"未来{index}", s.Now.AddDays(1).AddMinutes(index), s.Now.AddDays(1).AddHours(1).AddMinutes(index));
+        var snapshot = await s.Workbench.LoadAsync();
+        Assert.AreEqual(7, snapshot.FutureTotalCount);
+        Assert.AreEqual(5, snapshot.FutureSevenDays.SelectMany(day => day.Items).Count());
+    }
+
+    [TestMethod]
+    public async Task WorkbenchItem_UsesProjectNameGenericLocationAndChecklistWithoutPrivateMoneyOrPhone()
+    {
+        using var s = await SetupAsync(bookingStartOffset: TimeSpan.FromHours(1));
+        var projectId = Guid.NewGuid();
+        var projects = new SqliteProjectRepository(s.Database);
+        await projects.UpsertAsync(new PhotoProjectRecord { Id = projectId, Name = "公开项目名" });
+        var bookingId = await s.CreateBookingAsync("排期标题", s.Now.AddHours(2), s.Now.AddHours(3), projectId: projectId,
+            requirements: [new() { ItemText = "电池", IsCompleted = true }, new() { ItemText = "灯架" }]);
+        var service = new WorkbenchScheduleService(s.Bookings, s.Documents, s.Reminders, s.Time, TimeZoneInfo.Utc, projects);
+        var item = (await service.LoadAsync()).Today.Single(value => value.BookingId == bookingId);
+        Assert.AreEqual("公开项目名", item.ProjectName);
+        Assert.AreEqual("未记录地点", item.LocationDisplay);
+        Assert.AreEqual(1, item.RequirementCompleted);
+        Assert.AreEqual(2, item.RequirementTotal);
+        var text = string.Join('|', item.ProjectName, item.LocationDisplay);
+        Assert.IsFalse(text.Contains("138", StringComparison.Ordinal));
+        Assert.IsFalse(text.Contains("CNY", StringComparison.Ordinal));
     }
 
     [TestMethod]
@@ -477,9 +596,10 @@ public sealed class Version220StageDReminderWorkbenchTests
 
         public BookingReminderScheduler CreateScheduler(RecordingReminderNotification notifications) => new(Reminders, Bookings, notifications, Audit, Time, TimeSpan.FromSeconds(60));
 
-        public async Task<Guid> CreateBookingAsync(string title, DateTimeOffset start, DateTimeOffset end, ShootBookingStatus status = ShootBookingStatus.Confirmed)
+        public async Task<Guid> CreateBookingAsync(string title, DateTimeOffset start, DateTimeOffset end, ShootBookingStatus status = ShootBookingStatus.Confirmed,
+            Guid? projectId = null, IReadOnlyList<ShootRequirementItem>? requirements = null)
         {
-            var result = await Bookings.SaveAsync(new ShootBookingDraft { Title = title, ClientDisplayName = "客户", StartAt = start, EndAt = end, TimeZoneId = TimeZoneInfo.Utc.Id, ShootingType = "Portrait", Status = status, AllowOverlap = true });
+            var result = await Bookings.SaveAsync(new ShootBookingDraft { ProjectId = projectId, Title = title, ClientDisplayName = "客户 13800138000", StartAt = start, EndAt = end, TimeZoneId = TimeZoneInfo.Utc.Id, ShootingType = "Portrait", Status = status, AllowOverlap = true, Requirements = requirements ?? [] });
             return result.Booking!.Id;
         }
 

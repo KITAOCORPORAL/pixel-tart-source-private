@@ -26,12 +26,14 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private string _statusText = string.Empty;
 
     public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
-        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null)
+        IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
+        IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null)
     {
         _service = service;
         _reminderScheduler = reminderScheduler;
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         if (reminderService is not null) Reminders = new BookingRemindersViewModel(reminderService, reminderScheduler);
+        if (weatherService is not null && weatherState is not null) Weather = new BookingWeatherViewModel(weatherService, weatherState);
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
@@ -44,8 +46,10 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
     public BookingDocumentsViewModel? Documents { get; }
     public BookingRemindersViewModel? Reminders { get; }
+    public BookingWeatherViewModel? Weather { get; }
     public bool HasDocumentsPanel => Documents is not null;
     public bool HasRemindersPanel => Reminders is not null;
+    public bool HasWeatherPanel => Weather is not null;
     public ICommand ToggleAmountsCommand { get; }
     public ICommand CloseCommand { get; }
     public ICommand EditCommand { get; }
@@ -90,6 +94,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
                 foreach (var item in await _service.GetRequirementsAsync(bookingId).ConfigureAwait(true)) Requirements.Add(item);
                 if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
                 if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
+                if (Weather is not null) await Weather.LoadAsync(Booking).ConfigureAwait(true);
             }
             StatusText = Booking is null ? "排期不存在或已归档" : string.Empty;
         }

@@ -39,5 +39,6 @@ public interface IUndoJournalService
 {
     Task<TaskResultSummary> UndoAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task<TaskResultSummary> UndoFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default);
+    Task<bool> AbandonFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default);
 }
 

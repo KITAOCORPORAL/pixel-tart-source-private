@@ -249,6 +249,17 @@ public sealed class UndoJournalService(IUndoJournalRepository repository, IFileV
         }
     }
 
+    public async Task<bool> AbandonFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default)
+    {
+        var fullDestination = Path.GetFullPath(destinationPath);
+        var entries = await repository.ListAsync(taskId, cancellationToken).ConfigureAwait(false);
+        var entry = entries.FirstOrDefault(item => item.State == UndoJournalState.Pending && item.ReverseOperation == FileOperationType.DeleteCreatedOutput &&
+            string.Equals(Path.GetFullPath(item.DestinationPath), fullDestination, StringComparison.OrdinalIgnoreCase));
+        if (entry is null) return false;
+        await repository.UpdateStateAsync(entry.Id, UndoJournalState.Rejected, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        return true;
+    }
+
     private static async Task CopyCreateNewAsync(string sourcePath, string destinationPath, CancellationToken cancellationToken)
     {
         await using var source = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read, 131072, FileOptions.Asynchronous | FileOptions.SequentialScan);

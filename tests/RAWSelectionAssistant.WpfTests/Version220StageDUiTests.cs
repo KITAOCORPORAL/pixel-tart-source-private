@@ -1,5 +1,8 @@
 using System.IO;
 using System.Xml.Linq;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.WpfTests;
 
@@ -69,11 +72,55 @@ public sealed class Version220StageDUiTests
         Assert.IsFalse(text.Contains("Focusable=\"False\"", StringComparison.Ordinal));
     }
 
+    [TestMethod]
+    public async Task PersistedUnreadReminder_IsRestoredIntoNotificationUiAfterRestart()
+    {
+        var bookingId = Guid.NewGuid();
+        var reminderId = Guid.NewGuid();
+        var notification = new NotificationMessage(Guid.NewGuid(), NotificationType.Toast, NotificationSeverity.Information,
+            "拍摄排期提醒", "已脱敏", bookingId, null, [], false, DateTimeOffset.UtcNow, DeduplicationKey: $"booking-reminder:{reminderId:D}");
+        var center = new PersistedNotificationCenter(notification);
+        var viewModel = new ReminderNotificationCenterViewModel(new SilentReminderPublisher(), center, new SilentReminderService());
+
+        await viewModel.InitializeAsync();
+
+        Assert.HasCount(1, viewModel.Items);
+        Assert.AreEqual(bookingId, viewModel.Items[0].BookingId);
+        Assert.AreEqual(reminderId, viewModel.Items[0].ReminderId);
+        Assert.AreEqual(notification.Id, viewModel.Items[0].NotificationId);
+    }
+
     private static string Text(string relative) => File.ReadAllText(Path.Combine(Root(), relative.Replace('/', Path.DirectorySeparatorChar)));
     private static string Root()
     {
         for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
             if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
         throw new DirectoryNotFoundException();
+    }
+
+    private sealed class PersistedNotificationCenter(NotificationMessage notification) : INotificationCenter
+    {
+        public event EventHandler<NotificationMessage>? Published;
+        public Task PublishAsync(NotificationMessage message, CancellationToken cancellationToken = default) { Published?.Invoke(this, message); return Task.CompletedTask; }
+        public void NotifyPersisted(NotificationMessage message) => Published?.Invoke(this, message);
+        public Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<NotificationMessage>>([notification]);
+        public Task MarkReadAsync(Guid id, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    }
+
+    private sealed class SilentReminderPublisher : IBookingReminderNotificationService
+    {
+        public event EventHandler<ReminderPublishedEvent>? ReminderPublished { add { } remove { } }
+        public NotificationMessage CreateNotification(ReminderDispatch dispatch) => throw new NotSupportedException();
+        public Task PublishAsync(ReminderDispatch dispatch, CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public void PublishPersisted(ReminderDispatch dispatch, NotificationMessage notification) { }
+    }
+
+    private sealed class SilentReminderService : IBookingReminderService
+    {
+        public Task<IReadOnlyList<ReminderDefinition>> ListAsync(Guid bookingId, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<ReminderDefinition>>([]);
+        public Task<ReminderDefinition> SaveAsync(ReminderDefinition reminder, CancellationToken cancellationToken = default) => Task.FromResult(reminder);
+        public Task<bool> SetEnabledAsync(Guid reminderId, bool enabled, CancellationToken cancellationToken = default) => Task.FromResult(false);
+        public Task<bool> DeleteAsync(Guid reminderId, CancellationToken cancellationToken = default) => Task.FromResult(false);
+        public Task<bool> DismissAsync(Guid reminderId, CancellationToken cancellationToken = default) => Task.FromResult(false);
     }
 }

@@ -87,7 +87,14 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         PendingActions.Clear();
         if (_pendingByBooking.TryGetValue(bookingId, out var pending))
             foreach (var item in pending) PendingActions.Add(item);
-        try { await RefreshAndVerifyAsync(cancellationToken).ConfigureAwait(true); }
+        try
+        {
+            foreach (var recovered in await _workflow.ListPendingAssociationsAsync(bookingId, cancellationToken).ConfigureAwait(true))
+                if (!PendingActions.Any(item => item.Pending.TaskId == recovered.TaskId && string.Equals(item.Pending.DestinationPath, recovered.DestinationPath, StringComparison.OrdinalIgnoreCase)))
+                    PendingActions.Add(new(recovered, "已从上次未完成的文档任务恢复。"));
+            StorePendingActions();
+            await RefreshAndVerifyAsync(cancellationToken).ConfigureAwait(true);
+        }
         catch (Exception ex)
         {
             StatusText = "本地资料暂时无法加载。";

@@ -15,7 +15,7 @@ public sealed class Version220StageDDpiGateTests
         var wpfTest = Text("tests/RAWSelectionAssistant.WpfTests/Version220CalendarUiTests.cs");
         var expectedViewport = dpiPercent switch { 125 => "1024, 640", 150 => "854, 534", _ => "720, 480" };
         StringAssert.Contains(wpfTest, expectedViewport);
-        StringAssert.Contains(wpfTest, "new BookingRemindersPanel(), new WorkbenchScheduleView(), new ReminderNotificationHost()");
+        StringAssert.Contains(wpfTest, "new BookingRemindersPanel(), new BookingWeatherPanel(), new WorkbenchCalendarSummaryView(), new ReminderNotificationHost()");
     }
 
     [TestMethod] public void PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation()
@@ -41,6 +41,32 @@ public sealed class Version220StageDDpiGateTests
         StringAssert.Contains(text, "DynamicResource");
         Assert.IsFalse(text.Contains("DpiScale", StringComparison.Ordinal));
         Assert.IsFalse(text.Contains("ScaleTransform", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    [DataRow(125)]
+    [DataRow(150)]
+    [DataRow(200)]
+    public void WeatherPanels_AreIncludedInEveryLogicalDpiGate(int dpiPercent)
+    {
+        var source = Text("tests/RAWSelectionAssistant.WpfTests/Version220CalendarUiTests.cs");
+        StringAssert.Contains(source, "new BookingWeatherPanel()");
+        StringAssert.Contains(source, dpiPercent switch { 125 => "1024, 640", 150 => "854, 534", _ => "720, 480" });
+        var weather = Text("src/RAWSelectionAssistant/Views/BookingWeatherPanel.xaml");
+        Assert.IsFalse(weather.Contains("ScaleTransform", StringComparison.Ordinal));
+        Assert.IsFalse(weather.Contains("MinWidth=", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    public void WeatherPanels_UseDynamicThemesHighContrastResourcesAndAccessibilityNames()
+    {
+        var weather = Text("src/RAWSelectionAssistant/Views/BookingWeatherPanel.xaml");
+        StringAssert.Contains(weather, "DynamicResource");
+        StringAssert.Contains(weather, "AutomationProperties.Name");
+        StringAssert.Contains(weather, "AutomationProperties.HelpText");
+        Assert.IsFalse(weather.Contains("#FFFFFF", StringComparison.OrdinalIgnoreCase));
+        var theme = Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.HighContrast.xaml");
+        StringAssert.Contains(theme, "ResourceDictionary");
     }
 
     [TestMethod] public void MainWorkbench_PreservesResponsiveTaskCenterAndScheduleRows()
