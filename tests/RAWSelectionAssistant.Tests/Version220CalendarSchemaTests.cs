@@ -170,6 +170,6 @@ public sealed class Version220CalendarSchemaTests
     private sealed class Setup(TempDirectory temp, PixelTartDatabase database) : IDisposable
     {
         public PixelTartDatabase Database { get; } = database;
-        public void Dispose() { SqliteConnection.ClearAllPools(); temp.Dispose(); }
+        public void Dispose() { SqliteTestIsolation.ClearPool(Database); temp.Dispose(); }
     }
 }

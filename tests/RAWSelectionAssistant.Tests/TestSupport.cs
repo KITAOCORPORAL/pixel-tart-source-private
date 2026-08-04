@@ -1,5 +1,7 @@
+using Microsoft.Data.Sqlite;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Database;
 
 namespace RAWSelectionAssistant.Tests;
 
@@ -32,6 +34,23 @@ internal sealed class TempDirectory : IDisposable
     public void Dispose()
     {
         try { Directory.Delete(Path, true); } catch { }
+    }
+}
+
+internal static class SqliteTestIsolation
+{
+    public static void ClearPool(PixelTartDatabase database)
+    {
+        var builder = new SqliteConnectionStringBuilder
+        {
+            DataSource = database.DatabasePath,
+            Mode = database.IsReadOnly ? SqliteOpenMode.ReadOnly : SqliteOpenMode.ReadWriteCreate,
+            Cache = SqliteCacheMode.Shared,
+            Pooling = true,
+            DefaultTimeout = 5
+        };
+        using var connection = new SqliteConnection(builder.ToString());
+        SqliteConnection.ClearPool(connection);
     }
 }
 

@@ -183,6 +183,6 @@ public sealed class Version220DocumentReminderTests
         public SqliteBookingDocumentRepository DocumentRepository { get; }
         public BookingDocumentService DocumentService { get; }
         public SqliteReminderRepository ReminderRepository { get; }
-        public void Dispose() { SqliteConnection.ClearAllPools(); Temp.Dispose(); }
+        public void Dispose() { SqliteTestIsolation.ClearPool(Database); Temp.Dispose(); }
     }
 }
