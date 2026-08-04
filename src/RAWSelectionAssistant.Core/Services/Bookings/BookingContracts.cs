@@ -36,9 +36,12 @@ public interface IBookingDocumentRepository
 {
     Task AddAsync(BookingDocumentRecord document, CancellationToken cancellationToken = default);
     Task<BookingDocumentRecord?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<BookingDocumentRecord?> GetByNormalizedPathAsync(Guid bookingId, string normalizedPath, CancellationToken cancellationToken = default);
+    Task<BookingDocumentRecord?> GetByNormalizedPathAsync(string normalizedPath, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<BookingDocumentRecord>> ListByBookingAsync(Guid bookingId, CancellationToken cancellationToken = default);
     Task UpdateLocationAsync(Guid id, string filePath, string normalizedPath, string fileExtension, long? fileSize, DateTimeOffset? modifiedAtUtc, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default);
     Task SetMissingAsync(Guid id, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default);
+    Task UpdateHashAsync(Guid id, string? optionalHash, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default);
     Task<bool> RemoveAssociationAsync(Guid id, CancellationToken cancellationToken = default);
 }
 
@@ -48,4 +51,18 @@ public interface IBookingDocumentService
     Task<BookingDocumentRecord?> VerifyAsync(Guid documentId, CancellationToken cancellationToken = default);
     Task<BookingDocumentRecord> RelocateAsync(Guid documentId, string newFilePath, CancellationToken cancellationToken = default);
     Task<bool> RemoveAssociationAsync(Guid documentId, CancellationToken cancellationToken = default);
+}
+
+public interface IBookingDocumentWorkflowService
+{
+    Task<IReadOnlyList<BookingDocumentRecord>> ListAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<string?> GetSuggestedDestinationAsync(Guid? projectId, BookingDocumentType documentType, CancellationToken cancellationToken = default);
+    Task<BookingDocumentBatchResult> AddReferencesAsync(BookingDocumentAddRequest request, CancellationToken cancellationToken = default);
+    Task<BookingDocumentBatchResult> CopyAndAssociateAsync(BookingDocumentCopyRequest request, CancellationToken cancellationToken = default);
+    Task<BookingDocumentCheckResult?> VerifyAsync(Guid documentId, CancellationToken cancellationToken = default);
+    Task<BookingDocumentRelocationResult> RelocateAsync(Guid documentId, string newFilePath, bool acceptHashMismatch = false, CancellationToken cancellationToken = default);
+    Task<bool> RemoveAssociationAsync(Guid documentId, CancellationToken cancellationToken = default);
+    Task<BookingDocumentRetryResult> RetryAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
+    Task<TaskResultSummary> UndoCopiedFileAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
+    Task AbandonAssociationAsync(PendingDocumentAssociation pending, CancellationToken cancellationToken = default);
 }

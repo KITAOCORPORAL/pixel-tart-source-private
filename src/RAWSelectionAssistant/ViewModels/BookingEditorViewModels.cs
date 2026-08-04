@@ -5,6 +5,7 @@ using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
@@ -22,9 +23,10 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private bool _isBusy;
     private string _statusText = string.Empty;
 
-    public ShootBookingDetailsViewModel(IShootBookingService service)
+    public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null)
     {
         _service = service;
+        if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
@@ -35,6 +37,8 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public event EventHandler<Guid>? EditRequested;
     public event EventHandler<Guid>? Archived;
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
+    public BookingDocumentsViewModel? Documents { get; }
+    public bool HasDocumentsPanel => Documents is not null;
     public ICommand ToggleAmountsCommand { get; }
     public ICommand CloseCommand { get; }
     public ICommand EditCommand { get; }
@@ -74,7 +78,10 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
             Booking = await _service.GetAsync(bookingId, includeArchived).ConfigureAwait(true);
             Requirements.Clear();
             if (Booking is not null)
+            {
                 foreach (var item in await _service.GetRequirementsAsync(bookingId).ConfigureAwait(true)) Requirements.Add(item);
+                if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
+            }
             StatusText = Booking is null ? "排期不存在或已归档" : string.Empty;
         }
         catch (Exception ex) { StatusText = $"加载失败：{ex.Message}"; }
@@ -85,6 +92,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     {
         if (Booking is null || !await _service.ArchiveAsync(Booking.Id).ConfigureAwait(true)) return;
         Booking = Booking with { IsArchived = true, ArchivedAtUtc = DateTimeOffset.UtcNow };
+        if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, isArchived: true).ConfigureAwait(true);
         StatusText = "排期已归档；提醒已关闭，关联数据与电脑文件均已保留。";
         Archived?.Invoke(this, Booking.Id);
     }

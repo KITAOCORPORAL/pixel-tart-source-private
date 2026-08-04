@@ -1,0 +1,8 @@
+<Window x:Class="RAWSelectionAssistant.Views.DocumentDropChoiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="添加本地摄影资料" Width="520" SizeToContent="Height" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
+        AutomationProperties.Name="选择文档关联方式">
+    <Border Style="{StaticResource PanelBorder}" Margin="16"><StackPanel><TextBlock Text="如何处理拖入的文件？" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="默认仅保存原位置引用，不会复制、移动、重命名或删除文件。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,14" /><Button Content="仅关联原位置（默认）" IsDefault="True" Style="{StaticResource PrimaryButton}" Click="Reference_Click" AutomationProperties.Name="仅关联原位置" /><Button Content="复制到项目资料目录并关联" Style="{StaticResource SecondaryButton}" Margin="0,8,0,0" Click="ManagedCopy_Click" AutomationProperties.Name="复制到项目资料目录并关联" /><Button Content="取消" IsCancel="True" Style="{StaticResource GhostButton}" Margin="0,8,0,0" Click="Cancel_Click" AutomationProperties.Name="取消添加文档" /></StackPanel></Border>
+</Window>
