@@ -307,7 +307,7 @@ public sealed class BookingDocumentWorkflowService(
             if (existing is not null) return new(true, existing, null, null, "关联记录已经存在。" );
             var document = BuildDocument(pending.BookingId, booking.ProjectId, pending.DocumentType, pending.DestinationPath, BookingDocumentLinkMode.ManagedCopy, pending.TaskId, pending.OutputHash);
             await repository.AddAsync(document, cancellationToken).ConfigureAwait(false);
-            await WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationRetried", "Succeeded", pending.TaskId, null, cancellationToken).ConfigureAwait(false);
+            await WriteAuditAsync(pending.BookingId, booking.ProjectId, pending.DocumentType, "AssociationRetried", "Succeeded", pending.TaskId, null, cancellationToken).ConfigureAwait(false);
             return new(true, document, null, null, "关联记录已保存。" );
         }
         catch (Exception)
