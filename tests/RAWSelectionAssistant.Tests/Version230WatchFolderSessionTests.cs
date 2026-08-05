@@ -120,6 +120,58 @@ public sealed class Version230WatchFolderSessionTests
     }
 
     [TestMethod]
+    public async Task MixedBurstEvents_DeduplicateToOneHundredReadyAssets()
+    {
+        using var setup = await SetupAsync();
+        var (adapter, source) = setup.Adapter(new StableProbe());
+        var session = await adapter.StartAsync(new(setup.WatchDirectory, ImportExisting: true));
+        var paths = Enumerable.Range(0, 100)
+            .Select(index => setup.Temp.CreateFile($"watch/mixed-{index:D3}{(index % 2 == 0 ? ".jpg" : ".nef")}", [(byte)index, 1, 2, 3]))
+            .ToArray();
+        foreach (var path in paths)
+        {
+            source.Publish(WatchFolderEventKind.Created, path);
+            source.Publish(WatchFolderEventKind.Changed, path);
+            source.Publish(WatchFolderEventKind.Renamed, path);
+        }
+
+        await session.ReconcileAsync();
+
+        var assets = await setup.Assets.ListBySessionAsync(session.Session.Id);
+        Assert.HasCount(100, assets);
+        Assert.AreEqual(100, assets.Count(asset => asset.StabilityState == TetherStabilityState.Stable));
+        Assert.HasCount(100, assets.Select(asset => asset.NormalizedSourcePath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+        Assert.IsTrue(paths.All(File.Exists));
+        await session.DisposeAsync();
+    }
+
+    [TestMethod]
+    [Timeout(120000, CooperativeCancellation = true)]
+    public async Task BatchOfOneThousandSyntheticFiles_CompletesWithoutDuplicatesOrSourceChanges()
+    {
+        using var setup = await SetupAsync();
+        var paths = Enumerable.Range(0, 1000)
+            .Select(index => setup.Temp.CreateFile($"watch/batch-{index:D4}{(index % 2 == 0 ? ".jpg" : ".nef")}", [(byte)(index % 251), 2, 3, 4]))
+            .ToArray();
+        var before = paths.ToDictionary(path => path, path => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))), StringComparer.OrdinalIgnoreCase);
+        var (adapter, _) = setup.Adapter(new StableProbe());
+        var session = await adapter.StartAsync(new(setup.WatchDirectory, ImportExisting: true));
+
+        await session.ReconcileAsync();
+
+        var assets = await setup.Assets.ListBySessionAsync(session.Session.Id);
+        Assert.HasCount(1000, assets);
+        Assert.AreEqual(1000, assets.Count(asset => asset.StabilityState == TetherStabilityState.Stable));
+        Assert.HasCount(1000, assets.Select(asset => asset.NormalizedSourcePath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+        foreach (var path in paths)
+        {
+            Assert.IsTrue(File.Exists(path));
+            Assert.AreEqual(before[path], Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))));
+        }
+        await session.DisposeAsync();
+    }
+
+    [TestMethod]
     public async Task RawCandidate_UsesPlaceholderAndKeepsRawFile()
     {
         using var setup = await SetupAsync();
@@ -233,6 +285,30 @@ public sealed class Version230WatchFolderSessionTests
         Directory.Delete(setup.WatchDirectory, true); await session.ReconcileAsync();
         Assert.AreEqual(TetherSessionState.NeedsAttention, session.Session.State);
         Assert.AreEqual(ErrorCodeCatalog.SourceNotFound, session.Session.LastErrorCode);
+        Assert.IsTrue(File.Exists(safe));
+        await session.DisposeAsync();
+    }
+
+    [TestMethod]
+    public async Task RestoredWatchDirectory_ReconcileReturnsSessionToRunningWithoutDuplicateAssets()
+    {
+        using var setup = await SetupAsync();
+        var safe = setup.Temp.CreateFile("outside-safe.jpg", [1, 2, 3]);
+        var (adapter, _) = setup.Adapter(new StableProbe());
+        var session = await adapter.StartAsync(new(setup.WatchDirectory, ImportExisting: true));
+        Directory.Delete(setup.WatchDirectory, true);
+        await session.ReconcileAsync();
+        Assert.AreEqual(TetherSessionState.NeedsAttention, session.Session.State);
+
+        Directory.CreateDirectory(setup.WatchDirectory);
+        var restored = setup.Temp.CreateFile("watch/restored.jpg", [4, 5, 6]);
+        await session.ReconcileAsync();
+        await session.ReconcileAsync();
+
+        Assert.AreEqual(TetherSessionState.Running, session.Session.State);
+        Assert.IsNull(session.Session.LastErrorCode);
+        Assert.HasCount(1, await setup.Assets.ListBySessionAsync(session.Session.Id));
+        Assert.IsTrue(File.Exists(restored));
         Assert.IsTrue(File.Exists(safe));
         await session.DisposeAsync();
     }
