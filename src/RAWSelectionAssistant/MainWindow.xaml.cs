@@ -27,6 +27,10 @@ public partial class MainWindow : Window
     private MainViewModel? _viewModel;
     private TutorialTarget? _lastTutorialTarget;
     private bool _taskCenterDrawerOpen;
+    private bool _tetherFullScreen;
+    private WindowStyle _tetherPreviousWindowStyle;
+    private WindowState _tetherPreviousWindowState;
+    private ResizeMode _tetherPreviousResizeMode;
     private Point _quickDragStart;
     private string? _quickDraggedId;
     private Button? _quickInsertionTarget;
@@ -185,6 +189,18 @@ public partial class MainWindow : Window
 
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (_viewModel?.IsTetherPage == true && e.Key == Key.F11 && _viewModel.TetherPage?.ToggleFullScreenCommand.CanExecute(null) == true)
+        {
+            _viewModel.TetherPage.ToggleFullScreenCommand.Execute(null);
+            e.Handled = true;
+            return;
+        }
+        if (_tetherFullScreen && e.Key == Key.Escape && _viewModel?.TetherPage?.ToggleFullScreenCommand.CanExecute(null) == true)
+        {
+            _viewModel.TetherPage.ToggleFullScreenCommand.Execute(null);
+            e.Handled = true;
+            return;
+        }
         if (e.Key == Key.Escape && _viewModel?.IsSettingsModalOpen == true)
         {
             _viewModel.IsSettingsModalOpen = false;
@@ -232,6 +248,41 @@ public partial class MainWindow : Window
             SearchBox.Focus();
             SearchBox.SelectAll();
             e.Handled = true;
+        }
+    }
+
+    private void TetherCaptureView_FullScreenChanged(object? sender, TetherFullScreenChangedEventArgs e)
+    {
+        if (e.IsFullScreen == _tetherFullScreen) return;
+        if (e.IsFullScreen)
+        {
+            _tetherPreviousWindowStyle = WindowStyle;
+            _tetherPreviousWindowState = WindowState;
+            _tetherPreviousResizeMode = ResizeMode;
+            _tetherFullScreen = true;
+            TopMenu.Visibility = Visibility.Collapsed;
+            SidebarContainer.Visibility = Visibility.Collapsed;
+            BottomStatusBar.Visibility = Visibility.Collapsed;
+            TaskCenterPanel.Visibility = Visibility.Collapsed;
+            UnifiedTaskCenterPanel.Visibility = Visibility.Collapsed;
+            RootGrid.RowDefinitions[0].Height = new GridLength(0);
+            RootGrid.RowDefinitions[2].Height = new GridLength(0);
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            WindowState = WindowState.Maximized;
+        }
+        else
+        {
+            _tetherFullScreen = false;
+            WindowStyle = _tetherPreviousWindowStyle;
+            ResizeMode = _tetherPreviousResizeMode;
+            WindowState = _tetherPreviousWindowState;
+            TopMenu.Visibility = Visibility.Visible;
+            SidebarContainer.Visibility = Visibility.Visible;
+            BottomStatusBar.Visibility = Visibility.Visible;
+            RootGrid.RowDefinitions[0].Height = new GridLength(36);
+            RootGrid.RowDefinitions[2].Height = new GridLength(34);
+            UpdateWorkbenchResponsiveLayout();
         }
     }
 
@@ -426,7 +477,9 @@ public partial class MainWindow : Window
         var root = document.RootElement;
         var width = root.GetProperty("Width").GetDouble();
         var height = root.GetProperty("Height").GetDouble();
-        var dark = string.Equals(root.GetProperty("Theme").GetString(), "Dark", StringComparison.OrdinalIgnoreCase);
+        var themeName = root.GetProperty("Theme").GetString() ?? "Dark";
+        var dark = string.Equals(themeName, "Dark", StringComparison.OrdinalIgnoreCase);
+        var highContrast = string.Equals(themeName, "HighContrast", StringComparison.OrdinalIgnoreCase);
         var collapsed = root.GetProperty("SidebarCollapsed").GetBoolean();
         var reviewState = root.GetProperty("State").GetString();
         var outputPath = root.GetProperty("OutputPath").GetString();
@@ -440,7 +493,16 @@ public partial class MainWindow : Window
             Theme = dark ? RAWSelectionAssistant.Core.Models.ThemeMode.Dark : RAWSelectionAssistant.Core.Models.ThemeMode.Light,
             SidebarCollapsed = collapsed
         });
-        NativeWindowTheme.Apply(this, dark);
+        if (highContrast)
+        {
+            var dictionaries = Application.Current.Resources.MergedDictionaries;
+            var current = dictionaries.FirstOrDefault(dictionary =>
+                dictionary.Source?.OriginalString.Contains("DesignSystem/Theme.", StringComparison.OrdinalIgnoreCase) == true);
+            var replacement = new ResourceDictionary { Source = new Uri("Resources/DesignSystem/Theme.HighContrast.xaml", UriKind.Relative) };
+            if (current is null) dictionaries.Insert(0, replacement);
+            else dictionaries[dictionaries.IndexOf(current)] = replacement;
+        }
+        NativeWindowTheme.Apply(this, dark && !highContrast);
         if (_viewModel is null) return;
         if (_viewModel.IsSidebarCollapsed != collapsed)
         {
@@ -495,6 +557,8 @@ public partial class MainWindow : Window
         if (tab is not null) RecentProjectTab_Click(tab, new RoutedEventArgs());
         RootGrid.UpdateLayout();
         UpdateWorkbenchResponsiveLayout();
+        if (reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true)
+            TetherMonitorView.ApplyReviewPresentation(reviewState, width);
         FinalizeAutomatedDpiAcceptanceState(reviewState);
 
         if (string.Equals(reviewState, "ToolboxPopup", StringComparison.OrdinalIgnoreCase))
@@ -515,8 +579,15 @@ public partial class MainWindow : Window
         }
         if (!string.IsNullOrWhiteSpace(outputPath) && !string.Equals(outputPath, "KEEP_OPEN", StringComparison.OrdinalIgnoreCase))
         {
-            var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(550) };
-            captureTimer.Tick += (_, _) => { captureTimer.Stop(); CaptureUiReviewFrame(outputPath); };
+            var captureDelay = reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true ? 2200 : 550;
+            var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(captureDelay) };
+            captureTimer.Tick += (_, _) =>
+            {
+                captureTimer.Stop();
+                if (reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true)
+                    TetherMonitorView.ApplyReviewPresentation(reviewState, width);
+                CaptureUiReviewFrame(outputPath);
+            };
             captureTimer.Start();
         }
     }

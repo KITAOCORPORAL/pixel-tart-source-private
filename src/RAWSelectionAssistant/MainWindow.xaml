@@ -68,7 +68,7 @@
             <RowDefinition Height="34" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Style="{StaticResource WorkbenchMenuStyle}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
+        <Menu x:Name="TopMenu" Grid.Row="0" Style="{StaticResource WorkbenchMenuStyle}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
             <MenuItem Header="文件(_F)">
                 <MenuItem Header="新建本地分片任务" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit" />
                 <MenuItem Header="新建归片项目" InputGestureText="Ctrl+N" Command="{Binding NewProjectCommand}" />
@@ -220,7 +220,7 @@
                 <Border Grid.Column="0" Width="0" />
                 <Grid Grid.Column="1">
                 <views:WorkCalendarView DataContext="{Binding WorkCalendarPage}" Visibility="{Binding IsWorkCalendarPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <views:TetherCaptureView DataContext="{Binding TetherPage}" Visibility="{Binding IsTetherPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <views:TetherCaptureView x:Name="TetherMonitorView" DataContext="{Binding TetherPage}" Visibility="{Binding IsTetherPage, Converter={StaticResource BooleanToVisibilityConverter}}" FullScreenChanged="TetherCaptureView_FullScreenChanged" />
                 <Grid x:Name="WorkflowWorkspace" Margin="14" Visibility="{Binding IsWorkflowPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="12" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Border Style="{StaticResource PanelBorder}" Padding="10">
@@ -573,7 +573,7 @@
             </Grid>
         </Grid>
 
-        <Border Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <Grid Margin="18,0"><TextBlock Text="{Binding StatusMessage}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" /><TextBlock Text="{Binding CurrentItem}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="720" /><TextBlock Text="{Binding ProcessedCount, StringFormat=已处理 {0:N0}}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
         </Border>
 

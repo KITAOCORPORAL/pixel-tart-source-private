@@ -25,6 +25,7 @@ public interface ITetherAnnotationRepository
 {
     Task UpsertAsync(TetherAnnotationRecord annotation, CancellationToken cancellationToken = default);
     Task<TetherAnnotationRecord?> GetByAssetAsync(Guid assetId, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<TetherAnnotationRecord>> ListBySessionAsync(Guid sessionId, CancellationToken cancellationToken = default);
 }
 
 public sealed class SqliteTetherSessionRepository(IPixelTartDatabase database) : ITetherSessionRepository
@@ -236,7 +237,9 @@ public sealed class SqliteTetherAnnotationRepository(IPixelTartDatabase database
     public async Task UpsertAsync(TetherAnnotationRecord annotation, CancellationToken cancellationToken = default)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
+        command.Transaction = transaction;
         command.CommandText = """
             INSERT INTO TetherAnnotations(Id,AssetId,Rating,ColorLabel,PhotographerNote,ClientFavorite,ClientNote,IsRejected,CreatedAtUtc,UpdatedAtUtc)
             VALUES($id,$asset,$rating,$color,$photographerNote,$favorite,$clientNote,$rejected,$created,$updated)
@@ -249,6 +252,7 @@ public sealed class SqliteTetherAnnotationRepository(IPixelTartDatabase database
         command.Parameters.AddWithValue("$rejected", annotation.IsRejected ? 1 : 0); command.Parameters.AddWithValue("$created", annotation.CreatedAtUtc.ToString("O"));
         command.Parameters.AddWithValue("$updated", annotation.UpdatedAtUtc.ToString("O"));
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<TetherAnnotationRecord?> GetByAssetAsync(Guid assetId, CancellationToken cancellationToken = default)
@@ -260,5 +264,23 @@ public sealed class SqliteTetherAnnotationRepository(IPixelTartDatabase database
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) return null;
         return new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), reader.GetInt32(2), reader.IsDBNull(3) ? null : reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), DateTimeOffset.Parse(reader.GetString(5)), DateTimeOffset.Parse(reader.GetString(6)), reader.GetInt32(7) != 0, reader.IsDBNull(8) ? null : reader.GetString(8), reader.GetInt32(9) != 0);
+    }
+
+    public async Task<IReadOnlyList<TetherAnnotationRecord>> ListBySessionAsync(Guid sessionId, CancellationToken cancellationToken = default)
+    {
+        var result = new List<TetherAnnotationRecord>();
+        await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = """
+            SELECT a.Id,a.AssetId,a.Rating,a.ColorLabel,a.PhotographerNote,a.CreatedAtUtc,a.UpdatedAtUtc,a.ClientFavorite,a.ClientNote,a.IsRejected
+            FROM TetherAnnotations a
+            INNER JOIN TetherAssets t ON t.Id=a.AssetId
+            WHERE t.SessionId=$session;
+            """;
+        command.Parameters.AddWithValue("$session", sessionId.ToString("D"));
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+            result.Add(new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), reader.GetInt32(2), reader.IsDBNull(3) ? null : reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), DateTimeOffset.Parse(reader.GetString(5)), DateTimeOffset.Parse(reader.GetString(6)), reader.GetInt32(7) != 0, reader.IsDBNull(8) ? null : reader.GetString(8), reader.GetInt32(9) != 0));
+        return result;
     }
 }

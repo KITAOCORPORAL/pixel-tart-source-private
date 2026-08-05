@@ -23,7 +23,7 @@ public sealed class Version230TetherUiTests
     public void TetherPage_ClearlyLabelsWatchFolderNotUsbDirect()
     {
         var xaml = TetherXaml();
-        Contains(xaml, "当前为看守文件夹模式，并非相机USB直连", "不提供实时取景、遥控快门或相机设置", "ProviderText");
+        Contains(xaml, "当前为看守文件夹模式，并非相机USB直连", "不提供实时取景、遥控快门、相机参数控制", "ProviderText");
     }
 
     [TestMethod]
@@ -48,11 +48,11 @@ public sealed class Version230TetherUiTests
     }
 
     [TestMethod]
-    public void TetherPage_ReservesAnnotationsWithoutOpeningStageCEditor()
+    public void TetherPage_UsesReservedAnnotationsForStageCLocalEditor()
     {
-        var xaml = TetherXaml();
-        Contains(xaml, "TetherAnnotations 已预留", "本阶段不开放标注编辑器", "客户收藏", "拒片标记", "AutomationProperties.Name=\"联机文件列表\"");
-        Assert.IsFalse(xaml.Contains("SaveAnnotationCommand", StringComparison.Ordinal));
+        var combined = TetherXaml() + Text("src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs");
+        Contains(combined, "SaveNotesCommand", "客户收藏", "快速拒绝", "IsRejected", "AutomationProperties.Name=\"联机文件列表\"");
+        Assert.IsFalse(combined.Contains("File.Delete", StringComparison.Ordinal));
     }
 
     [TestMethod]

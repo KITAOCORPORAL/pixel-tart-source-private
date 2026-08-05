@@ -133,7 +133,11 @@ public partial class App : Application
                 _compositionRoot.TetherSessionRepository,
                 _compositionRoot.TetherAssetRepository,
                 tetherProxyCache,
-                dialogService);
+                dialogService,
+                new TetherAnnotationService(
+                    _compositionRoot.TetherAnnotationRepository,
+                    _compositionRoot.AuditLog,
+                    _compositionRoot.NotificationCenter));
 
             _mainViewModel = new MainViewModel(
                 normalizer,
