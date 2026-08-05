@@ -152,10 +152,16 @@ public partial class MainWindow
             : [];
         var records = new List<TetherAssetRecord>();
         var rawId = Guid.Parse("23000000-0000-0000-0000-000000000099");
-        for (var index = 0; index < imagePaths.Length; index++)
+        var requestedCount = state switch
+        {
+            "TetherAssets1000" => 999,
+            "TetherBurst" => 99,
+            _ => imagePaths.Length
+        };
+        for (var index = 0; index < requestedCount && imagePaths.Length > 0; index++)
         {
             var id = Guid.Parse($"23000000-0000-0000-0000-{index + 1:000000000000}");
-            var path = imagePaths[index];
+            var path = imagePaths[index % imagePaths.Length];
             var file = new FileInfo(path);
             records.Add(new(
                 id, sessionId, null, path, path.ToUpperInvariant(), file.Name, file.Extension,

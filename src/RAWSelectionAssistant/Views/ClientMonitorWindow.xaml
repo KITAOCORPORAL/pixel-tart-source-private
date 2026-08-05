@@ -16,7 +16,7 @@
             <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                 <Button Content="客户收藏" Command="{Binding ToggleFavoriteCommand}" Padding="16,8" AutomationProperties.Name="客户收藏按钮" />
                 <StackPanel Grid.Column="1" Margin="16,0"><TextBlock Text="客户备注" /><TextBox Text="{Binding ClientNote, UpdateSourceTrigger=PropertyChanged}" MinWidth="360" MaxWidth="720" Height="42" AutomationProperties.Name="客户备注输入框" /></StackPanel>
-                <StackPanel Grid.Column="2" Orientation="Horizontal"><Button Content="清空" Command="{Binding ClearNoteCommand}" Padding="12,8" Margin="0,0,8,0" /><Button Content="保存备注" Command="{Binding SaveNoteCommand}" Padding="16,8" /></StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal"><Button Content="清空" Command="{Binding ClearNoteCommand}" Padding="12,8" Margin="0,0,8,0" AutomationProperties.Name="清空客户备注" /><Button Content="保存备注" Command="{Binding SaveNoteCommand}" Padding="16,8" AutomationProperties.Name="保存客户备注" /></StackPanel>
             </Grid>
         </Border>
         <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,58,16,0" Background="#CC11161D" Padding="10"><TextBlock Text="{Binding NewAssetText}" Foreground="#F2B84B" /></Border>
