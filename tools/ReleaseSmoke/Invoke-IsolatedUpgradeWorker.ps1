@@ -1,6 +1,7 @@
 param([Parameter(Mandatory=$true)][string]$ContextPath)
 
 $ErrorActionPreference = 'Stop'
+function Decode([string]$Value) { [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Value)) }
 $context = Get-Content -LiteralPath $ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $env:LOCALAPPDATA = $context.LocalAppData
 $appDataRoot = Join-Path $context.LocalAppData 'KitaoPhotoSelector.Acceptance'
@@ -20,7 +21,7 @@ $projectId = [Guid]::NewGuid()
     OnboardingCompleted = $true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $appDataRoot 'settings.json') -Encoding UTF8
 
-$upgradeProjectName = '2.2.0 隔离升级项目'
+$upgradeProjectName = Decode 'Mi4yLjAg6ZqU56a75Y2H57qn6aG555uu'
 $projectTimestamp = [DateTimeOffset]::UtcNow.ToString('O')
 @"
 [

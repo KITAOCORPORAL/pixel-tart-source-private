@@ -64,7 +64,7 @@ $N = @{
     Workflow=Decode '5b2S54mH5bel5L2c5Yy6'; SourceDirectory=Decode '54Wn54mH5p2l5rqQ55uu5b2V'; History=Decode '6aG555uu5Y6G5Y+y'; Toolbox=Decode '5bel5YW3566x'; ViewAll=Decode '5p+l55yL5YWo6YOo5bel5YW3';
     Settings=Decode '6K6+572u'; CloseSettings=Decode '5YWz6Zet6K6+572u'; CollagePage=Decode '5ou85Zu+6aG16Z2i'; ImportPhotos=Decode '5a+85YWl54Wn54mH';
     ToolPage=Decode '5bel5YW3566x';
-    WorkCalendar=Decode '5bel5L2c5pel5Y6G'; NewBooking=Decode '5paw5bu65ouN5pGE5o6S5pyf'; Tether='联机拍摄'; TetherWorkspace='联机拍摄现场监看工作区';
+    WorkCalendar=Decode '5bel5L2c5pel5Y6G'; NewBooking=Decode '5paw5bu65ouN5pGE5o6S5pyf'; Tether=Decode '6IGU5py65ouN5pGE'; TetherWorkspace=Decode '6IGU5py65ouN5pGE546w5Zy655uR55yL5bel5L2c5Yy6';
     Month=Decode '5pyI'; MonthView=Decode '5pyI6KeG5Zu+'; Week=Decode '5ZGo'; WeekView=Decode '5ZGo6KeG5Zu+';
     Day=Decode '5pel'; DayView=Decode '5pel6KeG5Zu+'; ProjectName=Decode '6aG555uu5ZCN56ew'; StartDate=Decode '5byA5aeL5pel5pyf'; EndDate=Decode '57uT5p2f5pel5pyf';
     AcceptanceBooking=Decode '6ZqU56a76aqM5pS25o6S5pyf'; EditedAcceptanceBooking=Decode '6ZqU56a76aqM5pS25o6S5pyfLeW3sue8lui+kQ==';
@@ -262,33 +262,6 @@ try {
     $script:mainHandle=$main.Current.NativeWindowHandle
     $script:workbenchNavigation=Find-Control -root $main -name $N.Workbench -type ([System.Windows.Automation.ControlType]::Button) -timeout 8
     $result.AppRestartedAfterReminder=$true
-<#[
-    Invoke-Control (Find-Control $main '工作日历' '' ([System.Windows.Automation.ControlType]::Button) 12)
-    $result.WorkCalendarOpened=$null -ne (Find-Control $main '新建拍摄排期' '' ([System.Windows.Automation.ControlType]::Button) 12)
-    Invoke-Control (Find-Control $main '月' '' ([System.Windows.Automation.ControlType]::Button) 5);$result.MonthViewOpened=$null -ne (Find-Control $main '月视图' '' $null 8)
-    Invoke-Control (Find-Control $main '周' '' ([System.Windows.Automation.ControlType]::Button) 5);$result.WeekViewOpened=$null -ne (Find-Control $main '周视图' '' $null 8)
-    Invoke-Control (Find-Control $main '日' '' ([System.Windows.Automation.ControlType]::Button) 5);$result.DayViewOpened=$null -ne (Find-Control $main '日视图' '' $null 8)
-    Invoke-Control (Find-Control $main '月' '' ([System.Windows.Automation.ControlType]::Button) 5)
-    Invoke-Control (Find-Control $main '新建拍摄排期' '' ([System.Windows.Automation.ControlType]::Button) 8)
-    $editor=Find-ChildWindow $process.Id $main.Current.NativeWindowHandle '新建拍摄排期' 10
-    if($null -eq $editor){throw 'Booking editor did not open.'}
-    Set-Value (Find-Control $editor '项目名称' '' ([System.Windows.Automation.ControlType]::Edit) 8) '隔离验收排期'
-    Invoke-Control (Find-Control $editor '保存排期' '' ([System.Windows.Automation.ControlType]::Button) 8)
-    $bookingButton=Find-Control $main '隔离验收排期' '' ([System.Windows.Automation.ControlType]::Button) 12 -contains
-    $result.BookingCreated=$null -ne $bookingButton
-    Invoke-Control $bookingButton
-    Invoke-Control (Find-Control $main '编辑排期' '' ([System.Windows.Automation.ControlType]::Button) 8)
-    $editor=Find-ChildWindow $process.Id $main.Current.NativeWindowHandle '' 10
-    if($null -eq $editor){throw 'Booking edit window did not open.'}
-    Set-Value (Find-Control $editor '项目名称' '' ([System.Windows.Automation.ControlType]::Edit) 8) '隔离验收排期-已编辑'
-    Invoke-Control (Find-Control $editor '保存排期' '' ([System.Windows.Automation.ControlType]::Button) 8)
-    $result.BookingEdited=$null -ne (Find-Control $main '隔离验收排期-已编辑' '' $null 12 -contains)
-    $result.ReminderDefaultOffVisible=$null -ne (Find-Control $main '新提醒默认关闭' '' $null 8 -contains)
-    $result.WeatherDefaultOffVisible=$null -ne (Find-Control $main '尚未启用天气' '' $null 8 -contains)
-    $enableReminder=Find-Control $main '保存后立即启用提醒' '' ([System.Windows.Automation.ControlType]::CheckBox) 8
-    if($enableReminder){Toggle-Control $enableReminder;Invoke-Control (Find-Control $main '保存排期提醒' '' ([System.Windows.Automation.ControlType]::Button) 8);$result.ReminderEnabledByUser=$null -ne (Find-Control $main '已启用' '' $null 10 -contains)}
-    Invoke-Control (Find-Control $main '工作台' '' ([System.Windows.Automation.ControlType]::Button) 8)
-]#>
     $result.Stage='OpenLocalSplitWizard'
     Invoke-Navigation $main $N.StartLocal;$result.LocalSplitWizardOpened=$null -ne (Wait-Text $main $N.Wizard 12);Invoke-Navigation $main $N.Workbench;$result.LocalSplitWizardClosed=$null -ne (Wait-Text $main $N.Overview 12)
     $result.Stage='NavigatePrimaryPages'
