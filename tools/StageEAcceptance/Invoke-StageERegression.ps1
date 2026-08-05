@@ -15,6 +15,15 @@ New-Item -ItemType Directory -Force -Path $OutputRoot | Out-Null
 $coreProject = Join-Path $repoRoot 'tests\RAWSelectionAssistant.Tests\RAWSelectionAssistant.Tests.csproj'
 $wpfProject = Join-Path $repoRoot 'tests\RAWSelectionAssistant.WpfTests\RAWSelectionAssistant.WpfTests.csproj'
 
+function Get-ScopedRelativePath([string]$BasePath, [string]$Path) {
+    $resolvedBase = [IO.Path]::GetFullPath($BasePath).TrimEnd([IO.Path]::DirectorySeparatorChar)
+    $resolvedPath = [IO.Path]::GetFullPath($Path)
+    if (-not $resolvedPath.StartsWith($resolvedBase + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Path escaped expected root: $resolvedPath"
+    }
+    return $resolvedPath.Substring($resolvedBase.Length + 1).Replace('\', '/')
+}
+
 function Invoke-Series {
     param(
         [string]$Name,
@@ -48,7 +57,7 @@ function Invoke-Series {
             Failed = [int]$counters.failed
             Skipped = [int]$counters.notExecuted
             DurationSeconds = [Math]::Round(([DateTimeOffset]::Now - $started).TotalSeconds, 3)
-            Trx = [IO.Path]::GetRelativePath($repoRoot, $trxPath).Replace('\', '/')
+            Trx = Get-ScopedRelativePath $repoRoot $trxPath
         }
         if ($run.Failed -ne 0 -or $run.Skipped -ne 0 -or $run.Passed -ne $run.Total) {
             throw "$Name round $round did not pass cleanly."
