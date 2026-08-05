@@ -1,0 +1,15 @@
+{
+  "PhysicalDisplayCount": 1,
+  "PhysicalSecondMonitorTested": false,
+  "PhysicalDualMonitorAcceptance": "NotRun",
+  "RealSystemSleepWakeAcceptance": "NotRun",
+  "HardProcessCrashInjection": "NotRun",
+  "AutomatedTopologyAndLifecycleTests": "Passed",
+  "IndependentClientWindowTests": "Passed",
+  "CodeSigning": "NotSigned",
+  "SmartScreenReputation": "NotClaimed",
+  "InstallerType": "RC1",
+  "MainMerged": false,
+  "VersionTagCreated": false,
+  "NextRequiredAction": "Run the physical dual-monitor manual acceptance checklist before promotion to the final installer name, main merge, and v2.3.0 tag."
+}

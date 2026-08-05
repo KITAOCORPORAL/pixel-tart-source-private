@@ -1,0 +1,27 @@
+{
+  "ProductVersion": "2.3.0",
+  "SchemaVersion": 3,
+  "BaselineTests": 1179,
+  "AddedTests": 8,
+  "FinalTests": 1187,
+  "Projects": {
+    "Core": 948,
+    "Wpf": 165,
+    "Dpi": 74
+  },
+  "Specialized": {
+    "LutCore": { "Rounds": 20, "TestsPerRound": 48, "Passed": true },
+    "ClientMonitor": { "Rounds": 20, "TestsPerRound": 28, "Passed": true },
+    "WatchFolder": { "Rounds": 10, "TestsPerRound": 67, "Passed": true },
+    "RecoveryGate": { "Rounds": 20, "TestsPerRound": 4, "Passed": true },
+    "CoreParallel": { "Rounds": 3, "TestsPerRound": 948, "Passed": true },
+    "CoreNonParallel": { "Rounds": 3, "TestsPerRound": 948, "Passed": true }
+  },
+  "FullMatrix": {
+    "Debug": { "Rounds": 3, "TestsPerRound": 1187, "Failed": 0, "Skipped": 0, "BuildWarnings": 0, "BuildErrors": 0, "Passed": true },
+    "Release": { "Rounds": 3, "TestsPerRound": 1187, "Failed": 0, "Skipped": 0, "BuildWarnings": 0, "BuildErrors": 0, "Passed": true }
+  },
+  "OriginalBaselineRetained": true,
+  "Passed": true,
+  "EvidenceCommit": "bf25853ad2682f8ac20c533c1281fe985676c14f"
+}

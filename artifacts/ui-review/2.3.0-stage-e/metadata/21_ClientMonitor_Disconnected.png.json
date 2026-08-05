@@ -1,0 +1,96 @@
+{
+  "scenario": "ClientMonitorDisconnected",
+  "theme": "Dark",
+  "validationMode": "automated-logical-simulation",
+  "physicalDpiManuallyTested": false,
+  "targetDpiX": 96,
+  "targetDpiY": 96,
+  "scale": 1,
+  "physicalViewport": {
+    "width": 1600,
+    "height": 920
+  },
+  "logicalViewport": {
+    "width": 1600,
+    "height": 920
+  },
+  "rootActual": {
+    "width": 1585.3333333333333,
+    "height": 882.6666666666666
+  },
+  "screenshot": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\ui-review\\2.3.0-stage-e\\21_ClientMonitor_Disconnected.png",
+  "sourceCommit": "unknown",
+  "layout": {
+    "ElementCount": 739,
+    "Overflow": [],
+    "Overlaps": [],
+    "ZeroSizedInteractive": [],
+    "TextClipping": [],
+    "UnexpectedWhiteSurfaces": [],
+    "FocusTarget": "\u505C\u6B62\u770B\u5B88\u6587\u4EF6\u5939\u4F1A\u8BDD",
+    "FocusVisible": true,
+    "BlockingIssueCount": 0
+  },
+  "auxiliaryLayout": {
+    "ElementCount": 12,
+    "Overflow": [],
+    "Overlaps": [],
+    "ZeroSizedInteractive": [],
+    "TextClipping": [],
+    "UnexpectedWhiteSurfaces": [],
+    "FocusTarget": "",
+    "FocusVisible": false,
+    "BlockingIssueCount": 0
+  },
+  "themeInspection": {
+    "Theme": "Dark",
+    "MissingBrushResources": [],
+    "HighContrastResourceStructurePresent": true,
+    "RenderedControlTypes": {
+      "TextBox": 4,
+      "PasswordBox": 0,
+      "ComboBox": 14,
+      "ComboBoxItem": 0,
+      "CheckBox": 16,
+      "RadioButton": 0,
+      "ToggleButton": 15,
+      "Slider": 8,
+      "ScrollBar": 3,
+      "ScrollViewer": 14,
+      "DatePicker": 1,
+      "DataGrid": 0,
+      "DataGridColumnHeader": 0,
+      "ContextMenu": 0,
+      "MenuItem": 6,
+      "Popup": 0,
+      "TabControl": 0,
+      "ToolTip": 0,
+      "ProgressBar": 1
+    },
+    "ControlStyleRenderChecks": {
+      "TextBox": true,
+      "PasswordBox": true,
+      "ComboBox": true,
+      "ComboBoxItem": true,
+      "CheckBox": true,
+      "RadioButton": true,
+      "ToggleButton": true,
+      "Slider": true,
+      "ScrollBar": true,
+      "ScrollViewer": true,
+      "DatePicker": true,
+      "DataGrid": true,
+      "DataGridColumnHeader": true,
+      "ContextMenu": true,
+      "MenuItem": true,
+      "Popup": true,
+      "TabControl": true,
+      "ToolTip": true,
+      "ProgressBar": true
+    },
+    "PrimaryTextContrastRatio": 17.802952574615944,
+    "Passed": true
+  },
+  "passed": true,
+  "generatedAt": "2026-08-05T18:50:04.1884022+08:00"
+}

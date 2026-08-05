@@ -1,0 +1,27 @@
+﻿{
+    "Product":  "像素蛋挞",
+    "Version":  "2.3.0",
+    "FileVersion":  "2.3.0.0",
+    "SchemaVersion":  3,
+    "Candidate":  "RC1",
+    "Provider":  "None",
+    "PhysicalSecondMonitorTested":  false,
+    "GitCommit":  "ba64b784fd2002a378d63b8f9f942f2cb744161e",
+    "OutputType":  "WinExe",
+    "SelfContained":  true,
+    "Runtime":  "win-x64",
+    "Installer":  "installer/像素蛋挞_Setup_2.3.0_RC1_x64.exe",
+    "InstallerSha256":  "7C9AD2689BBCC5960D7B20396D8951D63F012A615447FEAE453BC6CABD588A2C",
+    "InstallerBytes":  49932887,
+    "SignatureStatus":  "NotSigned",
+    "ReleaseScan":  {
+                        "Passed":  true,
+                        "NoTests":  true,
+                        "NoVendorSdk":  true,
+                        "NoLocalhost":  true,
+                        "NoLogs":  true,
+                        "NoDatabases":  true,
+                        "NoSyntheticAssets":  true
+                    },
+    "GeneratedAt":  "2026-08-05T20:19:49.3809654+08:00"
+}

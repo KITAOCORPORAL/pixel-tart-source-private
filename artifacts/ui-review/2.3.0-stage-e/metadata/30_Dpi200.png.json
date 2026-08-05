@@ -1,0 +1,86 @@
+{
+  "scenario": "TetherDpi200",
+  "theme": "Dark",
+  "validationMode": "automated-logical-simulation",
+  "physicalDpiManuallyTested": false,
+  "targetDpiX": 192,
+  "targetDpiY": 192,
+  "scale": 2,
+  "physicalViewport": {
+    "width": 2560,
+    "height": 1640
+  },
+  "logicalViewport": {
+    "width": 1280,
+    "height": 820
+  },
+  "rootActual": {
+    "width": 1265.3333333333333,
+    "height": 782.6666666666666
+  },
+  "screenshot": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\ui-review\\2.3.0-stage-e\\30_Dpi200.png",
+  "sourceCommit": "unknown",
+  "layout": {
+    "ElementCount": 273,
+    "Overflow": [],
+    "Overlaps": [],
+    "ZeroSizedInteractive": [],
+    "TextClipping": [],
+    "UnexpectedWhiteSurfaces": [],
+    "FocusTarget": "\u505C\u6B62\u770B\u5B88\u6587\u4EF6\u5939\u4F1A\u8BDD",
+    "FocusVisible": true,
+    "BlockingIssueCount": 0
+  },
+  "auxiliaryLayout": null,
+  "themeInspection": {
+    "Theme": "Dark",
+    "MissingBrushResources": [],
+    "HighContrastResourceStructurePresent": true,
+    "RenderedControlTypes": {
+      "TextBox": 1,
+      "PasswordBox": 0,
+      "ComboBox": 9,
+      "ComboBoxItem": 0,
+      "CheckBox": 3,
+      "RadioButton": 0,
+      "ToggleButton": 10,
+      "Slider": 0,
+      "ScrollBar": 3,
+      "ScrollViewer": 10,
+      "DatePicker": 1,
+      "DataGrid": 0,
+      "DataGridColumnHeader": 0,
+      "ContextMenu": 0,
+      "MenuItem": 6,
+      "Popup": 0,
+      "TabControl": 0,
+      "ToolTip": 0,
+      "ProgressBar": 1
+    },
+    "ControlStyleRenderChecks": {
+      "TextBox": true,
+      "PasswordBox": true,
+      "ComboBox": true,
+      "ComboBoxItem": true,
+      "CheckBox": true,
+      "RadioButton": true,
+      "ToggleButton": true,
+      "Slider": true,
+      "ScrollBar": true,
+      "ScrollViewer": true,
+      "DatePicker": true,
+      "DataGrid": true,
+      "DataGridColumnHeader": true,
+      "ContextMenu": true,
+      "MenuItem": true,
+      "Popup": true,
+      "TabControl": true,
+      "ToolTip": true,
+      "ProgressBar": true
+    },
+    "PrimaryTextContrastRatio": 17.802952574615944,
+    "Passed": true
+  },
+  "passed": true,
+  "generatedAt": "2026-08-05T18:50:45.3794096+08:00"
+}

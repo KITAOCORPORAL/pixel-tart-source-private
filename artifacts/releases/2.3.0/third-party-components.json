@@ -1,0 +1,19 @@
+{
+  "Runtime": [
+    { "Name": ".NET Runtime win-x64", "Version": "10.0.10", "Distribution": "SelfContained" },
+    { "Name": ".NET Windows Desktop Runtime win-x64", "Version": "10.0.10", "Distribution": "SelfContained" },
+    { "Name": "Microsoft Windows SDK .NET Runtime", "Version": "10.0.19041.57" }
+  ],
+  "Packages": [
+    { "Name": "Microsoft.Data.Sqlite", "Version": "10.0.10", "License": "MIT" },
+    { "Name": "SQLitePCLRaw.bundle_e_sqlite3", "Version": "2.1.12", "License": "Apache-2.0" },
+    { "Name": "SQLitePCLRaw.core", "Version": "2.1.12", "License": "Apache-2.0" },
+    { "Name": "SQLitePCLRaw.lib.e_sqlite3", "Version": "2.1.12", "License": "Apache-2.0" },
+    { "Name": "SQLitePCLRaw.provider.e_sqlite3", "Version": "2.1.12", "License": "Apache-2.0" },
+    { "Name": "MetadataExtractor", "Version": "2.9.0", "License": "Apache-2.0" },
+    { "Name": "XmpCore", "Version": "6.1.10.1", "License": "Adobe XMP Core package license reference" }
+  ],
+  "VendorCameraSdkIncluded": false,
+  "UnknownCameraDllIncluded": false,
+  "Source": "Published application dependency manifest and local NuGet package metadata"
+}
