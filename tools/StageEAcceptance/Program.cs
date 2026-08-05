@@ -20,6 +20,8 @@ internal static class StageEAcceptance
     public static async Task<int> RunAsync(string[] args)
     {
         var output = Argument(args, "--output") ?? Path.Combine(Environment.CurrentDirectory, "artifacts", "diagnostics", "2.3.0", "stage-e-stress", "result.json");
+        if (args.Any(item => string.Equals(item, "--display-only", StringComparison.OrdinalIgnoreCase)))
+            return await RunDisplayProbeAsync(output);
         var minutes = int.TryParse(Argument(args, "--minutes"), out var parsed) ? Math.Max(1, parsed) : 60;
         var runRoot = Path.Combine(Path.GetTempPath(), "PixelTart.StageE", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(runRoot);
@@ -50,6 +52,43 @@ internal static class StageEAcceptance
         }
         Console.WriteLine(JsonSerializer.Serialize(new { Output = Path.GetFullPath(output), Passed = result["Passed"] }));
         return Equals(result["Passed"], true) ? 0 : 1;
+    }
+
+    private static async Task<int> RunDisplayProbeAsync(string output)
+    {
+        using var topology = new WindowsDisplayTopologyService(watchChanges: false);
+        var profileService = new WindowsDisplayProfileService();
+        var displays = new List<object>();
+        foreach (var display in topology.GetDisplays())
+        {
+            var profile = await profileService.GetProfileAsync(display);
+            displays.Add(new
+            {
+                display.StableKey,
+                display.FriendlyName,
+                display.DeviceName,
+                display.IsPrimary,
+                Bounds = new { display.Left, display.Top, display.Width, display.Height },
+                display.DpiX,
+                display.DpiY,
+                Orientation = display.Height > display.Width ? "Portrait" : "Landscape",
+                IccStatus = profile.Status.ToString(),
+                profile.ProfileName,
+                profile.ColorSpaceHint,
+                profile.IsSystemDefault
+            });
+        }
+        var result = new
+        {
+            CapturedAt = DateTimeOffset.Now,
+            PhysicalDisplayCount = displays.Count,
+            PhysicalSecondMonitorTested = displays.Count >= 2,
+            Displays = displays
+        };
+        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
+        await File.WriteAllTextAsync(output, JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
+        Console.WriteLine(JsonSerializer.Serialize(result));
+        return displays.Count > 0 ? 0 : 1;
     }
 
     private static async Task<object> RunWatchFolderAsync(string root, TimeSpan duration)
