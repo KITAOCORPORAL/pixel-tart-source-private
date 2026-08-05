@@ -293,7 +293,8 @@ internal sealed class WatchFolderCameraSession : ICameraSession
         try
         {
             var existing = await _assetRepository.GetByPathAsync(Session.Id, normalized, cancellationToken).ConfigureAwait(false);
-            if (existing is null && !Session.ImportExisting && eventKind == WatchFolderEventKind.Reconcile && IsOlderThanCutoff(path)) return;
+            if (existing is null && !Session.ImportExisting && eventKind == WatchFolderEventKind.Reconcile &&
+                !_lastQueued.ContainsKey(normalized) && IsOlderThanCutoff(path)) return;
 
             var now = DateTimeOffset.UtcNow;
             var asset = existing ?? new TetherAssetRecord(Guid.NewGuid(), Session.Id, Session.ProjectId, Path.GetFullPath(path), normalized, Path.GetFileName(path),

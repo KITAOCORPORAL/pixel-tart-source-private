@@ -120,6 +120,25 @@ public sealed class Version230WatchFolderSessionTests
     }
 
     [TestMethod]
+    public async Task QueuedCreatedEvents_WithCoarseOlderCreationTime_AreNotDroppedByReconciliation()
+    {
+        using var setup = await SetupAsync();
+        var (adapter, source) = setup.Adapter(new StableProbe());
+        var session = await adapter.StartAsync(new(setup.WatchDirectory));
+        for (var index = 0; index < 100; index++)
+        {
+            var path = setup.Temp.CreateFile($"watch/coarse-time-{index:D3}.jpg", [(byte)index, 1, 2]);
+            File.SetCreationTimeUtc(path, DateTime.UtcNow.AddMinutes(-5));
+            source.Publish(WatchFolderEventKind.Created, path);
+        }
+
+        await session.ReconcileAsync();
+
+        Assert.HasCount(100, await setup.Assets.ListBySessionAsync(session.Session.Id));
+        await session.DisposeAsync();
+    }
+
+    [TestMethod]
     public async Task MixedBurstEvents_DeduplicateToOneHundredReadyAssets()
     {
         using var setup = await SetupAsync();
