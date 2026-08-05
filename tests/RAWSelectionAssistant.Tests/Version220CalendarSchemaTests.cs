@@ -12,13 +12,13 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class Version220CalendarSchemaTests
 {
     [TestMethod]
-    public async Task DefaultMigration_UpgradesToSchemaVersionTwo()
+    public async Task DefaultMigration_UpgradesToCurrentSchemaVersionThree()
     {
         using var setup = await SetupAsync();
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(2L, (long)(await command.ExecuteScalarAsync())!);
+        Assert.AreEqual(3L, (long)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
@@ -52,7 +52,7 @@ public sealed class Version220CalendarSchemaTests
     }
 
     [TestMethod]
-    public async Task SchemaOneToTwo_CreatesMigrationBackup()
+    public async Task SchemaOneToCurrent_CreatesMigrationBackup()
     {
         using var temp = new TempDirectory();
         var database = new PixelTartDatabase(temp.Combine("data", "pixel-tart.db"));
@@ -61,7 +61,7 @@ public sealed class Version220CalendarSchemaTests
         var result = await new DatabaseMigrator(database, new DatabaseBackupService(database, backupRoot)).MigrateAsync();
         Assert.IsTrue(result.Success);
         Assert.AreEqual(1, result.PreviousVersion);
-        Assert.AreEqual(2, result.CurrentVersion);
+        Assert.AreEqual(3, result.CurrentVersion);
         Assert.IsNotNull(result.BackupPath);
         Assert.IsTrue(File.Exists(result.BackupPath));
     }

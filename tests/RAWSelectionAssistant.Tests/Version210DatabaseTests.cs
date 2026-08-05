@@ -36,7 +36,7 @@ public sealed class Version210DatabaseTests
 
     [TestMethod] public async Task InitialMigration_CreatesDatabaseAtRequestedPath() { using var temp = new TempDirectory(); var (db, migrator) = Create(temp); var result = await migrator.MigrateAsync(); Assert.IsTrue(result.Success); Assert.IsTrue(File.Exists(db.DatabasePath)); }
     [TestMethod] public async Task InitialMigration_RecordsSchemaVersionOne() { using var temp = new TempDirectory(); var db=new PixelTartDatabase(temp.Combine("data","pixel-tart.db"));var migrator=new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups")),[new InitialSchemaMigration()]); await migrator.MigrateAsync(); await using var connection = await db.OpenConnectionAsync(); await using var command=connection.CreateCommand();command.CommandText="SELECT MAX(Version) FROM SchemaInfo;";Assert.AreEqual(1L,(long)(await command.ExecuteScalarAsync())!); }
-    [TestMethod] public async Task RepeatedMigration_DoesNotRunTwice() { using var temp = new TempDirectory(); var (_, migrator) = Create(temp); await migrator.MigrateAsync(); var second=await migrator.MigrateAsync(); Assert.IsTrue(second.Success); Assert.AreEqual(0,second.AppliedMigrations.Count);Assert.AreEqual(2,second.CurrentVersion); }
+    [TestMethod] public async Task RepeatedMigration_DoesNotRunTwice() { using var temp = new TempDirectory(); var (_, migrator) = Create(temp); await migrator.MigrateAsync(); var second=await migrator.MigrateAsync(); Assert.IsTrue(second.Success); Assert.AreEqual(0,second.AppliedMigrations.Count);Assert.AreEqual(3,second.CurrentVersion); }
 
     [TestMethod]
     public async Task MigrationBeforeUpgrade_CreatesBackup()

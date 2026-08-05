@@ -5,7 +5,7 @@ namespace RAWSelectionAssistant.Tests;
 [TestClass]
 public sealed class WorkbenchVisualCorrection201Tests
 {
-    [TestMethod] public void Version_Is220() => Contains(Branding(), "ProductVersion = \"2.2.0\"");
+    [TestMethod] public void Version_Is230() => Contains(Branding(), "ProductVersion = \"2.3.0\"");
     [TestMethod] public void DefaultTheme_IsDark() => Assert.AreEqual(ThemeMode.Dark, new AppearanceSettings().Theme);
     [TestMethod] public void DefaultWindow_Is1600By920() => Contains(MainXaml(), "Width=\"1600\" Height=\"920\"", "MinWidth=\"1180\"");
     [TestMethod] public void WorkbenchDefaultDarkResources_AreComplete() => Contains(Dark(), "#0B0C0E", "#141518", "#18191C", "#202226", "#24262A", "#2A2D32", "#E3A93B", "#20C985");

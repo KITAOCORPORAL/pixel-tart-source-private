@@ -200,7 +200,7 @@ TaskOperationBridge.RunAsync
 - 中文、空格、长路径和大文件均使用独立临时目录通过。
 - 默认不复制；启用复制后源文件哈希不变。
 - Release Provider 默认为 None，Fake Camera 不注册。
-- 原 867 项测试保留，Debug/Release 全量通过后才结束阶段 B。
+- 恢复门禁的原 875 项测试保留，Debug/Release 全量通过后才结束阶段 B。
 
 ## 17. 官方依据
 
@@ -208,4 +208,3 @@ TaskOperationBridge.RunAsync
 - [FileSystemWatcher.Error](https://learn.microsoft.com/en-us/dotnet/api/system.io.filesystemwatcher.error?view=net-10.0)
 - [InternalBufferOverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.io.internalbufferoverflowexception?view=net-10.0)
 - [FileSystemWatcher.Changed](https://learn.microsoft.com/en-us/dotnet/api/system.io.filesystemwatcher.changed?view=net-10.0)
-

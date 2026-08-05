@@ -3,6 +3,7 @@ using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
+using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Services;
@@ -51,6 +52,11 @@ public sealed class ApplicationCompositionRoot
         BookingReminderNotificationService = new BookingReminderNotificationService(notificationCenter);
         BookingReminderScheduler = new BookingReminderScheduler(ReminderRepository, ShootBookingService, BookingReminderNotificationService, auditLog);
         WorkbenchScheduleService = new WorkbenchScheduleService(ShootBookingService, BookingDocumentRepository, ReminderRepository, projectRepository: ProjectRepository);
+        TetherSessionRepository = new SqliteTetherSessionRepository(database);
+        TetherAssetRepository = new SqliteTetherAssetRepository(database);
+        TetherAnnotationRepository = new SqliteTetherAnnotationRepository(database);
+        TetherTransferService = new TetherSafeCopyService(TetherAssetRepository, FileOperationPlanner, FileOperationExecutor,
+            FileVerificationService, OperationBridge, AuditLog, NotificationCenter);
     }
 
     public PixelTartDatabase Database { get; }
@@ -80,6 +86,10 @@ public sealed class ApplicationCompositionRoot
     public IBookingReminderNotificationService BookingReminderNotificationService { get; }
     public IBookingReminderScheduler BookingReminderScheduler { get; }
     public IWorkbenchScheduleService WorkbenchScheduleService { get; }
+    public ITetherSessionRepository TetherSessionRepository { get; }
+    public ITetherAssetRepository TetherAssetRepository { get; }
+    public ITetherAnnotationRepository TetherAnnotationRepository { get; }
+    public ICameraTransferService TetherTransferService { get; }
 
     public static async Task<ApplicationCompositionRoot> CreateAsync(CancellationToken cancellationToken = default)
     {

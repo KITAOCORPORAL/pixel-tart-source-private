@@ -23,7 +23,7 @@ public sealed class Version210UiArchitectureTests
     [TestMethod] public void RecoveryAndNotificationViewModelsExist(){StringAssert.Contains(TaskVm,"RecoveryCenterViewModel");StringAssert.Contains(TaskVm,"NotificationCenterViewModel");StringAssert.Contains(TaskVm,"DatabaseRecoveryViewModel");}
     [TestMethod] public void NavigationServiceExists()=>StringAssert.Contains(TaskVm,"class NavigationService");
     [TestMethod] public void CalendarPageUsesIndependentHost()=>Contains(MainXaml,"<views:WorkCalendarView", "DataContext=\"{Binding WorkCalendarPage}\"");
-    [TestMethod] public void VersionIs220(){var version=File.ReadAllText(Path.Combine(Root,"build","Version.props"));StringAssert.Contains(version,"<PixelTartVersion>2.2.0</PixelTartVersion>");StringAssert.Contains(version,"<PixelTartAssemblyVersion>2.2.0.0</PixelTartAssemblyVersion>");}
+    [TestMethod] public void VersionIs230(){var version=File.ReadAllText(Path.Combine(Root,"build","Version.props"));StringAssert.Contains(version,"<PixelTartVersion>2.3.0</PixelTartVersion>");StringAssert.Contains(version,"<PixelTartAssemblyVersion>2.3.0.0</PixelTartAssemblyVersion>");}
     [TestMethod] public void ReleaseStillDisallowsMockProvider(){var app=File.ReadAllText(Path.Combine(Root,"src","RAWSelectionAssistant","App.xaml.cs"));StringAssert.Contains(app,"allowMockProvider: false");}
 
     private static void Contains(string text,params string[] values){foreach(var value in values)StringAssert.Contains(text,value);}

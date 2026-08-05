@@ -71,7 +71,7 @@ public sealed class BookingReminderService(
     {
         ReminderTriggerKind.AbsoluteTime => reminder.Trigger.At?.ToUniversalTime() ?? throw new ArgumentException("自定义提醒需要明确时间。"),
         ReminderTriggerKind.RelativeToBookingStart => booking.StartAtUtc - (reminder.Trigger.Offset ?? throw new ArgumentException("相对提醒需要提前量。")),
-        _ => throw new NotSupportedException("2.2.0 不支持项目日期提醒。")
+        _ => throw new NotSupportedException("2.3.0 不支持项目日期提醒。")
     };
 }
 

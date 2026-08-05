@@ -114,12 +114,12 @@ public sealed class UiDesignSystem140Tests
     [TestMethod] public void MainWindow_DoesNotUseLegacyDarkGreenSidebar() => DoesNotContain("src/RAWSelectionAssistant/MainWindow.xaml", "#173D33");
     [TestMethod] public void DetailsDialog_UsesDynamicTheme() => Contains("src/RAWSelectionAssistant/Views/MediaDetailsWindow.xaml", "DynamicResource WindowBackgroundBrush", "DynamicResource TextSecondaryBrush", "IsCancel=\"True\"");
     [TestMethod] public void CandidateDialog_UsesDynamicThemeAndDefaultAction() => Contains("src/RAWSelectionAssistant/Views/CandidateSelectionWindow.xaml", "DynamicResource WindowBackgroundBrush", "IsDefault=\"True\"", "IsCancel=\"True\"");
-    [TestMethod] public void HelpDialog_ShowsVersion220() => Contains("src/RAWSelectionAssistant/Views/HelpWindow.xaml", "版本 2.2.0", "DynamicResource WindowBackgroundBrush");
+    [TestMethod] public void HelpDialog_ShowsVersion230() => Contains("src/RAWSelectionAssistant/Views/HelpWindow.xaml", "版本 2.3.0", "DynamicResource WindowBackgroundBrush");
     [TestMethod] public void TutorialOfferDialog_UsesDynamicTheme() => Contains("src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml", "DynamicResource WindowBackgroundBrush", "DynamicResource TextSecondaryBrush");
     [TestMethod] public void AppearanceService_RespondsToWindowsAndHighContrast() => Contains("src/RAWSelectionAssistant/Services/AppearanceService.cs", "AppsUseLightTheme", "SystemParameters.HighContrast", "UserPreferenceChanged");
     [TestMethod] public void AppearanceService_DoesNotResetMainViewModel() => DoesNotContain("src/RAWSelectionAssistant/Services/AppearanceService.cs", "MainViewModel");
     [TestMethod] public void AccentService_UsesContrastNotFixedForeground() => Contains("src/RAWSelectionAssistant/Services/AppearanceService.cs", "GetReadableForeground", "RelativeLuminance", "ContrastRatio");
-    [TestMethod] public void Version_BrandingSourceIs220() => Contains("src/RAWSelectionAssistant.Core/Models/Branding.cs", "ProductVersion = \"2.2.0\"");
+    [TestMethod] public void Version_BrandingSourceIs230() => Contains("src/RAWSelectionAssistant.Core/Models/Branding.cs", "ProductVersion = \"2.3.0\"");
     [TestMethod] public void Version_InstallerOutputs220Package() => Contains("installer/RAWSelectionAssistant.iss", "MyAppVersion \"2.2.0\"", "像素蛋挞_Setup_2.2.0_x64");
     [TestMethod] public void Packaging_RemainsWinExeSelfContainedX64() => Contains("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");
     [TestMethod] public void LicenseConfig_RemainsProviderNone() => Contains("src/RAWSelectionAssistant/appsettings.license.json", "\"Provider\": \"None\"");

@@ -82,7 +82,7 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
     {
         _database = database;
         _backupService = backupService;
-        _migrations = (migrations ?? [new InitialSchemaMigration(), new CalendarSchemaMigration()]).OrderBy(x => x.Version).ToArray();
+        _migrations = (migrations ?? [new InitialSchemaMigration(), new CalendarSchemaMigration(), new TetherSchemaMigration()]).OrderBy(x => x.Version).ToArray();
         if (_migrations.Select(x => x.Version).Distinct().Count() != _migrations.Count ||
             _migrations.Select(x => x.Version).Where((version, index) => version != index + 1).Any())
             throw new InvalidOperationException("Database migrations must be unique, contiguous and start at version 1.");
@@ -174,7 +174,7 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
 
         await using var integrity = connection.CreateCommand();
         integrity.Transaction = transaction;
-        integrity.CommandText = "PRAGMA quick_check;";
+        integrity.CommandText = "PRAGMA integrity_check;";
         var result = Convert.ToString(await integrity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
         if (!string.Equals(result, "ok", StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Database migration integrity verification failed.");
