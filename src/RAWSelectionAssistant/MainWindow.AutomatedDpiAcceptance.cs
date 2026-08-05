@@ -13,6 +13,7 @@ using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
+using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
 
 namespace RAWSelectionAssistant;
@@ -56,7 +57,7 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
-        if (state.StartsWith("Tether", StringComparison.OrdinalIgnoreCase))
+        if (state.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Lut", StringComparison.OrdinalIgnoreCase) || state.StartsWith("ColorProfile", StringComparison.OrdinalIgnoreCase) || state.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) || state == "MixedDpi")
         {
             _viewModel.NavigateCommand.Execute("Tether");
             if (_viewModel.TetherPage is null) return false;
@@ -253,6 +254,37 @@ public partial class MainWindow
                 IsOpen = true
             };
         }
+        else if (state.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) || state == "MixedDpi")
+        {
+            var color = _viewModel.TetherPage?.ColorSettings;
+            var client = new ClientMonitorViewModel
+            {
+                DisplayImage = color?.VisibleImage,
+                FollowMode = state switch
+                {
+                    "ClientMonitorFollowLatest" => ClientMonitorFollowMode.FollowLatest,
+                    "ClientMonitorLocked" => ClientMonitorFollowMode.Locked,
+                    _ => ClientMonitorFollowMode.FollowMainSelection
+                },
+                ShowIdentifier = false,
+                ShowTechnicalMetadata = false,
+                ShowRating = state == "ClientMonitorFavoriteNote",
+                ShowClientControls = state is not "ClientMonitorDisconnected" and not "ClientMonitorReconnected",
+                IsFavorite = state == "ClientMonitorFavoriteNote",
+                ClientNote = state == "ClientMonitorFavoriteNote" ? "喜欢服装和光线" : null,
+                NewAssetCount = state == "ClientMonitorLocked" ? 3 : 0,
+                StatusText = state switch
+                {
+                    "ClientMonitorDisconnected" => "客户显示器未连接 · 联机会话继续",
+                    "ClientMonitorReconnected" => "客户显示器已重新连接 · 可恢复监看",
+                    "ClientMonitorPrivacy" => "隐私默认：文件名与路径隐藏",
+                    "MixedDpi" => "客户屏150% · 独立ICC",
+                    _ => "客户监看开发版验证"
+                }
+            };
+            _automatedAuxiliaryWindow = new ClientMonitorWindow { DataContext = client, Width = state == "MixedDpi" ? 900 : 1120, Height = state == "MixedDpi" ? 760 : 700, ShowInTaskbar = false };
+            _automatedAuxiliaryWindow.Show();
+        }
 
         _automatedAuxiliaryWindow?.UpdateLayout();
         _automatedContextMenu?.UpdateLayout();
@@ -340,9 +372,11 @@ public partial class MainWindow
     {
         FrameworkElement layoutRoot = string.Equals(_automatedScenarioName, "SettingsDialog", StringComparison.OrdinalIgnoreCase)
             ? SettingsModal
-            : _automatedScenarioName.StartsWith("Tether", StringComparison.OrdinalIgnoreCase)
-                ? TetherMonitorView
-                : RootGrid;
+            : string.Equals(_automatedScenarioName, "Settings", StringComparison.OrdinalIgnoreCase)
+                ? SettingsPageContent
+                : IsTetherColorReviewState(_automatedScenarioName)
+                    ? TetherMonitorView
+                    : RootGrid;
         var layout = InspectLayout(layoutRoot, layoutRoot.ActualWidth, layoutRoot.ActualHeight);
         var auxiliary = _automatedAuxiliaryWindow?.Content is FrameworkElement content
             ? InspectLayout(content, content.ActualWidth, content.ActualHeight)

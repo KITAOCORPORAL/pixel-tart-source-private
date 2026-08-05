@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
-             Focusable="True" PreviewKeyDown="View_PreviewKeyDown" SizeChanged="View_SizeChanged"
+             Focusable="True" PreviewKeyDown="View_PreviewKeyDown" PreviewKeyUp="View_PreviewKeyUp" SizeChanged="View_SizeChanged"
              AutomationProperties.Name="联机拍摄现场监看工作区"
              AutomationProperties.HelpText="使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注">
     <UserControl.Resources>
@@ -56,7 +56,40 @@
                         <StackPanel><CheckBox Content="高光警告" IsChecked="{Binding HighlightWarningEnabled}" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="1" Maximum="255" Value="{Binding HighlightThreshold}" AutomationProperties.Name="高光警告阈值" /></StackPanel>
                         <StackPanel Grid.Column="1" Margin="12,0,0,0"><CheckBox Content="阴影警告" IsChecked="{Binding ShadowWarningEnabled}" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="0" Maximum="254" Value="{Binding ShadowThreshold}" AutomationProperties.Name="阴影警告阈值" /></StackPanel>
                     </Grid>
-                    <TextBlock Text="警告基于当前代理显示，仅供现场参考；不写入照片，LUT尚未实现。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <TextBlock Text="警告基于当前代理显示，仅供现场参考；不写入照片。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+
+                    <Separator Margin="0,14" />
+                    <TextBlock Text="LUT 监看" Style="{StaticResource SectionTitleText}" />
+                    <TextBlock Text="{Binding ColorSettings.InputSpaceWarning}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" AutomationProperties.HelpText="输入色彩空间可能未知，监看结果仅供现场参考" />
+                    <WrapPanel Margin="0,7,0,0">
+                        <Button Content="导入 .cube" Style="{StaticResource SecondaryButton}" Command="{Binding ColorSettings.ImportLutCommand}" AutomationProperties.Name="导入Cube LUT" />
+                        <Button Content="{Binding ColorSettings.LutToggleText}" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleLutCommand}" Margin="6,0,0,0" AutomationProperties.Name="切换LUT" />
+                        <Button Content="{Binding ColorSettings.BeforeAfterText}" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleBeforeCommand}" PreviewMouseLeftButtonDown="LutBefore_MouseDown" PreviewMouseLeftButtonUp="LutBefore_MouseUp" MouseLeave="LutBefore_MouseLeave" Margin="6,0,0,0" AutomationProperties.Name="查看LUT前后对比" />
+                        <Button Content="{Binding ColorSettings.SplitViewText}" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleSplitCommand}" Margin="6,0,0,0" AutomationProperties.Name="LUT分屏对比" />
+                    </WrapPanel>
+                    <TextBlock Text="当前LUT" Style="{StaticResource CaptionText}" Margin="0,7,0,0" />
+                    <ComboBox ItemsSource="{Binding ColorSettings.LutView}" DisplayMemberPath="DisplayName" SelectedItem="{Binding ColorSettings.SelectedLut}" AutomationProperties.Name="当前LUT选择" />
+                    <TextBlock Text="搜索LUT" Style="{StaticResource CaptionText}" Margin="0,5,0,0" /><TextBox Text="{Binding ColorSettings.LutSearch, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="搜索LUT" />
+                    <TextBlock Text="{Binding ColorSettings.LutStrengthText, StringFormat=强度 {0}}" Style="{StaticResource CaptionText}" Margin="0,5,0,0" /><Slider Minimum="0" Maximum="100" Value="{Binding ColorSettings.LutStrengthPercent}" AutomationProperties.Name="LUT强度百分比" />
+                    <TextBlock Text="LUT输入解释" Style="{StaticResource CaptionText}" Margin="0,5,0,0" /><ComboBox ItemsSource="{Binding ColorSettings.InputInterpretations}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ColorSettings.SelectedInputInterpretation}" AutomationProperties.Name="LUT输入色彩空间解释" />
+                    <TextBlock Text="{Binding ColorSettings.InputSpaceWarning}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,0" />
+                    <TextBlock Text="{Binding ColorSettings.LutStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <WrapPanel Margin="0,6,0,0"><Button Content="收藏LUT" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleFavoriteLutCommand}" /><Button Content="会话默认" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.SetSessionDefaultCommand}" Margin="5,0,0,0" /><Button Content="项目默认" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.SetProjectDefaultCommand}" Margin="5,0,0,0" /></WrapPanel>
+                    <WrapPanel Margin="0,5,0,0"><Button Content="打开所在位置" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RevealLutCommand}" /><Button Content="重新验证" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RevalidateLutCommand}" Margin="5,0,0,0" /><Button Content="重新定位" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RelocateLutCommand}" Margin="5,0,0,0" /><Button Content="移除引用" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RemoveLutReferenceCommand}" Margin="5,0,0,0" /></WrapPanel>
+
+                    <Separator Margin="0,14" />
+                    <TextBlock Text="ICC 与客户屏" Style="{StaticResource SectionTitleText}" />
+                    <TextBlock Text="{Binding ColorSettings.ColorProfileStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" AutomationProperties.HelpText="ICC异常时安全回退sRGB；软件不能替代显示器校准" Margin="0,5,0,0" />
+                    <TextBlock Text="客户显示器" Style="{StaticResource CaptionText}" Margin="0,7,0,0" />
+                    <ComboBox ItemsSource="{Binding ColorSettings.Displays}" SelectedItem="{Binding ColorSettings.SelectedClientDisplay}" DisplayMemberPath="FriendlyName" AutomationProperties.Name="客户显示器选择" />
+                    <TextBlock Text="客户屏跟随模式" Style="{StaticResource CaptionText}" Margin="0,5,0,0" />
+                    <ComboBox ItemsSource="{Binding ColorSettings.ClientFollowModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ColorSettings.ClientFollowMode}" AutomationProperties.Name="客户屏跟随模式选择" />
+                    <WrapPanel Margin="0,7,0,0"><Button Content="开启客户监看" Style="{StaticResource PrimaryButton}" Command="{Binding ColorSettings.OpenClientMonitorCommand}" /><Button Content="关闭客户监看" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.CloseClientMonitorCommand}" Margin="6,0,0,0" /></WrapPanel>
+                    <CheckBox Content="客户屏显示简化文件编号（默认关闭）" IsChecked="{Binding ColorSettings.ShowClientFileName}" Margin="0,7,0,0" />
+                    <CheckBox Content="客户屏显示拍摄参数摘要（默认关闭）" IsChecked="{Binding ColorSettings.ShowClientTechnicalMetadata}" Margin="0,5,0,0" />
+                    <CheckBox Content="客户屏显示星级（默认关闭）" IsChecked="{Binding ColorSettings.ShowClientRating}" Margin="0,5,0,0" />
+                    <CheckBox Content="客户屏允许收藏和备注" IsChecked="{Binding ColorSettings.ShowClientControls}" Margin="0,5,0,0" />
+                    <TextBlock Text="{Binding ColorSettings.ClientMonitorStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
 
                     <Separator Margin="0,14" />
                     <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
@@ -108,7 +141,7 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
         <Grid>
-            <StackPanel><TextBlock Text="联机拍摄 · 现场监看" Style="{StaticResource PageTitleText}" /><TextBlock Text="当前为看守文件夹模式，并非相机USB直连。本阶段不提供实时取景、遥控快门、相机参数控制、LUT或ICC转换。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,3,180,0" /></StackPanel>
+            <StackPanel><TextBlock Text="联机拍摄 · 现场监看" Style="{StaticResource PageTitleText}" /><TextBlock Text="当前为看守文件夹模式，并非相机USB直连 · 不提供实时取景、遥控快门、相机参数控制 · CPU代理LUT监看 · 每屏ICC安全降级 · 客户屏默认隐藏私人信息" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,3,180,0" /></StackPanel>
             <Border HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource PanelBorder}" Padding="10,6"><StackPanel Orientation="Horizontal"><TextBlock Text="Provider  " Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ProviderText}" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}" /></StackPanel></Border>
         </Grid>
 
@@ -149,7 +182,14 @@
                     <Grid x:Name="PreviewViewport" Grid.Row="1" Background="{Binding CanvasBackground}" ClipToBounds="True" MouseWheel="PreviewViewport_MouseWheel" MouseLeftButtonDown="PreviewViewport_MouseLeftButtonDown" MouseLeftButtonUp="PreviewViewport_MouseLeftButtonUp" MouseMove="PreviewViewport_MouseMove" MouseLeave="PreviewViewport_MouseLeave">
                         <Grid Visibility="{Binding IsNormalPreview, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid.RenderTransform><TransformGroup><ScaleTransform ScaleX="{Binding Zoom}" ScaleY="{Binding Zoom}" /><TranslateTransform X="{Binding PanX}" Y="{Binding PanY}" /></TransformGroup></Grid.RenderTransform>
-                            <Image Source="{Binding CurrentImage}" Stretch="{Binding PreviewStretch}" SnapsToDevicePixels="True" MouseLeftButtonDown="PreviewImage_MouseLeftButtonDown" />
+                            <Image Source="{Binding ColorSettings.VisibleImage}" Stretch="{Binding PreviewStretch}" SnapsToDevicePixels="True" MouseLeftButtonDown="PreviewImage_MouseLeftButtonDown" Visibility="{Binding ColorSettings.IsLutSingleView, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Grid Visibility="{Binding ColorSettings.IsSplitView, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="{Binding ColorSettings.SplitLeftWidth}" /><ColumnDefinition Width="4" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch" Background="{DynamicResource AccentBrush}" AutomationProperties.Name="拖动LUT分屏分割线" />
+                                <Image Source="{Binding ColorSettings.SourceImage}" Stretch="{Binding PreviewStretch}" /><Image Grid.Column="2" Source="{Binding ColorSettings.DisplayImage}" Stretch="{Binding PreviewStretch}" />
+                                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Background="{DynamicResource OverlayBrush}" Padding="8" Margin="10"><TextBlock Text="原图" /></Border>
+                                <Border Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{DynamicResource OverlayBrush}" Padding="8" Margin="10"><TextBlock Text="LUT结果" /></Border>
+                            </Grid>
                             <Image Source="{Binding ClippingOverlay}" Stretch="{Binding PreviewStretch}" IsHitTestVisible="False" />
                             <Image Source="{Binding ReferenceImage}" Stretch="Uniform" Opacity="{Binding ReferenceOpacity}" Visibility="{Binding ReferenceVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False"><Image.RenderTransform><TransformGroup><ScaleTransform ScaleX="{Binding ReferenceScaleX}" ScaleY="{Binding ReferenceScale}" /><TranslateTransform X="{Binding ReferenceOffsetX}" Y="{Binding ReferenceOffsetY}" /></TransformGroup></Image.RenderTransform></Image>
                             <views:CompositionGuideOverlay GuideMode="{Binding GuideMode}" GuideBrush="{DynamicResource TextPrimaryBrush}" IsHitTestVisible="False" AutomationProperties.Name="构图辅助线" />

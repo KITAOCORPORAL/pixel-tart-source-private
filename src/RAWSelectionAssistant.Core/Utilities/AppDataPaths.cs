@@ -21,6 +21,8 @@ public static class AppDataPaths
     public static string WeatherCacheDirectory => Path.Combine(CacheDirectory, "Weather");
     public static string TetherProxyCacheDirectory => Path.Combine(CacheDirectory, "TetherProxies");
     public static string TetherFullResolutionCacheDirectory => Path.Combine(CacheDirectory, "TetherFullResolution");
+    public static string TetherLutCacheDirectory => Path.Combine(CacheDirectory, "TetherLutPreviews");
+    public static string TetherColorSettingsDirectory => Path.Combine(DataDirectory, "TetherColor");
     public static string TetherDisplaySettingsDirectory => Path.Combine(Root, "TetherDisplaySettings");
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
@@ -56,6 +58,8 @@ public static class AppDataPaths
         Directory.CreateDirectory(CacheDirectory);
         Directory.CreateDirectory(TetherProxyCacheDirectory);
         Directory.CreateDirectory(TetherFullResolutionCacheDirectory);
+        Directory.CreateDirectory(TetherLutCacheDirectory);
+        Directory.CreateDirectory(TetherColorSettingsDirectory);
         Directory.CreateDirectory(TetherDisplaySettingsDirectory);
         Directory.CreateDirectory(LicenseDirectory);
         Directory.CreateDirectory(ProjectDirectory);

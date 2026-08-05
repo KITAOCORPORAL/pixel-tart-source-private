@@ -108,7 +108,7 @@ public sealed class TetherProxyCacheService : ITetherProxyCache
         using (var source = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
             frame = BitmapFrame.Create(source, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
 
-        BitmapSource bitmap = frame;
+        BitmapSource bitmap = NormalizeEmbeddedProfile(frame);
         var longest = Math.Max(frame.PixelWidth, frame.PixelHeight);
         if (longest > LongestEdge)
         {
@@ -122,6 +122,21 @@ public sealed class TetherProxyCacheService : ITetherProxyCache
         using var output = new FileStream(destinationPath, FileMode.CreateNew, FileAccess.Write, FileShare.None);
         encoder.Save(output);
         output.Flush(true);
+    }
+
+    private static BitmapSource NormalizeEmbeddedProfile(BitmapFrame frame)
+    {
+        if (frame.ColorContexts is not { Count: > 0 }) return frame;
+        try
+        {
+            var converted = new ColorConvertedBitmap(frame, frame.ColorContexts[0], new ColorContext(PixelFormats.Bgra32), PixelFormats.Bgra32);
+            converted.Freeze();
+            return converted;
+        }
+        catch (Exception ex) when (ex is ArgumentException or NotSupportedException or FileFormatException)
+        {
+            return frame;
+        }
     }
 
     private static void ValidateProxy(string path)
