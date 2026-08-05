@@ -66,7 +66,7 @@ public sealed class Baseline2031AcceptanceTests
             var text = File.ReadAllText(Path.Combine(root, path.Replace('/', Path.DirectorySeparatorChar)));
             StringAssert.Contains(text, "2.3.0");
         }
-        StringAssert.Contains(File.ReadAllText(Path.Combine(root, "installer", "RAWSelectionAssistant.iss")), "2.2.0");
+        StringAssert.Contains(File.ReadAllText(Path.Combine(root, "installer", "RAWSelectionAssistant.iss")), "2.3.0");
     }
 
     private static string Root()

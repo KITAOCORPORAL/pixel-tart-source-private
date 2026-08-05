@@ -6,10 +6,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 if ([string]::IsNullOrWhiteSpace($Installer)) {
-    $Installer = (Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.2.0\rc\installer') -Filter '*RC_Setup_2.2.0_x64.exe' -File | Select-Object -First 1).FullName
+    $Installer = (Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.3.0\installer') -Filter '*Setup_2.3.0_RC1_x64.exe' -File | Select-Object -First 1).FullName
 }
 if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) {
-    $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.2.0\isolated-desktop-acceptance'
+    $EvidenceRoot = Join-Path $repoRoot 'artifacts\diagnostics\2.3.0\isolated-desktop-acceptance'
 }
 $runId = [Guid]::NewGuid().ToString('N')
 $runRoot = Join-Path $EvidenceRoot $runId

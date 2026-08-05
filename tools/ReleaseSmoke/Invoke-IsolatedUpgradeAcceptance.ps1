@@ -2,9 +2,9 @@ param([string]$OldInstaller='', [string]$NewInstaller='', [string]$EvidenceRoot=
 
 $ErrorActionPreference='Stop'
 $repoRoot=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-if([string]::IsNullOrWhiteSpace($OldInstaller)){$OldInstaller=(Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.1.0\installer') -Filter '*Setup_2.1.0_x64.exe' -File|Select-Object -First 1).FullName}
-if([string]::IsNullOrWhiteSpace($NewInstaller)){$NewInstaller=(Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.2.0\rc\installer') -Filter '*RC_Setup_2.2.0_x64.exe' -File|Select-Object -First 1).FullName}
-if([string]::IsNullOrWhiteSpace($EvidenceRoot)){$EvidenceRoot=Join-Path $repoRoot 'artifacts\diagnostics\2.2.0\isolated-upgrade-acceptance'}
+if([string]::IsNullOrWhiteSpace($OldInstaller)){$OldInstaller=(Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.2.0\installer') -Filter '*Setup_2.2.0_x64.exe' -File|Select-Object -First 1).FullName}
+if([string]::IsNullOrWhiteSpace($NewInstaller)){$NewInstaller=(Get-ChildItem (Join-Path $repoRoot 'artifacts\releases\2.3.0\installer') -Filter '*Setup_2.3.0_RC1_x64.exe' -File|Select-Object -First 1).FullName}
+if([string]::IsNullOrWhiteSpace($EvidenceRoot)){$EvidenceRoot=Join-Path $repoRoot 'artifacts\diagnostics\2.3.0\isolated-upgrade-acceptance'}
 $runId=[Guid]::NewGuid().ToString('N');$runRoot=Join-Path $EvidenceRoot $runId;$localAppData=Join-Path $runRoot 'local-appdata';$installRoot=Join-Path $runRoot 'installed';$sourceRoot=Join-Path $runRoot 'source';New-Item -ItemType Directory -Force -Path $localAppData,$sourceRoot|Out-Null
 $workspaceDotnet=Join-Path (Split-Path $repoRoot -Parent) '.dotnet\dotnet.exe';$dotnet=if(Test-Path -LiteralPath $workspaceDotnet){$workspaceDotnet}else{Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet-sdk-10\dotnet.exe'}
 $context=[ordered]@{RunId=$runId;RepoRoot=$repoRoot;OldInstaller=[IO.Path]::GetFullPath($OldInstaller);NewInstaller=[IO.Path]::GetFullPath($NewInstaller);EvidenceRoot=$runRoot;LocalAppData=$localAppData;InstallRoot=$installRoot;SourceRoot=$sourceRoot;DotnetPath=$dotnet};$contextPath=Join-Path $runRoot 'context.json';$context|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $contextPath -Encoding UTF8

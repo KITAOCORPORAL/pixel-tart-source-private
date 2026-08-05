@@ -39,7 +39,7 @@ public sealed class UsabilityFix151Tests
     }
 
     [TestMethod] public void Version_Is230() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.3.0\"");
-    [TestMethod] public void Installer_IsNamedFor220() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.2.0\"", "像素蛋挞_Setup_2.2.0_x64");
+    [TestMethod] public void Installer_IsNamedFor230() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64");
     [TestMethod] public void Release_RemainsWinExeSelfContained() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
