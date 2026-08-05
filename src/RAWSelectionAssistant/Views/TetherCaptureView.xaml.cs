@@ -66,6 +66,8 @@ public partial class TetherCaptureView : UserControl
             "TetherAnnotations" => 650,
             "TetherSideBySide" or "TetherOverlayCompare" => 880,
             "TetherReference" => 1110,
+            "LutNone" or "LutImported" or "LutStrength50" or "LutBeforeAfter" or "LutSplitView" or "LutInvalid" => 370,
+            "ColorProfileDetected" or "ColorProfileFallback" or "ClientMonitorSelector" or "ClientMonitorFollowMain" or "ClientMonitorFollowLatest" or "ClientMonitorLocked" or "ClientMonitorPrivacy" or "ClientMonitorFavoriteNote" or "ClientMonitorDisconnected" or "ClientMonitorReconnected" or "MixedDpi" => 750,
             _ => 0
         };
         scroll?.ScrollToVerticalOffset(offset);
@@ -133,8 +135,14 @@ public partial class TetherCaptureView : UserControl
             case Key.D3: case Key.NumPad3: SetRating(viewModel, 3, e); break;
             case Key.D4: case Key.NumPad4: SetRating(viewModel, 4, e); break;
             case Key.D5: case Key.NumPad5: SetRating(viewModel, 5, e); break;
+            case Key.B: viewModel.ColorSettings.ShowBefore = true; e.Handled = true; break;
         }
     }
+
+    private void LutBefore_MouseDown(object sender, MouseButtonEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = true; }
+    private void LutBefore_MouseUp(object sender, MouseButtonEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = false; }
+    private void LutBefore_MouseLeave(object sender, MouseEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = false; }
+    private void View_PreviewKeyUp(object sender, KeyEventArgs e) { if (e.Key == Key.B && ViewModel is not null) { ViewModel.ColorSettings.ShowBefore = false; e.Handled = true; } }
 
     private static void SetRating(TetherCaptureViewModel viewModel, int rating, KeyEventArgs e)
     {

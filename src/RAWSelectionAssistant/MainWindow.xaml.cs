@@ -557,8 +557,8 @@ public partial class MainWindow : Window
         if (tab is not null) RecentProjectTab_Click(tab, new RoutedEventArgs());
         RootGrid.UpdateLayout();
         UpdateWorkbenchResponsiveLayout();
-        if (reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true)
-            TetherMonitorView.ApplyReviewPresentation(reviewState, width);
+        if (IsTetherColorReviewState(reviewState))
+            TetherMonitorView.ApplyReviewPresentation(reviewState!, width);
         FinalizeAutomatedDpiAcceptanceState(reviewState);
 
         if (string.Equals(reviewState, "ToolboxPopup", StringComparison.OrdinalIgnoreCase))
@@ -579,18 +579,20 @@ public partial class MainWindow : Window
         }
         if (!string.IsNullOrWhiteSpace(outputPath) && !string.Equals(outputPath, "KEEP_OPEN", StringComparison.OrdinalIgnoreCase))
         {
-            var captureDelay = reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true ? 2200 : 550;
+            var captureDelay = IsTetherColorReviewState(reviewState) ? 2200 : 550;
             var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(captureDelay) };
             captureTimer.Tick += (_, _) =>
             {
                 captureTimer.Stop();
-                if (reviewState?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true)
-                    TetherMonitorView.ApplyReviewPresentation(reviewState, width);
+                if (IsTetherColorReviewState(reviewState))
+                    TetherMonitorView.ApplyReviewPresentation(reviewState!, width);
                 CaptureUiReviewFrame(outputPath);
             };
             captureTimer.Start();
         }
     }
+
+    private static bool IsTetherColorReviewState(string? state) => state?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("Lut", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("ColorProfile", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) == true || state == "MixedDpi";
 
     private void CaptureUiReviewFrame(string outputPath)
     {

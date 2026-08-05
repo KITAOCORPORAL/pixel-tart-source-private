@@ -122,7 +122,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         IPreviewRequestCoordinator? requestCoordinator = null,
         ITetherExifService? exifService = null,
         ITetherDisplaySettingsStore? displaySettingsStore = null,
-        IPreviewMemoryManager? memoryManager = null)
+        IPreviewMemoryManager? memoryManager = null,
+        TetherColorViewModel? color = null)
     {
         _adapter = adapter;
         _sessionRepository = sessionRepository;
@@ -138,6 +139,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _requestCoordinator = requestCoordinator ?? new PreviewRequestCoordinator();
         _exifService = exifService ?? new TetherExifService();
         _displaySettingsStore = displaySettingsStore ?? new JsonTetherDisplaySettingsStore();
+        ColorSettings = color ?? new TetherColorViewModel(dialogs);
+        ColorSettings.AttachClientAnnotationHandler(SaveClientAnnotationFromMonitorAsync);
+        ColorSettings.AttachAssetImageLoader(LoadAssetImageForClientAsync);
 
         AssetsView = CollectionViewSource.GetDefaultView(Assets);
         AssetsView.Filter = FilterAsset;
@@ -183,6 +187,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     }
 
     public ObservableCollection<TetherAssetItemViewModel> Assets { get; } = [];
+    public TetherColorViewModel ColorSettings { get; }
     public ICollectionView AssetsView { get; }
     public IReadOnlyList<TetherChoice<TetherAssetFilter>> FilterOptions { get; } =
     [
@@ -356,6 +361,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
+        await ColorSettings.InitializeAsync(cancellationToken);
         var recovered = await _adapter.RecoverLatestAsync(cancellationToken);
         if (recovered is not null)
         {
@@ -421,6 +427,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         lock (_backgroundSync) tasks = _backgroundTasks.ToArray();
         try { await Task.WhenAll(tasks); } catch (Exception ex) when (ex is OperationCanceledException or ObjectDisposedException) { }
         _requestCoordinator.Dispose();
+        ColorSettings.Dispose();
         _lifetime.Dispose();
     }
 
@@ -434,6 +441,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         if (annotations is not null)
             foreach (var pair in annotations) if (_assetIndex.TryGetValue(pair.Key, out var item)) item.ApplyAnnotation(pair.Value);
         SelectedAsset = Assets.FirstOrDefault();
+        ColorSettings.ApplyReviewState(state);
         StatusText = state switch
         {
             "TetherEmpty" => "阶段C评审：等待看守文件夹送入第一张照片。",
@@ -454,6 +462,23 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             "TetherCompact1280" => "阶段C评审：1280 宽度使用检查器抽屉。",
             "TetherDpi150" => "阶段C评审：150% 逻辑 DPI 布局。",
             "TetherRawPlaceholder" => "阶段C评审：无配对 JPG 的 RAW 显示安全占位。",
+            "LutNone" => "阶段D评审：未选择LUT，输入色彩空间未知。",
+            "LutImported" => "阶段D评审：3D LUT已验证并仅关联原位置。",
+            "LutStrength50" => "阶段D评审：LUT强度50%，CPU代理后台渲染。",
+            "LutBeforeAfter" => "阶段D评审：按住或键盘B临时查看原图。",
+            "LutSplitView" => "阶段D评审：原图与LUT结果分屏比较。",
+            "LutInvalid" => "阶段D评审：损坏LUT已安全回退原图。",
+            "ColorProfileDetected" => "阶段D评审：当前显示器ICC已独立检测。",
+            "ColorProfileFallback" => "阶段D评审：无ICC或异常ICC时回退sRGB。",
+            "ClientMonitorSelector" => "阶段D评审：选择StableKey显示器并确认隐私后开启。",
+            "ClientMonitorFollowMain" => "阶段D评审：客户屏跟随主选中。",
+            "ClientMonitorFollowLatest" => "阶段D评审：客户屏跟随最新Ready照片。",
+            "ClientMonitorLocked" => "阶段D评审：客户屏独立锁定，新照片只累计提示。",
+            "ClientMonitorPrivacy" => "阶段D评审：客户屏默认隐藏文件名、路径和私人备注。",
+            "ClientMonitorFavoriteNote" => "阶段D评审：客户收藏和备注复用TetherAnnotations。",
+            "ClientMonitorDisconnected" => "阶段D评审：客户屏断开，窗口撤回且接片继续。",
+            "ClientMonitorReconnected" => "阶段D评审：客户屏重连后可手动恢复。",
+            "MixedDpi" => "阶段D评审：主屏100%与客户屏150%自动化拓扑。",
             _ => StatusText
         };
         switch (state)
@@ -539,6 +564,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         foreach (var ready in snapshot.Assets.Where(IsReady).OrderBy(asset => asset.ReadyAtUtc ?? asset.FirstSeenAtUtc))
         {
             if (!_knownReadyAssets.Add(ready.Id)) continue;
+            ColorSettings.NotifyLatest(ready.Id);
             var selected = _selectionCoordinator.OnReady(ready.Id);
             if (selected.HasValue && _assetIndex.TryGetValue(selected.Value, out var item)) SetSelected(item, false);
         }
@@ -569,6 +595,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             var result = await previewTask;
             if (!_requestCoordinator.IsCurrent(item.Record.Id, request.Version)) return;
             CurrentImage = result.Image;
+            await ColorSettings.SetSourceAsync(item.Record.Id, item.Record.ProxyCacheKey ?? item.Record.UpdatedAtUtc.ToUnixTimeMilliseconds().ToString(), result.Image, request.Token);
             PreviewMode = TetherPreviewMode.Fit; Zoom = 1; PanX = PanY = 0;
             PreviewProgress = 65;
             PreviewStatus = result.Image is null ? result.Message ?? "预览不可用。" : result.UsedPairedPreview ? "RAW使用配对JPG进行监看。" : "监看代理图 · 最长边2048";
@@ -598,6 +625,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         var preview = await _previewLoader.LoadAsync(item.Record, 2048, _lifetime.Token);
         if (preview.Image is null) return;
         CurrentImage = preview.Image;
+        await ColorSettings.SetSourceAsync(item.Record.Id, item.Record.ProxyCacheKey ?? item.Record.UpdatedAtUtc.ToUnixTimeMilliseconds().ToString(), preview.Image, _lifetime.Token);
         Histogram = await _histogramService.CalculateAsync(preview.Image, true, _lifetime.Token);
         ClippingOverlay = createClippingOverlay
             ? await _clippingService.CreateAsync(preview.Image, true, HighlightThreshold, true, ShadowThreshold, _lifetime.Token)
@@ -625,6 +653,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
                 return;
             }
             CurrentImage = result.Image; PreviewMode = TetherPreviewMode.ActualSize; Zoom = 1; PanX = PanY = 0; PreviewProgress = 100;
+            await ColorSettings.SetSourceAsync(item.Record.Id, item.Record.UpdatedAtUtc.ToUnixTimeMilliseconds().ToString(), result.Image, request.Token);
             PreviewStatus = result.UsedPairedPreview ? "100%查看 · RAW使用配对JPG源文件" : "100%查看 · 源文件流已释放";
             Histogram = await _histogramService.CalculateAsync(result.Image, false, request.Token);
             await RefreshClippingAsync(request.Token);
@@ -752,6 +781,23 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         }
         catch (OperationCanceledException) { AnnotationStatus = "标注保存已取消。"; }
         finally { IsAnnotationSaving = false; }
+    }
+
+    private async Task SaveClientAnnotationFromMonitorAsync(bool favorite, string? note)
+    {
+        if (SelectedAsset is null) throw new InvalidOperationException("当前没有选中的照片。");
+        ClientFavorite = favorite;
+        ClientNote = note;
+        await SaveAnnotationAsync();
+        if (AnnotationStatus.Contains("失败", StringComparison.Ordinal)) throw new InvalidOperationException(AnnotationStatus);
+    }
+
+    private async Task<BitmapSource?> LoadAssetImageForClientAsync(Guid assetId, CancellationToken cancellationToken)
+    {
+        var item = Assets.FirstOrDefault(candidate => candidate.Record.Id == assetId);
+        if (item is null) return null;
+        var result = await _previewLoader.LoadAsync(item.Record, 1600, cancellationToken).ConfigureAwait(false);
+        return result.Image;
     }
 
     private void SetCompareCandidate(TetherAssetItemViewModel? item)
