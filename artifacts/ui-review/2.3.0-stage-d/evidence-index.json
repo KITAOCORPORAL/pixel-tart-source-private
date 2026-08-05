@@ -1,0 +1,234 @@
+﻿{
+    "EvidenceType":  "real-wpf-render-target-capture",
+    "IsolatedProfile":  "C:\\Users\\Administrator\\AppData\\Local\\KitaoPhotoSelector.UiReview",
+    "SourceCommit":  "52a40a02529adf02fe8f87bca0817d7ef8fce2ad",
+    "ExpectedScreenshotCount":  22,
+    "ScreenshotCount":  22,
+    "UniqueScreenshotHashes":  22,
+    "SourceFilesUnchanged":  true,
+    "PhysicalSecondMonitorTested":  false,
+    "ValidationScope":  "automated display topology and independent WPF window",
+    "GeneratedAt":  "2026-08-05T16:24:33.1004367+08:00",
+    "Screenshots":  [
+                        {
+                            "File":  "01_Lut_None.png",
+                            "State":  "LutNone",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  178844,
+                            "Sha256":  "7775EB7E0464775D8CF615E40222626A45D122A16C291F7C3CB5914CDB94E5D5",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "02_Lut_Imported.png",
+                            "State":  "LutImported",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  181196,
+                            "Sha256":  "A57ACDBE5802D22741597A3DC90BED76DD281F9A2196ACA912E44C9BBE066067",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "03_Lut_Strength50.png",
+                            "State":  "LutStrength50",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  178978,
+                            "Sha256":  "5903754DB420440BB947C8012B32D3F25DD1D4E02E92646C63D41A018568B2A2",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "04_Lut_BeforeAfter.png",
+                            "State":  "LutBeforeAfter",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  178307,
+                            "Sha256":  "B41A43B37F8DA0A2B934E59B736625CCF8DA2E2AEB75343E55455FD43878216A",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "05_Lut_SplitView.png",
+                            "State":  "LutSplitView",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  344516,
+                            "Sha256":  "BA40FF2D703EC82162462AE8F624BB93FB590EA90215CF41B3AA85D8DD9CA214",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "06_Lut_Invalid.png",
+                            "State":  "LutInvalid",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  178366,
+                            "Sha256":  "85726CEBD3D0F1DF9040CA7F4DE6F0AE7175C9D3F2DF3AFBCA12D9C74AACF3B7",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "07_ColorProfile_Detected.png",
+                            "State":  "ColorProfileDetected",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  164067,
+                            "Sha256":  "21B77E803764A49E86A9B5CCA1B9B76954050D7E165DBE26BCD1757C18D7EA1E",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "08_ColorProfile_Fallback.png",
+                            "State":  "ColorProfileFallback",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  164079,
+                            "Sha256":  "A4F8A185837EDF3C22CEBBEB6DBC718531C84D089B0CEFB0C485F9401488C2AB",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "09_ClientMonitor_Selector.png",
+                            "State":  "ClientMonitorSelector",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  166190,
+                            "Sha256":  "384027D5989F53B80543720870D0B8B1B155C5EEA36CA01D4B5F8A98A643DBF3",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "10_ClientMonitor_FollowMain.png",
+                            "State":  "ClientMonitorFollowMain",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  164782,
+                            "Sha256":  "775FEED68456A53055038FC64A56A5F08B27C40BDF7C6B159BFB3A4AEDAC4B6A",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "11_ClientMonitor_FollowLatest.png",
+                            "State":  "ClientMonitorFollowLatest",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  165747,
+                            "Sha256":  "D2103ACEF1DFB4D83B13DFA1C6632A81DBF02F53DC007C438D3A47B2D3A01FDE",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "12_ClientMonitor_Locked.png",
+                            "State":  "ClientMonitorLocked",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  167304,
+                            "Sha256":  "9FC921FCF013376582C80E5BE6E7FD276CFA76F756C5D39EFBBB5D1131C824BB",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "13_ClientMonitor_PrivacyDefault.png",
+                            "State":  "ClientMonitorPrivacy",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  167431,
+                            "Sha256":  "AF3532EA36B37A32D52022028CA4321403A9D31D4EA575364CF0192D0FB22493",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "14_ClientMonitor_FavoriteNote.png",
+                            "State":  "ClientMonitorFavoriteNote",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  169526,
+                            "Sha256":  "8B088642ED77F9043A9E052B4E6E92E8C905878BEEC700C8F4E64FF62488C7D5",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "15_ClientMonitor_Disconnected.png",
+                            "State":  "ClientMonitorDisconnected",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  166593,
+                            "Sha256":  "B12A9882DB362069CCC35C6CB64F5AAF8EBBB1DC9985CCEBDE7C071C0F9D2F7C",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "16_ClientMonitor_Reconnected.png",
+                            "State":  "ClientMonitorReconnected",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  165616,
+                            "Sha256":  "F4B4F8F7E5EB97E15D3A129D2DBAC059984EAEDB87E8E65E78CF8A6C69DB6560",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "17_MixedDpi.png",
+                            "State":  "MixedDpi",
+                            "Theme":  "Dark",
+                            "DpiScale":  1.5,
+                            "Bytes":  409935,
+                            "Sha256":  "47F33A6BE1D16392FFC45D6EE1A63974B3B824787AF167D7196A4C98218265F5",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "18_DarkTheme.png",
+                            "State":  "TetherDark",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  186482,
+                            "Sha256":  "D9ED9499A626FA26486CB4B1D544F35E74F6E5292F6805787788647CAF6F78A6",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "19_LightTheme.png",
+                            "State":  "LutImported",
+                            "Theme":  "Light",
+                            "DpiScale":  1,
+                            "Bytes":  178326,
+                            "Sha256":  "9C9F52B309C59C832571855DA9A50F28F5AC969D1F2B33822BFDBC0B88FCC6BC",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "20_HighContrast.png",
+                            "State":  "LutImported",
+                            "Theme":  "HighContrast",
+                            "DpiScale":  1,
+                            "Bytes":  171065,
+                            "Sha256":  "B6D323DE6468C9B2D0BBCBF64F3761305DDD05347C94FE97E141520D8B4CC69B",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "21_Compact1280.png",
+                            "State":  "LutStrength50",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  115669,
+                            "Sha256":  "74EC7A93721AD35A925C45FE68119B342A7A2513ABFD6A459F95408B00927A4B",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        },
+                        {
+                            "File":  "22_Settings_Color.png",
+                            "State":  "Settings",
+                            "Theme":  "Dark",
+                            "DpiScale":  1,
+                            "Bytes":  105469,
+                            "Sha256":  "937D074D8093ADC673492606061F994EE46CDF6077EADD5721E38B81474CFBED",
+                            "LayoutPassed":  true,
+                            "BlockingIssueCount":  0
+                        }
+                    ]
+}
