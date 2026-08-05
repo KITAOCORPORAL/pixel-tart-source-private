@@ -548,6 +548,11 @@ public partial class MainWindow : Window
             _viewModel.CollagePage.AddPaths(System.IO.Directory.Exists(demoDirectory) ? System.IO.Directory.GetFiles(demoDirectory, "*.png") : []);
             _viewModel.CollagePage.SelectedTemplate = CollageTemplateCatalog.Get("4-grid");
         }
+        if (string.Equals(reviewState, "TetherTaskCenter", StringComparison.OrdinalIgnoreCase))
+        {
+            TaskCenterRuntimeContent.Visibility = Visibility.Collapsed;
+            TaskCenterReviewContent.Visibility = Visibility.Visible;
+        }
 
         var tab = RecentAllTab;
         if (string.Equals(reviewState, "CompletedProjectsEmpty", StringComparison.OrdinalIgnoreCase))

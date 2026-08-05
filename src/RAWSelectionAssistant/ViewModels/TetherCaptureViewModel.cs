@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Core.Utilities;
@@ -435,8 +436,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         _reviewStateActive = true;
         var now = DateTimeOffset.UtcNow;
-        var session = new TetherSessionRecord(Guid.Parse("23000000-0000-0000-0000-000000000003"), null, CameraProviderType.WatchFolder, "[合成测试目录]", "[合成测试目录]", TetherSessionState.Running, now, now, true, false, null, false, null, now);
-        IsRunning = true;
+        var disconnected = state == "TetherDirectoryDisconnected";
+        var session = new TetherSessionRecord(Guid.Parse("23000000-0000-0000-0000-000000000003"), null, CameraProviderType.WatchFolder, "[合成测试目录]", "[合成测试目录]", disconnected ? TetherSessionState.NeedsAttention : TetherSessionState.Running, now, now, true, false, null, false, null, now, LastErrorCode: disconnected ? ErrorCodeCatalog.SourceNotFound : null);
+        IsRunning = !disconnected;
         ApplySnapshot(new(session, assets, 0, false));
         if (annotations is not null)
             foreach (var pair in annotations) if (_assetIndex.TryGetValue(pair.Key, out var item)) item.ApplyAnnotation(pair.Value);
@@ -460,8 +462,18 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             "TetherLight" => "阶段C评审：浅色主题。",
             "TetherHighContrast" => "阶段C评审：高对比度主题。",
             "TetherCompact1280" => "阶段C评审：1280 宽度使用检查器抽屉。",
+            "TetherCompact1280Closed" => "阶段E验收：1280 宽度保持主监看完整，检查器按需从抽屉打开。",
             "TetherDpi150" => "阶段C评审：150% 逻辑 DPI 布局。",
             "TetherRawPlaceholder" => "阶段C评审：无配对 JPG 的 RAW 显示安全占位。",
+            "TetherAssets1000" => "阶段E验收：1000 个合成资产已完成受控批量发现，无重复资产。",
+            "TetherBurst" => "阶段E验收：100 个 JPG/RAW 混合连拍已完成，队列归零。",
+            "TetherNeedsAttention" => "阶段E验收：单个异常文件进入需要处理，联机会话继续。",
+            "TetherDirectoryDisconnected" => "阶段E验收：看守目录暂时不可访问；源文件保持不变。",
+            "TetherDirectoryRecovered" => "阶段E验收：目录已恢复并完成顶层核对，没有重复复制。",
+            "TetherDpi200" => "阶段E验收：200% 逻辑 DPI 布局。",
+            "TetherTaskCenter" => "阶段E验收：联机安全复制任务由统一任务中心展示和恢复。",
+            "Lut1D" => "阶段E验收：纯1D LUT已安全解析并用于代理监看。",
+            "Lut3D" => "阶段E验收：纯3D LUT已安全解析并用于代理监看。",
             "LutNone" => "阶段D评审：未选择LUT，输入色彩空间未知。",
             "LutImported" => "阶段D评审：3D LUT已验证并仅关联原位置。",
             "LutStrength50" => "阶段D评审：LUT强度50%，CPU代理后台渲染。",
@@ -493,6 +505,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             case "TetherAnnotations": CurrentRating = 5; CurrentColorLabel = "绿"; ClientFavorite = true; PhotographerNote = "主光位置确认，保留这一张。"; ClientNote = "客户现场收藏"; break;
             case "TetherFullscreen": IsFullScreen = true; break;
             case "TetherRawPlaceholder": SelectedAsset = Assets.FirstOrDefault(item => item.Record.MediaKind == TetherMediaKind.Raw); break;
+            case "TetherNeedsAttention": SelectedFilter = TetherAssetFilter.NeedsAttention; SelectedAsset = Assets.FirstOrDefault(item => item.NeedsAttention); break;
         }
     }
 

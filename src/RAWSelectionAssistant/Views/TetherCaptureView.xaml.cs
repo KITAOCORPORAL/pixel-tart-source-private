@@ -135,6 +135,21 @@ public partial class TetherCaptureView : UserControl
             case Key.D3: case Key.NumPad3: SetRating(viewModel, 3, e); break;
             case Key.D4: case Key.NumPad4: SetRating(viewModel, 4, e); break;
             case Key.D5: case Key.NumPad5: SetRating(viewModel, 5, e); break;
+            case Key.L:
+                if (viewModel.ColorSettings.ToggleLutCommand.CanExecute(null)) viewModel.ColorSettings.ToggleLutCommand.Execute(null);
+                e.Handled = true;
+                break;
+            case Key.K:
+                if (viewModel.ToggleLockCommand.CanExecute(null)) viewModel.ToggleLockCommand.Execute(null);
+                e.Handled = true;
+                break;
+            case Key.C:
+                System.Windows.Input.ICommand clientCommand = viewModel.ColorSettings.IsClientMonitorOpen
+                    ? viewModel.ColorSettings.CloseClientMonitorCommand
+                    : viewModel.ColorSettings.OpenClientMonitorCommand;
+                if (clientCommand.CanExecute(null)) clientCommand.Execute(null);
+                e.Handled = true;
+                break;
             case Key.B: viewModel.ColorSettings.ShowBefore = true; e.Handled = true; break;
         }
     }

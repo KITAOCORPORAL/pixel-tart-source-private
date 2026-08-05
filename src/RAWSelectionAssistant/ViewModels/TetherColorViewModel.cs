@@ -227,10 +227,13 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
 
     public void ApplyReviewState(string state)
     {
-        if (state == "LutImported" && LutPresets.Count == 0)
+        if ((state is "LutImported" or "Lut1D" or "Lut3D") && LutPresets.Count == 0)
         {
-            var identity = new LutDefinition("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
-            var synthetic = new LutPresetReference(Guid.Parse("23000000-0000-0000-0000-00000000000D"), "Pixel Tart Warm 3D", "[合成测试LUT]", "[合成测试LUT]", "synthetic-lut-fingerprint", LutKind.ThreeDimensional, 2, identity.DomainMin, identity.DomainMax, true, DateTimeOffset.UtcNow, LutValidationStatus.Valid);
+            var oneDimensional = state == "Lut1D";
+            var identity = oneDimensional
+                ? new LutDefinition("Pixel Tart 1D", LutKind.OneDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.94f,.82f)])
+                : new LutDefinition("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+            var synthetic = new LutPresetReference(Guid.Parse("23000000-0000-0000-0000-00000000000D"), oneDimensional ? "Pixel Tart 1D" : "Pixel Tart Warm 3D", "[合成测试LUT]", "[合成测试LUT]", "synthetic-lut-fingerprint", identity.Kind, identity.Size, identity.DomainMin, identity.DomainMax, true, DateTimeOffset.UtcNow, LutValidationStatus.Valid);
             LutPresets.Add(synthetic); SelectedLut = synthetic;
         }
         LutStrengthPercent = state == "LutStrength50" ? 50 : 100;
