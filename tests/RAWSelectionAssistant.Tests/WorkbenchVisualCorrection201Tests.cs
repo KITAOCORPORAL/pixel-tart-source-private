@@ -54,7 +54,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void ReleaseProvider_RemainsNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void ReleaseMock_RemainsDisabled() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");
     [TestMethod] public void Source_DoesNotUseLocalhost() { foreach (var file in Directory.EnumerateFiles(Path.Combine(Root(), "src"), "*.*", SearchOption.AllDirectories).Where(path => path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))) DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1"); }
-    [TestMethod] public void Installer_IsNamedFor220() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.2.0\"", "像素蛋挞_Setup_2.2.0_x64");
+    [TestMethod] public void Installer_IsNamedFor230() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");
     private static string CodeBehind() => Text("src/RAWSelectionAssistant/MainWindow.xaml.cs");

@@ -39,7 +39,7 @@ if(Test-Path $acceptanceSettingsRoot){Remove-Item $acceptanceSettingsRoot -Recur
 New-Item -ItemType Directory -Force -Path $acceptanceSettingsRoot | Out-Null
 $completedAt = [DateTimeOffset]::UtcNow
 $completedAtText = $completedAt.ToString('O')
-$completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.2.0|$completedAtText"
+$completionValue = "KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.3.0|$completedAtText"
 $sha256 = [Security.Cryptography.SHA256]::Create()
 try { $completionProof = ([BitConverter]::ToString($sha256.ComputeHash([Text.Encoding]::UTF8.GetBytes($completionValue)))).Replace('-', '') }
 finally { $sha256.Dispose() }
@@ -47,7 +47,7 @@ $acceptanceSettings = @{
     Appearance=@{ Theme=2; SidebarCollapsed=$false }
     PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress')
     onboardingCompleted=$true
-    onboardingVersion='2.2.0'
+    onboardingVersion='2.3.0'
     onboardingCompletedAt=$completedAtText
     onboardingCurrentStep=22
     onboardingLegacyUser=$false
@@ -64,7 +64,7 @@ $N = @{
     Workflow=Decode '5b2S54mH5bel5L2c5Yy6'; SourceDirectory=Decode '54Wn54mH5p2l5rqQ55uu5b2V'; History=Decode '6aG555uu5Y6G5Y+y'; Toolbox=Decode '5bel5YW3566x'; ViewAll=Decode '5p+l55yL5YWo6YOo5bel5YW3';
     Settings=Decode '6K6+572u'; CloseSettings=Decode '5YWz6Zet6K6+572u'; CollagePage=Decode '5ou85Zu+6aG16Z2i'; ImportPhotos=Decode '5a+85YWl54Wn54mH';
     ToolPage=Decode '5bel5YW3566x';
-    WorkCalendar=Decode '5bel5L2c5pel5Y6G'; NewBooking=Decode '5paw5bu65ouN5pGE5o6S5pyf';
+    WorkCalendar=Decode '5bel5L2c5pel5Y6G'; NewBooking=Decode '5paw5bu65ouN5pGE5o6S5pyf'; Tether='联机拍摄'; TetherWorkspace='联机拍摄现场监看工作区';
     Month=Decode '5pyI'; MonthView=Decode '5pyI6KeG5Zu+'; Week=Decode '5ZGo'; WeekView=Decode '5ZGo6KeG5Zu+';
     Day=Decode '5pel'; DayView=Decode '5pel6KeG5Zu+'; ProjectName=Decode '6aG555uu5ZCN56ew'; StartDate=Decode '5byA5aeL5pel5pyf'; EndDate=Decode '57uT5p2f5pel5pyf';
     AcceptanceBooking=Decode '6ZqU56a76aqM5pS25o6S5pyf'; EditedAcceptanceBooking=Decode '6ZqU56a76aqM5pS25o6S5pyfLeW3sue8lui+kQ==';
@@ -89,7 +89,7 @@ $result = [ordered]@{
     OrganizeOpened=$false; OrganizeImportedCount=0; OrganizeFileFormatRuleSelected=$false; OrganizePlanPreviewed=$false
     OrganizeCopyCompleted=$false; OrganizeCopiedCount=0; SourceFileIntegrityVerified=$false; ProviderNone=$false; ReleaseMockDisabled=$false
     WinExeNoConsole=$false; UninstallExitCode=$null; InstallDirectoryRemoved=$false; StartedAt=[DateTimeOffset]::Now.ToString('O')
-    StageDInstalledProbePassed=$false; StageDInstalledProbe=$null
+    StageDInstalledProbePassed=$false; StageDInstalledProbe=$null; TetherOpened=$false
     CleanupError=''
     Stage='Initialize'
 }
@@ -292,6 +292,7 @@ try {
     $result.Stage='OpenLocalSplitWizard'
     Invoke-Navigation $main $N.StartLocal;$result.LocalSplitWizardOpened=$null -ne (Wait-Text $main $N.Wizard 12);Invoke-Navigation $main $N.Workbench;$result.LocalSplitWizardClosed=$null -ne (Wait-Text $main $N.Overview 12)
     $result.Stage='NavigatePrimaryPages'
+    Invoke-Navigation $main $N.Tether;$result.TetherOpened=$null -ne (Find-Control $main $N.TetherWorkspace '' $null 12);Invoke-Navigation $main $N.Workbench
     Invoke-Navigation $main $N.Workflow;$result.WorkflowOpened=$null -ne (Wait-Text $main $N.SourceDirectory 12);$result.WorkflowDistinctFromWizard=$null -eq (Find-Control $main $N.Wizard '' $null 1);$result.SidebarLocalSplitAbsent=$null -eq (Find-Control $main $N.StartLocal '' ([System.Windows.Automation.ControlType]::Button) 1)
     Invoke-Navigation $main $N.History;$result.HistoryOpened=$null -ne (Wait-Text $main $N.History 10);Invoke-Navigation $main $N.Workbench
     $toolbox=Find-Control $main $N.Toolbox 'ToolboxQuickButton' ([System.Windows.Automation.ControlType]::Button) 12;Invoke-Control $toolbox;$result.ToolboxPopupOpened=$null -ne (Find-Control ([System.Windows.Automation.AutomationElement]::RootElement) $N.ViewAll '' ([System.Windows.Automation.ControlType]::Button) 10)
@@ -331,11 +332,11 @@ try {
     $settingsFile=Join-Path $context.LocalAppData 'KitaoPhotoSelector\settings.json';$result.SettingsPathExists=Test-Path $settingsFile
     $sourceBefore=@(Get-ChildItem $context.InputRoot -Filter 'DPI_TEST_*.png'|ForEach-Object{[ordered]@{Name=$_.Name;Sha256=(Get-FileHash $_.FullName -Algorithm SHA256).Hash}})
     Close-App;if(Test-Path $appExe){Remove-Item $appExe -Force};$uninstaller=Join-Path $context.InstallRoot 'unins000.exe';$uninstall=Start-Process $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART') -Wait -PassThru;$result.UninstallExitCode=$uninstall.ExitCode;if(Test-Path $context.InstallRoot){Remove-Item $context.InstallRoot -Recurse -Force -ErrorAction SilentlyContinue};$result.InstallDirectoryRemoved=-not(Test-Path $context.InstallRoot);$sourceAfter=@(Get-ChildItem $context.InputRoot -Filter 'DPI_TEST_*.png'|ForEach-Object{[ordered]@{Name=$_.Name;Sha256=(Get-FileHash $_.FullName -Algorithm SHA256).Hash}});$result.SourceFileIntegrityVerified=($sourceBefore|ConvertTo-Json) -eq ($sourceAfter|ConvertTo-Json)
-    $result.NavigationDeduplicated=$result.NavigationClickCount -eq 7
+    $result.NavigationDeduplicated=$result.NavigationClickCount -eq 9
     if($result.QuickToolsManagerOpened -and $result.QuickToolsReset){$result.QuickToolsOrderChanged=$true;$result.QuickToolsPersistedAfterRestart=$true}
     $result.CollageNoAutomaticImport=$result.NoAutomaticImport
     $result.CollageNoAutomaticTemplate=$result.NoAutomaticTemplate
-    $result.Passed=$result.InstallExitCode -eq 0 -and $result.DefaultWorkbench -and $result.WorkCalendarOpened -and $result.MonthViewOpened -and $result.WeekViewOpened -and $result.DayViewOpened -and $result.BookingCreated -and $result.BookingEdited -and $result.AppRestartedAfterBooking -and $result.BookingPersistedAfterRestart -and $result.ReminderDefaultOffVisible -and $result.ReminderEnableActionSubmitted -and $result.ReminderEnabledByUser -and $result.WeatherDefaultOffVisible -and $result.AppRestartedAfterReminder -and $result.StageDInstalledProbePassed -and $result.LocalSplitWizardOpened -and $result.LocalSplitWizardClosed -and $result.WorkflowOpened -and $result.WorkflowDistinctFromWizard -and $result.SidebarLocalSplitAbsent -and $result.HistoryOpened -and $result.ToolboxPopupOpened -and $result.ToolboxFullPageOpened -and $result.SettingsOpened -and $result.SettingsClosed -and $result.NavigationDeduplicated -and $result.QuickToolsManagerOpened -and $result.QuickToolsOrderChanged -and $result.QuickToolsPersistedAfterRestart -and $result.QuickToolsReset -and $result.OrganizeOpened -and $result.OrganizeImportedCount -eq 4 -and $result.OrganizeFileFormatRuleSelected -and $result.OrganizePlanPreviewed -and $result.OrganizeCopyCompleted -and $result.CollageOpened -and $result.CollageSingleInstance -and $result.CollageNoAutomaticFileDialog -and $result.CollageReentryGuardPassed -and $result.CollageImportedCount -eq 4 -and $result.CollageTemplate2x2Selected -and $result.CollageJpgExported -and $result.CollagePngExported -and $result.ExportedFilesParseable -and $result.ProviderNone -and $result.ReleaseMockDisabled -and $result.WinExeNoConsole -and $result.UninstallExitCode -eq 0 -and $result.InstallDirectoryRemoved -and $result.SourceFileIntegrityVerified
+    $result.Passed=$result.InstallExitCode -eq 0 -and $result.DefaultWorkbench -and $result.TetherOpened -and $result.WorkCalendarOpened -and $result.MonthViewOpened -and $result.WeekViewOpened -and $result.DayViewOpened -and $result.BookingCreated -and $result.BookingEdited -and $result.AppRestartedAfterBooking -and $result.BookingPersistedAfterRestart -and $result.ReminderDefaultOffVisible -and $result.ReminderEnableActionSubmitted -and $result.ReminderEnabledByUser -and $result.WeatherDefaultOffVisible -and $result.AppRestartedAfterReminder -and $result.StageDInstalledProbePassed -and $result.LocalSplitWizardOpened -and $result.LocalSplitWizardClosed -and $result.WorkflowOpened -and $result.WorkflowDistinctFromWizard -and $result.SidebarLocalSplitAbsent -and $result.HistoryOpened -and $result.ToolboxPopupOpened -and $result.ToolboxFullPageOpened -and $result.SettingsOpened -and $result.SettingsClosed -and $result.NavigationDeduplicated -and $result.QuickToolsManagerOpened -and $result.QuickToolsOrderChanged -and $result.QuickToolsPersistedAfterRestart -and $result.QuickToolsReset -and $result.OrganizeOpened -and $result.OrganizeImportedCount -eq 4 -and $result.OrganizeFileFormatRuleSelected -and $result.OrganizePlanPreviewed -and $result.OrganizeCopyCompleted -and $result.CollageOpened -and $result.CollageSingleInstance -and $result.CollageNoAutomaticFileDialog -and $result.CollageReentryGuardPassed -and $result.CollageImportedCount -eq 4 -and $result.CollageTemplate2x2Selected -and $result.CollageJpgExported -and $result.CollagePngExported -and $result.ExportedFilesParseable -and $result.ProviderNone -and $result.ReleaseMockDisabled -and $result.WinExeNoConsole -and $result.UninstallExitCode -eq 0 -and $result.InstallDirectoryRemoved -and $result.SourceFileIntegrityVerified
 } catch {
     $result.Error=$_.Exception.ToString()
     if($null -ne $main){Save-UiTree $main (Join-Path $evidence 'failure-ui-tree.json')}

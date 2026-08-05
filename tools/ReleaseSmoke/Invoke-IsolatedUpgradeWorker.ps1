@@ -20,7 +20,7 @@ $projectId = [Guid]::NewGuid()
     OnboardingCompleted = $true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $appDataRoot 'settings.json') -Encoding UTF8
 
-$upgradeProjectName = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('Mi4x5Y2H57qn6aqM5pS26aG555uu'))
+$upgradeProjectName = '2.2.0 隔离升级项目'
 $projectTimestamp = [DateTimeOffset]::UtcNow.ToString('O')
 @"
 [
@@ -69,23 +69,28 @@ function Start-And-Close([string]$exe) {
 try {
     $old = Start-Process -FilePath $context.OldInstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/DIR="'+$context.InstallRoot+'"'),'/NOICONS') -Wait -PassThru
     $result.OldInstallExitCode = $old.ExitCode
-    if ($old.ExitCode -ne 0) { throw '2.1.0 install failed.' }
+    if ($old.ExitCode -ne 0) { throw '2.2.0 install failed.' }
 
     $installed = Join-Path $context.InstallRoot 'KitaoPhotoSelector.exe'
     $acceptance = Join-Path $context.InstallRoot 'KitaoPhotoSelector.Acceptance.exe'
-    if (-not (Test-Path -LiteralPath $installed)) { throw '2.1.0 executable missing after install.' }
+    if (-not (Test-Path -LiteralPath $installed)) { throw '2.2.0 executable missing after install.' }
     $oldVersion = (Get-Item -LiteralPath $installed).VersionInfo
     $result.OldProductVersion = $oldVersion.ProductVersion
-    $result.OldInstallVerified = $oldVersion.ProductVersion -like '2.1.0*'
-    $result.LegacyDataSeeded = (Test-Path -LiteralPath (Join-Path $appDataRoot 'settings.json')) -and (Test-Path -LiteralPath (Join-Path $appDataRoot 'Projects\projects.json'))
-    if (-not $result.OldInstallVerified -or -not $result.LegacyDataSeeded) { throw '2.1.0 installation or isolated legacy data verification failed.' }
+    $result.OldInstallVerified = $oldVersion.ProductVersion -like '2.2.0*'
+    $seedProject = Join-Path $context.RepoRoot 'tools\ReleaseSmoke\StageEUpgradeSeed\StageEUpgradeSeed.csproj'
+    $seedOutput = & $context.DotnetPath run --project $seedProject -c Release -- $appDataRoot $sourceFile 2>&1
+    $seedLine = @($seedOutput | Where-Object { $_ -match '^\{.*\}$' } | Select-Object -Last 1)
+    if (-not $seedLine) { throw ($seedOutput -join [Environment]::NewLine) }
+    $seed = $seedLine | ConvertFrom-Json
+    $result.LegacyDataSeeded = [bool]$seed.Passed -and $seed.SchemaVersion -eq 2 -and (Test-Path -LiteralPath (Join-Path $appDataRoot 'settings.json')) -and (Test-Path -LiteralPath (Join-Path $appDataRoot 'Projects\projects.json'))
+    if (-not $result.OldInstallVerified -or -not $result.LegacyDataSeeded) { throw '2.2.0 installation or isolated Schema 2 data verification failed.' }
 
     $new = Start-Process -FilePath $context.NewInstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART',('/DIR="'+$context.InstallRoot+'"'),'/NOICONS') -Wait -PassThru
     $result.NewInstallExitCode = $new.ExitCode
-    if ($new.ExitCode -ne 0) { throw '2.2.0 candidate upgrade failed.' }
+    if ($new.ExitCode -ne 0) { throw '2.3.0 candidate upgrade failed.' }
     $newVersion = (Get-Item -LiteralPath $installed).VersionInfo
     $result.NewProductVersion = $newVersion.ProductVersion
-    if ($newVersion.ProductVersion -notlike '2.2.0*') { throw '2.2.0 executable version verification failed.' }
+    if ($newVersion.ProductVersion -notlike '2.3.0*') { throw '2.3.0 executable version verification failed.' }
     Copy-Item -LiteralPath $installed -Destination $acceptance -Force
     Start-And-Close $acceptance
     $result.NewStarted = $true
