@@ -1,6 +1,7 @@
 param([string]$OutputRoot = '', [switch]$SkipBuild, [switch]$KeepReviewProfile)
 
 $ErrorActionPreference = 'Stop'
+function Decode([string]$Value) { [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Value)) }
 $repoRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $dotnet = Join-Path (Split-Path $repoRoot -Parent) '.dotnet\dotnet.exe'
 $project = Join-Path $repoRoot 'src\RAWSelectionAssistant\RAWSelectionAssistant.csproj'
@@ -90,6 +91,6 @@ $sourceAfter = Get-ChildItem $demoRoot -Filter 'STAGE*' | Sort-Object Name | For
 $sourceIntegrity = ($sourceBefore|ConvertTo-Json -Compress) -eq ($sourceAfter|ConvertTo-Json -Compress)
 $evidence=@{EvidenceType='real-wpf-render-target-capture';SourceCommit=(& git -C $repoRoot rev-parse HEAD).Trim();ExpectedScreenshotCount=32;ScreenshotCount=$results.Count;UniqueScreenshotHashes=($results.Sha256|Sort-Object -Unique).Count;SourceFilesUnchanged=$sourceIntegrity;PhysicalSecondMonitorTested=$false;ValidationScope='automated topology, mixed DPI and independent WPF window; one physical monitor detected';GeneratedAt=[DateTimeOffset]::Now.ToString('O');Screenshots=$results}
 $evidence|ConvertTo-Json -Depth 12|Set-Content (Join-Path $OutputRoot 'evidence-index.json') -Encoding UTF8; @{Passed=$sourceIntegrity;Before=$sourceBefore;After=$sourceAfter}|ConvertTo-Json -Depth 10|Set-Content (Join-Path $OutputRoot 'source-integrity.json') -Encoding UTF8
-$python='<USERPROFILE>\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe';$sheet=Join-Path $OutputRoot '像素蛋挞_2.3.0阶段E最终UI验收总览.png';& $python (Join-Path $PSScriptRoot 'create_contact_sheet.py') --input $OutputRoot --output $sheet;if($LASTEXITCODE-ne 0){throw 'Stage E contact sheet failed.'}
+$python='<USERPROFILE>\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe';$sheet=Join-Path $OutputRoot (Decode '5YOP57Sg6JuL5oyeXzIuMy4w6Zi25q61ReacgOe7iFVJ6aqM5pS25oC76KeILnBuZw==');& $python (Join-Path $PSScriptRoot 'create_contact_sheet.py') --input $OutputRoot --output $sheet;if($LASTEXITCODE-ne 0){throw 'Stage E contact sheet failed.'}
 if($results.Count-ne 32){throw 'Expected 32 Stage E screenshots.'};if(($results.Sha256|Sort-Object -Unique).Count-ne 32){throw 'Stage E screenshots must be unique.'};if(-not $sourceIntegrity){throw 'Stage E source assets changed.'};if(($results|Where-Object{-not $_.LayoutPassed}).Count-gt 0){throw 'Stage E layout metadata contains failures.'}
 if(-not $KeepReviewProfile){Remove-Item -LiteralPath $statePath -Force -ErrorAction SilentlyContinue};$evidence|ConvertTo-Json -Depth 4
