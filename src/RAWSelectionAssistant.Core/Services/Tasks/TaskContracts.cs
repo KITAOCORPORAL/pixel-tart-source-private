@@ -41,6 +41,7 @@ public interface ITaskConflictResolver
 public interface ITaskEngine : ITaskSnapshotProvider
 {
     Task<Guid> EnqueueAsync(TaskDefinition definition, CancellationToken cancellationToken = default);
+    Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task PauseAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task ResumeAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task CancelAsync(Guid taskId, CancellationToken cancellationToken = default);

@@ -130,9 +130,17 @@ public sealed class BookingDocumentWorkflowService(
                     plan = plan with { Items = hashed, EstimatedBytes = hashed.Sum(item => item.ExpectedSourceSize ?? 0) };
                 }
 
-                var progress = new Progress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
-                    _ = context.ReportProgressAsync(value.Progress, "复制拍摄资料", null, value.Summary, token));
-                var execution = await executor.ExecuteAsync(plan, context.SafeBoundaryAsync, progress, token).ConfigureAwait(false);
+                var progress = new AwaitableProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
+                    context.ReportProgressAsync(value.Progress, "复制拍摄资料", null, value.Summary, token));
+                FileOperationExecutionResult execution;
+                try
+                {
+                    execution = await executor.ExecuteAsync(plan, context.SafeBoundaryAsync, progress, token).ConfigureAwait(false);
+                }
+                finally
+                {
+                    await progress.DrainAsync().ConfigureAwait(false);
+                }
                 var outcomes = new List<BookingDocumentItemOutcome>(initialOutcomes);
                 var associated = 0;
                 var failed = initialOutcomes.Count(item => item.State == BookingDocumentFileState.Failed);
@@ -502,6 +510,25 @@ public sealed class BookingDocumentWorkflowService(
         catch (Exception) when (!cancellationToken.IsCancellationRequested)
         {
             // Audit persistence must never turn a safe file result into a second file operation or a false failure.
+        }
+    }
+
+    private sealed class AwaitableProgress<T>(Func<T, Task> report) : IProgress<T>
+    {
+        private readonly object _sync = new();
+        private readonly List<Task> _pending = [];
+
+        public void Report(T value)
+        {
+            Task task;
+            try { task = report(value); }
+            catch (Exception ex) { task = Task.FromException(ex); }
+            lock (_sync) _pending.Add(task);
+        }
+
+        public Task DrainAsync()
+        {
+            lock (_sync) return _pending.Count == 0 ? Task.CompletedTask : Task.WhenAll(_pending.ToArray());
         }
     }
 }

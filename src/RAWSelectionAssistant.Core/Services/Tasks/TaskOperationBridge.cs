@@ -23,6 +23,7 @@ public sealed class TaskOperationBridge : ITaskHandler
         var definition = new TaskDefinition(id, projectId, TaskType, displayName, inputSnapshot, null, DateTimeOffset.UtcNow);
         await engine.EnqueueAsync(definition, cancellationToken);
         await pending.Completion.Task.WaitAsync(cancellationToken);
+        await engine.WaitForCompletionAsync(id, CancellationToken.None).ConfigureAwait(false);
         return id;
     }
 

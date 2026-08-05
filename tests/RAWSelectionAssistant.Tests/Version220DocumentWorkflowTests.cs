@@ -312,7 +312,10 @@ public sealed class Version220DocumentWorkflowTests
     {
         using var setup = await SetupAsync(failDocumentAdds: true);
         var source = setup.Temp.CreateFile("来源/放弃关联.pdf", [2, 7, 1, 8]);
-        await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var persistedBeforeAbandon = await new SqliteTaskRepository(new PixelTartDatabase(setup.Database.DatabasePath)).GetAsync(copy.TaskId!.Value);
+        Assert.AreEqual(TaskLifecycleState.PartiallyCompleted, persistedBeforeAbandon!.State);
+        Assert.IsNotNull(persistedBeforeAbandon.CompletedAt);
         var restarted = setup.CreateRestartedWorkflow();
         var recovered = (await restarted.ListPendingAssociationsAsync(setup.BookingId)).Single();
 
@@ -320,7 +323,154 @@ public sealed class Version220DocumentWorkflowTests
 
         Assert.IsTrue(File.Exists(recovered.DestinationPath));
         Assert.IsTrue(File.Exists(source));
+        Assert.IsEmpty(await setup.Documents.ListByBookingAsync(setup.BookingId));
         Assert.IsEmpty(await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+        var persistedAfterAbandon = await new SqliteTaskRepository(new PixelTartDatabase(setup.Database.DatabasePath)).GetAsync(copy.TaskId.Value);
+        Assert.AreEqual(TaskLifecycleState.PartiallyCompleted, persistedAfterAbandon!.State);
+        Assert.IsNotNull(persistedAfterAbandon.CompletedAt);
+    }
+
+    [TestMethod]
+    public async Task CopyReturn_MakesTerminalStateAndRecoveryActionImmediatelyVisibleToNewConnection()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/立即恢复.pdf", [8, 6, 7, 5]);
+
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+
+        var task = await new SqliteTaskRepository(new PixelTartDatabase(setup.Database.DatabasePath)).GetAsync(copy.TaskId!.Value);
+        Assert.AreEqual(TaskLifecycleState.PartiallyCompleted, task!.State);
+        Assert.IsNotNull(task.CompletedAt);
+        Assert.HasCount(1, await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+    }
+
+    [TestMethod]
+    public async Task AbandonAssociation_IsIdempotentAndKeepsBothFiles()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/幂等放弃.pdf", [1, 6, 1, 8]);
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var pending = copy.Items.Single().PendingAssociation!;
+        var restarted = setup.CreateRestartedWorkflow();
+
+        await restarted.AbandonAssociationAsync(pending);
+        await restarted.AbandonAssociationAsync(pending);
+
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsTrue(File.Exists(pending.DestinationPath));
+        Assert.IsEmpty(await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+        var entries = await new SqliteUndoJournalRepository(new PixelTartDatabase(setup.Database.DatabasePath)).ListAsync(pending.TaskId);
+        Assert.AreEqual(UndoJournalState.Rejected, entries.Single().State);
+    }
+
+    [TestMethod]
+    public async Task AbandonAssociation_ConcurrentCallsProduceOnePersistedFinalJournalState()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/并发放弃.pdf", [1, 2, 3, 5, 8]);
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var pending = copy.Items.Single().PendingAssociation!;
+        var restarted = setup.CreateRestartedWorkflow();
+
+        await Task.WhenAll(Enumerable.Range(0, 8).Select(_ => restarted.AbandonAssociationAsync(pending)));
+
+        var entries = await new SqliteUndoJournalRepository(new PixelTartDatabase(setup.Database.DatabasePath)).ListAsync(pending.TaskId);
+        Assert.HasCount(1, entries);
+        Assert.AreEqual(UndoJournalState.Rejected, entries.Single().State);
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsTrue(File.Exists(pending.DestinationPath));
+        Assert.IsEmpty(await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+    }
+
+    [TestMethod]
+    public async Task AbandonAssociation_PersistenceFailureKeepsRecoveryActionAndReturnsFailure()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/写入失败.pdf", [4, 2]);
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var pending = copy.Items.Single().PendingAssociation!;
+        var workflow = setup.CreateWorkflow(setup.Documents, undo: new FailingAbandonUndoJournalService(setup.Undo));
+
+        await Assert.ThrowsExactlyAsync<InvalidOperationException>(() => workflow.AbandonAssociationAsync(pending));
+
+        Assert.HasCount(1, await setup.CreateRestartedWorkflow().ListPendingAssociationsAsync(setup.BookingId));
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsTrue(File.Exists(pending.DestinationPath));
+    }
+
+    [TestMethod]
+    public async Task AbandonAssociation_UsesRejectOnlyAndNeverInvokesUndoDeletion()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("来源/只拒绝撤销.pdf", [9, 9, 7]);
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var pending = copy.Items.Single().PendingAssociation!;
+        var tracking = new TrackingUndoJournalService(setup.Undo);
+
+        await setup.CreateWorkflow(setup.Documents, undo: tracking).AbandonAssociationAsync(pending);
+
+        Assert.AreEqual(1, tracking.AbandonCalls);
+        Assert.AreEqual(0, tracking.UndoCalls);
+        Assert.AreEqual(0, tracking.UndoFileCalls);
+        Assert.IsTrue(File.Exists(source));
+        Assert.IsTrue(File.Exists(pending.DestinationPath));
+    }
+
+    [TestMethod]
+    public async Task AbandonAssociation_AuditContainsNoPathOrFileName()
+    {
+        using var setup = await SetupAsync(failDocumentAdds: true);
+        var source = setup.Temp.CreateFile("客户资料/绝密放弃文件.pdf", [2, 0, 2, 6]);
+        var copy = await setup.Workflow.CopyAndAssociateAsync(new(setup.BookingId, null, BookingDocumentType.Other, [source], setup.Temp.Combine("目标"), true));
+        var pending = copy.Items.Single().PendingAssociation!;
+
+        await setup.CreateRestartedWorkflow().AbandonAssociationAsync(pending);
+
+        await using var connection = await setup.Database.OpenConnectionAsync();
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT SanitizedMessage FROM AuditLogs WHERE EventType='AssociationAbandoned' ORDER BY Timestamp DESC LIMIT 1;";
+        var message = (string)(await command.ExecuteScalarAsync())!;
+        Assert.IsFalse(message.Contains(setup.Temp.Path, StringComparison.OrdinalIgnoreCase));
+        Assert.IsFalse(message.Contains("绝密放弃文件.pdf", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    public async Task CopyReturn_LeavesNoTerminalPersistenceOrCompletionNotificationRunning()
+    {
+        var repository = new TerminalGateTaskRepository();
+        var bridge = new TaskOperationBridge();
+        var notifications = new TrackingNotificationCenter();
+        var engine = new TaskEngine(repository, new ConservativeTaskScheduler(), [bridge], new RecordingAuditLogService(), notifications, TimeSpan.Zero);
+        bridge.Attach(engine);
+        var summary = new TaskResultSummary(1, 1, 0, 0, 0, 1, 1, 1);
+
+        var run = bridge.RunAsync("recovery-gate", (_, _) => Task.FromResult(summary));
+        await repository.TerminalSaveStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        await Task.Yield();
+        Assert.IsFalse(run.IsCompleted, "TaskOperationBridge returned before TaskEngine persisted the terminal state.");
+
+        repository.ReleaseTerminalSave();
+        await run.WaitAsync(TimeSpan.FromSeconds(5));
+
+        Assert.AreEqual(0, repository.ActiveSaves);
+        Assert.AreEqual(0, notifications.ActivePublishes);
+        Assert.AreEqual(1, notifications.PublishedCount);
+        Assert.AreEqual(TaskLifecycleState.PartiallyCompleted, repository.LastPersistedState);
+        Assert.IsTrue(repository.CompletedAtPersisted);
+    }
+
+    [TestMethod]
+    public void AbandonAssociationSourceContainsNoDeleteMoveOrUndoExecution()
+    {
+        var source = File.ReadAllText(Path.Combine(Root(), "src", "RAWSelectionAssistant.Core", "Services", "Bookings", "BookingDocumentWorkflowService.cs"));
+        var start = source.IndexOf("public async Task AbandonAssociationAsync", StringComparison.Ordinal);
+        var end = source.IndexOf("private static bool TryParseDocumentSnapshot", start, StringComparison.Ordinal);
+        var method = source[start..end];
+        StringAssert.Contains(method, "AbandonFileAsync");
+        Assert.IsFalse(method.Contains("File.Delete", StringComparison.Ordinal));
+        Assert.IsFalse(method.Contains("File.Move", StringComparison.Ordinal));
+        Assert.IsFalse(method.Contains("UndoFileAsync", StringComparison.Ordinal));
+        Assert.IsFalse(method.Contains("UndoAsync", StringComparison.Ordinal));
     }
 
     [TestMethod]
@@ -573,6 +723,8 @@ public sealed class Version220DocumentWorkflowTests
         StringAssert.Contains(source, "IFileOperationPlanner");
         StringAssert.Contains(source, "IFileOperationExecutor");
         StringAssert.Contains(source, "TaskOperationBridge");
+        StringAssert.Contains(source, "await progress.DrainAsync()");
+        Assert.IsFalse(source.Contains("_ = context.ReportProgressAsync", StringComparison.Ordinal));
         Assert.IsFalse(source.Contains("File.Copy", StringComparison.Ordinal));
         Assert.IsFalse(source.Contains("File.Move", StringComparison.Ordinal));
         Assert.IsFalse(source.Contains("ReadAllText", StringComparison.Ordinal));
@@ -663,8 +815,8 @@ public sealed class Version220DocumentWorkflowTests
         public SqliteTaskRepository Tasks { get; }
         public AuditLogService Audit { get; }
         public BookingDocumentWorkflowService Workflow { get; set; } = null!;
-        public BookingDocumentWorkflowService CreateWorkflow(IBookingDocumentRepository repository, IFileOperationExecutor? executor = null) =>
-            new(repository, Bookings, Projects, Planner, executor ?? Executor, Verification, Undo, Bridge, Audit, Database);
+        public BookingDocumentWorkflowService CreateWorkflow(IBookingDocumentRepository repository, IFileOperationExecutor? executor = null, IUndoJournalService? undo = null) =>
+            new(repository, Bookings, Projects, Planner, executor ?? Executor, Verification, undo ?? Undo, Bridge, Audit, Database);
         public BookingDocumentWorkflowService CreateRestartedWorkflow()
         {
             var database = new PixelTartDatabase(Database.DatabasePath);
@@ -703,6 +855,82 @@ public sealed class Version220DocumentWorkflowTests
         public Task SetMissingAsync(Guid id, bool isMissing, DateTimeOffset verifiedAtUtc, CancellationToken cancellationToken = default) => inner.SetMissingAsync(id, isMissing, verifiedAtUtc, cancellationToken);
         public Task UpdateHashAsync(Guid id, string? optionalHash, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default) => inner.UpdateHashAsync(id, optionalHash, updatedAtUtc, cancellationToken);
         public Task<bool> RemoveAssociationAsync(Guid id, CancellationToken cancellationToken = default) => inner.RemoveAssociationAsync(id, cancellationToken);
+    }
+
+    private sealed class FailingAbandonUndoJournalService(IUndoJournalService inner) : IUndoJournalService
+    {
+        public Task<TaskResultSummary> UndoAsync(Guid taskId, CancellationToken cancellationToken = default) => inner.UndoAsync(taskId, cancellationToken);
+        public Task<TaskResultSummary> UndoFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default) => inner.UndoFileAsync(taskId, destinationPath, cancellationToken);
+        public Task<bool> AbandonFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default) =>
+            throw new InvalidOperationException("forced abandon persistence failure");
+    }
+
+    private sealed class TrackingUndoJournalService(IUndoJournalService inner) : IUndoJournalService
+    {
+        public int UndoCalls { get; private set; }
+        public int UndoFileCalls { get; private set; }
+        public int AbandonCalls { get; private set; }
+        public Task<TaskResultSummary> UndoAsync(Guid taskId, CancellationToken cancellationToken = default) { UndoCalls++; return inner.UndoAsync(taskId, cancellationToken); }
+        public Task<TaskResultSummary> UndoFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default) { UndoFileCalls++; return inner.UndoFileAsync(taskId, destinationPath, cancellationToken); }
+        public Task<bool> AbandonFileAsync(Guid taskId, string destinationPath, CancellationToken cancellationToken = default) { AbandonCalls++; return inner.AbandonFileAsync(taskId, destinationPath, cancellationToken); }
+    }
+
+    private sealed class TerminalGateTaskRepository : ITaskRepository
+    {
+        private readonly TaskCompletionSource<bool> _releaseTerminalSave = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private int _terminalSaveBlocked;
+        private int _activeSaves;
+        public TaskCompletionSource<bool> TerminalSaveStarted { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public int ActiveSaves => Volatile.Read(ref _activeSaves);
+        public TaskLifecycleState LastPersistedState { get; private set; } = TaskLifecycleState.Pending;
+        public bool CompletedAtPersisted { get; private set; }
+
+        public async Task SaveAsync(TaskRuntimeState state, CancellationToken cancellationToken = default)
+        {
+            Interlocked.Increment(ref _activeSaves);
+            try
+            {
+                if (TaskStateMachine.IsTerminal(state.State) && Interlocked.Exchange(ref _terminalSaveBlocked, 1) == 0)
+                {
+                    TerminalSaveStarted.TrySetResult(true);
+                    await _releaseTerminalSave.Task.WaitAsync(cancellationToken).ConfigureAwait(false);
+                }
+                LastPersistedState = state.State;
+                CompletedAtPersisted = state.CompletedAt is not null;
+            }
+            finally
+            {
+                Interlocked.Decrement(ref _activeSaves);
+            }
+        }
+
+        public void ReleaseTerminalSave() => _releaseTerminalSave.TrySetResult(true);
+        public Task<TaskRuntimeState?> GetAsync(Guid taskId, CancellationToken cancellationToken = default) => Task.FromResult<TaskRuntimeState?>(null);
+        public Task<IReadOnlyList<TaskRuntimeState>> ListAsync(int limit = 200, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<TaskRuntimeState>>([]);
+        public Task<IReadOnlyList<TaskRuntimeState>> ListUnfinishedAsync(CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<TaskRuntimeState>>([]);
+        public Task SaveCheckpointAsync(Guid taskId, TaskCheckpoint checkpoint, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    }
+
+    private sealed class RecordingAuditLogService : IAuditLogService
+    {
+        public Task WriteAsync(string category, string eventType, string severity, string message, Guid? taskId = null, Guid? projectId = null, string? errorCode = null, string? correlationId = null, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    }
+
+    private sealed class TrackingNotificationCenter : INotificationCenter
+    {
+        private int _activePublishes;
+        public event EventHandler<NotificationMessage>? Published;
+        public int ActivePublishes => Volatile.Read(ref _activePublishes);
+        public int PublishedCount { get; private set; }
+        public Task<IReadOnlyList<NotificationMessage>> GetHistoryAsync(int limit = 100, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<NotificationMessage>>([]);
+        public Task MarkReadAsync(Guid id, CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public void NotifyPersisted(NotificationMessage message) => Published?.Invoke(this, message);
+        public Task PublishAsync(NotificationMessage message, CancellationToken cancellationToken = default)
+        {
+            Interlocked.Increment(ref _activePublishes);
+            try { PublishedCount++; NotifyPersisted(message); return Task.CompletedTask; }
+            finally { Interlocked.Decrement(ref _activePublishes); }
+        }
     }
 
     private static string Root() { for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent) if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName; throw new DirectoryNotFoundException(); }

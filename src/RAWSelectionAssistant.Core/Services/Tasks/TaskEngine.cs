@@ -40,6 +40,13 @@ public sealed class TaskEngine : ITaskEngine
         return definition.Id;
     }
 
+    public async Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default)
+    {
+        var execution = GetControl(taskId).Execution;
+        if (execution is not null)
+            await execution.WaitAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     public async Task PauseAsync(Guid taskId, CancellationToken cancellationToken = default)
     {
         var control = GetControl(taskId);
