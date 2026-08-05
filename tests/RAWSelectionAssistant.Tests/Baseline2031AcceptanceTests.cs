@@ -58,14 +58,15 @@ public sealed class Baseline2031AcceptanceTests
     }
 
     [TestMethod]
-    public void VersionChain_Uses220Everywhere()
+    public void VersionChain_Uses230WhileUnpublishedInstallerRemains220()
     {
         var root = Root();
-        foreach (var path in new[] { "build/Version.props", "src/RAWSelectionAssistant.Core/Models/Branding.cs", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "src/RAWSelectionAssistant/app.manifest", "installer/RAWSelectionAssistant.iss" })
+        foreach (var path in new[] { "build/Version.props", "src/RAWSelectionAssistant.Core/Models/Branding.cs", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "src/RAWSelectionAssistant/app.manifest" })
         {
             var text = File.ReadAllText(Path.Combine(root, path.Replace('/', Path.DirectorySeparatorChar)));
-            StringAssert.Contains(text, "2.2.0");
+            StringAssert.Contains(text, "2.3.0");
         }
+        StringAssert.Contains(File.ReadAllText(Path.Combine(root, "installer", "RAWSelectionAssistant.iss")), "2.2.0");
     }
 
     private static string Root()

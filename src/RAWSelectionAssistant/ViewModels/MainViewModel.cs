@@ -113,7 +113,8 @@ public sealed class MainViewModel : ObservableObject
         WorkCalendarViewModel workCalendarPage,
         WorkbenchScheduleViewModel? workbenchSchedule = null,
         ReminderNotificationCenterViewModel? reminderNotifications = null,
-        WeatherFeatureState? weatherState = null)
+        WeatherFeatureState? weatherState = null,
+        TetherCaptureViewModel? tetherPage = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -141,6 +142,7 @@ public sealed class MainViewModel : ObservableObject
         WorkCalendarPage = workCalendarPage;
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
+        TetherPage = tetherPage;
         if (ReminderNotifications is not null) ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenCalendarRequested += WorkbenchSchedule_OpenCalendarRequested;
@@ -226,6 +228,7 @@ public sealed class MainViewModel : ObservableObject
     public WorkCalendarViewModel WorkCalendarPage { get; }
     public WorkbenchScheduleViewModel? WorkbenchSchedule { get; }
     public ReminderNotificationCenterViewModel? ReminderNotifications { get; }
+    public TetherCaptureViewModel? TetherPage { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -406,6 +409,7 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsWorkflowPage));
             OnPropertyChanged(nameof(IsHistoryPage));
             OnPropertyChanged(nameof(IsWorkCalendarPage));
+            OnPropertyChanged(nameof(IsTetherPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
             OnPropertyChanged(nameof(IsHelpPage));
@@ -428,6 +432,7 @@ public sealed class MainViewModel : ObservableObject
     public bool IsWorkflowPage => CurrentPage == "Workflow";
     public bool IsHistoryPage => CurrentPage == "History";
     public bool IsWorkCalendarPage => CurrentPage == "WorkCalendar";
+    public bool IsTetherPage => CurrentPage == "Tether";
     public bool IsActivationPage => CurrentPage == "Activation";
     public bool IsSettingsPage => CurrentPage == "Settings";
     public bool IsHelpPage => CurrentPage == "Help";
@@ -883,6 +888,7 @@ public sealed class MainViewModel : ObservableObject
         OutputPresets.Clear();
         foreach (var preset in await _outputPresetService.LoadAsync()) OutputPresets.Add(preset);
         if (WorkbenchSchedule is not null) await WorkbenchSchedule.InitializeAsync();
+        if (TetherPage is not null) await TetherPage.InitializeAsync();
         if (ProjectHistory.FirstOrDefault() is { } recent) _currentProject = recent;
         RegenerateOutputFolderName();
         _initialized = true;
@@ -1786,7 +1792,7 @@ public sealed class MainViewModel : ObservableObject
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "Activation" or "Settings" or "Help" or
+        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "Tether" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
         var targetPage = page switch
         {

@@ -6,6 +6,7 @@ using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
+using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
@@ -116,6 +117,23 @@ public partial class App : Application
                 _compositionRoot.BookingReminderNotificationService,
                 _compositionRoot.NotificationCenter,
                 _compositionRoot.BookingReminderService);
+            var tetherProxyCache = new TetherProxyCacheService();
+            var tetherPairing = new TetherPairingService(_compositionRoot.TetherAssetRepository);
+            var watchFolderAdapter = new WatchFolderCameraAdapter(
+                _compositionRoot.TetherSessionRepository,
+                _compositionRoot.TetherAssetRepository,
+                new FileStabilityProbe(),
+                tetherPairing,
+                tetherProxyCache,
+                _compositionRoot.TetherTransferService,
+                _compositionRoot.AuditLog,
+                _compositionRoot.NotificationCenter);
+            var tetherPage = new TetherCaptureViewModel(
+                watchFolderAdapter,
+                _compositionRoot.TetherSessionRepository,
+                _compositionRoot.TetherAssetRepository,
+                tetherProxyCache,
+                dialogService);
 
             _mainViewModel = new MainViewModel(
                 normalizer,
@@ -143,7 +161,8 @@ public partial class App : Application
                 calendarViewModel,
                 workbenchSchedule,
                 reminderNotifications,
-                _weatherState);
+                _weatherState,
+                tetherPage);
 
             await _mainViewModel.InitializeAsync();
             await reminderNotifications.InitializeAsync();
@@ -169,6 +188,7 @@ public partial class App : Application
         {
             _compositionRoot?.BookingReminderScheduler.StopAsync().GetAwaiter().GetResult();
             _mainViewModel?.SaveSettingsAsync().GetAwaiter().GetResult();
+            if (_mainViewModel?.TetherPage is not null) _mainViewModel.TetherPage.DisposeAsync().AsTask().GetAwaiter().GetResult();
         }
         catch (Exception ex)
         {

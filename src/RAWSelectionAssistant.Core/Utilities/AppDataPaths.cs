@@ -19,6 +19,7 @@ public static class AppDataPaths
     public static string LogDirectory => Path.Combine(Root, "Logs");
     public static string CacheDirectory => Path.Combine(Root, "Cache");
     public static string WeatherCacheDirectory => Path.Combine(CacheDirectory, "Weather");
+    public static string TetherProxyCacheDirectory => Path.Combine(CacheDirectory, "TetherProxies");
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
     public static string ProjectDirectory => Path.Combine(Root, "Projects");
@@ -51,6 +52,7 @@ public static class AppDataPaths
         Directory.CreateDirectory(IndexDirectory);
         Directory.CreateDirectory(LogDirectory);
         Directory.CreateDirectory(CacheDirectory);
+        Directory.CreateDirectory(TetherProxyCacheDirectory);
         Directory.CreateDirectory(LicenseDirectory);
         Directory.CreateDirectory(ProjectDirectory);
         Directory.CreateDirectory(DataDirectory);
