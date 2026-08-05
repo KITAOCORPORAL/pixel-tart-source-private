@@ -265,7 +265,13 @@ internal sealed class WatchFolderCameraSession : ICameraSession
                     await ProcessPathAsync(path, WatchFolderEventKind.Reconcile, cancellationToken).ConfigureAwait(false);
             }
             var reconciledAt = DateTimeOffset.UtcNow;
-            Session = Session with { LastReconciledAtUtc = reconciledAt, UpdatedAtUtc = reconciledAt };
+            Session = Session with
+            {
+                State = TetherSessionState.Running,
+                LastErrorCode = null,
+                LastReconciledAtUtc = reconciledAt,
+                UpdatedAtUtc = reconciledAt
+            };
             await _sessionRepository.UpdateAsync(Session, cancellationToken).ConfigureAwait(false);
             await WriteAuditAsync("TopLevelReconciliation", "Succeeded", null, cancellationToken).ConfigureAwait(false);
         }
