@@ -42,7 +42,7 @@ function Invoke-Series {
         if (-not [string]::IsNullOrWhiteSpace($Filter)) { $arguments += @('--filter', $Filter) }
         $arguments += $ExtraArguments
         $started = [DateTimeOffset]::Now
-        & $dotnet @arguments
+        & $dotnet @arguments | Out-Host
         $exitCode = $LASTEXITCODE
         $trxPath = Join-Path $resultDirectory $trxName
         if ($exitCode -ne 0 -or -not (Test-Path -LiteralPath $trxPath)) {
