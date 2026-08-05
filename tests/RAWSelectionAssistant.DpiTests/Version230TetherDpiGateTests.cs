@@ -22,25 +22,26 @@ public sealed class Version230TetherDpiGateTests
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
         Assert.IsFalse(xaml.Contains("DpiScale", StringComparison.Ordinal));
-        Assert.IsFalse(xaml.Contains("ScaleTransform", StringComparison.Ordinal));
         Assert.IsFalse(xaml.Contains("LayoutTransform", StringComparison.Ordinal));
+        StringAssert.Contains(xaml, "ScaleX=\"{Binding Zoom}\"");
         StringAssert.Contains(xaml, "DynamicResource");
     }
 
     [TestMethod]
-    public void TetherView_UsesBoundedPreviewCardsAndScrollableAssetList()
+    public void TetherView_UsesRecyclingVirtualizedScrollableAssetList()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        StringAssert.Contains(xaml, "Width=\"210\"");
+        StringAssert.Contains(xaml, "Width=\"104\"");
         StringAssert.Contains(xaml, "ScrollViewer.HorizontalScrollBarVisibility=\"Disabled\"");
-        StringAssert.Contains(xaml, "<WrapPanel />");
+        StringAssert.Contains(xaml, "VirtualizingPanel.VirtualizationMode=\"Recycling\"");
+        StringAssert.Contains(xaml, "<VirtualizingStackPanel />");
     }
 
     [TestMethod]
     public void TetherView_HasKeyboardReachableNamedActions()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        foreach (var value in new[] { "AutomationProperties.Name=\"联机拍摄\"", "AutomationProperties.Name=\"明确启动或恢复看守\"", "AutomationProperties.Name=\"联机文件列表\"", "AutomationProperties.HelpText" })
+        foreach (var value in new[] { "AutomationProperties.Name=\"联机拍摄现场监看工作区\"", "AutomationProperties.Name=\"明确启动或恢复看守\"", "AutomationProperties.Name=\"联机文件列表\"", "AutomationProperties.HelpText" })
             StringAssert.Contains(xaml, value);
     }
 

@@ -56,6 +56,15 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
+        if (state.StartsWith("Tether", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("Tether");
+            if (_viewModel.TetherPage is null) return false;
+            var (assets, annotations) = CreateTetherReviewAssets(demoDirectory, state);
+            _viewModel.TetherPage.ApplyReviewState(state, assets, annotations);
+            return true;
+        }
+
         switch (state)
         {
             case "WorkbenchDarkExpanded":
@@ -126,6 +135,56 @@ public partial class MainWindow
             default:
                 return false;
         }
+    }
+
+    private static (IReadOnlyList<TetherAssetRecord> Assets, IReadOnlyDictionary<Guid, TetherAnnotationRecord> Annotations) CreateTetherReviewAssets(
+        string demoDirectory,
+        string state)
+    {
+        if (string.Equals(state, "TetherEmpty", StringComparison.OrdinalIgnoreCase))
+            return ([], new Dictionary<Guid, TetherAnnotationRecord>());
+
+        var sessionId = Guid.Parse("23000000-0000-0000-0000-000000000003");
+        var now = DateTimeOffset.UtcNow;
+        var imagePaths = Directory.Exists(demoDirectory)
+            ? Directory.GetFiles(demoDirectory, "STAGEC_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).Take(12).ToArray()
+            : [];
+        var records = new List<TetherAssetRecord>();
+        var rawId = Guid.Parse("23000000-0000-0000-0000-000000000099");
+        for (var index = 0; index < imagePaths.Length; index++)
+        {
+            var id = Guid.Parse($"23000000-0000-0000-0000-{index + 1:000000000000}");
+            var path = imagePaths[index];
+            var file = new FileInfo(path);
+            records.Add(new(
+                id, sessionId, null, path, path.ToUpperInvariant(), file.Name, file.Extension,
+                TetherMediaKind.PreviewImage, file.Exists ? file.Length : null, file.Exists ? file.LastWriteTimeUtc : null,
+                now.AddSeconds(-index * 12), TetherStabilityState.Stable,
+                index == 7 ? TetherProcessingState.NeedsAttention : TetherProcessingState.Ready,
+                TetherPreviewState.Ready, now.AddSeconds(-index * 12), now.AddSeconds(-index * 12),
+                PairingKey: index == 0 ? "STAGEC_PAIR" : null, PairedAssetId: index == 0 ? rawId : null,
+                LastErrorCode: index == 7 ? "TETHER_SOURCE_TEMPORARILY_UNAVAILABLE" : null));
+        }
+
+        var rawPath = Path.Combine(demoDirectory, "STAGEC_RAW.nef");
+        var rawFile = new FileInfo(rawPath);
+        records.Add(new(
+            rawId, sessionId, null, rawPath, rawPath.ToUpperInvariant(), rawFile.Name, rawFile.Extension,
+            TetherMediaKind.Raw, rawFile.Exists ? rawFile.Length : null, rawFile.Exists ? rawFile.LastWriteTimeUtc : null,
+            now.AddSeconds(-160), TetherStabilityState.Stable, TetherProcessingState.Ready, TetherPreviewState.Placeholder,
+            now.AddSeconds(-160), now.AddSeconds(-160), PairingKey: "STAGEC_RAW_UNPAIRED"));
+
+        var annotations = new Dictionary<Guid, TetherAnnotationRecord>();
+        for (var index = 0; index < Math.Min(5, records.Count); index++)
+        {
+            var asset = records[index];
+            annotations[asset.Id] = new(
+                Guid.Parse($"23000000-0000-0000-0001-{index + 1:000000000000}"), asset.Id,
+                index == 0 ? 5 : 4 - index % 3, index % 2 == 0 ? "绿" : "蓝",
+                index == 0 ? "主光位置确认，保留这一张。" : null, now, now,
+                ClientFavorite: index is 0 or 2, ClientNote: index == 0 ? "客户现场收藏" : null, IsRejected: index == 4);
+        }
+        return (records, annotations);
     }
 
     private void FinalizeAutomatedDpiAcceptanceState(string? state)
@@ -281,7 +340,9 @@ public partial class MainWindow
     {
         FrameworkElement layoutRoot = string.Equals(_automatedScenarioName, "SettingsDialog", StringComparison.OrdinalIgnoreCase)
             ? SettingsModal
-            : RootGrid;
+            : _automatedScenarioName.StartsWith("Tether", StringComparison.OrdinalIgnoreCase)
+                ? TetherMonitorView
+                : RootGrid;
         var layout = InspectLayout(layoutRoot, layoutRoot.ActualWidth, layoutRoot.ActualHeight);
         var auxiliary = _automatedAuxiliaryWindow?.Content is FrameworkElement content
             ? InspectLayout(content, content.ActualWidth, content.ActualHeight)
@@ -519,6 +580,9 @@ public partial class MainWindow
 
     private static bool IsAllowedUtilityOverlay(ElementBounds left, ElementBounds right, Rect intersection)
     {
+        if (left.Identity.Contains("关闭检查器", StringComparison.OrdinalIgnoreCase) ||
+            right.Identity.Contains("关闭检查器", StringComparison.OrdinalIgnoreCase))
+            return true;
         var leftArea = left.Width * left.Height;
         var rightArea = right.Width * right.Height;
         var smaller = leftArea <= rightArea ? left : right;
