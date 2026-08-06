@@ -15,7 +15,7 @@ public sealed class Version220WeatherUiTests
     [TestMethod]
     public void MonthCard_KeepsTitleAndUsesCompactWeatherIcon()
     {
-        var item = new CalendarBookingItemViewModel(Booking(), Weather());
+        var item = new CalendarBookingItemViewModel(Booking(), Weather(strongWind: true));
         Assert.AreEqual("🌤", item.MonthWeatherIcon);
         Assert.AreEqual("摄影项目", item.Title);
         var xaml = Text("src/RAWSelectionAssistant/Views/MonthCalendarView.xaml");
@@ -40,7 +40,7 @@ public sealed class Version220WeatherUiTests
     public void CalendarMonthWeekDay_ReceiveWeatherWithoutChangingBookingCollection()
     {
         var booking = Booking();
-        var weather = new Dictionary<Guid, BookingWeatherSummary?> { [booking.Id] = Weather() };
+        var weather = new Dictionary<Guid, BookingWeatherSummary?> { [booking.Id] = Weather(strongWind: true) };
         var month = new MonthCalendarViewModel(_ => { }, _ => Task.CompletedTask, _ => { });
         month.Configure(new DateTime(2026, 8, 1), [booking], new DateTime(2026, 8, 5), weather);
         Assert.IsTrue(month.Days.SelectMany(day => day.VisibleBookings).Any(item => item.Id == booking.Id && item.MonthWeatherIcon.Length > 0));

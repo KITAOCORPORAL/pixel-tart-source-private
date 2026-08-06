@@ -4,6 +4,7 @@ using System.Windows.Input;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Business;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
@@ -11,10 +12,23 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 
 public enum CalendarViewMode { Month, Week, Day }
+public enum CalendarPresentationMode { Calendar, List, Overview }
+public enum CalendarSortMode { ShootTime, CreatedTime, Status, ClientOrProject }
 
-public sealed record CalendarStatusOption(string Label, ShootBookingStatus? Value) { public override string ToString() => Label; }
+public sealed record CalendarStatusOption(
+    string Label,
+    ShootBookingStatus? Value = null,
+    string? BusinessState = null,
+    bool ConflictOnly = false,
+    bool WeatherRiskOnly = false,
+    bool ArchivedOnly = false)
+{
+    public override string ToString() => Label;
+}
 public sealed record CalendarTypeOption(string Label, string? Value) { public override string ToString() => Label; }
 public sealed record CalendarSearchScopeOption(string Label, BookingSearchScope Value) { public override string ToString() => Label; }
+public sealed record CalendarPresentationOption(string Label, CalendarPresentationMode Value) { public override string ToString() => Label; }
+public sealed record CalendarSortOption(string Label, CalendarSortMode Value) { public override string ToString() => Label; }
 
 public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 {
@@ -23,6 +37,10 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private readonly IBookingReminderScheduler? _reminderScheduler;
     private readonly IWeatherForecastService? _weatherService;
     private readonly WeatherFeatureState? _weatherState;
+    private readonly ICalendarAvailabilityStore _availabilityStore;
+    private readonly IDialogService? _dialogs;
+    private readonly IBookingPeopleService? _bookingPeopleService;
+    private readonly IBookingDocumentWorkflowService? _documentWorkflow;
     private IReadOnlyDictionary<Guid, BookingWeatherSummary?> _currentWeather = new Dictionary<Guid, BookingWeatherSummary?>();
     private CancellationTokenSource? _queryCancellation;
     private bool _initialized;
@@ -37,22 +55,32 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private ShootBookingPageCursor? _nextCursor;
     private bool _isDetailsOpen;
     private bool _isArchivedPaneOpen;
+    private CalendarPresentationOption _selectedPresentation;
+    private CalendarSortOption _selectedSort;
 
     public WorkCalendarViewModel(IShootBookingService bookingService, RAWSelectionAssistant.Core.Services.Database.IProjectRepository projectRepository,
         IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
         IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
-        IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null)
+        IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null,
+        ICalendarAvailabilityStore? availabilityStore = null,
+        IBookingPeopleService? bookingPeopleService = null,
+        IFinanceService? financeService = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
         _reminderScheduler = reminderScheduler;
         _weatherService = weatherService;
         _weatherState = weatherState;
+        _dialogs = dialogs;
+        _bookingPeopleService = bookingPeopleService;
+        _documentWorkflow = documentWorkflow;
+        _availabilityStore = availabilityStore ?? new JsonCalendarAvailabilityStore();
         StatusOptions =
         [
-            new("全部状态", null), new("待确定", ShootBookingStatus.Tentative), new("已确认", ShootBookingStatus.Confirmed),
-            new("准备中", ShootBookingStatus.Preparing), new("拍摄中", ShootBookingStatus.Shooting), new("已完成", ShootBookingStatus.Completed),
-            new("已取消", ShootBookingStatus.Cancelled), new("已延期", ShootBookingStatus.Postponed)
+            new("全部"), new("未拍摄", BusinessState: "未拍摄"), new("已拍摄", BusinessState: "已拍摄"),
+            new("待返图", BusinessState: "待返图"), new("已交付", ShootBookingStatus.Delivered),
+            new("已取消", ShootBookingStatus.Cancelled), new("已归档", ArchivedOnly: true),
+            new("有冲突", ConflictOnly: true), new("有天气风险", WeatherRiskOnly: true)
         ];
         TypeOptions =
         [
@@ -60,19 +88,24 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             new("活动", "Event"), new("产品", "Product"), new("其他", "Other")
         ];
         SearchScopeOptions = [new("当前视图", BookingSearchScope.CurrentView), new("全部未归档排期", BookingSearchScope.AllUnarchived)];
+        PresentationOptions = [new("日历视图", CalendarPresentationMode.Calendar), new("列表视图", CalendarPresentationMode.List), new("总览视图", CalendarPresentationMode.Overview)];
+        SortOptions = [new("按拍摄时间", CalendarSortMode.ShootTime), new("按创建时间", CalendarSortMode.CreatedTime), new("按状态", CalendarSortMode.Status), new("按客户或项目", CalendarSortMode.ClientOrProject)];
         _selectedStatus = StatusOptions[0];
         _selectedType = TypeOptions[0];
         _selectedSearchScope = SearchScopeOptions[0];
+        _selectedPresentation = PresentationOptions[0];
+        _selectedSort = SortOptions[0];
 
-        Month = new MonthCalendarViewModel(SelectDate, OpenBookingAsync, CreateForDate);
+        Month = new MonthCalendarViewModel(SelectDate, OpenBookingAsync, CreateForDate, SetDayClosedAsync, _availabilityStore.IsClosed);
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
-        DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync);
-        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState);
+        DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync, CreateForDate);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState, bookingPeopleService, financeService);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.EditRequested += (_, bookingId) => _ = RequestEditorAsync(bookingId, null);
         Details.Archived += (_, _) => _ = RefreshAsync();
         Details.Completed += (_, _) => _ = RefreshAfterBookingChangeAsync();
+        Details.FinanceRequested += (_, request) => FinanceRequested?.Invoke(this, request);
         Archived = new ArchivedBookingsViewModel(bookingService);
         Archived.OpenDetailsRequested += (_, id) => _ = OpenBookingAsync(id, includeArchived: true);
         Archived.Restored += (_, _) => _ = RefreshAsync();
@@ -84,7 +117,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         SetWeekViewCommand = new AsyncRelayCommand(_ => SetModeAsync(CalendarViewMode.Week));
         SetDayViewCommand = new AsyncRelayCommand(_ => SetModeAsync(CalendarViewMode.Day));
         RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync());
-        NewBookingCommand = new AsyncRelayCommand(_ => RequestEditorAsync(null, DefaultStartForSelectedDate()));
+        NewBookingCommand = new AsyncRelayCommand(_ => RequestEditorAsync(null, DefaultStartForSelectedDate()), _ => !_availabilityStore.IsClosed(SelectedDate));
         LoadMoreCommand = new AsyncRelayCommand(_ => LoadMoreAsync(), _ => HasMoreGlobalResults && !IsBusy);
         OpenBookingCommand = new AsyncRelayCommand(parameter => parameter is ShootBookingSummary item ? OpenBookingAsync(item.Id) : Task.CompletedTask);
         ToggleArchivedCommand = new AsyncRelayCommand(_ => ToggleArchivedAsync());
@@ -93,11 +126,15 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     }
 
     public event EventHandler<BookingEditorRequestEventArgs>? EditorRequested;
+    public event EventHandler<BookingFinanceRequestEventArgs>? FinanceRequested;
 
     public IReadOnlyList<CalendarStatusOption> StatusOptions { get; }
     public IReadOnlyList<CalendarTypeOption> TypeOptions { get; }
     public IReadOnlyList<CalendarSearchScopeOption> SearchScopeOptions { get; }
+    public IReadOnlyList<CalendarPresentationOption> PresentationOptions { get; }
+    public IReadOnlyList<CalendarSortOption> SortOptions { get; }
     public ObservableCollection<ShootBookingSummary> GlobalSearchResults { get; } = [];
+    public ObservableCollection<ShootBookingSummary> CurrentItems { get; } = [];
     public MonthCalendarViewModel Month { get; }
     public WeekCalendarViewModel Week { get; }
     public DayCalendarViewModel Day { get; }
@@ -130,6 +167,23 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public bool HasMoreGlobalResults => _nextCursor is not null;
     public bool IsDetailsOpen { get => _isDetailsOpen; private set => SetProperty(ref _isDetailsOpen, value); }
     public bool IsArchivedPaneOpen { get => _isArchivedPaneOpen; private set => SetProperty(ref _isArchivedPaneOpen, value); }
+    public CalendarPresentationOption SelectedPresentation
+    {
+        get => _selectedPresentation;
+        set { if (value is null || !SetProperty(ref _selectedPresentation, value)) return; OnPropertyChanged(nameof(IsCalendarPresentation)); OnPropertyChanged(nameof(IsListPresentation)); OnPropertyChanged(nameof(IsOverviewPresentation)); }
+    }
+    public CalendarSortOption SelectedSort
+    {
+        get => _selectedSort;
+        set { if (value is not null && SetProperty(ref _selectedSort, value)) QueueRefresh(); }
+    }
+    public bool IsCalendarPresentation => SelectedPresentation.Value == CalendarPresentationMode.Calendar;
+    public bool IsListPresentation => SelectedPresentation.Value == CalendarPresentationMode.List;
+    public bool IsOverviewPresentation => SelectedPresentation.Value == CalendarPresentationMode.Overview;
+    public int UnshotCount => CurrentItems.Count(item => CalendarText.BusinessState(item.Status) == "未拍摄");
+    public int ShotCount => CurrentItems.Count(item => CalendarText.BusinessState(item.Status) == "已拍摄");
+    public int AwaitingReturnCount => CurrentItems.Count(item => CalendarText.BusinessState(item.Status) == "待返图");
+    public int DeliveredCount => CurrentItems.Count(item => item.Status == ShootBookingStatus.Delivered);
 
     public DateTime SelectedDate
     {
@@ -184,6 +238,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     {
         if (_initialized) return;
         _initialized = true;
+        await _availabilityStore.LoadAsync().ConfigureAwait(true);
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -198,8 +253,10 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         {
             if (IsGlobalSearch)
             {
-                var page = await _bookingService.SearchAllUnarchivedAsync(BuildSearchRequest(null), cancellationToken).ConfigureAwait(true);
-                Replace(GlobalSearchResults, page.Items);
+                var page = SelectedStatus.ArchivedOnly
+                    ? await _bookingService.SearchArchivedAsync(BuildSearchRequest(null), cancellationToken).ConfigureAwait(true)
+                    : await _bookingService.SearchAllUnarchivedAsync(BuildSearchRequest(null), cancellationToken).ConfigureAwait(true);
+                Replace(GlobalSearchResults, ApplyNonWeatherStatusFilter(page.Items));
                 _nextCursor = page.NextCursor;
                 OnPropertyChanged(nameof(HasMoreGlobalResults));
                 StatusText = $"已加载 {GlobalSearchResults.Count} 条未归档排期";
@@ -208,8 +265,17 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 
             var (startDate, endDateExclusive) = CurrentDateRange();
             var range = ShootBookingTimeRules.CreateAllDayRange(DateOnly.FromDateTime(startDate), DateOnly.FromDateTime(endDateExclusive), TimeZoneInfo.Local.Id);
-            var items = await _bookingService.QueryCurrentViewAsync(new ShootBookingQuery(
-                range.StartAtUtc, range.EndAtUtc, SelectedStatus.Value, SelectedType.Value, SearchText), cancellationToken).ConfigureAwait(true);
+            IReadOnlyList<ShootBookingSummary> items;
+            if (SelectedStatus.ArchivedOnly)
+            {
+                var archived = await _bookingService.SearchArchivedAsync(new(SearchText, ShootingType: SelectedType.Value, PageSize: 100), cancellationToken).ConfigureAwait(true);
+                items = archived.Items.Where(item => item.EndAtUtc > range.StartAtUtc && item.StartAtUtc < range.EndAtUtc).ToArray();
+            }
+            else
+            {
+                items = await _bookingService.QueryCurrentViewAsync(new ShootBookingQuery(
+                    range.StartAtUtc, range.EndAtUtc, SelectedStatus.Value, SelectedType.Value, SearchText), cancellationToken).ConfigureAwait(true);
+            }
             _currentWeather = await LoadCachedWeatherAsync(items, cancellationToken).ConfigureAwait(true);
             ApplyCurrentView(items, _currentWeather);
             _nextCursor = null;
@@ -256,11 +322,45 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 
     private void ApplyCurrentView(IReadOnlyList<ShootBookingSummary> items, IReadOnlyDictionary<Guid, BookingWeatherSummary?> weather)
     {
-        Month.Configure(SelectedDate, items, SelectedDate, weather);
-        Week.Configure(StartOfWeek(SelectedDate), items, SelectedDate, weather);
-        Day.Configure(SelectedDate, items, weather);
-        DaySchedule.Configure(SelectedDate, ItemsOnDate(items, SelectedDate), weather);
+        var filtered = ApplyStatusFilter(items, weather).ToArray();
+        var sorted = SortItems(filtered).ToArray();
+        Replace(CurrentItems, sorted);
+        OnPropertyChanged(nameof(UnshotCount)); OnPropertyChanged(nameof(ShotCount)); OnPropertyChanged(nameof(AwaitingReturnCount)); OnPropertyChanged(nameof(DeliveredCount));
+        Month.Configure(SelectedDate, sorted, SelectedDate, weather);
+        Week.Configure(StartOfWeek(SelectedDate), sorted, SelectedDate, weather);
+        Day.Configure(SelectedDate, sorted, weather);
+        DaySchedule.Configure(SelectedDate, ItemsOnDate(sorted, SelectedDate), weather);
     }
+
+    private IEnumerable<ShootBookingSummary> SortItems(IEnumerable<ShootBookingSummary> items) => SelectedSort.Value switch
+    {
+        CalendarSortMode.CreatedTime => items.OrderByDescending(item => item.CreatedAtUtc),
+        CalendarSortMode.Status => items.OrderBy(item => item.Status).ThenBy(item => item.StartAtUtc),
+        CalendarSortMode.ClientOrProject => items.OrderBy(item => item.ClientDisplayName).ThenBy(item => item.Title),
+        _ => items.OrderBy(item => item.StartAtUtc)
+    };
+
+    private IEnumerable<ShootBookingSummary> ApplyNonWeatherStatusFilter(IEnumerable<ShootBookingSummary> items)
+    {
+        var result = items;
+        if (!string.IsNullOrWhiteSpace(SelectedStatus.BusinessState)) result = result.Where(item => CalendarText.BusinessState(item.Status) == SelectedStatus.BusinessState);
+        if (SelectedStatus.ConflictOnly)
+        {
+            var all = result.ToArray();
+            result = all.Where(item => HasCalendarConflict(item, all));
+        }
+        return result;
+    }
+
+    private IEnumerable<ShootBookingSummary> ApplyStatusFilter(IEnumerable<ShootBookingSummary> items, IReadOnlyDictionary<Guid, BookingWeatherSummary?> weather)
+    {
+        var result = ApplyNonWeatherStatusFilter(items);
+        if (SelectedStatus.WeatherRiskOnly) result = result.Where(item => weather.GetValueOrDefault(item.Id)?.Risks.Count > 0);
+        return result;
+    }
+
+    private static bool HasCalendarConflict(ShootBookingSummary candidate, IReadOnlyList<ShootBookingSummary> all) =>
+        !candidate.AllowOverlap && all.Any(other => other.Id != candidate.Id && !other.AllowOverlap && candidate.StartAtUtc < other.EndAtUtc && other.StartAtUtc < candidate.EndAtUtc);
 
     private async Task<IReadOnlyDictionary<Guid, BookingWeatherSummary?>> LoadCachedWeatherAsync(
         IReadOnlyList<ShootBookingSummary> items, CancellationToken cancellationToken)
@@ -303,8 +403,25 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         DaySchedule.Configure(SelectedDate, Month.AllItems.Where(item => CalendarBookingItemViewModel.SpansDate(item, SelectedDate)).ToArray(), _currentWeather);
     }
 
-    private void CreateForDate(DateTime date) => _ = RequestEditorAsync(null, DefaultStart(date));
-    private void CreateAt(DateTime dateTime) => _ = RequestEditorAsync(null, dateTime);
+    private void CreateForDate(DateTime date)
+    {
+        if (_availabilityStore.IsClosed(date)) { StatusText = $"{date:M月d日} 已关闭档期，请先重新开放。"; return; }
+        _ = RequestEditorAsync(null, DefaultStart(date));
+    }
+    private void CreateAt(DateTime dateTime)
+    {
+        if (_availabilityStore.IsClosed(dateTime)) { StatusText = $"{dateTime:M月d日} 已关闭档期，请先重新开放。"; return; }
+        _ = RequestEditorAsync(null, dateTime);
+    }
+
+    private async Task SetDayClosedAsync(DateTime date, bool closed)
+    {
+        var bookings = Month.AllItems.Count(item => CalendarBookingItemViewModel.SpansDate(item, date));
+        if (closed && bookings > 0 && _dialogs is not null && !_dialogs.Confirm($"该日期已有 {bookings} 项拍摄任务。关闭档期不会删除或修改已有任务，是否继续？", "关闭本日档期")) return;
+        await _availabilityStore.SetClosedAsync(date, closed).ConfigureAwait(true);
+        Month.Configure(SelectedDate, Month.AllItems, SelectedDate, _currentWeather);
+        StatusText = closed ? $"{date:M月d日} 已关闭新拍摄档期；已有任务保持不变。" : $"{date:M月d日} 已重新开放。";
+    }
 
     private async Task OpenBookingAsync(Guid bookingId, bool includeArchived = false)
     {
@@ -318,7 +435,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 
     private async Task RequestEditorAsync(Guid? bookingId, DateTime? suggestedStart)
     {
-        var editor = new ShootBookingEditorViewModel(_bookingService, _projectRepository, bookingId, suggestedStart);
+        var editor = new ShootBookingEditorViewModel(_bookingService, _projectRepository, bookingId, suggestedStart, _bookingPeopleService, _documentWorkflow, _dialogs);
         await editor.InitializeAsync().ConfigureAwait(true);
         editor.Saved += async (_, saved) =>
         {
@@ -446,9 +563,21 @@ public sealed class CalendarBookingItemViewModel
     public bool IsAllDay => Booking.IsAllDay;
     public string TimeText => IsAllDay ? "全天" : $"{LocalStart:HH:mm}–{LocalEnd:HH:mm}";
     public string StatusText => CalendarText.Status(Booking.Status);
-    public string StatusGlyph => Booking.Status switch { ShootBookingStatus.Completed => "✓", ShootBookingStatus.Cancelled => "×", ShootBookingStatus.Confirmed => "●", ShootBookingStatus.Preparing => "◆", ShootBookingStatus.Shooting => "▶", ShootBookingStatus.Postponed => "↷", _ => "○" };
+    public string BusinessStateText => CalendarText.BusinessState(Booking.Status);
+    public string StatusGlyph => Booking.Status switch
+    {
+        ShootBookingStatus.Completed or ShootBookingStatus.Shooting => "●",
+        ShootBookingStatus.AwaitingSelectionDelivery or ShootBookingStatus.AwaitingSelection or ShootBookingStatus.Selected or ShootBookingStatus.AwaitingRetouch or ShootBookingStatus.Retouched or ShootBookingStatus.AwaitingDelivery => "◆",
+        ShootBookingStatus.Delivered => "✓",
+        ShootBookingStatus.Cancelled => "×",
+        ShootBookingStatus.Confirmed => "●",
+        ShootBookingStatus.Preparing => "◇",
+        ShootBookingStatus.Postponed => "↷",
+        _ => "○"
+    };
     public string WeatherIcon => WeatherIconFor(Weather?.RepresentativeHour?.WeatherCode ?? Weather?.Day?.WeatherCode);
-    public string MonthWeatherIcon => Weather is null ? string.Empty : WeatherIcon;
+    public bool HasWeatherRisk => Weather?.Risks.Count > 0;
+    public string MonthWeatherIcon => HasWeatherRisk ? WeatherIcon : string.Empty;
     public string WeatherText
     {
         get
@@ -501,10 +630,13 @@ public sealed class MonthDayViewModel
     public bool IsCurrentMonth { get; init; }
     public bool IsToday => Date == DateTime.Today;
     public bool IsSelected { get; init; }
+    public bool IsClosed { get; init; }
     public ObservableCollection<CalendarBookingItemViewModel> VisibleBookings { get; } = [];
     public int OverflowCount { get; init; }
     public int BookingCount => VisibleBookings.Count + OverflowCount;
     public string BookingCountText => BookingCount == 0 ? string.Empty : BookingCount.ToString(CultureInfo.InvariantCulture);
+    public bool HasBookings => BookingCount > 0;
+    public string PrimaryBusinessState => VisibleBookings.FirstOrDefault()?.BusinessStateText ?? string.Empty;
     public string PrimaryStatusGlyph => VisibleBookings.FirstOrDefault()?.StatusGlyph ?? string.Empty;
     public string WeatherGlyph => VisibleBookings.Select(item => item.MonthWeatherIcon).FirstOrDefault(value => !string.IsNullOrEmpty(value)) ?? string.Empty;
     public bool HasConflict { get; init; }
@@ -516,12 +648,19 @@ public sealed class MonthDayViewModel
 public sealed class MonthCalendarViewModel
 {
     private readonly Action<DateTime> _selectDate;
-    public MonthCalendarViewModel(Action<DateTime> selectDate, Func<ShootBookingSummary, Task> openBooking, Action<DateTime> create)
+    private readonly Func<DateTime, bool, Task> _setClosed;
+    private readonly Func<DateTime, bool> _isClosed;
+    public MonthCalendarViewModel(Action<DateTime> selectDate, Func<ShootBookingSummary, Task> openBooking, Action<DateTime> create,
+        Func<DateTime, bool, Task>? setClosed = null, Func<DateTime, bool>? isClosed = null)
     {
         _selectDate = selectDate;
+        _setClosed = setClosed ?? ((_, _) => Task.CompletedTask);
+        _isClosed = isClosed ?? (_ => false);
         OpenBookingCommand = new AsyncRelayCommand(parameter => parameter is CalendarBookingItemViewModel item ? openBooking(item.Booking) : Task.CompletedTask);
         SelectDateCommand = new RelayCommand(parameter => { if (parameter is MonthDayViewModel day) _selectDate(day.Date); });
-        CreateBookingCommand = new RelayCommand(parameter => { if (parameter is MonthDayViewModel day) create(day.Date); });
+        CreateBookingCommand = new RelayCommand(parameter => { if (parameter is MonthDayViewModel day) create(day.Date); }, parameter => parameter is MonthDayViewModel day && !day.IsClosed);
+        CloseDayCommand = new AsyncRelayCommand(parameter => parameter is MonthDayViewModel day ? _setClosed(day.Date, true) : Task.CompletedTask);
+        OpenDayCommand = new AsyncRelayCommand(parameter => parameter is MonthDayViewModel day ? _setClosed(day.Date, false) : Task.CompletedTask);
     }
 
     public ObservableCollection<MonthDayViewModel> Days { get; } = [];
@@ -529,6 +668,8 @@ public sealed class MonthCalendarViewModel
     public ICommand OpenBookingCommand { get; }
     public ICommand SelectDateCommand { get; }
     public ICommand CreateBookingCommand { get; }
+    public ICommand CloseDayCommand { get; }
+    public ICommand OpenDayCommand { get; }
 
     public void Configure(DateTime month, IReadOnlyList<ShootBookingSummary> items, DateTime selectedDate,
         IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
@@ -542,7 +683,7 @@ public sealed class MonthCalendarViewModel
             var matches = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date))
                 .Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id)))
                 .OrderBy(item => item.LocalStart).ToArray();
-            var day = new MonthDayViewModel { Date = date, IsCurrentMonth = date.Month == month.Month && date.Year == month.Year, IsSelected = date == selectedDate.Date, OverflowCount = Math.Max(0, matches.Length - 3), HasConflict = HasConflict(matches) };
+            var day = new MonthDayViewModel { Date = date, IsCurrentMonth = date.Month == month.Month && date.Year == month.Year, IsSelected = date == selectedDate.Date, IsClosed = _isClosed(date), OverflowCount = Math.Max(0, matches.Length - 3), HasConflict = HasConflict(matches) };
             foreach (var match in matches.Take(3)) day.VisibleBookings.Add(match);
             Days.Add(day);
         }
@@ -657,18 +798,43 @@ public sealed class DayCalendarViewModel
 public sealed class DaySchedulePanelViewModel : ObservableObject
 {
     private DateTime _date;
-    public DaySchedulePanelViewModel(Func<ShootBookingSummary, Task> openBooking) =>
+    private readonly Action<DateTime> _create;
+    public DaySchedulePanelViewModel(Func<ShootBookingSummary, Task> openBooking, Action<DateTime> create)
+    {
+        _create = create;
         OpenBookingCommand = new AsyncRelayCommand(parameter => parameter is CalendarBookingItemViewModel item ? openBooking(item.Booking) : Task.CompletedTask);
-    public DateTime Date { get => _date; private set { if (SetProperty(ref _date, value)) OnPropertyChanged(nameof(Title)); } }
-    public string Title => $"{Date:M月d日} 当天排期";
+        NewBookingCommand = new RelayCommand(_ => _create(Date));
+    }
+    public DateTime Date { get => _date; private set { if (!SetProperty(ref _date, value)) return; foreach (var name in new[] { nameof(Title), nameof(DateNumberText), nameof(MonthYearText), nameof(WeekdayText), nameof(EmptyText) }) OnPropertyChanged(name); } }
+    public string Title => $"{Date:M月d日} 当天详情";
+    public string DateNumberText => Date.Day.ToString(CultureInfo.InvariantCulture);
+    public string MonthYearText => Date.ToString("yyyy年M月", CultureInfo.GetCultureInfo("zh-CN"));
+    public string WeekdayText => Date.ToString("dddd", CultureInfo.GetCultureInfo("zh-CN"));
+    public string EmptyText => $"{Date:M月d日}暂无拍摄任务";
     public ObservableCollection<CalendarBookingItemViewModel> Bookings { get; } = [];
     public ICommand OpenBookingCommand { get; }
+    public ICommand NewBookingCommand { get; }
+    public int BookingCount => Bookings.Count;
+    public int UnshotCount => Bookings.Count(item => item.BusinessStateText == "未拍摄");
+    public int ShotCount => Bookings.Count(item => item.BusinessStateText == "已拍摄");
+    public int AwaitingReturnCount => Bookings.Count(item => item.BusinessStateText == "待返图");
+    public int ConflictCount
+    {
+        get
+        {
+            var count = 0;
+            for (var left = 0; left < Bookings.Count; left++)
+                if (!Bookings[left].Booking.AllowOverlap && Bookings.Where((_, index) => index != left).Any(other => !other.Booking.AllowOverlap && Bookings[left].LocalStart < other.LocalEnd && other.LocalStart < Bookings[left].LocalEnd)) count++;
+            return count;
+        }
+    }
     public void Configure(DateTime date, IReadOnlyList<ShootBookingSummary> items,
         IReadOnlyDictionary<Guid, BookingWeatherSummary?>? weather = null)
     {
         Date = date.Date;
         Bookings.Clear();
         foreach (var item in items.Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id))).OrderBy(item => item.LocalStart)) Bookings.Add(item);
+        foreach (var name in new[] { nameof(BookingCount), nameof(UnshotCount), nameof(ShotCount), nameof(AwaitingReturnCount), nameof(ConflictCount) }) OnPropertyChanged(name);
     }
 }
 
@@ -743,8 +909,19 @@ internal static class CalendarText
     public static string Status(ShootBookingStatus status) => status switch
     {
         ShootBookingStatus.Tentative => "待确定", ShootBookingStatus.Confirmed => "已确认", ShootBookingStatus.Preparing => "准备中",
-        ShootBookingStatus.Shooting => "拍摄中", ShootBookingStatus.Completed => "已完成", ShootBookingStatus.Cancelled => "已取消",
-        ShootBookingStatus.Postponed => "已延期", _ => status.ToString()
+        ShootBookingStatus.Shooting => "拍摄中", ShootBookingStatus.Completed => "已拍摄", ShootBookingStatus.Cancelled => "已取消",
+        ShootBookingStatus.Postponed => "已延期", ShootBookingStatus.AwaitingSelectionDelivery => "待发送选片", ShootBookingStatus.AwaitingSelection => "待选片",
+        ShootBookingStatus.Selected => "已选片", ShootBookingStatus.AwaitingRetouch => "待精修", ShootBookingStatus.Retouched => "已精修",
+        ShootBookingStatus.AwaitingDelivery => "待交付", ShootBookingStatus.Delivered => "已交付", _ => status.ToString()
+    };
+
+    public static string BusinessState(ShootBookingStatus status) => status switch
+    {
+        ShootBookingStatus.Shooting or ShootBookingStatus.Completed => "已拍摄",
+        ShootBookingStatus.AwaitingSelectionDelivery or ShootBookingStatus.AwaitingSelection or ShootBookingStatus.Selected or ShootBookingStatus.AwaitingRetouch or ShootBookingStatus.Retouched or ShootBookingStatus.AwaitingDelivery => "待返图",
+        ShootBookingStatus.Delivered => "已交付",
+        ShootBookingStatus.Cancelled => "已取消",
+        _ => "未拍摄"
     };
 
     public static string Type(string type) => type switch

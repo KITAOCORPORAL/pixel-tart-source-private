@@ -1,4 +1,5 @@
 using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using RAWSelectionAssistant.ViewModels;
@@ -15,5 +16,38 @@ public partial class MonthCalendarView : UserControl
             if (current is Button) return;
         if (e.ClickCount == 2) viewModel.CreateBookingCommand.Execute(day);
         else viewModel.SelectDateCommand.Execute(day);
+    }
+
+    private static MonthDayViewModel? ContextDay(object sender) =>
+        sender is MenuItem { Parent: ContextMenu { PlacementTarget: FrameworkElement { DataContext: MonthDayViewModel day } } } ? day : null;
+
+    private void CreateBooking_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+            viewModel.CreateBookingCommand.Execute(day);
+    }
+
+    private void CloseDay_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+            viewModel.CloseDayCommand.Execute(day);
+    }
+
+    private void OpenDay_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+            viewModel.OpenDayCommand.Execute(day);
+    }
+
+    private void ViewDay_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+            viewModel.SelectDateCommand.Execute(day);
+    }
+
+    private void DaySettings_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+            viewModel.SelectDateCommand.Execute(day);
     }
 }

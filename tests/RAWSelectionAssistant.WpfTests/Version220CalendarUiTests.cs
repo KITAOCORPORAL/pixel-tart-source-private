@@ -70,11 +70,12 @@ public sealed class Version220CalendarUiTests
         var vm = Calendar(service);
         await vm.InitializeAsync();
         vm.SearchText = "本地关键词";
-        vm.SelectedStatus = vm.StatusOptions.Single(option => option.Value == ShootBookingStatus.Confirmed);
+        vm.SelectedStatus = vm.StatusOptions.Single(option => option.BusinessState == "未拍摄");
         vm.SelectedType = vm.TypeOptions.Single(option => option.Value == "Commercial");
         await vm.RefreshAsync();
         Assert.AreEqual("本地关键词", service.LastCurrentQuery!.Keyword);
-        Assert.AreEqual(ShootBookingStatus.Confirmed, service.LastCurrentQuery.Status);
+        Assert.IsNull(service.LastCurrentQuery.Status);
+        Assert.AreEqual("未拍摄", vm.SelectedStatus.BusinessState);
         Assert.AreEqual("Commercial", service.LastCurrentQuery.ShootingType);
     }
 

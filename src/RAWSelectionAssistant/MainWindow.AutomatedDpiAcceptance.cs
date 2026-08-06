@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Business;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -32,6 +33,7 @@ public partial class MainWindow
     private Window? _automatedAuxiliaryWindow;
     private ContextMenu? _automatedContextMenu;
     private ToolTip? _automatedToolTip;
+    private Popup? _automatedPopup;
 
     private void ConfigureAutomatedDpiAcceptance(JsonElement root)
     {
@@ -59,13 +61,13 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
-        if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase))
+        if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("WorkCalendar");
             ApplyCalendarReviewState(state);
-            if (state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase))
+            if (state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
             {
-                var editor = await CreateBookingEditorReviewStateAsync(state).ConfigureAwait(true);
+                var editor = await CreateBookingEditorReviewStateAsync(state, demoDirectory).ConfigureAwait(true);
                 _automatedAuxiliaryWindow = new Window
                 {
                     Title = editor.DialogTitle,
@@ -78,6 +80,38 @@ public partial class MainWindow
                     Background = Application.Current.TryFindResource("WindowBackgroundBrush") as Brush
                 };
                 _automatedAuxiliaryWindow.Show();
+            }
+            return true;
+        }
+
+        if (state.StartsWith("Finance", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("Finance");
+            _viewModel.FinancePage?.ApplyReviewState(state);
+            return true;
+        }
+
+        if (state.StartsWith("DatePicker", StringComparison.OrdinalIgnoreCase) || state == "CalendarPopupDark" || state == "ComboBoxDark")
+        {
+            var panel = new StackPanel { Margin = new Thickness(22), Width = 420 };
+            panel.Children.Add(new TextBlock { Text = state == "ComboBoxDark" ? "深色下拉控件" : "运行时日期选择器", FontSize = 20, FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 14) });
+            if (state == "ComboBoxDark")
+            {
+                var combo = new ComboBox { ItemsSource = new[] { "全部排期", "未拍摄", "已拍摄", "待返图" }, SelectedIndex = 0, Width = 260, HorizontalAlignment = HorizontalAlignment.Left };
+                panel.Children.Add(combo);
+                _automatedAuxiliaryWindow = ReviewWindow(panel, 520, 300);
+                _automatedAuxiliaryWindow.Show();
+                combo.ApplyTemplate(); combo.IsDropDownOpen = true; combo.UpdateLayout();
+                _automatedPopup = combo.Template.FindName("PART_Popup", combo) as Popup;
+            }
+            else
+            {
+                var picker = new DatePicker { SelectedDate = DateTime.Today, Width = 260, HorizontalAlignment = HorizontalAlignment.Left };
+                panel.Children.Add(picker);
+                _automatedAuxiliaryWindow = ReviewWindow(panel, 520, 520);
+                _automatedAuxiliaryWindow.Show();
+                picker.ApplyTemplate(); picker.IsDropDownOpen = true; picker.UpdateLayout();
+                _automatedPopup = picker.Template.FindName("PART_Popup", picker) as Popup;
             }
             return true;
         }
@@ -100,7 +134,16 @@ public partial class MainWindow
             case "WorkbenchCalendarRightTop":
             case "WorkbenchDpi150":
             case "WorkbenchDpi200":
+            case "WorkbenchLegend":
+            case "Workbench1280":
                 ApplyCalendarReviewState(state);
+                return true;
+            case "WorkbenchPinStates":
+                _viewModel.NavigateCommand.Execute("Toolbox");
+                return true;
+            case "LocalSplitHelp":
+            case "LocalSplitHover":
+                _viewModel.NavigateCommand.Execute("Workbench");
                 return true;
             case "SettingsDialog":
                 _viewModel.IsSettingsModalOpen = true;
@@ -110,7 +153,13 @@ public partial class MainWindow
             case "FeedbackDialog":
             case "ConfirmationDialog":
             case "ContextMenu":
+            case "ContextMenuDark":
             case "Tooltip":
+                return true;
+            case "ToastDark":
+                _viewModel.NavigateCommand.Execute("Workbench");
+                _viewModel.GetType().GetMethod("ShowToast", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                    ?.Invoke(_viewModel, ["主题通知：日期与资料已安全保存到本机。"]);
                 return true;
             case "ToolboxFullPage":
                 _viewModel.NavigateCommand.Execute("Toolbox");
@@ -194,7 +243,7 @@ public partial class MainWindow
         var calendar = _viewModel.WorkCalendarPage;
         var items = new List<ShootBookingSummary>();
         var weather = new Dictionary<Guid, BookingWeatherSummary?>();
-        if (!string.Equals(state, "CalendarEmptyMonth", StringComparison.OrdinalIgnoreCase))
+        if (!string.Equals(state, "CalendarEmptyMonth", StringComparison.OrdinalIgnoreCase) && !string.Equals(state, "CalendarEmptyDates", StringComparison.OrdinalIgnoreCase))
         {
             var zone = TimeZoneInfo.Local;
             var specifications = new[]
@@ -217,9 +266,10 @@ public partial class MainWindow
                 items.Add(new ShootBookingSummary(id, null, specification.Title, "合成演示客户", start, end, zone.Id, false,
                     specification.Status, specification.Location, "Commercial", false, false));
                 var representative = new HourlyWeatherForecast(start, specification.WeatherCode, 24, 25, specification.WeatherCode == "61" ? 70 : 10, 0, 12, 20, 55, 30, 10000);
+                var risks = specification.WeatherCode == "61" ? new[] { new WeatherRiskNotice("Rain", "降雨风险", NotificationSeverity.Warning) } : [];
                 weather[id] = new BookingWeatherSummary(id, WeatherAvailability.Cached,
                     new WeatherLocation("合成演示地点", null, "CN", 0, 0, zone.Id, "UI review"), representative, null,
-                    [representative], [], [], DateTimeOffset.UtcNow, "UI review", true, false, false, "合成天气，仅用于界面验收");
+                    [representative], [], risks, DateTimeOffset.UtcNow, "UI review", true, false, false, "合成天气，仅用于界面验收");
             }
         }
 
@@ -227,6 +277,11 @@ public partial class MainWindow
         calendar.Week.Configure(WorkCalendarViewModel.StartOfWeek(DateTime.Today), items, DateTime.Today, weather);
         calendar.Day.Configure(DateTime.Today, items, weather);
         calendar.DaySchedule.Configure(DateTime.Today, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, DateTime.Today)).ToArray(), weather);
+        if (state == "CalendarDayClosed")
+        {
+            var today = calendar.Month.Days.FirstOrDefault(day => day.Date == DateTime.Today);
+            typeof(MonthDayViewModel).GetProperty(nameof(MonthDayViewModel.IsClosed))?.SetValue(today, true);
+        }
         var statusText = state switch
         {
             "CalendarEmptyMonth" => "RC2 运行时验收：当前月份没有拍摄排期。",
@@ -241,12 +296,15 @@ public partial class MainWindow
         typeof(WorkCalendarViewModel).GetProperty(nameof(WorkCalendarViewModel.StatusText))?.SetValue(calendar, statusText);
     }
 
-    private async Task<ShootBookingEditorViewModel> CreateBookingEditorReviewStateAsync(string state)
+    private async Task<ShootBookingEditorViewModel> CreateBookingEditorReviewStateAsync(string state, string demoDirectory)
     {
         var calendar = _viewModel!.WorkCalendarPage;
         var bookingService = PrivateField<IShootBookingService>(calendar, "_bookingService");
         var projectRepository = PrivateField<IProjectRepository>(calendar, "_projectRepository");
-        var editor = new ShootBookingEditorViewModel(bookingService, projectRepository, suggestedStart: DateTime.Today.AddHours(9));
+        var people = PrivateField<IBookingPeopleService?>(calendar, "_bookingPeopleService");
+        var documents = PrivateField<IBookingDocumentWorkflowService?>(calendar, "_documentWorkflow");
+        var dialogs = PrivateField<IDialogService?>(calendar, "_dialogs");
+        var editor = new ShootBookingEditorViewModel(bookingService, projectRepository, suggestedStart: DateTime.Today.AddHours(9), peopleService: people, documentWorkflow: documents, dialogs: dialogs);
         await editor.InitializeAsync().ConfigureAwait(true);
         editor.Title = state switch
         {
@@ -257,7 +315,7 @@ public partial class MainWindow
             "CreateShootStaff" => "RC2 工作人员边界验收",
             "CreateShootConflict" => "RC2 时间冲突验收",
             "CreateShootSaved" => "RC2 保存同步验收",
-            _ => "RC2 合成拍摄任务"
+            _ => "RC3 合成拍摄任务"
         };
         editor.ClientDisplayName = "合成演示客户";
         editor.StartDate = DateTime.Today;
@@ -267,7 +325,7 @@ public partial class MainWindow
         editor.Location = state == "CreateShootWeather" ? "合成外景地（天气仅作界面验收）" : state == "CreateShootTimeLocation" ? "RC2 合成影棚" : "一号影棚";
         editor.ShootingRequirements = state == "CreateShootDocuments" ? "资料关联：策划案、拍摄协议和灯光图均使用隔离合成文件。" : state == "CreateShootWeather" ? "天气不可用时仍允许保存；远期天气不会编造。" : "主光、背景与机位按合成验收方案准备。";
         editor.PreparationNotes = state == "CreateShootStaff" ? "工作人员：摄影、灯光、造型；当前 Schema 3 不新增工作人员表。" : state == "CreateShootSaved" ? "保存后刷新月历、选中日期详情、今日拍摄和未来 7 天。" : "仅使用合成资料，不含真实客户信息。";
-        editor.Notes = "RC2 UI review / synthetic data";
+        editor.Notes = "RC3 UI review / synthetic data";
         editor.TotalAmountText = "6800.00";
         editor.DepositAmountText = "2000.00";
         editor.PaidAmountText = "2000.00";
@@ -280,8 +338,33 @@ public partial class MainWindow
             SetPrivateField(editor, "_isConflictVisible", true);
             SetPrivateField(editor, "_validationText", "检测到时间冲突。请选择返回修改、仍然保存，或明确允许重叠。");
         }
+        editor.CurrentStep = state switch
+        {
+            "CreateShootStep2" => 2,
+            "CreateShootStep3" or "DocumentsImages" or "DocumentsPdf" or "DocumentsText" or "DocumentsUnsupported" => 3,
+            "CreateShootStep4" or "CreateShootContacts" or "CreateShootStaff" => 4,
+            _ => 1
+        };
+        if (state == "CreateShootContacts")
+        {
+            editor.Contacts.Add(new() { DisplayName = "合成客户代号 A", Phone = "138****0000", WeChat = "synthetic_wechat", Email = "demo@example.invalid", IsPrimary = true, Note = "仅用于 RC3 隔离界面验收" });
+            editor.Contacts.Add(new() { DisplayName = "合成模特代号 B", OtherContact = "经纪人转达", Note = "不含真实联系方式" });
+        }
+        if (state == "CreateShootStaff")
+        {
+            editor.Staff.Add(new() { DisplayName = "合成摄影师", SelectedRole = editor.StaffRoleOptions.First(item => item.Value == BookingStaffRole.Photographer), ArrivalTimeText = $"{DateTime.Today:yyyy-MM-dd} 08:30", Note = "主机位" });
+            editor.Staff.Add(new() { DisplayName = "合成灯光师", SelectedRole = editor.StaffRoleOptions.First(item => item.Value == BookingStaffRole.LightingTechnician), ArrivalTimeText = $"{DateTime.Today:yyyy-MM-dd} 08:00", Note = "灯光图已关联" });
+        }
+        if (state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase)) editor.Documents?.ApplyReviewState(state, demoDirectory);
         return editor;
     }
+
+    private Window ReviewWindow(FrameworkElement content, double width, double height) => new()
+    {
+        Title = "像素蛋挞 RC3 隔离验收", Owner = this, Content = content, Width = width, Height = height,
+        ShowInTaskbar = false, WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        Background = Application.Current.TryFindResource("WindowBackgroundBrush") as Brush
+    };
 
     private static T PrivateField<T>(object instance, string name) =>
         (T)(instance.GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(instance)
@@ -298,7 +381,7 @@ public partial class MainWindow
         string demoDirectory,
         string state)
     {
-        if (string.Equals(state, "TetherEmpty", StringComparison.OrdinalIgnoreCase))
+        if (state is "TetherEmpty" or "TetherWaiting" or "TetherNoPhotoFullscreen")
             return ([], new Dictionary<Guid, TetherAnnotationRecord>());
 
         var sessionId = Guid.Parse("23000000-0000-0000-0000-000000000003");
@@ -354,7 +437,7 @@ public partial class MainWindow
     {
         if (!_automatedDpiAcceptanceEnabled || _viewModel is null || string.IsNullOrWhiteSpace(state)) return;
 
-        if (state == "ToolboxPopup")
+        if (state is "ToolboxPopup" or "WorkbenchPinStates")
         {
             WorkbenchToolboxPopup.IsOpen = true;
         }
@@ -390,7 +473,7 @@ public partial class MainWindow
             };
             _automatedAuxiliaryWindow.Show();
         }
-        else if (state == "ContextMenu")
+        else if (state is "ContextMenu" or "ContextMenuDark")
         {
             _viewModel.SetQuickToolsCompact(false);
             QuickToolsOverflowButton.Visibility = Visibility.Collapsed;
@@ -415,6 +498,36 @@ public partial class MainWindow
                 Placement = PlacementMode.Bottom,
                 IsOpen = true
             };
+        }
+        else if (state == "LocalSplitHelp")
+        {
+            _automatedToolTip = LocalSplitHelpToolTip;
+            _automatedToolTip.PlacementTarget = LocalSplitHelpButton;
+            _automatedToolTip.Placement = PlacementMode.Bottom;
+            _automatedToolTip.IsOpen = true;
+        }
+        else if (state == "LocalSplitHover")
+        {
+            LocalSplitHelpButton.Focus();
+        }
+        else if (state == "CalendarViewMenu")
+        {
+            var combo = FindVisualChildren<ComboBox>(RootGrid).FirstOrDefault(item => string.Equals(AutomationProperties.GetName(item), "工作日历视图", StringComparison.Ordinal));
+            if (combo is not null)
+            {
+                combo.ApplyTemplate(); combo.IsDropDownOpen = true; combo.UpdateLayout();
+                _automatedPopup = combo.Template.FindName("PART_Popup", combo) as Popup;
+            }
+        }
+        else if (state == "CalendarContextMenu")
+        {
+            var target = FindVisualChildren<Border>(RootGrid).FirstOrDefault(item => item.DataContext is MonthDayViewModel && item.ContextMenu is not null);
+            if (target?.ContextMenu is not null)
+            {
+                _automatedContextMenu = target.ContextMenu;
+                _automatedContextMenu.PlacementTarget = target;
+                _automatedContextMenu.IsOpen = true;
+            }
         }
         else if (state.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) || state == "MixedDpi")
         {
@@ -451,6 +564,7 @@ public partial class MainWindow
         _automatedAuxiliaryWindow?.UpdateLayout();
         _automatedContextMenu?.UpdateLayout();
         _automatedToolTip?.UpdateLayout();
+        _automatedPopup?.Child?.UpdateLayout();
     }
 
     private void CaptureAutomatedDpiFrame(string outputPath)
@@ -476,6 +590,7 @@ public partial class MainWindow
             DrawPopup(drawing, QuickToolsOverflowPopup.IsOpen ? QuickToolsOverflowPopup.Child as FrameworkElement : null, logicalWidth, logicalHeight, .58, .12);
             DrawPopup(drawing, _automatedContextMenu, logicalWidth, logicalHeight, .46, .17);
             DrawPopup(drawing, _automatedToolTip, logicalWidth, logicalHeight, .60, .15);
+            DrawPopup(drawing, _automatedPopup?.Child as FrameworkElement, logicalWidth, logicalHeight, .44, .18);
             DrawAuxiliaryWindow(drawing, logicalWidth, logicalHeight);
             drawing.Pop();
         }
@@ -859,8 +974,21 @@ public partial class MainWindow
 
     private void CloseAutomatedDpiOverlays()
     {
-        if (_automatedContextMenu is not null) _automatedContextMenu.IsOpen = false;
-        if (_automatedToolTip is not null) _automatedToolTip.IsOpen = false;
+        if (_automatedContextMenu is not null)
+        {
+            _automatedContextMenu.IsOpen = false;
+            _automatedContextMenu = null;
+        }
+        if (_automatedToolTip is not null)
+        {
+            _automatedToolTip.IsOpen = false;
+            _automatedToolTip = null;
+        }
+        if (_automatedPopup is not null)
+        {
+            _automatedPopup.IsOpen = false;
+            _automatedPopup = null;
+        }
         if (_automatedAuxiliaryWindow is not null)
         {
             _automatedAuxiliaryWindow.Close();
