@@ -87,6 +87,8 @@ public sealed class MainViewModel : ObservableObject
     private bool _isSettingsModalOpen;
     private bool _quickToolsCompact;
 
+    public event EventHandler<PageChangedEventArgs>? PageChanged;
+
     public MainViewModel(
         FileNameNormalizer normalizer,
         InputParserService inputParser,
@@ -402,6 +404,7 @@ public sealed class MainViewModel : ObservableObject
         get => _currentPage;
         private set
         {
+            var previousPage = _currentPage;
             if (!SetProperty(ref _currentPage, value)) return;
             OnPropertyChanged(nameof(IsWorkbenchPage));
             OnPropertyChanged(nameof(IsProjectCenterPage));
@@ -423,7 +426,10 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsPhotoGroupingPage));
             OnPropertyChanged(nameof(IsCollagePage));
             OnPropertyChanged(nameof(IsToolboxPage));
+            if (string.Equals(previousPage, "Tether", StringComparison.Ordinal)) TetherPage?.OnDeactivated();
+            if (IsTetherPage) TetherPage?.OnActivated();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
+            PageChanged?.Invoke(this, new(previousPage, value));
         }
     }
     public bool IsWorkbenchPage => CurrentPage is "Workbench" or "ProjectCenter";
