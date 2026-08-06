@@ -64,9 +64,16 @@ try{
     if(-not$result.Probe.Passed){throw 'Installed RC3 data probe failed.'}
     $script:process=Start-Process $acceptance -PassThru;$root=Get-Root $process.Id;if($null-eq$root){throw 'RC3 restart failed.'};$result.Restarted=$true;Close-App
     $sourceAfter=(Get-FileHash $context.SourceFile -Algorithm SHA256).Hash;$result.SourceUnchanged=$sourceBefore-eq$sourceAfter
-    if(Test-Path -LiteralPath $acceptance){Remove-Item -LiteralPath $acceptance -Force}
     $uninstaller=Join-Path $context.InstallRoot 'unins000.exe';$uninstall=Start-Process $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART') -Wait -PassThru
-    $result.UninstallExitCode=$uninstall.ExitCode;$result.InstallDirectoryRemoved=-not(Test-Path $context.InstallRoot);$result.UserDataRetained=Test-Path $db
+    $result.UninstallExitCode=$uninstall.ExitCode
+    $cleanupDeadline=[DateTime]::UtcNow.AddSeconds(10)
+    do{
+        if(Test-Path -LiteralPath $acceptance){try{Remove-Item -LiteralPath $acceptance -Force -ErrorAction Stop}catch{}}
+        if(Test-Path -LiteralPath $context.InstallRoot){$remaining=@(Get-ChildItem -LiteralPath $context.InstallRoot -Force);if($remaining.Count-eq0){try{Remove-Item -LiteralPath $context.InstallRoot -Force -ErrorAction Stop}catch{}}}
+        if(-not(Test-Path -LiteralPath $context.InstallRoot)){break}
+        Start-Sleep -Milliseconds 200
+    }while([DateTime]::UtcNow-lt$cleanupDeadline)
+    $result.InstallDirectoryRemoved=-not(Test-Path $context.InstallRoot);$result.UserDataRetained=Test-Path $db
     $result.Passed=$result.Rc3InstallExitCode-eq0-and$result.Rc3Version-like'2.3.0*'-and$result.WindowObserved-and$result.WorkbenchVisible-and$result.ThreeLegendsVisible-and$result.PinnedToolsVisible-and$result.CalendarOpened-and$result.FinanceOpened-and$result.TetherOpened-and$result.TetherEmptyVisible-and$result.Probe.Passed-and$result.Restarted-and$result.SourceUnchanged-and$result.UninstallExitCode-eq0-and$result.InstallDirectoryRemoved-and$result.UserDataRetained
 }catch{$result.Error=$_.Exception.ToString()}finally{Close-App;$result.CompletedAt=[DateTimeOffset]::Now.ToString('O');[IO.File]::WriteAllText((Join-Path $context.EvidenceRoot 'result.json'),($result|ConvertTo-Json -Depth 15),[Text.UTF8Encoding]::new($true))}
 Get-Content (Join-Path $context.EvidenceRoot 'result.json') -Raw -Encoding UTF8
