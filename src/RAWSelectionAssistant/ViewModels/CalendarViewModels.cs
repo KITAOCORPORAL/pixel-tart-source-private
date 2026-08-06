@@ -12,9 +12,9 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public enum CalendarViewMode { Month, Week, Day }
 
-public sealed record CalendarStatusOption(string Label, ShootBookingStatus? Value);
-public sealed record CalendarTypeOption(string Label, string? Value);
-public sealed record CalendarSearchScopeOption(string Label, BookingSearchScope Value);
+public sealed record CalendarStatusOption(string Label, ShootBookingStatus? Value) { public override string ToString() => Label; }
+public sealed record CalendarTypeOption(string Label, string? Value) { public override string ToString() => Label; }
+public sealed record CalendarSearchScopeOption(string Label, BookingSearchScope Value) { public override string ToString() => Label; }
 
 public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 {

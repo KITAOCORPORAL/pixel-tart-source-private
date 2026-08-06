@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
@@ -57,6 +59,29 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
+        if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("WorkCalendar");
+            ApplyCalendarReviewState(state);
+            if (state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase))
+            {
+                var editor = await CreateBookingEditorReviewStateAsync(state).ConfigureAwait(true);
+                _automatedAuxiliaryWindow = new Window
+                {
+                    Title = editor.DialogTitle,
+                    Owner = this,
+                    Content = new ShootBookingEditorView { DataContext = editor },
+                    Width = 900,
+                    Height = 780,
+                    ShowInTaskbar = false,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Background = Application.Current.TryFindResource("WindowBackgroundBrush") as Brush
+                };
+                _automatedAuxiliaryWindow.Show();
+            }
+            return true;
+        }
+
         if (state.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Lut", StringComparison.OrdinalIgnoreCase) || state.StartsWith("ColorProfile", StringComparison.OrdinalIgnoreCase) || state.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) || state == "MixedDpi")
         {
             _viewModel.NavigateCommand.Execute("Tether");
@@ -71,6 +96,11 @@ public partial class MainWindow
             case "WorkbenchDarkExpanded":
             case "WorkbenchDarkCollapsed":
             case "WorkbenchLight":
+            case "WorkbenchHighContrast":
+            case "WorkbenchCalendarRightTop":
+            case "WorkbenchDpi150":
+            case "WorkbenchDpi200":
+                ApplyCalendarReviewState(state);
                 return true;
             case "SettingsDialog":
                 _viewModel.IsSettingsModalOpen = true;
@@ -85,8 +115,28 @@ public partial class MainWindow
             case "ToolboxFullPage":
                 _viewModel.NavigateCommand.Execute("Toolbox");
                 return true;
+            case "ToolboxClosedAfterSelection":
+                _viewModel.NavigateCommand.Execute("PhotoGrouping");
+                WorkbenchToolboxPopup.IsOpen = false;
+                return true;
+            case "CollectionNoOverlap":
+                _viewModel.NavigateCommand.Execute("Workflow");
+                return true;
+            case "CompressNoOverlap":
+                _viewModel.NavigateCommand.Execute("BatchCompress");
+                return true;
+            case "WatermarkNoOverlap":
+                _viewModel.NavigateCommand.Execute("Watermark");
+                return true;
+            case "LicenseNoOverlap":
+                _viewModel.NavigateCommand.Execute("Activation");
+                return true;
             case "OrganizeEmpty":
                 _viewModel.NavigateCommand.Execute("PhotoGrouping");
+                return true;
+            case "OrganizeNoOverlap":
+                _viewModel.NavigateCommand.Execute("PhotoGrouping");
+                await _viewModel.OrganizePhotosPage.AddPathsAsync(demoImages);
                 return true;
             case "OrganizeGrouped":
             case "OrganizeManifest":
@@ -136,6 +186,102 @@ public partial class MainWindow
             default:
                 return false;
         }
+    }
+
+    private void ApplyCalendarReviewState(string state)
+    {
+        if (_viewModel is null) return;
+        var calendar = _viewModel.WorkCalendarPage;
+        var items = new List<ShootBookingSummary>();
+        var weather = new Dictionary<Guid, BookingWeatherSummary?>();
+        if (!string.Equals(state, "CalendarEmptyMonth", StringComparison.OrdinalIgnoreCase))
+        {
+            var zone = TimeZoneInfo.Local;
+            var specifications = new[]
+            {
+                (Offset: 0, Hour: 9, Duration: 2, Status: ShootBookingStatus.Confirmed, Title: "品牌人像拍摄", Location: "一号影棚", WeatherCode: "1"),
+                (Offset: 0, Hour: 10, Duration: 2, Status: ShootBookingStatus.Preparing, Title: "新品静物拍摄", Location: "二号影棚", WeatherCode: "61"),
+                (Offset: 1, Hour: 14, Duration: 3, Status: ShootBookingStatus.Shooting, Title: "服装目录拍摄", Location: "合成外景地", WeatherCode: "2"),
+                (Offset: 2, Hour: 9, Duration: 1, Status: ShootBookingStatus.Tentative, Title: "演员定妆照", Location: "三号影棚", WeatherCode: "3"),
+                (Offset: 3, Hour: 11, Duration: 2, Status: ShootBookingStatus.Completed, Title: "活动主视觉", Location: "会议中心", WeatherCode: "0"),
+                (Offset: 5, Hour: 15, Duration: 2, Status: ShootBookingStatus.Postponed, Title: "场地勘景", Location: "合成场地", WeatherCode: "45"),
+                (Offset: 7, Hour: 10, Duration: 4, Status: ShootBookingStatus.Cancelled, Title: "样片补拍", Location: "四号影棚", WeatherCode: "80")
+            };
+            foreach (var specification in specifications)
+            {
+                var id = Guid.Parse($"23020000-0000-0000-0000-{items.Count + 1:000000000000}");
+                var localStart = DateTime.SpecifyKind(DateTime.Today.AddDays(specification.Offset).AddHours(specification.Hour), DateTimeKind.Unspecified);
+                var localEnd = localStart.AddHours(specification.Duration);
+                var start = new DateTimeOffset(localStart, zone.GetUtcOffset(localStart)).ToUniversalTime();
+                var end = new DateTimeOffset(localEnd, zone.GetUtcOffset(localEnd)).ToUniversalTime();
+                items.Add(new ShootBookingSummary(id, null, specification.Title, "合成演示客户", start, end, zone.Id, false,
+                    specification.Status, specification.Location, "Commercial", false, false));
+                var representative = new HourlyWeatherForecast(start, specification.WeatherCode, 24, 25, specification.WeatherCode == "61" ? 70 : 10, 0, 12, 20, 55, 30, 10000);
+                weather[id] = new BookingWeatherSummary(id, WeatherAvailability.Cached,
+                    new WeatherLocation("合成演示地点", null, "CN", 0, 0, zone.Id, "UI review"), representative, null,
+                    [representative], [], [], DateTimeOffset.UtcNow, "UI review", true, false, false, "合成天气，仅用于界面验收");
+            }
+        }
+
+        calendar.Month.Configure(DateTime.Today, items, DateTime.Today, weather);
+        calendar.Week.Configure(WorkCalendarViewModel.StartOfWeek(DateTime.Today), items, DateTime.Today, weather);
+        calendar.Day.Configure(DateTime.Today, items, weather);
+        calendar.DaySchedule.Configure(DateTime.Today, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, DateTime.Today)).ToArray(), weather);
+        typeof(WorkCalendarViewModel).GetProperty(nameof(WorkCalendarViewModel.StatusText))?.SetValue(calendar,
+            state == "CalendarEmptyMonth" ? "RC2 运行时验收：当前月份没有拍摄排期。" : "RC2 运行时验收：状态颜色、数量、冲突和天气标记。");
+    }
+
+    private async Task<ShootBookingEditorViewModel> CreateBookingEditorReviewStateAsync(string state)
+    {
+        var calendar = _viewModel!.WorkCalendarPage;
+        var bookingService = PrivateField<IShootBookingService>(calendar, "_bookingService");
+        var projectRepository = PrivateField<IProjectRepository>(calendar, "_projectRepository");
+        var editor = new ShootBookingEditorViewModel(bookingService, projectRepository, suggestedStart: DateTime.Today.AddHours(9));
+        await editor.InitializeAsync().ConfigureAwait(true);
+        editor.Title = state switch
+        {
+            "CreateShootBasic" => string.Empty,
+            "CreateShootTimeLocation" => "RC2 时间与地点验收",
+            "CreateShootWeather" => "RC2 天气降级验收",
+            "CreateShootDocuments" => "RC2 本地资料关联验收",
+            "CreateShootStaff" => "RC2 工作人员边界验收",
+            "CreateShootConflict" => "RC2 时间冲突验收",
+            "CreateShootSaved" => "RC2 保存同步验收",
+            _ => "RC2 合成拍摄任务"
+        };
+        editor.ClientDisplayName = "合成演示客户";
+        editor.StartDate = DateTime.Today;
+        editor.EndDate = DateTime.Today;
+        editor.StartTimeText = "09:30";
+        editor.EndTimeText = "12:00";
+        editor.Location = state == "CreateShootWeather" ? "合成外景地（天气仅作界面验收）" : state == "CreateShootTimeLocation" ? "RC2 合成影棚" : "一号影棚";
+        editor.ShootingRequirements = state == "CreateShootDocuments" ? "资料关联：策划案、拍摄协议和灯光图均使用隔离合成文件。" : state == "CreateShootWeather" ? "天气不可用时仍允许保存；远期天气不会编造。" : "主光、背景与机位按合成验收方案准备。";
+        editor.PreparationNotes = state == "CreateShootStaff" ? "工作人员：摄影、灯光、造型；当前 Schema 3 不新增工作人员表。" : state == "CreateShootSaved" ? "保存后刷新月历、选中日期详情、今日拍摄和未来 7 天。" : "仅使用合成资料，不含真实客户信息。";
+        editor.Notes = "RC2 UI review / synthetic data";
+        editor.TotalAmountText = "6800.00";
+        editor.DepositAmountText = "2000.00";
+        editor.PaidAmountText = "2000.00";
+        if (state == "CreateShootConflict")
+        {
+            var start = new DateTimeOffset(DateTime.Today.AddHours(10));
+            editor.Conflicts.Add(new BookingConflictViewModel(new BookingConflict(
+                Guid.Parse("23020000-0000-0000-0000-000000000099"), "已存在的合成拍摄", "合成演示客户",
+                start, start.AddHours(2), "二号影棚", ShootBookingStatus.Confirmed, TimeSpan.FromHours(1), false, true)));
+            SetPrivateField(editor, "_isConflictVisible", true);
+            SetPrivateField(editor, "_validationText", "检测到时间冲突。请选择返回修改、仍然保存，或明确允许重叠。");
+        }
+        return editor;
+    }
+
+    private static T PrivateField<T>(object instance, string name) =>
+        (T)(instance.GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(instance)
+            ?? throw new InvalidOperationException($"Review field not found: {name}"));
+
+    private static void SetPrivateField(object instance, string name, object value)
+    {
+        var field = instance.GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException($"Review field not found: {name}");
+        field.SetValue(instance, value);
     }
 
     private static (IReadOnlyList<TetherAssetRecord> Assets, IReadOnlyDictionary<Guid, TetherAnnotationRecord> Annotations) CreateTetherReviewAssets(

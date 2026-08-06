@@ -19,7 +19,7 @@
         <DataTemplate x:Key="InspectorTemplate">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="现场监看右侧检查器">
                 <StackPanel Margin="10">
-                    <Expander Header="拍摄会话" IsExpanded="True" AutomationProperties.Name="拍摄会话工具组">
+                    <Expander x:Name="SessionGroup" Header="拍摄会话" IsExpanded="True" AutomationProperties.Name="拍摄会话工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding UserFacingProviderText, StringFormat=● {0}}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
                             <TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -28,7 +28,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="直方图" IsExpanded="True" AutomationProperties.Name="直方图工具组">
+                    <Expander x:Name="HistogramGroup" Header="直方图" IsExpanded="True" AutomationProperties.Name="直方图工具组">
                         <StackPanel Margin="0,8,0,10">
                             <Grid><TextBlock Text="RGB直方图" Style="{StaticResource SectionTitleText}" /><Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding RefreshAnalysisCommand}" AutomationProperties.Name="刷新RGB直方图" /></Grid>
                             <views:TetherHistogramView Histogram="{Binding Histogram}" Height="132" Margin="0,8,0,0" AutomationProperties.Name="RGB直方图" />
@@ -38,7 +38,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="拍摄信息" IsExpanded="False" AutomationProperties.Name="拍摄信息工具组">
+                    <Expander x:Name="ExifGroup" Header="拍摄信息" IsExpanded="False" AutomationProperties.Name="拍摄信息工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="EXIF 与文件" Style="{StaticResource SectionTitleText}" />
                     <Grid Margin="0,8,0,0">
@@ -83,7 +83,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
+                    <Expander x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
                     <UniformGrid Columns="6" Margin="0,8,0,0"><Button Content="0" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="0" AutomationProperties.Name="清除星级" /><Button Content="★1" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="1" AutomationProperties.Name="设置一星" /><Button Content="★2" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="2" AutomationProperties.Name="设置二星" /><Button Content="★3" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="3" AutomationProperties.Name="设置三星" /><Button Content="★4" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="4" AutomationProperties.Name="设置四星" /><Button Content="★5" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="5" AutomationProperties.Name="设置五星" /></UniformGrid>
@@ -96,7 +96,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="LUT 与色彩" IsExpanded="False" AutomationProperties.Name="LUT与色彩工具组">
+                    <Expander x:Name="LutGroup" Header="LUT 与色彩" IsExpanded="False" AutomationProperties.Name="LUT与色彩工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="LUT 监看" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.InputSpaceWarning}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" AutomationProperties.HelpText="输入色彩空间可能未知，监看结果仅供现场参考" />
@@ -118,7 +118,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="客户监看" IsExpanded="False" AutomationProperties.Name="客户监看工具组">
+                    <Expander x:Name="ClientGroup" Header="客户监看" IsExpanded="False" AutomationProperties.Name="客户监看工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="ICC 与客户屏" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.ColorProfileStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" AutomationProperties.HelpText="ICC异常时安全回退sRGB；软件不能替代显示器校准" Margin="0,5,0,0" />
@@ -135,7 +135,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="文件处理" IsExpanded="False" AutomationProperties.Name="文件处理工具组">
+                    <Expander x:Name="FileGroup" Header="文件处理" IsExpanded="False" AutomationProperties.Name="文件处理工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="看守目录" Style="{StaticResource SectionTitleText}" />
                             <Grid Margin="0,6,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding WatchDirectory}" IsReadOnly="True" AutomationProperties.Name="看守文件夹路径" /><Button Grid.Column="1" Content="选择目录" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding ChooseWatchFolderCommand}" AutomationProperties.Name="选择看守文件夹目录" /></Grid>
@@ -151,7 +151,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="问题与恢复" IsExpanded="{Binding HasAttention, Mode=OneWay}" AutomationProperties.Name="问题与恢复工具组">
+                    <Expander x:Name="AttentionGroup" Header="问题与恢复" IsExpanded="{Binding HasAttention, Mode=OneWay}" AutomationProperties.Name="问题与恢复工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding AttentionCount, StringFormat=需处理 {0} 项}" FontWeight="SemiBold" />
                             <TextBlock Text="当前没有需要处理的问题" Margin="0,5,0,0">

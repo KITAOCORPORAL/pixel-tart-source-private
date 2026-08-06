@@ -53,9 +53,9 @@
             <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="300" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
             <Border Grid.Column="0" Style="{StaticResource PanelBorder}" Padding="0" ClipToBounds="True">
                 <Grid>
-                    <views:MonthCalendarView DataContext="{Binding Month}" Visibility="{Binding IsMonthView, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <views:WeekCalendarView DataContext="{Binding Week}" Visibility="{Binding IsWeekView, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <views:DayCalendarView DataContext="{Binding Day}" Visibility="{Binding IsDayView, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <views:MonthCalendarView DataContext="{Binding Month}" Visibility="{Binding DataContext.IsMonthView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <views:WeekCalendarView DataContext="{Binding Week}" Visibility="{Binding DataContext.IsWeekView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <views:DayCalendarView DataContext="{Binding Day}" Visibility="{Binding DataContext.IsDayView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <Grid Visibility="{Binding IsGlobalSearch, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="10">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                         <TextBlock Text="全部未归档排期（每页50条）" FontSize="16" FontWeight="SemiBold" Margin="16,14" />
@@ -68,7 +68,7 @@
             </Border>
 
             <views:DaySchedulePanel Grid.Column="1" DataContext="{Binding DaySchedule}" Margin="12,0,0,0" />
-            <views:ShootBookingDetailsView Grid.Column="2" Width="390" Margin="12,0,0,0" DataContext="{Binding Details}" Visibility="{Binding IsDetailsOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <views:ShootBookingDetailsView Grid.Column="2" Width="390" Margin="12,0,0,0" DataContext="{Binding Details}" Visibility="{Binding DataContext.IsDetailsOpen, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <Border Grid.ColumnSpan="3" Panel.ZIndex="30" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="8" Visibility="{Binding IsArchivedPaneOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <views:ArchivedBookingsView DataContext="{Binding Archived}" />
