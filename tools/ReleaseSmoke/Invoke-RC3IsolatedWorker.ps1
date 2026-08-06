@@ -64,6 +64,7 @@ try{
     if(-not$result.Probe.Passed){throw 'Installed RC3 data probe failed.'}
     $script:process=Start-Process $acceptance -PassThru;$root=Get-Root $process.Id;if($null-eq$root){throw 'RC3 restart failed.'};$result.Restarted=$true;Close-App
     $sourceAfter=(Get-FileHash $context.SourceFile -Algorithm SHA256).Hash;$result.SourceUnchanged=$sourceBefore-eq$sourceAfter
+    if(Test-Path -LiteralPath $acceptance){Remove-Item -LiteralPath $acceptance -Force}
     $uninstaller=Join-Path $context.InstallRoot 'unins000.exe';$uninstall=Start-Process $uninstaller -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART') -Wait -PassThru
     $result.UninstallExitCode=$uninstall.ExitCode;$result.InstallDirectoryRemoved=-not(Test-Path $context.InstallRoot);$result.UserDataRetained=Test-Path $db
     $result.Passed=$result.Rc3InstallExitCode-eq0-and$result.Rc3Version-like'2.3.0*'-and$result.WindowObserved-and$result.WorkbenchVisible-and$result.ThreeLegendsVisible-and$result.PinnedToolsVisible-and$result.CalendarOpened-and$result.FinanceOpened-and$result.TetherOpened-and$result.TetherEmptyVisible-and$result.Probe.Passed-and$result.Restarted-and$result.SourceUnchanged-and$result.UninstallExitCode-eq0-and$result.InstallDirectoryRemoved-and$result.UserDataRetained
