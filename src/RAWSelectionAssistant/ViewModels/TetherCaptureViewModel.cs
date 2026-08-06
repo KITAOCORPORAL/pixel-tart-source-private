@@ -50,7 +50,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private int _existingCandidateCount;
     private int _queueDepth;
     private bool _hasRecoverableSession;
-    private string _statusText = "尚未启动。默认 Provider 为 None。";
+    private string _statusText = "尚未启动联机会话。请选择相机软件正在写入照片的文件夹。";
     private TetherAssetItemViewModel? _selectedAsset;
     private TetherAssetItemViewModel? _compareCandidate;
     private TetherAssetItemViewModel? _selectionBeforeCompare;
@@ -257,7 +257,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool CopyToProject { get => _copyToProject; set { if (SetProperty(ref _copyToProject, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool CopyToBackup { get => _copyToBackup; set { if (SetProperty(ref _copyToBackup, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool VerifySha256 { get => _verifySha256; set => SetProperty(ref _verifySha256, value); }
-    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); RefreshCommands(); } } }
+    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); OnPropertyChanged(nameof(UserFacingProviderText)); RefreshCommands(); } } }
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) RefreshCommands(); } }
     public int ExistingCandidateCount { get => _existingCandidateCount; private set => SetProperty(ref _existingCandidateCount, value); }
     public int QueueDepth { get => _queueDepth; private set => SetProperty(ref _queueDepth, value); }
@@ -270,6 +270,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool IncludeSubdirectories => false;
     public int ReadyCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.Ready or TetherProcessingState.Copied);
     public int AttentionCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.NeedsAttention or TetherProcessingState.PartiallyCompleted);
+    public bool HasAttention => AttentionCount > 0;
     public int DiscoveredCount => Assets.Count;
     public int WaitingStableCount => Assets.Count(item => item.Record.StabilityState is TetherStabilityState.Pending or TetherStabilityState.Probing);
     public int FailedCount => Assets.Count(item => item.Record.ProcessingState == TetherProcessingState.Failed || item.Record.PreviewState == TetherPreviewState.Failed);
@@ -1015,7 +1016,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     private void NotifyCounts()
     {
-        OnPropertyChanged(nameof(ReadyCount)); OnPropertyChanged(nameof(AttentionCount)); OnPropertyChanged(nameof(DiscoveredCount));
+        OnPropertyChanged(nameof(ReadyCount)); OnPropertyChanged(nameof(AttentionCount)); OnPropertyChanged(nameof(HasAttention)); OnPropertyChanged(nameof(DiscoveredCount));
         OnPropertyChanged(nameof(WaitingStableCount)); OnPropertyChanged(nameof(FailedCount)); OnPropertyChanged(nameof(CopyStatusText));
         OnPropertyChanged(nameof(NewAssetCount)); OnPropertyChanged(nameof(NewAssetText)); RefreshCommands();
     }
