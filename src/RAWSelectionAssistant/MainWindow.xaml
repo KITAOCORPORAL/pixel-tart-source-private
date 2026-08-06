@@ -429,6 +429,10 @@
                     </Grid>
                     <Border x:Name="TaskCenterPanel" Grid.Column="1" Panel.ZIndex="5" Background="{DynamicResource TaskCenterBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1,0,0,0" Padding="20,18">
                         <Grid>
+                            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="12" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                            <views:WorkbenchCalendarPanel DataContext="{Binding WorkCalendarPage}" />
+                            <Border Grid.Row="1" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" />
+                            <Grid Grid.Row="2" Margin="0,12,0,0">
                             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                             <Grid><TextBlock Text="任务中心" FontSize="17" FontWeight="SemiBold" /><Button Content="＋ 新建任务" Style="{StaticResource GhostButton}" Foreground="{DynamicResource ToolAccentBrush}" HorizontalAlignment="Right" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit" Padding="5,2" MinHeight="26" /></Grid>
                             <UniformGrid Grid.Row="1" Columns="2" Margin="0,18,0,0">
@@ -479,6 +483,7 @@
                                 <Button Content="打开任务历史" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Command="{Binding NavigateCommand}" CommandParameter="History" />
                                 <Button Content="清空已完成任务" Style="{StaticResource GhostButton}" Foreground="{DynamicResource TextTertiaryBrush}" HorizontalAlignment="Stretch" Command="{Binding TaskCenter.ClearCompletedCommand}" Margin="0,4,0,0" />
                             </StackPanel>
+                            </Grid>
                         </Grid>
                     </Border>
                     <Button x:Name="TaskDrawerButton" Grid.Column="0" Panel.ZIndex="6" Content="任务中心" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,18,0" Visibility="Collapsed" Click="TaskDrawerButton_Click" />
@@ -585,7 +590,7 @@
         </Grid>
 
         <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
-            <Grid Margin="18,0"><TextBlock Text="{Binding StatusMessage}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" /><TextBlock Text="{Binding CurrentItem}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="720" /><TextBlock Text="{Binding ProcessedCount, StringFormat=已处理 {0:N0}}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
+            <Grid Margin="18,0"><TextBlock Text="{Binding CurrentPageStatus}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" /><TextBlock Text="{Binding CurrentPageDetail}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="720" /><TextBlock Text="{Binding CurrentPageProcessedText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
         </Border>
 
         <Border x:Name="SettingsModal" Grid.RowSpan="3" Panel.ZIndex="850" Background="{DynamicResource OverlayBrush}" Visibility="{Binding IsSettingsModalOpen, Converter={StaticResource BooleanToVisibilityConverter}}">

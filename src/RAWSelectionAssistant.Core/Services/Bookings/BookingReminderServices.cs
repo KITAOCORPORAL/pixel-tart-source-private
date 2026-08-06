@@ -20,7 +20,7 @@ public sealed class BookingReminderService(
         var booking = await bookingService.GetAsync(reminder.BookingId.Value, includeArchived: true, cancellationToken).ConfigureAwait(false)
             ?? throw new KeyNotFoundException("排期不存在。");
         if (booking.IsArchived) throw new InvalidOperationException("已归档排期只能查看提醒。");
-        if (booking.Status == ShootBookingStatus.Cancelled && reminder.IsEnabled) throw new InvalidOperationException("已取消排期不能启用提醒。");
+        if (booking.Status is ShootBookingStatus.Cancelled or ShootBookingStatus.Completed && reminder.IsEnabled) throw new InvalidOperationException("已取消或已完成排期不能启用提醒。");
         var planned = ResolvePlannedAt(reminder, booking);
         if (planned >= booking.EndAtUtc) throw new InvalidOperationException("提醒时间必须早于拍摄结束时间。");
         var now = _timeProvider.GetUtcNow();
@@ -44,7 +44,7 @@ public sealed class BookingReminderService(
         var reminder = await repository.GetAsync(reminderId, cancellationToken).ConfigureAwait(false);
         if (reminder?.BookingId is null) return false;
         var booking = await bookingService.GetAsync(reminder.BookingId.Value, includeArchived: true, cancellationToken).ConfigureAwait(false);
-        if (booking is null || booking.IsArchived || booking.Status == ShootBookingStatus.Cancelled) return false;
+        if (booking is null || booking.IsArchived || booking.Status is ShootBookingStatus.Cancelled or ShootBookingStatus.Completed) return false;
         if (enabled && (reminder.Trigger.At is null || reminder.Trigger.At >= booking.EndAtUtc)) return false;
         var changed = await repository.SetEnabledAsync(reminderId, enabled, _timeProvider.GetUtcNow(), cancellationToken).ConfigureAwait(false);
         if (changed) await auditLog.WriteAsync("BookingReminder", enabled ? "Enabled" : "Disabled", "Information", $"ReminderId={reminderId:D};BookingId={booking.Id:D};Result=Succeeded", cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -220,7 +220,7 @@ public sealed class BookingReminderScheduler(
                     cancellationToken.ThrowIfCancellationRequested();
                     if (reminder.BookingId is null || reminder.Trigger.At is null) continue;
                     var booking = await bookingService.GetAsync(reminder.BookingId.Value, includeArchived: true, cancellationToken).ConfigureAwait(false);
-                    if (booking is null || booking.IsArchived || booking.Status == ShootBookingStatus.Cancelled || booking.EndAtUtc <= activeAt) continue;
+                    if (booking is null || booking.IsArchived || booking.Status is ShootBookingStatus.Cancelled or ShootBookingStatus.Completed || booking.EndAtUtc <= activeAt) continue;
                     var isMissed = missed && reminder.Trigger.At < activeAt - TimeSpan.FromSeconds(1);
                     var dispatch = new ReminderDispatch(reminder, booking, reminder.Trigger.At.Value, activeAt, isMissed);
                     try
