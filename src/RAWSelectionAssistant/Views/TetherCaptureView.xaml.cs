@@ -18,6 +18,7 @@ public partial class TetherCaptureView : UserControl
     private double _panStartX;
     private double _panStartY;
     private bool _isDragging;
+    private bool _isBrowserCollapsed;
 
     public TetherCaptureView()
     {
@@ -78,7 +79,11 @@ public partial class TetherCaptureView : UserControl
     private void ApplyResponsiveLayout(double windowWidth)
     {
         var compact = windowWidth < 1350;
-        ThumbnailColumn.Width = new GridLength(compact ? 230 : 270);
+        ThumbnailColumn.MinWidth = _isBrowserCollapsed ? 0 : 220;
+        ThumbnailColumn.MaxWidth = _isBrowserCollapsed ? 0 : 300;
+        ThumbnailColumn.Width = _isBrowserCollapsed ? new GridLength(0) : new GridLength(compact ? 230 : 270);
+        BrowserSplitterColumn.Width = _isBrowserCollapsed ? new GridLength(0) : new GridLength(8);
+        BrowserPanel.Visibility = _isBrowserCollapsed ? Visibility.Collapsed : Visibility.Visible;
         InspectorColumn.MinWidth = compact ? 0 : 280;
         InspectorColumn.MaxWidth = compact ? 0 : 340;
         InspectorColumn.Width = compact ? new GridLength(0) : new GridLength(320);
@@ -88,6 +93,18 @@ public partial class TetherCaptureView : UserControl
             ViewModel.IsInspectorCollapsed = compact;
             if (!compact) ViewModel.ShowInspectorDrawer = false;
         }
+    }
+
+    private void ToggleBrowser_Click(object sender, RoutedEventArgs e)
+    {
+        _isBrowserCollapsed = !_isBrowserCollapsed;
+        UpdateResponsiveLayout();
+    }
+
+    private void OpenTaskCenter_Click(object sender, RoutedEventArgs e)
+    {
+        if (Window.GetWindow(this)?.DataContext is MainViewModel viewModel)
+            viewModel.NavigateCommand.Execute("Workbench");
     }
 
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
