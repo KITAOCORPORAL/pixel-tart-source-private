@@ -50,7 +50,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private int _existingCandidateCount;
     private int _queueDepth;
     private bool _hasRecoverableSession;
-    private string _statusText = "尚未启动。默认 Provider 为 None。";
+    private string _statusText = "尚未启动联机会话。请选择相机软件正在写入照片的文件夹。";
     private TetherAssetItemViewModel? _selectedAsset;
     private TetherAssetItemViewModel? _compareCandidate;
     private TetherAssetItemViewModel? _selectionBeforeCompare;
@@ -108,6 +108,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private string _annotationStatus = "标注保存在当前电脑的项目数据库中。";
     private bool _suppressManualSelection;
     private bool _reviewStateActive;
+    private bool _isPageActive;
 
     public TetherCaptureViewModel(
         WatchFolderCameraAdapter adapter,
@@ -256,7 +257,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool CopyToProject { get => _copyToProject; set { if (SetProperty(ref _copyToProject, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool CopyToBackup { get => _copyToBackup; set { if (SetProperty(ref _copyToBackup, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool VerifySha256 { get => _verifySha256; set => SetProperty(ref _verifySha256, value); }
-    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); RefreshCommands(); } } }
+    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); OnPropertyChanged(nameof(UserFacingProviderText)); RefreshCommands(); } } }
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) RefreshCommands(); } }
     public int ExistingCandidateCount { get => _existingCandidateCount; private set => SetProperty(ref _existingCandidateCount, value); }
     public int QueueDepth { get => _queueDepth; private set => SetProperty(ref _queueDepth, value); }
@@ -264,9 +265,12 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public string StartButtonText => HasRecoverableSession ? "恢复目录并继续" : "启动看守";
     public string ProviderText => IsRunning ? "Watch Folder" : "None";
+    public string UserFacingProviderText => IsRunning ? "看守文件夹会话正在运行" : "尚未启动联机会话";
+    public bool IsPageActive { get => _isPageActive; private set => SetProperty(ref _isPageActive, value); }
     public bool IncludeSubdirectories => false;
     public int ReadyCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.Ready or TetherProcessingState.Copied);
     public int AttentionCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.NeedsAttention or TetherProcessingState.PartiallyCompleted);
+    public bool HasAttention => AttentionCount > 0;
     public int DiscoveredCount => Assets.Count;
     public int WaitingStableCount => Assets.Count(item => item.Record.StabilityState is TetherStabilityState.Pending or TetherStabilityState.Probing);
     public int FailedCount => Assets.Count(item => item.Record.ProcessingState == TetherProcessingState.Failed || item.Record.PreviewState == TetherPreviewState.Failed);
@@ -283,7 +287,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             if (value is not null && !_suppressManualSelection) _selectionCoordinator.SelectManually(value.Record.Id);
             OnPropertyChanged(nameof(HasSelection));
             RefreshCommands();
-            if (value is not null) Track(LoadSelectedAsync(value, _lifetime.Token));
+            if (value is not null && IsPageActive) Track(LoadSelectedAsync(value, _lifetime.Token));
         }
     }
     public bool HasSelection => SelectedAsset is not null;
@@ -412,6 +416,34 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public void BeginNoteEditing() => _selectionCoordinator.IsEditingNote = true;
     public void EndNoteEditing() => _selectionCoordinator.IsEditingNote = false;
 
+    public void OnActivated()
+    {
+        if (IsPageActive) return;
+        IsPageActive = true;
+        if (SelectedAsset is not null) Track(LoadSelectedAsync(SelectedAsset, _lifetime.Token));
+    }
+
+    public void OnDeactivated()
+    {
+        if (!IsPageActive) return;
+        IsPageActive = false;
+        _requestCoordinator.CancelCurrent();
+        _fullResolutionLoader.ReleaseExcept(null);
+        _selectionCoordinator.HasActiveInteraction = false;
+        _selectionCoordinator.IsActualSize = false;
+        IsPreviewLoading = false;
+        PreviewProgress = 0;
+        CurrentImage = null;
+        ComparisonPrimaryImage = null;
+        ComparisonSecondaryImage = null;
+        ClippingOverlay = null;
+        ReferenceImage = null;
+        Histogram = null;
+        ExifInfo = null;
+        foreach (var item in Assets) item.ReleaseThumbnail();
+        ColorSettings.ReleasePageImageResources();
+    }
+
     public async ValueTask DisposeAsync()
     {
         _lifetime.Cancel();
@@ -448,6 +480,15 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         {
             "TetherEmpty" => "阶段C评审：等待看守文件夹送入第一张照片。",
             "TetherAssets" => "阶段C评审：缩略图、主画布和检查器已联动。",
+            "TetherBrowser" => "RC2 运行时验收：左侧浏览器保持紧凑并显示当前选择。",
+            "TetherViewer" => "RC2 运行时验收：中央监看画布保持主区域。",
+            "TetherInspector" => "RC2 运行时验收：右侧单滚动检查器按信息组组织。",
+            "TetherHistogram" => "RC2 运行时验收：直方图在检查器顶部紧凑显示。",
+            "TetherExifCollapsed" => "RC2 运行时验收：拍摄信息默认折叠且可按需展开。",
+            "TetherLutCollapsed" => "RC2 运行时验收：LUT 与色彩默认折叠。",
+            "TetherClientSingleMonitor" => "RC2 运行时验收：当前单屏环境只显示客户监看提示。",
+            "Tether1600" => "RC2 运行时验收：1600×920 三栏监看布局。",
+            "Tether1920" => "RC2 运行时验收：1920×1080 三栏监看布局。",
             "TetherAutoLatest" => "阶段C评审：自动最新已开启。",
             "TetherLocked" => "阶段C评审：当前照片已锁定，新照片不会抢占。",
             "TetherExifHistogram" => "阶段C评审：EXIF 与 RGB 直方图使用当前代理图。",
@@ -984,7 +1025,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     private void NotifyCounts()
     {
-        OnPropertyChanged(nameof(ReadyCount)); OnPropertyChanged(nameof(AttentionCount)); OnPropertyChanged(nameof(DiscoveredCount));
+        OnPropertyChanged(nameof(ReadyCount)); OnPropertyChanged(nameof(AttentionCount)); OnPropertyChanged(nameof(HasAttention)); OnPropertyChanged(nameof(DiscoveredCount));
         OnPropertyChanged(nameof(WaitingStableCount)); OnPropertyChanged(nameof(FailedCount)); OnPropertyChanged(nameof(CopyStatusText));
         OnPropertyChanged(nameof(NewAssetCount)); OnPropertyChanged(nameof(NewAssetText)); RefreshCommands();
     }

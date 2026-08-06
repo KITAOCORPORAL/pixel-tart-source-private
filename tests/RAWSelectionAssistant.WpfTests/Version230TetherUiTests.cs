@@ -37,7 +37,7 @@ public sealed class Version230TetherUiTests
     public void TetherPage_ExposesImportCountPreviewAndDefaultSafeCopyChoices()
     {
         var xaml = TetherXaml();
-        Contains(xaml, "导入启动前已有文件", "预览数量", "复制到项目资料目录", "复制到独立备份目录", "复制固定使用 Copy + CreateNew + AutoNumber");
+        Contains(xaml, "导入启动前已有文件", "预览数量", "复制到项目资料目录", "复制到独立备份目录", "复制固定使用复制、新建文件和自动编号");
     }
 
     [TestMethod]

@@ -88,12 +88,15 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         await using (var reminders = connection.CreateCommand())
         {
             reminders.Transaction = transaction;
-            reminders.CommandText = booking.Status == ShootBookingStatus.Cancelled
-                ? "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;"
-                : "UPDATE BookingReminders SET TriggerAtUtc=strftime('%Y-%m-%dT%H:%M:%fZ',$start, '-' || OffsetMinutes || ' minutes'),UpdatedAtUtc=$updated WHERE BookingId=$booking AND TriggerKind='RelativeToBookingStart' AND OffsetMinutes IS NOT NULL AND Status IN ('Scheduled','Disabled');";
+            reminders.CommandText = booking.Status switch
+            {
+                ShootBookingStatus.Cancelled => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;",
+                ShootBookingStatus.Completed => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;",
+                _ => "UPDATE BookingReminders SET TriggerAtUtc=strftime('%Y-%m-%dT%H:%M:%fZ',$start, '-' || OffsetMinutes || ' minutes'),UpdatedAtUtc=$updated WHERE BookingId=$booking AND TriggerKind='RelativeToBookingStart' AND OffsetMinutes IS NOT NULL AND Status IN ('Scheduled','Disabled');"
+            };
             reminders.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
             reminders.Parameters.AddWithValue("$updated", Utc(booking.UpdatedAtUtc));
-            if (booking.Status != ShootBookingStatus.Cancelled) reminders.Parameters.AddWithValue("$start", Utc(booking.StartAtUtc));
+            if (booking.Status is not ShootBookingStatus.Cancelled and not ShootBookingStatus.Completed) reminders.Parameters.AddWithValue("$start", Utc(booking.StartAtUtc));
             await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
 
@@ -180,6 +183,29 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             reminders.CommandText = "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id;";
             reminders.Parameters.AddWithValue("$id", id.ToString("D"));
             reminders.Parameters.AddWithValue("$at", Utc(archivedAtUtc));
+            await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return changed > 0;
+    }
+
+    public async Task<bool> CompleteAsync(Guid id, DateTimeOffset completedAtUtc, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using var booking = connection.CreateCommand();
+        booking.Transaction = transaction;
+        booking.CommandText = "UPDATE ShootBookings SET Status='Completed',UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>'Completed';";
+        booking.Parameters.AddWithValue("$id", id.ToString("D"));
+        booking.Parameters.AddWithValue("$at", Utc(completedAtUtc));
+        var changed = await booking.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        if (changed > 0)
+        {
+            await using var reminders = connection.CreateCommand();
+            reminders.Transaction = transaction;
+            reminders.CommandText = "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id AND IsEnabled=1;";
+            reminders.Parameters.AddWithValue("$id", id.ToString("D"));
+            reminders.Parameters.AddWithValue("$at", Utc(completedAtUtc));
             await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);

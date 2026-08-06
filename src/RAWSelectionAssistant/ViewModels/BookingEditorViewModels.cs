@@ -11,10 +11,10 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed record ProjectOption(Guid? Id, string Name);
-public sealed record TimeZoneOption(string Id, string Label);
-public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label);
-public sealed record ShootingTypeEditorOption(string Value, string Label);
+public sealed record ProjectOption(Guid? Id, string Name) { public override string ToString() => Name; }
+public sealed record TimeZoneOption(string Id, string Label) { public override string ToString() => Label; }
+public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label) { public override string ToString() => Label; }
+public sealed record ShootingTypeEditorOption(string Value, string Label) { public override string ToString() => Label; }
 
 public sealed class ShootBookingDetailsViewModel : ObservableObject
 {
@@ -37,11 +37,13 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
+        CompleteCommand = new AsyncRelayCommand(_ => CompleteAsync(), _ => CanComplete);
         ArchiveCommand = new AsyncRelayCommand(_ => ArchiveAsync(), _ => Booking is { IsArchived: false });
     }
 
     public event EventHandler? CloseRequested;
     public event EventHandler<Guid>? EditRequested;
+    public event EventHandler<Guid>? Completed;
     public event EventHandler<Guid>? Archived;
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
     public BookingDocumentsViewModel? Documents { get; }
@@ -53,6 +55,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public ICommand ToggleAmountsCommand { get; }
     public ICommand CloseCommand { get; }
     public ICommand EditCommand { get; }
+    public ICommand CompleteCommand { get; }
     public ICommand ArchiveCommand { get; }
     public ShootBooking? Booking { get => _booking; private set { if (SetProperty(ref _booking, value)) NotifyBooking(); } }
     public bool IsBusy { get => _isBusy; private set => SetProperty(ref _isBusy, value); }
@@ -60,6 +63,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public bool AmountsVisible { get => _amountsVisible; set { if (SetProperty(ref _amountsVisible, value)) NotifyMoney(); } }
     public bool IsArchived => Booking?.IsArchived == true;
     public bool CanEdit => Booking is { IsArchived: false };
+    public bool CanComplete => Booking is { IsArchived: false, Status: not ShootBookingStatus.Completed and not ShootBookingStatus.Cancelled };
     public string Title => Booking?.Title ?? "排期详情";
     public string ClientDisplayName => Booking?.ClientDisplayName ?? "—";
     public string TimeText => Booking is null ? "—" : FormatTime(Booking);
@@ -113,10 +117,21 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         Archived?.Invoke(this, Booking.Id);
     }
 
+    private async Task CompleteAsync()
+    {
+        if (Booking is null || !await _service.CompleteAsync(Booking.Id).ConfigureAwait(true)) return;
+        Booking = Booking with { Status = ShootBookingStatus.Completed, UpdatedAtUtc = DateTimeOffset.UtcNow };
+        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false).ConfigureAwait(true);
+        if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
+        StatusText = "拍摄已完成；未来未触发提醒已关闭，排期和历史记录均已保留。";
+        Completed?.Invoke(this, Booking.Id);
+    }
+
     private void NotifyBooking()
     {
-        foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
+        foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(CanComplete), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
         (EditCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (CompleteCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (ArchiveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         NotifyMoney();
     }

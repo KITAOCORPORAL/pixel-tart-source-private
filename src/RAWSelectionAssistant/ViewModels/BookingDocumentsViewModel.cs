@@ -8,7 +8,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed record BookingDocumentTypeOption(BookingDocumentType Value, string Label);
+public sealed record BookingDocumentTypeOption(BookingDocumentType Value, string Label) { public override string ToString() => Label; }
 
 public sealed class BookingDocumentsViewModel : ObservableObject
 {

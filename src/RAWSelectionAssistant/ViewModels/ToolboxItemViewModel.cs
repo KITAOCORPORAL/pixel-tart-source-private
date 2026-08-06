@@ -28,12 +28,14 @@ public sealed class ToolboxItemViewModel : ObservableObject
         private set
         {
             if (!SetProperty(ref _isPinned, value)) return;
-            OnPropertyChanged(nameof(PinActionLabel));
+            OnPropertyChanged(nameof(PinGlyph));
+            OnPropertyChanged(nameof(PinToolTip));
             OnPropertyChanged(nameof(PinAutomationName));
         }
     }
 
-    public string PinActionLabel => IsPinned ? "取消固定" : "固定";
+    public string PinGlyph => "📌";
+    public string PinToolTip => IsPinned ? "从快捷区取消固定" : "固定到快捷区";
     public string PinAutomationName => IsPinned ? $"取消固定{DisplayName}" : $"固定{DisplayName}";
 
     public void SetPinned(bool value) => IsPinned = value;

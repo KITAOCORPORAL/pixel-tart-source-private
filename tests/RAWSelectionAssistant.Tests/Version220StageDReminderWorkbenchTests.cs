@@ -376,6 +376,51 @@ public sealed class Version220StageDReminderWorkbenchTests
     }
 
     [TestMethod]
+    public async Task CompletePersistsStatusAndDisablesFutureReminderInSameOperation()
+    {
+        using var setup = await SetupAsync();
+        var reminderId = await setup.AddReminderAsync(setup.Now.AddHours(1));
+        Assert.IsTrue(await setup.Bookings.CompleteAsync(setup.BookingId));
+
+        var completed = await setup.Bookings.GetAsync(setup.BookingId, includeArchived: true);
+        var reminder = await setup.Reminders.GetAsync(reminderId);
+        Assert.AreEqual(ShootBookingStatus.Completed, completed!.Status);
+        Assert.IsFalse(reminder!.IsEnabled);
+        Assert.AreEqual(ReminderStatus.Disabled, reminder.Status);
+        Assert.IsNotNull(await setup.Reminders.GetAsync(reminderId));
+    }
+
+    [TestMethod]
+    public async Task CompletedBookingNeverPublishesReminder()
+    {
+        using var setup = await SetupAsync();
+        Assert.IsTrue(await setup.Bookings.CompleteAsync(setup.BookingId));
+        var reminderId = await setup.AddReminderAsync(setup.Now.AddMinutes(-1));
+        var notifications = new RecordingReminderNotification();
+        await using var scheduler = setup.CreateScheduler(notifications);
+
+        await scheduler.CheckDueAsync();
+
+        Assert.HasCount(0, notifications.Dispatches);
+        Assert.AreEqual(ReminderStatus.Scheduled, (await setup.Reminders.GetAsync(reminderId))!.Status);
+    }
+
+    [TestMethod]
+    public async Task EditingStatusToCompletedAlsoDisablesFutureReminder()
+    {
+        using var setup = await SetupAsync();
+        var reminderId = await setup.AddReminderAsync(setup.Now.AddHours(1));
+        var booking = await setup.Bookings.GetAsync(setup.BookingId, includeArchived: true);
+
+        var result = await setup.Bookings.SaveAsync(Draft(booking! with { Status = ShootBookingStatus.Completed }));
+
+        Assert.AreEqual(BookingSaveStatus.Saved, result.Status);
+        var reminder = await setup.Reminders.GetAsync(reminderId);
+        Assert.IsFalse(reminder!.IsEnabled);
+        Assert.AreEqual(ReminderStatus.Disabled, reminder.Status);
+    }
+
+    [TestMethod]
     public async Task RemoveReminder_OnlyDeletesReminderRecord()
     {
         using var s = await SetupAsync();
