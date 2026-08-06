@@ -11,10 +11,10 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed record ProjectOption(Guid? Id, string Name);
-public sealed record TimeZoneOption(string Id, string Label);
-public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label);
-public sealed record ShootingTypeEditorOption(string Value, string Label);
+public sealed record ProjectOption(Guid? Id, string Name) { public override string ToString() => Name; }
+public sealed record TimeZoneOption(string Id, string Label) { public override string ToString() => Label; }
+public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label) { public override string ToString() => Label; }
+public sealed record ShootingTypeEditorOption(string Value, string Label) { public override string ToString() => Label; }
 
 public sealed class ShootBookingDetailsViewModel : ObservableObject
 {

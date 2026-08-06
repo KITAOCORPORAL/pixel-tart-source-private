@@ -219,8 +219,8 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Width="0" />
                 <Grid Grid.Column="1">
-                <views:WorkCalendarView DataContext="{Binding WorkCalendarPage}" Visibility="{Binding IsWorkCalendarPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <views:TetherCaptureView x:Name="TetherMonitorView" DataContext="{Binding TetherPage}" Visibility="{Binding IsTetherPage, Converter={StaticResource BooleanToVisibilityConverter}}" FullScreenChanged="TetherCaptureView_FullScreenChanged" />
+                <views:WorkCalendarView DataContext="{Binding WorkCalendarPage}" Visibility="{Binding DataContext.IsWorkCalendarPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <views:TetherCaptureView x:Name="TetherMonitorView" DataContext="{Binding TetherPage}" Visibility="{Binding DataContext.IsTetherPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" FullScreenChanged="TetherCaptureView_FullScreenChanged" />
                 <Grid x:Name="WorkflowWorkspace" Margin="14" Visibility="{Binding IsWorkflowPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="12" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Border Style="{StaticResource PanelBorder}" Padding="10">

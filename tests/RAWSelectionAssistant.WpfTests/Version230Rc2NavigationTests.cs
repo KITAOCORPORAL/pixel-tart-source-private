@@ -16,6 +16,8 @@ public sealed class Version230Rc2NavigationTests
         StringAssert.Contains(main, "PageChanged?.Invoke");
         Assert.AreEqual(1, Count(window, "x:Name=\"TaskCenterPanel\""));
         Assert.DoesNotContain("UnifiedTaskCenterPanel", window, StringComparison.Ordinal);
+        StringAssert.Contains(window, "DataContext.IsWorkCalendarPage, RelativeSource={RelativeSource AncestorType=Window}");
+        StringAssert.Contains(window, "DataContext.IsTetherPage, RelativeSource={RelativeSource AncestorType=Window}");
     }
 
     [TestMethod]

@@ -538,6 +538,7 @@ public partial class MainWindow : Window
         if (_viewModel.IsSidebarCollapsed != collapsed)
         {
             _viewModel.ToggleSidebarCommand.Execute(null);
+            _viewModel.DismissToastCommand.Execute(null);
         }
 
         _viewModel.IsSettingsModalOpen = false;

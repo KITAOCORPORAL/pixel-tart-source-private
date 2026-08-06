@@ -55,9 +55,22 @@ public partial class TetherCaptureView : UserControl
 
     public void ApplyReviewPresentation(string state, double windowWidth)
     {
+        _isBrowserCollapsed = false;
         ApplyResponsiveLayout(windowWidth);
         if (ViewModel is not null)
             ViewModel.ShowInspectorDrawer = string.Equals(state, "TetherCompact1280", StringComparison.Ordinal);
+        SetReviewGroup("拍摄会话", true);
+        SetReviewGroup("直方图", state is not "TetherViewer");
+        SetReviewGroup("拍摄信息", state is "TetherInspector" or "TetherExifExpanded");
+        SetReviewGroup("标记与备注", state is not "TetherViewer");
+        SetReviewGroup("LUT 与色彩", state is "TetherLutExpanded");
+        SetReviewGroup("客户监看", state is "TetherClientSingleMonitor");
+        SetReviewGroup("文件处理", state is "TetherFileHandling");
+        if (state == "TetherInspector")
+        {
+            SetReviewGroup("LUT 与色彩", true);
+            SetReviewGroup("客户监看", true);
+        }
         InspectorPanel.UpdateLayout();
         var scroll = FindVisualChildren<ScrollViewer>(InspectorPanel)
             .OrderByDescending(element => element.ScrollableHeight)
@@ -67,6 +80,11 @@ public partial class TetherCaptureView : UserControl
             "TetherAnnotations" => 650,
             "TetherSideBySide" or "TetherOverlayCompare" => 880,
             "TetherReference" => 1110,
+            "TetherInspector" => 260,
+            "TetherHistogram" or "TetherExifCollapsed" => 80,
+            "TetherLutCollapsed" or "TetherLutExpanded" => 420,
+            "TetherClientSingleMonitor" => 650,
+            "TetherFileHandling" => 860,
             "LutNone" or "LutImported" or "LutStrength50" or "LutBeforeAfter" or "LutSplitView" or "LutInvalid" => 370,
             "ColorProfileDetected" or "ColorProfileFallback" or "ClientMonitorSelector" or "ClientMonitorFollowMain" or "ClientMonitorFollowLatest" or "ClientMonitorLocked" or "ClientMonitorPrivacy" or "ClientMonitorFavoriteNote" or "ClientMonitorDisconnected" or "ClientMonitorReconnected" or "MixedDpi" => 750,
             _ => 0
@@ -74,6 +92,13 @@ public partial class TetherCaptureView : UserControl
         scroll?.ScrollToVerticalOffset(offset);
         scroll?.UpdateLayout();
         InspectorPanel.UpdateLayout();
+    }
+
+    private void SetReviewGroup(string header, bool expanded)
+    {
+        var group = FindVisualChildren<Expander>(InspectorPanel)
+            .FirstOrDefault(item => string.Equals(item.Header?.ToString(), header, StringComparison.Ordinal));
+        if (group is not null) group.IsExpanded = expanded;
     }
 
     private void ApplyResponsiveLayout(double windowWidth)
