@@ -10,6 +10,7 @@ using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
+using RAWSelectionAssistant.Views;
 
 namespace RAWSelectionAssistant;
 
@@ -111,7 +112,10 @@ public partial class App : Application
                 _compositionRoot.BookingReminderService,
                 _compositionRoot.BookingReminderScheduler,
                 weatherService,
-                _weatherState);
+                _weatherState,
+                new JsonCalendarAvailabilityStore(),
+                _compositionRoot.BookingPeopleService,
+                _compositionRoot.FinanceService);
             var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,
@@ -138,6 +142,11 @@ public partial class App : Application
                     _compositionRoot.TetherAnnotationRepository,
                     _compositionRoot.AuditLog,
                     _compositionRoot.NotificationCenter));
+            var financePage = new FinanceViewModel(
+                _compositionRoot.FinanceService,
+                dialogService,
+                _compositionRoot.ProjectRepository,
+                _compositionRoot.ShootBookingService);
 
             _mainViewModel = new MainViewModel(
                 normalizer,
@@ -166,7 +175,14 @@ public partial class App : Application
                 workbenchSchedule,
                 reminderNotifications,
                 _weatherState,
-                tetherPage);
+                tetherPage,
+                financePage);
+
+            calendarViewModel.FinanceRequested += async (_, request) =>
+            {
+                _mainViewModel.NavigateCommand.Execute("Finance");
+                await financePage.OpenForBookingAsync(request.BookingId, request.Kind);
+            };
 
             await _mainViewModel.InitializeAsync();
             await reminderNotifications.InitializeAsync();
@@ -180,7 +196,7 @@ public partial class App : Application
         catch (Exception ex)
         {
             _logService.Error("应用程序启动失败。", ex);
-            MessageBox.Show("软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+            ThemedMessageDialog.Show(null, Branding.ProductName, "软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", ThemedMessageKind.Error);
             _singleInstance.Dispose();
             Shutdown(-1);
         }
@@ -235,7 +251,7 @@ public partial class App : Application
     private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         _logService?.Error("发生未处理的界面异常。", e.Exception);
-        MessageBox.Show("程序遇到问题，但已记录详细信息。请重试当前操作。", Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+        ThemedMessageDialog.Show(Current?.MainWindow, Branding.ProductName, "程序遇到问题，但已记录详细信息。请重试当前操作。", ThemedMessageKind.Error);
         e.Handled = true;
         if (MainWindow is null || !MainWindow.IsVisible)
         {

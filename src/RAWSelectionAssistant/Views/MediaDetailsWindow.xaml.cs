@@ -41,7 +41,7 @@ public partial class MediaDetailsWindow : Window
     {
         if (DetailsGrid.SelectedItem is not MediaDetailRow { File: not null } row)
         {
-            MessageBox.Show(this, "请选择一个实际候选文件。", Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+            ThemedMessageDialog.Show(this, Branding.ProductName, "请选择一个实际候选文件。", ThemedMessageKind.Information);
             return;
         }
 

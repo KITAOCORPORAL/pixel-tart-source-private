@@ -236,7 +236,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         }
         if (!string.IsNullOrWhiteSpace(keyword))
         {
-            sql.Append(" AND (Title LIKE $keyword ESCAPE '\\' OR ClientDisplayName LIKE $keyword ESCAPE '\\' OR IFNULL(Location,'') LIKE $keyword ESCAPE '\\' OR ShootingType LIKE $keyword ESCAPE '\\' OR IFNULL(ShootingRequirements,'') LIKE $keyword ESCAPE '\\' OR IFNULL(Notes,'') LIKE $keyword ESCAPE '\\')");
+            sql.Append(" AND (Title LIKE $keyword ESCAPE '\\' OR ClientDisplayName LIKE $keyword ESCAPE '\\' OR IFNULL(Location,'') LIKE $keyword ESCAPE '\\' OR ShootingType LIKE $keyword ESCAPE '\\' OR IFNULL(ShootingRequirements,'') LIKE $keyword ESCAPE '\\' OR IFNULL(Notes,'') LIKE $keyword ESCAPE '\\' OR EXISTS(SELECT 1 FROM BookingContacts c WHERE c.BookingId=ShootBookings.Id AND (c.DisplayName LIKE $keyword ESCAPE '\\' OR IFNULL(c.Phone,'') LIKE $keyword ESCAPE '\\' OR IFNULL(c.WeChat,'') LIKE $keyword ESCAPE '\\' OR IFNULL(c.Email,'') LIKE $keyword ESCAPE '\\')) OR EXISTS(SELECT 1 FROM BookingStaffMembers s WHERE s.BookingId=ShootBookings.Id AND s.DisplayName LIKE $keyword ESCAPE '\\'))");
             command.Parameters.AddWithValue("$keyword", "%" + EscapeLike(keyword.Trim()) + "%");
         }
     }
@@ -287,7 +287,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
 
     private static ShootBookingSummary ReadSummary(SqliteDataReader reader) => new(
         Guid.Parse(reader.GetString(0)), GuidOrNull(reader, 1), reader.GetString(2), reader.GetString(3), ParseUtc(reader.GetString(4)), ParseUtc(reader.GetString(5)),
-        reader.GetString(6), reader.GetInt32(7) != 0, EnumValue(reader.GetString(8), ShootBookingStatus.Tentative), TextOrNull(reader, 9), reader.GetString(10), reader.GetInt32(11) != 0, reader.GetInt32(12) != 0);
+        reader.GetString(6), reader.GetInt32(7) != 0, EnumValue(reader.GetString(8), ShootBookingStatus.Tentative), TextOrNull(reader, 9), reader.GetString(10), reader.GetInt32(11) != 0, reader.GetInt32(12) != 0, ParseUtc(reader.GetString(13)));
 
     private static ShootRequirementItem ReadRequirement(SqliteDataReader reader) => new()
     {
@@ -297,7 +297,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
     };
 
     private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc FROM ShootBookings";
-    private const string SummarySelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,AllowOverlap,IsArchived FROM ShootBookings";
+    private const string SummarySelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,AllowOverlap,IsArchived,CreatedAtUtc FROM ShootBookings";
     private static string Utc(DateTimeOffset value) => value.ToUniversalTime().ToString("O");
     private static DateTimeOffset ParseUtc(string value) => DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind).ToUniversalTime();
     private static object Db(object? value) => value switch { null => DBNull.Value, Guid guid => guid.ToString("D"), DateTimeOffset date => Utc(date), _ => value };

@@ -1,5 +1,11 @@
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Windows.Data.Pdf;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
@@ -12,7 +18,7 @@ public sealed record BookingDocumentTypeOption(BookingDocumentType Value, string
 
 public sealed class BookingDocumentsViewModel : ObservableObject
 {
-    public const string SupportedFileFilter = "支持的资料|*.pdf;*.doc;*.docx;*.ppt;*.pptx;*.xls;*.xlsx;*.txt;*.jpg;*.jpeg;*.png|所有文件|*.*";
+    public const string SupportedFileFilter = "支持的资料|*.pdf;*.doc;*.docx;*.ppt;*.pptx;*.xls;*.xlsx;*.txt;*.md;*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tif;*.tiff;*.webp;*.psd;*.ai;*.zip;*.rar|所有文件|*.*";
     private readonly IBookingDocumentWorkflowService _workflow;
     private readonly IDialogService _dialogs;
     private readonly Dictionary<Guid, List<PendingDocumentActionViewModel>> _pendingByBooking = [];
@@ -23,6 +29,18 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     private string _statusText = "尚未关联本地资料";
     private string? _sessionDestinationPreference;
     private BookingDocumentTypeOption _selectedDocumentType;
+    private BookingDocumentItemViewModel? _selectedItem;
+    private DocumentPreviewKind _previewKind;
+    private ImageSource? _previewImage;
+    private string _previewText = string.Empty;
+    private string _previewTitle = "选择资料以预览";
+    private string _previewMessage = "图片、PDF、TXT 和 Markdown 可在本地安全预览；Office 与未知格式显示文件卡片。";
+    private double _previewZoom = 1d;
+    private int _previewPageIndex;
+    private int _previewPageCount;
+    private string _previewSearchText = string.Empty;
+    private string _previewSearchResult = string.Empty;
+    private bool _previewTextWrap = true;
 
     public BookingDocumentsViewModel(IBookingDocumentWorkflowService workflow, IDialogService dialogs)
     {
@@ -33,7 +51,8 @@ public sealed class BookingDocumentsViewModel : ObservableObject
             new(BookingDocumentType.PhotographyPlan, "摄影策划"), new(BookingDocumentType.ShootAgreement, "拍摄协议"),
             new(BookingDocumentType.ModelRelease, "模特授权书"), new(BookingDocumentType.Quotation, "报价单"),
             new(BookingDocumentType.VenueMaterial, "场地资料"), new(BookingDocumentType.WardrobeReference, "服装参考"),
-            new(BookingDocumentType.LightingDiagram, "灯光图"), new(BookingDocumentType.Other, "其他")
+            new(BookingDocumentType.LightingDiagram, "灯光图"), new(BookingDocumentType.CameraDiagram, "机位图"),
+            new(BookingDocumentType.MoodBoard, "情绪板"), new(BookingDocumentType.StaffFile, "工作人员资料"), new(BookingDocumentType.Other, "其他")
         ];
         _selectedDocumentType = DocumentTypes[0];
         AddReferenceCommand = new AsyncRelayCommand(_ => ChooseAndAddReferencesAsync(), _ => CanModify);
@@ -49,6 +68,16 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         UndoCopyCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? ExecuteSafelyAsync(() => UndoAsync(item)) : Task.CompletedTask);
         OpenOutputDirectoryCommand = new RelayCommand(parameter => { if (parameter is PendingDocumentActionViewModel item) RevealDirectoryRequested?.Invoke(this, item.Pending.DestinationPath); });
         AbandonAssociationCommand = new AsyncRelayCommand(parameter => parameter is PendingDocumentActionViewModel item ? ExecuteSafelyAsync(() => AbandonAsync(item)) : Task.CompletedTask);
+        PreviewCommand = new AsyncRelayCommand(parameter => parameter is BookingDocumentItemViewModel item ? PreviewAsync(item) : Task.CompletedTask);
+        PreviousPreviewCommand = new AsyncRelayCommand(_ => NavigatePreviewAsync(-1), _ => CanPreviousPreview);
+        NextPreviewCommand = new AsyncRelayCommand(_ => NavigatePreviewAsync(1), _ => CanNextPreview);
+        ZoomInCommand = new RelayCommand(_ => PreviewZoom = Math.Min(4d, PreviewZoom + 0.25d));
+        ZoomOutCommand = new RelayCommand(_ => PreviewZoom = Math.Max(0.25d, PreviewZoom - 0.25d));
+        ActualSizeCommand = new RelayCommand(_ => PreviewZoom = 1d);
+        FitPreviewCommand = new RelayCommand(_ => PreviewZoom = 1d);
+        PreviousPdfPageCommand = new AsyncRelayCommand(_ => ChangePdfPageAsync(-1), _ => IsPdfPreview && PreviewPageIndex > 0);
+        NextPdfPageCommand = new AsyncRelayCommand(_ => ChangePdfPageAsync(1), _ => IsPdfPreview && PreviewPageIndex + 1 < PreviewPageCount);
+        ToggleTextWrapCommand = new RelayCommand(_ => PreviewTextWrap = !PreviewTextWrap);
     }
 
     public event EventHandler<string>? OpenFileRequested;
@@ -70,11 +99,64 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public ICommand UndoCopyCommand { get; }
     public ICommand OpenOutputDirectoryCommand { get; }
     public ICommand AbandonAssociationCommand { get; }
+    public ICommand PreviewCommand { get; }
+    public ICommand PreviousPreviewCommand { get; }
+    public ICommand NextPreviewCommand { get; }
+    public ICommand ZoomInCommand { get; }
+    public ICommand ZoomOutCommand { get; }
+    public ICommand ActualSizeCommand { get; }
+    public ICommand FitPreviewCommand { get; }
+    public ICommand PreviousPdfPageCommand { get; }
+    public ICommand NextPdfPageCommand { get; }
+    public ICommand ToggleTextWrapCommand { get; }
     public bool IsBusy { get => _isBusy; private set { if (!SetProperty(ref _isBusy, value)) return; OnPropertyChanged(nameof(CanModify)); RefreshCommands(); } }
     public bool IsArchived { get => _isArchived; private set { if (!SetProperty(ref _isArchived, value)) return; OnPropertyChanged(nameof(CanModify)); RefreshCommands(); } }
     public bool CanModify => !IsArchived && !IsBusy;
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public BookingDocumentTypeOption SelectedDocumentType { get => _selectedDocumentType; set => SetProperty(ref _selectedDocumentType, value); }
+    public BookingDocumentItemViewModel? SelectedItem { get => _selectedItem; set { if (!SetProperty(ref _selectedItem, value)) return; OnPropertyChanged(nameof(CanPreviousPreview)); OnPropertyChanged(nameof(CanNextPreview)); RefreshPreviewCommands(); if (value is not null) _ = PreviewAsync(value); } }
+    public DocumentPreviewKind PreviewKind { get => _previewKind; private set { if (!SetProperty(ref _previewKind, value)) return; OnPropertyChanged(nameof(IsImagePreview)); OnPropertyChanged(nameof(IsPdfPreview)); OnPropertyChanged(nameof(IsTextPreview)); OnPropertyChanged(nameof(IsCardPreview)); RefreshPreviewCommands(); } }
+    public bool IsImagePreview => PreviewKind is DocumentPreviewKind.Image or DocumentPreviewKind.Pdf;
+    public bool IsPdfPreview => PreviewKind == DocumentPreviewKind.Pdf;
+    public bool IsTextPreview => PreviewKind == DocumentPreviewKind.Text;
+    public bool IsCardPreview => PreviewKind is DocumentPreviewKind.OfficeCard or DocumentPreviewKind.Unsupported or DocumentPreviewKind.None;
+    public ImageSource? PreviewImage
+    {
+        get => _previewImage;
+        private set
+        {
+            if (!SetProperty(ref _previewImage, value)) return;
+            OnPropertyChanged(nameof(PreviewDisplayWidth));
+            OnPropertyChanged(nameof(PreviewDisplayHeight));
+        }
+    }
+    public string PreviewText { get => _previewText; private set => SetProperty(ref _previewText, value); }
+    public string PreviewTitle { get => _previewTitle; private set => SetProperty(ref _previewTitle, value); }
+    public string PreviewMessage { get => _previewMessage; private set => SetProperty(ref _previewMessage, value); }
+    public double PreviewZoom
+    {
+        get => _previewZoom;
+        private set
+        {
+            if (!SetProperty(ref _previewZoom, value)) return;
+            OnPropertyChanged(nameof(PreviewZoomText));
+            OnPropertyChanged(nameof(PreviewDisplayWidth));
+            OnPropertyChanged(nameof(PreviewDisplayHeight));
+        }
+    }
+    public string PreviewZoomText => $"{PreviewZoom * 100:0}%";
+    public double PreviewDisplayWidth => PreviewImage is BitmapSource bitmap ? bitmap.PixelWidth * PreviewZoom : double.NaN;
+    public double PreviewDisplayHeight => PreviewImage is BitmapSource bitmap ? bitmap.PixelHeight * PreviewZoom : double.NaN;
+    public int PreviewPageIndex { get => _previewPageIndex; private set { if (!SetProperty(ref _previewPageIndex, value)) return; OnPropertyChanged(nameof(PreviewPageText)); RefreshPreviewCommands(); } }
+    public int PreviewPageCount { get => _previewPageCount; private set { if (!SetProperty(ref _previewPageCount, value)) return; OnPropertyChanged(nameof(PreviewPageText)); RefreshPreviewCommands(); } }
+    public string PreviewPageText => PreviewPageCount <= 0 ? string.Empty : $"第 {PreviewPageIndex + 1} / {PreviewPageCount} 页";
+    public bool CanPreviousPreview => SelectedItem is not null && Items.IndexOf(SelectedItem) > 0;
+    public bool CanNextPreview => SelectedItem is not null && Items.IndexOf(SelectedItem) >= 0 && Items.IndexOf(SelectedItem) + 1 < Items.Count;
+    public string PreviewSearchText { get => _previewSearchText; set { if (SetProperty(ref _previewSearchText, value ?? string.Empty)) UpdateTextSearch(); } }
+    public string PreviewSearchResult { get => _previewSearchResult; private set => SetProperty(ref _previewSearchResult, value); }
+    public bool PreviewTextWrap { get => _previewTextWrap; private set { if (!SetProperty(ref _previewTextWrap, value)) return; OnPropertyChanged(nameof(PreviewTextWrapping)); OnPropertyChanged(nameof(PreviewTextWrapLabel)); } }
+    public TextWrapping PreviewTextWrapping => PreviewTextWrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
+    public string PreviewTextWrapLabel => PreviewTextWrap ? "取消换行" : "自动换行";
 
     public async Task LoadAsync(Guid bookingId, Guid? projectId, bool isArchived, CancellationToken cancellationToken = default)
     {
@@ -84,6 +166,7 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         IsArchived = isArchived;
         _sessionDestinationPreference = null;
         Items.Clear();
+        ClearPreview();
         PendingActions.Clear();
         if (_pendingByBooking.TryGetValue(bookingId, out var pending))
             foreach (var item in pending) PendingActions.Add(item);
@@ -109,9 +192,81 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         _projectId = null;
         IsArchived = true;
         Items.Clear();
+        ClearPreview();
         PendingActions.Clear();
         StatusText = "尚未关联本地资料";
     }
+
+#if RC3_REVIEW_ONLY
+    public void ApplyReviewState(string state, string demoDirectory)
+    {
+        _bookingId = Guid.Parse("23030000-0000-0000-0000-000000000020");
+        _projectId = Guid.Parse("23030000-0000-0000-0000-000000000021");
+        IsArchived = false;
+        Items.Clear();
+        var now = DateTimeOffset.Now;
+        var candidates = new[]
+        {
+            ("RC3_资料图片.png", BookingDocumentType.PhotographyPlan),
+            ("RC3_拍摄策划.pdf", BookingDocumentType.PhotographyPlan),
+            ("RC3_现场说明.txt", BookingDocumentType.StaffFile),
+            ("RC3_报价参考.docx", BookingDocumentType.Quotation),
+            ("RC3_未知格式.xyz", BookingDocumentType.Other)
+        };
+        foreach (var (name, type) in candidates)
+        {
+            var path = Path.Combine(demoDirectory, name);
+            var info = new FileInfo(path);
+            Items.Add(new BookingDocumentItemViewModel(new BookingDocumentRecord
+            {
+                BookingId = _bookingId, ProjectId = _projectId, DocumentType = type, DisplayName = name,
+                FilePath = path, NormalizedPath = path.ToUpperInvariant(), FileExtension = info.Extension,
+                FileSize = info.Exists ? info.Length : null, LastKnownModifiedAtUtc = info.Exists ? info.LastWriteTimeUtc : null,
+                LinkMode = BookingDocumentLinkMode.Reference, AddedAtUtc = now.AddMinutes(-Items.Count * 7),
+                UpdatedAtUtc = now, LastVerifiedAtUtc = now, IsMissing = false
+            }));
+        }
+        _selectedItem = state switch
+        {
+            "DocumentsPdf" => Items.ElementAtOrDefault(1),
+            "DocumentsText" => Items.ElementAtOrDefault(2),
+            "DocumentsUnsupported" => Items.ElementAtOrDefault(4),
+            _ => Items.FirstOrDefault()
+        };
+        OnPropertyChanged(nameof(SelectedItem));
+        PreviewTitle = _selectedItem?.DisplayName ?? "RC3 合成资料";
+        PreviewZoom = 1d;
+        PreviewPageIndex = 0;
+        PreviewPageCount = 0;
+        PreviewSearchText = string.Empty;
+        if (state == "DocumentsText")
+        {
+            PreviewKind = DocumentPreviewKind.Text;
+            PreviewText = "RC3 合成拍摄说明\n- 客户资料仅为演示代号\n- 文件默认仅关联原位置\n- 移除关联不会删除电脑文件";
+            PreviewMessage = "TXT 本地只读预览 · 已限制读取长度。";
+            PreviewImage = null;
+        }
+        else if (state == "DocumentsUnsupported")
+        {
+            PreviewKind = DocumentPreviewKind.Unsupported;
+            PreviewImage = null;
+            PreviewText = string.Empty;
+            PreviewMessage = "该格式不提供内容预览；仅显示安全文件卡片和元数据。";
+        }
+        else
+        {
+            var imagePath = Path.Combine(demoDirectory, "RC3_资料图片.png");
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit(); bitmap.CacheOption = BitmapCacheOption.OnLoad; bitmap.UriSource = new Uri(imagePath); bitmap.EndInit(); bitmap.Freeze();
+            PreviewImage = bitmap;
+            PreviewText = string.Empty;
+            PreviewKind = state == "DocumentsPdf" ? DocumentPreviewKind.Pdf : DocumentPreviewKind.Image;
+            PreviewPageCount = state == "DocumentsPdf" ? 3 : 0;
+            PreviewMessage = state == "DocumentsPdf" ? "PDF 本地预览 · 第 1 / 3 页；文件流已释放。" : "图片预览已载入；文件流已释放。";
+        }
+        StatusText = $"RC3 隔离验收：已关联 {Items.Count} 份合成资料，未写入任何文件正文。";
+    }
+#endif
 
     public async Task HandleDroppedFilesAsync(IReadOnlyList<string> paths, BookingDocumentLinkMode mode)
     {
@@ -220,6 +375,100 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         }
         if (reveal) RevealFileRequested?.Invoke(this, result.Document.FilePath);
         else OpenFileRequested?.Invoke(this, result.Document.FilePath);
+    }
+
+    private async Task PreviewAsync(BookingDocumentItemViewModel item)
+    {
+        if (!ReferenceEquals(SelectedItem, item))
+        {
+            SelectedItem = item;
+            return;
+        }
+        PreviewImage = null; PreviewText = string.Empty; PreviewTitle = item.DisplayName; PreviewZoom = 1d; PreviewPageIndex = 0; PreviewPageCount = 0; PreviewSearchText = string.Empty;
+        var check = await _workflow.VerifyAsync(item.Id).ConfigureAwait(true);
+        if (check is null || check.State == BookingDocumentFileState.Missing)
+        {
+            PreviewKind = DocumentPreviewKind.Unsupported; PreviewMessage = "文件已丢失或暂时不可访问，可使用“重新定位”修复关联。"; return;
+        }
+        var path = item.FullPath;
+        var extension = Path.GetExtension(path).ToLowerInvariant();
+        try
+        {
+            if (extension is ".jpg" or ".jpeg" or ".png" or ".webp" or ".bmp" or ".gif" or ".tif" or ".tiff")
+            {
+                await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, 65536, true);
+                var bitmap = new BitmapImage(); bitmap.BeginInit(); bitmap.CacheOption = BitmapCacheOption.OnLoad; bitmap.StreamSource = stream; bitmap.EndInit(); bitmap.Freeze();
+                PreviewImage = bitmap; PreviewKind = DocumentPreviewKind.Image; PreviewMessage = "图片预览已载入；文件流已释放。"; return;
+            }
+            if (extension == ".pdf")
+            {
+                await RenderPdfPageAsync(path, 0).ConfigureAwait(true); return;
+            }
+            if (extension is ".txt" or ".md")
+            {
+                await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, 65536, true);
+                using var reader = new StreamReader(stream, detectEncodingFromByteOrderMarks: true); var buffer = new char[65536]; var read = await reader.ReadBlockAsync(buffer.AsMemory()).ConfigureAwait(true);
+                PreviewText = new string(buffer, 0, read); PreviewKind = DocumentPreviewKind.Text; PreviewMessage = read == buffer.Length ? "只显示前 64K 文本，未修改原文件。" : "文本预览已载入；文件流已释放。"; UpdateTextSearch(); return;
+            }
+            if (extension is ".doc" or ".docx" or ".ppt" or ".pptx" or ".xls" or ".xlsx")
+            {
+                PreviewKind = DocumentPreviewKind.OfficeCard; PreviewMessage = "Office 文件不解析正文；可安全打开或在资源管理器中定位。"; return;
+            }
+            PreviewKind = DocumentPreviewKind.Unsupported; PreviewMessage = "此格式暂不生成内容预览，仅显示安全文件卡片。";
+        }
+        catch { PreviewKind = DocumentPreviewKind.Unsupported; PreviewMessage = "预览暂时不可用；原文件未被修改。"; PreviewImage = null; PreviewText = string.Empty; }
+    }
+
+    private void ClearPreview()
+    {
+        SelectedItem = null; PreviewKind = DocumentPreviewKind.None; PreviewImage = null; PreviewText = string.Empty; PreviewTitle = "选择资料以预览"; PreviewMessage = "图片、PDF、TXT 和 Markdown 可在本地安全预览；Office 与未知格式显示文件卡片。"; PreviewZoom = 1d; PreviewPageIndex = 0; PreviewPageCount = 0; PreviewSearchText = string.Empty;
+    }
+
+    private async Task NavigatePreviewAsync(int offset)
+    {
+        if (SelectedItem is null) return;
+        var target = Items.IndexOf(SelectedItem) + offset;
+        if (target >= 0 && target < Items.Count) SelectedItem = Items[target];
+        await Task.CompletedTask;
+    }
+
+    private async Task ChangePdfPageAsync(int offset)
+    {
+        if (SelectedItem is null || !IsPdfPreview) return;
+        var target = Math.Clamp(PreviewPageIndex + offset, 0, Math.Max(0, PreviewPageCount - 1));
+        if (target == PreviewPageIndex) return;
+        await RenderPdfPageAsync(SelectedItem.FullPath, target).ConfigureAwait(true);
+    }
+
+    private async Task RenderPdfPageAsync(string path, int pageIndex)
+    {
+        var file = await StorageFile.GetFileFromPathAsync(path);
+        var document = await PdfDocument.LoadFromFileAsync(file);
+        if (document.PageCount == 0) throw new InvalidDataException("PDF 没有可预览页面。");
+        var safePage = Math.Clamp(pageIndex, 0, (int)document.PageCount - 1);
+        using var page = document.GetPage((uint)safePage);
+        using var random = new InMemoryRandomAccessStream();
+        await page.RenderToStreamAsync(random);
+        random.Seek(0);
+        using var input = random.AsStreamForRead();
+        var bitmap = new BitmapImage(); bitmap.BeginInit(); bitmap.CacheOption = BitmapCacheOption.OnLoad; bitmap.StreamSource = input; bitmap.EndInit(); bitmap.Freeze();
+        PreviewImage = bitmap; PreviewPageCount = (int)document.PageCount; PreviewPageIndex = safePage; PreviewKind = DocumentPreviewKind.Pdf; PreviewMessage = $"PDF 本地预览 · {PreviewPageText}；文件流已释放。";
+    }
+
+    private void UpdateTextSearch()
+    {
+        if (!IsTextPreview || string.IsNullOrWhiteSpace(PreviewSearchText)) { PreviewSearchResult = string.Empty; return; }
+        var count = 0;
+        for (var index = 0; (index = PreviewText.IndexOf(PreviewSearchText, index, StringComparison.CurrentCultureIgnoreCase)) >= 0; index += Math.Max(1, PreviewSearchText.Length)) count++;
+        PreviewSearchResult = count == 0 ? "未找到" : $"找到 {count} 处";
+    }
+
+    private void RefreshPreviewCommands()
+    {
+        (PreviousPreviewCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (NextPreviewCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (PreviousPdfPageCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (NextPdfPageCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
     }
 
     private async Task RelocateAsync(BookingDocumentItemViewModel item)
@@ -335,6 +584,9 @@ public sealed class BookingDocumentItemViewModel : ObservableObject
     public string LinkModeText => _document.LinkMode == BookingDocumentLinkMode.Reference ? "仅关联原位置" : "项目资料副本";
     public string AddedText => _document.AddedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
     public string VerifiedText => _document.LastVerifiedAtUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? "尚未检查";
+    public string FileSizeText => _document.FileSize is null ? "大小未知" : FormatBytes(_document.FileSize.Value);
+    public string ModifiedText => _document.LastKnownModifiedAtUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? "修改时间未知";
+    public string FileMetadataText => $"{ExtensionText} · {FileSizeText} · {ModifiedText} · {StateText}";
     public string StatusMessage { get => _statusMessage; private set => SetProperty(ref _statusMessage, value); }
     public bool IsMissing => _state == BookingDocumentFileState.Missing;
     public bool IsModified => _state == BookingDocumentFileState.Modified;
@@ -347,16 +599,28 @@ public sealed class BookingDocumentItemViewModel : ObservableObject
         _document = result.Document;
         _state = result.State;
         StatusMessage = result.Message;
-        foreach (var name in new[] { nameof(DisplayName), nameof(DocumentTypeText), nameof(ExtensionText), nameof(StateText), nameof(LinkModeText), nameof(AddedText), nameof(VerifiedText), nameof(IsMissing), nameof(IsModified), nameof(FullPath) }) OnPropertyChanged(name);
+        foreach (var name in new[] { nameof(DisplayName), nameof(DocumentTypeText), nameof(ExtensionText), nameof(StateText), nameof(LinkModeText), nameof(AddedText), nameof(VerifiedText), nameof(FileSizeText), nameof(ModifiedText), nameof(FileMetadataText), nameof(IsMissing), nameof(IsModified), nameof(FullPath) }) OnPropertyChanged(name);
     }
 
     private static string DocumentTypeLabel(BookingDocumentType type) => type switch
     {
         BookingDocumentType.PhotographyPlan => "摄影策划", BookingDocumentType.ShootAgreement => "拍摄协议", BookingDocumentType.ModelRelease => "模特授权书",
         BookingDocumentType.Quotation => "报价单", BookingDocumentType.VenueMaterial => "场地资料", BookingDocumentType.WardrobeReference => "服装参考",
-        BookingDocumentType.LightingDiagram => "灯光图", _ => "其他"
+        BookingDocumentType.LightingDiagram => "灯光图", BookingDocumentType.CameraDiagram => "机位图", BookingDocumentType.MoodBoard => "情绪板",
+        BookingDocumentType.StaffFile => "工作人员资料", _ => "其他"
     };
+
+    private static string FormatBytes(long value)
+    {
+        string[] units = ["B", "KB", "MB", "GB", "TB"];
+        var amount = (double)Math.Max(0, value);
+        var index = 0;
+        while (amount >= 1024 && index < units.Length - 1) { amount /= 1024; index++; }
+        return $"{amount:0.#} {units[index]}";
+    }
 }
+
+public enum DocumentPreviewKind { None, Image, Pdf, Text, OfficeCard, Unsupported }
 
 public sealed class PendingDocumentActionViewModel(PendingDocumentAssociation pending, string statusText) : ObservableObject
 {

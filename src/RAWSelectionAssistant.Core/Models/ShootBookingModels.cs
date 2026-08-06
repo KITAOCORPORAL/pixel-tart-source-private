@@ -8,11 +8,18 @@ public enum ShootBookingStatus
     Shooting,
     Completed,
     Cancelled,
-    Postponed
+    Postponed,
+    AwaitingSelectionDelivery,
+    AwaitingSelection,
+    Selected,
+    AwaitingRetouch,
+    Retouched,
+    AwaitingDelivery,
+    Delivered
 }
 
 public enum ShootRequirementPriority { Low, Normal, High, Critical }
-public enum BookingDocumentType { PhotographyPlan, ShootAgreement, ModelRelease, Quotation, VenueMaterial, WardrobeReference, LightingDiagram, Other }
+public enum BookingDocumentType { PhotographyPlan, ShootAgreement, ModelRelease, Quotation, VenueMaterial, WardrobeReference, LightingDiagram, CameraDiagram, MoodBoard, StaffFile, Other }
 public enum BookingDocumentLinkMode { Reference, ManagedCopy }
 public enum BookingSearchScope { CurrentView, AllUnarchived }
 public enum BookingConflictResolution { None, SaveAnyway, MarkAllowOverlap }
@@ -103,7 +110,8 @@ public sealed record ShootBookingSummary(
     string? Location,
     string ShootingType,
     bool AllowOverlap,
-    bool IsArchived);
+    bool IsArchived,
+    DateTimeOffset CreatedAtUtc = default);
 
 public sealed record BookingDocumentRecord
 {

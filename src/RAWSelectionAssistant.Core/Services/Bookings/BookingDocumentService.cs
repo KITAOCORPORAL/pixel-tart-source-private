@@ -4,9 +4,9 @@ namespace RAWSelectionAssistant.Core.Services.Bookings;
 
 public sealed class BookingDocumentService(IBookingDocumentRepository repository) : IBookingDocumentService
 {
-    private static readonly HashSet<string> AllowedExtensions = new(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> BlockedExecutableExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
-        ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx", ".txt", ".jpg", ".jpeg", ".png"
+        ".exe", ".com", ".bat", ".cmd", ".ps1", ".vbs", ".js", ".jse", ".msi", ".msp", ".dll", ".scr", ".lnk"
     };
 
     public async Task<BookingDocumentRecord> AddReferenceAsync(Guid bookingId, Guid? projectId, BookingDocumentType documentType, string filePath, string? displayName = null, string? notes = null, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ public sealed class BookingDocumentService(IBookingDocumentRepository repository
         var fullPath = Path.GetFullPath(filePath);
         if (!File.Exists(fullPath)) throw new FileNotFoundException("Document file was not found.", fullPath);
         var extension = Path.GetExtension(fullPath);
-        if (!AllowedExtensions.Contains(extension)) throw new NotSupportedException("Document file type is not supported.");
+        if (BlockedExecutableExtensions.Contains(extension)) throw new NotSupportedException("为避免误执行，程序或脚本文件不能作为拍摄资料关联。");
         return fullPath;
     }
 

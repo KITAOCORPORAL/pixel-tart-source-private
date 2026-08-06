@@ -9,13 +9,13 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class Version230TetherSchemaTests
 {
     [TestMethod]
-    public async Task DefaultMigration_RecordsSchemaVersionThree()
+    public async Task DefaultMigration_RecordsSchemaVersionFour()
     {
         using var setup = await SetupAsync();
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(3L, (long)(await command.ExecuteScalarAsync())!);
+        Assert.AreEqual(4L, (long)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
@@ -50,13 +50,13 @@ public sealed class Version230TetherSchemaTests
     }
 
     [TestMethod]
-    public async Task SchemaThree_UsesIntegrityCheckAndIsIdempotent()
+    public async Task CurrentSchema_UsesIntegrityCheckAndIsIdempotent()
     {
         using var setup = await SetupAsync();
         var migrator = new DatabaseMigrator(setup.Database, new DatabaseBackupService(setup.Database, setup.Temp.Combine("second-backups")));
         var second = await migrator.MigrateAsync();
         Assert.IsTrue(second.Success);
-        Assert.AreEqual(3, second.CurrentVersion);
+        Assert.AreEqual(4, second.CurrentVersion);
         Assert.HasCount(0, second.AppliedMigrations);
         await using var connection = await setup.Database.OpenConnectionAsync(); await using var command = connection.CreateCommand(); command.CommandText = "PRAGMA integrity_check;";
         Assert.AreEqual("ok", Convert.ToString(await command.ExecuteScalarAsync()));
@@ -135,7 +135,7 @@ public sealed class Version230TetherSchemaTests
         var result = await new DatabaseMigrator(database, backup).MigrateAsync();
         Assert.IsTrue(result.Success);
         Assert.AreEqual(2, result.PreviousVersion);
-        Assert.AreEqual(3, result.CurrentVersion);
+        Assert.AreEqual(4, result.CurrentVersion);
         Assert.IsNotNull(result.BackupPath);
         Assert.IsTrue(File.Exists(result.BackupPath));
         Assert.AreEqual(1L, await CountAsync(database, "SELECT COUNT(*) FROM ShootBookings;"));

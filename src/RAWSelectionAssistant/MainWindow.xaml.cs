@@ -211,7 +211,8 @@ public partial class MainWindow : Window
         if (_viewModel?.NeedsUpgradeTutorialOffer == true)
         {
             var offer = new UpgradeTutorialWindow { Owner = this };
-            await _viewModel.RespondToUpgradeOfferAsync(offer.ShowDialog() == true);
+            offer.ShowDialog();
+            await _viewModel.RespondToUpgradeOfferAsync(offer.Accepted);
         }
     }
 
@@ -327,6 +328,23 @@ public partial class MainWindow : Window
     }
 
     private void WorkbenchToolboxPopup_Closed(object? sender, EventArgs e) => ToolboxQuickButton.Focus();
+
+    private void LocalSplitHelpButton_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        LocalSplitHelpToolTip.IsOpen = true;
+    }
+
+    private void LocalSplitHelpButton_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        LocalSplitHelpToolTip.IsOpen = false;
+    }
+
+    private void LocalSplitHelpButton_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Escape) return;
+        LocalSplitHelpToolTip.IsOpen = false;
+        e.Handled = true;
+    }
 
     private void OpenToolboxPage_Click(object sender, RoutedEventArgs e)
     {

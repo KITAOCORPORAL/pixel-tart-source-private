@@ -18,7 +18,7 @@ public sealed class BookingDocumentWorkflowService(
     IAuditLogService auditLog,
     IPixelTartDatabase? database = null) : IBookingDocumentWorkflowService
 {
-    private static readonly HashSet<string> AllowedExtensions = new(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> SupportedReferenceExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
         ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx", ".txt", ".jpg", ".jpeg", ".png"
     };
@@ -457,7 +457,9 @@ public sealed class BookingDocumentWorkflowService(
         var fullPath = Path.GetFullPath(path);
         if (Directory.Exists(fullPath)) throw new NotSupportedException("当前版本只支持添加单个或多个文件。" );
         if (!File.Exists(fullPath)) throw new FileNotFoundException("文件不存在或当前不可访问。", fullPath);
-        if (!AllowedExtensions.Contains(Path.GetExtension(fullPath))) throw new NotSupportedException("当前文件类型不受支持。" );
+        var extension = Path.GetExtension(fullPath);
+        if (!SupportedReferenceExtensions.Contains(extension) && !BookingDocumentFileSafety.IsSafeExtension(extension))
+            throw new NotSupportedException("为避免误执行，程序或脚本文件不能作为拍摄资料关联。" );
         return fullPath;
     }
 
@@ -486,6 +488,9 @@ public sealed class BookingDocumentWorkflowService(
         BookingDocumentType.VenueMaterial => "场地资料",
         BookingDocumentType.WardrobeReference => "服装参考",
         BookingDocumentType.LightingDiagram => "灯光图",
+        BookingDocumentType.CameraDiagram => "机位图",
+        BookingDocumentType.MoodBoard => "情绪板",
+        BookingDocumentType.StaffFile => "工作人员资料",
         _ => "其他"
     };
 
