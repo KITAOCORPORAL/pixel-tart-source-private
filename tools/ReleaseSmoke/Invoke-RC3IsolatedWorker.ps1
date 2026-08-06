@@ -11,12 +11,16 @@ $local=[IO.Path]::GetFullPath($context.LocalAppData).TrimEnd([IO.Path]::Director
 if(-not$resolved.StartsWith($local+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Acceptance app data escaped the isolated root.'}
 $env:PIXEL_TART_ACCEPTANCE_ROOT=$appDataRoot
 New-Item -ItemType Directory -Force -Path $appDataRoot|Out-Null
-$settings=@{Appearance=@{Theme=2;SidebarCollapsed=$false};PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress');onboardingCompleted=$true;onboardingVersion='2.3.0';onboardingLegacyUser=$true;onboardingUpgradeOfferShown=$true}|ConvertTo-Json -Depth 6
+$completedAt=[DateTimeOffset]::UtcNow.ToString('O')
+$completionValue="KitaoPhotoSelector-Onboarding-1.2.0-Completion|2.3.0|$completedAt"
+$sha=[Security.Cryptography.SHA256]::Create()
+try{$completionProof=([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($completionValue)))).Replace('-','')}finally{$sha.Dispose()}
+$settings=@{Appearance=@{Theme=2;SidebarCollapsed=$false};PinnedQuickTools=@('Workflow','PhotoOrganize','BatchCompress');onboardingCompleted=$true;onboardingVersion='2.3.0';onboardingCompletedAt=$completedAt;onboardingCurrentStep=22;onboardingLegacyUser=$false;onboardingUpgradeOfferShown=$true;onboardingCompletionProof=$completionProof}|ConvertTo-Json -Depth 6
 [IO.File]::WriteAllText((Join-Path $appDataRoot 'settings.json'),$settings,[Text.UTF8Encoding]::new($true))
 function Decode([string]$value){[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($value))}
 $names=@{
     Workbench=Decode '5bel5L2c5Y+w';Calendar=Decode '5bel5L2c5pel5Y6G';Finance=Decode '5pGE5b2x5pS25pSv';Tether=Decode '6IGU5py65ouN5pGE';Toolbox=Decode '5bel5YW3566x'
-    Unshot=Decode '5pyq5ouN5pGE';Shot=Decode '5bey5ouN5pGE';Return=Decode '5b6F6L+U5Zu+';CreateBooking=Decode '5Yib5bu65ouN5pGE5Lu75Yqh';Income=Decode '5paw5aKe5pS25YWl';Expense=Decode '5paw5aKe5pSv5Ye6';TetherEmpty=Decode '5bCa5pyq5byA5aeL6IGU5py65ouN5pGE'
+    Unshot=Decode '5pyq5ouN5pGE';Shot=Decode '5bey5ouN5pGE';Return=Decode '5b6F6L+U5Zu+';CreateBooking=Decode '5paw5bu65ouN5pGE5o6S5pyf';Income=Decode '5paw5bu65pS25YWl';Expense=Decode '5paw5bu65pSv5Ye6';TetherEmpty=Decode '5bCa5pyq5ZCv5Yqo6IGU5py65Lya6K+d'
 }
 $result=[ordered]@{
     Passed=$false;Mode=$context.Mode;RunId=$context.RunId;IsolationMethod='Win32 CreateDesktopW';LocalAppData=$context.LocalAppData
@@ -26,8 +30,9 @@ $result=[ordered]@{
     StartedAt=[DateTimeOffset]::Now.ToString('O')
 }
 $process=$null
-function Get-Root([int]$pid,[int]$timeout=25){$end=[DateTime]::UtcNow.AddSeconds($timeout);do{$p=Get-Process -Id $pid -ErrorAction SilentlyContinue;if($p){$p.Refresh();if($p.MainWindowHandle-ne[IntPtr]::Zero){return [System.Windows.Automation.AutomationElement]::FromHandle($p.MainWindowHandle)}};Start-Sleep -Milliseconds 250}while([DateTime]::UtcNow-lt$end);$null}
+function Get-Root([int]$processId,[int]$timeout=25){$end=[DateTime]::UtcNow.AddSeconds($timeout);do{$p=Get-Process -Id $processId -ErrorAction SilentlyContinue;if($p){$p.Refresh();if($p.MainWindowHandle-ne[IntPtr]::Zero){return [System.Windows.Automation.AutomationElement]::FromHandle($p.MainWindowHandle)}};Start-Sleep -Milliseconds 250}while([DateTime]::UtcNow-lt$end);$null}
 function Find-Element($root,[string]$name,[int]$timeout=10,[switch]$contains){$end=[DateTime]::UtcNow.AddSeconds($timeout);do{foreach($el in @($root.FindAll([System.Windows.Automation.TreeScope]::Descendants,[System.Windows.Automation.Condition]::TrueCondition))){try{if(-not$el.Current.IsOffscreen-and(($contains-and$el.Current.Name-like"*$name*")-or(-not$contains-and$el.Current.Name-eq$name))){return $el}}catch{}};Start-Sleep -Milliseconds 180}while([DateTime]::UtcNow-lt$end);$null}
+function Save-Tree($root,[string]$path){$items=@();foreach($el in @($root.FindAll([System.Windows.Automation.TreeScope]::Descendants,[System.Windows.Automation.Condition]::TrueCondition))){try{$items+=[ordered]@{Name=$el.Current.Name;Type=$el.Current.ControlType.ProgrammaticName;AutomationId=$el.Current.AutomationId;Offscreen=$el.Current.IsOffscreen;Enabled=$el.Current.IsEnabled}}catch{}};[IO.File]::WriteAllText($path,($items|ConvertTo-Json -Depth 6),[Text.UTF8Encoding]::new($true))}
 function Invoke-Element($element){if($null-eq$element){throw 'Required UI element was not found.'};$pattern=$null;if($element.TryGetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern,[ref]$pattern)){$pattern.Invoke();return};if($element.TryGetCurrentPattern([System.Windows.Automation.SelectionItemPattern]::Pattern,[ref]$pattern)){$pattern.Select();return};throw 'UI element cannot be invoked.'}
 function Close-App{if($process-and-not$process.HasExited){$process.CloseMainWindow()|Out-Null;if(-not$process.WaitForExit(10000)){Stop-Process -Id $process.Id -Force};$script:process=$null}}
 try{
@@ -45,13 +50,13 @@ try{
     $installed=Join-Path $context.InstallRoot 'KitaoPhotoSelector.exe';$result.Rc3Version=(Get-Item $installed).VersionInfo.ProductVersion
     $acceptance=Join-Path $context.InstallRoot 'KitaoPhotoSelector.Acceptance.exe';Copy-Item $installed $acceptance -Force
     $script:process=Start-Process $acceptance -PassThru
-    $root=Get-Root $process.Id;if($null-eq$root){throw 'RC3 main window was not observed.'};$result.WindowObserved=$true
+    $root=Get-Root $process.Id;if($null-eq$root){throw 'RC3 main window was not observed.'};$result.WindowObserved=$true;Save-Tree $root (Join-Path $context.EvidenceRoot 'startup-ui-tree.json')
     $result.WorkbenchVisible=$null-ne(Find-Element $root $names.Workbench 8)
     $result.ThreeLegendsVisible=($null-ne(Find-Element $root $names.Unshot 4))-and($null-ne(Find-Element $root $names.Shot 4))-and($null-ne(Find-Element $root $names.Return 4))
     $result.PinnedToolsVisible=($null-ne(Find-Element $root $names.Toolbox 4))
-    Invoke-Element (Find-Element $root $names.Calendar 8);$result.CalendarOpened=$null-ne(Find-Element $root $names.CreateBooking 10 -contains)
-    Invoke-Element (Find-Element $root $names.Finance 8);$result.FinanceOpened=($null-ne(Find-Element $root $names.Income 10 -contains))-and($null-ne(Find-Element $root $names.Expense 5 -contains))
-    Invoke-Element (Find-Element $root $names.Tether 8);$result.TetherOpened=$true;$result.TetherEmptyVisible=$null-ne(Find-Element $root $names.TetherEmpty 10 -contains)
+    Invoke-Element (Find-Element $root $names.Calendar 8);$result.CalendarOpened=$null-ne(Find-Element $root $names.CreateBooking 10 -contains);Save-Tree $root (Join-Path $context.EvidenceRoot 'calendar-ui-tree.json')
+    Invoke-Element (Find-Element $root $names.Finance 8);$result.FinanceOpened=($null-ne(Find-Element $root $names.Income 10 -contains))-and($null-ne(Find-Element $root $names.Expense 5 -contains));Save-Tree $root (Join-Path $context.EvidenceRoot 'finance-ui-tree.json')
+    Invoke-Element (Find-Element $root $names.Tether 8);$result.TetherOpened=$true;$result.TetherEmptyVisible=$null-ne(Find-Element $root $names.TetherEmpty 10 -contains);Save-Tree $root (Join-Path $context.EvidenceRoot 'tether-ui-tree.json')
     Close-App
     $db=Join-Path $appDataRoot 'Data\pixel-tart.db'
     $probeOutput=& $context.DotnetPath run --project (Join-Path $context.RepoRoot 'tools\ReleaseSmoke\RC3InstalledDataProbe\RC3InstalledDataProbe.csproj') -c Release ("-p:InstalledAppRoot="+$context.InstallRoot) -- $context.Mode.ToLowerInvariant() $db $appDataRoot $context.SourceFile 2>&1

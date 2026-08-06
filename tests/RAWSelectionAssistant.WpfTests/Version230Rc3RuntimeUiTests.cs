@@ -78,6 +78,15 @@ public sealed class Version230Rc3RuntimeUiTests
     }
 
     [TestMethod]
+    public void WorkCalendar_OwnsStatusConverterRequiredByDeferredBookingTemplates()
+    {
+        Contains(
+            "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml",
+            "xmlns:conv=\"clr-namespace:RAWSelectionAssistant.Converters\"",
+            "<conv:StatusToTextConverter x:Key=\"StatusToTextConverter\" />");
+    }
+
+    [TestMethod]
     public void RuntimeDialogs_AreThemedAndNoDirectMessageBoxRemains()
     {
         var source = string.Join('\n', Directory.GetFiles(Path.Combine(Root(), "src", "RAWSelectionAssistant"), "*.cs", SearchOption.AllDirectories).Select(File.ReadAllText));
