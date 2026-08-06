@@ -12,9 +12,9 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public enum CalendarViewMode { Month, Week, Day }
 
-public sealed record CalendarStatusOption(string Label, ShootBookingStatus? Value);
-public sealed record CalendarTypeOption(string Label, string? Value);
-public sealed record CalendarSearchScopeOption(string Label, BookingSearchScope Value);
+public sealed record CalendarStatusOption(string Label, ShootBookingStatus? Value) { public override string ToString() => Label; }
+public sealed record CalendarTypeOption(string Label, string? Value) { public override string ToString() => Label; }
+public sealed record CalendarSearchScopeOption(string Label, BookingSearchScope Value) { public override string ToString() => Label; }
 
 public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
 {
@@ -72,6 +72,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.EditRequested += (_, bookingId) => _ = RequestEditorAsync(bookingId, null);
         Details.Archived += (_, _) => _ = RefreshAsync();
+        Details.Completed += (_, _) => _ = RefreshAfterBookingChangeAsync();
         Archived = new ArchivedBookingsViewModel(bookingService);
         Archived.OpenDetailsRequested += (_, id) => _ = OpenBookingAsync(id, includeArchived: true);
         Archived.Restored += (_, _) => _ = RefreshAsync();
@@ -229,6 +230,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public void FocusSearchRequested() => SearchFocusRequested?.Invoke(this, EventArgs.Empty);
     public event EventHandler? SearchFocusRequested;
 
+    public void MoveSelectedDate(int days) => SelectDate(SelectedDate.AddDays(days));
+    public void CreateBookingForSelectedDate() => CreateForDate(SelectedDate);
+
     private ShootBookingSearchRequest BuildSearchRequest(ShootBookingPageCursor? cursor) =>
         new(SearchText, SelectedStatus.Value, SelectedType.Value, cursor, 50);
 
@@ -335,6 +339,12 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             await OpenBookingAsync(saved.Id).ConfigureAwait(true);
         };
         EditorRequested?.Invoke(this, new BookingEditorRequestEventArgs(editor));
+    }
+
+    private async Task RefreshAfterBookingChangeAsync()
+    {
+        await RefreshAsync().ConfigureAwait(true);
+        if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
     }
 
     private async Task ToggleArchivedAsync()
@@ -493,8 +503,14 @@ public sealed class MonthDayViewModel
     public bool IsSelected { get; init; }
     public ObservableCollection<CalendarBookingItemViewModel> VisibleBookings { get; } = [];
     public int OverflowCount { get; init; }
+    public int BookingCount => VisibleBookings.Count + OverflowCount;
+    public string BookingCountText => BookingCount == 0 ? string.Empty : BookingCount.ToString(CultureInfo.InvariantCulture);
+    public string PrimaryStatusGlyph => VisibleBookings.FirstOrDefault()?.StatusGlyph ?? string.Empty;
+    public string WeatherGlyph => VisibleBookings.Select(item => item.MonthWeatherIcon).FirstOrDefault(value => !string.IsNullOrEmpty(value)) ?? string.Empty;
+    public bool HasConflict { get; init; }
+    public string ConflictGlyph => HasConflict ? "!" : string.Empty;
     public string OverflowText => OverflowCount > 0 ? $"另有 {OverflowCount} 项" : string.Empty;
-    public string AccessibilityName => $"{Date:yyyy年M月d日}，{VisibleBookings.Count + OverflowCount}项排期";
+    public string AccessibilityName => $"{Date:yyyy年M月d日}，{BookingCount}项排期" + (HasConflict ? "，存在时间冲突" : string.Empty);
 }
 
 public sealed class MonthCalendarViewModel
@@ -526,10 +542,20 @@ public sealed class MonthCalendarViewModel
             var matches = items.Where(item => CalendarBookingItemViewModel.SpansDate(item, date))
                 .Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id)))
                 .OrderBy(item => item.LocalStart).ToArray();
-            var day = new MonthDayViewModel { Date = date, IsCurrentMonth = date.Month == month.Month && date.Year == month.Year, IsSelected = date == selectedDate.Date, OverflowCount = Math.Max(0, matches.Length - 3) };
+            var day = new MonthDayViewModel { Date = date, IsCurrentMonth = date.Month == month.Month && date.Year == month.Year, IsSelected = date == selectedDate.Date, OverflowCount = Math.Max(0, matches.Length - 3), HasConflict = HasConflict(matches) };
             foreach (var match in matches.Take(3)) day.VisibleBookings.Add(match);
             Days.Add(day);
         }
+    }
+
+    private static bool HasConflict(IReadOnlyList<CalendarBookingItemViewModel> items)
+    {
+        for (var left = 0; left < items.Count; left++)
+            for (var right = left + 1; right < items.Count; right++)
+                if (!items[left].Booking.AllowOverlap && !items[right].Booking.AllowOverlap &&
+                    items[left].LocalStart < items[right].LocalEnd && items[right].LocalStart < items[left].LocalEnd)
+                    return true;
+        return false;
     }
 }
 

@@ -94,6 +94,15 @@ public sealed class ShootBookingService(
     public Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default) =>
         repository.SearchArchivedAsync(request with { PageSize = Math.Clamp(request.PageSize, 1, 100) }, cancellationToken);
 
+    public async Task<bool> CompleteAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var completed = await repository.CompleteAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        if (completed && auditLog is not null)
+            await auditLog.WriteAsync("Booking", "Completed", "Information", "拍摄排期已标记完成，未触发提醒已关闭。", cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (completed) BookingChanged?.Invoke(this, id);
+        return completed;
+    }
+
     public async Task<bool> ArchiveAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var archived = await repository.ArchiveAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);

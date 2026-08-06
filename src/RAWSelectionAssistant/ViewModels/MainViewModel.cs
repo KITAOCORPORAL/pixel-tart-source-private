@@ -87,6 +87,8 @@ public sealed class MainViewModel : ObservableObject
     private bool _isSettingsModalOpen;
     private bool _quickToolsCompact;
 
+    public event EventHandler<PageChangedEventArgs>? PageChanged;
+
     public MainViewModel(
         FileNameNormalizer normalizer,
         InputParserService inputParser,
@@ -143,6 +145,9 @@ public sealed class MainViewModel : ObservableObject
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
         TetherPage = tetherPage;
+        WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
+        if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
+        if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
         if (ReminderNotifications is not null) ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenCalendarRequested += WorkbenchSchedule_OpenCalendarRequested;
@@ -402,6 +407,7 @@ public sealed class MainViewModel : ObservableObject
         get => _currentPage;
         private set
         {
+            var previousPage = _currentPage;
             if (!SetProperty(ref _currentPage, value)) return;
             OnPropertyChanged(nameof(IsWorkbenchPage));
             OnPropertyChanged(nameof(IsProjectCenterPage));
@@ -423,7 +429,13 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsPhotoGroupingPage));
             OnPropertyChanged(nameof(IsCollagePage));
             OnPropertyChanged(nameof(IsToolboxPage));
+            OnPropertyChanged(nameof(CurrentPageStatus));
+            OnPropertyChanged(nameof(CurrentPageDetail));
+            OnPropertyChanged(nameof(CurrentPageProcessedText));
+            if (string.Equals(previousPage, "Tether", StringComparison.Ordinal)) TetherPage?.OnDeactivated();
+            if (IsTetherPage) TetherPage?.OnActivated();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
+            PageChanged?.Invoke(this, new(previousPage, value));
         }
     }
     public bool IsWorkbenchPage => CurrentPage is "Workbench" or "ProjectCenter";
@@ -755,10 +767,28 @@ public sealed class MainViewModel : ObservableObject
     };
 
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) { OnPropertyChanged(nameof(PendingTaskCount)); OnPropertyChanged(nameof(TaskCenterSummary)); RefreshCommands(); } } }
-    public string StatusMessage { get => _statusMessage; private set => SetProperty(ref _statusMessage, value); }
-    public string CurrentItem { get => _currentItem; private set => SetProperty(ref _currentItem, value); }
+    public string StatusMessage { get => _statusMessage; private set { if (SetProperty(ref _statusMessage, value)) OnPropertyChanged(nameof(CurrentPageStatus)); } }
+    public string CurrentPageStatus => WithBackgroundTether(CurrentPage switch
+    {
+        "Tether" => TetherPage?.StatusText ?? "看守文件夹监看准备就绪",
+        "WorkCalendar" => WorkCalendarPage.StatusText,
+        "Workbench" or "ProjectCenter" => string.IsNullOrWhiteSpace(WorkbenchSchedule?.StatusText) ? "工作台准备就绪" : WorkbenchSchedule.StatusText,
+        "Activation" => LicenseStatusMessage,
+        "Settings" => "设置更改会即时保存",
+        "Help" => "帮助与教程",
+        _ => StatusMessage
+    });
+    public string CurrentPageDetail => CurrentPage switch
+    {
+        "Tether" => TetherPage?.PreviewStatus ?? string.Empty,
+        "WorkCalendar" => WorkCalendarPage.DisplayPeriod,
+        "Workbench" or "ProjectCenter" => WorkbenchSchedule?.NextTodayText ?? string.Empty,
+        _ => CurrentItem
+    };
+    public string CurrentPageProcessedText => CurrentPage is "Workflow" or "LocalSplit" ? $"已处理 {ProcessedCount:N0}" : string.Empty;
+    public string CurrentItem { get => _currentItem; private set { if (SetProperty(ref _currentItem, value)) OnPropertyChanged(nameof(CurrentPageDetail)); } }
     public double ProgressPercent { get => _progressPercent; private set => SetProperty(ref _progressPercent, value); }
-    public long ProcessedCount { get => _processedCount; private set => SetProperty(ref _processedCount, value); }
+    public long ProcessedCount { get => _processedCount; private set { if (SetProperty(ref _processedCount, value)) OnPropertyChanged(nameof(CurrentPageProcessedText)); } }
     public int TotalCount { get => _totalCount; private set => SetProperty(ref _totalCount, value); }
     public int TargetFileCount { get => _targetFileCount; private set => SetProperty(ref _targetFileCount, value); }
     public int JpegMatchedCount { get => _jpegMatchedCount; private set => SetProperty(ref _jpegMatchedCount, value); }
@@ -887,6 +917,7 @@ public sealed class MainViewModel : ObservableObject
         foreach (var project in await _projectHistoryService.LoadVisibleAsync()) ProjectHistory.Add(project);
         OutputPresets.Clear();
         foreach (var preset in await _outputPresetService.LoadAsync()) OutputPresets.Add(preset);
+        if (WorkCalendarPage is not null) await WorkCalendarPage.InitializeAsync();
         if (WorkbenchSchedule is not null) await WorkbenchSchedule.InitializeAsync();
         if (TetherPage is not null) await TetherPage.InitializeAsync();
         if (ProjectHistory.FirstOrDefault() is { } recent) _currentProject = recent;
@@ -908,6 +939,21 @@ public sealed class MainViewModel : ObservableObject
         OnLicenseChanged();
         if (_onboardingService.NeedsUpgradeOffer) UpgradeTutorialOfferRequested?.Invoke(this, EventArgs.Empty);
     }
+
+    private void ChildPage_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is nameof(WorkCalendarViewModel.StatusText) or nameof(WorkCalendarViewModel.DisplayPeriod) or
+            nameof(TetherCaptureViewModel.StatusText) or nameof(TetherCaptureViewModel.PreviewStatus) or nameof(TetherCaptureViewModel.IsRunning) or
+            nameof(WorkbenchScheduleViewModel.StatusText) or nameof(WorkbenchScheduleViewModel.NextTodayText))
+        {
+            OnPropertyChanged(nameof(CurrentPageStatus));
+            OnPropertyChanged(nameof(CurrentPageDetail));
+        }
+    }
+
+    private string WithBackgroundTether(string pageStatus) => TetherPage?.IsRunning == true && !IsTetherPage
+        ? $"{pageStatus} · 看守文件夹会话正在后台运行"
+        : pageStatus;
 
     private async void ReminderNotifications_OpenBookingRequested(object? sender, Guid bookingId)
     {

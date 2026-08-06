@@ -18,7 +18,28 @@
         </Style>
         <DataTemplate x:Key="InspectorTemplate">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="现场监看右侧检查器">
-                <StackPanel Margin="12">
+                <StackPanel Margin="10">
+                    <Expander x:Name="SessionGroup" Header="拍摄会话" IsExpanded="True" AutomationProperties.Name="拍摄会话工具组">
+                        <StackPanel Margin="0,8,0,10">
+                            <TextBlock Text="{Binding UserFacingProviderText, StringFormat=● {0}}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                            <WrapPanel Margin="0,8,0,0"><Button Content="{Binding StartButtonText}" Style="{StaticResource PrimaryButton}" Command="{Binding StartCommand}" AutomationProperties.Name="明确启动或恢复看守" /><Button Content="停止" Style="{StaticResource SecondaryButton}" Command="{Binding StopCommand}" Margin="6,0,0,0" AutomationProperties.Name="停止看守文件夹会话" /><Button Content="顶层核对" Style="{StaticResource GhostButton}" Command="{Binding ReconcileCommand}" Margin="6,0,0,0" AutomationProperties.Name="重新核对看守文件夹顶层" /></WrapPanel>
+                            <TextBlock Text="{Binding DiscoveredCount, StringFormat=已发现 {0}}" Style="{StaticResource CaptionText}" Margin="0,7,0,0" />
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander x:Name="HistogramGroup" Header="直方图" IsExpanded="True" AutomationProperties.Name="直方图工具组">
+                        <StackPanel Margin="0,8,0,10">
+                            <Grid><TextBlock Text="RGB直方图" Style="{StaticResource SectionTitleText}" /><Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding RefreshAnalysisCommand}" AutomationProperties.Name="刷新RGB直方图" /></Grid>
+                            <views:TetherHistogramView Histogram="{Binding Histogram}" Height="132" Margin="0,8,0,0" AutomationProperties.Name="RGB直方图" />
+                            <TextBlock Text="基于监看代理图；不是RAW显影结果。" Style="{StaticResource CaptionText}" Margin="0,5,0,0" />
+                            <CheckBox Content="显示亮度参考" IsChecked="{Binding ShowLuminanceHistogram}" Margin="0,7,0,0" AutomationProperties.Name="显示亮度参考" />
+                            <Grid Margin="0,8,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><StackPanel><CheckBox Content="高光警告" IsChecked="{Binding HighlightWarningEnabled}" AutomationProperties.Name="显示高光警告" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="1" Maximum="255" Value="{Binding HighlightThreshold}" AutomationProperties.Name="高光警告阈值" /></StackPanel><StackPanel Grid.Column="1" Margin="12,0,0,0"><CheckBox Content="阴影警告" IsChecked="{Binding ShadowWarningEnabled}" AutomationProperties.Name="显示阴影警告" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="0" Maximum="254" Value="{Binding ShadowThreshold}" AutomationProperties.Name="阴影警告阈值" /></StackPanel></Grid>
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander x:Name="ExifGroup" Header="拍摄信息" IsExpanded="False" AutomationProperties.Name="拍摄信息工具组">
+                        <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="EXIF 与文件" Style="{StaticResource SectionTitleText}" />
                     <Grid Margin="0,8,0,0">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="108" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
@@ -46,19 +67,37 @@
                             <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding ShowFullPath}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></TextBlock.Style>
                         </TextBlock>
                     </Grid>
+                    <Separator Margin="0,12" />
+                    <TextBlock Text="比较" Style="{StaticResource SectionTitleText}" />
+                    <TextBlock Text="{Binding CompareCandidateText}" Style="{StaticResource CaptionText}" Margin="0,5,0,0" />
+                    <WrapPanel Margin="0,7,0,0"><Button Content="并排比较" Style="{StaticResource SecondaryButton}" Command="{Binding StartSideBySideCommand}" AutomationProperties.Name="开始并排比较" /><Button Content="重叠比较" Style="{StaticResource SecondaryButton}" Command="{Binding StartOverlayCommand}" Margin="7,0,0,0" AutomationProperties.Name="开始重叠比较" /><Button Content="退出比较" Style="{StaticResource GhostButton}" Command="{Binding ExitComparisonCommand}" Margin="7,0,0,0" AutomationProperties.Name="退出照片比较" /></WrapPanel>
+                    <CheckBox Content="同步缩放" IsChecked="{Binding ComparisonSyncZoom}" Margin="0,7,0,0" AutomationProperties.Name="比较视图同步缩放" /><CheckBox Content="同步拖动" IsChecked="{Binding ComparisonSyncPan}" Margin="0,5,0,0" AutomationProperties.Name="比较视图同步拖动" />
+                    <TextBlock Text="重叠透明度" Style="{StaticResource CaptionText}" Margin="0,7,0,0" /><Slider Minimum="0" Maximum="1" Value="{Binding ComparisonOpacity}" AutomationProperties.Name="重叠比较透明度" />
+                    <CheckBox Content="闪烁对比" IsChecked="{Binding ComparisonBlink}" Margin="0,5,0,0" AutomationProperties.Name="闪烁对比" />
+                    <Separator Margin="0,12" />
+                    <TextBlock Text="参考图叠加" Style="{StaticResource SectionTitleText}" />
+                    <TextBlock Text="{Binding ReferenceStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <WrapPanel Margin="0,7,0,0"><Button Content="选择参考图" Style="{StaticResource SecondaryButton}" Command="{Binding ChooseReferenceCommand}" AutomationProperties.Name="选择参考图" /><Button Content="重新定位" Style="{StaticResource GhostButton}" Command="{Binding RelocateReferenceCommand}" Margin="7,0,0,0" AutomationProperties.Name="重新定位参考图" /><Button Content="清除引用" Style="{StaticResource GhostButton}" Command="{Binding ClearReferenceCommand}" Margin="7,0,0,0" AutomationProperties.Name="清除参考图引用" /></WrapPanel>
+                    <CheckBox Content="显示参考图" IsChecked="{Binding ReferenceVisible}" Margin="0,7,0,0" AutomationProperties.Name="显示参考图" /><CheckBox Content="锁定参考图" IsChecked="{Binding ReferenceLocked}" Margin="0,5,0,0" AutomationProperties.Name="锁定参考图" /><CheckBox Content="左右翻转" IsChecked="{Binding ReferenceFlipHorizontal}" Margin="0,5,0,0" AutomationProperties.Name="左右翻转参考图" />
+                    <TextBlock Text="透明度" Style="{StaticResource CaptionText}" Margin="0,5,0,0" /><Slider Minimum="0" Maximum="1" Value="{Binding ReferenceOpacity}" AutomationProperties.Name="参考图透明度" />
+                        </StackPanel>
+                    </Expander>
 
-                    <Separator Margin="0,14" />
-                    <Grid><TextBlock Text="RGB直方图" Style="{StaticResource SectionTitleText}" /><Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding RefreshAnalysisCommand}" AutomationProperties.Name="刷新RGB直方图" /></Grid>
-                    <views:TetherHistogramView Histogram="{Binding Histogram}" Height="132" Margin="0,8,0,0" AutomationProperties.Name="RGB直方图" />
-                    <TextBlock Text="基于监看代理图；不是RAW显影结果。" Style="{StaticResource CaptionText}" Margin="0,5,0,0" />
-                    <CheckBox Content="显示亮度参考" IsChecked="{Binding ShowLuminanceHistogram}" Margin="0,7,0,0" AutomationProperties.Name="显示亮度参考" />
-                    <Grid Margin="0,8,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                        <StackPanel><CheckBox Content="高光警告" IsChecked="{Binding HighlightWarningEnabled}" AutomationProperties.Name="显示高光警告" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="1" Maximum="255" Value="{Binding HighlightThreshold}" AutomationProperties.Name="高光警告阈值" /></StackPanel>
-                        <StackPanel Grid.Column="1" Margin="12,0,0,0"><CheckBox Content="阴影警告" IsChecked="{Binding ShadowWarningEnabled}" AutomationProperties.Name="显示阴影警告" /><TextBlock Text="阈值" Style="{StaticResource CaptionText}" /><Slider Minimum="0" Maximum="254" Value="{Binding ShadowThreshold}" AutomationProperties.Name="阴影警告阈值" /></StackPanel>
-                    </Grid>
-                    <TextBlock Text="警告基于当前代理显示，仅供现场参考；不写入照片。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <Expander x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
+                        <StackPanel Margin="0,8,0,10">
+                    <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
+                    <UniformGrid Columns="6" Margin="0,8,0,0"><Button Content="0" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="0" AutomationProperties.Name="清除星级" /><Button Content="★1" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="1" AutomationProperties.Name="设置一星" /><Button Content="★2" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="2" AutomationProperties.Name="设置二星" /><Button Content="★3" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="3" AutomationProperties.Name="设置三星" /><Button Content="★4" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="4" AutomationProperties.Name="设置四星" /><Button Content="★5" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="5" AutomationProperties.Name="设置五星" /></UniformGrid>
+                    <ComboBox ItemsSource="{Binding ColorLabels}" SelectedItem="{Binding CurrentColorLabel}" Margin="0,7,0,0" AutomationProperties.Name="颜色标签"><ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding TargetNullValue=无颜色标签}" /></DataTemplate></ComboBox.ItemTemplate></ComboBox>
+                    <Button Content="保存颜色标签" Style="{StaticResource GhostButton}" HorizontalAlignment="Left" Margin="0,5,0,0" Command="{Binding SetColorLabelCommand}" CommandParameter="{Binding CurrentColorLabel}" AutomationProperties.Name="保存颜色标签" />
+                    <TextBlock Text="摄影师备注" FontWeight="SemiBold" Margin="0,10,0,4" /><TextBox Text="{Binding PhotographerNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="72" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="摄影师备注" />
+                    <TextBlock Text="客户备注" FontWeight="SemiBold" Margin="0,10,0,4" /><TextBox Text="{Binding ClientNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="64" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="客户备注" />
+                    <WrapPanel Margin="0,8,0,0"><Button Content="保存备注" Style="{StaticResource PrimaryButton}" Command="{Binding SaveNotesCommand}" AutomationProperties.Name="保存联机照片备注" /><Button Content="客户收藏" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleFavoriteCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换客户收藏" /><Button Content="快速拒绝 / 取消" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleRejectedCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换快速拒绝标记" AutomationProperties.HelpText="只设置拒绝标记，不删除、不移动照片" /></WrapPanel>
+                    <TextBlock Text="快速拒绝仅设置 IsRejected；不删除、不移动、不进入回收站、不调用UndoJournal。" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                        </StackPanel>
+                    </Expander>
 
-                    <Separator Margin="0,14" />
+                    <Expander x:Name="LutGroup" Header="LUT 与色彩" IsExpanded="False" AutomationProperties.Name="LUT与色彩工具组">
+                        <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="LUT 监看" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.InputSpaceWarning}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" AutomationProperties.HelpText="输入色彩空间可能未知，监看结果仅供现场参考" />
                     <WrapPanel Margin="0,7,0,0">
@@ -76,8 +115,11 @@
                     <TextBlock Text="{Binding ColorSettings.LutStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
                     <WrapPanel Margin="0,6,0,0"><Button Content="收藏LUT" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleFavoriteLutCommand}" AutomationProperties.Name="收藏或取消收藏LUT" /><Button Content="会话默认" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.SetSessionDefaultCommand}" Margin="5,0,0,0" AutomationProperties.Name="设为当前会话默认LUT" /><Button Content="项目默认" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.SetProjectDefaultCommand}" Margin="5,0,0,0" AutomationProperties.Name="设为当前项目默认LUT" /></WrapPanel>
                     <WrapPanel Margin="0,5,0,0"><Button Content="打开所在位置" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RevealLutCommand}" AutomationProperties.Name="打开LUT所在位置" /><Button Content="重新验证" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RevalidateLutCommand}" Margin="5,0,0,0" AutomationProperties.Name="重新验证LUT" /><Button Content="重新定位" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RelocateLutCommand}" Margin="5,0,0,0" AutomationProperties.Name="重新定位LUT" /><Button Content="移除引用" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.RemoveLutReferenceCommand}" Margin="5,0,0,0" AutomationProperties.Name="移除LUT引用" /></WrapPanel>
+                        </StackPanel>
+                    </Expander>
 
-                    <Separator Margin="0,14" />
+                    <Expander x:Name="ClientGroup" Header="客户监看" IsExpanded="False" AutomationProperties.Name="客户监看工具组">
+                        <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="ICC 与客户屏" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.ColorProfileStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" AutomationProperties.HelpText="ICC异常时安全回退sRGB；软件不能替代显示器校准" Margin="0,5,0,0" />
                     <TextBlock Text="客户显示器" Style="{StaticResource CaptionText}" Margin="0,7,0,0" />
@@ -90,78 +132,68 @@
                     <CheckBox Content="客户屏显示星级（默认关闭）" IsChecked="{Binding ColorSettings.ShowClientRating}" Margin="0,5,0,0" AutomationProperties.Name="客户屏显示星级" />
                     <CheckBox Content="客户屏允许收藏和备注" IsChecked="{Binding ColorSettings.ShowClientControls}" Margin="0,5,0,0" AutomationProperties.Name="客户屏允许收藏和备注" />
                     <TextBlock Text="{Binding ColorSettings.ClientMonitorStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                        </StackPanel>
+                    </Expander>
 
-                    <Separator Margin="0,14" />
-                    <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
-                    <UniformGrid Columns="6" Margin="0,8,0,0">
-                        <Button Content="0" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="0" AutomationProperties.Name="清除星级" />
-                        <Button Content="★1" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="1" AutomationProperties.Name="设置一星" />
-                        <Button Content="★2" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="2" AutomationProperties.Name="设置二星" />
-                        <Button Content="★3" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="3" AutomationProperties.Name="设置三星" />
-                        <Button Content="★4" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="4" AutomationProperties.Name="设置四星" />
-                        <Button Content="★5" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="5" AutomationProperties.Name="设置五星" />
-                    </UniformGrid>
-                    <ComboBox ItemsSource="{Binding ColorLabels}" SelectedItem="{Binding CurrentColorLabel}" Margin="0,7,0,0" AutomationProperties.Name="颜色标签">
-                        <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding TargetNullValue=无颜色标签}" /></DataTemplate></ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button Content="保存颜色标签" Style="{StaticResource GhostButton}" HorizontalAlignment="Left" Margin="0,5,0,0" Command="{Binding SetColorLabelCommand}" CommandParameter="{Binding CurrentColorLabel}" AutomationProperties.Name="保存颜色标签" />
-                    <TextBlock Text="摄影师备注" FontWeight="SemiBold" Margin="0,10,0,4" />
-                    <TextBox Text="{Binding PhotographerNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="72" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="摄影师备注" />
-                    <TextBlock Text="客户备注" FontWeight="SemiBold" Margin="0,10,0,4" />
-                    <TextBox Text="{Binding ClientNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="64" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="客户备注" />
-                    <WrapPanel Margin="0,8,0,0">
-                        <Button Content="保存备注" Style="{StaticResource PrimaryButton}" Command="{Binding SaveNotesCommand}" AutomationProperties.Name="保存联机照片备注" />
-                        <Button Content="客户收藏" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleFavoriteCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换客户收藏" />
-                        <Button Content="快速拒绝 / 取消" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleRejectedCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换快速拒绝标记" AutomationProperties.HelpText="只设置拒绝标记，不删除、不移动照片" />
-                    </WrapPanel>
-                    <TextBlock Text="{Binding AnnotationStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,0" />
-                    <TextBlock Text="快速拒绝仅设置 IsRejected；不删除、不移动、不进入回收站、不调用UndoJournal。" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <Expander x:Name="FileGroup" Header="文件处理" IsExpanded="False" AutomationProperties.Name="文件处理工具组">
+                        <StackPanel Margin="0,8,0,10">
+                            <TextBlock Text="看守目录" Style="{StaticResource SectionTitleText}" />
+                            <Grid Margin="0,6,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding WatchDirectory}" IsReadOnly="True" AutomationProperties.Name="看守文件夹路径" /><Button Grid.Column="1" Content="选择目录" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding ChooseWatchFolderCommand}" AutomationProperties.Name="选择看守文件夹目录" /></Grid>
+                            <TextBlock Text="当前为看守文件夹模式，并非相机USB直连；不提供实时取景、遥控快门、相机参数控制。IncludeSubdirectories 固定为 False，不会递归扫描文件夹。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                            <WrapPanel Margin="0,7,0,0"><CheckBox Content="导入启动前已有文件" IsChecked="{Binding ImportExisting}" AutomationProperties.Name="导入启动前已有文件" /><Button Content="预览数量" Style="{StaticResource GhostButton}" Margin="8,0,0,0" Command="{Binding PreviewExistingCommand}" AutomationProperties.Name="预览已有文件数量" /></WrapPanel>
+                            <TextBlock Text="可选安全复制（默认关闭）" Style="{StaticResource SectionTitleText}" Margin="0,12,0,0" />
+                            <CheckBox Content="复制到项目资料目录" IsChecked="{Binding CopyToProject}" Margin="0,6,0,0" AutomationProperties.Name="复制到项目资料目录" />
+                            <Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToProject}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding ProjectDestination}" IsReadOnly="True" AutomationProperties.Name="项目复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseProjectDestinationCommand}" AutomationProperties.Name="选择项目复制目标目录" /></Grid>
+                            <CheckBox Content="复制到独立备份目录" IsChecked="{Binding CopyToBackup}" Margin="0,5,0,0" AutomationProperties.Name="复制到独立备份目录" />
+                            <Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToBackup}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding BackupDestination}" IsReadOnly="True" AutomationProperties.Name="备份复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseBackupDestinationCommand}" AutomationProperties.Name="选择备份复制目标目录" /></Grid>
+                            <CheckBox Content="复制后同时校验 SHA-256（更慢）" IsChecked="{Binding VerifySha256}" Margin="0,5,0,0" AutomationProperties.Name="复制后校验SHA256" />
+                            <TextBlock Text="复制固定使用复制、新建文件和自动编号；不覆盖、不移动、不删除源文件。" Style="{StaticResource CaptionText}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </Expander>
 
-                    <Separator Margin="0,14" />
-                    <TextBlock Text="比较" Style="{StaticResource SectionTitleText}" />
-                    <TextBlock Text="{Binding CompareCandidateText}" Style="{StaticResource CaptionText}" Margin="0,5,0,0" />
-                    <WrapPanel Margin="0,7,0,0"><Button Content="并排比较" Style="{StaticResource SecondaryButton}" Command="{Binding StartSideBySideCommand}" AutomationProperties.Name="开始并排比较" /><Button Content="重叠比较" Style="{StaticResource SecondaryButton}" Command="{Binding StartOverlayCommand}" Margin="7,0,0,0" AutomationProperties.Name="开始重叠比较" /><Button Content="退出比较" Style="{StaticResource GhostButton}" Command="{Binding ExitComparisonCommand}" Margin="7,0,0,0" AutomationProperties.Name="退出照片比较" /></WrapPanel>
-                    <CheckBox Content="同步缩放" IsChecked="{Binding ComparisonSyncZoom}" Margin="0,7,0,0" AutomationProperties.Name="比较视图同步缩放" /><CheckBox Content="同步拖动" IsChecked="{Binding ComparisonSyncPan}" Margin="0,5,0,0" AutomationProperties.Name="比较视图同步拖动" />
-                    <TextBlock Text="重叠透明度" Style="{StaticResource CaptionText}" Margin="0,7,0,0" /><Slider Minimum="0" Maximum="1" Value="{Binding ComparisonOpacity}" AutomationProperties.Name="重叠比较透明度" />
-                    <CheckBox Content="闪烁对比" IsChecked="{Binding ComparisonBlink}" Margin="0,5,0,0" AutomationProperties.Name="闪烁对比" /><WrapPanel><Button Content="交换左右 / 上下层" Style="{StaticResource GhostButton}" Command="{Binding SwapComparisonCommand}" AutomationProperties.Name="交换比较位置" /><Button Content="将第二张设为主选中" Style="{StaticResource GhostButton}" Command="{Binding UseCompareCandidateAsPrimaryCommand}" Margin="6,0,0,0" AutomationProperties.Name="将第二张设为主选中" /></WrapPanel>
-
-                    <Separator Margin="0,14" />
-                    <TextBlock Text="参考图叠加" Style="{StaticResource SectionTitleText}" />
-                    <TextBlock Text="{Binding ReferenceStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                    <WrapPanel Margin="0,7,0,0"><Button Content="选择参考图" Style="{StaticResource SecondaryButton}" Command="{Binding ChooseReferenceCommand}" AutomationProperties.Name="选择参考图" /><Button Content="重新定位" Style="{StaticResource GhostButton}" Command="{Binding RelocateReferenceCommand}" Margin="7,0,0,0" AutomationProperties.Name="重新定位参考图" /><Button Content="清除引用" Style="{StaticResource GhostButton}" Command="{Binding ClearReferenceCommand}" Margin="7,0,0,0" AutomationProperties.Name="清除参考图引用" /></WrapPanel>
-                    <CheckBox Content="显示参考图" IsChecked="{Binding ReferenceVisible}" Margin="0,7,0,0" AutomationProperties.Name="显示参考图" /><CheckBox Content="锁定参考图" IsChecked="{Binding ReferenceLocked}" Margin="0,5,0,0" AutomationProperties.Name="锁定参考图" /><CheckBox Content="左右翻转" IsChecked="{Binding ReferenceFlipHorizontal}" Margin="0,5,0,0" AutomationProperties.Name="左右翻转参考图" />
-                    <TextBlock Text="透明度" Style="{StaticResource CaptionText}" Margin="0,5,0,0" /><Slider Minimum="0" Maximum="1" Value="{Binding ReferenceOpacity}" AutomationProperties.Name="参考图透明度" />
-                    <TextBlock Text="缩放" Style="{StaticResource CaptionText}" /><Slider Minimum="0.1" Maximum="8" Value="{Binding ReferenceScale}" AutomationProperties.Name="参考图缩放" /><TextBlock Text="水平位置" Style="{StaticResource CaptionText}" /><Slider Minimum="-500" Maximum="500" Value="{Binding ReferenceOffsetX}" AutomationProperties.Name="参考图水平位置" /><TextBlock Text="垂直位置" Style="{StaticResource CaptionText}" /><Slider Minimum="-500" Maximum="500" Value="{Binding ReferenceOffsetY}" AutomationProperties.Name="参考图垂直位置" />
+                    <Expander x:Name="AttentionGroup" Header="问题与恢复" IsExpanded="{Binding HasAttention, Mode=OneWay}" AutomationProperties.Name="问题与恢复工具组">
+                        <StackPanel Margin="0,8,0,10">
+                            <TextBlock Text="{Binding AttentionCount, StringFormat=需处理 {0} 项}" FontWeight="SemiBold" />
+                            <TextBlock Text="当前没有需要处理的问题" Margin="0,5,0,0">
+                                <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource CaptionText}"><Style.Triggers><DataTrigger Binding="{Binding HasAttention}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="{Binding AnnotationStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                            <TextBlock Text="部分完成或需要处理的文件会保留原始文件，并继续通过现有任务中心恢复；不会在此提供删除入口。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </ScrollViewer>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="12,10">
-        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="8">
+        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="8" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
-        <Grid>
-            <StackPanel><TextBlock Text="联机拍摄 · 现场监看" Style="{StaticResource PageTitleText}" /><TextBlock Text="当前为看守文件夹模式，并非相机USB直连 · 不提供实时取景、遥控快门、相机参数控制 · CPU代理LUT监看 · 每屏ICC安全降级 · 客户屏默认隐藏私人信息" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,3,180,0" /></StackPanel>
-            <Border HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource PanelBorder}" Padding="10,6"><StackPanel Orientation="Horizontal"><TextBlock Text="Provider  " Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ProviderText}" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}" /></StackPanel></Border>
-        </Grid>
-
-        <Expander Grid.Row="1" Header="看守目录与安全复制设置" Margin="0,8,0,6" AutomationProperties.Name="看守目录与复制设置">
-            <Border Style="{StaticResource PanelBorder}" Padding="12" Margin="0,4,0,0">
-                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="16" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                    <StackPanel><TextBlock Text="看守目录" Style="{StaticResource SectionTitleText}" /><Grid Margin="0,6,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding WatchDirectory}" IsReadOnly="True" AutomationProperties.Name="看守文件夹路径" /><Button Grid.Column="1" Content="选择目录" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding ChooseWatchFolderCommand}" AutomationProperties.Name="选择看守文件夹目录" /></Grid><TextBlock Text="只监看所选目录第一层；IncludeSubdirectories 固定为 False，不会递归扫描文件夹。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" /><WrapPanel Margin="0,7,0,0"><CheckBox Content="导入启动前已有文件" IsChecked="{Binding ImportExisting}" AutomationProperties.Name="导入启动前已有文件" /><Button Content="预览数量" Style="{StaticResource GhostButton}" Margin="8,0,0,0" Command="{Binding PreviewExistingCommand}" AutomationProperties.Name="预览已有文件数量" /><TextBlock Text="{Binding ExistingCandidateCount, StringFormat=顶层候选 {0} 个}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="7,0,0,0" /></WrapPanel></StackPanel>
-                <StackPanel Grid.Column="2"><TextBlock Text="可选安全复制（默认关闭）" Style="{StaticResource SectionTitleText}" /><CheckBox Content="复制到项目资料目录" IsChecked="{Binding CopyToProject}" Margin="0,6,0,0" AutomationProperties.Name="复制到项目资料目录" /><Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToProject}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding ProjectDestination}" IsReadOnly="True" AutomationProperties.Name="项目复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseProjectDestinationCommand}" AutomationProperties.Name="选择项目复制目标目录" /></Grid><CheckBox Content="复制到独立备份目录" IsChecked="{Binding CopyToBackup}" Margin="0,5,0,0" AutomationProperties.Name="复制到独立备份目录" /><Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToBackup}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding BackupDestination}" IsReadOnly="True" AutomationProperties.Name="备份复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseBackupDestinationCommand}" AutomationProperties.Name="选择备份复制目标目录" /></Grid><CheckBox Content="复制后同时校验 SHA-256（更慢）" IsChecked="{Binding VerifySha256}" Margin="0,5,0,0" AutomationProperties.Name="复制后校验SHA256" /><TextBlock Text="复制固定使用 Copy + CreateNew + AutoNumber；不覆盖、不移动、不删除源文件。" Style="{StaticResource CaptionText}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0" /></StackPanel>
-                </Grid>
-            </Border>
-        </Expander>
-
-        <Border Grid.Row="2" Style="{StaticResource PanelBorder}" Padding="8" Margin="0,0,0,7">
-            <Grid><TextBlock Text="{Binding StatusText}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,560,0" /><WrapPanel HorizontalAlignment="Right"><TextBlock Text="{Binding DiscoveredCount, StringFormat=已发现 {0}}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" /><TextBlock Text="{Binding ReadyCount, StringFormat= · 就绪 {0}}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" /><TextBlock Text="{Binding AttentionCount, StringFormat= · 需处理 {0}}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" /><TextBlock Text="{Binding QueueDepth, StringFormat= · 队列 {0}}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" /><Button Content="{Binding StartButtonText}" Style="{StaticResource PrimaryButton}" Command="{Binding StartCommand}" Margin="10,0,0,0" AutomationProperties.Name="明确启动或恢复看守" /><Button Content="停止" Style="{StaticResource SecondaryButton}" Command="{Binding StopCommand}" Margin="6,0,0,0" AutomationProperties.Name="停止看守文件夹会话" /><Button Content="顶层核对" Style="{StaticResource GhostButton}" Command="{Binding ReconcileCommand}" Margin="6,0,0,0" AutomationProperties.Name="重新核对看守文件夹顶层" /></WrapPanel></Grid>
+        <Border Style="{StaticResource PanelBorder}" Padding="8,6">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding UserFacingProviderText, StringFormat=● {0}}" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}"
+                               ToolTip="当前为看守文件夹模式，并非相机USB直连；不提供实时取景、遥控快门、相机参数控制。" />
+                    <TextBlock Text="{Binding ReadyCount, StringFormat= · 就绪 {0}}" Style="{StaticResource CaptionText}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding AttentionCount, StringFormat= · 需处理 {0}}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" />
+                </StackPanel>
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button Content="照片浏览器" Style="{StaticResource GhostButton}" Click="ToggleBrowser_Click" AutomationProperties.Name="显示或隐藏照片浏览器" />
+                    <CheckBox Content="自动最新" IsChecked="{Binding AutoLatest}" Margin="8,0,0,0" VerticalAlignment="Center" AutomationProperties.Name="自动跟随最新照片" />
+                    <Button Content="{Binding LockButtonText}" Style="{StaticResource GhostButton}" Command="{Binding ToggleLockCommand}" Margin="6,0,0,0" AutomationProperties.Name="锁定或解锁当前照片" />
+                    <Button Content="LUT" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleLutCommand}" Margin="6,0,0,0" AutomationProperties.Name="切换LUT" />
+                    <Button Content="客户监看" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.OpenClientMonitorCommand}" Margin="6,0,0,0" AutomationProperties.Name="开启客户监看窗口" />
+                    <Button Content="检查器" Style="{StaticResource GhostButton}" Command="{Binding ToggleInspectorCommand}" Margin="6,0,0,0" AutomationProperties.Name="显示或隐藏现场监看检查器" />
+                    <Button Content="任务中心" Style="{StaticResource GhostButton}" Click="OpenTaskCenter_Click" Margin="6,0,0,0" AutomationProperties.Name="打开任务中心" />
+                    <Button Content="{Binding FullScreenButtonText}" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleFullScreenCommand}" Margin="6,0,0,0" AutomationProperties.Name="全屏监看" />
+                </WrapPanel>
+            </Grid>
         </Border>
 
-        <Grid x:Name="MonitorWorkspace" Grid.Row="3">
-            <Grid.ColumnDefinitions><ColumnDefinition x:Name="ThumbnailColumn" Width="270" MinWidth="220" MaxWidth="300" /><ColumnDefinition Width="8" /><ColumnDefinition Width="*" MinWidth="640" /><ColumnDefinition Width="8" /><ColumnDefinition x:Name="InspectorColumn" Width="320" MinWidth="280" MaxWidth="340" /></Grid.ColumnDefinitions>
+        <Grid x:Name="MonitorWorkspace" Grid.Row="2">
+            <Grid.ColumnDefinitions><ColumnDefinition x:Name="ThumbnailColumn" Width="270" MinWidth="220" MaxWidth="300" /><ColumnDefinition x:Name="BrowserSplitterColumn" Width="8" /><ColumnDefinition Width="*" MinWidth="640" /><ColumnDefinition Width="8" /><ColumnDefinition x:Name="InspectorColumn" Width="320" MinWidth="280" MaxWidth="340" /></Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource PanelBorder}" Padding="8">
+            <Border x:Name="BrowserPanel" Style="{StaticResource PanelBorder}" Padding="8">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><ComboBox ItemsSource="{Binding FilterOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedFilter}" AutomationProperties.Name="缩略图筛选" /><ComboBox Grid.Column="1" ItemsSource="{Binding SortOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedSort}" Margin="6,0,0,0" AutomationProperties.Name="缩略图排序" /></Grid>
                     <ListBox x:Name="AssetList" Grid.Row="1" ItemsSource="{Binding AssetsView}" SelectedItem="{Binding SelectedAsset}" BorderThickness="0" Background="Transparent" Margin="0,7,0,0"
@@ -174,6 +206,8 @@
                     <TextBlock Grid.Row="2" Text="1000项使用回收虚拟化；离开视口释放缩略图，快速滚动取消旧请求。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="2,6,2,0" />
                 </Grid>
             </Border>
+
+            <GridSplitter Grid.Column="1" Width="8" HorizontalAlignment="Stretch" Background="Transparent" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="调整照片浏览器宽度" />
 
             <Border Grid.Column="2" Style="{StaticResource PanelBorder}" Padding="0" ClipToBounds="True">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>

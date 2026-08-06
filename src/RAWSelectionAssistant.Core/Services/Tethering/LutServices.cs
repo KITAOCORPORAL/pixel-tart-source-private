@@ -55,6 +55,7 @@ public sealed class LutRenderRequestCoordinator : IDisposable
         }
     }
     public bool IsCurrent(long version) { lock (_sync) return version == _version && _current is { IsCancellationRequested: false }; }
+    public void CancelCurrent() { lock (_sync) { _current?.Cancel(); _current?.Dispose(); _current = null; _version++; } }
     public void Dispose() { lock (_sync) { _current?.Cancel(); _current?.Dispose(); _current = null; } }
 }
 
