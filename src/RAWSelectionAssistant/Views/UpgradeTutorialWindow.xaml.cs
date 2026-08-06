@@ -6,15 +6,17 @@ public partial class UpgradeTutorialWindow : Window
 {
     public UpgradeTutorialWindow() => InitializeComponent();
 
+    public bool Accepted { get; private set; }
+
     private void Start_Click(object sender, RoutedEventArgs e)
     {
-        DialogResult = true;
+        Accepted = true;
         Close();
     }
 
     private void Later_Click(object sender, RoutedEventArgs e)
     {
-        DialogResult = false;
+        Accepted = false;
         Close();
     }
 }

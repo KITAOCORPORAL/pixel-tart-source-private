@@ -164,6 +164,9 @@
                             <Button Content="联机拍摄" Tag="{StaticResource IconWorkspace}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄（看守文件夹）" AutomationProperties.Name="联机拍摄">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsTetherPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
+                            <Button Content="收支" Tag="{StaticResource IconHistory}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsFinancePage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
                             <Button Content="项目历史" Tag="{StaticResource IconHistory}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" />
                             <Separator />
                             <TextBlock Text="应用" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -186,7 +189,7 @@
                         <Grid>
                             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                             <TextBlock Text="{Binding EditionLabel}" Foreground="{DynamicResource BrandDeepBrush}" FontSize="12" FontWeight="SemiBold" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Button Content="升级" Style="{StaticResource GhostButton}" Foreground="{DynamicResource BrandDeepBrush}" HorizontalAlignment="Right" Padding="5,2" MinHeight="24" Command="{Binding NavigateCommand}" CommandParameter="Activation" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Button Content="升级" Style="{StaticResource GhostButton}" Foreground="{DynamicResource BrandDeepBrush}" HorizontalAlignment="Right" Padding="5,2" MinHeight="24" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="查看授权与版本" AutomationProperties.Name="查看授权与版本" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <TextBlock Grid.Row="1" Text="授权服务准备中" Style="{StaticResource CaptionText}" FontSize="10" Margin="0,3,0,0" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Ellipse Width="8" Height="8" Fill="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsSidebarCollapsed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </Grid>
@@ -221,6 +224,7 @@
                 <Grid Grid.Column="1">
                 <views:WorkCalendarView DataContext="{Binding WorkCalendarPage}" Visibility="{Binding DataContext.IsWorkCalendarPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <views:TetherCaptureView x:Name="TetherMonitorView" DataContext="{Binding TetherPage}" Visibility="{Binding DataContext.IsTetherPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" FullScreenChanged="TetherCaptureView_FullScreenChanged" />
+                <views:FinanceView DataContext="{Binding FinancePage}" Visibility="{Binding DataContext.IsFinancePage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Grid x:Name="WorkflowWorkspace" Margin="14" Visibility="{Binding IsWorkflowPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="12" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Border Style="{StaticResource PanelBorder}" Padding="10">
@@ -330,17 +334,21 @@
                         <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
                             <Grid Margin="0,0,5,0">
                                 <Button x:Name="StartLocalSplitCard" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit"
-                                        Padding="22" HorizontalContentAlignment="Stretch" Background="{DynamicResource WorkbenchHeroBrush}"
-                                        BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
-                                        ToolTip="{Binding LocalSplitHelpText}" AutomationProperties.Name="开始本地分片"
-                                        AutomationProperties.HelpText="{Binding LocalSplitHelpText}">
-                                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="48" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Border Width="38" Height="38" Background="#22FFFFFF" CornerRadius="8" VerticalAlignment="Center"><Path Width="20" Height="20" Stretch="Uniform" Stroke="{DynamicResource TextPrimaryBrush}" StrokeThickness="1.8" Data="{StaticResource ToolIconLocalSplit}" /></Border><TextBlock Grid.Column="1" Text="开始本地分片" FontSize="19" FontWeight="SemiBold" VerticalAlignment="Center" /></Grid>
-                                </Button>
-                                <Button Content="?" Width="26" Height="26" Margin="0,11,11,0" HorizontalAlignment="Right" VerticalAlignment="Top"
-                                        Padding="0" Style="{StaticResource GhostButton}" ToolTip="{Binding LocalSplitHelpText}"
-                                        ToolTipService.InitialShowDelay="150" ToolTipService.ShowDuration="12000"
-                                        AutomationProperties.Name="本地分片说明" AutomationProperties.HelpText="{Binding LocalSplitHelpText}"
-                                        FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" Focusable="True" />
+                                        Background="{DynamicResource WorkbenchHeroBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                                        ToolTip="{Binding LocalSplitHelpText}"
+                                        AutomationProperties.Name="开始本地分片" AutomationProperties.HelpText="{Binding LocalSplitHelpText}" />
+                                <Grid Margin="22,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="48" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                    <Border Width="38" Height="38" Background="#22FFFFFF" CornerRadius="8" VerticalAlignment="Center" IsHitTestVisible="False"><Path Width="20" Height="20" Stretch="Uniform" Stroke="{DynamicResource TextPrimaryBrush}" StrokeThickness="1.8" Data="{StaticResource ToolIconLocalSplit}" /></Border>
+                                    <TextBlock Grid.Column="1" Text="开始本地分片" FontSize="19" FontWeight="SemiBold" VerticalAlignment="Center" IsHitTestVisible="False" />
+                                    <Button x:Name="LocalSplitHelpButton" Grid.Column="2" Content="?" Width="26" Height="26" Margin="8,0,0,0"
+                                            Padding="0" Style="{StaticResource GhostButton}" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" Focusable="True"
+                                            GotKeyboardFocus="LocalSplitHelpButton_GotKeyboardFocus" LostKeyboardFocus="LocalSplitHelpButton_LostKeyboardFocus" PreviewKeyDown="LocalSplitHelpButton_PreviewKeyDown"
+                                            ToolTipService.InitialShowDelay="100" ToolTipService.BetweenShowDelay="100" ToolTipService.ShowDuration="12000"
+                                            AutomationProperties.Name="本地分片说明" AutomationProperties.HelpText="{Binding LocalSplitHelpText}">
+                                        <Button.ToolTip><ToolTip x:Name="LocalSplitHelpToolTip" MaxWidth="340" Placement="Bottom"><TextBlock Text="导入TXT、客户选图JPG或编号记录，匹配本地JPG、RAW及相关文件。" TextWrapping="Wrap" /></ToolTip></Button.ToolTip>
+                                    </Button>
+                                </Grid>
                             </Grid>
                             <ItemsControl x:Name="PinnedQuickToolsList" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding DisplayedPinnedToolboxItems}"
                                           AllowDrop="True" PreviewMouseLeftButtonDown="PinnedQuickTools_MouseLeftButtonDown"
@@ -403,11 +411,16 @@
                                                                 <TextBlock Text="{Binding DisplayName}" />
                                                             </StackPanel>
                                                         </Button>
-                                                        <Button Content="{Binding PinGlyph}" Style="{StaticResource GhostButton}" ToolTip="{Binding PinToolTip}"
-                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,2" MinHeight="22"
+                                                        <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Padding="5,2" CornerRadius="4" Background="{DynamicResource SurfaceSecondaryBrush}" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TextBlock Text="已固定" FontSize="10" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
+                                                        </Border>
+                                                        <Button Content="{Binding PinGlyph}" ToolTip="{Binding PinToolTip}"
+                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,2" MinHeight="22" FontSize="16"
                                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                                AutomationProperties.Name="{Binding PinAutomationName}" />
+                                                                AutomationProperties.Name="{Binding PinAutomationName}">
+                                                            <Button.Style><Style TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}" /><Setter Property="FontWeight" Value="Bold" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                                                        </Button>
                                                     </Grid>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
@@ -613,8 +626,8 @@
             </Border>
         </Border>
 
-        <Border Grid.Row="1" Panel.ZIndex="900" Style="{StaticResource ToastCard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,18,22,0" Visibility="{Binding IsToastVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel Orientation="Horizontal"><TextBlock Text="{Binding ToastMessage}" Foreground="{DynamicResource SurfacePrimaryBrush}" VerticalAlignment="Center" /><Button Content="关闭" Style="{StaticResource GhostButton}" Foreground="{DynamicResource SurfacePrimaryBrush}" Padding="8,2" MinHeight="24" Margin="10,0,0,0" Command="{Binding DismissToastCommand}" AutomationProperties.Name="关闭通知" /></StackPanel>
+        <Border Grid.Row="2" Panel.ZIndex="900" Style="{StaticResource ToastCard}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,22,46" Visibility="{Binding IsToastVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal"><TextBlock Text="{Binding ToastMessage}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" /><Button Content="关闭" Style="{StaticResource GhostButton}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="8,2" MinHeight="24" Margin="10,0,0,0" Command="{Binding DismissToastCommand}" AutomationProperties.Name="关闭通知" /></StackPanel>
         </Border>
 
         <views:ReminderNotificationHost Grid.Row="1" Panel.ZIndex="920" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,18,22,0" DataContext="{Binding ReminderNotifications}" />

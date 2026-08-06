@@ -104,6 +104,7 @@ public partial class TetherCaptureView : UserControl
     private void ApplyResponsiveLayout(double windowWidth)
     {
         var compact = windowWidth < 1350;
+        var compactToolbar = windowWidth < 1520;
         ThumbnailColumn.MinWidth = _isBrowserCollapsed ? 0 : 220;
         ThumbnailColumn.MaxWidth = _isBrowserCollapsed ? 0 : 300;
         ThumbnailColumn.Width = _isBrowserCollapsed ? new GridLength(0) : new GridLength(compact ? 230 : 270);
@@ -113,6 +114,13 @@ public partial class TetherCaptureView : UserControl
         InspectorColumn.MaxWidth = compact ? 0 : 340;
         InspectorColumn.Width = compact ? new GridLength(0) : new GridLength(320);
         InspectorPanel.Visibility = compact ? Visibility.Collapsed : Visibility.Visible;
+        BrowserToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
+        ClientMonitorToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
+        InspectorToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
+        TaskCenterToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
+        CompactMoreButton.Visibility = compactToolbar ? Visibility.Visible : Visibility.Collapsed;
+        SessionSummaryText.MaxWidth = compactToolbar ? 220 : double.PositiveInfinity;
+        SessionSummaryText.TextTrimming = compactToolbar ? TextTrimming.CharacterEllipsis : TextTrimming.None;
         if (ViewModel is not null)
         {
             ViewModel.IsInspectorCollapsed = compact;
@@ -130,6 +138,14 @@ public partial class TetherCaptureView : UserControl
     {
         if (Window.GetWindow(this)?.DataContext is MainViewModel viewModel)
             viewModel.NavigateCommand.Execute("Workbench");
+    }
+
+    private void OpenCompactMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { ContextMenu: { } menu } button) return;
+        menu.DataContext = DataContext;
+        menu.PlacementTarget = button;
+        menu.IsOpen = true;
     }
 
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
