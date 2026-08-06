@@ -13,6 +13,24 @@ public sealed class StatusToTextConverter : IValueConverter
         {
             MatchStatus status => status.ToChinese(),
             MediaOverallStatus status => status.ToChinese(),
+            ShootBookingStatus status => status switch
+            {
+                ShootBookingStatus.Tentative => "待确定",
+                ShootBookingStatus.Confirmed => "已确认",
+                ShootBookingStatus.Preparing => "准备中",
+                ShootBookingStatus.Shooting => "拍摄中",
+                ShootBookingStatus.Completed => "已拍摄",
+                ShootBookingStatus.AwaitingSelectionDelivery => "待发送选片",
+                ShootBookingStatus.AwaitingSelection => "待选片",
+                ShootBookingStatus.Selected => "已选片",
+                ShootBookingStatus.AwaitingRetouch => "待精修",
+                ShootBookingStatus.Retouched => "已精修",
+                ShootBookingStatus.AwaitingDelivery => "待交付",
+                ShootBookingStatus.Delivered => "已交付",
+                ShootBookingStatus.Cancelled => "已取消",
+                ShootBookingStatus.Postponed => "已延期",
+                _ => "未知状态"
+            },
             _ => string.Empty
         };
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;

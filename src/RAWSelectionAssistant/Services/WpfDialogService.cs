@@ -43,13 +43,13 @@ public sealed class WpfDialogService : IDialogService
     }
 
     public void ShowInfo(string message) =>
-        MessageBox.Show(Application.Current.MainWindow, message, Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+        ThemedMessageDialog.Show(Application.Current.MainWindow, Branding.ProductName, message, ThemedMessageKind.Information);
 
     public void ShowError(string message) =>
-        MessageBox.Show(Application.Current.MainWindow, message, Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+        ThemedMessageDialog.Show(Application.Current.MainWindow, Branding.ProductName, message, ThemedMessageKind.Error);
 
     public bool Confirm(string message, string title) =>
-        MessageBox.Show(Application.Current.MainWindow, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+        ThemedMessageDialog.Show(Application.Current.MainWindow, title, message, ThemedMessageKind.Question, confirmation: true);
 
     public HelpAction ShowHelp()
     {

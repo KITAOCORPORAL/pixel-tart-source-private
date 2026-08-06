@@ -168,7 +168,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ResetViewCommand = new RelayCommand(_ => ResetView());
         ToggleLockCommand = new RelayCommand(_ => IsCurrentLocked = !IsCurrentLocked, _ => SelectedAsset is not null);
         UnlockLatestCommand = new RelayCommand(_ => UnlockAndSelectLatest(), _ => NewAssetCount > 0 || IsCurrentLocked);
-        ToggleFullScreenCommand = new RelayCommand(_ => IsFullScreen = !IsFullScreen);
+        ToggleFullScreenCommand = new RelayCommand(_ => IsFullScreen = !IsFullScreen, _ => SelectedAsset is not null);
         ToggleInspectorCommand = new RelayCommand(_ => ShowInspectorDrawer = !ShowInspectorDrawer);
         SetRatingCommand = new AsyncRelayCommand(SetRatingAsync, _ => SelectedAsset is not null && !IsAnnotationSaving);
         SetColorLabelCommand = new AsyncRelayCommand(SetColorLabelAsync, _ => SelectedAsset is not null && !IsAnnotationSaving);
@@ -257,7 +257,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool CopyToProject { get => _copyToProject; set { if (SetProperty(ref _copyToProject, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool CopyToBackup { get => _copyToBackup; set { if (SetProperty(ref _copyToBackup, value)) { OnPropertyChanged(nameof(CopyStatusText)); RefreshCommands(); } } }
     public bool VerifySha256 { get => _verifySha256; set => SetProperty(ref _verifySha256, value); }
-    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); OnPropertyChanged(nameof(UserFacingProviderText)); RefreshCommands(); } } }
+    public bool IsRunning { get => _isRunning; private set { if (SetProperty(ref _isRunning, value)) { OnPropertyChanged(nameof(ProviderText)); OnPropertyChanged(nameof(UserFacingProviderText)); NotifyEmptyState(); RefreshCommands(); } } }
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) RefreshCommands(); } }
     public int ExistingCandidateCount { get => _existingCandidateCount; private set => SetProperty(ref _existingCandidateCount, value); }
     public int QueueDepth { get => _queueDepth; private set => SetProperty(ref _queueDepth, value); }
@@ -286,11 +286,16 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             if (!SetProperty(ref _selectedAsset, value)) return;
             if (value is not null && !_suppressManualSelection) _selectionCoordinator.SelectManually(value.Record.Id);
             OnPropertyChanged(nameof(HasSelection));
+            NotifyEmptyState();
             RefreshCommands();
             if (value is not null && IsPageActive) Track(LoadSelectedAsync(value, _lifetime.Token));
         }
     }
     public bool HasSelection => SelectedAsset is not null;
+    public bool ShowTetherEmptyState => SelectedAsset is null;
+    public string TetherEmptyStateText => !IsRunning
+        ? "尚未启动联机会话，请先选择相机软件正在写入照片的文件夹。"
+        : Assets.Count == 0 ? "联机会话正在运行，等待新照片写入。" : "请选择一张已就绪照片开始监看。";
     public TetherAssetItemViewModel? CompareCandidate { get => _compareCandidate; private set { if (SetProperty(ref _compareCandidate, value)) { OnPropertyChanged(nameof(CompareCandidateText)); RefreshCommands(); } } }
     public string CompareCandidateText => CompareCandidate is null ? "尚未选择第二张" : $"第二张：{CompareCandidate.FileName}";
     public BitmapSource? CurrentImage { get => _currentImage; private set => SetProperty(ref _currentImage, value); }
@@ -469,9 +474,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _reviewStateActive = true;
         var now = DateTimeOffset.UtcNow;
         var disconnected = state == "TetherDirectoryDisconnected";
+        var notStarted = state == "TetherEmpty";
         var session = new TetherSessionRecord(Guid.Parse("23000000-0000-0000-0000-000000000003"), null, CameraProviderType.WatchFolder, "[合成测试目录]", "[合成测试目录]", disconnected ? TetherSessionState.NeedsAttention : TetherSessionState.Running, now, now, true, false, null, false, null, now, LastErrorCode: disconnected ? ErrorCodeCatalog.SourceNotFound : null);
-        IsRunning = !disconnected;
         ApplySnapshot(new(session, assets, 0, false));
+        IsRunning = !disconnected && !notStarted;
         if (annotations is not null)
             foreach (var pair in annotations) if (_assetIndex.TryGetValue(pair.Key, out var item)) item.ApplyAnnotation(pair.Value);
         SelectedAsset = Assets.FirstOrDefault();
@@ -479,6 +485,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         StatusText = state switch
         {
             "TetherEmpty" => "阶段C评审：等待看守文件夹送入第一张照片。",
+            "TetherWaiting" => "RC3 运行时验收：联机会话正在运行，等待新照片写入。",
+            "TetherReady" => "RC3 运行时验收：已就绪照片可安全开始现场监看。",
+            "TetherCompactToolbar" => "RC3 运行时验收：窄屏工具栏保持单行，次要操作收纳到更多菜单。",
+            "TetherNoPhotoFullscreen" => "RC3 运行时验收：暂无可显示照片；按 Esc 退出全屏。",
             "TetherAssets" => "阶段C评审：缩略图、主画布和检查器已联动。",
             "TetherBrowser" => "RC2 运行时验收：左侧浏览器保持紧凑并显示当前选择。",
             "TetherViewer" => "RC2 运行时验收：中央监看画布保持主区域。",
@@ -545,6 +555,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             case "TetherGuides": GuideMode = TetherGuideMode.Thirds; break;
             case "TetherAnnotations": CurrentRating = 5; CurrentColorLabel = "绿"; ClientFavorite = true; PhotographerNote = "主光位置确认，保留这一张。"; ClientNote = "客户现场收藏"; break;
             case "TetherFullscreen": IsFullScreen = true; break;
+            case "TetherNoPhotoFullscreen": IsFullScreen = true; break;
             case "TetherRawPlaceholder": SelectedAsset = Assets.FirstOrDefault(item => item.Record.MediaKind == TetherMediaKind.Raw); break;
             case "TetherNeedsAttention": SelectedFilter = TetherAssetFilter.NeedsAttention; SelectedAsset = Assets.FirstOrDefault(item => item.NeedsAttention); break;
         }
@@ -1018,7 +1029,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ChooseWatchFolderCommand.RaiseCanExecuteChanged(); PreviewExistingCommand.RaiseCanExecuteChanged();
         ChooseProjectDestinationCommand.RaiseCanExecuteChanged(); ChooseBackupDestinationCommand.RaiseCanExecuteChanged();
         StartCommand.RaiseCanExecuteChanged(); StopCommand.RaiseCanExecuteChanged(); ReconcileCommand.RaiseCanExecuteChanged(); ClearProxyCacheCommand.RaiseCanExecuteChanged();
-        PreviousCommand.RaiseCanExecuteChanged(); NextCommand.RaiseCanExecuteChanged(); ActualSizeCommand.RaiseCanExecuteChanged(); ToggleLockCommand.RaiseCanExecuteChanged(); UnlockLatestCommand.RaiseCanExecuteChanged();
+        PreviousCommand.RaiseCanExecuteChanged(); NextCommand.RaiseCanExecuteChanged(); ActualSizeCommand.RaiseCanExecuteChanged(); ToggleLockCommand.RaiseCanExecuteChanged(); UnlockLatestCommand.RaiseCanExecuteChanged(); ToggleFullScreenCommand.RaiseCanExecuteChanged();
         SetRatingCommand.RaiseCanExecuteChanged(); SetColorLabelCommand.RaiseCanExecuteChanged(); SaveNotesCommand.RaiseCanExecuteChanged(); ToggleFavoriteCommand.RaiseCanExecuteChanged(); ToggleRejectedCommand.RaiseCanExecuteChanged();
         StartSideBySideCommand.RaiseCanExecuteChanged(); StartOverlayCommand.RaiseCanExecuteChanged(); ExitComparisonCommand.RaiseCanExecuteChanged(); SwapComparisonCommand.RaiseCanExecuteChanged(); UseCompareCandidateAsPrimaryCommand.RaiseCanExecuteChanged(); ClearReferenceCommand.RaiseCanExecuteChanged(); RefreshAnalysisCommand.RaiseCanExecuteChanged();
     }
@@ -1027,7 +1038,13 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         OnPropertyChanged(nameof(ReadyCount)); OnPropertyChanged(nameof(AttentionCount)); OnPropertyChanged(nameof(HasAttention)); OnPropertyChanged(nameof(DiscoveredCount));
         OnPropertyChanged(nameof(WaitingStableCount)); OnPropertyChanged(nameof(FailedCount)); OnPropertyChanged(nameof(CopyStatusText));
-        OnPropertyChanged(nameof(NewAssetCount)); OnPropertyChanged(nameof(NewAssetText)); RefreshCommands();
+        OnPropertyChanged(nameof(NewAssetCount)); OnPropertyChanged(nameof(NewAssetText)); NotifyEmptyState(); RefreshCommands();
+    }
+
+    private void NotifyEmptyState()
+    {
+        OnPropertyChanged(nameof(ShowTetherEmptyState));
+        OnPropertyChanged(nameof(TetherEmptyStateText));
     }
 
     private void Track(Task task)

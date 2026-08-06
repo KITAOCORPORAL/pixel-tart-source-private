@@ -23,14 +23,16 @@ public sealed class Version230TetherUiTests
     public void TetherPage_ClearlyLabelsWatchFolderNotUsbDirect()
     {
         var xaml = TetherXaml();
-        Contains(xaml, "当前为看守文件夹模式，并非相机USB直连", "不提供实时取景、遥控快门、相机参数控制", "ProviderText");
+        Contains(xaml, "当前通过看守文件夹接收照片", "不提供实时取景、遥控快门或相机参数控制", "UserFacingProviderText");
+        Assert.IsFalse(xaml.Contains("USB", StringComparison.Ordinal));
     }
 
     [TestMethod]
     public void TetherPage_RequiresExplicitStartAndShowsNonRecursiveBoundary()
     {
         var xaml = TetherXaml();
-        Contains(xaml, "StartButtonText", "AutomationProperties.Name=\"明确启动或恢复看守\"", "IncludeSubdirectories 固定为 False", "不会递归扫描文件夹");
+        Contains(xaml, "StartButtonText", "AutomationProperties.Name=\"明确启动或恢复看守\"", "只监看所选文件夹顶层", "不会递归扫描子文件夹");
+        Assert.IsFalse(xaml.Contains("IncludeSubdirectories", StringComparison.Ordinal));
     }
 
     [TestMethod]

@@ -19,7 +19,7 @@ public partial class CandidateSelectionWindow : Window
     {
         if (CandidatesGrid.SelectedItem is not RawFileEntry candidate)
         {
-            MessageBox.Show(this, "请选择一个 RAW 候选文件。", Branding.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+            ThemedMessageDialog.Show(this, Branding.ProductName, "请选择一个 RAW 候选文件。", ThemedMessageKind.Information);
             return;
         }
 

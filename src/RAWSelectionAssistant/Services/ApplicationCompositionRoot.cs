@@ -1,5 +1,6 @@
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Business;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
@@ -51,6 +52,10 @@ public sealed class ApplicationCompositionRoot
         BookingReminderService = new BookingReminderService(ReminderRepository, ShootBookingService, auditLog);
         BookingReminderNotificationService = new BookingReminderNotificationService(notificationCenter);
         BookingReminderScheduler = new BookingReminderScheduler(ReminderRepository, ShootBookingService, BookingReminderNotificationService, auditLog);
+        BookingPeopleRepository = new SqliteBookingPeopleRepository(database);
+        BookingPeopleService = new BookingPeopleService(BookingPeopleRepository);
+        FinanceRepository = new SqliteFinanceRepository(database);
+        FinanceService = new FinanceService(FinanceRepository);
         WorkbenchScheduleService = new WorkbenchScheduleService(ShootBookingService, BookingDocumentRepository, ReminderRepository, projectRepository: ProjectRepository);
         TetherSessionRepository = new SqliteTetherSessionRepository(database);
         TetherAssetRepository = new SqliteTetherAssetRepository(database);
@@ -85,6 +90,10 @@ public sealed class ApplicationCompositionRoot
     public IBookingReminderService BookingReminderService { get; }
     public IBookingReminderNotificationService BookingReminderNotificationService { get; }
     public IBookingReminderScheduler BookingReminderScheduler { get; }
+    public IBookingPeopleRepository BookingPeopleRepository { get; }
+    public IBookingPeopleService BookingPeopleService { get; }
+    public IFinanceRepository FinanceRepository { get; }
+    public IFinanceService FinanceService { get; }
     public IWorkbenchScheduleService WorkbenchScheduleService { get; }
     public ITetherSessionRepository TetherSessionRepository { get; }
     public ITetherAssetRepository TetherAssetRepository { get; }

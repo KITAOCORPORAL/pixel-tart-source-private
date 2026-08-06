@@ -55,4 +55,14 @@ public partial class WorkbenchCalendarPanel : UserControl
         if (Window.GetWindow(this)?.DataContext is MainViewModel viewModel)
             viewModel.NavigateCommand.Execute("WorkCalendar");
     }
+
+    private void ViewDayDetails_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuItem { Parent: ContextMenu contextMenu } &&
+            contextMenu.PlacementTarget is FrameworkElement { DataContext: MonthDayViewModel day } &&
+            DataContext is WorkCalendarViewModel viewModel)
+        {
+            viewModel.Month.SelectDateCommand.Execute(day);
+        }
+    }
 }

@@ -38,6 +38,7 @@ public partial class WorkCalendarView : UserControl
     {
         var previousFocus = Keyboard.FocusedElement;
         var owner = Window.GetWindow(this);
+        var ownerOpacity = owner?.Opacity ?? 1d;
         var window = new Window
         {
             Title = e.Editor.DialogTitle,
@@ -52,7 +53,19 @@ public partial class WorkCalendarView : UserControl
         };
         window.InputBindings.Add(new KeyBinding(e.Editor.CancelCommand, Key.Escape, ModifierKeys.None));
         e.Editor.CloseRequested += (_, _) => window.Close();
+        window.Closing += (_, args) =>
+        {
+            if (!e.Editor.WasSaved && !e.Editor.ConfirmDiscardChanges()) args.Cancel = true;
+        };
         window.Closed += (_, _) => previousFocus?.Focus();
-        window.ShowDialog();
+        try
+        {
+            if (owner is not null) owner.Opacity = 0.72;
+            window.ShowDialog();
+        }
+        finally
+        {
+            if (owner is not null) owner.Opacity = ownerOpacity;
+        }
     }
 }
