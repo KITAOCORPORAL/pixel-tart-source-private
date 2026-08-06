@@ -356,6 +356,7 @@ public sealed class Version220CalendarUiTests
         public Task<IReadOnlyList<ShootBookingSummary>> QueryCurrentViewAsync(ShootBookingQuery query, CancellationToken cancellationToken = default) { LastCurrentQuery = query; return CurrentViewHandler?.Invoke(query, cancellationToken) ?? Task.FromResult<IReadOnlyList<ShootBookingSummary>>([]); }
         public Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default) { LastSearchRequest = request; return Task.FromResult(GlobalPage); }
         public Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default) { LastArchivedRequest = request; return Task.FromResult(ArchivedPage); }
+        public Task<bool> CompleteAsync(Guid id, CancellationToken cancellationToken = default) => Task.FromResult(true);
         public Task<bool> ArchiveAsync(Guid id, CancellationToken cancellationToken = default) { ArchiveCalls++; return Task.FromResult(true); }
         public Task<bool> RestoreAsync(Guid id, CancellationToken cancellationToken = default) { RestoreCalls++; return Task.FromResult(true); }
     }

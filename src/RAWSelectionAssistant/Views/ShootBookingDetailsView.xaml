@@ -30,7 +30,7 @@
                 <Border Style="{StaticResource InfoCard}" Margin="0,12,0,0" Visibility="{Binding IsArchived, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="此排期已归档，只提供查看和恢复；没有永久删除入口。" TextWrapping="Wrap" /></Border>
                 <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Margin="0,10,0,0" />
             </StackPanel></ScrollViewer>
-            <Border Grid.Row="2" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" Padding="12"><WrapPanel HorizontalAlignment="Right"><Button Content="归档" Style="{StaticResource SecondaryButton}" Command="{Binding ArchiveCommand}" AutomationProperties.Name="归档排期" AutomationProperties.HelpText="归档后隐藏常规日历、关闭提醒并保留全部关联数据和电脑文件" /><Button Content="编辑" Style="{StaticResource PrimaryButton}" Margin="7,0,0,0" Command="{Binding EditCommand}" AutomationProperties.Name="编辑排期" /></WrapPanel></Border>
+            <Border Grid.Row="2" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" Padding="12"><WrapPanel HorizontalAlignment="Right"><Button Content="归档" Style="{StaticResource SecondaryButton}" Command="{Binding ArchiveCommand}" AutomationProperties.Name="归档排期" AutomationProperties.HelpText="归档后隐藏常规日历、关闭提醒并保留全部关联数据和电脑文件" /><Button Content="标记拍摄完成" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding CompleteCommand}" AutomationProperties.Name="标记拍摄完成" AutomationProperties.HelpText="保留排期与提醒历史，并关闭未来未触发提醒" /><Button Content="编辑" Style="{StaticResource PrimaryButton}" Margin="7,0,0,0" Command="{Binding EditCommand}" AutomationProperties.Name="编辑排期" /></WrapPanel></Border>
         </Grid>
     </Border>
 </UserControl>
