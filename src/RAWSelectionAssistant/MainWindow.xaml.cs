@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 #endif
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Input;
@@ -158,14 +159,41 @@ public partial class MainWindow : Window
         {
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
+            _viewModel.PageChanged -= ViewModel_PageChanged;
         }
         _viewModel = e.NewValue as MainViewModel;
         if (_viewModel is not null)
         {
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested += ViewModel_CloseRequested;
+            _viewModel.PageChanged += ViewModel_PageChanged;
         }
         ScheduleTutorialLayout();
+    }
+
+    private void ViewModel_PageChanged(object? sender, PageChangedEventArgs e)
+    {
+        WorkbenchToolboxPopup.IsOpen = false;
+        QuickToolsOverflowPopup.IsOpen = false;
+        Keyboard.ClearFocus();
+        Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, () =>
+        {
+            if (_viewModel?.CurrentPage == e.CurrentPage) FocusActivePage();
+        });
+    }
+
+    private void FocusActivePage()
+    {
+        var automationName = _viewModel?.CurrentPage switch
+        {
+            "WorkCalendar" => "工作日历",
+            "Tether" => "联机拍摄现场监看工作区",
+            _ => string.Empty
+        };
+        var page = string.IsNullOrEmpty(automationName) ? null : FindVisualChildren<FrameworkElement>(RootGrid)
+            .FirstOrDefault(element => element.Visibility == Visibility.Visible &&
+                string.Equals(AutomationProperties.GetName(element), automationName, StringComparison.Ordinal));
+        (page ?? this).Focus();
     }
 
     private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -264,7 +292,6 @@ public partial class MainWindow : Window
             SidebarContainer.Visibility = Visibility.Collapsed;
             BottomStatusBar.Visibility = Visibility.Collapsed;
             TaskCenterPanel.Visibility = Visibility.Collapsed;
-            UnifiedTaskCenterPanel.Visibility = Visibility.Collapsed;
             RootGrid.RowDefinitions[0].Height = new GridLength(0);
             RootGrid.RowDefinitions[2].Height = new GridLength(0);
             WindowStyle = WindowStyle.None;
@@ -305,6 +332,15 @@ public partial class MainWindow : Window
     {
         WorkbenchToolboxPopup.IsOpen = false;
         _viewModel?.OpenToolboxPageCommand.Execute(null);
+        e.Handled = true;
+    }
+
+    private void ToolboxItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement { Tag: string targetPage }) return;
+        WorkbenchToolboxPopup.IsOpen = false;
+        Keyboard.ClearFocus();
+        _viewModel?.NavigateCommand.Execute(targetPage);
         e.Handled = true;
     }
 
@@ -420,15 +456,10 @@ public partial class MainWindow : Window
         Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 2 : 3);
         WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(320);
         TaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
-        UnifiedTaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(TaskCenterPanel, compact ? 0 : 1);
-        Grid.SetColumn(UnifiedTaskCenterPanel, compact ? 0 : 1);
         Grid.SetColumnSpan(TaskCenterPanel, compact ? 2 : 1);
-        Grid.SetColumnSpan(UnifiedTaskCenterPanel, compact ? 2 : 1);
         TaskCenterPanel.Width = compact ? 320 : double.NaN;
-        UnifiedTaskCenterPanel.Width = compact ? 320 : double.NaN;
         TaskCenterPanel.HorizontalAlignment = compact ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
-        UnifiedTaskCenterPanel.HorizontalAlignment = compact ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
         TaskDrawerButton.Visibility = compact ? Visibility.Visible : Visibility.Collapsed;
         WorkbenchQuickActions.Margin = compact ? new Thickness(0, 0, 116, 0) : new Thickness(0);
         TaskDrawerButton.Content = _taskCenterDrawerOpen ? "收起任务中心" : "任务中心";

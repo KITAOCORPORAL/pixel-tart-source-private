@@ -218,6 +218,14 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         await RenderAsync(cancellationToken);
     }
 
+    public void ReleasePageImageResources()
+    {
+        _renderRequests.CancelCurrent();
+        ShowBefore = false;
+        SourceImage = null;
+        DisplayImage = null;
+    }
+
     public void NotifyLatest(Guid assetId)
     {
         var state = _clientCoordinator.OnReady(assetId);

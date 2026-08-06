@@ -108,6 +108,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private string _annotationStatus = "标注保存在当前电脑的项目数据库中。";
     private bool _suppressManualSelection;
     private bool _reviewStateActive;
+    private bool _isPageActive;
 
     public TetherCaptureViewModel(
         WatchFolderCameraAdapter adapter,
@@ -264,6 +265,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public string StartButtonText => HasRecoverableSession ? "恢复目录并继续" : "启动看守";
     public string ProviderText => IsRunning ? "Watch Folder" : "None";
+    public string UserFacingProviderText => IsRunning ? "看守文件夹会话正在运行" : "尚未启动联机会话";
+    public bool IsPageActive { get => _isPageActive; private set => SetProperty(ref _isPageActive, value); }
     public bool IncludeSubdirectories => false;
     public int ReadyCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.Ready or TetherProcessingState.Copied);
     public int AttentionCount => Assets.Count(item => item.Record.ProcessingState is TetherProcessingState.NeedsAttention or TetherProcessingState.PartiallyCompleted);
@@ -283,7 +286,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             if (value is not null && !_suppressManualSelection) _selectionCoordinator.SelectManually(value.Record.Id);
             OnPropertyChanged(nameof(HasSelection));
             RefreshCommands();
-            if (value is not null) Track(LoadSelectedAsync(value, _lifetime.Token));
+            if (value is not null && IsPageActive) Track(LoadSelectedAsync(value, _lifetime.Token));
         }
     }
     public bool HasSelection => SelectedAsset is not null;
@@ -411,6 +414,34 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public void ToggleFitActual() { if (IsActualSize) SetPreviewMode(TetherPreviewMode.Fit); else if (ActualSizeCommand.CanExecute(null)) ActualSizeCommand.Execute(null); }
     public void BeginNoteEditing() => _selectionCoordinator.IsEditingNote = true;
     public void EndNoteEditing() => _selectionCoordinator.IsEditingNote = false;
+
+    public void OnActivated()
+    {
+        if (IsPageActive) return;
+        IsPageActive = true;
+        if (SelectedAsset is not null) Track(LoadSelectedAsync(SelectedAsset, _lifetime.Token));
+    }
+
+    public void OnDeactivated()
+    {
+        if (!IsPageActive) return;
+        IsPageActive = false;
+        _requestCoordinator.CancelCurrent();
+        _fullResolutionLoader.ReleaseExcept(null);
+        _selectionCoordinator.HasActiveInteraction = false;
+        _selectionCoordinator.IsActualSize = false;
+        IsPreviewLoading = false;
+        PreviewProgress = 0;
+        CurrentImage = null;
+        ComparisonPrimaryImage = null;
+        ComparisonSecondaryImage = null;
+        ClippingOverlay = null;
+        ReferenceImage = null;
+        Histogram = null;
+        ExifInfo = null;
+        foreach (var item in Assets) item.ReleaseThumbnail();
+        ColorSettings.ReleasePageImageResources();
+    }
 
     public async ValueTask DisposeAsync()
     {
