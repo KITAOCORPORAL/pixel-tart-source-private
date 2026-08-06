@@ -227,8 +227,18 @@ public partial class MainWindow
         calendar.Week.Configure(WorkCalendarViewModel.StartOfWeek(DateTime.Today), items, DateTime.Today, weather);
         calendar.Day.Configure(DateTime.Today, items, weather);
         calendar.DaySchedule.Configure(DateTime.Today, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, DateTime.Today)).ToArray(), weather);
-        typeof(WorkCalendarViewModel).GetProperty(nameof(WorkCalendarViewModel.StatusText))?.SetValue(calendar,
-            state == "CalendarEmptyMonth" ? "RC2 运行时验收：当前月份没有拍摄排期。" : "RC2 运行时验收：状态颜色、数量、冲突和天气标记。");
+        var statusText = state switch
+        {
+            "CalendarEmptyMonth" => "RC2 运行时验收：当前月份没有拍摄排期。",
+            "CalendarStatusColors" => "RC2 运行时验收：状态颜色、数量、冲突和天气标记。",
+            "CalendarSelectedDay" => "RC2 运行时验收：已选择今天并同步右侧日期详情。",
+            "CalendarCreateButton" => "RC2 运行时验收：加号默认使用当前选中日期。",
+            "CalendarDayDetails" => "RC2 运行时验收：日期详情与月历使用同一数据源。",
+            "CalendarCompleted" => "RC2 运行时验收：完成状态保留在日历中且不自动归档。",
+            "CalendarArchived" => "RC2 运行时验收：归档入口独立，恢复不删除排期数据。",
+            _ => "RC2 运行时验收：工作台与完整工作日历共享正式日历模型。"
+        };
+        typeof(WorkCalendarViewModel).GetProperty(nameof(WorkCalendarViewModel.StatusText))?.SetValue(calendar, statusText);
     }
 
     private async Task<ShootBookingEditorViewModel> CreateBookingEditorReviewStateAsync(string state)
