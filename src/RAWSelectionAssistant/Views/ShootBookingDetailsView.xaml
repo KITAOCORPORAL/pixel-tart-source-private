@@ -4,7 +4,17 @@
              xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
              AutomationProperties.Name="拍摄排期详情"
              AutomationProperties.HelpText="切换排期时默认回到概览并重置滚动位置；金额默认遮罩，归档不会删除任何电脑文件">
-    <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="BookingDetailsTabItemStyle" TargetType="TabItem">
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="Template">
+                <Setter.Value><ControlTemplate TargetType="TabItem"><Border x:Name="HeaderSurface" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" CornerRadius="5,5,0,0" Padding="{TemplateBinding Padding}"><ContentPresenter ContentSource="Header" HorizontalAlignment="Center" /></Border><ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True"><Setter TargetName="HeaderSurface" Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter TargetName="HeaderSurface" Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="HeaderSurface" Property="Background" Value="{DynamicResource SurfaceHoverBrush}" /></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Border Style="{StaticResource PanelBorder}" Padding="0">
         <Grid>
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
@@ -15,10 +25,12 @@
                 </Grid>
             </Border>
 
-            <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabIndex}" BorderThickness="0" Background="Transparent">
+            <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabIndex}" BorderThickness="0" Background="{DynamicResource SurfacePrimaryBrush}" ItemContainerStyle="{StaticResource BookingDetailsTabItemStyle}">
                 <TabItem Header="概览">
                     <ScrollViewer x:Name="OverviewScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel Margin="14">
+                            <TextBlock Text="拍摄流程状态" Style="{StaticResource CaptionText}" />
+                            <ComboBox ItemsSource="{Binding WorkflowStatusOptions}" SelectedItem="{Binding SelectedWorkflowStatus, Mode=TwoWay}" DisplayMemberPath="Label" Margin="0,4,0,12" AutomationProperties.Name="修改拍摄流程状态" AutomationProperties.HelpText="选择后立即保存；回退状态时会请求确认" />
                             <TextBlock Text="客户" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ClientDisplayName}" Margin="0,2,0,10" />
                             <TextBlock Text="时间" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding TimeText}" TextWrapping="Wrap" Margin="0,2,0,2" /><TextBlock Text="{Binding TimeZoneText}" Style="{StaticResource CaptionText}" Margin="0,0,0,10" />
                             <TextBlock Text="地点 / 类型" Style="{StaticResource CaptionText}" /><TextBlock Margin="0,2,0,10"><Run Text="{Binding LocationText, Mode=OneWay}" /><Run Text=" · " /><Run Text="{Binding ShootingTypeText, Mode=OneWay}" /></TextBlock>

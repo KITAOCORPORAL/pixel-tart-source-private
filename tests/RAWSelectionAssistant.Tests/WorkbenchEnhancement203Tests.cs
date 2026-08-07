@@ -28,7 +28,7 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void CollagePage_IsUsable() { Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板和参数", "背景颜色", "导出重新读取原图"); Contains(Text("src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs"), "纵向长图", "横向长图"); }
     [TestMethod] public void Navigation_AllowsNewToolPages() => Contains(ViewModel(), "\"PhotoGrouping\"", "\"Collage\"", "IsPhotoGroupingPage", "IsCollagePage");
     [TestMethod] public void ExistingSettingsAndToolboxFixesRemain() => Contains(MainXaml(), "SidebarSettingsButton", "OpenSettingsCommand", "ViewAllToolsButton", "OpenToolboxPage_Click");
-    [TestMethod] public void SidebarCollapseFixRemains() => Contains(MainXaml(), "SidebarNavButton", "IconExpand", "SidebarCollapseButton");
+    [TestMethod] public void SidebarCollapseFixRemains() => Contains(MainXaml(), "SidebarNavButton", "IconPanelExpand", "SidebarCollapseButton");
     [TestMethod] public void ReleaseProviderAndWinExeRemain() { Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\""); Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>"); Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false"); }
     [TestMethod] public void AppAndCandidateInstallerAre230() { Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "2.3.0"); Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64"); }
 

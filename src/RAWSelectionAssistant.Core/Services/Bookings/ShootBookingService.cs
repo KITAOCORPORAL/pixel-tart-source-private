@@ -131,6 +131,15 @@ public sealed class ShootBookingService(
         return completed;
     }
 
+    public async Task<bool> SetStatusAsync(Guid id, ShootBookingStatus status, CancellationToken cancellationToken = default)
+    {
+        var changed = await repository.SetStatusAsync(id, status, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        if (changed && auditLog is not null)
+            await auditLog.WriteAsync("Booking", "WorkflowStatusChanged", "Information", "拍摄流程状态已更新。", cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (changed) BookingChanged?.Invoke(this, id);
+        return changed;
+    }
+
     public async Task<bool> ArchiveAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var archived = await repository.ArchiveAsync(id, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
