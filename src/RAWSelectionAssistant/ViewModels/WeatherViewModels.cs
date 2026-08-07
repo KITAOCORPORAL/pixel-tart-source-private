@@ -8,6 +8,8 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
+public sealed record WeatherLocationModeOption(WeatherLocationMode Value, string Label) { public override string ToString() => Label; }
+
 public sealed class BookingWeatherViewModel : ObservableObject
 {
     private readonly IWeatherForecastService _service;
@@ -18,22 +20,39 @@ public sealed class BookingWeatherViewModel : ObservableObject
     private WeatherLocationCandidate? _selectedCandidate;
     private BookingWeatherSummary? _summary;
     private string _statusText = "尚未启用天气";
+    private readonly ICurrentLocationService? _currentLocationService;
+    private WeatherLocationModeOption _selectedLocationMode;
+    private CurrentLocationPermission _locationPermission = CurrentLocationPermission.Unknown;
+    private bool _locationAttempted;
 
-    public BookingWeatherViewModel(IWeatherForecastService service, WeatherFeatureState state)
+    public BookingWeatherViewModel(IWeatherForecastService service, WeatherFeatureState state, ICurrentLocationService? currentLocationService = null)
     {
         _service = service;
         _state = state;
+        _currentLocationService = currentLocationService;
+        LocationModes =
+        [
+            new(WeatherLocationMode.CurrentLocation, "当前位置"),
+            new(WeatherLocationMode.FollowBookingLocation, "跟随拍摄地点"),
+            new(WeatherLocationMode.ManualCity, "其他城市")
+        ];
+        _selectedLocationMode = LocationModes[0];
         SearchCommand = new AsyncRelayCommand(_ => SearchAsync(), _ => IsEnabled && !IsBusy && !string.IsNullOrWhiteSpace(SearchText));
         ConfirmLocationCommand = new AsyncRelayCommand(_ => ConfirmLocationAsync(), _ => IsEnabled && !IsBusy && SelectedCandidate is not null && _booking is not null);
         RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync(force: true), _ => IsEnabled && !IsBusy && _booking is not null);
         ClearCacheCommand = new AsyncRelayCommand(_ => ClearCacheAsync(), _ => !IsBusy);
+        UseCurrentLocationCommand = new AsyncRelayCommand(_ => ResolveCurrentLocationAsync(force: true), _ => IsEnabled && !IsBusy && _booking is not null && _currentLocationService is not null);
+        OpenLocationSettingsCommand = new AsyncRelayCommand(_ => OpenLocationSettingsAsync(), _ => _currentLocationService is not null && !IsBusy);
     }
 
     public ObservableCollection<WeatherLocationCandidate> Candidates { get; } = [];
+    public IReadOnlyList<WeatherLocationModeOption> LocationModes { get; }
     public ICommand SearchCommand { get; }
     public ICommand ConfirmLocationCommand { get; }
     public ICommand RefreshCommand { get; }
     public ICommand ClearCacheCommand { get; }
+    public ICommand UseCurrentLocationCommand { get; }
+    public ICommand OpenLocationSettingsCommand { get; }
     public bool IsEnabled
     {
         get => _state.Enabled;
@@ -50,6 +69,33 @@ public sealed class BookingWeatherViewModel : ObservableObject
     public bool IsDisabled => !IsEnabled;
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) RaiseCommands(); } }
     public string SearchText { get => _searchText; set { if (SetProperty(ref _searchText, value ?? string.Empty)) RaiseCommands(); } }
+    public WeatherLocationModeOption SelectedLocationMode
+    {
+        get => _selectedLocationMode;
+        set
+        {
+            if (value is null || !SetProperty(ref _selectedLocationMode, value)) return;
+            if (_booking is not null) _state.SetLocationMode(_booking.Id, value.Value);
+            StatusText = value.Value switch
+            {
+                WeatherLocationMode.CurrentLocation => "使用 Windows 当前位置；只在你查询时获取一次，不会持续跟踪。",
+                WeatherLocationMode.FollowBookingLocation => "将根据排期中的拍摄地点搜索候选城市，请确认后查询。",
+                _ => "请输入城市或地区，并从带地区和国家的候选项中确认。"
+            };
+            OnPropertyChanged(nameof(IsCurrentLocationMode));
+            OnPropertyChanged(nameof(IsFollowBookingLocationMode));
+            OnPropertyChanged(nameof(IsManualCityMode));
+            if (_booking is not null && value.Value == WeatherLocationMode.FollowBookingLocation && !string.IsNullOrWhiteSpace(_booking.Location))
+            {
+                SearchText = _booking.Location;
+                _ = SearchAsync();
+            }
+            RaiseCommands();
+        }
+    }
+    public bool IsCurrentLocationMode => SelectedLocationMode.Value == WeatherLocationMode.CurrentLocation;
+    public bool IsFollowBookingLocationMode => SelectedLocationMode.Value == WeatherLocationMode.FollowBookingLocation;
+    public bool IsManualCityMode => SelectedLocationMode.Value == WeatherLocationMode.ManualCity;
     public WeatherLocationCandidate? SelectedCandidate { get => _selectedCandidate; set { if (SetProperty(ref _selectedCandidate, value)) RaiseCommands(); } }
     public BookingWeatherSummary? Summary { get => _summary; private set { if (SetProperty(ref _summary, value)) NotifySummary(); } }
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
@@ -62,12 +108,33 @@ public sealed class BookingWeatherViewModel : ObservableObject
     public string SunText => Summary?.Day is { } day ? $"日出 {Local(day.SunriseUtc)} · 日落 {Local(day.SunsetUtc)}" : "—";
     public string UpdatedText => Summary?.UpdatedAtUtc is { } at ? $"更新时间 {at.ToLocalTime():yyyy-MM-dd HH:mm}" : "尚未更新";
     public string ProviderText => $"数据来源：{Summary?.Provider ?? "Open-Meteo"}";
-    public string RiskText => Summary is { Risks.Count: > 0 } ? string.Join("；", Summary.Risks.Select(risk => risk.Message)) : "当前没有达到集中配置的天气风险阈值。";
+    public string RiskText => Summary switch
+    {
+        { Risks.Count: > 0 } => string.Join("；", Summary.Risks.Select(risk => risk.Message)),
+        { Availability: WeatherAvailability.LocationPending } => "地点尚未确认，暂时无法判断天气风险。",
+        { Availability: WeatherAvailability.Unavailable } => "天气服务暂时不可用，不能判断是否存在风险。",
+        { Availability: WeatherAvailability.OutOfRange } => "拍摄日期超出可靠预报范围，不能判断是否存在风险。",
+        { RepresentativeHour: not null } or { Day: not null } => "预报已获取，当前未达到天气风险阈值。",
+        _ => "尚未取得可靠预报，不能判断是否存在风险。"
+    };
+    public string LocationPermissionText => _locationPermission switch
+    {
+        CurrentLocationPermission.Allowed => "Windows 位置权限已允许；仅执行一次性定位。",
+        CurrentLocationPermission.Denied => "Windows 位置权限未允许。",
+        CurrentLocationPermission.Unavailable => "Windows 位置服务暂时不可用。",
+        _ => "首次使用当前位置时，Windows 会请求位置权限。"
+    };
     public bool HasSummary => Summary?.RepresentativeHour is not null || Summary?.Day is not null;
 
     public async Task LoadAsync(ShootBooking booking, CancellationToken cancellationToken = default)
     {
         _booking = booking;
+        _locationAttempted = false;
+        _selectedLocationMode = LocationModes.First(item => item.Value == _state.GetLocationMode(booking.Id));
+        OnPropertyChanged(nameof(SelectedLocationMode));
+        OnPropertyChanged(nameof(IsCurrentLocationMode));
+        OnPropertyChanged(nameof(IsFollowBookingLocationMode));
+        OnPropertyChanged(nameof(IsManualCityMode));
         Candidates.Clear();
         SelectedCandidate = null;
         SearchText = string.Empty;
@@ -79,7 +146,16 @@ public sealed class BookingWeatherViewModel : ObservableObject
         {
             Summary = null;
         }
-        StatusText = !IsEnabled ? "尚未启用天气" : Summary?.StatusMessage ?? (_state.GetLocation(booking.Id) is null ? "地点待确认。" : "可以手动刷新天气。" );
+        StatusText = !IsEnabled ? "尚未启用天气" : Summary?.StatusMessage ?? (_state.GetLocation(booking.Id) is null ? "地点待确认。" : "可以刷新天气。" );
+        if (IsEnabled && Summary is null)
+        {
+            if (SelectedLocationMode.Value == WeatherLocationMode.CurrentLocation) await ResolveCurrentLocationAsync(force: false, cancellationToken).ConfigureAwait(true);
+            else if (SelectedLocationMode.Value == WeatherLocationMode.FollowBookingLocation && !string.IsNullOrWhiteSpace(booking.Location))
+            {
+                SearchText = booking.Location;
+                await SearchAsync().ConfigureAwait(true);
+            }
+        }
         OnPropertyChanged(nameof(IsEnabled));
         OnPropertyChanged(nameof(IsDisabled));
         NotifySummary();
@@ -110,6 +186,9 @@ public sealed class BookingWeatherViewModel : ObservableObject
     private async Task RefreshAsync(bool force)
     {
         if (_booking is null) return;
+        if (_state.GetLocation(_booking.Id) is null && SelectedLocationMode.Value == WeatherLocationMode.CurrentLocation)
+            await ResolveCurrentLocationAsync(force: false, refreshWeather: false).ConfigureAwait(true);
+        if (_state.GetLocation(_booking.Id) is null) { StatusText = "地点尚未确认；请选择当前位置、跟随拍摄地点或其他城市。"; return; }
         IsBusy = true;
         try
         {
@@ -131,6 +210,66 @@ public sealed class BookingWeatherViewModel : ObservableObject
         finally { IsBusy = false; }
     }
 
+    private async Task ResolveCurrentLocationAsync(bool force, CancellationToken cancellationToken = default, bool refreshWeather = true)
+    {
+        if (_booking is null || _currentLocationService is null || (!force && _locationAttempted)) return;
+        _locationAttempted = true;
+        IsBusy = true;
+        try
+        {
+            CurrentLocationResult result;
+            try
+            {
+                result = await _currentLocationService.GetCurrentLocationAsync(cancellationToken).ConfigureAwait(true);
+            }
+            catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
+            {
+                _locationPermission = CurrentLocationPermission.Unavailable;
+                OnPropertyChanged(nameof(LocationPermissionText));
+                StatusText = "无法获取当前位置，请选择城市。";
+                return;
+            }
+            catch (Exception)
+            {
+                _locationPermission = CurrentLocationPermission.Unavailable;
+                OnPropertyChanged(nameof(LocationPermissionText));
+                StatusText = "无法获取当前位置，请选择城市。";
+                return;
+            }
+            _locationPermission = result.Permission;
+            OnPropertyChanged(nameof(LocationPermissionText));
+            if (result.Permission != CurrentLocationPermission.Allowed || result.Latitude is null || result.Longitude is null)
+            {
+                StatusText = "无法获取当前位置，请选择城市。";
+                return;
+            }
+            _state.SetLocationMode(_booking.Id, WeatherLocationMode.CurrentLocation);
+            _state.ConfirmLocation(_booking.Id, new WeatherLocation("当前位置", null, string.Empty, result.Latitude.Value, result.Longitude.Value, TimeZoneInfo.Local.Id, "Windows Location"));
+            StatusText = result.Message ?? "当前位置已获取；不会持续跟踪。";
+            OnPropertyChanged(nameof(LocationText));
+            if (refreshWeather && IsEnabled)
+            {
+                try
+                {
+                    Summary = await _service.GetBookingWeatherAsync(_booking.Id, _booking.StartAtUtc, _booking.EndAtUtc, forceRefresh: true, cancellationToken: cancellationToken).ConfigureAwait(true);
+                    StatusText = Summary.StatusMessage;
+                }
+                catch (Exception) when (!cancellationToken.IsCancellationRequested)
+                {
+                    StatusText = "当前位置已获取，但天气服务暂时不可用；排期仍可正常使用。";
+                }
+            }
+        }
+        finally { IsBusy = false; }
+    }
+
+    private async Task OpenLocationSettingsAsync()
+    {
+        if (_currentLocationService is null) return;
+        try { await _currentLocationService.OpenLocationPrivacySettingsAsync().ConfigureAwait(true); }
+        catch { StatusText = "无法打开 Windows 位置设置；你仍可手动选择城市。"; }
+    }
+
     private void NotifySummary()
     {
         foreach (var name in new[] { nameof(LocationText), nameof(ConditionText), nameof(TemperatureText), nameof(PrecipitationText), nameof(WindText), nameof(AtmosphereText), nameof(SunText), nameof(UpdatedText), nameof(ProviderText), nameof(RiskText), nameof(HasSummary) }) OnPropertyChanged(name);
@@ -142,6 +281,8 @@ public sealed class BookingWeatherViewModel : ObservableObject
         (ConfirmLocationCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (RefreshCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (ClearCacheCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (UseCurrentLocationCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (OpenLocationSettingsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
     }
 
     private static string Local(DateTimeOffset? value) => value?.ToLocalTime().ToString("HH:mm") ?? "—";

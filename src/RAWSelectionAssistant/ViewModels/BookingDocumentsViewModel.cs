@@ -15,6 +15,7 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 
 public sealed record BookingDocumentTypeOption(BookingDocumentType Value, string Label) { public override string ToString() => Label; }
+public sealed record BookingDocumentLinkModeOption(BookingDocumentLinkMode Value, string Label) { public override string ToString() => Label; }
 
 public sealed class BookingDocumentsViewModel : ObservableObject
 {
@@ -26,9 +27,12 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     private Guid? _projectId;
     private bool _isArchived;
     private bool _isBusy;
+    private bool _isDraftOnly;
+    private readonly List<DraftDocumentOperation> _draftOperations = [];
     private string _statusText = "尚未关联本地资料";
     private string? _sessionDestinationPreference;
     private BookingDocumentTypeOption _selectedDocumentType;
+    private BookingDocumentLinkModeOption _selectedLinkMode;
     private BookingDocumentItemViewModel? _selectedItem;
     private DocumentPreviewKind _previewKind;
     private ImageSource? _previewImage;
@@ -46,6 +50,7 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     {
         _workflow = workflow;
         _dialogs = dialogs;
+        Items.CollectionChanged += (_, _) => { OnPropertyChanged(nameof(HasItems)); OnPropertyChanged(nameof(HasNoItems)); };
         DocumentTypes =
         [
             new(BookingDocumentType.PhotographyPlan, "摄影策划"), new(BookingDocumentType.ShootAgreement, "拍摄协议"),
@@ -55,6 +60,9 @@ public sealed class BookingDocumentsViewModel : ObservableObject
             new(BookingDocumentType.MoodBoard, "情绪板"), new(BookingDocumentType.StaffFile, "工作人员资料"), new(BookingDocumentType.Other, "其他")
         ];
         _selectedDocumentType = DocumentTypes[0];
+        LinkModes = [new(BookingDocumentLinkMode.Reference, "仅关联原位置"), new(BookingDocumentLinkMode.ManagedCopy, "安全复制到项目目录")];
+        _selectedLinkMode = LinkModes[0];
+        AddDocumentsCommand = new AsyncRelayCommand(_ => ChooseAndAddUsingSelectedModeAsync(), _ => CanModify);
         AddReferenceCommand = new AsyncRelayCommand(_ => ChooseAndAddReferencesAsync(), _ => CanModify);
         CopyAndAssociateCommand = new AsyncRelayCommand(_ => ChooseAndCopyAsync(), _ => CanModify);
         CheckAllCommand = new AsyncRelayCommand(_ => CheckAllAsync(), _ => !IsBusy);
@@ -84,10 +92,12 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public event EventHandler<string>? RevealFileRequested;
     public event EventHandler<string>? RevealDirectoryRequested;
     public IReadOnlyList<BookingDocumentTypeOption> DocumentTypes { get; }
+    public IReadOnlyList<BookingDocumentLinkModeOption> LinkModes { get; }
     public ObservableCollection<BookingDocumentItemViewModel> Items { get; } = [];
     public ObservableCollection<PendingDocumentActionViewModel> PendingActions { get; } = [];
     public ICommand AddReferenceCommand { get; }
     public ICommand CopyAndAssociateCommand { get; }
+    public ICommand AddDocumentsCommand { get; }
     public ICommand CheckAllCommand { get; }
     public ICommand OpenCommand { get; }
     public ICommand RevealCommand { get; }
@@ -112,9 +122,14 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public bool IsBusy { get => _isBusy; private set { if (!SetProperty(ref _isBusy, value)) return; OnPropertyChanged(nameof(CanModify)); RefreshCommands(); } }
     public bool IsArchived { get => _isArchived; private set { if (!SetProperty(ref _isArchived, value)) return; OnPropertyChanged(nameof(CanModify)); RefreshCommands(); } }
     public bool CanModify => !IsArchived && !IsBusy;
+    public bool HasDraftOperations => _draftOperations.Count > 0;
+    public bool HasItems => Items.Count > 0;
+    public bool HasNoItems => Items.Count == 0;
+    public bool HasPreview => SelectedItem is not null;
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public BookingDocumentTypeOption SelectedDocumentType { get => _selectedDocumentType; set => SetProperty(ref _selectedDocumentType, value); }
-    public BookingDocumentItemViewModel? SelectedItem { get => _selectedItem; set { if (!SetProperty(ref _selectedItem, value)) return; OnPropertyChanged(nameof(CanPreviousPreview)); OnPropertyChanged(nameof(CanNextPreview)); RefreshPreviewCommands(); if (value is not null) _ = PreviewAsync(value); } }
+    public BookingDocumentLinkModeOption SelectedLinkMode { get => _selectedLinkMode; set => SetProperty(ref _selectedLinkMode, value); }
+    public BookingDocumentItemViewModel? SelectedItem { get => _selectedItem; set { if (!SetProperty(ref _selectedItem, value)) return; OnPropertyChanged(nameof(HasPreview)); OnPropertyChanged(nameof(CanPreviousPreview)); OnPropertyChanged(nameof(CanNextPreview)); RefreshPreviewCommands(); if (value is not null) _ = PreviewAsync(value); } }
     public DocumentPreviewKind PreviewKind { get => _previewKind; private set { if (!SetProperty(ref _previewKind, value)) return; OnPropertyChanged(nameof(IsImagePreview)); OnPropertyChanged(nameof(IsPdfPreview)); OnPropertyChanged(nameof(IsTextPreview)); OnPropertyChanged(nameof(IsCardPreview)); RefreshPreviewCommands(); } }
     public bool IsImagePreview => PreviewKind is DocumentPreviewKind.Image or DocumentPreviewKind.Pdf;
     public bool IsPdfPreview => PreviewKind == DocumentPreviewKind.Pdf;
@@ -161,6 +176,8 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public async Task LoadAsync(Guid bookingId, Guid? projectId, bool isArchived, CancellationToken cancellationToken = default)
     {
         StorePendingActions();
+        _isDraftOnly = false;
+        _draftOperations.Clear();
         _bookingId = bookingId;
         _projectId = projectId;
         IsArchived = isArchived;
@@ -188,6 +205,8 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     public void Reset()
     {
         StorePendingActions();
+        _isDraftOnly = false;
+        _draftOperations.Clear();
         _bookingId = Guid.Empty;
         _projectId = null;
         IsArchived = true;
@@ -195,6 +214,65 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         ClearPreview();
         PendingActions.Clear();
         StatusText = "尚未关联本地资料";
+    }
+
+    public void BeginDraft(Guid bookingId, Guid? projectId)
+    {
+        StorePendingActions();
+        _bookingId = bookingId;
+        _projectId = projectId;
+        _isDraftOnly = true;
+        IsArchived = false;
+        _draftOperations.Clear();
+        Items.Clear();
+        PendingActions.Clear();
+        ClearPreview();
+        StatusText = "资料已暂存；创建排期成功后才会写入资料关联。";
+        OnPropertyChanged(nameof(HasDraftOperations));
+        RefreshCommands();
+    }
+
+    public async Task CommitDraftAsync(CancellationToken cancellationToken = default)
+    {
+        if (!_isDraftOnly || _draftOperations.Count == 0) return;
+        var operations = _draftOperations.ToArray();
+        try
+        {
+            foreach (var group in operations.Where(item => item.Mode == BookingDocumentLinkMode.Reference).GroupBy(item => item.DocumentType))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var result = await _workflow.AddReferencesAsync(new(_bookingId, _projectId, group.Key, group.Select(item => item.Path).ToArray()), cancellationToken).ConfigureAwait(true);
+                ApplyBatchResult(result);
+                if (result.Status is BookingDocumentBatchStatus.Failed or BookingDocumentBatchStatus.NeedsAttention or BookingDocumentBatchStatus.PartiallyCompleted)
+                    throw new InvalidOperationException("部分资料关联未完成，请在资料面板中重试。", new IOException());
+            }
+            foreach (var group in operations.Where(item => item.Mode == BookingDocumentLinkMode.ManagedCopy).GroupBy(item => item.DocumentType))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var destination = await _workflow.GetSuggestedDestinationAsync(_projectId, group.Key, cancellationToken).ConfigureAwait(true);
+                if (string.IsNullOrWhiteSpace(destination))
+                {
+                    destination = _sessionDestinationPreference;
+                    if (string.IsNullOrWhiteSpace(destination)) destination = _dialogs.ChooseFolder("选择本次排期的目标资料目录");
+                    if (string.IsNullOrWhiteSpace(destination)) throw new OperationCanceledException("未选择资料目录。", cancellationToken);
+                    _sessionDestinationPreference = destination;
+                }
+                var result = await _workflow.CopyAndAssociateAsync(new(_bookingId, _projectId, group.Key, group.Select(item => item.Path).ToArray(), destination, VerifySha256: true), cancellationToken).ConfigureAwait(true);
+                ApplyBatchResult(result);
+                if (result.Status is BookingDocumentBatchStatus.Failed or BookingDocumentBatchStatus.NeedsAttention or BookingDocumentBatchStatus.PartiallyCompleted)
+                    throw new InvalidOperationException("部分资料复制或关联未完成，请在资料面板中处理。", new IOException());
+            }
+            _draftOperations.Clear();
+            _isDraftOnly = false;
+            await RefreshAsync(cancellationToken).ConfigureAwait(true);
+            StatusText = Items.Count == 0 ? "尚未关联本地资料" : $"已关联 {Items.Count} 份本地资料";
+            OnPropertyChanged(nameof(HasDraftOperations));
+        }
+        catch
+        {
+            StatusText = "排期已保存，但部分资料尚未完成关联；请在资料面板中重试。";
+            throw;
+        }
     }
 
 #if RC3_REVIEW_ONLY
@@ -286,6 +364,10 @@ public sealed class BookingDocumentsViewModel : ObservableObject
         if (paths.Count > 0) await AddReferencesAsync(paths).ConfigureAwait(true);
     }
 
+    private Task ChooseAndAddUsingSelectedModeAsync() => SelectedLinkMode.Value == BookingDocumentLinkMode.Reference
+        ? ChooseAndAddReferencesAsync()
+        : ChooseAndCopyAsync();
+
     private async Task ChooseAndCopyAsync()
     {
         var paths = _dialogs.ChooseFiles("选择要复制到项目资料目录的文件", SupportedFileFilter, multiselect: true);
@@ -294,6 +376,11 @@ public sealed class BookingDocumentsViewModel : ObservableObject
 
     private async Task AddReferencesAsync(IReadOnlyList<string> paths)
     {
+        if (_isDraftOnly)
+        {
+            Stage(paths, BookingDocumentLinkMode.Reference);
+            return;
+        }
         IsBusy = true;
         try
         {
@@ -307,6 +394,11 @@ public sealed class BookingDocumentsViewModel : ObservableObject
 
     private async Task CopyAsync(IReadOnlyList<string> paths)
     {
+        if (_isDraftOnly)
+        {
+            Stage(paths, BookingDocumentLinkMode.ManagedCopy);
+            return;
+        }
         IsBusy = true;
         try
         {
@@ -548,10 +640,42 @@ public sealed class BookingDocumentsViewModel : ObservableObject
 
     private void RefreshCommands()
     {
+        (AddDocumentsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (AddReferenceCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (CopyAndAssociateCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (RelocateCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (RemoveAssociationCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+    }
+
+    private void Stage(IReadOnlyList<string> paths, BookingDocumentLinkMode mode)
+    {
+        var files = paths.Where(path => File.Exists(path)).Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+        foreach (var path in files)
+            if (!_draftOperations.Any(item => string.Equals(item.Path, path, StringComparison.OrdinalIgnoreCase) && item.Mode == mode && item.DocumentType == SelectedDocumentType.Value))
+            {
+                _draftOperations.Add(new(path, SelectedDocumentType.Value, mode));
+                var info = new FileInfo(path);
+                var item = new BookingDocumentItemViewModel(new BookingDocumentRecord
+                {
+                    BookingId = _bookingId,
+                    ProjectId = _projectId,
+                    DocumentType = SelectedDocumentType.Value,
+                    DisplayName = info.Name,
+                    FilePath = path,
+                    NormalizedPath = path.ToUpperInvariant(),
+                    FileExtension = info.Extension,
+                    FileSize = info.Exists ? info.Length : null,
+                    LastKnownModifiedAtUtc = info.Exists ? info.LastWriteTimeUtc : null,
+                    LinkMode = mode,
+                    AddedAtUtc = DateTimeOffset.UtcNow,
+                    UpdatedAtUtc = DateTimeOffset.UtcNow
+                }, BookingDocumentFileState.WaitingForConfirmation);
+                item.SetStatusMessage("等待排期创建后处理；不会修改原文件。");
+                Items.Add(item);
+                SelectedItem = item;
+            }
+        StatusText = files.Length == 0 ? "没有可关联的文件；文件夹不会被扫描。" : $"已暂存 {files.Length} 份资料，创建排期成功后完成关联。";
+        OnPropertyChanged(nameof(HasDraftOperations));
     }
 
     private static string PrivacySafeMessage(Exception ex) => ex switch
@@ -565,16 +689,18 @@ public sealed class BookingDocumentsViewModel : ObservableObject
     };
 }
 
+internal sealed record DraftDocumentOperation(string Path, BookingDocumentType DocumentType, BookingDocumentLinkMode Mode);
+
 public sealed class BookingDocumentItemViewModel : ObservableObject
 {
     private BookingDocumentRecord _document;
     private BookingDocumentFileState _state;
     private string _statusMessage = string.Empty;
     private bool _isPathExpanded;
-    public BookingDocumentItemViewModel(BookingDocumentRecord document)
+    public BookingDocumentItemViewModel(BookingDocumentRecord document, BookingDocumentFileState initialState = BookingDocumentFileState.Normal)
     {
         _document = document;
-        _state = document.IsMissing ? BookingDocumentFileState.Missing : BookingDocumentFileState.Normal;
+        _state = document.IsMissing ? BookingDocumentFileState.Missing : initialState;
     }
     public Guid Id => _document.Id;
     public string DisplayName => _document.DisplayName;
@@ -593,6 +719,8 @@ public sealed class BookingDocumentItemViewModel : ObservableObject
     public bool IsPathExpanded { get => _isPathExpanded; set { if (!SetProperty(ref _isPathExpanded, value)) return; OnPropertyChanged(nameof(PathActionText)); } }
     public string PathActionText => IsPathExpanded ? "隐藏完整路径" : "显示完整路径";
     public string FullPath => _document.FilePath;
+
+    internal void SetStatusMessage(string message) => StatusMessage = message;
 
     public void Apply(BookingDocumentCheckResult result)
     {

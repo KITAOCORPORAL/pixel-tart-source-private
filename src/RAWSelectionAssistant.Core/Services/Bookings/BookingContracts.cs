@@ -7,6 +7,12 @@ public interface IShootBookingRepository
     Task<ShootBooking?> GetAsync(Guid id, bool includeArchived = false, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ShootRequirementItem>> GetRequirementsAsync(Guid bookingId, CancellationToken cancellationToken = default);
     Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default);
+    Task SaveAggregateAsync(
+        ShootBooking booking,
+        IReadOnlyList<ShootRequirementItem> requirements,
+        IReadOnlyList<BookingContact> contacts,
+        IReadOnlyList<BookingStaffMember> staff,
+        CancellationToken cancellationToken = default) => SaveAsync(booking, requirements, cancellationToken);
     Task<IReadOnlyList<ShootBookingSummary>> QueryCurrentViewAsync(ShootBookingQuery query, CancellationToken cancellationToken = default);
     Task<ShootBookingPage> SearchAllUnarchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);
     Task<ShootBookingPage> SearchArchivedAsync(ShootBookingSearchRequest request, CancellationToken cancellationToken = default);

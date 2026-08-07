@@ -15,7 +15,8 @@ public enum ShootBookingStatus
     AwaitingRetouch,
     Retouched,
     AwaitingDelivery,
-    Delivered
+    Delivered,
+    Draft
 }
 
 public enum ShootRequirementPriority { Low, Normal, High, Critical }
@@ -24,6 +25,7 @@ public enum BookingDocumentLinkMode { Reference, ManagedCopy }
 public enum BookingSearchScope { CurrentView, AllUnarchived }
 public enum BookingConflictResolution { None, SaveAnyway, MarkAllowOverlap }
 public enum BookingSaveStatus { Saved, NeedsAttention, ValidationFailed, NotFound }
+public enum BookingEditorSaveStatus { DraftSaved, Created, NeedsDocumentAttention, ValidationFailed, DatabaseFailed, FileOperationFailed }
 public enum BookingMoneyDisplayKind { Unknown, Receivable, Settled, Overpaid }
 
 public sealed record ShootBooking
@@ -60,6 +62,9 @@ public sealed record ShootBooking
 public sealed record ShootBookingDraft
 {
     public Guid? Id { get; init; }
+    public Guid EditorSessionId { get; init; }
+    public bool CreateIfMissing { get; init; }
+    public bool ReplacePeople { get; init; }
     public Guid? ProjectId { get; init; }
     public string Title { get; init; } = string.Empty;
     public string ClientDisplayName { get; init; } = string.Empty;
@@ -82,6 +87,8 @@ public sealed record ShootBookingDraft
     public bool AllowOverlap { get; init; }
     public string? Notes { get; init; }
     public IReadOnlyList<ShootRequirementItem> Requirements { get; init; } = [];
+    public IReadOnlyList<BookingContact> Contacts { get; init; } = [];
+    public IReadOnlyList<BookingStaffMember> Staff { get; init; } = [];
 }
 
 public sealed record ShootRequirementItem

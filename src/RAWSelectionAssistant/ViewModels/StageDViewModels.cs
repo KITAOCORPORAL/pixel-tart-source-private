@@ -70,9 +70,9 @@ public sealed class BookingRemindersViewModel : ObservableObject
         _localTimeZone = localTimeZone ?? TimeZoneInfo.Local;
         Presets =
         [
-            new("提前1天", 1440), new("提前3小时", 180), new("提前1小时", 60), new("自定义时间", null, true)
+            new("提前10分钟", 10), new("提前30分钟", 30), new("提前1小时", 60), new("提前2小时", 120), new("提前1天", 1440), new("自定义时间", null, true)
         ];
-        _selectedPreset = Presets[2];
+        _selectedPreset = Presets.First(item => item.OffsetMinutes == 60);
         AddCommand = new AsyncRelayCommand(_ => AddAsync(), _ => CanEdit && !IsBusy);
         EditCommand = new RelayCommand(Edit, parameter => CanEdit && parameter is BookingReminderItemViewModel);
         CancelEditCommand = new RelayCommand(_ => ResetEditor(), _ => EditingReminderId.HasValue);
@@ -136,6 +136,11 @@ public sealed class BookingRemindersViewModel : ObservableObject
         {
             trigger = new(ReminderTriggerKind.RelativeToBookingStart, null, TimeSpan.FromMinutes(SelectedPreset.OffsetMinutes ?? 0));
         }
+        if (!EditingReminderId.HasValue && Items.Any(item => SameTrigger(item.Reminder.Trigger, trigger)))
+        {
+            StatusText = "相同提醒已存在，无需重复添加。";
+            return;
+        }
         IsBusy = true;
         try
         {
@@ -175,9 +180,12 @@ public sealed class BookingRemindersViewModel : ObservableObject
         EditingReminderId = null;
         _editingCreatedAt = null;
         NewReminderEnabled = false;
-        SelectedPreset = Presets[2];
+        SelectedPreset = Presets.First(item => item.OffsetMinutes == 60);
         StatusText = string.Empty;
     }
+
+    private static bool SameTrigger(ReminderTrigger left, ReminderTrigger right) =>
+        left.Kind == right.Kind && left.Offset == right.Offset && left.At?.ToUniversalTime() == right.At?.ToUniversalTime();
 
     private async Task ToggleAsync(object? parameter)
     {
