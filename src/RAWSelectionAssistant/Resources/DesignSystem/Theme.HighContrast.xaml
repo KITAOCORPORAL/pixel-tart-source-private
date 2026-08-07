@@ -55,5 +55,11 @@
     <SolidColorBrush x:Key="CalendarStatusShotBrush" Color="#53FF96" />
     <SolidColorBrush x:Key="CalendarStatusPendingDeliveryBrush" Color="#FFE45C" />
     <SolidColorBrush x:Key="CalendarStatusDeliveredBrush" Color="#64B5FF" />
+    <SolidColorBrush x:Key="CalendarStatusFreeForegroundBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarStatusScheduledForegroundBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarStatusShotForegroundBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarStatusPendingDeliveryForegroundBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarStatusDeliveredForegroundBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarTodayOutlineBrush" Color="{x:Static SystemColors.HighlightColor}" />
     <SolidColorBrush x:Key="WorkbenchHeroBrush" Color="{x:Static SystemColors.WindowColor}" />
 </ResourceDictionary>
