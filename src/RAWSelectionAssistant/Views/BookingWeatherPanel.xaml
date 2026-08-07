@@ -7,20 +7,27 @@
     <Border Style="{StaticResource InfoCard}" Padding="12">
         <StackPanel>
             <Grid>
-                <StackPanel><TextBlock Text="拍摄天气参考" FontWeight="SemiBold" /><TextBlock Text="默认关闭；启用后仅在你搜索或刷新时联网。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
+                <StackPanel><TextBlock Text="拍摄天气参考" FontWeight="SemiBold" /><TextBlock Text="默认使用当前位置；仅在你主动查询或刷新时联网，不会持续定位。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
                 <CheckBox Content="启用天气" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" VerticalAlignment="Top" AutomationProperties.Name="启用可选天气查询" />
             </Grid>
             <TextBlock Text="尚未启用天气" Margin="0,10,0,0" Visibility="{Binding IsDisabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <StackPanel Margin="0,10,0,0" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <WrapPanel>
+                <TextBlock Text="位置模式" FontWeight="SemiBold" />
+                <ComboBox ItemsSource="{Binding LocationModes}" SelectedItem="{Binding SelectedLocationMode}" DisplayMemberPath="Label" Margin="0,5,0,0" AutomationProperties.Name="天气位置模式" />
+                <StackPanel Margin="0,8,0,0" Visibility="{Binding IsCurrentLocationMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="{Binding LocationPermissionText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" />
+                    <WrapPanel Margin="0,6,0,0"><Button Content="使用当前位置" Style="{StaticResource SecondaryButton}" Command="{Binding UseCurrentLocationCommand}" AutomationProperties.Name="刷新当前位置" /><Button Content="打开位置设置" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding OpenLocationSettingsCommand}" AutomationProperties.Name="打开Windows位置隐私设置" /></WrapPanel>
+                </StackPanel>
+                <WrapPanel Visibility="{Binding IsManualCityMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBox Width="180" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="搜索天气城市或地区" />
                     <Button Content="搜索地点" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding SearchCommand}" />
                 </WrapPanel>
-                <ComboBox ItemsSource="{Binding Candidates}" SelectedItem="{Binding SelectedCandidate}" DisplayMemberPath="DisplayName" Margin="0,7,0,0" AutomationProperties.Name="天气地点候选" />
+                <TextBlock Text="拍摄地点候选" Style="{StaticResource CaptionText}" Margin="0,7,0,0" Visibility="{Binding IsFollowBookingLocationMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <ComboBox ItemsSource="{Binding Candidates}" SelectedItem="{Binding SelectedCandidate}" DisplayMemberPath="DisplayName" Margin="0,5,0,0" AutomationProperties.Name="天气地点候选" Visibility="{Binding IsManualCityMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <ComboBox ItemsSource="{Binding Candidates}" SelectedItem="{Binding SelectedCandidate}" DisplayMemberPath="DisplayName" Margin="0,5,0,0" AutomationProperties.Name="拍摄地点天气候选" Visibility="{Binding IsFollowBookingLocationMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <WrapPanel Margin="0,7,0,0">
                     <Button Content="确认地点" Style="{StaticResource SecondaryButton}" Command="{Binding ConfirmLocationCommand}" />
                     <Button Content="手动刷新" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding RefreshCommand}" />
-                    <Button Content="清除天气缓存" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding ClearCacheCommand}" />
                 </WrapPanel>
                 <TextBlock Text="{Binding LocationText}" FontWeight="SemiBold" Margin="0,10,0,0" />
                 <Grid Margin="0,7,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="110" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="天气情况" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding ConditionText}" /></Grid>

@@ -169,7 +169,7 @@
     <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="8">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="8" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
-        <Border Style="{StaticResource PanelBorder}" Padding="8,6">
+        <Border Style="{StaticResource PanelBorder}" Padding="8,6" Visibility="{Binding ShowMonitorWorkspace, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock x:Name="SessionSummaryText" Text="{Binding UserFacingProviderText, StringFormat=● {0}}" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}"
@@ -200,7 +200,27 @@
             </Grid>
         </Border>
 
-        <Grid x:Name="MonitorWorkspace" Grid.Row="2">
+        <Border Grid.Row="2" Style="{StaticResource PanelBorder}" Visibility="{Binding ShowPreSessionPage, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="联机拍摄启动页">
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="620" Margin="40">
+                    <TextBlock Text="联机拍摄" FontSize="30" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                    <TextBlock Text="选择相机软件正在写入照片的文件夹，像素蛋挞会在文件写入稳定后自动显示。" TextWrapping="Wrap" TextAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="15" LineHeight="24" Margin="0,14,0,0" />
+                    <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="14" Margin="0,22,0,0">
+                        <StackPanel>
+                            <TextBlock Text="看守文件夹" Style="{StaticResource CaptionText}" />
+                            <TextBlock Text="{Binding WatchDirectory, TargetNullValue=尚未选择}" TextTrimming="CharacterEllipsis" Margin="0,5,0,0" AutomationProperties.Name="当前看守文件夹" />
+                            <TextBlock Text="只监看所选目录顶层；不会递归扫描，不会删除、移动或修改源照片。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Button Content="选择看守文件夹" Style="{StaticResource SecondaryButton}" Command="{Binding ChooseWatchFolderCommand}" AutomationProperties.Name="选择看守文件夹" />
+                        <Button Content="开始联机会话" Style="{StaticResource PrimaryButton}" Command="{Binding StartCommand}" Margin="10,0,0,0" AutomationProperties.Name="开始联机会话" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="MonitorWorkspace" Grid.Row="2" Visibility="{Binding ShowMonitorWorkspace, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions><ColumnDefinition x:Name="ThumbnailColumn" Width="270" MinWidth="220" MaxWidth="300" /><ColumnDefinition x:Name="BrowserSplitterColumn" Width="8" /><ColumnDefinition Width="*" MinWidth="640" /><ColumnDefinition Width="8" /><ColumnDefinition x:Name="InspectorColumn" Width="320" MinWidth="280" MaxWidth="340" /></Grid.ColumnDefinitions>
 
             <Border x:Name="BrowserPanel" Style="{StaticResource PanelBorder}" Padding="8">
@@ -213,6 +233,10 @@
                         <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
                         <ListBox.ItemTemplate><DataTemplate><Border Padding="6" Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="6"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="104" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Grid Width="104" Height="78" Background="{DynamicResource SurfaceTertiaryBrush}" ClipToBounds="True"><Image Source="{Binding Thumbnail}" Stretch="Uniform" /><Border Background="{DynamicResource SurfaceSecondaryBrush}"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding IsRaw}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style><StackPanel VerticalAlignment="Center"><TextBlock Text="RAW" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource AccentBrush}" /><TextBlock Text="安全占位预览" Style="{StaticResource CaptionText}" HorizontalAlignment="Center" /></StackPanel></Border></Grid><StackPanel Grid.Column="1" Margin="8,0,0,0"><Grid><TextBlock Text="{Binding MediaKindText}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" /><TextBlock Text="{Binding CaptureTimeText}" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid><TextBlock Text="{Binding FileName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" /><TextBlock Text="{Binding RatingText}" Foreground="{DynamicResource WarningBrush}" /><WrapPanel><TextBlock Text="{Binding PairText}" Style="{StaticResource CaptionText}" /><TextBlock Text="  ♥" Foreground="{DynamicResource DangerBrush}" Visibility="{Binding ClientFavorite, Converter={StaticResource BooleanToVisibilityConverter}}" /><TextBlock Text="  拒绝" Foreground="{DynamicResource WarningBrush}" Visibility="{Binding IsRejected, Converter={StaticResource BooleanToVisibilityConverter}}" /></WrapPanel><Grid Margin="0,3,0,0"><TextBlock Text="{Binding StateText}" Style="{StaticResource CaptionText}" /><Button Content="加入比较" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="4,1" MinHeight="22" Command="{Binding DataContext.SetCompareCandidateCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" AutomationProperties.Name="将照片加入比较" /></Grid></StackPanel></Grid></Border></DataTemplate></ListBox.ItemTemplate>
                     </ListBox>
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ShowWaitingForFirstPhoto, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="等待照片" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                        <TextBlock Text="新照片写入稳定后会出现在这里" Style="{StaticResource CaptionText}" TextAlignment="Center" Margin="0,6,0,0" />
+                    </StackPanel>
                     <TextBlock Grid.Row="2" Text="缩略图会按需加载，快速滚动时仍保持流畅。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="2,6,2,0" />
                 </Grid>
             </Border>

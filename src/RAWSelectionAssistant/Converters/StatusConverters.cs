@@ -15,6 +15,7 @@ public sealed class StatusToTextConverter : IValueConverter
             MediaOverallStatus status => status.ToChinese(),
             ShootBookingStatus status => status switch
             {
+                ShootBookingStatus.Draft => "草稿",
                 ShootBookingStatus.Tentative => "待确定",
                 ShootBookingStatus.Confirmed => "已确认",
                 ShootBookingStatus.Preparing => "准备中",

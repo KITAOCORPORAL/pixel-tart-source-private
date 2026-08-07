@@ -1,6 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Views;
@@ -52,6 +54,15 @@ public partial class WorkCalendarView : UserControl
             Background = Application.Current.TryFindResource("WindowBackgroundBrush") as System.Windows.Media.Brush
         };
         window.InputBindings.Add(new KeyBinding(e.Editor.CancelCommand, Key.Escape, ModifierKeys.None));
+        void ApplyEditorCaptionTheme()
+        {
+            var background = Application.Current.TryFindResource("WindowBackgroundBrush") as SolidColorBrush;
+            var color = background?.Color ?? Colors.White;
+            var dark = !SystemParameters.HighContrast && (0.2126 * color.R + 0.7152 * color.G + 0.0722 * color.B) < 128;
+            NativeWindowTheme.Apply(window, dark);
+        }
+        window.SourceInitialized += (_, _) => ApplyEditorCaptionTheme();
+        window.Activated += (_, _) => ApplyEditorCaptionTheme();
         e.Editor.CloseRequested += (_, _) => window.Close();
         window.Closing += (_, args) =>
         {

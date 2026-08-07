@@ -93,6 +93,7 @@ public partial class App : Application
                 new OpenMeteoGeocodingProvider(_weatherHttpClient, weatherOptions),
                 new JsonWeatherCacheStore(), _weatherState,
                 _compositionRoot.NotificationCenter, _compositionRoot.AuditLog);
+            var currentLocationService = new WindowsCurrentLocationService();
             var tutorialDataService = new TutorialDataService();
             var onboardingService = new OnboardingService(settingsService, tutorialDataService, _logService);
             var feedbackService = new FeedbackService(
@@ -115,7 +116,8 @@ public partial class App : Application
                 _weatherState,
                 new JsonCalendarAvailabilityStore(),
                 _compositionRoot.BookingPeopleService,
-                _compositionRoot.FinanceService);
+                _compositionRoot.FinanceService,
+                currentLocationService);
             var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,
