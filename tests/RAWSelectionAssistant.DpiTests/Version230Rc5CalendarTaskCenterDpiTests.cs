@@ -11,9 +11,11 @@ public sealed class Version230Rc5CalendarTaskCenterDpiTests
     public void MiniCalendarBadge_UsesLogicalSizeWithoutScalingOrClipping(int dpiPercent)
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml");
-        StringAssert.Contains(xaml, "MinWidth=\"28\"");
-        StringAssert.Contains(xaml, "Height=\"24\"");
-        StringAssert.Contains(xaml, "Padding=\"6,2\"");
+        StringAssert.Contains(xaml, "MinWidth=\"24\"");
+        StringAssert.Contains(xaml, "Height=\"22\"");
+        StringAssert.Contains(xaml, "Padding=\"5,0\"");
+        StringAssert.Contains(xaml, "LineHeight=\"16\"");
+        StringAssert.Contains(xaml, "UseLayoutRounding=\"True\"");
         Assert.IsFalse(xaml.Contains("ScaleTransform", StringComparison.Ordinal));
         CollectionAssert.Contains(new[] { 150, 200 }, dpiPercent);
     }

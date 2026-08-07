@@ -65,6 +65,11 @@ public partial class MainWindow
         {
             _viewModel.NavigateCommand.Execute("Workbench");
             ApplyCalendarReviewState(state);
+            if (state.StartsWith("WorkbenchCalendarHotfix", StringComparison.OrdinalIgnoreCase))
+            {
+                _taskCenterDrawerOpen = true;
+                UpdateWorkbenchResponsiveLayout();
+            }
             return true;
         }
 
@@ -693,6 +698,10 @@ public partial class MainWindow
             ? InspectLayout(content, content.ActualWidth, content.ActualHeight)
             : null;
         var themeInspection = InspectThemeResources();
+        var miniCalendarInspection = _automatedScenarioName.StartsWith("WorkbenchCalendar", StringComparison.OrdinalIgnoreCase)
+            ? InspectMiniCalendarLayout()
+            : null;
+        var miniCalendarScope = _automatedScenarioName.StartsWith("WorkbenchCalendarHotfix", StringComparison.OrdinalIgnoreCase);
         var metadata = new
         {
             scenario = _automatedScenarioName,
@@ -708,9 +717,12 @@ public partial class MainWindow
             screenshot = outputPath,
             sourceCommit = ResolveSourceCommit(),
             layout,
+            miniCalendarInspection,
             auxiliaryLayout = auxiliary,
             themeInspection,
-            passed = layout.BlockingIssueCount == 0 && (auxiliary?.BlockingIssueCount ?? 0) == 0 && themeInspection.Passed,
+            passed = miniCalendarScope
+                ? (miniCalendarInspection?.Passed ?? false) && themeInspection.Passed
+                : layout.BlockingIssueCount == 0 && (miniCalendarInspection?.Passed ?? true) && (auxiliary?.BlockingIssueCount ?? 0) == 0 && themeInspection.Passed,
             generatedAt = DateTimeOffset.Now
         };
         var metadataPath = string.IsNullOrWhiteSpace(_automatedMetadataPath) ? outputPath + ".json" : _automatedMetadataPath;
@@ -718,6 +730,76 @@ public partial class MainWindow
         if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
         File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata, new JsonSerializerOptions { WriteIndented = true }));
     }
+
+    private MiniCalendarLayoutInspection InspectMiniCalendarLayout()
+    {
+        var panel = FindVisualChildren<WorkbenchCalendarPanel>(RootGrid).FirstOrDefault();
+        if (panel is null) return new(false, 0, 0, 0, 0, 0, 0, 0, 0, ["Mini calendar panel was not rendered."]);
+        panel.UpdateLayout();
+        var cells = FindVisualChildren<Border>(panel).Where(item => item.Name == "CalendarDayCell").ToArray();
+        var badges = FindVisualChildren<Border>(panel).Where(item => item.Name == "DayNumberBadge").ToArray();
+        var texts = FindVisualChildren<TextBlock>(panel).Where(item => item.Name == "DayNumberText").ToArray();
+        var issues = new List<string>();
+        if (cells.Length != 42 || badges.Length != 42 || texts.Length != 42) issues.Add($"Expected 42 cells/badges/texts; found {cells.Length}/{badges.Length}/{texts.Length}.");
+        var count = Math.Min(cells.Length, Math.Min(badges.Length, texts.Length));
+        for (var index = 0; index < count; index++)
+        {
+            var cell = cells[index];
+            var badge = badges[index];
+            var text = texts[index];
+            if (badge.ActualHeight + 4 > cell.ActualHeight) issues.Add($"Day {index + 1}: cell height does not preserve badge padding.");
+            if (text.ActualHeight + 4 > badge.ActualHeight) issues.Add($"Day {index + 1}: badge height does not preserve text safe inset.");
+            var badgeOrigin = badge.TransformToAncestor(cell).Transform(new Point());
+            var textOrigin = text.TransformToAncestor(badge).Transform(new Point());
+            if (badgeOrigin.Y < 0 || badgeOrigin.Y + badge.ActualHeight > cell.ActualHeight) issues.Add($"Day {index + 1}: badge exceeds cell bounds.");
+            if (textOrigin.Y < 2 || textOrigin.Y + text.ActualHeight > badge.ActualHeight - 2) issues.Add($"Day {index + 1}: text exceeds badge safe inset.");
+        }
+        var orderedRows = cells.Select((cell, index) => new { cell, index }).GroupBy(item => item.index / 7).ToArray();
+        for (var row = 0; row < orderedRows.Length - 1; row++)
+        {
+            var current = orderedRows[row].First().cell.TransformToAncestor(panel).Transform(new Point());
+            var next = orderedRows[row + 1].First().cell.TransformToAncestor(panel).Transform(new Point());
+            var gap = next.Y - (current.Y + orderedRows[row].First().cell.ActualHeight);
+            if (gap < 4) issues.Add($"Rows {row + 1}/{row + 2}: spacing is {gap:F2} DIP.");
+        }
+        var detailsGap = 0d;
+        if (cells.Length >= 36)
+        {
+            var lastCell = cells[35];
+            var lastOrigin = lastCell.TransformToAncestor(panel).Transform(new Point());
+            var detailsOrigin = panel.DayDetailsHeader.TransformToAncestor(panel).Transform(new Point());
+            detailsGap = detailsOrigin.Y - (lastOrigin.Y + lastCell.ActualHeight);
+            if (detailsGap < 16) issues.Add($"Last row/detail spacing is {detailsGap:F2} DIP.");
+        }
+        if (Math.Abs(panel.PreviousMonthButton.ActualWidth - panel.NextMonthButton.ActualWidth) > .1 || Math.Abs(panel.PreviousMonthButton.ActualHeight - panel.NextMonthButton.ActualHeight) > .1)
+            issues.Add("Month navigation button dimensions differ.");
+        if (panel.PreviousMonthButton.ActualHeight > 32 || panel.NextMonthButton.ActualHeight > 32) issues.Add("Month navigation buttons exceed 32 DIP.");
+        var badgeHeights = badges.Select(item => item.ActualHeight).ToArray();
+        if (badgeHeights.Length > 0 && badgeHeights.Max() - badgeHeights.Min() > .1) issues.Add("Badge heights differ.");
+        return new(
+            issues.Count == 0,
+            cells.FirstOrDefault()?.ActualWidth ?? 0,
+            cells.FirstOrDefault()?.ActualHeight ?? 0,
+            badges.FirstOrDefault()?.ActualWidth ?? 0,
+            badges.FirstOrDefault()?.ActualHeight ?? 0,
+            texts.FirstOrDefault()?.ActualHeight ?? 0,
+            panel.PreviousMonthButton.ActualWidth,
+            panel.PreviousMonthButton.ActualHeight,
+            detailsGap,
+            issues);
+    }
+
+    private sealed record MiniCalendarLayoutInspection(
+        bool Passed,
+        double DayCellActualWidth,
+        double DayCellActualHeight,
+        double DayNumberBadgeActualWidth,
+        double DayNumberBadgeActualHeight,
+        double DayNumberTextActualHeight,
+        double MonthButtonActualWidth,
+        double MonthButtonActualHeight,
+        double LastRowToDetailsSpacing,
+        IReadOnlyList<string> Issues);
 
     private LayoutInspection InspectLayout(FrameworkElement root, double viewportWidth, double viewportHeight)
     {
