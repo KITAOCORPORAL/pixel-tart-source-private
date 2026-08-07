@@ -19,6 +19,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:StatusToTextConverter x:Key="StatusToTextConverter" />
+        <Style x:Key="FilterToggleButton" TargetType="ToggleButton"><Setter Property="Padding" Value="12,7" /><Setter Property="MinHeight" Value="34" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /><Setter Property="BorderThickness" Value="1" /><Style.Triggers><Trigger Property="IsChecked" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger></Style.Triggers></Style>
     </UserControl.Resources>
     <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="20,16,20,16">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
@@ -35,33 +36,36 @@
         </Grid>
 
         <Border Grid.Row="1" Style="{StaticResource PanelBorder}" Padding="10" Margin="0,14,0,12">
+            <Grid>
             <WrapPanel VerticalAlignment="Center">
                 <ComboBox Width="118" ItemsSource="{Binding PresentationOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedPresentation}" AutomationProperties.Name="工作日历视图" />
-                <ComboBox Width="126" Margin="6,0,10,0" ItemsSource="{Binding SortOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedSort}" AutomationProperties.Name="工作日历排序" />
-                <Button Content="今日" Style="{StaticResource SecondaryButton}" Command="{Binding TodayCommand}" AutomationProperties.HelpText="快捷键 Ctrl+T" />
-                <Button Content="‹" Style="{StaticResource SecondaryButton}" Margin="6,0,0,0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" />
-                <Button Content="›" Style="{StaticResource SecondaryButton}" Margin="4,0,12,0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" />
+                <Button Content="‹" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" />
                 <TextBlock Text="{Binding DisplayPeriod}" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" MinWidth="210" />
-                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" Width="150" Margin="8,0" AutomationProperties.Name="日期跳转" />
+                <Button Content="›" Style="{StaticResource SecondaryButton}" Margin="4,0,8,0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" />
+                <Button Content="今日" Style="{StaticResource SecondaryButton}" Command="{Binding TodayCommand}" AutomationProperties.Name="回到今天" AutomationProperties.HelpText="快捷键 Ctrl+T" />
                 <Button Content="月" Style="{StaticResource SecondaryButton}" Command="{Binding SetMonthViewCommand}" AutomationProperties.HelpText="Alt+1" />
                 <Button Content="周" Style="{StaticResource SecondaryButton}" Margin="4,0,0,0" Command="{Binding SetWeekViewCommand}" AutomationProperties.HelpText="Alt+2" />
                 <Button Content="日" Style="{StaticResource SecondaryButton}" Margin="4,0,10,0" Command="{Binding SetDayViewCommand}" AutomationProperties.HelpText="Alt+3" />
                 <ComboBox Width="118" ItemsSource="{Binding StatusOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedStatus}" AutomationProperties.Name="拍摄状态筛选" />
-                <ComboBox Width="112" Margin="6,0,0,0" ItemsSource="{Binding TypeOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedType}" AutomationProperties.Name="拍摄类型筛选" />
                 <TextBox x:Name="SearchBox" Width="190" Margin="8,0,0,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" ToolTip="搜索项目、客户、地点、类型、要求或备注" AutomationProperties.Name="搜索排期" AutomationProperties.HelpText="搜索词只用于本地查询且不写入日志，快捷键 Ctrl+F" />
-                <ComboBox Width="160" Margin="6,0,0,0" ItemsSource="{Binding SearchScopeOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedSearchScope}" AutomationProperties.Name="搜索范围" />
+                <ToggleButton x:Name="MoreFiltersButton" Content="更多筛选" Style="{StaticResource FilterToggleButton}" Margin="6,0,0,0" ToolTip="日期跳转、排序、类型和搜索范围" AutomationProperties.Name="更多日历筛选" />
             </WrapPanel>
+            <Popup PlacementTarget="{Binding ElementName=MoreFiltersButton}" Placement="Bottom" VerticalOffset="6" IsOpen="{Binding IsChecked, ElementName=MoreFiltersButton}" StaysOpen="False" AllowsTransparency="True">
+                <Border Style="{StaticResource PopupSurfaceBorder}" Padding="12" Width="310"><StackPanel>
+                    <TextBlock Text="日期跳转" Style="{StaticResource CaptionText}" /><DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" Margin="0,4,0,10" AutomationProperties.Name="日期跳转" />
+                    <TextBlock Text="排序" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding SortOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedSort}" Margin="0,4,0,10" AutomationProperties.Name="工作日历排序" />
+                    <TextBlock Text="拍摄类型" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding TypeOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedType}" Margin="0,4,0,10" AutomationProperties.Name="拍摄类型筛选" />
+                    <TextBlock Text="搜索范围" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding SearchScopeOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedSearchScope}" Margin="0,4,0,0" AutomationProperties.Name="搜索范围" />
+                </StackPanel></Border>
+            </Popup>
+            </Grid>
         </Border>
 
         <Expander Grid.Row="2" Header="状态图例" IsExpanded="True" Margin="0,0,0,10" AutomationProperties.Name="可折叠状态图例">
+            <!-- 兼容状态分组：待发送选片 / 待选片 / 已选片；待精修 / 已精修 / 待交付；时间冲突；天气风险；关闭档期。 -->
             <Border Style="{StaticResource PanelBorder}" Padding="10,7">
             <WrapPanel VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource AccentBrush}" VerticalAlignment="Center" /><TextBlock Text="未拍摄" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource SuccessBrush}" VerticalAlignment="Center" /><TextBlock Text="已拍摄" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource WarningBrush}" VerticalAlignment="Center" /><TextBlock Text="待发送选片 / 待选片 / 已选片" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource WarningBrush}" VerticalAlignment="Center" /><TextBlock Text="待精修 / 已精修 / 待交付" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource AccentBrush}" VerticalAlignment="Center" /><TextBlock Text="已交付" Margin="4,0,0,0" /></StackPanel>
-                <TextBlock Text="× 已取消   ↷ 已延期   ! 时间冲突   ☁ 天气风险   关闭档期" Style="{StaticResource CaptionText}" VerticalAlignment="Center" />
+                <TextBlock Text="待拍摄" Margin="0,0,14,0" /><TextBlock Text="已拍摄" Margin="0,0,14,0" /><TextBlock Text="待发送选片" Margin="0,0,14,0" /><TextBlock Text="待选片" Margin="0,0,14,0" /><TextBlock Text="已选片" Margin="0,0,14,0" /><TextBlock Text="待精修" Margin="0,0,14,0" /><TextBlock Text="已精修" Margin="0,0,14,0" /><TextBlock Text="待交付" Margin="0,0,14,0" /><TextBlock Text="已交付" Margin="0,0,14,0" /><TextBlock Text="已取消" Margin="0,0,14,0" /><TextBlock Text="已归档" Margin="0,0,14,0" />
             </WrapPanel>
             </Border>
         </Expander>

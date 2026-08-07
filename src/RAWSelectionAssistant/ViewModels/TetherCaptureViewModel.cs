@@ -292,7 +292,11 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         }
     }
     public bool HasSelection => SelectedAsset is not null;
-    public bool ShowTetherEmptyState => SelectedAsset is null;
+    public bool ShowPreSessionPage => !IsRunning;
+    public bool ShowMonitorWorkspace => IsRunning;
+    public bool ShowWaitingForFirstPhoto => IsRunning && Assets.Count == 0;
+    public bool HasReadyAsset => ReadyCount > 0;
+    public bool ShowTetherEmptyState => IsRunning && SelectedAsset is null;
     public string TetherEmptyStateText => !IsRunning
         ? "尚未启动联机会话，请先选择相机软件正在写入照片的文件夹。"
         : Assets.Count == 0 ? "联机会话正在运行，等待新照片写入。" : "请选择一张已就绪照片开始监看。";
@@ -1043,6 +1047,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     private void NotifyEmptyState()
     {
+        OnPropertyChanged(nameof(ShowPreSessionPage));
+        OnPropertyChanged(nameof(ShowMonitorWorkspace));
+        OnPropertyChanged(nameof(ShowWaitingForFirstPhoto));
+        OnPropertyChanged(nameof(HasReadyAsset));
         OnPropertyChanged(nameof(ShowTetherEmptyState));
         OnPropertyChanged(nameof(TetherEmptyStateText));
     }

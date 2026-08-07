@@ -150,7 +150,11 @@ public sealed class MainViewModel : ObservableObject
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
         if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
-        if (ReminderNotifications is not null) ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+        if (ReminderNotifications is not null)
+        {
+            ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
+            ReminderNotifications.Items.CollectionChanged += (_, _) => OnPropertyChanged(nameof(NotificationStatus));
+        }
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.OpenCalendarRequested += WorkbenchSchedule_OpenCalendarRequested;
         OrganizePhotosPage = new OrganizePhotosViewModel(new OrganizeService(logService), dialogService, taskOperationBridge);
@@ -436,6 +440,8 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(CurrentPageStatus));
             OnPropertyChanged(nameof(CurrentPageDetail));
             OnPropertyChanged(nameof(CurrentPageProcessedText));
+            OnPropertyChanged(nameof(BackgroundTaskStatus));
+            OnPropertyChanged(nameof(NotificationStatus));
             if (string.Equals(previousPage, "Tether", StringComparison.Ordinal)) TetherPage?.OnDeactivated();
             if (IsTetherPage) TetherPage?.OnActivated();
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
@@ -774,7 +780,7 @@ public sealed class MainViewModel : ObservableObject
 
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) { OnPropertyChanged(nameof(PendingTaskCount)); OnPropertyChanged(nameof(TaskCenterSummary)); RefreshCommands(); } } }
     public string StatusMessage { get => _statusMessage; private set { if (SetProperty(ref _statusMessage, value)) OnPropertyChanged(nameof(CurrentPageStatus)); } }
-    public string CurrentPageStatus => WithBackgroundTether(CurrentPage switch
+    public string CurrentPageStatus => CurrentPage switch
     {
         "Tether" => TetherPage?.StatusText ?? "看守文件夹监看准备就绪",
         "WorkCalendar" => WorkCalendarPage.StatusText,
@@ -783,7 +789,9 @@ public sealed class MainViewModel : ObservableObject
         "Settings" => "设置更改会即时保存",
         "Help" => "帮助与教程",
         _ => StatusMessage
-    });
+    };
+    public string BackgroundTaskStatus => TetherPage?.IsRunning == true && !IsTetherPage ? "看守文件夹会话正在后台运行" : string.Empty;
+    public string NotificationStatus => ReminderNotifications?.Items.Count > 0 ? $"{ReminderNotifications.Items.Count} 条提醒待处理" : string.Empty;
     public string CurrentPageDetail => CurrentPage switch
     {
         "Tether" => TetherPage?.PreviewStatus ?? string.Empty,
@@ -954,12 +962,9 @@ public sealed class MainViewModel : ObservableObject
         {
             OnPropertyChanged(nameof(CurrentPageStatus));
             OnPropertyChanged(nameof(CurrentPageDetail));
+            OnPropertyChanged(nameof(BackgroundTaskStatus));
         }
     }
-
-    private string WithBackgroundTether(string pageStatus) => TetherPage?.IsRunning == true && !IsTetherPage
-        ? $"{pageStatus} · 看守文件夹会话正在后台运行"
-        : pageStatus;
 
     private async void ReminderNotifications_OpenBookingRequested(object? sender, Guid bookingId)
     {

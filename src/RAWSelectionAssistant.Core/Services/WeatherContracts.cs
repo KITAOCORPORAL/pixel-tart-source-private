@@ -22,6 +22,12 @@ public interface IWeatherCacheStore
     Task ClearAsync(CancellationToken cancellationToken = default);
 }
 
+public interface ICurrentLocationService
+{
+    Task<CurrentLocationResult> GetCurrentLocationAsync(CancellationToken cancellationToken = default);
+    Task OpenLocationPrivacySettingsAsync(CancellationToken cancellationToken = default);
+}
+
 public interface IWeatherForecastService
 {
     Task<IReadOnlyList<WeatherLocationCandidate>> SearchLocationsAsync(string query, CancellationToken cancellationToken = default);

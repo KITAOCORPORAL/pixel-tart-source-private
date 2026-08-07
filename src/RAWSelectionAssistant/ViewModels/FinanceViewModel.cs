@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
+using System.Windows;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Business;
@@ -74,6 +75,7 @@ public sealed class FinanceViewModel : ObservableObject
     private string _paymentMethod = string.Empty;
     private string _note = string.Empty;
     private FinanceSummary _summary = new(0, 0, 0, 0, 0, 0);
+    private bool _isEditorOpen;
 
     public FinanceViewModel(
         IFinanceService service,
@@ -113,7 +115,7 @@ public sealed class FinanceViewModel : ObservableObject
         SaveCommand = new AsyncRelayCommand(_ => SaveAsync(), _ => !IsBusy);
         CancelCommand = new RelayCommand(_ => ResetEditor());
         DeleteCommand = new AsyncRelayCommand(_ => DeleteAsync(), _ => SelectedTransaction is not null && !IsBusy);
-        ExportCommand = new AsyncRelayCommand(_ => ExportAsync(), _ => !IsBusy);
+        ExportCommand = new AsyncRelayCommand(_ => ExportAsync(), _ => !IsBusy && Transactions.Count > 0);
         AddAttachmentCommand = new RelayCommand(_ => AddAttachments());
         RemoveAttachmentCommand = new RelayCommand(parameter => RemoveAttachment(parameter as FinanceAttachmentItem));
     }
@@ -148,8 +150,14 @@ public sealed class FinanceViewModel : ObservableObject
     public ICommand RemoveAttachmentCommand { get; }
 
     public bool IsBusy { get => _isBusy; private set => SetProperty(ref _isBusy, value); }
-    public bool IsEditing => _editingId.HasValue || !string.IsNullOrWhiteSpace(AmountText);
-    public string EditorTitle => _editingId.HasValue ? "编辑收支记录" : "新建收支记录";
+    public bool IsEditing => IsEditorOpen;
+    public bool IsEditorOpen { get => _isEditorOpen; private set { if (!SetProperty(ref _isEditorOpen, value)) return; OnPropertyChanged(nameof(IsEditing)); OnPropertyChanged(nameof(EditorColumnWidth)); OnPropertyChanged(nameof(EditorSplitterWidth)); } }
+    public GridLength EditorColumnWidth => IsEditorOpen ? new GridLength(390) : new GridLength(0);
+    public GridLength EditorSplitterWidth => IsEditorOpen ? new GridLength(10) : new GridLength(0);
+    public string EditorTitle => _editingId.HasValue ? "编辑收支记录" : SelectedKind.Value == FinanceTransactionKind.Income ? "新建收入" : "新建支出";
+    public bool HasTransactions => Transactions.Count > 0;
+    public bool IsEmpty => !HasTransactions;
+    public string EmptyText => "本月还没有收支记录";
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public string Keyword { get => _keyword; set { if (SetProperty(ref _keyword, value ?? string.Empty)) _ = RefreshAsync(); } }
     public FinanceTransactionItemViewModel? SelectedTransaction { get => _selectedTransaction; set { if (SetProperty(ref _selectedTransaction, value)) RefreshCommandStates(); } }
@@ -163,7 +171,7 @@ public sealed class FinanceViewModel : ObservableObject
     public FinanceLinkOption SelectedProjectFilter { get => _selectedProjectFilter; set { if (value is not null && SetProperty(ref _selectedProjectFilter, value)) _ = RefreshAsync(); } }
     public FinanceLinkOption SelectedBookingLink { get => _selectedBookingLink; set => SetProperty(ref _selectedBookingLink, value); }
     public FinanceLinkOption SelectedProjectLink { get => _selectedProjectLink; set => SetProperty(ref _selectedProjectLink, value); }
-    public string AmountText { get => _amountText; set { if (SetProperty(ref _amountText, value ?? string.Empty)) OnPropertyChanged(nameof(IsEditing)); } }
+    public string AmountText { get => _amountText; set => SetProperty(ref _amountText, value ?? string.Empty); }
     public DateTime OccurredOn { get => _occurredOn; set => SetProperty(ref _occurredOn, value.Date); }
     public DateTime SelectedMonth { get => _selectedMonth; set { var month = new DateTime(value.Year, value.Month, 1); if (SetProperty(ref _selectedMonth, month)) { OnPropertyChanged(nameof(SelectedMonthText)); _ = RefreshAsync(); } } }
     public string SelectedMonthText => SelectedMonth.ToString("yyyy年M月");
@@ -196,6 +204,8 @@ public sealed class FinanceViewModel : ObservableObject
                     BookingLinkOptions.FirstOrDefault(option => option.Id == item.BookingId)?.Label ?? "未关联拍摄",
                     ProjectLinkOptions.FirstOrDefault(option => option.Id == item.ProjectId)?.Label ?? "未关联项目"));
             }
+            OnPropertyChanged(nameof(HasTransactions));
+            OnPropertyChanged(nameof(IsEmpty));
             _summary = await _service.SummarizeAsync(query).ConfigureAwait(true);
             NotifySummary();
             StatusText = $"{SelectedMonthText}共 {Transactions.Count} 条本地收支记录。CSV 仅在你主动导出时生成。";
@@ -333,6 +343,8 @@ public sealed class FinanceViewModel : ObservableObject
         ResetEditor();
         SelectedKind = KindOptions.First(item => item.Value == kind);
         AmountText = "0.00";
+        IsEditorOpen = true;
+        OnPropertyChanged(nameof(EditorTitle));
     }
 
     private void BeginEdit(FinanceTransactionItemViewModel? item)
@@ -360,6 +372,7 @@ public sealed class FinanceViewModel : ObservableObject
         PaymentMethod = item.PaymentMethod ?? string.Empty;
         Note = item.Note ?? string.Empty;
         Replace(Attachments, item.AttachmentPaths.Select(path => new FinanceAttachmentItem(path)));
+        IsEditorOpen = true;
         OnPropertyChanged(nameof(EditorTitle));
         OnPropertyChanged(nameof(IsEditing));
     }
@@ -470,6 +483,7 @@ public sealed class FinanceViewModel : ObservableObject
         PaymentMethod = string.Empty;
         Note = string.Empty;
         Attachments.Clear();
+        IsEditorOpen = false;
         SelectedBookingLink = BookingLinkOptions.FirstOrDefault() ?? new(null, "不关联拍摄任务");
         SelectedProjectLink = ProjectLinkOptions.FirstOrDefault() ?? new(null, "不关联项目");
         OnPropertyChanged(nameof(EditorTitle));

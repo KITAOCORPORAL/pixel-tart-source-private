@@ -26,21 +26,22 @@
                 <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="125" /><ColumnDefinition Width="145" /><ColumnDefinition Width="145" /><ColumnDefinition Width="155" /><ColumnDefinition Width="155" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                 <Button Content="‹" Style="{StaticResource GhostButton}" Command="{Binding PreviousMonthCommand}" AutomationProperties.Name="上个月" />
                 <TextBlock Grid.Column="1" Text="{Binding SelectedMonthText}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0" />
-                <ComboBox Grid.Column="2" ItemsSource="{Binding KindFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedKindFilter}" AutomationProperties.Name="按收入支出筛选" />
-                <ComboBox Grid.Column="3" ItemsSource="{Binding PaymentFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedPaymentFilter}" Margin="7,0,0,0" AutomationProperties.Name="按支付状态筛选" />
-                <ComboBox Grid.Column="4" ItemsSource="{Binding CategoryFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedCategoryFilter}" Margin="7,0,0,0" AutomationProperties.Name="按分类筛选" />
-                <ComboBox Grid.Column="5" ItemsSource="{Binding ProjectFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedProjectFilter}" Margin="7,0,0,0" AutomationProperties.Name="按项目筛选" />
-                <ComboBox Grid.Column="6" ItemsSource="{Binding BookingFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedBookingFilter}" Margin="7,0,0,0" AutomationProperties.Name="按拍摄任务筛选" />
+                <StackPanel Grid.Column="2"><TextBlock Text="类型" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding KindFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedKindFilter}" AutomationProperties.Name="按收入支出筛选" /></StackPanel>
+                <StackPanel Grid.Column="3" Margin="7,0,0,0"><TextBlock Text="支付状态" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding PaymentFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedPaymentFilter}" AutomationProperties.Name="按支付状态筛选" /></StackPanel>
+                <StackPanel Grid.Column="4" Margin="7,0,0,0"><TextBlock Text="分类" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding CategoryFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedCategoryFilter}" AutomationProperties.Name="按分类筛选" /></StackPanel>
+                <StackPanel Grid.Column="5" Margin="7,0,0,0"><TextBlock Text="项目" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding ProjectFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedProjectFilter}" AutomationProperties.Name="按项目筛选" /></StackPanel>
+                <StackPanel Grid.Column="6" Margin="7,0,0,0"><TextBlock Text="拍摄任务" Style="{StaticResource CaptionText}" /><ComboBox ItemsSource="{Binding BookingFilterOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedBookingFilter}" AutomationProperties.Name="按拍摄任务筛选" /></StackPanel>
                 <TextBox Grid.Column="7" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged, Delay=250}" Margin="7,0" ToolTip="搜索项目、客户、收付款方、支付方式或备注；搜索词不会写入日志" AutomationProperties.Name="搜索收支记录" />
                 <StackPanel Grid.Column="8" Orientation="Horizontal"><Button Content="今天" Style="{StaticResource GhostButton}" Command="{Binding CurrentMonthCommand}" AutomationProperties.Name="返回本月" /><Button Content="›" Style="{StaticResource GhostButton}" Command="{Binding NextMonthCommand}" Margin="4,0,0,0" AutomationProperties.Name="下个月" /></StackPanel>
             </Grid>
         </Border>
 
         <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="*" MinWidth="520" /><ColumnDefinition Width="10" /><ColumnDefinition Width="390" /></Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" MinWidth="520" /><ColumnDefinition Width="{Binding EditorSplitterWidth}" /><ColumnDefinition Width="{Binding EditorColumnWidth}" /></Grid.ColumnDefinitions>
             <Border Style="{StaticResource PanelBorder}" Padding="12">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Transactions}" SelectedItem="{Binding SelectedTransaction}" AutoGenerateColumns="False" IsReadOnly="True" AutomationProperties.Name="本月收支记录">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="{Binding EmptyText}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="可以从一笔收入或支出开始。" Style="{StaticResource CaptionText}" Margin="0,5,0,12" HorizontalAlignment="Center" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Center"><Button Content="新建收入" Style="{StaticResource PrimaryButton}" Command="{Binding NewIncomeCommand}" /><Button Content="新建支出" Style="{StaticResource SecondaryButton}" Command="{Binding NewExpenseCommand}" Margin="7,0,0,0" /></StackPanel></StackPanel>
+                    <DataGrid ItemsSource="{Binding Transactions}" SelectedItem="{Binding SelectedTransaction}" AutoGenerateColumns="False" IsReadOnly="True" AutomationProperties.Name="本月收支记录" Visibility="{Binding HasTransactions, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="日期" Binding="{Binding DateText}" Width="105" />
                             <DataGridTextColumn Header="类型" Binding="{Binding KindText}" Width="64" />
@@ -53,11 +54,11 @@
                             <DataGridTextColumn Header="附件" Binding="{Binding AttachmentText}" Width="105" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,0"><Button Content="编辑" Style="{StaticResource SecondaryButton}" Command="{Binding EditCommand}" AutomationProperties.Name="编辑所选收支记录" /><Button Content="复制" Style="{StaticResource GhostButton}" Command="{Binding CopyCommand}" Margin="6,0,0,0" AutomationProperties.Name="复制所选收支记录" /><Button Content="删除" Style="{StaticResource GhostButton}" Command="{Binding DeleteCommand}" Margin="6,0,0,0" Foreground="{DynamicResource DangerBrush}" AutomationProperties.Name="删除所选收支记录" /></StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,0" Visibility="{Binding HasTransactions, Converter={StaticResource BooleanToVisibilityConverter}}"><Button Content="编辑" Style="{StaticResource SecondaryButton}" Command="{Binding EditCommand}" AutomationProperties.Name="编辑所选收支记录" /><Button Content="复制" Style="{StaticResource GhostButton}" Command="{Binding CopyCommand}" Margin="6,0,0,0" AutomationProperties.Name="复制所选收支记录" /><Button Content="删除" Style="{StaticResource GhostButton}" Command="{Binding DeleteCommand}" Margin="6,0,0,0" Foreground="{DynamicResource DangerBrush}" AutomationProperties.Name="删除所选收支记录" /></StackPanel>
                 </Grid>
             </Border>
-            <GridSplitter Grid.Column="1" Width="10" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" AutomationProperties.Name="调整收支列表和编辑器宽度" />
-            <Border Grid.Column="2" Style="{StaticResource PanelBorder}" Padding="16">
+            <GridSplitter Grid.Column="1" Width="10" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" AutomationProperties.Name="调整收支列表和编辑器宽度" Visibility="{Binding IsEditorOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Border Grid.Column="2" Style="{StaticResource PanelBorder}" Padding="16" Visibility="{Binding IsEditorOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel>
                     <TextBlock Text="{Binding EditorTitle}" FontSize="17" FontWeight="SemiBold" />
                     <TextBlock Text="收入或支出" Style="{StaticResource CaptionText}" Margin="0,12,0,4" /><ComboBox ItemsSource="{Binding KindOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedKind}" AutomationProperties.Name="交易类型" />

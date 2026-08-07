@@ -11,7 +11,8 @@
             <Border Margin="0,10,0,0" Padding="12" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="7" Background="{DynamicResource SurfaceSecondaryBrush}" AutomationProperties.Name="拖入本地资料区域" AutomationProperties.HelpText="拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描">
                 <StackPanel HorizontalAlignment="Center"><TextBlock Text="拖入图片、PDF、Office、TXT、MD 或其他资料" HorizontalAlignment="Center" /><TextBlock Text="支持一次添加多个文件；不支持递归导入文件夹" Style="{StaticResource CaptionText}" Margin="0,4,0,0" HorizontalAlignment="Center" /></StackPanel>
             </Border>
-            <WrapPanel Margin="0,10,0,0"><ComboBox Width="150" ItemsSource="{Binding DocumentTypes}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedDocumentType}" AutomationProperties.Name="文档分类" /><Button Content="添加文件（仅关联）" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding AddReferenceCommand}" AutomationProperties.Name="添加本地文件引用" /><Button Content="复制到项目资料目录并关联" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding CopyAndAssociateCommand}" AutomationProperties.Name="复制到项目资料目录并关联" /></WrapPanel>
+            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->
+            <WrapPanel Margin="0,10,0,0"><TextBlock Text="分类" VerticalAlignment="Center" /><ComboBox Width="150" ItemsSource="{Binding DocumentTypes}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedDocumentType}" Margin="6,0,0,0" AutomationProperties.Name="文档分类" /><TextBlock Text="添加方式" VerticalAlignment="Center" Margin="12,0,0,0" /><ComboBox Width="190" ItemsSource="{Binding LinkModes}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedLinkMode}" Margin="6,0,0,0" AutomationProperties.Name="资料添加方式" /><Button Content="＋ 添加资料" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding AddDocumentsCommand}" AutomationProperties.Name="按当前方式添加资料" /></WrapPanel>
             <Border Style="{StaticResource InfoCard}" Margin="0,9,0,0" Visibility="{Binding IsArchived, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="已归档排期只允许查看、打开和检查资料，不允许修改或移除关联。" TextWrapping="Wrap" /></Border>
 
             <ScrollViewer MaxHeight="360" Margin="0,10,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -30,7 +31,7 @@
                 </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
             </ScrollViewer>
 
-            <Border Style="{StaticResource InfoCard}" Margin="0,10,0,0" Padding="10">
+            <Border Style="{StaticResource InfoCard}" Margin="0,10,0,0" Padding="10" Visibility="{Binding HasPreview, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                     <Grid><TextBlock Text="{Binding PreviewTitle}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="上一份" Style="{StaticResource GhostButton}" Command="{Binding PreviousPreviewCommand}" AutomationProperties.Name="预览上一份资料" /><Button Content="下一份" Style="{StaticResource GhostButton}" Command="{Binding NextPreviewCommand}" Margin="5,0,0,0" AutomationProperties.Name="预览下一份资料" /></StackPanel></Grid>
                     <Grid Grid.Row="1" Margin="0,7,0,0">
@@ -45,6 +46,10 @@
                     </Grid>
                     <TextBlock Grid.Row="3" Text="{Binding PreviewMessage}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,7,0,0" />
                 </Grid>
+            </Border>
+
+            <Border Style="{StaticResource InfoCard}" Margin="0,10,0,0" Padding="12" Visibility="{Binding HasNoItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel HorizontalAlignment="Center"><TextBlock Text="尚未添加拍摄资料" TextAlignment="Center" FontWeight="SemiBold" /><Button Content="＋ 添加资料" Style="{StaticResource SecondaryButton}" Command="{Binding AddDocumentsCommand}" Margin="0,8,0,0" AutomationProperties.Name="添加拍摄资料" /></StackPanel>
             </Border>
 
             <ItemsControl ItemsSource="{Binding PendingActions}" Margin="0,10,0,0"><ItemsControl.ItemTemplate><DataTemplate><Border Style="{StaticResource WarningCard}" Margin="0,4"><StackPanel><TextBlock Text="{Binding DisplayText}" FontWeight="SemiBold" /><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Margin="0,3,0,0" /><WrapPanel Margin="0,8,0,0"><Button Content="重试保存关联" Style="{StaticResource SecondaryButton}" Command="{Binding DataContext.RetryAssociationCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="重试保存文档关联" /><Button Content="打开输出目录" Style="{StaticResource SecondaryButton}" Margin="6,0,0,0" Command="{Binding DataContext.OpenOutputDirectoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="打开文档复制输出目录" /><Button Content="安全撤销本次复制" Style="{StaticResource SecondaryButton}" Margin="6,0,0,0" Command="{Binding DataContext.UndoCopyCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="安全撤销本次文档复制" /><Button Content="保留文件但放弃关联" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding DataContext.AbandonAssociationCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="保留文件但放弃文档关联" /></WrapPanel></StackPanel></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>

@@ -29,7 +29,24 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         return result;
     }
 
-    public async Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default)
+    public Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default) =>
+        SaveAggregateInternalAsync(booking, requirements, [], [], replacePeople: false, cancellationToken: cancellationToken);
+
+    public Task SaveAggregateAsync(
+        ShootBooking booking,
+        IReadOnlyList<ShootRequirementItem> requirements,
+        IReadOnlyList<BookingContact> contacts,
+        IReadOnlyList<BookingStaffMember> staff,
+        CancellationToken cancellationToken = default) =>
+        SaveAggregateInternalAsync(booking, requirements, contacts, staff, replacePeople: true, cancellationToken: cancellationToken);
+
+    private async Task SaveAggregateInternalAsync(
+        ShootBooking booking,
+        IReadOnlyList<ShootRequirementItem> requirements,
+        IReadOnlyList<BookingContact> contacts,
+        IReadOnlyList<BookingStaffMember> staff,
+        bool replacePeople,
+        CancellationToken cancellationToken)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
@@ -85,6 +102,55 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        if (replacePeople)
+        {
+            foreach (var table in new[] { "BookingContacts", "BookingStaffMembers" })
+            {
+                await using var clear = connection.CreateCommand();
+                clear.Transaction = transaction;
+                clear.CommandText = $"DELETE FROM {table} WHERE BookingId=$booking;";
+                clear.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
+                await clear.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            foreach (var contact in contacts)
+            {
+                await using var command = connection.CreateCommand();
+                command.Transaction = transaction;
+                command.CommandText = "INSERT INTO BookingContacts(Id,BookingId,DisplayName,Phone,WeChat,Email,OtherContact,IsPrimary,Note,CreatedAtUtc,UpdatedAtUtc) VALUES($id,$booking,$name,$phone,$wechat,$email,$other,$primary,$note,$created,$updated);";
+                command.Parameters.AddWithValue("$id", contact.Id.ToString("D"));
+                command.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
+                command.Parameters.AddWithValue("$name", contact.DisplayName);
+                command.Parameters.AddWithValue("$phone", Db(contact.Phone));
+                command.Parameters.AddWithValue("$wechat", Db(contact.WeChat));
+                command.Parameters.AddWithValue("$email", Db(contact.Email));
+                command.Parameters.AddWithValue("$other", Db(contact.OtherContact));
+                command.Parameters.AddWithValue("$primary", contact.IsPrimary ? 1 : 0);
+                command.Parameters.AddWithValue("$note", Db(contact.Note));
+                command.Parameters.AddWithValue("$created", Utc(contact.CreatedAtUtc));
+                command.Parameters.AddWithValue("$updated", Utc(contact.UpdatedAtUtc));
+                await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            foreach (var member in staff)
+            {
+                await using var command = connection.CreateCommand();
+                command.Transaction = transaction;
+                command.CommandText = "INSERT INTO BookingStaffMembers(Id,BookingId,DisplayName,Role,ArrivalTime,Phone,WeChat,Email,Note,SortOrder,CreatedAtUtc,UpdatedAtUtc) VALUES($id,$booking,$name,$role,$arrival,$phone,$wechat,$email,$note,$sort,$created,$updated);";
+                command.Parameters.AddWithValue("$id", member.Id.ToString("D"));
+                command.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
+                command.Parameters.AddWithValue("$name", member.DisplayName);
+                command.Parameters.AddWithValue("$role", member.Role.ToString());
+                command.Parameters.AddWithValue("$arrival", member.ArrivalTime is null ? DBNull.Value : Utc(member.ArrivalTime.Value));
+                command.Parameters.AddWithValue("$phone", Db(member.Phone));
+                command.Parameters.AddWithValue("$wechat", Db(member.WeChat));
+                command.Parameters.AddWithValue("$email", Db(member.Email));
+                command.Parameters.AddWithValue("$note", Db(member.Note));
+                command.Parameters.AddWithValue("$sort", member.SortOrder);
+                command.Parameters.AddWithValue("$created", Utc(member.CreatedAtUtc));
+                command.Parameters.AddWithValue("$updated", Utc(member.UpdatedAtUtc));
+                await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+        }
+
         await using (var reminders = connection.CreateCommand())
         {
             reminders.Transaction = transaction;
@@ -92,11 +158,12 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             {
                 ShootBookingStatus.Cancelled => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;",
                 ShootBookingStatus.Completed => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;",
+                ShootBookingStatus.Draft => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$updated WHERE BookingId=$booking;",
                 _ => "UPDATE BookingReminders SET TriggerAtUtc=strftime('%Y-%m-%dT%H:%M:%fZ',$start, '-' || OffsetMinutes || ' minutes'),UpdatedAtUtc=$updated WHERE BookingId=$booking AND TriggerKind='RelativeToBookingStart' AND OffsetMinutes IS NOT NULL AND Status IN ('Scheduled','Disabled');"
             };
             reminders.Parameters.AddWithValue("$booking", booking.Id.ToString("D"));
             reminders.Parameters.AddWithValue("$updated", Utc(booking.UpdatedAtUtc));
-            if (booking.Status is not ShootBookingStatus.Cancelled and not ShootBookingStatus.Completed) reminders.Parameters.AddWithValue("$start", Utc(booking.StartAtUtc));
+            if (booking.Status is not ShootBookingStatus.Cancelled and not ShootBookingStatus.Completed and not ShootBookingStatus.Draft) reminders.Parameters.AddWithValue("$start", Utc(booking.StartAtUtc));
             await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
 
