@@ -469,15 +469,23 @@ public partial class MainWindow : Window
         if (!IsLoaded) return;
         var compact = ActualWidth < 1350;
         var quickOverflow = ActualWidth <= 1280;
+        var shortWorkbench = ActualHeight < 820;
+        var veryShortWorkbench = ActualHeight < 760;
+        var taskCenterWidth = ActualWidth >= 1920 ? 360d : 320d;
         _viewModel?.SetQuickToolsCompact(quickOverflow);
         QuickToolsOverflowButton.Visibility = quickOverflow ? Visibility.Visible : Visibility.Collapsed;
         Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 2 : 3);
-        WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(320);
+        WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(taskCenterWidth);
         TaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(TaskCenterPanel, compact ? 0 : 1);
         Grid.SetColumnSpan(TaskCenterPanel, compact ? 2 : 1);
-        TaskCenterPanel.Width = compact ? 320 : double.NaN;
+        TaskCenterPanel.Width = compact ? 300 : double.NaN;
         TaskCenterPanel.HorizontalAlignment = compact ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
+        if (WorkbenchOverviewRow is not null)
+        {
+            WorkbenchOverviewRow.Height = new GridLength(veryShortWorkbench ? 170 : shortWorkbench ? 190 : 230);
+            WorkbenchScheduleRow.Height = new GridLength(veryShortWorkbench ? 115 : shortWorkbench ? 140 : 170);
+        }
         TaskDrawerButton.Visibility = compact ? Visibility.Visible : Visibility.Collapsed;
         WorkbenchQuickActions.Margin = compact ? new Thickness(0, 0, 116, 0) : new Thickness(0);
         TaskDrawerButton.Content = _taskCenterDrawerOpen ? "收起任务中心" : "任务中心";
@@ -603,6 +611,8 @@ public partial class MainWindow : Window
             TaskCenterRuntimeContent.Visibility = Visibility.Collapsed;
             TaskCenterReviewContent.Visibility = Visibility.Visible;
         }
+        if (reviewState?.StartsWith("WorkbenchTaskCenter", StringComparison.OrdinalIgnoreCase) == true)
+            ApplyTaskCenterReviewState(reviewState);
 
         var tab = RecentAllTab;
         if (string.Equals(reviewState, "CompletedProjectsEmpty", StringComparison.OrdinalIgnoreCase))
@@ -648,6 +658,21 @@ public partial class MainWindow : Window
     }
 
     private static bool IsTetherColorReviewState(string? state) => state?.StartsWith("Tether", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("Lut", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("ColorProfile", StringComparison.OrdinalIgnoreCase) == true || state?.StartsWith("ClientMonitor", StringComparison.OrdinalIgnoreCase) == true || state == "MixedDpi";
+
+    private void ApplyTaskCenterReviewState(string state)
+    {
+        if (string.Equals(state, "WorkbenchTaskCenterEmpty", StringComparison.OrdinalIgnoreCase)) return;
+        var count = state.Contains("20Tasks", StringComparison.OrdinalIgnoreCase) || state.Contains("Scrolled", StringComparison.OrdinalIgnoreCase) ? 20 : 5;
+        TaskCenterRuntimeContent.Visibility = Visibility.Collapsed;
+        TaskCenterReviewContent.Visibility = Visibility.Visible;
+        TaskCenterReviewList.ItemsSource = Enumerable.Range(1, count).Select(index => new TaskCenterReviewItem(
+            $"界面验收任务 {index:00}", (index % 4) switch { 0 => "来源：联机拍摄", 1 => "来源：文件复制", 2 => "来源：批量压缩", _ => "来源：归片工作区" },
+            index % 5 == 0 ? "等待确认" : "处理中", Math.Min(96, 12 + index * 4), $"更新 08-07 {14 + index / 6:00}:{index * 3 % 60:00}" )).ToArray();
+        if (state.Contains("Scrolled", StringComparison.OrdinalIgnoreCase))
+            _ = Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () => TaskCenterReviewContent.ScrollToVerticalOffset(520));
+    }
+
+    private sealed record TaskCenterReviewItem(string DisplayName, string Source, string StateLabel, double Progress, string UpdatedAt);
 
     private void CaptureUiReviewFrame(string outputPath)
     {

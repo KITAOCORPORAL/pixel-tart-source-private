@@ -61,6 +61,13 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
+        if (state.StartsWith("WorkbenchCalendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("WorkbenchTaskCenter", StringComparison.OrdinalIgnoreCase))
+        {
+            _viewModel.NavigateCommand.Execute("Workbench");
+            ApplyCalendarReviewState(state);
+            return true;
+        }
+
         if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("WorkCalendar");
@@ -250,9 +257,9 @@ public partial class MainWindow
             {
                 (Offset: 0, Hour: 9, Duration: 2, Status: ShootBookingStatus.Confirmed, Title: "品牌人像拍摄", Location: "一号影棚", WeatherCode: "1"),
                 (Offset: 0, Hour: 10, Duration: 2, Status: ShootBookingStatus.Preparing, Title: "新品静物拍摄", Location: "二号影棚", WeatherCode: "61"),
-                (Offset: 1, Hour: 14, Duration: 3, Status: ShootBookingStatus.Shooting, Title: "服装目录拍摄", Location: "合成外景地", WeatherCode: "2"),
-                (Offset: 2, Hour: 9, Duration: 1, Status: ShootBookingStatus.Tentative, Title: "演员定妆照", Location: "三号影棚", WeatherCode: "3"),
-                (Offset: 3, Hour: 11, Duration: 2, Status: ShootBookingStatus.Completed, Title: "活动主视觉", Location: "会议中心", WeatherCode: "0"),
+                (Offset: 1, Hour: 14, Duration: 3, Status: ShootBookingStatus.Completed, Title: "服装目录拍摄", Location: "合成外景地", WeatherCode: "2"),
+                (Offset: 2, Hour: 9, Duration: 1, Status: ShootBookingStatus.AwaitingDelivery, Title: "演员定妆照", Location: "三号影棚", WeatherCode: "3"),
+                (Offset: 3, Hour: 11, Duration: 2, Status: ShootBookingStatus.Delivered, Title: "活动主视觉", Location: "会议中心", WeatherCode: "0"),
                 (Offset: 5, Hour: 15, Duration: 2, Status: ShootBookingStatus.Postponed, Title: "场地勘景", Location: "合成场地", WeatherCode: "45"),
                 (Offset: 7, Hour: 10, Duration: 4, Status: ShootBookingStatus.Cancelled, Title: "样片补拍", Location: "四号影棚", WeatherCode: "80")
             };
@@ -273,10 +280,22 @@ public partial class MainWindow
             }
         }
 
-        calendar.Month.Configure(DateTime.Today, items, DateTime.Today, weather);
+        var selectedOffset = state switch
+        {
+            "WorkbenchCalendarShot" => 1,
+            "WorkbenchCalendarPendingReturn" => 2,
+            "WorkbenchCalendarReturned" => 3,
+            "WorkbenchCalendarSelected" => 2,
+            "WorkbenchCalendarNumberVisible" => 5,
+            "WorkbenchCalendarDarkTheme" => 1,
+            "WorkbenchCalendarFree" => 10,
+            _ => 0
+        };
+        var selectedDate = DateTime.Today.AddDays(selectedOffset);
+        calendar.Month.Configure(DateTime.Today, items, selectedDate, weather);
         calendar.Week.Configure(WorkCalendarViewModel.StartOfWeek(DateTime.Today), items, DateTime.Today, weather);
         calendar.Day.Configure(DateTime.Today, items, weather);
-        calendar.DaySchedule.Configure(DateTime.Today, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, DateTime.Today)).ToArray(), weather);
+        calendar.DaySchedule.Configure(selectedDate, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, selectedDate)).ToArray(), weather);
         if (state == "CalendarDayClosed")
         {
             var today = calendar.Month.Days.FirstOrDefault(day => day.Date == DateTime.Today);
@@ -287,6 +306,21 @@ public partial class MainWindow
             "CalendarEmptyMonth" => "RC2 运行时验收：当前月份没有拍摄排期。",
             "CalendarStatusColors" => "RC2 运行时验收：状态颜色、数量、冲突和天气标记。",
             "CalendarSelectedDay" => "RC2 运行时验收：已选择今天并同步右侧日期详情。",
+            "CalendarHeaderLayout" => "RC5 UI补丁：完整日历工具栏按功能分组并保持响应式间距。",
+            "CalendarYearMonthSpacing" => "RC5 UI补丁：年份与月份使用独立标签和稳定间距。",
+            "WorkbenchCalendarDarkTheme" => "RC5 UI补丁：迷你日历状态格在深色主题下保持清晰对比。",
+            "WorkbenchCalendarFree" => "RC5 UI补丁：空闲日期使用灰色日期数字格。",
+            "WorkbenchCalendarScheduled" => "RC5 UI补丁：待拍摄日期使用红色日期数字格。",
+            "WorkbenchCalendarShot" => "RC5 UI补丁：已拍摄日期使用绿色日期数字格。",
+            "WorkbenchCalendarPendingReturn" => "RC5 UI补丁：待返片日期使用黄色日期数字格。",
+            "WorkbenchCalendarReturned" => "RC5 UI补丁：已返片日期使用蓝色日期数字格。",
+            "WorkbenchCalendarNumberVisible" => "RC5 UI补丁：日期数字在状态格内完整可见。",
+            "WorkbenchCalendarToday" => "RC5 UI补丁：今天描边与状态背景保持独立。",
+            "WorkbenchCalendarSelected" => "RC5 UI补丁：选择描边与今天描边保持独立。",
+            "WorkbenchTaskCenterEmpty" => "RC5 UI补丁：任务中心空状态固定在内容区。",
+            "WorkbenchTaskCenter5Tasks" => "RC5 UI补丁：任务中心展示来源、进度、状态和更新时间。",
+            "WorkbenchTaskCenter20Tasks" => "RC5 UI补丁：任务中心中间列表支持滚动。",
+            "WorkbenchTaskCenterScrolled" => "RC5 UI补丁：任务中心滚动后页头和页脚保持固定。",
             "CalendarCreateButton" => "RC2 运行时验收：加号默认使用当前选中日期。",
             "CalendarDayDetails" => "RC2 运行时验收：日期详情与月历使用同一数据源。",
             "CalendarCompleted" => "RC2 运行时验收：完成状态保留在日历中且不自动归档。",

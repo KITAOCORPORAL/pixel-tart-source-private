@@ -55,5 +55,11 @@
     <SolidColorBrush x:Key="CalendarStatusShotBrush" Color="#4BC782" />
     <SolidColorBrush x:Key="CalendarStatusPendingDeliveryBrush" Color="#E6B84F" />
     <SolidColorBrush x:Key="CalendarStatusDeliveredBrush" Color="#58A9F5" />
+    <SolidColorBrush x:Key="CalendarStatusFreeForegroundBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="CalendarStatusScheduledForegroundBrush" Color="#190708" />
+    <SolidColorBrush x:Key="CalendarStatusShotForegroundBrush" Color="#061A10" />
+    <SolidColorBrush x:Key="CalendarStatusPendingDeliveryForegroundBrush" Color="#1D1503" />
+    <SolidColorBrush x:Key="CalendarStatusDeliveredForegroundBrush" Color="#061422" />
+    <SolidColorBrush x:Key="CalendarTodayOutlineBrush" Color="#FFFFFF" />
     <LinearGradientBrush x:Key="WorkbenchHeroBrush" StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#004B59" Offset="0" /><GradientStop Color="#004523" Offset="1" /></LinearGradientBrush>
 </ResourceDictionary>
