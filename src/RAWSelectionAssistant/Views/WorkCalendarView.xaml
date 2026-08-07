@@ -35,18 +35,28 @@
             </StackPanel>
         </Grid>
 
-        <Border Grid.Row="1" Style="{StaticResource PanelBorder}" Padding="10" Margin="0,14,0,12">
-            <Grid>
-            <WrapPanel VerticalAlignment="Center">
+        <Border Grid.Row="1" Style="{StaticResource PanelBorder}" Padding="12" Margin="0,14,0,18">
+            <Grid x:Name="CalendarToolbar" SizeChanged="CalendarToolbar_SizeChanged">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="24" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <StackPanel x:Name="CalendarViewGroup" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" AutomationProperties.Name="日历视图组">
                 <ComboBox Width="118" ItemsSource="{Binding PresentationOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedPresentation}" AutomationProperties.Name="工作日历视图" />
-                <Button Content="‹" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" />
-                <TextBlock Text="{Binding DisplayPeriod}" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" MinWidth="210" />
-                <Button Content="›" Style="{StaticResource SecondaryButton}" Margin="4,0,8,0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" />
-                <Button Content="今日" Style="{StaticResource SecondaryButton}" Command="{Binding TodayCommand}" AutomationProperties.Name="回到今天" AutomationProperties.HelpText="快捷键 Ctrl+T" />
+            </StackPanel>
+            <Grid x:Name="CalendarDateNavigationGroup" Grid.Column="2" MinWidth="392" VerticalAlignment="Center" AutomationProperties.Name="年月导航组">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="36" /><ColumnDefinition Width="*" /><ColumnDefinition Width="36" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="‹" Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0">
+                    <TextBlock Text="{Binding DisplayYear}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" MinWidth="76" TextAlignment="Center" />
+                    <TextBlock Text="{Binding DisplayMonth}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0" MinWidth="48" TextAlignment="Center" />
+                </StackPanel>
+                <Button Grid.Column="2" Content="›" Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" />
+                <Button Grid.Column="3" Content="今天" Style="{StaticResource SecondaryButton}" Margin="12,0,0,0" Command="{Binding TodayCommand}" AutomationProperties.Name="回到今天" AutomationProperties.HelpText="今日；快捷键 Ctrl+T" />
+            </Grid>
+            <StackPanel x:Name="CalendarFilterSearchGroup" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" AutomationProperties.Name="日历筛选与搜索组">
                 <ComboBox Width="118" ItemsSource="{Binding StatusOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedStatus}" AutomationProperties.Name="拍摄状态筛选" />
-                <TextBox x:Name="SearchBox" Width="190" Margin="8,0,0,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" ToolTip="搜索项目、客户、地点、类型、要求或备注" AutomationProperties.Name="搜索排期" AutomationProperties.HelpText="搜索词只用于本地查询且不写入日志，快捷键 Ctrl+F" />
-                <ToggleButton x:Name="MoreFiltersButton" Content="更多筛选" Style="{StaticResource FilterToggleButton}" Margin="6,0,0,0" ToolTip="日期跳转、排序、类型、关闭档期和搜索范围" AutomationProperties.Name="更多日历筛选" />
-            </WrapPanel>
+                <TextBox x:Name="SearchBox" Width="210" Margin="10,0,0,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" ToolTip="搜索项目、客户、地点、类型、要求或备注" AutomationProperties.Name="搜索排期" AutomationProperties.HelpText="搜索词只用于本地查询且不写入日志，快捷键 Ctrl+F" />
+                <ToggleButton x:Name="MoreFiltersButton" Content="更多筛选" Style="{StaticResource FilterToggleButton}" Margin="10,0,0,0" ToolTip="日期跳转、排序、类型、关闭档期和搜索范围" AutomationProperties.Name="更多日历筛选" />
+            </StackPanel>
             <Popup PlacementTarget="{Binding ElementName=MoreFiltersButton}" Placement="Bottom" VerticalOffset="6" IsOpen="{Binding IsChecked, ElementName=MoreFiltersButton}" StaysOpen="False" AllowsTransparency="True">
                 <Border Style="{StaticResource PopupSurfaceBorder}" Padding="12" Width="310"><StackPanel>
                     <TextBlock Text="日历粒度" Style="{StaticResource CaptionText}" />
@@ -61,7 +71,7 @@
             </Grid>
         </Border>
 
-        <Expander Grid.Row="2" Header="状态图例" IsExpanded="False" Margin="0,0,0,10" AutomationProperties.Name="可折叠状态图例">
+        <Expander Grid.Row="2" Header="状态图例" IsExpanded="False" Margin="0,0,0,12" AutomationProperties.Name="可折叠状态图例">
             <Border Style="{StaticResource PanelBorder}" Padding="10,7">
             <WrapPanel VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusFreeBrush}" VerticalAlignment="Center" /><TextBlock Text="空闲" Margin="4,0,0,0" /></StackPanel>
