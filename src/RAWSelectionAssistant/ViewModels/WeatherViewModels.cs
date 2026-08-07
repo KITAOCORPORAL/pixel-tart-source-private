@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Utilities;
 
@@ -21,15 +22,18 @@ public sealed class BookingWeatherViewModel : ObservableObject
     private BookingWeatherSummary? _summary;
     private string _statusText = "尚未启用天气";
     private readonly ICurrentLocationService? _currentLocationService;
+    private readonly IBookingTimeDisplayService _timeDisplay;
     private WeatherLocationModeOption _selectedLocationMode;
     private CurrentLocationPermission _locationPermission = CurrentLocationPermission.Unknown;
     private bool _locationAttempted;
 
-    public BookingWeatherViewModel(IWeatherForecastService service, WeatherFeatureState state, ICurrentLocationService? currentLocationService = null)
+    public BookingWeatherViewModel(IWeatherForecastService service, WeatherFeatureState state, ICurrentLocationService? currentLocationService = null,
+        IBookingTimeDisplayService? timeDisplay = null)
     {
         _service = service;
         _state = state;
         _currentLocationService = currentLocationService;
+        _timeDisplay = timeDisplay ?? BookingTimeDisplayService.Default;
         LocationModes =
         [
             new(WeatherLocationMode.CurrentLocation, "当前位置"),
@@ -105,8 +109,8 @@ public sealed class BookingWeatherViewModel : ObservableObject
     public string PrecipitationText => Summary?.RepresentativeHour is { } hour ? $"{hour.PrecipitationProbability}% · {hour.PrecipitationMm:0.#} mm" : "—";
     public string WindText => Summary?.RepresentativeHour is { } hour ? $"{hour.WindSpeedKph:0.#} km/h · 阵风 {hour.WindGustKph:0.#} km/h" : "—";
     public string AtmosphereText => Summary?.RepresentativeHour is { } hour ? $"湿度 {hour.RelativeHumidity}% · 云量 {hour.CloudCover}% · 能见度 {hour.VisibilityMeters / 1000:0.#} km" : "—";
-    public string SunText => Summary?.Day is { } day ? $"日出 {Local(day.SunriseUtc)} · 日落 {Local(day.SunsetUtc)}" : "—";
-    public string UpdatedText => Summary?.UpdatedAtUtc is { } at ? $"更新时间 {at.ToLocalTime():yyyy-MM-dd HH:mm}" : "尚未更新";
+    public string SunText => Summary?.Day is { } day ? $"日出 {BookingTime(day.SunriseUtc, "HH:mm")} · 日落 {BookingTime(day.SunsetUtc, "HH:mm")}" : "—";
+    public string UpdatedText => Summary?.UpdatedAtUtc is { } at ? $"更新时间 {BookingTime(at, "yyyy-MM-dd HH:mm")}" : "尚未更新";
     public string ProviderText => $"数据来源：{Summary?.Provider ?? "Open-Meteo"}";
     public string RiskText => Summary switch
     {
@@ -285,7 +289,9 @@ public sealed class BookingWeatherViewModel : ObservableObject
         (OpenLocationSettingsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
     }
 
-    private static string Local(DateTimeOffset? value) => value?.ToLocalTime().ToString("HH:mm") ?? "—";
+    private string BookingTime(DateTimeOffset? value, string format) => value is { } at
+        ? _timeDisplay.ToBookingTime(at, _booking?.TimeZoneId).ToString(format)
+        : "—";
     private static string WeatherCodeText(string code) => code switch
     {
         "0" => "晴", "1" or "2" => "少云", "3" => "阴", "45" or "48" => "雾", "51" or "53" or "55" => "毛毛雨",

@@ -27,7 +27,7 @@ public sealed class StatusToTextConverter : IValueConverter
                 ShootBookingStatus.AwaitingRetouch => "待精修",
                 ShootBookingStatus.Retouched => "已精修",
                 ShootBookingStatus.AwaitingDelivery => "待交付",
-                ShootBookingStatus.Delivered => "已交付",
+                ShootBookingStatus.Delivered => "已返图",
                 ShootBookingStatus.Cancelled => "已取消",
                 ShootBookingStatus.Postponed => "已延期",
                 _ => "未知状态"

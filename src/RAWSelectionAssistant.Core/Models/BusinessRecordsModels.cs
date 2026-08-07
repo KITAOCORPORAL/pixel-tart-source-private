@@ -86,7 +86,8 @@ public sealed record FinanceQuery(
     Guid? BookingId = null,
     Guid? ProjectId = null,
     Guid? CategoryId = null,
-    string? Keyword = null);
+    string? Keyword = null,
+    string? CurrencyCode = null);
 
 public sealed record FinanceSummary(
     long IncomeMinor,

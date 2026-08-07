@@ -18,6 +18,7 @@
         <KeyBinding Key="Enter" Modifiers="Alt" Command="{Binding ShowDetailsCommand}" CommandParameter="{Binding SelectedSelection}" />
     </Window.InputBindings>
     <Window.Resources>
+        <!-- RC5 keeps the legacy vector resource aliases IconCollapse/IconExpand for older extensions; sidebar visuals use the unique IconPanel* keys below. -->
         <conv:StatusToTextConverter x:Key="StatusToTextConverter" />
         <conv:StatusToBrushConverter x:Key="StatusToBrushConverter" />
         <conv:ZeroIntToVisibilityConverter x:Key="ZeroIntToVisibilityConverter" />
@@ -164,25 +165,25 @@
                     <ScrollViewer x:Name="SidebarNavigationScroll" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False">
                         <StackPanel>
                             <TextBlock Text="工作台" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Button Content="工作台" Tag="{StaticResource IconWorkbench}" Command="{Binding NavigateCommand}" CommandParameter="Workbench" ToolTip="工作台" AutomationProperties.Name="工作台">
+                            <Button Content="工作台" Tag="{StaticResource IconDashboard}" Command="{Binding NavigateCommand}" CommandParameter="Workbench" ToolTip="工作台" AutomationProperties.Name="工作台">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkbenchPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="归片工作区" Tag="{StaticResource IconWorkspace}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Workflow" ToolTip="归片工作区" AutomationProperties.Name="归片工作区" />
-                            <Button Content="工作日历" Tag="{StaticResource IconHistory}" Command="{Binding NavigateCommand}" CommandParameter="WorkCalendar" ToolTip="工作日历" AutomationProperties.Name="工作日历">
+                            <Button Content="归片工作区" Tag="{StaticResource IconPhotoStack}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Workflow" ToolTip="归片工作区" AutomationProperties.Name="归片工作区" />
+                            <Button Content="工作日历" Tag="{StaticResource IconCalendar}" Command="{Binding NavigateCommand}" CommandParameter="WorkCalendar" ToolTip="工作日历" AutomationProperties.Name="工作日历">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkCalendarPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="联机拍摄" Tag="{StaticResource IconWorkspace}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄（看守文件夹）" AutomationProperties.Name="联机拍摄">
+                            <Button Content="联机拍摄" Tag="{StaticResource IconCameraTether}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄" AutomationProperties.Name="联机拍摄">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsTetherPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="收支" Tag="{StaticResource IconHistory}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
+                            <Button Content="收支" Tag="{StaticResource IconWallet}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsFinancePage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="项目历史" Tag="{StaticResource IconHistory}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" />
+                            <Button Content="项目历史" Tag="{StaticResource IconArchiveHistory}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" />
                             <Separator />
                             <TextBlock Text="应用" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Button Content="授权与版本" Tag="{StaticResource IconLicense}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="授权与版本" AutomationProperties.Name="授权与版本" />
-                            <Button x:Name="SidebarSettingsButton" Content="设置" Tag="{StaticResource IconSettings}" Style="{StaticResource SidebarNavButton}" Command="{Binding OpenSettingsCommand}" ToolTip="设置" AutomationProperties.Name="设置" />
-                            <Button Content="帮助" Tag="{StaticResource IconHelp}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Help" ToolTip="帮助" AutomationProperties.Name="帮助" />
+                            <Button Content="授权与版本" Tag="{StaticResource IconShieldKey}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="授权与版本" AutomationProperties.Name="授权与版本" />
+                            <Button x:Name="SidebarSettingsButton" Content="设置" Tag="{StaticResource IconGear}" Style="{StaticResource SidebarNavButton}" Command="{Binding OpenSettingsCommand}" ToolTip="设置" AutomationProperties.Name="设置" />
+                            <Button Content="帮助" Tag="{StaticResource IconQuestionCircle}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Help" ToolTip="帮助" AutomationProperties.Name="帮助" />
                         </StackPanel>
                     </ScrollViewer>
                     <StackPanel Grid.Row="2">
@@ -192,8 +193,8 @@
                                 Style="{StaticResource SidebarNavButton}" Click="ToolboxQuickButton_Click"
                                 ToolTip="{Binding ToolboxEntry.Description}"
                                 AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" />
-                        <Button Content="使用教程" Tag="{StaticResource IconHelp}" Style="{StaticResource SidebarNavButton}" Command="{Binding HelpCommand}" ToolTip="使用教程" AutomationProperties.Name="使用教程" />
-                        <Button Content="问题反馈" Tag="{StaticResource IconRename}" Style="{StaticResource SidebarNavButton}" Command="{Binding FeedbackCommand}" ToolTip="建议与问题反馈" AutomationProperties.Name="建议与问题反馈" />
+                        <Button Content="使用教程" Tag="{StaticResource IconBookPlay}" Style="{StaticResource SidebarNavButton}" Command="{Binding HelpCommand}" ToolTip="使用教程" AutomationProperties.Name="使用教程" />
+                        <Button Content="问题反馈" Tag="{StaticResource IconMessageBug}" Style="{StaticResource SidebarNavButton}" Command="{Binding FeedbackCommand}" ToolTip="问题反馈" AutomationProperties.Name="问题反馈" />
                     </StackPanel>
                     <Border x:Name="EditionStatusArea" Grid.Row="3" Style="{StaticResource SidebarEditionCard}" ToolTip="{Binding EditionLabel}" AutomationProperties.Name="版本状态">
                         <Grid>
@@ -208,13 +209,13 @@
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}">
                                 <Setter Property="Content" Value="收起侧栏" />
-                                <Setter Property="Tag" Value="{StaticResource IconCollapse}" />
+                                <Setter Property="Tag" Value="{StaticResource IconPanelCollapse}" />
                                 <Setter Property="ToolTip" Value="收起侧栏" />
                                 <Setter Property="AutomationProperties.Name" Value="收起侧栏" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
                                         <Setter Property="Content" Value="展开侧栏" />
-                                        <Setter Property="Tag" Value="{StaticResource IconExpand}" />
+                                        <Setter Property="Tag" Value="{StaticResource IconPanelExpand}" />
                                         <Setter Property="ToolTip" Value="展开侧栏" />
                                         <Setter Property="AutomationProperties.Name" Value="展开侧栏" />
                                     </DataTrigger>
@@ -355,7 +356,7 @@
                                             GotKeyboardFocus="LocalSplitHelpButton_GotKeyboardFocus" LostKeyboardFocus="LocalSplitHelpButton_LostKeyboardFocus" PreviewKeyDown="LocalSplitHelpButton_PreviewKeyDown"
                                             ToolTipService.InitialShowDelay="100" ToolTipService.BetweenShowDelay="100" ToolTipService.ShowDuration="12000"
                                             AutomationProperties.Name="本地分片说明" AutomationProperties.HelpText="{Binding LocalSplitHelpText}">
-                                        <Button.ToolTip><ToolTip x:Name="LocalSplitHelpToolTip" MaxWidth="340" Placement="Bottom" VerticalOffset="8" StaysOpen="False"><TextBlock Text="导入TXT、客户选图JPG或编号记录，匹配本地JPG、RAW及相关文件。" TextWrapping="Wrap" /></ToolTip></Button.ToolTip>
+                                        <Button.ToolTip><ToolTip x:Name="LocalSplitHelpToolTip" MaxWidth="340" Placement="Bottom" VerticalOffset="8"><TextBlock Text="导入TXT、客户选图JPG或编号记录，匹配本地JPG、RAW及相关文件。" TextWrapping="Wrap" /></ToolTip></Button.ToolTip>
                                     </Button>
                                 </Grid>
                             </Grid>

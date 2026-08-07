@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:conv="clr-namespace:RAWSelectionAssistant.Converters"
+             xmlns:models="clr-namespace:RAWSelectionAssistant.Core.Models;assembly=RAWSelectionAssistant.Core"
              AutomationProperties.Name="工作台右侧工作日历"
              AutomationProperties.HelpText="与完整工作日历共享同一排期数据源">
     <UserControl.Resources>
@@ -26,11 +27,13 @@
             <Button Grid.Column="2" Content="＋" Style="{StaticResource PrimaryButton}" Width="32" Height="30" Padding="0"
                     Command="{Binding NewBookingCommand}" ToolTip="新建拍摄排期" AutomationProperties.Name="新建拍摄排期" />
         </Grid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,7,0,2">
-            <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource AccentBrush}" VerticalAlignment="Center" /><TextBlock Text="未拍摄" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,12,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource SuccessBrush}" VerticalAlignment="Center" /><TextBlock Text="已拍摄" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
-            <StackPanel Orientation="Horizontal"><Ellipse Width="8" Height="8" Fill="{DynamicResource WarningBrush}" VerticalAlignment="Center" /><TextBlock Text="待返图" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
-        </StackPanel>
+        <WrapPanel Grid.Row="1" Margin="0,7,0,2">
+            <StackPanel Orientation="Horizontal" Margin="0,0,10,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusFreeBrush}" VerticalAlignment="Center" /><TextBlock Text="空闲" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,10,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusScheduledBrush}" VerticalAlignment="Center" /><TextBlock Text="有拍摄" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,10,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusShotBrush}" VerticalAlignment="Center" /><TextBlock Text="已拍摄" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,10,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusPendingDeliveryBrush}" VerticalAlignment="Center" /><TextBlock Text="待返图" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusDeliveredBrush}" VerticalAlignment="Center" /><TextBlock Text="已返图" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
+        </WrapPanel>
         <Grid Grid.Row="2" Margin="0,3,0,4">
             <Button Content="‹" Style="{StaticResource GhostButton}" Width="30" Height="28" Padding="0" HorizontalAlignment="Left" Command="{Binding PreviousCommand}" AutomationProperties.Name="上个月" />
             <Button Content="{Binding DisplayPeriod}" Style="{StaticResource GhostButton}" HorizontalAlignment="Center" Command="{Binding TodayCommand}" ToolTip="返回今天" AutomationProperties.Name="返回今天" />
@@ -57,13 +60,12 @@
                         <Grid>
                             <TextBlock Text="{Binding DayNumber}" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" />
                             <Border CornerRadius="7" MinWidth="14" Height="14" Padding="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding HasBookings, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource AccentBrush}" /><Style.Triggers><DataTrigger Binding="{Binding PrimaryBusinessState}" Value="已拍摄"><Setter Property="Background" Value="{DynamicResource SuccessBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryBusinessState}" Value="待返图"><Setter Property="Background" Value="{DynamicResource WarningBrush}" /></DataTrigger></Style.Triggers></Style></Border.Style>
+                                <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource CalendarStatusScheduledBrush}" /><Style.Triggers><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Background" Value="{DynamicResource CalendarStatusShotBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Background" Value="{DynamicResource CalendarStatusPendingDeliveryBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /></DataTrigger></Style.Triggers></Style></Border.Style>
                                 <TextBlock Text="{Binding BookingCountText}" Foreground="White" FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Visibility="{Binding HasBookings, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Ellipse Width="7" Height="7" VerticalAlignment="Center" Tag="{Binding PrimaryStatusGlyph}"><Ellipse.Style><Style TargetType="Ellipse"><Setter Property="Fill" Value="{DynamicResource AccentBrush}" /><Style.Triggers><DataTrigger Binding="{Binding PrimaryBusinessState}" Value="已拍摄"><Setter Property="Fill" Value="{DynamicResource SuccessBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryBusinessState}" Value="待返图"><Setter Property="Fill" Value="{DynamicResource WarningBrush}" /></DataTrigger></Style.Triggers></Style></Ellipse.Style></Ellipse>
-                                <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" Margin="3,0,0,0" FontSize="10" />
-                            </StackPanel>
+                            <Border Height="2" VerticalAlignment="Bottom" Background="{DynamicResource CalendarStatusFreeBrush}" Opacity="0.5"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Visible" /><Style.Triggers><DataTrigger Binding="{Binding HasBookings}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger></Style.Triggers></Style></Border.Style></Border>
+                            <ItemsControl ItemsSource="{Binding WorkflowSegments}" VerticalAlignment="Bottom" Visibility="{Binding HasBookings, Converter={StaticResource BooleanToVisibilityConverter}}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Width="8" Height="4" Margin="0,0,2,0" CornerRadius="1"><Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource CalendarStatusScheduledBrush}" /><Style.Triggers><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Background" Value="{DynamicResource CalendarStatusShotBrush}" /></DataTrigger><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Background" Value="{DynamicResource CalendarStatusPendingDeliveryBrush}" /></DataTrigger><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /></DataTrigger></Style.Triggers></Style></Border.Style></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                            <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10" />
                             <TextBlock Text="{Binding WeatherGlyph}" FontSize="9" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                         </Grid>
                     </Border>

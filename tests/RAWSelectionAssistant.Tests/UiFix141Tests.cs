@@ -17,7 +17,7 @@ public sealed class UiFix141Tests
     public void Sidebar_UsesPackagedVectorGeometriesInsteadOfFontGlyphs()
     {
         var main = Text("src/RAWSelectionAssistant/MainWindow.xaml");
-        Contains(main, "IconWorkbench", "IconLocalSplit", "IconWorkspace", "IconHistory", "IconLicense", "IconSettings", "IconHelp", "IconCollapse");
+        Contains(main, "IconDashboard", "IconPhotoStack", "IconCalendar", "IconArchiveHistory", "IconShieldKey", "IconGear", "IconQuestionCircle", "IconPanelCollapse");
         Assert.IsFalse(main.Contains("Segoe Fluent Icons", StringComparison.Ordinal));
         Assert.IsFalse(main.Contains("&#xE", StringComparison.OrdinalIgnoreCase));
     }

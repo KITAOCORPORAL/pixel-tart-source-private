@@ -150,6 +150,7 @@ public sealed class MainViewModel : ObservableObject
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
         if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
+        if (FinancePage is not null) FinancePage.PropertyChanged += ChildPage_PropertyChanged;
         if (ReminderNotifications is not null)
         {
             ReminderNotifications.OpenBookingRequested += ReminderNotifications_OpenBookingRequested;
@@ -785,10 +786,24 @@ public sealed class MainViewModel : ObservableObject
         "Tether" => TetherPage?.StatusText ?? "看守文件夹监看准备就绪",
         "WorkCalendar" => WorkCalendarPage.StatusText,
         "Workbench" or "ProjectCenter" => string.IsNullOrWhiteSpace(WorkbenchSchedule?.StatusText) ? "工作台准备就绪" : WorkbenchSchedule.StatusText,
+        "Finance" => FinancePage?.StatusText ?? "本月暂无收支记录",
+        "LocalSplit" => "请选择本地分片入口",
+        "Workflow" => StatusMessage,
+        "History" => ProjectHistory.Count == 0 ? "暂无本地项目历史" : $"共 {ProjectHistory.Count} 个本地项目",
+        "Toolbox" => "工具箱准备就绪",
+        "BatchCompress" => "批量压缩准备就绪",
+        "Watermark" => "水印工具准备就绪",
+        "DeleteRejects" => "快速拒绝准备就绪",
+        "FtpTool" => "FTP 工具准备就绪",
+        "PhotoOrganize" => "整理图片准备就绪",
+        "BatchRename" => "批量重命名准备就绪",
+        "BatchConvert" => "批量转档准备就绪",
+        "PhotoGrouping" => "照片分组准备就绪",
+        "Collage" => "拼图工具准备就绪",
         "Activation" => LicenseStatusMessage,
         "Settings" => "设置更改会即时保存",
         "Help" => "帮助与教程",
-        _ => StatusMessage
+        _ => "准备就绪"
     };
     public string BackgroundTaskStatus => TetherPage?.IsRunning == true && !IsTetherPage ? "看守文件夹会话正在后台运行" : string.Empty;
     public string NotificationStatus => ReminderNotifications?.Items.Count > 0 ? $"{ReminderNotifications.Items.Count} 条提醒待处理" : string.Empty;
@@ -958,7 +973,8 @@ public sealed class MainViewModel : ObservableObject
     {
         if (e.PropertyName is nameof(WorkCalendarViewModel.StatusText) or nameof(WorkCalendarViewModel.DisplayPeriod) or
             nameof(TetherCaptureViewModel.StatusText) or nameof(TetherCaptureViewModel.PreviewStatus) or nameof(TetherCaptureViewModel.IsRunning) or
-            nameof(WorkbenchScheduleViewModel.StatusText) or nameof(WorkbenchScheduleViewModel.NextTodayText))
+            nameof(WorkbenchScheduleViewModel.StatusText) or nameof(WorkbenchScheduleViewModel.NextTodayText) or
+            nameof(FinanceViewModel.StatusText))
         {
             OnPropertyChanged(nameof(CurrentPageStatus));
             OnPropertyChanged(nameof(CurrentPageDetail));
@@ -2337,7 +2353,7 @@ public sealed class MainViewModel : ObservableObject
                 var summary = new TaskResultSummary(succeeded, succeeded, 0, 0, 0, 0, 0, 0);
                 await context.ReportProgressAsync(100, "完成", CurrentItem, summary, linked.Token);
                 return summary;
-            }, _currentProject.Id == Guid.Empty ? null : _currentProject.Id, writeRoot, _operationCancellation.Token);
+            }, CurrentPersistedTaskProjectId(), writeRoot, _operationCancellation.Token);
         }
         catch (OperationCanceledException)
         {
@@ -2362,6 +2378,12 @@ public sealed class MainViewModel : ObservableObject
             _operationCancellation = null;
             RefreshCommands();
         }
+    }
+
+    private Guid? CurrentPersistedTaskProjectId()
+    {
+        if (_currentProject.Id == Guid.Empty) return null;
+        return ProjectHistory.Any(project => project.Id == _currentProject.Id) ? _currentProject.Id : null;
     }
 
     private IProgress<OperationProgress> CreateProgress() => new Progress<OperationProgress>(progress =>

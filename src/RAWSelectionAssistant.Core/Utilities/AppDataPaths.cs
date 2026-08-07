@@ -5,9 +5,11 @@ public static class AppDataPaths
     private static readonly string ProcessName = Path.GetFileNameWithoutExtension(Environment.ProcessPath ?? string.Empty);
     private static readonly bool IsAcceptanceBuild = ProcessName.EndsWith(".Acceptance", StringComparison.OrdinalIgnoreCase);
     private static readonly bool IsUiReviewBuild = ProcessName.EndsWith(".UiReview", StringComparison.OrdinalIgnoreCase);
-    private static readonly string? AcceptanceRootOverride = IsAcceptanceBuild
+    private static readonly bool IsExplicitIsolatedRuntime = string.Equals(
+        Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME"), "1", StringComparison.Ordinal);
+    private static readonly string? RootOverride = IsAcceptanceBuild
         ? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")
-        : null;
+        : IsExplicitIsolatedRuntime ? Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT") : null;
 
     public static string Root { get; } = ResolveRoot();
 
@@ -34,8 +36,8 @@ public static class AppDataPaths
 
     private static string ResolveRoot()
     {
-        if (!string.IsNullOrWhiteSpace(AcceptanceRootOverride) && Path.IsPathFullyQualified(AcceptanceRootOverride))
-            return Path.GetFullPath(AcceptanceRootOverride);
+        if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))
+            return Path.GetFullPath(RootOverride);
         return Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             IsUiReviewBuild ? "KitaoPhotoSelector.UiReview" : IsAcceptanceBuild ? "KitaoPhotoSelector.Acceptance" : "KitaoPhotoSelector");
@@ -43,8 +45,8 @@ public static class AppDataPaths
 
     private static string ResolveLegacyRoot()
     {
-        if (!string.IsNullOrWhiteSpace(AcceptanceRootOverride) && Path.IsPathFullyQualified(AcceptanceRootOverride))
-            return Path.Combine(Path.GetDirectoryName(Path.GetFullPath(AcceptanceRootOverride))!, "RAWSelectionAssistant.Acceptance");
+        if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))
+            return Path.Combine(Path.GetDirectoryName(Path.GetFullPath(RootOverride))!, IsAcceptanceBuild ? "RAWSelectionAssistant.Acceptance" : "RAWSelectionAssistant.IsolatedRuntime");
         return Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             IsUiReviewBuild ? "RAWSelectionAssistant.UiReview" : IsAcceptanceBuild ? "RAWSelectionAssistant.Acceptance" : "RAWSelectionAssistant");
