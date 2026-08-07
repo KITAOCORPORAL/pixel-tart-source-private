@@ -7,7 +7,7 @@
     <Border Style="{StaticResource InfoCard}" Padding="12">
         <StackPanel>
             <Grid>
-                <StackPanel><TextBlock Text="拍摄天气参考" FontWeight="SemiBold" /><TextBlock Text="默认使用当前位置；仅在你主动查询或刷新时联网，不会持续定位。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
+                <StackPanel><TextBlock Text="拍摄天气参考" FontWeight="SemiBold" /><TextBlock Text="默认启用并自动尝试当前位置；只进行一次性定位，不会持续跟踪。" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
                 <CheckBox Content="启用天气" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" VerticalAlignment="Top" AutomationProperties.Name="启用可选天气查询" />
             </Grid>
             <TextBlock Text="尚未启用天气" Margin="0,10,0,0" Visibility="{Binding IsDisabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -16,7 +16,7 @@
                 <ComboBox ItemsSource="{Binding LocationModes}" SelectedItem="{Binding SelectedLocationMode}" DisplayMemberPath="Label" Margin="0,5,0,0" AutomationProperties.Name="天气位置模式" />
                 <StackPanel Margin="0,8,0,0" Visibility="{Binding IsCurrentLocationMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="{Binding LocationPermissionText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" />
-                    <WrapPanel Margin="0,6,0,0"><Button Content="使用当前位置" Style="{StaticResource SecondaryButton}" Command="{Binding UseCurrentLocationCommand}" AutomationProperties.Name="刷新当前位置" /><Button Content="打开位置设置" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding OpenLocationSettingsCommand}" AutomationProperties.Name="打开Windows位置隐私设置" /></WrapPanel>
+                    <WrapPanel Margin="0,6,0,0"><Button Content="重试当前位置" Style="{StaticResource SecondaryButton}" Command="{Binding UseCurrentLocationCommand}" AutomationProperties.Name="重试当前位置" /><Button Content="打开位置设置" Style="{StaticResource GhostButton}" Margin="7,0,0,0" Command="{Binding OpenLocationSettingsCommand}" AutomationProperties.Name="打开Windows位置隐私设置" /></WrapPanel>
                 </StackPanel>
                 <WrapPanel Visibility="{Binding IsManualCityMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBox Width="180" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="搜索天气城市或地区" />

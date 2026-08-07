@@ -15,6 +15,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed record ProjectOption(Guid? Id, string Name) { public override string ToString() => Name; }
 public sealed record TimeZoneOption(string Id, string Label) { public override string ToString() => Label; }
 public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label) { public override string ToString() => Label; }
+public sealed record CalendarWorkflowStatusOption(CalendarWorkflowStatus Value, string Label) { public override string ToString() => Label; }
 public sealed record ShootingTypeEditorOption(string Value, string Label) { public override string ToString() => Label; }
 public sealed record BookingStaffRoleOption(BookingStaffRole Value, string Label) { public override string ToString() => Label; }
 
@@ -44,12 +45,22 @@ public sealed class BookingStaffEditorViewModel : ObservableObject
     public string WeChat { get => _weChat; set => SetProperty(ref _weChat, value ?? string.Empty); }
     public string Email { get => _email; set => SetProperty(ref _email, value ?? string.Empty); }
     public string Note { get => _note; set => SetProperty(ref _note, value ?? string.Empty); }
-    public BookingStaffMember ToModel(Guid bookingId, int sortOrder)
+    public BookingStaffMember ToModel(Guid bookingId, int sortOrder, string? timeZoneId = null)
     {
-        DateTimeOffset? arrival = DateTimeOffset.TryParse(ArrivalTimeText, out var parsed) ? parsed : null;
+        DateTimeOffset? arrival = null;
+        if (DateTime.TryParse(ArrivalTimeText, CultureInfo.CurrentCulture, DateTimeStyles.AllowWhiteSpaces, out var parsed))
+        {
+            var local = DateTime.SpecifyKind(parsed, DateTimeKind.Unspecified);
+            var zone = BookingTimeDisplayService.Default.ResolveTimeZone(timeZoneId);
+            if (!zone.IsInvalidTime(local))
+            {
+                var offset = zone.IsAmbiguousTime(local) ? zone.GetAmbiguousTimeOffsets(local).Max() : zone.GetUtcOffset(local);
+                arrival = new DateTimeOffset(local, offset).ToUniversalTime();
+            }
+        }
         return new() { Id = Id, BookingId = bookingId, DisplayName = DisplayName, Role = SelectedRole?.Value ?? BookingStaffRole.Other, ArrivalTime = arrival, Phone = Phone, WeChat = WeChat, Email = Email, Note = Note, SortOrder = sortOrder };
     }
-    public static BookingStaffEditorViewModel From(BookingStaffMember value, IReadOnlyList<BookingStaffRoleOption> options) => new() { Id = value.Id, DisplayName = value.DisplayName, SelectedRole = options.First(x => x.Value == value.Role), ArrivalTimeText = value.ArrivalTime?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? string.Empty, Phone = value.Phone ?? string.Empty, WeChat = value.WeChat ?? string.Empty, Email = value.Email ?? string.Empty, Note = value.Note ?? string.Empty };
+    public static BookingStaffEditorViewModel From(BookingStaffMember value, IReadOnlyList<BookingStaffRoleOption> options, string? timeZoneId = null, IBookingTimeDisplayService? timeDisplay = null) => new() { Id = value.Id, DisplayName = value.DisplayName, SelectedRole = options.First(x => x.Value == value.Role), ArrivalTimeText = value.ArrivalTime is { } arrival ? (timeDisplay ?? BookingTimeDisplayService.Default).ToBookingTime(arrival, timeZoneId).ToString("yyyy-MM-dd HH:mm") : string.Empty, Phone = value.Phone ?? string.Empty, WeChat = value.WeChat ?? string.Empty, Email = value.Email ?? string.Empty, Note = value.Note ?? string.Empty };
 }
 
 public sealed class BookingContactDetailsViewModel(BookingContact value)
@@ -58,17 +69,19 @@ public sealed class BookingContactDetailsViewModel(BookingContact value)
     public string ContactText => string.Join(" · ", new[] { value.Phone, value.WeChat, value.Email, value.OtherContact }.Where(item => !string.IsNullOrWhiteSpace(item))!);
 }
 
-public sealed class BookingStaffDetailsViewModel(BookingStaffMember value)
+public sealed class BookingStaffDetailsViewModel(BookingStaffMember value, string? timeZoneId = null, IBookingTimeDisplayService? timeDisplay = null)
 {
     public string DisplayName => value.DisplayName;
     public string RoleText => value.Role switch { BookingStaffRole.Photographer => "摄影师", BookingStaffRole.PhotographyAssistant => "摄影助理", BookingStaffRole.LightingTechnician => "灯光师", BookingStaffRole.MakeupArtist => "化妆师", BookingStaffRole.Stylist => "造型师", BookingStaffRole.ModelOrActor => "模特或演员", BookingStaffRole.ClientRepresentative => "客户代表", BookingStaffRole.FloorAssistant => "场务", _ => "其他" };
-    public string ArrivalText => value.ArrivalTime?.ToLocalTime().ToString("M月d日 HH:mm 到场") ?? "未设置到场时间";
+    public string ArrivalText => value.ArrivalTime is { } arrival ? (timeDisplay ?? BookingTimeDisplayService.Default).ToBookingTime(arrival, timeZoneId).ToString("M月d日 HH:mm 到场") : "未设置到场时间";
 }
 
 public sealed class ShootBookingDetailsViewModel : ObservableObject
 {
     private readonly IShootBookingService _service;
     private readonly IBookingReminderScheduler? _reminderScheduler;
+    private readonly IDialogService? _dialogs;
+    private readonly IBookingTimeDisplayService _timeDisplay;
     private ShootBooking? _booking;
     private bool _amountsVisible;
     private bool _isBusy;
@@ -77,20 +90,25 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private readonly IBookingPeopleService? _peopleService;
     private readonly IFinanceService? _financeService;
     private FinanceSummary _financeSummary = new(0, 0, 0, 0, 0, 0);
+    private CalendarWorkflowStatusOption? _selectedWorkflowStatus;
+    private bool _suppressWorkflowStatusChange;
 
     public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
         IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
         IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null,
         IBookingPeopleService? peopleService = null, IFinanceService? financeService = null,
-        ICurrentLocationService? currentLocationService = null)
+        ICurrentLocationService? currentLocationService = null,
+        IBookingTimeDisplayService? timeDisplay = null)
     {
         _service = service;
         _reminderScheduler = reminderScheduler;
+        _dialogs = dialogs;
+        _timeDisplay = timeDisplay ?? BookingTimeDisplayService.Default;
         _peopleService = peopleService;
         _financeService = financeService;
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         if (reminderService is not null) Reminders = new BookingRemindersViewModel(reminderService, reminderScheduler);
-        if (weatherService is not null && weatherState is not null) Weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService);
+        if (weatherService is not null && weatherState is not null) Weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService, _timeDisplay);
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
@@ -99,16 +117,21 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         ViewFinanceCommand = new RelayCommand(_ => RequestFinance(null), _ => Booking is not null);
         AddIncomeCommand = new RelayCommand(_ => RequestFinance(FinanceTransactionKind.Income), _ => Booking is { IsArchived: false });
         AddExpenseCommand = new RelayCommand(_ => RequestFinance(FinanceTransactionKind.Expense), _ => Booking is { IsArchived: false });
+        WorkflowStatusOptions = Enum.GetValues<CalendarWorkflowStatus>()
+            .Select(value => new CalendarWorkflowStatusOption(value, CalendarWorkflowStatusMapper.DisplayName(value)))
+            .ToArray();
     }
 
     public event EventHandler? CloseRequested;
     public event EventHandler<Guid>? EditRequested;
     public event EventHandler<Guid>? Completed;
+    public event EventHandler<Guid>? WorkflowStatusChanged;
     public event EventHandler<Guid>? Archived;
     public event EventHandler<BookingFinanceRequestEventArgs>? FinanceRequested;
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
     public ObservableCollection<BookingContactDetailsViewModel> Contacts { get; } = [];
     public ObservableCollection<BookingStaffDetailsViewModel> Staff { get; } = [];
+    public IReadOnlyList<CalendarWorkflowStatusOption> WorkflowStatusOptions { get; }
     public BookingDocumentsViewModel? Documents { get; }
     public BookingRemindersViewModel? Reminders { get; }
     public BookingWeatherViewModel? Weather { get; }
@@ -134,10 +157,19 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public string Title => Booking?.Title ?? "排期详情";
     public string ClientDisplayName => Booking?.ClientDisplayName ?? "—";
     public string TimeText => Booking is null ? "—" : FormatTime(Booking);
-    public string TimeZoneText => Booking?.TimeZoneId ?? "—";
+    public string TimeZoneText => Booking is null ? "—" : _timeDisplay.FriendlyTimeZoneName(Booking.TimeZoneId);
     public string LocationText => Booking?.Location ?? "未填写";
     public string ShootingTypeText => Booking is null ? "—" : CalendarText.Type(Booking.ShootingType);
     public string BookingStatusText => Booking is null ? "—" : CalendarText.Status(Booking.Status);
+    public CalendarWorkflowStatusOption? SelectedWorkflowStatus
+    {
+        get => _selectedWorkflowStatus;
+        set
+        {
+            if (value is null || !SetProperty(ref _selectedWorkflowStatus, value) || _suppressWorkflowStatusChange) return;
+            _ = ChangeWorkflowStatusAsync(value);
+        }
+    }
     public string ShootingRequirementsText => Booking?.ShootingRequirements ?? "未填写";
     public string PreparationNotesText => Booking?.PreparationNotes ?? "未填写";
     public string NotesText => Booking?.Notes ?? "未填写";
@@ -174,10 +206,10 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
                 if (_peopleService is not null)
                 {
                     foreach (var item in await _peopleService.ListContactsAsync(bookingId).ConfigureAwait(true)) Contacts.Add(new(item));
-                    foreach (var item in await _peopleService.ListStaffAsync(bookingId).ConfigureAwait(true)) Staff.Add(new(item));
+                    foreach (var item in await _peopleService.ListStaffAsync(bookingId).ConfigureAwait(true)) Staff.Add(new(item, Booking.TimeZoneId, _timeDisplay));
                 }
                 if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
-                if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived).ConfigureAwait(true);
+                if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, Booking.IsArchived, Booking.TimeZoneId).ConfigureAwait(true);
                 if (Weather is not null) await Weather.LoadAsync(Booking).ConfigureAwait(true);
                 if (_financeService is not null)
                 {
@@ -209,7 +241,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         if (Booking is null || !await _service.ArchiveAsync(Booking.Id).ConfigureAwait(true)) return;
         Booking = Booking with { IsArchived = true, ArchivedAtUtc = DateTimeOffset.UtcNow };
         if (Documents is not null) await Documents.LoadAsync(Booking.Id, Booking.ProjectId, isArchived: true).ConfigureAwait(true);
-        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: true).ConfigureAwait(true);
+        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: true, Booking.TimeZoneId).ConfigureAwait(true);
         if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
         StatusText = "排期已归档；提醒已关闭，关联数据与电脑文件均已保留。";
         Archived?.Invoke(this, Booking.Id);
@@ -219,10 +251,47 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     {
         if (Booking is null || !await _service.CompleteAsync(Booking.Id).ConfigureAwait(true)) return;
         Booking = Booking with { Status = ShootBookingStatus.Completed, UpdatedAtUtc = DateTimeOffset.UtcNow };
-        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false).ConfigureAwait(true);
+        if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false, Booking.TimeZoneId).ConfigureAwait(true);
         if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
         StatusText = "拍摄已完成；未来未触发提醒已关闭，排期和历史记录均已保留。";
         Completed?.Invoke(this, Booking.Id);
+    }
+
+    private async Task ChangeWorkflowStatusAsync(CalendarWorkflowStatusOption requested)
+    {
+        if (Booking is null || Booking.IsArchived) { SyncWorkflowStatus(); return; }
+        var current = CalendarWorkflowStatusMapper.FromBookingStatus(Booking.Status);
+        if (requested.Value == current) return;
+        if (requested.Value < current && _dialogs is not null && !_dialogs.Confirm(
+                $"将拍摄流程从“{CalendarWorkflowStatusMapper.DisplayName(current)}”退回到“{requested.Label}”会立即保存，是否继续？",
+                "确认回退拍摄状态"))
+        {
+            SyncWorkflowStatus();
+            return;
+        }
+
+        IsBusy = true;
+        try
+        {
+            var status = CalendarWorkflowStatusMapper.ToBookingStatus(requested.Value);
+            if (!await _service.SetStatusAsync(Booking.Id, status).ConfigureAwait(true))
+            {
+                StatusText = "拍摄流程状态未能保存，请重试。";
+                SyncWorkflowStatus();
+                return;
+            }
+            Booking = Booking with { Status = status, UpdatedAtUtc = DateTimeOffset.UtcNow };
+            if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false, Booking.TimeZoneId).ConfigureAwait(true);
+            if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
+            StatusText = $"拍摄流程已更新为“{requested.Label}”。";
+            WorkflowStatusChanged?.Invoke(this, Booking.Id);
+        }
+        catch (Exception ex)
+        {
+            StatusText = $"拍摄流程状态保存失败：{ex.Message}";
+            SyncWorkflowStatus();
+        }
+        finally { IsBusy = false; }
     }
 
     private void RequestFinance(FinanceTransactionKind? kind)
@@ -240,6 +309,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         (AddIncomeCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (AddExpenseCommand as RelayCommand)?.RaiseCanExecuteChanged();
         NotifyMoney();
+        SyncWorkflowStatus();
     }
 
     private void NotifyMoney()
@@ -263,13 +333,19 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         return $"{Booking?.CurrencyCode ?? "CNY"} {value.Value / divisor:N2}";
     }
 
-    private static string FormatTime(ShootBooking booking)
+    private string FormatTime(ShootBooking booking) => _timeDisplay.FormatRange(booking.StartAtUtc, booking.EndAtUtc, booking.TimeZoneId, booking.IsAllDay);
+
+    private void SyncWorkflowStatus()
     {
-        TimeZoneInfo zone;
-        try { zone = TimeZoneInfo.FindSystemTimeZoneById(booking.TimeZoneId); } catch { zone = TimeZoneInfo.Local; }
-        var start = TimeZoneInfo.ConvertTime(booking.StartAtUtc, zone);
-        var end = TimeZoneInfo.ConvertTime(booking.EndAtUtc, zone);
-        return booking.IsAllDay ? $"{start:yyyy-MM-dd} 至 {end.AddDays(-1):yyyy-MM-dd}（全天）" : $"{start:yyyy-MM-dd HH:mm} — {end:yyyy-MM-dd HH:mm}";
+        _suppressWorkflowStatusChange = true;
+        try
+        {
+            _selectedWorkflowStatus = Booking is null
+                ? null
+                : WorkflowStatusOptions.First(option => option.Value == CalendarWorkflowStatusMapper.FromBookingStatus(Booking.Status));
+            OnPropertyChanged(nameof(SelectedWorkflowStatus));
+        }
+        finally { _suppressWorkflowStatusChange = false; }
     }
 }
 
@@ -289,6 +365,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     private readonly DateTime? _suggestedStart;
     private readonly IBookingPeopleService? _peopleService;
     private readonly IDialogService? _dialogs;
+    private readonly BookingWeatherViewModel? _weather;
     private string _title = string.Empty;
     private string _clientDisplayName = string.Empty;
     private DateTime _startDate = DateTime.Today;
@@ -320,7 +397,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     private BookingEditorSaveStatus _saveStatus = BookingEditorSaveStatus.ValidationFailed;
 
     public ShootBookingEditorViewModel(IShootBookingService service, IProjectRepository projectRepository, Guid? bookingId = null, DateTime? suggestedStart = null,
-        IBookingPeopleService? peopleService = null, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null)
+        IBookingPeopleService? peopleService = null, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
+        IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null, ICurrentLocationService? currentLocationService = null)
     {
         _service = service;
         _projectRepository = projectRepository;
@@ -347,6 +425,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             new(BookingStaffRole.ClientRepresentative, "客户代表"), new(BookingStaffRole.FloorAssistant, "场务"), new(BookingStaffRole.Other, "其他")
         ];
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
+        if (weatherService is not null && weatherState is not null) _weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService, BookingTimeDisplayService.Default);
         SaveCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.None, asDraft: false), _ => !IsBusy);
         SaveDraftCommand = new AsyncRelayCommand(_ => SaveDraftAsync(), _ => !IsBusy);
         SaveAnywayCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.SaveAnyway, asDraft: false), _ => !IsBusy && IsConflictVisible);
@@ -375,6 +454,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ObservableCollection<BookingConflictViewModel> Conflicts { get; } = [];
     public ShootRequirementsViewModel Requirements { get; }
     public BookingDocumentsViewModel? Documents { get; }
+    public BookingWeatherViewModel? Weather => _weather;
+    public bool HasWeatherPanel => Weather is not null;
     public ObservableCollection<BookingContactEditorViewModel> Contacts { get; } = [];
     public ObservableCollection<BookingStaffEditorViewModel> Staff { get; } = [];
     public IReadOnlyList<BookingStaffRoleOption> StaffRoleOptions { get; }
@@ -440,9 +521,11 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ProjectOption? SelectedProject { get => _selectedProject; set => SetProperty(ref _selectedProject, value); }
     public bool AllowOverlap { get => _allowOverlap; set => SetProperty(ref _allowOverlap, value); }
     public string Notes { get => _notes; set => SetProperty(ref _notes, value ?? string.Empty); }
-    public int CurrentStep { get => _currentStep; set { var next = Math.Clamp(value, 1, 4); if (!SetProperty(ref _currentStep, next)) return; OnPropertyChanged(nameof(CurrentStepIndex)); OnPropertyChanged(nameof(StepTitle)); OnPropertyChanged(nameof(CanGoPrevious)); OnPropertyChanged(nameof(CanGoNext)); OnPropertyChanged(nameof(IsFinalStep)); (NextStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); (PreviousStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); } }
+    public int CurrentStep { get => _currentStep; set { var next = Math.Clamp(value, 1, 4); if (!SetProperty(ref _currentStep, next)) return; OnPropertyChanged(nameof(CurrentStepIndex)); OnPropertyChanged(nameof(StepTitle)); OnPropertyChanged(nameof(CanGoPrevious)); OnPropertyChanged(nameof(CanGoNext)); OnPropertyChanged(nameof(IsFinalStep)); foreach (var name in new[] { nameof(Step1State), nameof(Step2State), nameof(Step3State), nameof(Step4State), nameof(Step1Glyph), nameof(Step2Glyph), nameof(Step3Glyph), nameof(Step4Glyph) }) OnPropertyChanged(name); (NextStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); (PreviousStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); if (next == 2) _ = LoadWeatherPreviewAsync(); } }
     public int CurrentStepIndex { get => CurrentStep - 1; set => CurrentStep = value + 1; }
     public string StepTitle => CurrentStep switch { 1 => "1 基础信息", 2 => "2 时间、天气与提醒", 3 => "3 策划资料", _ => "4 人员与收支" };
+    public string Step1State => StepState(1); public string Step2State => StepState(2); public string Step3State => StepState(3); public string Step4State => StepState(4);
+    public string Step1Glyph => StepGlyph(1); public string Step2Glyph => StepGlyph(2); public string Step3Glyph => StepGlyph(3); public string Step4Glyph => StepGlyph(4);
     public string WeatherPreviewText => string.IsNullOrWhiteSpace(Location) ? "天气预览：拍摄地点待确认" : $"天气预览：将按“{Location.Trim()}”显示候选地点和预报";
     public string WeatherRiskText => "天气风险：尚未取得可靠预报时不会臆测风险；天气服务不可用也不会阻止排期保存。";
     public string ReminderSummaryText => "当前提醒列表：0 条；提醒默认关闭，可在排期详情中新增或调整。";
@@ -498,11 +581,33 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         if (_peopleService is not null)
         {
             foreach (var item in await _peopleService.ListContactsAsync(booking.Id).ConfigureAwait(true)) Contacts.Add(BookingContactEditorViewModel.From(item));
-            foreach (var item in await _peopleService.ListStaffAsync(booking.Id).ConfigureAwait(true)) Staff.Add(BookingStaffEditorViewModel.From(item, StaffRoleOptions));
+            foreach (var item in await _peopleService.ListStaffAsync(booking.Id).ConfigureAwait(true)) Staff.Add(BookingStaffEditorViewModel.From(item, StaffRoleOptions, booking.TimeZoneId));
         }
         if (Documents is not null) await Documents.LoadAsync(booking.Id, booking.ProjectId, booking.IsArchived).ConfigureAwait(true);
         _initialSignature = BuildEditSignature();
     }
+
+    private async Task LoadWeatherPreviewAsync()
+    {
+        if (Weather is null || SelectedTimeZone is null || !TryBuildRange(SelectedTimeZone.Id, out var start, out var end, out _)) return;
+        await Weather.LoadAsync(new ShootBooking
+        {
+            Id = _stableBookingId,
+            ProjectId = SelectedProject?.Id,
+            Title = string.IsNullOrWhiteSpace(Title) ? "新建拍摄排期" : Title.Trim(),
+            ClientDisplayName = ClientDisplayName,
+            StartAtUtc = start,
+            EndAtUtc = end,
+            TimeZoneId = SelectedTimeZone.Id,
+            IsAllDay = IsAllDay,
+            Status = SelectedStatus?.Value ?? ShootBookingStatus.Tentative,
+            Location = string.IsNullOrWhiteSpace(Location) ? null : Location.Trim(),
+            ShootingType = SelectedShootingType?.Value ?? "Other"
+        }).ConfigureAwait(true);
+    }
+
+    private string StepState(int step) => CurrentStep == step ? "Current" : CurrentStep > step ? "Complete" : "Pending";
+    private string StepGlyph(int step) => CurrentStep > step ? "✓" : step.ToString(CultureInfo.InvariantCulture);
 
     private async Task SaveAsync(BookingConflictResolution resolution, bool asDraft)
     {
@@ -641,7 +746,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             .ToArray();
         var staff = Staff
             .Where(item => !allowPartial || !string.IsNullOrWhiteSpace(item.DisplayName))
-            .Select((item, index) => item.ToModel(_stableBookingId, index))
+            .Select((item, index) => item.ToModel(_stableBookingId, index, timeZone.Id))
             .ToArray();
         var requirements = Requirements.ToModels(_stableBookingId)
             .Where(item => !allowPartial || !string.IsNullOrWhiteSpace(item.ItemText))
@@ -760,15 +865,17 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
 
 public sealed class BookingConflictViewModel(BookingConflict conflict)
 {
+    private DateTimeOffset LocalStart => BookingTimeDisplayService.Default.ToBookingTime(conflict.StartAtUtc, conflict.TimeZoneId);
+    private DateTimeOffset LocalEnd => BookingTimeDisplayService.Default.ToBookingTime(conflict.EndAtUtc, conflict.TimeZoneId);
     public Guid BookingId { get; } = conflict.BookingId;
     public string Title { get; } = conflict.Title;
     public string ClientDisplayName { get; } = conflict.ClientDisplayName;
-    public string TimeText { get; } = $"{conflict.StartAtUtc.ToLocalTime():yyyy-MM-dd HH:mm} — {conflict.EndAtUtc.ToLocalTime():yyyy-MM-dd HH:mm}";
-    public string DateText { get; } = conflict.StartAtUtc.ToLocalTime().Date == conflict.EndAtUtc.ToLocalTime().Date ? conflict.StartAtUtc.ToLocalTime().ToString("yyyy-MM-dd") : $"{conflict.StartAtUtc.ToLocalTime():yyyy-MM-dd} 至 {conflict.EndAtUtc.ToLocalTime():yyyy-MM-dd}";
-    public string StartText { get; } = conflict.StartAtUtc.ToLocalTime().ToString("HH:mm");
-    public string EndText { get; } = conflict.EndAtUtc.ToLocalTime().ToString("HH:mm");
+    public string TimeText => $"{LocalStart:yyyy-MM-dd HH:mm} — {LocalEnd:yyyy-MM-dd HH:mm}";
+    public string DateText => LocalStart.Date == LocalEnd.Date ? LocalStart.ToString("yyyy-MM-dd") : $"{LocalStart:yyyy-MM-dd} 至 {LocalEnd:yyyy-MM-dd}";
+    public string StartText => LocalStart.ToString("HH:mm");
+    public string EndText => LocalEnd.ToString("HH:mm");
     public string DurationText { get; } = conflict.EndAtUtc - conflict.StartAtUtc >= TimeSpan.FromHours(1) ? $"{(conflict.EndAtUtc - conflict.StartAtUtc).TotalHours:0.#} 小时" : $"{Math.Max(1, (conflict.EndAtUtc - conflict.StartAtUtc).TotalMinutes):0} 分钟";
-    public string CrossDayText { get; } = conflict.StartAtUtc.ToLocalTime().Date == conflict.EndAtUtc.ToLocalTime().Date ? "当日排期" : "跨日排期";
+    public string CrossDayText => LocalStart.Date == LocalEnd.Date ? "当日排期" : "跨日排期";
     public string Location { get; } = conflict.Location ?? "未填写";
     public string OverlapText { get; } = conflict.Overlap.TotalHours >= 1 ? $"{conflict.Overlap.TotalHours:0.#} 小时" : $"{Math.Max(1, conflict.Overlap.TotalMinutes):0} 分钟";
     public string StatusText { get; } = CalendarText.Status(conflict.Status);

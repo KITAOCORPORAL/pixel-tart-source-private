@@ -279,6 +279,35 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         return changed > 0;
     }
 
+    public async Task<bool> SetStatusAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using var booking = connection.CreateCommand();
+        booking.Transaction = transaction;
+        booking.CommandText = "UPDATE ShootBookings SET Status=$status,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>$status;";
+        booking.Parameters.AddWithValue("$id", id.ToString("D"));
+        booking.Parameters.AddWithValue("$status", status.ToString());
+        booking.Parameters.AddWithValue("$at", Utc(updatedAtUtc));
+        var changed = await booking.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        if (changed > 0)
+        {
+            await using var reminders = connection.CreateCommand();
+            reminders.Transaction = transaction;
+            reminders.CommandText = status switch
+            {
+                ShootBookingStatus.Cancelled => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Cancelled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id;",
+                ShootBookingStatus.Completed or ShootBookingStatus.Delivered => "UPDATE BookingReminders SET IsEnabled=0,Status=CASE WHEN Status='Scheduled' THEN 'Disabled' ELSE Status END,UpdatedAtUtc=$at WHERE BookingId=$id;",
+                _ => "UPDATE BookingReminders SET UpdatedAtUtc=$at WHERE BookingId=$id;"
+            };
+            reminders.Parameters.AddWithValue("$id", id.ToString("D"));
+            reminders.Parameters.AddWithValue("$at", Utc(updatedAtUtc));
+            await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return changed > 0;
+    }
+
     public async Task<bool> RestoreAsync(Guid id, DateTimeOffset restoredAtUtc, CancellationToken cancellationToken = default)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);

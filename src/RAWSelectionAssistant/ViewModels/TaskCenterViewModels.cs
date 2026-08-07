@@ -141,7 +141,26 @@ public sealed class TaskSnapshotViewModel : ObservableObject
     public Guid Id => _snapshot.TaskId;
     public string DisplayName => _snapshot.DisplayName;
     public TaskLifecycleState State => _snapshot.State;
-    public string StateLabel => State switch { TaskLifecycleState.NeedsAttention => "等待确认", TaskLifecycleState.PartiallyCompleted => "部分完成", TaskLifecycleState.Interrupted => "已中断", _ => State.ToString() };
+    public string StateLabel => State switch
+    {
+        TaskLifecycleState.Pending => "等待开始",
+        TaskLifecycleState.Preparing => "准备中",
+        TaskLifecycleState.Scanning => "扫描中",
+        TaskLifecycleState.Validating => "验证中",
+        TaskLifecycleState.WaitingForConfirmation => "等待确认",
+        TaskLifecycleState.Running => "处理中",
+        TaskLifecycleState.Pausing => "正在暂停",
+        TaskLifecycleState.Paused => "已暂停",
+        TaskLifecycleState.NeedsAttention => "等待确认",
+        TaskLifecycleState.Retrying => "正在重试",
+        TaskLifecycleState.Cancelling => "正在取消",
+        TaskLifecycleState.Cancelled => "已取消",
+        TaskLifecycleState.PartiallyCompleted => "部分完成",
+        TaskLifecycleState.Failed => "处理失败",
+        TaskLifecycleState.Completed => "已完成",
+        TaskLifecycleState.Interrupted => "已中断",
+        _ => "未知状态"
+    };
     public double Progress => _snapshot.Progress;
     public string CurrentStep => _snapshot.CurrentStep;
     public string CurrentFile => string.IsNullOrWhiteSpace(_snapshot.CurrentFile) ? string.Empty : Path.GetFileName(_snapshot.CurrentFile);

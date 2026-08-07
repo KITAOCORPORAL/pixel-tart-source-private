@@ -77,16 +77,17 @@ public sealed class BookingReminderService(
 
 public sealed class BookingReminderNotificationService(
     INotificationCenter notificationCenter,
-    TimeZoneInfo? localTimeZone = null) : IBookingReminderNotificationService
+    TimeZoneInfo? localTimeZone = null,
+    IBookingTimeDisplayService? timeDisplay = null) : IBookingReminderNotificationService
 {
-    private readonly TimeZoneInfo _localTimeZone = localTimeZone ?? TimeZoneInfo.Local;
+    private readonly IBookingTimeDisplayService _timeDisplay = timeDisplay ?? new BookingTimeDisplayService(localTimeZone);
     public event EventHandler<ReminderPublishedEvent>? ReminderPublished;
 
     public NotificationMessage CreateNotification(ReminderDispatch dispatch)
     {
-        var plannedLocal = TimeZoneInfo.ConvertTime(dispatch.PlannedAtUtc, _localTimeZone);
-        var startLocal = TimeZoneInfo.ConvertTime(dispatch.Booking.StartAtUtc, _localTimeZone);
-        var endLocal = TimeZoneInfo.ConvertTime(dispatch.Booking.EndAtUtc, _localTimeZone);
+        var plannedLocal = _timeDisplay.ToBookingTime(dispatch.PlannedAtUtc, dispatch.Booking.TimeZoneId);
+        var startLocal = _timeDisplay.ToBookingTime(dispatch.Booking.StartAtUtc, dispatch.Booking.TimeZoneId);
+        var endLocal = _timeDisplay.ToBookingTime(dispatch.Booking.EndAtUtc, dispatch.Booking.TimeZoneId);
         var location = string.IsNullOrWhiteSpace(dispatch.Booking.Location) ? "未记录地点" : "地点已记录";
         var type = dispatch.Reminder.Trigger.Kind == ReminderTriggerKind.AbsoluteTime ? "自定义时间" : RelativeLabel(dispatch.Reminder.Trigger.Offset);
         var message = $"{type}；计划提醒 {plannedLocal:MM-dd HH:mm}；拍摄 {startLocal:MM-dd HH:mm}–{endLocal:HH:mm}；{location}";

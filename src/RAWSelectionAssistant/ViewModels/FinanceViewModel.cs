@@ -17,6 +17,7 @@ public sealed record FinanceKindFilterOption(FinanceTransactionKind? Value, stri
 public sealed record FinancePaymentOption(FinancePaymentStatus Value, string Label);
 public sealed record FinancePaymentFilterOption(FinancePaymentStatus? Value, string Label);
 public sealed record FinanceCategoryFilterOption(Guid? Id, string Label);
+public sealed record FinanceCurrencyFilterOption(string? Value, string Label);
 public sealed record FinanceLinkOption(Guid? Id, string Label);
 
 public sealed class FinanceAttachmentItem(string fullPath)
@@ -51,6 +52,7 @@ public sealed class FinanceViewModel : ObservableObject
     private readonly IDialogService _dialogs;
     private readonly IProjectRepository? _projectRepository;
     private readonly IShootBookingService? _bookingService;
+    private readonly IBookingTimeDisplayService _timeDisplay;
     private IReadOnlyList<FinanceCategory> _allCategories = [];
     private bool _isBusy;
     private string _statusText = "本地摄影业务记账，不替代会计或税务软件。";
@@ -67,6 +69,7 @@ public sealed class FinanceViewModel : ObservableObject
     private FinanceLinkOption _selectedProjectFilter;
     private FinanceLinkOption _selectedBookingLink;
     private FinanceLinkOption _selectedProjectLink;
+    private FinanceCurrencyFilterOption _selectedCurrencyFilter;
     private string _amountText = string.Empty;
     private DateTime _occurredOn = DateTime.Today;
     private DateTime _selectedMonth = new(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -81,18 +84,21 @@ public sealed class FinanceViewModel : ObservableObject
         IFinanceService service,
         IDialogService dialogs,
         IProjectRepository? projectRepository = null,
-        IShootBookingService? bookingService = null)
+        IShootBookingService? bookingService = null,
+        IBookingTimeDisplayService? timeDisplay = null)
     {
         _service = service;
         _dialogs = dialogs;
         _projectRepository = projectRepository;
         _bookingService = bookingService;
+        _timeDisplay = timeDisplay ?? BookingTimeDisplayService.Default;
 
         KindOptions = [new(FinanceTransactionKind.Income, "收入"), new(FinanceTransactionKind.Expense, "支出")];
         KindFilterOptions = [new(null, "全部类型"), new(FinanceTransactionKind.Income, "收入"), new(FinanceTransactionKind.Expense, "支出")];
         PaymentOptions = Enum.GetValues<FinancePaymentStatus>().Select(value => new FinancePaymentOption(value, PaymentStatusText(value))).ToArray();
         PaymentFilterOptions = [new(null, "全部支付状态"), .. Enum.GetValues<FinancePaymentStatus>().Select(value => new FinancePaymentFilterOption(value, PaymentStatusText(value)))];
         CurrencyOptions = ["CNY", "USD", "EUR", "JPY", "HKD"];
+        CurrencyFilterOptions = [new(null, "全部币种"), .. CurrencyOptions.Select(code => new FinanceCurrencyFilterOption(code, code))];
 
         _selectedKind = KindOptions[0];
         _selectedPaymentStatus = PaymentOptions.First(item => item.Value == FinancePaymentStatus.Receivable);
@@ -103,6 +109,7 @@ public sealed class FinanceViewModel : ObservableObject
         _selectedProjectFilter = new(null, "全部项目");
         _selectedBookingLink = new(null, "不关联拍摄任务");
         _selectedProjectLink = new(null, "不关联项目");
+        _selectedCurrencyFilter = CurrencyFilterOptions[0];
 
         RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync(), _ => !IsBusy);
         PreviousMonthCommand = new RelayCommand(_ => SelectedMonth = SelectedMonth.AddMonths(-1));
@@ -133,6 +140,7 @@ public sealed class FinanceViewModel : ObservableObject
     public IReadOnlyList<FinancePaymentOption> PaymentOptions { get; }
     public IReadOnlyList<FinancePaymentFilterOption> PaymentFilterOptions { get; }
     public IReadOnlyList<string> CurrencyOptions { get; }
+    public IReadOnlyList<FinanceCurrencyFilterOption> CurrencyFilterOptions { get; }
 
     public ICommand RefreshCommand { get; }
     public ICommand PreviousMonthCommand { get; }
@@ -171,6 +179,7 @@ public sealed class FinanceViewModel : ObservableObject
     public FinanceLinkOption SelectedProjectFilter { get => _selectedProjectFilter; set { if (value is not null && SetProperty(ref _selectedProjectFilter, value)) _ = RefreshAsync(); } }
     public FinanceLinkOption SelectedBookingLink { get => _selectedBookingLink; set => SetProperty(ref _selectedBookingLink, value); }
     public FinanceLinkOption SelectedProjectLink { get => _selectedProjectLink; set => SetProperty(ref _selectedProjectLink, value); }
+    public FinanceCurrencyFilterOption SelectedCurrencyFilter { get => _selectedCurrencyFilter; set { if (value is not null && SetProperty(ref _selectedCurrencyFilter, value)) _ = RefreshAsync(); } }
     public string AmountText { get => _amountText; set => SetProperty(ref _amountText, value ?? string.Empty); }
     public DateTime OccurredOn { get => _occurredOn; set => SetProperty(ref _occurredOn, value.Date); }
     public DateTime SelectedMonth { get => _selectedMonth; set { var month = new DateTime(value.Year, value.Month, 1); if (SetProperty(ref _selectedMonth, month)) { OnPropertyChanged(nameof(SelectedMonthText)); _ = RefreshAsync(); } } }
@@ -208,7 +217,9 @@ public sealed class FinanceViewModel : ObservableObject
             OnPropertyChanged(nameof(IsEmpty));
             _summary = await _service.SummarizeAsync(query).ConfigureAwait(true);
             NotifySummary();
-            StatusText = $"{SelectedMonthText}共 {Transactions.Count} 条本地收支记录。CSV 仅在你主动导出时生成。";
+            StatusText = Transactions.Count == 0
+                ? "本月暂无收支记录"
+                : $"{SelectedMonthText}共 {Transactions.Count} 条本地收支记录。CSV 仅在你主动导出时生成。";
         }
         catch
         {
@@ -301,8 +312,8 @@ public sealed class FinanceViewModel : ObservableObject
             var selectedFilter = SelectedBookingFilter.Id;
             var selectedLink = SelectedBookingLink.Id;
             var bookings = (await _bookingService.SearchAllUnarchivedAsync(new(PageSize: 100)).ConfigureAwait(true)).Items;
-            Replace(BookingFilterOptions, [new(null, "全部拍摄任务"), .. bookings.Select(item => new FinanceLinkOption(item.Id, $"{item.StartAtUtc.ToLocalTime():MM-dd} · {item.Title}"))]);
-            Replace(BookingLinkOptions, [new(null, "不关联拍摄任务"), .. bookings.Select(item => new FinanceLinkOption(item.Id, $"{item.StartAtUtc.ToLocalTime():MM-dd} · {item.Title}"))]);
+            Replace(BookingFilterOptions, [new(null, "全部拍摄任务"), .. bookings.Select(item => new FinanceLinkOption(item.Id, $"{_timeDisplay.ToBookingTime(item.StartAtUtc, item.TimeZoneId):MM-dd} · {item.Title}"))]);
+            Replace(BookingLinkOptions, [new(null, "不关联拍摄任务"), .. bookings.Select(item => new FinanceLinkOption(item.Id, $"{_timeDisplay.ToBookingTime(item.StartAtUtc, item.TimeZoneId):MM-dd} · {item.Title}"))]);
             _selectedBookingFilter = BookingFilterOptions.FirstOrDefault(item => item.Id == selectedFilter) ?? BookingFilterOptions[0];
             _selectedBookingLink = BookingLinkOptions.FirstOrDefault(item => item.Id == selectedLink) ?? BookingLinkOptions[0];
             OnPropertyChanged(nameof(SelectedBookingFilter));
@@ -327,7 +338,8 @@ public sealed class FinanceViewModel : ObservableObject
             SelectedBookingFilter.Id,
             SelectedProjectFilter.Id,
             SelectedCategoryFilter.Id,
-            string.IsNullOrWhiteSpace(Keyword) ? null : Keyword.Trim());
+            string.IsNullOrWhiteSpace(Keyword) ? null : Keyword.Trim(),
+            SelectedCurrencyFilter.Value);
     }
 
     private void RefreshCategoryChoices()

@@ -25,7 +25,7 @@ public sealed class Version230Rc2CalendarTetherTests
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml");
         var code = Text("src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml.cs");
-        foreach (var token in new[] { "DayCell_MouseLeftButtonDown", "DayCell_PreviewKeyDown", "CreateBooking_Click", "BookingCountText", "PrimaryStatusGlyph", "ConflictGlyph", "WeatherGlyph" })
+        foreach (var token in new[] { "DayCell_MouseLeftButtonDown", "DayCell_PreviewKeyDown", "CreateBooking_Click", "BookingCountText", "WorkflowSegments", "ConflictGlyph", "WeatherGlyph" })
             StringAssert.Contains(xaml + code, token);
         foreach (var token in new[] { "Key.Left", "Key.Right", "Key.Up", "Key.Down", "Key.Enter", "Key.Space" })
             StringAssert.Contains(code, token);

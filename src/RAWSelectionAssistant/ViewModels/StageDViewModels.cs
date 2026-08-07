@@ -12,12 +12,12 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed record ReminderPresetOption(string Label, int? OffsetMinutes, bool IsCustom = false);
 
-public sealed class BookingReminderItemViewModel(ReminderDefinition reminder, TimeZoneInfo localTimeZone, TimeProvider timeProvider)
+public sealed class BookingReminderItemViewModel(ReminderDefinition reminder, TimeZoneInfo displayTimeZone, TimeProvider timeProvider)
 {
     public ReminderDefinition Reminder { get; } = reminder;
     public Guid Id => Reminder.Id;
     public string TypeText => Reminder.Trigger.Kind == ReminderTriggerKind.AbsoluteTime ? "自定义时间" : OffsetText(Reminder.Trigger.Offset);
-    public string PlannedTimeText => Reminder.Trigger.At is { } at ? TimeZoneInfo.ConvertTime(at, localTimeZone).ToString("yyyy-MM-dd HH:mm") : "未设置";
+    public string PlannedTimeText => Reminder.Trigger.At is { } at ? TimeZoneInfo.ConvertTime(at, displayTimeZone).ToString("yyyy-MM-dd HH:mm") : "未设置";
     public string RelativeTimeText => Reminder.Trigger.At is { } at ? Relative(at, timeProvider.GetUtcNow()) : string.Empty;
     public string StatusText => Reminder.Status switch
     {
@@ -26,7 +26,7 @@ public sealed class BookingReminderItemViewModel(ReminderDefinition reminder, Ti
     };
     public bool IsEnabled => Reminder.IsEnabled && Reminder.Status == ReminderStatus.Scheduled;
     public bool CanToggle => Reminder.Status is ReminderStatus.Disabled or ReminderStatus.Scheduled;
-    public string LastTriggeredText => Reminder.LastTriggeredAt is { } at ? TimeZoneInfo.ConvertTime(at, localTimeZone).ToString("yyyy-MM-dd HH:mm") : "尚未触发";
+    public string LastTriggeredText => Reminder.LastTriggeredAt is { } at ? TimeZoneInfo.ConvertTime(at, displayTimeZone).ToString("yyyy-MM-dd HH:mm") : "尚未触发";
 
     private static string OffsetText(TimeSpan? offset) => offset?.TotalMinutes switch
     {
@@ -50,6 +50,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
     private readonly IBookingReminderScheduler? _scheduler;
     private readonly TimeProvider _timeProvider;
     private readonly TimeZoneInfo _localTimeZone;
+    private TimeZoneInfo _displayTimeZone;
     private Guid _bookingId;
     private Guid? _projectId;
     private bool _isReadOnly;
@@ -68,6 +69,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
         _scheduler = scheduler;
         _timeProvider = timeProvider ?? TimeProvider.System;
         _localTimeZone = localTimeZone ?? TimeZoneInfo.Local;
+        _displayTimeZone = _localTimeZone;
         Presets =
         [
             new("提前10分钟", 10), new("提前30分钟", 30), new("提前1小时", 60), new("提前2小时", 120), new("提前1天", 1440), new("自定义时间", null, true)
@@ -78,7 +80,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
         CancelEditCommand = new RelayCommand(_ => ResetEditor(), _ => EditingReminderId.HasValue);
         ToggleCommand = new AsyncRelayCommand(ToggleAsync, parameter => CanEdit && parameter is BookingReminderItemViewModel);
         DeleteCommand = new AsyncRelayCommand(DeleteAsync, parameter => CanEdit && parameter is BookingReminderItemViewModel);
-        RefreshCommand = new AsyncRelayCommand(_ => LoadAsync(_bookingId, _projectId, _isReadOnly), _ => _bookingId != Guid.Empty && !IsBusy);
+        RefreshCommand = new AsyncRelayCommand(_ => LoadAsync(_bookingId, _projectId, _isReadOnly, _displayTimeZone.Id), _ => _bookingId != Guid.Empty && !IsBusy);
     }
 
     public IReadOnlyList<ReminderPresetOption> Presets { get; }
@@ -103,16 +105,19 @@ public sealed class BookingRemindersViewModel : ObservableObject
     public bool IsEditing => EditingReminderId.HasValue;
     public string SaveButtonText => IsEditing ? "保存修改" : "添加提醒";
 
-    public async Task LoadAsync(Guid bookingId, Guid? projectId, bool isReadOnly)
+    public async Task LoadAsync(Guid bookingId, Guid? projectId, bool isReadOnly, string? timeZoneId = null)
     {
         _bookingId = bookingId;
         _projectId = projectId;
         IsReadOnly = isReadOnly;
+        _displayTimeZone = string.IsNullOrWhiteSpace(timeZoneId)
+            ? _localTimeZone
+            : BookingTimeDisplayService.Default.ResolveTimeZone(timeZoneId);
         IsBusy = true;
         try
         {
             Items.Clear();
-            foreach (var reminder in await _service.ListAsync(bookingId).ConfigureAwait(true)) Items.Add(new(reminder, _localTimeZone, _timeProvider));
+            foreach (var reminder in await _service.ListAsync(bookingId).ConfigureAwait(true)) Items.Add(new(reminder, _displayTimeZone, _timeProvider));
             StatusText = string.Empty;
             OnPropertyChanged(nameof(EmptyText));
         }
@@ -128,8 +133,8 @@ public sealed class BookingRemindersViewModel : ObservableObject
         {
             if (!TimeOnly.TryParse(CustomTimeText, CultureInfo.CurrentCulture, DateTimeStyles.None, out var time)) { StatusText = "自定义时间格式应为 HH:mm。"; return; }
             var local = DateTime.SpecifyKind(CustomDate.Add(time.ToTimeSpan()), DateTimeKind.Unspecified);
-            if (_localTimeZone.IsInvalidTime(local)) { StatusText = "该本地时间因夏令时切换而不存在。"; return; }
-            var offset = _localTimeZone.IsAmbiguousTime(local) ? _localTimeZone.GetAmbiguousTimeOffsets(local).Max() : _localTimeZone.GetUtcOffset(local);
+            if (_displayTimeZone.IsInvalidTime(local)) { StatusText = "该排期时区中的时间因夏令时切换而不存在。"; return; }
+            var offset = _displayTimeZone.IsAmbiguousTime(local) ? _displayTimeZone.GetAmbiguousTimeOffsets(local).Max() : _displayTimeZone.GetUtcOffset(local);
             trigger = new(ReminderTriggerKind.AbsoluteTime, new DateTimeOffset(local, offset).ToUniversalTime(), null);
         }
         else
@@ -147,7 +152,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
             await _service.SaveAsync(new(EditingReminderId ?? Guid.NewGuid(), _projectId, string.Empty, string.Empty, trigger,
                 NewReminderEnabled ? ReminderStatus.Scheduled : ReminderStatus.Disabled, _bookingId, NewReminderEnabled, CreatedAt: _editingCreatedAt), default).ConfigureAwait(true);
             ResetEditor();
-            await LoadAsync(_bookingId, _projectId, _isReadOnly).ConfigureAwait(true);
+            await LoadAsync(_bookingId, _projectId, _isReadOnly, _displayTimeZone.Id).ConfigureAwait(true);
             if (_scheduler is not null) await _scheduler.RefreshAsync().ConfigureAwait(true);
         }
         catch (Exception ex) { StatusText = $"保存提醒失败：{ex.Message}"; }
@@ -163,7 +168,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
         if (item.Reminder.Trigger.Kind == ReminderTriggerKind.AbsoluteTime && item.Reminder.Trigger.At is { } at)
         {
             SelectedPreset = Presets.Single(x => x.IsCustom);
-            var local = TimeZoneInfo.ConvertTime(at, _localTimeZone);
+            var local = TimeZoneInfo.ConvertTime(at, _displayTimeZone);
             CustomDate = local.Date;
             CustomTimeText = local.ToString("HH:mm");
         }
@@ -194,7 +199,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
         try
         {
             if (!await _service.SetEnabledAsync(item.Id, !item.IsEnabled).ConfigureAwait(true)) StatusText = "提醒状态未更新；请确认排期尚未归档或取消。";
-            await LoadAsync(_bookingId, _projectId, _isReadOnly).ConfigureAwait(true);
+            await LoadAsync(_bookingId, _projectId, _isReadOnly, _displayTimeZone.Id).ConfigureAwait(true);
             if (_scheduler is not null) await _scheduler.RefreshAsync().ConfigureAwait(true);
         }
         finally { IsBusy = false; }
@@ -207,7 +212,7 @@ public sealed class BookingRemindersViewModel : ObservableObject
         try
         {
             await _service.DeleteAsync(item.Id).ConfigureAwait(true);
-            await LoadAsync(_bookingId, _projectId, _isReadOnly).ConfigureAwait(true);
+            await LoadAsync(_bookingId, _projectId, _isReadOnly, _displayTimeZone.Id).ConfigureAwait(true);
         }
         finally { IsBusy = false; }
     }
@@ -222,12 +227,14 @@ public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, T
     {
         get
         {
-            var start = TimeZoneInfo.ConvertTime(item.StartAtUtc, localTimeZone);
-            var end = TimeZoneInfo.ConvertTime(item.EndAtUtc, localTimeZone);
+            var display = new BookingTimeDisplayService(localTimeZone);
+            var start = display.ToBookingTime(item.StartAtUtc, item.TimeZoneId);
+            var end = display.ToBookingTime(item.EndAtUtc, item.TimeZoneId);
             return item.IsAllDay ? "全天" : $"{start:HH:mm}–{end:HH:mm}";
         }
     }
     public string StatusText => item.IsOngoing ? "进行中" : CalendarText.Status(item.Status);
+    public bool IsFinished => item.Status is ShootBookingStatus.Completed or ShootBookingStatus.Delivered or ShootBookingStatus.Cancelled;
     public string ProjectName => item.ProjectName;
     public string LocationText => item.LocationDisplay;
     public string PreparationText => item.RequirementTotal == 0 ? "准备清单未设置" : $"准备 {item.RequirementCompleted}/{item.RequirementTotal}";
@@ -304,7 +311,7 @@ public class WorkbenchScheduleViewModel : ObservableObject, IDisposable
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public string TodayCountText => $"今日 {Today.Count}";
     public string FutureCountText => $"未来7天 {_futureTotalCount}";
-    public string NextTodayText => Today.FirstOrDefault(item => !item.StatusText.Equals("已完成", StringComparison.Ordinal)) is { } next ? $"下一场：{next.TimeText} · {next.ProjectName}" : "今天没有待开始的拍摄";
+    public string NextTodayText => Today.FirstOrDefault(item => !item.IsFinished) is { } next ? $"下一场：{next.TimeText} · {next.ProjectName}" : "今天没有待开始的拍摄";
 
     public async Task InitializeAsync()
     {
