@@ -9,7 +9,11 @@ public sealed class UiPolish142Tests
     [TestMethod] public void Sidebar_DoesNotRepeatBrand() { DoesNotContain(MainXaml(), "<Image Source=\"Assets/AppIcon.ico\"", "本地摄影工具箱"); Contains(MainXaml(), "Title=\"像素蛋挞\""); }
     [TestMethod] public void GlobalStatusBar_IsIndependentFixedRow() => Contains(MainXaml(), "<RowDefinition Height=\"34\" />", "Grid.Row=\"2\" Height=\"34\"", "BorderThickness=\"0,1,0,0\"");
     [TestMethod] public void Workbench_HasBalancedThreeColumnShell() => Contains(MainXaml(), "x:Name=\"WorkbenchShell\"", "MinWidth=\"760\"", "x:Name=\"WorkbenchTaskColumn\" Width=\"320\"");
-    [TestMethod] public void Workbench_UsesDenseVerticalRhythm() => Contains(MainXaml(), "<RowDefinition Height=\"106\" />", "<RowDefinition Height=\"230\" />", "x:Name=\"RecentProjectsArea\"");
+    [TestMethod] public void Workbench_UsesDenseVerticalRhythm()
+    {
+        Contains(MainXaml(), "<RowDefinition Height=\"106\" />", "x:Name=\"WorkbenchOverviewRow\" Height=\"230\"", "x:Name=\"WorkbenchScheduleRow\" Height=\"170\"", "x:Name=\"RecentProjectsArea\"");
+        Contains(Text("src/RAWSelectionAssistant/MainWindow.xaml.cs"), "shortWorkbench", "veryShortWorkbench", "WorkbenchOverviewRow.Height", "WorkbenchScheduleRow.Height");
+    }
     [TestMethod] public void EditionUpgrade_IsInsideSidebarFooter() => Contains(MainXaml(), "x:Name=\"EditionStatusArea\"", "Content=\"升级\"", "CommandParameter=\"Activation\"");
     [TestMethod] public void CancelTask_IsLocalWorkflowAction() => Contains(MainXaml(), "x:Name=\"CancelButton\" Content=\"取消当前任务\"", "Style=\"{StaticResource DangerButton}\"");
     [TestMethod] public void ThemesStillProvideSemanticSurfaceResources() { Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Light.xaml"), "WorkbenchCardBrush", "DividerBrush"); Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Dark.xaml"), "WorkbenchCardBrush", "DividerBrush"); }

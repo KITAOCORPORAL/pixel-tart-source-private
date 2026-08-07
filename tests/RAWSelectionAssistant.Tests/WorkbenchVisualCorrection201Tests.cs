@@ -37,7 +37,11 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void RecentProjects_HasDesignedEmptyState() => Contains(MainXaml(), "x:Name=\"RecentProjectsEmptyState\"", "还没有本地项目", "创建第一个本地分片任务");
     [TestMethod] public void CompletedProjects_HasIndependentEmptyState() => Contains(MainXaml(), "x:Name=\"CompletedProjectsEmptyState\"", "暂无已完成项目");
     [TestMethod] public void TaskCenter_HasLocalTaskData() => Contains(MainXaml(), "任务中心", "当前任务", "等待确认", "冲突文件", "未找到文件", "打开任务历史");
-    [TestMethod] public void TaskCenterReviewData_IsClearlyDemoOnly() => Contains(MainXaml(), "x:Name=\"TaskCenterReviewContent\"", "演示 · 正在扫描", "以上为界面验收演示数据");
+    [TestMethod] public void TaskCenterReviewData_IsClearlyDemoOnly()
+    {
+        Contains(MainXaml(), "x:Name=\"TaskCenterReviewContent\" Visibility=\"Collapsed\"", "x:Name=\"TaskCenterReviewList\"");
+        Contains(Text("src/RAWSelectionAssistant/MainWindow.xaml.cs"), "#if UI_REVIEW_BUILD", "ApplyTaskCenterReviewState", "TaskCenterReviewItem");
+    }
     [TestMethod] public void TaskCenter_CollapsesBelow1350() => Contains(CodeBehind(), "ActualWidth < 1350", "WorkbenchTaskColumn.Width", "TaskDrawerButton.Visibility");
     [TestMethod] public void TaskCenter_DrawerReopens() => Contains(MainXaml(), "x:Name=\"TaskDrawerButton\"", "TaskDrawerButton_Click");
     [TestMethod] public void LightTheme_HasSameShellResources() => Contains(Light(), "ShellTopBrush", "TaskCenterBackgroundBrush", "ToolTileBrush", "WorkbenchCardBrush", "WorkbenchHeroBrush");

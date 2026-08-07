@@ -15,9 +15,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="22" />
-            <RowDefinition Height="188" />
+            <RowDefinition Height="4*" MinHeight="148" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="104" />
+            <RowDefinition Height="2*" MinHeight="82" MaxHeight="140" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
@@ -49,22 +49,34 @@
             <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="7" Rows="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="1" Padding="3" CornerRadius="5" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" Focusable="True"
-                            PreviewMouseLeftButtonDown="DayCell_MouseLeftButtonDown" PreviewKeyDown="DayCell_PreviewKeyDown" AutomationProperties.Name="{Binding AccessibilityName}" ToolTip="{Binding AccessibilityName}">
+                    <Border Margin="1" Padding="4" CornerRadius="5" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" Focusable="True"
+                            PreviewMouseLeftButtonDown="DayCell_MouseLeftButtonDown" PreviewKeyDown="DayCell_PreviewKeyDown" AutomationProperties.Name="{Binding AccessibilityName}" ToolTip="{Binding TooltipText}">
                         <Border.ContextMenu><ContextMenu><MenuItem Header="在此日期新建拍摄任务" Click="CreateBooking_Click" /><MenuItem Header="查看当天详情" Click="ViewDayDetails_Click" /></ContextMenu></Border.ContextMenu>
                         <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource SurfacePrimaryBrush}" /><Style.Triggers>
                             <DataTrigger Binding="{Binding IsCurrentMonth}" Value="False"><Setter Property="Opacity" Value="0.46" /></DataTrigger>
-                            <DataTrigger Binding="{Binding IsToday}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="2" /></DataTrigger>
-                            <DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" /></DataTrigger>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="2" /></DataTrigger>
                         </Style.Triggers></Style></Border.Style>
                         <Grid>
-                            <TextBlock Text="{Binding DayNumber}" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                            <Border CornerRadius="7" MinWidth="14" Height="14" Padding="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding HasBookings, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource CalendarStatusScheduledBrush}" /><Style.Triggers><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Background" Value="{DynamicResource CalendarStatusShotBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Background" Value="{DynamicResource CalendarStatusPendingDeliveryBrush}" /></DataTrigger><DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /></DataTrigger></Style.Triggers></Style></Border.Style>
-                                <TextBlock Text="{Binding BookingCountText}" Foreground="White" FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Border CornerRadius="5" MinWidth="28" Height="24" Padding="6,2" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="{Binding TooltipText}">
+                                <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource CalendarStatusFreeBrush}" /><Setter Property="BorderBrush" Value="Transparent" /><Setter Property="BorderThickness" Value="0" /><Style.Triggers>
+                                    <DataTrigger Binding="{Binding HasBookings}" Value="True"><Setter Property="Background" Value="{DynamicResource CalendarStatusScheduledBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource CalendarStatusScheduledForegroundBrush}" /></DataTrigger>
+                                    <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Background" Value="{DynamicResource CalendarStatusShotBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource CalendarStatusShotForegroundBrush}" /></DataTrigger>
+                                    <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Background" Value="{DynamicResource CalendarStatusPendingDeliveryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource CalendarStatusPendingDeliveryForegroundBrush}" /></DataTrigger>
+                                    <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource CalendarStatusDeliveredForegroundBrush}" /></DataTrigger>
+                                    <DataTrigger Binding="{Binding IsToday}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource CalendarTodayOutlineBrush}" /><Setter Property="BorderThickness" Value="1.5" /></DataTrigger>
+                                </Style.Triggers></Style></Border.Style>
+                                <TextBlock Text="{Binding DayNumber}" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusFreeForegroundBrush}" /><Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasBookings}" Value="True"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusScheduledForegroundBrush}" /></DataTrigger>
+                                        <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusShotForegroundBrush}" /></DataTrigger>
+                                        <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusPendingDeliveryForegroundBrush}" /></DataTrigger>
+                                        <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusDeliveredForegroundBrush}" /></DataTrigger>
+                                    </Style.Triggers></Style></TextBlock.Style>
+                                </TextBlock>
                             </Border>
-                            <Border Height="2" VerticalAlignment="Bottom" Background="{DynamicResource CalendarStatusFreeBrush}" Opacity="0.5"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Visible" /><Style.Triggers><DataTrigger Binding="{Binding HasBookings}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger></Style.Triggers></Style></Border.Style></Border>
-                            <ItemsControl ItemsSource="{Binding WorkflowSegments}" VerticalAlignment="Bottom" Visibility="{Binding HasBookings, Converter={StaticResource BooleanToVisibilityConverter}}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Width="8" Height="4" Margin="0,0,2,0" CornerRadius="1"><Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource CalendarStatusScheduledBrush}" /><Style.Triggers><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.Shot}"><Setter Property="Background" Value="{DynamicResource CalendarStatusShotBrush}" /></DataTrigger><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Background" Value="{DynamicResource CalendarStatusPendingDeliveryBrush}" /></DataTrigger><DataTrigger Binding="{Binding}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /></DataTrigger></Style.Triggers></Style></Border.Style></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                            <Border CornerRadius="5" MinWidth="18" Height="18" Padding="3,1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" Visibility="{Binding HasMultipleBookings, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock Text="{Binding BookingCountBadgeText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
                             <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10" />
                             <TextBlock Text="{Binding WeatherGlyph}" FontSize="9" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                         </Grid>

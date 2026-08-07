@@ -27,7 +27,28 @@ public partial class WorkCalendarView : UserControl
             viewModel.SearchFocusRequested += ViewModel_SearchFocusRequested;
         }
         await viewModel.InitializeAsync();
+        ApplyCalendarToolbarLayout(CalendarToolbar.ActualWidth);
         Focus();
+    }
+
+    private void CalendarToolbar_SizeChanged(object sender, SizeChangedEventArgs e) => ApplyCalendarToolbarLayout(e.NewSize.Width);
+
+    private void ApplyCalendarToolbarLayout(double width)
+    {
+        if (CalendarFilterSearchGroup is null || CalendarDateNavigationGroup is null || SearchBox is null) return;
+        var compact = width > 0 && width < 1180;
+        Grid.SetRow(CalendarFilterSearchGroup, compact ? 1 : 0);
+        Grid.SetColumn(CalendarFilterSearchGroup, compact ? 0 : 4);
+        Grid.SetColumnSpan(CalendarFilterSearchGroup, compact ? 5 : 1);
+        CalendarFilterSearchGroup.HorizontalAlignment = compact ? HorizontalAlignment.Left : HorizontalAlignment.Right;
+        CalendarFilterSearchGroup.Margin = compact ? new Thickness(0, 12, 0, 0) : new Thickness(0);
+        CalendarDateNavigationGroup.MinWidth = compact ? 360 : 392;
+        SearchBox.Width = width switch
+        {
+            < 1050 => 150,
+            < 1400 => 170,
+            _ => 210
+        };
     }
 
     private void ViewModel_SearchFocusRequested(object? sender, EventArgs e)
