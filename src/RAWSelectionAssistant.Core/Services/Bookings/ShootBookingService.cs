@@ -14,11 +14,12 @@ public sealed class ShootBookingService(
     {
         var money = BookingMoneyCalculator.Calculate(draft.TotalAmountMinor, draft.DepositAmountMinor, draft.PaidAmountMinor);
         var validation = Validate(draft).ToList();
+        ShootBooking? existing = null;
         if (draft.Id is { } existingId)
         {
-            var existing = await repository.GetAsync(existingId, includeArchived: true, cancellationToken).ConfigureAwait(false);
-            if (existing is null) return new(BookingSaveStatus.NotFound, null, money, [], ["拍摄排期不存在。"]);
-            if (existing.IsArchived) validation.Add("已归档排期必须先恢复后才能编辑。");
+            existing = await repository.GetAsync(existingId, includeArchived: true, cancellationToken).ConfigureAwait(false);
+            if (existing is null && !draft.CreateIfMissing) return new(BookingSaveStatus.NotFound, null, money, [], ["拍摄排期不存在。"]);
+            if (existing?.IsArchived == true) validation.Add("已归档排期必须先恢复后才能编辑。");
         }
         if (validation.Count > 0) return BookingSaveResult.ValidationFailed(money, validation);
 
@@ -30,7 +31,7 @@ public sealed class ShootBookingService(
             return new(BookingSaveStatus.NeedsAttention, null, money, conflicts, []);
 
         var now = DateTimeOffset.UtcNow;
-        var previous = draft.Id is { } id ? await repository.GetAsync(id, includeArchived: true, cancellationToken).ConfigureAwait(false) : null;
+        var previous = existing;
         var bookingId = draft.Id ?? Guid.NewGuid();
         var booking = new ShootBooking
         {
@@ -71,8 +72,35 @@ public sealed class ShootBookingService(
             CreatedAtUtc = item.CreatedAtUtc == default ? now : item.CreatedAtUtc,
             CompletedAtUtc = item.IsCompleted ? item.CompletedAtUtc ?? now : null
         }).ToArray();
+        var contacts = draft.Contacts.Select(item => item with
+        {
+            BookingId = bookingId,
+            DisplayName = item.DisplayName.Trim(),
+            Phone = Clean(item.Phone),
+            WeChat = Clean(item.WeChat),
+            Email = Clean(item.Email),
+            OtherContact = Clean(item.OtherContact),
+            Note = Clean(item.Note),
+            CreatedAtUtc = item.CreatedAtUtc == default ? now : item.CreatedAtUtc,
+            UpdatedAtUtc = now
+        }).ToArray();
+        var staff = draft.Staff.Select((item, index) => item with
+        {
+            BookingId = bookingId,
+            DisplayName = item.DisplayName.Trim(),
+            Phone = Clean(item.Phone),
+            WeChat = Clean(item.WeChat),
+            Email = Clean(item.Email),
+            Note = Clean(item.Note),
+            SortOrder = index,
+            CreatedAtUtc = item.CreatedAtUtc == default ? now : item.CreatedAtUtc,
+            UpdatedAtUtc = now
+        }).ToArray();
 
-        await repository.SaveAsync(booking, requirements, cancellationToken).ConfigureAwait(false);
+        if (draft.ReplacePeople)
+            await repository.SaveAggregateAsync(booking, requirements, contacts, staff, cancellationToken).ConfigureAwait(false);
+        else
+            await repository.SaveAsync(booking, requirements, cancellationToken).ConfigureAwait(false);
         if (auditLog is not null)
             await auditLog.WriteAsync("Booking", previous is null ? "Created" : "Updated", "Information", "拍摄排期记录已保存。", projectId: booking.ProjectId, cancellationToken: cancellationToken).ConfigureAwait(false);
         BookingChanged?.Invoke(this, booking.Id);
@@ -130,6 +158,9 @@ public sealed class ShootBookingService(
         foreach (var error in BookingMoneyCalculator.Validate(draft.TotalAmountMinor, draft.DepositAmountMinor, draft.PaidAmountMinor, draft.CurrencyScale)) yield return error;
         foreach (var item in draft.Requirements)
             if (string.IsNullOrWhiteSpace(item.ItemText)) yield return "准备清单项目不能为空。";
+        if (draft.Contacts.Any(item => string.IsNullOrWhiteSpace(item.DisplayName))) yield return "联系人姓名或代号不能为空。";
+        if (draft.Contacts.Count(item => item.IsPrimary) > 1) yield return "同一排期只能设置一个主要联系人。";
+        if (draft.Staff.Any(item => string.IsNullOrWhiteSpace(item.DisplayName))) yield return "工作人员姓名或代号不能为空。";
     }
 
     private static string? Clean(string? value) => string.IsNullOrWhiteSpace(value) ? null : value.Trim();

@@ -35,17 +35,14 @@ public partial class BookingDocumentsPanel : UserControl
 
     private async void BookingDocumentsPanel_Drop(object sender, DragEventArgs e)
     {
+        // RC4 replaces the former DocumentDropChoiceWindow prompt with the persistent mode selector above the list.
         if (DataContext is not BookingDocumentsViewModel { CanModify: true } viewModel || e.Data.GetData(DataFormats.FileDrop) is not string[] paths || paths.Length == 0) return;
         if (paths.Any(Directory.Exists))
         {
             ThemedMessageDialog.Show(Window.GetWindow(this), "本地摄影资料", "当前版本只支持添加单个或多个文件，不会扫描文件夹。", ThemedMessageKind.Information);
             return;
         }
-        var previousFocus = Keyboard.FocusedElement;
-        var dialog = new DocumentDropChoiceWindow { Owner = Window.GetWindow(this) };
-        if (dialog.ShowDialog() == true && dialog.Choice is { } choice)
-            await viewModel.HandleDroppedFilesAsync(paths, choice);
-        previousFocus?.Focus();
+        await viewModel.HandleDroppedFilesAsync(paths, viewModel.SelectedLinkMode.Value);
     }
 
     private static void ViewModel_OpenFileRequested(object? sender, string path)

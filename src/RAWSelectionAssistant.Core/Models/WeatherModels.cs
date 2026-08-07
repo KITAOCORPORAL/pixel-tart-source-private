@@ -11,6 +11,15 @@ public enum WeatherAvailability
     Unavailable
 }
 
+public enum WeatherLocationMode { CurrentLocation, FollowBookingLocation, ManualCity }
+public enum CurrentLocationPermission { Unknown, Allowed, Denied, Unavailable }
+
+public sealed record CurrentLocationResult(
+    CurrentLocationPermission Permission,
+    double? Latitude = null,
+    double? Longitude = null,
+    string? Message = null);
+
 public sealed record WeatherLocationCandidate(
     string Id,
     string Name,

@@ -58,4 +58,5 @@ public sealed class WeatherSettings
     public string GeocodingApiBaseUrl { get; set; } = "https://geocoding-api.open-meteo.com/v1/search";
     public string ApiKey { get; set; } = string.Empty;
     public Dictionary<string, WeatherLocation> BookingLocations { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, WeatherLocationMode> BookingLocationModes { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 }

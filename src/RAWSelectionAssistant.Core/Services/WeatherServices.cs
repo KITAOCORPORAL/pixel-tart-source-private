@@ -23,6 +23,7 @@ public sealed class WeatherFeatureState
         {
             _settings = settings ?? new WeatherSettings();
             _settings.BookingLocations ??= new(StringComparer.OrdinalIgnoreCase);
+            _settings.BookingLocationModes ??= new(StringComparer.OrdinalIgnoreCase);
         }
     }
 
@@ -38,13 +39,22 @@ public sealed class WeatherFeatureState
                 WeatherApiBaseUrl = _settings.WeatherApiBaseUrl,
                 GeocodingApiBaseUrl = _settings.GeocodingApiBaseUrl,
                 ApiKey = _settings.ApiKey,
-                BookingLocations = new(_settings.BookingLocations, StringComparer.OrdinalIgnoreCase)
+                BookingLocations = new(_settings.BookingLocations, StringComparer.OrdinalIgnoreCase),
+                BookingLocationModes = new(_settings.BookingLocationModes, StringComparer.OrdinalIgnoreCase)
             };
         }
     }
 
     public void SetEnabled(bool enabled) { lock (_sync) _settings.Enabled = enabled; }
     public void SetAutoRefresh(bool enabled) { lock (_sync) _settings.AutoRefreshEnabled = enabled; }
+    public WeatherLocationMode GetLocationMode(Guid bookingId)
+    {
+        lock (_sync) return _settings.BookingLocationModes.TryGetValue(bookingId.ToString("D"), out var mode) ? mode : WeatherLocationMode.CurrentLocation;
+    }
+    public void SetLocationMode(Guid bookingId, WeatherLocationMode mode)
+    {
+        lock (_sync) _settings.BookingLocationModes[bookingId.ToString("D")] = mode;
+    }
 
     public WeatherLocation? GetLocation(Guid bookingId)
     {

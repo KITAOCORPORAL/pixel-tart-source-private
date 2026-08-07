@@ -24,6 +24,16 @@
         <conv:ResourceKeyToGeometryConverter x:Key="ResourceKeyToGeometryConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="WorkbenchMenuStyle" TargetType="Menu"><Setter Property="Background" Value="{DynamicResource ShellTopBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Style>
+        <Style x:Key="LocalSplitHeroButton" TargetType="Button" BasedOn="{StaticResource QuickActionButton}">
+            <Setter Property="Background" Value="{DynamicResource WorkbenchHeroBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource WorkbenchHeroBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="Background" Value="{DynamicResource WorkbenchHeroBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
+                <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource WorkbenchHeroBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="SettingsTabControlStyle" TargetType="TabControl">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
@@ -333,8 +343,7 @@
                         <Grid.RowDefinitions><RowDefinition Height="106" /><RowDefinition Height="16" /><RowDefinition Height="230" /><RowDefinition Height="16" /><RowDefinition Height="170" /><RowDefinition Height="16" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                         <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
                             <Grid Margin="0,0,5,0">
-                                <Button x:Name="StartLocalSplitCard" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit"
-                                        Background="{DynamicResource WorkbenchHeroBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                                <Button x:Name="StartLocalSplitCard" Style="{StaticResource LocalSplitHeroButton}" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit"
                                         ToolTip="{Binding LocalSplitHelpText}"
                                         AutomationProperties.Name="开始本地分片" AutomationProperties.HelpText="{Binding LocalSplitHelpText}" />
                                 <Grid Margin="22,0" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -346,7 +355,7 @@
                                             GotKeyboardFocus="LocalSplitHelpButton_GotKeyboardFocus" LostKeyboardFocus="LocalSplitHelpButton_LostKeyboardFocus" PreviewKeyDown="LocalSplitHelpButton_PreviewKeyDown"
                                             ToolTipService.InitialShowDelay="100" ToolTipService.BetweenShowDelay="100" ToolTipService.ShowDuration="12000"
                                             AutomationProperties.Name="本地分片说明" AutomationProperties.HelpText="{Binding LocalSplitHelpText}">
-                                        <Button.ToolTip><ToolTip x:Name="LocalSplitHelpToolTip" MaxWidth="340" Placement="Bottom"><TextBlock Text="导入TXT、客户选图JPG或编号记录，匹配本地JPG、RAW及相关文件。" TextWrapping="Wrap" /></ToolTip></Button.ToolTip>
+                                        <Button.ToolTip><ToolTip x:Name="LocalSplitHelpToolTip" MaxWidth="340" Placement="Bottom" VerticalOffset="8" StaysOpen="False"><TextBlock Text="导入TXT、客户选图JPG或编号记录，匹配本地JPG、RAW及相关文件。" TextWrapping="Wrap" /></ToolTip></Button.ToolTip>
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -403,6 +412,7 @@
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="2">
+                                                        <Border IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="3" Background="{DynamicResource AccentBrush}" CornerRadius="2" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                                         <Button Style="{StaticResource ToolEntryButton}" Tag="{Binding TargetPageKey}"
                                                                 Click="ToolboxItem_Click" ToolTip="{Binding Description}"
                                                                 AutomationProperties.Name="{Binding DisplayName}" IsEnabled="{Binding IsAvailable}">
@@ -603,7 +613,7 @@
         </Grid>
 
         <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
-            <Grid Margin="18,0"><TextBlock Text="{Binding CurrentPageStatus}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" /><TextBlock Text="{Binding CurrentPageDetail}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="720" /><TextBlock Text="{Binding CurrentPageProcessedText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
+            <Grid Margin="18,0"><TextBlock Text="{Binding CurrentPageStatus}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="{Binding CurrentPageDetail}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" TextTrimming="CharacterEllipsis" MaxWidth="520" /><TextBlock Text="{Binding BackgroundTaskStatus, StringFormat= · {0}}" Foreground="{DynamicResource AccentBrush}" FontSize="12" Margin="8,0,0,0" /><TextBlock Text="{Binding NotificationStatus, StringFormat= · {0}}" Foreground="{DynamicResource WarningBrush}" FontSize="12" Margin="8,0,0,0" /></StackPanel><TextBlock Text="{Binding CurrentPageProcessedText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
         </Border>
 
         <Border x:Name="SettingsModal" Grid.RowSpan="3" Panel.ZIndex="850" Background="{DynamicResource OverlayBrush}" Visibility="{Binding IsSettingsModalOpen, Converter={StaticResource BooleanToVisibilityConverter}}">

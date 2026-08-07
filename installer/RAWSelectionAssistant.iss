@@ -41,6 +41,9 @@ OutputBaseFilename=像素蛋挞_Test_Setup_2.3.0_x64
 #else
 #ifdef CandidateBuild
 OutputDir=..\artifacts\releases\2.3.0\installer
+#ifdef CandidateRc4
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC4_x64
+#else
 #ifdef CandidateRc3
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
 #else
@@ -48,6 +51,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC2_x64
 #else
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
+#endif
 #endif
 #endif
 #else
