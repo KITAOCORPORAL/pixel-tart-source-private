@@ -231,7 +231,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             var date = value.Date;
             if (!SetProperty(ref _selectedDate, date)) return;
             ClearSelection();
-            OnPropertyChanged(nameof(DisplayPeriod));
+            NotifyDisplayPeriod();
             QueueRefresh();
         }
     }
@@ -242,6 +242,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         CalendarViewMode.Week => $"{StartOfWeek(SelectedDate):yyyy年M月d日} — {StartOfWeek(SelectedDate).AddDays(6):M月d日}",
         _ => SelectedDate.ToString("yyyy年M月d日 dddd", CultureInfo.GetCultureInfo("zh-CN"))
     };
+
+    public string DisplayYear => $"{SelectedDate:yyyy}年";
+    public string DisplayMonth => $"{SelectedDate.Month}月";
 
     public CalendarStatusOption SelectedStatus
     {
@@ -469,7 +472,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         _selectedDate = date.Date;
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
-        OnPropertyChanged(nameof(DisplayPeriod));
+        NotifyDisplayPeriod();
         if (ViewMode == CalendarViewMode.Month && previousMonth != (_selectedDate.Year, _selectedDate.Month))
         {
             _selectFirstBookingAfterRefresh = true;
@@ -560,7 +563,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private async Task SetModeAsync(CalendarViewMode mode)
     {
         ViewMode = mode;
-        OnPropertyChanged(nameof(DisplayPeriod));
+        NotifyDisplayPeriod();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -569,7 +572,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         _selectedDate = DateTime.Today;
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
-        OnPropertyChanged(nameof(DisplayPeriod));
+        NotifyDisplayPeriod();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -583,7 +586,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         };
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
-        OnPropertyChanged(nameof(DisplayPeriod));
+        NotifyDisplayPeriod();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -605,7 +608,14 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         OnPropertyChanged(nameof(IsMonthView));
         OnPropertyChanged(nameof(IsWeekView));
         OnPropertyChanged(nameof(IsDayView));
+        NotifyDisplayPeriod();
+    }
+
+    private void NotifyDisplayPeriod()
+    {
         OnPropertyChanged(nameof(DisplayPeriod));
+        OnPropertyChanged(nameof(DisplayYear));
+        OnPropertyChanged(nameof(DisplayMonth));
     }
 
     private void ClearSelection()
@@ -727,6 +737,14 @@ public sealed class CalendarBookingItemViewModel
 
 public sealed class MonthDayViewModel
 {
+    private static readonly IReadOnlyDictionary<CalendarWorkflowStatus, int> PrimaryStatusPriority = new Dictionary<CalendarWorkflowStatus, int>
+    {
+        [CalendarWorkflowStatus.Scheduled] = 0,
+        [CalendarWorkflowStatus.Shot] = 1,
+        [CalendarWorkflowStatus.PendingDelivery] = 2,
+        [CalendarWorkflowStatus.Delivered] = 3
+    };
+
     public DateTime Date { get; init; }
     public int DayNumber => Date.Day;
     public bool IsCurrentMonth { get; init; }
@@ -738,16 +756,33 @@ public sealed class MonthDayViewModel
     public int BookingCount => VisibleBookings.Count + OverflowCount;
     public string BookingCountText => BookingCount == 0 ? string.Empty : $"{BookingCount}场";
     public bool HasBookings => BookingCount > 0;
-    public string PrimaryBusinessState => VisibleBookings.FirstOrDefault()?.BusinessStateText ?? string.Empty;
-    public CalendarWorkflowStatus PrimaryWorkflowStatus => VisibleBookings.FirstOrDefault()?.WorkflowStatus ?? CalendarWorkflowStatus.Scheduled;
+    public string PrimaryBusinessState => PrimaryBooking?.BusinessStateText ?? string.Empty;
+    public CalendarWorkflowStatus PrimaryWorkflowStatus => PrimaryBooking?.WorkflowStatus ?? CalendarWorkflowStatus.Scheduled;
     public IReadOnlyList<CalendarWorkflowStatus> WorkflowSegments => VisibleBookings.Select(item => item.WorkflowStatus).Distinct().Take(3).ToArray();
     public bool HasMixedWorkflowStatuses => WorkflowSegments.Count > 1;
     public string PrimaryStatusGlyph => VisibleBookings.FirstOrDefault()?.StatusGlyph ?? string.Empty;
+    public bool HasMultipleBookings => BookingCount > 1;
+    public string BookingCountBadgeText => HasMultipleBookings ? BookingCount.ToString(CultureInfo.InvariantCulture) : string.Empty;
     public string WeatherGlyph => VisibleBookings.Select(item => item.MonthWeatherIcon).FirstOrDefault(value => !string.IsNullOrEmpty(value)) ?? string.Empty;
     public bool HasConflict { get; init; }
     public string ConflictGlyph => HasConflict ? "!" : string.Empty;
     public string OverflowText => OverflowCount > 0 ? $"另有 {OverflowCount} 项" : string.Empty;
+    public string TooltipText
+    {
+        get
+        {
+            var lines = new List<string> { $"{Date:M月d日}", BookingCount == 0 ? "暂无拍摄" : $"{BookingCount}场拍摄" };
+            lines.AddRange(VisibleBookings.Select(item => $"• {item.Title}：{item.WorkflowStatusText}"));
+            if (OverflowCount > 0) lines.Add($"• 另有 {OverflowCount} 场拍摄");
+            return string.Join(Environment.NewLine, lines);
+        }
+    }
     public string AccessibilityName => $"{Date:yyyy年M月d日}，{BookingCount}项排期" + (HasConflict ? "，存在时间冲突" : string.Empty);
+
+    private CalendarBookingItemViewModel? PrimaryBooking => VisibleBookings
+        .OrderBy(item => PrimaryStatusPriority.GetValueOrDefault(item.WorkflowStatus, int.MaxValue))
+        .ThenBy(item => item.LocalStart)
+        .FirstOrDefault();
 }
 
 public sealed class MonthCalendarViewModel
