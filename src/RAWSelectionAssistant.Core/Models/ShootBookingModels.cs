@@ -19,6 +19,14 @@ public enum ShootBookingStatus
     Draft
 }
 
+public enum CalendarWorkflowStatus
+{
+    Scheduled,
+    Shot,
+    PendingDelivery,
+    Delivered
+}
+
 public enum ShootRequirementPriority { Low, Normal, High, Critical }
 public enum BookingDocumentType { PhotographyPlan, ShootAgreement, ModelRelease, Quotation, VenueMaterial, WardrobeReference, LightingDiagram, CameraDiagram, MoodBoard, StaffFile, Other }
 public enum BookingDocumentLinkMode { Reference, ManagedCopy }
@@ -183,7 +191,8 @@ public sealed record BookingConflict(
     ShootBookingStatus Status,
     TimeSpan Overlap,
     bool ExistingAllowsOverlap,
-    bool IsBlocking);
+    bool IsBlocking,
+    string TimeZoneId = "");
 
 public sealed record BookingSaveResult(
     BookingSaveStatus Status,

@@ -51,8 +51,8 @@ public sealed class AppSettings
 
 public sealed class WeatherSettings
 {
-    public bool Enabled { get; set; }
-    public bool AutoRefreshEnabled { get; set; }
+    public bool Enabled { get; set; } = true;
+    public bool AutoRefreshEnabled { get; set; } = true;
     public string Provider { get; set; } = "OpenMeteo";
     public string WeatherApiBaseUrl { get; set; } = "https://api.open-meteo.com/v1/forecast";
     public string GeocodingApiBaseUrl { get; set; } = "https://geocoding-api.open-meteo.com/v1/search";

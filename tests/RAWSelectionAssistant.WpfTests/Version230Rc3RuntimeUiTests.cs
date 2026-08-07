@@ -12,7 +12,7 @@ public sealed class Version230Rc3RuntimeUiTests
     [TestMethod]
     [DataRow("工作日历视图")][DataRow("工作日历排序")][DataRow("日期跳转")][DataRow("月")][DataRow("周")][DataRow("日")]
     [DataRow("拍摄状态筛选")][DataRow("拍摄类型筛选")][DataRow("搜索排期")][DataRow("可折叠状态图例")]
-    [DataRow("未拍摄")][DataRow("已拍摄")][DataRow("待发送选片 / 待选片 / 已选片")][DataRow("待精修 / 已精修 / 待交付")][DataRow("已交付")]
+    [DataRow("未拍摄")][DataRow("已拍摄")][DataRow("待发送选片 / 待选片 / 已选片")][DataRow("待精修 / 已精修 / 待交付")][DataRow("已返图")]
     [DataRow("时间冲突")][DataRow("天气风险")][DataRow("关闭档期")][DataRow("Width=\"65*\"")][DataRow("Width=\"35*\"")]
     [DataRow("GridSplitter")][DataRow("当前周期拍摄列表")][DataRow("当前周期总览")][DataRow("StatusToTextConverter")][DataRow("DaySchedulePanel")]
     public void ProfessionalCalendar_ContainsRequiredRuntimeSurface(string token) => Contains("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml", token);
@@ -28,7 +28,7 @@ public sealed class Version230Rc3RuntimeUiTests
     [TestMethod]
     [DataRow("本地摄影资料关联")][DataRow("默认仅关联原位置")][DataRow("不把文件写入数据库")][DataRow("不会自动复制")]
     [DataRow("文件夹不会被扫描")][DataRow("支持一次添加多个文件")][DataRow("文档分类")][DataRow("复制到项目资料目录并关联")]
-    [DataRow("预览")][DataRow("打开所在位置")][DataRow("重新定位")][DataRow("移除关联")][DataRow("检查全部关联文件")]
+    [DataRow("预览")][DataRow("打开所在位置")][DataRow("重新定位")][DataRow("移除关联")][DataRow("检查资料状态")]
     [DataRow("PreviewDisplayWidth")][DataRow("PreviewDisplayHeight")][DataRow("搜索文本预览")][DataRow("只读文本预览")]
     [DataRow("安全文件卡片")][DataRow("Office 文件不执行宏")][DataRow("未知格式仅显示元数据")][DataRow("重试保存关联")]
     [DataRow("安全撤销本次复制")][DataRow("保留文件但放弃关联")][DataRow("VerticalScrollBarVisibility=\"Auto\"")]
@@ -68,7 +68,7 @@ public sealed class Version230Rc3RuntimeUiTests
     [DataRow(ShootBookingStatus.Tentative, "待确定")][DataRow(ShootBookingStatus.Confirmed, "已确认")][DataRow(ShootBookingStatus.Preparing, "准备中")]
     [DataRow(ShootBookingStatus.Shooting, "拍摄中")][DataRow(ShootBookingStatus.Completed, "已拍摄")][DataRow(ShootBookingStatus.AwaitingSelectionDelivery, "待发送选片")]
     [DataRow(ShootBookingStatus.AwaitingSelection, "待选片")][DataRow(ShootBookingStatus.Selected, "已选片")][DataRow(ShootBookingStatus.AwaitingRetouch, "待精修")]
-    [DataRow(ShootBookingStatus.Retouched, "已精修")][DataRow(ShootBookingStatus.AwaitingDelivery, "待交付")][DataRow(ShootBookingStatus.Delivered, "已交付")]
+    [DataRow(ShootBookingStatus.Retouched, "已精修")][DataRow(ShootBookingStatus.AwaitingDelivery, "待交付")][DataRow(ShootBookingStatus.Delivered, "已返图")]
     [DataRow(ShootBookingStatus.Cancelled, "已取消")][DataRow(ShootBookingStatus.Postponed, "已延期")]
     public void BookingStatusConverter_NeverExposesInternalEnum(ShootBookingStatus status, string expected)
     {
