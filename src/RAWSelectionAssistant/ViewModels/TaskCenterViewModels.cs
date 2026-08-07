@@ -162,6 +162,15 @@ public sealed class TaskSnapshotViewModel : ObservableObject
         _ => "未知状态"
     };
     public double Progress => _snapshot.Progress;
+    public string SourceModuleText => DisplayName switch
+    {
+        var name when name.Contains("联机", StringComparison.OrdinalIgnoreCase) => "来源：联机拍摄",
+        var name when name.Contains("压缩", StringComparison.OrdinalIgnoreCase) => "来源：批量压缩",
+        var name when name.Contains("归片", StringComparison.OrdinalIgnoreCase) => "来源：归片工作区",
+        var name when name.Contains("复制", StringComparison.OrdinalIgnoreCase) => "来源：文件复制",
+        _ => "来源：本地任务"
+    };
+    public string UpdatedAtText => $"更新 {_snapshot.UpdatedAt.ToLocalTime():MM-dd HH:mm}";
     public string CurrentStep => _snapshot.CurrentStep;
     public string CurrentFile => string.IsNullOrWhiteSpace(_snapshot.CurrentFile) ? string.Empty : Path.GetFileName(_snapshot.CurrentFile);
     public string ResultText => $"成功 {_snapshot.Summary.Succeeded} · 失败 {_snapshot.Summary.Failed} · 跳过 {_snapshot.Summary.Skipped}";
