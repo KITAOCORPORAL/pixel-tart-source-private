@@ -1,0 +1,42 @@
+{
+  "Candidate": "RC5",
+  "Root": "../../ui-review/2.3.0-rc5",
+  "Captured": [
+    "01_Sidebar_Expanded.png",
+    "06_LocalSplit_Opened.png",
+    "像素蛋挞_2.3.0_RC5真实运行修复UI总览.png"
+  ],
+  "NotCaptured": [
+    "02_Sidebar_Collapsed.png",
+    "03_Sidebar_IconUnique.png",
+    "07_Workbench_CalendarLegend.png",
+    "08_Calendar_FreeGray.png",
+    "09_Calendar_ScheduledRed.png",
+    "10_Calendar_ShotGreen.png",
+    "11_Calendar_PendingReturnYellow.png",
+    "12_Calendar_ReturnedBlue.png",
+    "13_Calendar_MixedDay.png",
+    "14_Calendar_StatusSelector.png",
+    "15_Calendar_StatusFilter.png",
+    "16_Calendar_DetailDarkTabs.png",
+    "17_Calendar_MultidayStatus.png",
+    "18_ArchivedTime_Local.png",
+    "19_CreateShoot_DarkStepper.png",
+    "20_CreateShoot_Width.png",
+    "21_Weather_AutoCurrent.png",
+    "22_Weather_PermissionDenied.png",
+    "23_Weather_ManualCity.png",
+    "24_Finance_FilterDefaults.png",
+    "25_StatusBar_Finance.png",
+    "26_Documents_ActionsCompact.png",
+    "27_DarkTheme.png",
+    "28_LightTheme.png",
+    "29_HighContrast.png",
+    "30_Dpi150.png",
+    "31_Dpi200.png",
+    "32_Compact1280.png"
+  ],
+  "Recording": null,
+  "DynamicAcceptance": false,
+  "EvidencePolicy": "Only real installed-build screenshots are indexed; duplicates and placeholders were removed."
+}

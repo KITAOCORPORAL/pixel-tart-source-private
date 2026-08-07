@@ -1,0 +1,28 @@
+{
+  "ProductVersion": "2.3.0",
+  "SchemaVersion": 4,
+  "OriginalBaselineTests": 1461,
+  "FinalTests": 1493,
+  "Projects": {
+    "Core": 1024,
+    "Wpf": 382,
+    "Dpi": 87
+  },
+  "RepeatedGateBeforeFinalChineseLabelTest": {
+    "TestsPerRound": 1492,
+    "CoreParallelRounds": 3,
+    "CoreNonParallelRounds": 3,
+    "DebugFullRounds": 3,
+    "ReleaseFullRounds": 3,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  "FinalVerification": {
+    "Debug": { "Total": 1493, "Passed": 1493, "Failed": 0, "Skipped": 0, "Warnings": 0, "Errors": 0 },
+    "Release": { "Total": 1493, "Passed": 1493, "Failed": 0, "Skipped": 0, "Warnings": 0, "Errors": 0 }
+  },
+  "OriginalBaselineRetained": true,
+  "Provider": "None",
+  "OutputType": "WinExe",
+  "Passed": true
+}
