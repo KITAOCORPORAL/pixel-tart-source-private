@@ -39,6 +39,7 @@ public sealed class TaskCenterViewModel : ObservableObject
     public int AttentionCount => Tasks.Count(x => x.State == TaskLifecycleState.NeedsAttention);
     public bool HasTasks => Tasks.Count > 0;
     public bool HasNoTasks => !HasTasks;
+    public IReadOnlyList<TaskSnapshotViewModel> VisibleTasks => Tasks.Where(item => !item.IsTerminal).Concat(Tasks.Where(item => item.IsTerminal).Take(2)).ToArray();
     public string EmptyMessage => "暂无待处理任务";
     public AsyncRelayCommand PauseCommand { get; }
     public AsyncRelayCommand ResumeCommand { get; }
@@ -115,6 +116,7 @@ public sealed class TaskCenterViewModel : ObservableObject
         OnPropertyChanged(nameof(AttentionCount));
         OnPropertyChanged(nameof(HasTasks));
         OnPropertyChanged(nameof(HasNoTasks));
+        OnPropertyChanged(nameof(VisibleTasks));
         RaiseCommands();
     }
 
@@ -126,6 +128,7 @@ public sealed class TaskCenterViewModel : ObservableObject
         OnPropertyChanged(nameof(AttentionCount));
         OnPropertyChanged(nameof(HasTasks));
         OnPropertyChanged(nameof(HasNoTasks));
+        OnPropertyChanged(nameof(VisibleTasks));
         RaiseCommands();
     }
 

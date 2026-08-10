@@ -160,6 +160,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     }
 
     public event EventHandler<BookingEditorRequestEventArgs>? EditorRequested;
+    public event EventHandler? DayDetailsNavigationRequested;
     public event EventHandler<BookingFinanceRequestEventArgs>? FinanceRequested;
 
     public IReadOnlyList<CalendarStatusOption> StatusOptions { get; }
@@ -514,6 +515,27 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     }
 
     public Task OpenBookingDetailsAsync(Guid bookingId, bool includeArchived = false) => OpenBookingAsync(bookingId, includeArchived);
+
+    public async Task OpenDayDetailsForDateAsync(DateTime date)
+    {
+        var target = date.Date;
+        if (SelectedDate != target)
+        {
+            _selectedDate = target;
+            ClearSelection();
+            OnPropertyChanged(nameof(SelectedDate));
+            NotifyDisplayPeriod();
+        }
+        if (ViewMode != CalendarViewMode.Month)
+        {
+            ViewMode = CalendarViewMode.Month;
+            NotifyDisplayPeriod();
+        }
+        await RefreshAsync().ConfigureAwait(true);
+        if (DaySchedule.Bookings.FirstOrDefault() is { } first)
+            await OpenBookingAsync(first.Booking).ConfigureAwait(true);
+        DayDetailsNavigationRequested?.Invoke(this, EventArgs.Empty);
+    }
 
     private Task OpenBookingAsync(ShootBookingSummary item)
     {
@@ -957,6 +979,9 @@ public sealed class DaySchedulePanelViewModel : ObservableObject
     public string WeekdayText => Date.ToString("dddd", CultureInfo.GetCultureInfo("zh-CN"));
     public string EmptyText => $"{Date:M月d日}暂无拍摄任务";
     public ObservableCollection<CalendarBookingItemViewModel> Bookings { get; } = [];
+    public IEnumerable<CalendarBookingItemViewModel> VisibleBookings => Bookings.Take(2);
+    public int OverflowCount => Math.Max(0, Bookings.Count - 2);
+    public string OverflowText => OverflowCount > 0 ? $"还有 {OverflowCount} 项 · 查看完整日历" : string.Empty;
     public ICommand OpenBookingCommand { get; }
     public ICommand NewBookingCommand { get; }
     public int BookingCount => Bookings.Count;
@@ -979,7 +1004,7 @@ public sealed class DaySchedulePanelViewModel : ObservableObject
         Date = date.Date;
         Bookings.Clear();
         foreach (var item in items.Select(item => new CalendarBookingItemViewModel(item, weather?.GetValueOrDefault(item.Id))).OrderBy(item => item.LocalStart)) Bookings.Add(item);
-        foreach (var name in new[] { nameof(BookingCount), nameof(UnshotCount), nameof(ShotCount), nameof(AwaitingReturnCount), nameof(ConflictCount) }) OnPropertyChanged(name);
+        foreach (var name in new[] { nameof(BookingCount), nameof(UnshotCount), nameof(ShotCount), nameof(AwaitingReturnCount), nameof(ConflictCount), nameof(VisibleBookings), nameof(OverflowCount), nameof(OverflowText) }) OnPropertyChanged(name);
     }
 }
 

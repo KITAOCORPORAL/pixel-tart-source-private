@@ -23,7 +23,7 @@ public partial class QuickToolsManagerWindow : Window
     }
 
     public IReadOnlyList<string> ResultToolIds { get; private set; } = [];
-    private void RefreshAvailable() { _available.Clear(); foreach (var tool in ToolRegistry.Pinnable.Where(x => _pinned.All(p => p.Id != x.Id))) _available.Add(tool); }
+    private void RefreshAvailable() { _available.Clear(); foreach (var tool in ToolRegistry.ReleasePinnable.Where(x => _pinned.All(p => p.Id != x.Id))) _available.Add(tool); }
     private void Add_Click(object sender, RoutedEventArgs e) { if (AvailableList.SelectedItem is ToolDefinition tool && _pinned.Count < QuickToolsService.MaximumPinnedTools) { _pinned.Add(tool); RefreshAvailable(); } }
     private void Remove_Click(object sender, RoutedEventArgs e) { if (PinnedList.SelectedItem is ToolDefinition tool) { _pinned.Remove(tool); RefreshAvailable(); } }
     private void Up_Click(object sender, RoutedEventArgs e) => Move(-1);

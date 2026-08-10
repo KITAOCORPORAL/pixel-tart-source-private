@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.ComponentModel;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.ViewModels;
 
@@ -21,15 +22,32 @@ public partial class WorkCalendarView : UserControl
             {
                 _subscribedViewModel.EditorRequested -= ViewModel_EditorRequested;
                 _subscribedViewModel.SearchFocusRequested -= ViewModel_SearchFocusRequested;
+                _subscribedViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                _subscribedViewModel.DayDetailsNavigationRequested -= ViewModel_DayDetailsNavigationRequested;
             }
             _subscribedViewModel = viewModel;
             viewModel.EditorRequested += ViewModel_EditorRequested;
             viewModel.SearchFocusRequested += ViewModel_SearchFocusRequested;
+            viewModel.PropertyChanged += ViewModel_PropertyChanged;
+            viewModel.DayDetailsNavigationRequested += ViewModel_DayDetailsNavigationRequested;
         }
         await viewModel.InitializeAsync();
         ApplyCalendarToolbarLayout(CalendarToolbar.ActualWidth);
         Focus();
+        if (viewModel.IsDetailsOpen) DayDetailsPanel.PrepareForNavigation();
     }
+
+    private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(WorkCalendarViewModel.IsDetailsOpen) && sender is WorkCalendarViewModel { IsDetailsOpen: true })
+            Dispatcher.BeginInvoke(DayDetailsPanel.PrepareForNavigation);
+    }
+
+    private void ViewModel_DayDetailsNavigationRequested(object? sender, EventArgs e) => Dispatcher.BeginInvoke(() =>
+    {
+        if (sender is WorkCalendarViewModel { IsDetailsOpen: true }) DayDetailsPanel.PrepareForNavigation();
+        else DayDetailsHost.Focus();
+    });
 
     private void CalendarToolbar_SizeChanged(object sender, SizeChangedEventArgs e) => ApplyCalendarToolbarLayout(e.NewSize.Width);
 

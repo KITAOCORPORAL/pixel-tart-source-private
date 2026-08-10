@@ -36,6 +36,7 @@ public sealed class ToolboxItemViewModel : ObservableObject
         {
             if (!SetProperty(ref _isPinned, value)) return;
             OnPropertyChanged(nameof(PinGlyph));
+            OnPropertyChanged(nameof(PinIconResourceKey));
             OnPropertyChanged(nameof(PinToolTip));
             OnPropertyChanged(nameof(PinAutomationName));
             OnPropertyChanged(nameof(PinStateLabel));
@@ -43,11 +44,12 @@ public sealed class ToolboxItemViewModel : ObservableObject
         }
     }
 
-    public string PinGlyph => IsPinned ? "●" : "○";
-    public string PinStateLabel => IsPinned ? "已固定" : "未固定";
-    public string PinActionLabel => IsPinned ? "●  已固定" : "○";
-    public string PinToolTip => IsPinned ? $"从工作台快捷区取消固定{DisplayName}" : $"固定{DisplayName}到工作台快捷区";
-    public string PinAutomationName => $"{DisplayName}，{PinStateLabel}，点击后{(IsPinned ? "取消固定" : "固定")}";
+    public string PinIconResourceKey => IsPinned ? "ToolIconPinFilled" : "ToolIconPinOutline";
+    public string PinGlyph => PinIconResourceKey;
+    public string PinStateLabel => IsPinned ? "已固定" : string.Empty;
+    public string PinActionLabel => IsPinned ? "已固定" : "固定到工作台";
+    public string PinToolTip => IsPinned ? "从工作台取消固定" : "固定到工作台";
+    public string PinAutomationName => IsPinned ? $"{DisplayName}，已固定，从工作台取消固定" : $"{DisplayName}，未固定，固定到工作台";
 
     public void SetPinned(bool value) => IsPinned = value;
 }
