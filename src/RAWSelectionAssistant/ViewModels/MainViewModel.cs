@@ -14,6 +14,8 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed class MainViewModel : ObservableObject
 {
+    private const string QuickToolsCapacityShortLabel = "快捷工具已满";
+    private const string QuickToolsCapacityMessage = "工作台快捷区已满，请先取消一个已固定工具。";
     private readonly FileNameNormalizer _normalizer;
     private readonly InputParserService _inputParser;
     private readonly MediaIndexService _indexService;
@@ -474,8 +476,8 @@ public sealed class MainViewModel : ObservableObject
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
         new(ToolRegistry.All.Select(definition => new ToolboxItemViewModel(definition)));
     public IReadOnlyList<ToolboxItemViewModel> ToolCatalogItems =>
-        ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox).ToList();
-    public IReadOnlyList<ToolDefinition> ToolMenuItems => ToolRegistry.All;
+        ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox && item.Availability != FeatureAvailability.Hidden).ToList();
+    public IReadOnlyList<ToolDefinition> ToolMenuItems => ToolRegistry.ReleaseCatalog;
     public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
     public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => Settings.PinnedQuickTools
         .Select(id => ToolboxItems.FirstOrDefault(item => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
@@ -488,6 +490,7 @@ public sealed class MainViewModel : ObservableObject
     public bool IsToolPinned(string id) => ToolRegistry.TryGet(id, out var definition) &&
         Settings.PinnedQuickTools.Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase);
     public bool CanPinTool(string id) => ToolRegistry.TryGet(id, out var definition) && definition.CanPin &&
+        definition.Availability == FeatureAvailability.Production &&
         (IsToolPinned(id) || QuickToolsService.Normalize(Settings.PinnedQuickTools).Count < QuickToolsService.MaximumPinnedTools);
     public string LocalSplitHelpText => "导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。";
     public string SearchQuery
@@ -998,6 +1001,12 @@ public sealed class MainViewModel : ObservableObject
     }
 
     private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => CurrentPage = "WorkCalendar";
+
+    public async Task NavigateToCalendarDetailsAsync(DateTime date)
+    {
+        CurrentPage = "WorkCalendar";
+        await WorkCalendarPage.OpenDayDetailsForDateAsync(date).ConfigureAwait(true);
+    }
 
     public async Task HandleDropAsync(string[]? paths, string? text)
     {
@@ -1891,9 +1900,14 @@ public sealed class MainViewModel : ObservableObject
     private void TogglePinnedTool(string? id)
     {
         if (!ToolRegistry.TryGet(id, out var definition)) return;
-        if (!definition.CanPin)
+        if (definition.Id == ToolId.Toolbox)
         {
             ShowToast("工具箱始终可从工作台和侧栏打开，不占快捷位");
+            return;
+        }
+        if (!definition.CanPin || definition.Availability != FeatureAvailability.Production)
+        {
+            ShowToast("预览或隐藏工具不能固定到工作台");
             return;
         }
         if (IsToolPinned(definition.SettingsId))
@@ -1902,7 +1916,8 @@ public sealed class MainViewModel : ObservableObject
         }
         else if (QuickToolsService.Normalize(Settings.PinnedQuickTools).Count >= QuickToolsService.MaximumPinnedTools)
         {
-            ShowToast("快捷工具已满，请先取消固定一个工具");
+            _ = QuickToolsCapacityShortLabel;
+            ShowToast(QuickToolsCapacityMessage);
             return;
         }
         else

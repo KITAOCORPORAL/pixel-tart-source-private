@@ -56,13 +56,25 @@ public partial class WorkbenchCalendarPanel : UserControl
             viewModel.NavigateCommand.Execute("WorkCalendar");
     }
 
+    private void OpenSelectedDayDetails_Click(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is not WorkCalendarViewModel calendar) return;
+        if (Window.GetWindow(this)?.DataContext is MainViewModel mainViewModel)
+            _ = mainViewModel.NavigateToCalendarDetailsAsync(calendar.SelectedDate);
+        else
+            _ = calendar.OpenDayDetailsForDateAsync(calendar.SelectedDate);
+    }
+
     private void ViewDayDetails_Click(object sender, RoutedEventArgs e)
     {
         if (sender is MenuItem { Parent: ContextMenu contextMenu } &&
             contextMenu.PlacementTarget is FrameworkElement { DataContext: MonthDayViewModel day } &&
-            DataContext is WorkCalendarViewModel viewModel)
+            DataContext is WorkCalendarViewModel calendar)
         {
-            viewModel.Month.SelectDateCommand.Execute(day);
+            if (Window.GetWindow(this)?.DataContext is MainViewModel mainViewModel)
+                _ = mainViewModel.NavigateToCalendarDetailsAsync(day.Date);
+            else
+                _ = calendar.OpenDayDetailsForDateAsync(day.Date);
         }
     }
 }

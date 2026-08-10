@@ -16,7 +16,8 @@ public static class QuickToolsService
 
         foreach (var value in source)
         {
-            if (!ToolRegistry.TryGet(value, out var definition) || !definition.CanPin || !seen.Add(definition.Id))
+            if (!ToolRegistry.TryGet(value, out var definition) || !definition.CanPin ||
+                definition.Availability != FeatureAvailability.Production || !seen.Add(definition.Id))
             {
                 continue;
             }
@@ -49,7 +50,8 @@ public static class QuickToolsService
     {
         var result = Normalize(values);
         if (result.Count >= MaximumPinnedTools || result.Contains(toolId, StringComparer.OrdinalIgnoreCase) ||
-            !ToolRegistry.TryGet(toolId, out var definition) || !definition.CanPin) return result;
+            !ToolRegistry.TryGet(toolId, out var definition) || !definition.CanPin ||
+            definition.Availability != FeatureAvailability.Production) return result;
         result.Add(definition.SettingsId);
         return result;
     }

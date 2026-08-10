@@ -11,7 +11,7 @@ public static class BookingMoneyCalculator
         var warnings = new List<BookingMoneyWarning>();
         long? balance = totalAmountMinor.HasValue ? totalAmountMinor.Value - (paidAmountMinor ?? 0) : null;
         if (totalAmountMinor.HasValue && paidAmountMinor > totalAmountMinor)
-            warnings.Add(new(PaidExceedsTotalCode, "已收金额高于当前拍摄总金额"));
+            warnings.Add(new(PaidExceedsTotalCode, "已收金额高于当前拍摄总金额，请确认是否包含追加费用。"));
 
         var displayKind = balance switch
         {
@@ -31,6 +31,8 @@ public static class BookingMoneyCalculator
         if (totalAmountMinor < 0) errors.Add("拍摄总金额不得为负数。");
         if (depositAmountMinor < 0) errors.Add("定金不得为负数。");
         if (paidAmountMinor < 0) errors.Add("已收金额不得为负数。");
+        if (totalAmountMinor.HasValue && depositAmountMinor.HasValue && depositAmountMinor > totalAmountMinor)
+            errors.Add("定金不能高于拍摄总金额。");
         if (currencyScale is < 0 or > 4) errors.Add("货币小数位必须在0到4之间。");
         return errors;
     }
