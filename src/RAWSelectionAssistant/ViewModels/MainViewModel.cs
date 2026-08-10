@@ -145,6 +145,7 @@ public sealed class MainViewModel : ObservableObject
         _matchDecisionRepository = matchDecisionRepository;
         _weatherState = weatherState;
         WorkCalendarPage = workCalendarPage;
+        WorkCalendarPage.CalendarPageRequested += WorkCalendarPage_CalendarPageRequested;
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
         TetherPage = tetherPage;
@@ -1002,10 +1003,16 @@ public sealed class MainViewModel : ObservableObject
 
     private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => CurrentPage = "WorkCalendar";
 
-    public async Task NavigateToCalendarDetailsAsync(DateTime date)
+    private async void WorkCalendarPage_CalendarPageRequested(object? sender, EventArgs e)
     {
         CurrentPage = "WorkCalendar";
-        await WorkCalendarPage.OpenDayDetailsForDateAsync(date).ConfigureAwait(true);
+        await WorkCalendarPage.ActivateAsync().ConfigureAwait(true);
+    }
+
+    public async Task NavigateToCalendarDetailsAsync(DateTime date)
+    {
+        WorkCalendarPage.ViewDayDetailsCommand.Execute(date.Date);
+        await Task.CompletedTask;
     }
 
     public async Task HandleDropAsync(string[]? paths, string? text)

@@ -475,6 +475,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ICommand MoveStaffDownCommand { get; }
     public ICommand OpenConflictCommand { get; }
     public string DialogTitle => _bookingId.HasValue ? "编辑拍摄排期" : "新建拍摄排期";
+    public bool IsEditMode => _bookingId.HasValue;
+    public string EditorMode => IsEditMode ? "EditMode" : "CreateMode";
     public bool IsBusy { get => _isBusy; private set => SetProperty(ref _isBusy, value); }
     public Guid EditorSessionId => _editorSessionId;
     public Guid StableBookingId => _stableBookingId;

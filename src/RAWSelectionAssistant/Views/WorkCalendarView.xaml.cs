@@ -31,7 +31,7 @@ public partial class WorkCalendarView : UserControl
             viewModel.PropertyChanged += ViewModel_PropertyChanged;
             viewModel.DayDetailsNavigationRequested += ViewModel_DayDetailsNavigationRequested;
         }
-        await viewModel.InitializeAsync();
+        await viewModel.ActivateAsync();
         ApplyCalendarToolbarLayout(CalendarToolbar.ActualWidth);
         Focus();
         if (viewModel.IsDetailsOpen) DayDetailsPanel.PrepareForNavigation();
