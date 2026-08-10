@@ -70,7 +70,7 @@ public sealed class Version230Rc5CoreInteractionHotfixTests
     [DataRow("ToolIconPinOutline")]
     [DataRow("ToolIconPinFilled")]
     [DataRow("PinIconResourceKey")]
-    [DataRow("Width=\"30\" Height=\"30\"")]
+    [DataRow("Width=\"32\" Height=\"32\"")]
     [DataRow("固定到工作台")]
     [DataRow("从工作台取消固定")]
     [DataRow("已固定")]

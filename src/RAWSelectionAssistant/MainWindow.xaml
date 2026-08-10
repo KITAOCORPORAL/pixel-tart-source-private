@@ -425,16 +425,16 @@
                                                                 <TextBlock Text="{Binding DisplayName}" />
                                                             </StackPanel>
                                                         </Button>
-                                                        <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Padding="5,2" CornerRadius="4" Background="{DynamicResource SurfaceSecondaryBrush}" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                            <TextBlock Text="已固定" FontSize="10" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
+                                                        <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,5,5,5" Padding="6,3" CornerRadius="4" Background="{DynamicResource AccentBrush}" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TextBlock Text="已固定" FontSize="10" Foreground="#FF17120A" FontWeight="Bold" />
                                                         </Border>
                                                         <Button ToolTip="{Binding PinToolTip}"
-                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" MinWidth="28" MinHeight="28" Padding="0"
+                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Width="32" Height="32" MinWidth="32" MinHeight="32" Padding="0"
                                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                                 AutomationProperties.Name="{Binding PinAutomationName}">
                                                             <Button.Style><Style TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}" /><Setter Property="FontWeight" Value="Bold" /></DataTrigger></Style.Triggers></Style></Button.Style>
-                                                            <Path Width="18" Height="18" Stretch="Uniform" StrokeThickness="1.5" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="{DynamicResource AccentBrush}" /><Setter Property="Stroke" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
+                                                            <Path Width="20" Height="20" Stretch="Uniform" StrokeThickness="1.7" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="#FFFFC44D" /><Setter Property="Stroke" Value="#FFFFD476" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
                                                         </Button>
                                                     </Grid>
                                                 </DataTemplate>
@@ -562,12 +562,12 @@
                                             </Grid>
                                         </Button>
                                         <Button Style="{StaticResource GhostButton}" ToolTip="{Binding PinToolTip}"
-                                                HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="6,2" MinHeight="28"
+                                                HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="7,4" MinWidth="32" MinHeight="32"
                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                 AutomationProperties.Name="{Binding PinAutomationName}">
                                             <StackPanel Orientation="Horizontal">
-                                                <Path Width="16" Height="16" Stretch="Uniform" StrokeThickness="1.5" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="{DynamicResource AccentBrush}" /><Setter Property="Stroke" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
+                                                <Path Width="20" Height="20" Stretch="Uniform" StrokeThickness="1.7" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="#FFFFC44D" /><Setter Property="Stroke" Value="#FFFFD476" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
                                                 <TextBlock Text="{Binding PinActionLabel}" Margin="5,0,0,0" />
                                             </StackPanel>
                                         </Button>

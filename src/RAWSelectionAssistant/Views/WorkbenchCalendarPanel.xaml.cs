@@ -42,14 +42,6 @@ public partial class WorkbenchCalendarPanel : UserControl
         }
     }
 
-    private void CreateBooking_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuItem { Parent: ContextMenu contextMenu } &&
-            contextMenu.PlacementTarget is FrameworkElement { DataContext: MonthDayViewModel day } &&
-            DataContext is WorkCalendarViewModel viewModel)
-            viewModel.Month.CreateBookingCommand.Execute(day);
-    }
-
     private void OpenFullCalendar_Click(object sender, RoutedEventArgs e)
     {
         if (Window.GetWindow(this)?.DataContext is MainViewModel viewModel)
@@ -65,16 +57,4 @@ public partial class WorkbenchCalendarPanel : UserControl
             _ = calendar.OpenDayDetailsForDateAsync(calendar.SelectedDate);
     }
 
-    private void ViewDayDetails_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuItem { Parent: ContextMenu contextMenu } &&
-            contextMenu.PlacementTarget is FrameworkElement { DataContext: MonthDayViewModel day } &&
-            DataContext is WorkCalendarViewModel calendar)
-        {
-            if (Window.GetWindow(this)?.DataContext is MainViewModel mainViewModel)
-                _ = mainViewModel.NavigateToCalendarDetailsAsync(day.Date);
-            else
-                _ = calendar.OpenDayDetailsForDateAsync(day.Date);
-        }
-    }
 }

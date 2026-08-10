@@ -7,6 +7,10 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\win-x64"
 #endif
+#ifdef CandidateCoreHotfix2
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\corehotfix2-win-x64"
+#endif
 #ifdef TestBuild
   #undef MyAppName
   #define MyAppName "像素蛋挞 验收测试"
@@ -54,7 +58,11 @@ OutputBaseFilename=像素蛋挞_Test_Setup_2.3.0_x64
 #ifdef CandidateBuild
 OutputDir=..\artifacts\releases\2.3.0\installer
 #ifdef CandidateRc5
+#ifdef CandidateCoreHotfix2
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_CoreHotfix2_x64
+#else
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_x64
+#endif
 #else
 #ifdef CandidateRc4
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC4_x64

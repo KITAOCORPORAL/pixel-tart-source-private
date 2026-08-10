@@ -50,11 +50,22 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border x:Name="CalendarDayCell" Margin="2" MinHeight="32" Padding="3" CornerRadius="5" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" Focusable="True"
+                            Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
                             PreviewMouseLeftButtonDown="DayCell_MouseLeftButtonDown" PreviewKeyDown="DayCell_PreviewKeyDown" AutomationProperties.Name="{Binding AccessibilityName}" ToolTip="{Binding TooltipText}">
-                        <Border.ContextMenu><ContextMenu><MenuItem Header="在此日期新建拍摄任务" Click="CreateBooking_Click" /><MenuItem Header="查看当天详情" Click="ViewDayDetails_Click" /></ContextMenu></Border.ContextMenu>
+                        <Border.ContextMenu>
+                            <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                <MenuItem Header="在此日期新建拍摄任务"
+                                          Command="{Binding PlacementTarget.Tag.Month.CreateBookingCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                          CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                <MenuItem Header="查看当天详情"
+                                          Command="{Binding PlacementTarget.Tag.ViewDayDetailsCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                          CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                            </ContextMenu>
+                        </Border.ContextMenu>
                         <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="{DynamicResource SurfacePrimaryBrush}" /><Style.Triggers>
                             <DataTrigger Binding="{Binding IsCurrentMonth}" Value="False"><Setter Property="Opacity" Value="0.46" /></DataTrigger>
                             <DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="2" /></DataTrigger>
+                            <DataTrigger Binding="{Binding IsClosed}" Value="True"><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="Opacity" Value="0.78" /></DataTrigger>
                         </Style.Triggers></Style></Border.Style>
                         <Grid>
                             <Border x:Name="DayNumberBadge" CornerRadius="5" MinWidth="24" Height="22" Padding="5,0" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="{Binding TooltipText}">
@@ -79,6 +90,7 @@
                             </Border>
                             <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10" />
                             <TextBlock Text="{Binding WeatherGlyph}" FontSize="9" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                            <Path Width="10" Height="10" Stretch="Uniform" Stroke="{DynamicResource WarningBrush}" StrokeThickness="1.5" HorizontalAlignment="Right" VerticalAlignment="Top" Data="M5,10 L5,7 C5,3 11,3 11,7 L11,10 M3,10 L13,10 13,17 3,17 Z" Visibility="{Binding IsClosed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </Grid>
                     </Border>
                 </DataTemplate>

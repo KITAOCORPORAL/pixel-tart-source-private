@@ -151,7 +151,8 @@ public partial class MainWindow
                 ApplyCalendarReviewState(state);
                 return true;
             case "WorkbenchPinStates":
-                _viewModel.NavigateCommand.Execute("Toolbox");
+                ApplyToolboxPinReviewState(true);
+                _viewModel.NavigateCommand.Execute("Workbench");
                 return true;
             case "LocalSplitHelp":
             case "LocalSplitHover":
@@ -177,6 +178,11 @@ public partial class MainWindow
                 _viewModel.NavigateCommand.Execute("Toolbox");
                 return true;
             case "RuntimeToolboxPinned":
+                ApplyToolboxPinReviewState(true);
+                _viewModel.NavigateCommand.Execute("Toolbox");
+                return true;
+            case "RuntimeToolboxUnpinned":
+                ApplyToolboxPinReviewState(false);
                 _viewModel.NavigateCommand.Execute("Toolbox");
                 return true;
             case "ToolboxClosedAfterSelection":
@@ -320,10 +326,23 @@ public partial class MainWindow
         calendar.Week.Configure(WorkCalendarViewModel.StartOfWeek(DateTime.Today), items, DateTime.Today, weather);
         calendar.Day.Configure(DateTime.Today, items, weather);
         calendar.DaySchedule.Configure(selectedDate, items.Where(item => CalendarBookingItemViewModel.SpansDate(item, selectedDate)).ToArray(), weather);
-        if (state == "CalendarDayClosed")
+        if (state is "CalendarDayClosed" or "CalendarClosedBookingDay")
         {
-            var today = calendar.Month.Days.FirstOrDefault(day => day.Date == DateTime.Today);
-            typeof(MonthDayViewModel).GetProperty(nameof(MonthDayViewModel.IsClosed))?.SetValue(today, true);
+            var index = calendar.Month.Days.ToList().FindIndex(day => day.Date == DateTime.Today);
+            if (index >= 0)
+            {
+                var current = calendar.Month.Days[index];
+                var closed = new MonthDayViewModel
+                {
+                    Date = current.Date,
+                    IsCurrentMonth = current.IsCurrentMonth,
+                    VisualState = current.VisualState is { } visual ? visual with { IsClosed = true } : null,
+                    OverflowCount = current.OverflowCount,
+                    HasConflict = current.HasConflict
+                };
+                foreach (var booking in current.VisibleBookings) closed.VisibleBookings.Add(booking);
+                calendar.Month.Days[index] = closed;
+            }
         }
         var statusText = state switch
         {
@@ -577,9 +596,17 @@ public partial class MainWindow
                 _automatedPopup = combo.Template.FindName("PART_Popup", combo) as Popup;
             }
         }
-        else if (state == "CalendarContextMenu")
+        else if (state is "CalendarContextMenu" or "CalendarBookingContextMenu" or "WorkbenchCalendarContextMenu")
         {
-            var target = FindVisualChildren<Border>(RootGrid).FirstOrDefault(item => item.DataContext is MonthDayViewModel && item.ContextMenu is not null);
+            FrameworkElement? target = state switch
+            {
+                "CalendarBookingContextMenu" => FindVisualChildren<Button>(RootGrid)
+                    .FirstOrDefault(item => item.DataContext is CalendarBookingItemViewModel && item.ContextMenu is not null),
+                "WorkbenchCalendarContextMenu" => FindVisualChildren<Border>(RootGrid)
+                    .FirstOrDefault(item => string.Equals(item.Name, "CalendarDayCell", StringComparison.Ordinal) && item.ContextMenu is not null),
+                _ => FindVisualChildren<Border>(RootGrid)
+                    .FirstOrDefault(item => item.DataContext is MonthDayViewModel && item.ContextMenu is not null)
+            };
             if (target?.ContextMenu is not null)
             {
                 _automatedContextMenu = target.ContextMenu;
@@ -623,6 +650,16 @@ public partial class MainWindow
         _automatedContextMenu?.UpdateLayout();
         _automatedToolTip?.UpdateLayout();
         _automatedPopup?.Child?.UpdateLayout();
+    }
+
+    private void ApplyToolboxPinReviewState(bool pinned)
+    {
+        if (_viewModel is null) return;
+        var ids = pinned ? new[] { "Workflow", "PhotoOrganize", "BatchCompress" } : Array.Empty<string>();
+        _viewModel.Settings.PinnedQuickTools = ids.ToList();
+        _viewModel.Settings.QuickToolLayout.OrderedToolIds = ids.ToList();
+        foreach (var item in _viewModel.ToolboxItems)
+            item.SetPinned(pinned && ids.Contains(item.Id, StringComparer.OrdinalIgnoreCase));
     }
 
     private void CaptureAutomatedDpiFrame(string outputPath)
