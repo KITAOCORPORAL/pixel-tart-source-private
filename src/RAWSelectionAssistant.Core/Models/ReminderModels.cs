@@ -42,7 +42,8 @@ public sealed record WorkbenchScheduleItem(
     string ProjectName,
     string LocationDisplay,
     int RequirementCompleted,
-    int RequirementTotal);
+    int RequirementTotal,
+    string ClientDisplayName = "");
 
 public sealed record WorkbenchScheduleDay(DateOnly Date, IReadOnlyList<WorkbenchScheduleItem> Items);
 

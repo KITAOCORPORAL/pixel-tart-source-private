@@ -24,14 +24,15 @@
                         <TextBlock Text="{Binding NextTodayText}" FontWeight="SemiBold" Margin="4,0,4,4" />
                         <ItemsControl ItemsSource="{Binding Today}">
                             <ItemsControl.ItemTemplate><DataTemplate>
-                                <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="10,7"
+                                <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="11,8"
                                         Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"
+                                        ToolTip="{Binding ScheduleTooltipText}"
                                         AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="从工作台打开拍摄排期详情">
-                                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="76" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding TimeText}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                        <StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding MetaText}" Style="{StaticResource CaptionText}" /></StackPanel>
-                                        <TextBlock Grid.Column="2" Text="{Binding StatusText}" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center" Margin="8,0,0,0" />
-                                    </Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding SecondaryLineText}" FontSize="12" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding TertiaryLineText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis" Visibility="{Binding HasTertiaryLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </StackPanel>
                                 </Button>
                             </DataTemplate></ItemsControl.ItemTemplate>
                         </ItemsControl></StackPanel>
@@ -46,12 +47,14 @@
                                 <StackPanel Margin="0,3,0,8">
                                     <TextBlock Text="{Binding DateText}" FontWeight="SemiBold" Margin="3,0,0,3" />
                                     <ItemsControl ItemsSource="{Binding Items}"><ItemsControl.ItemTemplate><DataTemplate>
-                                        <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="10,7"
+                                        <Button Style="{StaticResource ToolEntryButton}" HorizontalContentAlignment="Stretch" Margin="0,2" Padding="11,8"
                                                 Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
-                                                AutomationProperties.Name="{Binding Title}">
-                                            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="76" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                                <TextBlock Text="{Binding TimeText}" FontWeight="SemiBold" /><StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding MetaText}" Style="{StaticResource CaptionText}" /></StackPanel><TextBlock Grid.Column="2" Text="{Binding DistanceText}" Margin="8,0,0,0" />
-                                            </Grid>
+                                                ToolTip="{Binding ScheduleTooltipText}" AutomationProperties.Name="{Binding Title}">
+                                            <StackPanel>
+                                                <Grid><TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,0,74,0" /><TextBlock Text="{Binding DistanceText}" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid>
+                                                <TextBlock Text="{Binding SecondaryLineText}" FontSize="12" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding TertiaryLineText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis" Visibility="{Binding HasTertiaryLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            </StackPanel>
                                         </Button>
                                     </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
                                 </StackPanel>

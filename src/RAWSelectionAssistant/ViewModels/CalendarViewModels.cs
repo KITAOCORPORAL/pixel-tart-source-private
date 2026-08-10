@@ -89,7 +89,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         _availabilityStore = availabilityStore ?? new JsonCalendarAvailabilityStore();
         StatusOptions =
         [
-            new("全部"), new("空闲", FreeOnly: true),
+            new("全部状态"), new("空闲", FreeOnly: true),
             new("有拍摄", WorkflowStatus: CalendarWorkflowStatus.Scheduled),
             new("已拍摄", WorkflowStatus: CalendarWorkflowStatus.Shot),
             new("待返图", WorkflowStatus: CalendarWorkflowStatus.PendingDelivery),

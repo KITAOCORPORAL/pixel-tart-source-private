@@ -236,7 +236,19 @@ public sealed class WorkbenchScheduleItemViewModel(WorkbenchScheduleItem item, T
     public string StatusText => item.IsOngoing ? "进行中" : CalendarText.Status(item.Status);
     public bool IsFinished => item.Status is ShootBookingStatus.Completed or ShootBookingStatus.Delivered or ShootBookingStatus.Cancelled;
     public string ProjectName => item.ProjectName;
+    public string ClientText => item.ClientDisplayName;
     public string LocationText => item.LocationDisplay;
+    public string SecondaryLineText => string.Join("  ·  ", new[] { TimeText, StatusText }.Where(value => !string.IsNullOrWhiteSpace(value)));
+    public string TertiaryLineText => string.Join("  ·  ", new[] { ClientText, LocationText }.Where(value => !string.IsNullOrWhiteSpace(value)));
+    public bool HasTertiaryLine => !string.IsNullOrWhiteSpace(TertiaryLineText);
+    public string ScheduleTooltipText => string.Join(Environment.NewLine, new[]
+    {
+        $"项目名称：{Title}",
+        $"客户：{ClientText}",
+        $"时间：{TimeText}",
+        $"地点：{LocationText}",
+        $"状态：{StatusText}"
+    });
     public string PreparationText => item.RequirementTotal == 0 ? "准备清单未设置" : $"准备 {item.RequirementCompleted}/{item.RequirementTotal}";
     public string ReminderText => item.HasEnabledReminder ? "提醒已开" : "提醒关闭";
     public string DocumentText => $"文档 {item.DocumentCount}";

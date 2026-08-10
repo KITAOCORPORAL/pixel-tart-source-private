@@ -28,6 +28,11 @@
     <GridLength x:Key="SidebarIconColumnWidth">20</GridLength>
     <Thickness x:Key="ControlPadding">14,8</Thickness>
     <Thickness x:Key="PagePadding">24</Thickness>
+    <Thickness x:Key="PageHorizontalPadding">28</Thickness>
+    <Thickness x:Key="PageVerticalPadding">24</Thickness>
+    <sys:Double x:Key="PageContentMaxWidth">1360</sys:Double>
+    <Thickness x:Key="SectionSpacing">0,18,0,0</Thickness>
+    <Thickness x:Key="CardSpacing">0,0,12,12</Thickness>
     <Thickness x:Key="CardPadding">16</Thickness>
     <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius>
     <CornerRadius x:Key="CardCornerRadius">10</CornerRadius>

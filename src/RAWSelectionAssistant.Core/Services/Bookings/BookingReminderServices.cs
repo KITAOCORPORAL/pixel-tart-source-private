@@ -306,7 +306,7 @@ public sealed class WorkbenchScheduleService(
             summary.IsAllDay, summary.StartAtUtc <= now && summary.EndAtUtc > now, !string.IsNullOrWhiteSpace(summary.Location),
             remindersTask.Result.Any(x => x.IsEnabled && x.Status == ReminderStatus.Scheduled), documentsTask.Result.Count,
             projectName, string.IsNullOrWhiteSpace(summary.Location) ? "未记录地点" : "地点已记录",
-            requirements.Count(item => item.IsCompleted), requirements.Count);
+            requirements.Count(item => item.IsCompleted), requirements.Count, summary.ClientDisplayName);
     }
 
     private DateTimeOffset ToUtc(DateOnly date)
