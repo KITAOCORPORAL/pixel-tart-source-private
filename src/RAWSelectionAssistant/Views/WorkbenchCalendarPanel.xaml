@@ -89,12 +89,14 @@
             <Button Content="＋ 新建拍摄" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="5,2" MinHeight="26" Command="{Binding NewBookingCommand}" AutomationProperties.Name="为选中日期新建拍摄排期" />
         </Grid>
         <Grid Grid.Row="6">
+            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <TextBlock Text="当天暂无排期，双击日期或点击“新建拍摄”。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DaySchedule.Bookings.Count, Converter={StaticResource ZeroIntToVisibilityConverter}}" />
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><ItemsControl ItemsSource="{Binding DaySchedule.Bookings}"><ItemsControl.ItemTemplate><DataTemplate>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><ItemsControl ItemsSource="{Binding DaySchedule.VisibleBookings}"><ItemsControl.ItemTemplate><DataTemplate>
                 <Button Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Padding="7,5" Margin="0,0,0,3" Command="{Binding DataContext.DaySchedule.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" AutomationProperties.Name="{Binding AccessibilityName}">
                     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="52" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="{Binding TimeText}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="11" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="2" Text="{Binding StatusGlyph}" Margin="4,0,0,0" /></Grid>
                 </Button>
             </DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+            <Button Grid.Row="1" Content="{Binding DaySchedule.OverflowText}" Style="{StaticResource GhostButton}" Padding="2" HorizontalAlignment="Left" Click="OpenSelectedDayDetails_Click" Visibility="{Binding DaySchedule.OverflowCount, Converter={StaticResource ZeroIntToVisibilityConverter}}" AutomationProperties.Name="查看选中日期的完整排期" />
         </Grid>
     </Grid>
 </UserControl>

@@ -41,8 +41,18 @@ public partial class MonthCalendarView : UserControl
 
     private void ViewDay_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        if (ContextDay(sender) is { } day && DataContext is MonthCalendarViewModel viewModel)
+        if (ContextDay(sender) is not { } day) return;
+        if (FindParent<WorkCalendarView>(this)?.DataContext is WorkCalendarViewModel calendar)
+            _ = calendar.OpenDayDetailsForDateAsync(day.Date);
+        else if (DataContext is MonthCalendarViewModel viewModel)
             viewModel.SelectDateCommand.Execute(day);
+    }
+
+    private static T? FindParent<T>(DependencyObject? child) where T : DependencyObject
+    {
+        for (var current = child; current is not null; current = VisualTreeHelper.GetParent(current))
+            if (current is T match) return match;
+        return null;
     }
 
     private void DaySettings_Click(object sender, System.Windows.RoutedEventArgs e)

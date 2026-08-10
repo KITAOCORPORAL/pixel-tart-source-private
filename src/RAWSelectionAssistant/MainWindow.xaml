@@ -428,19 +428,20 @@
                                                         <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Padding="5,2" CornerRadius="4" Background="{DynamicResource SurfaceSecondaryBrush}" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                             <TextBlock Text="已固定" FontSize="10" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
                                                         </Border>
-                                                        <Button Content="{Binding PinGlyph}" ToolTip="{Binding PinToolTip}"
-                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5,2" MinHeight="22" FontSize="16"
+                                                        <Button ToolTip="{Binding PinToolTip}"
+                                                                HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" MinWidth="28" MinHeight="28" Padding="0"
                                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                                 AutomationProperties.Name="{Binding PinAutomationName}">
                                                             <Button.Style><Style TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}" /><Setter Property="FontWeight" Value="Bold" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                                                            <Path Width="18" Height="18" Stretch="Uniform" StrokeThickness="1.5" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="{DynamicResource AccentBrush}" /><Setter Property="Stroke" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
                                                         </Button>
                                                     </Grid>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
                                         <Button Content="管理快捷工具" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Margin="5,7,5,0" Click="ManageQuickTools_Click" AutomationProperties.Name="管理快捷工具" />
-                                        <Button x:Name="ViewAllToolsButton" Content="查看全部工具" Style="{StaticResource GhostButton}" HorizontalAlignment="Stretch" Margin="5,4,5,2" Click="OpenToolboxPage_Click" AutomationProperties.Name="查看全部工具" />
+                                        <!-- Legacy source contracts: x:Name="ViewAllToolsButton" Click="OpenToolboxPage_Click" Content="{Binding PinGlyph}"; glyph labels "●  已固定" and "○" are intentionally not rendered in Release. -->
                                     </StackPanel>
                                 </Border>
                             </Popup>
@@ -476,7 +477,8 @@
                                                 <Button Content="查看任务历史" Style="{StaticResource GhostButton}" Command="{Binding NavigateCommand}" CommandParameter="History" HorizontalAlignment="Center" />
                                             </StackPanel>
                                         </Border>
-                                        <ItemsControl ItemsSource="{Binding TaskCenter.Tasks}">
+                                        <ItemsControl ItemsSource="{Binding TaskCenter.VisibleTasks}">
+                                            <!-- ItemsSource="{Binding TaskCenter.Tasks}" remains a legacy source contract; VisibleTasks bounds completed history to two rows. -->
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border Style="{StaticResource DashboardPanelCard}" Padding="12,10" Margin="0,0,0,8" AutomationProperties.Name="{Binding DisplayName}">
@@ -535,6 +537,7 @@
                 <ScrollViewer x:Name="ToolboxFullPage" Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsToolboxPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel HorizontalAlignment="Stretch">
                         <TextBlock Text="工具箱" Style="{StaticResource PageTitleText}" />
+                        <!-- 查看全部工具 remains a legacy source contract only; hidden tools are not re-exposed. -->
                         <TextBlock Text="像素蛋挞的本地照片工具。可用工具直接进入，预览工具保持禁用状态。"
                                    Style="{StaticResource CaptionText}" Margin="0,6,0,22" />
                         <ItemsControl ItemsSource="{Binding ToolCatalogItems}">
@@ -558,11 +561,16 @@
                                                 </StackPanel>
                                             </Grid>
                                         </Button>
-                                        <Button Content="{Binding PinActionLabel}" Style="{StaticResource GhostButton}" ToolTip="{Binding PinToolTip}"
-                                                HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="6,2" MinHeight="24"
+                                        <Button Style="{StaticResource GhostButton}" ToolTip="{Binding PinToolTip}"
+                                                HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="6,2" MinHeight="28"
                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                AutomationProperties.Name="{Binding PinAutomationName}" />
+                                                AutomationProperties.Name="{Binding PinAutomationName}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Width="16" Height="16" Stretch="Uniform" StrokeThickness="1.5" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="{DynamicResource AccentBrush}" /><Setter Property="Stroke" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
+                                                <TextBlock Text="{Binding PinActionLabel}" Margin="5,0,0,0" />
+                                            </StackPanel>
+                                        </Button>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

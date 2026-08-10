@@ -721,6 +721,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             return false;
         }
         if (total < 0 || deposit < 0 || paid < 0) errors.Add("金额不得为负数。");
+        if (total.HasValue && deposit.HasValue && deposit > total) errors.Add("定金不能高于拍摄总金额。");
         var timeZone = SelectedTimeZone ?? TimeZoneOptions.FirstOrDefault(option => option.Id == TimeZoneInfo.Local.Id) ?? TimeZoneOptions.First();
         DateTimeOffset start = default;
         DateTimeOffset end = default;
@@ -834,6 +835,12 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         if (!TryMinor(TotalAmountText, 2, "总金额", errors, out var total) || !TryMinor(DepositAmountText, 2, "定金", errors, out var deposit) || !TryMinor(PaidAmountText, 2, "已收金额", errors, out var paid))
         {
             MoneyWarningText = errors.FirstOrDefault() ?? string.Empty;
+            return;
+        }
+        var validation = BookingMoneyCalculator.Validate(total, deposit, paid, 2);
+        if (validation.Count > 0)
+        {
+            MoneyWarningText = validation[0];
             return;
         }
         UpdateMoney(BookingMoneyCalculator.Calculate(total, deposit, paid));
