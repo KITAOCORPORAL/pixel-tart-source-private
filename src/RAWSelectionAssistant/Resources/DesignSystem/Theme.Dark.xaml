@@ -50,16 +50,16 @@
     <SolidColorBrush x:Key="DropdownHoverBrush" Color="#2B3138" />
     <SolidColorBrush x:Key="DropdownSelectedBrush" Color="#26373A" />
     <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="#282C32" />
-    <SolidColorBrush x:Key="CalendarStatusFreeBrush" Color="#69717C" />
-    <SolidColorBrush x:Key="CalendarStatusScheduledBrush" Color="#F0646D" />
-    <SolidColorBrush x:Key="CalendarStatusShotBrush" Color="#4BC782" />
-    <SolidColorBrush x:Key="CalendarStatusPendingDeliveryBrush" Color="#E6B84F" />
-    <SolidColorBrush x:Key="CalendarStatusDeliveredBrush" Color="#58A9F5" />
+    <SolidColorBrush x:Key="CalendarStatusFreeBrush" Color="#59616B" />
+    <SolidColorBrush x:Key="CalendarStatusScheduledBrush" Color="#E05252" />
+    <SolidColorBrush x:Key="CalendarStatusShotBrush" Color="#3DB879" />
+    <SolidColorBrush x:Key="CalendarStatusPendingDeliveryBrush" Color="#DDAF32" />
+    <SolidColorBrush x:Key="CalendarStatusDeliveredBrush" Color="#3E8ED0" />
     <SolidColorBrush x:Key="CalendarStatusFreeForegroundBrush" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="CalendarStatusScheduledForegroundBrush" Color="#190708" />
-    <SolidColorBrush x:Key="CalendarStatusShotForegroundBrush" Color="#061A10" />
+    <SolidColorBrush x:Key="CalendarStatusScheduledForegroundBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="CalendarStatusShotForegroundBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="CalendarStatusPendingDeliveryForegroundBrush" Color="#1D1503" />
-    <SolidColorBrush x:Key="CalendarStatusDeliveredForegroundBrush" Color="#061422" />
+    <SolidColorBrush x:Key="CalendarStatusDeliveredForegroundBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="CalendarTodayOutlineBrush" Color="#FFFFFF" />
     <LinearGradientBrush x:Key="WorkbenchHeroBrush" StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#004B59" Offset="0" /><GradientStop Color="#004523" Offset="1" /></LinearGradientBrush>
 </ResourceDictionary>

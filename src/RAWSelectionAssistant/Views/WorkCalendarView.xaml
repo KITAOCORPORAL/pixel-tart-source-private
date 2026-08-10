@@ -111,9 +111,9 @@
                 </Grid>
             </Border>
             <GridSplitter Grid.Column="1" Width="8" HorizontalAlignment="Stretch" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" AutomationProperties.Name="调整日历和当天详情宽度" />
-            <Grid Grid.Column="2" Margin="12,0,0,0">
+            <Grid x:Name="DayDetailsHost" Grid.Column="2" Margin="12,0,0,0" Focusable="True">
                 <views:DaySchedulePanel DataContext="{Binding DaySchedule}" />
-                <views:ShootBookingDetailsView DataContext="{Binding Details}" Panel.ZIndex="5" Visibility="{Binding DataContext.IsDetailsOpen, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <views:ShootBookingDetailsView x:Name="DayDetailsPanel" Focusable="True" DataContext="{Binding Details}" Panel.ZIndex="5" Visibility="{Binding DataContext.IsDetailsOpen, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
 
             <Border Grid.ColumnSpan="3" Panel.ZIndex="30" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="8" Visibility="{Binding IsArchivedPaneOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
