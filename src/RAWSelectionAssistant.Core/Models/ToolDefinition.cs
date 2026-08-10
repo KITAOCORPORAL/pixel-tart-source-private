@@ -15,10 +15,12 @@ public enum ToolId
     Toolbox
 }
 
-public enum ToolMaturity
+public enum FeatureAvailability
 {
-    Available,
-    Preview
+    Production,
+    Preview,
+    ComingSoon,
+    Hidden
 }
 
 public enum ToolMenuGroup
@@ -38,7 +40,7 @@ public sealed record ToolDefinition(
     string TargetPageKey,
     bool CanPin,
     bool IsAvailable,
-    ToolMaturity Maturity,
+    FeatureAvailability Availability,
     ToolMenuGroup MenuGroup,
     int SortOrder,
     string? MenuLabel = null)

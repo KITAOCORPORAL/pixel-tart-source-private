@@ -176,6 +176,9 @@ public partial class MainWindow
             case "ToolboxFullPage":
                 _viewModel.NavigateCommand.Execute("Toolbox");
                 return true;
+            case "RuntimeToolboxPinned":
+                _viewModel.NavigateCommand.Execute("Toolbox");
+                return true;
             case "ToolboxClosedAfterSelection":
                 _viewModel.NavigateCommand.Execute("PhotoGrouping");
                 WorkbenchToolboxPopup.IsOpen = false;
@@ -183,10 +186,26 @@ public partial class MainWindow
             case "CollectionNoOverlap":
                 _viewModel.NavigateCommand.Execute("Workflow");
                 return true;
+            case "RuntimeCollectionEmpty":
+                _viewModel.NavigateCommand.Execute("Workflow");
+                _viewModel.GoToWorkflowStepCommand.Execute("1");
+                return true;
+            case "RuntimeCollectionImported":
+                _viewModel.NavigateCommand.Execute("Workflow");
+                _viewModel.GoToWorkflowStepCommand.Execute("2");
+                _viewModel.TextInput = "DPI_TEST_001\nDPI_TEST_002";
+                _viewModel.ParseTextCommand.Execute(null);
+                return true;
+            case "RuntimeLocalSplit":
+                _viewModel.NavigateCommand.Execute("LocalSplit");
+                return true;
             case "CompressNoOverlap":
                 _viewModel.NavigateCommand.Execute("BatchCompress");
                 return true;
             case "WatermarkNoOverlap":
+                _viewModel.NavigateCommand.Execute("Watermark");
+                return true;
+            case "RuntimeWatermarkPreview":
                 _viewModel.NavigateCommand.Execute("Watermark");
                 return true;
             case "LicenseNoOverlap":

@@ -90,8 +90,15 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) RefreshCommandStates(); } }
     public double Progress { get => _progress; private set => SetProperty(ref _progress, value); }
     public string StatusMessage { get => _statusMessage; private set => SetProperty(ref _statusMessage, value); }
-    public OrganizePlan? CurrentPlan { get => _currentPlan; private set { if (SetProperty(ref _currentPlan, value)) { OnPropertyChanged(nameof(PlanSummary)); OnPropertyChanged(nameof(RiskSummary)); RefreshCommandStates(); } } }
-    public OrganizeExecutionResult? LastResult { get => _lastResult; private set { if (SetProperty(ref _lastResult, value)) RefreshCommandStates(); } }
+    public OrganizePlan? CurrentPlan { get => _currentPlan; private set { if (SetProperty(ref _currentPlan, value)) { OnPropertyChanged(nameof(PlanSummary)); OnPropertyChanged(nameof(RiskSummary)); NotifyStageState(); RefreshCommandStates(); } } }
+    public OrganizeExecutionResult? LastResult { get => _lastResult; private set { if (SetProperty(ref _lastResult, value)) { NotifyStageState(); RefreshCommandStates(); } } }
+    public bool HasPhotos => Photos.Count > 0;
+    public bool HasGroups => Groups.Count > 0;
+    public bool HasPlan => CurrentPlan is not null;
+    public bool HasResult => LastResult is not null;
+    public bool IsEmptyStage => !HasPhotos;
+    public bool IsGroupedStage => HasGroups && !HasPlan;
+    public bool IsPlanReady => HasPlan && !HasResult;
     public string PlanSummary => CurrentPlan is null ? "尚未生成操作清单" : $"来源 {Photos.Count} · 有效 {CurrentPlan.Items.Count} · 分组 {CurrentPlan.Groups.Count} · 元数据缺失 {CurrentPlan.MetadataMissingCount} · 预计 {FormatBytes(CurrentPlan.EstimatedOutputBytes)}";
     public string RiskSummary => CurrentPlan is null ? "默认复制、不覆盖、不删除源文件" : $"操作：{SelectedOperation.Label}；冲突：{SelectedConflict.Label}；重名风险 {CurrentPlan.ConflictRiskCount}";
 
@@ -155,7 +162,12 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     private Task AddPhotosAsync() => AddPathsAsync(_dialogs.ChooseFiles("选择要整理的照片", "照片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.webp;*.heic;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng;*.rw2;*.orf;*.pef|所有文件|*.*"));
     private Task AddFolderAsync() { var folder = _dialogs.ChooseFolder("选择要整理的照片文件夹"); return folder is null ? Task.CompletedTask : AddPathsAsync([folder]); }
     private void BrowseOutput() { var folder = _dialogs.ChooseFolder("选择整理输出目录", OutputPath); if (folder is not null) OutputPath = folder; }
-    private void Regroup() { if (Photos.Count == 0) { RefreshCommandStates(); return; } Groups.Clear(); foreach (var group in _service.Group(Photos, new OrganizeRule(SelectedRule.Value, CustomParameter, FixedCount))) Groups.Add(group); InvalidatePlan(); StatusMessage = $"已生成 {Groups.Count} 个分组"; RefreshCommandStates(); }
+    private void Regroup() { if (Photos.Count == 0) { NotifyStageState(); RefreshCommandStates(); return; } Groups.Clear(); foreach (var group in _service.Group(Photos, new OrganizeRule(SelectedRule.Value, CustomParameter, FixedCount))) Groups.Add(group); InvalidatePlan(); StatusMessage = $"已生成 {Groups.Count} 个分组"; NotifyStageState(); RefreshCommandStates(); }
+    private void NotifyStageState()
+    {
+        OnPropertyChanged(nameof(HasPhotos)); OnPropertyChanged(nameof(HasGroups)); OnPropertyChanged(nameof(HasPlan)); OnPropertyChanged(nameof(HasResult));
+        OnPropertyChanged(nameof(IsEmptyStage)); OnPropertyChanged(nameof(IsGroupedStage)); OnPropertyChanged(nameof(IsPlanReady));
+    }
     private void PreviewPlan() { try { CurrentPlan = _service.BuildPlan(Photos, Groups, SourceInputs, OutputPath, new OrganizeRule(SelectedRule.Value, CustomParameter, FixedCount), SelectedOperation.Value, SelectedConflict.Value, VerifySha256); StatusMessage = "操作清单已生成，请核对摘要后执行"; } catch (Exception ex) { _dialogs.ShowError(ex.Message); } }
     private async Task ExecuteAsync()
     {

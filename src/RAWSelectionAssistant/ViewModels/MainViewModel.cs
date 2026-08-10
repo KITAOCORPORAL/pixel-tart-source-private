@@ -693,6 +693,9 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsWorkflowStepThree));
             OnPropertyChanged(nameof(IsWorkflowStepFour));
             OnPropertyChanged(nameof(WorkflowStepTitle));
+            OnPropertyChanged(nameof(ShowIndexEmpty));
+            OnPropertyChanged(nameof(ShowSelectionEmpty));
+            OnPropertyChanged(nameof(ShowIndexWarning));
         }
     }
     public bool IsWorkflowStepOne => CurrentWorkflowStep == 1;
@@ -818,7 +821,7 @@ public sealed class MainViewModel : ObservableObject
     public string CurrentItem { get => _currentItem; private set { if (SetProperty(ref _currentItem, value)) OnPropertyChanged(nameof(CurrentPageDetail)); } }
     public double ProgressPercent { get => _progressPercent; private set => SetProperty(ref _progressPercent, value); }
     public long ProcessedCount { get => _processedCount; private set { if (SetProperty(ref _processedCount, value)) OnPropertyChanged(nameof(CurrentPageProcessedText)); } }
-    public int TotalCount { get => _totalCount; private set => SetProperty(ref _totalCount, value); }
+    public int TotalCount { get => _totalCount; private set { if (!SetProperty(ref _totalCount, value)) return; OnPropertyChanged(nameof(HasSelections)); OnPropertyChanged(nameof(ShowSelectionEmpty)); OnPropertyChanged(nameof(ShowWorkflowResults)); OnPropertyChanged(nameof(ShowIndexWarning)); } }
     public int TargetFileCount { get => _targetFileCount; private set => SetProperty(ref _targetFileCount, value); }
     public int JpegMatchedCount { get => _jpegMatchedCount; private set => SetProperty(ref _jpegMatchedCount, value); }
     public int RawMatchedCount { get => _rawMatchedCount; private set => SetProperty(ref _rawMatchedCount, value); }
@@ -827,7 +830,13 @@ public sealed class MainViewModel : ObservableObject
     public int ConflictCount { get => _conflictCount; private set => SetProperty(ref _conflictCount, value); }
     public int NotFoundCount { get => _notFoundCount; private set => SetProperty(ref _notFoundCount, value); }
     public int CopiedCount { get => _copiedCount; private set => SetProperty(ref _copiedCount, value); }
-    public int IndexedMediaCount { get => _indexedMediaCount; private set { if (SetProperty(ref _indexedMediaCount, value)) RefreshCommands(); } }
+    public int IndexedMediaCount { get => _indexedMediaCount; private set { if (!SetProperty(ref _indexedMediaCount, value)) return; OnPropertyChanged(nameof(HasIndexedMedia)); OnPropertyChanged(nameof(ShowIndexEmpty)); OnPropertyChanged(nameof(ShowIndexWarning)); RefreshCommands(); } }
+    public bool HasSelections => TotalCount > 0;
+    public bool HasIndexedMedia => IndexedMediaCount > 0;
+    public bool ShowIndexEmpty => IsWorkflowStepOne && !HasIndexedMedia;
+    public bool ShowSelectionEmpty => IsWorkflowStepTwo && !HasSelections;
+    public bool ShowWorkflowResults => HasSelections;
+    public bool ShowIndexWarning => IsWorkflowStepThree && !HasIndexedMedia && HasSelections;
 
     public RelayCommand AddSourceCommand { get; }
     public RelayCommand RemoveSourceCommand { get; }

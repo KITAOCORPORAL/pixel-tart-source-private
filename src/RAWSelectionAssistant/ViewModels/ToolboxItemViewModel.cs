@@ -20,7 +20,14 @@ public sealed class ToolboxItemViewModel : ObservableObject
     public string TargetPageKey => Definition.TargetPageKey;
     public bool CanPin => Definition.CanPin;
     public bool IsAvailable => Definition.IsAvailable;
-    public string MaturityLabel => Definition.Maturity == ToolMaturity.Preview ? "预览" : "可用";
+    public FeatureAvailability Availability => Definition.Availability;
+    public string MaturityLabel => Availability switch
+    {
+        FeatureAvailability.Preview => "预览功能",
+        FeatureAvailability.ComingSoon => "即将推出",
+        FeatureAvailability.Hidden => "暂不显示",
+        _ => "正式可用"
+    };
 
     public bool IsPinned
     {
@@ -32,11 +39,13 @@ public sealed class ToolboxItemViewModel : ObservableObject
             OnPropertyChanged(nameof(PinToolTip));
             OnPropertyChanged(nameof(PinAutomationName));
             OnPropertyChanged(nameof(PinStateLabel));
+            OnPropertyChanged(nameof(PinActionLabel));
         }
     }
 
     public string PinGlyph => IsPinned ? "●" : "○";
     public string PinStateLabel => IsPinned ? "已固定" : "未固定";
+    public string PinActionLabel => IsPinned ? "●  已固定" : "○";
     public string PinToolTip => IsPinned ? $"从工作台快捷区取消固定{DisplayName}" : $"固定{DisplayName}到工作台快捷区";
     public string PinAutomationName => $"{DisplayName}，{PinStateLabel}，点击后{(IsPinned ? "取消固定" : "固定")}";
 
