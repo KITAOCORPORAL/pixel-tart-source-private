@@ -60,7 +60,7 @@
                     </ScrollViewer>
                 </TabItem>
 
-                <TabItem Header="天气与提醒">
+                <TabItem Header="天气提醒">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel Margin="12">
                             <views:BookingWeatherPanel DataContext="{Binding Weather}" Visibility="{Binding HasWeatherPanel, Converter={StaticResource BooleanToVisibilityConverter}}" />

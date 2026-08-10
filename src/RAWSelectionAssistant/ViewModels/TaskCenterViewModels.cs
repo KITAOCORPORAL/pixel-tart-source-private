@@ -30,6 +30,7 @@ public sealed class TaskCenterViewModel : ObservableObject
         RollbackCommand = new AsyncRelayCommand(RollbackAsync, parameter => Resolve(parameter)?.CanRollback == true && _recovery is not null);
         AbandonCommand = new AsyncRelayCommand(AbandonAsync, parameter => Resolve(parameter)?.CanAbandon == true && _recovery is not null);
         ClearCompletedCommand = new RelayCommand(_ => ClearCompleted(), _ => Tasks.Any(x => x.IsTerminal));
+        SelectTaskCommand = new RelayCommand(parameter => SelectedTask = Resolve(parameter));
     }
 
     public ObservableCollection<TaskSnapshotViewModel> Tasks { get; } = [];
@@ -47,6 +48,7 @@ public sealed class TaskCenterViewModel : ObservableObject
     public AsyncRelayCommand RollbackCommand { get; }
     public AsyncRelayCommand AbandonCommand { get; }
     public RelayCommand ClearCompletedCommand { get; }
+    public RelayCommand SelectTaskCommand { get; }
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
@@ -162,6 +164,7 @@ public sealed class TaskSnapshotViewModel : ObservableObject
         _ => "未知状态"
     };
     public double Progress => _snapshot.Progress;
+    public string ProgressText => $"{Math.Clamp(Progress, 0, 100):0}%";
     public string SourceModuleText => DisplayName switch
     {
         var name when name.Contains("联机", StringComparison.OrdinalIgnoreCase) => "来源：联机拍摄",
@@ -183,6 +186,7 @@ public sealed class TaskSnapshotViewModel : ObservableObject
     public bool CanResolveAttention => State == TaskLifecycleState.NeedsAttention;
     public bool CanRollback => State is TaskLifecycleState.Interrupted or TaskLifecycleState.Failed or TaskLifecycleState.PartiallyCompleted;
     public bool CanAbandon => State is TaskLifecycleState.Interrupted or TaskLifecycleState.NeedsAttention;
+    public bool HasMoreActions => CanCancel || CanRetry || CanResolveAttention || CanRollback || CanAbandon;
     public void Update(TaskProgressSnapshot snapshot) { _snapshot = snapshot; OnPropertyChanged(string.Empty); }
 }
 
