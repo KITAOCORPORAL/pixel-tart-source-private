@@ -12,7 +12,7 @@ public sealed class UsabilityFix151Tests
     [TestMethod] public void ContextMenu_UsesSameThemeResources() => Contains(Menu(), "TargetType=\"ContextMenu\"", "MenuPopupBackgroundBrush", "MenuPopupBorderBrush", "ItemsPresenter");
     [TestMethod] public void Separator_UsesLowContrastThemeBrush() => Contains(Menu(), "TargetType=\"Separator\"", "MenuSeparatorBrush", "Height=\"1\"");
 
-    [TestMethod] public void DarkTheme_DefinesNonWhiteMenuPopupPalette() { var text = Theme("Dark"); Contains(text, "MenuPopupBackgroundBrush\" Color=\"#1E2024", "MenuItemHoverBrush\" Color=\"#2A2D32", "MenuShortcutBrush\" Color=\"#70737B"); DoesNotContain(text, "MenuPopupBackgroundBrush\" Color=\"#FFFFFF"); }
+    [TestMethod] public void DarkTheme_DefinesNonWhiteMenuPopupPalette() { var text = Theme("Dark"); Contains(text, "MenuPopupBackgroundBrush\" Color=\"#222830", "MenuItemHoverBrush\" Color=\"#1D2228", "MenuShortcutBrush\" Color=\"#747C86"); DoesNotContain(text, "MenuPopupBackgroundBrush\" Color=\"#FFFFFF"); }
     [TestMethod] public void LightTheme_DefinesMenuPopupPalette() => Contains(Theme("Light"), "MenuPopupBackgroundBrush\" Color=\"#FFFFFF", "MenuPopupBorderBrush", "MenuItemHoverBrush", "MenuShortcutBrush");
     [TestMethod] public void HighContrastTheme_UsesSystemMenuColors() => Contains(Theme("HighContrast"), "SystemColors.MenuColor", "SystemColors.MenuTextColor", "SystemColors.HighlightColor");
     [TestMethod] public void AppearanceService_ReplacesThemeDictionaryImmediately() => Contains(Text("src/RAWSelectionAssistant/Services/AppearanceService.cs"), "ReplaceThemeDictionary(effectiveTheme)", "UserPreferenceChanged", "Application.Current.Dispatcher.BeginInvoke");
@@ -27,7 +27,7 @@ public sealed class UsabilityFix151Tests
     [TestMethod] public void ScrollBarStyle_HasThemeAwareTrackThumbAndHover() => Contains(Tables(), "TargetType=\"ScrollBar\"", "ScrollBarTrackBrush", "ScrollBarThumbBrush", "ScrollBarThumbHoverBrush");
     [TestMethod] public void HorizontalScrollBar_HasFourteenPixelUsableHeight() => Contains(Tables(), "Orientation\" Value=\"Horizontal", "Height\" Value=\"14", "MinHeight\" Value=\"14", "HorizontalScrollThumb");
     [TestMethod] public void HorizontalThumb_HasDpiSafeMinimum() => Contains(Tables(), "HorizontalScrollThumb", "MinWidth\" Value=\"28", "CornerRadius=\"5\"");
-    [TestMethod] public void DarkTheme_DefinesVisibleScrollBarPalette() => Contains(Theme("Dark"), "ScrollBarTrackBrush\" Color=\"#111214", "ScrollBarThumbBrush\" Color=\"#454850", "ScrollBarThumbHoverBrush\" Color=\"#70737B");
+    [TestMethod] public void DarkTheme_DefinesVisibleScrollBarPalette() => Contains(Theme("Dark"), "ScrollBarTrackBrush\" Color=\"#121519", "ScrollBarThumbBrush\" Color=\"#3A424C", "ScrollBarThumbHoverBrush\" Color=\"#59616B");
 
     [TestMethod]
     [DataRow(1.25)]

@@ -13,13 +13,15 @@ public sealed class Version220WeatherUiTests
     private static readonly DateTimeOffset End = DateTimeOffset.Parse("2026-08-05T12:00:00Z");
 
     [TestMethod]
-    public void MonthCard_KeepsTitleAndUsesCompactWeatherIcon()
+    public void MonthCalendar_KeepsTaskCardCompactAndShowsDayWeatherGlyph()
     {
         var item = new CalendarBookingItemViewModel(Booking(), Weather(strongWind: true));
         Assert.AreEqual("🌤", item.MonthWeatherIcon);
         Assert.AreEqual("摄影项目", item.Title);
         var xaml = Text("src/RAWSelectionAssistant/Views/MonthCalendarView.xaml");
-        StringAssert.Contains(xaml, "MonthWeatherIcon");
+        StringAssert.Contains(xaml, "WeatherGlyph");
+        Assert.IsFalse(xaml.Contains("MonthWeatherIcon", StringComparison.Ordinal));
+        StringAssert.Contains(xaml, "TimeText, Mode=OneWay");
         StringAssert.Contains(xaml, "TextTrimming=\"CharacterEllipsis\"");
         Assert.IsFalse(xaml.Contains("WeatherText}" + " TextWrapping", StringComparison.Ordinal));
     }
