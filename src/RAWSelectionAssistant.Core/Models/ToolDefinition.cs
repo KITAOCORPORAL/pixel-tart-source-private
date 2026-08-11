@@ -12,7 +12,8 @@ public enum ToolId
     FtpTool,
     BatchRename,
     BatchConvert,
-    Toolbox
+    Toolbox,
+    RawToJpeg
 }
 
 public enum FeatureAvailability
