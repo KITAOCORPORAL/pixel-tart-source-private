@@ -164,7 +164,7 @@
                     </Grid.RowDefinitions>
                     <ScrollViewer x:Name="SidebarNavigationScroll" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False">
                         <StackPanel>
-                            <TextBlock Text="工作台" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="工作" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Button Content="工作台" Tag="{StaticResource IconDashboard}" Command="{Binding NavigateCommand}" CommandParameter="Workbench" ToolTip="工作台" AutomationProperties.Name="工作台">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkbenchPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
@@ -172,30 +172,30 @@
                             <Button Content="工作日历" Tag="{StaticResource IconCalendar}" Command="{Binding NavigateCommand}" CommandParameter="WorkCalendar" ToolTip="工作日历" AutomationProperties.Name="工作日历">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkCalendarPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
+                            <Button Content="在线选片" Tag="{StaticResource IconOnlineSelection}" Command="{Binding NavigateCommand}" CommandParameter="OnlineSelection" ToolTip="在线选片" AutomationProperties.Name="在线选片">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsOnlineSelectionPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
                             <Button Content="联机拍摄" Tag="{StaticResource IconCameraTether}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄" AutomationProperties.Name="联机拍摄">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsTetherPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="收支" Tag="{StaticResource IconWallet}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
+                            <Button Content="摄影收支" Tag="{StaticResource IconWallet}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsFinancePage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
                             <Button Content="项目历史" Tag="{StaticResource IconArchiveHistory}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" />
                             <Separator />
-                            <TextBlock Text="应用" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="工具" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Button Content="{Binding ToolboxEntry.DisplayName}"
+                                    Tag="{Binding ToolboxEntry.IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"
+                                    Style="{StaticResource SidebarNavButton}" Click="ToolboxQuickButton_Click"
+                                    ToolTip="{Binding ToolboxEntry.Description}"
+                                    AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" />
+                            <Separator />
+                            <TextBlock Text="系统" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Button Content="授权与版本" Tag="{StaticResource IconShieldKey}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="授权与版本" AutomationProperties.Name="授权与版本" />
                             <Button x:Name="SidebarSettingsButton" Content="设置" Tag="{StaticResource IconGear}" Style="{StaticResource SidebarNavButton}" Command="{Binding OpenSettingsCommand}" ToolTip="设置" AutomationProperties.Name="设置" />
                             <Button Content="帮助" Tag="{StaticResource IconQuestionCircle}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Help" ToolTip="帮助" AutomationProperties.Name="帮助" />
                         </StackPanel>
                     </ScrollViewer>
-                    <StackPanel Grid.Row="2">
-                        <Separator />
-                        <Button Content="{Binding ToolboxEntry.DisplayName}"
-                                Tag="{Binding ToolboxEntry.IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"
-                                Style="{StaticResource SidebarNavButton}" Click="ToolboxQuickButton_Click"
-                                ToolTip="{Binding ToolboxEntry.Description}"
-                                AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" />
-                        <Button Content="使用教程" Tag="{StaticResource IconBookPlay}" Style="{StaticResource SidebarNavButton}" Command="{Binding HelpCommand}" ToolTip="使用教程" AutomationProperties.Name="使用教程" />
-                        <Button Content="问题反馈" Tag="{StaticResource IconMessageBug}" Style="{StaticResource SidebarNavButton}" Command="{Binding FeedbackCommand}" ToolTip="问题反馈" AutomationProperties.Name="问题反馈" />
-                    </StackPanel>
                     <Border x:Name="EditionStatusArea" Grid.Row="3" Style="{StaticResource SidebarEditionCard}" ToolTip="{Binding EditionLabel}" AutomationProperties.Name="版本状态">
                         <Grid>
                             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
@@ -234,6 +234,12 @@
                 <Border Grid.Column="0" Width="0" />
                 <Grid Grid.Column="1">
                 <views:WorkCalendarView DataContext="{Binding WorkCalendarPage}" Visibility="{Binding DataContext.IsWorkCalendarPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <views:OnlineSelectionView DataContext="{Binding OnlineSelectionPage}" Visibility="{Binding DataContext.IsOnlineSelectionPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Grid Visibility="{Binding DataContext.IsRawToJpegPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource ContentBackgroundBrush}">
+                    <Border Style="{StaticResource ModalSurface}" Width="960" MaxHeight="760" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <views:RawToJpegModal DataContext="{Binding DataContext.RawToJpegPage, RelativeSource={RelativeSource AncestorType=Window}}" />
+                    </Border>
+                </Grid>
                 <views:TetherCaptureView x:Name="TetherMonitorView" DataContext="{Binding TetherPage}" Visibility="{Binding DataContext.IsTetherPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" FullScreenChanged="TetherCaptureView_FullScreenChanged" />
                 <views:FinanceView DataContext="{Binding FinancePage}" Visibility="{Binding DataContext.IsFinancePage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Grid x:Name="WorkflowWorkspace" Margin="14" Visibility="{Binding IsWorkflowPage, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -345,7 +351,7 @@
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" MinWidth="760" /><ColumnDefinition x:Name="WorkbenchTaskColumn" Width="320" /></Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Margin="22,20,20,18">
                         <Grid.RowDefinitions><RowDefinition Height="106" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchOverviewRow" Height="230" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchScheduleRow" Height="170" /><RowDefinition Height="16" /><RowDefinition Height="*" /></Grid.RowDefinitions>
-                        <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
+                        <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
                             <Grid Margin="0,0,5,0">
                                 <Button x:Name="StartLocalSplitCard" Style="{StaticResource LocalSplitHeroButton}" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit"
                                         ToolTip="{Binding LocalSplitHelpText}"
@@ -363,7 +369,7 @@
                                     </Button>
                                 </Grid>
                             </Grid>
-                            <ItemsControl x:Name="PinnedQuickToolsList" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding DisplayedPinnedToolboxItems}"
+                            <ItemsControl x:Name="PinnedQuickToolsList" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding DisplayedPinnedToolboxItems}"
                                           AllowDrop="True" PreviewMouseLeftButtonDown="PinnedQuickTools_MouseLeftButtonDown"
                                           PreviewMouseMove="PinnedQuickTools_MouseMove" DragOver="PinnedQuickTools_DragOver"
                                           Drop="PinnedQuickTools_Drop" PreviewKeyDown="PinnedQuickTools_KeyDown">
@@ -391,14 +397,14 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <Button x:Name="QuickToolsOverflowButton" Grid.Column="3" Style="{StaticResource QuickActionButton}" Visibility="Collapsed"
+                            <Button x:Name="QuickToolsOverflowButton" Grid.Column="4" Style="{StaticResource QuickActionButton}" Visibility="Collapsed"
                                     Click="QuickToolsOverflowButton_Click" ToolTip="更多快捷工具" AutomationProperties.Name="更多快捷工具">
                                 <StackPanel><TextBlock Text="•••" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="更多" HorizontalAlignment="Center"/></StackPanel>
                             </Button>
                             <Popup x:Name="QuickToolsOverflowPopup" PlacementTarget="{Binding ElementName=QuickToolsOverflowButton}" Placement="Bottom" VerticalOffset="8" Width="190" StaysOpen="False" AllowsTransparency="True">
                                 <Border Style="{StaticResource PopupSurfaceBorder}" Padding="8"><ItemsControl ItemsSource="{Binding OverflowPinnedToolboxItems}"><ItemsControl.ItemTemplate><DataTemplate><Button Style="{StaticResource ToolEntryButton}" Command="{Binding DataContext.NavigateCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding TargetPageKey}" AutomationProperties.Name="{Binding DisplayName}"><StackPanel Orientation="Horizontal"><Path Width="18" Height="18" Stretch="Uniform" Stroke="{DynamicResource TextPrimaryBrush}" Data="{Binding IconResourceKey,Converter={StaticResource ResourceKeyToGeometryConverter}}"/><TextBlock Text="{Binding DisplayName}" Margin="9,0,0,0"/></StackPanel></Button></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></Border>
                             </Popup>
-                            <Button x:Name="ToolboxQuickButton" Grid.Column="4" Style="{StaticResource QuickActionButton}"
+                            <Button x:Name="ToolboxQuickButton" Grid.Column="5" Style="{StaticResource QuickActionButton}"
                                     Click="ToolboxQuickButton_Click" ToolTip="{Binding ToolboxEntry.Description}"
                                     AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}">
                                 <StackPanel>
@@ -447,7 +453,7 @@
                             </Popup>
                         </Grid>
                         <Grid Grid.Row="2"><Grid.ColumnDefinitions><ColumnDefinition Width="48*" /><ColumnDefinition Width="14" /><ColumnDefinition Width="52*" /></Grid.ColumnDefinitions>
-                            <Border x:Name="ProjectOverviewCard" Style="{StaticResource DashboardPanelCard}"><Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions><Grid><TextBlock Text="项目概览" FontSize="16" FontWeight="SemiBold" /><Button Content="更多  ›" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="6,2" MinHeight="26" Command="{Binding NavigateCommand}" CommandParameter="History" /></Grid><UniformGrid Grid.Row="1" Columns="3" Rows="2" Margin="0,16,0,0"><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding TotalCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="待处理" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding PartialMatchedCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="待匹配" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding CompleteMatchedCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="已匹配" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding CopiedCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="已导出" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding ProjectHistory.Count}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="本地项目" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding AttentionCount}" FontSize="26" FontWeight="SemiBold" Foreground="{DynamicResource BrandDeepBrush}" HorizontalAlignment="Center" /><TextBlock Text="需要确认" Style="{StaticResource CaptionText}" /></StackPanel></UniformGrid></Grid></Border>
+                            <Border x:Name="ProjectOverviewCard" Style="{StaticResource DashboardPanelCard}"><Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions><Grid><TextBlock Text="项目概览" FontSize="16" FontWeight="SemiBold" /><Button Content="更多  ›" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="6,2" MinHeight="26" Command="{Binding NavigateCommand}" CommandParameter="History" /></Grid><UniformGrid Grid.Row="1" Columns="4" Rows="1" Margin="0,16,0,0"><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding WorkbenchInProgressCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="进行中" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding WorkbenchAttentionCount}" FontSize="26" FontWeight="SemiBold" Foreground="{DynamicResource BrandDeepBrush}" HorizontalAlignment="Center" /><TextBlock Text="待确认" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding WorkbenchAwaitingReturnCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="待返图" Style="{StaticResource CaptionText}" /></StackPanel><StackPanel HorizontalAlignment="Center"><TextBlock Text="{Binding WorkbenchCompletedCount}" FontSize="26" FontWeight="SemiBold" HorizontalAlignment="Center" /><TextBlock Text="已完成" Style="{StaticResource CaptionText}" /></StackPanel></UniformGrid></Grid></Border>
                             <Border x:Name="ProcessingTasksCard" Grid.Column="2" Style="{StaticResource DashboardPanelCard}"><Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions><Grid><TextBlock Text="处理任务" FontSize="16" FontWeight="SemiBold" /><Button Content="更多  ›" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="6,2" MinHeight="26" /></Grid><StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"><Path Width="52" Height="52" Stretch="Uniform" Stroke="{DynamicResource TextTertiaryBrush}" StrokeThickness="1.1" Data="{StaticResource IconHistory}" /><TextBlock Text="{Binding TaskCenterSummary}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0" HorizontalAlignment="Center" /><TextBlock Text="扫描、复制、压缩和转档任务会显示在这里" Style="{StaticResource CaptionText}" Margin="0,6,0,0" /></StackPanel></Grid></Border>
                         </Grid>
                         <views:WorkbenchCalendarSummaryView Grid.Row="4" DataContext="{Binding WorkbenchSchedule}" />
@@ -566,10 +572,9 @@
                                                 Command="{Binding DataContext.TogglePinnedToolCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding Id}" Visibility="{Binding CanPin, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                 AutomationProperties.Name="{Binding PinAutomationName}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Path Width="20" Height="20" Stretch="Uniform" StrokeThickness="1.7" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="#FFFFC44D" /><Setter Property="Stroke" Value="#FFFFD476" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
-                                                <TextBlock Text="{Binding PinActionLabel}" Margin="5,0,0,0" />
-                                            </StackPanel>
+                                            <Grid Width="20" Height="20">
+                                                <Path Width="20" Height="20" Stretch="Uniform" StrokeThickness="1.7" Data="{Binding PinIconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"><Path.Style><Style TargetType="Path"><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Style.Triggers><DataTrigger Binding="{Binding IsPinned}" Value="True"><Setter Property="Fill" Value="{DynamicResource PhotographyGoldBrush}" /><Setter Property="Stroke" Value="{DynamicResource PhotographyGoldBrush}" /></DataTrigger></Style.Triggers></Style></Path.Style></Path>
+                                            </Grid>
                                         </Button>
                                     </Grid>
                                 </DataTemplate>
@@ -589,12 +594,11 @@
                     </StackPanel>
                 </ScrollViewer>
 
-                <ScrollViewer Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsBatchCompressPage, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <StackPanel MaxWidth="980" HorizontalAlignment="Left"><TextBlock Text="批量压缩" Style="{StaticResource PageTitleText}" /><TextBlock Text="建立照片压缩任务并预设尺寸、质量与元数据保留方式。" Style="{StaticResource CaptionText}" Margin="0,7,0,18" />
-                        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="12" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Border Style="{StaticResource ToolPanelCard}"><StackPanel><TextBlock Text="输入照片" Style="{StaticResource SectionTitleText}" /><Border Style="{StaticResource InfoCard}" Height="120" Margin="0,10,0,0"><TextBlock Text="拖入 JPG / PNG / TIFF，或点击添加照片" TextAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /></Border><Button Content="添加照片" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="0,10,0,0" /></StackPanel></Border><Border Grid.Column="2" Style="{StaticResource ToolPanelCard}"><StackPanel><TextBlock Text="压缩设置" Style="{StaticResource SectionTitleText}" /><TextBlock Text="压缩预设" Style="{StaticResource CaptionText}" Margin="0,10,0,4" /><ComboBox SelectedIndex="0"><ComboBoxItem Content="网页交付" /><ComboBoxItem Content="社交分享" /><ComboBoxItem Content="自定义" /></ComboBox><Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="10" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><StackPanel><TextBlock Text="质量" Style="{StaticResource CaptionText}" /><TextBox Text="85" Margin="0,4,0,0" /></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="长边像素" Style="{StaticResource CaptionText}" /><TextBox Text="2400" Margin="0,4,0,0" /></StackPanel></Grid><StackPanel Orientation="Horizontal" Margin="0,10,0,0"><CheckBox Content="保留 EXIF" IsChecked="True" /><CheckBox Content="保留 ICC" IsChecked="True" Margin="18,0,0,0" /></StackPanel></StackPanel></Border></Grid>
-                        <Border Style="{StaticResource PanelBorder}" Margin="0,2,12,0"><Grid><TextBlock Text="输出目录尚未选择 · 核心压缩能力开发中" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" /><Button Content="开始压缩（开发中）" Style="{StaticResource PrimaryButton}" IsEnabled="False" HorizontalAlignment="Right" /></Grid></Border>
-                    </StackPanel>
-                </ScrollViewer>
+                <Grid Visibility="{Binding IsBatchCompressPage, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource ContentBackgroundBrush}">
+                    <Border Style="{StaticResource ModalSurface}" Width="960" MaxHeight="760" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <views:BatchCompressionModal DataContext="{Binding BatchCompressionPage}" />
+                    </Border>
+                </Grid>
 
                 <ScrollViewer Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsWatermarkPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel MaxWidth="1320" HorizontalAlignment="Center">
@@ -648,6 +652,18 @@
                 <ScrollViewer Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsHelpPage, Converter={StaticResource BooleanToVisibilityConverter}}"><StackPanel MaxWidth="880" HorizontalAlignment="Left"><TextBlock Text="帮助" Style="{StaticResource PageTitleText}" /><TextBlock Text="四步完成归片：添加并扫描来源 → 导入客户编号 → 匹配检查 → 复制并导出报告。" Style="{StaticResource CaptionText}" Margin="0,6,0,18" /><Border Style="{StaticResource PanelBorder}"><StackPanel><TextBlock Text="客户 JPG 安全规则" Style="{StaticResource SectionTitleText}" /><TextBlock Text="客户发回的 JPG 默认只用于识别编号；正式 JPG 优先从照片来源目录查找。质量判断综合尺寸、元数据和文件特征，不仅依赖文件大小。" TextWrapping="Wrap" Margin="0,7,0,0" /></StackPanel></Border><Border Style="{StaticResource PanelBorder}" Margin="0,10,0,0"><StackPanel><TextBlock Text="需要完整引导？" Style="{StaticResource SectionTitleText}" /><TextBlock Text="可以随时重新播放 22 步交互式教程，教程只使用独立演示文件。" TextWrapping="Wrap" Margin="0,7,0,10" /><Button x:Name="HelpButton" Content="打开帮助与教程" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Command="{Binding HelpCommand}" /></StackPanel></Border><Border Style="{StaticResource PanelBorder}" Margin="0,10,0,0"><StackPanel><TextBlock Text="快捷键与反馈" Style="{StaticResource SectionTitleText}" /><TextBlock Text="Ctrl+B 展开或隐藏侧栏；Ctrl+Shift+F 打开建议与问题反馈。反馈邮件不会自动附带照片、项目、授权或日志信息。" TextWrapping="Wrap" Margin="0,7,0,10" /><Button Content="建议与问题反馈" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Command="{Binding FeedbackCommand}" /></StackPanel></Border><Button Content="打开日志文件夹" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="0,12,0,0" Command="{Binding OpenLogDirectoryCommand}" /></StackPanel></ScrollViewer>
                 </Grid>
             </Grid>
+        </Grid>
+
+        <Grid x:Name="BookingEditorOverlay" Grid.RowSpan="3" Panel.ZIndex="780" Visibility="Collapsed" Background="{DynamicResource OverlayBrush}">
+            <Border x:Name="BookingEditorModalSurface" Style="{StaticResource ModalSurface}" Width="820" MaxHeight="760" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <views:QuickBookingEditorView x:Name="QuickBookingEditorHost" />
+            </Border>
+            <Border x:Name="BookingEditorPlanningSurface" Style="{StaticResource ModalSurface}" Width="1000" MaxHeight="850" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <views:ShootBookingEditorView x:Name="PlanningBookingEditorHost" />
+            </Border>
+            <Border x:Name="BookingEditorDrawerSurface" Style="{StaticResource DrawerSurface}" Width="480" MaxHeight="900" HorizontalAlignment="Right" Visibility="Collapsed">
+                <views:QuickBookingEditorView x:Name="DrawerBookingEditorHost" />
+            </Border>
         </Grid>
 
         <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">

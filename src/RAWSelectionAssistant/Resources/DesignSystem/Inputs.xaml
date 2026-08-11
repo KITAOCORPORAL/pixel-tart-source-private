@@ -3,4 +3,31 @@
     <Style x:Key="Av2ComboBox" TargetType="ComboBox"><Setter Property="MinHeight" Value="{DynamicResource ControlHeight}" /><Setter Property="Padding" Value="12,7" /><Setter Property="Background" Value="{DynamicResource Surface02Brush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}" /><Setter Property="BorderThickness" Value="1" /><Style.Triggers><Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" /><Setter Property="BorderThickness" Value="2" /></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55" /></Trigger></Style.Triggers></Style>
     <Style x:Key="Av2FieldLabel" TargetType="TextBlock"><Setter Property="FontSize" Value="{DynamicResource SecondaryFontSize}" /><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="Margin" Value="0,0,0,4" /></Style>
     <Style x:Key="Av2ValidationText" TargetType="TextBlock"><Setter Property="FontSize" Value="{DynamicResource MinimumCaptionFontSize}" /><Setter Property="Foreground" Value="{DynamicResource DangerBrush}" /><Setter Property="Margin" Value="0,4,0,0" /><Setter Property="TextWrapping" Value="Wrap" /></Style>
+    <Style x:Key="Av2ListView" TargetType="ListView">
+        <Setter Property="Background" Value="{DynamicResource Surface01Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+    <Style x:Key="Av2ListViewItem" TargetType="ListViewItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="8,6" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Surface02Brush}" /></Trigger>
+            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Surface03Brush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="Av2GridViewHeader" TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource Surface03Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
 </ResourceDictionary>

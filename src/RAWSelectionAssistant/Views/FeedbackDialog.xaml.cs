@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 #endif
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Utilities;
 
 namespace RAWSelectionAssistant.Views;
 
@@ -29,10 +30,7 @@ public partial class FeedbackDialog : Window
 
     private void CaptureUiReviewFrame()
     {
-        var statePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "KitaoPhotoSelector.UiReview",
-            "ui-review-state.json");
+        var statePath = Path.Combine(AppDataPaths.Root, "ui-review-state.json");
         if (!File.Exists(statePath)) return;
 
         using var document = JsonDocument.Parse(File.ReadAllText(statePath));

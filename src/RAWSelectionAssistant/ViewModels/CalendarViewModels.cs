@@ -147,7 +147,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         SetWeekViewCommand = new AsyncRelayCommand(_ => SetModeAsync(CalendarViewMode.Week));
         SetDayViewCommand = new AsyncRelayCommand(_ => SetModeAsync(CalendarViewMode.Day));
         RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync());
-        NewBookingCommand = new AsyncRelayCommand(_ => RequestEditorAsync(null, DefaultStartForSelectedDate()), _ => !_availabilityStore.IsClosed(SelectedDate));
+        NewBookingCommand = new AsyncRelayCommand(_ => RequestEditorAsync(null, DefaultStartForSelectedDate(), BookingEditorPresentation.QuickCreate), _ => !_availabilityStore.IsClosed(SelectedDate));
         LoadMoreCommand = new AsyncRelayCommand(_ => LoadMoreAsync(), _ => HasMoreGlobalResults && !IsBusy);
         OpenBookingCommand = new AsyncRelayCommand(parameter => parameter switch
         {
@@ -157,12 +157,16 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         });
         ViewDayDetailsCommand = new RelayCommand(RequestDayDetailsNavigation, CanResolveCalendarDate);
         EditBookingCommand = new AsyncRelayCommand(parameter => TryResolveBookingId(parameter, out var bookingId)
-            ? RequestEditorAsync(bookingId, null)
+            ? RequestEditorAsync(bookingId, null, BookingEditorPresentation.QuickEdit)
+            : Task.CompletedTask, parameter => TryResolveBookingId(parameter, out _));
+        OpenFullPlanningCommand = new AsyncRelayCommand(parameter => TryResolveBookingId(parameter, out var bookingId)
+            ? RequestEditorAsync(bookingId, null, BookingEditorPresentation.FullPlanning)
             : Task.CompletedTask, parameter => TryResolveBookingId(parameter, out _));
         ChangeWorkflowStatusCommand = new AsyncRelayCommand(ChangeWorkflowStatusAsync,
             parameter => parameter is CalendarWorkflowStatusChangeRequest);
         ArchiveBookingCommand = new AsyncRelayCommand(ArchiveBookingAsync, parameter => TryResolveBookingId(parameter, out _));
         Details.EditRequested += (_, bookingId) => EditBookingCommand.Execute(bookingId);
+        Details.FullPlanningRequested += (_, bookingId) => OpenFullPlanningCommand.Execute(bookingId);
         ToggleArchivedCommand = new AsyncRelayCommand(_ => ToggleArchivedAsync());
         CloseDetailsCommand = new RelayCommand(_ => IsDetailsOpen = false);
         FocusSearchCommand = new RelayCommand(_ => FocusSearchRequested());
@@ -202,6 +206,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public ICommand OpenBookingCommand { get; }
     public ICommand ViewDayDetailsCommand { get; }
     public ICommand EditBookingCommand { get; }
+    public ICommand OpenFullPlanningCommand { get; }
     public ICommand ChangeWorkflowStatusCommand { get; }
     public ICommand ArchiveBookingCommand { get; }
     public ICommand ToggleArchivedCommand { get; }
@@ -247,6 +252,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             if (!SetProperty(ref _selectedDate, date)) return;
             ClearSelection();
             NotifyDisplayPeriod();
+            RefreshNewBookingCommandState();
             QueueRefresh();
         }
     }
@@ -501,6 +507,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
         NotifyDisplayPeriod();
+        RefreshNewBookingCommandState();
         if (ViewMode == CalendarViewMode.Month && previousMonth != (_selectedDate.Year, _selectedDate.Month))
         {
             _selectFirstBookingAfterRefresh = true;
@@ -516,12 +523,12 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     private void CreateForDate(DateTime date)
     {
         if (_availabilityStore.IsClosed(date)) { StatusText = $"{date:M月d日} 已关闭档期，请先重新开放。"; return; }
-        _ = RequestEditorAsync(null, DefaultStart(date));
+        _ = RequestEditorAsync(null, DefaultStart(date), BookingEditorPresentation.QuickCreate);
     }
     private void CreateAt(DateTime dateTime)
     {
         if (_availabilityStore.IsClosed(dateTime)) { StatusText = $"{dateTime:M月d日} 已关闭档期，请先重新开放。"; return; }
-        _ = RequestEditorAsync(null, dateTime);
+        _ = RequestEditorAsync(null, dateTime, BookingEditorPresentation.QuickCreate);
     }
 
     private async Task SetDayClosedAsync(DateTime date, bool closed)
@@ -530,6 +537,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         if (closed && bookings > 0 && _dialogs is not null && !_dialogs.Confirm($"该日期已有 {bookings} 项拍摄任务。关闭档期不会删除或修改已有任务，是否继续？", "关闭本日档期")) return;
         await _availabilityStore.SetClosedAsync(date, closed).ConfigureAwait(true);
         Month.Configure(SelectedDate, Month.AllItems, SelectedDate, _currentWeather);
+        RefreshNewBookingCommandState();
         StatusText = closed ? $"{date:M月d日} 已关闭新拍摄档期；已有任务保持不变。" : $"{date:M月d日} 已重新开放。";
     }
 
@@ -552,6 +560,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             ClearSelection();
             OnPropertyChanged(nameof(SelectedDate));
             NotifyDisplayPeriod();
+            RefreshNewBookingCommandState();
         }
         if (ViewMode != CalendarViewMode.Month)
         {
@@ -639,12 +648,13 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         return OpenBookingAsync(item.Id);
     }
 
-    private async Task RequestEditorAsync(Guid? bookingId, DateTime? suggestedStart)
+    private async Task RequestEditorAsync(Guid? bookingId, DateTime? suggestedStart, BookingEditorPresentation presentation = BookingEditorPresentation.FullPlanning)
     {
         var editor = new ShootBookingEditorViewModel(_bookingService, _projectRepository, bookingId, suggestedStart, _bookingPeopleService, _documentWorkflow, _dialogs, _weatherService, _weatherState, _currentLocationService);
         await editor.InitializeAsync().ConfigureAwait(true);
         editor.OpenConflictingBookingRequested += async (_, conflictId) => await OpenBookingAsync(conflictId).ConfigureAwait(true);
-        editor.Saved += async (_, saved) =>
+        editor.ContinuePlanningRequested += saved => RequestEditorAsync(saved.Id, null, BookingEditorPresentation.FullPlanning);
+        editor.SavedAsync += async saved =>
         {
             _weatherState?.MarkNeedsRefresh(saved.Id);
             if (saved.Status != ShootBookingStatus.Draft && _weatherService is not null && _weatherState?.AutoRefreshEnabled == true)
@@ -667,12 +677,13 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
                 ClearSelection();
                 OnPropertyChanged(nameof(SelectedDate));
                 NotifyDisplayPeriod();
+                RefreshNewBookingCommandState();
             }
             await RefreshAsync().ConfigureAwait(true);
             if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
             await OpenBookingAsync(saved.Id).ConfigureAwait(true);
         };
-        EditorRequested?.Invoke(this, new BookingEditorRequestEventArgs(editor));
+        EditorRequested?.Invoke(this, new BookingEditorRequestEventArgs(editor, presentation));
     }
 
     private async Task RefreshAfterBookingChangeAsync()
@@ -700,6 +711,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
         NotifyDisplayPeriod();
+        RefreshNewBookingCommandState();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -714,6 +726,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         ClearSelection();
         OnPropertyChanged(nameof(SelectedDate));
         NotifyDisplayPeriod();
+        RefreshNewBookingCommandState();
         await RefreshAsync().ConfigureAwait(true);
     }
 
@@ -757,6 +770,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         if (_initialized) _ = RefreshAsync();
     }
 
+    private void RefreshNewBookingCommandState() =>
+        (NewBookingCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+
     private static void Replace<T>(ObservableCollection<T> target, IEnumerable<T> values)
     {
         target.Clear();
@@ -771,9 +787,10 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     }
 }
 
-public sealed class BookingEditorRequestEventArgs(ShootBookingEditorViewModel editor) : EventArgs
+public sealed class BookingEditorRequestEventArgs(ShootBookingEditorViewModel editor, BookingEditorPresentation presentation = BookingEditorPresentation.FullPlanning) : EventArgs
 {
     public ShootBookingEditorViewModel Editor { get; } = editor;
+    public BookingEditorPresentation Presentation { get; } = presentation;
 }
 
 public sealed class CalendarBookingItemViewModel
@@ -903,6 +920,27 @@ public static class CalendarDayVisualStateResolver
     }
 }
 
+public static class CalendarStatusBrushResolver
+{
+    public const string Free = "CalendarStatusFreeBrush";
+    public const string Scheduled = "CalendarStatusScheduledBrush";
+    public const string Shot = "CalendarStatusShotBrush";
+    public const string PendingReturn = "CalendarStatusPendingDeliveryBrush";
+    public const string Returned = "CalendarStatusDeliveredBrush";
+
+    public static string Resolve(CalendarDayVisualState state) => state.HasBookings
+        ? Resolve(state.PrimaryWorkflowStatus)
+        : Free;
+
+    public static string Resolve(CalendarWorkflowStatus status) => status switch
+    {
+        CalendarWorkflowStatus.Shot => Shot,
+        CalendarWorkflowStatus.PendingDelivery => PendingReturn,
+        CalendarWorkflowStatus.Delivered => Returned,
+        _ => Scheduled
+    };
+}
+
 public sealed class MonthDayViewModel
 {
     private static readonly IReadOnlyDictionary<CalendarWorkflowStatus, int> PrimaryStatusPriority = new Dictionary<CalendarWorkflowStatus, int>
@@ -927,6 +965,7 @@ public sealed class MonthDayViewModel
     public bool HasBookings => VisualState?.HasBookings ?? BookingCount > 0;
     public string PrimaryBusinessState => PrimaryBooking?.BusinessStateText ?? string.Empty;
     public CalendarWorkflowStatus PrimaryWorkflowStatus => VisualState?.PrimaryWorkflowStatus ?? PrimaryBooking?.WorkflowStatus ?? CalendarWorkflowStatus.Scheduled;
+    public string StatusBrushKey => CalendarStatusBrushResolver.Resolve(VisualState ?? new CalendarDayVisualState(Date, PrimaryWorkflowStatus, BookingCount, IsClosed, IsToday, IsSelected));
     public IReadOnlyList<CalendarWorkflowStatus> WorkflowSegments => VisibleBookings.Select(item => item.WorkflowStatus).Distinct().Take(3).ToArray();
     public bool HasMixedWorkflowStatuses => WorkflowSegments.Count > 1;
     public string PrimaryStatusGlyph => VisibleBookings.FirstOrDefault()?.StatusGlyph ?? string.Empty;

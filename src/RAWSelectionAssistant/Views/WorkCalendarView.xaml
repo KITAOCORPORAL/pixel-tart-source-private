@@ -84,7 +84,7 @@
         </Expander>
 
         <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="65*" MinWidth="520" /><ColumnDefinition Width="8" /><ColumnDefinition Width="35*" MinWidth="320" /></Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="60*" MinWidth="520" /><ColumnDefinition Width="8" /><ColumnDefinition Width="40*" MinWidth="320" /></Grid.ColumnDefinitions>
             <Border Grid.Column="0" Style="{StaticResource PanelBorder}" Padding="0" ClipToBounds="True">
                 <Grid>
                     <views:MonthCalendarView DataContext="{Binding Month}" Visibility="{Binding DataContext.IsMonthView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />

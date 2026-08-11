@@ -5,6 +5,9 @@ using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tasks;
 using RAWSelectionAssistant.Core.Services.Tethering;
+using RAWSelectionAssistant.Core.Services.RawToJpeg;
+using RAWSelectionAssistant.Core.Services.BatchCompression;
+using RAWSelectionAssistant.Core.Services.OnlineSelection;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Services;
@@ -23,7 +26,10 @@ public sealed class ApplicationCompositionRoot
         IFileOperationPlanner fileOperationPlanner,
         IFileOperationExecutor fileOperationExecutor,
         IFileVerificationService fileVerificationService,
-        IUndoJournalService undoJournalService)
+        IUndoJournalService undoJournalService,
+        IRawToJpegTaskCoordinator rawToJpegCoordinator,
+        IBatchCompressionTaskCoordinator batchCompressionCoordinator,
+        SelectionProxyJpegService selectionProxyJpegService)
     {
         Database = database;
         Migration = migration;
@@ -37,6 +43,9 @@ public sealed class ApplicationCompositionRoot
         FileOperationExecutor = fileOperationExecutor;
         FileVerificationService = fileVerificationService;
         UndoJournalService = undoJournalService;
+        RawToJpegCoordinator = rawToJpegCoordinator;
+        BatchCompressionCoordinator = batchCompressionCoordinator;
+        SelectionProxyJpegService = selectionProxyJpegService;
         ProjectRepository = new SqliteProjectRepository(database);
         MediaIndexRepository = new SqliteMediaIndexRepository(database);
         QuickToolsRepository = new SqliteQuickToolsRepository(database);
@@ -76,6 +85,9 @@ public sealed class ApplicationCompositionRoot
     public IFileOperationExecutor FileOperationExecutor { get; }
     public IFileVerificationService FileVerificationService { get; }
     public IUndoJournalService UndoJournalService { get; }
+    public IRawToJpegTaskCoordinator RawToJpegCoordinator { get; }
+    public IBatchCompressionTaskCoordinator BatchCompressionCoordinator { get; }
+    public SelectionProxyJpegService SelectionProxyJpegService { get; }
     public IProjectRepository ProjectRepository { get; }
     public IMediaIndexRepository MediaIndexRepository { get; }
     public IQuickToolsRepository QuickToolsRepository { get; }
@@ -119,12 +131,35 @@ public sealed class ApplicationCompositionRoot
         var executor = new FileOperationExecutor(new FileOperationValidator(), verification, undoRepository, database);
         var undo = new UndoJournalService(undoRepository, verification);
         var bridge = new TaskOperationBridge();
-        var engine = new TaskEngine(repository, new ConservativeTaskScheduler(), [bridge], audit, notifications);
+        var rawRequests = new RawToJpegRequestStore();
+        var rawDecoder = new LibRawDecoder();
+        var selectionProxyJpegService = new SelectionProxyJpegService(
+            new RAWSelectionAssistant.Services.OnlineSelection.WpfSelectionProxyRenderer(rawDecoder));
+        var rawConversion = new RawToJpegSafeConversionService(
+            rawDecoder,
+            new RAWSelectionAssistant.Services.RawToJpeg.WpfJpegEncoder(),
+            new FileConflictResolver(),
+            new FileOperationValidator(),
+            verification,
+            undoRepository,
+            audit,
+            notifications,
+            executor);
+        var rawHandler = new RawToJpegTaskHandler(rawRequests, rawConversion);
+        var batchRequests = new BatchCompressionRequestStore();
+        var batchCompression = new BatchCompressionSafeService(
+            new RAWSelectionAssistant.Services.BatchCompression.WpfBatchCompressionEncoder(),
+            new FileOperationValidator(), new FileConflictResolver(), verification, audit, notifications, executor);
+        var batchHandler = new BatchCompressionTaskHandler(batchRequests, batchCompression);
+        var engine = new TaskEngine(repository, new ConservativeTaskScheduler(), [bridge, rawHandler, batchHandler], audit, notifications);
         bridge.Attach(engine);
         await new TaskRecoveryService(repository, audit).RecoverInterruptedAsync(cancellationToken);
-        var recovery = new RecoveryCoordinator(database, repository, executor, undo, audit);
+        var recovery = new RecoveryCoordinator(database, repository, executor, undo, audit, engine);
         var taskCenter = new TaskCenterViewModel(engine, recovery);
         await taskCenter.InitializeAsync(cancellationToken);
-        return new(database, migration, jsonMigration, bridge, engine, taskCenter, notifications, audit, planner, executor, verification, undo);
+        return new(database, migration, jsonMigration, bridge, engine, taskCenter, notifications, audit, planner, executor, verification, undo,
+            new RawToJpegTaskCoordinator(engine, rawRequests, rawDecoder),
+            new BatchCompressionTaskCoordinator(engine, batchRequests),
+            selectionProxyJpegService);
     }
 }

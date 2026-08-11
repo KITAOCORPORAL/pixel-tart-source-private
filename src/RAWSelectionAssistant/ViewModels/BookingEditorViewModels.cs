@@ -19,6 +19,13 @@ public sealed record CalendarWorkflowStatusOption(CalendarWorkflowStatus Value, 
 public sealed record ShootingTypeEditorOption(string Value, string Label) { public override string ToString() => Label; }
 public sealed record BookingStaffRoleOption(BookingStaffRole Value, string Label) { public override string ToString() => Label; }
 
+public enum BookingEditorPresentation
+{
+    QuickCreate,
+    QuickEdit,
+    FullPlanning
+}
+
 public sealed class BookingContactEditorViewModel : ObservableObject
 {
     private string _displayName = string.Empty; private string _phone = string.Empty; private string _weChat = string.Empty; private string _email = string.Empty; private string _otherContact = string.Empty; private bool _isPrimary; private string _note = string.Empty;
@@ -112,6 +119,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         ToggleAmountsCommand = new RelayCommand(_ => AmountsVisible = !AmountsVisible);
         CloseCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
         EditCommand = new RelayCommand(_ => { if (Booking is not null) EditRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
+        FullPlanningCommand = new RelayCommand(_ => { if (Booking is not null) FullPlanningRequested?.Invoke(this, Booking.Id); }, _ => Booking is { IsArchived: false });
         CompleteCommand = new AsyncRelayCommand(_ => CompleteAsync(), _ => CanComplete);
         ArchiveCommand = new AsyncRelayCommand(_ => ArchiveAsync(), _ => Booking is { IsArchived: false });
         ViewFinanceCommand = new RelayCommand(_ => RequestFinance(null), _ => Booking is not null);
@@ -124,6 +132,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
 
     public event EventHandler? CloseRequested;
     public event EventHandler<Guid>? EditRequested;
+    public event EventHandler<Guid>? FullPlanningRequested;
     public event EventHandler<Guid>? Completed;
     public event EventHandler<Guid>? WorkflowStatusChanged;
     public event EventHandler<Guid>? Archived;
@@ -141,6 +150,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public ICommand ToggleAmountsCommand { get; }
     public ICommand CloseCommand { get; }
     public ICommand EditCommand { get; }
+    public ICommand FullPlanningCommand { get; }
     public ICommand CompleteCommand { get; }
     public ICommand ArchiveCommand { get; }
     public ICommand ViewFinanceCommand { get; }
@@ -303,6 +313,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     {
         foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(CanComplete), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
         (EditCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (FullPlanningCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (CompleteCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (ArchiveCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (ViewFinanceCommand as RelayCommand)?.RaiseCanExecuteChanged();
@@ -427,6 +438,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         if (weatherService is not null && weatherState is not null) _weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService, BookingTimeDisplayService.Default);
         SaveCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.None, asDraft: false), _ => !IsBusy);
+        ContinuePlanningCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.None, asDraft: false, continuePlanning: true), _ => !IsBusy);
         SaveDraftCommand = new AsyncRelayCommand(_ => SaveDraftAsync(), _ => !IsBusy);
         SaveAnywayCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.SaveAnyway, asDraft: false), _ => !IsBusy && IsConflictVisible);
         MarkOverlapAndSaveCommand = new AsyncRelayCommand(_ => SaveAsync(BookingConflictResolution.MarkAllowOverlap, asDraft: false), _ => !IsBusy && IsConflictVisible);
@@ -444,6 +456,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     }
 
     public event EventHandler<ShootBooking>? Saved;
+    public event Func<ShootBooking, Task>? SavedAsync;
+    public event Func<ShootBooking, Task>? ContinuePlanningRequested;
     public event EventHandler? CloseRequested;
     public event EventHandler<string>? FocusFieldRequested;
     public event EventHandler<Guid>? OpenConflictingBookingRequested;
@@ -460,6 +474,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ObservableCollection<BookingStaffEditorViewModel> Staff { get; } = [];
     public IReadOnlyList<BookingStaffRoleOption> StaffRoleOptions { get; }
     public ICommand SaveCommand { get; }
+    public ICommand ContinuePlanningCommand { get; }
     public ICommand SaveDraftCommand { get; }
     public ICommand SaveAnywayCommand { get; }
     public ICommand MarkOverlapAndSaveCommand { get; }
@@ -476,7 +491,12 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ICommand OpenConflictCommand { get; }
     public string DialogTitle => _bookingId.HasValue ? "编辑拍摄排期" : "新建拍摄排期";
     public bool IsEditMode => _bookingId.HasValue;
+    public bool IsCreateMode => !IsEditMode;
     public string EditorMode => IsEditMode ? "EditMode" : "CreateMode";
+    public string QuickDialogTitle => IsEditMode ? "快速编辑拍摄" : "新建拍摄";
+    public string QuickDescription => IsEditMode ? "只修改高频信息；完整策划、资料、人员和收支保持不变。" : "先记录必要信息，创建后可继续完善完整拍摄策划。";
+    public string QuickPrimarySaveText => IsEditMode ? "保存修改" : "创建拍摄";
+    public string ContinuePlanningText => IsEditMode ? "保存并打开完整策划" : "继续完善策划";
     public bool IsBusy { get => _isBusy; private set => SetProperty(ref _isBusy, value); }
     public Guid EditorSessionId => _editorSessionId;
     public Guid StableBookingId => _stableBookingId;
@@ -611,7 +631,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     private string StepState(int step) => CurrentStep == step ? "Current" : CurrentStep > step ? "Complete" : "Pending";
     private string StepGlyph(int step) => CurrentStep > step ? "✓" : step.ToString(CultureInfo.InvariantCulture);
 
-    private async Task SaveAsync(BookingConflictResolution resolution, bool asDraft)
+    private async Task SaveAsync(BookingConflictResolution resolution, bool asDraft, bool continuePlanning = false)
     {
         ValidationText = string.Empty;
         if (!TryBuildDraft(out var draft, out var validation, allowPartial: asDraft))
@@ -661,7 +681,30 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             SaveStatus = asDraft ? BookingEditorSaveStatus.DraftSaved : BookingEditorSaveStatus.Created;
             ValidationText = string.Empty;
             Saved?.Invoke(this, result.Booking);
-            CloseRequested?.Invoke(this, EventArgs.Empty);
+            try
+            {
+                await NotifySavedAsync(result.Booking).ConfigureAwait(true);
+            }
+            catch
+            {
+                ValidationText = "排期已保存，但日历刷新暂时未完成；重新打开工作日历即可刷新。";
+            }
+            if (continuePlanning)
+            {
+                try
+                {
+                    if (!await ContinuePlanningAsync(result.Booking).ConfigureAwait(true))
+                        ValidationText = "排期已保存，但未能打开完整策划；请从工作日历重新打开。";
+                }
+                catch
+                {
+                    ValidationText = "排期已保存，但完整策划暂时无法打开；请从工作日历重新打开。";
+                }
+            }
+            else
+            {
+                CloseRequested?.Invoke(this, EventArgs.Empty);
+            }
         }
         catch (OperationCanceledException) { throw; }
         catch (IOException) { SaveStatus = BookingEditorSaveStatus.DatabaseFailed; ValidationText = "保存失败：本地数据库暂时不可用。请保持当前输入并重试。"; }
@@ -675,6 +718,23 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         await SaveAsync(BookingConflictResolution.None, asDraft: true).ConfigureAwait(true);
     }
 
+    private async Task<bool> ContinuePlanningAsync(ShootBooking booking)
+    {
+        var handlers = ContinuePlanningRequested;
+        if (handlers is null) return false;
+        foreach (Func<ShootBooking, Task> handler in handlers.GetInvocationList())
+            await handler(booking).ConfigureAwait(true);
+        return true;
+    }
+
+    private async Task NotifySavedAsync(ShootBooking booking)
+    {
+        var handlers = SavedAsync;
+        if (handlers is null) return;
+        foreach (Func<ShootBooking, Task> handler in handlers.GetInvocationList())
+            await handler(booking).ConfigureAwait(true);
+    }
+
     private void MoveStaff(BookingStaffEditorViewModel? item, int offset)
     {
         if (item is null) return;
@@ -684,7 +744,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         Staff.Move(current, target);
     }
 
-    public bool HasUnsavedChanges => !_wasSaved && _initialSignature is not null && !string.Equals(_initialSignature, BuildEditSignature(), StringComparison.Ordinal);
+    public bool HasUnsavedChanges => Documents?.HasDraftOperations == true ||
+        (!_wasSaved && _initialSignature is not null && !string.Equals(_initialSignature, BuildEditSignature(), StringComparison.Ordinal));
     public bool WasSaved => _wasSaved;
 
     public bool ConfirmDiscardChanges()

@@ -119,7 +119,10 @@ public sealed class MainViewModel : ObservableObject
         ReminderNotificationCenterViewModel? reminderNotifications = null,
         WeatherFeatureState? weatherState = null,
         TetherCaptureViewModel? tetherPage = null,
-        FinanceViewModel? financePage = null)
+        FinanceViewModel? financePage = null,
+        OnlineSelectionViewModel? onlineSelectionPage = null,
+        RawToJpegViewModel? rawToJpegPage = null,
+        BatchCompressionViewModel? batchCompressionPage = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -150,6 +153,10 @@ public sealed class MainViewModel : ObservableObject
         ReminderNotifications = reminderNotifications;
         TetherPage = tetherPage;
         FinancePage = financePage;
+        OnlineSelectionPage = onlineSelectionPage ?? new OnlineSelectionViewModel(
+            store: new Core.Services.OnlineSelection.JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile));
+        RawToJpegPage = rawToJpegPage;
+        BatchCompressionPage = batchCompressionPage;
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
         if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
@@ -222,6 +229,7 @@ public sealed class MainViewModel : ObservableObject
         SelectionView = CollectionViewSource.GetDefaultView(Selections);
         SelectionView.Filter = FilterSelection;
         Selections.CollectionChanged += (_, _) => { UpdateStatistics(); SelectionView.Refresh(); RefreshCommands(); };
+        ProjectHistory.CollectionChanged += (_, _) => NotifyWorkbenchProjectOverview();
         RefreshToolPinState();
         RegenerateOutputFolderName();
     }
@@ -245,6 +253,9 @@ public sealed class MainViewModel : ObservableObject
     public ReminderNotificationCenterViewModel? ReminderNotifications { get; }
     public TetherCaptureViewModel? TetherPage { get; }
     public FinanceViewModel? FinancePage { get; }
+    public OnlineSelectionViewModel OnlineSelectionPage { get; }
+    public RawToJpegViewModel? RawToJpegPage { get; }
+    public BatchCompressionViewModel? BatchCompressionPage { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -428,6 +439,8 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsWorkCalendarPage));
             OnPropertyChanged(nameof(IsTetherPage));
             OnPropertyChanged(nameof(IsFinancePage));
+            OnPropertyChanged(nameof(IsOnlineSelectionPage));
+            OnPropertyChanged(nameof(IsRawToJpegPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
             OnPropertyChanged(nameof(IsHelpPage));
@@ -449,6 +462,7 @@ public sealed class MainViewModel : ObservableObject
             if (string.Equals(previousPage, "Tether", StringComparison.Ordinal)) TetherPage?.OnDeactivated();
             if (IsTetherPage) TetherPage?.OnActivated();
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
+            if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
             PageChanged?.Invoke(this, new(previousPage, value));
         }
@@ -461,6 +475,8 @@ public sealed class MainViewModel : ObservableObject
     public bool IsWorkCalendarPage => CurrentPage == "WorkCalendar";
     public bool IsTetherPage => CurrentPage == "Tether";
     public bool IsFinancePage => CurrentPage == "Finance";
+    public bool IsOnlineSelectionPage => CurrentPage == "OnlineSelection";
+    public bool IsRawToJpegPage => CurrentPage == "RawToJpeg";
     public bool IsActivationPage => CurrentPage == "Activation";
     public bool IsSettingsPage => CurrentPage == "Settings";
     public bool IsHelpPage => CurrentPage == "Help";
@@ -475,24 +491,26 @@ public sealed class MainViewModel : ObservableObject
     public bool IsCollagePage => CurrentPage == "Collage";
     public bool IsToolboxPage => CurrentPage == "Toolbox";
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
-        new(ToolRegistry.All.Select(definition => new ToolboxItemViewModel(definition)));
+        new(ProductToolboxPolicy.Catalog
+            .Append(ToolRegistry.Get(ToolId.Toolbox))
+            .Select(definition => new ToolboxItemViewModel(definition)));
     public IReadOnlyList<ToolboxItemViewModel> ToolCatalogItems =>
         ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox && item.Availability != FeatureAvailability.Hidden).ToList();
-    public IReadOnlyList<ToolDefinition> ToolMenuItems => ToolRegistry.ReleaseCatalog;
+    public IReadOnlyList<ToolDefinition> ToolMenuItems => ProductToolboxPolicy.Catalog;
     public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
-    public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => Settings.PinnedQuickTools
+    public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => CurrentProductQuickTools()
         .Select(id => ToolboxItems.FirstOrDefault(item => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
         .Where(item => item is not null && item.IsPinned)
         .Cast<ToolboxItemViewModel>()
-        .Take(QuickToolsService.MaximumPinnedTools)
+        .Take(ProductToolboxPolicy.MaximumPinnedTools)
         .ToList();
     public IReadOnlyList<ToolboxItemViewModel> DisplayedPinnedToolboxItems => _quickToolsCompact ? PinnedToolboxItems.Take(2).ToList() : PinnedToolboxItems;
     public IReadOnlyList<ToolboxItemViewModel> OverflowPinnedToolboxItems => _quickToolsCompact ? PinnedToolboxItems.Skip(2).ToList() : [];
-    public bool IsToolPinned(string id) => ToolRegistry.TryGet(id, out var definition) &&
-        Settings.PinnedQuickTools.Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase);
-    public bool CanPinTool(string id) => ToolRegistry.TryGet(id, out var definition) && definition.CanPin &&
+    public bool IsToolPinned(string id) => TryGetProductTool(id, out var definition) &&
+        CurrentProductQuickTools().Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase);
+    public bool CanPinTool(string id) => TryGetProductTool(id, out var definition) && definition.CanPin &&
         definition.Availability == FeatureAvailability.Production &&
-        (IsToolPinned(id) || QuickToolsService.Normalize(Settings.PinnedQuickTools).Count < QuickToolsService.MaximumPinnedTools);
+        (IsToolPinned(id) || CurrentProductQuickTools().Count < ProductToolboxPolicy.MaximumPinnedTools);
     public string LocalSplitHelpText => "导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。";
     public string SearchQuery
     {
@@ -684,6 +702,10 @@ public sealed class MainViewModel : ObservableObject
         : SidebarLayoutMetrics.ExpandedWidth;
     public int PendingTaskCount => IsBusy ? 1 : 0;
     public int AttentionCount => ConflictCount + NotFoundCount + PartialMatchedCount;
+    public int WorkbenchInProgressCount => ProjectHistory.Count(project => project.Status != PhotoProjectStatus.Completed);
+    public int WorkbenchAttentionCount => AttentionCount;
+    public int WorkbenchAwaitingReturnCount => WorkCalendarPage.AwaitingReturnCount;
+    public int WorkbenchCompletedCount => ProjectHistory.Count(project => project.Status == PhotoProjectStatus.Completed);
     public string TaskCenterSummary => IsBusy ? $"正在处理：{StatusMessage}" : "暂无待处理任务";
     public string ThemeSummary => SelectedTheme switch { ThemeMode.Light => "浅色", ThemeMode.Dark => "深色", _ => "跟随系统" };
     public int CurrentWorkflowStep
@@ -792,13 +814,15 @@ public sealed class MainViewModel : ObservableObject
     {
         "Tether" => TetherPage?.StatusText ?? "看守文件夹监看准备就绪",
         "WorkCalendar" => WorkCalendarPage.StatusText,
+        "OnlineSelection" => OnlineSelectionPage.StatusText,
+        "RawToJpeg" => RawToJpegPage?.StatusText ?? "RAW 转 JPG 准备就绪",
         "Workbench" or "ProjectCenter" => string.IsNullOrWhiteSpace(WorkbenchSchedule?.StatusText) ? "工作台准备就绪" : WorkbenchSchedule.StatusText,
         "Finance" => FinancePage?.StatusText ?? "本月暂无收支记录",
         "LocalSplit" => "请选择本地分片入口",
         "Workflow" => StatusMessage,
         "History" => ProjectHistory.Count == 0 ? "暂无本地项目历史" : $"共 {ProjectHistory.Count} 个本地项目",
         "Toolbox" => "工具箱准备就绪",
-        "BatchCompress" => "批量压缩准备就绪",
+        "BatchCompress" => BatchCompressionPage?.StatusText ?? "批量压缩准备就绪",
         "Watermark" => "水印工具准备就绪",
         "DeleteRejects" => "快速拒绝准备就绪",
         "FtpTool" => "FTP 工具准备就绪",
@@ -902,13 +926,9 @@ public sealed class MainViewModel : ObservableObject
     {
         Settings = await _settingsService.LoadAsync();
         _weatherState?.Apply(Settings.Weather);
-        var databaseQuickTools = await _quickToolsRepository.LoadAsync();
-        if (databaseQuickTools.Count > 0)
-        {
-            Settings.PinnedQuickTools = QuickToolsService.Normalize(databaseQuickTools);
-            Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
-        }
-        Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.QuickToolLayout.OrderedToolIds);
+        Settings.ProductQuickToolLayout ??= new ProductQuickToolLayout();
+        Settings.PinnedQuickTools = ProductToolboxPolicy.Normalize(Settings.ProductQuickToolLayout.OrderedToolIds);
+        Settings.ProductQuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
         OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
@@ -984,6 +1004,8 @@ public sealed class MainViewModel : ObservableObject
 
     private void ChildPage_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (ReferenceEquals(sender, WorkCalendarPage) && e.PropertyName == nameof(WorkCalendarViewModel.AwaitingReturnCount))
+            OnPropertyChanged(nameof(WorkbenchAwaitingReturnCount));
         if (e.PropertyName is nameof(WorkCalendarViewModel.StatusText) or nameof(WorkCalendarViewModel.DisplayPeriod) or
             nameof(TetherCaptureViewModel.StatusText) or nameof(TetherCaptureViewModel.PreviewStatus) or nameof(TetherCaptureViewModel.IsRunning) or
             nameof(WorkbenchScheduleViewModel.StatusText) or nameof(WorkbenchScheduleViewModel.NextTodayText) or
@@ -1054,11 +1076,16 @@ public sealed class MainViewModel : ObservableObject
 
     public async Task SaveSettingsAsync()
     {
+        var productQuickTools = CurrentProductQuickTools();
+        Settings.ProductQuickToolLayout ??= new ProductQuickToolLayout();
+        Settings.ProductQuickToolLayout.SchemaVersion = ProductQuickToolLayout.CurrentSchemaVersion;
+        Settings.ProductQuickToolLayout.OrderedToolIds = productQuickTools.ToList();
         if (_weatherState is not null) Settings.Weather = _weatherState.Snapshot();
         if (IsOnboardingActive)
         {
             await _settingsService.SaveAsync(Settings);
-            await _quickToolsRepository.SaveAsync(Settings.PinnedQuickTools);
+            Settings.PinnedQuickTools = productQuickTools;
+            await _quickToolsRepository.SaveAsync(productQuickTools);
             return;
         }
 
@@ -1074,7 +1101,8 @@ public sealed class MainViewModel : ObservableObject
         var custom = MediaExtensionPolicy.ParseCustomExtensions(CustomExtensionsText);
         if (custom.IsValid) Settings.CustomExtensions = custom.Extensions.ToList();
         await _settingsService.SaveAsync(Settings);
-        await _quickToolsRepository.SaveAsync(Settings.PinnedQuickTools);
+        Settings.PinnedQuickTools = productQuickTools;
+        await _quickToolsRepository.SaveAsync(productQuickTools);
     }
 
     private void AddSource()
@@ -1890,8 +1918,8 @@ public sealed class MainViewModel : ObservableObject
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "Tether" or "Finance" or "Activation" or "Settings" or "Help" or
-            "BatchCompress" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
+        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "OnlineSelection" or "Tether" or "Finance" or "Activation" or "Settings" or "Help" or
+            "BatchCompress" or "RawToJpeg" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
         var targetPage = page switch
         {
             "ProjectCenter" => "Workbench",
@@ -1906,7 +1934,7 @@ public sealed class MainViewModel : ObservableObject
 
     private void TogglePinnedTool(string? id)
     {
-        if (!ToolRegistry.TryGet(id, out var definition)) return;
+        if (!TryGetProductTool(id, out var definition)) return;
         if (definition.Id == ToolId.Toolbox)
         {
             ShowToast("工具箱始终可从工作台和侧栏打开，不占快捷位");
@@ -1917,11 +1945,12 @@ public sealed class MainViewModel : ObservableObject
             ShowToast("预览或隐藏工具不能固定到工作台");
             return;
         }
-        if (IsToolPinned(definition.SettingsId))
+        var productQuickTools = CurrentProductQuickTools();
+        if (productQuickTools.Contains(definition.SettingsId, StringComparer.OrdinalIgnoreCase))
         {
-            Settings.PinnedQuickTools.RemoveAll(value => string.Equals(value, definition.SettingsId, StringComparison.OrdinalIgnoreCase));
+            productQuickTools.RemoveAll(value => string.Equals(value, definition.SettingsId, StringComparison.OrdinalIgnoreCase));
         }
-        else if (QuickToolsService.Normalize(Settings.PinnedQuickTools).Count >= QuickToolsService.MaximumPinnedTools)
+        else if (productQuickTools.Count >= ProductToolboxPolicy.MaximumPinnedTools)
         {
             _ = QuickToolsCapacityShortLabel;
             ShowToast(QuickToolsCapacityMessage);
@@ -1929,10 +1958,10 @@ public sealed class MainViewModel : ObservableObject
         }
         else
         {
-            Settings.PinnedQuickTools.Add(definition.SettingsId);
+            productQuickTools.Add(definition.SettingsId);
         }
-        Settings.PinnedQuickTools = QuickToolsService.Normalize(Settings.PinnedQuickTools);
-        Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
+        Settings.ProductQuickToolLayout.OrderedToolIds = ProductToolboxPolicy.Normalize(productQuickTools);
+        Settings.PinnedQuickTools = Settings.ProductQuickToolLayout.OrderedToolIds.ToList();
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
         OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
@@ -1943,8 +1972,9 @@ public sealed class MainViewModel : ObservableObject
     public void MovePinnedTool(string? id, int offset)
     {
         if (string.IsNullOrWhiteSpace(id)) return;
-        var moved = QuickToolsService.Move(Settings.PinnedQuickTools, id, offset);
-        if (moved.SequenceEqual(Settings.PinnedQuickTools, StringComparer.OrdinalIgnoreCase)) return;
+        var current = CurrentProductQuickTools();
+        var moved = ProductToolboxPolicy.Move(current, id, offset);
+        if (moved.SequenceEqual(current, StringComparer.OrdinalIgnoreCase)) return;
         ApplyQuickToolLayout(moved, "快捷工具顺序已保存");
     }
 
@@ -1959,7 +1989,7 @@ public sealed class MainViewModel : ObservableObject
     public void MovePinnedToolTo(string? sourceId, string? targetId)
     {
         if (string.IsNullOrWhiteSpace(sourceId) || string.IsNullOrWhiteSpace(targetId) || string.Equals(sourceId, targetId, StringComparison.OrdinalIgnoreCase)) return;
-        var values = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        var values = CurrentProductQuickTools();
         var sourceIndex = values.FindIndex(x => string.Equals(x, sourceId, StringComparison.OrdinalIgnoreCase));
         var targetIndex = values.FindIndex(x => string.Equals(x, targetId, StringComparison.OrdinalIgnoreCase));
         if (sourceIndex < 0 || targetIndex < 0) return;
@@ -1972,23 +2002,23 @@ public sealed class MainViewModel : ObservableObject
     private void RemovePinnedTool(string? id)
     {
         if (string.IsNullOrWhiteSpace(id)) return;
-        ApplyQuickToolLayout(QuickToolsService.Remove(Settings.PinnedQuickTools, id), "已从快捷工具移除");
+        ApplyQuickToolLayout(ProductToolboxPolicy.Remove(CurrentProductQuickTools(), id), "已从快捷工具移除");
     }
 
-    private void ResetQuickTools() => ApplyQuickToolLayout(QuickToolsService.DefaultPinnedTools, "已恢复默认快捷布局");
+    private void ResetQuickTools() => ApplyQuickToolLayout(ProductToolboxPolicy.DefaultPinnedTools, "已恢复默认快捷布局");
 
     private void ManageQuickTools()
     {
-        var result = _dialogService.ManageQuickTools(Settings.PinnedQuickTools);
+        var result = _dialogService.ManageQuickTools(CurrentProductQuickTools());
         if (result is null) return;
         ApplyQuickToolLayout(result, "快捷工具布局已保存");
     }
 
     private void ApplyQuickToolLayout(IEnumerable<string> toolIds, string message)
     {
-        Settings.PinnedQuickTools = QuickToolsService.Normalize(toolIds);
-        Settings.QuickToolLayout.SchemaVersion = QuickToolLayout.CurrentSchemaVersion;
-        Settings.QuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
+        Settings.PinnedQuickTools = ProductToolboxPolicy.Normalize(toolIds);
+        Settings.ProductQuickToolLayout.SchemaVersion = ProductQuickToolLayout.CurrentSchemaVersion;
+        Settings.ProductQuickToolLayout.OrderedToolIds = Settings.PinnedQuickTools.ToList();
         RefreshToolPinState();
         OnPropertyChanged(nameof(PinnedToolboxItems));
         OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
@@ -1999,13 +2029,28 @@ public sealed class MainViewModel : ObservableObject
 
     private void RefreshToolPinState()
     {
-        var normalized = QuickToolsService.Normalize(Settings.PinnedQuickTools);
+        var normalized = CurrentProductQuickTools();
         Settings.PinnedQuickTools = normalized;
-        Settings.QuickToolLayout.OrderedToolIds = normalized.ToList();
+        Settings.ProductQuickToolLayout.OrderedToolIds = normalized.ToList();
         foreach (var item in ToolboxItems)
         {
             item.SetPinned(normalized.Contains(item.Id, StringComparer.OrdinalIgnoreCase));
         }
+    }
+
+    private List<string> CurrentProductQuickTools() =>
+        ProductToolboxPolicy.Normalize(Settings.ProductQuickToolLayout?.OrderedToolIds);
+
+    private void NotifyWorkbenchProjectOverview()
+    {
+        OnPropertyChanged(nameof(WorkbenchInProgressCount));
+        OnPropertyChanged(nameof(WorkbenchCompletedCount));
+    }
+
+    private static bool TryGetProductTool(string? id, out ToolDefinition definition)
+    {
+        if (ProductToolboxPolicy.TryGet(id, out definition)) return true;
+        return ToolRegistry.TryGet(id, out definition) && definition.Id == ToolId.Toolbox;
     }
 
     private void GoToWorkflowStep(object? parameter)
@@ -2437,6 +2482,7 @@ public sealed class MainViewModel : ObservableObject
         ConflictCount = Selections.Count(x => x.OverallStatus == MediaOverallStatus.Conflict);
         NotFoundCount = Selections.Count(x => x.OverallStatus == MediaOverallStatus.NotFound);
         OnPropertyChanged(nameof(AttentionCount));
+        OnPropertyChanged(nameof(WorkbenchAttentionCount));
         OnPropertyChanged(nameof(TaskCenterSummary));
         CopiedCount = allResults.Count(x => x.Status == MatchStatus.Copied);
     }
