@@ -162,6 +162,17 @@ public sealed class DesignSystemAv2LockTests
     }
 
     [TestMethod]
+    public void Av2ComboBox_InheritsThemedControlTemplate()
+    {
+        var comboBox = Load("src/RAWSelectionAssistant/Resources/DesignSystem/Inputs.xaml")
+            .Descendants()
+            .Single(element => element.Name.LocalName == "Style" &&
+                               (string?)element.Attribute(Xaml + "Key") == "Av2ComboBox");
+
+        Assert.AreEqual("{StaticResource {x:Type ComboBox}}", (string?)comboBox.Attribute("BasedOn"));
+    }
+
+    [TestMethod]
     public void FormalDesignDocumentsAndMasters_ExistAndAreNotEmpty()
     {
         var required = new[]
