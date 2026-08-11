@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ModalOverlay" TargetType="Border"><Setter Property="Background" Value="{DynamicResource OverlayBrush}" /></Style>
+    <Style x:Key="ModalSurface" TargetType="Border"><Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" /><Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="{DynamicResource RadiusModal}" /></Style>
+    <Style x:Key="ModalHeader" TargetType="Border"><Setter Property="Padding" Value="24,16" /><Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}" /><Setter Property="BorderThickness" Value="0,0,0,1" /></Style>
+    <Style x:Key="ModalFooter" TargetType="Border"><Setter Property="Padding" Value="24,16" /><Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}" /><Setter Property="BorderThickness" Value="0,1,0,0" /></Style>
+    <Style x:Key="ModalTitleText" TargetType="TextBlock" BasedOn="{StaticResource HeroText}" />
+</ResourceDictionary>

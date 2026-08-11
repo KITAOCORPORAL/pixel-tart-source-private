@@ -79,7 +79,9 @@ public sealed class AppearanceService : IAppearanceService
 
     private static void ApplyAccent(AppearanceSettings settings, bool highContrast)
     {
-        var color = highContrast ? SystemColors.HighlightColor : AccentColorService.ResolveColor(settings.Accent, settings.CustomAccentColor);
+        // Pixel Tart A-v2 owns the runtime primary action color. User presets remain
+        // readable for migration, but no longer repaint product semantics.
+        var color = highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x18, 0xA8, 0x8C);
         var resources = Application.Current.Resources;
         resources["AccentBrush"] = AccentColorService.Brush(color);
         resources["AccentHoverBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.12));
@@ -100,6 +102,7 @@ public sealed class AppearanceService : IAppearanceService
         resources["RowHeight"] = compact ? 34d : 42d;
         resources["BodyFontSize"] = largeFont ? 15d : 13d;
         resources["CaptionFontSize"] = largeFont ? 13d : 12d;
+        resources["MinimumCaptionFontSize"] = largeFont ? 13d : 11d;
         resources["SidebarWidth"] = settings.SidebarCollapsed
             ? SidebarLayoutMetrics.CollapsedWidth
             : SidebarLayoutMetrics.ExpandedWidth;
