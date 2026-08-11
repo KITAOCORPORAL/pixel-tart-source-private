@@ -235,11 +235,14 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     }
 
     [TestMethod]
-    public void FullCalendar_ReadOnlyTaskSummaryBindingsAreExplicitlyOneWay()
+    public void FullCalendar_TaskCardKeepsOnlyTitleAndOneWayTimeSummary()
     {
         var xaml = FullCalendar();
+        Contains(xaml, "{Binding MonthTitle}");
         Contains(xaml, "{Binding TimeText, Mode=OneWay}");
-        Contains(xaml, "{Binding WorkflowStatusText, Mode=OneWay}");
+        DoesNotContain(xaml, "{Binding WorkflowStatusText, Mode=OneWay}");
+        DoesNotContain(xaml, "Content=\"编辑\"");
+        Contains(xaml, "Header=\"编辑排期\"");
     }
 
     [TestMethod]

@@ -9,7 +9,7 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void Hero_HasKeyboardAccessibleQuestionHelp() => Contains(MainXaml(), "Content=\"?\"", "AutomationProperties.Name=\"本地分片说明\"", "ToolTip=\"{Binding LocalSplitHelpText}\"");
     [TestMethod] public void Hero_DescriptionIsNotPersistent() { var line = MainXaml().Split('\n').First(value => value.Contains("StartLocalSplitCard")); Assert.IsFalse(line.Contains("导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件", StringComparison.Ordinal)); }
     [TestMethod] public void Hero_TooltipTextIsComplete() => Contains(ViewModel(), "导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。");
-    [TestMethod] public void DarkTheme_HasInputTokens() => Contains(Dark(), "#1F2227", "#3A3E45", "#F2F3F5", "#1A1D21", "#2B3138", "#26373A");
+    [TestMethod] public void DarkTheme_HasInputTokens() => Contains(Dark(), "InputBackgroundBrush\" Color=\"#171B20", "InputBorderBrush\" Color=\"#3A424C", "InputForegroundBrush\" Color=\"#F2F4F6", "DropdownBackgroundBrush\" Color=\"#222830", "DropdownHoverBrush\" Color=\"#1D2228", "DropdownSelectedBrush\" Color=\"#173A34");
     [TestMethod] public void Inputs_HaveDarkComboTemplate() => Contains(Inputs(), "ControlTemplate TargetType=\"ComboBox\"", "PART_Popup", "DropdownBackgroundBrush", "InputBackgroundBrush");
     [TestMethod] public void ComboItems_AreThemed() => Contains(Inputs(), "TargetType=\"ComboBoxItem\"", "DropdownHoverBrush", "DropdownSelectedBrush");
     [TestMethod] public void TextPasswordListAndTooltip_AreThemed() => Contains(Inputs(), "TargetType=\"PasswordBox\"", "TargetType=\"ListBoxItem\"", "TargetType=\"ToolTip\"", "TooltipBackgroundBrush");
@@ -23,7 +23,7 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void QuickTools_HomeUpdatesFromPinnedCollection() => Contains(MainXaml(), "ItemsSource=\"{Binding DisplayedPinnedToolboxItems}\"", "WrapPanel ItemWidth=\"116\"");
     [TestMethod] public void Toolbox_RemainsFixedEntry() => Contains(ViewModel(), "工具箱始终可从工作台和侧栏打开", "ToolCatalogItems", "ToolId.Toolbox");
     [TestMethod] public void ToolboxPopup_HasGroupingAndCollage() => Contains(Popup(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "TogglePinnedToolCommand", "ResourceKeyToGeometryConverter");
-    [TestMethod] public void ToolboxFullPage_HasGroupingAndCollage() => Contains(MainXaml(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "UniformGrid Columns=\"3\"", "ToolCatalogCard", "PinActionLabel");
+    [TestMethod] public void ToolboxFullPage_HasGroupingAndIconOnlyPin() => Contains(MainXaml(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "UniformGrid Columns=\"3\"", "ToolCatalogCard", "PinToolTip", "PinAutomationName", "PinIconResourceKey");
     [TestMethod] public void GroupingPage_IsUsable() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "来源和分组规则", "新建组", "生成并预览操作清单", "执行当前清单");
     [TestMethod] public void CollagePage_IsUsable() { Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板和参数", "背景颜色", "导出重新读取原图"); Contains(Text("src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs"), "纵向长图", "横向长图"); }
     [TestMethod] public void Navigation_AllowsNewToolPages() => Contains(ViewModel(), "\"PhotoGrouping\"", "\"Collage\"", "IsPhotoGroupingPage", "IsCollagePage");

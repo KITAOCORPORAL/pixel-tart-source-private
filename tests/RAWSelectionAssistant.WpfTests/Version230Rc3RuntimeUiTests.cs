@@ -13,7 +13,7 @@ public sealed class Version230Rc3RuntimeUiTests
     [DataRow("工作日历视图")][DataRow("工作日历排序")][DataRow("日期跳转")][DataRow("月")][DataRow("周")][DataRow("日")]
     [DataRow("拍摄状态筛选")][DataRow("拍摄类型筛选")][DataRow("搜索排期")][DataRow("可折叠状态图例")]
     [DataRow("未拍摄")][DataRow("已拍摄")][DataRow("待发送选片 / 待选片 / 已选片")][DataRow("待精修 / 已精修 / 待交付")][DataRow("已返图")]
-    [DataRow("时间冲突")][DataRow("天气风险")][DataRow("关闭档期")][DataRow("Width=\"65*\"")][DataRow("Width=\"35*\"")]
+    [DataRow("时间冲突")][DataRow("天气风险")][DataRow("关闭档期")][DataRow("Width=\"60*\"")][DataRow("Width=\"40*\"")]
     [DataRow("GridSplitter")][DataRow("当前周期拍摄列表")][DataRow("当前周期总览")][DataRow("StatusToTextConverter")][DataRow("DaySchedulePanel")]
     public void ProfessionalCalendar_ContainsRequiredRuntimeSurface(string token) => Contains("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml", token);
 
