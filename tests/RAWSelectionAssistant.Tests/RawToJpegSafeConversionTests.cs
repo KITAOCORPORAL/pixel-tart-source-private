@@ -285,6 +285,44 @@ public sealed class RawToJpegSafeConversionTests
         SqliteTestIsolation.ClearPool(database);
     }
 
+    [TestMethod]
+    public async Task SafeService_AwaitsDurableItemCallbackBeforeStartingNextItem()
+    {
+        using var setup = await SetupAsync();
+        var first = setup.Temp.CreateFile("raw/first.ARW", [1]);
+        var second = setup.Temp.CreateFile("raw/second.ARW", [2]);
+        var output = setup.Temp.Combine("jpg");
+        var taskId = Guid.NewGuid();
+        await new SqliteTaskRepository(setup.Database).SaveAsync(new TaskRuntimeState
+        {
+            Definition = new(taskId, null, RawToJpegDefaults.TaskType, "RAW to JPG", "PathsRedacted", null,
+                DateTimeOffset.UtcNow)
+        });
+        var firstCallback = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releaseCallback = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var callbackCount = 0;
+
+        var conversion = setup.Service.ConvertAsync(taskId, new([first, second], output, new()),
+            itemCompleted: item =>
+            {
+                Assert.IsNotNull(item.DestinationPath);
+                Assert.IsTrue(File.Exists(item.DestinationPath));
+                if (Interlocked.Increment(ref callbackCount) != 1) return Task.CompletedTask;
+                firstCallback.TrySetResult(true);
+                return releaseCallback.Task;
+            });
+
+        await firstCallback.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        Assert.IsFalse(conversion.IsCompleted, "The second item started before the first durable callback completed.");
+        Assert.HasCount(1, Directory.GetFiles(output, "*.jpg"));
+        releaseCallback.TrySetResult(true);
+        var result = await conversion.WaitAsync(TimeSpan.FromSeconds(10));
+
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        Assert.AreEqual(2, callbackCount);
+        Assert.HasCount(2, Directory.GetFiles(output, "*.jpg"));
+    }
+
     private static async Task<Setup> SetupAsync(IRawJpegEncoder? encoder = null, bool useOperationExecutor = false)
     {
         var temp = new TempDirectory("RawToJpeg-" + Guid.NewGuid().ToString("N"));
@@ -434,6 +472,7 @@ public sealed class RawToJpegSafeConversionTests
 
         public async Task<RawToJpegBatchResult> ConvertAsync(Guid taskId, RawToJpegBatchRequest request,
             IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+            Func<RawToJpegItemResult, Task>? itemCompleted = null,
             CancellationToken cancellationToken = default)
         {
             var results = new List<RawToJpegItemResult>();
@@ -446,15 +485,20 @@ public sealed class RawToJpegSafeConversionTests
                 var sequence = request.SourceSequences?[localIndex] ?? localIndex;
                 if (batchAttempt == 1 && localIndex == 1)
                 {
-                    results.Add(new(sequence, RawToJpegItemState.Failed, source, null, 0, null,
-                        ErrorCodeCatalog.DecodeFailed, "Conversion failed."));
+                    var failed = new RawToJpegItemResult(sequence, RawToJpegItemState.Failed, source, null, 0, null,
+                        ErrorCodeCatalog.DecodeFailed, "Conversion failed.");
+                    results.Add(failed);
+                    if (itemCompleted is not null) await itemCompleted(failed);
                     continue;
                 }
 
                 Directory.CreateDirectory(request.DestinationRoot);
                 var destination = Path.Combine(request.DestinationRoot, Path.GetFileNameWithoutExtension(source) + ".jpg");
                 await File.WriteAllBytesAsync(destination, [0xFF, 0xD8, 0xFF, 0xD9], cancellationToken);
-                results.Add(new(sequence, RawToJpegItemState.Completed, source, destination, 4, null, null, null));
+                var completed = new RawToJpegItemResult(sequence, RawToJpegItemState.Completed, source, destination,
+                    4, null, null, null);
+                results.Add(completed);
+                if (itemCompleted is not null) await itemCompleted(completed);
             }
 
             var summary = new TaskResultSummary(request.SourceFiles.Count,
@@ -470,6 +514,7 @@ public sealed class RawToJpegSafeConversionTests
     {
         public Task<RawToJpegBatchResult> ConvertAsync(Guid taskId, RawToJpegBatchRequest request,
             IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+            Func<RawToJpegItemResult, Task>? itemCompleted = null,
             CancellationToken cancellationToken = default)
         {
             progress?.Report((50, "redacted", new(request.SourceFiles.Count, 0, 0, 0, 0, 0, 0, 0)));

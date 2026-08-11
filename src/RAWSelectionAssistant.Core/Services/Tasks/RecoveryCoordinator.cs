@@ -2,6 +2,8 @@ using Microsoft.Data.Sqlite;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FileOperations;
+using RAWSelectionAssistant.Core.Services.BatchCompression;
+using RAWSelectionAssistant.Core.Services.RawToJpeg;
 
 namespace RAWSelectionAssistant.Core.Services.Tasks;
 
@@ -13,7 +15,8 @@ public interface IRecoveryCoordinator
     Task AbandonAsync(Guid taskId, CancellationToken cancellationToken = default);
 }
 
-public sealed class RecoveryCoordinator(IPixelTartDatabase database, ITaskRepository tasks, IFileOperationExecutor executor, IUndoJournalService undo, IAuditLogService audit) : IRecoveryCoordinator
+public sealed class RecoveryCoordinator(IPixelTartDatabase database, ITaskRepository tasks, IFileOperationExecutor executor,
+    IUndoJournalService undo, IAuditLogService audit, ITaskEngine? handlerRecovery = null) : IRecoveryCoordinator
 {
     public Task<bool> ContinueAsync(Guid taskId, bool userConfirmedHighRisk = false, CancellationToken cancellationToken = default) => RecoverFileItemsAsync(taskId, includeFailed: false, userConfirmedHighRisk, cancellationToken);
     public Task<bool> RetryFailedAsync(Guid taskId, bool userConfirmedHighRisk = false, CancellationToken cancellationToken = default) => RecoverFileItemsAsync(taskId, includeFailed: true, userConfirmedHighRisk, cancellationToken);
@@ -38,6 +41,13 @@ public sealed class RecoveryCoordinator(IPixelTartDatabase database, ITaskReposi
     private async Task<bool> RecoverFileItemsAsync(Guid taskId, bool includeFailed, bool userConfirmedHighRisk, CancellationToken cancellationToken)
     {
         var runtime = await tasks.GetAsync(taskId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Task not found.");
+        if (runtime.State == TaskLifecycleState.Interrupted && handlerRecovery is not null &&
+            IsHandlerManaged(runtime.Definition.Type))
+        {
+            await handlerRecovery.RetryAsync(taskId, cancellationToken).ConfigureAwait(false);
+            await handlerRecovery.WaitForCompletionAsync(taskId, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
         var items = await LoadItemsAsync(taskId, includeFailed, cancellationToken).ConfigureAwait(false);
         if (items.Count == 0)
         {
@@ -114,4 +124,8 @@ public sealed class RecoveryCoordinator(IPixelTartDatabase database, ITaskReposi
         while (directories.Any(x => !x.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase) && !string.Equals(x, root, StringComparison.OrdinalIgnoreCase))) root = Path.GetDirectoryName(root) ?? Path.GetPathRoot(root) ?? root;
         return root;
     }
+
+    private static bool IsHandlerManaged(string taskType) =>
+        string.Equals(taskType, RawToJpegDefaults.TaskType, StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(taskType, BatchCompressionDefaults.TaskType, StringComparison.OrdinalIgnoreCase);
 }

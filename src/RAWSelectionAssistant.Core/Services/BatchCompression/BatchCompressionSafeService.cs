@@ -16,6 +16,7 @@ public sealed class BatchCompressionSafeService(
         Guid taskId,
         BatchCompressionRequest request,
         IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+        Func<BatchCompressionItemResult, Task>? itemCompleted = null,
         CancellationToken cancellationToken = default)
     {
         request.Validate();
@@ -48,6 +49,8 @@ public sealed class BatchCompressionSafeService(
                     : await CompressItemAsync(taskId, request.ProjectId, item, request.Options, cancellationToken)
                         .ConfigureAwait(false);
                 results.Add(result);
+                if (itemCompleted is not null)
+                    await itemCompleted(result).ConfigureAwait(false);
                 var summary = Summarize(plan.Items.Count, results);
                 progress?.Report((results.Count * 100d / plan.Items.Count, $"Item {item.Sequence + 1}", summary));
             }

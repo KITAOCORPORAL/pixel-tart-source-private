@@ -8,6 +8,12 @@ public interface ITaskHandler
     Task<TaskExecutionResult> ExecuteAsync(TaskExecutionContext context, CancellationToken cancellationToken);
 }
 
+public interface ITaskTerminalStateObserver
+{
+    Task OnTerminalStatePersistedAsync(Guid taskId, TaskLifecycleState terminalState,
+        CancellationToken cancellationToken = default);
+}
+
 public interface ITaskRepository
 {
     Task SaveAsync(TaskRuntimeState state, CancellationToken cancellationToken = default);

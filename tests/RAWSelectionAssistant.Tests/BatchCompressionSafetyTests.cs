@@ -186,6 +186,44 @@ public sealed class BatchCompressionSafetyTests
     }
 
     [TestMethod]
+    public async Task SafeService_AwaitsDurableItemCallbackBeforeStartingNextItem()
+    {
+        using var setup = await SetupAsync(new RecordingEncoder());
+        var first = setup.Temp.CreateFile("source/first.jpg", [1]);
+        var second = setup.Temp.CreateFile("source/second.jpg", [2]);
+        var output = setup.Temp.Combine("output");
+        var taskId = Guid.NewGuid();
+        await new SqliteTaskRepository(setup.Database).SaveAsync(new TaskRuntimeState
+        {
+            Definition = new(taskId, null, BatchCompressionDefaults.TaskType, "Batch compression",
+                "PathsRedacted", null, DateTimeOffset.UtcNow)
+        });
+        var firstCallback = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releaseCallback = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var callbackCount = 0;
+
+        var compression = setup.Service.CompressAsync(taskId, new([first, second], output, new()),
+            itemCompleted: item =>
+            {
+                Assert.IsNotNull(item.DestinationPath);
+                Assert.IsTrue(File.Exists(item.DestinationPath));
+                if (Interlocked.Increment(ref callbackCount) != 1) return Task.CompletedTask;
+                firstCallback.TrySetResult(true);
+                return releaseCallback.Task;
+            });
+
+        await firstCallback.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        Assert.IsFalse(compression.IsCompleted, "The second item started before the first durable callback completed.");
+        Assert.HasCount(1, Directory.GetFiles(output, "*.jpg"));
+        releaseCallback.TrySetResult(true);
+        var result = await compression.WaitAsync(TimeSpan.FromSeconds(10));
+
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        Assert.AreEqual(2, callbackCount);
+        Assert.HasCount(2, Directory.GetFiles(output, "*.jpg"));
+    }
+
+    [TestMethod]
     public void Request_RejectsRelativePathsInvalidQualityAndSequenceMetadata()
     {
         Assert.Throws<ArgumentException>(() => new BatchCompressionRequest(
@@ -283,6 +321,7 @@ public sealed class BatchCompressionSafetyTests
 
         public async Task<BatchCompressionResult> CompressAsync(Guid taskId, BatchCompressionRequest request,
             IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+            Func<BatchCompressionItemResult, Task>? itemCompleted = null,
             CancellationToken cancellationToken = default)
         {
             Interlocked.Increment(ref _executionCount);
@@ -295,6 +334,7 @@ public sealed class BatchCompressionSafetyTests
             var item = new BatchCompressionItemResult(sequence, BatchCompressionItemState.Completed,
                 source, destination, 4, null, null);
             var summary = new TaskResultSummary(1, 1, 0, 0, 0, 0, 0, 4);
+            if (itemCompleted is not null) await itemCompleted(item);
             progress?.Report((100, "Item 1", summary));
             return new(taskId, TaskLifecycleState.Completed, summary, [item]);
         }

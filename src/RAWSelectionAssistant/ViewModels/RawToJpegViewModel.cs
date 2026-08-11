@@ -42,7 +42,8 @@ public sealed class RawToJpegViewModel : ObservableObject
     private bool _isBusy;
     private double _progress;
     private string _statusText = "选择 RAW 文件开始转换；源文件不会被修改。";
-    private CancellationTokenSource? _conversionCancellation;
+    private Guid? _activeTaskId;
+    private bool _cancelRequested;
 
     public RawToJpegViewModel(IRawToJpegTaskCoordinator coordinator, IDialogService dialogs)
     {
@@ -55,7 +56,7 @@ public sealed class RawToJpegViewModel : ObservableObject
         AddFilesCommand = new RelayCommand(_ => AddFiles());
         ChooseDestinationCommand = new RelayCommand(_ => ChooseDestination());
         StartCommand = new AsyncRelayCommand(_ => StartAsync(), _ => CanStart);
-        CancelCommand = new RelayCommand(_ => _conversionCancellation?.Cancel(), _ => IsBusy);
+        CancelCommand = new AsyncRelayCommand(_ => CancelAsync(), _ => _activeTaskId.HasValue);
     }
 
     public ObservableCollection<RawToJpegItemViewModel> Items { get; } = [];
@@ -94,28 +95,40 @@ public sealed class RawToJpegViewModel : ObservableObject
         if (!CanStart) return;
         IsBusy = true;
         Progress = 0;
-        _conversionCancellation = new CancellationTokenSource();
+        _cancelRequested = false;
         try
         {
             var request = new RawToJpegBatchRequest(Items.Select(x => x.SourcePath).ToArray(), DestinationDirectory,
                 new RawToJpegOptions(JpegQuality, LongestEdge, UseCameraWhiteBalance, PreserveExif: PreserveExif, AutoRotate: AutoRotate));
-            var taskId = await _coordinator.StartAsync(request, _conversionCancellation.Token).ConfigureAwait(true);
+            var taskId = await _coordinator.StartAsync(request, CancellationToken.None).ConfigureAwait(true);
+            _activeTaskId = taskId;
             StatusText = $"任务已提交：{taskId:N}";
+            RaiseCommands();
+            await _coordinator.WaitForCompletionAsync(taskId, CancellationToken.None).ConfigureAwait(true);
+            if (!_cancelRequested) StatusText = "RAW 转 JPG 任务已完成；源文件保持不变。";
         }
         catch (OperationCanceledException) { StatusText = "已取消；源 RAW 保持不变。"; }
         catch (Exception) { StatusText = "任务提交失败；请检查输出目录和解码器状态。"; }
         finally
         {
-            _conversionCancellation.Dispose();
-            _conversionCancellation = null;
+            _activeTaskId = null;
             IsBusy = false;
         }
+    }
+
+    private async Task CancelAsync()
+    {
+        if (_activeTaskId is not Guid taskId) return;
+        _cancelRequested = true;
+        await _coordinator.CancelAsync(taskId, CancellationToken.None).ConfigureAwait(true);
+        await _coordinator.WaitForCompletionAsync(taskId, CancellationToken.None).ConfigureAwait(true);
+        StatusText = "已安全取消；已完成输出保留，源 RAW 保持不变。";
     }
 
     private static bool IsCandidateFile(string path) => File.Exists(path) && RawToJpegDefaults.CandidateRawExtensions.Contains(Path.GetExtension(path));
     private void RaiseCommands()
     {
         (StartCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
-        (CancelCommand as RelayCommand)?.RaiseCanExecuteChanged();
+        (CancelCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
     }
 }

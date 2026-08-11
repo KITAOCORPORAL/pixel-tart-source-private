@@ -3,7 +3,8 @@ using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services.RawToJpeg;
 
-public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawToJpegSafeConversionService conversion) : ITaskHandler
+public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawToJpegSafeConversionService conversion) :
+    ITaskHandler, ITaskTerminalStateObserver
 {
     public string TaskType => RawToJpegDefaults.TaskType;
 
@@ -16,7 +17,17 @@ public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawTo
         var progress = new AwaitableProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
             context.ReportProgressAsync(value.Progress, "RAW 转 JPG", null, value.Summary, CancellationToken.None));
         TaskExecutionResult executionResult;
-        var removeCheckpoint = false;
+        var completedThisRun = new List<RawToJpegItemResult>();
+        async Task PersistItemCheckpointAsync(RawToJpegItemResult item)
+        {
+            completedThisRun.RemoveAll(candidate => candidate.Sequence == item.Sequence);
+            completedThisRun.Add(item);
+            var itemAggregate = Merge(checkpoint, completedThisRun);
+            var durableCheckpoint = CreateCheckpoint(checkpoint.OriginalRequest, itemAggregate);
+            requests.Update(context.Definition.Id, durableCheckpoint);
+            await context.SafeBoundaryAsync("RawToJpeg.ItemCommitted", durableCheckpoint.StableResults.Count,
+                cancellationToken: CancellationToken.None).ConfigureAwait(false);
+        }
         try
         {
             RawToJpegBatchResult current;
@@ -35,24 +46,21 @@ public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawTo
                     SourceFiles = checkpoint.PendingSourceFiles,
                     SourceSequences = sourceSequences
                 };
-                current = await conversion.ConvertAsync(context.Definition.Id, pendingRequest, progress, cancellationToken).ConfigureAwait(false);
+                current = await conversion.ConvertAsync(context.Definition.Id, pendingRequest, progress,
+                    PersistItemCheckpointAsync, cancellationToken).ConfigureAwait(false);
             }
 
             var aggregate = Merge(checkpoint, current.Items);
-            var pendingSources = aggregate
-                .Where(item => string.IsNullOrWhiteSpace(item.DestinationPath) && item.State != RawToJpegItemState.Completed)
-                .Select(item => item.SourcePath)
-                .ToArray();
-            var stable = aggregate.Where(item => !string.IsNullOrWhiteSpace(item.DestinationPath)).ToArray();
+            var durableCheckpoint = CreateCheckpoint(checkpoint.OriginalRequest, aggregate);
+            var stable = durableCheckpoint.StableResults;
             var summary = Summarize(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
             var state = ResolveState(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
-            requests.Update(context.Definition.Id, new(checkpoint.OriginalRequest, pendingSources, stable));
-            var cancellationWithStableOutput = stable.Length > 0 &&
+            requests.Update(context.Definition.Id, durableCheckpoint);
+            var cancellationWithStableOutput = stable.Count > 0 &&
                 (cancellationToken.IsCancellationRequested || context.RuntimeState.State == TaskLifecycleState.Cancelling);
             var finalState = state == TaskLifecycleState.Completed && cancellationWithStableOutput
                 ? TaskLifecycleState.PartiallyCompleted
                 : state;
-            removeCheckpoint = finalState == TaskLifecycleState.Completed;
             executionResult = new(finalState, summary,
                 aggregate.FirstOrDefault(x => x.ErrorCode is not null)?.ErrorCode,
                 finalState == TaskLifecycleState.Completed ? null : "One or more RAW items require attention; completed outputs are not repeated on retry.");
@@ -61,8 +69,25 @@ public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawTo
         {
             await progress.DrainAsync().ConfigureAwait(false);
         }
-        if (removeCheckpoint) requests.Remove(context.Definition.Id);
         return executionResult;
+    }
+
+    public Task OnTerminalStatePersistedAsync(Guid taskId, TaskLifecycleState terminalState,
+        CancellationToken cancellationToken = default)
+    {
+        if (terminalState == TaskLifecycleState.Completed) requests.Remove(taskId);
+        return Task.CompletedTask;
+    }
+
+    private static RawToJpegRecoveryCheckpoint CreateCheckpoint(RawToJpegBatchRequest originalRequest,
+        IReadOnlyList<RawToJpegItemResult> aggregate)
+    {
+        var pendingSources = aggregate
+            .Where(item => string.IsNullOrWhiteSpace(item.DestinationPath) && item.State != RawToJpegItemState.Completed)
+            .Select(item => item.SourcePath)
+            .ToArray();
+        var stable = aggregate.Where(item => !string.IsNullOrWhiteSpace(item.DestinationPath)).ToArray();
+        return new(originalRequest, pendingSources, stable);
     }
 
     private static IReadOnlyList<RawToJpegItemResult> Merge(RawToJpegRecoveryCheckpoint checkpoint,
@@ -121,4 +146,10 @@ public sealed class RawToJpegTaskCoordinator(ITaskEngine taskEngine, IRawToJpegR
             throw;
         }
     }
+
+    public Task CancelAsync(Guid taskId, CancellationToken cancellationToken = default) =>
+        taskEngine.CancelAsync(taskId, cancellationToken);
+
+    public Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default) =>
+        taskEngine.WaitForCompletionAsync(taskId, cancellationToken);
 }
