@@ -9,48 +9,76 @@
         <local:EnumEqualsVisibilityConverter x:Key="EnumToVisibilityConverter" />
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisibility" />
         <DataTemplate DataType="{x:Type vm:OnlineSelectionAssetViewModel}">
-            <Border Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="12" Margin="0,0,0,8">
+            <Border Style="{StaticResource CardSurface}" Width="260" Padding="{DynamicResource Spacing12Thickness}" Margin="{DynamicResource CardSpacing}">
                 <Grid>
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                    <StackPanel>
-                        <TextBlock Text="{Binding OriginalFileName}" Foreground="{DynamicResource TextPrimaryBrush}" FontSize="13" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" Margin="0,4,0,0" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" Margin="0,0,12,0" />
-                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" />
-                    </StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="156" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Background="{DynamicResource Surface03Brush}" ClipToBounds="True">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="照片" Style="{StaticResource MinimumCaptionText}" HorizontalAlignment="Center" />
+                            <TextBlock Text="本地缩略图不可用" Style="{StaticResource MinimumCaptionText}" Margin="{DynamicResource Spacing4Thickness}" />
+                        </StackPanel>
+                        <Image Source="{Binding Thumbnail}" Stretch="UniformToFill" AutomationProperties.Name="{Binding OriginalFileName}" />
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="{DynamicResource SpacingVertical8}">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{Binding OriginalFileName}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding StatusText}" Style="{StaticResource MinimumCaptionText}" Margin="{DynamicResource Spacing4Thickness}" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="封面">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource MinimumCaptionText}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Setter Property="Foreground" Value="{DynamicResource PhotographyGoldBrush}" />
+                                    <Style.Triggers><DataTrigger Binding="{Binding IsCover}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" />
+                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" HorizontalAlignment="Right" />
+                    </Grid>
                 </Grid>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="24">
+
+    <Border Style="{StaticResource WorkspaceSurface}" Margin="{DynamicResource PagePadding}">
+    <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
         <Grid>
             <StackPanel>
                 <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" />
-                <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" />
+                <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,16,0" />
-                <Button Content="创建选片项目" Style="{StaticResource PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
-                <Button Content="刷新" Style="{StaticResource GhostButton}" Command="{Binding RefreshCommand}" Margin="8,0,0,0" AutomationProperties.Name="刷新在线选片项目" />
+                <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
+                <Button Content="创建选片项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
+                <Button Content="刷新" Style="{StaticResource Av2GhostButton}" Command="{Binding RefreshCommand}" Margin="{DynamicResource SpacingHorizontal8}" AutomationProperties.Name="刷新在线选片项目" />
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="0,24,0,0">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="330" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="16">
+        <Grid Grid.Row="1" Margin="{DynamicResource SpacingVertical24}">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="300" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Style="{StaticResource PanelSurface}" Padding="{DynamicResource Spacing16Thickness}">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="选片项目" Style="{StaticResource SectionTitleText}" Margin="0,0,0,12" />
-                    <ListBox ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject, Mode=OneWay}" BorderThickness="0" Background="Transparent">
+                    <TextBlock DockPanel.Dock="Top" Text="选片项目" Style="{StaticResource SectionTitleText}" Margin="{DynamicResource SpacingVertical12}" />
+                    <ListBox ItemsSource="{Binding Projects}" SelectedValuePath="Project" SelectedValue="{Binding SelectedProject, Mode=OneWay}" BorderThickness="0" Background="Transparent">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.OpenProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Padding="8">
+                                <Button Command="{Binding DataContext.OpenProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{StaticResource Av2GhostButton}" HorizontalContentAlignment="Stretch" Padding="{DynamicResource Spacing8Thickness}">
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" />
-                                        <TextBlock Text="{Binding ClientDisplayName}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" Margin="0,3,0,0" />
-                                        <TextBlock Text="{Binding Status}" Foreground="{DynamicResource TextMutedBrush}" FontSize="11" Margin="0,3,0,0" />
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding ClientDisplayName}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
+                                        <WrapPanel Margin="{DynamicResource Spacing4Thickness}">
+                                            <TextBlock Text="{Binding StatusText}" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" />
+                                            <TextBlock Text="{Binding SelectionTargetText, StringFormat=  ·  {0}}" Style="{StaticResource MinimumCaptionText}" />
+                                        </WrapPanel>
                                     </StackPanel>
                                 </Button>
                             </DataTemplate>
@@ -58,86 +86,99 @@
                     </ListBox>
                 </DockPanel>
             </Border>
-            <Border Grid.Column="2" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="20">
+
+            <Border Grid.Column="2" Style="{StaticResource PanelSurface}" Padding="{DynamicResource Spacing16Thickness}">
                 <Grid DataContext="{Binding ProjectPage}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Grid>
                         <StackPanel>
                             <TextBlock Text="{Binding Project.Name, TargetNullValue=在线选片项目}" Style="{StaticResource SectionTitleText}" />
-                            <TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource CaptionText}" Margin="0,4,0,0" />
+                            <TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
                         </StackPanel>
-                        <TextBlock Text="{Binding ServiceStatusText}" HorizontalAlignment="Right" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding ProjectStatusText}" HorizontalAlignment="Right" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center" />
                     </Grid>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,18,0,16">
+
+                    <Grid Grid.Row="1" Margin="{DynamicResource SpacingVertical16}">
                         <ItemsControl ItemsSource="{Binding Tabs}">
                             <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Label}" Command="{Binding DataContext.SelectTabCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0" MinWidth="90" />
+                                    <Button Content="{Binding Label}" Command="{Binding DataContext.SelectTabCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Style="{StaticResource Av2SecondaryButton}" Margin="{DynamicResource Spacing4Thickness}" MinWidth="90" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <Button Content="添加照片" Style="{StaticResource SecondaryButton}" Command="{Binding AddAssetsCommand}" Margin="8,0,0,0" />
-                        <Button Content="发布项目" Style="{StaticResource PrimaryButton}" Command="{Binding PublishCommand}" Margin="8,0,0,0" />
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="添加照片" Style="{StaticResource Av2SecondaryButton}" Command="{Binding AddAssetsCommand}" />
+                            <Button Content="发布项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding PublishCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
+                        </StackPanel>
+                    </Grid>
+
                     <Grid Grid.Row="2">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Photos}">
-                            <ItemsControl ItemsSource="{Binding Assets}" />
+                            <ItemsControl ItemsSource="{Binding Assets}">
+                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </ScrollViewer>
                         <Grid Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=ClientSelection}">
                             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding SelectionSummary}" FontSize="20" FontWeight="SemiBold" />
-                                <TextBlock Text="{Binding FavoriteCount, StringFormat=收藏 {0}}" Style="{StaticResource CaptionText}" Margin="24,5,0,0" />
-                            </StackPanel>
-                            <ItemsControl Grid.Row="1" ItemsSource="{Binding Assets}" Margin="0,16,0,0" />
+                            <Grid>
+                                <TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource HeroText}" />
+                                <TextBlock Text="{Binding FavoriteCount, StringFormat=收藏 {0}}" Style="{StaticResource SecondaryBodyText}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            </Grid>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="{DynamicResource SpacingVertical16}">
+                                <ItemsControl ItemsSource="{Binding Assets}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel></ItemsControl>
+                            </ScrollViewer>
                         </Grid>
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Settings}">
                             <StackPanel MaxWidth="720" HorizontalAlignment="Left">
                                 <TextBlock Text="选片规则" Style="{StaticResource SectionTitleText}" />
-                                <TextBlock Text="目标数量" Style="{StaticResource CaptionText}" Margin="0,16,0,4" />
+                                <TextBlock Text="目标数量" Style="{StaticResource MinimumCaptionText}" Margin="{DynamicResource SpacingVertical16}" />
                                 <TextBox Text="{Binding Rule.TargetCount, Mode=OneWay}" IsReadOnly="True" />
-                                <TextBlock Text="最低 / 最高" Style="{StaticResource CaptionText}" Margin="0,12,0,4" />
-                                <TextBlock Text="{Binding Rule.MinimumCount, StringFormat={}{0}}" />
-                                <TextBlock Text="{Binding Rule.MaximumCount, StringFormat={}{0}}" />
-                                <CheckBox Content="允许加选" IsChecked="{Binding Rule.AllowExtraSelections, Mode=OneWay}" Margin="0,12,0,0" />
-                                <CheckBox Content="允许收藏" IsChecked="{Binding Rule.AllowFavorites, Mode=OneWay}" Margin="0,8,0,0" />
-                                <CheckBox Content="允许备注" IsChecked="{Binding Rule.AllowComments, Mode=OneWay}" Margin="0,8,0,0" />
-                                <CheckBox Content="确认后锁定" IsChecked="{Binding Rule.LockAfterConfirmation, Mode=OneWay}" Margin="0,8,0,0" />
+                                <TextBlock Text="最低 / 最高" Style="{StaticResource MinimumCaptionText}" Margin="{DynamicResource SpacingVertical12}" />
+                                <TextBlock Style="{StaticResource BodyText}"><Run Text="{Binding Rule.MinimumCount}" /><Run Text=" / " /><Run Text="{Binding Rule.MaximumCount}" /></TextBlock>
+                                <CheckBox Content="允许加选" IsChecked="{Binding Rule.AllowExtraSelections, Mode=OneWay}" Margin="{DynamicResource SpacingVertical12}" />
+                                <CheckBox Content="允许收藏" IsChecked="{Binding Rule.AllowFavorites, Mode=OneWay}" Margin="{DynamicResource SpacingVertical8}" />
+                                <CheckBox Content="允许备注" IsChecked="{Binding Rule.AllowComments, Mode=OneWay}" Margin="{DynamicResource SpacingVertical8}" />
+                                <CheckBox Content="确认后锁定" IsChecked="{Binding Rule.LockAfterConfirmation, Mode=OneWay}" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </ScrollViewer>
                         <Grid Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=DeliveryResults}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="520">
-                                <TextBlock Text="交付结果" Style="{StaticResource SectionTitleText}" HorizontalAlignment="Center" />
-                                <TextBlock Text="客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。" Style="{StaticResource CaptionText}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,8,0,16" />
-                                <Button Content="同步归片工作区" Style="{StaticResource PrimaryButton}" Command="{Binding SyncResultsCommand}" HorizontalAlignment="Center" />
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0"><Button Content="导出 TXT" Style="{StaticResource SecondaryButton}" /><Button Content="导出 CSV" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0" /></StackPanel>
-                            </StackPanel>
+                            <Border Style="{StaticResource EmptyStateContainer}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel MaxWidth="520">
+                                    <TextBlock Text="交付结果" Style="{StaticResource Av2EmptyStateTitle}" />
+                                    <TextBlock Text="客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
+                                    <Button Content="同步归片工作区" Style="{StaticResource Av2PrimaryButton}" Command="{Binding SyncResultsCommand}" HorizontalAlignment="Center" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{DynamicResource SpacingVertical8}"><Button Content="导出 TXT" Style="{StaticResource Av2SecondaryButton}" /><Button Content="导出 CSV" Style="{StaticResource Av2SecondaryButton}" Margin="{DynamicResource SpacingHorizontal8}" /></StackPanel>
+                                </StackPanel>
+                            </Border>
                         </Grid>
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsProjectOpen, Converter={StaticResource InverseBoolToVisibility}}">
-                            <TextBlock Text="尚未选择项目" Style="{StaticResource SectionTitleText}" HorizontalAlignment="Center" />
-                            <TextBlock Text="创建一个选片项目后，从照片标签开始。" Style="{StaticResource CaptionText}" Margin="0,8,0,0" />
-                        </StackPanel>
+                        <Border Style="{StaticResource EmptyStateContainer}" Visibility="{Binding IsProjectOpen, Converter={StaticResource InverseBoolToVisibility}}">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="尚未选择项目" Style="{StaticResource Av2EmptyStateTitle}" />
+                                <TextBlock Text="创建一个选片项目后，从照片标签开始。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
                 </Grid>
             </Border>
         </Grid>
 
-        <Border Grid.RowSpan="2" Background="#99000000" Visibility="{Binding IsCreateModalOpen, Converter={StaticResource BoolToVisibility}}">
-            <Border Width="520" MaxHeight="620" Background="{DynamicResource SurfaceElevatedBrush}" BorderBrush="{DynamicResource BorderStrongBrush}" BorderThickness="1" Padding="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border Grid.RowSpan="2" Style="{StaticResource ModalOverlay}" Visibility="{Binding IsCreateModalOpen, Converter={StaticResource BoolToVisibility}}">
+            <Border Width="520" MaxHeight="620" Style="{StaticResource ModalSurface}" Padding="{DynamicResource Spacing24Thickness}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
-                    <TextBlock Text="创建选片项目" Style="{StaticResource SectionTitleText}" />
-                    <TextBlock Text="只填写开始选片所需信息，照片可随后导入。" Style="{StaticResource CaptionText}" Margin="0,6,0,20" />
-                    <TextBlock Text="项目名" Style="{StaticResource CaptionText}" /><TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,12" AutomationProperties.Name="选片项目名" />
-                    <TextBlock Text="客户" Style="{StaticResource CaptionText}" /><TextBox Text="{Binding ClientName, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,12" AutomationProperties.Name="选片客户" />
-                    <TextBlock Text="目标数量" Style="{StaticResource CaptionText}" /><TextBox Text="{Binding TargetCountText, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,12" AutomationProperties.Name="目标选片数量" />
-                    <TextBlock Text="截止日期" Style="{StaticResource CaptionText}" /><DatePicker SelectedDate="{Binding Deadline}" Margin="0,5,0,20" AutomationProperties.Name="选片截止日期" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="取消" Style="{StaticResource GhostButton}" Command="{Binding CancelCreateCommand}" />
-                        <Button Content="创建并导入照片" Style="{StaticResource PrimaryButton}" Command="{Binding CreateAndImportCommand}" Margin="8,0,0,0" AutomationProperties.Name="创建并导入照片" />
+                    <TextBlock Text="创建选片项目" Style="{StaticResource ModalTitleText}" />
+                    <TextBlock Text="只填写开始选片所需信息，照片可随后导入。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource SpacingVertical8}" />
+                    <TextBlock Text="项目名" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="选片项目名" />
+                    <TextBlock Text="客户" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding ClientName, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="选片客户" />
+                    <TextBlock Text="目标数量" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding TargetCountText, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="目标选片数量" />
+                    <TextBlock Text="截止日期" Style="{StaticResource MinimumCaptionText}" /><DatePicker SelectedDate="{Binding Deadline}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="选片截止日期" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource SpacingVertical16}">
+                        <Button Content="取消" Style="{StaticResource Av2GhostButton}" Command="{Binding CancelCreateCommand}" />
+                        <Button Content="创建并导入照片" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateAndImportCommand}" Margin="{DynamicResource SpacingHorizontal8}" AutomationProperties.Name="创建并导入照片" />
                     </StackPanel>
                 </StackPanel>
             </Border>
         </Border>
     </Grid>
+    </Border>
 </UserControl>

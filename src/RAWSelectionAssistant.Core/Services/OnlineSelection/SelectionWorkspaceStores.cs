@@ -47,12 +47,14 @@ public sealed class JsonSelectionWorkspaceStore : ISelectionWorkspaceStore
         {
             if (!File.Exists(FilePath)) return SelectionWorkspaceSnapshot.Empty;
             await using var stream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 32 * 1024, FileOptions.Asynchronous | FileOptions.SequentialScan);
-            return await JsonSerializer.DeserializeAsync<SelectionWorkspaceSnapshot>(stream, SerializerOptions, cancellationToken).ConfigureAwait(false)
-                ?? SelectionWorkspaceSnapshot.Empty;
+            var snapshot = await JsonSerializer.DeserializeAsync<SelectionWorkspaceSnapshot>(stream, SerializerOptions, cancellationToken).ConfigureAwait(false);
+            if (snapshot is null || snapshot.Projects is null || snapshot.Assets is null || snapshot.Rules is null || snapshot.FinalResults is null)
+                throw new InvalidDataException("在线选片工作区数据损坏，原文件已保留且未写入。");
+            return snapshot;
         }
         catch (JsonException)
         {
-            return SelectionWorkspaceSnapshot.Empty;
+            throw new InvalidDataException("在线选片工作区数据损坏，原文件已保留且未写入。");
         }
         finally { _gate.Release(); }
     }
