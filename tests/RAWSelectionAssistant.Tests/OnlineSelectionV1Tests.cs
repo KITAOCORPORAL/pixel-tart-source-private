@@ -181,6 +181,29 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
+    public async Task FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions()
+    {
+        using var temp = new TempDirectory();
+        var jpeg = temp.CreateFile("IMG_0013.JPG", [1, 2, 3]);
+        var raw = temp.CreateFile("IMG_0013.NEF", [4, 5, 6]);
+        var project = Project();
+        var result = new SelectionFinalResult(project.Id, DateTimeOffset.UtcNow,
+            [new(project.Id, Guid.NewGuid(), "IMG_0013.JPG", true, false, null, false)]);
+        var service = new SelectionResultSyncService(new FileNameNormalizer());
+
+        var matched = await service.SynchronizeAsync(result, [jpeg, raw], temp.Combine("matched"));
+        var jpegOnly = await service.SynchronizeAsync(result, [jpeg], temp.Combine("jpeg-only"));
+
+        Assert.AreEqual(SelectionRawMatchStatus.Matched, matched.Matches.Single().Status);
+        Assert.AreEqual(raw, matched.Matches.Single().RawPath);
+        CollectionAssert.AreEqual(new[] { raw }, matched.Matches.Single().Candidates.ToArray());
+        Assert.AreEqual(SelectionRawMatchStatus.NotFound, jpegOnly.Matches.Single().Status);
+        Assert.IsNull(jpegOnly.Matches.Single().RawPath);
+        Assert.IsTrue(File.Exists(jpeg));
+        Assert.IsTrue(File.Exists(raw));
+    }
+
+    [TestMethod]
     public async Task FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete()
     {
         using var temp = new TempDirectory();
@@ -206,6 +229,99 @@ public sealed class OnlineSelectionV1Tests
         var loaded = await new JsonSelectionWorkspaceStore(store.FilePath).LoadAsync();
         Assert.HasCount(1, loaded.Projects);
         Assert.AreEqual(project.Id, loaded.Projects[0].Id);
+    }
+
+    [TestMethod]
+    public async Task JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults()
+    {
+        using var temp = new TempDirectory();
+        var first = Project();
+        var second = Project();
+        var firstAsset = Asset(first.Id, "FIRST.JPG");
+        var secondAsset = Asset(second.Id, "SECOND.JPG");
+        var firstResult = FinalResult(first, firstAsset, selected: true);
+        var secondResult = FinalResult(second, secondAsset, selected: false);
+        var snapshot = new SelectionWorkspaceSnapshot(
+            [first, second],
+            [firstAsset, secondAsset],
+            [SelectionRule.Default(first.Id, first.TargetCount), SelectionRule.Default(second.Id, second.TargetCount)],
+            [firstResult, secondResult]);
+        var store = new JsonSelectionWorkspaceStore(temp.Combine("selection", "workspace.json"));
+
+        await store.SaveAsync(snapshot);
+        var loaded = await new JsonSelectionWorkspaceStore(store.FilePath).LoadAsync();
+
+        CollectionAssert.AreEquivalent(new[] { first.Id, second.Id }, loaded.Projects.Select(item => item.Id).ToArray());
+        CollectionAssert.AreEquivalent(new[] { firstAsset.Id, secondAsset.Id }, loaded.Assets.Select(item => item.Id).ToArray());
+        CollectionAssert.AreEquivalent(new[] { first.Id, second.Id }, loaded.Rules.Select(item => item.ProjectId).ToArray());
+        CollectionAssert.AreEquivalent(new[] { first.Id, second.Id }, loaded.FinalResults.Select(item => item.SelectionProjectId).ToArray());
+    }
+
+    [TestMethod]
+    public async Task JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal()
+    {
+        using var temp = new TempDirectory();
+        var path = temp.CreateFile("selection/workspace.json", "{ damaged"u8.ToArray());
+        var original = await File.ReadAllBytesAsync(path);
+        var store = new JsonSelectionWorkspaceStore(path);
+
+        var exception = await Assert.ThrowsExactlyAsync<InvalidDataException>(() => store.LoadAsync());
+
+        StringAssert.Contains(exception.Message, "数据损坏");
+        CollectionAssert.AreEqual(original, await File.ReadAllBytesAsync(path));
+        Assert.HasCount(1, Directory.GetFiles(Path.GetDirectoryName(path)!));
+    }
+
+    [TestMethod]
+    public async Task ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile()
+    {
+        using var temp = new TempDirectory();
+        var source = temp.CreateFile("IMG_0042.JPG", [1, 2, 3]);
+        var output = temp.Combine("proxies");
+        Directory.CreateDirectory(output);
+        var competitor = Path.Combine(output, "IMG_0042_proxy.jpg");
+        await File.WriteAllBytesAsync(competitor, [9, 8, 7]);
+        var service = new SelectionProxyJpegService(new ThrowingProxyRenderer());
+
+        var result = await service.GenerateAsync(source, output);
+
+        Assert.AreEqual(SelectionProxyState.Failed, result.State);
+        CollectionAssert.AreEqual(new byte[] { 9, 8, 7 }, await File.ReadAllBytesAsync(competitor));
+        CollectionAssert.AreEqual(new byte[] { 1, 2, 3 }, await File.ReadAllBytesAsync(source));
+        Assert.HasCount(1, Directory.GetFiles(output));
+    }
+
+    [TestMethod]
+    public async Task ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive()
+    {
+        using var temp = new TempDirectory();
+        var raw = temp.CreateFile("IMG_0100.ARW", [5, 4, 3]);
+        var project = Project();
+        var asset = Asset(project.Id, "IMG_0100.JPG");
+        var confirmedAt = new DateTimeOffset(2026, 8, 11, 8, 9, 10, TimeSpan.Zero);
+        var result = new SelectionFinalResult(project.Id, confirmedAt,
+            [new(project.Id, asset.Id, asset.OriginalFileName, true, false, null, false)]);
+        var archiveDirectory = temp.Combine("archive");
+        var service = new SelectionResultSyncService(new FileNameNormalizer());
+
+        var first = await service.SynchronizeAsync(result, [raw], archiveDirectory);
+        var firstBytes = await File.ReadAllBytesAsync(first.ArchivePath!);
+        var second = await service.SynchronizeAsync(result, [raw], archiveDirectory);
+
+        Assert.AreNotEqual(first.ArchivePath, second.ArchivePath);
+        Assert.EndsWith("_2.json", second.ArchivePath, StringComparison.OrdinalIgnoreCase);
+        CollectionAssert.AreEqual(firstBytes, await File.ReadAllBytesAsync(first.ArchivePath!));
+        Assert.IsGreaterThan(0, new FileInfo(second.ArchivePath!).Length);
+        Assert.HasCount(2, Directory.GetFiles(archiveDirectory));
+    }
+
+    [TestMethod]
+    public async Task ResultArchive_RequiresExplicitDestinationDirectory()
+    {
+        var project = Project();
+        var result = new SelectionFinalResult(project.Id, DateTimeOffset.UtcNow, []);
+        var service = new SelectionResultSyncService(new FileNameNormalizer());
+        await Assert.ThrowsExactlyAsync<ArgumentException>(() => service.SynchronizeAsync(result, [], string.Empty));
     }
 
     [TestMethod]
@@ -238,6 +354,20 @@ public sealed class OnlineSelectionV1Tests
     {
         var now = DateTimeOffset.UtcNow;
         return new(Guid.NewGuid(), projectId, name, Path.GetFullPath(name), null, SelectionAssetStatus.LocalOnly, 0, false, now, now);
+    }
+
+    private static SelectionFinalResult FinalResult(SelectionProject project, SelectionAsset asset, bool selected) =>
+        new(project.Id, DateTimeOffset.UtcNow, [new(project.Id, asset.Id, asset.OriginalFileName, selected, false, null, false)]);
+
+    private sealed class ThrowingProxyRenderer : ISelectionProxyRenderer
+    {
+        public string Name => "确定性失败渲染器";
+
+        public async Task RenderJpegAsync(string sourcePath, Stream destination, SelectionProxyOptions options, CancellationToken cancellationToken = default)
+        {
+            await destination.WriteAsync(new byte[] { 6, 6, 6 }, cancellationToken);
+            throw new IOException("测试渲染失败");
+        }
     }
 
     private static string FindRepoRoot()

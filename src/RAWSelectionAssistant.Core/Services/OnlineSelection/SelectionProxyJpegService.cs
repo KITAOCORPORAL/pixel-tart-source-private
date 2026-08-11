@@ -28,50 +28,83 @@ public sealed class SelectionProxyJpegService(ISelectionProxyRenderer renderer)
 
         var beforeLength = new FileInfo(source).Length;
         var beforeWriteUtc = File.GetLastWriteTimeUtc(source);
-        Directory.CreateDirectory(Path.GetFullPath(outputDirectory));
-        var destination = CreateNumberedPath(outputDirectory, Path.GetFileNameWithoutExtension(source) + "_proxy", ".jpg");
+        var directory = Path.GetFullPath(outputDirectory);
+        Directory.CreateDirectory(directory);
+        string? ownedStagingPath = null;
         try
         {
-            await using (var stream = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 64 * 1024, FileOptions.Asynchronous | FileOptions.SequentialScan))
+            var staging = CreateOwnedStagingFile(directory);
+            ownedStagingPath = staging.Path;
+            await using (staging.Stream)
             {
-                await renderer.RenderJpegAsync(source, stream, options ?? SelectionProxyOptions.OnlineDefault, cancellationToken).ConfigureAwait(false);
-                await stream.FlushAsync(cancellationToken).ConfigureAwait(false);
-                stream.Flush(flushToDisk: true);
+                await renderer.RenderJpegAsync(source, staging.Stream, options ?? SelectionProxyOptions.OnlineDefault, cancellationToken).ConfigureAwait(false);
+                await staging.Stream.FlushAsync(cancellationToken).ConfigureAwait(false);
+                staging.Stream.Flush(flushToDisk: true);
             }
-            var outputLength = new FileInfo(destination).Length;
+            var outputLength = new FileInfo(ownedStagingPath).Length;
             if (outputLength <= 0) throw new InvalidDataException("代理图为空。");
             var sourceInfo = new FileInfo(source);
             if (sourceInfo.Length != beforeLength || sourceInfo.LastWriteTimeUtc != beforeWriteUtc)
                 throw new IOException("源文件在生成代理图期间发生变化。");
+            cancellationToken.ThrowIfCancellationRequested();
+            var destination = MoveToNumberedPath(
+                ownedStagingPath,
+                directory,
+                Path.GetFileNameWithoutExtension(source) + "_proxy",
+                ".jpg");
+            ownedStagingPath = null;
             return new(SelectionProxyState.Ready, destination, outputLength, $"已生成在线选片代理 JPG（{renderer.Name}）。");
         }
         catch (OperationCanceledException)
         {
-            SafeDelete(destination);
+            SafeDeleteOwned(ownedStagingPath);
             throw;
         }
         catch
         {
-            SafeDelete(destination);
+            SafeDeleteOwned(ownedStagingPath);
             return new(SelectionProxyState.Failed, null, 0, "代理图生成未完成，源文件保持不变。", OnlineSelectionErrorCodes.ProxyGenerationFailed);
         }
     }
 
-    private static string CreateNumberedPath(string directory, string stem, string extension)
+    private static (string Path, FileStream Stream) CreateOwnedStagingFile(string directory)
     {
-        var first = Path.Combine(Path.GetFullPath(directory), stem + extension);
-        if (!File.Exists(first)) return first;
-        for (var index = 2; index < 100_000; index++)
+        for (var attempt = 0; attempt < 100; attempt++)
         {
-            var candidate = Path.Combine(Path.GetFullPath(directory), $"{stem}_{index}{extension}");
-            if (!File.Exists(candidate)) return candidate;
+            var path = Path.Combine(directory, $".selection-proxy-{Guid.NewGuid():N}.tmp");
+            try
+            {
+                return (path, new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None, 64 * 1024, FileOptions.Asynchronous | FileOptions.SequentialScan));
+            }
+            catch (IOException) when (File.Exists(path))
+            {
+            }
+        }
+        throw new IOException("无法创建代理图临时文件。");
+    }
+
+    private static string MoveToNumberedPath(string ownedStagingPath, string directory, string stem, string extension)
+    {
+        for (var index = 1; index < 100_000; index++)
+        {
+            var suffix = index == 1 ? string.Empty : $"_{index}";
+            var candidate = Path.Combine(directory, stem + suffix + extension);
+            try
+            {
+                File.Move(ownedStagingPath, candidate, overwrite: false);
+                return candidate;
+            }
+            catch (IOException) when (File.Exists(ownedStagingPath) && File.Exists(candidate))
+            {
+            }
         }
         throw new IOException("无法创建唯一的代理图文件名。");
     }
 
-    private static void SafeDelete(string path)
+    private static void SafeDeleteOwned(string? ownedStagingPath)
     {
-        try { if (File.Exists(path)) File.Delete(path); } catch { }
+        if (string.IsNullOrWhiteSpace(ownedStagingPath)) return;
+        try { if (File.Exists(ownedStagingPath)) File.Delete(ownedStagingPath); } catch { }
     }
 }
 
