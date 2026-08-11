@@ -15,7 +15,10 @@ public interface IRawJpegEncoder
 
 public interface IRawToJpegSafeConversionService
 {
-    Task<RawToJpegBatchResult> ConvertAsync(Guid taskId, RawToJpegBatchRequest request, IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default);
+    Task<RawToJpegBatchResult> ConvertAsync(Guid taskId, RawToJpegBatchRequest request,
+        IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+        Func<RawToJpegItemResult, Task>? itemCompleted = null,
+        CancellationToken cancellationToken = default);
 }
 
 public interface IRawToJpegRequestStore
@@ -30,4 +33,6 @@ public interface IRawToJpegTaskCoordinator
 {
     RawDecoderCapability GetCapability();
     Task<Guid> StartAsync(RawToJpegBatchRequest request, CancellationToken cancellationToken = default);
+    Task CancelAsync(Guid taskId, CancellationToken cancellationToken = default);
+    Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default);
 }

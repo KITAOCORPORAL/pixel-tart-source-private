@@ -128,6 +128,7 @@ public sealed class TaskEngine : ITaskEngine
             runtime.Progress = final == TaskLifecycleState.Completed ? 100 : runtime.Progress;
             runtime.CompletedAt = DateTimeOffset.UtcNow;
             await PersistAndPublishAsync(runtime, true, CancellationToken.None).ConfigureAwait(false);
+            await NotifyTerminalStatePersistedAsync(runtime, CancellationToken.None).ConfigureAwait(false);
             await PublishCompletionNotificationAsync(runtime).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
@@ -140,6 +141,7 @@ public sealed class TaskEngine : ITaskEngine
             await TransitionAsync(runtime, final, CancellationToken.None).ConfigureAwait(false);
             runtime.CompletedAt = DateTimeOffset.UtcNow;
             await PersistAndPublishAsync(runtime, true, CancellationToken.None).ConfigureAwait(false);
+            await NotifyTerminalStatePersistedAsync(runtime, CancellationToken.None).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -149,6 +151,7 @@ public sealed class TaskEngine : ITaskEngine
                 await TransitionAsync(runtime, TaskLifecycleState.Failed, CancellationToken.None).ConfigureAwait(false);
             runtime.CompletedAt = DateTimeOffset.UtcNow;
             await PersistAndPublishAsync(runtime, true, CancellationToken.None).ConfigureAwait(false);
+            await NotifyTerminalStatePersistedAsync(runtime, CancellationToken.None).ConfigureAwait(false);
             await _notifications.PublishAsync(new NotificationMessage(Guid.NewGuid(), NotificationType.TaskNotification, NotificationSeverity.Error, runtime.Definition.DisplayName, $"任务未完成：{ErrorCodeCatalog.Describe(runtime.LastErrorCode)}", runtime.Definition.Id, runtime.Definition.ProjectId, [], false, DateTimeOffset.UtcNow, DeduplicationKey: $"task-error-{runtime.Definition.Id}"), CancellationToken.None).ConfigureAwait(false);
         }
     }
@@ -211,6 +214,11 @@ public sealed class TaskEngine : ITaskEngine
         await _repository.SaveAsync(runtime, cancellationToken).ConfigureAwait(false);
         Publish(runtime, force);
     }
+
+    private Task NotifyTerminalStatePersistedAsync(TaskRuntimeState runtime, CancellationToken cancellationToken) =>
+        _handlers[runtime.Definition.Type] is ITaskTerminalStateObserver observer
+            ? observer.OnTerminalStatePersistedAsync(runtime.Definition.Id, runtime.State, cancellationToken)
+            : Task.CompletedTask;
 
     private void Publish(TaskRuntimeState runtime, bool force)
     {

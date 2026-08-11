@@ -154,6 +154,7 @@ public sealed class BatchCompressionViewModel : ObservableObject
         try
         {
             await _coordinator.CancelAsync(taskId).ConfigureAwait(true);
+            await _coordinator.WaitForCompletionAsync(taskId).ConfigureAwait(true);
             StatusText = "已请求安全取消；已完成输出会保留，临时文件会清理。";
         }
         catch (KeyNotFoundException)

@@ -14,6 +14,7 @@ public interface IBatchCompressionService
         Guid taskId,
         BatchCompressionRequest request,
         IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null,
+        Func<BatchCompressionItemResult, Task>? itemCompleted = null,
         CancellationToken cancellationToken = default);
 }
 

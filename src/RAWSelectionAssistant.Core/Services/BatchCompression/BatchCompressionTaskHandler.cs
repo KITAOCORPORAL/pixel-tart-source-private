@@ -5,7 +5,7 @@ namespace RAWSelectionAssistant.Core.Services.BatchCompression;
 
 public sealed class BatchCompressionTaskHandler(
     IBatchCompressionRequestStore requests,
-    IBatchCompressionService compression) : ITaskHandler
+    IBatchCompressionService compression) : ITaskHandler, ITaskTerminalStateObserver
 {
     public string TaskType => BatchCompressionDefaults.TaskType;
 
@@ -18,7 +18,17 @@ public sealed class BatchCompressionTaskHandler(
         var progress = new AwaitableProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value =>
             context.ReportProgressAsync(value.Progress, "批量压缩", null, value.Summary, CancellationToken.None));
         TaskExecutionResult executionResult;
-        var removeCheckpoint = false;
+        var completedThisRun = new List<BatchCompressionItemResult>();
+        async Task PersistItemCheckpointAsync(BatchCompressionItemResult item)
+        {
+            completedThisRun.RemoveAll(candidate => candidate.Sequence == item.Sequence);
+            completedThisRun.Add(item);
+            var itemAggregate = Merge(checkpoint, completedThisRun);
+            var durableCheckpoint = CreateCheckpoint(checkpoint.OriginalRequest, itemAggregate);
+            requests.Update(context.Definition.Id, durableCheckpoint);
+            await context.SafeBoundaryAsync("BatchCompression.ItemCommitted", durableCheckpoint.StableResults.Count,
+                cancellationToken: CancellationToken.None).ConfigureAwait(false);
+        }
         try
         {
             BatchCompressionResult current;
@@ -38,20 +48,16 @@ public sealed class BatchCompressionTaskHandler(
                     SourceFiles = checkpoint.PendingSourceFiles,
                     SourceSequences = sourceSequences
                 };
-                current = await compression.CompressAsync(context.Definition.Id, pendingRequest, progress, cancellationToken)
+                current = await compression.CompressAsync(context.Definition.Id, pendingRequest, progress,
+                        PersistItemCheckpointAsync, cancellationToken)
                     .ConfigureAwait(false);
             }
 
             var aggregate = Merge(checkpoint, current.Items);
-            var pendingSources = aggregate
-                .Where(item => string.IsNullOrWhiteSpace(item.DestinationPath) && item.State != BatchCompressionItemState.Completed)
-                .Select(item => item.SourcePath)
-                .ToArray();
-            var stable = aggregate.Where(item => !string.IsNullOrWhiteSpace(item.DestinationPath)).ToArray();
+            var durableCheckpoint = CreateCheckpoint(checkpoint.OriginalRequest, aggregate);
             var summary = Summarize(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
             var state = ResolveState(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
-            requests.Update(context.Definition.Id, new(checkpoint.OriginalRequest, pendingSources, stable));
-            removeCheckpoint = state == TaskLifecycleState.Completed;
+            requests.Update(context.Definition.Id, durableCheckpoint);
             executionResult = new(state, summary,
                 aggregate.FirstOrDefault(item => item.ErrorCode is not null)?.ErrorCode,
                 state == TaskLifecycleState.Completed
@@ -63,9 +69,25 @@ public sealed class BatchCompressionTaskHandler(
             await progress.DrainAsync().ConfigureAwait(false);
         }
 
-        if (removeCheckpoint && !cancellationToken.IsCancellationRequested)
-            requests.Remove(context.Definition.Id);
         return executionResult;
+    }
+
+    public Task OnTerminalStatePersistedAsync(Guid taskId, TaskLifecycleState terminalState,
+        CancellationToken cancellationToken = default)
+    {
+        if (terminalState == TaskLifecycleState.Completed) requests.Remove(taskId);
+        return Task.CompletedTask;
+    }
+
+    private static BatchCompressionRecoveryCheckpoint CreateCheckpoint(BatchCompressionRequest originalRequest,
+        IReadOnlyList<BatchCompressionItemResult> aggregate)
+    {
+        var pendingSources = aggregate
+            .Where(item => string.IsNullOrWhiteSpace(item.DestinationPath) && item.State != BatchCompressionItemState.Completed)
+            .Select(item => item.SourcePath)
+            .ToArray();
+        var stable = aggregate.Where(item => !string.IsNullOrWhiteSpace(item.DestinationPath)).ToArray();
+        return new(originalRequest, pendingSources, stable);
     }
 
     private static IReadOnlyList<BatchCompressionItemResult> Merge(
