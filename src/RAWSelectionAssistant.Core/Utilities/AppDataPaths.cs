@@ -29,6 +29,8 @@ public static class AppDataPaths
     public static string TutorialDirectory => Path.Combine(Root, "Tutorial");
     public static string LicenseDirectory => Path.Combine(Root, "License");
     public static string ProjectDirectory => Path.Combine(Root, "Projects");
+    public static string OnlineSelectionDirectory => Path.Combine(Root, "OnlineSelection");
+    public static string OnlineSelectionWorkspaceFile => Path.Combine(OnlineSelectionDirectory, "workspace.json");
     public static string DataDirectory => Path.Combine(Root, "Data");
     public static string DatabaseFile => Path.Combine(DataDirectory, "pixel-tart.db");
     public static string DatabaseBackupDirectory => Path.Combine(Root, "Backups", "Database");
@@ -65,6 +67,7 @@ public static class AppDataPaths
         Directory.CreateDirectory(TetherDisplaySettingsDirectory);
         Directory.CreateDirectory(LicenseDirectory);
         Directory.CreateDirectory(ProjectDirectory);
+        Directory.CreateDirectory(OnlineSelectionDirectory);
         Directory.CreateDirectory(DataDirectory);
         Directory.CreateDirectory(DatabaseBackupDirectory);
         Directory.CreateDirectory(MigrationBackupDirectory);

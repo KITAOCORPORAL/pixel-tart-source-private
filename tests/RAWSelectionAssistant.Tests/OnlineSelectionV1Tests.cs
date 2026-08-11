@@ -1,0 +1,249 @@
+using System.Text.Json;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.OnlineSelection;
+
+namespace RAWSelectionAssistant.Tests;
+
+[TestClass]
+public sealed class OnlineSelectionV1Tests
+{
+    [TestMethod]
+    public void DefaultProvider_IsNoneAndNeverPretendsConfigured()
+    {
+        var provider = OnlineSelectionProviderFactory.CreateDefault();
+        Assert.IsInstanceOfType<NoneOnlineSelectionProvider>(provider);
+        Assert.AreEqual(OnlineSelectionProviderKind.None, provider.Kind);
+        Assert.IsFalse(provider.IsConfigured);
+        Assert.AreEqual("未配置", provider.DisplayName);
+    }
+
+    [TestMethod]
+    public async Task NoneProvider_AllOperationsReturnExplicitNotConfigured()
+    {
+        var provider = new NoneOnlineSelectionProvider();
+        var project = Project();
+        var create = await provider.CreateProjectAsync(project);
+        var upload = await provider.UploadAssetAsync(project.Id, Asset(project.Id), new MemoryStream([1, 2, 3]));
+        var progress = await provider.GetSelectionProgressAsync(project.Id);
+        Assert.IsFalse(create.Success); Assert.AreEqual(OnlineSelectionErrorCodes.ProviderNotConfigured, create.ErrorCode);
+        Assert.IsFalse(upload.Success); Assert.AreEqual(OnlineSelectionErrorCodes.ProviderNotConfigured, upload.ErrorCode);
+        Assert.IsFalse(progress.Success); Assert.AreEqual("在线选片服务尚未配置。", progress.Message);
+    }
+
+    [TestMethod]
+    public void ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData()
+    {
+        var project = SelectionProjectFactory.CreateDraft("秋季婚礼", "林女士", 30);
+        Assert.AreEqual(32, project.PublicId.Length);
+        Assert.DoesNotContain("林", project.PublicId, StringComparison.Ordinal);
+        Assert.AreNotEqual(Guid.Empty, project.Id);
+    }
+
+    [TestMethod]
+    [DataRow(SelectionProjectStatus.Draft, "草稿")]
+    [DataRow(SelectionProjectStatus.Uploading, "上传中")]
+    [DataRow(SelectionProjectStatus.Ready, "待发布")]
+    [DataRow(SelectionProjectStatus.Published, "已发布")]
+    [DataRow(SelectionProjectStatus.Selecting, "客户选片中")]
+    [DataRow(SelectionProjectStatus.ClientConfirmed, "客户已确认")]
+    [DataRow(SelectionProjectStatus.Closed, "已关闭")]
+    [DataRow(SelectionProjectStatus.Archived, "已归档")]
+    public void ProjectStatus_HasChinesePresentation(SelectionProjectStatus status, string expected) =>
+        Assert.AreEqual(expected, SelectionDisplayText.ProjectStatus(status));
+
+    [TestMethod]
+    [DataRow(SelectionAssetStatus.LocalOnly, "仅本地")]
+    [DataRow(SelectionAssetStatus.Queued, "等待上传")]
+    [DataRow(SelectionAssetStatus.Uploading, "上传中")]
+    [DataRow(SelectionAssetStatus.Ready, "已就绪")]
+    [DataRow(SelectionAssetStatus.Failed, "上传失败")]
+    [DataRow(SelectionAssetStatus.DeletedCloudCopy, "云端副本已删除")]
+    public void AssetStatus_HasChinesePresentation(SelectionAssetStatus status, string expected) =>
+        Assert.AreEqual(expected, SelectionDisplayText.AssetStatus(status));
+
+    [TestMethod]
+    public void PublishGate_RequiresProjectRuleAndReadyAsset()
+    {
+        var project = Project();
+        var rule = SelectionRule.Default(project.Id, project.TargetCount);
+        var noAsset = SelectionProjectValidator.ValidateForPublish(project, rule, []);
+        var localOnly = SelectionProjectValidator.ValidateForPublish(project, rule, [Asset(project.Id)]);
+        var ready = SelectionProjectValidator.ValidateForPublish(project, rule, [Asset(project.Id) with { Status = SelectionAssetStatus.Ready }]);
+        Assert.AreEqual(OnlineSelectionErrorCodes.NoReadyAssets, noAsset.ErrorCode);
+        Assert.AreEqual(OnlineSelectionErrorCodes.NoReadyAssets, localOnly.ErrorCode);
+        Assert.IsTrue(ready.IsValid);
+    }
+
+    [TestMethod]
+    public void ClientProjection_HidesPathsCloudIdsAndOperationalState()
+    {
+        var asset = Asset(Guid.NewGuid()) with
+        {
+            OriginalFileName = @"C:\客户\婚礼\IMG_0012.JPG",
+            LocalSourcePath = @"C:\客户\婚礼\IMG_0012.JPG",
+            ProxyJpegPath = @"D:\cache\private.jpg",
+            CloudAssetId = "admin-object-key",
+            LastErrorCode = "private-error"
+        };
+        var client = SelectionPrivacyPolicy.ToClientAsset(asset, "https://cdn.invalid/signed");
+        Assert.AreEqual("IMG_0012.JPG", client.FileName);
+        var json = JsonSerializer.Serialize(client);
+        Assert.DoesNotContain("客户", json, StringComparison.Ordinal);
+        Assert.DoesNotContain("admin-object-key", json, StringComparison.Ordinal);
+        Assert.DoesNotContain("private-error", json, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
+    public async Task UploadQueue_OneFailureDoesNotBlockOtherAssets()
+    {
+        var project = Project();
+        var provider = new FakeOnlineSelectionProvider { FailUploadWhen = asset => asset.OriginalFileName.Contains("FAIL", StringComparison.Ordinal) };
+        var queue = new SelectionUploadQueue(provider);
+        var failed = Asset(project.Id, "FAIL.JPG") with { ProxyJpegPath = "FAIL_proxy.jpg" };
+        var ready = Asset(project.Id, "OK.JPG") with { ProxyJpegPath = "OK_proxy.jpg" };
+        queue.Enqueue(failed, _ => ValueTask.FromResult<Stream>(new MemoryStream([1, 2])));
+        queue.Enqueue(ready, _ => ValueTask.FromResult<Stream>(new MemoryStream([1, 2, 3, 4])));
+        await queue.RunAsync();
+        Assert.AreEqual(SelectionAssetStatus.Failed, queue.Items.Single(item => item.AssetId == failed.Id).State);
+        Assert.AreEqual(SelectionAssetStatus.Ready, queue.Items.Single(item => item.AssetId == ready.Id).State);
+    }
+
+    [TestMethod]
+    public async Task UploadQueue_PauseAndResumeHaveExplicitState()
+    {
+        var queue = new SelectionUploadQueue(new FakeOnlineSelectionProvider());
+        var asset = Asset(Guid.NewGuid()) with { ProxyJpegPath = "queued_proxy.jpg" };
+        queue.Enqueue(asset, _ => ValueTask.FromResult<Stream>(new MemoryStream([1])));
+        queue.Pause();
+        await queue.RunAsync();
+        Assert.AreEqual(SelectionUploadQueueState.Paused, queue.State);
+        Assert.AreEqual(SelectionAssetStatus.Queued, queue.Items[0].State);
+        await queue.ResumeAsync();
+        Assert.AreEqual(SelectionAssetStatus.Ready, queue.Items[0].State);
+    }
+
+    [TestMethod]
+    public async Task CloudDeleteContract_DoesNotTouchLocalFile()
+    {
+        using var temp = new TempDirectory();
+        var local = temp.CreateFile("IMG_0099.JPG", [1, 2, 3]);
+        var provider = new FakeOnlineSelectionProvider();
+        var project = Project();
+        var asset = Asset(project.Id) with { LocalSourcePath = local };
+        await provider.DeleteCloudAssetAsync(project.Id, asset.Id);
+        Assert.IsTrue(File.Exists(local));
+        CollectionAssert.AreEqual(new byte[] { 1, 2, 3 }, File.ReadAllBytes(local));
+    }
+
+    [TestMethod]
+    public async Task ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched()
+    {
+        using var temp = new TempDirectory();
+        var source = temp.CreateFile("IMG_0001.JPG", [1, 2, 3, 4]);
+        var output = temp.Combine("proxies"); Directory.CreateDirectory(output);
+        await File.WriteAllBytesAsync(Path.Combine(output, "IMG_0001_proxy.jpg"), [9]);
+        var service = new SelectionProxyJpegService(new PassThroughJpegProxyRenderer());
+        var result = await service.GenerateAsync(source, output);
+        Assert.AreEqual(SelectionProxyState.Ready, result.State);
+        Assert.EndsWith("IMG_0001_proxy_2.jpg", result.OutputPath, StringComparison.OrdinalIgnoreCase);
+        CollectionAssert.AreEqual(new byte[] { 1, 2, 3, 4 }, File.ReadAllBytes(source));
+        CollectionAssert.AreEqual(new byte[] { 9 }, File.ReadAllBytes(Path.Combine(output, "IMG_0001_proxy.jpg")));
+    }
+
+    [TestMethod]
+    public async Task ProxyJpeg_UnsupportedNeverCreatesOutput()
+    {
+        using var temp = new TempDirectory();
+        var source = temp.CreateFile("unsafe.psd", [1]);
+        var output = temp.Combine("proxies");
+        var result = await new SelectionProxyJpegService(new PassThroughJpegProxyRenderer()).GenerateAsync(source, output);
+        Assert.AreEqual(SelectionProxyState.Unsupported, result.State);
+        Assert.IsFalse(Directory.Exists(output));
+        Assert.IsTrue(File.Exists(source));
+    }
+
+    [TestMethod]
+    public async Task FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath()
+    {
+        using var temp = new TempDirectory();
+        var raw = temp.CreateFile("IMG_0012.ARW", [7, 8]);
+        var project = Project();
+        var result = new SelectionFinalResult(project.Id, DateTimeOffset.UtcNow,
+            [new(project.Id, Guid.NewGuid(), "IMG_0012.JPG", true, true, "精修皮肤", false)]);
+        var sync = await new SelectionResultSyncService(new FileNameNormalizer()).SynchronizeAsync(result, [raw], temp.Combine("archive"));
+        Assert.AreEqual(SelectionSyncState.Completed, sync.State);
+        Assert.AreEqual(raw, sync.Matches.Single().RawPath);
+        var archive = await File.ReadAllTextAsync(sync.ArchivePath!);
+        Assert.DoesNotContain(temp.Path, archive, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain(".ARW", archive, StringComparison.OrdinalIgnoreCase);
+        Assert.IsTrue(File.Exists(raw));
+    }
+
+    [TestMethod]
+    public async Task FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete()
+    {
+        using var temp = new TempDirectory();
+        var first = temp.CreateFile("A/IMG_0020.NEF", [1]);
+        var second = temp.CreateFile("B/IMG_0020.CR3", [2]);
+        var project = Project();
+        var result = new SelectionFinalResult(project.Id, DateTimeOffset.UtcNow,
+            [new(project.Id, Guid.NewGuid(), "IMG_0020.JPG", true, false, null, false)]);
+        var sync = await new SelectionResultSyncService(new FileNameNormalizer()).SynchronizeAsync(result, [first, second], temp.Combine("archive"));
+        Assert.AreEqual(SelectionSyncState.NeedsAttention, sync.State);
+        Assert.AreEqual(SelectionRawMatchStatus.Conflict, sync.Matches.Single().Status);
+        Assert.IsTrue(File.Exists(first)); Assert.IsTrue(File.Exists(second));
+    }
+
+    [TestMethod]
+    public async Task JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory()
+    {
+        using var temp = new TempDirectory();
+        var project = Project();
+        var snapshot = new SelectionWorkspaceSnapshot([project], [Asset(project.Id)], [SelectionRule.Default(project.Id, project.TargetCount)], []);
+        var store = new JsonSelectionWorkspaceStore(temp.Combine("selection", "workspace.json"));
+        await store.SaveAsync(snapshot);
+        var loaded = await new JsonSelectionWorkspaceStore(store.FilePath).LoadAsync();
+        Assert.HasCount(1, loaded.Projects);
+        Assert.AreEqual(project.Id, loaded.Projects[0].Id);
+    }
+
+    [TestMethod]
+    public void ProductionCoreContainsNoHttpLocalhostOrCredentials()
+    {
+        var root = FindRepoRoot();
+        var files = Directory.GetFiles(Path.Combine(root, "src", "RAWSelectionAssistant.Core", "Services", "OnlineSelection"), "*.cs", SearchOption.AllDirectories)
+            .Where(path => !path.Contains($"{Path.DirectorySeparatorChar}TestDoubles{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase));
+        var text = string.Join('\n', files.Select(File.ReadAllText));
+        Assert.DoesNotContain("localhost", text, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("HttpClient", text, StringComparison.Ordinal);
+        Assert.DoesNotContain("Bearer ", text, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("FakeOnlineSelectionProvider", text, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
+    public void FakeProvider_IsCompiledOnlyByTestProject()
+    {
+        var root = FindRepoRoot();
+        var productionFiles = Directory.GetFiles(Path.Combine(root, "src"), "*.cs", SearchOption.AllDirectories)
+            .Where(path => !path.Contains($"{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)
+                && !path.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase));
+        Assert.IsFalse(productionFiles.Any(path => File.ReadAllText(path).Contains("class FakeOnlineSelectionProvider", StringComparison.Ordinal)));
+        Assert.IsTrue(File.Exists(Path.Combine(root, "tests", "RAWSelectionAssistant.Tests", "FakeOnlineSelectionProvider.cs")));
+    }
+
+    private static SelectionProject Project() => SelectionProjectFactory.CreateDraft("城市婚礼", "客户", 30);
+
+    private static SelectionAsset Asset(Guid projectId, string name = "IMG_0012.JPG")
+    {
+        var now = DateTimeOffset.UtcNow;
+        return new(Guid.NewGuid(), projectId, name, Path.GetFullPath(name), null, SelectionAssetStatus.LocalOnly, 0, false, now, now);
+    }
+
+    private static string FindRepoRoot()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
+        return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
+    }
+}

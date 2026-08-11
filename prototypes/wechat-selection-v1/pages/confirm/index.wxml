@@ -1,0 +1,1 @@
+<view class="page confirm"><view class="heading">确认选片结果</view><view class="muted">最终选择 30 张，加选 2 张。确认后将按项目设置锁定结果。</view><view class="warning">确认前请再次检查收藏和备注。</view><button class="primary" bindtap="submit">确认并提交</button><button bindtap="back">返回调整</button></view>

@@ -1,0 +1,4 @@
+<view class="page gallery-page">
+  <view class="grid"><block wx:for="{{photos}}" wx:key="id"><view class="tile" bindtap="open" data-id="{{item.id}}"><view class="placeholder">{{item.name}}</view><view class="actions">♡　选择</view></view></block></view>
+  <view class="footer"><text>已选 {{selected}} / 30</text><button size="mini" class="primary" bindtap="selectedPage">查看已选</button></view>
+</view>

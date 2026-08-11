@@ -1,0 +1,1 @@
+Page({ data:{ selected:12, photos:[{id:'1',name:'IMG_0012.JPG'},{id:'2',name:'IMG_0145.JPG'},{id:'3',name:'IMG_0278.JPG'},{id:'4',name:'IMG_0310.JPG'}]}, open(e){wx.navigateTo({url:'/pages/photo/index?id='+e.currentTarget.dataset.id})}, selectedPage(){wx.navigateTo({url:'/pages/selected/index'})} });
