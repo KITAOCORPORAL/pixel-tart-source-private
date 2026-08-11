@@ -30,6 +30,7 @@ public partial class MainWindow
     private string? _automatedMetadataPath;
     private string _automatedScenarioName = string.Empty;
     private string _automatedThemeName = "Dark";
+    private string _automatedLayoutRootName = string.Empty;
     private Window? _automatedAuxiliaryWindow;
     private ContextMenu? _automatedContextMenu;
     private ToolTip? _automatedToolTip;
@@ -47,16 +48,14 @@ public partial class MainWindow
         _automatedMetadataPath = root.TryGetProperty("MetadataPath", out var metadataElement) ? metadataElement.GetString() : null;
         _automatedScenarioName = root.TryGetProperty("State", out var stateElement) ? stateElement.GetString() ?? string.Empty : string.Empty;
         _automatedThemeName = root.TryGetProperty("Theme", out var themeElement) ? themeElement.GetString() ?? "Dark" : "Dark";
+        _automatedLayoutRootName = root.TryGetProperty("LayoutRoot", out var layoutRootElement) ? layoutRootElement.GetString() ?? string.Empty : string.Empty;
     }
 
     private async Task<bool> PrepareAutomatedDpiAcceptanceStateAsync(string? state)
     {
         if (!_automatedDpiAcceptanceEnabled || _viewModel is null || string.IsNullOrWhiteSpace(state)) return false;
 
-        var demoDirectory = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "KitaoPhotoSelector.UiReview",
-            "DemoImages");
+        var demoDirectory = Path.Combine(AppDataPaths.Root, "DemoImages");
         var demoImages = Directory.Exists(demoDirectory)
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
@@ -73,11 +72,22 @@ public partial class MainWindow
             return true;
         }
 
-        if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
+        if (state.StartsWith("Calendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Booking", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("WorkCalendar");
             ApplyCalendarReviewState(state);
-            if (state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
+            if (state.StartsWith("Booking", StringComparison.OrdinalIgnoreCase))
+            {
+                var editor = await CreateBookingEditorReviewStateAsync(state, demoDirectory).ConfigureAwait(true);
+                var presentation = state switch
+                {
+                    "BookingQuickEdit" => BookingEditorPresentation.QuickEdit,
+                    "BookingFullPlanning" => BookingEditorPresentation.FullPlanning,
+                    _ => BookingEditorPresentation.QuickCreate
+                };
+                ViewModel_EditorRequested(this, new BookingEditorRequestEventArgs(editor, presentation));
+            }
+            else if (state.StartsWith("CreateShoot", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Documents", StringComparison.OrdinalIgnoreCase))
             {
                 var editor = await CreateBookingEditorReviewStateAsync(state, demoDirectory).ConfigureAwait(true);
                 _automatedAuxiliaryWindow = new Window
@@ -206,7 +216,44 @@ public partial class MainWindow
                 _viewModel.NavigateCommand.Execute("LocalSplit");
                 return true;
             case "CompressNoOverlap":
+            case "BatchCompression":
                 _viewModel.NavigateCommand.Execute("BatchCompress");
+                if (_viewModel.BatchCompressionPage is not null)
+                {
+                    _viewModel.BatchCompressionPage.AddFiles(demoImages);
+                    _viewModel.BatchCompressionPage.DestinationDirectory = Path.Combine(AppDataPaths.Root, "BatchOutput");
+                    Directory.CreateDirectory(_viewModel.BatchCompressionPage.DestinationDirectory);
+                }
+                return true;
+            case "RawToJpeg":
+                _viewModel.NavigateCommand.Execute("RawToJpeg");
+                if (_viewModel.RawToJpegPage is not null)
+                {
+                    var rawFiles = Directory.Exists(demoDirectory)
+                        ? Directory.GetFiles(demoDirectory).Where(path => RawToJpegDefaults.CandidateRawExtensions.Contains(Path.GetExtension(path))).ToArray()
+                        : [];
+                    _viewModel.RawToJpegPage.AddFiles(rawFiles);
+                    _viewModel.RawToJpegPage.DestinationDirectory = Path.Combine(AppDataPaths.Root, "RawOutput");
+                    Directory.CreateDirectory(_viewModel.RawToJpegPage.DestinationDirectory);
+                }
+                return true;
+            case "OnlineSelectionHome":
+                _viewModel.NavigateCommand.Execute("OnlineSelection");
+                await _viewModel.OnlineSelectionPage.RefreshAsync().ConfigureAwait(true);
+                return true;
+            case "OnlineSelectionProject":
+                _viewModel.NavigateCommand.Execute("OnlineSelection");
+                _viewModel.OnlineSelectionPage.ProjectName = "城市人像样片";
+                _viewModel.OnlineSelectionPage.ClientName = "演示客户";
+                _viewModel.OnlineSelectionPage.TargetCountText = "12";
+                await _viewModel.OnlineSelectionPage.CreateProjectAsync(demoImages.Take(6)).ConfigureAwait(true);
+                return true;
+            case "OnlineSelectionCreate":
+                _viewModel.NavigateCommand.Execute("OnlineSelection");
+                _viewModel.OnlineSelectionPage.ProjectName = "秋季服装目录";
+                _viewModel.OnlineSelectionPage.ClientName = "演示客户";
+                _viewModel.OnlineSelectionPage.TargetCountText = "30";
+                _viewModel.OnlineSelectionPage.CreateProjectCommand.Execute(null);
                 return true;
             case "WatermarkNoOverlap":
                 _viewModel.NavigateCommand.Execute("Watermark");
@@ -230,10 +277,7 @@ public partial class MainWindow
                 await _viewModel.OrganizePhotosPage.AddPathsAsync(demoImages);
                 if (state == "OrganizeManifest")
                 {
-                    _viewModel.OrganizePhotosPage.OutputPath = Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "KitaoPhotoSelector.UiReview",
-                        "OrganizeOutput");
+                    _viewModel.OrganizePhotosPage.OutputPath = Path.Combine(AppDataPaths.Root, "OrganizeOutput");
                     if (_viewModel.OrganizePhotosPage.PreviewPlanCommand.CanExecute(null))
                         _viewModel.OrganizePhotosPage.PreviewPlanCommand.Execute(null);
                 }
@@ -383,8 +427,13 @@ public partial class MainWindow
         var dialogs = PrivateField<IDialogService?>(calendar, "_dialogs");
         var editor = new ShootBookingEditorViewModel(bookingService, projectRepository, suggestedStart: DateTime.Today.AddHours(9), peopleService: people, documentWorkflow: documents, dialogs: dialogs);
         await editor.InitializeAsync().ConfigureAwait(true);
+        if (string.Equals(state, "BookingFullPlanning", StringComparison.OrdinalIgnoreCase) && editor.Documents is null)
+            throw new InvalidOperationException("BookingFullPlanning requires a live BookingDocumentsViewModel.");
         editor.Title = state switch
         {
+            "BookingQuickCreate" => "新建人像拍摄",
+            "BookingQuickEdit" => "城市人像样片",
+            "BookingFullPlanning" => "品牌秋季视觉拍摄",
             "CreateShootBasic" => string.Empty,
             "CreateShootTimeLocation" => "RC2 时间与地点验收",
             "CreateShootWeather" => "RC2 天气降级验收",
@@ -417,6 +466,7 @@ public partial class MainWindow
         }
         editor.CurrentStep = state switch
         {
+            "BookingFullPlanning" => 3,
             "CreateShootStep2" => 2,
             "CreateShootStep3" or "DocumentsImages" or "DocumentsPdf" or "DocumentsText" or "DocumentsUnsupported" => 3,
             "CreateShootStep4" or "CreateShootContacts" or "CreateShootStaff" => 4,
@@ -655,9 +705,10 @@ public partial class MainWindow
     private void ApplyToolboxPinReviewState(bool pinned)
     {
         if (_viewModel is null) return;
-        var ids = pinned ? new[] { "Workflow", "PhotoOrganize", "BatchCompress" } : Array.Empty<string>();
+        var ids = pinned ? ProductToolboxPolicy.DefaultPinnedTools.ToArray() : [];
         _viewModel.Settings.PinnedQuickTools = ids.ToList();
         _viewModel.Settings.QuickToolLayout.OrderedToolIds = ids.ToList();
+        _viewModel.Settings.ProductQuickToolLayout.OrderedToolIds = ids.ToList();
         foreach (var item in _viewModel.ToolboxItems)
             item.SetPinned(pinned && ids.Contains(item.Id, StringComparer.OrdinalIgnoreCase));
     }
@@ -742,13 +793,7 @@ public partial class MainWindow
 
     private void WriteAutomatedDpiMetadata(string outputPath, double logicalWidth, double logicalHeight)
     {
-        FrameworkElement layoutRoot = string.Equals(_automatedScenarioName, "SettingsDialog", StringComparison.OrdinalIgnoreCase)
-            ? SettingsModal
-            : string.Equals(_automatedScenarioName, "Settings", StringComparison.OrdinalIgnoreCase)
-                ? SettingsPageContent
-                : IsTetherColorReviewState(_automatedScenarioName)
-                    ? TetherMonitorView
-                    : RootGrid;
+        var layoutRoot = ResolveAutomatedLayoutRoot();
         var layout = InspectLayout(layoutRoot, layoutRoot.ActualWidth, layoutRoot.ActualHeight);
         var auxiliary = _automatedAuxiliaryWindow?.Content is FrameworkElement content
             ? InspectLayout(content, content.ActualWidth, content.ActualHeight)
@@ -758,6 +803,13 @@ public partial class MainWindow
             ? InspectMiniCalendarLayout()
             : null;
         var miniCalendarScope = _automatedScenarioName.StartsWith("WorkbenchCalendarHotfix", StringComparison.OrdinalIgnoreCase);
+        var pinnedToolboxItemIds = _viewModel?.PinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
+        var displayedPinnedToolboxItemIds = _viewModel?.DisplayedPinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
+        var workbenchQuickToolsScope = _automatedScenarioName.StartsWith("Workbench", StringComparison.OrdinalIgnoreCase);
+        var workbenchQuickToolsPassed = !workbenchQuickToolsScope ||
+            pinnedToolboxItemIds.SequenceEqual(ProductToolboxPolicy.DefaultPinnedTools, StringComparer.OrdinalIgnoreCase) &&
+            displayedPinnedToolboxItemIds.SequenceEqual(ProductToolboxPolicy.DefaultPinnedTools, StringComparer.OrdinalIgnoreCase) &&
+            !displayedPinnedToolboxItemIds.Contains(ToolId.Toolbox.ToString(), StringComparer.OrdinalIgnoreCase);
         var metadata = new
         {
             scenario = _automatedScenarioName,
@@ -770,21 +822,52 @@ public partial class MainWindow
             physicalViewport = new { width = _automatedPhysicalWidth, height = _automatedPhysicalHeight },
             logicalViewport = new { width = logicalWidth, height = logicalHeight },
             rootActual = new { width = RootGrid.ActualWidth, height = RootGrid.ActualHeight },
+            layoutRoot = layoutRoot.Name,
             screenshot = outputPath,
             sourceCommit = ResolveSourceCommit(),
+            pinnedToolboxItemIds,
+            displayedPinnedToolboxItemIds,
+            workbenchQuickToolsPassed,
+            workbenchOverview = _viewModel is null ? null : new
+            {
+                inProgress = _viewModel.WorkbenchInProgressCount,
+                awaitingConfirmation = _viewModel.WorkbenchAttentionCount,
+                awaitingReturn = _viewModel.WorkbenchAwaitingReturnCount,
+                completed = _viewModel.WorkbenchCompletedCount
+            },
             layout,
             miniCalendarInspection,
             auxiliaryLayout = auxiliary,
             themeInspection,
             passed = miniCalendarScope
-                ? (miniCalendarInspection?.Passed ?? false) && themeInspection.Passed
-                : layout.BlockingIssueCount == 0 && (miniCalendarInspection?.Passed ?? true) && (auxiliary?.BlockingIssueCount ?? 0) == 0 && themeInspection.Passed,
+                ? (miniCalendarInspection?.Passed ?? false) && themeInspection.Passed && workbenchQuickToolsPassed
+                : layout.BlockingIssueCount == 0 && (miniCalendarInspection?.Passed ?? true) && (auxiliary?.BlockingIssueCount ?? 0) == 0 && themeInspection.Passed && workbenchQuickToolsPassed,
             generatedAt = DateTimeOffset.Now
         };
         var metadataPath = string.IsNullOrWhiteSpace(_automatedMetadataPath) ? outputPath + ".json" : _automatedMetadataPath;
         var directory = Path.GetDirectoryName(metadataPath);
         if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
         File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata, new JsonSerializerOptions { WriteIndented = true }));
+    }
+
+    private FrameworkElement ResolveAutomatedLayoutRoot()
+    {
+        FrameworkElement? requestedRoot = _automatedLayoutRootName switch
+        {
+            nameof(BookingEditorModalSurface) => BookingEditorModalSurface,
+            nameof(BookingEditorDrawerSurface) => BookingEditorDrawerSurface,
+            nameof(BookingEditorPlanningSurface) => BookingEditorPlanningSurface,
+            _ => null
+        };
+        if (requestedRoot is { IsVisible: true, ActualWidth: > 0, ActualHeight: > 0 }) return requestedRoot;
+
+        return string.Equals(_automatedScenarioName, "SettingsDialog", StringComparison.OrdinalIgnoreCase)
+            ? SettingsModal
+            : string.Equals(_automatedScenarioName, "Settings", StringComparison.OrdinalIgnoreCase)
+                ? SettingsPageContent
+                : IsTetherColorReviewState(_automatedScenarioName)
+                    ? TetherMonitorView
+                    : RootGrid;
     }
 
     private MiniCalendarLayoutInspection InspectMiniCalendarLayout()
@@ -862,7 +945,7 @@ public partial class MainWindow
         root.UpdateLayout();
         var elements = FindVisualChildren<FrameworkElement>(root)
             .Prepend(root)
-            .Where(element => element.IsVisible && element.ActualWidth > 0 && element.ActualHeight > 0)
+            .Where(element => HasVisibleAncestorChain(element, root) && element.ActualWidth > 0 && element.ActualHeight > 0)
             .Distinct()
             .ToArray();
         var bounds = new List<ElementBounds>();
@@ -897,7 +980,7 @@ public partial class MainWindow
                 whiteSurface.Add(identity);
         }
 
-        foreach (var interactive in FindVisualChildren<FrameworkElement>(root).Where(IsInteractive).Where(element => element.IsVisible && element.TemplatedParent is null))
+        foreach (var interactive in FindVisualChildren<FrameworkElement>(root).Where(IsInteractive).Where(element => HasVisibleAncestorChain(element, root) && element.TemplatedParent is null))
         {
             if (interactive.ActualWidth < 1 || interactive.ActualHeight < 1) zeroSized.Add(ElementIdentity(interactive));
         }
@@ -956,7 +1039,7 @@ public partial class MainWindow
             nameof(DataGridColumnHeader), nameof(ContextMenu), nameof(MenuItem), nameof(Popup), nameof(TabControl), nameof(ToolTip), nameof(ProgressBar)
         ];
         var visibleTypes = FindVisualChildren<FrameworkElement>(RootGrid)
-            .Where(element => element.IsVisible)
+            .Where(element => HasVisibleAncestorChain(element, RootGrid))
             .GroupBy(element => element.GetType().Name)
             .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
         var renderedTypes = controlTypes.ToDictionary(type => type, type => visibleTypes.TryGetValue(type, out var count) ? count : 0);
@@ -1030,8 +1113,19 @@ public partial class MainWindow
         return false;
     }
 
+    private static bool HasVisibleAncestorChain(FrameworkElement element, FrameworkElement root)
+    {
+        for (DependencyObject? current = element; current is not null; current = VisualTreeHelper.GetParent(current))
+        {
+            if (current is UIElement uiElement && uiElement.Visibility != Visibility.Visible) return false;
+            if (ReferenceEquals(current, root)) return true;
+        }
+        return false;
+    }
+
     private static ElementBounds? TryGetElementBounds(FrameworkElement element, FrameworkElement root)
     {
+        if (!HasVisibleAncestorChain(element, root)) return null;
         try
         {
             var origin = element.TransformToAncestor(root).Transform(new Point(0, 0));

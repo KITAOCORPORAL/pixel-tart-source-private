@@ -7,6 +7,7 @@ using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tethering;
+using RAWSelectionAssistant.Core.Services.OnlineSelection;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
@@ -149,6 +150,13 @@ public partial class App : Application
                 dialogService,
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService);
+            var onlineSelectionPage = new OnlineSelectionViewModel(
+                OnlineSelectionProviderFactory.CreateDefault(),
+                new JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile),
+                new SelectionResultSyncService(normalizer),
+                _compositionRoot.SelectionProxyJpegService,
+                Path.Combine(AppDataPaths.OnlineSelectionDirectory, "Proxies"),
+                dialogService);
 
             _mainViewModel = new MainViewModel(
                 normalizer,
@@ -178,7 +186,10 @@ public partial class App : Application
                 reminderNotifications,
                 _weatherState,
                 tetherPage,
-                financePage);
+                financePage,
+                onlineSelectionPage: onlineSelectionPage,
+                rawToJpegPage: new RawToJpegViewModel(_compositionRoot.RawToJpegCoordinator, dialogService),
+                batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService));
 
             calendarViewModel.FinanceRequested += async (_, request) =>
             {

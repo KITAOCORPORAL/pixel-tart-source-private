@@ -84,6 +84,10 @@ public sealed class SettingsService
         settings.QuickToolLayout.OrderedToolIds = QuickToolsService.Normalize(
             settings.QuickToolLayout.OrderedToolIds.Count > 0 ? settings.QuickToolLayout.OrderedToolIds : settings.PinnedQuickTools);
         settings.PinnedQuickTools = settings.QuickToolLayout.OrderedToolIds.ToList();
+        settings.ProductQuickToolLayout ??= new ProductQuickToolLayout();
+        settings.ProductQuickToolLayout.SchemaVersion = ProductQuickToolLayout.CurrentSchemaVersion;
+        settings.ProductQuickToolLayout.OrderedToolIds = ProductToolboxPolicy.Normalize(
+            settings.ProductQuickToolLayout.OrderedToolIds);
         settings.Appearance.CustomAccentColor = NormalizeAccent(settings.Appearance.CustomAccentColor);
         if (!Enum.IsDefined(settings.Appearance.Theme)) settings.Appearance.Theme = ThemeMode.System;
         if (!Enum.IsDefined(settings.Appearance.Accent)) settings.Appearance.Accent = AccentPreset.KitaoBlue;

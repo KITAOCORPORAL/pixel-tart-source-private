@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
@@ -35,6 +36,7 @@ public partial class MainWindow : Window
     private Point _quickDragStart;
     private string? _quickDraggedId;
     private Button? _quickInsertionTarget;
+    private ShootBookingEditorViewModel? _activeBookingEditor;
 #if UI_REVIEW_BUILD
     private DispatcherTimer? _uiReviewTimer;
     private string _uiReviewStateContent = string.Empty;
@@ -147,6 +149,12 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object? sender, CancelEventArgs e)
     {
+        if (!TryCloseBookingEditorVisual())
+        {
+            e.Cancel = true;
+            return;
+        }
+
         if (DataContext is MainViewModel viewModel)
         {
             viewModel.CaptureWindowState(ActualWidth, ActualHeight, Left, Top);
@@ -160,6 +168,7 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
             _viewModel.PageChanged -= ViewModel_PageChanged;
+            _viewModel.WorkCalendarPage.EditorRequested -= ViewModel_EditorRequested;
         }
         _viewModel = e.NewValue as MainViewModel;
         if (_viewModel is not null)
@@ -167,8 +176,68 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested += ViewModel_CloseRequested;
             _viewModel.PageChanged += ViewModel_PageChanged;
+            _viewModel.WorkCalendarPage.EditorRequested += ViewModel_EditorRequested;
         }
         ScheduleTutorialLayout();
+    }
+
+    private void ViewModel_EditorRequested(object? sender, BookingEditorRequestEventArgs e)
+    {
+        if (!TryCloseBookingEditorVisual()) return;
+
+        _activeBookingEditor = e.Editor;
+        _activeBookingEditor.CloseRequested += ActiveBookingEditor_CloseRequested;
+        QuickBookingEditorHost.DataContext = e.Editor;
+        DrawerBookingEditorHost.DataContext = e.Editor;
+        PlanningBookingEditorHost.DataContext = e.Editor;
+
+        switch (e.Presentation)
+        {
+            case BookingEditorPresentation.QuickEdit:
+                BookingEditorDrawerSurface.Visibility = Visibility.Visible;
+                DrawerBookingEditorHost.Focus();
+                break;
+            case BookingEditorPresentation.FullPlanning:
+                BookingEditorPlanningSurface.Visibility = Visibility.Visible;
+                PlanningBookingEditorHost.Focus();
+                break;
+            default:
+                BookingEditorModalSurface.Visibility = Visibility.Visible;
+                QuickBookingEditorHost.Focus();
+                break;
+        }
+
+        BookingEditorOverlay.Visibility = Visibility.Visible;
+    }
+
+    private void ActiveBookingEditor_CloseRequested(object? sender, EventArgs e)
+    {
+        TryCloseBookingEditorVisual();
+    }
+
+    private bool TryCloseBookingEditorVisual()
+    {
+        if (_activeBookingEditor is not null && !_activeBookingEditor.WasSaved && !_activeBookingEditor.ConfirmDiscardChanges())
+            return false;
+
+        CloseBookingEditorVisual();
+        return true;
+    }
+
+    private void CloseBookingEditorVisual()
+    {
+        if (_activeBookingEditor is not null)
+        {
+            _activeBookingEditor.CloseRequested -= ActiveBookingEditor_CloseRequested;
+        }
+        _activeBookingEditor = null;
+        QuickBookingEditorHost.DataContext = null;
+        DrawerBookingEditorHost.DataContext = null;
+        PlanningBookingEditorHost.DataContext = null;
+        BookingEditorModalSurface.Visibility = Visibility.Collapsed;
+        BookingEditorPlanningSurface.Visibility = Visibility.Collapsed;
+        BookingEditorDrawerSurface.Visibility = Visibility.Collapsed;
+        BookingEditorOverlay.Visibility = Visibility.Collapsed;
     }
 
     private void ViewModel_PageChanged(object? sender, PageChangedEventArgs e)
@@ -205,7 +274,7 @@ public partial class MainWindow : Window
         StartUiReviewController();
 #endif
         _viewModel?.UpdateSidebarForWidth(ActualWidth);
-        _viewModel?.SetQuickToolsCompact(ActualWidth <= 1280);
+        _viewModel?.SetQuickToolsCompact(ActualWidth < 1180);
         UpdateWorkbenchResponsiveLayout();
         ScheduleTutorialLayout();
         if (_viewModel?.NeedsUpgradeTutorialOffer == true)
@@ -233,6 +302,12 @@ public partial class MainWindow : Window
         if (e.Key == Key.Escape && _viewModel?.IsSettingsModalOpen == true)
         {
             _viewModel.IsSettingsModalOpen = false;
+            e.Handled = true;
+            return;
+        }
+        if (e.Key == Key.Escape && BookingEditorOverlay.Visibility == Visibility.Visible)
+        {
+            _activeBookingEditor?.CancelCommand.Execute(null);
             e.Handled = true;
             return;
         }
@@ -468,13 +543,13 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         var compact = ActualWidth < 1350;
-        var quickOverflow = ActualWidth <= 1280;
+        var quickOverflow = ActualWidth < 1180;
         var shortWorkbench = ActualHeight < 820;
         var veryShortWorkbench = ActualHeight < 760;
         var taskCenterWidth = ActualWidth >= 1920 ? 360d : 320d;
         _viewModel?.SetQuickToolsCompact(quickOverflow);
         QuickToolsOverflowButton.Visibility = quickOverflow ? Visibility.Visible : Visibility.Collapsed;
-        Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 2 : 3);
+        Grid.SetColumnSpan(PinnedQuickToolsList, quickOverflow ? 3 : 4);
         WorkbenchTaskColumn.Width = compact ? new GridLength(0) : new GridLength(taskCenterWidth);
         TaskCenterPanel.Visibility = compact && !_taskCenterDrawerOpen ? Visibility.Collapsed : Visibility.Visible;
         Grid.SetColumn(TaskCenterPanel, compact ? 0 : 1);
@@ -512,10 +587,7 @@ public partial class MainWindow : Window
 
     private async void ApplyUiReviewState()
     {
-        var path = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "KitaoPhotoSelector.UiReview",
-            "ui-review-state.json");
+        var path = System.IO.Path.Combine(AppDataPaths.Root, "ui-review-state.json");
         if (!System.IO.File.Exists(path)) return;
 
         string content;
@@ -596,13 +668,13 @@ public partial class MainWindow : Window
         else if (string.Equals(reviewState, "OrganizePhotos", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("PhotoGrouping");
-            var demoDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.UiReview", "DemoImages");
+            var demoDirectory = System.IO.Path.Combine(AppDataPaths.Root, "DemoImages");
             await _viewModel.OrganizePhotosPage.AddPathsAsync(System.IO.Directory.Exists(demoDirectory) ? System.IO.Directory.GetFiles(demoDirectory, "*.png") : []);
         }
         else if (string.Equals(reviewState, "Collage", StringComparison.OrdinalIgnoreCase))
         {
             _viewModel.NavigateCommand.Execute("Collage");
-            var demoDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.UiReview", "DemoImages");
+            var demoDirectory = System.IO.Path.Combine(AppDataPaths.Root, "DemoImages");
             _viewModel.CollagePage.AddPaths(System.IO.Directory.Exists(demoDirectory) ? System.IO.Directory.GetFiles(demoDirectory, "*.png") : []);
             _viewModel.CollagePage.SelectedTemplate = CollageTemplateCatalog.Get("4-grid");
         }
@@ -634,7 +706,7 @@ public partial class MainWindow : Window
         {
             _viewModel.SetQuickToolsCompact(true);
             QuickToolsOverflowButton.Visibility = Visibility.Visible;
-            Grid.SetColumnSpan(PinnedQuickToolsList, 2);
+            Grid.SetColumnSpan(PinnedQuickToolsList, 3);
             QuickToolsOverflowPopup.IsOpen = true;
         }
         if (string.Equals(reviewState, "Feedback", StringComparison.OrdinalIgnoreCase))
