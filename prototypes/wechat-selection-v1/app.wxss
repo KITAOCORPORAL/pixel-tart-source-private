@@ -1,0 +1,6 @@
+page { background:#0D0F12; color:#F2F4F6; font-family:"Microsoft YaHei UI",sans-serif; }
+.page { min-height:100vh; padding:32rpx; box-sizing:border-box; }
+.muted { color:#B2B8C0; font-size:24rpx; }
+.primary { background:#18A88C; color:#07110F; border-radius:12rpx; font-weight:600; }
+.photo { width:100%; background:#171B20; display:block; }
+.footer { position:fixed; left:0; right:0; bottom:0; padding:24rpx 32rpx; background:#121519; border-top:1rpx solid #292F37; }
