@@ -1,0 +1,27 @@
+{
+  "baseline": 1787,
+  "finalPerConfiguration": 1922,
+  "debug": {
+    "core": 1098,
+    "wpf": 723,
+    "dpi": 101,
+    "passed": 1922,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "release": {
+    "core": 1098,
+    "wpf": 723,
+    "dpi": 101,
+    "passed": 1922,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "dpiPercentages": [100, 125, 150, 175, 200],
+  "trxDirectory": "artifacts/test-results/product-redesign-final",
+  "note": "The DPI project uses its normal output path; the first x64 --no-build invocation was corrected before the final 101/101 gates. No product test failed."
+}

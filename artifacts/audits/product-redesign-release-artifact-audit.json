@@ -1,0 +1,162 @@
+{
+  "auditName": "Pixel Tart 2.3.x product redesign release artifact audit",
+  "generatedAt": "2026-08-11T15:47:29.7214180+08:00",
+  "readOnlyScope": true,
+  "passed": true,
+  "blockers": [],
+  "git": {
+    "repository": "D:\\AI AGENT\\RAWSelectionAssistant",
+    "branch": "feature/pixel-tart-product-redesign",
+    "head": "31f0798235b9970d7dc605ae4a623bb6816ef5ab",
+    "headSubject": "docs(design): track A-v2 page masters",
+    "workingTreeClean": false,
+    "knownChanges": [
+      "M installer/RAWSelectionAssistant.iss"
+    ],
+    "changeNote": "Candidate-only installer configuration is present as a 19-line additive change; this audit did not modify tracked product files."
+  },
+  "publish": {
+    "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.3.0\\publish\\product-redesign-rc1-win-x64",
+    "exists": true,
+    "fileCount": 280,
+    "totalBytes": 172099342,
+    "mainExecutable": {
+      "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.3.0\\publish\\product-redesign-rc1-win-x64\\KitaoPhotoSelector.exe",
+      "length": 179200,
+      "sha256": "9B0D2E77C2D2E4B47FB7BE93D30549B6E41C5D1CCC866183C66032E2653901",
+      "productVersion": "2.3.0",
+      "fileVersion": "2.3.0.0",
+      "peOptionalHeader": "PE32+",
+      "subsystem": 2,
+      "subsystemName": "WindowsGui",
+      "winExe": true
+    },
+    "mainAssembly": {
+      "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.3.0\\publish\\product-redesign-rc1-win-x64\\KitaoPhotoSelector.dll",
+      "length": 1525760,
+      "sha256": "16D6E4264EFEC8115CE42DD8196B11F0B718219FCD4690832ADAAC816219E0D7"
+    },
+    "licenseProvider": {
+      "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.3.0\\publish\\product-redesign-rc1-win-x64\\appsettings.license.json",
+      "provider": "None",
+      "productId": 0,
+      "publicKeyEmpty": true,
+      "publicValidationTokenEmpty": true,
+      "purchaseUrlEmpty": true,
+      "passed": true
+    },
+    "contentSafety": {
+      "testAssemblyOrAdapterNameMatches": 0,
+      "pdbFiles": 0,
+      "databaseFiles": 0,
+      "logFiles": 0,
+      "imageFiles": 0,
+      "rawFiles": 0,
+      "userDataSuspectFiles": 0,
+      "vendorSdkFileNameMatches": 0,
+      "productOwnedLocalhostHits": 0,
+      "productOwnedLoopbackHits": 0,
+      "productOwnedFakeCameraHits": 0,
+      "productOwnedMockCameraHits": 0,
+      "productOwnedVendorSdkStringHits": 0,
+      "passed": true,
+      "notes": [
+        "A case-insensitive all-binary scan finds the character sequence localhost once inside Microsoft.Windows.SDK.NET.dll as the framework metadata identifier localHostName, not as a URL or endpoint.",
+        "Product-owned executables, assemblies and configuration contain no localhost, 127.0.0.1, FakeCamera, MockCamera or vendor-SDK markers.",
+        "Sdcb.LibRaw and LibRaw are the declared open-source RAW codec dependency and are not camera-vendor SDKs."
+      ]
+    }
+  },
+  "thirdPartyLicenses": {
+    "requiredFileCount": 9,
+    "allPresent": true,
+    "files": [
+      { "path": "THIRD-PARTY-NOTICES.md", "length": 2216, "sha256": "8312E995C25E00E947CD77B7B9EF22DC52F2C8973EFFD7C5C9B5153E8FD0D2C7" },
+      { "path": "Licenses\\libjpeg-turbo-2.1.3-LICENSE.md.txt", "length": 5214, "sha256": "A6CD615C6459C5B4F4F1905F148FAA6D7D1BE7C96D303F4ACB6EC767F0315BC4" },
+      { "path": "Licenses\\libjpeg-turbo-2.1.3-README.ijg.txt", "length": 12733, "sha256": "D225E9CB469B606D179F1B8BD8B852EA0A72290955A8F92CF8696DB89168A767" },
+      { "path": "Licenses\\LibRaw-0.21.1-COPYRIGHT.txt", "length": 1154, "sha256": "79B9C232F41EE29A06B6004086D8979571DA37E7B4911EA83D41FE82E9DEF774" },
+      { "path": "Licenses\\LibRaw-0.21.1-LICENSE.CDDL.txt", "length": 16907, "sha256": "9F9D89018ED97D42C0AC424EA3DFAFA815D00ADAFCF534CF11B39C6680BABA57" },
+      { "path": "Licenses\\LibRaw-0.21.1-LICENSE.LGPL.txt", "length": 24390, "sha256": "C1D75C15DB4409BCBB182180D582F410A263DC9A631CD546B256E95F1DA42165" },
+      { "path": "Licenses\\Little-CMS-2.12-COPYING.txt", "length": 1084, "sha256": "2037BE8816E9D7D991FA5FA60D2A59B541136FB9CDBC015DC823C09AF403C265" },
+      { "path": "Licenses\\Sdcb.LibRaw-0.21.1.7-MIT.txt", "length": 1070, "sha256": "45651D6AF45C674B39DE8FB59513CF032C85ED1512EE57F523CC5B950F805066" },
+      { "path": "Licenses\\zlib-1.2.11-README-LICENSE.txt", "length": 5188, "sha256": "91EE3819372FB9A1B9B8CA056962D47691180112642073293D7D7F20303AF3A2" }
+    ]
+  },
+  "candidateInstaller": {
+    "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\releases\\2.3.0\\installer\\像素蛋挞_Setup_2.3.0_ProductRedesign_RC1_x64.exe",
+    "exists": true,
+    "length": 50677426,
+    "sha256": "D8A997A463D64BB1D44D3ACFFBDD4A7213DC4A1EDD91FF404CBA4711C2804660",
+    "setupProductVersion": "2.3.0",
+    "description": "像素蛋挞 产品重构候选 Setup"
+  },
+  "previousInstallers": {
+    "expectedCount": 10,
+    "actualPreviousCount": 10,
+    "allUnchanged": true,
+    "files": [
+      { "name": "像素蛋挞_Setup_2.3.0_RC1_x64.exe", "length": 49932887, "sha256": "7C9AD2689BBCC5960D7B20396D8951D63F012A615447FEAE453BC6CABD588A2C", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC2_x64.exe", "length": 49933785, "sha256": "E26050081A9D1AC45D5A4B6B7B43FFE0F835B1898350CCA85DF53B1F33EBFA91", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC3_x64.exe", "length": 49989112, "sha256": "B3AD224E75394C0219FFC583A8965DE39BF38176ED1AE61BC185D60C8A225876", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC4_x64.exe", "length": 49994050, "sha256": "A0DB75F7A85C2AE45C861492E14F6954D9C72E47C436BAE59999CFF531F1CA6C", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_x64.exe", "length": 50012219, "sha256": "BEDA28D09EC439764A037A624EB872C83EEB452DF9BF8F1D968FF0E37C301FAD", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_LayoutFix1_x64.exe", "length": 50040747, "sha256": "B64F989522BD3CD1D895E4D77C5979C040D92DCF8E87188F7C04E500D201563E", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_LayoutFix2_x64.exe", "length": 49996259, "sha256": "83B8AF6E9911666F43A45A04611F01499A79A93FC9BB2DD1EAB8BC393C033004", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_RuntimeUI1_x64.exe", "length": 50011955, "sha256": "CFE0E3C46DE5AAC90F430AC98A0706827846992261DA1DCE8BEE70A766409329", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_CoreHotfix1_x64.exe", "length": 50011268, "sha256": "BB651C506F3188E6077980094129BC8E8A3E51F077E5D8C9DD2313F39994CD84", "unchanged": true },
+      { "name": "像素蛋挞_Setup_2.3.0_RC5_CoreHotfix2_x64.exe", "length": 50019833, "sha256": "B34F45E58D25ED876D35E53E7FB1150465153589C564ADD8837D631942437F4F", "unchanged": true }
+    ]
+  },
+  "isolatedInstall": {
+    "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\installed-acceptance\\product-redesign-rc1",
+    "exists": true,
+    "fileCount": 282,
+    "totalBytes": 176553251,
+    "payloadFileCountExcludingUninstaller": 280,
+    "payloadByteForByteMatchesPublish": true,
+    "missingPayloadFiles": [],
+    "extraPayloadFiles": [],
+    "changedPayloadFiles": [],
+    "mainExecutable": {
+      "productVersion": "2.3.0",
+      "fileVersion": "2.3.0.0",
+      "length": 179200
+    },
+    "embeddedUserData": {
+      "pdbFiles": 0,
+      "databaseFiles": 0,
+      "logFiles": 0,
+      "imageFiles": 0,
+      "rawFiles": 0
+    }
+  },
+  "isolatedRuntimeDatabase": {
+    "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\diagnostics\\2.3.0\\product-redesign-rc1\\runtime\\Data\\pixel-tart.db",
+    "connectionMode": "ReadOnly",
+    "schemaVersion": 4,
+    "integrityCheck": "ok",
+    "tableCount": 24,
+    "passed": true,
+    "userLocalAppDataAccessed": false
+  },
+  "installationEvidence": {
+    "installerLog": {
+      "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\diagnostics\\2.3.0\\product-redesign-rc1\\installer.log",
+      "length": 113458,
+      "installationSucceeded": true,
+      "restartRequired": false,
+      "candidateUninstallKeyCreated": true
+    },
+    "applicationLog": {
+      "path": "D:\\AI AGENT\\RAWSelectionAssistant\\artifacts\\diagnostics\\2.3.0\\product-redesign-rc1\\runtime\\Logs\\app-20260811.log",
+      "length": 342,
+      "launchEntries": 3,
+      "gracefulExitEntries": 3,
+      "errorOrFatalEntries": 0,
+      "exceptionMentions": 0,
+      "firstTimestamp": "2026-08-11 15:35:36.538",
+      "lastTimestamp": "2026-08-11 15:39:22.565",
+      "passed": true
+    }
+  }
+}

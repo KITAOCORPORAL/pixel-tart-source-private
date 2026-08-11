@@ -11,6 +11,12 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\corehotfix2-win-x64"
 #endif
+#ifdef ProductRedesignCandidate
+  #undef MyAppName
+  #define MyAppName "像素蛋挞 产品重构候选"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\product-redesign-rc1-win-x64"
+#endif
 #ifdef TestBuild
   #undef MyAppName
   #define MyAppName "像素蛋挞 验收测试"
@@ -21,6 +27,9 @@
 #endif
 
 [Setup]
+#ifdef ProductRedesignCandidate
+AppId={{9E737D34-58DB-4B4D-91DF-C7B8A96D5F20}
+#else
 #ifdef TestBuild
 AppId={{8D3538F8-CB93-4812-8722-A21D9B3204B2}
 #else
@@ -30,10 +39,14 @@ AppId={{F2A566DF-83FD-4D9E-B6B6-3A11F0B77B5A}
 AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef ProductRedesignCandidate
+DefaultDirName={autopf}\像素蛋挞_ProductRedesign_RC1
+#else
 #ifdef TestBuild
 DefaultDirName={autopf}\像素蛋挞_验收测试
 #else
@@ -43,10 +56,15 @@ DefaultDirName={autopf}\像素蛋挞_RC5_隔离验收
 DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
+#endif
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef ProductRedesignCandidate
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_ProductRedesign_RC1_x64
+#else
 #ifdef IsolatedRuntimeTest
 OutputDir=..\artifacts\ui-review\2.3.0-rc5\runtime-installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_IsolatedAcceptance_x64
@@ -81,6 +99,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
 #else
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
+#endif
 #endif
 #endif
 #endif

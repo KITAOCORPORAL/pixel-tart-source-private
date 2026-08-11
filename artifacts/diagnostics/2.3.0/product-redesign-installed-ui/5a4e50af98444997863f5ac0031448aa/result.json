@@ -1,0 +1,139 @@
+﻿{
+    "Passed":  false,
+    "RunId":  "5a4e50af98444997863f5ac0031448aa",
+    "IsolationMethod":  "Win32 CreateDesktopW + PIXEL_TART_ISOLATED_RUNTIME",
+    "CurrentDesktopOperated":  false,
+    "InstalledBinarySha256":  "9B0D2E77C2D2E4B47FB7BE93D30549B6C5E41C5D1CCC866183C66032E2653901",
+    "Checks":  {
+                   "RuntimeIsolation":  true,
+                   "InstalledCandidateStarted":  true,
+                   "Workbench":  true,
+                   "WorkbenchMiniCalendar":  true,
+                   "QuickCreate":  true,
+                   "FullPlanning":  true,
+                   "QuickEdit":  true,
+                   "Calendar":  true,
+                   "CalendarContextMenu":  false,
+                   "ClosedDay":  false,
+                   "ClosedDayPersisted":  false,
+                   "Toolbox":  true,
+                   "PinRoundTrip":  true,
+                   "RawTool":  true,
+                   "BatchCompressionTool":  true,
+                   "OrganizeTool":  true,
+                   "CollageTool":  true,
+                   "Finance":  true,
+                   "OnlineSelection":  true,
+                   "ProviderNone":  true,
+                   "SelectionProjectCreated":  false,
+                   "SelectionProxyReady":  true,
+                   "SelectionFourTabs":  false,
+                   "SelectionResultSync":  false,
+                   "Tether":  true,
+                   "GracefulExit":  true
+               },
+    "Steps":  [
+                  {
+                      "Name":  "01-workbench",
+                      "Passed":  true,
+                      "DurationMs":  3420,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "02-booking-workflow",
+                      "Passed":  true,
+                      "DurationMs":  30539,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "03-calendar-close-day",
+                      "Passed":  false,
+                      "DurationMs":  5356,
+                      "Error":  "Calendar day right-click could not be sent."
+                  },
+                  {
+                      "Name":  "04-toolbox-pin-and-tools",
+                      "Passed":  true,
+                      "DurationMs":  31294,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "05-finance",
+                      "Passed":  true,
+                      "DurationMs":  12887,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "06-online-selection-create",
+                      "Passed":  false,
+                      "DurationMs":  39362,
+                      "Error":  "Native dialog remained open after its action was invoked."
+                  },
+                  {
+                      "Name":  "07-tether",
+                      "Passed":  true,
+                      "DurationMs":  5017,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "08-selection-proxy-fixture",
+                      "Passed":  true,
+                      "DurationMs":  22,
+                      "Error":  ""
+                  },
+                  {
+                      "Name":  "09-restart-persistence-and-sync",
+                      "Passed":  false,
+                      "DurationMs":  37173,
+                      "Error":  "Required UI control was not found."
+                  }
+              ],
+    "InstalledUiVerified":  {
+                                "RuntimeIsolation":  true,
+                                "InstalledCandidateStarted":  true,
+                                "Workbench":  true,
+                                "WorkbenchMiniCalendar":  true,
+                                "QuickCreate":  true,
+                                "FullPlanning":  true,
+                                "QuickEdit":  true,
+                                "Calendar":  true,
+                                "CalendarContextMenu":  false,
+                                "ClosedDay":  false,
+                                "ClosedDayPersisted":  false,
+                                "Toolbox":  true,
+                                "PinRoundTrip":  true,
+                                "RawTool":  true,
+                                "BatchCompressionTool":  true,
+                                "OrganizeTool":  true,
+                                "CollageTool":  true,
+                                "Finance":  true,
+                                "OnlineSelection":  true,
+                                "ProviderNone":  true,
+                                "SelectionProjectCreated":  false,
+                                "SelectionProxyReady":  true,
+                                "SelectionFourTabs":  false,
+                                "SelectionResultSync":  false,
+                                "Tether":  true,
+                                "GracefulExit":  true
+                            },
+    "Unverified":  [
+                       "CalendarContextMenu",
+                       "ClosedDay",
+                       "ClosedDayPersisted",
+                       "SelectionProjectCreated",
+                       "SelectionFourTabs",
+                       "SelectionResultSync"
+                   ],
+    "Error":  "",
+    "StartedAt":  "2026-08-11T16:13:33.9222325+08:00",
+    "VerificationBasis":  {
+                              "BookingAndTools":  "Actual clicks against the installed candidate on an isolated Win32 desktop.",
+                              "SelectionProjectAndProxy":  "Actual create/import clicks plus installed-binary persistence and proxy-file probes inside the isolated runtime.",
+                              "SelectionResultSync":  "A final-result fixture is injected only into the isolated persisted workspace; Delivery-tab and sync-folder actions are actual installed UI clicks.",
+                              "ClosedDay":  "Actual calendar context-menu click followed by a restart persistence probe."
+                          },
+    "FixtureInjections":  {
+                              "SelectionFinalResult":  true
+                          },
+    "CompletedAt":  "2026-08-11T16:16:33.4378093+08:00"
+}

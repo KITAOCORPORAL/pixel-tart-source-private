@@ -1,0 +1,70 @@
+{
+  "product": "像素蛋挞",
+  "version": "2.3.0",
+  "fileVersion": "2.3.0.0",
+  "schemaVersion": 4,
+  "candidate": "ProductRedesign_RC1",
+  "branch": "feature/pixel-tart-product-redesign",
+  "binarySourceCommit": "5069affe4c2e5c27f45059ffa755c43357a628d0",
+  "designDocumentationCommit": "31f0798235b9970d7dc605ae4a623bb6816ef5ab",
+  "provider": "None",
+  "outputType": "WinExe",
+  "runtime": "win-x64",
+  "selfContained": true,
+  "publish": {
+    "path": "publish/product-redesign-rc1-win-x64",
+    "fileCount": 280,
+    "totalBytes": 172099342,
+    "scanPassed": true,
+    "noTests": true,
+    "noUserData": true,
+    "noVendorSdk": true,
+    "noProductLocalhostLogic": true
+  },
+  "installer": {
+    "path": "installer/像素蛋挞_Setup_2.3.0_ProductRedesign_RC1_x64.exe",
+    "bytes": 50677426,
+    "sha256": "D8A997A463D64BB1D44D3ACFFBDD4A7213DC4A1EDD91FF404CBA4711C2804660",
+    "signatureStatus": "NotSigned",
+    "usesIndependentCandidateAppId": true
+  },
+  "previousInstallers": {
+    "count": 10,
+    "allRetainedAndUnchanged": true
+  },
+  "tests": {
+    "debugPassed": 1922,
+    "releasePassed": 1922,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "visualEvidence": {
+    "directory": "artifacts/ui-review/product-redesign",
+    "independentPngCount": 30,
+    "layoutPassed": 30,
+    "blockingIssues": 0,
+    "codexPrecheckScore": 90,
+    "userVerified": false
+  },
+  "installedAcceptance": {
+    "runId": "5a4e50af98444997863f5ac0031448aa",
+    "result": "artifacts/diagnostics/2.3.0/product-redesign-installed-ui/5a4e50af98444997863f5ac0031448aa/result.json",
+    "resultSha256": "75F3C31FDA85D8127E4FBEF434C60BF7B0ADDD752757A26FD7BEE9778D2C89EB",
+    "runtimeIsolated": true,
+    "currentDesktopOperated": false,
+    "fullyPassed": false,
+    "unverified": [
+      "CalendarContextMenu",
+      "ClosedDay",
+      "ClosedDayPersisted",
+      "SelectionProjectCreated",
+      "SelectionFourTabs",
+      "SelectionResultSync"
+    ]
+  },
+  "stage9ProductionCloudDeployment": false,
+  "mainMerged": false,
+  "formalTagCreated": false
+}
