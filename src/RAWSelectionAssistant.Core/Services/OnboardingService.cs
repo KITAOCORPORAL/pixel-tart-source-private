@@ -12,6 +12,7 @@ public sealed class OnboardingService(
     // Keep this value stable so a patch upgrade does not invalidate completed tutorials.
     private const string ProofSalt = "KitaoPhotoSelector-Onboarding-1.2.0-Completion";
     private AppSettings? _settings;
+    private readonly SemaphoreSlim _transitionGate = new(1, 1);
 
     public TutorialState State { get; } = new();
     public TutorialSandboxPaths Sandbox => tutorialDataService.Paths;
@@ -80,6 +81,34 @@ public sealed class OnboardingService(
         State.Mode = TutorialMode.Inactive;
         State.CurrentStep = 1;
         State.ErrorMessage = string.Empty;
+    }
+
+    public async Task ExitAsync(CancellationToken cancellationToken = default)
+    {
+        await _transitionGate.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            if (!State.IsActive) return;
+            if (State.IsRequired)
+            {
+                EnsureInitialized();
+                _settings!.OnboardingCompleted = false;
+                _settings.OnboardingCompletionProof = string.Empty;
+                _settings.OnboardingCurrentStep = Math.Clamp(State.CurrentStep, 1, Steps.Count);
+                await settingsService.SaveAsync(_settings, cancellationToken).ConfigureAwait(false);
+            }
+
+            var wasRequired = State.IsRequired;
+            State.Mode = TutorialMode.Inactive;
+            if (!wasRequired) State.CurrentStep = 1;
+            State.ErrorMessage = string.Empty;
+            State.VisitedCategories.Clear();
+            State.VisitedOutputModes.Clear();
+        }
+        finally
+        {
+            _transitionGate.Release();
+        }
     }
 
     public bool CanPerform(TutorialAction action) => !State.IsActive || CurrentStep.RequiredAction == action;

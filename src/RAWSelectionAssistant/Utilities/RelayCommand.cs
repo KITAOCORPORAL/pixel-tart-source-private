@@ -16,7 +16,12 @@ public sealed class AsyncRelayCommand(Func<object?, Task> execute, Func<object?,
     public event EventHandler? CanExecuteChanged;
     public bool CanExecute(object? parameter) => !_isExecuting && (canExecute?.Invoke(parameter) ?? true);
 
-    public async void Execute(object? parameter)
+    public void Execute(object? parameter)
+    {
+        _ = ExecuteAsync(parameter);
+    }
+
+    public async Task ExecuteAsync(object? parameter)
     {
         if (!CanExecute(parameter))
         {
