@@ -105,7 +105,9 @@ public sealed class RawToJpegViewModel : ObservableObject
             StatusText = $"任务已提交：{taskId:N}";
             RaiseCommands();
             await _coordinator.WaitForCompletionAsync(taskId, CancellationToken.None).ConfigureAwait(true);
-            if (!_cancelRequested) StatusText = "RAW 转 JPG 任务已完成；源文件保持不变。";
+            var terminal = await _coordinator.GetTaskStateAsync(taskId, CancellationToken.None).ConfigureAwait(true);
+            if (!_cancelRequested && terminal is { State: TaskLifecycleState.Completed }) StatusText = "RAW 转 JPG 任务已完成；源文件保持不变。";
+            else if (!_cancelRequested) StatusText = terminal is null ? "任务状态暂不可用；请打开任务中心查看原因。" : $"任务{terminal.State}：{terminal.LastErrorMessage ?? "请打开任务中心查看原因。"}";
         }
         catch (OperationCanceledException) { StatusText = "已取消；源 RAW 保持不变。"; }
         catch (Exception) { StatusText = "任务提交失败；请检查输出目录和解码器状态。"; }

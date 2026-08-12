@@ -82,7 +82,7 @@ public sealed class DatabaseMigrator : IDatabaseMigrator
     {
         _database = database;
         _backupService = backupService;
-        _migrations = (migrations ?? [new InitialSchemaMigration(), new CalendarSchemaMigration(), new TetherSchemaMigration(), new BusinessSchemaMigration()]).OrderBy(x => x.Version).ToArray();
+        _migrations = (migrations ?? [new InitialSchemaMigration(), new CalendarSchemaMigration(), new TetherSchemaMigration(), new BusinessSchemaMigration(), new CalendarWorkflowSchemaMigration()]).OrderBy(x => x.Version).ToArray();
         if (_migrations.Select(x => x.Version).Distinct().Count() != _migrations.Count ||
             _migrations.Select(x => x.Version).Where((version, index) => version != index + 1).Any())
             throw new InvalidOperationException("Database migrations must be unique, contiguous and start at version 1.");

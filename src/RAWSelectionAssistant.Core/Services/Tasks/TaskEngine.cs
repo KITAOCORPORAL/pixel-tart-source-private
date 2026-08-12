@@ -3,7 +3,7 @@ using RAWSelectionAssistant.Core.Models;
 
 namespace RAWSelectionAssistant.Core.Services.Tasks;
 
-public sealed class TaskEngine : ITaskEngine
+public sealed class TaskEngine : ITaskEngine, ITaskCompletionStateProvider
 {
     private readonly ITaskRepository _repository;
     private readonly ITaskScheduler _scheduler;
@@ -103,6 +103,8 @@ public sealed class TaskEngine : ITaskEngine
 
     public Task<IReadOnlyList<TaskRuntimeState>> LoadHistoryAsync(int limit = 200, CancellationToken cancellationToken = default) => _repository.ListAsync(limit, cancellationToken);
 
+    public Task<TaskRuntimeState?> GetTaskStateAsync(Guid taskId, CancellationToken cancellationToken = default) => _repository.GetAsync(taskId, cancellationToken);
+
     private async Task RunAsync(ExecutionControl control)
     {
         var runtime = control.Runtime;
@@ -122,6 +124,8 @@ public sealed class TaskEngine : ITaskEngine
             runtime.LastErrorCode = result.ErrorCode;
             runtime.LastErrorMessage = result.ErrorMessage;
             var final = result.FinalState == TaskLifecycleState.Completed && result.Summary.IsPartial ? TaskLifecycleState.PartiallyCompleted : result.FinalState;
+            if (final == TaskLifecycleState.Failed && string.IsNullOrWhiteSpace(runtime.LastErrorMessage))
+                runtime.LastErrorMessage = "验证失败：任务未生成可验证的完整输出，请查看任务诊断后重试。";
             if (runtime.State == TaskLifecycleState.Cancelling)
                 final = result.Summary.Succeeded > 0 ? TaskLifecycleState.PartiallyCompleted : TaskLifecycleState.Cancelled;
             await TransitionAsync(runtime, final, CancellationToken.None).ConfigureAwait(false);

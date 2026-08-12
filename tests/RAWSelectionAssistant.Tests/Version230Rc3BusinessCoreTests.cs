@@ -25,7 +25,7 @@ public sealed class Version230Rc3BusinessCoreTests
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var version = connection.CreateCommand();
         version.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(4L, (long)(await version.ExecuteScalarAsync())!);
+        Assert.AreEqual(5L, (long)(await version.ExecuteScalarAsync())!);
         await using var integrity = connection.CreateCommand();
         integrity.CommandText = "PRAGMA integrity_check;";
         Assert.AreEqual("ok", (string)(await integrity.ExecuteScalarAsync())!);
@@ -37,7 +37,7 @@ public sealed class Version230Rc3BusinessCoreTests
         using var setup = await DatabaseSetup.CreateAsync();
         var result = await new DatabaseMigrator(setup.Database, new DatabaseBackupService(setup.Database, setup.Temp.Combine("repeat-backups"))).MigrateAsync();
         Assert.IsTrue(result.Success);
-        Assert.AreEqual(4, result.CurrentVersion);
+        Assert.AreEqual(5, result.CurrentVersion);
     }
 
     [TestMethod]

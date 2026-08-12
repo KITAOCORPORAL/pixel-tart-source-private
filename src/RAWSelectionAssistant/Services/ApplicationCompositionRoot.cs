@@ -53,6 +53,7 @@ public sealed class ApplicationCompositionRoot
         ShootBookingRepository = new SqliteShootBookingRepository(database);
         BookingConflictDetector = new BookingConflictDetector(ShootBookingRepository);
         ShootBookingService = new ShootBookingService(ShootBookingRepository, BookingConflictDetector, auditLog);
+        BookingWorkflowService = new BookingWorkflowService(ShootBookingRepository, auditLog);
         BookingDocumentRepository = new SqliteBookingDocumentRepository(database);
         BookingDocumentService = new BookingDocumentService(BookingDocumentRepository);
         BookingDocumentWorkflowService = new BookingDocumentWorkflowService(BookingDocumentRepository, ShootBookingService, ProjectRepository,
@@ -95,6 +96,7 @@ public sealed class ApplicationCompositionRoot
     public IShootBookingRepository ShootBookingRepository { get; }
     public IBookingConflictDetector BookingConflictDetector { get; }
     public IShootBookingService ShootBookingService { get; }
+    public IBookingWorkflowService BookingWorkflowService { get; }
     public IBookingDocumentRepository BookingDocumentRepository { get; }
     public IBookingDocumentService BookingDocumentService { get; }
     public IBookingDocumentWorkflowService BookingDocumentWorkflowService { get; }

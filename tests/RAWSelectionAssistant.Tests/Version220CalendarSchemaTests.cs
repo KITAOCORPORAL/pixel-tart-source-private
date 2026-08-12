@@ -18,7 +18,7 @@ public sealed class Version220CalendarSchemaTests
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(4L, (long)(await command.ExecuteScalarAsync())!);
+        Assert.AreEqual(5L, (long)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
@@ -61,7 +61,7 @@ public sealed class Version220CalendarSchemaTests
         var result = await new DatabaseMigrator(database, new DatabaseBackupService(database, backupRoot)).MigrateAsync();
         Assert.IsTrue(result.Success);
         Assert.AreEqual(1, result.PreviousVersion);
-        Assert.AreEqual(4, result.CurrentVersion);
+        Assert.AreEqual(5, result.CurrentVersion);
         Assert.IsNotNull(result.BackupPath);
         Assert.IsTrue(File.Exists(result.BackupPath));
     }

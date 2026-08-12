@@ -201,7 +201,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     [DataRow("Header=\"编辑排期\"")]
     [DataRow("Header=\"修改状态\"")]
     [DataRow("Header=\"有拍摄\"")]
-    [DataRow("Header=\"已拍摄\"")]
+    [DataRow("Header=\"标记拍摄完成\"")]
     [DataRow("Header=\"待返图\"")]
     [DataRow("Header=\"已返图\"")]
     [DataRow("Header=\"归档\"")]
@@ -221,7 +221,6 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     [DataRow("Height=\"26\"")]
     [DataRow("Padding=\"6,0\"")]
     [DataRow("CalendarStatusScheduledBrush")]
-    [DataRow("CalendarStatusShotBrush")]
     [DataRow("CalendarStatusPendingDeliveryBrush")]
     [DataRow("CalendarStatusDeliveredBrush")]
     public void FullCalendar_UsesCompleteFiveStateDayBadge(string token) => Contains(FullCalendar(), token);
@@ -258,7 +257,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
 
     [TestMethod]
     [DataRow(ShootBookingStatus.Confirmed, CalendarWorkflowStatus.Scheduled)]
-    [DataRow(ShootBookingStatus.Completed, CalendarWorkflowStatus.Shot)]
+    [DataRow(ShootBookingStatus.Completed, CalendarWorkflowStatus.PendingDelivery)]
     [DataRow(ShootBookingStatus.AwaitingDelivery, CalendarWorkflowStatus.PendingDelivery)]
     [DataRow(ShootBookingStatus.Delivered, CalendarWorkflowStatus.Delivered)]
     public void CalendarVisualState_ResolvesAllWorkflowColors(ShootBookingStatus status, CalendarWorkflowStatus expected)
@@ -287,7 +286,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
 
     [TestMethod]
     [DataRow("M5,10 L5,7 C5,3 11,3 11,7 L11,10")]
-    [DataRow("Text=\"已关闭\"")]
+    [DataRow("当天已关闭接单")]
     [DataRow("Binding IsClosed")]
     [DataRow("SurfaceSecondaryBrush")]
     public void ClosedDay_HasLockLabelAndDarkenedCell(string token) => Contains(MiniCalendar() + FullCalendar(), token);

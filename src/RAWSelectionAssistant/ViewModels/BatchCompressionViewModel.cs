@@ -134,8 +134,13 @@ public sealed class BatchCompressionViewModel : ObservableObject
             var request = new BatchCompressionRequest(Items.Select(item => item.SourcePath).ToArray(),
                 DestinationDirectory, new BatchCompressionOptions(JpegQuality, LongestEdge, PreserveMetadata, PreserveIccProfile));
             _activeTaskId = await _coordinator.StartAsync(request).ConfigureAwait(true);
+            var taskId = _activeTaskId.Value;
             foreach (var item in Items) item.StatusText = "已提交到任务中心";
             StatusText = "压缩任务已提交到任务中心；源文件保持不变。";
+            await _coordinator.WaitForCompletionAsync(taskId).ConfigureAwait(true);
+            var terminal = await _coordinator.GetTaskStateAsync(taskId).ConfigureAwait(true);
+            if (terminal is not null)
+                StatusText = $"{terminal.State} · {taskId:N}" + (string.IsNullOrWhiteSpace(terminal.LastErrorMessage) ? string.Empty : $" · {terminal.LastErrorMessage}");
             RaiseCommands();
         }
         catch (Exception)

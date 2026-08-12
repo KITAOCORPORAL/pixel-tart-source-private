@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services.RawToJpeg;
 
@@ -29,7 +30,7 @@ public interface IRawToJpegRequestStore
     void Remove(Guid taskId);
 }
 
-public interface IRawToJpegTaskCoordinator
+public interface IRawToJpegTaskCoordinator : ITaskCompletionStateProvider
 {
     RawDecoderCapability GetCapability();
     Task<Guid> StartAsync(RawToJpegBatchRequest request, CancellationToken cancellationToken = default);

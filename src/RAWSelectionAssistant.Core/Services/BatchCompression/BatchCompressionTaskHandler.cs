@@ -153,4 +153,7 @@ public sealed class BatchCompressionTaskCoordinator(
 
     public Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default) =>
         taskEngine.WaitForCompletionAsync(taskId, cancellationToken);
+
+    public async Task<TaskRuntimeState?> GetTaskStateAsync(Guid taskId, CancellationToken cancellationToken = default) =>
+        (await taskEngine.LoadHistoryAsync(200, cancellationToken).ConfigureAwait(false)).FirstOrDefault(x => x.Definition.Id == taskId);
 }
