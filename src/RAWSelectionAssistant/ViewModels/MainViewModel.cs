@@ -39,6 +39,9 @@ public sealed class MainViewModel : ObservableObject
     private readonly IMatchDecisionRepository _matchDecisionRepository;
     private readonly WeatherFeatureState? _weatherState;
     private CancellationTokenSource? _operationCancellation;
+    private TaskCompletionSource? _operationCompletion;
+    private Task? _tutorialCancellationTask;
+    private Task? _tutorialActionTask;
     private MediaIndexSnapshot _mediaIndex = new();
     private SourceDirectoryEntry? _selectedSource;
     private string _textInput = string.Empty;
@@ -88,6 +91,13 @@ public sealed class MainViewModel : ObservableObject
     private bool _exportLogForCurrentProject;
     private bool _isSettingsModalOpen;
     private bool _quickToolsCompact;
+    private int _tutorialExpectedReportCount = 3;
+    private int _tutorialGeneratedReportCount;
+    private IReadOnlyList<string> _tutorialMissingReports = [];
+    private bool _tutorialExitInProgress;
+    private bool _lastOperationSucceeded;
+
+    private static readonly string[] TutorialReportNames = ["匹配报告.csv", "匹配报告.json", "操作日志.txt"];
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
 
@@ -191,8 +201,8 @@ public sealed class MainViewModel : ObservableObject
         ShowDetailsCommand = new RelayCommand(ShowDetails, item => !IsBusy && item is MediaSelectionItem media && media.FormatResults.Count > 0 && CanTutorial(TutorialAction.ViewDetails));
         TutorialPrimaryCommand = new AsyncRelayCommand(_ => TutorialPrimaryAsync(), _ => IsOnboardingActive && ShowTutorialPrimaryAction);
         TutorialBackCommand = new AsyncRelayCommand(_ => TutorialBackAsync(), _ => IsOnboardingActive && TutorialCanGoBack);
-        TutorialExitCommand = new RelayCommand(_ => ExitTutorial());
-        TutorialRetryCommand = new RelayCommand(_ => TutorialErrorMessage = string.Empty, _ => IsOnboardingActive && !string.IsNullOrWhiteSpace(TutorialErrorMessage));
+        TutorialExitCommand = new AsyncRelayCommand(_ => ExitTutorialAsync(), _ => IsOnboardingActive && !_tutorialExitInProgress);
+        TutorialRetryCommand = new AsyncRelayCommand(_ => RetryTutorialStepAsync(), _ => IsOnboardingActive && !string.IsNullOrWhiteSpace(TutorialErrorMessage));
         TutorialRecreateDataCommand = new AsyncRelayCommand(_ => RecreateTutorialDataAsync(), _ => IsOnboardingActive);
         HelpCommand = new AsyncRelayCommand(_ => ShowHelpAsync(), _ => !IsBusy && !IsOnboardingRequired);
         FeedbackCommand = new RelayCommand(_ => _dialogService.ShowFeedback(), _ => !IsOnboardingRequired);
@@ -797,6 +807,10 @@ public sealed class MainViewModel : ObservableObject
     public bool TutorialCanGoBack => _onboardingService.CurrentStep.AllowBack;
     public string TutorialErrorMessage { get => _onboardingService.State.ErrorMessage; private set { _onboardingService.State.ErrorMessage = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasTutorialError)); RefreshCommands(); } }
     public bool HasTutorialError => !string.IsNullOrWhiteSpace(TutorialErrorMessage);
+    public int TutorialExpectedReportCount => _tutorialExpectedReportCount;
+    public int TutorialGeneratedReportCount => _tutorialGeneratedReportCount;
+    public IReadOnlyList<string> TutorialMissingReports => _tutorialMissingReports;
+    public string TutorialReportStatus => $"报告：已生成 {_tutorialGeneratedReportCount}/{_tutorialExpectedReportCount}";
     public bool ShowTutorialPrimaryAction => _onboardingService.CurrentStep.RequiredAction is TutorialAction.BeginTutorial or TutorialAction.LoadCustomerSelection or TutorialAction.ViewDetails or TutorialAction.AcknowledgeJpegQuality or TutorialAction.AcknowledgeEditions or TutorialAction.FinishTutorial;
     public string TutorialPrimaryActionLabel => _onboardingService.CurrentStep.RequiredAction switch
     {
@@ -886,8 +900,8 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand ShowDetailsCommand { get; }
     public AsyncRelayCommand TutorialPrimaryCommand { get; }
     public AsyncRelayCommand TutorialBackCommand { get; }
-    public RelayCommand TutorialExitCommand { get; }
-    public RelayCommand TutorialRetryCommand { get; }
+    public AsyncRelayCommand TutorialExitCommand { get; }
+    public AsyncRelayCommand TutorialRetryCommand { get; }
     public AsyncRelayCommand TutorialRecreateDataCommand { get; }
     public AsyncRelayCommand HelpCommand { get; }
     public RelayCommand FeedbackCommand { get; }
@@ -1343,13 +1357,32 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task ExportReportAsync()
     {
+        _lastOperationSucceeded = false;
         await RunOperationAsync("导出匹配报告", async token =>
         {
-            await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections, token, CreateReportExportOptions(manualExport: true));
-            StatusMessage = CanExportAdvancedReports ? $"已导出：{string.Join("、", SelectedReportLabels())}" : "免费版基础 CSV 报告已导出";
+            var options = IsOnboardingActive ? ReportExportOptions.Pro : CreateReportExportOptions(manualExport: true);
+            await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections, token, options);
+            _lastOperationSucceeded = true;
+            StatusMessage = IsOnboardingActive
+                ? "教程报告已导出：CSV、JSON、操作日志 TXT"
+                : CanExportAdvancedReports ? $"已导出：{string.Join("、", SelectedReportLabels())}" : "免费版基础 CSV 报告已导出";
             RefreshCommands();
         });
-        if (IsOnboardingActive) await AdvanceTutorialAsync(TutorialAction.ExportReports, CreateTutorialContext());
+        if (IsOnboardingActive)
+        {
+            UpdateTutorialReportStatus();
+            if (!_lastOperationSucceeded)
+            {
+                TutorialErrorMessage = $"报告导出未完成（已生成 {_tutorialGeneratedReportCount}/{_tutorialExpectedReportCount}）：{string.Join("、", _tutorialMissingReports)}";
+                return;
+            }
+            var context = CreateTutorialContext();
+            await AdvanceTutorialAsync(TutorialAction.ExportReports, context);
+            if (!context.ReportsExist)
+            {
+                TutorialErrorMessage = $"教程报告未完整生成（已生成 {_tutorialGeneratedReportCount}/{_tutorialExpectedReportCount}）：{string.Join("、", _tutorialMissingReports)}";
+            }
+        }
     }
 
     private void ShowDetails(object? parameter)
@@ -1476,17 +1509,61 @@ public sealed class MainViewModel : ObservableObject
         NotifyTutorialChanged();
     }
 
-    private void ExitTutorial()
+    private async Task ExitTutorialAsync()
     {
-        if (IsOnboardingRequired)
+        if (_tutorialExitInProgress) return;
+        _tutorialExitInProgress = true;
+        RefreshCommands();
+        try
         {
-            _ = SaveSettingsAsync();
-            CloseRequested?.Invoke(this, EventArgs.Empty);
-            return;
+            _operationCancellation?.Cancel();
+            var cancellationTask = _tutorialCancellationTask;
+            if (cancellationTask is not null)
+            {
+                try { await cancellationTask.ConfigureAwait(true); }
+                catch (OperationCanceledException) { }
+            }
+            var operationCompletion = _operationCompletion?.Task;
+            if (operationCompletion is not null)
+            {
+                try { await operationCompletion.ConfigureAwait(true); }
+                catch (OperationCanceledException) { }
+            }
+            var tutorialAction = _tutorialActionTask;
+            if (tutorialAction is not null)
+            {
+                try { await tutorialAction.ConfigureAwait(true); }
+                catch (OperationCanceledException) { }
+            }
+            await _onboardingService.ExitAsync();
+            RestoreNormalWorkspace();
+            if (CurrentPage == "Workflow") CurrentPage = "ProjectCenter";
+            StatusMessage = "教程已安全退出；当前工作区和用户文件未被删除。";
+            NotifyTutorialChanged();
         }
-        _onboardingService.ExitReplay();
-        RestoreNormalWorkspace();
-        NotifyTutorialChanged();
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ObjectDisposedException)
+        {
+            TutorialErrorMessage = "教程退出保存失败，请重试；当前文件保持不变。";
+        }
+        finally
+        {
+            _tutorialExitInProgress = false;
+            RefreshCommands();
+        }
+    }
+
+    private async Task RetryTutorialStepAsync()
+    {
+        if (!IsOnboardingActive) return;
+        TutorialErrorMessage = string.Empty;
+        if (_onboardingService.CurrentStep.RequiredAction == TutorialAction.ExportReports)
+        {
+            await ExportReportAsync();
+        }
+        else
+        {
+            NotifyTutorialChanged();
+        }
     }
 
     private async Task RecreateTutorialDataAsync()
@@ -1546,6 +1623,11 @@ public sealed class MainViewModel : ObservableObject
         _tutorialOutputDirectoryOverride = string.Empty;
         _tutorialDetailsViewed = false;
         _tutorialOutputOpened = false;
+        _tutorialGeneratedReportCount = 0;
+        _tutorialMissingReports = TutorialReportNames.ToArray();
+        OnPropertyChanged(nameof(TutorialGeneratedReportCount));
+        OnPropertyChanged(nameof(TutorialMissingReports));
+        OnPropertyChanged(nameof(TutorialReportStatus));
         if (resetProgress) Settings.OnboardingTutorialOutputDirectory = string.Empty;
         StatusMessage = "教程演示环境已准备好，不会访问你的真实照片。";
         NotifyTutorialChanged();
@@ -1654,7 +1736,7 @@ public sealed class MainViewModel : ObservableObject
         }
         if (step == 6 && !_tutorialCancellationDemoActive)
         {
-            _ = StartTutorialCancellationDemoAsync();
+            _tutorialCancellationTask = StartTutorialCancellationDemoAsync();
         }
         if (step == 22)
         {
@@ -1695,8 +1777,13 @@ public sealed class MainViewModel : ObservableObject
         {
             IsBusy = false;
             _tutorialCancellationDemoActive = false;
-            _operationCancellation.Dispose();
-            _operationCancellation = null;
+            var cancellation = _operationCancellation;
+            if (cancellation is not null)
+            {
+                cancellation.Dispose();
+                if (ReferenceEquals(_operationCancellation, cancellation)) _operationCancellation = null;
+            }
+            _tutorialCancellationTask = null;
             RefreshCommands();
         }
     }
@@ -1706,8 +1793,9 @@ public sealed class MainViewModel : ObservableObject
         _operationCancellation?.Cancel();
         if (_tutorialCancellationDemoActive)
         {
+            if (_tutorialActionTask is { IsCompleted: false }) return;
             StatusMessage = "模拟扫描已安全取消，已完成的教程索引保持不变。";
-            _ = AdvanceTutorialAsync(TutorialAction.CancelSimulatedTask, CreateTutorialContext());
+            _tutorialActionTask = AdvanceTutorialAsync(TutorialAction.CancelSimulatedTask, CreateTutorialContext());
         }
     }
 
@@ -1717,15 +1805,39 @@ public sealed class MainViewModel : ObservableObject
         var rawIndexed = _mediaIndex.Files.Count(file => file.Category == FileCategory.Raw);
         var copiedJpeg = Selections.SelectMany(item => item.FormatResults).Count(result => result.Category == FileCategory.Jpeg && result.Status == MatchStatus.Copied);
         var copiedRaw = Selections.SelectMany(item => item.FormatResults).Count(result => result.Category == FileCategory.Raw && result.Status == MatchStatus.Copied);
-        var reportRoot = Directory.Exists(OutputDirectory) ? OutputDirectory : Settings.OnboardingTutorialOutputDirectory;
-        var reportsExist = !string.IsNullOrWhiteSpace(reportRoot) &&
-                           File.Exists(Path.Combine(reportRoot, "匹配报告.csv")) &&
-                           File.Exists(Path.Combine(reportRoot, "匹配报告.json")) &&
-                           File.Exists(Path.Combine(reportRoot, "操作日志.txt"));
+        UpdateTutorialReportStatus();
+        var reportsExist = _tutorialGeneratedReportCount == _tutorialExpectedReportCount;
         return new TutorialActionContext(
             Sources.Count, jpegIndexed, rawIndexed, Selections.Count, CompleteMatchedCount,
             copiedJpeg, copiedRaw, _tutorialDetailsViewed, reportsExist, _tutorialOutputOpened,
             false, ProjectName, OutputBaseDirectory, CollectionCategory, OutputMode);
+    }
+
+    private void UpdateTutorialReportStatus()
+    {
+        if (!IsOnboardingActive)
+        {
+            _tutorialGeneratedReportCount = 0;
+            _tutorialMissingReports = [];
+            return;
+        }
+
+        var reportRoot = Directory.Exists(OutputDirectory) ? OutputDirectory : Settings.OnboardingTutorialOutputDirectory;
+        var missing = new List<string>();
+        if (string.IsNullOrWhiteSpace(reportRoot) || !Directory.Exists(reportRoot))
+        {
+            missing.AddRange(TutorialReportNames);
+        }
+        else
+        {
+            missing.AddRange(TutorialReportNames.Where(name => !File.Exists(Path.Combine(reportRoot, name))));
+        }
+        _tutorialMissingReports = missing;
+        _tutorialGeneratedReportCount = _tutorialExpectedReportCount - missing.Count;
+        OnPropertyChanged(nameof(TutorialExpectedReportCount));
+        OnPropertyChanged(nameof(TutorialGeneratedReportCount));
+        OnPropertyChanged(nameof(TutorialMissingReports));
+        OnPropertyChanged(nameof(TutorialReportStatus));
     }
 
     private async Task AdvanceTutorialAsync(TutorialAction action, TutorialActionContext context)
@@ -2414,6 +2526,7 @@ public sealed class MainViewModel : ObservableObject
     {
         if (IsBusy) return;
         _operationCancellation = new CancellationTokenSource();
+        _operationCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         IsBusy = true;
         StatusMessage = stage;
         ProgressPercent = 0;
@@ -2454,6 +2567,8 @@ public sealed class MainViewModel : ObservableObject
             IsBusy = false;
             _operationCancellation.Dispose();
             _operationCancellation = null;
+            _operationCompletion?.TrySetResult();
+            _operationCompletion = null;
             RefreshCommands();
         }
     }

@@ -16,6 +16,7 @@ using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
+using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
 
@@ -37,6 +38,7 @@ public partial class MainWindow : Window
     private string? _quickDraggedId;
     private Button? _quickInsertionTarget;
     private ShootBookingEditorViewModel? _activeBookingEditor;
+    private readonly IModalHost _modalHost = new ModalHost();
 #if UI_REVIEW_BUILD
     private DispatcherTimer? _uiReviewTimer;
     private string _uiReviewStateContent = string.Empty;
@@ -46,6 +48,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Loaded += MainWindow_Loaded;
+        Closed += Window_Closed;
         SizeChanged += (_, _) =>
         {
             ScheduleTutorialLayout();
@@ -181,6 +184,8 @@ public partial class MainWindow : Window
         ScheduleTutorialLayout();
     }
 
+    private void Window_Closed(object? sender, EventArgs e) => _modalHost.Dispose();
+
     private void ViewModel_EditorRequested(object? sender, BookingEditorRequestEventArgs e)
     {
         if (!TryCloseBookingEditorVisual()) return;
@@ -285,7 +290,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (_viewModel?.IsTetherPage == true && e.Key == Key.F11 && _viewModel.TetherPage?.ToggleFullScreenCommand.CanExecute(null) == true)
         {
@@ -299,22 +304,10 @@ public partial class MainWindow : Window
             e.Handled = true;
             return;
         }
-        if (e.Key == Key.Escape && _viewModel?.IsSettingsModalOpen == true)
+        if (e.Key == Key.Escape)
         {
-            _viewModel.IsSettingsModalOpen = false;
             e.Handled = true;
-            return;
-        }
-        if (e.Key == Key.Escape && BookingEditorOverlay.Visibility == Visibility.Visible)
-        {
-            _activeBookingEditor?.CancelCommand.Execute(null);
-            e.Handled = true;
-            return;
-        }
-        if (e.Key == Key.Escape && WorkbenchToolboxPopup.IsOpen)
-        {
-            WorkbenchToolboxPopup.IsOpen = false;
-            e.Handled = true;
+            await RequestEscapeCloseAsync();
             return;
         }
 
@@ -353,6 +346,102 @@ public partial class MainWindow : Window
             SearchBox.SelectAll();
             e.Handled = true;
         }
+    }
+
+    private async Task RequestEscapeCloseAsync()
+    {
+        if (_viewModel is null) return;
+
+        if (_viewModel.IsOnboardingActive)
+        {
+            await _viewModel.TutorialExitCommand.ExecuteAsync(null);
+            return;
+        }
+
+        if (_viewModel.IsSettingsModalOpen)
+        {
+            await RequestModalActionAsync(
+                closeAsync: () => { _viewModel.IsSettingsModalOpen = false; return Task.CompletedTask; },
+                cancelAsync: () => { _viewModel.IsSettingsModalOpen = false; return Task.CompletedTask; });
+            return;
+        }
+
+        if (BookingEditorOverlay.Visibility == Visibility.Visible)
+        {
+            await RequestModalActionAsync(async () =>
+            {
+                if (_activeBookingEditor?.CancelCommand is AsyncRelayCommand asyncCancel)
+                    await asyncCancel.ExecuteAsync(null);
+                else
+                    _activeBookingEditor?.CancelCommand.Execute(null);
+            }, async () =>
+            {
+                if (_activeBookingEditor?.CancelCommand is AsyncRelayCommand asyncCancel)
+                    await asyncCancel.ExecuteAsync(null);
+                else
+                    _activeBookingEditor?.CancelCommand.Execute(null);
+            });
+            return;
+        }
+
+        if (WorkbenchToolboxPopup.IsOpen)
+        {
+            await RequestModalActionAsync(
+                closeAsync: () => { WorkbenchToolboxPopup.IsOpen = false; return Task.CompletedTask; },
+                cancelAsync: () => { WorkbenchToolboxPopup.IsOpen = false; return Task.CompletedTask; });
+            return;
+        }
+
+        if (QuickToolsOverflowPopup.IsOpen)
+        {
+            await RequestModalActionAsync(
+                closeAsync: () => { QuickToolsOverflowPopup.IsOpen = false; return Task.CompletedTask; },
+                cancelAsync: () => { QuickToolsOverflowPopup.IsOpen = false; return Task.CompletedTask; });
+            return;
+        }
+
+        switch (_viewModel.CurrentPage)
+        {
+            case "RawToJpeg" when _viewModel.RawToJpegPage is not null:
+                await RequestPageModalActionAsync(_viewModel.RawToJpegPage.CancelCommand);
+                return;
+            case "BatchCompress" when _viewModel.BatchCompressionPage is not null:
+                await RequestPageModalActionAsync(_viewModel.BatchCompressionPage.CancelCommand);
+                return;
+            case "Collage":
+                await RequestPageModalActionAsync(_viewModel.CollagePage.CancelCommand);
+                return;
+            case "PhotoGrouping":
+                await RequestPageModalActionAsync(_viewModel.OrganizePhotosPage.CancelCommand);
+                return;
+            case "OnlineSelection":
+                _viewModel.NavigateCommand.Execute("Workbench");
+                return;
+        }
+    }
+
+    private async Task RequestPageModalActionAsync(ICommand command)
+    {
+        await RequestModalActionAsync(
+            closeAsync: async () =>
+            {
+                if (command is AsyncRelayCommand asyncCommand) await asyncCommand.ExecuteAsync(null);
+                else if (command.CanExecute(null)) command.Execute(null);
+                _viewModel?.NavigateCommand.Execute("Workbench");
+            },
+            cancelAsync: async () =>
+            {
+                if (command is AsyncRelayCommand asyncCommand) await asyncCommand.ExecuteAsync(null);
+                else if (command.CanExecute(null)) command.Execute(null);
+                _viewModel?.NavigateCommand.Execute("Workbench");
+            });
+    }
+
+    private async Task RequestModalActionAsync(Func<Task> closeAsync, Func<Task> cancelAsync)
+    {
+        using var session = new ModalSession(closeAsync: closeAsync, cancelAsync: cancelAsync);
+        _modalHost.Show(session);
+        await _modalHost.RequestCancelAsync();
     }
 
     private void TetherCaptureView_FullScreenChanged(object? sender, TetherFullScreenChangedEventArgs e)

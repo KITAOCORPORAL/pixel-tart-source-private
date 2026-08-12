@@ -28,9 +28,9 @@ public sealed class WorkbenchVisualCorrection201Tests
         Contains(popup, "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "ResourceKeyToGeometryConverter");
     }
 
-    [TestMethod] public void ToolboxEscape_ClosesPopup() => Contains(CodeBehind(), "e.Key == Key.Escape && WorkbenchToolboxPopup.IsOpen", "WorkbenchToolboxPopup.IsOpen = false");
+    [TestMethod] public void ToolboxEscape_ClosesPopup() => Contains(CodeBehind(), "Key.Escape", "WorkbenchToolboxPopup.IsOpen", "RequestEscapeCloseAsync", "RequestCancelAsync");
     [TestMethod] public void ToolboxFullPage_UsesThreeColumns() => Contains(MainXaml(), "x:Name=\"ToolboxFullPage\"", "<UniformGrid Columns=\"3\"", "ToolCatalogCard", "查看全部工具");
-    [TestMethod] public void ProjectOverview_IsSingleLargePanel() => Contains(MainXaml(), "x:Name=\"ProjectOverviewCard\"", "项目概览", "Columns=\"4\" Rows=\"1\"", "进行中", "待确认", "后期待处理", "已完成");
+    [TestMethod] public void ProjectOverview_IsSingleLargePanel() => Contains(MainXaml(), "x:Name=\"ProjectOverviewCard\"", "Columns=\"4\" Rows=\"1\"", "WorkbenchInProgressCount", "WorkbenchAttentionCount", "WorkbenchAwaitingReturnCount", "WorkbenchCompletedCount");
     [TestMethod] public void ProcessingTasks_IsSingleLargePanel() { Contains(MainXaml(), "x:Name=\"ProcessingTasksCard\"", "处理任务", "扫描、复制、压缩和转档任务"); Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "暂无待处理任务"); }
     [TestMethod] public void RecentProjects_HasTabs() => Contains(MainXaml(), "x:Name=\"RecentProjectsArea\"", "最近项目", "本地分片", "归片项目", "已完成", "↻  刷新", "查看全部");
     [TestMethod] public void RecentProjectCard_HasCoverAndMetadata() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "个文件", "更新于", "继续处理");
@@ -46,7 +46,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void TaskCenter_DrawerReopens() => Contains(MainXaml(), "x:Name=\"TaskDrawerButton\"", "TaskDrawerButton_Click");
     [TestMethod] public void LightTheme_HasSameShellResources() => Contains(Light(), "ShellTopBrush", "TaskCenterBackgroundBrush", "ToolTileBrush", "WorkbenchCardBrush", "WorkbenchHeroBrush");
     [TestMethod] public void Settings_UsesCenteredDarkModal() => Contains(MainXaml(), "x:Name=\"SettingsModal\"", "RaisedSurfaceBrush", "Header=\"常规\"", "Header=\"外观\"", "Header=\"输出与报告\"");
-    [TestMethod] public void SettingsEscape_ClosesModal() => Contains(CodeBehind(), "e.Key == Key.Escape && _viewModel?.IsSettingsModalOpen == true", "_viewModel.IsSettingsModalOpen = false");
+    [TestMethod] public void SettingsEscape_ClosesModal() => Contains(CodeBehind(), "Key.Escape", "IsSettingsModalOpen = false", "RequestModalActionAsync", "RequestCancelAsync");
     [TestMethod] public void ProviderNoneStatus_IsVisibleInSidebar() => Contains(MainXaml(), "授权服务准备中", "x:Name=\"EditionStatusArea\"");
     [TestMethod] public void MainMenu_Remains() => Contains(MainXaml(), "Header=\"文件(_F)\"", "Header=\"项目(_P)\"", "Header=\"编辑(_E)\"", "Header=\"视图(_V)\"", "Header=\"工具(_T)\"", "Header=\"帮助(_H)\"");
     [TestMethod] public void BusinessModules_AreAbsent() => DoesNotContain(MainXaml(), "极速选片", "预约管理", "我的收入", "客资管理", "团队管理", "橱窗管理", "AI挑图", "AI 挑图", "会员促销");

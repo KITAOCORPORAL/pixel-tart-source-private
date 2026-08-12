@@ -84,6 +84,24 @@ public sealed class OnboardingServiceTests
     }
 
     [TestMethod]
+    public async Task ExitAsync_LeavesRequiredTutorialInactiveWithoutCompletingIt()
+    {
+        using var temp = new TempDirectory();
+        var fixture = CreateFixture(temp);
+        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: false);
+        await fixture.Service.PerformAsync(TutorialAction.BeginTutorial, new());
+        await fixture.Service.PerformAsync(TutorialAction.AddSourceDirectory, new(SourceDirectoryCount: 1));
+
+        await Task.WhenAll(fixture.Service.ExitAsync(), fixture.Service.ExitAsync());
+
+        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
+        Assert.IsFalse(fixture.Settings.OnboardingCompleted);
+        var persisted = await fixture.SettingsService.LoadAsync();
+        Assert.IsFalse(persisted.OnboardingCompleted);
+        Assert.AreEqual(3, persisted.OnboardingCurrentStep);
+    }
+
+    [TestMethod]
     public void ExistingUserDetection_RecognizesAllSupportedHistorySignals()
     {
         var detector = new ExistingUserDetectionService();

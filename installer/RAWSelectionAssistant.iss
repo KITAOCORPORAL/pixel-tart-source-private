@@ -17,6 +17,14 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\product-redesign-rc1-win-x64"
 #endif
+#ifdef CoreReliabilityInteractionHotfix
+  #undef MyAppName
+  #define MyAppName "Pixel Tart CoreReliability Interaction Hotfix DevValidation"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\core-reliability-interaction-hotfix-devvalidation-win-x64"
+#endif
 #ifdef CoreReliabilityDevValidation
   #undef MyAppName
   #define MyAppName "像素蛋挞 核心可靠性验收"
@@ -35,6 +43,9 @@
 #endif
 
 [Setup]
+#ifdef CoreReliabilityInteractionHotfix
+AppId={{A2D0D68C-0B3F-4B8F-9C0A-7C0D27E4C2F1}
+#else
 #ifdef CoreReliabilityDevValidation
 AppId={{4FBAC285-72B5-4560-A249-EBF70EFD7B3F}
 #else
@@ -52,10 +63,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef CoreReliabilityInteractionHotfix
+DefaultDirName={autopf}\PixelTart_CoreReliability_InteractionHotfix_DevValidation
+#else
 #ifdef CoreReliabilityDevValidation
 DefaultDirName={autopf}\像素蛋挞_CoreReliability_DevValidation
 #else
@@ -73,10 +88,15 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #endif
+#endif
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef CoreReliabilityInteractionHotfix
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=PixelTart_2.3.0_CoreReliability_InteractionHotfix_DevValidation_x64
+#else
 #ifdef CoreReliabilityDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_2.3.0_CoreReliability_DevValidation_x64
@@ -119,6 +139,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
 #else
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
+#endif
 #endif
 #endif
 #endif
