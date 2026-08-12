@@ -73,7 +73,8 @@ public sealed record BatchCompressionItemResult(
     string? DestinationPath,
     long BytesWritten,
     string? ErrorCode,
-    string? ErrorMessage);
+    string? ErrorMessage,
+    MediaTaskFailureDetail? Failure = null);
 
 public sealed record BatchCompressionResult(
     Guid TaskId,

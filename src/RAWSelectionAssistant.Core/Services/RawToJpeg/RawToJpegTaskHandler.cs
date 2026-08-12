@@ -61,9 +61,10 @@ public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawTo
             var finalState = state == TaskLifecycleState.Completed && cancellationWithStableOutput
                 ? TaskLifecycleState.PartiallyCompleted
                 : state;
+            var firstFailure = aggregate.FirstOrDefault(x => x.Failure is not null)?.Failure;
             executionResult = new(finalState, summary,
-                aggregate.FirstOrDefault(x => x.ErrorCode is not null)?.ErrorCode,
-                finalState == TaskLifecycleState.Completed ? null : "One or more RAW items require attention; completed outputs are not repeated on retry.");
+                firstFailure?.ErrorCode ?? aggregate.FirstOrDefault(x => x.ErrorCode is not null)?.ErrorCode,
+                finalState == TaskLifecycleState.Completed ? null : BuildFailurePayload(firstFailure, summary));
         }
         finally
         {
@@ -122,6 +123,10 @@ public sealed class RawToJpegTaskHandler(IRawToJpegRequestStore requests, IRawTo
         if (summary.Cancelled > 0 && summary.Failed == 0) return TaskLifecycleState.Cancelled;
         return TaskLifecycleState.Failed;
     }
+
+    private static string BuildFailurePayload(MediaTaskFailureDetail? failure, TaskResultSummary summary) => failure is null
+        ? $"RAW 转换未完成：成功 {summary.Succeeded}，失败 {summary.Failed + summary.WaitingForAttention}。请查看原因后重试失败项。"
+        : MediaTaskFailurePayload.Serialize(failure);
 }
 
 public sealed class RawToJpegTaskCoordinator(ITaskEngine taskEngine, IRawToJpegRequestStore requests, IRawDecoder decoder) : IRawToJpegTaskCoordinator

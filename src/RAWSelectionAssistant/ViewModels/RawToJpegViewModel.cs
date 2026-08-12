@@ -106,8 +106,19 @@ public sealed class RawToJpegViewModel : ObservableObject
             RaiseCommands();
             await _coordinator.WaitForCompletionAsync(taskId, CancellationToken.None).ConfigureAwait(true);
             var terminal = await _coordinator.GetTaskStateAsync(taskId, CancellationToken.None).ConfigureAwait(true);
-            if (!_cancelRequested && terminal is { State: TaskLifecycleState.Completed }) StatusText = "RAW 转 JPG 任务已完成；源文件保持不变。";
-            else if (!_cancelRequested) StatusText = terminal is null ? "任务状态暂不可用；请打开任务中心查看原因。" : $"任务{terminal.State}：{terminal.LastErrorMessage ?? "请打开任务中心查看原因。"}";
+            if (!_cancelRequested && terminal is { State: TaskLifecycleState.Completed })
+            {
+                Progress = 100;
+                foreach (var item in Items) { item.State = RawToJpegItemState.Completed; item.Status = "已安全生成 JPG"; }
+                StatusText = $"转换完成 · TaskId {taskId:N}";
+            }
+            else if (!_cancelRequested)
+            {
+                foreach (var item in Items) { item.State = RawToJpegItemState.Failed; item.Status = "请在任务中心查看原因"; }
+                StatusText = terminal is null
+                    ? "转换未完成：任务状态暂不可用，请打开任务中心查看原因。"
+                    : $"{MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "转换未完成，请打开任务中心查看原因。")} · TaskId {taskId:N}";
+            }
         }
         catch (OperationCanceledException) { StatusText = "已取消；源 RAW 保持不变。"; }
         catch (Exception) { StatusText = "任务提交失败；请检查输出目录和解码器状态。"; }

@@ -75,7 +75,8 @@ public sealed record RawToJpegItemResult(
     long BytesWritten,
     string? OutputHash,
     string? ErrorCode,
-    string? ErrorMessage);
+    string? ErrorMessage,
+    MediaTaskFailureDetail? Failure = null);
 
 public sealed record RawToJpegBatchRequest(
     IReadOnlyList<string> SourceFiles,

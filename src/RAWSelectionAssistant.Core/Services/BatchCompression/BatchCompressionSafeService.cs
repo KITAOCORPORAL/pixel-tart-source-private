@@ -102,7 +102,7 @@ public sealed class BatchCompressionSafeService(
 
         return new(1, Guid.NewGuid(), taskId, projectId, FileOperationType.Copy, sourceRoot,
             destinationRoot, FileConflictPolicy.AutoNumber, items, estimatedBytes,
-            FileOperationRiskLevel.Low, DateTimeOffset.UtcNow);
+            FileOperationRiskLevel.Low, DateTimeOffset.UtcNow, AllowSourceAndDestinationRootSame: true);
     }
 
     private async Task<BatchCompressionItemResult> CompressItemAsync(
@@ -115,6 +115,7 @@ public sealed class BatchCompressionSafeService(
         FileOperationItemResult? ownedCopy = null;
         var temporaryRoot = Path.Combine(Path.GetTempPath(), "PixelTartBatchCompression", taskId.ToString("N"));
         var temporaryPath = Path.Combine(temporaryRoot, Guid.NewGuid().ToString("N") + ".jpg");
+        var stage = MediaTaskStages.FileOpen;
         try
         {
             var sourceInfo = new FileInfo(item.SourcePath);
@@ -122,21 +123,27 @@ public sealed class BatchCompressionSafeService(
             var originalLength = sourceInfo.Length;
             var originalModified = sourceInfo.LastWriteTimeUtc;
 
+            stage = MediaTaskStages.TemporaryWrite;
             Directory.CreateDirectory(temporaryRoot);
             await using (var output = new FileStream(temporaryPath, FileMode.CreateNew, FileAccess.Write, FileShare.None,
                 262144, FileOptions.Asynchronous | FileOptions.SequentialScan | FileOptions.WriteThrough))
             {
+                stage = MediaTaskStages.ImageDecode;
                 await encoder.EncodeAsync(item.SourcePath, output, options, cancellationToken).ConfigureAwait(false);
+                stage = MediaTaskStages.TemporaryWrite;
                 await output.FlushAsync(cancellationToken).ConfigureAwait(false);
                 output.Flush(true);
             }
 
+            stage = MediaTaskStages.OutputVerification;
             ValidateJpeg(temporaryPath);
             await encoder.VerifyDecodableAsync(temporaryPath, cancellationToken).ConfigureAwait(false);
+            stage = MediaTaskStages.SourceVerification;
             sourceInfo.Refresh();
             if (!sourceInfo.Exists || sourceInfo.Length != originalLength || sourceInfo.LastWriteTimeUtc != originalModified)
                 throw new IOException(ErrorCodeCatalog.SourceChanged);
 
+            stage = MediaTaskStages.OutputVerification;
             var temporaryInfo = new FileInfo(temporaryPath);
             var temporaryHash = await verification.ComputeSha256Async(temporaryPath, cancellationToken).ConfigureAwait(false);
             var copyItem = new FileOperationItem(Guid.NewGuid(), item.Sequence, temporaryPath, item.DestinationPath,
@@ -145,6 +152,7 @@ public sealed class BatchCompressionSafeService(
             var copyPlan = new FileOperationPlan(1, Guid.NewGuid(), taskId, projectId, FileOperationType.Copy,
                 temporaryRoot, Path.GetDirectoryName(item.DestinationPath)!, FileConflictPolicy.AutoNumber,
                 [copyItem], temporaryInfo.Length, FileOperationRiskLevel.Low, DateTimeOffset.UtcNow);
+            stage = MediaTaskStages.OutputCommit;
             var execution = await operationExecutor.ExecuteAsync(copyPlan, cancellationToken: cancellationToken).ConfigureAwait(false);
             ownedCopy = execution.Items.SingleOrDefault(result =>
                 result.ItemId == copyItem.Id && result.State == FileOperationItemState.Completed);
@@ -152,14 +160,18 @@ public sealed class BatchCompressionSafeService(
             {
                 var failed = execution.Items.FirstOrDefault(result => result.ItemId == copyItem.Id)
                     ?? execution.Items.FirstOrDefault();
+                var failureCode = failed?.ErrorCode ?? ErrorCodeCatalog.DestinationNotWritable;
+                var failure = CreateFailure(item.SourcePath, stage, failureCode,
+                    failed?.ErrorMessage ?? "The compression output could not be committed safely.", false);
                 return new(item.Sequence,
                     failed?.State == FileOperationItemState.NeedsAttention
                         ? BatchCompressionItemState.NeedsAttention
                         : BatchCompressionItemState.Failed,
-                    item.SourcePath, null, 0, failed?.ErrorCode ?? ErrorCodeCatalog.DestinationNotWritable,
-                    "The compression output could not be committed safely.");
+                    item.SourcePath, null, 0, failureCode,
+                    "The compression output could not be committed safely.", failure);
             }
 
+            stage = MediaTaskStages.OutputVerification;
             ValidateJpeg(ownedCopy.DestinationPath);
             await encoder.VerifyDecodableAsync(ownedCopy.DestinationPath, CancellationToken.None).ConfigureAwait(false);
             var outputInfo = new FileInfo(ownedCopy.DestinationPath);
@@ -173,12 +185,15 @@ public sealed class BatchCompressionSafeService(
         catch (Exception exception) when (!cancellationToken.IsCancellationRequested)
         {
             var code = MapError(exception);
+            var failure = CreateFailure(item.SourcePath, stage, code,
+                $"{exception.GetType().Name}: {exception.Message}",
+                ownedCopy is not null && !string.IsNullOrWhiteSpace(ownedCopy.DestinationPath));
             if (ownedCopy is not null && !string.IsNullOrWhiteSpace(ownedCopy.DestinationPath))
             {
                 var outputInfo = new FileInfo(ownedCopy.DestinationPath);
                 return new(item.Sequence, BatchCompressionItemState.PartiallyCompleted, item.SourcePath,
                     ownedCopy.DestinationPath, outputInfo.Exists ? outputInfo.Length : 0, code,
-                    "The committed output needs attention.");
+                    "The committed output needs attention.", failure);
             }
 
             var state = exception is UnauthorizedAccessException ||
@@ -188,7 +203,7 @@ public sealed class BatchCompressionSafeService(
             return new(item.Sequence, state, item.SourcePath, null, 0, code,
                 state == BatchCompressionItemState.NeedsAttention
                     ? "The compression output needs attention."
-                    : "Compression failed.");
+                    : "Compression failed.", failure);
         }
         finally
         {
@@ -209,9 +224,17 @@ public sealed class BatchCompressionSafeService(
             throw new InvalidDataException("The JPEG output was not fully written.");
     }
 
-    private static BatchCompressionItemResult Failure(FileOperationItem item, FileOperationValidationIssue issue) =>
-        new(item.Sequence, issue.RequiresAttention ? BatchCompressionItemState.NeedsAttention : BatchCompressionItemState.Failed,
-            item.SourcePath, null, 0, issue.ErrorCode, issue.Message);
+    private static BatchCompressionItemResult Failure(FileOperationItem item, FileOperationValidationIssue issue)
+    {
+        var failure = CreateFailure(item.SourcePath, MediaTaskStages.InputValidation, issue.ErrorCode, issue.Message, false);
+        return new(item.Sequence, issue.RequiresAttention ? BatchCompressionItemState.NeedsAttention : BatchCompressionItemState.Failed,
+            item.SourcePath, null, 0, issue.ErrorCode, issue.Message, failure);
+    }
+
+    private static MediaTaskFailureDetail CreateFailure(string sourcePath, string stage, string errorCode,
+        string technicalMessage, bool outputOwned) => new(Path.GetFileName(sourcePath), stage, errorCode,
+        MediaTaskFailureMessages.UserMessage(stage, errorCode), MediaTaskFailurePayload.SanitizeTechnical(technicalMessage),
+        MediaTaskFailureMessages.Retryable(errorCode), outputOwned);
 
     private static TaskResultSummary Summarize(int total, IReadOnlyCollection<BatchCompressionItemResult> results) =>
         new(total, results.Count(item => item.State == BatchCompressionItemState.Completed),

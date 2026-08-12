@@ -17,6 +17,14 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\product-redesign-rc1-win-x64"
 #endif
+#ifdef CoreReliabilityDevValidation
+  #undef MyAppName
+  #define MyAppName "像素蛋挞 核心可靠性验收"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\core-reliability-devvalidation-win-x64-2"
+#endif
 #ifdef TestBuild
   #undef MyAppName
   #define MyAppName "像素蛋挞 验收测试"
@@ -27,6 +35,9 @@
 #endif
 
 [Setup]
+#ifdef CoreReliabilityDevValidation
+AppId={{4FBAC285-72B5-4560-A249-EBF70EFD7B3F}
+#else
 #ifdef ProductRedesignCandidate
 AppId={{9E737D34-58DB-4B4D-91DF-C7B8A96D5F20}
 #else
@@ -40,10 +51,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef CoreReliabilityDevValidation
+DefaultDirName={autopf}\像素蛋挞_CoreReliability_DevValidation
+#else
 #ifdef ProductRedesignCandidate
 DefaultDirName={autopf}\像素蛋挞_ProductRedesign_RC1
 #else
@@ -57,10 +72,15 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #endif
+#endif
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef CoreReliabilityDevValidation
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=像素蛋挞_2.3.0_CoreReliability_DevValidation_x64
+#else
 #ifdef ProductRedesignCandidate
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_ProductRedesign_RC1_x64
@@ -99,6 +119,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
 #else
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
+#endif
 #endif
 #endif
 #endif

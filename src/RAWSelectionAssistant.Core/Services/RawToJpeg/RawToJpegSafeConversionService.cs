@@ -93,7 +93,8 @@ public sealed class RawToJpegSafeConversionService(
 
         var sourceRoot = Path.GetDirectoryName(sources[0]) ?? Path.GetPathRoot(sources[0])!;
         return new(1, Guid.NewGuid(), taskId, projectId, FileOperationType.Copy, sourceRoot, destinationRoot,
-            FileConflictPolicy.AutoNumber, items, estimatedBytes, FileOperationRiskLevel.Low, DateTimeOffset.UtcNow);
+            FileConflictPolicy.AutoNumber, items, estimatedBytes, FileOperationRiskLevel.Low, DateTimeOffset.UtcNow,
+            AllowSourceAndDestinationRootSame: true);
     }
 
     private async Task<RawToJpegItemResult> ConvertItemAsync(Guid taskId, FileOperationItem item, RawToJpegOptions options, CancellationToken cancellationToken)
@@ -106,32 +107,40 @@ public sealed class RawToJpegSafeConversionService(
         var temporaryRoot = Path.Combine(Path.GetTempPath(), "PixelTartRawToJpeg", taskId.ToString("N"));
         var temporaryPath = Path.Combine(temporaryRoot, Guid.NewGuid().ToString("N") + ".jpg");
         var encodePath = operationExecutor is null ? item.DestinationPath : temporaryPath;
+        var stage = MediaTaskStages.FileOpen;
         try
         {
             var sourceInfo = new FileInfo(item.SourcePath);
             if (!sourceInfo.Exists) throw new FileNotFoundException("The RAW source is unavailable.");
             var originalLength = sourceInfo.Length;
             var originalModified = sourceInfo.LastWriteTimeUtc;
+            stage = MediaTaskStages.RawDecode;
             var decoded = await decoder.DecodeAsync(item.SourcePath, options, cancellationToken).ConfigureAwait(false);
             ValidateDecoded(decoded);
 
+            stage = MediaTaskStages.TemporaryWrite;
             Directory.CreateDirectory(Path.GetDirectoryName(encodePath)!);
             await using (var output = new FileStream(encodePath, FileMode.CreateNew, FileAccess.Write, FileShare.None,
                 262144, FileOptions.Asynchronous | FileOptions.WriteThrough))
             {
                 created = true;
+                stage = MediaTaskStages.JpegEncode;
                 await encoder.EncodeAsync(decoded, output, options, cancellationToken).ConfigureAwait(false);
+                stage = MediaTaskStages.TemporaryWrite;
                 await output.FlushAsync(cancellationToken).ConfigureAwait(false);
                 output.Flush(true);
             }
 
+            stage = MediaTaskStages.OutputVerification;
             ValidateJpeg(encodePath);
+            stage = MediaTaskStages.SourceVerification;
             sourceInfo.Refresh();
             if (!sourceInfo.Exists || sourceInfo.Length != originalLength || sourceInfo.LastWriteTimeUtc != originalModified)
                 throw new RawDecodeException(ErrorCodeCatalog.SourceChanged, "The RAW source changed during conversion.");
 
             if (operationExecutor is not null)
             {
+                stage = MediaTaskStages.OutputCommit;
                 var temporaryInfo = new FileInfo(temporaryPath);
                 var copyItem = new FileOperationItem(Guid.NewGuid(), item.Sequence, temporaryPath, item.DestinationPath,
                     FileOperationType.Copy, FileConflictPolicy.AutoNumber, temporaryInfo.Length, temporaryInfo.LastWriteTimeUtc);
@@ -145,9 +154,11 @@ public sealed class RawToJpegSafeConversionService(
                 ownedCopy = copied;
                 outputPath = copied.DestinationPath;
                 journalWrittenByExecutor = true;
+                stage = MediaTaskStages.OutputVerification;
                 ValidateJpeg(outputPath);
             }
 
+            stage = MediaTaskStages.OutputVerification;
             var outputInfo = new FileInfo(outputPath);
             var hash = options.VerifySha256
                 ? ownedCopy?.Hash ?? await verification.ComputeSha256Async(outputPath,
@@ -163,7 +174,8 @@ public sealed class RawToJpegSafeConversionService(
             catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
             {
                 return new(item.Sequence, RawToJpegItemState.PartiallyCompleted, item.SourcePath, outputPath,
-                    outputInfo.Length, hash, ErrorCodeCatalog.DatabaseUnavailable, SafeMessage(ex));
+                    outputInfo.Length, hash, ErrorCodeCatalog.DatabaseUnavailable, SafeMessage(ex),
+                    CreateFailure(item.SourcePath, MediaTaskStages.TaskPersistence, ErrorCodeCatalog.DatabaseUnavailable, ex, true));
             }
             return new(item.Sequence, RawToJpegItemState.Completed, item.SourcePath, outputPath,
                 outputInfo.Length, hash, null, null);
@@ -177,6 +189,8 @@ public sealed class RawToJpegSafeConversionService(
         {
             if (created && !committed && operationExecutor is null) TryDeleteOwnedOutput(outputPath);
             var code = MapError(ex);
+            var failure = CreateFailure(item.SourcePath, stage, code, ex,
+                ownedCopy is not null && !string.IsNullOrWhiteSpace(ownedCopy.DestinationPath));
             if (ownedCopy is not null && !string.IsNullOrWhiteSpace(ownedCopy.DestinationPath))
             {
                 outputPath = ownedCopy.DestinationPath;
@@ -191,11 +205,11 @@ public sealed class RawToJpegSafeConversionService(
                 }
                 catch { }
                 return new(item.Sequence, RawToJpegItemState.PartiallyCompleted, item.SourcePath, outputPath,
-                    outputInfo.Length, outputHash, code, SafeMessage(ex));
+                    outputInfo.Length, outputHash, code, SafeMessage(ex), failure);
             }
             var state = ex is UnauthorizedAccessException || code is ErrorCodeCatalog.FileLocked or ErrorCodeCatalog.DestinationNotWritable
                 ? RawToJpegItemState.NeedsAttention : RawToJpegItemState.Failed;
-            return new(item.Sequence, state, item.SourcePath, null, 0, null, code, SafeMessage(ex));
+            return new(item.Sequence, state, item.SourcePath, null, 0, null, code, SafeMessage(ex), failure);
         }
         finally { TryDeleteOwnedOutput(temporaryPath); }
     }
@@ -220,9 +234,25 @@ public sealed class RawToJpegSafeConversionService(
             throw new InvalidDataException("The JPEG output was not fully written.");
     }
 
-    private static RawToJpegItemResult Failure(FileOperationItem item, FileOperationValidationIssue issue) =>
-        new(item.Sequence, issue.RequiresAttention ? RawToJpegItemState.NeedsAttention : RawToJpegItemState.Failed,
-            item.SourcePath, null, 0, null, issue.ErrorCode, issue.Message);
+    private static RawToJpegItemResult Failure(FileOperationItem item, FileOperationValidationIssue issue)
+    {
+        var failure = new MediaTaskFailureDetail(Path.GetFileName(item.SourcePath), MediaTaskStages.InputValidation,
+            issue.ErrorCode, MediaTaskFailureMessages.UserMessage(MediaTaskStages.InputValidation, issue.ErrorCode),
+            issue.Message, MediaTaskFailureMessages.Retryable(issue.ErrorCode), false);
+        return new(item.Sequence, issue.RequiresAttention ? RawToJpegItemState.NeedsAttention : RawToJpegItemState.Failed,
+            item.SourcePath, null, 0, null, issue.ErrorCode, issue.Message, failure);
+    }
+
+    private static MediaTaskFailureDetail CreateFailure(string sourcePath, string stage, string errorCode,
+        Exception exception, bool outputOwned)
+    {
+        var technical = exception is Sdcb.LibRaw.LibRawException libRaw
+            ? $"LibRawCode={libRaw.ErrorCode};LibRawMessage={libRaw.ErrorExplain};Exception={exception.Message}"
+            : $"{exception.GetType().Name}: {exception.Message}";
+        return new(Path.GetFileName(sourcePath), stage, errorCode,
+            MediaTaskFailureMessages.UserMessage(stage, errorCode), MediaTaskFailurePayload.SanitizeTechnical(technical),
+            MediaTaskFailureMessages.Retryable(errorCode), outputOwned);
+    }
 
     private static TaskResultSummary Summarize(int total, IReadOnlyCollection<RawToJpegItemResult> results) => new(total,
         results.Count(x => x.State == RawToJpegItemState.Completed),
