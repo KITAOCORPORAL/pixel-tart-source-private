@@ -139,8 +139,17 @@ public sealed class BatchCompressionViewModel : ObservableObject
             StatusText = "压缩任务已提交到任务中心；源文件保持不变。";
             await _coordinator.WaitForCompletionAsync(taskId).ConfigureAwait(true);
             var terminal = await _coordinator.GetTaskStateAsync(taskId).ConfigureAwait(true);
-            if (terminal is not null)
-                StatusText = $"{terminal.State} · {taskId:N}" + (string.IsNullOrWhiteSpace(terminal.LastErrorMessage) ? string.Empty : $" · {terminal.LastErrorMessage}");
+            if (terminal is { State: TaskLifecycleState.Completed })
+            {
+                Progress = 100;
+                foreach (var item in Items) { item.State = BatchCompressionItemState.Completed; item.StatusText = "已安全生成 JPG"; }
+                StatusText = $"压缩完成 · TaskId {taskId:N}";
+            }
+            else if (terminal is not null)
+            {
+                foreach (var item in Items) { item.State = BatchCompressionItemState.Failed; item.StatusText = "请在任务中心查看原因"; }
+                StatusText = $"{MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "压缩未完成，请打开任务中心查看原因。")} · TaskId {taskId:N}";
+            }
             RaiseCommands();
         }
         catch (Exception)

@@ -17,7 +17,8 @@ public sealed record FileOperationPlan(
     IReadOnlyList<FileOperationItem> Items,
     long EstimatedBytes,
     FileOperationRiskLevel RiskLevel,
-    DateTimeOffset CreatedAt);
+    DateTimeOffset CreatedAt,
+    bool AllowSourceAndDestinationRootSame = false);
 
 public sealed record FileOperationItem(
     Guid Id,

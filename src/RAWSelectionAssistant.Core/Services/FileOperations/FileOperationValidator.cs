@@ -9,7 +9,8 @@ public sealed class FileOperationValidator : IFileOperationValidator
         var issues = new List<FileOperationValidationIssue>();
         var sourceRoot = Normalize(plan.SourceRoot);
         var destinationRoot = Normalize(plan.DestinationRoot);
-        if (string.Equals(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase))
+        if (!plan.AllowSourceAndDestinationRootSame &&
+            string.Equals(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase))
             issues.Add(new(ErrorCodeCatalog.SourceAndDestinationSame, "来源与目标不能是同一位置。"));
         if (IsInside(destinationRoot, sourceRoot))
             issues.Add(new(ErrorCodeCatalog.DestinationInsideSource, "目标目录不能位于来源目录内部。"));

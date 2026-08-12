@@ -148,7 +148,7 @@
                                     <TextBlock Text="交付结果" Style="{StaticResource Av2EmptyStateTitle}" />
                                     <TextBlock Text="客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
                                     <Button Content="同步归片工作区" Style="{StaticResource Av2PrimaryButton}" Command="{Binding SyncResultsCommand}" HorizontalAlignment="Center" />
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{DynamicResource SpacingVertical8}"><Button Content="导出 TXT" Style="{StaticResource Av2SecondaryButton}" /><Button Content="导出 CSV" Style="{StaticResource Av2SecondaryButton}" Margin="{DynamicResource SpacingHorizontal8}" /></StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{DynamicResource SpacingVertical8}"><Button Content="导出 TXT（准备中）" Style="{StaticResource Av2SecondaryButton}" IsEnabled="False" ToolTip="当前版本请使用“同步归片工作区”；独立结果文件导出尚未开放。" ToolTipService.ShowOnDisabled="True" /><Button Content="导出 CSV（准备中）" Style="{StaticResource Av2SecondaryButton}" IsEnabled="False" ToolTip="当前版本请使用“同步归片工作区”；独立结果文件导出尚未开放。" ToolTipService.ShowOnDisabled="True" Margin="{DynamicResource SpacingHorizontal8}" /></StackPanel>
                                 </StackPanel>
                             </Border>
                         </Grid>

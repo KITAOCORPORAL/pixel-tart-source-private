@@ -14,6 +14,25 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class RawToJpegSafeConversionTests
 {
     [TestMethod]
+    public void StructuredFailurePayload_RedactsLocalPathsAndRoundTripsRequiredFields()
+    {
+        var detail = new MediaTaskFailureDetail("DSC09403.ARW", MediaTaskStages.RawDecode,
+            ErrorCodeCatalog.DecodeFailed, "无法完成 RAW 解码。",
+            @"LibRawException C:\Users\Example\Downloads\DSC09403.ARW", true, false);
+
+        var payload = MediaTaskFailurePayload.Serialize(detail);
+
+        Assert.IsTrue(MediaTaskFailurePayload.TryParse(payload, out var restored));
+        Assert.AreEqual("DSC09403.ARW", restored!.FileName);
+        Assert.AreEqual(MediaTaskStages.RawDecode, restored.Stage);
+        Assert.AreEqual(ErrorCodeCatalog.DecodeFailed, restored.ErrorCode);
+        Assert.IsTrue(restored.Retryable);
+        Assert.IsFalse(restored.OutputOwned);
+        Assert.DoesNotContain(@"C:\Users\Example", payload);
+        StringAssert.Contains(payload, "PATH_REDACTED");
+    }
+
+    [TestMethod]
     public async Task Conversion_UsesCreateNewAutoNumberAndKeepsRawUnchanged()
     {
         using var setup = await SetupAsync();
@@ -43,6 +62,27 @@ public sealed class RawToJpegSafeConversionTests
     }
 
     [TestMethod]
+    public async Task Conversion_AllowsSameDirectoryButStillAutoNumbersAndNeverTouchesRaw()
+    {
+        using var setup = await SetupAsync(useOperationExecutor: true);
+        var source = setup.Temp.CreateFile("same/portrait.ARW", [1, 2, 3, 4]);
+        var sourceBytes = await File.ReadAllBytesAsync(source);
+        var sourceModified = File.GetLastWriteTimeUtc(source);
+        var existing = setup.Temp.CreateFile("same/portrait.jpg", [9, 8, 7]);
+
+        var result = await setup.ConvertAsync(new([source], setup.Temp.Combine("same"), new()));
+
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        var output = result.Items.Single().DestinationPath!;
+        Assert.AreNotEqual(source, output);
+        Assert.AreNotEqual(existing, output);
+        StringAssert.Contains(Path.GetFileName(output), "(1)");
+        CollectionAssert.AreEqual(sourceBytes, await File.ReadAllBytesAsync(source));
+        Assert.AreEqual(sourceModified, File.GetLastWriteTimeUtc(source));
+        CollectionAssert.AreEqual(new byte[] { 9, 8, 7 }, await File.ReadAllBytesAsync(existing));
+    }
+
+    [TestMethod]
     public async Task EncoderFailure_DoesNotLeaveOutputOrTouchRaw()
     {
         using var setup = await SetupAsync(new ThrowingEncoder());
@@ -51,6 +91,9 @@ public sealed class RawToJpegSafeConversionTests
 
         Assert.AreEqual(TaskLifecycleState.Failed, result.State);
         Assert.AreEqual(1, result.Summary.Failed);
+        Assert.AreEqual(MediaTaskStages.JpegEncode, result.Items.Single().Failure?.Stage);
+        Assert.AreEqual("无法完成 JPEG 编码。", result.Items.Single().Failure?.UserMessage);
+        Assert.IsFalse(result.Items.Single().Failure?.OutputOwned);
         Assert.IsFalse(Directory.Exists(setup.Temp.Combine("jpg")) && Directory.GetFiles(setup.Temp.Combine("jpg")).Length > 0);
         CollectionAssert.AreEqual(new byte[] { 5, 4, 3 }, await File.ReadAllBytesAsync(source));
         Assert.IsEmpty(await setup.Undo.ListAsync(result.TaskId));

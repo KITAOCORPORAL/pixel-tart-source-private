@@ -58,11 +58,12 @@ public sealed class BatchCompressionTaskHandler(
             var summary = Summarize(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
             var state = ResolveState(checkpoint.OriginalRequest.SourceFiles.Count, aggregate);
             requests.Update(context.Definition.Id, durableCheckpoint);
+            var firstFailure = aggregate.FirstOrDefault(item => item.Failure is not null)?.Failure;
             executionResult = new(state, summary,
-                aggregate.FirstOrDefault(item => item.ErrorCode is not null)?.ErrorCode,
+                firstFailure?.ErrorCode ?? aggregate.FirstOrDefault(item => item.ErrorCode is not null)?.ErrorCode,
                 state == TaskLifecycleState.Completed
                     ? null
-                    : "One or more compression items require attention; completed outputs are not repeated on retry.");
+                    : BuildFailurePayload(firstFailure, summary));
         }
         finally
         {
@@ -123,6 +124,10 @@ public sealed class BatchCompressionTaskHandler(
         if (summary.Cancelled > 0 && summary.Failed == 0) return TaskLifecycleState.Cancelled;
         return TaskLifecycleState.Failed;
     }
+
+    private static string BuildFailurePayload(MediaTaskFailureDetail? failure, TaskResultSummary summary) => failure is null
+        ? $"批量压缩未完成：成功 {summary.Succeeded}，失败 {summary.Failed + summary.WaitingForAttention}。请查看原因后重试失败项。"
+        : MediaTaskFailurePayload.Serialize(failure);
 }
 
 public sealed class BatchCompressionTaskCoordinator(

@@ -39,18 +39,24 @@ public sealed class BatchCompressionSafetyTests
     }
 
     [TestMethod]
-    public async Task SourceAndDestinationSame_IsRejectedBeforeEncoderRuns()
+    public async Task SameDirectory_IsAllowedWithAutoNumberAndSourceIsPreserved()
     {
         var encoder = new RecordingEncoder();
         using var setup = await SetupAsync(encoder);
         var source = setup.Temp.CreateFile("same/image.jpg", [1, 2]);
 
+        var existing = setup.Temp.CreateFile("same/image (1).jpg", [9, 8, 7]);
         var result = await setup.Service.CompressAsync(Guid.NewGuid(),
             new([source], setup.Temp.Combine("same"), new()));
 
-        Assert.AreEqual(TaskLifecycleState.Failed, result.State);
-        Assert.AreEqual(0, encoder.CallCount);
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        Assert.AreEqual(1, encoder.CallCount);
+        var output = result.Items.Single().DestinationPath!;
+        Assert.AreNotEqual(source, output);
+        Assert.AreNotEqual(existing, output);
+        StringAssert.Contains(Path.GetFileName(output), "(2)");
         CollectionAssert.AreEqual(new byte[] { 1, 2 }, await File.ReadAllBytesAsync(source));
+        CollectionAssert.AreEqual(new byte[] { 9, 8, 7 }, await File.ReadAllBytesAsync(existing));
     }
 
     [TestMethod]
@@ -85,6 +91,8 @@ public sealed class BatchCompressionSafetyTests
 
         Assert.AreEqual(TaskLifecycleState.Failed, result.State);
         Assert.AreEqual(ErrorCodeCatalog.CorruptedImage, result.Items.Single().ErrorCode);
+        Assert.AreEqual(MediaTaskStages.OutputVerification, result.Items.Single().Failure?.Stage);
+        Assert.AreEqual("JPG 已生成，但最终文件验证失败。", result.Items.Single().Failure?.UserMessage);
         Assert.IsFalse(Directory.Exists(setup.Temp.Combine("output")) &&
                        Directory.EnumerateFiles(setup.Temp.Combine("output")).Any());
         Assert.IsFalse(Directory.Exists(TemporaryTaskPath(taskId)) &&
