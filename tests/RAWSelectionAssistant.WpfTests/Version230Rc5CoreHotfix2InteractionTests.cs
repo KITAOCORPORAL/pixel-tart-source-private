@@ -222,6 +222,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     [DataRow("Padding=\"6,0\"")]
     [DataRow("CalendarStatusScheduledBrush")]
     [DataRow("CalendarStatusPendingDeliveryBrush")]
+    [DataRow("CalendarStatusPendingDeliveryForegroundBrush")]
     [DataRow("CalendarStatusDeliveredBrush")]
     public void FullCalendar_UsesCompleteFiveStateDayBadge(string token) => Contains(FullCalendar(), token);
 
