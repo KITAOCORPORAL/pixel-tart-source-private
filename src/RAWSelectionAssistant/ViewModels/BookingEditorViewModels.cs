@@ -99,13 +99,15 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private FinanceSummary _financeSummary = new(0, 0, 0, 0, 0, 0);
     private CalendarWorkflowStatusOption? _selectedWorkflowStatus;
     private bool _suppressWorkflowStatusChange;
+    private readonly IBookingWorkflowService? _workflowService;
 
     public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
         IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
         IWeatherForecastService? weatherService = null, WeatherFeatureState? weatherState = null,
         IBookingPeopleService? peopleService = null, IFinanceService? financeService = null,
         ICurrentLocationService? currentLocationService = null,
-        IBookingTimeDisplayService? timeDisplay = null)
+        IBookingTimeDisplayService? timeDisplay = null,
+        IBookingWorkflowService? workflowService = null)
     {
         _service = service;
         _reminderScheduler = reminderScheduler;
@@ -113,6 +115,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         _timeDisplay = timeDisplay ?? BookingTimeDisplayService.Default;
         _peopleService = peopleService;
         _financeService = financeService;
+        _workflowService = workflowService;
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         if (reminderService is not null) Reminders = new BookingRemindersViewModel(reminderService, reminderScheduler);
         if (weatherService is not null && weatherState is not null) Weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService, _timeDisplay);
@@ -164,6 +167,8 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public bool IsArchived => Booking?.IsArchived == true;
     public bool CanEdit => Booking is { IsArchived: false };
     public bool CanComplete => Booking is { IsArchived: false, Status: not ShootBookingStatus.Completed and not ShootBookingStatus.Cancelled };
+    public string ShootCompletionText => Booking?.ShotCompletedAtUtc is { } completed ? $"拍摄 ✓ 已完成 · {completed.ToLocalTime():yyyy-MM-dd HH:mm}" : "拍摄 · 待拍摄";
+    public string WorkflowStageText => Booking is null ? "—" : CalendarWorkflowStateMapper.DisplayName(CalendarWorkflowStateMapper.FromBookingStatus(Booking.Status));
     public string Title => Booking?.Title ?? "排期详情";
     public string ClientDisplayName => Booking?.ClientDisplayName ?? "—";
     public string TimeText => Booking is null ? "—" : FormatTime(Booking);
@@ -259,11 +264,16 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
 
     private async Task CompleteAsync()
     {
-        if (Booking is null || !await _service.CompleteAsync(Booking.Id).ConfigureAwait(true)) return;
-        Booking = Booking with { Status = ShootBookingStatus.Completed, UpdatedAtUtc = DateTimeOffset.UtcNow };
+        if (Booking is null) return;
+        var completed = _workflowService is not null
+            ? await _workflowService.MarkShootCompletedAsync(Booking.Id).ConfigureAwait(true)
+            : new BookingWorkflowResult(Booking.Id, (await _service.CompleteAsync(Booking.Id).ConfigureAwait(true)) ? BookingWorkflowOperationStatus.Succeeded : BookingWorkflowOperationStatus.Failed,
+                CalendarWorkflowStateMapper.FromBookingStatus(Booking.Status), CalendarWorkflowState.PostProduction, DateTimeOffset.UtcNow);
+        if (!completed.IsSuccess) { StatusText = completed.ErrorMessage ?? "拍摄完成状态未能保存，请重试。"; return; }
+        Booking = Booking with { Status = ShootBookingStatus.Completed, ShotCompletedAtUtc = completed.ShotCompletedAtUtc ?? DateTimeOffset.UtcNow, UpdatedAtUtc = DateTimeOffset.UtcNow };
         if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false, Booking.TimeZoneId).ConfigureAwait(true);
         if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
-        StatusText = "拍摄已完成；未来未触发提醒已关闭，排期和历史记录均已保留。";
+        StatusText = "拍摄已完成，流程已进入后期；未来未触发提醒已关闭，排期和历史记录均已保留。";
         Completed?.Invoke(this, Booking.Id);
     }
 
@@ -284,13 +294,22 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         try
         {
             var status = CalendarWorkflowStatusMapper.ToBookingStatus(requested.Value);
-            if (!await _service.SetStatusAsync(Booking.Id, status).ConfigureAwait(true))
+            var changed = _workflowService is not null
+                ? requested.Value switch
+                {
+                    CalendarWorkflowStatus.Scheduled => await _workflowService.UndoShootCompletedAsync(Booking.Id).ConfigureAwait(true),
+                    CalendarWorkflowStatus.PendingDelivery => await _workflowService.SetPostProductionStageAsync(Booking.Id, CalendarPostProductionStage.PendingDelivery).ConfigureAwait(true),
+                    CalendarWorkflowStatus.Delivered => await _workflowService.MarkDeliveredAsync(Booking.Id).ConfigureAwait(true),
+                    _ => new BookingWorkflowResult(Booking.Id, BookingWorkflowOperationStatus.Rejected, current is CalendarWorkflowStatus.Scheduled ? CalendarWorkflowState.Scheduled : CalendarWorkflowState.PostProduction, CalendarWorkflowState.PostProduction, ErrorMessage: "请使用“标记拍摄完成”进入后期流程。")
+                }
+                : new BookingWorkflowResult(Booking.Id, (await _service.SetStatusAsync(Booking.Id, status).ConfigureAwait(true)) ? BookingWorkflowOperationStatus.Succeeded : BookingWorkflowOperationStatus.Failed, CalendarWorkflowStateMapper.FromBookingStatus(Booking.Status), CalendarWorkflowStateMapper.FromBookingStatus(status));
+            if (!changed.IsSuccess)
             {
-                StatusText = "拍摄流程状态未能保存，请重试。";
+                StatusText = changed.ErrorMessage ?? "拍摄流程状态未能保存，请重试。";
                 SyncWorkflowStatus();
                 return;
             }
-            Booking = Booking with { Status = status, UpdatedAtUtc = DateTimeOffset.UtcNow };
+            Booking = Booking with { Status = status, ShotCompletedAtUtc = changed.ShotCompletedAtUtc ?? Booking.ShotCompletedAtUtc, UpdatedAtUtc = DateTimeOffset.UtcNow };
             if (Reminders is not null) await Reminders.LoadAsync(Booking.Id, Booking.ProjectId, isReadOnly: false, Booking.TimeZoneId).ConfigureAwait(true);
             if (_reminderScheduler is not null) await _reminderScheduler.RefreshAsync().ConfigureAwait(true);
             StatusText = $"拍摄流程已更新为“{requested.Label}”。";
@@ -311,7 +330,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
 
     private void NotifyBooking()
     {
-        foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(CanComplete), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
+        foreach (var name in new[] { nameof(IsArchived), nameof(CanEdit), nameof(CanComplete), nameof(Title), nameof(ClientDisplayName), nameof(TimeText), nameof(TimeZoneText), nameof(LocationText), nameof(ShootingTypeText), nameof(BookingStatusText), nameof(ShootCompletionText), nameof(WorkflowStageText), nameof(ShootingRequirementsText), nameof(PreparationNotesText), nameof(NotesText) }) OnPropertyChanged(name);
         (EditCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (FullPlanningCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (CompleteCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();

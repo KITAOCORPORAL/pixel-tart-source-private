@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services.BatchCompression;
 
@@ -26,7 +27,7 @@ public interface IBatchCompressionRequestStore
     void Remove(Guid taskId);
 }
 
-public interface IBatchCompressionTaskCoordinator
+public interface IBatchCompressionTaskCoordinator : ITaskCompletionStateProvider
 {
     Task<Guid> StartAsync(BatchCompressionRequest request, CancellationToken cancellationToken = default);
     Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default);

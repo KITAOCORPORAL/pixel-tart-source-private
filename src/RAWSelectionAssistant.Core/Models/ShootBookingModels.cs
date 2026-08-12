@@ -27,6 +27,45 @@ public enum CalendarWorkflowStatus
     Delivered
 }
 
+public enum CalendarWorkflowState
+{
+    Free,
+    Scheduled,
+    PostProduction,
+    Delivered
+}
+
+public enum CalendarPostProductionStage
+{
+    AwaitingSelection,
+    ClientSelecting,
+    Selected,
+    Retouching,
+    PendingDelivery,
+    WaitingClientConfirm
+}
+
+public enum BookingWorkflowOperationStatus
+{
+    Succeeded,
+    AlreadyApplied,
+    Rejected,
+    NotFound,
+    Failed
+}
+
+public sealed record BookingWorkflowResult(
+    Guid BookingId,
+    BookingWorkflowOperationStatus Status,
+    CalendarWorkflowState PreviousState,
+    CalendarWorkflowState CurrentState,
+    DateTimeOffset? ShotCompletedAtUtc = null,
+    string? ErrorCode = null,
+    string? ErrorMessage = null)
+{
+    public bool IsSuccess => Status is BookingWorkflowOperationStatus.Succeeded or BookingWorkflowOperationStatus.AlreadyApplied;
+}
+
 public enum ShootRequirementPriority { Low, Normal, High, Critical }
 public enum BookingDocumentType { PhotographyPlan, ShootAgreement, ModelRelease, Quotation, VenueMaterial, WardrobeReference, LightingDiagram, CameraDiagram, MoodBoard, StaffFile, Other }
 public enum BookingDocumentLinkMode { Reference, ManagedCopy }
@@ -47,6 +86,7 @@ public sealed record ShootBooking
     public string TimeZoneId { get; init; } = TimeZoneInfo.Local.Id;
     public bool IsAllDay { get; init; }
     public ShootBookingStatus Status { get; init; } = ShootBookingStatus.Tentative;
+    public DateTimeOffset? ShotCompletedAtUtc { get; init; }
     public string? Location { get; init; }
     public string ShootingType { get; init; } = "Other";
     public string? ShootingRequirements { get; init; }

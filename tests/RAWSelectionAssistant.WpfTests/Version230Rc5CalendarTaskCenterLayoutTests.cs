@@ -14,7 +14,7 @@ public sealed class Version230Rc5CalendarTaskCenterLayoutTests
         var xaml = Read("src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml");
         Contains(xaml, "MinWidth=\"24\"", "Height=\"22\"", "Padding=\"5,0\"", "CornerRadius=\"5\"", "TooltipText", "LineHeight=\"16\"", "LineStackingStrategy=\"BlockLineHeight\"");
         Contains(xaml, "MinHeight=\"32\"", "Margin=\"2\"", "Height=\"216\"");
-        Contains(xaml, "CalendarStatusFreeBrush", "CalendarStatusScheduledBrush", "CalendarStatusShotBrush", "CalendarStatusPendingDeliveryBrush", "CalendarStatusDeliveredBrush");
+        Contains(xaml, "CalendarStatusFreeBrush", "CalendarStatusScheduledBrush", "CalendarStatusPendingDeliveryBrush", "CalendarStatusDeliveredBrush");
         Assert.IsFalse(xaml.Contains("ItemsSource=\"{Binding WorkflowSegments}\"", StringComparison.Ordinal));
         Assert.IsFalse(xaml.Contains("Height=\"2\" VerticalAlignment=\"Bottom\" Background=\"{DynamicResource CalendarStatusFreeBrush}\"", StringComparison.Ordinal));
     }
@@ -67,7 +67,7 @@ public sealed class Version230Rc5CalendarTaskCenterLayoutTests
 
     [TestMethod]
     [DataRow(ShootBookingStatus.Confirmed, CalendarWorkflowStatus.Scheduled)]
-    [DataRow(ShootBookingStatus.Completed, CalendarWorkflowStatus.Shot)]
+    [DataRow(ShootBookingStatus.Completed, CalendarWorkflowStatus.PendingDelivery)]
     [DataRow(ShootBookingStatus.AwaitingDelivery, CalendarWorkflowStatus.PendingDelivery)]
     [DataRow(ShootBookingStatus.Delivered, CalendarWorkflowStatus.Delivered)]
     public void MiniCalendar_SingleBookingKeepsExistingWorkflowSemantics(ShootBookingStatus status, CalendarWorkflowStatus expected)

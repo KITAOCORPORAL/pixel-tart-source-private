@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using RAWSelectionAssistant.Core.Models;
 
 namespace RAWSelectionAssistant.Core.Services.Bookings;
@@ -59,7 +59,7 @@ public static class CalendarWorkflowStatusMapper
 {
     public static CalendarWorkflowStatus FromBookingStatus(ShootBookingStatus status) => status switch
     {
-        ShootBookingStatus.Shooting or ShootBookingStatus.Completed => CalendarWorkflowStatus.Shot,
+        ShootBookingStatus.Shooting or ShootBookingStatus.Completed => CalendarWorkflowStatus.PendingDelivery,
         ShootBookingStatus.AwaitingSelectionDelivery or ShootBookingStatus.AwaitingSelection or ShootBookingStatus.Selected or
             ShootBookingStatus.AwaitingRetouch or ShootBookingStatus.Retouched or ShootBookingStatus.AwaitingDelivery => CalendarWorkflowStatus.PendingDelivery,
         ShootBookingStatus.Delivered => CalendarWorkflowStatus.Delivered,
@@ -84,3 +84,4 @@ public static class CalendarWorkflowStatusMapper
         _ => "未知状态"
     };
 }
+

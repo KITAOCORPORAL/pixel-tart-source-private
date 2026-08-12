@@ -31,7 +31,7 @@ public sealed class Version230Rc5CalendarCoreTests
     public void WorkflowMapper_CoversFiveCalendarStatesWithoutInternalLabels()
     {
         Assert.AreEqual(CalendarWorkflowStatus.Scheduled, CalendarWorkflowStatusMapper.FromBookingStatus(ShootBookingStatus.Confirmed));
-        Assert.AreEqual(CalendarWorkflowStatus.Shot, CalendarWorkflowStatusMapper.FromBookingStatus(ShootBookingStatus.Completed));
+        Assert.AreEqual(CalendarWorkflowStatus.PendingDelivery, CalendarWorkflowStatusMapper.FromBookingStatus(ShootBookingStatus.Completed));
         Assert.AreEqual(CalendarWorkflowStatus.PendingDelivery, CalendarWorkflowStatusMapper.FromBookingStatus(ShootBookingStatus.AwaitingDelivery));
         Assert.AreEqual(CalendarWorkflowStatus.Delivered, CalendarWorkflowStatusMapper.FromBookingStatus(ShootBookingStatus.Delivered));
         CollectionAssert.AreEquivalent(new[] { "有拍摄", "已拍摄", "待返图", "已返图" },

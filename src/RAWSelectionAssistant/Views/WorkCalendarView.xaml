@@ -71,13 +71,12 @@
             </Grid>
         </Border>
 
-        <Expander Grid.Row="2" Header="五色状态图例" IsExpanded="True" Margin="0,0,0,12" AutomationProperties.Name="五色状态图例" AutomationProperties.HelpText="可折叠状态图例">
+        <Expander Grid.Row="2" Header="四态工作流图例" IsExpanded="True" Margin="0,0,0,12" AutomationProperties.Name="四态工作流图例" AutomationProperties.HelpText="可折叠状态图例">
             <Border Style="{StaticResource PanelBorder}" Padding="10,7">
             <WrapPanel VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusFreeBrush}" VerticalAlignment="Center" /><TextBlock Text="空闲" Margin="4,0,0,0" /></StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusScheduledBrush}" VerticalAlignment="Center" /><TextBlock Text="有拍摄" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusShotBrush}" VerticalAlignment="Center" /><TextBlock Text="已拍摄" Margin="4,0,0,0" /></StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusPendingDeliveryBrush}" VerticalAlignment="Center" /><TextBlock Text="待返图" Margin="4,0,0,0" /></StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusPendingDeliveryBrush}" VerticalAlignment="Center" /><TextBlock Text="后期待处理" Margin="4,0,0,0" /></StackPanel>
                 <StackPanel Orientation="Horizontal"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusDeliveredBrush}" VerticalAlignment="Center" /><TextBlock Text="已返图" Margin="4,0,0,0" /></StackPanel>
             </WrapPanel>
             </Border>
@@ -98,7 +97,7 @@
                         </DataTemplate></ListBox.ItemTemplate></ListBox>
                     </Grid>
                     <Grid Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="8" Visibility="{Binding IsOverviewPresentation, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <StackPanel Margin="22"><TextBlock Text="当前周期总览" FontSize="20" FontWeight="SemiBold" /><UniformGrid Columns="2" Margin="0,18,0,0"><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,8"><StackPanel><TextBlock Text="{Binding UnshotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="有拍摄" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,0,8"><StackPanel><TextBlock Text="{Binding ShotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="已拍摄" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,0"><StackPanel><TextBlock Text="{Binding AwaitingReturnCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="待返图" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}"><StackPanel><TextBlock Text="{Binding DeliveredCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="已返图" Style="{StaticResource CaptionText}" /></StackPanel></Border></UniformGrid></StackPanel>
+                        <StackPanel Margin="22"><TextBlock Text="当前周期总览" FontSize="20" FontWeight="SemiBold" /><UniformGrid Columns="2" Margin="0,18,0,0"><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,8"><StackPanel><TextBlock Text="{Binding UnshotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="进行中" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,0,8"><StackPanel><TextBlock Text="{Binding ShotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="待确认" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,0"><StackPanel><TextBlock Text="{Binding AwaitingReturnCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="后期待处理" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}"><StackPanel><TextBlock Text="{Binding DeliveredCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="已完成" Style="{StaticResource CaptionText}" /></StackPanel></Border></UniformGrid></StackPanel>
                     </Grid>
                     <Grid Visibility="{Binding IsGlobalSearch, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="10">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>

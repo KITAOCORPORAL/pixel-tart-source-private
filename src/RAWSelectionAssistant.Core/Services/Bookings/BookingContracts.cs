@@ -37,6 +37,23 @@ public interface IShootBookingService
     Task<bool> RestoreAsync(Guid id, CancellationToken cancellationToken = default);
 }
 
+public interface IBookingWorkflowService
+{
+    Task<BookingWorkflowResult> MarkShootCompletedAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<BookingWorkflowResult> UndoShootCompletedAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<BookingWorkflowResult> SetPostProductionStageAsync(Guid bookingId, CalendarPostProductionStage stage, CancellationToken cancellationToken = default);
+    Task<BookingWorkflowResult> MarkDeliveredAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<BookingWorkflowResult> ReopenDeliveryAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<BookingWorkflowResult> SetDayAvailabilityAsync(DateTime date, bool isClosed, CancellationToken cancellationToken = default);
+}
+
+public interface ICalendarWorkflowBooking
+{
+    ShootBookingStatus BookingStatus { get; }
+    DateTime SortStart { get; }
+    bool IsArchived { get; }
+}
+
 public interface IBookingChangeNotifier
 {
     event EventHandler<Guid>? BookingChanged;

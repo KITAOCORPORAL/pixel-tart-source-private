@@ -56,16 +56,19 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             command.CommandText = """
                 INSERT INTO ShootBookings(
                     Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,
+                    ShotCompletedAtUtc,
                     ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,
                     ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc)
                 VALUES(
                     $id,$project,$title,$client,$start,$end,$zone,$allDay,$status,$location,$type,
+                    $shotCompletedAt,
                     $requirements,$preparation,$total,$deposit,$paid,$currency,$scale,
                     $contact,$phone,$overlap,$override,$notes,$created,$updated,$archived,$archivedAt)
                 ON CONFLICT(Id) DO UPDATE SET
                     ProjectId=excluded.ProjectId,Title=excluded.Title,ClientDisplayName=excluded.ClientDisplayName,
                     StartAtUtc=excluded.StartAtUtc,EndAtUtc=excluded.EndAtUtc,TimeZoneId=excluded.TimeZoneId,
                     IsAllDay=excluded.IsAllDay,Status=excluded.Status,Location=excluded.Location,ShootingType=excluded.ShootingType,
+                    ShotCompletedAtUtc=COALESCE(excluded.ShotCompletedAtUtc,ShootBookings.ShotCompletedAtUtc),
                     ShootingRequirements=excluded.ShootingRequirements,PreparationNotes=excluded.PreparationNotes,
                     TotalAmountMinor=excluded.TotalAmountMinor,DepositAmountMinor=excluded.DepositAmountMinor,PaidAmountMinor=excluded.PaidAmountMinor,
                     CurrencyCode=excluded.CurrencyCode,CurrencyScale=excluded.CurrencyScale,ContactName=excluded.ContactName,ContactPhone=excluded.ContactPhone,
@@ -285,7 +288,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var booking = connection.CreateCommand();
         booking.Transaction = transaction;
-        booking.CommandText = "UPDATE ShootBookings SET Status=$status,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>$status;";
+        booking.CommandText = "UPDATE ShootBookings SET Status=$status,ShotCompletedAtUtc=CASE WHEN $status='Completed' THEN COALESCE(ShotCompletedAtUtc,$at) WHEN $status='Confirmed' THEN NULL ELSE ShotCompletedAtUtc END,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>$status;";
         booking.Parameters.AddWithValue("$id", id.ToString("D"));
         booking.Parameters.AddWithValue("$status", status.ToString());
         booking.Parameters.AddWithValue("$at", Utc(updatedAtUtc));
@@ -350,6 +353,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         command.Parameters.AddWithValue("$zone", booking.TimeZoneId);
         command.Parameters.AddWithValue("$allDay", booking.IsAllDay ? 1 : 0);
         command.Parameters.AddWithValue("$status", booking.Status.ToString());
+        command.Parameters.AddWithValue("$shotCompletedAt", Db(booking.ShotCompletedAtUtc));
         command.Parameters.AddWithValue("$location", Db(booking.Location));
         command.Parameters.AddWithValue("$type", booking.ShootingType);
         command.Parameters.AddWithValue("$requirements", Db(booking.ShootingRequirements));
@@ -375,10 +379,10 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         Id = Guid.Parse(reader.GetString(0)), ProjectId = GuidOrNull(reader, 1), Title = reader.GetString(2), ClientDisplayName = reader.GetString(3),
         StartAtUtc = ParseUtc(reader.GetString(4)), EndAtUtc = ParseUtc(reader.GetString(5)), TimeZoneId = reader.GetString(6), IsAllDay = reader.GetInt32(7) != 0,
         Status = EnumValue(reader.GetString(8), ShootBookingStatus.Tentative), Location = TextOrNull(reader, 9), ShootingType = reader.GetString(10),
-        ShootingRequirements = TextOrNull(reader, 11), PreparationNotes = TextOrNull(reader, 12), TotalAmountMinor = LongOrNull(reader, 13), DepositAmountMinor = LongOrNull(reader, 14),
-        PaidAmountMinor = LongOrNull(reader, 15), CurrencyCode = reader.GetString(16), CurrencyScale = reader.GetInt32(17), ContactName = TextOrNull(reader, 18), ContactPhone = TextOrNull(reader, 19),
-        AllowOverlap = reader.GetInt32(20) != 0, ConflictOverride = reader.GetInt32(21) != 0, Notes = TextOrNull(reader, 22), CreatedAtUtc = ParseUtc(reader.GetString(23)),
-        UpdatedAtUtc = ParseUtc(reader.GetString(24)), IsArchived = reader.GetInt32(25) != 0, ArchivedAtUtc = DateOrNull(reader, 26)
+        ShotCompletedAtUtc = DateOrNull(reader, 11), ShootingRequirements = TextOrNull(reader, 12), PreparationNotes = TextOrNull(reader, 13), TotalAmountMinor = LongOrNull(reader, 14), DepositAmountMinor = LongOrNull(reader, 15),
+        PaidAmountMinor = LongOrNull(reader, 16), CurrencyCode = reader.GetString(17), CurrencyScale = reader.GetInt32(18), ContactName = TextOrNull(reader, 19), ContactPhone = TextOrNull(reader, 20),
+        AllowOverlap = reader.GetInt32(21) != 0, ConflictOverride = reader.GetInt32(22) != 0, Notes = TextOrNull(reader, 23), CreatedAtUtc = ParseUtc(reader.GetString(24)),
+        UpdatedAtUtc = ParseUtc(reader.GetString(25)), IsArchived = reader.GetInt32(26) != 0, ArchivedAtUtc = DateOrNull(reader, 27)
     };
 
     private static ShootBookingSummary ReadSummary(SqliteDataReader reader) => new(
@@ -392,7 +396,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         CreatedAtUtc = ParseUtc(reader.GetString(7)), UpdatedAtUtc = ParseUtc(reader.GetString(8))
     };
 
-    private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc FROM ShootBookings";
+    private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShotCompletedAtUtc,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc FROM ShootBookings";
     private const string SummarySelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,AllowOverlap,IsArchived,CreatedAtUtc FROM ShootBookings";
     private static string Utc(DateTimeOffset value) => value.ToUniversalTime().ToString("O");
     private static DateTimeOffset ParseUtc(string value) => DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind).ToUniversalTime();

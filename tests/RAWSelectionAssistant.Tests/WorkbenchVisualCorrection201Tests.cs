@@ -30,7 +30,7 @@ public sealed class WorkbenchVisualCorrection201Tests
 
     [TestMethod] public void ToolboxEscape_ClosesPopup() => Contains(CodeBehind(), "e.Key == Key.Escape && WorkbenchToolboxPopup.IsOpen", "WorkbenchToolboxPopup.IsOpen = false");
     [TestMethod] public void ToolboxFullPage_UsesThreeColumns() => Contains(MainXaml(), "x:Name=\"ToolboxFullPage\"", "<UniformGrid Columns=\"3\"", "ToolCatalogCard", "查看全部工具");
-    [TestMethod] public void ProjectOverview_IsSingleLargePanel() => Contains(MainXaml(), "x:Name=\"ProjectOverviewCard\"", "项目概览", "Columns=\"4\" Rows=\"1\"", "进行中", "待确认", "待返图", "已完成");
+    [TestMethod] public void ProjectOverview_IsSingleLargePanel() => Contains(MainXaml(), "x:Name=\"ProjectOverviewCard\"", "项目概览", "Columns=\"4\" Rows=\"1\"", "进行中", "待确认", "后期待处理", "已完成");
     [TestMethod] public void ProcessingTasks_IsSingleLargePanel() { Contains(MainXaml(), "x:Name=\"ProcessingTasksCard\"", "处理任务", "扫描、复制、压缩和转档任务"); Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "暂无待处理任务"); }
     [TestMethod] public void RecentProjects_HasTabs() => Contains(MainXaml(), "x:Name=\"RecentProjectsArea\"", "最近项目", "本地分片", "归片项目", "已完成", "↻  刷新", "查看全部");
     [TestMethod] public void RecentProjectCard_HasCoverAndMetadata() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "个文件", "更新于", "继续处理");

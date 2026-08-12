@@ -29,6 +29,8 @@
                 <TabItem Header="概览">
                     <ScrollViewer x:Name="OverviewScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel Margin="14">
+                            <TextBlock Text="拍摄" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ShootCompletionText}" FontWeight="SemiBold" Margin="0,2,0,8" />
+                            <TextBlock Text="工作流" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding WorkflowStageText}" Margin="0,2,0,10" />
                             <TextBlock Text="拍摄流程状态" Style="{StaticResource CaptionText}" />
                             <ComboBox ItemsSource="{Binding WorkflowStatusOptions}" SelectedItem="{Binding SelectedWorkflowStatus, Mode=TwoWay}" DisplayMemberPath="Label" Margin="0,4,0,12" AutomationProperties.Name="修改拍摄流程状态" AutomationProperties.HelpText="选择后立即保存；回退状态时会请求确认" />
                             <TextBlock Text="客户" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ClientDisplayName}" Margin="0,2,0,10" />

@@ -101,7 +101,7 @@ public sealed class Version230Rc5RuntimeUiPolishRound2Tests
     [DataRow("搜索项目、客户、地点或拍摄内容")]
     [DataRow("AutomationProperties.Name=\"搜索工作日历\"")]
     [DataRow("全部状态")]
-    [DataRow("五色状态图例")]
+    [DataRow("四态工作流图例")]
     public void FullCalendar_SearchStatusAndLegendAreExplicit(string token) => ContainsAny(token, "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml", "src/RAWSelectionAssistant/ViewModels/CalendarViewModels.cs");
 
     [TestMethod]

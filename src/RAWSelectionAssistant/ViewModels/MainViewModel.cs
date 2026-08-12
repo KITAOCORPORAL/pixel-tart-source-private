@@ -208,6 +208,7 @@ public sealed class MainViewModel : ObservableObject
         GoToWorkflowStepCommand = new RelayCommand(GoToWorkflowStep, _ => !IsBusy);
         NewProjectCommand = new RelayCommand(_ => StartNewProject(), _ => !IsBusy && !IsOnboardingRequired);
         ContinueProjectCommand = new AsyncRelayCommand(ContinueProjectAsync, _ => !IsBusy && ProjectHistory.Count > 0 && !IsOnboardingRequired);
+        RefreshProjectHistoryCommand = new AsyncRelayCommand(_ => ReloadProjectHistoryAsync());
         ActivateLicenseCommand = new AsyncRelayCommand(_ => ActivateLicenseAsync(), _ => !IsBusy && LicenseKeyFormatter.IsComplete(LicenseKeyInput));
         DeactivateLicenseCommand = new AsyncRelayCommand(_ => DeactivateLicenseAsync(), _ => !IsBusy && IsProEdition);
         ValidateLicenseCommand = new AsyncRelayCommand(_ => ValidateLicenseAsync(), _ => !IsBusy && IsProEdition);
@@ -902,6 +903,7 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand GoToWorkflowStepCommand { get; }
     public RelayCommand NewProjectCommand { get; }
     public AsyncRelayCommand ContinueProjectCommand { get; }
+    public AsyncRelayCommand RefreshProjectHistoryCommand { get; }
     public AsyncRelayCommand ActivateLicenseCommand { get; }
     public AsyncRelayCommand DeactivateLicenseCommand { get; }
     public AsyncRelayCommand ValidateLicenseCommand { get; }

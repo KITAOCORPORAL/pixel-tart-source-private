@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Windows;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Database;
@@ -181,6 +182,11 @@ public sealed class TaskSnapshotViewModel : ObservableObject
     public string CurrentFile => string.IsNullOrWhiteSpace(_snapshot.CurrentFile) ? string.Empty : Path.GetFileName(_snapshot.CurrentFile);
     public string ResultText => $"成功 {_snapshot.Summary.Succeeded} · 失败 {_snapshot.Summary.Failed} · 跳过 {_snapshot.Summary.Skipped}";
     public string ErrorSummary => _snapshot.ErrorMessage ?? string.Empty;
+    public bool IsFailure => State is TaskLifecycleState.Failed or TaskLifecycleState.NeedsAttention or TaskLifecycleState.PartiallyCompleted or TaskLifecycleState.Cancelled;
+    public string TaskIdText => $"TaskId: {Id:N}";
+    public string DiagnosticText => string.Join(Environment.NewLine, new[] { TaskIdText, $"State: {State}", $"Progress: {ProgressText}", $"Summary: {ResultText}", string.IsNullOrWhiteSpace(_snapshot.ErrorCode) ? null : $"ErrorCode: {_snapshot.ErrorCode}", string.IsNullOrWhiteSpace(_snapshot.ErrorMessage) ? null : $"Error: {_snapshot.ErrorMessage}" }.Where(x => x is not null)!);
+    public void CopyDiagnostics() => Clipboard.SetText(DiagnosticText);
+    public RelayCommand CopyDiagnosticsCommand => new(_ => CopyDiagnostics());
     public bool IsTerminal => TaskStateMachine.IsTerminal(State);
     public bool CanPause => State is TaskLifecycleState.Running or TaskLifecycleState.Scanning;
     public bool CanResume => State == TaskLifecycleState.Paused;

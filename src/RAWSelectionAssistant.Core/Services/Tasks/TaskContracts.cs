@@ -56,6 +56,12 @@ public interface ITaskEngine : ITaskSnapshotProvider
     Task<IReadOnlyList<TaskRuntimeState>> LoadHistoryAsync(int limit = 200, CancellationToken cancellationToken = default);
 }
 
+public interface ITaskCompletionStateProvider
+{
+    Task<TaskRuntimeState?> GetTaskStateAsync(Guid taskId, CancellationToken cancellationToken = default) =>
+        Task.FromResult<TaskRuntimeState?>(null);
+}
+
 public sealed class TaskExecutionContext
 {
     private readonly Func<string, int, string?, CancellationToken, Task> _safeBoundary;

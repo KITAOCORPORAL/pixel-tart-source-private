@@ -118,7 +118,8 @@ public partial class App : Application
                 new JsonCalendarAvailabilityStore(),
                 _compositionRoot.BookingPeopleService,
                 _compositionRoot.FinanceService,
-                currentLocationService);
+                currentLocationService,
+                _compositionRoot.BookingWorkflowService);
             var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,

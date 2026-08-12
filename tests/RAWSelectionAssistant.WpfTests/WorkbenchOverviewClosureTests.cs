@@ -12,7 +12,7 @@ public sealed class WorkbenchOverviewClosureTests
         var overview = Slice(xaml, "x:Name=\"ProjectOverviewCard\"", "x:Name=\"ProcessingTasksCard\"");
 
         StringAssert.Contains(overview, "Columns=\"4\" Rows=\"1\"");
-        foreach (var label in new[] { "进行中", "待确认", "待返图", "已完成" })
+        foreach (var label in new[] { "进行中", "待确认", "后期待处理", "已完成" })
             StringAssert.Contains(overview, $"Text=\"{label}\"");
         foreach (var removed in new[] { "待处理", "待匹配", "已匹配", "已导出", "本地项目", "需要确认" })
             Assert.IsFalse(overview.Contains($"Text=\"{removed}\"", StringComparison.Ordinal));
