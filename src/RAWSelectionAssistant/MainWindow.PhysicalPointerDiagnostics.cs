@@ -24,6 +24,7 @@ public partial class MainWindow
     private void ConfigurePhysicalPointerDiagnostics()
     {
         if (!PhysicalPointerDiagnosticSession.IsEnabled) return;
+        Title = "像素蛋挞 [Physical Pointer Diagnostic]";
         AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseDown), true);
         AddHandler(Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseUp), true);
         AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseLeftButtonDown), true);
