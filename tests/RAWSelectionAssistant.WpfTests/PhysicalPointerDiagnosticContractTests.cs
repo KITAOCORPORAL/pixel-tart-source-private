@@ -13,7 +13,9 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "Mouse.PreviewMouseDownEvent",
             "Mouse.PreviewMouseUpEvent",
             "UIElement.PreviewMouseLeftButtonDownEvent",
+            "UIElement.MouseLeftButtonDownEvent",
             "UIElement.PreviewMouseLeftButtonUpEvent",
+            "UIElement.MouseLeftButtonUpEvent",
             "Mouse.MouseUpEvent",
             "CompleteWpfMouseDispatch",
             "new MouseButtonEventHandler",
@@ -84,6 +86,17 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "VisualParentChain",
             "args.ChangedButton != MouseButton.Left",
             "CurrentTutorialStep");
+        ContainsAll(diagnostics,
+            "MouseCapturedElement",
+            "IsMouseCaptured",
+            "IsMouseCaptureWithin",
+            "IsPressed",
+            "InstanceId",
+            "DownTargetAutomationId",
+            "UpTargetAutomationId",
+            "ButtonInstanceSameDownUp",
+            "ClickMode",
+            "CommandCanExecute");
     }
 
     [TestMethod]
@@ -100,6 +113,34 @@ public sealed class PhysicalPointerDiagnosticContractTests
         ContainsAll(input, "PhysicalPointerDiagnosticSession.RecordControlEvent", "PhysicalPointerDiagnosticSession.RecordShellEvent");
         ContainsAll(main, "TutorialOverlayDetached", "SurfaceCloseDispatchCompleted",
             "TutorialExitButton_Click", "RecordControlEvent(control, \"CloseClick\"");
+    }
+
+    [TestMethod]
+    public void PointerDownEscape_CorrelatesBeforeUpWithoutRelaxingNonPhysicalActions()
+    {
+        var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
+        var input = Read("src/RAWSelectionAssistant/Services/InputRoutingDiagnostics.cs");
+        ContainsAll(input,
+            "string.Equals(eventName, \"PreviewMouseLeftButtonDown\"",
+            "args.ChangedButton == MouseButton.Left",
+            "ShellEscapePointer.TryResolve(args.OriginalSource as DependencyObject",
+            "PhysicalPointerDiagnosticSession.RecordPointerDownEscapeTarget");
+        ContainsAll(diagnostics,
+            "RecordPointerDownEscapeTarget",
+            "action == ShellEscapePointerAction.None",
+            "CanConfirmPhysicalPointerDownEscape",
+            "_activeAttempt.Layer1Win32.LButtonDownReceived",
+            "_activeAttempt.Layer2Wpf.PreviewMouseDownReceived",
+            "MatchesLastWpfDownTarget(originalSource)",
+            "ShellEscapePointer.GetAction(escapeOwner) == action",
+            "IsAncestorOrSelf(escapeOwner, originalSource)",
+            "PointerDownEscapeTargetConfirmed = true",
+            "PhysicalTargetConfirmed = true",
+            "PointerDownEscapeTargetConfirmed",
+            "PointerDownEscapeAction");
+        Assert.IsFalse(input.Contains("RecordPointerDownEscapeTarget" + Environment.NewLine + "            eventName", StringComparison.Ordinal));
+        StringAssert.Contains(diagnostics,
+            "if (!CanCorrelateWithActiveAttempt(requireWpfDown: true) || !_activeAttempt!.Layer4Action.PhysicalTargetConfirmed)");
     }
 
     private static string Read(string relativePath) =>

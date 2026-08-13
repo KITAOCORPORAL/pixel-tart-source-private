@@ -27,6 +27,18 @@ internal static class InputRoutingDiagnostics
         var point = args.GetPosition(root);
         var inputHit = root.InputHitTest(point) as DependencyObject;
         var visualHit = VisualTreeHelper.HitTest(root, point)?.VisualHit;
+#if INPUT_ROUTING_DIAGNOSTICS
+        if (string.Equals(eventName, "PreviewMouseLeftButtonDown", StringComparison.Ordinal) &&
+            args.ChangedButton == MouseButton.Left &&
+            ShellEscapePointer.TryResolve(args.OriginalSource as DependencyObject, out var escapeOwner, out var escapeAction) &&
+            escapeOwner is not null)
+        {
+            PhysicalPointerDiagnosticSession.RecordPointerDownEscapeTarget(
+                escapeOwner,
+                args.OriginalSource as DependencyObject,
+                escapeAction);
+        }
+#endif
         Write(new
         {
             timestamp = DateTimeOffset.UtcNow,

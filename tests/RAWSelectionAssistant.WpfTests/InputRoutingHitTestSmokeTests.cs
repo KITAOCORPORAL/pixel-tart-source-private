@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Views;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -142,6 +143,35 @@ public sealed class InputRoutingHitTestSmokeTests
     });
 
     [TestMethod]
+    public Task ShellEscapePointer_ResolvesOnlyExplicitEscapeTargetsAndDeduplicatesOneInput() => RunSta(() =>
+    {
+        var root = new Grid();
+        var close = new Border();
+        var closeContent = new TextBlock { Text = "close" };
+        close.Child = closeContent;
+        ShellEscapePointer.SetAction(close, ShellEscapePointerAction.CloseCurrentSurface);
+        root.Children.Add(close);
+
+        var ordinary = new Button { Content = "ordinary" };
+        root.Children.Add(ordinary);
+
+        Assert.IsTrue(ShellEscapePointer.TryResolve(closeContent, out var owner, out var action));
+        Assert.AreSame(close, owner);
+        Assert.AreEqual(ShellEscapePointerAction.CloseCurrentSurface, action);
+        Assert.IsFalse(ShellEscapePointer.TryResolve(ordinary, out _, out _),
+            "Ordinary controls must not enter the shell escape route.");
+
+        var input = new MouseButtonEventArgs(Mouse.PrimaryDevice, 42, MouseButton.Left);
+        Assert.IsTrue(ShellEscapePointer.TryBeginDispatch(input));
+        Assert.IsFalse(ShellEscapePointer.TryBeginDispatch(input),
+            "The same pointer input must dispatch only once.");
+        var laterInput = new MouseButtonEventArgs(Mouse.PrimaryDevice, 42, MouseButton.Left);
+        Assert.IsTrue(ShellEscapePointer.TryBeginDispatch(laterInput),
+            "A later input must remain available to keyboard, UIA and pointer paths.");
+        return Task.CompletedTask;
+    });
+
+    [TestMethod]
     public void EscapeAndAutomationContracts_AreShellOwnedAndStable()
     {
         var mainXaml = Read("src/RAWSelectionAssistant/MainWindow.xaml");
@@ -176,6 +206,19 @@ public sealed class InputRoutingHitTestSmokeTests
             "ForceCloseCurrentSurface",
             "ForceExitTutorial",
             "ForceReturnToWorkbench");
+        ContainsAll(mainCode,
+            "AddHandler(UIElement.PreviewMouseLeftButtonDownEvent",
+            "ShellEscapePointer.TryResolve",
+            "ShellEscapePointer.TryBeginDispatch",
+            "ShellEscapePointerAction.ExitTutorial",
+            "await RequestEscapeCloseAsync()");
+        ContainsAll(mainXaml,
+            "services:ShellEscapePointer.Action=\"ExitTutorial\"",
+            "AutomationProperties.AutomationId=\"TutorialExitButton\"");
+        var surfaceCloseCode = Read("src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml.cs");
+        ContainsAll(surfaceCloseCode,
+            "ShellEscapePointer.TryBeginDispatch(e)",
+            "RaiseEvent(new RoutedEventArgs(CloseRequestedEvent, this))");
         var diagnostics = Read("src/RAWSelectionAssistant/Services/InputRoutingDiagnostics.cs");
         ContainsAll(diagnostics, "InputHitTest", "VisualTreeHelper.HitTest", "visual_parent_chain");
         ContainsAll(coreServices, "IShellEscapeService", "ForceCloseCurrentSurface", "ForceExitTutorial", "ForceReturnToWorkbench");
