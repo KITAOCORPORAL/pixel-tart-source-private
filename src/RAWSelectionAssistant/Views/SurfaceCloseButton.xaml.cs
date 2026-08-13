@@ -1,5 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.Views;
 
@@ -27,6 +29,12 @@ public partial class SurfaceCloseButton : UserControl
         typeof(SurfaceCloseButton),
         new PropertyMetadata("关闭并返回"));
 
+    public static readonly DependencyProperty AutomationIdProperty = DependencyProperty.Register(
+        nameof(AutomationId),
+        typeof(string),
+        typeof(SurfaceCloseButton),
+        new PropertyMetadata(string.Empty));
+
     public SurfaceCloseButton() => InitializeComponent();
 
     public event RoutedEventHandler CloseRequested
@@ -47,8 +55,24 @@ public partial class SurfaceCloseButton : UserControl
         set => SetValue(AutomationNameProperty, value);
     }
 
+    public string AutomationId
+    {
+        get => (string)GetValue(AutomationIdProperty);
+        set => SetValue(AutomationIdProperty, value);
+    }
+
+    private void CloseButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+#if DEBUG || INPUT_ROUTING_DIAGNOSTICS
+        InputRoutingDiagnostics.RecordControlEvent(this, "ClosePreviewMouseDown", e.OriginalSource, e.Source, e.Handled);
+#endif
+    }
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
+#if DEBUG || INPUT_ROUTING_DIAGNOSTICS
+        InputRoutingDiagnostics.RecordControlEvent(this, "CloseClick", e.OriginalSource, e.Source, e.Handled);
+#endif
         e.Handled = true;
         RaiseEvent(new RoutedEventArgs(CloseRequestedEvent, this));
     }

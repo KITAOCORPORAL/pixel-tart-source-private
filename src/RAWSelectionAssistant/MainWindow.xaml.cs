@@ -39,6 +39,7 @@ public partial class MainWindow : Window
     private Button? _quickInsertionTarget;
     private ShootBookingEditorViewModel? _activeBookingEditor;
     private readonly IModalHost _modalHost = new ModalHost();
+    private IShellEscapeService? _shellEscapeService;
 #if UI_REVIEW_BUILD
     private DispatcherTimer? _uiReviewTimer;
     private string _uiReviewStateContent = string.Empty;
@@ -175,6 +176,7 @@ public partial class MainWindow : Window
             _viewModel.WorkCalendarPage.EditorRequested -= ViewModel_EditorRequested;
         }
         _viewModel = e.NewValue as MainViewModel;
+        _shellEscapeService = e.NewValue as IShellEscapeService;
         if (_viewModel is not null)
         {
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
@@ -293,6 +295,11 @@ public partial class MainWindow : Window
 
     private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        InputRoutingDiagnostics.RecordWindowKey(
+            e,
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
         if (_viewModel?.IsTetherPage == true && e.Key == Key.F11 && _viewModel.TetherPage?.ToggleFullScreenCommand.CanExecute(null) == true)
         {
             _viewModel.TetherPage.ToggleFullScreenCommand.Execute(null);
@@ -386,7 +393,7 @@ public partial class MainWindow : Window
 
         if (_viewModel.IsOnboardingActive)
         {
-            await _viewModel.CloseCurrentSurfaceAsync();
+            ForceExitTutorial();
             return;
         }
 
@@ -444,14 +451,88 @@ public partial class MainWindow : Window
             return;
         }
 
-        await _viewModel.CloseCurrentSurfaceAsync();
+        ForceCloseCurrentSurface();
     }
 
     private async void CloseCurrentSurface_Click(object sender, RoutedEventArgs e)
     {
         e.Handled = true;
+        InputRoutingDiagnostics.RecordShellEvent(
+            "SurfaceCloseRequested",
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
         await RequestEscapeCloseAsync();
     }
+
+    private void TutorialExitButton_Click(object sender, RoutedEventArgs e)
+    {
+        e.Handled = true;
+        ForceExitTutorial();
+    }
+
+    private void ForceExitTutorial()
+    {
+        InputRoutingDiagnostics.RecordShellEvent(
+            "ForceExitTutorialEntered",
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.TutorialStepNumber);
+        DetachTutorialUiImmediately();
+        _shellEscapeService?.ForceExitTutorial();
+        Dispatcher.BeginInvoke(DispatcherPriority.Input, () =>
+        {
+            WorkbenchShell.Focus();
+            Keyboard.Focus(this);
+        });
+    }
+
+    private void ForceCloseCurrentSurface()
+    {
+        InputRoutingDiagnostics.RecordShellEvent(
+            "ForceCloseCurrentSurfaceEntered",
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
+        _shellEscapeService?.ForceCloseCurrentSurface();
+    }
+
+    private void ForceReturnToWorkbench() => _shellEscapeService?.ForceReturnToWorkbench();
+
+    private void DetachTutorialUiImmediately()
+    {
+        TutorialOverlay.Visibility = Visibility.Collapsed;
+        TutorialHighlight.Visibility = Visibility.Collapsed;
+        TutorialPointer.Visibility = Visibility.Collapsed;
+        TutorialMaskTop.IsHitTestVisible = false;
+        TutorialMaskLeft.IsHitTestVisible = false;
+        TutorialMaskRight.IsHitTestVisible = false;
+        TutorialMaskBottom.IsHitTestVisible = false;
+        _lastTutorialTarget = null;
+    }
+
+    private string CurrentOverlayName()
+    {
+        if (TutorialOverlay.Visibility == Visibility.Visible) return nameof(TutorialOverlay);
+        if (BookingEditorOverlay.Visibility == Visibility.Visible) return nameof(BookingEditorOverlay);
+        if (_viewModel?.IsSettingsModalOpen == true) return nameof(SettingsModal);
+        return string.Empty;
+    }
+
+    private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
+        RecordInputMouse(e, "PreviewMouseLeftButtonDown");
+
+    private void Window_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) =>
+        RecordInputMouse(e, "PreviewMouseLeftButtonUp");
+
+    private void RecordInputMouse(MouseButtonEventArgs e, string eventName) =>
+        InputRoutingDiagnostics.RecordWindowMouse(
+            RootGrid,
+            e,
+            eventName,
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
 
     private async Task RequestModalActionAsync(Func<Task> closeAsync, Func<Task> cancelAsync)
     {
@@ -925,12 +1006,15 @@ public partial class MainWindow : Window
     {
         if (_viewModel?.IsOnboardingActive != true || RootGrid.ActualWidth <= 0 || RootGrid.ActualHeight <= 0)
         {
-            TutorialOverlay.Visibility = Visibility.Collapsed;
-            _lastTutorialTarget = null;
+            DetachTutorialUiImmediately();
             return;
         }
 
         TutorialOverlay.Visibility = Visibility.Visible;
+        TutorialMaskTop.IsHitTestVisible = true;
+        TutorialMaskLeft.IsHitTestVisible = true;
+        TutorialMaskRight.IsHitTestVisible = true;
+        TutorialMaskBottom.IsHitTestVisible = true;
         TutorialOverlay.Width = RootGrid.ActualWidth;
         TutorialOverlay.Height = RootGrid.ActualHeight;
         var tutorialTarget = _viewModel.TutorialTarget;

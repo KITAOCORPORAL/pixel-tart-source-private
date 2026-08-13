@@ -9,6 +9,7 @@ public sealed class SettingsService
     private readonly ILogService _logService;
     private readonly string _settingsFilePath;
     private readonly JsonSerializerOptions _options = new() { WriteIndented = true };
+    private readonly SemaphoreSlim _saveGate = new(1, 1);
     public bool WasSettingsFilePresent { get; private set; }
     public bool WasSettingsFileCorrupted { get; private set; }
     public bool WasLegacySettings { get; private set; }
@@ -55,6 +56,12 @@ public sealed class SettingsService
 
     public async Task SaveAsync(AppSettings settings, CancellationToken cancellationToken = default)
     {
+        _ = await TrySaveAsync(settings, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<bool> TrySaveAsync(AppSettings settings, CancellationToken cancellationToken = default)
+    {
+        await _saveGate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
             AppDataPaths.EnsureCreated();
@@ -67,10 +74,16 @@ public sealed class SettingsService
             }
 
             File.Move(temporaryPath, _settingsFilePath, true);
+            return true;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             _logService.Error("无法保存用户设置。", ex);
+            return false;
+        }
+        finally
+        {
+            _saveGate.Release();
         }
     }
 

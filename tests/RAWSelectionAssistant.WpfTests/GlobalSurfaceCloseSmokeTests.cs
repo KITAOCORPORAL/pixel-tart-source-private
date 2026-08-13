@@ -40,18 +40,18 @@ public sealed class GlobalSurfaceCloseSmokeTests
             "CloseCurrentSurface_Click",
             "if (e.Key == Key.Escape)",
             "await RequestEscapeCloseAsync()",
-            "await _viewModel.CloseCurrentSurfaceAsync()");
+            "ForceCloseCurrentSurface()");
         ContainsAll(window,
             "Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Left",
             "await RequestEscapeCloseAsync()");
         ContainsAll(viewModel,
             "ISurfaceNavigationHost SurfaceNavigationHost",
             "CloseCurrentSurfaceCommand",
-            "public async Task CloseCurrentSurfaceAsync()",
+            "public Task CloseCurrentSurfaceAsync()",
             "SurfaceNavigationHost.ReturnToOrigin()",
             "SurfaceNavigationHost.ReturnToWorkbench()");
 
-        var closeMethod = Slice(viewModel, "public async Task CloseCurrentSurfaceAsync()", "public void ReturnToOrigin()");
+        var closeMethod = Slice(viewModel, "public Task CloseCurrentSurfaceAsync()", "public void ReturnToOrigin()");
         foreach (var forbidden in new[]
         {
             "RawToJpegPage.CancelCommand", "BatchCompressionPage.CancelCommand", "CollagePage.CancelCommand",
@@ -80,15 +80,15 @@ public sealed class GlobalSurfaceCloseSmokeTests
         var mainCode = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
         var viewModel = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
 
-        ContainsAll(mainView, "Content=\"退出教程\"", "Command=\"{Binding TutorialExitCommand}\"",
-            "退出教程并返回", "SurfaceCloseButton");
+        ContainsAll(mainView, "Content=\"退出教程\"", "Click=\"TutorialExitButton_Click\"",
+            "AutomationProperties.AutomationId=\"TutorialExitButton\"", "AutomationId=\"TutorialCalloutCloseButton\"", "SurfaceCloseButton");
         ContainsAll(viewModel,
             "TutorialExitCommand = new AsyncRelayCommand(_ => ExitTutorialAsync()",
             "if (IsOnboardingActive)",
-            "await ExitTutorialAsync()",
+            "ForceExitTutorial()",
             "RestoreNormalWorkspace()",
             "TutorialReportNames");
-        ContainsAll(mainCode, "if (_viewModel.IsOnboardingActive)", "await _viewModel.CloseCurrentSurfaceAsync()");
+        ContainsAll(mainCode, "if (_viewModel.IsOnboardingActive)", "ForceExitTutorial()");
 
         var exit = Slice(viewModel, "private async Task ExitTutorialAsync()", "private async Task RestoreTutorialWorkspaceAsync()");
         ContainsAll(exit, "finally", "_tutorialExitInProgress = false", "RestoreNormalWorkspace()");

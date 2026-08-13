@@ -38,6 +38,8 @@ public static class AppDataPaths
 
     private static string ResolveRoot()
     {
+        if (IsAcceptanceBuild && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
+            throw new InvalidOperationException("Acceptance builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
         if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))
             return Path.GetFullPath(RootOverride);
         return Path.Combine(
@@ -47,6 +49,8 @@ public static class AppDataPaths
 
     private static string ResolveLegacyRoot()
     {
+        if (IsAcceptanceBuild && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
+            throw new InvalidOperationException("Acceptance builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
         if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))
             return Path.Combine(Path.GetDirectoryName(Path.GetFullPath(RootOverride))!, IsAcceptanceBuild ? "RAWSelectionAssistant.Acceptance" : "RAWSelectionAssistant.IsolatedRuntime");
         return Path.Combine(

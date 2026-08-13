@@ -8,7 +8,10 @@
         mc:Ignorable="d" Title="像素蛋挞" Icon="Assets/AppIcon.ico"
         Width="1600" Height="920" MinWidth="1180" MinHeight="720"
         WindowStartupLocation="CenterScreen" Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
-        AllowDrop="True" Closing="Window_Closing" PreviewKeyDown="Window_PreviewKeyDown" DragOver="Window_DragOver" Drop="Window_Drop">
+        AllowDrop="True" Closing="Window_Closing" PreviewKeyDown="Window_PreviewKeyDown"
+        PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
+        PreviewMouseLeftButtonUp="Window_PreviewMouseLeftButtonUp"
+        DragOver="Window_DragOver" Drop="Window_Drop">
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveProjectCommand}" />
@@ -162,6 +165,9 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+                    <views:AutomationLandmark Grid.RowSpan="5" Panel.ZIndex="-1"
+                                              AutomationProperties.AutomationId="SidebarRoot"
+                                              AutomationProperties.Name="侧栏根区域" />
                     <ScrollViewer x:Name="SidebarNavigationScroll" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False">
                         <StackPanel>
                             <TextBlock Text="工作" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -350,8 +356,12 @@
                     </Grid>
                 </Grid>
 
-                <Grid x:Name="WorkbenchShell" Background="{DynamicResource ContentBackgroundBrush}" Visibility="{Binding IsWorkbenchPage, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid x:Name="WorkbenchShell" Background="{DynamicResource ContentBackgroundBrush}"
+                      Visibility="{Binding IsWorkbenchPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" MinWidth="760" /><ColumnDefinition x:Name="WorkbenchTaskColumn" Width="320" /></Grid.ColumnDefinitions>
+                    <views:AutomationLandmark Grid.ColumnSpan="2" Panel.ZIndex="-1"
+                                              AutomationProperties.AutomationId="WorkbenchRoot"
+                                              AutomationProperties.Name="工作台根区域" />
                     <Grid Grid.Column="0" Margin="22,20,20,18">
                         <Grid.RowDefinitions><RowDefinition Height="106" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchOverviewRow" Height="230" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchScheduleRow" Height="170" /><RowDefinition Height="16" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                         <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
@@ -382,7 +392,8 @@
                                         <Button Style="{StaticResource QuickActionButton}"
                                                 Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding TargetPageKey}" ToolTip="{Binding Description}"
-                                                AutomationProperties.Name="{Binding DisplayName}">
+                                                AutomationProperties.Name="{Binding DisplayName}"
+                                                AutomationProperties.AutomationId="{Binding Id, StringFormat=WorkbenchQuickTool_{0}}">
                                             <Button.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="向左移动" Tag="{Binding Id}" Click="MovePinnedToolLeft_Click" />
@@ -405,11 +416,12 @@
                                 <StackPanel><TextBlock Text="•••" FontSize="20" HorizontalAlignment="Center"/><TextBlock Text="更多" HorizontalAlignment="Center"/></StackPanel>
                             </Button>
                             <Popup x:Name="QuickToolsOverflowPopup" PlacementTarget="{Binding ElementName=QuickToolsOverflowButton}" Placement="Bottom" VerticalOffset="8" Width="190" StaysOpen="False" AllowsTransparency="True">
-                                <Border Style="{StaticResource PopupSurfaceBorder}" Padding="8"><ItemsControl ItemsSource="{Binding OverflowPinnedToolboxItems}"><ItemsControl.ItemTemplate><DataTemplate><Button Style="{StaticResource ToolEntryButton}" Command="{Binding DataContext.NavigateCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding TargetPageKey}" AutomationProperties.Name="{Binding DisplayName}"><StackPanel Orientation="Horizontal"><Path Width="18" Height="18" Stretch="Uniform" Stroke="{DynamicResource TextPrimaryBrush}" Data="{Binding IconResourceKey,Converter={StaticResource ResourceKeyToGeometryConverter}}"/><TextBlock Text="{Binding DisplayName}" Margin="9,0,0,0"/></StackPanel></Button></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></Border>
+                                <Border Style="{StaticResource PopupSurfaceBorder}" Padding="8"><ItemsControl ItemsSource="{Binding OverflowPinnedToolboxItems}"><ItemsControl.ItemTemplate><DataTemplate><Button Style="{StaticResource ToolEntryButton}" Command="{Binding DataContext.NavigateCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding TargetPageKey}" AutomationProperties.Name="{Binding DisplayName}" AutomationProperties.AutomationId="{Binding Id, StringFormat=WorkbenchQuickTool_{0}}"><StackPanel Orientation="Horizontal"><Path Width="18" Height="18" Stretch="Uniform" Stroke="{DynamicResource TextPrimaryBrush}" Data="{Binding IconResourceKey,Converter={StaticResource ResourceKeyToGeometryConverter}}"/><TextBlock Text="{Binding DisplayName}" Margin="9,0,0,0"/></StackPanel></Button></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></Border>
                             </Popup>
                             <Button x:Name="ToolboxQuickButton" Grid.Column="5" Style="{StaticResource QuickActionButton}"
                                     Click="ToolboxQuickButton_Click" ToolTip="{Binding ToolboxEntry.Description}"
-                                    AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}">
+                                    AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}"
+                                    AutomationProperties.AutomationId="WorkbenchToolboxButton">
                                 <StackPanel>
                                     <Path Style="{StaticResource QuickActionIcon}" Data="{Binding ToolboxEntry.IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}" />
                                     <TextBlock Text="{Binding ToolboxEntry.DisplayName}" HorizontalAlignment="Center" />
@@ -428,7 +440,9 @@
                                                         <Border IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="3" Background="{DynamicResource AccentBrush}" CornerRadius="2" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                                         <Button Style="{StaticResource ToolEntryButton}" Tag="{Binding TargetPageKey}"
                                                                 Click="ToolboxItem_Click" ToolTip="{Binding Description}"
-                                                                AutomationProperties.Name="{Binding DisplayName}" IsEnabled="{Binding IsAvailable}">
+                                                                AutomationProperties.Name="{Binding DisplayName}"
+                                                                AutomationProperties.AutomationId="{Binding Id, StringFormat=ToolboxCatalogTool_{0}}"
+                                                                IsEnabled="{Binding IsAvailable}">
                                                             <StackPanel>
                                                                 <Path Style="{StaticResource ToolEntryIcon}" Data="{Binding IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}" />
                                                                 <TextBlock Text="{Binding DisplayName}" />
@@ -737,11 +751,26 @@
 
         <views:ReminderNotificationHost Grid.Row="1" Panel.ZIndex="920" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,18,22,0" DataContext="{Binding ReminderNotifications}" />
 
-        <Canvas x:Name="TutorialOverlay" Grid.RowSpan="3" Panel.ZIndex="1000" Visibility="Collapsed" ClipToBounds="True" IsHitTestVisible="True">
-            <Rectangle x:Name="TutorialMaskTop" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskLeft" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskRight" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskBottom" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" />
-            <Border x:Name="TutorialHighlight" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="3" CornerRadius="8" IsHitTestVisible="False"><Border.Effect><DropShadowEffect Color="#C98220" BlurRadius="18" ShadowDepth="0" Opacity="0.9" /></Border.Effect></Border>
-            <Line x:Name="TutorialPointer" Stroke="{DynamicResource AccentBrush}" StrokeThickness="3" IsHitTestVisible="False" />
-            <Border x:Name="TutorialCard" Width="390" Panel.ZIndex="1001" IsHitTestVisible="True" Style="{StaticResource PanelBorder}" Padding="20"><Border.Effect><DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="5" Opacity="0.28" /></Border.Effect><Grid><StackPanel><TextBlock Text="{Binding TutorialStepProgress}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" Margin="0,0,44,0" /><TextBlock Text="{Binding TutorialTitle}" FontSize="20" FontWeight="SemiBold" Margin="0,8,0,0" TextWrapping="Wrap" /><TextBlock Text="{Binding TutorialInstruction}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,10,0,0" TextWrapping="Wrap" LineHeight="22" /><TextBlock Text="{Binding TutorialReportStatus}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" Visibility="{Binding HasTutorialError, Converter={StaticResource BooleanToVisibilityConverter}}" /><Border Style="{StaticResource DangerCard}" Padding="9" Margin="0,12,0,0" Visibility="{Binding HasTutorialError, Converter={StaticResource BooleanToVisibilityConverter}}"><StackPanel><TextBlock Text="{Binding TutorialErrorMessage}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" /><WrapPanel Margin="0,8,0,0"><Button Content="重试当前步骤" Style="{StaticResource SecondaryButton}" Command="{Binding TutorialRetryCommand}" /><Button Content="重新创建教程数据" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding TutorialRecreateDataCommand}" /></WrapPanel></StackPanel></Border><Button x:Name="TutorialPrimaryButton" AutomationProperties.Name="{Binding TutorialPrimaryActionLabel}" Content="{Binding TutorialPrimaryActionLabel}" Style="{StaticResource PrimaryButton}" Margin="0,14,0,0" Visibility="{Binding ShowTutorialPrimaryAction, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding TutorialPrimaryCommand}" /><Grid Margin="0,14,0,0"><Button Content="返回上一步" HorizontalAlignment="Left" Style="{StaticResource SecondaryButton}" Command="{Binding TutorialBackCommand}" Visibility="{Binding TutorialCanGoBack, Converter={StaticResource BooleanToVisibilityConverter}}" /><Button Content="退出教程" HorizontalAlignment="Right" Style="{StaticResource SecondaryButton}" Command="{Binding TutorialExitCommand}" AutomationProperties.Name="退出教程" AutomationProperties.HelpText="取消当前教程并返回正常工作区" /></Grid></StackPanel><views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="1002" ToolTipText="退出教程并返回" AutomationName="退出教程并返回" /></Grid></Border>
+        <Canvas x:Name="TutorialOverlay" Grid.RowSpan="3" Panel.ZIndex="2000" Visibility="Collapsed" ClipToBounds="True" IsHitTestVisible="True">
+            <Rectangle x:Name="TutorialMaskTop" Panel.ZIndex="2000" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskLeft" Panel.ZIndex="2000" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskRight" Panel.ZIndex="2000" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" /><Rectangle x:Name="TutorialMaskBottom" Panel.ZIndex="2000" Fill="{DynamicResource OverlayBrush}" IsHitTestVisible="True" />
+            <Border x:Name="TutorialHighlight" Panel.ZIndex="2100" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="3" CornerRadius="8" IsHitTestVisible="False"><Border.Effect><DropShadowEffect Color="#C98220" BlurRadius="18" ShadowDepth="0" Opacity="0.9" /></Border.Effect></Border>
+            <Line x:Name="TutorialPointer" Panel.ZIndex="2100" Stroke="{DynamicResource AccentBrush}" StrokeThickness="3" IsHitTestVisible="False" />
+            <Border x:Name="TutorialCard" Width="390" Panel.ZIndex="2200" IsHitTestVisible="True" Style="{StaticResource PanelBorder}" Padding="20"><Border.Effect><DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="5" Opacity="0.28" /></Border.Effect><Grid><StackPanel><TextBlock Text="{Binding TutorialStepProgress}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" Margin="0,0,44,0" /><TextBlock Text="{Binding TutorialTitle}" FontSize="20" FontWeight="SemiBold" Margin="0,8,0,0" TextWrapping="Wrap" /><TextBlock Text="{Binding TutorialInstruction}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,10,0,0" TextWrapping="Wrap" LineHeight="22" /><TextBlock Text="{Binding TutorialReportStatus}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" Visibility="{Binding HasTutorialError, Converter={StaticResource BooleanToVisibilityConverter}}" /><Border Style="{StaticResource DangerCard}" Padding="9" Margin="0,12,0,0" Visibility="{Binding HasTutorialError, Converter={StaticResource BooleanToVisibilityConverter}}"><StackPanel><TextBlock Text="{Binding TutorialErrorMessage}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" /><WrapPanel Margin="0,8,0,0"><Button Content="重试当前步骤" Style="{StaticResource SecondaryButton}" Command="{Binding TutorialRetryCommand}" /><Button Content="重新创建教程数据" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding TutorialRecreateDataCommand}" /></WrapPanel></StackPanel></Border><Button x:Name="TutorialPrimaryButton" AutomationProperties.Name="{Binding TutorialPrimaryActionLabel}" Content="{Binding TutorialPrimaryActionLabel}" Style="{StaticResource PrimaryButton}" Margin="0,14,0,0" Visibility="{Binding ShowTutorialPrimaryAction, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding TutorialPrimaryCommand}" /><Grid Margin="0,14,0,0"><Button Content="返回上一步" HorizontalAlignment="Left" Style="{StaticResource SecondaryButton}" Command="{Binding TutorialBackCommand}" Visibility="{Binding TutorialCanGoBack, Converter={StaticResource BooleanToVisibilityConverter}}" /><Button Content="退出教程" HorizontalAlignment="Right" Style="{StaticResource SecondaryButton}" Click="TutorialExitButton_Click" AutomationProperties.AutomationId="TutorialExitButton" AutomationProperties.Name="退出教程" AutomationProperties.HelpText="取消当前教程并返回正常工作区" /></Grid></StackPanel><views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="2201" ToolTipText="退出教程并返回" AutomationName="退出教程并返回" AutomationId="TutorialCalloutCloseButton" /></Grid></Border>
         </Canvas>
+
+        <views:SurfaceCloseButton x:Name="EmergencyEscapeChrome"
+                                  Grid.Row="1"
+                                  Width="36"
+                                  Height="36"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Top"
+                                  Margin="0,12,16,0"
+                                  Panel.ZIndex="30000"
+                                  IsHitTestVisible="True"
+                                  Focusable="True"
+                                  ToolTipText="{Binding CurrentSurfaceCloseToolTip}"
+                                  AutomationName="关闭当前界面并返回"
+                                  AutomationId="ShellEmergencyCloseButton"
+                                  Visibility="{Binding IsCurrentSurfaceClosable, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </Window>

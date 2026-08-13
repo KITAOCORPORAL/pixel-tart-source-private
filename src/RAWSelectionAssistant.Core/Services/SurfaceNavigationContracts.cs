@@ -18,6 +18,17 @@ public interface ISurfaceNavigationHost
     string ReturnToWorkbench();
 }
 
+/// <summary>
+/// Shell-owned escape operations. These methods never depend on a hosted
+/// module command, CanExecute state, task state or busy state.
+/// </summary>
+public interface IShellEscapeService
+{
+    void ForceCloseCurrentSurface();
+    void ForceExitTutorial();
+    void ForceReturnToWorkbench();
+}
+
 public sealed class SurfaceNavigationHost : ISurfaceNavigationHost
 {
     public const string WorkbenchSurface = "Workbench";

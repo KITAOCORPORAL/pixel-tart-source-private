@@ -6,7 +6,8 @@
              Height="36"
              MinWidth="36"
              MinHeight="36"
-             Focusable="False">
+             Focusable="False"
+             IsHitTestVisible="True">
     <Button Width="36"
             Height="36"
             MinWidth="36"
@@ -15,9 +16,13 @@
             Background="Transparent"
             BorderBrush="Transparent"
             BorderThickness="0"
+            Focusable="True"
+            IsHitTestVisible="True"
             ToolTip="{Binding ToolTipText, ElementName=Root}"
             AutomationProperties.Name="{Binding AutomationName, ElementName=Root}"
+            AutomationProperties.AutomationId="{Binding AutomationId, ElementName=Root}"
             AutomationProperties.HelpText="{Binding ToolTipText, ElementName=Root}"
+            PreviewMouseLeftButtonDown="CloseButton_PreviewMouseLeftButtonDown"
             Click="CloseButton_Click">
         <Button.Style>
             <Style TargetType="Button" BasedOn="{StaticResource GhostButton}">
