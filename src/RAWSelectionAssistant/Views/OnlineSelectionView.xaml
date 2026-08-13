@@ -60,7 +60,6 @@
                 <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
                 <Button Content="创建选片项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
                 <Button Content="刷新" Style="{StaticResource Av2GhostButton}" Command="{Binding RefreshCommand}" Margin="{DynamicResource SpacingHorizontal8}" AutomationProperties.Name="刷新在线选片项目" />
-                <local:SurfaceCloseButton Margin="8,0,0,0" AutomationName="关闭在线选片并返回" />
             </StackPanel>
         </Grid>
 
@@ -164,7 +163,7 @@
             </Border>
         </Grid>
 
-        <Border Grid.RowSpan="2" Style="{StaticResource ModalOverlay}" Visibility="{Binding IsCreateModalOpen, Converter={StaticResource BoolToVisibility}}">
+        <Border x:Name="OnlineSelectionCreateSurface" Grid.RowSpan="2" Style="{StaticResource ModalOverlay}" Visibility="{Binding IsCreateModalOpen, Converter={StaticResource BoolToVisibility}}">
             <Border Width="520" MaxHeight="620" Style="{StaticResource ModalSurface}" Padding="{DynamicResource Spacing24Thickness}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid>
                 <StackPanel>

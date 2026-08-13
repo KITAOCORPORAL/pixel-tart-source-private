@@ -20,6 +20,9 @@ public partial class SurfaceHeader : UserControl
     public static readonly DependencyProperty CloseAutomationIdProperty = DependencyProperty.Register(
         nameof(CloseAutomationId), typeof(string), typeof(SurfaceHeader), new PropertyMetadata(string.Empty));
 
+    public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register(
+        nameof(ShowCloseButton), typeof(bool), typeof(SurfaceHeader), new PropertyMetadata(true));
+
     public SurfaceHeader() => InitializeComponent();
 
     public string Title
@@ -50,5 +53,11 @@ public partial class SurfaceHeader : UserControl
     {
         get => (string)GetValue(CloseAutomationIdProperty);
         set => SetValue(CloseAutomationIdProperty, value);
+    }
+
+    public bool ShowCloseButton
+    {
+        get => (bool)GetValue(ShowCloseButtonProperty);
+        set => SetValue(ShowCloseButtonProperty, value);
     }
 }

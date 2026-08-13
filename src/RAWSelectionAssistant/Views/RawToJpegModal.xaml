@@ -13,6 +13,7 @@
 
         <views:SurfaceHeader Title="RAW 转 JPG"
                              Subtitle="只读取 RAW，输出 JPG；源文件不会被移动、删除或覆盖。"
+                             ShowCloseButton="False"
                              CloseAutomationName="关闭 RAW 转 JPG 并返回"
                              CloseAutomationId="RawToJpegCloseButton" />
 

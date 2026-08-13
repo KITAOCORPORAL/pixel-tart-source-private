@@ -96,7 +96,7 @@ public sealed class ModalCloseSmokeTests
         StringAssert.Contains(xaml, "Panel.ZIndex=\"2200\"");
         StringAssert.Contains(xaml, "AutomationProperties.Name=");
         StringAssert.Contains(code, "CloseCurrentSurfaceAsync");
-        StringAssert.Contains(code, "ExitTutorialAsync");
+        StringAssert.Contains(code, "ForceExitTutorial");
     }
 
     [TestMethod]
@@ -130,7 +130,7 @@ public sealed class ModalCloseSmokeTests
     {
         var xaml = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         var source = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
-        foreach (var token in new[] { "TutorialRetryCommand", "TutorialRecreateDataCommand", "TutorialBackCommand", "TutorialExitCommand" })
+        foreach (var token in new[] { "TutorialRetryCommand", "TutorialRecreateDataCommand", "TutorialBackCommand", "TutorialExitButton_Click", "ForceExitTutorial" })
             StringAssert.Contains(xaml + source, token);
         StringAssert.Contains(source, "IsBusy = false");
         StringAssert.Contains(source, "_tutorialCancellationTask = null");

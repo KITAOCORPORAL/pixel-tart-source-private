@@ -8,6 +8,7 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
         <views:SurfaceHeader Title="批量压缩"
                              Subtitle="输出始终写入独立目录，使用新文件名，不覆盖、移动或删除源文件。"
+                             ShowCloseButton="False"
                              CloseAutomationName="关闭批量压缩并返回"
                              CloseAutomationId="BatchCompressCloseButton" />
 

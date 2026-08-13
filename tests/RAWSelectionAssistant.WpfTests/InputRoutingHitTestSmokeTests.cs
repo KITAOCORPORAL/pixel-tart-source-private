@@ -162,7 +162,7 @@ public sealed class InputRoutingHitTestSmokeTests
             Assert.AreEqual(1, CountAutomationIdDeclarations(automationId, mainXaml, raw, batch),
                 $"{automationId} must be declared exactly once in product markup.");
 
-        ContainsAll(mainXaml, "EmergencyEscapeChrome", "Panel.ZIndex=\"30000\"");
+        ContainsAll(mainXaml, "ShellSurfaceCloseButton", "Panel.ZIndex=\"30000\"");
         ContainsAll(mainXaml,
             "StringFormat=WorkbenchQuickTool_{0}",
             "AutomationId=\"WorkbenchToolboxButton\"",
@@ -193,15 +193,15 @@ public sealed class InputRoutingHitTestSmokeTests
 
         var document = XDocument.Parse(mainXaml);
         var tutorial = NamedElement(document, "TutorialOverlay");
-        var emergency = NamedElement(document, "EmergencyEscapeChrome");
+        var emergency = NamedElement(document, "ShellSurfaceCloseButton");
         Assert.AreSame(tutorial.Parent, emergency.Parent,
-            "EmergencyEscapeChrome must be a RootGrid sibling of TutorialOverlay.");
+            "ShellSurfaceCloseButton must be a RootGrid sibling of TutorialOverlay.");
         Assert.IsTrue(string.Equals(Attribute(emergency, "HorizontalAlignment"), "Right", StringComparison.Ordinal));
         Assert.IsTrue(string.Equals(Attribute(emergency, "VerticalAlignment"), "Top", StringComparison.Ordinal));
         Assert.IsTrue(double.TryParse(Attribute(emergency, "Width"), out var width) && width >= 36 && width <= 64,
-            "EmergencyEscapeChrome must only wrap its close button, not capture the full window.");
+            "ShellSurfaceCloseButton must only wrap its close button, not capture the full window.");
         Assert.IsTrue(double.TryParse(Attribute(emergency, "Height"), out var height) && height >= 36 && height <= 64,
-            "EmergencyEscapeChrome must only wrap its close button, not capture the full window.");
+            "ShellSurfaceCloseButton must only wrap its close button, not capture the full window.");
         var tutorialClose = ElementWithAutomationId(document, "TutorialCalloutCloseButton");
         var tutorialExit = ElementWithAutomationId(document, "TutorialExitButton");
         Assert.IsTrue(tutorialClose.Ancestors().Contains(tutorial), "Tutorial local close must remain inside TutorialOverlay.");

@@ -48,6 +48,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+#if INPUT_ROUTING_DIAGNOSTICS
+        ConfigurePhysicalPointerDiagnostics();
+#endif
         AddHandler(SurfaceCloseButton.CloseRequestedEvent, new RoutedEventHandler(CloseCurrentSurface_Click));
         Loaded += MainWindow_Loaded;
         Closed += Window_Closed;
@@ -78,6 +81,9 @@ public partial class MainWindow : Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
+#if INPUT_ROUTING_DIAGNOSTICS
+        AttachPhysicalPointerHwndHook();
+#endif
         if (!_hasSavedPosition)
         {
             return;
@@ -187,7 +193,28 @@ public partial class MainWindow : Window
         ScheduleTutorialLayout();
     }
 
-    private void Window_Closed(object? sender, EventArgs e) => _modalHost.Dispose();
+    private void Window_Closed(object? sender, EventArgs e)
+    {
+#if INPUT_ROUTING_DIAGNOSTICS
+        DisposePhysicalPointerDiagnostics();
+#endif
+        _modalHost.Dispose();
+    }
+
+    internal void CopyPhysicalPointerDiagnosticId_Click(object sender, RoutedEventArgs e)
+    {
+#if INPUT_ROUTING_DIAGNOSTICS
+        try
+        {
+            var diagnosticId = PhysicalPointerDiagnosticSession.DiagnosticId;
+            if (diagnosticId.Length > 0) Clipboard.SetText(diagnosticId);
+        }
+        catch (Exception ex) when (ex is ExternalException or InvalidOperationException)
+        {
+        }
+#endif
+        e.Handled = true;
+    }
 
     private void ViewModel_EditorRequested(object? sender, BookingEditorRequestEventArgs e)
     {
@@ -467,6 +494,10 @@ public partial class MainWindow : Window
 
     private void TutorialExitButton_Click(object sender, RoutedEventArgs e)
     {
+#if DEBUG || INPUT_ROUTING_DIAGNOSTICS
+        if (sender is DependencyObject control)
+            InputRoutingDiagnostics.RecordControlEvent(control, "CloseClick", e.OriginalSource, e.Source, e.Handled);
+#endif
         e.Handled = true;
         ForceExitTutorial();
     }
@@ -489,12 +520,28 @@ public partial class MainWindow : Window
 
     private void ForceCloseCurrentSurface()
     {
+        var surfaceBeforeClose = _viewModel?.CurrentPage ?? string.Empty;
+        var overlayBeforeClose = CurrentOverlayName();
         InputRoutingDiagnostics.RecordShellEvent(
             "ForceCloseCurrentSurfaceEntered",
             _viewModel?.CurrentPage ?? string.Empty,
             CurrentOverlayName(),
             _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
         _shellEscapeService?.ForceCloseCurrentSurface();
+        if (!string.Equals(surfaceBeforeClose, _viewModel?.CurrentPage ?? string.Empty, StringComparison.Ordinal) ||
+            !string.Equals(overlayBeforeClose, CurrentOverlayName(), StringComparison.Ordinal))
+        {
+            InputRoutingDiagnostics.RecordShellEvent(
+                "SurfaceClosed",
+                _viewModel?.CurrentPage ?? string.Empty,
+                CurrentOverlayName(),
+                _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
+        }
+        InputRoutingDiagnostics.RecordShellEvent(
+            "SurfaceCloseDispatchCompleted",
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
     }
 
     private void ForceReturnToWorkbench() => _shellEscapeService?.ForceReturnToWorkbench();
@@ -509,6 +556,11 @@ public partial class MainWindow : Window
         TutorialMaskRight.IsHitTestVisible = false;
         TutorialMaskBottom.IsHitTestVisible = false;
         _lastTutorialTarget = null;
+        InputRoutingDiagnostics.RecordShellEvent(
+            "TutorialOverlayDetached",
+            _viewModel?.CurrentPage ?? string.Empty,
+            CurrentOverlayName(),
+            _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
     }
 
     private string CurrentOverlayName()
