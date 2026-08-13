@@ -26,7 +26,8 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "ButtonBase.ClickEvent",
             "MissingAutomationId",
             "DuplicateCloseAuthorityBanner",
-            "PhysicalPointerDiagnosticCopyButton");
+            "PhysicalPointerDiagnosticCopyButton",
+            "Title = \"像素蛋挞 [Physical Pointer Diagnostic]\"");
         ContainsAll(Read("src/RAWSelectionAssistant/MainWindow.xaml.cs"),
             "CopyPhysicalPointerDiagnosticId_Click",
             "#if INPUT_ROUTING_DIAGNOSTICS",

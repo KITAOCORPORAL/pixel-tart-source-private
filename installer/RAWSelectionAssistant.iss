@@ -65,8 +65,19 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\physical-pointer-diagnostic-devvalidation-win-x64"
 #endif
+#ifdef PhysicalPointerDiagnosticDevValidation2
+  #undef MyAppName
+  #define MyAppName "像素蛋挞 - 输入诊断版"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\physical-pointer-diagnostic-devvalidation2-win-x64"
+#endif
 
 [Setup]
+#ifdef PhysicalPointerDiagnosticDevValidation2
+AppId={{A6D55B25-EE0C-4BC4-B983-83D777F2A4B8}
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation
 AppId={{85F41320-9C4A-4AC1-AB91-302477C8E93F}
 #else
@@ -100,10 +111,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef PhysicalPointerDiagnosticDevValidation2
+DefaultDirName={autopf}\PixelTart_PhysicalPointerDiagnostic_DevValidation2
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation
 DefaultDirName={autopf}\PixelTart_PhysicalPointerDiagnostic_DevValidation
 #else
@@ -137,10 +152,23 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #endif
+#endif
+#ifdef PhysicalPointerDiagnosticDevValidation2
+DefaultGroupName=像素蛋挞
+#else
 DefaultGroupName={#MyAppName}
+#endif
 DisableProgramGroupPage=yes
+#ifdef PhysicalPointerDiagnosticDevValidation2
+UninstallDisplayName=像素蛋挞 - Physical Pointer Diagnostic DevValidation
+#else
 UninstallDisplayName={#MyAppName}
+#endif
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef PhysicalPointerDiagnosticDevValidation2
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=PixelTart_2.3.0_PhysicalPointerDiagnostic_DevValidation2_x64
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=PixelTart_2.3.0_PhysicalPointerDiagnostic_DevValidation_x64
@@ -208,6 +236,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
 #endif
 #endif
 #endif
+#endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -216,37 +245,58 @@ PrivilegesRequired=admin
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0.19041
+#ifdef PhysicalPointerDiagnosticDevValidation2
+CloseApplications=no
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation
 CloseApplications=no
 #else
 CloseApplications=force
 #endif
+#endif
 RestartApplications=no
 ChangesAssociations=no
+#ifdef PhysicalPointerDiagnosticDevValidation2
+ChangesEnvironment=yes
+#else
 ChangesEnvironment=no
+#endif
 AllowNoIcons=yes
 
 [Languages]
 Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [Tasks]
+#ifdef PhysicalPointerDiagnosticDevValidation2
+Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加快捷方式："; Flags: checkedonce
+#else
 #ifndef PhysicalPointerDiagnosticDevValidation
 Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加快捷方式："; Flags: checkedonce
+#endif
 #endif
 
 [Files]
 Source: "{#MyPublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.xml"
 
 [Icons]
+#ifdef PhysicalPointerDiagnosticDevValidation2
+Name: "{group}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autodesktop}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
+#else
 #ifndef PhysicalPointerDiagnosticDevValidation
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 #endif
+#endif
 
 [Run]
+#ifdef PhysicalPointerDiagnosticDevValidation2
+Filename: "{app}\{#MyAppExeName}"; Description: "启动 像素蛋挞 - 输入诊断版"; Flags: nowait postinstall skipifsilent
+#else
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
 Filename: "{app}\{#MyAppExeName}"; Description: "运行 {#MyAppName}"; Flags: nowait postinstall skipifsilent
+#endif
 #endif
 #endif
 
@@ -254,12 +304,90 @@ Filename: "{app}\{#MyAppExeName}"; Description: "运行 {#MyAppName}"; Flags: no
 var
   DeleteUserDataCheckBox: TNewCheckBox;
 
+#ifdef PhysicalPointerDiagnosticDevValidation2
+const
+  PhysicalPointerDiagnosticEnvironmentKey = 'Environment';
+  PhysicalPointerDiagnosticMarkerKey = 'Software\PixelTart\PhysicalPointerDiagnosticDevValidation2';
+  PhysicalPointerDiagnosticRootValue = 'PIXEL_TART_ACCEPTANCE_ROOT';
+  PhysicalPointerHwndBroadcast = $FFFF;
+  PhysicalPointerWmSettingChange = $001A;
+  PhysicalPointerSmtoAbortIfHung = $0002;
+
+function SetEnvironmentVariable(lpName, lpValue: string): Boolean;
+  external 'SetEnvironmentVariableW@kernel32.dll stdcall';
+function SendMessageTimeout(hWnd: HWND; Msg, wParam: LongWord; lParam: string; fuFlags, uTimeout: LongWord; var lpdwResult: LongWord): LongWord;
+  external 'SendMessageTimeoutW@user32.dll stdcall';
+
+function PhysicalPointerDiagnosticAcceptanceRoot(): string;
+begin
+  Result := ExpandConstant('{localappdata}\PixelTart_Validation\PhysicalPointerDiagnosticDevValidation2');
+end;
+
+procedure NotifyEnvironmentChanged();
+var
+  MessageResult: LongWord;
+begin
+  SendMessageTimeout(PhysicalPointerHwndBroadcast, PhysicalPointerWmSettingChange, 0, 'Environment', PhysicalPointerSmtoAbortIfHung, 5000, MessageResult);
+end;
+
+procedure ConfigurePhysicalPointerDiagnosticEnvironment();
+var
+  PreviousRoot: string;
+  Root: string;
+begin
+  Root := PhysicalPointerDiagnosticAcceptanceRoot();
+  if not RegValueExists(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRootExisted') then
+  begin
+    if RegQueryStringValue(HKCU, PhysicalPointerDiagnosticEnvironmentKey, PhysicalPointerDiagnosticRootValue, PreviousRoot) then
+    begin
+      RegWriteStringValue(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRootExisted', '1');
+      RegWriteStringValue(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRoot', PreviousRoot);
+    end
+    else
+      RegWriteStringValue(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRootExisted', '0');
+  end;
+
+  RegWriteStringValue(HKCU, PhysicalPointerDiagnosticEnvironmentKey, PhysicalPointerDiagnosticRootValue, Root);
+  SetEnvironmentVariable(PhysicalPointerDiagnosticRootValue, Root);
+  NotifyEnvironmentChanged();
+end;
+
+procedure RestorePhysicalPointerDiagnosticEnvironment();
+var
+  CurrentRoot: string;
+  PreviousRoot: string;
+  PreviousRootExisted: string;
+  Root: string;
+begin
+  Root := PhysicalPointerDiagnosticAcceptanceRoot();
+  if RegQueryStringValue(HKCU, PhysicalPointerDiagnosticEnvironmentKey, PhysicalPointerDiagnosticRootValue, CurrentRoot) and
+     (CompareText(CurrentRoot, Root) = 0) then
+  begin
+    if RegQueryStringValue(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRootExisted', PreviousRootExisted) and
+       (PreviousRootExisted = '1') and
+       RegQueryStringValue(HKCU, PhysicalPointerDiagnosticMarkerKey, 'PreviousAcceptanceRoot', PreviousRoot) then
+    begin
+      RegWriteStringValue(HKCU, PhysicalPointerDiagnosticEnvironmentKey, PhysicalPointerDiagnosticRootValue, PreviousRoot);
+      SetEnvironmentVariable(PhysicalPointerDiagnosticRootValue, PreviousRoot);
+    end
+    else
+    begin
+      RegDeleteValue(HKCU, PhysicalPointerDiagnosticEnvironmentKey, PhysicalPointerDiagnosticRootValue);
+      SetEnvironmentVariable(PhysicalPointerDiagnosticRootValue, '');
+    end;
+    NotifyEnvironmentChanged();
+  end;
+  RegDeleteKeyIncludingSubkeys(HKCU, PhysicalPointerDiagnosticMarkerKey);
+end;
+#endif
+
 function FindWindow(lpClassName, lpWindowName: string): HWND;
   external 'FindWindowW@user32.dll stdcall';
 function PostMessage(hWnd: HWND; Msg: LongWord; wParam, lParam: Longint): Boolean;
   external 'PostMessageW@user32.dll stdcall';
 
 function InitializeUninstall(): Boolean;
+#ifndef PhysicalPointerDiagnosticDevValidation2
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
 var
@@ -267,7 +395,9 @@ var
   WaitCount: Integer;
 #endif
 #endif
+#endif
 begin
+#ifndef PhysicalPointerDiagnosticDevValidation2
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
   AppWindow := FindWindow('', '像素蛋挞');
@@ -283,6 +413,7 @@ begin
   end;
 #endif
 #endif
+#endif
   Result := True;
 end;
 
@@ -295,6 +426,9 @@ end;
 
 procedure InitializeUninstallProgressForm();
 begin
+#ifdef PhysicalPointerDiagnosticDevValidation2
+  DeleteUserDataCheckBox := nil;
+#else
 #ifdef InputRoutingHotfixDevValidation
   DeleteUserDataCheckBox := nil;
 #else
@@ -310,14 +444,28 @@ begin
   DeleteUserDataCheckBox.Checked := False;
 #endif
 #endif
+#endif
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
+#ifdef PhysicalPointerDiagnosticDevValidation2
+  if CurUninstallStep = usPostUninstall then
+    RestorePhysicalPointerDiagnosticEnvironment();
+#else
 #ifndef PhysicalPointerDiagnosticDevValidation
 #ifndef InputRoutingHotfixDevValidation
   if (CurUninstallStep = usPostUninstall) and DeleteUserDataCheckBox.Checked then
     DelTree(ExpandConstant('{localappdata}\KitaoPhotoSelector'), True, True, True);
 #endif
+#endif
+#endif
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+#ifdef PhysicalPointerDiagnosticDevValidation2
+  if CurStep = ssPostInstall then
+    ConfigurePhysicalPointerDiagnosticEnvironment();
 #endif
 end;
