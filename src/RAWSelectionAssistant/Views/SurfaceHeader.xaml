@@ -13,7 +13,8 @@
             </StackPanel>
             <views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top"
                                       ToolTipText="{Binding CloseToolTip, ElementName=Root}"
-                                      AutomationName="{Binding CloseAutomationName, ElementName=Root}" />
+                                      AutomationName="{Binding CloseAutomationName, ElementName=Root}"
+                                      AutomationId="{Binding CloseAutomationId, ElementName=Root}" />
         </Grid>
     </Border>
 </UserControl>

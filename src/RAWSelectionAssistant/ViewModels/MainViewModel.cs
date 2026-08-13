@@ -12,7 +12,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed class MainViewModel : ObservableObject
+public sealed class MainViewModel : ObservableObject, IShellEscapeService
 {
     private const string QuickToolsCapacityShortLabel = "快捷工具已满";
     private const string QuickToolsCapacityMessage = "工作台快捷区已满，请先取消一个已固定工具。";
@@ -42,6 +42,7 @@ public sealed class MainViewModel : ObservableObject
     private TaskCompletionSource? _operationCompletion;
     private Task? _tutorialCancellationTask;
     private Task? _tutorialActionTask;
+    private Task? _tutorialExitCleanupTask;
     private MediaIndexSnapshot _mediaIndex = new();
     private SourceDirectoryEntry? _selectedSource;
     private string _textInput = string.Empty;
@@ -218,7 +219,7 @@ public sealed class MainViewModel : ObservableObject
         TutorialExitCommand = new AsyncRelayCommand(_ => ExitTutorialAsync(), _ => IsOnboardingActive && !_tutorialExitInProgress);
         TutorialRetryCommand = new AsyncRelayCommand(_ => RetryTutorialStepAsync(), _ => IsOnboardingActive && !string.IsNullOrWhiteSpace(TutorialErrorMessage));
         TutorialRecreateDataCommand = new AsyncRelayCommand(_ => RecreateTutorialDataAsync(), _ => IsOnboardingActive);
-        HelpCommand = new AsyncRelayCommand(_ => ShowHelpAsync(), _ => !IsBusy && !IsOnboardingRequired);
+        HelpCommand = new AsyncRelayCommand(_ => ShowHelpAsync(), _ => !IsBusy && !IsOnboardingRequired && !_tutorialExitInProgress);
         FeedbackCommand = new RelayCommand(_ => _dialogService.ShowFeedback(), _ => !IsOnboardingRequired);
         NavigateCommand = new RelayCommand(Navigate, _ => !IsBusy && !IsOnboardingRequired);
         OpenSettingsCommand = new RelayCommand(_ => IsSettingsModalOpen = true);
@@ -526,7 +527,7 @@ public sealed class MainViewModel : ObservableObject
     public bool IsPhotoGroupingPage => CurrentPage == "PhotoGrouping";
     public bool IsCollagePage => CurrentPage == "Collage";
     public bool IsToolboxPage => CurrentPage == "Toolbox";
-    public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || ClosableSurfaces.Contains(CurrentPage);
+    public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || CurrentPage is not ("Workbench" or "ProjectCenter");
     public string CurrentSurfaceCloseToolTip => IsOnboardingActive ? "退出教程并返回" : "关闭并返回";
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
         new(ProductToolboxPolicy.Catalog
@@ -1085,6 +1086,7 @@ public sealed class MainViewModel : ObservableObject
 
     public async Task HandleDropAsync(string[]? paths, string? text)
     {
+        var tutorialSession = CaptureTutorialSession();
         if (IsBusy) return;
         if (IsOnboardingActive && !CanTutorial(TutorialAction.LoadCustomerSelection))
         {
@@ -1098,15 +1100,17 @@ public sealed class MainViewModel : ObservableObject
         }
         if (paths is { Length: > 0 })
         {
-            await RunOperationAsync("读取客户选片", async token =>
+            await RunOperationAsync("读取客户选片", async (token, operationSession) =>
             {
-                var limited = await _inputParser.ParseDroppedItemsForProjectAsync(paths, Selections, _projectEntitlementService, IsOnboardingActive, CreateProgress(), token);
+                var limited = await _inputParser.ParseDroppedItemsForProjectAsync(paths, Selections.ToList(), _projectEntitlementService, IsOnboardingActive, CreateProgress(operationSession), token);
+                EnsureTutorialSessionCurrent(operationSession, token);
                 AddInputs(limited.Accepted, applyLimit: false);
                 if (limited.LimitReached) ShowUpgradePrompt(limited.Message);
                 StatusMessage = limited.LimitReached
                     ? $"已加入 {limited.Accepted.Count:N0} 条记录，另有 {limited.Rejected.Count:N0} 条超过免费版上限"
                     : $"已加入 {limited.Accepted.Count:N0} 条客户选片记录";
-            });
+            }, tutorialSession);
+            if (!IsTutorialSessionCurrent(tutorialSession)) return;
             if (IsOnboardingActive) await AdvanceTutorialAsync(TutorialAction.LoadCustomerSelection, CreateTutorialContext());
         }
         if (!string.IsNullOrWhiteSpace(text)) AddInputs(_inputParser.ParseText(text).Select(x => new ParsedSelectionInput(x)));
@@ -1294,23 +1298,33 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task ScanAsync()
     {
+        var tutorialSession = CaptureTutorialSession();
         if (!CanModifyCurrentProject()) return;
-        await RunOperationAsync("扫描照片文件", async token =>
+        await RunOperationAsync("扫描照片文件", async (token, operationSession) =>
         {
             var extensions = Settings.EnabledJpegExtensions
                 .Concat(Settings.EnabledRawExtensions)
                 .Concat(CollectionCategory == CollectionCategory.Custom ? CurrentCustomExtensions() : [])
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();
-            for (var index = 0; index < Sources.Count; index++) Sources[index].Priority = index;
-            _mediaIndex = await _indexService.ScanAsync(Sources, extensions, CreateProgress(), token);
+            var sources = Sources.Select(source => new SourceDirectoryEntry
+            {
+                Path = source.Path,
+                DirectoryType = source.DirectoryType,
+                Priority = source.Priority
+            }).ToList();
+            for (var index = 0; index < sources.Count; index++) sources[index].Priority = index;
+            var mediaIndex = await _indexService.ScanAsync(sources, extensions, CreateProgress(operationSession), token);
+            EnsureTutorialSessionCurrent(operationSession, token);
+            _mediaIndex = mediaIndex;
             IndexedMediaCount = _mediaIndex.Files.Count;
             var jpegCount = _mediaIndex.Files.Count(file => file.Category == FileCategory.Jpeg);
             var rawCount = _mediaIndex.Files.Count(file => file.Category == FileCategory.Raw);
             StatusMessage = $"综合索引已更新：JPG {jpegCount:N0}，RAW {rawCount:N0}，共 {IndexedMediaCount:N0} 个文件；跳过 {_mediaIndex.SkippedDirectoryCount:N0} 个不可访问目录";
             CurrentWorkflowStep = 2;
             await SaveSettingsAsync();
-        });
+        }, tutorialSession);
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         if (IsOnboardingActive && CanTutorial(TutorialAction.ScanSourceFiles))
         {
             await AdvanceTutorialAsync(TutorialAction.ScanSourceFiles, CreateTutorialContext());
@@ -1320,10 +1334,12 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task MatchAsync()
     {
+        var tutorialSession = CaptureTutorialSession();
         if (!CanModifyCurrentProject()) return;
-        await RunOperationAsync("匹配选片文件", async token =>
+        await RunOperationAsync("匹配选片文件", async (token, operationSession) =>
         {
-            var decisions = await _matchService.MatchAsync(Selections, _mediaIndex, CreateMatchOptions(), token);
+            var decisions = await _matchService.MatchAsync(Selections.ToList(), _mediaIndex, CreateMatchOptions(), token);
+            EnsureTutorialSessionCurrent(operationSession, token);
             foreach (var decision in decisions)
             {
                 Selections.First(x => x.Id == decision.ItemId).ApplyMatch(decision);
@@ -1333,24 +1349,30 @@ public sealed class MainViewModel : ObservableObject
             SelectedSelection ??= Selections.FirstOrDefault();
             UpdateStatistics();
             StatusMessage = $"匹配完成：完整 {CompleteMatchedCount:N0}，部分 {PartialMatchedCount:N0}，冲突 {ConflictCount:N0}，未找到 {NotFoundCount:N0}";
-            _currentProject.Status = PhotoProjectStatus.Ready;
-            await SaveCurrentProjectAsync();
-            await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
-        });
+            if (operationSession is null)
+            {
+                _currentProject.Status = PhotoProjectStatus.Ready;
+                await SaveCurrentProjectAsync();
+                await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
+            }
+        }, tutorialSession);
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         if (IsOnboardingActive) await AdvanceTutorialAsync(TutorialAction.MatchFiles, CreateTutorialContext());
     }
 
     private async Task CopyAsync()
     {
+        var tutorialSession = CaptureTutorialSession();
         if (!CanModifyCurrentProject()) return;
         if (string.IsNullOrWhiteSpace(OutputBaseDirectory))
         {
             _dialogService.ShowError("请先选择输出目录。");
             return;
         }
-        await RunOperationAsync("复制已匹配文件", async token =>
+        await RunOperationAsync("复制已匹配文件", async (token, operationSession) =>
         {
-            var summary = await _copyService.CopyAsync(Selections, OutputDirectory, OutputMode, CreateProgress(), token);
+            var summary = await _copyService.CopyAsync(Selections.ToList(), OutputDirectory, OutputMode, CreateProgress(operationSession), token);
+            EnsureTutorialSessionCurrent(operationSession, token);
             foreach (var outcome in summary.Outcomes)
             {
                 var item = Selections.First(x => x.Id == outcome.ItemId);
@@ -1365,17 +1387,22 @@ public sealed class MainViewModel : ObservableObject
             var reportExported = IsOnboardingActive || ExportReportsForCurrentProject;
             if (reportExported)
             {
-                await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections, token, CreateReportExportOptions());
+                await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections.ToList(), token, CreateReportExportOptions());
+                EnsureTutorialSessionCurrent(operationSession, token);
             }
             UpdateStatistics();
             StatusMessage = $"复制完成：成功 {summary.CopiedCount:N0}，失败 {summary.FailedCount:N0}{(reportExported ? "；报告已导出" : "；未自动导出报告")}";
-            _currentProject.Status = PhotoProjectStatus.Completed;
-            _currentProject.CompletedAt = DateTimeOffset.UtcNow;
-            await SaveCurrentProjectAsync();
-            await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
+            if (operationSession is null)
+            {
+                _currentProject.Status = PhotoProjectStatus.Completed;
+                _currentProject.CompletedAt = DateTimeOffset.UtcNow;
+                await SaveCurrentProjectAsync();
+                await _matchDecisionRepository.SaveAsync(_currentProject.Id, Selections.ToList(), token);
+            }
             OnPropertyChanged(nameof(OutputDirectory));
             RefreshCommands();
-        });
+        }, tutorialSession);
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         if (IsOnboardingActive)
         {
             Settings.OnboardingTutorialOutputDirectory = OutputDirectory;
@@ -1387,17 +1414,20 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task ExportReportAsync()
     {
+        var tutorialSession = CaptureTutorialSession();
         _lastOperationSucceeded = false;
-        await RunOperationAsync("导出匹配报告", async token =>
+        await RunOperationAsync("导出匹配报告", async (token, operationSession) =>
         {
             var options = IsOnboardingActive ? ReportExportOptions.Pro : CreateReportExportOptions(manualExport: true);
-            await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections, token, options);
+            await _reportService.ExportAsync(OutputDirectory, CollectionCategory, Selections.ToList(), token, options);
+            EnsureTutorialSessionCurrent(operationSession, token);
             _lastOperationSucceeded = true;
             StatusMessage = IsOnboardingActive
                 ? "教程报告已导出：CSV、JSON、操作日志 TXT"
                 : CanExportAdvancedReports ? $"已导出：{string.Join("、", SelectedReportLabels())}" : "免费版基础 CSV 报告已导出";
             RefreshCommands();
-        });
+        }, tutorialSession);
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         if (IsOnboardingActive)
         {
             UpdateTutorialReportStatus();
@@ -1541,44 +1571,77 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task ExitTutorialAsync()
     {
-        if (_tutorialExitInProgress) return;
+        ForceExitTutorial();
+        if (_tutorialExitCleanupTask is not null)
+            await _tutorialExitCleanupTask.ConfigureAwait(true);
+    }
+
+    public void ForceExitTutorial()
+    {
+        if (!IsOnboardingActive) return;
+
         _tutorialExitInProgress = true;
-        RefreshCommands();
+        var operationCancellation = _operationCancellation;
+        var operationCompletion = _operationCompletion;
+        var pendingTasks = new Task?[]
+        {
+            _tutorialCancellationTask,
+            operationCompletion?.Task,
+            _tutorialActionTask
+        };
+        _tutorialCancellationTask = null;
+        _tutorialActionTask = null;
+
+        _onboardingService.DetachForExit();
+        operationCancellation?.Cancel();
+        _tutorialCancellationDemoActive = false;
+        if (ReferenceEquals(_operationCancellation, operationCancellation)) _operationCancellation = null;
+        if (ReferenceEquals(_operationCompletion, operationCompletion)) _operationCompletion = null;
+        IsBusy = false;
+        RestoreNormalWorkspace();
+        ReturnToWorkbench();
+        StatusMessage = "教程已安全退出；当前工作区和用户文件未被删除。";
+        NotifyTutorialChanged();
+
+        _tutorialExitCleanupTask = CompleteTutorialExitAsync(pendingTasks);
+    }
+
+    private async Task CompleteTutorialExitAsync(IEnumerable<Task?> pendingTasks)
+    {
+        var cleanupTasks = pendingTasks
+            .Where(task => task is not null)
+            .Cast<Task>()
+            .Append(_onboardingService.ExitAsync())
+            .Select(ObserveTutorialCleanupAsync)
+            .ToArray();
+
         try
         {
-            _operationCancellation?.Cancel();
-            var cancellationTask = _tutorialCancellationTask;
-            if (cancellationTask is not null)
-            {
-                try { await cancellationTask.ConfigureAwait(true); }
-                catch (OperationCanceledException) { }
-            }
-            var operationCompletion = _operationCompletion?.Task;
-            if (operationCompletion is not null)
-            {
-                try { await operationCompletion.ConfigureAwait(true); }
-                catch (OperationCanceledException) { }
-            }
-            var tutorialAction = _tutorialActionTask;
-            if (tutorialAction is not null)
-            {
-                try { await tutorialAction.ConfigureAwait(true); }
-                catch (OperationCanceledException) { }
-            }
-            await _onboardingService.ExitAsync();
-            RestoreNormalWorkspace();
-            ReturnToWorkbench();
-            StatusMessage = "教程已安全退出；当前工作区和用户文件未被删除。";
-            NotifyTutorialChanged();
+            await Task.WhenAll(cleanupTasks).WaitAsync(TimeSpan.FromMilliseconds(500)).ConfigureAwait(true);
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ObjectDisposedException)
+        catch (TimeoutException)
         {
-            TutorialErrorMessage = "教程退出保存失败，请重试；当前文件保持不变。";
+            _logService.Info("Tutorial cleanup timed out; the tutorial UI was already detached.");
         }
         finally
         {
             _tutorialExitInProgress = false;
             RefreshCommands();
+        }
+    }
+
+    private async Task ObserveTutorialCleanupAsync(Task task)
+    {
+        try
+        {
+            await task.ConfigureAwait(false);
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ObjectDisposedException)
+        {
+            _logService.Error("教程后台收尾失败；界面已恢复。", ex);
         }
     }
 
@@ -1639,7 +1702,9 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task PrepareTutorialWorkspaceAsync(bool resetProgress)
     {
+        var tutorialSession = CaptureTutorialSession();
         await _onboardingService.EnsureTutorialDataAsync();
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         Sources.Clear();
         Selections.Clear();
         TextInput = string.Empty;
@@ -1722,7 +1787,9 @@ public sealed class MainViewModel : ObservableObject
     private async Task RestoreTutorialWorkspaceAsync()
     {
         if (!IsOnboardingActive) return;
+        var tutorialSession = CaptureTutorialSession();
         await _onboardingService.EnsureTutorialDataAsync();
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         var step = TutorialStepNumber;
         if (step >= 3)
         {
@@ -1733,18 +1800,23 @@ public sealed class MainViewModel : ObservableObject
         if (step >= 6)
         {
             var extensions = Settings.EnabledJpegExtensions.Concat(Settings.EnabledRawExtensions).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-            _mediaIndex = await _indexService.ScanAsync(Sources, extensions, null, CancellationToken.None);
+            var mediaIndex = await _indexService.ScanAsync(Sources, extensions, null, CancellationToken.None);
+            if (!IsTutorialSessionCurrent(tutorialSession)) return;
+            _mediaIndex = mediaIndex;
             IndexedMediaCount = _mediaIndex.Files.Count;
         }
         if (step >= 8) RestoreTutorialSelections(includeAll: step >= 10);
         if (step >= 9)
         {
-            TextInput = await File.ReadAllTextAsync(_onboardingService.Sandbox.SelectionText);
+            var input = await File.ReadAllTextAsync(_onboardingService.Sandbox.SelectionText);
+            if (!IsTutorialSessionCurrent(tutorialSession)) return;
+            TextInput = input;
         }
         if (step >= 12)
         {
             CollectionCategory = CollectionCategory.JpegAndRaw;
             var decisions = await _matchService.MatchAsync(Selections, _mediaIndex, CreateMatchOptions(), CancellationToken.None);
+            if (!IsTutorialSessionCurrent(tutorialSession)) return;
             foreach (var decision in decisions) Selections.First(x => x.Id == decision.ItemId).ApplyMatch(decision);
             _matchCompleted = true;
             SelectedSelection ??= Selections.FirstOrDefault();
@@ -1791,29 +1863,29 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task StartTutorialCancellationDemoAsync()
     {
+        var tutorialSession = CaptureTutorialSession();
+        var cancellation = new CancellationTokenSource();
         _tutorialCancellationDemoActive = true;
-        _operationCancellation = new CancellationTokenSource();
+        _operationCancellation = cancellation;
         IsBusy = true;
         StatusMessage = "教程模拟扫描正在运行，请点击“取消当前任务”";
         RefreshCommands();
         try
         {
-            await Task.Delay(TimeSpan.FromMinutes(10), _operationCancellation.Token);
+            await Task.Delay(TimeSpan.FromMinutes(10), cancellation.Token);
         }
         catch (OperationCanceledException)
         {
         }
         finally
         {
-            IsBusy = false;
-            _tutorialCancellationDemoActive = false;
-            var cancellation = _operationCancellation;
-            if (cancellation is not null)
+            if (IsTutorialSessionCurrent(tutorialSession))
             {
-                cancellation.Dispose();
-                if (ReferenceEquals(_operationCancellation, cancellation)) _operationCancellation = null;
+                IsBusy = false;
+                _tutorialCancellationDemoActive = false;
             }
-            _tutorialCancellationTask = null;
+            cancellation.Dispose();
+            if (ReferenceEquals(_operationCancellation, cancellation)) _operationCancellation = null;
             RefreshCommands();
         }
     }
@@ -1872,9 +1944,25 @@ public sealed class MainViewModel : ObservableObject
 
     private async Task AdvanceTutorialAsync(TutorialAction action, TutorialActionContext context)
     {
-        var result = await _onboardingService.PerformAsync(action, context);
+        var tutorialSession = CaptureTutorialSession();
+        if (tutorialSession is null) return;
+        var result = await _onboardingService.PerformForSessionAsync(tutorialSession.Value, action, context);
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         if (!result.Succeeded) TutorialErrorMessage = result.Message;
         NotifyTutorialChanged();
+    }
+
+    private long? CaptureTutorialSession() =>
+        IsOnboardingActive ? _onboardingService.SessionVersion : null;
+
+    private bool IsTutorialSessionCurrent(long? sessionVersion) =>
+        sessionVersion is null ||
+        (IsOnboardingActive && _onboardingService.SessionVersion == sessionVersion.Value);
+
+    private void EnsureTutorialSessionCurrent(long? sessionVersion, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!IsTutorialSessionCurrent(sessionVersion)) throw new OperationCanceledException(cancellationToken);
     }
 
     private void NotifyTutorialChanged()
@@ -2075,11 +2163,17 @@ public sealed class MainViewModel : ObservableObject
         NavigateToSurface(targetPage);
     }
 
-    public async Task CloseCurrentSurfaceAsync()
+    public Task CloseCurrentSurfaceAsync()
+    {
+        ForceCloseCurrentSurface();
+        return Task.CompletedTask;
+    }
+
+    public void ForceCloseCurrentSurface()
     {
         if (IsOnboardingActive)
         {
-            await ExitTutorialAsync().ConfigureAwait(true);
+            ForceExitTutorial();
             return;
         }
 
@@ -2090,6 +2184,12 @@ public sealed class MainViewModel : ObservableObject
         }
 
         ReturnToOrigin();
+    }
+
+    public void ForceReturnToWorkbench()
+    {
+        IsSettingsModalOpen = false;
+        ReturnToWorkbench();
     }
 
     public void ReturnToOrigin() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToOrigin());
@@ -2607,11 +2707,17 @@ public sealed class MainViewModel : ObservableObject
         .SelectMany(x => x.FormatResults)
         .Any(x => x.SelectedFile is not null && x.Status is MatchStatus.Matched or MatchStatus.ManuallyConfirmed);
 
-    private async Task RunOperationAsync(string stage, Func<CancellationToken, Task> operation)
+    private async Task RunOperationAsync(
+        string stage,
+        Func<CancellationToken, long?, Task> operation,
+        long? tutorialSession = null)
     {
         if (IsBusy) return;
-        _operationCancellation = new CancellationTokenSource();
-        _operationCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        tutorialSession ??= CaptureTutorialSession();
+        var operationCancellation = new CancellationTokenSource();
+        var operationCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _operationCancellation = operationCancellation;
+        _operationCompletion = operationCompletion;
         IsBusy = true;
         StatusMessage = stage;
         ProgressPercent = 0;
@@ -2622,38 +2728,47 @@ public sealed class MainViewModel : ObservableObject
                 : string.Empty;
             await _taskOperationBridge.RunAsync(stage, async (context, taskToken) =>
             {
-                using var linked = CancellationTokenSource.CreateLinkedTokenSource(taskToken, _operationCancellation.Token);
+                using var linked = CancellationTokenSource.CreateLinkedTokenSource(taskToken, operationCancellation.Token);
                 await context.SafeBoundaryAsync("开始", 0, cancellationToken: linked.Token);
-                await operation(linked.Token);
+                await operation(linked.Token, tutorialSession);
                 var succeeded = ProcessedCount > 0 ? (int)Math.Min(int.MaxValue, ProcessedCount) : 1;
                 var summary = new TaskResultSummary(succeeded, succeeded, 0, 0, 0, 0, 0, 0);
                 await context.ReportProgressAsync(100, "完成", CurrentItem, summary, linked.Token);
                 return summary;
-            }, CurrentPersistedTaskProjectId(), writeRoot, _operationCancellation.Token);
+            }, tutorialSession is null ? CurrentPersistedTaskProjectId() : null, writeRoot, operationCancellation.Token);
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = $"{stage}已取消";
+            if (IsTutorialSessionCurrent(tutorialSession)) StatusMessage = $"{stage}已取消";
             _logService.Info($"用户取消操作：{stage}");
         }
         catch (InvalidOperationException ex)
         {
-            StatusMessage = ex.Message;
-            _dialogService.ShowError(ex.Message);
+            if (IsTutorialSessionCurrent(tutorialSession))
+            {
+                StatusMessage = ex.Message;
+                _dialogService.ShowError(ex.Message);
+            }
         }
         catch (Exception ex)
         {
             _logService.Error($"{stage}失败。", ex);
-            StatusMessage = $"{stage}失败，请检查路径、文件权限和存储设备。";
-            _dialogService.ShowError(StatusMessage);
+            if (IsTutorialSessionCurrent(tutorialSession))
+            {
+                StatusMessage = $"{stage}失败，请检查路径、文件权限和存储设备。";
+                _dialogService.ShowError(StatusMessage);
+            }
         }
         finally
         {
-            IsBusy = false;
-            _operationCancellation.Dispose();
-            _operationCancellation = null;
-            _operationCompletion?.TrySetResult();
-            _operationCompletion = null;
+            if (ReferenceEquals(_operationCancellation, operationCancellation))
+            {
+                IsBusy = false;
+                _operationCancellation = null;
+            }
+            operationCancellation.Dispose();
+            operationCompletion.TrySetResult();
+            if (ReferenceEquals(_operationCompletion, operationCompletion)) _operationCompletion = null;
             RefreshCommands();
         }
     }
@@ -2664,8 +2779,9 @@ public sealed class MainViewModel : ObservableObject
         return ProjectHistory.Any(project => project.Id == _currentProject.Id) ? _currentProject.Id : null;
     }
 
-    private IProgress<OperationProgress> CreateProgress() => new Progress<OperationProgress>(progress =>
+    private IProgress<OperationProgress> CreateProgress(long? tutorialSession = null) => new Progress<OperationProgress>(progress =>
     {
+        if (!IsTutorialSessionCurrent(tutorialSession)) return;
         StatusMessage = progress.Stage;
         CurrentItem = progress.CurrentItem;
         ProcessedCount = progress.Processed;

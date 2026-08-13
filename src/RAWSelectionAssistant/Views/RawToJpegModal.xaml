@@ -13,7 +13,8 @@
 
         <views:SurfaceHeader Title="RAW 转 JPG"
                              Subtitle="只读取 RAW，输出 JPG；源文件不会被移动、删除或覆盖。"
-                             CloseAutomationName="关闭 RAW 转 JPG 并返回" />
+                             CloseAutomationName="关闭 RAW 转 JPG 并返回"
+                             CloseAutomationId="RawToJpegCloseButton" />
 
         <Grid Grid.Row="1" Margin="24,16">
             <Grid.ColumnDefinitions>
@@ -95,7 +96,8 @@
                     <ProgressBar Width="180" Height="6" Value="{Binding Progress, Mode=OneWay}" Margin="0,8,0,0" HorizontalAlignment="Left" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0" />
+                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
+                            AutomationProperties.AutomationId="RawToJpegCancelTaskButton" />
                     <Button Content="开始转换" Style="{StaticResource Av2PrimaryButton}" Command="{Binding StartCommand}" IsDefault="True" />
                 </StackPanel>
             </Grid>

@@ -16,7 +16,7 @@ public sealed class ModalCloseSmokeTests
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
         var viewModel = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
         StringAssert.Contains(viewModel, $"\"{page}\"");
-        StringAssert.Contains(source, "await _viewModel.CloseCurrentSurfaceAsync()");
+        StringAssert.Contains(source, "ForceCloseCurrentSurface()");
         Assert.DoesNotContain("RequestPageModalActionAsync", source, StringComparison.Ordinal);
         Assert.DoesNotContain("RawToJpegPage.CancelCommand", source, StringComparison.Ordinal);
         Assert.DoesNotContain("BatchCompressionPage.CancelCommand", source, StringComparison.Ordinal);
@@ -93,7 +93,7 @@ public sealed class ModalCloseSmokeTests
                    Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
         StringAssert.Contains(xaml, "x:Name=\"TutorialOverlay\"");
         StringAssert.Contains(xaml, "IsHitTestVisible=\"True\"");
-        StringAssert.Contains(xaml, "Panel.ZIndex=\"1001\"");
+        StringAssert.Contains(xaml, "Panel.ZIndex=\"2200\"");
         StringAssert.Contains(xaml, "AutomationProperties.Name=");
         StringAssert.Contains(code, "CloseCurrentSurfaceAsync");
         StringAssert.Contains(code, "ExitTutorialAsync");
@@ -104,7 +104,7 @@ public sealed class ModalCloseSmokeTests
     {
         var source = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
         StringAssert.Contains(source, "_operationCancellation?.Cancel()");
-        StringAssert.Contains(source, "await _onboardingService.ExitAsync()");
+        StringAssert.Contains(source, "_onboardingService.DetachForExit()");
         StringAssert.Contains(source, "RestoreNormalWorkspace()");
         StringAssert.Contains(source, "finally");
         StringAssert.Contains(source, "_tutorialExitInProgress = false");

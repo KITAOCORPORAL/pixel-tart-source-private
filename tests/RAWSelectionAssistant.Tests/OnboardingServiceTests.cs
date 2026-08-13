@@ -102,6 +102,49 @@ public sealed class OnboardingServiceTests
     }
 
     [TestMethod]
+    public async Task DetachedSession_CannotAdvanceTutorialAfterExit()
+    {
+        using var temp = new TempDirectory();
+        var fixture = CreateFixture(temp);
+        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: false);
+        var session = fixture.Service.SessionVersion;
+
+        fixture.Service.DetachForExit();
+        var result = await fixture.Service.PerformForSessionAsync(
+            session,
+            TutorialAction.BeginTutorial,
+            new TutorialActionContext());
+
+        Assert.IsTrue(result.Succeeded);
+        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
+        Assert.AreEqual(1, fixture.Service.State.CurrentStep);
+        Assert.IsGreaterThan(session, fixture.Service.SessionVersion);
+    }
+
+    [TestMethod]
+    public async Task ExitAsync_SaveFailureKeepsPendingStateForRetry()
+    {
+        using var temp = new TempDirectory();
+        var blockedPath = temp.Combine("settings-target");
+        Directory.CreateDirectory(blockedPath);
+        var settingsService = new SettingsService(new TestLogService(), blockedPath);
+        var service = new OnboardingService(settingsService, new TutorialDataService(temp.Combine("Tutorial")), new TestLogService());
+        var settings = new AppSettings();
+        await service.InitializeAsync(settings, existingUser: false);
+
+        service.DetachForExit();
+        await service.ExitAsync();
+        Assert.IsTrue(Directory.Exists(blockedPath));
+
+        Directory.Delete(blockedPath);
+        await service.ExitAsync();
+        Assert.IsTrue(File.Exists(blockedPath));
+        var persisted = await new SettingsService(new TestLogService(), blockedPath).LoadAsync();
+        Assert.IsFalse(persisted.OnboardingCompleted);
+        Assert.AreEqual(1, persisted.OnboardingCurrentStep);
+    }
+
+    [TestMethod]
     public void ExistingUserDetection_RecognizesAllSupportedHistorySignals()
     {
         var detector = new ExistingUserDetectionService();

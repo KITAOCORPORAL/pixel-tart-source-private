@@ -8,7 +8,8 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
         <views:SurfaceHeader Title="批量压缩"
                              Subtitle="输出始终写入独立目录，使用新文件名，不覆盖、移动或删除源文件。"
-                             CloseAutomationName="关闭批量压缩并返回" />
+                             CloseAutomationName="关闭批量压缩并返回"
+                             CloseAutomationId="BatchCompressCloseButton" />
 
         <Grid Grid.Row="1" Margin="24,16">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="24" /><ColumnDefinition Width="320" /></Grid.ColumnDefinitions>
@@ -68,7 +69,8 @@
                     <ProgressBar Width="180" Height="6" Value="{Binding Progress, Mode=OneWay}" Margin="0,8,0,0" HorizontalAlignment="Left" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0" />
+                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
+                            AutomationProperties.AutomationId="BatchCompressCancelTaskButton" />
                     <Button Content="开始压缩" Style="{StaticResource Av2PrimaryButton}" Command="{Binding StartCommand}" IsDefault="True" />
                 </StackPanel>
             </Grid>

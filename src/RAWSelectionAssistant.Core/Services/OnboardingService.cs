@@ -13,9 +13,13 @@ public sealed class OnboardingService(
     private const string ProofSalt = "KitaoPhotoSelector-Onboarding-1.2.0-Completion";
     private AppSettings? _settings;
     private readonly SemaphoreSlim _transitionGate = new(1, 1);
+    private readonly object _exitGate = new();
+    private bool _exitPersistencePending;
+    private long _sessionVersion;
 
     public TutorialState State { get; } = new();
     public TutorialSandboxPaths Sandbox => tutorialDataService.Paths;
+    public long SessionVersion => Volatile.Read(ref _sessionVersion);
     public bool NeedsUpgradeOffer { get; private set; }
     public IReadOnlyList<TutorialStep> Steps { get; } = CreateSteps();
     public TutorialStep CurrentStep => Steps[Math.Clamp(State.CurrentStep, 1, Steps.Count) - 1];
@@ -43,6 +47,7 @@ public sealed class OnboardingService(
 
         await tutorialDataService.EnsureCreatedAsync(cancellationToken).ConfigureAwait(false);
         State.Mode = TutorialMode.Required;
+        Interlocked.Increment(ref _sessionVersion);
         State.CurrentStep = Math.Clamp(settings.OnboardingCurrentStep, 1, Steps.Count);
         settings.OnboardingCompleted = false;
         settings.OnboardingVersion = Branding.ProductVersion;
@@ -69,6 +74,7 @@ public sealed class OnboardingService(
         EnsureInitialized();
         await tutorialDataService.EnsureCreatedAsync(cancellationToken).ConfigureAwait(false);
         State.Mode = TutorialMode.Replay;
+        Interlocked.Increment(ref _sessionVersion);
         State.CurrentStep = 1;
         State.ErrorMessage = string.Empty;
         State.VisitedCategories.Clear();
@@ -85,29 +91,51 @@ public sealed class OnboardingService(
 
     public async Task ExitAsync(CancellationToken cancellationToken = default)
     {
+        var shouldPersist = DetachForExit();
+        if (!shouldPersist) return;
+
         await _transitionGate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            if (!State.IsActive) return;
-            if (State.IsRequired)
+            lock (_exitGate)
+            {
+                if (!_exitPersistencePending) return;
+            }
+
+            if (await settingsService.TrySaveAsync(_settings!, cancellationToken).ConfigureAwait(false))
+            {
+                lock (_exitGate) _exitPersistencePending = false;
+            }
+        }
+        finally
+        {
+            _transitionGate.Release();
+        }
+    }
+
+    public bool DetachForExit()
+    {
+        lock (_exitGate)
+        {
+            if (!State.IsActive) return _exitPersistencePending;
+
+            var wasRequired = State.IsRequired;
+            Interlocked.Increment(ref _sessionVersion);
+            if (wasRequired)
             {
                 EnsureInitialized();
                 _settings!.OnboardingCompleted = false;
                 _settings.OnboardingCompletionProof = string.Empty;
                 _settings.OnboardingCurrentStep = Math.Clamp(State.CurrentStep, 1, Steps.Count);
-                await settingsService.SaveAsync(_settings, cancellationToken).ConfigureAwait(false);
+                _exitPersistencePending = true;
             }
 
-            var wasRequired = State.IsRequired;
             State.Mode = TutorialMode.Inactive;
             if (!wasRequired) State.CurrentStep = 1;
             State.ErrorMessage = string.Empty;
             State.VisitedCategories.Clear();
             State.VisitedOutputModes.Clear();
-        }
-        finally
-        {
-            _transitionGate.Release();
+            return _exitPersistencePending;
         }
     }
 
@@ -116,10 +144,17 @@ public sealed class OnboardingService(
     public async Task<TutorialValidationResult> PerformAsync(
         TutorialAction action,
         TutorialActionContext context,
+        CancellationToken cancellationToken = default) =>
+        await PerformForSessionAsync(SessionVersion, action, context, cancellationToken).ConfigureAwait(false);
+
+    public async Task<TutorialValidationResult> PerformForSessionAsync(
+        long sessionVersion,
+        TutorialAction action,
+        TutorialActionContext context,
         CancellationToken cancellationToken = default)
     {
         EnsureInitialized();
-        if (!State.IsActive) return TutorialValidationResult.Success();
+        if (!IsSessionCurrent(sessionVersion)) return TutorialValidationResult.Success();
         if (CurrentStep.RequiredAction != action)
         {
             return Fail("请先完成当前高亮步骤。");
@@ -137,6 +172,7 @@ public sealed class OnboardingService(
             return TutorialValidationResult.Success();
         }
         var validation = Validate(CurrentStep, context);
+        if (!IsSessionCurrent(sessionVersion)) return TutorialValidationResult.Success();
         if (!validation.Succeeded)
         {
             State.ErrorMessage = validation.Message;
@@ -146,10 +182,11 @@ public sealed class OnboardingService(
         State.ErrorMessage = string.Empty;
         if (action == TutorialAction.FinishTutorial)
         {
-            await CompleteAsync(cancellationToken).ConfigureAwait(false);
+            await CompleteAsync(sessionVersion, cancellationToken).ConfigureAwait(false);
             return TutorialValidationResult.Success();
         }
 
+        if (!IsSessionCurrent(sessionVersion)) return TutorialValidationResult.Success();
         State.CurrentStep = Math.Min(Steps.Count, State.CurrentStep + 1);
         if (State.IsRequired)
         {
@@ -159,10 +196,14 @@ public sealed class OnboardingService(
         return TutorialValidationResult.Success();
     }
 
+    private bool IsSessionCurrent(long sessionVersion) =>
+        State.IsActive && Volatile.Read(ref _sessionVersion) == sessionVersion;
+
     public async Task<bool> BackAsync(CancellationToken cancellationToken = default)
     {
         EnsureInitialized();
-        if (!State.IsActive || !CurrentStep.AllowBack || State.CurrentStep <= 1) return false;
+        var sessionVersion = SessionVersion;
+        if (!IsSessionCurrent(sessionVersion) || !CurrentStep.AllowBack || State.CurrentStep <= 1) return false;
         State.CurrentStep--;
         State.ErrorMessage = string.Empty;
         if (State.IsRequired)
@@ -170,7 +211,7 @@ public sealed class OnboardingService(
             _settings!.OnboardingCurrentStep = State.CurrentStep;
             await settingsService.SaveAsync(_settings, cancellationToken).ConfigureAwait(false);
         }
-        return true;
+        return IsSessionCurrent(sessionVersion);
     }
 
     public Task<TutorialSandboxPaths> ResetTutorialDataAsync(CancellationToken cancellationToken = default) =>
@@ -191,8 +232,9 @@ public sealed class OnboardingService(
             Encoding.UTF8.GetBytes(settings.OnboardingCompletionProof ?? string.Empty));
     }
 
-    private async Task CompleteAsync(CancellationToken cancellationToken)
+    private async Task CompleteAsync(long sessionVersion, CancellationToken cancellationToken)
     {
+        if (!IsSessionCurrent(sessionVersion)) return;
         var wasReplay = State.Mode == TutorialMode.Replay;
         if (!wasReplay)
         {
@@ -203,8 +245,10 @@ public sealed class OnboardingService(
             _settings.OnboardingCurrentStep = Steps.Count;
             _settings.OnboardingCompletionProof = CreateProof(completedAt, Branding.ProductVersion);
             await settingsService.SaveAsync(_settings, cancellationToken).ConfigureAwait(false);
+            if (!IsSessionCurrent(sessionVersion)) return;
             logService?.Info($"{Branding.ProductName} 首次新手教程已完成。");
         }
+        if (!IsSessionCurrent(sessionVersion)) return;
         State.Mode = TutorialMode.Inactive;
         State.CurrentStep = 1;
         State.ErrorMessage = string.Empty;

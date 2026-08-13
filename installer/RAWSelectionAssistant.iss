@@ -49,8 +49,19 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\win-x64"
 #endif
+#ifdef InputRoutingHotfixDevValidation
+  #undef MyAppName
+  #define MyAppName "Pixel Tart Input Routing Hotfix DevValidation"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\input-routing-hotfix-devvalidation-win-x64"
+#endif
 
 [Setup]
+#ifdef InputRoutingHotfixDevValidation
+AppId={{F26197CF-E765-4CB5-8063-A5BE6C9AB5E4}
+#else
 #ifdef GlobalSurfaceCloseDevValidation
 AppId={{6D33EA10-A934-48ED-BE4F-B2E20106D7CE}
 #else
@@ -76,10 +87,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef InputRoutingHotfixDevValidation
+DefaultDirName={autopf}\PixelTart_InputRoutingHotfix_DevValidation
+#else
 #ifdef GlobalSurfaceCloseDevValidation
 DefaultDirName={autopf}\PixelTart_GlobalSurfaceClose_DevValidation
 #else
@@ -105,10 +120,15 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #endif
+#endif
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef InputRoutingHotfixDevValidation
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=PixelTart_2.3.0_InputRoutingHotfix_DevValidation_x64
+#else
 #ifdef GlobalSurfaceCloseDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=PixelTart_2.3.0_GlobalSurfaceClose_DevValidation_x64
@@ -166,6 +186,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
 #endif
 #endif
 #endif
+#endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -194,7 +215,9 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
+#ifndef InputRoutingHotfixDevValidation
 Filename: "{app}\{#MyAppExeName}"; Description: "运行 {#MyAppName}"; Flags: nowait postinstall skipifsilent
+#endif
 
 [Code]
 var
@@ -206,10 +229,13 @@ function PostMessage(hWnd: HWND; Msg: LongWord; wParam, lParam: Longint): Boolea
   external 'PostMessageW@user32.dll stdcall';
 
 function InitializeUninstall(): Boolean;
+#ifndef InputRoutingHotfixDevValidation
 var
   AppWindow: HWND;
   WaitCount: Integer;
+#endif
 begin
+#ifndef InputRoutingHotfixDevValidation
   AppWindow := FindWindow('', '像素蛋挞');
   if AppWindow <> 0 then
   begin
@@ -221,6 +247,7 @@ begin
         Break;
     end;
   end;
+#endif
   Result := True;
 end;
 
@@ -233,6 +260,9 @@ end;
 
 procedure InitializeUninstallProgressForm();
 begin
+#ifdef InputRoutingHotfixDevValidation
+  DeleteUserDataCheckBox := nil;
+#else
   DeleteUserDataCheckBox := TNewCheckBox.Create(UninstallProgressForm);
   DeleteUserDataCheckBox.Parent := UninstallProgressForm;
   DeleteUserDataCheckBox.Left := UninstallProgressForm.StatusLabel.Left;
@@ -240,10 +270,13 @@ begin
   DeleteUserDataCheckBox.Width := UninstallProgressForm.ClientWidth - (DeleteUserDataCheckBox.Left * 2);
   DeleteUserDataCheckBox.Caption := '同时删除用户设置、项目数据库、索引和历史日志';
   DeleteUserDataCheckBox.Checked := False;
+#endif
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
+#ifndef InputRoutingHotfixDevValidation
   if (CurUninstallStep = usPostUninstall) and DeleteUserDataCheckBox.Checked then
     DelTree(ExpandConstant('{localappdata}\KitaoPhotoSelector'), True, True, True);
+#endif
 end;
