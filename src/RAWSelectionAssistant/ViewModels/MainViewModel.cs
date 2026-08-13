@@ -216,7 +216,6 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         ShowDetailsCommand = new RelayCommand(ShowDetails, item => !IsBusy && item is MediaSelectionItem media && media.FormatResults.Count > 0 && CanTutorial(TutorialAction.ViewDetails));
         TutorialPrimaryCommand = new AsyncRelayCommand(_ => TutorialPrimaryAsync(), _ => IsOnboardingActive && ShowTutorialPrimaryAction);
         TutorialBackCommand = new AsyncRelayCommand(_ => TutorialBackAsync(), _ => IsOnboardingActive && TutorialCanGoBack);
-        TutorialExitCommand = new AsyncRelayCommand(_ => ExitTutorialAsync(), _ => IsOnboardingActive && !_tutorialExitInProgress);
         TutorialRetryCommand = new AsyncRelayCommand(_ => RetryTutorialStepAsync(), _ => IsOnboardingActive && !string.IsNullOrWhiteSpace(TutorialErrorMessage));
         TutorialRecreateDataCommand = new AsyncRelayCommand(_ => RecreateTutorialDataAsync(), _ => IsOnboardingActive);
         HelpCommand = new AsyncRelayCommand(_ => ShowHelpAsync(), _ => !IsBusy && !IsOnboardingRequired && !_tutorialExitInProgress);
@@ -928,7 +927,6 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public RelayCommand ShowDetailsCommand { get; }
     public AsyncRelayCommand TutorialPrimaryCommand { get; }
     public AsyncRelayCommand TutorialBackCommand { get; }
-    public AsyncRelayCommand TutorialExitCommand { get; }
     public AsyncRelayCommand TutorialRetryCommand { get; }
     public AsyncRelayCommand TutorialRecreateDataCommand { get; }
     public AsyncRelayCommand HelpCommand { get; }
@@ -1567,13 +1565,6 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         await _onboardingService.BackAsync();
         await RestoreTutorialWorkspaceAsync();
         NotifyTutorialChanged();
-    }
-
-    private async Task ExitTutorialAsync()
-    {
-        ForceExitTutorial();
-        if (_tutorialExitCleanupTask is not null)
-            await _tutorialExitCleanupTask.ConfigureAwait(true);
     }
 
     public void ForceExitTutorial()
@@ -2826,7 +2817,6 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         ShowDetailsCommand.RaiseCanExecuteChanged();
         TutorialPrimaryCommand.RaiseCanExecuteChanged();
         TutorialBackCommand.RaiseCanExecuteChanged();
-        TutorialExitCommand.RaiseCanExecuteChanged();
         TutorialRetryCommand.RaiseCanExecuteChanged();
         TutorialRecreateDataCommand.RaiseCanExecuteChanged();
         HelpCommand.RaiseCanExecuteChanged();

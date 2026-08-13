@@ -7,18 +7,18 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class GlobalSurfaceCloseSmokeTests
 {
     [TestMethod]
-    public void SharedEscapeHatch_IsVector36DipAndHasNoBusinessCommandDependency()
+    public void SharedEscapeHatch_IsVector40DipAndHasNoBusinessCommandDependency()
     {
         var view = Read("src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml");
         var code = Read("src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml.cs");
         XDocument.Parse(view);
 
-        ContainsAll(view, "Width=\"36\"", "Height=\"36\"", "<Path", "Width=\"16\"", "ToolTipText",
+        ContainsAll(view, "Width=\"40\"", "Height=\"40\"", "<Path", "Width=\"16\"", "ToolTipText",
             "AutomationProperties.Name", "Click=\"CloseButton_Click\"");
         ContainsAll(code, "CloseRequestedEvent", "RoutingStrategy.Bubble", "RaiseEvent");
         var header = Read("src/RAWSelectionAssistant/Views/SurfaceHeader.xaml");
         XDocument.Parse(header);
-        ContainsAll(header, "SurfaceCloseButton", "Title", "Subtitle", "CloseToolTip", "CloseAutomationName");
+        ContainsAll(header, "SurfaceCloseButton", "Title", "Subtitle", "CloseToolTip", "CloseAutomationName", "ShowCloseButton");
 
         var executableContract = view + WithoutLineComments(code);
         foreach (var forbidden in new[]
@@ -74,7 +74,7 @@ public sealed class GlobalSurfaceCloseSmokeTests
     }
 
     [TestMethod]
-    public void TutorialButtonAndTutorialX_ConvergeOnExitTutorialAsync()
+    public void TutorialButtonTutorialXAndEscape_ConvergeOnSingleForceExitTutorial()
     {
         var mainView = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         var mainCode = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
@@ -82,17 +82,12 @@ public sealed class GlobalSurfaceCloseSmokeTests
 
         ContainsAll(mainView, "Content=\"退出教程\"", "Click=\"TutorialExitButton_Click\"",
             "AutomationProperties.AutomationId=\"TutorialExitButton\"", "AutomationId=\"TutorialCalloutCloseButton\"", "SurfaceCloseButton");
-        ContainsAll(viewModel,
-            "TutorialExitCommand = new AsyncRelayCommand(_ => ExitTutorialAsync()",
-            "if (IsOnboardingActive)",
-            "ForceExitTutorial()",
-            "RestoreNormalWorkspace()",
-            "TutorialReportNames");
-        ContainsAll(mainCode, "if (_viewModel.IsOnboardingActive)", "ForceExitTutorial()");
-
-        var exit = Slice(viewModel, "private async Task ExitTutorialAsync()", "private async Task RestoreTutorialWorkspaceAsync()");
-        ContainsAll(exit, "finally", "_tutorialExitInProgress = false", "RestoreNormalWorkspace()");
-        Assert.IsFalse(exit.Contains("CloseRequested?.Invoke", StringComparison.Ordinal));
+        ContainsAll(viewModel, "public void ForceExitTutorial()", "_onboardingService.DetachForExit()",
+            "RestoreNormalWorkspace()", "ReturnToWorkbench()", "TutorialReportNames");
+        ContainsAll(mainCode, "if (_viewModel.IsOnboardingActive)", "TutorialExitButton_Click", "ForceExitTutorial()");
+        Assert.AreEqual(1, Count(viewModel, "void ForceExitTutorial("), "Only one tutorial-exit authority may exist.");
+        Assert.IsFalse(viewModel.Contains("ExitTutorialAsync", StringComparison.Ordinal));
+        Assert.IsFalse(viewModel.Contains("TutorialExitCommand", StringComparison.Ordinal));
     }
 
     [TestMethod]
@@ -120,12 +115,13 @@ public sealed class GlobalSurfaceCloseSmokeTests
     [TestMethod]
     public void RequiredSurfaceMatrix_ExposesShellOwnedClose()
     {
+        var shell = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         var sources = new Dictionary<string, string>(StringComparer.Ordinal)
         {
             ["RawToJpeg"] = Read("src/RAWSelectionAssistant/Views/RawToJpegModal.xaml"),
             ["BatchCompress"] = Read("src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml"),
-            ["Collage"] = Read("src/RAWSelectionAssistant/Views/CollageView.xaml"),
-            ["Organize"] = Read("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"),
+            ["Collage"] = shell + Read("src/RAWSelectionAssistant/Views/CollageView.xaml"),
+            ["Organize"] = shell + Read("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"),
             ["LocalSplitWizard"] = Read("src/RAWSelectionAssistant/MainWindow.xaml"),
             ["Tutorial"] = Read("src/RAWSelectionAssistant/MainWindow.xaml"),
             ["BookingQuickCreate"] = Read("src/RAWSelectionAssistant/Views/QuickBookingEditorView.xaml"),
@@ -231,6 +227,9 @@ public sealed class GlobalSurfaceCloseSmokeTests
     {
         foreach (var value in values) StringAssert.Contains(source, value);
     }
+
+    private static int Count(string source, string value) =>
+        source.Split(value, StringSplitOptions.None).Length - 1;
 
     private static string WithoutLineComments(string source) => string.Join('\n',
         source.Split('\n').Where(line => !line.TrimStart().StartsWith("//", StringComparison.Ordinal)));

@@ -61,6 +61,13 @@ internal static class InputRoutingDiagnostics
 
     [Conditional("DEBUG"), Conditional("INPUT_ROUTING_DIAGNOSTICS")]
     public static void RecordControlEvent(DependencyObject control, string eventName, object? originalSource, object? source, bool handled) =>
+        WriteControlEvent(control, eventName, originalSource, source, handled);
+
+    private static void WriteControlEvent(DependencyObject control, string eventName, object? originalSource, object? source, bool handled)
+    {
+#if INPUT_ROUTING_DIAGNOSTICS
+        PhysicalPointerDiagnosticSession.RecordControlEvent(control, eventName, originalSource, source, handled);
+#endif
         Write(new
         {
             timestamp = DateTimeOffset.UtcNow,
@@ -70,9 +77,16 @@ internal static class InputRoutingDiagnostics
             source = Describe(source as DependencyObject),
             handled
         });
+    }
 
     [Conditional("DEBUG"), Conditional("INPUT_ROUTING_DIAGNOSTICS")]
-    public static void RecordShellEvent(string eventName, string surface, string overlay, int? tutorialStep) =>
+    public static void RecordShellEvent(string eventName, string surface, string overlay, int? tutorialStep)
+    {
+#if INPUT_ROUTING_DIAGNOSTICS
+        PhysicalPointerDiagnosticSession.RecordShellEvent(
+            eventName,
+            new PointerDiagnosticContext(surface, overlay, tutorialStep.HasValue, tutorialStep));
+#endif
         Write(new
         {
             timestamp = DateTimeOffset.UtcNow,
@@ -81,6 +95,7 @@ internal static class InputRoutingDiagnostics
             current_overlay = SafeToken(overlay),
             tutorial_step = tutorialStep
         });
+    }
 
     private static object Describe(DependencyObject? element)
     {
