@@ -25,6 +25,14 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\core-reliability-interaction-hotfix-devvalidation-win-x64"
 #endif
+#ifdef GlobalSurfaceCloseDevValidation
+  #undef MyAppName
+  #define MyAppName "Pixel Tart Global Surface Close DevValidation"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\global-surface-close-devvalidation-win-x64"
+#endif
 #ifdef CoreReliabilityDevValidation
   #undef MyAppName
   #define MyAppName "像素蛋挞 核心可靠性验收"
@@ -43,6 +51,9 @@
 #endif
 
 [Setup]
+#ifdef GlobalSurfaceCloseDevValidation
+AppId={{6D33EA10-A934-48ED-BE4F-B2E20106D7CE}
+#else
 #ifdef CoreReliabilityInteractionHotfix
 AppId={{A2D0D68C-0B3F-4B8F-9C0A-7C0D27E4C2F1}
 #else
@@ -64,10 +75,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef GlobalSurfaceCloseDevValidation
+DefaultDirName={autopf}\PixelTart_GlobalSurfaceClose_DevValidation
+#else
 #ifdef CoreReliabilityInteractionHotfix
 DefaultDirName={autopf}\PixelTart_CoreReliability_InteractionHotfix_DevValidation
 #else
@@ -89,10 +104,15 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #endif
+#endif
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef GlobalSurfaceCloseDevValidation
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=PixelTart_2.3.0_GlobalSurfaceClose_DevValidation_x64
+#else
 #ifdef CoreReliabilityInteractionHotfix
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=PixelTart_2.3.0_CoreReliability_InteractionHotfix_DevValidation_x64
@@ -139,6 +159,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
 #else
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
+#endif
 #endif
 #endif
 #endif

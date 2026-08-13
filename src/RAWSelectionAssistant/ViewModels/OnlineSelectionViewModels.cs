@@ -600,6 +600,8 @@ public sealed class OnlineSelectionViewModel : ObservableObject
     public ICommand OpenProjectCommand { get; }
     public ICommand RefreshCommand { get; }
 
+    public void CloseCreateSurface() => IsCreateModalOpen = false;
+
     public async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
         var snapshot = await _store.LoadAsync(cancellationToken).ConfigureAwait(true);

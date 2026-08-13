@@ -226,6 +226,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public bool IsGlobalSearch => !IsCurrentViewSearch;
     public bool HasMoreGlobalResults => _nextCursor is not null;
     public bool IsDetailsOpen { get => _isDetailsOpen; private set => SetProperty(ref _isDetailsOpen, value); }
+
+    public void CloseDetailsSurface() => IsDetailsOpen = false;
+
     public Guid? SelectedBookingId { get => _selectedBookingId; private set => SetProperty(ref _selectedBookingId, value); }
     public bool IsArchivedPaneOpen { get => _isArchivedPaneOpen; private set => SetProperty(ref _isArchivedPaneOpen, value); }
     public CalendarPresentationOption SelectedPresentation

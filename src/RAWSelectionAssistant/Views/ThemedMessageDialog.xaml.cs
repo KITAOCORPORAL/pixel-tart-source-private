@@ -45,6 +45,7 @@ public partial class ThemedMessageDialog : Window
     private void YesButton_Click(object sender, RoutedEventArgs e) { DialogResult = true; Close(); }
     private void NoButton_Click(object sender, RoutedEventArgs e) { DialogResult = false; Close(); }
     private void CloseButton_Click(object sender, RoutedEventArgs e) { DialogResult = _confirmation ? false : true; Close(); }
+    private void CloseSurfaceRequested(object sender, RoutedEventArgs e) { DialogResult = _confirmation ? false : true; Close(); }
     private void Header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { if (e.ButtonState == MouseButtonState.Pressed) DragMove(); }
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {

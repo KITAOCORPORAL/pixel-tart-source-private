@@ -7,17 +7,19 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ModalCloseSmokeTests
 {
     [TestMethod]
-    [DataRow("RawToJpeg", "RawToJpegPage.CancelCommand")]
-    [DataRow("BatchCompress", "BatchCompressionPage.CancelCommand")]
-    [DataRow("Collage", "CollagePage.CancelCommand")]
-    [DataRow("PhotoGrouping", "OrganizePhotosPage.CancelCommand")]
-    public void EscapePageMatrix_UsesTheSharedModalHost(string page, string cancelCommand)
+    [DataRow("RawToJpeg")]
+    [DataRow("BatchCompress")]
+    [DataRow("Collage")]
+    [DataRow("PhotoGrouping")]
+    public void EscapePageMatrix_UsesShellNavigationWithoutCancellingTasks(string page)
     {
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
-        StringAssert.Contains(source, $"case \"{page}\"");
-        StringAssert.Contains(source, cancelCommand);
-        StringAssert.Contains(source, "await RequestPageModalActionAsync");
-        StringAssert.Contains(source, "await _modalHost.RequestCancelAsync()");
+        var viewModel = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
+        StringAssert.Contains(viewModel, $"\"{page}\"");
+        StringAssert.Contains(source, "await _viewModel.CloseCurrentSurfaceAsync()");
+        Assert.DoesNotContain("RequestPageModalActionAsync", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("RawToJpegPage.CancelCommand", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("BatchCompressionPage.CancelCommand", source, StringComparison.Ordinal);
     }
 
     [TestMethod]
@@ -93,7 +95,7 @@ public sealed class ModalCloseSmokeTests
         StringAssert.Contains(xaml, "IsHitTestVisible=\"True\"");
         StringAssert.Contains(xaml, "Panel.ZIndex=\"1001\"");
         StringAssert.Contains(xaml, "AutomationProperties.Name=");
-        StringAssert.Contains(code, "TutorialExitCommand.ExecuteAsync");
+        StringAssert.Contains(code, "CloseCurrentSurfaceAsync");
         StringAssert.Contains(code, "ExitTutorialAsync");
     }
 

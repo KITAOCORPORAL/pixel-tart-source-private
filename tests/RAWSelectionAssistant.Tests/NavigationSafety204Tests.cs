@@ -28,7 +28,7 @@ public sealed class NavigationSafety204Tests
     {
         var viewModel = File.ReadAllText(Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "ViewModels", "MainViewModel.cs"));
         StringAssert.Contains(viewModel, "private string _currentPage = \"Workbench\"");
-        StringAssert.Contains(viewModel, "CurrentPage = \"ProjectCenter\"");
+        StringAssert.Contains(viewModel, "NavigateToSurface(\"Workbench\", recordHistory: false)");
         Assert.IsFalse(viewModel.Contains("CurrentPage = \"Collage\";", StringComparison.Ordinal));
     }
 
@@ -54,7 +54,7 @@ public sealed class NavigationSafety204Tests
     public void DuplicateNavigationIsIgnored()
     {
         var viewModel = File.ReadAllText(Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "ViewModels", "MainViewModel.cs"));
-        StringAssert.Contains(viewModel, "if (string.Equals(CurrentPage, targetPage, StringComparison.Ordinal)) return;");
+        StringAssert.Contains(viewModel, "if (string.Equals(CurrentPage, normalizedTarget, StringComparison.Ordinal)) return;");
     }
 
     [TestMethod]
@@ -176,7 +176,7 @@ public sealed class NavigationSafety204Tests
         var navigate = Slice(MainViewModel(), "private void Navigate(object? parameter)", "private void TogglePinnedTool");
         Assert.AreEqual(1, Count(navigate, "_logService.Info"));
         StringAssert.Contains(navigate, "navigationCorrelationId");
-        StringAssert.Contains(navigate, "if (string.Equals(CurrentPage, targetPage, StringComparison.Ordinal)) return;");
+        StringAssert.Contains(navigate, "if (string.Equals(CurrentPage, normalizedTarget, StringComparison.Ordinal)) return;");
     }
 
     private static string ProductProject() => Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj");

@@ -47,6 +47,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        AddHandler(SurfaceCloseButton.CloseRequestedEvent, new RoutedEventHandler(CloseCurrentSurface_Click));
         Loaded += MainWindow_Loaded;
         Closed += Window_Closed;
         SizeChanged += (_, _) =>
@@ -306,6 +307,12 @@ public partial class MainWindow : Window
         }
         if (e.Key == Key.Escape)
         {
+            if (TryCloseActiveInputPopup())
+            {
+                e.Handled = true;
+                return;
+            }
+
             e.Handled = true;
             await RequestEscapeCloseAsync();
             return;
@@ -345,7 +352,32 @@ public partial class MainWindow : Window
             SearchBox.Focus();
             SearchBox.SelectAll();
             e.Handled = true;
+            return;
         }
+
+        if (Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Left)
+        {
+            e.Handled = true;
+            await RequestEscapeCloseAsync();
+            return;
+        }
+    }
+
+    private bool TryCloseActiveInputPopup()
+    {
+        var openCombo = FindVisualChildren<ComboBox>(RootGrid).FirstOrDefault(combo => combo.IsDropDownOpen);
+        if (openCombo is not null)
+        {
+            openCombo.IsDropDownOpen = false;
+            openCombo.Focus();
+            return true;
+        }
+
+        var openDatePicker = FindVisualChildren<DatePicker>(RootGrid).FirstOrDefault(picker => picker.IsDropDownOpen);
+        if (openDatePicker is null) return false;
+        openDatePicker.IsDropDownOpen = false;
+        openDatePicker.Focus();
+        return true;
     }
 
     private async Task RequestEscapeCloseAsync()
@@ -354,7 +386,7 @@ public partial class MainWindow : Window
 
         if (_viewModel.IsOnboardingActive)
         {
-            await _viewModel.TutorialExitCommand.ExecuteAsync(null);
+            await _viewModel.CloseCurrentSurfaceAsync();
             return;
         }
 
@@ -368,19 +400,31 @@ public partial class MainWindow : Window
 
         if (BookingEditorOverlay.Visibility == Visibility.Visible)
         {
-            await RequestModalActionAsync(async () =>
-            {
-                if (_activeBookingEditor?.CancelCommand is AsyncRelayCommand asyncCancel)
-                    await asyncCancel.ExecuteAsync(null);
-                else
-                    _activeBookingEditor?.CancelCommand.Execute(null);
-            }, async () =>
-            {
-                if (_activeBookingEditor?.CancelCommand is AsyncRelayCommand asyncCancel)
-                    await asyncCancel.ExecuteAsync(null);
-                else
-                    _activeBookingEditor?.CancelCommand.Execute(null);
-            });
+            TryCloseBookingEditorVisual();
+            return;
+        }
+
+        if (_viewModel.OnlineSelectionPage.IsCreateModalOpen)
+        {
+            _viewModel.OnlineSelectionPage.CloseCreateSurface();
+            return;
+        }
+
+        if (_viewModel.FinancePage?.IsEditorOpen == true)
+        {
+            _viewModel.FinancePage.CloseEditorSurface();
+            return;
+        }
+
+        if (_viewModel.TaskCenter.IsTaskDetailsOpen)
+        {
+            _viewModel.TaskCenter.CloseDetailsSurface();
+            return;
+        }
+
+        if (_viewModel.WorkCalendarPage.IsDetailsOpen)
+        {
+            _viewModel.WorkCalendarPage.CloseDetailsSurface();
             return;
         }
 
@@ -400,41 +444,13 @@ public partial class MainWindow : Window
             return;
         }
 
-        switch (_viewModel.CurrentPage)
-        {
-            case "RawToJpeg" when _viewModel.RawToJpegPage is not null:
-                await RequestPageModalActionAsync(_viewModel.RawToJpegPage.CancelCommand);
-                return;
-            case "BatchCompress" when _viewModel.BatchCompressionPage is not null:
-                await RequestPageModalActionAsync(_viewModel.BatchCompressionPage.CancelCommand);
-                return;
-            case "Collage":
-                await RequestPageModalActionAsync(_viewModel.CollagePage.CancelCommand);
-                return;
-            case "PhotoGrouping":
-                await RequestPageModalActionAsync(_viewModel.OrganizePhotosPage.CancelCommand);
-                return;
-            case "OnlineSelection":
-                _viewModel.NavigateCommand.Execute("Workbench");
-                return;
-        }
+        await _viewModel.CloseCurrentSurfaceAsync();
     }
 
-    private async Task RequestPageModalActionAsync(ICommand command)
+    private async void CloseCurrentSurface_Click(object sender, RoutedEventArgs e)
     {
-        await RequestModalActionAsync(
-            closeAsync: async () =>
-            {
-                if (command is AsyncRelayCommand asyncCommand) await asyncCommand.ExecuteAsync(null);
-                else if (command.CanExecute(null)) command.Execute(null);
-                _viewModel?.NavigateCommand.Execute("Workbench");
-            },
-            cancelAsync: async () =>
-            {
-                if (command is AsyncRelayCommand asyncCommand) await asyncCommand.ExecuteAsync(null);
-                else if (command.CanExecute(null)) command.Execute(null);
-                _viewModel?.NavigateCommand.Execute("Workbench");
-            });
+        e.Handled = true;
+        await RequestEscapeCloseAsync();
     }
 
     private async Task RequestModalActionAsync(Func<Task> closeAsync, Func<Task> cancelAsync)

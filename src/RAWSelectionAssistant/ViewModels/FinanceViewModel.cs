@@ -166,6 +166,8 @@ public sealed class FinanceViewModel : ObservableObject
     public bool HasTransactions => Transactions.Count > 0;
     public bool IsEmpty => !HasTransactions;
     public string EmptyText => "本月还没有收支记录";
+
+    public void CloseEditorSurface() => ResetEditor();
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
     public string Keyword { get => _keyword; set { if (SetProperty(ref _keyword, value ?? string.Empty)) _ = RefreshAsync(); } }
     public FinanceTransactionItemViewModel? SelectedTransaction { get => _selectedTransaction; set { if (SetProperty(ref _selectedTransaction, value)) RefreshCommandStates(); } }
