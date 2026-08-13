@@ -1,10 +1,12 @@
 #if INPUT_ROUTING_DIAGNOSTICS
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Utilities;
@@ -135,12 +137,14 @@ internal static class PhysicalPointerDiagnosticSession
         Point screenPosition;
         DependencyObject? inputHit;
         DependencyObject? visualHit;
+        PointerButtonState buttonState;
         try
         {
             windowPosition = args.GetPosition(root);
             screenPosition = root.PointToScreen(windowPosition);
             inputHit = root.InputHitTest(windowPosition) as DependencyObject;
             visualHit = VisualTreeHelper.HitTest(root, windowPosition)?.VisualHit;
+            buttonState = CaptureButtonState(args.OriginalSource as DependencyObject);
         }
         catch (InvalidOperationException)
         {
@@ -162,7 +166,8 @@ internal static class PhysicalPointerDiagnosticSession
                 ScreenPosition = DiagnosticPoint.From(screenPosition),
                 OriginalSource = Describe(args.OriginalSource as DependencyObject),
                 Source = Describe(args.Source as DependencyObject),
-                Handled = args.Handled
+                Handled = args.Handled,
+                ButtonState = buttonState
             });
             if (eventName.Contains("Down", StringComparison.Ordinal))
                 attempt.Layer2Wpf.PreviewMouseDownReceived = true;
@@ -178,6 +183,16 @@ internal static class PhysicalPointerDiagnosticSession
                 attempt.LastWpfDownAt = now;
                 attempt.LastWpfDownTarget = Describe(args.OriginalSource as DependencyObject);
                 attempt.LastWpfDownParentChain = ParentChain(args.OriginalSource as DependencyObject);
+                attempt.DownTargetAutomationId = buttonState.AutomationId;
+                attempt.DownButtonInstanceId = buttonState.InstanceId;
+            }
+            if (eventName.Contains("LeftButtonUp", StringComparison.Ordinal) && args.ChangedButton == MouseButton.Left)
+            {
+                attempt.UpTargetAutomationId = buttonState.AutomationId;
+                attempt.UpButtonInstanceId = buttonState.InstanceId;
+                attempt.ButtonInstanceSameDownUp = attempt.DownButtonInstanceId is not null &&
+                                                   attempt.UpButtonInstanceId is not null &&
+                                                   attempt.DownButtonInstanceId == attempt.UpButtonInstanceId;
             }
             attempt.UpdatedAt = now;
             Save();
@@ -202,6 +217,37 @@ internal static class PhysicalPointerDiagnosticSession
                 Timestamp = DateTimeOffset.Now,
                 EventName = "ButtonClick",
                 Handled = handled
+            });
+            attempt.UpdatedAt = DateTimeOffset.Now;
+            Save();
+        }
+    }
+
+    public static void RecordPointerDownEscapeTarget(
+        DependencyObject escapeOwner,
+        DependencyObject? originalSource,
+        ShellEscapePointerAction action)
+    {
+        if (!IsEnabled || action == ShellEscapePointerAction.None) return;
+        lock (Gate)
+        {
+            EnsureSession();
+            if (!CanConfirmPhysicalPointerDownEscape(originalSource, escapeOwner, action)) return;
+
+            var attempt = _activeAttempt!;
+            attempt.Layer4Action.PhysicalTargetConfirmed = true;
+            attempt.Layer4Action.PointerDownEscapeTargetConfirmed = true;
+            attempt.Layer4Action.ActionFinalized = true;
+            attempt.Layer4Action.PointerDownEscapeAction = SafeToken(action.ToString());
+            attempt.Layer4Action.Button = Describe(escapeOwner);
+            attempt.Layer4Action.Events.Add(new ActionEvent
+            {
+                Timestamp = DateTimeOffset.Now,
+                EventName = "PointerDownEscapeTargetConfirmed",
+                Control = Describe(escapeOwner),
+                OriginalSource = Describe(originalSource),
+                Source = Describe(escapeOwner),
+                Handled = false
             });
             attempt.UpdatedAt = DateTimeOffset.Now;
             Save();
@@ -391,6 +437,36 @@ internal static class PhysicalPointerDiagnosticSession
             DateTimeOffset.Now - _activeAttempt.LastWpfDownAt.Value > TimeSpan.FromSeconds(1))
             return false;
 
+        return MatchesLastWpfDownTarget(source);
+    }
+
+    private static bool CanConfirmPhysicalPointerDownEscape(
+        DependencyObject? originalSource,
+        DependencyObject escapeOwner,
+        ShellEscapePointerAction action)
+    {
+        if (_activeAttempt is null || _activeAttempt.Layer4Action.ActionFinalized ||
+            !_activeAttempt.Layer1Win32.LButtonDownReceived ||
+            !_activeAttempt.Layer2Wpf.PreviewMouseDownReceived ||
+            _activeAttempt.LastWpfDownAt is null ||
+            DateTimeOffset.Now - _activeAttempt.LastWpfDownAt.Value > TimeSpan.FromSeconds(1))
+            return false;
+
+        return ShellEscapePointer.GetAction(escapeOwner) == action &&
+               MatchesLastWpfDownTarget(originalSource) &&
+               IsAncestorOrSelf(escapeOwner, originalSource);
+    }
+
+    private static bool IsAncestorOrSelf(DependencyObject ancestor, DependencyObject? element)
+    {
+        for (var current = element; current is not null; current = Parent(current))
+            if (ReferenceEquals(current, ancestor)) return true;
+        return false;
+    }
+
+    private static bool MatchesLastWpfDownTarget(DependencyObject? source)
+    {
+        if (_activeAttempt is null || source is null) return false;
         var candidateChain = ParentChain(source);
         var knownIds = _activeAttempt.LastWpfDownParentChain
             .Select(item => item.AutomationId)
@@ -480,6 +556,36 @@ internal static class PhysicalPointerDiagnosticSession
             IsHitTestVisible = uiElement?.IsHitTestVisible ?? false,
             EffectiveIsEnabled = uiElement?.IsEnabled ?? false
         };
+    }
+
+    private static PointerButtonState CaptureButtonState(DependencyObject? element)
+    {
+        var button = FindAncestor<ButtonBase>(element);
+        var captured = Mouse.Captured as DependencyObject;
+        return new PointerButtonState
+        {
+            AutomationId = SafeToken(button is null ? string.Empty : AutomationProperties.GetAutomationId(button)),
+            InstanceId = button is null ? null : RuntimeHelpers.GetHashCode(button),
+            MouseCapturedElement = Describe(captured),
+            IsMouseCaptured = button?.IsMouseCaptured ?? false,
+            IsMouseCaptureWithin = button?.IsMouseCaptureWithin ?? false,
+            IsPressed = button?.IsPressed ?? false,
+            IsEnabled = button?.IsEnabled ?? false,
+            IsHitTestVisible = button?.IsHitTestVisible ?? false,
+            Visibility = SafeToken(button?.Visibility.ToString()),
+            VisualParent = Describe(button is null ? null : Parent(button)),
+            ClickMode = SafeToken(button?.ClickMode.ToString()),
+            CommandCanExecute = button is Button commandButton && commandButton.Command is not null
+                ? commandButton.Command.CanExecute(commandButton.CommandParameter)
+                : true
+        };
+    }
+
+    private static T? FindAncestor<T>(DependencyObject? element) where T : DependencyObject
+    {
+        for (var current = element; current is not null; current = Parent(current))
+            if (current is T match) return match;
+        return null;
     }
 
     private static List<PointerElementSnapshot> ParentChain(DependencyObject? element)
@@ -592,6 +698,11 @@ internal static class PhysicalPointerDiagnosticSession
         public PointerElementSnapshot LastWpfDownTarget { get; set; } = PointerElementSnapshot.None;
         public List<PointerElementSnapshot> LastWpfDownParentChain { get; set; } = [];
         public DateTimeOffset? LastWpfDownAt { get; set; }
+        public string DownTargetAutomationId { get; set; } = string.Empty;
+        public string UpTargetAutomationId { get; set; } = string.Empty;
+        public int? DownButtonInstanceId { get; set; }
+        public int? UpButtonInstanceId { get; set; }
+        public bool? ButtonInstanceSameDownUp { get; set; }
     }
 
     private sealed class Win32Layer
@@ -626,7 +737,9 @@ internal static class PhysicalPointerDiagnosticSession
         public bool SurfaceCloseDispatchCompleted { get; set; }
         public bool SurfaceClosed { get; set; }
         public bool PhysicalTargetConfirmed { get; set; }
+        public bool PointerDownEscapeTargetConfirmed { get; set; }
         public bool ActionFinalized { get; set; }
+        public string PointerDownEscapeAction { get; set; } = string.Empty;
         public PointerElementSnapshot Button { get; set; } = PointerElementSnapshot.None;
         public List<ActionEvent> Events { get; } = [];
     }
@@ -640,6 +753,23 @@ internal static class PhysicalPointerDiagnosticSession
         public PointerElementSnapshot OriginalSource { get; set; } = PointerElementSnapshot.None;
         public PointerElementSnapshot Source { get; set; } = PointerElementSnapshot.None;
         public bool Handled { get; set; }
+        public PointerButtonState ButtonState { get; set; } = new();
+    }
+
+    private sealed class PointerButtonState
+    {
+        public string AutomationId { get; set; } = string.Empty;
+        public int? InstanceId { get; set; }
+        public PointerElementSnapshot MouseCapturedElement { get; set; } = PointerElementSnapshot.None;
+        public bool IsMouseCaptured { get; set; }
+        public bool IsMouseCaptureWithin { get; set; }
+        public bool IsPressed { get; set; }
+        public bool IsEnabled { get; set; }
+        public bool IsHitTestVisible { get; set; }
+        public string Visibility { get; set; } = string.Empty;
+        public PointerElementSnapshot VisualParent { get; set; } = PointerElementSnapshot.None;
+        public string ClickMode { get; set; } = string.Empty;
+        public bool CommandCanExecute { get; set; }
     }
 
     private sealed class ActionEvent

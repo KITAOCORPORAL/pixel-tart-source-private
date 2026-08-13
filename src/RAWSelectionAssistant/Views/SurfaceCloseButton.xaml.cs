@@ -35,7 +35,11 @@ public partial class SurfaceCloseButton : UserControl
         typeof(SurfaceCloseButton),
         new PropertyMetadata(string.Empty));
 
-    public SurfaceCloseButton() => InitializeComponent();
+    public SurfaceCloseButton()
+    {
+        ShellEscapePointer.SetAction(this, ShellEscapePointerAction.CloseCurrentSurface);
+        InitializeComponent();
+    }
 
     public event RoutedEventHandler CloseRequested
     {
@@ -66,6 +70,9 @@ public partial class SurfaceCloseButton : UserControl
 #if DEBUG || INPUT_ROUTING_DIAGNOSTICS
         InputRoutingDiagnostics.RecordControlEvent(this, "ClosePreviewMouseDown", e.OriginalSource, e.Source, e.Handled);
 #endif
+        if (!ShellEscapePointer.TryBeginDispatch(e)) return;
+        e.Handled = true;
+        RaiseEvent(new RoutedEventArgs(CloseRequestedEvent, this));
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)

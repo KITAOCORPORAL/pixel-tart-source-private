@@ -51,6 +51,8 @@ public partial class MainWindow : Window
 #if INPUT_ROUTING_DIAGNOSTICS
         ConfigurePhysicalPointerDiagnostics();
 #endif
+        AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(Window_PreviewMouseLeftButtonDown), true);
+        AddHandler(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(Window_PreviewMouseLeftButtonUp), true);
         AddHandler(SurfaceCloseButton.CloseRequestedEvent, new RoutedEventHandler(CloseCurrentSurface_Click));
         Loaded += MainWindow_Loaded;
         Closed += Window_Closed;
@@ -571,8 +573,26 @@ public partial class MainWindow : Window
         return string.Empty;
     }
 
-    private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
+    private async void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
         RecordInputMouse(e, "PreviewMouseLeftButtonDown");
+        if (!ShellEscapePointer.TryResolve(
+                e.OriginalSource as DependencyObject,
+                out _,
+                out var action))
+            return;
+
+        e.Handled = true;
+        if (!ShellEscapePointer.TryBeginDispatch(e)) return;
+
+        if (action == ShellEscapePointerAction.ExitTutorial)
+        {
+            ForceExitTutorial();
+            return;
+        }
+
+        await RequestEscapeCloseAsync();
+    }
 
     private void Window_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) =>
         RecordInputMouse(e, "PreviewMouseLeftButtonUp");
@@ -1088,7 +1108,7 @@ public partial class MainWindow : Window
             TutorialPointer.Visibility = Visibility.Collapsed;
             Canvas.SetLeft(TutorialCard, Math.Max(16, (RootGrid.ActualWidth - TutorialCard.Width) / 2));
             Canvas.SetTop(TutorialCard, Math.Max(16, (RootGrid.ActualHeight - 280) / 2));
-            TutorialPrimaryButton.Focus();
+            if (targetChanged && Mouse.LeftButton == MouseButtonState.Released) TutorialPrimaryButton.Focus();
             return;
         }
 
@@ -1121,7 +1141,7 @@ public partial class MainWindow : Window
         TutorialPointer.Y1 = layout.CardTop + 54;
         TutorialPointer.X2 = cardIsRight ? layout.TargetLeft + layout.TargetWidth : layout.TargetLeft;
         TutorialPointer.Y2 = layout.TargetTop + layout.TargetHeight / 2;
-        target.Focus();
+        if (targetChanged && Mouse.LeftButton == MouseButtonState.Released) target.Focus();
     }
 
     private FrameworkElement? ResolveTutorialTarget(TutorialTarget target) => target switch

@@ -73,8 +73,19 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\physical-pointer-diagnostic-devvalidation2-win-x64"
 #endif
+#ifdef ClickRoutingFixDevValidation
+  #undef MyAppName
+  #define MyAppName "Pixel Tart Click Routing Fix DevValidation"
+  #undef MyAppExeName
+  #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\click-routing-fix-devvalidation-win-x64"
+#endif
 
 [Setup]
+#ifdef ClickRoutingFixDevValidation
+AppId={{C4B8A06B-2812-4C3E-9FA7-EA97E755F99B}
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 AppId={{A6D55B25-EE0C-4BC4-B983-83D777F2A4B8}
 #else
@@ -112,10 +123,14 @@ AppId={{72CA568E-8C7C-4DB6-A8E4-AEC68008D19B}
 #endif
 #endif
 #endif
+#endif
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+#ifdef ClickRoutingFixDevValidation
+DefaultDirName={autopf}\PixelTart_ClickRoutingFix_DevValidation
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 DefaultDirName={autopf}\PixelTart_PhysicalPointerDiagnostic_DevValidation2
 #else
@@ -158,6 +173,7 @@ DefaultGroupName=像素蛋挞
 #else
 DefaultGroupName={#MyAppName}
 #endif
+#endif
 DisableProgramGroupPage=yes
 #ifdef PhysicalPointerDiagnosticDevValidation2
 UninstallDisplayName=像素蛋挞 - Physical Pointer Diagnostic DevValidation
@@ -165,6 +181,10 @@ UninstallDisplayName=像素蛋挞 - Physical Pointer Diagnostic DevValidation
 UninstallDisplayName={#MyAppName}
 #endif
 UninstallDisplayIcon={app}\{#MyAppExeName}
+#ifdef ClickRoutingFixDevValidation
+OutputDir=..\artifacts\releases\2.3.0\installer
+OutputBaseFilename=PixelTart_2.3.0_ClickRoutingFix_DevValidation_x64
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 OutputDir=..\artifacts\releases\2.3.0\installer
 OutputBaseFilename=PixelTart_2.3.0_PhysicalPointerDiagnostic_DevValidation2_x64
@@ -237,6 +257,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
 #endif
 #endif
 #endif
+#endif
 SetupIconFile=..\src\RAWSelectionAssistant\Assets\AppIcon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -245,6 +266,9 @@ PrivilegesRequired=admin
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0.19041
+#ifdef ClickRoutingFixDevValidation
+CloseApplications=no
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 CloseApplications=no
 #else
@@ -254,12 +278,17 @@ CloseApplications=no
 CloseApplications=force
 #endif
 #endif
+#endif
 RestartApplications=no
 ChangesAssociations=no
+#ifdef ClickRoutingFixDevValidation
+ChangesEnvironment=yes
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 ChangesEnvironment=yes
 #else
 ChangesEnvironment=no
+#endif
 #endif
 AllowNoIcons=yes
 
@@ -267,6 +296,9 @@ AllowNoIcons=yes
 Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [Tasks]
+#ifdef ClickRoutingFixDevValidation
+Name: "desktopicon"; Description: "Create desktop shortcut"; GroupDescription: "Additional shortcuts:"; Flags: checkedonce
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加快捷方式："; Flags: checkedonce
 #else
@@ -274,11 +306,16 @@ Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: 
 Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加快捷方式："; Flags: checkedonce
 #endif
 #endif
+#endif
 
 [Files]
 Source: "{#MyPublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.xml"
 
 [Icons]
+#ifdef ClickRoutingFixDevValidation
+Name: "{group}\Pixel Tart Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autodesktop}\Pixel Tart Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 Name: "{group}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
 Name: "{autodesktop}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
@@ -288,8 +325,12 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 #endif
 #endif
+#endif
 
 [Run]
+#ifdef ClickRoutingFixDevValidation
+Filename: "{app}\{#MyAppExeName}"; Description: "Launch Pixel Tart Click Routing Fix DevValidation"; Flags: nowait postinstall skipifsilent
+#else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 Filename: "{app}\{#MyAppExeName}"; Description: "启动 像素蛋挞 - 输入诊断版"; Flags: nowait postinstall skipifsilent
 #else
@@ -299,15 +340,20 @@ Filename: "{app}\{#MyAppExeName}"; Description: "运行 {#MyAppName}"; Flags: no
 #endif
 #endif
 #endif
+#endif
 
 [Code]
 var
   DeleteUserDataCheckBox: TNewCheckBox;
 
-#ifdef PhysicalPointerDiagnosticDevValidation2
+#if defined PhysicalPointerDiagnosticDevValidation2 || defined ClickRoutingFixDevValidation
 const
   PhysicalPointerDiagnosticEnvironmentKey = 'Environment';
+#ifdef ClickRoutingFixDevValidation
+  PhysicalPointerDiagnosticMarkerKey = 'Software\PixelTart\ClickRoutingFixDevValidation';
+#else
   PhysicalPointerDiagnosticMarkerKey = 'Software\PixelTart\PhysicalPointerDiagnosticDevValidation2';
+#endif
   PhysicalPointerDiagnosticRootValue = 'PIXEL_TART_ACCEPTANCE_ROOT';
   PhysicalPointerHwndBroadcast = $FFFF;
   PhysicalPointerWmSettingChange = $001A;
@@ -320,7 +366,11 @@ function SendMessageTimeout(hWnd: HWND; Msg, wParam: LongWord; lParam: string; f
 
 function PhysicalPointerDiagnosticAcceptanceRoot(): string;
 begin
+#ifdef ClickRoutingFixDevValidation
+  Result := ExpandConstant('{localappdata}\PixelTart_Validation\ClickRoutingFixDevValidation');
+#else
   Result := ExpandConstant('{localappdata}\PixelTart_Validation\PhysicalPointerDiagnosticDevValidation2');
+#endif
 end;
 
 procedure NotifyEnvironmentChanged();
@@ -387,7 +437,7 @@ function PostMessage(hWnd: HWND; Msg: LongWord; wParam, lParam: Longint): Boolea
   external 'PostMessageW@user32.dll stdcall';
 
 function InitializeUninstall(): Boolean;
-#ifndef PhysicalPointerDiagnosticDevValidation2
+#if !defined PhysicalPointerDiagnosticDevValidation2 && !defined ClickRoutingFixDevValidation
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
 var
@@ -397,7 +447,7 @@ var
 #endif
 #endif
 begin
-#ifndef PhysicalPointerDiagnosticDevValidation2
+#if !defined PhysicalPointerDiagnosticDevValidation2 && !defined ClickRoutingFixDevValidation
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
   AppWindow := FindWindow('', '像素蛋挞');
@@ -426,7 +476,7 @@ end;
 
 procedure InitializeUninstallProgressForm();
 begin
-#ifdef PhysicalPointerDiagnosticDevValidation2
+#if defined PhysicalPointerDiagnosticDevValidation2 || defined ClickRoutingFixDevValidation
   DeleteUserDataCheckBox := nil;
 #else
 #ifdef InputRoutingHotfixDevValidation
@@ -449,7 +499,7 @@ end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
-#ifdef PhysicalPointerDiagnosticDevValidation2
+#if defined PhysicalPointerDiagnosticDevValidation2 || defined ClickRoutingFixDevValidation
   if CurUninstallStep = usPostUninstall then
     RestorePhysicalPointerDiagnosticEnvironment();
 #else
@@ -464,7 +514,7 @@ end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
-#ifdef PhysicalPointerDiagnosticDevValidation2
+#if defined PhysicalPointerDiagnosticDevValidation2 || defined ClickRoutingFixDevValidation
   if CurStep = ssPostInstall then
     ConfigurePhysicalPointerDiagnosticEnvironment();
 #endif

@@ -28,7 +28,9 @@ public partial class MainWindow
         AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseDown), true);
         AddHandler(Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseUp), true);
         AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseLeftButtonDown), true);
+        AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(PhysicalPointer_MouseLeftButtonDown), true);
         AddHandler(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseLeftButtonUp), true);
+        AddHandler(UIElement.MouseLeftButtonUpEvent, new MouseButtonEventHandler(PhysicalPointer_MouseLeftButtonUp), true);
         AddHandler(Mouse.MouseUpEvent, new MouseButtonEventHandler(PhysicalPointer_MouseUpCompleted), true);
         AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(PhysicalPointer_ButtonClick), true);
         LayoutUpdated += PhysicalPointer_LayoutUpdated;
@@ -94,8 +96,14 @@ public partial class MainWindow
     private void PhysicalPointer_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
         RecordPhysicalPointerWpf(e, "PreviewMouseLeftButtonDown");
 
+    private void PhysicalPointer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
+        RecordPhysicalPointerWpf(e, "MouseLeftButtonDown");
+
     private void PhysicalPointer_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) =>
         RecordPhysicalPointerWpf(e, "PreviewMouseLeftButtonUp");
+
+    private void PhysicalPointer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) =>
+        RecordPhysicalPointerWpf(e, "MouseLeftButtonUp");
 
     private void PhysicalPointer_MouseUpCompleted(object sender, MouseButtonEventArgs e) =>
         PhysicalPointerDiagnosticSession.CompleteWpfMouseDispatch(e.ChangedButton);
