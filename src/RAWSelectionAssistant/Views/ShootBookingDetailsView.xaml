@@ -21,7 +21,7 @@
             <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="14">
                 <Grid>
                     <StackPanel><TextBlock Text="{Binding Title}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding BookingStatusText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
-                    <Button Content="×" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding CloseCommand}" AutomationProperties.Name="关闭排期详情" />
+                    <views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top" AutomationName="关闭排期详情" />
                 </Grid>
             </Border>
 

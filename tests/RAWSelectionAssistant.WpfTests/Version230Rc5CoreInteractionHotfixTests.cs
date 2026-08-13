@@ -122,7 +122,7 @@ public sealed class Version230Rc5CoreInteractionHotfixTests
     [DataRow("OpenDayDetailsForDateAsync")]
     [DataRow("NavigateToCalendarDetailsAsync")]
     [DataRow("day.Date")]
-    [DataRow("CurrentPage = \"WorkCalendar\"")]
+    [DataRow("NavigateToSurface(\"WorkCalendar\")")]
     [DataRow("DaySchedule.Bookings.FirstOrDefault")]
     public void Calendar_ViewDayDetailsUsesRealContextDate(string token)
     {

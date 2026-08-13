@@ -15,6 +15,7 @@ public sealed class TaskCenterViewModel : ObservableObject
     private readonly IRecoveryCoordinator? _recovery;
     private readonly SynchronizationContext? _context;
     private TaskSnapshotViewModel? _selectedTask;
+    private bool _isTaskDetailsOpen;
 
     public TaskCenterViewModel(ITaskEngine engine, IRecoveryCoordinator? recovery = null)
     {
@@ -31,11 +32,31 @@ public sealed class TaskCenterViewModel : ObservableObject
         RollbackCommand = new AsyncRelayCommand(RollbackAsync, parameter => Resolve(parameter)?.CanRollback == true && _recovery is not null);
         AbandonCommand = new AsyncRelayCommand(AbandonAsync, parameter => Resolve(parameter)?.CanAbandon == true && _recovery is not null);
         ClearCompletedCommand = new RelayCommand(_ => ClearCompleted(), _ => Tasks.Any(x => x.IsTerminal));
-        SelectTaskCommand = new RelayCommand(parameter => SelectedTask = Resolve(parameter));
+        SelectTaskCommand = new RelayCommand(OpenDetailsSurface);
+        CloseDetailsCommand = new RelayCommand(_ => CloseDetailsSurface());
     }
 
     public ObservableCollection<TaskSnapshotViewModel> Tasks { get; } = [];
-    public TaskSnapshotViewModel? SelectedTask { get => _selectedTask; set => SetProperty(ref _selectedTask, value); }
+    public TaskSnapshotViewModel? SelectedTask
+    {
+        get => _selectedTask;
+        set
+        {
+            SetProperty(ref _selectedTask, value);
+        }
+    }
+    public bool IsTaskDetailsOpen
+    {
+        get => _isTaskDetailsOpen;
+        private set => SetProperty(ref _isTaskDetailsOpen, value);
+    }
+
+    public void CloseDetailsSurface()
+    {
+        IsTaskDetailsOpen = false;
+        SelectedTask = null;
+    }
+
     public int ActiveCount => Tasks.Count(x => !x.IsTerminal);
     public int AttentionCount => Tasks.Count(x => x.State == TaskLifecycleState.NeedsAttention);
     public bool HasTasks => Tasks.Count > 0;
@@ -51,6 +72,7 @@ public sealed class TaskCenterViewModel : ObservableObject
     public AsyncRelayCommand AbandonCommand { get; }
     public RelayCommand ClearCompletedCommand { get; }
     public RelayCommand SelectTaskCommand { get; }
+    public RelayCommand CloseDetailsCommand { get; }
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
@@ -68,6 +90,12 @@ public sealed class TaskCenterViewModel : ObservableObject
     }
 
     private TaskSnapshotViewModel? Resolve(object? parameter) => parameter as TaskSnapshotViewModel ?? SelectedTask;
+
+    private void OpenDetailsSurface(object? parameter)
+    {
+        SelectedTask = Resolve(parameter);
+        IsTaskDetailsOpen = SelectedTask is not null;
+    }
 
     private async Task RetryAsync(object? parameter)
     {

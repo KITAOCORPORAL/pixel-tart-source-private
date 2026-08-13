@@ -99,6 +99,19 @@ public sealed class MainViewModel : ObservableObject
 
     private static readonly string[] TutorialReportNames = ["匹配报告.csv", "匹配报告.json", "操作日志.txt"];
 
+    private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
+    {
+        "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "Tether", "Finance",
+        "Activation", "Help", "BatchCompress", "RawToJpeg", "Watermark", "DeleteRejects", "FtpTool",
+        "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
+    };
+
+    private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
+    {
+        "LocalSplit", "Workflow", "OnlineSelection", "Finance", "BatchCompress", "RawToJpeg", "Watermark",
+        "DeleteRejects", "FtpTool", "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
+    };
+
     public event EventHandler<PageChangedEventArgs>? PageChanged;
 
     public MainViewModel(
@@ -157,6 +170,7 @@ public sealed class MainViewModel : ObservableObject
         _quickToolsRepository = quickToolsRepository;
         _matchDecisionRepository = matchDecisionRepository;
         _weatherState = weatherState;
+        SurfaceNavigationHost = new SurfaceNavigationHost(_currentPage, IsValidNavigationSurface);
         WorkCalendarPage = workCalendarPage;
         WorkCalendarPage.CalendarPageRequested += WorkCalendarPage_CalendarPageRequested;
         WorkbenchSchedule = workbenchSchedule;
@@ -208,7 +222,7 @@ public sealed class MainViewModel : ObservableObject
         FeedbackCommand = new RelayCommand(_ => _dialogService.ShowFeedback(), _ => !IsOnboardingRequired);
         NavigateCommand = new RelayCommand(Navigate, _ => !IsBusy && !IsOnboardingRequired);
         OpenSettingsCommand = new RelayCommand(_ => IsSettingsModalOpen = true);
-        OpenToolboxPageCommand = new RelayCommand(_ => CurrentPage = "Toolbox");
+        OpenToolboxPageCommand = new RelayCommand(_ => NavigateToSurface("Toolbox"));
         TogglePinnedToolCommand = new RelayCommand(parameter => TogglePinnedTool(parameter?.ToString()));
         MovePinnedToolLeftCommand = new RelayCommand(parameter => MovePinnedTool(parameter?.ToString(), -1));
         MovePinnedToolRightCommand = new RelayCommand(parameter => MovePinnedTool(parameter?.ToString(), 1));
@@ -234,6 +248,9 @@ public sealed class MainViewModel : ObservableObject
         OpenLogDirectoryCommand = new RelayCommand(_ => OpenLogDirectory());
         DismissToastCommand = new RelayCommand(_ => DismissToast());
         CloseSettingsCommand = new RelayCommand(_ => IsSettingsModalOpen = false);
+        CloseCurrentSurfaceCommand = new RelayCommand(_ => _ = CloseCurrentSurfaceAsync());
+        ReturnToOriginCommand = new RelayCommand(_ => ReturnToOrigin());
+        ReturnToWorkbenchCommand = new RelayCommand(_ => ReturnToWorkbench());
         ExitCommand = new RelayCommand(_ => CloseRequested?.Invoke(this, EventArgs.Empty));
 
         Sources.CollectionChanged += (_, _) => RefreshCommands();
@@ -254,7 +271,12 @@ public sealed class MainViewModel : ObservableObject
     public bool IsSettingsModalOpen
     {
         get => _isSettingsModalOpen;
-        set => SetProperty(ref _isSettingsModalOpen, value);
+        set
+        {
+            if (!SetProperty(ref _isSettingsModalOpen, value)) return;
+            OnPropertyChanged(nameof(IsCurrentSurfaceClosable));
+            OnPropertyChanged(nameof(CurrentSurfaceCloseToolTip));
+        }
     }
     public AppSettings Settings { get; private set; } = new();
     public OrganizePhotosViewModel OrganizePhotosPage { get; }
@@ -267,6 +289,7 @@ public sealed class MainViewModel : ObservableObject
     public OnlineSelectionViewModel OnlineSelectionPage { get; }
     public RawToJpegViewModel? RawToJpegPage { get; }
     public BatchCompressionViewModel? BatchCompressionPage { get; }
+    public ISurfaceNavigationHost SurfaceNavigationHost { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
         new(CollectionCategory.JpegOnly, "仅 JPG"),
@@ -465,6 +488,8 @@ public sealed class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(IsPhotoGroupingPage));
             OnPropertyChanged(nameof(IsCollagePage));
             OnPropertyChanged(nameof(IsToolboxPage));
+            OnPropertyChanged(nameof(IsCurrentSurfaceClosable));
+            OnPropertyChanged(nameof(CurrentSurfaceCloseToolTip));
             OnPropertyChanged(nameof(CurrentPageStatus));
             OnPropertyChanged(nameof(CurrentPageDetail));
             OnPropertyChanged(nameof(CurrentPageProcessedText));
@@ -501,6 +526,8 @@ public sealed class MainViewModel : ObservableObject
     public bool IsPhotoGroupingPage => CurrentPage == "PhotoGrouping";
     public bool IsCollagePage => CurrentPage == "Collage";
     public bool IsToolboxPage => CurrentPage == "Toolbox";
+    public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || ClosableSurfaces.Contains(CurrentPage);
+    public string CurrentSurfaceCloseToolTip => IsOnboardingActive ? "退出教程并返回" : "关闭并返回";
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
         new(ProductToolboxPolicy.Catalog
             .Append(ToolRegistry.Get(ToolId.Toolbox))
@@ -932,6 +959,9 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand OpenLogDirectoryCommand { get; }
     public RelayCommand DismissToastCommand { get; }
     public RelayCommand CloseSettingsCommand { get; }
+    public RelayCommand CloseCurrentSurfaceCommand { get; }
+    public RelayCommand ReturnToOriginCommand { get; }
+    public RelayCommand ReturnToWorkbenchCommand { get; }
     public RelayCommand ExitCommand { get; }
     public RelayCommand ToggleCompactDensityCommand { get; }
     public event EventHandler? TutorialVisualStateChanged;
@@ -1003,12 +1033,12 @@ public sealed class MainViewModel : ObservableObject
         _initialized = true;
         if (IsOnboardingActive)
         {
-            CurrentPage = "Workflow";
+            NavigateToSurface("Workflow", recordHistory: false);
             await RestoreTutorialWorkspaceAsync();
         }
         else
         {
-            CurrentPage = "ProjectCenter";
+            NavigateToSurface("Workbench", recordHistory: false);
         }
         StatusMessage = IndexedMediaCount > 0
             ? $"已载入综合索引，共 {IndexedMediaCount:N0} 个文件"
@@ -1035,15 +1065,15 @@ public sealed class MainViewModel : ObservableObject
 
     private async void ReminderNotifications_OpenBookingRequested(object? sender, Guid bookingId)
     {
-        CurrentPage = "WorkCalendar";
+        NavigateToSurface("WorkCalendar");
         await WorkCalendarPage.OpenBookingDetailsAsync(bookingId).ConfigureAwait(true);
     }
 
-    private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => CurrentPage = "WorkCalendar";
+    private void WorkbenchSchedule_OpenCalendarRequested(object? sender, EventArgs e) => NavigateToSurface("WorkCalendar");
 
     private async void WorkCalendarPage_CalendarPageRequested(object? sender, EventArgs e)
     {
-        CurrentPage = "WorkCalendar";
+        NavigateToSurface("WorkCalendar");
         await WorkCalendarPage.ActivateAsync().ConfigureAwait(true);
     }
 
@@ -1537,7 +1567,7 @@ public sealed class MainViewModel : ObservableObject
             }
             await _onboardingService.ExitAsync();
             RestoreNormalWorkspace();
-            if (CurrentPage == "Workflow") CurrentPage = "ProjectCenter";
+            ReturnToWorkbench();
             StatusMessage = "教程已安全退出；当前工作区和用户文件未被删除。";
             NotifyTutorialChanged();
         }
@@ -1865,6 +1895,8 @@ public sealed class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(TutorialPrimaryActionLabel));
         OnPropertyChanged(nameof(ShowCustomerJpegWarning));
         OnPropertyChanged(nameof(NeedsUpgradeTutorialOffer));
+        OnPropertyChanged(nameof(IsCurrentSurfaceClosable));
+        OnPropertyChanged(nameof(CurrentSurfaceCloseToolTip));
         RefreshCommands();
         TutorialVisualStateChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -1872,7 +1904,7 @@ public sealed class MainViewModel : ObservableObject
     private void EnsureTutorialPage()
     {
         if (!IsOnboardingActive) return;
-        CurrentPage = "Workflow";
+        NavigateToSurface("Workflow", recordHistory: false);
         CurrentWorkflowStep = TutorialTarget switch
         {
             TutorialTarget.AddSourceButton or TutorialTarget.RemoveSourceButton or TutorialTarget.CollectionCategorySelector or TutorialTarget.ScanButton or TutorialTarget.CancelButton => 1,
@@ -2040,11 +2072,64 @@ public sealed class MainViewModel : ObservableObject
             "PhotoOrganize" => "PhotoGrouping",
             _ => page
         };
-        if (string.Equals(CurrentPage, targetPage, StringComparison.Ordinal)) return;
-        var navigationCorrelationId = Guid.NewGuid().ToString("N");
-        _logService.Info($"导航请求[{navigationCorrelationId}]：{CurrentPage} -> {targetPage}");
-        CurrentPage = targetPage;
+        NavigateToSurface(targetPage);
     }
+
+    public async Task CloseCurrentSurfaceAsync()
+    {
+        if (IsOnboardingActive)
+        {
+            await ExitTutorialAsync().ConfigureAwait(true);
+            return;
+        }
+
+        if (IsSettingsModalOpen)
+        {
+            IsSettingsModalOpen = false;
+            return;
+        }
+
+        ReturnToOrigin();
+    }
+
+    public void ReturnToOrigin() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToOrigin());
+
+    public void ReturnToWorkbench() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench());
+
+    private void NavigateToSurface(string targetPage, bool recordHistory = true)
+    {
+        var normalizedTarget = NormalizeNavigationSurface(targetPage);
+        if (string.Equals(CurrentPage, normalizedTarget, StringComparison.Ordinal)) return;
+        var navigationCorrelationId = Guid.NewGuid().ToString("N");
+        _logService.Info($"导航请求[{navigationCorrelationId}]：{CurrentPage} -> {normalizedTarget}");
+        var target = recordHistory
+            ? SurfaceNavigationHost.Navigate(normalizedTarget)
+            : ResetSurfaceNavigation(normalizedTarget);
+        ApplySurfaceNavigation(target);
+    }
+
+    private string ResetSurfaceNavigation(string targetPage)
+    {
+        SurfaceNavigationHost.ReturnToWorkbench();
+        return string.Equals(targetPage, SurfaceNavigationHost.CurrentSurface, StringComparison.Ordinal)
+            ? targetPage
+            : SurfaceNavigationHost.Navigate(targetPage);
+    }
+
+    private void ApplySurfaceNavigation(string targetPage)
+    {
+        var validTarget = IsValidNavigationSurface(targetPage) ? targetPage : Core.Services.SurfaceNavigationHost.WorkbenchSurface;
+        CurrentPage = validTarget;
+    }
+
+    private static string NormalizeNavigationSurface(string targetPage) => targetPage switch
+    {
+        "ProjectCenter" => "Workbench",
+        "PhotoOrganize" => "PhotoGrouping",
+        _ => targetPage
+    };
+
+    private static bool IsValidNavigationSurface(string surface) => NavigableSurfaces.Contains(surface);
 
     private void TogglePinnedTool(string? id)
     {
@@ -2170,7 +2255,7 @@ public sealed class MainViewModel : ObservableObject
     private void GoToWorkflowStep(object? parameter)
     {
         if (!int.TryParse(parameter?.ToString(), out var step)) return;
-        CurrentPage = "Workflow";
+        NavigateToSurface("Workflow");
         CurrentWorkflowStep = step;
     }
 
@@ -2189,7 +2274,7 @@ public sealed class MainViewModel : ObservableObject
         _matchCompleted = false;
         _currentProject = new PhotoProjectRecord();
         InitializeCurrentReportOptions();
-        CurrentPage = "Workflow";
+        NavigateToSurface("Workflow");
         CurrentWorkflowStep = 1;
         StatusMessage = "新项目已创建，请先添加照片来源目录。";
         UpdateStatistics();
@@ -2219,7 +2304,7 @@ public sealed class MainViewModel : ObservableObject
         ExportCsvForCurrentProject = project.ExportCsvReport;
         ExportJsonForCurrentProject = project.ExportJsonReport;
         ExportLogForCurrentProject = project.ExportLogReport;
-        CurrentPage = "Workflow";
+        NavigateToSurface("Workflow");
         CurrentWorkflowStep = project.Status == PhotoProjectStatus.Completed ? 4 : 1;
         StatusMessage = IsCurrentProjectReadOnly ? CurrentProjectAccessText : "项目已载入，可继续工作。";
         OnPropertyChanged(nameof(CurrentProjectStatus));
@@ -2397,7 +2482,7 @@ public sealed class MainViewModel : ObservableObject
     {
         StatusMessage = message;
         _dialogService.ShowInfo($"{message}\n\n你可以继续使用免费版基础功能；如需此能力，请在“授权与版本”页查看专业版说明。购买页面只会在你主动点击时打开。");
-        CurrentPage = "Activation";
+        NavigateToSurface("Activation");
     }
 
     private sealed record NormalWorkspaceSnapshot(
