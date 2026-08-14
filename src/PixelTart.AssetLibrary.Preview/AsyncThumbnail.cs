@@ -15,6 +15,10 @@ public static class AsyncThumbnail
     private static readonly LinkedList<string> Lru = new();
     private static readonly ConcurrentDictionary<Image, CancellationTokenSource> Requests = new();
     private static long _cacheBytes;
+    private static int _failureCount;
+
+    public static int PendingRequestCount => Requests.Count;
+    public static int FailureCount => Volatile.Read(ref _failureCount);
 
     public static readonly DependencyProperty SourcePathProperty = DependencyProperty.RegisterAttached("SourcePath", typeof(string), typeof(AsyncThumbnail), new PropertyMetadata(null, OnSourceChanged));
     public static readonly DependencyProperty DecodeWidthProperty = DependencyProperty.RegisterAttached("DecodeWidth", typeof(double), typeof(AsyncThumbnail), new PropertyMetadata(180d, OnSourceChanged));
@@ -26,7 +30,7 @@ public static class AsyncThumbnail
         if (target is not Image image) return;
         image.Unloaded -= OnImageUnloaded; image.Unloaded += OnImageUnloaded;
         if (Requests.TryRemove(image, out var previous)) { previous.Cancel(); previous.Dispose(); }
-        image.Source = null; var path = GetSourcePath(image); if (string.IsNullOrWhiteSpace(path) || !File.Exists(path)) return;
+        image.Source = null; var path = GetSourcePath(image); if (string.IsNullOrWhiteSpace(path) || !File.Exists(path)) { if (!string.IsNullOrWhiteSpace(path)) Interlocked.Increment(ref _failureCount); return; }
         var cancellation = new CancellationTokenSource(); Requests[image] = cancellation; var requestedPath = Path.GetFullPath(path); var width = Math.Clamp(GetDecodeWidth(image), 96, 512);
         try
         {
@@ -39,7 +43,9 @@ public static class AsyncThumbnail
             if (!cancellation.IsCancellationRequested && string.Equals(GetSourcePath(image), path, StringComparison.OrdinalIgnoreCase)) image.Source = cached.Bitmap;
         }
         catch (OperationCanceledException) { }
-        catch (IOException) { }
+        catch (IOException) { Interlocked.Increment(ref _failureCount); }
+        catch (NotSupportedException) { Interlocked.Increment(ref _failureCount); }
+        catch (ArgumentException) { Interlocked.Increment(ref _failureCount); }
         finally { if (Requests.TryGetValue(image, out var current) && ReferenceEquals(current, cancellation)) Requests.TryRemove(image, out _); cancellation.Dispose(); }
     }
 

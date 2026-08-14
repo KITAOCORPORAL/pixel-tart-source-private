@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     private ClassifierWindow? _classifier;
     private Window? _preview;
 
-    public MainWindow() { InitializeComponent(); PreviewKeyDown += OnPreviewKeyDown; }
+    public MainWindow() { InitializeComponent(); PreviewKeyDown += OnPreviewKeyDown; AssetGrid.ItemContainerGenerator.StatusChanged += (_, _) => UpdateImportGridDiagnostics(); }
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -23,6 +23,7 @@ public partial class MainWindow : Window
         _viewModel = new(Path.Combine(root, "asset-library-v16-preview.db")); DataContext = _viewModel; await _viewModel.InitializeAsync();
         var demo = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR");
         if (!string.IsNullOrWhiteSpace(demo) && Directory.Exists(demo)) await _viewModel.ImportDemoDirectoryAsync(demo);
+        UpdateImportGridDiagnostics();
     }
 
     private static string RequireAbsoluteAcceptanceRoot(string value)
@@ -36,6 +37,15 @@ public partial class MainWindow : Window
     private async void OnClosed(object? sender, EventArgs e) { _classifier?.Close(); _preview?.Close(); if (_viewModel is not null) await _viewModel.DisposeAsync(); }
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel?.ClearFilters();
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) { if (_viewModel is null) return; _viewModel.SyncSelection(AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset)); }
+    private void UpdateImportGridDiagnostics()
+    {
+        if (_viewModel is null) return;
+        _viewModel.UpdateAssetGridDiagnostics(
+            AssetGrid.Items.Count,
+            ReferenceEquals(AssetGrid.ItemsSource, _viewModel.AssetCards) ? "AssetCards" : AssetGrid.ItemsSource?.GetType().Name ?? "None",
+            ReferenceEquals(AssetGrid.ItemsSource, _viewModel.AssetCards),
+            DataContext?.GetType().Name ?? "None");
+    }
     private void OpenClassifier_Click(object sender, RoutedEventArgs e) => OpenClassifier();
     private void OpenTagManager_Click(object sender, RoutedEventArgs e) => new TagManagerWindow { Owner = this, DataContext = _viewModel }.ShowDialog();
 
@@ -80,7 +90,7 @@ public partial class MainWindow : Window
         if (_preview is not null) { _preview.Close(); _preview = null; return; }
         if (_viewModel?.SelectedAsset is null) return;
         var image = new Image { Stretch = System.Windows.Media.Stretch.Uniform };
-        AsyncThumbnail.SetSourcePath(image, _viewModel.SelectedAsset.SourcePath); AsyncThumbnail.SetDecodeWidth(image, 1200);
+        AsyncThumbnail.SetSourcePath(image, _viewModel.GetDisplaySourcePath(_viewModel.SelectedAsset)); AsyncThumbnail.SetDecodeWidth(image, 1200);
         _preview = new Window { Owner = this, Title = $"预览 · {_viewModel.SelectedAsset.DisplayName}", Width = 1100, Height = 800, Background = System.Windows.Media.Brushes.Black, Content = image, WindowStartupLocation = WindowStartupLocation.CenterOwner };
         _preview.Closed += (_, _) => _preview = null; _preview.PreviewKeyDown += (_, args) => { if (args.Key is Key.Space or Key.Escape) { _preview?.Close(); args.Handled = true; } }; _preview.Show();
     }

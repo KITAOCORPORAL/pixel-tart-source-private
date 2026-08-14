@@ -18,6 +18,7 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
     private readonly AssetVisualAnalysisService _visualAnalysis;
     private readonly AssetVisualAnalysisBatchProcessor _batchProcessor;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
+    private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private CancellationTokenSource? _analysisCancellation;
     private CancellationTokenSource? _queryCancellation;
     private CancellationTokenSource? _batchCancellation;
@@ -68,11 +69,13 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
     public AssetLibraryPreviewViewModel(string databasePath)
     {
         var database = new AssetLibraryDatabase(databasePath);
+        _importDiagnostics = new(Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT"));
         _repository = new SqliteAssetLibraryRepository(database);
         _featureStore = new SqliteAssetVisualAnalysisCache(database);
         _visualAnalysis = new(_featureStore);
         _visualQuery = new SqliteVisualAssetQueryService(database, _featureStore);
         _batchProcessor = new(_visualAnalysis, _featureStore);
+        AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
         _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
         _searchDebounce.Tick += async (_, _) => { _searchDebounce.Stop(); await RefreshAsync(); };
         RefreshCommand = new(RefreshAsync); ImportCommand = new(ImportAsync); LoadMoreCommand = new(LoadMoreAsync, () => _nextCursor is not null);
@@ -90,7 +93,12 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
+    public PreviewImportDiagnostics ImportDiagnostics => _importDiagnostics.Snapshot;
+    public void UpdateAssetGridDiagnostics(int itemCount, string itemsSourceInstance, bool itemsSourceIsViewModelCollection, string dataContextType) =>
+        _importDiagnostics.SetBindingState(itemCount, itemsSourceInstance, itemsSourceIsViewModelCollection, dataContextType, CurrentCollectionDiagnostic);
     public IEnumerable<AssetItem> Assets => AssetCards.Select(card => card.Asset);
+    public string GetDisplaySourcePath(AssetItem? asset) => asset is not null && !string.IsNullOrWhiteSpace(asset.ManagedCopyPath) && File.Exists(asset.ManagedCopyPath) ? asset.ManagedCopyPath : asset?.SourcePath ?? string.Empty;
+    public string SelectedAssetThumbnailPath => GetDisplaySourcePath(SelectedAsset);
     public ObservableCollection<VisualFilterChipView> ActiveVisualChips { get; } = [];
     public ObservableCollection<VisualSearchHistoryEntry> VisualSearchHistory { get; } = [];
     public ObservableCollection<AssetItem> SelectedAssets { get; } = [];
@@ -195,6 +203,7 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
         SelectedAssets.Clear(); foreach (var item in selected) SelectedAssets.Add(item);
         if (selected.Length != 1) { _selectedAsset = selected.FirstOrDefault(); OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset?.AssetId != selected[0].AssetId) { _selectedAsset = selected[0]; OnPropertyChanged(nameof(SelectedAsset)); }
+        OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
         OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         _ = RefreshSelectionSummaryAsync(); if (selected.Length == 1) { _ = RefreshSelectedFeaturesAsync(selected[0]); _ = AnalyzeSelectionCanonicalAsync(); } RaiseActions(); RaiseVisualActions();
     }
@@ -209,6 +218,7 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
                 var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120), token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return;
                 SetAssetCards(visual.Items.Select(item => item.Asset)); _nextCursor = visual.NextCursor;
+                _importDiagnostics.SetViewState(visual.TotalCount, AssetCards.Count, 0);
                 Status = $"临时视觉结果 · 共 {visual.TotalCount:N0} 个，当前显示 {AssetCards.Count:N0} 个";
             }
             else if (_visualResultMode == VisualResultMode.Similarity && _similarityQuery is not null)
@@ -228,6 +238,7 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
                 var page = await _repository.QueryAsync(BuildQuery(), token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return;
                 SetAssetCards(page.Items); _nextCursor = page.NextCursor;
+                _importDiagnostics.SetViewState(page.TotalCount, AssetCards.Count, 0);
                 Status = page.RegexError is null ? $"共 {page.TotalCount:N0} 个素材，当前显示 {AssetCards.Count:N0} 个" : $"筛选错误：{page.RegexError}";
             }
             OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
@@ -248,18 +259,86 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
 
     private async Task ImportAsync()
     {
-        var dialog = new OpenFileDialog { Multiselect = true, Filter = "图片|*.jpg;*.jpeg;*.png;*.webp;*.tif;*.tiff;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng|所有文件|*.*" };
-        if (dialog.ShowDialog() != true) return; var result = await _repository.ImportAsync(dialog.FileNames.Select(path => new AssetImportRequest(path, ComputeContentHash: true))); Status = result.Cancelled ? "导入已取消" : $"已索引 {result.ImportedCount:N0} 项，跳过重复 {result.SkippedCount:N0} 项（未修改源文件）"; await RefreshAsync();
+        _importDiagnostics.Snapshot.ImportCommandEntered = true;
+        _importDiagnostics.Save();
+        string[] selected = [];
+        try
+        {
+            var dialog = new OpenFileDialog { Multiselect = true, Filter = "Images|*.jpg;*.jpeg;*.png;*.webp;*.tif;*.tiff;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng|All files|*.*" };
+            if (dialog.ShowDialog() != true) return;
+            selected = dialog.FileNames.Where(IsSupportedReferencePath).ToArray();
+            _importDiagnostics.Snapshot.PickerAccepted = true;
+            _importDiagnostics.SetSource("file-picker", selected.Length, CountExtensions(selected));
+            _importDiagnostics.Snapshot.RepositoryAssetCountBefore = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
+            _importDiagnostics.Snapshot.ImportServiceEntered = true;
+            _importDiagnostics.Save();
+            var result = await _repository.ImportAsync(selected.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            _importDiagnostics.Snapshot.ImportedCount = result.ImportedCount;
+            _importDiagnostics.Snapshot.SkippedCount = result.SkippedCount;
+            _importDiagnostics.Snapshot.FailedCount = result.MissingCount;
+            _importDiagnostics.Snapshot.RepositoryAssetCountAfter = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
+            _importDiagnostics.Save();
+            Status = result.Cancelled ? "导入已取消" : $"已索引 {result.ImportedCount:N0} 项，跳过重复 {result.SkippedCount:N0} 项；未修改源文件。";
+            await RefreshAsync();
+        }
+        catch (Exception exception)
+        {
+            _importDiagnostics.Snapshot.FailedCount = Math.Max(1, selected.Length);
+            _importDiagnostics.Save();
+            Status = $"导入失败（{exception.GetType().Name}）；未修改源文件。";
+        }
     }
 
     public async Task ImportDemoDirectoryAsync(string directory)
     {
-        var files = Directory.EnumerateFiles(directory, "*.jpg", SearchOption.TopDirectoryOnly).ToArray();
-        if (files.Length == 0) return;
-        var result = await _repository.ImportAsync(files.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
-        Status = $"合成测试图库：新索引 {result.ImportedCount}，已存在 {result.SkippedCount}";
-        await RefreshAsync();
+        _importDiagnostics.Snapshot.ImportCommandEntered = true;
+        string[] files = [];
+        try
+        {
+            files = Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories).Where(IsSupportedReferencePath).ToArray();
+            _importDiagnostics.Snapshot.PickerAccepted = files.Length > 0;
+            _importDiagnostics.SetSource("synthetic-directory-recursive", files.Length, CountExtensions(files));
+            if (files.Length == 0) { _importDiagnostics.Snapshot.FailedCount++; _importDiagnostics.Save(); return; }
+            _importDiagnostics.Snapshot.RepositoryAssetCountBefore = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
+            _importDiagnostics.Snapshot.ImportServiceEntered = true;
+            _importDiagnostics.Save();
+            var result = await _repository.ImportAsync(files.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            _importDiagnostics.Snapshot.ImportedCount = result.ImportedCount;
+            _importDiagnostics.Snapshot.SkippedCount = result.SkippedCount;
+            _importDiagnostics.Snapshot.FailedCount = result.MissingCount;
+            _importDiagnostics.Snapshot.RepositoryAssetCountAfter = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
+            _importDiagnostics.Save();
+            Status = $"合成测试图库：新索引 {result.ImportedCount}，已存在 {result.SkippedCount}；未修改源文件。";
+            await RefreshAsync();
+        }
+        catch (Exception exception)
+        {
+            _importDiagnostics.Snapshot.FailedCount = Math.Max(1, files.Length);
+            _importDiagnostics.Save();
+            Status = $"合成图库导入失败（{exception.GetType().Name}）；未修改源文件。";
+        }
     }
+
+    private static bool IsSupportedReferencePath(string path)
+    {
+        var extension = Path.GetExtension(path);
+        return extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".png", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".tif", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".tiff", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".webp", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".arw", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".cr2", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".cr3", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".nef", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".raf", StringComparison.OrdinalIgnoreCase)
+            || extension.Equals(".dng", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static Dictionary<string, int> CountExtensions(IEnumerable<string> paths) => paths
+        .GroupBy(path => Path.GetExtension(path).ToLowerInvariant())
+        .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
 
     private async Task NewFolderAsync() { var name = string.IsNullOrWhiteSpace(NewFolderName) ? UniqueName("新建文件夹", Folders.Select(x => x.Name)) : NewFolderName.Trim(); await _repository.SaveFolderAsync(new(Guid.NewGuid(), null, name)); NewFolderName = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建文件夹：{name}"; }
     private async Task NewSubfolderAsync() { var name = string.IsNullOrWhiteSpace(NewFolderName) ? UniqueName("子文件夹", Folders.Where(x => x.ParentFolderId == SelectedFolder!.FolderId).Select(x => x.Name)) : NewFolderName.Trim(); await _repository.SaveFolderAsync(new(Guid.NewGuid(), SelectedFolder!.FolderId, name)); NewFolderName = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建子文件夹：{SelectedFolder.Name} / {name}"; }
@@ -592,6 +671,16 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
         DateTimeOffset? addedTo = DateTimeOffset.TryParse(AddedToFilterText, out var to) ? to : null;
         return new(SearchText, SelectedFolder?.FolderId, SelectedTag?.TagId, MinimumRating: minimumRating, FileNameRegex: string.IsNullOrWhiteSpace(FileNameRegexFilterText) ? null : FileNameRegexFilterText, SmartFolderId: SelectedSmartFolder?.SmartFolderId, PageSize: 120, Cursor: cursor, AddedFrom: addedFrom, AddedTo: addedTo);
     }
+    private string CurrentCollectionDiagnostic => _visualResultMode switch
+    {
+        VisualResultMode.Filter => "VisualFilter",
+        VisualResultMode.Similarity => "VisualSimilarity",
+        VisualResultMode.Color => "ColorSearch",
+        _ when SelectedSmartFolder is not null => "SmartFolder",
+        _ when SelectedFolder is not null => "Folder",
+        _ when SelectedTag is not null => "Tag",
+        _ => "AllAssets"
+    };
     private static string UniqueName(string seed, IEnumerable<string> names) { var set = names.ToHashSet(StringComparer.OrdinalIgnoreCase); if (!set.Contains(seed)) return seed; for (var i = 2; ; i++) if (!set.Contains($"{seed} {i}")) return $"{seed} {i}"; }
     private void RaiseActions() { AddFolderCommand.RaiseCanExecuteChanged(); ApplyTagsCommand.RaiseCanExecuteChanged(); NewSubfolderCommand.RaiseCanExecuteChanged(); UndoCommand.RaiseCanExecuteChanged(); }
     public ValueTask DisposeAsync() { _searchDebounce.Stop(); _analysisCancellation?.Cancel(); _analysisCancellation?.Dispose(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _batchCancellation?.Cancel(); _batchCancellation?.Dispose(); _analysisCoordinator.ClearSelection(); return _repository.DisposeAsync(); }
@@ -605,6 +694,7 @@ public enum VisualContextAction { Analyze, Palette, Similarity }
 public sealed record AssetVisualMatchView(AssetItem Asset, VisualSimilarityScores? Scores, double? ColorDeltaE)
 {
     public AssetVisualMatchView(AssetItem asset) : this(asset, null, null) { }
+    public string ThumbnailPath => !string.IsNullOrWhiteSpace(Asset.ManagedCopyPath) && File.Exists(Asset.ManagedCopyPath) ? Asset.ManagedCopyPath : Asset.SourcePath;
     public bool HasDetail => Scores is not null || ColorDeltaE is not null;
     public string Detail => Scores is not null ? $"相似 {Scores.Overall:F0} · 色 {Scores.Color:F0} · 调 {Scores.Tone:F0} · 对 {Scores.Contrast:F0} · 饱 {Scores.Saturation:F0}" : ColorDeltaE is not null ? $"ΔE76 {ColorDeltaE:F1}" : string.Empty;
 }
