@@ -48,6 +48,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        if (Application.Current is App app && app.ModuleRegistry is not null)
+            AssetLibraryWorkspace.ModuleRegistry = app.ModuleRegistry;
 #if INPUT_ROUTING_DIAGNOSTICS
         ConfigurePhysicalPointerDiagnostics();
 #endif

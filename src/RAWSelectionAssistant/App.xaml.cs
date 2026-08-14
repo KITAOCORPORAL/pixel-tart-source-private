@@ -12,6 +12,10 @@ using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
+using PixelTart.Kernel;
+using PixelTart.Modules.AssetLibrary;
+using PixelTart.Modules.RawTool;
+using PixelTart.Modules.OnlineSelection;
 
 namespace RAWSelectionAssistant;
 
@@ -24,6 +28,9 @@ public partial class App : Application
     private ApplicationCompositionRoot? _compositionRoot;
     private HttpClient? _weatherHttpClient;
     private WeatherFeatureState? _weatherState;
+    private PixelTartModuleRegistry? _moduleRegistry;
+
+    public PixelTartModuleRegistry? ModuleRegistry => _moduleRegistry;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -45,6 +52,9 @@ public partial class App : Application
 
         try
         {
+            _moduleRegistry = CreateModuleRegistry();
+            await _moduleRegistry.InitializeAsync();
+            await _moduleRegistry.ActivateAllAsync();
             _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
             var normalizer = new FileNameNormalizer();
             var inputParser = new InputParserService(_logService);
@@ -235,8 +245,22 @@ public partial class App : Application
         if (_compositionRoot is not null) _compositionRoot.BookingReminderScheduler.DisposeAsync().AsTask().GetAwaiter().GetResult();
         _weatherHttpClient?.Dispose();
         _appearanceService?.Dispose();
+        _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
         _logService?.Info("应用程序已退出。");
         base.OnExit(e);
+    }
+
+    private static PixelTartModuleRegistry CreateModuleRegistry()
+    {
+        var registry = new PixelTartModuleRegistry();
+        registry.Capabilities.Register(new("core.navigation", "pixel-tart.kernel", "kernel/v1"));
+        registry.Capabilities.Register(new("core.task-center", "pixel-tart.kernel", "kernel/v1"));
+        registry.Capabilities.Register(new("core.settings", "pixel-tart.kernel", "kernel/v1"));
+        registry.Capabilities.Register(new("core.file-safety", "pixel-tart.kernel", "kernel/v1"));
+        registry.Register(new AssetLibraryModule());
+        registry.Register(new RawToolModule());
+        registry.Register(new OnlineSelectionModule());
+        return registry;
     }
 
     private void ActivateMainWindow()
