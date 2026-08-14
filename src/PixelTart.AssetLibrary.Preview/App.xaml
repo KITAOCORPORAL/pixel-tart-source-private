@@ -1,0 +1,25 @@
+<Application x:Class="PixelTart.AssetLibrary.Preview.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="WindowBrush" Color="#111315" />
+        <SolidColorBrush x:Key="PanelBrush" Color="#191C1F" />
+        <SolidColorBrush x:Key="PanelAltBrush" Color="#212529" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#343A40" />
+        <SolidColorBrush x:Key="TextBrush" Color="#F0ECE5" />
+        <SolidColorBrush x:Key="MutedBrush" Color="#A9A39B" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#D59A43" />
+        <SolidColorBrush x:Key="AccentDarkBrush" Color="#8B5B20" />
+        <Style TargetType="Window"><Setter Property="Background" Value="{StaticResource WindowBrush}" /><Setter Property="Foreground" Value="{StaticResource TextBrush}" /><Setter Property="FontFamily" Value="Segoe UI,Microsoft YaHei UI" /></Style>
+        <Style TargetType="TextBlock"><Setter Property="Foreground" Value="{StaticResource TextBrush}" /></Style>
+        <Style TargetType="TextBox"><Setter Property="Background" Value="{StaticResource PanelAltBrush}" /><Setter Property="Foreground" Value="{StaticResource TextBrush}" /><Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" /><Setter Property="Padding" Value="9,6" /></Style>
+        <Style TargetType="Button"><Setter Property="Background" Value="{StaticResource PanelAltBrush}" /><Setter Property="Foreground" Value="{StaticResource TextBrush}" /><Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" /><Setter Property="Padding" Value="12,7" /><Setter Property="Margin" Value="0,0,6,0" /><Setter Property="Cursor" Value="Hand" /></Style>
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="Background" Value="{StaticResource AccentDarkBrush}" /><Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" /></Style>
+        <Style TargetType="ListBox"><Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="{StaticResource TextBrush}" /><Setter Property="BorderThickness" Value="0" /></Style>
+        <Style TargetType="ListBoxItem"><Setter Property="Foreground" Value="{StaticResource TextBrush}" /><Setter Property="Padding" Value="6,4" /><Setter Property="HorizontalContentAlignment" Value="Stretch" /></Style>
+        <Style x:Key="Panel" TargetType="Border"><Setter Property="Background" Value="{StaticResource PanelBrush}" /><Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" /><Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="8" /><Setter Property="Padding" Value="12" /></Style>
+        <Style x:Key="Caption" TargetType="TextBlock"><Setter Property="Foreground" Value="{StaticResource MutedBrush}" /><Setter Property="FontSize" Value="12" /></Style>
+        <Style x:Key="Section" TargetType="TextBlock"><Setter Property="FontSize" Value="14" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    </Application.Resources>
+</Application>

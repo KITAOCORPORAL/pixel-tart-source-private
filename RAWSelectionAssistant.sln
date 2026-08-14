@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelTart.SelectionApi.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelTart.SelectionApi.Skeleton", "src\PixelTart.SelectionApi.Skeleton\PixelTart.SelectionApi.Skeleton.csproj", "{088880A0-E544-4DDF-9637-042894601C9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelTart.AssetLibrary.Preview", "src\PixelTart.AssetLibrary.Preview\PixelTart.AssetLibrary.Preview.csproj", "{1E6FFB15-148B-41ED-8516-5F91E7021BF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,18 @@ Global
 		{088880A0-E544-4DDF-9637-042894601C9F}.Release|x64.Build.0 = Release|Any CPU
 		{088880A0-E544-4DDF-9637-042894601C9F}.Release|x86.ActiveCfg = Release|Any CPU
 		{088880A0-E544-4DDF-9637-042894601C9F}.Release|x86.Build.0 = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|x64.Build.0 = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +139,6 @@ Global
 		{20DF2214-D277-4FFE-AD70-2CF0DFA19457} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{74567D15-DD33-445F-B7AE-72EA79441F0B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{088880A0-E544-4DDF-9637-042894601C9F} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{1E6FFB15-148B-41ED-8516-5F91E7021BF7} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
