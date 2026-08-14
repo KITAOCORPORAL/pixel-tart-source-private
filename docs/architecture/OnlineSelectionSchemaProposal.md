@@ -24,22 +24,32 @@
 
 代理图默认 2560px 长边、JPEG Quality 85、sRGB。RAW 只读解码，永不进入上传队列；代理编码不携带 EXIF、GPS、本地路径、电脑用户名或其他非业务元数据。
 
-## 服务端 V1 合同
+## 服务端 V1.5 LocalDev 合同
 
-现有 canonical 路径继续使用 `/v1/selection-projects` 与 `/v1/client/selection`，不并行维护第二套 `/api/v1` 身份。`PixelTart.SelectionApi.Contracts` 提供分页、稳定身份、选择版本和最终快照 DTO；`PixelTart.SelectionApi.Server` 仅提供合同与 Local Dev Storage 抽象，不启动监听器。
+现有 canonical 路径继续使用 `/v1/selection-projects` 与 `/v1/client/selection`，不并行维护第二套 `/api/v1` 身份。`PixelTart.SelectionApi.Contracts` 提供分页、稳定身份、选择版本和最终快照 DTO；`PixelTart.SelectionApi.Server` 是独立 LocalDev 可执行服务，不嵌入 WPF 正式进程。
+
+当前 LocalDev Server 是可独立启动的 ASP.NET Core 进程，只绑定 `127.0.0.1`，使用独立 SQLite 根目录，绝不读取产品数据库。`SelectionVersion` 只在摄影师重新开放时增加；每次客户 mutation 增加 `Revision`。Choice/Favorite/Comment 同时提交 version、revision 与稳定 operation id，冲突返回 409 和当前值。确认事务写入不可变 `FinalSelectionSnapshot` 并锁定；重新开放保留旧快照并进入下一 version。
 
 生产需要另行提供：HTTPS、合法小程序域名、数据库、对象存储、部署环境和凭据。`Provider=None` 仍是 Desktop Release 默认状态。
 
 ## Local Dev Storage
 
-`ISelectionObjectStorage` / `LocalSelectionObjectStorage` 只接受相对对象键，在调用方提供的临时根目录下原子写入代理字节。它拒绝 `..` 越界，不包含管理密钥，不代表生产对象存储。
+`ISelectionObjectStorage` / `LocalSelectionObjectStorage` 只接受相对对象键，在调用方提供的临时根目录下写入重编码 JPEG。Server 解码并生成三份真实尺寸：Thumb 480、Preview 1600、Proxy 2560；不接受 RAW、无效 JPEG 或越界对象键。上传按 project/asset 串行，第二个同 asset 上传返回冲突，避免混合 variants。对象删除若遇到磁盘级异常仍可能留下无数据库引用的 orphan，后续生产实现需要 cleanup journal，因此本轮只声明 LocalDev 可恢复预览，不声明生产对象存储完备。
+
+主 access token 只保存 SHA-256 hash；Desktop LocalDev 缓存使用 Windows CurrentUser DPAPI。图片 URL 不包含 mutation token，通过 15 分钟只读 media session 获取。media token 仍只适用于本机开发，不是生产授权设计。
 
 ## 微信小程序 Mock
 
-`clients/wechat-mini-program/` 只有五页：`project`、`gallery`、`photo`、`selected`、`confirm`。所有请求经 `services/api.ts`，状态集中在 `services/selection-store.ts`，网络失败时选择保留在本地待重试。
+`clients/wechat-mini-program/` 只有五页：`project`、`gallery`、`photo`、`selected`、`confirm`。所有请求经 `services/api.ts`，状态集中在 `services/selection-store.ts`。完整 pending operation（operation id、payload、version、revision、attempt）写入微信本地存储；409 先拉取最新 project version/revision，再明确重放未同步用户意图。确认只有在 pending queue 清空且 Server 确认成功后才锁定；Provider None 永不假装成功。
+
+当前 409 恢复只刷新 project version/revision 并重放本地未同步意图，尚未提供逐图远端 Choice/Favorite/Comment 拉取与多设备字段级合并；规则已经持久化和展示，但 Server 尚未强制执行 AllowComments、AllowFavorites、最小/最大数量或超选计费。本轮因此只标记 LocalDev 单机 Preview 可用，不声明多客户端冲突合并或完整规则引擎完成。脱敏 UI review 七图也留待真实 WeChat DevTools/前台验收后生成，不用合成图替代证据。
 
 微信登录边界：`wx.login` 只取得临时 code；正式服务端才可调用 `code2Session`。AppSecret、SessionKey、长期 Access Token 不进入小程序代码。正式网络必须使用 HTTPS 与微信后台配置的合法域名。本目录只是 Mock/Local Dev，不宣称在线选片或小程序已上线。
 
 ## 迁移与回滚
 
 本轮不注册 SchemaVersion 6，也不修改现有正式 SQLite 表。后续若进入数据库实现，应先建立独立迁移：新增 selection workspace 表、唯一 `(ProjectId, SelectionAssetId)` 约束、Choices/Comments/FinalSnapshots 索引；迁移失败时回滚新表，不触碰既有媒体、日历、RAW 或生产数据。
+
+## Asset Library 边界
+
+共享合同固定为 `pixel-tart-asset-selection/v1`：`IAssetSelectionSource.QueryAssetsAsync`、`GetAssetSnapshotAsync`、`GetProxySourceAsync`。Snapshot 不包含 SourcePath；ProxySource 是可释放的只读 stream，并明确 `IsUploadReady=false`，在线选片仍必须自己重编码脱敏。Online 分支只有测试 Fake adapter，不引用素材库 repository，也不创建 integration branch。

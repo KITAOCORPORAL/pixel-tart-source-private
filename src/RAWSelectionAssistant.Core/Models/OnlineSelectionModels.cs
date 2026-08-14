@@ -5,7 +5,8 @@ namespace RAWSelectionAssistant.Core.Models;
 
 public enum OnlineSelectionProviderKind
 {
-    None
+    None,
+    LocalDev
 }
 
 public enum SelectionProjectStatus

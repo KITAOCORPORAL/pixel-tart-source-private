@@ -1,8 +1,16 @@
 using System.Security.Cryptography;
+using System.IO;
 
 namespace PixelTart.SelectionApi.Server;
 
 public sealed record SelectionObjectWriteResult(string ObjectKey, long Bytes, string Sha256);
+
+public enum SelectionObjectVariant
+{
+    Thumb,
+    Preview,
+    Proxy
+}
 
 public interface ISelectionObjectStorage
 {
@@ -13,9 +21,19 @@ public interface ISelectionObjectStorage
         Stream content,
         CancellationToken cancellationToken = default);
 
+    Task<SelectionObjectWriteResult> PutImageAsync(
+        Guid projectId,
+        Guid selectionAssetId,
+        SelectionObjectVariant variant,
+        string originalFileName,
+        Stream content,
+        CancellationToken cancellationToken = default);
+
     Task<Stream?> OpenReadAsync(string objectKey, CancellationToken cancellationToken = default);
 
     Task<bool> DeleteAsync(string objectKey, CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsAsync(string objectKey, CancellationToken cancellationToken = default);
 }
 /// <summary>
 /// Local development storage only. It keeps proxy bytes under a caller-owned
@@ -23,6 +41,11 @@ public interface ISelectionObjectStorage
 /// </summary>
 public sealed class LocalSelectionObjectStorage : ISelectionObjectStorage
 {
+    private static readonly HashSet<string> RawExtensions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ".arw", ".cr2", ".cr3", ".dng", ".nef", ".nrw", ".orf", ".pef", ".raf", ".rw2", ".srw"
+    };
+
     public LocalSelectionObjectStorage(string rootDirectory)
     {
         if (string.IsNullOrWhiteSpace(rootDirectory)) throw new ArgumentException("需要明确本地开发存储目录。", nameof(rootDirectory));
@@ -36,6 +59,8 @@ public sealed class LocalSelectionObjectStorage : ISelectionObjectStorage
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(objectKey);
         ArgumentNullException.ThrowIfNull(content);
+        if (RawExtensions.Contains(Path.GetExtension(objectKey)))
+            throw new InvalidOperationException("RAW files are not accepted by online-selection storage.");
         var destination = Resolve(objectKey);
         Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
         var staging = destination + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -61,6 +86,22 @@ public sealed class LocalSelectionObjectStorage : ISelectionObjectStorage
         }
     }
 
+    public Task<SelectionObjectWriteResult> PutImageAsync(
+        Guid projectId,
+        Guid selectionAssetId,
+        SelectionObjectVariant variant,
+        string originalFileName,
+        Stream content,
+        CancellationToken cancellationToken = default)
+    {
+        if (projectId == Guid.Empty || selectionAssetId == Guid.Empty) throw new ArgumentException("Project and asset identifiers are required.");
+        if (RawExtensions.Contains(Path.GetExtension(originalFileName)))
+            throw new InvalidOperationException("RAW files are never stored by the online-selection service.");
+        var folder = variant.ToString().ToLowerInvariant();
+        var key = $"{projectId:N}/{selectionAssetId:N}/{folder}.jpg";
+        return PutAsync(key, content, cancellationToken);
+    }
+
     public Task<Stream?> OpenReadAsync(string objectKey, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -77,6 +118,12 @@ public sealed class LocalSelectionObjectStorage : ISelectionObjectStorage
         if (!File.Exists(path)) return Task.FromResult(false);
         File.Delete(path);
         return Task.FromResult(true);
+    }
+
+    public Task<bool> ExistsAsync(string objectKey, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(File.Exists(Resolve(objectKey)));
     }
 
     private string Resolve(string objectKey)

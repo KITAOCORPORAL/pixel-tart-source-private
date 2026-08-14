@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj" />
+    <ProjectReference Include="..\PixelTart.SelectionApi.Contracts\PixelTart.SelectionApi.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

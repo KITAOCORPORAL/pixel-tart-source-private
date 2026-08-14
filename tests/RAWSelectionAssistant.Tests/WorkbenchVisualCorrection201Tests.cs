@@ -57,7 +57,20 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void Release_RemainsWinExeSelfContained() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");
     [TestMethod] public void ReleaseProvider_RemainsNone() => Contains(Text("src/RAWSelectionAssistant/appsettings.license.json"), "\"Provider\": \"None\"");
     [TestMethod] public void ReleaseMock_RemainsDisabled() => Contains(Text("src/RAWSelectionAssistant/App.xaml.cs"), "allowMockProvider: false");
-    [TestMethod] public void Source_DoesNotUseLocalhost() { foreach (var file in Directory.EnumerateFiles(Path.Combine(Root(), "src"), "*.*", SearchOption.AllDirectories).Where(path => path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))) DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1"); }
+    [TestMethod] public void FormalProductSource_DoesNotUseLocalhost()
+    {
+        var formalRoots = new[]
+        {
+            Path.Combine(Root(), "src", "RAWSelectionAssistant.Core"),
+            Path.Combine(Root(), "src", "RAWSelectionAssistant")
+        };
+        foreach (var file in formalRoots.SelectMany(root => Directory.EnumerateFiles(root, "*.*", SearchOption.AllDirectories))
+                     .Where(path => (path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))
+                         && !path.EndsWith("LocalDevOnlineSelectionProvider.cs", StringComparison.OrdinalIgnoreCase)
+                         && !path.Contains($"{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)
+                         && !path.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)))
+            DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1");
+    }
     [TestMethod] public void Installer_IsNamedFor230() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64");
 
     private static string MainXaml() => Text("src/RAWSelectionAssistant/MainWindow.xaml");

@@ -433,8 +433,60 @@ public sealed class OnlineSelectionV1Tests
         var pages = document.RootElement.GetProperty("pages").EnumerateArray().Select(item => item.GetString()).ToArray();
         CollectionAssert.AreEqual(new[] { "pages/project/index", "pages/gallery/index", "pages/photo/index", "pages/selected/index", "pages/confirm/index" }, pages);
         var api = File.ReadAllText(Path.Combine(mini, "services", "api.ts"));
+        var store = File.ReadAllText(Path.Combine(mini, "services", "selection-store.ts"));
+        var app = File.ReadAllText(Path.Combine(mini, "app.ts"));
+        var localDevConfig = File.ReadAllText(Path.Combine(mini, "localdev.config.example.ts"));
         Assert.DoesNotContain("appSecret:", api, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("sessionKey:", api, StringComparison.OrdinalIgnoreCase);
+        StringAssert.Contains(api, "X-PixelTart-Dev-Token");
+        StringAssert.Contains(api, "expectedSelectionVersion");
+        StringAssert.Contains(api, "expectedRevision");
+        StringAssert.Contains(api, "operationId");
+        StringAssert.Contains(store, "wx.setStorageSync");
+        StringAssert.Contains(store, "refreshProject");
+        StringAssert.Contains(store, "mediaSession");
+        StringAssert.Contains(app, "initializeLocalDev");
+        StringAssert.Contains(app, "wx.getStorageSync('pixel-tart-localdev-config/v1')");
+        StringAssert.Contains(localDevConfig, "enabled: false");
+        StringAssert.Contains(localDevConfig, "devAccessToken: ''");
+        Assert.DoesNotContain("ProviderNone') this.confirmed = true", store, StringComparison.Ordinal);
+        var pageSources = Directory.GetFiles(Path.Combine(mini, "pages"), "*.ts", SearchOption.AllDirectories)
+            .Select(File.ReadAllText).ToArray();
+        Assert.IsFalse(pageSources.Any(source => source.Contains("wx.request", StringComparison.Ordinal)));
+    }
+
+    [TestMethod]
+    public void LocalDevLauncher_WaitsForReadyAndStopsOnlyItsServerChild()
+    {
+        var root = FindRepoRoot();
+        var script = File.ReadAllText(Path.Combine(root, "tools", "PixelTart_OnlineSelection_LocalDev_Preview.ps1"));
+        var readyIndex = script.IndexOf("$health.ready", StringComparison.Ordinal);
+        var previewIndex = script.IndexOf("$preview = Start-Process", StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, readyIndex);
+        Assert.IsGreaterThan(readyIndex, previewIndex);
+        StringAssert.Contains(script, "$server.Kill($true)");
+        StringAssert.Contains(script, "$server.WaitForExit");
+        Assert.DoesNotContain("Get-Process", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Stop-Process", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("-Name", script, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [TestMethod]
+    public void LocalDevPreview_IsIsolatedAndFormalAppDoesNotSelectLocalDev()
+    {
+        var root = FindRepoRoot();
+        var formalApp = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "App.xaml.cs"));
+        var previewApp = File.ReadAllText(Path.Combine(root, "src", "PixelTart.OnlineSelection.LocalDevPreview", "App.xaml.cs"));
+        var provider = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Services", "OnlineSelection", "LocalDevOnlineSelectionProvider.cs"));
+        StringAssert.Contains(formalApp, "OnlineSelectionProviderFactory.CreateDefault()");
+        Assert.DoesNotContain("CreateFromEnvironmentOrNone", formalApp, StringComparison.Ordinal);
+        StringAssert.Contains(previewApp, "LocalDevOnlineSelectionProvider");
+        StringAssert.Contains(previewApp, "WpfSelectionProxyRenderer");
+        StringAssert.Contains(previewApp, "LocalDevPreviewDialogService");
+        StringAssert.Contains(provider, "ProtectedData.Protect");
+        StringAssert.Contains(provider, "DataProtectionScope.CurrentUser");
+        StringAssert.Contains(provider, "#if DEBUG");
+        Assert.DoesNotContain("localdev-access.json", provider, StringComparison.OrdinalIgnoreCase);
     }
 
     private static SelectionProject Project() => SelectionProjectFactory.CreateDraft("城市婚礼", "客户", 30);

@@ -448,6 +448,11 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         {
             var validation = SelectionProjectValidator.ValidateForPublish(Project, Rule, Assets.Select(asset => asset.ToModel()));
             if (!validation.IsValid) { StatusText = validation.Message; return; }
+            if (_provider is ILocalDevOnlineSelectionProvider localDev)
+            {
+                var ruleResult = await localDev.UpdateRuleAsync(Rule, cancellationToken).ConfigureAwait(true);
+                if (!ruleResult.Success) { StatusText = ruleResult.Message; return; }
+            }
             var publish = new SelectionPublish(Guid.NewGuid(), Project.Id, Project.PublicId, 1, DateTimeOffset.UtcNow, Rule.AccessExpiresAtUtc);
             var result = await _provider.PublishProjectAsync(Project.Id, publish, cancellationToken).ConfigureAwait(true);
             StatusText = result.Success ? "项目已发布；客户可通过受保护链接进入选片。" : result.Message;
@@ -600,6 +605,14 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         }
         try
         {
+            if (_provider.IsConfigured)
+            {
+                var remote = await _provider.GetFinalSelectionAsync(Project.Id, cancellationToken).ConfigureAwait(true);
+                if (!remote.Success || remote.Value is null) { StatusText = remote.Message; return; }
+                ApplyFinalResult(remote.Value);
+                await SaveAsync(cancellationToken).ConfigureAwait(true);
+                return;
+            }
             var snapshot = _clientMock.Confirm(Project, Assets.Select(item => item.ToModel()).ToArray(), Rule);
             FinalSnapshot = snapshot;
             FinalResult = snapshot.ToFinalResult();
@@ -616,6 +629,16 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
     public async Task ReopenClientSelectionAsync(CancellationToken cancellationToken = default)
     {
         if (Project is null || FinalSnapshot is null) return;
+        if (_provider is ILocalDevOnlineSelectionProvider localDev)
+        {
+            var remote = await localDev.ReopenAsync(Project.Id, cancellationToken).ConfigureAwait(true);
+            if (!remote.Success || remote.Value is null) { StatusText = remote.Message; return; }
+            ApplyFinalResultCore(remote.Value);
+            Project = Project with { Status = SelectionProjectStatus.Selecting, UpdatedAtUtc = DateTimeOffset.UtcNow };
+            StatusText = "LocalDev 选片已重新开放；旧确认快照仍保留。";
+            await SaveAsync(cancellationToken).ConfigureAwait(true);
+            return;
+        }
         var state = _clientMock.Reopen(Project.Id);
         FinalSnapshot = FinalSnapshot with { IsLocked = state.IsLocked };
         FinalResult = FinalSnapshot.ToFinalResult();
@@ -889,6 +912,12 @@ public sealed class OnlineSelectionViewModel : ObservableObject
         IsBusy = true;
         try
         {
+            if (_provider.IsConfigured)
+            {
+                var remote = await _provider.CreateProjectAsync(project, cancellationToken).ConfigureAwait(true);
+                if (!remote.Success || remote.Value is null) { StatusText = remote.Message; return; }
+                project = remote.Value;
+            }
             Projects.Add(new(project));
             SelectedProject = project;
             await ProjectPage.OpenProjectAsync(project, SelectionRule.Default(project.Id, targetCount, project.DeadlineUtc), cancellationToken: cancellationToken).ConfigureAwait(true);
