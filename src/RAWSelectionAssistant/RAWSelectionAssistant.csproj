@@ -2,6 +2,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj" />
+    <ProjectReference Include="..\PixelTart.Kernel\PixelTart.Kernel.csproj" />
+    <ProjectReference Include="..\PixelTart.Modules.AssetLibrary\PixelTart.Modules.AssetLibrary.csproj" />
+    <ProjectReference Include="..\PixelTart.Modules.RawTool\PixelTart.Modules.RawTool.csproj" />
+    <ProjectReference Include="..\PixelTart.Modules.OnlineSelection\PixelTart.Modules.OnlineSelection.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

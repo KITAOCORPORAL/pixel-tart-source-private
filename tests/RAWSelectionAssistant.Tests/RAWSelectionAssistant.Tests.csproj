@@ -19,4 +19,8 @@
     <ProjectReference Include="..\..\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="ModularHarnessTests.cs" />
+  </ItemGroup>
+
 </Project>

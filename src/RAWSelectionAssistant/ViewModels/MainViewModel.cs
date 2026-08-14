@@ -102,14 +102,14 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
     {
-        "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "Tether", "Finance",
+        "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
         "Activation", "Help", "BatchCompress", "RawToJpeg", "Watermark", "DeleteRejects", "FtpTool",
         "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
     };
 
     private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
     {
-        "LocalSplit", "Workflow", "OnlineSelection", "Finance", "BatchCompress", "RawToJpeg", "Watermark",
+        "LocalSplit", "Workflow", "OnlineSelection", "AssetLibrary", "Finance", "BatchCompress", "RawToJpeg", "Watermark",
         "DeleteRejects", "FtpTool", "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
     };
 
@@ -474,6 +474,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             OnPropertyChanged(nameof(IsTetherPage));
             OnPropertyChanged(nameof(IsFinancePage));
             OnPropertyChanged(nameof(IsOnlineSelectionPage));
+            OnPropertyChanged(nameof(IsAssetLibraryPage));
             OnPropertyChanged(nameof(IsRawToJpegPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
@@ -512,6 +513,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public bool IsTetherPage => CurrentPage == "Tether";
     public bool IsFinancePage => CurrentPage == "Finance";
     public bool IsOnlineSelectionPage => CurrentPage == "OnlineSelection";
+    public bool IsAssetLibraryPage => CurrentPage == "AssetLibrary";
     public bool IsRawToJpegPage => CurrentPage == "RawToJpeg";
     public bool IsActivationPage => CurrentPage == "Activation";
     public bool IsSettingsPage => CurrentPage == "Settings";
@@ -2143,7 +2145,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "OnlineSelection" or "Tether" or "Finance" or "Activation" or "Settings" or "Help" or
+        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "OnlineSelection" or "AssetLibrary" or "Tether" or "Finance" or "Activation" or "Settings" or "Help" or
             "BatchCompress" or "RawToJpeg" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
         var targetPage = page switch
         {
