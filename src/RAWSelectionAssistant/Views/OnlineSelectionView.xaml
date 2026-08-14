@@ -40,8 +40,8 @@
                         </TextBlock>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" />
-                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" HorizontalAlignment="Right" />
+                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsEditable}" />
+                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" IsEnabled="{Binding IsEditable}" HorizontalAlignment="Right" />
                     </Grid>
                 </Grid>
             </Border>
@@ -52,10 +52,11 @@
     <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
         <Grid>
-            <StackPanel>
-                <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" />
-                <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
-            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" />
+                                <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
+                                <TextBlock Text="{Binding ProjectPage.UploadQueueStatusText}" Style="{StaticResource MinimumCaptionText}" Margin="{DynamicResource Spacing4Thickness}" />
+                            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
                 <Button Content="创建选片项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
@@ -109,7 +110,10 @@
                         </ItemsControl>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Content="添加照片" Style="{StaticResource Av2SecondaryButton}" Command="{Binding AddAssetsCommand}" />
-                            <Button Content="发布项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding PublishCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
+                            <Button Content="上传代理" Style="{StaticResource Av2SecondaryButton}" Command="{Binding QueueUploadsCommand}" Margin="{DynamicResource SpacingHorizontal8}" ToolTip="只上传代理 JPG；Provider=None 时会明确失败并保留可重试状态。" />
+                            <Button Content="发布项目" Style="{StaticResource Av2SecondaryButton}" Command="{Binding PublishCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
+                            <Button Content="确认选片" Style="{StaticResource Av2PrimaryButton}" Command="{Binding ConfirmSelectionCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
+                            <Button Content="重新开放" Style="{StaticResource Av2GhostButton}" Command="{Binding ReopenSelectionCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
                         </StackPanel>
                     </Grid>
 
@@ -145,10 +149,11 @@
                         <Grid Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=DeliveryResults}">
                             <Border Style="{StaticResource EmptyStateContainer}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel MaxWidth="520">
-                                    <TextBlock Text="交付结果" Style="{StaticResource Av2EmptyStateTitle}" />
+                                <TextBlock Text="交付结果" Style="{StaticResource Av2EmptyStateTitle}" />
+                                    <TextBlock Text="{Binding ConfirmationStatusText}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource SpacingVertical8}" />
                                     <TextBlock Text="客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
                                     <Button Content="同步归片工作区" Style="{StaticResource Av2PrimaryButton}" Command="{Binding SyncResultsCommand}" HorizontalAlignment="Center" />
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{DynamicResource SpacingVertical8}"><Button Content="导出 TXT（准备中）" Style="{StaticResource Av2SecondaryButton}" IsEnabled="False" ToolTip="当前版本请使用“同步归片工作区”；独立结果文件导出尚未开放。" ToolTipService.ShowOnDisabled="True" /><Button Content="导出 CSV（准备中）" Style="{StaticResource Av2SecondaryButton}" IsEnabled="False" ToolTip="当前版本请使用“同步归片工作区”；独立结果文件导出尚未开放。" ToolTipService.ShowOnDisabled="True" Margin="{DynamicResource SpacingHorizontal8}" /></StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{DynamicResource SpacingVertical8}"><Button Content="导出 TXT" Style="{StaticResource Av2SecondaryButton}" Command="{Binding ExportTxtCommand}" /><Button Content="导出 CSV" Style="{StaticResource Av2SecondaryButton}" Command="{Binding ExportCsvCommand}" Margin="{DynamicResource SpacingHorizontal8}" /></StackPanel>
                                 </StackPanel>
                             </Border>
                         </Grid>

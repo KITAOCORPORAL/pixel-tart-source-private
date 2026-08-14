@@ -52,13 +52,51 @@ public sealed class OnlineSelectionV1WpfTests
     }
 
     [TestMethod]
+    public async Task LocalClientMock_ConfirmsReopensAndExposesExports()
+    {
+        using var temp = new TestDirectory();
+        var photo = temp.Write("IMG_1001.JPG", [1, 2, 3]);
+        var project = SelectionProjectFactory.CreateDraft("本地客户 Mock", "客户", 1);
+        var page = new OnlineSelectionProjectViewModel(
+            new NoneOnlineSelectionProvider(),
+            new InMemorySelectionWorkspaceStore(),
+            new SelectionResultSyncService(new FileNameNormalizer()));
+        await page.OpenProjectAsync(project);
+        await page.ImportAssetsAsync([photo]);
+        var asset = page.Assets.Single();
+        page.SetClientChoice(asset.Id, selected: true, favorite: true);
+        page.SetClientComment(asset.Id, "保留");
+        await page.ConfirmClientSelectionAsync();
+        Assert.IsNotNull(page.FinalSnapshot);
+        Assert.IsTrue(page.IsSelectionLocked);
+        Assert.AreEqual(SelectionProjectStatus.ClientConfirmed, page.Project!.Status);
+        await page.ReopenClientSelectionAsync();
+        Assert.IsFalse(page.IsSelectionLocked);
+        Assert.AreEqual(SelectionProjectStatus.Selecting, page.Project!.Status);
+    }
+
+    [TestMethod]
+    public async Task AssetLibraryReferenceImport_PreservesSourceAssetIdWithoutCopying()
+    {
+        using var temp = new TestDirectory();
+        var source = temp.Write("LIBRARY.JPG", [8, 9]);
+        var sourceAssetId = Guid.NewGuid();
+        var project = SelectionProjectFactory.CreateDraft("素材库来源", "客户", 1);
+        var page = new OnlineSelectionProjectViewModel(new NoneOnlineSelectionProvider(), new InMemorySelectionWorkspaceStore(), new SelectionResultSyncService(new FileNameNormalizer()));
+        await page.OpenProjectAsync(project);
+        await page.ImportAssetReferencesAsync([new SelectionAssetImportCandidate(source, sourceAssetId)]);
+        Assert.AreEqual(sourceAssetId, page.Assets.Single().SourceAssetId);
+        CollectionAssert.AreEqual(new byte[] { 8, 9 }, File.ReadAllBytes(source));
+    }
+
+    [TestMethod]
     public void ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage()
     {
         var root = FindRepoRoot();
         var text = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Views", "OnlineSelectionView.xaml"))
             + File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "ViewModels", "OnlineSelectionViewModels.cs"));
         StringAssert.Contains(text, "在线选片服务尚未配置");
-        foreach (var token in new[] { "照片", "客户选片", "设置", "交付结果", "同步归片工作区", "创建并导入照片" })
+        foreach (var token in new[] { "照片", "客户选片", "设置", "交付结果", "同步归片工作区", "创建并导入照片", "确认选片", "重新开放", "导出 TXT", "导出 CSV" })
             StringAssert.Contains(text, token);
         Assert.DoesNotContain("localhost", text, StringComparison.OrdinalIgnoreCase);
     }
@@ -78,5 +116,27 @@ public sealed class OnlineSelectionV1WpfTests
         var directory = new DirectoryInfo(AppContext.BaseDirectory);
         while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
         return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
+    }
+
+    private sealed class TestDirectory : IDisposable
+    {
+        public TestDirectory()
+        {
+            Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart.Selection.WpfTests", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(Path);
+        }
+
+        public string Path { get; }
+        public string Write(string name, byte[] bytes)
+        {
+            var path = System.IO.Path.Combine(Path, name);
+            File.WriteAllBytes(path, bytes);
+            return path;
+        }
+
+        public void Dispose()
+        {
+            try { Directory.Delete(Path, true); } catch { }
+        }
     }
 }
