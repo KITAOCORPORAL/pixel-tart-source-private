@@ -9,7 +9,6 @@ public sealed record SelectionApiServerOptions(
 {
     public static SelectionApiServerOptions LocalDevelopment { get; } = new();
 }
-
 /// <summary>
 /// Contract-only server façade for local development and deterministic API
 /// tests. No listener, credentials, database, or production cloud is started.
@@ -42,4 +41,3 @@ internal static class SelectionApiSkeletonRoutes
         $"POST {SelectionApiRouteNames.ClientConfirm}"
     ];
 }
-
