@@ -40,7 +40,14 @@ public sealed record AssetImportRequest(
     string SourcePath,
     AssetImportMode Mode = AssetImportMode.Reference,
     string? ManagedLibraryRoot = null,
-    bool ComputeContentHash = false);
+    bool ComputeContentHash = false,
+    AssetDuplicateBehavior DuplicateBehavior = AssetDuplicateBehavior.Skip);
+
+public enum AssetDuplicateBehavior
+{
+    Skip,
+    ImportIndependentRecord
+}
 
 public sealed record AssetFolder(
     Guid FolderId,
@@ -115,6 +122,8 @@ public enum SmartFolderOperator
     Contains,
     Equals,
     NotEquals,
+    StartsWith,
+    EndsWith,
     GreaterThan,
     GreaterThanOrEqual,
     LessThan,
@@ -131,7 +140,9 @@ public sealed record SmartFolderRule(
     SmartFolderOperator Operator,
     string Value = "",
     bool Negated = false,
-    int SortOrder = 0);
+    int SortOrder = 0,
+    Guid? GroupId = null,
+    SmartFolderLogic GroupLogic = SmartFolderLogic.And);
 
 public sealed record SmartFolder(
     Guid SmartFolderId,
@@ -161,7 +172,9 @@ public sealed record AssetLibraryQuery(
     Guid? SmartFolderId = null,
     int PageSize = 100,
     string? Cursor = null,
-    bool IncludeArchived = false)
+    bool IncludeArchived = false,
+    IReadOnlyList<Guid>? FolderIds = null,
+    IReadOnlyList<Guid>? TagIds = null)
 {
     public int EffectivePageSize => Math.Clamp(PageSize <= 0 ? 100 : PageSize, 1, 500);
 }

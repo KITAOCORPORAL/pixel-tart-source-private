@@ -22,7 +22,7 @@ The canonical library identity is therefore `AssetItem.AssetId`, generated once 
 The first development preview uses an independent metadata database:
 
 ```text
-%LocalAppData%/KitaoPhotoSelector.AssetLibraryPreview/asset-library-preview.db
+%LocalAppData%/KitaoPhotoSelector.AssetLibraryV15Preview/asset-library-v15-preview.db
 ```
 
 This is deliberate. The active product database is still controlled by the P0 line, and the feature branch must not silently advance or mutate that schema. The proposal can later become a contiguous product migration after P0 is stable and merge order is agreed.
@@ -34,7 +34,7 @@ No `Schema 6` migration is registered in `DatabaseMigrator`, and the formal `pix
 ### `AssetItems`
 
 - `AssetId` stable GUID primary key
-- `SourcePath`, `NormalizedSourcePath` (unique)
+- `SourcePath`, `NormalizedSourcePath`, `DuplicateDiscriminator`
 - `DisplayName`, `Extension`, `MediaType`, `FileSize`, optional `ContentHash`
 - optional `Width`, `Height`, `Orientation`, `CaptureTime`
 - `AddedAt`, `ModifiedAt`, `Rating`, `Comment`
@@ -57,7 +57,7 @@ Membership is many-to-many. Adding an asset to several folders creates no image 
 - `AssetTags`
 - `AssetTagMemberships(AssetId, TagId)`
 
-Tag merge migrates all memberships to the target tag, archives the source tag, and provides an in-process undo token that restores the prior membership sets.
+Tag merge migrates all memberships to the target tag, archives the source tag, and writes an undo journal entry that restores the prior membership sets after restart.
 
 ### Smart folders
 
@@ -83,14 +83,15 @@ Managed Copy is explicit and requires a destination root. The copy gets a collis
 ## 5. Query and performance contract
 
 - database-only search over filename, comment, tag and folder names
-- cursor/offset paging, default 100 and hard maximum 500 rows
+- keyset paging by (`AddedAt`, `AssetId`), default 100 and hard maximum 500 rows
 - indexes on display name, added time, capture time, rating, tag membership and folder membership
 - metadata-only import; no full-image decode during indexing
 - thumbnail decoding belongs to the UI cache/queue, not SQLite
 - preview loads at most one page of model rows; additional pages are explicit
-- cancellation is checked during import and query enumeration
+- cancellation is checked during import, decode and query enumeration
+- non-regex Smart Folder rules compile to SQLite predicates; regex remains a bounded fallback
 
-For a production 100,000-record library, the next profiling pass should replace offset cursors with keyset cursors (`AddedAt`, `AssetId`) and move smart-rule compilation into a reusable SQL plan cache. The current contract already prevents an unbounded UI result page.
+A deterministic 100,000-record metadata-only test traverses keyset pages without storing media bytes. This is a correctness smoke test, not a production-hardware latency claim. SQL plan caching and a 10,000 generated-JPEG end-to-end benchmark remain deferred.
 
 ## 6. Undo scope
 
@@ -101,7 +102,7 @@ V1 local undo tokens cover:
 - rating/comment update
 - tag merge
 
-Tokens are intentionally process-local in this preview. A production migration may add an `AssetLibraryUndoJournal` table after retention, crash recovery and privacy requirements are reviewed.
+`AssetLibraryUndoJournal` retains the newest 100 operations. Forward mutation and journal write share one SQLite transaction; inverse mutation and `UndoneAt` marking also share one transaction. Folder membership undo records only rows introduced by the operation, including auto-tags. Restart success paths are tested; explicit SQLite fault-injection remains deferred.
 
 ## 7. Future controlled migration
 
@@ -125,7 +126,7 @@ Implemented on this branch:
 - Reference and explicit Managed Copy contracts
 - folder/tag many-to-many repositories
 - tag groups, tag merge and undo
-- smart-folder base evaluator
+- grouped Smart Folder evaluator with SQLite compilation for non-regex rules
 - metadata import, search, filters and bounded paging
 - uncategorized/no-tag queries
 - isolated three-column Darkroom-style WPF development preview
@@ -136,8 +137,11 @@ Deferred intentionally:
 - production database migration and merge to the P0 branch
 - persistent thumbnail priority queue and multi-size disk cache
 - 100,000-record profiling run on production-equivalent hardware
-- drag/drop folder tree editing, F shortcut overlay and Shift+D interaction polish
-- persistent undo journal across application restarts
+- drag/drop folder tree editing and insertion-line feedback
+- full drag/drop folder tree editing and insertion-line feedback
+- complete Tag Manager editing/merge UI and complete visual Smart Builder UI
+- SQLite fault-injection coverage for persistent undo
+- generated 10,000-JPEG end-to-end UI benchmark
 - AI, semantic search, cloud sync, browser extension and plugin system
 
 The preview contains no production cloud provider and no Eagle branding or copied assets.
