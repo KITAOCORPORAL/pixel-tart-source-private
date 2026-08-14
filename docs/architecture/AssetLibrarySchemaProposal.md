@@ -1,7 +1,7 @@
 # Pixel Tart Asset Library Schema Proposal
 
-Status: feature-branch development proposal  
-Branch: `feature/asset-library-v1`  
+Status: feature-branch development proposal
+Branch: `feature/asset-library-v1`
 Production migration: **not registered**
 
 ## 1. Existing identity audit
