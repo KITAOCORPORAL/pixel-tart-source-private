@@ -94,6 +94,14 @@ public sealed class AssetLibraryPreviewWpfTests
             StringAssert.Contains(xaml, token);
     }
 
+    [TestMethod]
+    public void PreviewDecoderFingerprintsDecodedProxyPixels()
+    {
+        var decoder = Read("src/PixelTart.AssetLibrary.Preview/WpfVisualAnalysisDecoder.cs");
+        StringAssert.Contains(decoder, "VisualAnalysisFingerprint.Compute(pixels)");
+        Assert.DoesNotContain("asset.ContentHash ??", decoder, StringComparison.Ordinal);
+    }
+
     private static string Read(string relative) => File.ReadAllText(Path.Combine(Root(), relative.Replace('/', Path.DirectorySeparatorChar)));
     private static string Root()
     {

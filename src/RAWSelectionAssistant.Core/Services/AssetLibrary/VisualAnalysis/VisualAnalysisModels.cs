@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 public readonly record struct VisualRgb24(byte R, byte G, byte B);
@@ -15,6 +17,11 @@ public sealed class VisualPixelBuffer
     public int Height { get; }
     public ReadOnlyMemory<byte> Rgb24 { get; }
     public int PixelCount => Width * Height;
+}
+
+public static class VisualAnalysisFingerprint
+{
+    public static string Compute(VisualPixelBuffer pixels) => Convert.ToHexString(SHA256.HashData(pixels.Rgb24.Span));
 }
 
 public readonly record struct VisualLab(double L, double A, double B);
@@ -60,6 +67,8 @@ public sealed record AssetVisualAnalysisResult(
     Guid AssetId,
     string ContentHash,
     string AnalysisVersion,
+    int PaletteSize,
+    PaletteSortMode PaletteSort,
     VisualAnalysisSourceKind AnalysisSource,
     string SourceProfile,
     string AnalysisProfile,

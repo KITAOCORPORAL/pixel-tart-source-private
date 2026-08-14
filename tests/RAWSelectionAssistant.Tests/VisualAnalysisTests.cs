@@ -84,11 +84,56 @@ public sealed class VisualAnalysisTests
             var request = Request(Solid(24, 24, 80, 100, 120), "hash-a", 5) with { AssetId = asset.AssetId };
             var miss = await service.AnalyzeAsync(request); var hit = await service.AnalyzeAsync(request);
             Assert.IsFalse(miss.CacheHit); Assert.IsTrue(hit.CacheHit);
-            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-b"));
-            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-a", "visual-analysis-v2"));
+            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-b", 5, PaletteSortMode.Weight));
+            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-a", 5, PaletteSortMode.Weight, "visual-analysis-v2"));
+
+            var smaller = await service.AnalyzeAsync(request with { PaletteSize = 3 });
+            Assert.IsFalse(smaller.CacheHit);
+            Assert.IsLessThanOrEqualTo(3, smaller.Palette.Count);
+            Assert.IsTrue((await service.AnalyzeAsync(request with { PaletteSize = 3 })).CacheHit);
+            Assert.IsTrue((await service.AnalyzeAsync(request)).CacheHit);
+
+            var hueSorted = await service.AnalyzeAsync(request with { PaletteSort = PaletteSortMode.Hue });
+            Assert.IsFalse(hueSorted.CacheHit);
+            CollectionAssert.AreEqual(hueSorted.Palette.OrderBy(x => x.Hue).Select(x => x.Hex).ToArray(), hueSorted.Palette.Select(x => x.Hex).ToArray());
+            Assert.IsTrue((await service.AnalyzeAsync(request with { PaletteSort = PaletteSortMode.Hue })).CacheHit);
             using var cancelled = new CancellationTokenSource(); cancelled.Cancel();
             await Assert.ThrowsAsync<OperationCanceledException>(() => service.AnalyzeAsync(request with { ContentHash = "cancelled" }, cancelled.Token));
-            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "cancelled"));
+            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "cancelled", 5, PaletteSortMode.Weight));
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
+    public void ProxyFingerprintDependsOnDecodedPixels()
+    {
+        var first = Solid(4, 4, 10, 20, 30);
+        var second = Solid(4, 4, 10, 20, 31);
+        Assert.AreEqual(VisualAnalysisFingerprint.Compute(first), VisualAnalysisFingerprint.Compute(first));
+        Assert.AreNotEqual(VisualAnalysisFingerprint.Compute(first), VisualAnalysisFingerprint.Compute(second));
+    }
+
+    [TestMethod]
+    public async Task LegacyVisualCacheTableIsRecreatedWithPaletteDimensions()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-VisualAnalysis", Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
+        try
+        {
+            var database = new AssetLibraryDatabase(Path.Combine(root, "library.db"));
+            await using var repository = new SqliteAssetLibraryRepository(database); await repository.InitializeAsync();
+            await using (var connection = await database.OpenConnectionAsync(write: true))
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = "DROP TABLE AssetVisualAnalysis; CREATE TABLE AssetVisualAnalysis(AssetId TEXT NOT NULL,AnalysisVersion TEXT NOT NULL,ContentHash TEXT NOT NULL,AnalysisSource TEXT NOT NULL,SourceProfile TEXT NOT NULL,AnalysisProfile TEXT NOT NULL,ResultJson TEXT NOT NULL,CreatedAt TEXT NOT NULL,PRIMARY KEY(AssetId,AnalysisVersion));";
+                await command.ExecuteNonQueryAsync();
+            }
+            var cache = new SqliteAssetVisualAnalysisCache(database);
+            var assetId = Guid.NewGuid();
+            Assert.IsNull(await cache.TryGetAsync(assetId, "missing", 3, PaletteSortMode.Hue));
+            await using var check = await database.OpenConnectionAsync();
+            await using var pragma = check.CreateCommand(); pragma.CommandText = "PRAGMA table_info(AssetVisualAnalysis);";
+            var columns = new List<string>(); await using var reader = await pragma.ExecuteReaderAsync(); while (await reader.ReadAsync()) columns.Add(reader.GetString(1));
+            CollectionAssert.Contains(columns, "PaletteSize"); CollectionAssert.Contains(columns, "PaletteSort");
         }
         finally { try { Directory.Delete(root, true); } catch { } }
     }

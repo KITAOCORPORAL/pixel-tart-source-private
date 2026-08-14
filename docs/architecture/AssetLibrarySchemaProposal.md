@@ -90,6 +90,7 @@ Managed Copy is explicit and requires a destination root. The copy gets a collis
 - preview loads at most one page of model rows; additional pages are explicit
 - cancellation is checked during import, decode and query enumeration
 - non-regex Smart Folder rules compile to SQLite predicates; regex remains a bounded fallback
+- visual-analysis cache variants include decoded-proxy fingerprint, palette size and palette sort
 
 A deterministic 100,000-record metadata-only test traverses keyset pages without storing media bytes. This is a correctness smoke test, not a production-hardware latency claim. SQL plan caching and a 10,000 generated-JPEG end-to-end benchmark remain deferred.
 

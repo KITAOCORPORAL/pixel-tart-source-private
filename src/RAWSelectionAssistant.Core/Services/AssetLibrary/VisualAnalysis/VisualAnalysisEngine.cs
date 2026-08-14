@@ -51,7 +51,8 @@ public static class VisualAnalysisEngine
         var warmCoolMetric = warmCoolWeight > 0 ? warmCoolSum / warmCoolWeight : 0;
         var denominator = (double)count;
         return new(
-            request.AssetId, request.ContentHash, AssetVisualAnalysisResult.CurrentVersion, request.AnalysisSource, request.SourceProfile, request.AnalysisProfile,
+            request.AssetId, request.ContentHash, AssetVisualAnalysisResult.CurrentVersion, request.PaletteSize, request.PaletteSort,
+            request.AnalysisSource, request.SourceProfile, request.AnalysisProfile,
             palette, ClassifyHarmony(palette, averageSaturation), histR, histG, histB, histLuma,
             new(zoneCounts[0] / denominator, zoneCounts[1] / denominator, zoneCounts[2] / denominator, zoneCounts[3] / denominator, zoneCounts[4] / denominator),
             averageLuma, medianLuma, blackClip, whiteClip, contrastMetric,

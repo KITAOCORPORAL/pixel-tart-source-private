@@ -4,7 +4,7 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 internal static class AssetLibrarySchema
 {
-    public const int Version = 4;
+    public const int Version = 5;
 
     public static async Task EnsureAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {
@@ -146,12 +146,14 @@ internal static class AssetLibrarySchema
                 AssetId TEXT NOT NULL,
                 AnalysisVersion TEXT NOT NULL,
                 ContentHash TEXT NOT NULL,
+                PaletteSize INTEGER NOT NULL DEFAULT 5,
+                PaletteSort TEXT NOT NULL DEFAULT 'Weight',
                 AnalysisSource TEXT NOT NULL,
                 SourceProfile TEXT NOT NULL,
                 AnalysisProfile TEXT NOT NULL,
                 ResultJson TEXT NOT NULL,
                 CreatedAt TEXT NOT NULL,
-                PRIMARY KEY(AssetId,AnalysisVersion),
+                PRIMARY KEY(AssetId,AnalysisVersion,PaletteSize,PaletteSort),
                 FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE
             );
             """,
@@ -176,6 +178,7 @@ internal static class AssetLibrarySchema
 
         await EnsureAssetIdentitySchemaAsync(connection, cancellationToken).ConfigureAwait(false);
         await EnsureAssetIndexesAsync(connection, cancellationToken).ConfigureAwait(false);
+        await EnsureVisualAnalysisCacheSchemaAsync(connection, cancellationToken).ConfigureAwait(false);
 
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupId", "TEXT NULL", cancellationToken).ConfigureAwait(false);
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupLogic", "TEXT NOT NULL DEFAULT 'And'", cancellationToken).ConfigureAwait(false);
@@ -185,6 +188,44 @@ internal static class AssetLibrarySchema
         version.Parameters.AddWithValue("$version", Version);
         version.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O"));
         await version.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task EnsureVisualAnalysisCacheSchemaAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        var primaryKeyColumns = new List<string>();
+        await using (var info = connection.CreateCommand())
+        {
+            info.CommandText = "PRAGMA table_info(AssetVisualAnalysis);";
+            await using var reader = await info.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                if (reader.GetInt32(5) > 0) primaryKeyColumns.Add(reader.GetString(1));
+        }
+        if (primaryKeyColumns.Contains("PaletteSize", StringComparer.OrdinalIgnoreCase) &&
+            primaryKeyColumns.Contains("PaletteSort", StringComparer.OrdinalIgnoreCase)) return;
+
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            await using var migrate = connection.CreateCommand();
+            migrate.Transaction = transaction;
+            migrate.CommandText = """
+                CREATE TABLE AssetVisualAnalysis_v5(
+                    AssetId TEXT NOT NULL, AnalysisVersion TEXT NOT NULL, ContentHash TEXT NOT NULL,
+                    PaletteSize INTEGER NOT NULL, PaletteSort TEXT NOT NULL, AnalysisSource TEXT NOT NULL,
+                    SourceProfile TEXT NOT NULL, AnalysisProfile TEXT NOT NULL, ResultJson TEXT NOT NULL, CreatedAt TEXT NOT NULL,
+                    PRIMARY KEY(AssetId,AnalysisVersion,PaletteSize,PaletteSort),
+                    FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE);
+                DROP TABLE AssetVisualAnalysis;
+                ALTER TABLE AssetVisualAnalysis_v5 RENAME TO AssetVisualAnalysis;
+                """;
+            await migrate.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
+            throw;
+        }
     }
 
     private static async Task EnsureAssetIdentitySchemaAsync(SqliteConnection connection, CancellationToken cancellationToken)

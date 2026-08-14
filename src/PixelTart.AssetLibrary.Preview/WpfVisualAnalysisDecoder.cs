@@ -1,5 +1,4 @@
 using System.IO;
-using System.Security.Cryptography;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
@@ -43,7 +42,8 @@ internal static class WpfVisualAnalysisDecoder
         var rgb = new byte[bgr.Length];
         for (var index = 0; index < bgr.Length; index += 3) { rgb[index] = bgr[index + 2]; rgb[index + 1] = bgr[index + 1]; rgb[index + 2] = bgr[index]; }
         cancellationToken.ThrowIfCancellationRequested();
-        var fingerprint = asset.ContentHash ?? Convert.ToHexString(SHA256.HashData(rgb));
-        return new(asset.AssetId, fingerprint, new(formatted.PixelWidth, formatted.PixelHeight, rgb), paletteSize, AnalysisSource: VisualAnalysisSourceKind.RasterOriginal, SourceProfile: sourceProfile, AnalysisProfile: "sRGB IEC61966-2.1", PixelsConvertedToAnalysisProfile: converted || sourceProfile.StartsWith("UnknownAssumedSrgb", StringComparison.Ordinal) || sourceProfile.EndsWith("AssumedSrgb", StringComparison.Ordinal));
+        var pixels = new VisualPixelBuffer(formatted.PixelWidth, formatted.PixelHeight, rgb);
+        var fingerprint = VisualAnalysisFingerprint.Compute(pixels);
+        return new(asset.AssetId, fingerprint, pixels, paletteSize, AnalysisSource: VisualAnalysisSourceKind.RasterOriginal, SourceProfile: sourceProfile, AnalysisProfile: "sRGB IEC61966-2.1", PixelsConvertedToAnalysisProfile: converted || sourceProfile.StartsWith("UnknownAssumedSrgb", StringComparison.Ordinal) || sourceProfile.EndsWith("AssumedSrgb", StringComparison.Ordinal));
     }
 }

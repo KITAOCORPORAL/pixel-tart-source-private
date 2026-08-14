@@ -18,7 +18,7 @@ RAW files use an existing rendered proxy or embedded preview only. The preview d
 
 ## Cache and cancellation
 
-`AssetVisualAnalysis` stores result JSON only, keyed by stable `AssetId`, content hash and `visual-analysis-v1`. It never stores source pixels or proxy bytes. A per-asset async lock prevents an older content analysis from overwriting a newer cache entry. Selection changes cancel decode and analysis; publication is marshalled to the captured synchronization context and rechecks asset/generation immediately before publishing. Multi-selection shows an explicit selected-count state and never presents the first asset as group analysis.
+`AssetVisualAnalysis` stores result JSON only, keyed by stable `AssetId`, decoded-proxy content hash, `visual-analysis-v1`, palette size and palette sort. The WPF decoder always fingerprints the actual RGB proxy bytes and never substitutes the import-time source-file hash. It never stores source pixels or proxy bytes. A per-asset async lock prevents an older content analysis from overwriting a newer cache entry. Selection changes cancel decode and analysis; publication is marshalled to the captured synchronization context and rechecks asset/generation immediately before publishing. Multi-selection shows an explicit selected-count state and never presents the first asset as group analysis.
 
 ## Verification boundary
 
