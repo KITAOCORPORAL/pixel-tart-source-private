@@ -9,7 +9,7 @@ export type ApiResult<T> = { ok: true; data: T } | { ok: false; error: ApiError 
 export const api = {
   baseUrl: '',
   async request<T>(path: string, method: 'GET' | 'PUT' | 'POST' = 'GET', data?: unknown): Promise<ApiResult<T>> {
-    if (!this.baseUrl) return { ok: false, error: { code: 'ProviderNone', message: '本地 Mock：在线服务尚未配置。', retryable: false } };
+    if (!this.baseUrl) return { ok: false, error: { code: 'ProviderNone', message: 'Local mock: online service is not configured.', retryable: false } };
     return new Promise(resolve => {
       wx.request({
         url: `${this.baseUrl}${path}`,
@@ -18,8 +18,8 @@ export const api = {
         timeout: 10000,
         success: response => response.statusCode >= 200 && response.statusCode < 300
           ? resolve({ ok: true, data: response.data as T })
-          : resolve({ ok: false, error: { code: `Http${response.statusCode}`, message: '服务暂时不可用。', retryable: response.statusCode >= 500 } }),
-        fail: () => resolve({ ok: false, error: { code: 'NetworkError', message: '网络暂时不可用，已保留本地选择。', retryable: true } })
+          : resolve({ ok: false, error: { code: `Http${response.statusCode}`, message: 'The service is temporarily unavailable.', retryable: response.statusCode >= 500 } }),
+        fail: () => resolve({ ok: false, error: { code: 'NetworkError', message: 'Network unavailable; local choices are retained.', retryable: true } })
       });
     });
   },
