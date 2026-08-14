@@ -85,7 +85,7 @@ public sealed class VisualAnalysisTests
             var miss = await service.AnalyzeAsync(request); var hit = await service.AnalyzeAsync(request);
             Assert.IsFalse(miss.CacheHit); Assert.IsTrue(hit.CacheHit);
             Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-b", 5, PaletteSortMode.Weight));
-            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-a", 5, PaletteSortMode.Weight, "visual-analysis-v2"));
+            Assert.IsNull(await cache.TryGetAsync(asset.AssetId, "hash-a", 5, PaletteSortMode.Weight, "visual-analysis-v999"));
 
             var smaller = await service.AnalyzeAsync(request with { PaletteSize = 3 });
             Assert.IsFalse(smaller.CacheHit);

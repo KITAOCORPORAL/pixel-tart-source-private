@@ -42,7 +42,8 @@ public sealed class AssetLibraryPreviewWpfTests
     public void PreviewIsIsolatedFromFormalDatabaseAndP0Shell()
     {
         var host = Read("src/PixelTart.AssetLibrary.Preview/MainWindow.xaml.cs") + Read("src/PixelTart.AssetLibrary.Preview/AssetLibraryPreviewViewModel.cs");
-        StringAssert.Contains(host, "KitaoPhotoSelector.AssetLibraryV15Preview");
+        StringAssert.Contains(host, "KitaoPhotoSelector.AssetLibraryV16Preview");
+        StringAssert.Contains(host, "PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT");
         Assert.DoesNotContain("pixel-tart.db", host, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("RAWSelectionAssistant.MainWindow", host, StringComparison.Ordinal);
         Assert.DoesNotContain("InputRouting", host, StringComparison.Ordinal);
@@ -57,7 +58,7 @@ public sealed class AssetLibraryPreviewWpfTests
         Assert.IsFalse(bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF);
         var text = new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true).GetString(bytes);
         Assert.DoesNotContain("鍍", text, StringComparison.Ordinal);
-        StringAssert.Contains(text, "素材库 V1.5");
+        StringAssert.Contains(text, "素材库 V1.6");
         StringAssert.Contains(text, "F 分类");
     }
 
@@ -100,6 +101,17 @@ public sealed class AssetLibraryPreviewWpfTests
         var decoder = Read("src/PixelTart.AssetLibrary.Preview/WpfVisualAnalysisDecoder.cs");
         StringAssert.Contains(decoder, "VisualAnalysisFingerprint.Compute(pixels)");
         Assert.DoesNotContain("asset.ContentHash ??", decoder, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
+    public void PreviewConnectsV16VisualSearchBatchAndTemporaryResultActions()
+    {
+        var xaml = Read("src/PixelTart.AssetLibrary.Preview/MainWindow.xaml");
+        var viewModel = Read("src/PixelTart.AssetLibrary.Preview/AssetLibraryPreviewViewModel.cs");
+        foreach (var token in new[] { "AssetLibraryV16Window", "VisualFilterChips", "AdvancedVisualFilter", "SearchByColor", "FindSimilarAssets", "AnalyzeVisibleAssets", "CancelVisualBatch", "VisualFeatureStatus", "ClearVisualResults" })
+            StringAssert.Contains(xaml, token);
+        foreach (var token in new[] { "_queryGeneration", "VisualResultMode", "FindSimilarAsync", "SearchColorAsync", "ApplyAdvancedVisualFilterAsync", "AnalyzeVisibleAsync", "AssetVisualAnalysisBatchProcessor" })
+            StringAssert.Contains(viewModel, token);
     }
 
     private static string Read(string relative) => File.ReadAllText(Path.Combine(Root(), relative.Replace('/', Path.DirectorySeparatorChar)));

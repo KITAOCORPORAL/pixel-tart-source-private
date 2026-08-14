@@ -96,7 +96,22 @@ public sealed record AssetVisualAnalysisResult(
     DateTimeOffset CreatedAt,
     bool CacheHit = false)
 {
-    public const string CurrentVersion = "visual-analysis-v1";
+    public const string CurrentVersion = "visual-analysis-v2";
+
+    /// <summary>
+    /// Fingerprint of the current source/managed-copy bytes when the analysis was
+    /// produced.  ContentHash above deliberately remains the exact decoded proxy
+    /// fingerprint used by the visual engine.
+    /// </summary>
+    public string? SourceContentHash { get; init; }
+    public string? PreviousSourceContentHash { get; init; }
+    public double? SecondaryHue { get; init; }
+    public double? AverageHue { get; init; }
+    public double MedianSaturation { get; init; }
+    public double AverageLightness { get; init; }
+    public string HistogramLumaSignature { get; init; } = string.Empty;
+    public string PaletteSignature { get; init; } = string.Empty;
+    public bool HasDominantChromaticColor { get; init; }
 }
 
 public sealed record AssetVisualAnalysisRequest(
@@ -108,7 +123,9 @@ public sealed record AssetVisualAnalysisRequest(
     VisualAnalysisSourceKind AnalysisSource = VisualAnalysisSourceKind.RasterOriginal,
     string SourceProfile = "UnknownAssumedSrgb",
     string AnalysisProfile = "sRGB IEC61966-2.1",
-    bool PixelsConvertedToAnalysisProfile = true);
+    bool PixelsConvertedToAnalysisProfile = true,
+    string? SourceContentHash = null,
+    string? PreviousSourceContentHash = null);
 
 public sealed record VisualAnalysisPerformanceSample(int Count, double MeanMilliseconds, double P95Milliseconds, int CacheHits, int CacheMisses);
 

@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>PixelTart_AssetLibrary_V1_6_Preview</AssemblyName>
-    <RootNamespace>PixelTart.AssetLibrary.Preview</RootNamespace>
+    <AssemblyName>PixelTart.AssetLibrary.V16.AcceptanceRunner</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj" />
+    <ProjectReference Include="..\..\src\PixelTart.AssetLibrary.Preview\PixelTart.AssetLibrary.Preview.csproj" />
+    <ProjectReference Include="..\..\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj" />
   </ItemGroup>
 </Project>

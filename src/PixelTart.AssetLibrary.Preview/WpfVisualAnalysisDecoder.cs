@@ -1,4 +1,5 @@
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
@@ -8,18 +9,28 @@ namespace PixelTart.AssetLibrary.Preview;
 
 internal static class WpfVisualAnalysisDecoder
 {
-    public static async Task<AssetVisualAnalysisRequest> DecodeAsync(AssetItem asset, int paletteSize, CancellationToken cancellationToken)
+    private const long MaximumSnapshotBytes = 512L * 1024 * 1024;
+    public static async Task<AssetVisualAnalysisRequest> DecodeAsync(AssetItem asset, int paletteSize, CancellationToken cancellationToken, PaletteSortMode paletteSort = PaletteSortMode.Weight)
     {
-        return await Task.Run(() => Decode(asset, paletteSize, cancellationToken), cancellationToken).ConfigureAwait(false);
+        return await Task.Run(() => Decode(asset, paletteSize, paletteSort, cancellationToken), cancellationToken).ConfigureAwait(false);
     }
 
-    private static AssetVisualAnalysisRequest Decode(AssetItem asset, int paletteSize, CancellationToken cancellationToken)
+    private static AssetVisualAnalysisRequest Decode(AssetItem asset, int paletteSize, PaletteSortMode paletteSort, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         var sourcePath = asset.ManagedCopyPath is not null && File.Exists(asset.ManagedCopyPath) ? asset.ManagedCopyPath : asset.SourcePath;
         if (!File.Exists(sourcePath)) throw new FileNotFoundException("素材文件已移动。", sourcePath);
         if (asset.MediaType == "Raw") throw new NotSupportedException("RAW 视觉分析需要已有代理图或内嵌预览；本预览不会执行完整 RAW 解码。");
-        using var stream = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+        byte[] sourceBytes;
+        using (var source = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+        {
+            if (source.Length > MaximumSnapshotBytes) throw new NotSupportedException("本地视觉分析暂不接受大于 512 MiB 的单个栅格文件；请使用已有代理图。");
+            sourceBytes = new byte[checked((int)source.Length)];
+            source.ReadExactly(sourceBytes);
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        var sourceContentHash = Convert.ToHexString(SHA256.HashData(sourceBytes));
+        using var stream = new MemoryStream(sourceBytes, writable: false);
         var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
         var frame = decoder.Frames[0];
         var scale = Math.Min(1d, 512d / Math.Max(frame.PixelWidth, frame.PixelHeight));
@@ -44,6 +55,7 @@ internal static class WpfVisualAnalysisDecoder
         cancellationToken.ThrowIfCancellationRequested();
         var pixels = new VisualPixelBuffer(formatted.PixelWidth, formatted.PixelHeight, rgb);
         var fingerprint = VisualAnalysisFingerprint.Compute(pixels);
-        return new(asset.AssetId, fingerprint, pixels, paletteSize, AnalysisSource: VisualAnalysisSourceKind.RasterOriginal, SourceProfile: sourceProfile, AnalysisProfile: "sRGB IEC61966-2.1", PixelsConvertedToAnalysisProfile: converted || sourceProfile.StartsWith("UnknownAssumedSrgb", StringComparison.Ordinal) || sourceProfile.EndsWith("AssumedSrgb", StringComparison.Ordinal));
+        return new(asset.AssetId, fingerprint, pixels, paletteSize, paletteSort, AnalysisSource: VisualAnalysisSourceKind.RasterOriginal, SourceProfile: sourceProfile, AnalysisProfile: "sRGB IEC61966-2.1", PixelsConvertedToAnalysisProfile: converted || sourceProfile.StartsWith("UnknownAssumedSrgb", StringComparison.Ordinal) || sourceProfile.EndsWith("AssumedSrgb", StringComparison.Ordinal), SourceContentHash: sourceContentHash, PreviousSourceContentHash: asset.ContentHash);
     }
+
 }

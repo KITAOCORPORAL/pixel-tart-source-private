@@ -16,17 +16,46 @@ public partial class MainWindow : Window
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
-        var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.AssetLibraryV15Preview");
-        _viewModel = new(Path.Combine(root, "asset-library-v15-preview.db")); DataContext = _viewModel; await _viewModel.InitializeAsync();
+        var requestedRoot = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT");
+        var root = string.IsNullOrWhiteSpace(requestedRoot)
+            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KitaoPhotoSelector.AssetLibraryV16Preview")
+            : RequireAbsoluteAcceptanceRoot(requestedRoot);
+        _viewModel = new(Path.Combine(root, "asset-library-v16-preview.db")); DataContext = _viewModel; await _viewModel.InitializeAsync();
         var demo = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR");
         if (!string.IsNullOrWhiteSpace(demo) && Directory.Exists(demo)) await _viewModel.ImportDemoDirectoryAsync(demo);
     }
 
+    private static string RequireAbsoluteAcceptanceRoot(string value)
+    {
+        if (!Path.IsPathFullyQualified(value)) throw new InvalidOperationException("PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT 必须是显式绝对目录。");
+        var root = Path.GetFullPath(value);
+        Directory.CreateDirectory(root);
+        return root;
+    }
+
     private async void OnClosed(object? sender, EventArgs e) { _classifier?.Close(); _preview?.Close(); if (_viewModel is not null) await _viewModel.DisposeAsync(); }
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel?.ClearFilters();
-    private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) { if (_viewModel is null) return; _viewModel.SyncSelection(AssetGrid.SelectedItems.Cast<AssetItem>()); }
+    private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) { if (_viewModel is null) return; _viewModel.SyncSelection(AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset)); }
     private void OpenClassifier_Click(object sender, RoutedEventArgs e) => OpenClassifier();
     private void OpenTagManager_Click(object sender, RoutedEventArgs e) => new TagManagerWindow { Owner = this, DataContext = _viewModel }.ShowDialog();
+
+    private async void FindSimilarPaletteMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (_viewModel is null || (sender as FrameworkElement)?.DataContext is not AssetVisualMatchView card) return;
+        await _viewModel.ExecuteVisualContextActionAsync(card.Asset, VisualContextAction.Palette);
+    }
+
+    private async void FindSimilarVisualMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (_viewModel is null || (sender as FrameworkElement)?.DataContext is not AssetVisualMatchView card) return;
+        await _viewModel.ExecuteVisualContextActionAsync(card.Asset, VisualContextAction.Similarity);
+    }
+
+    private async void AnalyzeVisualMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (_viewModel is null || (sender as FrameworkElement)?.DataContext is not AssetVisualMatchView card) return;
+        await _viewModel.ExecuteVisualContextActionAsync(card.Asset, VisualContextAction.Analyze);
+    }
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {

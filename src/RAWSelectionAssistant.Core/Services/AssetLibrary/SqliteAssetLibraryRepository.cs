@@ -489,6 +489,10 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         if (query.UncategorizedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
         if (query.UntaggedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
         if (query.MissingOnly) where.Add("a.IsMissing=1");
+        if (query.AddedFrom is not null) { where.Add("a.AddedAt >= $addedFrom"); command.Parameters.AddWithValue("$addedFrom", query.AddedFrom.Value.ToString("O")); }
+        if (query.AddedTo is not null) { where.Add("a.AddedAt <= $addedTo"); command.Parameters.AddWithValue("$addedTo", query.AddedTo.Value.ToString("O")); }
+        if (query.CaptureFrom is not null) { where.Add("a.CaptureTime >= $captureFrom"); command.Parameters.AddWithValue("$captureFrom", query.CaptureFrom.Value.ToString("O")); }
+        if (query.CaptureTo is not null) { where.Add("a.CaptureTime <= $captureTo"); command.Parameters.AddWithValue("$captureTo", query.CaptureTo.Value.ToString("O")); }
         command.CommandText = SelectAssetSql + " WHERE " + string.Join(" AND ", where) + " ORDER BY a.AddedAt DESC,a.AssetId;";
         var result = new List<AssetItem>(); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(ReadAsset(reader)); return result;
     }

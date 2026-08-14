@@ -1,7 +1,9 @@
 using System.Text.Json;
 using System.Text;
+using System.Globalization;
 using Microsoft.Data.Sqlite;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
@@ -119,6 +121,10 @@ public sealed partial class SqliteAssetLibraryRepository
         if (query.UncategorizedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
         if (query.UntaggedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
         if (query.MissingOnly) where.Add("a.IsMissing=1");
+        if (query.AddedFrom is not null) { where.Add("a.AddedAt >= $addedFrom"); command.Parameters.AddWithValue("$addedFrom", query.AddedFrom.Value.ToString("O")); }
+        if (query.AddedTo is not null) { where.Add("a.AddedAt <= $addedTo"); command.Parameters.AddWithValue("$addedTo", query.AddedTo.Value.ToString("O")); }
+        if (query.CaptureFrom is not null) { where.Add("a.CaptureTime >= $captureFrom"); command.Parameters.AddWithValue("$captureFrom", query.CaptureFrom.Value.ToString("O")); }
+        if (query.CaptureTo is not null) { where.Add("a.CaptureTime <= $captureTo"); command.Parameters.AddWithValue("$captureTo", query.CaptureTo.Value.ToString("O")); }
         return string.Join(" AND ", where);
     }
 
@@ -188,6 +194,7 @@ public sealed partial class SqliteAssetLibraryRepository
 
     private static string BuildSmartRule(SmartFolderRule rule, SqliteCommand command)
     {
+        if (IsVisualSmartField(rule.Field)) return BuildVisualSmartRule(rule, command);
         var parameter = $"$smart{command.Parameters.Count}";
         var expression = rule.Field switch
         {
@@ -212,6 +219,118 @@ public sealed partial class SqliteAssetLibraryRepository
         };
         if (UsesSmartParameter(rule)) command.Parameters.AddWithValue(parameter, SmartParameterValue(rule));
         return rule.Negated ? $"NOT ({expression})" : $"({expression})";
+    }
+
+    private static bool IsVisualSmartField(SmartFolderField field) => field is
+        SmartFolderField.VisualAnalysisStatus or SmartFolderField.VisualHarmony or SmartFolderField.VisualToneKey or
+        SmartFolderField.VisualContrast or SmartFolderField.VisualSaturation or SmartFolderField.VisualWarmCool or
+        SmartFolderField.VisualDominantHue or SmartFolderField.VisualDominantColor or SmartFolderField.VisualAverageLuma or
+        SmartFolderField.VisualAverageSaturation or SmartFolderField.VisualLumaSpread or SmartFolderField.VisualShadowRatio or
+        SmartFolderField.VisualHighlightRatio or SmartFolderField.VisualBlackClipRatio or SmartFolderField.VisualWhiteClipRatio;
+
+    private static string BuildVisualSmartRule(SmartFolderRule rule, SqliteCommand command)
+    {
+        ValidateVisualSmartRule(rule);
+        var version = $"$smartVersion{command.Parameters.Count}";
+        command.Parameters.AddWithValue(version, AssetVisualFeatureContract.AnalysisVersion);
+        string expression;
+        if (rule.Field == SmartFolderField.VisualAnalysisStatus)
+        {
+            var state = $"CASE WHEN NOT EXISTS(SELECT 1 FROM AssetVisualFeatures avs WHERE avs.AssetId=a.AssetId) THEN 'NotAnalyzed' " +
+                        $"WHEN NOT EXISTS(SELECT 1 FROM AssetVisualFeatures avs WHERE avs.AssetId=a.AssetId AND avs.AnalysisVersion={version}) THEN 'Stale' " +
+                        $"WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures avs WHERE avs.AssetId=a.AssetId AND avs.AnalysisVersion={version} AND avs.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND avs.SourceContentHash=a.ContentHash AND avs.Outcome='Succeeded') THEN 'Valid' " +
+                        $"WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures avs WHERE avs.AssetId=a.AssetId AND avs.AnalysisVersion={version} AND avs.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND avs.SourceContentHash=a.ContentHash AND avs.Outcome='Failed') THEN 'Failed' ELSE 'Stale' END";
+            var value = $"$smartState{command.Parameters.Count}"; command.Parameters.AddWithValue(value, NormalizeVisualState(rule.Value));
+            expression = rule.Operator == SmartFolderOperator.NotEquals ? $"{state}<>{value}" : $"{state}={value}";
+        }
+        else
+        {
+            var valid = $"vf.AssetId=a.AssetId AND vf.AnalysisVersion={version} AND vf.Outcome='Succeeded' AND vf.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND vf.SourceContentHash=a.ContentHash";
+            if (rule.Field == SmartFolderField.VisualDominantHue)
+            {
+                var (start, end) = ParseRange(rule.Value);
+                var startName = $"$smartHueStart{command.Parameters.Count}"; command.Parameters.AddWithValue(startName, start);
+                var endName = $"$smartHueEnd{command.Parameters.Count}"; command.Parameters.AddWithValue(endName, end);
+                var hue = start <= end ? $"pc.Hue BETWEEN {startName} AND {endName}" : $"(pc.Hue>={startName} OR pc.Hue<={endName})";
+                expression = $"EXISTS(SELECT 1 FROM AssetVisualFeatures vf JOIN AssetVisualPaletteColors pc ON pc.AssetId=vf.AssetId AND pc.AnalysisVersion=vf.AnalysisVersion WHERE {valid} AND pc.Weight>={AssetVisualFeatureContract.MinimumPaletteWeight.ToString(CultureInfo.InvariantCulture)} AND pc.Saturation>=0.08 AND pc.Chroma>=8 AND {hue})";
+            }
+            else if (rule.Field == SmartFolderField.VisualDominantColor)
+            {
+                var (target, maximumDelta) = ParseColor(rule.Value);
+                var l = $"$smartLabL{command.Parameters.Count}"; command.Parameters.AddWithValue(l, target.L);
+                var aValue = $"$smartLabA{command.Parameters.Count}"; command.Parameters.AddWithValue(aValue, target.A);
+                var bValue = $"$smartLabB{command.Parameters.Count}"; command.Parameters.AddWithValue(bValue, target.B);
+                var delta = $"$smartDelta{command.Parameters.Count}"; command.Parameters.AddWithValue(delta, maximumDelta * maximumDelta);
+                expression = $"EXISTS(SELECT 1 FROM AssetVisualFeatures vf JOIN AssetVisualPaletteColors pc ON pc.AssetId=vf.AssetId AND pc.AnalysisVersion=vf.AnalysisVersion WHERE {valid} AND pc.Weight>={AssetVisualFeatureContract.MinimumPaletteWeight.ToString(CultureInfo.InvariantCulture)} AND ((pc.LabL-{l})*(pc.LabL-{l})+(pc.LabA-{aValue})*(pc.LabA-{aValue})+(pc.LabB-{bValue})*(pc.LabB-{bValue}))<={delta})";
+            }
+            else
+            {
+                var column = rule.Field switch
+                {
+                    SmartFolderField.VisualHarmony => "vf.Harmony",
+                    SmartFolderField.VisualToneKey => "vf.ToneKey",
+                    SmartFolderField.VisualContrast => "vf.Contrast",
+                    SmartFolderField.VisualSaturation => "vf.Saturation",
+                    SmartFolderField.VisualWarmCool => "vf.WarmCool",
+                    SmartFolderField.VisualAverageLuma => "vf.AverageLuma",
+                    SmartFolderField.VisualAverageSaturation => "vf.AverageSaturation",
+                    SmartFolderField.VisualLumaSpread => "vf.LumaSpreadMetric",
+                    SmartFolderField.VisualShadowRatio => "vf.ShadowRatio",
+                    SmartFolderField.VisualHighlightRatio => "vf.HighlightRatio",
+                    SmartFolderField.VisualBlackClipRatio => "vf.BlackClipRatio",
+                    SmartFolderField.VisualWhiteClipRatio => "vf.WhiteClipRatio",
+                    _ => "NULL"
+                };
+                var value = $"$smartVisual{command.Parameters.Count}"; command.Parameters.AddWithValue(value, rule.Value);
+                var condition = rule.Field is SmartFolderField.VisualHarmony or SmartFolderField.VisualToneKey or SmartFolderField.VisualContrast or SmartFolderField.VisualSaturation or SmartFolderField.VisualWarmCool
+                    ? BuildTextRule(column, rule, value)
+                    : BuildScalarRule(column, rule, value);
+                expression = $"EXISTS(SELECT 1 FROM AssetVisualFeatures vf WHERE {valid} AND {condition})";
+            }
+        }
+        return rule.Negated ? $"NOT ({expression})" : $"({expression})";
+    }
+
+    private static void ValidateVisualSmartRule(SmartFolderRule rule)
+    {
+        static bool IsNumeric(SmartFolderField field) => field is SmartFolderField.VisualAverageLuma or SmartFolderField.VisualAverageSaturation or SmartFolderField.VisualLumaSpread or SmartFolderField.VisualShadowRatio or SmartFolderField.VisualHighlightRatio or SmartFolderField.VisualBlackClipRatio or SmartFolderField.VisualWhiteClipRatio;
+        static bool IsNumericOperator(SmartFolderOperator value) => value is SmartFolderOperator.Equals or SmartFolderOperator.NotEquals or SmartFolderOperator.GreaterThan or SmartFolderOperator.GreaterThanOrEqual or SmartFolderOperator.LessThan or SmartFolderOperator.LessThanOrEqual;
+        if (rule.Field == SmartFolderField.VisualAnalysisStatus && rule.Operator is not (SmartFolderOperator.Equals or SmartFolderOperator.NotEquals))
+            throw new ArgumentException("VisualAnalysisStatus supports Equals or NotEquals only.");
+        if (rule.Field is SmartFolderField.VisualDominantHue or SmartFolderField.VisualDominantColor && rule.Operator is not (SmartFolderOperator.Equals or SmartFolderOperator.InRange))
+            throw new ArgumentException($"{rule.Field} supports Equals or InRange only.");
+        if (IsNumeric(rule.Field) && !IsNumericOperator(rule.Operator))
+            throw new ArgumentException($"{rule.Field} requires a numeric comparison operator.");
+        if (rule.Field is SmartFolderField.VisualHarmony or SmartFolderField.VisualToneKey or SmartFolderField.VisualContrast or SmartFolderField.VisualSaturation or SmartFolderField.VisualWarmCool && rule.Operator is not (SmartFolderOperator.Equals or SmartFolderOperator.NotEquals))
+            throw new ArgumentException($"{rule.Field} supports Equals or NotEquals only.");
+    }
+
+    private static (double Start, double End) ParseRange(string value)
+    {
+        var parts = value.Split(["..", ",", "，"], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (parts.Length != 2 || !double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out var start) || !double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out var end))
+            throw new ArgumentException($"Invalid range '{value}'. Use start..end.");
+        static double Normalize(double hue) => (hue % 360 + 360) % 360;
+        return (Normalize(start), Normalize(end));
+    }
+
+    private static string NormalizeVisualState(string value)
+    {
+        var compact = new string(value.Where(char.IsLetterOrDigit).ToArray());
+        if (compact.Equals("Analyzed", StringComparison.OrdinalIgnoreCase) || compact.Equals("Valid", StringComparison.OrdinalIgnoreCase)) return AssetVisualFeatureState.Valid.ToString();
+        if (compact.Equals("NotAnalyzed", StringComparison.OrdinalIgnoreCase)) return AssetVisualFeatureState.NotAnalyzed.ToString();
+        if (compact.Equals("Failed", StringComparison.OrdinalIgnoreCase)) return AssetVisualFeatureState.Failed.ToString();
+        return AssetVisualFeatureState.Stale.ToString();
+    }
+
+    private static (VisualLab Lab, double MaximumDelta) ParseColor(string value)
+    {
+        var parts = value.Split('@', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        var hex = parts[0].TrimStart('#');
+        if (hex.Length != 6 || !byte.TryParse(hex[..2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var red) || !byte.TryParse(hex[2..4], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var green) || !byte.TryParse(hex[4..], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var blue))
+            throw new ArgumentException($"Invalid visual color '{value}'. Use #RRGGBB or #RRGGBB@DeltaE.");
+        var maximum = parts.Length > 1 && double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out var parsed) ? Math.Max(0, parsed) : 20;
+        return (VisualAnalysisEngine.ToLab(new(red, green, blue)), maximum);
     }
 
     private static bool UsesSmartParameter(SmartFolderRule rule) => rule.Operator is not (SmartFolderOperator.IsTrue or SmartFolderOperator.IsFalse);

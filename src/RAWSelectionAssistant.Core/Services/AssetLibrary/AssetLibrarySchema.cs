@@ -4,7 +4,7 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 internal static class AssetLibrarySchema
 {
-    public const int Version = 5;
+    public const int Version = 6;
 
     public static async Task EnsureAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {
@@ -157,6 +157,73 @@ internal static class AssetLibrarySchema
                 FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE
             );
             """,
+            """
+            CREATE TABLE IF NOT EXISTS AssetVisualFeatures(
+                AssetId TEXT NOT NULL,
+                AnalysisVersion TEXT NOT NULL,
+                PaletteSize INTEGER NOT NULL CHECK(PaletteSize=5),
+                PaletteSort TEXT NOT NULL CHECK(PaletteSort='Weight'),
+                ContentFingerprint TEXT NOT NULL,
+                SourceContentHash TEXT NULL,
+                Outcome TEXT NOT NULL,
+                FailureReason TEXT NULL,
+                AnalysisSource TEXT NOT NULL,
+                SourceProfile TEXT NOT NULL,
+                AnalysisProfile TEXT NOT NULL,
+                Harmony TEXT NULL,
+                ToneKey TEXT NULL,
+                Contrast TEXT NULL,
+                LuminanceSpan TEXT NULL,
+                Saturation TEXT NULL,
+                WarmCool TEXT NULL,
+                DominantHue REAL NULL,
+                SecondaryHue REAL NULL,
+                AverageHue REAL NULL,
+                AverageLuma REAL NULL,
+                MedianLuma REAL NULL,
+                ContrastMetric REAL NULL,
+                LumaSpreadMetric REAL NULL,
+                AverageSaturation REAL NULL,
+                MedianSaturation REAL NULL,
+                AverageLightness REAL NULL,
+                WarmCoolMetric REAL NULL,
+                DeepShadowRatio REAL NULL,
+                ShadowRatio REAL NULL,
+                MidtoneRatio REAL NULL,
+                HighlightRatio REAL NULL,
+                SpecularRatio REAL NULL,
+                BlackClipRatio REAL NULL,
+                WhiteClipRatio REAL NULL,
+                HistogramLumaSignature TEXT NULL,
+                PaletteSignature TEXT NULL,
+                ResultJson TEXT NULL,
+                CreatedAt TEXT NOT NULL,
+                UpdatedAt TEXT NOT NULL,
+                PRIMARY KEY(AssetId,AnalysisVersion),
+                FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE
+            );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS AssetVisualPaletteColors(
+                AssetId TEXT NOT NULL,
+                AnalysisVersion TEXT NOT NULL,
+                ColorIndex INTEGER NOT NULL,
+                Red INTEGER NOT NULL CHECK(Red BETWEEN 0 AND 255),
+                Green INTEGER NOT NULL CHECK(Green BETWEEN 0 AND 255),
+                Blue INTEGER NOT NULL CHECK(Blue BETWEEN 0 AND 255),
+                LabL REAL NOT NULL,
+                LabA REAL NOT NULL,
+                LabB REAL NOT NULL,
+                Hue REAL NOT NULL,
+                Saturation REAL NOT NULL,
+                Chroma REAL NOT NULL,
+                Weight REAL NOT NULL CHECK(Weight >= 0 AND Weight <= 1),
+                Hex TEXT NOT NULL,
+                PRIMARY KEY(AssetId,AnalysisVersion,ColorIndex),
+                FOREIGN KEY(AssetId,AnalysisVersion)
+                    REFERENCES AssetVisualFeatures(AssetId,AnalysisVersion) ON DELETE CASCADE
+            );
+            """,
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_DisplayName ON AssetItems(DisplayName COLLATE NOCASE);",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_AddedAt ON AssetItems(AddedAt DESC);",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_CaptureTime ON AssetItems(CaptureTime DESC);",
@@ -166,7 +233,16 @@ internal static class AssetLibrarySchema
             "CREATE INDEX IF NOT EXISTS IX_AssetFolderMemberships_Folder ON AssetFolderMemberships(FolderId,AssetId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetFolderAutoTags_Tag ON AssetFolderAutoTags(TagId,FolderId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetTagMemberships_Tag ON AssetTagMemberships(TagId,AssetId);",
-            "CREATE INDEX IF NOT EXISTS IX_AssetLibraryUndoJournal_Recent ON AssetLibraryUndoJournal(UndoneAt,CreatedAt DESC);"
+            "CREATE INDEX IF NOT EXISTS IX_AssetLibraryUndoJournal_Recent ON AssetLibraryUndoJournal(UndoneAt,CreatedAt DESC);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Outcome ON AssetVisualFeatures(AnalysisVersion,Outcome,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Hue ON AssetVisualFeatures(AnalysisVersion,Outcome,DominantHue,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Luma ON AssetVisualFeatures(AnalysisVersion,Outcome,AverageLuma,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Saturation ON AssetVisualFeatures(AnalysisVersion,Outcome,AverageSaturation,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Contrast ON AssetVisualFeatures(AnalysisVersion,Outcome,ContrastMetric,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_WarmCool ON AssetVisualFeatures(AnalysisVersion,Outcome,WarmCoolMetric,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Classifications ON AssetVisualFeatures(AnalysisVersion,Outcome,ToneKey,Contrast,Saturation,WarmCool,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualPaletteColors_HueWeight ON AssetVisualPaletteColors(AnalysisVersion,Hue,Weight,AssetId);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetVisualPaletteColors_LabWeight ON AssetVisualPaletteColors(AnalysisVersion,LabL,LabA,LabB,Weight,AssetId);"
         };
 
         foreach (var statement in statements)

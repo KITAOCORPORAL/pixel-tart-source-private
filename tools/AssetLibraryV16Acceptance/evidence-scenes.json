@@ -1,0 +1,47 @@
+{
+  "schema": "pixel-tart-asset-library-v16-evidence/v1",
+  "synthetic_only": true,
+  "customer_media_allowed": false,
+  "scenes": [
+    {
+      "file_name": "07_visual_analysis_color.png",
+      "automation_target": "VisualAnalysisTabs",
+      "visible_assertion": "配色"
+    },
+    {
+      "file_name": "08_visual_analysis_histogram.png",
+      "automation_target": "VisualAnalysisTabs",
+      "visible_assertion": "直方图"
+    },
+    {
+      "file_name": "09_visual_analysis_tone.png",
+      "automation_target": "VisualAnalysisTabs",
+      "visible_assertion": "影调"
+    },
+    {
+      "file_name": "10_visual_filter.png",
+      "automation_target": "VisualFilterChips",
+      "visible_assertion": "视觉筛选"
+    },
+    {
+      "file_name": "11_visual_smart_folder.png",
+      "automation_target": "VisualSmartFolderBuilder",
+      "visible_assertion": "Smart Folder Builder"
+    },
+    {
+      "file_name": "12_color_similarity_results.png",
+      "automation_target": "SearchByColor",
+      "visible_assertion": "DeltaE76"
+    },
+    {
+      "file_name": "13_visual_similarity_results.png",
+      "automation_target": "FindSimilarAssets",
+      "visible_assertion": "相似"
+    },
+    {
+      "file_name": "14_batch_visual_analysis.png",
+      "automation_target": "VisualBatchStatus",
+      "visible_assertion": "批量视觉分析"
+    }
+  ]
+}

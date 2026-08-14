@@ -22,7 +22,7 @@ The canonical library identity is therefore `AssetItem.AssetId`, generated once 
 The first development preview uses an independent metadata database:
 
 ```text
-%LocalAppData%/KitaoPhotoSelector.AssetLibraryV15Preview/asset-library-v15-preview.db
+%LocalAppData%/KitaoPhotoSelector.AssetLibraryV16Preview/asset-library-v16-preview.db
 ```
 
 This is deliberate. The active product database is still controlled by the P0 line, and the feature branch must not silently advance or mutate that schema. The proposal can later become a contiguous product migration after P0 is stable and merge order is agreed.
@@ -91,6 +91,7 @@ Managed Copy is explicit and requires a destination root. The copy gets a collis
 - cancellation is checked during import, decode and query enumeration
 - non-regex Smart Folder rules compile to SQLite predicates; regex remains a bounded fallback
 - visual-analysis cache variants include decoded-proxy fingerprint, palette size and palette sort
+- canonical `AssetVisualFeatures` uses analysis version `visual-analysis-v2`, fixed palette size 5/weight order, derived stale state, queryable palette children and visual indexes
 
 A deterministic 100,000-record metadata-only test traverses keyset pages without storing media bytes. This is a correctness smoke test, not a production-hardware latency claim. SQL plan caching and a 10,000 generated-JPEG end-to-end benchmark remain deferred.
 

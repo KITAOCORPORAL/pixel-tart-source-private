@@ -14,7 +14,8 @@ public static class VisualAnalysisEngine
         var histR = new uint[256]; var histG = new uint[256]; var histB = new uint[256]; var histLuma = new uint[256];
         var zoneCounts = new long[5];
         var lumaValues = new byte[request.Pixels.PixelCount];
-        double lumaSum = 0; double saturationSum = 0; double warmCoolSum = 0; double warmCoolWeight = 0; double hueX = 0; double hueY = 0; double hueWeight = 0;
+        var saturationValues = new double[request.Pixels.PixelCount];
+        double lumaSum = 0; double saturationSum = 0; double lightnessSum = 0; double warmCoolSum = 0; double warmCoolWeight = 0; double hueX = 0; double hueY = 0; double hueWeight = 0;
         for (var pixel = 0; pixel < request.Pixels.PixelCount; pixel++)
         {
             if ((pixel & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
@@ -23,7 +24,7 @@ public static class VisualAnalysisEngine
             var luma = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(r, g, b)), 0, 255);
             histLuma[luma]++; lumaValues[pixel] = luma; lumaSum += luma;
             zoneCounts[luma < 32 ? 0 : luma < 80 ? 1 : luma < 176 ? 2 : luma < 224 ? 3 : 4]++;
-            var hsl = RgbToHsl(r, g, b); saturationSum += hsl.S;
+            var hsl = RgbToHsl(r, g, b); saturationValues[pixel] = hsl.S; saturationSum += hsl.S; lightnessSum += hsl.L;
             if (hsl.S >= 0.08)
             {
                 var radians = hsl.H * Math.PI / 180; hueX += Math.Cos(radians) * hsl.S; hueY += Math.Sin(radians) * hsl.S; hueWeight += hsl.S;
@@ -32,6 +33,7 @@ public static class VisualAnalysisEngine
             }
         }
         Array.Sort(lumaValues);
+        Array.Sort(saturationValues);
         var count = request.Pixels.PixelCount;
         var averageLuma = lumaSum / count;
         var medianLuma = Percentile(lumaValues, 0.5);
@@ -47,21 +49,36 @@ public static class VisualAnalysisEngine
             _ => palette.OrderByDescending(x => x.Weight).ToArray()
         };
         var averageSaturation = saturationSum / count;
-        var dominantHue = hueWeight > 0 ? NormalizeHue(Math.Atan2(hueY, hueX) * 180 / Math.PI) : 0;
+        var hueVectorMagnitude = hueWeight > 0 ? Math.Sqrt(hueX * hueX + hueY * hueY) / hueWeight : 0;
+        double? averageHue = hueVectorMagnitude >= .01 ? NormalizeHue(Math.Atan2(hueY, hueX) * 180 / Math.PI) : null;
+        var materialPalette = palette.Where(color => color.Weight >= AssetVisualFeatureContract.MinimumPaletteWeight && color.Saturation >= AssetVisualFeatureContract.MinimumChromaticSaturation && Math.Sqrt(color.Lab.A * color.Lab.A + color.Lab.B * color.Lab.B) >= AssetVisualFeatureContract.MinimumChromaticLabChroma).OrderByDescending(color => color.Weight).ThenBy(color => color.Hex, StringComparer.Ordinal).ToArray();
+        var dominantHue = materialPalette.FirstOrDefault()?.Hue ?? 0;
+        var secondaryHue = materialPalette.Skip(1).FirstOrDefault()?.Hue;
         var warmCoolMetric = warmCoolWeight > 0 ? warmCoolSum / warmCoolWeight : 0;
         var denominator = (double)count;
-        return new(
+        return new AssetVisualAnalysisResult(
             request.AssetId, request.ContentHash, AssetVisualAnalysisResult.CurrentVersion, request.PaletteSize, request.PaletteSort,
             request.AnalysisSource, request.SourceProfile, request.AnalysisProfile,
             palette, ClassifyHarmony(palette, averageSaturation), histR, histG, histB, histLuma,
             new(zoneCounts[0] / denominator, zoneCounts[1] / denominator, zoneCounts[2] / denominator, zoneCounts[3] / denominator, zoneCounts[4] / denominator),
             averageLuma, medianLuma, blackClip, whiteClip, contrastMetric,
-            contrastMetric < .25 ? ContrastTendency.Low : contrastMetric < .55 ? ContrastTendency.Medium : ContrastTendency.High,
-            spanMetric, spanMetric < .35 ? LuminanceSpanTendency.Narrow : spanMetric < .70 ? LuminanceSpanTendency.Medium : LuminanceSpanTendency.Wide,
-            medianLuma < 32 ? ToneKeyTendency.Low : medianLuma > 120 ? ToneKeyTendency.High : ToneKeyTendency.Mid,
-            averageSaturation, dominantHue, averageSaturation < .18 ? SaturationTendency.Low : averageSaturation < .5 ? SaturationTendency.Medium : SaturationTendency.High,
-            warmCoolMetric, Math.Abs(warmCoolMetric) < .15 ? WarmCoolTendency.Neutral : warmCoolMetric > 0 ? WarmCoolTendency.Warm : WarmCoolTendency.Cool,
-            DateTimeOffset.UtcNow);
+            contrastMetric < VisualClassificationThresholds.LowContrastMaximum ? ContrastTendency.Low : contrastMetric < VisualClassificationThresholds.MediumContrastMaximum ? ContrastTendency.Medium : ContrastTendency.High,
+            spanMetric, spanMetric < VisualClassificationThresholds.NarrowLuminanceSpanMaximum ? LuminanceSpanTendency.Narrow : spanMetric < VisualClassificationThresholds.MediumLuminanceSpanMaximum ? LuminanceSpanTendency.Medium : LuminanceSpanTendency.Wide,
+            medianLuma < VisualClassificationThresholds.LowToneMedianMaximum ? ToneKeyTendency.Low : medianLuma > VisualClassificationThresholds.HighToneMedianMinimum ? ToneKeyTendency.High : ToneKeyTendency.Mid,
+            averageSaturation, dominantHue, averageSaturation < VisualClassificationThresholds.LowSaturationMaximum ? SaturationTendency.Low : averageSaturation < VisualClassificationThresholds.MediumSaturationMaximum ? SaturationTendency.Medium : SaturationTendency.High,
+            warmCoolMetric, Math.Abs(warmCoolMetric) < VisualClassificationThresholds.NeutralWarmCoolMagnitudeMaximum ? WarmCoolTendency.Neutral : warmCoolMetric > 0 ? WarmCoolTendency.Warm : WarmCoolTendency.Cool,
+            DateTimeOffset.UtcNow)
+        {
+            SourceContentHash = request.SourceContentHash,
+            PreviousSourceContentHash = request.PreviousSourceContentHash,
+            SecondaryHue = secondaryHue,
+            AverageHue = averageHue,
+            MedianSaturation = Percentile(saturationValues, .5),
+            AverageLightness = lightnessSum / count,
+            HistogramLumaSignature = HistogramSignature(histLuma),
+            PaletteSignature = string.Join("|", palette.Select(color => $"{color.Hex}:{color.Weight:F6}")),
+            HasDominantChromaticColor = materialPalette.Length > 0
+        };
     }
 
     public static ColorDerivatives Derive(VisualRgb24 color)
@@ -164,6 +181,13 @@ public static class VisualAnalysisEngine
 
     private static int Closest(VisualLab sample, IReadOnlyList<VisualLab> centroids) { var best = 0; var distance = double.MaxValue; for (var index = 0; index < centroids.Count; index++) { var current = DeltaE(sample, centroids[index]); if (current < distance) { best = index; distance = current; } } return best; }
     private static double Percentile(IReadOnlyList<byte> sorted, double percentile) => sorted[(int)Math.Round((sorted.Count - 1) * percentile)];
+    private static double Percentile(IReadOnlyList<double> sorted, double percentile) => sorted[(int)Math.Round((sorted.Count - 1) * percentile)];
+    private static string HistogramSignature(uint[] histogram)
+    {
+        var bytes = new byte[histogram.Length * sizeof(uint)];
+        Buffer.BlockCopy(histogram, 0, bytes, 0, bytes.Length);
+        return Convert.ToHexString(SHA256.HashData(bytes));
+    }
     private static double CircularSpan(IReadOnlyList<double> hues) { if (hues.Count < 2) return 0; var sorted = hues.Order().ToArray(); var largestGap = Enumerable.Range(0, sorted.Length).Max(i => i == sorted.Length - 1 ? 360 - sorted[i] + sorted[0] : sorted[i + 1] - sorted[i]); return 360 - largestGap; }
     private static double AngularDistance(double a, double b) { var distance = Math.Abs(a - b) % 360; return distance > 180 ? 360 - distance : distance; }
     private static double NormalizeHue(double hue) => (hue % 360 + 360) % 360;

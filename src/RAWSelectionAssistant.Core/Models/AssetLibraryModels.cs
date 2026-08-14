@@ -114,7 +114,22 @@ public enum SmartFolderField
     FileSize,
     IsUncategorized,
     IsUntagged,
-    IsMissing
+    IsMissing,
+    VisualAnalysisStatus,
+    VisualHarmony,
+    VisualToneKey,
+    VisualContrast,
+    VisualSaturation,
+    VisualWarmCool,
+    VisualDominantHue,
+    VisualDominantColor,
+    VisualAverageLuma,
+    VisualAverageSaturation,
+    VisualLumaSpread,
+    VisualShadowRatio,
+    VisualHighlightRatio,
+    VisualBlackClipRatio,
+    VisualWhiteClipRatio
 }
 
 public enum SmartFolderOperator
@@ -130,7 +145,8 @@ public enum SmartFolderOperator
     LessThanOrEqual,
     Regex,
     IsTrue,
-    IsFalse
+    IsFalse,
+    InRange
 }
 
 public sealed record SmartFolderRule(
@@ -174,7 +190,11 @@ public sealed record AssetLibraryQuery(
     string? Cursor = null,
     bool IncludeArchived = false,
     IReadOnlyList<Guid>? FolderIds = null,
-    IReadOnlyList<Guid>? TagIds = null)
+    IReadOnlyList<Guid>? TagIds = null,
+    DateTimeOffset? AddedFrom = null,
+    DateTimeOffset? AddedTo = null,
+    DateTimeOffset? CaptureFrom = null,
+    DateTimeOffset? CaptureTo = null)
 {
     public int EffectivePageSize => Math.Clamp(PageSize <= 0 ? 100 : PageSize, 1, 500);
 }
