@@ -17,7 +17,6 @@ public interface ISelectionObjectStorage
 
     Task<bool> DeleteAsync(string objectKey, CancellationToken cancellationToken = default);
 }
-
 /// <summary>
 /// Local development storage only. It keeps proxy bytes under a caller-owned
 /// temporary root and rejects traversal; it is not a production object store.
@@ -90,4 +89,3 @@ public sealed class LocalSelectionObjectStorage : ISelectionObjectStorage
         return path;
     }
 }
-

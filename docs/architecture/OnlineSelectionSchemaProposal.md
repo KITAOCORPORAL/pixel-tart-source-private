@@ -43,4 +43,3 @@
 ## 迁移与回滚
 
 本轮不注册 SchemaVersion 6，也不修改现有正式 SQLite 表。后续若进入数据库实现，应先建立独立迁移：新增 selection workspace 表、唯一 `(ProjectId, SelectionAssetId)` 约束、Choices/Comments/FinalSnapshots 索引；迁移失败时回滚新表，不触碰既有媒体、日历、RAW 或生产数据。
-
