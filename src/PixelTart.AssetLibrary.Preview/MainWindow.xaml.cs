@@ -1,4 +1,5 @@
 using System.IO;
+using System.Windows.Input;
 using System.Windows;
 
 namespace PixelTart.AssetLibrary.Preview;
@@ -6,7 +7,11 @@ namespace PixelTart.AssetLibrary.Preview;
 public partial class MainWindow : Window
 {
     private AssetLibraryPreviewViewModel? _viewModel;
-    public MainWindow() => InitializeComponent();
+    public MainWindow()
+    {
+        InitializeComponent();
+        PreviewKeyDown += OnPreviewKeyDown;
+    }
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -20,4 +25,22 @@ public partial class MainWindow : Window
     }
 
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel?.ClearFilters();
+
+    private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.None)
+        {
+            FolderList.Focus();
+            Keyboard.Focus(FolderList);
+            _viewModel?.FocusFolderClassifier();
+            e.Handled = true;
+            return;
+        }
+
+        if (e.Key == Key.D && Keyboard.Modifiers == ModifierKeys.Shift && _viewModel is not null)
+        {
+            e.Handled = true;
+            await _viewModel.RepeatLastFolderMembershipAsync();
+        }
+    }
 }

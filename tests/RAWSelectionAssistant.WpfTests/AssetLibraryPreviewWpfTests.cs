@@ -22,6 +22,7 @@ public sealed class AssetLibraryPreviewWpfTests
         var viewModel = Read("src/PixelTart.AssetLibrary.Preview/AssetLibraryPreviewViewModel.cs");
         StringAssert.Contains(xaml, "VirtualizingPanel.IsVirtualizing=\"True\"");
         StringAssert.Contains(xaml, "VirtualizationMode=\"Recycling\"");
+        StringAssert.Contains(xaml, "<VirtualizingStackPanel />");
         StringAssert.Contains(viewModel, "PageSize: 80");
         StringAssert.Contains(viewModel, "LoadMoreCommand");
     }
@@ -44,6 +45,44 @@ public sealed class AssetLibraryPreviewWpfTests
         Assert.DoesNotContain("pixel-tart.db", host, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("RAWSelectionAssistant.MainWindow", host, StringComparison.Ordinal);
         Assert.DoesNotContain("InputRouting", host, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
+    public void PreviewTextIsUtf8WithoutBomAndUsesReadableChinese()
+    {
+        var path = Path.Combine(Root(), "src", "PixelTart.AssetLibrary.Preview", "MainWindow.xaml");
+        var bytes = File.ReadAllBytes(path);
+        Assert.IsGreaterThanOrEqualTo(3, bytes.Length);
+        Assert.IsFalse(bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF);
+        var text = new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true).GetString(bytes);
+        Assert.DoesNotContain("鍍", text, StringComparison.Ordinal);
+        StringAssert.Contains(text, "素材库开发预览");
+        StringAssert.Contains(text, "F：打开分类工具");
+    }
+
+    [TestMethod]
+    public void PreviewLocksFClassifierAndShiftDRepeatContracts()
+    {
+        var xaml = Read("src/PixelTart.AssetLibrary.Preview/MainWindow.xaml");
+        var host = Read("src/PixelTart.AssetLibrary.Preview/MainWindow.xaml.cs");
+        var viewModel = Read("src/PixelTart.AssetLibrary.Preview/AssetLibraryPreviewViewModel.cs");
+        StringAssert.Contains(xaml, "F：打开分类工具");
+        StringAssert.Contains(xaml, "Shift+D：重复上次文件夹分类");
+        StringAssert.Contains(host, "Key.F");
+        StringAssert.Contains(host, "Keyboard.Focus(FolderList)");
+        StringAssert.Contains(host, "ModifierKeys.Shift");
+        StringAssert.Contains(viewModel, "RepeatLastFolderMembershipAsync");
+        StringAssert.Contains(viewModel, "_lastFolderId");
+    }
+
+    [TestMethod]
+    public void PreviewThumbnailCacheIsBoundedAndUsesDecodeWidth()
+    {
+        var converter = Read("src/PixelTart.AssetLibrary.Preview/AssetThumbnailConverter.cs");
+        StringAssert.Contains(converter, "MaxEntries = 128");
+        StringAssert.Contains(converter, "ConcurrentDictionary");
+        StringAssert.Contains(converter, "Cache.Count >= MaxEntries");
+        StringAssert.Contains(converter, "DecodePixelWidth = 280");
     }
 
     private static string Read(string relative) => File.ReadAllText(Path.Combine(Root(), relative.Replace('/', Path.DirectorySeparatorChar)));

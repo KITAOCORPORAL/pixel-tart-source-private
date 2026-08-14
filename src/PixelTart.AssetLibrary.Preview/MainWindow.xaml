@@ -18,7 +18,8 @@
             <Border Style="{StaticResource Panel}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel>
                     <Grid><TextBlock Text="虚拟文件夹" Style="{StaticResource Section}" /><Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}" /></Grid>
-                    <ListBox ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}" DisplayMemberPath="Name" Margin="0,8,0,16" AutomationProperties.AutomationId="AssetFolders" />
+                    <TextBlock Text="F：打开分类工具 · Shift+D：重复上次文件夹分类" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,4" />
+                    <ListBox x:Name="FolderList" ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}" DisplayMemberPath="Name" Margin="0,8,0,16" AutomationProperties.AutomationId="AssetFolders" />
                     <TextBlock Text="智能文件夹" Style="{StaticResource Section}" /><ListBox ItemsSource="{Binding SmartFolders}" SelectedItem="{Binding SelectedSmartFolder}" DisplayMemberPath="Name" Margin="0,8,0,16" AutomationProperties.AutomationId="SmartFolders" />
                     <Grid><TextBlock Text="标签" Style="{StaticResource Section}" /><Button Content="+" HorizontalAlignment="Right" Command="{Binding NewTagCommand}" /></Grid>
                     <ListBox ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name" Margin="0,8,0,14" AutomationProperties.AutomationId="AssetTags" />
@@ -28,8 +29,9 @@
             <Border Grid.Column="2" Style="{StaticResource Panel}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <DockPanel Margin="0,0,0,8"><TextBlock Text="素材网格" Style="{StaticResource Section}" /><TextBlock Text="{Binding VisibleCount, StringFormat=可见 {0:N0}}" Style="{StaticResource Caption}" HorizontalAlignment="Right" /></DockPanel>
-                    <ListBox x:Name="AssetGrid" Grid.Row="1" ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.AutomationId="AssetGrid" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
-                        <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel IsItemsHost="True" /></ItemsPanelTemplate></ListBox.ItemsPanel>
+                    <ListBox x:Name="AssetGrid" Grid.Row="1" ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.AutomationId="AssetGrid" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Pixel">
+                        <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem"><Setter Property="Width" Value="186" /><Setter Property="HorizontalContentAlignment" Value="Left" /><Setter Property="Margin" Value="0,0,0,6" /></Style></ListBox.ItemContainerStyle>
+                        <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
                         <ListBox.ItemTemplate><DataTemplate><Border Width="174" Height="160" Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="6" Margin="4" Padding="6"><Grid><Grid.RowDefinitions><RowDefinition Height="116" /><RowDefinition Height="*" /></Grid.RowDefinitions><Border Background="#0D0F10"><Image Source="{Binding SourcePath, Converter={StaticResource Thumb}}" Stretch="UniformToFill" /></Border><StackPanel Grid.Row="1" Margin="2,5,2,0"><TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding DisplayName}" /><TextBlock Text="{Binding MediaType}" Style="{StaticResource Caption}" /></StackPanel></Grid></Border></DataTemplate></ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>

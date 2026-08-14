@@ -16,6 +16,8 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
     private AssetFolder? _selectedFolder;
     private AssetTag? _selectedTag;
     private SmartFolder? _selectedSmartFolder;
+    private Guid? _lastFolderId;
+    private string _lastFolderName = string.Empty;
 
     public AssetLibraryPreviewViewModel(string databasePath)
     {
@@ -36,6 +38,7 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
     public ObservableCollection<SmartFolder> SmartFolders { get; } = [];
     public string SearchText { get => _searchText; set => SetProperty(ref _searchText, value); }
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
+    public string LastFolderName => _lastFolderName;
     public int VisibleCount => Assets.Count;
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
     public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) RaiseActions(); } }
@@ -98,7 +101,24 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
 
     private async Task AddFolderAsync()
     {
-        var result = await _repository.AddToFolderAsync([SelectedAsset!.AssetId], SelectedFolder!.FolderId); LastUndoToken = result.UndoToken; Status = $"已加入虚拟文件夹：{SelectedFolder.Name}"; RaiseActions();
+        var result = await _repository.AddToFolderAsync([SelectedAsset!.AssetId], SelectedFolder!.FolderId);
+        _lastFolderId = SelectedFolder.FolderId; _lastFolderName = SelectedFolder.Name;
+        LastUndoToken = result.UndoToken; Status = $"已加入虚拟文件夹：{SelectedFolder.Name}"; OnPropertyChanged(nameof(LastFolderName)); RaiseActions();
+    }
+
+    /// <summary>Shift+D repeats the last folder classification for the current asset.</summary>
+    public async Task RepeatLastFolderMembershipAsync()
+    {
+        if (_lastFolderId is null || SelectedAsset is null)
+        {
+            Status = "Shift+D：尚无上一次文件夹分类";
+            return;
+        }
+
+        var result = await _repository.AddToFolderAsync([SelectedAsset.AssetId], _lastFolderId.Value);
+        LastUndoToken = result.UndoToken;
+        Status = $"已重复分类到：{_lastFolderName}";
+        RaiseActions();
     }
 
     private async Task AddTagAsync()
@@ -117,6 +137,8 @@ public sealed class AssetLibraryPreviewViewModel : ObservableObject, IAsyncDispo
         _selectedFolder = null; _selectedTag = null; _selectedSmartFolder = null; SearchText = string.Empty;
         OnPropertyChanged(nameof(SelectedFolder)); OnPropertyChanged(nameof(SelectedTag)); OnPropertyChanged(nameof(SelectedSmartFolder)); _ = RefreshAsync();
     }
+
+    public void FocusFolderClassifier() => Status = "F：已打开加入文件夹分类入口";
 
     private async Task RefreshFilterListsAsync()
     {

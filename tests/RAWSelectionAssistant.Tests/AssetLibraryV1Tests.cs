@@ -160,6 +160,27 @@ public sealed class AssetLibraryV1Tests
         Assert.IsFalse(string.IsNullOrWhiteSpace(page.RegexError));
     }
 
+    [TestMethod]
+    public async Task OneHundredThousandMetadataRecordsRemainPageableWithoutMediaBytes()
+    {
+        await using var setup = await TestSetup.CreateAsync();
+        var requests = Enumerable.Range(0, 100_000)
+            .Select(index => new AssetImportRequest(setup.Combine($"synthetic-{index:000000}.metadata")))
+            .ToArray();
+
+        var result = await setup.Repository.ImportAsync(requests);
+
+        Assert.AreEqual(100_000, result.ImportedCount);
+        var first = await setup.Repository.QueryAsync(new(PageSize: 128));
+        Assert.HasCount(128, first.Items);
+        Assert.AreEqual(100_000, first.TotalCount);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(first.NextCursor));
+        Assert.IsFalse(first.Items.Any(item => File.Exists(item.SourcePath)));
+        var second = await setup.Repository.QueryAsync(new(PageSize: 128, Cursor: first.NextCursor));
+        Assert.HasCount(128, second.Items);
+        Assert.IsFalse(first.Items.Select(item => item.AssetId).Intersect(second.Items.Select(item => item.AssetId)).Any());
+    }
+
     private sealed class TestSetup : IAsyncDisposable
     {
         private readonly string _root;
