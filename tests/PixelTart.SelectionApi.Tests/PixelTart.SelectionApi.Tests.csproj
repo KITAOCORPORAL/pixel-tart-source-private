@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest" Version="4.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.0" />
     <ProjectReference Include="..\..\src\PixelTart.SelectionApi.Contracts\PixelTart.SelectionApi.Contracts.csproj" />
     <ProjectReference Include="..\..\src\PixelTart.SelectionApi.Server\PixelTart.SelectionApi.Server.csproj" />
   </ItemGroup>

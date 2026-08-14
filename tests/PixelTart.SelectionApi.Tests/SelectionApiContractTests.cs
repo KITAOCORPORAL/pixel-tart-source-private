@@ -44,9 +44,10 @@ public sealed class SelectionApiContractTests
     {
         var source = Guid.NewGuid();
         var request = new CreateAssetUploadRequest(Guid.NewGuid(), "IMG_001.JPG", 12, "image/jpeg") { SourceAssetId = source };
-        var choice = new SelectionChoiceRequest(true, true) { ExpectedVersion = 3 };
+        var choice = new SelectionChoiceRequest(true, true) { ExpectedSelectionVersion = 3, ExpectedRevision = 8, OperationId = "op-1" };
         Assert.AreEqual(source, request.SourceAssetId);
-        Assert.AreEqual(3, choice.ExpectedVersion);
+        Assert.AreEqual(3, choice.ExpectedSelectionVersion);
+        Assert.AreEqual(8, choice.ExpectedRevision);
     }
 
     private sealed class TempRoot : IDisposable

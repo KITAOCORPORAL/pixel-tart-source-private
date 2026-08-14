@@ -1,5 +1,6 @@
 <view class="page" style="padding-bottom:130rpx">
   <view wx:if="{{confirmed}}" class="muted">选片结果已提交，照片仍可查看。</view><view wx:elif="{{syncing}}" class="muted">正在同步</view>
+  <view wx:if="{{lastError}}" class="muted">{{lastError}}</view>
   <view class="photo-grid">
     <view class="photo-card" wx:for="{{assets}}" wx:key="selectionAssetId">
       <image src="{{item.thumbUrl}}" mode="aspectFill" data-id="{{item.selectionAssetId}}" bindtap="openPhoto" />

@@ -79,6 +79,15 @@ public interface IOnlineSelectionProvider
         CancellationToken cancellationToken = default);
 }
 
+public sealed record LocalDevSelectionAccess(Guid ProjectId, string PublicId, string DevAccessToken, int SelectionVersion, long Revision);
+
+public interface ILocalDevOnlineSelectionProvider : IOnlineSelectionProvider
+{
+    bool TryGetAccess(Guid projectId, out LocalDevSelectionAccess access);
+    Task<OnlineSelectionProviderResult<SelectionRule>> UpdateRuleAsync(SelectionRule rule, CancellationToken cancellationToken = default);
+    Task<OnlineSelectionProviderResult<SelectionFinalResult>> ReopenAsync(Guid projectId, CancellationToken cancellationToken = default);
+}
+
 public interface ISelectionProxyRenderer
 {
     string Name { get; }
