@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -7,9 +8,8 @@ using PixelTart.SelectionApi.Contracts;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.OnlineSelection;
 
-namespace RAWSelectionAssistant.Services.OnlineSelection;
+namespace PixelTart.OnlineSelection.LocalDevPreview;
 
-#if DEBUG
 public sealed class LocalDevOnlineSelectionProvider : ILocalDevOnlineSelectionProvider, IDisposable
 {
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web) { WriteIndented = true };
@@ -252,23 +252,5 @@ public sealed class LocalDevOnlineSelectionProvider : ILocalDevOnlineSelectionPr
     {
         _client.Dispose();
         _accessStoreGate.Dispose();
-    }
-}
-#endif
-
-public static class LocalDevOnlineSelectionProviderFactory
-{
-    public static IOnlineSelectionProvider CreateFromEnvironmentOrNone()
-    {
-#if DEBUG
-        var endpointText = Environment.GetEnvironmentVariable("PIXELTART_SELECTION_LOCALDEV_ENDPOINT");
-        if (Uri.TryCreate(endpointText, UriKind.Absolute, out var endpoint) && endpoint.IsLoopback)
-        {
-            var accessStore = Environment.GetEnvironmentVariable("PIXELTART_SELECTION_LOCALDEV_ACCESS_STORE")
-                ?? Path.Combine(Path.GetTempPath(), "PixelTart_OnlineSelection_LocalDev_Preview", "Desktop", "localdev-access.dpapi");
-            return new LocalDevOnlineSelectionProvider(endpoint, accessStore);
-        }
-#endif
-        return new NoneOnlineSelectionProvider();
     }
 }
