@@ -1,0 +1,6 @@
+<view class="page">
+  <view class="title">{{name}}</view><view class="muted">{{photographer}}</view>
+  <view class="photo-card" style="margin-top:32rpx"><view class="photo-meta">目标 {{targetCount}} 张 · 已选 {{selectedCount}} 张</view><view class="photo-meta muted">截止：{{deadline}}</view></view>
+  <view wx:if="{{confirmed}}" class="muted" style="margin-top:20rpx">选片结果已提交</view>
+  <button class="button" bindtap="enterGallery">进入选片</button>
+</view>

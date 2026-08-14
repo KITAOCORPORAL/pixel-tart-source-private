@@ -1,0 +1,10 @@
+page { background: #f7f3ee; color: #24252a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.page { padding: 32rpx; }
+.title { font-size: 42rpx; font-weight: 700; margin-bottom: 12rpx; }
+.muted { color: #77716d; font-size: 26rpx; }
+.button { margin-top: 24rpx; background: #26282e; color: #fff; border-radius: 16rpx; }
+.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18rpx; }
+.photo-card { background: #fff; border-radius: 16rpx; overflow: hidden; }
+.photo-card image { width: 100%; height: 300rpx; background: #ded9d3; }
+.photo-meta { padding: 16rpx; }
+.bottom-bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 20rpx 32rpx; background: rgba(255,255,255,.96); border-top: 1rpx solid #e1dcd6; }

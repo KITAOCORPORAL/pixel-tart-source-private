@@ -258,6 +258,25 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
+    public async Task JsonWorkspaceStore_RoundTripsLocalChoicesAndComments()
+    {
+        using var temp = new TempDirectory();
+        var project = Project();
+        var asset = Asset(project.Id);
+        var now = DateTimeOffset.UtcNow;
+        var snapshot = new SelectionWorkspaceSnapshot([project], [asset], [SelectionRule.Default(project.Id, project.TargetCount)], [])
+        {
+            Choices = [new SelectionChoice(project.Id, asset.Id, true, true, false, now)],
+            Comments = [new SelectionComment(Guid.NewGuid(), project.Id, asset.Id, "本地备注", now, now)]
+        };
+        var store = new JsonSelectionWorkspaceStore(temp.Combine("selection", "workspace.json"));
+        await store.SaveAsync(snapshot);
+        var loaded = await store.LoadAsync();
+        Assert.IsTrue(loaded.Choices.Single().Selected);
+        Assert.AreEqual("本地备注", loaded.Comments.Single().CustomerNote);
+    }
+
+    [TestMethod]
     public async Task JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal()
     {
         using var temp = new TempDirectory();
@@ -325,6 +344,61 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
+    public void SelectionAsset_UsesExistingIdAsStableSelectionAssetIdAndOptionalSourceReference()
+    {
+        var project = Project();
+        var source = Guid.NewGuid();
+        var asset = Asset(project.Id) with { SourceAssetId = source };
+        Assert.AreEqual(asset.Id, asset.SelectionAssetId);
+        Assert.AreEqual(source, asset.SourceAssetId);
+        Assert.AreEqual("IMG_0012", asset.OriginalStem);
+        var candidate = SelectionAssetFactory.Create(project.Id, new SelectionAssetImportCandidate(@"C:\photos\IMG_0100.JPG", source), 3);
+        Assert.AreEqual(source, candidate.SourceAssetId);
+        Assert.AreEqual("IMG_0100.JPG", candidate.OriginalFileName);
+    }
+
+    [TestMethod]
+    public void ClientChoiceMock_ConfirmsVersionedSnapshotAndCanReopen()
+    {
+        var project = Project();
+        var rule = SelectionRule.Default(project.Id, 1);
+        var asset = Asset(project.Id);
+        var mock = new SelectionClientChoiceMock();
+        mock.SetChoice(project.Id, asset.Id, selected: true, favorite: true);
+        mock.SetComment(project.Id, asset.Id, "保留这张");
+        var snapshot = mock.Confirm(project, [asset], rule);
+        Assert.AreEqual(1, snapshot.SelectionVersion);
+        Assert.IsTrue(snapshot.IsLocked);
+        CollectionAssert.AreEqual(new[] { asset.Id }, snapshot.AssetIds.ToArray());
+        Assert.AreEqual("保留这张", snapshot.AssetItems.Single().CustomerNote);
+        var state = mock.Reopen(project.Id);
+        Assert.IsFalse(state.IsLocked);
+        Assert.IsTrue(mock.GetState(project.Id).IsConfirmed);
+    }
+
+    [TestMethod]
+    public async Task ResultExport_WritesUtf8WithoutBomAndNoLocalPath()
+    {
+        using var temp = new TempDirectory();
+        var project = Project();
+        var item = new SelectionFinalItem(project.Id, Guid.NewGuid(), @"C:\客户\IMG_0012.JPG", true, true, "请保留", false);
+        var snapshot = new FinalSelectionSnapshot(project.Id, 2, [item], DateTimeOffset.UtcNow);
+        var service = new SelectionResultExportService();
+        var txt = await service.ExportTxtAsync(snapshot, temp.Path);
+        var csv = await service.ExportCsvAsync(snapshot, temp.Path);
+        foreach (var path in new[] { txt, csv })
+        {
+            var bytes = await File.ReadAllBytesAsync(path);
+            Assert.IsFalse(bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF);
+            var content = await File.ReadAllTextAsync(path);
+            Assert.DoesNotContain(temp.Path, content, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("客户", content, StringComparison.Ordinal);
+        }
+        StringAssert.Contains(await File.ReadAllTextAsync(txt), "IMG_0012.JPG");
+        StringAssert.Contains(await File.ReadAllTextAsync(csv), "SelectionAssetId");
+    }
+
+    [TestMethod]
     public void ProductionCoreContainsNoHttpLocalhostOrCredentials()
     {
         var root = FindRepoRoot();
@@ -346,6 +420,21 @@ public sealed class OnlineSelectionV1Tests
                 && !path.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase));
         Assert.IsFalse(productionFiles.Any(path => File.ReadAllText(path).Contains("class FakeOnlineSelectionProvider", StringComparison.Ordinal)));
         Assert.IsTrue(File.Exists(Path.Combine(root, "tests", "RAWSelectionAssistant.Tests", "FakeOnlineSelectionProvider.cs")));
+    }
+
+    [TestMethod]
+    public void MiniProgramMock_HasExactlyFivePagesAndCentralizedServices()
+    {
+        var root = FindRepoRoot();
+        var mini = Path.Combine(root, "clients", "wechat-mini-program");
+        Assert.IsTrue(File.Exists(Path.Combine(mini, "services", "api.ts")));
+        Assert.IsTrue(File.Exists(Path.Combine(mini, "services", "selection-store.ts")));
+        using var document = JsonDocument.Parse(File.ReadAllText(Path.Combine(mini, "app.json")));
+        var pages = document.RootElement.GetProperty("pages").EnumerateArray().Select(item => item.GetString()).ToArray();
+        CollectionAssert.AreEqual(new[] { "pages/project/index", "pages/gallery/index", "pages/photo/index", "pages/selected/index", "pages/confirm/index" }, pages);
+        var api = File.ReadAllText(Path.Combine(mini, "services", "api.ts"));
+        Assert.DoesNotContain("appSecret:", api, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("sessionKey:", api, StringComparison.OrdinalIgnoreCase);
     }
 
     private static SelectionProject Project() => SelectionProjectFactory.CreateDraft("城市婚礼", "客户", 30);

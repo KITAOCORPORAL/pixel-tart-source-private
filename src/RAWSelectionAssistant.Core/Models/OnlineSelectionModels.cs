@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text.Json.Serialization;
 
 namespace RAWSelectionAssistant.Core.Models;
 
@@ -71,7 +72,7 @@ public sealed record SelectionProject(
     DateTimeOffset UpdatedAtUtc,
     string? LocalSourceDirectory = null);
 
-public sealed record SelectionAsset(
+public sealed partial record SelectionAsset(
     Guid Id,
     Guid ProjectId,
     string OriginalFileName,
@@ -85,6 +86,58 @@ public sealed record SelectionAsset(
     long? ProxyBytes = null,
     string? CloudAssetId = null,
     string? LastErrorCode = null);
+
+public sealed partial record SelectionAsset
+{
+    /// <summary>Stable project-scoped identity; equivalent to <see cref="Id"/>.</summary>
+    [JsonIgnore]
+    public Guid SelectionAssetId => Id;
+
+    /// <summary>Optional reference to the local Asset Library identity.</summary>
+    public Guid? SourceAssetId { get; init; }
+
+    /// <summary>Filename stem retained for deterministic result matching.</summary>
+    [JsonIgnore]
+    public string OriginalStem => Path.GetFileNameWithoutExtension(OriginalFileName);
+}
+
+public sealed record SelectionAssetImportCandidate(
+    string SourcePath,
+    Guid? SourceAssetId = null,
+    string? OriginalFileName = null);
+
+public static class SelectionAssetFactory
+{
+    public static SelectionAsset Create(
+        Guid projectId,
+        SelectionAssetImportCandidate candidate,
+        int sortOrder,
+        SelectionAssetStatus status = SelectionAssetStatus.LocalOnly,
+        DateTimeOffset? nowUtc = null)
+    {
+        ArgumentNullException.ThrowIfNull(candidate);
+        if (projectId == Guid.Empty) throw new ArgumentException("项目标识不能为空。", nameof(projectId));
+        var path = Path.GetFullPath(candidate.SourcePath);
+        var now = nowUtc ?? DateTimeOffset.UtcNow;
+        return new SelectionAsset(
+            Guid.NewGuid(),
+            projectId,
+            SelectionPrivacyFileName(candidate.OriginalFileName, path),
+            path,
+            null,
+            status,
+            sortOrder,
+            false,
+            now,
+            now)
+        {
+            SourceAssetId = candidate.SourceAssetId
+        };
+    }
+
+    private static string SelectionPrivacyFileName(string? requested, string path) =>
+        string.IsNullOrWhiteSpace(requested) ? Path.GetFileName(path) : Path.GetFileName(requested);
+}
 
 public sealed record SelectionRule(
     Guid ProjectId,
@@ -171,12 +224,58 @@ public sealed record SelectionFinalItem(
     bool Selected,
     bool Favorite,
     string? CustomerNote,
-    bool ExtraSelected);
+    bool ExtraSelected)
+{
+    [JsonIgnore]
+    public Guid SelectionAssetId => ImageId;
+
+    public Guid? SourceAssetId { get; init; }
+}
 
 public sealed record SelectionFinalResult(
     Guid SelectionProjectId,
     DateTimeOffset ConfirmedAtUtc,
-    IReadOnlyList<SelectionFinalItem> Items);
+    IReadOnlyList<SelectionFinalItem> Items)
+{
+    /// <summary>Monotonic client-selection version captured at confirmation.</summary>
+    public int SelectionVersion { get; init; } = 1;
+
+    /// <summary>Confirmed snapshots are locked until the photographer reopens the project.</summary>
+    public bool IsLocked { get; init; } = true;
+
+    public FinalSelectionSnapshot ToSnapshot() => new(
+        SelectionProjectId,
+        SelectionVersion,
+        Items,
+        ConfirmedAtUtc,
+        IsLocked);
+}
+
+public sealed record FinalSelectionSnapshot(
+    Guid ProjectId,
+    int SelectionVersion,
+    IReadOnlyList<SelectionFinalItem> AssetItems,
+    DateTimeOffset ConfirmedAtUtc,
+    bool IsLocked = true)
+{
+    public IReadOnlyList<Guid> AssetIds => AssetItems
+        .Where(item => item.Selected)
+        .Select(item => item.ImageId)
+        .ToArray();
+
+    public SelectionFinalResult ToFinalResult() => new(ProjectId, ConfirmedAtUtc, AssetItems)
+    {
+        SelectionVersion = SelectionVersion,
+        IsLocked = IsLocked
+    };
+}
+
+public sealed record SelectionConfirmationState(
+    Guid ProjectId,
+    int SelectionVersion,
+    bool IsConfirmed,
+    DateTimeOffset? ConfirmedAtUtc,
+    bool IsLocked);
 
 public sealed record SelectionRawMatch(
     SelectionFinalItem Selection,
@@ -210,6 +309,12 @@ public sealed record SelectionWorkspaceSnapshot(
     IReadOnlyList<SelectionRule> Rules,
     IReadOnlyList<SelectionFinalResult> FinalResults)
 {
+    /// <summary>Local client mock choices retained separately from final snapshots.</summary>
+    public IReadOnlyList<SelectionChoice> Choices { get; init; } = [];
+
+    /// <summary>Local client mock comments retained separately from final snapshots.</summary>
+    public IReadOnlyList<SelectionComment> Comments { get; init; } = [];
+
     public static SelectionWorkspaceSnapshot Empty { get; } = new([], [], [], []);
 }
 
