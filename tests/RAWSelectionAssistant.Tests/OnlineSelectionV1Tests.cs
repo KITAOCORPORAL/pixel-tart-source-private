@@ -477,7 +477,7 @@ public sealed class OnlineSelectionV1Tests
         var root = FindRepoRoot();
         var formalApp = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "App.xaml.cs"));
         var previewApp = File.ReadAllText(Path.Combine(root, "src", "PixelTart.OnlineSelection.LocalDevPreview", "App.xaml.cs"));
-        var provider = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Services", "OnlineSelection", "LocalDevOnlineSelectionProvider.cs"));
+        var provider = File.ReadAllText(Path.Combine(root, "src", "PixelTart.OnlineSelection.LocalDevPreview", "LocalDevOnlineSelectionProvider.cs"));
         StringAssert.Contains(formalApp, "OnlineSelectionProviderFactory.CreateDefault()");
         Assert.DoesNotContain("CreateFromEnvironmentOrNone", formalApp, StringComparison.Ordinal);
         StringAssert.Contains(previewApp, "LocalDevOnlineSelectionProvider");
@@ -485,7 +485,7 @@ public sealed class OnlineSelectionV1Tests
         StringAssert.Contains(previewApp, "LocalDevPreviewDialogService");
         StringAssert.Contains(provider, "ProtectedData.Protect");
         StringAssert.Contains(provider, "DataProtectionScope.CurrentUser");
-        StringAssert.Contains(provider, "#if DEBUG");
+        Assert.DoesNotContain("LocalDevOnlineSelectionProvider", formalApp, StringComparison.Ordinal);
         Assert.DoesNotContain("localdev-access.json", provider, StringComparison.OrdinalIgnoreCase);
     }
 

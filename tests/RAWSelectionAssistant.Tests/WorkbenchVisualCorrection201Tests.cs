@@ -66,7 +66,6 @@ public sealed class WorkbenchVisualCorrection201Tests
         };
         foreach (var file in formalRoots.SelectMany(root => Directory.EnumerateFiles(root, "*.*", SearchOption.AllDirectories))
                      .Where(path => (path.EndsWith(".cs") || path.EndsWith(".xaml") || path.EndsWith(".json"))
-                         && !path.EndsWith("LocalDevOnlineSelectionProvider.cs", StringComparison.OrdinalIgnoreCase)
                          && !path.Contains($"{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)
                          && !path.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)))
             DoesNotContain(File.ReadAllText(file), "localhost", "127.0.0.1");
