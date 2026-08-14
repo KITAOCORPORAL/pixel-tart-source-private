@@ -258,6 +258,25 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
+    public async Task JsonWorkspaceStore_RoundTripsLocalChoicesAndComments()
+    {
+        using var temp = new TempDirectory();
+        var project = Project();
+        var asset = Asset(project.Id);
+        var now = DateTimeOffset.UtcNow;
+        var snapshot = new SelectionWorkspaceSnapshot([project], [asset], [SelectionRule.Default(project.Id, project.TargetCount)], [])
+        {
+            Choices = [new SelectionChoice(project.Id, asset.Id, true, true, false, now)],
+            Comments = [new SelectionComment(Guid.NewGuid(), project.Id, asset.Id, "本地备注", now, now)]
+        };
+        var store = new JsonSelectionWorkspaceStore(temp.Combine("selection", "workspace.json"));
+        await store.SaveAsync(snapshot);
+        var loaded = await store.LoadAsync();
+        Assert.IsTrue(loaded.Choices.Single().Selected);
+        Assert.AreEqual("本地备注", loaded.Comments.Single().CustomerNote);
+    }
+
+    [TestMethod]
     public async Task JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal()
     {
         using var temp = new TempDirectory();
