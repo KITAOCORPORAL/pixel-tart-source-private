@@ -25,8 +25,10 @@
     <AssemblyName>KitaoPhotoSelector</AssemblyName>
     <AssemblyName Condition="'$(AcceptanceBuild)' == 'true'">KitaoPhotoSelector.Acceptance</AssemblyName>
     <AssemblyName Condition="'$(UiReviewBuild)' == 'true'">KitaoPhotoSelector.UiReview</AssemblyName>
+    <AssemblyName Condition="'$(ModularHarnessDevPreview)' == 'true'">PixelTart_ModularHarness_V1_DevPreview</AssemblyName>
     <DefineConstants Condition="'$(UiReviewBuild)' == 'true'">$(DefineConstants);UI_REVIEW_BUILD;RC3_REVIEW_ONLY</DefineConstants>
     <DefineConstants Condition="'$(InputRoutingDiagnostics)' == 'true'">$(DefineConstants);INPUT_ROUTING_DIAGNOSTICS</DefineConstants>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true'">$(DefineConstants);MODULAR_HARNESS_DEV_PREVIEW</DefineConstants>
     <RootNamespace>RAWSelectionAssistant</RootNamespace>
     <Version>$(PixelTartVersion)</Version>
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>

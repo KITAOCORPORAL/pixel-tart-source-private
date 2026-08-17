@@ -8,6 +8,7 @@ using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Core.Services.OnlineSelection;
+using RAWSelectionAssistant.Core.Services.Tasks;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
@@ -52,10 +53,10 @@ public partial class App : Application
 
         try
         {
-            _moduleRegistry = CreateModuleRegistry();
+            _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
+            _moduleRegistry = CreateModuleRegistry(_compositionRoot.OperationBridge);
             await _moduleRegistry.InitializeAsync();
             await _moduleRegistry.ActivateAllAsync();
-            _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
             var normalizer = new FileNameNormalizer();
             var inputParser = new InputParserService(_logService);
             var licenseConfiguration = new LicenseConfigurationService().Load();
@@ -250,18 +251,53 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    private static PixelTartModuleRegistry CreateModuleRegistry()
+    private static PixelTartModuleRegistry CreateModuleRegistry(TaskOperationBridge taskOperationBridge)
     {
         var registry = new PixelTartModuleRegistry();
         registry.Capabilities.Register(new("core.navigation", "pixel-tart.kernel", "kernel/v1"));
         registry.Capabilities.Register(new("core.task-center", "pixel-tart.kernel", "kernel/v1"));
         registry.Capabilities.Register(new("core.settings", "pixel-tart.kernel", "kernel/v1"));
         registry.Capabilities.Register(new("core.file-safety", "pixel-tart.kernel", "kernel/v1"));
-        registry.Register(new AssetLibraryModule());
+#if MODULAR_HARNESS_DEV_PREVIEW
+        var enableAssetLibraryPreview = true;
+        var assetLibraryDemoDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR");
+#else
+        const bool enableAssetLibraryPreview = false;
+        string? assetLibraryDemoDirectory = null;
+#endif
+        registry.Register(new AssetLibraryModule(() =>
+        {
+            IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
+            return new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db"),
+                taskOperationBridge,
+                diagnostics,
+                enableAssetLibraryPreview,
+                assetLibraryDemoDirectory);
+        }));
         registry.Register(new RawToolModule());
         registry.Register(new OnlineSelectionModule());
         return registry;
     }
+
+    private static IReadOnlyList<AssetLibraryModuleDiagnostic> BuildModuleDiagnostics(PixelTartModuleRegistry registry) =>
+        registry.Modules
+            .OrderBy(module => module.Manifest.NavigationOrder)
+            .Select(module =>
+            {
+                var manifest = module.Manifest;
+                var state = registry.Diagnostics.FirstOrDefault(item => item.ModuleId.Equals(manifest.ModuleId, StringComparison.OrdinalIgnoreCase))?.State;
+                var automationId = manifest.ModuleId switch
+                {
+                    AssetLibraryModule.ModuleId => "AssetLibraryModuleDiagnostic",
+                    RawToolModule.ModuleId => "RawToolModuleDiagnostic",
+                    OnlineSelectionModule.ModuleId => "OnlineSelectionModuleDiagnostic",
+                    _ => "ModuleDiagnostic"
+                };
+                var text = $"{manifest.DisplayName} · {manifest.ModuleType} · route={manifest.Route ?? "-"} · state={state} · provides={string.Join(", ", manifest.Provides)}";
+                return new AssetLibraryModuleDiagnostic(automationId, text);
+            })
+            .ToArray();
 
     private void ActivateMainWindow()
     {

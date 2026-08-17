@@ -13,6 +13,9 @@ public sealed class OnlineSelectionModule : PixelTartModuleBase
 
     public override void RegisterRoutes(ModuleRegistrationContext context) =>
         context.Routes.Register(new("online-selection", "Online Selection", "workspace", 50, Manifest.ModuleId, static () => new OnlineSelectionPagePlaceholder(), false));
+
+    public override void RegisterCapabilities(ModuleRegistrationContext context) =>
+        context.Capabilities.Register(new("selection.create-from-assets", Manifest.ModuleId, "online-selection/v1"));
 }
 
 public sealed class OnlineSelectionPagePlaceholder

@@ -1,0 +1,72 @@
+{
+  "schema": "pixel-tart-modular-harness-v1-evidence/v1",
+  "synthetic_only": true,
+  "customer_media_allowed": false,
+  "standalone_asset_preview_allowed": false,
+  "expected_executable": "PixelTart_ModularHarness_V1_DevPreview.exe",
+  "expected_window_title": "像素蛋挞 [Modular Harness Dev]",
+  "expected_gui_process_count": 1,
+  "capture_status": "captured",
+  "scenes": [
+    {
+      "file_name": "01_workbench.png",
+      "required_automation_targets": ["WorkbenchRoot"],
+      "visible_assertion": "完整像素蛋挞工作台，窗口标题明确显示 Modular Harness Dev。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "02_toolbox_asset_library.png",
+      "required_automation_targets": ["WorkbenchToolboxButton", "ToolboxAssetLibraryEntry"],
+      "visible_assertion": "从工作台工具入口可以看到且只看到一个用户可识别的素材库入口。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "03_embedded_asset_library.png",
+      "required_automation_targets": ["AssetLibraryPage", "AssetGrid"],
+      "visible_assertion": "素材库在同一个 MainWindow 中显示，合成 JPEG 已进入素材网格。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "04_visual_analysis_palette.png",
+      "required_automation_targets": ["VisualAnalysisTabs", "VisualPaletteTab", "VisualPalettePanel", "FindSimilarPalette"],
+      "visible_assertion": "选中素材的 Inspector 显示真实计算的配色结果。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "05_visual_analysis_histogram.png",
+      "required_automation_targets": ["VisualAnalysisTabs", "VisualHistogramTab", "VisualHistogramPanel"],
+      "visible_assertion": "同一素材的 Inspector 显示真实计算的直方图。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "06_visual_analysis_tone.png",
+      "required_automation_targets": ["VisualAnalysisTabs", "VisualToneTab", "VisualTonePanel"],
+      "visible_assertion": "同一素材的 Inspector 显示真实计算的影调结果。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "07_visual_filter.png",
+      "required_automation_targets": ["VisualFilterChips", "ActiveVisualFilterChips", "AssetGrid"],
+      "visible_assertion": "视觉筛选已生效，Active chips 可见，素材网格结果数量发生真实变化。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "08_visual_similarity.png",
+      "required_automation_targets": ["SearchByColor", "FindSimilarAssets", "VisualMatchScores"],
+      "visible_assertion": "颜色、配色或视觉相似查询返回真实候选和可解释分数。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "09_return_workbench.png",
+      "required_automation_targets": ["WorkbenchRoot"],
+      "visible_assertion": "从嵌入素材库通过全局导航返回同一窗口的工作台。",
+      "expected_gui_process_count": 1
+    },
+    {
+      "file_name": "10_module_diagnostics.png",
+      "required_automation_targets": ["ModuleDiagnostics", "AssetLibraryModuleDiagnostic", "RawToolModuleDiagnostic", "OnlineSelectionModuleDiagnostic"],
+      "visible_assertion": "模块诊断显示 Asset、RAW 与 Online 描述符及 Asset 的 route/provides。",
+      "expected_gui_process_count": 1
+    }
+  ]
+}

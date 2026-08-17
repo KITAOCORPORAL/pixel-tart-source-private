@@ -48,6 +48,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+#if MODULAR_HARNESS_DEV_PREVIEW
+        Title = "像素蛋挞 [Modular Harness Dev]";
+#endif
         if (Application.Current is App app && app.ModuleRegistry is not null)
             AssetLibraryWorkspace.ModuleRegistry = app.ModuleRegistry;
 #if INPUT_ROUTING_DIAGNOSTICS

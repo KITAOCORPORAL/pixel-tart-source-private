@@ -55,6 +55,7 @@ activation*.json
 logs/
 LocalAppData/
 AppData/
+.validation/
 
 # Generated installers and archives outside the versioned manifest folders
 *.exe
