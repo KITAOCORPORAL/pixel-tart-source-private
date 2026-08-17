@@ -200,6 +200,7 @@ public sealed class TaskSnapshotViewModel : ObservableObject
     public string SourceModuleText => DisplayName switch
     {
         var name when name.Contains("联机", StringComparison.OrdinalIgnoreCase) => "来源：联机拍摄",
+        var name when name.Contains("素材库", StringComparison.OrdinalIgnoreCase) => "来源：素材库",
         var name when name.Contains("压缩", StringComparison.OrdinalIgnoreCase) => "来源：批量压缩",
         var name when name.Contains("归片", StringComparison.OrdinalIgnoreCase) => "来源：归片工作区",
         var name when name.Contains("复制", StringComparison.OrdinalIgnoreCase) => "来源：文件复制",

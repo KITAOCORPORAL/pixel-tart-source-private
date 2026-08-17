@@ -81,6 +81,29 @@ public sealed class ModularHarnessTests
         await Assert.ThrowsAsync<InvalidOperationException>(() => registry.InitializeAsync());
     }
 
+    [TestMethod]
+    public void RegistrationFailure_RollsBackEveryRegistry()
+    {
+        var registry = new PixelTartModuleRegistry();
+        Assert.Throws<InvalidOperationException>(() => registry.Register(new TestModule("broken.registration", throwOnRegistration: true)));
+        Assert.IsFalse(registry.Modules.Any(module => module.Manifest.ModuleId == "broken.registration"));
+        Assert.IsFalse(registry.Capabilities.Contains("broken.registration.capability"));
+        Assert.IsFalse(registry.Routes.Items.Any(route => route.ModuleId == "broken.registration"));
+    }
+
+    [TestMethod]
+    public async Task DeactivationFailure_DoesNotPreventOtherModulesFromDeactivating()
+    {
+        var registry = new PixelTartModuleRegistry();
+        registry.Register(new TestModule("healthy.deactivation"));
+        registry.Register(new TestModule("broken.deactivation", throwOnDeactivate: true));
+        await registry.InitializeAsync();
+        await registry.ActivateAllAsync();
+        await registry.DeactivateAllAsync();
+        Assert.AreEqual(ModuleLifecycleState.Deactivated, registry.Diagnostics.Single(item => item.ModuleId == "healthy.deactivation").State);
+        Assert.AreEqual(ModuleLifecycleState.Failed, registry.Diagnostics.Single(item => item.ModuleId == "broken.deactivation").State);
+    }
+
     private static PixelTartModuleRegistry CreateRegistry()
     {
         var registry = new PixelTartModuleRegistry();
@@ -108,13 +131,26 @@ public sealed class ModularHarnessTests
     private sealed class TestModule : PixelTartModuleBase
     {
         private readonly bool _throwOnInitialize;
-        public TestModule(string id, bool throwOnInitialize = false, IReadOnlyList<string>? dependencies = null)
+        private readonly bool _throwOnRegistration;
+        private readonly bool _throwOnDeactivate;
+        public TestModule(string id, bool throwOnInitialize = false, IReadOnlyList<string>? dependencies = null, bool throwOnRegistration = false, bool throwOnDeactivate = false)
             : base(new PixelTartModuleManifest(id, id, "1.0", ModuleType.ServiceModule, null, null, 0, [], [], [], dependencies ?? []))
         {
             _throwOnInitialize = throwOnInitialize;
+            _throwOnRegistration = throwOnRegistration;
+            _throwOnDeactivate = throwOnDeactivate;
+        }
+
+        public override void RegisterCapabilities(ModuleRegistrationContext context)
+        {
+            context.Capabilities.Register(new($"{Manifest.ModuleId}.capability", Manifest.ModuleId, "test/v1"));
+            if (_throwOnRegistration) throw new InvalidOperationException("registration failure");
         }
 
         public override Task InitializeAsync(CancellationToken cancellationToken = default) =>
             _throwOnInitialize ? throw new InvalidOperationException("test failure") : Task.CompletedTask;
+
+        public override Task DeactivateAsync(CancellationToken cancellationToken = default) =>
+            _throwOnDeactivate ? throw new InvalidOperationException("deactivation failure") : Task.CompletedTask;
     }
 }

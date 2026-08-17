@@ -1,0 +1,61 @@
+using System.IO;
+using System.Security.Cryptography;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+
+namespace PixelTart.Modules.AssetLibrary;
+
+internal static class WpfVisualAnalysisDecoder
+{
+    private const long MaximumSnapshotBytes = 512L * 1024 * 1024;
+    public static async Task<AssetVisualAnalysisRequest> DecodeAsync(AssetItem asset, int paletteSize, CancellationToken cancellationToken, PaletteSortMode paletteSort = PaletteSortMode.Weight)
+    {
+        return await Task.Run(() => Decode(asset, paletteSize, paletteSort, cancellationToken), cancellationToken).ConfigureAwait(false);
+    }
+
+    private static AssetVisualAnalysisRequest Decode(AssetItem asset, int paletteSize, PaletteSortMode paletteSort, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var sourcePath = asset.ManagedCopyPath is not null && File.Exists(asset.ManagedCopyPath) ? asset.ManagedCopyPath : asset.SourcePath;
+        if (!File.Exists(sourcePath)) throw new FileNotFoundException("素材文件已移动。", sourcePath);
+        if (asset.MediaType == "Raw") throw new NotSupportedException("RAW 视觉分析需要已有代理图或内嵌预览；本预览不会执行完整 RAW 解码。");
+        byte[] sourceBytes;
+        using (var source = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+        {
+            if (source.Length > MaximumSnapshotBytes) throw new NotSupportedException("本地视觉分析暂不接受大于 512 MiB 的单个栅格文件；请使用已有代理图。");
+            sourceBytes = new byte[checked((int)source.Length)];
+            source.ReadExactly(sourceBytes);
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        var sourceContentHash = Convert.ToHexString(SHA256.HashData(sourceBytes));
+        using var stream = new MemoryStream(sourceBytes, writable: false);
+        var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+        var frame = decoder.Frames[0];
+        var scale = Math.Min(1d, 512d / Math.Max(frame.PixelWidth, frame.PixelHeight));
+        BitmapSource proxy = scale < 1 ? new TransformedBitmap(frame, new ScaleTransform(scale, scale)) : frame;
+        var sourceProfile = "UnknownAssumedSrgb";
+        var converted = false;
+        if (frame.ColorContexts is { Count: > 0 } && frame.ColorContexts[0] is { } sourceContext)
+        {
+            try
+            {
+                var destinationContext = new ColorContext(PixelFormats.Bgra32);
+                proxy = new ColorConvertedBitmap(proxy, sourceContext, destinationContext, PixelFormats.Bgra32);
+                sourceProfile = "EmbeddedICC"; converted = true;
+            }
+            catch (NotSupportedException) { sourceProfile = "EmbeddedICCUnsupportedAssumedSrgb"; }
+            catch (FileFormatException) { sourceProfile = "EmbeddedICCInvalidAssumedSrgb"; }
+        }
+        var formatted = new FormatConvertedBitmap(proxy, PixelFormats.Bgr24, null, 0);
+        var stride = checked(formatted.PixelWidth * 3); var bgr = new byte[checked(stride * formatted.PixelHeight)]; formatted.CopyPixels(bgr, stride, 0);
+        var rgb = new byte[bgr.Length];
+        for (var index = 0; index < bgr.Length; index += 3) { rgb[index] = bgr[index + 2]; rgb[index + 1] = bgr[index + 1]; rgb[index + 2] = bgr[index]; }
+        cancellationToken.ThrowIfCancellationRequested();
+        var pixels = new VisualPixelBuffer(formatted.PixelWidth, formatted.PixelHeight, rgb);
+        var fingerprint = VisualAnalysisFingerprint.Compute(pixels);
+        return new(asset.AssetId, fingerprint, pixels, paletteSize, paletteSort, AnalysisSource: VisualAnalysisSourceKind.RasterOriginal, SourceProfile: sourceProfile, AnalysisProfile: "sRGB IEC61966-2.1", PixelsConvertedToAnalysisProfile: converted || sourceProfile.StartsWith("UnknownAssumedSrgb", StringComparison.Ordinal) || sourceProfile.EndsWith("AssumedSrgb", StringComparison.Ordinal), SourceContentHash: sourceContentHash, PreviousSourceContentHash: asset.ContentHash);
+    }
+
+}

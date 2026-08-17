@@ -531,12 +531,12 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || CurrentPage is not ("Workbench" or "ProjectCenter");
     public string CurrentSurfaceCloseToolTip => IsOnboardingActive ? "退出教程并返回" : "关闭并返回";
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
-        new(ProductToolboxPolicy.Catalog
+        new(ProductCatalogForCurrentBuild()
             .Append(ToolRegistry.Get(ToolId.Toolbox))
             .Select(definition => new ToolboxItemViewModel(definition)));
     public IReadOnlyList<ToolboxItemViewModel> ToolCatalogItems =>
         ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox && item.Availability != FeatureAvailability.Hidden).ToList();
-    public IReadOnlyList<ToolDefinition> ToolMenuItems => ProductToolboxPolicy.Catalog;
+    public IReadOnlyList<ToolDefinition> ToolMenuItems => ProductCatalogForCurrentBuild();
     public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
     public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => CurrentProductQuickTools()
         .Select(id => ToolboxItems.FirstOrDefault(item => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
@@ -972,6 +972,12 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public async Task InitializeAsync()
     {
         Settings = await _settingsService.LoadAsync();
+#if MODULAR_HARNESS_DEV_PREVIEW
+        // The modular harness is a deterministic foreground acceptance host. Keep its
+        // isolated profile on the Workbench instead of starting the product tutorial.
+        Settings.OnboardingLegacyUser = true;
+        Settings.OnboardingUpgradeOfferShown = true;
+#endif
         _weatherState?.Apply(Settings.Weather);
         Settings.ProductQuickToolLayout ??= new ProductQuickToolLayout();
         Settings.PinnedQuickTools = ProductToolboxPolicy.Normalize(Settings.ProductQuickToolLayout.OrderedToolIds);
@@ -2330,8 +2336,14 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         }
     }
 
-    private List<string> CurrentProductQuickTools() =>
-        ProductToolboxPolicy.Normalize(Settings.ProductQuickToolLayout?.OrderedToolIds);
+    private List<string> CurrentProductQuickTools()
+    {
+        var normalized = ProductToolboxPolicy.Normalize(Settings.ProductQuickToolLayout?.OrderedToolIds);
+#if MODULAR_HARNESS_DEV_PREVIEW
+        normalized.RemoveAll(id => string.Equals(id, ToolId.PhotoOrganize.ToString(), StringComparison.OrdinalIgnoreCase));
+#endif
+        return normalized;
+    }
 
     private void NotifyWorkbenchProjectOverview()
     {
@@ -2341,8 +2353,24 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private static bool TryGetProductTool(string? id, out ToolDefinition definition)
     {
+#if MODULAR_HARNESS_DEV_PREVIEW
+        if (string.Equals(id, ToolId.PhotoOrganize.ToString(), StringComparison.OrdinalIgnoreCase))
+        {
+            definition = null!;
+            return false;
+        }
+#endif
         if (ProductToolboxPolicy.TryGet(id, out definition)) return true;
         return ToolRegistry.TryGet(id, out definition) && definition.Id == ToolId.Toolbox;
+    }
+
+    private static IReadOnlyList<ToolDefinition> ProductCatalogForCurrentBuild()
+    {
+#if MODULAR_HARNESS_DEV_PREVIEW
+        return ProductToolboxPolicy.Catalog.Where(definition => definition.Id != ToolId.PhotoOrganize).ToArray();
+#else
+        return ProductToolboxPolicy.Catalog;
+#endif
     }
 
     private void GoToWorkflowStep(object? parameter)

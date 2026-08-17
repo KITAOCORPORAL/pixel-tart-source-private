@@ -35,13 +35,21 @@ public sealed class PixelTartModuleRegistry : IModuleRegistry
     {
         if (!_modules.TryAdd(module.Manifest.ModuleId, module)) throw new InvalidOperationException($"Duplicate module id: {module.Manifest.ModuleId}");
         _states[module.Manifest.ModuleId] = ModuleLifecycleState.Registered;
-        module.RegisterServices(Context);
-        module.RegisterCapabilities(Context);
-        module.RegisterProviders(Context);
-        module.RegisterRoutes(Context);
-        module.RegisterNavigation(Context);
-        module.RegisterTasks(Context);
-        module.RegisterSettings(Context);
+        try
+        {
+            module.RegisterServices(Context);
+            module.RegisterCapabilities(Context);
+            module.RegisterProviders(Context);
+            module.RegisterRoutes(Context);
+            module.RegisterNavigation(Context);
+            module.RegisterTasks(Context);
+            module.RegisterSettings(Context);
+        }
+        catch
+        {
+            RollbackRegistration(module.Manifest.ModuleId);
+            throw;
+        }
     }
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
@@ -82,8 +90,15 @@ public sealed class PixelTartModuleRegistry : IModuleRegistry
         foreach (var module in TopologicalOrder().Reverse())
         {
             if (_states[module.Manifest.ModuleId] != ModuleLifecycleState.Active) continue;
-            await module.DeactivateAsync(cancellationToken).ConfigureAwait(false);
-            _states[module.Manifest.ModuleId] = ModuleLifecycleState.Deactivated;
+            try
+            {
+                await module.DeactivateAsync(cancellationToken).ConfigureAwait(false);
+                _states[module.Manifest.ModuleId] = ModuleLifecycleState.Deactivated;
+            }
+            catch (Exception ex)
+            {
+                SetFailure(module, ex.Message);
+            }
         }
     }
 
@@ -101,6 +116,19 @@ public sealed class PixelTartModuleRegistry : IModuleRegistry
     {
         _states[module.Manifest.ModuleId] = ModuleLifecycleState.Failed;
         _failures[module.Manifest.ModuleId] = message;
+    }
+
+    private void RollbackRegistration(string moduleId)
+    {
+        Capabilities.RemoveByModule(moduleId);
+        Providers.RemoveByModule(moduleId);
+        Routes.RemoveByModule(moduleId);
+        Navigation.RemoveByModule(moduleId);
+        Settings.RemoveByModule(moduleId);
+        Tasks.RemoveByModule(moduleId);
+        _states.Remove(moduleId);
+        _failures.Remove(moduleId);
+        _modules.Remove(moduleId);
     }
 
     private IReadOnlyList<IPixelTartModule> TopologicalOrder()
