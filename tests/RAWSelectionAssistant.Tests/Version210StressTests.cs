@@ -38,13 +38,13 @@ public sealed class Version210StressTests
     [TestMethod]
     public async Task Checkpoint_SurvivesDatabaseRestart()
     {
-        using var setup=await SetupAsync();var task=await CreateTaskAsync(setup.Repository,"checkpoint");await setup.Repository.SaveCheckpointAsync(task,new TaskCheckpoint("copy",42,"item-42",DateTimeOffset.UtcNow));SqliteConnection.ClearAllPools();var reopened=new SqliteTaskRepository(new PixelTartDatabase(setup.Database.DatabasePath));var runtime=await reopened.GetAsync(task);Assert.IsNotNull(runtime);await using var connection=await setup.Database.OpenConnectionAsync();await using var command=connection.CreateCommand();command.CommandText="SELECT Checkpoint FROM TaskSteps WHERE TaskId=$task AND Sequence=42;";command.Parameters.AddWithValue("$task",task.ToString("D"));Assert.AreEqual("item-42",(string)(await command.ExecuteScalarAsync())!);
+        using var setup=await SetupAsync();var task=await CreateTaskAsync(setup.Repository,"checkpoint");await setup.Repository.SaveCheckpointAsync(task,new TaskCheckpoint("copy",42,"item-42",DateTimeOffset.UtcNow));SqliteTestIsolation.ClearPool(setup.Database);var reopened=new SqliteTaskRepository(new PixelTartDatabase(setup.Database.DatabasePath));var runtime=await reopened.GetAsync(task);Assert.IsNotNull(runtime);await using var connection=await setup.Database.OpenConnectionAsync();await using var command=connection.CreateCommand();command.CommandText="SELECT Checkpoint FROM TaskSteps WHERE TaskId=$task AND Sequence=42;";command.Parameters.AddWithValue("$task",task.ToString("D"));Assert.AreEqual("item-42",(string)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
     public async Task DatabaseConnections_AreReleasedAfterParallelReads()
     {
-        using var setup=await SetupAsync();var reads=Enumerable.Range(0,100).Select(async _=>{await using var connection=await setup.Database.OpenConnectionAsync();await using var command=connection.CreateCommand();command.CommandText="SELECT 1;";return Convert.ToInt32(await command.ExecuteScalarAsync());});Assert.IsTrue((await Task.WhenAll(reads)).All(x=>x==1));SqliteConnection.ClearAllPools();File.Move(setup.Database.DatabasePath,setup.Database.DatabasePath+".moved");Assert.IsTrue(File.Exists(setup.Database.DatabasePath+".moved"));
+        using var setup=await SetupAsync();var reads=Enumerable.Range(0,100).Select(async _=>{await using var connection=await setup.Database.OpenConnectionAsync();await using var command=connection.CreateCommand();command.CommandText="SELECT 1;";return Convert.ToInt32(await command.ExecuteScalarAsync());});Assert.IsTrue((await Task.WhenAll(reads)).All(x=>x==1));SqliteTestIsolation.ClearPool(setup.Database);File.Move(setup.Database.DatabasePath,setup.Database.DatabasePath+".moved");Assert.IsTrue(File.Exists(setup.Database.DatabasePath+".moved"));
     }
 
     [TestMethod]
@@ -55,5 +55,5 @@ public sealed class Version210StressTests
 
     private static async Task<Guid> CreateTaskAsync(ITaskRepository repository,string name){var id=Guid.NewGuid();await repository.SaveAsync(new TaskRuntimeState{Definition=new TaskDefinition(id,null,"stress",name,"",null,DateTimeOffset.UtcNow),State=TaskLifecycleState.Pending});return id;}
     private static async Task<Setup> SetupAsync(){var temp=new TempDirectory();var db=new PixelTartDatabase(temp.Combine("db.sqlite"));await new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups"))).MigrateAsync();return new(temp,db,new SqliteTaskRepository(db));}
-    private sealed class Setup:IDisposable{private readonly TempDirectory _temp;public Setup(TempDirectory temp,PixelTartDatabase database,SqliteTaskRepository repository){_temp=temp;Database=database;Repository=repository;}public PixelTartDatabase Database{get;}public SqliteTaskRepository Repository{get;}public void Dispose(){SqliteConnection.ClearAllPools();_temp.Dispose();}}
+    private sealed class Setup:IDisposable{private readonly TempDirectory _temp;public Setup(TempDirectory temp,PixelTartDatabase database,SqliteTaskRepository repository){_temp=temp;Database=database;Repository=repository;}public PixelTartDatabase Database{get;}public SqliteTaskRepository Repository{get;}public void Dispose(){SqliteTestIsolation.ClearPool(Database);_temp.Dispose();}}
 }

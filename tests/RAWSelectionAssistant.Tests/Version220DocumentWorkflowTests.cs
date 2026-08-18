@@ -568,7 +568,7 @@ public sealed class Version220DocumentWorkflowTests
             new(repository, Bookings, Projects, Planner, executor ?? Executor, Verification, Undo, Bridge, Audit);
         public IFileOperationExecutor CreateRejectedExecutor(string errorCode, bool requiresAttention) =>
             new FileOperationExecutor(new RejectedFileOperationValidator(errorCode, requiresAttention), Verification, new SqliteUndoJournalRepository(Database), Database);
-        public void Dispose() { SqliteConnection.ClearAllPools(); Temp.Dispose(); }
+        public void Dispose() { SqliteTestIsolation.ClearPool(Database); Temp.Dispose(); }
     }
 
     private sealed class RejectedFileOperationValidator(string errorCode, bool requiresAttention) : IFileOperationValidator

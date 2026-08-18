@@ -285,6 +285,6 @@ public sealed class Version220BookingDomainTests
     {
         public PixelTartDatabase Database { get; } = database;
         public ShootBookingService Service { get; } = service;
-        public void Dispose() { SqliteConnection.ClearAllPools(); temp.Dispose(); }
+        public void Dispose() { SqliteTestIsolation.ClearPool(Database); temp.Dispose(); }
     }
 }
