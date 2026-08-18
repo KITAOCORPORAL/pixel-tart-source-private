@@ -5,18 +5,19 @@
              xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary"
              Loaded="OnLoaded"
              Unloaded="OnUnloaded"
+             SizeChanged="OnSizeChanged"
              PreviewKeyDown="OnPreviewKeyDown"
              Focusable="True"
              AutomationProperties.AutomationId="AssetLibraryPage"
-             AutomationProperties.Name="素材库">
+             AutomationProperties.Name="素材库工作区">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
         <Style x:Key="AssetPanel" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="0" />
             <Setter Property="Padding" Value="12" />
         </Style>
         <Style x:Key="AssetCaption" TargetType="TextBlock">
@@ -29,51 +30,68 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="18,14,18,12">
+    <Grid Background="{DynamicResource ContentBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="12" />
+            <RowDefinition Height="1" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Margin="14,10,14,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="290" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="48" />
             </Grid.ColumnDefinitions>
-            <Button Content="‹ 返回工作台"
-                    Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                    CommandParameter="Workbench"
-                    AutomationProperties.AutomationId="ReturnToWorkbench" />
-            <StackPanel Grid.Column="1" Margin="12,0,18,0">
+            <StackPanel Grid.ColumnSpan="4" Margin="0,0,0,7">
                 <TextBlock Text="素材库" FontSize="24" FontWeight="SemiBold" />
                 <TextBlock Text="内置 Workspace Module · 本地视觉检索 · 引用导入默认不移动、不改名、不删除源文件"
                            Style="{StaticResource AssetCaption}" />
             </StackPanel>
-            <TextBox Grid.Column="2"
+            <TextBox x:Name="AssetLibrarySearchBox" Grid.Row="1" Grid.Column="0" MinWidth="120" Margin="0,0,8,0"
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      ToolTip="搜索名称、标签、文件夹与备注"
                      AutomationProperties.AutomationId="AssetLibrarySearch"
                      VerticalAlignment="Center" />
-            <Button Grid.Column="3" Content="导入引用" Margin="8,0,0,0"
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="{Binding OrganizationPaneToggleLabel}" Command="{Binding ToggleOrganizationPaneCommand}"
+                        ToolTip="展开或收起左侧组织栏" AutomationProperties.AutomationId="ToggleAssetOrganizationPane" />
+                <Button Content="{Binding InspectorPaneToggleLabel}" Command="{Binding ToggleInspectorPaneCommand}" Margin="4,0,0,0"
+                        ToolTip="展开或收起右侧检查器" AutomationProperties.AutomationId="ToggleAssetInspectorPane" />
+                <Button Content="{Binding InspectorPinLabel}" Command="{Binding ToggleInspectorPinCommand}" Margin="4,0,0,0"
+                        ToolTip="固定检查器；空间不足时优先保留，极窄窗口仍会收起" AutomationProperties.AutomationId="PinAssetInspectorPane" />
+            </StackPanel>
+            <Button Grid.Row="1" Grid.Column="2" Content="导入引用" Margin="8,0,0,0"
                     Style="{DynamicResource PrimaryButton}"
                     Command="{Binding ImportCommand}"
                     AutomationProperties.AutomationId="AssetLibraryImport" />
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="330" />
+                <ColumnDefinition x:Name="AssetOrganizationColumn"
+                                  Width="{Binding OrganizationPaneColumnWidth}"
+                                  MinWidth="{Binding OrganizationPaneMinimumWidth}"
+                                  MaxWidth="{Binding OrganizationPaneMaximumWidth}" />
+                <ColumnDefinition Width="{Binding OrganizationSplitterColumnWidth}" />
+                <ColumnDefinition x:Name="AssetCollectionColumn" Width="*" MinWidth="360" />
+                <ColumnDefinition Width="{Binding InspectorSplitterColumnWidth}" />
+                <ColumnDefinition x:Name="AssetInspectorColumn"
+                                  Width="{Binding InspectorPaneColumnWidth}"
+                                  MinWidth="{Binding InspectorPaneMinimumWidth}"
+                                  MaxWidth="{Binding InspectorPaneMaximumWidth}" />
             </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource AssetPanel}">
+            <Border Style="{StaticResource AssetPanel}"
+                    Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    BorderThickness="0,0,1,0"
+                    AutomationProperties.AutomationId="AssetOrganizationPane">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
                         <TextBlock Text="分类" Style="{StaticResource AssetSection}" />
@@ -110,7 +128,15 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Column="2" Style="{StaticResource AssetPanel}">
+            <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
+                          DragCompleted="OnPaneSplitterDragCompleted"
+                          PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
+                          Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          AutomationProperties.AutomationId="AssetOrganizationSplitter"
+                          AutomationProperties.Name="调整组织栏宽度" />
+
+            <Border Grid.Column="2" Style="{StaticResource AssetPanel}" AutomationProperties.AutomationId="AssetCollectionPane">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -123,7 +149,7 @@
                             <TextBlock Text="素材网格" Style="{StaticResource AssetSection}" />
                             <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{StaticResource AssetCaption}" Margin="8,2,0,0" />
                         </StackPanel>
-                        <Slider Grid.Column="1" Minimum="120" Maximum="260" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小" />
+                        <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小" />
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" AutomationProperties.AutomationId="VisualFilterChips">
@@ -162,11 +188,17 @@
                              VirtualizingPanel.VirtualizationMode="Recycling"
                              AutomationProperties.AutomationId="AssetGrid">
                         <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate><local:VirtualizingWrapPanel ItemWidth="178" ItemHeight="214" /></ItemsPanelTemplate>
+                            <ItemsPanelTemplate>
+                                <local:VirtualizingWrapPanel
+                                    ItemWidth="{Binding DataContext.ThumbnailItemWidth, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                    ItemHeight="{Binding DataContext.ThumbnailItemHeight, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Width="170" Height="206" Background="{DynamicResource SurfaceSecondaryBrush}"
+                                <Border Width="{Binding DataContext.ThumbnailWidth, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                        Height="{Binding DataContext.ThumbnailCardHeight, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                        Background="{DynamicResource SurfaceSecondaryBrush}"
                                         BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="6" Padding="5" Margin="3">
                                     <Border.ContextMenu>
                                         <ContextMenu DataContext="{Binding}" AutomationProperties.AutomationId="AssetVisualContextMenu">
@@ -200,16 +232,70 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                    <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource ContentBackgroundBrush}"
+                            Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            AutomationProperties.AutomationId="AssetLibraryLoadingState">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
+                            <ProgressBar IsIndeterminate="True" Width="180" Height="5" />
+                            <TextBlock Text="正在加载素材库…" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,0" />
+                            <TextBlock Text="正在读取本地索引与已保存的视觉分析，不会修改源文件。" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2" Panel.ZIndex="5" Background="{DynamicResource ContentBackgroundBrush}"
+                            Visibility="{Binding HasLoadError, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            AutomationProperties.AutomationId="AssetLibraryErrorState">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
+                            <TextBlock Text="素材库暂时无法加载" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding LoadErrorMessage}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
+                            <Button Content="重试" Command="{Binding RetryLoadCommand}" HorizontalAlignment="Center"
+                                    AutomationProperties.AutomationId="RetryAssetLibraryLoad" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2" Panel.ZIndex="3" Background="{DynamicResource ContentBackgroundBrush}"
+                            Visibility="{Binding IsEmptyStateVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            AutomationProperties.AutomationId="AssetLibraryEmptyState">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
+                            <TextBlock Text="{Binding EmptyStateTitle}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding EmptyStateDescription}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{DynamicResource PrimaryButton}" />
+                                <Button Content="清除条件" Click="ClearFilters_Click" Margin="7,0,0,0"
+                                        Visibility="{Binding HasActiveQuery, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </Grid>
             </Border>
 
-            <Border Grid.Column="4" Style="{StaticResource AssetPanel}">
+            <GridSplitter Grid.Column="3" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
+                          DragCompleted="OnPaneSplitterDragCompleted"
+                          PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
+                          Visibility="{Binding IsInspectorPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          AutomationProperties.AutomationId="AssetInspectorSplitter"
+                          AutomationProperties.Name="调整检查器宽度" />
+
+            <Border Grid.Column="4" Style="{StaticResource AssetPanel}"
+                    Visibility="{Binding IsInspectorPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    BorderThickness="1,0,0,0"
+                    AutomationProperties.AutomationId="AssetInspectorPane">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" AutomationProperties.AutomationId="AssetInspectorScroll">
                     <StackPanel>
                         <DockPanel>
                             <TextBlock Text="检查器" Style="{StaticResource AssetSection}" />
                             <TextBlock Text="{Binding SelectionCount, StringFormat={}{0} 项}" Style="{StaticResource AssetCaption}" HorizontalAlignment="Right" />
                         </DockPanel>
+                        <Border Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="6" Padding="12" Margin="0,8,0,2"
+                                Visibility="{Binding IsSelectionEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                AutomationProperties.AutomationId="AssetInspectorEmptyState">
+                            <StackPanel>
+                                <TextBlock Text="尚未选择素材" FontWeight="SemiBold" />
+                                <TextBlock Text="选择一项查看预览和视觉分析；多选时不会用首项冒充整组结果。" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,4,0,0" />
+                            </StackPanel>
+                        </Border>
                         <Border Height="150" Background="{DynamicResource ContentBackgroundBrush}" Margin="0,8">
                             <Image local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
                         </Border>

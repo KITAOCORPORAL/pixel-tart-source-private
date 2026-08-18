@@ -3,6 +3,11 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PixelTart.Kernel;
@@ -325,6 +330,378 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     [TestMethod]
+    public async Task WorkspaceLayoutRestoresClampsCollapsesAndRespondsToNarrowWidth()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedLayout", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var state = new RAWSelectionAssistant.Core.Models.AssetLibraryWorkspaceSettings
+                {
+                    OrganizationPaneWidth = 286,
+                    InspectorPaneWidth = 414,
+                    ThumbnailWidth = 232
+                };
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                var viewModel = page.ViewModel;
+
+                Assert.AreEqual(286d, viewModel.OrganizationPaneWidth);
+                Assert.AreEqual(414d, viewModel.InspectorPaneWidth);
+                Assert.AreEqual(232d, viewModel.ThumbnailWidth);
+
+                viewModel.UpdateViewportWidth(1000);
+                Assert.IsTrue(viewModel.IsOrganizationPaneVisible);
+                Assert.IsFalse(viewModel.IsInspectorPaneVisible);
+                Assert.AreEqual(new GridLength(0), viewModel.InspectorPaneColumnWidth);
+
+                viewModel.UpdateViewportWidth(1280);
+                Assert.IsTrue(viewModel.IsInspectorPaneVisible);
+                viewModel.UpdatePaneWidths(12, 900);
+                Assert.AreEqual(180d, state.OrganizationPaneWidth);
+                Assert.AreEqual(520d, state.InspectorPaneWidth);
+
+                viewModel.ToggleOrganizationPaneCommand.Execute(null);
+                Assert.IsTrue(state.OrganizationPaneCollapsed);
+                Assert.AreEqual(new GridLength(0), viewModel.OrganizationPaneColumnWidth);
+                viewModel.ToggleOrganizationPaneCommand.Execute(null);
+                Assert.IsFalse(state.OrganizationPaneCollapsed);
+
+                viewModel.ToggleInspectorPinCommand.Execute(null);
+                Assert.IsTrue(state.InspectorPinned);
+                viewModel.UpdateViewportWidth(820);
+                Assert.IsFalse(viewModel.IsInspectorPaneVisible);
+                Assert.AreEqual("检查器（窗口过窄）", viewModel.InspectorPaneToggleLabel);
+                viewModel.UpdateViewportWidth(900);
+                Assert.IsTrue(viewModel.IsInspectorPaneVisible);
+                Assert.IsFalse(viewModel.ToggleInspectorPaneCommand.CanExecute(null));
+
+                viewModel.ThumbnailWidth = 248;
+                Assert.AreEqual(248d, state.ThumbnailWidth);
+                viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public async Task RealSplitterDragKeepsSideWidthBindingsAndCollapseRestoresTheDraggedWidths()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedSplitter", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var state = new RAWSelectionAssistant.Core.Models.AssetLibraryWorkspaceSettings
+                {
+                    OrganizationPaneWidth = 286,
+                    InspectorPaneWidth = 414
+                };
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                using var presentation = AttachToPresentationSource(page, 1500, 820);
+                ArrangePage(page, 1500, 820);
+
+                var workspace = FindVisualByAutomationId<Grid>(page, "AssetLibraryThreePaneWorkspace");
+                var organizationColumn = workspace.ColumnDefinitions[0];
+                var collectionColumn = workspace.ColumnDefinitions[2];
+                var inspectorColumn = workspace.ColumnDefinitions[4];
+                var organizationSplitter = FindVisualByAutomationId<GridSplitter>(page, "AssetOrganizationSplitter");
+                var inspectorSplitter = FindVisualByAutomationId<GridSplitter>(page, "AssetInspectorSplitter");
+
+                Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(collectionColumn.Width.IsStar);
+
+                RaiseSplitterDrag(organizationSplitter, horizontalChange: 36);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => state.OrganizationPaneWidth > 286 && BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty),
+                    TimeSpan.FromSeconds(1)));
+                var draggedOrganizationWidth = state.OrganizationPaneWidth;
+                Assert.IsGreaterThan(286d, draggedOrganizationWidth);
+                Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty),
+                    "A real GridSplitter drag must not detach the responsive organization-column binding.");
+                Assert.IsTrue(collectionColumn.Width.IsStar, "The elastic collection column must remain star-sized after dragging.");
+
+                // Exercise WPF's real keyboard path: KeyDown changes the columns and PreviewKeyUp
+                // schedules the same deferred persistence repair without a test-side layout pass.
+                RaiseSplitterKeyboardAdjustment(organizationSplitter, Key.Right);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => Math.Abs(state.OrganizationPaneWidth - draggedOrganizationWidth) > .5 && BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty),
+                    TimeSpan.FromSeconds(1)));
+                var keyboardAdjustedOrganizationWidth = state.OrganizationPaneWidth;
+                var retainedInspectorWidth = state.InspectorPaneWidth;
+                Assert.AreNotEqual(draggedOrganizationWidth, keyboardAdjustedOrganizationWidth);
+                Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(collectionColumn.Width.IsStar, "The elastic collection column must remain star-sized after both drags.");
+
+                Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(collectionColumn.Width.IsStar,
+                    "Keyboard splitter adjustment must restore the elastic collection star column.");
+
+                page.ViewModel.ToggleOrganizationPaneCommand.Execute(null);
+                page.UpdateLayout();
+                Assert.AreEqual(0d, organizationColumn.ActualWidth, .1);
+                page.ViewModel.UpdateViewportWidth(1500);
+                page.ViewModel.ToggleOrganizationPaneCommand.Execute(null);
+                page.UpdateLayout();
+                Assert.AreEqual(keyboardAdjustedOrganizationWidth, organizationColumn.ActualWidth, 1d);
+
+                page.ViewModel.ToggleInspectorPaneCommand.Execute(null);
+                page.UpdateLayout();
+                Assert.AreEqual(0d, inspectorColumn.ActualWidth, .1);
+                page.ViewModel.UpdateViewportWidth(1500);
+                page.ViewModel.ToggleInspectorPaneCommand.Execute(null);
+                page.UpdateLayout();
+                Assert.AreEqual(retainedInspectorWidth, inspectorColumn.ActualWidth, 1d);
+                Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
+                Assert.IsTrue(collectionColumn.Width.IsStar);
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public async Task MaximumPersistedPaneWidthsAndPinnedNarrowLayoutKeepTheCollectionInsideTheWorkspace()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedPaneBounds", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var state = new RAWSelectionAssistant.Core.Models.AssetLibraryWorkspaceSettings
+                {
+                    OrganizationPaneWidth = 420,
+                    InspectorPaneWidth = 520,
+                    InspectorPinned = true
+                };
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+
+                foreach (var width in new[] { 1400d, 1280d, 900d, 820d })
+                {
+                    ArrangePage(page, width, 720);
+                    var workspace = FindVisualByAutomationId<Grid>(page, "AssetLibraryThreePaneWorkspace");
+                    var collection = FindVisualByAutomationId<Border>(page, "AssetCollectionPane");
+                    var organization = FindVisualByAutomationId<Border>(page, "AssetOrganizationPane");
+                    var inspector = FindVisualByAutomationId<Border>(page, "AssetInspectorPane");
+
+                    Assert.IsGreaterThanOrEqualTo(360d, collection.ActualWidth,
+                        $"The collection fell below its 360 DIP minimum at a {width} DIP viewport.");
+                    AssertElementStaysInside(workspace, collection, width);
+                    AssertElementStaysInside(workspace, organization, width);
+                    AssertElementStaysInside(workspace, inspector, width);
+                }
+
+                Assert.AreEqual(420d, state.OrganizationPaneWidth,
+                    "Responsive hiding or temporary fitting must not overwrite the persisted organization width.");
+                Assert.AreEqual(520d, state.InspectorPaneWidth,
+                    "Responsive hiding or temporary fitting must not overwrite the persisted inspector width.");
+                Assert.IsTrue(state.InspectorPinned);
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public async Task EmptyVisualResultClearConditionsReturnsToTheNormalCollection()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedClearAll", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var source = Path.Combine(root, "analyzed-reference.jpg");
+                WriteSyntheticJpeg(source);
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    []);
+                page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                page.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                var asset = page.ViewModel.AssetCards.Single().Asset;
+                page.ViewModel.ExecuteVisualContextActionAsync(asset, VisualContextAction.Analyze).GetAwaiter().GetResult();
+                Assert.IsNotNull(page.ViewModel.SelectedFeatures);
+
+                ArrangePage(page, 1280, 820);
+                var dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
+                var previousContext = SynchronizationContext.Current;
+                try
+                {
+                    SynchronizationContext.SetSynchronizationContext(new System.Windows.Threading.DispatcherSynchronizationContext(dispatcher));
+                    page.ViewModel.VisualChipCommand.Execute("NotAnalyzed");
+                    Assert.IsTrue(PumpDispatcherUntil(
+                        () => page.ViewModel.VisualChipCommand.CanExecute("NotAnalyzed") &&
+                              page.ViewModel.IsTemporaryVisualMode &&
+                              !page.ViewModel.IsLoading &&
+                              page.ViewModel.AssetCards.Count == 0,
+                        TimeSpan.FromSeconds(10)),
+                        "The deterministic visual filter did not reach an empty temporary result.");
+                    page.UpdateLayout();
+                    Assert.IsTrue(page.ViewModel.IsEmptyStateVisible);
+                    Assert.AreEqual(Visibility.Visible,
+                        FindVisualByAutomationId<Border>(page, "AssetLibraryEmptyState").Visibility);
+
+                    var clearConditions = FindVisualChildren<Button>(page)
+                        .Single(button => string.Equals(button.Content as string, "清除条件", StringComparison.Ordinal));
+                    clearConditions.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    Assert.IsTrue(PumpDispatcherUntil(
+                        () => !page.ViewModel.IsTemporaryVisualMode &&
+                              !page.ViewModel.IsLoading &&
+                              page.ViewModel.AssetCards.Count == 1,
+                        TimeSpan.FromSeconds(10)),
+                        "Clear conditions did not exit the temporary visual mode and restore the normal collection.");
+                }
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(previousContext);
+                }
+
+                Assert.HasCount(0, page.ViewModel.ActiveVisualChips);
+                Assert.IsFalse(page.ViewModel.HasActiveQuery);
+                Assert.AreEqual(asset.AssetId, page.ViewModel.AssetCards.Single().Asset.AssetId);
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    [DataRow(1366d, 768d, 1d)]
+    [DataRow(1366d, 768d, 1.25d)]
+    [DataRow(1366d, 768d, 1.5d)]
+    [DataRow(1366d, 768d, 1.75d)]
+    [DataRow(1920d, 1080d, 1d)]
+    [DataRow(1920d, 1080d, 1.25d)]
+    [DataRow(1920d, 1080d, 1.5d)]
+    [DataRow(1920d, 1080d, 1.75d)]
+    [DataRow(2560d, 1440d, 1d)]
+    [DataRow(2560d, 1440d, 1.25d)]
+    [DataRow(2560d, 1440d, 1.5d)]
+    [DataRow(2560d, 1440d, 1.75d)]
+    public async Task WorkspaceKeepsTheCollectionUsableAcrossRequiredDisplayScales(double physicalWidth, double physicalHeight, double scale)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedDpi", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var logicalShellWidth = physicalWidth / scale;
+                var logicalShellHeight = physicalHeight / scale;
+                var compactPrimaryNavigation = logicalShellWidth < 1100d;
+                var navigationWidth = compactPrimaryNavigation ? 60d : 172d;
+                var contentWidth = Math.Max(720d - navigationWidth, logicalShellWidth - navigationWidth);
+                var contentHeight = Math.Max(400d, logicalShellHeight);
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    []);
+
+                page.ViewModel.UpdateViewportWidth(contentWidth);
+                page.Measure(new Size(contentWidth, contentHeight));
+                page.Arrange(new Rect(0, 0, contentWidth, contentHeight));
+                page.UpdateLayout();
+
+                var workspace = FindVisualByAutomationId<Grid>(page, "AssetLibraryThreePaneWorkspace");
+                var collection = FindVisualByAutomationId<Border>(page, "AssetCollectionPane");
+                var search = FindVisualByAutomationId<TextBox>(page, "AssetLibrarySearch");
+                Assert.AreEqual(contentWidth, workspace.ActualWidth, 1d);
+                Assert.IsGreaterThanOrEqualTo(360d, collection.ActualWidth,
+                    $"Collection became unusable at {physicalWidth}x{physicalHeight} / {scale:P0}.");
+                Assert.IsGreaterThanOrEqualTo(120d, search.ActualWidth,
+                    $"Search became unusable at {physicalWidth}x{physicalHeight} / {scale:P0}.");
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public async Task WorkspaceShowsLoadingThenFirstEmptyAndExplicitInitializationErrorStates()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedStates", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var emptyPage = new AssetLibraryPage(
+                    Path.Combine(root, "empty", "asset-library.db"),
+                    new TaskOperationBridge(),
+                    []);
+                Assert.IsTrue(emptyPage.ViewModel.IsLoading);
+                emptyPage.Measure(new Size(1280, 820));
+                emptyPage.Arrange(new Rect(0, 0, 1280, 820));
+                emptyPage.UpdateLayout();
+                Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryLoadingState").Visibility);
+
+                emptyPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                emptyPage.UpdateLayout();
+                Assert.IsFalse(emptyPage.ViewModel.IsLoading);
+                Assert.IsFalse(emptyPage.ViewModel.HasLoadError);
+                Assert.IsTrue(emptyPage.ViewModel.IsEmptyStateVisible);
+                Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryEmptyState").Visibility);
+                emptyPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+
+                var blockedParent = Path.Combine(root, "blocked-parent");
+                File.WriteAllText(blockedParent, "not a directory");
+                var errorPage = new AssetLibraryPage(
+                    Path.Combine(blockedParent, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    []);
+                errorPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                errorPage.Measure(new Size(1280, 820));
+                errorPage.Arrange(new Rect(0, 0, 1280, 820));
+                errorPage.UpdateLayout();
+                Assert.IsFalse(errorPage.ViewModel.IsLoading);
+                Assert.IsTrue(errorPage.ViewModel.HasLoadError);
+                Assert.IsFalse(errorPage.ViewModel.IsEmptyStateVisible);
+                Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(errorPage, "AssetLibraryErrorState").Visibility);
+                Assert.IsNotNull(FindVisualByAutomationId<Button>(errorPage, "RetryAssetLibraryLoad").Command);
+                errorPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
     public void EmbeddedPageExposesForegroundAndDiagnosticsAutomationSeamsWithoutStandaloneProcess()
     {
         var root = FindRepositoryRoot();
@@ -337,11 +714,20 @@ public sealed class EmbeddedAssetLibraryWpfTests
         var hexBrushConverter = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "HexToBrushConverter.cs"));
         foreach (var id in new[]
         {
-            "AssetLibraryPage", "ReturnToWorkbench", "AssetLibraryImport", "AssetGrid", "VisualFilterChips",
+            "AssetLibraryPage", "AssetLibraryImport", "AssetLibraryThreePaneWorkspace", "AssetOrganizationPane",
+            "AssetOrganizationSplitter", "AssetCollectionPane", "AssetInspectorSplitter", "AssetInspectorPane",
+            "ToggleAssetOrganizationPane", "ToggleAssetInspectorPane", "PinAssetInspectorPane",
+            "AssetLibraryLoadingState", "AssetLibraryEmptyState", "AssetLibraryErrorState", "RetryAssetLibraryLoad",
+            "AssetGrid", "VisualFilterChips",
             "VisualPaletteTab", "VisualHistogramTab", "VisualToneTab", "SearchByColor", "FindSimilarPalette",
             "FindSimilarAssets", "VisualSmartFolderBuilder", "AnalyzeVisibleAssets", "ModuleDiagnostics"
         })
             StringAssert.Contains(xaml, $"AutomationProperties.AutomationId=\"{id}\"");
+        Assert.DoesNotContain("AutomationProperties.AutomationId=\"ReturnToWorkbench\"", xaml, StringComparison.Ordinal);
+        foreach (var token in new[] { "public void FocusSearch()", "AssetLibrarySearchBox.Focus()", "AssetLibrarySearchBox.SelectAll()" })
+            StringAssert.Contains(page, token);
+        foreach (var token in new[] { "AssetLibraryShellMinWidth = 720d", "AssetLibraryShellMinHeight = 400d", "ApplySurfaceMinimumSize(e.CurrentPage)" })
+            StringAssert.Contains(File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "MainWindow.xaml.cs")), token);
         StringAssert.Contains(viewModel, "_taskOperationBridge.RunAsync(");
         Assert.DoesNotContain("Process.Start", page, StringComparison.Ordinal);
         Assert.DoesNotContain("new Window", page, StringComparison.Ordinal);
@@ -401,6 +787,60 @@ public sealed class EmbeddedAssetLibraryWpfTests
     private static T FindVisualByAutomationId<T>(DependencyObject root, string automationId)
         where T : FrameworkElement =>
         FindVisualChildren<T>(root).Single(element => AutomationProperties.GetAutomationId(element) == automationId);
+
+    private static void ArrangePage(AssetLibraryPage page, double width, double height)
+    {
+        page.ViewModel.UpdateViewportWidth(width);
+        page.Measure(new Size(width, height));
+        page.Arrange(new Rect(0, 0, width, height));
+        page.UpdateLayout();
+    }
+
+    private static HwndSource AttachToPresentationSource(FrameworkElement content, int width, int height)
+    {
+        var source = new HwndSource(new HwndSourceParameters("PixelTartAssetLibrarySplitterTest")
+        {
+            Width = width,
+            Height = height,
+            PositionX = -32000,
+            PositionY = -32000,
+            WindowStyle = unchecked((int)0x80000000)
+        });
+        source.RootVisual = new AdornerDecorator { Child = content };
+        return source;
+    }
+
+    private static void RaiseSplitterDrag(GridSplitter splitter, double horizontalChange)
+    {
+        Assert.IsTrue(splitter.ShowsPreview, "The regression must exercise the production preview-drag path.");
+        splitter.RaiseEvent(new DragStartedEventArgs(0, 0) { RoutedEvent = Thumb.DragStartedEvent });
+        splitter.RaiseEvent(new DragDeltaEventArgs(horizontalChange, 0) { RoutedEvent = Thumb.DragDeltaEvent });
+        splitter.RaiseEvent(new DragCompletedEventArgs(horizontalChange, 0, false) { RoutedEvent = Thumb.DragCompletedEvent });
+    }
+
+    private static void RaiseSplitterKeyboardAdjustment(GridSplitter splitter, Key key)
+    {
+        var inputSource = PresentationSource.FromVisual(splitter)
+            ?? throw new InvalidOperationException("The splitter must be attached to a presentation source.");
+        splitter.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, inputSource, Environment.TickCount, key)
+        {
+            RoutedEvent = Keyboard.KeyDownEvent
+        });
+        splitter.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, inputSource, Environment.TickCount, key)
+        {
+            RoutedEvent = Keyboard.PreviewKeyUpEvent
+        });
+    }
+
+    private static void AssertElementStaysInside(FrameworkElement workspace, FrameworkElement element, double viewportWidth)
+    {
+        if (element.Visibility != Visibility.Visible || element.ActualWidth <= 0) return;
+        var origin = element.TranslatePoint(new Point(0, 0), workspace);
+        Assert.IsGreaterThanOrEqualTo(-1d, origin.X,
+            $"{AutomationProperties.GetAutomationId(element)} started outside a {viewportWidth} DIP workspace.");
+        Assert.IsLessThanOrEqualTo(workspace.ActualWidth + 1d, origin.X + element.ActualWidth,
+            $"{AutomationProperties.GetAutomationId(element)} overflowed a {viewportWidth} DIP workspace.");
+    }
 
     private static bool PumpDispatcherUntil(Func<bool> condition, TimeSpan timeout)
     {

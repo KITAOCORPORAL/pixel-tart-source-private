@@ -251,7 +251,7 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    private static PixelTartModuleRegistry CreateModuleRegistry(TaskOperationBridge taskOperationBridge)
+    private PixelTartModuleRegistry CreateModuleRegistry(TaskOperationBridge taskOperationBridge)
     {
         var registry = new PixelTartModuleRegistry();
         registry.Capabilities.Register(new("core.navigation", "pixel-tart.kernel", "kernel/v1"));
@@ -268,12 +268,15 @@ public partial class App : Application
         registry.Register(new AssetLibraryModule(() =>
         {
             IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
+            var workspaceSettings = _mainViewModel?.Settings.AssetLibraryWorkspace ?? new AssetLibraryWorkspaceSettings();
             return new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
                 Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db"),
                 taskOperationBridge,
                 diagnostics,
                 enableAssetLibraryPreview,
-                assetLibraryDemoDirectory);
+                assetLibraryDemoDirectory,
+                workspaceSettings,
+                _logService);
         }));
         registry.Register(new RawToolModule());
         registry.Register(new OnlineSelectionModule());

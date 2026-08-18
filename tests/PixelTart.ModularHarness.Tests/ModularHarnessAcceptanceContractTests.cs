@@ -44,7 +44,8 @@ public sealed class ModularHarnessAcceptanceContractTests
         Assert.AreEqual("1.6.0-dev", asset.Version);
         Assert.AreEqual(ModuleType.WorkspaceModule, asset.ModuleType);
         Assert.AreEqual("asset-library", asset.Route);
-        Assert.AreEqual("toolbox", asset.NavigationGroup);
+        Assert.AreEqual("primary", asset.NavigationGroup);
+        Assert.AreEqual(20, asset.NavigationOrder);
         CollectionAssert.AreEquivalent(AssetCapabilities, asset.Provides.ToArray());
         CollectionAssert.AreEquivalent(CoreCapabilities, asset.Requires.ToArray());
         CollectionAssert.AreEquivalent(new[] { "selection.create-from-assets" }, asset.Optional.ToArray());
@@ -104,6 +105,8 @@ public sealed class ModularHarnessAcceptanceContractTests
         Assert.IsInstanceOfType<UserControl>(view);
         Assert.IsNotInstanceOfType<Window>(view);
         Assert.AreEqual(AssetLibraryModule.ModuleId, route.ModuleId);
+        Assert.AreEqual("primary", route.NavigationGroup);
+        Assert.AreEqual(20, route.NavigationOrder);
         Assert.IsTrue(route.IsNavigationVisible);
     }
 

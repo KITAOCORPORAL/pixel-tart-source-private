@@ -26,7 +26,7 @@ public sealed class ModularHarnessEmbeddedEvidenceContractTests
     ];
 
     [TestMethod]
-    public void ShellContainsOneEmbeddedAssetHostAndOnlyTheTwoIntentionalToolboxAssetEntries()
+    public void ShellContainsOneEmbeddedAssetHostAndOnePrimaryAssetNavigationEntry()
     {
         var document = XDocument.Load(PathAt("src/RAWSelectionAssistant/MainWindow.xaml"));
 
@@ -38,12 +38,13 @@ public sealed class ModularHarnessEmbeddedEvidenceContractTests
 
         var assetNavigation = document.Descendants()
             .Where(element => element.Name.LocalName == "Button")
-            .Where(element => Attribute(element, "AutomationProperties.AutomationId") is "ToolboxAssetLibraryEntry" or "ToolboxPageAssetLibraryEntry")
+            .Where(element => Attribute(element, "AutomationProperties.AutomationId") == "AssetLibraryNavigationButton")
             .ToArray();
-        Assert.HasCount(2, assetNavigation);
+        Assert.HasCount(1, assetNavigation);
         Assert.IsTrue(assetNavigation.All(element => Attribute(element, "AutomationProperties.Name") == "素材库"));
         Assert.IsTrue(assetNavigation.All(element => Attribute(element, "CommandParameter") == "AssetLibrary"));
-        Assert.IsFalse(document.Descendants().Any(element => Attribute(element, "AutomationProperties.AutomationId") == "AssetLibraryNavigationButton"));
+        Assert.IsFalse(document.Descendants().Any(element =>
+            Attribute(element, "AutomationProperties.AutomationId") is "ToolboxAssetLibraryEntry" or "ToolboxPageAssetLibraryEntry"));
 
         Assert.IsFalse(document.Descendants().Any(element => Attribute(element, "Name") == "LegacyAssetLibraryWorkspace"));
     }
@@ -264,7 +265,7 @@ public sealed class ModularHarnessEmbeddedEvidenceContractTests
 
         Assert.HasCount(RequiredEvidenceFiles.Length, hashes);
         using var manifest = JsonDocument.Parse(Read("tools/ModularHarnessV1Acceptance/evidence-contract.json"));
-        Assert.AreEqual("captured", manifest.RootElement.GetProperty("capture_status").GetString());
+        Assert.AreEqual("not_captured", manifest.RootElement.GetProperty("capture_status").GetString());
     }
 
     private static bool ContainsForbiddenMetadataChunk(ReadOnlySpan<byte> png)

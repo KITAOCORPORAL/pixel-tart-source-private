@@ -6,7 +6,7 @@
   "expected_executable": "PixelTart_ModularHarness_V1_DevPreview.exe",
   "expected_window_title": "像素蛋挞 [Modular Harness Dev]",
   "expected_gui_process_count": 1,
-  "capture_status": "captured",
+  "capture_status": "not_captured",
   "scenes": [
     {
       "file_name": "01_workbench.png",
@@ -16,8 +16,8 @@
     },
     {
       "file_name": "02_toolbox_asset_library.png",
-      "required_automation_targets": ["WorkbenchToolboxButton", "ToolboxAssetLibraryEntry"],
-      "visible_assertion": "从工作台工具入口可以看到且只看到一个用户可识别的素材库入口。",
+      "required_automation_targets": ["AssetLibraryNavigationButton"],
+      "visible_assertion": "素材库作为像素蛋挞全局导航第 2 个一级入口可见，且不再重复出现在工具箱。",
       "expected_gui_process_count": 1
     },
     {

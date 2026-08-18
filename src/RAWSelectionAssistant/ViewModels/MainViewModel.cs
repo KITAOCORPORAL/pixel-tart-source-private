@@ -77,6 +77,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     private string _tutorialOutputDirectoryOverride = string.Empty;
     private NormalWorkspaceSnapshot? _normalWorkspaceSnapshot;
     private string _currentPage = "Workbench";
+    private double _shellViewportWidth = 1600d;
     private int _currentWorkflowStep = 1;
     private string _licenseKeyInput = "KQGP-";
     private PhotoProjectRecord _currentProject = new();
@@ -475,6 +476,9 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             OnPropertyChanged(nameof(IsFinancePage));
             OnPropertyChanged(nameof(IsOnlineSelectionPage));
             OnPropertyChanged(nameof(IsAssetLibraryPage));
+            OnPropertyChanged(nameof(IsSidebarCollapsed));
+            OnPropertyChanged(nameof(IsSidebarExpanded));
+            OnPropertyChanged(nameof(SidebarWidth));
             OnPropertyChanged(nameof(IsRawToJpegPage));
             OnPropertyChanged(nameof(IsActivationPage));
             OnPropertyChanged(nameof(IsSettingsPage));
@@ -501,6 +505,8 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
             if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
+            if (_initialized && !IsOnboardingActive && PrimaryNavigationPolicy.IsPrimaryPage(value))
+                Settings.LastPrimaryPage = value;
             PageChanged?.Invoke(this, new(previousPage, value));
         }
     }
@@ -735,7 +741,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             OnPropertyChanged();
         }
     }
-    public bool IsSidebarCollapsed => Settings.Appearance.SidebarCollapsed;
+    public bool IsSidebarCollapsed => Settings.Appearance.SidebarCollapsed || IsAssetLibraryPage && _shellViewportWidth < 1100d;
     public bool IsSidebarExpanded => !IsSidebarCollapsed;
     public double SidebarWidth => IsSidebarCollapsed
         ? SidebarLayoutMetrics.CollapsedWidth
@@ -859,6 +865,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         "Tether" => TetherPage?.StatusText ?? "看守文件夹监看准备就绪",
         "WorkCalendar" => WorkCalendarPage.StatusText,
         "OnlineSelection" => OnlineSelectionPage.StatusText,
+        "AssetLibrary" => "素材库工作区",
         "RawToJpeg" => RawToJpegPage?.StatusText ?? "RAW 转 JPG 准备就绪",
         "Workbench" or "ProjectCenter" => string.IsNullOrWhiteSpace(WorkbenchSchedule?.StatusText) ? "工作台准备就绪" : WorkbenchSchedule.StatusText,
         "Finance" => FinancePage?.StatusText ?? "本月暂无收支记录",
@@ -886,6 +893,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     {
         "Tether" => TetherPage?.PreviewStatus ?? string.Empty,
         "WorkCalendar" => WorkCalendarPage.DisplayPeriod,
+        "AssetLibrary" => "本地素材、视觉分析与批量任务共享同一工作区",
         "Workbench" or "ProjectCenter" => WorkbenchSchedule?.NextTodayText ?? string.Empty,
         _ => CurrentItem
     };
@@ -1045,7 +1053,11 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         }
         else
         {
-            NavigateToSurface("Workbench", recordHistory: false);
+#if MODULAR_HARNESS_DEV_PREVIEW
+            NavigateToSurface(PrimaryNavigationPolicy.Workbench, recordHistory: false);
+#else
+            NavigateToSurface(PrimaryNavigationPolicy.Normalize(Settings.LastPrimaryPage), recordHistory: false);
+#endif
         }
         StatusMessage = IndexedMediaCount > 0
             ? $"已载入综合索引，共 {IndexedMediaCount:N0} 个文件"
@@ -2004,6 +2016,15 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     public void UpdateSidebarForWidth(double width)
     {
+        var wasCompactForAssetLibrary = IsAssetLibraryPage && _shellViewportWidth < 1100d;
+        _shellViewportWidth = width;
+        var isCompactForAssetLibrary = IsAssetLibraryPage && _shellViewportWidth < 1100d;
+        if (wasCompactForAssetLibrary != isCompactForAssetLibrary)
+        {
+            OnPropertyChanged(nameof(IsSidebarCollapsed));
+            OnPropertyChanged(nameof(IsSidebarExpanded));
+            OnPropertyChanged(nameof(SidebarWidth));
+        }
         if (Settings.Appearance.Sidebar != SidebarMode.AutoCollapse) return;
         var collapsed = width < 1100;
         if (Settings.Appearance.SidebarCollapsed == collapsed) return;
@@ -2145,21 +2166,14 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private void Navigate(object? parameter)
     {
-        var page = parameter?.ToString();
+        var page = NormalizeNavigationSurface(parameter?.ToString() ?? string.Empty);
         if (page == "Settings")
         {
             OpenSettingsCommand.Execute(null);
             return;
         }
-        if (page is not ("Workbench" or "ProjectCenter" or "LocalSplit" or "Workflow" or "History" or "WorkCalendar" or "OnlineSelection" or "AssetLibrary" or "Tether" or "Finance" or "Activation" or "Settings" or "Help" or
-            "BatchCompress" or "RawToJpeg" or "Watermark" or "DeleteRejects" or "FtpTool" or "PhotoOrganize" or "PhotoGrouping" or "Collage" or "BatchRename" or "BatchConvert" or "Toolbox")) return;
-        var targetPage = page switch
-        {
-            "ProjectCenter" => "Workbench",
-            "PhotoOrganize" => "PhotoGrouping",
-            _ => page
-        };
-        NavigateToSurface(targetPage);
+        if (!IsValidNavigationSurface(page)) return;
+        NavigateToSurface(page);
     }
 
     public Task CloseCurrentSurfaceAsync()
@@ -2223,7 +2237,8 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private static string NormalizeNavigationSurface(string targetPage) => targetPage switch
     {
-        "ProjectCenter" => "Workbench",
+        "ProjectCenter" => PrimaryNavigationPolicy.Workbench,
+        "asset-library" => PrimaryNavigationPolicy.AssetLibrary,
         "PhotoOrganize" => "PhotoGrouping",
         _ => targetPage
     };

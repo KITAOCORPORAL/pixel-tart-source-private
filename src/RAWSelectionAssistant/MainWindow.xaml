@@ -180,25 +180,35 @@
                                               AutomationProperties.AutomationId="SidebarRoot"
                                               AutomationProperties.Name="侧栏根区域" />
                     <ScrollViewer x:Name="SidebarNavigationScroll" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False">
-                        <StackPanel>
+                        <StackPanel KeyboardNavigation.DirectionalNavigation="Continue" KeyboardNavigation.TabNavigation="Continue">
                             <TextBlock Text="工作" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Button Content="工作台" Tag="{StaticResource IconDashboard}" Command="{Binding NavigateCommand}" CommandParameter="Workbench" ToolTip="工作台" AutomationProperties.Name="工作台">
+                            <StackPanel x:Name="PrimaryNavigationGroup"
+                                        KeyboardNavigation.DirectionalNavigation="Contained"
+                                        KeyboardNavigation.TabNavigation="Continue"
+                                        AutomationProperties.AutomationId="PrimaryNavigationGroup"
+                                        AutomationProperties.Name="主要导航">
+                            <Button Content="工作台" Tag="{StaticResource IconDashboard}" Command="{Binding NavigateCommand}" CommandParameter="Workbench" ToolTip="工作台" AutomationProperties.Name="工作台" AutomationProperties.AutomationId="PrimaryNavigationWorkbench" AutomationProperties.PositionInSet="1" AutomationProperties.SizeOfSet="7">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkbenchPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="归片工作区" Tag="{StaticResource IconPhotoStack}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Workflow" ToolTip="归片工作区" AutomationProperties.Name="归片工作区" />
-                            <Button Content="工作日历" Tag="{StaticResource IconCalendar}" Command="{Binding NavigateCommand}" CommandParameter="WorkCalendar" ToolTip="工作日历" AutomationProperties.Name="工作日历">
+                            <Button x:Name="AssetLibraryNavigationButton" Content="素材库" Tag="{StaticResource IconAssetLibrary}" Command="{Binding NavigateCommand}" CommandParameter="AssetLibrary" ToolTip="素材库" AutomationProperties.Name="素材库" AutomationProperties.AutomationId="AssetLibraryNavigationButton" AutomationProperties.PositionInSet="2" AutomationProperties.SizeOfSet="7">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsAssetLibraryPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
+                            <Button Content="归片工作区" Tag="{StaticResource IconPhotoStack}" Command="{Binding NavigateCommand}" CommandParameter="Workflow" ToolTip="归片工作区" AutomationProperties.Name="归片工作区" AutomationProperties.AutomationId="PrimaryNavigationWorkflow" AutomationProperties.PositionInSet="3" AutomationProperties.SizeOfSet="7">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkflowPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
+                            <Button Content="工作日历" Tag="{StaticResource IconCalendar}" Command="{Binding NavigateCommand}" CommandParameter="WorkCalendar" ToolTip="工作日历" AutomationProperties.Name="工作日历" AutomationProperties.AutomationId="PrimaryNavigationWorkCalendar" AutomationProperties.PositionInSet="4" AutomationProperties.SizeOfSet="7">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsWorkCalendarPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="在线选片" Tag="{StaticResource IconOnlineSelection}" Command="{Binding NavigateCommand}" CommandParameter="OnlineSelection" ToolTip="在线选片" AutomationProperties.Name="在线选片">
-                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsOnlineSelectionPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
-                            </Button>
-                            <Button Content="联机拍摄" Tag="{StaticResource IconCameraTether}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄" AutomationProperties.Name="联机拍摄">
+                            <Button Content="联机拍摄" Tag="{StaticResource IconCameraTether}" Command="{Binding NavigateCommand}" CommandParameter="Tether" ToolTip="联机拍摄" AutomationProperties.Name="联机拍摄" AutomationProperties.AutomationId="PrimaryNavigationTether" AutomationProperties.PositionInSet="5" AutomationProperties.SizeOfSet="7">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsTetherPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="摄影收支" Tag="{StaticResource IconWallet}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支">
+                            <Button Content="摄影收支" Tag="{StaticResource IconWallet}" Command="{Binding NavigateCommand}" CommandParameter="Finance" ToolTip="摄影收支" AutomationProperties.Name="摄影收支" AutomationProperties.AutomationId="PrimaryNavigationFinance" AutomationProperties.PositionInSet="6" AutomationProperties.SizeOfSet="7">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsFinancePage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
-                            <Button Content="项目历史" Tag="{StaticResource IconArchiveHistory}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" />
+                            <Button Content="项目历史" Tag="{StaticResource IconArchiveHistory}" Command="{Binding NavigateCommand}" CommandParameter="History" ToolTip="项目历史" AutomationProperties.Name="项目历史" AutomationProperties.AutomationId="PrimaryNavigationHistory" AutomationProperties.PositionInSet="7" AutomationProperties.SizeOfSet="7">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsHistoryPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
+                            </StackPanel>
                             <Separator />
                             <TextBlock Text="工具" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Button Content="{Binding ToolboxEntry.DisplayName}"
@@ -206,6 +216,9 @@
                                     Style="{StaticResource SidebarNavButton}" Click="ToolboxQuickButton_Click"
                                     ToolTip="{Binding ToolboxEntry.Description}"
                                     AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" />
+                            <Button Content="在线选片" Tag="{StaticResource IconOnlineSelection}" Command="{Binding NavigateCommand}" CommandParameter="OnlineSelection" ToolTip="在线选片" AutomationProperties.Name="在线选片" AutomationProperties.AutomationId="SecondaryNavigationOnlineSelection">
+                                <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsOnlineSelectionPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
+                            </Button>
                             <Separator />
                             <TextBlock Text="系统" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Button Content="授权与版本" Tag="{StaticResource IconShieldKey}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="授权与版本" AutomationProperties.Name="授权与版本" />
@@ -443,17 +456,7 @@
                                 <Border Style="{StaticResource PopupSurfaceBorder}" Padding="10">
                                     <Border.Effect><DropShadowEffect BlurRadius="24" ShadowDepth="6" Opacity="0.48" Color="#000000" /></Border.Effect>
                                     <StackPanel>
-                                        <Grid Margin="5,2,5,7"><TextBlock Text="本地工具箱" FontSize="15" FontWeight="SemiBold" /><TextBlock Text="素材库与本地工具" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid>
-                                        <Button Style="{StaticResource ToolEntryButton}"
-                                                Command="{Binding NavigateCommand}"
-                                                CommandParameter="AssetLibrary"
-                                                Margin="2"
-                                                AutomationProperties.AutomationId="ToolboxAssetLibraryEntry"
-                                                AutomationProperties.Name="素材库">
-                                            <StackPanel>
-                                                <TextBlock Text="素材库" />
-                                            </StackPanel>
-                                        </Button>
+                                        <Grid Margin="5,2,5,7"><TextBlock Text="本地工具箱" FontSize="15" FontWeight="SemiBold" /><TextBlock Text="本地照片工具" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid>
                                         <ItemsControl ItemsSource="{Binding ToolCatalogItems}">
                                             <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
@@ -621,21 +624,6 @@
                                            Style="{StaticResource CaptionText}" Margin="0,6,0,0" />
                             </StackPanel>
                         </Grid>
-                        <Button Style="{StaticResource ToolCatalogCard}"
-                                Command="{Binding NavigateCommand}"
-                                CommandParameter="AssetLibrary"
-                                Margin="5"
-                                AutomationProperties.AutomationId="ToolboxPageAssetLibraryEntry"
-                                AutomationProperties.Name="素材库">
-                            <Grid>
-                                <Grid.ColumnDefinitions><ColumnDefinition Width="46" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="素材库" FontSize="16" FontWeight="SemiBold" />
-                                    <TextBlock Text="管理、筛选与分析本地素材。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,7,0,0" />
-                                    <TextBlock Text="工作区模块" Foreground="{DynamicResource ToolAccentBrush}" Margin="0,16,0,0" />
-                                </StackPanel>
-                            </Grid>
-                        </Button>
                         <ItemsControl ItemsSource="{Binding ToolCatalogItems}">
                             <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
@@ -767,7 +755,7 @@
                     <Grid.RowDefinitions><RowDefinition Height="58" /><RowDefinition Height="*" /><RowDefinition Height="58" /></Grid.RowDefinitions>
                     <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="20,0"><Grid><StackPanel VerticalAlignment="Center"><TextBlock Text="设置" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="更改即时生效并自动保存" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel><views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Center" AutomationName="关闭设置并返回" /></Grid></Border>
                     <TabControl Grid.Row="1" Margin="18,14" Style="{StaticResource SettingsTabControlStyle}" ItemContainerStyle="{StaticResource SettingsTabItemStyle}">
-                        <TabItem Header="常规"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="12,18"><TextBlock Text="启动与工作区" Style="{StaticResource SectionTitleText}" /><CheckBox Content="启动后打开工作台" IsChecked="True" Margin="0,14,0,0" /><CheckBox Content="记住窗口尺寸和侧栏状态" IsChecked="True" Margin="0,10,0,0" /><TextBlock Text="默认窗口为 1600 × 920；窗口较窄时任务中心自动折叠。" Style="{StaticResource CaptionText}" Margin="0,14,0,0" TextWrapping="Wrap" /></StackPanel></ScrollViewer></TabItem>
+                        <TabItem Header="常规"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="12,18"><TextBlock Text="启动与工作区" Style="{StaticResource SectionTitleText}" /><CheckBox Content="启动后恢复上次使用的一级页面" IsChecked="True" IsEnabled="False" Margin="0,14,0,0" /><CheckBox Content="记住窗口尺寸和侧栏状态" IsChecked="True" Margin="0,10,0,0" /><TextBlock Text="默认窗口为 1600 × 920；窗口较窄时任务中心自动折叠。" Style="{StaticResource CaptionText}" Margin="0,14,0,0" TextWrapping="Wrap" /></StackPanel></ScrollViewer></TabItem>
                         <TabItem Header="外观"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="12,18"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="160" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions><TextBlock Text="主题" VerticalAlignment="Center" /><ComboBox Grid.Column="1" ItemsSource="{Binding ThemeOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedTheme}" /><TextBlock Grid.Row="1" Text="强调色" VerticalAlignment="Center" Margin="0,12,0,0" /><ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AccentOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedAccent}" Margin="0,12,0,0" /><TextBlock Grid.Row="2" Text="界面密度" VerticalAlignment="Center" Margin="0,12,0,0" /><ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DensityOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedDensity}" Margin="0,12,0,0" /><TextBlock Grid.Row="3" Text="侧栏" VerticalAlignment="Center" Margin="0,12,0,0" /><ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SidebarOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedSidebarMode}" Margin="0,12,0,0" /><TextBlock Grid.Row="4" Text="字号" VerticalAlignment="Center" Margin="0,12,0,0" /><ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding FontScaleOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedFontScale}" Margin="0,12,0,0" /></Grid><Border Style="{StaticResource InfoCard}" Margin="0,18,0,0"><TextBlock Text="深色工作台是默认设计稿；浅色与跟随系统保持相同布局结构。" TextWrapping="Wrap" /></Border></StackPanel></ScrollViewer></TabItem>
                         <TabItem Header="分片与归片"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="12,18"><TextBlock Text="默认归片类别" Style="{StaticResource SectionTitleText}" /><ComboBox ItemsSource="{Binding CollectionCategories}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding CollectionCategory}" Margin="0,12,0,0" /><TextBlock Text="来源 JPG 未找到时" Style="{StaticResource SectionTitleText}" Margin="0,22,0,0" /><ComboBox ItemsSource="{Binding CustomerJpegModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding CustomerJpegMode}" Margin="0,12,0,0" /><TextBlock Text="客户 JPG 默认只用于识别编号，正式文件优先从照片来源目录查找。" Style="{StaticResource CaptionText}" Margin="0,10,0,0" TextWrapping="Wrap" /></StackPanel></ScrollViewer></TabItem>
                         <TabItem Header="输出与报告"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="12,18"><TextBlock Text="报告默认行为" Style="{StaticResource SectionTitleText}" /><CheckBox Content="默认导出匹配报告" IsChecked="{Binding DefaultExportReports}" Margin="0,14,0,0" /><StackPanel Margin="22,12,0,0"><CheckBox Content="CSV 报告" IsChecked="{Binding DefaultExportCsv}" /><CheckBox Content="JSON 报告（专业版）" IsChecked="{Binding DefaultExportJson}" Margin="0,8,0,0" /><CheckBox Content="操作日志 TXT（专业版）" IsChecked="{Binding DefaultExportLog}" Margin="0,8,0,0" /></StackPanel><TextBlock Text="默认关闭；新任务可在输出交付页面单独开启。" Style="{StaticResource CaptionText}" Margin="0,14,0,0" /></StackPanel></ScrollViewer></TabItem>

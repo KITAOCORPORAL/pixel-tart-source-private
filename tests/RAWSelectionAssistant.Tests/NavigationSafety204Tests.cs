@@ -24,11 +24,14 @@ public sealed class NavigationSafety204Tests
     }
 
     [TestMethod]
-    public void StartupDefaultsToWorkbenchAndDoesNotRestoreCollage()
+    public void StartupRestoresOnlyASafePrimaryPageAndDevPreviewStillDefaultsToWorkbench()
     {
         var viewModel = File.ReadAllText(Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "ViewModels", "MainViewModel.cs"));
         StringAssert.Contains(viewModel, "private string _currentPage = \"Workbench\"");
-        StringAssert.Contains(viewModel, "NavigateToSurface(\"Workbench\", recordHistory: false)");
+        StringAssert.Contains(viewModel, "PrimaryNavigationPolicy.Normalize(Settings.LastPrimaryPage)");
+        StringAssert.Contains(viewModel, "#if MODULAR_HARNESS_DEV_PREVIEW");
+        StringAssert.Contains(viewModel, "NavigateToSurface(PrimaryNavigationPolicy.Workbench, recordHistory: false)");
+        StringAssert.Contains(viewModel, "PrimaryNavigationPolicy.IsPrimaryPage(value)");
         Assert.IsFalse(viewModel.Contains("CurrentPage = \"Collage\";", StringComparison.Ordinal));
     }
 
@@ -166,8 +169,25 @@ public sealed class NavigationSafety204Tests
     public void ReturningToWorkbenchDoesNotRestoreWizard()
     {
         var viewModel = MainViewModel();
-        Assert.IsFalse(viewModel.Contains("LastPage", StringComparison.Ordinal));
         Assert.IsFalse(viewModel.Contains("RestoreLastPage", StringComparison.Ordinal));
+        StringAssert.Contains(viewModel, "Settings.LastPrimaryPage = value");
+        StringAssert.Contains(viewModel, "PrimaryNavigationPolicy.IsPrimaryPage(value)");
+        StringAssert.Contains(viewModel, "public void ReturnToWorkbench() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench())");
+    }
+
+    [TestMethod]
+    public void AssetLibraryDeepLinkAliasRemainsAcceptedByShellNavigation()
+    {
+        var viewModel = MainViewModel();
+        var navigate = Slice(viewModel, "private void Navigate(object? parameter)", "public Task CloseCurrentSurfaceAsync()");
+        StringAssert.Contains(navigate, "var page = NormalizeNavigationSurface(parameter?.ToString() ?? string.Empty);");
+        StringAssert.Contains(navigate, "if (!IsValidNavigationSurface(page)) return;");
+        StringAssert.Contains(navigate, "NavigateToSurface(page);");
+        Assert.IsLessThan(
+            upperBound: navigate.IndexOf("IsValidNavigationSurface", StringComparison.Ordinal),
+            value: navigate.IndexOf("NormalizeNavigationSurface", StringComparison.Ordinal));
+        Assert.DoesNotContain("page is not (", navigate, StringComparison.Ordinal);
+        StringAssert.Contains(viewModel, "\"asset-library\" => PrimaryNavigationPolicy.AssetLibrary");
     }
 
     [TestMethod]

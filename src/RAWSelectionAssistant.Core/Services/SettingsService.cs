@@ -101,6 +101,9 @@ public sealed class SettingsService
         settings.ProductQuickToolLayout.SchemaVersion = ProductQuickToolLayout.CurrentSchemaVersion;
         settings.ProductQuickToolLayout.OrderedToolIds = ProductToolboxPolicy.Normalize(
             settings.ProductQuickToolLayout.OrderedToolIds);
+        settings.LastPrimaryPage = PrimaryNavigationPolicy.Normalize(settings.LastPrimaryPage);
+        settings.AssetLibraryWorkspace ??= new AssetLibraryWorkspaceSettings();
+        settings.AssetLibraryWorkspace.Normalize();
         settings.Appearance.CustomAccentColor = NormalizeAccent(settings.Appearance.CustomAccentColor);
         if (!Enum.IsDefined(settings.Appearance.Theme)) settings.Appearance.Theme = ThemeMode.System;
         if (!Enum.IsDefined(settings.Appearance.Accent)) settings.Appearance.Accent = AccentPreset.KitaoBlue;

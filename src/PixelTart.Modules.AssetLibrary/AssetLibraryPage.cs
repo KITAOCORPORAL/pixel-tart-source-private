@@ -1,8 +1,12 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace PixelTart.Modules.AssetLibrary;
@@ -14,6 +18,7 @@ public partial class AssetLibraryPage : UserControl
     private readonly string? _demoDirectory;
     private bool _initialized;
     private bool _disposed;
+    private DispatcherOperation? _pendingPaneWidthCommit;
 
     public AssetLibraryPage()
         : this(
@@ -28,12 +33,14 @@ public partial class AssetLibraryPage : UserControl
         TaskOperationBridge taskOperationBridge,
         IReadOnlyList<AssetLibraryModuleDiagnostic> moduleDiagnostics,
         bool enablePreviewFeatures = false,
-        string? demoDirectory = null)
+        string? demoDirectory = null,
+        AssetLibraryWorkspaceSettings? workspaceSettings = null,
+        ILogService? logService = null)
     {
         InitializeComponent();
         _enablePreviewFeatures = enablePreviewFeatures;
         _demoDirectory = enablePreviewFeatures ? demoDirectory : null;
-        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, enablePreviewFeatures);
+        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, enablePreviewFeatures, workspaceSettings, logService);
         DataContext = _viewModel;
     }
 
@@ -43,6 +50,7 @@ public partial class AssetLibraryPage : UserControl
     {
         if (_initialized || _disposed) return;
         _initialized = true;
+        _viewModel.UpdateViewportWidth(ActualWidth);
         try
         {
             await _viewModel.InitializeAsync();
@@ -50,9 +58,9 @@ public partial class AssetLibraryPage : UserControl
                 await _viewModel.ImportDemoDirectoryAsync(_demoDirectory);
             UpdateGridDiagnostics();
         }
-        catch (Exception exception)
+        catch (Exception)
         {
-            _viewModel.SetForegroundError($"素材库初始化失败：{exception.Message}");
+            _viewModel.SetForegroundError("素材库加载失败。请检查数据目录权限后重试。");
         }
     }
 
@@ -60,6 +68,8 @@ public partial class AssetLibraryPage : UserControl
     {
         if (_disposed || Application.Current?.MainWindow?.IsLoaded == true) return;
         _disposed = true;
+        _pendingPaneWidthCommit?.Abort();
+        _pendingPaneWidthCommit = null;
         await _viewModel.DisposeAsync();
     }
 
@@ -76,6 +86,56 @@ public partial class AssetLibraryPage : UserControl
         ReferenceEquals(AssetGrid.ItemsSource, _viewModel.AssetCards) ? "AssetCards" : AssetGrid.ItemsSource?.GetType().Name ?? "None",
         ReferenceEquals(AssetGrid.ItemsSource, _viewModel.AssetCards),
         DataContext?.GetType().Name ?? "None");
+
+    public void FocusSearch()
+    {
+        AssetLibrarySearchBox.Focus();
+        AssetLibrarySearchBox.SelectAll();
+    }
+
+    public void FocusInitial() => FocusSearch();
+
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e) => _viewModel.UpdateViewportWidth(e.NewSize.Width);
+
+    private void OnPaneSplitterDragCompleted(object sender, DragCompletedEventArgs e) => SchedulePaneWidthCommit();
+
+    private void OnPaneSplitterPreviewKeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.Key is Key.Left or Key.Right) SchedulePaneWidthCommit();
+    }
+
+    private void SchedulePaneWidthCommit()
+    {
+        _pendingPaneWidthCommit?.Abort();
+        _pendingPaneWidthCommit = Dispatcher.BeginInvoke(
+            DispatcherPriority.Loaded,
+            new Action(() =>
+            {
+                _pendingPaneWidthCommit = null;
+                if (!_disposed) PersistAndRebindPaneWidths();
+            }));
+    }
+
+    private void PersistAndRebindPaneWidths()
+    {
+        // Preview splitters commit after their routed completion event. This deferred callback
+        // runs after that commit; force layout before reading the completed mouse/keyboard width.
+        UpdateLayout();
+        var organizationPaneWidth = AssetOrganizationColumn.ActualWidth;
+        var inspectorPaneWidth = AssetInspectorColumn.ActualWidth;
+        _viewModel.UpdatePaneWidths(organizationPaneWidth, inspectorPaneWidth);
+
+        // GridSplitter writes local Width values and would otherwise replace the responsive bindings.
+        AssetCollectionColumn.Width = new GridLength(1d, GridUnitType.Star);
+        BindingOperations.SetBinding(
+            AssetOrganizationColumn,
+            ColumnDefinition.WidthProperty,
+            new Binding(nameof(AssetLibraryViewModel.OrganizationPaneColumnWidth)) { Source = _viewModel, Mode = BindingMode.OneWay });
+        BindingOperations.SetBinding(
+            AssetInspectorColumn,
+            ColumnDefinition.WidthProperty,
+            new Binding(nameof(AssetLibraryViewModel.InspectorPaneColumnWidth)) { Source = _viewModel, Mode = BindingMode.OneWay });
+    }
 
     private async void FindSimilarPaletteMenu_Click(object sender, RoutedEventArgs e)
     {
@@ -97,6 +157,13 @@ public partial class AssetLibraryPage : UserControl
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key is Key.ImeProcessed or Key.DeadCharProcessed || IsTextInputContext(e.OriginalSource)) return;
+        if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            FocusSearch();
+            e.Handled = true;
+            return;
+        }
         if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.None)
         {
             _viewModel.FocusFolderClassifier();
@@ -110,7 +177,7 @@ public partial class AssetLibraryPage : UserControl
         else if (e.Key == Key.T && Keyboard.Modifiers == ModifierKeys.None)
         {
             e.Handled = true;
-            _viewModel.SetForegroundError("输入标签后点击“应用标签”。");
+            _viewModel.SetStatusMessage("输入标签后点击“应用标签”。");
         }
         else if (e.Key is >= Key.D0 and <= Key.D5 && Keyboard.Modifiers == ModifierKeys.None)
         {
@@ -123,4 +190,17 @@ public partial class AssetLibraryPage : UserControl
             e.Handled = true;
         }
     }
+
+    private static bool IsTextInputContext(object? source)
+    {
+        if (Keyboard.FocusedElement is TextBoxBase or PasswordBox or ComboBox) return true;
+        for (var current = source as DependencyObject; current is not null; current = GetInputParent(current))
+            if (current is TextBoxBase or PasswordBox or ComboBox) return true;
+        return false;
+    }
+
+    private static DependencyObject? GetInputParent(DependencyObject current) =>
+        current is System.Windows.Media.Visual or System.Windows.Media.Media3D.Visual3D
+            ? System.Windows.Media.VisualTreeHelper.GetParent(current)
+            : LogicalTreeHelper.GetParent(current);
 }

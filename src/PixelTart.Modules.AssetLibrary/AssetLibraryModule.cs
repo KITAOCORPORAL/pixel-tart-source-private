@@ -23,8 +23,8 @@ public sealed class AssetLibraryModule : PixelTartModuleBase
             Version,
             ModuleType.WorkspaceModule,
             Route,
-            "toolbox",
-            30,
+            "primary",
+            20,
             ["asset.query", "asset.pick", "asset.import", "asset.folder", "asset.tag", "asset.smart-folder", "asset.visual-analysis", "asset.visual-search"],
             ["core.navigation", "core.task-center", "core.settings", "core.file-safety"],
             ["selection.create-from-assets"],
@@ -43,7 +43,7 @@ public sealed class AssetLibraryModule : PixelTartModuleBase
         context.Providers.Register(new("visual-analysis.local-pixel", Manifest.ModuleId, "visual-analysis/v1", new LocalPixelVisualAnalysisProvider()));
 
     public override void RegisterRoutes(ModuleRegistrationContext context) =>
-        context.Routes.Register(new(Route, "素材库", "toolbox", Manifest.NavigationOrder, Manifest.ModuleId, _viewFactory));
+        context.Routes.Register(new(Route, "素材库", "primary", Manifest.NavigationOrder, Manifest.ModuleId, _viewFactory));
 
     public override void RegisterNavigation(ModuleRegistrationContext context)
     {

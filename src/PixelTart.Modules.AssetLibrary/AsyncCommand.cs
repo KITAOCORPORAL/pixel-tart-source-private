@@ -36,3 +36,14 @@ public sealed class AsyncCommand<T>(Func<T?, Task> execute, Func<T?, bool>? canE
         return (T?)System.Convert.ChangeType(value, Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T), System.Globalization.CultureInfo.InvariantCulture);
     }
 }
+
+public sealed class AssetCommand(Action execute, Func<bool>? canExecute = null) : ICommand
+{
+    public event EventHandler? CanExecuteChanged;
+    public bool CanExecute(object? parameter) => canExecute?.Invoke() ?? true;
+    public void Execute(object? parameter)
+    {
+        if (CanExecute(parameter)) execute();
+    }
+    public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+}

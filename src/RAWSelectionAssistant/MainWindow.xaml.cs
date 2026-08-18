@@ -24,6 +24,10 @@ namespace RAWSelectionAssistant;
 
 public partial class MainWindow : Window
 {
+    private const double DefaultShellMinWidth = 1180d;
+    private const double DefaultShellMinHeight = 720d;
+    private const double AssetLibraryShellMinWidth = 720d;
+    private const double AssetLibraryShellMinHeight = 400d;
     private bool _hasSavedPosition;
     private readonly TutorialSpotlightLayoutService _spotlightLayoutService = new();
     private bool _tutorialLayoutPending;
@@ -73,6 +77,11 @@ public partial class MainWindow : Window
 
     public void ApplySavedBounds(AppSettings settings)
     {
+        var restoredPage = _viewModel?.CurrentPage ?? PrimaryNavigationPolicy.Normalize(settings.LastPrimaryPage);
+#if MODULAR_HARNESS_DEV_PREVIEW
+        restoredPage = _viewModel?.CurrentPage ?? PrimaryNavigationPolicy.Workbench;
+#endif
+        ApplySurfaceMinimumSize(restoredPage);
         if (settings.WindowWidth is > 0) Width = Math.Max(MinWidth, settings.WindowWidth.Value);
         if (settings.WindowHeight is > 0) Height = Math.Max(MinHeight, settings.WindowHeight.Value);
 
@@ -286,6 +295,8 @@ public partial class MainWindow : Window
     {
         WorkbenchToolboxPopup.IsOpen = false;
         QuickToolsOverflowPopup.IsOpen = false;
+        ApplySurfaceMinimumSize(e.CurrentPage);
+        _viewModel?.UpdateSidebarForWidth(ActualWidth);
         Keyboard.ClearFocus();
         Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, () =>
         {
@@ -293,8 +304,24 @@ public partial class MainWindow : Window
         });
     }
 
+    private void ApplySurfaceMinimumSize(string page)
+    {
+        var isAssetLibrary = string.Equals(page, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal);
+        MinWidth = isAssetLibrary ? AssetLibraryShellMinWidth : DefaultShellMinWidth;
+        MinHeight = isAssetLibrary ? AssetLibraryShellMinHeight : DefaultShellMinHeight;
+    }
+
     private void FocusActivePage()
     {
+        if (_viewModel?.IsAssetLibraryPage == true)
+        {
+            if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
+                assetLibraryPage.FocusInitial();
+            else
+                AssetLibraryWorkspace.RequestInitialFocus();
+            return;
+        }
+
         var automationName = _viewModel?.CurrentPage switch
         {
             "WorkCalendar" => "工作日历",
@@ -390,8 +417,7 @@ public partial class MainWindow : Window
 
         if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.F)
         {
-            SearchBox.Focus();
-            SearchBox.SelectAll();
+            FocusSearchForActivePage();
             e.Handled = true;
             return;
         }
@@ -402,6 +428,21 @@ public partial class MainWindow : Window
             await RequestEscapeCloseAsync();
             return;
         }
+    }
+
+    private void FocusSearchForActivePage()
+    {
+        if (_viewModel?.IsAssetLibraryPage == true)
+        {
+            if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
+                assetLibraryPage.FocusSearch();
+            else
+                AssetLibraryWorkspace.RequestInitialFocus();
+            return;
+        }
+
+        SearchBox.Focus();
+        SearchBox.SelectAll();
     }
 
     private bool TryCloseActiveInputPopup()

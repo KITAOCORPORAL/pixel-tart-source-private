@@ -13,7 +13,7 @@ public sealed class Version220AcceptanceIsolationTests
         StringAssert.Contains(paths, "PIXEL_TART_ACCEPTANCE_ROOT");
         StringAssert.Contains(paths, "Path.IsPathFullyQualified");
         StringAssert.Contains(paths, "Path.GetFullPath(RootOverride)");
-        StringAssert.Contains(paths, "Acceptance builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
+        StringAssert.Contains(paths, "Acceptance and Modular Harness Dev Preview builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
 
         var worker = File.ReadAllText(Path.Combine(Root, "tools", "ReleaseSmoke", "Invoke-IsolatedDesktopWorker.ps1"));
         StringAssert.Contains(worker, "$env:PIXEL_TART_ACCEPTANCE_ROOT = $acceptanceSettingsRoot");

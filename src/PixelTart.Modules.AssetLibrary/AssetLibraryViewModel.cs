@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Tasks;
@@ -13,15 +14,19 @@ namespace PixelTart.Modules.AssetLibrary;
 
 public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 {
+    private const double MinimumCollectionPaneWidth = 360d;
+    private const double PaneSplitterWidth = 6d;
     private readonly IAssetLibraryRepository _repository;
     private readonly IVisualAssetQueryService _visualQuery;
     private readonly IAssetVisualFeatureStore _featureStore;
     private readonly AssetVisualAnalysisService _visualAnalysis;
     private readonly AssetVisualAnalysisBatchProcessor _batchProcessor;
     private readonly TaskOperationBridge _taskOperationBridge;
+    private readonly ILogService? _logService;
     private readonly bool _enablePreviewFeatures;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
+    private readonly SemaphoreSlim _initializationGate = new(1, 1);
     private CancellationTokenSource? _analysisCancellation;
     private CancellationTokenSource? _queryCancellation;
     private CancellationTokenSource? _batchCancellation;
@@ -69,16 +74,28 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private double _maximumVisualValue = 1;
     private readonly ObservableCollection<VisualAssetFilter> _visualFilterStack = [];
     private readonly Dictionary<Guid, AssetVisualMatchView> _visualMatchByAsset = [];
+    private readonly AssetLibraryWorkspaceSettings _workspaceSettings;
+    private bool _isLoading = true;
+    private bool _isReady;
+    private string _loadErrorMessage = string.Empty;
+    private double _viewportWidth = 1280d;
+    private bool _isRestoringWorkspace;
 
     public AssetLibraryViewModel(
         string databasePath,
         TaskOperationBridge taskOperationBridge,
         IReadOnlyList<AssetLibraryModuleDiagnostic>? moduleDiagnostics = null,
-        bool enablePreviewFeatures = false)
+        bool enablePreviewFeatures = false,
+        AssetLibraryWorkspaceSettings? workspaceSettings = null,
+        ILogService? logService = null)
     {
         var database = new AssetLibraryDatabase(databasePath);
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _enablePreviewFeatures = enablePreviewFeatures;
+        _logService = logService;
+        _workspaceSettings = workspaceSettings ?? new AssetLibraryWorkspaceSettings();
+        _workspaceSettings.Normalize();
+        _thumbnailWidth = _workspaceSettings.ThumbnailWidth;
         ModuleDiagnostics = enablePreviewFeatures ? moduleDiagnostics ?? [] : [];
         _importDiagnostics = new(Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT")
             ?? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT"));
@@ -89,24 +106,107 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         _batchProcessor = new(_visualAnalysis, _featureStore);
         AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
         _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
-        _searchDebounce.Tick += async (_, _) => { _searchDebounce.Stop(); await RefreshAsync(); };
-        RefreshCommand = new(RefreshAsync); ImportCommand = new(ImportAsync); LoadMoreCommand = new(LoadMoreAsync, () => _nextCursor is not null);
-        NewFolderCommand = new(NewFolderAsync); NewSubfolderCommand = new(NewSubfolderAsync, () => SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync);
-        NewTagCommand = new(NewTagAsync); ApplyTagsCommand = new(ApplyTagsAsync, () => SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
-        AddFolderCommand = new(AddFolderAsync, () => SelectedAssets.Count > 0 && SelectedFolder is not null); UndoCommand = new(UndoAsync, () => LastUndoToken is not null);
-        SaveSmartFolderCommand = new(SaveSmartFolderAsync); RelinkCommand = new(RelinkAsync); RateCommand = new AsyncCommand<int>(value => RateSelectedAsync(value));
-        VisualChipCommand = new AsyncCommand<string>(ApplyVisualChipAsync); ClearVisualModeCommand = new(ClearVisualModeAsync, () => IsTemporaryVisualMode);
-        FindSimilarCommand = new(FindSimilarAsync, () => SelectedAssets.Count == 1 && SelectedFeatures?.State == AssetVisualFeatureState.Valid);
-        AnalyzeSelectionCommand = new(AnalyzeSelectionCanonicalAsync, () => SelectedAssets.Count == 1);
-        AnalyzeVisibleCommand = new(AnalyzeVisibleAsync, CanAnalyzeVisible);
-        CancelBatchCommand = new(CancelBatchAsync, () => IsBatchAnalyzing);
-        SearchColorCommand = new(SearchColorAsync, () => IsVisualQueryScopeSupported); SearchPaletteColorCommand = new(SearchPaletteColorAsync, _ => IsVisualQueryScopeSupported); FindPaletteSimilarCommand = new(FindPaletteSimilarAsync, () => SelectedAssets.Count == 1 && Analysis is not null && IsVisualQueryScopeSupported);
-        ApplyAdvancedVisualFilterCommand = new(ApplyAdvancedVisualFilterAsync); RemoveVisualChipCommand = new(RemoveVisualChipAsync);
+        _searchDebounce.Tick += async (_, _) => { _searchDebounce.Stop(); if (IsReady) await RefreshAsync(); };
+        RefreshCommand = new(RefreshAsync, () => IsReady); RetryLoadCommand = new(RetryLoadAsync, () => !IsLoading); ImportCommand = new(ImportAsync, () => IsReady); LoadMoreCommand = new(LoadMoreAsync, () => IsReady && _nextCursor is not null);
+        NewFolderCommand = new(NewFolderAsync, () => IsReady); NewSubfolderCommand = new(NewSubfolderAsync, () => IsReady && SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync, () => IsReady);
+        NewTagCommand = new(NewTagAsync, () => IsReady); ApplyTagsCommand = new(ApplyTagsAsync, () => IsReady && SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
+        AddFolderCommand = new(AddFolderAsync, () => IsReady && SelectedAssets.Count > 0 && SelectedFolder is not null); UndoCommand = new(UndoAsync, () => IsReady && LastUndoToken is not null);
+        SaveSmartFolderCommand = new(SaveSmartFolderAsync, () => IsReady); RelinkCommand = new(RelinkAsync, () => IsReady); RateCommand = new AsyncCommand<int>(value => RateSelectedAsync(value), _ => IsReady && SelectedAssets.Count > 0);
+        VisualChipCommand = new AsyncCommand<string>(ApplyVisualChipAsync, _ => IsReady); ClearVisualModeCommand = new(ClearVisualModeAsync, () => IsReady && IsTemporaryVisualMode);
+        FindSimilarCommand = new(FindSimilarAsync, () => IsReady && SelectedAssets.Count == 1 && SelectedFeatures?.State == AssetVisualFeatureState.Valid);
+        AnalyzeSelectionCommand = new(AnalyzeSelectionCanonicalAsync, () => IsReady && SelectedAssets.Count == 1);
+        AnalyzeVisibleCommand = new(AnalyzeVisibleAsync, () => IsReady && CanAnalyzeVisible());
+        CancelBatchCommand = new(CancelBatchAsync, () => IsReady && IsBatchAnalyzing);
+        SearchColorCommand = new(SearchColorAsync, () => IsReady && IsVisualQueryScopeSupported); SearchPaletteColorCommand = new(SearchPaletteColorAsync, _ => IsReady && IsVisualQueryScopeSupported); FindPaletteSimilarCommand = new(FindPaletteSimilarAsync, () => IsReady && SelectedAssets.Count == 1 && Analysis is not null && IsVisualQueryScopeSupported);
+        ApplyAdvancedVisualFilterCommand = new(ApplyAdvancedVisualFilterAsync, () => IsReady); RemoveVisualChipCommand = new(RemoveVisualChipAsync, _ => IsReady);
+        ToggleOrganizationPaneCommand = new(
+            () => IsOrganizationPaneCollapsed = !IsOrganizationPaneCollapsed,
+            () => IsOrganizationPaneVisible || IsOrganizationPaneCollapsed && CanShowOrganizationPaneWhenExpanded);
+        ToggleInspectorPaneCommand = new(
+            () => IsInspectorPaneCollapsed = !IsInspectorPaneCollapsed,
+            () => !IsInspectorPinned && (IsInspectorPaneVisible || IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded));
+        ToggleInspectorPinCommand = new(() => IsInspectorPinned = !IsInspectorPinned);
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
     public IReadOnlyList<AssetLibraryModuleDiagnostic> ModuleDiagnostics { get; }
     public bool IsPreviewDiagnosticsEnabled => _enablePreviewFeatures && ModuleDiagnostics.Count > 0;
+    public bool IsReady { get => _isReady; private set { if (SetProperty(ref _isReady, value)) RaiseWorkspaceCommandStates(); } }
+    public bool IsLoading
+    {
+        get => _isLoading;
+        private set
+        {
+            if (!SetProperty(ref _isLoading, value)) return;
+            NotifyContentState();
+            RetryLoadCommand.RaiseCanExecuteChanged();
+        }
+    }
+    public string LoadErrorMessage { get => _loadErrorMessage; private set { if (SetProperty(ref _loadErrorMessage, value)) NotifyContentState(); } }
+    public bool HasLoadError => !string.IsNullOrWhiteSpace(LoadErrorMessage);
+    public bool HasAssetCards => AssetCards.Count > 0;
+    public bool IsEmptyStateVisible => !IsLoading && !HasLoadError && !HasAssetCards;
+    public bool HasActiveQuery => !string.IsNullOrWhiteSpace(SearchText) || SelectedFolder is not null || SelectedTag is not null || SelectedSmartFolder is not null || IsTemporaryVisualMode;
+    public string EmptyStateTitle => HasActiveQuery ? "没有符合当前条件的素材" : "素材库还是空的";
+    public string EmptyStateDescription => HasActiveQuery ? "清除搜索或筛选后重试，现有素材和文件不会被修改。" : "导入文件引用以开始整理；默认不会移动、改名或删除源文件。";
+    public double OrganizationPaneWidth => _workspaceSettings.OrganizationPaneWidth;
+    public double InspectorPaneWidth => _workspaceSettings.InspectorPaneWidth;
+    public bool IsOrganizationPaneCollapsed
+    {
+        get => _workspaceSettings.OrganizationPaneCollapsed;
+        set
+        {
+            if (_workspaceSettings.OrganizationPaneCollapsed == value) return;
+            _workspaceSettings.OrganizationPaneCollapsed = value;
+            NotifyWorkspaceLayout();
+        }
+    }
+    public bool IsInspectorPaneCollapsed
+    {
+        get => _workspaceSettings.InspectorPaneCollapsed;
+        set
+        {
+            if (_workspaceSettings.InspectorPaneCollapsed == value) return;
+            _workspaceSettings.InspectorPaneCollapsed = value;
+            NotifyWorkspaceLayout();
+        }
+    }
+    public bool IsInspectorPinned
+    {
+        get => _workspaceSettings.InspectorPinned;
+        set
+        {
+            if (_workspaceSettings.InspectorPinned == value) return;
+            _workspaceSettings.InspectorPinned = value;
+            if (value) _workspaceSettings.InspectorPaneCollapsed = false;
+            NotifyWorkspaceLayout();
+            ToggleInspectorPaneCommand.RaiseCanExecuteChanged();
+        }
+    }
+    private bool CanFitOrganizationPane => _viewportWidth >= MinimumCollectionPaneWidth + PaneSplitterWidth + OrganizationPaneWidth;
+    private bool CanFitInspectorPane => _viewportWidth >= MinimumCollectionPaneWidth + PaneSplitterWidth + InspectorPaneWidth;
+    private bool CanFitBothPanes => _viewportWidth >= MinimumCollectionPaneWidth + (2d * PaneSplitterWidth) + OrganizationPaneWidth + InspectorPaneWidth;
+    private bool CanShowOrganizationPaneWhenExpanded =>
+        IsInspectorPaneCollapsed || !IsInspectorPinned ? CanFitOrganizationPane : CanFitBothPanes;
+    private bool CanShowInspectorPaneWhenExpanded =>
+        IsOrganizationPaneCollapsed || IsInspectorPinned ? CanFitInspectorPane : CanFitBothPanes;
+    public bool IsOrganizationPaneVisible => !IsOrganizationPaneCollapsed && CanShowOrganizationPaneWhenExpanded;
+    public bool IsInspectorPaneVisible => !IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded;
+    public GridLength OrganizationPaneColumnWidth => IsOrganizationPaneVisible ? new(OrganizationPaneWidth) : new(0);
+    public double OrganizationPaneMinimumWidth => IsOrganizationPaneVisible ? 180d : 0d;
+    public double OrganizationPaneMaximumWidth => IsOrganizationPaneVisible ? 420d : 0d;
+    public GridLength OrganizationSplitterColumnWidth => IsOrganizationPaneVisible ? new(6) : new(0);
+    public GridLength InspectorPaneColumnWidth => IsInspectorPaneVisible ? new(InspectorPaneWidth) : new(0);
+    public double InspectorPaneMinimumWidth => IsInspectorPaneVisible ? 260d : 0d;
+    public double InspectorPaneMaximumWidth => IsInspectorPaneVisible ? 520d : 0d;
+    public GridLength InspectorSplitterColumnWidth => IsInspectorPaneVisible ? new(6) : new(0);
+    public string OrganizationPaneToggleLabel => IsOrganizationPaneVisible
+        ? "收起组织栏"
+        : IsOrganizationPaneCollapsed ? "展开组织栏" : "组织栏（窗口过窄）";
+    public string InspectorPaneToggleLabel => IsInspectorPaneVisible
+        ? "收起检查器"
+        : IsInspectorPaneCollapsed ? "展开检查器" : "检查器（窗口过窄）";
+    public string InspectorPinLabel => IsInspectorPinned ? "取消固定检查器" : "固定检查器";
     public PreviewImportDiagnostics ImportDiagnostics => _importDiagnostics.Snapshot;
     public void UpdateAssetGridDiagnostics(int itemCount, string itemsSourceInstance, bool itemsSourceIsViewModelCollection, string dataContextType) =>
         _importDiagnostics.SetBindingState(itemCount, itemsSourceInstance, itemsSourceIsViewModelCollection, dataContextType, CurrentCollectionDiagnostic);
@@ -125,7 +225,19 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public ObservableCollection<TagGroup> TagGroups { get; } = [];
     public ObservableCollection<SmartFolder> SmartFolders { get; } = [];
     public ObservableCollection<AssetTagUsageSummary> SelectedTagSummary { get; } = [];
-    public string SearchText { get => _searchText; set { if (SetProperty(ref _searchText, value)) { _searchDebounce.Stop(); _searchDebounce.Start(); } } }
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (!SetProperty(ref _searchText, value)) return;
+            _workspaceSettings.SearchText = value;
+            NotifyContentState();
+            if (_isRestoringWorkspace) return;
+            _searchDebounce.Stop();
+            _searchDebounce.Start();
+        }
+    }
     public string TagInput { get => _tagInput; set { if (SetProperty(ref _tagInput, value)) ApplyTagsCommand.RaiseCanExecuteChanged(); } }
     public string FolderSearch { get => _folderSearch; set { if (SetProperty(ref _folderSearch, value)) RefreshClassifierFolders(); } }
     public string NewFolderName { get => _newFolderName; set => SetProperty(ref _newFolderName, value); }
@@ -149,12 +261,35 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         string.IsNullOrWhiteSpace(SmartAnalysisStatus) ? null : $"视觉状态={SmartAnalysisStatus}"
     }.Where(value => value is not null)!);
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
-    public void SetForegroundError(string message) => Status = message;
+    public void SetForegroundError(string message)
+    {
+        IsLoading = false;
+        LoadErrorMessage = message;
+        Status = message;
+    }
+    public void SetStatusMessage(string message) => Status = message;
     public int VisibleCount => AssetCards.Count;
     public int SelectionCount => SelectedAssets.Count;
+    public bool HasSelection => SelectionCount > 0;
+    public bool IsSelectionEmpty => SelectionCount == 0;
     public bool HasMultipleSelection => SelectionCount > 1;
     public bool HasSingleSelection => SelectionCount == 1;
-    public double ThumbnailWidth { get => _thumbnailWidth; set => SetProperty(ref _thumbnailWidth, Math.Clamp(value, 120, 280)); }
+    public double ThumbnailWidth
+    {
+        get => _thumbnailWidth;
+        set
+        {
+            var normalized = Math.Clamp(value, 120, 280);
+            if (!SetProperty(ref _thumbnailWidth, normalized)) return;
+            _workspaceSettings.ThumbnailWidth = normalized;
+            OnPropertyChanged(nameof(ThumbnailItemWidth));
+            OnPropertyChanged(nameof(ThumbnailItemHeight));
+            OnPropertyChanged(nameof(ThumbnailCardHeight));
+        }
+    }
+    public double ThumbnailItemWidth => ThumbnailWidth + 8d;
+    public double ThumbnailItemHeight => ThumbnailWidth + 44d;
+    public double ThumbnailCardHeight => ThumbnailWidth + 36d;
     public int PaletteSize { get => _paletteSize; set { if (SetProperty(ref _paletteSize, value) && SelectedAsset is not null) _ = AnalyzeSelectionCanonicalAsync(); } }
     public AssetVisualAnalysisResult? Analysis { get => _analysis; private set { if (SetProperty(ref _analysis, value)) { OnPropertyChanged(nameof(AnalysisStatus)); FindPaletteSimilarCommand.RaiseCanExecuteChanged(); } } }
     public bool IsAnalyzing { get => _isAnalyzing; private set { if (SetProperty(ref _isAnalyzing, value)) OnPropertyChanged(nameof(AnalysisStatus)); } }
@@ -180,10 +315,10 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
     public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) { SyncSelection(value is null ? [] : [value]); } } }
-    public AssetFolder? SelectedFolder { get => _selectedFolder; set { if (SetProperty(ref _selectedFolder, value)) { RaiseActions(); RefreshBatchScopeAvailability(); _ = RefreshAsync(); } } }
-    public AssetTag? SelectedTag { get => _selectedTag; set { if (SetProperty(ref _selectedTag, value)) _ = RefreshAsync(); } }
-    public SmartFolder? SelectedSmartFolder { get => _selectedSmartFolder; set { if (SetProperty(ref _selectedSmartFolder, value)) { OnPropertyChanged(nameof(IsVisualQueryScopeSupported)); OnPropertyChanged(nameof(VisualQueryScopeStatus)); SearchColorCommand.RaiseCanExecuteChanged(); SearchPaletteColorCommand.RaiseCanExecuteChanged(); FindPaletteSimilarCommand.RaiseCanExecuteChanged(); _ = RefreshAsync(); } } }
-    public AsyncCommand RefreshCommand { get; } public AsyncCommand ImportCommand { get; } public AsyncCommand LoadMoreCommand { get; }
+    public AssetFolder? SelectedFolder { get => _selectedFolder; set { if (SetProperty(ref _selectedFolder, value)) { _workspaceSettings.SelectedFolderId = value?.FolderId; NotifyContentState(); RaiseActions(); RefreshBatchScopeAvailability(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
+    public AssetTag? SelectedTag { get => _selectedTag; set { if (SetProperty(ref _selectedTag, value)) { _workspaceSettings.SelectedTagId = value?.TagId; NotifyContentState(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
+    public SmartFolder? SelectedSmartFolder { get => _selectedSmartFolder; set { if (SetProperty(ref _selectedSmartFolder, value)) { _workspaceSettings.SelectedSmartFolderId = value?.SmartFolderId; NotifyContentState(); OnPropertyChanged(nameof(IsVisualQueryScopeSupported)); OnPropertyChanged(nameof(VisualQueryScopeStatus)); SearchColorCommand.RaiseCanExecuteChanged(); SearchPaletteColorCommand.RaiseCanExecuteChanged(); FindPaletteSimilarCommand.RaiseCanExecuteChanged(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
+    public AsyncCommand RefreshCommand { get; } public AsyncCommand RetryLoadCommand { get; } public AsyncCommand ImportCommand { get; } public AsyncCommand LoadMoreCommand { get; }
     public AsyncCommand NewFolderCommand { get; } public AsyncCommand NewSubfolderCommand { get; } public AsyncCommand BatchFolderCommand { get; }
     public AsyncCommand NewTagCommand { get; } public AsyncCommand ApplyTagsCommand { get; } public AsyncCommand AddFolderCommand { get; }
     public AsyncCommand UndoCommand { get; } public AsyncCommand SaveSmartFolderCommand { get; } public AsyncCommand RelinkCommand { get; } public AsyncCommand<int> RateCommand { get; }
@@ -191,6 +326,60 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public AsyncCommand AnalyzeSelectionCommand { get; } public AsyncCommand AnalyzeVisibleCommand { get; } public AsyncCommand CancelBatchCommand { get; }
     public AsyncCommand SearchColorCommand { get; } public AsyncCommand<string> SearchPaletteColorCommand { get; } public AsyncCommand FindPaletteSimilarCommand { get; }
     public AsyncCommand ApplyAdvancedVisualFilterCommand { get; } public AsyncCommand<string> RemoveVisualChipCommand { get; }
+    public AssetCommand ToggleOrganizationPaneCommand { get; }
+    public AssetCommand ToggleInspectorPaneCommand { get; }
+    public AssetCommand ToggleInspectorPinCommand { get; }
+
+    public void UpdateViewportWidth(double width)
+    {
+        var normalized = double.IsFinite(width) ? Math.Max(0d, width) : 0d;
+        if (Math.Abs(_viewportWidth - normalized) < 0.5d) return;
+        _viewportWidth = normalized;
+        NotifyWorkspaceLayout();
+    }
+
+    public void UpdatePaneWidths(double organizationPaneWidth, double inspectorPaneWidth)
+    {
+        if (IsOrganizationPaneVisible && double.IsFinite(organizationPaneWidth) && organizationPaneWidth > 0)
+            _workspaceSettings.OrganizationPaneWidth = Math.Clamp(organizationPaneWidth, 180d, 420d);
+        if (IsInspectorPaneVisible && double.IsFinite(inspectorPaneWidth) && inspectorPaneWidth > 0)
+            _workspaceSettings.InspectorPaneWidth = Math.Clamp(inspectorPaneWidth, 260d, 520d);
+        NotifyWorkspaceLayout();
+    }
+
+    private void NotifyWorkspaceLayout()
+    {
+        OnPropertyChanged(nameof(OrganizationPaneWidth));
+        OnPropertyChanged(nameof(InspectorPaneWidth));
+        OnPropertyChanged(nameof(IsOrganizationPaneCollapsed));
+        OnPropertyChanged(nameof(IsInspectorPaneCollapsed));
+        OnPropertyChanged(nameof(IsInspectorPinned));
+        OnPropertyChanged(nameof(IsOrganizationPaneVisible));
+        OnPropertyChanged(nameof(IsInspectorPaneVisible));
+        OnPropertyChanged(nameof(OrganizationPaneColumnWidth));
+        OnPropertyChanged(nameof(OrganizationPaneMinimumWidth));
+        OnPropertyChanged(nameof(OrganizationPaneMaximumWidth));
+        OnPropertyChanged(nameof(OrganizationSplitterColumnWidth));
+        OnPropertyChanged(nameof(InspectorPaneColumnWidth));
+        OnPropertyChanged(nameof(InspectorPaneMinimumWidth));
+        OnPropertyChanged(nameof(InspectorPaneMaximumWidth));
+        OnPropertyChanged(nameof(InspectorSplitterColumnWidth));
+        OnPropertyChanged(nameof(OrganizationPaneToggleLabel));
+        OnPropertyChanged(nameof(InspectorPaneToggleLabel));
+        OnPropertyChanged(nameof(InspectorPinLabel));
+        ToggleOrganizationPaneCommand.RaiseCanExecuteChanged();
+        ToggleInspectorPaneCommand.RaiseCanExecuteChanged();
+    }
+
+    private void NotifyContentState()
+    {
+        OnPropertyChanged(nameof(HasLoadError));
+        OnPropertyChanged(nameof(HasAssetCards));
+        OnPropertyChanged(nameof(IsEmptyStateVisible));
+        OnPropertyChanged(nameof(HasActiveQuery));
+        OnPropertyChanged(nameof(EmptyStateTitle));
+        OnPropertyChanged(nameof(EmptyStateDescription));
+    }
 
     public async Task ExecuteVisualContextActionAsync(AssetItem asset, VisualContextAction action)
     {
@@ -206,10 +395,68 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 
     public async Task InitializeAsync()
     {
-        await _repository.InitializeAsync(); await RefreshFilterListsAsync();
-        if (_enablePreviewFeatures && Folders.Count == 0) await SeedPreviewStructureAsync();
-        await RefreshAsync();
-        var journal = await _repository.ListUndoJournalAsync(1); LastUndoToken = journal.FirstOrDefault(x => !x.IsUndone)?.Token; RaiseActions();
+        await _initializationGate.WaitAsync();
+        try
+        {
+            if (IsReady) return;
+            _searchDebounce.Stop();
+            _queryCancellation?.Cancel();
+            IsLoading = true;
+            LoadErrorMessage = string.Empty;
+            await _repository.InitializeAsync();
+            await RefreshFilterListsAsync();
+            if (_enablePreviewFeatures && Folders.Count == 0) await SeedPreviewStructureAsync();
+            RestoreWorkspaceQuery();
+            await RefreshAsync();
+            var journal = await _repository.ListUndoJournalAsync(1);
+            LastUndoToken = journal.FirstOrDefault(x => !x.IsUndone)?.Token;
+            IsReady = true;
+            RaiseActions();
+        }
+        catch (Exception exception)
+        {
+            IsReady = false;
+            _logService?.Error("素材库初始化失败。", exception);
+            SetForegroundError("素材库加载失败。请检查数据目录权限后重试。");
+        }
+        finally
+        {
+            _initializationGate.Release();
+            RaiseWorkspaceCommandStates();
+        }
+    }
+
+    private Task RetryLoadAsync() => IsReady ? RefreshAsync() : InitializeAsync();
+
+    private void RestoreWorkspaceQuery()
+    {
+        _isRestoringWorkspace = true;
+        try
+        {
+            _searchText = _workspaceSettings.SearchText;
+            _selectedFolder = Folders.FirstOrDefault(item => item.FolderId == _workspaceSettings.SelectedFolderId);
+            _selectedTag = Tags.FirstOrDefault(item => item.TagId == _workspaceSettings.SelectedTagId);
+            _selectedSmartFolder = SmartFolders.FirstOrDefault(item => item.SmartFolderId == _workspaceSettings.SelectedSmartFolderId);
+            _workspaceSettings.SelectedFolderId = _selectedFolder?.FolderId;
+            _workspaceSettings.SelectedTagId = _selectedTag?.TagId;
+            _workspaceSettings.SelectedSmartFolderId = _selectedSmartFolder?.SmartFolderId;
+            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged(nameof(SelectedFolder));
+            OnPropertyChanged(nameof(SelectedTag));
+            OnPropertyChanged(nameof(SelectedSmartFolder));
+            OnPropertyChanged(nameof(IsVisualQueryScopeSupported));
+            OnPropertyChanged(nameof(VisualQueryScopeStatus));
+            SearchColorCommand.RaiseCanExecuteChanged();
+            SearchPaletteColorCommand.RaiseCanExecuteChanged();
+            FindPaletteSimilarCommand.RaiseCanExecuteChanged();
+            NotifyContentState();
+            RaiseActions();
+            RefreshBatchScopeAvailability();
+        }
+        finally
+        {
+            _isRestoringWorkspace = false;
+        }
     }
 
     public void SyncSelection(IEnumerable<AssetItem> items)
@@ -230,13 +477,15 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         if (selected.Length != 1) { _selectedAsset = selected.FirstOrDefault(); OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset?.AssetId != selected[0].AssetId) { _selectedAsset = selected[0]; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
-        OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
+        OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         _ = RefreshSelectionSummaryAsync(); if (selected.Length == 1) { _ = RefreshSelectedFeaturesAsync(selected[0]); _ = AnalyzeSelectionCanonicalAsync(); } RaiseActions(); RaiseVisualActions();
     }
 
     private async Task RefreshAsync()
     {
         _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
+        IsLoading = true;
+        LoadErrorMessage = string.Empty;
         try
         {
             if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
@@ -270,6 +519,21 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+        catch (Exception exception)
+        {
+            if (generation != Volatile.Read(ref _queryGeneration)) return;
+            _logService?.Error("素材库查询失败。", exception);
+            LoadErrorMessage = "无法加载当前素材集合。请检查数据目录权限或稍后重试。";
+            Status = LoadErrorMessage;
+        }
+        finally
+        {
+            if (generation == Volatile.Read(ref _queryGeneration))
+            {
+                IsLoading = false;
+                NotifyContentState();
+            }
+        }
     }
 
     private async Task LoadMoreAsync()
@@ -495,7 +759,21 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 
     private async Task ClearVisualModeAsync()
     {
-        _visualResultMode = VisualResultMode.None; _visualFilter = null; _visualFilterStack.Clear(); ActiveVisualChips.Clear(); _similarityQuery = null; _colorQuery = null; _visualMatchByAsset.Clear(); VisualModeLabel = string.Empty; NotifyVisualMode(); await RefreshAsync();
+        ResetVisualModeState();
+        await RefreshAsync();
+    }
+
+    private void ResetVisualModeState()
+    {
+        _visualResultMode = VisualResultMode.None;
+        _visualFilter = null;
+        _visualFilterStack.Clear();
+        ActiveVisualChips.Clear();
+        _similarityQuery = null;
+        _colorQuery = null;
+        _visualMatchByAsset.Clear();
+        VisualModeLabel = string.Empty;
+        NotifyVisualMode();
     }
 
     private async Task FindSimilarAsync()
@@ -723,18 +1001,21 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, match.Scores, null); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        NotifyContentState();
     }
 
     private void SetColorMatches(IEnumerable<VisualAssetMatch> matches)
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        NotifyContentState();
     }
 
     private void SetAssetCards(IEnumerable<AssetItem> assets)
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var asset in assets) AssetCards.Add(new(asset));
+        NotifyContentState();
         RefreshBatchScopeAvailability();
     }
 
@@ -746,8 +1027,37 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         while (VisualSearchHistory.Count > 10) VisualSearchHistory.RemoveAt(VisualSearchHistory.Count - 1);
     }
 
-    private void NotifyVisualMode() { OnPropertyChanged(nameof(IsTemporaryVisualMode)); ClearVisualModeCommand.RaiseCanExecuteChanged(); }
+    private void NotifyVisualMode() { OnPropertyChanged(nameof(IsTemporaryVisualMode)); NotifyContentState(); ClearVisualModeCommand.RaiseCanExecuteChanged(); }
     private void RaiseVisualActions() { AnalyzeSelectionCommand.RaiseCanExecuteChanged(); RefreshBatchScopeAvailability(); CancelBatchCommand.RaiseCanExecuteChanged(); FindSimilarCommand.RaiseCanExecuteChanged(); }
+
+    private void RaiseWorkspaceCommandStates()
+    {
+        RefreshCommand.RaiseCanExecuteChanged();
+        RetryLoadCommand.RaiseCanExecuteChanged();
+        ImportCommand.RaiseCanExecuteChanged();
+        LoadMoreCommand.RaiseCanExecuteChanged();
+        NewFolderCommand.RaiseCanExecuteChanged();
+        NewSubfolderCommand.RaiseCanExecuteChanged();
+        BatchFolderCommand.RaiseCanExecuteChanged();
+        NewTagCommand.RaiseCanExecuteChanged();
+        ApplyTagsCommand.RaiseCanExecuteChanged();
+        AddFolderCommand.RaiseCanExecuteChanged();
+        UndoCommand.RaiseCanExecuteChanged();
+        SaveSmartFolderCommand.RaiseCanExecuteChanged();
+        RelinkCommand.RaiseCanExecuteChanged();
+        RateCommand.RaiseCanExecuteChanged();
+        VisualChipCommand.RaiseCanExecuteChanged();
+        ClearVisualModeCommand.RaiseCanExecuteChanged();
+        FindSimilarCommand.RaiseCanExecuteChanged();
+        AnalyzeSelectionCommand.RaiseCanExecuteChanged();
+        AnalyzeVisibleCommand.RaiseCanExecuteChanged();
+        CancelBatchCommand.RaiseCanExecuteChanged();
+        SearchColorCommand.RaiseCanExecuteChanged();
+        SearchPaletteColorCommand.RaiseCanExecuteChanged();
+        FindPaletteSimilarCommand.RaiseCanExecuteChanged();
+        ApplyAdvancedVisualFilterCommand.RaiseCanExecuteChanged();
+        RemoveVisualChipCommand.RaiseCanExecuteChanged();
+    }
 
     private bool IsCurrentAnalysis(AssetItem asset, long generation) =>
         generation == Volatile.Read(ref _analysisGeneration) &&
@@ -801,7 +1111,29 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private void RefreshClassifierFolders() { ClassifierFolders.Clear(); foreach (var folder in Folders.Where(x => string.IsNullOrWhiteSpace(FolderSearch) || x.Name.Contains(FolderSearch, StringComparison.OrdinalIgnoreCase))) ClassifierFolders.Add(folder); }
     private async Task SeedPreviewStructureAsync() { await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光\n灯光/柔光"); var groups = new[] { new TagGroup(Guid.NewGuid(), "人物"), new TagGroup(Guid.NewGuid(), "视觉"), new TagGroup(Guid.NewGuid(), "概念") }; foreach (var group in groups) await _repository.SaveTagGroupAsync(group); await _repository.BatchCreateTagsAsync("身体,宗教,凝视", groups[2].TagGroupId); await _repository.BatchCreateTagsAsync("红,蓝,绿色", groups[1].TagGroupId); await RefreshFilterListsAsync(); }
 
-    public void ClearFilters() { _selectedFolder = null; _selectedTag = null; _selectedSmartFolder = null; SearchText = string.Empty; OnPropertyChanged(nameof(SelectedFolder)); OnPropertyChanged(nameof(SelectedTag)); OnPropertyChanged(nameof(SelectedSmartFolder)); _ = RefreshAsync(); }
+    public void ClearFilters()
+    {
+        _searchDebounce.Stop();
+        ResetVisualModeState();
+        _selectedFolder = null;
+        _selectedTag = null;
+        _selectedSmartFolder = null;
+        _searchText = string.Empty;
+        _workspaceSettings.SelectedFolderId = null;
+        _workspaceSettings.SelectedTagId = null;
+        _workspaceSettings.SelectedSmartFolderId = null;
+        _workspaceSettings.SearchText = string.Empty;
+        OnPropertyChanged(nameof(SearchText));
+        OnPropertyChanged(nameof(SelectedFolder));
+        OnPropertyChanged(nameof(SelectedTag));
+        OnPropertyChanged(nameof(SelectedSmartFolder));
+        OnPropertyChanged(nameof(IsVisualQueryScopeSupported));
+        OnPropertyChanged(nameof(VisualQueryScopeStatus));
+        NotifyContentState();
+        RaiseActions();
+        RefreshBatchScopeAvailability();
+        _ = RefreshAsync();
+    }
     public void FocusFolderClassifier() => Status = "F：快速分类器已打开；↑↓选择、Space多选、Enter确认、Esc关闭";
     private AssetLibraryQuery BuildQuery(string? cursor = null)
     {
@@ -821,7 +1153,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         _ => "AllAssets"
     };
     private static string UniqueName(string seed, IEnumerable<string> names) { var set = names.ToHashSet(StringComparer.OrdinalIgnoreCase); if (!set.Contains(seed)) return seed; for (var i = 2; ; i++) if (!set.Contains($"{seed} {i}")) return $"{seed} {i}"; }
-    private void RaiseActions() { AddFolderCommand.RaiseCanExecuteChanged(); ApplyTagsCommand.RaiseCanExecuteChanged(); NewSubfolderCommand.RaiseCanExecuteChanged(); UndoCommand.RaiseCanExecuteChanged(); }
+    private void RaiseActions() { AddFolderCommand.RaiseCanExecuteChanged(); ApplyTagsCommand.RaiseCanExecuteChanged(); NewSubfolderCommand.RaiseCanExecuteChanged(); UndoCommand.RaiseCanExecuteChanged(); RateCommand.RaiseCanExecuteChanged(); }
     public ValueTask DisposeAsync() { _searchDebounce.Stop(); _analysisCancellation?.Cancel(); _analysisCancellation?.Dispose(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _batchCancellation?.Cancel(); _batchCancellation?.Dispose(); _analysisCoordinator.ClearSelection(); return _repository.DisposeAsync(); }
 
     private enum VisualResultMode { None, Filter, Similarity, Color }
