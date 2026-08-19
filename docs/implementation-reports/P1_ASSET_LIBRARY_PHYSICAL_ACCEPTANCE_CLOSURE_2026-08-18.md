@@ -1,9 +1,13 @@
 # 素材库 P1 Gate A 真实验收记录（BLOCKED）
 
-日期：2026-08-19  
-分支：`feature/modular-harness-v1-p1`  
-Gate A 起点：`20c1df775673cec790b1daa9db25072c2e34926c`  
-P0：`140e34348000174986c6e503dcedff8f90a78c34`  
+日期：2026-08-19
+
+分支：`feature/modular-harness-v1-p1`
+
+Gate A 起点：`20c1df775673cec790b1daa9db25072c2e34926c`
+
+P0：`140e34348000174986c6e503dcedff8f90a78c34`
+
 P1 实现：`b4bd38f53d6a44756289eeda8bfc4feb343443c7`
 
 ## 结论
