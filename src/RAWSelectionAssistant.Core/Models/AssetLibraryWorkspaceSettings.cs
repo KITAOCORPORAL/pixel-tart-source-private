@@ -16,6 +16,7 @@ public sealed class AssetLibraryWorkspaceSettings
     public Guid? SelectedFolderId { get; set; }
     public Guid? SelectedTagId { get; set; }
     public Guid? SelectedSmartFolderId { get; set; }
+    public Guid? SelectedAssetId { get; set; }
 
     public void Normalize()
     {

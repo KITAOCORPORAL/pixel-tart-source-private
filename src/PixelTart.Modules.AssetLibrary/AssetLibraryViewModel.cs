@@ -216,6 +216,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public ObservableCollection<VisualFilterChipView> ActiveVisualChips { get; } = [];
     public ObservableCollection<VisualSearchHistoryEntry> VisualSearchHistory { get; } = [];
     public ObservableCollection<AssetItem> SelectedAssets { get; } = [];
+    public event EventHandler? SelectionRestoreRequested;
     public ObservableCollection<AssetFolderTreeItem> FolderTree { get; } = [];
     public ObservableCollection<AssetFolder> Folders { get; } = [];
     public ObservableCollection<AssetFolder> ClassifierFolders { get; } = [];
@@ -474,6 +475,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             IsAnalyzing = false;
         }
         SelectedAssets.Clear(); foreach (var item in selected) SelectedAssets.Add(item);
+        _workspaceSettings.SelectedAssetId = nextSingleAssetId;
         if (selected.Length != 1) { _selectedAsset = selected.FirstOrDefault(); OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset?.AssetId != selected[0].AssetId) { _selectedAsset = selected[0]; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
@@ -1001,6 +1003,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, match.Scores, null); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
 
@@ -1008,6 +1011,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
 
@@ -1015,8 +1019,31 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var asset in assets) AssetCards.Add(new(asset));
+        ReconcileSelectionWithVisibleCards();
         NotifyContentState();
         RefreshBatchScopeAvailability();
+    }
+
+    private void ReconcileSelectionWithVisibleCards()
+    {
+        var selectedAssetId = SelectedAssets.Count == 1
+            ? SelectedAssets[0].AssetId
+            : _workspaceSettings.SelectedAssetId;
+        var visibleCard = selectedAssetId is null
+            ? null
+            : AssetCards.FirstOrDefault(card => card.Asset.AssetId == selectedAssetId.Value);
+
+        if (visibleCard is null)
+        {
+            if (SelectedAssets.Count > 0 || _workspaceSettings.SelectedAssetId is not null)
+                SyncSelection([]);
+        }
+        else if (SelectedAssets.Count != 1 || SelectedAssets[0].AssetId != visibleCard.Asset.AssetId)
+        {
+            SyncSelection([visibleCard.Asset]);
+        }
+
+        SelectionRestoreRequested?.Invoke(this, EventArgs.Empty);
     }
 
     private void UpdateActiveVisualLabel() => VisualModeLabel = string.Join(" + ", ActiveVisualChips.Select(chip => chip.Label));

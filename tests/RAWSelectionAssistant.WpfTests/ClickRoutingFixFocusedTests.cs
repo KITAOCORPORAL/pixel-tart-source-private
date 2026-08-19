@@ -75,7 +75,12 @@ public sealed class ClickRoutingFixFocusedTests
     {
         var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
         StringAssert.Contains(diagnostics, "_activeAttempt.Layer4Action.ActionFinalized");
-        StringAssert.Contains(diagnostics, "if (!IsCloseLike(button)) return;");
+        StringAssert.Contains(
+            diagnostics,
+            "if (!CanCorrelateWithActiveAttempt(requireWpfDown: true) || !TryConfirmPhysicalTarget(button)) return;");
+        Assert.IsFalse(
+            diagnostics.Contains("if (!IsCloseLike(button)) return;", StringComparison.Ordinal),
+            "Confirmed ordinary buttons must remain observable for Gate A state-transition evidence.");
         StringAssert.Contains(diagnostics, "if (!IsCloseLike(control) && !IsCloseLike(targetSource)) return;");
         StringAssert.Contains(diagnostics, "if (_activeAttempt is null || _activeAttempt.Layer4Action.ActionFinalized");
         StringAssert.Contains(diagnostics, "_activeAttempt = null;");

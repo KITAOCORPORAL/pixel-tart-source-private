@@ -29,7 +29,9 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "MissingAutomationId",
             "DuplicateCloseAuthorityBanner",
             "PhysicalPointerDiagnosticCopyButton",
-            "Title = \"像素蛋挞 [Physical Pointer Diagnostic]\"");
+            "Title = \"像素蛋挞 [Physical Pointer Diagnostic]\"",
+            "Title = \"像素蛋挞 [Modular Harness Dev]\"",
+            "#if MODULAR_HARNESS_DEV_PREVIEW");
         ContainsAll(Read("src/RAWSelectionAssistant/MainWindow.xaml.cs"),
             "CopyPhysicalPointerDiagnosticId_Click",
             "#if INPUT_ROUTING_DIAGNOSTICS",
@@ -37,12 +39,19 @@ public sealed class PhysicalPointerDiagnosticContractTests
     }
 
     [TestMethod]
-    public void Diagnostic_IsAcceptanceOnlyAndWritesFixedSanitizedArtifact()
+    public void Diagnostic_IsAcceptanceOrExplicitDevPreviewOnlyAndWritesFixedSanitizedArtifact()
     {
         var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
         ContainsAll(diagnostics,
             "#if INPUT_ROUTING_DIAGNOSTICS",
             ".Acceptance",
+            "#if MODULAR_HARNESS_DEV_PREVIEW",
+            "#else",
+            "return false;",
+            "PixelTart_ModularHarness_V1_DevPreview",
+            "PIXEL_TART_PHYSICAL_POINTER_DIAGNOSTICS",
+            "Environment.GetEnvironmentVariable(DevPreviewOptInEnvironmentVariable)",
+            "\"1\"",
             "AppDataPaths.Root",
             "InputDiagnostics",
             "physical-pointer-session.json",
@@ -55,7 +64,17 @@ public sealed class PhysicalPointerDiagnosticContractTests
         Assert.IsFalse(diagnostics.Contains("file_name", StringComparison.OrdinalIgnoreCase));
         Assert.IsFalse(diagnostics.Contains("project_name", StringComparison.OrdinalIgnoreCase));
         Assert.IsFalse(diagnostics.Contains("full_path", StringComparison.OrdinalIgnoreCase));
+        Assert.IsFalse(diagnostics.Contains("StartsWith(DevPreviewProcessName", StringComparison.Ordinal));
+        Assert.IsFalse(diagnostics.Contains("EndsWith(DevPreviewProcessName", StringComparison.Ordinal));
+        Assert.IsFalse(diagnostics.Contains("Contains(DevPreviewProcessName", StringComparison.Ordinal));
         Assert.IsTrue(diagnostics.TrimEnd().EndsWith("#endif", StringComparison.Ordinal));
+
+        var project = Read("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj");
+        ContainsAll(project,
+            "Condition=\"'$(InputRoutingDiagnostics)' == 'true'\"",
+            ";INPUT_ROUTING_DIAGNOSTICS",
+            "Condition=\"'$(ModularHarnessDevPreview)' == 'true'\"",
+            ";MODULAR_HARNESS_DEV_PREVIEW");
     }
 
     [TestMethod]
@@ -86,6 +105,7 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "VisualParentChain",
             "args.ChangedButton != MouseButton.Left",
             "CurrentTutorialStep");
+        Assert.IsFalse(diagnostics.Contains("if (!IsCloseLike(button)) return;", StringComparison.Ordinal));
         ContainsAll(diagnostics,
             "MouseCapturedElement",
             "IsMouseCaptured",
@@ -97,6 +117,145 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "ButtonInstanceSameDownUp",
             "ClickMode",
             "CommandCanExecute");
+    }
+
+    [TestMethod]
+    public void Diagnostic_CorrelatesRealSplitterAndSliderStateTransitions()
+    {
+        var host = Read("src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs");
+        var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
+
+        ContainsAll(host,
+            "Thumb.DragStartedEvent",
+            "Thumb.DragCompletedEvent",
+            "Keyboard.PreviewKeyDownEvent",
+            "Keyboard.KeyDownEvent",
+            "Keyboard.PreviewKeyUpEvent",
+            "Keyboard.KeyUpEvent",
+            "WM_KEYDOWN",
+            "WM_KEYUP",
+            "GetMessageTime()",
+            "scanCode: (int)((nativeKeyData >> 16) & 0xff)",
+            "repeatCount: (int)(nativeKeyData & 0xffff)",
+            "modifiers: Keyboard.Modifiers",
+            "AssetOrganizationSplitter",
+            "OrganizationPaneWidth",
+            "AssetInspectorSplitter",
+            "InspectorPaneWidth",
+            "AssetThumbnailSizeSlider",
+            "ThumbnailWidth",
+            "grid.ColumnDefinitions[0].ActualWidth",
+            "inspectorGrid.ColumnDefinitions[4].ActualWidth",
+            "slider.Value",
+            "viewModel.OrganizationPaneWidth",
+            "viewModel.InspectorPaneWidth",
+            "viewModel.ThumbnailWidth",
+            "viewModel.IsOrganizationPaneCollapsed",
+            "viewModel.IsInspectorPaneCollapsed",
+            "ExpectedKeyboardAdjustment",
+            "(\"AssetOrganizationSplitter\", Key.Left) => \"Decrease\"",
+            "(\"AssetOrganizationSplitter\", Key.Right) => \"Increase\"",
+            "(\"AssetInspectorSplitter\", Key.Left) => \"Increase\"",
+            "(\"AssetInspectorSplitter\", Key.Right) => \"Decrease\"",
+            "DispatcherPriority.ContextIdle",
+            "BeginControlStateTransition",
+            "CompleteControlStateTransition",
+            "RecordWorkspaceRestoreState");
+        ContainsAll(diagnostics,
+            "RecordWin32Key",
+            "RecordWpfKey",
+            "KeyAttempts",
+            "ControlStateTransitions",
+            "ScanCode",
+            "RepeatCount",
+            "Modifiers",
+            "NativeMessageTime",
+            "IsExtendedKey",
+            "WasPreviouslyDown",
+            "IsTransitionUp",
+            "PreviewKeyDownReceived",
+            "KeyDownReceived",
+            "PreviewKeyUpReceived",
+            "KeyUpReceived",
+            "FocusedElementAtDown",
+            "FocusedElementAtUp",
+            "FocusedAutomationIdAtDown",
+            "FocusedAutomationIdAtUp",
+            "FocusParentChainAtDown",
+            "FocusParentChainAtUp",
+            "BeforeActualValue",
+            "AfterActualValue",
+            "BeforePersistedValue",
+            "AfterPersistedValue",
+            "SettingsStateChanged",
+            "SettingsWriteBackConfirmed",
+            "StateChanged",
+            "CompletedAt",
+            "CorrelatedPointerAttemptId",
+            "CorrelatedKeyAttemptId",
+            "Layer1Win32Confirmed",
+            "Layer2WpfConfirmed",
+            "Layer3TargetConfirmed",
+            "Layer4ActionConfirmed",
+            "ControlStateTransitionConfirmed",
+            "DownControlAutomationId",
+            "UpControlAutomationId",
+            "MatchesPointerUpTarget",
+            "MatchesKeyTarget",
+            "BoundaryReached",
+            "BoundaryNoOpConfirmed",
+            "IsExpectedBoundary",
+            "\"Confirmed\"",
+            "\"BoundaryNoOpConfirmed\"",
+            "\"UnexpectedNoStateChange\"",
+            "\"SettingsWriteBackMismatch\"",
+            "\"InputUnconfirmed\"");
+        Assert.IsTrue(host.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
+        Assert.IsTrue(diagnostics.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    public void Diagnostic_AutomatesCollapsedAndRestartWorkspaceRestoreContracts()
+    {
+        var host = Read("src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs");
+        var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
+        var layoutTests = Read("tests/RAWSelectionAssistant.WpfTests/EmbeddedAssetLibraryWpfTests.cs");
+        var settingsTests = Read("tests/RAWSelectionAssistant.Tests/AssetLibraryP1SettingsTests.cs");
+
+        ContainsAll(host,
+            "RecordAssetLibraryWorkspaceRestoreState",
+            "IsOrganizationPaneVisible",
+            "IsInspectorPaneVisible",
+            "RecordWorkspaceRestoreState");
+        ContainsAll(diagnostics,
+            "WorkspaceRestoreSnapshots",
+            "PreviousSession",
+            "ReadPreviousSessionSummary",
+            "ProcessId = Environment.ProcessId",
+            "ProcessStartedAt",
+            "OrganizationRestoreResult",
+            "InspectorRestoreResult",
+            "ThumbnailRestoreConfirmed",
+            "CollapsedRestored",
+            "DeferredByViewport",
+            "ExpandedRestored",
+            "RestartComparisonPerformed",
+            "RestartSettingsMatchPreviousSession");
+        ContainsAll(layoutTests,
+            "RealSplitterDragKeepsSideWidthBindingsAndCollapseRestoresTheDraggedWidths",
+            "Assert.AreEqual(0d, organizationColumn.ActualWidth, .1)",
+            "Assert.AreEqual(keyboardAdjustedOrganizationWidth, organizationColumn.ActualWidth, 1d)",
+            "Assert.AreEqual(0d, inspectorColumn.ActualWidth, .1)",
+            "Assert.AreEqual(retainedInspectorWidth, inspectorColumn.ActualWidth, 1d)",
+            "MaximumPersistedPaneWidthsAndPinnedNarrowLayoutKeepTheCollectionInsideTheWorkspace",
+            "OrganizationPaneWidth = 420",
+            "InspectorPaneWidth = 520");
+        ContainsAll(settingsTests,
+            "Settings_RoundTripLastPrimaryPageAndAssetWorkspaceLayout",
+            "Assert.AreEqual(286d, restored.AssetLibraryWorkspace.OrganizationPaneWidth)",
+            "Assert.AreEqual(414d, restored.AssetLibraryWorkspace.InspectorPaneWidth)",
+            "Assert.IsTrue(restored.AssetLibraryWorkspace.OrganizationPaneCollapsed)",
+            "Assert.IsFalse(restored.AssetLibraryWorkspace.InspectorPaneCollapsed)");
     }
 
     [TestMethod]

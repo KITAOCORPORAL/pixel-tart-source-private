@@ -18,6 +18,7 @@ public partial class AssetLibraryPage : UserControl
     private readonly string? _demoDirectory;
     private bool _initialized;
     private bool _disposed;
+    private bool _applyingViewModelSelection;
     private DispatcherOperation? _pendingPaneWidthCommit;
 
     public AssetLibraryPage()
@@ -41,6 +42,7 @@ public partial class AssetLibraryPage : UserControl
         _enablePreviewFeatures = enablePreviewFeatures;
         _demoDirectory = enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, enablePreviewFeatures, workspaceSettings, logService);
+        _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         DataContext = _viewModel;
     }
 
@@ -70,6 +72,7 @@ public partial class AssetLibraryPage : UserControl
         _disposed = true;
         _pendingPaneWidthCommit?.Abort();
         _pendingPaneWidthCommit = null;
+        _viewModel.SelectionRestoreRequested -= ViewModel_SelectionRestoreRequested;
         await _viewModel.DisposeAsync();
     }
 
@@ -77,7 +80,37 @@ public partial class AssetLibraryPage : UserControl
 
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        if (_applyingViewModelSelection) return;
         _viewModel.SyncSelection(AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset));
+        UpdateGridDiagnostics();
+    }
+
+    private void ViewModel_SelectionRestoreRequested(object? sender, EventArgs e)
+    {
+        if (!Dispatcher.CheckAccess())
+        {
+            _ = Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(ApplyViewModelSelection));
+            return;
+        }
+        ApplyViewModelSelection();
+    }
+
+    private void ApplyViewModelSelection()
+    {
+        if (_disposed) return;
+        var selectedIds = _viewModel.SelectedAssets.Select(asset => asset.AssetId).ToHashSet();
+        _applyingViewModelSelection = true;
+        try
+        {
+            AssetGrid.SelectedItems.Clear();
+            foreach (var card in _viewModel.AssetCards.Where(card => selectedIds.Contains(card.Asset.AssetId)))
+                AssetGrid.SelectedItems.Add(card);
+            if (AssetGrid.SelectedItem is not null) AssetGrid.ScrollIntoView(AssetGrid.SelectedItem);
+        }
+        finally
+        {
+            _applyingViewModelSelection = false;
+        }
         UpdateGridDiagnostics();
     }
 

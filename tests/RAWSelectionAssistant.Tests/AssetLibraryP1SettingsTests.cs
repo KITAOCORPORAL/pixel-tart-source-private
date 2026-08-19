@@ -38,6 +38,7 @@ public sealed class AssetLibraryP1SettingsTests
         var folderId = Guid.Parse("11111111-1111-1111-1111-111111111111");
         var tagId = Guid.Parse("22222222-2222-2222-2222-222222222222");
         var smartFolderId = Guid.Parse("33333333-3333-3333-3333-333333333333");
+        var assetId = Guid.Parse("44444444-4444-4444-4444-444444444444");
         var settings = new AppSettings
         {
             LastPrimaryPage = PrimaryNavigationPolicy.AssetLibrary,
@@ -52,7 +53,8 @@ public sealed class AssetLibraryP1SettingsTests
                 SearchText = "  portrait reference  ",
                 SelectedFolderId = folderId,
                 SelectedTagId = tagId,
-                SelectedSmartFolderId = smartFolderId
+                SelectedSmartFolderId = smartFolderId,
+                SelectedAssetId = assetId
             }
         };
 
@@ -70,6 +72,7 @@ public sealed class AssetLibraryP1SettingsTests
         Assert.AreEqual(folderId, restored.AssetLibraryWorkspace.SelectedFolderId);
         Assert.AreEqual(tagId, restored.AssetLibraryWorkspace.SelectedTagId);
         Assert.AreEqual(smartFolderId, restored.AssetLibraryWorkspace.SelectedSmartFolderId);
+        Assert.AreEqual(assetId, restored.AssetLibraryWorkspace.SelectedAssetId);
     }
 
     [TestMethod]

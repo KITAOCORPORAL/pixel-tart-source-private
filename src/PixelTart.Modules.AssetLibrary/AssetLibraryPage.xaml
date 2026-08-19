@@ -149,7 +149,8 @@
                             <TextBlock Text="素材网格" Style="{StaticResource AssetSection}" />
                             <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{StaticResource AssetCaption}" Margin="8,2,0,0" />
                         </StackPanel>
-                        <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小" />
+                        <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
+                                AutomationProperties.AutomationId="AssetThumbnailSizeSlider" />
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" AutomationProperties.AutomationId="VisualFilterChips">

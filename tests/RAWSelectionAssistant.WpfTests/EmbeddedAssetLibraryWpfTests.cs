@@ -89,6 +89,74 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     [TestMethod]
+    public async Task PersistedSingleAssetSelectionRestoresAndInvalidAssetFallsBackToNoSelection()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedSelectionRestore", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var source = Path.Combine(root, "selection-restore.jpg");
+            await RunSta(() =>
+            {
+                WriteSyntheticJpeg(source);
+                var databasePath = Path.Combine(root, "asset-library.db");
+                var state = new RAWSelectionAssistant.Core.Models.AssetLibraryWorkspaceSettings();
+                var firstPage = new AssetLibraryPage(
+                    databasePath,
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                firstPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                firstPage.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                var asset = firstPage.ViewModel.AssetCards.Single().Asset;
+                firstPage.ViewModel.SyncSelection([asset]);
+                Assert.AreEqual(asset.AssetId, state.SelectedAssetId);
+                firstPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+
+                var restoredPage = new AssetLibraryPage(
+                    databasePath,
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                restoredPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                ArrangePage(restoredPage, 1600, 900);
+                var restoredGrid = FindVisualByAutomationId<ListBox>(restoredPage, "AssetGrid");
+                Assert.HasCount(1, restoredPage.ViewModel.SelectedAssets);
+                Assert.AreEqual(asset.AssetId, restoredPage.ViewModel.SelectedAssets[0].AssetId);
+                Assert.HasCount(1, restoredGrid.SelectedItems.Cast<object>().ToArray());
+                Assert.AreEqual(asset.AssetId, ((AssetVisualMatchView)restoredGrid.SelectedItem).Asset.AssetId);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => AsyncThumbnail.PendingRequestCount == 0,
+                    TimeSpan.FromSeconds(10)),
+                    $"Restored selection thumbnails did not drain; pending={AsyncThumbnail.PendingRequestCount}.");
+                restoredPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+
+                state.SelectedAssetId = Guid.NewGuid();
+                var fallbackPage = new AssetLibraryPage(
+                    databasePath,
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                fallbackPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                ArrangePage(fallbackPage, 1600, 900);
+                var fallbackGrid = FindVisualByAutomationId<ListBox>(fallbackPage, "AssetGrid");
+                Assert.IsNull(state.SelectedAssetId);
+                Assert.HasCount(0, fallbackPage.ViewModel.SelectedAssets);
+                Assert.HasCount(0, fallbackGrid.SelectedItems.Cast<object>().ToArray());
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => AsyncThumbnail.PendingRequestCount == 0,
+                    TimeSpan.FromSeconds(10)),
+                    $"Fallback selection thumbnails did not drain; pending={AsyncThumbnail.PendingRequestCount}.");
+                fallbackPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
     public async Task EmbeddedCommandsRefreshAfterAssetLoadAndVisualAnalysis()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedCommands", Guid.NewGuid().ToString("N"));
