@@ -1,10 +1,10 @@
-# 素材库 P1 Gate A 真实验收记录（BLOCKED）
+# 素材库 P1 Gate A 最终物理验收记录（BLOCKED）
 
 日期：2026-08-19
 
 分支：`feature/modular-harness-v1-p1`
 
-Gate A 起点：`20c1df775673cec790b1daa9db25072c2e34926c`
+本轮起始 HEAD：`fab900d8478cbe8b8712a212cb7b2e32a702cd55`
 
 P0：`140e34348000174986c6e503dcedff8f90a78c34`
 
@@ -12,92 +12,85 @@ P1 实现：`b4bd38f53d6a44756289eeda8bfc4feb343443c7`
 
 ## 结论
 
-P1 Gate A 状态为 **BLOCKED**，不得写成 PASS/CLOSED，也不得进入 P2。
+P1 Gate A 状态为 **BLOCKED**，`capture_status` 继续保持 `not_captured`，不得进入 P2～P6。
 
-已完成并推送两个可独立回滚的 Gate A 检查点：
+本轮确实从 `fab900d` 的 clean 工作树开始，生成了新的隔离运行根、唯一 TRX 基线、专属 DevPreview 发布及两个独立状态会话。两次会话均能精确绑定唯一 PID、完整 EXE 路径、精确标题和包含 `AssetLibraryNavigationButton` 的一级导航树；但 Computer Use 对该按钮的首次物理点击均返回未知结果，重新枚举、重新绑定、激活和刷新后允许的唯一重试也均失败。按有界恢复规则停止，没有使用坐标盲点、命令直达、自动化树 Invoke、旧截图或循环重试冒充真实物理证据。
 
-- `94f2207a821e8025ac73de0baca6f8586b1128c2`：保存选择恢复、物理输入诊断与窗口证据工具。
-- `7fc0c8ad66c439ac78a1a23674142b355d72bdac`：加入只在专属 DevPreview 构建和精确环境变量下启用的确定性状态链、严格证据契约与只读校验器。
+## 本轮运行与发布
 
-`capture_status` 继续保持 `not_captured`。本轮没有伪造状态、命令直达、图片后处理、坐标盲点或循环重试。
+运行根：`.validation/P1-GateA-Physical-20260819-151509-732ceb65/`
 
-## 确定性状态链与校验器
+SDK：`.NET SDK 10.0.302`
 
-状态实现已通过自动化验证：
+专属发布：`Debug + ModularHarnessDevPreview=true + AssetLibraryP1StateAcceptance=true + InputRoutingDiagnostics=true`，0 warnings / 0 errors。
 
-- 首次空库使用独立全新隔离根，真实 SQLite v6 初始化并从真实 `AssetItems` 读取 0。
-- loading → recoverable error → Retry → empty 在同一 ViewModel 内完成；首轮只注入带固定 ID 的已知 `IOException`，第二轮必须进入并完成真实 `SqliteAssetLibraryRepository` 查询。
-- fresh DB/WAL/SHM、真实 repository implementation、schema version、asset count、异常类型、injection ID、attempt 和时间线均写入原始事件/快照。
-- 初始化与 Dispose 共享 lifetime cancellation 和 gate；取消不会产生伪 ready，也不会在 repository 使用中提前 dispose。
-- first-empty 与 retry 两个会话分别使用精确 8 条和 18 条时间线。
-- PowerShell 5.1 严格校验器的完整成功夹具、控制器事件篡改和 PNG CRC 篡改等动态测试为 6/6。
+发布 EXE SHA-256：`827767075FD022DD5D89990F3C5A595A2E91173BC93B0FD4D7C922F0B4BA0FB9`
 
-这些结果只证明代码与证据机制可用，不替代真实前台截图和物理 Retry 点击。
+素材模块 DLL SHA-256：`523E2AC0B420198EB5A9CF7CEB2551277EA4DA3A6D213A936A1E996291F62842`
 
-## 本轮真实前台尝试与阻断
+所有运行时 DB、WAL/SHM、日志、EXE/DLL、窗口清单和机器绝对路径均保留在 ignored `.validation` 中，不进入 Git。
 
-本轮最终证据根：
+## 基线构建与测试数字
 
-`.validation/P1-GateA-Final-20260819-114313-b22c8654/`
+本轮只统计 `.validation/P1-GateA-Physical-20260819-151509-732ceb65/baseline/trx/` 内四份当前运行 TRX 的唯一 `executionId` / `testId`；未累计历史运行。
 
-构建绑定到 `7fc0c8ad66c439ac78a1a23674142b355d72bdac`，专属 DevPreview 自包含发布成功，EXE SHA-256 为：
+| 验证 | 本轮结果 |
+|---|---:|
+| Debug solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
+| Release solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
+| Core | 1192/1192 passed |
+| WPF | 837/837 passed |
+| Modular Harness | 14/14 passed |
+| DPI | 75/101 passed，26 failed |
+| 完整 solution | 2144 total / 2118 passed / 26 failed / 0 skipped |
 
-`827767075FD022DD5D89990F3C5A595A2E91173BC93B0FD4D7C922F0B4BA0FB9`
+26 个失败逐项仍来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失；没有新增失败、不同失败原因或跳过项。原始命令、耗时、退出码、完整日志和 TRX 保存在本轮 `baseline/` 下。
 
-使用了两个全新 first-empty 隔离根。两次均精确绑定唯一进程、唯一标题窗口和一级导航 `AssetLibraryNavigationButton`，但真实前台输入被外部桌面状态反复打断：
+## 状态会话实际结果
 
-- 第一次元素点击返回未知结果；按有界规则重新观察后，唯一一次重试被 `user input was detected in this window; call get_window_state before continuing` 拦截。
-- 第二个新根/新进程仍无法完成元素点击；窗口随后被外部状态最小化，唯一的重新绑定、激活和状态刷新恢复也被同一输入守卫拦截。
-- 截图接口还复现 `SetIsBorderRequired failed: 不支持此接口 (0x80004002)`。
-- 因未真实进入素材库，未创建任何状态截图、Retry 点击证据、键盘 splitter 证据或 DPI 交互证据。
+### first-empty
 
-严格校验器对该根按预期失败，共报告 48 个缺失/未捕获条件；因此证据门没有假绿。
+- 隔离根：`states/first-empty/`；启动前精确确认素材 DB/WAL/SHM 不存在。
+- PID 3296；窗口标题为 `像素蛋挞 [Modular Harness Dev]`；EXE 路径和哈希与本轮发布一致。
+- 状态控制器真实创建了 SQLite v6 数据库，并在原始清单中记录 `repositorySource=real-repository`、`repositoryImplementation=SqliteAssetLibraryRepository`、`repositorySchemaVersion=6`、`repositoryAssetCount=0` 和 attempt 1 ready。
+- Computer Use 的素材库物理点击结果未知；重新绑定后唯一一次重试仍失败。没有 08 PNG/window-evidence 对，因此 first-empty **不能判 PASS**。
 
-## 显示状态与 DPI
+### loading / error / Retry / recovered
 
-本轮开始前实测基线为 `3840x2160 @ 60 Hz / 150%`。Computer Use 在首个状态场景即达到恢复上限，因此没有执行任何 Windows 显示切换。
+- 独立隔离根：`states/retry/`；启动前精确确认素材 DB/WAL/SHM 不存在。
+- PID 35000；窗口标题、EXE 路径和哈希与本轮发布一致。
+- 首次物理点击结果未知但状态控制器确实进入 `loading-barrier-waiting`；重新绑定后的唯一重试仍失败。
+- 为遵守停止规则，没有创建 release gate，没有取得 09 loading、10 error、11 recovered 截图，也没有执行物理 `RetryAssetLibraryLoad`。因此 error、Retry、attempt 2 真实仓储查询和 recovered 均 **未完成**。
 
-清理后重新读取的显示状态仍为 `3840x2160 @ 60 Hz / 150%`。四个目标组合均为 **未执行/BLOCKED**：
+状态控制器原始 JSON 证明机制能够 fail-closed；它不能替代本轮缺失的可见窗口截图和物理输入链。
 
-| 目标组合 | 结果 |
-|---|---|
-| `1366x768 @ 100%` | 未执行；前台输入在进入素材库前被阻断 |
-| `1920x1080 @ 125%` | 未执行；前台输入在进入素材库前被阻断 |
-| `1920x1080 @ 150%` | 未执行；前台输入在进入素材库前被阻断 |
-| `2560x1440 @ 175%` | 未执行；前台输入在进入素材库前被阻断 |
+## splitter、DPI 与显示恢复
 
-因为显示设置从未改变，最终基线不是“推测恢复”，而是保持原值并再次读回确认。
+- 本轮未能进入可审计素材页，所以没有执行两个 splitter 的 Left/Right、边界无变化、折叠/展开和新进程恢复；没有形成键盘 Layer 1～4 证据。
+- 四组真实 DPI 的每组验收都要求先进入同一素材页并在 default 后完成至少一个物理点击/拖动。该前置条件已在两个独立会话中用尽有界恢复，故没有修改 Windows 显示设置，也没有把只读模式探测写成实测。
+- 未执行：`1366x768@100%`、`1920x1080@125%`、`1920x1080@150%`、`2560x1440@175%`。
+- 系统显示从未改变；进程清理后的最终只读回读为 `3840x2160 @ 60 Hz / 150%`，与本轮实测原始状态相同。该事实不是四组 DPI 矩阵 PASS。
 
-## 最终自动回归
+## 严格校验器与 Modular Harness runner
 
-- Debug solution build（warnings-as-errors）：PASS，0 warnings / 0 errors。
-- Release solution build（warnings-as-errors）：PASS，0 warnings / 0 errors。
-- Core：1192/1192。
-- WPF：837/837。
-- Modular Harness：14/14。
-- DPI：75/101；26 个失败全部仍为既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失。
-- 完整 solution：2144 total / 2118 passed / 26 failed / 0 skipped。
-- 状态链 + Gate A 校验器 + Embedded 聚焦回归：32/32。
-- 专属 DevPreview + state seam + input diagnostics 构建：PASS，0 warnings / 0 errors。
-- Modular Harness acceptance runner：focused suites 为 Harness 14/14、Asset 28/28、Visual 26/26、WPF embedded 49/50、100K 2/2；唯一失败是本轮 runner 根缺少 `foreground-result.json`，总状态 `complete=false`。该结果与本轮前台 BLOCKED 一致。
+严格 Gate A 校验器已对本轮根执行，退出码 1，报告 41 个缺失/未捕获条件；主要包括 08～11 状态证据、Retry 物理点击、splitter 键盘链、重启恢复、8 张 DPI 图、最终 restore 截图及 0→12 合成导入诊断。失败与真实缺口一致，校验器没有被放宽。
+
+本轮没有完整 `foreground-result.json`、三阶段 process snapshot、同 run 合成导入与完整 Gate A 前台材料，因而没有把旧前台证据转发给 Modular Harness acceptance runner，也没有冒报新的 runner 结果。历史 runner 结果不得替代本轮 Gate A。
 
 ## 安全边界
 
-- 正式产品 Schema 5 未改。
-- 素材库 schema v6、表、索引和用户素材行未改。
+- 正式产品 Schema 5 未改；素材库 schema v6、表、索引和用户素材行未改。
 - 没有读取、移动、重命名、覆盖或删除用户源文件。
-- 没有写入 Eagle `.library`，没有进入 P2～P6。
-- `.validation` 中只保留本地运行证据、发布产物和失败诊断，保持 Git ignore；没有提交 DB、日志、PNG、EXE/DLL 或机器绝对路径。
-- 所有代码、测试和工具检查点均已推送到私有远程分支，未强推、未合并其他功能分支。
+- 没有写 Eagle `.library`，没有进入 P2～P6。
+- 两个会话只使用全新隔离根；所有本机路径、DB、日志和运行时发布均留在 `.validation`。
+- `tools/AssetLibraryP1Acceptance/gate-a-evidence-contract.json` 继续为 `capture_status: not_captured`。
 
 ## 剩余闭环项
 
-只有在新的可控桌面会话中，才可继续以下 Gate A 项目：
-
-1. 全新 first-empty 会话的真实空库截图。
-2. 全新 retry 会话的 loading、recoverable error、物理 Retry 和恢复空库截图/时间线。
-3. 左右 splitter 四个方向键的同一按键 Layer 1～4、边界、折叠/展开及新进程恢复证据。
-4. 四组真实 Windows 分辨率/DPI 的 default/interaction 截图与窗口清单。
-5. 完成后恢复并复核 `3840x2160 @ 60 Hz / 150%`，运行严格校验器，将 `capture_status` 改为 `captured`，再追加 P1 closure 提交。
+1. 在新的可控桌面会话中取得 08 first-empty 真实窗口证据。
+2. 取得同 PID/HWND 的 09 loading、10 error、物理 Retry 和 11 recovered 完整链。
+3. 完成两个 splitter 全部方向键 Layer 1～4、边界、折叠/展开和新进程恢复。
+4. 通过 Windows 设置 UI 实际完成四组 DPI default/interaction，并恢复、截取、复核 `3840x2160@60/150%`。
+5. 让严格校验器退出 0；只在同 run foreground artifacts 齐全后运行 Modular Harness acceptance runner。
 
 上述任一项缺失时，P1 仍为 BLOCKED，禁止进入 P2。

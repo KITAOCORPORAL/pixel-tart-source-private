@@ -206,13 +206,13 @@ P0 的总体适用性边界不变：Eagle 的欢迎/激活/设备/商店/更新�
 | Release solution build（`--no-restore -warnaserror`） | PASS，0 warnings / 0 errors，6.67 s |
 | Acceptance + InputRoutingDiagnostics Debug build | PASS，0 warnings / 0 errors，3.17 s |
 | DevPreview + InputRoutingDiagnostics Debug build | PASS，0 warnings / 0 errors，3.01 s |
-| 修改后完整 solution tests | 2128 total / 2102 passed / 26 failed / 0 skipped |
+| 修改后完整 solution tests | 2144 total / 2118 passed / 26 failed / 0 skipped |
 | Core 完整测试 | 1192/1192 passed |
-| WPF 完整测试 | 821/821 passed |
+| WPF 完整测试 | 837/837 passed |
 | Modular Harness 完整测试 | 14/14 passed |
 | DPI 完整测试 | 75/101 passed，26 failed |
 
-与修改前基线相比，测试总数从 2095 增至 2128（+33），通过数从 2068 增至 2102（+34），失败数从 27 降至 26。基线中的 1 个 Core 失败是陈旧的 isolation assertion，现已与既有 Acceptance 隔离根行为对齐；本轮完整 WPF 首跑还发现一条旧测试反向要求“只记录关闭按钮”，该测试已同步为“所有物理确认按钮均可审计、关闭动作仍去重”，新增窗口证据工具契约后最终 WPF 821/821。剩余 26 个失败全部仍是基线已经存在的 `artifacts/automated-dpi-review/2.0.4/*.json` 自动 DPI 证据文件缺失，没有新增失败、隐藏失败、跳过测试或降低断言。
+与修改前基线相比，测试总数从 2095 增至 2144（+49），通过数从 2068 增至 2118（+50），失败数从 27 降至 26。基线中的 1 个 Core 失败是陈旧的 isolation assertion，现已与既有 Acceptance 隔离根行为对齐；本轮完整 WPF 首跑还发现一条旧测试反向要求“只记录关闭按钮”，该测试已同步为“所有物理确认按钮均可审计、关闭动作仍去重”，状态 seam、窗口证据和严格 Gate A 校验器契约纳入后最终 WPF 837/837。剩余 26 个失败全部仍是基线已经存在的 `artifacts/automated-dpi-review/2.0.4/*.json` 自动 DPI 证据文件缺失，没有新增失败、隐藏失败、跳过测试或降低断言。
 
 聚焦覆盖包括：固定七项导航与唯一入口、`AssetLibrary`/`asset-library` 归一化、生产/Dev Preview 启动策略、设置往返与矛盾状态规范化、single-flight 初始化及 ready 门禁、三栏宽度/折叠/固定/响应、真实 splitter 鼠标与键盘事件后的宽度持久化和绑定恢复、最大保存栏宽与窄窗中央栏下限、缩略图真实尺寸、loading/empty/error、ModuleWorkspaceHost 缓存/缺失 route/工厂失败/重试/初始焦点、同窗/单入口 evidence contract。WPF 的显示矩阵以逻辑布局测试覆盖 1366×768、1920×1080、2560×1440 与 100%/125%/150%/175% 的换算尺寸；它不是物理显示器或真实 Windows 缩放证据。
 
@@ -234,11 +234,11 @@ P0 的总体适用性边界不变：Eagle 的欢迎/激活/设备/商店/更新�
 
 | 验证项 | 当前记录 |
 |---|---|
-| Computer Use / Gate A 总状态 | **BLOCKED**。常规场景已取得上述真实交互；首次空库/加载/错误重试的 Acceptance 启动被既有 22 步教程遮挡，两次可见退出点击均返回 `Input or refresh outcome is unknown`。两个全新 Dev Preview 空根随后分别在素材入口恢复时触发最小化/`user input was detected`，以及坐标无状态变化后元素重试 `Input or refresh outcome is unknown after retry`。按 computer-use 的有界恢复规则已经停止，不继续盲点或循环重试。 |
-| 分隔条键盘链 | **部分、不能判 PASS**。方向键实际把检查器 360→370、组织栏 260→270 并写回设置，但诊断 JSON 的两条键盘转换均为 `InputUnconfirmed`/`layer4_action_confirmed=false`；不能把状态变化冒充完整 `Win32 → WPF → HitTest → Action` 证据。 |
-| 空/加载/错误/重试截图 | **未验证**。首次空库、加载和错误/重试场景未形成可审计截图；因此 `tools/ModularHarnessV1Acceptance/evidence-contract.json` 继续保持 `capture_status: not_captured`，不能只因已有部分 PNG 就翻成 captured。 |
+| Computer Use / Gate A 总状态 | **BLOCKED**。2026-08-19 从 `fab900d` 创建两个独立全新状态根；精确 PID/路径/标题和一级导航树均正确。两个会话对 `AssetLibraryNavigationButton` 的首次物理点击结果均未知，重新绑定后的唯一重试也均失败。按有界恢复规则停止，没有坐标盲点、命令直达或循环重试。 |
+| 分隔条键盘链 | **未完成、不能判 PASS**。历史尝试曾有状态写回但缺完整 Layer 1～4；本轮因素材库入口在两个独立会话中用尽有界恢复，未进入键盘组，故没有新的四方向、边界、折叠/展开与重启恢复证据。 |
+| 空/加载/错误/重试截图 | **未验证**。first-empty 原始状态流证明真实 SQLite v6/0 items/attempt 1 ready；retry 原始状态流只到 `loading-barrier-waiting`。缺少 08～11 PNG/window-evidence、物理 Retry 和 attempt 2 recovered，所以 `tools/AssetLibraryP1Acceptance/gate-a-evidence-contract.json` 继续保持 `capture_status: not_captured`。 |
 | P1 真实 DPI | **未验证**。自动逻辑矩阵和 26 个历史证据缺失失败都不能替代真实 Windows 100%/125%/150%/175% 检查。 |
-| 指令要求的真实矩阵 | **未验证**。驱动只读测试表明 1366×768@60、1920×1080@60、2560×1440@120 可接受，但没有实际切换到 1366×768@100%、1920×1080@125/150%、2560×1440@175%，也没有形成每组截图、命中和滚动证据；只读模式探测不能算验收。 |
+| 指令要求的真实矩阵 | **未验证**。每组 DPI 的 default/interaction 都要求先完成可审计素材页物理交互；该前置条件已失败，因此本轮未修改 Windows 显示设置。最终只读回读仍为原始 `3840×2160@60/150%`；这不能替代四组实测。 |
 | 性能 | **未重跑**。本阶段没有新的 1K/10K/100K 搜索、滚动、选中、检查器切换耗时与内存记录；历史 100K 结果不冒充本阶段结果。 |
 | 其余六个一级业务页的物理进入回归 | **已取得物理点击链**。七项一级按钮均有 `physical_target_confirmed=true`；但这不补足空/错误/DPI 阻断项。 |
 
@@ -246,7 +246,7 @@ P0 的总体适用性边界不变：Eagle 的欢迎/激活/设备/商店/更新�
 
 - P1 的前台完成条件尚未满足：虽然七项导航、常规素材工作区、搜索/IME、鼠标分栏、折叠、缩略图、选择和关闭重启已有真实证据，首次空库、加载、错误/重试、键盘分栏完整链和真实 DPI 矩阵仍缺失。实现检查点已创建，但 Gate A 验收闭环尚未创建。
 - Computer Use 先出现 `SetIsBorderRequired` / `0x80004002`，常规场景通过文本状态与严格 PrintWindow 辅助器继续取得部分证据；空状态的三个有界新进程恢复最终仍停在 `Input or refresh outcome is unknown` / `user input was detected`。本轮不再继续 UI 输入，evidence contract 保持 `not_captured`。
-- 完整测试仍有 26 个失败；共同原因是基线即存在的 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失。报告保留该失败，不把 2102/2128 写成“全部通过”。
+- 完整测试仍有 26 个失败；共同原因是基线即存在的 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失。报告保留该失败，不把 2118/2144 写成“全部通过”。
 - 1366×768 配合 150%/175% 时，素材页会压缩全局侧栏并响应内部栏；自动逻辑布局测试覆盖中央栏下限和元素边界，但真实文本溢出、命中区、遮挡和滚动行为仍有视觉风险。
 - 检查器“固定”在窄窗下会优先保留右栏；中央栏仍有最小宽度。极窄窗口的实际可用性需要前台证据确认。
 - 设置模型已保存搜索、集合选择 ID 与有效单项素材 ID；失效素材 ID 会安全清空，但集合/筛选的完整 P2/P3 UI 与用户提示仍未完成。
@@ -285,7 +285,7 @@ P0 的总体适用性边界不变：Eagle 的欢迎/激活/设备/商店/更新�
 
 ## 11. 当前 Gate A 继续条件
 
-> 在 `feature/modular-harness-v1-p1` 上从 Gate A 起点 `20c1df775673cec790b1daa9db25072c2e34926c` 继续。P0 父检查点仍为 `140e34348000174986c6e503dcedff8f90a78c34`，P1 实现检查点仍为 `b4bd38f53d6a44756289eeda8bfc4feb343443c7`。不得进入 P2～P6，不得修改正式 Schema 5、素材 schema v6、Eagle `.library` 或用户源文件。当前自动结果是 2128 total / 2102 passed / 26 inherited DPI-evidence failures / 0 skipped；Core 1192/1192、WPF 821/821、Harness 14/14，Debug/Release 均 0 warnings / 0 errors。Gate A 已真实验证七项一级导航、0→12 合成导入、同窗素材页、Ctrl+F、中文 IME、鼠标分栏、左右折叠、缩略图、固定检查器、有效素材选择和 Acceptance 关闭重启恢复；证据在 `.validation/P1-GateA-Real-20260818-170520-db3d4e4b/evidence/`。仍需在新的可控 Computer Use 会话补首次空库/loading/error/retry、分隔条方向键完整 Layer1～4 链，以及 1366×768@100%、1920×1080@125/150%、2560×1440@175% 的真实 Windows 矩阵，并最终恢复实测基线 3840×2160@60、150%。当前 `capture_status` 必须保持 `not_captured`；只有全部必需证据、回归与安全审计通过后才允许提交/推送验收闭环并进入 P2。
+> 在 `feature/modular-harness-v1-p1` 上从最终物理验收起点 `fab900d8478cbe8b8712a212cb7b2e32a702cd55` 继续。P0 父检查点仍为 `140e34348000174986c6e503dcedff8f90a78c34`，P1 实现检查点仍为 `b4bd38f53d6a44756289eeda8bfc4feb343443c7`。不得进入 P2～P6，不得修改正式 Schema 5、素材 schema v6、Eagle `.library` 或用户源文件。2026-08-19 从 `fab900d` 全新执行的唯一 TRX 基线是 2144 total / 2118 passed / 26 inherited DPI-evidence failures / 0 skipped；Core 1192/1192、WPF 837/837、Harness 14/14，Debug/Release 均 0 warnings / 0 errors。Gate A 的历史真实证据仍在 `.validation/P1-GateA-Real-20260818-170520-db3d4e4b/evidence/`；本轮新的有界尝试根为 `.validation/P1-GateA-Physical-20260819-151509-732ceb65/`。first-empty 和 retry 两个独立新根都绑定唯一 PID、完整 EXE 路径、精确标题和稳定一级导航树，但 `AssetLibraryNavigationButton` 首次物理点击结果未知，重新绑定后的唯一重试仍失败；没有使用坐标盲点、命令直达或循环重试。因此本轮没有形成 08～11 截图、Retry 物理链、splitter 键盘链或四组真实 DPI 证据；显示设置未被改变，最终只读回读仍为 3840×2160@60、150%。严格校验器按预期退出 1 并报告 41 个缺失条件；同 run 没有可转发的完整 foreground artifacts，因此未用旧证据冒跑 Modular Harness runner。`tools/AssetLibraryP1Acceptance/gate-a-evidence-contract.json` 的 `capture_status` 必须保持 `not_captured`，P1 Gate A 仍为 BLOCKED。
 
 ## 12. 历史继续指令（执行前状态，仅作审计留档）
 
