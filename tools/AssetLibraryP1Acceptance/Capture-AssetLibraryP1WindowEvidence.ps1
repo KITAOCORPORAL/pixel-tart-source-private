@@ -41,6 +41,41 @@ public static class AssetLibraryP1CaptureNative
         public int Bottom;
     }
 
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    public struct DevMode
+    {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string DeviceName;
+        public ushort SpecVersion;
+        public ushort DriverVersion;
+        public ushort Size;
+        public ushort DriverExtra;
+        public uint Fields;
+        public int PositionX;
+        public int PositionY;
+        public uint DisplayOrientation;
+        public uint DisplayFixedOutput;
+        public short Color;
+        public short Duplex;
+        public short YResolution;
+        public short TTOption;
+        public short Collate;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string FormName;
+        public ushort LogPixels;
+        public uint BitsPerPel;
+        public uint PelsWidth;
+        public uint PelsHeight;
+        public uint DisplayFlags;
+        public uint DisplayFrequency;
+        public uint ICMMethod;
+        public uint ICMIntent;
+        public uint MediaType;
+        public uint DitherType;
+        public uint Reserved1;
+        public uint Reserved2;
+        public uint PanningWidth;
+        public uint PanningHeight;
+    }
+
     private delegate bool EnumWindowsProc(IntPtr handle, IntPtr parameter);
 
     [DllImport("user32.dll", SetLastError = true)]
@@ -48,6 +83,15 @@ public static class AssetLibraryP1CaptureNative
 
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint GetDpiForWindow(IntPtr handle);
+
+    [DllImport("user32.dll")]
+    public static extern IntPtr MonitorFromWindow(IntPtr handle, uint flags);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern bool EnumDisplaySettingsExW(string deviceName, int modeNumber, ref DevMode mode, uint flags);
+
+    [DllImport("shcore.dll")]
+    public static extern int GetScaleFactorForMonitor(IntPtr monitor, out int scaleFactor);
 
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool GetWindowRect(IntPtr handle, out Rect rect);
@@ -182,6 +226,61 @@ function Test-SameWindowObservation {
         $Before.rect_physical_pixels.bottom -eq $After.rect_physical_pixels.bottom
 }
 
+function Get-DisplayObservation {
+    param([Parameter(Mandatory = $true)][IntPtr]$Handle)
+
+    $screen = [Windows.Forms.Screen]::FromHandle($Handle)
+    $mode = New-Object AssetLibraryP1CaptureNative+DevMode
+    $mode.Size = [Runtime.InteropServices.Marshal]::SizeOf([type][AssetLibraryP1CaptureNative+DevMode])
+    if (-not [AssetLibraryP1CaptureNative]::EnumDisplaySettingsExW($screen.DeviceName, -1, [ref]$mode, 0)) {
+        $nativeError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+        throw "EnumDisplaySettingsExW failed for '$($screen.DeviceName)' with Win32 error $nativeError."
+    }
+
+    $monitorHandle = [AssetLibraryP1CaptureNative]::MonitorFromWindow($Handle, 2)
+    if ($monitorHandle -eq [IntPtr]::Zero) { throw 'MonitorFromWindow returned a null monitor handle.' }
+    $scaleFactor = 0
+    $scaleResult = [AssetLibraryP1CaptureNative]::GetScaleFactorForMonitor($monitorHandle, [ref]$scaleFactor)
+    if ($scaleResult -ne 0) { throw "GetScaleFactorForMonitor failed with HRESULT 0x$('{0:X8}' -f $scaleResult)." }
+
+    return [ordered]@{
+        monitor_device_name = $screen.DeviceName
+        monitor_primary = $screen.Primary
+        current_mode_source = 'EnumDisplaySettingsExW(ENUM_CURRENT_SETTINGS)'
+        current_width_physical_pixels = [int]$mode.PelsWidth
+        current_height_physical_pixels = [int]$mode.PelsHeight
+        current_bits_per_pixel = [int]$mode.BitsPerPel
+        current_refresh_rate_hz = [int]$mode.DisplayFrequency
+        scale_factor_source = 'GetScaleFactorForMonitor'
+        scale_factor_percent = [int]$scaleFactor
+        monitor_bounds_physical_pixels = [ordered]@{
+            left = $screen.Bounds.Left
+            top = $screen.Bounds.Top
+            width = $screen.Bounds.Width
+            height = $screen.Bounds.Height
+        }
+        monitor_working_area_physical_pixels = [ordered]@{
+            left = $screen.WorkingArea.Left
+            top = $screen.WorkingArea.Top
+            width = $screen.WorkingArea.Width
+            height = $screen.WorkingArea.Height
+        }
+    }
+}
+
+function Test-SameDisplayObservation {
+    param(
+        [Parameter(Mandatory = $true)]$Before,
+        [Parameter(Mandatory = $true)]$After
+    )
+
+    return $Before.monitor_device_name -ceq $After.monitor_device_name -and
+        $Before.current_width_physical_pixels -eq $After.current_width_physical_pixels -and
+        $Before.current_height_physical_pixels -eq $After.current_height_physical_pixels -and
+        $Before.current_refresh_rate_hz -eq $After.current_refresh_rate_hz -and
+        $Before.scale_factor_percent -eq $After.scale_factor_percent
+}
+
 function Write-NewUtf8File {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -260,7 +359,7 @@ if ($before.is_minimized) {
     throw "The exact target window is minimized: $($before.hwnd)."
 }
 
-$monitor = [Windows.Forms.Screen]::FromHandle($windowHandle)
+$displayBefore = Get-DisplayObservation -Handle $windowHandle
 $displayControllers = @(Get-CimInstance Win32_VideoController | ForEach-Object {
         [ordered]@{
             name = [string]$_.Name
@@ -327,6 +426,8 @@ else {
     $null
 }
 $stableWindow = $null -ne $after -and (Test-SameWindowObservation -Before $before -After $after)
+$displayAfter = if ($null -ne $after) { Get-DisplayObservation -Handle $windowHandle } else { $null }
+$stableDisplay = $null -ne $displayAfter -and (Test-SameDisplayObservation -Before $displayBefore -After $displayAfter)
 $allRuntimeProcessesAfter = @(Get-CimInstance Win32_Process | Select-Object ProcessId, Name, ExecutablePath)
 $matchingNameProcessesAfter = @($allRuntimeProcessesAfter | Where-Object {
         [string]::Equals([string]$_.Name, $expectedExecutableName, [StringComparison]::OrdinalIgnoreCase)
@@ -347,7 +448,7 @@ $validPngSignature = $pngHeader.Length -ge 8 -and
     $pngHeader[0] -eq 137 -and $pngHeader[1] -eq 80 -and $pngHeader[2] -eq 78 -and $pngHeader[3] -eq 71 -and
     $pngHeader[4] -eq 13 -and $pngHeader[5] -eq 10 -and $pngHeader[6] -eq 26 -and $pngHeader[7] -eq 10
 
-$verified = $stableWindow -and $stableProcessPopulation -and $validPngSignature -and $screenshotInfo.Length -gt 8
+$verified = $stableWindow -and $stableDisplay -and $stableProcessPopulation -and $validPngSignature -and $screenshotInfo.Length -gt 8
 $captureMethodDescription = if ($CaptureMethod -eq 'ScreenPixels') {
     'System.Drawing.Graphics.CopyFromScreen'
 }
@@ -389,20 +490,8 @@ $manifest = [ordered]@{
         observed_dpi_source = 'GetDpiForWindow'
     }
     display = [ordered]@{
-        monitor_device_name = $monitor.DeviceName
-        monitor_primary = $monitor.Primary
-        monitor_bounds_physical_pixels = [ordered]@{
-            left = $monitor.Bounds.Left
-            top = $monitor.Bounds.Top
-            width = $monitor.Bounds.Width
-            height = $monitor.Bounds.Height
-        }
-        monitor_working_area_physical_pixels = [ordered]@{
-            left = $monitor.WorkingArea.Left
-            top = $monitor.WorkingArea.Top
-            width = $monitor.WorkingArea.Width
-            height = $monitor.WorkingArea.Height
-        }
+        before_capture = $displayBefore
+        after_capture = $displayAfter
         video_controllers = $displayControllers
     }
     visible_top_level_window_count_before_capture = $visibleHandles.Count
@@ -428,6 +517,7 @@ $manifest = [ordered]@{
         single_global_matching_process_verified = [bool]$stableProcessPopulation
         exact_window_foreground_verified = $before.is_foreground -eq $true
         window_stable_during_capture = [bool]$stableWindow
+        display_mode_and_scale_stable_during_capture = [bool]$stableDisplay
         passed = [bool]$verified
     }
 }

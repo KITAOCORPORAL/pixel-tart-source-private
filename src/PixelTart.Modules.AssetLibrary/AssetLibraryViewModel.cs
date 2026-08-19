@@ -9,6 +9,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Tasks;
 using RAWSelectionAssistant.Core.Utilities;
+using AssetLibraryPageResult = RAWSelectionAssistant.Core.Models.AssetLibraryPage;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -17,6 +18,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private const double MinimumCollectionPaneWidth = 360d;
     private const double PaneSplitterWidth = 6d;
     private readonly IAssetLibraryRepository _repository;
+    private readonly AssetLibraryDatabase _database;
     private readonly IVisualAssetQueryService _visualQuery;
     private readonly IAssetVisualFeatureStore _featureStore;
     private readonly AssetVisualAnalysisService _visualAnalysis;
@@ -24,9 +26,12 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private readonly TaskOperationBridge _taskOperationBridge;
     private readonly ILogService? _logService;
     private readonly bool _enablePreviewFeatures;
+    private readonly IAssetLibraryLoadStateController? _loadStateController;
+    private readonly string _databasePath;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
+    private readonly CancellationTokenSource _lifetimeCancellation = new();
     private CancellationTokenSource? _analysisCancellation;
     private CancellationTokenSource? _queryCancellation;
     private CancellationTokenSource? _batchCancellation;
@@ -80,6 +85,14 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private string _loadErrorMessage = string.Empty;
     private double _viewportWidth = 1280d;
     private bool _isRestoringWorkspace;
+    private int _loadAttempt;
+    private string? _repositorySource;
+    private string? _repositoryImplementation;
+    private int? _repositorySchemaVersion;
+    private int? _repositoryAssetCount;
+    private string? _loadExceptionType;
+    private string? _loadInjectionId;
+    private int _disposeStarted;
 
     public AssetLibraryViewModel(
         string databasePath,
@@ -87,22 +100,25 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         IReadOnlyList<AssetLibraryModuleDiagnostic>? moduleDiagnostics = null,
         bool enablePreviewFeatures = false,
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
-        ILogService? logService = null)
+        ILogService? logService = null,
+        IAssetLibraryLoadStateController? loadStateController = null)
     {
-        var database = new AssetLibraryDatabase(databasePath);
+        _database = new AssetLibraryDatabase(databasePath);
+        _databasePath = _database.DatabasePath;
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
-        _enablePreviewFeatures = enablePreviewFeatures;
+        _loadStateController = loadStateController;
+        _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _logService = logService;
         _workspaceSettings = workspaceSettings ?? new AssetLibraryWorkspaceSettings();
         _workspaceSettings.Normalize();
         _thumbnailWidth = _workspaceSettings.ThumbnailWidth;
-        ModuleDiagnostics = enablePreviewFeatures ? moduleDiagnostics ?? [] : [];
+        ModuleDiagnostics = _enablePreviewFeatures ? moduleDiagnostics ?? [] : [];
         _importDiagnostics = new(Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_ACCEPTANCE_ROOT")
             ?? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT"));
-        _repository = new SqliteAssetLibraryRepository(database);
-        _featureStore = new SqliteAssetVisualAnalysisCache(database);
+        _repository = new SqliteAssetLibraryRepository(_database);
+        _featureStore = new SqliteAssetVisualAnalysisCache(_database);
         _visualAnalysis = new(_featureStore);
-        _visualQuery = new SqliteVisualAssetQueryService(database, _featureStore);
+        _visualQuery = new SqliteVisualAssetQueryService(_database, _featureStore);
         _batchProcessor = new(_visualAnalysis, _featureStore);
         AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
         _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
@@ -131,6 +147,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
     public IReadOnlyList<AssetLibraryModuleDiagnostic> ModuleDiagnostics { get; }
     public bool IsPreviewDiagnosticsEnabled => _enablePreviewFeatures && ModuleDiagnostics.Count > 0;
+    public int LoadAttempt => Volatile.Read(ref _loadAttempt);
     public bool IsReady { get => _isReady; private set { if (SetProperty(ref _isReady, value)) RaiseWorkspaceCommandStates(); } }
     public bool IsLoading
     {
@@ -267,6 +284,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         IsLoading = false;
         LoadErrorMessage = message;
         Status = message;
+        RecordLoadState("foreground-error", LoadAttempt);
     }
     public void SetStatusMessage(string message) => Status = message;
     public int VisibleCount => AssetCards.Count;
@@ -382,6 +400,56 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         OnPropertyChanged(nameof(EmptyStateDescription));
     }
 
+    private void RecordLoadState(string stage, int attempt)
+    {
+        if (_loadStateController is null) return;
+        try
+        {
+            _loadStateController.RecordState(new(
+                _databasePath,
+                _repositorySource,
+                _repositoryImplementation,
+                _repositorySchemaVersion,
+                _repositoryAssetCount,
+                attempt,
+                stage,
+                IsLoading,
+                IsReady,
+                HasLoadError,
+                _loadExceptionType,
+                _loadInjectionId,
+                AssetCards.Count,
+                DateTimeOffset.UtcNow));
+        }
+        catch (Exception exception)
+        {
+            _logService?.Error("Unable to record the Asset Library load-state acceptance snapshot.", exception);
+        }
+    }
+
+    private async Task CaptureRepositoryIdentityAndSchemaAsync(CancellationToken cancellationToken)
+    {
+        if (_repository is not SqliteAssetLibraryRepository)
+            throw new InvalidOperationException("The Asset Library P1 state proof requires the real SQLite repository.");
+        _repositorySource = "real-repository";
+        _repositoryImplementation = _repository.GetType().Name;
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;";
+        var value = await command.ExecuteScalarAsync(cancellationToken);
+        _repositorySchemaVersion = Convert.ToInt32(value);
+    }
+
+    private async Task CaptureReadyRepositoryProofAsync(CancellationToken cancellationToken)
+    {
+        await CaptureRepositoryIdentityAndSchemaAsync(cancellationToken);
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT COUNT(*) FROM AssetItems;";
+        var value = await command.ExecuteScalarAsync(cancellationToken);
+        _repositoryAssetCount = Convert.ToInt32(value);
+    }
+
     public async Task ExecuteVisualContextActionAsync(AssetItem asset, VisualContextAction action)
     {
         SyncSelection([asset]);
@@ -396,33 +464,70 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 
     public async Task InitializeAsync()
     {
-        await _initializationGate.WaitAsync();
+        if (Volatile.Read(ref _disposeStarted) != 0) return;
+        var lifetimeToken = _lifetimeCancellation.Token;
+        var gateEntered = false;
+        var attempt = 0;
         try
         {
+            await _initializationGate.WaitAsync(lifetimeToken);
+            gateEntered = true;
+            lifetimeToken.ThrowIfCancellationRequested();
             if (IsReady) return;
+            attempt = Interlocked.Increment(ref _loadAttempt);
+            OnPropertyChanged(nameof(LoadAttempt));
             _searchDebounce.Stop();
             _queryCancellation?.Cancel();
             IsLoading = true;
             LoadErrorMessage = string.Empty;
-            await _repository.InitializeAsync();
-            await RefreshFilterListsAsync();
+            _loadExceptionType = null;
+            _loadInjectionId = null;
+            _repositoryAssetCount = null;
+            RecordLoadState("loading-entered", attempt);
+            if (_loadStateController is not null)
+                await _loadStateController.BeforeRepositoryInitializationAsync(attempt, lifetimeToken);
+            lifetimeToken.ThrowIfCancellationRequested();
+            RecordLoadState("repository-initialization-entered", attempt);
+            await _repository.InitializeAsync(lifetimeToken);
+            if (_loadStateController is not null)
+                await CaptureRepositoryIdentityAndSchemaAsync(lifetimeToken);
+            RecordLoadState("repository-initialized", attempt);
+            await RefreshFilterListsAsync(lifetimeToken);
             if (_enablePreviewFeatures && Folders.Count == 0) await SeedPreviewStructureAsync();
+            lifetimeToken.ThrowIfCancellationRequested();
             RestoreWorkspaceQuery();
-            await RefreshAsync();
-            var journal = await _repository.ListUndoJournalAsync(1);
+            var refreshOutcome = await RefreshAsync(attempt, lifetimeToken);
+            if (refreshOutcome != AssetLibraryRefreshOutcome.Completed)
+            {
+                RecordLoadState(refreshOutcome == AssetLibraryRefreshOutcome.Failed ? "initial-query-failed" : "initial-query-not-completed", attempt);
+                return;
+            }
+            var journal = await _repository.ListUndoJournalAsync(1, lifetimeToken);
             LastUndoToken = journal.FirstOrDefault(x => !x.IsUndone)?.Token;
+            if (_loadStateController is not null)
+                await CaptureReadyRepositoryProofAsync(lifetimeToken);
+            lifetimeToken.ThrowIfCancellationRequested();
             IsReady = true;
             RaiseActions();
+            RecordLoadState("ready", attempt);
+        }
+        catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested)
+        {
+            IsReady = false;
+            IsLoading = false;
+            if (attempt > 0) RecordLoadState("initialization-canceled", attempt);
         }
         catch (Exception exception)
         {
             IsReady = false;
+            _loadExceptionType = exception.GetType().FullName ?? exception.GetType().Name;
+            _loadInjectionId = exception.Data[AssetLibraryLoadStateExceptionMetadata.InjectionIdDataKey] as string;
             _logService?.Error("素材库初始化失败。", exception);
             SetForegroundError("素材库加载失败。请检查数据目录权限后重试。");
         }
         finally
         {
-            _initializationGate.Release();
+            if (gateEntered) _initializationGate.Release();
             RaiseWorkspaceCommandStates();
         }
     }
@@ -485,15 +590,26 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 
     private async Task RefreshAsync()
     {
-        _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
+        _ = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token);
+    }
+
+    private async Task<AssetLibraryRefreshOutcome> RefreshAsync(int? initializationAttempt, CancellationToken cancellationToken)
+    {
+        _queryCancellation?.Cancel();
+        _queryCancellation?.Dispose();
+        _queryCancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token, cancellationToken);
+        var token = _queryCancellation.Token;
+        var generation = Interlocked.Increment(ref _queryGeneration);
+        var outcome = AssetLibraryRefreshOutcome.Completed;
         IsLoading = true;
         LoadErrorMessage = string.Empty;
+        if (initializationAttempt is int loadingAttempt) RecordLoadState("initial-query-entered", loadingAttempt);
         try
         {
             if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
             {
                 var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120), token);
-                if (generation != Volatile.Read(ref _queryGeneration)) return;
+                if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
                 SetAssetCards(visual.Items.Select(item => item.Asset)); _nextCursor = visual.NextCursor;
                 _importDiagnostics.SetViewState(visual.TotalCount, AssetCards.Count, 0);
                 Status = $"临时视觉结果 · 共 {visual.TotalCount:N0} 个，当前显示 {AssetCards.Count:N0} 个";
@@ -501,32 +617,50 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             else if (_visualResultMode == VisualResultMode.Similarity && _similarityQuery is not null)
             {
                 var matches = await _visualQuery.FindSimilarAsync(_similarityQuery with { Scope = BuildQuery() }, token);
-                if (generation != Volatile.Read(ref _queryGeneration)) return;
+                if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
                 SetSimilarityMatches(matches); Status = $"临时相似结果 · {matches.Count} 项"; _nextCursor = null;
             }
             else if (_visualResultMode == VisualResultMode.Color && _colorQuery is not null)
             {
                 var matches = await _visualQuery.SearchByColorAsync(_colorQuery with { Scope = BuildQuery() }, token);
-                if (generation != Volatile.Read(ref _queryGeneration)) return;
+                if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
                 SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; _nextCursor = null;
             }
             else
             {
-                var page = await _repository.QueryAsync(BuildQuery(), token);
-                if (generation != Volatile.Read(ref _queryGeneration)) return;
+                var query = BuildQuery();
+                var page = initializationAttempt is int attempt && _loadStateController is not null
+                    ? await _loadStateController.ExecuteInitialQueryAsync(attempt, ct => _repository.QueryAsync(query, ct), token)
+                    : await _repository.QueryAsync(query, token);
+                if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
+                if (initializationAttempt is not null && _loadStateController is not null)
+                    _repositoryAssetCount = page.TotalCount;
                 SetAssetCards(page.Items); _nextCursor = page.NextCursor;
                 _importDiagnostics.SetViewState(page.TotalCount, AssetCards.Count, 0);
                 Status = page.RegexError is null ? $"共 {page.TotalCount:N0} 个素材，当前显示 {AssetCards.Count:N0} 个" : $"筛选错误：{page.RegexError}";
             }
             OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
         }
-        catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            outcome = AssetLibraryRefreshOutcome.Canceled;
+        }
         catch (Exception exception)
         {
-            if (generation != Volatile.Read(ref _queryGeneration)) return;
-            _logService?.Error("素材库查询失败。", exception);
-            LoadErrorMessage = "无法加载当前素材集合。请检查数据目录权限或稍后重试。";
-            Status = LoadErrorMessage;
+            if (generation != Volatile.Read(ref _queryGeneration))
+            {
+                outcome = AssetLibraryRefreshOutcome.Superseded;
+            }
+            else
+            {
+                outcome = AssetLibraryRefreshOutcome.Failed;
+                _loadExceptionType = exception.GetType().FullName ?? exception.GetType().Name;
+                _loadInjectionId = exception.Data[AssetLibraryLoadStateExceptionMetadata.InjectionIdDataKey] as string;
+                _logService?.Error("素材库查询失败。", exception);
+                LoadErrorMessage = "无法加载当前素材集合。请检查数据目录权限或稍后重试。";
+                Status = LoadErrorMessage;
+                if (initializationAttempt is int attempt) RecordLoadState("query-error", attempt);
+            }
         }
         finally
         {
@@ -534,8 +668,17 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             {
                 IsLoading = false;
                 NotifyContentState();
+                if (initializationAttempt is int attempt)
+                    RecordLoadState(outcome switch
+                    {
+                        AssetLibraryRefreshOutcome.Completed => "query-completed",
+                        AssetLibraryRefreshOutcome.Failed => "error-visible",
+                        AssetLibraryRefreshOutcome.Canceled => "query-canceled",
+                        _ => "query-superseded"
+                    }, attempt);
             }
         }
+        return outcome;
     }
 
     private async Task LoadMoreAsync()
@@ -1127,12 +1270,12 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         try { var features = await _featureStore.GetFeaturesAsync(asset.AssetId); if (SelectedAssets.Count == 1 && SelectedAssets[0].AssetId == asset.AssetId) SelectedFeatures = features.Summary; }
         catch (KeyNotFoundException) { if (SelectedAssets.Count == 1 && SelectedAssets[0].AssetId == asset.AssetId) SelectedFeatures = null; }
     }
-    private async Task RefreshFilterListsAsync()
+    private async Task RefreshFilterListsAsync(CancellationToken cancellationToken = default)
     {
-        Folders.Clear(); foreach (var folder in await _repository.ListFoldersAsync()) Folders.Add(folder); RefreshClassifierFolders();
-        FolderTree.Clear(); foreach (var node in await _repository.GetFolderTreeAsync()) FolderTree.Add(node);
-        Tags.Clear(); foreach (var tag in await _repository.ListTagsAsync()) Tags.Add(tag); TagGroups.Clear(); foreach (var group in await _repository.ListTagGroupsAsync()) TagGroups.Add(group);
-        SmartFolders.Clear(); foreach (var folder in await _repository.ListSmartFoldersAsync()) SmartFolders.Add(folder);
+        Folders.Clear(); foreach (var folder in await _repository.ListFoldersAsync(cancellationToken: cancellationToken)) Folders.Add(folder); RefreshClassifierFolders();
+        FolderTree.Clear(); foreach (var node in await _repository.GetFolderTreeAsync(cancellationToken: cancellationToken)) FolderTree.Add(node);
+        Tags.Clear(); foreach (var tag in await _repository.ListTagsAsync(cancellationToken: cancellationToken)) Tags.Add(tag); TagGroups.Clear(); foreach (var group in await _repository.ListTagGroupsAsync(cancellationToken: cancellationToken)) TagGroups.Add(group);
+        SmartFolders.Clear(); foreach (var folder in await _repository.ListSmartFoldersAsync(cancellationToken: cancellationToken)) SmartFolders.Add(folder);
         FavoriteFolders.Clear(); foreach (var folder in Folders.Where(x => !string.IsNullOrWhiteSpace(x.Color)).Take(6)) FavoriteFolders.Add(folder);
     }
     private void RefreshClassifierFolders() { ClassifierFolders.Clear(); foreach (var folder in Folders.Where(x => string.IsNullOrWhiteSpace(FolderSearch) || x.Name.Contains(FolderSearch, StringComparison.OrdinalIgnoreCase))) ClassifierFolders.Add(folder); }
@@ -1181,9 +1324,66 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     };
     private static string UniqueName(string seed, IEnumerable<string> names) { var set = names.ToHashSet(StringComparer.OrdinalIgnoreCase); if (!set.Contains(seed)) return seed; for (var i = 2; ; i++) if (!set.Contains($"{seed} {i}")) return $"{seed} {i}"; }
     private void RaiseActions() { AddFolderCommand.RaiseCanExecuteChanged(); ApplyTagsCommand.RaiseCanExecuteChanged(); NewSubfolderCommand.RaiseCanExecuteChanged(); UndoCommand.RaiseCanExecuteChanged(); RateCommand.RaiseCanExecuteChanged(); }
-    public ValueTask DisposeAsync() { _searchDebounce.Stop(); _analysisCancellation?.Cancel(); _analysisCancellation?.Dispose(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _batchCancellation?.Cancel(); _batchCancellation?.Dispose(); _analysisCoordinator.ClearSelection(); return _repository.DisposeAsync(); }
+    public async ValueTask DisposeAsync()
+    {
+        if (Interlocked.Exchange(ref _disposeStarted, 1) != 0) return;
+        _lifetimeCancellation.Cancel();
+        _searchDebounce.Stop();
+        _analysisCancellation?.Cancel();
+        _queryCancellation?.Cancel();
+        _batchCancellation?.Cancel();
+        _analysisCoordinator.ClearSelection();
+        await _initializationGate.WaitAsync();
+        try
+        {
+            IsReady = false;
+            IsLoading = false;
+            _analysisCancellation?.Dispose();
+            _queryCancellation?.Dispose();
+            _batchCancellation?.Dispose();
+            await _repository.DisposeAsync();
+        }
+        finally
+        {
+            _initializationGate.Release();
+            _lifetimeCancellation.Dispose();
+        }
+    }
 
+    private enum AssetLibraryRefreshOutcome { Completed, Failed, Canceled, Superseded }
     private enum VisualResultMode { None, Filter, Similarity, Color }
+}
+
+public interface IAssetLibraryLoadStateController
+{
+    bool DisablePreviewFixtures { get; }
+    Task BeforeRepositoryInitializationAsync(int attempt, CancellationToken cancellationToken);
+    Task<AssetLibraryPageResult> ExecuteInitialQueryAsync(
+        int attempt,
+        Func<CancellationToken, Task<AssetLibraryPageResult>> realQuery,
+        CancellationToken cancellationToken);
+    void RecordState(AssetLibraryLoadStateSnapshot snapshot);
+}
+
+public sealed record AssetLibraryLoadStateSnapshot(
+    string DatabasePath,
+    string? RepositorySource,
+    string? RepositoryImplementation,
+    int? RepositorySchemaVersion,
+    int? RepositoryAssetCount,
+    int Attempt,
+    string Stage,
+    bool IsLoading,
+    bool IsReady,
+    bool HasLoadError,
+    string? ExceptionType,
+    string? InjectionId,
+    int VisibleAssetCount,
+    DateTimeOffset RecordedAt);
+
+public static class AssetLibraryLoadStateExceptionMetadata
+{
+    public const string InjectionIdDataKey = "PixelTart.AssetLibrary.LoadStateInjectionId";
 }
 
 public enum VisualBatchScope { Current, Selected, Folder, Filter }

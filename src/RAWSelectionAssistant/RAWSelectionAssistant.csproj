@@ -29,6 +29,7 @@
     <DefineConstants Condition="'$(UiReviewBuild)' == 'true'">$(DefineConstants);UI_REVIEW_BUILD;RC3_REVIEW_ONLY</DefineConstants>
     <DefineConstants Condition="'$(InputRoutingDiagnostics)' == 'true'">$(DefineConstants);INPUT_ROUTING_DIAGNOSTICS</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true'">$(DefineConstants);MODULAR_HARNESS_DEV_PREVIEW</DefineConstants>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">$(DefineConstants);ASSET_LIBRARY_P1_STATE_ACCEPTANCE</DefineConstants>
     <RootNamespace>RAWSelectionAssistant</RootNamespace>
     <Version>$(PixelTartVersion)</Version>
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
@@ -65,6 +66,17 @@
     <Error Condition="'$(PixelTartVersion)' != '2.3.0'" Text="PixelTartVersion 必须为 2.3.0。" />
     <Error Condition="'$(Version)' != '$(PixelTartVersion)'" Text="项目 Version 与统一版本不一致。" />
     <Error Condition="'$(AssemblyVersion)' != '$(PixelTartAssemblyVersion)'" Text="程序集版本与统一版本不一致。" />
+  </Target>
+
+  <Target Name="ValidateAssetLibraryP1StateAcceptanceBuild"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(AssetLibraryP1StateAcceptance)' == 'true'">
+    <Error Condition="'$(ModularHarnessDevPreview)' != 'true'"
+           Text="AssetLibraryP1StateAcceptance requires ModularHarnessDevPreview=true." />
+    <Error Condition="'$(AcceptanceBuild)' == 'true'"
+           Text="AssetLibraryP1StateAcceptance cannot be combined with AcceptanceBuild." />
+    <Error Condition="'$(Configuration)' == 'Release'"
+           Text="AssetLibraryP1StateAcceptance is forbidden in Release builds." />
   </Target>
 
 </Project>

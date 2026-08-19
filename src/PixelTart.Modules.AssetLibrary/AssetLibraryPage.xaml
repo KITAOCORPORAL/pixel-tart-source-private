@@ -238,7 +238,8 @@
                             Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryLoadingState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
-                            <ProgressBar IsIndeterminate="True" Width="180" Height="5" />
+                            <ProgressBar IsIndeterminate="True" Width="180" Height="5"
+                                         AutomationProperties.AutomationId="AssetLibraryLoadingProgress" />
                             <TextBlock Text="正在加载素材库…" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,0" />
                             <TextBlock Text="正在读取本地索引与已保存的视觉分析，不会修改源文件。" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0" />
                         </StackPanel>
@@ -249,7 +250,8 @@
                             AutomationProperties.AutomationId="AssetLibraryErrorState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
                             <TextBlock Text="素材库暂时无法加载" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                            <TextBlock Text="{Binding LoadErrorMessage}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
+                            <TextBlock Text="{Binding LoadErrorMessage}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12"
+                                       AutomationProperties.AutomationId="AssetLibraryLoadErrorMessage" />
                             <Button Content="重试" Command="{Binding RetryLoadCommand}" HorizontalAlignment="Center"
                                     AutomationProperties.AutomationId="RetryAssetLibraryLoad" />
                         </StackPanel>
@@ -259,10 +261,12 @@
                             Visibility="{Binding IsEmptyStateVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryEmptyState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
-                            <TextBlock Text="{Binding EmptyStateTitle}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding EmptyStateTitle}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"
+                                       AutomationProperties.AutomationId="AssetLibraryEmptyStateTitle" />
                             <TextBlock Text="{Binding EmptyStateDescription}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{DynamicResource PrimaryButton}" />
+                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{DynamicResource PrimaryButton}"
+                                        AutomationProperties.AutomationId="ImportFromEmptyAssetLibrary" />
                                 <Button Content="清除条件" Click="ClearFilters_Click" Margin="7,0,0,0"
                                         Visibility="{Binding HasActiveQuery, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </StackPanel>

@@ -265,6 +265,15 @@ public partial class App : Application
         const bool enableAssetLibraryPreview = false;
         string? assetLibraryDemoDirectory = null;
 #endif
+        IAssetLibraryLoadStateController? assetLibraryP1StateController = null;
+#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+        assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, _logService);
+        if (assetLibraryP1StateController is not null)
+        {
+            enableAssetLibraryPreview = false;
+            assetLibraryDemoDirectory = null;
+        }
+#endif
         registry.Register(new AssetLibraryModule(() =>
         {
             IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
@@ -276,7 +285,8 @@ public partial class App : Application
                 enableAssetLibraryPreview,
                 assetLibraryDemoDirectory,
                 workspaceSettings,
-                _logService);
+                _logService,
+                assetLibraryP1StateController);
         }));
         registry.Register(new RawToolModule());
         registry.Register(new OnlineSelectionModule());

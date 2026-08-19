@@ -1,0 +1,201 @@
+{
+  "schema": "pixel-tart-asset-library-p1-gate-a-evidence-contract/v1",
+  "capture_status": "not_captured",
+  "synthetic_fixture_only": true,
+  "customer_media_allowed": false,
+  "runtime_evidence_may_contain_machine_paths": true,
+  "portable_output": {
+    "machine_paths_allowed": false,
+    "all_contract_paths_are_run_relative": true
+  },
+  "window_evidence_schema": "pixel-tart-asset-library-p1-window-evidence/v1",
+  "expected_executable_name": "PixelTart_ModularHarness_V1_DevPreview.exe",
+  "expected_window_title": "\u50cf\u7d20\u86cb\u631e [Modular Harness Dev]",
+  "expected_gui_process_count": 1,
+  "state_chain": {
+    "scenario_protocol": "pixel-tart-asset-library-p1-state/v1",
+    "scenario_manifest_file": "scenario-manifest.json",
+    "snapshot_file": "view-model-snapshots.jsonl",
+    "controller_event_file": "controller-events.jsonl",
+    "state_evidence_dpi": 144,
+    "duplicate_hash_allowed_scene_sets": [
+      ["first-empty", "retry-recovered"]
+    ],
+    "scenes": [
+      {
+        "id": "first-empty",
+        "session_id": "first-empty-session",
+        "capture_name_prefix": "08-first-empty-",
+        "automation_id": "AssetLibraryEmptyState",
+        "evidence_stream": "snapshot",
+        "snapshot_stage": "ready",
+        "snapshot_attempt": 1
+      },
+      {
+        "id": "loading",
+        "session_id": "retry-session",
+        "capture_name_prefix": "09-loading-",
+        "automation_id": "AssetLibraryLoadingState",
+        "evidence_stream": "controller",
+        "snapshot_stage": "loading-barrier-waiting",
+        "snapshot_attempt": 1
+      },
+      {
+        "id": "recoverable-error",
+        "session_id": "retry-session",
+        "capture_name_prefix": "10-recoverable-error-",
+        "automation_id": "AssetLibraryErrorState",
+        "evidence_stream": "snapshot",
+        "snapshot_stage": "error-visible",
+        "snapshot_attempt": 1
+      },
+      {
+        "id": "retry-recovered",
+        "session_id": "retry-session",
+        "capture_name_prefix": "11-retry-recovered-",
+        "automation_id": "AssetLibraryEmptyState",
+        "evidence_stream": "snapshot",
+        "snapshot_stage": "ready",
+        "snapshot_attempt": 2
+      }
+    ],
+    "sessions": [
+      {
+        "id": "first-empty-session",
+        "scenario": "first-empty/v1",
+        "scene_ids": ["first-empty"],
+        "ready_attempt": 1,
+        "required_timeline": [
+          { "stream": "snapshot", "stage": "loading-entered", "attempt": 1 },
+          { "stream": "snapshot", "stage": "repository-initialization-entered", "attempt": 1 },
+          { "stream": "snapshot", "stage": "repository-initialized", "attempt": 1 },
+          { "stream": "snapshot", "stage": "initial-query-entered", "attempt": 1 },
+          { "stream": "controller", "stage": "real-repository-query-entered", "attempt": 1 },
+          { "stream": "controller", "stage": "real-repository-query-completed", "attempt": 1 },
+          { "stream": "snapshot", "stage": "query-completed", "attempt": 1 },
+          { "stream": "snapshot", "stage": "ready", "attempt": 1 }
+        ]
+      },
+      {
+        "id": "retry-session",
+        "scenario": "loading-error-retry-empty/v1",
+        "scene_ids": ["loading", "recoverable-error", "retry-recovered"],
+        "ready_attempt": 2,
+        "required_timeline": [
+          { "stream": "snapshot", "stage": "loading-entered", "attempt": 1 },
+          { "stream": "controller", "stage": "loading-barrier-waiting", "attempt": 1 },
+          { "stream": "controller", "stage": "loading-barrier-released", "attempt": 1 },
+          { "stream": "snapshot", "stage": "repository-initialization-entered", "attempt": 1 },
+          { "stream": "snapshot", "stage": "repository-initialized", "attempt": 1 },
+          { "stream": "snapshot", "stage": "initial-query-entered", "attempt": 1 },
+          { "stream": "controller", "stage": "recoverable-query-error-injected", "attempt": 1 },
+          { "stream": "snapshot", "stage": "query-error", "attempt": 1 },
+          { "stream": "snapshot", "stage": "error-visible", "attempt": 1 },
+          { "stream": "snapshot", "stage": "initial-query-failed", "attempt": 1 },
+          { "stream": "snapshot", "stage": "loading-entered", "attempt": 2 },
+          { "stream": "snapshot", "stage": "repository-initialization-entered", "attempt": 2 },
+          { "stream": "snapshot", "stage": "repository-initialized", "attempt": 2 },
+          { "stream": "snapshot", "stage": "initial-query-entered", "attempt": 2 },
+          { "stream": "controller", "stage": "real-repository-query-entered", "attempt": 2 },
+          { "stream": "controller", "stage": "real-repository-query-completed", "attempt": 2 },
+          { "stream": "snapshot", "stage": "query-completed", "attempt": 2 },
+          { "stream": "snapshot", "stage": "ready", "attempt": 2 }
+        ]
+      }
+    ],
+    "repository_source": "real-repository",
+    "repository_implementation": "SqliteAssetLibraryRepository",
+    "repository_schema_version": 6,
+    "repository_asset_count": 0,
+    "recoverable_exception_type": "System.IO.IOException",
+    "recoverable_injection_id": "asset-library-p1-initial-query-io-once/v1"
+  },
+  "retry_pointer": {
+    "automation_id": "RetryAssetLibraryLoad",
+    "required_layer2_events": [
+      "PreviewMouseDown",
+      "PreviewMouseUp"
+    ]
+  },
+  "splitter_keyboard": {
+    "diagnostic_protocol": "pixel-tart-physical-pointer/v1",
+    "required_layer2_events": [
+      "PreviewKeyDown",
+      "KeyDown",
+      "PreviewKeyUp",
+      "KeyUp"
+    ],
+    "controls": [
+      {
+        "automation_id": "AssetOrganizationSplitter",
+        "control_kind": "GridSplitter",
+        "property_name": "OrganizationPaneWidth",
+        "minimum": 180,
+        "maximum": 420,
+        "left_delta": "decrease",
+        "right_delta": "increase",
+        "minimum_boundary_key": "Left",
+        "maximum_boundary_key": "Right"
+      },
+      {
+        "automation_id": "AssetInspectorSplitter",
+        "control_kind": "GridSplitter",
+        "property_name": "InspectorPaneWidth",
+        "minimum": 260,
+        "maximum": 520,
+        "left_delta": "increase",
+        "right_delta": "decrease",
+        "minimum_boundary_key": "Right",
+        "maximum_boundary_key": "Left"
+      }
+    ]
+  },
+  "dpi_matrix": [
+    {
+      "width": 1366,
+      "height": 768,
+      "scale_percent": 100,
+      "dpi": 96,
+      "capture_tokens": ["1366x768", "100pct"]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scale_percent": 125,
+      "dpi": 120,
+      "capture_tokens": ["1920x1080", "125pct"]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scale_percent": 150,
+      "dpi": 144,
+      "capture_tokens": ["1920x1080", "150pct"]
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "scale_percent": 175,
+      "dpi": 168,
+      "capture_tokens": ["2560x1440", "175pct"]
+    }
+  ],
+  "dpi_capture_kinds": ["default", "interaction"],
+  "dpi_interaction_requires_physical_action": true,
+  "dpi_tuple_order_is_contract_order": true,
+  "restore_baseline": {
+    "capture_name_prefix": "restore-baseline-3840x2160-150pct-",
+    "width": 3840,
+    "height": 2160,
+    "refresh_rate_hz": 60,
+    "scale_percent": 150,
+    "dpi": 144
+  },
+  "synthetic_fixture": {
+    "import_diagnostics_file": "initial-import-0-to-12.json",
+    "source_kind": "synthetic-directory-recursive",
+    "selected_file_count": 12,
+    "imported_count": 12,
+    "failed_count": 0
+  }
+}

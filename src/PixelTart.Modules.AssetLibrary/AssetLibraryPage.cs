@@ -36,12 +36,13 @@ public partial class AssetLibraryPage : UserControl
         bool enablePreviewFeatures = false,
         string? demoDirectory = null,
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
-        ILogService? logService = null)
+        ILogService? logService = null,
+        IAssetLibraryLoadStateController? loadStateController = null)
     {
         InitializeComponent();
-        _enablePreviewFeatures = enablePreviewFeatures;
-        _demoDirectory = enablePreviewFeatures ? demoDirectory : null;
-        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, enablePreviewFeatures, workspaceSettings, logService);
+        _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
+        _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
+        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         DataContext = _viewModel;
     }
