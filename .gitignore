@@ -8,6 +8,9 @@ TestResults/
 
 # Generated release, verification and media artifacts
 artifacts/**
+!artifacts/manual-acceptance/
+!artifacts/manual-acceptance/P1_ASSET_LIBRARY_GATE_A_MANUAL_PACKET/
+!artifacts/manual-acceptance/P1_ASSET_LIBRARY_GATE_A_MANUAL_PACKET/Invoke-P1AssetLibraryGateAManualAcceptance.ps1
 !artifacts/releases/
 !artifacts/releases/**/
 !artifacts/releases/**/release-manifest.json
