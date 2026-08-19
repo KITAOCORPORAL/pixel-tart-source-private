@@ -12,6 +12,12 @@
   "expected_executable_name": "PixelTart_ModularHarness_V1_DevPreview.exe",
   "expected_window_title": "\u50cf\u7d20\u86cb\u631e [Modular Harness Dev]",
   "expected_gui_process_count": 1,
+  "acceptance_start_route": {
+    "environment_variable": "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE",
+    "route": "asset-library",
+    "current_page": "AssetLibrary",
+    "source_head": "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af"
+  },
   "state_chain": {
     "scenario_protocol": "pixel-tart-asset-library-p1-state/v1",
     "scenario_manifest_file": "scenario-manifest.json",
@@ -110,12 +116,16 @@
     "recoverable_exception_type": "System.IO.IOException",
     "recoverable_injection_id": "asset-library-p1-initial-query-io-once/v1"
   },
-  "retry_pointer": {
+  "retry_physical_activation": {
     "automation_id": "RetryAssetLibraryLoad",
-    "required_layer2_events": [
-      "PreviewMouseDown",
-      "PreviewMouseUp"
-    ]
+    "allowed_modes": ["mouse", "keyboard"],
+    "mouse": {
+      "required_layer2_events": ["PreviewMouseDown", "PreviewMouseUp"]
+    },
+    "keyboard": {
+      "allowed_keys": ["Enter", "Space"],
+      "required_layer2_events": ["PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp"]
+    }
   },
   "splitter_keyboard": {
     "diagnostic_protocol": "pixel-tart-physical-pointer/v1",

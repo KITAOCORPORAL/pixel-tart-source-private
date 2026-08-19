@@ -30,6 +30,9 @@ public partial class App : Application
     private HttpClient? _weatherHttpClient;
     private WeatherFeatureState? _weatherState;
     private PixelTartModuleRegistry? _moduleRegistry;
+#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+    private AssetLibraryP1AcceptanceStateController? _assetLibraryP1StateController;
+#endif
 
     public PixelTartModuleRegistry? ModuleRegistry => _moduleRegistry;
 
@@ -210,6 +213,9 @@ public partial class App : Application
             };
 
             await _mainViewModel.InitializeAsync();
+#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+            _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
+#endif
             await reminderNotifications.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };
             window.ApplySavedBounds(_mainViewModel.Settings);
@@ -267,7 +273,8 @@ public partial class App : Application
 #endif
         IAssetLibraryLoadStateController? assetLibraryP1StateController = null;
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
-        assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, _logService);
+        _assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, _logService);
+        assetLibraryP1StateController = _assetLibraryP1StateController;
         if (assetLibraryP1StateController is not null)
         {
             enableAssetLibraryPreview = false;

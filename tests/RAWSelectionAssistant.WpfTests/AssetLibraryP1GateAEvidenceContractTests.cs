@@ -21,6 +21,11 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
 
         Assert.AreEqual("pixel-tart-asset-library-p1-gate-a-evidence-contract/v1", root.GetProperty("schema").GetString());
         Assert.AreEqual("not_captured", root.GetProperty("capture_status").GetString());
+        var route = root.GetProperty("acceptance_start_route");
+        Assert.AreEqual("PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE", route.GetProperty("environment_variable").GetString());
+        Assert.AreEqual("asset-library", route.GetProperty("route").GetString());
+        Assert.AreEqual("AssetLibrary", route.GetProperty("current_page").GetString());
+        Assert.AreEqual("3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af", route.GetProperty("source_head").GetString());
         Assert.IsTrue(root.GetProperty("synthetic_fixture_only").GetBoolean());
         Assert.IsFalse(root.GetProperty("customer_media_allowed").GetBoolean());
         Assert.IsTrue(root.GetProperty("runtime_evidence_may_contain_machine_paths").GetBoolean());
@@ -80,7 +85,10 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             entry.GetProperty("stage").GetString() == "ready" &&
             entry.GetProperty("attempt").GetInt32() == 2));
 
-        Assert.AreEqual("RetryAssetLibraryLoad", root.GetProperty("retry_pointer").GetProperty("automation_id").GetString());
+        var retry = root.GetProperty("retry_physical_activation");
+        Assert.AreEqual("RetryAssetLibraryLoad", retry.GetProperty("automation_id").GetString());
+        CollectionAssert.AreEqual(new[] { "mouse", "keyboard" }, retry.GetProperty("allowed_modes").EnumerateArray().Select(item => item.GetString()).ToArray());
+        CollectionAssert.AreEqual(new[] { "Enter", "Space" }, retry.GetProperty("keyboard").GetProperty("allowed_keys").EnumerateArray().Select(item => item.GetString()).ToArray());
         var splitter = root.GetProperty("splitter_keyboard");
         CollectionAssert.AreEqual(
             new[] { "PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp" },
@@ -277,6 +285,20 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         StringAssert.Contains(result.Output, "PNG chunk 'IDAT' has a CRC mismatch");
     }
 
+    [TestMethod]
+    public void ValidatorAcceptsCompleteRetryKeyboardActivationAndRejectsMissingKeyUp()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseRetryKeyboardActivation("Enter");
+        var accepted = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+        Assert.AreEqual(0, accepted.ExitCode, accepted.Output);
+
+        fixture.RemoveRetryKeyboardKeyUp();
+        var rejected = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+        Assert.AreNotEqual(0, rejected.ExitCode, rejected.Output);
+        StringAssert.Contains(rejected.Output, "exactly one verified physical mouse or keyboard activation");
+    }
+
     private sealed class CapturedFixture : IDisposable
     {
         private const string Protocol = "pixel-tart-asset-library-p1-state/v1";
@@ -303,6 +325,26 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         public string ContractPath { get; }
         private string ExecutablePath => Path.Combine(RunRoot, ExecutableName);
         private string ExecutableHash { get; set; } = string.Empty;
+
+        public void UseRetryKeyboardActivation(string key)
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+            var startedAt = new DateTimeOffset(2026, 8, 19, 0, 1, 11, TimeSpan.Zero);
+            root["attempts"] = new JsonArray();
+            root["key_attempts"] = new JsonArray(JsonSerializer.SerializeToNode(RetryKeyAttempt("key-retry", "RetryAssetLibraryLoad", key, startedAt)));
+            File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
+        public void RemoveRetryKeyboardKeyUp()
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+            var attempt = root["key_attempts"]!.AsArray()[0]!.AsObject();
+            attempt["layer1_win32"]!["key_up_received"] = false;
+            attempt["layer1_win32"]!["events"] = new JsonArray(attempt["layer1_win32"]!["events"]!.AsArray()[0]!.DeepClone());
+            File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
 
         public static CapturedFixture Create()
         {
@@ -479,6 +521,11 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("repositoryAssetCount", 0),
                 ("repositoryProofStage", "ready"),
                 ("repositoryProofRecordedAt", readyAt.ToString("O")),
+                ("startRouteSource", "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE"),
+                ("startRoute", "asset-library"),
+                ("startRouteCurrentPage", "AssetLibrary"),
+                ("startRouteHead", "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af"),
+                ("startRouteRecordedAt", startedAt.AddMilliseconds(100).ToString("O")),
                 ("exceptionType", retry ? "System.IO.IOException" : null),
                 ("injectionId", retry ? "asset-library-p1-initial-query-io-once/v1" : null),
                 ("failureAttempt", retry ? 1 : null)));
@@ -626,6 +673,37 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("button_click_received", true),
                 ("physical_target_confirmed", true),
                 ("button", D(("automation_id", automationId))))));
+
+        private static Dictionary<string, object?> RetryKeyAttempt(string attemptId, string automationId, string key, DateTimeOffset startedAt)
+        {
+            var virtualKey = key == "Enter" ? 13 : 32;
+            Dictionary<string, object?> Native(string message, DateTimeOffset timestamp) => D(
+                ("timestamp", timestamp.ToString("O")), ("message", message), ("virtual_key", virtualKey),
+                ("scan_code", key == "Enter" ? 28 : 57), ("repeat_count", 1), ("modifiers", "None"), ("native_message_time", 1));
+            var chain = new[] { D(("automation_id", automationId), ("type", "Button")), D(("automation_id", "AssetLibraryPage"), ("type", "AssetLibraryPage")) };
+            return D(
+                ("attempt_id", attemptId),
+                ("started_at", startedAt.ToString("O")),
+                ("updated_at", startedAt.AddMilliseconds(500).ToString("O")),
+                ("origin", "Win32"),
+                ("key", key),
+                ("virtual_key", virtualKey),
+                ("layer1_win32", D(
+                    ("key_down_received", true), ("key_up_received", true),
+                    ("events", new[] { Native("WM_KEYDOWN", startedAt), Native("WM_KEYUP", startedAt.AddMilliseconds(200)) }))),
+                ("layer2_wpf", D(
+                    ("preview_key_down_received", true), ("key_down_received", true), ("preview_key_up_received", true), ("key_up_received", true),
+                    ("events", new[] { "PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp" }.Select((name, index) =>
+                        D(("event_name", name), ("key", key), ("timestamp", startedAt.AddMilliseconds(50 * index).ToString("O")))).ToArray()))),
+                ("layer3_target", D(
+                    ("control_automation_id", automationId), ("control", D(("automation_id", automationId))),
+                    ("focused_element_at_down", D(("automation_id", automationId))), ("focused_element_at_up", D(("automation_id", automationId))),
+                    ("focused_automation_id_at_down", automationId), ("focused_automation_id_at_up", automationId),
+                    ("focus_parent_chain_at_down", chain), ("focus_parent_chain_at_up", chain))),
+                ("layer4_action", D(
+                    ("button_click_received", true), ("physical_target_confirmed", true),
+                    ("button", D(("automation_id", automationId))))));
+        }
 
         private static void AddRegularKey(List<Dictionary<string, object?>> attempts, List<Dictionary<string, object?>> transitions, string attemptId, string transitionId, string automationId, string propertyName, string key, string adjustment, double before, double after, double minimum, double maximum, DateTimeOffset startedAt)
         {

@@ -20,6 +20,8 @@ public partial class MainWindow
     private const int WmLButtonUp = 0x0202;
     private const int WmKeyDown = 0x0100;
     private const int WmKeyUp = 0x0101;
+    private const int VkReturn = 0x0D;
+    private const int VkSpace = 0x20;
     private const int VkLeft = 0x25;
     private const int VkRight = 0x27;
     private HwndSource? _physicalPointerHwndSource;
@@ -77,7 +79,7 @@ public partial class MainWindow
         if (message is WmKeyDown or WmKeyUp)
         {
             var virtualKey = unchecked((int)(long)wParam);
-            if (virtualKey is VkLeft or VkRight)
+            if (virtualKey is VkLeft or VkRight or VkReturn or VkSpace)
             {
                 var nativeKeyData = unchecked((uint)(long)lParam);
                 PhysicalPointerDiagnosticSession.RecordWin32Key(
@@ -183,8 +185,26 @@ public partial class MainWindow
     {
         var key = e.Key == Key.System ? e.SystemKey : e.Key;
         var focusedElement = Keyboard.FocusedElement as DependencyObject;
+        var target = focusedElement ?? e.OriginalSource as DependencyObject;
+        if (key is Key.Enter or Key.Space &&
+            IsRetryAssetLibraryLoadTarget(target))
+        {
+            PhysicalPointerDiagnosticSession.RecordWpfKey(
+                target!,
+                focusedElement,
+                key,
+                eventName,
+                e.IsRepeat,
+                Keyboard.Modifiers,
+                e.OriginalSource as DependencyObject,
+                e.Source as DependencyObject,
+                e.Handled,
+                CurrentPointerDiagnosticContext());
+            return;
+        }
+
         if (key is not (Key.Left or Key.Right) ||
-            !TryCaptureAcceptanceControlState(focusedElement ?? e.OriginalSource as DependencyObject, out var state))
+            !TryCaptureAcceptanceControlState(target, out var state))
             return;
 
         PhysicalPointerDiagnosticSession.RecordWpfKey(
@@ -211,6 +231,15 @@ public partial class MainWindow
             _pendingControlStateTransition is { InputKind: "Keyboard" } pending &&
             ReferenceEquals(pending.Control, state.Control))
             ScheduleControlStateTransitionCompletion(pending);
+    }
+
+    private static bool IsRetryAssetLibraryLoadTarget(DependencyObject? source)
+    {
+        var button = FindDiagnosticAncestor<Button>(source);
+        return button is not null && string.Equals(
+            AutomationProperties.GetAutomationId(button),
+            "RetryAssetLibraryLoad",
+            StringComparison.Ordinal);
     }
 
     private void BeginControlStateTransition(

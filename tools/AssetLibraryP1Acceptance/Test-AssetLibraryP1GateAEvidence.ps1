@@ -444,7 +444,14 @@ function Test-KeyInputLayers {
     if ($null -eq $Attempt) { return $false }
     if (-not (Test-ExactString (Get-PropertyValue $Attempt 'origin') 'Win32')) { return $false }
     if (-not (Test-ExactString (Get-PropertyValue $Attempt 'key') $Key)) { return $false }
-    $expectedVirtualKey = if ($Key -ceq 'Left') { 37 } else { 39 }
+    $expectedVirtualKey = switch -CaseSensitive ($Key) {
+        'Enter' { 13 }
+        'Space' { 32 }
+        'Left' { 37 }
+        'Right' { 39 }
+        default { -1 }
+    }
+    if ($expectedVirtualKey -lt 0) { return $false }
     if ([int](Get-PropertyValue $Attempt 'virtual_key') -ne $expectedVirtualKey) { return $false }
 
     $layer1 = Get-PropertyValue $Attempt 'layer1_win32'
@@ -703,6 +710,11 @@ if ($scenarioFiles.Count -eq 1) {
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'protocol') $contract.state_chain.scenario_protocol) 'State-controller scenario protocol mismatch.'
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'scenario') $retrySessionContract.scenario) 'State-controller scenario name mismatch.'
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'processName') ([IO.Path]::GetFileNameWithoutExtension($contract.expected_executable_name))) 'State-controller process name mismatch.'
+        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteSource') $contract.acceptance_start_route.environment_variable) 'Retry manifest start-route source mismatch.'
+        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRoute') $contract.acceptance_start_route.route) 'Retry manifest start route mismatch.'
+        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteCurrentPage') $contract.acceptance_start_route.current_page) 'Retry manifest start-route current page mismatch.'
+        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteHead') $contract.acceptance_start_route.source_head) 'Retry manifest start-route HEAD mismatch.'
+        [void](Convert-ToTimestamp (Get-PropertyValue $scenarioManifest 'startRouteRecordedAt') 'Retry manifest startRouteRecordedAt')
         $isolatedRoot = [string](Get-PropertyValue $scenarioManifest 'isolatedRoot')
         Require-True (Test-FullyQualifiedPath $isolatedRoot) 'State-controller isolatedRoot is not absolute runtime evidence.'
         if (-not [string]::IsNullOrWhiteSpace($isolatedRoot)) {
@@ -908,6 +920,11 @@ if ($firstCandidates.Count -eq 1) {
     $firstManifest = $firstCandidates[0].Json
     Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'protocol') $contract.state_chain.scenario_protocol) 'First-empty scenario protocol mismatch.'
     Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'processName') ([IO.Path]::GetFileNameWithoutExtension($contract.expected_executable_name))) 'First-empty process name mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteSource') $contract.acceptance_start_route.environment_variable) 'First-empty manifest start-route source mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRoute') $contract.acceptance_start_route.route) 'First-empty manifest start route mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteCurrentPage') $contract.acceptance_start_route.current_page) 'First-empty manifest start-route current page mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteHead') $contract.acceptance_start_route.source_head) 'First-empty manifest start-route HEAD mismatch.'
+    [void](Convert-ToTimestamp (Get-PropertyValue $firstManifest 'startRouteRecordedAt') 'First-empty manifest startRouteRecordedAt')
     $firstIsolatedRoot = [string](Get-PropertyValue $firstManifest 'isolatedRoot')
     Require-True (Test-FullyQualifiedPath $firstIsolatedRoot) 'First-empty isolatedRoot is not absolute runtime evidence.'
     if (Test-FullyQualifiedPath $firstIsolatedRoot) {
@@ -1073,7 +1090,7 @@ foreach ($scene in @($contract.state_chain.scenes)) {
     }
 }
 
-# Physical retry must be one real pointer attempt and must bridge the attempt-1 error to attempt-2 readiness.
+# Physical retry must be exactly one verified real mouse or keyboard activation and must bridge error to readiness.
 $pointerDocuments = @()
 if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
     foreach ($file in @(Get-ChildItem -LiteralPath $resolvedRunRoot -Recurse -File -Filter '*physical-pointer*.json')) {
@@ -1083,42 +1100,59 @@ if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
         }
     }
 }
-$retryAttemptRecords = @()
+$retryMouseRecords = @()
+$retryKeyboardRecords = @()
 $retryStateIdentity = @($stateSummaries | Where-Object { Test-ExactString $_.Scene.session_id 'retry-session' }) | Select-Object -First 1
 foreach ($document in $pointerDocuments) {
     if ($null -ne $retryStateIdentity -and [int](Get-PropertyValue $document.Json 'process_id') -ne $retryStateIdentity.Summary.ProcessId) { continue }
     foreach ($attempt in @(Get-PropertyValue $document.Json 'attempts')) {
-        if ((Test-ExactString (Get-PropertyValue $attempt 'down_target_automation_id') $contract.retry_pointer.automation_id) -and
-            (Test-ExactString (Get-PropertyValue $attempt 'up_target_automation_id') $contract.retry_pointer.automation_id)) {
-            $retryAttemptRecords += [pscustomobject]@{ Document = $document; Attempt = $attempt }
+        if ((Test-ExactString (Get-PropertyValue $attempt 'down_target_automation_id') $contract.retry_physical_activation.automation_id) -and
+            (Test-ExactString (Get-PropertyValue $attempt 'up_target_automation_id') $contract.retry_physical_activation.automation_id)) {
+            $retryMouseRecords += [pscustomobject]@{ Document = $document; Attempt = $attempt; Mode = 'mouse' }
+        }
+    }
+    foreach ($attempt in @(Get-PropertyValue $document.Json 'key_attempts')) {
+        foreach ($allowedKey in @($contract.retry_physical_activation.keyboard.allowed_keys)) {
+            if (Test-KeyInputLayers $attempt ([string]$contract.retry_physical_activation.automation_id) ([string]$allowedKey) @($contract.retry_physical_activation.keyboard.required_layer2_events)) {
+                $retryKeyboardRecords += [pscustomobject]@{ Document = $document; Attempt = $attempt; Mode = 'keyboard' }
+            }
         }
     }
 }
-Require-Equal $retryAttemptRecords.Count 1 'RetryAssetLibraryLoad must have exactly one matching physical pointer attempt.'
-if ($retryAttemptRecords.Count -eq 1) {
-    $retry = $retryAttemptRecords[0].Attempt
+Require-Equal ($retryMouseRecords.Count + $retryKeyboardRecords.Count) 1 'RetryAssetLibraryLoad must have exactly one verified physical mouse or keyboard activation.'
+if ($retryMouseRecords.Count -eq 1 -and $retryKeyboardRecords.Count -eq 0) {
+    $retry = $retryMouseRecords[0].Attempt
     Require-True (Test-ExactString (Get-PropertyValue $retry 'origin') 'Win32') 'Retry pointer Layer 1 origin is not Win32.'
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer1_win32', 'l_button_down_received'))) 'Retry pointer Layer 1 is missing WM_LBUTTONDOWN.'
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer1_win32', 'l_button_up_received'))) 'Retry pointer Layer 1 is missing WM_LBUTTONUP.'
     [void](Convert-ToTimestamp (Get-NestedValue $retry @('layer1_win32', 'down', 'timestamp')) 'Retry pointer Layer 1 down timestamp')
     [void](Convert-ToTimestamp (Get-NestedValue $retry @('layer1_win32', 'up', 'timestamp')) 'Retry pointer Layer 1 up timestamp')
     $mouseEvents = @(Get-NestedValue $retry @('layer2_wpf', 'events'))
-    foreach ($eventName in @($contract.retry_pointer.required_layer2_events)) {
+    foreach ($eventName in @($contract.retry_physical_activation.mouse.required_layer2_events)) {
         Require-Equal @($mouseEvents | Where-Object { Test-ExactString (Get-PropertyValue $_ 'event_name') ([string]$eventName) }).Count 1 "Retry pointer Layer 2 event '$eventName' must occur exactly once."
     }
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer2_wpf', 'preview_mouse_down_received'))) 'Retry pointer Layer 2 is missing preview down.'
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer2_wpf', 'preview_mouse_up_received'))) 'Retry pointer Layer 2 is missing preview up.'
-    Require-True (Test-ExactString (Get-PropertyValue $retry 'down_control_automation_id') $contract.retry_pointer.automation_id) 'Retry pointer Layer 3 down control mismatch.'
-    Require-True (Test-ExactString (Get-PropertyValue $retry 'up_control_automation_id') $contract.retry_pointer.automation_id) 'Retry pointer Layer 3 up control mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $retry 'down_control_automation_id') $contract.retry_physical_activation.automation_id) 'Retry pointer Layer 3 down control mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $retry 'up_control_automation_id') $contract.retry_physical_activation.automation_id) 'Retry pointer Layer 3 up control mismatch.'
     Require-True (Test-TrueValue (Get-PropertyValue $retry 'button_instance_same_down_up')) 'Retry pointer Layer 3 did not retain the same button instance.'
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer4_action', 'button_click_received'))) 'Retry pointer Layer 4 has no Button.Click.'
     Require-True (Test-TrueValue (Get-NestedValue $retry @('layer4_action', 'physical_target_confirmed'))) 'Retry pointer Layer 4 did not confirm the physical target.'
-    Require-True (Test-ExactString (Get-NestedValue $retry @('layer4_action', 'button', 'automation_id')) $contract.retry_pointer.automation_id) 'Retry pointer Layer 4 button AutomationId mismatch.'
+    Require-True (Test-ExactString (Get-NestedValue $retry @('layer4_action', 'button', 'automation_id')) $contract.retry_physical_activation.automation_id) 'Retry pointer Layer 4 button AutomationId mismatch.'
+}
+elseif ($retryKeyboardRecords.Count -eq 1 -and $retryMouseRecords.Count -eq 0) {
+    $retry = $retryKeyboardRecords[0].Attempt
+    Require-True (Test-TrueValue (Get-NestedValue $retry @('layer4_action', 'button_click_received'))) 'Retry keyboard Layer 4 has no Button.Click.'
+    Require-True (Test-TrueValue (Get-NestedValue $retry @('layer4_action', 'physical_target_confirmed'))) 'Retry keyboard Layer 4 did not confirm the focused Retry target.'
+    Require-True (Test-ExactString (Get-NestedValue $retry @('layer4_action', 'button', 'automation_id')) $contract.retry_physical_activation.automation_id) 'Retry keyboard Layer 4 button AutomationId mismatch.'
+}
+if (($retryMouseRecords.Count + $retryKeyboardRecords.Count) -eq 1) {
+    $retry = @($retryMouseRecords + $retryKeyboardRecords)[0].Attempt
     if ($errorSnapshots.Count -gt 0 -and $readySnapshots.Count -gt 0) {
-        $retryAt = Convert-ToTimestamp (Get-PropertyValue $retry 'started_at') 'Retry pointer started_at'
+        $retryAt = Convert-ToTimestamp (Get-PropertyValue $retry 'started_at') 'Retry physical activation started_at'
         $errorAt = Convert-ToTimestamp (Get-PropertyValue $errorSnapshots[-1] 'recordedAt') 'error-visible recordedAt'
         $readyAt = Convert-ToTimestamp (Get-PropertyValue $readySnapshots[-1] 'recordedAt') 'ready recordedAt'
-        Require-True ($retryAt -ge $errorAt -and $retryAt -le $readyAt) 'Retry pointer attempt is not between attempt 1 error and attempt 2 readiness.'
+        Require-True ($retryAt -ge $errorAt -and $retryAt -le $readyAt) 'Retry physical activation is not between attempt 1 error and attempt 2 readiness.'
     }
 }
 

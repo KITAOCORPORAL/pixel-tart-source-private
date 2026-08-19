@@ -151,7 +151,7 @@ internal static class PhysicalPointerDiagnosticSession
         bool isTransitionUp,
         PointerDiagnosticContext context)
     {
-        if (!IsEnabled || virtualKey is not (0x25 or 0x27)) return;
+        if (!IsEnabled || virtualKey is not (0x0D or 0x20 or 0x25 or 0x27)) return;
         lock (Gate)
         {
             EnsureSession();
@@ -217,7 +217,7 @@ internal static class PhysicalPointerDiagnosticSession
         bool handled,
         PointerDiagnosticContext context)
     {
-        if (!IsEnabled || key is not (Key.Left or Key.Right)) return;
+        if (!IsEnabled || key is not (Key.Enter or Key.Space or Key.Left or Key.Right)) return;
         lock (Gate)
         {
             EnsureSession();
@@ -649,18 +649,41 @@ internal static class PhysicalPointerDiagnosticSession
         {
             EnsureSession();
             UpdateContext(context);
-            if (!CanCorrelateWithActiveAttempt(requireWpfDown: true) || !TryConfirmPhysicalTarget(button)) return;
-            var attempt = _activeAttempt!;
-            attempt.Layer4Action.ButtonClickReceived = true;
-            attempt.Layer4Action.PhysicalTargetConfirmed = true;
-            attempt.Layer4Action.Button = Describe(button);
-            attempt.Layer4Action.Events.Add(new ActionEvent
+            if (CanCorrelateWithActiveAttempt(requireWpfDown: true) && TryConfirmPhysicalTarget(button))
+            {
+                var attempt = _activeAttempt!;
+                attempt.Layer4Action.ButtonClickReceived = true;
+                attempt.Layer4Action.PhysicalTargetConfirmed = true;
+                attempt.Layer4Action.Button = Describe(button);
+                attempt.Layer4Action.Events.Add(new ActionEvent
+                {
+                    Timestamp = DateTimeOffset.Now,
+                    EventName = "ButtonClick",
+                    Handled = handled
+                });
+                attempt.UpdatedAt = DateTimeOffset.Now;
+                Save();
+                return;
+            }
+
+            var buttonAutomationId = NearestAutomationId(button);
+            if (!string.Equals(buttonAutomationId, "RetryAssetLibraryLoad", StringComparison.Ordinal) ||
+                _activeKeyAttempt is null ||
+                _activeKeyAttempt.Key is not ("Enter" or "Space") ||
+                !MatchesKeyTarget(_activeKeyAttempt, button!, requireUp: false) ||
+                DateTimeOffset.Now - _activeKeyAttempt.StartedAt > TimeSpan.FromSeconds(3))
+                return;
+
+            _activeKeyAttempt.Layer4Action.ButtonClickReceived = true;
+            _activeKeyAttempt.Layer4Action.PhysicalTargetConfirmed = true;
+            _activeKeyAttempt.Layer4Action.Button = Describe(button);
+            _activeKeyAttempt.Layer4Action.Events.Add(new ActionEvent
             {
                 Timestamp = DateTimeOffset.Now,
                 EventName = "ButtonClick",
                 Handled = handled
             });
-            attempt.UpdatedAt = DateTimeOffset.Now;
+            _activeKeyAttempt.UpdatedAt = DateTimeOffset.Now;
             Save();
         }
     }
@@ -1436,6 +1459,10 @@ internal static class PhysicalPointerDiagnosticSession
 
     private sealed class KeyActionLayer
     {
+        public bool ButtonClickReceived { get; set; }
+        public bool PhysicalTargetConfirmed { get; set; }
+        public PointerElementSnapshot Button { get; set; } = PointerElementSnapshot.None;
+        public List<ActionEvent> Events { get; } = [];
         public bool ControlStateTransitionConfirmed { get; set; }
         public double BeforeActualValue { get; set; }
         public double? AfterActualValue { get; set; }

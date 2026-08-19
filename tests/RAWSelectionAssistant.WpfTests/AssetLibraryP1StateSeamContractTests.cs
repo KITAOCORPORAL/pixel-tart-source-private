@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -39,12 +40,19 @@ public sealed class AssetLibraryP1StateSeamContractTests
         ContainsAll(
             controller,
             "PIXEL_TART_ASSET_LIBRARY_P1_STATE_ACCEPTANCE",
+            "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE",
+            "PIXEL_TART_ASSET_LIBRARY_P1_HEAD",
             "first-empty/v1",
             "loading-error-retry-empty/v1",
             "PixelTart_ModularHarness_V1_DevPreview",
             "StringComparison.Ordinal",
             "PIXEL_TART_ACCEPTANCE_ROOT",
             "Path.IsPathFullyQualified",
+            "asset-library",
+            "ApplyAcceptanceStartRoute",
+            "startRouteSource = _startRouteSource",
+            "startRouteCurrentPage = _startRouteCurrentPage",
+            "startRouteHead = _startRouteHead",
             "release-loading.gate",
             "requires a fresh isolated evidence directory",
             "BeforeRepositoryInitializationAsync",
@@ -71,12 +79,39 @@ public sealed class AssetLibraryP1StateSeamContractTests
         Assert.DoesNotContain("repositorySource = \"SqliteAssetLibraryRepository\"", controller, StringComparison.Ordinal);
 
         var app = Text("src/RAWSelectionAssistant/App.xaml.cs");
-        var gateStart = app.IndexOf("#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE", StringComparison.Ordinal);
         var factoryCall = app.IndexOf("AssetLibraryP1AcceptanceStateController.TryCreate", StringComparison.Ordinal);
+        var gateStart = app.LastIndexOf("#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE", factoryCall, StringComparison.Ordinal);
         var gateEnd = app.IndexOf("#endif", gateStart, StringComparison.Ordinal);
         Assert.IsGreaterThanOrEqualTo(0, gateStart);
         Assert.IsGreaterThan(gateStart, factoryCall);
         Assert.IsGreaterThan(factoryCall, gateEnd);
+        StringAssert.Contains(app, "_assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel)");
+    }
+
+    [TestMethod]
+    public void AcceptanceStartRouteRuntimeGateRejectsMissingOrInvalidInputs()
+    {
+        var type = typeof(RAWSelectionAssistant.App).Assembly.GetType("RAWSelectionAssistant.Services.AssetLibraryP1AcceptanceStateController");
+        if (type is null) return;
+        var method = type.GetMethod("ValidateRuntimeOptIn", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
+            ?? throw new MissingMethodException(type.FullName, "ValidateRuntimeOptIn");
+        var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart-P1-Route", Guid.NewGuid().ToString("N")));
+        const string head = "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af";
+
+        method.Invoke(null, new object?[] { root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head });
+        foreach (var invalid in new object?[][]
+                 {
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head],
+                     [root, "first-empty/v1", "KitaoPhotoSelector", root, "asset-library", head],
+                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", "relative", "asset-library", head],
+                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, null, head],
+                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "AssetLibrary", head],
+                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", "3b5ff13"]
+                 })
+        {
+            var exception = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, invalid));
+            Assert.IsInstanceOfType<InvalidOperationException>(exception.InnerException);
+        }
     }
 
     [TestMethod]

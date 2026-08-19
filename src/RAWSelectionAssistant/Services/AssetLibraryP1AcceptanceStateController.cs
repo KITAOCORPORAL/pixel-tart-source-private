@@ -1,18 +1,23 @@
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using AssetLibraryPageResult = RAWSelectionAssistant.Core.Models.AssetLibraryPage;
+using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Services;
 
 internal sealed class AssetLibraryP1AcceptanceStateController : IAssetLibraryLoadStateController
 {
     internal const string OptInEnvironmentVariable = "PIXEL_TART_ASSET_LIBRARY_P1_STATE_ACCEPTANCE";
+    internal const string StartRouteEnvironmentVariable = "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE";
+    internal const string HeadEnvironmentVariable = "PIXEL_TART_ASSET_LIBRARY_P1_HEAD";
     internal const string FirstEmptyScenario = "first-empty/v1";
     internal const string LoadingErrorRetryScenario = "loading-error-retry-empty/v1";
+    internal const string AssetLibraryStartRoute = "asset-library";
     internal const string ExpectedProcessName = "PixelTart_ModularHarness_V1_DevPreview";
     private const string Protocol = "pixel-tart-asset-library-p1-state/v1";
     private const string QueryFailureInjectionId = "asset-library-p1-initial-query-io-once/v1";
@@ -39,7 +44,13 @@ internal sealed class AssetLibraryP1AcceptanceStateController : IAssetLibraryLoa
     private string? _injectionId;
     private int? _failureAttempt;
     private DateTimeOffset? _failureRecordedAt;
+    private string? _startRouteSource;
+    private string? _startRoute;
+    private string? _startRouteCurrentPage;
+    private string? _startRouteHead;
+    private DateTimeOffset? _startRouteRecordedAt;
     private int _queryFailureInjected;
+    private int _startRouteApplied;
     private long _sequence;
 
     private AssetLibraryP1AcceptanceStateController(string isolatedRoot, string scenario, ILogService? logService)
@@ -72,21 +83,63 @@ internal sealed class AssetLibraryP1AcceptanceStateController : IAssetLibraryLoa
     {
         var optIn = Environment.GetEnvironmentVariable(OptInEnvironmentVariable);
         if (optIn is null) return null;
-        if (optIn is not FirstEmptyScenario and not LoadingErrorRetryScenario)
-            throw new InvalidOperationException($"{OptInEnvironmentVariable} must exactly match the P1 state scenario allowlist.");
-
         var processName = Path.GetFileNameWithoutExtension(Environment.ProcessPath ?? string.Empty);
+        var explicitRoot = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT");
+        ValidateRuntimeOptIn(
+            isolatedRoot,
+            optIn,
+            processName,
+            explicitRoot,
+            Environment.GetEnvironmentVariable(StartRouteEnvironmentVariable),
+            Environment.GetEnvironmentVariable(HeadEnvironmentVariable));
+
+        logService?.Info("Asset Library P1 deterministic state acceptance scenario enabled in the isolated Dev Preview runtime.");
+        return new(NormalizeRoot(isolatedRoot), optIn, logService);
+    }
+
+    internal void ApplyAcceptanceStartRoute(MainViewModel viewModel)
+    {
+        ArgumentNullException.ThrowIfNull(viewModel);
+        if (Interlocked.CompareExchange(ref _startRouteApplied, 1, 0) != 0)
+            throw new InvalidOperationException("The P1 acceptance start route may only be applied once.");
+
+        if (!viewModel.NavigateCommand.CanExecute(AssetLibraryStartRoute))
+            throw new InvalidOperationException("The P1 acceptance start route is not currently executable.");
+        viewModel.NavigateCommand.Execute(AssetLibraryStartRoute);
+        if (!string.Equals(viewModel.CurrentPage, "AssetLibrary", StringComparison.Ordinal))
+            throw new InvalidOperationException("The P1 acceptance start route did not resolve to the Asset Library surface.");
+
+        lock (_writeGate)
+        {
+            _startRouteSource = StartRouteEnvironmentVariable;
+            _startRoute = AssetLibraryStartRoute;
+            _startRouteCurrentPage = viewModel.CurrentPage;
+            _startRouteHead = Environment.GetEnvironmentVariable(HeadEnvironmentVariable);
+            _startRouteRecordedAt = DateTimeOffset.UtcNow;
+            WriteManifestUnsafe();
+        }
+    }
+
+    internal static void ValidateRuntimeOptIn(
+        string isolatedRoot,
+        string? scenario,
+        string processName,
+        string? explicitRoot,
+        string? startRoute,
+        string? head)
+    {
+        if (scenario is not FirstEmptyScenario and not LoadingErrorRetryScenario)
+            throw new InvalidOperationException($"{OptInEnvironmentVariable} must exactly match the P1 state scenario allowlist.");
         if (!string.Equals(processName, ExpectedProcessName, StringComparison.Ordinal))
             throw new InvalidOperationException("The P1 state acceptance scenario is restricted to the Modular Harness Dev Preview executable.");
-
-        var explicitRoot = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT");
         if (string.IsNullOrWhiteSpace(explicitRoot) || !Path.IsPathFullyQualified(explicitRoot))
             throw new InvalidOperationException("The P1 state acceptance scenario requires an explicit absolute PIXEL_TART_ACCEPTANCE_ROOT.");
         if (!string.Equals(NormalizeRoot(isolatedRoot), NormalizeRoot(explicitRoot), StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("The active application data root does not match PIXEL_TART_ACCEPTANCE_ROOT.");
-
-        logService?.Info("Asset Library P1 deterministic state acceptance scenario enabled in the isolated Dev Preview runtime.");
-        return new(NormalizeRoot(isolatedRoot), optIn, logService);
+        if (!string.Equals(startRoute, AssetLibraryStartRoute, StringComparison.Ordinal))
+            throw new InvalidOperationException($"{StartRouteEnvironmentVariable} must exactly match '{AssetLibraryStartRoute}'.");
+        if (head is null || !Regex.IsMatch(head, "^[0-9a-f]{40}$", RegexOptions.CultureInvariant))
+            throw new InvalidOperationException($"{HeadEnvironmentVariable} must be the exact lowercase 40-character source HEAD.");
     }
 
     public async Task BeforeRepositoryInitializationAsync(int attempt, CancellationToken cancellationToken)
@@ -193,7 +246,12 @@ internal sealed class AssetLibraryP1AcceptanceStateController : IAssetLibraryLoa
                 exceptionType = _exceptionType,
                 injectionId = _injectionId,
                 failureAttempt = _failureAttempt,
-                failureRecordedAt = _failureRecordedAt
+                failureRecordedAt = _failureRecordedAt,
+                startRouteSource = _startRouteSource,
+                startRoute = _startRoute,
+                startRouteCurrentPage = _startRouteCurrentPage,
+                startRouteHead = _startRouteHead,
+                startRouteRecordedAt = _startRouteRecordedAt
             }, JsonOptions));
     }
 

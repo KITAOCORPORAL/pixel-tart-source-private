@@ -77,7 +77,9 @@ public sealed class ClickRoutingFixFocusedTests
         StringAssert.Contains(diagnostics, "_activeAttempt.Layer4Action.ActionFinalized");
         StringAssert.Contains(
             diagnostics,
-            "if (!CanCorrelateWithActiveAttempt(requireWpfDown: true) || !TryConfirmPhysicalTarget(button)) return;");
+            "if (CanCorrelateWithActiveAttempt(requireWpfDown: true) && TryConfirmPhysicalTarget(button))");
+        StringAssert.Contains(diagnostics, "RetryAssetLibraryLoad");
+        StringAssert.Contains(diagnostics, "MatchesKeyTarget(_activeKeyAttempt, button!, requireUp: false)");
         Assert.IsFalse(
             diagnostics.Contains("if (!IsCloseLike(button)) return;", StringComparison.Ordinal),
             "Confirmed ordinary buttons must remain observable for Gate A state-transition evidence.");
