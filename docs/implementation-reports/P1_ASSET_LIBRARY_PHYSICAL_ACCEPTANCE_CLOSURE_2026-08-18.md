@@ -10,6 +10,8 @@ V2 代码与契约提交：`029e57e4f0f937894738ac2593d5608e0bae2c65`
 
 V2 人工包提交：`65e4206e1468950789c86a4f98b876c5889d524a`
 
+Windows PowerShell 5.1 兼容修复：`638afa44b121d4d0d897a0ef36ab579e6439e7d9`
+
 P0：`140e34348000174986c6e503dcedff8f90a78c34`
 
 P1 实现：`b4bd38f53d6a44756289eeda8bfc4feb343443c7`
@@ -49,6 +51,14 @@ P1 Gate A 状态为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 继
 | 完整 solution | 2170 total / 2144 passed / 26 failed / 0 skipped |
 
 26 个 DPI 失败仍逐项来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失，没有新增失败或跳过。严格 Gate A validator 与 Modular Harness runner 未在真实 V2 run 上执行；在证据尚未产生时不得把它们写成通过。
+
+## Windows PowerShell 5.1 实跑修复
+
+2026-08-20 的首次真人 V2 Run 已真实完成 08 first-empty 和 09 loading 自动捕获，随后在创建 release gate 前因 `.NET Framework` 不提供 `Path.IsPathFullyQualified` 而 fail-closed。失败清单正确写出 `status=failed`、`display_restored=true`，DevPreview 残留进程为 0；失败根继续保留在 `%TEMP%`，不得提交。
+
+人工包已改用 PowerShell 5.1 兼容的盘符绝对路径/UNC 判断，并继续对规范化后的 release 路径执行 retry 会话根边界检查。三个相关脚本的 Windows PowerShell 5.1 AST 均为 0 error；系统 `powershell.exe` 下的 drive-root/UNC/relative/drive-relative 正反验证、DryRun、RecoveryTest 与人工包聚焦测试 6/6 均通过。静态审计未发现第二个 .NET Core-only API。
+
+由于该修复改变源码 HEAD 和专属 EXE 哈希，失败根中的 08/09 只能作为失败诊断，不能与修复后的证据拼接。下一次必须从新的 run root 全量重跑。
 
 ## 历史导航证据复用边界
 
