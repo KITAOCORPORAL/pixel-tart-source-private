@@ -14,6 +14,8 @@ Windows PowerShell 5.1 兼容修复：`638afa44b121d4d0d897a0ef36ab579e6439e7d9`
 
 瞬态辅助窗口捕获修复：`c5f67425cb51ba7b443db9f61b6326f8039def8f`
 
+Gate A 专属构建节点复用修复：`e1739807d0e11d52da9125eecad567235843f9a4`
+
 P0：`140e34348000174986c6e503dcedff8f90a78c34`
 
 P1 实现：`b4bd38f53d6a44756289eeda8bfc4feb343443c7`
@@ -43,14 +45,14 @@ P1 Gate A 状态为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 继
 | 人工包目录 | 1 个 `.ps1`，0 个 `.bat` |
 | DryRun | PASS；GUI=false、validator=false、显示未修改 |
 | RecoveryTest | PASS；环境恢复、辅助进程清理、显示基线正反判断均为 true |
-| V2 整合聚焦测试 | 42/42 passed |
+| 人工包聚焦契约测试 | 7/7 passed |
 | Debug solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
 | Release solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
 | Core | 1192/1192 passed |
-| WPF | 864/864 passed |
+| WPF | 865/865 passed |
 | Modular Harness | 14/14 passed |
 | DPI | 75/101 passed，26 failed |
-| 完整 solution | 2171 total / 2145 passed / 26 failed / 0 skipped |
+| 完整 solution | 2172 total / 2146 passed / 26 failed / 0 skipped |
 
 26 个 DPI 失败仍逐项来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失，没有新增失败或跳过。WPF 新增一项真实 STA 键盘遍历回归：从素材页根开始最多 12 次前向焦点移动必须到达 `RetryAssetLibraryLoad`，且移动焦点不得触发 attempt 2；本机路径 9 步通过。严格 Gate A validator 与 Modular Harness runner 未在真实 V2 run 上执行；在证据尚未产生时不得把它们写成通过。
 
@@ -89,6 +91,20 @@ Windows PowerShell 5.1 下三个相关脚本 AST 均为 0 error；捕获器、�
 人工包不再用单次 `Get-Process` 判断清零。现在同时读取精确进程名的托管进程表和 `Win32_Process`，取 PID 并集；任何一个视图仍见进程都会重置稳定计时，只有两者连续 1000 ms 均为零才允许继续，最长等待 10 秒。枚举错误、持续存在的 PID、未达到完整稳定窗口都会继续失败并报告最后 PID；脚本不会忽略、过滤或自动结束残留软件。用户正常关闭路径在 `HasExited + WaitForExit` 后先经过该门，下一会话入口再经过同一门形成二次防线；单次 CIM 查询另有 2 秒操作超时，避免系统查询无限挂起。
 
 RecoveryTest 已动态覆盖“残留后归零”“归零期间重新出现并重置计时”“持续非零必须超时拒绝”及本机双进程表连续稳定清零；PowerShell 5.1 AST、DryRun、RecoveryTest、人工包聚焦 6/6 与完整 WPF 864/864 均通过。第四次失败根只保留在 `%TEMP%` 作诊断；由于修复改变 HEAD 和专属 EXE 哈希，08 不能续用，下一次仍须新 run root 从第 1 步全量重跑。Gate A 继续为 **BLOCKED（READY_FOR_MANUAL_RUN）**。
+
+## 最终 Run 的专属构建等待与正常关闭失败
+
+2026-08-20 在 `6bc2f5b3e0dac31e28873c541366b090ffaaf411` 上按最终指令创建了全新 run root：`%TEMP%\PixelTart-P1-GateA-Manual-V2-20260820-162637-4af97c1430b140c184f295002709b6db`。本地分支、fetch 后远端分支与服务器公布 HEAD 均精确一致，tracked/untracked 工作树为 clean，启动前托管进程表和 `Win32_Process` 均为 0。
+
+专属 publish 实际于 `16:26:41` 成功完成且 stderr 为空，但 Windows PowerShell 5.1 的 `Start-Process -Wait` 把整个子进程树纳入等待；四个 `/nodemode:1 /nodeReuse:true` MSBuild 节点在主 `dotnet publish` 退出后继续空闲存活，直到约 15 分钟后才自然回收。脚本随后正常启动 first-empty PID `13156`，真实 SQLite v6 / attempt 1 / 0 项状态通过，并于 `16:41:49` 成功生成本轮 08 PNG 与 window-evidence。
+
+脚本进入 `close-first-empty` 后，Computer Use 对标题栏关闭按钮的首次动作和一次 fresh-state 重试都返回输入结果未知/失败；窗口及 PID 此后仍存活。该步骤在五分钟后以“等待用户正常关闭软件超时：PID 13156”失败，`finally` 安全清理才使窗口消失。因此用户随后观察到的“自己关闭”是失败清理，不是正常关闭门通过。本轮没有启动 retry 会话，只有 08，`validator_started=false`，显示前后均为 `3840x2160@60Hz / 150%` 且 `display_restored=true`，最终两套进程表均为 0。该 root 不能续跑或与下一轮证据拼接。
+
+已按“仅修复本轮可复现代码缺陷”的边界，在提交 `e1739807d0e11d52da9125eecad567235843f9a4` 中只为 `Invoke-DedicatedBuild` 的等待进程临时设置 `MSBUILDDISABLENODEREUSE=1`，继续保留 `Start-Process -Wait`、stdout/stderr 重定向、完整 ExitCode 校验和非零失败。环境只在专属构建作用域生效并在返回后恢复；捕获器、validator 与普通构建路径不受影响。RecoveryTest 使用父进程 sentinel 动态验证作用域内值为 `1` 且退出后精确恢复，静态契约同时证明该精确覆盖只出现一次。
+
+修复后真实专属 publish 用时 `2.686 s`，目标 EXE 存在，残留 node-reuse 进程为 0，环境恢复为 true。PowerShell 5.1 AST、DryRun、RecoveryTest、人工包聚焦 7/7、Debug/Release warnings-as-errors 均通过；完整回归为 Core `1192/1192`、WPF `865/865`、Modular Harness `14/14`、DPI `75/101`，其中 26 个失败仍全部来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失。合计 `2172 total / 2146 passed / 26 failed / 0 skipped`，无新增失败。
+
+本轮也明确证明，最终真实验收的关闭、Retry、splitter 和 DPI 必须由真人完成；Computer Use 输入不能替代附件要求的真人动作。下一轮必须以 `e1739807d0e11d52da9125eecad567235843f9a4` 或其报告提交后的 clean HEAD、新专属 EXE 和全新 run root 从第 1 步重跑。P1 Gate A 继续为 **BLOCKED（READY_FOR_MANUAL_RUN）**，不得进入 P2。
 
 ## 历史导航证据复用边界
 
