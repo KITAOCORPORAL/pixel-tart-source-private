@@ -12,6 +12,8 @@ V2 人工包提交：`65e4206e1468950789c86a4f98b876c5889d524a`
 
 Windows PowerShell 5.1 兼容修复：`638afa44b121d4d0d897a0ef36ab579e6439e7d9`
 
+瞬态辅助窗口捕获修复：`c5f67425cb51ba7b443db9f61b6326f8039def8f`
+
 P0：`140e34348000174986c6e503dcedff8f90a78c34`
 
 P1 实现：`b4bd38f53d6a44756289eeda8bfc4feb343443c7`
@@ -45,12 +47,12 @@ P1 Gate A 状态为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 继
 | Debug solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
 | Release solution build（warnings-as-errors） | PASS，0 warnings / 0 errors |
 | Core | 1192/1192 passed |
-| WPF | 863/863 passed |
+| WPF | 864/864 passed |
 | Modular Harness | 14/14 passed |
 | DPI | 75/101 passed，26 failed |
-| 完整 solution | 2170 total / 2144 passed / 26 failed / 0 skipped |
+| 完整 solution | 2171 total / 2145 passed / 26 failed / 0 skipped |
 
-26 个 DPI 失败仍逐项来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失，没有新增失败或跳过。严格 Gate A validator 与 Modular Harness runner 未在真实 V2 run 上执行；在证据尚未产生时不得把它们写成通过。
+26 个 DPI 失败仍逐项来自既有 `artifacts/automated-dpi-review/2.0.4/*.json` 缺失，没有新增失败或跳过。WPF 新增一项真实 STA 键盘遍历回归：从素材页根开始最多 12 次前向焦点移动必须到达 `RetryAssetLibraryLoad`，且移动焦点不得触发 attempt 2；本机路径 9 步通过。严格 Gate A validator 与 Modular Harness runner 未在真实 V2 run 上执行；在证据尚未产生时不得把它们写成通过。
 
 ## Windows PowerShell 5.1 实跑修复
 
@@ -69,6 +71,16 @@ P1 Gate A 状态为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 继
 修复提交 `c5f67425cb51ba7b443db9f61b6326f8039def8f` 保留原有严格口径：任何非白名单辅助顶层窗口出现时，捕获器最多等待 15 秒，每 200 ms 重新枚举，并持续要求同一精确主 HWND 保持前台；只有辅助窗口真实消失后才截图。超时、主 HWND 改变或失去前台仍立即失败。截图后再次枚举辅助窗口，严格 validator 现在同时要求捕获前后 `unexpected_auxiliary_window_count=0` 和 `no_unapproved_auxiliary_window_during_capture=true`。没有宽泛允许 `HwndWrapper`，也没有放宽第二窗口检测。
 
 Windows PowerShell 5.1 下三个相关脚本 AST 均为 0 error；捕获器、人工包与严格 validator 聚焦测试 32/32 通过；人工包 DryRun 和 RecoveryTest 均退出 0。由于修复再次改变 HEAD 与专属 EXE 哈希，下一次真人 Run 必须使用全新 run root 从第 1 步全量重跑。P1 Gate A 仍为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 仍为 `not_captured`。
+
+## Retry 步骤越序与真实素材误导修复
+
+2026-08-20 在 `bec9fa024309f731310d2f3e322147ce05c18a2d` 上的第三次真人 V2 Run 已真实完成 08 first-empty 与 09 loading。retry 会话随后于 `13:45:47` 进入真实 `IOException` 可恢复错误态；但在脚本要求“用 Tab/Shift+Tab 聚焦重试”时，第一条物理输入于 `13:45:57` 直接用鼠标点击了 `RetryAssetLibraryLoad`。四层诊断证明该点击已触发 attempt 2，并于约 20 ms 后进入真实 SQLite v6 / ready / 0 项。错误层因此正常消失，不是错误态未生成或 Retry 控件丢失。
+
+旧人工包只查询历史中是否曾有 `error-visible`，又在该聚焦步骤通过后才建立 Retry activation baseline；所以提前发生的 Retry 被吞进 baseline，脚本继续等待已经消失的“错误态 + Retry 焦点”，直到五分钟超时。期间又发生了对 `ImportFromEmptyAssetLibrary` 的物理点击，并通过文件选择器向该 retry 会话的隔离数据库引用导入 1 个本地 PNG，最终画面显示 1 个普通素材。源文件没有被移动、改名、覆盖或删除，但该 run 已不再满足 synthetic-only，不能用于 Gate A。
+
+人工包现改为严格顺序：release gate 后先要求用户保持前台且不操作，实时拒绝提前 Retry、attempt 2 或任何文件选择/导入；真实 attempt 1 错误态稳定后先自动捕获 10，再建立新的 activation baseline。随后一个动作步骤明确允许二选一：`Tab/Shift+Tab` 聚焦 Retry 后只按一次 Enter/Space，或鼠标只单击一次 Retry；两种方式只能选一种。若 Retry 多次激活、attempt 2 没有同一步骤的唯一四层输入，或 retry 会话出现任何导入，脚本立即 fail-closed，不再盲等五分钟。RecoveryTest 新增“干净 attempt 1 放行、提前 attempt 2 拒绝、file-picker 导入拒绝”三项动态门禁；人工包/证据工具/严格校验器聚焦测试 32/32 通过，PowerShell 5.1 AST、DryRun、RecoveryTest 与 diff check 均通过。
+
+失败根仅保留在 `%TEMP%` 作诊断，`validator_started=false`，显示已恢复并复核为 `3840x2160@60Hz / 150%`，两个 DevPreview PID 均已退出。它不能续跑、不能与修复后证据拼接，也不能进入 Git。下一次必须从新的 clean HEAD、新的专属构建和新的 run root 从第 1 步全量重跑；Gate A 继续为 **BLOCKED（READY_FOR_MANUAL_RUN）**。
 
 ## 历史导航证据复用边界
 

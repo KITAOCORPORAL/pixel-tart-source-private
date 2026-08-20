@@ -770,6 +770,72 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     [TestMethod]
+    public async Task RecoverableErrorRetryIsReachableByForwardKeyboardTraversalWithoutStartingAttemptTwo()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedRetryFocus", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var controller = new RecoverableKeyboardTraversalLoadStateController();
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    [],
+                    loadStateController: controller);
+                using var presentation = AttachToPresentationSource(page, 1280, 820);
+                ArrangePage(page, 1280, 820);
+
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => page.ViewModel.HasLoadError &&
+                          FindVisualByAutomationId<Border>(page, "AssetLibraryErrorState").Visibility == Visibility.Visible,
+                    TimeSpan.FromSeconds(10)),
+                    "The recoverable load-state seam did not produce the visible error surface.");
+
+                var retry = FindVisualByAutomationId<Button>(page, "RetryAssetLibraryLoad");
+                Assert.IsTrue(page.Focus(), "The attached Asset Library page root must accept the initial keyboard focus.");
+                Assert.AreSame(page, Keyboard.FocusedElement);
+
+                const int maximumForwardMoves = 12;
+                var visitedAutomationIds = new List<string>();
+                for (var move = 0; move < maximumForwardMoves && !ReferenceEquals(Keyboard.FocusedElement, retry); move++)
+                {
+                    var focused = Keyboard.FocusedElement as UIElement;
+                    Assert.IsNotNull(focused, $"Keyboard focus left the WPF visual tree after: {string.Join(" -> ", visitedAutomationIds)}");
+                    Assert.IsTrue(
+                        focused.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next)),
+                        $"Forward focus traversal stopped before Retry after: {string.Join(" -> ", visitedAutomationIds)}");
+                    page.UpdateLayout();
+                    var current = Keyboard.FocusedElement as DependencyObject;
+                    visitedAutomationIds.Add(current is null
+                        ? "<none>"
+                        : AutomationProperties.GetAutomationId(current) is { Length: > 0 } automationId
+                            ? automationId
+                            : $"<{current.GetType().Name}>");
+                }
+
+                Assert.AreSame(retry, Keyboard.FocusedElement,
+                    $"Retry was not reachable within {maximumForwardMoves} forward moves. Visited: {string.Join(" -> ", visitedAutomationIds)}");
+                Assert.AreEqual("RetryAssetLibraryLoad", AutomationProperties.GetAutomationId(retry));
+                Assert.AreEqual(1, page.ViewModel.LoadAttempt, "Moving focus must not execute Retry or start attempt 2.");
+                CollectionAssert.AreEqual(new[] { 1 }, controller.InitialQueryAttempts.ToArray(),
+                    "Moving focus must not invoke a second repository query.");
+                Assert.IsTrue(page.ViewModel.HasLoadError);
+                Assert.IsFalse(page.ViewModel.IsLoading);
+                Assert.IsFalse(page.ViewModel.IsReady);
+
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
     public void EmbeddedPageExposesForegroundAndDiagnosticsAutomationSeamsWithoutStandaloneProcess()
     {
         var root = FindRepositoryRoot();
@@ -908,6 +974,31 @@ public sealed class EmbeddedAssetLibraryWpfTests
             $"{AutomationProperties.GetAutomationId(element)} started outside a {viewportWidth} DIP workspace.");
         Assert.IsLessThanOrEqualTo(workspace.ActualWidth + 1d, origin.X + element.ActualWidth,
             $"{AutomationProperties.GetAutomationId(element)} overflowed a {viewportWidth} DIP workspace.");
+    }
+
+    private sealed class RecoverableKeyboardTraversalLoadStateController : IAssetLibraryLoadStateController
+    {
+        public bool DisablePreviewFixtures => true;
+        public System.Collections.Concurrent.ConcurrentQueue<int> InitialQueryAttempts { get; } = new();
+
+        public Task BeforeRepositoryInitializationAsync(int attempt, CancellationToken cancellationToken) => Task.CompletedTask;
+
+        public Task<RAWSelectionAssistant.Core.Models.AssetLibraryPage> ExecuteInitialQueryAsync(
+            int attempt,
+            Func<CancellationToken, Task<RAWSelectionAssistant.Core.Models.AssetLibraryPage>> realQuery,
+            CancellationToken cancellationToken)
+        {
+            InitialQueryAttempts.Enqueue(attempt);
+            if (attempt != 1) return realQuery(cancellationToken);
+
+            var exception = new IOException("Known recoverable query failure for retry keyboard traversal.");
+            exception.Data[AssetLibraryLoadStateExceptionMetadata.InjectionIdDataKey] = "asset-library-retry-keyboard-traversal-io-once/v1";
+            return Task.FromException<RAWSelectionAssistant.Core.Models.AssetLibraryPage>(exception);
+        }
+
+        public void RecordState(AssetLibraryLoadStateSnapshot snapshot)
+        {
+        }
     }
 
     private static bool PumpDispatcherUntil(Func<bool> condition, TimeSpan timeout)

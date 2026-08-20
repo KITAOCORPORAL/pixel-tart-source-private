@@ -46,7 +46,13 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "RetryAssetLibraryLoad",
             "Test-StateTimelineComplete",
             "Get-QualifiedRetryActivations",
+            "Get-RetrySessionContamination",
+            "retry-error-ready",
+            "尚未触发 Retry，尚未导入素材",
+            "两种方式只能选一种",
+            "本轮已失去 synthetic-only 资格",
             "Write-NewUtf8NoBom $releaseFile 'release'");
+        Assert.DoesNotContain("retry-error-focused", script, StringComparison.Ordinal);
     }
 
     [TestMethod]
@@ -138,6 +144,9 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("environment_restored").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("helper_process_cleanup_verified").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_process_count_unchanged").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_clean_attempt_one_allowed").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_early_attempt_two_rejected").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_file_picker_import_rejected").GetBoolean());
     }
 
     private static void AssertManifest(string outputRoot, string expectedStatus)

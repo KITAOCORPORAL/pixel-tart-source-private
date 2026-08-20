@@ -741,6 +741,39 @@ function Get-QualifiedRetryActivations {
     return $qualified
 }
 
+function Get-RetrySessionContamination {
+    param(
+        [Parameter(Mandatory = $true)]$Data,
+        [Parameter(Mandatory = $true)]$Document,
+        [Parameter(Mandatory = $true)][string]$RuntimeRoot,
+        [string[]]$AllowedActivationIds = @()
+    )
+
+    $attemptTwo = @($Data.Snapshots | Where-Object { [int](Get-PropertyValue $_ 'attempt') -ge 2 })
+    $unexpectedActivations = @(Get-QualifiedRetryActivations $Document | Where-Object {
+            [string](Get-PropertyValue $_ 'attempt_id') -notin $AllowedActivationIds
+        })
+    $import = Read-JsonFileSafely (Join-Path $RuntimeRoot 'InputDiagnostics\asset-library-import.json')
+    $importEntered = $null -ne $import -and (
+        [bool](Get-PropertyValue $import 'picker_accepted') -or
+        [bool](Get-PropertyValue $import 'import_command_entered') -or
+        [bool](Get-PropertyValue $import 'import_service_entered') -or
+        [int](Get-PropertyValue $import 'selected_file_count') -gt 0 -or
+        [int](Get-PropertyValue $import 'imported_count') -gt 0 -or
+        -not [string]::IsNullOrWhiteSpace([string](Get-PropertyValue $import 'source_kind')))
+
+    if ($importEntered) {
+        return '检测到文件选择或导入；retry 会话只允许空库错误与重试，不得导入任何素材。请保留本轮 run root 并重新运行。'
+    }
+    if ($unexpectedActivations.Count -gt 0) {
+        return '“重试”已在允许步骤之前被点击或按键触发。请保留本轮 run root 并重新运行；下次先等脚本自动捕获错误态。'
+    }
+    if ($attemptTwo.Count -gt 0) {
+        return '状态已经提前离开 attempt 1 错误态并进入 attempt 2，但没有对应的本步骤合格输入证据。请保留本轮 run root 并重新运行。'
+    }
+    return ''
+}
+
 function Get-RouteSession {
     param([Parameter(Mandatory = $true)][string]$RuntimeRoot)
     return Read-JsonFileSafely (Join-Path $RuntimeRoot 'InputDiagnostics\AssetLibraryP1RouteAcceptance\current-route-session.json')
@@ -987,9 +1020,27 @@ function Invoke-RecoveryTest {
     $processCleanup = $helper.HasExited
     $trueCase = Test-DisplayMatches ([pscustomobject]@{ width=3840; height=2160; refresh_rate_hz=60; scale_percent=150 }) $baselineDisplay $true
     $falseCase = Test-DisplayMatches ([pscustomobject]@{ width=1920; height=1080; refresh_rate_hz=60; scale_percent=150 }) $baselineDisplay $true
+    $retryGuardRoot = Join-Path $script:runRoot 'recovery-test-retry-guard'
+    [IO.Directory]::CreateDirectory((Join-Path $retryGuardRoot 'InputDiagnostics')) | Out-Null
+    $emptyPhysical = [pscustomobject]@{ attempts = @(); key_attempts = @() }
+    $attemptOneData = [pscustomobject]@{ Snapshots = @([pscustomobject]@{ attempt = 1; stage = 'error-visible' }) }
+    $attemptTwoData = [pscustomobject]@{ Snapshots = @([pscustomobject]@{ attempt = 1; stage = 'error-visible' }, [pscustomobject]@{ attempt = 2; stage = 'loading-entered' }) }
+    $retryGuardCleanCase = [string]::IsNullOrWhiteSpace((Get-RetrySessionContamination $attemptOneData $emptyPhysical $retryGuardRoot))
+    $retryGuardAttemptTwoCase = -not [string]::IsNullOrWhiteSpace((Get-RetrySessionContamination $attemptTwoData $emptyPhysical $retryGuardRoot))
+    Write-Utf8NoBom (Join-Path $retryGuardRoot 'InputDiagnostics\asset-library-import.json') (([ordered]@{
+                picker_accepted = $true
+                selected_file_count = 1
+                import_command_entered = $true
+                import_service_entered = $true
+                imported_count = 1
+                source_kind = 'file-picker'
+            }) | ConvertTo-Json -Depth 4)
+    $retryGuardImportCase = -not [string]::IsNullOrWhiteSpace((Get-RetrySessionContamination $attemptOneData $emptyPhysical $retryGuardRoot))
     $observed = Get-DisplayObservation
     $afterDevPreview = @(Get-Process -Name $expectedProcessName -ErrorAction SilentlyContinue).Count
-    if (-not $environmentRestored -or -not $processCleanup -or -not $trueCase -or $falseCase -or $beforeDevPreview -ne $afterDevPreview) {
+    if (-not $environmentRestored -or -not $processCleanup -or -not $trueCase -or $falseCase -or
+        -not $retryGuardCleanCase -or -not $retryGuardAttemptTwoCase -or -not $retryGuardImportCase -or
+        $beforeDevPreview -ne $afterDevPreview) {
         throw 'RecoveryTest failed environment restoration, process cleanup, display evaluator, or GUI isolation.'
     }
     $script:manifest['status'] = 'recovery-test-passed'
@@ -1005,6 +1056,9 @@ function Invoke-RecoveryTest {
         display_nonbaseline_false_case = -not $falseCase
         display_observer_read_only = $true
         devpreview_process_count_unchanged = $true
+        retry_guard_clean_attempt_one_allowed = $retryGuardCleanCase
+        retry_guard_early_attempt_two_rejected = $retryGuardAttemptTwoCase
+        retry_guard_file_picker_import_rejected = $retryGuardImportCase
         observed_display = $observed
     }
     Save-Manifest
@@ -1062,23 +1116,44 @@ function Invoke-RealRun {
     Write-NewUtf8NoBom $releaseFile 'release'
     Add-ManifestEvent 'release-loading-gate' 'passed' '脚本创建契约指定 release gate；不生成 UI 输入' $releaseFile
 
-    Wait-ForStep 'retry-error-focused' '仅用真实 Tab 或 Shift+Tab，把焦点移动到“重试”按钮，然后停止。' -Session $retry -Probe {
+    $retryBeforeError = Get-PhysicalDocument $retry.Root
+    $retryPreErrorActivationIds = @(@(Get-QualifiedRetryActivations $retryBeforeError) | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
+    Wait-ForStep 'retry-error-ready' '将像素蛋挞保持在前台且不要点击任何控件。真实错误态稳定后会自动捕获 10。' -Session $retry -Probe {
         $data = Get-StateSessionData $retry.Root
+        $document = Get-PhysicalDocument $retry.Root
+        $contamination = Get-RetrySessionContamination $data $document $retry.Root $retryPreErrorActivationIds
+        if (-not [string]::IsNullOrWhiteSpace($contamination)) {
+            return New-ProbeResult $false '' $contamination $true
+        }
         $errors = @($data.Snapshots | Where-Object { [string](Get-PropertyValue $_ 'stage') -ceq 'error-visible' -and [int](Get-PropertyValue $_ 'attempt') -eq 1 })
-        $focused = Get-FocusedAutomationObservation
-        $passed = $errors.Count -eq 1 -and $null -ne $focused -and $focused.ProcessId -eq $retry.Process.Id -and $focused.AutomationId -ceq 'RetryAssetLibraryLoad'
-        New-ProbeResult $passed 'error-visible-retry-focused' "错误态 + 当前焦点 AutomationId=$([string](Get-PropertyValue $focused 'AutomationId'))"
+        $failed = @($data.Snapshots | Where-Object { [string](Get-PropertyValue $_ 'stage') -ceq 'initial-query-failed' -and [int](Get-PropertyValue $_ 'attempt') -eq 1 })
+        $passed = $errors.Count -eq 1 -and $failed.Count -eq 1
+        New-ProbeResult $passed 'error-visible-attempt-1' '真实可恢复错误态：attempt 1；尚未触发 Retry，尚未导入素材'
     } | Out-Null
     Capture-WindowEvidence $retry '10-recoverable-error-manual-v2' $stateEvidenceRoot | Out-Null
 
     $retryBefore = Get-PhysicalDocument $retry.Root
     $retryBaselineIds = @(@(Get-PropertyValue $retryBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') }) +
         @(@(Get-PropertyValue $retryBefore 'attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'retry-activate-once' '焦点保持在“重试”按钮，只按一次 Enter 或 Space。' -Session $retry -Probe {
+    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter 或 Space；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手。' -Session $retry -Probe {
         $data = Get-StateSessionData $retry.Root
         $document = Get-PhysicalDocument $retry.Root
+        $import = Read-JsonFileSafely (Join-Path $retry.Root 'InputDiagnostics\asset-library-import.json')
+        if ($null -ne $import -and (
+            [bool](Get-PropertyValue $import 'picker_accepted') -or
+            [bool](Get-PropertyValue $import 'import_command_entered') -or
+            [bool](Get-PropertyValue $import 'import_service_entered') -or
+            [int](Get-PropertyValue $import 'selected_file_count') -gt 0 -or
+            [int](Get-PropertyValue $import 'imported_count') -gt 0 -or
+            -not [string]::IsNullOrWhiteSpace([string](Get-PropertyValue $import 'source_kind')))) {
+            return New-ProbeResult $false '' '检测到文件选择或导入；本轮已失去 synthetic-only 资格，立即停止。' $true
+        }
         $activations = @(Get-QualifiedRetryActivations $document | Where-Object { [string](Get-PropertyValue $_ 'attempt_id') -notin $retryBaselineIds })
         if ($activations.Count -gt 1) { return New-ProbeResult $false '' '重试收到超过一次合格真实激活；本轮必须失败' $true }
+        $attemptTwo = @($data.Snapshots | Where-Object { [int](Get-PropertyValue $_ 'attempt') -ge 2 })
+        if ($attemptTwo.Count -gt 0 -and $activations.Count -eq 0) {
+            return New-ProbeResult $false '' 'attempt 2 已开始，但没有本步骤唯一真实 Retry 四层激活；立即停止。' $true
+        }
         $passed = $activations.Count -eq 1 -and (Test-StateTimelineComplete $data 'retry-session') -and (Test-ReadySnapshot $data 2)
         New-ProbeResult $passed $(if ($activations.Count -eq 1) { [string](Get-PropertyValue $activations[0] 'attempt_id') } else { '' }) '唯一真实 Retry 四层激活 + attempt 2 真实仓储 ready/0 项'
     } | Out-Null
