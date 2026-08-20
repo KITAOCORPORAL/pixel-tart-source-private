@@ -13,6 +13,268 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
+
+        <!-- Asset Library button roles intentionally stay local to this page. -->
+        <Color x:Key="AssetLibraryPrimaryForegroundColor">#F5FFFC</Color>
+        <Color x:Key="AssetLibraryPrimaryNormalColor">#0B6658</Color>
+        <Color x:Key="AssetLibraryPrimaryHoverColor">#0D7464</Color>
+        <Color x:Key="AssetLibraryPrimaryPressedColor">#074D43</Color>
+        <Color x:Key="AssetLibrarySecondaryForegroundColor">#F2F6F7</Color>
+        <Color x:Key="AssetLibrarySecondaryNormalColor">#192129</Color>
+        <Color x:Key="AssetLibrarySecondaryHoverColor">#24303A</Color>
+        <Color x:Key="AssetLibrarySecondaryPressedColor">#111820</Color>
+        <Color x:Key="AssetLibraryChipForegroundColor">#EAF1F3</Color>
+        <Color x:Key="AssetLibraryChipNormalColor">#172027</Color>
+        <Color x:Key="AssetLibraryChipHoverColor">#22313A</Color>
+        <Color x:Key="AssetLibraryChipPressedColor">#0F171D</Color>
+        <Color x:Key="AssetLibraryChipActiveNormalColor">#114238</Color>
+        <Color x:Key="AssetLibraryChipActiveHoverColor">#155247</Color>
+        <Color x:Key="AssetLibraryChipActivePressedColor">#0C332C</Color>
+        <Color x:Key="AssetLibraryFocusRingColor">#65E6C7</Color>
+        <Color x:Key="AssetLibraryDisabledBackgroundColor">#252C32</Color>
+        <Color x:Key="AssetLibraryDisabledForegroundColor">#ADB8C0</Color>
+        <Color x:Key="AssetLibraryDisabledBorderColor">#71808C</Color>
+        <Color x:Key="AssetLibraryBorderColor">#5F7180</Color>
+        <Color x:Key="AssetLibraryActiveBorderColor">#42CEAF</Color>
+        <Color x:Key="AssetLibraryPaletteBorderColor">#5F7180</Color>
+        <Color x:Key="AssetLibraryPaletteHoverBorderColor">#91B5C2</Color>
+        <Color x:Key="AssetLibraryPalettePressedBorderColor">#55D0B3</Color>
+        <Color x:Key="AssetLibraryPaletteFocusInnerColor">#061311</Color>
+
+        <SolidColorBrush x:Key="AssetLibraryPrimaryForegroundBrush" Color="{StaticResource AssetLibraryPrimaryForegroundColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPrimaryNormalBrush" Color="{StaticResource AssetLibraryPrimaryNormalColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPrimaryHoverBrush" Color="{StaticResource AssetLibraryPrimaryHoverColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPrimaryPressedBrush" Color="{StaticResource AssetLibraryPrimaryPressedColor}" />
+        <SolidColorBrush x:Key="AssetLibrarySecondaryForegroundBrush" Color="{StaticResource AssetLibrarySecondaryForegroundColor}" />
+        <SolidColorBrush x:Key="AssetLibrarySecondaryNormalBrush" Color="{StaticResource AssetLibrarySecondaryNormalColor}" />
+        <SolidColorBrush x:Key="AssetLibrarySecondaryHoverBrush" Color="{StaticResource AssetLibrarySecondaryHoverColor}" />
+        <SolidColorBrush x:Key="AssetLibrarySecondaryPressedBrush" Color="{StaticResource AssetLibrarySecondaryPressedColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipForegroundBrush" Color="{StaticResource AssetLibraryChipForegroundColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipNormalBrush" Color="{StaticResource AssetLibraryChipNormalColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipHoverBrush" Color="{StaticResource AssetLibraryChipHoverColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipPressedBrush" Color="{StaticResource AssetLibraryChipPressedColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipActiveNormalBrush" Color="{StaticResource AssetLibraryChipActiveNormalColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipActiveHoverBrush" Color="{StaticResource AssetLibraryChipActiveHoverColor}" />
+        <SolidColorBrush x:Key="AssetLibraryChipActivePressedBrush" Color="{StaticResource AssetLibraryChipActivePressedColor}" />
+        <SolidColorBrush x:Key="AssetLibraryFocusRingBrush" Color="{StaticResource AssetLibraryFocusRingColor}" />
+        <SolidColorBrush x:Key="AssetLibraryDisabledBackgroundBrush" Color="{StaticResource AssetLibraryDisabledBackgroundColor}" />
+        <SolidColorBrush x:Key="AssetLibraryDisabledForegroundBrush" Color="{StaticResource AssetLibraryDisabledForegroundColor}" />
+        <SolidColorBrush x:Key="AssetLibraryDisabledBorderBrush" Color="{StaticResource AssetLibraryDisabledBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryBorderBrush" Color="{StaticResource AssetLibraryBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryActiveBorderBrush" Color="{StaticResource AssetLibraryActiveBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPaletteBorderBrush" Color="{StaticResource AssetLibraryPaletteBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPaletteHoverBorderBrush" Color="{StaticResource AssetLibraryPaletteHoverBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPalettePressedBorderBrush" Color="{StaticResource AssetLibraryPalettePressedBorderColor}" />
+        <SolidColorBrush x:Key="AssetLibraryPaletteFocusInnerBrush" Color="{StaticResource AssetLibraryPaletteFocusInnerColor}" />
+
+        <ControlTemplate x:Key="AssetLibraryButtonTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="FocusRing" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" Padding="1">
+                <Border x:Name="Chrome"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      RecognizesAccessKey="True"
+                                      SnapsToDevicePixels="True" />
+                </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter TargetName="FocusRing" Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="AssetLibraryPaletteFocusVisualStyle" TargetType="{x:Type Control}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid Margin="-4" IsHitTestVisible="False">
+                            <Border x:Name="PaletteOuterFocus"
+                                    BorderBrush="{StaticResource AssetLibraryFocusRingBrush}"
+                                    BorderThickness="2" CornerRadius="8" />
+                            <Border x:Name="PaletteInnerFocus"
+                                    BorderBrush="{StaticResource AssetLibraryPaletteFocusInnerBrush}"
+                                    BorderThickness="2" CornerRadius="6" Margin="2" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="AssetLibraryPaletteButtonTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="Chrome"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="4"
+                    Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  SnapsToDevicePixels="True" />
+            </Border>
+        </ControlTemplate>
+
+        <Style x:Key="AssetLibraryButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="12,5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template" Value="{StaticResource AssetLibraryButtonTemplate}" />
+        </Style>
+
+        <Style x:Key="AssetLibraryPrimaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+            <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryNormalBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryNormalBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryHoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryPressedBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryPressedBrush}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AssetLibrarySecondaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryPressedBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AssetLibraryCompactChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+            <Setter Property="Background" Value="{StaticResource AssetLibraryChipNormalBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibraryChipForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="Padding" Value="9,3" />
+            <Setter Property="Margin" Value="0,0,5,4" />
+            <Style.Triggers>
+                <Trigger Property="Tag" Value="Active">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveNormalBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryActiveBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipPressedBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Tag" Value="Active" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Tag" Value="Active" />
+                        <Condition Property="IsPressed" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActivePressedBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AssetLibraryIconButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="MinWidth" Value="34" />
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="7,3" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryPressedBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AssetLibraryPaletteSwatchButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template" Value="{StaticResource AssetLibraryPaletteButtonTemplate}" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource AssetLibraryPaletteFocusVisualStyle}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPalettePressedBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="AssetPanel" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
@@ -61,14 +323,17 @@
                      VerticalAlignment="Center" />
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                 <Button Content="{Binding OrganizationPaneToggleLabel}" Command="{Binding ToggleOrganizationPaneCommand}"
+                        Style="{StaticResource AssetLibrarySecondaryButton}"
                         ToolTip="展开或收起左侧组织栏" AutomationProperties.AutomationId="ToggleAssetOrganizationPane" />
                 <Button Content="{Binding InspectorPaneToggleLabel}" Command="{Binding ToggleInspectorPaneCommand}" Margin="4,0,0,0"
+                        Style="{StaticResource AssetLibrarySecondaryButton}"
                         ToolTip="展开或收起右侧检查器" AutomationProperties.AutomationId="ToggleAssetInspectorPane" />
                 <Button Content="{Binding InspectorPinLabel}" Command="{Binding ToggleInspectorPinCommand}" Margin="4,0,0,0"
+                        Style="{StaticResource AssetLibrarySecondaryButton}"
                         ToolTip="固定检查器；空间不足时优先保留，极窄窗口仍会收起" AutomationProperties.AutomationId="PinAssetInspectorPane" />
             </StackPanel>
             <Button Grid.Row="1" Grid.Column="2" Content="导入引用" Margin="8,0,0,0"
-                    Style="{DynamicResource PrimaryButton}"
+                    Style="{StaticResource AssetLibraryPrimaryButton}"
                     Command="{Binding ImportCommand}"
                     AutomationProperties.AutomationId="AssetLibraryImport" />
         </Grid>
@@ -95,7 +360,9 @@
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
                         <TextBlock Text="分类" Style="{StaticResource AssetSection}" />
-                        <Button Content="全部素材" Margin="0,7,0,2" Click="ClearFilters_Click" AutomationProperties.AutomationId="AssetLibraryAllAssets" />
+                        <Button Content="全部素材" Margin="0,7,0,2" Click="ClearFilters_Click"
+                                Style="{StaticResource AssetLibrarySecondaryButton}"
+                                AutomationProperties.AutomationId="AssetLibraryAllAssets" />
                         <Separator Margin="0,8" />
                         <Expander Header="模块诊断" Margin="0,0,0,10"
                                   IsExpanded="{Binding IsPreviewDiagnosticsEnabled, Mode=OneWay}"
@@ -109,7 +376,9 @@
                         </Expander>
                         <DockPanel>
                             <TextBlock Text="文件夹" Style="{StaticResource AssetSection}" />
-                            <Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}" ToolTip="新建文件夹" />
+                            <Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}"
+                                    Style="{StaticResource AssetLibraryIconButton}"
+                                    ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
                         </DockPanel>
                         <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="新文件夹名称" Margin="0,5,0,4" />
                     </StackPanel>
@@ -155,14 +424,14 @@
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" AutomationProperties.AutomationId="VisualFilterChips">
                         <WrapPanel>
-                            <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" />
-                            <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" />
-                            <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" />
-                            <Button Content="低饱和" Command="{Binding VisualChipCommand}" CommandParameter="LowSaturation" />
-                            <Button Content="低调" Command="{Binding VisualChipCommand}" CommandParameter="LowKey" />
-                            <Button Content="高对比" Command="{Binding VisualChipCommand}" CommandParameter="HighContrast" />
-                            <Button Content="暖色" Command="{Binding VisualChipCommand}" CommandParameter="Warm" />
-                            <Button Content="冷色" Command="{Binding VisualChipCommand}" CommandParameter="Cool" />
+                            <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="低饱和" Command="{Binding VisualChipCommand}" CommandParameter="LowSaturation" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="低调" Command="{Binding VisualChipCommand}" CommandParameter="LowKey" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="高对比" Command="{Binding VisualChipCommand}" CommandParameter="HighContrast" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="暖色" Command="{Binding VisualChipCommand}" CommandParameter="Warm" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="冷色" Command="{Binding VisualChipCommand}" CommandParameter="Cool" Style="{StaticResource AssetLibraryCompactChipButton}" />
                         </WrapPanel>
                         <DockPanel Margin="0,5,0,0">
                             <ItemsControl ItemsSource="{Binding ActiveVisualChips}" AutomationProperties.AutomationId="ActiveVisualFilterChips">
@@ -170,13 +439,16 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Button Command="{Binding DataContext.RemoveVisualChipCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding Key}" Padding="7,3" Margin="0,0,5,0">
+                                                CommandParameter="{Binding Key}"
+                                                Style="{StaticResource AssetLibraryCompactChipButton}"
+                                                Tag="Active">
                                             <TextBlock><Run Text="{Binding Label}" /><Run Text="  ×" /></TextBlock>
                                         </Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Button DockPanel.Dock="Right" Content="退出临时结果" Command="{Binding ClearVisualModeCommand}"
+                                    Style="{StaticResource AssetLibrarySecondaryButton}"
                                     AutomationProperties.AutomationId="ClearVisualResults" />
                         </DockPanel>
                     </StackPanel>
@@ -253,6 +525,7 @@
                             <TextBlock Text="{Binding LoadErrorMessage}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12"
                                        AutomationProperties.AutomationId="AssetLibraryLoadErrorMessage" />
                             <Button Content="重试" Command="{Binding RetryLoadCommand}" HorizontalAlignment="Center"
+                                    Style="{StaticResource AssetLibraryPrimaryButton}"
                                     AutomationProperties.AutomationId="RetryAssetLibraryLoad" />
                         </StackPanel>
                     </Border>
@@ -265,9 +538,10 @@
                                        AutomationProperties.AutomationId="AssetLibraryEmptyStateTitle" />
                             <TextBlock Text="{Binding EmptyStateDescription}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{DynamicResource PrimaryButton}"
+                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{StaticResource AssetLibraryPrimaryButton}"
                                         AutomationProperties.AutomationId="ImportFromEmptyAssetLibrary" />
                                 <Button Content="清除条件" Click="ClearFilters_Click" Margin="7,0,0,0"
+                                        Style="{StaticResource AssetLibrarySecondaryButton}"
                                         Visibility="{Binding HasActiveQuery, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </StackPanel>
                         </StackPanel>
@@ -308,8 +582,12 @@
                         <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{StaticResource AssetCaption}" />
                         <TextBlock Text="{Binding FeatureStatus}" Style="{StaticResource AssetCaption}" AutomationProperties.AutomationId="VisualFeatureStatus" />
                         <WrapPanel Margin="0,6,0,0">
-                            <Button Content="重新分析" Command="{Binding AnalyzeSelectionCommand}" AutomationProperties.AutomationId="ReanalyzeSelected" />
-                            <Button Content="视觉相似" Command="{Binding FindSimilarCommand}" AutomationProperties.AutomationId="FindSimilarAssets" />
+                            <Button Content="重新分析" Command="{Binding AnalyzeSelectionCommand}"
+                                    Style="{StaticResource AssetLibrarySecondaryButton}"
+                                    AutomationProperties.AutomationId="ReanalyzeSelected" />
+                            <Button Content="视觉相似" Command="{Binding FindSimilarCommand}"
+                                    Style="{StaticResource AssetLibrarySecondaryButton}"
+                                    AutomationProperties.AutomationId="FindSimilarAssets" />
                         </WrapPanel>
 
                         <Expander Margin="0,10,0,0" IsExpanded="True" HorizontalContentAlignment="Stretch"
@@ -318,6 +596,7 @@
                                 <DockPanel LastChildFill="True">
                                     <Button DockPanel.Dock="Right" Content="保存" Command="{Binding SaveSmartFolderCommand}"
                                             Focusable="True" IsTabStop="True" Margin="8,0,0,0"
+                                            Style="{StaticResource AssetLibraryPrimaryButton}"
                                             AutomationProperties.Name="保存智能文件夹"
                                             AutomationProperties.AutomationId="SaveVisualSmartFolder" />
                                     <TextBlock Text="Smart Folder Builder" VerticalAlignment="Center" />
@@ -354,6 +633,7 @@
                                                 <StackPanel Width="48" Margin="2">
                                                     <Button Command="{Binding DataContext.SearchPaletteColorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                             CommandParameter="{Binding Hex}" Padding="0" ToolTip="查找相近颜色"
+                                                            Style="{StaticResource AssetLibraryPaletteSwatchButton}"
                                                             HorizontalContentAlignment="Stretch">
                                                         <Border Height="34" Background="{Binding Hex, Converter={StaticResource HexToBrushConverter}}" CornerRadius="3" />
                                                     </Button>
@@ -363,6 +643,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                     <Button Content="查找相似配色" Command="{Binding FindPaletteSimilarCommand}" Margin="0,5,0,0"
+                                            Style="{StaticResource AssetLibrarySecondaryButton}"
                                             AutomationProperties.AutomationId="FindSimilarPalette" />
                                     <TextBlock Text="{Binding Analysis.AverageSaturation, StringFormat=平均饱和度：{0:P0}}" Style="{StaticResource AssetCaption}" />
                                     <TextBlock Text="{Binding Analysis.WarmCool, StringFormat=冷暖倾向：{0}}" Style="{StaticResource AssetCaption}" />
@@ -392,7 +673,9 @@
                                 <DockPanel>
                                     <TextBox Text="{Binding TargetColor}" Width="92" />
                                     <Slider Minimum="1" Maximum="100" Value="{Binding ColorTolerance}" Width="105" Margin="6,0" />
-                                    <Button Content="查颜色" Command="{Binding SearchColorCommand}" AutomationProperties.AutomationId="SearchByColor" />
+                                    <Button Content="查颜色" Command="{Binding SearchColorCommand}"
+                                            Style="{StaticResource AssetLibrarySecondaryButton}"
+                                            AutomationProperties.AutomationId="SearchByColor" />
                                 </DockPanel>
                                 <TextBlock Text="{Binding VisualModeLabel, StringFormat=当前：{0}}" Style="{StaticResource AssetCaption}" Margin="0,5,0,0" />
                             </StackPanel>
@@ -402,8 +685,11 @@
                         <TextBlock Text="批量视觉分析（进入全局任务中心）" Style="{StaticResource AssetSection}" />
                         <DockPanel Margin="0,4,0,0">
                             <ComboBox ItemsSource="{Binding BatchScopeOptions}" SelectedItem="{Binding BatchScope}" Width="105" AutomationProperties.AutomationId="VisualBatchScope" />
-                            <Button Content="开始" Command="{Binding AnalyzeVisibleCommand}" Margin="6,0,0,0" AutomationProperties.AutomationId="AnalyzeVisibleAssets" />
-                            <Button Content="取消" Command="{Binding CancelBatchCommand}" Margin="4,0,0,0" />
+                            <Button Content="开始" Command="{Binding AnalyzeVisibleCommand}" Margin="6,0,0,0"
+                                    Style="{StaticResource AssetLibraryPrimaryButton}"
+                                    AutomationProperties.AutomationId="AnalyzeVisibleAssets" />
+                            <Button Content="取消" Command="{Binding CancelBatchCommand}" Margin="4,0,0,0"
+                                    Style="{StaticResource AssetLibrarySecondaryButton}" />
                         </DockPanel>
                         <TextBlock Text="{Binding BatchStatus}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" AutomationProperties.AutomationId="VisualBatchStatus" />
                     </StackPanel>
