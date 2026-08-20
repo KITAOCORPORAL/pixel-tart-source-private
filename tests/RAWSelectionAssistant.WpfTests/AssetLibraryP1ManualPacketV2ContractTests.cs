@@ -32,8 +32,10 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.DoesNotContain("SetForegroundWindow", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("SendInput", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("explorer.exe", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("IsPathFullyQualified", script, StringComparison.Ordinal);
         ContainsAll(
             script,
+            "function Test-WindowsAbsolutePath",
             "function Wait-ForStep",
             "$window.Foreground",
             "$ForegroundStableMilliseconds",

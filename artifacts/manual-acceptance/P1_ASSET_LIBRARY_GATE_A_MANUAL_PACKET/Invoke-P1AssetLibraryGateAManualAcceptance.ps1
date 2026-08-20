@@ -338,6 +338,14 @@ function Test-DisplayMatches {
     return -not $RequireRefreshRate -or [int]$Observed.refresh_rate_hz -eq [int]$Expected.refresh_rate_hz
 }
 
+function Test-WindowsAbsolutePath {
+    param([string]$Path)
+    if ([string]::IsNullOrWhiteSpace($Path)) { return $false }
+    # Windows PowerShell 5.1 runs on .NET Framework, so use explicit Windows path
+    # syntax instead of a newer runtime-only qualification helper.
+    return $Path -match '^[A-Za-z]:[\\/]' -or $Path -match '^\\\\[^\\/]+[\\/][^\\/]+'
+}
+
 function Get-FocusedAutomationObservation {
     Initialize-AutomationObservation
     try {
@@ -1047,7 +1055,7 @@ function Invoke-RealRun {
     Capture-WindowEvidence $retry '09-loading-manual-v2' $stateEvidenceRoot | Out-Null
     $scenarioManifest = (Get-StateSessionData $retry.Root).Manifest
     $releaseFile = [string](Get-PropertyValue $scenarioManifest 'releaseFile')
-    if ([string]::IsNullOrWhiteSpace($releaseFile) -or -not [IO.Path]::IsPathFullyQualified($releaseFile) -or
+    if (-not (Test-WindowsAbsolutePath $releaseFile) -or
         -not [IO.Path]::GetFullPath($releaseFile).StartsWith(([IO.Path]::GetFullPath($retry.Root).TrimEnd('\') + '\'), [StringComparison]::OrdinalIgnoreCase)) {
         throw '状态控制器 release gate 路径缺失或越出 retry 会话根。'
     }
