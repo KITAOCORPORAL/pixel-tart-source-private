@@ -7,6 +7,7 @@ The caller must provide the exact PID, full executable path, exact window title,
 - the PID resolves to the supplied executable path;
 - exactly one process with that executable name and exactly one process at that path are running globally;
 - the PID owns exactly one visible product window with the supplied title; non-foreground, untitled Chinese IME status/composition windows are recorded and accepted only by exact class allowlist;
+- any other visible auxiliary top-level window (including a transient WPF ToolTip/Popup) is never broadly allowlisted: the helper waits up to 15 seconds for a quiet window set while continuously requiring the same exact foreground main HWND, then rejects the capture if the auxiliary window remains;
 - that window has the supplied title, is not minimized, and is currently foreground;
 - the output PNG and JSON names do not already exist.
 

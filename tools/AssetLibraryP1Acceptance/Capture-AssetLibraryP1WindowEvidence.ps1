@@ -281,6 +281,35 @@ function Test-SameDisplayObservation {
         $Before.scale_factor_percent -eq $After.scale_factor_percent
 }
 
+function Get-AuxiliaryWindowRecords {
+    param(
+        [Parameter(Mandatory = $true)][IntPtr[]]$VisibleHandles,
+        [Parameter(Mandatory = $true)][IntPtr]$MainWindowHandle
+    )
+
+    return @($VisibleHandles | Where-Object { $_ -ne $MainWindowHandle } | ForEach-Object {
+            [ordered]@{
+                hwnd = ConvertTo-HexHandle -Handle $_
+                title = [AssetLibraryP1CaptureNative]::GetWindowTitle($_)
+                class_name = [AssetLibraryP1CaptureNative]::GetWindowClass($_)
+                is_foreground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $_
+            }
+        })
+}
+
+function Get-UnexpectedAuxiliaryWindowRecords {
+    param(
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()][object[]]$AuxiliaryWindows,
+        [Parameter(Mandatory = $true)][string[]]$AllowedClasses
+    )
+
+    return @($AuxiliaryWindows | Where-Object {
+            $_.is_foreground -or
+            -not [string]::IsNullOrEmpty([string]$_.title) -or
+            $AllowedClasses -cnotcontains [string]$_.class_name
+        })
+}
+
 function Write-NewUtf8File {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -324,30 +353,45 @@ if ($matchingNameProcesses.Count -ne 1 -or $matchingPathProcesses.Count -ne 1 -o
 $visibleHandles = @([AssetLibraryP1CaptureNative]::GetVisibleProcessWindows([uint32]$ProcessId))
 $matchingTitleHandles = @($visibleHandles | Where-Object {
         [string]::Equals([AssetLibraryP1CaptureNative]::GetWindowTitle($_), $WindowTitle, [StringComparison]::Ordinal)
-    })
+})
 if ($matchingTitleHandles.Count -ne 1) {
     throw "Expected one visible top-level window with the exact title for PID $ProcessId; observed exact_title_count=$($matchingTitleHandles.Count), all_visible_count=$($visibleHandles.Count)."
 }
 
 $allowedAuxiliaryWindowClasses = @('SoPY_Status', 'SoPY_Comp', 'IME', 'MSCTFIME UI')
-$auxiliaryWindows = @($visibleHandles | Where-Object { $_ -ne $matchingTitleHandles[0] } | ForEach-Object {
-        [ordered]@{
-            hwnd = ConvertTo-HexHandle -Handle $_
-            title = [AssetLibraryP1CaptureNative]::GetWindowTitle($_)
-            class_name = [AssetLibraryP1CaptureNative]::GetWindowClass($_)
-            is_foreground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $_
-        }
-    })
-$unexpectedAuxiliaryWindows = @($auxiliaryWindows | Where-Object {
-        $_.is_foreground -or
-        -not [string]::IsNullOrEmpty([string]$_.title) -or
-        $allowedAuxiliaryWindowClasses -cnotcontains [string]$_.class_name
-    })
+$windowHandle = [IntPtr]$matchingTitleHandles[0]
+$auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
+$unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
+$initialUnexpectedAuxiliaryWindows = @($unexpectedAuxiliaryWindows)
+$auxiliaryWindowQuietWaitStartedAt = [DateTimeOffset]::UtcNow
+$auxiliaryWindowQuietWaitPollCount = 0
+$auxiliaryWindowQuietWaitTimeout = [TimeSpan]::FromSeconds(15)
+while ($unexpectedAuxiliaryWindows.Count -ne 0 -and
+       ([DateTimeOffset]::UtcNow - $auxiliaryWindowQuietWaitStartedAt) -lt $auxiliaryWindowQuietWaitTimeout) {
+    # A WPF ToolTip/Popup is a real visible top-level HWND and may appear after the
+    # packet's main-window stability probe. Do not allowlist its dynamic class or
+    # capture through it. Wait boundedly for every unapproved HWND to disappear,
+    # while continuously requiring the exact main HWND to remain foreground.
+    Start-Sleep -Milliseconds 200
+    $auxiliaryWindowQuietWaitPollCount++
+    $visibleHandles = @([AssetLibraryP1CaptureNative]::GetVisibleProcessWindows([uint32]$ProcessId))
+    $matchingTitleHandles = @($visibleHandles | Where-Object {
+            [string]::Equals([AssetLibraryP1CaptureNative]::GetWindowTitle($_), $WindowTitle, [StringComparison]::Ordinal)
+        })
+    if ($matchingTitleHandles.Count -ne 1 -or [IntPtr]$matchingTitleHandles[0] -ne $windowHandle) {
+        throw "The exact main HWND changed while waiting for auxiliary windows to close for PID $ProcessId."
+    }
+    if ([AssetLibraryP1CaptureNative]::GetForegroundWindow() -ne $windowHandle) {
+        throw "The exact target window lost foreground while waiting for auxiliary windows to close: $(ConvertTo-HexHandle -Handle $windowHandle)."
+    }
+    $auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
+    $unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
+}
+$auxiliaryWindowQuietWaitMilliseconds = [Math]::Round(([DateTimeOffset]::UtcNow - $auxiliaryWindowQuietWaitStartedAt).TotalMilliseconds, 0)
 if ($unexpectedAuxiliaryWindows.Count -ne 0) {
-    throw "Unexpected visible auxiliary top-level window(s) for PID ${ProcessId}: $($unexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
+    throw "Unexpected visible auxiliary top-level window(s) remained after a bounded 15-second quiet wait for PID ${ProcessId}: $($unexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
 }
 
-$windowHandle = [IntPtr]$matchingTitleHandles[0]
 $before = Get-WindowObservation -Handle $windowHandle
 if ($before.title -cne $WindowTitle) {
     throw "Window title mismatch. Expected '$WindowTitle'; observed '$($before.title)'."
@@ -425,6 +469,13 @@ $after = if ($matchingTitleHandlesAfter.Count -eq 1) {
 else {
     $null
 }
+$auxiliaryWindowsAfter = if ($matchingTitleHandlesAfter.Count -eq 1) {
+    @(Get-AuxiliaryWindowRecords -VisibleHandles $afterHandles -MainWindowHandle ([IntPtr]$matchingTitleHandlesAfter[0]))
+}
+else {
+    @()
+}
+$unexpectedAuxiliaryWindowsAfter = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindowsAfter -AllowedClasses $allowedAuxiliaryWindowClasses)
 $stableWindow = $null -ne $after -and (Test-SameWindowObservation -Before $before -After $after)
 $displayAfter = if ($null -ne $after) { Get-DisplayObservation -Handle $windowHandle } else { $null }
 $stableDisplay = $null -ne $displayAfter -and (Test-SameDisplayObservation -Before $displayBefore -After $displayAfter)
@@ -448,7 +499,8 @@ $validPngSignature = $pngHeader.Length -ge 8 -and
     $pngHeader[0] -eq 137 -and $pngHeader[1] -eq 80 -and $pngHeader[2] -eq 78 -and $pngHeader[3] -eq 71 -and
     $pngHeader[4] -eq 13 -and $pngHeader[5] -eq 10 -and $pngHeader[6] -eq 26 -and $pngHeader[7] -eq 10
 
-$verified = $stableWindow -and $stableDisplay -and $stableProcessPopulation -and $validPngSignature -and $screenshotInfo.Length -gt 8
+$verified = $stableWindow -and $stableDisplay -and $stableProcessPopulation -and
+    $unexpectedAuxiliaryWindowsAfter.Count -eq 0 -and $validPngSignature -and $screenshotInfo.Length -gt 8
 $captureMethodDescription = if ($CaptureMethod -eq 'ScreenPixels') {
     'System.Drawing.Graphics.CopyFromScreen'
 }
@@ -497,11 +549,16 @@ $manifest = [ordered]@{
     visible_top_level_window_count_before_capture = $visibleHandles.Count
     exact_title_main_window_count_before_capture = $matchingTitleHandles.Count
     allowed_nonforeground_ime_auxiliary_windows = $auxiliaryWindows
+    transient_unexpected_auxiliary_windows_before_capture = $initialUnexpectedAuxiliaryWindows
+    auxiliary_window_quiet_wait_milliseconds = $auxiliaryWindowQuietWaitMilliseconds
+    auxiliary_window_quiet_wait_poll_count = $auxiliaryWindowQuietWaitPollCount
     unexpected_auxiliary_window_count = $unexpectedAuxiliaryWindows.Count
     window_before_capture = $before
     window_after_capture = $after
     visible_top_level_window_count_after_capture = $afterHandles.Count
     exact_title_main_window_count_after_capture = $matchingTitleHandlesAfter.Count
+    auxiliary_windows_after_capture = $auxiliaryWindowsAfter
+    unexpected_auxiliary_window_count_after_capture = $unexpectedAuxiliaryWindowsAfter.Count
     screenshot = [ordered]@{
         file_name = [IO.Path]::GetFileName($screenshotPath)
         absolute_path = $screenshotPath
@@ -516,6 +573,7 @@ $manifest = [ordered]@{
         single_product_main_window_verified = $matchingTitleHandles.Count -eq 1 -and $matchingTitleHandlesAfter.Count -eq 1
         single_global_matching_process_verified = [bool]$stableProcessPopulation
         exact_window_foreground_verified = $before.is_foreground -eq $true
+        no_unapproved_auxiliary_window_during_capture = $unexpectedAuxiliaryWindows.Count -eq 0 -and $unexpectedAuxiliaryWindowsAfter.Count -eq 0
         window_stable_during_capture = [bool]$stableWindow
         display_mode_and_scale_stable_during_capture = [bool]$stableDisplay
         passed = [bool]$verified

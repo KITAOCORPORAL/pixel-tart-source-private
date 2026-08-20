@@ -21,6 +21,15 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
             "GetWindowClass",
             "SoPY_Status",
             "SoPY_Comp",
+            "Get-AuxiliaryWindowRecords",
+            "Get-UnexpectedAuxiliaryWindowRecords",
+            "[TimeSpan]::FromSeconds(15)",
+            "Start-Sleep -Milliseconds 200",
+            "The exact main HWND changed while waiting for auxiliary windows to close",
+            "transient_unexpected_auxiliary_windows_before_capture",
+            "auxiliary_window_quiet_wait_milliseconds",
+            "unexpected_auxiliary_window_count_after_capture",
+            "no_unapproved_auxiliary_window_during_capture",
             "unexpected_auxiliary_window_count",
             "single_product_main_window_verified",
             "GetForegroundWindow",
@@ -51,6 +60,8 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
             "[IO.FileMode]::CreateNew",
             "window_stable_during_capture",
             "exact_pid_path_title_verified");
+
+        Assert.DoesNotContain("HwndWrapper[", script, StringComparison.OrdinalIgnoreCase);
     }
 
     [TestMethod]

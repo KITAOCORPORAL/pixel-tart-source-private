@@ -184,6 +184,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             "physicalKeyboardActions",
             "Test-KeyActionInsideCaptureWindow",
             "previousTupleInteractionAt",
+            "unexpected_auxiliary_window_count_after_capture",
+            "no_unapproved_auxiliary_window_during_capture",
             "synthetic-directory-recursive");
 
         foreach (var forbidden in new[]
@@ -1034,11 +1036,13 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("exact_title_main_window_count_before_capture", 1),
                 ("exact_title_main_window_count_after_capture", 1),
                 ("unexpected_auxiliary_window_count", 0),
+                ("unexpected_auxiliary_window_count_after_capture", 0),
                 ("verification", D(
                     ("exact_pid_path_title_verified", true),
                     ("single_product_main_window_verified", true),
                     ("single_global_matching_process_verified", true),
                     ("exact_window_foreground_verified", true),
+                    ("no_unapproved_auxiliary_window_during_capture", true),
                     ("window_stable_during_capture", true),
                     ("display_mode_and_scale_stable_during_capture", true),
                     ("passed", true))),

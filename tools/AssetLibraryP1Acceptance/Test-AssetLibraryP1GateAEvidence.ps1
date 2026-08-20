@@ -355,11 +355,13 @@ function Get-WindowRecordSummary {
         Require-Equal (Get-NestedValue $json $path) $script:contract.expected_gui_process_count "$context single-GUI assertion '$($path -join '.')' failed."
     }
     Require-Equal (Get-PropertyValue $json 'unexpected_auxiliary_window_count') 0 "$context has an unexpected auxiliary window."
+    Require-Equal (Get-PropertyValue $json 'unexpected_auxiliary_window_count_after_capture') 0 "$context gained an unexpected auxiliary window during capture."
     foreach ($field in @(
             'exact_pid_path_title_verified',
             'single_product_main_window_verified',
             'single_global_matching_process_verified',
             'exact_window_foreground_verified',
+            'no_unapproved_auxiliary_window_during_capture',
             'window_stable_during_capture',
             'display_mode_and_scale_stable_during_capture')) {
         Require-True (Test-TrueValue (Get-NestedValue $json @('verification', $field))) "$context verification.$field is not true."
