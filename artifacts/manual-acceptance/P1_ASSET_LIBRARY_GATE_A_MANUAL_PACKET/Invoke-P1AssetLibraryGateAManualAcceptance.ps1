@@ -680,7 +680,9 @@ function Invoke-DedicatedBuild {
         '--nologo'
     )
     $startedAt = [DateTimeOffset]::UtcNow
-    $exitCode = Invoke-HiddenProcess $dotnet $arguments (Join-Path $logsRoot 'dedicated-build.stdout.txt') (Join-Path $logsRoot 'dedicated-build.stderr.txt')
+    $exitCode = Invoke-WithEnvironment @{ MSBUILDDISABLENODEREUSE = '1' } {
+        Invoke-HiddenProcess $dotnet $arguments (Join-Path $logsRoot 'dedicated-build.stdout.txt') (Join-Path $logsRoot 'dedicated-build.stderr.txt')
+    }
     if ($exitCode -ne 0) { throw "专属 warnings-as-errors 构建失败，exit=$exitCode；查看 logs\dedicated-build.*.txt。" }
     Assert-TrackedCleanAndHead $SourceHead '专属构建后'
     if (-not (Test-Path -LiteralPath $expectedExecutable -PathType Leaf)) { throw "专属构建未生成目标 EXE：$expectedExecutable" }
@@ -706,6 +708,7 @@ function Invoke-DedicatedBuild {
         modular_harness_dev_preview = $true
         asset_library_p1_acceptance = $true
         input_routing_diagnostics = $true
+        msbuild_node_reuse_disabled = $true
         created_at = [DateTimeOffset]::UtcNow.ToString('O')
         build_started_at = $startedAt.ToString('O')
     }
@@ -1122,6 +1125,21 @@ function Invoke-RecoveryTest {
     } finally {
         [Environment]::SetEnvironmentVariable($environmentKey, $sentinel, 'Process')
     }
+    $nodeReuseKey = 'MSBUILDDISABLENODEREUSE'
+    $nodeReuseSentinel = [Environment]::GetEnvironmentVariable($nodeReuseKey, 'Process')
+    $nodeReuseOverrideObserved = $false
+    $nodeReuseEnvironmentRestored = $false
+    try {
+        $nodeReuseOverrideObserved = [bool](Invoke-WithEnvironment @{ $nodeReuseKey = '1' } {
+                [string]::Equals([Environment]::GetEnvironmentVariable($nodeReuseKey, 'Process'), '1', [StringComparison]::Ordinal)
+            })
+        $nodeReuseEnvironmentRestored = [string]::Equals(
+            [Environment]::GetEnvironmentVariable($nodeReuseKey, 'Process'),
+            $nodeReuseSentinel,
+            [StringComparison]::Ordinal)
+    } finally {
+        [Environment]::SetEnvironmentVariable($nodeReuseKey, $nodeReuseSentinel, 'Process')
+    }
     $shellPath = (Get-Process -Id $PID).Path
     $helper = Start-Process -FilePath $shellPath -ArgumentList @('-NoProfile', '-NonInteractive', '-Command', (Quote-ProcessArgument 'Start-Sleep -Seconds 30')) -PassThru -WindowStyle Hidden
     Stop-SessionForCleanup ([pscustomobject]@{ Process = $helper })
@@ -1154,6 +1172,7 @@ function Invoke-RecoveryTest {
     if (-not $persistentNonzeroRejected) { $recoveryFailures.Add("persistent nonzero rejection [$persistentNonzeroError]") }
     if ($realDevPreviewStableZero.StableMilliseconds -lt 300) { $recoveryFailures.Add('live process-table stable zero') }
     if (-not $environmentRestored) { $recoveryFailures.Add('environment restoration') }
+    if (-not $nodeReuseOverrideObserved -or -not $nodeReuseEnvironmentRestored) { $recoveryFailures.Add('MSBuild node-reuse environment isolation') }
     if (-not $processCleanup) { $recoveryFailures.Add('helper process cleanup') }
     if (-not $trueCase -or $falseCase) { $recoveryFailures.Add('display evaluator') }
     if (-not $retryGuardCleanCase -or -not $retryGuardAttemptTwoCase -or -not $retryGuardImportCase) { $recoveryFailures.Add('retry contamination guard') }
@@ -1169,6 +1188,8 @@ function Invoke-RecoveryTest {
     $script:manifest['display_restored'] = Test-DisplayMatches $observed $baselineDisplay $true
     $script:manifest['recovery_test'] = [ordered]@{
         environment_restored = $environmentRestored
+        msbuild_node_reuse_override_observed = $nodeReuseOverrideObserved
+        msbuild_node_reuse_environment_restored = $nodeReuseEnvironmentRestored
         helper_process_cleanup_verified = $processCleanup
         display_baseline_true_case = $trueCase
         display_nonbaseline_false_case = -not $falseCase

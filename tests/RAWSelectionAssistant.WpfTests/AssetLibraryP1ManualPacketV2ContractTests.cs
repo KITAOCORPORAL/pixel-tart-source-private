@@ -79,6 +79,8 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "-p:AssetLibraryP1StateAcceptance=true",
             "-p:InputRoutingDiagnostics=true",
             "-p:TreatWarningsAsErrors=true",
+            "Invoke-WithEnvironment @{ MSBUILDDISABLENODEREUSE = '1' }",
+            "msbuild_node_reuse_disabled = $true",
             "pixel-tart-p1-gate-a-build-manifest/v1",
             "source_head_is_current_head",
             "repository_tracked_clean",
@@ -89,6 +91,31 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "keyboard-session",
             "restart-dpi-session");
         Assert.DoesNotContain("3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af", script, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
+    public void DedicatedBuildDisablesNodeReuseOnlyInsideScopedWaitedProcess()
+    {
+        var script = Text();
+        var hiddenProcess = Slice(script, "function Invoke-HiddenProcess", "function Invoke-WithEnvironment");
+        var dedicatedBuild = Slice(script, "function Invoke-DedicatedBuild", "function Get-StateSessionData");
+        const string exactOverride = "MSBUILDDISABLENODEREUSE = '1'";
+
+        ContainsAll(
+            hiddenProcess,
+            "Start-Process -FilePath $FilePath",
+            "-PassThru -Wait",
+            "-RedirectStandardOutput $StdOutPath",
+            "-RedirectStandardError $StdErrPath",
+            "return [int]$process.ExitCode");
+        ContainsAll(
+            dedicatedBuild,
+            "$exitCode = Invoke-WithEnvironment @{ MSBUILDDISABLENODEREUSE = '1' }",
+            "Invoke-HiddenProcess $dotnet $arguments",
+            "if ($exitCode -ne 0)",
+            "msbuild_node_reuse_disabled = $true");
+        Assert.AreEqual(1, CountOccurrences(script, exactOverride));
+        Assert.DoesNotContain("-nodeReuse:false", dedicatedBuild, StringComparison.OrdinalIgnoreCase);
     }
 
     [TestMethod]
@@ -150,6 +177,8 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.IsFalse(root.GetProperty("validator_started").GetBoolean());
         Assert.IsFalse(root.GetProperty("build_started").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("environment_restored").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("msbuild_node_reuse_override_observed").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("msbuild_node_reuse_environment_restored").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("helper_process_cleanup_verified").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_process_count_unchanged").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_residual_then_stable_zero_verified").GetBoolean());
@@ -182,6 +211,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             RedirectStandardOutput = true,
             RedirectStandardError = true
         };
+        if (mode == "RecoveryTest") start.Environment["MSBUILDDISABLENODEREUSE"] = "recovery-parent-sentinel";
         foreach (var argument in new[]
                  {
                      "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path($"{RelativePacketDirectory}/{EntryName}"),
@@ -200,6 +230,18 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     {
         foreach (var value in values) StringAssert.Contains(text, value);
     }
+
+    private static string Slice(string text, string start, string end)
+    {
+        var startIndex = text.IndexOf(start, StringComparison.Ordinal);
+        var endIndex = text.IndexOf(end, startIndex + start.Length, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, startIndex);
+        Assert.IsGreaterThan(startIndex, endIndex);
+        return text[startIndex..endIndex];
+    }
+
+    private static int CountOccurrences(string text, string value) =>
+        (text.Length - text.Replace(value, string.Empty, StringComparison.Ordinal).Length) / value.Length;
 
     private static string Text() => File.ReadAllText(Path($"{RelativePacketDirectory}/{EntryName}"), Encoding.UTF8);
 
