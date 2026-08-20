@@ -82,6 +82,14 @@ Windows PowerShell 5.1 下三个相关脚本 AST 均为 0 error；捕获器、�
 
 失败根仅保留在 `%TEMP%` 作诊断，`validator_started=false`，显示已恢复并复核为 `3840x2160@60Hz / 150%`，两个 DevPreview PID 均已退出。它不能续跑、不能与修复后证据拼接，也不能进入 Git。下一次必须从新的 clean HEAD、新的专属构建和新的 run root 从第 1 步全量重跑；Gate A 继续为 **BLOCKED（READY_FOR_MANUAL_RUN）**。
 
+## 会话退出后的进程枚举竞态修复
+
+2026-08-20 在 `6a99ab5fa2b81d3c6f81dc8a369a24680d3b17a2` 上的第四次真人 V2 Run 已真实完成 first-empty、08 自动捕获及第一个窗口的用户正常关闭。`close-first-empty` 于 `06:41:01.452Z` 根据该会话进程的 `HasExited` 通过；约 16 ms 后，下一会话启动前的瞬时全局名称检查仍短暂枚举到 1 个同名进程，因而 fail-closed。当前与事后复核均为 0 个残留 DevPreview；本轮没有启动 retry 会话，validator 未启动，显示前后均为 `3840x2160@60Hz / 150%` 且 `display_restored=true`。这不是用户漏关窗口，而是退出完成与 Windows 两套进程枚举视图收敛之间的竞态。
+
+人工包不再用单次 `Get-Process` 判断清零。现在同时读取精确进程名的托管进程表和 `Win32_Process`，取 PID 并集；任何一个视图仍见进程都会重置稳定计时，只有两者连续 1000 ms 均为零才允许继续，最长等待 10 秒。枚举错误、持续存在的 PID、未达到完整稳定窗口都会继续失败并报告最后 PID；脚本不会忽略、过滤或自动结束残留软件。用户正常关闭路径在 `HasExited + WaitForExit` 后先经过该门，下一会话入口再经过同一门形成二次防线；单次 CIM 查询另有 2 秒操作超时，避免系统查询无限挂起。
+
+RecoveryTest 已动态覆盖“残留后归零”“归零期间重新出现并重置计时”“持续非零必须超时拒绝”及本机双进程表连续稳定清零；PowerShell 5.1 AST、DryRun、RecoveryTest、人工包聚焦 6/6 与完整 WPF 864/864 均通过。第四次失败根只保留在 `%TEMP%` 作诊断；由于修复改变 HEAD 和专属 EXE 哈希，08 不能续用，下一次仍须新 run root 从第 1 步全量重跑。Gate A 继续为 **BLOCKED（READY_FOR_MANUAL_RUN）**。
+
 ## 历史导航证据复用边界
 
 历史证据 `.validation/P1-GateA-Real-20260818-170520-db3d4e4b/evidence/navigation-7-physical-pointer-session.json` 的七项一级导航均含 Win32→WPF→精确 AutomationId→Button.Click 真实链。对 `b4bd38f53d6a44756289eeda8bfc4feb343443c7..ab21ef0bec2eb04f1b0e720418770e9025286e4c` 的差异审计确认以下生产路径零变更，因此仅复用“已验证且未变化的导航行为”：

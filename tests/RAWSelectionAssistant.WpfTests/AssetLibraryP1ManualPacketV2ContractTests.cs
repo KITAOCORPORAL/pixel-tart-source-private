@@ -37,6 +37,14 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             script,
             "function Test-WindowsAbsolutePath",
             "function Wait-ForStep",
+            "function Wait-ForStableEmptyProcessSnapshot",
+            "function Wait-ForNoExistingDevPreview",
+            "Get-DevPreviewProcessSnapshot",
+            "Get-CimInstance -ClassName Win32_Process",
+            "-OperationTimeoutSec 2",
+            "Wait-ForNoExistingDevPreview -Context \"关闭 PID $($Session.Process.Id) 后\"",
+            "Wait-ForNoExistingDevPreview -Context \"启动 $expectedProcessName 前\"",
+            "全局进程表已连续稳定清零",
             "$window.Foreground",
             "$ForegroundStableMilliseconds",
             "Capture-AssetLibraryP1WindowEvidence.ps1",
@@ -144,6 +152,10 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("environment_restored").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("helper_process_cleanup_verified").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_process_count_unchanged").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_residual_then_stable_zero_verified").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_reappearance_resets_stability_verified").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_persistent_nonzero_rejected").GetBoolean());
+        Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("devpreview_live_process_tables_stable_zero_verified").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_clean_attempt_one_allowed").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_early_attempt_two_rejected").GetBoolean());
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_file_picker_import_rejected").GetBoolean());

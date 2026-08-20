@@ -422,7 +422,9 @@ function Wait-ForExpectedClose {
     while ([DateTimeOffset]::UtcNow -lt $deadline) {
         Test-CancelRequested
         if ($Session.Process.HasExited) {
-            Complete-Instruction $StepId $Instruction '进程已由用户正常关闭'
+            $Session.Process.WaitForExit()
+            [void](Wait-ForNoExistingDevPreview -Context "关闭 PID $($Session.Process.Id) 后")
+            Complete-Instruction $StepId $Instruction '进程已由用户正常关闭，且全局进程表已连续稳定清零'
             if ($script:activeSession -eq $Session) { $script:activeSession = $null }
             return
         }
@@ -471,9 +473,84 @@ function Invoke-WithEnvironment {
     }
 }
 
+function Get-DevPreviewProcessSnapshot {
+    try {
+        $managedIds = @(Get-Process -ErrorAction Stop | Where-Object {
+                [string]::Equals([string]$_.ProcessName, $expectedProcessName, [StringComparison]::OrdinalIgnoreCase)
+            } | ForEach-Object { [int]$_.Id })
+        $escapedExecutableName = $expectedExecutableName.Replace("'", "''")
+        $cimIds = @(Get-CimInstance -ClassName Win32_Process -Filter ("Name = '{0}'" -f $escapedExecutableName) `
+                -OperationTimeoutSec 2 -ErrorAction Stop |
+                ForEach-Object { [int]$_.ProcessId })
+    } catch {
+        throw "无法可靠枚举 $expectedProcessName 进程；为避免假通过，本轮停止：$($_.Exception.Message)"
+    }
+    $processIds = @($managedIds + $cimIds | Sort-Object -Unique)
+    return [pscustomobject]@{
+        Count = @($processIds).Count
+        ProcessIds = $processIds
+        ManagedProcessIds = @($managedIds | Sort-Object -Unique)
+        CimProcessIds = @($cimIds | Sort-Object -Unique)
+    }
+}
+
+function Wait-ForStableEmptyProcessSnapshot {
+    param(
+        [Parameter(Mandatory = $true)][scriptblock]$SnapshotProvider,
+        [Parameter(Mandatory = $true)][string]$Context,
+        [ValidateRange(100, 60000)][int]$TimeoutMilliseconds = 10000,
+        [ValidateRange(50, 10000)][int]$StableMilliseconds = 1000,
+        [ValidateRange(10, 1000)][int]$PollMilliseconds = 100
+    )
+    if ($StableMilliseconds -ge $TimeoutMilliseconds) {
+        throw 'StableMilliseconds must be smaller than TimeoutMilliseconds.'
+    }
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    [long]$zeroSince = -1
+    $lastSnapshot = $null
+    while ($clock.ElapsedMilliseconds -lt $TimeoutMilliseconds) {
+        Test-CancelRequested
+        try { $lastSnapshot = & $SnapshotProvider } catch {
+            throw "$Context 无法可靠读取进程表；为避免假通过，本轮停止：$($_.Exception.Message)"
+        }
+        if ($null -eq $lastSnapshot -or $null -eq (Get-PropertyValue $lastSnapshot 'Count')) {
+            throw "$Context 的进程快照无效；为避免假通过，本轮停止。"
+        }
+        if ([int](Get-PropertyValue $lastSnapshot 'Count') -eq 0) {
+            if ($zeroSince -lt 0) { $zeroSince = $clock.ElapsedMilliseconds }
+            $stableFor = $clock.ElapsedMilliseconds - $zeroSince
+            if ($stableFor -ge $StableMilliseconds) {
+                return [pscustomobject]@{
+                    Snapshot = $lastSnapshot
+                    ElapsedMilliseconds = [long]$clock.ElapsedMilliseconds
+                    StableMilliseconds = [long]$stableFor
+                }
+            }
+        } else {
+            $zeroSince = -1
+        }
+        Start-Sleep -Milliseconds $PollMilliseconds
+    }
+    $lastIds = if ($null -eq $lastSnapshot) { @() } else { @((Get-PropertyValue $lastSnapshot 'ProcessIds')) }
+    $lastIdText = if (@($lastIds).Count -eq 0) { '无（但未达到连续稳定窗口）' } else { $lastIds -join ',' }
+    throw "$Context 未在 $TimeoutMilliseconds ms 内达到连续 $StableMilliseconds ms 的进程表稳定清零；最后 PID=$lastIdText。"
+}
+
+function Wait-ForNoExistingDevPreview {
+    param(
+        [Parameter(Mandatory = $true)][string]$Context,
+        [int]$TimeoutMilliseconds = 10000,
+        [int]$StableMilliseconds = 1000,
+        [int]$PollMilliseconds = 100
+    )
+    return Wait-ForStableEmptyProcessSnapshot -Context $Context -TimeoutMilliseconds $TimeoutMilliseconds `
+        -StableMilliseconds $StableMilliseconds -PollMilliseconds $PollMilliseconds -SnapshotProvider {
+            Get-DevPreviewProcessSnapshot
+        }
+}
+
 function Assert-NoExistingDevPreview {
-    $existing = @(Get-Process -Name $expectedProcessName -ErrorAction SilentlyContinue)
-    if ($existing.Count -ne 0) { throw "启动前必须关闭全部 $expectedProcessName 进程；当前检测到 $($existing.Count) 个。" }
+    [void](Wait-ForNoExistingDevPreview -Context "启动 $expectedProcessName 前")
 }
 
 function Get-DotnetHost {
@@ -1001,6 +1078,37 @@ function Invoke-DryRun {
 function Invoke-RecoveryTest {
     Initialize-NativeObservation
     $beforeDevPreview = @(Get-Process -Name $expectedProcessName -ErrorAction SilentlyContinue).Count
+    $residualQueue = [Collections.Queue]::new()
+    $residualQueue.Enqueue([pscustomobject]@{ Count = 1; ProcessIds = @(41001) })
+    $residualQueue.Enqueue([pscustomobject]@{ Count = 0; ProcessIds = @() })
+    $residualThenZero = Wait-ForStableEmptyProcessSnapshot -Context 'RecoveryTest residual-then-zero' `
+        -TimeoutMilliseconds 600 -StableMilliseconds 80 -PollMilliseconds 20 -SnapshotProvider {
+            if ($residualQueue.Count -gt 0) { return $residualQueue.Dequeue() }
+            return [pscustomobject]@{ Count = 0; ProcessIds = @() }
+        }
+    $reappearanceQueue = [Collections.Queue]::new()
+    $reappearanceQueue.Enqueue([pscustomobject]@{ Count = 0; ProcessIds = @() })
+    $reappearanceQueue.Enqueue([pscustomobject]@{ Count = 0; ProcessIds = @() })
+    $reappearanceQueue.Enqueue([pscustomobject]@{ Count = 1; ProcessIds = @(41002) })
+    $reappearanceQueue.Enqueue([pscustomobject]@{ Count = 0; ProcessIds = @() })
+    $reappearanceReset = Wait-ForStableEmptyProcessSnapshot -Context 'RecoveryTest zero-reappears-zero' `
+        -TimeoutMilliseconds 700 -StableMilliseconds 80 -PollMilliseconds 20 -SnapshotProvider {
+            if ($reappearanceQueue.Count -gt 0) { return $reappearanceQueue.Dequeue() }
+            return [pscustomobject]@{ Count = 0; ProcessIds = @() }
+        }
+    $persistentNonzeroRejected = $false
+    $persistentNonzeroError = ''
+    try {
+        [void](Wait-ForStableEmptyProcessSnapshot -Context 'RecoveryTest persistent-nonzero' `
+                -TimeoutMilliseconds 180 -StableMilliseconds 80 -PollMilliseconds 20 -SnapshotProvider {
+                [pscustomobject]@{ Count = 1; ProcessIds = @(41003) }
+            })
+    } catch {
+        $persistentNonzeroError = $_.Exception.Message
+        $persistentNonzeroRejected = $persistentNonzeroError -like '*41003*'
+    }
+    $realDevPreviewStableZero = Wait-ForNoExistingDevPreview -Context 'RecoveryTest live DevPreview preflight' `
+        -TimeoutMilliseconds 3000 -StableMilliseconds 300 -PollMilliseconds 50
     $environmentKey = 'PIXEL_TART_ASSET_LIBRARY_P1_HEAD'
     $sentinel = [Environment]::GetEnvironmentVariable($environmentKey, 'Process')
     $environmentRestored = $false
@@ -1038,10 +1146,20 @@ function Invoke-RecoveryTest {
     $retryGuardImportCase = -not [string]::IsNullOrWhiteSpace((Get-RetrySessionContamination $attemptOneData $emptyPhysical $retryGuardRoot))
     $observed = Get-DisplayObservation
     $afterDevPreview = @(Get-Process -Name $expectedProcessName -ErrorAction SilentlyContinue).Count
-    if (-not $environmentRestored -or -not $processCleanup -or -not $trueCase -or $falseCase -or
-        -not $retryGuardCleanCase -or -not $retryGuardAttemptTwoCase -or -not $retryGuardImportCase -or
-        $beforeDevPreview -ne $afterDevPreview) {
-        throw 'RecoveryTest failed environment restoration, process cleanup, display evaluator, or GUI isolation.'
+    $recoveryFailures = [Collections.Generic.List[string]]::new()
+    if ($residualThenZero.StableMilliseconds -lt 80) { $recoveryFailures.Add('residual-then-zero stability') }
+    if ($reappearanceReset.StableMilliseconds -lt 80 -or $reappearanceReset.ElapsedMilliseconds -lt 120) {
+        $recoveryFailures.Add('reappearance stability reset')
+    }
+    if (-not $persistentNonzeroRejected) { $recoveryFailures.Add("persistent nonzero rejection [$persistentNonzeroError]") }
+    if ($realDevPreviewStableZero.StableMilliseconds -lt 300) { $recoveryFailures.Add('live process-table stable zero') }
+    if (-not $environmentRestored) { $recoveryFailures.Add('environment restoration') }
+    if (-not $processCleanup) { $recoveryFailures.Add('helper process cleanup') }
+    if (-not $trueCase -or $falseCase) { $recoveryFailures.Add('display evaluator') }
+    if (-not $retryGuardCleanCase -or -not $retryGuardAttemptTwoCase -or -not $retryGuardImportCase) { $recoveryFailures.Add('retry contamination guard') }
+    if ($beforeDevPreview -ne $afterDevPreview) { $recoveryFailures.Add('DevPreview process count unchanged') }
+    if ($recoveryFailures.Count -ne 0) {
+        throw "RecoveryTest failed: $($recoveryFailures -join '; ')."
     }
     $script:manifest['status'] = 'recovery-test-passed'
     $script:manifest['ui_started'] = $false
@@ -1056,6 +1174,10 @@ function Invoke-RecoveryTest {
         display_nonbaseline_false_case = -not $falseCase
         display_observer_read_only = $true
         devpreview_process_count_unchanged = $true
+        devpreview_residual_then_stable_zero_verified = $true
+        devpreview_reappearance_resets_stability_verified = $true
+        devpreview_persistent_nonzero_rejected = $persistentNonzeroRejected
+        devpreview_live_process_tables_stable_zero_verified = $true
         retry_guard_clean_attempt_one_allowed = $retryGuardCleanCase
         retry_guard_early_attempt_two_rejected = $retryGuardAttemptTwoCase
         retry_guard_file_picker_import_rejected = $retryGuardImportCase
