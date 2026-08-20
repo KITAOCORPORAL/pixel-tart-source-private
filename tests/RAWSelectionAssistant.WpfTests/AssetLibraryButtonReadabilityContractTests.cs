@@ -177,7 +177,9 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var disabledBackground = Color(document, "AssetLibraryDisabledBackgroundColor");
         AssertContrast(Color(document, "AssetLibraryDisabledForegroundColor"), disabledBackground, 4.5, "disabled text");
         AssertContrast(Color(document, "AssetLibraryDisabledBorderColor"), disabledBackground, 3.0, "disabled outline");
+        AssertContrast(focus, disabledBackground, 3.0, "focus ring / disabled surface");
         AssertContrast(Color(document, "AssetLibraryBorderColor"), Color(document, "AssetLibrarySecondaryNormalColor"), 3.0, "secondary outline");
+        AssertContrast(Color(document, "AssetLibraryPaletteHoverBorderColor"), Color(document, "AssetLibrarySecondaryHoverColor"), 3.0, "tab hover outline");
         AssertContrast(Color(document, "AssetLibraryBorderColor"), Color(document, "AssetLibraryChipNormalColor"), 3.0, "chip outline");
         AssertContrast(Color(document, "AssetLibraryActiveBorderColor"), Color(document, "AssetLibraryChipActiveNormalColor"), 3.0, "active chip outline");
         AssertContrast(Color(document, "AssetLibraryPaletteBorderColor"), contentSurface, 3.0, "palette outline / dark content surface");
@@ -201,6 +203,60 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         AssertAutomationRole(document, "ToggleAssetInspectorPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "PinAssetInspectorPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "SaveVisualSmartFolder", "AssetLibraryPrimaryButton");
+    }
+
+    [TestMethod]
+    public void VisualAnalysisTabsUseExplicitReadableLocalChrome()
+    {
+        var document = LoadPage();
+        var tabs = document.Descendants(Presentation + "TabItem").ToArray();
+
+        Assert.HasCount(3, tabs);
+        CollectionAssert.AreEquivalent(new[] { "配色", "直方图", "影调" },
+            tabs.Select(tab => Attribute(tab, "Header")).ToArray());
+        CollectionAssert.AreEquivalent(new[] { "VisualPaletteTab", "VisualHistogramTab", "VisualToneTab" },
+            tabs.Select(tab => Attribute(tab, "AutomationProperties.AutomationId")).ToArray());
+        Assert.IsTrue(tabs.All(tab =>
+            Attribute(tab, "Style") == "{StaticResource AssetLibraryVisualTabItem}"));
+
+        var style = Style(document, "AssetLibraryVisualTabItem");
+        Assert.AreEqual(string.Empty, Attribute(style, "BasedOn"),
+            "The local tab chrome must not inherit the global disabled Opacity trigger.");
+        Assert.AreEqual("{StaticResource AssetLibrarySecondaryNormalBrush}", DirectSetterValue(style, "Background"));
+        Assert.AreEqual("{StaticResource AssetLibrarySecondaryForegroundBrush}", DirectSetterValue(style, "Foreground"));
+        Assert.AreEqual("{StaticResource AssetLibraryBorderBrush}", DirectSetterValue(style, "BorderBrush"));
+        Assert.AreEqual("{x:Null}", DirectSetterValue(style, "FocusVisualStyle"));
+
+        AssertTrigger(style, "IsMouseOver", "True", "AssetLibraryVisualTabItem");
+        var selected = AssertTrigger(style, "IsSelected", "True", "AssetLibraryVisualTabItem");
+        Assert.IsTrue(selected.Elements(Presentation + "Setter").Any(setter =>
+            Attribute(setter, "Property") == "Background" &&
+            Attribute(setter, "Value") == "{StaticResource AssetLibraryChipActiveNormalBrush}"));
+        var disabled = AssertTrigger(style, "IsEnabled", "False", "AssetLibraryVisualTabItem");
+        foreach (var property in new[] { "Background", "Foreground", "BorderBrush", "Cursor" })
+            Assert.IsTrue(disabled.Elements(Presentation + "Setter").Any(setter => Attribute(setter, "Property") == property));
+
+        Assert.IsTrue(style.Descendants(Presentation + "MultiTrigger").Any(trigger =>
+        {
+            var conditions = trigger.Descendants(Presentation + "Condition").ToArray();
+            return conditions.Any(condition => Attribute(condition, "Property") == "IsSelected" && Attribute(condition, "Value") == "True") &&
+                   conditions.Any(condition => Attribute(condition, "Property") == "IsMouseOver" && Attribute(condition, "Value") == "True");
+        }));
+
+        var template = Resource(document, "ControlTemplate", "AssetLibraryVisualTabItemTemplate");
+        var focusRing = template.Descendants(Presentation + "Border")
+            .Single(border => Attribute(border, "Name") == "FocusRing");
+        Assert.AreEqual("Transparent", Attribute(focusRing, "BorderBrush"));
+        var chrome = template.Descendants(Presentation + "Border")
+            .Single(border => Attribute(border, "Name") == "Chrome");
+        Assert.AreEqual("{TemplateBinding Background}", Attribute(chrome, "Background"));
+        Assert.AreEqual("{TemplateBinding BorderBrush}", Attribute(chrome, "BorderBrush"));
+        Assert.IsTrue(template.Descendants(Presentation + "ContentPresenter")
+            .Any(presenter => Attribute(presenter, "ContentSource") == "Header"));
+        Assert.IsTrue(template.Descendants(Presentation + "Trigger")
+            .Any(trigger => Attribute(trigger, "Property") == "IsKeyboardFocused" && Attribute(trigger, "Value") == "True"));
+        Assert.IsFalse(style.Descendants(Presentation + "Setter")
+            .Any(setter => Attribute(setter, "Property") == "Opacity"));
     }
 
     private static void AssertContentRole(XDocument document, string content, string role, int count)

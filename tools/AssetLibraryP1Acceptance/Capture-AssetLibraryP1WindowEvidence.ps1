@@ -469,11 +469,9 @@ $after = if ($matchingTitleHandlesAfter.Count -eq 1) {
 else {
     $null
 }
-$auxiliaryWindowsAfter = if ($matchingTitleHandlesAfter.Count -eq 1) {
-    @(Get-AuxiliaryWindowRecords -VisibleHandles $afterHandles -MainWindowHandle ([IntPtr]$matchingTitleHandlesAfter[0]))
-}
-else {
-    @()
+$auxiliaryWindowsAfter = @()
+if ($matchingTitleHandlesAfter.Count -eq 1) {
+    $auxiliaryWindowsAfter = @(Get-AuxiliaryWindowRecords -VisibleHandles $afterHandles -MainWindowHandle ([IntPtr]$matchingTitleHandlesAfter[0]))
 }
 $unexpectedAuxiliaryWindowsAfter = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindowsAfter -AllowedClasses $allowedAuxiliaryWindowClasses)
 $stableWindow = $null -ne $after -and (Test-SameWindowObservation -Before $before -After $after)

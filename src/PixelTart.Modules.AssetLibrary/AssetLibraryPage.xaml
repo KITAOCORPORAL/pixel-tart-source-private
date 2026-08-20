@@ -275,6 +275,68 @@
             </Style.Triggers>
         </Style>
 
+        <ControlTemplate x:Key="AssetLibraryVisualTabItemTemplate" TargetType="{x:Type TabItem}">
+            <Border x:Name="FocusRing" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" Padding="1">
+                <Border x:Name="Chrome"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter ContentSource="Header"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      RecognizesAccessKey="True"
+                                      SnapsToDevicePixels="True" />
+                </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter TargetName="FocusRing" Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="AssetLibraryVisualTabItem" TargetType="{x:Type TabItem}">
+            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="11,5" />
+            <Setter Property="Margin" Value="0,0,3,0" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template" Value="{StaticResource AssetLibraryVisualTabItemTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveNormalBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryActiveBorderBrush}" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsSelected" Value="True" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveHoverBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
+                    <Setter Property="Cursor" Value="Arrow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="AssetPanel" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
@@ -624,7 +686,8 @@
                         </Expander>
 
                         <TabControl Margin="0,9,0,0" AutomationProperties.AutomationId="VisualAnalysisTabs">
-                            <TabItem Header="配色" AutomationProperties.AutomationId="VisualPaletteTab">
+                            <TabItem Header="配色" Style="{StaticResource AssetLibraryVisualTabItem}"
+                                     AutomationProperties.AutomationId="VisualPaletteTab">
                                 <StackPanel Margin="7" AutomationProperties.AutomationId="VisualPalettePanel">
                                     <ItemsControl ItemsSource="{Binding Analysis.Palette}">
                                         <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
@@ -649,14 +712,16 @@
                                     <TextBlock Text="{Binding Analysis.WarmCool, StringFormat=冷暖倾向：{0}}" Style="{StaticResource AssetCaption}" />
                                 </StackPanel>
                             </TabItem>
-                            <TabItem Header="直方图" AutomationProperties.AutomationId="VisualHistogramTab">
+                            <TabItem Header="直方图" Style="{StaticResource AssetLibraryVisualTabItem}"
+                                     AutomationProperties.AutomationId="VisualHistogramTab">
                                 <StackPanel Margin="7" AutomationProperties.AutomationId="VisualHistogramPanel">
                                     <local:HistogramDrawing Analysis="{Binding Analysis}" Height="100" />
                                     <TextBlock Text="{Binding Analysis.BlackClipRatio, StringFormat=暗部剪切：{0:P2}}" />
                                     <TextBlock Text="{Binding Analysis.WhiteClipRatio, StringFormat=高光剪切：{0:P2}}" />
                                 </StackPanel>
                             </TabItem>
-                            <TabItem Header="影调" AutomationProperties.AutomationId="VisualToneTab">
+                            <TabItem Header="影调" Style="{StaticResource AssetLibraryVisualTabItem}"
+                                     AutomationProperties.AutomationId="VisualToneTab">
                                 <StackPanel Margin="7" AutomationProperties.AutomationId="VisualTonePanel">
                                     <TextBlock Text="{Binding Analysis.ToneKey, StringFormat=影调：{0}}" />
                                     <TextBlock Text="{Binding Analysis.Contrast, StringFormat=对比：{0}}" />
