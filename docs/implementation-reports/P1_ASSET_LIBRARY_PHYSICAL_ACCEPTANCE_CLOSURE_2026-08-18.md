@@ -60,6 +60,16 @@ P1 Gate A 状态为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 继
 
 由于该修复改变源码 HEAD 和专属 EXE 哈希，失败根中的 08/09 只能作为失败诊断，不能与修复后的证据拼接。下一次必须从新的 run root 全量重跑。
 
+## 瞬态 WPF 辅助窗口捕获修复
+
+2026-08-20 的第二次真人 V2 Run 在 `c69a3835750a449c994f49235c3f8e4bbaa006ef` 上真实通过 first-empty 状态探针：attempt 1、真实 SQLite v6、0 项和素材库直达均成立；但在写入 08 之前，严格捕获器发现同一 PID 下出现一个空标题、非前台的动态 `HwndWrapper[...]` 可见顶层窗口，因它不在四个精确 IME 类白名单内而 fail-closed。该窗口与鼠标悬停产生的瞬态 WPF ToolTip/Popup 相符，但失败运行未记录足够的 owner/style/rect 证明，所以没有按类名前缀放行，也没有把它伪装成合法辅助窗口。
+
+失败根保留在 `%TEMP%`：没有生成 08 PNG/window-evidence，validator 未启动，DevPreview 无残留进程，显示前后均为 `3840x2160@60/150%` 且 `display_restored=true`。该根只能用于失败诊断，不能继续执行或与后续证据拼接。
+
+修复提交 `c5f67425cb51ba7b443db9f61b6326f8039def8f` 保留原有严格口径：任何非白名单辅助顶层窗口出现时，捕获器最多等待 15 秒，每 200 ms 重新枚举，并持续要求同一精确主 HWND 保持前台；只有辅助窗口真实消失后才截图。超时、主 HWND 改变或失去前台仍立即失败。截图后再次枚举辅助窗口，严格 validator 现在同时要求捕获前后 `unexpected_auxiliary_window_count=0` 和 `no_unapproved_auxiliary_window_during_capture=true`。没有宽泛允许 `HwndWrapper`，也没有放宽第二窗口检测。
+
+Windows PowerShell 5.1 下三个相关脚本 AST 均为 0 error；捕获器、人工包与严格 validator 聚焦测试 32/32 通过；人工包 DryRun 和 RecoveryTest 均退出 0。由于修复再次改变 HEAD 与专属 EXE 哈希，下一次真人 Run 必须使用全新 run root 从第 1 步全量重跑。P1 Gate A 仍为 **BLOCKED（READY_FOR_MANUAL_RUN）**，`capture_status` 仍为 `not_captured`。
+
 ## 历史导航证据复用边界
 
 历史证据 `.validation/P1-GateA-Real-20260818-170520-db3d4e4b/evidence/navigation-7-physical-pointer-session.json` 的七项一级导航均含 Win32→WPF→精确 AutomationId→Button.Click 真实链。对 `b4bd38f53d6a44756289eeda8bfc4feb343443c7..ab21ef0bec2eb04f1b0e720418770e9025286e4c` 的差异审计确认以下生产路径零变更，因此仅复用“已验证且未变化的导航行为”：
