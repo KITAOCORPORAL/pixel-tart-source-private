@@ -39,20 +39,26 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+        if (!TryAcquireSingleInstance())
+        {
+            Shutdown();
+            return;
+        }
+        _assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, logService: null);
+#endif
         new AppDataMigrationService().MigrateLegacyData();
         _logService = new FileLogService();
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
-
-        var assemblyName = typeof(App).Assembly.GetName().Name ?? "RAWSelectionAssistant";
-        _singleInstance = new SingleInstanceManager($"{assemblyName}-96AFD8F1-7EF9-4D10-AFA9-18C6BE383E17");
-        if (!_singleInstance.TryAcquire())
+#if !ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+        if (!TryAcquireSingleInstance())
         {
             Shutdown();
             return;
         }
-        _singleInstance.ActivationRequested += ActivateMainWindow;
+#endif
 
         try
         {
@@ -228,7 +234,7 @@ public partial class App : Application
         {
             _logService.Error("应用程序启动失败。", ex);
             ThemedMessageDialog.Show(null, Branding.ProductName, "软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", ThemedMessageKind.Error);
-            _singleInstance.Dispose();
+            _singleInstance?.Dispose();
             Shutdown(-1);
         }
     }
@@ -257,6 +263,15 @@ public partial class App : Application
         base.OnExit(e);
     }
 
+    private bool TryAcquireSingleInstance()
+    {
+        var assemblyName = typeof(App).Assembly.GetName().Name ?? "RAWSelectionAssistant";
+        _singleInstance = new SingleInstanceManager($"{assemblyName}-96AFD8F1-7EF9-4D10-AFA9-18C6BE383E17");
+        if (!_singleInstance.TryAcquire()) return false;
+        _singleInstance.ActivationRequested += ActivateMainWindow;
+        return true;
+    }
+
     private PixelTartModuleRegistry CreateModuleRegistry(TaskOperationBridge taskOperationBridge)
     {
         var registry = new PixelTartModuleRegistry();
@@ -273,8 +288,9 @@ public partial class App : Application
 #endif
         IAssetLibraryLoadStateController? assetLibraryP1StateController = null;
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
-        _assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, _logService);
-        assetLibraryP1StateController = _assetLibraryP1StateController;
+        assetLibraryP1StateController = _assetLibraryP1StateController?.HasStateScenario == true
+            ? _assetLibraryP1StateController
+            : null;
         if (assetLibraryP1StateController is not null)
         {
             enableAssetLibraryPreview = false;

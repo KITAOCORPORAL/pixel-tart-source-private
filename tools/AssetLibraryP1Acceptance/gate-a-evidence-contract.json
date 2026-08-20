@@ -16,7 +16,25 @@
     "environment_variable": "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE",
     "route": "asset-library",
     "current_page": "AssetLibrary",
-    "source_head": "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af"
+    "source_head_source": "build-manifest-authority"
+  },
+  "source_identity": {
+    "manual_manifest_file": "manual-run-manifest.json",
+    "manual_manifest_schema": "pixel-tart-p1-gate-a-manual-packet/v1",
+    "build_manifest_file": "build-manifest.json",
+    "build_manifest_schema": "pixel-tart-p1-gate-a-build-manifest/v1",
+    "allowed_build_configurations": ["Debug"],
+    "required_manual_session_ids": [
+      "first-empty-session",
+      "retry-session",
+      "keyboard-session",
+      "restart-dpi-session"
+    ],
+    "source_head_format": "lowercase-hex-40",
+    "executable_sha256_format": "uppercase-hex-64",
+    "build_must_be_from_tracked_clean_head": true,
+    "build_source_head_must_be_current": true,
+    "dedicated_build_must_succeed": true
   },
   "state_chain": {
     "scenario_protocol": "pixel-tart-asset-library-p1-state/v1",

@@ -25,7 +25,20 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         Assert.AreEqual("PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE", route.GetProperty("environment_variable").GetString());
         Assert.AreEqual("asset-library", route.GetProperty("route").GetString());
         Assert.AreEqual("AssetLibrary", route.GetProperty("current_page").GetString());
-        Assert.AreEqual("3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af", route.GetProperty("source_head").GetString());
+        Assert.AreEqual("build-manifest-authority", route.GetProperty("source_head_source").GetString());
+        var sourceIdentity = root.GetProperty("source_identity");
+        Assert.AreEqual("manual-run-manifest.json", sourceIdentity.GetProperty("manual_manifest_file").GetString());
+        Assert.AreEqual("pixel-tart-p1-gate-a-manual-packet/v1", sourceIdentity.GetProperty("manual_manifest_schema").GetString());
+        Assert.AreEqual("build-manifest.json", sourceIdentity.GetProperty("build_manifest_file").GetString());
+        Assert.AreEqual("pixel-tart-p1-gate-a-build-manifest/v1", sourceIdentity.GetProperty("build_manifest_schema").GetString());
+        CollectionAssert.AreEqual(new[] { "Debug" }, sourceIdentity.GetProperty("allowed_build_configurations").EnumerateArray().Select(item => item.GetString()).ToArray());
+        CollectionAssert.AreEqual(
+            new[] { "first-empty-session", "retry-session", "keyboard-session", "restart-dpi-session" },
+            sourceIdentity.GetProperty("required_manual_session_ids").EnumerateArray().Select(item => item.GetString()).ToArray());
+        Assert.IsTrue(sourceIdentity.GetProperty("build_must_be_from_tracked_clean_head").GetBoolean());
+        Assert.IsTrue(sourceIdentity.GetProperty("build_source_head_must_be_current").GetBoolean());
+        Assert.IsTrue(sourceIdentity.GetProperty("dedicated_build_must_succeed").GetBoolean());
+        Assert.DoesNotContain("3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af", contractText, StringComparison.OrdinalIgnoreCase);
         Assert.IsTrue(root.GetProperty("synthetic_fixture_only").GetBoolean());
         Assert.IsFalse(root.GetProperty("customer_media_allowed").GetBoolean());
         Assert.IsTrue(root.GetProperty("runtime_evidence_may_contain_machine_paths").GetBoolean());
@@ -162,7 +175,14 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             "workspace_restore_snapshots",
             "restart_settings_match_previous_session",
             "previousFinalSnapshot",
-            "physicalActions",
+            "source_identity.manual_manifest_file",
+            "source_identity.build_manifest_file",
+            "trustedSourceHead",
+            "source_head_is_current_head",
+            "manualSessionsById",
+            "physicalMouseActions",
+            "physicalKeyboardActions",
+            "Test-KeyActionInsideCaptureWindow",
             "previousTupleInteractionAt",
             "synthetic-directory-recursive");
 
@@ -299,12 +319,143 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         StringAssert.Contains(rejected.Output, "exactly one verified physical mouse or keyboard activation");
     }
 
+    [TestMethod]
+    public void ValidatorAcceptsStrictDpiKeyboardInteractionsWithoutMouseFallback()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseDpiKeyboardInteractions();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreEqual(0, result.ExitCode, result.Output);
+    }
+
+    [TestMethod]
+    [DataRow("missing-key-up")]
+    [DataRow("wrong-focus")]
+    [DataRow("no-state-change")]
+    [DataRow("outside-capture-window")]
+    [DataRow("synthetic-source")]
+    public void ValidatorRejectsUntrustedDpiKeyboardLayerOrTiming(string mutation)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseDpiKeyboardInteractions();
+        fixture.CorruptFirstDpiKeyboardInteraction(mutation);
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "interaction capture is not linked");
+    }
+
+    [TestMethod]
+    [DataRow("pid")]
+    [DataRow("hwnd")]
+    public void ValidatorRejectsDpiInteractionFromAnotherProcessOrWindow(string identityPart)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.CorruptFirstDpiInteractionIdentity(identityPart);
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, identityPart == "pid" ? "changed PID" : "changed HWND");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsSelfConsistentWindowEvidenceForAnotherExecutablePath()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.MoveFirstDpiInteractionToAnotherExecutablePath();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "executable path differs from build authority");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsOldManualAndSessionHeadAgainstCurrentBuildAuthority()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.SetNonAuthorityHeads("3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af");
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "Manual-run source_head differs from the build authority");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsUppercaseCommitShaEvenWhenEveryManifestRepeatsIt()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.SetEverySourceHead(CapturedFixture.AuthoritySourceHead.ToUpperInvariant());
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "40 lowercase hexadecimal characters");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsWrongExecutableShaCasingEvenWhenAllManifestsRepeatIt()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.LowercaseEveryExecutableSha();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "64 uppercase hexadecimal characters");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsReleaseEvidenceEvenWhenEveryManifestRepeatsRelease()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.SetEveryBuildConfiguration("Release");
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "configuration is not allowed by the contract");
+    }
+
+    [TestMethod]
+    [DataRow("manual-session")]
+    [DataRow("scenario")]
+    public void ValidatorRejectsOneSessionWhoseHeadDiffersFromAuthority(string location)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.CorruptRetrySessionHead(location);
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, location == "manual-session" ? "Manual-run session 'retry-session' HEAD differs" : "Retry manifest start-route HEAD differs");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsNonSyntheticFixtureSource()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseCustomerMediaFixtureSource();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "source_kind is not synthetic-directory-recursive");
+    }
+
     private sealed class CapturedFixture : IDisposable
     {
         private const string Protocol = "pixel-tart-asset-library-p1-state/v1";
         private const string PointerProtocol = "pixel-tart-physical-pointer/v1";
         private const string ExecutableName = "PixelTart_ModularHarness_V1_DevPreview.exe";
         private const string WindowTitle = "像素蛋挞 [Modular Harness Dev]";
+        private const string SourceHead = "ab21ef0bec2eb04f1b0e720418770e9025286e4c";
+        private const string BuildConfiguration = "Debug";
         private int _pngSeed = 1;
 
         private CapturedFixture(string root)
@@ -325,6 +476,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         public string ContractPath { get; }
         private string ExecutablePath => Path.Combine(RunRoot, ExecutableName);
         private string ExecutableHash { get; set; } = string.Empty;
+        public static string AuthoritySourceHead => SourceHead;
 
         public void UseRetryKeyboardActivation(string key)
         {
@@ -344,6 +496,174 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             attempt["layer1_win32"]!["key_up_received"] = false;
             attempt["layer1_win32"]!["events"] = new JsonArray(attempt["layer1_win32"]!["events"]!.AsArray()[0]!.DeepClone());
             File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
+        public void UseDpiKeyboardInteractions()
+        {
+            var path = Path.Combine(RunRoot, "restart-physical-pointer.json");
+            var root = ReadObject(path);
+            var attempts = new List<Dictionary<string, object?>>();
+            var transitions = new List<Dictionary<string, object?>>();
+            var matrixBase = new DateTimeOffset(2026, 8, 19, 1, 0, 0, TimeSpan.Zero);
+            AddRegularKey(attempts, transitions, "dpi-key-org-right", "dpi-transition-org-right", "AssetOrganizationSplitter", "OrganizationPaneWidth", "Right", "increase", 290, 300, 180, 420, matrixBase.AddSeconds(1));
+            AddRegularKey(attempts, transitions, "dpi-key-org-left", "dpi-transition-org-left", "AssetOrganizationSplitter", "OrganizationPaneWidth", "Left", "decrease", 310, 300, 180, 420, matrixBase.AddSeconds(11));
+            AddRegularKey(attempts, transitions, "dpi-key-inspector-left", "dpi-transition-inspector-left", "AssetInspectorSplitter", "InspectorPaneWidth", "Left", "increase", 290, 300, 260, 520, matrixBase.AddSeconds(21));
+            AddRegularKey(attempts, transitions, "dpi-key-inspector-right", "dpi-transition-inspector-right", "AssetInspectorSplitter", "InspectorPaneWidth", "Right", "decrease", 310, 300, 260, 520, matrixBase.AddSeconds(31));
+            root["attempts"] = new JsonArray();
+            root["key_attempts"] = JsonSerializer.SerializeToNode(attempts);
+            root["control_state_transitions"] = JsonSerializer.SerializeToNode(transitions);
+            WriteObject(path, root);
+        }
+
+        public void CorruptFirstDpiKeyboardInteraction(string mutation)
+        {
+            var path = Path.Combine(RunRoot, "restart-physical-pointer.json");
+            var root = ReadObject(path);
+            var attempt = root["key_attempts"]!.AsArray()[0]!.AsObject();
+            var transition = root["control_state_transitions"]!.AsArray()[0]!.AsObject();
+            switch (mutation)
+            {
+                case "missing-key-up":
+                    attempt["layer1_win32"]!["key_up_received"] = false;
+                    attempt["layer1_win32"]!["events"] = new JsonArray(attempt["layer1_win32"]!["events"]!.AsArray()[0]!.DeepClone());
+                    break;
+                case "wrong-focus":
+                    attempt["layer3_target"]!["focused_element_at_down"]!["automation_id"] = "WrongFocusedControl";
+                    attempt["layer3_target"]!["focused_automation_id_at_down"] = "WrongFocusedControl";
+                    break;
+                case "no-state-change":
+                    attempt["layer4_action"]!["state_changed"] = false;
+                    transition["state_changed"] = false;
+                    transition["settings_state_changed"] = false;
+                    transition["result"] = "NoChange";
+                    break;
+                case "outside-capture-window":
+                    MoveKeyEvidenceTo(attempt, transition, new DateTimeOffset(2026, 8, 19, 0, 59, 59, TimeSpan.Zero));
+                    break;
+                case "synthetic-source":
+                    attempt["origin"] = "Synthetic";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mutation), mutation, "Unknown DPI-keyboard mutation.");
+            }
+            WriteObject(path, root);
+        }
+
+        public void CorruptFirstDpiInteractionIdentity(string identityPart)
+        {
+            var path = Path.Combine(RunRoot, "dpi-1366x768-100pct-interaction.window-evidence.json");
+            var root = ReadObject(path);
+            switch (identityPart)
+            {
+                case "pid":
+                    root["expected"]!["process_id"] = 999;
+                    root["process"]!["process_id"] = 999;
+                    break;
+                case "hwnd":
+                    root["window_before_capture"]!["hwnd"] = "0xBAD";
+                    root["window_after_capture"]!["hwnd"] = "0xBAD";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(identityPart), identityPart, "Unknown window identity mutation.");
+            }
+            WriteObject(path, root);
+        }
+
+        public void MoveFirstDpiInteractionToAnotherExecutablePath()
+        {
+            var otherDirectory = Path.Combine(RunRoot, "other-build");
+            Directory.CreateDirectory(otherDirectory);
+            var otherExecutable = Path.Combine(otherDirectory, ExecutableName);
+            File.Copy(ExecutablePath, otherExecutable);
+            var path = Path.Combine(RunRoot, "dpi-1366x768-100pct-interaction.window-evidence.json");
+            var root = ReadObject(path);
+            root["expected"]!["executable_path"] = otherExecutable;
+            root["process"]!["executable_path"] = otherExecutable;
+            WriteObject(path, root);
+        }
+
+        public void SetNonAuthorityHeads(string sourceHead)
+        {
+            SetManualAndSessionHeads(sourceHead);
+            SetScenarioHeads(sourceHead);
+        }
+
+        public void SetEverySourceHead(string sourceHead)
+        {
+            var buildPath = Path.Combine(RunRoot, "build-manifest.json");
+            var build = ReadObject(buildPath);
+            build["source_head"] = sourceHead;
+            WriteObject(buildPath, build);
+            SetManualAndSessionHeads(sourceHead);
+            SetScenarioHeads(sourceHead);
+        }
+
+        public void LowercaseEveryExecutableSha()
+        {
+            var lowercase = ExecutableHash.ToLowerInvariant();
+            var buildPath = Path.Combine(RunRoot, "build-manifest.json");
+            var build = ReadObject(buildPath);
+            build["executable_sha256"] = lowercase;
+            WriteObject(buildPath, build);
+
+            var manualPath = Path.Combine(RunRoot, "manual-run-manifest.json");
+            var manual = ReadObject(manualPath);
+            manual["executable_sha256"] = lowercase;
+            foreach (var session in manual["sessions"]!.AsArray()) session!["executable_sha256"] = lowercase;
+            WriteObject(manualPath, manual);
+
+            foreach (var evidencePath in Directory.EnumerateFiles(RunRoot, "*.window-evidence.json", SearchOption.AllDirectories))
+            {
+                var evidence = ReadObject(evidencePath);
+                evidence["process"]!["executable_sha256"] = lowercase;
+                WriteObject(evidencePath, evidence);
+            }
+        }
+
+        public void SetEveryBuildConfiguration(string configuration)
+        {
+            var buildPath = Path.Combine(RunRoot, "build-manifest.json");
+            var build = ReadObject(buildPath);
+            build["build_configuration"] = configuration;
+            WriteObject(buildPath, build);
+
+            var manualPath = Path.Combine(RunRoot, "manual-run-manifest.json");
+            var manual = ReadObject(manualPath);
+            manual["build_configuration"] = configuration;
+            foreach (var session in manual["sessions"]!.AsArray()) session!["build_configuration"] = configuration;
+            WriteObject(manualPath, manual);
+        }
+
+        public void CorruptRetrySessionHead(string location)
+        {
+            const string differentHead = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+            switch (location)
+            {
+                case "manual-session":
+                    var manualPath = Path.Combine(RunRoot, "manual-run-manifest.json");
+                    var manual = ReadObject(manualPath);
+                    var retry = manual["sessions"]!.AsArray().Select(node => node!.AsObject())
+                        .Single(session => session["session_id"]!.GetValue<string>() == "retry-session");
+                    retry["source_head"] = differentHead;
+                    WriteObject(manualPath, manual);
+                    break;
+                case "scenario":
+                    var scenarioPath = Path.Combine(RunRoot, "sessions", "retry", "scenario-manifest.json");
+                    var scenario = ReadObject(scenarioPath);
+                    scenario["startRouteHead"] = differentHead;
+                    WriteObject(scenarioPath, scenario);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(location), location, "Unknown session HEAD location.");
+            }
+        }
+
+        public void UseCustomerMediaFixtureSource()
+        {
+            var path = Path.Combine(RunRoot, "initial-import-0-to-12.json");
+            var root = ReadObject(path);
+            root["source_kind"] = "customer-media";
+            WriteObject(path, root);
         }
 
         public static CapturedFixture Create()
@@ -369,6 +689,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         {
             File.WriteAllBytes(ExecutablePath, Encoding.ASCII.GetBytes("fixture executable identity\n"));
             ExecutableHash = Sha256(File.ReadAllBytes(ExecutablePath));
+            WriteSourceIdentityManifests();
 
             var firstBase = new DateTimeOffset(2026, 8, 19, 0, 0, 0, TimeSpan.Zero);
             var retryBase = firstBase.AddMinutes(1);
@@ -408,9 +729,9 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 var defaultAt = matrixBase.AddSeconds(index * 10);
                 var actionAt = defaultAt.AddSeconds(1);
                 var interactionAt = defaultAt.AddSeconds(3);
-                WriteWindowEvidence($"dpi-{tuple.Name}-default", defaultAt, 300, "0x300", tuple.Dpi, tuple.Width, tuple.Height, tuple.Scale, 60);
+                WriteWindowEvidence($"dpi-{tuple.Name}-default", defaultAt, 301, "0x301", tuple.Dpi, tuple.Width, tuple.Height, tuple.Scale, 60);
                 dpiAttempts.Add(PointerAttempt($"pointer-dpi-{index + 1}", index % 2 == 0 ? "ToggleAssetOrganizationPane" : "ToggleAssetInspectorPane", actionAt));
-                WriteWindowEvidence($"dpi-{tuple.Name}-interaction", interactionAt, 300, "0x300", tuple.Dpi, tuple.Width, tuple.Height, tuple.Scale, 60);
+                WriteWindowEvidence($"dpi-{tuple.Name}-interaction", interactionAt, 301, "0x301", tuple.Dpi, tuple.Width, tuple.Height, tuple.Scale, 60);
             }
 
             var keyboardStart = firstBase.AddMinutes(30);
@@ -432,7 +753,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 WorkspaceSnapshot(keyboardStart.AddSeconds(12), 300, false, 300, true, 200),
                 WorkspaceSnapshot(keyboardStart.AddSeconds(13), 300, false, 300, false, 200)
             };
-            var keyboardUpdated = matrixBase.AddSeconds(33);
+            var keyboardUpdated = keyboardStart.AddSeconds(14);
             WriteJson(Path.Combine(RunRoot, "keyboard-physical-pointer.json"), D(
                 ("protocol", PointerProtocol),
                 ("diagnostic_id", "keyboard-diagnostic"),
@@ -440,12 +761,13 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("process_started_at", keyboardStart.AddSeconds(-10).ToString("O")),
                 ("started_at", keyboardStart.AddSeconds(-10).ToString("O")),
                 ("updated_at", keyboardUpdated.ToString("O")),
-                ("attempts", dpiAttempts),
+                ("attempts", Array.Empty<object>()),
                 ("key_attempts", keyAttempts),
                 ("control_state_transitions", transitions),
                 ("workspace_restore_snapshots", restoreSnapshots)));
+            WriteWindowEvidence("keyboard-splitters-start-fixture", keyboardStart, 300, "0x300", 144, 1920, 1080, 150, 60);
 
-            var restartAt = matrixBase.AddSeconds(40);
+            var restartAt = matrixBase.AddSeconds(-5);
             var restartSnapshot = WorkspaceSnapshot(restartAt.AddSeconds(1), 300, false, 300, false, 200);
             restartSnapshot["restore_confirmed"] = true;
             restartSnapshot["restart_comparison_performed"] = true;
@@ -457,7 +779,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("process_id", 301),
                 ("process_started_at", restartAt.ToString("O")),
                 ("started_at", restartAt.ToString("O")),
-                ("updated_at", restartAt.AddSeconds(2).ToString("O")),
+                ("updated_at", matrixBase.AddSeconds(46).ToString("O")),
                 ("previous_session", D(
                     ("diagnostic_id", "keyboard-diagnostic"),
                     ("process_id", 300),
@@ -467,7 +789,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                     ("thumbnail_persisted_width", 200d),
                     ("organization_collapsed", false),
                     ("inspector_collapsed", false))),
-                ("attempts", Array.Empty<object>()),
+                ("attempts", dpiAttempts),
                 ("key_attempts", Array.Empty<object>()),
                 ("control_state_transitions", Array.Empty<object>()),
                 ("workspace_restore_snapshots", new[] { restartSnapshot })));
@@ -484,6 +806,91 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("import_command_entered", true),
                 ("import_service_entered", true)));
         }
+
+        private void WriteSourceIdentityManifests()
+        {
+            var createdAt = new DateTimeOffset(2026, 8, 19, 0, 0, 0, TimeSpan.Zero);
+            WriteJson(Path.Combine(RunRoot, "build-manifest.json"), D(
+                ("schema", "pixel-tart-p1-gate-a-build-manifest/v1"),
+                ("source_head", SourceHead),
+                ("repository_tracked_clean", true),
+                ("source_head_is_current_head", true),
+                ("dedicated_build_succeeded", true),
+                ("build_configuration", BuildConfiguration),
+                ("executable_path", ExecutablePath),
+                ("executable_sha256", ExecutableHash),
+                ("created_at", createdAt.ToString("O"))));
+
+            Dictionary<string, object?> Session(string id, int processId, string hwnd) => D(
+                ("session_id", id),
+                ("process_id", processId),
+                ("window_hwnd", hwnd),
+                ("source_head", SourceHead),
+                ("build_configuration", BuildConfiguration),
+                ("executable_path", ExecutablePath),
+                ("executable_sha256", ExecutableHash));
+            WriteJson(Path.Combine(RunRoot, "manual-run-manifest.json"), D(
+                ("schema", "pixel-tart-p1-gate-a-manual-packet/v1"),
+                ("status", "running"),
+                ("mode", "Run"),
+                ("source_head", SourceHead),
+                ("build_manifest_file", "build-manifest.json"),
+                ("build_configuration", BuildConfiguration),
+                ("run_root", RunRoot),
+                ("executable_path", ExecutablePath),
+                ("executable_sha256", ExecutableHash),
+                ("synthetic_fixture_only", true),
+                ("customer_media_allowed", false),
+                ("eagle_library_write_allowed", false),
+                ("created_at", createdAt.AddSeconds(1).ToString("O")),
+                ("sessions", new[]
+                {
+                    Session("first-empty-session", 100, "0x100"),
+                    Session("retry-session", 200, "0x200"),
+                    Session("keyboard-session", 300, "0x300"),
+                    Session("restart-dpi-session", 301, "0x301")
+                })));
+        }
+
+        private void SetManualAndSessionHeads(string sourceHead)
+        {
+            var path = Path.Combine(RunRoot, "manual-run-manifest.json");
+            var root = ReadObject(path);
+            root["source_head"] = sourceHead;
+            foreach (var session in root["sessions"]!.AsArray()) session!["source_head"] = sourceHead;
+            WriteObject(path, root);
+        }
+
+        private void SetScenarioHeads(string sourceHead)
+        {
+            foreach (var path in Directory.EnumerateFiles(Path.Combine(RunRoot, "sessions"), "scenario-manifest.json", SearchOption.AllDirectories))
+            {
+                var root = ReadObject(path);
+                root["startRouteHead"] = sourceHead;
+                WriteObject(path, root);
+            }
+        }
+
+        private static void MoveKeyEvidenceTo(JsonObject attempt, JsonObject transition, DateTimeOffset startedAt)
+        {
+            attempt["started_at"] = startedAt.ToString("O");
+            attempt["updated_at"] = startedAt.AddMilliseconds(500).ToString("O");
+            var nativeEvents = attempt["layer1_win32"]!["events"]!.AsArray();
+            nativeEvents[0]!["timestamp"] = startedAt.ToString("O");
+            nativeEvents[1]!["timestamp"] = startedAt.AddMilliseconds(200).ToString("O");
+            var wpfEvents = attempt["layer2_wpf"]!["events"]!.AsArray();
+            for (var index = 0; index < wpfEvents.Count; index++)
+                wpfEvents[index]!["timestamp"] = startedAt.AddMilliseconds(index * 50).ToString("O");
+            attempt["layer4_action"]!["completed_at"] = startedAt.AddMilliseconds(500).ToString("O");
+            transition["started_at"] = startedAt.ToString("O");
+            transition["completed_at"] = startedAt.AddMilliseconds(500).ToString("O");
+        }
+
+        private static JsonObject ReadObject(string path) =>
+            JsonNode.Parse(File.ReadAllText(path, Encoding.UTF8))!.AsObject();
+
+        private static void WriteObject(string path, JsonObject root) =>
+            File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
 
         private void BuildStateSession(JsonObject contract, string sessionId, string directoryName, int processId, DateTimeOffset startedAt)
         {
@@ -524,7 +931,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("startRouteSource", "PIXEL_TART_ASSET_LIBRARY_P1_START_ROUTE"),
                 ("startRoute", "asset-library"),
                 ("startRouteCurrentPage", "AssetLibrary"),
-                ("startRouteHead", "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af"),
+                ("startRouteHead", SourceHead),
                 ("startRouteRecordedAt", startedAt.AddMilliseconds(100).ToString("O")),
                 ("exceptionType", retry ? "System.IO.IOException" : null),
                 ("injectionId", retry ? "asset-library-p1-initial-query-io-once/v1" : null),

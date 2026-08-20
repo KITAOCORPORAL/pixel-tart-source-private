@@ -73,6 +73,39 @@ function Test-TrueValue {
     return $null -ne $Value -and [bool]$Value
 }
 
+function Test-LowercaseCommitSha {
+    param([AllowNull()]$Value)
+    return $null -ne $Value -and [string]$Value -cmatch '^[0-9a-f]{40}$'
+}
+
+function Test-UppercaseSha256 {
+    param([AllowNull()]$Value)
+    return $null -ne $Value -and [string]$Value -cmatch '^[0-9A-F]{64}$'
+}
+
+function Test-SameFullPath {
+    param(
+        [AllowNull()][string]$First,
+        [AllowNull()][string]$Second
+    )
+    if (-not (Test-FullyQualifiedPath $First) -or -not (Test-FullyQualifiedPath $Second)) { return $false }
+    return [string]::Equals(
+        [IO.Path]::GetFullPath($First),
+        [IO.Path]::GetFullPath($Second),
+        [StringComparison]::OrdinalIgnoreCase)
+}
+
+function Try-GetTimestamp {
+    param(
+        [AllowNull()]$Value,
+        [ref]$Timestamp
+    )
+    $parsed = [DateTimeOffset]::MinValue
+    if ($null -eq $Value -or -not [DateTimeOffset]::TryParse([string]$Value, [ref]$parsed)) { return $false }
+    $Timestamp.Value = $parsed
+    return $true
+}
+
 function Read-JsonFile {
     param([string]$Path)
     try {
@@ -407,6 +440,7 @@ function Get-WindowRecordSummary {
         Hwnd = [string]$beforeHwnd
         Dpi = [int]$beforeDpi
         Hash = [string]$actualHash
+        ExecutableHash = [string](Get-NestedValue $json @('process', 'executable_sha256'))
     }
 }
 
@@ -564,6 +598,54 @@ function Test-RegularKeyTransition {
         $null -ne (Get-PropertyValue $layer4 'completed_at')
 }
 
+function Test-KeyActionInsideCaptureWindow {
+    param(
+        $Attempt,
+        $Transition,
+        [DateTimeOffset]$DefaultCapturedAt,
+        [DateTimeOffset]$InteractionCapturedAt,
+        [string[]]$RequiredWpfEvents
+    )
+    $attemptStartedAt = [DateTimeOffset]::MinValue
+    $attemptUpdatedAt = [DateTimeOffset]::MinValue
+    $transitionStartedAt = [DateTimeOffset]::MinValue
+    $transitionCompletedAt = [DateTimeOffset]::MinValue
+    $layer4CompletedAt = [DateTimeOffset]::MinValue
+    if (-not (Try-GetTimestamp (Get-PropertyValue $Attempt 'started_at') ([ref]$attemptStartedAt)) -or
+        -not (Try-GetTimestamp (Get-PropertyValue $Attempt 'updated_at') ([ref]$attemptUpdatedAt)) -or
+        -not (Try-GetTimestamp (Get-PropertyValue $Transition 'started_at') ([ref]$transitionStartedAt)) -or
+        -not (Try-GetTimestamp (Get-PropertyValue $Transition 'completed_at') ([ref]$transitionCompletedAt)) -or
+        -not (Try-GetTimestamp (Get-NestedValue $Attempt @('layer4_action', 'completed_at')) ([ref]$layer4CompletedAt))) { return $false }
+
+    if ($attemptStartedAt -le $DefaultCapturedAt -or $attemptUpdatedAt -gt $InteractionCapturedAt -or
+        $attemptUpdatedAt -lt $attemptStartedAt -or
+        $transitionStartedAt -lt $attemptStartedAt -or $transitionCompletedAt -gt $InteractionCapturedAt -or
+        $transitionCompletedAt -lt $transitionStartedAt -or
+        $layer4CompletedAt -lt $transitionStartedAt -or $layer4CompletedAt -gt $InteractionCapturedAt) { return $false }
+
+    $nativeTimestamps = @()
+    foreach ($nativeEvent in @(Get-NestedValue $Attempt @('layer1_win32', 'events'))) {
+        $timestamp = [DateTimeOffset]::MinValue
+        if (-not (Try-GetTimestamp (Get-PropertyValue $nativeEvent 'timestamp') ([ref]$timestamp)) -or
+            $timestamp -le $DefaultCapturedAt -or $timestamp -gt $InteractionCapturedAt) { return $false }
+        $nativeTimestamps += $timestamp
+    }
+    if ($nativeTimestamps.Count -ne 2 -or $nativeTimestamps[1] -le $nativeTimestamps[0]) { return $false }
+
+    $wpfEvents = @(Get-NestedValue $Attempt @('layer2_wpf', 'events'))
+    if ($wpfEvents.Count -ne $RequiredWpfEvents.Count) { return $false }
+    $previousWpfAt = [DateTimeOffset]::MinValue
+    for ($index = 0; $index -lt $RequiredWpfEvents.Count; $index++) {
+        if (-not (Test-ExactString (Get-PropertyValue $wpfEvents[$index] 'event_name') $RequiredWpfEvents[$index])) { return $false }
+        $timestamp = [DateTimeOffset]::MinValue
+        if (-not (Try-GetTimestamp (Get-PropertyValue $wpfEvents[$index] 'timestamp') ([ref]$timestamp)) -or
+            $timestamp -le $DefaultCapturedAt -or $timestamp -gt $InteractionCapturedAt -or
+            $timestamp -lt $previousWpfAt) { return $false }
+        $previousWpfAt = $timestamp
+    }
+    return $true
+}
+
 function Test-BoundaryTransition {
     param(
         $Transition,
@@ -623,6 +705,98 @@ if (-not (Test-Path -LiteralPath $resolvedRunRoot -PathType Container)) {
     Add-Failure 'The supplied Gate A run root does not exist or is not a directory.'
 }
 
+# Source and binary identity come from two same-run manifests. The build manifest is the
+# authority produced after a tracked-clean dedicated build; the manual manifest and every
+# process session must repeat that identity exactly.
+$trustedSourceHead = $null
+$trustedExecutablePath = $null
+$trustedExecutableHash = $null
+$trustedBuildConfiguration = $null
+$manualManifest = $null
+$buildManifest = $null
+$manualSessionsById = @{}
+$manualManifestPath = Join-Path $resolvedRunRoot ([string]$contract.source_identity.manual_manifest_file)
+$buildManifestPath = Join-Path $resolvedRunRoot ([string]$contract.source_identity.build_manifest_file)
+$manualManifestFiles = @(if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
+        Get-ChildItem -LiteralPath $resolvedRunRoot -Recurse -File -Filter ([string]$contract.source_identity.manual_manifest_file)
+    })
+$buildManifestFiles = @(if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
+        Get-ChildItem -LiteralPath $resolvedRunRoot -Recurse -File -Filter ([string]$contract.source_identity.build_manifest_file)
+    })
+Require-Equal $manualManifestFiles.Count 1 'The run must contain exactly one manual-run manifest.'
+Require-Equal $buildManifestFiles.Count 1 'The run must contain exactly one authoritative build manifest.'
+if ($manualManifestFiles.Count -eq 1) {
+    Require-True (Test-SameFullPath $manualManifestFiles[0].FullName $manualManifestPath) 'The manual-run manifest is not at the run root.'
+    $manualManifest = Read-JsonFile $manualManifestFiles[0].FullName
+}
+if ($buildManifestFiles.Count -eq 1) {
+    Require-True (Test-SameFullPath $buildManifestFiles[0].FullName $buildManifestPath) 'The authoritative build manifest is not at the run root.'
+    $buildManifest = Read-JsonFile $buildManifestFiles[0].FullName
+}
+
+if ($null -ne $buildManifest) {
+    Require-True (Test-ExactString (Get-PropertyValue $buildManifest 'schema') $contract.source_identity.build_manifest_schema) 'Build manifest schema mismatch.'
+    $trustedSourceHead = [string](Get-PropertyValue $buildManifest 'source_head')
+    $trustedExecutablePath = [string](Get-PropertyValue $buildManifest 'executable_path')
+    $trustedExecutableHash = [string](Get-PropertyValue $buildManifest 'executable_sha256')
+    $trustedBuildConfiguration = [string](Get-PropertyValue $buildManifest 'build_configuration')
+    Require-True (Test-LowercaseCommitSha $trustedSourceHead) 'Build manifest source_head must be exactly 40 lowercase hexadecimal characters.'
+    Require-True (Test-UppercaseSha256 $trustedExecutableHash) 'Build manifest executable_sha256 must be exactly 64 uppercase hexadecimal characters.'
+    Require-True (Test-FullyQualifiedPath $trustedExecutablePath) 'Build manifest executable_path is not absolute.'
+    $matchingBuildConfigurations = @($contract.source_identity.allowed_build_configurations | Where-Object {
+            Test-ExactString $_ $trustedBuildConfiguration
+        })
+    Require-Equal $matchingBuildConfigurations.Count 1 'Build manifest configuration is not allowed by the contract.'
+    Require-True (Test-TrueValue (Get-PropertyValue $buildManifest 'repository_tracked_clean')) 'Build manifest does not attest a tracked-clean source tree.'
+    Require-True (Test-TrueValue (Get-PropertyValue $buildManifest 'source_head_is_current_head')) 'Build manifest does not attest that source_head was current HEAD.'
+    Require-True (Test-TrueValue (Get-PropertyValue $buildManifest 'dedicated_build_succeeded')) 'Build manifest does not attest a successful dedicated build.'
+    [void](Convert-ToTimestamp (Get-PropertyValue $buildManifest 'created_at') 'Build manifest created_at')
+    if (Test-FullyQualifiedPath $trustedExecutablePath) {
+        Require-True (Test-Path -LiteralPath $trustedExecutablePath -PathType Leaf) 'Build-authority executable does not exist.'
+        if (Test-Path -LiteralPath $trustedExecutablePath -PathType Leaf) {
+            $authorityFileHash = (Get-FileHash -LiteralPath $trustedExecutablePath -Algorithm SHA256).Hash
+            Require-True (Test-ExactString $authorityFileHash $trustedExecutableHash) 'Build manifest executable_sha256 does not match the executable bytes.'
+        }
+    }
+}
+
+if ($null -ne $manualManifest) {
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'schema') $contract.source_identity.manual_manifest_schema) 'Manual-run manifest schema mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'mode') 'Run') 'Manual-run manifest is not a real Run packet.'
+    Require-True (Test-SameFullPath ([string](Get-PropertyValue $manualManifest 'run_root')) $resolvedRunRoot) 'Manual-run manifest run_root does not identify the supplied run.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'build_manifest_file') $contract.source_identity.build_manifest_file) 'Manual-run manifest does not identify the authoritative build manifest.'
+    Require-True (Test-LowercaseCommitSha (Get-PropertyValue $manualManifest 'source_head')) 'Manual-run source_head must be exactly 40 lowercase hexadecimal characters.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'source_head') $trustedSourceHead) 'Manual-run source_head differs from the build authority.'
+    Require-True (Test-SameFullPath ([string](Get-PropertyValue $manualManifest 'executable_path')) $trustedExecutablePath) 'Manual-run executable_path differs from the build authority.'
+    Require-True (Test-UppercaseSha256 (Get-PropertyValue $manualManifest 'executable_sha256')) 'Manual-run executable_sha256 must be exactly 64 uppercase hexadecimal characters.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'executable_sha256') $trustedExecutableHash) 'Manual-run executable_sha256 differs from the build authority.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'build_configuration') $trustedBuildConfiguration) 'Manual-run build configuration differs from the build authority.'
+    Require-True (Test-TrueValue (Get-PropertyValue $manualManifest 'synthetic_fixture_only')) 'Manual-run manifest is not synthetic-fixture-only.'
+    Require-True (-not (Test-TrueValue (Get-PropertyValue $manualManifest 'customer_media_allowed'))) 'Manual-run manifest allows customer media.'
+    Require-True (-not (Test-TrueValue (Get-PropertyValue $manualManifest 'eagle_library_write_allowed'))) 'Manual-run manifest allows Eagle library writes.'
+    [void](Convert-ToTimestamp (Get-PropertyValue $manualManifest 'created_at') 'Manual-run manifest created_at')
+
+    $manualSessions = @(Get-PropertyValue $manualManifest 'sessions')
+    Require-Equal $manualSessions.Count @($contract.source_identity.required_manual_session_ids).Count 'Manual-run manifest session count mismatch.'
+    $seenSessionProcessIds = [Collections.Generic.HashSet[int]]::new()
+    foreach ($sessionIdValue in @($contract.source_identity.required_manual_session_ids)) {
+        $sessionId = [string]$sessionIdValue
+        $matches = @($manualSessions | Where-Object { Test-ExactString (Get-PropertyValue $_ 'session_id') $sessionId })
+        Require-Equal $matches.Count 1 "Manual-run session '$sessionId' must occur exactly once."
+        if ($matches.Count -ne 1) { continue }
+        $session = $matches[0]
+        $manualSessionsById[$sessionId] = $session
+        $sessionProcessId = [int](Get-PropertyValue $session 'process_id')
+        Require-True ($sessionProcessId -gt 0) "Manual-run session '$sessionId' has no positive PID."
+        Require-True ($seenSessionProcessIds.Add($sessionProcessId)) "Manual-run session '$sessionId' reuses another session PID."
+        Require-True (-not [string]::IsNullOrWhiteSpace([string](Get-PropertyValue $session 'window_hwnd'))) "Manual-run session '$sessionId' has no HWND."
+        Require-True (Test-ExactString (Get-PropertyValue $session 'source_head') $trustedSourceHead) "Manual-run session '$sessionId' HEAD differs from build authority."
+        Require-True (Test-ExactString (Get-PropertyValue $session 'build_configuration') $trustedBuildConfiguration) "Manual-run session '$sessionId' build configuration differs from build authority."
+        Require-True (Test-SameFullPath ([string](Get-PropertyValue $session 'executable_path')) $trustedExecutablePath) "Manual-run session '$sessionId' executable path differs from build authority."
+        Require-True (Test-ExactString (Get-PropertyValue $session 'executable_sha256') $trustedExecutableHash) "Manual-run session '$sessionId' executable hash differs from build authority."
+    }
+}
+
 $windowRecords = @()
 if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
     foreach ($file in @(Get-ChildItem -LiteralPath $resolvedRunRoot -Recurse -File -Filter '*.window-evidence.json')) {
@@ -636,6 +810,32 @@ if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
             }
         }
     }
+}
+
+# Every captured window must belong to exactly one declared session and repeat the same
+# build-authority executable identity. This includes supporting keyboard/restart captures,
+# not only the screenshots selected later by capture-name tokens.
+foreach ($record in $windowRecords) {
+    $recordProcessId = [int](Get-NestedValue $record.Json @('process', 'process_id'))
+    $sessionMatches = @($manualSessionsById.Values | Where-Object { [int](Get-PropertyValue $_ 'process_id') -eq $recordProcessId })
+    Require-Equal $sessionMatches.Count 1 "Window evidence '$($record.Name)' does not belong to exactly one manual-run session."
+    Require-True (Test-SameFullPath ([string](Get-NestedValue $record.Json @('process', 'executable_path'))) $trustedExecutablePath) "Window evidence '$($record.Name)' executable path differs from build authority."
+    Require-True (Test-SameFullPath ([string](Get-NestedValue $record.Json @('expected', 'executable_path'))) $trustedExecutablePath) "Window evidence '$($record.Name)' expected executable path differs from build authority."
+    Require-True (Test-ExactString (Get-NestedValue $record.Json @('process', 'executable_sha256')) $trustedExecutableHash) "Window evidence '$($record.Name)' executable hash differs from build authority."
+    if ($sessionMatches.Count -eq 1) {
+        Require-True (Test-ExactString (Get-NestedValue $record.Json @('window_before_capture', 'hwnd')) (Get-PropertyValue $sessionMatches[0] 'window_hwnd')) "Window evidence '$($record.Name)' HWND differs from its manual-run session."
+        Require-True (Test-ExactString (Get-NestedValue $record.Json @('window_after_capture', 'hwnd')) (Get-PropertyValue $sessionMatches[0] 'window_hwnd')) "Window evidence '$($record.Name)' post-capture HWND differs from its manual-run session."
+    }
+}
+foreach ($sessionIdValue in @($contract.source_identity.required_manual_session_ids)) {
+    $sessionId = [string]$sessionIdValue
+    $session = $manualSessionsById[$sessionId]
+    if ($null -eq $session) { continue }
+    $sessionWindows = @($windowRecords | Where-Object {
+            [int](Get-NestedValue $_.Json @('process', 'process_id')) -eq [int](Get-PropertyValue $session 'process_id') -and
+            (Test-ExactString (Get-NestedValue $_.Json @('window_before_capture', 'hwnd')) (Get-PropertyValue $session 'window_hwnd'))
+        })
+    Require-True ($sessionWindows.Count -ge 1) "Manual-run session '$sessionId' has no matching PID/HWND window evidence."
 }
 
 # Four state captures are validated from raw window JSON and the corresponding PNG bytes.
@@ -665,6 +865,14 @@ foreach ($sessionContract in @($contract.state_chain.sessions)) {
     Require-Equal $sessionStates.Count @($sessionContract.scene_ids).Count "State session '$($sessionContract.id)' is incomplete."
     if ($sessionStates.Count -gt 0) {
         $identity = $sessionStates[0].Summary
+        $manualSession = $manualSessionsById[[string]$sessionContract.id]
+        Require-True ($null -ne $manualSession) "State session '$($sessionContract.id)' is absent from the manual-run identity manifest."
+        if ($null -ne $manualSession) {
+            Require-Equal $identity.ProcessId (Get-PropertyValue $manualSession 'process_id') "State session '$($sessionContract.id)' PID differs from the manual-run identity."
+            Require-True (Test-ExactString $identity.Hwnd (Get-PropertyValue $manualSession 'window_hwnd')) "State session '$($sessionContract.id)' HWND differs from the manual-run identity."
+            Require-True (Test-SameFullPath $identity.ExecutablePath ([string](Get-PropertyValue $manualSession 'executable_path'))) "State session '$($sessionContract.id)' executable differs from the manual-run identity."
+            Require-True (Test-ExactString $identity.ExecutableHash (Get-PropertyValue $manualSession 'executable_sha256')) "State session '$($sessionContract.id)' executable hash differs from the manual-run identity."
+        }
         foreach ($item in $sessionStates | Select-Object -Skip 1) {
             Require-Equal $item.Summary.ProcessId $identity.ProcessId "State '$($item.Scene.id)' PID differs within session '$($sessionContract.id)'."
             Require-True ([string]::Equals($item.Summary.ExecutablePath, $identity.ExecutablePath, [StringComparison]::OrdinalIgnoreCase)) "State '$($item.Scene.id)' executable path differs within session '$($sessionContract.id)'."
@@ -713,7 +921,7 @@ if ($scenarioFiles.Count -eq 1) {
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteSource') $contract.acceptance_start_route.environment_variable) 'Retry manifest start-route source mismatch.'
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRoute') $contract.acceptance_start_route.route) 'Retry manifest start route mismatch.'
         Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteCurrentPage') $contract.acceptance_start_route.current_page) 'Retry manifest start-route current page mismatch.'
-        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteHead') $contract.acceptance_start_route.source_head) 'Retry manifest start-route HEAD mismatch.'
+        Require-True (Test-ExactString (Get-PropertyValue $scenarioManifest 'startRouteHead') $trustedSourceHead) 'Retry manifest start-route HEAD differs from build authority.'
         [void](Convert-ToTimestamp (Get-PropertyValue $scenarioManifest 'startRouteRecordedAt') 'Retry manifest startRouteRecordedAt')
         $isolatedRoot = [string](Get-PropertyValue $scenarioManifest 'isolatedRoot')
         Require-True (Test-FullyQualifiedPath $isolatedRoot) 'State-controller isolatedRoot is not absolute runtime evidence.'
@@ -923,7 +1131,7 @@ if ($firstCandidates.Count -eq 1) {
     Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteSource') $contract.acceptance_start_route.environment_variable) 'First-empty manifest start-route source mismatch.'
     Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRoute') $contract.acceptance_start_route.route) 'First-empty manifest start route mismatch.'
     Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteCurrentPage') $contract.acceptance_start_route.current_page) 'First-empty manifest start-route current page mismatch.'
-    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteHead') $contract.acceptance_start_route.source_head) 'First-empty manifest start-route HEAD mismatch.'
+    Require-True (Test-ExactString (Get-PropertyValue $firstManifest 'startRouteHead') $trustedSourceHead) 'First-empty manifest start-route HEAD differs from build authority.'
     [void](Convert-ToTimestamp (Get-PropertyValue $firstManifest 'startRouteRecordedAt') 'First-empty manifest startRouteRecordedAt')
     $firstIsolatedRoot = [string](Get-PropertyValue $firstManifest 'isolatedRoot')
     Require-True (Test-FullyQualifiedPath $firstIsolatedRoot) 'First-empty isolatedRoot is not absolute runtime evidence.'
@@ -1100,11 +1308,18 @@ if (Test-Path -LiteralPath $resolvedRunRoot -PathType Container) {
         }
     }
 }
+foreach ($document in $pointerDocuments) {
+    $documentProcessId = [int](Get-PropertyValue $document.Json 'process_id')
+    $sessionMatches = @($manualSessionsById.Values | Where-Object { [int](Get-PropertyValue $_ 'process_id') -eq $documentProcessId })
+    Require-Equal $sessionMatches.Count 1 "Physical diagnostic '$($document.Path)' does not belong to exactly one manual-run session."
+}
 $retryMouseRecords = @()
 $retryKeyboardRecords = @()
 $retryStateIdentity = @($stateSummaries | Where-Object { Test-ExactString $_.Scene.session_id 'retry-session' }) | Select-Object -First 1
+$retryManualSession = $manualSessionsById['retry-session']
 foreach ($document in $pointerDocuments) {
     if ($null -ne $retryStateIdentity -and [int](Get-PropertyValue $document.Json 'process_id') -ne $retryStateIdentity.Summary.ProcessId) { continue }
+    if ($null -eq $retryManualSession -or [int](Get-PropertyValue $document.Json 'process_id') -ne [int](Get-PropertyValue $retryManualSession 'process_id')) { continue }
     foreach ($attempt in @(Get-PropertyValue $document.Json 'attempts')) {
         if ((Test-ExactString (Get-PropertyValue $attempt 'down_target_automation_id') $contract.retry_physical_activation.automation_id) -and
             (Test-ExactString (Get-PropertyValue $attempt 'up_target_automation_id') $contract.retry_physical_activation.automation_id)) {
@@ -1160,9 +1375,11 @@ if (($retryMouseRecords.Count + $retryKeyboardRecords.Count) -eq 1) {
 $keyboardDocument = $null
 $regularTransitionsByControl = @{}
 $windowEvidenceProcessIds = @($windowRecords | ForEach-Object { [int](Get-NestedValue $_.Json @('process', 'process_id')) } | Select-Object -Unique)
+$keyboardManualSession = $manualSessionsById['keyboard-session']
 foreach ($document in $pointerDocuments) {
     $documentProcessId = [int](Get-PropertyValue $document.Json 'process_id')
     if ($documentProcessId -le 0 -or $documentProcessId -notin $windowEvidenceProcessIds) { continue }
+    if ($null -eq $keyboardManualSession -or $documentProcessId -ne [int](Get-PropertyValue $keyboardManualSession 'process_id')) { continue }
     $attempts = @(Get-PropertyValue $document.Json 'key_attempts')
     $transitions = @(Get-PropertyValue $document.Json 'control_state_transitions')
     $allFound = $true
@@ -1274,6 +1491,7 @@ $restartDocuments = @($pointerDocuments | Where-Object {
         $null -ne $previous -and (Test-TrueValue (Get-PropertyValue $previous 'has_workspace_state'))
     })
 $restartMatches = @()
+$restartDpiManualSession = $manualSessionsById['restart-dpi-session']
 if ($null -ne $keyboardDocument -and $keyboardRestoreByPrefix.Count -eq 2) {
     $keyboardDiagnosticId = [string](Get-PropertyValue $keyboardDocument.Json 'diagnostic_id')
     $keyboardProcessId = [int](Get-PropertyValue $keyboardDocument.Json 'process_id')
@@ -1301,6 +1519,8 @@ if ($null -ne $keyboardDocument -and $keyboardRestoreByPrefix.Count -eq 2) {
             $previous = Get-PropertyValue $document.Json 'previous_session'
             if ($newProcessId -le 0 -or $newProcessId -eq $keyboardProcessId -or
                 $newProcessId -notin $windowEvidenceProcessIds -or
+                $null -eq $restartDpiManualSession -or
+                $newProcessId -ne [int](Get-PropertyValue $restartDpiManualSession 'process_id') -or
                 -not (Test-ExactString (Get-PropertyValue $previous 'diagnostic_id') $keyboardDiagnosticId) -or
                 [int](Get-PropertyValue $previous 'process_id') -ne $keyboardProcessId -or
                 $newStartedAt -le $keyboardStartedAt -or $newStartedAt -lt $keyboardUpdatedAt) { continue }
@@ -1392,13 +1612,22 @@ foreach ($tuple in @($contract.dpi_matrix)) {
         Require-True (Test-ExactString $interaction.WindowTitle $default.WindowTitle) "DPI tuple $($tuple.width)x$($tuple.height) changed title between default and interaction."
         Require-True ($default.CapturedAt -gt $previousTupleInteractionAt) "DPI tuple $($tuple.width)x$($tuple.height) was captured out of contract order."
         Require-True ($interaction.CapturedAt -gt $default.CapturedAt) "DPI tuple $($tuple.width)x$($tuple.height) interaction capture does not follow its default capture."
+        if ($null -ne $restartDpiManualSession) {
+            Require-Equal $default.ProcessId (Get-PropertyValue $restartDpiManualSession 'process_id') "DPI tuple $($tuple.width)x$($tuple.height) does not belong to the restart/DPI session PID."
+            Require-True (Test-ExactString $default.Hwnd (Get-PropertyValue $restartDpiManualSession 'window_hwnd')) "DPI tuple $($tuple.width)x$($tuple.height) does not belong to the restart/DPI session HWND."
+            Require-True (Test-SameFullPath $default.ExecutablePath ([string](Get-PropertyValue $restartDpiManualSession 'executable_path'))) "DPI tuple $($tuple.width)x$($tuple.height) executable path differs from the restart/DPI session."
+            Require-True (Test-ExactString $default.ExecutableHash (Get-PropertyValue $restartDpiManualSession 'executable_sha256')) "DPI tuple $($tuple.width)x$($tuple.height) executable hash differs from the restart/DPI session."
+        }
 
-        $physicalActions = @()
+        $physicalMouseActions = @()
+        $physicalKeyboardActions = @()
         foreach ($document in @($pointerDocuments | Where-Object { [int](Get-PropertyValue $_.Json 'process_id') -eq $default.ProcessId })) {
             $transitions = @(Get-PropertyValue $document.Json 'control_state_transitions')
             foreach ($attempt in @(Get-PropertyValue $document.Json 'attempts')) {
-                $startedAt = Convert-ToTimestamp (Get-PropertyValue $attempt 'started_at') 'DPI physical pointer started_at'
-                $completedAt = Convert-ToTimestamp (Get-PropertyValue $attempt 'updated_at') 'DPI physical pointer updated_at'
+                $startedAt = [DateTimeOffset]::MinValue
+                $completedAt = [DateTimeOffset]::MinValue
+                if (-not (Try-GetTimestamp (Get-PropertyValue $attempt 'started_at') ([ref]$startedAt)) -or
+                    -not (Try-GetTimestamp (Get-PropertyValue $attempt 'updated_at') ([ref]$completedAt))) { continue }
                 if ($startedAt -le $default.CapturedAt -or $completedAt -gt $interaction.CapturedAt -or $completedAt -lt $startedAt -or
                     -not (Test-ExactString (Get-PropertyValue $attempt 'origin') 'Win32') -or
                     -not (Test-TrueValue (Get-NestedValue $attempt @('layer1_win32', 'l_button_down_received'))) -or
@@ -1414,6 +1643,13 @@ foreach ($tuple in @($contract.dpi_matrix)) {
                     -not [string]::IsNullOrWhiteSpace([string](Get-NestedValue $attempt @('layer4_action', 'button', 'automation_id')))
                 $attemptId = [string](Get-PropertyValue $attempt 'attempt_id')
                 $confirmedTransitions = @($transitions | Where-Object {
+                        $transitionStartedAt = [DateTimeOffset]::MinValue
+                        $transitionCompletedAt = [DateTimeOffset]::MinValue
+                        (Try-GetTimestamp (Get-PropertyValue $_ 'started_at') ([ref]$transitionStartedAt)) -and
+                        (Try-GetTimestamp (Get-PropertyValue $_ 'completed_at') ([ref]$transitionCompletedAt)) -and
+                        $transitionStartedAt -gt $default.CapturedAt -and
+                        $transitionCompletedAt -le $interaction.CapturedAt -and
+                        $transitionCompletedAt -ge $transitionStartedAt -and
                         (Test-ExactString (Get-PropertyValue $_ 'correlated_pointer_attempt_id') $attemptId) -and
                         (Test-ExactString (Get-PropertyValue $_ 'input_kind') 'MouseDrag') -and
                         (Test-TrueValue (Get-PropertyValue $_ 'layer1_win32_confirmed')) -and
@@ -1423,15 +1659,31 @@ foreach ($tuple in @($contract.dpi_matrix)) {
                         (Test-TrueValue (Get-PropertyValue $_ 'state_changed')) -and
                         (Test-TrueValue (Get-PropertyValue $_ 'settings_state_changed')) -and
                         (Test-TrueValue (Get-PropertyValue $_ 'settings_write_back_confirmed')) -and
-                        (Test-ExactString (Get-PropertyValue $_ 'result') 'Confirmed') -and
-                        (Convert-ToTimestamp (Get-PropertyValue $_ 'completed_at') 'DPI control transition completed_at') -le $interaction.CapturedAt
+                        (Test-ExactString (Get-PropertyValue $_ 'result') 'Confirmed')
                     })
                 if ($buttonAction -or $confirmedTransitions.Count -gt 0) {
-                    $physicalActions += [pscustomobject]@{ Document = $document; Attempt = $attempt }
+                    $physicalMouseActions += [pscustomobject]@{ Document = $document; Attempt = $attempt }
+                }
+            }
+
+            foreach ($attempt in @(Get-PropertyValue $document.Json 'key_attempts')) {
+                $key = [string](Get-PropertyValue $attempt 'key')
+                if ($key -notin @('Left', 'Right')) { continue }
+                $controlAutomationId = [string](Get-NestedValue $attempt @('layer3_target', 'control_automation_id'))
+                $controls = @($contract.splitter_keyboard.controls | Where-Object { Test-ExactString $_.automation_id $controlAutomationId })
+                if ($controls.Count -ne 1) { continue }
+                $control = $controls[0]
+                if (-not (Test-KeyInputLayers $attempt $controlAutomationId $key @($contract.splitter_keyboard.required_layer2_events))) { continue }
+                $delta = if ($key -ceq 'Left') { [string]$control.left_delta } else { [string]$control.right_delta }
+                foreach ($transition in @(Get-TransitionForAttempt $transitions $attempt $controlAutomationId $key)) {
+                    if ((Test-RegularKeyTransition $transition $attempt $delta $control) -and
+                        (Test-KeyActionInsideCaptureWindow $attempt $transition $default.CapturedAt $interaction.CapturedAt @($contract.splitter_keyboard.required_layer2_events))) {
+                        $physicalKeyboardActions += [pscustomobject]@{ Document = $document; Attempt = $attempt; Transition = $transition }
+                    }
                 }
             }
         }
-        Require-True ($physicalActions.Count -ge 1) "DPI tuple $($tuple.width)x$($tuple.height) interaction capture is not linked to a same-process physical click or drag after the default capture."
+        Require-True (($physicalMouseActions.Count + $physicalKeyboardActions.Count) -ge 1) "DPI tuple $($tuple.width)x$($tuple.height) interaction capture is not linked to a same-PID/HWND physical mouse action or strict Left/Right Layer 1-4 state transition inside its capture window."
         $previousTupleInteractionAt = $interaction.CapturedAt
     }
 }
@@ -1444,6 +1696,10 @@ foreach ($match in $baselineMatches) {
     $summary = Get-WindowRecordSummary $match $contract.restore_baseline
     Require-True ([string]::Equals($summary.ExecutablePath, $matrixExecutablePath, [StringComparison]::OrdinalIgnoreCase)) 'Baseline-restore capture uses a different executable path.'
     Require-True ($summary.CapturedAt -gt $previousTupleInteractionAt) 'Baseline-restore capture was not recorded after the complete ordered DPI matrix.'
+    if ($null -ne $restartDpiManualSession) {
+        Require-Equal $summary.ProcessId (Get-PropertyValue $restartDpiManualSession 'process_id') 'Baseline-restore capture does not belong to the restart/DPI session PID.'
+        Require-True (Test-ExactString $summary.Hwnd (Get-PropertyValue $restartDpiManualSession 'window_hwnd')) 'Baseline-restore capture does not belong to the restart/DPI session HWND.'
+    }
     if (-not [string]::IsNullOrWhiteSpace($summary.Hash)) {
         Require-True ($requiredHashes.Add($summary.Hash)) 'Baseline-restore screenshot duplicates a required screenshot hash.'
     }

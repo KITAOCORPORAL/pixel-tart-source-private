@@ -355,13 +355,24 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
         var constructor = type.GetConstructor(
             BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,
-            [typeof(string), typeof(string), typeof(RAWSelectionAssistant.Core.Services.ILogService)],
+            [typeof(string), typeof(string), typeof(string), typeof(RAWSelectionAssistant.Core.Services.ILogService)],
             modifiers: null) ?? throw new MissingMethodException(type.FullName, ".ctor");
-        return constructor.Invoke([root, scenario, null]);
+        var sourceHead = (string)(type.GetMethod("GetBuildSourceHead", BindingFlags.Static | BindingFlags.NonPublic)
+            ?? throw new MissingMethodException(type.FullName, "GetBuildSourceHead")).Invoke(null, null)!;
+        return constructor.Invoke([root, scenario, sourceHead, null]);
     }
 
     private static Type? ProductionControllerType() =>
         typeof(RAWSelectionAssistant.App).Assembly.GetType("RAWSelectionAssistant.Services.AssetLibraryP1AcceptanceStateController");
+
+    private static string? BuildSourceHead()
+    {
+        var type = ProductionControllerType();
+        return type is null
+            ? null
+            : (string)(type.GetMethod("GetBuildSourceHead", BindingFlags.Static | BindingFlags.NonPublic)
+                ?? throw new MissingMethodException(type.FullName, "GetBuildSourceHead")).Invoke(null, null)!;
+    }
 
     private static void AssertFreshManifest(string root, string databasePath, string scenario)
     {
@@ -369,6 +380,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
         var manifest = document.RootElement;
         Assert.AreEqual(scenario, manifest.GetProperty("scenario").GetString());
         Assert.AreEqual(Path.GetFullPath(databasePath), manifest.GetProperty("databasePath").GetString());
+        Assert.AreEqual(BuildSourceHead(), manifest.GetProperty("sourceHead").GetString());
         Assert.IsTrue(manifest.GetProperty("freshDatabaseVerified").GetBoolean());
         Assert.IsFalse(File.Exists(databasePath));
         Assert.IsFalse(File.Exists(databasePath + "-wal"));

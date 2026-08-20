@@ -35,6 +35,7 @@
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
     <Authors>像素蛋挞</Authors>
     <Product>像素蛋挞</Product>
     <Description>面向摄影师的本地分片、归片与照片处理工具平台</Description>

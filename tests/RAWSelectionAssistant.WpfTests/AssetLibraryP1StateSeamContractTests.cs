@@ -21,6 +21,10 @@ public sealed class AssetLibraryP1StateSeamContractTests
             "'$(AcceptanceBuild)' != 'true'",
             "'$(Configuration)' != 'Release'");
 
+        var sourceRevision = project.Descendants("IncludeSourceRevisionInInformationalVersion")
+            .Single(element => string.Equals(element.Value, "true", StringComparison.Ordinal));
+        Assert.AreEqual(defineCondition, (string?)sourceRevision.Attribute("Condition"));
+
         var validation = project.Descendants("Target")
             .Single(element => string.Equals((string?)element.Attribute("Name"), "ValidateAssetLibraryP1StateAcceptanceBuild", StringComparison.Ordinal));
         Assert.AreEqual("PrepareForBuild", (string?)validation.Attribute("BeforeTargets"));
@@ -50,6 +54,15 @@ public sealed class AssetLibraryP1StateSeamContractTests
             "Path.IsPathFullyQualified",
             "asset-library",
             "ApplyAcceptanceStartRoute",
+            "GetBuildSourceHead",
+            "AssemblyInformationalVersionAttribute",
+            "does not match the source HEAD embedded",
+            "HasStateScenario",
+            "AssetLibraryP1RouteAcceptance",
+            "current-route-session.json",
+            "route-sessions.jsonl",
+            "stateScenarioEnabled = false",
+            "previewFixturesDisabled = false",
             "startRouteSource = _startRouteSource",
             "startRouteCurrentPage = _startRouteCurrentPage",
             "startRouteHead = _startRouteHead",
@@ -62,8 +75,8 @@ public sealed class AssetLibraryP1StateSeamContractTests
             "real-repository-query-entered",
             "real-repository-query-completed",
             "asset-library-v16.db",
-            "_databasePath + \"-wal\"",
-            "_databasePath + \"-shm\"",
+            "databasePath + \"-wal\"",
+            "databasePath + \"-shm\"",
             "databasePath = _databasePath",
             "freshDatabaseVerified = true",
             "repositorySource = _repositorySource",
@@ -86,6 +99,7 @@ public sealed class AssetLibraryP1StateSeamContractTests
         Assert.IsGreaterThan(gateStart, factoryCall);
         Assert.IsGreaterThan(factoryCall, gateEnd);
         StringAssert.Contains(app, "_assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel)");
+        StringAssert.Contains(app, "_assetLibraryP1StateController?.HasStateScenario == true");
     }
 
     [TestMethod]
@@ -95,22 +109,100 @@ public sealed class AssetLibraryP1StateSeamContractTests
         if (type is null) return;
         var method = type.GetMethod("ValidateRuntimeOptIn", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
             ?? throw new MissingMethodException(type.FullName, "ValidateRuntimeOptIn");
+        var headMethod = type.GetMethod("GetBuildSourceHead", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
+            ?? throw new MissingMethodException(type.FullName, "GetBuildSourceHead");
         var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart-P1-Route", Guid.NewGuid().ToString("N")));
-        const string head = "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af";
+        var head = (string?)headMethod.Invoke(null, null) ?? throw new InvalidOperationException("The special build source HEAD is unavailable.");
+        const string oldHead = "3b5ff13bb4c5b4c2001f978cb6ab31f5715cd7af";
 
-        method.Invoke(null, new object?[] { root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head });
+        method.Invoke(null, new object?[] { root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head });
+        method.Invoke(null, new object?[] { root, string.Empty, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head });
+        method.Invoke(null, new object?[] { root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head });
+        method.Invoke(null, new object?[] { root, "loading-error-retry-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head });
         foreach (var invalid in new object?[][]
                  {
-                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head],
-                     [root, "first-empty/v1", "KitaoPhotoSelector", root, "asset-library", head],
-                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", "relative", "asset-library", head],
-                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, null, head],
-                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "AssetLibrary", head],
-                     [root, "first-empty/v1", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", "3b5ff13"]
+                     [root, "regular", "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head],
+                     [root, null, "KitaoPhotoSelector", root, "asset-library", head, head],
+                     [root, null, "pixeltart_modularharness_v1_devpreview", root, "asset-library", head, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", "relative", "asset-library", head, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", System.IO.Path.Combine(root, "other"), "asset-library", head, head],
+                     ["relative", null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, null, head, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "AssetLibrary", head, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", "3b5ff13", head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", oldHead, head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head.ToUpperInvariant(), head],
+                     [root, null, "PixelTart_ModularHarness_V1_DevPreview", root, "asset-library", head, oldHead]
                  })
         {
             var exception = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, invalid));
             Assert.IsInstanceOfType<InvalidOperationException>(exception.InnerException);
+        }
+    }
+
+    [TestMethod]
+    public void SyntheticRouteOnlyControllerKeepsPreviewFixturesAndWritesFreshProvenance()
+    {
+        var type = typeof(RAWSelectionAssistant.App).Assembly.GetType("RAWSelectionAssistant.Services.AssetLibraryP1AcceptanceStateController");
+        if (type is null) return;
+        var head = (string)(type.GetMethod("GetBuildSourceHead", BindingFlags.Static | BindingFlags.NonPublic)
+            ?? throw new MissingMethodException(type.FullName, "GetBuildSourceHead")).Invoke(null, null)!;
+        var constructor = type.GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
+            binder: null,
+            [typeof(string), typeof(string), typeof(string), typeof(RAWSelectionAssistant.Core.Services.ILogService)],
+            modifiers: null) ?? throw new MissingMethodException(type.FullName, ".ctor");
+        var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart-P1-SyntheticRoute", Guid.NewGuid().ToString("N")));
+        try
+        {
+            var controller = constructor.Invoke([root, null, head, null]);
+            Assert.IsFalse((bool)(type.GetProperty("HasStateScenario", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?? throw new MissingMemberException(type.FullName, "HasStateScenario")).GetValue(controller)!);
+            var loadStateController = (PixelTart.Modules.AssetLibrary.IAssetLibraryLoadStateController)controller;
+            Assert.IsFalse(loadStateController.DisablePreviewFixtures);
+            Assert.Throws<InvalidOperationException>(() =>
+                loadStateController.BeforeRepositoryInitializationAsync(1, CancellationToken.None).GetAwaiter().GetResult());
+
+            var routeRoot = System.IO.Path.Combine(root, "InputDiagnostics", "AssetLibraryP1RouteAcceptance");
+            var provenance = File.ReadAllText(System.IO.Path.Combine(routeRoot, "route-root-manifest.json"));
+            var current = File.ReadAllText(System.IO.Path.Combine(routeRoot, "current-route-session.json"));
+            StringAssert.Contains(provenance, head);
+            StringAssert.Contains(provenance, "\"freshAcceptanceRootVerified\": true");
+            StringAssert.Contains(current, "\"status\": \"validated\"");
+            StringAssert.Contains(current, "\"stateScenarioEnabled\": false");
+            StringAssert.Contains(current, "\"previewFixturesDisabled\": false");
+            Assert.IsFalse(File.Exists(System.IO.Path.Combine(root, "Data", "asset-library-v16.db")));
+            Assert.IsFalse(Directory.Exists(System.IO.Path.Combine(root, "InputDiagnostics", "AssetLibraryP1StateAcceptance")));
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public void SyntheticRouteOnlyControllerRejectsANonFreshFirstRoot()
+    {
+        var type = typeof(RAWSelectionAssistant.App).Assembly.GetType("RAWSelectionAssistant.Services.AssetLibraryP1AcceptanceStateController");
+        if (type is null) return;
+        var head = (string)(type.GetMethod("GetBuildSourceHead", BindingFlags.Static | BindingFlags.NonPublic)
+            ?? throw new MissingMethodException(type.FullName, "GetBuildSourceHead")).Invoke(null, null)!;
+        var constructor = type.GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
+            binder: null,
+            [typeof(string), typeof(string), typeof(string), typeof(RAWSelectionAssistant.Core.Services.ILogService)],
+            modifiers: null) ?? throw new MissingMethodException(type.FullName, ".ctor");
+        var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart-P1-NonFreshSyntheticRoute", Guid.NewGuid().ToString("N")));
+        try
+        {
+            Directory.CreateDirectory(root);
+            File.WriteAllText(System.IO.Path.Combine(root, "preexisting.txt"), "not-fresh");
+            var exception = Assert.Throws<TargetInvocationException>(() => constructor.Invoke([root, null, head, null]));
+            Assert.IsInstanceOfType<InvalidOperationException>(exception.InnerException);
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
         }
     }
 
