@@ -157,6 +157,23 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
+    public void DragStepsConsumeTheExactMouseDragKindProducedAndValidatedByTheEvidenceContract()
+    {
+        var script = Text();
+        var dragGate = Slice(script, "function Wait-DragStep", "function Wait-PaneToggleStep");
+        var producer = File.ReadAllText(Path("src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs"), Encoding.UTF8);
+        var diagnosticService = File.ReadAllText(Path("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs"), Encoding.UTF8);
+        var validator = File.ReadAllText(Path("tools/AssetLibraryP1Acceptance/Test-AssetLibraryP1GateAEvidence.ps1"), Encoding.UTF8);
+
+        StringAssert.Contains(dragGate, "[string](Get-PropertyValue $_ 'input_kind') -ceq 'MouseDrag'");
+        Assert.DoesNotContain("-ceq 'Mouse'", dragGate, StringComparison.Ordinal);
+        StringAssert.Contains(producer, "BeginControlStateTransition(state, \"MouseDrag\"");
+        StringAssert.Contains(producer, "_pendingControlStateTransition?.InputKind != \"MouseDrag\"");
+        StringAssert.Contains(diagnosticService, "safeInputKind == \"MouseDrag\"");
+        StringAssert.Contains(validator, "(Test-ExactString (Get-PropertyValue $_ 'input_kind') 'MouseDrag')");
+    }
+
+    [TestMethod]
     public async Task DryRunAndRecoveryTestAreExecutableAndIsolated()
     {
         var before = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;

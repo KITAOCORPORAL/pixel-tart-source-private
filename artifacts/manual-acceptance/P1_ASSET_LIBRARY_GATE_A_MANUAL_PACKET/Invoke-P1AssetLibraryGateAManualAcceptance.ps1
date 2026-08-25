@@ -956,7 +956,7 @@ function Wait-DragStep {
         $document = Get-PhysicalDocument $Session.Root
         $matches = @(@(Get-PropertyValue $document 'control_state_transitions') | Where-Object {
                 [string](Get-PropertyValue $_ 'transition_id') -notin $baselineIds -and
-                [string](Get-PropertyValue $_ 'input_kind') -ceq 'Mouse' -and
+                [string](Get-PropertyValue $_ 'input_kind') -ceq 'MouseDrag' -and
                 [string](Get-NestedValue $_ @('control', 'automation_id')) -ceq $ControlId -and
                 $null -ne (Get-PropertyValue $_ 'completed_at')
             })
