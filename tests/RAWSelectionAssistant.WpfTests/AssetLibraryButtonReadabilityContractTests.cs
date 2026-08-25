@@ -13,9 +13,9 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     private static readonly IReadOnlyDictionary<string, int> ExpectedRoleCounts =
         new Dictionary<string, int>(StringComparer.Ordinal)
         {
-            ["{StaticResource AssetLibraryPrimaryButton}"] = 5,
-            ["{StaticResource AssetLibrarySecondaryButton}"] = 11,
-            ["{StaticResource AssetLibraryCompactChipButton}"] = 9,
+            ["{StaticResource AssetLibraryPrimaryButton}"] = 4,
+            ["{StaticResource AssetLibrarySecondaryButton}"] = 12,
+            ["{StaticResource AssetLibraryChipButton}"] = 9,
             ["{StaticResource AssetLibraryIconButton}"] = 1,
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
         };
@@ -39,8 +39,10 @@ public sealed class AssetLibraryButtonReadabilityContractTests
             Assert.AreEqual(expected.Value, buttons.Count(button => Attribute(button, "Style") == expected.Key), expected.Key);
 
         var activeChip = buttons.Single(button => Attribute(button, "Tag") == "Active");
-        Assert.AreEqual("{StaticResource AssetLibraryCompactChipButton}", Attribute(activeChip, "Style"));
+        Assert.AreEqual("{StaticResource AssetLibraryChipButton}", Attribute(activeChip, "Style"));
         Assert.AreEqual("{Binding Key}", Attribute(activeChip, "CommandParameter"));
+        Assert.AreEqual("7,3", Attribute(activeChip, "Padding"));
+        Assert.AreEqual("0,0,5,0", Attribute(activeChip, "Margin"));
     }
 
     [TestMethod]
@@ -51,7 +53,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         {
             "AssetLibraryPrimaryButton",
             "AssetLibrarySecondaryButton",
-            "AssetLibraryCompactChipButton",
+            "AssetLibraryChipButton",
             "AssetLibraryIconButton",
             "AssetLibraryPaletteSwatchButton",
         };
@@ -111,7 +113,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         {
             "AssetLibraryPrimaryButton",
             "AssetLibrarySecondaryButton",
-            "AssetLibraryCompactChipButton",
+            "AssetLibraryChipButton",
             "AssetLibraryIconButton",
             "AssetLibraryPaletteSwatchButton",
         };
@@ -193,8 +195,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = LoadPage();
         AssertContentRole(document, "导入引用", "AssetLibraryPrimaryButton", 2);
         AssertContentRole(document, "重试", "AssetLibraryPrimaryButton", 1);
-        AssertContentRole(document, "已分析", "AssetLibraryCompactChipButton", 1);
-        AssertContentRole(document, "低饱和", "AssetLibraryCompactChipButton", 1);
+        AssertContentRole(document, "已分析", "AssetLibraryChipButton", 1);
+        AssertContentRole(document, "低饱和", "AssetLibraryChipButton", 1);
         AssertContentRole(document, "查颜色", "AssetLibrarySecondaryButton", 1);
         AssertContentRole(document, "开始", "AssetLibraryPrimaryButton", 1);
         AssertContentRole(document, "取消", "AssetLibrarySecondaryButton", 1);
@@ -202,7 +204,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         AssertAutomationRole(document, "ToggleAssetOrganizationPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "ToggleAssetInspectorPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "PinAssetInspectorPane", "AssetLibrarySecondaryButton");
-        AssertAutomationRole(document, "SaveVisualSmartFolder", "AssetLibraryPrimaryButton");
+        AssertAutomationRole(document, "SaveVisualSmartFolder", "AssetLibrarySecondaryButton");
     }
 
     [TestMethod]

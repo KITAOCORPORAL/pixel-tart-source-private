@@ -173,7 +173,7 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="AssetLibraryCompactChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
+        <Style x:Key="AssetLibraryChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
             <Setter Property="Background" Value="{StaticResource AssetLibraryChipNormalBrush}" />
             <Setter Property="Foreground" Value="{StaticResource AssetLibraryChipForegroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
@@ -486,14 +486,14 @@
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" AutomationProperties.AutomationId="VisualFilterChips">
                         <WrapPanel>
-                            <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="低饱和" Command="{Binding VisualChipCommand}" CommandParameter="LowSaturation" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="低调" Command="{Binding VisualChipCommand}" CommandParameter="LowKey" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="高对比" Command="{Binding VisualChipCommand}" CommandParameter="HighContrast" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="暖色" Command="{Binding VisualChipCommand}" CommandParameter="Warm" Style="{StaticResource AssetLibraryCompactChipButton}" />
-                            <Button Content="冷色" Command="{Binding VisualChipCommand}" CommandParameter="Cool" Style="{StaticResource AssetLibraryCompactChipButton}" />
+                            <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="低饱和" Command="{Binding VisualChipCommand}" CommandParameter="LowSaturation" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="低调" Command="{Binding VisualChipCommand}" CommandParameter="LowKey" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="高对比" Command="{Binding VisualChipCommand}" CommandParameter="HighContrast" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="暖色" Command="{Binding VisualChipCommand}" CommandParameter="Warm" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="冷色" Command="{Binding VisualChipCommand}" CommandParameter="Cool" Style="{StaticResource AssetLibraryChipButton}" />
                         </WrapPanel>
                         <DockPanel Margin="0,5,0,0">
                             <ItemsControl ItemsSource="{Binding ActiveVisualChips}" AutomationProperties.AutomationId="ActiveVisualFilterChips">
@@ -502,8 +502,10 @@
                                     <DataTemplate>
                                         <Button Command="{Binding DataContext.RemoveVisualChipCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding Key}"
-                                                Style="{StaticResource AssetLibraryCompactChipButton}"
-                                                Tag="Active">
+                                                Style="{StaticResource AssetLibraryChipButton}"
+                                                Tag="Active"
+                                                Padding="7,3"
+                                                Margin="0,0,5,0">
                                             <TextBlock><Run Text="{Binding Label}" /><Run Text="  ×" /></TextBlock>
                                         </Button>
                                     </DataTemplate>
@@ -658,7 +660,7 @@
                                 <DockPanel LastChildFill="True">
                                     <Button DockPanel.Dock="Right" Content="保存" Command="{Binding SaveSmartFolderCommand}"
                                             Focusable="True" IsTabStop="True" Margin="8,0,0,0"
-                                            Style="{StaticResource AssetLibraryPrimaryButton}"
+                                            Style="{StaticResource AssetLibrarySecondaryButton}"
                                             AutomationProperties.Name="保存智能文件夹"
                                             AutomationProperties.AutomationId="SaveVisualSmartFolder" />
                                     <TextBlock Text="Smart Folder Builder" VerticalAlignment="Center" />
