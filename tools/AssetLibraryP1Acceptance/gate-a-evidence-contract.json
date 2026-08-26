@@ -145,7 +145,8 @@
       "required_layer2_events": ["PreviewKeyDown", "KeyDown"],
       "forbidden_layer2_events": ["PreviewKeyUp", "KeyUp"],
       "completion_phase": "KeyDown",
-      "native_key_up_finalization_required": true
+      "native_key_up_finalization_required": true,
+      "native_key_up_focus_policy": "different-focus-or-unavailable-original-target"
     }
   },
   "splitter_keyboard": {

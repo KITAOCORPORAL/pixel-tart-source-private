@@ -328,6 +328,9 @@ internal static class PhysicalPointerDiagnosticSession
             attempt.Layer3Target.ActualFocusedElementAtNativeKeyUp = Describe(actualFocusedElement);
             attempt.Layer3Target.ActualFocusedAutomationIdAtNativeKeyUp = NearestAutomationId(actualFocusedElement);
             attempt.Layer3Target.ActualFocusParentChainAtNativeKeyUp = ParentChain(actualFocusedElement);
+            attempt.Layer3Target.ActualFocusedElementIsOriginalTargetAtNativeKeyUp = ReferenceEquals(actualFocusedElement, control);
+            attempt.Layer3Target.ActualFocusedElementAvailableAtNativeKeyUp =
+                actualFocusedElement is not null && IsKeyboardTargetAvailable(actualFocusedElement);
             attempt.Layer3Target.TargetAvailableAtNativeKeyUp = IsKeyboardTargetAvailable(control);
             attempt.Layer4Action.ActivationFinalizedAtNativeKeyUp = true;
             attempt.Layer4Action.ActivationFinalizedAt = now;
@@ -1535,6 +1538,8 @@ internal static class PhysicalPointerDiagnosticSession
         public PointerElementSnapshot ActualFocusedElementAtNativeKeyUp { get; set; } = PointerElementSnapshot.None;
         public string ActualFocusedAutomationIdAtNativeKeyUp { get; set; } = string.Empty;
         public List<PointerElementSnapshot> ActualFocusParentChainAtNativeKeyUp { get; set; } = [];
+        public bool? ActualFocusedElementIsOriginalTargetAtNativeKeyUp { get; set; }
+        public bool? ActualFocusedElementAvailableAtNativeKeyUp { get; set; }
         public bool? TargetAvailableAtNativeKeyUp { get; set; }
     }
 

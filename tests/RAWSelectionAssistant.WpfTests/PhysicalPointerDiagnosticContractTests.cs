@@ -188,6 +188,8 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "FocusParentChainAtUp",
             "ActualFocusedElementAtNativeKeyUp",
             "ActualFocusedAutomationIdAtNativeKeyUp",
+            "ActualFocusedElementIsOriginalTargetAtNativeKeyUp",
+            "ActualFocusedElementAvailableAtNativeKeyUp",
             "TargetAvailableAtNativeKeyUp",
             "ActivationCompletedOnKeyDown",
             "ActivationFinalizedAtNativeKeyUp",
@@ -250,6 +252,9 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "attempt.Layer2Wpf.PreviewKeyUpReceived",
             "attempt.Layer2Wpf.KeyUpReceived",
             "ActualFocusedElementAtNativeKeyUp = Describe(actualFocusedElement)",
+            "ActualFocusedElementIsOriginalTargetAtNativeKeyUp = ReferenceEquals(actualFocusedElement, control)",
+            "ActualFocusedElementAvailableAtNativeKeyUp =",
+            "actualFocusedElement is not null && IsKeyboardTargetAvailable(actualFocusedElement)",
             "TargetAvailableAtNativeKeyUp = IsKeyboardTargetAvailable(control)",
             "PresentationSource.FromDependencyObject(control) is not null");
         Assert.IsFalse(host.Contains("RaiseEvent(new KeyEventArgs", StringComparison.Ordinal));

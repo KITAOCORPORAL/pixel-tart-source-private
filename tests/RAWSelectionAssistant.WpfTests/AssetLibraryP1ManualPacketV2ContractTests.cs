@@ -221,16 +221,26 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         var retryStep = Slice(script, "Wait-ForStep 'retry-activate-once'", "Capture-WindowEvidence $retry '11-retry-recovered-manual-v2'");
 
         ContainsAll(localKeyValidator,
+            "Get-PropertyState",
+            "Test-StrictScalarPropertyValue",
             "activation_completed_on_key_down",
             "activation_finalized_at_native_key_up",
             "target_available_at_native_key_up",
             "actual_focused_automation_id_at_native_key_up",
-            "Test-PropertyPresent $layer3 'actual_focused_element_at_native_key_up'",
-            "Test-PropertyPresent $layer3 'actual_focused_automation_id_at_native_key_up'",
+            "actual_focused_element_is_original_target_at_native_key_up",
+            "actual_focused_element_available_at_native_key_up",
+            "$focusedElementAvailableAtUp",
+            "$focusedElementUnavailableAtUp",
+            "$focusStateAtUpIsValid",
+            "$focusedElementSnapshotStateAtUp.IsArray",
+            "$focusedIdStateAtUp.IsArray",
+            "$focusedElementIdStateAtUp.IsArray",
             "'PreviewKeyDown'; 'KeyDown'");
         var retryQualification = Slice(script, "function Get-QualifiedRetryActivations", "function Get-RetrySessionContamination");
         ContainsAll(retryQualification,
             "$allowedKeys.Count -eq 1",
+            "native_key_up_focus_policy",
+            "Test-StrictScalarPropertyValue $keyboardContract 'native_key_up_focus_policy'",
             "if ($usesKeyDownNativeUpFinalization)",
             "Test-KeyLayersLocal $attempt 'RetryAssetLibraryLoad' $key $true");
         ContainsAll(retryStep,

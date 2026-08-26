@@ -69,6 +69,42 @@ function Get-PropertyValue {
     return $property.Value
 }
 
+function Get-PropertyState {
+    param($Object, [Parameter(Mandatory = $true)][string]$Name)
+    if ($null -eq $Object) {
+        return [pscustomobject]@{ Present = $false; IsArray = $false; Value = $null }
+    }
+    if ($Object -is [Collections.IDictionary]) {
+        if (-not $Object.Contains($Name)) {
+            return [pscustomobject]@{ Present = $false; IsArray = $false; Value = $null }
+        }
+        $value = $Object[$Name]
+    }
+    else {
+        $property = $Object.PSObject.Properties[$Name]
+        if ($null -eq $property) {
+            return [pscustomobject]@{ Present = $false; IsArray = $false; Value = $null }
+        }
+        $value = $property.Value
+    }
+    return [pscustomobject]@{ Present = $true; IsArray = $value -is [Array]; Value = $value }
+}
+
+function Test-StrictScalarPropertyValue {
+    param(
+        $Object,
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][Type]$ExpectedType,
+        [Parameter(Mandatory = $true)]$ExpectedValue
+    )
+    $state = Get-PropertyState $Object $Name
+    return $state.Present -and
+        -not $state.IsArray -and
+        $null -ne $state.Value -and
+        $state.Value.GetType() -eq $ExpectedType -and
+        [object]::Equals($state.Value, $ExpectedValue)
+}
+
 function Test-PropertyPresent {
     param($Object, [Parameter(Mandatory = $true)][string]$Name)
     if ($null -eq $Object) { return $false }
@@ -816,25 +852,51 @@ function Test-KeyLayersLocal {
         return [string](Get-PropertyValue $layer3 'focused_automation_id_at_up') -ceq $ControlId
     }
 
-    $targetAvailableAtUp = Get-PropertyValue $layer3 'target_available_at_native_key_up'
-    $focusedElementSnapshotAtUp = Get-PropertyValue $layer3 'actual_focused_element_at_native_key_up'
-    $focusedAtUp = Get-PropertyValue $layer3 'actual_focused_automation_id_at_native_key_up'
-    $focusedElementAtUp = Get-PropertyValue $focusedElementSnapshotAtUp 'automation_id'
+    $focusedElementSnapshotStateAtUp = Get-PropertyState $layer3 'actual_focused_element_at_native_key_up'
+    $focusedElementSnapshotAtUp = $focusedElementSnapshotStateAtUp.Value
+    $focusedElementIdStateAtUp = Get-PropertyState $focusedElementSnapshotAtUp 'automation_id'
+    $focusedIdStateAtUp = Get-PropertyState $layer3 'actual_focused_automation_id_at_native_key_up'
+    $focusedElementAtUpIsString = $focusedElementIdStateAtUp.Present -and
+        -not $focusedElementIdStateAtUp.IsArray -and
+        $null -ne $focusedElementIdStateAtUp.Value -and
+        $focusedElementIdStateAtUp.Value.GetType() -eq [string]
+    $focusedAtUpIsString = $focusedIdStateAtUp.Present -and
+        -not $focusedIdStateAtUp.IsArray -and
+        $null -ne $focusedIdStateAtUp.Value -and
+        $focusedIdStateAtUp.Value.GetType() -eq [string]
+    $nearestFocusMatchesControlAtUp = $focusedAtUpIsString -and $focusedIdStateAtUp.Value -ceq $ControlId
+    $directFocusMatchesControlAtUp = $focusedElementAtUpIsString -and $focusedElementIdStateAtUp.Value -ceq $ControlId
+    $focusedElementIsOriginalTargetAtUp = Test-StrictScalarPropertyValue $layer3 'actual_focused_element_is_original_target_at_native_key_up' ([bool]) $true
+    $focusedElementIsDifferentTargetAtUp = Test-StrictScalarPropertyValue $layer3 'actual_focused_element_is_original_target_at_native_key_up' ([bool]) $false
+    $focusedElementAvailableAtUp = Test-StrictScalarPropertyValue $layer3 'actual_focused_element_available_at_native_key_up' ([bool]) $true
+    $focusedElementUnavailableAtUp = Test-StrictScalarPropertyValue $layer3 'actual_focused_element_available_at_native_key_up' ([bool]) $false
+    $focusStateAtUpIsValid = if ($focusedElementIsOriginalTargetAtUp) {
+        $nearestFocusMatchesControlAtUp -and
+        $directFocusMatchesControlAtUp -and
+        $focusedElementUnavailableAtUp
+    }
+    else {
+        $focusedAtUpIsString -and
+        $focusedElementAtUpIsString -and
+        -not $nearestFocusMatchesControlAtUp -and
+        -not $directFocusMatchesControlAtUp -and
+        $focusedElementIsDifferentTargetAtUp -and
+        $focusedElementAvailableAtUp
+    }
     $clickEvents = @(@(Get-PropertyValue $layer4 'events') | Where-Object { [string](Get-PropertyValue $_ 'event_name') -ceq 'ButtonClick' })
     return $ControlId -ceq 'RetryAssetLibraryLoad' -and $Key -ceq 'Enter' -and
-        [bool](Get-PropertyValue $layer4 'button_click_received') -and
-        [bool](Get-PropertyValue $layer4 'physical_target_confirmed') -and
-        [bool](Get-PropertyValue $layer4 'activation_completed_on_key_down') -and
-        [bool](Get-PropertyValue $layer4 'activation_finalized_at_native_key_up') -and
+        (Test-StrictScalarPropertyValue $layer4 'button_click_received' ([bool]) $true) -and
+        (Test-StrictScalarPropertyValue $layer4 'physical_target_confirmed' ([bool]) $true) -and
+        (Test-StrictScalarPropertyValue $layer4 'activation_completed_on_key_down' ([bool]) $true) -and
+        (Test-StrictScalarPropertyValue $layer4 'activation_finalized_at_native_key_up' ([bool]) $true) -and
         $null -ne (Get-PropertyValue $layer4 'activation_finalized_at') -and
-        $null -ne $targetAvailableAtUp -and -not [bool]$targetAvailableAtUp -and
-        (Test-PropertyPresent $layer3 'actual_focused_element_at_native_key_up') -and
+        (Test-StrictScalarPropertyValue $layer3 'target_available_at_native_key_up' ([bool]) $false) -and
+        $focusedElementSnapshotStateAtUp.Present -and
+        -not $focusedElementSnapshotStateAtUp.IsArray -and
         $null -ne $focusedElementSnapshotAtUp -and
-        (Test-PropertyPresent $focusedElementSnapshotAtUp 'automation_id') -and
-        $null -ne $focusedElementAtUp -and
-        (Test-PropertyPresent $layer3 'actual_focused_automation_id_at_native_key_up') -and
-        $null -ne $focusedAtUp -and
-        [string]$focusedAtUp -cne $ControlId -and [string]$focusedElementAtUp -cne $ControlId -and
+        $focusedElementAtUpIsString -and
+        $focusedAtUpIsString -and
+        $focusStateAtUpIsValid -and
         $clickEvents.Count -eq 1 -and
         [string](Get-NestedValue $layer4 @('button', 'automation_id')) -ceq $ControlId
 }
@@ -851,7 +913,8 @@ function Get-QualifiedRetryActivations {
         $allowedKeys.Count -eq 1 -and
         [string]$allowedKeys[0] -ceq 'Enter' -and
         [string](Get-PropertyValue $keyboardContract 'completion_phase') -ceq 'KeyDown' -and
-        [bool](Get-PropertyValue $keyboardContract 'native_key_up_finalization_required') -and
+        (Test-StrictScalarPropertyValue $keyboardContract 'native_key_up_finalization_required' ([bool]) $true) -and
+        (Test-StrictScalarPropertyValue $keyboardContract 'native_key_up_focus_policy' ([string]) 'different-focus-or-unavailable-original-target') -and
         $requiredWpfEvents.Count -eq 2 -and
         [string]$requiredWpfEvents[0] -ceq 'PreviewKeyDown' -and
         [string]$requiredWpfEvents[1] -ceq 'KeyDown' -and

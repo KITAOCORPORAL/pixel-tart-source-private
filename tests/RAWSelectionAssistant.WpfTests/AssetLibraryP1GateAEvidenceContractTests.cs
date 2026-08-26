@@ -110,6 +110,9 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             retry.GetProperty("keyboard").GetProperty("forbidden_layer2_events").EnumerateArray().Select(value => value.GetString()).ToArray());
         Assert.AreEqual("KeyDown", retry.GetProperty("keyboard").GetProperty("completion_phase").GetString());
         Assert.IsTrue(retry.GetProperty("keyboard").GetProperty("native_key_up_finalization_required").GetBoolean());
+        Assert.AreEqual(
+            "different-focus-or-unavailable-original-target",
+            retry.GetProperty("keyboard").GetProperty("native_key_up_focus_policy").GetString());
         var splitter = root.GetProperty("splitter_keyboard");
         CollectionAssert.AreEqual(
             new[] { "PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp" },
@@ -330,12 +333,37 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
     }
 
     [TestMethod]
+    public void ValidatorAcceptsUnavailableOriginalRetryFocusReferenceAtNativeKeyUp()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseRetryKeyboardActivation("Enter");
+        fixture.UseUnavailableOriginalRetryFocusReference();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreEqual(0, result.ExitCode, result.Output);
+    }
+
+    [TestMethod]
     [DataRow("return-token")]
     [DataRow("forged-up-focus")]
     [DataRow("nearest-up-focus-retry")]
     [DataRow("direct-up-focus-retry")]
     [DataRow("missing-nearest-up-focus-field")]
     [DataRow("missing-direct-up-focus-field")]
+    [DataRow("missing-original-target-identity")]
+    [DataRow("missing-focused-availability")]
+    [DataRow("focused-original-target-still-available")]
+    [DataRow("focused-retry-not-original-target")]
+    [DataRow("original-target-identity-with-other-focus")]
+    [DataRow("string-focused-availability")]
+    [DataRow("different-focus-unavailable")]
+    [DataRow("array-target-availability")]
+    [DataRow("array-original-target-identity")]
+    [DataRow("array-focused-availability")]
+    [DataRow("array-nearest-up-focus")]
+    [DataRow("array-direct-up-focus")]
+    [DataRow("array-focus-snapshot")]
     [DataRow("target-still-available")]
     [DataRow("activation-not-on-keydown")]
     [DataRow("finalization-flag-false")]
@@ -353,6 +381,19 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
 
         Assert.AreNotEqual(0, result.ExitCode, result.Output);
         StringAssert.Contains(result.Output, "exactly one verified physical mouse or keyboard activation");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsArrayShapedRetryNativeKeyUpFocusPolicy()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseRetryKeyboardActivation("Enter");
+        fixture.WrapRetryNativeKeyUpFocusPolicyInArray();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "Retry keyboard contract must require Enter KeyDown completion");
     }
 
     [TestMethod]
@@ -576,6 +617,18 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
         }
 
+        public void UseUnavailableOriginalRetryFocusReference()
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+            var target = root["key_attempts"]!.AsArray()[0]!["layer3_target"]!;
+            target["actual_focused_element_at_native_key_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+            target["actual_focused_automation_id_at_native_key_up"] = "RetryAssetLibraryLoad";
+            target["actual_focused_element_is_original_target_at_native_key_up"] = true;
+            target["actual_focused_element_available_at_native_key_up"] = false;
+            File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
         public void DowngradeRetryKeyboardContractToStable()
         {
             var root = JsonNode.Parse(File.ReadAllText(ContractPath))!.AsObject();
@@ -584,6 +637,14 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             keyboard["forbidden_layer2_events"] = new JsonArray();
             keyboard["completion_phase"] = "KeyUp";
             keyboard["native_key_up_finalization_required"] = false;
+            File.WriteAllText(ContractPath, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
+        public void WrapRetryNativeKeyUpFocusPolicyInArray()
+        {
+            var root = JsonNode.Parse(File.ReadAllText(ContractPath))!.AsObject();
+            var keyboard = root["retry_physical_activation"]!["keyboard"]!;
+            keyboard["native_key_up_focus_policy"] = new JsonArray("different-focus-or-unavailable-original-target");
             File.WriteAllText(ContractPath, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
         }
 
@@ -614,6 +675,54 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                     break;
                 case "missing-direct-up-focus-field":
                     attempt["layer3_target"]!.AsObject().Remove("actual_focused_element_at_native_key_up");
+                    break;
+                case "missing-original-target-identity":
+                    attempt["layer3_target"]!.AsObject().Remove("actual_focused_element_is_original_target_at_native_key_up");
+                    break;
+                case "missing-focused-availability":
+                    attempt["layer3_target"]!.AsObject().Remove("actual_focused_element_available_at_native_key_up");
+                    break;
+                case "focused-original-target-still-available":
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["actual_focused_automation_id_at_native_key_up"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["actual_focused_element_is_original_target_at_native_key_up"] = true;
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = true;
+                    break;
+                case "focused-retry-not-original-target":
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["actual_focused_automation_id_at_native_key_up"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["actual_focused_element_is_original_target_at_native_key_up"] = false;
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = false;
+                    break;
+                case "original-target-identity-with-other-focus":
+                    attempt["layer3_target"]!["actual_focused_element_is_original_target_at_native_key_up"] = true;
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = false;
+                    break;
+                case "string-focused-availability":
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = "false";
+                    break;
+                case "different-focus-unavailable":
+                    attempt["layer3_target"]!["actual_focused_element_is_original_target_at_native_key_up"] = false;
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = false;
+                    break;
+                case "array-target-availability":
+                    attempt["layer3_target"]!["target_available_at_native_key_up"] = new JsonArray(false);
+                    break;
+                case "array-original-target-identity":
+                    attempt["layer3_target"]!["actual_focused_element_is_original_target_at_native_key_up"] = new JsonArray(false);
+                    break;
+                case "array-focused-availability":
+                    attempt["layer3_target"]!["actual_focused_element_available_at_native_key_up"] = new JsonArray(true);
+                    break;
+                case "array-nearest-up-focus":
+                    attempt["layer3_target"]!["actual_focused_automation_id_at_native_key_up"] = new JsonArray("SomeOtherControl");
+                    break;
+                case "array-direct-up-focus":
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!["automation_id"] = new JsonArray(string.Empty);
+                    break;
+                case "array-focus-snapshot":
+                    var snapshot = attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!.DeepClone();
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"] = new JsonArray(snapshot);
                     break;
                 case "target-still-available":
                     attempt["layer3_target"]!["target_available_at_native_key_up"] = true;
@@ -1329,6 +1438,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                     ("actual_focused_element_at_native_key_up", D(("automation_id", string.Empty))),
                     ("actual_focused_automation_id_at_native_key_up", "SomeOtherControl"),
                     ("actual_focus_parent_chain_at_native_key_up", Array.Empty<object>()),
+                    ("actual_focused_element_is_original_target_at_native_key_up", false),
+                    ("actual_focused_element_available_at_native_key_up", true),
                     ("target_available_at_native_key_up", false))),
                 ("layer4_action", D(
                     ("button_click_received", true), ("physical_target_confirmed", true),
