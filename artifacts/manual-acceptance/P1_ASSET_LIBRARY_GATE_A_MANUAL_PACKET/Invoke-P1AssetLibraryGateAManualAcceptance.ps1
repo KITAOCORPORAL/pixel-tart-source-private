@@ -719,6 +719,7 @@ function Invoke-DedicatedBuild {
         '-p:AssetLibraryP1StateAcceptance=true',
         '-p:InputRoutingDiagnostics=true',
         '-p:TreatWarningsAsErrors=true',
+        '-p:UseSharedCompilation=false',
         '--output', (Quote-ProcessArgument $publishRoot),
         '--nologo'
     )
@@ -752,6 +753,7 @@ function Invoke-DedicatedBuild {
         asset_library_p1_acceptance = $true
         input_routing_diagnostics = $true
         msbuild_node_reuse_disabled = $true
+        shared_compilation_disabled = $true
         created_at = [DateTimeOffset]::UtcNow.ToString('O')
         build_started_at = $startedAt.ToString('O')
     }

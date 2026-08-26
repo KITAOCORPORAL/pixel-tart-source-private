@@ -79,8 +79,10 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "-p:AssetLibraryP1StateAcceptance=true",
             "-p:InputRoutingDiagnostics=true",
             "-p:TreatWarningsAsErrors=true",
+            "-p:UseSharedCompilation=false",
             "Invoke-WithEnvironment @{ MSBUILDDISABLENODEREUSE = '1' }",
             "msbuild_node_reuse_disabled = $true",
+            "shared_compilation_disabled = $true",
             "pixel-tart-p1-gate-a-build-manifest/v1",
             "source_head_is_current_head",
             "repository_tracked_clean",
@@ -94,7 +96,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
-    public void DedicatedBuildDisablesNodeReuseOnlyInsideScopedWaitedProcess()
+    public void DedicatedBuildDisablesNodeAndCompilerReuseInsideWaitedProcess()
     {
         var script = Text();
         var hiddenProcess = Slice(script, "function Invoke-HiddenProcess", "function Invoke-WithEnvironment");
@@ -113,8 +115,11 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "$exitCode = Invoke-WithEnvironment @{ MSBUILDDISABLENODEREUSE = '1' }",
             "Invoke-HiddenProcess $dotnet $arguments",
             "if ($exitCode -ne 0)",
-            "msbuild_node_reuse_disabled = $true");
+            "-p:UseSharedCompilation=false",
+            "msbuild_node_reuse_disabled = $true",
+            "shared_compilation_disabled = $true");
         Assert.AreEqual(1, CountOccurrences(script, exactOverride));
+        Assert.AreEqual(1, CountOccurrences(script, "-p:UseSharedCompilation=false"));
         Assert.DoesNotContain("-nodeReuse:false", dedicatedBuild, StringComparison.OrdinalIgnoreCase);
     }
 
