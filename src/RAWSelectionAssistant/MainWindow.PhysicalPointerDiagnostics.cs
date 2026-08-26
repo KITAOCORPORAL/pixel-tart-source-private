@@ -25,6 +25,9 @@ public partial class MainWindow
     private const int VkLeft = 0x25;
     private const int VkRight = 0x27;
     private HwndSource? _physicalPointerHwndSource;
+    private bool _physicalPointerThreadMessageHookAttached;
+    private PendingRetryKeyActivation? _pendingRetryKeyActivation;
+    private int? _finalizedRetryKeyUpVirtualKey;
     private PendingControlStateTransition? _pendingControlStateTransition;
     private bool _closeAuthorityScanPending;
     private bool _duplicateCloseAuthorityNoticeShown;
@@ -62,41 +65,67 @@ public partial class MainWindow
         var handle = new WindowInteropHelper(this).Handle;
         if (handle == IntPtr.Zero) return;
         _physicalPointerHwndSource = HwndSource.FromHwnd(handle);
-        _physicalPointerHwndSource?.AddHook(PhysicalPointerWindowHook);
+        if (_physicalPointerHwndSource is null) return;
+        _physicalPointerHwndSource.AddHook(PhysicalPointerWindowHook);
+        ComponentDispatcher.ThreadFilterMessage += PhysicalPointer_ThreadFilterMessage;
+        _physicalPointerThreadMessageHookAttached = true;
     }
 
     private void DisposePhysicalPointerDiagnostics()
     {
         if (!PhysicalPointerDiagnosticSession.IsEnabled) return;
         PhysicalPointerDiagnosticSession.Complete(CurrentPointerDiagnosticContext());
+        if (_physicalPointerThreadMessageHookAttached)
+        {
+            ComponentDispatcher.ThreadFilterMessage -= PhysicalPointer_ThreadFilterMessage;
+            _physicalPointerThreadMessageHookAttached = false;
+        }
         _physicalPointerHwndSource?.RemoveHook(PhysicalPointerWindowHook);
         _physicalPointerHwndSource = null;
+        _pendingRetryKeyActivation = null;
+        _finalizedRetryKeyUpVirtualKey = null;
         LayoutUpdated -= PhysicalPointer_LayoutUpdated;
+    }
+
+    private void PhysicalPointer_ThreadFilterMessage(ref MSG message, ref bool handled)
+    {
+        if (_physicalPointerHwndSource is null ||
+            message.hwnd != _physicalPointerHwndSource.Handle ||
+            message.message is not (WmKeyDown or WmKeyUp))
+            return;
+
+        var virtualKey = unchecked((int)(long)message.wParam);
+        if (virtualKey is not (VkLeft or VkRight or VkReturn or VkSpace)) return;
+
+        var nativeKeyData = unchecked((uint)(long)message.lParam);
+        PhysicalPointerDiagnosticSession.RecordWin32Key(
+            message.message == WmKeyDown ? "WM_KEYDOWN" : "WM_KEYUP",
+            virtualKey,
+            scanCode: (int)((nativeKeyData >> 16) & 0xff),
+            repeatCount: (int)(nativeKeyData & 0xffff),
+            modifiers: Keyboard.Modifiers,
+            nativeMessageTime: message.time,
+            isExtendedKey: (nativeKeyData & 0x01000000) != 0,
+            wasPreviouslyDown: (nativeKeyData & 0x40000000) != 0,
+            isTransitionUp: (nativeKeyData & 0x80000000) != 0,
+            context: CurrentPointerDiagnosticContext());
+
+        if (message.message == WmKeyUp &&
+            _pendingRetryKeyActivation is { } pending &&
+            pending.VirtualKey == virtualKey &&
+            PhysicalPointerDiagnosticSession.TryFinalizeKeyDownCompletedActivationAtNativeKeyUp(
+                pending.Control,
+                Keyboard.FocusedElement as DependencyObject,
+                virtualKey,
+                CurrentPointerDiagnosticContext()))
+        {
+            _pendingRetryKeyActivation = null;
+            _finalizedRetryKeyUpVirtualKey = virtualKey;
+        }
     }
 
     private IntPtr PhysicalPointerWindowHook(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (message is WmKeyDown or WmKeyUp)
-        {
-            var virtualKey = unchecked((int)(long)wParam);
-            if (virtualKey is VkLeft or VkRight or VkReturn or VkSpace)
-            {
-                var nativeKeyData = unchecked((uint)(long)lParam);
-                PhysicalPointerDiagnosticSession.RecordWin32Key(
-                    message == WmKeyDown ? "WM_KEYDOWN" : "WM_KEYUP",
-                    virtualKey,
-                    scanCode: (int)((nativeKeyData >> 16) & 0xff),
-                    repeatCount: (int)(nativeKeyData & 0xffff),
-                    modifiers: Keyboard.Modifiers,
-                    nativeMessageTime: GetMessageTime(),
-                    isExtendedKey: (nativeKeyData & 0x01000000) != 0,
-                    wasPreviouslyDown: (nativeKeyData & 0x40000000) != 0,
-                    isTransitionUp: (nativeKeyData & 0x80000000) != 0,
-                    context: CurrentPointerDiagnosticContext());
-            }
-            return IntPtr.Zero;
-        }
-
         var name = message switch
         {
             WmLButtonDown => "WM_LBUTTONDOWN",
@@ -186,11 +215,36 @@ public partial class MainWindow
         var key = e.Key == Key.System ? e.SystemKey : e.Key;
         var focusedElement = Keyboard.FocusedElement as DependencyObject;
         var target = focusedElement ?? e.OriginalSource as DependencyObject;
-        if (key is Key.Enter or Key.Space &&
-            IsRetryAssetLibraryLoadTarget(target))
+        if (key is Key.Enter or Key.Space)
         {
+            var virtualKey = KeyInterop.VirtualKeyFromKey(key);
+            if (!beginTransition &&
+                _finalizedRetryKeyUpVirtualKey == virtualKey &&
+                eventName is "PreviewKeyUp" or "KeyUp")
+            {
+                if (completeTransition) _finalizedRetryKeyUpVirtualKey = null;
+                return;
+            }
+
+            var retryButton = FindRetryAssetLibraryLoadTarget(target);
+            if (beginTransition && !e.IsRepeat)
+            {
+                _finalizedRetryKeyUpVirtualKey = null;
+                _pendingRetryKeyActivation = retryButton is null
+                    ? null
+                    : new PendingRetryKeyActivation(retryButton, virtualKey, DateTimeOffset.Now);
+            }
+
+            var retryActivation = _pendingRetryKeyActivation;
+            if (retryButton is null &&
+                (retryActivation is null ||
+                 retryActivation.VirtualKey != virtualKey ||
+                 DateTimeOffset.Now - retryActivation.StartedAt > TimeSpan.FromSeconds(3)))
+                return;
+
+            var activationTarget = retryButton ?? retryActivation!.Control;
             PhysicalPointerDiagnosticSession.RecordWpfKey(
-                target!,
+                activationTarget,
                 focusedElement,
                 key,
                 eventName,
@@ -200,6 +254,7 @@ public partial class MainWindow
                 e.Source as DependencyObject,
                 e.Handled,
                 CurrentPointerDiagnosticContext());
+            if (completeTransition) _pendingRetryKeyActivation = null;
             return;
         }
 
@@ -233,13 +288,15 @@ public partial class MainWindow
             ScheduleControlStateTransitionCompletion(pending);
     }
 
-    private static bool IsRetryAssetLibraryLoadTarget(DependencyObject? source)
+    private static Button? FindRetryAssetLibraryLoadTarget(DependencyObject? source)
     {
         var button = FindDiagnosticAncestor<Button>(source);
         return button is not null && string.Equals(
             AutomationProperties.GetAutomationId(button),
             "RetryAssetLibraryLoad",
-            StringComparison.Ordinal);
+            StringComparison.Ordinal)
+            ? button
+            : null;
     }
 
     private void BeginControlStateTransition(
@@ -465,9 +522,6 @@ public partial class MainWindow
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool ClientToScreen(IntPtr window, ref NativePointerPoint point);
 
-    [DllImport("user32.dll")]
-    private static extern int GetMessageTime();
-
     [StructLayout(LayoutKind.Sequential)]
     private struct NativePointerPoint
     {
@@ -479,6 +533,11 @@ public partial class MainWindow
         string TransitionId,
         DependencyObject Control,
         string InputKind);
+
+    private sealed record PendingRetryKeyActivation(
+        Button Control,
+        int VirtualKey,
+        DateTimeOffset StartedAt);
 
     private sealed record AcceptanceControlState(
         DependencyObject Control,

@@ -101,7 +101,15 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         var retry = root.GetProperty("retry_physical_activation");
         Assert.AreEqual("RetryAssetLibraryLoad", retry.GetProperty("automation_id").GetString());
         CollectionAssert.AreEqual(new[] { "mouse", "keyboard" }, retry.GetProperty("allowed_modes").EnumerateArray().Select(item => item.GetString()).ToArray());
-        CollectionAssert.AreEqual(new[] { "Enter", "Space" }, retry.GetProperty("keyboard").GetProperty("allowed_keys").EnumerateArray().Select(item => item.GetString()).ToArray());
+        CollectionAssert.AreEqual(new[] { "Enter" }, retry.GetProperty("keyboard").GetProperty("allowed_keys").EnumerateArray().Select(item => item.GetString()).ToArray());
+        CollectionAssert.AreEqual(
+            new[] { "PreviewKeyDown", "KeyDown" },
+            retry.GetProperty("keyboard").GetProperty("required_layer2_events").EnumerateArray().Select(value => value.GetString()).ToArray());
+        CollectionAssert.AreEqual(
+            new[] { "PreviewKeyUp", "KeyUp" },
+            retry.GetProperty("keyboard").GetProperty("forbidden_layer2_events").EnumerateArray().Select(value => value.GetString()).ToArray());
+        Assert.AreEqual("KeyDown", retry.GetProperty("keyboard").GetProperty("completion_phase").GetString());
+        Assert.IsTrue(retry.GetProperty("keyboard").GetProperty("native_key_up_finalization_required").GetBoolean());
         var splitter = root.GetProperty("splitter_keyboard");
         CollectionAssert.AreEqual(
             new[] { "PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp" },
@@ -322,6 +330,46 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
     }
 
     [TestMethod]
+    [DataRow("return-token")]
+    [DataRow("forged-up-focus")]
+    [DataRow("nearest-up-focus-retry")]
+    [DataRow("direct-up-focus-retry")]
+    [DataRow("missing-nearest-up-focus-field")]
+    [DataRow("missing-direct-up-focus-field")]
+    [DataRow("target-still-available")]
+    [DataRow("activation-not-on-keydown")]
+    [DataRow("finalization-flag-false")]
+    [DataRow("forged-wpf-up")]
+    [DataRow("downgrade-to-stable")]
+    [DataRow("missing-click-event")]
+    [DataRow("click-after-keydown")]
+    public void ValidatorRejectsTamperedKeyDownCompletedRetryActivation(string mutation)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseRetryKeyboardActivation("Enter");
+        fixture.CorruptRetryKeyboardActivation(mutation);
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "exactly one verified physical mouse or keyboard activation");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsRetryKeyboardContractDowngradeEvenWithForgedStableEvidence()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.UseRetryKeyboardActivation("Enter");
+        fixture.CorruptRetryKeyboardActivation("downgrade-to-stable");
+        fixture.DowngradeRetryKeyboardContractToStable();
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "Retry keyboard contract must require Enter KeyDown completion");
+    }
+
+    [TestMethod]
     public void ValidatorAcceptsStrictDpiKeyboardInteractionsWithoutMouseFallback()
     {
         using var fixture = CapturedFixture.Create();
@@ -497,6 +545,83 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             var attempt = root["key_attempts"]!.AsArray()[0]!.AsObject();
             attempt["layer1_win32"]!["key_up_received"] = false;
             attempt["layer1_win32"]!["events"] = new JsonArray(attempt["layer1_win32"]!["events"]!.AsArray()[0]!.DeepClone());
+            File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
+        public void DowngradeRetryKeyboardContractToStable()
+        {
+            var root = JsonNode.Parse(File.ReadAllText(ContractPath))!.AsObject();
+            var keyboard = root["retry_physical_activation"]!["keyboard"]!;
+            keyboard["required_layer2_events"] = new JsonArray("PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp");
+            keyboard["forbidden_layer2_events"] = new JsonArray();
+            keyboard["completion_phase"] = "KeyUp";
+            keyboard["native_key_up_finalization_required"] = false;
+            File.WriteAllText(ContractPath, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
+        }
+
+        public void CorruptRetryKeyboardActivation(string mutation)
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+            var attempt = root["key_attempts"]!.AsArray()[0]!.AsObject();
+            var layer2Events = attempt["layer2_wpf"]!["events"]!.AsArray();
+            switch (mutation)
+            {
+                case "return-token":
+                    attempt["key"] = "Return";
+                    foreach (var item in layer2Events) item!["key"] = "Return";
+                    break;
+                case "forged-up-focus":
+                    attempt["layer3_target"]!["actual_focused_automation_id_at_native_key_up"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+                    break;
+                case "nearest-up-focus-retry":
+                    attempt["layer3_target"]!["actual_focused_automation_id_at_native_key_up"] = "RetryAssetLibraryLoad";
+                    break;
+                case "direct-up-focus-retry":
+                    attempt["layer3_target"]!["actual_focused_element_at_native_key_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+                    break;
+                case "missing-nearest-up-focus-field":
+                    attempt["layer3_target"]!.AsObject().Remove("actual_focused_automation_id_at_native_key_up");
+                    break;
+                case "missing-direct-up-focus-field":
+                    attempt["layer3_target"]!.AsObject().Remove("actual_focused_element_at_native_key_up");
+                    break;
+                case "target-still-available":
+                    attempt["layer3_target"]!["target_available_at_native_key_up"] = true;
+                    break;
+                case "activation-not-on-keydown":
+                    attempt["layer4_action"]!["activation_completed_on_key_down"] = false;
+                    break;
+                case "finalization-flag-false":
+                    attempt["layer4_action"]!["activation_finalized_at_native_key_up"] = false;
+                    break;
+                case "forged-wpf-up":
+                    attempt["layer2_wpf"]!["preview_key_up_received"] = true;
+                    attempt["layer2_wpf"]!["key_up_received"] = true;
+                    layer2Events.Add(JsonSerializer.SerializeToNode(D(("event_name", "PreviewKeyUp"), ("key", "Enter"), ("timestamp", "2026-08-19T00:01:11.2250000+00:00"))));
+                    layer2Events.Add(JsonSerializer.SerializeToNode(D(("event_name", "KeyUp"), ("key", "Enter"), ("timestamp", "2026-08-19T00:01:11.2750000+00:00"))));
+                    break;
+                case "downgrade-to-stable":
+                    attempt["layer4_action"]!["activation_completed_on_key_down"] = false;
+                    attempt["layer4_action"]!["activation_finalized_at_native_key_up"] = false;
+                    attempt["layer2_wpf"]!["preview_key_up_received"] = true;
+                    attempt["layer2_wpf"]!["key_up_received"] = true;
+                    layer2Events.Add(JsonSerializer.SerializeToNode(D(("event_name", "PreviewKeyUp"), ("key", "Enter"), ("timestamp", "2026-08-19T00:01:11.2250000+00:00"))));
+                    layer2Events.Add(JsonSerializer.SerializeToNode(D(("event_name", "KeyUp"), ("key", "Enter"), ("timestamp", "2026-08-19T00:01:11.2750000+00:00"))));
+                    attempt["layer3_target"]!["focused_automation_id_at_up"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["focused_element_at_up"]!["automation_id"] = "RetryAssetLibraryLoad";
+                    attempt["layer3_target"]!["focus_parent_chain_at_up"] = attempt["layer3_target"]!["focus_parent_chain_at_down"]!.DeepClone();
+                    break;
+                case "missing-click-event":
+                    attempt["layer4_action"]!["events"] = new JsonArray();
+                    break;
+                case "click-after-keydown":
+                    attempt["layer4_action"]!["events"]!.AsArray()[0]!["timestamp"] = "2026-08-19T00:01:11.1500000+00:00";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mutation), mutation, null);
+            }
             File.WriteAllText(path, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
         }
 
@@ -1091,11 +1216,16 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             Dictionary<string, object?> Native(string message, DateTimeOffset timestamp) => D(
                 ("timestamp", timestamp.ToString("O")), ("message", message), ("virtual_key", virtualKey),
                 ("scan_code", key == "Enter" ? 28 : 57), ("repeat_count", 1), ("modifiers", "None"), ("native_message_time", 1));
-            var chain = new[] { D(("automation_id", automationId), ("type", "Button")), D(("automation_id", "AssetLibraryPage"), ("type", "AssetLibraryPage")) };
+            var downChain = new[] { D(("automation_id", automationId), ("type", "Button")), D(("automation_id", "AssetLibraryPage"), ("type", "AssetLibraryPage")) };
+            var wpfEvents = new[]
+            {
+                D(("event_name", "PreviewKeyDown"), ("key", key), ("timestamp", startedAt.AddMilliseconds(25).ToString("O")), ("focused_element", D(("automation_id", automationId)))),
+                D(("event_name", "KeyDown"), ("key", key), ("timestamp", startedAt.AddMilliseconds(75).ToString("O")), ("focused_element", D(("automation_id", automationId))))
+            };
             return D(
                 ("attempt_id", attemptId),
                 ("started_at", startedAt.ToString("O")),
-                ("updated_at", startedAt.AddMilliseconds(500).ToString("O")),
+                ("updated_at", startedAt.AddMilliseconds(205).ToString("O")),
                 ("origin", "Win32"),
                 ("key", key),
                 ("virtual_key", virtualKey),
@@ -1103,17 +1233,24 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                     ("key_down_received", true), ("key_up_received", true),
                     ("events", new[] { Native("WM_KEYDOWN", startedAt), Native("WM_KEYUP", startedAt.AddMilliseconds(200)) }))),
                 ("layer2_wpf", D(
-                    ("preview_key_down_received", true), ("key_down_received", true), ("preview_key_up_received", true), ("key_up_received", true),
-                    ("events", new[] { "PreviewKeyDown", "KeyDown", "PreviewKeyUp", "KeyUp" }.Select((name, index) =>
-                        D(("event_name", name), ("key", key), ("timestamp", startedAt.AddMilliseconds(50 * index).ToString("O")))).ToArray()))),
+                    ("preview_key_down_received", true), ("key_down_received", true), ("preview_key_up_received", false), ("key_up_received", false),
+                    ("events", wpfEvents))),
                 ("layer3_target", D(
                     ("control_automation_id", automationId), ("control", D(("automation_id", automationId))),
-                    ("focused_element_at_down", D(("automation_id", automationId))), ("focused_element_at_up", D(("automation_id", automationId))),
-                    ("focused_automation_id_at_down", automationId), ("focused_automation_id_at_up", automationId),
-                    ("focus_parent_chain_at_down", chain), ("focus_parent_chain_at_up", chain))),
+                    ("focused_element_at_down", D(("automation_id", automationId))), ("focused_element_at_up", D(("automation_id", string.Empty))),
+                    ("focused_automation_id_at_down", automationId), ("focused_automation_id_at_up", string.Empty),
+                    ("focus_parent_chain_at_down", downChain), ("focus_parent_chain_at_up", Array.Empty<object>()),
+                    ("actual_focused_element_at_native_key_up", D(("automation_id", string.Empty))),
+                    ("actual_focused_automation_id_at_native_key_up", "SomeOtherControl"),
+                    ("actual_focus_parent_chain_at_native_key_up", Array.Empty<object>()),
+                    ("target_available_at_native_key_up", false))),
                 ("layer4_action", D(
                     ("button_click_received", true), ("physical_target_confirmed", true),
-                    ("button", D(("automation_id", automationId))))));
+                    ("activation_completed_on_key_down", true),
+                    ("activation_finalized_at_native_key_up", true),
+                    ("activation_finalized_at", startedAt.AddMilliseconds(205).ToString("O")),
+                    ("button", D(("automation_id", automationId))),
+                    ("events", new[] { D(("timestamp", startedAt.AddMilliseconds(50).ToString("O")), ("event_name", "ButtonClick")) }))));
         }
 
         private static void AddRegularKey(List<Dictionary<string, object?>> attempts, List<Dictionary<string, object?>> transitions, string attemptId, string transitionId, string automationId, string propertyName, string key, string adjustment, double before, double after, double minimum, double maximum, DateTimeOffset startedAt)

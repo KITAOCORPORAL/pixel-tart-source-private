@@ -69,6 +69,13 @@ function Get-PropertyValue {
     return $property.Value
 }
 
+function Test-PropertyPresent {
+    param($Object, [Parameter(Mandatory = $true)][string]$Name)
+    if ($null -eq $Object) { return $false }
+    if ($Object -is [Collections.IDictionary]) { return $Object.Contains($Name) }
+    return $null -ne $Object.PSObject.Properties[$Name]
+}
+
 function Get-NestedValue {
     param($Object, [Parameter(Mandatory = $true)][string[]]$Path)
     $current = $Object
@@ -778,39 +785,88 @@ function Get-PhysicalDocument {
 }
 
 function Test-KeyLayersLocal {
-    param($Attempt, [string]$ControlId, [string]$Key)
+    param($Attempt, [string]$ControlId, [string]$Key, [bool]$AllowKeyDownCompletedActivation = $false)
     if ($null -eq $Attempt -or [string](Get-PropertyValue $Attempt 'origin') -cne 'Win32' -or [string](Get-PropertyValue $Attempt 'key') -cne $Key) { return $false }
     $virtualKey = switch ($Key) { 'Enter' { 13 } 'Space' { 32 } 'Left' { 37 } 'Right' { 39 } default { -1 } }
     if ([int](Get-PropertyValue $Attempt 'virtual_key') -ne $virtualKey) { return $false }
     $layer1 = Get-PropertyValue $Attempt 'layer1_win32'
     if (-not [bool](Get-PropertyValue $layer1 'key_down_received') -or -not [bool](Get-PropertyValue $layer1 'key_up_received')) { return $false }
     $nativeEvents = @(Get-PropertyValue $layer1 'events')
-    if (@($nativeEvents | Where-Object { [string](Get-PropertyValue $_ 'message') -ceq 'WM_KEYDOWN' }).Count -ne 1 -or
+    if ($nativeEvents.Count -ne 2 -or
+        @($nativeEvents | Where-Object { [string](Get-PropertyValue $_ 'message') -ceq 'WM_KEYDOWN' }).Count -ne 1 -or
         @($nativeEvents | Where-Object { [string](Get-PropertyValue $_ 'message') -ceq 'WM_KEYUP' }).Count -ne 1) { return $false }
     $layer2 = Get-PropertyValue $Attempt 'layer2_wpf'
-    foreach ($flag in @('preview_key_down_received', 'key_down_received', 'preview_key_up_received', 'key_up_received')) {
+    $layer4 = Get-PropertyValue $Attempt 'layer4_action'
+    $isKeyDownCompletedActivation = $AllowKeyDownCompletedActivation -and $ControlId -ceq 'RetryAssetLibraryLoad' -and $Key -ceq 'Enter'
+    foreach ($flag in @('preview_key_down_received', 'key_down_received')) {
         if (-not [bool](Get-PropertyValue $layer2 $flag)) { return $false }
     }
-    foreach ($eventName in @('PreviewKeyDown', 'KeyDown', 'PreviewKeyUp', 'KeyUp')) {
+    foreach ($flag in @('preview_key_up_received', 'key_up_received')) {
+        if ($isKeyDownCompletedActivation -eq [bool](Get-PropertyValue $layer2 $flag)) { return $false }
+    }
+    $expectedWpfEvents = @($(if ($isKeyDownCompletedActivation) { 'PreviewKeyDown'; 'KeyDown' } else { 'PreviewKeyDown'; 'KeyDown'; 'PreviewKeyUp'; 'KeyUp' }))
+    if (@(Get-PropertyValue $layer2 'events').Count -ne $expectedWpfEvents.Count) { return $false }
+    foreach ($eventName in $expectedWpfEvents) {
         if (@(@(Get-PropertyValue $layer2 'events') | Where-Object { [string](Get-PropertyValue $_ 'event_name') -ceq $eventName }).Count -ne 1) { return $false }
     }
     $layer3 = Get-PropertyValue $Attempt 'layer3_target'
-    return [string](Get-PropertyValue $layer3 'control_automation_id') -ceq $ControlId -and
-        [string](Get-PropertyValue $layer3 'focused_automation_id_at_down') -ceq $ControlId -and
-        [string](Get-PropertyValue $layer3 'focused_automation_id_at_up') -ceq $ControlId
+    if ([string](Get-PropertyValue $layer3 'control_automation_id') -cne $ControlId -or
+        [string](Get-PropertyValue $layer3 'focused_automation_id_at_down') -cne $ControlId) { return $false }
+    if (-not $isKeyDownCompletedActivation) {
+        return [string](Get-PropertyValue $layer3 'focused_automation_id_at_up') -ceq $ControlId
+    }
+
+    $targetAvailableAtUp = Get-PropertyValue $layer3 'target_available_at_native_key_up'
+    $focusedElementSnapshotAtUp = Get-PropertyValue $layer3 'actual_focused_element_at_native_key_up'
+    $focusedAtUp = Get-PropertyValue $layer3 'actual_focused_automation_id_at_native_key_up'
+    $focusedElementAtUp = Get-PropertyValue $focusedElementSnapshotAtUp 'automation_id'
+    $clickEvents = @(@(Get-PropertyValue $layer4 'events') | Where-Object { [string](Get-PropertyValue $_ 'event_name') -ceq 'ButtonClick' })
+    return $ControlId -ceq 'RetryAssetLibraryLoad' -and $Key -ceq 'Enter' -and
+        [bool](Get-PropertyValue $layer4 'button_click_received') -and
+        [bool](Get-PropertyValue $layer4 'physical_target_confirmed') -and
+        [bool](Get-PropertyValue $layer4 'activation_completed_on_key_down') -and
+        [bool](Get-PropertyValue $layer4 'activation_finalized_at_native_key_up') -and
+        $null -ne (Get-PropertyValue $layer4 'activation_finalized_at') -and
+        $null -ne $targetAvailableAtUp -and -not [bool]$targetAvailableAtUp -and
+        (Test-PropertyPresent $layer3 'actual_focused_element_at_native_key_up') -and
+        $null -ne $focusedElementSnapshotAtUp -and
+        (Test-PropertyPresent $focusedElementSnapshotAtUp 'automation_id') -and
+        $null -ne $focusedElementAtUp -and
+        (Test-PropertyPresent $layer3 'actual_focused_automation_id_at_native_key_up') -and
+        $null -ne $focusedAtUp -and
+        [string]$focusedAtUp -cne $ControlId -and [string]$focusedElementAtUp -cne $ControlId -and
+        $clickEvents.Count -eq 1 -and
+        [string](Get-NestedValue $layer4 @('button', 'automation_id')) -ceq $ControlId
 }
 
 function Get-QualifiedRetryActivations {
     param($Document)
     $qualified = @()
     if ($null -eq $Document) { return $qualified }
-    foreach ($attempt in @(Get-PropertyValue $Document 'key_attempts')) {
-        $key = [string](Get-PropertyValue $attempt 'key')
-        if ($key -notin @('Enter', 'Space') -or -not (Test-KeyLayersLocal $attempt 'RetryAssetLibraryLoad' $key)) { continue }
-        $layer4 = Get-PropertyValue $attempt 'layer4_action'
-        if ([bool](Get-PropertyValue $layer4 'button_click_received') -and
-            [bool](Get-PropertyValue $layer4 'physical_target_confirmed') -and
-            [string](Get-NestedValue $layer4 @('button', 'automation_id')) -ceq 'RetryAssetLibraryLoad') { $qualified += $attempt }
+    $keyboardContract = Get-PropertyValue (Get-PropertyValue $script:contract 'retry_physical_activation') 'keyboard'
+    $allowedKeys = @(Get-PropertyValue $keyboardContract 'allowed_keys')
+    $requiredWpfEvents = @(Get-PropertyValue $keyboardContract 'required_layer2_events')
+    $forbiddenWpfEvents = @(Get-PropertyValue $keyboardContract 'forbidden_layer2_events')
+    $usesKeyDownNativeUpFinalization =
+        $allowedKeys.Count -eq 1 -and
+        [string]$allowedKeys[0] -ceq 'Enter' -and
+        [string](Get-PropertyValue $keyboardContract 'completion_phase') -ceq 'KeyDown' -and
+        [bool](Get-PropertyValue $keyboardContract 'native_key_up_finalization_required') -and
+        $requiredWpfEvents.Count -eq 2 -and
+        [string]$requiredWpfEvents[0] -ceq 'PreviewKeyDown' -and
+        [string]$requiredWpfEvents[1] -ceq 'KeyDown' -and
+        $forbiddenWpfEvents.Count -eq 2 -and
+        [string]$forbiddenWpfEvents[0] -ceq 'PreviewKeyUp' -and
+        [string]$forbiddenWpfEvents[1] -ceq 'KeyUp'
+    if ($usesKeyDownNativeUpFinalization) {
+        foreach ($attempt in @(Get-PropertyValue $Document 'key_attempts')) {
+            $key = [string](Get-PropertyValue $attempt 'key')
+            if ($key -cne 'Enter' -or -not (Test-KeyLayersLocal $attempt 'RetryAssetLibraryLoad' $key $true)) { continue }
+            $layer4 = Get-PropertyValue $attempt 'layer4_action'
+            if ([bool](Get-PropertyValue $layer4 'button_click_received') -and
+                [bool](Get-PropertyValue $layer4 'physical_target_confirmed') -and
+                [string](Get-NestedValue $layer4 @('button', 'automation_id')) -ceq 'RetryAssetLibraryLoad') { $qualified += $attempt }
+        }
     }
     foreach ($attempt in @(Get-PropertyValue $Document 'attempts')) {
         if ([string](Get-PropertyValue $attempt 'down_target_automation_id') -ceq 'RetryAssetLibraryLoad' -and
@@ -1278,7 +1334,7 @@ function Invoke-RealRun {
     $retryBefore = Get-PhysicalDocument $retry.Root
     $retryBaselineIds = @(@(Get-PropertyValue $retryBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') }) +
         @(@(Get-PropertyValue $retryBefore 'attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter 或 Space；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手。' -Session $retry -Probe {
+    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手。' -Session $retry -Probe {
         $data = Get-StateSessionData $retry.Root
         $document = Get-PhysicalDocument $retry.Root
         $import = Read-JsonFileSafely (Join-Path $retry.Root 'InputDiagnostics\asset-library-import.json')
@@ -1293,8 +1349,20 @@ function Invoke-RealRun {
         }
         $activations = @(Get-QualifiedRetryActivations $document | Where-Object { [string](Get-PropertyValue $_ 'attempt_id') -notin $retryBaselineIds })
         if ($activations.Count -gt 1) { return New-ProbeResult $false '' '重试收到超过一次合格真实激活；本轮必须失败' $true }
+        $attemptThreeOrLater = @($data.Snapshots | Where-Object { [int](Get-PropertyValue $_ 'attempt') -ge 3 })
+        if ($attemptThreeOrLater.Count -gt 0) { return New-ProbeResult $false '' '检测到 attempt 3 或更晚重试；本轮必须失败' $true }
         $attemptTwo = @($data.Snapshots | Where-Object { [int](Get-PropertyValue $_ 'attempt') -ge 2 })
         if ($attemptTwo.Count -gt 0 -and $activations.Count -eq 0) {
+            $attemptTwoAt = [DateTimeOffset]::MaxValue
+            foreach ($snapshot in $attemptTwo) {
+                $candidate = [DateTimeOffset]::MinValue
+                if ([DateTimeOffset]::TryParse([string](Get-PropertyValue $snapshot 'recordedAt'), [ref]$candidate) -and $candidate -lt $attemptTwoAt) {
+                    $attemptTwoAt = $candidate
+                }
+            }
+            if ($attemptTwoAt -ne [DateTimeOffset]::MaxValue -and ([DateTimeOffset]::Now - $attemptTwoAt).TotalSeconds -le 3) {
+                return New-ProbeResult $false '' 'attempt 2 已真实开始；在固定 3 秒诊断落盘窗口内等待同一物理按键的 WM_KEYUP 收尾'
+            }
             return New-ProbeResult $false '' 'attempt 2 已开始，但没有本步骤唯一真实 Retry 四层激活；立即停止。' $true
         }
         $passed = $activations.Count -eq 1 -and (Test-StateTimelineComplete $data 'retry-session') -and (Test-ReadySnapshot $data 2)

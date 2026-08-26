@@ -184,6 +184,20 @@ internal static class PhysicalPointerDiagnosticSession
                         _document.KeyAttempts.Add(_activeKeyAttempt);
                     }
                 }
+                else if (!_activeKeyAttempt.Layer1Win32.KeyDownReceived)
+                {
+                    _activeKeyAttempt.Origin = "Win32";
+                    _activeKeyAttempt.Layer1Win32.KeyDownReceived = true;
+                    _activeKeyAttempt.Layer1Win32.KeyDownAt = now;
+                    _activeKeyAttempt.Layer1Win32.RepeatKeyDownCount = nativeEvent.RepeatCount;
+                    _activeKeyAttempt.Layer1Win32.Down = nativeEvent;
+                    _activeKeyAttempt.Layer1Win32.Events.Add(nativeEvent);
+                    if (_activeKeyAttempt.Layer4Action.ButtonClickReceived &&
+                        _activeKeyAttempt.Layer2Wpf.PreviewKeyDownReceived &&
+                        !_activeKeyAttempt.Layer2Wpf.PreviewKeyUpReceived)
+                        _activeKeyAttempt.Layer4Action.ActivationCompletedOnKeyDown = true;
+                    _activeKeyAttempt.UpdatedAt = now;
+                }
                 else
                 {
                     _activeKeyAttempt.Layer1Win32.RepeatKeyDownCount += nativeEvent.RepeatCount;
@@ -246,7 +260,7 @@ internal static class PhysicalPointerDiagnosticSession
             {
                 Timestamp = now,
                 EventName = SafeToken(eventName),
-                Key = SafeToken(key.ToString()),
+                Key = PhysicalKeyName(virtualKey),
                 IsRepeat = isRepeat,
                 Modifiers = SafeToken(modifiers.ToString()),
                 OriginalSource = Describe(originalSource),
@@ -276,10 +290,50 @@ internal static class PhysicalPointerDiagnosticSession
                     attempt.Layer3Target.FocusedElementAtUp = Describe(focusedElement);
                     attempt.Layer3Target.FocusedAutomationIdAtUp = focusedAutomationId;
                     attempt.Layer3Target.FocusParentChainAtUp = ParentChain(focusedElement);
+                    attempt.Layer3Target.TargetAvailableAtUp = IsKeyboardTargetAvailable(control);
                     break;
             }
             attempt.UpdatedAt = now;
             Save();
+        }
+    }
+
+    public static bool TryFinalizeKeyDownCompletedActivationAtNativeKeyUp(
+        DependencyObject control,
+        DependencyObject? actualFocusedElement,
+        int virtualKey,
+        PointerDiagnosticContext context)
+    {
+        if (!IsEnabled || virtualKey is not (0x0D or 0x20)) return false;
+        lock (Gate)
+        {
+            EnsureSession();
+            UpdateContext(context);
+            var attempt = _activeKeyAttempt;
+            if (attempt is null ||
+                attempt.VirtualKey != virtualKey ||
+                !attempt.Layer1Win32.KeyDownReceived ||
+                !attempt.Layer1Win32.KeyUpReceived ||
+                !attempt.Layer2Wpf.PreviewKeyDownReceived ||
+                !attempt.Layer2Wpf.KeyDownReceived ||
+                attempt.Layer2Wpf.PreviewKeyUpReceived ||
+                attempt.Layer2Wpf.KeyUpReceived ||
+                !attempt.Layer4Action.ButtonClickReceived ||
+                !attempt.Layer4Action.PhysicalTargetConfirmed ||
+                !attempt.Layer4Action.ActivationCompletedOnKeyDown ||
+                !MatchesKeyTarget(attempt, control, requireUp: false))
+                return false;
+
+            var now = DateTimeOffset.Now;
+            attempt.Layer3Target.ActualFocusedElementAtNativeKeyUp = Describe(actualFocusedElement);
+            attempt.Layer3Target.ActualFocusedAutomationIdAtNativeKeyUp = NearestAutomationId(actualFocusedElement);
+            attempt.Layer3Target.ActualFocusParentChainAtNativeKeyUp = ParentChain(actualFocusedElement);
+            attempt.Layer3Target.TargetAvailableAtNativeKeyUp = IsKeyboardTargetAvailable(control);
+            attempt.Layer4Action.ActivationFinalizedAtNativeKeyUp = true;
+            attempt.Layer4Action.ActivationFinalizedAt = now;
+            attempt.UpdatedAt = now;
+            Save();
+            return true;
         }
     }
 
@@ -674,16 +728,22 @@ internal static class PhysicalPointerDiagnosticSession
                 DateTimeOffset.Now - _activeKeyAttempt.StartedAt > TimeSpan.FromSeconds(3))
                 return;
 
+            var now = DateTimeOffset.Now;
             _activeKeyAttempt.Layer4Action.ButtonClickReceived = true;
             _activeKeyAttempt.Layer4Action.PhysicalTargetConfirmed = true;
+            _activeKeyAttempt.Layer4Action.ActivationCompletedOnKeyDown =
+                _activeKeyAttempt.Layer1Win32.KeyDownReceived &&
+                !_activeKeyAttempt.Layer1Win32.KeyUpReceived &&
+                _activeKeyAttempt.Layer2Wpf.PreviewKeyDownReceived &&
+                !_activeKeyAttempt.Layer2Wpf.PreviewKeyUpReceived;
             _activeKeyAttempt.Layer4Action.Button = Describe(button);
             _activeKeyAttempt.Layer4Action.Events.Add(new ActionEvent
             {
-                Timestamp = DateTimeOffset.Now,
+                Timestamp = now,
                 EventName = "ButtonClick",
                 Handled = handled
             });
-            _activeKeyAttempt.UpdatedAt = DateTimeOffset.Now;
+            _activeKeyAttempt.UpdatedAt = now;
             Save();
         }
     }
@@ -870,7 +930,7 @@ internal static class PhysicalPointerDiagnosticSession
         UpdatedAt = now,
         CurrentSurface = SafeToken(context.CurrentSurface),
         VirtualKey = virtualKey,
-        Key = SafeToken(KeyInterop.KeyFromVirtualKey(virtualKey).ToString()),
+        Key = PhysicalKeyName(virtualKey),
         Origin = win32DownReceived ? "Win32" : "WpfWithoutWin32",
         Layer1Win32 = new KeyWin32Layer
         {
@@ -1001,6 +1061,22 @@ internal static class PhysicalPointerDiagnosticSession
         return !requireUp ||
                string.Equals(attempt.Layer3Target.FocusedAutomationIdAtUp, controlAutomationId, StringComparison.Ordinal);
     }
+
+    private static bool IsKeyboardTargetAvailable(DependencyObject control) =>
+        control is UIElement element &&
+        element.IsVisible &&
+        element.IsEnabled &&
+        element.IsHitTestVisible &&
+        PresentationSource.FromDependencyObject(control) is not null;
+
+    private static string PhysicalKeyName(int virtualKey) => virtualKey switch
+    {
+        0x0D => "Enter",
+        0x20 => "Space",
+        0x25 => "Left",
+        0x27 => "Right",
+        _ => SafeToken(KeyInterop.KeyFromVirtualKey(virtualKey).ToString())
+    };
 
     private static bool IsExpectedBoundary(ControlStateTransition transition) => transition.ExpectedAdjustment switch
     {
@@ -1455,12 +1531,20 @@ internal static class PhysicalPointerDiagnosticSession
         public string FocusedAutomationIdAtUp { get; set; } = string.Empty;
         public List<PointerElementSnapshot> FocusParentChainAtDown { get; set; } = [];
         public List<PointerElementSnapshot> FocusParentChainAtUp { get; set; } = [];
+        public bool? TargetAvailableAtUp { get; set; }
+        public PointerElementSnapshot ActualFocusedElementAtNativeKeyUp { get; set; } = PointerElementSnapshot.None;
+        public string ActualFocusedAutomationIdAtNativeKeyUp { get; set; } = string.Empty;
+        public List<PointerElementSnapshot> ActualFocusParentChainAtNativeKeyUp { get; set; } = [];
+        public bool? TargetAvailableAtNativeKeyUp { get; set; }
     }
 
     private sealed class KeyActionLayer
     {
         public bool ButtonClickReceived { get; set; }
         public bool PhysicalTargetConfirmed { get; set; }
+        public bool ActivationCompletedOnKeyDown { get; set; }
+        public bool ActivationFinalizedAtNativeKeyUp { get; set; }
+        public DateTimeOffset? ActivationFinalizedAt { get; set; }
         public PointerElementSnapshot Button { get; set; } = PointerElementSnapshot.None;
         public List<ActionEvent> Events { get; } = [];
         public bool ControlStateTransitionConfirmed { get; set; }

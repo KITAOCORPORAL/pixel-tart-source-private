@@ -174,6 +174,35 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
+    public void RetryEnterGateUsesNativeUpFinalizationAndOneFixedAttemptTwoWriteWindow()
+    {
+        var script = Text();
+        var localKeyValidator = Slice(script, "function Test-KeyLayersLocal", "function Get-QualifiedRetryActivations");
+        var retryStep = Slice(script, "Wait-ForStep 'retry-activate-once'", "Capture-WindowEvidence $retry '11-retry-recovered-manual-v2'");
+
+        ContainsAll(localKeyValidator,
+            "activation_completed_on_key_down",
+            "activation_finalized_at_native_key_up",
+            "target_available_at_native_key_up",
+            "actual_focused_automation_id_at_native_key_up",
+            "Test-PropertyPresent $layer3 'actual_focused_element_at_native_key_up'",
+            "Test-PropertyPresent $layer3 'actual_focused_automation_id_at_native_key_up'",
+            "'PreviewKeyDown'; 'KeyDown'");
+        var retryQualification = Slice(script, "function Get-QualifiedRetryActivations", "function Get-RetrySessionContamination");
+        ContainsAll(retryQualification,
+            "$allowedKeys.Count -eq 1",
+            "if ($usesKeyDownNativeUpFinalization)",
+            "Test-KeyLayersLocal $attempt 'RetryAssetLibraryLoad' $key $true");
+        ContainsAll(retryStep,
+            "只按一次 Enter",
+            "$attemptThreeOrLater",
+            "$attemptTwoAt = [DateTimeOffset]::MaxValue",
+            "([DateTimeOffset]::Now - $attemptTwoAt).TotalSeconds -le 3");
+        Assert.DoesNotContain("Enter 或 Space", retryStep, StringComparison.Ordinal);
+        Assert.DoesNotContain("updated_at", retryStep, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
     public async Task DryRunAndRecoveryTestAreExecutableAndIsolated()
     {
         var before = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;

@@ -132,9 +132,12 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "Keyboard.KeyDownEvent",
             "Keyboard.PreviewKeyUpEvent",
             "Keyboard.KeyUpEvent",
+            "ComponentDispatcher.ThreadFilterMessage",
+            "PhysicalPointer_ThreadFilterMessage",
             "WM_KEYDOWN",
             "WM_KEYUP",
-            "GetMessageTime()",
+            "message.hwnd != _physicalPointerHwndSource.Handle",
+            "nativeMessageTime: message.time",
             "scanCode: (int)((nativeKeyData >> 16) & 0xff)",
             "repeatCount: (int)(nativeKeyData & 0xffff)",
             "modifiers: Keyboard.Modifiers",
@@ -183,6 +186,14 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "FocusedAutomationIdAtUp",
             "FocusParentChainAtDown",
             "FocusParentChainAtUp",
+            "ActualFocusedElementAtNativeKeyUp",
+            "ActualFocusedAutomationIdAtNativeKeyUp",
+            "TargetAvailableAtNativeKeyUp",
+            "ActivationCompletedOnKeyDown",
+            "ActivationFinalizedAtNativeKeyUp",
+            "TryFinalizeKeyDownCompletedActivationAtNativeKeyUp",
+            "PhysicalKeyName",
+            "0x0D => \"Enter\"",
             "BeforeActualValue",
             "AfterActualValue",
             "BeforePersistedValue",
@@ -212,6 +223,36 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "\"InputUnconfirmed\"");
         Assert.IsTrue(host.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
         Assert.IsTrue(diagnostics.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    public void RetryEnter_CapturesFirstChanceNativeInputAndTruthfullyFinalizesAfterTargetDisappears()
+    {
+        var host = Read("src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs");
+        var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
+        var nativeFilter = Slice(host, "private void PhysicalPointer_ThreadFilterMessage", "private IntPtr PhysicalPointerWindowHook");
+        var hwndHook = Slice(host, "private IntPtr PhysicalPointerWindowHook", "private void PhysicalPointer_PreviewMouseDown");
+
+        ContainsAll(host,
+            "ComponentDispatcher.ThreadFilterMessage += PhysicalPointer_ThreadFilterMessage",
+            "ComponentDispatcher.ThreadFilterMessage -= PhysicalPointer_ThreadFilterMessage");
+        ContainsAll(nativeFilter,
+            "message.hwnd != _physicalPointerHwndSource.Handle",
+            "RecordWin32Key",
+            "TryFinalizeKeyDownCompletedActivationAtNativeKeyUp",
+            "Keyboard.FocusedElement as DependencyObject");
+        Assert.IsFalse(nativeFilter.Contains("handled = true", StringComparison.Ordinal));
+        Assert.IsFalse(hwndHook.Contains("RecordWin32Key", StringComparison.Ordinal));
+        ContainsAll(diagnostics,
+            "else if (!_activeKeyAttempt.Layer1Win32.KeyDownReceived)",
+            "_activeKeyAttempt.Origin = \"Win32\"",
+            "ActivationCompletedOnKeyDown = true",
+            "attempt.Layer2Wpf.PreviewKeyUpReceived",
+            "attempt.Layer2Wpf.KeyUpReceived",
+            "ActualFocusedElementAtNativeKeyUp = Describe(actualFocusedElement)",
+            "TargetAvailableAtNativeKeyUp = IsKeyboardTargetAvailable(control)",
+            "PresentationSource.FromDependencyObject(control) is not null");
+        Assert.IsFalse(host.Contains("RaiseEvent(new KeyEventArgs", StringComparison.Ordinal));
     }
 
     [TestMethod]
@@ -308,6 +349,15 @@ public sealed class PhysicalPointerDiagnosticContractTests
     private static void ContainsAll(string source, params string[] values)
     {
         foreach (var value in values) StringAssert.Contains(source, value);
+    }
+
+    private static string Slice(string source, string start, string end)
+    {
+        var startIndex = source.IndexOf(start, StringComparison.Ordinal);
+        var endIndex = source.IndexOf(end, startIndex + start.Length, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, startIndex);
+        Assert.IsGreaterThan(startIndex, endIndex);
+        return source[startIndex..endIndex];
     }
 
     private static string RepositoryRoot

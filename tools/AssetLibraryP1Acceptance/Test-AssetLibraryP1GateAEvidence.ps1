@@ -27,6 +27,16 @@ function Get-PropertyValue {
     return $property.Value
 }
 
+function Test-PropertyPresent {
+    param(
+        [AllowNull()]$InputObject,
+        [string]$Name
+    )
+    if ($null -eq $InputObject) { return $false }
+    if ($InputObject -is [Collections.IDictionary]) { return $InputObject.Contains($Name) }
+    return $null -ne $InputObject.PSObject.Properties[$Name]
+}
+
 function Get-NestedValue {
     param(
         [AllowNull()]$InputObject,
@@ -475,7 +485,8 @@ function Test-KeyInputLayers {
         $Attempt,
         [string]$ControlAutomationId,
         [string]$Key,
-        [string[]]$RequiredWpfEvents
+        [string[]]$RequiredWpfEvents,
+        [bool]$AllowKeyDownCompletedActivation = $false
     )
     if ($null -eq $Attempt) { return $false }
     if (-not (Test-ExactString (Get-PropertyValue $Attempt 'origin') 'Win32')) { return $false }
@@ -495,6 +506,7 @@ function Test-KeyInputLayers {
         -not (Test-TrueValue (Get-PropertyValue $layer1 'key_up_received'))) { return $false }
     $nativeEvents = @(Get-PropertyValue $layer1 'events')
     if ($nativeEvents.Count -ne 2) { return $false }
+    $nativeByMessage = @{}
     foreach ($message in @('WM_KEYDOWN', 'WM_KEYUP')) {
         $matchingNative = @($nativeEvents | Where-Object { Test-ExactString (Get-PropertyValue $_ 'message') $message })
         if ($matchingNative.Count -ne 1) { return $false }
@@ -506,38 +518,99 @@ function Test-KeyInputLayers {
                 [int](Get-PropertyValue $nativeEvent 'native_message_time') -lt 0 -or
                 (Convert-ToTimestamp (Get-PropertyValue $nativeEvent 'timestamp') 'Keyboard native event timestamp') -eq [DateTimeOffset]::MinValue) { return $false }
         }
+        $nativeByMessage[$message] = $matchingNative[0]
     }
 
     $layer2 = Get-PropertyValue $Attempt 'layer2_wpf'
-    foreach ($flag in @('preview_key_down_received', 'key_down_received', 'preview_key_up_received', 'key_up_received')) {
+    $layer4 = Get-PropertyValue $Attempt 'layer4_action'
+    $isKeyDownCompletedActivation = $AllowKeyDownCompletedActivation -and
+        (Test-ExactString $ControlAutomationId 'RetryAssetLibraryLoad') -and
+        $Key -ceq 'Enter'
+    foreach ($flag in @('preview_key_down_received', 'key_down_received')) {
         if (-not (Test-TrueValue (Get-PropertyValue $layer2 $flag))) { return $false }
     }
+    if ($isKeyDownCompletedActivation) {
+        foreach ($flag in @('preview_key_up_received', 'key_up_received')) {
+            if (Test-TrueValue (Get-PropertyValue $layer2 $flag)) { return $false }
+        }
+    }
+    else {
+        foreach ($flag in @('preview_key_up_received', 'key_up_received')) {
+            if (-not (Test-TrueValue (Get-PropertyValue $layer2 $flag))) { return $false }
+        }
+    }
     $wpfEvents = @(Get-PropertyValue $layer2 'events')
-    if ($wpfEvents.Count -ne $RequiredWpfEvents.Count) { return $false }
-    foreach ($eventName in $RequiredWpfEvents) {
+    $expectedWpfEvents = @($RequiredWpfEvents)
+    if ($wpfEvents.Count -ne $expectedWpfEvents.Count) { return $false }
+    $wpfByName = @{}
+    foreach ($eventName in $expectedWpfEvents) {
         $matchingWpf = @($wpfEvents | Where-Object {
                 (Test-ExactString (Get-PropertyValue $_ 'event_name') $eventName) -and
                 (Test-ExactString (Get-PropertyValue $_ 'key') $Key)
-            })
+        })
         if ($matchingWpf.Count -ne 1) { return $false }
+        $wpfByName[$eventName] = $matchingWpf[0]
     }
 
     $layer3 = Get-PropertyValue $Attempt 'layer3_target'
     if (-not (Test-ExactString (Get-PropertyValue $layer3 'control_automation_id') $ControlAutomationId) -or
         -not (Test-ExactString (Get-NestedValue $layer3 @('control', 'automation_id')) $ControlAutomationId) -or
         -not (Test-ExactString (Get-NestedValue $layer3 @('focused_element_at_down', 'automation_id')) $ControlAutomationId) -or
-        -not (Test-ExactString (Get-NestedValue $layer3 @('focused_element_at_up', 'automation_id')) $ControlAutomationId) -or
-        -not (Test-ExactString (Get-PropertyValue $layer3 'focused_automation_id_at_down') $ControlAutomationId) -or
-        -not (Test-ExactString (Get-PropertyValue $layer3 'focused_automation_id_at_up') $ControlAutomationId)) { return $false }
+        -not (Test-ExactString (Get-PropertyValue $layer3 'focused_automation_id_at_down') $ControlAutomationId)) { return $false }
     $downChain = @(Get-PropertyValue $layer3 'focus_parent_chain_at_down')
     $upChain = @(Get-PropertyValue $layer3 'focus_parent_chain_at_up')
-    if ($downChain.Count -eq 0 -or $downChain.Count -ne $upChain.Count -or
+    if ($downChain.Count -eq 0 -or
         -not (Test-ExactString (Get-PropertyValue $downChain[0] 'automation_id') $ControlAutomationId)) { return $false }
-    for ($index = 0; $index -lt $downChain.Count; $index++) {
-        if (-not (Test-ExactString (Get-PropertyValue $downChain[$index] 'automation_id') (Get-PropertyValue $upChain[$index] 'automation_id')) -or
-            -not (Test-ExactString (Get-PropertyValue $downChain[$index] 'type') (Get-PropertyValue $upChain[$index] 'type'))) { return $false }
+
+    if (-not $isKeyDownCompletedActivation) {
+        if (-not (Test-ExactString (Get-NestedValue $layer3 @('focused_element_at_up', 'automation_id')) $ControlAutomationId) -or
+            -not (Test-ExactString (Get-PropertyValue $layer3 'focused_automation_id_at_up') $ControlAutomationId) -or
+            $downChain.Count -ne $upChain.Count) { return $false }
+        for ($index = 0; $index -lt $downChain.Count; $index++) {
+            if (-not (Test-ExactString (Get-PropertyValue $downChain[$index] 'automation_id') (Get-PropertyValue $upChain[$index] 'automation_id')) -or
+                -not (Test-ExactString (Get-PropertyValue $downChain[$index] 'type') (Get-PropertyValue $upChain[$index] 'type'))) { return $false }
+        }
+        return $true
     }
-    return $true
+
+    $targetAvailableAtUp = Get-PropertyValue $layer3 'target_available_at_native_key_up'
+    $focusedElementSnapshotAtUp = Get-PropertyValue $layer3 'actual_focused_element_at_native_key_up'
+    $focusedAtUp = Get-PropertyValue $layer3 'actual_focused_automation_id_at_native_key_up'
+    $focusedElementAtUp = Get-PropertyValue $focusedElementSnapshotAtUp 'automation_id'
+    $clickEvents = @((Get-PropertyValue $layer4 'events') | Where-Object { Test-ExactString (Get-PropertyValue $_ 'event_name') 'ButtonClick' })
+    if (-not (Test-TrueValue (Get-PropertyValue $layer4 'button_click_received')) -or
+        -not (Test-TrueValue (Get-PropertyValue $layer4 'physical_target_confirmed')) -or
+        -not (Test-TrueValue (Get-PropertyValue $layer4 'activation_completed_on_key_down')) -or
+        -not (Test-TrueValue (Get-PropertyValue $layer4 'activation_finalized_at_native_key_up')) -or
+        $null -eq $targetAvailableAtUp -or [bool]$targetAvailableAtUp -or
+        -not (Test-PropertyPresent $layer3 'actual_focused_element_at_native_key_up') -or
+        $null -eq $focusedElementSnapshotAtUp -or
+        -not (Test-PropertyPresent $focusedElementSnapshotAtUp 'automation_id') -or
+        $null -eq $focusedElementAtUp -or
+        -not (Test-PropertyPresent $layer3 'actual_focused_automation_id_at_native_key_up') -or
+        $null -eq $focusedAtUp -or
+        (Test-ExactString $focusedAtUp $ControlAutomationId) -or
+        (Test-ExactString $focusedElementAtUp $ControlAutomationId) -or
+        $clickEvents.Count -ne 1 -or
+        -not (Test-ExactString (Get-NestedValue $layer4 @('button', 'automation_id')) $ControlAutomationId)) { return $false }
+
+    $nativeDownAt = Convert-ToTimestamp (Get-PropertyValue $nativeByMessage['WM_KEYDOWN'] 'timestamp') 'Retry keyboard native down timestamp'
+    $nativeUpAt = Convert-ToTimestamp (Get-PropertyValue $nativeByMessage['WM_KEYUP'] 'timestamp') 'Retry keyboard native up timestamp'
+    $previewDownAt = Convert-ToTimestamp (Get-PropertyValue $wpfByName['PreviewKeyDown'] 'timestamp') 'Retry keyboard WPF PreviewKeyDown timestamp'
+    $keyDownAt = Convert-ToTimestamp (Get-PropertyValue $wpfByName['KeyDown'] 'timestamp') 'Retry keyboard WPF KeyDown timestamp'
+    $clickAt = Convert-ToTimestamp (Get-PropertyValue $clickEvents[0] 'timestamp') 'Retry keyboard ButtonClick timestamp'
+    $finalizedAt = Convert-ToTimestamp (Get-PropertyValue $layer4 'activation_finalized_at') 'Retry keyboard native-key-up finalization timestamp'
+    return $nativeDownAt -ne [DateTimeOffset]::MinValue -and
+        $nativeUpAt -ne [DateTimeOffset]::MinValue -and
+        $previewDownAt -ne [DateTimeOffset]::MinValue -and
+        $keyDownAt -ne [DateTimeOffset]::MinValue -and
+        $clickAt -ne [DateTimeOffset]::MinValue -and
+        $finalizedAt -ne [DateTimeOffset]::MinValue -and
+        $nativeDownAt -le $previewDownAt -and
+        $previewDownAt -le $clickAt -and
+        $clickAt -le $keyDownAt -and
+        $keyDownAt -le $nativeUpAt -and
+        $nativeUpAt -le $finalizedAt
 }
 
 function Get-TransitionForAttempt {
@@ -1317,6 +1390,22 @@ foreach ($document in $pointerDocuments) {
 }
 $retryMouseRecords = @()
 $retryKeyboardRecords = @()
+$retryKeyboardContract = Get-PropertyValue $contract.retry_physical_activation 'keyboard'
+$retryAllowedKeys = @(Get-PropertyValue $retryKeyboardContract 'allowed_keys')
+$retryRequiredWpfEvents = @(Get-PropertyValue $retryKeyboardContract 'required_layer2_events')
+$retryForbiddenWpfEvents = @(Get-PropertyValue $retryKeyboardContract 'forbidden_layer2_events')
+$retryUsesKeyDownNativeUpFinalization =
+    $retryAllowedKeys.Count -eq 1 -and
+    (Test-ExactString $retryAllowedKeys[0] 'Enter') -and
+    (Test-ExactString (Get-PropertyValue $retryKeyboardContract 'completion_phase') 'KeyDown') -and
+    (Test-TrueValue (Get-PropertyValue $retryKeyboardContract 'native_key_up_finalization_required')) -and
+    $retryRequiredWpfEvents.Count -eq 2 -and
+    (Test-ExactString $retryRequiredWpfEvents[0] 'PreviewKeyDown') -and
+    (Test-ExactString $retryRequiredWpfEvents[1] 'KeyDown') -and
+    $retryForbiddenWpfEvents.Count -eq 2 -and
+    (Test-ExactString $retryForbiddenWpfEvents[0] 'PreviewKeyUp') -and
+    (Test-ExactString $retryForbiddenWpfEvents[1] 'KeyUp')
+Require-True $retryUsesKeyDownNativeUpFinalization 'Retry keyboard contract must require Enter KeyDown completion, exactly the two WPF down events, forbid both WPF up events, and require native-key-up finalization.'
 $retryStateIdentity = @($stateSummaries | Where-Object { Test-ExactString $_.Scene.session_id 'retry-session' }) | Select-Object -First 1
 $retryManualSession = $manualSessionsById['retry-session']
 foreach ($document in $pointerDocuments) {
@@ -1330,7 +1419,7 @@ foreach ($document in $pointerDocuments) {
     }
     foreach ($attempt in @(Get-PropertyValue $document.Json 'key_attempts')) {
         foreach ($allowedKey in @($contract.retry_physical_activation.keyboard.allowed_keys)) {
-            if (Test-KeyInputLayers $attempt ([string]$contract.retry_physical_activation.automation_id) ([string]$allowedKey) @($contract.retry_physical_activation.keyboard.required_layer2_events)) {
+            if (Test-KeyInputLayers $attempt ([string]$contract.retry_physical_activation.automation_id) ([string]$allowedKey) @($contract.retry_physical_activation.keyboard.required_layer2_events) $retryUsesKeyDownNativeUpFinalization) {
                 $retryKeyboardRecords += [pscustomobject]@{ Document = $document; Attempt = $attempt; Mode = 'keyboard' }
             }
         }
