@@ -1064,20 +1064,45 @@ function Capture-WindowEvidence {
         '-ProcessId', [string]$Session.Process.Id,
         '-ExecutablePath', (Quote-ProcessArgument $script:resolvedExecutable),
         '-WindowTitle', (Quote-ProcessArgument $windowTitle),
+        '-ExpectedWindowHwnd', $Session.Hwnd,
         '-OutputRoot', (Quote-ProcessArgument $OutputDirectory),
         '-CaptureName', $CaptureName,
-        '-CaptureMethod', 'ScreenPixels'
+        '-CaptureMethod', 'ScreenPixels',
+        '-PreCaptureTimeoutSeconds', [string]$StepTimeoutSeconds,
+        '-PreCaptureStableMilliseconds', [string]$ForegroundStableMilliseconds
     )
+    Write-Host ("自动捕获 {0}：只读等待同一窗口恢复前台并连续稳定；不会自动抢焦点。" -f $CaptureName) -ForegroundColor DarkYellow
     $exitCode = Invoke-HiddenProcess $shellPath $arguments (Join-Path $logs "$CaptureName.stdout.txt") (Join-Path $logs "$CaptureName.stderr.txt")
     if ($exitCode -ne 0) { throw "自动捕获 '$CaptureName' 失败，exit=$exitCode。软件必须保持前台且窗口稳定。" }
     $recordPath = Join-Path $OutputDirectory "$CaptureName.window-evidence.json"
     $record = Read-JsonFileSafely $recordPath
     if ($null -eq $record) { throw "捕获没有生成窗口证据：$recordPath" }
+    $preCaptureGate = Get-PropertyValue $record 'pre_capture_gate'
     if ([int](Get-NestedValue $record @('process', 'process_id')) -ne $Session.Process.Id -or
+        -not (Test-PropertyPresent $record 'ui_input_generated') -or
+        -not [object]::Equals((Get-PropertyValue $record 'ui_input_generated'), $false) -or
+        -not (Test-PropertyPresent $record 'synthetic_ui_events_generated') -or
+        -not [object]::Equals((Get-PropertyValue $record 'synthetic_ui_events_generated'), $false) -or
+        $null -eq $preCaptureGate -or
+        -not (Test-PropertyPresent $preCaptureGate 'passed') -or
+        -not [object]::Equals((Get-PropertyValue $preCaptureGate 'passed'), $true) -or
+        -not (Test-PropertyPresent $preCaptureGate 'exact_original_hwnd_required') -or
+        -not [object]::Equals((Get-PropertyValue $preCaptureGate 'exact_original_hwnd_required'), $true) -or
+        -not (Test-PropertyPresent $preCaptureGate 'ui_activation_attempted') -or
+        -not [object]::Equals((Get-PropertyValue $preCaptureGate 'ui_activation_attempted'), $false) -or
+        [int](Get-PropertyValue $preCaptureGate 'timeout_seconds') -ne $StepTimeoutSeconds -or
+        [int](Get-PropertyValue $preCaptureGate 'required_stable_milliseconds') -ne $ForegroundStableMilliseconds -or
+        [string](Get-NestedValue $record @('expected', 'window_hwnd')) -cne $Session.Hwnd -or
         [string](Get-NestedValue $record @('window_before_capture', 'hwnd')) -cne $Session.Hwnd -or
+        [string](Get-NestedValue $record @('window_after_capture', 'hwnd')) -cne $Session.Hwnd -or
+        -not [bool](Get-NestedValue $record @('window_before_capture', 'is_foreground')) -or
+        -not [bool](Get-NestedValue $record @('window_after_capture', 'is_foreground')) -or
+        [bool](Get-NestedValue $record @('window_before_capture', 'is_minimized')) -or
+        [bool](Get-NestedValue $record @('window_after_capture', 'is_minimized')) -or
+        -not [bool](Get-NestedValue $record @('verification', 'passed')) -or
         -not [string]::Equals([string](Get-NestedValue $record @('process', 'executable_path')), $script:resolvedExecutable, [StringComparison]::OrdinalIgnoreCase) -or
         [string](Get-NestedValue $record @('process', 'executable_sha256')) -cne $script:executableHash) {
-        throw "捕获 '$CaptureName' 的 PID/HWND/路径/哈希与本会话不一致。"
+        throw "捕获 '$CaptureName' 的稳定门/零输入声明/PID/HWND/前台状态/路径/哈希/验证结果与本会话不一致。"
     }
     Add-ManifestEvent "capture-$CaptureName" 'captured' '后台自动捕获' $recordPath
     return $record

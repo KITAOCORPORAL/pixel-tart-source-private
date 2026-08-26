@@ -401,6 +401,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
     [TestMethod]
     [DataRow("pid")]
     [DataRow("hwnd")]
+    [DataRow("expected-hwnd")]
     public void ValidatorRejectsDpiInteractionFromAnotherProcessOrWindow(string identityPart)
     {
         using var fixture = CapturedFixture.Create();
@@ -409,7 +410,34 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
 
         Assert.AreNotEqual(0, result.ExitCode, result.Output);
-        StringAssert.Contains(result.Output, identityPart == "pid" ? "changed PID" : "changed HWND");
+        StringAssert.Contains(result.Output, identityPart switch
+        {
+            "pid" => "changed PID",
+            "hwnd" => "changed HWND",
+            _ => "expected session HWND differs"
+        });
+    }
+
+    [TestMethod]
+    [DataRow("missing-ui-input", "missing ui_input_generated")]
+    [DataRow("synthetic-events-true", "synthetic_ui_events_generated must be false")]
+    [DataRow("missing-gate", "missing pre_capture_gate")]
+    [DataRow("gate-failed", "pre_capture_gate.passed must be true")]
+    [DataRow("activation-attempted", "ui_activation_attempted")]
+    [DataRow("replacement-hwnd-allowed", "exact_original_hwnd")]
+    [DataRow("elapsed-too-short", "elapsed time is shorter")]
+    [DataRow("stable-longer-than-timeout", "pre_capture_gate requires")]
+    [DataRow("timeout-out-of-range", "timeout_seconds")]
+    [DataRow("negative-poll-count", "poll_count")]
+    public void ValidatorRejectsMissingOrTamperedPreCaptureGateContract(string mutation, string expectedFailure)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.CorruptFirstWindowCaptureContract(mutation);
+
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, expectedFailure);
     }
 
     [TestMethod]
@@ -690,8 +718,56 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                     root["window_before_capture"]!["hwnd"] = "0xBAD";
                     root["window_after_capture"]!["hwnd"] = "0xBAD";
                     break;
+                case "expected-hwnd":
+                    root["expected"]!["window_hwnd"] = "0xBAD";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(identityPart), identityPart, "Unknown window identity mutation.");
+            }
+            WriteObject(path, root);
+        }
+
+        public void CorruptFirstWindowCaptureContract(string mutation)
+        {
+            var path = Path.Combine(RunRoot, "dpi-1366x768-100pct-interaction.window-evidence.json");
+            var root = ReadObject(path);
+            switch (mutation)
+            {
+                case "missing-ui-input":
+                    root.Remove("ui_input_generated");
+                    break;
+                case "synthetic-events-true":
+                    root["synthetic_ui_events_generated"] = true;
+                    break;
+                case "missing-gate":
+                    root.Remove("pre_capture_gate");
+                    break;
+                case "gate-failed":
+                    root["pre_capture_gate"]!["passed"] = false;
+                    break;
+                case "activation-attempted":
+                    root["pre_capture_gate"]!["ui_activation_attempted"] = true;
+                    break;
+                case "replacement-hwnd-allowed":
+                    root["pre_capture_gate"]!["exact_original_hwnd_required"] = false;
+                    break;
+                case "elapsed-too-short":
+                    root["pre_capture_gate"]!["elapsed_milliseconds"] = 1199;
+                    break;
+                case "stable-longer-than-timeout":
+                    root["pre_capture_gate"]!["timeout_seconds"] = 1;
+                    root["pre_capture_gate"]!["required_stable_milliseconds"] = 5000;
+                    root["pre_capture_gate"]!["elapsed_milliseconds"] = 5000;
+                    root["pre_capture_gate"]!["poll_count"] = 25;
+                    break;
+                case "timeout-out-of-range":
+                    root["pre_capture_gate"]!["timeout_seconds"] = 0;
+                    break;
+                case "negative-poll-count":
+                    root["pre_capture_gate"]!["poll_count"] = -1;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mutation), mutation, "Unknown pre-capture gate mutation.");
             }
             WriteObject(path, root);
         }
@@ -1146,7 +1222,17 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("captured_at_utc", capturedAt.ToString("O")),
                 ("ui_input_generated", false),
                 ("synthetic_ui_events_generated", false),
-                ("expected", D(("process_id", processId), ("executable_path", ExecutablePath), ("window_title", WindowTitle))),
+                ("pre_capture_gate", D(
+                    ("timeout_seconds", 300),
+                    ("required_stable_milliseconds", 1200),
+                    ("elapsed_milliseconds", 1400),
+                    ("poll_count", 7),
+                    ("foreground_loss_observed", false),
+                    ("unexpected_auxiliary_window_observed", false),
+                    ("exact_original_hwnd_required", true),
+                    ("ui_activation_attempted", false),
+                    ("passed", true))),
+                ("expected", D(("process_id", processId), ("executable_path", ExecutablePath), ("window_title", WindowTitle), ("window_hwnd", hwnd))),
                 ("process", D(
                     ("process_id", processId),
                     ("executable_path", ExecutablePath),

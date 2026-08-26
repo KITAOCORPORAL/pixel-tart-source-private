@@ -119,6 +119,46 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
+    public void CaptureDelegatesBoundedForegroundRestabilizationToOneStrictHelperInvocation()
+    {
+        var script = Text();
+        var capture = Slice(script, "function Capture-WindowEvidence", "function Get-NewTransitionWidth");
+
+        ContainsAll(
+            capture,
+            "'-ExpectedWindowHwnd', $Session.Hwnd",
+            "'-PreCaptureTimeoutSeconds', [string]$StepTimeoutSeconds",
+            "'-PreCaptureStableMilliseconds', [string]$ForegroundStableMilliseconds",
+            "只读等待同一窗口恢复前台并连续稳定；不会自动抢焦点",
+            "Invoke-HiddenProcess $shellPath $arguments",
+            "if ($exitCode -ne 0)",
+            "Get-NestedValue $record @('expected', 'window_hwnd')",
+            "Get-NestedValue $record @('window_after_capture', 'hwnd')",
+            "Get-NestedValue $record @('verification', 'passed')",
+            "Test-PropertyPresent $record 'ui_input_generated'",
+            "Test-PropertyPresent $record 'synthetic_ui_events_generated'",
+            "Test-PropertyPresent $preCaptureGate 'passed'",
+            "Test-PropertyPresent $preCaptureGate 'exact_original_hwnd_required'",
+            "Test-PropertyPresent $preCaptureGate 'ui_activation_attempted'",
+            "Get-PropertyValue $preCaptureGate 'timeout_seconds') -ne $StepTimeoutSeconds",
+            "Get-PropertyValue $preCaptureGate 'required_stable_milliseconds') -ne $ForegroundStableMilliseconds");
+        Assert.AreEqual(1, CountOccurrences(capture, "Invoke-HiddenProcess $shellPath $arguments"));
+        Assert.DoesNotContain("Remove-Item", capture, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("SetForegroundWindow", capture, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [TestMethod]
+    public void LoadingEvidenceMustCompleteBeforeTheRetryReleaseGateIsWritten()
+    {
+        var script = Text();
+        var loadingCapture = script.IndexOf("Capture-WindowEvidence $retry '09-loading-manual-v2'", StringComparison.Ordinal);
+        var releaseWrite = script.IndexOf("Write-NewUtf8NoBom $releaseFile 'release'", StringComparison.Ordinal);
+
+        Assert.IsGreaterThanOrEqualTo(0, loadingCapture);
+        Assert.IsGreaterThan(loadingCapture, releaseWrite);
+    }
+
+    [TestMethod]
     public void RegularAndRestartSessionsUseAcceptanceRouteWithoutPrimaryNavigationClick()
     {
         var script = Text();

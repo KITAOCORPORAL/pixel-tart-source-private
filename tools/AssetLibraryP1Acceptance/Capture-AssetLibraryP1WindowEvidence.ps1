@@ -11,6 +11,10 @@ param(
     [string]$WindowTitle,
 
     [Parameter(Mandatory = $true)]
+    [ValidatePattern('^0x[0-9A-F]+$')]
+    [string]$ExpectedWindowHwnd,
+
+    [Parameter(Mandatory = $true)]
     [string]$OutputRoot,
 
     [Parameter(Mandatory = $true)]
@@ -18,7 +22,13 @@ param(
     [string]$CaptureName,
 
     [ValidateSet('ScreenPixels', 'PrintWindow')]
-    [string]$CaptureMethod = 'ScreenPixels'
+    [string]$CaptureMethod = 'ScreenPixels',
+
+    [ValidateRange(1, 1800)]
+    [int]$PreCaptureTimeoutSeconds = 15,
+
+    [ValidateRange(100, 5000)]
+    [int]$PreCaptureStableMilliseconds = 1200
 )
 
 $ErrorActionPreference = 'Stop'
@@ -360,50 +370,17 @@ if ($matchingTitleHandles.Count -ne 1) {
 
 $allowedAuxiliaryWindowClasses = @('SoPY_Status', 'SoPY_Comp', 'IME', 'MSCTFIME UI')
 $windowHandle = [IntPtr]$matchingTitleHandles[0]
-$auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
-$unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
-$initialUnexpectedAuxiliaryWindows = @($unexpectedAuxiliaryWindows)
-$auxiliaryWindowQuietWaitStartedAt = [DateTimeOffset]::UtcNow
-$auxiliaryWindowQuietWaitPollCount = 0
-$auxiliaryWindowQuietWaitTimeout = [TimeSpan]::FromSeconds(15)
-while ($unexpectedAuxiliaryWindows.Count -ne 0 -and
-       ([DateTimeOffset]::UtcNow - $auxiliaryWindowQuietWaitStartedAt) -lt $auxiliaryWindowQuietWaitTimeout) {
-    # A WPF ToolTip/Popup is a real visible top-level HWND and may appear after the
-    # packet's main-window stability probe. Do not allowlist its dynamic class or
-    # capture through it. Wait boundedly for every unapproved HWND to disappear,
-    # while continuously requiring the exact main HWND to remain foreground.
-    Start-Sleep -Milliseconds 200
-    $auxiliaryWindowQuietWaitPollCount++
-    $visibleHandles = @([AssetLibraryP1CaptureNative]::GetVisibleProcessWindows([uint32]$ProcessId))
-    $matchingTitleHandles = @($visibleHandles | Where-Object {
-            [string]::Equals([AssetLibraryP1CaptureNative]::GetWindowTitle($_), $WindowTitle, [StringComparison]::Ordinal)
-        })
-    if ($matchingTitleHandles.Count -ne 1 -or [IntPtr]$matchingTitleHandles[0] -ne $windowHandle) {
-        throw "The exact main HWND changed while waiting for auxiliary windows to close for PID $ProcessId."
-    }
-    if ([AssetLibraryP1CaptureNative]::GetForegroundWindow() -ne $windowHandle) {
-        throw "The exact target window lost foreground while waiting for auxiliary windows to close: $(ConvertTo-HexHandle -Handle $windowHandle)."
-    }
-    $auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
-    $unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
+$observedWindowHwnd = ConvertTo-HexHandle -Handle $windowHandle
+if ($observedWindowHwnd -cne $ExpectedWindowHwnd) {
+    throw "The exact-title main HWND does not match the required session HWND. Expected '$ExpectedWindowHwnd'; observed '$observedWindowHwnd'."
 }
-$auxiliaryWindowQuietWaitMilliseconds = [Math]::Round(([DateTimeOffset]::UtcNow - $auxiliaryWindowQuietWaitStartedAt).TotalMilliseconds, 0)
-if ($unexpectedAuxiliaryWindows.Count -ne 0) {
-    throw "Unexpected visible auxiliary top-level window(s) remained after a bounded 15-second quiet wait for PID ${ProcessId}: $($unexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
+$resolvedOutputRoot = [IO.Path]::GetFullPath($OutputRoot)
+[IO.Directory]::CreateDirectory($resolvedOutputRoot) | Out-Null
+$screenshotPath = Join-Path $resolvedOutputRoot "$CaptureName.png"
+$manifestPath = Join-Path $resolvedOutputRoot "$CaptureName.window-evidence.json"
+if ((Test-Path -LiteralPath $screenshotPath) -or (Test-Path -LiteralPath $manifestPath)) {
+    throw "Capture output already exists; choose a new CaptureName. PNG='$screenshotPath'; manifest='$manifestPath'."
 }
-
-$before = Get-WindowObservation -Handle $windowHandle
-if ($before.title -cne $WindowTitle) {
-    throw "Window title mismatch. Expected '$WindowTitle'; observed '$($before.title)'."
-}
-if (-not $before.is_foreground) {
-    throw "The exact target window is not the foreground window: $($before.hwnd)."
-}
-if ($before.is_minimized) {
-    throw "The exact target window is minimized: $($before.hwnd)."
-}
-
-$displayBefore = Get-DisplayObservation -Handle $windowHandle
 $displayControllers = @(Get-CimInstance Win32_VideoController | ForEach-Object {
         [ordered]@{
             name = [string]$_.Name
@@ -413,12 +390,101 @@ $displayControllers = @(Get-CimInstance Win32_VideoController | ForEach-Object {
         }
     })
 
-$resolvedOutputRoot = [IO.Path]::GetFullPath($OutputRoot)
-[IO.Directory]::CreateDirectory($resolvedOutputRoot) | Out-Null
-$screenshotPath = Join-Path $resolvedOutputRoot "$CaptureName.png"
-$manifestPath = Join-Path $resolvedOutputRoot "$CaptureName.window-evidence.json"
-if ((Test-Path -LiteralPath $screenshotPath) -or (Test-Path -LiteralPath $manifestPath)) {
-    throw "Capture output already exists; choose a new CaptureName. PNG='$screenshotPath'; manifest='$manifestPath'."
+# The packet proves a stable foreground window before launching this isolated
+# helper, but the operator may return to the chat during process startup. Wait
+# read-only for the original exact HWND to become foreground again. Never
+# activate it, generate input, accept a replacement HWND, or create evidence
+# until every condition has remained stable continuously.
+$preCaptureGateStartedAt = [DateTimeOffset]::UtcNow
+$preCaptureGateDeadline = $preCaptureGateStartedAt.AddSeconds($PreCaptureTimeoutSeconds)
+$preCaptureGateStableSince = $null
+$preCaptureGateStableSignature = ''
+$preCaptureGatePollCount = 0
+$foregroundLossObservedBeforeCapture = $false
+$unexpectedAuxiliaryObservedBeforeCapture = $false
+$preCaptureGatePassed = $false
+$before = $null
+$auxiliaryWindows = @()
+$unexpectedAuxiliaryWindows = @()
+$initialUnexpectedAuxiliaryWindows = @()
+while ([DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline) {
+    $targetProcess.Refresh()
+    if ($targetProcess.HasExited) { throw "Target process exited while waiting for pre-capture stability: $ProcessId" }
+    $currentExecutablePath = [IO.Path]::GetFullPath($targetProcess.Path)
+    if (-not [string]::Equals($currentExecutablePath, $expectedExecutablePath, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "PID $ProcessId executable changed while waiting for pre-capture stability. Expected '$expectedExecutablePath'; observed '$currentExecutablePath'."
+    }
+
+    $visibleHandles = @([AssetLibraryP1CaptureNative]::GetVisibleProcessWindows([uint32]$ProcessId))
+    $matchingTitleHandles = @($visibleHandles | Where-Object {
+            [string]::Equals([AssetLibraryP1CaptureNative]::GetWindowTitle($_), $WindowTitle, [StringComparison]::Ordinal)
+        })
+    if ($matchingTitleHandles.Count -ne 1 -or [IntPtr]$matchingTitleHandles[0] -ne $windowHandle) {
+        throw "The exact main HWND changed while waiting for pre-capture stability for PID $ProcessId."
+    }
+
+    $candidate = Get-WindowObservation -Handle $windowHandle
+    if ($candidate.title -cne $WindowTitle) {
+        throw "Window title changed while waiting for pre-capture stability. Expected '$WindowTitle'; observed '$($candidate.title)'."
+    }
+    if ($candidate.is_minimized) {
+        throw "The exact target window is minimized: $($candidate.hwnd)."
+    }
+
+    $auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
+    $unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
+    if ($unexpectedAuxiliaryWindows.Count -ne 0 -and -not $unexpectedAuxiliaryObservedBeforeCapture) {
+        $unexpectedAuxiliaryObservedBeforeCapture = $true
+        $initialUnexpectedAuxiliaryWindows = @($unexpectedAuxiliaryWindows)
+    }
+
+    $isForeground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $windowHandle
+    if (-not $isForeground) { $foregroundLossObservedBeforeCapture = $true }
+    if ($isForeground -and $unexpectedAuxiliaryWindows.Count -eq 0) {
+        $signature = "$($candidate.hwnd)|$($candidate.rect_physical_pixels.left),$($candidate.rect_physical_pixels.top),$($candidate.rect_physical_pixels.right),$($candidate.rect_physical_pixels.bottom)|$($candidate.dpi)"
+        if ($signature -cne $preCaptureGateStableSignature) {
+            $preCaptureGateStableSignature = $signature
+            $preCaptureGateStableSince = [DateTimeOffset]::UtcNow
+        }
+        elseif ($null -ne $preCaptureGateStableSince -and
+                ([DateTimeOffset]::UtcNow - $preCaptureGateStableSince).TotalMilliseconds -ge $PreCaptureStableMilliseconds) {
+            $before = $candidate
+            $preCaptureGatePassed = $true
+            break
+        }
+    }
+    else {
+        $preCaptureGateStableSince = $null
+        $preCaptureGateStableSignature = ''
+    }
+
+    Start-Sleep -Milliseconds 200
+    $preCaptureGatePollCount++
+}
+$preCaptureGateElapsedMilliseconds = [Math]::Round(([DateTimeOffset]::UtcNow - $preCaptureGateStartedAt).TotalMilliseconds, 0)
+$auxiliaryWindowQuietWaitMilliseconds = $preCaptureGateElapsedMilliseconds
+$auxiliaryWindowQuietWaitPollCount = $preCaptureGatePollCount
+if (-not $preCaptureGatePassed) {
+    if ($unexpectedAuxiliaryWindows.Count -ne 0) {
+        throw "Unexpected visible auxiliary top-level window(s) remained after a bounded $PreCaptureTimeoutSeconds-second pre-capture wait for PID ${ProcessId}: $($unexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
+    }
+    throw "The exact target window did not remain foreground and stable for $PreCaptureStableMilliseconds ms within the bounded $PreCaptureTimeoutSeconds-second pre-capture wait: $(ConvertTo-HexHandle -Handle $windowHandle)."
+}
+
+$preCaptureGateObservation = $before
+$displayBefore = Get-DisplayObservation -Handle $windowHandle
+$before = Get-WindowObservation -Handle $windowHandle
+if ($before.title -cne $WindowTitle) {
+    throw "Window title mismatch. Expected '$WindowTitle'; observed '$($before.title)'."
+}
+if (-not $before.is_foreground) {
+    throw "The exact target window is not the foreground window immediately before pixel capture: $($before.hwnd)."
+}
+if ($before.is_minimized) {
+    throw "The exact target window is minimized: $($before.hwnd)."
+}
+if (-not (Test-SameWindowObservation -Before $preCaptureGateObservation -After $before)) {
+    throw "The exact target window changed after the pre-capture stability gate and before pixel capture: $($before.hwnd)."
 }
 
 $captureWidth = [int]$before.rect_physical_pixels.width
@@ -497,7 +563,7 @@ $validPngSignature = $pngHeader.Length -ge 8 -and
     $pngHeader[0] -eq 137 -and $pngHeader[1] -eq 80 -and $pngHeader[2] -eq 78 -and $pngHeader[3] -eq 71 -and
     $pngHeader[4] -eq 13 -and $pngHeader[5] -eq 10 -and $pngHeader[6] -eq 26 -and $pngHeader[7] -eq 10
 
-$verified = $stableWindow -and $stableDisplay -and $stableProcessPopulation -and
+$verified = $preCaptureGatePassed -and $stableWindow -and $stableDisplay -and $stableProcessPopulation -and
     $unexpectedAuxiliaryWindowsAfter.Count -eq 0 -and $validPngSignature -and $screenshotInfo.Length -gt 8
 $captureMethodDescription = if ($CaptureMethod -eq 'ScreenPixels') {
     'System.Drawing.Graphics.CopyFromScreen'
@@ -517,6 +583,7 @@ $manifest = [ordered]@{
         process_id = $ProcessId
         executable_path = $expectedExecutablePath
         window_title = $WindowTitle
+        window_hwnd = $ExpectedWindowHwnd
         global_matching_executable_process_count = 1
     }
     process = [ordered]@{
@@ -550,6 +617,17 @@ $manifest = [ordered]@{
     transient_unexpected_auxiliary_windows_before_capture = $initialUnexpectedAuxiliaryWindows
     auxiliary_window_quiet_wait_milliseconds = $auxiliaryWindowQuietWaitMilliseconds
     auxiliary_window_quiet_wait_poll_count = $auxiliaryWindowQuietWaitPollCount
+    pre_capture_gate = [ordered]@{
+        timeout_seconds = $PreCaptureTimeoutSeconds
+        required_stable_milliseconds = $PreCaptureStableMilliseconds
+        elapsed_milliseconds = $preCaptureGateElapsedMilliseconds
+        poll_count = $preCaptureGatePollCount
+        foreground_loss_observed = [bool]$foregroundLossObservedBeforeCapture
+        unexpected_auxiliary_window_observed = [bool]$unexpectedAuxiliaryObservedBeforeCapture
+        exact_original_hwnd_required = $true
+        ui_activation_attempted = $false
+        passed = [bool]$preCaptureGatePassed
+    }
     unexpected_auxiliary_window_count = $unexpectedAuxiliaryWindows.Count
     window_before_capture = $before
     window_after_capture = $after

@@ -324,6 +324,7 @@ function Get-WindowRecordSummary {
     $expectedExecutable = Get-NestedValue $json @('expected', 'executable_path')
     $observedExecutable = Get-NestedValue $json @('process', 'executable_path')
     $expectedTitle = Get-NestedValue $json @('expected', 'window_title')
+    $expectedHwnd = Get-NestedValue $json @('expected', 'window_hwnd')
     $beforeTitle = Get-NestedValue $json @('window_before_capture', 'title')
     $afterTitle = Get-NestedValue $json @('window_after_capture', 'title')
     $beforeHwnd = Get-NestedValue $json @('window_before_capture', 'hwnd')
@@ -332,11 +333,32 @@ function Get-WindowRecordSummary {
     $expectedProcessId = Get-NestedValue $json @('expected', 'process_id')
     $beforeDpi = Get-NestedValue $json @('window_before_capture', 'dpi')
     $afterDpi = Get-NestedValue $json @('window_after_capture', 'dpi')
+    $preCaptureGate = Get-PropertyValue $json 'pre_capture_gate'
 
     Require-True (Test-ExactString (Get-PropertyValue $json 'schema') $script:contract.window_evidence_schema) "$context has the wrong schema."
     Require-True (-not [string]::IsNullOrWhiteSpace([string]$captureName)) "$context is missing capture_name."
-    Require-True (-not (Test-TrueValue (Get-PropertyValue $json 'ui_input_generated'))) "$context claims that it generated UI input."
-    Require-True (-not (Test-TrueValue (Get-PropertyValue $json 'synthetic_ui_events_generated'))) "$context claims that it generated synthetic UI events."
+    Require-True (Test-PropertyPresent $json 'ui_input_generated') "$context is missing ui_input_generated."
+    Require-Equal (Get-PropertyValue $json 'ui_input_generated') $false "$context ui_input_generated must be false."
+    Require-True (Test-PropertyPresent $json 'synthetic_ui_events_generated') "$context is missing synthetic_ui_events_generated."
+    Require-Equal (Get-PropertyValue $json 'synthetic_ui_events_generated') $false "$context synthetic_ui_events_generated must be false."
+    Require-True ($null -ne $preCaptureGate) "$context is missing pre_capture_gate."
+    if ($null -ne $preCaptureGate) {
+        foreach ($field in @('timeout_seconds', 'required_stable_milliseconds', 'elapsed_milliseconds', 'poll_count', 'passed', 'exact_original_hwnd_required', 'ui_activation_attempted')) {
+            Require-True (Test-PropertyPresent $preCaptureGate $field) "$context pre_capture_gate is missing $field."
+        }
+        $gateTimeoutSeconds = Get-PropertyValue $preCaptureGate 'timeout_seconds'
+        $gateStableMilliseconds = Get-PropertyValue $preCaptureGate 'required_stable_milliseconds'
+        $gateElapsedMilliseconds = Get-PropertyValue $preCaptureGate 'elapsed_milliseconds'
+        $gatePollCount = Get-PropertyValue $preCaptureGate 'poll_count'
+        Require-True ($null -ne $gateTimeoutSeconds -and [int]$gateTimeoutSeconds -ge 1 -and [int]$gateTimeoutSeconds -le 1800) "$context pre_capture_gate.timeout_seconds is outside the contract range."
+        Require-True ($null -ne $gateStableMilliseconds -and [int]$gateStableMilliseconds -ge 100 -and [int]$gateStableMilliseconds -le 5000) "$context pre_capture_gate.required_stable_milliseconds is outside the contract range."
+        Require-True ($null -ne $gateTimeoutSeconds -and $null -ne $gateStableMilliseconds -and [int]$gateStableMilliseconds -le ([int]$gateTimeoutSeconds * 1000)) "$context pre_capture_gate requires a stable interval longer than its timeout."
+        Require-True ($null -ne $gateElapsedMilliseconds -and [double]$gateElapsedMilliseconds -ge [double]$gateStableMilliseconds) "$context pre_capture_gate elapsed time is shorter than its required stable interval."
+        Require-True ($null -ne $gatePollCount -and [int]$gatePollCount -ge 1) "$context pre_capture_gate.poll_count proves no stability polling."
+        Require-Equal (Get-PropertyValue $preCaptureGate 'passed') $true "$context pre_capture_gate.passed must be true."
+        Require-Equal (Get-PropertyValue $preCaptureGate 'exact_original_hwnd_required') $true "$context pre_capture_gate.exact_original_hwnd_required must be true."
+        Require-Equal (Get-PropertyValue $preCaptureGate 'ui_activation_attempted') $false "$context pre_capture_gate.ui_activation_attempted must be false."
+    }
     Require-Equal $processId $expectedProcessId "$context PID identity mismatch."
     Require-True (Test-ExactString $expectedExecutable $observedExecutable) "$context executable path identity mismatch."
     Require-True (Test-ExactString ([IO.Path]::GetFileName([string]$observedExecutable)) $script:contract.expected_executable_name) "$context executable name is not the contract executable."
@@ -345,6 +367,8 @@ function Get-WindowRecordSummary {
     Require-True (Test-ExactString $beforeTitle $expectedTitle) "$context before-capture title mismatch."
     Require-True (Test-ExactString $afterTitle $expectedTitle) "$context after-capture title mismatch."
     Require-True (-not [string]::IsNullOrWhiteSpace([string]$beforeHwnd)) "$context is missing HWND."
+    Require-True (-not [string]::IsNullOrWhiteSpace([string]$expectedHwnd)) "$context is missing expected session HWND."
+    Require-True (Test-ExactString $expectedHwnd $beforeHwnd) "$context expected session HWND differs from the captured HWND."
     Require-True (Test-ExactString $beforeHwnd $afterHwnd) "$context HWND changed during capture."
     Require-Equal $beforeDpi $afterDpi "$context DPI changed during capture."
     foreach ($field in @('left', 'top', 'right', 'bottom', 'width', 'height')) {
@@ -898,6 +922,7 @@ foreach ($record in $windowRecords) {
     Require-True (Test-SameFullPath ([string](Get-NestedValue $record.Json @('expected', 'executable_path'))) $trustedExecutablePath) "Window evidence '$($record.Name)' expected executable path differs from build authority."
     Require-True (Test-ExactString (Get-NestedValue $record.Json @('process', 'executable_sha256')) $trustedExecutableHash) "Window evidence '$($record.Name)' executable hash differs from build authority."
     if ($sessionMatches.Count -eq 1) {
+        Require-True (Test-ExactString (Get-NestedValue $record.Json @('expected', 'window_hwnd')) (Get-PropertyValue $sessionMatches[0] 'window_hwnd')) "Window evidence '$($record.Name)' expected HWND differs from its manual-run session."
         Require-True (Test-ExactString (Get-NestedValue $record.Json @('window_before_capture', 'hwnd')) (Get-PropertyValue $sessionMatches[0] 'window_hwnd')) "Window evidence '$($record.Name)' HWND differs from its manual-run session."
         Require-True (Test-ExactString (Get-NestedValue $record.Json @('window_after_capture', 'hwnd')) (Get-PropertyValue $sessionMatches[0] 'window_hwnd')) "Window evidence '$($record.Name)' post-capture HWND differs from its manual-run session."
     }
