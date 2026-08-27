@@ -209,7 +209,7 @@ function Show-Instruction {
     Write-Host ''
     Write-Host (([string]::Concat([char]0x7B2C, ' {0} ', [char]0x6B65, [char]0xFF08, [char]0x53EA, [char]0x505A, [char]0x8FD9, [char]0x4E00, [char]0x4E2A, [char]0x52A8, [char]0x4F5C, [char]0xFF09)) -f $script:instructionNumber) -ForegroundColor Yellow
     Write-Host $Instruction -ForegroundColor Cyan
-    Write-Host ([string]::Concat([char]0x5B8C, [char]0x6210, [char]0x540E, [char]0x4E0D, [char]0x8981, [char]0x5207, [char]0x56DE, ' PowerShell; ', [char]0x811A, [char]0x672C, [char]0x4F1A, [char]0x5728, [char]0x540E, [char]0x53F0, [char]0x81EA, [char]0x52A8, [char]0x8BC6, [char]0x522B, [char]0x5E76, [char]0x7EE7, [char]0x7EED, [char]0x3002)) -ForegroundColor DarkGray
+    Write-Host '完成后不要切回 PowerShell 或聊天；保持步骤要求的窗口状态，脚本会在后台自动识别并继续。' -ForegroundColor DarkGray
     Add-ManifestEvent $StepId 'waiting' $Instruction ''
 }
 
@@ -409,6 +409,7 @@ function Wait-ForStep {
         [Parameter(Mandatory = $true)][scriptblock]$Probe,
         $Session,
         [bool]$RequireWindow = $true,
+        [bool]$RequireForeground = $true,
         [bool]$RequireMaximized = $false
     )
     Show-Instruction $StepId $Instruction
@@ -430,9 +431,10 @@ function Wait-ForStep {
         $windowSignature = ''
         if ($RequireWindow) {
             $window = Get-WindowObservation $Session.Process.Id
-            $windowReady = $null -ne $window -and $window.Foreground -and -not $window.Minimized -and
+            $windowReady = $null -ne $window -and -not $window.Minimized -and
                 [string]::Equals($window.Path, $script:resolvedExecutable, [StringComparison]::OrdinalIgnoreCase) -and
                 $window.Hwnd -ceq $Session.Hwnd
+            if ($RequireForeground) { $windowReady = $windowReady -and $window.Foreground }
             if ($RequireMaximized) { $windowReady = $windowReady -and $window.Maximized }
             if ($null -ne $window) { $windowSignature = "$($window.Hwnd)|$($window.Rect)|$($window.Dpi)|$($window.Maximized)" }
         }
@@ -1377,7 +1379,7 @@ function Invoke-RealRun {
     $firstRoot = Join-Path $script:runRoot 'sessions\first-empty'
     $first = Start-AcceptanceSession 'first-empty-session' $firstRoot 'first-empty/v1' ''
     $script:manifest['ui_started'] = $true; Save-Manifest
-    Wait-ForStep 'first-empty-ready' '将像素蛋挞置于前台并保持不动。首次空库准备好后会自动捕获 08。' -Session $first -Probe {
+    Wait-ForStep 'first-empty-ready' '首次空库准备好后，保持像素蛋挞窗口不动；截图程序会只读等待它位于前台并自动捕获 08。' -Session $first -RequireForeground:$false -Probe {
         $data = Get-StateSessionData $first.Root
         $passed = (Test-StateManifestIdentity $data $first 'first-empty/v1') -and
             (Test-StateTimelineComplete $data 'first-empty-session') -and (Test-ReadySnapshot $data 1)
@@ -1388,7 +1390,7 @@ function Invoke-RealRun {
 
     $retryRoot = Join-Path $script:runRoot 'sessions\retry'
     $retry = Start-AcceptanceSession 'retry-session' $retryRoot 'loading-error-retry-empty/v1' ''
-    Wait-ForStep 'retry-loading-held' '将像素蛋挞置于前台并保持不动。真实 Loading 屏障稳定后会自动捕获 09。' -Session $retry -Probe {
+    Wait-ForStep 'retry-loading-held' '真实 Loading 屏障准备好后，保持像素蛋挞窗口不动；截图程序会只读等待它位于前台并自动捕获 09。' -Session $retry -RequireForeground:$false -Probe {
         $data = Get-StateSessionData $retry.Root
         $waiting = @($data.Controller | Where-Object { [string](Get-PropertyValue $_ 'stage') -ceq 'loading-barrier-waiting' -and [int](Get-PropertyValue $_ 'attempt') -eq 1 })
         $loading = @($data.Snapshots | Where-Object { [string](Get-PropertyValue $_ 'stage') -ceq 'loading-entered' -and [int](Get-PropertyValue $_ 'attempt') -eq 1 })
@@ -1407,7 +1409,7 @@ function Invoke-RealRun {
 
     $retryBeforeError = Get-PhysicalDocument $retry.Root
     $retryPreErrorActivationIds = @(@(Get-QualifiedRetryActivations $retryBeforeError) | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'retry-error-ready' '将像素蛋挞保持在前台且不要点击任何控件。真实错误态稳定后会自动捕获 10。' -Session $retry -Probe {
+    Wait-ForStep 'retry-error-ready' '不要点击任何控件；真实错误态准备好后，截图程序会只读等待像素蛋挞位于前台并自动捕获 10。' -Session $retry -RequireForeground:$false -Probe {
         $data = Get-StateSessionData $retry.Root
         $document = Get-PhysicalDocument $retry.Root
         $contamination = Get-RetrySessionContamination $data $document $retry.Root $retryPreErrorActivationIds
@@ -1424,7 +1426,7 @@ function Invoke-RealRun {
     $retryBefore = Get-PhysicalDocument $retry.Root
     $retryBaselineIds = @(@(Get-PropertyValue $retryBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') }) +
         @(@(Get-PropertyValue $retryBefore 'attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手。' -Session $retry -Probe {
+    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手并保持窗口不动，无需回复。' -Session $retry -RequireForeground:$false -Probe {
         $data = Get-StateSessionData $retry.Root
         $document = Get-PhysicalDocument $retry.Root
         $import = Read-JsonFileSafely (Join-Path $retry.Root 'InputDiagnostics\asset-library-import.json')
@@ -1465,7 +1467,7 @@ function Invoke-RealRun {
     & $fixtureTool -OutputRoot $fixtureRoot | Out-Null
     $regularRoot = Join-Path $script:runRoot 'sessions\regular'
     $regular = Start-AcceptanceSession 'keyboard-session' $regularRoot '' (Join-Path $fixtureRoot 'images')
-    Wait-ForStep 'regular-direct-import' '将像素蛋挞置于前台并最大化；不要点击一级导航，验收直达会自动进入素材库。' -Session $regular -RequireMaximized:$true -Probe {
+    Wait-ForStep 'regular-direct-import' '将像素蛋挞最大化；不要点击一级导航，验收直达会自动进入素材库，截图程序随后只读等待窗口位于前台。' -Session $regular -RequireForeground:$false -RequireMaximized:$true -Probe {
         $route = Get-RouteSession $regular.Root
         $passed = (Test-RouteSessionApplied $route $regular 1) -and (Test-SyntheticImportComplete $regular.Root)
         New-ProbeResult $passed 'route-1-import-12' '普通验收直达已 applied，真实 synthetic import 0→12，网格 12 项'
@@ -1502,7 +1504,7 @@ function Invoke-RealRun {
     } | Out-Null
     $sliderBefore = Get-PhysicalDocument $regular.Root
     $sliderBaseline = @(@(Get-PropertyValue $sliderBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'thumbnail-right' '焦点保持在缩略图滑块，只按一次 Right。' -Session $regular -Probe {
+    Wait-ForStep 'thumbnail-right' '焦点保持在缩略图滑块，只按一次 Right；完成后停手并保持窗口不动，无需回复。' -Session $regular -RequireForeground:$false -Probe {
         $document = Get-PhysicalDocument $regular.Root
         $matches = @(Get-NewKeyTransitionMatches $document $sliderBaseline 'AssetThumbnailSizeSlider' 'Right' 'regular' 0 'increase')
         if ($matches.Count -gt 1) { return New-ProbeResult $false '' '缩略图滑块收到超过一次 Right' $true }
@@ -1523,7 +1525,7 @@ function Invoke-RealRun {
     Copy-Item -LiteralPath $importDiagnostic -Destination (Join-Path $fixtureEvidenceRoot 'initial-import-0-to-12.json')
 
     $restart = Start-AcceptanceSession 'restart-dpi-session' $regularRoot '' '' $true
-    Wait-ForStep 'restart-restored' '将重启后的像素蛋挞置于前台并最大化；不要点击一级导航。' -Session $restart -RequireMaximized:$true -Probe {
+    Wait-ForStep 'restart-restored' '将重启后的像素蛋挞最大化；不要点击一级导航，截图程序随后只读等待窗口位于前台。' -Session $restart -RequireForeground:$false -RequireMaximized:$true -Probe {
         $route = Get-RouteSession $restart.Root
         $document = Get-PhysicalDocument $restart.Root
         $previous = Get-PropertyValue $document 'previous_session'
@@ -1549,7 +1551,7 @@ function Invoke-RealRun {
     foreach ($tuple in $tuples) {
         $tupleIndex++
         $displayInstruction = "请在 Windows 显示设置中只设置 $($tuple.width)x$($tuple.height) / $($tuple.scale_percent)%；完成后返回像素蛋挞并最大化。"
-        Wait-ForStep "dpi-$tupleIndex-observe" $displayInstruction -Session $restart -RequireMaximized:$true -Probe {
+        Wait-ForStep "dpi-$tupleIndex-observe" $displayInstruction -Session $restart -RequireForeground:$false -RequireMaximized:$true -Probe {
             $window = Get-WindowObservation $restart.Process.Id
             if ($null -eq $window) { return New-ProbeResult $false '' '等待精确 DevPreview 窗口' }
             $display = Get-DisplayObservation $window.Handle
@@ -1579,7 +1581,7 @@ function Invoke-RealRun {
         } | Out-Null
         $dpiBefore = Get-PhysicalDocument $restart.Root
         $dpiBaselineIds = @(@(Get-PropertyValue $dpiBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-        Wait-ForStep "dpi-$tupleIndex-key" "焦点保持在 $controlId，只按一次 $key。" -Session $restart -Probe {
+        Wait-ForStep "dpi-$tupleIndex-key" "焦点保持在 $controlId，只按一次 $key；完成后停手并保持窗口不动，无需回复。" -Session $restart -RequireForeground:$false -Probe {
             $current = Get-PhysicalDocument $restart.Root
             $matches = @(Get-NewKeyTransitionMatches $current $dpiBaselineIds $controlId $key 'regular' 0 $direction)
             if ($matches.Count -gt 1) { return New-ProbeResult $false '' "该 tuple 收到超过一次 $key" $true }
@@ -1596,7 +1598,7 @@ function Invoke-RealRun {
 
     Wait-ForDisplay 'restore-final-display' '请在 Windows 显示设置中恢复 3840x2160@60Hz / 150%。' $baselineDisplay $true | Out-Null
     $script:displayRestored = $true
-    Wait-ForStep 'restore-final-foreground' '返回像素蛋挞，将窗口最大化并保持不动。' -Session $restart -RequireMaximized:$true -Probe {
+    Wait-ForStep 'restore-final-foreground' '返回像素蛋挞，将窗口最大化并保持不动；截图程序会只读等待窗口位于前台。' -Session $restart -RequireForeground:$false -RequireMaximized:$true -Probe {
         $window = Get-WindowObservation $restart.Process.Id
         if ($null -eq $window) { return New-ProbeResult $false '' '等待 DevPreview 前台窗口' }
         $display = Get-DisplayObservation $window.Handle

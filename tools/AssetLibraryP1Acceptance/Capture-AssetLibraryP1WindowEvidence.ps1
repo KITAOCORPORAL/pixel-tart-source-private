@@ -179,7 +179,10 @@ function ConvertTo-HexHandle {
 }
 
 function Get-WindowObservation {
-    param([Parameter(Mandatory = $true)][IntPtr]$Handle)
+    param(
+        [Parameter(Mandatory = $true)][IntPtr]$Handle,
+        [IntPtr]$ForegroundHandle = [AssetLibraryP1CaptureNative]::GetForegroundWindow()
+    )
 
     $nativeRect = New-Object AssetLibraryP1CaptureNative+Rect
     if (-not [AssetLibraryP1CaptureNative]::GetWindowRect($Handle, [ref]$nativeRect)) {
@@ -202,7 +205,7 @@ function Get-WindowObservation {
     return [ordered]@{
         hwnd = ConvertTo-HexHandle -Handle $Handle
         title = [AssetLibraryP1CaptureNative]::GetWindowTitle($Handle)
-        is_foreground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $Handle
+        is_foreground = $ForegroundHandle -eq $Handle
         is_minimized = [AssetLibraryP1CaptureNative]::IsIconic($Handle)
         rect_physical_pixels = [ordered]@{
             left = $nativeRect.Left
@@ -294,7 +297,8 @@ function Test-SameDisplayObservation {
 function Get-AuxiliaryWindowRecords {
     param(
         [Parameter(Mandatory = $true)][IntPtr[]]$VisibleHandles,
-        [Parameter(Mandatory = $true)][IntPtr]$MainWindowHandle
+        [Parameter(Mandatory = $true)][IntPtr]$MainWindowHandle,
+        [IntPtr]$ForegroundHandle = [AssetLibraryP1CaptureNative]::GetForegroundWindow()
     )
 
     return @($VisibleHandles | Where-Object { $_ -ne $MainWindowHandle } | ForEach-Object {
@@ -302,7 +306,7 @@ function Get-AuxiliaryWindowRecords {
                 hwnd = ConvertTo-HexHandle -Handle $_
                 title = [AssetLibraryP1CaptureNative]::GetWindowTitle($_)
                 class_name = [AssetLibraryP1CaptureNative]::GetWindowClass($_)
-                is_foreground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $_
+                is_foreground = $ForegroundHandle -eq $_
             }
         })
 }
@@ -404,6 +408,8 @@ $foregroundLossObservedBeforeCapture = $false
 $unexpectedAuxiliaryObservedBeforeCapture = $false
 $preCaptureGatePassed = $false
 $before = $null
+$displayBefore = $null
+$lastCommitUnexpectedAuxiliaryWindows = @()
 $auxiliaryWindows = @()
 $unexpectedAuxiliaryWindows = @()
 $initialUnexpectedAuxiliaryWindows = @()
@@ -423,7 +429,8 @@ while ([DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline) {
         throw "The exact main HWND changed while waiting for pre-capture stability for PID $ProcessId."
     }
 
-    $candidate = Get-WindowObservation -Handle $windowHandle
+    $foregroundHandle = [AssetLibraryP1CaptureNative]::GetForegroundWindow()
+    $candidate = Get-WindowObservation -Handle $windowHandle -ForegroundHandle $foregroundHandle
     if ($candidate.title -cne $WindowTitle) {
         throw "Window title changed while waiting for pre-capture stability. Expected '$WindowTitle'; observed '$($candidate.title)'."
     }
@@ -431,14 +438,14 @@ while ([DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline) {
         throw "The exact target window is minimized: $($candidate.hwnd)."
     }
 
-    $auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle)
+    $auxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $visibleHandles -MainWindowHandle $windowHandle -ForegroundHandle $foregroundHandle)
     $unexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $auxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
     if ($unexpectedAuxiliaryWindows.Count -ne 0 -and -not $unexpectedAuxiliaryObservedBeforeCapture) {
         $unexpectedAuxiliaryObservedBeforeCapture = $true
         $initialUnexpectedAuxiliaryWindows = @($unexpectedAuxiliaryWindows)
     }
 
-    $isForeground = [AssetLibraryP1CaptureNative]::GetForegroundWindow() -eq $windowHandle
+    $isForeground = $foregroundHandle -eq $windowHandle
     if (-not $isForeground) { $foregroundLossObservedBeforeCapture = $true }
     if ($isForeground -and $unexpectedAuxiliaryWindows.Count -eq 0) {
         $signature = "$($candidate.hwnd)|$($candidate.rect_physical_pixels.left),$($candidate.rect_physical_pixels.top),$($candidate.rect_physical_pixels.right),$($candidate.rect_physical_pixels.bottom)|$($candidate.dpi)"
@@ -448,9 +455,58 @@ while ([DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline) {
         }
         elseif ($null -ne $preCaptureGateStableSince -and
                 ([DateTimeOffset]::UtcNow - $preCaptureGateStableSince).TotalMilliseconds -ge $PreCaptureStableMilliseconds) {
-            $before = $candidate
-            $preCaptureGatePassed = $true
-            break
+            $commitDisplay = Get-DisplayObservation -Handle $windowHandle
+            $targetProcess.Refresh()
+            if ($targetProcess.HasExited) { throw "Target process exited while committing pre-capture stability: $ProcessId" }
+            $commitExecutablePath = [IO.Path]::GetFullPath($targetProcess.Path)
+            if (-not [string]::Equals($commitExecutablePath, $expectedExecutablePath, [StringComparison]::OrdinalIgnoreCase)) {
+                throw "PID $ProcessId executable changed while committing pre-capture stability. Expected '$expectedExecutablePath'; observed '$commitExecutablePath'."
+            }
+
+            $commitVisibleHandles = @([AssetLibraryP1CaptureNative]::GetVisibleProcessWindows([uint32]$ProcessId))
+            $commitMatchingTitleHandles = @($commitVisibleHandles | Where-Object {
+                    [string]::Equals([AssetLibraryP1CaptureNative]::GetWindowTitle($_), $WindowTitle, [StringComparison]::Ordinal)
+                })
+            if ($commitMatchingTitleHandles.Count -ne 1 -or [IntPtr]$commitMatchingTitleHandles[0] -ne $windowHandle) {
+                throw "The exact main HWND changed while committing pre-capture stability for PID $ProcessId."
+            }
+
+            $commitForegroundHandle = [AssetLibraryP1CaptureNative]::GetForegroundWindow()
+            $commitCandidate = Get-WindowObservation -Handle $windowHandle -ForegroundHandle $commitForegroundHandle
+            if ($commitCandidate.title -cne $WindowTitle) {
+                throw "Window title changed while committing pre-capture stability. Expected '$WindowTitle'; observed '$($commitCandidate.title)'."
+            }
+            if ($commitCandidate.is_minimized) {
+                $preCaptureGateStableSince = $null
+                $preCaptureGateStableSignature = ''
+                Start-Sleep -Milliseconds 200
+                $preCaptureGatePollCount++
+                continue
+            }
+            $commitAuxiliaryWindows = @(Get-AuxiliaryWindowRecords -VisibleHandles $commitVisibleHandles -MainWindowHandle $windowHandle -ForegroundHandle $commitForegroundHandle)
+            $commitUnexpectedAuxiliaryWindows = @(Get-UnexpectedAuxiliaryWindowRecords -AuxiliaryWindows $commitAuxiliaryWindows -AllowedClasses $allowedAuxiliaryWindowClasses)
+            $lastCommitUnexpectedAuxiliaryWindows = @($commitUnexpectedAuxiliaryWindows)
+            if (-not $commitCandidate.is_foreground) { $foregroundLossObservedBeforeCapture = $true }
+            if ($commitUnexpectedAuxiliaryWindows.Count -ne 0 -and -not $unexpectedAuxiliaryObservedBeforeCapture) {
+                $unexpectedAuxiliaryObservedBeforeCapture = $true
+                $initialUnexpectedAuxiliaryWindows = @($commitUnexpectedAuxiliaryWindows)
+            }
+
+            if ([DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline -and
+                $commitUnexpectedAuxiliaryWindows.Count -eq 0 -and
+                (Test-SameWindowObservation -Before $candidate -After $commitCandidate)) {
+                $before = $commitCandidate
+                $displayBefore = $commitDisplay
+                $visibleHandles = $commitVisibleHandles
+                $matchingTitleHandles = $commitMatchingTitleHandles
+                $auxiliaryWindows = $commitAuxiliaryWindows
+                $unexpectedAuxiliaryWindows = $commitUnexpectedAuxiliaryWindows
+                $preCaptureGatePassed = $true
+                break
+            }
+
+            $preCaptureGateStableSince = $null
+            $preCaptureGateStableSignature = ''
         }
     }
     else {
@@ -465,26 +521,16 @@ $preCaptureGateElapsedMilliseconds = [Math]::Round(([DateTimeOffset]::UtcNow - $
 $auxiliaryWindowQuietWaitMilliseconds = $preCaptureGateElapsedMilliseconds
 $auxiliaryWindowQuietWaitPollCount = $preCaptureGatePollCount
 if (-not $preCaptureGatePassed) {
-    if ($unexpectedAuxiliaryWindows.Count -ne 0) {
-        throw "Unexpected visible auxiliary top-level window(s) remained after a bounded $PreCaptureTimeoutSeconds-second pre-capture wait for PID ${ProcessId}: $($unexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
+    $remainingUnexpectedAuxiliaryWindows = if ($lastCommitUnexpectedAuxiliaryWindows.Count -ne 0) {
+        @($lastCommitUnexpectedAuxiliaryWindows)
+    }
+    else {
+        @($unexpectedAuxiliaryWindows)
+    }
+    if ($remainingUnexpectedAuxiliaryWindows.Count -ne 0) {
+        throw "Unexpected visible auxiliary top-level window(s) remained after a bounded $PreCaptureTimeoutSeconds-second pre-capture wait for PID ${ProcessId}: $($remainingUnexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
     }
     throw "The exact target window did not remain foreground and stable for $PreCaptureStableMilliseconds ms within the bounded $PreCaptureTimeoutSeconds-second pre-capture wait: $(ConvertTo-HexHandle -Handle $windowHandle)."
-}
-
-$preCaptureGateObservation = $before
-$displayBefore = Get-DisplayObservation -Handle $windowHandle
-$before = Get-WindowObservation -Handle $windowHandle
-if ($before.title -cne $WindowTitle) {
-    throw "Window title mismatch. Expected '$WindowTitle'; observed '$($before.title)'."
-}
-if (-not $before.is_foreground) {
-    throw "The exact target window is not the foreground window immediately before pixel capture: $($before.hwnd)."
-}
-if ($before.is_minimized) {
-    throw "The exact target window is minimized: $($before.hwnd)."
-}
-if (-not (Test-SameWindowObservation -Before $preCaptureGateObservation -After $before)) {
-    throw "The exact target window changed after the pre-capture stability gate and before pixel capture: $($before.hwnd)."
 }
 
 $captureWidth = [int]$before.rect_physical_pixels.width

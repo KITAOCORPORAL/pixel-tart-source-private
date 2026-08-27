@@ -27,13 +27,20 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
             "Get-AuxiliaryWindowRecords",
             "Get-UnexpectedAuxiliaryWindowRecords",
             "$preCaptureGateDeadline = $preCaptureGateStartedAt.AddSeconds($PreCaptureTimeoutSeconds)",
+            "[IntPtr]$ForegroundHandle = [AssetLibraryP1CaptureNative]::GetForegroundWindow()",
+            "$candidate = Get-WindowObservation -Handle $windowHandle -ForegroundHandle $foregroundHandle",
             "$matchingTitleHandles.Count -ne 1 -or [IntPtr]$matchingTitleHandles[0] -ne $windowHandle",
             "$candidate.is_minimized",
             "$preCaptureGateStableSince = $null",
             ".TotalMilliseconds -ge $PreCaptureStableMilliseconds",
+            "$commitDisplay = Get-DisplayObservation -Handle $windowHandle",
+            "$commitCandidate = Get-WindowObservation -Handle $windowHandle -ForegroundHandle $commitForegroundHandle",
+            "[DateTimeOffset]::UtcNow -lt $preCaptureGateDeadline",
+            "Test-SameWindowObservation -Before $candidate -After $commitCandidate",
             "Start-Sleep -Milliseconds 200",
             "The exact-title main HWND does not match the required session HWND",
             "The exact main HWND changed while waiting for pre-capture stability",
+            "The exact main HWND changed while committing pre-capture stability",
             "transient_unexpected_auxiliary_windows_before_capture",
             "auxiliary_window_quiet_wait_milliseconds",
             "pre_capture_gate = [ordered]",
@@ -46,7 +53,7 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
             "unexpected_auxiliary_window_count",
             "single_product_main_window_verified",
             "GetForegroundWindow",
-            "The exact target window is not the foreground window",
+            "The exact target window did not remain foreground and stable",
             "GetWindowRect",
             "GetDpiForWindow",
             "System.Windows.Forms",
@@ -75,6 +82,16 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
             "exact_pid_path_title_verified");
 
         Assert.DoesNotContain("HwndWrapper[", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("changed after the pre-capture stability gate and before pixel capture", script, StringComparison.Ordinal);
+        Assert.DoesNotContain("$before = $candidate", script, StringComparison.Ordinal);
+
+        var commitCheck = script.IndexOf("Test-SameWindowObservation -Before $candidate -After $commitCandidate", StringComparison.Ordinal);
+        var committedPass = script.IndexOf("$preCaptureGatePassed = $true", StringComparison.Ordinal);
+        var resetAfterCommit = script.IndexOf("$preCaptureGateStableSince = $null", committedPass, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, commitCheck);
+        Assert.IsGreaterThan(commitCheck, committedPass);
+        Assert.IsGreaterThan(committedPass, resetAfterCommit);
+        Assert.AreEqual(1, script.Split("$preCaptureGatePassed = $true", StringSplitOptions.None).Length - 1);
     }
 
     [TestMethod]

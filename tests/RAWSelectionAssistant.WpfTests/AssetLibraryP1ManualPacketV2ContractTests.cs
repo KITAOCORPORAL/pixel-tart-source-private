@@ -58,6 +58,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "retry-error-ready",
             "尚未触发 Retry，尚未导入素材",
             "两种方式只能选一种",
+            "完成后不要切回 PowerShell 或聊天",
             "本轮已失去 synthetic-only 资格",
             "Write-NewUtf8NoBom $releaseFile 'release'");
         Assert.DoesNotContain("retry-error-focused", script, StringComparison.Ordinal);
@@ -150,6 +151,46 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.AreEqual(1, CountOccurrences(capture, "Invoke-HiddenProcess $shellPath $arguments"));
         Assert.DoesNotContain("Remove-Item", capture, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("SetForegroundWindow", capture, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [TestMethod]
+    public void CaptureBoundStateGatesLeaveForegroundStabilityToTheStrictHelper()
+    {
+        var script = Text();
+        var waitForStep = Slice(script, "function Wait-ForStep", "function Wait-ForExpectedClose");
+
+        ContainsAll(
+            waitForStep,
+            "[bool]$RequireWindow = $true",
+            "[bool]$RequireForeground = $true",
+            "Get-WindowObservation $Session.Process.Id",
+            "if ($RequireForeground) { $windowReady = $windowReady -and $window.Foreground }",
+            "[string]::Equals($window.Path, $script:resolvedExecutable, [StringComparison]::OrdinalIgnoreCase)",
+            "$window.Hwnd -ceq $Session.Hwnd",
+            "-not $window.Minimized");
+
+        foreach (var step in new[]
+                 {
+                     "Wait-ForStep 'first-empty-ready'",
+                     "Wait-ForStep 'retry-loading-held'",
+                     "Wait-ForStep 'retry-error-ready'",
+                     "Wait-ForStep 'retry-activate-once'",
+                     "Wait-ForStep 'regular-direct-import'",
+                     "Wait-ForStep 'thumbnail-right'",
+                     "Wait-ForStep 'restart-restored'",
+                     "Wait-ForStep \"dpi-$tupleIndex-observe\"",
+                     "Wait-ForStep \"dpi-$tupleIndex-key\"",
+                     "Wait-ForStep 'restore-final-foreground'"
+                 })
+        {
+            var start = script.IndexOf(step, StringComparison.Ordinal);
+            Assert.IsGreaterThanOrEqualTo(0, start, $"Missing state gate: {step}");
+            var probe = script.IndexOf("-Probe {", start, StringComparison.Ordinal);
+            Assert.IsGreaterThan(start, probe, $"Missing probe for state gate: {step}");
+            var invocation = script[start..probe];
+            StringAssert.Contains(invocation, "-RequireForeground:$false", $"{step} must delegate foreground stability to capture helper.");
+            Assert.DoesNotContain("-RequireWindow:$false", invocation, StringComparison.Ordinal);
+        }
     }
 
     [TestMethod]
