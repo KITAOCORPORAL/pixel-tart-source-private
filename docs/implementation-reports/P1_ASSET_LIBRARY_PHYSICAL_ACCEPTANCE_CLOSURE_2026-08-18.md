@@ -189,6 +189,14 @@ SDK：`.NET SDK 10.0.302`
 
 本轮没有完整 `foreground-result.json`、三阶段 process snapshot、同 run 合成导入与完整 Gate A 前台材料，因而没有把旧前台证据转发给 Modular Harness acceptance runner，也没有冒报新的 runner 结果。历史 runner 结果不得替代本轮 Gate A。
 
+## 2026-08-27 后续修复与最新受控尝试
+
+- 在 `e461904b5f97daaa04dab06827ffb48c923addf0` 前后完成了三项验收工具修复：前台捕获器在同一截止时间内重新校验并在瞬态漂移时重置稳定性；状态等待不再抢占捕获器的前台资格；PowerShell 5.1 严格模式下的空辅助窗口集合保持为空数组，不再因 `.Count` 诊断异常中断。
+- 在隔离的 Windows PowerShell 5.1 模块路径下，聚焦契约测试为 `17/17`，完整 WPF 测试为 `919/919`；未隔离的宿主模块路径只产生环境级 `Get-FileHash` 解析错误，不计入代码失败。
+- 运行根 `PixelTart-P1-GateA-Manual-V2-20260827-173432-a38fcc3785ea46b29b377505f99534cf`：08、09、10 已取得真实截图；Retry 超时是因为所需的真人键盘动作未完成，进程随后正常清理，没有闪退。
+- 运行根 `PixelTart-P1-GateA-Manual-V2-20260827-180037-64099c8b35f442998495d6a91539c0c3`：08 已取得真实截图；`close-first-empty` 等待真人关闭窗口超过有界时限后失败，进程正常清理，没有闪退。该根和前述失败根均保留，未拼接、未重跑冒充完整链。
+- 因而本次收尾仍明确为 **BLOCKED / READY_FOR_MANUAL_RUN**，`capture_status` 仍为 `not_captured`；未进入 P2，也未把 Computer Use 或后台清理替代真人关闭、Retry、splitter、DPI 操作。
+
 ## 安全边界
 
 - 正式产品 Schema 5 未改；素材库 schema v6、表、索引和用户素材行未改。
