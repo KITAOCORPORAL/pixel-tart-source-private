@@ -138,6 +138,19 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
     }
 
     [TestMethod]
+    public void CaptureHelperPreservesAnEmptyTimeoutAuxiliaryWindowCollectionOnPowerShell51()
+    {
+        var script = Read("tools/AssetLibraryP1Acceptance/Capture-AssetLibraryP1WindowEvidence.ps1");
+
+        ContainsAll(script,
+            "$lastCommitUnexpectedAuxiliaryWindows = @()",
+            "$remainingUnexpectedAuxiliaryWindows = @(",
+            "if ($lastCommitUnexpectedAuxiliaryWindows.Count -ne 0)",
+            "if ($remainingUnexpectedAuxiliaryWindows.Count -ne 0)");
+        Assert.DoesNotContain("$remainingUnexpectedAuxiliaryWindows = if", script, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
     public void ReadmeLimitsTheHelperToPostActionRealScreenEvidence()
     {
         var readme = Read("tools/AssetLibraryP1Acceptance/README.md");

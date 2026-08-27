@@ -521,12 +521,17 @@ $preCaptureGateElapsedMilliseconds = [Math]::Round(([DateTimeOffset]::UtcNow - $
 $auxiliaryWindowQuietWaitMilliseconds = $preCaptureGateElapsedMilliseconds
 $auxiliaryWindowQuietWaitPollCount = $preCaptureGatePollCount
 if (-not $preCaptureGatePassed) {
-    $remainingUnexpectedAuxiliaryWindows = if ($lastCommitUnexpectedAuxiliaryWindows.Count -ne 0) {
-        @($lastCommitUnexpectedAuxiliaryWindows)
-    }
-    else {
-        @($unexpectedAuxiliaryWindows)
-    }
+    # An if-expression enumerates branch output in Windows PowerShell 5.1.
+    # Collect the entire expression so both zero and one records retain a
+    # real array with a safe Count property under StrictMode.
+    $remainingUnexpectedAuxiliaryWindows = @(
+        if ($lastCommitUnexpectedAuxiliaryWindows.Count -ne 0) {
+            $lastCommitUnexpectedAuxiliaryWindows
+        }
+        else {
+            $unexpectedAuxiliaryWindows
+        }
+    )
     if ($remainingUnexpectedAuxiliaryWindows.Count -ne 0) {
         throw "Unexpected visible auxiliary top-level window(s) remained after a bounded $PreCaptureTimeoutSeconds-second pre-capture wait for PID ${ProcessId}: $($remainingUnexpectedAuxiliaryWindows | ConvertTo-Json -Compress)."
     }
