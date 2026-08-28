@@ -10,18 +10,58 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
 {
     private const string RelativePacketDirectory = "artifacts/manual-acceptance/P1_ASSET_LIBRARY_GATE_A_MANUAL_PACKET";
     private const string EntryName = "Invoke-P1AssetLibraryGateAManualAcceptance.ps1";
+    private const string ReadmeName = "README_给北尾.md";
 
     [TestMethod]
-    public void PacketDirectoryHasOneBomEncodedPowerShellEntryAndNoBat()
+    public void PacketDirectoryHasOneBomEncodedPowerShellEntryOneHumanReadmeAndNoBat()
     {
         var directory = Path(RelativePacketDirectory);
         var files = Directory.GetFiles(directory);
-        Assert.HasCount(1, files);
-        Assert.AreEqual(EntryName, System.IO.Path.GetFileName(files[0]));
+        Assert.HasCount(2, files);
+        CollectionAssert.AreEquivalent(new[] { EntryName, ReadmeName }, files.Select(System.IO.Path.GetFileName).ToArray());
+        Assert.HasCount(1, Directory.GetFiles(directory, "*.ps1"));
         Assert.HasCount(0, Directory.GetFiles(directory, "*.bat"));
 
-        var bytes = File.ReadAllBytes(files[0]);
+        var bytes = File.ReadAllBytes(Path($"{RelativePacketDirectory}/{EntryName}"));
         CollectionAssert.AreEqual(Encoding.UTF8.Preamble.ToArray(), bytes[..Encoding.UTF8.Preamble.Length].ToArray());
+
+        var readme = File.ReadAllText(Path($"{RelativePacketDirectory}/{ReadmeName}"), Encoding.UTF8);
+        ContainsAll(readme, "-Mode Run", "60 秒", "移动鼠标", "run root");
+        Assert.DoesNotContain("git ", readme, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [TestMethod]
+    public void WeekendV3RunHasPresencePreflightCountdownReadOnlyValidationAndBuildIdentity()
+    {
+        var script = Text();
+        ContainsAll(
+            script,
+            "[ValidateSet('DryRun', 'Run', 'RecoveryTest', 'ValidateExistingRun')]",
+            "[Alias('RunRoot')]",
+            "function Invoke-ValidateExistingRun",
+            "function Invoke-RunPresencePreflight",
+            "GetLastInputInfo",
+            "$preflightDurationSeconds = 60",
+            "$humanPresenceObserved = $false",
+            "if ($newInputObserved -and $consoleIsForeground -and $interactiveSessionObserved) { $humanPresenceObserved = $true }",
+            "presence_combined_sample_observed",
+            "if (-not $humanPresenceObserved)",
+            "ready-for-manual-run",
+            "未检测到新的真人键盘或鼠标活动",
+            "预检剩余",
+            "步骤剩余",
+            "成功后脚本会自动进入下一步",
+            "超时将安全停止并保留本轮 run root",
+            "PixelTart-P1-GateA-Manual-V3",
+            "packet_version = 3",
+            "PixelTart.Modules.AssetLibrary.dll",
+            "asset_module_sha256");
+
+        var validation = Slice(script, "function Invoke-ValidateExistingRun", "function Initialize-ValidationToolSnapshot");
+        ContainsAll(validation, "validation\\tool", "Get-TreeFingerprint $resolvedRunRoot", "& $existingValidator -RunRoot $resolvedRunRoot");
+        Assert.DoesNotContain("Start-Process", validation, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Remove-Item", validation, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Copy-Item", validation, StringComparison.OrdinalIgnoreCase);
     }
 
     [TestMethod]
@@ -136,7 +176,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "'-PreCaptureTimeoutSeconds', [string]$StepTimeoutSeconds",
             "'-PreCaptureStableMilliseconds', [string]$ForegroundStableMilliseconds",
             "只读等待同一窗口恢复前台并连续稳定；不会自动抢焦点",
-            "Invoke-HiddenProcess $shellPath $arguments",
+            "Invoke-HiddenProcessWithCountdown $shellPath $arguments",
             "if ($exitCode -ne 0)",
             "Get-NestedValue $record @('expected', 'window_hwnd')",
             "Get-NestedValue $record @('window_after_capture', 'hwnd')",
@@ -148,7 +188,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "Test-PropertyPresent $preCaptureGate 'ui_activation_attempted'",
             "Get-PropertyValue $preCaptureGate 'timeout_seconds') -ne $StepTimeoutSeconds",
             "Get-PropertyValue $preCaptureGate 'required_stable_milliseconds') -ne $ForegroundStableMilliseconds");
-        Assert.AreEqual(1, CountOccurrences(capture, "Invoke-HiddenProcess $shellPath $arguments"));
+        Assert.AreEqual(1, CountOccurrences(capture, "Invoke-HiddenProcessWithCountdown $shellPath $arguments"));
         Assert.DoesNotContain("Remove-Item", capture, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("SetForegroundWindow", capture, StringComparison.OrdinalIgnoreCase);
     }
@@ -197,7 +237,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     public void LoadingEvidenceMustCompleteBeforeTheRetryReleaseGateIsWritten()
     {
         var script = Text();
-        var loadingCapture = script.IndexOf("Capture-WindowEvidence $retry '09-loading-manual-v2'", StringComparison.Ordinal);
+        var loadingCapture = script.IndexOf("Capture-WindowEvidence $retry '09-loading-manual-v3'", StringComparison.Ordinal);
         var releaseWrite = script.IndexOf("Write-NewUtf8NoBom $releaseFile 'release'", StringComparison.Ordinal);
 
         Assert.IsGreaterThanOrEqualTo(0, loadingCapture);
@@ -264,7 +304,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     {
         var script = Text();
         var localKeyValidator = Slice(script, "function Test-KeyLayersLocal", "function Get-QualifiedRetryActivations");
-        var retryStep = Slice(script, "Wait-ForStep 'retry-activate-once'", "Capture-WindowEvidence $retry '11-retry-recovered-manual-v2'");
+        var retryStep = Slice(script, "Wait-ForStep 'retry-activate-once'", "Capture-WindowEvidence $retry '11-retry-recovered-manual-v3'");
 
         ContainsAll(localKeyValidator,
             "Get-PropertyState",
@@ -332,6 +372,30 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         Assert.IsTrue(root.GetProperty("recovery_test").GetProperty("retry_guard_file_picker_import_rejected").GetBoolean());
     }
 
+    [TestMethod]
+    public async Task ValidateExistingRunFailsClosedWithoutMutatingTargetOrStartingGui()
+    {
+        var runRoot = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"PixelTart-P1-ManualPacketV3-Validate-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(runRoot);
+        File.WriteAllText(System.IO.Path.Combine(runRoot, "sentinel.txt"), "unchanged", new UTF8Encoding(false));
+        try
+        {
+            var before = TreeFingerprint(runRoot);
+            var processCountBefore = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;
+            var result = await InvokeValidateExistingRunAsync(runRoot);
+            var processCountAfter = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;
+
+            Assert.AreNotEqual(0, result.ExitCode);
+            StringAssert.Contains(result.Error, "validation\\tool");
+            Assert.AreEqual(before, TreeFingerprint(runRoot));
+            Assert.AreEqual(processCountBefore, processCountAfter);
+        }
+        finally
+        {
+            Directory.Delete(runRoot, recursive: true);
+        }
+    }
+
     private static void AssertManifest(string outputRoot, string expectedStatus)
     {
         using var document = JsonDocument.Parse(File.ReadAllText(System.IO.Path.Combine(outputRoot, "manual-run-manifest.json")));
@@ -353,6 +417,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             RedirectStandardOutput = true,
             RedirectStandardError = true
         };
+        start.Environment["PSModulePath"] = WindowsPowerShellModulePath();
         if (mode == "RecoveryTest") start.Environment["MSBUILDDISABLENODEREUSE"] = "recovery-parent-sentinel";
         foreach (var argument in new[]
                  {
@@ -366,6 +431,45 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(60));
         await process.WaitForExitAsync(cancellation.Token);
         return (process.ExitCode, await outputTask, await errorTask, outputRoot);
+    }
+
+    private static async Task<(int ExitCode, string Output, string Error)> InvokeValidateExistingRunAsync(string runRoot)
+    {
+        var start = new ProcessStartInfo("powershell.exe")
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+        start.Environment["PSModulePath"] = WindowsPowerShellModulePath();
+        foreach (var argument in new[]
+                 {
+                     "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path($"{RelativePacketDirectory}/{EntryName}"),
+                     "-Mode", "ValidateExistingRun", "-RunRoot", runRoot
+                 }) start.ArgumentList.Add(argument);
+
+        using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell process did not start.");
+        var outputTask = process.StandardOutput.ReadToEndAsync();
+        var errorTask = process.StandardError.ReadToEndAsync();
+        using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+        await process.WaitForExitAsync(cancellation.Token);
+        return (process.ExitCode, await outputTask, await errorTask);
+    }
+
+    private static string WindowsPowerShellModulePath() => string.Join(';', new[]
+    {
+        System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WindowsPowerShell", "Modules"),
+        System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "WindowsPowerShell", "Modules"),
+        System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WindowsPowerShell", "v1.0", "Modules")
+    });
+
+    private static string TreeFingerprint(string root)
+    {
+        var entries = Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories)
+            .Select(path => $"{System.IO.Path.GetRelativePath(root, path).Replace('\\', '/')}:{Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)))}")
+            .OrderBy(value => value, StringComparer.Ordinal);
+        return Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(string.Join("\n", entries))));
     }
 
     private static void ContainsAll(string text, params string[] values)

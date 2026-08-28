@@ -1,9 +1,12 @@
 ﻿[CmdletBinding()]
 param(
-    [ValidateSet('DryRun', 'Run', 'RecoveryTest')]
+    [ValidateSet('DryRun', 'Run', 'RecoveryTest', 'ValidateExistingRun')]
     [string]$Mode = 'DryRun',
 
     [string]$OutputRoot,
+
+    [Alias('RunRoot')]
+    [string]$ExistingRunRoot,
 
     [ValidatePattern('^[0-9a-f]{40}$')]
     [string]$SourceHead,
@@ -26,6 +29,7 @@ $contractSource = Join-Path $repositoryRoot 'tools\AssetLibraryP1Acceptance\gate
 $fixtureTool = Join-Path $repositoryRoot 'tools\ModularHarnessV1Acceptance\New-ModularHarnessSyntheticFixture.ps1'
 $expectedExecutableName = 'PixelTart_ModularHarness_V1_DevPreview.exe'
 $expectedProcessName = 'PixelTart_ModularHarness_V1_DevPreview'
+$expectedAssetModuleName = 'PixelTart.Modules.AssetLibrary.dll'
 $windowTitle = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5YOP57Sg6JuL5oyeIFtNb2R1bGFyIEhhcm5lc3MgRGV2XQ=='))
 $buildConfiguration = 'Debug'
 $baselineDisplay = [ordered]@{ width = 3840; height = 2160; refresh_rate_hz = 60; scale_percent = 150; dpi = 144 }
@@ -35,11 +39,14 @@ $script:manifestPath = $null
 $script:runRoot = $null
 $script:resolvedExecutable = $null
 $script:executableHash = $null
+$script:resolvedAssetModule = $null
+$script:assetModuleHash = $null
 $script:contract = $null
 $script:activeSession = $null
 $script:instructionNumber = 0
 $script:displayMatrixStarted = $false
 $script:displayRestored = $false
+$script:runReadyExit = $false
 $script:interopInitialized = $false
 $script:automationInitialized = $false
 
@@ -206,11 +213,11 @@ function Add-ManifestEvent {
 function Show-Instruction {
     param([Parameter(Mandatory = $true)][string]$StepId, [Parameter(Mandatory = $true)][string]$Instruction)
     $script:instructionNumber++
+    $prompt = "第 $($script:instructionNumber) 步：$Instruction 完成后不要切回 PowerShell 或聊天并停手；成功后脚本会自动进入下一步；$StepTimeoutSeconds 秒内未完成，超时将安全停止并保留本轮 run root。"
     Write-Host ''
-    Write-Host (([string]::Concat([char]0x7B2C, ' {0} ', [char]0x6B65, [char]0xFF08, [char]0x53EA, [char]0x505A, [char]0x8FD9, [char]0x4E00, [char]0x4E2A, [char]0x52A8, [char]0x4F5C, [char]0xFF09)) -f $script:instructionNumber) -ForegroundColor Yellow
-    Write-Host $Instruction -ForegroundColor Cyan
-    Write-Host '完成后不要切回 PowerShell 或聊天；保持步骤要求的窗口状态，脚本会在后台自动识别并继续。' -ForegroundColor DarkGray
-    Add-ManifestEvent $StepId 'waiting' $Instruction ''
+    Write-Host $prompt -ForegroundColor Cyan
+    Add-ManifestEvent $StepId 'waiting' $prompt ''
+    return $prompt
 }
 
 function Complete-Instruction {
@@ -222,6 +229,60 @@ function Complete-Instruction {
 function New-ProbeResult {
     param([bool]$Passed, [string]$Signature, [string]$Detail, [bool]$Fatal = $false)
     return [pscustomobject]@{ Passed = $Passed; Signature = $Signature; Detail = $Detail; Fatal = $Fatal }
+}
+
+function Write-StepTimeoutDiagnostic {
+    param(
+        [Parameter(Mandatory = $true)][string]$StepId,
+        [Parameter(Mandatory = $true)][string]$Instruction,
+        [Parameter(Mandatory = $true)][string]$LastDetail,
+        $Session,
+        [Parameter(Mandatory = $true)][DateTimeOffset]$Deadline
+    )
+    $diagnosticRoot = Join-Path $script:runRoot 'failure-diagnostics'
+    [IO.Directory]::CreateDirectory($diagnosticRoot) | Out-Null
+    $safeStepId = $StepId -replace '[^A-Za-z0-9._-]', '_'
+    $path = Join-Path $diagnosticRoot ("{0}-{1}.json" -f ([DateTimeOffset]::UtcNow.ToString('yyyyMMddTHHmmssfffZ')), $safeStepId)
+    $window = $null
+    $visibleProcessWindows = @()
+    $foregroundHandle = [IntPtr]::Zero
+    if ($null -ne $Session) {
+        try {
+            $foregroundHandle = [PixelTartManualPacketNativeV2]::GetForegroundWindow()
+            $visibleProcessWindows = @([PixelTartManualPacketNativeV2]::GetVisibleProcessWindows([uint32]$Session.Process.Id) | ForEach-Object {
+                    [ordered]@{
+                        hwnd = [string]::Format('0x{0:X}', $_.ToInt64())
+                        title = [PixelTartManualPacketNativeV2]::GetWindowTitle($_)
+                        is_foreground = $_ -eq $foregroundHandle
+                        is_minimized = [PixelTartManualPacketNativeV2]::IsIconic($_)
+                        is_expected_main = [string]::Format('0x{0:X}', $_.ToInt64()) -ceq $Session.Hwnd
+                    }
+                })
+            $window = Get-WindowObservation $Session.Process.Id
+        } catch { $window = $null }
+    }
+    $display = $null
+    try { $display = Get-DisplayObservation $(if ($null -eq $window) { [IntPtr]::Zero } else { $window.Handle }) } catch { $display = $null }
+    $diagnostic = [ordered]@{
+        schema = 'pixel-tart-p1-gate-a-step-timeout/v1'
+        step_id = $StepId
+        instruction = $Instruction
+        last_detail = $LastDetail
+        deadline_utc = $Deadline.ToUniversalTime().ToString('O')
+        recorded_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+        process_id = $(if ($null -eq $Session) { $null } else { $Session.Process.Id })
+        expected_hwnd = $(if ($null -eq $Session) { $null } else { $Session.Hwnd })
+        process_has_exited = $(if ($null -eq $Session) { $null } else { $Session.Process.HasExited })
+        foreground_hwnd = [string]::Format('0x{0:X}', $foregroundHandle.ToInt64())
+        window = $window
+        visible_process_windows = $visibleProcessWindows
+        display = $display
+        ui_input_generated_by_script = $false
+        display_modified_by_script = $false
+    }
+    Write-NewUtf8NoBom $path ($diagnostic | ConvertTo-Json -Depth 12)
+    Add-ManifestEvent $StepId 'timed-out' $Instruction $path
+    return $path
 }
 
 function Initialize-NativeObservation {
@@ -237,6 +298,7 @@ public static class PixelTartManualPacketNativeV2
 {
     [StructLayout(LayoutKind.Sequential)] public struct Rect { public int Left; public int Top; public int Right; public int Bottom; }
     [StructLayout(LayoutKind.Sequential)] public struct Point { public int X; public int Y; }
+    [StructLayout(LayoutKind.Sequential)] public struct LastInputInfo { public uint Size; public uint Time; }
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct DevMode
     {
@@ -251,6 +313,8 @@ public static class PixelTartManualPacketNativeV2
     }
     private delegate bool EnumWindowsProc(IntPtr handle, IntPtr parameter);
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] public static extern bool GetLastInputInfo(ref LastInputInfo info);
+    [DllImport("kernel32.dll")] public static extern IntPtr GetConsoleWindow();
     [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr handle);
     [DllImport("user32.dll")] public static extern bool IsZoomed(IntPtr handle);
     [DllImport("user32.dll", SetLastError = true)] public static extern bool GetWindowRect(IntPtr handle, out Rect rect);
@@ -307,6 +371,14 @@ function Initialize-AutomationObservation {
     Add-Type -AssemblyName UIAutomationClient
     Add-Type -AssemblyName UIAutomationTypes
     $script:automationInitialized = $true
+}
+
+function Get-LastInputTick {
+    Initialize-NativeObservation
+    $info = New-Object PixelTartManualPacketNativeV2+LastInputInfo
+    $info.Size = [Runtime.InteropServices.Marshal]::SizeOf([type][PixelTartManualPacketNativeV2+LastInputInfo])
+    if (-not [PixelTartManualPacketNativeV2]::GetLastInputInfo([ref]$info)) { return $null }
+    return [uint32]$info.Time
 }
 
 function Test-CancelRequested {
@@ -412,12 +484,12 @@ function Wait-ForStep {
         [bool]$RequireForeground = $true,
         [bool]$RequireMaximized = $false
     )
-    Show-Instruction $StepId $Instruction
+    $prompt = Show-Instruction $StepId $Instruction
     $deadline = [DateTimeOffset]::UtcNow.AddSeconds($StepTimeoutSeconds)
     $stableSince = $null
     $stableSignature = ''
     $lastDetail = '等待真实状态'
-    $nextProgress = [DateTimeOffset]::UtcNow.AddSeconds(15)
+    $nextProgress = [DateTimeOffset]::UtcNow
     while ([DateTimeOffset]::UtcNow -lt $deadline) {
         Test-CancelRequested
         if ($null -ne $Session -and $Session.Process.HasExited) {
@@ -444,7 +516,7 @@ function Wait-ForStep {
                 $stableSignature = $signature
                 $stableSince = [DateTimeOffset]::UtcNow
             } elseif ($null -ne $stableSince -and ([DateTimeOffset]::UtcNow - $stableSince).TotalMilliseconds -ge $ForegroundStableMilliseconds) {
-                Complete-Instruction $StepId $Instruction $lastDetail
+                Complete-Instruction $StepId $prompt $lastDetail
                 return $result
             }
         } else {
@@ -452,30 +524,39 @@ function Wait-ForStep {
             $stableSignature = ''
         }
         if ([DateTimeOffset]::UtcNow -ge $nextProgress) {
-            Write-Host ("仍在后台等待：{0}" -f $lastDetail) -ForegroundColor DarkYellow
-            $nextProgress = [DateTimeOffset]::UtcNow.AddSeconds(15)
+            $remaining = [Math]::Max(0, [int][Math]::Ceiling(($deadline - [DateTimeOffset]::UtcNow).TotalSeconds))
+            Write-Host ("步骤剩余 {0} 秒：{1}" -f $remaining, $lastDetail) -ForegroundColor DarkYellow
+            $nextProgress = [DateTimeOffset]::UtcNow.AddSeconds(5)
         }
         Start-Sleep -Milliseconds 200
     }
-    throw "步骤 '$StepId' 超时。目标与当前状态：$lastDetail"
+    $diagnosticPath = Write-StepTimeoutDiagnostic $StepId $prompt $lastDetail $Session $deadline
+    throw "步骤 '$StepId' 超时。目标与当前状态：$lastDetail；诊断：$diagnosticPath"
 }
 
 function Wait-ForExpectedClose {
     param($Session, [string]$StepId, [string]$Instruction)
-    Show-Instruction $StepId $Instruction
+    $prompt = Show-Instruction $StepId $Instruction
     $deadline = [DateTimeOffset]::UtcNow.AddSeconds($StepTimeoutSeconds)
+    $nextProgress = [DateTimeOffset]::UtcNow
     while ([DateTimeOffset]::UtcNow -lt $deadline) {
         Test-CancelRequested
         if ($Session.Process.HasExited) {
             $Session.Process.WaitForExit()
             [void](Wait-ForNoExistingDevPreview -Context "关闭 PID $($Session.Process.Id) 后")
-            Complete-Instruction $StepId $Instruction '进程已由用户正常关闭，且全局进程表已连续稳定清零'
+            Complete-Instruction $StepId $prompt '进程已由用户正常关闭，且全局进程表已连续稳定清零'
             if ($script:activeSession -eq $Session) { $script:activeSession = $null }
             return
         }
+        if ([DateTimeOffset]::UtcNow -ge $nextProgress) {
+            $remaining = [Math]::Max(0, [int][Math]::Ceiling(($deadline - [DateTimeOffset]::UtcNow).TotalSeconds))
+            Write-Host ("步骤剩余 {0} 秒：等待用户关闭 PID {1}" -f $remaining, $Session.Process.Id) -ForegroundColor DarkYellow
+            $nextProgress = [DateTimeOffset]::UtcNow.AddSeconds(5)
+        }
         Start-Sleep -Milliseconds 200
     }
-    throw "等待用户正常关闭软件超时：PID $($Session.Process.Id)。"
+    $diagnosticPath = Write-StepTimeoutDiagnostic $StepId $prompt "等待用户关闭 PID $($Session.Process.Id)" $Session $deadline
+    throw "等待用户正常关闭软件超时：PID $($Session.Process.Id)。诊断：$diagnosticPath"
 }
 
 function Wait-ForDisplay {
@@ -504,6 +585,38 @@ function Invoke-HiddenProcess {
     [IO.Directory]::CreateDirectory($parent) | Out-Null
     $process = Start-Process -FilePath $FilePath -ArgumentList $Arguments -PassThru -Wait -WindowStyle Hidden -RedirectStandardOutput $StdOutPath -RedirectStandardError $StdErrPath
     return [int]$process.ExitCode
+}
+
+function Invoke-HiddenProcessWithCountdown {
+    param(
+        [Parameter(Mandatory = $true)][string]$FilePath,
+        [Parameter(Mandatory = $true)][string[]]$Arguments,
+        [Parameter(Mandatory = $true)][string]$StdOutPath,
+        [Parameter(Mandatory = $true)][string]$StdErrPath,
+        [Parameter(Mandatory = $true)][int]$TimeoutSeconds,
+        [Parameter(Mandatory = $true)][string]$Context
+    )
+    $parent = Split-Path -Parent $StdOutPath
+    [IO.Directory]::CreateDirectory($parent) | Out-Null
+    $process = Start-Process -FilePath $FilePath -ArgumentList $Arguments -PassThru -WindowStyle Hidden -RedirectStandardOutput $StdOutPath -RedirectStandardError $StdErrPath
+    $deadline = [DateTimeOffset]::UtcNow.AddSeconds($TimeoutSeconds)
+    try {
+        while (-not $process.HasExited -and [DateTimeOffset]::UtcNow -lt $deadline) {
+            Test-CancelRequested
+            $remaining = [Math]::Max(0, [int][Math]::Ceiling(($deadline - [DateTimeOffset]::UtcNow).TotalSeconds))
+            Write-Host ("步骤剩余 {0} 秒：{1}" -f $remaining, $Context) -ForegroundColor DarkYellow
+            [void]$process.WaitForExit(1000)
+        }
+        if (-not $process.HasExited) {
+            Stop-Process -Id $process.Id -ErrorAction SilentlyContinue
+            [void]$process.WaitForExit(5000)
+            return 124
+        }
+        $process.WaitForExit()
+        return [int]$process.ExitCode
+    } finally {
+        $process.Dispose()
+    }
 }
 
 function Invoke-WithEnvironment {
@@ -711,6 +824,7 @@ function Invoke-DedicatedBuild {
     $publishRoot = Join-Path $script:runRoot 'build\publish'
     $logsRoot = Join-Path $script:runRoot 'logs'
     $expectedExecutable = Join-Path $publishRoot $expectedExecutableName
+    $expectedAssetModule = Join-Path $publishRoot $expectedAssetModuleName
     $dotnet = Get-DotnetHost
     $arguments = @(
         'publish', (Quote-ProcessArgument $projectPath),
@@ -732,10 +846,13 @@ function Invoke-DedicatedBuild {
     if ($exitCode -ne 0) { throw "专属 warnings-as-errors 构建失败，exit=$exitCode；查看 logs\dedicated-build.*.txt。" }
     Assert-TrackedCleanAndHead $SourceHead '专属构建后'
     if (-not (Test-Path -LiteralPath $expectedExecutable -PathType Leaf)) { throw "专属构建未生成目标 EXE：$expectedExecutable" }
+    if (-not (Test-Path -LiteralPath $expectedAssetModule -PathType Leaf)) { throw "专属构建未生成素材模块：$expectedAssetModule" }
     $matchingExecutables = @(Get-ChildItem -LiteralPath $publishRoot -File -Filter $expectedExecutableName)
     if ($matchingExecutables.Count -ne 1) { throw "专属构建目录中目标 EXE 数量不是 1：$($matchingExecutables.Count)。" }
     $script:resolvedExecutable = [IO.Path]::GetFullPath($expectedExecutable)
     $script:executableHash = (Get-FileHash -LiteralPath $script:resolvedExecutable -Algorithm SHA256).Hash
+    $script:resolvedAssetModule = [IO.Path]::GetFullPath($expectedAssetModule)
+    $script:assetModuleHash = (Get-FileHash -LiteralPath $script:resolvedAssetModule -Algorithm SHA256).Hash
     $productVersion = [Diagnostics.FileVersionInfo]::GetVersionInfo($script:resolvedExecutable).ProductVersion
     if ([string]::IsNullOrWhiteSpace($productVersion) -or $productVersion.IndexOf($SourceHead, [StringComparison]::Ordinal) -lt 0) {
         throw "专属 EXE 未通过嵌入源码 HEAD 校验；ProductVersion='$productVersion'。"
@@ -749,6 +866,8 @@ function Invoke-DedicatedBuild {
         build_configuration = $buildConfiguration
         executable_path = $script:resolvedExecutable
         executable_sha256 = $script:executableHash
+        asset_module_path = $script:resolvedAssetModule
+        asset_module_sha256 = $script:assetModuleHash
         informational_version = $productVersion
         warnings_as_errors = $true
         modular_harness_dev_preview = $true
@@ -764,6 +883,8 @@ function Invoke-DedicatedBuild {
     $script:manifest['build_configuration'] = $buildConfiguration
     $script:manifest['executable_path'] = $script:resolvedExecutable
     $script:manifest['executable_sha256'] = $script:executableHash
+    $script:manifest['asset_module_path'] = $script:resolvedAssetModule
+    $script:manifest['asset_module_sha256'] = $script:assetModuleHash
     $script:manifest['dedicated_build_succeeded'] = $true
     Save-Manifest
 }
@@ -1084,6 +1205,7 @@ function Wait-DragStep {
                 $null -ne (Get-PropertyValue $_ 'completed_at')
             })
         if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待真实拖动 $ControlId；允许范围 $Minimum–$Maximum" }
+        if ($matches.Count -gt 1) { return New-ProbeResult $false '' "检测到超过一次真实拖动 $ControlId；本轮必须失败" $true }
         $latest = $matches[-1]
         $actual = [double](Get-PropertyValue $latest 'after_actual_value')
         $persisted = [double](Get-PropertyValue $latest 'after_persisted_value')
@@ -1109,6 +1231,7 @@ function Wait-PaneToggleStep {
                 [bool](Get-PropertyValue $_ "${Prefix}_collapsed") -eq $Collapsed
             })
         if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待 $Prefix collapsed=$Collapsed" }
+        if ($matches.Count -gt 1) { return New-ProbeResult $false '' "检测到 $Prefix 栏重复折叠/展开；本轮必须失败" $true }
         $latest = $matches[-1]
         $persisted = [double](Get-PropertyValue $latest "${Prefix}_persisted_width")
         $actual = [double](Get-PropertyValue $latest "${Prefix}_actual_width")
@@ -1138,9 +1261,14 @@ function Capture-WindowEvidence {
         '-PreCaptureTimeoutSeconds', [string]$StepTimeoutSeconds,
         '-PreCaptureStableMilliseconds', [string]$ForegroundStableMilliseconds
     )
-    Write-Host ("自动捕获 {0}：只读等待同一窗口恢复前台并连续稳定；不会自动抢焦点。" -f $CaptureName) -ForegroundColor DarkYellow
-    $exitCode = Invoke-HiddenProcess $shellPath $arguments (Join-Path $logs "$CaptureName.stdout.txt") (Join-Path $logs "$CaptureName.stderr.txt")
-    if ($exitCode -ne 0) { throw "自动捕获 '$CaptureName' 失败，exit=$exitCode。软件必须保持前台且窗口稳定。" }
+    $captureInstruction = "自动捕获 $CaptureName：只读等待同一窗口恢复前台并连续稳定；不会自动抢焦点"
+    Write-Host $captureInstruction -ForegroundColor DarkYellow
+    $exitCode = Invoke-HiddenProcessWithCountdown $shellPath $arguments (Join-Path $logs "$CaptureName.stdout.txt") (Join-Path $logs "$CaptureName.stderr.txt") ($StepTimeoutSeconds + 10) $captureInstruction
+    if ($exitCode -ne 0) {
+        $deadline = [DateTimeOffset]::UtcNow
+        $diagnosticPath = Write-StepTimeoutDiagnostic "capture-$CaptureName" $captureInstruction "capture helper exit=$exitCode" $Session $deadline
+        throw "自动捕获 '$CaptureName' 失败，exit=$exitCode。软件必须保持前台且窗口稳定。诊断：$diagnosticPath"
+    }
     $recordPath = Join-Path $OutputDirectory "$CaptureName.window-evidence.json"
     $record = Read-JsonFileSafely $recordPath
     if ($null -eq $record) { throw "捕获没有生成窗口证据：$recordPath" }
@@ -1199,11 +1327,148 @@ function Invoke-RecoveryCheck {
     }
 }
 
+function Get-TreeFingerprint {
+    param([Parameter(Mandatory = $true)][string]$Root)
+    # Tree fingerprint is computed from relative paths and SHA-256 values without changing the target.
+    $entries = @(Get-ChildItem -LiteralPath $Root -Recurse -File | ForEach-Object {
+            $relative = $_.FullName.Substring($Root.TrimEnd('\').Length).TrimStart('\').Replace('\', '/')
+            '{0}:{1}' -f $relative, (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash
+        } | Sort-Object)
+    $sha256 = [Security.Cryptography.SHA256]::Create()
+    try {
+        $bytes = [Text.Encoding]::UTF8.GetBytes(($entries -join "`n"))
+        return ([BitConverter]::ToString($sha256.ComputeHash($bytes))).Replace('-', '')
+    } finally { $sha256.Dispose() }
+}
+
+function Invoke-ValidateExistingRun {
+    param([Parameter(Mandatory = $true)][string]$ExistingRunRoot)
+    $resolvedRunRoot = [IO.Path]::GetFullPath($ExistingRunRoot).TrimEnd('\')
+    if (-not (Test-Path -LiteralPath $resolvedRunRoot -PathType Container)) {
+        throw "ValidateExistingRun 找不到 run root：$resolvedRunRoot"
+    }
+    $validationToolRoot = Join-Path $resolvedRunRoot 'validation\tool'
+    $existingValidator = Join-Path $validationToolRoot 'Test-AssetLibraryP1GateAEvidence.ps1'
+    $existingContract = Join-Path $validationToolRoot 'gate-a-evidence-contract.json'
+    if (-not (Test-Path -LiteralPath $existingValidator -PathType Leaf) -or -not (Test-Path -LiteralPath $existingContract -PathType Leaf)) {
+        throw "ValidateExistingRun 要求既有 run root 包含只读验证快照 validation\tool。"
+    }
+    $beforeFingerprint = Get-TreeFingerprint $resolvedRunRoot
+    $result = $null
+    $validationError = $null
+    try { $result = & $existingValidator -RunRoot $resolvedRunRoot } catch { $validationError = $_ }
+    $afterFingerprint = Get-TreeFingerprint $resolvedRunRoot
+    if ($beforeFingerprint -cne $afterFingerprint) {
+        throw 'ValidateExistingRun 检测到输入树发生变化；只读保证失败。'
+    }
+    if ($null -ne $validationError) { throw $validationError }
+    return $result
+}
+
+function Initialize-ValidationToolSnapshot {
+    $validationToolRoot = Join-Path $script:runRoot 'validation\tool'
+    [IO.Directory]::CreateDirectory($validationToolRoot) | Out-Null
+    Copy-Item -LiteralPath $validatorSource -Destination (Join-Path $validationToolRoot 'Test-AssetLibraryP1GateAEvidence.ps1')
+    Copy-Item -LiteralPath $contractSource -Destination (Join-Path $validationToolRoot 'gate-a-evidence-contract.json')
+    $script:manifest['validation_tool_snapshot_ready'] = $true
+    Save-Manifest
+}
+
+function Write-ReadyForManualRun {
+    param([Parameter(Mandatory = $true)][string]$Reason, $Display)
+    $record = [ordered]@{
+        schema = 'pixel-tart-p1-gate-a-ready-for-manual-run/v1'
+        status = 'READY_FOR_MANUAL_RUN'
+        reason = $Reason
+        source_head = $SourceHead
+        executable_sha256 = $script:executableHash
+        asset_module_sha256 = $script:assetModuleHash
+        display = $Display
+        run_root = $script:runRoot
+        ui_started = $false
+        ui_input_generated_by_script = $false
+        recorded_at = [DateTimeOffset]::UtcNow.ToString('O')
+    }
+    Write-NewUtf8NoBom (Join-Path $script:runRoot 'READY_FOR_MANUAL_RUN.json') ($record | ConvertTo-Json -Depth 8)
+    Write-NewUtf8NoBom (Join-Path $script:runRoot 'READY_FOR_MANUAL_RUN.md') ("# READY_FOR_MANUAL_RUN`r`n`r`n$Reason`r`n`r`nRun root：$($script:runRoot)`r`n")
+    $script:manifest['status'] = 'ready-for-manual-run'
+    $script:manifest['ready_reason'] = $Reason
+    $script:manifest['ui_started'] = $false
+    $script:runReadyExit = $true
+    Save-Manifest
+    Write-Warning "$Reason`nREADY_FOR_MANUAL_RUN；未启动软件。Run root：$($script:runRoot)"
+}
+
+function Invoke-RunPresencePreflight {
+    param([Parameter(Mandatory = $true)]$DisplayAtStart)
+    $preflightDurationSeconds = 60
+    $script:manifest['preflight_duration_seconds'] = $preflightDurationSeconds
+    $script:manifest['preflight_display'] = $DisplayAtStart
+    Save-Manifest
+    Write-Host ''
+    Write-Host 'P1 Gate A V3｜启动前 60 秒预检' -ForegroundColor Yellow
+    Write-Host ("当前 commit：{0}" -f $SourceHead) -ForegroundColor Cyan
+    Write-Host ("构建哈希：EXE {0}；Asset DLL {1}" -f $script:executableHash, $script:assetModuleHash) -ForegroundColor Cyan
+    Write-Host ("原始显示：{0}x{1}@{2}Hz / {3}%" -f $DisplayAtStart.width, $DisplayAtStart.height, $DisplayAtStart.refresh_rate_hz, $DisplayAtStart.scale_percent) -ForegroundColor Cyan
+    Write-Host '预计阶段：空库关闭 → 唯一 Retry → splitter/折叠/缩略图 → 重启恢复 → 四组 DPI → 恢复基线。' -ForegroundColor Cyan
+    Write-Host '禁止：不要导入用户素材、不要触碰 Eagle .library、不要重复点击/按键、不要切回聊天。' -ForegroundColor Red
+
+    if (-not (Test-DisplayMatches $DisplayAtStart $baselineDisplay $true)) {
+        Write-ReadyForManualRun '当前显示不是 3840x2160@60Hz / 150%；请恢复后重新执行唯一 Run 命令。' $DisplayAtStart
+        return $false
+    }
+
+    $initialInputTick = Get-LastInputTick
+    $newInputObserved = $false
+    $interactiveSessionObserved = [Environment]::UserInteractive
+    $consoleWindow = [PixelTartManualPacketNativeV2]::GetConsoleWindow()
+    $consoleForegroundObserved = $false
+    $humanPresenceObserved = $false
+    Write-Host '请在倒计时内保持此 PowerShell 在前台，并移动鼠标一次；不需要按回车。' -ForegroundColor Yellow
+    $deadline = [DateTimeOffset]::UtcNow.AddSeconds($preflightDurationSeconds)
+    while ([DateTimeOffset]::UtcNow -lt $deadline) {
+        $currentInputTick = Get-LastInputTick
+        if ($null -ne $initialInputTick -and $null -ne $currentInputTick -and $currentInputTick -ne $initialInputTick) { $newInputObserved = $true }
+        $consoleIsForeground = $consoleWindow -ne [IntPtr]::Zero -and [PixelTartManualPacketNativeV2]::GetForegroundWindow() -eq $consoleWindow
+        if ($consoleIsForeground) { $consoleForegroundObserved = $true }
+        if ($newInputObserved -and $consoleIsForeground -and $interactiveSessionObserved) { $humanPresenceObserved = $true }
+        $remaining = [Math]::Max(0, [int][Math]::Ceiling(($deadline - [DateTimeOffset]::UtcNow).TotalSeconds))
+        Write-Host ("预检剩余 {0} 秒：真人输入={1}，PowerShell 前台={2}，交互桌面={3}" -f $remaining, $newInputObserved, $consoleForegroundObserved, $interactiveSessionObserved) -ForegroundColor DarkYellow
+        Start-Sleep -Seconds 1
+    }
+    $script:manifest['presence_new_input_observed'] = $newInputObserved
+    $script:manifest['presence_console_foreground_observed'] = $consoleForegroundObserved
+    $script:manifest['presence_interactive_session_observed'] = $interactiveSessionObserved
+    $script:manifest['presence_combined_sample_observed'] = $humanPresenceObserved
+    Save-Manifest
+    if (-not $humanPresenceObserved) {
+        Write-ReadyForManualRun '未检测到新的真人键盘或鼠标活动、PowerShell 前台或交互桌面。' $DisplayAtStart
+        return $false
+    }
+
+    Assert-TrackedCleanAndHead $SourceHead '60 秒预检提交'
+    Assert-NoExistingDevPreview
+    if ((Get-FileHash -LiteralPath $script:resolvedExecutable -Algorithm SHA256).Hash -cne $script:executableHash -or
+        (Get-FileHash -LiteralPath $script:resolvedAssetModule -Algorithm SHA256).Hash -cne $script:assetModuleHash) {
+        throw '60 秒预检后构建哈希发生变化；禁止启动 GUI。'
+    }
+    $displayAfter = Get-DisplayObservation
+    if (-not (Test-DisplayMatches $displayAfter $baselineDisplay $true)) {
+        Write-ReadyForManualRun '60 秒预检期间显示设置发生变化；请恢复后重新执行唯一 Run 命令。' $displayAfter
+        return $false
+    }
+    $script:manifest['presence_preflight_passed'] = $true
+    Save-Manifest
+    return $true
+}
+
 function Invoke-DryRun {
     $packetFiles = @(Get-ChildItem -LiteralPath $PSScriptRoot -File)
-    $onlyEntry = $packetFiles.Count -eq 1 -and $packetFiles[0].Name -ceq 'Invoke-P1AssetLibraryGateAManualAcceptance.ps1'
-    if (-not $onlyEntry -or @(Get-ChildItem -LiteralPath $PSScriptRoot -File -Filter '*.bat').Count -ne 0) {
-        throw '人工包目录必须且只能包含唯一 PowerShell 入口，且不得包含 BAT。'
+    $allowedNames = @('Invoke-P1AssetLibraryGateAManualAcceptance.ps1', 'README_给北尾.md')
+    $onlyExpectedFiles = $packetFiles.Count -eq 2 -and @($packetFiles | Where-Object { $_.Name -notin $allowedNames }).Count -eq 0
+    if (-not $onlyExpectedFiles -or @(Get-ChildItem -LiteralPath $PSScriptRoot -File -Filter '*.ps1').Count -ne 1 -or
+        @(Get-ChildItem -LiteralPath $PSScriptRoot -File -Filter '*.bat').Count -ne 0) {
+        throw '人工包目录必须且只能包含唯一 PowerShell 入口与 README_给北尾.md，且不得包含 BAT。'
     }
     $script:manifest['status'] = 'dry-run-passed'
     $script:manifest['ui_started'] = $false
@@ -1213,6 +1478,7 @@ function Invoke-DryRun {
     $script:manifest['repository_tracked_clean_observed'] = [string]::IsNullOrWhiteSpace((Get-WorktreeStatus))
     $script:manifest['dry_run_checks'] = [ordered]@{
         unique_ps1_entry = $true
+        human_readme_present = $true
         bat_absent = $true
         required_tools_present = $true
         contract_json_parsed = $true
@@ -1359,20 +1625,20 @@ function Invoke-RecoveryTest {
 function Invoke-RealRun {
     Assert-TrackedCleanAndHead $SourceHead 'Run 启动前'
     Assert-NoExistingDevPreview
-    [PixelTartManualPacketCancellationV2]::Install()
     $script:manifest['status'] = 'building'
     $script:manifest['repository_tracked_clean'] = $true
     Save-Manifest
     Invoke-DedicatedBuild
-    $script:manifest['status'] = 'running'
+    Initialize-ValidationToolSnapshot
+    $script:manifest['status'] = 'preflight'
     $script:manifest['ui_started'] = $false
     $displayAtStart = Get-DisplayObservation
     $script:manifest['display_before'] = $displayAtStart
     Save-Manifest
-
-    if (-not (Test-DisplayMatches $displayAtStart $baselineDisplay $true)) {
-        Wait-ForDisplay 'initial-display-baseline' '请在 Windows 显示设置中恢复 3840x2160@60Hz / 150%。' $baselineDisplay $true | Out-Null
-    }
+    if (-not (Invoke-RunPresencePreflight $displayAtStart)) { return }
+    [PixelTartManualPacketCancellationV2]::Install()
+    $script:manifest['status'] = 'running'
+    Save-Manifest
     $script:displayRestored = $true
 
     $stateEvidenceRoot = Join-Path $script:runRoot 'evidence\states'
@@ -1385,7 +1651,7 @@ function Invoke-RealRun {
             (Test-StateTimelineComplete $data 'first-empty-session') -and (Test-ReadySnapshot $data 1)
         New-ProbeResult $passed 'first-empty-ready-attempt-1' '首次空库：attempt 1 完整真实仓储 timeline + ready/0 项'
     } | Out-Null
-    Capture-WindowEvidence $first '08-first-empty-manual-v2' $stateEvidenceRoot | Out-Null
+    Capture-WindowEvidence $first '08-first-empty-manual-v3' $stateEvidenceRoot | Out-Null
     Wait-ForExpectedClose $first 'close-first-empty' '请关闭当前像素蛋挞窗口。'
 
     $retryRoot = Join-Path $script:runRoot 'sessions\retry'
@@ -1397,7 +1663,7 @@ function Invoke-RealRun {
         $passed = (Test-StateManifestIdentity $data $retry 'loading-error-retry-empty/v1') -and $waiting.Count -eq 1 -and $loading.Count -eq 1
         New-ProbeResult $passed 'loading-barrier-waiting-1' 'Loading：attempt 1 正在真实 release gate 前等待'
     } | Out-Null
-    Capture-WindowEvidence $retry '09-loading-manual-v2' $stateEvidenceRoot | Out-Null
+    Capture-WindowEvidence $retry '09-loading-manual-v3' $stateEvidenceRoot | Out-Null
     $scenarioManifest = (Get-StateSessionData $retry.Root).Manifest
     $releaseFile = [string](Get-PropertyValue $scenarioManifest 'releaseFile')
     if (-not (Test-WindowsAbsolutePath $releaseFile) -or
@@ -1421,7 +1687,7 @@ function Invoke-RealRun {
         $passed = $errors.Count -eq 1 -and $failed.Count -eq 1
         New-ProbeResult $passed 'error-visible-attempt-1' '真实可恢复错误态：attempt 1；尚未触发 Retry，尚未导入素材'
     } | Out-Null
-    Capture-WindowEvidence $retry '10-recoverable-error-manual-v2' $stateEvidenceRoot | Out-Null
+    Capture-WindowEvidence $retry '10-recoverable-error-manual-v3' $stateEvidenceRoot | Out-Null
 
     $retryBefore = Get-PhysicalDocument $retry.Root
     $retryBaselineIds = @(@(Get-PropertyValue $retryBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') }) +
@@ -1460,7 +1726,7 @@ function Invoke-RealRun {
         $passed = $activations.Count -eq 1 -and (Test-StateTimelineComplete $data 'retry-session') -and (Test-ReadySnapshot $data 2)
         New-ProbeResult $passed $(if ($activations.Count -eq 1) { [string](Get-PropertyValue $activations[0] 'attempt_id') } else { '' }) '唯一真实 Retry 四层激活 + attempt 2 真实仓储 ready/0 项'
     } | Out-Null
-    Capture-WindowEvidence $retry '11-retry-recovered-manual-v2' $stateEvidenceRoot | Out-Null
+    Capture-WindowEvidence $retry '11-retry-recovered-manual-v3' $stateEvidenceRoot | Out-Null
     Wait-ForExpectedClose $retry 'close-retry-session' '请关闭当前像素蛋挞窗口。'
 
     $fixtureRoot = Join-Path $script:runRoot 'synthetic-fixture'
@@ -1473,7 +1739,7 @@ function Invoke-RealRun {
         New-ProbeResult $passed 'route-1-import-12' '普通验收直达已 applied，真实 synthetic import 0→12，网格 12 项'
     } | Out-Null
     $keyboardEvidenceRoot = Join-Path $script:runRoot 'evidence\keyboard'
-    Capture-WindowEvidence $regular 'keyboard-splitters-start-v2' $keyboardEvidenceRoot | Out-Null
+    Capture-WindowEvidence $regular 'keyboard-splitters-start-v3' $keyboardEvidenceRoot | Out-Null
 
     Wait-DragStep $regular 'org-drag-min' '把组织栏分隔条拖到最左边，直到最小宽度 180。' 'AssetOrganizationSplitter' 180 420 'minimum' | Out-Null
     Wait-KeyTransitionStep $regular 'org-min-left' '不要再拖动；在组织栏分隔条上只按一次 Left。' 'AssetOrganizationSplitter' 'Left' 'boundary' 180 | Out-Null
@@ -1483,8 +1749,6 @@ function Invoke-RealRun {
     $orgRight = Wait-KeyTransitionStep $regular 'org-middle-right' '在组织栏分隔条上只按一次 Right。' 'AssetOrganizationSplitter' 'Right' 'regular' 0 'increase'
     $orgLeft = Wait-KeyTransitionStep $regular 'org-middle-left' '在组织栏分隔条上只按一次 Left。' 'AssetOrganizationSplitter' 'Left' 'regular' 0 'decrease'
     $orgWidth = Get-NewTransitionWidth $orgLeft
-    Wait-PaneToggleStep $regular 'org-collapse' '只点击一次“收起组织栏”。' 'organization' $true $orgWidth | Out-Null
-    Wait-PaneToggleStep $regular 'org-expand' '只点击一次“展开组织栏”。' 'organization' $false $orgWidth | Out-Null
 
     Wait-DragStep $regular 'inspector-drag-min' '把检查器分隔条拖到最右边，直到检查器最小宽度 260。' 'AssetInspectorSplitter' 260 520 'minimum' | Out-Null
     Wait-KeyTransitionStep $regular 'inspector-min-right' '不要再拖动；在检查器分隔条上只按一次 Right。' 'AssetInspectorSplitter' 'Right' 'boundary' 260 | Out-Null
@@ -1494,6 +1758,9 @@ function Invoke-RealRun {
     $inspectorLeft = Wait-KeyTransitionStep $regular 'inspector-middle-left' '在检查器分隔条上只按一次 Left。' 'AssetInspectorSplitter' 'Left' 'regular' 0 'increase'
     $inspectorRight = Wait-KeyTransitionStep $regular 'inspector-middle-right' '在检查器分隔条上只按一次 Right。' 'AssetInspectorSplitter' 'Right' 'regular' 0 'decrease'
     $inspectorWidth = Get-NewTransitionWidth $inspectorRight
+
+    Wait-PaneToggleStep $regular 'org-collapse' '只点击一次“收起组织栏”。' 'organization' $true $orgWidth | Out-Null
+    Wait-PaneToggleStep $regular 'org-expand' '只点击一次“展开组织栏”。' 'organization' $false $orgWidth | Out-Null
     Wait-PaneToggleStep $regular 'inspector-collapse' '只点击一次“收起检查器”。' 'inspector' $true $inspectorWidth | Out-Null
     Wait-PaneToggleStep $regular 'inspector-expand' '只点击一次“展开检查器”。' 'inspector' $false $inspectorWidth | Out-Null
 
@@ -1511,7 +1778,7 @@ function Invoke-RealRun {
         if ($matches.Count -eq 0) { return New-ProbeResult $false '' '等待滑块一次 Right 的四层写回证据；范围 120–280' }
         New-ProbeResult $true ([string](Get-PropertyValue $matches[0].Transition 'transition_id')) ("缩略图实际/持久值 {0}/{1}" -f (Get-PropertyValue $matches[0].Transition 'after_actual_value'), (Get-PropertyValue $matches[0].Transition 'after_persisted_value'))
     } | Out-Null
-    Capture-WindowEvidence $regular 'keyboard-splitters-complete-v2' $keyboardEvidenceRoot | Out-Null
+    Capture-WindowEvidence $regular 'keyboard-splitters-complete-v3' $keyboardEvidenceRoot | Out-Null
     Wait-ForExpectedClose $regular 'close-keyboard-session' '请关闭当前像素蛋挞窗口；这一步用于真实保存布局。'
 
     $physicalRoot = Join-Path $script:runRoot 'evidence\physical'
@@ -1537,7 +1804,7 @@ function Invoke-RealRun {
         $passed = (Test-RouteSessionApplied $route $restart 2) -and $null -ne $previous -and [bool](Get-PropertyValue $previous 'has_workspace_state') -and $restore.Count -ge 1
         New-ProbeResult $passed 'restart-route-2-restored' '新 PID 已恢复两栏宽度、折叠状态与缩略图尺寸'
     } | Out-Null
-    Capture-WindowEvidence $restart 'keyboard-splitters-restart-restored-v2' $keyboardEvidenceRoot | Out-Null
+    Capture-WindowEvidence $restart 'keyboard-splitters-restart-restored-v3' $keyboardEvidenceRoot | Out-Null
 
     $dpiEvidenceRoot = Join-Path $script:runRoot 'evidence\dpi'
     $tuples = @(
@@ -1611,11 +1878,9 @@ function Invoke-RealRun {
 
     Assert-TrackedCleanAndHead $SourceHead '正式校验前'
     if ((Get-FileHash -LiteralPath $script:resolvedExecutable -Algorithm SHA256).Hash -cne $script:executableHash) { throw '正式校验前 EXE 哈希发生变化。' }
+    if ((Get-FileHash -LiteralPath $script:resolvedAssetModule -Algorithm SHA256).Hash -cne $script:assetModuleHash) { throw '正式校验前素材库 DLL 哈希发生变化。' }
     $validationRoot = Join-Path $script:runRoot 'validation'
     $validationToolRoot = Join-Path $validationRoot 'tool'
-    [IO.Directory]::CreateDirectory($validationToolRoot) | Out-Null
-    Copy-Item -LiteralPath $validatorSource -Destination (Join-Path $validationToolRoot 'Test-AssetLibraryP1GateAEvidence.ps1')
-    Copy-Item -LiteralPath $contractSource -Destination (Join-Path $validationToolRoot 'gate-a-evidence-contract.json')
     $validationContractPath = Join-Path $validationToolRoot 'gate-a-evidence-contract.json'
     $validationContract = Read-JsonFileSafely $validationContractPath
     $validationContract.capture_status = 'captured'
@@ -1637,7 +1902,13 @@ function Invoke-RealRun {
     if ($validatorExit -ne 0) { throw "严格 Gate A validator 退出 $validatorExit；回传本轮 run root：$script:runRoot" }
 }
 
-$requiredFiles = @($projectPath, $captureTool, $validatorSource, $contractSource, $fixtureTool)
+if ($Mode -ceq 'ValidateExistingRun') {
+    if ([string]::IsNullOrWhiteSpace($ExistingRunRoot)) { throw 'ValidateExistingRun 必须提供 -RunRoot。' }
+    Invoke-ValidateExistingRun -ExistingRunRoot $ExistingRunRoot
+    return
+}
+
+$requiredFiles = @($projectPath, $captureTool, $validatorSource, $contractSource, $fixtureTool, (Join-Path $PSScriptRoot 'README_给北尾.md'))
 foreach ($required in $requiredFiles) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) { throw "Required manual acceptance input is missing: $required" }
 }
@@ -1648,7 +1919,7 @@ if ($PSBoundParameters.ContainsKey('SourceHead') -and $SourceHead -cne $currentH
 $SourceHead = $currentHead
 $script:contract = Get-Content -LiteralPath $contractSource -Raw -Encoding UTF8 | ConvertFrom-Json
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
-    $OutputRoot = Join-Path $temporaryRoot ("PixelTart-P1-GateA-Manual-V2-{0}-{1}" -f [DateTimeOffset]::Now.ToString('yyyyMMdd-HHmmss'), [Guid]::NewGuid().ToString('N'))
+    $OutputRoot = Join-Path $temporaryRoot ("PixelTart-P1-GateA-Manual-V3-{0}-{1}" -f [DateTimeOffset]::Now.ToString('yyyyMMdd-HHmmss'), [Guid]::NewGuid().ToString('N'))
 }
 $script:runRoot = [IO.Path]::GetFullPath($OutputRoot)
 if (-not $script:runRoot.StartsWith($temporaryRoot, [StringComparison]::OrdinalIgnoreCase) -or
@@ -1660,7 +1931,7 @@ if (Test-Path -LiteralPath $script:runRoot) { throw "OutputRoot already exists; 
 $script:manifestPath = Join-Path $script:runRoot 'manual-run-manifest.json'
 $script:manifest = [ordered]@{
     schema = 'pixel-tart-p1-gate-a-manual-packet/v1'
-    packet_version = 2
+    packet_version = 3
     status = 'initializing'
     mode = $Mode
     source_head = $SourceHead
@@ -1670,6 +1941,8 @@ $script:manifest = [ordered]@{
     build_configuration = $buildConfiguration
     executable_path = $null
     executable_sha256 = $null
+    asset_module_path = $null
+    asset_module_sha256 = $null
     synthetic_fixture_only = $true
     customer_media_allowed = $false
     eagle_library_write_allowed = $false
@@ -1700,7 +1973,9 @@ try {
     $terminalError = $_.Exception
 } finally {
     Stop-SessionForCleanup $script:activeSession
-    if ($script:displayMatrixStarted -or -not (Test-DisplayMatches (Get-DisplayObservation) $baselineDisplay $true)) {
+    if ($script:runReadyExit) {
+        $script:displayRestored = Test-DisplayMatches (Get-DisplayObservation) $baselineDisplay $true
+    } elseif ($script:displayMatrixStarted -or -not (Test-DisplayMatches (Get-DisplayObservation) $baselineDisplay $true)) {
         [void](Invoke-RecoveryCheck $(if ($terminalCanceled) { '本轮已取消，正在执行显示恢复检查' } else { '本轮异常，正在执行显示恢复检查' }))
     } else { $script:displayRestored = $true }
     if ($null -ne $terminalError) {
