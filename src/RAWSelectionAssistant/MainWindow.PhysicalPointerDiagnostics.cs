@@ -226,7 +226,13 @@ public partial class MainWindow
                 return;
             }
 
-            var retryButton = FindRetryAssetLibraryLoadTarget(target);
+            var acceptanceButton = FindAcceptanceKeyboardButtonTarget(target);
+            var retryButton = acceptanceButton is not null && string.Equals(
+                AutomationProperties.GetAutomationId(acceptanceButton),
+                "RetryAssetLibraryLoad",
+                StringComparison.Ordinal)
+                ? acceptanceButton
+                : null;
             if (beginTransition && !e.IsRepeat)
             {
                 _finalizedRetryKeyUpVirtualKey = null;
@@ -236,13 +242,14 @@ public partial class MainWindow
             }
 
             var retryActivation = _pendingRetryKeyActivation;
-            if (retryButton is null &&
-                (retryActivation is null ||
-                 retryActivation.VirtualKey != virtualKey ||
-                 DateTimeOffset.Now - retryActivation.StartedAt > TimeSpan.FromSeconds(3)))
+            if (acceptanceButton is null ||
+                (retryButton is not null &&
+                 (retryActivation is null ||
+                  retryActivation.VirtualKey != virtualKey ||
+                  DateTimeOffset.Now - retryActivation.StartedAt > TimeSpan.FromSeconds(3))))
                 return;
 
-            var activationTarget = retryButton ?? retryActivation!.Control;
+            var activationTarget = acceptanceButton;
             PhysicalPointerDiagnosticSession.RecordWpfKey(
                 activationTarget,
                 focusedElement,
@@ -254,7 +261,7 @@ public partial class MainWindow
                 e.Source as DependencyObject,
                 e.Handled,
                 CurrentPointerDiagnosticContext());
-            if (completeTransition) _pendingRetryKeyActivation = null;
+            if (completeTransition && retryButton is not null) _pendingRetryKeyActivation = null;
             return;
         }
 
@@ -288,13 +295,14 @@ public partial class MainWindow
             ScheduleControlStateTransitionCompletion(pending);
     }
 
-    private static Button? FindRetryAssetLibraryLoadTarget(DependencyObject? source)
+    private static Button? FindAcceptanceKeyboardButtonTarget(DependencyObject? source)
     {
         var button = FindDiagnosticAncestor<Button>(source);
-        return button is not null && string.Equals(
-            AutomationProperties.GetAutomationId(button),
-            "RetryAssetLibraryLoad",
-            StringComparison.Ordinal)
+        if (button is null) return null;
+        return AutomationProperties.GetAutomationId(button) is
+            "RetryAssetLibraryLoad" or
+            "ToggleAssetOrganizationPane" or
+            "ToggleAssetInspectorPane"
             ? button
             : null;
     }
@@ -421,6 +429,8 @@ public partial class MainWindow
             ("AssetOrganizationSplitter", Key.Right) => "Increase",
             ("AssetInspectorSplitter", Key.Left) => "Increase",
             ("AssetInspectorSplitter", Key.Right) => "Decrease",
+            ("AssetThumbnailSizeSlider", Key.Left) => "Decrease",
+            ("AssetThumbnailSizeSlider", Key.Right) => "Increase",
             _ => string.Empty
         };
 

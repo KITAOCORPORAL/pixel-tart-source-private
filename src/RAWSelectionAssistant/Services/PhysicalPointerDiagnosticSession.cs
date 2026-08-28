@@ -724,7 +724,7 @@ internal static class PhysicalPointerDiagnosticSession
             }
 
             var buttonAutomationId = NearestAutomationId(button);
-            if (!string.Equals(buttonAutomationId, "RetryAssetLibraryLoad", StringComparison.Ordinal) ||
+            if (!IsAcceptanceKeyboardButtonAutomationId(buttonAutomationId) ||
                 _activeKeyAttempt is null ||
                 _activeKeyAttempt.Key is not ("Enter" or "Space") ||
                 !MatchesKeyTarget(_activeKeyAttempt, button!, requireUp: false) ||
@@ -1064,6 +1064,11 @@ internal static class PhysicalPointerDiagnosticSession
         return !requireUp ||
                string.Equals(attempt.Layer3Target.FocusedAutomationIdAtUp, controlAutomationId, StringComparison.Ordinal);
     }
+
+    private static bool IsAcceptanceKeyboardButtonAutomationId(string automationId) => automationId is
+        "RetryAssetLibraryLoad" or
+        "ToggleAssetOrganizationPane" or
+        "ToggleAssetInspectorPane";
 
     private static bool IsKeyboardTargetAvailable(DependencyObject control) =>
         control is UIElement element &&

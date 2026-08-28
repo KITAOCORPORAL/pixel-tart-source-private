@@ -31,6 +31,8 @@
         <Color x:Key="AssetLibraryChipActiveHoverColor">#155247</Color>
         <Color x:Key="AssetLibraryChipActivePressedColor">#0C332C</Color>
         <Color x:Key="AssetLibraryFocusRingColor">#65E6C7</Color>
+        <Color x:Key="AssetLibraryButtonFocusOuterColor">#061311</Color>
+        <Color x:Key="AssetLibraryButtonFocusInnerColor">#F5FFFC</Color>
         <Color x:Key="AssetLibraryDisabledBackgroundColor">#252C32</Color>
         <Color x:Key="AssetLibraryDisabledForegroundColor">#ADB8C0</Color>
         <Color x:Key="AssetLibraryDisabledBorderColor">#71808C</Color>
@@ -57,6 +59,8 @@
         <SolidColorBrush x:Key="AssetLibraryChipActiveHoverBrush" Color="{StaticResource AssetLibraryChipActiveHoverColor}" />
         <SolidColorBrush x:Key="AssetLibraryChipActivePressedBrush" Color="{StaticResource AssetLibraryChipActivePressedColor}" />
         <SolidColorBrush x:Key="AssetLibraryFocusRingBrush" Color="{StaticResource AssetLibraryFocusRingColor}" />
+        <SolidColorBrush x:Key="AssetLibraryButtonFocusOuterBrush" Color="{StaticResource AssetLibraryButtonFocusOuterColor}" />
+        <SolidColorBrush x:Key="AssetLibraryButtonFocusInnerBrush" Color="{StaticResource AssetLibraryButtonFocusInnerColor}" />
         <SolidColorBrush x:Key="AssetLibraryDisabledBackgroundBrush" Color="{StaticResource AssetLibraryDisabledBackgroundColor}" />
         <SolidColorBrush x:Key="AssetLibraryDisabledForegroundBrush" Color="{StaticResource AssetLibraryDisabledForegroundColor}" />
         <SolidColorBrush x:Key="AssetLibraryDisabledBorderBrush" Color="{StaticResource AssetLibraryDisabledBorderColor}" />
@@ -68,8 +72,13 @@
         <SolidColorBrush x:Key="AssetLibraryPaletteFocusInnerBrush" Color="{StaticResource AssetLibraryPaletteFocusInnerColor}" />
 
         <ControlTemplate x:Key="AssetLibraryButtonTemplate" TargetType="{x:Type Button}">
-            <Border x:Name="FocusRing" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" Padding="1">
+            <Grid>
+                <Border x:Name="ButtonFocusOuterRing"
+                        BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" />
+                <Border x:Name="ButtonFocusInnerRing"
+                        BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Margin="2" />
                 <Border x:Name="Chrome"
+                        Margin="3"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -80,10 +89,11 @@
                                       RecognizesAccessKey="True"
                                       SnapsToDevicePixels="True" />
                 </Border>
-            </Border>
+            </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter TargetName="FocusRing" Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
+                    <Setter TargetName="ButtonFocusOuterRing" Property="BorderBrush" Value="{StaticResource AssetLibraryButtonFocusOuterBrush}" />
+                    <Setter TargetName="ButtonFocusInnerRing" Property="BorderBrush" Value="{StaticResource AssetLibraryButtonFocusInnerBrush}" />
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -386,10 +396,16 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                 <Button Content="{Binding OrganizationPaneToggleLabel}" Command="{Binding ToggleOrganizationPaneCommand}"
                         Style="{StaticResource AssetLibrarySecondaryButton}"
-                        ToolTip="展开或收起左侧组织栏" AutomationProperties.AutomationId="ToggleAssetOrganizationPane" />
+                        ToolTip="展开或收起左侧组织栏"
+                        AutomationProperties.AutomationId="ToggleAssetOrganizationPane"
+                        AutomationProperties.Name="{Binding OrganizationPaneToggleLabel}"
+                        Focusable="True" IsTabStop="True" />
                 <Button Content="{Binding InspectorPaneToggleLabel}" Command="{Binding ToggleInspectorPaneCommand}" Margin="4,0,0,0"
                         Style="{StaticResource AssetLibrarySecondaryButton}"
-                        ToolTip="展开或收起右侧检查器" AutomationProperties.AutomationId="ToggleAssetInspectorPane" />
+                        ToolTip="展开或收起右侧检查器"
+                        AutomationProperties.AutomationId="ToggleAssetInspectorPane"
+                        AutomationProperties.Name="{Binding InspectorPaneToggleLabel}"
+                        Focusable="True" IsTabStop="True" />
                 <Button Content="{Binding InspectorPinLabel}" Command="{Binding ToggleInspectorPinCommand}" Margin="4,0,0,0"
                         Style="{StaticResource AssetLibrarySecondaryButton}"
                         ToolTip="固定检查器；空间不足时优先保留，极窄窗口仍会收起" AutomationProperties.AutomationId="PinAssetInspectorPane" />
@@ -465,7 +481,8 @@
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
                           Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                           AutomationProperties.AutomationId="AssetOrganizationSplitter"
-                          AutomationProperties.Name="调整组织栏宽度" />
+                          AutomationProperties.Name="调整组织栏宽度"
+                          Focusable="True" IsTabStop="True" />
 
             <Border Grid.Column="2" Style="{StaticResource AssetPanel}" AutomationProperties.AutomationId="AssetCollectionPane">
                 <Grid>
@@ -481,7 +498,9 @@
                             <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{StaticResource AssetCaption}" Margin="8,2,0,0" />
                         </StackPanel>
                         <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
-                                AutomationProperties.AutomationId="AssetThumbnailSizeSlider" />
+                                AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
+                                AutomationProperties.Name="缩略图大小"
+                                Focusable="True" IsTabStop="True" />
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" AutomationProperties.AutomationId="VisualFilterChips">
@@ -505,7 +524,8 @@
                                                 Style="{StaticResource AssetLibraryChipButton}"
                                                 Tag="Active"
                                                 Padding="7,3"
-                                                Margin="0,0,5,0">
+                                                Margin="0,0,5,0"
+                                                AutomationProperties.Name="{Binding Label, StringFormat={}移除筛选 {0}}">
                                             <TextBlock><Run Text="{Binding Label}" /><Run Text="  ×" /></TextBlock>
                                         </Button>
                                     </DataTemplate>
@@ -590,7 +610,9 @@
                                        AutomationProperties.AutomationId="AssetLibraryLoadErrorMessage" />
                             <Button Content="重试" Command="{Binding RetryLoadCommand}" HorizontalAlignment="Center"
                                     Style="{StaticResource AssetLibraryPrimaryButton}"
-                                    AutomationProperties.AutomationId="RetryAssetLibraryLoad" />
+                                    AutomationProperties.AutomationId="RetryAssetLibraryLoad"
+                                    AutomationProperties.Name="重试"
+                                    Focusable="True" IsTabStop="True" />
                         </StackPanel>
                     </Border>
 
@@ -619,7 +641,8 @@
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
                           Visibility="{Binding IsInspectorPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                           AutomationProperties.AutomationId="AssetInspectorSplitter"
-                          AutomationProperties.Name="调整检查器宽度" />
+                          AutomationProperties.Name="调整检查器宽度"
+                          Focusable="True" IsTabStop="True" />
 
             <Border Grid.Column="4" Style="{StaticResource AssetPanel}"
                     Visibility="{Binding IsInspectorPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -699,6 +722,7 @@
                                                     <Button Command="{Binding DataContext.SearchPaletteColorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                             CommandParameter="{Binding Hex}" Padding="0" ToolTip="查找相近颜色"
                                                             Style="{StaticResource AssetLibraryPaletteSwatchButton}"
+                                                            AutomationProperties.Name="{Binding Hex, StringFormat={}查找相近颜色 {0}}"
                                                             HorizontalContentAlignment="Stretch">
                                                         <Border Height="34" Background="{Binding Hex, Converter={StaticResource HexToBrushConverter}}" CornerRadius="3" />
                                                     </Button>

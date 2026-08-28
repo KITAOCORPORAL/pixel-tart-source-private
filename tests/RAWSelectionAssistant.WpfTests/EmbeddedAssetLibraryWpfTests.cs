@@ -488,6 +488,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 var inspectorColumn = workspace.ColumnDefinitions[4];
                 var organizationSplitter = FindVisualByAutomationId<GridSplitter>(page, "AssetOrganizationSplitter");
                 var inspectorSplitter = FindVisualByAutomationId<GridSplitter>(page, "AssetInspectorSplitter");
+                var thumbnailSlider = FindVisualByAutomationId<Slider>(page, "AssetThumbnailSizeSlider");
 
                 Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty));
                 Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
@@ -505,7 +506,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
 
                 // Exercise WPF's real keyboard path: KeyDown changes the columns and PreviewKeyUp
                 // schedules the same deferred persistence repair without a test-side layout pass.
-                RaiseSplitterKeyboardAdjustment(organizationSplitter, Key.Right);
+                RaiseKeyboardAdjustment(organizationSplitter, Key.Right);
                 Assert.IsTrue(PumpDispatcherUntil(
                     () => Math.Abs(state.OrganizationPaneWidth - draggedOrganizationWidth) > .5 && BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty),
                     TimeSpan.FromSeconds(1)));
@@ -519,6 +520,15 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
                 Assert.IsTrue(collectionColumn.Width.IsStar,
                     "Keyboard splitter adjustment must restore the elastic collection star column.");
+
+                var thumbnailWidthBeforeKeyboard = state.ThumbnailWidth;
+                Assert.IsTrue(thumbnailSlider.Focus(), "The attached thumbnail-size slider must accept keyboard focus.");
+                RaiseKeyboardAdjustment(thumbnailSlider, Key.Right);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => state.ThumbnailWidth > thumbnailWidthBeforeKeyboard &&
+                          Math.Abs(thumbnailSlider.Value - state.ThumbnailWidth) <= .01,
+                    TimeSpan.FromSeconds(1)),
+                    "WPF Right must increase the thumbnail size and write the new value back to workspace settings.");
 
                 page.ViewModel.ToggleOrganizationPaneCommand.Execute(null);
                 page.UpdateLayout();
@@ -836,6 +846,94 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     [TestMethod]
+    public async Task AcceptanceWorkspaceControlsAreReachableInNaturalForwardAndReverseTabOrderWithoutChangingState()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-EmbeddedWorkspaceFocus", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var state = new RAWSelectionAssistant.Core.Models.AssetLibraryWorkspaceSettings
+                {
+                    OrganizationPaneWidth = 286,
+                    InspectorPaneWidth = 414,
+                    ThumbnailWidth = 196,
+                    InspectorPinned = false
+                };
+                var page = new AssetLibraryPage(
+                    Path.Combine(root, "asset-library.db"),
+                    new TaskOperationBridge(),
+                    [],
+                    workspaceSettings: state);
+                // HwndSource dimensions are device pixels; this environment runs at 150% DPI,
+                // so 2400x1230 provides a 1600x820 DIP workspace where both panes fit.
+                using var presentation = AttachToPresentationSource(page, 2400, 1230);
+                ArrangePage(page, 1600, 820);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => page.ViewModel.IsReady,
+                    TimeSpan.FromSeconds(10)),
+                    "The embedded page must finish its isolated load before keyboard traversal is measured.");
+                ArrangePage(page, 1600, 820);
+                // Keep the focus walk on the page's normal controls. State overlays are
+                // independently covered by load-state tests and otherwise create a nested
+                // focus scope that intentionally terminates WPF traversal.
+                FindVisualByAutomationId<Border>(page, "AssetLibraryLoadingState").Visibility = Visibility.Collapsed;
+                FindVisualByAutomationId<Border>(page, "AssetLibraryErrorState").Visibility = Visibility.Collapsed;
+                FindVisualByAutomationId<Border>(page, "AssetLibraryEmptyState").Visibility = Visibility.Collapsed;
+                page.UpdateLayout();
+
+                Control[] targets =
+                [
+                    FindVisualByAutomationId<Button>(page, "ToggleAssetOrganizationPane"),
+                    FindVisualByAutomationId<Button>(page, "ToggleAssetInspectorPane"),
+                    FindVisualByAutomationId<GridSplitter>(page, "AssetOrganizationSplitter"),
+                    FindVisualByAutomationId<Slider>(page, "AssetThumbnailSizeSlider"),
+                    FindVisualByAutomationId<GridSplitter>(page, "AssetInspectorSplitter"),
+                ];
+                var expectedNames = new[]
+                {
+                    page.ViewModel.OrganizationPaneToggleLabel,
+                    page.ViewModel.InspectorPaneToggleLabel,
+                    "调整组织栏宽度",
+                    "缩略图大小",
+                    "调整检查器宽度",
+                };
+                for (var index = 0; index < targets.Length; index++)
+                {
+                    Assert.IsTrue(targets[index].IsEnabled,
+                        $"{AutomationProperties.GetAutomationId(targets[index])} must remain enabled for keyboard acceptance; " +
+                        $"organizationVisible={page.ViewModel.IsOrganizationPaneVisible}, inspectorVisible={page.ViewModel.IsInspectorPaneVisible}, " +
+                        $"inspectorPinned={page.ViewModel.IsInspectorPinned}, viewport={page.ActualWidth:F1}.");
+                    Assert.IsTrue(targets[index].Focusable, AutomationProperties.GetAutomationId(targets[index]));
+                    Assert.IsTrue(targets[index].IsTabStop, AutomationProperties.GetAutomationId(targets[index]));
+                    Assert.AreEqual(expectedNames[index], AutomationProperties.GetName(targets[index]),
+                        AutomationProperties.GetAutomationId(targets[index]));
+                }
+
+                var forward = TraverseKeyboardFocus(page, FocusNavigationDirection.Next, maximumMoves: 96);
+                AssertFocusOrder(forward, targets, "forward");
+
+                var reverse = TraverseKeyboardFocus(targets[^1], FocusNavigationDirection.Previous, maximumMoves: 96);
+                AssertFocusOrder(reverse, targets.Reverse().ToArray(), "reverse");
+
+                Assert.AreEqual(286d, state.OrganizationPaneWidth, .01, "Tab traversal must not resize the organization pane.");
+                Assert.AreEqual(414d, state.InspectorPaneWidth, .01, "Tab traversal must not resize the inspector pane.");
+                Assert.AreEqual(196d, state.ThumbnailWidth, .01, "Tab traversal must not change thumbnail size.");
+                Assert.IsFalse(state.OrganizationPaneCollapsed, "Tab traversal must not collapse the organization pane.");
+                Assert.IsFalse(state.InspectorPaneCollapsed, "Tab traversal must not collapse the inspector pane.");
+
+                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+        }
+        finally
+        {
+            Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
     public void EmbeddedPageExposesForegroundAndDiagnosticsAutomationSeamsWithoutStandaloneProcess()
     {
         var root = FindRepositoryRoot();
@@ -952,18 +1050,64 @@ public sealed class EmbeddedAssetLibraryWpfTests
         splitter.RaiseEvent(new DragCompletedEventArgs(horizontalChange, 0, false) { RoutedEvent = Thumb.DragCompletedEvent });
     }
 
-    private static void RaiseSplitterKeyboardAdjustment(GridSplitter splitter, Key key)
+    private static void RaiseKeyboardAdjustment(UIElement control, Key key)
     {
-        var inputSource = PresentationSource.FromVisual(splitter)
-            ?? throw new InvalidOperationException("The splitter must be attached to a presentation source.");
-        splitter.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, inputSource, Environment.TickCount, key)
+        var inputSource = PresentationSource.FromVisual(control)
+            ?? throw new InvalidOperationException("The keyboard target must be attached to a presentation source.");
+        foreach (var routedEvent in new[]
+                 {
+                     Keyboard.PreviewKeyDownEvent,
+                     Keyboard.KeyDownEvent,
+                     Keyboard.PreviewKeyUpEvent,
+                     Keyboard.KeyUpEvent,
+                 })
+            control.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, inputSource, Environment.TickCount, key)
+            {
+                RoutedEvent = routedEvent
+            });
+    }
+
+    private static List<DependencyObject> TraverseKeyboardFocus(
+        UIElement initial,
+        FocusNavigationDirection direction,
+        int maximumMoves)
+    {
+        Assert.IsTrue(initial.Focus(), $"{initial.GetType().Name} must accept initial keyboard focus.");
+        var visited = new List<DependencyObject>();
+        if (Keyboard.FocusedElement is DependencyObject first) visited.Add(first);
+
+        for (var move = 0; move < maximumMoves; move++)
         {
-            RoutedEvent = Keyboard.KeyDownEvent
-        });
-        splitter.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, inputSource, Environment.TickCount, key)
+            if (Keyboard.FocusedElement is not UIElement focused ||
+                !focused.MoveFocus(new TraversalRequest(direction)) ||
+                Keyboard.FocusedElement is not DependencyObject next ||
+                visited.Any(item => ReferenceEquals(item, next)))
+                break;
+            visited.Add(next);
+        }
+        return visited;
+    }
+
+    private static void AssertFocusOrder(
+        IReadOnlyList<DependencyObject> visited,
+        IReadOnlyList<Control> expected,
+        string direction)
+    {
+        var previousIndex = -1;
+        foreach (var target in expected)
         {
-            RoutedEvent = Keyboard.PreviewKeyUpEvent
-        });
+            var index = -1;
+            for (var candidate = 0; candidate < visited.Count; candidate++)
+                if (ReferenceEquals(visited[candidate], target))
+                {
+                    index = candidate;
+                    break;
+                }
+            Assert.IsGreaterThan(previousIndex, index,
+                $"{direction} Tab traversal did not reach {AutomationProperties.GetAutomationId(target)} in order. " +
+                $"Visited: {string.Join(" -> ", visited.Select(item => AutomationProperties.GetAutomationId(item) is { Length: > 0 } id ? id : $"<{item.GetType().Name}>"))}");
+            previousIndex = index;
+        }
     }
 
     private static void AssertElementStaysInside(FrameworkElement workspace, FrameworkElement element, double viewportWidth)

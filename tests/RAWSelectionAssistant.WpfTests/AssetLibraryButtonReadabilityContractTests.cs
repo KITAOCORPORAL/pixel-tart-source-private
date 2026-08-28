@@ -20,6 +20,37 @@ public sealed class AssetLibraryButtonReadabilityContractTests
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
         };
 
+    private static readonly string[] ExpectedButtonAudit =
+    [
+        "{Binding OrganizationPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetOrganizationPane|{Binding OrganizationPaneToggleLabel}",
+        "{Binding InspectorPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetInspectorPane|{Binding InspectorPaneToggleLabel}",
+        "{Binding InspectorPinLabel}|||AssetLibrarySecondaryButton|PinAssetInspectorPane|",
+        "导入引用|||AssetLibraryPrimaryButton|AssetLibraryImport|",
+        "全部素材|||AssetLibrarySecondaryButton|AssetLibraryAllAssets|",
+        "+|||AssetLibraryIconButton||新建文件夹",
+        "已分析|Valid||AssetLibraryChipButton||",
+        "未分析|NotAnalyzed||AssetLibraryChipButton||",
+        "主色绿|Green||AssetLibraryChipButton||",
+        "低饱和|LowSaturation||AssetLibraryChipButton||",
+        "低调|LowKey||AssetLibraryChipButton||",
+        "高对比|HighContrast||AssetLibraryChipButton||",
+        "暖色|Warm||AssetLibraryChipButton||",
+        "冷色|Cool||AssetLibraryChipButton||",
+        "|{Binding Key}|Active|AssetLibraryChipButton||{Binding Label, StringFormat={}移除筛选 {0}}",
+        "退出临时结果|||AssetLibrarySecondaryButton|ClearVisualResults|",
+        "重试|||AssetLibraryPrimaryButton|RetryAssetLibraryLoad|重试",
+        "导入引用|||AssetLibraryPrimaryButton|ImportFromEmptyAssetLibrary|",
+        "清除条件|||AssetLibrarySecondaryButton||",
+        "重新分析|||AssetLibrarySecondaryButton|ReanalyzeSelected|",
+        "视觉相似|||AssetLibrarySecondaryButton|FindSimilarAssets|",
+        "保存|||AssetLibrarySecondaryButton|SaveVisualSmartFolder|保存智能文件夹",
+        "|{Binding Hex}||AssetLibraryPaletteSwatchButton||{Binding Hex, StringFormat={}查找相近颜色 {0}}",
+        "查找相似配色|||AssetLibrarySecondaryButton|FindSimilarPalette|",
+        "查颜色|||AssetLibrarySecondaryButton|SearchByColor|",
+        "开始|||AssetLibraryPrimaryButton|AnalyzeVisibleAssets|",
+        "取消|||AssetLibrarySecondaryButton||",
+    ];
+
     [TestMethod]
     public void EveryAssetLibraryButtonUsesOneExplicitLocalRole()
     {
@@ -37,6 +68,11 @@ public sealed class AssetLibraryButtonReadabilityContractTests
 
         foreach (var expected in ExpectedRoleCounts)
             Assert.AreEqual(expected.Value, buttons.Count(button => Attribute(button, "Style") == expected.Key), expected.Key);
+
+        CollectionAssert.AreEqual(
+            ExpectedButtonAudit,
+            buttons.Select(ButtonAuditSignature).ToArray(),
+            "The complete 27-button role, identity, and accessible-name audit changed.");
 
         var activeChip = buttons.Single(button => Attribute(button, "Tag") == "Active");
         Assert.AreEqual("{StaticResource AssetLibraryChipButton}", Attribute(activeChip, "Style"));
@@ -130,8 +166,30 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         }
 
         var standardTemplate = Resource(document, "ControlTemplate", "AssetLibraryButtonTemplate");
-        Assert.IsTrue(standardTemplate.Descendants(Presentation + "Trigger")
-            .Any(trigger => Attribute(trigger, "Property") == "IsKeyboardFocused" && Attribute(trigger, "Value") == "True"));
+        var standardFocus = standardTemplate.Descendants(Presentation + "Trigger")
+            .Single(trigger => Attribute(trigger, "Property") == "IsKeyboardFocused" && Attribute(trigger, "Value") == "True");
+        var standardFocusSetters = standardFocus.Elements(Presentation + "Setter").ToArray();
+        Assert.HasCount(2, standardFocusSetters);
+        Assert.IsTrue(standardFocusSetters.All(setter => Attribute(setter, "Property") == "BorderBrush"),
+            "Keyboard focus may recolor only the two preallocated rings; it must not change layout properties.");
+        Assert.IsTrue(standardFocusSetters.Any(setter =>
+            Attribute(setter, "TargetName") == "ButtonFocusOuterRing" &&
+            Attribute(setter, "Value") == "{StaticResource AssetLibraryButtonFocusOuterBrush}"));
+        Assert.IsTrue(standardFocusSetters.Any(setter =>
+            Attribute(setter, "TargetName") == "ButtonFocusInnerRing" &&
+            Attribute(setter, "Value") == "{StaticResource AssetLibraryButtonFocusInnerBrush}"));
+
+        var outerRing = standardTemplate.Descendants(Presentation + "Border")
+            .Single(border => Attribute(border, "Name") == "ButtonFocusOuterRing");
+        var innerRing = standardTemplate.Descendants(Presentation + "Border")
+            .Single(border => Attribute(border, "Name") == "ButtonFocusInnerRing");
+        var standardChrome = standardTemplate.Descendants(Presentation + "Border")
+            .Single(border => Attribute(border, "Name") == "Chrome");
+        Assert.AreEqual("2", Attribute(outerRing, "BorderThickness"));
+        Assert.AreEqual("1", Attribute(innerRing, "BorderThickness"));
+        Assert.AreEqual("2", Attribute(innerRing, "Margin"));
+        Assert.AreEqual("3", Attribute(standardChrome, "Margin"),
+            "The chrome must reserve both focus rails before and during keyboard focus.");
         Assert.AreEqual("{StaticResource AssetLibraryPaletteFocusVisualStyle}",
             DirectSetterValue(Style(document, "AssetLibraryPaletteSwatchButton"), "FocusVisualStyle"));
 
@@ -190,6 +248,45 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     }
 
     [TestMethod]
+    public void StandardButtonDualFocusRingsCoverDarkLightAndArbitraryHighContrastSurfaces()
+    {
+        var document = LoadPage();
+        var outer = Color(document, "AssetLibraryButtonFocusOuterColor");
+        var inner = Color(document, "AssetLibraryButtonFocusInnerColor");
+        AssertContrast(outer, inner, 3.0, "standard button complementary focus rails");
+
+        foreach (var themePath in new[] { DarkThemePath, LightThemePath })
+        {
+            var theme = XDocument.Load(themePath, LoadOptions.SetLineInfo);
+            foreach (var surfaceKey in new[] { "ContentBackgroundBrush", "WorkbenchCardBrush" })
+            {
+                var surface = ThemeBrushColor(theme, surfaceKey);
+                var strongestRail = Math.Max(Contrast(outer, surface), Contrast(inner, surface));
+                Assert.IsGreaterThanOrEqualTo(3.0, strongestRail,
+                    $"Neither standard focus rail reaches 3:1 against {Path.GetFileName(themePath)} / {surfaceKey}.");
+            }
+        }
+
+        var highContrast = XDocument.Load(HighContrastThemePath, LoadOptions.SetLineInfo);
+        foreach (var surfaceKey in new[] { "ContentBackgroundBrush", "WorkbenchCardBrush" })
+            Assert.AreEqual("{x:Static SystemColors.WindowColor}", ThemeBrushValue(highContrast, surfaceKey));
+
+        // High Contrast system colors are user-configurable. Contrast depends only on
+        // relative luminance, so sample the complete luminance domain instead of
+        // assuming one Windows palette. At least one complementary rail must remain
+        // distinguishable against every possible system surface.
+        for (var sample = 0; sample <= 10_000; sample++)
+        {
+            var surfaceLuminance = sample / 10_000d;
+            var strongestRail = Math.Max(
+                Contrast(outer.RelativeLuminance, surfaceLuminance),
+                Contrast(inner.RelativeLuminance, surfaceLuminance));
+            Assert.IsGreaterThanOrEqualTo(3.0, strongestRail,
+                $"Complementary focus rails fail at relative luminance {surfaceLuminance:F4}.");
+        }
+    }
+
+    [TestMethod]
     public void UserFacingActionsRemainMappedToTheirAuditedRoles()
     {
         var document = LoadPage();
@@ -205,6 +302,53 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         AssertAutomationRole(document, "ToggleAssetInspectorPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "PinAssetInspectorPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "SaveVisualSmartFolder", "AssetLibrarySecondaryButton");
+
+        var activeChip = document.Descendants(Presentation + "Button")
+            .Single(button => Attribute(button, "Tag") == "Active");
+        Assert.AreEqual("{Binding Label, StringFormat={}移除筛选 {0}}",
+            Attribute(activeChip, "AutomationProperties.Name"));
+        var palette = document.Descendants(Presentation + "Button")
+            .Single(button => Attribute(button, "Style") == "{StaticResource AssetLibraryPaletteSwatchButton}");
+        Assert.AreEqual("{Binding Hex, StringFormat={}查找相近颜色 {0}}",
+            Attribute(palette, "AutomationProperties.Name"));
+    }
+
+    [TestMethod]
+    public void AcceptanceWorkspaceKeyboardTargetsDeclareStableNamesAndNaturalTabOrder()
+    {
+        var document = LoadPage();
+        var expected = new (string AutomationId, string Name)[]
+        {
+            ("ToggleAssetOrganizationPane", "{Binding OrganizationPaneToggleLabel}"),
+            ("ToggleAssetInspectorPane", "{Binding InspectorPaneToggleLabel}"),
+            ("AssetOrganizationSplitter", "调整组织栏宽度"),
+            ("AssetThumbnailSizeSlider", "缩略图大小"),
+            ("AssetInspectorSplitter", "调整检查器宽度"),
+        };
+
+        var expectedIds = expected.Select(item => item.AutomationId).ToHashSet(StringComparer.Ordinal);
+        var targets = document.Descendants()
+            .Where(element => expectedIds.Contains(Attribute(element, "AutomationProperties.AutomationId")))
+            .ToArray();
+        Assert.HasCount(expected.Length, targets,
+            "Each acceptance keyboard target must have exactly one AutomationId in the page.");
+        CollectionAssert.AreEqual(
+            expected.Select(item => item.AutomationId).ToArray(),
+            targets.Select(target => Attribute(target, "AutomationProperties.AutomationId")).ToArray(),
+            "Natural XAML order is the stable forward Tab order for the five acceptance controls.");
+
+        for (var index = 0; index < expected.Length; index++)
+        {
+            Assert.AreEqual(expected[index].Name, Attribute(targets[index], "AutomationProperties.Name"), expected[index].AutomationId);
+            Assert.AreEqual("True", Attribute(targets[index], "Focusable"), expected[index].AutomationId);
+            Assert.AreEqual("True", Attribute(targets[index], "IsTabStop"), expected[index].AutomationId);
+        }
+
+        var retry = document.Descendants(Presentation + "Button")
+            .Single(button => Attribute(button, "AutomationProperties.AutomationId") == "RetryAssetLibraryLoad");
+        Assert.AreEqual("重试", Attribute(retry, "AutomationProperties.Name"));
+        Assert.AreEqual("True", Attribute(retry, "Focusable"));
+        Assert.AreEqual("True", Attribute(retry, "IsTabStop"));
     }
 
     [TestMethod]
@@ -291,11 +435,22 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     }
 
     private static double Contrast(Rgb first, Rgb second)
+        => Contrast(first.RelativeLuminance, second.RelativeLuminance);
+
+    private static double Contrast(double firstLuminance, double secondLuminance)
     {
-        var lighter = Math.Max(first.RelativeLuminance, second.RelativeLuminance);
-        var darker = Math.Min(first.RelativeLuminance, second.RelativeLuminance);
+        var lighter = Math.Max(firstLuminance, secondLuminance);
+        var darker = Math.Min(firstLuminance, secondLuminance);
         return (lighter + 0.05) / (darker + 0.05);
     }
+
+    private static Rgb ThemeBrushColor(XDocument document, string key) =>
+        Rgb.Parse(ThemeBrushValue(document, key));
+
+    private static string ThemeBrushValue(XDocument document, string key) =>
+        document.Descendants(Presentation + "SolidColorBrush")
+            .Single(element => Attribute(element, "Key") == key)
+            .Attribute("Color")?.Value ?? string.Empty;
 
     private static Rgb Color(XDocument document, string key) =>
         Rgb.Parse(Resource(document, "Color", key).Value.Trim());
@@ -326,6 +481,22 @@ public sealed class AssetLibraryButtonReadabilityContractTests
             ? automationId
             : Attribute(button, "Content") is { Length: > 0 } content ? content : "templated button";
 
+    private static string ButtonAuditSignature(XElement button)
+    {
+        var style = Attribute(button, "Style");
+        const string prefix = "{StaticResource ";
+        var role = style.StartsWith(prefix, StringComparison.Ordinal) && style.EndsWith('}')
+            ? style[prefix.Length..^1]
+            : style;
+        return string.Join('|',
+            Attribute(button, "Content"),
+            Attribute(button, "CommandParameter"),
+            Attribute(button, "Tag"),
+            role,
+            Attribute(button, "AutomationProperties.AutomationId"),
+            Attribute(button, "AutomationProperties.Name"));
+    }
+
     private static string Attribute(XElement element, string name) =>
         name is "Key" or "Name"
             ? element.Attribute(Xaml + name)?.Value ?? string.Empty
@@ -333,6 +504,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
 
     private static string PagePath => Path.Combine(RepositoryRoot, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml");
     private static string DarkThemePath => Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.Dark.xaml");
+    private static string LightThemePath => Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.Light.xaml");
+    private static string HighContrastThemePath => Path.Combine(RepositoryRoot, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.HighContrast.xaml");
 
     private static string RepositoryRoot
     {

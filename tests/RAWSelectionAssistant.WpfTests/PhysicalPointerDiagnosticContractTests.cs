@@ -156,10 +156,15 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "viewModel.IsOrganizationPaneCollapsed",
             "viewModel.IsInspectorPaneCollapsed",
             "ExpectedKeyboardAdjustment",
+            "FindAcceptanceKeyboardButtonTarget",
+            "ToggleAssetOrganizationPane",
+            "ToggleAssetInspectorPane",
             "(\"AssetOrganizationSplitter\", Key.Left) => \"Decrease\"",
             "(\"AssetOrganizationSplitter\", Key.Right) => \"Increase\"",
             "(\"AssetInspectorSplitter\", Key.Left) => \"Increase\"",
             "(\"AssetInspectorSplitter\", Key.Right) => \"Decrease\"",
+            "(\"AssetThumbnailSizeSlider\", Key.Left) => \"Decrease\"",
+            "(\"AssetThumbnailSizeSlider\", Key.Right) => \"Increase\"",
             "DispatcherPriority.ContextIdle",
             "BeginControlStateTransition",
             "CompleteControlStateTransition",
@@ -167,6 +172,9 @@ public sealed class PhysicalPointerDiagnosticContractTests
         ContainsAll(diagnostics,
             "RecordWin32Key",
             "RecordWpfKey",
+            "IsAcceptanceKeyboardButtonAutomationId",
+            "ToggleAssetOrganizationPane",
+            "ToggleAssetInspectorPane",
             "KeyAttempts",
             "ControlStateTransitions",
             "ScanCode",
@@ -225,6 +233,40 @@ public sealed class PhysicalPointerDiagnosticContractTests
             "\"InputUnconfirmed\"");
         Assert.IsTrue(host.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
         Assert.IsTrue(diagnostics.TrimStart().StartsWith("#if INPUT_ROUTING_DIAGNOSTICS", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
+    public void PaneToggleButtonsFlowThroughAllFourWpfKeyEventsWithoutTheRetryEarlyExit()
+    {
+        var host = Read("src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs");
+        var diagnostics = Read("src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs");
+        var configuration = Slice(host, "private void ConfigurePhysicalPointerDiagnostics", "private void AttachPhysicalPointerHwndHook");
+        var keyRoute = Slice(host, "private void RecordPhysicalKey", "private static Button? FindAcceptanceKeyboardButtonTarget");
+        var buttonTarget = Slice(host, "private static Button? FindAcceptanceKeyboardButtonTarget", "private void BeginControlStateTransition");
+        var clickCorrelation = Slice(diagnostics, "public static void RecordButtonClick", "public static void RecordPointerDownEscapeTarget");
+
+        ContainsAll(configuration,
+            "Keyboard.PreviewKeyDownEvent",
+            "Keyboard.KeyDownEvent",
+            "Keyboard.PreviewKeyUpEvent",
+            "Keyboard.KeyUpEvent",
+            "new KeyEventHandler",
+            "true);");
+        ContainsAll(buttonTarget,
+            "RetryAssetLibraryLoad",
+            "ToggleAssetOrganizationPane",
+            "ToggleAssetInspectorPane");
+        ContainsAll(keyRoute,
+            "if (acceptanceButton is null ||",
+            "var activationTarget = acceptanceButton",
+            "PhysicalPointerDiagnosticSession.RecordWpfKey(",
+            "if (completeTransition && retryButton is not null)");
+        Assert.IsFalse(keyRoute.Contains("if (retryButton is null &&", StringComparison.Ordinal),
+            "Non-Retry acceptance buttons must not be rejected by Retry-only native-key-up state.");
+        ContainsAll(clickCorrelation,
+            "IsAcceptanceKeyboardButtonAutomationId(buttonAutomationId)",
+            "ButtonClickReceived = true",
+            "PhysicalTargetConfirmed = true");
     }
 
     [TestMethod]
