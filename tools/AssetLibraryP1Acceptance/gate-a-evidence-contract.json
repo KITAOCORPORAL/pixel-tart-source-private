@@ -32,6 +32,10 @@
     ],
     "source_head_format": "lowercase-hex-40",
     "executable_sha256_format": "uppercase-hex-64",
+    "expected_asset_module_name": "PixelTart.Modules.AssetLibrary.dll",
+    "asset_module_sha256_format": "uppercase-hex-64",
+    "asset_module_hash_must_match_file": true,
+    "manual_asset_module_identity_must_match_build": true,
     "build_must_be_from_tracked_clean_head": true,
     "build_source_head_must_be_current": true,
     "dedicated_build_must_succeed": true

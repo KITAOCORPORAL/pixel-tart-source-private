@@ -874,6 +874,8 @@ if (-not (Test-Path -LiteralPath $resolvedRunRoot -PathType Container)) {
 $trustedSourceHead = $null
 $trustedExecutablePath = $null
 $trustedExecutableHash = $null
+$trustedAssetModulePath = $null
+$trustedAssetModuleHash = $null
 $trustedBuildConfiguration = $null
 $manualManifest = $null
 $buildManifest = $null
@@ -902,10 +904,20 @@ if ($null -ne $buildManifest) {
     $trustedSourceHead = [string](Get-PropertyValue $buildManifest 'source_head')
     $trustedExecutablePath = [string](Get-PropertyValue $buildManifest 'executable_path')
     $trustedExecutableHash = [string](Get-PropertyValue $buildManifest 'executable_sha256')
+    $trustedAssetModulePath = [string](Get-PropertyValue $buildManifest 'asset_module_path')
+    $trustedAssetModuleHash = [string](Get-PropertyValue $buildManifest 'asset_module_sha256')
     $trustedBuildConfiguration = [string](Get-PropertyValue $buildManifest 'build_configuration')
     Require-True (Test-LowercaseCommitSha $trustedSourceHead) 'Build manifest source_head must be exactly 40 lowercase hexadecimal characters.'
     Require-True (Test-UppercaseSha256 $trustedExecutableHash) 'Build manifest executable_sha256 must be exactly 64 uppercase hexadecimal characters.'
+    Require-True (Test-UppercaseSha256 $trustedAssetModuleHash) 'Build manifest asset_module_sha256 must be exactly 64 uppercase hexadecimal characters.'
     Require-True (Test-FullyQualifiedPath $trustedExecutablePath) 'Build manifest executable_path is not absolute.'
+    Require-True (Test-FullyQualifiedPath $trustedAssetModulePath) 'Build manifest asset_module_path is not absolute.'
+    if (Test-FullyQualifiedPath $trustedAssetModulePath) {
+        Require-True (Test-ExactString ([IO.Path]::GetFileName($trustedAssetModulePath)) ([string]$contract.source_identity.expected_asset_module_name)) "Build manifest Asset DLL must be named '$($contract.source_identity.expected_asset_module_name)'."
+        if (Test-FullyQualifiedPath $trustedExecutablePath) {
+            Require-True (Test-SameFullPath (Split-Path -Parent $trustedAssetModulePath) (Split-Path -Parent $trustedExecutablePath)) 'Build manifest Asset DLL must be beside the executable.'
+        }
+    }
     $matchingBuildConfigurations = @($contract.source_identity.allowed_build_configurations | Where-Object {
             Test-ExactString $_ $trustedBuildConfiguration
         })
@@ -921,6 +933,13 @@ if ($null -ne $buildManifest) {
             Require-True (Test-ExactString $authorityFileHash $trustedExecutableHash) 'Build manifest executable_sha256 does not match the executable bytes.'
         }
     }
+    if (Test-FullyQualifiedPath $trustedAssetModulePath) {
+        Require-True (Test-Path -LiteralPath $trustedAssetModulePath -PathType Leaf) 'Build-authority Asset DLL does not exist.'
+        if (Test-Path -LiteralPath $trustedAssetModulePath -PathType Leaf) {
+            $assetModuleFileHash = (Get-FileHash -LiteralPath $trustedAssetModulePath -Algorithm SHA256).Hash
+            Require-True (Test-ExactString $assetModuleFileHash $trustedAssetModuleHash) 'Build manifest asset_module_sha256 does not match the Asset DLL bytes.'
+        }
+    }
 }
 
 if ($null -ne $manualManifest) {
@@ -933,6 +952,9 @@ if ($null -ne $manualManifest) {
     Require-True (Test-SameFullPath ([string](Get-PropertyValue $manualManifest 'executable_path')) $trustedExecutablePath) 'Manual-run executable_path differs from the build authority.'
     Require-True (Test-UppercaseSha256 (Get-PropertyValue $manualManifest 'executable_sha256')) 'Manual-run executable_sha256 must be exactly 64 uppercase hexadecimal characters.'
     Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'executable_sha256') $trustedExecutableHash) 'Manual-run executable_sha256 differs from the build authority.'
+    Require-True (Test-SameFullPath ([string](Get-PropertyValue $manualManifest 'asset_module_path')) $trustedAssetModulePath) 'Manual-run asset_module_path differs from the build authority.'
+    Require-True (Test-UppercaseSha256 (Get-PropertyValue $manualManifest 'asset_module_sha256')) 'Manual-run asset_module_sha256 must be exactly 64 uppercase hexadecimal characters.'
+    Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'asset_module_sha256') $trustedAssetModuleHash) 'Manual-run asset_module_sha256 differs from the build authority.'
     Require-True (Test-ExactString (Get-PropertyValue $manualManifest 'build_configuration') $trustedBuildConfiguration) 'Manual-run build configuration differs from the build authority.'
     Require-True (Test-TrueValue (Get-PropertyValue $manualManifest 'synthetic_fixture_only')) 'Manual-run manifest is not synthetic-fixture-only.'
     Require-True (-not (Test-TrueValue (Get-PropertyValue $manualManifest 'customer_media_allowed'))) 'Manual-run manifest allows customer media.'

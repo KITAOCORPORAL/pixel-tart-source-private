@@ -31,6 +31,10 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         Assert.AreEqual("pixel-tart-p1-gate-a-manual-packet/v1", sourceIdentity.GetProperty("manual_manifest_schema").GetString());
         Assert.AreEqual("build-manifest.json", sourceIdentity.GetProperty("build_manifest_file").GetString());
         Assert.AreEqual("pixel-tart-p1-gate-a-build-manifest/v1", sourceIdentity.GetProperty("build_manifest_schema").GetString());
+        Assert.AreEqual("PixelTart.Modules.AssetLibrary.dll", sourceIdentity.GetProperty("expected_asset_module_name").GetString());
+        Assert.AreEqual("uppercase-hex-64", sourceIdentity.GetProperty("asset_module_sha256_format").GetString());
+        Assert.IsTrue(sourceIdentity.GetProperty("asset_module_hash_must_match_file").GetBoolean());
+        Assert.IsTrue(sourceIdentity.GetProperty("manual_asset_module_identity_must_match_build").GetBoolean());
         CollectionAssert.AreEqual(new[] { "Debug" }, sourceIdentity.GetProperty("allowed_build_configurations").EnumerateArray().Select(item => item.GetString()).ToArray());
         CollectionAssert.AreEqual(
             new[] { "first-empty-session", "retry-session", "keyboard-session", "restart-dpi-session" },
@@ -189,6 +193,10 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             "source_identity.manual_manifest_file",
             "source_identity.build_manifest_file",
             "trustedSourceHead",
+            "trustedAssetModulePath",
+            "trustedAssetModuleHash",
+            "asset_module_path",
+            "asset_module_sha256",
             "source_head_is_current_head",
             "manualSessionsById",
             "physicalMouseActions",
@@ -632,6 +640,23 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
     }
 
     [TestMethod]
+    [DataRow("missing-file", "Build-authority Asset DLL does not exist.")]
+    [DataRow("wrong-name", "Build manifest Asset DLL must be named 'PixelTart.Modules.AssetLibrary.dll'.")]
+    [DataRow("mutated-bytes", "Build manifest asset_module_sha256 does not match the Asset DLL bytes.")]
+    [DataRow("manual-path-mismatch", "Manual-run asset_module_path differs from the build authority.")]
+    [DataRow("manual-hash-mismatch", "Manual-run asset_module_sha256 differs from the build authority.")]
+    public void ValidatorRejectsMissingWrongMutatedOrInconsistentAssetModule(string mutation, string expectedFailure)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.MutateAssetModuleIdentity(mutation);
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, expectedFailure);
+    }
+
+    [TestMethod]
     public void ValidatorRejectsReleaseEvidenceEvenWhenEveryManifestRepeatsRelease()
     {
         using var fixture = CapturedFixture.Create();
@@ -674,6 +699,7 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         private const string Protocol = "pixel-tart-asset-library-p1-state/v1";
         private const string PointerProtocol = "pixel-tart-physical-pointer/v1";
         private const string ExecutableName = "PixelTart_ModularHarness_V1_DevPreview.exe";
+        private const string AssetModuleName = "PixelTart.Modules.AssetLibrary.dll";
         private const string WindowTitle = "像素蛋挞 [Modular Harness Dev]";
         private const string SourceHead = "ab21ef0bec2eb04f1b0e720418770e9025286e4c";
         private const string BuildConfiguration = "Debug";
@@ -697,6 +723,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         public string ContractPath { get; }
         private string ExecutablePath => Path.Combine(RunRoot, ExecutableName);
         private string ExecutableHash { get; set; } = string.Empty;
+        private string AssetModulePath => Path.Combine(RunRoot, AssetModuleName);
+        private string AssetModuleHash { get; set; } = string.Empty;
         public static string AuthoritySourceHead => SourceHead;
 
         public void RemoveRequiredStateCapture(string captureName)
@@ -1115,6 +1143,41 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             }
         }
 
+        public void MutateAssetModuleIdentity(string mutation)
+        {
+            var buildPath = Path.Combine(RunRoot, "build-manifest.json");
+            var manualPath = Path.Combine(RunRoot, "manual-run-manifest.json");
+            var build = ReadObject(buildPath);
+            var manual = ReadObject(manualPath);
+            switch (mutation)
+            {
+                case "missing-file":
+                    File.Delete(AssetModulePath);
+                    break;
+                case "wrong-name":
+                    var wrongPath = Path.Combine(RunRoot, "Wrong.AssetLibrary.dll");
+                    File.Move(AssetModulePath, wrongPath);
+                    build["asset_module_path"] = wrongPath;
+                    manual["asset_module_path"] = wrongPath;
+                    WriteObject(buildPath, build);
+                    WriteObject(manualPath, manual);
+                    break;
+                case "mutated-bytes":
+                    File.AppendAllText(AssetModulePath, "mutated\n", new UTF8Encoding(false));
+                    break;
+                case "manual-path-mismatch":
+                    manual["asset_module_path"] = ExecutablePath;
+                    WriteObject(manualPath, manual);
+                    break;
+                case "manual-hash-mismatch":
+                    manual["asset_module_sha256"] = new string('F', 64);
+                    WriteObject(manualPath, manual);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mutation), mutation, "Unknown Asset DLL mutation.");
+            }
+        }
+
         public void SetEveryBuildConfiguration(string configuration)
         {
             var buildPath = Path.Combine(RunRoot, "build-manifest.json");
@@ -1184,6 +1247,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         {
             File.WriteAllBytes(ExecutablePath, Encoding.ASCII.GetBytes("fixture executable identity\n"));
             ExecutableHash = Sha256(File.ReadAllBytes(ExecutablePath));
+            File.WriteAllBytes(AssetModulePath, Encoding.ASCII.GetBytes("fixture Asset Library module identity\n"));
+            AssetModuleHash = Sha256(File.ReadAllBytes(AssetModulePath));
             WriteSourceIdentityManifests();
 
             var firstBase = new DateTimeOffset(2026, 8, 19, 0, 0, 0, TimeSpan.Zero);
@@ -1314,6 +1379,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("build_configuration", BuildConfiguration),
                 ("executable_path", ExecutablePath),
                 ("executable_sha256", ExecutableHash),
+                ("asset_module_path", AssetModulePath),
+                ("asset_module_sha256", AssetModuleHash),
                 ("created_at", createdAt.ToString("O"))));
 
             Dictionary<string, object?> Session(string id, int processId, string hwnd) => D(
@@ -1334,6 +1401,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
                 ("run_root", RunRoot),
                 ("executable_path", ExecutablePath),
                 ("executable_sha256", ExecutableHash),
+                ("asset_module_path", AssetModulePath),
+                ("asset_module_sha256", AssetModuleHash),
                 ("synthetic_fixture_only", true),
                 ("customer_media_allowed", false),
                 ("eagle_library_write_allowed", false),
