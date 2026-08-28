@@ -197,6 +197,8 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             "previousTupleInteractionAt",
             "unexpected_auxiliary_window_count_after_capture",
             "no_unapproved_auxiliary_window_during_capture",
+            "InputDiagnostics\\asset-library-import.json",
+            "Retry session contains file-picker/import contamination.",
             "synthetic-directory-recursive");
 
         foreach (var forbidden in new[]
@@ -281,6 +283,106 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         Assert.AreEqual(0, result.ExitCode, result.Output);
         StringAssert.Contains(result.Output, "pixel-tart-asset-library-p1-gate-a-validation/v1");
         Assert.AreEqual(before, TreeFingerprint(fixture.Root), "The read-only validator changed its contract, script, or run evidence.");
+    }
+
+    [TestMethod]
+    [DataRow("08-first-empty-fixture", "first-empty")]
+    [DataRow("09-loading-fixture", "loading")]
+    [DataRow("10-recoverable-error-fixture", "recoverable-error")]
+    [DataRow("11-retry-recovered-fixture", "retry-recovered")]
+    public void ValidatorRejectsEachMissingRequiredStateCapture(string captureName, string sceneId)
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.RemoveRequiredStateCapture(captureName);
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, $"State '{sceneId}' must have exactly one PNG + window-evidence pair.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsRetryActivationBeforeRecoverableError()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.MoveRetryMouseActivationBeforeError();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "Retry physical activation is not between attempt 1 error and attempt 2 readiness.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsDuplicateRetryActivation()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.DuplicateRetryMouseActivation();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "RetryAssetLibraryLoad must have exactly one verified physical mouse or keyboard activation.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsRetryFilePickerOrImportContamination()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.AddRetryImportContamination();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "Retry session contains file-picker/import contamination.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsUnapprovedAuxiliaryWindow()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.AddUnexpectedAuxiliaryWindow();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "has an unexpected auxiliary window.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsSplitterEvidenceWithoutAllFourKeyLayers()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.RemoveFirstSplitterWpfLayer();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "No single physical diagnostic session contains all four splitter Left/Right Layer 1-4 attempts.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsFinalDisplayThatWasNotRestoredToBaseline()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.CorruptRestoredDisplayWidth();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "before_capture width mismatch.");
+    }
+
+    [TestMethod]
+    public void ValidatorRejectsScreenshotHashMismatchWithoutPngCorruption()
+    {
+        using var fixture = CapturedFixture.Create();
+        fixture.CorruptScreenshotHash();
+
+        var result = RunValidatorWithoutMutatingInput(fixture);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        StringAssert.Contains(result.Output, "PNG SHA-256 does not match the file.");
     }
 
     [TestMethod]
@@ -596,6 +698,87 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         private string ExecutablePath => Path.Combine(RunRoot, ExecutableName);
         private string ExecutableHash { get; set; } = string.Empty;
         public static string AuthoritySourceHead => SourceHead;
+
+        public void RemoveRequiredStateCapture(string captureName)
+        {
+            File.Delete(Path.Combine(RunRoot, captureName + ".window-evidence.json"));
+            File.Delete(Path.Combine(RunRoot, captureName + ".png"));
+        }
+
+        public void MoveRetryMouseActivationBeforeError()
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = ReadObject(path);
+            var attempt = root["attempts"]!.AsArray()[0]!.AsObject();
+            var startedAt = new DateTimeOffset(2026, 8, 19, 0, 1, 8, TimeSpan.Zero);
+            attempt["started_at"] = startedAt.ToString("O");
+            attempt["updated_at"] = startedAt.AddSeconds(1).ToString("O");
+            attempt["layer1_win32"]!["down"]!["timestamp"] = startedAt.ToString("O");
+            attempt["layer1_win32"]!["up"]!["timestamp"] = startedAt.AddMilliseconds(200).ToString("O");
+            var wpfEvents = attempt["layer2_wpf"]!["events"]!.AsArray();
+            wpfEvents[0]!["timestamp"] = startedAt.AddMilliseconds(50).ToString("O");
+            wpfEvents[1]!["timestamp"] = startedAt.AddMilliseconds(150).ToString("O");
+            root["updated_at"] = startedAt.AddSeconds(1).ToString("O");
+            WriteObject(path, root);
+        }
+
+        public void DuplicateRetryMouseActivation()
+        {
+            var path = Path.Combine(RunRoot, "retry-physical-pointer.json");
+            var root = ReadObject(path);
+            var attempts = root["attempts"]!.AsArray();
+            var duplicate = attempts[0]!.DeepClone().AsObject();
+            duplicate["attempt_id"] = "pointer-retry-duplicate";
+            attempts.Add(duplicate);
+            WriteObject(path, root);
+        }
+
+        public void AddRetryImportContamination()
+        {
+            var path = Path.Combine(RunRoot, "sessions", "retry", "InputDiagnostics", "asset-library-import.json");
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            WriteJson(path, D(
+                ("picker_accepted", true),
+                ("import_command_entered", true),
+                ("import_service_entered", true),
+                ("selected_file_count", 1),
+                ("imported_count", 1),
+                ("source_kind", "file-picker")));
+        }
+
+        public void AddUnexpectedAuxiliaryWindow()
+        {
+            var path = Path.Combine(RunRoot, "09-loading-fixture.window-evidence.json");
+            var root = ReadObject(path);
+            root["unexpected_auxiliary_window_count"] = 1;
+            root["verification"]!["no_unapproved_auxiliary_window_during_capture"] = false;
+            WriteObject(path, root);
+        }
+
+        public void RemoveFirstSplitterWpfLayer()
+        {
+            var path = Path.Combine(RunRoot, "keyboard-physical-pointer.json");
+            var root = ReadObject(path);
+            root["key_attempts"]!.AsArray()[0]!.AsObject().Remove("layer2_wpf");
+            WriteObject(path, root);
+        }
+
+        public void CorruptRestoredDisplayWidth()
+        {
+            var path = Path.Combine(RunRoot, "restore-baseline-3840x2160-150pct-fixture.window-evidence.json");
+            var root = ReadObject(path);
+            root["display"]!["before_capture"]!["current_width_physical_pixels"] = 2560;
+            root["display"]!["after_capture"]!["current_width_physical_pixels"] = 2560;
+            WriteObject(path, root);
+        }
+
+        public void CorruptScreenshotHash()
+        {
+            var path = Path.Combine(RunRoot, "08-first-empty-fixture.window-evidence.json");
+            var root = ReadObject(path);
+            root["screenshot"]!["sha256"] = new string('0', 64);
+            WriteObject(path, root);
+        }
 
         public void UseRetryKeyboardActivation(string key)
         {
@@ -1629,6 +1812,11 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
             RedirectStandardOutput = true,
             RedirectStandardError = true
         };
+        startInfo.Environment["PSModulePath"] = string.Join(
+            Path.PathSeparator,
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WindowsPowerShell", "Modules"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "WindowsPowerShell", "Modules"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WindowsPowerShell", "v1.0", "Modules"));
         startInfo.ArgumentList.Add("-NoProfile");
         startInfo.ArgumentList.Add("-NonInteractive");
         startInfo.ArgumentList.Add("-ExecutionPolicy");
@@ -1643,6 +1831,14 @@ public sealed class AssetLibraryP1GateAEvidenceContractTests
         var standardError = process.StandardError.ReadToEndAsync();
         Assert.IsTrue(process.WaitForExit(30_000), "Gate A validator process did not exit within 30 seconds.");
         return (process.ExitCode, standardOutput.GetAwaiter().GetResult() + standardError.GetAwaiter().GetResult());
+    }
+
+    private static (int ExitCode, string Output) RunValidatorWithoutMutatingInput(CapturedFixture fixture)
+    {
+        var before = TreeFingerprint(fixture.Root);
+        var result = RunPowerShell(fixture.ScriptPath, fixture.RunRoot);
+        Assert.AreEqual(before, TreeFingerprint(fixture.Root), "The read-only validator changed its synthetic input tree.");
+        return result;
     }
 
     private static string TreeFingerprint(string root)

@@ -1093,6 +1093,34 @@ if ($scenarioFiles.Count -eq 1) {
             Require-True (Test-PathAtOrInsideRoot $isolatedRoot $resolvedRunRoot) 'State-controller isolatedRoot is outside the supplied run root.'
             Require-True (Test-PathInsideRoot $scenarioFiles[0].FullName $isolatedRoot) 'State-controller scenario manifest is outside its isolated root.'
         }
+        if ((Test-FullyQualifiedPath $isolatedRoot) -and (Test-PathAtOrInsideRoot $isolatedRoot $resolvedRunRoot)) {
+            $retryImportDiagnosticPath = Join-Path $isolatedRoot 'InputDiagnostics\asset-library-import.json'
+            if (Test-Path -LiteralPath $retryImportDiagnosticPath) {
+                $retryImportDiagnosticIsFile = Test-Path -LiteralPath $retryImportDiagnosticPath -PathType Leaf
+                Require-True $retryImportDiagnosticIsFile 'Retry session InputDiagnostics/asset-library-import.json must be absent or a JSON file.'
+                if ($retryImportDiagnosticIsFile) {
+                    $retryImportDiagnostic = Read-JsonFile $retryImportDiagnosticPath
+                    if ($null -ne $retryImportDiagnostic) {
+                        $selectedFileCount = 0
+                        $importedCount = 0
+                        $selectedFileCountText = [string](Get-PropertyValue $retryImportDiagnostic 'selected_file_count')
+                        $importedCountText = [string](Get-PropertyValue $retryImportDiagnostic 'imported_count')
+                        $selectedFileCountIsZero = [string]::IsNullOrWhiteSpace($selectedFileCountText) -or
+                            ([int]::TryParse($selectedFileCountText, [ref]$selectedFileCount) -and $selectedFileCount -eq 0)
+                        $importedCountIsZero = [string]::IsNullOrWhiteSpace($importedCountText) -or
+                            ([int]::TryParse($importedCountText, [ref]$importedCount) -and $importedCount -eq 0)
+                        $retryImportContaminated =
+                            (Test-TrueValue (Get-PropertyValue $retryImportDiagnostic 'picker_accepted')) -or
+                            (Test-TrueValue (Get-PropertyValue $retryImportDiagnostic 'import_command_entered')) -or
+                            (Test-TrueValue (Get-PropertyValue $retryImportDiagnostic 'import_service_entered')) -or
+                            -not $selectedFileCountIsZero -or
+                            -not $importedCountIsZero -or
+                            -not [string]::IsNullOrWhiteSpace([string](Get-PropertyValue $retryImportDiagnostic 'source_kind'))
+                        Require-True (-not $retryImportContaminated) 'Retry session contains file-picker/import contamination.'
+                    }
+                }
+            }
+        }
         Require-True (Test-TrueValue (Get-PropertyValue $scenarioManifest 'freshDatabaseVerified')) 'State-controller manifest did not record a fresh database verification.'
         $manifestDatabasePath = [string](Get-PropertyValue $scenarioManifest 'databasePath')
         Require-True (Test-FullyQualifiedPath $manifestDatabasePath) 'State-controller manifest databasePath is not absolute runtime evidence.'
