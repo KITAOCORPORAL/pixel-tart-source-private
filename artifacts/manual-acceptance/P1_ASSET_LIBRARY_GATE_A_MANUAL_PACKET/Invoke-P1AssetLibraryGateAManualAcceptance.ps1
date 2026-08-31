@@ -259,8 +259,24 @@ function Complete-Instruction {
 }
 
 function New-ProbeResult {
-    param([bool]$Passed, [string]$Signature, [string]$Detail, [bool]$Fatal = $false)
-    return [pscustomobject]@{ Passed = $Passed; Signature = $Signature; Detail = $Detail; Fatal = $Fatal }
+    param([bool]$Passed, [string]$Signature, [string]$Detail, [bool]$Fatal = $false, $Attempt, $Transition)
+    $properties = [ordered]@{ Passed = $Passed; Signature = $Signature; Detail = $Detail; Fatal = $Fatal }
+    $hasAttempt = $PSBoundParameters.ContainsKey('Attempt')
+    $hasTransition = $PSBoundParameters.ContainsKey('Transition')
+    if ($hasAttempt -ne $hasTransition) {
+        throw "Probe result fields 'Attempt' and 'Transition' must be supplied together."
+    }
+    if ($hasTransition) {
+        if ($null -eq $Attempt -or $Attempt -is [Array]) {
+            throw "Probe result field 'Attempt' must be one non-null object."
+        }
+        if ($null -eq $Transition -or $Transition -is [Array]) {
+            throw "Probe result field 'Transition' must be one non-null object."
+        }
+        $properties['Attempt'] = $Attempt
+        $properties['Transition'] = $Transition
+    }
+    return [pscustomobject]$properties
 }
 
 function Write-StepTimeoutDiagnostic {
@@ -1208,18 +1224,41 @@ function Get-NewKeyTransitionMatches {
     return $matches
 }
 
+function Get-HumanKeyInstruction {
+    param([Parameter(Mandatory = $true)][string]$Key)
+    switch -CaseSensitive ($Key) {
+        'Left' { return '键盘左方向键 ←' }
+        'Right' { return '键盘右方向键 →' }
+        'Enter' { return '回车键' }
+        'Space' { return '空格键' }
+        default { throw '验收脚本遇到不支持的按键标识。' }
+    }
+}
+
+function Get-HumanControlInstruction {
+    param([Parameter(Mandatory = $true)][string]$ControlId)
+    switch -CaseSensitive ($ControlId) {
+        'AssetOrganizationSplitter' { return '左边文件夹区和中间素材区域之间的竖线' }
+        'AssetInspectorSplitter' { return '中间素材区域和右侧信息栏之间的竖线' }
+        'AssetThumbnailSizeSlider' { return '“缩略图大小”滑块' }
+        default { throw '验收脚本遇到不支持的控件标识。' }
+    }
+}
+
 function Wait-KeyTransitionStep {
     param($Session, [string]$StepId, [string]$Instruction, [string]$ControlId, [string]$Key, [string]$Kind, [double]$Boundary = 0, [string]$Direction = '')
     $beforeDocument = Get-PhysicalDocument $Session.Root
     $baselineAttemptIds = @(@(Get-PropertyValue $beforeDocument 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
+    $humanKey = Get-HumanKeyInstruction $Key
+    $humanControl = Get-HumanControlInstruction $ControlId
     $result = Wait-ForStep $StepId $Instruction -Session $Session -Probe {
         $document = Get-PhysicalDocument $Session.Root
         $matches = @(Get-NewKeyTransitionMatches $document $baselineAttemptIds $ControlId $Key $Kind $Boundary $Direction)
-        if ($matches.Count -gt 1) { return New-ProbeResult $false '' "$ControlId 收到超过一次 $Key；本轮不能继续" $true }
-        if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待 $ControlId 的一次真实 $Key 四层证据" }
+        if ($matches.Count -gt 1) { return New-ProbeResult $false '' "$humanControl 收到超过一次$humanKey；本轮不能继续" $true }
+        if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待在$humanControl上按一次$humanKey后的四层真实证据" }
         $transition = $matches[0].Transition
         $after = [double](Get-PropertyValue $transition 'after_actual_value')
-        New-ProbeResult $true ([string](Get-PropertyValue $transition 'transition_id')) "$ControlId：$Key 已通过，当前值 $after"
+        New-ProbeResult $true ([string](Get-PropertyValue $transition 'transition_id')) "$humanControl：$humanKey 已通过，当前值 $after" -Attempt $matches[0].Attempt -Transition $transition
     }
     return $result
 }
@@ -1337,7 +1376,31 @@ function Capture-WindowEvidence {
 
 function Get-NewTransitionWidth {
     param($WaitResult)
-    return [double](Get-PropertyValue $WaitResult.Transition 'after_persisted_value')
+    $transitionState = Get-PropertyState $WaitResult 'Transition'
+    if (-not $transitionState.Present -or $transitionState.IsArray -or $null -eq $transitionState.Value) {
+        throw "Key transition step result is missing required scalar field 'Transition'."
+    }
+    $attemptState = Get-PropertyState $WaitResult 'Attempt'
+    if (-not $attemptState.Present -or $attemptState.IsArray -or $null -eq $attemptState.Value) {
+        throw "Key transition step result is missing required scalar field 'Attempt'."
+    }
+    $widthState = Get-PropertyState $transitionState.Value 'after_persisted_value'
+    if (-not $widthState.Present -or $widthState.IsArray -or $null -eq $widthState.Value) {
+        throw "Transition is missing required scalar field 'after_persisted_value'."
+    }
+    $numericTypes = @(
+        [TypeCode]::Byte, [TypeCode]::SByte, [TypeCode]::Int16, [TypeCode]::UInt16,
+        [TypeCode]::Int32, [TypeCode]::UInt32, [TypeCode]::Int64, [TypeCode]::UInt64,
+        [TypeCode]::Single, [TypeCode]::Double, [TypeCode]::Decimal
+    )
+    if ([Type]::GetTypeCode($widthState.Value.GetType()) -notin $numericTypes) {
+        throw "Transition field 'after_persisted_value' must be numeric."
+    }
+    $width = [double]$widthState.Value
+    if ([double]::IsNaN($width) -or [double]::IsInfinity($width)) {
+        throw "Transition field 'after_persisted_value' must be finite."
+    }
+    return $width
 }
 
 function Invoke-RecoveryCheck {
@@ -1442,7 +1505,7 @@ function Invoke-RunPresencePreflight {
     Write-Host ("当前 commit：{0}" -f $SourceHead) -ForegroundColor Cyan
     Write-Host ("构建哈希：EXE {0}；Asset DLL {1}" -f $script:executableHash, $script:assetModuleHash) -ForegroundColor Cyan
     Write-Host ("原始显示：{0}x{1}@{2}Hz / {3}%" -f $DisplayAtStart.width, $DisplayAtStart.height, $DisplayAtStart.refresh_rate_hz, $DisplayAtStart.scale_percent) -ForegroundColor Cyan
-    Write-Host '预计阶段：空库关闭 → 唯一 Retry → splitter/折叠/缩略图 → 重启恢复 → 四组 DPI → 恢复基线。' -ForegroundColor Cyan
+    Write-Host '预计阶段：空库关闭 → 唯一重试 → 区域竖线/折叠/缩略图 → 重启恢复 → 四组显示缩放 → 恢复基线。' -ForegroundColor Cyan
     Write-Host '禁止：不要导入用户素材、不要触碰 Eagle .library、不要重复点击/按键、不要切回聊天。' -ForegroundColor Red
 
     if (-not (Test-DisplayMatches $DisplayAtStart $baselineDisplay $true)) {
@@ -1724,7 +1787,7 @@ function Invoke-RealRun {
     $retryBefore = Get-PhysicalDocument $retry.Root
     $retryBaselineIds = @(@(Get-PropertyValue $retryBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') }) +
         @(@(Get-PropertyValue $retryBefore 'attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'retry-activate-once' '优先键盘：用 Tab/Shift+Tab 聚焦“重试”后，只按一次 Enter；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手并保持窗口不动，无需回复。' -Session $retry -RequireForeground:$false -Probe {
+    Wait-ForStep 'retry-activate-once' '优先用键盘：按键盘 Tab 键或 Shift+Tab 组合键把焦点移到“重试”按钮后，只按一次回车键；若焦点难以判断，可改用鼠标只单击一次“重试”。两种方式只能选一种，完成后停手并保持窗口不动，无需回复。' -Session $retry -RequireForeground:$false -Probe {
         $data = Get-StateSessionData $retry.Root
         $document = Get-PhysicalDocument $retry.Root
         $import = Read-JsonFileSafely (Join-Path $retry.Root 'InputDiagnostics\asset-library-import.json')
@@ -1773,22 +1836,22 @@ function Invoke-RealRun {
     $keyboardEvidenceRoot = Join-Path $script:runRoot 'evidence\keyboard'
     Capture-WindowEvidence $regular 'keyboard-splitters-start-v3' $keyboardEvidenceRoot | Out-Null
 
-    Wait-DragStep $regular 'org-drag-min' '把组织栏分隔条拖到最左边，直到最小宽度 180。' 'AssetOrganizationSplitter' 180 420 'minimum' | Out-Null
-    Wait-KeyTransitionStep $regular 'org-min-left' '不要再拖动；在组织栏分隔条上只按一次 Left。' 'AssetOrganizationSplitter' 'Left' 'boundary' 180 | Out-Null
-    Wait-DragStep $regular 'org-drag-max' '把组织栏分隔条拖到最右边，直到最大宽度 420。' 'AssetOrganizationSplitter' 180 420 'maximum' | Out-Null
-    Wait-KeyTransitionStep $regular 'org-max-right' '不要再拖动；在组织栏分隔条上只按一次 Right。' 'AssetOrganizationSplitter' 'Right' 'boundary' 420 | Out-Null
-    Wait-DragStep $regular 'org-drag-middle' '把组织栏分隔条拖到 180–420 之间的中间位置。' 'AssetOrganizationSplitter' 180 420 'middle' | Out-Null
-    $orgRight = Wait-KeyTransitionStep $regular 'org-middle-right' '在组织栏分隔条上只按一次 Right。' 'AssetOrganizationSplitter' 'Right' 'regular' 0 'increase'
-    $orgLeft = Wait-KeyTransitionStep $regular 'org-middle-left' '在组织栏分隔条上只按一次 Left。' 'AssetOrganizationSplitter' 'Left' 'regular' 0 'decrease'
+    Wait-DragStep $regular 'org-drag-min' '把左边文件夹区和中间素材区域之间的竖线拖到最左边，直到最小宽度 180。' 'AssetOrganizationSplitter' 180 420 'minimum' | Out-Null
+    Wait-KeyTransitionStep $regular 'org-min-left' '不要再拖动；点一下左边文件夹区和中间素材区域之间的竖线，然后只按一次键盘左方向键 ←。' 'AssetOrganizationSplitter' 'Left' 'boundary' 180 | Out-Null
+    Wait-DragStep $regular 'org-drag-max' '把左边文件夹区和中间素材区域之间的竖线拖到最右边，直到最大宽度 420。' 'AssetOrganizationSplitter' 180 420 'maximum' | Out-Null
+    Wait-KeyTransitionStep $regular 'org-max-right' '不要再拖动；点一下左边文件夹区和中间素材区域之间的竖线，然后只按一次键盘右方向键 →。' 'AssetOrganizationSplitter' 'Right' 'boundary' 420 | Out-Null
+    Wait-DragStep $regular 'org-drag-middle' '把左边文件夹区和中间素材区域之间的竖线拖到 180–420 之间的中间位置。' 'AssetOrganizationSplitter' 180 420 'middle' | Out-Null
+    $orgRight = Wait-KeyTransitionStep $regular 'org-middle-right' '点一下左边文件夹区和中间素材区域之间的竖线，然后只按一次键盘右方向键 →。' 'AssetOrganizationSplitter' 'Right' 'regular' 0 'increase'
+    $orgLeft = Wait-KeyTransitionStep $regular 'org-middle-left' '点一下左边文件夹区和中间素材区域之间的竖线，然后只按一次键盘左方向键 ←。' 'AssetOrganizationSplitter' 'Left' 'regular' 0 'decrease'
     $orgWidth = Get-NewTransitionWidth $orgLeft
 
-    Wait-DragStep $regular 'inspector-drag-min' '把检查器分隔条拖到最右边，直到检查器最小宽度 260。' 'AssetInspectorSplitter' 260 520 'minimum' | Out-Null
-    Wait-KeyTransitionStep $regular 'inspector-min-right' '不要再拖动；在检查器分隔条上只按一次 Right。' 'AssetInspectorSplitter' 'Right' 'boundary' 260 | Out-Null
-    Wait-DragStep $regular 'inspector-drag-max' '把检查器分隔条拖到最左边，直到检查器最大宽度 520。' 'AssetInspectorSplitter' 260 520 'maximum' | Out-Null
-    Wait-KeyTransitionStep $regular 'inspector-max-left' '不要再拖动；在检查器分隔条上只按一次 Left。' 'AssetInspectorSplitter' 'Left' 'boundary' 520 | Out-Null
-    Wait-DragStep $regular 'inspector-drag-middle' '把检查器分隔条拖到 260–520 之间的中间位置。' 'AssetInspectorSplitter' 260 520 'middle' | Out-Null
-    $inspectorLeft = Wait-KeyTransitionStep $regular 'inspector-middle-left' '在检查器分隔条上只按一次 Left。' 'AssetInspectorSplitter' 'Left' 'regular' 0 'increase'
-    $inspectorRight = Wait-KeyTransitionStep $regular 'inspector-middle-right' '在检查器分隔条上只按一次 Right。' 'AssetInspectorSplitter' 'Right' 'regular' 0 'decrease'
+    Wait-DragStep $regular 'inspector-drag-min' '把中间素材区域和右侧信息栏之间的竖线拖到最右边，直到右侧信息栏最小宽度 260。' 'AssetInspectorSplitter' 260 520 'minimum' | Out-Null
+    Wait-KeyTransitionStep $regular 'inspector-min-right' '不要再拖动；点一下中间素材区域和右侧信息栏之间的竖线，然后只按一次键盘右方向键 →。' 'AssetInspectorSplitter' 'Right' 'boundary' 260 | Out-Null
+    Wait-DragStep $regular 'inspector-drag-max' '把中间素材区域和右侧信息栏之间的竖线拖到最左边，直到右侧信息栏最大宽度 520。' 'AssetInspectorSplitter' 260 520 'maximum' | Out-Null
+    Wait-KeyTransitionStep $regular 'inspector-max-left' '不要再拖动；点一下中间素材区域和右侧信息栏之间的竖线，然后只按一次键盘左方向键 ←。' 'AssetInspectorSplitter' 'Left' 'boundary' 520 | Out-Null
+    Wait-DragStep $regular 'inspector-drag-middle' '把中间素材区域和右侧信息栏之间的竖线拖到 260–520 之间的中间位置。' 'AssetInspectorSplitter' 260 520 'middle' | Out-Null
+    $inspectorLeft = Wait-KeyTransitionStep $regular 'inspector-middle-left' '点一下中间素材区域和右侧信息栏之间的竖线，然后只按一次键盘左方向键 ←。' 'AssetInspectorSplitter' 'Left' 'regular' 0 'increase'
+    $inspectorRight = Wait-KeyTransitionStep $regular 'inspector-middle-right' '点一下中间素材区域和右侧信息栏之间的竖线，然后只按一次键盘右方向键 →。' 'AssetInspectorSplitter' 'Right' 'regular' 0 'decrease'
     $inspectorWidth = Get-NewTransitionWidth $inspectorRight
 
     Wait-PaneToggleStep $regular 'org-collapse' '只点击一次“收起组织栏”。' 'organization' $true $orgWidth | Out-Null
@@ -1796,18 +1859,18 @@ function Invoke-RealRun {
     Wait-PaneToggleStep $regular 'inspector-collapse' '只点击一次“收起检查器”。' 'inspector' $true $inspectorWidth | Out-Null
     Wait-PaneToggleStep $regular 'inspector-expand' '只点击一次“展开检查器”。' 'inspector' $false $inspectorWidth | Out-Null
 
-    Wait-ForStep 'thumbnail-focus' '仅用真实 Tab 或 Shift+Tab，把焦点移动到“缩略图大小”滑块，然后停止。' -Session $regular -Probe {
+    Wait-ForStep 'thumbnail-focus' '只用键盘 Tab 键或 Shift+Tab 组合键，把焦点移动到“缩略图大小”滑块，然后停止。' -Session $regular -Probe {
         $focused = Get-FocusedAutomationObservation
         $passed = $null -ne $focused -and $focused.ProcessId -eq $regular.Process.Id -and $focused.AutomationId -ceq 'AssetThumbnailSizeSlider'
         New-ProbeResult $passed 'thumbnail-slider-focused' "当前焦点 AutomationId=$([string](Get-PropertyValue $focused 'AutomationId'))"
     } | Out-Null
     $sliderBefore = Get-PhysicalDocument $regular.Root
     $sliderBaseline = @(@(Get-PropertyValue $sliderBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-    Wait-ForStep 'thumbnail-right' '焦点保持在缩略图滑块，只按一次 Right；完成后停手并保持窗口不动，无需回复。' -Session $regular -RequireForeground:$false -Probe {
+    Wait-ForStep 'thumbnail-right' '焦点保持在“缩略图大小”滑块，只按一次键盘右方向键 →；完成后停手并保持窗口不动，无需回复。' -Session $regular -RequireForeground:$false -Probe {
         $document = Get-PhysicalDocument $regular.Root
         $matches = @(Get-NewKeyTransitionMatches $document $sliderBaseline 'AssetThumbnailSizeSlider' 'Right' 'regular' 0 'increase')
-        if ($matches.Count -gt 1) { return New-ProbeResult $false '' '缩略图滑块收到超过一次 Right' $true }
-        if ($matches.Count -eq 0) { return New-ProbeResult $false '' '等待滑块一次 Right 的四层写回证据；范围 120–280' }
+        if ($matches.Count -gt 1) { return New-ProbeResult $false '' '“缩略图大小”滑块收到超过一次键盘右方向键 →' $true }
+        if ($matches.Count -eq 0) { return New-ProbeResult $false '' '等待滑块一次键盘右方向键 → 的四层写回证据；范围 120–280' }
         New-ProbeResult $true ([string](Get-PropertyValue $matches[0].Transition 'transition_id')) ("缩略图实际/持久值 {0}/{1}" -f (Get-PropertyValue $matches[0].Transition 'after_actual_value'), (Get-PropertyValue $matches[0].Transition 'after_persisted_value'))
     } | Out-Null
     Capture-WindowEvidence $regular 'keyboard-splitters-complete-v3' $keyboardEvidenceRoot | Out-Null
@@ -1873,24 +1936,26 @@ function Invoke-RealRun {
             if ($actual -ge $maximum - 0.5) { 'Right' } else { 'Left' }
         }
         $direction = if (($controlId -ceq 'AssetOrganizationSplitter' -and $key -ceq 'Right') -or ($controlId -ceq 'AssetInspectorSplitter' -and $key -ceq 'Left')) { 'increase' } else { 'decrease' }
-        Wait-ForStep "dpi-$tupleIndex-focus" "仅用真实 Tab 或 Shift+Tab，把焦点移动到 $controlId，然后停止。" -Session $restart -Probe {
+        $humanControl = Get-HumanControlInstruction $controlId
+        $humanKey = Get-HumanKeyInstruction $key
+        Wait-ForStep "dpi-$tupleIndex-focus" "只用键盘 Tab 键或 Shift+Tab 组合键，把焦点移动到$humanControl，然后停止。" -Session $restart -Probe {
             $focused = Get-FocusedAutomationObservation
             $passed = $null -ne $focused -and $focused.ProcessId -eq $restart.Process.Id -and $focused.AutomationId -ceq $controlId
             New-ProbeResult $passed "focused-$controlId" "当前焦点 $([string](Get-PropertyValue $focused 'AutomationId'))"
         } | Out-Null
         $dpiBefore = Get-PhysicalDocument $restart.Root
         $dpiBaselineIds = @(@(Get-PropertyValue $dpiBefore 'key_attempts') | ForEach-Object { [string](Get-PropertyValue $_ 'attempt_id') })
-        Wait-ForStep "dpi-$tupleIndex-key" "焦点保持在 $controlId，只按一次 $key；完成后停手并保持窗口不动，无需回复。" -Session $restart -RequireForeground:$false -Probe {
+        Wait-ForStep "dpi-$tupleIndex-key" "焦点保持在$humanControl，只按一次$humanKey；完成后停手并保持窗口不动，无需回复。" -Session $restart -RequireForeground:$false -Probe {
             $current = Get-PhysicalDocument $restart.Root
             $matches = @(Get-NewKeyTransitionMatches $current $dpiBaselineIds $controlId $key 'regular' 0 $direction)
-            if ($matches.Count -gt 1) { return New-ProbeResult $false '' "该 tuple 收到超过一次 $key" $true }
-            if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待一次真实 $key：实际值必须在 $minimum–$maximum 内变化并写回" }
+            if ($matches.Count -gt 1) { return New-ProbeResult $false '' "该显示缩放组合收到超过一次$humanKey" $true }
+            if ($matches.Count -eq 0) { return New-ProbeResult $false '' "等待一次真实$humanKey：实际值必须在 $minimum–$maximum 内变化并写回" }
             $transition = $matches[0].Transition
             $defaultAt = [DateTimeOffset]::Parse([string](Get-PropertyValue $defaultRecord 'captured_at_utc'))
             $startedAt = [DateTimeOffset]::Parse([string](Get-PropertyValue $transition 'started_at'))
             $completedAt = [DateTimeOffset]::Parse([string](Get-PropertyValue $transition 'completed_at'))
             $passed = $startedAt -gt $defaultAt -and $completedAt -gt $startedAt
-            New-ProbeResult $passed ([string](Get-PropertyValue $transition 'transition_id')) "真实 $key 四层 transition 位于 default capture 之后"
+            New-ProbeResult $passed ([string](Get-PropertyValue $transition 'transition_id')) "真实$humanKey的四层状态变化位于默认截图之后"
         } | Out-Null
         Capture-WindowEvidence $restart ("dpi-{0}-interaction" -f $tuple.token) $dpiEvidenceRoot | Out-Null
     }

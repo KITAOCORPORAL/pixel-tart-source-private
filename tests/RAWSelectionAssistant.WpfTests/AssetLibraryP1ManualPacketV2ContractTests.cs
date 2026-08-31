@@ -306,6 +306,86 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
+    public async Task KeyTransitionResultCarriesTheValidatedMatchIntoTheWidthConsumer()
+    {
+        var script = Text();
+        var keyStep = Slice(script, "function Wait-KeyTransitionStep", "function Wait-DragStep");
+        ContainsAll(
+            keyStep,
+            "-Attempt $matches[0].Attempt -Transition $transition",
+            "return $result");
+        ContainsAll(script, "键盘左方向键 ←", "键盘右方向键 →", "回车键", "空格键");
+        Assert.DoesNotContain("只按一次 Left", script, StringComparison.Ordinal);
+        Assert.DoesNotContain("只按一次 Right", script, StringComparison.Ordinal);
+        Assert.DoesNotContain("只按一次 Enter", script, StringComparison.Ordinal);
+
+        var result = await InvokeTransitionContractAsync(@"
+$attempt = [pscustomobject]@{ attempt_id = 'key-004' }
+$transition = [pscustomobject]@{ transition_id = 'control-011'; after_persisted_value = [double]257 }
+$probe = New-ProbeResult $true 'control-011' 'passed' -Attempt $attempt -Transition $transition
+if (-not [object]::ReferenceEquals($attempt, $probe.Attempt)) { throw 'Attempt identity was not preserved.' }
+if (-not [object]::ReferenceEquals($transition, $probe.Transition)) { throw 'Transition identity was not preserved.' }
+if ((Get-NewTransitionWidth $probe) -ne 257) { throw 'Persisted width was not preserved.' }
+Write-Output 'positive-pass'
+");
+
+        Assert.AreEqual(0, result.ExitCode, result.Error);
+        StringAssert.Contains(result.Output, "positive-pass");
+    }
+
+    [TestMethod]
+    public async Task KeyTransitionWidthContractRejectsMissingOrMalformedRequiredFields()
+    {
+        var result = await InvokeTransitionContractAsync(@"
+$attempt = [pscustomobject]@{ attempt_id = 'key-004' }
+$transition = [pscustomobject]@{ transition_id = 'control-011'; after_persisted_value = [double]257 }
+$cases = @(
+    [pscustomobject]@{ Name = 'missing-transition'; Value = [pscustomobject]@{ Attempt = $attempt }; Expected = ""field 'Transition'"" },
+    [pscustomobject]@{ Name = 'null-transition'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = $null }; Expected = ""field 'Transition'"" },
+    [pscustomobject]@{ Name = 'array-transition'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = @($transition) }; Expected = ""field 'Transition'"" },
+    [pscustomobject]@{ Name = 'missing-attempt'; Value = [pscustomobject]@{ Transition = $transition }; Expected = ""field 'Attempt'"" },
+    [pscustomobject]@{ Name = 'missing-width'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = [pscustomobject]@{} }; Expected = ""field 'after_persisted_value'"" },
+    [pscustomobject]@{ Name = 'text-width'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = [pscustomobject]@{ after_persisted_value = '257' } }; Expected = 'must be numeric' },
+    [pscustomobject]@{ Name = 'nan-width'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = [pscustomobject]@{ after_persisted_value = [double]::NaN } }; Expected = 'must be finite' },
+    [pscustomobject]@{ Name = 'infinite-width'; Value = [pscustomobject]@{ Attempt = $attempt; Transition = [pscustomobject]@{ after_persisted_value = [double]::PositiveInfinity } }; Expected = 'must be finite' }
+)
+foreach ($case in $cases) {
+    $rejected = $false
+    try { [void](Get-NewTransitionWidth $case.Value) }
+    catch {
+        if ($_.Exception.Message.IndexOf($case.Expected, [StringComparison]::Ordinal) -lt 0) { throw }
+        $rejected = $true
+    }
+    if (-not $rejected) { throw ""Malformed case '$($case.Name)' was accepted."" }
+}
+Write-Output 'negative-pass'
+");
+
+        Assert.AreEqual(0, result.ExitCode, result.Error);
+        StringAssert.Contains(result.Output, "negative-pass");
+    }
+
+    [TestMethod]
+    public async Task LegacyProbeAndRawMatchFieldShapesRemainCompatible()
+    {
+        var result = await InvokeTransitionContractAsync(@"
+$legacyProbe = New-ProbeResult $true 'legacy-signature' 'legacy-detail' $true
+$legacyNames = @($legacyProbe.PSObject.Properties.Name)
+if (($legacyNames -join ',') -cne 'Passed,Signature,Detail,Fatal') { throw ""Legacy probe fields changed: $($legacyNames -join ',')"" }
+if (-not $legacyProbe.Passed -or -not $legacyProbe.Fatal -or $legacyProbe.Signature -cne 'legacy-signature' -or $legacyProbe.Detail -cne 'legacy-detail') { throw 'Legacy probe values changed.' }
+$legacyMatch = [pscustomobject]@{
+    Attempt = [pscustomobject]@{ attempt_id = 'key-legacy' }
+    Transition = [pscustomobject]@{ transition_id = 'transition-legacy'; after_persisted_value = [int64]300 }
+}
+if ((Get-NewTransitionWidth $legacyMatch) -ne 300) { throw 'Legacy raw match was rejected.' }
+Write-Output 'legacy-pass'
+");
+
+        Assert.AreEqual(0, result.ExitCode, result.Error);
+        StringAssert.Contains(result.Output, "legacy-pass");
+    }
+
+    [TestMethod]
     public void DragStepsConsumeTheExactMouseDragKindProducedAndValidatedByTheEvidenceContract()
     {
         var script = Text();
@@ -353,7 +433,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             "if ($usesKeyDownNativeUpFinalization)",
             "Test-KeyLayersLocal $attempt 'RetryAssetLibraryLoad' $key $true");
         ContainsAll(retryStep,
-            "只按一次 Enter",
+            "只按一次回车键",
             "$attemptThreeOrLater",
             "$attemptTwoAt = [DateTimeOffset]::MaxValue",
             "([DateTimeOffset]::Now - $attemptTwoAt).TotalSeconds -le 3");
@@ -512,6 +592,44 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(60));
         await process.WaitForExitAsync(cancellation.Token);
         return (process.ExitCode, await outputTask, await errorTask);
+    }
+
+    private static async Task<(int ExitCode, string Output, string Error)> InvokeTransitionContractAsync(string body)
+    {
+        var source = Text();
+        var testScript = string.Join(
+            Environment.NewLine,
+            "$ErrorActionPreference = 'Stop'",
+            "Set-StrictMode -Version Latest",
+            Slice(source, "function Get-PropertyValue", "function Get-NestedValue"),
+            Slice(source, "function New-ProbeResult", "function Write-StepTimeoutDiagnostic"),
+            Slice(source, "function Get-NewTransitionWidth", "function Invoke-RecoveryCheck"),
+            body);
+        var scriptPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"PixelTart-TransitionContract-{Guid.NewGuid():N}.ps1");
+        File.WriteAllText(scriptPath, testScript, new UTF8Encoding(true));
+        try
+        {
+            var start = new ProcessStartInfo("powershell.exe")
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            foreach (var argument in new[] { "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", scriptPath })
+                start.ArgumentList.Add(argument);
+
+            using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell process did not start.");
+            var outputTask = process.StandardOutput.ReadToEndAsync();
+            var errorTask = process.StandardError.ReadToEndAsync();
+            using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            await process.WaitForExitAsync(cancellation.Token);
+            return (process.ExitCode, await outputTask, await errorTask);
+        }
+        finally
+        {
+            File.Delete(scriptPath);
+        }
     }
 
     private static string WindowsPowerShellModulePath() => string.Join(';', new[]
