@@ -152,7 +152,10 @@ function Write-JsonAtomic {
     $json = $Value | ConvertTo-Json -Depth 20
     [IO.File]::WriteAllText($temporary, $json, [Text.UTF8Encoding]::new($false))
     if ([IO.File]::Exists($Path)) {
-        [IO.File]::Replace($temporary, $Path, $null)
+        $backup = "$Path.bak"
+        if ([IO.File]::Exists($backup)) { [IO.File]::Delete($backup) }
+        try { [IO.File]::Replace($temporary, $Path, $backup) }
+        finally { if ([IO.File]::Exists($backup)) { [IO.File]::Delete($backup) } }
     } else {
         [IO.File]::Move($temporary, $Path)
     }

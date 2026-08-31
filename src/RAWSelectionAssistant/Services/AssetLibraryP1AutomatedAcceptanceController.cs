@@ -943,9 +943,13 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
             !string.Equals(RequireString(root, "run_id"), _runId, StringComparison.Ordinal) ||
             !string.Equals(RequireString(root, "head"), _sourceHead, StringComparison.Ordinal))
             throw new InvalidOperationException("The aggregate summary does not match this automated run identity.");
-        if (root.TryGetProperty("primary_pid", out var primaryPid) && primaryPid.TryGetInt32(out var primary))
+        if (root.TryGetProperty("primary_pid", out var primaryPid) &&
+            primaryPid.ValueKind == JsonValueKind.Number &&
+            primaryPid.TryGetInt32(out var primary))
             _primaryPid = primary;
-        if (root.TryGetProperty("restart_pid", out var restartPid) && restartPid.TryGetInt32(out var restart))
+        if (root.TryGetProperty("restart_pid", out var restartPid) &&
+            restartPid.ValueKind == JsonValueKind.Number &&
+            restartPid.TryGetInt32(out var restart))
             _restartPid = restart;
         if (root.TryGetProperty("scenarios", out var scenarios) && scenarios.ValueKind == JsonValueKind.Array)
         {
