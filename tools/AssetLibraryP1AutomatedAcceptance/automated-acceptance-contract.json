@@ -1,0 +1,78 @@
+{
+  "schema": "pixel-tart-asset-library-p1-automated-acceptance-contract/v1",
+  "validation_mode": "automated",
+  "owner_manual_ux_smoke": "waived",
+  "manual_evidence_claimed": false,
+  "automated_capture_status": "captured",
+  "historical_manual_gate": "not_closed_superseded_as_release_blocker",
+  "manifest_file": "run-manifest.json",
+  "manifest_schema": "pixel-tart-asset-library-p1-automated-run/v1",
+  "event_journal_file": "app/evidence/events.ndjson",
+  "summary_journal_file": "app/evidence/summary.ndjson",
+  "summary_file": "app/evidence/summary.json",
+  "required_runner_session_count": 12,
+  "process_session_id_format": "lowercase-hex-32",
+  "pre_cleanup_database_audit_schema": "pixel-tart-p1-pre-cleanup-database-audit/v1",
+  "pre_cleanup_database_audit_file": "runner/database-consistency-audit.json",
+  "validate_existing_run_must_preserve_tree": true,
+  "source_head_format": "lowercase-hex-40",
+  "sha256_format": "lowercase-hex-64",
+  "expected_executable_name": "PixelTart_ModularHarness_V1_DevPreview.exe",
+  "expected_asset_module_name": "PixelTart.Modules.AssetLibrary.dll",
+  "repository": {
+    "implementation": "SqliteAssetLibraryRepository",
+    "schema_version": 6,
+    "schema_query": "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;",
+    "database_header": "SQLite format 3",
+    "required_schema_marker": "AssetLibrarySchemaInfo"
+  },
+  "required_scenario_order": [
+    "first-empty/v1",
+    "loading-error-retry-recovered/v1",
+    "organization-splitter/v1",
+    "inspector-splitter/v1",
+    "pane-collapse-expand/v1",
+    "thumbnail-slider/v1",
+    "selection-navigation-restart/v1",
+    "navigation-ime/v1",
+    "layout-dpi-buttons/v1"
+  ],
+  "required_dpi_matrix": [
+    { "width": 1366, "height": 768, "scale_percent": 100 },
+    { "width": 1920, "height": 1080, "scale_percent": 125 },
+    { "width": 1920, "height": 1080, "scale_percent": 150 },
+    { "width": 2560, "height": 1440, "scale_percent": 175 }
+  ],
+  "button_readability": {
+    "required_button_count": 27,
+    "required_states": ["normal", "hover", "pressed", "focus", "disabled"],
+    "required_themes": ["dark", "light", "high-contrast"],
+    "minimum_text_contrast": 4.5,
+    "minimum_non_text_contrast": 3.0
+  },
+  "safety_zero_fields": [
+    "desktop_input_injection_count",
+    "real_display_setting_write_count",
+    "eagle_write_count",
+    "user_source_read_count",
+    "user_source_write_count",
+    "direct_width_mutation_count",
+    "direct_settings_mutation_count",
+    "direct_sqlite_row_edit_count"
+  ],
+  "required_negative_fixtures": [
+    "missing-screenshot",
+    "mutated-hash",
+    "wrong-scenario-order",
+    "retry-twice",
+    "direct-width-mutation",
+    "direct-settings-mutation",
+    "cross-run-splice",
+    "wrong-pid-or-hwnd",
+    "dll-hash-mismatch",
+    "database-not-v6",
+    "import-contamination",
+    "uncleared-process",
+    "dpi-overflow"
+  ]
+}

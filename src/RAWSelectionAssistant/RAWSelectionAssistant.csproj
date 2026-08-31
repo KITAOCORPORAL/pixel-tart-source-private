@@ -30,12 +30,13 @@
     <DefineConstants Condition="'$(InputRoutingDiagnostics)' == 'true'">$(DefineConstants);INPUT_ROUTING_DIAGNOSTICS</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true'">$(DefineConstants);MODULAR_HARNESS_DEV_PREVIEW</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">$(DefineConstants);ASSET_LIBRARY_P1_STATE_ACCEPTANCE</DefineConstants>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE</DefineConstants>
     <RootNamespace>RAWSelectionAssistant</RootNamespace>
     <Version>$(PixelTartVersion)</Version>
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-    <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and ('$(AssetLibraryP1StateAcceptance)' == 'true' or ('$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(Configuration)' == 'Debug')) and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
     <Authors>像素蛋挞</Authors>
     <Product>像素蛋挞</Product>
     <Description>面向摄影师的本地分片、归片与照片处理工具平台</Description>
@@ -78,6 +79,19 @@
            Text="AssetLibraryP1StateAcceptance cannot be combined with AcceptanceBuild." />
     <Error Condition="'$(Configuration)' == 'Release'"
            Text="AssetLibraryP1StateAcceptance is forbidden in Release builds." />
+  </Target>
+
+  <Target Name="ValidateAssetLibraryP1AutomatedAcceptanceBuild"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(AssetLibraryP1AutomatedAcceptance)' == 'true'">
+    <Error Condition="'$(ModularHarnessDevPreview)' != 'true'"
+           Text="AssetLibraryP1AutomatedAcceptance requires ModularHarnessDevPreview=true." />
+    <Error Condition="'$(AcceptanceBuild)' == 'true'"
+           Text="AssetLibraryP1AutomatedAcceptance cannot be combined with AcceptanceBuild." />
+    <Error Condition="'$(Configuration)' != 'Debug'"
+           Text="AssetLibraryP1AutomatedAcceptance is restricted to Debug builds." />
+    <Error Condition="'$(AssetLibraryP1StateAcceptance)' == 'true'"
+           Text="AssetLibraryP1AutomatedAcceptance cannot be combined with the historical manual state seam." />
   </Target>
 
 </Project>

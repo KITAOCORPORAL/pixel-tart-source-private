@@ -11,7 +11,7 @@ using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace PixelTart.Modules.AssetLibrary;
 
-public partial class AssetLibraryPage : UserControl
+public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 {
     private readonly AssetLibraryViewModel _viewModel;
     private readonly bool _enablePreviewFeatures;
@@ -70,6 +70,12 @@ public partial class AssetLibraryPage : UserControl
     private async void OnUnloaded(object sender, RoutedEventArgs e)
     {
         if (_disposed || Application.Current?.MainWindow?.IsLoaded == true) return;
+        await DisposeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_disposed) return;
         _disposed = true;
         _pendingPaneWidthCommit?.Abort();
         _pendingPaneWidthCommit = null;

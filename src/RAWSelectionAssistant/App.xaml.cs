@@ -33,6 +33,9 @@ public partial class App : Application
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
     private AssetLibraryP1AcceptanceStateController? _assetLibraryP1StateController;
 #endif
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+    private AssetLibraryP1AutomatedAcceptanceController? _assetLibraryP1AutomatedController;
+#endif
 
     public PixelTartModuleRegistry? ModuleRegistry => _moduleRegistry;
 
@@ -47,12 +50,20 @@ public partial class App : Application
         }
         _assetLibraryP1StateController = AssetLibraryP1AcceptanceStateController.TryCreate(AppDataPaths.Root, logService: null);
 #endif
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        if (!TryAcquireSingleInstance())
+        {
+            Shutdown();
+            return;
+        }
+        _assetLibraryP1AutomatedController = AssetLibraryP1AutomatedAcceptanceController.TryCreate(AppDataPaths.Root, logService: null);
+#endif
         new AppDataMigrationService().MigrateLegacyData();
         _logService = new FileLogService();
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
-#if !ASSET_LIBRARY_P1_STATE_ACCEPTANCE
+#if !ASSET_LIBRARY_P1_STATE_ACCEPTANCE && !ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
         if (!TryAcquireSingleInstance())
         {
             Shutdown();
@@ -222,10 +233,20 @@ public partial class App : Application
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
             _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
 #endif
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+            _assetLibraryP1AutomatedController?.ApplyStartRoute(_mainViewModel);
+#endif
             await reminderNotifications.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };
             window.ApplySavedBounds(_mainViewModel.Settings);
             MainWindow = window;
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+            if (_assetLibraryP1AutomatedController is not null)
+            {
+                _assetLibraryP1AutomatedController.BindWindow(window);
+                window.ConfigureAssetLibraryP1AutomatedAcceptance(_assetLibraryP1AutomatedController);
+            }
+#endif
             window.Show();
             await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
@@ -233,7 +254,11 @@ public partial class App : Application
         catch (Exception ex)
         {
             _logService.Error("应用程序启动失败。", ex);
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+            _assetLibraryP1AutomatedController?.Fail(ex);
+#else
             ThemedMessageDialog.Show(null, Branding.ProductName, "软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", ThemedMessageKind.Error);
+#endif
             _singleInstance?.Dispose();
             Shutdown(-1);
         }
@@ -250,6 +275,9 @@ public partial class App : Application
         catch (Exception ex)
         {
             _logService?.Error("退出时保存设置失败。", ex);
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+            _assetLibraryP1AutomatedController?.Fail(ex);
+#endif
         }
 
         _singleInstance?.Dispose();
@@ -258,7 +286,22 @@ public partial class App : Application
         if (_compositionRoot is not null) _compositionRoot.BookingReminderScheduler.DisposeAsync().AsTask().GetAwaiter().GetResult();
         _weatherHttpClient?.Dispose();
         _appearanceService?.Dispose();
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        try
+        {
+            if (MainWindow is RAWSelectionAssistant.MainWindow automatedWindow)
+                automatedWindow.TeardownAssetLibraryP1AutomatedAcceptanceAsync().GetAwaiter().GetResult();
+            _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
+        }
+        catch (Exception ex)
+        {
+            _logService?.Error("自动验收退出时关闭模块失败。", ex);
+            _assetLibraryP1AutomatedController?.Fail(ex);
+        }
+        _assetLibraryP1AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
+#else
         _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
+#endif
         _logService?.Info("应用程序已退出。");
         base.OnExit(e);
     }
@@ -291,6 +334,14 @@ public partial class App : Application
         assetLibraryP1StateController = _assetLibraryP1StateController?.HasStateScenario == true
             ? _assetLibraryP1StateController
             : null;
+        if (assetLibraryP1StateController is not null)
+        {
+            enableAssetLibraryPreview = false;
+            assetLibraryDemoDirectory = null;
+        }
+#endif
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        assetLibraryP1StateController = _assetLibraryP1AutomatedController;
         if (assetLibraryP1StateController is not null)
         {
             enableAssetLibraryPreview = false;
@@ -361,6 +412,11 @@ public partial class App : Application
     private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         _logService?.Error("发生未处理的界面异常。", e.Exception);
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        _assetLibraryP1AutomatedController?.Fail(e.Exception);
+        e.Handled = true;
+        Shutdown(-1);
+#else
         ThemedMessageDialog.Show(Current?.MainWindow, Branding.ProductName, "程序遇到问题，但已记录详细信息。请重试当前操作。", ThemedMessageKind.Error);
         e.Handled = true;
         if (MainWindow is null || !MainWindow.IsVisible)
@@ -368,14 +424,28 @@ public partial class App : Application
             _singleInstance?.Dispose();
             Shutdown(-1);
         }
+#endif
     }
 
-    private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e) =>
-        _logService?.Error("发生未处理的程序异常。", e.ExceptionObject as Exception);
+    private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        var exception = e.ExceptionObject as Exception
+            ?? new InvalidOperationException("The automated process raised a non-Exception AppDomain failure.");
+        _logService?.Error("发生未处理的程序异常。", exception);
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        _assetLibraryP1AutomatedController?.Fail(exception);
+#endif
+    }
 
     private void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         _logService?.Error("发生未观察到的后台任务异常。", e.Exception);
+#if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
+        _assetLibraryP1AutomatedController?.Fail(e.Exception);
         e.SetObserved();
+        Shutdown(-1);
+#else
+        e.SetObserved();
+#endif
     }
 }
