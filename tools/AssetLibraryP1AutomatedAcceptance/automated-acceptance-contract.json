@@ -85,6 +85,8 @@
     "application-hash-mismatch",
     "sealed-application-mutation",
     "sealed-dependency-mutation",
-    "binary-tree-manifest-mismatch"
+    "binary-tree-manifest-mismatch",
+    "manifest-product-version-forgery",
+    "actual-product-version-mismatch"
   ]
 }

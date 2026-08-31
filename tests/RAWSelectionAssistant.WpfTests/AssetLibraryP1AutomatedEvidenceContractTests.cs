@@ -62,7 +62,9 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             "application-hash-mismatch",
             "sealed-application-mutation",
             "sealed-dependency-mutation",
-            "binary-tree-manifest-mismatch");
+            "binary-tree-manifest-mismatch",
+            "manifest-product-version-forgery",
+            "actual-product-version-mismatch");
         ContainsAll(validator,
             "events.ndjson",
             "summary.json",
@@ -144,6 +146,8 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     [DataRow("sealed-application-mutation")]
     [DataRow("sealed-dependency-mutation")]
     [DataRow("binary-tree-manifest-mismatch")]
+    [DataRow("manifest-product-version-forgery")]
+    [DataRow("actual-product-version-mismatch")]
     public void IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree(string fault)
     {
         using var fixture = new EvidenceFixture();
@@ -153,6 +157,8 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         var result = RunValidator(fixture.Root);
 
         Assert.AreNotEqual(0, result.ExitCode, $"Fault '{fault}' was accepted.\n{result.Output}");
+        if (fault is "manifest-product-version-forgery" or "actual-product-version-mismatch")
+            StringAssert.Contains(result.Output, "ProductVersion", $"Fault '{fault}' did not exercise the sealed-file ProductVersion validator.");
         Assert.AreEqual(before, fixture.TreeFingerprint(), $"Validation of '{fault}' changed its input tree.");
     }
 
@@ -220,7 +226,10 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     private sealed class EvidenceFixture : IDisposable
     {
         private const string RunId = "p1-auto-0123456789abcdef0123456789abcdef";
-        private const string Head = "18a8cb2ffe66de68cef12c856730f4309e9631e5";
+        private static readonly string FixtureVersionedBinary = typeof(AssetLibraryP1AutomatedEvidenceContractTests).Assembly.Location;
+        private static readonly string FixtureProductVersion = FileVersionInfo.GetVersionInfo(FixtureVersionedBinary).ProductVersion
+            ?? throw new InvalidOperationException("The evidence fixture assembly has no ProductVersion.");
+        private static readonly string Head = ProductVersionHead(FixtureProductVersion);
         private static readonly byte[] Png = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=");
         private readonly string _summaryPath;
         private readonly string _eventsPath;
@@ -247,9 +256,9 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             _mutableApplicationPath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.dll");
             _mutableDllPath = Path.Combine(buildDirectory, "PixelTart.Modules.AssetLibrary.dll");
             var mutableDepsPath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.deps.json");
-            File.WriteAllBytes(_mutableExePath, Encoding.UTF8.GetBytes("fixture-executable"));
-            File.WriteAllBytes(_mutableApplicationPath, Encoding.UTF8.GetBytes("fixture-application"));
-            File.WriteAllBytes(_mutableDllPath, Encoding.UTF8.GetBytes("fixture-module"));
+            File.Copy(FixtureVersionedBinary, _mutableExePath);
+            File.Copy(FixtureVersionedBinary, _mutableApplicationPath);
+            File.Copy(FixtureVersionedBinary, _mutableDllPath);
             File.WriteAllBytes(mutableDepsPath, Encoding.UTF8.GetBytes("{}"));
             var binaryDirectory = Path.Combine(Root, "binaries");
             Directory.CreateDirectory(binaryDirectory);
@@ -286,9 +295,9 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             build["build_source_asset_module_path"] = _mutableDllPath;
             build["build_source_asset_module_sha256"] = _dllHash;
             build["binary_snapshot"] = BinarySnapshot(buildDirectory, binaryDirectory);
-            build["executable_product_version"] = "2.3.0+" + Head;
-            build["application_product_version"] = "2.3.0+" + Head;
-            build["asset_module_product_version"] = "2.3.0+" + Head;
+            build["executable_product_version"] = FixtureProductVersion;
+            build["application_product_version"] = FixtureProductVersion;
+            build["asset_module_product_version"] = FixtureProductVersion;
             build["restore"] = BuildProcessResult("fixture-restore", new[] { "restore", "RAWSelectionAssistant.sln", "-nodeReuse:false", "-p:UseSharedCompilation=false" });
             build["build"] = BuildProcessResult("fixture-build", new[] { "build", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "-c", "Debug", "--no-restore", "-t:Rebuild", "-nodeReuse:false", "-p:UseSharedCompilation=false", "-p:TreatWarningsAsErrors=true", "-p:ModularHarnessDevPreview=true", "-p:InputRoutingDiagnostics=true", "-p:AssetLibraryP1AutomatedAcceptance=true", "-p:ContinuousIntegrationBuild=true", $"-p:SourceRevisionId={Head}", $"-p:BaseOutputPath={buildDirectory}\\" });
             build["source_audit"] = SourceAudit(repositoryRoot);
@@ -475,9 +484,29 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
                     treeManifest["binary_snapshot"]!["tree_sha256"] = new string('f', 64);
                     WriteJson(Path.Combine(Root, "build-manifest.json"), treeManifest);
                     break;
+                case "manifest-product-version-forgery":
+                    var forgedVersionManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    forgedVersionManifest["executable_product_version"] = "9.9.9+" + Head;
+                    WriteJson(Path.Combine(Root, "build-manifest.json"), forgedVersionManifest);
+                    break;
+                case "actual-product-version-mismatch":
+                    var actualVersionManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    File.WriteAllText(actualVersionManifest["executable_path"]!.GetValue<string>(), "not-a-versioned-binary", Encoding.UTF8);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fault), fault, null);
             }
+        }
+
+        private static string ProductVersionHead(string productVersion)
+        {
+            var separator = productVersion.LastIndexOf('+');
+            if (separator <= 0 || separator == productVersion.Length - 1)
+                throw new InvalidOperationException($"The evidence fixture ProductVersion '{productVersion}' has no source revision suffix.");
+            var head = productVersion[(separator + 1)..];
+            if (head.Length != 40 || head.Any(character => !Uri.IsHexDigit(character)))
+                throw new InvalidOperationException($"The evidence fixture ProductVersion '{productVersion}' has an invalid source revision suffix.");
+            return head.ToLowerInvariant();
         }
 
         public void InjectScenarioFailure(string scenarioId)
