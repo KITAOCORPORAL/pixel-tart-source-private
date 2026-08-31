@@ -75,7 +75,9 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "-p:InputRoutingDiagnostics=true",
             "-p:AssetLibraryP1AutomatedAcceptance=true",
             "Assert-CleanCommit",
-            "Assert-NoDevPreview");
+            "Assert-NoDevPreview",
+            "Invoke-DryRun",
+            "ready-for-automated-run");
         Assert.DoesNotContain("-p:AssetLibraryP1StateAcceptance=true", runner, StringComparison.Ordinal);
         Assert.IsFalse(
             new Regex("PIXEL_TART_ASSET_LIBRARY_P1_STATE_ACCEPTANCE\\s*=\\s*['\"](?:1|true)['\"]", RegexOptions.IgnoreCase)
@@ -98,7 +100,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "Path.GetFullPath",
             "Path.GetRelativePath",
             "PixelTart_ModularHarness_V1_DevPreview",
-            "pixel-tart-p1-automated-plan/v1",
+            "pixel-tart-p1-automated-plan/v2",
             "scenario_ids",
             "run_id");
         Assert.IsTrue(
@@ -646,6 +648,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "pid",
             "hwnd",
             "executable_sha256",
+            "application_sha256",
             "asset_module_sha256");
     }
 
@@ -722,6 +725,16 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
                 "import-contamination",
                 "uncleared-process",
                 "dpi-overflow",
+                "runner-session-splice",
+                "process-session-splice",
+                "pre-cleanup-audit-hash",
+                "cleanup-path-splice",
+                "build-log-hash",
+                "sealed-binary-mutation",
+                "application-hash-mismatch",
+                "sealed-application-mutation",
+                "sealed-dependency-mutation",
+                "binary-tree-manifest-mismatch",
             },
             negatives);
 
@@ -738,6 +751,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "pid",
             "hwnd",
             "executable_sha256",
+            "application_sha256",
             "asset_module_sha256",
             "schema_version",
             "SQLite format 3",
@@ -841,6 +855,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "pid",
             "hwnd",
             "executable_sha256",
+            "application_sha256",
             "asset_module_sha256",
             "scenario_id");
         ContainsAll(
@@ -850,6 +865,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "pid",
             "hwnd",
             "executable_sha256",
+            "application_sha256",
             "asset_module_sha256",
             "scenario_id");
     }
@@ -870,7 +886,13 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "$backup = \"$Path.bak\"",
             "[IO.File]::Replace($temporary, $Path, $backup)",
             "[IO.File]::Delete($backup)",
-            "failed in the application");
+            "failed in the application",
+            "pixel-tart-p1-run-owned-binary-snapshot/v2",
+            "New-BinarySnapshot",
+            "build_source_executable_sha256",
+            "build_source_application_sha256",
+            "application_product_version",
+            "asset_module_product_version");
         Assert.DoesNotContain("[IO.File]::Replace($temporary, $Path, $null)", runner, StringComparison.Ordinal);
 
         var driver = Text("src/PixelTart.Modules.AssetLibrary/AssetLibraryP1AutomatedAcceptanceDriver.cs");

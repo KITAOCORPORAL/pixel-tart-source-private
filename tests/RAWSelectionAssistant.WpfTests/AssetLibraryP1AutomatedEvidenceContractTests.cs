@@ -33,7 +33,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         var readme = Read("tools/AssetLibraryP1AutomatedAcceptance/README.md");
 
         ContainsAll(contract,
-            "pixel-tart-asset-library-p1-automated-acceptance-contract/v1",
+            "pixel-tart-asset-library-p1-automated-acceptance-contract/v2",
             "\"validation_mode\": \"automated\"",
             "\"owner_manual_ux_smoke\": \"waived\"",
             "\"manual_evidence_claimed\": false",
@@ -52,7 +52,17 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             "database-not-v6",
             "import-contamination",
             "uncleared-process",
-            "dpi-overflow");
+            "dpi-overflow",
+            "runner-session-splice",
+            "process-session-splice",
+            "pre-cleanup-audit-hash",
+            "cleanup-path-splice",
+            "build-log-hash",
+            "sealed-binary-mutation",
+            "application-hash-mismatch",
+            "sealed-application-mutation",
+            "sealed-dependency-mutation",
+            "binary-tree-manifest-mismatch");
         ContainsAll(validator,
             "events.ndjson",
             "summary.json",
@@ -98,6 +108,19 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges()
+    {
+        using var fixture = new EvidenceFixture();
+        fixture.OverwriteMutableBuildOutputs();
+        var before = fixture.TreeFingerprint();
+
+        var result = RunValidator(fixture.Root);
+
+        Assert.AreEqual(0, result.ExitCode, result.Output);
+        Assert.AreEqual(before, fixture.TreeFingerprint(), "Revalidation after a later build changed the sealed run tree.");
+    }
+
+    [TestMethod]
     [DataRow("missing-screenshot")]
     [DataRow("mutated-hash")]
     [DataRow("wrong-scenario-order")]
@@ -116,6 +139,11 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     [DataRow("pre-cleanup-audit-hash")]
     [DataRow("cleanup-path-splice")]
     [DataRow("build-log-hash")]
+    [DataRow("sealed-binary-mutation")]
+    [DataRow("application-hash-mismatch")]
+    [DataRow("sealed-application-mutation")]
+    [DataRow("sealed-dependency-mutation")]
+    [DataRow("binary-tree-manifest-mismatch")]
     public void IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree(string fault)
     {
         using var fixture = new EvidenceFixture();
@@ -199,8 +227,13 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         private readonly string _summaryJournalPath;
         private readonly string _manifestPath;
         private readonly string _fixtureBuildDirectory;
+        private readonly string _mutableExePath;
+        private readonly string _mutableApplicationPath;
+        private readonly string _mutableDllPath;
         private readonly string _exeHash;
+        private readonly string _applicationHash;
         private readonly string _dllHash;
+        private readonly string _binaryTreeHash;
 
         public EvidenceFixture()
         {
@@ -210,38 +243,71 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             var buildDirectory = Path.Combine(repositoryRoot, "src", "RAWSelectionAssistant", "bin", "Debug", "AutomatedEvidenceContractFixture-" + Guid.NewGuid().ToString("N"));
             _fixtureBuildDirectory = buildDirectory;
             Directory.CreateDirectory(buildDirectory);
-            var exePath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.exe");
-            var dllPath = Path.Combine(buildDirectory, "PixelTart.Modules.AssetLibrary.dll");
-            File.WriteAllBytes(exePath, Encoding.UTF8.GetBytes("fixture-executable"));
-            File.WriteAllBytes(dllPath, Encoding.UTF8.GetBytes("fixture-module"));
+            _mutableExePath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.exe");
+            _mutableApplicationPath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.dll");
+            _mutableDllPath = Path.Combine(buildDirectory, "PixelTart.Modules.AssetLibrary.dll");
+            var mutableDepsPath = Path.Combine(buildDirectory, "PixelTart_ModularHarness_V1_DevPreview.deps.json");
+            File.WriteAllBytes(_mutableExePath, Encoding.UTF8.GetBytes("fixture-executable"));
+            File.WriteAllBytes(_mutableApplicationPath, Encoding.UTF8.GetBytes("fixture-application"));
+            File.WriteAllBytes(_mutableDllPath, Encoding.UTF8.GetBytes("fixture-module"));
+            File.WriteAllBytes(mutableDepsPath, Encoding.UTF8.GetBytes("{}"));
+            var binaryDirectory = Path.Combine(Root, "binaries");
+            Directory.CreateDirectory(binaryDirectory);
+            var exePath = Path.Combine(binaryDirectory, Path.GetFileName(_mutableExePath));
+            var applicationPath = Path.Combine(binaryDirectory, Path.GetFileName(_mutableApplicationPath));
+            var dllPath = Path.Combine(binaryDirectory, Path.GetFileName(_mutableDllPath));
+            var depsPath = Path.Combine(binaryDirectory, Path.GetFileName(mutableDepsPath));
+            File.Copy(_mutableExePath, exePath);
+            File.Copy(_mutableApplicationPath, applicationPath);
+            File.Copy(_mutableDllPath, dllPath);
+            File.Copy(mutableDepsPath, depsPath);
             _exeHash = Sha(exePath);
+            _applicationHash = Sha(applicationPath);
             _dllHash = Sha(dllPath);
+            _binaryTreeHash = BinaryTreeHash(binaryDirectory);
 
             var markers = Markers();
             var build = Clone(markers);
-            build["schema_version"] = "pixel-tart-p1-automated-build/v1";
+            build["schema_version"] = "pixel-tart-p1-automated-build/v2";
             build["run_id"] = RunId;
             build["source_head"] = Head;
             build["configuration"] = "Debug";
             build["repository_clean"] = true;
             build["executable_path"] = exePath;
             build["executable_sha256"] = _exeHash;
+            build["application_path"] = applicationPath;
+            build["application_sha256"] = _applicationHash;
             build["asset_module_path"] = dllPath;
             build["asset_module_sha256"] = _dllHash;
+            build["build_source_executable_path"] = _mutableExePath;
+            build["build_source_executable_sha256"] = _exeHash;
+            build["build_source_application_path"] = _mutableApplicationPath;
+            build["build_source_application_sha256"] = _applicationHash;
+            build["build_source_asset_module_path"] = _mutableDllPath;
+            build["build_source_asset_module_sha256"] = _dllHash;
+            build["binary_snapshot"] = BinarySnapshot(buildDirectory, binaryDirectory);
+            build["executable_product_version"] = "2.3.0+" + Head;
+            build["application_product_version"] = "2.3.0+" + Head;
+            build["asset_module_product_version"] = "2.3.0+" + Head;
             build["restore"] = BuildProcessResult("fixture-restore", new[] { "restore", "RAWSelectionAssistant.sln", "-nodeReuse:false", "-p:UseSharedCompilation=false" });
-            build["build"] = BuildProcessResult("fixture-build", new[] { "build", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "-c", "Debug", "--no-restore", "-nodeReuse:false", "-p:UseSharedCompilation=false", "-p:TreatWarningsAsErrors=true", "-p:ModularHarnessDevPreview=true", "-p:InputRoutingDiagnostics=true", "-p:AssetLibraryP1AutomatedAcceptance=true" });
+            build["build"] = BuildProcessResult("fixture-build", new[] { "build", "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj", "-c", "Debug", "--no-restore", "-t:Rebuild", "-nodeReuse:false", "-p:UseSharedCompilation=false", "-p:TreatWarningsAsErrors=true", "-p:ModularHarnessDevPreview=true", "-p:InputRoutingDiagnostics=true", "-p:AssetLibraryP1AutomatedAcceptance=true", "-p:ContinuousIntegrationBuild=true", $"-p:SourceRevisionId={Head}", $"-p:BaseOutputPath={buildDirectory}\\" });
             build["source_audit"] = SourceAudit(repositoryRoot);
             WriteJson(Path.Combine(Root, "build-manifest.json"), build);
 
             var summary = Clone(markers);
-            summary["schema_version"] = "pixel-tart-p1-automated-summary/v1";
+            summary["schema_version"] = "pixel-tart-p1-automated-summary/v2";
             summary["status"] = "completed";
             summary["run_id"] = RunId;
             summary["source_head"] = Head;
             summary["executable_path"] = exePath;
             summary["executable_sha256"] = _exeHash;
+            summary["application_path"] = applicationPath;
+            summary["application_sha256"] = _applicationHash;
             summary["asset_module_path"] = dllPath;
             summary["asset_module_sha256"] = _dllHash;
+            summary["executable"] = BinaryIdentity(exePath, _exeHash);
+            summary["application"] = BinaryIdentity(applicationPath, _applicationHash);
+            summary["module"] = BinaryIdentity(dllPath, _dllHash);
             summary["scenario_ids"] = new JsonArray(ScenarioIds.Select(item => JsonValue.Create(item)).ToArray());
             summary["scenarios"] = new JsonArray();
             summary["artifacts"] = new JsonArray();
@@ -271,7 +337,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             WriteSummaryChain(summary);
 
             var manifest = Clone(markers);
-            manifest["schema_version"] = "pixel-tart-p1-automated-run/v1";
+            manifest["schema_version"] = "pixel-tart-p1-automated-run/v2";
             manifest["run_id"] = RunId;
             manifest["run_root"] = Root;
             manifest["branch"] = "feature/modular-harness-v1-p1";
@@ -287,6 +353,13 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         }
 
         public string Root { get; }
+
+        public void OverwriteMutableBuildOutputs()
+        {
+            File.WriteAllText(_mutableExePath, "later-build-executable", Encoding.UTF8);
+            File.WriteAllText(_mutableApplicationPath, "later-build-application", Encoding.UTF8);
+            File.WriteAllText(_mutableDllPath, "later-build-module", Encoding.UTF8);
+        }
 
         public void Inject(string fault)
         {
@@ -378,6 +451,29 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
                 case "build-log-hash":
                     var buildManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
                     File.AppendAllText(buildManifest["build"]!["stdout"]!.GetValue<string>(), "tampered", Encoding.UTF8);
+                    break;
+                case "sealed-binary-mutation":
+                    var sealedBuildManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    File.AppendAllText(sealedBuildManifest["executable_path"]!.GetValue<string>(), "tampered", Encoding.UTF8);
+                    break;
+                case "application-hash-mismatch":
+                    events.First(item => item["scenario_id"]!.GetValue<string>() == "selection-navigation-restart/v1")["application_sha256"] = new string('e', 64);
+                    WriteEvents(events);
+                    break;
+                case "sealed-application-mutation":
+                    var sealedApplicationManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    File.AppendAllText(sealedApplicationManifest["application_path"]!.GetValue<string>(), "tampered", Encoding.UTF8);
+                    break;
+                case "sealed-dependency-mutation":
+                    var sealedDependencyManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    var dependencyRow = sealedDependencyManifest["binary_snapshot"]!["files"]!.AsArray()
+                        .Single(item => item!["path"]!.GetValue<string>().EndsWith(".deps.json", StringComparison.Ordinal));
+                    File.AppendAllText(Path.Combine(Root, "binaries", dependencyRow!["path"]!.GetValue<string>()), "tampered", Encoding.UTF8);
+                    break;
+                case "binary-tree-manifest-mismatch":
+                    var treeManifest = ReadJson(Path.Combine(Root, "build-manifest.json"));
+                    treeManifest["binary_snapshot"]!["tree_sha256"] = new string('f', 64);
+                    WriteJson(Path.Combine(Root, "build-manifest.json"), treeManifest);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fault), fault, null);
@@ -692,13 +788,21 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
                 var planPath = Path.Combine(plansDirectory, sessionName + ".json");
                 WriteJson(planPath, new JsonObject
                 {
-                    ["schema_version"] = "pixel-tart-p1-automated-plan/v1",
+                    ["schema_version"] = "pixel-tart-p1-automated-plan/v2",
                     ["validation_mode"] = "automated",
                     ["owner_manual_ux_smoke"] = "waived",
                     ["manual_evidence_claimed"] = false,
                     ["run_id"] = RunId,
                     ["phase"] = phase,
                     ["source_head"] = Head,
+                    ["executable_path"] = summary["executable_path"]!.GetValue<string>(),
+                    ["executable_sha256"] = _exeHash,
+                    ["application_path"] = summary["application_path"]!.GetValue<string>(),
+                    ["application_sha256"] = _applicationHash,
+                    ["asset_module_path"] = summary["asset_module_path"]!.GetValue<string>(),
+                    ["asset_module_sha256"] = _dllHash,
+                    ["binary_snapshot_directory"] = Path.Combine(Root, "binaries"),
+                    ["binary_snapshot_tree_sha256"] = _binaryTreeHash,
                     ["scenario_ids"] = new JsonArray(id),
                     ["scenario_root"] = scenarioRoot,
                     ["fixture_root"] = id == "selection-navigation-restart/v1" ? Path.Combine(Root, "synthetic-fixture") : null
@@ -733,6 +837,12 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
                     ["phase_summary_path"] = phaseSummaryPath,
                     ["executable_path"] = summary["executable_path"]!.GetValue<string>(),
                     ["executable_sha256"] = _exeHash,
+                    ["application_path"] = summary["application_path"]!.GetValue<string>(),
+                    ["application_sha256"] = _applicationHash,
+                    ["asset_module_path"] = summary["asset_module_path"]!.GetValue<string>(),
+                    ["asset_module_sha256"] = _dllHash,
+                    ["binary_snapshot_tree_sha256_before"] = _binaryTreeHash,
+                    ["binary_snapshot_tree_sha256_after"] = _binaryTreeHash,
                     ["stdout"] = stdout,
                     ["stderr"] = stderr,
                     ["stdout_sha256"] = Sha(stdout),
@@ -747,7 +857,11 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             var artifact = Clone(Markers());
             artifact["run_id"] = RunId;
             artifact["source_head"] = Head;
+            artifact["executable_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.exe");
             artifact["executable_sha256"] = _exeHash;
+            artifact["application_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.dll");
+            artifact["application_sha256"] = _applicationHash;
+            artifact["asset_module_path"] = Path.Combine(Root, "binaries", "PixelTart.Modules.AssetLibrary.dll");
             artifact["asset_module_sha256"] = _dllHash;
             artifact["path"] = Relative(path);
             artifact["sha256"] = Sha(path);
@@ -767,7 +881,9 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             item["run_id"] = RunId; item["source_head"] = Head; item["event_sequence"] = ++sequence;
             item["scenario_id"] = id; item["scenario_root"] = scenarioRoot; item["phase"] = phase; item["pid"] = pid; item["hwnd"] = hwnd;
             item["process_session_id"] = SessionId(id, phase);
-            item["executable_sha256"] = _exeHash; item["asset_module_sha256"] = _dllHash; item["event_type"] = type;
+            item["executable_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.exe"); item["executable_sha256"] = _exeHash;
+            item["application_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.dll"); item["application_sha256"] = _applicationHash;
+            item["asset_module_path"] = Path.Combine(Root, "binaries", "PixelTart.Modules.AssetLibrary.dll"); item["asset_module_sha256"] = _dllHash; item["event_type"] = type;
             item["automation_id"] = automationId; item["route"] = route; item["activation_mode"] = "in-process-wpf-route"; item["direct_mutation"] = false;
             item["before_state"] = new JsonObject { ["value"] = "before" }; item["after_state"] = new JsonObject { ["value"] = "after" }; item["persisted_state"] = new JsonObject { ["value"] = "persisted" };
             events.Add(item);
@@ -779,7 +895,9 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             result["run_id"] = RunId; result["source_head"] = Head; result["scenario_id"] = id; result["pid"] = pid; result["hwnd"] = hwnd;
             result["scenario_root"] = scenarioRoot; result["phase"] = phase;
             result["process_session_id"] = SessionId(id, phase);
-            result["executable_sha256"] = _exeHash; result["asset_module_sha256"] = _dllHash;
+            result["executable_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.exe"); result["executable_sha256"] = _exeHash;
+            result["application_path"] = Path.Combine(Root, "binaries", "PixelTart_ModularHarness_V1_DevPreview.dll"); result["application_sha256"] = _applicationHash;
+            result["asset_module_path"] = Path.Combine(Root, "binaries", "PixelTart.Modules.AssetLibrary.dll"); result["asset_module_sha256"] = _dllHash;
             result["viewport"] = new JsonObject { ["width"] = 1000, ["height"] = 700 };
             result["has_overflow"] = false;
             result["elements"] = new JsonArray(
@@ -1001,6 +1119,12 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
                 item["process_session_id"] = SessionId(scenario["id"]!.GetValue<string>(), phase);
                 item["pid"] = phase == "primary" ? scenario["pid"]!.GetValue<int>() : scenario["restart_pid"]!.GetValue<int>();
                 item["hwnd"] = phase == "primary" ? scenario["hwnd"]!.GetValue<string>() : scenario["restart_hwnd"]!.GetValue<string>();
+                item["executable_path"] = summary["executable_path"]!.GetValue<string>();
+                item["executable_sha256"] = _exeHash;
+                item["application_path"] = summary["application_path"]!.GetValue<string>();
+                item["application_sha256"] = _applicationHash;
+                item["asset_module_path"] = summary["asset_module_path"]!.GetValue<string>();
+                item["asset_module_sha256"] = _dllHash;
                 var embeddedSummary = Clone(summary);
                 embeddedSummary["phase"] = phase;
                 embeddedSummary["process_session_id"] = SessionId(scenario["id"]!.GetValue<string>(), phase);
@@ -1039,6 +1163,49 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             Assert.IsFalse(File.Exists(path + "-wal"), "The WAL-mode fixture retained a WAL before independent validation.");
             Assert.IsFalse(File.Exists(path + "-shm"), "The WAL-mode fixture retained an SHM before independent validation.");
         }
+
+        private static JsonObject BinarySnapshot(string sourceDirectory, string binaryDirectory)
+        {
+            var files = Directory.EnumerateFiles(binaryDirectory, "*", SearchOption.AllDirectories)
+                .OrderBy(path => Path.GetRelativePath(binaryDirectory, path), StringComparer.Ordinal)
+                .Select(path => (JsonNode)new JsonObject
+                {
+                    ["path"] = Path.GetRelativePath(binaryDirectory, path).Replace('\\', '/'),
+                    ["byte_length"] = new FileInfo(path).Length,
+                    ["sha256"] = Sha(path),
+                })
+                .ToArray();
+            return new JsonObject
+            {
+                ["schema"] = "pixel-tart-p1-run-owned-binary-snapshot/v2",
+                ["source_directory"] = sourceDirectory,
+                ["directory"] = binaryDirectory,
+                ["file_count"] = files.Length,
+                ["copy_verified_before_execution"] = true,
+                ["tree_sha256"] = BinaryTreeHash(binaryDirectory),
+                ["files"] = new JsonArray(files),
+            };
+        }
+
+        private static string BinaryTreeHash(string binaryDirectory)
+        {
+            var lines = Directory.EnumerateFiles(binaryDirectory, "*", SearchOption.AllDirectories)
+                .Select(path => new
+                {
+                    Path = Path.GetRelativePath(binaryDirectory, path).Replace('\\', '/'),
+                    Length = new FileInfo(path).Length,
+                    Hash = Sha(path),
+                })
+                .OrderBy(item => item.Path, StringComparer.Ordinal)
+                .Select(item => $"{item.Path}|{item.Length}|{item.Hash}");
+            return ShaBytes(Encoding.UTF8.GetBytes(string.Join("\n", lines)));
+        }
+
+        private static JsonObject BinaryIdentity(string path, string sha256) => new()
+        {
+            ["path"] = path,
+            ["sha256"] = sha256,
+        };
 
         private static string SessionId(string id, string phase)
         {
