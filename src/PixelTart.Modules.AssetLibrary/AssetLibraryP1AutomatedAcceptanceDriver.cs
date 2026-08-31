@@ -233,7 +233,6 @@ public sealed class AssetLibraryP1AutomatedAcceptanceDriver : IDisposable
         var composition = new TextComposition(InputManager.Current, _searchBox, text);
         if (!TextCompositionManager.StartComposition(composition))
             throw new InvalidOperationException("The WPF text-composition route did not start.");
-        TextCompositionManager.CompleteComposition(composition);
         await DrainDispatcherAsync();
         if (!string.Equals(_viewModel.SearchText, text, StringComparison.Ordinal))
             throw new InvalidOperationException("The WPF text-composition route did not update the bound Asset Library search query.");

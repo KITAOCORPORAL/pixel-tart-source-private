@@ -393,6 +393,9 @@ function Invoke-AppPhase {
     if ($phaseScenario.Count -ne 1) { throw "Automated app phase '$Phase' has no unique scenario summary." }
     $processSessionId = [string]$phaseSummary.process_session_id
     if ($processSessionId -cnotmatch '^[0-9a-f]{32}$') { throw "Automated app phase '$Phase' has an invalid process_session_id." }
+    if ([string]$phaseSummary.status -cne 'completed') {
+        throw "Automated app phase '$Phase' failed in the application: $([string]$phaseSummary.failure)"
+    }
     $phasePid = if ($Phase -ceq 'primary') { [int]$phaseScenario[0].pid } else { [int]$phaseScenario[0].restart_pid }
     $phaseHwnd = if ($Phase -ceq 'primary') { [string]$phaseScenario[0].hwnd } else { [string]$phaseScenario[0].restart_hwnd }
     if ($phasePid -ne $process.Id -or $phaseHwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or

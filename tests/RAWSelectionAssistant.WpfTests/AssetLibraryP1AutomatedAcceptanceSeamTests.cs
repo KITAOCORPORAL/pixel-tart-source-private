@@ -344,7 +344,6 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "Keyboard.PreviewKeyUpEvent",
             "Keyboard.KeyUpEvent",
             "TextCompositionManager.StartComposition",
-            "TextCompositionManager.CompleteComposition",
             "EditingCommands.Delete.Execute",
             "Selector.SelectionChangedEvent",
             "AutomationProperties.GetAutomationId");
@@ -864,8 +863,13 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             runner,
             "$backup = \"$Path.bak\"",
             "[IO.File]::Replace($temporary, $Path, $backup)",
-            "[IO.File]::Delete($backup)");
+            "[IO.File]::Delete($backup)",
+            "failed in the application");
         Assert.DoesNotContain("[IO.File]::Replace($temporary, $Path, $null)", runner, StringComparison.Ordinal);
+
+        var driver = Text("src/PixelTart.Modules.AssetLibrary/AssetLibraryP1AutomatedAcceptanceDriver.cs");
+        StringAssert.Contains(driver, "TextCompositionManager.StartComposition(composition)");
+        Assert.DoesNotContain("TextCompositionManager.CompleteComposition(composition)", driver, StringComparison.Ordinal);
     }
 
     private static void AssertCompileGuard(XDocument project, string projectName)
