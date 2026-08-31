@@ -854,6 +854,7 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
     {
         var controller = Text("src/RAWSelectionAssistant/Services/AssetLibraryP1AutomatedAcceptanceController.cs");
         var runner = Text("tools/AssetLibraryP1AutomatedAcceptance/Invoke-P1AssetLibraryAutomatedAcceptance.ps1");
+        var validator = Text("tools/AssetLibraryP1AutomatedAcceptance/Test-P1AssetLibraryAutomatedEvidence.ps1");
 
         ContainsAll(
             controller,
@@ -870,6 +871,15 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
         var driver = Text("src/PixelTart.Modules.AssetLibrary/AssetLibraryP1AutomatedAcceptanceDriver.cs");
         StringAssert.Contains(driver, "TextCompositionManager.StartComposition(composition)");
         Assert.DoesNotContain("TextCompositionManager.CompleteComposition(composition)", driver, StringComparison.Ordinal);
+        ContainsAll(
+            driver,
+            "JsonPropertyName(\"button_identity\")",
+            "JsonPropertyName(\"surface_resource_key\")",
+            "JsonPropertyName(\"template_applied\")",
+            "VisualTreeHelper.GetChildrenCount(probe) > 0");
+        ContainsAll(
+            validator,
+            "?mode=ro&immutable=1");
     }
 
     private static void AssertCompileGuard(XDocument project, string projectName)

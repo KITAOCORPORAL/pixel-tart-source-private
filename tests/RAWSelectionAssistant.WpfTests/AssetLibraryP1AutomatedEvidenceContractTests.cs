@@ -164,6 +164,19 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree()
+    {
+        using var fixture = new EvidenceFixture();
+        fixture.InjectLegacyCamelCaseButtonRow();
+        var before = fixture.TreeFingerprint();
+
+        var result = RunValidator(fixture.Root);
+
+        Assert.AreNotEqual(0, result.ExitCode, result.Output);
+        Assert.AreEqual(before, fixture.TreeFingerprint(), "Validation of a legacy camel-case button row changed its input tree.");
+    }
+
+    [TestMethod]
     public void IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree()
     {
         using var fixture = new EvidenceFixture();
@@ -421,6 +434,17 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             var summary = ReadJson(_summaryPath);
             var layout = summary["scenarios"]!.AsArray().Single(item => item!["id"]!.GetValue<string>() == "layout-dpi-buttons/v1")!["checks"]!;
             layout["button_state_matrix"]![0]!["source_declaration_probe"] = false;
+            WriteJson(_summaryPath, summary);
+            WriteSummaryChain(summary);
+        }
+
+        public void InjectLegacyCamelCaseButtonRow()
+        {
+            var summary = ReadJson(_summaryPath);
+            var layout = summary["scenarios"]!.AsArray().Single(item => item!["id"]!.GetValue<string>() == "layout-dpi-buttons/v1")!["checks"]!;
+            var row = layout["button_state_matrix"]![0]!.AsObject();
+            row["buttonIdentity"] = row["button_identity"]!.DeepClone();
+            row.Remove("button_identity");
             WriteJson(_summaryPath, summary);
             WriteSummaryChain(summary);
         }

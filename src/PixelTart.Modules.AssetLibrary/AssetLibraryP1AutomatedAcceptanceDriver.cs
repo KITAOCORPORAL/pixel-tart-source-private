@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
+using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
@@ -355,9 +356,11 @@ public sealed class AssetLibraryP1AutomatedAcceptanceDriver : IDisposable
                 Style = style,
                 Tag = definition.Active ? "Active" : null,
             };
+            probe.ApplyTemplate();
             probe.Measure(new Size(240, 80));
             probe.Arrange(new Rect(0, 0, Math.Max(40, probe.DesiredSize.Width), Math.Max(40, probe.DesiredSize.Height)));
-            var templateApplied = probe.ApplyTemplate();
+            probe.UpdateLayout();
+            var templateApplied = probe.Template is not null && VisualTreeHelper.GetChildrenCount(probe) > 0;
 
             foreach (var state in new[] { "normal", "hover", "pressed", "focus", "disabled" })
             {
@@ -806,28 +809,28 @@ public sealed record AssetLibraryP1AutomatedButtonDefinition(
     bool Active = false);
 
 public sealed record AssetLibraryP1AutomatedButtonReadabilityState(
-    string ButtonIdentity,
-    string Role,
-    string Theme,
-    string State,
-    string SurfaceResourceKey,
-    string SurfaceColor,
-    string BackgroundColor,
-    string ForegroundColor,
-    string BorderColor,
-    string NonTextReferenceColor,
-    string FocusOuterColor,
-    string FocusInnerColor,
-    double? TextContrast,
-    double? NonTextContrast,
-    double FocusContrast,
-    bool FocusVisible,
-    bool TextContrastApplicable,
-    bool NonTextContrastApplicable,
-    bool LiveWpfButtonInstance,
-    bool SourceDeclarationProbe,
-    bool TemplateApplied,
-    string StateResolution);
+    [property: JsonPropertyName("button_identity")] string ButtonIdentity,
+    [property: JsonPropertyName("role")] string Role,
+    [property: JsonPropertyName("theme")] string Theme,
+    [property: JsonPropertyName("state")] string State,
+    [property: JsonPropertyName("surface_resource_key")] string SurfaceResourceKey,
+    [property: JsonPropertyName("surface_color")] string SurfaceColor,
+    [property: JsonPropertyName("background_color")] string BackgroundColor,
+    [property: JsonPropertyName("foreground_color")] string ForegroundColor,
+    [property: JsonPropertyName("border_color")] string BorderColor,
+    [property: JsonPropertyName("non_text_reference_color")] string NonTextReferenceColor,
+    [property: JsonPropertyName("focus_outer_color")] string FocusOuterColor,
+    [property: JsonPropertyName("focus_inner_color")] string FocusInnerColor,
+    [property: JsonPropertyName("text_contrast")] double? TextContrast,
+    [property: JsonPropertyName("non_text_contrast")] double? NonTextContrast,
+    [property: JsonPropertyName("focus_contrast")] double FocusContrast,
+    [property: JsonPropertyName("focus_visible")] bool FocusVisible,
+    [property: JsonPropertyName("text_contrast_applicable")] bool TextContrastApplicable,
+    [property: JsonPropertyName("non_text_contrast_applicable")] bool NonTextContrastApplicable,
+    [property: JsonPropertyName("live_wpf_button_instance")] bool LiveWpfButtonInstance,
+    [property: JsonPropertyName("source_declaration_probe")] bool SourceDeclarationProbe,
+    [property: JsonPropertyName("template_applied")] bool TemplateApplied,
+    [property: JsonPropertyName("state_resolution")] string StateResolution);
 
 public sealed record AssetLibraryP1AutomatedButtonState(
     string Identity,

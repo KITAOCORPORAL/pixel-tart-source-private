@@ -440,6 +440,8 @@ public partial class MainWindow
         var buttonCount = buttonMatrix.Select(item => item.ButtonIdentity).Distinct(StringComparer.Ordinal).Count();
         if (buttonCount != 27 || buttonMatrix.Count != 27 * 5 * 3)
             throw new InvalidOperationException($"The live WPF button matrix is incomplete: {buttonCount} buttons, {buttonMatrix.Count} state records.");
+        if (buttonMatrix.Any(item => !item.LiveWpfButtonInstance || !item.SourceDeclarationProbe || !item.TemplateApplied))
+            throw new InvalidOperationException("The live WPF button matrix contains an unrealized, unbound, or unapplied-template probe.");
         var minimumTextContrast = buttonMatrix.Where(item => item.TextContrastApplicable).Min(item => item.TextContrast!.Value);
         var minimumNonTextContrast = buttonMatrix.Where(item => item.NonTextContrastApplicable).Min(item => item.NonTextContrast!.Value);
         var focusVisibleAllThemes = buttonMatrix
