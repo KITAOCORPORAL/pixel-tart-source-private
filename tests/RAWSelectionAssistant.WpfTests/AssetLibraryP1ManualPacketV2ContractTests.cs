@@ -65,6 +65,29 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
     }
 
     [TestMethod]
+    public void EntryPinsTheBuiltInUtilityModuleBeforeAnyFileHashCall()
+    {
+        var script = Text();
+        var initializer = script.IndexOf("function Initialize-BuiltInUtilityModule", StringComparison.Ordinal);
+        var invocationMatch = System.Text.RegularExpressions.Regex.Match(script, @"(?m)^Initialize-BuiltInUtilityModule\r?$");
+        var firstHash = script.IndexOf("Get-FileHash -LiteralPath", StringComparison.Ordinal);
+
+        Assert.IsGreaterThanOrEqualTo(0, initializer);
+        Assert.IsTrue(invocationMatch.Success);
+        var invocation = invocationMatch.Index;
+        Assert.IsGreaterThan(initializer, invocation);
+        Assert.IsGreaterThan(invocation, firstHash);
+        ContainsAll(
+            script[initializer..firstHash],
+            "[IO.Path]::Combine($PSHOME, 'Modules')",
+            "SetEnvironmentVariable('PSModulePath'",
+            "Microsoft.PowerShell.Utility.psd1",
+            "Import-Module -Name $utilityManifest -Force -ErrorAction Stop",
+            "Get-Command -Name Get-FileHash -CommandType Function",
+            "Get-FileHash is not bound to the built-in PowerShell utility module");
+    }
+
+    [TestMethod]
     public void RunUsesBackgroundStateGatesWithoutTerminalAcknowledgementOrSyntheticInput()
     {
         var script = Text();
@@ -396,6 +419,40 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         }
     }
 
+    [TestMethod]
+    public async Task ValidateExistingRunRepairsAHostileCoreOnlyModulePathBeforeHashing()
+    {
+        var fixtureRoot = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"PixelTart-P1-ManualPacketV3-HostileModules-{Guid.NewGuid():N}");
+        var hostileModuleRoot = System.IO.Path.Combine(fixtureRoot, "Modules");
+        var hostileUtilityRoot = System.IO.Path.Combine(hostileModuleRoot, "Microsoft.PowerShell.Utility");
+        var runRoot = System.IO.Path.Combine(fixtureRoot, "run");
+        Directory.CreateDirectory(hostileUtilityRoot);
+        Directory.CreateDirectory(runRoot);
+        File.WriteAllText(
+            System.IO.Path.Combine(hostileUtilityRoot, "Microsoft.PowerShell.Utility.psd1"),
+            "@{ ModuleVersion='7.0.0.0'; PowerShellVersion='7.0'; CompatiblePSEditions=@('Core'); FunctionsToExport=@('Get-FileHash') }",
+            new UTF8Encoding(false));
+        File.WriteAllText(System.IO.Path.Combine(runRoot, "sentinel.txt"), "unchanged", new UTF8Encoding(false));
+
+        try
+        {
+            var before = TreeFingerprint(runRoot);
+            var processCountBefore = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;
+            var result = await InvokeValidateExistingRunAsync(runRoot, hostileModuleRoot);
+            var processCountAfter = Process.GetProcessesByName("PixelTart_ModularHarness_V1_DevPreview").Length;
+
+            Assert.AreNotEqual(0, result.ExitCode);
+            StringAssert.Contains(result.Error, "validation\\tool");
+            Assert.DoesNotContain("Get-FileHash", result.Error, StringComparison.Ordinal);
+            Assert.AreEqual(before, TreeFingerprint(runRoot));
+            Assert.AreEqual(processCountBefore, processCountAfter);
+        }
+        finally
+        {
+            Directory.Delete(fixtureRoot, recursive: true);
+        }
+    }
+
     private static void AssertManifest(string outputRoot, string expectedStatus)
     {
         using var document = JsonDocument.Parse(File.ReadAllText(System.IO.Path.Combine(outputRoot, "manual-run-manifest.json")));
@@ -433,7 +490,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
         return (process.ExitCode, await outputTask, await errorTask, outputRoot);
     }
 
-    private static async Task<(int ExitCode, string Output, string Error)> InvokeValidateExistingRunAsync(string runRoot)
+    private static async Task<(int ExitCode, string Output, string Error)> InvokeValidateExistingRunAsync(string runRoot, string? modulePath = null)
     {
         var start = new ProcessStartInfo("powershell.exe")
         {
@@ -442,7 +499,7 @@ public sealed class AssetLibraryP1ManualPacketV2ContractTests
             RedirectStandardOutput = true,
             RedirectStandardError = true
         };
-        start.Environment["PSModulePath"] = WindowsPowerShellModulePath();
+        start.Environment["PSModulePath"] = modulePath ?? WindowsPowerShellModulePath();
         foreach (var argument in new[]
                  {
                      "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path($"{RelativePacketDirectory}/{EntryName}"),

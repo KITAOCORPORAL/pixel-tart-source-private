@@ -21,6 +21,38 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
+function Initialize-BuiltInUtilityModule {
+    $builtInModuleRoot = [IO.Path]::GetFullPath([IO.Path]::Combine($PSHOME, 'Modules'))
+    $pathSeparator = [string][IO.Path]::PathSeparator
+    $currentModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Process')
+    $orderedModuleRoots = [Collections.Generic.List[string]]::new()
+    $orderedModuleRoots.Add($builtInModuleRoot)
+    foreach ($candidate in [Text.RegularExpressions.Regex]::Split([string]$currentModulePath, [Text.RegularExpressions.Regex]::Escape($pathSeparator))) {
+        $trimmed = $candidate.Trim()
+        if ([string]::IsNullOrWhiteSpace($trimmed)) { continue }
+        $duplicate = $false
+        foreach ($existing in $orderedModuleRoots) {
+            if ([string]::Equals($existing.TrimEnd('\', '/'), $trimmed.TrimEnd('\', '/'), [StringComparison]::OrdinalIgnoreCase)) {
+                $duplicate = $true
+                break
+            }
+        }
+        if (-not $duplicate) { $orderedModuleRoots.Add($trimmed) }
+    }
+    [Environment]::SetEnvironmentVariable('PSModulePath', ($orderedModuleRoots -join $pathSeparator), 'Process')
+
+    $utilityManifest = [IO.Path]::Combine($builtInModuleRoot, 'Microsoft.PowerShell.Utility', 'Microsoft.PowerShell.Utility.psd1')
+    if (-not [IO.File]::Exists($utilityManifest)) { throw "Built-in PowerShell utility module is missing: $utilityManifest" }
+    Import-Module -Name $utilityManifest -Force -ErrorAction Stop
+    $hashCommands = @(Get-Command -Name Get-FileHash -CommandType Function -ErrorAction SilentlyContinue)
+    if ($hashCommands.Count -ne 1 -or $null -eq $hashCommands[0].Module -or
+        -not [string]::Equals([IO.Path]::GetFullPath([string]$hashCommands[0].Module.Path), [IO.Path]::GetFullPath($utilityManifest), [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Get-FileHash is not bound to the built-in PowerShell utility module: $utilityManifest"
+    }
+}
+
+Initialize-BuiltInUtilityModule
+
 $repositoryRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..'))
 $projectPath = Join-Path $repositoryRoot 'src\RAWSelectionAssistant\RAWSelectionAssistant.csproj'
 $captureTool = Join-Path $repositoryRoot 'tools\AssetLibraryP1Acceptance\Capture-AssetLibraryP1WindowEvidence.ps1'
