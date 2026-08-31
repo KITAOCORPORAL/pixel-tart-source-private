@@ -1023,11 +1023,21 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             using (var connection = new SqliteConnection($"Data Source={path};Pooling=False"))
             {
                 connection.Open();
+                using (var journal = connection.CreateCommand())
+                {
+                    journal.CommandText = "PRAGMA journal_mode=WAL;";
+                    Assert.AreEqual("wal", Convert.ToString(journal.ExecuteScalar(), System.Globalization.CultureInfo.InvariantCulture));
+                }
                 using var command = connection.CreateCommand();
                 command.CommandText = "CREATE TABLE AssetLibrarySchemaInfo(Version INTEGER PRIMARY KEY); INSERT INTO AssetLibrarySchemaInfo VALUES(6); CREATE TABLE AssetItems(Id TEXT PRIMARY KEY);" + (assetCount == 1 ? "INSERT INTO AssetItems VALUES('synthetic-asset');" : string.Empty);
                 command.ExecuteNonQuery();
+                using var checkpoint = connection.CreateCommand();
+                checkpoint.CommandText = "PRAGMA wal_checkpoint(TRUNCATE);";
+                checkpoint.ExecuteNonQuery();
             }
             SqliteConnection.ClearAllPools();
+            Assert.IsFalse(File.Exists(path + "-wal"), "The WAL-mode fixture retained a WAL before independent validation.");
+            Assert.IsFalse(File.Exists(path + "-shm"), "The WAL-mode fixture retained an SHM before independent validation.");
         }
 
         private static string SessionId(string id, string phase)
