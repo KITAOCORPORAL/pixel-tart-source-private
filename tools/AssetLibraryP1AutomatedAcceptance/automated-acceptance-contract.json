@@ -1,12 +1,12 @@
 {
-  "schema": "pixel-tart-asset-library-p1-automated-acceptance-contract/v1",
+  "schema": "pixel-tart-asset-library-p1-automated-acceptance-contract/v2",
   "validation_mode": "automated",
   "owner_manual_ux_smoke": "waived",
   "manual_evidence_claimed": false,
   "automated_capture_status": "captured",
   "historical_manual_gate": "not_closed_superseded_as_release_blocker",
   "manifest_file": "run-manifest.json",
-  "manifest_schema": "pixel-tart-asset-library-p1-automated-run/v1",
+  "manifest_schema": "pixel-tart-p1-automated-run/v2",
   "event_journal_file": "app/evidence/events.ndjson",
   "summary_journal_file": "app/evidence/summary.ndjson",
   "summary_file": "app/evidence/summary.json",
@@ -18,7 +18,9 @@
   "source_head_format": "lowercase-hex-40",
   "sha256_format": "lowercase-hex-64",
   "expected_executable_name": "PixelTart_ModularHarness_V1_DevPreview.exe",
+  "expected_application_name": "PixelTart_ModularHarness_V1_DevPreview.dll",
   "expected_asset_module_name": "PixelTart.Modules.AssetLibrary.dll",
+  "binary_snapshot_schema": "pixel-tart-p1-run-owned-binary-snapshot/v2",
   "repository": {
     "implementation": "SqliteAssetLibraryRepository",
     "schema_version": 6,
@@ -73,6 +75,16 @@
     "database-not-v6",
     "import-contamination",
     "uncleared-process",
-    "dpi-overflow"
+    "dpi-overflow",
+    "runner-session-splice",
+    "process-session-splice",
+    "pre-cleanup-audit-hash",
+    "cleanup-path-splice",
+    "build-log-hash",
+    "sealed-binary-mutation",
+    "application-hash-mismatch",
+    "sealed-application-mutation",
+    "sealed-dependency-mutation",
+    "binary-tree-manifest-mismatch"
   ]
 }

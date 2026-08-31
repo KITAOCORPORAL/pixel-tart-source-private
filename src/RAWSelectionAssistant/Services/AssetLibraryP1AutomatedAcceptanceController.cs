@@ -22,9 +22,9 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
     internal const string PlanPathEnvironmentVariable = "PIXEL_TART_P1_AUTOMATED_PLAN_PATH";
     internal const string SourceHeadEnvironmentVariable = "PIXEL_TART_P1_AUTOMATED_SOURCE_HEAD";
     internal const string FixtureRootEnvironmentVariable = "PIXEL_TART_P1_AUTOMATED_FIXTURE_ROOT";
-    internal const string PlanSchema = "pixel-tart-p1-automated-plan/v1";
+    internal const string PlanSchema = "pixel-tart-p1-automated-plan/v2";
     internal const string EventSchema = "pixel-tart-p1-automated-event/v1";
-    internal const string SummarySchema = "pixel-tart-p1-automated-summary/v1";
+    internal const string SummarySchema = "pixel-tart-p1-automated-summary/v2";
     internal const string ExpectedProcessName = "PixelTart_ModularHarness_V1_DevPreview";
     internal const string AssetLibraryRoute = "asset-library";
     internal const string FirstEmptyScenario = "first-empty/v1";
@@ -74,6 +74,8 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
     private readonly string _processSessionId = Guid.NewGuid().ToString("N");
     private readonly string _executablePath;
     private readonly string _executableSha256;
+    private readonly string _applicationAssemblyPath;
+    private readonly string _applicationAssemblySha256;
     private readonly string _modulePath;
     private readonly string _moduleSha256;
     private readonly DateTimeOffset _startedAt = DateTimeOffset.UtcNow;
@@ -131,9 +133,34 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         _databasePath = Path.Combine(_applicationRoot, "Data", "asset-library-v16.db");
         _executablePath = NormalizePath(Environment.ProcessPath
             ?? throw new InvalidOperationException("The automated acceptance process path is unavailable."));
+        _applicationAssemblyPath = NormalizePath(typeof(AssetLibraryP1AutomatedAcceptanceController).Assembly.Location);
         _modulePath = NormalizePath(typeof(AssetLibraryPage).Assembly.Location);
         _executableSha256 = HashFile(_executablePath);
+        _applicationAssemblySha256 = HashFile(_applicationAssemblyPath);
         _moduleSha256 = HashFile(_modulePath);
+
+        var binarySnapshotDirectory = NormalizePath(Path.Combine(_runRoot, "binaries"));
+        if (!string.Equals(binarySnapshotDirectory, NormalizePath(plan.BinarySnapshotDirectory), StringComparison.OrdinalIgnoreCase) ||
+            !Directory.Exists(binarySnapshotDirectory) ||
+            (new DirectoryInfo(binarySnapshotDirectory).Attributes & FileAttributes.ReparsePoint) != 0)
+            throw new InvalidOperationException("The automated plan does not bind the run-owned binary snapshot directory.");
+        EnsurePathInside(_executablePath, binarySnapshotDirectory, "executable path");
+        EnsurePathInside(_applicationAssemblyPath, binarySnapshotDirectory, "application assembly path");
+        EnsurePathInside(_modulePath, binarySnapshotDirectory, "Asset Library module path");
+        if (!string.Equals(Path.GetDirectoryName(_executablePath), binarySnapshotDirectory, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(Path.GetDirectoryName(_applicationAssemblyPath), binarySnapshotDirectory, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(Path.GetDirectoryName(_modulePath), binarySnapshotDirectory, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(Path.GetFileName(_executablePath), "PixelTart_ModularHarness_V1_DevPreview.exe", StringComparison.Ordinal) ||
+            !string.Equals(Path.GetFileName(_applicationAssemblyPath), "PixelTart_ModularHarness_V1_DevPreview.dll", StringComparison.Ordinal) ||
+            !string.Equals(Path.GetFileName(_modulePath), "PixelTart.Modules.AssetLibrary.dll", StringComparison.Ordinal))
+            throw new InvalidOperationException("The automated process, application assembly, and Asset Library module must load directly from the run-owned binary snapshot.");
+        if (!string.Equals(_executablePath, NormalizePath(plan.ExecutablePath), StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(_applicationAssemblyPath, NormalizePath(plan.ApplicationPath), StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(_modulePath, NormalizePath(plan.AssetModulePath), StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(_executableSha256, plan.ExecutableSha256, StringComparison.Ordinal) ||
+            !string.Equals(_applicationAssemblySha256, plan.ApplicationSha256, StringComparison.Ordinal) ||
+            !string.Equals(_moduleSha256, plan.AssetModuleSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("The live executable, application assembly, or loaded Asset Library module does not match the sealed plan identity.");
 
         Directory.CreateDirectory(Path.GetDirectoryName(_eventsPath)!);
         EnsurePathInside(_applicationRoot, _scenarioRoot, "application root");
@@ -157,6 +184,8 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
     internal string ProcessSessionId => _processSessionId;
     internal string ExecutablePath => _executablePath;
     internal string ExecutableSha256 => _executableSha256;
+    internal string ApplicationAssemblyPath => _applicationAssemblyPath;
+    internal string ApplicationAssemblySha256 => _applicationAssemblySha256;
     internal string AssetModulePath => _modulePath;
     internal string AssetModuleSha256 => _moduleSha256;
     internal string Hwnd => FormatHwnd(_hwnd.ToInt64());
@@ -402,7 +431,11 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
             _processSessionId,
             _runId,
             _sourceHead,
+            _executablePath,
             _executableSha256,
+            _applicationAssemblyPath,
+            _applicationAssemblySha256,
+            _modulePath,
             _moduleSha256);
         lock (_gate) _artifacts.Add(artifact);
         if (directoryName == "bounds") scenario.BoundsPaths.Add(artifact.Path);
@@ -445,6 +478,16 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         var completed = Volatile.Read(ref _executionCompleted) == 1 && _failure is null && exitCode == 0;
         if (!completed && _failure is null)
             _failure = $"Application exited before the automated plan completed (exit code {exitCode}).";
+
+        try
+        {
+            ValidateLiveBinaryIdentityAtExit();
+        }
+        catch (Exception exception)
+        {
+            completed = false;
+            _failure = $"Automated binary identity finalization failed: {exception.GetType().FullName}: {exception.Message}";
+        }
 
         try
         {
@@ -572,6 +615,8 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
                 ["scenario_root"] = _scenarioRoot,
                 ["executable_path"] = _executablePath,
                 ["executable_sha256"] = _executableSha256,
+                ["application_path"] = _applicationAssemblyPath,
+                ["application_sha256"] = _applicationAssemblySha256,
                 ["module_path"] = _modulePath,
                 ["module_sha256"] = _moduleSha256,
                 ["asset_module_path"] = _modulePath,
@@ -654,9 +699,12 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
             restart_pid = _restartPid,
             process_session_id = _processSessionId,
             executable = new { path = _executablePath, sha256 = _executableSha256 },
+            application = new { path = _applicationAssemblyPath, sha256 = _applicationAssemblySha256 },
             module = new { path = _modulePath, sha256 = _moduleSha256 },
             executable_path = _executablePath,
             executable_sha256 = _executableSha256,
+            application_path = _applicationAssemblyPath,
+            application_sha256 = _applicationAssemblySha256,
             asset_module_path = _modulePath,
             asset_module_sha256 = _moduleSha256,
             run_root = _runRoot,
@@ -720,6 +768,12 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
             ["process_session_id"] = _processSessionId,
             ["pid"] = Environment.ProcessId,
             ["hwnd"] = FormatHwnd(_hwnd.ToInt64()),
+            ["executable_path"] = _executablePath,
+            ["executable_sha256"] = _executableSha256,
+            ["application_path"] = _applicationAssemblyPath,
+            ["application_sha256"] = _applicationAssemblySha256,
+            ["asset_module_path"] = _modulePath,
+            ["asset_module_sha256"] = _moduleSha256,
             ["summary"] = summaryElement,
             ["previous_summary_hash"] = _previousSummaryHash,
             ["previous_record_sha256"] = _previousSummaryHash,
@@ -822,7 +876,11 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
             _processSessionId,
             _runId,
             _sourceHead,
+            _executablePath,
             _executableSha256,
+            _applicationAssemblyPath,
+            _applicationAssemblySha256,
+            _modulePath,
             _moduleSha256));
     }
 
@@ -941,7 +999,13 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         var root = summary.RootElement;
         if (!string.Equals(RequireString(root, "schema"), SummarySchema, StringComparison.Ordinal) ||
             !string.Equals(RequireString(root, "run_id"), _runId, StringComparison.Ordinal) ||
-            !string.Equals(RequireString(root, "head"), _sourceHead, StringComparison.Ordinal))
+            !string.Equals(RequireString(root, "head"), _sourceHead, StringComparison.Ordinal) ||
+            !string.Equals(NormalizePath(RequireString(root, "executable_path")), _executablePath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(RequireString(root, "executable_sha256"), _executableSha256, StringComparison.Ordinal) ||
+            !string.Equals(NormalizePath(RequireString(root, "application_path")), _applicationAssemblyPath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(RequireString(root, "application_sha256"), _applicationAssemblySha256, StringComparison.Ordinal) ||
+            !string.Equals(NormalizePath(RequireString(root, "asset_module_path")), _modulePath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(RequireString(root, "asset_module_sha256"), _moduleSha256, StringComparison.Ordinal))
             throw new InvalidOperationException("The aggregate summary does not match this automated run identity.");
         if (root.TryGetProperty("primary_pid", out var primaryPid) &&
             primaryPid.ValueKind == JsonValueKind.Number &&
@@ -1008,11 +1072,19 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         if (!string.Equals(processName, ExpectedProcessName, StringComparison.Ordinal))
             throw new InvalidOperationException("Automated P1 acceptance is restricted to the Modular Harness Dev Preview executable.");
 
-        var productVersion = FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion ?? string.Empty;
-        var marker = productVersion.LastIndexOf('+');
-        var embeddedHead = marker >= 0 ? productVersion[(marker + 1)..] : string.Empty;
-        if (!string.Equals(embeddedHead, sourceHead, StringComparison.Ordinal))
-            throw new InvalidOperationException("The automated Dev Preview binary source HEAD does not match the runtime plan.");
+        foreach (var binaryPath in new[]
+                 {
+                     Environment.ProcessPath!,
+                     typeof(AssetLibraryP1AutomatedAcceptanceController).Assembly.Location,
+                     typeof(AssetLibraryPage).Assembly.Location,
+                 })
+        {
+            var productVersion = FileVersionInfo.GetVersionInfo(binaryPath).ProductVersion ?? string.Empty;
+            var marker = productVersion.LastIndexOf('+');
+            var embeddedHead = marker >= 0 ? productVersion[(marker + 1)..] : string.Empty;
+            if (!string.Equals(embeddedHead, sourceHead, StringComparison.Ordinal))
+                throw new InvalidOperationException($"The automated binary '{Path.GetFileName(binaryPath)}' source HEAD does not match the runtime plan.");
+        }
     }
 
     private static AutomatedPlan ReadPlan(string planPath)
@@ -1039,12 +1111,23 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         if (phase == "restart" &&
             (ids.Length != 1 || ids[0] is not (SelectionScenario or CollapseScenario or ThumbnailScenario)))
             throw new InvalidOperationException("A restart automated process must contain exactly one persistence scenario.");
+        var binarySnapshotTreeSha256 = RequireString(root, "binary_snapshot_tree_sha256");
+        if (!Regex.IsMatch(binarySnapshotTreeSha256, "^[0-9a-f]{64}$", RegexOptions.CultureInvariant))
+            throw new InvalidOperationException("The automated acceptance binary snapshot tree hash is invalid.");
         return new(
             runId,
             phase,
             sourceHead,
             RequireString(root, "scenario_root"),
             GetString(root, "fixture_root"),
+            RequireString(root, "executable_path"),
+            RequireString(root, "executable_sha256"),
+            RequireString(root, "application_path"),
+            RequireString(root, "application_sha256"),
+            RequireString(root, "asset_module_path"),
+            RequireString(root, "asset_module_sha256"),
+            RequireString(root, "binary_snapshot_directory"),
+            binarySnapshotTreeSha256,
             ids);
     }
 
@@ -1082,6 +1165,24 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
 
     private static string HashBytes(ReadOnlySpan<byte> bytes) =>
         Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
+
+    private void ValidateLiveBinaryIdentityAtExit()
+    {
+        var executablePath = NormalizePath(Environment.ProcessPath
+            ?? throw new InvalidOperationException("The automated acceptance process path is unavailable at exit."));
+        var applicationPath = NormalizePath(typeof(AssetLibraryP1AutomatedAcceptanceController).Assembly.Location);
+        var modulePath = NormalizePath(typeof(AssetLibraryPage).Assembly.Location);
+        var snapshotDirectory = NormalizePath(Path.Combine(_runRoot, "binaries"));
+        foreach (var path in new[] { executablePath, applicationPath, modulePath })
+            EnsurePathInside(path, snapshotDirectory, "exit binary path");
+        if (!string.Equals(executablePath, _executablePath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(applicationPath, _applicationAssemblyPath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(modulePath, _modulePath, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(HashFile(executablePath), _executableSha256, StringComparison.Ordinal) ||
+            !string.Equals(HashFile(applicationPath), _applicationAssemblySha256, StringComparison.Ordinal) ||
+            !string.Equals(HashFile(modulePath), _moduleSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("The live executable, application assembly, or Asset Library module changed during the automated process.");
+    }
 
     private static string FormatHwnd(long value) => $"0x{value:x}";
 
@@ -1130,7 +1231,11 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         [property: JsonPropertyName("process_session_id")] string ProcessSessionId,
         [property: JsonPropertyName("run_id")] string RunId,
         [property: JsonPropertyName("source_head")] string SourceHead,
+        [property: JsonPropertyName("executable_path")] string ExecutablePath,
         [property: JsonPropertyName("executable_sha256")] string ExecutableSha256,
+        [property: JsonPropertyName("application_path")] string ApplicationPath,
+        [property: JsonPropertyName("application_sha256")] string ApplicationSha256,
+        [property: JsonPropertyName("asset_module_path")] string AssetModulePath,
         [property: JsonPropertyName("asset_module_sha256")] string AssetModuleSha256)
     {
         [JsonPropertyName("validation_mode")]
@@ -1158,6 +1263,14 @@ internal sealed class AssetLibraryP1AutomatedAcceptanceController : IAssetLibrar
         string SourceHead,
         string ScenarioRoot,
         string? FixtureRoot,
+        string ExecutablePath,
+        string ExecutableSha256,
+        string ApplicationPath,
+        string ApplicationSha256,
+        string AssetModulePath,
+        string AssetModuleSha256,
+        string BinarySnapshotDirectory,
+        string BinarySnapshotTreeSha256,
         IReadOnlyList<string> ScenarioIds);
 
     private sealed class ScenarioState(string id, long sequence)

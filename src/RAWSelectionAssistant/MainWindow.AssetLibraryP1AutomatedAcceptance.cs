@@ -533,6 +533,8 @@ public partial class MainWindow
                 hwnd = controller.Hwnd,
                 executable_path = controller.ExecutablePath,
                 executable_sha256 = controller.ExecutableSha256,
+                application_path = controller.ApplicationAssemblyPath,
+                application_sha256 = controller.ApplicationAssemblySha256,
                 asset_module_path = controller.AssetModulePath,
                 asset_module_sha256 = controller.AssetModuleSha256,
                 real_display_settings_changed = false,

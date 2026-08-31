@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Run', 'ValidateExistingRun', 'RecoveryTest')]
+    [ValidateSet('Run', 'DryRun', 'ValidateExistingRun', 'RecoveryTest')]
     [string]$Mode = 'Run',
     [string]$OutputRoot,
     [string]$RunRoot,
@@ -187,6 +187,89 @@ function Get-FileSha256 {
     } finally { $stream.Dispose() }
 }
 
+function Get-BinarySnapshotTreeSha256 {
+    param([object[]]$Rows)
+    $lines = @($Rows | ForEach-Object {
+        "{0}|{1}|{2}" -f ([string]$_.path), ([int64]$_.byte_length), ([string]$_.sha256)
+    })
+    $bytes = [Text.Encoding]::UTF8.GetBytes(($lines -join "`n"))
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try { return (($sha.ComputeHash($bytes) | ForEach-Object { $_.ToString('x2') }) -join '') }
+    finally { $sha.Dispose() }
+}
+
+function Assert-BinarySnapshotState {
+    param([AllowNull()]$Snapshot)
+    if ($null -eq $Snapshot) { throw 'The run-owned binary snapshot is missing.' }
+    $directory = [IO.Path]::GetFullPath([string]$Snapshot.directory).TrimEnd('\', '/')
+    if (-not (Test-Path -LiteralPath $directory -PathType Container)) { throw "The run-owned binary snapshot directory is missing: $directory" }
+    $entries = @(Get-ChildItem -LiteralPath $directory -Recurse -Force -ErrorAction Stop)
+    foreach ($entry in $entries) {
+        if (($entry.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "The run-owned binary snapshot contains a reparse point: $($entry.FullName)" }
+    }
+    $files = @($entries | Where-Object { -not $_.PSIsContainer })
+    $rows = @($Snapshot.files)
+    if ($files.Count -ne $rows.Count -or [int]$Snapshot.file_count -ne $rows.Count) { throw 'The run-owned binary snapshot file set changed.' }
+    $liveRows = [Collections.Generic.List[object]]::new()
+    foreach ($row in $rows) {
+        $relative = [string]$row.path
+        if ([string]::IsNullOrWhiteSpace($relative) -or [IO.Path]::IsPathRooted($relative) -or $relative.Contains(':') -or $relative -match '(^|/)\.\.?(/|$)') { throw "The binary snapshot path is not canonical: '$relative'." }
+        $full = [IO.Path]::GetFullPath((Join-Path $directory $relative.Replace('/', [IO.Path]::DirectorySeparatorChar)))
+        if (-not $full.StartsWith($directory + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath $full -PathType Leaf)) { throw "The binary snapshot file is missing or escaped its root: '$relative'." }
+        $length = [int64](Get-Item -LiteralPath $full -Force).Length
+        $hash = Get-FileSha256 $full
+        if ($length -ne [int64]$row.byte_length -or $hash -cne [string]$row.sha256) { throw "The binary snapshot file changed: '$relative'." }
+        $liveRows.Add([ordered]@{ path = $relative; byte_length = $length; sha256 = $hash })
+    }
+    $treeHash = Get-BinarySnapshotTreeSha256 @($liveRows)
+    if ($treeHash -cne [string]$Snapshot.tree_sha256) { throw 'The run-owned binary snapshot tree hash differs.' }
+    return $treeHash
+}
+
+function New-BinarySnapshot {
+    param([string]$SourceDirectory, [string]$DestinationDirectory)
+    $sourceBase = [IO.Path]::GetFullPath($SourceDirectory).TrimEnd('\', '/')
+    $destinationBase = [IO.Path]::GetFullPath($DestinationDirectory).TrimEnd('\', '/')
+    if (-not (Test-Path -LiteralPath $sourceBase -PathType Container)) { throw "Build output directory is missing: $sourceBase" }
+    if (((Get-Item -LiteralPath $sourceBase -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "Build output directory is a reparse point: $sourceBase" }
+    if (Test-Path -LiteralPath $destinationBase) { throw "Run-owned binary snapshot is not fresh: $destinationBase" }
+    [IO.Directory]::CreateDirectory($destinationBase) | Out-Null
+    if (((Get-Item -LiteralPath $destinationBase -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "Run-owned binary snapshot directory is a reparse point: $destinationBase" }
+    $rows = [Collections.Generic.List[object]]::new()
+    $sourceEntries = @(Get-ChildItem -LiteralPath $sourceBase -Recurse -Force -ErrorAction Stop)
+    foreach ($sourceEntry in $sourceEntries) {
+        if (($sourceEntry.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "Build output contains a reparse point: $($sourceEntry.FullName)" }
+    }
+    $sourceFiles = @($sourceEntries | Where-Object { -not $_.PSIsContainer } | Sort-Object FullName)
+    if ($sourceFiles.Count -eq 0) { throw 'The build output directory contains no files to seal.' }
+    foreach ($sourceFile in $sourceFiles) {
+        $relative = $sourceFile.FullName.Substring($sourceBase.Length).TrimStart('\', '/').Replace('\', '/')
+        $destination = Join-Path $destinationBase $relative.Replace('/', [IO.Path]::DirectorySeparatorChar)
+        [IO.Directory]::CreateDirectory((Split-Path -Parent $destination)) | Out-Null
+        $sourceHashBefore = Get-FileSha256 $sourceFile.FullName
+        [IO.File]::Copy($sourceFile.FullName, $destination, $false)
+        $sourceHashAfter = Get-FileSha256 $sourceFile.FullName
+        $destinationHash = Get-FileSha256 $destination
+        if ($sourceHashAfter -cne $sourceHashBefore -or $destinationHash -cne $sourceHashBefore) {
+            throw "Run-owned binary copy verification failed for '$relative'."
+        }
+        $rows.Add([ordered]@{
+            path = $relative
+            byte_length = [int64](Get-Item -LiteralPath $destination).Length
+            sha256 = $destinationHash
+        })
+    }
+    return [ordered]@{
+        schema = 'pixel-tart-p1-run-owned-binary-snapshot/v2'
+        source_directory = $sourceBase
+        directory = $destinationBase
+        file_count = $rows.Count
+        copy_verified_before_execution = $true
+        tree_sha256 = Get-BinarySnapshotTreeSha256 @($rows)
+        files = @($rows)
+    }
+}
+
 function Get-RunTreeFingerprint {
     param([string]$Root)
     $base = [IO.Path]::GetFullPath($Root).TrimEnd('\', '/')
@@ -327,7 +410,8 @@ function Invoke-AppPhase {
         [string]$Executable,
         [string]$ActiveRunRoot,
         [string]$RunId,
-        [string]$LogDirectory
+        [string]$LogDirectory,
+        [AllowNull()]$BinarySnapshot
     )
     Assert-NoDevPreview
     if ($ScenarioIds.Count -ne 1) { throw 'Each automated app process must own exactly one scenario.' }
@@ -343,17 +427,37 @@ function Invoke-AppPhase {
         throw "Restart phase is missing the primary isolated runtime root: $runtimeRoot"
     }
     $planPath = Join-Path $ActiveRunRoot "plans\$SessionName.json"
+    $moduleDll = Join-Path (Split-Path -Parent $Executable) 'PixelTart.Modules.AssetLibrary.dll'
+    $applicationDll = Join-Path (Split-Path -Parent $Executable) 'PixelTart_ModularHarness_V1_DevPreview.dll'
+    foreach ($sealedPath in @($applicationDll, $moduleDll)) {
+        if (-not (Test-Path -LiteralPath $sealedPath -PathType Leaf)) { throw "A sealed application identity file is missing: $sealedPath" }
+    }
+    $expectedExecutablePath = [IO.Path]::GetFullPath($Executable)
+    $expectedApplicationPath = [IO.Path]::GetFullPath($applicationDll)
+    $expectedModulePath = [IO.Path]::GetFullPath($moduleDll)
+    $expectedExecutableHash = Get-FileSha256 $expectedExecutablePath
+    $expectedApplicationHash = Get-FileSha256 $expectedApplicationPath
+    $expectedModuleHash = Get-FileSha256 $expectedModulePath
+    $snapshotTreeBefore = Assert-BinarySnapshotState $BinarySnapshot
     $fixtureRoot = if ($ScenarioIds[0] -ceq 'selection-navigation-restart/v1') {
         Join-Path $ActiveRunRoot 'synthetic-fixture'
     } else { $null }
     Write-JsonAtomic $planPath ([ordered]@{
-        schema_version = 'pixel-tart-p1-automated-plan/v1'
+        schema_version = 'pixel-tart-p1-automated-plan/v2'
         validation_mode = 'automated'
         owner_manual_ux_smoke = 'waived'
         manual_evidence_claimed = $false
         run_id = $RunId
         phase = $Phase
         source_head = $Head
+        executable_path = $expectedExecutablePath
+        executable_sha256 = $expectedExecutableHash
+        application_path = $expectedApplicationPath
+        application_sha256 = $expectedApplicationHash
+        asset_module_path = $expectedModulePath
+        asset_module_sha256 = $expectedModuleHash
+        binary_snapshot_directory = [IO.Path]::GetFullPath((Split-Path -Parent $expectedExecutablePath))
+        binary_snapshot_tree_sha256 = $snapshotTreeBefore
         scenario_ids = $ScenarioIds
         scenario_root = $scenarioRoot
         fixture_root = $fixtureRoot
@@ -400,8 +504,21 @@ function Invoke-AppPhase {
     $phaseHwnd = if ($Phase -ceq 'primary') { [string]$phaseScenario[0].hwnd } else { [string]$phaseScenario[0].restart_hwnd }
     if ($phasePid -ne $process.Id -or $phaseHwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
         [string]$phaseSummary.run_id -cne $RunId -or [string]$phaseSummary.source_head -cne $Head -or
-        [string]$phaseSummary.phase -cne $Phase -or [string]$phaseSummary.status -cne 'completed') {
+        [string]$phaseSummary.phase -cne $Phase -or [string]$phaseSummary.status -cne 'completed' -or
+        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.executable_path), $expectedExecutablePath, [StringComparison]::OrdinalIgnoreCase) -or
+        [string]$phaseSummary.executable_sha256 -cne $expectedExecutableHash -or
+        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.application_path), $expectedApplicationPath, [StringComparison]::OrdinalIgnoreCase) -or
+        [string]$phaseSummary.application_sha256 -cne $expectedApplicationHash -or
+        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.asset_module_path), $expectedModulePath, [StringComparison]::OrdinalIgnoreCase) -or
+        [string]$phaseSummary.asset_module_sha256 -cne $expectedModuleHash) {
         throw "Automated app phase '$Phase' summary identity does not match the runner-owned process."
+    }
+    $snapshotTreeAfter = Assert-BinarySnapshotState $BinarySnapshot
+    if ($snapshotTreeAfter -cne $snapshotTreeBefore -or
+        (Get-FileSha256 $expectedExecutablePath) -cne $expectedExecutableHash -or
+        (Get-FileSha256 $expectedApplicationPath) -cne $expectedApplicationHash -or
+        (Get-FileSha256 $expectedModulePath) -cne $expectedModuleHash) {
+        throw "Automated app phase '$Phase' changed its sealed executable, application assembly, or module."
     }
     $result = [ordered]@{
         phase = $Phase
@@ -420,8 +537,14 @@ function Invoke-AppPhase {
         scenario_root = $scenarioRoot
         plan_path = $planPath
         phase_summary_path = $phaseSummaryPath
-        executable_path = [IO.Path]::GetFullPath($Executable)
-        executable_sha256 = Get-FileSha256 $Executable
+        executable_path = $expectedExecutablePath
+        executable_sha256 = $expectedExecutableHash
+        application_path = $expectedApplicationPath
+        application_sha256 = $expectedApplicationHash
+        asset_module_path = $expectedModulePath
+        asset_module_sha256 = $expectedModuleHash
+        binary_snapshot_tree_sha256_before = $snapshotTreeBefore
+        binary_snapshot_tree_sha256_after = $snapshotTreeAfter
         stdout = $stdout
         stderr = $stderr
         stdout_sha256 = Get-FileSha256 $stdout
@@ -619,7 +742,40 @@ function Invoke-RecoveryTest {
     }
 }
 
+function Invoke-DryRun {
+    $head = Assert-CleanCommit
+    Assert-NoDevPreview
+    $dotnet = Get-DotNetPath
+    $contractPath = Join-Path $PSScriptRoot 'automated-acceptance-contract.json'
+    $validatorPath = Join-Path $PSScriptRoot 'Test-P1AssetLibraryAutomatedEvidence.ps1'
+    foreach ($requiredPath in @($contractPath, $validatorPath)) {
+        if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) { throw "Automated acceptance preflight file is missing: $requiredPath" }
+    }
+    $contract = Get-Content -LiteralPath $contractPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ([string]$contract.schema -cne 'pixel-tart-asset-library-p1-automated-acceptance-contract/v2' -or
+        [string]$contract.validation_mode -cne 'automated' -or
+        [string]$contract.owner_manual_ux_smoke -cne 'waived' -or
+        [bool]$contract.manual_evidence_claimed) {
+        throw 'Automated acceptance contract preflight failed.'
+    }
+    foreach ($scriptPath in @($PSCommandPath, $validatorPath)) {
+        $parseErrors = $null
+        [Management.Automation.Language.Parser]::ParseFile($scriptPath, [ref]$null, [ref]$parseErrors) | Out-Null
+        if (@($parseErrors).Count -ne 0) { throw "PowerShell preflight parse failed for '$scriptPath'." }
+    }
+    [pscustomobject]@{
+        validation_mode = 'automated'
+        owner_manual_ux_smoke = 'waived'
+        manual_evidence_claimed = $false
+        status = 'ready-for-automated-run'
+        source_head = $head
+        dotnet = $dotnet
+        devpreview_process_count = 0
+    } | ConvertTo-Json -Depth 5
+}
+
 $script:repo = Get-RepositoryRoot
+if ($Mode -eq 'DryRun') { Invoke-DryRun; exit 0 }
 if ($Mode -eq 'RecoveryTest') { Invoke-RecoveryTest; exit 0 }
 if ($Mode -eq 'ValidateExistingRun') {
     if (-not (Test-IsAbsolutePath $RunRoot)) { throw 'ValidateExistingRun requires an absolute RunRoot.' }
@@ -658,7 +814,7 @@ $environmentBefore = @{}
 foreach ($key in $script:environmentKeys) { $environmentBefore[$key] = [Environment]::GetEnvironmentVariable($key, 'Process') }
 $manifestPath = Join-Path $activeRunRoot 'run-manifest.json'
 $manifest = [ordered]@{
-    schema_version = 'pixel-tart-p1-automated-run/v1'
+    schema_version = 'pixel-tart-p1-automated-run/v2'
     validation_mode = 'automated'
     owner_manual_ux_smoke = 'waived'
     manual_evidence_claimed = $false
@@ -682,18 +838,37 @@ try {
         'restore', 'RAWSelectionAssistant.sln',
         '-nodeReuse:false', '-p:UseSharedCompilation=false'
     ) -Name 'solution-restore' -LogDirectory $logDirectory -Timeout 1800
+    $buildOutputBase = Join-Path $script:repo "src\RAWSelectionAssistant\bin\P1Automated\$runId"
+    if (Test-Path -LiteralPath $buildOutputBase) { throw "The isolated automated build output is not fresh: $buildOutputBase" }
     $build = Invoke-LoggedProcess -FilePath $dotnet -Arguments @(
-        'build', 'src/RAWSelectionAssistant/RAWSelectionAssistant.csproj', '-c', 'Debug', '--no-restore',
+        'build', 'src/RAWSelectionAssistant/RAWSelectionAssistant.csproj', '-c', 'Debug', '--no-restore', '-t:Rebuild',
         '-nodeReuse:false', '-p:UseSharedCompilation=false', '-p:TreatWarningsAsErrors=true',
         '-p:ModularHarnessDevPreview=true', '-p:InputRoutingDiagnostics=true',
-        '-p:AssetLibraryP1AutomatedAcceptance=true'
+        '-p:AssetLibraryP1AutomatedAcceptance=true', '-p:ContinuousIntegrationBuild=true',
+        "-p:SourceRevisionId=$sourceHead", "-p:BaseOutputPath=$buildOutputBase\"
     ) -Name 'devpreview-build' -LogDirectory $logDirectory -Timeout 1800
 
-    $executable = Join-Path $script:repo 'src\RAWSelectionAssistant\bin\Debug\net10.0-windows10.0.19041.0\win-x64\PixelTart_ModularHarness_V1_DevPreview.exe'
-    $moduleDll = Join-Path (Split-Path -Parent $executable) 'PixelTart.Modules.AssetLibrary.dll'
-    foreach ($path in @($executable, $moduleDll)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Build output missing: $path" } }
+    $postBuildHead = Assert-CleanCommit
+    if ($postBuildHead -cne $sourceHead) { throw 'The clean source HEAD changed during the automated acceptance build.' }
+
+    $buildSourceExecutable = Join-Path $buildOutputBase 'Debug\net10.0-windows10.0.19041.0\win-x64\PixelTart_ModularHarness_V1_DevPreview.exe'
+    $buildSourceModuleDll = Join-Path (Split-Path -Parent $buildSourceExecutable) 'PixelTart.Modules.AssetLibrary.dll'
+    $buildSourceApplicationDll = Join-Path (Split-Path -Parent $buildSourceExecutable) 'PixelTart_ModularHarness_V1_DevPreview.dll'
+    foreach ($path in @($buildSourceExecutable, $buildSourceApplicationDll, $buildSourceModuleDll)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Build output missing: $path" } }
+    $buildSourceExecutableHash = Get-FileSha256 $buildSourceExecutable
+    $buildSourceApplicationHash = Get-FileSha256 $buildSourceApplicationDll
+    $buildSourceModuleHash = Get-FileSha256 $buildSourceModuleDll
+    $binarySnapshot = New-BinarySnapshot (Split-Path -Parent $buildSourceExecutable) (Join-Path $activeRunRoot 'binaries')
+    $executable = Join-Path $binarySnapshot.directory ([IO.Path]::GetFileName($buildSourceExecutable))
+    $applicationDll = Join-Path $binarySnapshot.directory ([IO.Path]::GetFileName($buildSourceApplicationDll))
+    $moduleDll = Join-Path $binarySnapshot.directory ([IO.Path]::GetFileName($buildSourceModuleDll))
+    if ((Get-FileSha256 $executable) -cne $buildSourceExecutableHash -or
+        (Get-FileSha256 $applicationDll) -cne $buildSourceApplicationHash -or
+        (Get-FileSha256 $moduleDll) -cne $buildSourceModuleHash) {
+        throw 'The sealed executable, application assembly, or Asset Library module differs from its just-built source.'
+    }
     $buildManifest = [ordered]@{
-        schema_version = 'pixel-tart-p1-automated-build/v1'
+        schema_version = 'pixel-tart-p1-automated-build/v2'
         validation_mode = 'automated'
         owner_manual_ux_smoke = 'waived'
         manual_evidence_claimed = $false
@@ -705,10 +880,23 @@ try {
         repository_clean = $true
         executable_path = [IO.Path]::GetFullPath($executable)
         executable_sha256 = Get-FileSha256 $executable
+        application_path = [IO.Path]::GetFullPath($applicationDll)
+        application_sha256 = Get-FileSha256 $applicationDll
         asset_module_path = [IO.Path]::GetFullPath($moduleDll)
         asset_module_sha256 = Get-FileSha256 $moduleDll
+        build_source_executable_path = [IO.Path]::GetFullPath($buildSourceExecutable)
+        build_source_executable_sha256 = $buildSourceExecutableHash
+        build_source_application_path = [IO.Path]::GetFullPath($buildSourceApplicationDll)
+        build_source_application_sha256 = $buildSourceApplicationHash
+        build_source_asset_module_path = [IO.Path]::GetFullPath($buildSourceModuleDll)
+        build_source_asset_module_sha256 = $buildSourceModuleHash
+        binary_snapshot = $binarySnapshot
         executable_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($executable).FileVersion
+        executable_product_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($executable).ProductVersion
+        application_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($applicationDll).FileVersion
+        application_product_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($applicationDll).ProductVersion
         asset_module_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($moduleDll).FileVersion
+        asset_module_product_version = [Diagnostics.FileVersionInfo]::GetVersionInfo($moduleDll).ProductVersion
         restore = $restore
         source_audit = @(
             (Get-GitBlobAudit $sourceHead 'src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml')
@@ -738,7 +926,7 @@ try {
         $scenarioBase = $scenarioId -replace '/v1$', ''
         $scenarioToken = $scenarioBase -replace '[^a-zA-Z0-9.-]', '-'
         $sessionName = ('{0:D2}-{1}' -f $sessionIndex, $scenarioToken)
-        $sessions.Add((Invoke-AppPhase 'primary' @($scenarioId) $sessionName $sourceHead $executable $activeRunRoot $runId $logDirectory))
+        $sessions.Add((Invoke-AppPhase 'primary' @($scenarioId) $sessionName $sourceHead $executable $activeRunRoot $runId $logDirectory $binarySnapshot))
     }
     $restartScenarios = @(
         'pane-collapse-expand/v1',
@@ -749,7 +937,7 @@ try {
         $sessionIndex++
         $restartToken = (($restartScenario -replace '/v1$', '') -replace '[^a-zA-Z0-9.-]', '-')
         $restartName = ('{0:D2}-{1}-restart' -f $sessionIndex, $restartToken)
-        $sessions.Add((Invoke-AppPhase 'restart' @($restartScenario) $restartName $sourceHead $executable $activeRunRoot $runId $logDirectory))
+        $sessions.Add((Invoke-AppPhase 'restart' @($restartScenario) $restartName $sourceHead $executable $activeRunRoot $runId $logDirectory $binarySnapshot))
     }
     # Compare every closed active SQLite repository with its immutable evidence
     # backup before cleaning generated runtime databases.
