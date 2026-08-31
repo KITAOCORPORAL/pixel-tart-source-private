@@ -850,6 +850,24 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
             "scenario_id");
     }
 
+    [TestMethod]
+    public void AggregateEvidenceAcceptsNullableSelectionPidsAndManifestReplacementUsesARealBackupPath()
+    {
+        var controller = Text("src/RAWSelectionAssistant/Services/AssetLibraryP1AutomatedAcceptanceController.cs");
+        var runner = Text("tools/AssetLibraryP1AutomatedAcceptance/Invoke-P1AssetLibraryAutomatedAcceptance.ps1");
+
+        ContainsAll(
+            controller,
+            "primaryPid.ValueKind == JsonValueKind.Number",
+            "restartPid.ValueKind == JsonValueKind.Number");
+        ContainsAll(
+            runner,
+            "$backup = \"$Path.bak\"",
+            "[IO.File]::Replace($temporary, $Path, $backup)",
+            "[IO.File]::Delete($backup)");
+        Assert.DoesNotContain("[IO.File]::Replace($temporary, $Path, $null)", runner, StringComparison.Ordinal);
+    }
+
     private static void AssertCompileGuard(XDocument project, string projectName)
     {
         var define = project.Descendants("DefineConstants").SingleOrDefault(element =>
