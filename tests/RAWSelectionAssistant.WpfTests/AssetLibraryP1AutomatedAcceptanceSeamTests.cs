@@ -735,6 +735,8 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
                 "sealed-application-mutation",
                 "sealed-dependency-mutation",
                 "binary-tree-manifest-mismatch",
+                "manifest-product-version-forgery",
+                "actual-product-version-mismatch",
             },
             negatives);
 
