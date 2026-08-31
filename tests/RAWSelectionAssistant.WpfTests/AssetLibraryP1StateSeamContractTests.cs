@@ -23,7 +23,15 @@ public sealed class AssetLibraryP1StateSeamContractTests
 
         var sourceRevision = project.Descendants("IncludeSourceRevisionInInformationalVersion")
             .Single(element => string.Equals(element.Value, "true", StringComparison.Ordinal));
-        Assert.AreEqual(defineCondition, (string?)sourceRevision.Attribute("Condition"));
+        var sourceRevisionCondition = (string?)sourceRevision.Attribute("Condition") ?? string.Empty;
+        ContainsAll(
+            sourceRevisionCondition,
+            "'$(ModularHarnessDevPreview)' == 'true'",
+            "'$(AssetLibraryP1StateAcceptance)' == 'true'",
+            "'$(AssetLibraryP1AutomatedAcceptance)' == 'true'",
+            "'$(AcceptanceBuild)' != 'true'",
+            "'$(Configuration)' == 'Debug'",
+            "'$(Configuration)' != 'Release'");
 
         var validation = project.Descendants("Target")
             .Single(element => string.Equals((string?)element.Attribute("Name"), "ValidateAssetLibraryP1StateAcceptanceBuild", StringComparison.Ordinal));

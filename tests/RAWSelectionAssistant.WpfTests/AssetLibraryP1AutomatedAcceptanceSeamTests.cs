@@ -44,6 +44,11 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
 
         AssertCompileGuard(appProject, "RAWSelectionAssistant");
         AssertCompileGuard(moduleProject, "PixelTart.Modules.AssetLibrary");
+        var appGuard = appProject.Descendants("DefineConstants").Single(element =>
+            element.Value.Contains("ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE", StringComparison.Ordinal));
+        var moduleGuard = moduleProject.Descendants("DefineConstants").Single(element =>
+            element.Value.Contains("ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE", StringComparison.Ordinal));
+        Assert.AreEqual(Attribute(appGuard, "Condition"), Attribute(moduleGuard, "Condition"));
 
         var validationTarget = appProject.Descendants("Target").Single(element =>
             Attribute(element, "Name") == "ValidateAssetLibraryP1AutomatedAcceptanceBuild");
