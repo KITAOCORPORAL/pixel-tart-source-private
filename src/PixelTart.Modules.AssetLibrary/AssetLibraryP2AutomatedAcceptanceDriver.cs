@@ -407,15 +407,20 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
         EnsureNotDisposed();
         _page.UpdateLayout();
         var pageBounds = new Rect(0, 0, _page.ActualWidth, _page.ActualHeight);
-        var candidates = new List<(FrameworkElement Element, string Identity, string ParentIdentity, int Depth, Rect Bounds, Rect VisibleBounds)>();
+        var candidates = new List<(FrameworkElement Element, string Identity, string ParentIdentity, int Depth, Rect Bounds, Rect VisibleBounds, bool MustFit)>();
         foreach (var element in EnumerateVisuals<FrameworkElement>(_page).Prepend(_page).Distinct())
         {
             if (!element.IsVisible || element.ActualWidth <= 0 || element.ActualHeight <= 0) continue;
             var automationId = GetAutomationId(element);
             var isActualButton = element is Button;
-            if (!isActualButton && !MustFitAutomationIds.Contains(automationId)) continue;
+            var mustFit = IsMustFitElement(element, automationId);
+            if (!isActualButton && !mustFit) continue;
             try
             {
+                // A button in a ScrollViewer is a valid scrollable-content control: it
+                // remains useful evidence, but its measured bounds are allowed to be
+                // outside the current viewport. Structural controls and buttons outside
+                // a scrollable viewport remain hard layout-fit requirements.
                 var bounds = element.TransformToAncestor(_page)
                     .TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
                 var visibleBounds = Rect.Intersect(bounds, pageBounds);
@@ -436,8 +441,9 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
                 }
                 // Scroll viewers keep off-viewport content measured and report IsVisible=true.
                 // Such buttons are not part of the rendered frame and therefore cannot be
-                // treated as clipped layout controls. Partially rendered buttons remain in
-                // the set so the independent overflow check can still reject real clipping.
+                // treated as hard-fit layout controls. Partially rendered buttons remain in
+                // the set (with mustFit=false) so the evidence still records their visible
+                // intersection and the independent structural overflow check stays strict.
                 if (isActualButton &&
                     (visibleBounds.IsEmpty || visibleBounds.Width <= 0.5 || visibleBounds.Height <= 0.5))
                     continue;
@@ -447,7 +453,8 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
                     GetComparableParentIdentity(element),
                     GetVisualDepth(element),
                     bounds,
-                    visibleBounds));
+                    visibleBounds,
+                    mustFit));
             }
             catch (InvalidOperationException)
             {
@@ -492,8 +499,53 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
                 overlapped,
                 candidate.Element.IsEnabled,
                 candidate.Element.Focusable,
-                true);
+                candidate.MustFit);
         }).ToArray();
+    }
+
+    /// <summary>
+    /// Applies the P2 layout contract to captured bounds. Only elements explicitly
+    /// marked MustFit participate; scrollable-content controls are evidence-only.
+    /// </summary>
+    public static bool HasLayoutOverflow(
+        IEnumerable<AssetLibraryP2AutomatedElementBounds> bounds,
+        double pageWidth,
+        double pageHeight)
+    {
+        ArgumentNullException.ThrowIfNull(bounds);
+        if (!double.IsFinite(pageWidth) || !double.IsFinite(pageHeight) || pageWidth < 0 || pageHeight < 0)
+            throw new ArgumentOutOfRangeException(nameof(pageWidth), "The layout viewport must have non-negative finite bounds.");
+        return bounds.Any(item =>
+            !double.IsFinite(item.X) || !double.IsFinite(item.Y) ||
+            !double.IsFinite(item.Width) || !double.IsFinite(item.Height) ||
+            !double.IsFinite(item.VisibleX) || !double.IsFinite(item.VisibleY) ||
+            !double.IsFinite(item.VisibleWidth) || !double.IsFinite(item.VisibleHeight) ||
+            item.Width < 0 || item.Height < 0 || item.VisibleWidth < 0 || item.VisibleHeight < 0 ||
+            item.MustFit &&
+            (item.Clipped || item.Overlapped || item.X < -0.01 || item.Y < -0.01 ||
+             item.X + item.Width > pageWidth + 0.01 || item.Y + item.Height > pageHeight + 0.01));
+    }
+
+    /// <summary>
+    /// Returns whether a captured element is a hard layout-fit requirement. Controls
+    /// inside a ScrollViewer remain in evidence but are explicitly scrollable content.
+    /// </summary>
+    public static bool IsMustFitElement(FrameworkElement element, string automationId)
+    {
+        ArgumentNullException.ThrowIfNull(element);
+        automationId ??= string.Empty;
+        if (MustFitAutomationIds.Contains(automationId)) return true;
+        return element is Button && !IsInsideScrollableViewport(element);
+    }
+
+    private static bool IsInsideScrollableViewport(DependencyObject element)
+    {
+        for (var ancestor = VisualTreeHelper.GetParent(element);
+             ancestor is not null;
+             ancestor = VisualTreeHelper.GetParent(ancestor))
+            if (ancestor is ScrollViewer)
+                return true;
+        return false;
     }
 
     public IReadOnlyList<AssetLibraryP2AutomatedButtonReadabilityState> CaptureButtonReadabilityMatrix(string theme)

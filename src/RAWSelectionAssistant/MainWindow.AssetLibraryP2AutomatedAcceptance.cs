@@ -333,7 +333,7 @@ public partial class MainWindow
         controller.WriteArtifact(controller.ScenarioId, "screenshot", $"{label}.png", stream.ToArray());
         var state = driver.CaptureState();
         var bounds = driver.CaptureVisibleBounds();
-        var overflow = bounds.Any(item => item.MustFit && (item.Clipped || item.Overlapped || item.X < -0.01 || item.Y < -0.01 || item.X + item.Width > state.PageWidth + 0.01 || item.Y + item.Height > state.PageHeight + 0.01));
+        var overflow = AssetLibraryP2AutomatedAcceptanceDriver.HasLayoutOverflow(bounds, state.PageWidth, state.PageHeight);
         if (overflow) throw new InvalidOperationException($"The live P2 layout overflowed at {physicalWidth}x{physicalHeight}/{scale:P0}.");
         controller.WriteJsonArtifact(controller.ScenarioId, "bounds", $"{label}.bounds.json", Evidence(controller, new
         {

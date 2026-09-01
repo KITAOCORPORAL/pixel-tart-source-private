@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest" Version="4.0.2" />

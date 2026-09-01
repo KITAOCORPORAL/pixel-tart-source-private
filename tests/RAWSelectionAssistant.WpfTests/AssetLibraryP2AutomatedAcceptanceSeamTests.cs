@@ -98,6 +98,17 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void BoundsContractSeparatesScrollableContentFromHardFitStructure()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP2AutomatedAcceptanceDriver.cs");
+        var window = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP2AutomatedAcceptance.cs");
+        ContainsAll(driver,
+            "IsMustFitElement", "IsInsideScrollableViewport", "candidate.MustFit",
+            "HasLayoutOverflow", "double.IsFinite");
+        ContainsAll(window, "AssetLibraryP2AutomatedAcceptanceDriver.HasLayoutOverflow");
+    }
+
+    [TestMethod]
     public void DriverUsesPublicWpfAndCommandSeamsNotDesktopOrReflection()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP2AutomatedAcceptanceDriver.cs");
