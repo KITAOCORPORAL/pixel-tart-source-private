@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
@@ -20,6 +21,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _disposed;
     private bool _applyingViewModelSelection;
     private DispatcherOperation? _pendingPaneWidthCommit;
+    private Guid? _viewTransitionAnchor;
 
     public AssetLibraryPage()
         : this(
@@ -44,6 +46,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
+        _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
+        _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
         DataContext = _viewModel;
     }
 
@@ -80,6 +84,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _pendingPaneWidthCommit?.Abort();
         _pendingPaneWidthCommit = null;
         _viewModel.SelectionRestoreRequested -= ViewModel_SelectionRestoreRequested;
+        _viewModel.ViewModeChanging -= ViewModel_ViewModeChanging;
+        _viewModel.ViewModeChanged -= ViewModel_ViewModeChanged;
         await _viewModel.DisposeAsync();
     }
 
@@ -88,7 +94,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_applyingViewModelSelection) return;
-        _viewModel.SyncSelection(AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset));
+        _viewModel.SyncVisibleSelection(
+            AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset),
+            _viewModel.AssetCards.Select(card => card.Asset.AssetId));
         UpdateGridDiagnostics();
     }
 
@@ -105,20 +113,52 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private void ApplyViewModelSelection()
     {
         if (_disposed) return;
-        var selectedIds = _viewModel.SelectedAssets.Select(asset => asset.AssetId).ToHashSet();
+        var selectedIds = _viewModel.SelectedAssetIds.ToHashSet();
         _applyingViewModelSelection = true;
         try
         {
             AssetGrid.SelectedItems.Clear();
             foreach (var card in _viewModel.AssetCards.Where(card => selectedIds.Contains(card.Asset.AssetId)))
                 AssetGrid.SelectedItems.Add(card);
-            if (AssetGrid.SelectedItem is not null) AssetGrid.ScrollIntoView(AssetGrid.SelectedItem);
         }
         finally
         {
             _applyingViewModelSelection = false;
         }
         UpdateGridDiagnostics();
+    }
+
+    private void ViewModel_ViewModeChanging(object? sender, AssetLibraryViewModeChangedEventArgs e)
+    {
+        var panel = FindVisualChild<VirtualizingAssetPanel>(AssetGrid);
+        var firstVisibleIndex = panel?.FirstVisibleIndex ?? -1;
+        _viewTransitionAnchor = firstVisibleIndex >= 0 && firstVisibleIndex < _viewModel.AssetCards.Count
+            ? _viewModel.AssetCards[firstVisibleIndex].Asset.AssetId
+            : _viewModel.SelectedAssets.FirstOrDefault()?.AssetId;
+        _viewModel.RememberScrollAnchor(_viewTransitionAnchor);
+    }
+
+    private void ViewModel_ViewModeChanged(object? sender, AssetLibraryViewModeChangedEventArgs e)
+    {
+        var target = _viewModel.GetScrollAnchor(e.Current) ?? _viewTransitionAnchor;
+        _ = Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+        {
+            if (_disposed || target is null) return;
+            var card = _viewModel.AssetCards.FirstOrDefault(item => item.Asset.AssetId == target.Value);
+            if (card is not null) AssetGrid.ScrollIntoView(card);
+        }));
+    }
+
+    private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (var index = 0; index < VisualTreeHelper.GetChildrenCount(parent); index++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, index);
+            if (child is T match) return match;
+            var descendant = FindVisualChild<T>(child);
+            if (descendant is not null) return descendant;
+        }
+        return null;
     }
 
     private void UpdateGridDiagnostics() => _viewModel.UpdateAssetGridDiagnostics(
@@ -226,6 +266,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         }
         else if (e.Key == Key.Escape)
         {
+            _viewModel.SyncSelection([]);
             AssetGrid.UnselectAll();
             e.Handled = true;
         }

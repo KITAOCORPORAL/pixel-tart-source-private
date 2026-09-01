@@ -22,7 +22,8 @@ public sealed class AssetLibraryP1StateSeamContractTests
             "'$(Configuration)' != 'Release'");
 
         var sourceRevision = project.Descendants("IncludeSourceRevisionInInformationalVersion")
-            .Single(element => string.Equals(element.Value, "true", StringComparison.Ordinal));
+            .Single(element => string.Equals(element.Value, "true", StringComparison.Ordinal) &&
+                               ((string?)element.Attribute("Condition"))?.Contains("AssetLibraryP1StateAcceptance", StringComparison.Ordinal) == true);
         var sourceRevisionCondition = (string?)sourceRevision.Attribute("Condition") ?? string.Empty;
         ContainsAll(
             sourceRevisionCondition,

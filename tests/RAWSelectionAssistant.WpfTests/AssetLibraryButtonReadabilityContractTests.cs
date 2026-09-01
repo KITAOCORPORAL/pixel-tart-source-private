@@ -14,8 +14,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         new Dictionary<string, int>(StringComparer.Ordinal)
         {
             ["{StaticResource AssetLibraryPrimaryButton}"] = 4,
-            ["{StaticResource AssetLibrarySecondaryButton}"] = 12,
-            ["{StaticResource AssetLibraryChipButton}"] = 9,
+            ["{StaticResource AssetLibrarySecondaryButton}"] = 18,
+            ["{StaticResource AssetLibraryChipButton}"] = 24,
             ["{StaticResource AssetLibraryIconButton}"] = 1,
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
         };
@@ -26,8 +26,25 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         "{Binding InspectorPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetInspectorPane|{Binding InspectorPaneToggleLabel}",
         "{Binding InspectorPinLabel}|||AssetLibrarySecondaryButton|PinAssetInspectorPane|",
         "导入引用|||AssetLibraryPrimaryButton|AssetLibraryImport|",
-        "全部素材|||AssetLibrarySecondaryButton|AssetLibraryAllAssets|",
+        "{Binding Label}|||AssetLibrarySecondaryButton|{Binding AutomationId}|{Binding AccessibleName}",
         "+|||AssetLibraryIconButton||新建文件夹",
+        "编辑|||AssetLibrarySecondaryButton||编辑智能文件夹条件",
+        "{Binding Name}|||AssetLibrarySecondaryButton|{Binding AutomationId}|{Binding AccessibleName}",
+        "|||AssetLibrarySecondaryButton|{Binding AutomationId}|{Binding AccessibleName}",
+        "网格|Grid||AssetLibraryChipButton|AssetViewGrid|切换到网格视图",
+        "瀑布流|Masonry||AssetLibraryChipButton|AssetViewMasonry|切换到瀑布流视图",
+        "两端对齐|Justified||AssetLibraryChipButton|AssetViewJustified|切换到两端对齐视图",
+        "列表|List||AssetLibraryChipButton|AssetViewList|切换到列表视图",
+        "添加时间|AddedAt||AssetLibraryChipButton|AssetSortAddedAt|",
+        "拍摄时间|CaptureTime||AssetLibraryChipButton|AssetSortCaptureTime|",
+        "文件名|FileName||AssetLibraryChipButton|AssetSortFileName|",
+        "文件大小|FileSize||AssetLibraryChipButton|AssetSortFileSize|",
+        "评分|Rating||AssetLibraryChipButton|AssetSortRating|",
+        "颜色|Color||AssetLibraryChipButton|AssetSortColor|",
+        "视觉分析|VisualAnalysis||AssetLibraryChipButton|AssetSortVisualAnalysis|",
+        "{Binding SortDirectionLabel}|||AssetLibrarySecondaryButton|AssetSortDirection|切换排序方向",
+        "撤销|||AssetLibrarySecondaryButton|AssetBrowserUndo|",
+        "重做|||AssetLibrarySecondaryButton|AssetBrowserRedo|",
         "已分析|Valid||AssetLibraryChipButton||",
         "未分析|NotAnalyzed||AssetLibraryChipButton||",
         "主色绿|Green||AssetLibraryChipButton||",
@@ -38,6 +55,10 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         "冷色|Cool||AssetLibraryChipButton||",
         "|{Binding Key}|Active|AssetLibraryChipButton||{Binding Label, StringFormat={}移除筛选 {0}}",
         "退出临时结果|||AssetLibrarySecondaryButton|ClearVisualResults|",
+        "名称|FileName||AssetLibraryChipButton|AssetListSortName|",
+        "拍摄时间|CaptureTime||AssetLibraryChipButton|AssetListSortCaptureTime|",
+        "添加时间|AddedAt||AssetLibraryChipButton|AssetListSortAddedAt|",
+        "评分|Rating||AssetLibraryChipButton|AssetListSortRating|",
         "重试|||AssetLibraryPrimaryButton|RetryAssetLibraryLoad|重试",
         "导入引用|||AssetLibraryPrimaryButton|ImportFromEmptyAssetLibrary|",
         "清除条件|||AssetLibrarySecondaryButton||",
@@ -57,7 +78,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = LoadPage();
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(27, buttons, "Update the audited role map when an Asset Library button is added or removed.");
+        Assert.HasCount(48, buttons, "Update the audited role map when an Asset Library button is added or removed.");
         foreach (var button in buttons)
         {
             var style = Attribute(button, "Style");
@@ -72,7 +93,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         CollectionAssert.AreEqual(
             ExpectedButtonAudit,
             buttons.Select(ButtonAuditSignature).ToArray(),
-            "The complete 27-button role, identity, and accessible-name audit changed.");
+            "The complete P1+P2 button role, identity, and accessible-name audit changed.");
 
         var activeChip = buttons.Single(button => Attribute(button, "Tag") == "Active");
         Assert.AreEqual("{StaticResource AssetLibraryChipButton}", Attribute(activeChip, "Style"));
