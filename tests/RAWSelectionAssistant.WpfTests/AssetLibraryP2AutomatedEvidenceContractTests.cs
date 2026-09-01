@@ -128,7 +128,9 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         ContainsAll(runner, "function Invoke-LoggedProcess", "if ($result.exit_code -ne 0)",
             "Validator emitted unexpected stderr", "Validator stdout is not valid JSON",
             "Validator stdout failed the result contract", "pixel-tart-p2-automated-validation-result/v1",
-            "targetRoot", "targetHead");
+            "targetRoot", "targetHead", "Validator log directory must be outside the sealed run root",
+            "$validatorLogDirectory = Join-Path (Split-Path -Parent $activeRunRoot)",
+            "Invoke-Validator $activeRunRoot $validatorLogDirectory");
     }
 
     [TestMethod]
@@ -308,6 +310,12 @@ $end = $runner.IndexOf('function Invoke-RecoveryTest', $start, [StringComparison
 if ($start -lt 0 -or $end -le $start) { throw 'Could not extract Invoke-Validator.' }
 $functionText = $runner.Substring($start, $end - $start)
 $functionText = $functionText.Replace('$PSScriptRoot', "'$(Split-Path -Parent $env:P2_RUNNER_PATH)'")
+function Test-PathWithin {
+    param([string]$Path, [string]$Root)
+    $fullPath = [IO.Path]::GetFullPath($Path).TrimEnd('\', '/')
+    $fullRoot = [IO.Path]::GetFullPath($Root).TrimEnd('\', '/')
+    return $fullPath -eq $fullRoot -or $fullPath.StartsWith($fullRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
+}
 Invoke-Expression $functionText
 $script:stubCase = $env:P2_CASE
 function Invoke-LoggedProcess {

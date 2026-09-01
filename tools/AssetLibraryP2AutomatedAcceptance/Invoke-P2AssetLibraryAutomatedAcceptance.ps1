@@ -1014,6 +1014,10 @@ function Invoke-Validator {
     $validator = Join-Path $PSScriptRoot 'Test-P2AssetLibraryAutomatedEvidence.ps1'
     if (-not (Test-Path -LiteralPath $validator -PathType Leaf)) { throw "Validator not found: $validator" }
     $targetRoot = [IO.Path]::GetFullPath($ActiveRunRoot).TrimEnd('\', '/')
+    $validatorLogRoot = [IO.Path]::GetFullPath($LogDirectory).TrimEnd('\', '/')
+    if (Test-PathWithin $validatorLogRoot $targetRoot) {
+        throw "Validator log directory must be outside the sealed run root: $validatorLogRoot"
+    }
     $targetManifestPath = Join-Path $targetRoot 'run-manifest.json'
     if (-not (Test-Path -LiteralPath $targetManifestPath -PathType Leaf)) { throw "Validator target manifest not found: $targetManifestPath" }
     try { $targetManifest = Get-Content -LiteralPath $targetManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop }
@@ -1139,6 +1143,7 @@ Assert-NoDevPreview
 $activeRunRoot = New-RunRoot
 $logDirectory = Join-Path $activeRunRoot 'logs'
 $runId = "p2-auto-$([guid]::NewGuid().ToString('N'))"
+$validatorLogDirectory = Join-Path (Split-Path -Parent $activeRunRoot) "P2-Automated-Validator-$runId"
 $environmentBefore = @{}
 foreach ($key in $script:environmentKeys) { $environmentBefore[$key] = [Environment]::GetEnvironmentVariable($key, 'Process') }
 $manifestPath = Join-Path $activeRunRoot 'run-manifest.json'
@@ -1326,7 +1331,7 @@ try {
     $manifest.process_cleanup = $processCleanup
     Write-JsonAtomic $manifestPath $manifest
     Assert-TrackedCleanAndHead $sourceHead 'Validator preflight'
-    [void](Invoke-Validator $activeRunRoot $logDirectory)
+    [void](Invoke-Validator $activeRunRoot $validatorLogDirectory)
     Write-Output $activeRunRoot
 } catch {
     $manifest.automated_capture_status = 'failed'
