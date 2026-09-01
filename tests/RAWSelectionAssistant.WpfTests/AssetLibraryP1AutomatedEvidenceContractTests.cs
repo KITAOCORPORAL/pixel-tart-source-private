@@ -230,6 +230,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         private static readonly string FixtureProductVersion = FileVersionInfo.GetVersionInfo(FixtureVersionedBinary).ProductVersion
             ?? throw new InvalidOperationException("The evidence fixture assembly has no ProductVersion.");
         private static readonly string Head = ProductVersionHead(FixtureProductVersion);
+        private static readonly string Branch = ResolveFixtureBranch(Head);
         private static readonly byte[] Png = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=");
         private readonly string _summaryPath;
         private readonly string _eventsPath;
@@ -349,7 +350,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             manifest["schema_version"] = "pixel-tart-p1-automated-run/v2";
             manifest["run_id"] = RunId;
             manifest["run_root"] = Root;
-            manifest["branch"] = "feature/modular-harness-v1-p1";
+            manifest["branch"] = Branch;
             manifest["source_head"] = Head;
             manifest["repository_root"] = repositoryRoot;
             manifest["sessions"] = BuildRunnerSessions(summary);
@@ -507,6 +508,31 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             if (head.Length != 40 || head.Any(character => !Uri.IsHexDigit(character)))
                 throw new InvalidOperationException($"The evidence fixture ProductVersion '{productVersion}' has an invalid source revision suffix.");
             return head.ToLowerInvariant();
+        }
+
+        private static string ResolveFixtureBranch(string head)
+        {
+            var branch = GitText(Root(), "branch", "--show-current");
+            if (branch is not ("feature/modular-harness-v1-p1" or "feature/asset-library-eagle-parity-p2"))
+                throw new InvalidOperationException($"The P1 evidence fixture cannot run on unapproved branch '{branch}'.");
+
+            var start = new ProcessStartInfo("git")
+            {
+                WorkingDirectory = Root(),
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+            start.ArgumentList.Add("merge-base");
+            start.ArgumentList.Add("--is-ancestor");
+            start.ArgumentList.Add(head);
+            start.ArgumentList.Add($"refs/heads/{branch}");
+            using var process = Process.Start(start) ?? throw new InvalidOperationException("git merge-base could not start.");
+            process.WaitForExit();
+            if (process.ExitCode != 0)
+                throw new InvalidOperationException($"Fixture HEAD '{head}' is not an ancestor of '{branch}'.");
+            return branch;
         }
 
         public void InjectScenarioFailure(string scenarioId)
