@@ -678,7 +678,7 @@ try:
         missing = 1 if (30 <= index < 60 or 500 <= index < 502) else 0
         asset_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"pixel-tart-p2-fixture-{index:04d}"))
         source = str(root / "media" / f"P2_{index:04d}.jpg")
-        display_name = f"P2_{index:04d} 人物参考 {index % 7 + 1:02d}.jpg"
+        display_name = f"P2_{index:04d} \u4eba\u7269\u53c2\u8003 {index % 7 + 1:02d}.jpg"
         content_hash = hashlib.sha256(f"pixel-tart-p2-source-{index:04d}".encode("ascii")).hexdigest()
         capture_time = (now + datetime.timedelta(days=index % 31, seconds=index)).isoformat()
         added_at = (now + datetime.timedelta(seconds=index)).isoformat()
@@ -732,17 +732,17 @@ try:
         AssetId,AnalysisVersion,ColorIndex,Red,Green,Blue,LabL,LabA,LabB,Hue,Saturation,Chroma,Weight,Hex)
       VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", palette_rows)
     uid = lambda name: str(uuid.uuid5(uuid.NAMESPACE_URL, "pixel-tart-p2-" + name))
-    folder_rows = [(uid("folder-people"), None, "人物", "人物参考", 0),
-                   (uid("folder-portrait"), uid("folder-people"), "人像", "人像样片", 0),
-                   (uid("folder-light"), None, "灯光", "灯光参考", 1),
-                   (uid("folder-archived"), None, "旧项目", "归档文件夹", 2)]
+    folder_rows = [(uid("folder-people"), None, "\u4eba\u7269", "\u4eba\u7269\u53c2\u8003", 0),
+                   (uid("folder-portrait"), uid("folder-people"), "\u4eba\u50cf", "\u4eba\u50cf\u6837\u7247", 0),
+                   (uid("folder-light"), None, "\u706f\u5149", "\u706f\u5149\u53c2\u8003", 1),
+                   (uid("folder-archived"), None, "\u65e7\u9879\u76ee", "\u5f52\u6863\u6587\u4ef6\u5939", 2)]
     connection.executemany("INSERT INTO AssetFolders(FolderId,ParentFolderId,Name,Description,SortOrder,CreatedAt,UpdatedAt,IsArchived) VALUES(?,?,?,?,?,?,?,?)",
-       [(fid,parent,name,desc,order,now.isoformat(),now.isoformat(),1 if name=="旧项目" else 0) for fid,parent,name,desc,order in folder_rows])
+       [(fid,parent,name,desc,order,now.isoformat(),now.isoformat(),1 if name=="\u65e7\u9879\u76ee" else 0) for fid,parent,name,desc,order in folder_rows])
     connection.executemany("INSERT INTO AssetFolderMemberships VALUES(?,?,?)",
        [(ids[i], uid("folder-portrait") if i % 2 == 0 else uid("folder-light"), now.isoformat()) for i in range(300)])
-    groups = [(uid("group-subject"),"主题",0,now.isoformat(),0),(uid("group-tone"),"色调",1,now.isoformat(),0)]
+    groups = [(uid("group-subject"),"\u4e3b\u9898",0,now.isoformat(),0),(uid("group-tone"),"\u8272\u8c03",1,now.isoformat(),0)]
     connection.executemany("INSERT INTO TagGroups VALUES(?,?,?,?,?)", groups)
-    tag_defs = [("portrait","人像","group-subject"),("fashion","时尚","group-subject"),("warm","暖色","group-tone"),("cool","冷色","group-tone")]
+    tag_defs = [("portrait","\u4eba\u50cf","group-subject"),("fashion","\u65f6\u5c1a","group-subject"),("warm","\u6696\u8272","group-tone"),("cool","\u51b7\u8272","group-tone")]
     tags = [(uid("tag-"+key),name,uid(group),order,0,now.isoformat(),0) for order,(key,name,group) in enumerate(tag_defs)]
     connection.executemany("INSERT INTO AssetTags VALUES(?,?,?,?,?,?,?)", tags)
     memberships = []
@@ -752,7 +752,7 @@ try:
     connection.executemany("INSERT INTO AssetTagMemberships VALUES(?,?,?)", memberships)
     connection.execute("UPDATE AssetTags SET UsageCount=(SELECT COUNT(*) FROM AssetTagMemberships m WHERE m.TagId=AssetTags.TagId)")
     smart = uid("smart-rating-four")
-    connection.execute("INSERT INTO SmartFolders VALUES(?,?,?,?,?,?,?)", (smart,"四星精选","And","评分至少四星",now.isoformat(),now.isoformat(),0))
+    connection.execute("INSERT INTO SmartFolders VALUES(?,?,?,?,?,?,?)", (smart,"\u56db\u661f\u7cbe\u9009","And","\u8bc4\u5206\u81f3\u5c11\u56db\u661f",now.isoformat(),now.isoformat(),0))
     connection.execute("INSERT INTO SmartFolderRules VALUES(?,?,?,?,?,?,?,?,?)", (uid("rule-rating-four"),smart,"Rating","GreaterThanOrEqual","4",0,0,None,"And"))
     connection.commit()
     counts = connection.execute("SELECT COUNT(*),SUM(IsArchived=0),SUM(IsArchived=1) FROM AssetItems").fetchone()
