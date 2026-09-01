@@ -1,10 +1,10 @@
 # 素材库 P2 Eagle 核心组织与浏览实施报告
 
-日期：2026-09-01  
-阶段：P2（Eagle 核心组织栏与素材浏览；不含 P3～P6）  
-执行分支：`feature/asset-library-eagle-parity-p2`  
-P1 已关闭起点：`ba25aae315e566db76a5db98a1762d006b91263f`  
-验收代码 HEAD：`806e2b78441e0a77ec0722efdc1ae0b3f7baeb8c`（交付文档提交后的最终 HEAD 以 git log/ls-remote 回传为准）  
+日期：2026-09-01
+阶段：P2（Eagle 核心组织栏与素材浏览；不含 P3～P6）
+执行分支：`feature/asset-library-eagle-parity-p2`
+P1 已关闭起点：`ba25aae315e566db76a5db98a1762d006b91263f`
+验收代码 HEAD：`806e2b78441e0a77ec0722efdc1ae0b3f7baeb8c`（交付文档提交后的最终 HEAD 以 git log/ls-remote 回传为准）
 远端核验：`报告提交后由 git ls-remote 核验；最终完整值随交付回传`
 
 > 本报告的功能口径来自 `P0_ASSET_LIBRARY_AUDIT_MIGRATION_MAP_2026-08-18.md` 的 F-001～F-083 原表及本轮 P2 开发指令。P2 只宣称组织栏、四视图、统一查询/排序/选择、metadata-only 拖放与上下文命令、三态检查器和独立自动验收闭环；Viewer、通用筛选器、完整导入/导出、逻辑回收站及 Eagle Adapter 均未纳入。所有数字均来自本地最终验收代码 HEAD=806e2b7 的独立日志、sealed run root 与只读 validator；历史失败根目录不与最终证据拼接。
@@ -211,7 +211,7 @@ P1 已关闭起点：`ba25aae315e566db76a5db98a1762d006b91263f`
 - `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P2-Automated-Acceptance-20260901-155619-6227e557d7b7`：旧布局 validator 误判。
 - `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P2-Automated-Acceptance-20260901-164020-a7a3ce8ada00`：旧 PS5 validator API/日志兼容失败；修复后只读 validator 可通过，但不计入最终三轮。
 - `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P2-Automated-Acceptance-20260901-174006-bc4d94f92413`：验证器日志与 sealed root 重叠导致文件锁冲突；该根目录保留为失败证据，修复后重新开始三轮。
-证据索引：`每轮均为 53 artifacts：bounds=15、commands=1、databases=11、inspectors=1、performance=2、queries=4、screenshots=15、selections=1、views=3；events.ndjson=5305 行；summary.json 与数据库审计文件均由 validator 逐文件哈希。`。  
+证据索引：`每轮均为 53 artifacts：bounds=15、commands=1、databases=11、inspectors=1、performance=2、queries=4、screenshots=15、selections=1、views=3；events.ndjson=5305 行；summary.json 与数据库审计文件均由 validator 逐文件哈希。`。
 截图清单与 hash：`每轮 15 张 PNG，validator 已逐文件校验路径、PNG 头、run_id/head 与 SHA256；截图清单聚合 SHA256：轮1=0a055f33f1d6dca6a9b5db6959dd452ffe25d8376775f1b1dff6700f3866838d，轮2=9dbf6424c59428be29f2dda07b78230112b066d3c0579f0ae19014c919d70780，轮3=23d329651be614a9b3e05d6c8abbb7654ac3c97a0d8b35ca5081977528203ba2；完整相对路径均在各 root/app/evidence/screenshots，summary.json 保存逐文件 hash。`。
 三轮摘要/审计 hash：轮1 `summary.json=7f80e141123fdfd380b6e6ac9af6021a13abc6e5ef7f4c05fb621d98dc1e0843`、`database-consistency-audit.json=97c8250a88db76352cf193f40c9feae341a29c98b835139907adde0182ba15b5`、`events.ndjson=066493c50d10178cb8fd6e8519c0b7b4f6e402523c08ad1318b16b34a0ca3c1a`；轮2 `summary.json=4ece4120aea647d1fb4a597ac888384e71f71054cb0b6feeccefee2c50de9aa4`、`database-consistency-audit.json=1591f363d0ec749324a8b97620fc4b85659aa2ddc9d279caa1bf235c31f396de`、`events.ndjson=44a4d4962465950f7e9ef1bd856cfd8658b61f3f7e0a3d9465b4d88e4902bff6`；轮3 `summary.json=6ab99c84d8e287e591c2388d7581156685db7c8aadbfb29a0b4bb0d00d82bc42`、`database-consistency-audit.json=557f0e73268b0801ebd8cc298699472f9d06fbf207574b5ec717be1edf762959`、`events.ndjson=8bd746469c18a94605c48a55ac15b720717d69a11182e69c6b6a281bef0ca42c`。
 
