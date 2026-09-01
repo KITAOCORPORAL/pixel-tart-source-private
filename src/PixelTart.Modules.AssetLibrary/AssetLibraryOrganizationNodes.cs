@@ -147,14 +147,19 @@ public sealed class AssetLibraryTagNodeView
     public AssetCommand SelectCommand { get; }
 }
 
-public sealed class AssetLibraryTagGroupNodeView
+public sealed class AssetLibraryTagGroupNodeView : ObservableObject
 {
-    internal AssetLibraryTagGroupNodeView(TagGroup? group, IEnumerable<AssetLibraryTagNodeView> tags)
+    private readonly AssetLibraryViewModel _owner;
+    private bool _isExpanded;
+
+    internal AssetLibraryTagGroupNodeView(AssetLibraryViewModel owner, TagGroup? group, IEnumerable<AssetLibraryTagNodeView> tags)
     {
+        _owner = owner;
         Group = group;
         Name = group?.Name ?? "未分组标签";
         AutomationId = group is null ? "AssetTagGroup_Ungrouped" : $"AssetTagGroup_{group.TagGroupId:N}";
         Children = new(tags);
+        _isExpanded = group is null || owner.IsTagGroupExpanded(group.TagGroupId);
     }
 
     public TagGroup? Group { get; }
@@ -162,4 +167,13 @@ public sealed class AssetLibraryTagGroupNodeView
     public string AutomationId { get; }
     public string AccessibleName => $"标签组 {Name}，{Children.Count} 个标签";
     public ObservableCollection<AssetLibraryTagNodeView> Children { get; }
+    public bool IsExpanded
+    {
+        get => _isExpanded;
+        set
+        {
+            if (!SetProperty(ref _isExpanded, value) || Group is null) return;
+            _owner.RememberTagGroupExpanded(Group.TagGroupId, value);
+        }
+    }
 }

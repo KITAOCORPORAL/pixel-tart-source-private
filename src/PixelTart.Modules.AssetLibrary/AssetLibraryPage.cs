@@ -22,6 +22,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _applyingViewModelSelection;
     private DispatcherOperation? _pendingPaneWidthCommit;
     private Guid? _viewTransitionAnchor;
+    private bool _isMarqueeSelecting;
+    private Point _marqueeStart;
+    private bool _marqueeControlSelection;
+    private bool _marqueeShiftSelection;
+    private HashSet<Guid> _marqueeBaseSelection = [];
 
     public AssetLibraryPage()
         : this(
@@ -48,6 +53,10 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
+        AssetGrid.PreviewMouseLeftButtonDown += AssetGrid_PreviewMouseLeftButtonDown;
+        AssetGrid.PreviewMouseMove += AssetGrid_PreviewMouseMove;
+        AssetGrid.PreviewMouseLeftButtonUp += AssetGrid_PreviewMouseLeftButtonUp;
+        AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
         DataContext = _viewModel;
     }
 
@@ -86,6 +95,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.SelectionRestoreRequested -= ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging -= ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged -= ViewModel_ViewModeChanged;
+        AssetGrid.PreviewMouseLeftButtonDown -= AssetGrid_PreviewMouseLeftButtonDown;
+        AssetGrid.PreviewMouseMove -= AssetGrid_PreviewMouseMove;
+        AssetGrid.PreviewMouseLeftButtonUp -= AssetGrid_PreviewMouseLeftButtonUp;
+        AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
+        CancelMarqueeSelection();
         await _viewModel.DisposeAsync();
     }
 
@@ -98,6 +112,162 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset),
             _viewModel.AssetCards.Select(card => card.Asset.AssetId));
         UpdateGridDiagnostics();
+    }
+
+    private void AssetGrid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (_disposed || e.ChangedButton != MouseButton.Left || IsAssetCardSource(e.OriginalSource as DependencyObject)) return;
+        if (FindVisualParent<ScrollBar>(e.OriginalSource as DependencyObject) is not null) return;
+
+        _isMarqueeSelecting = true;
+        _marqueeStart = e.GetPosition(AssetGrid);
+        _marqueeControlSelection = Keyboard.Modifiers.HasFlag(ModifierKeys.Control);
+        _marqueeShiftSelection = Keyboard.Modifiers.HasFlag(ModifierKeys.Shift);
+        _marqueeBaseSelection = _viewModel.SelectedAssetIds.ToHashSet();
+        if (!_marqueeControlSelection && !_marqueeShiftSelection) _marqueeBaseSelection.Clear();
+        AssetGrid.Focus();
+        AssetGrid.CaptureMouse();
+        UpdateMarqueeSelection(e.GetPosition(AssetGrid));
+        e.Handled = true;
+    }
+
+    private void AssetGrid_PreviewMouseMove(object sender, MouseEventArgs e)
+    {
+        if (!_isMarqueeSelecting || e.LeftButton != MouseButtonState.Pressed) return;
+        UpdateMarqueeSelection(e.GetPosition(AssetGrid));
+        e.Handled = true;
+    }
+
+    private void AssetGrid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (!_isMarqueeSelecting || e.ChangedButton != MouseButton.Left) return;
+        var end = e.GetPosition(AssetGrid);
+        UpdateMarqueeSelection(end);
+        CompleteMarqueeSelection(end);
+        e.Handled = true;
+    }
+
+    private void AssetGrid_LostMouseCapture(object sender, MouseEventArgs e)
+    {
+        if (_isMarqueeSelecting) CancelMarqueeSelection();
+    }
+
+    private void UpdateMarqueeSelection(Point current)
+    {
+        var width = Math.Max(0d, AssetGrid.RenderSize.Width);
+        var height = Math.Max(0d, AssetGrid.RenderSize.Height);
+        var left = Math.Clamp(Math.Min(_marqueeStart.X, current.X), 0d, width);
+        var top = Math.Clamp(Math.Min(_marqueeStart.Y, current.Y), 0d, height);
+        var right = Math.Clamp(Math.Max(_marqueeStart.X, current.X), 0d, width);
+        var bottom = Math.Clamp(Math.Max(_marqueeStart.Y, current.Y), 0d, height);
+        Canvas.SetLeft(AssetSelectionMarquee, left);
+        Canvas.SetTop(AssetSelectionMarquee, top);
+        AssetSelectionMarquee.Width = Math.Max(1d, right - left);
+        AssetSelectionMarquee.Height = Math.Max(1d, bottom - top);
+        AssetSelectionMarquee.Visibility = Visibility.Visible;
+    }
+
+    private void CompleteMarqueeSelection(Point end)
+    {
+        if (!_isMarqueeSelecting) return;
+        var selection = CreateMarqueeRect(_marqueeStart, end, AssetGrid.RenderSize);
+        var hitCards = GetIntersectingCards(selection);
+        var hitIds = hitCards.Select(card => card.Asset.AssetId).ToHashSet();
+        var nextIds = _marqueeControlSelection
+            ? ToggleSelection(_marqueeBaseSelection, hitIds)
+            : _marqueeShiftSelection
+                ? _marqueeBaseSelection.Concat(hitIds).ToHashSet()
+                : hitIds;
+
+        _isMarqueeSelecting = false;
+        AssetGrid.ReleaseMouseCapture();
+        HideMarqueeSelection();
+        ApplyMarqueeSelection(nextIds);
+        _marqueeBaseSelection.Clear();
+    }
+
+    private void CancelMarqueeSelection()
+    {
+        if (!_isMarqueeSelecting)
+        {
+            HideMarqueeSelection();
+            return;
+        }
+        _isMarqueeSelecting = false;
+        if (AssetGrid.IsMouseCaptured) AssetGrid.ReleaseMouseCapture();
+        HideMarqueeSelection();
+        _marqueeBaseSelection.Clear();
+    }
+
+    private void HideMarqueeSelection()
+    {
+        AssetSelectionMarquee.Visibility = Visibility.Collapsed;
+        AssetSelectionMarquee.Width = 0d;
+        AssetSelectionMarquee.Height = 0d;
+    }
+
+    private void ApplyMarqueeSelection(IReadOnlySet<Guid> ids)
+    {
+        var cards = _viewModel.AssetCards.Where(card => ids.Contains(card.Asset.AssetId)).ToArray();
+        _applyingViewModelSelection = true;
+        try
+        {
+            AssetGrid.SelectedItems.Clear();
+            foreach (var card in cards) AssetGrid.SelectedItems.Add(card);
+        }
+        finally { _applyingViewModelSelection = false; }
+
+        if (_marqueeControlSelection || _marqueeShiftSelection)
+            _viewModel.SyncVisibleSelection(cards.Select(card => card.Asset), _viewModel.AssetCards.Select(card => card.Asset.AssetId));
+        else
+            _viewModel.SyncSelection(cards.Select(card => card.Asset));
+        UpdateGridDiagnostics();
+    }
+
+    private IReadOnlyList<AssetVisualMatchView> GetIntersectingCards(Rect selection)
+    {
+        var hits = new List<AssetVisualMatchView>();
+        for (var index = 0; index < AssetGrid.Items.Count; index++)
+        {
+            if (AssetGrid.Items[index] is not AssetVisualMatchView card ||
+                AssetGrid.ItemContainerGenerator.ContainerFromIndex(index) is not ListBoxItem container) continue;
+            try
+            {
+                var local = new Rect(new Point(), container.RenderSize);
+                var bounds = container.TransformToAncestor(AssetGrid).TransformBounds(local);
+                if (bounds.IntersectsWith(selection)) hits.Add(card);
+            }
+            catch (InvalidOperationException) { }
+        }
+        return hits;
+    }
+
+    private static HashSet<Guid> ToggleSelection(IEnumerable<Guid> baseSelection, IEnumerable<Guid> hitIds)
+    {
+        var result = baseSelection.ToHashSet();
+        foreach (var id in hitIds)
+            if (!result.Add(id)) result.Remove(id);
+        return result;
+    }
+
+    private static Rect CreateMarqueeRect(Point start, Point end, Size bounds)
+    {
+        var width = Math.Max(0d, bounds.Width);
+        var height = Math.Max(0d, bounds.Height);
+        var left = Math.Clamp(Math.Min(start.X, end.X), 0d, width);
+        var top = Math.Clamp(Math.Min(start.Y, end.Y), 0d, height);
+        var right = Math.Clamp(Math.Max(start.X, end.X), 0d, width);
+        var bottom = Math.Clamp(Math.Max(start.Y, end.Y), 0d, height);
+        return new(left, top, Math.Max(0d, right - left), Math.Max(0d, bottom - top));
+    }
+
+    private static bool IsAssetCardSource(DependencyObject? source) => FindVisualParent<ListBoxItem>(source) is not null;
+
+    private static T? FindVisualParent<T>(DependencyObject? source) where T : DependencyObject
+    {
+        for (var current = source; current is not null; current = GetInputParent(current))
+            if (current is T match) return match;
+        return null;
     }
 
     private void ViewModel_SelectionRestoreRequested(object? sender, EventArgs e)
@@ -238,6 +408,28 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key is Key.ImeProcessed or Key.DeadCharProcessed || IsTextInputContext(e.OriginalSource)) return;
+        if (_isMarqueeSelecting && e.Key == Key.Escape)
+        {
+            CancelMarqueeSelection();
+            e.Handled = true;
+            return;
+        }
+        if (AssetGrid.IsKeyboardFocusWithin)
+        {
+            if (e.Key == Key.A && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                SelectAllVisibleAssets();
+                e.Handled = true;
+                return;
+            }
+            if (Keyboard.Modifiers == ModifierKeys.None &&
+                (e.Key is Key.Home or Key.End or Key.PageUp or Key.PageDown))
+            {
+                NavigateAssetGrid(e.Key);
+                e.Handled = true;
+                return;
+            }
+        }
         if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
         {
             FocusSearch();
@@ -270,6 +462,38 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             AssetGrid.UnselectAll();
             e.Handled = true;
         }
+    }
+
+    private void SelectAllVisibleAssets()
+    {
+        var cards = _viewModel.AssetCards.ToArray();
+        _applyingViewModelSelection = true;
+        try { AssetGrid.SelectAll(); }
+        finally { _applyingViewModelSelection = false; }
+        _viewModel.SyncSelection(cards.Select(card => card.Asset));
+        UpdateGridDiagnostics();
+    }
+
+    private void NavigateAssetGrid(Key key)
+    {
+        if (AssetGrid.Items.Count == 0) return;
+        var current = AssetGrid.SelectedIndex < 0 ? 0 : AssetGrid.SelectedIndex;
+        var panel = FindVisualChild<VirtualizingAssetPanel>(AssetGrid);
+        var target = key switch
+        {
+            Key.Home => 0,
+            Key.End => AssetGrid.Items.Count - 1,
+            Key.PageUp => panel?.GetPageTargetIndex(current, forward: false) ?? Math.Max(0, current - 10),
+            Key.PageDown => panel?.GetPageTargetIndex(current, forward: true) ?? Math.Min(AssetGrid.Items.Count - 1, current + 10),
+            _ => current
+        };
+        if (panel is not null)
+        {
+            if (key == Key.PageDown && target <= current && current < AssetGrid.Items.Count - 1) target = current + 1;
+            if (key == Key.PageUp && target >= current && current > 0) target = current - 1;
+        }
+        AssetGrid.SelectedIndex = target;
+        AssetGrid.ScrollIntoView(AssetGrid.Items[target]);
     }
 
     private static bool IsTextInputContext(object? source)

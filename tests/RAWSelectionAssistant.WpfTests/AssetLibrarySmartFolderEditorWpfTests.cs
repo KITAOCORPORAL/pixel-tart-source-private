@@ -203,7 +203,7 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
             "The Smart Folder editor must remain reachable when no asset is selected.");
         foreach (var id in new[]
         {
-            "AssetInspectorSourcePath", "AssetInspectorDimensions", "AssetInspectorCaptureTime", "AssetInspectorAddedTime",
+            "AssetInspectorSourcePath", "AssetInspectorFileSize", "AssetInspectorDimensions", "AssetInspectorCaptureTime", "AssetInspectorAddedTime",
             "AssetInspectorRating", "AssetInspectorMissingState", "AssetInspectorFolders", "AssetInspectorTags"
         })
             StringAssert.Contains(text, id);

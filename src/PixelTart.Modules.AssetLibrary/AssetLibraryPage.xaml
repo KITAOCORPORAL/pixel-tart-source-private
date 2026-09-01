@@ -689,7 +689,7 @@
                             <ItemsControl ItemsSource="{Binding OrganizationTagGroups}" AutomationProperties.AutomationId="AssetTags">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Expander Header="{Binding Name}" IsExpanded="True"
+                        <Expander Header="{Binding Name}" IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
                                                   AutomationProperties.AutomationId="{Binding AutomationId}"
                                                   AutomationProperties.Name="{Binding AccessibleName}">
                                             <ItemsControl ItemsSource="{Binding Children}">
@@ -729,6 +729,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid Margin="0,0,0,8" IsEnabled="{Binding IsReady}">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
@@ -815,8 +816,9 @@
                         </Border>
                     </StackPanel>
 
-                    <ListBox x:Name="AssetGrid" Grid.Row="2" ItemsSource="{Binding AssetCards}"
+                     <ListBox x:Name="AssetGrid" Grid.Row="2" ItemsSource="{Binding AssetCards}"
                              IsEnabled="{Binding IsReady}"
+                             Background="Transparent"
                              SelectionMode="Extended" SelectionChanged="AssetGrid_SelectionChanged"
                              ItemTemplate="{StaticResource AssetP2AdaptiveItemTemplate}"
                              ItemContainerStyle="{StaticResource AssetP2ListBoxItem}"
@@ -832,11 +834,36 @@
                                 <local:VirtualizingAssetPanel
                                     ViewMode="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                     ThumbnailWidth="{Binding DataContext.ThumbnailWidth, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
+                             </ItemsPanelTemplate>
+                         </ListBox.ItemsPanel>
+                      </ListBox>
 
-                    <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource ContentBackgroundBrush}"
+                      <Border Grid.Row="3" Margin="0,8,0,0" Padding="8,5"
+                              Background="{DynamicResource SurfaceSecondaryBrush}"
+                              Visibility="{Binding IsLoadMoreVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              AutomationProperties.AutomationId="AssetLoadMoreBar">
+                          <DockPanel LastChildFill="True">
+                              <Button DockPanel.Dock="Right" Content="加载更多" Command="{Binding LoadMoreCommand}"
+                                      IsEnabled="{Binding CanLoadMore}"
+                                      Style="{StaticResource AssetLibrarySecondaryButton}"
+                                      AutomationProperties.AutomationId="AssetLoadMoreButton"
+                                      AutomationProperties.Name="加载更多素材" />
+                              <TextBlock Text="{Binding LoadMoreStatus}" Style="{StaticResource AssetCaption}"
+                                         VerticalAlignment="Center" TextWrapping="Wrap"
+                                         AutomationProperties.AutomationId="AssetLoadMoreStatus" />
+                          </DockPanel>
+                      </Border>
+
+                     <Canvas x:Name="AssetSelectionMarqueeLayer" Grid.Row="2" Panel.ZIndex="6"
+                             IsHitTestVisible="False" ClipToBounds="True"
+                             AutomationProperties.AutomationId="AssetSelectionMarqueeLayer">
+                         <Border x:Name="AssetSelectionMarquee" Width="0" Height="0" Visibility="Collapsed"
+                                 Background="#2842CEAF" BorderBrush="{StaticResource AssetLibraryFocusRingBrush}"
+                                 BorderThickness="1" AutomationProperties.AutomationId="AssetSelectionMarquee"
+                                 AutomationProperties.Name="框选范围" />
+                     </Canvas>
+
+                     <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource ContentBackgroundBrush}"
                             Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryLoadingState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
@@ -924,6 +951,25 @@
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                         <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{StaticResource AssetCaption}" />
+                        <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{StaticResource AssetCaption}" TextTrimming="CharacterEllipsis"
+                                   AutomationProperties.AutomationId="AssetInspectorSourcePath" AutomationProperties.Name="素材路径" />
+                        <TextBlock Text="{Binding SelectedAsset.FileSize, StringFormat=文件大小：{0:N0} 字节}" Style="{StaticResource AssetCaption}"
+                                   AutomationProperties.AutomationId="AssetInspectorFileSize" AutomationProperties.Name="文件大小" />
+                        <TextBlock Style="{StaticResource AssetCaption}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
+                            <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
+                        </TextBlock>
+                        <TextBlock Text="{Binding SelectedAsset.CaptureTime, TargetNullValue=未记录, StringFormat=拍摄时间：{0:yyyy-MM-dd HH:mm}}" Style="{StaticResource AssetCaption}"
+                                   AutomationProperties.AutomationId="AssetInspectorCaptureTime" AutomationProperties.Name="拍摄时间" />
+                        <TextBlock Text="{Binding SelectedAsset.AddedAt, StringFormat=添加时间：{0:yyyy-MM-dd HH:mm}}" Style="{StaticResource AssetCaption}"
+                                   AutomationProperties.AutomationId="AssetInspectorAddedTime" AutomationProperties.Name="添加时间" />
+                        <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{StaticResource AssetCaption}"
+                                   AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
+                        <TextBlock Text="{Binding SelectedAsset.IsMissing, StringFormat=文件缺失：{0}}" Style="{StaticResource AssetCaption}"
+                                   AutomationProperties.AutomationId="AssetInspectorMissingState" AutomationProperties.Name="文件缺失状态" />
+                        <TextBlock Text="{Binding SingleFolderSummary, StringFormat=所属文件夹：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="AssetInspectorFolders" AutomationProperties.Name="所属文件夹" />
+                        <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
                         <TextBlock Text="{Binding FeatureStatus}" Style="{StaticResource AssetCaption}" AutomationProperties.AutomationId="VisualFeatureStatus" />
                         <WrapPanel Margin="0,6,0,0">
                             <Button Content="重新分析" Command="{Binding AnalyzeSelectionCommand}"
@@ -933,6 +979,8 @@
                                     Style="{StaticResource AssetLibrarySecondaryButton}"
                                     AutomationProperties.AutomationId="FindSimilarAssets" />
                         </WrapPanel>
+
+                        </StackPanel>
 
                         <Expander Margin="0,10,0,0" IsExpanded="True" HorizontalContentAlignment="Stretch"
                                   AutomationProperties.AutomationId="VisualSmartFolderBuilder">
@@ -947,26 +995,87 @@
                                 </DockPanel>
                             </Expander.Header>
                             <StackPanel Margin="6">
-                                <TextBox Text="{Binding SmartFolderName}" ToolTip="智能文件夹名称" />
+                                <TextBox Text="{Binding SmartFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="智能文件夹名称"
+                                         AutomationProperties.AutomationId="SmartFolderName" AutomationProperties.Name="智能文件夹名称" />
+                                <TextBlock Text="{Binding SmartFolderEditorStatus}" Style="{StaticResource AssetCaption}" Margin="0,3,0,0"
+                                           AutomationProperties.AutomationId="SmartFolderEditorStatus" />
+                                <Border Margin="0,5,0,0" Padding="5" Background="{DynamicResource SurfaceSecondaryBrush}"
+                                        AutomationProperties.AutomationId="SmartFolderBasicFields">
+                                    <StackPanel>
+                                        <TextBlock Text="基础条件" FontWeight="SemiBold" />
+                                        <Grid Margin="0,4,0,0">
+                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock Text="文件名包含" Style="{StaticResource AssetCaption}" />
+                                                <TextBox Text="{Binding SmartFileNameValue, UpdateSourceTrigger=PropertyChanged}"
+                                                         AutomationProperties.AutomationId="SmartFolderFileName" AutomationProperties.Name="文件名条件" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="扩展名" Style="{StaticResource AssetCaption}" />
+                                                <TextBox Text="{Binding SmartExtensionValue, UpdateSourceTrigger=PropertyChanged}"
+                                                         AutomationProperties.AutomationId="SmartFolderExtension" AutomationProperties.Name="扩展名条件" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Margin="0,4,0,0">
+                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock Text="媒体类型" Style="{StaticResource AssetCaption}" />
+                                                <TextBox Text="{Binding SmartMediaTypeValue, UpdateSourceTrigger=PropertyChanged}"
+                                                         AutomationProperties.AutomationId="SmartFolderMediaType" AutomationProperties.Name="媒体类型条件" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="所属文件夹" Style="{StaticResource AssetCaption}" />
+                                                <TextBox Text="{Binding SmartFolderValue, UpdateSourceTrigger=PropertyChanged}"
+                                                         AutomationProperties.AutomationId="SmartFolderFolder" AutomationProperties.Name="文件夹条件" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Margin="0,4,0,0">
+                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock Text="文件缺失" Style="{StaticResource AssetCaption}" />
+                                                <ComboBox ItemsSource="{Binding SmartMissingOptions}" SelectedItem="{Binding SmartMissingValue, UpdateSourceTrigger=PropertyChanged}"
+                                                          AutomationProperties.AutomationId="SmartFolderMissing" AutomationProperties.Name="文件缺失条件" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="添加时间起点" Style="{StaticResource AssetCaption}" />
+                                                <TextBox Text="{Binding SmartAddedAtFrom, UpdateSourceTrigger=PropertyChanged}" ToolTip="yyyy-MM-dd"
+                                                         AutomationProperties.AutomationId="SmartFolderAddedFrom" AutomationProperties.Name="添加时间起点" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <StackPanel Margin="0,4,0,0">
+                                            <TextBlock Text="添加时间终点" Style="{StaticResource AssetCaption}" />
+                                            <TextBox Text="{Binding SmartAddedAtTo, UpdateSourceTrigger=PropertyChanged}" ToolTip="yyyy-MM-dd"
+                                                     AutomationProperties.AutomationId="SmartFolderAddedTo" AutomationProperties.Name="添加时间终点" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
                                 <Grid Margin="0,4,0,0">
                                     <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="标签" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartTagValue}" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="影调" Style="{StaticResource AssetCaption}" /><ComboBox Text="{Binding SmartToneKey}" IsEditable="True"><ComboBoxItem Content="Low" /><ComboBoxItem Content="Mid" /><ComboBoxItem Content="High" /></ComboBox></StackPanel>
+                                    <StackPanel><TextBlock Text="标签" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartTagValue, UpdateSourceTrigger=PropertyChanged}"
+                                             AutomationProperties.AutomationId="SmartFolderTag" AutomationProperties.Name="标签条件" /></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Text="影调" Style="{StaticResource AssetCaption}" /><ComboBox Text="{Binding SmartToneKey, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"
+                                              AutomationProperties.AutomationId="SmartFolderVisualTone" AutomationProperties.Name="影调条件"><ComboBoxItem Content="Low" /><ComboBoxItem Content="Mid" /><ComboBoxItem Content="High" /></ComboBox></StackPanel>
                                 </Grid>
                                 <Grid Margin="0,4,0,0">
                                     <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="平均饱和度 ≤" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartAverageSaturationMaximum}" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="主色 Hue 范围" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartDominantHueRange}" /></StackPanel>
+                                    <StackPanel><TextBlock Text="平均饱和度 ≤" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartAverageSaturationMaximum, UpdateSourceTrigger=PropertyChanged}"
+                                             AutomationProperties.AutomationId="SmartFolderAverageSaturation" AutomationProperties.Name="平均饱和度条件" /></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Text="主色 Hue 范围" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartDominantHueRange, UpdateSourceTrigger=PropertyChanged}"
+                                             AutomationProperties.AutomationId="SmartFolderDominantHue" AutomationProperties.Name="主色 Hue 条件" /></StackPanel>
                                 </Grid>
                                 <Grid Margin="0,4,0,0">
                                     <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="评分 ≥" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartRuleValue}" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="视觉状态" Style="{StaticResource AssetCaption}" /><ComboBox ItemsSource="{Binding SmartAnalysisStatusOptions}" SelectedItem="{Binding SmartAnalysisStatus}" /></StackPanel>
+                                    <StackPanel><TextBlock Text="评分 ≥" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartRuleValue, UpdateSourceTrigger=PropertyChanged}"
+                                             AutomationProperties.AutomationId="SmartFolderRating" AutomationProperties.Name="评分条件" /></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Text="视觉状态" Style="{StaticResource AssetCaption}" /><ComboBox ItemsSource="{Binding SmartAnalysisStatusOptions}" SelectedItem="{Binding SmartAnalysisStatus, UpdateSourceTrigger=PropertyChanged}"
+                                              AutomationProperties.AutomationId="SmartFolderVisualAnalysisStatus" AutomationProperties.Name="视觉分析状态条件" /></StackPanel>
                                 </Grid>
                                 <TextBlock Text="{Binding SmartBuilderExplanation}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,5" />
                             </StackPanel>
                         </Expander>
 
+                        <StackPanel Visibility="{Binding IsSingleInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    AutomationProperties.AutomationId="AssetInspectorSingleVisualState">
                         <TabControl Margin="0,9,0,0" AutomationProperties.AutomationId="VisualAnalysisTabs">
                             <TabItem Header="配色" Style="{StaticResource AssetLibraryVisualTabItem}"
                                      AutomationProperties.AutomationId="VisualPaletteTab">

@@ -22,6 +22,7 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
     public AssetLibraryViewMode ViewMode { get => (AssetLibraryViewMode)GetValue(ViewModeProperty); set => SetValue(ViewModeProperty, value); }
     public double ThumbnailWidth { get => (double)GetValue(ThumbnailWidthProperty); set => SetValue(ThumbnailWidthProperty, value); }
     public int FirstVisibleIndex { get; private set; } = -1;
+    public int LastVisibleIndex { get; private set; } = -1;
     public int RealizedItemCount => InternalChildren.Count;
 
     protected override Size MeasureOverride(Size availableSize)
@@ -39,6 +40,7 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
         if (count == 0)
         {
             FirstVisibleIndex = -1;
+            LastVisibleIndex = -1;
             CleanUp(0, -1);
             return _viewport;
         }
@@ -60,6 +62,7 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
             last = first;
         }
         FirstVisibleIndex = first;
+        LastVisibleIndex = last;
         Realize(first, last);
         CleanUp(first, last);
         return _viewport;
@@ -132,6 +135,20 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
             best = index;
         }
         return best;
+    }
+
+    /// <summary>
+    /// Returns the item nearest to one viewport away from the current item.
+    /// The page is calculated from the same layout geometry used for rendering,
+    /// so keyboard paging remains consistent across all four view modes.
+    /// </summary>
+    public int GetPageTargetIndex(int currentIndex, bool forward)
+    {
+        if (_layout.Items.Count == 0) return -1;
+        currentIndex = Math.Clamp(currentIndex, 0, _layout.Items.Count - 1);
+        var distance = Math.Max(1d, ViewportHeight);
+        var target = _layout.Items[currentIndex].Top + (forward ? distance : -distance);
+        return Math.Clamp(FindNearestIndex(target), 0, _layout.Items.Count - 1);
     }
 
     private void ClampOffset()

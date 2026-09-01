@@ -30,6 +30,7 @@ public sealed class AssetLibraryWorkspaceSettings
     public AssetLibrarySortDirection SortDirection { get; set; } = AssetLibrarySortDirection.Descending;
     public AssetLibrarySystemCollection ActiveCollection { get; set; } = AssetLibrarySystemCollection.AllAssets;
     public List<Guid> ExpandedFolderIds { get; set; } = [];
+    public List<Guid> ExpandedTagGroupIds { get; set; } = [];
     public List<Guid> SelectedAssetIds { get; set; } = [];
     public Dictionary<string, Guid?> ScrollAnchors { get; set; } = [];
 
@@ -46,6 +47,7 @@ public sealed class AssetLibraryWorkspaceSettings
         if (!Enum.IsDefined(SortDirection)) SortDirection = AssetLibrarySortDirection.Descending;
         if (!Enum.IsDefined(ActiveCollection)) ActiveCollection = AssetLibrarySystemCollection.AllAssets;
         ExpandedFolderIds = NormalizeIds(ExpandedFolderIds, 10_000);
+        ExpandedTagGroupIds = NormalizeIds(ExpandedTagGroupIds, 10_000);
         SelectedAssetIds = NormalizeIds(SelectedAssetIds, 10_000);
         if (SelectedAssetIds.Count == 0 && SelectedAssetId is not null) SelectedAssetIds.Add(SelectedAssetId.Value);
         SelectedAssetId = SelectedAssetIds.Count == 1 ? SelectedAssetIds[0] : null;

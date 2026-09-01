@@ -117,6 +117,9 @@ public sealed partial class AssetLibraryViewModel
         _ = LoadSmartFolderEditorAsync(folder.SmartFolderId, generation, cancellation);
     }
 
+    /// <summary>Clears an editor session when the query source changes without invoking the public setter.</summary>
+    private void ClearSmartFolderEditorState() => BeginSmartFolderEditorLoad(null);
+
     private async Task LoadSmartFolderEditorAsync(Guid folderId, long generation, CancellationTokenSource cancellation)
     {
         try

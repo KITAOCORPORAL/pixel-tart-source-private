@@ -135,7 +135,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         NewFolderCommand = new(NewFolderAsync, () => IsReady); NewSubfolderCommand = new(NewSubfolderAsync, () => IsReady && SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync, () => IsReady);
         NewTagCommand = new(NewTagAsync, () => IsReady); ApplyTagsCommand = new(ApplyTagsAsync, () => IsReady && SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
         AddFolderCommand = new(AddFolderAsync, () => IsReady && SelectedAssets.Count > 0 && SelectedFolder is not null); UndoCommand = new(UndoAsync, () => IsReady && LastUndoToken is not null);
-        SaveSmartFolderCommand = new(SaveSmartFolderAsync, () => IsReady); RelinkCommand = new(RelinkAsync, () => IsReady); RateCommand = new AsyncCommand<int>(value => RateSelectedAsync(value), _ => IsReady && SelectedAssets.Count > 0);
+        SaveSmartFolderCommand = new(SaveSmartFolderAsync, () => IsReady && !IsSmartFolderEditorLoading); RelinkCommand = new(RelinkAsync, () => IsReady); RateCommand = new AsyncCommand<int>(value => RateSelectedAsync(value), _ => IsReady && SelectedAssets.Count > 0);
         VisualChipCommand = new AsyncCommand<string>(ApplyVisualChipAsync, _ => IsReady); ClearVisualModeCommand = new(ClearVisualModeAsync, () => IsReady && IsTemporaryVisualMode);
         FindSimilarCommand = new(FindSimilarAsync, () => IsReady && SelectedAssets.Count == 1 && SelectedFeatures?.State == AssetVisualFeatureState.Valid);
         AnalyzeSelectionCommand = new(AnalyzeSelectionCanonicalAsync, () => IsReady && SelectedAssets.Count == 1);
@@ -292,16 +292,16 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public string NewFolderName { get => _newFolderName; set => SetProperty(ref _newFolderName, value); }
     public string SmartFolderName { get => _smartFolderName; set => SetProperty(ref _smartFolderName, value); }
     public string SmartRuleValue { get => _smartRuleValue; set => SetProperty(ref _smartRuleValue, value); }
-    public string SmartTagValue { get => _smartTagValue; set => SetProperty(ref _smartTagValue, value); }
-    public string SmartToneKey { get => _smartToneKey; set => SetProperty(ref _smartToneKey, value); }
-    public string SmartAverageSaturationMaximum { get => _smartAverageSaturationMaximum; set => SetProperty(ref _smartAverageSaturationMaximum, value); }
-    public string SmartDominantHueRange { get => _smartDominantHueRange; set => SetProperty(ref _smartDominantHueRange, value); }
-    public string SmartDominantColor { get => _smartDominantColor; set => SetProperty(ref _smartDominantColor, value); }
-    public string SmartAnalysisStatus { get => _smartAnalysisStatus; set => SetProperty(ref _smartAnalysisStatus, value); }
+    public string SmartTagValue { get => _smartTagValue; set { if (SetProperty(ref _smartTagValue, value)) NotifySmartBuilderChanged(); } }
+    public string SmartToneKey { get => _smartToneKey; set { if (SetProperty(ref _smartToneKey, value)) NotifySmartBuilderChanged(); } }
+    public string SmartAverageSaturationMaximum { get => _smartAverageSaturationMaximum; set { if (SetProperty(ref _smartAverageSaturationMaximum, value)) NotifySmartBuilderChanged(); } }
+    public string SmartDominantHueRange { get => _smartDominantHueRange; set { if (SetProperty(ref _smartDominantHueRange, value)) NotifySmartBuilderChanged(); } }
+    public string SmartDominantColor { get => _smartDominantColor; set { if (SetProperty(ref _smartDominantColor, value)) NotifySmartBuilderChanged(); } }
+    public string SmartAnalysisStatus { get => _smartAnalysisStatus; set { if (SetProperty(ref _smartAnalysisStatus, value)) NotifySmartBuilderChanged(); } }
     public IReadOnlyList<string> SmartAnalysisStatusOptions { get; } = ["Analyzed", "NotAnalyzed", "Stale", "Failed"];
     public string SmartBuilderExplanation => string.Join(" AND ", new[]
     {
-        string.IsNullOrWhiteSpace(SmartTagValue) ? null : $"标签={SmartTagValue}",
+        string.IsNullOrWhiteSpace(SmartBasicBuilderExplanation) ? null : SmartBasicBuilderExplanation,
         string.IsNullOrWhiteSpace(SmartToneKey) ? null : $"影调={SmartToneKey}",
         string.IsNullOrWhiteSpace(SmartAverageSaturationMaximum) ? null : $"平均饱和度≤{SmartAverageSaturationMaximum}",
         string.IsNullOrWhiteSpace(SmartDominantHueRange) ? null : $"主色Hue={SmartDominantHueRange}",
@@ -395,6 +395,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         set
         {
             if (!SetProperty(ref _selectedSmartFolder, value)) return;
+            BeginSmartFolderEditorLoad(value);
             SelectP2QuerySource(smartFolder: value);
             _workspaceSettings.SelectedSmartFolderId = value?.SmartFolderId;
             NotifyContentState(); OnPropertyChanged(nameof(IsVisualQueryScopeSupported)); OnPropertyChanged(nameof(VisualQueryScopeStatus));
@@ -627,6 +628,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _selectedFolder = Folders.FirstOrDefault(item => item.FolderId == _workspaceSettings.SelectedFolderId);
             _selectedTag = Tags.FirstOrDefault(item => item.TagId == _workspaceSettings.SelectedTagId);
             _selectedSmartFolder = SmartFolders.FirstOrDefault(item => item.SmartFolderId == _workspaceSettings.SelectedSmartFolderId);
+            if (_selectedSmartFolder is not null) BeginSmartFolderEditorLoad(_selectedSmartFolder);
             _workspaceSettings.SelectedFolderId = _selectedFolder?.FolderId;
             _workspaceSettings.SelectedTagId = _selectedTag?.TagId;
             _workspaceSettings.SelectedSmartFolderId = _selectedSmartFolder?.SmartFolderId;
@@ -805,7 +807,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             {
                 var visual = await _visualQuery.QueryAsync(new(BuildQuery() with { Cursor = null }, _visualFilter, 120, cursor), cancellation.Token);
                 EnsureCurrentLoadMore(requestGeneration, queryGeneration, cursor, cancellation.Token);
-                if (visual.Items.Count > 0 && string.Equals(visual.NextCursor, cursor, StringComparison.Ordinal))
+                if (string.Equals(visual.NextCursor, cursor, StringComparison.Ordinal))
                     throw new InvalidOperationException("分页游标未前进。");
                 AddLoadMoreCards(visual.Items.Select(item => item.Asset));
                 SetNextCursor(visual.NextCursor);
@@ -815,7 +817,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                 var page = await _repository.QueryAsync(BuildQuery(cursor), cancellation.Token);
                 EnsureCurrentLoadMore(requestGeneration, queryGeneration, cursor, cancellation.Token);
                 if (!string.IsNullOrWhiteSpace(page.RegexError)) throw new InvalidOperationException(page.RegexError);
-                if (page.Items.Count > 0 && string.Equals(page.NextCursor, cursor, StringComparison.Ordinal))
+                if (string.Equals(page.NextCursor, cursor, StringComparison.Ordinal))
                     throw new InvalidOperationException("分页游标未前进。");
                 AddLoadMoreCards(page.Items);
                 SetNextCursor(page.NextCursor);
@@ -1023,17 +1025,19 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task SaveSmartFolderAsync()
     {
-        var folder = new SmartFolder(Guid.NewGuid(), string.IsNullOrWhiteSpace(SmartFolderName) ? "新智能文件夹" : SmartFolderName.Trim(), SmartFolderLogic.And);
-        var rules = new List<SmartFolderRule>();
-        if (!string.IsNullOrWhiteSpace(SmartTagValue)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.Tag, SmartFolderOperator.Equals, SmartTagValue.Trim()));
-        if (Enum.TryParse<ToneKeyTendency>(SmartToneKey, true, out var tone)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.VisualToneKey, SmartFolderOperator.Equals, tone.ToString()));
-        if (!string.IsNullOrWhiteSpace(SmartAnalysisStatus)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.VisualAnalysisStatus, SmartFolderOperator.Equals, SmartAnalysisStatus.Trim()));
-        if (double.TryParse(SmartAverageSaturationMaximum, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var saturationMaximum)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.VisualAverageSaturation, SmartFolderOperator.LessThanOrEqual, saturationMaximum.ToString(System.Globalization.CultureInfo.InvariantCulture)));
-        if (!string.IsNullOrWhiteSpace(SmartDominantHueRange)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.VisualDominantHue, SmartFolderOperator.InRange, SmartDominantHueRange.Trim()));
-        if (!string.IsNullOrWhiteSpace(SmartDominantColor)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.VisualDominantColor, SmartFolderOperator.Equals, SmartDominantColor.Trim()));
-        if (int.TryParse(SmartRuleValue, out var rating)) rules.Add(new(Guid.NewGuid(), folder.SmartFolderId, SmartFolderField.Rating, SmartFolderOperator.GreaterThanOrEqual, Math.Clamp(rating, 0, 5).ToString(System.Globalization.CultureInfo.InvariantCulture)));
-        if (rules.Count == 0) { Status = "请至少填写一条 Smart Folder 条件"; return; }
-        await _repository.SaveSmartFolderAsync(folder, rules); await RefreshFilterListsAsync(); Status = $"已保存智能文件夹：{folder.Name} · {SmartBuilderExplanation}";
+        if (!TryBuildSmartFolderEditorSave(out var folder, out var rules, out var validationError))
+        {
+            Status = validationError;
+            return;
+        }
+        await _repository.SaveSmartFolderAsync(folder, rules);
+        _smartFolderEditorId = folder.SmartFolderId;
+        _smartFolderEditorSnapshot = folder;
+        _smartFolderEditorRules = rules;
+        OnPropertyChanged(nameof(IsSmartFolderEditing));
+        OnPropertyChanged(nameof(SmartFolderEditorStatus));
+        await RefreshFilterListsAsync();
+        Status = $"已保存智能文件夹：{folder.Name} · {SmartBuilderExplanation}";
         OnPropertyChanged(nameof(SmartBuilderExplanation));
     }
 
@@ -1528,7 +1532,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         SetActiveCollectionWithoutRefresh(AssetLibrarySystemCollection.AllAssets);
         _selectedFolder = null;
         _selectedTag = null;
-        _selectedSmartFolder = null;
+        ClearSmartFolderSelectionState();
         _searchText = string.Empty;
         _workspaceSettings.SelectedFolderId = null;
         _workspaceSettings.SelectedTagId = null;
@@ -1589,6 +1593,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         CancelLoadMoreRequest();
         _queryCancellation?.Cancel();
         _batchCancellation?.Cancel();
+        _smartFolderEditorCancellation?.Cancel();
         _analysisCoordinator.ClearSelection();
         await _initializationGate.WaitAsync();
         try

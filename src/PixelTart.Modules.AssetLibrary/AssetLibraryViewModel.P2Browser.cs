@@ -150,7 +150,7 @@ public sealed partial class AssetLibraryViewModel
         _changingP2QuerySource = true;
         try
         {
-            _selectedFolder = null; _selectedTag = null; _selectedSmartFolder = null;
+            _selectedFolder = null; _selectedTag = null; ClearSmartFolderSelectionState();
             _workspaceSettings.SelectedFolderId = null; _workspaceSettings.SelectedTagId = null; _workspaceSettings.SelectedSmartFolderId = null;
             OnPropertyChanged(nameof(SelectedFolder)); OnPropertyChanged(nameof(SelectedTag)); OnPropertyChanged(nameof(SelectedSmartFolder));
         }
@@ -173,7 +173,7 @@ public sealed partial class AssetLibraryViewModel
         {
             if (ActiveCollection != AssetLibrarySystemCollection.AllAssets)
             {
-                _selectedFolder = null; _selectedTag = null; _selectedSmartFolder = null;
+                _selectedFolder = null; _selectedTag = null; ClearSmartFolderSelectionState();
             }
             else if (_selectedSmartFolder is not null)
             {
@@ -201,13 +201,13 @@ public sealed partial class AssetLibraryViewModel
             SetActiveCollectionWithoutRefresh(AssetLibrarySystemCollection.AllAssets);
             if (folder is not null)
             {
-                _selectedTag = null; _selectedSmartFolder = null;
+                _selectedTag = null; ClearSmartFolderSelectionState();
                 _workspaceSettings.SelectedTagId = null; _workspaceSettings.SelectedSmartFolderId = null;
                 OnPropertyChanged(nameof(SelectedTag)); OnPropertyChanged(nameof(SelectedSmartFolder));
             }
             else if (tag is not null)
             {
-                _selectedFolder = null; _selectedSmartFolder = null;
+                _selectedFolder = null; ClearSmartFolderSelectionState();
                 _workspaceSettings.SelectedFolderId = null; _workspaceSettings.SelectedSmartFolderId = null;
                 OnPropertyChanged(nameof(SelectedFolder)); OnPropertyChanged(nameof(SelectedSmartFolder));
             }
@@ -233,9 +233,28 @@ public sealed partial class AssetLibraryViewModel
     internal void SelectTagNode(AssetLibraryTagNodeView node) => SelectedTag = node.Tag;
     internal void EditSmartFolder(AssetLibrarySmartFolderNodeView node)
     {
-        SelectedSmartFolder = node.Folder;
+        if (SelectedSmartFolder?.SmartFolderId == node.Folder.SmartFolderId)
+            BeginSmartFolderEditorLoad(node.Folder);
+        else
+            SelectedSmartFolder = node.Folder;
         SmartFolderName = node.Folder.Name;
         Status = "已载入智能文件夹；P2 基础编辑器支持单层条件。";
+    }
+
+    private void ClearSmartFolderSelectionState()
+    {
+        _selectedSmartFolder = null;
+        ClearSmartFolderEditorState();
+    }
+
+    internal bool IsTagGroupExpanded(Guid groupId) => _workspaceSettings.ExpandedTagGroupIds.Contains(groupId);
+    internal void RememberTagGroupExpanded(Guid groupId, bool expanded)
+    {
+        if (expanded)
+        {
+            if (!_workspaceSettings.ExpandedTagGroupIds.Contains(groupId)) _workspaceSettings.ExpandedTagGroupIds.Add(groupId);
+        }
+        else _workspaceSettings.ExpandedTagGroupIds.Remove(groupId);
     }
 
     internal bool IsFolderExpanded(Guid folderId) => _workspaceSettings.ExpandedFolderIds.Contains(folderId);
@@ -324,9 +343,9 @@ public sealed partial class AssetLibraryViewModel
             OrganizationTagGroups.Clear();
             var tagViews = Tags.Select(tag => new AssetLibraryTagNodeView(this, tag)).ToArray();
             foreach (var group in TagGroups)
-                OrganizationTagGroups.Add(new(group, tagViews.Where(tag => tag.Tag.TagGroupId == group.TagGroupId)));
+                OrganizationTagGroups.Add(new(this, group, tagViews.Where(tag => tag.Tag.TagGroupId == group.TagGroupId)));
             var ungrouped = tagViews.Where(tag => tag.Tag.TagGroupId is null || TagGroups.All(group => group.TagGroupId != tag.Tag.TagGroupId)).ToArray();
-            if (ungrouped.Length > 0) OrganizationTagGroups.Add(new(null, ungrouped));
+            if (ungrouped.Length > 0) OrganizationTagGroups.Add(new(this, null, ungrouped));
             var tagNames = Tags.ToDictionary(tag => tag.TagId, tag => tag.Name);
             var memberships = await _repository.ListTagMembershipsAsync(cancellationToken: cancellationToken);
             _p2TagSummaryByAsset.Clear();
@@ -436,6 +455,12 @@ public sealed partial class AssetLibraryViewModel
             MultipleRatingSummary = selected.Select(asset => asset.Rating).Distinct().Take(2).Count() == 1 ? $"共同评分：{selected[0].Rating}" : "评分：混合值";
         }
         catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
+        catch (Exception exception) when (generation == Volatile.Read(ref _inspectorGeneration))
+        {
+            _logService?.Error("检查器信息加载失败。", exception);
+            SingleFolderSummary = SingleTagSummary = MultipleFolderSummary = MultipleTagSummary = MultipleRatingSummary = "检查器信息暂不可用，请重试。";
+            Status = "检查器信息加载失败，请重试。";
+        }
     }
 
     private static string JoinNames(IEnumerable<string?> values)
