@@ -797,8 +797,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task LoadMoreAsync()
     {
-        if (!TryBeginLoadMore(out var requestGeneration, out var queryGeneration, out var cursor, out var cancellation)) return;
         var statusBefore = Status;
+        if (!TryBeginLoadMore(out var requestGeneration, out var queryGeneration, out var cursor, out var cancellation)) return;
         try
         {
             if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
