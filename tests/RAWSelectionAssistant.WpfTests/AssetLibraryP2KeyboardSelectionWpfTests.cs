@@ -27,7 +27,8 @@ public sealed class AssetLibraryP2KeyboardSelectionWpfTests
             "Key.Home", "Key.End", "Key.PageUp", "Key.PageDown", "ModifierKeys.Control",
             "SelectAllVisibleAssets", "NavigateAssetGrid", "GetPageTargetIndex", "SyncVisibleSelection",
             "PreviewMouseLeftButtonDown", "PreviewMouseLeftButtonUp", "GetIntersectingCards",
-            "AssetSelectionMarquee", "CancelMarqueeSelection"
+            "AssetSelectionMarquee", "CancelMarqueeSelection", "_pendingSelectionSync",
+            "DispatcherPriority.DataBind", "FlushAssetGridSelection"
         })
             StringAssert.Contains(pageSource, token);
 
@@ -90,6 +91,51 @@ public sealed class AssetLibraryP2KeyboardSelectionWpfTests
                         "Ctrl+A's implementation must select every card in the current query.");
                     Assert.IsNull(page.ViewModel.SelectedAsset, "Select-all must expose the multiple-selection inspector state.");
                     Assert.HasCount(page.ViewModel.AssetCards.Count, grid.SelectedItems);
+                }
+                finally
+                {
+                    page.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                }
+            });
+        }
+        finally
+        {
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    }
+
+    [TestMethod]
+    public async Task BulkGridSelectionIsCoalescedIntoOneDispatcherSynchronization()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P2SelectionCoalesce", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                var page = new AssetLibraryPageControl(Path.Combine(root, "browser.db"), new TaskOperationBridge(), []);
+                try
+                {
+                    page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                    for (var index = 0; index < 120; index++)
+                        page.ViewModel.AssetCards.Add(new(CreateAsset(Guid.NewGuid(), 640, 480)) { Owner = page.ViewModel });
+
+                    page.Measure(new Size(1280, 760));
+                    page.Arrange(new Rect(0, 0, 1280, 760));
+                    page.UpdateLayout();
+                    PumpDispatcher();
+                    var grid = FindVisualByAutomationId<ListBox>(page, "AssetGrid");
+
+                    for (var index = 0; index < 100; index++) grid.SelectedItems.Add(grid.Items[index]);
+
+                    var pendingField = typeof(AssetLibraryPageControl).GetField("_pendingSelectionSync", BindingFlags.Instance | BindingFlags.NonPublic);
+                    Assert.IsNotNull(pendingField);
+                    Assert.IsNotNull(pendingField!.GetValue(page), "The first SelectionChanged event must schedule one deferred synchronization.");
+                    Assert.AreEqual(0, page.ViewModel.SelectionCount, "The view model must not process each synchronous item-add event.");
+
+                    PumpDispatcher();
+                    Assert.AreEqual(100, page.ViewModel.SelectionCount, "The deferred synchronization must apply the final 100-item selection.");
+                    Assert.IsNull(pendingField.GetValue(page), "The pending synchronization must be cleared after the dispatcher callback.");
                 }
                 finally
                 {

@@ -20,6 +20,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _initialized;
     private bool _disposed;
     private bool _applyingViewModelSelection;
+    // WPF raises one SelectionChanged event for every item added to SelectedItems.
+    // Keep the grid event path at one dispatcher turn so a bulk selection performs
+    // one view-model synchronization (and one set of inspector queries) instead
+    // of doing the same work once per item.
+    private DispatcherOperation? _pendingSelectionSync;
     private DispatcherOperation? _pendingPaneWidthCommit;
     private Guid? _viewTransitionAnchor;
     private bool _isMarqueeSelecting;
@@ -90,6 +95,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         if (_disposed) return;
         _disposed = true;
+        _pendingSelectionSync?.Abort();
+        _pendingSelectionSync = null;
         _pendingPaneWidthCommit?.Abort();
         _pendingPaneWidthCommit = null;
         _viewModel.SelectionRestoreRequested -= ViewModel_SelectionRestoreRequested;
@@ -107,7 +114,16 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_applyingViewModelSelection) return;
+        if (_applyingViewModelSelection || _disposed || _pendingSelectionSync is not null) return;
+        _pendingSelectionSync = Dispatcher.BeginInvoke(
+            DispatcherPriority.DataBind,
+            new Action(FlushAssetGridSelection));
+    }
+
+    private void FlushAssetGridSelection()
+    {
+        _pendingSelectionSync = null;
+        if (_disposed || _applyingViewModelSelection) return;
         _viewModel.SyncVisibleSelection(
             AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset),
             _viewModel.AssetCards.Select(card => card.Asset.AssetId));
