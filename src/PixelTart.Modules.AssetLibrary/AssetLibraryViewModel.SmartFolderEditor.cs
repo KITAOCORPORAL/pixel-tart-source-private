@@ -89,9 +89,11 @@ public sealed partial class AssetLibraryViewModel
     /// </summary>
     private void BeginSmartFolderEditorLoad(SmartFolder? folder)
     {
-        _smartFolderEditorCancellation?.Cancel();
-        _smartFolderEditorCancellation?.Dispose();
-        _smartFolderEditorCancellation = null;
+        // Let the in-flight load own and dispose its CTS in its finally block.
+        // Disposing it here races the repository await when a user switches
+        // folders quickly and can turn a normal cancellation into an error.
+        var previousCancellation = Interlocked.Exchange(ref _smartFolderEditorCancellation, null);
+        previousCancellation?.Cancel();
         Interlocked.Increment(ref _smartFolderEditorGeneration);
         _smartFolderEditorId = folder?.SmartFolderId;
         _smartFolderEditorSnapshot = folder;

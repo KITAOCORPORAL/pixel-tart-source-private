@@ -185,12 +185,26 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
     public void SmartFolderEditorXamlExposesStableBasicFieldAutomationIds()
     {
         var xamlPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml");
-        var text = XDocument.Load(xamlPath).ToString(SaveOptions.DisableFormatting);
+        var document = XDocument.Load(xamlPath);
+        var text = document.ToString(SaveOptions.DisableFormatting);
         foreach (var id in new[]
         {
             "SmartFolderName", "SmartFolderEditorStatus", "SmartFolderFileName", "SmartFolderExtension",
             "SmartFolderMediaType", "SmartFolderFolder", "SmartFolderTag", "SmartFolderRating",
             "SmartFolderMissing", "SmartFolderAddedFrom", "SmartFolderAddedTo", "SmartFolderVisualAnalysisStatus"
+        })
+            StringAssert.Contains(text, id);
+
+        var editor = document.Descendants().First(element =>
+            element.Attributes().Any(attribute => attribute.Name.LocalName.EndsWith("AutomationId", StringComparison.Ordinal) && attribute.Value == "VisualSmartFolderBuilder"));
+        Assert.IsFalse(
+            editor.Ancestors().Any(ancestor => ancestor.Attributes().Any(attribute =>
+                attribute.Name.LocalName.EndsWith("AutomationId", StringComparison.Ordinal) && attribute.Value == "AssetInspectorSingleState")),
+            "The Smart Folder editor must remain reachable when no asset is selected.");
+        foreach (var id in new[]
+        {
+            "AssetInspectorSourcePath", "AssetInspectorDimensions", "AssetInspectorCaptureTime", "AssetInspectorAddedTime",
+            "AssetInspectorRating", "AssetInspectorMissingState", "AssetInspectorFolders", "AssetInspectorTags"
         })
             StringAssert.Contains(text, id);
     }
