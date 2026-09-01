@@ -13,7 +13,7 @@ using AssetLibraryPageResult = RAWSelectionAssistant.Core.Models.AssetLibraryPag
 
 namespace PixelTart.Modules.AssetLibrary;
 
-public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
+public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 {
     private const double MinimumCollectionPaneWidth = 360d;
     private const double PaneSplitterWidth = 6d;
@@ -110,6 +110,9 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _logService = logService;
         _workspaceSettings = workspaceSettings ?? new AssetLibraryWorkspaceSettings();
+        if (_workspaceSettings.SelectedAssetId is Guid legacySelectedAssetId &&
+            (_workspaceSettings.SelectedAssetIds.Count != 1 || _workspaceSettings.SelectedAssetIds[0] != legacySelectedAssetId))
+            _workspaceSettings.SelectedAssetIds = [legacySelectedAssetId];
         _workspaceSettings.Normalize();
         _thumbnailWidth = _workspaceSettings.ThumbnailWidth;
         ModuleDiagnostics = _enablePreviewFeatures ? moduleDiagnostics ?? [] : [];
@@ -142,6 +145,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             () => IsInspectorPaneCollapsed = !IsInspectorPaneCollapsed,
             () => !IsInspectorPinned && (IsInspectorPaneVisible || IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded));
         ToggleInspectorPinCommand = new(() => IsInspectorPinned = !IsInspectorPinned);
+        InitializeP2Browser();
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
@@ -233,6 +237,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public ObservableCollection<VisualFilterChipView> ActiveVisualChips { get; } = [];
     public ObservableCollection<VisualSearchHistoryEntry> VisualSearchHistory { get; } = [];
     public ObservableCollection<AssetItem> SelectedAssets { get; } = [];
+    public IReadOnlyList<Guid> SelectedAssetIds => _workspaceSettings.SelectedAssetIds;
     public event EventHandler? SelectionRestoreRequested;
     public ObservableCollection<AssetFolderTreeItem> FolderTree { get; } = [];
     public ObservableCollection<AssetFolder> Folders { get; } = [];
@@ -288,7 +293,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     }
     public void SetStatusMessage(string message) => Status = message;
     public int VisibleCount => AssetCards.Count;
-    public int SelectionCount => SelectedAssets.Count;
+    public int SelectionCount => _workspaceSettings.SelectedAssetIds.Count;
     public bool HasSelection => SelectionCount > 0;
     public bool IsSelectionEmpty => SelectionCount == 0;
     public bool HasMultipleSelection => SelectionCount > 1;
@@ -333,10 +338,44 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public double MinimumVisualValue { get => _minimumVisualValue; set => SetProperty(ref _minimumVisualValue, Math.Clamp(value, 0, 1)); }
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
-    public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) { SyncSelection(value is null ? [] : [value]); } } }
-    public AssetFolder? SelectedFolder { get => _selectedFolder; set { if (SetProperty(ref _selectedFolder, value)) { _workspaceSettings.SelectedFolderId = value?.FolderId; NotifyContentState(); RaiseActions(); RefreshBatchScopeAvailability(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
-    public AssetTag? SelectedTag { get => _selectedTag; set { if (SetProperty(ref _selectedTag, value)) { _workspaceSettings.SelectedTagId = value?.TagId; NotifyContentState(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
-    public SmartFolder? SelectedSmartFolder { get => _selectedSmartFolder; set { if (SetProperty(ref _selectedSmartFolder, value)) { _workspaceSettings.SelectedSmartFolderId = value?.SmartFolderId; NotifyContentState(); OnPropertyChanged(nameof(IsVisualQueryScopeSupported)); OnPropertyChanged(nameof(VisualQueryScopeStatus)); SearchColorCommand.RaiseCanExecuteChanged(); SearchPaletteColorCommand.RaiseCanExecuteChanged(); FindPaletteSimilarCommand.RaiseCanExecuteChanged(); if (!_isRestoringWorkspace) _ = RefreshAsync(); } } }
+    public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) SyncSelection(value is null ? [] : [value]); } }
+    public AssetFolder? SelectedFolder
+    {
+        get => _selectedFolder;
+        set
+        {
+            if (!SetProperty(ref _selectedFolder, value)) return;
+            SelectP2QuerySource(folder: value);
+            _workspaceSettings.SelectedFolderId = value?.FolderId;
+            NotifyContentState(); RaiseActions(); RefreshBatchScopeAvailability();
+            if (!_isRestoringWorkspace) _ = RefreshAsync();
+        }
+    }
+    public AssetTag? SelectedTag
+    {
+        get => _selectedTag;
+        set
+        {
+            if (!SetProperty(ref _selectedTag, value)) return;
+            SelectP2QuerySource(tag: value);
+            _workspaceSettings.SelectedTagId = value?.TagId;
+            NotifyContentState();
+            if (!_isRestoringWorkspace) _ = RefreshAsync();
+        }
+    }
+    public SmartFolder? SelectedSmartFolder
+    {
+        get => _selectedSmartFolder;
+        set
+        {
+            if (!SetProperty(ref _selectedSmartFolder, value)) return;
+            SelectP2QuerySource(smartFolder: value);
+            _workspaceSettings.SelectedSmartFolderId = value?.SmartFolderId;
+            NotifyContentState(); OnPropertyChanged(nameof(IsVisualQueryScopeSupported)); OnPropertyChanged(nameof(VisualQueryScopeStatus));
+            SearchColorCommand.RaiseCanExecuteChanged(); SearchPaletteColorCommand.RaiseCanExecuteChanged(); FindPaletteSimilarCommand.RaiseCanExecuteChanged();
+            if (!_isRestoringWorkspace) _ = RefreshAsync();
+        }
+    }
     public AsyncCommand RefreshCommand { get; } public AsyncCommand RetryLoadCommand { get; } public AsyncCommand ImportCommand { get; } public AsyncCommand LoadMoreCommand { get; }
     public AsyncCommand NewFolderCommand { get; } public AsyncCommand NewSubfolderCommand { get; } public AsyncCommand BatchFolderCommand { get; }
     public AsyncCommand NewTagCommand { get; } public AsyncCommand ApplyTagsCommand { get; } public AsyncCommand AddFolderCommand { get; }
@@ -558,6 +597,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             NotifyContentState();
             RaiseActions();
             RefreshBatchScopeAvailability();
+            RestoreP2QuerySourceAfterLists();
         }
         finally
         {
@@ -568,8 +608,28 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     public void SyncSelection(IEnumerable<AssetItem> items)
     {
         var selected = items.DistinctBy(x => x.AssetId).ToArray();
-        var previousSingleAssetId = SelectedAssets.Count == 1 ? SelectedAssets[0].AssetId : (Guid?)null;
-        var nextSingleAssetId = selected.Length == 1 ? selected[0].AssetId : (Guid?)null;
+        ApplySelectionState(selected, selected.Select(item => item.AssetId).ToArray(), replacePersistedIds: true);
+    }
+
+    public void SyncVisibleSelection(IEnumerable<AssetItem> selectedVisibleItems, IEnumerable<Guid> visibleAssetIds)
+    {
+        var selectedVisible = selectedVisibleItems.DistinctBy(item => item.AssetId).ToArray();
+        var visibleIds = visibleAssetIds.ToHashSet();
+        var desiredIds = _workspaceSettings.SelectedAssetIds.Where(id => !visibleIds.Contains(id)).ToList();
+        desiredIds.AddRange(selectedVisible.Select(item => item.AssetId).Where(id => !desiredIds.Contains(id)));
+        var previousById = SelectedAssets.ToDictionary(item => item.AssetId);
+        var materialized = desiredIds
+            .Select(id => selectedVisible.FirstOrDefault(item => item.AssetId == id) ?? previousById.GetValueOrDefault(id))
+            .Where(item => item is not null)
+            .Cast<AssetItem>()
+            .ToArray();
+        ApplySelectionState(materialized, desiredIds, replacePersistedIds: true);
+    }
+
+    private void ApplySelectionState(IReadOnlyList<AssetItem> materialized, IReadOnlyList<Guid> desiredIds, bool replacePersistedIds)
+    {
+        var previousSingleAssetId = SelectionCount == 1 ? _workspaceSettings.SelectedAssetIds[0] : (Guid?)null;
+        var nextSingleAssetId = desiredIds.Count == 1 ? desiredIds[0] : (Guid?)null;
         if (previousSingleAssetId != nextSingleAssetId)
         {
             Interlocked.Increment(ref _analysisGeneration);
@@ -579,13 +639,17 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
             SelectedFeatures = null;
             IsAnalyzing = false;
         }
-        SelectedAssets.Clear(); foreach (var item in selected) SelectedAssets.Add(item);
+        SelectedAssets.Clear(); foreach (var item in materialized) SelectedAssets.Add(item);
+        if (replacePersistedIds) _workspaceSettings.SelectedAssetIds = desiredIds.Distinct().ToList();
         _workspaceSettings.SelectedAssetId = nextSingleAssetId;
-        if (selected.Length != 1) { _selectedAsset = selected.FirstOrDefault(); OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
-        else if (_selectedAsset?.AssetId != selected[0].AssetId) { _selectedAsset = selected[0]; OnPropertyChanged(nameof(SelectedAsset)); }
+        var singleMaterialized = nextSingleAssetId is Guid singleId ? materialized.FirstOrDefault(item => item.AssetId == singleId) : null;
+        if (singleMaterialized is null) { _selectedAsset = null; OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
+        else if (_selectedAsset?.AssetId != singleMaterialized.AssetId) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
-        OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
-        _ = RefreshSelectionSummaryAsync(); if (selected.Length == 1) { _ = RefreshSelectedFeaturesAsync(selected[0]); _ = AnalyzeSelectionCanonicalAsync(); } RaiseActions(); RaiseVisualActions();
+        OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
+        _ = RefreshSelectionSummaryAsync(); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
+        OnP2SelectionChanged(materialized);
+        RaiseActions(); RaiseVisualActions();
     }
 
     private async Task RefreshAsync()
@@ -613,18 +677,19 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
                 SetAssetCards(visual.Items.Select(item => item.Asset)); _nextCursor = visual.NextCursor;
                 _importDiagnostics.SetViewState(visual.TotalCount, AssetCards.Count, 0);
                 Status = $"临时视觉结果 · 共 {visual.TotalCount:N0} 个，当前显示 {AssetCards.Count:N0} 个";
+                UpdateP2QuerySummary(visual.TotalCount);
             }
             else if (_visualResultMode == VisualResultMode.Similarity && _similarityQuery is not null)
             {
                 var matches = await _visualQuery.FindSimilarAsync(_similarityQuery with { Scope = BuildQuery() }, token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetSimilarityMatches(matches); Status = $"临时相似结果 · {matches.Count} 项"; _nextCursor = null;
+                SetSimilarityMatches(matches); Status = $"临时相似结果 · {matches.Count} 项"; _nextCursor = null; UpdateP2QuerySummary(matches.Count);
             }
             else if (_visualResultMode == VisualResultMode.Color && _colorQuery is not null)
             {
                 var matches = await _visualQuery.SearchByColorAsync(_colorQuery with { Scope = BuildQuery() }, token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; _nextCursor = null;
+                SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; _nextCursor = null; UpdateP2QuerySummary(matches.Count);
             }
             else
             {
@@ -638,7 +703,9 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
                 SetAssetCards(page.Items); _nextCursor = page.NextCursor;
                 _importDiagnostics.SetViewState(page.TotalCount, AssetCards.Count, 0);
                 Status = page.RegexError is null ? $"共 {page.TotalCount:N0} 个素材，当前显示 {AssetCards.Count:N0} 个" : $"筛选错误：{page.RegexError}";
+                UpdateP2QuerySummary(page.TotalCount);
             }
+            await ReconcilePersistedSelectionAsync(token);
             OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
@@ -686,9 +753,9 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         if (_nextCursor is null) return;
         if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
         {
-            var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120, _nextCursor)); foreach (var item in visual.Items) AssetCards.Add(new(item.Asset)); _nextCursor = visual.NextCursor;
+            var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120, _nextCursor)); foreach (var item in visual.Items) AssetCards.Add(new(item.Asset) { Owner = this, TagSummary = GetP2TagSummary(item.Asset.AssetId) }); _nextCursor = visual.NextCursor;
         }
-        else { var page = await _repository.QueryAsync(BuildQuery(_nextCursor)); foreach (var asset in page.Items) AssetCards.Add(new(asset)); _nextCursor = page.NextCursor; }
+        else { var page = await _repository.QueryAsync(BuildQuery(_nextCursor)); foreach (var asset in page.Items) AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) }); _nextCursor = page.NextCursor; }
         Status = $"已加载 {AssetCards.Count:N0} 个素材"; OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
     }
 
@@ -1145,7 +1212,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private void SetSimilarityMatches(IEnumerable<VisualSimilarityMatch> matches)
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, match.Scores, null); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, match.Scores, null) { Owner = this, TagSummary = GetP2TagSummary(match.Asset.AssetId) }; AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
@@ -1153,7 +1220,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private void SetColorMatches(IEnumerable<VisualAssetMatch> matches)
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE); AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE) { Owner = this, TagSummary = GetP2TagSummary(match.Asset.AssetId) }; AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
@@ -1161,7 +1228,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     private void SetAssetCards(IEnumerable<AssetItem> assets)
     {
         AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var asset in assets) AssetCards.Add(new(asset));
+        foreach (var asset in assets) AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) });
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
         RefreshBatchScopeAvailability();
@@ -1169,23 +1236,35 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
 
     private void ReconcileSelectionWithVisibleCards()
     {
-        var selectedAssetId = SelectedAssets.Count == 1
-            ? SelectedAssets[0].AssetId
-            : _workspaceSettings.SelectedAssetId;
-        var visibleCard = selectedAssetId is null
-            ? null
-            : AssetCards.FirstOrDefault(card => card.Asset.AssetId == selectedAssetId.Value);
+        var desiredIds = (_workspaceSettings.SelectedAssetIds.Count > 0
+                ? _workspaceSettings.SelectedAssetIds
+                : SelectedAssets.Select(asset => asset.AssetId))
+            .ToHashSet();
+        var previousById = SelectedAssets.ToDictionary(asset => asset.AssetId);
+        var visibleById = AssetCards.ToDictionary(card => card.Asset.AssetId, card => card.Asset);
+        var visibleSelection = desiredIds
+            .Select(id => visibleById.GetValueOrDefault(id) ?? previousById.GetValueOrDefault(id))
+            .Where(asset => asset is not null)
+            .Cast<AssetItem>()
+            .ToArray();
 
-        if (visibleCard is null)
-        {
-            if (SelectedAssets.Count > 0 || _workspaceSettings.SelectedAssetId is not null)
-                SyncSelection([]);
-        }
-        else if (SelectedAssets.Count != 1 || SelectedAssets[0].AssetId != visibleCard.Asset.AssetId)
-        {
-            SyncSelection([visibleCard.Asset]);
-        }
+        if (!SelectedAssets.Select(asset => asset.AssetId).SequenceEqual(visibleSelection.Select(asset => asset.AssetId)))
+            ApplySelectionState(visibleSelection, _workspaceSettings.SelectedAssetIds, replacePersistedIds: false);
 
+        SelectionRestoreRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private async Task ReconcilePersistedSelectionAsync(CancellationToken cancellationToken)
+    {
+        var snapshot = _workspaceSettings.SelectedAssetIds.Distinct().ToArray();
+        if (snapshot.Length == 0) return;
+        var assets = await Task.WhenAll(snapshot.Select(id => _repository.GetAssetAsync(id, cancellationToken)));
+        var resolved = assets
+            .Where(asset => asset is not null && (ActiveCollection == AssetLibrarySystemCollection.Archived ? asset.IsArchived : !asset.IsArchived))
+            .Cast<AssetItem>()
+            .ToArray();
+        if (!_workspaceSettings.SelectedAssetIds.SequenceEqual(snapshot)) return;
+        ApplySelectionState(resolved, resolved.Select(asset => asset.AssetId).ToArray(), replacePersistedIds: true);
         SelectionRestoreRequested?.Invoke(this, EventArgs.Empty);
     }
 
@@ -1277,6 +1356,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         Tags.Clear(); foreach (var tag in await _repository.ListTagsAsync(cancellationToken: cancellationToken)) Tags.Add(tag); TagGroups.Clear(); foreach (var group in await _repository.ListTagGroupsAsync(cancellationToken: cancellationToken)) TagGroups.Add(group);
         SmartFolders.Clear(); foreach (var folder in await _repository.ListSmartFoldersAsync(cancellationToken: cancellationToken)) SmartFolders.Add(folder);
         FavoriteFolders.Clear(); foreach (var folder in Folders.Where(x => !string.IsNullOrWhiteSpace(x.Color)).Take(6)) FavoriteFolders.Add(folder);
+        await RefreshP2OrganizationAsync(cancellationToken);
     }
     private void RefreshClassifierFolders() { ClassifierFolders.Clear(); foreach (var folder in Folders.Where(x => string.IsNullOrWhiteSpace(FolderSearch) || x.Name.Contains(FolderSearch, StringComparison.OrdinalIgnoreCase))) ClassifierFolders.Add(folder); }
     private async Task SeedPreviewStructureAsync() { await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光\n灯光/柔光"); var groups = new[] { new TagGroup(Guid.NewGuid(), "人物"), new TagGroup(Guid.NewGuid(), "视觉"), new TagGroup(Guid.NewGuid(), "概念") }; foreach (var group in groups) await _repository.SaveTagGroupAsync(group); await _repository.BatchCreateTagsAsync("身体,宗教,凝视", groups[2].TagGroupId); await _repository.BatchCreateTagsAsync("红,蓝,绿色", groups[1].TagGroupId); await RefreshFilterListsAsync(); }
@@ -1285,6 +1365,7 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
     {
         _searchDebounce.Stop();
         ResetVisualModeState();
+        SetActiveCollectionWithoutRefresh(AssetLibrarySystemCollection.AllAssets);
         _selectedFolder = null;
         _selectedTag = null;
         _selectedSmartFolder = null;
@@ -1310,7 +1391,22 @@ public sealed class AssetLibraryViewModel : ObservableObject, IAsyncDisposable
         int? minimumRating = int.TryParse(MinimumRatingFilterText, out var rating) ? Math.Clamp(rating, 0, 5) : null;
         DateTimeOffset? addedFrom = DateTimeOffset.TryParse(AddedFromFilterText, out var from) ? from : null;
         DateTimeOffset? addedTo = DateTimeOffset.TryParse(AddedToFilterText, out var to) ? to : null;
-        return new(SearchText, SelectedFolder?.FolderId, SelectedTag?.TagId, MinimumRating: minimumRating, FileNameRegex: string.IsNullOrWhiteSpace(FileNameRegexFilterText) ? null : FileNameRegexFilterText, SmartFolderId: SelectedSmartFolder?.SmartFolderId, PageSize: 120, Cursor: cursor, AddedFrom: addedFrom, AddedTo: addedTo);
+        var source = AssetLibrarySystemCollections.CreateQuery(ActiveCollection);
+        return source with
+        {
+            SearchText = SearchText,
+            FolderId = SelectedFolder?.FolderId,
+            TagId = SelectedTag?.TagId,
+            MinimumRating = minimumRating ?? source.MinimumRating,
+            FileNameRegex = string.IsNullOrWhiteSpace(FileNameRegexFilterText) ? null : FileNameRegexFilterText,
+            SmartFolderId = SelectedSmartFolder?.SmartFolderId,
+            PageSize = 500,
+            Cursor = cursor,
+            AddedFrom = addedFrom,
+            AddedTo = addedTo,
+            SortField = SortField,
+            SortDirection = SortDirection
+        };
     }
     private string CurrentCollectionDiagnostic => _visualResultMode switch
     {
@@ -1392,7 +1488,17 @@ public enum VisualContextAction { Analyze, Palette, Similarity }
 public sealed record AssetVisualMatchView(AssetItem Asset, VisualSimilarityScores? Scores, double? ColorDeltaE)
 {
     public AssetVisualMatchView(AssetItem asset) : this(asset, null, null) { }
+    public AssetLibraryViewModel? Owner { get; init; }
+    public string TagSummary { get; init; } = "—";
     public string ThumbnailPath => !string.IsNullOrWhiteSpace(Asset.ManagedCopyPath) && File.Exists(Asset.ManagedCopyPath) ? Asset.ManagedCopyPath : Asset.SourcePath;
+    public string AutomationId => $"AssetCard_{Asset.AssetId:N}";
+    public string AccessibleName => $"素材 {Asset.DisplayName}，评分 {Asset.Rating}{(Asset.IsMissing ? "，文件缺失" : string.Empty)}{(Asset.IsArchived ? "，已归档" : string.Empty)}";
+    public double AspectRatio => Asset.Width is > 0 && Asset.Height is > 0 ? Math.Clamp((double)Asset.Width.Value / Asset.Height.Value, 0.2d, 5d) : 1.5d;
+    public string DimensionsText => Asset.Width is > 0 && Asset.Height is > 0 ? $"{Asset.Width} × {Asset.Height}" : "未知";
+    public string CaptureTimeText => Asset.CaptureTime?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? "—";
+    public string AddedTimeText => Asset.AddedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
+    public string FileSizeText => Asset.FileSize <= 0 ? "—" : Asset.FileSize >= 1024L * 1024 ? $"{Asset.FileSize / 1024d / 1024d:F1} MB" : $"{Asset.FileSize / 1024d:F0} KB";
+    public string MissingText => Asset.IsMissing ? "缺失" : string.Empty;
     public bool HasDetail => Scores is not null || ColorDeltaE is not null;
     public string Detail => Scores is not null ? $"相似 {Scores.Overall:F0} · 色 {Scores.Color:F0} · 调 {Scores.Tone:F0} · 对 {Scores.Contrast:F0} · 饱 {Scores.Saturation:F0}" : ColorDeltaE is not null ? $"ΔE76 {ColorDeltaE:F1}" : string.Empty;
 }
