@@ -66,7 +66,9 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
     public string CountText => DescendantAssetCount == DirectAssetCount ? DirectAssetCount.ToString() : $"{DirectAssetCount}/{DescendantAssetCount}";
     public string AutomationId => $"AssetFolderNode_{FolderId:N}";
     public string AccessibleName => $"文件夹 {Name}，{DescendantAssetCount} 项{(IsArchived ? "，已归档" : string.Empty)}";
-    public object DropTarget => new AssetLibraryDropTarget(AssetLibraryDropTargetKind.Folder, FolderId, Name);
+    // Keep the target metadata explicit so the drag behavior can fail closed before
+    // it starts an async preview for an archived node.
+    public object DropTarget => new AssetLibraryDropTarget(AssetLibraryDropTargetKind.Folder, FolderId, Name, IsArchived);
     public ObservableCollection<AssetLibraryFolderNodeView> Children { get; } = [];
 
     public bool IsExpanded
@@ -141,7 +143,7 @@ public sealed class AssetLibraryTagNodeView
     public int UsageCount => Tag.UsageCount;
     public string AutomationId => $"AssetTagNode_{Tag.TagId:N}";
     public string AccessibleName => $"标签 {Name}，{UsageCount} 项";
-    public object DropTarget => new AssetLibraryDropTarget(AssetLibraryDropTargetKind.Tag, Tag.TagId, Name);
+    public object DropTarget => new AssetLibraryDropTarget(AssetLibraryDropTargetKind.Tag, Tag.TagId, Name, Tag.IsArchived);
     public AssetCommand SelectCommand { get; }
 }
 

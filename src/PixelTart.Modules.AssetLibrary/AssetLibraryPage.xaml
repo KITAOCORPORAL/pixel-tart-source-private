@@ -421,8 +421,13 @@
             <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="6" Padding="5" Margin="3">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
                     <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
-                        <Image local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="240" Stretch="UniformToFill" />
+                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="240" Stretch="UniformToFill" />
                         <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
+                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Visibility="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                AutomationProperties.AutomationId="AssetThumbnailFailure">
+                            <TextBlock Text="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                        </Border>
                         <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Right" VerticalAlignment="Top" CornerRadius="3"
                                 AutomationProperties.AutomationId="VisualMatchScores">
                             <Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding HasDetail}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style>
@@ -437,7 +442,14 @@
         <DataTemplate x:Key="AssetMasonryCardTemplate">
             <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="6" Padding="5" Margin="3">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Image local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="280" Stretch="UniformToFill" /></Border>
+                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
+                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="280" Stretch="UniformToFill" />
+                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Visibility="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                AutomationProperties.AutomationId="AssetThumbnailFailure">
+                            <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                        </Border>
+                    </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="2,5,2,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{StaticResource AssetCaption}" /></StackPanel>
                 </Grid>
             </Border>
@@ -446,7 +458,14 @@
         <DataTemplate x:Key="AssetJustifiedCardTemplate">
             <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="5" Padding="4" Margin="2">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Image local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" /></Border>
+                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
+                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
+                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Visibility="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                AutomationProperties.AutomationId="AssetThumbnailFailure">
+                            <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                        </Border>
+                    </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="2,4,2,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.MediaType}" Style="{StaticResource AssetCaption}" /></StackPanel>
                 </Grid>
             </Border>
@@ -456,7 +475,13 @@
             <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="5,3">
                 <Grid>
                     <Grid.ColumnDefinitions><ColumnDefinition Width="54" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
-                    <Border Width="46" Height="54" Background="{DynamicResource ContentBackgroundBrush}"><Image local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="96" Stretch="UniformToFill" /></Border>
+                    <Border Width="46" Height="54" Background="{DynamicResource ContentBackgroundBrush}"><Grid>
+                        <Image x:Name="AssetListThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="96" Stretch="UniformToFill" />
+                        <TextBlock Text="缩略图失败" Foreground="White" Background="#D9222529" Padding="2" FontSize="9"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Visibility="{Binding ElementName=AssetListThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   AutomationProperties.AutomationId="AssetThumbnailFailure" />
+                    </Grid></Border>
                     <TextBlock Grid.Column="1" Text="{Binding Asset.DisplayName}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="7,0" />
                     <TextBlock Grid.Column="2" Text="{Binding Asset.MediaType}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
                     <TextBlock Grid.Column="3" Text="{Binding DimensionsText}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
@@ -888,7 +913,14 @@
                         <StackPanel Visibility="{Binding IsSingleInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     AutomationProperties.AutomationId="AssetInspectorSingleState">
                         <Border Height="150" Background="{DynamicResource ContentBackgroundBrush}" Margin="0,8">
-                            <Image local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
+                            <Grid>
+                                <Image x:Name="SelectedAssetThumbnail" local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
+                                <Border Background="#D9222529" Padding="6,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Visibility="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        AutomationProperties.AutomationId="SelectedAssetThumbnailFailure">
+                                    <TextBlock Text="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                                </Border>
+                            </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                         <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{StaticResource AssetCaption}" />

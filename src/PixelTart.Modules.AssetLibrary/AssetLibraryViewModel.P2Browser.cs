@@ -17,6 +17,7 @@ public sealed partial class AssetLibraryViewModel
     private string _multipleFolderSummary = string.Empty;
     private string _multipleTagSummary = string.Empty;
     private string _multipleRatingSummary = string.Empty;
+    private AssetLibraryCommandPreview? _lastDropPreview;
     private long _inspectorGeneration;
     private readonly Dictionary<Guid, string> _p2TagSummaryByAsset = [];
 
@@ -58,6 +59,24 @@ public sealed partial class AssetLibraryViewModel
     public string MultipleFolderSummary { get => _multipleFolderSummary; private set => SetProperty(ref _multipleFolderSummary, value); }
     public string MultipleTagSummary { get => _multipleTagSummary; private set => SetProperty(ref _multipleTagSummary, value); }
     public string MultipleRatingSummary { get => _multipleRatingSummary; private set => SetProperty(ref _multipleRatingSummary, value); }
+
+    /// <summary>
+    /// The last drag/drop preview is retained as structured evidence.  The UI still binds
+    /// to <see cref="AssetLibraryViewModel.Status"/> for the short human-readable message,
+    /// while acceptance and diagnostics can inspect the stable failure code and cancellation
+    /// bit without parsing that message.
+    /// </summary>
+    internal AssetLibraryCommandPreview? LastDropPreview
+    {
+        get => _lastDropPreview;
+        private set
+        {
+            if (!SetProperty(ref _lastDropPreview, value)) return;
+            OnPropertyChanged(nameof(HasDropError));
+        }
+    }
+
+    internal bool HasDropError => LastDropPreview is { IsAllowed: false };
 
     public AsyncCommand<string> SwitchViewCommand { get; private set; } = null!;
     public AsyncCommand<string> SortBrowserCommand { get; private set; } = null!;
@@ -434,41 +453,167 @@ public sealed partial class AssetLibraryViewModel
 
     public Guid? GetScrollAnchor(AssetLibraryViewMode mode) => _workspaceSettings.ScrollAnchors.GetValueOrDefault(mode.ToString());
 
-    internal IReadOnlyList<Guid> GetDragAssetIds() => SelectedAssetIds.ToArray();
-    internal bool CanDropOn(AssetLibraryDropTarget target) => SelectionCount > 0 &&
-        (target.Kind is AssetLibraryDropTargetKind.Folder or AssetLibraryDropTargetKind.Tag && target.TargetId is not null ||
-         target.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent && (SelectedFolder is not null || SelectedTag is not null));
-    internal async Task PreviewDropAsync(AssetLibraryDropTarget target)
+    internal IReadOnlyList<Guid> GetDragAssetIds() => SelectedAssetIds.Where(id => id != Guid.Empty).Distinct().ToArray();
+
+    /// <summary>
+    /// Synchronous gate used by WPF drag events.  It intentionally only allows targets that
+    /// are present in the currently loaded, non-archived filter lists; the command service
+    /// repeats the check asynchronously immediately before mutation to close stale-target
+    /// races and reject forged/nonexistent target ids.
+    /// </summary>
+    internal bool CanDropOn(AssetLibraryDropTarget? target)
     {
-        var preview = target.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent
-            ? SelectedFolder is not null
-                ? await _browserCommands.PreviewRemoveAsync(GetDragAssetIds(), SelectedFolder.FolderId, folder: true, SelectedFolder.Name, _lifetimeCancellation.Token)
-                : SelectedTag is not null
-                    ? await _browserCommands.PreviewRemoveAsync(GetDragAssetIds(), SelectedTag.TagId, folder: false, SelectedTag.Name, _lifetimeCancellation.Token)
-                    : new(false, SelectionCount, 0, 0, "当前查询没有可移出的文件夹或标签归属。")
-            : await _browserCommands.PreviewDropAsync(GetDragAssetIds(), target, _lifetimeCancellation.Token);
-        Status = preview.Message;
+        if (target is null || SelectionCount == 0 || target.IsArchived) return false;
+        return target.Kind switch
+        {
+            AssetLibraryDropTargetKind.Folder => target.TargetId is Guid folderId && folderId != Guid.Empty
+                && Folders.Any(folder => folder.FolderId == folderId && !folder.IsArchived),
+            AssetLibraryDropTargetKind.Tag => target.TargetId is Guid tagId && tagId != Guid.Empty
+                && Tags.Any(tag => tag.TagId == tagId && !tag.IsArchived),
+            AssetLibraryDropTargetKind.RemoveFromCurrent => SelectedFolder is { IsArchived: false } || SelectedTag is { IsArchived: false },
+            _ => false
+        };
     }
-    internal async Task ExecuteDropAsync(AssetLibraryDropTarget target)
+
+    /// <summary>Rejects data objects that do not exactly describe the current selection.</summary>
+    internal bool CanDropPayload(IEnumerable<Guid>? payload)
     {
-        var preview = target.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent
-            ? SelectedFolder is not null
-                ? await _browserCommands.PreviewRemoveAsync(GetDragAssetIds(), SelectedFolder.FolderId, folder: true, SelectedFolder.Name, _lifetimeCancellation.Token)
-                : SelectedTag is not null
-                    ? await _browserCommands.PreviewRemoveAsync(GetDragAssetIds(), SelectedTag.TagId, folder: false, SelectedTag.Name, _lifetimeCancellation.Token)
-                    : new(false, SelectionCount, 0, 0, "当前查询没有可移出的文件夹或标签归属。")
-            : await _browserCommands.PreviewDropAsync(GetDragAssetIds(), target, _lifetimeCancellation.Token);
-        Status = preview.Message;
+        var incoming = payload?.Where(id => id != Guid.Empty).Distinct().ToArray() ?? [];
+        var selected = GetDragAssetIds();
+        return incoming.Length > 0 && selected.Count > 0 && incoming.ToHashSet().SetEquals(selected);
+    }
+
+    internal async Task<AssetLibraryCommandPreview> PreviewDropAsync(AssetLibraryDropTarget? target)
+    {
+        var ids = GetDragAssetIds();
+        try
+        {
+            var preview = await BuildDropPreviewAsync(ids, target).ConfigureAwait(true);
+            return PublishDropPreview(preview);
+        }
+        catch (OperationCanceledException)
+        {
+            return PublishDropPreview(new(false, ids.Count, 0, 0, "拖放预览已取消。", "canceled", nameof(OperationCanceledException), true));
+        }
+        catch (Exception exception)
+        {
+            return PublishDropPreview(CreateDropFailurePreview("预览", ids.Count, exception));
+        }
+    }
+
+    internal async Task ExecuteDropAsync(AssetLibraryDropTarget? target)
+    {
+        var preview = await PreviewDropAsync(target).ConfigureAwait(true);
         if (!preview.IsAllowed) return;
-        var result = target.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent
-            ? SelectedFolder is not null
-                ? await _browserCommands.RemoveFromFolderAsync(GetDragAssetIds(), SelectedFolder.FolderId, _lifetimeCancellation.Token)
-                : await _browserCommands.RemoveTagAsync(GetDragAssetIds(), SelectedTag!.TagId, _lifetimeCancellation.Token)
-            : await _browserCommands.ExecuteDropAsync(GetDragAssetIds(), target, _lifetimeCancellation.Token);
-        Status = $"{preview.Message} 已完成 {result.ChangedCount} 项，可撤销。";
-        RaiseP2CommandStates();
-        await RefreshAsync();
+
+        var ids = GetDragAssetIds();
+        try
+        {
+            AssetLibraryBatchResult result;
+            if (target?.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent)
+            {
+                // Snapshot the selected scope before awaiting the repository.  A selection
+                // change during the operation must not redirect the mutation to another
+                // folder/tag.
+                var folder = SelectedFolder;
+                var tag = SelectedTag;
+                result = folder is { IsArchived: false }
+                    ? await _browserCommands.RemoveFromFolderAsync(ids, folder.FolderId, _lifetimeCancellation.Token).ConfigureAwait(true)
+                    : tag is { IsArchived: false }
+                        ? await _browserCommands.RemoveTagAsync(ids, tag.TagId, _lifetimeCancellation.Token).ConfigureAwait(true)
+                        : new AssetLibraryBatchResult(0, null, ["当前归属已失效，已拒绝移出操作。"]);
+            }
+            else
+            {
+                result = await _browserCommands.ExecuteDropAsync(ids, target!, _lifetimeCancellation.Token).ConfigureAwait(true);
+            }
+
+            if (result.Warnings.Count > 0)
+            {
+                PublishDropPreview(new(
+                    false,
+                    ids.Count,
+                    preview.ConflictCount,
+                    result.ChangedCount,
+                    $"{preview.Message} 未完成：{string.Join("；", result.Warnings)}",
+                    "mutation-warning"));
+                return;
+            }
+
+            Status = result.ChangedCount == 0
+                ? $"{preview.Message} 无需变更。"
+                : $"{preview.Message} 已完成 {result.ChangedCount} 项，可撤销。";
+            RaiseP2CommandStates();
+            await RefreshAsync().ConfigureAwait(true);
+        }
+        catch (OperationCanceledException)
+        {
+            PublishDropPreview(new(false, ids.Count, preview.ConflictCount, 0, "拖放执行已取消，未写入任何素材归属。", "canceled", nameof(OperationCanceledException), true));
+        }
+        catch (Exception exception)
+        {
+            PublishDropPreview(CreateDropFailurePreview("执行", ids.Count, exception, preview));
+        }
     }
+
+    internal void ReportDropRejected(AssetLibraryDropTarget? target)
+    {
+        var message = target?.IsArchived == true
+            ? $"“{(string.IsNullOrWhiteSpace(target.Name) ? "未命名目标" : target.Name.Trim())}”已归档，不能接收素材。"
+            : "当前拖放目标不存在、已归档或不支持写入，已拒绝操作。";
+        PublishDropPreview(new(false, GetDragAssetIds().Count, 0, 0, message, target?.IsArchived == true ? "archived-target" : "invalid-target"));
+    }
+
+    /// <summary>
+    /// Last-resort reporting seam for WPF's async-void drag events.  The normal preview and
+    /// execute paths already catch their own failures; this keeps an unexpected event-layer
+    /// exception visible in the status bar instead of becoming an unhandled UI crash.
+    /// </summary>
+    internal void ReportDropFailure(string phase, Exception exception)
+    {
+        if (exception is OperationCanceledException)
+        {
+            PublishDropPreview(new(false, GetDragAssetIds().Count, 0, 0,
+                $"拖放{phase}已取消。", "canceled", nameof(OperationCanceledException), true));
+            return;
+        }
+        PublishDropPreview(CreateDropFailurePreview(phase, GetDragAssetIds().Count, exception));
+    }
+
+    private async Task<AssetLibraryCommandPreview> BuildDropPreviewAsync(
+        IReadOnlyList<Guid> ids,
+        AssetLibraryDropTarget? target)
+    {
+        if (target?.Kind == AssetLibraryDropTargetKind.RemoveFromCurrent)
+        {
+            var folder = SelectedFolder;
+            var tag = SelectedTag;
+            return folder is { IsArchived: false }
+                ? await _browserCommands.PreviewRemoveAsync(ids, folder.FolderId, folder: true, folder.Name, _lifetimeCancellation.Token).ConfigureAwait(true)
+                : tag is { IsArchived: false }
+                    ? await _browserCommands.PreviewRemoveAsync(ids, tag.TagId, folder: false, tag.Name, _lifetimeCancellation.Token).ConfigureAwait(true)
+                    : new(false, ids.Count, 0, 0, "当前查询没有可移出的文件夹或标签归属。", "invalid-target");
+        }
+
+        if (target is null)
+            return new(false, ids.Count, 0, 0, "拖放目标无效，已拒绝操作。", "invalid-target");
+        return await _browserCommands.PreviewDropAsync(ids, target, _lifetimeCancellation.Token).ConfigureAwait(true);
+    }
+
+    private AssetLibraryCommandPreview PublishDropPreview(AssetLibraryCommandPreview preview)
+    {
+        LastDropPreview = preview;
+        Status = preview.Message;
+        return preview;
+    }
+
+    private static AssetLibraryCommandPreview CreateDropFailurePreview(
+        string phase,
+        int requestedCount,
+        Exception exception,
+        AssetLibraryCommandPreview? previous = null) =>
+        new(false, requestedCount, previous?.ConflictCount ?? 0, 0,
+            $"拖放{phase}失败：{exception.Message}", "exception", exception.GetType().Name);
 
     private IReadOnlyList<Guid> ContextIds(AssetVisualMatchView? card)
     {
