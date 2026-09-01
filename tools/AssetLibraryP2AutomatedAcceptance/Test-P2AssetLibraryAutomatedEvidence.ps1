@@ -22,6 +22,119 @@ function Read-Json([string]$Path, [string]$Name) {
     catch { Fail "$Name is not valid JSON: $($_.Exception.Message)" }
 }
 function Hash([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
+function Quote-ProcessArgument([AllowEmptyString()][string]$Value) {
+    if ($Value.Length -eq 0) { return '""' }
+    if ($Value -notmatch '[\s"]') { return $Value }
+    $builder = [Text.StringBuilder]::new()
+    [void]$builder.Append('"')
+    $backslashes = 0
+    foreach ($character in $Value.ToCharArray()) {
+        if ($character -eq '\') { $backslashes++; continue }
+        if ($character -eq '"') {
+            [void]$builder.Append(('\' * ($backslashes * 2 + 1)))
+            [void]$builder.Append('"')
+            $backslashes = 0
+            continue
+        }
+        if ($backslashes -gt 0) { [void]$builder.Append(('\' * $backslashes)); $backslashes = 0 }
+        [void]$builder.Append($character)
+    }
+    if ($backslashes -gt 0) { [void]$builder.Append(('\' * ($backslashes * 2))) }
+    [void]$builder.Append('"')
+    return $builder.ToString()
+}
+function Invoke-ReadonlyFixtureAudit([string]$DatabasePath) {
+    $pythonCommand = Get-Command python.exe -ErrorAction SilentlyContinue
+    if ($null -eq $pythonCommand) { Fail 'python.exe is required for the independent fixture content audit.' }
+    $python = [IO.Path]::GetFullPath($pythonCommand.Source)
+    if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { Fail "python.exe is not a file: $python" }
+    $auditCode = @'
+import hashlib, json, pathlib, re, sqlite3, sys
+db = pathlib.Path(sys.argv[2]).resolve()
+if not db.is_file():
+    raise RuntimeError(f"fixture database is missing: {db}")
+before = hashlib.sha256(db.read_bytes()).hexdigest()
+uri = db.as_uri() + "?mode=ro&immutable=1"
+connection = sqlite3.connect(uri, uri=True)
+try:
+    connection.execute("PRAGMA query_only=ON")
+    quick_check = connection.execute("PRAGMA quick_check").fetchone()[0]
+    schema_version = connection.execute("SELECT MAX(Version) FROM AssetLibrarySchemaInfo").fetchone()[0]
+    rows = connection.execute("SELECT AssetId,SourcePath,DisplayName,ContentHash,IsMissing,IsArchived FROM AssetItems ORDER BY SourcePath").fetchall()
+    if len(rows) != 512:
+        raise RuntimeError(f"fixture asset row count mismatch: {len(rows)}")
+    active_count = sum(1 for row in rows if row[5] == 0)
+    archived_count = sum(1 for row in rows if row[5] == 1)
+    if (active_count, archived_count) != (500, 12):
+        raise RuntimeError(f"fixture archive split mismatch: active={active_count}, archived={archived_count}")
+    han = re.compile(r"[\u3400-\u9fff]")
+    display_name_count = sum(1 for row in rows if isinstance(row[2], str) and han.search(row[2]))
+    if display_name_count != 512:
+        raise RuntimeError(f"fixture display names are not all Chinese: {display_name_count}/512")
+    hash_pattern = re.compile(r"^[0-9a-f]{64}$")
+    content_hash_count = 0
+    for row in rows:
+        value = row[3]
+        if not isinstance(value, str) or not hash_pattern.fullmatch(value):
+            raise RuntimeError(f"fixture content hash is missing or malformed for {row[0]}")
+        content_hash_count += 1
+        match = re.search(r"P2_(\d{4})\.jpg$", str(row[1]), re.IGNORECASE)
+        if match is None:
+            raise RuntimeError(f"fixture source path has no deterministic index for {row[0]}")
+        index = int(match.group(1))
+        expected = hashlib.sha256(f"pixel-tart-p2-source-{index:04d}".encode("ascii")).hexdigest()
+        if value != expected:
+            raise RuntimeError(f"fixture content hash is not deterministic for index {index:04d}")
+    missing_count = sum(1 for row in rows if row[4] == 1)
+    if missing_count != 32:
+        raise RuntimeError(f"fixture missing count mismatch: {missing_count}")
+    feature_rows = connection.execute("SELECT AssetId,AnalysisVersion,SourceContentHash,Outcome FROM AssetVisualFeatures WHERE AnalysisVersion='visual-analysis-v2'").fetchall()
+    valid_count = sum(1 for row in feature_rows if row[3] == 'Succeeded')
+    failed_count = sum(1 for row in feature_rows if row[3] == 'Failed')
+    not_analyzed_count = 512 - len(feature_rows)
+    if (valid_count, failed_count, not_analyzed_count) != (128, 64, 320):
+        raise RuntimeError(f"fixture visual state mismatch: valid={valid_count}, failed={failed_count}, not_analyzed={not_analyzed_count}")
+    hashes = {row[0]: row[3] for row in rows}
+    for asset_id, version, source_hash, outcome in feature_rows:
+        if outcome not in ('Succeeded', 'Failed') or source_hash != hashes.get(asset_id):
+            raise RuntimeError(f"fixture visual row is not tied to its deterministic source hash: {asset_id}")
+    result = {
+        "quick_check": quick_check,
+        "schema_version": schema_version,
+        "asset_count": len(rows),
+        "active_count": active_count,
+        "archived_count": archived_count,
+        "display_name_count": display_name_count,
+        "content_hash_count": content_hash_count,
+        "missing_count": missing_count,
+        "visual_feature_rows": len(feature_rows),
+        "visual_valid_count": valid_count,
+        "visual_failed_count": failed_count,
+        "visual_not_analyzed_count": not_analyzed_count
+    }
+finally:
+    connection.close()
+after = hashlib.sha256(db.read_bytes()).hexdigest()
+if before != after:
+    raise RuntimeError(f"read-only fixture audit changed database: {db}")
+print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
+'@
+    $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($auditCode))
+    $bootstrap = 'import base64,sys;exec(base64.b64decode(sys.argv[1]))'
+    $arguments = @('-I', '-c', $bootstrap, $encoded, [IO.Path]::GetFullPath($DatabasePath))
+    $startInfo = [Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = $python
+    $startInfo.Arguments = ($arguments | ForEach-Object { Quote-ProcessArgument ([string]$_) }) -join ' '
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $process = [Diagnostics.Process]::new(); $process.StartInfo = $startInfo
+    if (-not $process.Start()) { Fail 'Could not start the independent fixture audit.' }
+    $stdout = $process.StandardOutput.ReadToEnd(); $stderr = $process.StandardError.ReadToEnd(); $process.WaitForExit()
+    if ($process.ExitCode -ne 0) { Fail "Independent fixture content audit failed: $($stderr.Trim())" }
+    try { return $stdout | ConvertFrom-Json } catch { Fail "Independent fixture content audit returned invalid JSON: $($_.Exception.Message)" }
+}
 function Require-Equal($Actual, $Expected, [string]$Name) {
     if (-not [object]::Equals($Actual, $Expected)) { Fail "$Name differs (actual='$Actual', expected='$Expected')." }
 }
@@ -59,10 +172,27 @@ if ($expectedScenarios.Count -ne 10 -or ($expectedScenarios -join '|') -cne 'fix
 Require-Equal ([int]$contract.fixture.total_count) 512 'fixture total'
 Require-Equal ([int]$contract.fixture.active_count) 500 'fixture active'
 Require-Equal ([int]$contract.fixture.archived_count) 12 'fixture archived'
+Require-Equal ([int]$contract.fixture.schema_version) 6 'fixture schema version'
+Require-Equal ([int]$contract.fixture.display_name_count) 512 'fixture display-name count'
+Require-Equal $contract.fixture.display_name_language 'zh-CN' 'fixture display-name language'
+Require-Equal ([int]$contract.fixture.content_hash_count) 512 'fixture content-hash count'
+Require-Equal $contract.fixture.content_hash_algorithm 'sha256' 'fixture content-hash algorithm'
+Require-Equal ([bool]$contract.fixture.content_hash_deterministic) $true 'fixture content-hash determinism'
+Require-Equal ([int]$contract.fixture.missing_count) 32 'fixture missing count'
+Require-Equal $contract.fixture.visual_feature_counts.analysis_version 'visual-analysis-v2' 'fixture visual analysis version'
+Require-Equal ([int]$contract.fixture.visual_feature_counts.valid) 128 'fixture visual valid count'
+Require-Equal ([int]$contract.fixture.visual_feature_counts.failed) 64 'fixture visual failed count'
+Require-Equal ([int]$contract.fixture.visual_feature_counts.not_analyzed) 320 'fixture visual not-analyzed count'
+Require-Equal ([int]$contract.fixture.visual_feature_counts.feature_rows) 192 'fixture visual feature-row count'
 
 $negativeGuardMap = [ordered]@{
     'missing-screenshot'='required screenshot artifact and PNG signature'; 'mutated-hash'='every file hash is recomputed';
     'wrong-scenario-order'='exact fixed scenario array'; 'fixture-count-mismatch'='fixture and DB 512/500/12';
+    'fixture-content-hash-mismatch'='independent deterministic SHA-256 content-hash audit';
+    'fixture-display-name-not-chinese'='independent Han-character display-name audit';
+    'fixture-missing-count-mismatch'='independent IsMissing count audit';
+    'fixture-visual-outcome-mismatch'='independent Valid/Failed/NotAnalyzed outcome audit';
+    'fixture-schema-marker-mismatch'='independent AssetLibrarySchemaInfo=6 audit';
     'fixture-path-escape'='every fixture path is beneath run root'; 'folder-cycle-accepted'='organization snapshot and product contract check';
     'duplicate-automation-id'='bounds identity uniqueness'; 'smart-result-mismatch'='smart query positive count';
     'query-plan-divergence'='query snapshot identity and counts'; 'stale-cancelled-query'='resilience one-retry evidence';
@@ -97,12 +227,54 @@ Require-Equal $fixture.schema 'pixel-tart-p2-synthetic-fixture/v1' 'fixture sche
 Require-Equal ([int]$fixture.total_count) 512 'fixture total count'
 Require-Equal ([int]$fixture.active_count) 500 'fixture active count'
 Require-Equal ([int]$fixture.archived_count) 12 'fixture archived count'
+Require-Equal ([int]$fixture.schema_version) 6 'fixture schema version'
+Require-Equal ([int]$fixture.display_name_count) 512 'fixture display-name count'
+Require-Equal $fixture.display_name_language 'zh-CN' 'fixture display-name language'
+Require-Equal ([int]$fixture.content_hash_count) 512 'fixture content-hash count'
+Require-Equal $fixture.content_hash_algorithm 'sha256' 'fixture content-hash algorithm'
+Require-Equal ([bool]$fixture.content_hash_deterministic) $true 'fixture content-hash determinism'
+Require-Equal ([int]$fixture.missing_count) 32 'fixture missing count'
+Require-Equal $fixture.visual_feature_counts.analysis_version 'visual-analysis-v2' 'fixture visual analysis version'
+Require-Equal ([int]$fixture.visual_feature_counts.valid) 128 'fixture visual valid count'
+Require-Equal ([int]$fixture.visual_feature_counts.failed) 64 'fixture visual failed count'
+Require-Equal ([int]$fixture.visual_feature_counts.not_analyzed) 320 'fixture visual not-analyzed count'
+Require-Equal ([int]$fixture.visual_feature_counts.feature_rows) 192 'fixture visual feature-row count'
 Require-Equal ([int]$fixture.user_source_read_count) 0 'fixture user source read count'
 Require-Equal ([int]$fixture.user_source_write_count) 0 'fixture user source write count'
 $fixtureDb = Full $fixture.database_path
 if (-not (Inside $fixtureDb $root)) { Fail 'fixture database escapes the run root.' }
 [void](Require-File $fixtureDb 'fixture database')
 Require-Equal (Hash $fixtureDb) $fixture.database_sha256 'fixture database hash'
+$generatorPath = Full $fixture.generator_script_path
+if (-not (Inside $generatorPath $root)) { Fail 'fixture generator script escapes the run root.' }
+[void](Require-File $generatorPath 'fixture generator script')
+Require-Equal (Hash $generatorPath) $fixture.generator_script_sha256 'fixture generator script hash'
+Require-Equal ([int64](Get-Item -LiteralPath $generatorPath -Force).Length) ([int64]$fixture.generator_script_byte_length) 'fixture generator script byte length'
+$generatorArguments = @($fixture.generator_arguments | ForEach-Object { [string]$_ })
+if ($generatorArguments.Count -ne 4 -or $generatorArguments[0] -cne '-I' -or
+    (Full $generatorArguments[1]) -cne $generatorPath -or (Full $generatorArguments[2]) -cne (Full $fixture.directory) -or
+    (Full $generatorArguments[3]) -cne $fixtureDb) { Fail 'fixture generator arguments are not the sealed absolute invocation.' }
+$generatorProcess = $fixture.generator_process_result
+Require-Equal ([int]$generatorProcess.exit_code) 0 'fixture generator exit code'
+foreach ($pair in @(@('stdout','stdout_sha256'), @('stderr','stderr_sha256'))) {
+    $logPath = Full $generatorProcess.($pair[0])
+    if (-not (Inside $logPath $root)) { Fail "fixture generator $($pair[0]) escapes the run root." }
+    [void](Require-File $logPath "fixture generator $($pair[0])")
+    Require-Equal (Hash $logPath) $generatorProcess.($pair[1]) "fixture generator $($pair[1])"
+}
+$fixtureAudit = Invoke-ReadonlyFixtureAudit $fixtureDb
+Require-Equal ([string]$fixtureAudit.quick_check) 'ok' 'fixture independent quick_check'
+Require-Equal ([int]$fixtureAudit.schema_version) 6 'fixture independent schema version'
+Require-Equal ([int]$fixtureAudit.asset_count) 512 'fixture independent total count'
+Require-Equal ([int]$fixtureAudit.active_count) 500 'fixture independent active count'
+Require-Equal ([int]$fixtureAudit.archived_count) 12 'fixture independent archived count'
+Require-Equal ([int]$fixtureAudit.display_name_count) 512 'fixture independent display-name count'
+Require-Equal ([int]$fixtureAudit.content_hash_count) 512 'fixture independent content-hash count'
+Require-Equal ([int]$fixtureAudit.missing_count) 32 'fixture independent missing count'
+Require-Equal ([int]$fixtureAudit.visual_feature_rows) 192 'fixture independent visual feature-row count'
+Require-Equal ([int]$fixtureAudit.visual_valid_count) 128 'fixture independent visual valid count'
+Require-Equal ([int]$fixtureAudit.visual_failed_count) 64 'fixture independent visual failed count'
+Require-Equal ([int]$fixtureAudit.visual_not_analyzed_count) 320 'fixture independent visual not-analyzed count'
 
 $sessions = @($manifest.sessions)
 Require-Equal $sessions.Count 11 'runner session count'

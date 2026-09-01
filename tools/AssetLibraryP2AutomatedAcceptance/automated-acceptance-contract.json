@@ -30,9 +30,23 @@
   },
   "fixture": {
     "schema": "pixel-tart-p2-synthetic-fixture/v1",
+    "schema_version": 6,
     "total_count": 512,
     "active_count": 500,
     "archived_count": 12,
+    "display_name_count": 512,
+    "display_name_language": "zh-CN",
+    "content_hash_count": 512,
+    "content_hash_algorithm": "sha256",
+    "content_hash_deterministic": true,
+    "missing_count": 32,
+    "visual_feature_counts": {
+      "analysis_version": "visual-analysis-v2",
+      "valid": 128,
+      "failed": 64,
+      "not_analyzed": 320,
+      "feature_rows": 192
+    },
     "user_source_read_count": 0,
     "user_source_write_count": 0
   },
@@ -85,7 +99,10 @@
   ],
   "required_negative_fixtures": [
     "missing-screenshot", "mutated-hash", "wrong-scenario-order",
-    "fixture-count-mismatch", "fixture-path-escape", "folder-cycle-accepted",
+    "fixture-count-mismatch", "fixture-content-hash-mismatch",
+    "fixture-display-name-not-chinese", "fixture-missing-count-mismatch",
+    "fixture-visual-outcome-mismatch", "fixture-schema-marker-mismatch",
+    "fixture-path-escape", "folder-cycle-accepted",
     "duplicate-automation-id", "smart-result-mismatch", "query-plan-divergence",
     "stale-cancelled-query", "view-state-lost", "virtualization-realizes-all",
     "sort-unstable", "selection-truncated", "invalid-drop-accepted",

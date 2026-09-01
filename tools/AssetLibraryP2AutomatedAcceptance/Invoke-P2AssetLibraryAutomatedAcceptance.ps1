@@ -557,20 +557,64 @@ function Invoke-AppPhase {
 
 function New-P2SyntheticFixture {
     param([string]$ActiveRunRoot)
-    $directory = Join-Path $ActiveRunRoot 'synthetic-fixture'
+    if ([string]::IsNullOrWhiteSpace($ActiveRunRoot) -or -not (Test-IsAbsolutePath $ActiveRunRoot)) {
+        throw 'The synthetic fixture requires an absolute ActiveRunRoot.'
+    }
+    $runRoot = [IO.Path]::GetFullPath($ActiveRunRoot).TrimEnd('\', '/')
+    if (-not (Test-Path -LiteralPath $runRoot -PathType Container)) {
+        throw "The synthetic fixture run root does not exist: $runRoot"
+    }
+    if ((Get-Item -LiteralPath $runRoot -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+        throw "The synthetic fixture run root is a reparse point: $runRoot"
+    }
+    $directory = [IO.Path]::GetFullPath((Join-Path $runRoot 'synthetic-fixture')).TrimEnd('\', '/')
+    if (-not (Test-PathWithin $directory $runRoot)) {
+        throw "The synthetic fixture directory escaped the run root: $directory"
+    }
+    if (Test-Path -LiteralPath $directory) {
+        throw "The synthetic fixture directory is not fresh; refusing to modify an existing run root: $directory"
+    }
     [IO.Directory]::CreateDirectory($directory) | Out-Null
-    $databasePath = Join-Path $directory 'asset-library-v16.db'
-    $python = (Get-Command python.exe -ErrorAction Stop).Source
+    if ((Get-Item -LiteralPath $directory -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+        throw "The synthetic fixture directory is a reparse point: $directory"
+    }
+    $databasePath = [IO.Path]::GetFullPath((Join-Path $directory 'asset-library-v16.db'))
+    $generatorPath = [IO.Path]::GetFullPath((Join-Path $directory 'fixture-generator.py'))
+    if (-not (Test-PathWithin $databasePath $directory) -or [IO.Path]::GetFileName($databasePath) -cne 'asset-library-v16.db') {
+        throw "The synthetic fixture database path is invalid: $databasePath"
+    }
+    if (-not (Test-PathWithin $generatorPath $directory) -or [IO.Path]::GetFileName($generatorPath) -cne 'fixture-generator.py') {
+        throw "The synthetic fixture generator path is invalid: $generatorPath"
+    }
+    if ((Test-Path -LiteralPath $databasePath -PathType Leaf) -or (Test-Path -LiteralPath $generatorPath)) {
+        throw 'The synthetic fixture generator and database paths must not already exist.'
+    }
+    $python = [IO.Path]::GetFullPath((Get-Command python.exe -ErrorAction Stop).Source)
+    if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
+        throw "The Python executable is not a file: $python"
+    }
     $pythonCode = @'
-import datetime, pathlib, sqlite3, sys, uuid
-root = pathlib.Path(sys.argv[1]).resolve()
-db = pathlib.Path(sys.argv[2]).resolve()
-db.relative_to(root)
+import datetime, hashlib, json, pathlib, sqlite3, sys, uuid
+if len(sys.argv) != 3:
+    raise RuntimeError(f"fixture-generator.py expects exactly 2 arguments (root, database), got {len(sys.argv) - 1}")
+root_arg, db_arg = sys.argv[1], sys.argv[2]
+root_path = pathlib.Path(root_arg)
+db_path = pathlib.Path(db_arg)
+if not root_path.is_absolute() or not db_path.is_absolute():
+    raise RuntimeError("fixture root and database arguments must be absolute paths")
+root = root_path.resolve()
+db = db_path.resolve()
+if not root.is_dir():
+    raise RuntimeError(f"fixture root is not an existing directory: {root}")
+if db.parent != root or db.name != "asset-library-v16.db":
+    raise RuntimeError(f"database must be exactly <fixture-root>/asset-library-v16.db: {db}")
 if db.exists():
     raise RuntimeError("P2 fixture database already exists")
 connection = sqlite3.connect(db)
 try:
     connection.executescript("""
+    CREATE TABLE AssetLibrarySchemaInfo(
+      Version INTEGER NOT NULL PRIMARY KEY, AppliedAt TEXT NOT NULL);
     PRAGMA journal_mode=DELETE;
     CREATE TABLE AssetItems(
       AssetId TEXT NOT NULL PRIMARY KEY, SourcePath TEXT NOT NULL,
@@ -584,6 +628,33 @@ try:
       IsArchived INTEGER NOT NULL DEFAULT 0 CHECK(IsArchived IN(0,1)),
       ImportMode TEXT NOT NULL DEFAULT 'Reference', ManagedCopyPath TEXT NULL,
       UNIQUE(NormalizedSourcePath,DuplicateDiscriminator));
+    CREATE TABLE AssetVisualAnalysis(
+      AssetId TEXT NOT NULL, AnalysisVersion TEXT NOT NULL, ContentHash TEXT NOT NULL,
+      PaletteSize INTEGER NOT NULL DEFAULT 5, PaletteSort TEXT NOT NULL DEFAULT 'Weight',
+      AnalysisSource TEXT NOT NULL, SourceProfile TEXT NOT NULL, AnalysisProfile TEXT NOT NULL,
+      ResultJson TEXT NOT NULL, CreatedAt TEXT NOT NULL,
+      PRIMARY KEY(AssetId,AnalysisVersion,PaletteSize,PaletteSort));
+    CREATE TABLE AssetVisualFeatures(
+      AssetId TEXT NOT NULL, AnalysisVersion TEXT NOT NULL,
+      PaletteSize INTEGER NOT NULL CHECK(PaletteSize=5), PaletteSort TEXT NOT NULL CHECK(PaletteSort='Weight'),
+      ContentFingerprint TEXT NOT NULL, SourceContentHash TEXT NULL,
+      Outcome TEXT NOT NULL, FailureReason TEXT NULL,
+      AnalysisSource TEXT NOT NULL, SourceProfile TEXT NOT NULL, AnalysisProfile TEXT NOT NULL,
+      Harmony TEXT NULL, ToneKey TEXT NULL, Contrast TEXT NULL, LuminanceSpan TEXT NULL,
+      Saturation TEXT NULL, WarmCool TEXT NULL, DominantHue REAL NULL, SecondaryHue REAL NULL,
+      AverageHue REAL NULL, AverageLuma REAL NULL, MedianLuma REAL NULL, ContrastMetric REAL NULL,
+      LumaSpreadMetric REAL NULL, AverageSaturation REAL NULL, MedianSaturation REAL NULL,
+      AverageLightness REAL NULL, WarmCoolMetric REAL NULL, DeepShadowRatio REAL NULL,
+      ShadowRatio REAL NULL, MidtoneRatio REAL NULL, HighlightRatio REAL NULL, SpecularRatio REAL NULL,
+      BlackClipRatio REAL NULL, WhiteClipRatio REAL NULL, HistogramLumaSignature TEXT NULL,
+      PaletteSignature TEXT NULL, ResultJson TEXT NULL, CreatedAt TEXT NOT NULL, UpdatedAt TEXT NOT NULL,
+      PRIMARY KEY(AssetId,AnalysisVersion));
+    CREATE TABLE AssetVisualPaletteColors(
+      AssetId TEXT NOT NULL, AnalysisVersion TEXT NOT NULL, ColorIndex INTEGER NOT NULL,
+      Red INTEGER NOT NULL CHECK(Red BETWEEN 0 AND 255), Green INTEGER NOT NULL CHECK(Green BETWEEN 0 AND 255),
+      Blue INTEGER NOT NULL CHECK(Blue BETWEEN 0 AND 255), LabL REAL NOT NULL, LabA REAL NOT NULL, LabB REAL NOT NULL,
+      Hue REAL NOT NULL, Saturation REAL NOT NULL, Chroma REAL NOT NULL, Weight REAL NOT NULL CHECK(Weight>=0 AND Weight<=1),
+      Hex TEXT NOT NULL, PRIMARY KEY(AssetId,AnalysisVersion,ColorIndex));
     CREATE TABLE AssetFolders(FolderId TEXT NOT NULL PRIMARY KEY,ParentFolderId TEXT NULL,Name TEXT NOT NULL,
       Description TEXT NOT NULL DEFAULT '',Icon TEXT NULL,Color TEXT NULL,SortOrder INTEGER NOT NULL DEFAULT 0,
       CreatedAt TEXT NOT NULL,UpdatedAt TEXT NOT NULL,IsArchived INTEGER NOT NULL DEFAULT 0,IsSystem INTEGER NOT NULL DEFAULT 0,
@@ -600,21 +671,66 @@ try:
       Value TEXT NOT NULL DEFAULT '',Negated INTEGER NOT NULL DEFAULT 0,SortOrder INTEGER NOT NULL DEFAULT 0,GroupId TEXT NULL,GroupLogic TEXT NOT NULL DEFAULT 'And');
     """)
     now = datetime.datetime(2026, 9, 1, tzinfo=datetime.timezone.utc)
+    connection.execute("INSERT INTO AssetLibrarySchemaInfo(Version,AppliedAt) VALUES(?,?)", (6, now.isoformat()))
     rows = []
     for index in range(512):
         archived = 1 if index >= 500 else 0
+        missing = 1 if (30 <= index < 60 or 500 <= index < 502) else 0
         asset_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"pixel-tart-p2-fixture-{index:04d}"))
         source = str(root / "media" / f"P2_{index:04d}.jpg")
-        rows.append((asset_id, source, source.lower(), f"P2_{index:04d}.jpg", ".jpg", "Image",
-                     4096 + index, 640 + index % 7 * 80, 480 + index % 5 * 64,
-                     (now + datetime.timedelta(seconds=index)).isoformat(),
-                     (now + datetime.timedelta(seconds=index)).isoformat(), index % 6,
-                     f"synthetic fixture item {index:04d}", archived))
+        display_name = f"P2_{index:04d} 人物参考 {index % 7 + 1:02d}.jpg"
+        content_hash = hashlib.sha256(f"pixel-tart-p2-source-{index:04d}".encode("ascii")).hexdigest()
+        capture_time = (now + datetime.timedelta(days=index % 31, seconds=index)).isoformat()
+        added_at = (now + datetime.timedelta(seconds=index)).isoformat()
+        rows.append((asset_id, source, source.lower(), display_name, ".jpg", "Image",
+                     4096 + index, content_hash, 640 + index % 7 * 80, 480 + index % 5 * 64,
+                     "Landscape" if index % 2 == 0 else "Portrait", capture_time, added_at, added_at, index % 6,
+                     f"synthetic fixture item {index:04d}", missing, archived, "Reference", None))
     connection.executemany("""
       INSERT INTO AssetItems(AssetId,SourcePath,NormalizedSourcePath,DisplayName,Extension,MediaType,
-        FileSize,Width,Height,AddedAt,ModifiedAt,Rating,Comment,IsArchived)
-      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", rows)
+        FileSize,ContentHash,Width,Height,Orientation,CaptureTime,AddedAt,ModifiedAt,Rating,Comment,IsMissing,IsArchived,ImportMode,ManagedCopyPath)
+       VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", rows)
     ids = [row[0] for row in rows]
+    analysis_version = "visual-analysis-v2"
+    feature_rows = []
+    for index, asset_id in enumerate(ids):
+        if index >= 192:
+            continue
+        outcome = "Succeeded" if index < 128 else "Failed"
+        source_hash = rows[index][7]
+        feature_rows.append((
+            asset_id, analysis_version, 5, "Weight", source_hash, source_hash, outcome,
+            None if outcome == "Succeeded" else "deterministic synthetic analysis failure",
+            "RasterOriginal", "UnknownAssumedSrgb", "sRGB IEC61966-2.1",
+            "Monochrome", "Mid", "Medium", "Medium", "Medium", "Warm",
+            float((index * 13) % 360), float((index * 17) % 360), float((index * 19) % 360),
+            96.0 + (index % 20), 92.0 + (index % 18), 0.45, 0.30,
+            0.35, 0.22, 0.40, 0.12, 0.04, 0.20, 0.30, 0.18, 0.08,
+            0.01, 0.02, "synthetic-luma", "synthetic-palette", None,
+            now.isoformat(), now.isoformat()))
+    connection.executemany("""
+      INSERT INTO AssetVisualFeatures(
+        AssetId,AnalysisVersion,PaletteSize,PaletteSort,ContentFingerprint,SourceContentHash,Outcome,FailureReason,
+        AnalysisSource,SourceProfile,AnalysisProfile,Harmony,ToneKey,Contrast,LuminanceSpan,Saturation,WarmCool,
+        DominantHue,SecondaryHue,AverageHue,AverageLuma,MedianLuma,ContrastMetric,LumaSpreadMetric,AverageSaturation,
+        MedianSaturation,AverageLightness,WarmCoolMetric,DeepShadowRatio,ShadowRatio,MidtoneRatio,HighlightRatio,
+        SpecularRatio,BlackClipRatio,WhiteClipRatio,HistogramLumaSignature,PaletteSignature,ResultJson,CreatedAt,UpdatedAt)
+      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", feature_rows)
+    palette_rows = []
+    for index, asset_id in enumerate(ids[:128]):
+        source_hash = rows[index][7]
+        for color_index in range(5):
+            red = (index * 17 + color_index * 31) % 256
+            green = (index * 23 + color_index * 29) % 256
+            blue = (index * 37 + color_index * 13) % 256
+            palette_rows.append((asset_id, analysis_version, color_index, red, green, blue,
+                                 50.0 + color_index, -10.0 + color_index, 12.0 + color_index,
+                                 float((index * 13 + color_index * 7) % 360), 0.25, 20.0, 0.2,
+                                 f"#{red:02X}{green:02X}{blue:02X}"))
+    connection.executemany("""
+      INSERT INTO AssetVisualPaletteColors(
+        AssetId,AnalysisVersion,ColorIndex,Red,Green,Blue,LabL,LabA,LabB,Hue,Saturation,Chroma,Weight,Hex)
+      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", palette_rows)
     uid = lambda name: str(uuid.uuid5(uuid.NAMESPACE_URL, "pixel-tart-p2-" + name))
     folder_rows = [(uid("folder-people"), None, "人物", "人物参考", 0),
                    (uid("folder-portrait"), uid("folder-people"), "人像", "人像样片", 0),
@@ -644,20 +760,109 @@ try:
         raise RuntimeError(f"fixture count mismatch: {counts}")
     if connection.execute("PRAGMA quick_check").fetchone()[0] != "ok":
         raise RuntimeError("fixture quick_check failed")
+    visual_counts = connection.execute("SELECT Outcome,COUNT(*) FROM AssetVisualFeatures WHERE AnalysisVersion=? GROUP BY Outcome", (analysis_version,)).fetchall()
+    visual_by_outcome = {outcome: count for outcome, count in visual_counts}
+    print(json.dumps({
+        "schema_version": 6,
+        "total_count": counts[0],
+        "active_count": counts[1],
+        "archived_count": counts[2],
+        "display_name_count": sum(1 for row in rows if any('\u3400' <= character <= '\u9fff' for character in row[3])),
+        "content_hash_count": sum(1 for row in rows if row[7]),
+        "missing_count": connection.execute("SELECT COUNT(*) FROM AssetItems WHERE IsMissing=1").fetchone()[0],
+        "visual_feature_counts": {
+            "analysis_version": analysis_version,
+            "valid": visual_by_outcome.get("Succeeded", 0),
+            "failed": visual_by_outcome.get("Failed", 0),
+            "not_analyzed": counts[0] - sum(visual_by_outcome.values()),
+            "feature_rows": sum(visual_by_outcome.values())
+        }
+    }, ensure_ascii=False, separators=(",", ":")))
 finally:
     connection.close()
 '@
-    $output = & $python -c $pythonCode $directory $databasePath 2>&1
-    if ($LASTEXITCODE -ne 0) { throw "P2 synthetic fixture generation failed: $($output -join [Environment]::NewLine)" }
+    if ([string]::IsNullOrEmpty($pythonCode)) { throw 'The synthetic fixture generator script is empty.' }
+    [IO.File]::WriteAllText($generatorPath, $pythonCode, [Text.UTF8Encoding]::new($false))
+    if (-not (Test-Path -LiteralPath $generatorPath -PathType Leaf)) {
+        throw "The synthetic fixture generator script was not written: $generatorPath"
+    }
+    $generatorItem = Get-Item -LiteralPath $generatorPath -Force
+    if (($generatorItem.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+        throw "The synthetic fixture generator script is a reparse point: $generatorPath"
+    }
+    $generatorScriptHash = Get-FileSha256 $generatorPath
+    if ($generatorScriptHash -cnotmatch '^[0-9a-f]{64}$') {
+        throw "The synthetic fixture generator script hash is invalid: $generatorScriptHash"
+    }
+    $generatorArguments = @('-I', $generatorPath, $directory, $databasePath)
+    if ($generatorArguments.Count -ne 4) {
+        throw "The fixture generator invocation must contain exactly 4 process arguments; actual count=$($generatorArguments.Count)."
+    }
+    if ($generatorArguments[0] -cne '-I' -or
+        [IO.Path]::IsPathRooted([string]$generatorArguments[0]) -or
+        [IO.Path]::GetFullPath([string]$generatorArguments[1]) -cne $generatorPath -or
+        [IO.Path]::GetFullPath([string]$generatorArguments[2]) -cne $directory -or
+        [IO.Path]::GetFullPath([string]$generatorArguments[3]) -cne $databasePath -or
+        -not (Test-PathWithin ([string]$generatorArguments[1]) $directory) -or
+        -not (Test-PathWithin ([string]$generatorArguments[2]) $runRoot) -or
+        -not (Test-PathWithin ([string]$generatorArguments[3]) $directory)) {
+        throw 'The fixture generator invocation contains an invalid or escaped argument path.'
+    }
+    $generatorLogDirectory = Join-Path $runRoot 'runner'
+    $generatorResult = Invoke-LoggedProcess -FilePath $python `
+        -Arguments $generatorArguments `
+        -Name 'fixture-generator' -LogDirectory $generatorLogDirectory -Timeout 300
+    if (-not (Test-Path -LiteralPath $databasePath -PathType Leaf)) {
+        throw "The fixture generator completed without creating its database: $databasePath"
+    }
+    $generatorOutputLines = @(Get-Content -LiteralPath $generatorResult.stdout -Encoding UTF8 | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($generatorOutputLines.Count -ne 1) {
+        throw "The fixture generator must emit exactly one metadata JSON record; actual count=$($generatorOutputLines.Count)."
+    }
+    try { $generatedMetadata = $generatorOutputLines[0] | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw "The fixture generator metadata record is invalid JSON: $($_.Exception.Message)" }
+    if ([int]$generatedMetadata.schema_version -ne 6 -or
+        [int]$generatedMetadata.total_count -ne 512 -or
+        [int]$generatedMetadata.active_count -ne 500 -or
+        [int]$generatedMetadata.archived_count -ne 12 -or
+        [int]$generatedMetadata.display_name_count -ne 512 -or
+        [int]$generatedMetadata.content_hash_count -ne 512 -or
+        [int]$generatedMetadata.missing_count -ne 32 -or
+        [string]$generatedMetadata.visual_feature_counts.analysis_version -cne 'visual-analysis-v2' -or
+        [int]$generatedMetadata.visual_feature_counts.valid -ne 128 -or
+        [int]$generatedMetadata.visual_feature_counts.failed -ne 64 -or
+        [int]$generatedMetadata.visual_feature_counts.not_analyzed -ne 320 -or
+        [int]$generatedMetadata.visual_feature_counts.feature_rows -ne 192) {
+        throw 'The fixture generator metadata does not satisfy the P2 fixture contract.'
+    }
     $fixture = [ordered]@{
         schema = 'pixel-tart-p2-synthetic-fixture/v1'
         source_kind = 'synthetic-run-owned'
         directory = [IO.Path]::GetFullPath($directory)
         database_path = [IO.Path]::GetFullPath($databasePath)
         database_sha256 = Get-FileSha256 $databasePath
-        total_count = 512
-        active_count = 500
-        archived_count = 12
+        generator_script_path = [IO.Path]::GetFullPath($generatorPath)
+        generator_script_sha256 = $generatorScriptHash
+        generator_script_byte_length = [int64]$generatorItem.Length
+        generator_arguments = @($generatorArguments)
+        generator_process_result = $generatorResult
+        schema_version = [int]$generatedMetadata.schema_version
+        total_count = [int]$generatedMetadata.total_count
+        active_count = [int]$generatedMetadata.active_count
+        archived_count = [int]$generatedMetadata.archived_count
+        display_name_count = [int]$generatedMetadata.display_name_count
+        display_name_language = 'zh-CN'
+        content_hash_count = [int]$generatedMetadata.content_hash_count
+        content_hash_algorithm = 'sha256'
+        content_hash_deterministic = $true
+        missing_count = [int]$generatedMetadata.missing_count
+        visual_feature_counts = [ordered]@{
+            analysis_version = [string]$generatedMetadata.visual_feature_counts.analysis_version
+            valid = [int]$generatedMetadata.visual_feature_counts.valid
+            failed = [int]$generatedMetadata.visual_feature_counts.failed
+            not_analyzed = [int]$generatedMetadata.visual_feature_counts.not_analyzed
+            feature_rows = [int]$generatedMetadata.visual_feature_counts.feature_rows
+        }
         user_source_read_count = 0
         user_source_write_count = 0
     }

@@ -18,6 +18,8 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
     private static readonly string[] NegativeFixtures =
     [
         "missing-screenshot", "mutated-hash", "wrong-scenario-order", "fixture-count-mismatch",
+        "fixture-content-hash-mismatch", "fixture-display-name-not-chinese", "fixture-missing-count-mismatch",
+        "fixture-visual-outcome-mismatch", "fixture-schema-marker-mismatch",
         "fixture-path-escape", "folder-cycle-accepted", "duplicate-automation-id", "smart-result-mismatch",
         "query-plan-divergence", "stale-cancelled-query", "view-state-lost", "virtualization-realizes-all",
         "sort-unstable", "selection-truncated", "invalid-drop-accepted", "undo-mismatch",
@@ -49,6 +51,19 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         Assert.AreEqual(512, fixture.GetProperty("total_count").GetInt32());
         Assert.AreEqual(500, fixture.GetProperty("active_count").GetInt32());
         Assert.AreEqual(12, fixture.GetProperty("archived_count").GetInt32());
+        Assert.AreEqual(6, fixture.GetProperty("schema_version").GetInt32());
+        Assert.AreEqual(512, fixture.GetProperty("display_name_count").GetInt32());
+        Assert.AreEqual("zh-CN", fixture.GetProperty("display_name_language").GetString());
+        Assert.AreEqual(512, fixture.GetProperty("content_hash_count").GetInt32());
+        Assert.AreEqual("sha256", fixture.GetProperty("content_hash_algorithm").GetString());
+        Assert.IsTrue(fixture.GetProperty("content_hash_deterministic").GetBoolean());
+        Assert.AreEqual(32, fixture.GetProperty("missing_count").GetInt32());
+        var visual = fixture.GetProperty("visual_feature_counts");
+        Assert.AreEqual("visual-analysis-v2", visual.GetProperty("analysis_version").GetString());
+        Assert.AreEqual(128, visual.GetProperty("valid").GetInt32());
+        Assert.AreEqual(64, visual.GetProperty("failed").GetInt32());
+        Assert.AreEqual(320, visual.GetProperty("not_analyzed").GetInt32());
+        Assert.AreEqual(192, visual.GetProperty("feature_rows").GetInt32());
         var dpi = root.GetProperty("required_dpi_matrix").EnumerateArray()
             .Select(item => (item.GetProperty("width").GetInt32(), item.GetProperty("height").GetInt32(), item.GetProperty("scale_percent").GetInt32())).ToArray();
         CollectionAssert.AreEqual(new[] { (1366, 768, 100), (1920, 1080, 125), (1920, 1080, 150), (2560, 1440, 175) }, dpi);
