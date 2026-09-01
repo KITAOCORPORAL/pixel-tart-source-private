@@ -32,10 +32,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
     private readonly CancellationTokenSource _lifetimeCancellation = new();
+    private readonly object _loadMoreSync = new();
     private CancellationTokenSource? _analysisCancellation;
     private CancellationTokenSource? _queryCancellation;
+    private CancellationTokenSource? _loadMoreCancellation;
     private CancellationTokenSource? _batchCancellation;
     private long _queryGeneration;
+    private long _loadMoreGeneration;
     private long _analysisGeneration;
     private readonly DispatcherTimer _searchDebounce;
     private string _searchText = string.Empty;
@@ -81,8 +84,10 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly Dictionary<Guid, AssetVisualMatchView> _visualMatchByAsset = [];
     private readonly AssetLibraryWorkspaceSettings _workspaceSettings;
     private bool _isLoading = true;
+    private bool _isLoadingMore;
     private bool _isReady;
     private string _loadErrorMessage = string.Empty;
+    private string _loadMoreErrorMessage = string.Empty;
     private double _viewportWidth = 1280d;
     private bool _isRestoringWorkspace;
     private int _loadAttempt;
@@ -126,7 +131,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
         _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
         _searchDebounce.Tick += async (_, _) => { _searchDebounce.Stop(); if (IsReady) await RefreshAsync(); };
-        RefreshCommand = new(RefreshAsync, () => IsReady); RetryLoadCommand = new(RetryLoadAsync, () => !IsLoading); ImportCommand = new(ImportAsync, () => IsReady); LoadMoreCommand = new(LoadMoreAsync, () => IsReady && _nextCursor is not null);
+        RefreshCommand = new(RefreshAsync, () => IsReady); RetryLoadCommand = new(RetryLoadAsync, () => !IsLoading); ImportCommand = new(ImportAsync, () => IsReady); LoadMoreCommand = new(LoadMoreAsync, () => CanLoadMore);
         NewFolderCommand = new(NewFolderAsync, () => IsReady); NewSubfolderCommand = new(NewSubfolderAsync, () => IsReady && SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync, () => IsReady);
         NewTagCommand = new(NewTagAsync, () => IsReady); ApplyTagsCommand = new(ApplyTagsAsync, () => IsReady && SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
         AddFolderCommand = new(AddFolderAsync, () => IsReady && SelectedAssets.Count > 0 && SelectedFolder is not null); UndoCommand = new(UndoAsync, () => IsReady && LastUndoToken is not null);
@@ -160,11 +165,32 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         {
             if (!SetProperty(ref _isLoading, value)) return;
             NotifyContentState();
+            NotifyLoadMoreState();
             RetryLoadCommand.RaiseCanExecuteChanged();
+        }
+    }
+    /// <summary>True while the current page cursor is being fetched.</summary>
+    public bool IsLoadingMore
+    {
+        get => _isLoadingMore;
+        private set
+        {
+            if (!SetProperty(ref _isLoadingMore, value)) return;
+            NotifyLoadMoreState();
         }
     }
     public string LoadErrorMessage { get => _loadErrorMessage; private set { if (SetProperty(ref _loadErrorMessage, value)) NotifyContentState(); } }
     public bool HasLoadError => !string.IsNullOrWhiteSpace(LoadErrorMessage);
+    public string LoadMoreErrorMessage { get => _loadMoreErrorMessage; private set { if (SetProperty(ref _loadMoreErrorMessage, value)) NotifyLoadMoreState(); } }
+    public bool HasLoadMoreError => !string.IsNullOrWhiteSpace(LoadMoreErrorMessage);
+    public bool HasMore => !string.IsNullOrWhiteSpace(_nextCursor);
+    public bool CanLoadMore => IsReady && !IsLoading && !IsLoadingMore && HasMore;
+    public bool IsLoadMoreVisible => IsReady && !IsLoading && (HasMore || IsLoadingMore || HasLoadMoreError);
+    public string LoadMoreStatus => IsLoadingMore
+        ? "正在加载更多素材…"
+        : HasLoadMoreError ? LoadMoreErrorMessage
+        : HasMore ? "还有更多素材可加载"
+        : "已加载全部素材";
     public bool HasAssetCards => AssetCards.Count > 0;
     public bool IsEmptyStateVisible => !IsLoading && !HasLoadError && !HasAssetCards;
     public bool HasActiveQuery => !string.IsNullOrWhiteSpace(SearchText) || SelectedFolder is not null || SelectedTag is not null || SelectedSmartFolder is not null || IsTemporaryVisualMode;
@@ -439,6 +465,24 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         OnPropertyChanged(nameof(EmptyStateDescription));
     }
 
+    private void NotifyLoadMoreState()
+    {
+        OnPropertyChanged(nameof(HasLoadMoreError));
+        OnPropertyChanged(nameof(HasMore));
+        OnPropertyChanged(nameof(CanLoadMore));
+        OnPropertyChanged(nameof(IsLoadMoreVisible));
+        OnPropertyChanged(nameof(LoadMoreStatus));
+        LoadMoreCommand.RaiseCanExecuteChanged();
+    }
+
+    private void SetNextCursor(string? cursor)
+    {
+        var normalized = string.IsNullOrWhiteSpace(cursor) ? null : cursor;
+        if (string.Equals(_nextCursor, normalized, StringComparison.Ordinal)) return;
+        _nextCursor = normalized;
+        NotifyLoadMoreState();
+    }
+
     private void RecordLoadState(string stage, int attempt)
     {
         if (_loadStateController is null) return;
@@ -516,6 +560,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             attempt = Interlocked.Increment(ref _loadAttempt);
             OnPropertyChanged(nameof(LoadAttempt));
             _searchDebounce.Stop();
+            CancelLoadMoreRequest();
             _queryCancellation?.Cancel();
             IsLoading = true;
             LoadErrorMessage = string.Empty;
@@ -659,6 +704,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task<AssetLibraryRefreshOutcome> RefreshAsync(int? initializationAttempt, CancellationToken cancellationToken)
     {
+        CancelLoadMoreRequest();
         _queryCancellation?.Cancel();
         _queryCancellation?.Dispose();
         _queryCancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token, cancellationToken);
@@ -667,6 +713,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         var outcome = AssetLibraryRefreshOutcome.Completed;
         IsLoading = true;
         LoadErrorMessage = string.Empty;
+        LoadMoreErrorMessage = string.Empty;
         if (initializationAttempt is int loadingAttempt) RecordLoadState("initial-query-entered", loadingAttempt);
         try
         {
@@ -674,7 +721,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             {
                 var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120), token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetAssetCards(visual.Items.Select(item => item.Asset)); _nextCursor = visual.NextCursor;
+                SetAssetCards(visual.Items.Select(item => item.Asset)); SetNextCursor(visual.NextCursor);
                 _importDiagnostics.SetViewState(visual.TotalCount, AssetCards.Count, 0);
                 Status = $"临时视觉结果 · 共 {visual.TotalCount:N0} 个，当前显示 {AssetCards.Count:N0} 个";
                 UpdateP2QuerySummary(visual.TotalCount);
@@ -683,13 +730,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             {
                 var matches = await _visualQuery.FindSimilarAsync(_similarityQuery with { Scope = BuildQuery() }, token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetSimilarityMatches(matches); Status = $"临时相似结果 · {matches.Count} 项"; _nextCursor = null; UpdateP2QuerySummary(matches.Count);
+                SetSimilarityMatches(matches); Status = $"临时相似结果 · {matches.Count} 项"; SetNextCursor(null); UpdateP2QuerySummary(matches.Count);
             }
             else if (_visualResultMode == VisualResultMode.Color && _colorQuery is not null)
             {
                 var matches = await _visualQuery.SearchByColorAsync(_colorQuery with { Scope = BuildQuery() }, token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; _nextCursor = null; UpdateP2QuerySummary(matches.Count);
+                SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; SetNextCursor(null); UpdateP2QuerySummary(matches.Count);
             }
             else
             {
@@ -700,13 +747,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
                 if (initializationAttempt is not null && _loadStateController is not null)
                     _repositoryAssetCount = page.TotalCount;
-                SetAssetCards(page.Items); _nextCursor = page.NextCursor;
+                SetAssetCards(page.Items); SetNextCursor(page.NextCursor);
                 _importDiagnostics.SetViewState(page.TotalCount, AssetCards.Count, 0);
                 Status = page.RegexError is null ? $"共 {page.TotalCount:N0} 个素材，当前显示 {AssetCards.Count:N0} 个" : $"筛选错误：{page.RegexError}";
                 UpdateP2QuerySummary(page.TotalCount);
             }
             await ReconcilePersistedSelectionAsync(token);
-            OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
+            OnPropertyChanged(nameof(VisibleCount)); NotifyLoadMoreState();
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
         {
@@ -750,13 +797,126 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task LoadMoreAsync()
     {
-        if (_nextCursor is null) return;
-        if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
+        if (!TryBeginLoadMore(out var requestGeneration, out var queryGeneration, out var cursor, out var cancellation)) return;
+        var statusBefore = Status;
+        try
         {
-            var visual = await _visualQuery.QueryAsync(new(BuildQuery(), _visualFilter, 120, _nextCursor)); foreach (var item in visual.Items) AssetCards.Add(new(item.Asset) { Owner = this, TagSummary = GetP2TagSummary(item.Asset.AssetId) }); _nextCursor = visual.NextCursor;
+            if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
+            {
+                var visual = await _visualQuery.QueryAsync(new(BuildQuery() with { Cursor = null }, _visualFilter, 120, cursor), cancellation.Token);
+                EnsureCurrentLoadMore(requestGeneration, queryGeneration, cursor, cancellation.Token);
+                if (visual.Items.Count > 0 && string.Equals(visual.NextCursor, cursor, StringComparison.Ordinal))
+                    throw new InvalidOperationException("分页游标未前进。");
+                AddLoadMoreCards(visual.Items.Select(item => item.Asset));
+                SetNextCursor(visual.NextCursor);
+            }
+            else
+            {
+                var page = await _repository.QueryAsync(BuildQuery(cursor), cancellation.Token);
+                EnsureCurrentLoadMore(requestGeneration, queryGeneration, cursor, cancellation.Token);
+                if (!string.IsNullOrWhiteSpace(page.RegexError)) throw new InvalidOperationException(page.RegexError);
+                if (page.Items.Count > 0 && string.Equals(page.NextCursor, cursor, StringComparison.Ordinal))
+                    throw new InvalidOperationException("分页游标未前进。");
+                AddLoadMoreCards(page.Items);
+                SetNextCursor(page.NextCursor);
+            }
+            EnsureCurrentLoadMoreGeneration(requestGeneration, queryGeneration, cancellation.Token);
+            Status = $"已加载 {AssetCards.Count:N0} 个素材";
+            OnPropertyChanged(nameof(VisibleCount));
         }
-        else { var page = await _repository.QueryAsync(BuildQuery(_nextCursor)); foreach (var asset in page.Items) AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) }); _nextCursor = page.NextCursor; }
-        Status = $"已加载 {AssetCards.Count:N0} 个素材"; OnPropertyChanged(nameof(VisibleCount)); LoadMoreCommand.RaiseCanExecuteChanged();
+        catch (OperationCanceledException) when (cancellation.IsCancellationRequested)
+        {
+            if (IsCurrentLoadMore(requestGeneration, queryGeneration, cursor)) Status = statusBefore;
+        }
+        catch (Exception exception)
+        {
+            if (!IsCurrentLoadMore(requestGeneration, queryGeneration, cursor)) return;
+            _logService?.Error("加载更多素材失败。", exception);
+            LoadMoreErrorMessage = "无法加载更多素材，请重试。";
+            Status = LoadMoreErrorMessage;
+        }
+        finally
+        {
+            FinishLoadMore(cancellation);
+        }
+    }
+
+    private bool TryBeginLoadMore(out long requestGeneration, out long queryGeneration, out string cursor, out CancellationTokenSource cancellation)
+    {
+        lock (_loadMoreSync)
+        {
+            requestGeneration = 0;
+            queryGeneration = 0;
+            cursor = string.Empty;
+            cancellation = null!;
+            if (!CanLoadMore || _loadMoreCancellation is not null) return false;
+            cursor = _nextCursor!;
+            queryGeneration = Volatile.Read(ref _queryGeneration);
+            requestGeneration = Interlocked.Increment(ref _loadMoreGeneration);
+            cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
+            _loadMoreCancellation = cancellation;
+        }
+        LoadMoreErrorMessage = string.Empty;
+        IsLoadingMore = true;
+        Status = "正在加载更多素材…";
+        return true;
+    }
+
+    private void CancelLoadMoreRequest()
+    {
+        CancellationTokenSource? cancellation;
+        lock (_loadMoreSync)
+        {
+            Interlocked.Increment(ref _loadMoreGeneration);
+            cancellation = _loadMoreCancellation;
+        }
+        cancellation?.Cancel();
+    }
+
+    private bool IsCurrentLoadMoreGeneration(long requestGeneration, long queryGeneration) =>
+        requestGeneration == Volatile.Read(ref _loadMoreGeneration) &&
+        queryGeneration == Volatile.Read(ref _queryGeneration);
+
+    private bool IsCurrentLoadMore(long requestGeneration, long queryGeneration, string cursor) =>
+        IsCurrentLoadMoreGeneration(requestGeneration, queryGeneration) &&
+        string.Equals(cursor, _nextCursor, StringComparison.Ordinal);
+
+    private void EnsureCurrentLoadMore(long requestGeneration, long queryGeneration, string cursor, CancellationToken cancellationToken)
+    {
+        if (!IsCurrentLoadMore(requestGeneration, queryGeneration, cursor))
+            throw new OperationCanceledException("分页请求已过期。", cancellationToken);
+    }
+
+    private void EnsureCurrentLoadMoreGeneration(long requestGeneration, long queryGeneration, CancellationToken cancellationToken)
+    {
+        if (!IsCurrentLoadMoreGeneration(requestGeneration, queryGeneration))
+            throw new OperationCanceledException("分页请求已过期。", cancellationToken);
+    }
+
+    private void AddLoadMoreCards(IEnumerable<AssetItem> assets)
+    {
+        var existing = AssetCards.Select(card => card.Asset.AssetId).ToHashSet();
+        foreach (var asset in assets)
+            if (existing.Add(asset.AssetId))
+                AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) });
+        NotifyContentState();
+    }
+
+    private void FinishLoadMore(CancellationTokenSource cancellation)
+    {
+        var ownsRequest = false;
+        lock (_loadMoreSync)
+        {
+            if (ReferenceEquals(_loadMoreCancellation, cancellation))
+            {
+                _loadMoreCancellation = null;
+                ownsRequest = true;
+            }
+        }
+        if (!ownsRequest) return;
+        cancellation.Dispose();
+        IsLoadingMore = false;
+        NotifyLoadMoreState();
     }
 
     private async Task ImportAsync()
@@ -991,14 +1151,14 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private async Task FindSimilarAsync()
     {
         var asset = SelectedAssets.Count == 1 ? SelectedAssets[0] : null; if (asset is null) return;
-        _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
+        CancelLoadMoreRequest(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
         try
         {
             _similarityQuery = new(asset.AssetId, BuildQuery(), 100);
             var matches = await _visualQuery.FindSimilarAsync(_similarityQuery, token);
             if (generation != Volatile.Read(ref _queryGeneration)) return;
             _visualResultMode = VisualResultMode.Similarity; VisualModeLabel = $"与 {asset.DisplayName} 相似"; _visualFilter = null;
-            SetSimilarityMatches(matches); _nextCursor = null; Status = $"临时相似结果 · {matches.Count} 项 · {matches.FirstOrDefault()?.Scores.Explanation}"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
+            SetSimilarityMatches(matches); SetNextCursor(null); Status = $"临时相似结果 · {matches.Count} 项 · {matches.FirstOrDefault()?.Scores.Explanation}"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
             AddVisualSearchHistory(VisualSearchKind.Similarity, VisualModeLabel, asset.AssetId.ToString("D"));
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
@@ -1008,7 +1168,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private async Task SearchColorAsync()
     {
         if (!TryParseRgb(TargetColor, out var color)) { Status = "目标颜色格式错误，请输入 #RRGGBB"; return; }
-        _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
+        CancelLoadMoreRequest(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
         try
         {
             var filter = new VisualAssetFilter(PaletteColor: VisualAnalysisEngine.ToLab(color), MaximumDeltaE: ColorTolerance);
@@ -1016,7 +1176,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             var matches = await _visualQuery.SearchByColorAsync(_colorQuery, token);
             if (generation != Volatile.Read(ref _queryGeneration)) return;
             _visualResultMode = VisualResultMode.Color; _visualFilter = null; VisualModeLabel = $"颜色 {TargetColor} · ΔE76≤{ColorTolerance:F0}";
-            SetColorMatches(matches); _nextCursor = null; Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
+            SetColorMatches(matches); SetNextCursor(null); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
             AddVisualSearchHistory(VisualSearchKind.Color, VisualModeLabel, $"{TargetColor}|{ColorTolerance:F2}");
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
@@ -1033,14 +1193,14 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         var asset = SelectedAssets.Count == 1 ? SelectedAssets[0] : null;
         if (asset is null || Analysis is null) return;
-        _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
+        CancelLoadMoreRequest(); _queryCancellation?.Cancel(); _queryCancellation?.Dispose(); _queryCancellation = new(); var token = _queryCancellation.Token; var generation = Interlocked.Increment(ref _queryGeneration);
         try
         {
             _similarityQuery = new(asset.AssetId, BuildQuery(), 100, VisualSimilarityMode.Palette);
             var matches = await _visualQuery.FindSimilarAsync(_similarityQuery, token);
             if (generation != Volatile.Read(ref _queryGeneration)) return;
             _visualResultMode = VisualResultMode.Similarity; _visualFilter = null; VisualModeLabel = $"与 {asset.DisplayName} 配色相近";
-            SetSimilarityMatches(matches); _nextCursor = null; Status = $"临时配色相似结果 · {matches.Count} 项 · Top 5 Palette + Weight"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
+            SetSimilarityMatches(matches); SetNextCursor(null); Status = $"临时配色相似结果 · {matches.Count} 项 · Top 5 Palette + Weight"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
             AddVisualSearchHistory(VisualSearchKind.Palette, VisualModeLabel, asset.AssetId.ToString("D"));
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
@@ -1426,6 +1586,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _lifetimeCancellation.Cancel();
         _searchDebounce.Stop();
         _analysisCancellation?.Cancel();
+        CancelLoadMoreRequest();
         _queryCancellation?.Cancel();
         _batchCancellation?.Cancel();
         _analysisCoordinator.ClearSelection();
