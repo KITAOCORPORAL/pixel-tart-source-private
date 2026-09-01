@@ -18,7 +18,7 @@ function Relative-Path([string]$Root, [string]$Path) {
     if (-not $pathFull.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
         throw "Path is outside the fingerprint root: $Path"
     }
-    return $pathFull.Substring($prefix.Length).Replace('\\', '/')
+    return $pathFull.Substring($prefix.Length).Replace('\', '/')
 }
 function Bytes-ToHex([byte[]]$Bytes) {
     return -join ($Bytes | ForEach-Object { $_.ToString('x2', [Globalization.CultureInfo]::InvariantCulture) })
@@ -43,7 +43,15 @@ function Read-Json([string]$Path, [string]$Name) {
     try { return Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json }
     catch { Fail "$Name is not valid JSON: $($_.Exception.Message)" }
 }
-function Hash([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
+function Hash([string]$Path) {
+    $stream = [IO.File]::Open($Path, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+    try {
+        $algorithm = [Security.Cryptography.SHA256]::Create()
+        try { return (($algorithm.ComputeHash($stream) | ForEach-Object { $_.ToString('x2', [Globalization.CultureInfo]::InvariantCulture) }) -join '').ToLowerInvariant() }
+        finally { $algorithm.Dispose() }
+    }
+    finally { $stream.Dispose() }
+}
 function Quote-ProcessArgument([AllowEmptyString()][string]$Value) {
     if ($Value.Length -eq 0) { return '""' }
     if ($Value -notmatch '[\s"]') { return $Value }

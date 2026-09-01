@@ -1013,9 +1013,33 @@ function Invoke-Validator {
     param([string]$ActiveRunRoot, [string]$LogDirectory, [string]$Name = 'validator')
     $validator = Join-Path $PSScriptRoot 'Test-P2AssetLibraryAutomatedEvidence.ps1'
     if (-not (Test-Path -LiteralPath $validator -PathType Leaf)) { throw "Validator not found: $validator" }
-    return Invoke-LoggedProcess -FilePath 'powershell.exe' `
+    $targetRoot = [IO.Path]::GetFullPath($ActiveRunRoot).TrimEnd('\', '/')
+    $targetManifestPath = Join-Path $targetRoot 'run-manifest.json'
+    if (-not (Test-Path -LiteralPath $targetManifestPath -PathType Leaf)) { throw "Validator target manifest not found: $targetManifestPath" }
+    try { $targetManifest = Get-Content -LiteralPath $targetManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw "Validator target manifest is not valid JSON: $targetManifestPath`n$($_.Exception.Message)" }
+    $targetHead = [string]$targetManifest.source_head
+    if ($targetHead -notmatch '^[0-9a-f]{40}$') { throw "Validator target manifest has an invalid source_head: $targetManifestPath" }
+    $result = Invoke-LoggedProcess -FilePath 'powershell.exe' `
         -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $validator, '-RunRoot', $ActiveRunRoot) `
         -Name $Name -LogDirectory $LogDirectory -Timeout 300
+    $stderrText = Get-Content -LiteralPath $result.stderr -Raw -Encoding UTF8 -ErrorAction Stop
+    if (-not [string]::IsNullOrWhiteSpace($stderrText)) {
+        throw "Validator emitted unexpected stderr. See $($result.stderr)."
+    }
+    $stdoutText = Get-Content -LiteralPath $result.stdout -Raw -Encoding UTF8 -ErrorAction Stop
+    if ([string]::IsNullOrWhiteSpace($stdoutText)) { throw "Validator emitted empty stdout. See $($result.stdout)." }
+    try { $validation = $stdoutText | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw "Validator stdout is not valid JSON. See $($result.stdout).`n$($_.Exception.Message)" }
+    $validationRoot = [string]$validation.run_root
+    try { $validationRoot = [IO.Path]::GetFullPath($validationRoot).TrimEnd('\', '/') } catch { $validationRoot = '' }
+    if ([string]$validation.schema -cne 'pixel-tart-p2-automated-validation-result/v1' -or
+        [string]$validation.status -cne 'passed' -or
+        $validationRoot -cne $targetRoot -or
+        [string]$validation.source_head -cne $targetHead) {
+        throw "Validator stdout failed the result contract. See $($result.stdout)."
+    }
+    return $result
 }
 
 function Invoke-RecoveryTest {

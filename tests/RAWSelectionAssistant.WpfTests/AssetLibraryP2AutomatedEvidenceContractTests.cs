@@ -114,6 +114,86 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         Assert.DoesNotContain("GetRelativePath", validator, StringComparison.Ordinal);
         Assert.DoesNotContain("HashData", validator, StringComparison.Ordinal);
         Assert.DoesNotContain("ToHexString", validator, StringComparison.Ordinal);
+        StringAssert.Contains(validator, ".Replace('\\', '/')");
+    }
+
+    [TestMethod]
+    public void RunnerUsesWindowsPowerShellCompatibleHashAndValidatorHandshake()
+    {
+        var runner = Read("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");
+        Assert.DoesNotContain("GetRelativePath", runner, StringComparison.Ordinal);
+        Assert.DoesNotContain("IsPathFullyQualified", runner, StringComparison.Ordinal);
+        Assert.DoesNotContain("HashData", runner, StringComparison.Ordinal);
+        Assert.DoesNotContain("ToHexString", runner, StringComparison.Ordinal);
+        ContainsAll(runner, "function Invoke-LoggedProcess", "if ($result.exit_code -ne 0)",
+            "Validator emitted unexpected stderr", "Validator stdout is not valid JSON",
+            "Validator stdout failed the result contract", "pixel-tart-p2-automated-validation-result/v1",
+            "targetRoot", "targetHead");
+    }
+
+    [TestMethod]
+    public void WindowsPowerShellRunnerRejectsRelativeRootAndHandshakeDrift()
+    {
+        var runnerPath = Path("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");
+        var relative = StartPowerShell(new[]
+        {
+            "-File", runnerPath, "-Mode", "ValidateExistingRun", "-RunRoot", ".validation\\relative-root"
+        }, RepositoryRoot());
+        Assert.AreNotEqual(0, relative.ExitCode, "ValidateExistingRun accepted a relative run root.");
+
+        using var temp = new TemporaryDirectory("PixelTart-P2-ValidatorHandshake");
+        var extractionScript = System.IO.Path.Combine(temp.Path, "handshake.ps1");
+        var copiedValidator = System.IO.Path.Combine(temp.Path, "Test-P2AssetLibraryAutomatedEvidence.ps1");
+        File.WriteAllText(copiedValidator, "# stub");
+        File.WriteAllText(extractionScript, HandshakeProbeScript);
+        var sourceHead = new string('a', 40);
+        var manifest = new
+        {
+            schema_version = "pixel-tart-p2-automated-run/v1",
+            source_head = sourceHead
+        };
+        var runRoot = System.IO.Path.Combine(temp.Path, "run");
+        Directory.CreateDirectory(runRoot);
+        File.WriteAllText(System.IO.Path.Combine(runRoot, "run-manifest.json"), JsonSerializer.Serialize(manifest));
+        foreach (var testCase in new[] { "valid", "stderr", "invalid-json" })
+        {
+            var probe = StartPowerShell(new[] { "-File", extractionScript }, RepositoryRoot(), new Dictionary<string, string>
+            {
+                ["P2_RUNNER_PATH"] = runnerPath,
+                ["P2_ROOT"] = runRoot,
+                ["P2_HEAD"] = sourceHead,
+                ["P2_CASE"] = testCase,
+                ["P2_LOG"] = System.IO.Path.Combine(temp.Path, "logs", testCase)
+            });
+            Assert.AreEqual(0, probe.ExitCode, $"Invoke-Validator handshake case '{testCase}' did not produce the expected result. {probe.Output} {probe.Error}");
+        }
+    }
+
+    [TestMethod]
+    public void ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()
+    {
+        var repository = RepositoryRoot();
+        var validationRoot = System.IO.Path.Combine(repository, ".validation");
+        var candidate = Directory.Exists(validationRoot)
+            ? Directory.EnumerateDirectories(validationRoot, "P2-Automated-Acceptance-*")
+                .OrderByDescending(Directory.GetLastWriteTimeUtc)
+                .FirstOrDefault(path =>
+                {
+                    try
+                    {
+                        using var document = JsonDocument.Parse(File.ReadAllText(System.IO.Path.Combine(path, "run-manifest.json")));
+                        return document.RootElement.TryGetProperty("automated_capture_status", out var status) &&
+                               status.GetString() == "captured";
+                    }
+                    catch { return false; }
+                })
+            : null;
+        if (candidate is null) Assert.Inconclusive("No captured P2 run root is available for the read-only integration probe.");
+        var before = TreeFingerprint(candidate);
+        var runner = Path("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");
+        var result = StartPowerShell(new[] { "-File", runner, "-Mode", "ValidateExistingRun", "-RunRoot", candidate }, repository);
+        Assert.AreEqual(0, result.ExitCode, $"ValidateExistingRun rejected a captured run. {result.Output} {result.Error}");
+        Assert.AreEqual(before, TreeFingerprint(candidate), "ValidateExistingRun changed the sealed run root.");
     }
 
     [TestMethod]
@@ -140,7 +220,8 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
     {
         var validator = Read("tools/AssetLibraryP2AutomatedAcceptance/Test-P2AssetLibraryAutomatedEvidence.ps1");
         ContainsAll(validator, "$fingerprintBefore = Tree-Fingerprint $root", "$fingerprintAfter = Tree-Fingerprint $root",
-            "input tree fingerprint", "Get-FileHash", "runtime_database_count_after", "display settings unchanged");
+            "input tree fingerprint", "ComputeHash", "FileMode", "runtime_database_count_after", "display settings unchanged");
+        Assert.DoesNotContain("Get-FileHash", validator, StringComparison.Ordinal);
         foreach (var forbidden in new[] { "Set-Content", "Add-Content", "Out-File", "Remove-Item", "Move-Item", "Copy-Item", "WriteAllText", "WriteAllBytes" })
             Assert.IsFalse(validator.Contains(forbidden, StringComparison.OrdinalIgnoreCase), $"validator contains mutator {forbidden}");
     }
@@ -164,6 +245,95 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
 
     private static string Read(string relative) => File.ReadAllText(Path(relative));
     private static string Path(string relative) => System.IO.Path.Combine(RepositoryRoot(), relative.Replace('/', System.IO.Path.DirectorySeparatorChar));
+
+    private static (int ExitCode, string Output, string Error) StartPowerShell(
+        IEnumerable<string> arguments,
+        string workingDirectory,
+        IReadOnlyDictionary<string, string>? environment = null)
+    {
+        var start = new ProcessStartInfo("powershell.exe")
+        {
+            WorkingDirectory = workingDirectory,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+        foreach (var argument in arguments) start.ArgumentList.Add(argument);
+        if (environment is not null)
+            foreach (var pair in environment) start.Environment[pair.Key] = pair.Value;
+        using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell process did not start.");
+        var outputTask = process.StandardOutput.ReadToEndAsync();
+        var errorTask = process.StandardError.ReadToEndAsync();
+        process.WaitForExit();
+        return (process.ExitCode, outputTask.GetAwaiter().GetResult(), errorTask.GetAwaiter().GetResult());
+    }
+
+    private static string TreeFingerprint(string root)
+    {
+        var fullRoot = System.IO.Path.GetFullPath(root).TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
+        var rows = Directory.EnumerateFiles(fullRoot, "*", SearchOption.AllDirectories)
+            .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+            .Select(path =>
+            {
+                var relative = System.IO.Path.GetRelativePath(fullRoot, path).Replace(System.IO.Path.DirectorySeparatorChar, '/');
+                var hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();
+                return $"{relative}|{new FileInfo(path).Length}|{hash}";
+            });
+        return Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(string.Join("\n", rows)))).ToLowerInvariant();
+    }
+
+    private sealed class TemporaryDirectory : IDisposable
+    {
+        public TemporaryDirectory(string prefix)
+        {
+            Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"{prefix}-{Guid.NewGuid():N}");
+            Directory.CreateDirectory(Path);
+        }
+
+        public string Path { get; }
+
+        public void Dispose()
+        {
+            try { Directory.Delete(Path, recursive: true); }
+            catch { }
+        }
+    }
+
+    private const string HandshakeProbeScript = """
+$ErrorActionPreference = 'Stop'
+$runner = Get-Content -LiteralPath $env:P2_RUNNER_PATH -Raw
+$start = $runner.IndexOf('function Invoke-Validator', [StringComparison]::Ordinal)
+$end = $runner.IndexOf('function Invoke-RecoveryTest', $start, [StringComparison]::Ordinal)
+if ($start -lt 0 -or $end -le $start) { throw 'Could not extract Invoke-Validator.' }
+$functionText = $runner.Substring($start, $end - $start)
+$functionText = $functionText.Replace('$PSScriptRoot', "'$(Split-Path -Parent $env:P2_RUNNER_PATH)'")
+Invoke-Expression $functionText
+$script:stubCase = $env:P2_CASE
+function Invoke-LoggedProcess {
+    param([string]$FilePath, [string[]]$Arguments, [string]$Name, [string]$LogDirectory, [int]$Timeout)
+    [IO.Directory]::CreateDirectory($LogDirectory) | Out-Null
+    $stdout = Join-Path $LogDirectory ($Name + '.stdout.log')
+    $stderr = Join-Path $LogDirectory ($Name + '.stderr.log')
+    $payload = @{ schema = 'pixel-tart-p2-automated-validation-result/v1'; status = 'passed'; run_root = $env:P2_ROOT; source_head = $env:P2_HEAD } | ConvertTo-Json -Compress
+    if ($script:stubCase -eq 'invalid-json') { $payload = 'not-json' }
+    $errorText = if ($script:stubCase -eq 'stderr') { 'simulated validator warning' } else { '' }
+    [IO.File]::WriteAllText($stdout, $payload)
+    [IO.File]::WriteAllText($stderr, $errorText)
+    [pscustomobject]@{ exit_code = 0; stdout = $stdout; stderr = $stderr }
+}
+$root = $env:P2_ROOT
+try {
+    [void](Invoke-Validator $root $env:P2_LOG 'probe')
+    if ($env:P2_CASE -ne 'valid') { throw 'validator handshake unexpectedly accepted malformed output' }
+    exit 0
+}
+catch {
+    if ($env:P2_CASE -eq 'valid') { [Console]::Error.WriteLine(($_ | Out-String)); exit 1 }
+    exit 0
+}
+""";
+
     private static string RepositoryRoot()
     {
         var cursor = new DirectoryInfo(AppContext.BaseDirectory);
