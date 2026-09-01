@@ -104,6 +104,19 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void ValidatorUsesWindowsPowerShellCompatibleAbsolutePathGuard()
+    {
+        var validator = Read("tools/AssetLibraryP2AutomatedAcceptance/Test-P2AssetLibraryAutomatedEvidence.ps1");
+        StringAssert.Contains(validator, "function Test-AbsolutePath");
+        StringAssert.Contains(validator, "Test-AbsolutePath $RunRoot");
+        Assert.DoesNotContain("IsPathFullyQualified", validator, StringComparison.Ordinal);
+        ContainsAll(validator, "[A-Za-z]:", "GetFullPath", "Relative-Path", "Bytes-ToHex", "Sha256Bytes");
+        Assert.DoesNotContain("GetRelativePath", validator, StringComparison.Ordinal);
+        Assert.DoesNotContain("HashData", validator, StringComparison.Ordinal);
+        Assert.DoesNotContain("ToHexString", validator, StringComparison.Ordinal);
+    }
+
+    [TestMethod]
     public void RunnerExposesFourModesAndOneRestartOnly()
     {
         var runner = Read("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");

@@ -6,6 +6,28 @@ $ErrorActionPreference = 'Stop'
 
 function Fail([string]$Message) { throw "P2 automated evidence rejected: $Message" }
 function Full([string]$Path) { [IO.Path]::GetFullPath($Path).TrimEnd('\', '/') }
+function Test-AbsolutePath([AllowEmptyString()][string]$Path) {
+    if ([string]::IsNullOrWhiteSpace($Path)) { return $false }
+    if ($Path -notmatch '^(?:[A-Za-z]:[\\/]|\\\\)') { return $false }
+    try { [void][IO.Path]::GetFullPath($Path); return $true } catch { return $false }
+}
+function Relative-Path([string]$Root, [string]$Path) {
+    $rootFull = Full $Root
+    $pathFull = Full $Path
+    $prefix = $rootFull + [IO.Path]::DirectorySeparatorChar
+    if (-not $pathFull.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Path is outside the fingerprint root: $Path"
+    }
+    return $pathFull.Substring($prefix.Length).Replace('\\', '/')
+}
+function Bytes-ToHex([byte[]]$Bytes) {
+    return -join ($Bytes | ForEach-Object { $_.ToString('x2', [Globalization.CultureInfo]::InvariantCulture) })
+}
+function Sha256Bytes([byte[]]$Bytes) {
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try { return $algorithm.ComputeHash($Bytes) }
+    finally { $algorithm.Dispose() }
+}
 function Inside([string]$Path, [string]$Parent) {
     $child = Full $Path; $root = Full $Parent
     return $child.StartsWith($root + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
@@ -141,6 +163,12 @@ function Require-Equal($Actual, $Expected, [string]$Name) {
 function Require-String($Value, [string]$Name, [string]$Pattern = '^.+$') {
     if ($Value -isnot [string] -or $Value -cnotmatch $Pattern) { Fail "$Name is missing or invalid." }
 }
+function Property-Value($Object, [string]$Name) {
+    if ($null -eq $Object) { return $null }
+    $property = $Object.PSObject.Properties[$Name]
+    if ($null -eq $property) { return $null }
+    return $property.Value
+}
 function Require-ZeroFields($Object, [string[]]$Names, [string]$Owner) {
     foreach ($name in $Names) {
         $property = $Object.PSObject.Properties[$name]
@@ -149,13 +177,13 @@ function Require-ZeroFields($Object, [string[]]$Names, [string]$Owner) {
 }
 function Tree-Fingerprint([string]$Root) {
     $rows = Get-ChildItem -LiteralPath $Root -Recurse -Force -File | Sort-Object FullName | ForEach-Object {
-        "{0}|{1}|{2}" -f ([IO.Path]::GetRelativePath($Root, $_.FullName).Replace('\','/')), $_.Length, (Hash $_.FullName)
+        "{0}|{1}|{2}" -f (Relative-Path $Root $_.FullName), $_.Length, (Hash $_.FullName)
     }
     $bytes = [Text.Encoding]::UTF8.GetBytes(($rows -join "`n"))
-    return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
+    return (Bytes-ToHex (Sha256Bytes $bytes)).ToLowerInvariant()
 }
 
-if (-not [IO.Path]::IsPathFullyQualified($RunRoot)) { Fail 'RunRoot must be absolute.' }
+if (-not (Test-AbsolutePath $RunRoot)) { Fail 'RunRoot must be absolute.' }
 $root = Full $RunRoot
 if (-not (Test-Path -LiteralPath $root -PathType Container)) { Fail 'RunRoot does not exist.' }
 if ((Get-Item -LiteralPath $root -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { Fail 'RunRoot may not be a reparse point.' }
@@ -375,24 +403,51 @@ foreach ($bounds in $boundsPayloads) {
 $dpiBounds = @($boundsPayloads | Where-Object { [int]$_.viewport.scale_percent -in @(100,125,150,175) })
 foreach ($dpi in 100,125,150,175) { if (@($dpiBounds | Where-Object { [int]$_.viewport.scale_percent -eq $dpi }).Count -lt 1) { Fail "DPI $dpi evidence is absent." } }
 
-$selectionEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'selection-large/v1' }) | Select-Object -First 1
+$selectionEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'selection-large/v1' -and
+        $null -ne (Property-Value $payload 'count') -and
+        $null -ne (Property-Value $payload 'asset_ids') -and
+        $null -ne (Property-Value $payload 'elapsed_ms')
+}) | Select-Object -First 1
 if ($null -eq $selectionEvidence -or [int]$selectionEvidence.payload.count -ne 100 -or @($selectionEvidence.payload.asset_ids | Select-Object -Unique).Count -ne 100 -or [double]$selectionEvidence.payload.elapsed_ms -gt 250) { Fail '100-item selection evidence failed.' }
-$organizationEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'organization-browser/v1' -and $_.payload.before }) | Select-Object -First 1
+$organizationEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'organization-browser/v1' -and $null -ne (Property-Value $payload 'before')
+}) | Select-Object -First 1
 if ($null -eq $organizationEvidence -or -not [bool]$organizationEvidence.payload.before.FolderTreeAcyclic -or [int]$organizationEvidence.payload.before.FolderNodeCount -lt 3) { Fail 'organization tree cycle/count evidence failed.' }
-$smartEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'smart-tag-query/v1' -and $_.payload.tag }) | Select-Object -First 1
+$smartEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'smart-tag-query/v1' -and $null -ne (Property-Value $payload 'tag')
+}) | Select-Object -First 1
 if ($null -eq $smartEvidence -or [int]$smartEvidence.payload.tag.QueryTotalCount -ne 250 -or [int]$smartEvidence.payload.smart.QueryTotalCount -ne 166) { Fail 'deterministic tag/smart query result counts differ.' }
-$viewEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'four-views-query-sort/v1' -and $_.payload.views }) | Select-Object -First 1
+$viewEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'four-views-query-sort/v1' -and $null -ne (Property-Value $payload 'views')
+}) | Select-Object -First 1
 $viewNames = @($viewEvidence.payload.views | ForEach-Object { [string]$_.mode })
 if (($viewNames -join '|') -cne 'Grid|Masonry|Justified|List') { Fail 'four-view evidence differs.' }
 foreach ($row in @($viewEvidence.payload.views)) {
     if (-not [bool]$row.snapshot.IsVirtualizing -or $row.snapshot.VirtualizationMode -cne 'Recycling' -or
         [int]$row.snapshot.RealizedItemCount -ge [int]$row.snapshot.QueryTotalCount) { Fail 'view virtualization realized the complete query or left recycling mode.' }
 }
-$commandEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'metadata-drag-command/v1' -and $_.payload.drop }) | Select-Object -First 1
+$commandEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'metadata-drag-command/v1' -and $null -ne (Property-Value $payload 'drop')
+}) | Select-Object -First 1
 if ($null -eq $commandEvidence -or -not [bool]$commandEvidence.payload.drop.CanUndo -or [double]$commandEvidence.payload.elapsed_ms -gt 750) { Fail 'metadata drag command evidence failed.' }
-$inspectorEvidence = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'inspector-states/v1' }) | Select-Object -First 1
+$inspectorEvidence = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'inspector-states/v1' -and
+        $null -ne (Property-Value $payload 'query') -and
+        $null -ne (Property-Value $payload 'single') -and
+        $null -ne (Property-Value $payload 'multiple')
+}) | Select-Object -First 1
 if ($inspectorEvidence.payload.query.InspectorMode -cne 'query' -or $inspectorEvidence.payload.single.InspectorMode -cne 'single' -or $inspectorEvidence.payload.multiple.InspectorMode -cne 'multiple') { Fail 'inspector states differ.' }
-$performance = @($artifactJson.Values | Where-Object { $_.scenario_id -eq 'layout-dpi-performance/v1' -and $_.payload.first_screen_ms }) | Select-Object -First 1
+$performance = @($artifactJson.Values | Where-Object {
+    $payload = Property-Value $_ 'payload'
+    [string](Property-Value $_ 'scenario_id') -eq 'layout-dpi-performance/v1' -and $null -ne (Property-Value $payload 'first_screen_ms')
+}) | Select-Object -First 1
 if ($null -eq $performance -or [double]$performance.payload.first_screen_ms -gt 1500 -or [double]$performance.payload.ui_block_ms -gt 100) { Fail 'layout/UI performance threshold failed.' }
 
 $audit = Read-Json (Join-Path $root 'runner/database-consistency-audit.json') 'pre-cleanup database audit'
