@@ -1,0 +1,98 @@
+{
+  "schema": "pixel-tart-asset-library-p2-automated-acceptance-contract/v1",
+  "validation_mode": "automated",
+  "owner_manual_ux_smoke": "waived",
+  "manual_evidence_claimed": false,
+  "automated_capture_status": "captured",
+  "historical_manual_gate": "not_closed_superseded_as_release_blocker",
+  "manifest_file": "run-manifest.json",
+  "manifest_schema": "pixel-tart-p2-automated-run/v1",
+  "event_journal_file": "app/evidence/events.ndjson",
+  "summary_journal_file": "app/evidence/summary.ndjson",
+  "summary_file": "app/evidence/summary.json",
+  "required_runner_session_count": 11,
+  "process_session_id_format": "lowercase-hex-32",
+  "pre_cleanup_database_audit_schema": "pixel-tart-p2-pre-cleanup-database-audit/v1",
+  "pre_cleanup_database_audit_file": "runner/database-consistency-audit.json",
+  "validate_existing_run_must_preserve_tree": true,
+  "source_head_format": "lowercase-hex-40",
+  "sha256_format": "lowercase-hex-64",
+  "expected_executable_name": "PixelTart_ModularHarness_V1_DevPreview.exe",
+  "expected_application_name": "PixelTart_ModularHarness_V1_DevPreview.dll",
+  "expected_asset_module_name": "PixelTart.Modules.AssetLibrary.dll",
+  "binary_snapshot_schema": "pixel-tart-p2-run-owned-binary-snapshot/v1",
+  "repository": {
+    "implementation": "SqliteAssetLibraryRepository",
+    "schema_version": 6,
+    "schema_query": "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;",
+    "database_header": "SQLite format 3",
+    "required_schema_marker": "AssetLibrarySchemaInfo"
+  },
+  "fixture": {
+    "schema": "pixel-tart-p2-synthetic-fixture/v1",
+    "total_count": 512,
+    "active_count": 500,
+    "archived_count": 12,
+    "user_source_read_count": 0,
+    "user_source_write_count": 0
+  },
+  "required_scenario_order": [
+    "fixture-integrity/v1",
+    "organization-browser/v1",
+    "smart-tag-query/v1",
+    "four-views-query-sort/v1",
+    "selection-large/v1",
+    "metadata-drag-command/v1",
+    "inspector-states/v1",
+    "resilience-states/v1",
+    "restart-persistence/v1",
+    "layout-dpi-performance/v1"
+  ],
+  "required_view_modes": ["grid", "waterfall", "justified", "list"],
+  "required_evidence_kinds": [
+    "screenshots", "bounds", "queries", "selections", "views", "commands",
+    "inspectors", "performance", "databases"
+  ],
+  "required_dpi_matrix": [
+    { "width": 1366, "height": 768, "scale_percent": 100 },
+    { "width": 1920, "height": 1080, "scale_percent": 125 },
+    { "width": 1920, "height": 1080, "scale_percent": 150 },
+    { "width": 2560, "height": 1440, "scale_percent": 175 }
+  ],
+  "performance_thresholds_ms": {
+    "first_screen": 1500,
+    "view_switch": 250,
+    "sort": 350,
+    "select_100": 250,
+    "drag_drop_100": 750,
+    "ui_block": 100
+  },
+  "safety_zero_fields": [
+    "desktop_input_injection_count",
+    "uia_invoke_count",
+    "forced_foreground_count",
+    "real_display_setting_write_count",
+    "eagle_read_count",
+    "eagle_write_count",
+    "user_source_read_count",
+    "user_source_write_count",
+    "user_source_move_count",
+    "user_source_delete_count",
+    "user_source_rename_count",
+    "direct_width_mutation_count",
+    "direct_settings_mutation_count",
+    "direct_sqlite_row_edit_count"
+  ],
+  "required_negative_fixtures": [
+    "missing-screenshot", "mutated-hash", "wrong-scenario-order",
+    "fixture-count-mismatch", "fixture-path-escape", "folder-cycle-accepted",
+    "duplicate-automation-id", "smart-result-mismatch", "query-plan-divergence",
+    "stale-cancelled-query", "view-state-lost", "virtualization-realizes-all",
+    "sort-unstable", "selection-truncated", "invalid-drop-accepted",
+    "undo-mismatch", "prohibited-command-present", "inspector-mode-mismatch",
+    "restart-identity-reused", "dpi-overflow", "performance-threshold-exceeded",
+    "ui-block-exceeded", "user-source-write", "eagle-write", "residual-process",
+    "database-not-v6", "cross-run-splice", "runner-session-splice",
+    "process-session-splice", "binary-hash-mismatch", "input-tree-mutated"
+  ]
+}

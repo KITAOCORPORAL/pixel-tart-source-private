@@ -31,12 +31,14 @@
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true'">$(DefineConstants);MODULAR_HARNESS_DEV_PREVIEW</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">$(DefineConstants);ASSET_LIBRARY_P1_STATE_ACCEPTANCE</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE</DefineConstants>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE</DefineConstants>
     <RootNamespace>RAWSelectionAssistant</RootNamespace>
     <Version>$(PixelTartVersion)</Version>
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and ('$(AssetLibraryP1StateAcceptance)' == 'true' or ('$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(Configuration)' == 'Debug')) and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
     <Authors>像素蛋挞</Authors>
     <Product>像素蛋挞</Product>
     <Description>面向摄影师的本地分片、归片与照片处理工具平台</Description>
@@ -92,6 +94,19 @@
            Text="AssetLibraryP1AutomatedAcceptance is restricted to Debug builds." />
     <Error Condition="'$(AssetLibraryP1StateAcceptance)' == 'true'"
            Text="AssetLibraryP1AutomatedAcceptance cannot be combined with the historical manual state seam." />
+  </Target>
+
+  <Target Name="ValidateAssetLibraryP2AutomatedAcceptanceBuild"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(AssetLibraryP2AutomatedAcceptance)' == 'true'">
+    <Error Condition="'$(ModularHarnessDevPreview)' != 'true'"
+           Text="AssetLibraryP2AutomatedAcceptance requires ModularHarnessDevPreview=true." />
+    <Error Condition="'$(AcceptanceBuild)' == 'true'"
+           Text="AssetLibraryP2AutomatedAcceptance cannot be combined with AcceptanceBuild." />
+    <Error Condition="'$(Configuration)' != 'Debug'"
+           Text="AssetLibraryP2AutomatedAcceptance is restricted to Debug builds." />
+    <Error Condition="'$(AssetLibraryP1StateAcceptance)' == 'true' or '$(AssetLibraryP1AutomatedAcceptance)' == 'true'"
+           Text="AssetLibraryP2AutomatedAcceptance cannot be combined with a P1 acceptance seam." />
   </Target>
 
 </Project>

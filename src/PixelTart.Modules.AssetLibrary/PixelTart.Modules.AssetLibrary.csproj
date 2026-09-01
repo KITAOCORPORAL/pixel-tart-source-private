@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>PixelTart.Modules.AssetLibrary</RootNamespace>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE</DefineConstants>
+    <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">$(DefineConstants);ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\PixelTart.Kernel\PixelTart.Kernel.csproj" />
