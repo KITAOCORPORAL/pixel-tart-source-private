@@ -17,6 +17,8 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task UpdateAssetAsync(Guid assetId, int? rating = null, string? comment = null, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> UpdateAssetMetadataAsync(Guid assetId, int? rating = null, string? comment = null, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> UpdateAssetsMetadataAsync(IEnumerable<Guid> assetIds, int? rating = null, string? comment = null, CancellationToken cancellationToken = default);
+    Task<AssetLibraryBatchResult> SetAssetsArchivedAsync(IEnumerable<Guid> assetIds, bool isArchived, CancellationToken cancellationToken = default);
+    Task<AssetLibraryBatchResult> SetAssetsMissingAsync(IEnumerable<Guid> assetIds, bool isMissing, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<AssetFolder>> ListFoldersAsync(bool includeArchived = false, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetFolderTreeItem>> GetFolderTreeAsync(bool includeArchived = false, CancellationToken cancellationToken = default);
@@ -27,6 +29,8 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetFolderBatchCreateResult> BatchCreateFoldersAsync(string paths, Guid? parentFolderId = null, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetFolder>> CopyFolderStructureAsync(Guid sourceFolderId, Guid? targetParentFolderId, string? rootName = null, CancellationToken cancellationToken = default);
     Task ArchiveFolderAsync(Guid folderId, CancellationToken cancellationToken = default);
+    Task<AssetLibraryBatchResult> SetFolderArchivedAsync(Guid folderId, bool isArchived, CancellationToken cancellationToken = default);
+    Task<AssetLibraryBatchResult> RestoreFolderAsync(Guid folderId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetFolderMembership>> ListFolderMembershipsAsync(Guid? folderId = null, Guid? assetId = null, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> AddToFolderAsync(IEnumerable<Guid> assetIds, Guid folderId, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> AddToFoldersAsync(IEnumerable<Guid> assetIds, IEnumerable<Guid> folderIds, CancellationToken cancellationToken = default);
@@ -55,6 +59,7 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<IReadOnlyList<AssetUndoJournalEntry>> ListUndoJournalAsync(int limit = 100, CancellationToken cancellationToken = default);
 
     Task<bool> UndoAsync(AssetLibraryUndoToken token, CancellationToken cancellationToken = default);
+    Task<bool> RedoAsync(AssetLibraryUndoToken token, CancellationToken cancellationToken = default);
 }
 public sealed class AssetLibraryDatabase
 {

@@ -49,7 +49,9 @@ public enum AssetLibrarySystemCollection
     Uncategorized,
     Untagged,
     MissingFiles,
-    HighRating
+    HighRating,
+    Archived,
+    RecycleBin
 }
 
 public sealed record SmartFolderDefinition(
@@ -60,11 +62,12 @@ public static class AssetLibrarySystemCollections
 {
     public static AssetLibraryQuery CreateQuery(AssetLibrarySystemCollection collection) => collection switch
     {
-        AssetLibrarySystemCollection.Uncategorized => new(UncategorizedOnly: true),
-        AssetLibrarySystemCollection.Untagged => new(UntaggedOnly: true),
-        AssetLibrarySystemCollection.MissingFiles => new(MissingOnly: true),
-        AssetLibrarySystemCollection.HighRating => new(MinimumRating: 4),
-        AssetLibrarySystemCollection.RecentlyAdded => new(PageSize: 100),
-        _ => new()
+        AssetLibrarySystemCollection.Uncategorized => new(UncategorizedOnly: true, SystemCollection: collection),
+        AssetLibrarySystemCollection.Untagged => new(UntaggedOnly: true, SystemCollection: collection),
+        AssetLibrarySystemCollection.MissingFiles => new(MissingOnly: true, SystemCollection: collection),
+        AssetLibrarySystemCollection.HighRating => new(MinimumRating: 4, SystemCollection: collection),
+        AssetLibrarySystemCollection.RecentlyAdded => new(PageSize: 100, SortField: AssetLibrarySortField.AddedAt, SortDirection: AssetLibrarySortDirection.Descending, SystemCollection: collection),
+        AssetLibrarySystemCollection.Archived => new(ArchiveScope: AssetLibraryArchiveScope.ArchivedOnly, SystemCollection: collection),
+        _ => new(SystemCollection: collection)
     };
 }

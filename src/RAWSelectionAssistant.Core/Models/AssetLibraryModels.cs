@@ -173,6 +173,30 @@ public sealed record SmartFolder(
     public DateTimeOffset EffectiveUpdatedAt => UpdatedAt ?? EffectiveCreatedAt;
 }
 
+public enum AssetLibraryArchiveScope
+{
+    ActiveOnly,
+    ArchivedOnly,
+    All
+}
+
+public enum AssetLibrarySortField
+{
+    AddedAt,
+    CaptureTime,
+    FileName,
+    FileSize,
+    Rating,
+    Color,
+    VisualAnalysis
+}
+
+public enum AssetLibrarySortDirection
+{
+    Ascending,
+    Descending
+}
+
 public sealed record AssetLibraryQuery(
     string SearchText = "",
     Guid? FolderId = null,
@@ -194,9 +218,22 @@ public sealed record AssetLibraryQuery(
     DateTimeOffset? AddedFrom = null,
     DateTimeOffset? AddedTo = null,
     DateTimeOffset? CaptureFrom = null,
-    DateTimeOffset? CaptureTo = null)
+    DateTimeOffset? CaptureTo = null,
+    AssetLibraryArchiveScope ArchiveScope = AssetLibraryArchiveScope.ActiveOnly,
+    AssetLibrarySortField SortField = AssetLibrarySortField.AddedAt,
+    AssetLibrarySortDirection SortDirection = AssetLibrarySortDirection.Descending,
+    AssetLibrarySystemCollection? SystemCollection = null)
 {
     public int EffectivePageSize => Math.Clamp(PageSize <= 0 ? 100 : PageSize, 1, 500);
+    public AssetLibraryArchiveScope EffectiveArchiveScope => SystemCollection == AssetLibrarySystemCollection.Archived
+        ? AssetLibraryArchiveScope.ArchivedOnly
+        : IncludeArchived ? AssetLibraryArchiveScope.All : ArchiveScope;
+    public AssetLibrarySortField EffectiveSortField => SystemCollection == AssetLibrarySystemCollection.RecentlyAdded
+        ? AssetLibrarySortField.AddedAt
+        : SortField;
+    public AssetLibrarySortDirection EffectiveSortDirection => SystemCollection == AssetLibrarySystemCollection.RecentlyAdded
+        ? AssetLibrarySortDirection.Descending
+        : SortDirection;
 }
 
 public sealed record AssetLibraryPage(

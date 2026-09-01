@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text;
 using System.Globalization;
+using System.Security.Cryptography;
 using Microsoft.Data.Sqlite;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
@@ -20,6 +21,7 @@ public sealed partial class SqliteAssetLibraryRepository
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         var previous = new List<AssetMetadataUndo>();
+        var next = new List<AssetMetadataUndo>();
         foreach (var id in ids)
         {
             await using var read = connection.CreateCommand(); read.Transaction = transaction; read.CommandText = "SELECT Rating,Comment FROM AssetItems WHERE AssetId=$id;"; read.Parameters.AddWithValue("$id", id.ToString("D"));
@@ -30,13 +32,61 @@ public sealed partial class SqliteAssetLibraryRepository
             var nextRating = rating ?? oldRating; var nextComment = comment ?? oldComment;
             if (nextRating == oldRating && string.Equals(nextComment, oldComment, StringComparison.Ordinal)) continue;
             previous.Add(new(id, oldRating, oldComment));
+            next.Add(new(id, nextRating, nextComment));
             await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", nextRating), ("$comment", nextComment), ("$id", id.ToString("D"))).ConfigureAwait(false);
         }
         if (previous.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, []); }
         var token = CreateUndoToken("Update asset metadata batch");
-        await WriteUndoJournalAsync(connection, transaction, token, "asset-metadata-batch", new AssetMetadataBatchUndo(previous.ToArray()), cancellationToken).ConfigureAwait(false);
+        await WriteUndoJournalAsync(connection, transaction, token, "asset-metadata-v2", new AssetMetadataChange(previous.ToArray(), next.ToArray()), cancellationToken, journalVersion: 2).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return new(previous.Count, token, []);
+    }
+
+    public Task<AssetLibraryBatchResult> SetAssetsArchivedAsync(IEnumerable<Guid> assetIds, bool isArchived, CancellationToken cancellationToken = default) =>
+        SetAssetFlagAsync(assetIds, "IsArchived", isArchived, "asset-archive-state-v2", isArchived ? "Archive assets" : "Restore assets", cancellationToken);
+
+    public Task<AssetLibraryBatchResult> SetAssetsMissingAsync(IEnumerable<Guid> assetIds, bool isMissing, CancellationToken cancellationToken = default) =>
+        SetAssetFlagAsync(assetIds, "IsMissing", isMissing, "asset-missing-state-v2", isMissing ? "Mark assets missing" : "Clear missing assets", cancellationToken);
+
+    private async Task<AssetLibraryBatchResult> SetAssetFlagAsync(
+        IEnumerable<Guid> assetIds,
+        string column,
+        bool value,
+        string operationKind,
+        string description,
+        CancellationToken cancellationToken)
+    {
+        var ids = assetIds.Where(id => id != Guid.Empty).Distinct().ToArray();
+        if (ids.Length == 0) return new(0, null, []);
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        var before = new List<AssetFlagState>();
+        foreach (var id in ids)
+        {
+            await using var read = connection.CreateCommand();
+            read.Transaction = transaction;
+            read.CommandText = $"SELECT {column} FROM AssetItems WHERE AssetId=$id;";
+            read.Parameters.AddWithValue("$id", id.ToString("D"));
+            var scalar = await read.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
+            if (scalar is null or DBNull) continue;
+            var previous = Convert.ToInt32(scalar, CultureInfo.InvariantCulture) != 0;
+            if (previous == value) continue;
+            before.Add(new(id, previous));
+            await ExecuteAsync(connection, transaction, $"UPDATE AssetItems SET {column}=$value WHERE AssetId=$id;", cancellationToken,
+                ("$value", value ? 1 : 0), ("$id", id.ToString("D"))).ConfigureAwait(false);
+        }
+        if (before.Count == 0)
+        {
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+            return new(0, null, []);
+        }
+
+        var token = CreateUndoToken(description);
+        var envelope = new AssetFlagChange(before.ToArray(), before.Select(item => item with { Value = value }).ToArray());
+        await WriteUndoJournalAsync(connection, transaction, token, operationKind, envelope, cancellationToken, journalVersion: 2).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return new(before.Count, token, []);
     }
 
     public async Task<AssetLibraryBatchResult> AddToFoldersAsync(IEnumerable<Guid> assetIds, IEnumerable<Guid> folderIds, CancellationToken cancellationToken = default)
@@ -68,14 +118,14 @@ public sealed partial class SqliteAssetLibraryRepository
             }
         }
         if (memberships.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, []); }
-        var payload = new FolderMembershipUndo(false, memberships.ToArray(), introducedAutoTags.ToArray());
+        var payload = new FolderMembershipChange(false, true, memberships.ToArray(), introducedAutoTags.ToArray());
         var token = CreateUndoToken("Add assets to folders");
-        await WriteUndoJournalAsync(connection, transaction, token, "folder-membership", payload, cancellationToken).ConfigureAwait(false);
+        await WriteUndoJournalAsync(connection, transaction, token, "folder-membership-v2", payload, cancellationToken, journalVersion: 2).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return new(memberships.Count, token, []);
     }
 
-    private async Task<AssetLibraryPage> QueryIndexedPageAsync(AssetLibraryQuery query, int pageSize, CancellationToken cancellationToken)
+    private async Task<AssetLibraryPage> QueryIndexedPageAsync(AssetLibraryQuery query, int pageSize, AssetLibraryQueryCursor? cursor, CancellationToken cancellationToken)
     {
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var count = connection.CreateCommand();
@@ -85,42 +135,44 @@ public sealed partial class SqliteAssetLibraryRepository
 
         await using var page = connection.CreateCommand();
         var pageWhere = BuildIndexedWhere(query, page);
-        if (TryParseKeysetCursor(query.Cursor, out var cursorAddedAt, out var cursorAssetId))
-        {
-            pageWhere += " AND (a.AddedAt < $cursorAdded OR (a.AddedAt=$cursorAdded AND a.AssetId>$cursorAsset))";
-            page.Parameters.AddWithValue("$cursorAdded", cursorAddedAt.ToString("O"));
-            page.Parameters.AddWithValue("$cursorAsset", cursorAssetId.ToString("D"));
-        }
-        page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY a.AddedAt DESC,a.AssetId LIMIT $limit;";
+        if (cursor is not null) pageWhere = AddQueryCursorPredicate(pageWhere, query, cursor, page);
+        page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY " + BuildQueryOrderBy(query) + " LIMIT $limit;";
         page.Parameters.AddWithValue("$limit", pageSize + 1);
         var items = new List<AssetItem>(Math.Min(pageSize + 1, total));
         await using var reader = await page.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) items.Add(ReadAsset(reader));
         var hasMore = items.Count > pageSize;
         if (hasMore) items.RemoveAt(items.Count - 1);
-        var next = hasMore && items.Count > 0 ? CreateKeysetCursor(items[^1]) : null;
+        var next = hasMore && items.Count > 0 ? await CreateQueryCursorAsync(query, items[^1], cancellationToken).ConfigureAwait(false) : null;
         return new(items, next, total);
     }
 
     private static string BuildIndexedWhere(AssetLibraryQuery query, SqliteCommand command)
     {
-        var where = new List<string> { query.IncludeArchived ? "1=1" : "a.IsArchived=0" };
+        var where = new List<string> { query.EffectiveArchiveScope switch
+        {
+            AssetLibraryArchiveScope.ArchivedOnly => "a.IsArchived=1",
+            AssetLibraryArchiveScope.All => "1=1",
+            _ => "a.IsArchived=0"
+        } };
+        if (query.SystemCollection == AssetLibrarySystemCollection.RecycleBin) where.Add("0=1");
         if (!string.IsNullOrWhiteSpace(query.SearchText))
         {
-            where.Add("(a.DisplayName LIKE $search OR a.Comment LIKE $search OR EXISTS(SELECT 1 FROM AssetTagMemberships sm JOIN AssetTags st ON st.TagId=sm.TagId WHERE sm.AssetId=a.AssetId AND st.Name LIKE $search) OR EXISTS(SELECT 1 FROM AssetFolderMemberships sfm JOIN AssetFolders sf ON sf.FolderId=sfm.FolderId WHERE sfm.AssetId=a.AssetId AND sf.Name LIKE $search))");
+            where.Add("(a.DisplayName LIKE $search OR a.Extension LIKE $search OR a.Comment LIKE $search OR EXISTS(SELECT 1 FROM AssetTagMemberships sm JOIN AssetTags st ON st.TagId=sm.TagId WHERE sm.AssetId=a.AssetId AND st.Name LIKE $search) OR EXISTS(SELECT 1 FROM AssetFolderMemberships sfm JOIN AssetFolders sf ON sf.FolderId=sfm.FolderId WHERE sfm.AssetId=a.AssetId AND sf.Name LIKE $search))");
             command.Parameters.AddWithValue("$search", "%" + query.SearchText.Trim() + "%");
         }
         if (query.FolderId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder)"); command.Parameters.AddWithValue("$folder", query.FolderId.Value.ToString("D")); }
         if (query.TagId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetTagMemberships tm WHERE tm.AssetId=a.AssetId AND tm.TagId=$tag)"); command.Parameters.AddWithValue("$tag", query.TagId.Value.ToString("D")); }
         AddMembershipFilters(where, command, query.FolderIds, "AssetFolderMemberships", "FolderId", "folderList");
         AddMembershipFilters(where, command, query.TagIds, "AssetTagMemberships", "TagId", "tagList");
-        if (query.MinimumRating is not null) { where.Add("a.Rating >= $minRating"); command.Parameters.AddWithValue("$minRating", query.MinimumRating.Value); }
+        var minimumRating = query.SystemCollection == AssetLibrarySystemCollection.HighRating ? Math.Max(4, query.MinimumRating ?? 0) : query.MinimumRating;
+        if (minimumRating is not null) { where.Add("a.Rating >= $minRating"); command.Parameters.AddWithValue("$minRating", minimumRating.Value); }
         if (query.MaximumRating is not null) { where.Add("a.Rating <= $maxRating"); command.Parameters.AddWithValue("$maxRating", query.MaximumRating.Value); }
         if (!string.IsNullOrWhiteSpace(query.MediaType)) { where.Add("a.MediaType=$mediaType"); command.Parameters.AddWithValue("$mediaType", query.MediaType); }
         if (!string.IsNullOrWhiteSpace(query.Extension)) { where.Add("a.Extension=$extension"); command.Parameters.AddWithValue("$extension", NormalizeExtension(query.Extension)); }
-        if (query.UncategorizedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
-        if (query.UntaggedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
-        if (query.MissingOnly) where.Add("a.IsMissing=1");
+        if (query.UncategorizedOnly || query.SystemCollection == AssetLibrarySystemCollection.Uncategorized) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
+        if (query.UntaggedOnly || query.SystemCollection == AssetLibrarySystemCollection.Untagged) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
+        if (query.MissingOnly || query.SystemCollection == AssetLibrarySystemCollection.MissingFiles) where.Add("a.IsMissing=1");
         if (query.AddedFrom is not null) { where.Add("a.AddedAt >= $addedFrom"); command.Parameters.AddWithValue("$addedFrom", query.AddedFrom.Value.ToString("O")); }
         if (query.AddedTo is not null) { where.Add("a.AddedAt <= $addedTo"); command.Parameters.AddWithValue("$addedTo", query.AddedTo.Value.ToString("O")); }
         if (query.CaptureFrom is not null) { where.Add("a.CaptureTime >= $captureFrom"); command.Parameters.AddWithValue("$captureFrom", query.CaptureFrom.Value.ToString("O")); }
@@ -139,20 +191,11 @@ public sealed partial class SqliteAssetLibraryRepository
         }
     }
 
-    private async Task<AssetLibraryPage> QuerySmartFolderPageAsync(AssetLibraryQuery query, int pageSize, CancellationToken cancellationToken)
+    private async Task<AssetLibraryPage> QuerySmartFolderPageAsync(AssetLibraryQuery query, int pageSize, AssetLibraryQueryCursor? cursor, CancellationToken cancellationToken)
     {
         var smartFolder = await ReadSmartFolderAsync(query.SmartFolderId!.Value, cancellationToken).ConfigureAwait(false);
         if (smartFolder is null) return new([], null, 0);
         var rules = await ListSmartFolderRulesAsync(smartFolder.SmartFolderId, cancellationToken).ConfigureAwait(false);
-        if (rules.Any(rule => rule.Operator == SmartFolderOperator.Regex))
-        {
-            var offset = ParseCursor(query.Cursor);
-            var candidates = await LoadCandidatesAsync(query with { SmartFolderId = null, Cursor = null }, needsPostFilter: true, cancellationToken).ConfigureAwait(false);
-            var matches = new List<AssetItem>();
-            foreach (var item in candidates) if (await MatchesSmartFolderAsync(item, smartFolder.SmartFolderId, cancellationToken).ConfigureAwait(false)) matches.Add(item);
-            return new(matches.Skip(offset).Take(pageSize).ToArray(), offset + pageSize < matches.Count ? (offset + pageSize).ToString(System.Globalization.CultureInfo.InvariantCulture) : null, matches.Count);
-        }
-
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var count = connection.CreateCommand();
         var countWhere = BuildIndexedWhere(query with { SmartFolderId = null, Cursor = null }, count);
@@ -163,19 +206,15 @@ public sealed partial class SqliteAssetLibraryRepository
         await using var page = connection.CreateCommand();
         var pageWhere = BuildIndexedWhere(query with { SmartFolderId = null, Cursor = null }, page);
         pageWhere += " AND " + BuildSmartExpression(smartFolder, rules, page);
-        if (TryParseKeysetCursor(query.Cursor, out var cursorAddedAt, out var cursorAssetId))
-        {
-            pageWhere += " AND (a.AddedAt < $cursorAdded OR (a.AddedAt=$cursorAdded AND a.AssetId>$cursorAsset))";
-            page.Parameters.AddWithValue("$cursorAdded", cursorAddedAt.ToString("O")); page.Parameters.AddWithValue("$cursorAsset", cursorAssetId.ToString("D"));
-        }
-        page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY a.AddedAt DESC,a.AssetId LIMIT $limit;";
+        if (cursor is not null) pageWhere = AddQueryCursorPredicate(pageWhere, query, cursor, page);
+        page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY " + BuildQueryOrderBy(query) + " LIMIT $limit;";
         page.Parameters.AddWithValue("$limit", pageSize + 1);
         var items = new List<AssetItem>(pageSize + 1);
         await using var reader = await page.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) items.Add(ReadAsset(reader));
         var hasMore = items.Count > pageSize;
         if (hasMore) items.RemoveAt(items.Count - 1);
-        return new(items, hasMore && items.Count > 0 ? CreateKeysetCursor(items[^1]) : null, total);
+        return new(items, hasMore && items.Count > 0 ? await CreateQueryCursorAsync(query, items[^1], cancellationToken).ConfigureAwait(false) : null, total);
     }
 
     private static string BuildSmartExpression(SmartFolder folder, IReadOnlyList<SmartFolderRule> rules, SqliteCommand command)
@@ -369,18 +408,193 @@ public sealed partial class SqliteAssetLibraryRepository
         return rule.Operator == SmartFolderOperator.NotEquals ? $"NOT ({exists})" : exists;
     }
 
-    private static string CreateKeysetCursor(AssetItem item) => Convert.ToBase64String(Encoding.UTF8.GetBytes($"{item.AddedAt:O}|{item.AssetId:D}"));
-    private static bool TryParseKeysetCursor(string? cursor, out DateTimeOffset addedAt, out Guid assetId)
+    private async Task<string> CreateQueryCursorAsync(AssetLibraryQuery query, AssetItem item, CancellationToken cancellationToken)
     {
-        addedAt = default; assetId = default;
-        if (string.IsNullOrWhiteSpace(cursor)) return false;
+        var sortValue = await GetQuerySortValueAsync(item, query.EffectiveSortField, cancellationToken).ConfigureAwait(false);
+        var envelope = new AssetLibraryQueryCursor(
+            Version: 1,
+            PlanFingerprint: ComputeQueryFingerprint(query),
+            NullBucket: sortValue is null ? 1 : 0,
+            SortValue: sortValue,
+            AssetId: item.AssetId);
+        return Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(envelope)));
+    }
+
+    private async Task<string?> GetQuerySortValueAsync(AssetItem item, AssetLibrarySortField field, CancellationToken cancellationToken)
+    {
+        if (field is not (AssetLibrarySortField.Color or AssetLibrarySortField.VisualAnalysis)) return GetQuerySortValue(item, field);
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = $"SELECT {GetQuerySortExpression(field)} FROM AssetItems a WHERE a.AssetId=$id;";
+        command.Parameters.AddWithValue("$id", item.AssetId.ToString("D"));
+        var value = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
+        if (value is null or DBNull) return null;
+        return field == AssetLibrarySortField.Color
+            ? Convert.ToDouble(value, CultureInfo.InvariantCulture).ToString("R", CultureInfo.InvariantCulture)
+            : Convert.ToInt32(value, CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+    }
+
+    private static bool TryReadQueryCursor(AssetLibraryQuery query, out AssetLibraryQueryCursor? cursor, out string? error)
+    {
+        cursor = null;
+        error = null;
+        if (string.IsNullOrWhiteSpace(query.Cursor)) return true;
         try
         {
-            var value = Encoding.UTF8.GetString(Convert.FromBase64String(cursor));
-            var separator = value.LastIndexOf('|');
-            return separator > 0 && DateTimeOffset.TryParse(value[..separator], System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind, out addedAt) && Guid.TryParse(value[(separator + 1)..], out assetId);
+            var json = Encoding.UTF8.GetString(Convert.FromBase64String(query.Cursor));
+            cursor = JsonSerializer.Deserialize<AssetLibraryQueryCursor>(json);
+            if (cursor is null || cursor.Version != 1 || cursor.AssetId == Guid.Empty || cursor.NullBucket is < 0 or > 1 ||
+                !string.Equals(cursor.PlanFingerprint, ComputeQueryFingerprint(query), StringComparison.Ordinal) ||
+                !IsValidQueryCursorValue(query.EffectiveSortField, cursor.NullBucket, cursor.SortValue))
+            {
+                cursor = null;
+                error = "分页游标与当前查询或排序不匹配。";
+                return false;
+            }
+            return true;
         }
-        catch (FormatException) { return false; }
+        catch (Exception exception) when (exception is FormatException or JsonException or ArgumentException)
+        {
+            cursor = null;
+            error = "分页游标格式无效。";
+            return false;
+        }
+    }
+
+    private static string AddQueryCursorPredicate(string where, AssetLibraryQuery query, AssetLibraryQueryCursor cursor, SqliteCommand command)
+    {
+        var expression = GetQuerySortExpression(query.EffectiveSortField);
+        var nullExpression = $"CASE WHEN {expression} IS NULL THEN 1 ELSE 0 END";
+        command.Parameters.AddWithValue("$cursorAsset", cursor.AssetId.ToString("D"));
+        command.Parameters.AddWithValue("$cursorNull", cursor.NullBucket);
+        if (cursor.NullBucket == 1)
+            return where + $" AND ({nullExpression}=1 AND a.AssetId>$cursorAsset)";
+
+        command.Parameters.AddWithValue("$cursorSort", ParseQueryCursorValue(query.EffectiveSortField, cursor.SortValue!));
+        var comparison = query.EffectiveSortDirection == AssetLibrarySortDirection.Ascending ? ">" : "<";
+        return where + $" AND ({nullExpression}>$cursorNull OR ({nullExpression}=$cursorNull AND (({expression}){comparison}$cursorSort OR (({expression})=$cursorSort AND a.AssetId>$cursorAsset))))";
+    }
+
+    private static string BuildQueryOrderBy(AssetLibraryQuery query)
+    {
+        var expression = GetQuerySortExpression(query.EffectiveSortField);
+        var direction = query.EffectiveSortDirection == AssetLibrarySortDirection.Ascending ? "ASC" : "DESC";
+        return $"CASE WHEN {expression} IS NULL THEN 1 ELSE 0 END ASC,{expression} {direction},a.AssetId ASC";
+    }
+
+    private static bool IsAfterQueryCursor(AssetItem item, AssetLibraryQuery query, AssetLibraryQueryCursor cursor)
+    {
+        var itemValue = GetQuerySortValue(item, query.EffectiveSortField);
+        var itemNullBucket = itemValue is null ? 1 : 0;
+        if (itemNullBucket != cursor.NullBucket) return itemNullBucket > cursor.NullBucket;
+        if (itemNullBucket == 1)
+            return string.Compare(item.AssetId.ToString("D"), cursor.AssetId.ToString("D"), StringComparison.Ordinal) > 0;
+
+        var comparison = CompareQuerySortValues(query.EffectiveSortField, itemValue!, cursor.SortValue!);
+        if (comparison != 0)
+            return query.EffectiveSortDirection == AssetLibrarySortDirection.Ascending ? comparison > 0 : comparison < 0;
+        return string.Compare(item.AssetId.ToString("D"), cursor.AssetId.ToString("D"), StringComparison.Ordinal) > 0;
+    }
+
+    private static string GetQuerySortExpression(AssetLibrarySortField field)
+    {
+        var version = AssetVisualFeatureContract.AnalysisVersion.Replace("'", "''", StringComparison.Ordinal);
+        return field switch
+        {
+            AssetLibrarySortField.CaptureTime => "a.CaptureTime",
+            AssetLibrarySortField.FileName => "a.DisplayName COLLATE NOCASE",
+            AssetLibrarySortField.FileSize => "a.FileSize",
+            AssetLibrarySortField.Rating => "a.Rating",
+            AssetLibrarySortField.Color => $"(SELECT vf.DominantHue FROM AssetVisualFeatures vf WHERE vf.AssetId=a.AssetId AND vf.AnalysisVersion='{version}' AND vf.Outcome='Succeeded' AND vf.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND vf.SourceContentHash=a.ContentHash LIMIT 1)",
+            AssetLibrarySortField.VisualAnalysis => $"CASE WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures vf WHERE vf.AssetId=a.AssetId AND vf.AnalysisVersion='{version}' AND vf.Outcome='Succeeded' AND vf.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND vf.SourceContentHash=a.ContentHash) THEN 3 WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures vf WHERE vf.AssetId=a.AssetId AND vf.AnalysisVersion='{version}' AND vf.Outcome='Failed' AND vf.SourceContentHash IS NOT NULL AND a.ContentHash IS NOT NULL AND vf.SourceContentHash=a.ContentHash) THEN 2 WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures vf WHERE vf.AssetId=a.AssetId) THEN 1 ELSE 0 END",
+            _ => "a.AddedAt"
+        };
+    }
+
+    private static string? GetQuerySortValue(AssetItem item, AssetLibrarySortField field) => field switch
+    {
+        AssetLibrarySortField.CaptureTime => item.CaptureTime?.ToString("O", CultureInfo.InvariantCulture),
+        AssetLibrarySortField.FileName => item.DisplayName,
+        AssetLibrarySortField.FileSize => item.FileSize.ToString(CultureInfo.InvariantCulture),
+        AssetLibrarySortField.Rating => item.Rating.ToString(CultureInfo.InvariantCulture),
+        AssetLibrarySortField.Color or AssetLibrarySortField.VisualAnalysis => null,
+        _ => item.AddedAt.ToString("O", CultureInfo.InvariantCulture)
+    };
+
+    private static object ParseQueryCursorValue(AssetLibrarySortField field, string value) => field switch
+    {
+        AssetLibrarySortField.FileSize => long.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture),
+        AssetLibrarySortField.Rating => int.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture),
+        AssetLibrarySortField.Color => double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture),
+        AssetLibrarySortField.VisualAnalysis => int.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture),
+        _ => value
+    };
+
+    private static bool IsValidQueryCursorValue(AssetLibrarySortField field, int nullBucket, string? value)
+    {
+        if (nullBucket == 1) return (field is AssetLibrarySortField.CaptureTime or AssetLibrarySortField.Color) && value is null;
+        if (value is null) return false;
+        return field switch
+        {
+            AssetLibrarySortField.AddedAt or AssetLibrarySortField.CaptureTime => DateTimeOffset.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out _),
+            AssetLibrarySortField.FileSize => long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var size) && size >= 0,
+            AssetLibrarySortField.Rating => int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var rating) && rating is >= 0 and <= 5,
+            AssetLibrarySortField.Color => double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var hue) && double.IsFinite(hue) && hue is >= 0 and <= 360,
+            AssetLibrarySortField.VisualAnalysis => int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var state) && state is >= 0 and <= 3,
+            AssetLibrarySortField.FileName => true,
+            _ => false
+        };
+    }
+
+    private static int CompareQuerySortValues(AssetLibrarySortField field, string left, string right) => field switch
+    {
+        AssetLibrarySortField.FileName => CompareSqliteNoCase(left, right),
+        AssetLibrarySortField.FileSize => long.Parse(left, CultureInfo.InvariantCulture).CompareTo(long.Parse(right, CultureInfo.InvariantCulture)),
+        AssetLibrarySortField.Rating => int.Parse(left, CultureInfo.InvariantCulture).CompareTo(int.Parse(right, CultureInfo.InvariantCulture)),
+        _ => string.Compare(left, right, StringComparison.Ordinal)
+    };
+
+    private static int CompareSqliteNoCase(string left, string right)
+    {
+        var count = Math.Min(left.Length, right.Length);
+        for (var index = 0; index < count; index++)
+        {
+            var leftCharacter = left[index] is >= 'A' and <= 'Z' ? (char)(left[index] + 32) : left[index];
+            var rightCharacter = right[index] is >= 'A' and <= 'Z' ? (char)(right[index] + 32) : right[index];
+            if (leftCharacter != rightCharacter) return leftCharacter.CompareTo(rightCharacter);
+        }
+        return left.Length.CompareTo(right.Length);
+    }
+
+    private static string ComputeQueryFingerprint(AssetLibraryQuery query)
+    {
+        static string[] NormalizeIds(IReadOnlyList<Guid>? values) => (values ?? []).Distinct().OrderBy(value => value).Select(value => value.ToString("D")).ToArray();
+        var contract = new
+        {
+            SearchText = (query.SearchText ?? string.Empty).Trim(),
+            query.FolderId,
+            query.TagId,
+            query.MinimumRating,
+            query.MaximumRating,
+            query.MediaType,
+            query.Extension,
+            query.UncategorizedOnly,
+            query.UntaggedOnly,
+            query.MissingOnly,
+            query.FileNameRegex,
+            query.SmartFolderId,
+            FolderIds = NormalizeIds(query.FolderIds),
+            TagIds = NormalizeIds(query.TagIds),
+            AddedFrom = query.AddedFrom?.ToString("O", CultureInfo.InvariantCulture),
+            AddedTo = query.AddedTo?.ToString("O", CultureInfo.InvariantCulture),
+            CaptureFrom = query.CaptureFrom?.ToString("O", CultureInfo.InvariantCulture),
+            CaptureTo = query.CaptureTo?.ToString("O", CultureInfo.InvariantCulture),
+            ArchiveScope = query.EffectiveArchiveScope,
+            SortField = query.EffectiveSortField,
+            SortDirection = query.EffectiveSortDirection,
+            query.SystemCollection
+        };
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(contract))));
     }
 
     public async Task<IReadOnlyList<AssetFolderTreeItem>> GetFolderTreeAsync(bool includeArchived = false, CancellationToken cancellationToken = default)
@@ -412,6 +626,24 @@ public sealed partial class SqliteAssetLibraryRepository
             ? roots.Select(x => Build(x, string.Empty, 0).Node).ToArray()
             : [];
     }
+
+    public async Task<AssetLibraryBatchResult> SetFolderArchivedAsync(Guid folderId, bool isArchived, CancellationToken cancellationToken = default)
+    {
+        var before = await ReadFolderByIdAsync(folderId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Folder not found.");
+        if (before.IsSystem && isArchived) throw new InvalidOperationException("系统集合不能归档。");
+        if (before.IsArchived == isArchived) return new(0, null, []);
+        var after = before with { IsArchived = isArchived, UpdatedAt = DateTimeOffset.UtcNow };
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await SaveFolderInTransactionAsync(connection, transaction, after, cancellationToken).ConfigureAwait(false);
+        var token = CreateUndoToken(isArchived ? "Archive folder" : "Restore folder");
+        await WriteUndoJournalAsync(connection, transaction, token, "folder-archive-state-v2", new FolderArchiveChange(before, after), cancellationToken, journalVersion: 2).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return new(1, token, []);
+    }
+
+    public Task<AssetLibraryBatchResult> RestoreFolderAsync(Guid folderId, CancellationToken cancellationToken = default) =>
+        SetFolderArchivedAsync(folderId, isArchived: false, cancellationToken);
 
     public async Task<AssetLibraryBatchResult> RenameFolderAsync(Guid folderId, string name, CancellationToken cancellationToken = default)
     {
@@ -655,13 +887,13 @@ public sealed partial class SqliteAssetLibraryRepository
 
     private void TrackUndo(AssetLibraryUndoToken token, Func<CancellationToken, Task> operation) => _undo[token.OperationId] = operation;
 
-    private static async Task WriteUndoJournalAsync<T>(SqliteConnection connection, SqliteTransaction transaction, AssetLibraryUndoToken token, string kind, T payload, CancellationToken cancellationToken)
+    private static async Task WriteUndoJournalAsync<T>(SqliteConnection connection, SqliteTransaction transaction, AssetLibraryUndoToken token, string kind, T payload, CancellationToken cancellationToken, int journalVersion = 1)
     {
         await using (var insert = connection.CreateCommand())
         {
             insert.Transaction = transaction;
-            insert.CommandText = "INSERT INTO AssetLibraryUndoJournal(OperationId,Description,OperationKind,PayloadJson,CreatedAt,UndoneAt,JournalVersion) VALUES($id,$description,$kind,$payload,$created,NULL,1);";
-            insert.Parameters.AddWithValue("$id", token.OperationId.ToString("D")); insert.Parameters.AddWithValue("$description", token.Description); insert.Parameters.AddWithValue("$kind", kind); insert.Parameters.AddWithValue("$payload", JsonSerializer.Serialize(payload)); insert.Parameters.AddWithValue("$created", token.CreatedAt.ToString("O"));
+            insert.CommandText = "INSERT INTO AssetLibraryUndoJournal(OperationId,Description,OperationKind,PayloadJson,CreatedAt,UndoneAt,JournalVersion) VALUES($id,$description,$kind,$payload,$created,NULL,$version);";
+            insert.Parameters.AddWithValue("$id", token.OperationId.ToString("D")); insert.Parameters.AddWithValue("$description", token.Description); insert.Parameters.AddWithValue("$kind", kind); insert.Parameters.AddWithValue("$payload", JsonSerializer.Serialize(payload)); insert.Parameters.AddWithValue("$created", token.CreatedAt.ToString("O")); insert.Parameters.AddWithValue("$version", journalVersion);
             await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
         await using var trim = connection.CreateCommand();
@@ -690,19 +922,49 @@ public sealed partial class SqliteAssetLibraryRepository
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         string kind;
         string json;
+        int journalVersion;
         await using (var read = connection.CreateCommand())
         {
             read.Transaction = transaction;
-            read.CommandText = "SELECT OperationKind,PayloadJson FROM AssetLibraryUndoJournal WHERE OperationId=$id AND UndoneAt IS NULL;";
+            read.CommandText = "SELECT OperationKind,PayloadJson,JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id AND UndoneAt IS NULL;";
             read.Parameters.AddWithValue("$id", operationId.ToString("D"));
             await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
             if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
-            kind = reader.GetString(0); json = reader.GetString(1);
+            kind = reader.GetString(0); json = reader.GetString(1); journalVersion = reader.GetInt32(2);
         }
 
-        var handled = await DispatchPersistentUndoInTransactionAsync(connection, transaction, new(kind, json), cancellationToken).ConfigureAwait(false);
+        var handled = await DispatchPersistentUndoInTransactionAsync(connection, transaction, new(kind, json, journalVersion), cancellationToken).ConfigureAwait(false);
         if (!handled) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
         await using var mark = connection.CreateCommand(); mark.Transaction = transaction; mark.CommandText = "UPDATE AssetLibraryUndoJournal SET UndoneAt=$at WHERE OperationId=$id AND UndoneAt IS NULL;"; mark.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O")); mark.Parameters.AddWithValue("$id", operationId.ToString("D"));
+        if (await mark.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return true;
+    }
+
+    private async Task<bool> ApplyPersistedRedoAtomicallyAsync(Guid operationId, CancellationToken cancellationToken)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        PersistedUndo operation;
+        await using (var read = connection.CreateCommand())
+        {
+            read.Transaction = transaction;
+            read.CommandText = "SELECT OperationKind,PayloadJson,JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id AND UndoneAt IS NOT NULL;";
+            read.Parameters.AddWithValue("$id", operationId.ToString("D"));
+            await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
+            operation = new(reader.GetString(0), reader.GetString(1), reader.GetInt32(2));
+        }
+        if (operation.JournalVersion < 2 || !await DispatchPersistentRedoInTransactionAsync(connection, transaction, operation, cancellationToken).ConfigureAwait(false))
+        {
+            await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false);
+            return false;
+        }
+        await using var mark = connection.CreateCommand();
+        mark.Transaction = transaction;
+        mark.CommandText = "UPDATE AssetLibraryUndoJournal SET UndoneAt=NULL WHERE OperationId=$id AND UndoneAt IS NOT NULL;";
+        mark.Parameters.AddWithValue("$id", operationId.ToString("D"));
         if (await mark.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return true;
@@ -712,6 +974,36 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         switch (undo.Kind)
         {
+            case "asset-metadata-v2":
+                if (undo.JournalVersion < 2) return false;
+                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, Deserialize<AssetMetadataChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "asset-archive-state-v2":
+                if (undo.JournalVersion < 2) return false;
+                await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsArchived", Deserialize<AssetFlagChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "asset-missing-state-v2":
+                if (undo.JournalVersion < 2) return false;
+                await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsMissing", Deserialize<AssetFlagChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "folder-archive-state-v2":
+                if (undo.JournalVersion < 2) return false;
+                await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "folder-membership-v2":
+            {
+                if (undo.JournalVersion < 2) return false;
+                var payload = Deserialize<FolderMembershipChange>(undo.PayloadJson);
+                await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
+            case "tag-membership-v2":
+            {
+                if (undo.JournalVersion < 2) return false;
+                var payload = Deserialize<TagMembershipChange>(undo.PayloadJson);
+                await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
             case "asset-metadata":
             {
                 var payload = Deserialize<AssetMetadataUndo>(undo.PayloadJson);
@@ -766,6 +1058,95 @@ public sealed partial class SqliteAssetLibraryRepository
         }
     }
 
+    private static async Task<bool> DispatchPersistentRedoInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, PersistedUndo operation, CancellationToken cancellationToken)
+    {
+        switch (operation.Kind)
+        {
+            case "asset-metadata-v2":
+                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, Deserialize<AssetMetadataChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "asset-archive-state-v2":
+                await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsArchived", Deserialize<AssetFlagChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "asset-missing-state-v2":
+                await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsMissing", Deserialize<AssetFlagChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "folder-archive-state-v2":
+                await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                return true;
+            case "folder-membership-v2":
+            {
+                var payload = Deserialize<FolderMembershipChange>(operation.PayloadJson);
+                await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
+            case "tag-membership-v2":
+            {
+                var payload = Deserialize<TagMembershipChange>(operation.PayloadJson);
+                await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
+            default:
+                return false;
+        }
+    }
+
+    private static async Task ApplyAssetMetadataStatesInTransactionAsync(
+        SqliteConnection connection,
+        SqliteTransaction transaction,
+        IEnumerable<AssetMetadataUndo> states,
+        CancellationToken cancellationToken)
+    {
+        foreach (var state in states)
+            await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken,
+                ("$rating", state.Rating), ("$comment", state.Comment), ("$id", state.AssetId.ToString("D"))).ConfigureAwait(false);
+    }
+
+    private static async Task ApplyFolderMembershipStateInTransactionAsync(
+        SqliteConnection connection,
+        SqliteTransaction transaction,
+        FolderMembershipChange change,
+        bool present,
+        CancellationToken cancellationToken)
+    {
+        foreach (var row in change.Memberships)
+        {
+            if (present)
+                await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetFolderMemberships(AssetId,FolderId,AddedAt) VALUES($asset,$folder,$at);", cancellationToken,
+                    ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+            else
+                await ExecuteAsync(connection, transaction, "DELETE FROM AssetFolderMemberships WHERE AssetId=$asset AND FolderId=$folder;", cancellationToken,
+                    ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D"))).ConfigureAwait(false);
+        }
+
+        await ApplyTagMembershipStateInTransactionAsync(connection, transaction, change.IntroducedAutoTags, present, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task ApplyTagMembershipStateInTransactionAsync(
+        SqliteConnection connection,
+        SqliteTransaction transaction,
+        IEnumerable<AssetTagMembership> memberships,
+        bool present,
+        CancellationToken cancellationToken)
+    {
+        foreach (var row in memberships)
+        {
+            if (present)
+                await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);", cancellationToken,
+                    ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+            else
+                await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken,
+                    ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D"))).ConfigureAwait(false);
+        }
+    }
+
+    private static async Task ApplyAssetFlagStatesInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, string column, IEnumerable<AssetFlagState> states, CancellationToken cancellationToken)
+    {
+        foreach (var state in states)
+            await ExecuteAsync(connection, transaction, $"UPDATE AssetItems SET {column}=$value WHERE AssetId=$id;", cancellationToken,
+                ("$value", state.Value ? 1 : 0), ("$id", state.AssetId.ToString("D"))).ConfigureAwait(false);
+    }
+
     private static async Task SaveFolderInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, AssetFolder folder, CancellationToken cancellationToken)
     {
         await ExecuteAsync(connection, transaction, "UPDATE AssetFolders SET ParentFolderId=$parent,Name=$name,Description=$description,Icon=$icon,Color=$color,SortOrder=$sort,UpdatedAt=$updated,IsArchived=$archived,IsSystem=$system WHERE FolderId=$id;", cancellationToken,
@@ -789,11 +1170,11 @@ public sealed partial class SqliteAssetLibraryRepository
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
-        command.CommandText = "SELECT OperationKind,PayloadJson,UndoneAt FROM AssetLibraryUndoJournal WHERE OperationId=$id;";
+        command.CommandText = "SELECT OperationKind,PayloadJson,UndoneAt,JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id;";
         command.Parameters.AddWithValue("$id", operationId.ToString("D"));
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false) || !reader.IsDBNull(2)) return null;
-        return new(reader.GetString(0), reader.GetString(1));
+        return new(reader.GetString(0), reader.GetString(1), reader.GetInt32(3));
     }
 
     private async Task MarkUndoCompletedAsync(Guid operationId, CancellationToken cancellationToken)
@@ -861,10 +1242,17 @@ public sealed partial class SqliteAssetLibraryRepository
 
     private static T Deserialize<T>(string json) => JsonSerializer.Deserialize<T>(json) ?? throw new InvalidDataException("Undo journal payload is invalid.");
 
-    private sealed record PersistedUndo(string Kind, string PayloadJson);
+    private sealed record AssetLibraryQueryCursor(int Version, string PlanFingerprint, int NullBucket, string? SortValue, Guid AssetId);
+    private sealed record PersistedUndo(string Kind, string PayloadJson, int JournalVersion = 1);
     private sealed record AssetMetadataUndo(Guid AssetId, int Rating, string Comment);
     private sealed record AssetMetadataBatchUndo(AssetMetadataUndo[] Items);
+    private sealed record AssetMetadataChange(AssetMetadataUndo[] Before, AssetMetadataUndo[] After);
+    private sealed record AssetFlagState(Guid AssetId, bool Value);
+    private sealed record AssetFlagChange(AssetFlagState[] Before, AssetFlagState[] After);
+    private sealed record FolderArchiveChange(AssetFolder Before, AssetFolder After);
     private sealed record FolderMembershipUndo(bool Restore, AssetFolderMembership[] Memberships, AssetTagMembership[] AddedAutoTags);
     private sealed record TagMembershipUndo(bool Restore, AssetTagMembership[] Memberships);
+    private sealed record FolderMembershipChange(bool BeforePresent, bool AfterPresent, AssetFolderMembership[] Memberships, AssetTagMembership[] IntroducedAutoTags);
+    private sealed record TagMembershipChange(bool BeforePresent, bool AfterPresent, AssetTagMembership[] Memberships);
     private sealed record TagMergeUndo(AssetTag Source, AssetTag Target, AssetTagMembership[] SourceMembers, Guid[] TargetMemberIds);
 }

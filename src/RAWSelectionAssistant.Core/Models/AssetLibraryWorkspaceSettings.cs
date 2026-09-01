@@ -1,5 +1,13 @@
 namespace RAWSelectionAssistant.Core.Models;
 
+public enum AssetLibraryViewMode
+{
+    Grid,
+    Masonry,
+    Justified,
+    List
+}
+
 public sealed class AssetLibraryWorkspaceSettings
 {
     public const double DefaultOrganizationPaneWidth = 220d;
@@ -17,6 +25,13 @@ public sealed class AssetLibraryWorkspaceSettings
     public Guid? SelectedTagId { get; set; }
     public Guid? SelectedSmartFolderId { get; set; }
     public Guid? SelectedAssetId { get; set; }
+    public AssetLibraryViewMode ViewMode { get; set; } = AssetLibraryViewMode.Grid;
+    public AssetLibrarySortField SortField { get; set; } = AssetLibrarySortField.AddedAt;
+    public AssetLibrarySortDirection SortDirection { get; set; } = AssetLibrarySortDirection.Descending;
+    public AssetLibrarySystemCollection ActiveCollection { get; set; } = AssetLibrarySystemCollection.AllAssets;
+    public List<Guid> ExpandedFolderIds { get; set; } = [];
+    public List<Guid> SelectedAssetIds { get; set; } = [];
+    public Dictionary<string, Guid?> ScrollAnchors { get; set; } = [];
 
     public void Normalize()
     {
@@ -26,10 +41,26 @@ public sealed class AssetLibraryWorkspaceSettings
         if (InspectorPinned) InspectorPaneCollapsed = false;
         SearchText = (SearchText ?? string.Empty).Trim();
         if (SearchText.Length > 500) SearchText = SearchText[..500];
+        if (!Enum.IsDefined(ViewMode)) ViewMode = AssetLibraryViewMode.Grid;
+        if (!Enum.IsDefined(SortField)) SortField = AssetLibrarySortField.AddedAt;
+        if (!Enum.IsDefined(SortDirection)) SortDirection = AssetLibrarySortDirection.Descending;
+        if (!Enum.IsDefined(ActiveCollection)) ActiveCollection = AssetLibrarySystemCollection.AllAssets;
+        ExpandedFolderIds = NormalizeIds(ExpandedFolderIds, 10_000);
+        SelectedAssetIds = NormalizeIds(SelectedAssetIds, 10_000);
+        if (SelectedAssetIds.Count == 0 && SelectedAssetId is not null) SelectedAssetIds.Add(SelectedAssetId.Value);
+        SelectedAssetId = SelectedAssetIds.Count == 1 ? SelectedAssetIds[0] : null;
+        ScrollAnchors = (ScrollAnchors ?? [])
+            .Select(pair => (Valid: Enum.TryParse<AssetLibraryViewMode>(pair.Key, ignoreCase: true, out var view), View: view, pair.Value))
+            .Where(item => item.Valid)
+            .GroupBy(item => item.View)
+            .ToDictionary(group => group.Key.ToString(), group => group.Last().Value, StringComparer.Ordinal);
     }
 
     private static double NormalizeFinite(double value, double fallback, double minimum, double maximum) =>
         double.IsFinite(value) ? Math.Clamp(value, minimum, maximum) : fallback;
+
+    private static List<Guid> NormalizeIds(IEnumerable<Guid>? values, int limit) =>
+        (values ?? []).Where(value => value != Guid.Empty).Distinct().Take(limit).ToList();
 }
 
 public static class PrimaryNavigationPolicy
