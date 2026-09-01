@@ -14,7 +14,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         new Dictionary<string, int>(StringComparer.Ordinal)
         {
             ["{StaticResource AssetLibraryPrimaryButton}"] = 4,
-            ["{StaticResource AssetLibrarySecondaryButton}"] = 18,
+            ["{StaticResource AssetLibrarySecondaryButton}"] = 19,
             ["{StaticResource AssetLibraryChipButton}"] = 24,
             ["{StaticResource AssetLibraryIconButton}"] = 1,
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
@@ -59,6 +59,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         "拍摄时间|CaptureTime||AssetLibraryChipButton|AssetListSortCaptureTime|",
         "添加时间|AddedAt||AssetLibraryChipButton|AssetListSortAddedAt|",
         "评分|Rating||AssetLibraryChipButton|AssetListSortRating|",
+        "加载更多|||AssetLibrarySecondaryButton|AssetLoadMoreButton|加载更多素材",
         "重试|||AssetLibraryPrimaryButton|RetryAssetLibraryLoad|重试",
         "导入引用|||AssetLibraryPrimaryButton|ImportFromEmptyAssetLibrary|",
         "清除条件|||AssetLibrarySecondaryButton||",
@@ -78,7 +79,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = LoadPage();
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(48, buttons, "Update the audited role map when an Asset Library button is added or removed.");
+        Assert.HasCount(49, buttons, "Update the audited role map when an Asset Library button is added or removed.");
         foreach (var button in buttons)
         {
             var style = Attribute(button, "Style");
