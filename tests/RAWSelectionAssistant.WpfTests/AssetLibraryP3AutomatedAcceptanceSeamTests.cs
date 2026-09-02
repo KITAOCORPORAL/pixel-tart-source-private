@@ -122,6 +122,8 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
         ContainsAll(driver, "CaptureCanonicalQueryDocument", "CaptureParameterizedQueryPlan",
             "CaptureResultAssetIds", "ResolveAcceptanceDocumentAsync", "ResolveQueryReferencesAsync",
+            "P3SmartFolderSortField = document.SortField", "P3SmartFolderSortDirection = document.SortDirection",
+            "P3SmartFolderIncludeArchived = document.IncludeArchived",
             "P3QueryScope = scope", "SwitchViewCommand.Execute",
             "SaveP3SmartFolderCommand.Execute", "RetryP3SmartFolderPreviewCommand.Execute",
             "PreviewP3TagMergeCommand.Execute", "MergeP3TagCommand.Execute",

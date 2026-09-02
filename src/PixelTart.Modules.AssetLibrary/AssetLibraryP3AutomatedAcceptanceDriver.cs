@@ -638,6 +638,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
             "the public New Smart Folder command");
         _viewModel.P3SmartFolderName = name;
         _viewModel.P3SmartFolderDescription = "P3 automated acceptance";
+        _viewModel.P3SmartFolderSortField = document.SortField;
+        _viewModel.P3SmartFolderSortDirection = document.SortDirection;
+        _viewModel.P3SmartFolderIncludeArchived = document.IncludeArchived;
         var root = _viewModel.P3SmartFolderRoot;
         root.ClearAll();
         root.Logic = document.RootGroup.Logic;

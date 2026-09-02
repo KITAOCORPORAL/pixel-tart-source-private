@@ -382,7 +382,8 @@ public partial class MainWindow
             var canonicalRoundtrip = string.Equals(smart.LoadedCanonicalJson, smart.ExpectedCanonicalJson, StringComparison.Ordinal);
             if (!canonicalRoundtrip || !smart.PreviewIsolated || !smart.CancellationIsolated ||
                 !smart.EditorClosedAfterCancellation)
-                throw new InvalidOperationException("The Smart Folder preview/save/cancel contract did not round-trip.");
+                throw new InvalidOperationException(
+                    $"The Smart Folder preview/save/cancel contract did not round-trip (canonical={canonicalRoundtrip}, preview={smart.PreviewIsolated}, cancellation={smart.CancellationIsolated}, closed={smart.EditorClosedAfterCancellation}).");
             controller.RecordScenarioCheck(controller.ScenarioId, "smart_folder_id", smart.SmartFolderId.ToString("D"));
             controller.RecordScenarioCheck(controller.ScenarioId, "smart_folder_hash", smart.PersistedAfterPreviewSha256);
             WriteQueryDocument(controller, driver.CaptureCanonicalQueryDocument(document), "smart-folder-query.json");
