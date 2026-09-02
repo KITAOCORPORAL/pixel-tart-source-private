@@ -588,8 +588,8 @@
                     Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                     BorderThickness="0,0,1,0"
                     AutomationProperties.AutomationId="AssetOrganizationPane">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
                         <TextBlock Text="分类" Style="{StaticResource AssetSection}" />
                         <ItemsControl ItemsSource="{Binding SystemCollections}" Margin="0,7,0,2"
                                       AutomationProperties.AutomationId="AssetSystemCollections">
@@ -623,9 +623,6 @@
                                     ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
                         </DockPanel>
                         <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="新文件夹名称" Margin="0,5,0,4" />
-                    </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
                             <TextBlock Text="正在加载组织栏…" Style="{StaticResource AssetCaption}"
                                        Visibility="{Binding IsOrganizationLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationLoadingState" />
@@ -716,9 +713,8 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                        </StackPanel>
-                    </ScrollViewer>
-                </DockPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </Border>
 
             <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
