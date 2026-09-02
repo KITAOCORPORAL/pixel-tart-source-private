@@ -134,6 +134,40 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task SubmittedSearchCancelsPendingSuggestionsAndKeepsThemClosed()
+    {
+        await RunSta(() =>
+        {
+            var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Suggestions", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            try
+            {
+                var viewModel = new AssetLibraryViewModel(Path.Combine(root, "p3.db"), new TaskOperationBridge());
+                viewModel.InitializeAsync().GetAwaiter().GetResult();
+                viewModel.SearchText = "P3_000";
+                viewModel.SubmitP3SearchCommand.Execute(null);
+                Thread.Sleep(650);
+                Assert.IsFalse(viewModel.P3SuggestionsVisible);
+                Assert.IsEmpty(viewModel.P3QuerySuggestions);
+                viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            }
+            finally { try { Directory.Delete(root, true); } catch { } }
+        });
+    }
+
+    [TestMethod]
+    public void SearchSuggestionsAreViewportBoundedAndScrollable()
+    {
+        var composer = Load("AssetQueryComposerView.xaml");
+        var panel = composer.Descendants().Single(element =>
+            Attribute(element, "AutomationProperties.AutomationId") == "P3QuerySuggestionsPanel");
+        var scrollViewer = panel.Descendants().Single(element => element.Name.LocalName == "ScrollViewer");
+        Assert.AreEqual("180", Attribute(scrollViewer, "MaxHeight"));
+        Assert.AreEqual("Auto", Attribute(scrollViewer, "VerticalScrollBarVisibility"));
+        Assert.AreEqual("Disabled", Attribute(scrollViewer, "HorizontalScrollBarVisibility"));
+    }
+
+    [TestMethod]
     public async Task RuntimePageCreatesAllP3UserControlsWithSharedViewModel()
     {
         await RunSta(() =>

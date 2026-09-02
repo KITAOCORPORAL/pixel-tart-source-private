@@ -51,23 +51,27 @@
                 Visibility="{Binding P3SuggestionsVisible, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                 AutomationProperties.AutomationId="P3QuerySuggestionsPanel"
                 AutomationProperties.Name="搜索建议">
-            <ItemsControl ItemsSource="{Binding P3QuerySuggestions}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="{Binding DataContext.ApplyP3SuggestionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}" HorizontalContentAlignment="Stretch"
-                                Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding Value, StringFormat=P3QuerySuggestion_{0}}"
-                                AutomationProperties.Name="{Binding Label, StringFormat=使用搜索建议 {0}}">
-                            <DockPanel>
-                                <TextBlock Text="{Binding Kind}" Foreground="#8FE7D1" Margin="0,0,8,0" />
-                                <TextBlock Text="{Binding Label}" Foreground="#F2F6F7" />
-                                <TextBlock Text="{Binding Detail}" Foreground="#ADB8C0" Margin="8,0,0,0" />
-                            </DockPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ScrollViewer MaxHeight="180"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding P3QuerySuggestions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.ApplyP3SuggestionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}" HorizontalContentAlignment="Stretch"
+                                    Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                    AutomationProperties.AutomationId="{Binding Value, StringFormat=P3QuerySuggestion_{0}}"
+                                    AutomationProperties.Name="{Binding Label, StringFormat=使用搜索建议 {0}}">
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Kind}" Foreground="#8FE7D1" Margin="0,0,8,0" />
+                                    <TextBlock Text="{Binding Label}" Foreground="#F2F6F7" />
+                                    <TextBlock Text="{Binding Detail}" Foreground="#ADB8C0" Margin="8,0,0,0" />
+                                </DockPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Border>
 
         <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"

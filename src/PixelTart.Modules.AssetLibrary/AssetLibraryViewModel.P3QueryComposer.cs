@@ -350,6 +350,11 @@ public sealed partial class AssetLibraryViewModel
     private async Task SubmitP3SearchAsync()
     {
         _searchDebounce.Stop();
+        var pendingSuggestions = _p3SuggestionCancellation;
+        _p3SuggestionCancellation = null;
+        Interlocked.Increment(ref _p3SuggestionGeneration);
+        pendingSuggestions?.Cancel();
+        P3QuerySuggestions.Clear();
         AddP3SearchHistory(SearchText);
         CommitP3QueryDocument(scheduleRefresh: false);
         P3SuggestionsVisible = false;
