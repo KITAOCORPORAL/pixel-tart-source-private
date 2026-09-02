@@ -12,7 +12,7 @@
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                  MaxHeight="300" ClipToBounds="True">
+                  MaxHeight="240" ClipToBounds="True">
     <StackPanel>
         <Button Content="新建智能文件夹" Command="{Binding NewP3SmartFolderCommand}" HorizontalAlignment="Left" Margin="0,7,0,0"
                 Style="{StaticResource AssetLibraryP3SecondaryButton}"
