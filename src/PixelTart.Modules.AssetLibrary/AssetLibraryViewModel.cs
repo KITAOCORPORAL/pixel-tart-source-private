@@ -151,6 +151,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             () => !IsInspectorPinned && (IsInspectorPaneVisible || IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded));
         ToggleInspectorPinCommand = new(() => IsInspectorPinned = !IsInspectorPinned);
         InitializeP2Browser();
+        InitializeP3QueryComposer();
+        InitializeP3SmartFolderEditor();
+        InitializeP3TagManager();
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
@@ -193,7 +196,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         : "已加载全部素材";
     public bool HasAssetCards => AssetCards.Count > 0;
     public bool IsEmptyStateVisible => !IsLoading && !HasLoadError && !HasAssetCards;
-    public bool HasActiveQuery => !string.IsNullOrWhiteSpace(SearchText) || SelectedFolder is not null || SelectedTag is not null || SelectedSmartFolder is not null || IsTemporaryVisualMode;
+    public bool HasActiveQuery => P3QueryChips.Count > 0 || SelectedFolder is not null || SelectedTag is not null || SelectedSmartFolder is not null || IsTemporaryVisualMode;
     public string EmptyStateTitle => HasActiveQuery ? "没有符合当前条件的素材" : "素材库还是空的";
     public string EmptyStateDescription => HasActiveQuery ? "清除搜索或筛选后重试，现有素材和文件不会被修改。" : "导入文件引用以开始整理；默认不会移动、改名或删除源文件。";
     public double OrganizationPaneWidth => _workspaceSettings.OrganizationPaneWidth;
@@ -282,9 +285,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             if (!SetProperty(ref _searchText, value)) return;
             _workspaceSettings.SearchText = value;
             NotifyContentState();
-            if (_isRestoringWorkspace) return;
-            _searchDebounce.Stop();
-            _searchDebounce.Start();
+            OnP3SearchTextChanged();
         }
     }
     public string TagInput { get => _tagInput; set { if (SetProperty(ref _tagInput, value)) ApplyTagsCommand.RaiseCanExecuteChanged(); } }
@@ -587,8 +588,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                 RecordLoadState(refreshOutcome == AssetLibraryRefreshOutcome.Failed ? "initial-query-failed" : "initial-query-not-completed", attempt);
                 return;
             }
-            var journal = await _repository.ListUndoJournalAsync(1, lifetimeToken);
-            LastUndoToken = journal.FirstOrDefault(x => !x.IsUndone)?.Token;
+            await _browserCommands.RestoreFromJournalAsync(lifetimeToken);
+            LastUndoToken = _browserCommands.UndoToken;
+            RaiseP2CommandStates();
             if (_loadStateController is not null)
                 await CaptureReadyRepositoryProofAsync(lifetimeToken);
             lifetimeToken.ThrowIfCancellationRequested();
@@ -696,6 +698,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         _ = RefreshSelectionSummaryAsync(); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
         OnP2SelectionChanged(materialized);
+        OnP3SelectionChanged(materialized);
         RaiseActions(); RaiseVisualActions();
     }
 
@@ -712,6 +715,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _queryCancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token, cancellationToken);
         var token = _queryCancellation.Token;
         var generation = Interlocked.Increment(ref _queryGeneration);
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        var acceptanceQueryBarrier = Interlocked.Exchange(ref _p3AcceptanceQueryBarrier, null);
+#endif
         var outcome = AssetLibraryRefreshOutcome.Completed;
         IsLoading = true;
         LoadErrorMessage = string.Empty;
@@ -743,6 +749,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             else
             {
                 var query = BuildQuery();
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+                if (acceptanceQueryBarrier is not null)
+                {
+                    acceptanceQueryBarrier.Entered.TrySetResult(true);
+                    await acceptanceQueryBarrier.Release.Task.WaitAsync(token);
+                }
+#endif
                 var page = initializationAttempt is int attempt && _loadStateController is not null
                     ? await _loadStateController.ExecuteInitialQueryAsync(attempt, ct => _repository.QueryAsync(query, ct), token)
                     : await _repository.QueryAsync(query, token);
@@ -756,9 +769,15 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             }
             await ReconcilePersistedSelectionAsync(token);
             OnPropertyChanged(nameof(VisibleCount)); NotifyLoadMoreState();
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            Volatile.Write(ref _p3AcceptancePublishedQueryGeneration, generation);
+#endif
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
         {
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            if (acceptanceQueryBarrier is not null) acceptanceQueryBarrier.CancellationObserved = true;
+#endif
             outcome = AssetLibraryRefreshOutcome.Canceled;
         }
         catch (Exception exception)
@@ -1008,7 +1027,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private async Task NewSubfolderAsync() { var name = string.IsNullOrWhiteSpace(NewFolderName) ? UniqueName("子文件夹", Folders.Where(x => x.ParentFolderId == SelectedFolder!.FolderId).Select(x => x.Name)) : NewFolderName.Trim(); await _repository.SaveFolderAsync(new(Guid.NewGuid(), SelectedFolder!.FolderId, name)); NewFolderName = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建子文件夹：{SelectedFolder.Name} / {name}"; }
     private async Task BatchFolderAsync() { var result = await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光"); await RefreshFilterListsAsync(); Status = $"批量创建 {result.Created.Count} 个层级文件夹"; }
     private async Task NewTagAsync() { var tags = await _repository.BatchCreateTagsAsync(string.IsNullOrWhiteSpace(TagInput) ? "新标签" : TagInput); TagInput = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建/找到 {tags.Count} 个标签"; }
-    private async Task ApplyTagsAsync() { var tags = await _repository.BatchCreateTagsAsync(TagInput); var result = await _repository.AddTagsAsync(SelectedAssets.Select(x => x.AssetId), tags.Select(x => x.TagId)); LastUndoToken = result.UndoToken; Status = $"已为 {SelectionCount} 项添加 {tags.Count} 个标签"; TagInput = string.Empty; await RefreshFilterListsAsync(); await RefreshSelectionSummaryAsync(); RaiseActions(); }
+    private async Task ApplyTagsAsync() { var tags = await _repository.BatchCreateTagsAsync(TagInput); var result = await _repository.AddTagsAsync(SelectedAssets.Select(x => x.AssetId), tags.Select(x => x.TagId)); RememberBrowserMutationResult(result); Status = $"已为 {SelectionCount} 项添加 {tags.Count} 个标签"; TagInput = string.Empty; await RefreshFilterListsAsync(); await RefreshSelectionSummaryAsync(); RaiseActions(); }
     private async Task AddFolderAsync() { await ApplyFoldersAsync([SelectedFolder!.FolderId]); }
 
     public async Task ApplyFoldersAsync(IEnumerable<Guid> folderIds)
@@ -1016,12 +1035,20 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         var ids = folderIds.Distinct().ToArray(); if (ids.Length == 0 || SelectedAssets.Count == 0) return;
         var result = await _repository.AddToFoldersAsync(SelectedAssets.Select(x => x.AssetId), ids);
         foreach (var folderId in ids) { var folder = Folders.FirstOrDefault(x => x.FolderId == folderId); if (folder is not null) { RecentFolders.Remove(folder); RecentFolders.Insert(0, folder); while (RecentFolders.Count > 6) RecentFolders.RemoveAt(RecentFolders.Count - 1); } }
-        _lastFolderIds = ids; LastUndoToken = result.UndoToken; Status = $"已添加 {result.ChangedCount} 项 membership 到 {ids.Length} 个文件夹"; RaiseActions();
+        _lastFolderIds = ids; RememberBrowserMutationResult(result); Status = $"已添加 {result.ChangedCount} 项 membership 到 {ids.Length} 个文件夹"; RaiseActions();
     }
 
     public async Task RepeatLastFolderMembershipAsync() { if (_lastFolderIds.Count == 0) { Status = "Shift+D：尚无上一次文件夹分类"; return; } await ApplyFoldersAsync(_lastFolderIds); Status = $"已重复上次分类：{_lastFolderIds.Count} 个文件夹"; }
-    public async Task RateSelectedAsync(int rating) { rating = Math.Clamp(rating, 0, 5); var result = await _repository.UpdateAssetsMetadataAsync(SelectedAssets.Select(asset => asset.AssetId), rating: rating); LastUndoToken = result.UndoToken; Status = $"已将 {SelectionCount} 项评分设为 {rating}"; RaiseActions(); }
-    private async Task UndoAsync() { if (LastUndoToken is null) return; Status = await _repository.UndoAsync(LastUndoToken) ? "已撤销上一项素材库操作" : "撤销记录已失效"; LastUndoToken = null; await RefreshFilterListsAsync(); RaiseActions(); }
+    public async Task RateSelectedAsync(int rating) { rating = Math.Clamp(rating, 0, 5); var result = await _repository.UpdateAssetsMetadataAsync(SelectedAssets.Select(asset => asset.AssetId), rating: rating); RememberBrowserMutationResult(result); Status = $"已将 {SelectionCount} 项评分设为 {rating}"; RaiseActions(); }
+    private async Task UndoAsync()
+    {
+        if (!_browserCommands.CanUndo) return;
+        Status = await _browserCommands.UndoAsync(_lifetimeCancellation.Token) ? "已撤销上一项素材库操作" : "撤销记录已失效";
+        LastUndoToken = _browserCommands.UndoToken;
+        await RefreshFilterListsAsync();
+        RaiseActions();
+        RaiseP2CommandStates();
+    }
 
     private async Task SaveSmartFolderAsync()
     {
@@ -1030,10 +1057,11 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             Status = validationError;
             return;
         }
-        await _repository.SaveSmartFolderAsync(folder, rules);
-        _smartFolderEditorId = folder.SmartFolderId;
-        _smartFolderEditorSnapshot = folder;
-        _smartFolderEditorRules = rules;
+        var savedFolder = await _repository.SaveSmartFolderAsync(folder, rules);
+        var persistedRules = await _repository.ListSmartFolderRulesAsync(savedFolder.SmartFolderId);
+        _smartFolderEditorId = savedFolder.SmartFolderId;
+        _smartFolderEditorSnapshot = savedFolder;
+        _smartFolderEditorRules = persistedRules;
         OnPropertyChanged(nameof(IsSmartFolderEditing));
         OnPropertyChanged(nameof(SmartFolderEditorStatus));
         await RefreshFilterListsAsync();
@@ -1423,8 +1451,11 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         var snapshot = _workspaceSettings.SelectedAssetIds.Distinct().ToArray();
         if (snapshot.Length == 0) return;
         var assets = await Task.WhenAll(snapshot.Select(id => _repository.GetAssetAsync(id, cancellationToken)));
+        var archiveScope = BuildQuery().EffectiveArchiveScope;
         var resolved = assets
-            .Where(asset => asset is not null && (ActiveCollection == AssetLibrarySystemCollection.Archived ? asset.IsArchived : !asset.IsArchived))
+            .Where(asset => asset is not null && (asset.IsArchived
+                ? archiveScope is AssetLibraryArchiveScope.ArchivedOnly or AssetLibraryArchiveScope.All
+                : archiveScope is AssetLibraryArchiveScope.ActiveOnly or AssetLibraryArchiveScope.All))
             .Cast<AssetItem>()
             .ToArray();
         if (!_workspaceSettings.SelectedAssetIds.SequenceEqual(snapshot)) return;
@@ -1470,6 +1501,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         FindPaletteSimilarCommand.RaiseCanExecuteChanged();
         ApplyAdvancedVisualFilterCommand.RaiseCanExecuteChanged();
         RemoveVisualChipCommand.RaiseCanExecuteChanged();
+        RaiseP3SmartFolderCommands();
+        RaiseP3TagCommands();
+        PreviewP3BatchMetadataCommand?.RaiseCanExecuteChanged();
     }
 
     private bool IsCurrentAnalysis(AssetItem asset, long generation) =>
@@ -1518,12 +1552,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         Folders.Clear(); foreach (var folder in await _repository.ListFoldersAsync(cancellationToken: cancellationToken)) Folders.Add(folder); RefreshClassifierFolders();
         FolderTree.Clear(); foreach (var node in await _repository.GetFolderTreeAsync(cancellationToken: cancellationToken)) FolderTree.Add(node);
         Tags.Clear(); foreach (var tag in await _repository.ListTagsAsync(cancellationToken: cancellationToken)) Tags.Add(tag); TagGroups.Clear(); foreach (var group in await _repository.ListTagGroupsAsync(cancellationToken: cancellationToken)) TagGroups.Add(group);
+        OnPropertyChanged(nameof(P3FolderReferenceOptions)); OnPropertyChanged(nameof(P3TagReferenceOptions));
         SmartFolders.Clear(); foreach (var folder in await _repository.ListSmartFoldersAsync(cancellationToken: cancellationToken)) SmartFolders.Add(folder);
         FavoriteFolders.Clear(); foreach (var folder in Folders.Where(x => !string.IsNullOrWhiteSpace(x.Color)).Take(6)) FavoriteFolders.Add(folder);
         await RefreshP2OrganizationAsync(cancellationToken);
     }
     private void RefreshClassifierFolders() { ClassifierFolders.Clear(); foreach (var folder in Folders.Where(x => string.IsNullOrWhiteSpace(FolderSearch) || x.Name.Contains(FolderSearch, StringComparison.OrdinalIgnoreCase))) ClassifierFolders.Add(folder); }
-    private async Task SeedPreviewStructureAsync() { await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光\n灯光/柔光"); var groups = new[] { new TagGroup(Guid.NewGuid(), "人物"), new TagGroup(Guid.NewGuid(), "视觉"), new TagGroup(Guid.NewGuid(), "概念") }; foreach (var group in groups) await _repository.SaveTagGroupAsync(group); await _repository.BatchCreateTagsAsync("身体,宗教,凝视", groups[2].TagGroupId); await _repository.BatchCreateTagsAsync("红,蓝,绿色", groups[1].TagGroupId); await RefreshFilterListsAsync(); }
+    private async Task SeedPreviewStructureAsync() { await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光\n灯光/柔光"); var groups = new[] { new TagGroup(Guid.NewGuid(), "人物"), new TagGroup(Guid.NewGuid(), "视觉"), new TagGroup(Guid.NewGuid(), "概念") }; foreach (var group in groups) await _repository.SaveTagGroupAsync(group); await _repository.BatchCreateTagsAsync("人体,身体,宗教,凝视", groups[2].TagGroupId); await _repository.BatchCreateTagsAsync("红,蓝,绿色", groups[1].TagGroupId); await RefreshFilterListsAsync(); }
 
     public void ClearFilters()
     {
@@ -1547,6 +1582,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         NotifyContentState();
         RaiseActions();
         RefreshBatchScopeAvailability();
+        ClearP3QueryState();
         _ = RefreshAsync();
     }
     public void FocusFolderClassifier() => Status = "F：快速分类器已打开；↑↓选择、Space多选、Enter确认、Esc关闭";
@@ -1569,9 +1605,36 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             AddedFrom = addedFrom,
             AddedTo = addedTo,
             SortField = SortField,
-            SortDirection = SortDirection
+            SortDirection = SortDirection,
+            Document = GetP3QueryDocumentForExecution()
         };
     }
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    private P3AcceptanceQueryBarrier? _p3AcceptanceQueryBarrier;
+    private P3AcceptanceQueryBarrier? _p3AcceptanceLastQueryBarrier;
+    private long _p3AcceptancePublishedQueryGeneration;
+    internal long P3AcceptanceQueryGeneration => Volatile.Read(ref _queryGeneration);
+    internal long P3AcceptancePublishedQueryGeneration => Volatile.Read(ref _p3AcceptancePublishedQueryGeneration);
+    internal IReadOnlyList<Guid> P3AcceptancePublishedAssetIds => AssetCards.Select(card => card.Asset.AssetId).ToArray();
+    internal AssetLibraryQuery CaptureP3AcceptanceQuery() => BuildQuery();
+    internal void ArmP3AcceptanceQueryCancellationBarrier()
+    {
+        var barrier = new P3AcceptanceQueryBarrier();
+        if (Interlocked.CompareExchange(ref _p3AcceptanceQueryBarrier, barrier, null) is not null)
+            throw new InvalidOperationException("A P3 acceptance query barrier is already armed.");
+        _p3AcceptanceLastQueryBarrier = barrier;
+    }
+    internal Task WaitForP3AcceptanceBlockedQueryAsync() =>
+        (_p3AcceptanceLastQueryBarrier ?? throw new InvalidOperationException("No P3 acceptance query barrier is armed.")).Entered.Task;
+    internal void ReleaseP3AcceptanceQueryBarrier() => _p3AcceptanceLastQueryBarrier?.Release.TrySetResult(true);
+    internal bool P3AcceptanceBlockedQueryCancellationObserved => _p3AcceptanceLastQueryBarrier?.CancellationObserved == true;
+    private sealed class P3AcceptanceQueryBarrier
+    {
+        internal TaskCompletionSource<bool> Entered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource<bool> Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal bool CancellationObserved { get; set; }
+    }
+#endif
     private string CurrentCollectionDiagnostic => _visualResultMode switch
     {
         VisualResultMode.Filter => "VisualFilter",
@@ -1589,6 +1652,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         if (Interlocked.Exchange(ref _disposeStarted, 1) != 0) return;
         _lifetimeCancellation.Cancel();
         _searchDebounce.Stop();
+        DisposeP3QueryComposer();
+        DisposeP3SmartFolderEditor();
+        DisposeP3TagManager();
         _analysisCancellation?.Cancel();
         CancelLoadMoreRequest();
         _queryCancellation?.Cancel();

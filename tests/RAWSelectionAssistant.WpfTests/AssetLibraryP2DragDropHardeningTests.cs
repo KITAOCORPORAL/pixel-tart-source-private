@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,6 +81,92 @@ public sealed class AssetLibraryP2DragDropHardeningTests
             var executeResult = await AwaitResult(executeMethod.Invoke(service, [new[] { asset.AssetId }, archivedTarget, CancellationToken.None])!);
             Assert.AreEqual(0, (int)Read(executeResult, "ChangedCount")!);
             Assert.IsEmpty(await repository.ListFolderMembershipsAsync(folderId: archived.FolderId));
+            await repository.DisposeAsync();
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
+    public async Task VisibleUndoRedoStateRestoresFromDurableJournalAcrossServiceRestart()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3UndoRestart", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var repository = new SqliteAssetLibraryRepository(Path.Combine(root, "library.db"));
+            await repository.InitializeAsync();
+            var path = Path.Combine(root, "asset.jpg");
+            await File.WriteAllTextAsync(path, "fixture");
+            await repository.ImportAsync([new AssetImportRequest(path)]);
+            var asset = (await repository.QueryAsync(new AssetLibraryQuery(PageSize: 10))).Items.Single();
+
+            var serviceType = typeof(AssetLibraryViewModel).Assembly.GetType(
+                "PixelTart.Modules.AssetLibrary.AssetLibraryBrowserCommandService", throwOnError: true)!;
+            var first = Activator.CreateInstance(serviceType, repository)!;
+            await AwaitResult(serviceType.GetMethod("RateAsync")!.Invoke(
+                first, [new[] { asset.AssetId }, 4, CancellationToken.None])!);
+
+            var restarted = Activator.CreateInstance(serviceType, repository)!;
+            await (Task)serviceType.GetMethod("RestoreFromJournalAsync")!.Invoke(
+                restarted, [CancellationToken.None])!;
+            Assert.IsTrue((bool)serviceType.GetProperty("CanUndo")!.GetValue(restarted)!);
+            Assert.IsFalse((bool)serviceType.GetProperty("CanRedo")!.GetValue(restarted)!);
+            Assert.IsTrue((bool)await AwaitResult(serviceType.GetMethod("UndoAsync")!.Invoke(
+                restarted, [CancellationToken.None])!));
+
+            var restartedAfterUndo = Activator.CreateInstance(serviceType, repository)!;
+            await (Task)serviceType.GetMethod("RestoreFromJournalAsync")!.Invoke(
+                restartedAfterUndo, [CancellationToken.None])!;
+            Assert.IsFalse((bool)serviceType.GetProperty("CanUndo")!.GetValue(restartedAfterUndo)!);
+            Assert.IsTrue((bool)serviceType.GetProperty("CanRedo")!.GetValue(restartedAfterUndo)!);
+            Assert.IsTrue((bool)await AwaitResult(serviceType.GetMethod("RedoAsync")!.Invoke(
+                restartedAfterUndo, [CancellationToken.None])!));
+            Assert.AreEqual(4, (await repository.QueryAsync(new AssetLibraryQuery(PageSize: 10))).Items.Single().Rating);
+            await repository.DisposeAsync();
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
+    public async Task ExternalMetadataResultsJoinTheSameLifoUndoServiceAcrossRestart()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3UnifiedUndo", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var repository = new SqliteAssetLibraryRepository(Path.Combine(root, "library.db"));
+            await repository.InitializeAsync();
+            var path = Path.Combine(root, "asset.jpg");
+            await File.WriteAllTextAsync(path, "fixture");
+            await repository.ImportAsync([new AssetImportRequest(path)]);
+            var asset = (await repository.QueryAsync(new AssetLibraryQuery(PageSize: 10))).Items.Single();
+            var serviceType = typeof(AssetLibraryViewModel).Assembly.GetType(
+                "PixelTart.Modules.AssetLibrary.AssetLibraryBrowserCommandService", throwOnError: true)!;
+            var service = Activator.CreateInstance(serviceType, repository)!;
+            await AwaitResult(serviceType.GetMethod("RateAsync")!.Invoke(
+                service, [new[] { asset.AssetId }, 4, CancellationToken.None])!);
+
+            var external = await repository.SetAssetsMissingAsync([asset.AssetId], true);
+            serviceType.GetMethod("RememberExternalResult", BindingFlags.Instance | BindingFlags.NonPublic)!
+                .Invoke(service, [external]);
+            Assert.IsTrue((bool)serviceType.GetProperty("CanUndo")!.GetValue(service)!);
+
+            var restarted = Activator.CreateInstance(serviceType, repository)!;
+            await (Task)serviceType.GetMethod("RestoreFromJournalAsync")!.Invoke(
+                restarted, [CancellationToken.None])!;
+            Assert.IsTrue((bool)await AwaitResult(serviceType.GetMethod("UndoAsync")!.Invoke(
+                restarted, [CancellationToken.None])!));
+            var afterMissingUndo = await repository.GetAssetAsync(asset.AssetId);
+            Assert.IsNotNull(afterMissingUndo);
+            Assert.IsFalse(afterMissingUndo.IsMissing);
+            Assert.AreEqual(4, afterMissingUndo.Rating);
+            Assert.IsTrue((bool)serviceType.GetProperty("CanUndo")!.GetValue(restarted)!,
+                "Undoing the newest mixed command must expose the next durable operation.");
+
+            Assert.IsTrue((bool)await AwaitResult(serviceType.GetMethod("UndoAsync")!.Invoke(
+                restarted, [CancellationToken.None])!));
+            Assert.AreEqual(0, (await repository.GetAssetAsync(asset.AssetId))!.Rating);
+            Assert.IsTrue((bool)serviceType.GetProperty("CanRedo")!.GetValue(restarted)!);
             await repository.DisposeAsync();
         }
         finally { try { Directory.Delete(root, true); } catch { } }

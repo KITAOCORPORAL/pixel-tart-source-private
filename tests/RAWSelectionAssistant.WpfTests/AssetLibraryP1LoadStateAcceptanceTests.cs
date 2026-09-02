@@ -40,7 +40,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
             Assert.HasCount(0, viewModel.AssetCards);
             Assert.HasCount(0, viewModel.Folders);
             Assert.HasCount(0, viewModel.ModuleDiagnostics);
-            AssertDatabaseIsV6AndEmpty(databasePath);
+            AssertDatabaseIsV7AndEmpty(databasePath);
             AssertRepositoryProof(controller.Snapshots.Single(snapshot => snapshot.Stage == "ready"), expectedAssetCount: 0);
         }
         finally
@@ -104,7 +104,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
             CollectionAssert.AreEqual(new[] { 1, 2 }, controller.RepositoryInitializationAttempts.ToArray());
             CollectionAssert.AreEqual(new[] { 1, 2 }, controller.InitialQueryAttempts.ToArray());
 
-            AssertDatabaseIsV6AndEmpty(databasePath);
+            AssertDatabaseIsV7AndEmpty(databasePath);
 
             var error = controller.Snapshots.Single(snapshot => snapshot.Attempt == 1 && snapshot.Stage == "error-visible");
             Assert.IsTrue(error.HasLoadError);
@@ -321,7 +321,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
         return completion.Task;
     }
 
-    private static void AssertDatabaseIsV6AndEmpty(string databasePath) => AssertDatabaseSchemaAndCount(databasePath, 0);
+    private static void AssertDatabaseIsV7AndEmpty(string databasePath) => AssertDatabaseSchemaAndCount(databasePath, 0);
 
     private static void AssertDatabaseSchemaAndCount(string databasePath, int expectedAssetCount)
     {
@@ -329,7 +329,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
         using var connection = database.OpenConnectionAsync().GetAwaiter().GetResult();
         using var schema = connection.CreateCommand();
         schema.CommandText = "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;";
-        Assert.AreEqual(6L, Convert.ToInt64(schema.ExecuteScalar()));
+        Assert.AreEqual(7L, Convert.ToInt64(schema.ExecuteScalar()));
         using var assets = connection.CreateCommand();
         assets.CommandText = "SELECT COUNT(*) FROM AssetItems;";
         Assert.AreEqual(expectedAssetCount, Convert.ToInt32(assets.ExecuteScalar()));
@@ -339,7 +339,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
     {
         Assert.AreEqual("real-repository", snapshot.RepositorySource);
         Assert.AreEqual(nameof(SqliteAssetLibraryRepository), snapshot.RepositoryImplementation);
-        Assert.AreEqual(6, snapshot.RepositorySchemaVersion);
+        Assert.AreEqual(7, snapshot.RepositorySchemaVersion);
         Assert.AreEqual(expectedAssetCount, snapshot.RepositoryAssetCount);
     }
 
@@ -393,7 +393,7 @@ public sealed class AssetLibraryP1LoadStateAcceptanceTests
         var manifest = document.RootElement;
         Assert.AreEqual("real-repository", manifest.GetProperty("repositorySource").GetString());
         Assert.AreEqual(nameof(SqliteAssetLibraryRepository), manifest.GetProperty("repositoryImplementation").GetString());
-        Assert.AreEqual(6, manifest.GetProperty("repositorySchemaVersion").GetInt32());
+        Assert.AreEqual(7, manifest.GetProperty("repositorySchemaVersion").GetInt32());
         Assert.AreEqual(expectedAssetCount, manifest.GetProperty("repositoryAssetCount").GetInt32());
         Assert.AreEqual("ready", manifest.GetProperty("repositoryProofStage").GetString());
         if (expectedFailure)

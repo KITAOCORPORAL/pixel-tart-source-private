@@ -13,7 +13,7 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class AssetLibrarySmartFolderEditorWpfTests
 {
     [TestMethod]
-    public async Task ExistingRulesLoadIntoEditorAndSavePreservesUnknownRulesAndRuleIds()
+    public async Task ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds()
     {
         await RunSta(() =>
         {
@@ -23,14 +23,14 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
             {
                 var databasePath = Path.Combine(root, "editor.db");
                 var folderId = Guid.NewGuid();
-                var from = DateTimeOffset.UtcNow.Date.AddDays(-7);
-                var to = DateTimeOffset.UtcNow.Date.AddDays(1);
+                var from = new DateTimeOffset(DateTime.UtcNow.Date, TimeSpan.Zero).AddDays(-7);
+                var to = new DateTimeOffset(DateTime.UtcNow.Date, TimeSpan.Zero).AddDays(1);
                 var unknownId = Guid.NewGuid();
                 SmartFolderRule[] rules =
                 [
                     Rule(folderId, SmartFolderField.FileName, SmartFolderOperator.Contains, "海边"),
                     Rule(folderId, SmartFolderField.Extension, SmartFolderOperator.Equals, ".png"),
-                    Rule(folderId, SmartFolderField.MediaType, SmartFolderOperator.Equals, "image/png"),
+                    Rule(folderId, SmartFolderField.MediaType, SmartFolderOperator.Equals, "Image"),
                     Rule(folderId, SmartFolderField.Folder, SmartFolderOperator.Equals, "参考"),
                     Rule(folderId, SmartFolderField.Tag, SmartFolderOperator.Equals, "像素"),
                     Rule(folderId, SmartFolderField.Rating, SmartFolderOperator.GreaterThanOrEqual, "3"),
@@ -49,7 +49,7 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
 
                 Assert.AreEqual("海边", viewModel.SmartFileNameValue);
                 Assert.AreEqual(".png", viewModel.SmartExtensionValue);
-                Assert.AreEqual("image/png", viewModel.SmartMediaTypeValue);
+                Assert.AreEqual("Image", viewModel.SmartMediaTypeValue);
                 Assert.AreEqual("参考", viewModel.SmartFolderValue);
                 Assert.AreEqual("像素", viewModel.SmartTagValue);
                 Assert.AreEqual("3", viewModel.SmartRuleValue);
@@ -62,13 +62,18 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
                 viewModel.SmartFileNameValue = "海边日落";
                 InvokeSave(viewModel).GetAwaiter().GetResult();
 
+                Guid projectedCommentId;
                 var verification = OpenRepository(databasePath);
                 try
                 {
                     var savedFolder = verification.ListSmartFoldersAsync().GetAwaiter().GetResult().Single(item => item.SmartFolderId == folderId);
                     var savedRules = verification.ListSmartFolderRulesAsync(folderId).GetAwaiter().GetResult();
                     Assert.AreEqual("海边参考（更新）", savedFolder.Name);
-                    Assert.AreEqual(unknownId, savedRules.Single(item => item.Field == SmartFolderField.Comment).RuleId);
+                    var projectedComment = savedRules.Single(item => item.Field == SmartFolderField.Comment);
+                    projectedCommentId = projectedComment.RuleId;
+                    Assert.AreNotEqual(unknownId, projectedCommentId,
+                        "P3 canonical documents derive legacy projection ids from semantic hash and path.");
+                    Assert.AreEqual("保留旧字段", projectedComment.Value);
                     Assert.AreEqual(2, savedRules.Count(item => item.Field == SmartFolderField.AddedAt));
                     Assert.AreNotEqual(
                         savedRules.Single(item => item.Field == SmartFolderField.AddedAt && item.Operator == SmartFolderOperator.GreaterThanOrEqual).RuleId,
@@ -80,6 +85,17 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
                     Assert.AreEqual("海边日落", savedRules.Single(item => item.Field == SmartFolderField.FileName).Value);
                 }
                 finally { verification.DisposeAsync().AsTask().GetAwaiter().GetResult(); }
+
+                InvokeSave(viewModel).GetAwaiter().GetResult();
+                var repeatedVerification = OpenRepository(databasePath);
+                try
+                {
+                    Assert.AreEqual(projectedCommentId,
+                        repeatedVerification.ListSmartFolderRulesAsync(folderId).GetAwaiter().GetResult()
+                            .Single(item => item.Field == SmartFolderField.Comment).RuleId,
+                        "An unchanged canonical document must keep its legacy projection id stable across saves.");
+                }
+                finally { repeatedVerification.DisposeAsync().AsTask().GetAwaiter().GetResult(); }
             }
             finally { DisposeViewModel(viewModel); DeleteTempRoot(root); }
         });
@@ -215,7 +231,21 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
         try
         {
             repository.InitializeAsync().GetAwaiter().GetResult();
-            return repository.SaveSmartFolderAsync(folder, rules).GetAwaiter().GetResult();
+            var materializedRules = rules.ToArray();
+            foreach (var name in materializedRules
+                         .Where(rule => rule.Field == SmartFolderField.Folder)
+                         .Select(rule => rule.Value)
+                         .Where(value => !string.IsNullOrWhiteSpace(value))
+                         .Distinct(StringComparer.Ordinal))
+                repository.SaveFolderAsync(new(Guid.NewGuid(), null, name)).GetAwaiter().GetResult();
+            foreach (var name in materializedRules
+                         .Where(rule => rule.Field == SmartFolderField.Tag)
+                         .Select(rule => rule.Value)
+                         .Where(value => !string.IsNullOrWhiteSpace(value))
+                         .Distinct(StringComparer.Ordinal))
+                repository.SaveTagAsync(new(Guid.NewGuid(), name)).GetAwaiter().GetResult();
+
+            return repository.SaveSmartFolderAsync(folder, materializedRules).GetAwaiter().GetResult();
         }
         finally { repository.DisposeAsync().AsTask().GetAwaiter().GetResult(); }
     }

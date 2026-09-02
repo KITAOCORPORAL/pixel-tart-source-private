@@ -173,7 +173,11 @@ public sealed partial class AssetLibraryViewModel
                 case SmartFolderField.VisualToneKey:
                     SmartToneKey = rule.Value; _smartToneOperator = rule.Operator; break;
                 case SmartFolderField.VisualAnalysisStatus:
-                    SmartAnalysisStatus = rule.Value; _smartAnalysisStatusOperator = rule.Operator; break;
+                    SmartAnalysisStatus = string.Equals(rule.Value, "Valid", StringComparison.OrdinalIgnoreCase)
+                        ? "Analyzed"
+                        : rule.Value;
+                    _smartAnalysisStatusOperator = rule.Operator;
+                    break;
                 case SmartFolderField.VisualAverageSaturation:
                     SmartAverageSaturationMaximum = rule.Value; _smartAverageSaturationOperator = rule.Operator; break;
                 case SmartFolderField.VisualDominantHue:

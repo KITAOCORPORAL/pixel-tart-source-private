@@ -30,8 +30,53 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     {
         if (Volatile.Read(ref _initialized) != 0) return;
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await CreateSchemaV6BackupIfNeededAsync(connection, cancellationToken).ConfigureAwait(false);
         await AssetLibrarySchema.EnsureAsync(connection, cancellationToken).ConfigureAwait(false);
         Volatile.Write(ref _initialized, 1);
+    }
+
+    private async Task CreateSchemaV6BackupIfNeededAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        await using var exists = connection.CreateCommand();
+        exists.CommandText = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='AssetLibrarySchemaInfo';";
+        if (Convert.ToInt32(await exists.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) == 0) return;
+        await using var read = connection.CreateCommand();
+        read.CommandText = "SELECT COALESCE(MAX(Version),0) FROM AssetLibrarySchemaInfo;";
+        if (Convert.ToInt32(await read.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) != 6) return;
+        var primaryBackupPath = DatabasePath + ".schema-v6-backup.sqlite";
+        var backupPath = File.Exists(primaryBackupPath)
+            ? DatabasePath + $".schema-v6-backup-{DateTimeOffset.UtcNow:yyyyMMddTHHmmssfff}-{Guid.NewGuid():N}.sqlite"
+            : primaryBackupPath;
+        var partialPath = backupPath + $".partial-{Guid.NewGuid():N}";
+        var builder = new SqliteConnectionStringBuilder
+        {
+            DataSource = partialPath,
+            Mode = SqliteOpenMode.ReadWriteCreate,
+            Pooling = false
+        };
+        try
+        {
+            await using (var destination = new SqliteConnection(builder.ToString()))
+            {
+                await destination.OpenAsync(cancellationToken).ConfigureAwait(false);
+                connection.BackupDatabase(destination);
+                await using var integrity = destination.CreateCommand();
+                integrity.CommandText = "PRAGMA quick_check;";
+                if (!string.Equals(Convert.ToString(await integrity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)), "ok", StringComparison.OrdinalIgnoreCase))
+                    throw new InvalidDataException("v6 迁移备份未通过 SQLite 完整性检查。");
+                await using var version = destination.CreateCommand();
+                version.CommandText = "SELECT COALESCE(MAX(Version),0) FROM AssetLibrarySchemaInfo;";
+                if (Convert.ToInt32(await version.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) != 6)
+                    throw new InvalidDataException("v6 迁移备份的 schema 版本不匹配。");
+            }
+            File.Move(partialPath, backupPath, overwrite: false);
+        }
+        catch
+        {
+            try { if (File.Exists(partialPath)) File.Delete(partialPath); }
+            catch { /* Preserve the original backup failure as the actionable error. */ }
+            throw;
+        }
     }
 
     public async Task<AssetLibraryMetadataIndexResult> ImportAsync(
@@ -121,6 +166,38 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     public async Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default)
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        if (query.SmartFolderId is Guid smartFolderId &&
+            (query.Document is null || query.Document.Scope == AssetQueryScope.Current))
+        {
+            var savedDocument = await GetSmartFolderQueryDocumentAsync(smartFolderId, cancellationToken).ConfigureAwait(false);
+            if (savedDocument is null)
+                return new([], null, 0, "智能文件夹缺少有效的查询文档。");
+
+            var savedNormalization = AssetQueryDocumentCodec.Normalize(savedDocument.Document);
+            if (!savedNormalization.IsValid || savedNormalization.Document is null)
+                return new([], null, 0, savedNormalization.ErrorMessage);
+            AssetQueryDocument? transientDocument = null;
+            if (query.Document is not null)
+            {
+                var transientNormalization = AssetQueryDocumentCodec.Normalize(query.Document);
+                if (!transientNormalization.IsValid || transientNormalization.Document is null)
+                    return new([], null, 0, transientNormalization.ErrorMessage);
+                transientDocument = transientNormalization.Document;
+            }
+
+            query = ComposeCurrentSmartFolderQuery(query, savedNormalization.Document, transientDocument);
+        }
+        if (query.Document is not null)
+        {
+            var normalized = AssetQueryDocumentCodec.Normalize(query.Document);
+            if (!normalized.IsValid || normalized.Document is null)
+                return new([], null, 0, normalized.ErrorMessage);
+            query = MergeLegacyFileNameRegexIntoP3Document(query, normalized.Document);
+            normalized = AssetQueryDocumentCodec.Normalize(query.Document!);
+            if (!normalized.IsValid || normalized.Document is null)
+                return new([], null, 0, normalized.ErrorMessage);
+            query = ApplyP3DocumentBaseQuery(query, normalized.Document);
+        }
         if (!TryReadQueryCursor(query, out var cursor, out var cursorError))
             return new([], null, 0, cursorError);
         Regex? regex = null;
@@ -130,7 +207,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
             catch (ArgumentException ex) { return new([], null, 0, ex.Message); }
         }
         var smartFolderHasRegex = false;
-        if (query.SmartFolderId is not null)
+        if (query.SmartFolderId is not null && query.Document is null)
         {
             try
             {
@@ -146,6 +223,8 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         }
 
         var pageSize = query.EffectivePageSize;
+        if (query.Document is not null)
+            return await QueryP3DocumentPageAsync(query, pageSize, cursor, cancellationToken).ConfigureAwait(false);
         if (regex is null && query.SmartFolderId is null)
             return await QueryIndexedPageAsync(query, pageSize, cursor, cancellationToken).ConfigureAwait(false);
         if (query.SmartFolderId is not null && regex is null && !smartFolderHasRegex)
@@ -251,15 +330,19 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         var created = folder.CreatedAt ?? now;
         var updated = now;
         var parent = folder.ParentFolderId?.ToString("D");
+        var normalizedName = NormalizeEntityName(folder.Name, nameof(folder));
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        if (existingFolder is not null &&
+            (!string.Equals(existingFolder.Name, normalizedName, StringComparison.Ordinal) || (!existingFolder.IsArchived && folder.IsArchived)))
+            await ResolveP3NameReferencesInAllDocumentsAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand(); command.Transaction = transaction;
         command.CommandText = """
             INSERT INTO AssetFolders(FolderId,ParentFolderId,Name,Description,Icon,Color,SortOrder,CreatedAt,UpdatedAt,IsArchived,IsSystem,AutoTagIdsJson)
             VALUES($id,$parent,$name,$description,$icon,$color,$sort,$created,$updated,$archived,$system,$tags)
             ON CONFLICT(FolderId) DO UPDATE SET ParentFolderId=excluded.ParentFolderId,Name=excluded.Name,Description=excluded.Description,Icon=excluded.Icon,Color=excluded.Color,SortOrder=excluded.SortOrder,UpdatedAt=excluded.UpdatedAt,IsArchived=excluded.IsArchived,IsSystem=excluded.IsSystem,AutoTagIdsJson=excluded.AutoTagIdsJson;
             """;
-        command.Parameters.AddWithValue("$id", folder.FolderId.ToString("D")); command.Parameters.AddWithValue("$parent", (object?)parent ?? DBNull.Value); command.Parameters.AddWithValue("$name", folder.Name.Trim()); command.Parameters.AddWithValue("$description", folder.Description ?? string.Empty); command.Parameters.AddWithValue("$icon", (object?)folder.Icon ?? DBNull.Value); command.Parameters.AddWithValue("$color", (object?)folder.Color ?? DBNull.Value); command.Parameters.AddWithValue("$sort", folder.SortOrder); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$updated", updated.ToString("O")); command.Parameters.AddWithValue("$archived", folder.IsArchived ? 1 : 0); command.Parameters.AddWithValue("$system", folder.IsSystem ? 1 : 0); command.Parameters.AddWithValue("$tags", "[]");
+        command.Parameters.AddWithValue("$id", folder.FolderId.ToString("D")); command.Parameters.AddWithValue("$parent", (object?)parent ?? DBNull.Value); command.Parameters.AddWithValue("$name", normalizedName); command.Parameters.AddWithValue("$description", folder.Description ?? string.Empty); command.Parameters.AddWithValue("$icon", (object?)folder.Icon ?? DBNull.Value); command.Parameters.AddWithValue("$color", (object?)folder.Color ?? DBNull.Value); command.Parameters.AddWithValue("$sort", folder.SortOrder); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$updated", updated.ToString("O")); command.Parameters.AddWithValue("$archived", folder.IsArchived ? 1 : 0); command.Parameters.AddWithValue("$system", folder.IsSystem ? 1 : 0); command.Parameters.AddWithValue("$tags", "[]");
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         await using (var clearTags = connection.CreateCommand()) { clearTags.Transaction = transaction; clearTags.CommandText = "DELETE FROM AssetFolderAutoTags WHERE FolderId=$folder;"; clearTags.Parameters.AddWithValue("$folder", folder.FolderId.ToString("D")); await clearTags.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
         foreach (var tagId in (folder.AutoTagIds ?? []).Distinct())
@@ -267,7 +350,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
             await using var addTag = connection.CreateCommand(); addTag.Transaction = transaction; addTag.CommandText = "INSERT INTO AssetFolderAutoTags(FolderId,TagId) VALUES($folder,$tag);"; addTag.Parameters.AddWithValue("$folder", folder.FolderId.ToString("D")); addTag.Parameters.AddWithValue("$tag", tagId.ToString("D")); await addTag.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-        return folder with { Name = folder.Name.Trim(), CreatedAt = created, UpdatedAt = updated, AutoTagIds = folder.AutoTagIds ?? [] };
+        return folder with { Name = normalizedName, CreatedAt = created, UpdatedAt = updated, AutoTagIds = folder.AutoTagIds ?? [] };
     }
 
     public async Task ArchiveFolderAsync(Guid folderId, CancellationToken cancellationToken = default)
@@ -307,10 +390,14 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     public async Task<TagGroup> SaveTagGroupAsync(TagGroup group, CancellationToken cancellationToken = default)
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        var name = NormalizeEntityName(group.Name, nameof(group));
         var created = group.CreatedAt ?? DateTimeOffset.UtcNow;
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await using var command = connection.CreateCommand(); command.CommandText = "INSERT INTO TagGroups(TagGroupId,Name,SortOrder,CreatedAt,IsArchived) VALUES($id,$name,$sort,$created,$archived) ON CONFLICT(TagGroupId) DO UPDATE SET Name=excluded.Name,SortOrder=excluded.SortOrder,IsArchived=excluded.IsArchived;"; command.Parameters.AddWithValue("$id", group.TagGroupId.ToString("D")); command.Parameters.AddWithValue("$name", group.Name.Trim()); command.Parameters.AddWithValue("$sort", group.SortOrder); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$archived", group.IsArchived ? 1 : 0); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        return group with { Name = group.Name.Trim(), CreatedAt = created };
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await EnsureUniqueEntityNameAsync(connection, transaction, "TagGroups", "TagGroupId", group.TagGroupId, null, name, cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "INSERT INTO TagGroups(TagGroupId,Name,SortOrder,CreatedAt,IsArchived) VALUES($id,$name,$sort,$created,$archived) ON CONFLICT(TagGroupId) DO UPDATE SET Name=excluded.Name,SortOrder=excluded.SortOrder,IsArchived=excluded.IsArchived;", cancellationToken, ("$id", group.TagGroupId.ToString("D")), ("$name", name), ("$sort", group.SortOrder), ("$created", created.ToString("O")), ("$archived", group.IsArchived ? 1 : 0)).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return group with { Name = name, CreatedAt = created };
     }
 
     public async Task<IReadOnlyList<AssetTag>> ListTagsAsync(Guid? tagGroupId = null, bool includeArchived = false, CancellationToken cancellationToken = default)
@@ -318,7 +405,15 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         var result = new List<AssetTag>();
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-        await using var command = connection.CreateCommand(); command.CommandText = "SELECT t.TagId,t.Name,t.TagGroupId,t.SortOrder,(SELECT COUNT(*) FROM AssetTagMemberships m WHERE m.TagId=t.TagId),t.CreatedAt,t.IsArchived FROM AssetTags t WHERE ($group IS NULL OR t.TagGroupId=$group) AND ($include=1 OR t.IsArchived=0) ORDER BY t.SortOrder,t.Name COLLATE NOCASE;"; command.Parameters.AddWithValue("$group", (object?)tagGroupId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$include", includeArchived ? 1 : 0);
+        await using var command = connection.CreateCommand(); command.CommandText = """
+            SELECT t.TagId,t.Name,t.TagGroupId,t.SortOrder,
+                   (SELECT COUNT(*) FROM AssetTagMemberships m WHERE m.TagId=t.TagId),t.CreatedAt,t.IsArchived
+            FROM AssetTags t
+            LEFT JOIN TagGroups g ON g.TagGroupId=t.TagGroupId
+            WHERE ($group IS NULL OR t.TagGroupId=$group)
+              AND ($include=1 OR (t.IsArchived=0 AND (t.TagGroupId IS NULL OR g.IsArchived=0)))
+            ORDER BY t.SortOrder,t.Name COLLATE NOCASE;
+            """; command.Parameters.AddWithValue("$group", (object?)tagGroupId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$include", includeArchived ? 1 : 0);
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.IsDBNull(2) ? null : Guid.Parse(reader.GetString(2)), reader.GetInt32(3), reader.GetInt32(4), DateTimeOffset.Parse(reader.GetString(5)), reader.GetInt32(6) != 0));
         return result;
     }
@@ -326,16 +421,20 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     public async Task<AssetTag> SaveTagAsync(AssetTag tag, CancellationToken cancellationToken = default)
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        var name = NormalizeEntityName(tag.Name, nameof(tag));
         var created = tag.CreatedAt ?? DateTimeOffset.UtcNow;
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await using var command = connection.CreateCommand(); command.CommandText = "INSERT INTO AssetTags(TagId,Name,TagGroupId,SortOrder,UsageCount,CreatedAt,IsArchived) VALUES($id,$name,$group,$sort,0,$created,$archived) ON CONFLICT(TagId) DO UPDATE SET Name=excluded.Name,TagGroupId=excluded.TagGroupId,SortOrder=excluded.SortOrder,IsArchived=excluded.IsArchived;"; command.Parameters.AddWithValue("$id", tag.TagId.ToString("D")); command.Parameters.AddWithValue("$name", tag.Name.Trim()); command.Parameters.AddWithValue("$group", (object?)tag.TagGroupId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$sort", tag.SortOrder); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$archived", tag.IsArchived ? 1 : 0); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        return tag with { Name = tag.Name.Trim(), CreatedAt = created };
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await EnsureTagSaveAllowedAsync(connection, transaction, tag with { Name = name }, cancellationToken).ConfigureAwait(false);
+        await EnsureUniqueEntityNameAsync(connection, transaction, "AssetTags", "TagId", tag.TagId, tag.TagGroupId, name, cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "INSERT INTO AssetTags(TagId,Name,TagGroupId,SortOrder,UsageCount,CreatedAt,IsArchived) VALUES($id,$name,$group,$sort,0,$created,$archived) ON CONFLICT(TagId) DO UPDATE SET Name=excluded.Name,TagGroupId=excluded.TagGroupId,SortOrder=excluded.SortOrder,IsArchived=excluded.IsArchived;", cancellationToken, ("$id", tag.TagId.ToString("D")), ("$name", name), ("$group", (object?)tag.TagGroupId?.ToString("D") ?? DBNull.Value), ("$sort", tag.SortOrder), ("$created", created.ToString("O")), ("$archived", tag.IsArchived ? 1 : 0)).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return tag with { Name = name, CreatedAt = created };
     }
 
     public async Task ArchiveTagAsync(Guid tagId, CancellationToken cancellationToken = default)
     {
-        await InitializeAsync(cancellationToken).ConfigureAwait(false);
-        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "UPDATE AssetTags SET IsArchived=1 WHERE TagId=$id;"; command.Parameters.AddWithValue("$id", tagId.ToString("D")); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        _ = await SetTagArchivedAsync(tagId, isArchived: true, cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<IReadOnlyList<AssetTagMembership>> ListTagMembershipsAsync(Guid? tagId = null, Guid? assetId = null, CancellationToken cancellationToken = default)
@@ -354,45 +453,103 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 
     public async Task<AssetLibraryBatchResult> MergeTagsAsync(Guid sourceTagId, Guid targetTagId, CancellationToken cancellationToken = default)
     {
-        if (sourceTagId == targetTagId) throw new ArgumentException("Source and target tags must differ.");
-        await InitializeAsync(cancellationToken).ConfigureAwait(false);
-        var source = await ReadTagByIdAsync(sourceTagId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Source tag not found.");
-        var target = await ReadTagByIdAsync(targetTagId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Target tag not found.");
-        var sourceMembers = (await ListTagMembershipsAsync(sourceTagId, cancellationToken: cancellationToken).ConfigureAwait(false)).ToArray();
-        var targetMembers = (await ListTagMembershipsAsync(targetTagId, cancellationToken: cancellationToken).ConfigureAwait(false)).Select(x => x.AssetId).ToHashSet();
-        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
-        foreach (var member in sourceMembers)
-        {
-            await using var add = connection.CreateCommand(); add.Transaction = transaction; add.CommandText = "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);"; add.Parameters.AddWithValue("$asset", member.AssetId.ToString("D")); add.Parameters.AddWithValue("$tag", targetTagId.ToString("D")); add.Parameters.AddWithValue("$at", member.AddedAt.ToString("O")); await add.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        }
-        await using (var remove = connection.CreateCommand()) { remove.Transaction = transaction; remove.CommandText = "DELETE FROM AssetTagMemberships WHERE TagId=$tag;"; remove.Parameters.AddWithValue("$tag", sourceTagId.ToString("D")); await remove.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
-        await using (var archive = connection.CreateCommand()) { archive.Transaction = transaction; archive.CommandText = "UPDATE AssetTags SET IsArchived=1 WHERE TagId=$tag;"; archive.Parameters.AddWithValue("$tag", sourceTagId.ToString("D")); await archive.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
-        var payload = new TagMergeUndo(source, target, sourceMembers, targetMembers.ToArray());
-        var token = CreateUndoToken("Merge tags");
-        await WriteUndoJournalAsync(connection, transaction, token, "tag-merge", payload, cancellationToken).ConfigureAwait(false);
-        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-        TrackUndo(token, undoCancellation => RestoreMergedTagsAsync(source, target, sourceMembers, targetMembers, undoCancellation));
-        return new(sourceMembers.Length, token, []);
+        return await MergeTagsP3Async(sourceTagId, targetTagId, cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<IReadOnlyList<SmartFolder>> ListSmartFoldersAsync(bool includeArchived = false, CancellationToken cancellationToken = default)
     {
-        await InitializeAsync(cancellationToken).ConfigureAwait(false); var result = new List<SmartFolder>(); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT SmartFolderId,Name,Logic,Description,CreatedAt,UpdatedAt,IsArchived FROM SmartFolders WHERE ($include=1 OR IsArchived=0) ORDER BY Name COLLATE NOCASE;"; command.Parameters.AddWithValue("$include", includeArchived ? 1 : 0); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), Enum.TryParse<SmartFolderLogic>(reader.GetString(2), true, out var logic) ? logic : SmartFolderLogic.And, reader.GetString(3), DateTimeOffset.Parse(reader.GetString(4)), DateTimeOffset.Parse(reader.GetString(5)), reader.GetInt32(6) != 0)); return result;
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); var result = new List<SmartFolder>(); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT SmartFolderId,Name,Logic,Description,CreatedAt,UpdatedAt,IsArchived FROM SmartFolders WHERE ($include=1 OR IsArchived=0) ORDER BY Name COLLATE NOCASE;"; command.Parameters.AddWithValue("$include", includeArchived ? 1 : 0); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), ParseP3SmartFolderLogic(reader.GetString(2)), reader.GetString(3), DateTimeOffset.Parse(reader.GetString(4)), DateTimeOffset.Parse(reader.GetString(5)), reader.GetInt32(6) != 0)); return result;
     }
 
     public async Task<SmartFolder> SaveSmartFolderAsync(SmartFolder folder, IEnumerable<SmartFolderRule> rules, CancellationToken cancellationToken = default)
     {
-        await InitializeAsync(cancellationToken).ConfigureAwait(false); var now = DateTimeOffset.UtcNow; var created = folder.CreatedAt ?? now;
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); var now = DateTimeOffset.UtcNow; var created = folder.CreatedAt ?? now; var materializedRules = rules.OrderBy(x => x.SortOrder).ToArray(); var name = NormalizeEntityName(folder.Name, nameof(folder));
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
-        await using (var command = connection.CreateCommand()) { command.Transaction = transaction; command.CommandText = "INSERT INTO SmartFolders(SmartFolderId,Name,Logic,Description,CreatedAt,UpdatedAt,IsArchived) VALUES($id,$name,$logic,$description,$created,$updated,$archived) ON CONFLICT(SmartFolderId) DO UPDATE SET Name=excluded.Name,Logic=excluded.Logic,Description=excluded.Description,UpdatedAt=excluded.UpdatedAt,IsArchived=excluded.IsArchived;"; command.Parameters.AddWithValue("$id", folder.SmartFolderId.ToString("D")); command.Parameters.AddWithValue("$name", folder.Name.Trim()); command.Parameters.AddWithValue("$logic", folder.Logic.ToString()); command.Parameters.AddWithValue("$description", folder.Description ?? string.Empty); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$updated", now.ToString("O")); command.Parameters.AddWithValue("$archived", folder.IsArchived ? 1 : 0); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
+        var preserveCanonicalDocument = false;
+        await using (var readDocument = connection.CreateCommand())
+        {
+            readDocument.Transaction = transaction;
+            readDocument.CommandText = "SELECT QueryJson,QueryHash FROM SmartFolderQueryDocuments WHERE SmartFolderId=$id;";
+            readDocument.Parameters.AddWithValue("$id", folder.SmartFolderId.ToString("D"));
+            string? currentJson = null;
+            string? currentHash = null;
+            await using (var reader = await readDocument.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
+            {
+                if (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                {
+                    currentJson = reader.GetString(0);
+                    currentHash = reader.GetString(1);
+                }
+            }
+            if (currentJson is not null && currentHash is not null)
+            {
+                var parsed = AssetQueryDocumentCodec.Parse(currentJson);
+                if (!parsed.IsValid || parsed.Document is null) throw new InvalidDataException(parsed.ErrorMessage);
+                if (!string.Equals(currentHash, AssetQueryDocumentCodec.ComputeHash(parsed.Document), StringComparison.OrdinalIgnoreCase))
+                    throw new InvalidDataException("智能文件夹查询文档哈希不匹配。");
+                var currentProjection = await LegacySmartFolderAdapter.ProjectAsync(
+                    connection, transaction, folder.SmartFolderId, parsed.Document, currentHash, cancellationToken).ConfigureAwait(false);
+                LegacySmartFolderAdapter.RejectStaleProjection(materializedRules, currentProjection);
+                var currentLogic = parsed.Document.RootGroup.Logic == AssetQueryLogic.Any ? SmartFolderLogic.Or : SmartFolderLogic.And;
+                preserveCanonicalDocument = folder.Logic == currentLogic &&
+                    LegacySmartFolderAdapter.IsUnchangedProjection(materializedRules, currentProjection);
+            }
+        }
+        await EnsureUniqueEntityNameAsync(connection, transaction, "SmartFolders", "SmartFolderId", folder.SmartFolderId, null, name, cancellationToken).ConfigureAwait(false);
+        await using (var command = connection.CreateCommand()) { command.Transaction = transaction; command.CommandText = "INSERT INTO SmartFolders(SmartFolderId,Name,Logic,Description,CreatedAt,UpdatedAt,IsArchived) VALUES($id,$name,$logic,$description,$created,$updated,$archived) ON CONFLICT(SmartFolderId) DO UPDATE SET Name=excluded.Name,Logic=excluded.Logic,Description=excluded.Description,UpdatedAt=excluded.UpdatedAt,IsArchived=excluded.IsArchived;"; command.Parameters.AddWithValue("$id", folder.SmartFolderId.ToString("D")); command.Parameters.AddWithValue("$name", name); command.Parameters.AddWithValue("$logic", folder.Logic.ToString()); command.Parameters.AddWithValue("$description", folder.Description ?? string.Empty); command.Parameters.AddWithValue("$created", created.ToString("O")); command.Parameters.AddWithValue("$updated", now.ToString("O")); command.Parameters.AddWithValue("$archived", folder.IsArchived ? 1 : 0); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
         await using (var clear = connection.CreateCommand()) { clear.Transaction = transaction; clear.CommandText = "DELETE FROM SmartFolderRules WHERE SmartFolderId=$id;"; clear.Parameters.AddWithValue("$id", folder.SmartFolderId.ToString("D")); await clear.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
-        foreach (var rule in rules.OrderBy(x => x.SortOrder)) { await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = "INSERT INTO SmartFolderRules(RuleId,SmartFolderId,Field,Operator,Value,Negated,SortOrder,GroupId,GroupLogic) VALUES($id,$folder,$field,$operator,$value,$negated,$sort,$group,$groupLogic);"; command.Parameters.AddWithValue("$id", rule.RuleId == Guid.Empty ? Guid.NewGuid().ToString("D") : rule.RuleId.ToString("D")); command.Parameters.AddWithValue("$folder", folder.SmartFolderId.ToString("D")); command.Parameters.AddWithValue("$field", rule.Field.ToString()); command.Parameters.AddWithValue("$operator", rule.Operator.ToString()); command.Parameters.AddWithValue("$value", rule.Value ?? string.Empty); command.Parameters.AddWithValue("$negated", rule.Negated ? 1 : 0); command.Parameters.AddWithValue("$sort", rule.SortOrder); command.Parameters.AddWithValue("$group", (object?)rule.GroupId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$groupLogic", rule.GroupLogic.ToString()); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
-        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return folder with { Name = folder.Name.Trim(), CreatedAt = created, UpdatedAt = now };
+        foreach (var rule in materializedRules) { await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = "INSERT INTO SmartFolderRules(RuleId,SmartFolderId,Field,Operator,Value,Negated,SortOrder,GroupId,GroupLogic) VALUES($id,$folder,$field,$operator,$value,$negated,$sort,$group,$groupLogic);"; command.Parameters.AddWithValue("$id", rule.RuleId == Guid.Empty ? Guid.NewGuid().ToString("D") : rule.RuleId.ToString("D")); command.Parameters.AddWithValue("$folder", folder.SmartFolderId.ToString("D")); command.Parameters.AddWithValue("$field", rule.Field.ToString()); command.Parameters.AddWithValue("$operator", rule.Operator.ToString()); command.Parameters.AddWithValue("$value", rule.Value ?? string.Empty); command.Parameters.AddWithValue("$negated", rule.Negated ? 1 : 0); command.Parameters.AddWithValue("$sort", rule.SortOrder); command.Parameters.AddWithValue("$group", (object?)rule.GroupId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$groupLogic", rule.GroupLogic.ToString()); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
+        if (!preserveCanonicalDocument)
+            await UpsertLegacySmartFolderDocumentAsync(connection, transaction, folder, materializedRules, now, cancellationToken).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return folder with { Name = name, CreatedAt = created, UpdatedAt = now };
     }
 
     public async Task<IReadOnlyList<SmartFolderRule>> ListSmartFolderRulesAsync(Guid smartFolderId, CancellationToken cancellationToken = default)
     {
-        await InitializeAsync(cancellationToken).ConfigureAwait(false); var result = new List<SmartFolderRule>(); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT RuleId,SmartFolderId,Field,Operator,Value,Negated,SortOrder,GroupId,GroupLogic FROM SmartFolderRules WHERE SmartFolderId=$id ORDER BY SortOrder,RuleId;"; command.Parameters.AddWithValue("$id", smartFolderId.ToString("D")); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), Enum.TryParse<SmartFolderField>(reader.GetString(2), true, out var field) ? field : SmartFolderField.FileName, Enum.TryParse<SmartFolderOperator>(reader.GetString(3), true, out var op) ? op : SmartFolderOperator.Contains, reader.GetString(4), reader.GetInt32(5) != 0, reader.GetInt32(6), reader.IsDBNull(7) ? null : Guid.Parse(reader.GetString(7)), Enum.TryParse<SmartFolderLogic>(reader.GetString(8), true, out var groupLogic) ? groupLogic : SmartFolderLogic.And)); return result;
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using (var document = connection.CreateCommand())
+        {
+            document.CommandText = "SELECT QueryJson,QueryHash FROM SmartFolderQueryDocuments WHERE SmartFolderId=$id;";
+            document.Parameters.AddWithValue("$id", smartFolderId.ToString("D"));
+            string? queryJson = null;
+            string? queryHash = null;
+            await using (var reader = await document.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
+            {
+                if (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                {
+                    queryJson = reader.GetString(0);
+                    queryHash = reader.GetString(1);
+                }
+            }
+            if (queryJson is not null && queryHash is not null)
+            {
+                var parsed = AssetQueryDocumentCodec.Parse(queryJson);
+                if (!parsed.IsValid || parsed.Document is null) throw new InvalidDataException(parsed.ErrorMessage);
+                if (!string.Equals(queryHash, AssetQueryDocumentCodec.ComputeHash(parsed.Document), StringComparison.OrdinalIgnoreCase))
+                    throw new InvalidDataException("智能文件夹查询文档哈希不匹配。");
+                return await LegacySmartFolderAdapter.ProjectAsync(
+                    connection, null, smartFolderId, parsed.Document, queryHash, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
+        var result = new List<SmartFolderRule>();
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT RuleId,SmartFolderId,Field,Operator,Value,Negated,SortOrder,GroupId,GroupLogic FROM SmartFolderRules WHERE SmartFolderId=$id ORDER BY SortOrder,RuleId;";
+        command.Parameters.AddWithValue("$id", smartFolderId.ToString("D"));
+        await using var legacyReader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        while (await legacyReader.ReadAsync(cancellationToken).ConfigureAwait(false))
+        {
+            if (!Enum.TryParse<SmartFolderField>(legacyReader.GetString(2), true, out var field) ||
+                !Enum.TryParse<SmartFolderOperator>(legacyReader.GetString(3), true, out var op) ||
+                !Enum.TryParse<SmartFolderLogic>(legacyReader.GetString(8), true, out var groupLogic))
+                throw new InvalidDataException("智能文件夹包含未知字段、操作符或逻辑，已拒绝执行。");
+            result.Add(new(
+                Guid.Parse(legacyReader.GetString(0)), Guid.Parse(legacyReader.GetString(1)), field, op,
+                legacyReader.GetString(4), legacyReader.GetInt32(5) != 0, legacyReader.GetInt32(6),
+                legacyReader.IsDBNull(7) ? null : Guid.Parse(legacyReader.GetString(7)), groupLogic));
+        }
+        return result;
     }
 
     public async Task<bool> UndoAsync(AssetLibraryUndoToken token, CancellationToken cancellationToken = default)
@@ -457,6 +614,8 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         var previous = (await ListTagMembershipsAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Where(x => assets.Contains(x.AssetId) && tags.Contains(x.TagId)).ToArray();
         var previousPairs = previous.ToDictionary(x => (x.AssetId, x.TagId));
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        if (add)
+            await ValidateActiveIdsAsync(connection, transaction, "AssetTags", "TagId", tags, cancellationToken).ConfigureAwait(false);
         var affected = new List<AssetTagMembership>(); var changedAt = DateTimeOffset.UtcNow;
         foreach (var asset in assets) foreach (var tagId in tags)
         {

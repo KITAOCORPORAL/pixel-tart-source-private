@@ -12,6 +12,13 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class AssetLibraryP1AutomatedEvidenceContractTests
 {
+    private static readonly string[] P1CompatibleDevelopmentBranches =
+    [
+        "feature/modular-harness-v1-p1",
+        "feature/asset-library-eagle-parity-p2",
+        "feature/asset-library-eagle-parity-p3-query-metadata"
+    ];
+
     private static readonly string[] ScenarioIds =
     [
         "first-empty/v1",
@@ -84,6 +91,25 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(contract, "(?m)^\\s*\"capture_status\"\\s*:"));
         foreach (var forbidden in new[] { "SendInput", "SetForegroundWindow", "System.Windows.Automation", "Read-Host", "ChangeDisplaySettings" })
             Assert.DoesNotContain(forbidden, validator, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [TestMethod]
+    public void P1CompatibilityAllowlistNamesOnlyTheThreeReviewedDevelopmentLines()
+    {
+        CollectionAssert.AreEqual(
+            new[]
+            {
+                "feature/modular-harness-v1-p1",
+                "feature/asset-library-eagle-parity-p2",
+                "feature/asset-library-eagle-parity-p3-query-metadata"
+            },
+            P1CompatibleDevelopmentBranches);
+
+        var validator = Read("tools/AssetLibraryP1AutomatedAcceptance/Test-P1AssetLibraryAutomatedEvidence.ps1");
+        StringAssert.Contains(
+            validator,
+            "@('feature/modular-harness-v1-p1','feature/asset-library-eagle-parity-p2','feature/asset-library-eagle-parity-p3-query-metadata')-ccontains$branch");
+        Assert.IsFalse(P1CompatibleDevelopmentBranches.Contains("feature/asset-library-eagle-parity-p4"));
     }
 
     [TestMethod]
@@ -513,7 +539,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
         private static string ResolveFixtureBranch(string head)
         {
             var branch = GitText(Root(), "branch", "--show-current");
-            if (branch is not ("feature/modular-harness-v1-p1" or "feature/asset-library-eagle-parity-p2"))
+            if (!P1CompatibleDevelopmentBranches.Contains(branch, StringComparer.Ordinal))
                 throw new InvalidOperationException($"The P1 evidence fixture cannot run on unapproved branch '{branch}'.");
 
             var start = new ProcessStartInfo("git")

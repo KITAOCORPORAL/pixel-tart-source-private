@@ -117,6 +117,42 @@ public sealed class AssetLibraryV16Tests
     }
 
     [TestMethod]
+    public async Task EveryVisualQueryModeHonorsCanonicalP3DocumentScope()
+    {
+        await using var setup = await Setup.CreateAsync(3);
+        var cache = new SqliteAssetVisualAnalysisCache(setup.Database);
+        var analysis = new AssetVisualAnalysisService(cache);
+        var visual = new SqliteVisualAssetQueryService(setup.Database, cache);
+        await analysis.AnalyzeAsync(Request(setup.Assets[0], Solid(8, 8, 220, 30, 40)));
+        await analysis.AnalyzeAsync(Request(setup.Assets[1], Solid(8, 8, 30, 210, 60)));
+        await analysis.AnalyzeAsync(Request(setup.Assets[2], Solid(8, 8, 30, 60, 220)));
+
+        AssetLibraryQuery ScopeFor(AssetItem asset) => new(PageSize: 20)
+        {
+            Document = new AssetQueryDocument
+            {
+                Scope = AssetQueryScope.AllAssets,
+                RootGroup = AssetQueryNode.Group(AssetQueryLogic.All,
+                [
+                    AssetQueryNode.Rule(AssetQueryField.FileName, AssetQueryOperator.Equals, [asset.DisplayName])
+                ])
+            }
+        };
+
+        var page = await visual.QueryAsync(new(ScopeFor(setup.Assets[1]), new(), PageSize: 20));
+        CollectionAssert.AreEqual(new[] { setup.Assets[1].AssetId }, page.Items.Select(item => item.Asset.AssetId).ToArray());
+
+        var color = await visual.SearchByColorAsync(new(
+            ScopeFor(setup.Assets[1]),
+            new(PaletteColor: VisualAnalysisEngine.ToLab(new(30, 210, 60)), MaximumDeltaE: 200),
+            PageSize: 20));
+        CollectionAssert.AreEqual(new[] { setup.Assets[1].AssetId }, color.Select(item => item.Asset.AssetId).ToArray());
+
+        var similar = await visual.FindSimilarAsync(new(setup.Assets[0].AssetId, ScopeFor(setup.Assets[2]), 20));
+        CollectionAssert.AreEqual(new[] { setup.Assets[2].AssetId }, similar.Select(item => item.Asset.AssetId).ToArray());
+    }
+
+    [TestMethod]
     public void SimilarityIsSymmetricBoundedAndSensitiveToPaletteWeights()
     {
         var redHeavy = VisualAnalysisEngine.Analyze(Request(Guid.NewGuid(), Stripes(100, 1, ((byte)220, (byte)30, (byte)40), ((byte)30, (byte)50, (byte)220), 80)));
@@ -232,8 +268,8 @@ public sealed class AssetLibraryV16Tests
         CollectionAssert.AreEqual(new[] { setup.Assets[0].AssetId }, page.Items.Select(asset => asset.AssetId).ToArray());
 
         var invalid = new SmartFolder(Guid.NewGuid(), "invalid visual", SmartFolderLogic.And);
-        await setup.Repository.SaveSmartFolderAsync(invalid, [new(Guid.NewGuid(), invalid.SmartFolderId, SmartFolderField.VisualAverageSaturation, SmartFolderOperator.Contains, "0.3")]);
-        await Assert.ThrowsAsync<ArgumentException>(() => setup.Repository.QueryAsync(new(SmartFolderId: invalid.SmartFolderId)));
+        await Assert.ThrowsAsync<ArgumentException>(() => setup.Repository.SaveSmartFolderAsync(invalid, [new(Guid.NewGuid(), invalid.SmartFolderId, SmartFolderField.VisualAverageSaturation, SmartFolderOperator.Contains, "0.3")]));
+        Assert.IsFalse((await setup.Repository.ListSmartFoldersAsync(includeArchived: true)).Any(folder => folder.SmartFolderId == invalid.SmartFolderId), "P3 validation rejects an invalid rule before it can persist a half-valid smart folder.");
     }
 
     [TestMethod]

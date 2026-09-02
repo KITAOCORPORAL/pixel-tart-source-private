@@ -45,6 +45,28 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
 
     public bool CanUndo => _undoToken is not null;
     public bool CanRedo => _redoToken is not null;
+    public AssetLibraryUndoToken? UndoToken => _undoToken;
+
+    /// <summary>
+    /// Restores the visible one-step undo/redo state from the durable journal.
+    /// The repository is the source of truth, so a newly-created ViewModel keeps
+    /// the same commands available after an application restart.
+    /// </summary>
+    public async Task RestoreFromJournalAsync(CancellationToken cancellationToken = default)
+    {
+        var entries = await repository.ListUndoJournalAsync(100, cancellationToken).ConfigureAwait(false);
+        var latestActive = entries.FirstOrDefault(entry => !entry.IsUndone);
+        var latestUndone = entries.Where(entry => entry.IsUndone)
+            .OrderByDescending(entry => entry.UndoneAt)
+            .ThenByDescending(entry => entry.Token.CreatedAt)
+            .FirstOrDefault();
+        _undoToken = latestActive?.Token;
+        _redoToken = latestUndone is not null &&
+                     entries.Where(entry => !entry.IsUndone)
+                         .All(entry => entry.Token.CreatedAt <= latestUndone.Token.CreatedAt)
+            ? latestUndone.Token
+            : null;
+    }
 
     public Task CopyPathAsync(string path)
     {
@@ -186,8 +208,7 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
         if (_undoToken is null) return false;
         var token = _undoToken;
         if (!await repository.UndoAsync(token, cancellationToken).ConfigureAwait(false)) return false;
-        _undoToken = null;
-        _redoToken = token;
+        await RestoreFromJournalAsync(cancellationToken).ConfigureAwait(false);
         return true;
     }
 
@@ -196,8 +217,7 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
         if (_redoToken is null) return false;
         var token = _redoToken;
         if (!await repository.RedoAsync(token, cancellationToken).ConfigureAwait(false)) return false;
-        _redoToken = null;
-        _undoToken = token;
+        await RestoreFromJournalAsync(cancellationToken).ConfigureAwait(false);
         return true;
     }
 
@@ -207,6 +227,8 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
         _undoToken = result.UndoToken;
         _redoToken = null;
     }
+
+    internal void RememberExternalResult(AssetLibraryBatchResult result) => Remember(result);
 
     private async Task<DropTargetValidation> ValidateDropTargetAsync(
         AssetLibraryDropTarget? target,

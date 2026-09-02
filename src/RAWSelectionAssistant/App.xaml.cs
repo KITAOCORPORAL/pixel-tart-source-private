@@ -39,6 +39,9 @@ public partial class App : Application
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
     private AssetLibraryP2AutomatedAcceptanceController? _assetLibraryP2AutomatedController;
 #endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    private AssetLibraryP3AutomatedAcceptanceController? _assetLibraryP3AutomatedController;
+#endif
 
     public PixelTartModuleRegistry? ModuleRegistry => _moduleRegistry;
 
@@ -69,12 +72,20 @@ public partial class App : Application
         }
         _assetLibraryP2AutomatedController = AssetLibraryP2AutomatedAcceptanceController.TryCreate(AppDataPaths.Root, logService: null);
 #endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        if (!TryAcquireSingleInstance())
+        {
+            Shutdown();
+            return;
+        }
+        _assetLibraryP3AutomatedController = AssetLibraryP3AutomatedAcceptanceController.TryCreate(AppDataPaths.Root, logService: null);
+#endif
         new AppDataMigrationService().MigrateLegacyData();
         _logService = new FileLogService();
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
-#if !ASSET_LIBRARY_P1_STATE_ACCEPTANCE && !ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE && !ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
+#if !ASSET_LIBRARY_P1_STATE_ACCEPTANCE && !ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE && !ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE && !ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
         if (!TryAcquireSingleInstance())
         {
             Shutdown();
@@ -250,6 +261,9 @@ public partial class App : Application
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
             _assetLibraryP2AutomatedController?.ApplyStartRoute(_mainViewModel);
 #endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            _assetLibraryP3AutomatedController?.ApplyStartRoute(_mainViewModel);
+#endif
             await reminderNotifications.InitializeAsync();
             var window = new MainWindow { DataContext = _mainViewModel };
             window.ApplySavedBounds(_mainViewModel.Settings);
@@ -268,6 +282,13 @@ public partial class App : Application
                 window.ConfigureAssetLibraryP2AutomatedAcceptance(_assetLibraryP2AutomatedController);
             }
 #endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            if (_assetLibraryP3AutomatedController is not null)
+            {
+                _assetLibraryP3AutomatedController.BindWindow(window);
+                window.ConfigureAssetLibraryP3AutomatedAcceptance(_assetLibraryP3AutomatedController);
+            }
+#endif
             window.Show();
             await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
@@ -279,6 +300,8 @@ public partial class App : Application
             _assetLibraryP1AutomatedController?.Fail(ex);
 #elif ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
             _assetLibraryP2AutomatedController?.Fail(ex);
+#elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            _assetLibraryP3AutomatedController?.Fail(ex);
 #else
             ThemedMessageDialog.Show(null, Branding.ProductName, "软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", ThemedMessageKind.Error);
 #endif
@@ -303,6 +326,9 @@ public partial class App : Application
 #endif
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
             _assetLibraryP2AutomatedController?.Fail(ex);
+#endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            _assetLibraryP3AutomatedController?.Fail(ex);
 #endif
         }
 
@@ -338,6 +364,19 @@ public partial class App : Application
             _assetLibraryP2AutomatedController?.Fail(ex);
         }
         _assetLibraryP2AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
+#elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        try
+        {
+            if (MainWindow is RAWSelectionAssistant.MainWindow automatedWindow)
+                automatedWindow.TeardownAssetLibraryP3AutomatedAcceptanceAsync().GetAwaiter().GetResult();
+            _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
+        }
+        catch (Exception ex)
+        {
+            _logService?.Error("P3 自动验收退出时关闭模块失败。", ex);
+            _assetLibraryP3AutomatedController?.Fail(ex);
+        }
+        _assetLibraryP3AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
 #else
         _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
 #endif
@@ -389,6 +428,14 @@ public partial class App : Application
 #endif
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
         assetLibraryP1StateController = _assetLibraryP2AutomatedController;
+        if (assetLibraryP1StateController is not null)
+        {
+            enableAssetLibraryPreview = false;
+            assetLibraryDemoDirectory = null;
+        }
+#endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        assetLibraryP1StateController = _assetLibraryP3AutomatedController;
         if (assetLibraryP1StateController is not null)
         {
             enableAssetLibraryPreview = false;
@@ -467,6 +514,10 @@ public partial class App : Application
         _assetLibraryP2AutomatedController?.Fail(e.Exception);
         e.Handled = true;
         Shutdown(-1);
+#elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        _assetLibraryP3AutomatedController?.Fail(e.Exception);
+        e.Handled = true;
+        Shutdown(-1);
 #else
         ThemedMessageDialog.Show(Current?.MainWindow, Branding.ProductName, "程序遇到问题，但已记录详细信息。请重试当前操作。", ThemedMessageKind.Error);
         e.Handled = true;
@@ -489,6 +540,9 @@ public partial class App : Application
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
         _assetLibraryP2AutomatedController?.Fail(exception);
 #endif
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        _assetLibraryP3AutomatedController?.Fail(exception);
+#endif
     }
 
     private void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
@@ -500,6 +554,10 @@ public partial class App : Application
         Shutdown(-1);
 #elif ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
         _assetLibraryP2AutomatedController?.Fail(e.Exception);
+        e.SetObserved();
+        Shutdown(-1);
+#elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        _assetLibraryP3AutomatedController?.Fail(e.Exception);
         e.SetObserved();
         Shutdown(-1);
 #else

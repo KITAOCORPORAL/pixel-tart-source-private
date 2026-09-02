@@ -224,6 +224,20 @@ public sealed record AssetLibraryQuery(
     AssetLibrarySortDirection SortDirection = AssetLibrarySortDirection.Descending,
     AssetLibrarySystemCollection? SystemCollection = null)
 {
+    /// <summary>
+    /// Optional P3 canonical query document. Legacy positional fields remain the
+    /// current-scope base so P1/P2 callers and persisted cursors stay compatible.
+    /// </summary>
+    public AssetQueryDocument? Document { get; init; }
+
+    /// <summary>
+    /// Parameterized global-search clauses that are ANDed independently. This is
+    /// used when a transient current-scope query is composed with a saved smart
+    /// folder: concatenating the two texts would change their search semantics.
+    /// Legacy callers continue to use <see cref="SearchText"/>.
+    /// </summary>
+    public IReadOnlyList<string>? SearchClauses { get; init; }
+
     public int EffectivePageSize => Math.Clamp(PageSize <= 0 ? 100 : PageSize, 1, 500);
     public AssetLibraryArchiveScope EffectiveArchiveScope => SystemCollection == AssetLibrarySystemCollection.Archived
         ? AssetLibraryArchiveScope.ArchivedOnly

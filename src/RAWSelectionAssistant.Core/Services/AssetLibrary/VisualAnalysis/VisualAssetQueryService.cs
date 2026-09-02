@@ -10,6 +10,7 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database, IAssetVisualFeatureStore featureStore) : IVisualAssetQueryService, IVisualAssetQueryDiagnosticsProvider
 {
     private readonly AssetLibraryDatabase _database = database;
+    private readonly SqliteAssetLibraryRepository _scopeRepository = new(database);
     private int _initialized;
     private VisualSimilarityDiagnostics? _lastSimilarityDiagnostics;
 
@@ -46,16 +47,17 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         await EnsureInitializedAsync(cancellationToken).ConfigureAwait(false);
         ValidateScope(query.Scope);
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        var usesResolvedScope = await PrepareResolvedScopeAsync(connection, query.Scope, cancellationToken).ConfigureAwait(false);
 
         await using var count = connection.CreateCommand();
         count.Parameters.AddWithValue("$visualVersion", AssetVisualFeatureContract.AnalysisVersion);
-        var countWhere = BuildWhere(query.Scope, query.Filter, count);
+        var countWhere = BuildWhere(query.Scope, query.Filter, count, usesResolvedScope);
         count.CommandText = $"SELECT COUNT(*) FROM AssetItems a {CurrentFeatureJoin} WHERE {countWhere};";
         var total = Convert.ToInt32(await count.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false), CultureInfo.InvariantCulture);
 
         await using var page = connection.CreateCommand();
         page.Parameters.AddWithValue("$visualVersion", AssetVisualFeatureContract.AnalysisVersion);
-        var pageWhere = BuildWhere(query.Scope, query.Filter, page);
+        var pageWhere = BuildWhere(query.Scope, query.Filter, page, usesResolvedScope);
         if (TryParseCursor(query.Cursor, out var addedAt, out var assetId))
         {
             pageWhere += " AND (a.AddedAt<$cursorAdded OR (a.AddedAt=$cursorAdded AND a.AssetId>$cursorAsset))";
@@ -80,8 +82,9 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         ValidateScope(query.Scope);
         var target = query.Filter.PaletteColor.Value; var maximum = Math.Max(0, query.Filter.MaximumDeltaE);
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        var usesResolvedScope = await PrepareResolvedScopeAsync(connection, query.Scope, cancellationToken).ConfigureAwait(false);
         await using var candidates = connection.CreateCommand(); candidates.Parameters.AddWithValue("$visualVersion", AssetVisualFeatureContract.AnalysisVersion);
-        var scope = BuildScopeWhere(query.Scope, candidates);
+        var scope = BuildScopeWhere(query.Scope, candidates, usesResolvedScope);
         candidates.CommandText = $"""
             SELECT a.AssetId,MIN((pc.LabL-$targetL)*(pc.LabL-$targetL)+(pc.LabA-$targetA)*(pc.LabA-$targetA)+(pc.LabB-$targetB)*(pc.LabB-$targetB)) AS DistanceSquared
             FROM AssetItems a JOIN AssetVisualFeatures f ON f.AssetId=a.AssetId AND f.AnalysisVersion=$visualVersion
@@ -118,10 +121,11 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
 
         var reference = referenceFeatures.Analysis;
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        var usesResolvedScope = await PrepareResolvedScopeAsync(connection, query.Scope, cancellationToken).ConfigureAwait(false);
         if (query.Mode == VisualSimilarityMode.Palette)
         {
             var palettePruningStopwatch = Stopwatch.StartNew();
-            var paletteCandidates = await LoadPaletteCandidatesAsync(connection, reference, query, cancellationToken).ConfigureAwait(false);
+            var paletteCandidates = await LoadPaletteCandidatesAsync(connection, reference, query, usesResolvedScope, cancellationToken).ConfigureAwait(false);
             palettePruningStopwatch.Stop();
             var paletteScoringStopwatch = Stopwatch.StartNew();
             var paletteResults = paletteCandidates
@@ -136,7 +140,7 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         }
         var pruningStopwatch = Stopwatch.StartNew();
         await using var command = connection.CreateCommand(); command.Parameters.AddWithValue("$visualVersion", AssetVisualFeatureContract.AnalysisVersion);
-        var where = BuildScopeWhere(query.Scope, command);
+        var where = BuildScopeWhere(query.Scope, command, usesResolvedScope);
         where += " AND " + ValidFeaturePredicate + " AND a.AssetId<>$reference";
         command.Parameters.AddWithValue("$reference", query.ReferenceAssetId.ToString("D"));
         command.Parameters.AddWithValue("$minLuma", Math.Max(0, reference.AverageLuma - 112)); command.Parameters.AddWithValue("$maxLuma", Math.Min(255, reference.AverageLuma + 112));
@@ -204,6 +208,7 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         SqliteConnection connection,
         AssetVisualAnalysisResult reference,
         VisualSimilarityQuery query,
+        bool usesResolvedScope,
         CancellationToken cancellationToken)
     {
         var palette = reference.Palette.OrderByDescending(color => color.Weight).Take(AssetVisualFeatureContract.PaletteSize).ToArray();
@@ -212,7 +217,7 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         command.Parameters.AddWithValue("$visualVersion", AssetVisualFeatureContract.AnalysisVersion);
         command.Parameters.AddWithValue("$reference", query.ReferenceAssetId.ToString("D"));
         command.Parameters.AddWithValue("$candidateLimit", AssetVisualFeatureContract.CandidatePoolLimit);
-        var where = BuildScopeWhere(query.Scope, command) + " AND " + ValidFeaturePredicate + " AND a.AssetId<>$reference";
+        var where = BuildScopeWhere(query.Scope, command, usesResolvedScope) + " AND " + ValidFeaturePredicate + " AND a.AssetId<>$reference";
         var referenceRows = new List<string>(palette.Length);
         for (var index = 0; index < palette.Length; index++)
         {
@@ -249,6 +254,50 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         return candidates;
     }
 
+    private async Task<bool> PrepareResolvedScopeAsync(
+        SqliteConnection connection,
+        AssetLibraryQuery scope,
+        CancellationToken cancellationToken)
+    {
+        var requiresUnifiedRepository = scope.Document is not null ||
+            scope.SmartFolderId is not null ||
+            !string.IsNullOrWhiteSpace(scope.FileNameRegex) ||
+            scope.SearchClauses is { Count: > 0 };
+        if (!requiresUnifiedRepository) return false;
+
+        await using (var create = connection.CreateCommand())
+        {
+            create.CommandText = "CREATE TEMP TABLE IF NOT EXISTS P3VisualResolvedScope(AssetId TEXT NOT NULL PRIMARY KEY); DELETE FROM P3VisualResolvedScope;";
+            await create.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        var cursor = (string?)null;
+        var seenCursors = new HashSet<string>(StringComparer.Ordinal);
+        for (var pageNumber = 0; pageNumber < 100_000; pageNumber++)
+        {
+            var page = await _scopeRepository.QueryAsync(
+                scope with { Cursor = cursor, PageSize = 500 },
+                cancellationToken).ConfigureAwait(false);
+            if (!string.IsNullOrWhiteSpace(page.RegexError))
+                throw new InvalidDataException(page.RegexError);
+
+            foreach (var asset in page.Items)
+            {
+                await using var insert = connection.CreateCommand();
+                insert.CommandText = "INSERT OR IGNORE INTO P3VisualResolvedScope(AssetId) VALUES($id);";
+                insert.Parameters.AddWithValue("$id", asset.AssetId.ToString("D"));
+                await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            if (page.NextCursor is null) return true;
+            if (!seenCursors.Add(page.NextCursor))
+                throw new InvalidDataException("P3 视觉查询范围分页游标重复，已停止以避免不完整结果。");
+            cursor = page.NextCursor;
+        }
+
+        throw new InvalidDataException("P3 视觉查询范围超过安全分页上限。");
+    }
+
     private async Task EnsureInitializedAsync(CancellationToken cancellationToken)
     {
         if (Volatile.Read(ref _initialized) != 0) return;
@@ -257,9 +306,9 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         Volatile.Write(ref _initialized, 1);
     }
 
-    private static string BuildWhere(AssetLibraryQuery scope, VisualAssetFilter filter, SqliteCommand command)
+    private static string BuildWhere(AssetLibraryQuery scope, VisualAssetFilter filter, SqliteCommand command, bool usesResolvedScope)
     {
-        var where = BuildScopeWhere(scope, command);
+        var where = BuildScopeWhere(scope, command, usesResolvedScope);
         var state = "CASE WHEN f.AssetId IS NULL THEN CASE WHEN EXISTS(SELECT 1 FROM AssetVisualFeatures anyf WHERE anyf.AssetId=a.AssetId) THEN 'Stale' ELSE 'NotAnalyzed' END WHEN f.SourceContentHash IS NULL OR a.ContentHash IS NULL OR f.SourceContentHash<>a.ContentHash THEN 'Stale' WHEN f.Outcome='Succeeded' THEN 'Valid' WHEN f.Outcome='Failed' THEN 'Failed' ELSE 'Stale' END";
         if (filter.State is not null) { where += " AND " + state + "=$featureState"; command.Parameters.AddWithValue("$featureState", filter.State.Value.ToString()); }
         var needsValid = filter.DominantHue is not null || filter.Harmony is not null || filter.ToneKey is not null || filter.Contrast is not null || filter.Saturation is not null || filter.WarmCool is not null ||
@@ -295,8 +344,10 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         return where;
     }
 
-    private static string BuildScopeWhere(AssetLibraryQuery query, SqliteCommand command)
+    private static string BuildScopeWhere(AssetLibraryQuery query, SqliteCommand command, bool usesResolvedScope = false)
     {
+        if (usesResolvedScope)
+            return "EXISTS(SELECT 1 FROM P3VisualResolvedScope rs WHERE rs.AssetId=a.AssetId)";
         var where = new List<string> { query.IncludeArchived ? "1=1" : "a.IsArchived=0" };
         if (!string.IsNullOrWhiteSpace(query.SearchText)) { where.Add("(a.DisplayName LIKE $search OR a.Comment LIKE $search OR EXISTS(SELECT 1 FROM AssetTagMemberships sm JOIN AssetTags st ON st.TagId=sm.TagId WHERE sm.AssetId=a.AssetId AND st.Name LIKE $search) OR EXISTS(SELECT 1 FROM AssetFolderMemberships sfm JOIN AssetFolders sf ON sf.FolderId=sfm.FolderId WHERE sfm.AssetId=a.AssetId AND sf.Name LIKE $search))"); command.Parameters.AddWithValue("$search", "%" + query.SearchText.Trim() + "%"); }
         if (query.FolderId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder)"); command.Parameters.AddWithValue("$folder", query.FolderId.Value.ToString("D")); }
@@ -306,8 +357,8 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         if (query.MaximumRating is not null) { where.Add("a.Rating<=$maxRating"); command.Parameters.AddWithValue("$maxRating", query.MaximumRating.Value); }
         if (!string.IsNullOrWhiteSpace(query.MediaType)) { where.Add("a.MediaType=$mediaType"); command.Parameters.AddWithValue("$mediaType", query.MediaType); }
         if (!string.IsNullOrWhiteSpace(query.Extension)) { where.Add("a.Extension=$extension"); command.Parameters.AddWithValue("$extension", query.Extension.StartsWith('.') ? query.Extension : "." + query.Extension); }
-        if (query.UncategorizedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
-        if (query.UntaggedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
+        if (query.UncategorizedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf JOIN AssetFolders ff ON ff.FolderId=uf.FolderId WHERE uf.AssetId=a.AssetId AND ff.IsArchived=0)");
+        if (query.UntaggedOnly) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut JOIN AssetTags tt ON tt.TagId=ut.TagId LEFT JOIN TagGroups tg ON tg.TagGroupId=tt.TagGroupId WHERE ut.AssetId=a.AssetId AND tt.IsArchived=0 AND (tt.TagGroupId IS NULL OR tg.IsArchived=0))");
         if (query.MissingOnly) where.Add("a.IsMissing=1");
         if (query.AddedFrom is not null) { where.Add("a.AddedAt>=$addedFrom"); command.Parameters.AddWithValue("$addedFrom", query.AddedFrom.Value.ToString("O")); }
         if (query.AddedTo is not null) { where.Add("a.AddedAt<=$addedTo"); command.Parameters.AddWithValue("$addedTo", query.AddedTo.Value.ToString("O")); }
@@ -324,8 +375,7 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
 
     private static void ValidateScope(AssetLibraryQuery scope)
     {
-        if (!string.IsNullOrWhiteSpace(scope.FileNameRegex)) throw new NotSupportedException("Visual query scope does not accept regex; resolve the regex before entering temporary visual results.");
-        if (scope.SmartFolderId is not null) throw new NotSupportedException("Visual query scope does not nest a saved Smart Folder; visual Smart rules are compiled directly by the repository.");
+        ArgumentNullException.ThrowIfNull(scope);
     }
 
     private static void AddEnum<T>(ref string where, SqliteCommand command, string column, string parameter, T? value) where T : struct, Enum { if (value is null) return; where += $" AND {column}={parameter}"; command.Parameters.AddWithValue(parameter, value.Value.ToString()); }

@@ -1,13 +1,16 @@
 using Microsoft.Data.Sqlite;
+using RAWSelectionAssistant.Core.Models;
+using System.Text.Json;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 internal static class AssetLibrarySchema
 {
-    public const int Version = 6;
+    public const int Version = 7;
 
     public static async Task EnsureAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {
+        await RejectFutureVersionAsync(connection, cancellationToken).ConfigureAwait(false);
         var statements = new[]
         {
             "CREATE TABLE IF NOT EXISTS AssetLibrarySchemaInfo(Version INTEGER NOT NULL PRIMARY KEY, AppliedAt TEXT NOT NULL);",
@@ -259,13 +262,229 @@ internal static class AssetLibrarySchema
 
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupId", "TEXT NULL", cancellationToken).ConfigureAwait(false);
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupLogic", "TEXT NOT NULL DEFAULT 'And'", cancellationToken).ConfigureAwait(false);
-
-        await using var version = connection.CreateCommand();
-        version.CommandText = "INSERT OR IGNORE INTO AssetLibrarySchemaInfo(Version,AppliedAt) VALUES($version,$at);";
-        version.Parameters.AddWithValue("$version", Version);
-        version.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O"));
-        await version.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        await EnsureP3QueryDocumentsAsync(connection, cancellationToken).ConfigureAwait(false);
     }
+
+    private static async Task RejectFutureVersionAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        await using var exists = connection.CreateCommand();
+        exists.CommandText = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='AssetLibrarySchemaInfo';";
+        if (Convert.ToInt32(await exists.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) == 0) return;
+        await using var version = connection.CreateCommand();
+        version.CommandText = "SELECT COALESCE(MAX(Version),0) FROM AssetLibrarySchemaInfo;";
+        var current = Convert.ToInt32(await version.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+        if (current > Version)
+            throw new InvalidDataException($"素材库 schema {current} 高于当前支持的 v{Version}，已拒绝以旧代码打开。");
+    }
+
+    private static async Task EnsureP3QueryDocumentsAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            await using (var create = connection.CreateCommand())
+            {
+                create.Transaction = transaction;
+                create.CommandText = """
+                    CREATE TABLE IF NOT EXISTS SmartFolderQueryDocuments(
+                        SmartFolderId TEXT NOT NULL PRIMARY KEY,
+                        DocumentVersion INTEGER NOT NULL,
+                        QueryJson TEXT NOT NULL,
+                        QueryHash TEXT NOT NULL,
+                        LegacyRulesBackupJson TEXT NULL,
+                        UpdatedAt TEXT NOT NULL,
+                        FOREIGN KEY(SmartFolderId) REFERENCES SmartFolders(SmartFolderId) ON DELETE CASCADE
+                    );
+                    """;
+                await create.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            var folders = new List<(Guid Id, SmartFolderLogic Logic)>();
+            await using (var readFolders = connection.CreateCommand())
+            {
+                readFolders.Transaction = transaction;
+                readFolders.CommandText = "SELECT f.SmartFolderId,f.Logic FROM SmartFolders f LEFT JOIN SmartFolderQueryDocuments q ON q.SmartFolderId=f.SmartFolderId WHERE q.SmartFolderId IS NULL ORDER BY f.SmartFolderId;";
+                await using var reader = await readFolders.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+                while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                {
+                    if (!Guid.TryParse(reader.GetString(0), out var id))
+                        throw new InvalidDataException("旧智能文件夹包含无效标识，已拒绝 v6→v7 迁移。");
+                    if (!Enum.TryParse<SmartFolderLogic>(reader.GetString(1), true, out var logic) || !Enum.IsDefined(logic))
+                        throw new InvalidDataException($"旧智能文件夹 {id:D} 包含未知根逻辑，已拒绝 v6→v7 迁移。");
+                    folders.Add((id, logic));
+                }
+            }
+
+            foreach (var folder in folders)
+            {
+                var legacy = new List<LegacyRuleRow>();
+                await using (var readRules = connection.CreateCommand())
+                {
+                    readRules.Transaction = transaction;
+                    readRules.CommandText = "SELECT RuleId,Field,Operator,Value,Negated,SortOrder,GroupId,GroupLogic FROM SmartFolderRules WHERE SmartFolderId=$id ORDER BY SortOrder,RuleId;";
+                    readRules.Parameters.AddWithValue("$id", folder.Id.ToString("D"));
+                    await using var reader = await readRules.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+                    while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                        legacy.Add(new(
+                            reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                            reader.GetInt32(4) != 0, reader.GetInt32(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.GetString(7)));
+                }
+
+                var converted = ConvertLegacyRules(folder.Logic, legacy);
+                if (converted is null) throw new InvalidDataException($"智能文件夹 {folder.Id:D} 包含无法迁移的旧规则，已回滚整个 v6→v7 迁移。");
+                converted = await AssetQueryReferenceIntegrity.ResolveLegacyNameReferencesAsync(
+                    connection, transaction, converted, cancellationToken).ConfigureAwait(false);
+                var queryJson = AssetQueryDocumentCodec.SerializeCanonical(converted);
+                var queryHash = AssetQueryDocumentCodec.ComputeHash(converted);
+                var backupJson = JsonSerializer.Serialize(legacy);
+                await using var insert = connection.CreateCommand();
+                insert.Transaction = transaction;
+                insert.CommandText = "INSERT INTO SmartFolderQueryDocuments(SmartFolderId,DocumentVersion,QueryJson,QueryHash,LegacyRulesBackupJson,UpdatedAt) VALUES($id,$version,$json,$hash,$backup,$updated);";
+                insert.Parameters.AddWithValue("$id", folder.Id.ToString("D"));
+                insert.Parameters.AddWithValue("$version", AssetQueryDocument.CurrentVersion);
+                insert.Parameters.AddWithValue("$json", queryJson);
+                insert.Parameters.AddWithValue("$hash", queryHash);
+                insert.Parameters.AddWithValue("$backup", backupJson);
+                insert.Parameters.AddWithValue("$updated", DateTimeOffset.UtcNow.ToString("O"));
+                await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            await ValidateP3QueryDocumentsAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
+            await using (var version = connection.CreateCommand())
+            {
+                version.Transaction = transaction;
+                version.CommandText = "INSERT OR IGNORE INTO AssetLibrarySchemaInfo(Version,AppliedAt) VALUES($version,$at);";
+                version.Parameters.AddWithValue("$version", Version);
+                version.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O"));
+                await version.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
+            throw;
+        }
+    }
+
+    private static async Task ValidateP3QueryDocumentsAsync(
+        SqliteConnection connection,
+        SqliteTransaction transaction,
+        CancellationToken cancellationToken)
+    {
+        await using var command = connection.CreateCommand();
+        command.Transaction = transaction;
+        command.CommandText = "SELECT SmartFolderId,DocumentVersion,QueryJson,QueryHash,LegacyRulesBackupJson FROM SmartFolderQueryDocuments ORDER BY SmartFolderId;";
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+        {
+            var id = reader.GetString(0);
+            var version = reader.GetInt32(1);
+            if (version != AssetQueryDocument.CurrentVersion) throw new InvalidDataException($"智能文件夹 {id} 使用未知查询版本 {version}。");
+            var parsed = AssetQueryDocumentCodec.Parse(reader.GetString(2));
+            if (!parsed.IsValid || parsed.Document is null) throw new InvalidDataException($"智能文件夹 {id} 查询文档损坏：{parsed.ErrorMessage}");
+            if (!string.Equals(reader.GetString(3), AssetQueryDocumentCodec.ComputeHash(parsed.Document), StringComparison.OrdinalIgnoreCase))
+                throw new InvalidDataException($"智能文件夹 {id} 查询文档哈希不匹配。");
+            if (!reader.IsDBNull(4))
+            {
+                try
+                {
+                    using var backup = JsonDocument.Parse(reader.GetString(4));
+                    if (backup.RootElement.ValueKind != JsonValueKind.Array) throw new JsonException("backup root is not an array");
+                }
+                catch (JsonException exception)
+                {
+                    throw new InvalidDataException($"智能文件夹 {id} 的旧规则备份损坏。", exception);
+                }
+            }
+        }
+    }
+
+    private static AssetQueryDocument? ConvertLegacyRules(SmartFolderLogic rootLogic, IReadOnlyList<LegacyRuleRow> rows)
+    {
+        var rootChildren = new List<AssetQueryNode>();
+        foreach (var row in rows.Where(row => row.GroupId is null))
+        {
+            var converted = ConvertLegacyRule(row);
+            if (converted is null) return null;
+            rootChildren.Add(converted);
+        }
+        foreach (var group in rows.Where(row => row.GroupId is not null).GroupBy(row => row.GroupId, StringComparer.Ordinal))
+        {
+            if (!Guid.TryParse(group.Key, out _)) return null;
+            var groupChildren = new List<AssetQueryNode>();
+            foreach (var row in group)
+            {
+                var converted = ConvertLegacyRule(row);
+                if (converted is null) return null;
+                groupChildren.Add(converted);
+            }
+            var groupLogicValues = group.Select(row => row.GroupLogic).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            if (groupLogicValues.Length != 1 ||
+                !Enum.TryParse<SmartFolderLogic>(groupLogicValues[0], true, out var logic) ||
+                !Enum.IsDefined(logic)) return null;
+            rootChildren.Add(AssetQueryNode.Group(logic == SmartFolderLogic.Or ? AssetQueryLogic.Any : AssetQueryLogic.All, groupChildren));
+        }
+        return new AssetQueryDocument
+        {
+            Scope = AssetQueryScope.AllAssets,
+            RootGroup = AssetQueryNode.Group(rootLogic == SmartFolderLogic.Or ? AssetQueryLogic.Any : AssetQueryLogic.All, rootChildren)
+        };
+    }
+
+    private static AssetQueryNode? ConvertLegacyRule(LegacyRuleRow row)
+    {
+        if (!Guid.TryParse(row.RuleId, out _) ||
+            !Enum.TryParse<SmartFolderField>(row.Field, true, out var field) || !Enum.IsDefined(field) ||
+            !Enum.TryParse<SmartFolderOperator>(row.Operator, true, out var operation) || !Enum.IsDefined(operation) ||
+            !Enum.TryParse<AssetQueryField>(field.ToString(), true, out var queryField)) return null;
+        var queryOperator = operation switch
+        {
+            SmartFolderOperator.Contains => AssetQueryOperator.Contains,
+            SmartFolderOperator.Equals => field is SmartFolderField.Folder or SmartFolderField.Tag ? AssetQueryOperator.AnyOf : AssetQueryOperator.Equals,
+            SmartFolderOperator.NotEquals => field is SmartFolderField.Folder or SmartFolderField.Tag ? AssetQueryOperator.NoneOf : AssetQueryOperator.NotEquals,
+            SmartFolderOperator.StartsWith => AssetQueryOperator.StartsWith,
+            SmartFolderOperator.EndsWith => AssetQueryOperator.EndsWith,
+            SmartFolderOperator.GreaterThan => AssetQueryOperator.GreaterThan,
+            SmartFolderOperator.GreaterThanOrEqual => AssetQueryOperator.GreaterThanOrEqual,
+            SmartFolderOperator.LessThan => AssetQueryOperator.LessThan,
+            SmartFolderOperator.LessThanOrEqual => AssetQueryOperator.LessThanOrEqual,
+            SmartFolderOperator.Regex => AssetQueryOperator.Regex,
+            SmartFolderOperator.IsTrue => AssetQueryOperator.IsTrue,
+            SmartFolderOperator.IsFalse => AssetQueryOperator.IsFalse,
+            SmartFolderOperator.InRange => AssetQueryOperator.Between,
+            _ => throw new InvalidOperationException("Unsupported legacy smart-folder operator.")
+        };
+        IReadOnlyList<string> values = queryOperator switch
+        {
+            AssetQueryOperator.IsTrue or AssetQueryOperator.IsFalse => [],
+            AssetQueryOperator.Between => row.Value.Split(["..", ",", "，"], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries),
+            _ when queryField is AssetQueryField.Folder or AssetQueryField.Tag => ["name:" + row.Value],
+            _ => [NormalizeLegacyQueryValue(queryField, row.Value)]
+        };
+        return AssetQueryNode.Rule(queryField, queryOperator, values, negated: row.Negated);
+    }
+
+    private static string NormalizeLegacyQueryValue(AssetQueryField field, string value) => field == AssetQueryField.VisualAnalysisStatus
+        ? value.Trim().ToLowerInvariant() switch
+        {
+            "analyzed" or "completed" or "succeeded" or "valid" => "Valid",
+            "pending" or "notanalyzed" => "NotAnalyzed",
+            "failed" => "Failed",
+            "stale" or "unavailable" => "Stale",
+            _ => throw new InvalidDataException($"未知旧视觉分析状态“{value}”。")
+        }
+        : value;
+
+    private sealed record LegacyRuleRow(
+        string RuleId,
+        string Field,
+        string Operator,
+        string Value,
+        bool Negated,
+        int SortOrder,
+        string? GroupId,
+        string GroupLogic);
 
     private static async Task EnsureVisualAnalysisCacheSchemaAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {

@@ -33,6 +33,9 @@ public sealed class AssetLibraryWorkspaceSettings
     public List<Guid> ExpandedTagGroupIds { get; set; } = [];
     public List<Guid> SelectedAssetIds { get; set; } = [];
     public Dictionary<string, Guid?> ScrollAnchors { get; set; } = [];
+    public AssetQueryScope QueryScope { get; set; } = AssetQueryScope.Current;
+    public string? QueryDocumentJson { get; set; }
+    public List<AssetQueryHistoryEntry> QueryHistory { get; set; } = [];
 
     public void Normalize()
     {
@@ -46,6 +49,7 @@ public sealed class AssetLibraryWorkspaceSettings
         if (!Enum.IsDefined(SortField)) SortField = AssetLibrarySortField.AddedAt;
         if (!Enum.IsDefined(SortDirection)) SortDirection = AssetLibrarySortDirection.Descending;
         if (!Enum.IsDefined(ActiveCollection)) ActiveCollection = AssetLibrarySystemCollection.AllAssets;
+        if (!Enum.IsDefined(QueryScope)) QueryScope = AssetQueryScope.Current;
         ExpandedFolderIds = NormalizeIds(ExpandedFolderIds, 10_000);
         ExpandedTagGroupIds = NormalizeIds(ExpandedTagGroupIds, 10_000);
         SelectedAssetIds = NormalizeIds(SelectedAssetIds, 10_000);
@@ -56,6 +60,22 @@ public sealed class AssetLibraryWorkspaceSettings
             .Where(item => item.Valid)
             .GroupBy(item => item.View)
             .ToDictionary(group => group.Key.ToString(), group => group.Last().Value, StringComparer.Ordinal);
+        QueryHistory = (QueryHistory ?? [])
+            .Where(item => !string.IsNullOrWhiteSpace(item.Text))
+            .Select(item => item with { Text = item.Text.Trim().Normalize(System.Text.NormalizationForm.FormC) })
+            .Where(item => item.Text.Length <= 500)
+            .GroupBy(item => item.Text, StringComparer.OrdinalIgnoreCase)
+            .Select(group => group.OrderByDescending(item => item.UsedAt).First())
+            .OrderByDescending(item => item.UsedAt)
+            .Take(50)
+            .ToList();
+        if (!string.IsNullOrWhiteSpace(QueryDocumentJson))
+        {
+            var parsed = AssetQueryDocumentCodec.Parse(QueryDocumentJson);
+            QueryDocumentJson = parsed.IsValid && parsed.Document is not null
+                ? AssetQueryDocumentCodec.SerializeCanonical(parsed.Document)
+                : null;
+        }
     }
 
     private static double NormalizeFinite(double value, double fallback, double minimum, double maximum) =>

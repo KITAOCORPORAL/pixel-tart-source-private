@@ -62,6 +62,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseMove += AssetGrid_PreviewMouseMove;
         AssetGrid.PreviewMouseLeftButtonUp += AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
+        TextCompositionManager.AddPreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
+        TextCompositionManager.AddPreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
+        TextCompositionManager.AddTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
         DataContext = _viewModel;
     }
 
@@ -106,8 +109,34 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseMove -= AssetGrid_PreviewMouseMove;
         AssetGrid.PreviewMouseLeftButtonUp -= AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
+        TextCompositionManager.RemovePreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
+        TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
+        TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
         CancelMarqueeSelection();
         await _viewModel.DisposeAsync();
+    }
+
+    private void AssetLibrarySearchBox_CompositionStarted(object sender, TextCompositionEventArgs e) =>
+        _viewModel.BeginP3SearchComposition();
+
+    private void AssetLibrarySearchBox_CompositionUpdated(object sender, TextCompositionEventArgs e) =>
+        _viewModel.UpdateP3SearchComposition(e.TextComposition.CompositionText);
+
+    private void AssetLibrarySearchBox_TextInputCompleted(object sender, TextCompositionEventArgs e) =>
+        _viewModel.CompleteP3SearchComposition();
+
+    private async void AssetLibrarySearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter && _viewModel.SubmitP3SearchCommand.CanExecute(null))
+        {
+            _viewModel.SubmitP3SearchCommand.Execute(null);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            await _viewModel.HandleP3SearchEscapeAsync();
+            e.Handled = true;
+        }
     }
 
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel.ClearFilters();

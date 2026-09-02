@@ -156,6 +156,7 @@ public sealed partial class AssetLibraryViewModel
         }
         finally { _changingP2QuerySource = false; }
         SetActiveCollectionWithoutRefresh(collection);
+        OnP3QuerySourceChanged();
         _ = RefreshAsync();
     }
 
@@ -220,6 +221,7 @@ public sealed partial class AssetLibraryViewModel
         }
         finally { _changingP2QuerySource = false; }
         UpdateP2QueryDescription();
+        OnP3QuerySourceChanged();
         RaiseP2CommandStates();
     }
 
@@ -233,12 +235,9 @@ public sealed partial class AssetLibraryViewModel
     internal void SelectTagNode(AssetLibraryTagNodeView node) => SelectedTag = node.Tag;
     internal void EditSmartFolder(AssetLibrarySmartFolderNodeView node)
     {
-        if (SelectedSmartFolder?.SmartFolderId == node.Folder.SmartFolderId)
-            BeginSmartFolderEditorLoad(node.Folder);
-        else
-            SelectedSmartFolder = node.Folder;
-        SmartFolderName = node.Folder.Name;
-        Status = "已载入智能文件夹；P2 基础编辑器支持单层条件。";
+        if (SelectedSmartFolder?.SmartFolderId != node.Folder.SmartFolderId) SelectedSmartFolder = node.Folder;
+        OpenP3SmartFolderEditor(node.Folder);
+        Status = "已打开智能文件夹通用规则编辑器。";
     }
 
     private void ClearSmartFolderSelectionState()
@@ -274,7 +273,7 @@ public sealed partial class AssetLibraryViewModel
         try
         {
             var result = await _repository.RenameFolderAsync(node.FolderId, trimmed, _lifetimeCancellation.Token);
-            LastUndoToken = result.UndoToken;
+            RememberBrowserMutationResult(result);
             Status = result.ChangedCount == 0 ? "文件夹名称没有变化。" : $"已重命名为“{trimmed}”。";
             await RefreshFilterListsAsync(_lifetimeCancellation.Token);
             return true;
@@ -298,7 +297,7 @@ public sealed partial class AssetLibraryViewModel
         try
         {
             var result = await _repository.SetFolderArchivedAsync(node.FolderId, archived, _lifetimeCancellation.Token);
-            LastUndoToken = result.UndoToken;
+            RememberBrowserMutationResult(result);
             await RefreshFilterListsAsync(_lifetimeCancellation.Token);
             Status = archived ? $"已归档文件夹：{node.Name}" : $"已恢复文件夹：{node.Name}";
         }
@@ -314,7 +313,7 @@ public sealed partial class AssetLibraryViewModel
         if (index < 0 || target < 0 || target >= siblings.Count) { Status = delta < 0 ? "已经是同级第一项。" : "已经是同级最后一项。"; return; }
         (siblings[index], siblings[target]) = (siblings[target], siblings[index]);
         var result = await _repository.ReorderFoldersAsync(node.Folder.ParentFolderId, siblings.Select(folder => folder.FolderId), _lifetimeCancellation.Token);
-        LastUndoToken = result.UndoToken;
+        RememberBrowserMutationResult(result);
         await RefreshFilterListsAsync(_lifetimeCancellation.Token);
         Status = delta < 0 ? $"已上移文件夹：{node.Name}" : $"已下移文件夹：{node.Name}";
     }
@@ -326,7 +325,7 @@ public sealed partial class AssetLibraryViewModel
         var nextParent = parent?.ParentFolderId;
         var nextSort = Folders.Where(folder => folder.ParentFolderId == nextParent).Select(folder => folder.SortOrder).DefaultIfEmpty(-1).Max() + 1;
         var result = await _repository.MoveFolderAsync(new(node.FolderId, nextParent, nextSort), _lifetimeCancellation.Token);
-        LastUndoToken = result.UndoToken;
+        RememberBrowserMutationResult(result);
         await RefreshFilterListsAsync(_lifetimeCancellation.Token);
         Status = $"已将“{node.Name}”提升一级。";
     }
@@ -394,6 +393,7 @@ public sealed partial class AssetLibraryViewModel
         P2QueryTotalCount = total;
         UpdateP2QueryDescription();
         OnPropertyChanged(nameof(P2QuerySummary));
+        NotifyP3QueryResultChanged();
     }
 
     private void UpdateP2QueryDescription()
@@ -460,6 +460,10 @@ public sealed partial class AssetLibraryViewModel
             _logService?.Error("检查器信息加载失败。", exception);
             SingleFolderSummary = SingleTagSummary = MultipleFolderSummary = MultipleTagSummary = MultipleRatingSummary = "检查器信息暂不可用，请重试。";
             Status = "检查器信息加载失败，请重试。";
+        }
+        finally
+        {
+            if (generation == Volatile.Read(ref _inspectorGeneration)) OnPropertyChanged(nameof(P3BatchCommonState));
         }
     }
 
@@ -724,12 +728,22 @@ public sealed partial class AssetLibraryViewModel
     private async Task UndoP2Async()
     {
         Status = await _browserCommands.UndoAsync(_lifetimeCancellation.Token) ? "已撤销素材库操作。" : "没有可撤销的素材库操作。";
+        LastUndoToken = _browserCommands.UndoToken;
         RaiseP2CommandStates(); await RefreshFilterListsAsync(_lifetimeCancellation.Token); await RefreshAsync();
     }
     private async Task RedoP2Async()
     {
         Status = await _browserCommands.RedoAsync(_lifetimeCancellation.Token) ? "已重做素材库操作。" : "没有可重做的素材库操作。";
+        LastUndoToken = _browserCommands.UndoToken;
         RaiseP2CommandStates(); await RefreshFilterListsAsync(_lifetimeCancellation.Token); await RefreshAsync();
+    }
+
+    private void RememberBrowserMutationResult(AssetLibraryBatchResult result)
+    {
+        _browserCommands.RememberExternalResult(result);
+        LastUndoToken = _browserCommands.UndoToken;
+        RaiseActions();
+        RaiseP2CommandStates();
     }
 
     private void RaiseP2CommandStates()

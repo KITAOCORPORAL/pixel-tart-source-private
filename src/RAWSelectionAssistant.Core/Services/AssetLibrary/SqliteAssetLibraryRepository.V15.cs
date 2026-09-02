@@ -156,22 +156,23 @@ public sealed partial class SqliteAssetLibraryRepository
             _ => "a.IsArchived=0"
         } };
         if (query.SystemCollection == AssetLibrarySystemCollection.RecycleBin) where.Add("0=1");
-        if (!string.IsNullOrWhiteSpace(query.SearchText))
+        foreach (var searchClause in GetEffectiveSearchClauses(query))
         {
-            where.Add("(a.DisplayName LIKE $search OR a.Extension LIKE $search OR a.Comment LIKE $search OR EXISTS(SELECT 1 FROM AssetTagMemberships sm JOIN AssetTags st ON st.TagId=sm.TagId WHERE sm.AssetId=a.AssetId AND st.Name LIKE $search) OR EXISTS(SELECT 1 FROM AssetFolderMemberships sfm JOIN AssetFolders sf ON sf.FolderId=sfm.FolderId WHERE sfm.AssetId=a.AssetId AND sf.Name LIKE $search))");
-            command.Parameters.AddWithValue("$search", "%" + query.SearchText.Trim() + "%");
+            var parameter = "$search" + command.Parameters.Count;
+            where.Add($"(a.DisplayName LIKE {parameter} ESCAPE '\\' OR a.Extension LIKE {parameter} ESCAPE '\\' OR a.Comment LIKE {parameter} ESCAPE '\\' OR EXISTS(SELECT 1 FROM AssetTagMemberships sm JOIN AssetTags st ON st.TagId=sm.TagId LEFT JOIN TagGroups sg ON sg.TagGroupId=st.TagGroupId WHERE sm.AssetId=a.AssetId AND st.IsArchived=0 AND (st.TagGroupId IS NULL OR sg.IsArchived=0) AND st.Name LIKE {parameter} ESCAPE '\\') OR EXISTS(SELECT 1 FROM AssetFolderMemberships sfm JOIN AssetFolders sf ON sf.FolderId=sfm.FolderId WHERE sfm.AssetId=a.AssetId AND sf.IsArchived=0 AND sf.Name LIKE {parameter} ESCAPE '\\'))");
+            command.Parameters.AddWithValue(parameter, "%" + EscapeLikePattern(searchClause) + "%");
         }
         if (query.FolderId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder)"); command.Parameters.AddWithValue("$folder", query.FolderId.Value.ToString("D")); }
-        if (query.TagId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetTagMemberships tm WHERE tm.AssetId=a.AssetId AND tm.TagId=$tag)"); command.Parameters.AddWithValue("$tag", query.TagId.Value.ToString("D")); }
+        if (query.TagId is not null) { where.Add("EXISTS(SELECT 1 FROM AssetTagMemberships tm JOIN AssetTags tt ON tt.TagId=tm.TagId LEFT JOIN TagGroups tg ON tg.TagGroupId=tt.TagGroupId WHERE tm.AssetId=a.AssetId AND tm.TagId=$tag AND tt.IsArchived=0 AND (tt.TagGroupId IS NULL OR tg.IsArchived=0))"); command.Parameters.AddWithValue("$tag", query.TagId.Value.ToString("D")); }
         AddMembershipFilters(where, command, query.FolderIds, "AssetFolderMemberships", "FolderId", "folderList");
-        AddMembershipFilters(where, command, query.TagIds, "AssetTagMemberships", "TagId", "tagList");
+        AddActiveTagMembershipFilters(where, command, query.TagIds);
         var minimumRating = query.SystemCollection == AssetLibrarySystemCollection.HighRating ? Math.Max(4, query.MinimumRating ?? 0) : query.MinimumRating;
         if (minimumRating is not null) { where.Add("a.Rating >= $minRating"); command.Parameters.AddWithValue("$minRating", minimumRating.Value); }
         if (query.MaximumRating is not null) { where.Add("a.Rating <= $maxRating"); command.Parameters.AddWithValue("$maxRating", query.MaximumRating.Value); }
         if (!string.IsNullOrWhiteSpace(query.MediaType)) { where.Add("a.MediaType=$mediaType"); command.Parameters.AddWithValue("$mediaType", query.MediaType); }
         if (!string.IsNullOrWhiteSpace(query.Extension)) { where.Add("a.Extension=$extension"); command.Parameters.AddWithValue("$extension", NormalizeExtension(query.Extension)); }
-        if (query.UncategorizedOnly || query.SystemCollection == AssetLibrarySystemCollection.Uncategorized) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf WHERE uf.AssetId=a.AssetId)");
-        if (query.UntaggedOnly || query.SystemCollection == AssetLibrarySystemCollection.Untagged) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut WHERE ut.AssetId=a.AssetId)");
+        if (query.UncategorizedOnly || query.SystemCollection == AssetLibrarySystemCollection.Uncategorized) where.Add("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships uf JOIN AssetFolders ff ON ff.FolderId=uf.FolderId WHERE uf.AssetId=a.AssetId AND ff.IsArchived=0)");
+        if (query.UntaggedOnly || query.SystemCollection == AssetLibrarySystemCollection.Untagged) where.Add("NOT EXISTS(SELECT 1 FROM AssetTagMemberships ut JOIN AssetTags tt ON tt.TagId=ut.TagId LEFT JOIN TagGroups tg ON tg.TagGroupId=tt.TagGroupId WHERE ut.AssetId=a.AssetId AND tt.IsArchived=0 AND (tt.TagGroupId IS NULL OR tg.IsArchived=0))");
         if (query.MissingOnly || query.SystemCollection == AssetLibrarySystemCollection.MissingFiles) where.Add("a.IsMissing=1");
         if (query.AddedFrom is not null) { where.Add("a.AddedAt >= $addedFrom"); command.Parameters.AddWithValue("$addedFrom", query.AddedFrom.Value.ToString("O")); }
         if (query.AddedTo is not null) { where.Add("a.AddedAt <= $addedTo"); command.Parameters.AddWithValue("$addedTo", query.AddedTo.Value.ToString("O")); }
@@ -187,6 +188,17 @@ public sealed partial class SqliteAssetLibraryRepository
         {
             var name = $"${parameterPrefix}{command.Parameters.Count}";
             where.Add($"EXISTS(SELECT 1 FROM {table} mf WHERE mf.AssetId=a.AssetId AND mf.{column}={name})");
+            command.Parameters.AddWithValue(name, value.ToString("D"));
+        }
+    }
+
+    private static void AddActiveTagMembershipFilters(List<string> where, SqliteCommand command, IReadOnlyList<Guid>? values)
+    {
+        if (values is null) return;
+        foreach (var value in values.Distinct())
+        {
+            var name = $"$tagList{command.Parameters.Count}";
+            where.Add($"EXISTS(SELECT 1 FROM AssetTagMemberships mf JOIN AssetTags tt ON tt.TagId=mf.TagId LEFT JOIN TagGroups tg ON tg.TagGroupId=tt.TagGroupId WHERE mf.AssetId=a.AssetId AND mf.TagId={name} AND tt.IsArchived=0 AND (tt.TagGroupId IS NULL OR tg.IsArchived=0))");
             command.Parameters.AddWithValue(name, value.ToString("D"));
         }
     }
@@ -247,8 +259,8 @@ public sealed partial class SqliteAssetLibraryRepository
             SmartFolderField.AddedAt => BuildScalarRule("a.AddedAt", rule, parameter),
             SmartFolderField.CaptureTime => BuildScalarRule("a.CaptureTime", rule, parameter),
             SmartFolderField.IsMissing => BuildBooleanRule("a.IsMissing=1", rule),
-            SmartFolderField.IsUncategorized => BuildBooleanRule("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships sf WHERE sf.AssetId=a.AssetId)", rule),
-            SmartFolderField.IsUntagged => BuildBooleanRule("NOT EXISTS(SELECT 1 FROM AssetTagMemberships st WHERE st.AssetId=a.AssetId)", rule),
+            SmartFolderField.IsUncategorized => BuildBooleanRule("NOT EXISTS(SELECT 1 FROM AssetFolderMemberships sf JOIN AssetFolders ff ON ff.FolderId=sf.FolderId WHERE sf.AssetId=a.AssetId AND ff.IsArchived=0)", rule),
+            SmartFolderField.IsUntagged => BuildBooleanRule("NOT EXISTS(SELECT 1 FROM AssetTagMemberships st JOIN AssetTags tt ON tt.TagId=st.TagId LEFT JOIN TagGroups tg ON tg.TagGroupId=tt.TagGroupId WHERE st.AssetId=a.AssetId AND tt.IsArchived=0 AND (tt.TagGroupId IS NULL OR tg.IsArchived=0))", rule),
             SmartFolderField.FileName => BuildTextRule("a.DisplayName", rule, parameter),
             SmartFolderField.Extension => BuildTextRule("a.Extension", rule, parameter),
             SmartFolderField.MediaType => BuildTextRule("a.MediaType", rule, parameter),
@@ -571,7 +583,7 @@ public sealed partial class SqliteAssetLibraryRepository
         static string[] NormalizeIds(IReadOnlyList<Guid>? values) => (values ?? []).Distinct().OrderBy(value => value).Select(value => value.ToString("D")).ToArray();
         var contract = new
         {
-            SearchText = (query.SearchText ?? string.Empty).Trim(),
+            SearchClauses = GetEffectiveSearchClauses(query),
             query.FolderId,
             query.TagId,
             query.MinimumRating,
@@ -593,9 +605,27 @@ public sealed partial class SqliteAssetLibraryRepository
             SortField = query.EffectiveSortField,
             SortDirection = query.EffectiveSortDirection,
             query.SystemCollection
+            ,DocumentHash = query.Document is null ? null : AssetQueryDocumentCodec.ComputeHash(query.Document)
         };
         return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(contract))));
     }
+
+    private static string[] GetEffectiveSearchClauses(AssetLibraryQuery query)
+    {
+        var source = query.SearchClauses is { Count: > 0 }
+            ? query.SearchClauses
+            : [query.SearchText ?? string.Empty];
+        return source
+            .Select(value => (value ?? string.Empty).Trim().Normalize(NormalizationForm.FormC))
+            .Where(value => value.Length != 0)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    private static string EscapeLikePattern(string value) => value
+        .Replace("\\", "\\\\", StringComparison.Ordinal)
+        .Replace("%", "\\%", StringComparison.Ordinal)
+        .Replace("_", "\\_", StringComparison.Ordinal);
 
     public async Task<IReadOnlyList<AssetFolderTreeItem>> GetFolderTreeAsync(bool includeArchived = false, CancellationToken cancellationToken = default)
     {
@@ -635,6 +665,8 @@ public sealed partial class SqliteAssetLibraryRepository
         var after = before with { IsArchived = isArchived, UpdatedAt = DateTimeOffset.UtcNow };
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        if (isArchived)
+            await ResolveP3NameReferencesInAllDocumentsAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
         await SaveFolderInTransactionAsync(connection, transaction, after, cancellationToken).ConfigureAwait(false);
         var token = CreateUndoToken(isArchived ? "Archive folder" : "Restore folder");
         await WriteUndoJournalAsync(connection, transaction, token, "folder-archive-state-v2", new FolderArchiveChange(before, after), cancellationToken, journalVersion: 2).ConfigureAwait(false);
@@ -651,7 +683,11 @@ public sealed partial class SqliteAssetLibraryRepository
         var previous = await ReadFolderByIdAsync(folderId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Folder not found.");
         if (string.Equals(previous.Name, trimmed, StringComparison.Ordinal)) return new(0, null, []);
         var next = previous with { Name = trimmed };
-        var token = await MutateAndJournalAsync("Rename folder", "folder-restore", previous, (connection, transaction, ct) => ExecuteAsync(connection, transaction, "UPDATE AssetFolders SET Name=$name,UpdatedAt=$updated WHERE FolderId=$id;", ct, ("$name", next.Name), ("$updated", DateTimeOffset.UtcNow.ToString("O")), ("$id", folderId.ToString("D"))), ct => SaveFolderAsync(previous, ct), cancellationToken).ConfigureAwait(false);
+        var token = await MutateAndJournalAsync("Rename folder", "folder-restore", previous, async (connection, transaction, ct) =>
+        {
+            await ResolveP3NameReferencesInAllDocumentsAsync(connection, transaction, ct).ConfigureAwait(false);
+            await ExecuteAsync(connection, transaction, "UPDATE AssetFolders SET Name=$name,UpdatedAt=$updated WHERE FolderId=$id;", ct, ("$name", next.Name), ("$updated", DateTimeOffset.UtcNow.ToString("O")), ("$id", folderId.ToString("D"))).ConfigureAwait(false);
+        }, ct => SaveFolderAsync(previous, ct), cancellationToken).ConfigureAwait(false);
         return new(1, token, []);
     }
 
@@ -743,12 +779,18 @@ public sealed partial class SqliteAssetLibraryRepository
 
     public async Task<IReadOnlyList<AssetTag>> BatchCreateTagsAsync(string values, Guid? tagGroupId = null, CancellationToken cancellationToken = default)
     {
-        var names = (values ?? string.Empty).Split([',', '，', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+        var names = (values ?? string.Empty)
+            .Split([',', '，', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(value => NormalizeEntityName(value, nameof(values)))
+            .GroupBy(NormalizeEntityKey, StringComparer.Ordinal)
+            .Select(group => group.First())
+            .ToArray();
         var existing = await ListTagsAsync(tagGroupId, cancellationToken: cancellationToken).ConfigureAwait(false);
         var result = new List<AssetTag>();
         foreach (var name in names)
         {
-            var found = existing.FirstOrDefault(x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
+            var key = NormalizeEntityKey(name);
+            var found = existing.FirstOrDefault(x => string.Equals(NormalizeEntityKey(x.Name), key, StringComparison.Ordinal));
             if (found is not null) { result.Add(found); continue; }
             var created = await SaveTagAsync(new(Guid.NewGuid(), name, tagGroupId, result.Count), cancellationToken).ConfigureAwait(false);
             result.Add(created);
@@ -758,28 +800,12 @@ public sealed partial class SqliteAssetLibraryRepository
 
     public async Task<AssetLibraryBatchResult> RenameTagAsync(Guid tagId, string name, CancellationToken cancellationToken = default)
     {
-        var previous = await ReadTagByIdAsync(tagId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Tag not found.");
-        var trimmed = RequireName(name, nameof(name));
-        if (string.Equals(previous.Name, trimmed, StringComparison.Ordinal)) return new(0, null, []);
-        var next = previous with { Name = trimmed };
-        var token = await MutateAndJournalAsync("Rename tag", "tag-restore", previous, (connection, transaction, ct) => ExecuteAsync(connection, transaction, "UPDATE AssetTags SET Name=$name WHERE TagId=$id;", ct, ("$name", next.Name), ("$id", tagId.ToString("D"))), ct => SaveTagAsync(previous, ct), cancellationToken).ConfigureAwait(false);
-        return new(1, token, []);
+        return await RenameTagP3Async(tagId, name, cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<AssetLibraryBatchResult> MoveTagsToGroupAsync(IEnumerable<Guid> tagIds, Guid? tagGroupId, CancellationToken cancellationToken = default)
     {
-        var ids = tagIds.Distinct().ToArray();
-        var previous = new List<AssetTag>();
-        foreach (var id in ids)
-        {
-            var tag = await ReadTagByIdAsync(id, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("Tag not found.");
-            previous.Add(tag);
-        }
-        var token = await MutateAndJournalAsync("Move tags to group", "tags-restore", previous.ToArray(), async (connection, transaction, ct) =>
-        {
-            foreach (var tag in previous) await ExecuteAsync(connection, transaction, "UPDATE AssetTags SET TagGroupId=$group WHERE TagId=$id;", ct, ("$group", (object?)tagGroupId?.ToString("D") ?? DBNull.Value), ("$id", tag.TagId.ToString("D"))).ConfigureAwait(false);
-        }, async ct => { foreach (var tag in previous) await SaveTagAsync(tag, ct).ConfigureAwait(false); }, cancellationToken).ConfigureAwait(false);
-        return new(ids.Length, token, []);
+        return await MoveTagsToGroupP3Async(tagIds, tagGroupId, cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<IReadOnlyList<AssetTag>> SearchTagsAsync(string searchText, int limit = 30, CancellationToken cancellationToken = default)
@@ -789,14 +815,17 @@ public sealed partial class SqliteAssetLibraryRepository
         await using var command = connection.CreateCommand();
         command.CommandText = """
             SELECT t.TagId,t.Name,t.TagGroupId,t.SortOrder,COUNT(m.AssetId),t.CreatedAt,t.IsArchived,MAX(m.AddedAt)
-            FROM AssetTags t LEFT JOIN AssetTagMemberships m ON m.TagId=t.TagId
-            WHERE t.IsArchived=0 AND ($search='' OR t.Name LIKE $prefix OR t.Name LIKE $contains)
+            FROM AssetTags t
+            LEFT JOIN TagGroups g ON g.TagGroupId=t.TagGroupId
+            LEFT JOIN AssetTagMemberships m ON m.TagId=t.TagId
+            WHERE t.IsArchived=0 AND (t.TagGroupId IS NULL OR g.IsArchived=0)
+              AND ($search='' OR t.Name LIKE $prefix ESCAPE '\' OR t.Name LIKE $contains ESCAPE '\')
             GROUP BY t.TagId
-            ORDER BY CASE WHEN t.Name LIKE $prefix THEN 0 ELSE 1 END, MAX(m.AddedAt) DESC, COUNT(m.AssetId) DESC, t.Name COLLATE NOCASE
+            ORDER BY CASE WHEN t.Name LIKE $prefix ESCAPE '\' THEN 0 ELSE 1 END, MAX(m.AddedAt) DESC, COUNT(m.AssetId) DESC, t.Name COLLATE NOCASE
             LIMIT $limit;
             """;
-        var search = searchText?.Trim() ?? string.Empty;
-        command.Parameters.AddWithValue("$search", search); command.Parameters.AddWithValue("$prefix", search + "%"); command.Parameters.AddWithValue("$contains", "%" + search + "%"); command.Parameters.AddWithValue("$limit", Math.Clamp(limit, 1, 200));
+        var search = searchText?.Trim() ?? string.Empty; var escapedSearch = EscapeLikePattern(search);
+        command.Parameters.AddWithValue("$search", search); command.Parameters.AddWithValue("$prefix", escapedSearch + "%"); command.Parameters.AddWithValue("$contains", "%" + escapedSearch + "%"); command.Parameters.AddWithValue("$limit", Math.Clamp(limit, 1, 200));
         var result = new List<AssetTag>();
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.IsDBNull(2) ? null : Guid.Parse(reader.GetString(2)), reader.GetInt32(3), reader.GetInt32(4), DateTimeOffset.Parse(reader.GetString(5)), reader.GetInt32(6) != 0));
@@ -860,7 +889,7 @@ public sealed partial class SqliteAssetLibraryRepository
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
-        command.CommandText = "SELECT OperationId,Description,OperationKind,CreatedAt,UndoneAt FROM AssetLibraryUndoJournal ORDER BY CreatedAt DESC LIMIT $limit;";
+        command.CommandText = "SELECT OperationId,Description,OperationKind,CreatedAt,UndoneAt FROM AssetLibraryUndoJournal ORDER BY CreatedAt DESC,rowid DESC LIMIT $limit;";
         command.Parameters.AddWithValue("$limit", Math.Clamp(limit, 1, UndoJournalLimit));
         var result = new List<AssetUndoJournalEntry>();
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
@@ -919,14 +948,26 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using var transaction = connection.BeginTransaction(deferred: false);
         string kind;
         string json;
         int journalVersion;
         await using (var read = connection.CreateCommand())
         {
             read.Transaction = transaction;
-            read.CommandText = "SELECT OperationKind,PayloadJson,JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id AND UndoneAt IS NULL;";
+            read.CommandText = """
+                SELECT OperationKind,PayloadJson,JournalVersion
+                FROM AssetLibraryUndoJournal
+                WHERE OperationId=$id
+                  AND UndoneAt IS NULL
+                  AND OperationId=(
+                      SELECT OperationId
+                      FROM AssetLibraryUndoJournal
+                      WHERE UndoneAt IS NULL
+                      ORDER BY CreatedAt DESC,rowid DESC
+                      LIMIT 1
+                  );
+                """;
             read.Parameters.AddWithValue("$id", operationId.ToString("D"));
             await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
             if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
@@ -945,12 +986,30 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using var transaction = connection.BeginTransaction(deferred: false);
         PersistedUndo operation;
         await using (var read = connection.CreateCommand())
         {
             read.Transaction = transaction;
-            read.CommandText = "SELECT OperationKind,PayloadJson,JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id AND UndoneAt IS NOT NULL;";
+            read.CommandText = """
+                SELECT candidate.OperationKind,candidate.PayloadJson,candidate.JournalVersion
+                FROM AssetLibraryUndoJournal AS candidate
+                WHERE candidate.OperationId=$id
+                  AND candidate.UndoneAt IS NOT NULL
+                  AND candidate.OperationId=(
+                      SELECT OperationId
+                      FROM AssetLibraryUndoJournal
+                      WHERE UndoneAt IS NOT NULL
+                      ORDER BY UndoneAt DESC,rowid DESC
+                      LIMIT 1
+                  )
+                  AND NOT EXISTS(
+                      SELECT 1
+                      FROM AssetLibraryUndoJournal AS newer
+                      WHERE newer.UndoneAt IS NULL
+                        AND newer.rowid>candidate.rowid
+                  );
+                """;
             read.Parameters.AddWithValue("$id", operationId.ToString("D"));
             await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
             if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
@@ -1054,7 +1113,7 @@ public sealed partial class SqliteAssetLibraryRepository
             case "folders-restore": foreach (var folder in Deserialize<AssetFolder[]>(undo.PayloadJson)) await SaveFolderInTransactionAsync(connection, transaction, folder, cancellationToken).ConfigureAwait(false); return true;
             case "tag-restore": await SaveTagInTransactionAsync(connection, transaction, Deserialize<AssetTag>(undo.PayloadJson), cancellationToken).ConfigureAwait(false); return true;
             case "tags-restore": foreach (var tag in Deserialize<AssetTag[]>(undo.PayloadJson)) await SaveTagInTransactionAsync(connection, transaction, tag, cancellationToken).ConfigureAwait(false); return true;
-            default: return false;
+            default: return await TryApplyP3UndoInTransactionAsync(connection, transaction, undo, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -1087,7 +1146,7 @@ public sealed partial class SqliteAssetLibraryRepository
                 return true;
             }
             default:
-                return false;
+                return await TryApplyP3RedoInTransactionAsync(connection, transaction, operation, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -1155,8 +1214,25 @@ public sealed partial class SqliteAssetLibraryRepository
         foreach (var tagId in folder.AutoTagIds ?? []) await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetFolderAutoTags(FolderId,TagId) VALUES($folder,$tag);", cancellationToken, ("$folder", folder.FolderId.ToString("D")), ("$tag", tagId.ToString("D"))).ConfigureAwait(false);
     }
 
-    private static Task SaveTagInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, AssetTag tag, CancellationToken cancellationToken)
-        => ExecuteAsync(connection, transaction, "UPDATE AssetTags SET Name=$name,TagGroupId=$group,SortOrder=$sort,IsArchived=$archived WHERE TagId=$id;", cancellationToken, ("$name", tag.Name), ("$group", (object?)tag.TagGroupId?.ToString("D") ?? DBNull.Value), ("$sort", tag.SortOrder), ("$archived", tag.IsArchived ? 1 : 0), ("$id", tag.TagId.ToString("D")));
+    private static async Task SaveTagInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, AssetTag tag, CancellationToken cancellationToken)
+    {
+        await EnsureTagSaveAllowedAsync(connection, transaction, tag, cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "UPDATE AssetTags SET Name=$name,TagGroupId=$group,SortOrder=$sort,IsArchived=$archived WHERE TagId=$id;", cancellationToken, ("$name", tag.Name), ("$group", (object?)tag.TagGroupId?.ToString("D") ?? DBNull.Value), ("$sort", tag.SortOrder), ("$archived", tag.IsArchived ? 1 : 0), ("$id", tag.TagId.ToString("D"))).ConfigureAwait(false);
+    }
+
+    private static Task RestoreTagJournalStateInTransactionAsync(
+        SqliteConnection connection,
+        SqliteTransaction transaction,
+        AssetTag tag,
+        CancellationToken cancellationToken) =>
+        ExecuteAsync(connection, transaction,
+            "UPDATE AssetTags SET Name=$name,TagGroupId=$group,SortOrder=$sort,IsArchived=$archived WHERE TagId=$id;",
+            cancellationToken,
+            ("$name", tag.Name),
+            ("$group", (object?)tag.TagGroupId?.ToString("D") ?? DBNull.Value),
+            ("$sort", tag.SortOrder),
+            ("$archived", tag.IsArchived ? 1 : 0),
+            ("$id", tag.TagId.ToString("D")));
 
     private static async Task ExecuteAsync(SqliteConnection connection, SqliteTransaction transaction, string sql, CancellationToken cancellationToken, params (string Name, object? Value)[] parameters)
     {

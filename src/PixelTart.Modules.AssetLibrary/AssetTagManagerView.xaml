@@ -1,0 +1,180 @@
+<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetTagManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.AutomationId="P3TagManager"
+             AutomationProperties.Name="标签管理与批量元数据编辑">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="AssetLibraryP3Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Margin="0,7,0,0">
+        <Button Content="标签管理与批量编辑" Command="{Binding ToggleP3TagManagerCommand}"
+                HorizontalAlignment="Left" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                AutomationProperties.AutomationId="P3TagManagerToggle"
+                AutomationProperties.Name="打开或关闭标签管理与批量元数据编辑" />
+
+        <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
+                Visibility="{Binding P3TagManagerOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="3*" /><ColumnDefinition Width="12" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock Text="标签管理器" Foreground="#F2F6F7" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <Button DockPanel.Dock="Right" Content="刷新" Command="{Binding RefreshP3TagManagerCommand}"
+                                Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="P3TagManagerRefresh"
+                                AutomationProperties.Name="重新载入标签和标签组" />
+                    </DockPanel>
+                    <DockPanel Margin="0,6,0,0">
+                        <ToggleButton DockPanel.Dock="Right" Content="包含已归档" IsChecked="{Binding P3TagShowArchived, Mode=TwoWay}"
+                                      Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="P3TagShowArchived"
+                                      AutomationProperties.Name="显示或隐藏已归档标签和标签组" />
+                        <TextBox Text="{Binding P3TagSearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource AssetLibraryP3TextBox}"
+                                 ToolTip="按标签名称搜索，输入后 280 毫秒更新"
+                                 AutomationProperties.AutomationId="P3TagSearch"
+                                 AutomationProperties.Name="搜索标签" />
+                    </DockPanel>
+
+                    <Grid Margin="0,7,0,0">
+                        <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="10" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="标签组" Foreground="#CBD5DA" />
+                            <ListBox ItemsSource="{Binding P3ManagedTagGroups}" SelectedItem="{Binding P3SelectedManagedTagGroup}"
+                                     DisplayMemberPath="Name" MaxHeight="160"
+                                     Style="{StaticResource AssetLibraryP3ListBox}"
+                                     ItemContainerStyle="{StaticResource AssetLibraryP3ListItem}"
+                                     AutomationProperties.AutomationId="P3TagGroupList"
+                                     AutomationProperties.Name="标签组列表" />
+                            <TextBox Text="{Binding P3TagGroupNameInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"
+                                     Style="{StaticResource AssetLibraryP3TextBox}"
+                                     AutomationProperties.AutomationId="P3TagGroupName"
+                                     AutomationProperties.Name="标签组名称" />
+                            <WrapPanel Margin="0,5,0,0">
+                                <Button Content="新建" Command="{Binding CreateP3TagGroupCommand}" Style="{StaticResource AssetLibraryP3PrimaryButton}"
+                                        AutomationProperties.AutomationId="P3TagGroupCreate" AutomationProperties.Name="新建标签组" />
+                                <Button Content="重命名" Command="{Binding RenameP3TagGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagGroupRename" AutomationProperties.Name="重命名所选标签组" />
+                                <Button Content="归档/恢复" Command="{Binding ToggleArchiveP3TagGroupCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                        AutomationProperties.AutomationId="P3TagGroupArchive" AutomationProperties.Name="归档或恢复所选标签组及其标签" />
+                                <Button Content="上移" Command="{Binding MoveP3TagGroupCommand}" CommandParameter="up" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagGroupMoveUp" AutomationProperties.Name="向上移动所选标签组" />
+                                <Button Content="下移" Command="{Binding MoveP3TagGroupCommand}" CommandParameter="down" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagGroupMoveDown" AutomationProperties.Name="向下移动所选标签组" />
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="标签" Foreground="#CBD5DA" />
+                            <ListBox x:Name="ManagedTagList" ItemsSource="{Binding P3ManagedTags}" SelectedItem="{Binding P3SelectedManagedTag}"
+                                     SelectionMode="Extended" SelectionChanged="OnManagedTagSelectionChanged"
+                                     DisplayMemberPath="Name" MaxHeight="160"
+                                     Style="{StaticResource AssetLibraryP3ListBox}"
+                                     ItemContainerStyle="{StaticResource AssetLibraryP3ListItem}"
+                                     AutomationProperties.AutomationId="P3ManagedTagList"
+                                     AutomationProperties.Name="标签列表；可按 Ctrl 或 Shift 选择多个合并源" />
+                            <TextBox Text="{Binding P3TagNameInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"
+                                     Style="{StaticResource AssetLibraryP3TextBox}"
+                                     AutomationProperties.AutomationId="P3TagName"
+                                     AutomationProperties.Name="标签名称" />
+                            <WrapPanel Margin="0,5,0,0">
+                                <Button Content="新建" Command="{Binding CreateP3TagCommand}" Style="{StaticResource AssetLibraryP3PrimaryButton}"
+                                        AutomationProperties.AutomationId="P3TagCreate" AutomationProperties.Name="在当前标签组新建标签" />
+                                <Button Content="重命名" Command="{Binding RenameP3TagCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagRename" AutomationProperties.Name="重命名所选标签" />
+                                <Button Content="归档/恢复" Command="{Binding ToggleArchiveP3TagCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                        AutomationProperties.AutomationId="P3TagArchive" AutomationProperties.Name="归档或恢复所选标签" />
+                                <Button Content="上移" Command="{Binding ReorderP3TagCommand}" CommandParameter="up" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagMoveUp" AutomationProperties.Name="向上移动所选标签" />
+                                <Button Content="下移" Command="{Binding ReorderP3TagCommand}" CommandParameter="down" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagMoveDown" AutomationProperties.Name="向下移动所选标签" />
+                            </WrapPanel>
+                            <WrapPanel Margin="0,5,0,0">
+                                <ComboBox ItemsSource="{Binding P3ManagedTagGroups}" SelectedItem="{Binding P3MoveTargetTagGroup}"
+                                          DisplayMemberPath="Name" Width="150" Style="{StaticResource AssetLibraryP3ComboBox}"
+                                          AutomationProperties.AutomationId="P3TagMoveTargetGroup"
+                                          AutomationProperties.Name="标签移动目标组" />
+                                <Button Content="移到该组" Command="{Binding MoveP3TagCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagMoveToGroup" AutomationProperties.Name="把所选标签移动到目标标签组" />
+                                <ComboBox ItemsSource="{Binding P3ManagedTags}" SelectedItem="{Binding P3MergeTargetTag}"
+                                          DisplayMemberPath="Name" Width="150" Style="{StaticResource AssetLibraryP3ComboBox}"
+                                          AutomationProperties.AutomationId="P3TagMergeTarget"
+                                          AutomationProperties.Name="标签合并目标" />
+                                <Button Content="预览多源合并" Command="{Binding PreviewP3TagMergeCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="P3TagMergePreview" AutomationProperties.Name="预览标签合并影响和重复关系" />
+                                <Button Content="合并所选源到目标" Command="{Binding MergeP3TagCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                        ToolTip="先确认目标；关系去重，源标签归档，可撤销"
+                                        AutomationProperties.AutomationId="P3TagMerge" AutomationProperties.Name="把所选标签合并到目标标签" />
+                            </WrapPanel>
+                            <TextBlock Text="{Binding P3TagMergePreviewSummary}" Foreground="#CBD5DA" Margin="0,5,0,0" TextWrapping="Wrap"
+                                       AutomationProperties.AutomationId="P3TagMergePreviewSummary" AutomationProperties.Name="标签合并影响摘要" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="{Binding P3TagManagerStatus}" Foreground="#CBD5DA" Margin="0,6,0,0" TextWrapping="Wrap"
+                               AutomationProperties.AutomationId="P3TagManagerStatus" AutomationProperties.Name="标签管理操作状态" />
+                </StackPanel>
+
+                <Border Grid.Column="2" Style="{StaticResource AssetLibraryP3PopupSurface}"
+                        AutomationProperties.AutomationId="P3BatchMetadataEditor"
+                        AutomationProperties.Name="共享选择的批量元数据编辑器">
+                    <StackPanel>
+                        <TextBlock Text="批量元数据" Foreground="#F2F6F7" FontSize="16" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding P3BatchSelectionState}" Foreground="#8FE7D1" Margin="0,4,0,0"
+                                   AutomationProperties.AutomationId="P3BatchSelectionState" AutomationProperties.Name="批量编辑选择状态" />
+                        <TextBlock Text="{Binding P3BatchCommonState}" Foreground="#CBD5DA" TextWrapping="Wrap" Margin="0,3,0,5"
+                                   AutomationProperties.AutomationId="P3BatchCommonState" AutomationProperties.Name="共同值和混合值状态" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="115" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ComboBox Grid.Row="0" ItemsSource="{Binding P3MembershipActions}" SelectedItem="{Binding P3BatchTagAction}" Margin="0,0,5,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchTagAction" AutomationProperties.Name="添加或移除标签" />
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Tags}" SelectedItem="{Binding P3BatchTag}" DisplayMemberPath="Name" Margin="0,0,0,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchTagTarget" AutomationProperties.Name="批量标签目标" />
+                            <ComboBox Grid.Row="1" ItemsSource="{Binding P3MembershipActions}" SelectedItem="{Binding P3BatchFolderAction}" Margin="0,0,5,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchFolderAction" AutomationProperties.Name="加入或移出文件夹" />
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Folders}" SelectedItem="{Binding P3BatchFolder}" DisplayMemberPath="Name" Margin="0,0,0,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchFolderTarget" AutomationProperties.Name="批量文件夹目标" />
+                            <ComboBox Grid.Row="2" ItemsSource="{Binding P3ValueActions}" SelectedItem="{Binding P3BatchRatingAction}" Margin="0,0,5,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchRatingAction" AutomationProperties.Name="设置或清除评分" />
+                            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding P3RatingValues}" SelectedItem="{Binding P3BatchRating}" Margin="0,0,0,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchRatingValue" AutomationProperties.Name="批量评分值" />
+                            <ComboBox Grid.Row="3" ItemsSource="{Binding P3ValueActions}" SelectedItem="{Binding P3BatchCommentAction}" Margin="0,0,5,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchCommentAction" AutomationProperties.Name="设置或清除备注" />
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding P3BatchComment, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"
+                                     Style="{StaticResource AssetLibraryP3TextBox}" AutomationProperties.AutomationId="P3BatchCommentValue" AutomationProperties.Name="批量备注值" />
+                            <TextBlock Grid.Row="4" Text="归档状态" Foreground="#CBD5DA" VerticalAlignment="Center" />
+                            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding P3BooleanChoices}" SelectedItem="{Binding P3BatchArchiveChoice}" Margin="0,0,0,5"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchArchivedChoice" AutomationProperties.Name="批量归档状态" />
+                            <TextBlock Grid.Row="5" Text="缺失状态" Foreground="#CBD5DA" VerticalAlignment="Center" />
+                            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding P3BooleanChoices}" SelectedItem="{Binding P3BatchMissingChoice}"
+                                      Style="{StaticResource AssetLibraryP3ComboBox}" AutomationProperties.AutomationId="P3BatchMissingChoice" AutomationProperties.Name="批量缺失状态" />
+                        </Grid>
+
+                        <TextBlock Text="{Binding P3BatchPreviewSummary}" Foreground="#CBD5DA" Margin="0,7,0,0" TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="P3BatchPreviewSummary" AutomationProperties.Name="批量修改影响和冲突摘要" />
+                        <WrapPanel Margin="0,7,0,0">
+                            <Button Content="预览影响" Command="{Binding PreviewP3BatchMetadataCommand}"
+                                    Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                    AutomationProperties.AutomationId="P3BatchPreview"
+                                    AutomationProperties.Name="预览批量元数据修改影响" />
+                            <Button Content="确认应用" Command="{Binding ApplyP3BatchMetadataCommand}"
+                                    Style="{StaticResource AssetLibraryP3PrimaryButton}"
+                                    AutomationProperties.AutomationId="P3BatchApply"
+                                    AutomationProperties.Name="确认应用已预览的批量元数据修改" />
+                        </WrapPanel>
+                        <TextBlock Text="只修改素材库元数据；不会移动、改名或删除源文件。" Foreground="#ADB8C0" Margin="0,6,0,0" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </StackPanel>
+</UserControl>

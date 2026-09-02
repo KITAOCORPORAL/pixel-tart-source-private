@@ -1,0 +1,583 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary">
+    <BooleanToVisibilityConverter x:Key="P3BooleanToVisibilityConverter" />
+    <local:P3ReferenceOptionsConverter x:Key="P3ReferenceOptionsConverter" />
+    <local:P3ReferenceLabelConverter x:Key="P3ReferenceLabelConverter" />
+
+    <!-- P3 owns the complete toggle chrome so Windows' light default template can never bleed through. -->
+    <ControlTemplate x:Key="AssetLibraryP3ToggleTemplate" TargetType="{x:Type ToggleButton}">
+        <Grid SnapsToDevicePixels="True">
+            <Border x:Name="FocusOuter" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" />
+            <Border x:Name="FocusInner" Margin="2" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" />
+            <Border x:Name="Chrome" Margin="3" Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  RecognizesAccessKey="True" />
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="#071412" />
+                <Setter TargetName="FocusInner" Property="BorderBrush" Value="#65E6C7" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsKeyboardFocused" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter TargetName="FocusInner" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AssetLibraryP3ButtonTemplate" TargetType="{x:Type Button}">
+        <Grid>
+            <Border x:Name="FocusOuter" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" />
+            <Border x:Name="FocusInner" Margin="2" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" />
+            <Border x:Name="Chrome" Margin="3" Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  RecognizesAccessKey="True" />
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="#071412" />
+                <Setter TargetName="FocusInner" Property="BorderBrush" Value="#65E6C7" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AssetLibraryP3ButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="MinWidth" Value="36" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template" Value="{StaticResource AssetLibraryP3ButtonTemplate}" />
+    </Style>
+    <Style x:Key="AssetLibraryP3PrimaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
+        <Setter Property="Background" Value="#0B6658" />
+        <Setter Property="Foreground" Value="#F5FFFC" />
+        <Setter Property="BorderBrush" Value="#42CEAF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#0D7464" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#074D43" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3SecondaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
+        <Setter Property="Background" Value="#192129" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#111820" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3ChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
+        <Setter Property="Background" Value="#172027" />
+        <Setter Property="Foreground" Value="#EAF1F3" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,4" />
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="Active"><Setter Property="Background" Value="#114238" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#22313A" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#0F171D" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3DangerButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3SecondaryButton}">
+        <Setter Property="Foreground" Value="#FFB4AB" />
+        <Setter Property="BorderBrush" Value="#D87872" />
+    </Style>
+
+    <Style x:Key="AssetLibraryP3Toggle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Padding" Value="9,5" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Background" Value="#172027" />
+        <Setter Property="Foreground" Value="#EAF1F3" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="OverridesDefaultStyle" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template" Value="{StaticResource AssetLibraryP3ToggleTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#22313A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#0F171D" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="OverridesDefaultStyle" Value="True">
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsChecked" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsKeyboardFocused" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AssetLibraryP3TextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="CaretBrush" Value="#65E6C7" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,5" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3DatePicker" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type DatePicker}}">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /></Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ComboBoxItem is explicit as well: items rendered in a detached Popup never inherit a light app default. -->
+    <ControlTemplate x:Key="AssetLibraryP3ComboBoxItemTemplate" TargetType="{x:Type ComboBoxItem}">
+        <Border x:Name="ItemChrome" Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              RecognizesAccessKey="True" />
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="AssetLibraryP3ComboBoxItem" TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Padding" Value="9,6" />
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="OverridesDefaultStyle" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}" />
+        <Setter Property="Template" Value="{StaticResource AssetLibraryP3ComboBoxItemTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
+            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="OverridesDefaultStyle" Value="True">
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsSelected" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsKeyboardFocused" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Key="AssetLibraryP3ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid SnapsToDevicePixels="True">
+            <ToggleButton x:Name="DropDownToggle" ClickMode="Press" Focusable="False"
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                          Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}"
+                          BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                          Margin="0" Padding="8,4,28,4" MinHeight="0" MinWidth="0"
+                          HorizontalContentAlignment="Stretch" Style="{StaticResource AssetLibraryP3Toggle}"
+                          AutomationProperties.AutomationId="P3ComboBoxDropDownToggle"
+                          AutomationProperties.Name="打开或关闭筛选选项">
+                <Grid>
+                    <ContentPresenter x:Name="SelectionContent" Margin="0" IsHitTestVisible="False"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    <Path Width="8" Height="5" HorizontalAlignment="Right" VerticalAlignment="Center"
+                          Stretch="Fill" Data="M 0 0 L 4 4 L 8 0 Z"
+                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
+                </Grid>
+            </ToggleButton>
+            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" Margin="5,3,30,3"
+                     MinHeight="0" Padding="4,0" Background="Transparent" BorderThickness="0"
+                     Foreground="{TemplateBinding Foreground}" CaretBrush="{TemplateBinding Foreground}"
+                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                     IsReadOnly="{TemplateBinding IsReadOnly}" Style="{StaticResource AssetLibraryP3TextBox}"
+                     AutomationProperties.AutomationId="P3ComboBoxEditableText"
+                     AutomationProperties.Name="输入筛选选项" />
+            <Popup x:Name="PART_Popup" Placement="Bottom" AllowsTransparency="True" Focusable="False"
+                   IsOpen="{TemplateBinding IsDropDownOpen}" PopupAnimation="Fade" StaysOpen="False">
+                <Border x:Name="DropDownChrome" Margin="0,2,0,0" Padding="1"
+                        MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                        MaxWidth="480" MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                        Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1" CornerRadius="4" SnapsToDevicePixels="True">
+                    <ScrollViewer x:Name="DropDownScrollViewer" Padding="0"
+                                  Background="{TemplateBinding Background}"
+                                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                                  CanContentScroll="True" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasItems" Value="False"><Setter TargetName="DropDownChrome" Property="MinHeight" Value="34" /></Trigger>
+            <Trigger Property="IsEditable" Value="True"><Setter TargetName="SelectionContent" Property="Visibility" Value="Hidden" /><Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" /></Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AssetLibraryP3ComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="MaxDropDownHeight" Value="320" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="OverridesDefaultStyle" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AssetLibraryP3ComboBoxItem}" />
+        <Setter Property="Template" Value="{StaticResource AssetLibraryP3ComboBoxTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#1C2830" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
+            <Trigger Property="IsDropDownOpen" Value="True"><Setter Property="Background" Value="#111820" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="OverridesDefaultStyle" Value="True">
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsDropDownOpen" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="OverridesDefaultStyle" Value="True" />
+                    <Condition Property="IsEnabled" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3ListBox" TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style x:Key="AssetLibraryP3ListItem" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /></Trigger>
+            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="1" /></Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AssetLibraryP3Tree" TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style x:Key="AssetLibraryP3TreeItem" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="IsExpanded" Value="True" />
+        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding AccessibleName}" />
+    </Style>
+    <Style x:Key="AssetLibraryP3PopupSurface" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="#151D23" />
+        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="Padding" Value="10" />
+    </Style>
+    <Style x:Key="AssetLibraryP3ErrorSurface" TargetType="{x:Type Border}" BasedOn="{StaticResource AssetLibraryP3PopupSurface}">
+        <Setter Property="Background" Value="#352024" />
+        <Setter Property="BorderBrush" Value="#D87872" />
+    </Style>
+
+    <HierarchicalDataTemplate x:Key="AssetLibraryP3QueryNodeTemplate"
+                              DataType="{x:Type local:P3QueryNodeView}"
+                              ItemsSource="{Binding Children}">
+        <Border Background="#11181E" BorderBrush="#455966" BorderThickness="1" CornerRadius="5" Padding="7" MinWidth="0">
+            <Grid>
+                <StackPanel Visibility="{Binding IsGroup, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                    <WrapPanel>
+                        <TextBlock Text="规则组" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,7,0" />
+                        <ComboBox ItemsSource="{Binding LogicOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Logic, Mode=TwoWay}"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="105"
+                                  AutomationProperties.AutomationId="{Binding LogicAutomationId}"
+                                  AutomationProperties.Name="规则组匹配方式" />
+                        <ToggleButton Content="停用" IsChecked="{Binding IsDisabled, Mode=TwoWay}"
+                                      Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="{Binding EnabledAutomationId}"
+                                      AutomationProperties.Name="停用或启用规则组" />
+                        <ToggleButton Content="否定" IsChecked="{Binding Negated, Mode=TwoWay}"
+                                      Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="{Binding NegatedAutomationId}"
+                                      AutomationProperties.Name="切换规则组否定状态" />
+                        <Button Content="新增规则" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="在当前组新增规则" />
+                        <Button Content="新增子组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="在当前组新增子规则组" />
+                        <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动规则组" />
+                        <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动规则组" />
+                        <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除规则组" />
+                    </WrapPanel>
+                </StackPanel>
+                <StackPanel Visibility="{Binding IsRule, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                    <WrapPanel>
+                        <ComboBox ItemsSource="{Binding FieldOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Field, Mode=TwoWay}"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="145"
+                                  AutomationProperties.AutomationId="{Binding FieldAutomationId}" AutomationProperties.Name="筛选字段" />
+                        <ComboBox ItemsSource="{Binding OperatorOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="145" Margin="5,0,0,0"
+                                  AutomationProperties.AutomationId="{Binding OperatorAutomationId}" AutomationProperties.Name="筛选操作符" />
+                        <ToggleButton Content="区分大小写" IsChecked="{Binding IsCaseSensitive, Mode=TwoWay}"
+                                      Style="{StaticResource AssetLibraryP3Toggle}" Margin="5,0,0,0"
+                                      Visibility="{Binding CanChooseCaseSensitivity, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                      AutomationProperties.AutomationId="{Binding CaseSensitivityAutomationId}"
+                                      AutomationProperties.Name="切换文字筛选是否区分大小写" />
+                        <StackPanel Margin="5,0,0,0"
+                                    Visibility="{Binding IsReferenceEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                            <WrapPanel>
+                                <ComboBox DisplayMemberPath="Label" SelectedValuePath="Value"
+                                          SelectedValue="{Binding PendingReferenceValue, Mode=TwoWay}"
+                                          Width="185" Style="{StaticResource AssetLibraryP3ComboBox}"
+                                          AutomationProperties.AutomationId="{Binding ReferencePickerAutomationId}"
+                                          AutomationProperties.Name="选择要添加的稳定引用">
+                                    <ComboBox.ItemsSource>
+                                        <MultiBinding Converter="{StaticResource P3ReferenceOptionsConverter}">
+                                            <Binding Path="Field" />
+                                            <Binding Path="DataContext.P3FolderReferenceOptions" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                            <Binding Path="DataContext.P3TagReferenceOptions" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                        </MultiBinding>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+                                <Button Content="添加" Command="{Binding AddReferenceValueCommand}"
+                                        Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                        AutomationProperties.AutomationId="{Binding AddReferenceAutomationId}"
+                                        AutomationProperties.Name="添加所选筛选引用" />
+                            </WrapPanel>
+                            <ItemsControl ItemsSource="{Binding ReferenceValues}" Margin="0,4,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.RemoveReferenceValueCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding}"
+                                                Style="{StaticResource AssetLibraryP3ChipButton}"
+                                                AutomationProperties.AutomationId="{Binding AutomationId}"
+                                                AutomationProperties.Name="{Binding AccessibleName}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding Converter="{StaticResource P3ReferenceLabelConverter}">
+                                                            <Binding Path="Value" />
+                                                            <Binding Path="DataContext.Field" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                            <Binding Path="DataContext.P3FolderReferenceOptions" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            <Binding Path="DataContext.P3TagReferenceOptions" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <TextBlock Text=" ×" />
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <ComboBox ItemsSource="{Binding ValueOptions}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                                  SelectedValue="{Binding ValueText, Mode=TwoWay}" Width="185" Margin="5,0,0,0"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}"
+                                  Visibility="{Binding IsEnumEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择枚举筛选值" />
+                        <DatePicker SelectedDate="{Binding DateValue, Mode=TwoWay}" Width="185" Margin="5,0,0,0"
+                                    Style="{StaticResource AssetLibraryP3DatePicker}"
+                                    Visibility="{Binding IsDateEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                    AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择筛选日期" />
+                        <WrapPanel Margin="5,0,0,0" Visibility="{Binding IsDateRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                            <DatePicker SelectedDate="{Binding RangeStartDate, Mode=TwoWay}" Width="112" Style="{StaticResource AssetLibraryP3DatePicker}"
+                                        AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_Start}" AutomationProperties.Name="选择日期区间开始" />
+                            <TextBlock Text="至" Margin="5,0" VerticalAlignment="Center" />
+                            <DatePicker SelectedDate="{Binding RangeEndDate, Mode=TwoWay}" Width="112" Style="{StaticResource AssetLibraryP3DatePicker}"
+                                        AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_End}" AutomationProperties.Name="选择日期区间结束" />
+                        </WrapPanel>
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" Margin="5,0,0,0"
+                                 Style="{StaticResource AssetLibraryP3TextBox}" ToolTip="请输入数字"
+                                 Visibility="{Binding IsNumericEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                 AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入数字筛选值" />
+                        <WrapPanel Margin="5,0,0,0" Visibility="{Binding IsNumericRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                            <TextBox Text="{Binding FirstValue, UpdateSourceTrigger=PropertyChanged}" Width="82" Style="{StaticResource AssetLibraryP3TextBox}"
+                                     AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_Start}" AutomationProperties.Name="输入数值区间开始" />
+                            <TextBlock Text="至" Margin="5,0" VerticalAlignment="Center" />
+                            <TextBox Text="{Binding SecondValue, UpdateSourceTrigger=PropertyChanged}" Width="82" Style="{StaticResource AssetLibraryP3TextBox}"
+                                     AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_End}" AutomationProperties.Name="输入数值区间结束" />
+                        </WrapPanel>
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" MaxLength="7" Margin="5,0,0,0"
+                                 Style="{StaticResource AssetLibraryP3TextBox}" ToolTip="请输入 #RRGGBB 颜色"
+                                 Visibility="{Binding IsColorEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                 AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入十六进制颜色值" />
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="185" Margin="5,0,0,0"
+                                 Style="{StaticResource AssetLibraryP3TextBox}"
+                                 Visibility="{Binding IsTextEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                                 AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入文字筛选值" />
+                        <ToggleButton Content="停用" IsChecked="{Binding IsDisabled, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="{Binding EnabledAutomationId}" AutomationProperties.Name="停用或启用此规则" />
+                        <ToggleButton Content="锁定" IsChecked="{Binding Locked, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="{Binding LockedAutomationId}" AutomationProperties.Name="切换筛选锁定状态" />
+                        <ToggleButton Content="否定" IsChecked="{Binding Negated, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
+                                      AutomationProperties.AutomationId="{Binding NegatedAutomationId}" AutomationProperties.Name="切换规则否定状态" />
+                        <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动规则" />
+                        <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动规则" />
+                        <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除规则" />
+                    </WrapPanel>
+                    <TextBlock Text="{Binding ValidationMessage}" Foreground="#FFB4AB" Margin="0,4,0,0" TextWrapping="Wrap"
+                               AutomationProperties.AutomationId="{Binding ValidationAutomationId}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </HierarchicalDataTemplate>
+</ResourceDictionary>

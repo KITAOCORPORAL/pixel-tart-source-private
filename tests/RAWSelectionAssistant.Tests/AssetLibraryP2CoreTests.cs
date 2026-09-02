@@ -138,7 +138,7 @@ public sealed class AssetLibraryP2CoreTests
         await connection.OpenAsync();
         await using var schema = connection.CreateCommand();
         schema.CommandText = "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;";
-        Assert.AreEqual(6L, (long)(await schema.ExecuteScalarAsync())!);
+            Assert.AreEqual(7L, (long)(await schema.ExecuteScalarAsync())!, "P3 keeps the main application schema unchanged while intentionally upgrading only the private Asset Library schema to v7.");
         await using var journal = connection.CreateCommand();
         journal.CommandText = "SELECT JournalVersion FROM AssetLibraryUndoJournal WHERE OperationId=$id;";
         journal.Parameters.AddWithValue("$id", archived.UndoToken.OperationId.ToString("D"));

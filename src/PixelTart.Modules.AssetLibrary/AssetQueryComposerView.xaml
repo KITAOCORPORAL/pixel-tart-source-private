@@ -1,0 +1,149 @@
+<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetQueryComposerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.AutomationId="P3QueryComposer"
+             AutomationProperties.Name="通用筛选与搜索范围">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="AssetLibraryP3Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <ToggleButton Content="当前范围" IsChecked="{Binding IsP3CurrentScope, Mode=TwoWay}"
+                              Style="{StaticResource AssetLibraryP3Toggle}"
+                              AutomationProperties.AutomationId="P3QueryScopeCurrent"
+                              AutomationProperties.Name="在当前文件夹、标签或集合内筛选" />
+                <ToggleButton Content="全部素材" IsChecked="{Binding IsP3AllAssetsScope, Mode=TwoWay}"
+                              Style="{StaticResource AssetLibraryP3Toggle}"
+                              AutomationProperties.AutomationId="P3QueryScopeAllAssets"
+                              AutomationProperties.Name="在全部普通素材内筛选" />
+                <Button Content="筛选条件" Command="{Binding ToggleP3QueryPanelCommand}"
+                        Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                        AutomationProperties.AutomationId="P3QueryPanelToggle"
+                        AutomationProperties.Name="打开或关闭通用筛选条件面板" />
+            </StackPanel>
+            <TextBlock Text="{Binding P3QueryResultSummary}" Foreground="#CBD5DA" VerticalAlignment="Center"
+                       TextAlignment="Right" AutomationProperties.AutomationId="P3QueryResultSummary"
+                       AutomationProperties.Name="当前筛选范围和结果数量" />
+        </DockPanel>
+
+        <ItemsControl ItemsSource="{Binding P3QueryChips}" Margin="0,5,0,0"
+                      AutomationProperties.AutomationId="P3QueryActiveChips">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.RemoveP3ChipCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}" Content="{Binding Label, StringFormat={}{0}  ×}"
+                            Tag="Active" Style="{StaticResource AssetLibraryP3ChipButton}"
+                            ToolTip="移除此筛选条件"
+                            AutomationProperties.AutomationId="{Binding AutomationId}"
+                            AutomationProperties.Name="{Binding AccessibleName}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
+                Visibility="{Binding P3SuggestionsVisible, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="P3QuerySuggestionsPanel"
+                AutomationProperties.Name="搜索建议">
+            <ItemsControl ItemsSource="{Binding P3QuerySuggestions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.ApplyP3SuggestionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}" HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding Value, StringFormat=P3QuerySuggestion_{0}}"
+                                AutomationProperties.Name="{Binding Label, StringFormat=使用搜索建议 {0}}">
+                            <DockPanel>
+                                <TextBlock Text="{Binding Kind}" Foreground="#8FE7D1" Margin="0,0,8,0" />
+                                <TextBlock Text="{Binding Label}" Foreground="#F2F6F7" />
+                                <TextBlock Text="{Binding Detail}" Foreground="#ADB8C0" Margin="8,0,0,0" />
+                            </DockPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
+                Visibility="{Binding P3QueryPanelOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="P3QueryRulesPanel"
+                AutomationProperties.Name="通用筛选规则编辑器">
+            <StackPanel>
+                <DockPanel LastChildFill="True">
+                    <WrapPanel DockPanel.Dock="Left">
+                        <Button Content="清除未锁定" Command="{Binding ClearP3UnlockedCommand}"
+                                Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="P3QueryClearUnlocked"
+                                AutomationProperties.Name="清除所有没有锁定的筛选条件" />
+                        <Button Content="清除全部" Command="{Binding ClearP3AllCommand}"
+                                Style="{StaticResource AssetLibraryP3DangerButton}"
+                                AutomationProperties.AutomationId="P3QueryClearAll"
+                                AutomationProperties.Name="清除全部筛选条件" />
+                    </WrapPanel>
+                    <TextBlock Text="锁定条件会在切换文件夹或标签后保留。" Foreground="#ADB8C0" VerticalAlignment="Center" />
+                </DockPanel>
+
+                <TreeView ItemsSource="{Binding P3QueryRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
+                          ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
+                          Style="{StaticResource AssetLibraryP3Tree}" Margin="0,7,0,0"
+                          AutomationProperties.AutomationId="P3QueryRuleTree"
+                          AutomationProperties.Name="可嵌套的通用筛选规则树" />
+
+                <Border Margin="0,6,0,0" Style="{StaticResource AssetLibraryP3ErrorSurface}"
+                        Visibility="{Binding P3QueryHasError, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                    <TextBlock Text="{Binding P3QueryValidationMessage}" Foreground="#FFCBC5" TextWrapping="Wrap"
+                               AutomationProperties.AutomationId="P3QueryValidationError"
+                               AutomationProperties.Name="筛选条件错误" />
+                </Border>
+
+                <DockPanel Margin="0,7,0,0" LastChildFill="False">
+                    <TextBox Text="{Binding P3NewSmartFolderName, UpdateSourceTrigger=PropertyChanged}" Width="210"
+                             Style="{StaticResource AssetLibraryP3TextBox}"
+                             ToolTip="输入名称后，把当前筛选保存为智能文件夹"
+                             AutomationProperties.AutomationId="P3QuerySmartFolderName"
+                             AutomationProperties.Name="新智能文件夹名称" />
+                    <Button Content="保存为智能文件夹" Command="{Binding SaveP3QueryAsSmartFolderCommand}"
+                            Style="{StaticResource AssetLibraryP3PrimaryButton}" Margin="6,0,0,0"
+                            AutomationProperties.AutomationId="P3QuerySaveAsSmartFolder"
+                            AutomationProperties.Name="把当前通用筛选保存为智能文件夹" />
+                </DockPanel>
+
+                <Expander Header="搜索历史" Margin="0,7,0,0" Foreground="#F2F6F7"
+                          AutomationProperties.AutomationId="P3QueryHistory"
+                          AutomationProperties.Name="搜索历史">
+                    <StackPanel Margin="5">
+                        <Button Content="清空历史" Command="{Binding ClearP3HistoryCommand}"
+                                HorizontalAlignment="Left" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                AutomationProperties.AutomationId="P3QueryHistoryClear"
+                                AutomationProperties.Name="清空全部搜索历史" />
+                        <ItemsControl ItemsSource="{Binding P3QueryHistory}" Margin="0,5,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <Button DockPanel.Dock="Right" Content="删除"
+                                                Command="{Binding DataContext.RemoveP3HistoryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" Style="{StaticResource AssetLibraryP3DangerButton}"
+                                                AutomationProperties.AutomationId="{Binding Text, StringFormat=P3QueryHistoryRemove_{0}}"
+                                                AutomationProperties.Name="{Binding Text, StringFormat=删除搜索历史 {0}}" />
+                                        <Button Content="{Binding Text}"
+                                                Command="{Binding DataContext.ApplyP3HistoryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                                AutomationProperties.AutomationId="{Binding Text, StringFormat=P3QueryHistoryUse_{0}}"
+                                                AutomationProperties.Name="{Binding Text, StringFormat=再次搜索 {0}}" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
