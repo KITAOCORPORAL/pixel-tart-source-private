@@ -247,6 +247,31 @@ public sealed partial class SqliteAssetLibraryRepository
         return await ValidateQueryReferencesAsync(connection, normalized.Document, cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task<AssetQueryDocument> ResolveQueryReferencesAsync(
+        AssetQueryDocument document,
+        bool includeArchived = false,
+        CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        var normalized = AssetQueryDocumentCodec.Normalize(document);
+        if (!normalized.IsValid || normalized.Document is null)
+            throw new ArgumentException(normalized.ErrorMessage, nameof(document));
+
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        var resolved = includeArchived
+            ? await AssetQueryReferenceIntegrity.ResolveLegacyNameReferencesAsync(
+                connection, transaction, normalized.Document, cancellationToken).ConfigureAwait(false)
+            : await AssetQueryReferenceIntegrity.ResolveActiveNameReferencesAsync(
+                connection, transaction, normalized.Document, cancellationToken).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+
+        var resolvedNormalization = AssetQueryDocumentCodec.Normalize(resolved);
+        if (!resolvedNormalization.IsValid || resolvedNormalization.Document is null)
+            throw new InvalidDataException(resolvedNormalization.ErrorMessage);
+        return resolvedNormalization.Document;
+    }
+
     private static async Task<IReadOnlyList<AssetQueryValidationIssue>> ValidateQueryReferencesAsync(
         SqliteConnection connection,
         AssetQueryDocument document,

@@ -265,9 +265,10 @@ public partial class MainWindow
         for (var index = 0; index < variants.Count; index++)
         {
             var entry = variants[index];
-            await driver.ApplyQueryDocumentAsync(entry.Document);
-            var canonical = driver.CaptureCanonicalQueryDocument(entry.Document);
-            var result = await driver.CaptureResultAssetIds(entry.Document);
+            var document = await driver.ResolveAcceptanceDocumentAsync(entry.Document);
+            await driver.ApplyQueryDocumentAsync(document);
+            var canonical = driver.CaptureCanonicalQueryDocument(document);
+            var result = await driver.CaptureResultAssetIds(document);
             WriteQueryDocument(controller, canonical, $"{index:D2}-{entry.Variant}-query.json");
             WriteResult(controller, result, $"{index:D2}-{entry.Variant}-results.json", predicateVariant: entry.Variant);
         }
@@ -376,6 +377,7 @@ public partial class MainWindow
             Rule(AssetQueryField.Tag, AssetQueryOperator.AnyOf, "name:精选"));
         if (!controller.IsRestartPhase)
         {
+            document = await driver.ResolveAcceptanceDocumentAsync(document);
             var smart = await driver.SaveSmartFolderAndPreviewAsync("验收智能文件夹生命周期", document);
             var canonicalRoundtrip = string.Equals(smart.LoadedCanonicalJson, smart.ExpectedCanonicalJson, StringComparison.Ordinal);
             if (!canonicalRoundtrip || !smart.PreviewIsolated || !smart.CancellationIsolated ||

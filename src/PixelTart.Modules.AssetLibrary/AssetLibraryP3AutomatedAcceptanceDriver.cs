@@ -267,8 +267,18 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
 
     public async Task ApplyQueryDocumentAsync(AssetQueryDocument document)
     {
+        document = await ResolveAcceptanceDocumentAsync(document);
         var previousGeneration = BeginApplyQueryDocument(document);
         await WaitForPublishedQueryAfterAsync(previousGeneration, "the real P3 query composer refresh");
+    }
+
+    public async Task<AssetQueryDocument> ResolveAcceptanceDocumentAsync(
+        AssetQueryDocument document,
+        CancellationToken cancellationToken = default)
+    {
+        EnsureNotDisposed();
+        return await _acceptanceRepository.ResolveQueryReferencesAsync(
+            document, includeArchived: false, cancellationToken).ConfigureAwait(false);
     }
 
     private long BeginApplyQueryDocument(AssetQueryDocument document)
@@ -621,6 +631,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         CancellationToken cancellationToken = default)
     {
         EnsureNotDisposed();
+        document = await ResolveAcceptanceDocumentAsync(document, cancellationToken);
         await _acceptanceRepository.InitializeAsync(cancellationToken);
         _viewModel.NewP3SmartFolderCommand.Execute(null);
         await WaitUntilAsync(() => _viewModel.P3SmartFolderOpen && !_viewModel.P3SmartFolderLoading,
@@ -1123,7 +1134,8 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         var rule = parent.Children[^1];
         rule.Field = model.Field ?? AssetQueryField.FileName;
         rule.Operator = model.Operator ?? AssetQueryOperator.Contains;
-        rule.ValueText = string.Join("，", model.Values.Select(value => value.StartsWith("name:", StringComparison.Ordinal) ? value[5..] : value));
+        rule.ValueText = string.Join("，", model.Values);
+        rule.CaseSensitivity = model.CaseSensitivity;
         rule.Negated = model.Negated;
         rule.Enabled = model.Enabled;
         rule.Locked = model.Locked;

@@ -8,6 +8,65 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class AssetLibraryP3IntegrityTests
 {
     [TestMethod]
+    public async Task QueryReferenceResolutionMapsActiveNamesToStableIdsAcrossNestedGroups()
+    {
+        await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
+        var folder = await setup.Repository.SaveFolderAsync(new(Guid.NewGuid(), null, "人像"));
+        var tag = await setup.Repository.SaveTagAsync(new(Guid.NewGuid(), "精选"));
+        var document = new AssetQueryDocument
+        {
+            Scope = AssetQueryScope.AllAssets,
+            RootGroup = AssetQueryNode.Group(AssetQueryLogic.All,
+            [
+                AssetQueryNode.Group(AssetQueryLogic.Any,
+                [
+                    AssetQueryNode.Rule(AssetQueryField.Folder, AssetQueryOperator.AnyOf, ["name:人像"]),
+                    AssetQueryNode.Rule(AssetQueryField.Tag, AssetQueryOperator.AnyOf, ["name:精选"])
+                ]),
+                AssetQueryNode.Rule(AssetQueryField.Rating, AssetQueryOperator.GreaterThanOrEqual, ["3"])
+            ])
+        };
+
+        var resolved = await setup.Repository.ResolveQueryReferencesAsync(document);
+        var rules = Flatten(resolved.RootGroup).Where(node => node.Kind == AssetQueryNodeKind.Rule).ToArray();
+
+        CollectionAssert.AreEqual(new[] { $"id:{folder.FolderId:D}" }, rules[0].Values.ToArray());
+        CollectionAssert.AreEqual(new[] { $"id:{tag.TagId:D}" }, rules[1].Values.ToArray());
+        CollectionAssert.AreEqual(new[] { "3" }, rules[2].Values.ToArray());
+        Assert.IsTrue(AssetQueryDocumentCodec.Normalize(resolved).IsValid);
+    }
+
+    [TestMethod]
+    public async Task QueryReferenceResolutionRejectsMissingNameWithoutDefaultingToAllAssets()
+    {
+        await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
+        var document = Document(AssetQueryNode.Rule(
+            AssetQueryField.Folder, AssetQueryOperator.AnyOf, ["name:不存在的文件夹"]));
+
+        var failure = await Assert.ThrowsAsync<InvalidDataException>(() =>
+            setup.Repository.ResolveQueryReferencesAsync(document));
+
+        StringAssert.Contains(failure.Message, "不存在的文件夹");
+        var page = await setup.Repository.QueryAsync(new AssetLibraryQuery(PageSize: 20) { Document = document });
+        Assert.IsEmpty(page.Items);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(page.RegexError));
+    }
+
+    [TestMethod]
+    public async Task QueryReferenceResolutionKeepsStableIdsAndSupportsLegacyNameCompatibility()
+    {
+        await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
+        var tag = await setup.Repository.SaveTagAsync(new(Guid.NewGuid(), "兼容标签"));
+        var document = Document(AssetQueryNode.Rule(
+            AssetQueryField.Tag, AssetQueryOperator.AnyOf, [$"id:{tag.TagId:D}", "name:兼容标签"]));
+
+        var resolved = await setup.Repository.ResolveQueryReferencesAsync(document);
+        CollectionAssert.AreEqual(
+            new[] { $"id:{tag.TagId:D}" },
+            resolved.RootGroup.Children.Single().Values.ToArray());
+    }
+
+    [TestMethod]
     public async Task TagGroupArchivePreservesIndividualTagStateAndActiveVisibilityContract()
     {
         await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
@@ -249,6 +308,20 @@ public sealed class AssetLibraryP3IntegrityTests
             setup.Repository.ListSmartFolderRulesAsync(folder.SmartFolderId));
         await Assert.ThrowsAsync<InvalidDataException>(() =>
             setup.Repository.SaveSmartFolderAsync(folder, []));
+    }
+
+    private static AssetQueryDocument Document(params AssetQueryNode[] nodes) => new()
+    {
+        Scope = AssetQueryScope.AllAssets,
+        RootGroup = AssetQueryNode.Group(AssetQueryLogic.All, nodes)
+    };
+
+    private static IEnumerable<AssetQueryNode> Flatten(AssetQueryNode node)
+    {
+        yield return node;
+        foreach (var child in node.Children)
+            foreach (var nested in Flatten(child))
+                yield return nested;
     }
 
     private static AssetQueryDocument DocumentWithFileName(string value) => new()
