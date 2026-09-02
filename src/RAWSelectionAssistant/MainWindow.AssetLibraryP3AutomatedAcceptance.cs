@@ -918,7 +918,15 @@ public partial class MainWindow
         var state = driver.CaptureState();
         var bounds = driver.CaptureVisibleBounds();
         if (AssetLibraryP3AutomatedAcceptanceDriver.HasLayoutOverflow(bounds, state.PageWidth, state.PageHeight))
-            throw new InvalidOperationException($"The live P3 layout overflowed at {physicalWidth}x{physicalHeight}/{scale:P0}.");
+        {
+            var offenders = bounds
+                .Where(item => item.MustFit &&
+                    (item.Clipped || item.Overlapped || item.X < -0.01 || item.Y < -0.01 ||
+                     item.X + item.Width > state.PageWidth + 0.01 || item.Y + item.Height > state.PageHeight + 0.01))
+                .Select(item => $"{item.Identity}[{item.X:0.##},{item.Y:0.##},{item.Width:0.##},{item.Height:0.##};visible={item.VisibleX:0.##},{item.VisibleY:0.##},{item.VisibleWidth:0.##},{item.VisibleHeight:0.##};clipped={item.Clipped};overlapped={item.Overlapped}]")
+                .ToArray();
+            throw new InvalidOperationException($"The live P3 layout overflowed at {physicalWidth}x{physicalHeight}/{scale:P0} (page={state.PageWidth:0.##}x{state.PageHeight:0.##}; offenders={string.Join(", ", offenders)}).");
+        }
         var buttonReadability = driver.CaptureButtonReadabilityMatrix("dark");
         var realizedButtons = driver.CaptureRealizedButtons();
         var readability = EvaluateButtonReadability(buttonReadability, realizedButtons);
