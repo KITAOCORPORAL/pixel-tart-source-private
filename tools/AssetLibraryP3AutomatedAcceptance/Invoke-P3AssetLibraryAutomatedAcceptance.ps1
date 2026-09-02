@@ -540,9 +540,11 @@ function Measure-SafetyStaticScan {
                 }
             }
         }
+        $matchCount = 0
+        foreach ($match in $matches) { $matchCount += [int]$match.count }
         $ruleRows.Add([ordered]@{
             rule_id = $ruleId
-            match_count = [int](($matches | Measure-Object -Property count -Sum).Sum)
+            match_count = $matchCount
             matches = @($matches)
         })
     }
