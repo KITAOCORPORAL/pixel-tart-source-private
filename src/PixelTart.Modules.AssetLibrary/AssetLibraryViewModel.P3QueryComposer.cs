@@ -181,7 +181,7 @@ public sealed partial class AssetLibraryViewModel
     public void BeginP3SearchComposition()
     {
         _p3ImeComposing = true;
-        _searchDebounce.Stop();
+        StopSearchDebounce();
         _p3SuggestionCancellation?.Cancel();
         OnPropertyChanged(nameof(P3IsImeComposing));
         Status = "正在输入中文，完成输入后再搜索。";
@@ -250,8 +250,7 @@ public sealed partial class AssetLibraryViewModel
         OnPropertyChanged(nameof(P3QueryScopeLabel));
         OnPropertyChanged(nameof(P3QueryResultSummary));
         if (!scheduleRefresh || _isRestoringWorkspace || !IsReady) return;
-        _searchDebounce.Stop();
-        _searchDebounce.Start();
+        StartSearchDebounce();
     }
 
     private AssetQueryDocument GetP3QueryDocument() => _p3CurrentQueryDocument with
@@ -349,7 +348,7 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task SubmitP3SearchAsync()
     {
-        _searchDebounce.Stop();
+        StopSearchDebounce();
         var pendingSuggestions = _p3SuggestionCancellation;
         _p3SuggestionCancellation = null;
         Interlocked.Increment(ref _p3SuggestionGeneration);

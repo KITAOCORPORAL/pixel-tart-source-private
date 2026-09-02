@@ -41,6 +41,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private long _loadMoreGeneration;
     private long _analysisGeneration;
     private readonly DispatcherTimer _searchDebounce;
+    private long _searchDebounceGeneration;
+    private long _searchDebounceArmedGeneration;
     private string _searchText = string.Empty;
     private string _status = "正在准备素材库";
     private string _tagInput = string.Empty;
@@ -130,7 +132,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _batchProcessor = new(_visualAnalysis, _featureStore);
         AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
         _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
-        _searchDebounce.Tick += async (_, _) => { _searchDebounce.Stop(); if (IsReady) await RefreshAsync(); };
+        _searchDebounce.Tick += OnSearchDebounceTick;
         RefreshCommand = new(RefreshAsync, () => IsReady); RetryLoadCommand = new(RetryLoadAsync, () => !IsLoading); ImportCommand = new(ImportAsync, () => IsReady); LoadMoreCommand = new(LoadMoreAsync, () => CanLoadMore);
         NewFolderCommand = new(NewFolderAsync, () => IsReady); NewSubfolderCommand = new(NewSubfolderAsync, () => IsReady && SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync, () => IsReady);
         NewTagCommand = new(NewTagAsync, () => IsReady); ApplyTagsCommand = new(ApplyTagsAsync, () => IsReady && SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
@@ -154,6 +156,31 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         InitializeP3QueryComposer();
         InitializeP3SmartFolderEditor();
         InitializeP3TagManager();
+    }
+
+    private async void OnSearchDebounceTick(object? sender, EventArgs e)
+    {
+        if (!_searchDebounce.IsEnabled) return;
+        var armedGeneration = Volatile.Read(ref _searchDebounceArmedGeneration);
+        _searchDebounce.Stop();
+        Volatile.Write(ref _searchDebounceArmedGeneration, 0);
+        if (armedGeneration == 0 || armedGeneration != Volatile.Read(ref _searchDebounceGeneration)) return;
+        if (IsReady) await RefreshAsync();
+    }
+
+    private void StopSearchDebounce()
+    {
+        Interlocked.Increment(ref _searchDebounceGeneration);
+        Volatile.Write(ref _searchDebounceArmedGeneration, 0);
+        _searchDebounce.Stop();
+    }
+
+    private void StartSearchDebounce()
+    {
+        var generation = Interlocked.Increment(ref _searchDebounceGeneration);
+        Volatile.Write(ref _searchDebounceArmedGeneration, generation);
+        _searchDebounce.Stop();
+        _searchDebounce.Start();
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
@@ -561,7 +588,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             if (IsReady) return;
             attempt = Interlocked.Increment(ref _loadAttempt);
             OnPropertyChanged(nameof(LoadAttempt));
-            _searchDebounce.Stop();
+            StopSearchDebounce();
             CancelLoadMoreRequest();
             _queryCancellation?.Cancel();
             IsLoading = true;
@@ -1562,7 +1589,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     public void ClearFilters()
     {
-        _searchDebounce.Stop();
+        StopSearchDebounce();
         ResetVisualModeState();
         SetActiveCollectionWithoutRefresh(AssetLibrarySystemCollection.AllAssets);
         _selectedFolder = null;
@@ -1651,7 +1678,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         if (Interlocked.Exchange(ref _disposeStarted, 1) != 0) return;
         _lifetimeCancellation.Cancel();
-        _searchDebounce.Stop();
+        StopSearchDebounce();
         DisposeP3QueryComposer();
         DisposeP3SmartFolderEditor();
         DisposeP3TagManager();

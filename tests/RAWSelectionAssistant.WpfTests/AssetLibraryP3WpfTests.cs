@@ -156,6 +156,41 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task StoppedSearchDebounceIgnoresQueuedTick()
+    {
+        await RunSta(() =>
+        {
+            var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Debounce", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            try
+            {
+                var viewModel = new AssetLibraryViewModel(Path.Combine(root, "p3.db"), new TaskOperationBridge());
+                viewModel.InitializeAsync().GetAwaiter().GetResult();
+                var generationField = typeof(AssetLibraryViewModel).GetField(
+                    "_queryGeneration",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                Assert.IsNotNull(generationField);
+                var timerField = typeof(AssetLibraryViewModel).GetField(
+                    "_searchDebounce",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                Assert.IsNotNull(timerField);
+                var timer = (System.Windows.Threading.DispatcherTimer)timerField.GetValue(viewModel)!;
+                timer.Stop();
+                var before = (long)generationField.GetValue(viewModel)!;
+                var handler = typeof(AssetLibraryViewModel).GetMethod(
+                    "OnSearchDebounceTick",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                Assert.IsNotNull(handler);
+                handler.Invoke(viewModel, [timer, EventArgs.Empty]);
+                var after = (long)generationField.GetValue(viewModel)!;
+                Assert.AreEqual(before, after);
+                viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            }
+            finally { try { Directory.Delete(root, true); } catch { } }
+        });
+    }
+
+    [TestMethod]
     public void SearchSuggestionsAreViewportBoundedAndScrollable()
     {
         var composer = Load("AssetQueryComposerView.xaml");
