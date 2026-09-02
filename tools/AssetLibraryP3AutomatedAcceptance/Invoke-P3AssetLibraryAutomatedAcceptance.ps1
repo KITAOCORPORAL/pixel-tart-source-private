@@ -1010,9 +1010,13 @@ function New-P3SyntheticFixture {
                 sha256 = Get-FileSha256 $_.FullName
             }
         })
-    if ($generatedFileRows.Count -ne 4 -or
-        (@($generatedFileRows | ForEach-Object { [string]$_.path }) -join '|') -cne
-            'asset-library-v16-legacy-v6.db|asset-library-v16.db|fixture-expectations.json|fixture-generator.py') {
+    $generatedFileNames = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($row in $generatedFileRows) { [void]$generatedFileNames.Add([string]$row.path) }
+    $expectedFileNames = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($name in 'asset-library-v16.db', 'asset-library-v16-legacy-v6.db', 'fixture-expectations.json', 'fixture-generator.py') {
+        [void]$expectedFileNames.Add($name)
+    }
+    if ($generatedFileRows.Count -ne 4 -or -not $generatedFileNames.SetEquals($expectedFileNames)) {
         throw 'The generated fixture input tree has an unexpected file inventory.'
     }
     $fixture = [ordered]@{
