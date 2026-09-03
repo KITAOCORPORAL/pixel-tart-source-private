@@ -849,7 +849,12 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         var groupRenameCommandChangedState = !string.Equals(sourceGroup.Name, renamedGroupName, StringComparison.Ordinal) &&
             string.Equals(FindManagedTagGroup(sourceGroup.TagGroupId).Name, renamedGroupName, StringComparison.Ordinal);
 
-        var groupOrderBefore = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
+        // Reorder commands operate on the order displayed by the product. Newly
+        // created entities can temporarily share a SortOrder, and the repository's
+        // SQLite NOCASE tie-breaker is not the same contract as the WPF culture-aware
+        // display order. Capture the public UI order, then verify that exact order is
+        // persisted after the command normalizes the sort keys.
+        var groupOrderBefore = _viewModel.P3ManagedTagGroups
             .Select(item => item.TagGroupId).ToArray();
         var groupReorder = BuildOneStepReorder(groupOrderBefore, sourceGroup.TagGroupId);
         _viewModel.P3SelectedManagedTagGroup = FindManagedTagGroup(sourceGroup.TagGroupId);
@@ -860,7 +865,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         {
             var current = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
                 .Select(item => item.TagGroupId);
-            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(groupReorder.ExpectedOrder);
+            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(groupReorder.ExpectedOrder) &&
+                   _viewModel.P3ManagedTagGroups.Select(item => item.TagGroupId)
+                       .SequenceEqual(groupReorder.ExpectedOrder);
         }, "the public Move Tag Group command");
         var groupOrderAfter = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
             .Select(item => item.TagGroupId).ToArray();
@@ -901,8 +908,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         var renameCommandChangedState = !string.Equals(source.Name, renamedName, StringComparison.Ordinal) &&
                                         string.Equals(renamedSource.Name, renamedName, StringComparison.Ordinal);
 
-        var tagOrderBefore = (await _acceptanceRepository.ListTagsAsync(
-                sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))
+        var tagOrderBefore = _viewModel.P3ManagedTags
             .Select(item => item.TagId).ToArray();
         var tagReorder = BuildOneStepReorder(tagOrderBefore, source.TagId);
         _viewModel.P3SelectedManagedTag = FindManagedTag(source.TagId);
@@ -914,7 +920,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
             var current = (await _acceptanceRepository.ListTagsAsync(
                     sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))
                 .Select(item => item.TagId);
-            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(tagReorder.ExpectedOrder);
+            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(tagReorder.ExpectedOrder) &&
+                   _viewModel.P3ManagedTags.Select(item => item.TagId)
+                       .SequenceEqual(tagReorder.ExpectedOrder);
         }, "the public Reorder Tag command");
         var tagOrderAfter = (await _acceptanceRepository.ListTagsAsync(
                 sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))

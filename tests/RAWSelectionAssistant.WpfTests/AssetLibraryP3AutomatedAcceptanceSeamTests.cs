@@ -167,6 +167,10 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
         ContainsAll(driver,
+            "var groupOrderBefore = _viewModel.P3ManagedTagGroups",
+            "var tagOrderBefore = _viewModel.P3ManagedTags",
+            "_viewModel.P3ManagedTagGroups.Select(item => item.TagGroupId)",
+            "_viewModel.P3ManagedTags.Select(item => item.TagId)",
             "BuildOneStepReorder(groupOrderBefore, sourceGroup.TagGroupId)",
             "BuildOneStepReorder(tagOrderBefore, source.TagId)",
             "var target = index == 0 ? 1 : index - 1;",
@@ -177,6 +181,12 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "sourceMembershipsBeforeMerge.Select(item => item.AssetId)",
             ".Intersect(targetMembershipsBeforeMerge.Select(item => item.AssetId)).Count()",
             "targetMembershipsAfterMerge.Count == expectedMergedMembershipCount");
+        Assert.IsFalse(driver.Contains(
+            "var groupOrderBefore = (await _acceptanceRepository.ListTagGroupsAsync",
+            StringComparison.Ordinal));
+        Assert.IsFalse(driver.Contains(
+            "var tagOrderBefore = (await _acceptanceRepository.ListTagsAsync",
+            StringComparison.Ordinal));
     }
 
     [TestMethod]
