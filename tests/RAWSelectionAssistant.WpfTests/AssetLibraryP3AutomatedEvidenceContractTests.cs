@@ -108,6 +108,42 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void TagManagerLifecycleValidatorRequiresEveryPublicCommandTransitionAndMergeInvariant()
+    {
+        var writer = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP3AutomatedAcceptance.cs");
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        var fields = new[]
+        {
+            "group_create_command_changed_state", "group_rename_command_changed_state",
+            "group_reorder_command_changed_state", "group_order_count",
+            "group_order_before_sha256", "group_order_after_sha256",
+            "tag_create_command_changed_state", "tag_rename_command_changed_state",
+            "rename_command_changed_state", "rename_preserved_memberships",
+            "tag_reorder_command_changed_state", "tag_order_count",
+            "tag_order_before_sha256", "tag_order_after_sha256",
+            "tag_move_command_changed_state", "tag_original_group_id", "tag_moved_group_id",
+            "tag_archive_command_changed_state", "tag_restore_command_changed_state",
+            "archive_restore_preserved_memberships", "merge_source_membership_count_before",
+            "merge_target_membership_count_before", "merge_overlap_count_before",
+            "merge_source_membership_count_after", "merge_target_membership_count_after",
+            "merge_duplicate_membership_count", "merge_source_archived",
+            "merge_memberships_deduplicated", "group_cycle_rejected", "group_cycle_proof"
+        };
+        foreach (var field in fields)
+        {
+            StringAssert.Contains(writer, field, $"Evidence writer omitted {field}.");
+            StringAssert.Contains(validator, $"'{field}'", $"Validator omitted {field}.");
+        }
+        ContainsAll(writer, "pixel-tart-p3-tag-manager-lifecycle/v2",
+            "public-flat-group-order-and-tag-reference-contract", "flat-no-parent-reference");
+        ContainsAll(validator, "pixel-tart-p3-tag-manager-lifecycle/v2",
+            "public-flat-group-order-and-tag-reference-contract", "flat-no-parent-reference",
+            "$mergeOverlapBefore -le 0", "$mergeSourceAfter -ne 0",
+            "$mergeTargetAfter -ne ($mergeSourceBefore + $mergeTargetBefore - $mergeOverlapBefore)",
+            "$groupOrderBeforeHash -ceq $groupOrderAfterHash", "$tagOrderBeforeHash -ceq $tagOrderAfterHash");
+    }
+
+    [TestMethod]
     public void EveryNegativeFixtureHasAnExplicitValidatorGuard()
     {
         using var document = Contract();

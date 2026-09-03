@@ -819,36 +819,174 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         if (!_viewModel.P3TagManagerOpen) _viewModel.ToggleP3TagManagerCommand.Execute(null);
         await WaitUntilAsync(() => _viewModel.P3TagManagerOpen && !_viewModel.P3TagManagerLoading,
             "the real P3 tag manager");
-        var suffix = Guid.NewGuid().ToString("N")[..8];
-        var groupName = $"验收标签组-{suffix}";
-        _viewModel.P3TagGroupNameInput = groupName;
-        if (!_viewModel.CreateP3TagGroupCommand.CanExecute(null))
-            throw new InvalidOperationException("The public Create Tag Group command rejected a valid name.");
-        _viewModel.CreateP3TagGroupCommand.Execute(null);
-        await WaitUntilAsync(() => !_viewModel.P3TagManagerLoading &&
-                                 _viewModel.P3ManagedTagGroups.Any(item => string.Equals(item.Name, groupName, StringComparison.Ordinal)),
-            "the public Create Tag Group command");
-        var group = _viewModel.P3ManagedTagGroups.Single(item => string.Equals(item.Name, groupName, StringComparison.Ordinal));
-        _viewModel.P3SelectedManagedTagGroup = group;
+        _viewModel.P3TagSearchText = string.Empty;
+        _viewModel.P3TagShowArchived = false;
+        _viewModel.P3SelectedManagedTagGroup = null;
 
+        var suffix = Guid.NewGuid().ToString("N")[..8];
+        var sourceGroup = await CreateManagedTagGroupThroughCommandAsync($"验收标签组甲-{suffix}", cancellationToken);
+        var destinationGroup = await CreateManagedTagGroupThroughCommandAsync($"验收标签组乙-{suffix}", cancellationToken);
+        var createdGroups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
+        var groupCreateCommandChangedState = sourceGroup.TagGroupId != destinationGroup.TagGroupId &&
+            createdGroups.Any(item => item.TagGroupId == sourceGroup.TagGroupId && !item.IsArchived) &&
+            createdGroups.Any(item => item.TagGroupId == destinationGroup.TagGroupId && !item.IsArchived);
+
+        _viewModel.P3SelectedManagedTagGroup = FindManagedTagGroup(sourceGroup.TagGroupId);
+        var renamedGroupName = $"验收标签组已重命名-{suffix}";
+        _viewModel.P3TagGroupNameInput = renamedGroupName;
+        if (!_viewModel.RenameP3TagGroupCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Rename Tag Group command was unavailable for the selected group.");
+        _viewModel.RenameP3TagGroupCommand.Execute(null);
+        await WaitUntilAsync(async () =>
+        {
+            var groups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
+            return !_viewModel.P3TagManagerLoading &&
+                   groups.Any(item => item.TagGroupId == sourceGroup.TagGroupId &&
+                                      string.Equals(item.Name, renamedGroupName, StringComparison.Ordinal)) &&
+                   _viewModel.P3ManagedTagGroups.Any(item => item.TagGroupId == sourceGroup.TagGroupId &&
+                                                             string.Equals(item.Name, renamedGroupName, StringComparison.Ordinal));
+        }, "the public Rename Tag Group command");
+        var groupRenameCommandChangedState = !string.Equals(sourceGroup.Name, renamedGroupName, StringComparison.Ordinal) &&
+            string.Equals(FindManagedTagGroup(sourceGroup.TagGroupId).Name, renamedGroupName, StringComparison.Ordinal);
+
+        var groupOrderBefore = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
+            .Select(item => item.TagGroupId).ToArray();
+        var groupReorder = BuildOneStepReorder(groupOrderBefore, sourceGroup.TagGroupId);
+        _viewModel.P3SelectedManagedTagGroup = FindManagedTagGroup(sourceGroup.TagGroupId);
+        if (!_viewModel.MoveP3TagGroupCommand.CanExecute(groupReorder.Direction))
+            throw new InvalidOperationException("The public Move Tag Group command was unavailable for the selected group.");
+        _viewModel.MoveP3TagGroupCommand.Execute(groupReorder.Direction);
+        await WaitUntilAsync(async () =>
+        {
+            var current = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
+                .Select(item => item.TagGroupId);
+            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(groupReorder.ExpectedOrder);
+        }, "the public Move Tag Group command");
+        var groupOrderAfter = (await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken))
+            .Select(item => item.TagGroupId).ToArray();
+        var groupReorderCommandChangedState = groupOrderAfter.SequenceEqual(groupReorder.ExpectedOrder) &&
+                                              !groupOrderAfter.SequenceEqual(groupOrderBefore);
+
+        _viewModel.P3SelectedManagedTagGroup = FindManagedTagGroup(sourceGroup.TagGroupId);
         var source = await CreateManagedTagThroughCommandAsync($"验收来源标签-{suffix}", cancellationToken);
         var target = await CreateManagedTagThroughCommandAsync($"验收目标标签-{suffix}", cancellationToken);
+        var movable = await CreateManagedTagThroughCommandAsync($"验收移动标签-{suffix}", cancellationToken);
+        var createdTags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+        var tagCreateCommandChangedState = new[] { source.TagId, target.TagId, movable.TagId }.Distinct().Count() == 3 &&
+            createdTags.Where(item => item.TagId == source.TagId || item.TagId == target.TagId || item.TagId == movable.TagId)
+                .All(item => item.TagGroupId == sourceGroup.TagGroupId && !item.IsArchived) &&
+            createdTags.Count(item => item.TagId == source.TagId || item.TagId == target.TagId || item.TagId == movable.TagId) == 3;
+
         await ApplyTagToSelectedBatchThroughCommandsAsync(source, 16, exerciseUndoRedo: false, cancellationToken);
         await ApplyTagToSelectedBatchThroughCommandsAsync(target, 16, exerciseUndoRedo: false, cancellationToken);
         var beforeRename = await _acceptanceRepository.ListTagMembershipsAsync(tagId: source.TagId, cancellationToken: cancellationToken);
-        _viewModel.P3SelectedManagedTag = _viewModel.P3ManagedTags.Single(item => item.TagId == source.TagId);
+        _viewModel.P3SelectedManagedTag = FindManagedTag(source.TagId);
         var renamedName = $"验收来源标签已重命名-{suffix}";
         _viewModel.P3TagNameInput = renamedName;
         if (!_viewModel.RenameP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Rename Tag command was unavailable for the selected tag.");
         _viewModel.RenameP3TagCommand.Execute(null);
-        await WaitUntilAsync(() => !_viewModel.P3TagManagerLoading &&
-                                 _viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId &&
-                                     string.Equals(item.Name, renamedName, StringComparison.Ordinal)),
-            "the public Rename Tag command");
+        await WaitUntilAsync(async () =>
+        {
+            var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+            return !_viewModel.P3TagManagerLoading &&
+                   tags.Any(item => item.TagId == source.TagId && string.Equals(item.Name, renamedName, StringComparison.Ordinal)) &&
+                   _viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId &&
+                                                       string.Equals(item.Name, renamedName, StringComparison.Ordinal));
+        }, "the public Rename Tag command");
         var afterRename = await _acceptanceRepository.ListTagMembershipsAsync(tagId: source.TagId, cancellationToken: cancellationToken);
-        var renamedSource = _viewModel.P3ManagedTags.Single(item => item.TagId == source.TagId);
-        var currentTarget = _viewModel.P3ManagedTags.Single(item => item.TagId == target.TagId);
+        var renamedSource = FindManagedTag(source.TagId);
+        var renamePreservedMemberships = beforeRename.Select(item => item.AssetId).OrderBy(id => id)
+            .SequenceEqual(afterRename.Select(item => item.AssetId).OrderBy(id => id));
+        var renameCommandChangedState = !string.Equals(source.Name, renamedName, StringComparison.Ordinal) &&
+                                        string.Equals(renamedSource.Name, renamedName, StringComparison.Ordinal);
+
+        var tagOrderBefore = (await _acceptanceRepository.ListTagsAsync(
+                sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))
+            .Select(item => item.TagId).ToArray();
+        var tagReorder = BuildOneStepReorder(tagOrderBefore, source.TagId);
+        _viewModel.P3SelectedManagedTag = FindManagedTag(source.TagId);
+        if (!_viewModel.ReorderP3TagCommand.CanExecute(tagReorder.Direction))
+            throw new InvalidOperationException("The public Reorder Tag command was unavailable for the selected tag.");
+        _viewModel.ReorderP3TagCommand.Execute(tagReorder.Direction);
+        await WaitUntilAsync(async () =>
+        {
+            var current = (await _acceptanceRepository.ListTagsAsync(
+                    sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))
+                .Select(item => item.TagId);
+            return !_viewModel.P3TagManagerLoading && current.SequenceEqual(tagReorder.ExpectedOrder);
+        }, "the public Reorder Tag command");
+        var tagOrderAfter = (await _acceptanceRepository.ListTagsAsync(
+                sourceGroup.TagGroupId, includeArchived: true, cancellationToken: cancellationToken))
+            .Select(item => item.TagId).ToArray();
+        var tagReorderCommandChangedState = tagOrderAfter.SequenceEqual(tagReorder.ExpectedOrder) &&
+                                            !tagOrderAfter.SequenceEqual(tagOrderBefore);
+
+        _viewModel.P3SelectedManagedTag = FindManagedTag(movable.TagId);
+        _viewModel.P3MoveTargetTagGroup = FindManagedTagGroup(destinationGroup.TagGroupId);
+        if (!_viewModel.MoveP3TagCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Move Tag command was unavailable for the selected tag.");
+        _viewModel.MoveP3TagCommand.Execute(null);
+        await WaitUntilAsync(async () =>
+        {
+            var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+            return !_viewModel.P3TagManagerLoading &&
+                   tags.Any(item => item.TagId == movable.TagId && item.TagGroupId == destinationGroup.TagGroupId) &&
+                   _viewModel.P3ManagedTags.All(item => item.TagId != movable.TagId);
+        }, "the public Move Tag command");
+        var movedTag = (await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken))
+            .Single(item => item.TagId == movable.TagId);
+        var tagMoveCommandChangedState = movable.TagGroupId == sourceGroup.TagGroupId &&
+                                         movedTag.TagGroupId == destinationGroup.TagGroupId;
+
+        _viewModel.P3SelectedManagedTag = FindManagedTag(source.TagId);
+        if (!_viewModel.ToggleArchiveP3TagCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Archive Tag command was unavailable for the selected tag.");
+        _viewModel.ToggleArchiveP3TagCommand.Execute(null);
+        await WaitUntilAsync(async () =>
+        {
+            var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+            return !_viewModel.P3TagManagerLoading && tags.Any(item => item.TagId == source.TagId && item.IsArchived) &&
+                   _viewModel.P3ManagedTags.All(item => item.TagId != source.TagId);
+        }, "the public Archive Tag command");
+        var tagArchiveCommandChangedState = (await _acceptanceRepository.ListTagsAsync(
+                includeArchived: true, cancellationToken: cancellationToken))
+            .Single(item => item.TagId == source.TagId).IsArchived;
+
+        _viewModel.P3TagShowArchived = true;
+        await WaitUntilAsync(() => _viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId && item.IsArchived),
+            "the archived tag to appear through the public Show Archived state");
+        _viewModel.P3SelectedManagedTag = FindManagedTag(source.TagId);
+        if (!_viewModel.ToggleArchiveP3TagCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Restore Tag command was unavailable for the selected archived tag.");
+        _viewModel.ToggleArchiveP3TagCommand.Execute(null);
+        await WaitUntilAsync(async () =>
+        {
+            var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+            return !_viewModel.P3TagManagerLoading && tags.Any(item => item.TagId == source.TagId && !item.IsArchived) &&
+                   _viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId && !item.IsArchived);
+        }, "the public Restore Tag command");
+        var afterRestore = await _acceptanceRepository.ListTagMembershipsAsync(tagId: source.TagId, cancellationToken: cancellationToken);
+        var tagRestoreCommandChangedState = !(await _acceptanceRepository.ListTagsAsync(
+                includeArchived: true, cancellationToken: cancellationToken))
+            .Single(item => item.TagId == source.TagId).IsArchived;
+        var archiveRestorePreservedMemberships = beforeRename.Select(item => item.AssetId).OrderBy(id => id)
+            .SequenceEqual(afterRestore.Select(item => item.AssetId).OrderBy(id => id));
+        _viewModel.P3TagShowArchived = false;
+
+        var sourceMembershipsBeforeMerge = await _acceptanceRepository.ListTagMembershipsAsync(
+            tagId: source.TagId, cancellationToken: cancellationToken);
+        var targetMembershipsBeforeMerge = await _acceptanceRepository.ListTagMembershipsAsync(
+            tagId: target.TagId, cancellationToken: cancellationToken);
+        var mergeOverlapCountBefore = sourceMembershipsBeforeMerge.Select(item => item.AssetId)
+            .Intersect(targetMembershipsBeforeMerge.Select(item => item.AssetId)).Count();
+
+        _viewModel.P3SelectedManagedTagGroup = null;
+        await WaitUntilAsync(() => _viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId) &&
+                                   _viewModel.P3ManagedTags.Any(item => item.TagId == target.TagId),
+            "the active source and target tags in the unfiltered public tag manager");
+        renamedSource = FindManagedTag(source.TagId);
+        var currentTarget = FindManagedTag(target.TagId);
         var tagList = FindRequired<ListBox>("P3ManagedTagList");
         tagList.SelectedItems.Clear();
         tagList.SelectedItems.Add(renamedSource);
@@ -862,20 +1000,84 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         if (!_viewModel.MergeP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Merge Tags command was unavailable after preview.");
         _viewModel.MergeP3TagCommand.Execute(null);
-        await WaitUntilAsync(() => !_viewModel.P3TagManagerLoading &&
-                                 !_viewModel.P3ManagedTags.Any(item => item.TagId == source.TagId && !item.IsArchived),
-            "the public Merge Tags command");
-        var memberships = await _acceptanceRepository.ListTagMembershipsAsync(tagId: target.TagId, cancellationToken: cancellationToken);
-        var duplicateCount = memberships.GroupBy(item => item.AssetId).Count(grouping => grouping.Count() > 1);
-        var groups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
-        var serializedGroup = JsonSerializer.SerializeToElement(group);
-        var hasParentReference = serializedGroup.EnumerateObject().Any(property =>
-            property.Name.Contains("parent", StringComparison.OrdinalIgnoreCase));
-        var flatGroupModelPreventsCycles = !hasParentReference &&
-                                           groups.Select(item => item.TagGroupId).Distinct().Count() == groups.Count;
-        return new(afterRename.Count > 0 && string.Equals(renamedSource.Name, renamedName, StringComparison.Ordinal),
-            beforeRename.Count == afterRename.Count,
-            memberships.Count, duplicateCount, GroupCycleRejected: flatGroupModelPreventsCycles);
+        await WaitUntilAsync(async () =>
+        {
+            var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+            return !_viewModel.P3TagManagerLoading && tags.Any(item => item.TagId == source.TagId && item.IsArchived) &&
+                   _viewModel.P3ManagedTags.All(item => item.TagId != source.TagId);
+        }, "the public Merge Tags command");
+
+        var sourceMembershipsAfterMerge = await _acceptanceRepository.ListTagMembershipsAsync(
+            tagId: source.TagId, cancellationToken: cancellationToken);
+        var targetMembershipsAfterMerge = await _acceptanceRepository.ListTagMembershipsAsync(
+            tagId: target.TagId, cancellationToken: cancellationToken);
+        var mergeDuplicateMembershipCount = targetMembershipsAfterMerge.GroupBy(item => item.AssetId)
+            .Count(grouping => grouping.Count() > 1);
+        var sourceArchivedAfterMerge = (await _acceptanceRepository.ListTagsAsync(
+                includeArchived: true, cancellationToken: cancellationToken))
+            .Single(item => item.TagId == source.TagId).IsArchived;
+        var expectedMergedMembershipCount = sourceMembershipsBeforeMerge.Select(item => item.AssetId)
+            .Union(targetMembershipsBeforeMerge.Select(item => item.AssetId)).Count();
+        var mergeMembershipsDeduplicated = mergeOverlapCountBefore > 0 && sourceMembershipsAfterMerge.Count == 0 &&
+                                           targetMembershipsAfterMerge.Count == expectedMergedMembershipCount &&
+                                           mergeDuplicateMembershipCount == 0 && sourceArchivedAfterMerge;
+
+        var finalGroups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
+        var finalGroupIds = finalGroups.Select(item => item.TagGroupId).ToHashSet();
+        var finalTags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
+        var flatGroupContractObserved = groupReorderCommandChangedState && finalGroupIds.Count == finalGroups.Count &&
+                                        finalTags.All(item => item.TagGroupId is null || finalGroupIds.Contains(item.TagGroupId.Value));
+
+        return new(
+            GroupCreateCommandChangedState: groupCreateCommandChangedState,
+            GroupRenameCommandChangedState: groupRenameCommandChangedState,
+            GroupReorderCommandChangedState: groupReorderCommandChangedState,
+            GroupOrderCount: groupOrderBefore.Length,
+            GroupOrderBeforeSha256: Sha256GuidOrder(groupOrderBefore),
+            GroupOrderAfterSha256: Sha256GuidOrder(groupOrderAfter),
+            TagCreateCommandChangedState: tagCreateCommandChangedState,
+            RenameCommandChangedState: renameCommandChangedState,
+            RenamePreservedMemberships: renamePreservedMemberships,
+            TagReorderCommandChangedState: tagReorderCommandChangedState,
+            TagOrderCount: tagOrderBefore.Length,
+            TagOrderBeforeSha256: Sha256GuidOrder(tagOrderBefore),
+            TagOrderAfterSha256: Sha256GuidOrder(tagOrderAfter),
+            TagMoveCommandChangedState: tagMoveCommandChangedState,
+            TagOriginalGroupId: sourceGroup.TagGroupId,
+            TagMovedGroupId: destinationGroup.TagGroupId,
+            TagArchiveCommandChangedState: tagArchiveCommandChangedState,
+            TagRestoreCommandChangedState: tagRestoreCommandChangedState,
+            ArchiveRestorePreservedMemberships: archiveRestorePreservedMemberships,
+            MergeChangedCount: sourceMembershipsBeforeMerge.Count,
+            MergeSourceMembershipCountBefore: sourceMembershipsBeforeMerge.Count,
+            MergeTargetMembershipCountBefore: targetMembershipsBeforeMerge.Count,
+            MergeOverlapCountBefore: mergeOverlapCountBefore,
+            MergeSourceMembershipCountAfter: sourceMembershipsAfterMerge.Count,
+            MergeTargetMembershipCountAfter: targetMembershipsAfterMerge.Count,
+            MergeDuplicateMembershipCount: mergeDuplicateMembershipCount,
+            MergeSourceArchived: sourceArchivedAfterMerge,
+            MergeMembershipsDeduplicated: mergeMembershipsDeduplicated,
+            GroupCycleRejected: flatGroupContractObserved);
+    }
+
+    private async Task<TagGroup> CreateManagedTagGroupThroughCommandAsync(
+        string name,
+        CancellationToken cancellationToken)
+    {
+        _viewModel.P3TagGroupNameInput = name;
+        if (!_viewModel.CreateP3TagGroupCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Create Tag Group command rejected a valid name.");
+        _viewModel.CreateP3TagGroupCommand.Execute(null);
+        await WaitUntilAsync(async () =>
+        {
+            var groups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
+            return !_viewModel.P3TagManagerLoading &&
+                   groups.Any(item => string.Equals(item.Name, name, StringComparison.Ordinal)) &&
+                   _viewModel.P3ManagedTagGroups.Any(item => string.Equals(item.Name, name, StringComparison.Ordinal));
+        },
+            "the public Create Tag Group command");
+        cancellationToken.ThrowIfCancellationRequested();
+        return _viewModel.P3ManagedTagGroups.Single(item => string.Equals(item.Name, name, StringComparison.Ordinal));
     }
 
     private async Task<AssetTag> CreateManagedTagThroughCommandAsync(
@@ -892,6 +1094,29 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
         return _viewModel.P3ManagedTags.Single(item => string.Equals(item.Name, name, StringComparison.Ordinal));
     }
+
+    private TagGroup FindManagedTagGroup(Guid tagGroupId) =>
+        _viewModel.P3ManagedTagGroups.Single(item => item.TagGroupId == tagGroupId);
+
+    private AssetTag FindManagedTag(Guid tagId) =>
+        _viewModel.P3ManagedTags.Single(item => item.TagId == tagId);
+
+    internal static AssetLibraryP3OneStepReorder BuildOneStepReorder(
+        IReadOnlyList<Guid> currentOrder,
+        Guid selectedId)
+    {
+        if (currentOrder is null) throw new ArgumentNullException(nameof(currentOrder));
+        var expected = currentOrder.ToArray();
+        var index = Array.IndexOf(expected, selectedId);
+        if (index < 0) throw new InvalidOperationException("The selected lifecycle entity is absent from its public order.");
+        if (expected.Length < 2) throw new InvalidOperationException("The lifecycle reorder proof requires at least two entities.");
+        var target = index == 0 ? 1 : index - 1;
+        (expected[index], expected[target]) = (expected[target], expected[index]);
+        return new(index == 0 ? "down" : "up", expected);
+    }
+
+    private static string Sha256GuidOrder(IEnumerable<Guid> ids) =>
+        Sha256Text(string.Join("\n", ids.Select(id => id.ToString("D"))));
 
     public async Task<AssetLibraryP3BatchSnapshot> ExecuteBatchTagCommand(
         int batchSize,
@@ -2081,11 +2306,39 @@ public sealed record AssetLibraryP3MigrationSnapshot(
     bool InvalidReferenceFailClosed);
 
 public sealed record AssetLibraryP3TagLifecycleSnapshot(
+    bool GroupCreateCommandChangedState,
+    bool GroupRenameCommandChangedState,
+    bool GroupReorderCommandChangedState,
+    int GroupOrderCount,
+    string GroupOrderBeforeSha256,
+    string GroupOrderAfterSha256,
+    bool TagCreateCommandChangedState,
     bool RenameCommandChangedState,
     bool RenamePreservedMemberships,
+    bool TagReorderCommandChangedState,
+    int TagOrderCount,
+    string TagOrderBeforeSha256,
+    string TagOrderAfterSha256,
+    bool TagMoveCommandChangedState,
+    Guid TagOriginalGroupId,
+    Guid TagMovedGroupId,
+    bool TagArchiveCommandChangedState,
+    bool TagRestoreCommandChangedState,
+    bool ArchiveRestorePreservedMemberships,
     int MergeChangedCount,
+    int MergeSourceMembershipCountBefore,
+    int MergeTargetMembershipCountBefore,
+    int MergeOverlapCountBefore,
+    int MergeSourceMembershipCountAfter,
+    int MergeTargetMembershipCountAfter,
     int MergeDuplicateMembershipCount,
+    bool MergeSourceArchived,
+    bool MergeMembershipsDeduplicated,
     bool GroupCycleRejected);
+
+internal sealed record AssetLibraryP3OneStepReorder(
+    string Direction,
+    IReadOnlyList<Guid> ExpectedOrder);
 
 public sealed record AssetLibraryP3BatchSnapshot(
     int BatchSize,

@@ -608,12 +608,15 @@ public sealed partial class AssetLibraryViewModel
 
     private void RaiseP3TagCommands()
     {
+        RefreshP3TagManagerCommand?.RaiseCanExecuteChanged();
         CreateP3TagGroupCommand?.RaiseCanExecuteChanged();
         RenameP3TagGroupCommand?.RaiseCanExecuteChanged();
         ToggleArchiveP3TagGroupCommand?.RaiseCanExecuteChanged();
+        MoveP3TagGroupCommand?.RaiseCanExecuteChanged();
         CreateP3TagCommand?.RaiseCanExecuteChanged();
         RenameP3TagCommand?.RaiseCanExecuteChanged();
         MoveP3TagCommand?.RaiseCanExecuteChanged();
+        ReorderP3TagCommand?.RaiseCanExecuteChanged();
         PreviewP3TagMergeCommand?.RaiseCanExecuteChanged();
         MergeP3TagCommand?.RaiseCanExecuteChanged();
         ToggleArchiveP3TagCommand?.RaiseCanExecuteChanged();

@@ -99,8 +99,18 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     public void TagBatchJournalFourViewsDpiAndPerformanceAreMeasured()
     {
         var window = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP3AutomatedAcceptance.cs");
-        ContainsAll(window, "merge_duplicate_membership_count", "group_cycle_rejected",
-            "rename_preserved_memberships", "batch_size", "committed_count", "atomic",
+        ContainsAll(window, "pixel-tart-p3-tag-manager-lifecycle/v2",
+            "group_create_command_changed_state", "group_rename_command_changed_state",
+            "group_reorder_command_changed_state", "group_order_before_sha256", "group_order_after_sha256",
+            "tag_create_command_changed_state", "tag_rename_command_changed_state",
+            "tag_reorder_command_changed_state", "tag_move_command_changed_state",
+            "tag_archive_command_changed_state", "tag_restore_command_changed_state",
+            "archive_restore_preserved_memberships", "merge_source_membership_count_before",
+            "merge_target_membership_count_before", "merge_overlap_count_before",
+            "merge_source_membership_count_after", "merge_target_membership_count_after",
+            "merge_duplicate_membership_count", "merge_source_archived", "merge_memberships_deduplicated",
+            "group_cycle_rejected", "group_cycle_proof", "rename_preserved_memberships",
+            "batch_size", "committed_count", "atomic",
             "undo_passed", "redo_passed", "chain_valid", "deduplicated",
             "AssetLibraryViewMode.Grid", "AssetLibraryViewMode.Masonry", "Evidence: \"waterfall\"",
             "AssetLibraryViewMode.Justified", "AssetLibraryViewMode.List", "selection_sha256",
@@ -126,6 +136,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "P3SmartFolderIncludeArchived = document.IncludeArchived",
             "P3QueryScope = scope", "SwitchViewCommand.Execute",
             "SaveP3SmartFolderCommand.Execute", "RetryP3SmartFolderPreviewCommand.Execute",
+            "CreateP3TagGroupCommand.Execute", "RenameP3TagGroupCommand.Execute",
+            "MoveP3TagGroupCommand.Execute", "CreateP3TagCommand.Execute", "RenameP3TagCommand.Execute",
+            "ReorderP3TagCommand.Execute", "MoveP3TagCommand.Execute", "ToggleArchiveP3TagCommand.Execute",
             "PreviewP3TagMergeCommand.Execute", "MergeP3TagCommand.Execute",
             "PreviewP3BatchMetadataCommand.Execute", "ApplyP3BatchMetadataCommand.Execute",
             "P2UndoCommand.Execute", "P2RedoCommand.Execute",
@@ -140,11 +153,30 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "CaptureButtonReadabilityMatrix", "AccessibleIdentity", "AnalyzeUndoJournal",
             "ExerciseContentStateRecoveryAsync", "MaximumDispatcherGapMilliseconds", "PreviewIsolated");
         Assert.IsFalse(driver.Contains("GroupCycleRejected: true", StringComparison.Ordinal));
+        Assert.IsFalse(driver.Contains("JsonSerializer.SerializeToElement(group)", StringComparison.Ordinal));
+        Assert.IsFalse(driver.Contains("EnumerateObject().Any(property", StringComparison.Ordinal));
         foreach (var forbidden in new[]
                  {
                      "SendInput", "SetForegroundWindow", "AutomationElement", "InvokePattern",
                      "BindingFlags", "GetField(", "GetProperty(", "Eagle.exe"
                  }) Assert.IsFalse(driver.Contains(forbidden, StringComparison.Ordinal), forbidden);
+    }
+
+    [TestMethod]
+    public void TagLifecycleReorderProofUsesAnAdjacentPermutationAndCanonicalOrderHashes()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
+        ContainsAll(driver,
+            "BuildOneStepReorder(groupOrderBefore, sourceGroup.TagGroupId)",
+            "BuildOneStepReorder(tagOrderBefore, source.TagId)",
+            "var target = index == 0 ? 1 : index - 1;",
+            "(expected[index], expected[target]) = (expected[target], expected[index]);",
+            "return new(index == 0 ? \"down\" : \"up\", expected);",
+            "Sha256GuidOrder(groupOrderBefore)", "Sha256GuidOrder(groupOrderAfter)",
+            "Sha256GuidOrder(tagOrderBefore)", "Sha256GuidOrder(tagOrderAfter)",
+            "sourceMembershipsBeforeMerge.Select(item => item.AssetId)",
+            ".Intersect(targetMembershipsBeforeMerge.Select(item => item.AssetId)).Count()",
+            "targetMembershipsAfterMerge.Count == expectedMergedMembershipCount");
     }
 
     [TestMethod]

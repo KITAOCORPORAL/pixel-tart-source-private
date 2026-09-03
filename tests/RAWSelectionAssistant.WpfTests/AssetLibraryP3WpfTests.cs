@@ -473,6 +473,67 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task TagManagerButtonsRefreshWhenReadinessAndSelectionsChange()
+    {
+        await RunSta(async () =>
+        {
+            var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3TagCommands", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                Path.Combine(root, "tag-commands.db"), new TaskOperationBridge(), []);
+            var host = new Border { Child = page };
+            try
+            {
+                var size = new Size(1179.33, 660.67);
+                host.Measure(size);
+                host.Arrange(new Rect(new Point(), size));
+                host.UpdateLayout();
+
+                var refresh = Assert.IsInstanceOfType<Button>(
+                    FindVisualByAutomationId(page, "P3TagManagerRefresh"));
+                var groupMoveUp = Assert.IsInstanceOfType<Button>(
+                    FindVisualByAutomationId(page, "P3TagGroupMoveUp"));
+                var groupMoveDown = Assert.IsInstanceOfType<Button>(
+                    FindVisualByAutomationId(page, "P3TagGroupMoveDown"));
+                var tagMoveUp = Assert.IsInstanceOfType<Button>(
+                    FindVisualByAutomationId(page, "P3TagMoveUp"));
+                var tagMoveDown = Assert.IsInstanceOfType<Button>(
+                    FindVisualByAutomationId(page, "P3TagMoveDown"));
+
+                Assert.IsFalse(refresh.IsEnabled, "Refresh must remain disabled before the page is ready.");
+                Assert.IsFalse(groupMoveUp.IsEnabled);
+                Assert.IsFalse(groupMoveDown.IsEnabled);
+                Assert.IsFalse(tagMoveUp.IsEnabled);
+                Assert.IsFalse(tagMoveDown.IsEnabled);
+
+                await page.ViewModel.InitializeAsync();
+                Assert.IsTrue(refresh.IsEnabled, "Readiness must requery the Refresh command on the real button.");
+                Assert.IsFalse(groupMoveUp.IsEnabled);
+                Assert.IsFalse(groupMoveDown.IsEnabled);
+                Assert.IsFalse(tagMoveUp.IsEnabled);
+                Assert.IsFalse(tagMoveDown.IsEnabled);
+
+                var group = new TagGroup(Guid.NewGuid(), "命令状态标签组", 0);
+                page.ViewModel.P3ManagedTagGroups.Add(group);
+                page.ViewModel.P3SelectedManagedTagGroup = group;
+                Assert.IsTrue(groupMoveUp.IsEnabled, "Selecting a group must enable its Move Up button.");
+                Assert.IsTrue(groupMoveDown.IsEnabled, "Selecting a group must enable its Move Down button.");
+
+                var tag = new AssetTag(Guid.NewGuid(), "命令状态标签", group.TagGroupId, 0);
+                page.ViewModel.P3ManagedTags.Add(tag);
+                page.ViewModel.P3SelectedManagedTag = tag;
+                Assert.IsTrue(tagMoveUp.IsEnabled, "Selecting a tag must enable its Move Up button.");
+                Assert.IsTrue(tagMoveDown.IsEnabled, "Selecting a tag must enable its Move Down button.");
+            }
+            finally
+            {
+                await page.DisposeAsync();
+                try { Directory.Delete(root, true); } catch { }
+            }
+        });
+    }
+
+    [TestMethod]
     public async Task RuntimePageCreatesAllP3UserControlsWithSharedViewModel()
     {
         await RunSta(() =>

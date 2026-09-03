@@ -1105,11 +1105,58 @@ if ($null -eq $smartMigration -or
     Fail 'smart-folder v6 migration or invalid-reference evidence failed.'
 }
 $tagLifecycle = Require-SingleEvidenceJson 'tags' 'tag-manager-lifecycle/v1' 'primary' 'tag-manager-lifecycle.json'
-if ($null -eq $tagLifecycle -or
-    [int](Property-Value $tagLifecycle.payload 'merge_duplicate_membership_count') -ne 0 -or
-    -not [bool](Property-Value $tagLifecycle.payload 'group_cycle_rejected') -or
-    -not [bool](Property-Value $tagLifecycle.payload 'rename_preserved_memberships')) {
-    Fail 'tag manager lifecycle evidence failed.'
+if ($null -eq $tagLifecycle) { Fail 'tag manager lifecycle evidence is absent.' }
+$tagLifecyclePayload = $tagLifecycle.payload
+Require-Equal (Property-Value $tagLifecyclePayload 'lifecycle_schema') 'pixel-tart-p3-tag-manager-lifecycle/v2' 'tag manager lifecycle schema'
+foreach ($field in @(
+    'group_create_command_changed_state', 'group_rename_command_changed_state',
+    'group_reorder_command_changed_state', 'tag_create_command_changed_state',
+    'tag_rename_command_changed_state', 'rename_command_changed_state',
+    'rename_preserved_memberships', 'tag_reorder_command_changed_state',
+    'tag_move_command_changed_state', 'tag_archive_command_changed_state',
+    'tag_restore_command_changed_state', 'archive_restore_preserved_memberships',
+    'merge_source_archived', 'merge_memberships_deduplicated', 'group_cycle_rejected')) {
+    Require-Equal ([bool](Property-Value $tagLifecyclePayload $field)) $true "tag manager lifecycle $field"
+}
+Require-Equal (Property-Value $tagLifecyclePayload 'group_hierarchy_model') 'flat-no-parent-reference' 'tag manager flat group hierarchy model'
+Require-Equal (Property-Value $tagLifecyclePayload 'group_cycle_proof') 'public-flat-group-order-and-tag-reference-contract' 'tag manager flat group cycle proof'
+
+$groupOrderCount = [int](Property-Value $tagLifecyclePayload 'group_order_count')
+$tagOrderCount = [int](Property-Value $tagLifecyclePayload 'tag_order_count')
+if ($groupOrderCount -lt 2 -or $tagOrderCount -lt 3) {
+    Fail 'tag manager lifecycle reorder evidence does not contain enough real entities.'
+}
+$groupOrderBeforeHash = Property-Value $tagLifecyclePayload 'group_order_before_sha256'
+$groupOrderAfterHash = Property-Value $tagLifecyclePayload 'group_order_after_sha256'
+$tagOrderBeforeHash = Property-Value $tagLifecyclePayload 'tag_order_before_sha256'
+$tagOrderAfterHash = Property-Value $tagLifecyclePayload 'tag_order_after_sha256'
+Require-String $groupOrderBeforeHash 'tag manager group order before hash' '^[0-9a-f]{64}$'
+Require-String $groupOrderAfterHash 'tag manager group order after hash' '^[0-9a-f]{64}$'
+Require-String $tagOrderBeforeHash 'tag manager tag order before hash' '^[0-9a-f]{64}$'
+Require-String $tagOrderAfterHash 'tag manager tag order after hash' '^[0-9a-f]{64}$'
+if ($groupOrderBeforeHash -ceq $groupOrderAfterHash -or $tagOrderBeforeHash -ceq $tagOrderAfterHash) {
+    Fail 'tag manager lifecycle public reorder commands did not change the canonical order hashes.'
+}
+
+$tagOriginalGroupId = Property-Value $tagLifecyclePayload 'tag_original_group_id'
+$tagMovedGroupId = Property-Value $tagLifecyclePayload 'tag_moved_group_id'
+Require-String $tagOriginalGroupId 'tag manager original group id' '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+Require-String $tagMovedGroupId 'tag manager moved group id' '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+if ($tagOriginalGroupId -ceq $tagMovedGroupId) { Fail 'tag manager lifecycle did not move a tag between distinct groups.' }
+
+$mergeSourceBefore = [int](Property-Value $tagLifecyclePayload 'merge_source_membership_count_before')
+$mergeTargetBefore = [int](Property-Value $tagLifecyclePayload 'merge_target_membership_count_before')
+$mergeOverlapBefore = [int](Property-Value $tagLifecyclePayload 'merge_overlap_count_before')
+$mergeSourceAfter = [int](Property-Value $tagLifecyclePayload 'merge_source_membership_count_after')
+$mergeTargetAfter = [int](Property-Value $tagLifecyclePayload 'merge_target_membership_count_after')
+$mergeChanged = [int](Property-Value $tagLifecyclePayload 'merge_changed_count')
+$mergeDuplicateAfter = [int](Property-Value $tagLifecyclePayload 'merge_duplicate_membership_count')
+if ($mergeSourceBefore -le 0 -or $mergeTargetBefore -le 0 -or $mergeOverlapBefore -le 0 -or
+    $mergeOverlapBefore -gt [Math]::Min($mergeSourceBefore, $mergeTargetBefore) -or
+    $mergeSourceAfter -ne 0 -or
+    $mergeTargetAfter -ne ($mergeSourceBefore + $mergeTargetBefore - $mergeOverlapBefore) -or
+    $mergeChanged -ne $mergeSourceBefore -or $mergeDuplicateAfter -ne 0) {
+    Fail 'tag manager lifecycle merge evidence does not prove an existing overlap was deduplicated.'
 }
 
 foreach ($size in 100,500) {
