@@ -10,6 +10,21 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class AssetLibraryP3RepositoryTests
 {
     [TestMethod]
+    public async Task P3TestCleanupLeavesAnotherDatabaseConnectionUsable()
+    {
+        var first = await AssetLibraryP3TestSetup.CreateAsync();
+        await using var second = await AssetLibraryP3TestSetup.CreateAsync();
+        await using var activeSecondConnection = AssetLibraryP3TestSetup.CreatePooledConnection(second.DatabasePath);
+        await activeSecondConnection.OpenAsync();
+
+        await first.DisposeAsync();
+
+        await using var command = activeSecondConnection.CreateCommand();
+        command.CommandText = "SELECT COUNT(*) FROM AssetLibrarySchemaInfo;";
+        Assert.IsGreaterThan(0L, Convert.ToInt64(await command.ExecuteScalarAsync()));
+    }
+
+    [TestMethod]
     public async Task FolderAndTagAnyAllNoneNestedNotAndStablePagingShareOneQueryPlan()
     {
         await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
@@ -827,10 +842,21 @@ internal sealed class AssetLibraryP3TestSetup : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
+        var databasePath = Repository.DatabasePath;
         await Repository.DisposeAsync();
-        SqliteConnection.ClearAllPools();
+        using (var poolKey = CreatePooledConnection(databasePath)) SqliteConnection.ClearPool(poolKey);
         try { Directory.Delete(_root, recursive: true); } catch { }
     }
+
+    internal static SqliteConnection CreatePooledConnection(string databasePath) => new(
+        new SqliteConnectionStringBuilder
+        {
+            DataSource = databasePath,
+            Mode = SqliteOpenMode.ReadWriteCreate,
+            Cache = SqliteCacheMode.Shared,
+            Pooling = true,
+            DefaultTimeout = 5
+        }.ToString());
 }
 
 internal sealed record AssetLibraryP3Seed(
