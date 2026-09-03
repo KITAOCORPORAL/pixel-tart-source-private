@@ -381,7 +381,7 @@ public sealed class AssetLibraryP3WpfTests
         var viewportContract = manager.Descendants().Single(element =>
             Attribute(element, "AutomationProperties.AutomationId") == "P3TagManagerViewport");
         Assert.AreEqual("ScrollViewer", viewportContract.Name.LocalName);
-        Assert.AreEqual("200", Attribute(viewportContract, "MaxHeight"));
+        Assert.AreEqual("150", Attribute(viewportContract, "MaxHeight"));
         Assert.AreEqual("Auto", Attribute(viewportContract, "VerticalScrollBarVisibility"));
         Assert.AreEqual("Disabled", Attribute(viewportContract, "HorizontalScrollBarVisibility"));
         Assert.AreEqual("True", Attribute(viewportContract, "ClipToBounds"));
@@ -392,6 +392,7 @@ public sealed class AssetLibraryP3WpfTests
             Directory.CreateDirectory(root);
             var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
                 Path.Combine(root, "tag-layout.db"), new TaskOperationBridge(), []);
+            var host = new Border { Child = page, ClipToBounds = true };
             try
             {
                 await page.ViewModel.InitializeAsync();
@@ -413,13 +414,15 @@ public sealed class AssetLibraryP3WpfTests
 
                 foreach (var size in new[] { new Size(1179.33, 660.67), new Size(1179.33, 612.67) })
                 {
-                    page.Measure(size);
-                    page.Arrange(new Rect(new Point(), size));
-                    page.UpdateLayout();
+                    host.Width = size.Width;
+                    host.Height = size.Height;
+                    host.Measure(size);
+                    host.Arrange(new Rect(new Point(), size));
+                    host.UpdateLayout();
 
                     var viewport = Assert.IsInstanceOfType<ScrollViewer>(
                         FindVisualByAutomationId(page, "P3TagManagerViewport"));
-                    Assert.AreEqual(200d, viewport.MaxHeight);
+                    Assert.AreEqual(150d, viewport.MaxHeight);
                     Assert.IsGreaterThan(0d, viewport.ScrollableHeight,
                         "The seeded tag manager content must exercise the bounded scrolling path.");
 
@@ -433,7 +436,7 @@ public sealed class AssetLibraryP3WpfTests
                         var bounds = element.TransformToAncestor(page)
                             .TransformBounds(new Rect(new Point(), element.RenderSize));
                         Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{automationId} at {size}");
-                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{automationId} at {size}");
+                        Assert.IsLessThanOrEqualTo(size.Height + 0.01d, bounds.Bottom, $"{automationId} at {size}");
                     }
 
                     foreach (var button in EnumerateVisuals<Button>(page)
@@ -444,11 +447,11 @@ public sealed class AssetLibraryP3WpfTests
                             .TransformBounds(new Rect(new Point(), button.RenderSize));
                         var identity = AutomationProperties.GetAutomationId(button);
                         Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity} at {size}");
-                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity} at {size}");
+                        Assert.IsLessThanOrEqualTo(size.Height + 0.01d, bounds.Bottom, $"{identity} at {size}");
                     }
 
                     var workspace = FindVisualByAutomationId(page, "AssetLibraryThreePaneWorkspace");
-                    Assert.IsGreaterThanOrEqualTo(24d, workspace.ActualHeight,
+                    Assert.IsGreaterThanOrEqualTo(130d, workspace.ActualHeight,
                         $"The tag manager must not push the shared browser workspace out of the {size} viewport.");
                 }
             }

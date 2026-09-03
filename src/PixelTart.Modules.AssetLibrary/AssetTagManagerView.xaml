@@ -19,7 +19,7 @@
 
         <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
                 Visibility="{Binding P3TagManagerOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
-            <ScrollViewer MaxHeight="200"
+            <ScrollViewer MaxHeight="150"
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled"
                           ClipToBounds="True"
