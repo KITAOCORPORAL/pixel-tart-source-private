@@ -191,6 +191,30 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public void BatchApplyPublishesSuccessOnlyAfterUiRefreshCompletes()
+    {
+        var source = File.ReadAllText(ModulePath("AssetLibraryViewModel.P3TagManager.cs"));
+        var methodStart = source.IndexOf("private async Task ApplyP3BatchMetadataAsync()", StringComparison.Ordinal);
+        var methodEnd = source.IndexOf("private void RememberP3MetadataResult", methodStart, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, methodStart);
+        Assert.IsGreaterThan(methodStart, methodEnd);
+        var body = source[methodStart..methodEnd];
+
+        var repositoryApply = body.IndexOf("await _repository.ApplyBatchMetadataAsync", StringComparison.Ordinal);
+        var rememberResult = body.IndexOf("RememberP3MetadataResult(result);", StringComparison.Ordinal);
+        var refreshFilters = body.IndexOf("await RefreshFilterListsAsync", StringComparison.Ordinal);
+        var refreshAssets = body.IndexOf("await RefreshAsync();", StringComparison.Ordinal);
+        var refreshSelection = body.IndexOf("await RefreshSelectionSummaryAsync();", StringComparison.Ordinal);
+        var publishSuccess = body.IndexOf("P3BatchPreviewSummary = $\"已安全更新", StringComparison.Ordinal);
+
+        Assert.IsTrue(
+            repositoryApply >= 0 && repositoryApply < rememberResult &&
+            rememberResult < refreshFilters && refreshFilters < refreshAssets &&
+            refreshAssets < refreshSelection && refreshSelection < publishSuccess,
+            "Batch apply must publish its stable success state only after every UI refresh has completed.");
+    }
+
+    [TestMethod]
     public void SearchSuggestionsAreViewportBoundedAndScrollable()
     {
         var composer = Load("AssetQueryComposerView.xaml");

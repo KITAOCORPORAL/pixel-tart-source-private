@@ -1326,7 +1326,8 @@ function Invoke-DryRun {
         if (@($parseErrors).Count -ne 0) { throw "PowerShell preflight parse failed for '$scriptPath'." }
     }
     $python = [IO.Path]::GetFullPath((Get-Command python.exe -ErrorAction Stop).Source)
-    $pythonCompileCode = 'import ast,pathlib,sys;p=pathlib.Path(sys.argv[1]);s=p.read_bytes().decode();t=ast.parse(s);compile(t,str(p),"exec")'
+    $pythonCompileExpression = 'compile(t,str(p),"exec")'
+    $pythonCompileCode = "import ast,pathlib,sys;p=pathlib.Path(sys.argv[1]);s=p.read_bytes().decode();t=ast.parse(s);$($pythonCompileExpression.Replace([char]34, [char]39))"
     foreach ($pythonPath in @($script:requiredAcceptanceInputFiles | Where-Object { $_ -like '*.py' } | ForEach-Object { Join-Path $PSScriptRoot $_ })) {
         $pythonOutput = & $python -I -c $pythonCompileCode ([IO.Path]::GetFullPath($pythonPath)) 2>&1
         if ($LASTEXITCODE -ne 0) {

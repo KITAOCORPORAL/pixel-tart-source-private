@@ -484,10 +484,10 @@ public sealed partial class AssetLibraryViewModel
         {
             var result = await _repository.ApplyBatchMetadataAsync(request, preview, _lifetimeCancellation.Token);
             RememberP3MetadataResult(result);
-            P3BatchPreviewSummary = $"已安全更新 {result.ChangedCount:N0} 项素材库元数据；源文件未改动。";
             await RefreshFilterListsAsync(_lifetimeCancellation.Token);
             await RefreshAsync();
             await RefreshSelectionSummaryAsync();
+            P3BatchPreviewSummary = $"已安全更新 {result.ChangedCount:N0} 项素材库元数据；源文件未改动。";
         }
         catch (Exception exception) { P3BatchPreviewSummary = $"批量修改失败，事务未部分提交：{exception.Message}"; }
     }
