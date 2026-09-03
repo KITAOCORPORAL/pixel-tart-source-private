@@ -381,10 +381,13 @@ public sealed class AssetLibraryP3WpfTests
         var viewportContract = manager.Descendants().Single(element =>
             Attribute(element, "AutomationProperties.AutomationId") == "P3TagManagerViewport");
         Assert.AreEqual("ScrollViewer", viewportContract.Name.LocalName);
-        Assert.AreEqual("150", Attribute(viewportContract, "MaxHeight"));
+        StringAssert.Contains(Attribute(viewportContract, "MaxHeight"), "P3TagManagerViewportHeightConverter");
         Assert.AreEqual("Auto", Attribute(viewportContract, "VerticalScrollBarVisibility"));
         Assert.AreEqual("Disabled", Attribute(viewportContract, "HorizontalScrollBarVisibility"));
         Assert.AreEqual("True", Attribute(viewportContract, "ClipToBounds"));
+        Assert.AreEqual(60d, AssetTagManagerViewportHeightConverter.Calculate(560d));
+        Assert.AreEqual(110.67d, AssetTagManagerViewportHeightConverter.Calculate(660.67d), 0.001d);
+        Assert.AreEqual(300d, AssetTagManagerViewportHeightConverter.Calculate(900d));
 
         await RunSta(async () =>
         {
@@ -411,6 +414,8 @@ public sealed class AssetLibraryP3WpfTests
                     page.ViewModel.P3ManagedTags.Add(new(
                         Guid.NewGuid(), $"布局标签 {index + 1}", groupId, index));
                 }
+                InvokePrivateVoid(page.ViewModel, "SetNextCursor", "layout-next-page");
+                Assert.IsTrue(page.ViewModel.IsLoadMoreVisible);
 
                 foreach (var size in new[] { new Size(1179.33, 660.67), new Size(1179.33, 612.67) })
                 {
@@ -422,7 +427,11 @@ public sealed class AssetLibraryP3WpfTests
 
                     var viewport = Assert.IsInstanceOfType<ScrollViewer>(
                         FindVisualByAutomationId(page, "P3TagManagerViewport"));
-                    Assert.AreEqual(150d, viewport.MaxHeight);
+                    Assert.AreEqual(
+                        AssetTagManagerViewportHeightConverter.Calculate(size.Height),
+                        viewport.MaxHeight,
+                        0.01d,
+                        $"The tag viewport height must follow the live page height at {size}.");
                     Assert.IsGreaterThan(0d, viewport.ScrollableHeight,
                         "The seeded tag manager content must exercise the bounded scrolling path.");
 
