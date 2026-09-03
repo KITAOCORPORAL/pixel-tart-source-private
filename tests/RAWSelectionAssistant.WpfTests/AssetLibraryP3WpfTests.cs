@@ -381,7 +381,7 @@ public sealed class AssetLibraryP3WpfTests
         var viewportContract = manager.Descendants().Single(element =>
             Attribute(element, "AutomationProperties.AutomationId") == "P3TagManagerViewport");
         Assert.AreEqual("ScrollViewer", viewportContract.Name.LocalName);
-        Assert.AreEqual("280", Attribute(viewportContract, "MaxHeight"));
+        Assert.AreEqual("200", Attribute(viewportContract, "MaxHeight"));
         Assert.AreEqual("Auto", Attribute(viewportContract, "VerticalScrollBarVisibility"));
         Assert.AreEqual("Disabled", Attribute(viewportContract, "HorizontalScrollBarVisibility"));
         Assert.AreEqual("True", Attribute(viewportContract, "ClipToBounds"));
@@ -419,7 +419,7 @@ public sealed class AssetLibraryP3WpfTests
 
                     var viewport = Assert.IsInstanceOfType<ScrollViewer>(
                         FindVisualByAutomationId(page, "P3TagManagerViewport"));
-                    Assert.AreEqual(280d, viewport.MaxHeight);
+                    Assert.AreEqual(200d, viewport.MaxHeight);
                     Assert.IsGreaterThan(0d, viewport.ScrollableHeight,
                         "The seeded tag manager content must exercise the bounded scrolling path.");
 
@@ -434,6 +434,17 @@ public sealed class AssetLibraryP3WpfTests
                             .TransformBounds(new Rect(new Point(), element.RenderSize));
                         Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{automationId} at {size}");
                         Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{automationId} at {size}");
+                    }
+
+                    foreach (var button in EnumerateVisuals<Button>(page)
+                                 .Where(item => item.IsVisible && item.ActualWidth > 0 && item.ActualHeight > 0 &&
+                                                !IsInsideScrollViewer(item)))
+                    {
+                        var bounds = button.TransformToAncestor(page)
+                            .TransformBounds(new Rect(new Point(), button.RenderSize));
+                        var identity = AutomationProperties.GetAutomationId(button);
+                        Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity} at {size}");
+                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity} at {size}");
                     }
 
                     var workspace = FindVisualByAutomationId(page, "AssetLibraryThreePaneWorkspace");
@@ -1038,6 +1049,24 @@ public sealed class AssetLibraryP3WpfTests
             catch (AssertFailedException) { }
         }
         throw new AssertFailedException($"Visual '{automationId}' was not found.");
+    }
+
+    private static IEnumerable<T> EnumerateVisuals<T>(DependencyObject root) where T : DependencyObject
+    {
+        for (var index = 0; index < VisualTreeHelper.GetChildrenCount(root); index++)
+        {
+            var child = VisualTreeHelper.GetChild(root, index);
+            if (child is T match) yield return match;
+            foreach (var nested in EnumerateVisuals<T>(child)) yield return nested;
+        }
+    }
+
+    private static bool IsInsideScrollViewer(DependencyObject element)
+    {
+        for (var ancestor = VisualTreeHelper.GetParent(element); ancestor is not null;
+             ancestor = VisualTreeHelper.GetParent(ancestor))
+            if (ancestor is ScrollViewer) return true;
+        return false;
     }
 
     private static int Count(string source, string value)
