@@ -129,6 +129,10 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "PreviewP3TagMergeCommand.Execute", "MergeP3TagCommand.Execute",
             "PreviewP3BatchMetadataCommand.Execute", "ApplyP3BatchMetadataCommand.Execute",
             "P2UndoCommand.Execute", "P2RedoCommand.Execute",
+            "P3AcceptancePublishedQueryGeneration == _viewModel.P3AcceptanceQueryGeneration",
+            "!_viewModel.IsLoading && !_viewModel.HasLoadError",
+            "_viewModel.IsOrganizationLoading || _viewModel.HasOrganizationError",
+            "did not reach a stable UI state",
             "VirtualizingPanel.GetIsVirtualizing", "CaptureVisibleBounds",
             "CaptureButtonReadabilityMatrix", "AccessibleIdentity", "AnalyzeUndoJournal",
             "ExerciseContentStateRecoveryAsync", "MaximumDispatcherGapMilliseconds", "PreviewIsolated");

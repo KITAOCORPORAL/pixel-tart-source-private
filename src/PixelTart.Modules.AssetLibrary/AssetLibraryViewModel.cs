@@ -40,9 +40,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private long _queryGeneration;
     private long _loadMoreGeneration;
     private long _analysisGeneration;
-    private readonly DispatcherTimer _searchDebounce;
+    private DispatcherTimer? _searchDebounce;
     private long _searchDebounceGeneration;
-    private long _searchDebounceArmedGeneration;
     private string _searchText = string.Empty;
     private string _status = "正在准备素材库";
     private string _tagInput = string.Empty;
@@ -131,8 +130,6 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _visualQuery = new SqliteVisualAssetQueryService(_database, _featureStore);
         _batchProcessor = new(_visualAnalysis, _featureStore);
         AssetCards.CollectionChanged += (_, _) => _importDiagnostics.RecordCollectionChanged();
-        _searchDebounce = new(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
-        _searchDebounce.Tick += OnSearchDebounceTick;
         RefreshCommand = new(RefreshAsync, () => IsReady); RetryLoadCommand = new(RetryLoadAsync, () => !IsLoading); ImportCommand = new(ImportAsync, () => IsReady); LoadMoreCommand = new(LoadMoreAsync, () => CanLoadMore);
         NewFolderCommand = new(NewFolderAsync, () => IsReady); NewSubfolderCommand = new(NewSubfolderAsync, () => IsReady && SelectedFolder is not null); BatchFolderCommand = new(BatchFolderAsync, () => IsReady);
         NewTagCommand = new(NewTagAsync, () => IsReady); ApplyTagsCommand = new(ApplyTagsAsync, () => IsReady && SelectedAssets.Count > 0 && !string.IsNullOrWhiteSpace(TagInput));
@@ -158,29 +155,30 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         InitializeP3TagManager();
     }
 
-    private async void OnSearchDebounceTick(object? sender, EventArgs e)
+    private async void OnSearchDebounceTick(DispatcherTimer timer, long generation)
     {
-        if (!_searchDebounce.IsEnabled) return;
-        var armedGeneration = Volatile.Read(ref _searchDebounceArmedGeneration);
-        _searchDebounce.Stop();
-        Volatile.Write(ref _searchDebounceArmedGeneration, 0);
-        if (armedGeneration == 0 || armedGeneration != Volatile.Read(ref _searchDebounceGeneration)) return;
+        timer.Stop();
+        if (!ReferenceEquals(_searchDebounce, timer) || generation != Volatile.Read(ref _searchDebounceGeneration)) return;
+        _searchDebounce = null;
         if (IsReady) await RefreshAsync();
     }
 
     private void StopSearchDebounce()
     {
         Interlocked.Increment(ref _searchDebounceGeneration);
-        Volatile.Write(ref _searchDebounceArmedGeneration, 0);
-        _searchDebounce.Stop();
+        var timer = _searchDebounce;
+        _searchDebounce = null;
+        timer?.Stop();
     }
 
     private void StartSearchDebounce()
     {
-        var generation = Interlocked.Increment(ref _searchDebounceGeneration);
-        Volatile.Write(ref _searchDebounceArmedGeneration, generation);
-        _searchDebounce.Stop();
-        _searchDebounce.Start();
+        StopSearchDebounce();
+        var generation = Volatile.Read(ref _searchDebounceGeneration);
+        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
+        timer.Tick += (_, _) => OnSearchDebounceTick(timer, generation);
+        _searchDebounce = timer;
+        timer.Start();
     }
 
     public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];

@@ -156,7 +156,7 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
-    public async Task StoppedSearchDebounceIgnoresQueuedTick()
+    public async Task RearmedSearchDebounceIgnoresQueuedTickFromPriorTimer()
     {
         await RunSta(() =>
         {
@@ -174,16 +174,30 @@ public sealed class AssetLibraryP3WpfTests
                     "_searchDebounce",
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
                 Assert.IsNotNull(timerField);
-                var timer = (System.Windows.Threading.DispatcherTimer)timerField.GetValue(viewModel)!;
-                timer.Stop();
+                var debounceGenerationField = typeof(AssetLibraryViewModel).GetField(
+                    "_searchDebounceGeneration",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                Assert.IsNotNull(debounceGenerationField);
+                var start = typeof(AssetLibraryViewModel).GetMethod(
+                    "StartSearchDebounce",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                Assert.IsNotNull(start);
+                start.Invoke(viewModel, null);
+                var staleTimer = (System.Windows.Threading.DispatcherTimer)timerField.GetValue(viewModel)!;
+                var staleGeneration = (long)debounceGenerationField.GetValue(viewModel)!;
+                start.Invoke(viewModel, null);
+                var currentTimer = (System.Windows.Threading.DispatcherTimer)timerField.GetValue(viewModel)!;
+                Assert.AreNotSame(staleTimer, currentTimer);
                 var before = (long)generationField.GetValue(viewModel)!;
                 var handler = typeof(AssetLibraryViewModel).GetMethod(
                     "OnSearchDebounceTick",
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
                 Assert.IsNotNull(handler);
-                handler.Invoke(viewModel, [timer, EventArgs.Empty]);
+                handler.Invoke(viewModel, [staleTimer, staleGeneration]);
                 var after = (long)generationField.GetValue(viewModel)!;
                 Assert.AreEqual(before, after);
+                Assert.AreSame(currentTimer, timerField.GetValue(viewModel));
+                Assert.IsTrue(currentTimer.IsEnabled);
                 viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
             }
             finally { try { Directory.Delete(root, true); } catch { } }
@@ -203,7 +217,7 @@ public sealed class AssetLibraryP3WpfTests
         var repositoryApply = body.IndexOf("await _repository.ApplyBatchMetadataAsync", StringComparison.Ordinal);
         var rememberResult = body.IndexOf("RememberP3MetadataResult(result);", StringComparison.Ordinal);
         var refreshFilters = body.IndexOf("await RefreshFilterListsAsync", StringComparison.Ordinal);
-        var refreshAssets = body.IndexOf("await RefreshAsync();", StringComparison.Ordinal);
+        var refreshAssets = body.IndexOf("await RefreshAsync(initializationAttempt: null", StringComparison.Ordinal);
         var refreshSelection = body.IndexOf("await RefreshSelectionSummaryAsync();", StringComparison.Ordinal);
         var publishSuccess = body.IndexOf("P3BatchPreviewSummary = $\"已安全更新", StringComparison.Ordinal);
 
@@ -212,6 +226,57 @@ public sealed class AssetLibraryP3WpfTests
             rememberResult < refreshFilters && refreshFilters < refreshAssets &&
             refreshAssets < refreshSelection && refreshSelection < publishSuccess,
             "Batch apply must publish its stable success state only after every UI refresh has completed.");
+        StringAssert.Contains(body, "refreshOutcome != AssetLibraryRefreshOutcome.Completed || IsLoading || HasLoadError ||");
+        StringAssert.Contains(body, "IsOrganizationLoading || HasOrganizationError");
+        StringAssert.Contains(body, "批量修改已提交");
+        StringAssert.Contains(body, "但界面刷新失败");
+    }
+
+    [TestMethod]
+    public async Task BatchApplyCompletesAgainstRealRepositoryWithStableUiState()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3BatchStable", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var databasePath = Path.Combine(root, "library.db");
+        var assetPath = Path.Combine(root, "batch-stable.jpg");
+        var tagId = Guid.NewGuid();
+        try
+        {
+            await File.WriteAllTextAsync(assetPath, "batch-stable");
+            await using (var repository = new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(databasePath))
+            {
+                await repository.InitializeAsync();
+                await repository.ImportAsync([new AssetImportRequest(assetPath)]);
+                await repository.SaveTagAsync(new(tagId, "稳定提交标签"));
+            }
+
+            await RunSta(() =>
+            {
+                var viewModel = new AssetLibraryViewModel(databasePath, new TaskOperationBridge());
+                viewModel.InitializeAsync().GetAwaiter().GetResult();
+                viewModel.SyncSelection([viewModel.AssetCards.Single().Asset]);
+                viewModel.P3BatchTag = viewModel.Tags.Single(tag => tag.TagId == tagId);
+                viewModel.P3BatchTagAction = "添加";
+                InvokePrivateTask(viewModel, "PreviewP3BatchMetadataAsync").GetAwaiter().GetResult();
+                Assert.IsTrue(viewModel.P3BatchPreviewReady, viewModel.P3BatchPreviewSummary);
+
+                InvokePrivateTask(viewModel, "ApplyP3BatchMetadataAsync").GetAwaiter().GetResult();
+
+                Assert.IsNotNull(viewModel.LastUndoToken);
+                StringAssert.Contains(viewModel.P3BatchPreviewSummary, "已安全更新 1 项");
+                Assert.IsFalse(viewModel.IsLoading);
+                Assert.IsFalse(viewModel.HasLoadError);
+                Assert.IsFalse(viewModel.IsOrganizationLoading);
+                Assert.IsFalse(viewModel.HasOrganizationError);
+                Assert.HasCount(1, viewModel.SelectedAssets);
+                viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+
+            await using var verification = new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(databasePath);
+            await verification.InitializeAsync();
+            Assert.HasCount(1, await verification.ListTagMembershipsAsync(tagId: tagId));
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
     }
 
     [TestMethod]

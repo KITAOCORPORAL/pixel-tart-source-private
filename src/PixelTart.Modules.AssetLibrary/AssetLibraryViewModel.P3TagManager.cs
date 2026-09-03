@@ -480,16 +480,46 @@ public sealed partial class AssetLibraryViewModel
         var request = BuildP3BatchMetadataRequest();
         P3BatchPreviewReady = false;
         _p3BatchPreviewContract = null;
+        AssetLibraryBatchResult result;
         try
         {
-            var result = await _repository.ApplyBatchMetadataAsync(request, preview, _lifetimeCancellation.Token);
-            RememberP3MetadataResult(result);
-            await RefreshFilterListsAsync(_lifetimeCancellation.Token);
-            await RefreshAsync();
-            await RefreshSelectionSummaryAsync();
-            P3BatchPreviewSummary = $"已安全更新 {result.ChangedCount:N0} 项素材库元数据；源文件未改动。";
+            result = await _repository.ApplyBatchMetadataAsync(request, preview, _lifetimeCancellation.Token);
         }
-        catch (Exception exception) { P3BatchPreviewSummary = $"批量修改失败，事务未部分提交：{exception.Message}"; }
+        catch (Exception exception)
+        {
+            P3BatchPreviewSummary = $"批量修改失败，事务未部分提交：{exception.Message}";
+            return;
+        }
+
+        RememberP3MetadataResult(result);
+        try
+        {
+            await RefreshFilterListsAsync(_lifetimeCancellation.Token);
+            var refreshOutcome = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token);
+            if (refreshOutcome != AssetLibraryRefreshOutcome.Completed || IsLoading || HasLoadError ||
+                IsOrganizationLoading || HasOrganizationError)
+            {
+                var reason = HasOrganizationError ? OrganizationError
+                    : HasLoadError ? LoadErrorMessage
+                    : IsLoading || IsOrganizationLoading ? "仍有刷新任务在运行"
+                    : refreshOutcome switch
+                {
+                    AssetLibraryRefreshOutcome.Failed => "素材查询失败",
+                    AssetLibraryRefreshOutcome.Canceled => "素材查询已取消",
+                    AssetLibraryRefreshOutcome.Superseded => "素材查询已被新查询取代",
+                    _ => "刷新未稳定完成"
+                };
+                P3BatchPreviewSummary = $"批量修改已提交 {result.ChangedCount:N0} 项，但界面刷新未完成：{reason}；可使用撤销恢复，源文件未改动。";
+                return;
+            }
+            await RefreshSelectionSummaryAsync();
+        }
+        catch (Exception exception)
+        {
+            P3BatchPreviewSummary = $"批量修改已提交 {result.ChangedCount:N0} 项，但界面刷新失败：{exception.Message}；可使用撤销恢复，源文件未改动。";
+            return;
+        }
+        P3BatchPreviewSummary = $"已安全更新 {result.ChangedCount:N0} 项素材库元数据；源文件未改动。";
     }
 
     private void RememberP3MetadataResult(AssetLibraryBatchResult result)

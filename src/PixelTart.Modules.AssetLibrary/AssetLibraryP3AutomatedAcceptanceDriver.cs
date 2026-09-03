@@ -501,7 +501,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
 
     private Task WaitForPublishedQueryAfterAsync(long previousGeneration, string description) =>
         WaitUntilAsync(
-            () => _viewModel.P3AcceptanceQueryGeneration > previousGeneration && !_viewModel.IsLoading,
+            () => _viewModel.P3AcceptancePublishedQueryGeneration > previousGeneration &&
+                  _viewModel.P3AcceptancePublishedQueryGeneration == _viewModel.P3AcceptanceQueryGeneration &&
+                  !_viewModel.IsLoading && !_viewModel.HasLoadError,
             description);
 
     public async Task<AssetLibraryP3ImeSnapshot> ExerciseImeCancellationAsync(string compositionText)
@@ -929,10 +931,16 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         if (!_viewModel.ApplyP3BatchMetadataCommand.CanExecute(null))
             throw new InvalidOperationException("The public Batch Metadata Apply command was unavailable after preview.");
         _viewModel.ApplyP3BatchMetadataCommand.Execute(null);
-        await WaitUntilAsync(() => _viewModel.LastUndoToken is { } token &&
-                                 token.OperationId != previousOperationId &&
-                                 _viewModel.P3BatchPreviewSummary.Contains("已安全更新", StringComparison.Ordinal),
+        await WaitUntilAsync(() =>
+            _viewModel.P3BatchPreviewSummary.StartsWith("批量修改失败", StringComparison.Ordinal) ||
+            _viewModel.LastUndoToken is { } token && token.OperationId != previousOperationId &&
+            (_viewModel.P3BatchPreviewSummary.Contains("已安全更新", StringComparison.Ordinal) ||
+             _viewModel.P3BatchPreviewSummary.StartsWith("批量修改已提交", StringComparison.Ordinal)),
             "the public Batch Metadata Apply command");
+        if (!_viewModel.P3BatchPreviewSummary.Contains("已安全更新", StringComparison.Ordinal) ||
+            _viewModel.IsLoading || _viewModel.HasLoadError ||
+            _viewModel.IsOrganizationLoading || _viewModel.HasOrganizationError)
+            throw new InvalidOperationException($"The public Batch Metadata Apply command did not reach a stable UI state: {_viewModel.P3BatchPreviewSummary}");
         started.Stop();
         var undoToken = _viewModel.LastUndoToken!;
         var undoPassed = true;
