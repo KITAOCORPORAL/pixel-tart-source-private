@@ -6,10 +6,10 @@
 起点分支：`source-private/feature/asset-library-eagle-parity-p2`  
 起点完整 SHA：`c5fde036e13abd2039d517f2a4022e9a32452c2f`  
 P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`  
-当前验收候选代码 HEAD：`9f14abe1cb76507bfa4605b39db0cd9fe2222d32`  
+当前验收候选代码 HEAD：`689692a5e87cfb3db94d1080dbb9392894fb5487`
 交付文档提交后的最终 SHA：由包含本报告的 Git 提交决定，以最终 `git ls-remote` 核验和交付回传为准；Git 提交无法在自身正文中自含自己的哈希。
 
-> `BLOCKED` 同时包含两项事实：附件要求的“同一最终 HEAD 三轮独立正式 Run + 每轮只读 validator + run-set 聚合”尚未产生，当前计数为 `0/3`；历史执行已超过最多五轮自动修复循环的绝对上限。它不否定已经提交并通过本地测试的产品候选，也绝不把失败轮次的局部证据拼接成成功闭环。
+> `BLOCKED` 同时包含两项事实：附件要求的“同一最终 HEAD 三轮独立正式 Run + 每轮只读 validator + run-set 聚合”尚未产生，当前计数为 `0/3`；2026-09-03 新授权窗口的两次诊断修复 campaign 已用完，第三个最终 campaign 的第一轮又因场景完成后的进程退出超时失败，触发限定停止。它不否定已经提交并通过本地测试的产品候选，也绝不把失败轮次的局部证据拼接成成功闭环。
 
 ## 1. 结论与 P3 边界
 
@@ -17,7 +17,7 @@ P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`
 |---|---|---|
 | 通用 Query Composer | 已实现：当前/全库范围、IME/debounce/cancellation、建议与历史、嵌套 AND/OR、锁定/清除、保存为智能文件夹、参数化 query plan | 前 11 个正式场景曾在失败轮中重复执行到达；最终候选 HEAD 尚无完整正式 Run，不能单独宣称验收关闭 |
 | 智能文件夹通用规则编辑器 | 已实现：任意嵌套规则组、实时预览、保存/编辑/复制/归档/恢复、失效引用 fail closed、v6→v7 迁移 | 同上；正式总门仍为 `0/3` |
-| 标签管理器与批量元数据编辑 | 已实现：标签/组管理、移动/排序、归档/恢复、预览后合并、批量 metadata、统一 v2 journal、跨重启 undo/redo | 最近五个失败根呈现了第 12 场景的小视口布局和完成信号根因链；最后一个失败根后的响应式修复已通过回归，识别绝对五轮上限已超后没有启动第 18 个根 |
+| 标签管理器与批量元数据编辑 | 已实现：标签/组管理、移动/排序、归档/恢复、预览后合并、批量 metadata、统一 v2 journal、跨重启 undo/redo；公开命令全生命周期与刷新选择保持已有真实 WPF 回归 | 新授权窗口的最终候选运行中，标签生命周期场景通过，批量 metadata 场景也在应用内记录 `scenario-completed`；但该进程未完成退出和 phase summary，正式总门仍为 `0/3` |
 
 未混入 Viewer、媒体播放、导入/导出、Eagle Adapter、多素材库、逻辑回收站、永久删除、AI/MCP、反向图片搜索或 P4 产品代码。默认导入策略仍为 `Reference`，P3 路径只写产品私有 metadata、规则、标签、workspace settings 和 journal。
 
@@ -38,9 +38,9 @@ P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`
 
 ## 3. 架构与修改文件
 
-相对 P2 基线共修改/新增 65 个受控文件（约 22,412 行新增、166 行删除）。职责按边界如下。
+候选代码 HEAD `689692a...` 相对 P2 基线共修改/新增 66 个受控文件（23,368 行新增、166 行删除），其中 65 个为产品、测试或验收工具文件，另 1 个为本实施报告。职责按边界如下。
 
-实现归属必须如实说明：schema v7、Core、UI、测试和初版 P3 自动验收包被合并在首个 `e6e8f4a...` 大提交中，没有按附件的“建议”拆成多个功能提交；其后 20 个提交均为正式验收发现的定点修复或测试加固。报告不把现有历史反写成并不存在的提交结构。
+实现归属必须如实说明：schema v7、Core、UI、测试和初版 P3 自动验收包被合并在首个 `e6e8f4a...` 大提交中，没有按附件的“建议”拆成多个功能提交；其后 23 个提交均为正式验收发现的定点修复或测试加固。报告不把现有历史反写成并不存在的提交结构。
 
 | 组件 | 文件 | 职责 |
 |---|---|---|
@@ -57,7 +57,7 @@ P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`
 | P3 自动验收包 | `tools/AssetLibraryP3AutomatedAcceptance/*` | `DryRun`、`RecoveryTest`、`Run`、`ValidateExistingRun`、fixture、validator、三轮聚合器和 v1 契约 |
 | P1 兼容修正 | `tools/AssetLibraryP1AutomatedAcceptance/Test-P1AssetLibraryAutomatedEvidence.ps1` | 适配素材 schema v7，保持 P1 只读验收合同 |
 
-完整 65 文件清单（大括号仅压缩共同目录，不省略文件）：
+完整 65 个产品、测试与验收工具文件清单（大括号仅压缩共同目录；本实施报告为第 66 个文件）：
 
 - Core 模型/契约/状态（4）：`src/RAWSelectionAssistant.Core/Models/{AssetLibraryModels.cs,AssetLibraryWorkspaceSettings.cs,AssetQueryModels.cs}`；`src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs`。
 - Core schema/存储/计划（7）：`src/RAWSelectionAssistant.Core/Services/AssetLibrary/{AssetLibrarySchema.cs,AssetQueryReferenceIntegrity.cs,LegacySmartFolderAdapter.cs,SqliteAssetLibraryRepository.P3.cs,SqliteAssetLibraryRepository.V15.cs,SqliteAssetLibraryRepository.cs,VisualAnalysis/VisualAssetQueryService.cs}`。
@@ -141,26 +141,26 @@ P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`
 
 P3 控件全部使用 `AssetLibraryP3Styles.xaml` 的局部暗色样式。XAML 扫描、对比度、AutomationId 唯一性、可访问名称、焦点可见性、键盘路径和真实 WPF 页面测试已通过。中文 UI 使用“向左方向键/向右方向键”等可理解文本，不把 `Left`/`Right` 暴露给用户。
 
-最后一个已保存失败根（总第 17 个）后，标签管理器内部改为命名滚动视口 `P3TagManagerViewport`，高度绑定真实 `AssetLibraryPage.ActualHeight`：`clamp(pageHeight - 550, 60, 300)`。最终回归在 1366×768 对应的 660.67 DIP 和更小的 612.67 DIP 容器中，强制显示足量标签和“加载更多”行，检查三栏、滑块、全部非滚动按钮未越界且浏览工作区至少保留 130 DIP。独立只读审查确认绑定依赖外层页面高度，不形成测量循环。
+旧窗口最后一个已保存失败根（当时总第 17 个）后，标签管理器内部改为命名滚动视口 `P3TagManagerViewport`，高度绑定真实 `AssetLibraryPage.ActualHeight`：`clamp(pageHeight - 550, 60, 300)`。最终回归在 1366×768 对应的 660.67 DIP 和更小的 612.67 DIP 容器中，强制显示足量标签和“加载更多”行，检查三栏、滑块、全部非滚动按钮未越界且浏览工作区至少保留 130 DIP。独立只读审查确认绑定依赖外层页面高度，不形成测量循环。
 
-## 8. 自动构建与测试（候选 HEAD `9f14abe...`）
+## 8. 自动构建与测试（候选 HEAD `689692a...`）
 
-本节数字来自 2026-09-03 当前 Codex 会话直接执行命令后的控制台结果，未另存为 TRX/QualityGate 日志，因此只能作为可复现的候选级会话观察，**不是** sealed 正式验收证据。命令分别对 `RAWSelectionAssistant.Tests.csproj`、`RAWSelectionAssistant.WpfTests.csproj`、`PixelTart.ModularHarness.Tests.csproj` 执行严格 `dotnet test`，P1/P2/P3 行是同一最终候选二进制上的名称过滤测试，不是重新验证 P1/P2 的历史 sealed run。
+本节数字来自 2026-09-03 最终候选预检，日志和 TRX 保存在 `D:\AI AGENT\worktrees\modular-harness-v1\.validation\QualityGate\P3-GateA-689692a5-20260903-161953`。这些是候选级质量门记录，**不是** sealed 正式验收成功证据。命令分别对 `RAWSelectionAssistant.Tests.csproj`、`RAWSelectionAssistant.WpfTests.csproj`、`PixelTart.ModularHarness.Tests.csproj` 执行严格 `dotnet test`，P1/P2/P3 行是同一最终候选二进制上的名称过滤测试，不是重新验证 P1/P2 的历史 sealed run。
 
 | 门项 | 结果 |
 |---|---|
 | Core 全量 | `PASS；1260/1260，0 failed，0 skipped` |
-| WPF 全量 | `PASS；1105/1105，0 failed，0 skipped` |
+| WPF 全量 | `PASS；1109/1109，0 failed，0 skipped` |
 | Modular Harness | `PASS；14/14，0 failed，0 skipped` |
 | P1 automated acceptance 回归 | `PASS；60/60，0 failed，0 skipped` |
 | P2 automated acceptance 回归 | `PASS；37/37，0 failed，0 skipped` |
 | P3 Core 专项 | `PASS；62/62，0 failed，0 skipped` |
-| P3 WPF/契约专项 | `PASS；56/56，0 failed，0 skipped` |
-| 最终小视口定向布局 | `PASS；1/1`；另一次独立 P3 WPF/可访问复核 `29/29` |
+| P3 WPF/契约专项 | `PASS；60/60，0 failed，0 skipped` |
+| 标签生命周期/刷新选择与小视口回归 | 已包含在 P3 WPF 60/60 和 WPF 全量 1109/1109 中 |
 | Debug solution build | `PASS；0 warnings / 0 errors` |
 | Release solution build | `PASS；0 warnings / 0 errors` |
 | Debug DevPreview + P3 acceptance build | `PASS；0 warnings / 0 errors` |
-| P3 DryRun | `PASS；status=ready-for-automated-run；source_head=9f14abe1cb76507bfa4605b39db0cd9fe2222d32；devpreview_process_count=0` |
+| P3 DryRun | `PASS；status=ready-for-automated-run；source_head=689692a5e87cfb3db94d1080dbb9392894fb5487；devpreview_process_count=0` |
 | P3 RecoveryTest | `PASS；status=recovery-test-passed；environment_restored=true；devpreview_process_count=0；desktop_input_injection=0；display_setting_writes=0` |
 | `git diff --check` | `PASS` |
 | 历史 DPI 证据债 | 沿用并如实保留 P2 记录：`101 total / 75 passed / 26 failed / 0 skipped`；26 项是既有截图 hash/历史文件缺失，本轮未删除、skip 或冒充修复 |
@@ -195,9 +195,9 @@ P3 控件全部使用 `AssetLibraryP3Styles.xaml` 的局部暗色样式。XAML �
 
 最终同 HEAD 完整 PASS：**0/3**。三轮性能最差值：**N/A**。run-set 聚合验证：**N/A**。不能用以下失败 run 的前 11 个局部场景、截图、数据库、hash 或安全计数填入这张表。
 
-### 9.2 止损规则偏差与全部历史失败根
+### 9.2 止损规则偏差与旧窗口的 17 个失败根
 
-`.validation` 中共保留 **17** 个 P3 失败根。按附件 §13.2 的绝对口径，“运行 → 定位 → 修复 → 回归”最多五轮；该历史执行次数已经超过上限，不能把最后五个解释成可滑动的新额度。这是本次执行过程本身的一项合规偏差，也是必须保持 `BLOCKED` 并立即停止新 Run 的原因。当前没有删除或改写任何旧根，也没有启动第 18 个根。
+旧验收窗口在 `.validation` 中保留 **17** 个 P3 失败根。按旧附件 §13.2 的绝对口径，“运行 → 定位 → 修复 → 回归”最多五轮；该历史执行次数已经超过上限，不能把最后五个解释成可滑动的新额度。2026-09-03 的后续附件另行明确授权了一次新的有界验收窗口，因此新增的三个失败根单列在 §9.3；旧根没有删除、改写、续跑或用于新窗口拼接。
 
 前 12 个根使用共同前缀 `D:\AI AGENT\worktrees\modular-harness-v1\.validation\`，逐项如下：
 
@@ -228,13 +228,33 @@ P3 控件全部使用 `AssetLibraryP3Styles.xaml` 的局部暗色样式。XAML �
 
 最后五轮都停在 `primary → 第 12 场景 tag-manager-lifecycle/v1`。**原始异常文本只存在于**各根的 `run-manifest.json` 和 `app/evidence/summary-tag-manager-lifecycle-v1-primary.json`；`plans/12-tag-manager-lifecycle.json`、数据库、event journal 和 runtime log 仅提供身份、状态和数据库上下文，不能称为异常来源。五轮 `app-12` stdout/stderr 均为 0 字节。后四轮另有场景标签 JSON 与 PNG；第一轮在布局捕获前失败，因此没有该场景 PNG/bounds；后四轮在检测越界后、写 bounds 前 fail closed，因此有 PNG 而无失败帧 bounds JSON。
 
-### 9.3 剩余最小动作
+### 9.3 2026-09-03 新授权窗口与限定停止
 
-`9f14abe...` 是最后一个已保存失败根之后的候选修复。识别到绝对五轮上限已经被历史执行超过后，本次立即停止，没有自动启动新 Run。下一次只有在新的、明确授权的自动验收执行窗口中，才可在同一最终验收代码 HEAD 上生成三个全新、互不复用的 Run；每轮 Run 后只读 `ValidateExistingRun`；三轮全绿后运行 `Test-P3AssetLibraryAutomatedRunSet.ps1`。全过程不需要真人键盘、鼠标或 DPI 操作。
+本窗口从 `dd041ab2a741de9e21ef6c5f707d85e221ffa100` 开始，允许最多两个失败的诊断/修复 campaign；第三个 campaign 必须连续产出三个完整 PASS Run，否则立即限定停止。三个 campaign 均创建了独立的新根，未复用旧窗口的截图、日志、hash、数据库或状态。
+
+| campaign | 完整 run root / run id | source HEAD | 第一失败、诊断与处置 |
+|---:|---|---|---|
+| 1 | `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P3-Automated-Acceptance-20260903-154137-d59b340a8266` / `p3-auto-8000f2eb5891459eac99fed85264be91` | `cebb4b3b778af9d2acff0d61830f07ba9dbdac1b` | `System.TimeoutException: Timed out waiting for the public Move Tag Group command.` 验收驱动按 SQLite NOCASE 推断邻接顺序，而真实 WPF 公开列表使用当前文化显示顺序；`a5640fc...` 改为捕获公开显示顺序并校验持久化/UI 一致。 |
+| 2 | `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P3-Automated-Acceptance-20260903-160813-9482de20f627` / `p3-auto-82643d2a7c2143b296fa19e08ef2271c` | `a5640fc8c4db6fada4c4812b939cb395be13cb60` | `System.TimeoutException: Timed out waiting for the public Reorder Tag command.` 真实 WPF 集合刷新使 `P3SelectedManagedTagGroup` 短暂变为 null，导致后续标签静默创建为未分组；`689692a...` 以稳定 ID 保存并恢复组/标签选择，并增加真实页面回归。 |
+| 3（最终） | `D:\AI AGENT\worktrees\modular-harness-v1\.validation\P3-Automated-Acceptance-20260903-163753-d89ab3536f45` / `p3-auto-7deef67166bb4080ab7ec7be693f833c` | `689692a5e87cfb3db94d1080dbb9392894fb5487` | `System.Management.Automation.RuntimeException: Automated app phase 'primary' timed out; forced cleanup was required.` 最终 campaign 的第一轮失败，依契约停止；未启动第二、第三轮。 |
+
+第三个根的事件链证明 `bulk-metadata-journal/v1` 已在应用内生成 batch-100、batch-500、journal、membership、截图和 bounds，并于 2026-09-03 16:41:08（UTC+8）依次记录 `scenario-completed`（sequence 23138）和 `automated-plan-execution-completed`（sequence 23139）。随后进程在 300 秒内没有退出，runner 于 16:45:55 强制清理。由于应用退出 hook 没有完成，因此不存在 `summary-bulk-metadata-journal-v1-primary.json`、`app-13-...result.json`、run seal 或 validator PASS；这些局部事件不得计为一个成功 Run。runner 在保留上述原始 manifest 失败后又出现 `The property 'pid' cannot be found on this object.` 的二次错误，属于失败清理路径的独立健壮性缺陷，不覆盖 manifest 中的第一失败。
+
+本窗口的正式成功计数仍为 **0/3**，只读 validator 成功计数为 **0**，run-set 聚合为 **N/A**。所有允许的 Run 已停止，P3 状态保持 **BLOCKED**。
+
+### 9.4 最终候选预检
+
+`689692a5e87cfb3db94d1080dbb9392894fb5487` 在启动最终 campaign 前通过了完整候选门：Core 1260/1260、WPF 1109/1109、Modular Harness 14/14、P1 60/60、P2 37/37、P3 Core 62/62、P3 WPF 60/60；Debug、Release 和 P3 DevPreview 构建均为 0 warning / 0 error；DryRun、RecoveryTest、`git diff --check` 均通过。九类固定安全扫描命中全为 0，tracked runtime artifact 为 0，两种 DevPreview 进程检查均为 0。证据根为 `D:\AI AGENT\worktrees\modular-harness-v1\.validation\QualityGate\P3-GateA-689692a5-20260903-161953`。
+
+### 9.5 剩余最小动作
+
+下一次代码工作应先为“场景完成 → teardown → OnExit → phase summary → 正常进程退出”增加可观察的确定性完成握手和超时诊断，定位并修复批量场景后卡在 teardown/应用退出链的具体等待点；同时让 runner 的失败清理路径始终返回带 `pid` 的稳定类型并保留第一异常。必须分别增加退出成功、退出卡死 fail-closed、清理路径单/空进程快照回归，再重跑完整候选门。只有新的明确授权窗口才能重新生成三个全新 Run；当前不得续跑这个根，也不得启动第四个 campaign。
+
+由于 Gate A 未完成，本次**未创建 P3.5 分支、未提交 P3.5 产品代码、未执行 P3.5 验收**。
 
 ## 10. 安全与工作树卫生
 
-候选 HEAD 的三个产品自动验收 seam 按正式固定规则做了等价静态复扫：桌面输入、UIA Invoke、强制前台、真实显示写、Eagle IO、网络上传、直接栏宽写、直接 settings 反射写、直接 SQLite 行编辑命中均为 0。`RecoveryTest` 的运行时输入注入和显示写入也均为 0；Git 跟踪的 `.validation`、`bin`、`obj`、`TestResults`、fixture `.sqlite/.db` 为 0。
+候选 HEAD `689692a...` 的三个产品自动验收 seam 按正式固定规则做了等价静态复扫：桌面输入、UIA Invoke、强制前台、真实显示写、Eagle IO、网络上传、直接栏宽写、直接 settings 反射写、直接 SQLite 行编辑命中均为 0。`RecoveryTest` 的运行时输入注入和显示写入也均为 0；Git 跟踪的 `.validation`、`bin`、`obj`、`TestResults`、fixture `.sqlite/.db` 为 0。
 
 | 红线 | 候选级证据 | 最终三轮运行时计数 |
 |---|---|---|
@@ -258,7 +278,7 @@ P3 控件全部使用 `AssetLibraryP3Styles.xaml` 的局部暗色样式。XAML �
 | 5 并发 | PASS | IME、debounce、cancellation、generation guard、关闭页面回归通过。 |
 | 6 数据 | PASS | v6→v7 备份/事务/幂等/损坏/未来版本测试通过。 |
 | 7 安全 | BLOCKED | 候选静态与 RecoveryTest 通过；最终三轮运行时计数缺失。 |
-| 8 UI | BLOCKED | 全量 WPF 和小视口回归通过；最终响应式修复尚无正式 Run 截图/bounds。 |
+| 8 UI | BLOCKED | 全量 WPF、小视口和标签选择保持回归通过；最终失败根有场景 13 截图/bounds，但没有完整 phase summary、seal 或 validator，不能关闭正式门。 |
 | 9 可访问性 | PASS（候选） | AutomationId、名称、焦点、键盘和对比度测试通过；正式三轮仍缺。 |
 | 10 性能 | BLOCKED | 10k 单元护栏通过；正式三轮最差值和 UI block 缺失。 |
 | 11 证据 | BLOCKED | 最终三轮 `0/3`，run-set validator N/A；失败证据未拼接。 |
@@ -358,7 +378,7 @@ P3 控件全部使用 `AssetLibraryP3Styles.xaml` 的局部暗色样式。XAML �
 
 ## 13. 提交与回滚点
 
-P3 提交的回滚必须用 `git revert <完整 SHA>`，不得 reset/clean。对相互依赖的 P3 提交按 21→1 倒序 revert；顺序 0 的 P2 SHA 只是回退目标锚点，**不能 revert 基线本身**。单独回滚修复提交会有意恢复表中所述缺陷，只适用于诊断。
+P3 提交的回滚必须用 `git revert <完整 SHA>`，不得 reset/clean。对相互依赖的 P3 产品/验收提交按 24→1 倒序 revert；顺序 0 的 P2 SHA 只是回退目标锚点，**不能 revert 基线本身**。单独回滚修复提交会有意恢复表中所述缺陷，只适用于诊断。
 
 | 顺序 | 完整 SHA | 提交 | 回滚边界 |
 |---:|---|---|---|
@@ -384,11 +404,14 @@ P3 提交的回滚必须用 `git revert <完整 SHA>`，不得 reset/clean。对
 | 19 | `27230f18bf2889128fcf8e7e48670beb57fc8cd2` | `fix(asset-library): preserve browser toolbar below tag manager` | 回退浏览工具栏余量修复。 |
 | 20 | `6493266d25304a82c7cba3b163e45ad5d3d5fb20` | `fix(asset-library): reserve full browser controls under tag manager` | 回退固定 150 DIP 与完整控件回归。 |
 | 21 | `9f14abe1cb76507bfa4605b39db0cd9fe2222d32` | `fix(asset-library): size tag manager against live viewport` | 回退动态高度公式；会恢复已知的 Load More 裁剪，仅作机械诊断回滚点。 |
-| 22 | 本报告提交（完整 SHA 在最终 git log/远端核验中回传） | `docs(asset-library): record P3 bounded acceptance status` | 只回退本文档。 |
+| 22 | `cebb4b3b778af9d2acff0d61830f07ba9dbdac1b` | `fix(asset-library): exercise complete P3 tag lifecycle` | 回退公开标签生命周期、v2 证据与命令状态刷新回归。 |
+| 23 | `a5640fc8c4db6fada4c4812b939cb395be13cb60` | `fix(asset-library): align P3 lifecycle reorder evidence` | 回退按真实 WPF 显示顺序生成移动/排序证据的修复。 |
+| 24 | `689692a5e87cfb3db94d1080dbb9392894fb5487` | `fix(asset-library): preserve tag manager selection on refresh` | 回退集合刷新期间按稳定 ID 保持标签组/标签选择的产品修复。 |
+| 25 | 本报告提交（完整 SHA 在最终 git log/远端核验中回传） | `docs(asset-library): record bounded P3 gate A blocker` | 只回退本文档。 |
 
 ## 14. 已知风险与建议 P4 边界
 
-1. 唯一已知的未复验产品缺陷是标签管理器小视口布局；证据闭环还整体缺少三轮正式 Run、每轮只读 validator、50 类动态负例证明、run-set 聚合、正式性能最差值和运行时安全计数。不得通过延长 timeout、放宽 bounds 或复用旧截图关闭。
+1. 当前首要阻断是第 13 个应用会话在已记录场景/计划完成后未完成 teardown、退出 hook、phase summary 和正常进程退出；runner 失败清理路径另有空/单对象快照的 `pid` 类型健壮性缺陷。证据闭环仍缺三轮正式 Run、每轮只读 validator、动态负例证明、run-set 聚合、正式性能最差值和运行时安全计数。不得通过延长 timeout、忽略退出、手工补 summary 或复用旧截图关闭。
 2. WPF 定向测试通过反射调用私有 `SetNextCursor` 使“加载更多”进入可见状态；这是非阻断测试维护风险，未来方法改名需同步测试，但不影响产品运行时。
 3. F-024 智能文件夹组织群组仍未实现；嵌套 query group 不能冒充组织树群组。
 4. Viewer F-048～F-062 保持原边界。建议 P4 建独立 Viewer Registry 和安全格式降级，不把播放/写回混入查询或浏览卡片。
@@ -398,6 +421,6 @@ P3 提交的回滚必须用 `git revert <完整 SHA>`，不得 reset/clean。对
 
 - 目标远端：`KITAOCORPORAL/pixel-tart-source-private`
 - 目标分支：`feature/asset-library-eagle-parity-p3-query-metadata`
-- 本地验收候选代码 HEAD：`9f14abe1cb76507bfa4605b39db0cd9fe2222d32`
+- 本地验收候选代码 HEAD：`689692a5e87cfb3db94d1080dbb9392894fb5487`
 - 报告提交后最终 HEAD：以最终 `git rev-parse HEAD` 与 `git ls-remote source-private refs/heads/feature/asset-library-eagle-parity-p3-query-metadata` 的完全一致结果为准，并在最终回传给出完整 SHA。
 - 不创建 PR、不合并 `main`、不合并其他功能分支、不改写历史。
