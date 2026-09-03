@@ -22,6 +22,7 @@ public sealed partial class AssetLibraryViewModel
     private long _p3TagSearchGeneration;
     private long _p3BatchPreviewGeneration;
     private long _p3TagMergePreviewGeneration;
+    private bool _p3ApplyingTagFilter;
     private IReadOnlyList<AssetTag> _p3AllTags = [];
     private IReadOnlyList<TagGroup> _p3AllTagGroups = [];
     private bool _p3TagManagerOpen;
@@ -86,7 +87,7 @@ public sealed partial class AssetLibraryViewModel
         {
             if (!SetProperty(ref _p3SelectedManagedTagGroup, value)) return;
             if (value is not null) P3TagGroupNameInput = value.Name;
-            ScheduleP3TagFilter();
+            if (!_p3ApplyingTagFilter) ScheduleP3TagFilter();
             RaiseP3TagCommands();
         }
     }
@@ -222,23 +223,32 @@ public sealed partial class AssetLibraryViewModel
     private void ApplyP3TagFilter()
     {
         var selectedGroupId = P3SelectedManagedTagGroup?.TagGroupId;
+        var selectedTagId = P3SelectedManagedTag?.TagId;
         var text = P3TagSearchText.Trim();
-        P3ManagedTagGroups.Clear();
-        foreach (var group in _p3AllTagGroups.Where(group => P3TagShowArchived || !group.IsArchived)) P3ManagedTagGroups.Add(group);
-        var visibleGroupIds = P3ManagedTagGroups.Select(group => group.TagGroupId).ToHashSet();
-        if (selectedGroupId is Guid groupId && !visibleGroupIds.Contains(groupId))
+        _p3ApplyingTagFilter = true;
+        try
         {
-            P3SelectedManagedTagGroup = null;
-            selectedGroupId = null;
+            P3ManagedTagGroups.Clear();
+            foreach (var group in _p3AllTagGroups.Where(group => P3TagShowArchived || !group.IsArchived))
+                P3ManagedTagGroups.Add(group);
+            var restoredGroup = selectedGroupId is Guid groupId
+                ? P3ManagedTagGroups.FirstOrDefault(group => group.TagGroupId == groupId)
+                : null;
+            P3SelectedManagedTagGroup = restoredGroup;
+            selectedGroupId = restoredGroup?.TagGroupId;
+
+            P3ManagedTags.Clear();
+            var visibleGroupIds = P3ManagedTagGroups.Select(group => group.TagGroupId).ToHashSet();
+            foreach (var tag in _p3AllTags.Where(tag => P3TagShowArchived ||
+                                                       !tag.IsArchived && (tag.TagGroupId is null || visibleGroupIds.Contains(tag.TagGroupId.Value)))
+                         .Where(tag => selectedGroupId is null || tag.TagGroupId == selectedGroupId)
+                         .Where(tag => text.Length == 0 || tag.Name.Contains(text, StringComparison.CurrentCultureIgnoreCase)))
+                P3ManagedTags.Add(tag);
+            P3SelectedManagedTag = selectedTagId is Guid tagId
+                ? P3ManagedTags.FirstOrDefault(tag => tag.TagId == tagId)
+                : null;
         }
-        P3ManagedTags.Clear();
-        foreach (var tag in _p3AllTags.Where(tag => P3TagShowArchived ||
-                                                   !tag.IsArchived && (tag.TagGroupId is null || visibleGroupIds.Contains(tag.TagGroupId.Value)))
-                     .Where(tag => selectedGroupId is null || tag.TagGroupId == selectedGroupId)
-                     .Where(tag => text.Length == 0 || tag.Name.Contains(text, StringComparison.CurrentCultureIgnoreCase)))
-            P3ManagedTags.Add(tag);
-        if (P3SelectedManagedTag is not null && P3ManagedTags.All(tag => tag.TagId != P3SelectedManagedTag.TagId))
-            P3SelectedManagedTag = null;
+        finally { _p3ApplyingTagFilter = false; }
         SetP3MergeSourceTags(_p3MergeSourceTags.Where(source =>
             P3ManagedTags.Any(tag => tag.TagId == source.TagId) && IsP3TagEffectivelyActive(source)));
     }

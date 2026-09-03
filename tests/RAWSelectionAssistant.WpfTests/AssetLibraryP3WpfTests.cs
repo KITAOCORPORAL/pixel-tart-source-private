@@ -534,6 +534,59 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task TagManagerRefreshPreservesTheSelectedGroupForConsecutiveTagCreates()
+    {
+        await RunSta(async () =>
+        {
+            var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3TagSelection", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                Path.Combine(root, "tag-selection.db"), new TaskOperationBridge(), []);
+            var host = new Border { Child = page };
+            try
+            {
+                host.Measure(new Size(1179.33, 660.67));
+                host.Arrange(new Rect(0, 0, 1179.33, 660.67));
+                host.UpdateLayout();
+                await page.ViewModel.InitializeAsync();
+                page.ViewModel.ToggleP3TagManagerCommand.Execute(null);
+                await WaitForAsync(() => page.ViewModel.P3TagManagerOpen &&
+                                         !page.ViewModel.P3TagManagerLoading);
+
+                page.ViewModel.P3TagGroupNameInput = "连续创建标签组";
+                page.ViewModel.CreateP3TagGroupCommand.Execute(null);
+                await WaitForAsync(() => page.ViewModel.P3ManagedTagGroups.Any(group =>
+                    group.Name == "连续创建标签组"));
+                var group = page.ViewModel.P3ManagedTagGroups.Single(item => item.Name == "连续创建标签组");
+                page.ViewModel.P3SelectedManagedTagGroup = group;
+
+                foreach (var name in new[] { "连续标签甲", "连续标签乙" })
+                {
+                    page.ViewModel.P3TagNameInput = name;
+                    Assert.IsTrue(page.ViewModel.CreateP3TagCommand.CanExecute(null));
+                    page.ViewModel.CreateP3TagCommand.Execute(null);
+                    await WaitForAsync(() => !page.ViewModel.P3TagManagerLoading &&
+                                             page.ViewModel.P3ManagedTags.Any(tag => tag.Name == name));
+                    Assert.AreEqual(group.TagGroupId, page.ViewModel.P3SelectedManagedTagGroup?.TagGroupId,
+                        "Refreshing the real tag-manager list must retain its selected group.");
+                }
+
+                CollectionAssert.AreEquivalent(
+                    new[] { "连续标签甲", "连续标签乙" },
+                    page.ViewModel.P3ManagedTags
+                        .Where(tag => tag.TagGroupId == group.TagGroupId)
+                        .Select(tag => tag.Name)
+                        .ToArray());
+            }
+            finally
+            {
+                await page.DisposeAsync();
+                try { Directory.Delete(root, true); } catch { }
+            }
+        });
+    }
+
+    [TestMethod]
     public async Task RuntimePageCreatesAllP3UserControlsWithSharedViewModel()
     {
         await RunSta(() =>
@@ -1140,6 +1193,13 @@ public sealed class AssetLibraryP3WpfTests
              ancestor = VisualTreeHelper.GetParent(ancestor))
             if (ancestor is ScrollViewer) return true;
         return false;
+    }
+
+    private static async Task WaitForAsync(Func<bool> condition)
+    {
+        var deadline = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(5);
+        while (!condition() && DateTimeOffset.UtcNow < deadline) await Task.Delay(10);
+        Assert.IsTrue(condition(), "The expected tag-manager state was not reached before the test deadline.");
     }
 
     private static int Count(string source, string value)
