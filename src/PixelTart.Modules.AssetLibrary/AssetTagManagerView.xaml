@@ -19,6 +19,12 @@
 
         <Border Margin="0,5,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
                 Visibility="{Binding P3TagManagerOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+            <ScrollViewer MaxHeight="280"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          ClipToBounds="True"
+                          AutomationProperties.AutomationId="P3TagManagerViewport"
+                          AutomationProperties.Name="标签管理内容滚动区域">
             <Grid>
                 <Grid.ColumnDefinitions><ColumnDefinition Width="3*" /><ColumnDefinition Width="12" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
                 <StackPanel>
@@ -175,6 +181,7 @@
                     </StackPanel>
                 </Border>
             </Grid>
+            </ScrollViewer>
         </Border>
     </StackPanel>
 </UserControl>

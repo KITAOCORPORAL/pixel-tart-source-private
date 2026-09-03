@@ -1,7 +1,9 @@
 using System.IO;
 using System.Threading;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
@@ -370,6 +372,81 @@ public sealed class AssetLibraryP3WpfTests
         Assert.AreEqual("180", Attribute(scrollViewer, "MaxHeight"));
         Assert.AreEqual("Auto", Attribute(scrollViewer, "VerticalScrollBarVisibility"));
         Assert.AreEqual("Disabled", Attribute(scrollViewer, "HorizontalScrollBarVisibility"));
+    }
+
+    [TestMethod]
+    public async Task ExpandedTagManagerKeepsBrowserWorkspaceInsideSmallViewport()
+    {
+        var manager = Load("AssetTagManagerView.xaml");
+        var viewportContract = manager.Descendants().Single(element =>
+            Attribute(element, "AutomationProperties.AutomationId") == "P3TagManagerViewport");
+        Assert.AreEqual("ScrollViewer", viewportContract.Name.LocalName);
+        Assert.AreEqual("280", Attribute(viewportContract, "MaxHeight"));
+        Assert.AreEqual("Auto", Attribute(viewportContract, "VerticalScrollBarVisibility"));
+        Assert.AreEqual("Disabled", Attribute(viewportContract, "HorizontalScrollBarVisibility"));
+        Assert.AreEqual("True", Attribute(viewportContract, "ClipToBounds"));
+
+        await RunSta(async () =>
+        {
+            var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3TagLayout", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                Path.Combine(root, "tag-layout.db"), new TaskOperationBridge(), []);
+            try
+            {
+                await page.ViewModel.InitializeAsync();
+                page.ViewModel.ToggleP3TagManagerCommand.Execute(null);
+                var deadline = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(5);
+                while (page.ViewModel.P3TagManagerLoading && DateTimeOffset.UtcNow < deadline)
+                    await Task.Delay(10);
+                Assert.IsTrue(page.ViewModel.P3TagManagerOpen);
+                Assert.IsFalse(page.ViewModel.P3TagManagerLoading);
+
+                var groupId = Guid.NewGuid();
+                for (var index = 0; index < 16; index++)
+                {
+                    page.ViewModel.P3ManagedTagGroups.Add(new(
+                        index == 0 ? groupId : Guid.NewGuid(), $"布局标签组 {index + 1}", index));
+                    page.ViewModel.P3ManagedTags.Add(new(
+                        Guid.NewGuid(), $"布局标签 {index + 1}", groupId, index));
+                }
+
+                foreach (var size in new[] { new Size(1179.33, 660.67), new Size(1179.33, 612.67) })
+                {
+                    page.Measure(size);
+                    page.Arrange(new Rect(new Point(), size));
+                    page.UpdateLayout();
+
+                    var viewport = Assert.IsInstanceOfType<ScrollViewer>(
+                        FindVisualByAutomationId(page, "P3TagManagerViewport"));
+                    Assert.AreEqual(280d, viewport.MaxHeight);
+                    Assert.IsGreaterThan(0d, viewport.ScrollableHeight,
+                        "The seeded tag manager content must exercise the bounded scrolling path.");
+
+                    foreach (var automationId in new[]
+                             {
+                                 "AssetLibraryThreePaneWorkspace", "AssetOrganizationPane", "AssetCollectionPane",
+                                 "AssetInspectorPane", "AssetThumbnailSizeSlider"
+                             })
+                    {
+                        var element = FindVisualByAutomationId(page, automationId);
+                        var bounds = element.TransformToAncestor(page)
+                            .TransformBounds(new Rect(new Point(), element.RenderSize));
+                        Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{automationId} at {size}");
+                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{automationId} at {size}");
+                    }
+
+                    var workspace = FindVisualByAutomationId(page, "AssetLibraryThreePaneWorkspace");
+                    Assert.IsGreaterThanOrEqualTo(24d, workspace.ActualHeight,
+                        $"The tag manager must not push the shared browser workspace out of the {size} viewport.");
+                }
+            }
+            finally
+            {
+                await page.DisposeAsync();
+                try { Directory.Delete(root, true); } catch { }
+            }
+        });
     }
 
     [TestMethod]
@@ -948,6 +1025,19 @@ public sealed class AssetLibraryP3WpfTests
         foreach (var child in LogicalTreeHelper.GetChildren(root).OfType<DependencyObject>())
             try { return FindLogical<T>(child); } catch (AssertFailedException) { }
         throw new AssertFailedException($"{typeof(T).Name} was not found.");
+    }
+
+    private static FrameworkElement FindVisualByAutomationId(DependencyObject root, string automationId)
+    {
+        if (root is FrameworkElement element &&
+            string.Equals(AutomationProperties.GetAutomationId(element), automationId, StringComparison.Ordinal))
+            return element;
+        for (var index = 0; index < VisualTreeHelper.GetChildrenCount(root); index++)
+        {
+            try { return FindVisualByAutomationId(VisualTreeHelper.GetChild(root, index), automationId); }
+            catch (AssertFailedException) { }
+        }
+        throw new AssertFailedException($"Visual '{automationId}' was not found.");
     }
 
     private static int Count(string source, string value)
