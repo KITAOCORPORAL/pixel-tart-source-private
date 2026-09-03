@@ -153,9 +153,12 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         _pendingSelectionSync = null;
         if (_disposed || _applyingViewModelSelection) return;
-        _viewModel.SyncVisibleSelection(
-            AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset),
-            _viewModel.AssetCards.Select(card => card.Asset.AssetId));
+        var selectedVisibleAssets = AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().Select(card => card.Asset).ToArray();
+        var visibleAssetIds = _viewModel.AssetCards.Select(card => card.Asset.AssetId).ToHashSet();
+        var projectedSelectionIds = _viewModel.SelectedAssetIds.Where(id => !visibleAssetIds.Contains(id)).ToHashSet();
+        projectedSelectionIds.UnionWith(selectedVisibleAssets.Select(asset => asset.AssetId));
+        if (!projectedSelectionIds.SetEquals(_viewModel.SelectedAssetIds))
+            _viewModel.SyncVisibleSelection(selectedVisibleAssets, visibleAssetIds);
         UpdateGridDiagnostics();
     }
 
@@ -328,6 +331,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private void ApplyViewModelSelection()
     {
         if (_disposed) return;
+        if (_pendingSelectionSync is { } pendingSelectionSync)
+        {
+            _pendingSelectionSync = null;
+            if (pendingSelectionSync.Status == DispatcherOperationStatus.Pending) pendingSelectionSync.Abort();
+        }
         var selectedIds = _viewModel.SelectedAssetIds.ToHashSet();
         _applyingViewModelSelection = true;
         try

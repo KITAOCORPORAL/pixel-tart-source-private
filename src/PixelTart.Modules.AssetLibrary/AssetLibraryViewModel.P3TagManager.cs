@@ -5,6 +5,15 @@ using RAWSelectionAssistant.Core.Models;
 
 namespace PixelTart.Modules.AssetLibrary;
 
+internal enum AssetLibraryP3BatchApplyOutcome
+{
+    None,
+    Rejected,
+    Failed,
+    CommittedRefreshIncomplete,
+    Succeeded
+}
+
 public sealed partial class AssetLibraryViewModel
 {
     private CancellationTokenSource? _p3TagSearchCancellation;
@@ -43,6 +52,10 @@ public sealed partial class AssetLibraryViewModel
     private bool _p3BatchPreviewReady;
     private AssetBatchMetadataPreview? _p3BatchPreviewContract;
     private string _p3BatchPreviewSummary = "先选择素材，再预览批量修改。";
+    private HashSet<Guid> _p3ObservedBatchSelectionIds = [];
+    private long _p3BatchApplyCompletionGeneration;
+    private Guid? _p3BatchApplyCompletionOperationId;
+    private AssetLibraryP3BatchApplyOutcome _p3BatchApplyCompletionOutcome;
 
     public ObservableCollection<AssetTag> P3ManagedTags { get; } = [];
     public ObservableCollection<TagGroup> P3ManagedTagGroups { get; } = [];
@@ -111,6 +124,9 @@ public sealed partial class AssetLibraryViewModel
     public string P3BatchMissingChoice { get => _p3BatchMissingChoice; set => SetP3BatchField(ref _p3BatchMissingChoice, value); }
     public bool P3BatchPreviewReady { get => _p3BatchPreviewReady; private set { if (SetProperty(ref _p3BatchPreviewReady, value)) ApplyP3BatchMetadataCommand?.RaiseCanExecuteChanged(); } }
     public string P3BatchPreviewSummary { get => _p3BatchPreviewSummary; private set => SetProperty(ref _p3BatchPreviewSummary, value); }
+    internal long P3BatchApplyCompletionGeneration => Volatile.Read(ref _p3BatchApplyCompletionGeneration);
+    internal Guid? P3BatchApplyCompletionOperationId => _p3BatchApplyCompletionOperationId;
+    internal AssetLibraryP3BatchApplyOutcome P3BatchApplyCompletionOutcome => _p3BatchApplyCompletionOutcome;
     public string P3BatchSelectionState => SelectionCount switch { 0 => "没有选择素材", 1 => "已选择 1 项", _ => $"已选择 {SelectionCount:N0} 项（混合值会明确标记）" };
     public string P3BatchCommonState => SelectionCount switch
     {
@@ -475,6 +491,7 @@ public sealed partial class AssetLibraryViewModel
         {
             P3BatchPreviewReady = false;
             P3BatchPreviewSummary = "预览契约不存在，请重新预览后再应用。";
+            PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Rejected, operationId: null);
             return;
         }
         var request = BuildP3BatchMetadataRequest();
@@ -488,6 +505,7 @@ public sealed partial class AssetLibraryViewModel
         catch (Exception exception)
         {
             P3BatchPreviewSummary = $"批量修改失败，事务未部分提交：{exception.Message}";
+            PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Failed, operationId: null);
             return;
         }
 
@@ -510,6 +528,7 @@ public sealed partial class AssetLibraryViewModel
                     _ => "刷新未稳定完成"
                 };
                 P3BatchPreviewSummary = $"批量修改已提交 {result.ChangedCount:N0} 项，但界面刷新未完成：{reason}；可使用撤销恢复，源文件未改动。";
+                PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.CommittedRefreshIncomplete, result.UndoToken?.OperationId);
                 return;
             }
             await RefreshSelectionSummaryAsync();
@@ -517,9 +536,18 @@ public sealed partial class AssetLibraryViewModel
         catch (Exception exception)
         {
             P3BatchPreviewSummary = $"批量修改已提交 {result.ChangedCount:N0} 项，但界面刷新失败：{exception.Message}；可使用撤销恢复，源文件未改动。";
+            PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.CommittedRefreshIncomplete, result.UndoToken?.OperationId);
             return;
         }
         P3BatchPreviewSummary = $"已安全更新 {result.ChangedCount:N0} 项素材库元数据；源文件未改动。";
+        PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Succeeded, result.UndoToken?.OperationId);
+    }
+
+    private void PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome outcome, Guid? operationId)
+    {
+        _p3BatchApplyCompletionOperationId = operationId;
+        _p3BatchApplyCompletionOutcome = outcome;
+        Interlocked.Increment(ref _p3BatchApplyCompletionGeneration);
     }
 
     private void RememberP3MetadataResult(AssetLibraryBatchResult result)
@@ -529,7 +557,10 @@ public sealed partial class AssetLibraryViewModel
 
     private void OnP3SelectionChanged(IReadOnlyList<AssetItem> _)
     {
-        InvalidateP3BatchPreview();
+        var currentSelectionIds = SelectedAssetIds.ToHashSet();
+        var logicalSelectionChanged = !_p3ObservedBatchSelectionIds.SetEquals(currentSelectionIds);
+        _p3ObservedBatchSelectionIds = currentSelectionIds;
+        if (logicalSelectionChanged) InvalidateP3BatchPreview();
         OnPropertyChanged(nameof(P3BatchSelectionState));
         OnPropertyChanged(nameof(P3BatchCommonState));
         PreviewP3BatchMetadataCommand?.RaiseCanExecuteChanged();

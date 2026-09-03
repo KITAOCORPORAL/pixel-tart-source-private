@@ -927,16 +927,20 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
                                  _viewModel.P3BatchPreviewSummary.Contains(batchSize.ToString("N0"), StringComparison.Ordinal),
             "the public Batch Metadata Preview command");
         var previousOperationId = _viewModel.LastUndoToken?.OperationId;
+        var previousCompletionGeneration = _viewModel.P3BatchApplyCompletionGeneration;
         var started = System.Diagnostics.Stopwatch.StartNew();
         if (!_viewModel.ApplyP3BatchMetadataCommand.CanExecute(null))
             throw new InvalidOperationException("The public Batch Metadata Apply command was unavailable after preview.");
         _viewModel.ApplyP3BatchMetadataCommand.Execute(null);
-        await WaitUntilAsync(() =>
-            _viewModel.P3BatchPreviewSummary.StartsWith("批量修改失败", StringComparison.Ordinal) ||
-            _viewModel.LastUndoToken is { } token && token.OperationId != previousOperationId &&
-            (_viewModel.P3BatchPreviewSummary.Contains("已安全更新", StringComparison.Ordinal) ||
-             _viewModel.P3BatchPreviewSummary.StartsWith("批量修改已提交", StringComparison.Ordinal)),
+        await WaitUntilAsync(() => _viewModel.P3BatchApplyCompletionGeneration > previousCompletionGeneration,
             "the public Batch Metadata Apply command");
+        if (_viewModel.P3BatchApplyCompletionOutcome != AssetLibraryP3BatchApplyOutcome.Succeeded)
+            throw new InvalidOperationException(
+                $"The public Batch Metadata Apply command completed as '{_viewModel.P3BatchApplyCompletionOutcome}': {_viewModel.P3BatchPreviewSummary}");
+        if (_viewModel.LastUndoToken is not { } completedToken ||
+            completedToken.OperationId == previousOperationId ||
+            _viewModel.P3BatchApplyCompletionOperationId != completedToken.OperationId)
+            throw new InvalidOperationException("The public Batch Metadata Apply completion did not match its undo operation token.");
         if (!_viewModel.P3BatchPreviewSummary.Contains("已安全更新", StringComparison.Ordinal) ||
             _viewModel.IsLoading || _viewModel.HasLoadError ||
             _viewModel.IsOrganizationLoading || _viewModel.HasOrganizationError)

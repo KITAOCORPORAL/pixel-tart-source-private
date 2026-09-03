@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
 using PixelTart.Modules.AssetLibrary;
@@ -220,11 +221,13 @@ public sealed class AssetLibraryP3WpfTests
         var refreshAssets = body.IndexOf("await RefreshAsync(initializationAttempt: null", StringComparison.Ordinal);
         var refreshSelection = body.IndexOf("await RefreshSelectionSummaryAsync();", StringComparison.Ordinal);
         var publishSuccess = body.IndexOf("P3BatchPreviewSummary = $\"已安全更新", StringComparison.Ordinal);
+        var publishCompletion = body.IndexOf("PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Succeeded", StringComparison.Ordinal);
 
         Assert.IsTrue(
             repositoryApply >= 0 && repositoryApply < rememberResult &&
             rememberResult < refreshFilters && refreshFilters < refreshAssets &&
-            refreshAssets < refreshSelection && refreshSelection < publishSuccess,
+            refreshAssets < refreshSelection && refreshSelection < publishSuccess &&
+            publishSuccess < publishCompletion,
             "Batch apply must publish its stable success state only after every UI refresh has completed.");
         StringAssert.Contains(body, "refreshOutcome != AssetLibraryRefreshOutcome.Completed || IsLoading || HasLoadError ||");
         StringAssert.Contains(body, "IsOrganizationLoading || HasOrganizationError");
@@ -233,7 +236,7 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
-    public async Task BatchApplyCompletesAgainstRealRepositoryWithStableUiState()
+    public async Task BatchApplyCompletesAgainstRealRepositoryAndSameSelectionResyncPreservesStableUiState()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3BatchStable", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -269,7 +272,85 @@ public sealed class AssetLibraryP3WpfTests
                 Assert.IsFalse(viewModel.IsOrganizationLoading);
                 Assert.IsFalse(viewModel.HasOrganizationError);
                 Assert.HasCount(1, viewModel.SelectedAssets);
+
+                var selectedAfterRefresh = viewModel.SelectedAssets.ToArray();
+                viewModel.SyncVisibleSelection(
+                    selectedAfterRefresh,
+                    viewModel.AssetCards.Select(card => card.Asset.AssetId));
+                StringAssert.Contains(
+                    viewModel.P3BatchPreviewSummary,
+                    "已安全更新 1 项",
+                    "A delayed WPF selection reconciliation for the same asset IDs must not erase the completed batch state.");
+
+                viewModel.SyncSelection([]);
+                StringAssert.Contains(
+                    viewModel.P3BatchPreviewSummary,
+                    "先选择素材",
+                    "A real logical selection change must still invalidate the completed batch state.");
                 viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+            });
+
+            await using var verification = new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(databasePath);
+            await verification.InitializeAsync();
+            Assert.HasCount(1, await verification.ListTagMembershipsAsync(tagId: tagId));
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
+    public async Task PageBatchApplyCompletionSurvivesDeferredGridSelectionReconciliation()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3BatchGridStable", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var databasePath = Path.Combine(root, "library.db");
+        var assetPath = Path.Combine(root, "batch-grid-stable.jpg");
+        var tagId = Guid.NewGuid();
+        try
+        {
+            await File.WriteAllTextAsync(assetPath, "batch-grid-stable");
+            await using (var repository = new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(databasePath))
+            {
+                await repository.InitializeAsync();
+                await repository.ImportAsync([new AssetImportRequest(assetPath)]);
+                await repository.SaveTagAsync(new(tagId, "界面延迟同步标签"));
+            }
+
+            await RunSta(async () =>
+            {
+                var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(databasePath, new TaskOperationBridge(), []);
+                try
+                {
+                    page.Measure(new Size(1600, 1000));
+                    page.Arrange(new Rect(0, 0, 1600, 1000));
+                    await page.ViewModel.InitializeAsync();
+                    page.UpdateLayout();
+
+                    await InvokePrivateTask(page.ViewModel, "ApplyP3BatchMetadataAsync");
+                    AssertP3BatchCompletion(page.ViewModel, 1, "Rejected", operationId: null);
+
+                    var grid = page.FindName("AssetGrid") as ListBox;
+                    Assert.IsNotNull(grid);
+                    Assert.HasCount(1, grid.Items);
+                    grid.SelectedItems.Add(grid.Items[0]);
+                    await page.Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.ApplicationIdle);
+                    Assert.AreEqual(1, page.ViewModel.SelectionCount);
+
+                    page.ViewModel.P3BatchTag = page.ViewModel.Tags.Single(tag => tag.TagId == tagId);
+                    page.ViewModel.P3BatchTagAction = "添加";
+                    await InvokePrivateTask(page.ViewModel, "PreviewP3BatchMetadataAsync");
+                    Assert.IsTrue(page.ViewModel.P3BatchPreviewReady, page.ViewModel.P3BatchPreviewSummary);
+                    await InvokePrivateTask(page.ViewModel, "ApplyP3BatchMetadataAsync");
+
+                    await page.Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.ApplicationIdle);
+                    StringAssert.Contains(page.ViewModel.P3BatchPreviewSummary, "已安全更新 1 项");
+                    Assert.IsNotNull(page.ViewModel.LastUndoToken);
+                    AssertP3BatchCompletion(page.ViewModel, 2, "Succeeded", page.ViewModel.LastUndoToken.OperationId);
+                    Assert.AreEqual(1, page.ViewModel.SelectionCount);
+                }
+                finally
+                {
+                    await page.DisposeAsync();
+                }
             });
 
             await using var verification = new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(databasePath);
@@ -885,6 +966,20 @@ public sealed class AssetLibraryP3WpfTests
         return (Task)method.Invoke(viewModel, null)!;
     }
 
+    private static void AssertP3BatchCompletion(
+        AssetLibraryViewModel viewModel,
+        long generation,
+        string outcome,
+        Guid? operationId)
+    {
+        const System.Reflection.BindingFlags flags =
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+        var type = typeof(AssetLibraryViewModel);
+        Assert.AreEqual(generation, type.GetProperty("P3BatchApplyCompletionGeneration", flags)?.GetValue(viewModel));
+        Assert.AreEqual(outcome, type.GetProperty("P3BatchApplyCompletionOutcome", flags)?.GetValue(viewModel)?.ToString());
+        Assert.AreEqual(operationId, type.GetProperty("P3BatchApplyCompletionOperationId", flags)?.GetValue(viewModel));
+    }
+
     private static void InvokePrivateVoid(AssetLibraryViewModel viewModel, string methodName, object? argument)
     {
         var method = typeof(AssetLibraryViewModel).GetMethod(
@@ -943,6 +1038,32 @@ public sealed class AssetLibraryP3WpfTests
         var thread = new Thread(() =>
         {
             try { action(); completion.SetResult(); }
+            catch (Exception exception) { completion.SetException(exception); }
+        });
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+        return completion.Task;
+    }
+
+    private static Task RunSta(Func<Task> action)
+    {
+        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var thread = new Thread(() =>
+        {
+            var dispatcher = Dispatcher.CurrentDispatcher;
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(dispatcher));
+            try
+            {
+                var operation = action();
+                _ = operation.ContinueWith(
+                    _ => dispatcher.BeginInvokeShutdown(DispatcherPriority.Background),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default);
+                Dispatcher.Run();
+                operation.GetAwaiter().GetResult();
+                completion.SetResult();
+            }
             catch (Exception exception) { completion.SetException(exception); }
         });
         thread.SetApartmentState(ApartmentState.STA);
