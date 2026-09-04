@@ -745,29 +745,35 @@
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />
-                        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
-                                   AutomationProperties.AutomationId="AssetBrowserToolbar">
-                            <Button Content="网格" Command="{Binding SwitchViewCommand}" CommandParameter="Grid" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetViewGrid" AutomationProperties.Name="切换到网格视图" />
-                            <Button Content="瀑布流" Command="{Binding SwitchViewCommand}" CommandParameter="Masonry" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetViewMasonry" AutomationProperties.Name="切换到瀑布流视图" />
-                            <Button Content="两端对齐" Command="{Binding SwitchViewCommand}" CommandParameter="Justified" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetViewJustified" AutomationProperties.Name="切换到两端对齐视图" />
-                            <Button Content="列表" Command="{Binding SwitchViewCommand}" CommandParameter="List" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetViewList" AutomationProperties.Name="切换到列表视图" />
-                            <Separator Width="10" Opacity="0" />
-                            <Button Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortAddedAt" />
-                            <Button Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortCaptureTime" />
-                            <Button Content="文件名" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileName" />
-                            <Button Content="文件大小" Command="{Binding SortBrowserCommand}" CommandParameter="FileSize" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileSize" />
-                            <Button Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortRating" />
-                            <Button Content="颜色" Command="{Binding SortBrowserCommand}" CommandParameter="Color" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortColor" />
-                            <Button Content="视觉分析" Command="{Binding SortBrowserCommand}" CommandParameter="VisualAnalysis" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortVisualAnalysis" />
-                            <Button Content="{Binding SortDirectionLabel}" Command="{Binding ToggleSortDirectionCommand}" Style="{StaticResource AssetLibrarySecondaryButton}"
-                                    AutomationProperties.AutomationId="AssetSortDirection" AutomationProperties.Name="切换排序方向" />
-                            <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserUndo" />
-                            <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserRedo" />
-                        </WrapPanel>
+                        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      CanContentScroll="False"
+                                      AutomationProperties.AutomationId="AssetBrowserToolbar"
+                                      AutomationProperties.Name="素材浏览工具栏">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="网格" Command="{Binding SwitchViewCommand}" CommandParameter="Grid" Style="{StaticResource AssetLibraryChipButton}"
+                                        AutomationProperties.AutomationId="AssetViewGrid" AutomationProperties.Name="切换到网格视图" />
+                                <Button Content="瀑布流" Command="{Binding SwitchViewCommand}" CommandParameter="Masonry" Style="{StaticResource AssetLibraryChipButton}"
+                                        AutomationProperties.AutomationId="AssetViewMasonry" AutomationProperties.Name="切换到瀑布流视图" />
+                                <Button Content="两端对齐" Command="{Binding SwitchViewCommand}" CommandParameter="Justified" Style="{StaticResource AssetLibraryChipButton}"
+                                        AutomationProperties.AutomationId="AssetViewJustified" AutomationProperties.Name="切换到两端对齐视图" />
+                                <Button Content="列表" Command="{Binding SwitchViewCommand}" CommandParameter="List" Style="{StaticResource AssetLibraryChipButton}"
+                                        AutomationProperties.AutomationId="AssetViewList" AutomationProperties.Name="切换到列表视图" />
+                                <Separator Width="10" Opacity="0" />
+                                <Button Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortAddedAt" />
+                                <Button Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortCaptureTime" />
+                                <Button Content="文件名" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileName" />
+                                <Button Content="文件大小" Command="{Binding SortBrowserCommand}" CommandParameter="FileSize" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileSize" />
+                                <Button Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortRating" />
+                                <Button Content="颜色" Command="{Binding SortBrowserCommand}" CommandParameter="Color" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortColor" />
+                                <Button Content="视觉分析" Command="{Binding SortBrowserCommand}" CommandParameter="VisualAnalysis" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortVisualAnalysis" />
+                                <Button Content="{Binding SortDirectionLabel}" Command="{Binding ToggleSortDirectionCommand}" Style="{StaticResource AssetLibrarySecondaryButton}"
+                                        AutomationProperties.AutomationId="AssetSortDirection" AutomationProperties.Name="切换排序方向" />
+                                <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserUndo" />
+                                <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserRedo" />
+                            </StackPanel>
+                        </ScrollViewer>
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" IsEnabled="{Binding IsReady}" AutomationProperties.AutomationId="VisualFilterChips">

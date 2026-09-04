@@ -448,6 +448,82 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task BrowserToolbarStaysInsideTheExactFormal150PercentViewport()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Formal150Layout", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(async () =>
+            {
+                var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                    Path.Combine(root, "formal-150-layout.db"), new TaskOperationBridge(), []);
+                var host = new Border { Child = page, ClipToBounds = true };
+                try
+                {
+                    await page.ViewModel.InitializeAsync();
+                    for (var index = 0; index < 5; index++)
+                        page.ViewModel.P3QuerySuggestions.Add(new(
+                            "file", $"P3_0002{index} 人物素材 查询样本 {index + 1}", $"P3_0002{index}", "file"));
+                    typeof(AssetLibraryViewModel)
+                        .GetProperty(nameof(AssetLibraryViewModel.P3SuggestionsVisible))!
+                        .GetSetMethod(nonPublic: true)!
+                        .Invoke(page.ViewModel, [true]);
+
+                    var viewport = new Size(1093.33d, 612.67d);
+                    foreach (var mode in Enum.GetValues<AssetLibraryViewMode>())
+                    {
+                        if (page.ViewModel.ViewMode != mode)
+                        {
+                            await WaitForAsync(() => page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                            page.ViewModel.SwitchViewCommand.Execute(mode.ToString());
+                            await WaitForAsync(() => page.ViewModel.ViewMode == mode &&
+                                                     page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                        }
+
+                        host.Width = viewport.Width;
+                        host.Height = viewport.Height;
+                        host.Measure(viewport);
+                        host.Arrange(new Rect(new Point(), viewport));
+                        host.UpdateLayout();
+
+                        var toolbar = Assert.IsInstanceOfType<ScrollViewer>(
+                            FindVisualByAutomationId(page, "AssetBrowserToolbar"));
+                        Assert.AreEqual(ScrollBarVisibility.Auto, toolbar.HorizontalScrollBarVisibility, mode.ToString());
+                        Assert.AreEqual(ScrollBarVisibility.Disabled, toolbar.VerticalScrollBarVisibility, mode.ToString());
+                        Assert.IsGreaterThan(0d, toolbar.ScrollableWidth,
+                            $"The exact formal viewport must exercise horizontal toolbar overflow in {mode} view.");
+                        var toolbarBounds = toolbar.TransformToAncestor(page)
+                            .TransformBounds(new Rect(new Point(), toolbar.RenderSize));
+                        Assert.IsGreaterThanOrEqualTo(-0.01d, toolbarBounds.Top, mode.ToString());
+                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, toolbarBounds.Bottom, mode.ToString());
+
+                        var redo = FindVisualByAutomationId(page, "AssetBrowserRedo");
+                        Assert.IsTrue(IsInsideScrollViewer(redo),
+                            "Low-frequency browser actions must stay reachable through the bounded toolbar viewport.");
+
+                        foreach (var button in EnumerateVisuals<Button>(page)
+                                     .Where(item => item.IsVisible && item.ActualWidth > 0 && item.ActualHeight > 0 &&
+                                                    !IsInsideScrollViewer(item)))
+                        {
+                            var bounds = button.TransformToAncestor(page)
+                                .TransformBounds(new Rect(new Point(), button.RenderSize));
+                            var identity = AutomationProperties.GetAutomationId(button);
+                            Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity}/{mode}");
+                            Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity}/{mode}");
+                        }
+                    }
+                }
+                finally
+                {
+                    await page.DisposeAsync();
+                }
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
     public async Task ExpandedTagManagerKeepsBrowserWorkspaceInsideSmallViewport()
     {
         var manager = Load("AssetTagManagerView.xaml");
