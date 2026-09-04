@@ -405,10 +405,21 @@ function ConvertTo-StructuredFailure {
     $exception = if ($Failure -is [Management.Automation.ErrorRecord]) { $Failure.Exception }
         elseif ($Failure -is [Exception]) { $Failure }
         else { $null }
-    $message = if ($null -ne $exception) { [string]$exception.Message } else { [string]$Failure }
-    $type = if ($null -ne $exception) { [string]$exception.GetType().FullName } else { [string]$Failure.GetType().FullName }
-    $fullyQualifiedErrorId = if ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.FullyQualifiedErrorId } else { '' }
-    $scriptStackTrace = if ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.ScriptStackTrace } else { '' }
+    $isApplicationReportedFailure = $null -ne $exception -and
+        $exception.Data.Contains('p3_application_reported_failure') -and
+        [bool]$exception.Data['p3_application_reported_failure']
+    $message = if ($isApplicationReportedFailure) { [string]$exception.Data['p3_application_exception_message'] }
+        elseif ($null -ne $exception) { [string]$exception.Message }
+        else { [string]$Failure }
+    $type = if ($isApplicationReportedFailure) { [string]$exception.Data['p3_application_exception_type'] }
+        elseif ($null -ne $exception) { [string]$exception.GetType().FullName }
+        else { [string]$Failure.GetType().FullName }
+    $fullyQualifiedErrorId = if ($isApplicationReportedFailure) { 'application-reported-failure' }
+        elseif ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.FullyQualifiedErrorId }
+        else { '' }
+    $scriptStackTrace = if ($isApplicationReportedFailure) { [string]$exception.Data['p3_application_exception_stack_trace'] }
+        elseif ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.ScriptStackTrace }
+        else { '' }
     return [pscustomobject][ordered]@{
         schema = 'pixel-tart-p3-structured-failure/v1'
         category = $Category
@@ -419,6 +430,18 @@ function ConvertTo-StructuredFailure {
         script_stack_trace = $scriptStackTrace
         observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
     }
+}
+
+function New-P3ApplicationReportedFailureException {
+    param($Failure)
+    $exception = [InvalidOperationException]::new([string]$Failure.message)
+    $exception.Data['p3_stage'] = 'application-reported-failure'
+    $exception.Data['p3_application_reported_failure'] = $true
+    $exception.Data['p3_application_exception_type'] = [string]$Failure.type
+    $exception.Data['p3_application_exception_message'] = [string]$Failure.message
+    $exception.Data['p3_application_exception_stack_trace'] = [string]$Failure.stack_trace
+    $exception.Data['p3_application_lifecycle_record_sha256'] = [string]$Failure.record_sha256
+    return $exception
 }
 
 function Add-ProcessExitTimelineEvent {
@@ -661,6 +684,21 @@ function Get-RequiredJsonIntegerValue {
     return [int64]$value
 }
 
+function Get-RequiredJsonNumberValue {
+    param($Object, [string]$Name, [string]$Context)
+    $value = Get-RequiredPropertyValue $Object $Name $Context
+    if (-not ($value -is [sbyte] -or $value -is [byte] -or $value -is [int16] -or $value -is [uint16] -or
+        $value -is [int32] -or $value -is [uint32] -or $value -is [int64] -or $value -is [uint64] -or
+        $value -is [single] -or $value -is [double] -or $value -is [decimal])) {
+        throw "$Context property '$Name' must be a JSON number."
+    }
+    $number = [double]$value
+    if ([double]::IsNaN($number) -or [double]::IsInfinity($number)) {
+        throw "$Context property '$Name' must be a finite JSON number."
+    }
+    return $number
+}
+
 function Assert-P3LifecyclePendingOperationCount {
     param($Record, [int]$Index)
     if ($Index -lt 0 -or $Index -ge $script:p3LifecyclePendingOperationCountRules.Count) {
@@ -771,6 +809,8 @@ function Read-P3LifecycleObservation {
             events = @()
             hwnd = ''
             last_record_sha256 = ''
+            application_failure = $null
+            failure_tail_observation_failure = $null
         }
     }
     $text = Read-SharedUtf8Text $Path
@@ -786,71 +826,168 @@ function Read-P3LifecycleObservation {
     $previousTimestamp = [DateTimeOffset]::MinValue
     $previousElapsed = -1.0
     $observedHwnd = ''
-    for ($index = 0; $index -lt $completeCount; $index++) {
-        $line = $parts[$index]
-        if ([string]::IsNullOrWhiteSpace($line)) { throw "P3 lifecycle record[$index] is empty." }
-        try { $record = $line | ConvertFrom-Json -ErrorAction Stop }
-        catch { throw "P3 lifecycle record[$index] is invalid JSON: $($_.Exception.Message)" }
-        if ($index -ge $script:p3LifecycleEvents.Count) { throw 'P3 lifecycle has more records than the fixed contract.' }
-        $canonical = Get-P3LifecycleCanonicalText $line
-        if ((Get-TextSha256 $canonical.canonical) -cne $canonical.claimed_hash -or
-            [string](Get-RequiredPropertyValue $record 'record_sha256' "P3 lifecycle record[$index]") -cne $canonical.claimed_hash) {
-            throw "P3 lifecycle record[$index] hash is invalid."
-        }
-        if ([string](Get-RequiredPropertyValue $record 'previous_record_sha256' "P3 lifecycle record[$index]") -cne $previousHash) {
-            throw "P3 lifecycle record[$index] hash chain is invalid."
-        }
-        if ([int](Get-RequiredPropertyValue $record 'sequence' "P3 lifecycle record[$index]") -ne ($index + 1) -or
-            [string](Get-RequiredPropertyValue $record 'event' "P3 lifecycle record[$index]") -cne $script:p3LifecycleEvents[$index]) {
-            throw "P3 lifecycle record[$index] sequence or transition is invalid."
-        }
-        if ([string](Get-RequiredPropertyValue $record 'result' "P3 lifecycle record[$index]") -cne $script:p3LifecycleResults[$index] -or
-            [bool](Get-RequiredPropertyValue $record 'pending' "P3 lifecycle record[$index]") -ne [bool]$script:p3LifecyclePending[$index]) {
-            throw "P3 lifecycle record[$index] result or pending-state contract is invalid."
-        }
-        [void](Assert-P3LifecyclePendingOperationCount $record $index)
-        $exceptionProperty = $record.PSObject.Properties['exception']
-        if ($null -eq $exceptionProperty -or $null -ne $exceptionProperty.Value) {
-            throw "P3 lifecycle record[$index] exception state is invalid for a successful transition."
-        }
-        if ([int](Get-RequiredPropertyValue $record 'managed_thread_id' "P3 lifecycle record[$index]") -le 0 -or
-            [int](Get-RequiredPropertyValue $record 'dispatcher_thread_id' "P3 lifecycle record[$index]") -le 0) {
-            throw "P3 lifecycle record[$index] thread identity is invalid."
-        }
-        foreach ($binding in @(
-            @('schema','schema'), @('run_id','run_id'), @('scenario_id','scenario_id'),
-            @('phase','phase'), @('process_session_id','process_session_id'), @('source_head','source_head'),
-            @('executable_sha256','executable_sha256'), @('application_sha256','application_sha256'),
-            @('asset_module_sha256','asset_module_sha256'))) {
-            if ([string](Get-RequiredPropertyValue $record $binding[0] "P3 lifecycle record[$index]") -cne
-                [string](Get-RequiredPropertyValue $ExpectedIdentity $binding[1] 'P3 expected lifecycle identity')) {
-                throw "P3 lifecycle record[$index] identity field '$($binding[0])' is invalid."
+    $applicationFailure = $null
+    $lastLifecycleStage = 0
+    $failureTailObservationFailure = $null
+    try {
+        for ($index = 0; $index -lt $completeCount; $index++) {
+            $context = "P3 lifecycle record[$index]"
+            $line = $parts[$index]
+            if ([string]::IsNullOrWhiteSpace($line)) { throw "$context is empty." }
+            try { $record = $line | ConvertFrom-Json -ErrorAction Stop }
+            catch { throw "$context is invalid JSON: $($_.Exception.Message)" }
+            $canonical = Get-P3LifecycleCanonicalText $line
+            $recordHash = Get-RequiredPropertyValue $record 'record_sha256' $context
+            if (-not ($recordHash -is [string]) -or (Get-TextSha256 $canonical.canonical) -cne $canonical.claimed_hash -or
+                [string]$recordHash -cne $canonical.claimed_hash) {
+                throw "$context hash is invalid."
             }
+            $claimedPreviousHash = Get-RequiredPropertyValue $record 'previous_record_sha256' $context
+            if (-not ($claimedPreviousHash -is [string]) -or [string]$claimedPreviousHash -cne $previousHash) {
+                throw "$context hash chain is invalid."
+            }
+            $sequence = Get-RequiredJsonIntegerValue $record 'sequence' $context
+            if ($sequence -ne ($index + 1)) { throw "$context sequence is invalid." }
+            $eventValue = Get-RequiredPropertyValue $record 'event' $context
+            if (-not ($eventValue -is [string]) -or [string]::IsNullOrWhiteSpace([string]$eventValue)) {
+                throw "$context event must be a non-empty JSON string."
+            }
+            $event = [string]$eventValue
+            $isApplicationFailure = $event -ceq 'failure-observed'
+            $isFailureTailTransition = $null -ne $applicationFailure -and -not $isApplicationFailure
+            $eventIndex = [Array]::IndexOf([string[]]$script:p3LifecycleEvents, $event)
+            if (-not $isApplicationFailure -and -not $isFailureTailTransition -and
+                ($index -ge $script:p3LifecycleEvents.Count -or $event -cne $script:p3LifecycleEvents[$index])) {
+                throw "$context sequence or transition is invalid."
+            }
+            if ($isFailureTailTransition -and ($eventIndex -lt 0 -or (($eventIndex + 1) * 10) -le $lastLifecycleStage)) {
+                throw "$context failure-tail transition is not a production-monotonic lifecycle stage."
+            }
+            if ((Get-RequiredJsonIntegerValue $record 'managed_thread_id' $context) -le 0 -or
+                (Get-RequiredJsonIntegerValue $record 'dispatcher_thread_id' $context) -le 0) {
+                throw "$context thread identity is invalid."
+            }
+            foreach ($binding in @(
+                @('schema','schema'), @('run_id','run_id'), @('scenario_id','scenario_id'),
+                @('phase','phase'), @('process_session_id','process_session_id'), @('source_head','source_head'),
+                @('executable_sha256','executable_sha256'), @('application_sha256','application_sha256'),
+                @('asset_module_sha256','asset_module_sha256'))) {
+                $identityValue = Get-RequiredPropertyValue $record $binding[0] $context
+                if (-not ($identityValue -is [string]) -or [string]$identityValue -cne
+                    [string](Get-RequiredPropertyValue $ExpectedIdentity $binding[1] 'P3 expected lifecycle identity')) {
+                    throw "$context identity field '$($binding[0])' is invalid."
+                }
+            }
+            if ((Get-RequiredJsonIntegerValue $record 'pid' $context) -ne [int]$ExpectedIdentity.pid) {
+                throw "$context PID is invalid."
+            }
+            $hwndValue = Get-RequiredPropertyValue $record 'hwnd' $context
+            if (-not ($hwndValue -is [string])) { throw "$context HWND identity is invalid." }
+            $hwnd = [string]$hwndValue
+            if ($hwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
+                (-not [string]::IsNullOrWhiteSpace($observedHwnd) -and $hwnd -cne $observedHwnd)) {
+                throw "$context HWND identity is invalid."
+            }
+            $observedHwnd = $hwnd
+            $timestampValue = Get-RequiredPropertyValue $record 'timestamp_utc' $context
+            $timestamp = [DateTimeOffset]::MinValue
+            if (-not ($timestampValue -is [string]) -or -not [DateTimeOffset]::TryParse(
+                [string]$timestampValue,
+                [Globalization.CultureInfo]::InvariantCulture,
+                [Globalization.DateTimeStyles]::RoundtripKind,
+                [ref]$timestamp) -or $timestamp -lt $previousTimestamp) {
+                throw "$context wall-clock time is invalid or moved backwards."
+            }
+            $elapsed = Get-RequiredJsonNumberValue $record 'stopwatch_elapsed_ms' $context
+            if ($elapsed -lt $previousElapsed) { throw "$context stopwatch moved backwards." }
+            if ($isApplicationFailure) {
+                $resultValue = Get-RequiredPropertyValue $record 'result' $context
+                $pendingValue = Get-RequiredPropertyValue $record 'pending' $context
+                if (-not ($resultValue -is [string]) -or [string]$resultValue -cne 'failed' -or
+                    -not ($pendingValue -is [bool]) -or [bool]$pendingValue) {
+                    throw "$context application failure result or pending-state is invalid."
+                }
+                $pendingOperationCount = Get-RequiredJsonIntegerValue $record 'pending_operation_count' $context
+                if ($pendingOperationCount -ne 0) {
+                    throw "$context application failure pending_operation_count must be zero."
+                }
+                $exceptionProperty = $record.PSObject.Properties['exception']
+                if ($null -eq $exceptionProperty -or $null -eq $exceptionProperty.Value) {
+                    throw "$context application failure exception is missing."
+                }
+                $exceptionTypeValue = Get-RequiredPropertyValue $exceptionProperty.Value 'type' "$context application failure exception"
+                $exceptionMessageValue = Get-RequiredPropertyValue $exceptionProperty.Value 'message' "$context application failure exception"
+                $stackTraceProperty = $exceptionProperty.Value.PSObject.Properties['stackTrace']
+                if (-not ($exceptionTypeValue -is [string]) -or -not ($exceptionMessageValue -is [string]) -or
+                    [string]::IsNullOrWhiteSpace([string]$exceptionTypeValue) -or
+                    [string]::IsNullOrWhiteSpace([string]$exceptionMessageValue) -or
+                    $null -eq $stackTraceProperty -or
+                    ($null -ne $stackTraceProperty.Value -and -not ($stackTraceProperty.Value -is [string]))) {
+                    throw "$context application failure exception fields are invalid."
+                }
+                if ($null -eq $applicationFailure) {
+                    $applicationFailure = [pscustomobject][ordered]@{
+                        schema = 'pixel-tart-p3-application-reported-failure/v1'
+                        lifecycle_path = $Path
+                        record_index = $index
+                        sequence = $sequence
+                        type = [string]$exceptionTypeValue
+                        message = [string]$exceptionMessageValue
+                        stack_trace = $(if ($null -eq $stackTraceProperty.Value) { '' } else { [string]$stackTraceProperty.Value })
+                        record_sha256 = $canonical.claimed_hash
+                    }
+                }
+            } elseif (-not $isFailureTailTransition) {
+                $resultValue = Get-RequiredPropertyValue $record 'result' $context
+                $pendingValue = Get-RequiredPropertyValue $record 'pending' $context
+                if (-not ($resultValue -is [string]) -or [string]$resultValue -cne $script:p3LifecycleResults[$index] -or
+                    -not ($pendingValue -is [bool]) -or [bool]$pendingValue -ne [bool]$script:p3LifecyclePending[$index]) {
+                    throw "$context result or pending-state contract is invalid."
+                }
+                [void](Assert-P3LifecyclePendingOperationCount $record $index)
+                $exceptionProperty = $record.PSObject.Properties['exception']
+                if ($null -eq $exceptionProperty -or $null -ne $exceptionProperty.Value) {
+                    throw "$context exception state is invalid for a successful transition."
+                }
+                $lastLifecycleStage = ($eventIndex + 1) * 10
+            } else {
+                $resultValue = Get-RequiredPropertyValue $record 'result' $context
+                $pendingValue = Get-RequiredPropertyValue $record 'pending' $context
+                if (-not ($resultValue -is [string]) -or -not ($pendingValue -is [bool])) {
+                    throw "$context failure-tail result and pending must retain their production JSON types."
+                }
+                $result = [string]$resultValue
+                $pendingOperationCount = Get-RequiredJsonIntegerValue $record 'pending_operation_count' $context
+                $rule = $script:p3LifecyclePendingOperationCountRules[$eventIndex]
+                $stateIsValid = if ($event -ceq 'application-on-exit-enter') {
+                    ($result -ceq 'prepared' -and -not [bool]$pendingValue -and $pendingOperationCount -eq 0) -or
+                    ($result -ceq 'not-prepared' -and [bool]$pendingValue -and $pendingOperationCount -eq 1)
+                } elseif ($event -ceq 'summary-commit-start') {
+                    $result -ceq 'failed' -and [bool]$pendingValue -and $pendingOperationCount -eq 1
+                } elseif ($event -cin @('phase-summary-written','summary-commit-end')) {
+                    $result -ceq 'failed' -and -not [bool]$pendingValue -and $pendingOperationCount -eq 0
+                } else {
+                    $result -ceq $script:p3LifecycleResults[$eventIndex] -and
+                    [bool]$pendingValue -eq [bool]$script:p3LifecyclePending[$eventIndex] -and
+                    (($rule -ceq 'zero' -and $pendingOperationCount -eq 0) -or
+                     ($rule -ceq 'one' -and $pendingOperationCount -eq 1) -or
+                     ($rule -ceq 'observed-nonnegative' -and $pendingOperationCount -ge 0))
+                }
+                $exceptionProperty = $record.PSObject.Properties['exception']
+                if (-not $stateIsValid -or $null -eq $exceptionProperty -or $null -ne $exceptionProperty.Value) {
+                    throw "$context failure-tail state is invalid."
+                }
+                $lastLifecycleStage = ($eventIndex + 1) * 10
+            }
+            $previousTimestamp = $timestamp
+            $previousElapsed = $elapsed
+            $previousHash = $canonical.claimed_hash
+            $records.Add($record)
+            $events.Add($event)
         }
-        if ([int](Get-RequiredPropertyValue $record 'pid' "P3 lifecycle record[$index]") -ne [int]$ExpectedIdentity.pid) {
-            throw "P3 lifecycle record[$index] PID is invalid."
-        }
-        $hwnd = [string](Get-RequiredPropertyValue $record 'hwnd' "P3 lifecycle record[$index]")
-        if ($hwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
-            (-not [string]::IsNullOrWhiteSpace($observedHwnd) -and $hwnd -cne $observedHwnd)) {
-            throw "P3 lifecycle record[$index] HWND identity is invalid."
-        }
-        $observedHwnd = $hwnd
-        $timestamp = [DateTimeOffset]::MinValue
-        if (-not [DateTimeOffset]::TryParse(
-            [string](Get-RequiredPropertyValue $record 'timestamp_utc' "P3 lifecycle record[$index]"),
-            [Globalization.CultureInfo]::InvariantCulture,
-            [Globalization.DateTimeStyles]::RoundtripKind,
-            [ref]$timestamp) -or $timestamp -lt $previousTimestamp) {
-            throw "P3 lifecycle record[$index] wall-clock time is invalid or moved backwards."
-        }
-        $elapsed = [double](Get-RequiredPropertyValue $record 'stopwatch_elapsed_ms' "P3 lifecycle record[$index]")
-        if ($elapsed -lt $previousElapsed) { throw "P3 lifecycle record[$index] stopwatch moved backwards." }
-        $previousTimestamp = $timestamp
-        $previousElapsed = $elapsed
-        $previousHash = $canonical.claimed_hash
-        $records.Add($record)
-        $events.Add([string]$record.event)
+    } catch {
+        if ($null -eq $applicationFailure) { throw }
+        $failureTailObservationFailure = ConvertTo-StructuredFailure 'observation' 'failure-tail-validation' $_
     }
     return [pscustomobject][ordered]@{
         exists = $true
@@ -860,6 +997,8 @@ function Read-P3LifecycleObservation {
         hwnd = $observedHwnd
         last_record_sha256 = $previousHash
         records = @($records)
+        application_failure = $applicationFailure
+        failure_tail_observation_failure = $failureTailObservationFailure
     }
 }
 
@@ -1057,12 +1196,65 @@ function Invoke-P3ObservedStage {
         outcome = 'waiting'
         detail = $null
     }
+    $pendingApplicationFailure = $null
+    $applicationFailureAnnounced = $false
+    $readFinalFailureTailAfterProcessExit = {
+        param($ApplicationFailure)
+        $finalObservation = $null
+        try { $finalObservation = & $Probe }
+        catch {
+            $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-final-read-after-process-exit' $_))
+            return
+        }
+        if ($null -eq $finalObservation) {
+            $missingFinalObservation = [IO.InvalidDataException]::new(
+                'P3 lifecycle final failure-tail read returned no observation after process exit.')
+            $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-final-read-after-process-exit' $missingFinalObservation))
+            return
+        }
+        $finalTailFailureProperty = $finalObservation.PSObject.Properties['failure_tail_observation_failure']
+        if ($null -ne $finalTailFailureProperty -and $null -ne $finalTailFailureProperty.Value) {
+            $ObservationFailures.Add($finalTailFailureProperty.Value)
+            return
+        }
+        $finalApplicationFailureProperty = $finalObservation.PSObject.Properties['application_failure']
+        if ($null -eq $finalApplicationFailureProperty -or $null -eq $finalApplicationFailureProperty.Value -or
+            [string]$finalApplicationFailureProperty.Value.record_sha256 -cne [string]$ApplicationFailure.record_sha256) {
+            $changedFinalObservation = [IO.InvalidDataException]::new(
+                'P3 lifecycle final failure-tail read no longer contained the authenticated application failure record.')
+            $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-final-read-after-process-exit' $changedFinalObservation))
+            return
+        }
+        $finalPartialTailProperty = $finalObservation.PSObject.Properties['has_partial_tail']
+        if ($null -eq $finalPartialTailProperty -or [bool]$finalPartialTailProperty.Value) {
+            $partialTailFailure = [IO.InvalidDataException]::new(
+                'P3 lifecycle retained a partial failure tail after the application process exited naturally.')
+            $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-partial-after-process-exit' $partialTailFailure))
+        }
+    }
     try {
         while ($true) {
             $stageElapsed = [int64]$SharedClock.ElapsedMilliseconds - $stageStarted
             $sharedRemaining = $SharedBudgetMilliseconds - [int64]$SharedClock.ElapsedMilliseconds
             $stageRemaining = $stageCapMilliseconds - $stageElapsed
             if ($sharedRemaining -le 0 -or $stageRemaining -le 0) {
+                if ($null -ne $pendingApplicationFailure) {
+                    try { Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'application-reported-failure-partial-tail' }
+                    catch {
+                        $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-process-state-at-deadline' $_))
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                    if ([bool]$ProcessState.observed) {
+                        & $readFinalFailureTailAfterProcessExit $pendingApplicationFailure
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                    $partialTailFailure = [IO.InvalidDataException]::new(
+                        "P3 lifecycle retained a partial failure tail until stage '$Name' reached its original deadline.")
+                    $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-partial-at-deadline' $partialTailFailure))
+                    $stage.outcome = 'application-reported-failure'
+                    $stage.detail = $pendingApplicationFailure
+                    throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                }
                 $timeout = [TimeoutException]::new(
                     "P3 app phase stage '$Name' timed out (stage cap ${CapSeconds}s; shared budget $([int]($SharedBudgetMilliseconds / 1000))s).")
                 $timeout.Data['p3_stage'] = $Name
@@ -1084,10 +1276,74 @@ function Invoke-P3ObservedStage {
                     }
                 } else {
                     $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' $Name $_))
+                    if ($null -ne $pendingApplicationFailure) {
+                        $stage.outcome = 'application-reported-failure'
+                        $stage.detail = $pendingApplicationFailure
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
                     $_.Exception.Data['p3_stage'] = $Name
                     $_.Exception.Data['p3_observation_failure'] = $true
                     throw
                 }
+            }
+            if ($null -ne $observation) {
+                $tailFailureProperty = $observation.PSObject.Properties['failure_tail_observation_failure']
+                if ($null -ne $tailFailureProperty -and $null -ne $tailFailureProperty.Value) {
+                    $ObservationFailures.Add($tailFailureProperty.Value)
+                }
+                $applicationFailureProperty = $observation.PSObject.Properties['application_failure']
+                if ($null -ne $applicationFailureProperty -and $null -ne $applicationFailureProperty.Value) {
+                    if ($null -eq $pendingApplicationFailure) {
+                        $pendingApplicationFailure = $applicationFailureProperty.Value
+                    }
+                    $stage.outcome = 'application-reported-failure'
+                    $stage.detail = $pendingApplicationFailure
+                    if (-not $applicationFailureAnnounced) {
+                        Add-ProcessExitTimelineEvent $Timeline 'application-reported-failure' 'authenticated' `
+                            $pendingApplicationFailure
+                        $applicationFailureAnnounced = $true
+                    }
+                    $partialTailProperty = $observation.PSObject.Properties['has_partial_tail']
+                    $hasPartialFailureTail = $null -ne $partialTailProperty -and [bool]$partialTailProperty.Value
+                    if (($null -ne $tailFailureProperty -and $null -ne $tailFailureProperty.Value) -or
+                        -not $hasPartialFailureTail) {
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                }
+            }
+            if ($null -ne $pendingApplicationFailure) {
+                if (-not $transientContentionObserved) {
+                    try { Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'application-reported-failure-partial-tail' }
+                    catch {
+                        $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-process-state' $_))
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                    if ([bool]$ProcessState.observed) {
+                        & $readFinalFailureTailAfterProcessExit $pendingApplicationFailure
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                }
+                $waitSharedRemaining = $SharedBudgetMilliseconds - [int64]$SharedClock.ElapsedMilliseconds
+                $waitStageRemaining = $stageCapMilliseconds - ([int64]$SharedClock.ElapsedMilliseconds - $stageStarted)
+                $waitMilliseconds = [int][Math]::Min(100, [Math]::Min($waitSharedRemaining, $waitStageRemaining))
+                if ($waitMilliseconds -gt 0) {
+                    $processExitedDuringWait = $false
+                    try {
+                        if ($Process.WaitForExit($waitMilliseconds)) {
+                            Update-P3RetainedProcessExitState $Process $ProcessState $Timeline `
+                                'application-reported-failure-partial-tail'
+                            $processExitedDuringWait = $true
+                        }
+                    } catch {
+                        $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' 'failure-tail-exit-wait' $_))
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                    if ($processExitedDuringWait) {
+                        & $readFinalFailureTailAfterProcessExit $pendingApplicationFailure
+                        throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                    }
+                }
+                continue
             }
             if ($null -ne $observation -and [bool]$observation.satisfied) {
                 $stage.outcome = 'observed'
@@ -1180,6 +1436,9 @@ function Wait-RunnerOwnedProcessExit {
                 $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
                 [pscustomobject]@{
                     satisfied = $lifecycle.complete_record_count -ge 2
+                    application_failure = $lifecycle.application_failure
+                    has_partial_tail = $lifecycle.has_partial_tail
+                    failure_tail_observation_failure = $lifecycle.failure_tail_observation_failure
                     detail = [pscustomobject]@{
                         lifecycle_path = $LifecyclePath
                         complete_record_count = $lifecycle.complete_record_count
@@ -1195,6 +1454,9 @@ function Wait-RunnerOwnedProcessExit {
                 $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
                 [pscustomobject]@{
                     satisfied = $lifecycle.complete_record_count -ge 9
+                    application_failure = $lifecycle.application_failure
+                    has_partial_tail = $lifecycle.has_partial_tail
+                    failure_tail_observation_failure = $lifecycle.failure_tail_observation_failure
                     detail = [pscustomobject]@{ complete_record_count = $lifecycle.complete_record_count; events = @($lifecycle.events) }
                 }
             }
@@ -1205,6 +1467,9 @@ function Wait-RunnerOwnedProcessExit {
                 $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
                 [pscustomobject]@{
                     satisfied = $lifecycle.complete_record_count -ge 13
+                    application_failure = $lifecycle.application_failure
+                    has_partial_tail = $lifecycle.has_partial_tail
+                    failure_tail_observation_failure = $lifecycle.failure_tail_observation_failure
                     detail = [pscustomobject]@{ complete_record_count = $lifecycle.complete_record_count; events = @($lifecycle.events); hwnd = $lifecycle.hwnd }
                 }
             }
@@ -1213,6 +1478,15 @@ function Wait-RunnerOwnedProcessExit {
         $summaryCommit = Invoke-P3ObservedStage 'phase-summary-commit' $script:p3ProcessStageTimeoutSeconds.phase_summary_commit `
             $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
                 $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                if ($null -ne $lifecycle.application_failure) {
+                    return [pscustomobject]@{
+                        satisfied = $false
+                        application_failure = $lifecycle.application_failure
+                        has_partial_tail = $lifecycle.has_partial_tail
+                        failure_tail_observation_failure = $lifecycle.failure_tail_observation_failure
+                        detail = $null
+                    }
+                }
                 $summary = Read-P3PhaseSummaryObservation $PhaseSummaryPath $ExpectedIdentity $lifecycle.hwnd
                 $summaryJournal = if ($lifecycle.complete_record_count -ge 16 -and [bool]$summary.exists) {
                     Read-P3SummaryJournalBindingObservation $SummaryJournalPath $ExpectedIdentity `
@@ -1222,6 +1496,9 @@ function Wait-RunnerOwnedProcessExit {
                 }
                 [pscustomobject]@{
                     satisfied = $lifecycle.complete_record_count -ge 16 -and [bool]$summary.exists -and [bool]$summaryJournal.matched
+                    application_failure = $null
+                    has_partial_tail = $lifecycle.has_partial_tail
+                    failure_tail_observation_failure = $null
                     detail = [pscustomobject]@{
                         lifecycle_path = $LifecyclePath
                         lifecycle_record_count = $lifecycle.complete_record_count
@@ -1244,6 +1521,9 @@ function Wait-RunnerOwnedProcessExit {
                 $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
                 [pscustomobject]@{
                     satisfied = $lifecycle.complete_record_count -eq $script:p3LifecycleEvents.Count -and -not $lifecycle.has_partial_tail
+                    application_failure = $lifecycle.application_failure
+                    has_partial_tail = $lifecycle.has_partial_tail
+                    failure_tail_observation_failure = $lifecycle.failure_tail_observation_failure
                     detail = [pscustomobject]@{
                         lifecycle_path = $LifecyclePath
                         lifecycle_sha256 = $(if ($lifecycle.complete_record_count -eq $script:p3LifecycleEvents.Count -and -not $lifecycle.has_partial_tail) { Get-FileSha256 $LifecyclePath } else { '' })
@@ -1323,6 +1603,27 @@ function Wait-RunnerOwnedProcessExit {
     if ($null -ne $primaryException) {
         try { Update-P3RetainedProcessExitState $Process $processState $timeline 'failure-observation' }
         catch { $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'post-failure-process-state' $_)) }
+        $isApplicationReportedFailure = $primaryException.Data.Contains('p3_application_reported_failure') -and
+            [bool]$primaryException.Data['p3_application_reported_failure']
+        if ($isApplicationReportedFailure -and -not [bool]$processState.observed) {
+            $naturalExitRemainingMilliseconds = $sharedBudgetMilliseconds - [int64]$sharedClock.ElapsedMilliseconds
+            $naturalExitWaitMilliseconds = [int][Math]::Min(
+                [int64]$script:p3ProcessStageTimeoutSeconds.process_exit * 1000L,
+                [Math]::Max(0L, $naturalExitRemainingMilliseconds))
+            if ($naturalExitWaitMilliseconds -gt 0) {
+                Add-ProcessExitTimelineEvent $timeline 'application-reported-failure-exit-wait' 'started' `
+                    ([pscustomobject]@{ timeout_milliseconds = $naturalExitWaitMilliseconds })
+                try {
+                    if ($Process.WaitForExit($naturalExitWaitMilliseconds)) {
+                        Update-P3RetainedProcessExitState $Process $processState $timeline 'application-reported-failure'
+                    }
+                } catch {
+                    $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'application-reported-failure-exit-wait' $_))
+                }
+                Add-ProcessExitTimelineEvent $timeline 'application-reported-failure-exit-wait' `
+                    $(if ([bool]$processState.observed) { 'natural-exit-observed' } else { 'timed-out' }) $null
+            }
+        }
         if (-not [bool]$processState.observed) {
             $diagnosticValue.forced_cleanup.required = $true
             $diagnosticValue.forced_cleanup.started = $true

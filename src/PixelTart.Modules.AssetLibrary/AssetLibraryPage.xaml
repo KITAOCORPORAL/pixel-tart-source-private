@@ -800,6 +800,7 @@
                             </ItemsControl>
                             <Button DockPanel.Dock="Right" Content="退出临时结果" Command="{Binding ClearVisualModeCommand}"
                                     Style="{StaticResource AssetLibrarySecondaryButton}"
+                                    Visibility="{Binding IsTemporaryVisualMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     AutomationProperties.AutomationId="ClearVisualResults" />
                         </DockPanel>
                         <Border Margin="0,7,0,0" Padding="5,3" Background="{DynamicResource SurfaceSecondaryBrush}"

@@ -592,6 +592,97 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                         [Text.UTF8Encoding]::new($false))
                     [pscustomobject]@{ lifecycle=$lifecyclePath; summary=$summaryPath; journal=$summaryJournalPath }
                 }
+                function New-HarnessLifecycleRecord(
+                    $Identity,
+                    [int]$Sequence,
+                    [string]$PreviousHash,
+                    [string]$EventName,
+                    [string]$Result,
+                    [bool]$Pending,
+                    [int]$PendingOperationCount,
+                    $Exception) {
+                    $row = [ordered]@{
+                        schema=$Identity.schema; sequence=$Sequence
+                        timestamp_utc=[DateTimeOffset]::Parse('2026-09-04T00:00:00Z').AddMilliseconds($Sequence).ToString('O')
+                        stopwatch_elapsed_ms=[double]$Sequence; run_id=$Identity.run_id; scenario_id=$Identity.scenario_id
+                        phase=$Identity.phase; process_session_id=$Identity.process_session_id; pid=$Identity.pid; hwnd='0x1'
+                        source_head=$Identity.source_head; executable_sha256=$Identity.executable_sha256
+                        application_sha256=$Identity.application_sha256; asset_module_sha256=$Identity.asset_module_sha256
+                        managed_thread_id=1; dispatcher_thread_id=1; event=$EventName; result=$Result; pending=$Pending
+                        pending_operation_count=$PendingOperationCount; exception=$Exception; previous_record_sha256=$PreviousHash
+                    }
+                    $hash = Get-TextSha256 ($row | ConvertTo-Json -Depth 10 -Compress)
+                    $row.record_sha256 = $hash
+                    [pscustomobject]@{ row=[pscustomobject]$row; hash=$hash; line=($row | ConvertTo-Json -Depth 10 -Compress) }
+                }
+                function New-HarnessFailureTrace($Identity) {
+                    $firstException = [ordered]@{
+                        type='Harness.LayoutException'; message='authenticated application failure sentinel'; stackTrace='app-stack-sentinel'
+                    }
+                    $laterException = [ordered]@{
+                        type='Harness.CleanupException'; message='later cleanup failure sentinel'; stackTrace=$null
+                    }
+                    $records = [Collections.Generic.List[object]]::new()
+                    $previous = '0' * 64
+                    foreach ($specification in @(
+                        @('failure-observed','failed',$false,0,$firstException),
+                        @('window-close-completed','completed',$false,0,$null),
+                        @('application-on-exit-enter','not-prepared',$true,1,$null),
+                        @('failure-observed','failed',$false,0,$laterException),
+                        @('failure-observed','failed',$false,0,$laterException),
+                        @('summary-commit-start','failed',$true,1,$null),
+                        @('phase-summary-written','failed',$false,0,$null),
+                        @('summary-commit-end','failed',$false,0,$null))) {
+                        $record = New-HarnessLifecycleRecord $Identity ($records.Count + 1) $previous `
+                            ([string]$specification[0]) ([string]$specification[1]) ([bool]$specification[2]) `
+                            ([int]$specification[3]) $specification[4]
+                        $records.Add($record); $previous = $record.hash
+                    }
+                    [pscustomobject]@{
+                        records=$records.ToArray()
+                        text=((@($records | ForEach-Object { $_.line }) -join [Environment]::NewLine) + [Environment]::NewLine)
+                    }
+                }
+                function ConvertTo-ResealedHarnessLifecycleRecord($Record) {
+                    [void]$Record.PSObject.Properties.Remove('record_sha256')
+                    $hash = Get-TextSha256 ($Record | ConvertTo-Json -Depth 10 -Compress)
+                    $Record | Add-Member -NotePropertyName record_sha256 -NotePropertyValue $hash
+                    [pscustomobject]@{ row=$Record; hash=$hash; line=($Record | ConvertTo-Json -Depth 10 -Compress) }
+                }
+                function Test-HarnessLifecycleRejected([string]$Path, $Identity, [string]$ExpectedMessage) {
+                    try { [void](Read-P3LifecycleObservation $Path $Identity); return $false }
+                    catch { return $_.Exception.Message.Contains($ExpectedMessage) }
+                }
+                function Test-ResealedFirstFailureRejected(
+                    [string]$Line,
+                    $Identity,
+                    [scriptblock]$Mutator,
+                    [string]$ExpectedMessage) {
+                    $record = $Line | ConvertFrom-Json
+                    & $Mutator $record
+                    $record = ConvertTo-ResealedHarnessLifecycleRecord $record
+                    $path = Join-Path $harnessRoot ("invalid-first-failure-$([guid]::NewGuid().ToString('N')).ndjson")
+                    [IO.File]::WriteAllText($path, [string]$record.line + [Environment]::NewLine,
+                        [Text.UTF8Encoding]::new($false))
+                    return Test-HarnessLifecycleRejected $path $Identity $ExpectedMessage
+                }
+                function Test-ResealedPassedFailureTailIsSecondary($Trace, $Identity, [int]$RecordIndex) {
+                    $lines = [Collections.Generic.List[string]]::new()
+                    for ($index = 0; $index -lt $RecordIndex; $index++) {
+                        $lines.Add([string]$Trace.records[$index].line)
+                    }
+                    $record = ([string]$Trace.records[$RecordIndex].line) | ConvertFrom-Json
+                    $record.result = 'passed'
+                    $record = ConvertTo-ResealedHarnessLifecycleRecord $record
+                    $lines.Add([string]$record.line)
+                    $path = Join-Path $harnessRoot ("passed-failure-tail-$RecordIndex.ndjson")
+                    [IO.File]::WriteAllText($path, ($lines -join [Environment]::NewLine) + [Environment]::NewLine,
+                        [Text.UTF8Encoding]::new($false))
+                    $observation = Read-P3LifecycleObservation $path $Identity
+                    return $observation.application_failure.type -ceq 'Harness.LayoutException' -and
+                        $observation.failure_tail_observation_failure.stage -ceq 'failure-tail-validation' -and
+                        $observation.failure_tail_observation_failure.message.Contains("record[$RecordIndex] failure-tail state is invalid")
+                }
 
                 $rawNullRejected = $false
                 try { New-DevPreviewProcessObservation $null $null | Out-Null } catch { $rawNullRejected = $_.FullyQualifiedErrorId -notlike 'PropertyNotFoundStrict*' }
@@ -654,6 +745,155 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     $partialObservation.has_partial_tail -and $partialObservation.events.Count -eq 1 -and
                     $completedPartialObservation.complete_record_count -eq 2 -and
                     -not $completedPartialObservation.has_partial_tail -and $completedPartialObservation.events.Count -eq 2
+
+                $failureTrace = New-HarnessFailureTrace $currentIdentity
+                $failureLifecyclePath = Join-Path $harnessRoot 'authenticated-failure-lifecycle.ndjson'
+                [IO.File]::WriteAllText($failureLifecyclePath, $failureTrace.text, [Text.UTF8Encoding]::new($false))
+                $failureObservation = Read-P3LifecycleObservation $failureLifecyclePath $currentIdentity
+                $authenticatedFailureAccepted = $failureObservation.complete_record_count -eq 8 -and
+                    -not $failureObservation.has_partial_tail -and
+                    $failureObservation.application_failure.schema -ceq 'pixel-tart-p3-application-reported-failure/v1' -and
+                    $failureObservation.application_failure.record_index -eq 0 -and
+                    $failureObservation.application_failure.type -ceq 'Harness.LayoutException' -and
+                    $failureObservation.application_failure.message -ceq 'authenticated application failure sentinel' -and
+                    $failureObservation.application_failure.stack_trace -ceq 'app-stack-sentinel'
+
+                $partialFailurePath = Join-Path $harnessRoot 'partial-failure-lifecycle.ndjson'
+                $secondFailureBytes = [Text.UTF8Encoding]::new($false).GetBytes([string]$failureTrace.records[1].line)
+                $secondFailureSplit = [int][Math]::Floor($secondFailureBytes.Length / 2)
+                [IO.File]::WriteAllText($partialFailurePath,
+                    [string]$failureTrace.records[0].line + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $partialFailureWriter = [IO.FileStream]::new($partialFailurePath,[IO.FileMode]::Append,[IO.FileAccess]::Write,[IO.FileShare]::Read)
+                try {
+                    $partialFailureWriter.Write($secondFailureBytes,0,$secondFailureSplit); $partialFailureWriter.Flush($true)
+                    $partialFailureObservation = Read-P3LifecycleObservation $partialFailurePath $currentIdentity
+                    $partialFailureWriter.Write($secondFailureBytes,$secondFailureSplit,$secondFailureBytes.Length - $secondFailureSplit)
+                    $partialFailureNewline = [Text.UTF8Encoding]::new($false).GetBytes([Environment]::NewLine)
+                    $partialFailureWriter.Write($partialFailureNewline,0,$partialFailureNewline.Length); $partialFailureWriter.Flush($true)
+                    $completedFailureObservation = Read-P3LifecycleObservation $partialFailurePath $currentIdentity
+                } finally { $partialFailureWriter.Dispose() }
+                $partialFailureCandidatePreserved = $partialFailureObservation.has_partial_tail -and
+                    $partialFailureObservation.application_failure.type -ceq 'Harness.LayoutException' -and
+                    $null -eq $partialFailureObservation.failure_tail_observation_failure -and
+                    -not $completedFailureObservation.has_partial_tail -and
+                    $completedFailureObservation.application_failure.type -ceq 'Harness.LayoutException'
+
+                $exitAdjacentTailPath = Join-Path $harnessRoot 'exit-adjacent-completed-failure-tail.ndjson'
+                $exitAdjacentSecondLine = [string]$failureTrace.records[1].line
+                $exitAdjacentSplit = [int][Math]::Floor($exitAdjacentSecondLine.Length / 2)
+                [IO.File]::WriteAllText($exitAdjacentTailPath,
+                    [string]$failureTrace.records[0].line + [Environment]::NewLine +
+                    $exitAdjacentSecondLine.Substring(0,$exitAdjacentSplit), [Text.UTF8Encoding]::new($false))
+                $exitAdjacentProcess = Start-HarnessProcess 'exit 0'
+                [void]$exitAdjacentProcess.WaitForExit(5000); $exitAdjacentProcess.WaitForExit()
+                $exitAdjacentClock = [Diagnostics.Stopwatch]::StartNew()
+                $exitAdjacentState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $exitAdjacentTimeline = [Collections.Generic.List[object]]::new()
+                $exitAdjacentStages = [Collections.Generic.List[object]]::new()
+                $exitAdjacentObservationFailures = [Collections.Generic.List[object]]::new()
+                $script:exitAdjacentProbeCount = 0; $exitAdjacentFailure = $null
+                try {
+                    [void](Invoke-P3ObservedStage 'exit-adjacent-final-read' 2 $exitAdjacentClock 2000 `
+                        $exitAdjacentProcess $exitAdjacentState $exitAdjacentTimeline $exitAdjacentStages `
+                        $exitAdjacentObservationFailures {
+                            $script:exitAdjacentProbeCount++
+                            if ($script:exitAdjacentProbeCount -eq 2) {
+                                [IO.File]::AppendAllText($exitAdjacentTailPath,
+                                    $exitAdjacentSecondLine.Substring($exitAdjacentSplit) + [Environment]::NewLine,
+                                    [Text.UTF8Encoding]::new($false))
+                            }
+                            $lifecycle = Read-P3LifecycleObservation $exitAdjacentTailPath $currentIdentity
+                            [pscustomobject]@{
+                                satisfied=$false; application_failure=$lifecycle.application_failure
+                                has_partial_tail=$lifecycle.has_partial_tail
+                                failure_tail_observation_failure=$lifecycle.failure_tail_observation_failure; detail=$null
+                            }
+                        } $true)
+                } catch { $exitAdjacentFailure = $_ }
+                $exitAdjacentFinalReadAvoidedFalsePartial = $null -ne $exitAdjacentFailure -and
+                    $exitAdjacentFailure.Exception.Data['p3_application_reported_failure'] -eq $true -and
+                    $script:exitAdjacentProbeCount -eq 2 -and $exitAdjacentState.observed -and
+                    $exitAdjacentObservationFailures.Count -eq 0 -and
+                    $exitAdjacentStages[0].outcome -ceq 'application-reported-failure'
+                $exitAdjacentProcess.Dispose()
+
+                $badTailRecord = ([string]$failureTrace.records[1].line) | ConvertFrom-Json
+                $badTailRecord.result = 'tampered'
+                $badTailPath = Join-Path $harnessRoot 'bad-tail-hash-lifecycle.ndjson'
+                [IO.File]::WriteAllText($badTailPath,
+                    [string]$failureTrace.records[0].line + [Environment]::NewLine +
+                    ($badTailRecord | ConvertTo-Json -Depth 10 -Compress) + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $badTailObservation = Read-P3LifecycleObservation $badTailPath $currentIdentity
+                $badTailHashIsSecondary = $badTailObservation.application_failure.type -ceq 'Harness.LayoutException' -and
+                    $badTailObservation.failure_tail_observation_failure.stage -ceq 'failure-tail-validation' -and
+                    $badTailObservation.failure_tail_observation_failure.message.Contains('record[1] hash is invalid')
+
+                $wrongTailIdentityRecord = ([string]$failureTrace.records[1].line) | ConvertFrom-Json
+                $wrongTailIdentityRecord.run_id = 'wrong-run'
+                $wrongTailIdentityRecord = ConvertTo-ResealedHarnessLifecycleRecord $wrongTailIdentityRecord
+                $wrongTailIdentityPath = Join-Path $harnessRoot 'wrong-tail-identity-lifecycle.ndjson'
+                [IO.File]::WriteAllText($wrongTailIdentityPath,
+                    [string]$failureTrace.records[0].line + [Environment]::NewLine +
+                    [string]$wrongTailIdentityRecord.line + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $wrongTailIdentityObservation = Read-P3LifecycleObservation $wrongTailIdentityPath $currentIdentity
+                $wrongTailIdentityIsSecondary = $wrongTailIdentityObservation.application_failure.type -ceq 'Harness.LayoutException' -and
+                    $wrongTailIdentityObservation.failure_tail_observation_failure.message.Contains("identity field 'run_id' is invalid")
+
+                $missingTailFieldRecord = ([string]$failureTrace.records[1].line) | ConvertFrom-Json
+                [void]$missingTailFieldRecord.PSObject.Properties.Remove('pending_operation_count')
+                $missingTailFieldRecord = ConvertTo-ResealedHarnessLifecycleRecord $missingTailFieldRecord
+                $missingTailFieldPath = Join-Path $harnessRoot 'missing-tail-field-lifecycle.ndjson'
+                [IO.File]::WriteAllText($missingTailFieldPath,
+                    [string]$failureTrace.records[0].line + [Environment]::NewLine +
+                    [string]$missingTailFieldRecord.line + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $missingTailFieldObservation = Read-P3LifecycleObservation $missingTailFieldPath $currentIdentity
+                $missingTailFieldIsSecondary = $missingTailFieldObservation.application_failure.type -ceq 'Harness.LayoutException' -and
+                    $missingTailFieldObservation.failure_tail_observation_failure.message.Contains("missing required property 'pending_operation_count'")
+
+                $missingMessageRecord = ([string]$failureTrace.records[0].line) | ConvertFrom-Json
+                [void]$missingMessageRecord.exception.PSObject.Properties.Remove('message')
+                $missingMessageRecord = ConvertTo-ResealedHarnessLifecycleRecord $missingMessageRecord
+                $missingMessagePath = Join-Path $harnessRoot 'missing-failure-message-lifecycle.ndjson'
+                [IO.File]::WriteAllText($missingMessagePath, [string]$missingMessageRecord.line + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $missingFailureMessageRejected = Test-HarnessLifecycleRejected $missingMessagePath $currentIdentity "missing required property 'message'"
+
+                $invalidFailureStateRecord = ([string]$failureTrace.records[0].line) | ConvertFrom-Json
+                $invalidFailureStateRecord.pending = $true
+                $invalidFailureStateRecord = ConvertTo-ResealedHarnessLifecycleRecord $invalidFailureStateRecord
+                $invalidFailureStatePath = Join-Path $harnessRoot 'invalid-failure-state-lifecycle.ndjson'
+                [IO.File]::WriteAllText($invalidFailureStatePath, [string]$invalidFailureStateRecord.line + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $invalidFailureStateRejected = Test-HarnessLifecycleRejected $invalidFailureStatePath $currentIdentity `
+                    'application failure result or pending-state is invalid'
+
+                $firstFailureLine = [string]$failureTrace.records[0].line
+                $badFirstHashRecord = $firstFailureLine | ConvertFrom-Json
+                $badFirstHashRecord.result = 'tampered'
+                $badFirstHashPath = Join-Path $harnessRoot 'bad-first-failure-hash.ndjson'
+                [IO.File]::WriteAllText($badFirstHashPath,
+                    ($badFirstHashRecord | ConvertTo-Json -Depth 10 -Compress) + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $badFirstHashRejected = Test-HarnessLifecycleRejected $badFirstHashPath $currentIdentity 'record[0] hash is invalid'
+                $strictFirstFailureFieldTypesRejected =
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.sequence='1' } 'must be a JSON integer number') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.pid=[string]$r.pid } 'must be a JSON integer number') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.hwnd=1 } 'HWND identity is invalid') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.timestamp_utc=123 } 'wall-clock time is invalid') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.stopwatch_elapsed_ms='1' } 'must be a JSON number') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.managed_thread_id='1' } 'must be a JSON integer number') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.pending_operation_count='0' } 'must be a JSON integer number') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.exception.type=123 } 'exception fields are invalid') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.exception.message=$true } 'exception fields are invalid') -and
+                    (Test-ResealedFirstFailureRejected $firstFailureLine $currentIdentity { param($r) $r.exception.stackTrace=123 } 'exception fields are invalid')
+                $passedSummaryTailRejectedAsSecondary =
+                    (Test-ResealedPassedFailureTailIsSecondary $failureTrace $currentIdentity 5) -and
+                    (Test-ResealedPassedFailureTailIsSecondary $failureTrace $currentIdentity 6) -and
+                    (Test-ResealedPassedFailureTailIsSecondary $failureTrace $currentIdentity 7)
                 $historicalLine = (Get-Content -LiteralPath $historicalEvidence.journal -Raw -Encoding UTF8).TrimEnd("`r","`n")
                 $historicalRecord = $historicalLine | ConvertFrom-Json
                 $currentRecord = (Get-Content -LiteralPath $currentEvidence.journal -Raw -Encoding UTF8) | ConvertFrom-Json
@@ -816,6 +1056,117 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 Require-Harness ($normalDiagnostic.outcome -ceq 'process-exited-and-tables-empty' -and $normal.ExitCode -eq 0) 'normal real process path failed'
                 $normal.Dispose()
 
+                $applicationFailureMarker = Join-Path $harnessRoot 'application-failure-natural-exit.marker'
+                $escapedApplicationFailureMarker = $applicationFailureMarker.Replace("'", "''")
+                $applicationFailureProcess = Start-HarnessProcess `
+                    "[Threading.Thread]::Sleep(700); [IO.File]::WriteAllText('$escapedApplicationFailureMarker','natural-exit-completed'); exit 9"
+                $applicationFailureIdentity = New-HarnessIdentity $applicationFailureProcess
+                $applicationFailureOwner = New-HarnessOwner $applicationFailureProcess
+                $applicationFailureTrace = New-HarnessFailureTrace $applicationFailureIdentity
+                $applicationFailurePath = Join-Path $harnessRoot 'application-failure-live-partial.ndjson'
+                $applicationFailureSecondLine = [string]$applicationFailureTrace.records[1].line
+                $applicationFailureSecondSplit = [int][Math]::Floor($applicationFailureSecondLine.Length / 2)
+                [IO.File]::WriteAllText($applicationFailurePath,
+                    [string]$applicationFailureTrace.records[0].line + [Environment]::NewLine +
+                    $applicationFailureSecondLine.Substring(0,$applicationFailureSecondSplit),
+                    [Text.UTF8Encoding]::new($false))
+                $applicationFailureRemainder = $applicationFailureSecondLine.Substring($applicationFailureSecondSplit) +
+                    [Environment]::NewLine +
+                    (@($applicationFailureTrace.records[2..($applicationFailureTrace.records.Count - 1)] |
+                        ForEach-Object { $_.line }) -join [Environment]::NewLine) + [Environment]::NewLine
+                $applicationFailureRemainderBase64 = [Convert]::ToBase64String(
+                    [Text.UTF8Encoding]::new($false).GetBytes($applicationFailureRemainder))
+                $escapedApplicationFailurePath = $applicationFailurePath.Replace("'", "''")
+                $applicationFailureWriter = Start-HarnessProcess `
+                    "[Threading.Thread]::Sleep(200); [IO.File]::AppendAllText('$escapedApplicationFailurePath',[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('$applicationFailureRemainderBase64'))); exit 0"
+                $applicationFailureDiagnostic = $null; $applicationFailure = $null
+                try { [void](Wait-RunnerOwnedProcessExit $applicationFailureProcess $applicationFailureOwner 5 'primary' `
+                    'application-reported-failure' $applicationFailureIdentity.scenario_id $applicationFailurePath `
+                    (Join-Path $harnessRoot 'application-failure-summary.json') `
+                    (Join-Path $harnessRoot 'application-failure-summary.ndjson') $applicationFailureIdentity `
+                    ([ref]$applicationFailureDiagnostic)) } catch { $applicationFailure = $_ }
+                [void]$applicationFailureWriter.WaitForExit(5000); $applicationFailureWriter.WaitForExit(); $applicationFailureWriter.Dispose()
+                $applicationFailureProcess.Refresh()
+                $applicationFailurePropagated = $null -ne $applicationFailure -and $applicationFailureProcess.HasExited -and
+                    [IO.File]::Exists($applicationFailureMarker) -and
+                    $applicationFailure.Exception.Message -ceq 'authenticated application failure sentinel' -and
+                    $applicationFailureDiagnostic.primary_failure.stage -ceq 'application-reported-failure' -and
+                    $applicationFailureDiagnostic.primary_failure.type -ceq 'Harness.LayoutException' -and
+                    $applicationFailureDiagnostic.primary_failure.message -ceq 'authenticated application failure sentinel' -and
+                    $applicationFailureDiagnostic.primary_failure.script_stack_trace -ceq 'app-stack-sentinel' -and
+                    $applicationFailureDiagnostic.primary_failure.fully_qualified_error_id -ceq 'application-reported-failure' -and
+                    $applicationFailureDiagnostic.observation_failures.Count -eq 0 -and
+                    $applicationFailureDiagnostic.cleanup_failures.Count -eq 0 -and
+                    -not $applicationFailureDiagnostic.forced_cleanup.required -and
+                    -not $applicationFailureDiagnostic.forced_cleanup.kill_requested_through_retained_handle -and
+                    @($applicationFailureDiagnostic.execution_wait.stages | Where-Object {
+                        $_.outcome -ceq 'application-reported-failure'
+                    }).Count -eq 1
+                $applicationFailureProcess.Dispose()
+
+                $partialExitMarker = Join-Path $harnessRoot 'partial-failure-natural-exit.marker'
+                $escapedPartialExitMarker = $partialExitMarker.Replace("'", "''")
+                $partialExitProcess = Start-HarnessProcess `
+                    "[Threading.Thread]::Sleep(400); [IO.File]::WriteAllText('$escapedPartialExitMarker','natural-exit-completed'); exit 0"
+                $partialExitIdentity = New-HarnessIdentity $partialExitProcess
+                $partialExitOwner = New-HarnessOwner $partialExitProcess
+                $partialExitTrace = New-HarnessFailureTrace $partialExitIdentity
+                $partialExitPath = Join-Path $harnessRoot 'partial-failure-natural-exit.ndjson'
+                $partialExitSecondLine = [string]$partialExitTrace.records[1].line
+                $partialExitSplit = [int][Math]::Floor($partialExitSecondLine.Length / 2)
+                [IO.File]::WriteAllText($partialExitPath,
+                    [string]$partialExitTrace.records[0].line + [Environment]::NewLine +
+                    $partialExitSecondLine.Substring(0,$partialExitSplit), [Text.UTF8Encoding]::new($false))
+                $partialExitDiagnostic = $null; $partialExitFailure = $null
+                try { [void](Wait-RunnerOwnedProcessExit $partialExitProcess $partialExitOwner 3 'primary' `
+                    'partial-failure-natural-exit' $partialExitIdentity.scenario_id $partialExitPath `
+                    (Join-Path $harnessRoot 'partial-exit-summary.json') `
+                    (Join-Path $harnessRoot 'partial-exit-summary.ndjson') $partialExitIdentity ([ref]$partialExitDiagnostic)) }
+                catch { $partialExitFailure = $_ }
+                $partialExitProcess.Refresh()
+                $partialTailNaturalExitPreservedPrimary = $null -ne $partialExitFailure -and $partialExitProcess.HasExited -and
+                    [IO.File]::Exists($partialExitMarker) -and
+                    $partialExitDiagnostic.primary_failure.stage -ceq 'application-reported-failure' -and
+                    $partialExitDiagnostic.primary_failure.type -ceq 'Harness.LayoutException' -and
+                    @($partialExitDiagnostic.observation_failures | Where-Object {
+                        $_.stage -ceq 'failure-tail-partial-after-process-exit'
+                    }).Count -eq 1 -and
+                    -not $partialExitDiagnostic.forced_cleanup.required -and
+                    -not $partialExitDiagnostic.forced_cleanup.kill_requested_through_retained_handle
+                Require-Harness $partialTailNaturalExitPreservedPrimary `
+                    "partial-tail natural-exit contract failed: failure=$($partialExitFailure.Exception.Message), diagnostic=$($partialExitDiagnostic | ConvertTo-Json -Depth 20 -Compress)"
+                $partialExitProcess.Dispose()
+
+                $partialTimeoutProcess = Start-HarnessProcess 'Start-Sleep -Seconds 30; exit 0'
+                $partialTimeoutIdentity = New-HarnessIdentity $partialTimeoutProcess
+                $partialTimeoutOwner = New-HarnessOwner $partialTimeoutProcess
+                $partialTimeoutTrace = New-HarnessFailureTrace $partialTimeoutIdentity
+                $partialTimeoutPath = Join-Path $harnessRoot 'partial-failure-timeout.ndjson'
+                $partialTimeoutSecondLine = [string]$partialTimeoutTrace.records[1].line
+                $partialTimeoutSplit = [int][Math]::Floor($partialTimeoutSecondLine.Length / 2)
+                [IO.File]::WriteAllText($partialTimeoutPath,
+                    [string]$partialTimeoutTrace.records[0].line + [Environment]::NewLine +
+                    $partialTimeoutSecondLine.Substring(0,$partialTimeoutSplit), [Text.UTF8Encoding]::new($false))
+                $partialTimeoutDiagnostic = $null; $partialTimeoutFailure = $null
+                try { [void](Wait-RunnerOwnedProcessExit $partialTimeoutProcess $partialTimeoutOwner 1 'primary' `
+                    'partial-failure-timeout' $partialTimeoutIdentity.scenario_id $partialTimeoutPath `
+                    (Join-Path $harnessRoot 'partial-timeout-summary.json') `
+                    (Join-Path $harnessRoot 'partial-timeout-summary.ndjson') $partialTimeoutIdentity ([ref]$partialTimeoutDiagnostic)) }
+                catch { $partialTimeoutFailure = $_ }
+                $partialTimeoutProcess.Refresh()
+                $partialTailTimeoutPreservedPrimary = $null -ne $partialTimeoutFailure -and
+                    $partialTimeoutDiagnostic.primary_failure.stage -ceq 'application-reported-failure' -and
+                    $partialTimeoutDiagnostic.primary_failure.type -ceq 'Harness.LayoutException' -and
+                    @($partialTimeoutDiagnostic.observation_failures | Where-Object {
+                        $_.stage -ceq 'failure-tail-partial-at-deadline'
+                    }).Count -eq 1
+                Require-Harness $partialTailTimeoutPreservedPrimary `
+                    "partial-tail deadline contract failed: failure=$($partialTimeoutFailure.Exception.Message), diagnostic=$($partialTimeoutDiagnostic | ConvertTo-Json -Depth 20 -Compress)"
+                if (-not $partialTimeoutProcess.HasExited) {
+                    try { $partialTimeoutProcess.Kill(); [void]$partialTimeoutProcess.WaitForExit(5000); $partialTimeoutProcess.WaitForExit() } catch { }
+                }
+                $partialTimeoutProcess.Dispose()
+
                 $nonzero = Start-HarnessProcess 'Start-Sleep -Milliseconds 250; exit 7'
                 $nonzeroIdentity = New-HarnessIdentity $nonzero; $nonzeroOwner = New-HarnessOwner $nonzero
                 $nonzeroEvidence = Write-HarnessEvidence (Join-Path $harnessRoot 'nonzero') $nonzeroIdentity
@@ -930,6 +1281,20 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     raw_null_rejected=$rawNullRejected; id_to_pid=([int]$idSnapshot.Items[0].Pid -eq 4242)
                     raw_null_normalized=$rawNullNormalized; multi_session_journal_bound=$multiSessionJournalBound
                     partial_tail_observation_safe=$partialTailObservationSafe
+                    authenticated_failure_accepted=$authenticatedFailureAccepted
+                    partial_failure_candidate_preserved=$partialFailureCandidatePreserved
+                    exit_adjacent_final_read_avoided_false_partial=$exitAdjacentFinalReadAvoidedFalsePartial
+                    bad_failure_tail_hash_is_secondary=$badTailHashIsSecondary
+                    wrong_failure_tail_identity_is_secondary=$wrongTailIdentityIsSecondary
+                    missing_failure_tail_field_is_secondary=$missingTailFieldIsSecondary
+                    missing_failure_message_rejected=$missingFailureMessageRejected
+                    invalid_failure_state_rejected=$invalidFailureStateRejected
+                    bad_first_failure_hash_rejected=$badFirstHashRejected
+                    strict_first_failure_field_types_rejected=$strictFirstFailureFieldTypesRejected
+                    passed_summary_tail_rejected_as_secondary=$passedSummaryTailRejectedAsSecondary
+                    application_failure_propagated=$applicationFailurePropagated
+                    partial_tail_natural_exit_preserved_primary=$partialTailNaturalExitPreservedPrimary
+                    partial_tail_timeout_preserved_primary=$partialTailTimeoutPreservedPrimary
                     transient_contention_recovered=$transientContentionRecovered
                     transient_contention_precedes_exit_check=$transientContentionPrecedesExitCheck
                     persistent_contention_timed_out=$persistentContentionTimedOut
@@ -954,7 +1319,14 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             Assert.AreEqual("5.1", root.GetProperty("powershell_major_minor").GetString());
             foreach (var property in new[]
                      {
-                          "raw_null_rejected", "raw_null_normalized", "multi_session_journal_bound", "partial_tail_observation_safe", "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
+                          "raw_null_rejected", "raw_null_normalized", "multi_session_journal_bound", "partial_tail_observation_safe",
+                          "authenticated_failure_accepted", "partial_failure_candidate_preserved", "bad_failure_tail_hash_is_secondary",
+                          "exit_adjacent_final_read_avoided_false_partial", "passed_summary_tail_rejected_as_secondary",
+                          "wrong_failure_tail_identity_is_secondary", "missing_failure_tail_field_is_secondary",
+                          "missing_failure_message_rejected", "invalid_failure_state_rejected", "bad_first_failure_hash_rejected",
+                          "strict_first_failure_field_types_rejected", "application_failure_propagated",
+                          "partial_tail_natural_exit_preserved_primary", "partial_tail_timeout_preserved_primary",
+                          "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
                           "transient_contention_recovered", "transient_contention_precedes_exit_check", "persistent_contention_timed_out", "nonsharing_io_failed_closed",
                           "wrong_hash_rejected", "exited_identity_rejected", "normal_process_passed",
                           "nonzero_process_rejected", "premature_exit_marked_failed", "natural_exit_skipped_kill", "owner_check_exit_skipped_kill", "timeout_killed", "primary_preserved_with_cleanup_failure"
@@ -977,6 +1349,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             "function Get-RequiredJsonIntegerValue", "function Assert-P3LifecyclePendingOperationCount",
             "function Get-P3TransientFileContention", "transient_file_contention_count",
             "last_transient_file_contention",
+            "function New-P3ApplicationReportedFailureException", "pixel-tart-p3-application-reported-failure/v1",
+            "application-reported-failure-exit-wait", "p3_application_exception_stack_trace",
             "'observed-nonnegative'", "pending_operation_count violates rule",
             "function New-RunnerProcessOwnerToken", "function Test-RunnerOwnedProcessIdentity",
             "function Wait-RunnerOwnedProcessExit", "function Wait-DevPreviewProcessTableConvergence",

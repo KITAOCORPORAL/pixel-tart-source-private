@@ -375,6 +375,79 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
+    public async Task InactiveTemporaryVisualExitDoesNotConsumeTheNarrowFourViewViewport()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3FourViewLayout", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(async () =>
+            {
+                var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                    Path.Combine(root, "four-view-layout.db"), new TaskOperationBridge(), []);
+                var host = new Border { Child = page, ClipToBounds = true };
+                try
+                {
+                    await page.ViewModel.InitializeAsync();
+                    Assert.IsFalse(page.ViewModel.IsTemporaryVisualMode);
+
+                    for (var index = 0; index < 5; index++)
+                        page.ViewModel.P3QuerySuggestions.Add(new(
+                            "file", $"P3_0002{index} 人物素材 查询样本 {index + 1}", $"P3_0002{index}", "file"));
+                    var suggestionsSetter = typeof(AssetLibraryViewModel)
+                        .GetProperty(nameof(AssetLibraryViewModel.P3SuggestionsVisible))!
+                        .GetSetMethod(nonPublic: true)!;
+                    suggestionsSetter.Invoke(page.ViewModel, [true]);
+                    Assert.IsTrue(page.ViewModel.P3SuggestionsVisible);
+
+                    var viewport = new Size(1179.33d, 660.67d);
+                    foreach (var mode in Enum.GetValues<AssetLibraryViewMode>())
+                    {
+                        if (page.ViewModel.ViewMode != mode)
+                        {
+                            await WaitForAsync(() => page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                            page.ViewModel.SwitchViewCommand.Execute(mode.ToString());
+                            await WaitForAsync(() => page.ViewModel.ViewMode == mode &&
+                                                     page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                        }
+                        host.Width = viewport.Width;
+                        host.Height = viewport.Height;
+                        host.Measure(viewport);
+                        host.Arrange(new Rect(new Point(), viewport));
+                        host.UpdateLayout();
+
+                        var suggestions = FindVisualByAutomationId(page, "P3QuerySuggestionsPanel");
+                        Assert.AreEqual(Visibility.Visible, suggestions.Visibility, mode.ToString());
+                        Assert.IsGreaterThan(100d, suggestions.ActualHeight,
+                            $"The {mode} regression must preserve the tall live suggestion state from the failed formal run.");
+
+                        var clearVisualResults = FindVisualByAutomationId(page, "ClearVisualResults");
+                        Assert.AreEqual(Visibility.Collapsed, clearVisualResults.Visibility,
+                            $"The inactive temporary-result action must not consume layout height in {mode} view.");
+                        Assert.AreEqual(0d, clearVisualResults.ActualHeight, 0.01d, mode.ToString());
+
+                        foreach (var button in EnumerateVisuals<Button>(page)
+                                     .Where(item => item.IsVisible && item.ActualWidth > 0 && item.ActualHeight > 0 &&
+                                                    !IsInsideScrollViewer(item)))
+                        {
+                            var bounds = button.TransformToAncestor(page)
+                                .TransformBounds(new Rect(new Point(), button.RenderSize));
+                            var identity = AutomationProperties.GetAutomationId(button);
+                            Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity}/{mode}");
+                            Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity}/{mode}");
+                        }
+                    }
+                }
+                finally
+                {
+                    await page.DisposeAsync();
+                }
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
     public async Task ExpandedTagManagerKeepsBrowserWorkspaceInsideSmallViewport()
     {
         var manager = Load("AssetTagManagerView.xaml");
