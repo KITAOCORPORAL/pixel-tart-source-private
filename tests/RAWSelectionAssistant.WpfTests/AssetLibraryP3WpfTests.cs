@@ -448,7 +448,7 @@ public sealed class AssetLibraryP3WpfTests
     }
 
     [TestMethod]
-    public async Task BrowserToolbarStaysInsideTheExactFormal150PercentViewport()
+    public async Task BrowserToolbarDoesNotConsumeVerticalSpaceInExactFormalViewports()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Formal150Layout", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -470,47 +470,63 @@ public sealed class AssetLibraryP3WpfTests
                         .GetSetMethod(nonPublic: true)!
                         .Invoke(page.ViewModel, [true]);
 
-                    var viewport = new Size(1093.33d, 612.67d);
-                    foreach (var mode in Enum.GetValues<AssetLibraryViewMode>())
+                    var viewports = new[]
                     {
-                        if (page.ViewModel.ViewMode != mode)
+                        (Name: "1366x768/100%", Size: new Size(1179.33d, 660.67d)),
+                        (Name: "1920x1080/150%", Size: new Size(1093.33d, 612.67d)),
+                    };
+                    foreach (var viewport in viewports)
+                    {
+                        foreach (var mode in Enum.GetValues<AssetLibraryViewMode>())
                         {
-                            await WaitForAsync(() => page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
-                            page.ViewModel.SwitchViewCommand.Execute(mode.ToString());
-                            await WaitForAsync(() => page.ViewModel.ViewMode == mode &&
-                                                     page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
-                        }
+                            if (page.ViewModel.ViewMode != mode)
+                            {
+                                await WaitForAsync(() => page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                                page.ViewModel.SwitchViewCommand.Execute(mode.ToString());
+                                await WaitForAsync(() => page.ViewModel.ViewMode == mode &&
+                                                         page.ViewModel.SwitchViewCommand.CanExecute(mode.ToString()));
+                            }
 
-                        host.Width = viewport.Width;
-                        host.Height = viewport.Height;
-                        host.Measure(viewport);
-                        host.Arrange(new Rect(new Point(), viewport));
-                        host.UpdateLayout();
+                            host.Width = viewport.Size.Width;
+                            host.Height = viewport.Size.Height;
+                            host.Measure(viewport.Size);
+                            host.Arrange(new Rect(new Point(), viewport.Size));
+                            host.UpdateLayout();
 
-                        var toolbar = Assert.IsInstanceOfType<ScrollViewer>(
-                            FindVisualByAutomationId(page, "AssetBrowserToolbar"));
-                        Assert.AreEqual(ScrollBarVisibility.Auto, toolbar.HorizontalScrollBarVisibility, mode.ToString());
-                        Assert.AreEqual(ScrollBarVisibility.Disabled, toolbar.VerticalScrollBarVisibility, mode.ToString());
-                        Assert.IsGreaterThan(0d, toolbar.ScrollableWidth,
-                            $"The exact formal viewport must exercise horizontal toolbar overflow in {mode} view.");
-                        var toolbarBounds = toolbar.TransformToAncestor(page)
-                            .TransformBounds(new Rect(new Point(), toolbar.RenderSize));
-                        Assert.IsGreaterThanOrEqualTo(-0.01d, toolbarBounds.Top, mode.ToString());
-                        Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, toolbarBounds.Bottom, mode.ToString());
+                            var context = $"{viewport.Name}/{mode}";
+                            var toolbar = Assert.IsInstanceOfType<ScrollViewer>(
+                                FindVisualByAutomationId(page, "AssetBrowserToolbar"));
+                            Assert.AreEqual(ScrollBarVisibility.Hidden, toolbar.HorizontalScrollBarVisibility, context);
+                            Assert.AreEqual(ScrollBarVisibility.Disabled, toolbar.VerticalScrollBarVisibility, context);
+                            Assert.IsGreaterThan(0d, toolbar.ScrollableWidth,
+                                $"The exact formal viewport must exercise horizontal toolbar overflow in {context}.");
+                            var toolbarBounds = toolbar.TransformToAncestor(page)
+                                .TransformBounds(new Rect(new Point(), toolbar.RenderSize));
+                            Assert.IsGreaterThanOrEqualTo(-0.01d, toolbarBounds.Top, context);
+                            Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, toolbarBounds.Bottom, context);
 
-                        var redo = FindVisualByAutomationId(page, "AssetBrowserRedo");
-                        Assert.IsTrue(IsInsideScrollViewer(redo),
-                            "Low-frequency browser actions must stay reachable through the bounded toolbar viewport.");
+                            var redo = FindVisualByAutomationId(page, "AssetBrowserRedo");
+                            Assert.IsTrue(IsInsideScrollViewer(redo),
+                                "Low-frequency browser actions must stay reachable through the bounded toolbar viewport.");
+                            toolbar.ScrollToRightEnd();
+                            host.UpdateLayout();
+                            var redoBounds = redo.TransformToAncestor(page)
+                                .TransformBounds(new Rect(new Point(), redo.RenderSize));
+                            Assert.IsGreaterThanOrEqualTo(toolbarBounds.Left - 0.01d, redoBounds.Left, context);
+                            Assert.IsLessThanOrEqualTo(toolbarBounds.Right + 0.01d, redoBounds.Right, context);
+                            toolbar.ScrollToLeftEnd();
+                            host.UpdateLayout();
 
-                        foreach (var button in EnumerateVisuals<Button>(page)
-                                     .Where(item => item.IsVisible && item.ActualWidth > 0 && item.ActualHeight > 0 &&
-                                                    !IsInsideScrollViewer(item)))
-                        {
-                            var bounds = button.TransformToAncestor(page)
-                                .TransformBounds(new Rect(new Point(), button.RenderSize));
-                            var identity = AutomationProperties.GetAutomationId(button);
-                            Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity}/{mode}");
-                            Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity}/{mode}");
+                            foreach (var button in EnumerateVisuals<Button>(page)
+                                         .Where(item => item.IsVisible && item.ActualWidth > 0 && item.ActualHeight > 0 &&
+                                                        !IsInsideScrollViewer(item)))
+                            {
+                                var bounds = button.TransformToAncestor(page)
+                                    .TransformBounds(new Rect(new Point(), button.RenderSize));
+                                var identity = AutomationProperties.GetAutomationId(button);
+                                Assert.IsGreaterThanOrEqualTo(-0.01d, bounds.Top, $"{identity}/{context}");
+                                Assert.IsLessThanOrEqualTo(page.ActualHeight + 0.01d, bounds.Bottom, $"{identity}/{context}");
+                            }
                         }
                     }
                 }

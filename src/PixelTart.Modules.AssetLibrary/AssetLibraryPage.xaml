@@ -746,11 +746,13 @@
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />
                         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
-                                      HorizontalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Hidden"
                                       VerticalScrollBarVisibility="Disabled"
                                       CanContentScroll="False"
+                                      PanningMode="HorizontalOnly"
                                       AutomationProperties.AutomationId="AssetBrowserToolbar"
-                                      AutomationProperties.Name="素材浏览工具栏">
+                                      AutomationProperties.Name="素材浏览工具栏"
+                                      AutomationProperties.HelpText="使用键盘 Tab 键切换到右侧按钮，或水平滚动查看">
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="网格" Command="{Binding SwitchViewCommand}" CommandParameter="Grid" Style="{StaticResource AssetLibraryChipButton}"
                                         AutomationProperties.AutomationId="AssetViewGrid" AutomationProperties.Name="切换到网格视图" />
