@@ -901,10 +901,14 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             },
         };
         var summaryWithoutRecordHash = JsonSerializer.SerializeToElement(summary, LineJsonOptions);
-        var recordHash = HashBytes(Encoding.UTF8.GetBytes(summaryWithoutRecordHash.GetRawText()));
         var summaryPayload = JsonSerializer.Deserialize<Dictionary<string, object?>>(
             summaryWithoutRecordHash.GetRawText(), LineJsonOptions)
             ?? throw new InvalidOperationException("The P3 phase summary could not be materialized.");
+        // Hash the exact materialized representation that is embedded in the journal. Typed
+        // DateTimeOffset values can serialize '+' directly, while their JsonElement form uses
+        // '\u002B'; hashing before materialization would therefore create a false terminal hash.
+        var phaseSummaryCanonical = JsonSerializer.Serialize(summaryPayload, LineJsonOptions);
+        var recordHash = HashBytes(Encoding.UTF8.GetBytes(phaseSummaryCanonical));
         summaryPayload["record_sha256"] = recordHash;
         var summaryElement = JsonSerializer.SerializeToElement(summaryPayload, LineJsonOptions);
         var journal = new Dictionary<string, object?>(StringComparer.Ordinal)
@@ -934,8 +938,8 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             ["previous_summary_hash"] = _previousSummaryHash,
             ["previous_record_sha256"] = _previousSummaryHash,
         };
-        var summaryCanonical = JsonSerializer.Serialize(journal, LineJsonOptions);
-        var summaryHash = HashBytes(Encoding.UTF8.GetBytes(summaryCanonical));
+        var summaryJournalCanonical = JsonSerializer.Serialize(journal, LineJsonOptions);
+        var summaryHash = HashBytes(Encoding.UTF8.GetBytes(summaryJournalCanonical));
         journal["summary_hash"] = summaryHash;
         journal["record_sha256"] = summaryHash;
         AppendLineDurably(_summaryJournalPath, JsonSerializer.Serialize(journal, LineJsonOptions));

@@ -114,6 +114,61 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
         Assert.AreEqual(-7, RAWSelectionAssistant.App.ResolveFailedP3ExitCode(-7));
         Assert.AreEqual(9, RAWSelectionAssistant.App.ResolveFailedP3ExitCode(9));
     }
+
+    [TestMethod]
+    public void P3PhaseSummaryHashesTheExactMaterializedJournalRepresentation()
+    {
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        var typedSummary = new
+        {
+            started_at = new DateTimeOffset(2026, 9, 4, 14, 0, 0, TimeSpan.FromHours(8)),
+            status = "completed",
+        };
+        var typedCanonical = JsonSerializer.Serialize(typedSummary, options);
+        StringAssert.Contains(typedCanonical, "+08:00");
+        var prematureTypedHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(typedCanonical))).ToLowerInvariant();
+        var materialized = JsonSerializer.Deserialize<Dictionary<string, object?>>(
+            typedCanonical, options)!;
+        var canonical = JsonSerializer.Serialize(materialized, options);
+        var claimed = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(canonical))).ToLowerInvariant();
+        materialized["record_sha256"] = claimed;
+        var summaryElement = JsonSerializer.SerializeToElement(materialized, options);
+        var journal = new Dictionary<string, object?>
+        {
+            ["schema"] = "pixel-tart-p3-automated-summary/v1",
+            ["summary"] = summaryElement,
+            ["previous_summary_hash"] = new string('0', 64),
+        };
+        var journalLine = JsonSerializer.Serialize(journal, options);
+        var summaryMarker = "\"summary\":";
+        var terminalMarker = $",\"record_sha256\":\"{claimed}\"}},\"previous_summary_hash\"";
+        var summaryStart = journalLine.IndexOf(summaryMarker, StringComparison.Ordinal) + summaryMarker.Length;
+        var terminalStart = journalLine.IndexOf(terminalMarker, summaryStart, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(summaryMarker.Length, summaryStart);
+        Assert.IsGreaterThan(summaryStart, terminalStart);
+        StringAssert.Contains(journalLine, "\\u002B08:00");
+        var recoveredCanonical = journalLine[summaryStart..terminalStart] + "}";
+        var recoveredHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(recoveredCanonical))).ToLowerInvariant();
+        Assert.AreEqual(claimed, recoveredHash);
+        Assert.AreNotEqual(prematureTypedHash, recoveredHash,
+            "Hashing the typed DateTimeOffset form would recreate the retained Run's false hash.");
+
+        var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs");
+        ContainsAll(controller,
+            "var phaseSummaryCanonical = JsonSerializer.Serialize(summaryPayload, LineJsonOptions);",
+            "HashBytes(Encoding.UTF8.GetBytes(phaseSummaryCanonical))",
+            "var summaryJournalCanonical = JsonSerializer.Serialize(journal, LineJsonOptions);");
+        AssertOrdered(controller,
+        [
+            "JsonSerializer.Deserialize<Dictionary<string, object?>>(",
+            "var phaseSummaryCanonical = JsonSerializer.Serialize(summaryPayload, LineJsonOptions);",
+            "summaryPayload[\"record_sha256\"] = recordHash;",
+            "var summaryElement = JsonSerializer.SerializeToElement(summaryPayload, LineJsonOptions);",
+        ]);
+    }
 #endif
 
     [TestMethod]
