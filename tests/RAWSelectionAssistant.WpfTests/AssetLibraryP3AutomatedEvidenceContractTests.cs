@@ -635,6 +635,25 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 }
                 $historicalEvidence = Write-HarnessEvidence (Join-Path $harnessRoot 'journal-history') $historicalIdentity
                 $currentEvidence = Write-HarnessEvidence (Join-Path $harnessRoot 'journal-current') $currentIdentity
+                $lifecycleLines = [IO.File]::ReadAllLines($currentEvidence.lifecycle, [Text.UTF8Encoding]::new($false))
+                $partialLifecyclePath = Join-Path $harnessRoot 'live-partial-lifecycle.ndjson'
+                [IO.File]::WriteAllText($partialLifecyclePath, $lifecycleLines[0] + [Environment]::NewLine,
+                    [Text.UTF8Encoding]::new($false))
+                $secondLifecycleBytes = [Text.UTF8Encoding]::new($false).GetBytes($lifecycleLines[1])
+                $secondLifecycleSplit = [int][Math]::Floor($secondLifecycleBytes.Length / 2)
+                $partialWriter = [IO.FileStream]::new($partialLifecyclePath,[IO.FileMode]::Append,[IO.FileAccess]::Write,[IO.FileShare]::Read)
+                try {
+                    $partialWriter.Write($secondLifecycleBytes,0,$secondLifecycleSplit); $partialWriter.Flush($true)
+                    $partialObservation = Read-P3LifecycleObservation $partialLifecyclePath $currentIdentity
+                    $partialWriter.Write($secondLifecycleBytes,$secondLifecycleSplit,$secondLifecycleBytes.Length - $secondLifecycleSplit)
+                    $newlineBytes = [Text.UTF8Encoding]::new($false).GetBytes([Environment]::NewLine)
+                    $partialWriter.Write($newlineBytes,0,$newlineBytes.Length); $partialWriter.Flush($true)
+                    $completedPartialObservation = Read-P3LifecycleObservation $partialLifecyclePath $currentIdentity
+                } finally { $partialWriter.Dispose() }
+                $partialTailObservationSafe = $partialObservation.complete_record_count -eq 1 -and
+                    $partialObservation.has_partial_tail -and $partialObservation.events.Count -eq 1 -and
+                    $completedPartialObservation.complete_record_count -eq 2 -and
+                    -not $completedPartialObservation.has_partial_tail -and $completedPartialObservation.events.Count -eq 2
                 $historicalLine = (Get-Content -LiteralPath $historicalEvidence.journal -Raw -Encoding UTF8).TrimEnd("`r","`n")
                 $historicalRecord = $historicalLine | ConvertFrom-Json
                 $currentRecord = (Get-Content -LiteralPath $currentEvidence.journal -Raw -Encoding UTF8) | ConvertFrom-Json
@@ -653,6 +672,124 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 $multiSessionBinding = Read-P3SummaryJournalBindingObservation $sharedJournalPath $currentIdentity `
                     $currentSummary ([string]$currentSummary.record_sha256)
                 $multiSessionJournalBound = $multiSessionBinding.matched -and $multiSessionBinding.complete_record_count -eq 2
+
+                function Start-HarnessFileLocker(
+                    [string]$Path,
+                    [string]$Marker,
+                    [int]$HoldMilliseconds,
+                    [int]$AfterReleaseMilliseconds) {
+                    $escapedPath = $Path.Replace("'", "''")
+                    $escapedMarker = $Marker.Replace("'", "''")
+                    $body = @"
+                `$stream = [IO.FileStream]::new('$escapedPath',[IO.FileMode]::Open,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
+                try {
+                    [IO.File]::WriteAllText('$escapedMarker','locked',[Text.UTF8Encoding]::new(`$false))
+                    [Threading.Thread]::Sleep($HoldMilliseconds)
+                } finally { `$stream.Dispose() }
+                [Threading.Thread]::Sleep($AfterReleaseMilliseconds)
+                exit 0
+                "@
+                    $process = Start-HarnessProcess $body
+                    $deadline = [DateTimeOffset]::UtcNow.AddSeconds(5)
+                    while (-not [IO.File]::Exists($Marker) -and [DateTimeOffset]::UtcNow -lt $deadline) {
+                        if ($process.HasExited) { throw 'file-lock harness exited before acquiring its lock' }
+                        [Threading.Thread]::Sleep(10)
+                    }
+                    Require-Harness ([IO.File]::Exists($Marker)) 'file-lock harness did not acquire its lock'
+                    return $process
+                }
+
+                $contentionPath = Join-Path $harnessRoot 'transient-contention.ndjson'
+                $contentionMarker = Join-Path $harnessRoot 'transient-contention.locked'
+                [IO.File]::WriteAllText($contentionPath, 'ready', [Text.UTF8Encoding]::new($false))
+                $contentionProcess = Start-HarnessFileLocker $contentionPath $contentionMarker 350 300
+                $contentionClock = [Diagnostics.Stopwatch]::StartNew()
+                $contentionState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $contentionTimeline = [Collections.Generic.List[object]]::new()
+                $contentionStages = [Collections.Generic.List[object]]::new()
+                $contentionObservationFailures = [Collections.Generic.List[object]]::new()
+                $contentionDetail = Invoke-P3ObservedStage 'transient-contention' 3 $contentionClock 3000 `
+                    $contentionProcess $contentionState $contentionTimeline $contentionStages $contentionObservationFailures {
+                        $value = Read-SharedUtf8Text $contentionPath
+                        [pscustomobject]@{ satisfied=$value -ceq 'ready'; detail=$value }
+                    } $false
+                [void]$contentionProcess.WaitForExit(5000); $contentionProcess.WaitForExit(); $contentionProcess.Dispose()
+                $contentionStage = $contentionStages[0]
+                $transientContentionRecovered = $contentionDetail -ceq 'ready' -and
+                    $contentionStage.outcome -ceq 'observed' -and
+                    [int]$contentionStage.transient_file_contention_count -gt 0 -and
+                    [int]$contentionStage.last_transient_file_contention.win32_error_code -in @(32,33) -and
+                    $contentionObservationFailures.Count -eq 0 -and
+                    $contentionTimeline.Count -eq 0
+
+                $exitedContentionProcess = Start-HarnessProcess 'exit 0'
+                [void]$exitedContentionProcess.WaitForExit(5000); $exitedContentionProcess.WaitForExit()
+                $exitedContentionClock = [Diagnostics.Stopwatch]::StartNew()
+                $exitedContentionState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $exitedContentionTimeline = [Collections.Generic.List[object]]::new()
+                $exitedContentionStages = [Collections.Generic.List[object]]::new()
+                $exitedContentionFailures = [Collections.Generic.List[object]]::new()
+                $script:exitedContentionProbeCount = 0
+                $exitedContentionDetail = Invoke-P3ObservedStage 'exited-transient-contention' 2 `
+                    $exitedContentionClock 2000 $exitedContentionProcess $exitedContentionState `
+                    $exitedContentionTimeline $exitedContentionStages $exitedContentionFailures {
+                        $script:exitedContentionProbeCount++
+                        if ($script:exitedContentionProbeCount -eq 1) {
+                            throw [IO.IOException]::new('lock-violation-sentinel', -2147024863)
+                        }
+                        [pscustomobject]@{ satisfied=$true; detail='recovered-after-exit' }
+                    } $true
+                $exitedContentionProcess.Dispose()
+                $transientContentionPrecedesExitCheck = $exitedContentionDetail -ceq 'recovered-after-exit' -and
+                    $script:exitedContentionProbeCount -eq 2 -and
+                    [int]$exitedContentionStages[0].transient_file_contention_count -eq 1 -and
+                    $exitedContentionFailures.Count -eq 0 -and $exitedContentionTimeline.Count -eq 0
+
+                $persistentPath = Join-Path $harnessRoot 'persistent-contention.ndjson'
+                $persistentMarker = Join-Path $harnessRoot 'persistent-contention.locked'
+                [IO.File]::WriteAllText($persistentPath, 'ready', [Text.UTF8Encoding]::new($false))
+                $persistentProcess = Start-HarnessFileLocker $persistentPath $persistentMarker 5000 0
+                $persistentClock = [Diagnostics.Stopwatch]::StartNew()
+                $persistentState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $persistentTimeline = [Collections.Generic.List[object]]::new()
+                $persistentStages = [Collections.Generic.List[object]]::new()
+                $persistentObservationFailures = [Collections.Generic.List[object]]::new()
+                $persistentFailure = $null
+                try {
+                    [void](Invoke-P3ObservedStage 'persistent-contention' 1 $persistentClock 1000 `
+                        $persistentProcess $persistentState $persistentTimeline $persistentStages $persistentObservationFailures {
+                            [pscustomobject]@{ satisfied=(Read-SharedUtf8Text $persistentPath) -ceq 'ready'; detail=$null }
+                        } $false)
+                } catch { $persistentFailure = $_ }
+                try { $persistentProcess.Kill(); [void]$persistentProcess.WaitForExit(5000); $persistentProcess.WaitForExit() } catch { }
+                $persistentProcess.Dispose()
+                $persistentContentionTimedOut = $null -ne $persistentFailure -and
+                    $persistentFailure.Exception.Message.Contains('timed out') -and
+                    [int]$persistentStages[0].transient_file_contention_count -gt 0 -and
+                    [int64]$persistentStages[0].elapsed_milliseconds -le 1250 -and
+                    $persistentObservationFailures.Count -eq 0
+
+                $nonSharingProcess = Start-HarnessProcess 'Start-Sleep -Seconds 5; exit 0'
+                $nonSharingClock = [Diagnostics.Stopwatch]::StartNew()
+                $nonSharingState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $nonSharingTimeline = [Collections.Generic.List[object]]::new()
+                $nonSharingStages = [Collections.Generic.List[object]]::new()
+                $nonSharingObservationFailures = [Collections.Generic.List[object]]::new()
+                $script:nonSharingProbeCount = 0; $nonSharingFailure = $null
+                try {
+                    [void](Invoke-P3ObservedStage 'non-sharing-io' 2 $nonSharingClock 2000 `
+                        $nonSharingProcess $nonSharingState $nonSharingTimeline $nonSharingStages $nonSharingObservationFailures {
+                            $script:nonSharingProbeCount++
+                            throw [IO.IOException]::new('access-denied-sentinel', -2147024891)
+                        } $false)
+                } catch { $nonSharingFailure = $_ }
+                try { $nonSharingProcess.Kill(); [void]$nonSharingProcess.WaitForExit(5000); $nonSharingProcess.WaitForExit() } catch { }
+                $nonSharingProcess.Dispose()
+                $nonSharingIoFailedClosed = $null -ne $nonSharingFailure -and
+                    $nonSharingFailure.Exception.Message.Contains('access-denied-sentinel') -and
+                    $script:nonSharingProbeCount -eq 1 -and
+                    [int]$nonSharingStages[0].transient_file_contention_count -eq 0 -and
+                    $nonSharingObservationFailures.Count -eq 1
 
                 $identityProbe = Start-HarnessProcess 'Start-Sleep -Seconds 10; exit 0'
                 $actualHash = Get-FileSha256 $powershellPath
@@ -701,6 +838,65 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     @($prematureTimeline | Where-Object { $_.event -ceq 'normal-exit' }).Count -eq 0
                 $premature.Dispose()
 
+                $originalExitStateUpdater = ${function:Update-P3RetainedProcessExitState}
+                $originalOwnerIdentityTest = ${function:Test-RunnerOwnedProcessIdentity}
+                function Update-P3RetainedProcessExitState {
+                    param($Process,$State,$Timeline,[string]$Outcome='normal')
+                    if ($Outcome -ceq 'pre-forced-cleanup') {
+                        $State.observed = $true; $State.exit_code = 0
+                        $State.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+                        Add-ProcessExitTimelineEvent $Timeline 'process-exit-observed' 'pre-forced-cleanup' $null
+                    }
+                }
+                function Test-RunnerOwnedProcessIdentity { param($Process,$OwnerToken); throw 'owner-check-must-be-skipped' }
+                $cleanupRace = Start-HarnessProcess 'Start-Sleep -Seconds 5; exit 0'
+                $cleanupRaceIdentity = New-HarnessIdentity $cleanupRace; $cleanupRaceOwner = New-HarnessOwner $cleanupRace
+                $cleanupRaceDiagnostic = $null; $cleanupRaceFailure = $null
+                try { [void](Wait-RunnerOwnedProcessExit $cleanupRace $cleanupRaceOwner 1 'primary' 'cleanup-race' $cleanupRaceIdentity.scenario_id `
+                    (Join-Path $harnessRoot 'cleanup-race-lifecycle.ndjson') (Join-Path $harnessRoot 'cleanup-race-summary.json') `
+                    (Join-Path $harnessRoot 'cleanup-race-summary.ndjson') $cleanupRaceIdentity ([ref]$cleanupRaceDiagnostic)) }
+                catch { $cleanupRaceFailure = $_ }
+                $naturalExitSkippedKill = $null -ne $cleanupRaceFailure -and
+                    -not $cleanupRaceDiagnostic.forced_cleanup.required -and
+                    $cleanupRaceDiagnostic.forced_cleanup.started -and
+                    $cleanupRaceDiagnostic.forced_cleanup.process_exit_observed -and
+                    -not $cleanupRaceDiagnostic.forced_cleanup.kill_requested_through_retained_handle -and
+                    $cleanupRaceDiagnostic.cleanup_failures.Count -eq 0 -and
+                    @($cleanupRaceDiagnostic.timeline | Where-Object {
+                        $_.event -ceq 'forced-cleanup-skipped' -and $_.outcome -ceq 'process-already-exited'
+                    }).Count -eq 1
+                try { $cleanupRace.Kill(); [void]$cleanupRace.WaitForExit(5000); $cleanupRace.WaitForExit() } catch { }
+                $cleanupRace.Dispose()
+
+                function Update-P3RetainedProcessExitState {
+                    param($Process,$State,$Timeline,[string]$Outcome='normal')
+                    if ($Outcome -ceq 'post-owner-check') {
+                        $State.observed = $true; $State.exit_code = 0
+                        $State.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+                        Add-ProcessExitTimelineEvent $Timeline 'process-exit-observed' 'post-owner-check' $null
+                    }
+                }
+                function Test-RunnerOwnedProcessIdentity { param($Process,$OwnerToken); [pscustomobject]@{ valid=$false; retained_handle_has_exited=$true } }
+                $ownerRace = Start-HarnessProcess 'Start-Sleep -Seconds 5; exit 0'
+                $ownerRaceIdentity = New-HarnessIdentity $ownerRace; $ownerRaceOwner = New-HarnessOwner $ownerRace
+                $ownerRaceDiagnostic = $null; $ownerRaceFailure = $null
+                try { [void](Wait-RunnerOwnedProcessExit $ownerRace $ownerRaceOwner 1 'primary' 'owner-race' $ownerRaceIdentity.scenario_id `
+                    (Join-Path $harnessRoot 'owner-race-lifecycle.ndjson') (Join-Path $harnessRoot 'owner-race-summary.json') `
+                    (Join-Path $harnessRoot 'owner-race-summary.ndjson') $ownerRaceIdentity ([ref]$ownerRaceDiagnostic)) }
+                catch { $ownerRaceFailure = $_ }
+                $ownerCheckExitSkippedKill = $null -ne $ownerRaceFailure -and
+                    -not $ownerRaceDiagnostic.forced_cleanup.required -and
+                    $ownerRaceDiagnostic.forced_cleanup.process_exit_observed -and
+                    -not $ownerRaceDiagnostic.forced_cleanup.kill_requested_through_retained_handle -and
+                    $ownerRaceDiagnostic.cleanup_failures.Count -eq 0 -and
+                    @($ownerRaceDiagnostic.timeline | Where-Object {
+                        $_.event -ceq 'forced-cleanup-skipped' -and $_.outcome -ceq 'process-exited-during-owner-check'
+                    }).Count -eq 1
+                try { $ownerRace.Kill(); [void]$ownerRace.WaitForExit(5000); $ownerRace.WaitForExit() } catch { }
+                $ownerRace.Dispose()
+                Set-Item -Path Function:Update-P3RetainedProcessExitState -Value $originalExitStateUpdater
+                Set-Item -Path Function:Test-RunnerOwnedProcessIdentity -Value $originalOwnerIdentityTest
+
                 function Test-RunnerOwnedProcessIdentity { param($Process,$OwnerToken); [pscustomobject]@{ valid=$true } }
                 $timeout = Start-HarnessProcess 'Start-Sleep -Seconds 30; exit 0'
                 $timeoutIdentity = New-HarnessIdentity $timeout; $timeoutOwner = New-HarnessOwner $timeout
@@ -733,10 +929,17 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     powershell_major_minor="$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
                     raw_null_rejected=$rawNullRejected; id_to_pid=([int]$idSnapshot.Items[0].Pid -eq 4242)
                     raw_null_normalized=$rawNullNormalized; multi_session_journal_bound=$multiSessionJournalBound
+                    partial_tail_observation_safe=$partialTailObservationSafe
+                    transient_contention_recovered=$transientContentionRecovered
+                    transient_contention_precedes_exit_check=$transientContentionPrecedesExitCheck
+                    persistent_contention_timed_out=$persistentContentionTimedOut
+                    nonsharing_io_failed_closed=$nonSharingIoFailedClosed
                     cim_datetime_accepted=$cimDateTimeAccepted; cim_throw_failed_closed=$cimThrowClosed; outside_root_rejected=$outsideRootRejected
                     wrong_hash_rejected=$wrongHashRejected; exited_identity_rejected=$exitedIdentityRejected
                     normal_process_passed=($normalDiagnostic.outcome -ceq 'process-exited-and-tables-empty')
                     nonzero_process_rejected=($null -ne $nonzeroFailure); premature_exit_marked_failed=$prematureMarkedFailed
+                    natural_exit_skipped_kill=$naturalExitSkippedKill
+                    owner_check_exit_skipped_kill=$ownerCheckExitSkippedKill
                     timeout_killed=($null -ne $timeoutFailure)
                     primary_preserved_with_cleanup_failure=$primaryPreserved
                 } | ConvertTo-Json -Compress
@@ -751,9 +954,10 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             Assert.AreEqual("5.1", root.GetProperty("powershell_major_minor").GetString());
             foreach (var property in new[]
                      {
-                         "raw_null_rejected", "raw_null_normalized", "multi_session_journal_bound", "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
-                         "wrong_hash_rejected", "exited_identity_rejected", "normal_process_passed",
-                          "nonzero_process_rejected", "premature_exit_marked_failed", "timeout_killed", "primary_preserved_with_cleanup_failure"
+                          "raw_null_rejected", "raw_null_normalized", "multi_session_journal_bound", "partial_tail_observation_safe", "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
+                          "transient_contention_recovered", "transient_contention_precedes_exit_check", "persistent_contention_timed_out", "nonsharing_io_failed_closed",
+                          "wrong_hash_rejected", "exited_identity_rejected", "normal_process_passed",
+                          "nonzero_process_rejected", "premature_exit_marked_failed", "natural_exit_skipped_kill", "owner_check_exit_skipped_kill", "timeout_killed", "primary_preserved_with_cleanup_failure"
                      })
                 Assert.IsTrue(root.GetProperty(property).GetBoolean(), property);
         }
@@ -771,6 +975,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             "public sealed class PixelTartP3ProcessIdentitySnapshotRow",
             "public sealed class PixelTartP3ProcessTableSnapshot",
             "function Get-RequiredJsonIntegerValue", "function Assert-P3LifecyclePendingOperationCount",
+            "function Get-P3TransientFileContention", "transient_file_contention_count",
+            "last_transient_file_contention",
             "'observed-nonnegative'", "pending_operation_count violates rule",
             "function New-RunnerProcessOwnerToken", "function Test-RunnerOwnedProcessIdentity",
             "function Wait-RunnerOwnedProcessExit", "function Wait-DevPreviewProcessTableConvergence",
@@ -779,7 +985,7 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             "$expectedProcessSessionId = [guid]::NewGuid().ToString('N')",
             "process_session_id = $expectedProcessSessionId",
             "did not return its runner-preassigned process_session_id",
-            "process-exit-observed", "forced-cleanup-start", "forced-cleanup-completed",
+            "process-exit-observed", "forced-cleanup-start", "forced-cleanup-skipped", "forced-cleanup-completed",
             "same-run-process-zero", "completion-handshake-observed", "shutdown-preparation-observed",
             "application-on-exit-enter-observed", "application-on-exit-completed-observed", "phase-summary-commit",
             "primary_failure", "cleanup_failures", "observation_failures",

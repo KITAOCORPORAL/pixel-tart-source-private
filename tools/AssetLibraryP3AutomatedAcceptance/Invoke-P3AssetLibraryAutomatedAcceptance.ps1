@@ -691,6 +691,25 @@ function Read-SharedUtf8Text {
     } finally { $stream.Dispose() }
 }
 
+function Get-P3TransientFileContention {
+    param([Exception]$Exception)
+    $candidate = $Exception
+    while ($null -ne $candidate) {
+        if ($candidate -is [IO.IOException]) {
+            $win32ErrorCode = [int]($candidate.HResult -band 0xffff)
+            if ($win32ErrorCode -eq 32 -or $win32ErrorCode -eq 33) {
+                return [pscustomobject][ordered]@{
+                    win32_error_code = $win32ErrorCode
+                    hresult = [int]$candidate.HResult
+                    message = [string]$candidate.Message
+                }
+            }
+        }
+        $candidate = $candidate.InnerException
+    }
+    return $null
+}
+
 function Get-P3LifecycleCanonicalText {
     param([string]$Line)
     $match = [regex]::Match(
@@ -1033,6 +1052,8 @@ function Invoke-P3ObservedStage {
         started_at_elapsed_milliseconds = $stageStarted
         completed_at_elapsed_milliseconds = $null
         elapsed_milliseconds = 0
+        transient_file_contention_count = 0
+        last_transient_file_contention = $null
         outcome = 'waiting'
         detail = $null
     }
@@ -1047,19 +1068,33 @@ function Invoke-P3ObservedStage {
                 $timeout.Data['p3_stage'] = $Name
                 throw $timeout
             }
+            $observation = $null
+            $transientContentionObserved = $false
             try { $observation = & $Probe }
             catch {
-                $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' $Name $_))
-                $_.Exception.Data['p3_stage'] = $Name
-                $_.Exception.Data['p3_observation_failure'] = $true
-                throw
+                $contention = Get-P3TransientFileContention $_.Exception
+                if ($null -ne $contention) {
+                    $transientContentionObserved = $true
+                    $stage.transient_file_contention_count = [int]$stage.transient_file_contention_count + 1
+                    $stage.last_transient_file_contention = [pscustomobject][ordered]@{
+                        observed_at_elapsed_milliseconds = [int64]$SharedClock.ElapsedMilliseconds
+                        win32_error_code = [int]$contention.win32_error_code
+                        hresult = [int]$contention.hresult
+                        message = [string]$contention.message
+                    }
+                } else {
+                    $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' $Name $_))
+                    $_.Exception.Data['p3_stage'] = $Name
+                    $_.Exception.Data['p3_observation_failure'] = $true
+                    throw
+                }
             }
             if ($null -ne $observation -and [bool]$observation.satisfied) {
                 $stage.outcome = 'observed'
                 $stage.detail = $observation.detail
                 return $observation.detail
             }
-            if ($FailIfProcessAlreadyExited) {
+            if ($FailIfProcessAlreadyExited -and -not $transientContentionObserved) {
                 Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'premature'
                 if ([bool]$ProcessState.observed) {
                     $missing = [InvalidOperationException]::new(
@@ -1293,21 +1328,53 @@ function Wait-RunnerOwnedProcessExit {
             $diagnosticValue.forced_cleanup.started = $true
             Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-start' 'started' ([pscustomobject]@{ owner_pid = [int]$OwnerToken.Pid })
             try {
-                $ownership = Test-RunnerOwnedProcessIdentity $Process $OwnerToken
-                $diagnosticValue.forced_cleanup.owner_identity = $ownership
-                $diagnosticValue.forced_cleanup.owner_identity_verified = [bool]$ownership.valid
-                if (-not $ownership.valid) { throw 'Runner-owned process identity could not be proven; refusing to kill by PID.' }
-                $Process.Kill()
-                $diagnosticValue.forced_cleanup.kill_requested_through_retained_handle = $true
-                if (-not $Process.WaitForExit(10000)) {
-                    throw 'Runner-owned process did not exit within the bounded 10000 ms cleanup interval.'
+                Update-P3RetainedProcessExitState $Process $processState $timeline 'pre-forced-cleanup'
+                if ([bool]$processState.observed) {
+                    $diagnosticValue.forced_cleanup.required = $false
+                    $diagnosticValue.forced_cleanup.process_exit_observed = $true
+                    Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-skipped' 'process-already-exited' `
+                        ([pscustomobject]@{ exit_code = [int]$processState.exit_code })
+                } else {
+                    $ownership = Test-RunnerOwnedProcessIdentity $Process $OwnerToken
+                    $diagnosticValue.forced_cleanup.owner_identity = $ownership
+                    $diagnosticValue.forced_cleanup.owner_identity_verified = [bool]$ownership.valid
+                    if (-not $ownership.valid) {
+                        Update-P3RetainedProcessExitState $Process $processState $timeline 'post-owner-check'
+                        if (-not [bool]$processState.observed) {
+                            throw 'Runner-owned process identity could not be proven; refusing to kill by PID.'
+                        }
+                    }
+                    if ([bool]$processState.observed) {
+                        $diagnosticValue.forced_cleanup.required = $false
+                        $diagnosticValue.forced_cleanup.process_exit_observed = $true
+                        Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-skipped' 'process-exited-during-owner-check' `
+                            ([pscustomobject]@{ exit_code = [int]$processState.exit_code })
+                    } else {
+                        try {
+                            $Process.Kill()
+                            $diagnosticValue.forced_cleanup.kill_requested_through_retained_handle = $true
+                        } catch {
+                            Update-P3RetainedProcessExitState $Process $processState $timeline 'kill-race'
+                            if (-not [bool]$processState.observed) { throw }
+                        }
+                        if ([bool]$processState.observed) {
+                            $diagnosticValue.forced_cleanup.required = $false
+                            $diagnosticValue.forced_cleanup.process_exit_observed = $true
+                            Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-skipped' 'process-exited-before-kill' `
+                                ([pscustomobject]@{ exit_code = [int]$processState.exit_code })
+                        } else {
+                            if (-not $Process.WaitForExit(10000)) {
+                                throw 'Runner-owned process did not exit within the bounded 10000 ms cleanup interval.'
+                            }
+                            $Process.WaitForExit()
+                            $processState.observed = $true
+                            $processState.exit_code = [int]$Process.ExitCode
+                            $processState.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+                            $diagnosticValue.forced_cleanup.process_exit_observed = $true
+                            Add-ProcessExitTimelineEvent $timeline 'process-exit-observed' 'forced-cleanup' $null
+                        }
+                    }
                 }
-                $Process.WaitForExit()
-                $processState.observed = $true
-                $processState.exit_code = [int]$Process.ExitCode
-                $processState.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
-                $diagnosticValue.forced_cleanup.process_exit_observed = $true
-                Add-ProcessExitTimelineEvent $timeline 'process-exit-observed' 'forced-cleanup' $null
             } catch {
                 $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'owner-scoped-process-termination' $_))
             } finally {

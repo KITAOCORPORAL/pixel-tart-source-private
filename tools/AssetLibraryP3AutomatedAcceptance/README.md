@@ -68,13 +68,17 @@ run/session/HWND 所有权、退出状态和观察错误。查询错误会 fail 
 因此失败会定位到具体关闭阶段。若执行超时，runner 只在 PID、路径、启动时间
 和二进制 hash 均匹配启动时 owner token 后，通过保留的进程 handle 终止该进程，并记录
 强制清理开始和完成；不会按裸 PID 终止。主失败、清理失败和观察失败分栏保存，收尾失败
-不会覆盖最先发生的业务或超时异常。
+不会覆盖最先发生的业务或超时异常。终止前会再次刷新保留句柄；若进程已自然退出则记录
+跳过清理，只有仍存活且 owner token 完整匹配时才允许终止。
 
 应用还为每个会话写入 `lifecycle-<scenario>-<phase>.ndjson`。runner 在 plan 中预分配唯一的
 32 位小写十六进制进程会话 ID，应用必须原样用于 lifecycle、summary 和全部证据。validator
 逐行重算 lifecycle hash，检查 previous-hash 链、严格递增的序号/时间、固定退出状态顺序，
 并把 run、scenario、phase、session、PID/HWND、source HEAD 和三份二进制 hash 绑定到同一
 runner 会话；缺记录、重复/倒序、部分写入、伪造强制清理成功或旧 run 记录混入都会拒绝。
+生产端追加时允许同一 runner 只读观察但继续拒绝第二写入者；runner 忽略尚未换行的尾部片段，
+并且只对 Windows sharing/lock violation 32/33 在原有阶段截止时间内重试。其他 I/O、JSON、
+hash 或身份错误仍立即 fail closed，持续文件争用仍按原阶段上限超时失败。
 固定尾序为 `application-on-exit-enter` → `summary-commit-start` → `phase-summary-written` →
 `summary-commit-end` → `application-on-exit-completed`。其中 `phase-summary-written` 只能在不可变
 phase summary 原子发布成功后记录；真正完成提交还必须由该文件的 `record_sha256`、文件 hash

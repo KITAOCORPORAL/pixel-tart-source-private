@@ -1364,7 +1364,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             path,
             FileMode.Append,
             FileAccess.Write,
-            FileShare.None,
+            FileShare.Read,
             bufferSize: 4096,
             FileOptions.WriteThrough);
         stream.Write(bytes);

@@ -169,6 +169,58 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "var summaryElement = JsonSerializer.SerializeToElement(summaryPayload, LineJsonOptions);",
         ]);
     }
+
+    [TestMethod]
+    public void P3DurableJournalAppendAllowsRunnerReadsButRejectsConcurrentWriters()
+    {
+        var root = System.IO.Path.Combine(
+            System.IO.Path.GetTempPath(), "PixelTart-P3SharedJournal", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var path = System.IO.Path.Combine(root, "lifecycle.ndjson");
+        File.WriteAllText(path, string.Empty, new System.Text.UTF8Encoding(false));
+        try
+        {
+            var controllerType = typeof(RAWSelectionAssistant.App).Assembly.GetType(
+                "RAWSelectionAssistant.Services.AssetLibraryP3AutomatedAcceptanceController", throwOnError: true)!;
+            var append = controllerType.GetMethod(
+                "AppendLineDurably",
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!;
+
+            using (var runnerReader = new FileStream(
+                       path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            {
+                append.Invoke(null, [path, "first"]);
+                runnerReader.Position = 0;
+                using var textReader = new StreamReader(
+                    runnerReader, new System.Text.UTF8Encoding(false), true, 1024, leaveOpen: true);
+                Assert.AreEqual("first" + Environment.NewLine, textReader.ReadToEnd());
+            }
+
+            using var productionWriter = new FileStream(
+                path, FileMode.Append, FileAccess.Write, FileShare.Read);
+            using var concurrentRunnerReader = new FileStream(
+                path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+            Assert.Throws<IOException>(() =>
+            {
+                using var secondWriter = new FileStream(
+                    path, FileMode.Append, FileAccess.Write, FileShare.Read);
+            });
+
+            var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs");
+            var appendStart = controller.IndexOf("private static void AppendLineDurably", StringComparison.Ordinal);
+            var appendEnd = controller.IndexOf("private static string SanitizeFileName", appendStart, StringComparison.Ordinal);
+            Assert.IsGreaterThanOrEqualTo(0, appendStart);
+            Assert.IsGreaterThan(appendStart, appendEnd);
+            var appendSource = controller[appendStart..appendEnd];
+            StringAssert.Contains(appendSource, "FileShare.Read");
+            Assert.IsFalse(appendSource.Contains("FileShare.None", StringComparison.Ordinal));
+            Assert.IsFalse(appendSource.Contains("FileShare.ReadWrite", StringComparison.Ordinal));
+        }
+        finally
+        {
+            Directory.Delete(root, true);
+        }
+    }
 #endif
 
     [TestMethod]
