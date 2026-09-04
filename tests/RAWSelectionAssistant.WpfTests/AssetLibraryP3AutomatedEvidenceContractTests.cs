@@ -238,6 +238,36 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void ValidatorTimeoutBoundsAreContractBoundAndOutputReadsCannotBypassTheDeadline()
+    {
+        using var contract = JsonDocument.Parse(Read(
+            "tools/AssetLibraryP3AutomatedAcceptance/automated-acceptance-contract.json"));
+        var proofTimeout = contract.RootElement.GetProperty("negative_evidence_proof_timeout_seconds").GetInt32();
+        var validatorTimeout = contract.RootElement.GetProperty("validator_process_timeout_seconds").GetInt32();
+        Assert.AreEqual(3600, proofTimeout);
+        Assert.AreEqual(3900, validatorTimeout);
+        Assert.IsGreaterThan(0, proofTimeout);
+        Assert.IsGreaterThan(proofTimeout, validatorTimeout);
+
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        var stdoutTask = validator.IndexOf("$stdoutTask = $process.StandardOutput.ReadToEndAsync()", StringComparison.Ordinal);
+        var boundedWait = validator.IndexOf("$process.WaitForExit($TimeoutSeconds * 1000)", StringComparison.Ordinal);
+        var stdoutResult = validator.IndexOf("$stdout = $stdoutTask.GetAwaiter().GetResult()", StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, stdoutTask);
+        Assert.IsGreaterThan(stdoutTask, boundedWait);
+        Assert.IsGreaterThan(boundedWait, stdoutResult);
+        Assert.IsFalse(validator.Contains("$process.StandardOutput.ReadToEnd()\r\n        $stderr", StringComparison.Ordinal));
+        Assert.IsFalse(validator.Contains("$process.StandardOutput.ReadToEnd()\n        $stderr", StringComparison.Ordinal));
+
+        var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");
+        ContainsAll(runner,
+            "$validatorTimeoutSeconds = [int]$sealedContract.validator_process_timeout_seconds",
+            "-Timeout $validatorTimeoutSeconds",
+            "Validator target contract has invalid timeout bounds.");
+        Assert.IsFalse(runner.Contains("-Name $Name -LogDirectory $LogDirectory -Timeout 300", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
     public void ScriptsParseInWindowsPowerShellAndAvoidPowerShellSevenOnlyApis()
     {
         foreach (var relative in new[]

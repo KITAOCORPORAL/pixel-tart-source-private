@@ -474,7 +474,10 @@ function Measure-SealedSafetyScan($Scan, [string]$RunRoot) {
     if (@($Scan.rules).Count -ne $rules.Count) { Fail 'safety static scan contains an unknown rule.' }
     return $counts
 }
-function Invoke-NegativeEvidenceProofs([string]$RunRoot, [string[]]$Names) {
+function Invoke-NegativeEvidenceProofs([string]$RunRoot, [string[]]$Names, [int]$TimeoutSeconds) {
+    if ($TimeoutSeconds -le 0 -or $TimeoutSeconds -gt 3600) {
+        Fail 'negative evidence proof timeout must be between 1 and 3600 seconds.'
+    }
     $pythonCommand = Get-Command python.exe -ErrorAction SilentlyContinue
     if ($null -eq $pythonCommand) { Fail 'python.exe is required for real negative evidence proofs.' }
     $python = Full $pythonCommand.Source
@@ -498,12 +501,16 @@ function Invoke-NegativeEvidenceProofs([string]$RunRoot, [string[]]$Names) {
     $process = [Diagnostics.Process]::new(); $process.StartInfo = $startInfo
     try {
         if (-not $process.Start()) { Fail 'real negative evidence proof harness did not start.' }
-        $stdout = $process.StandardOutput.ReadToEnd()
-        $stderr = $process.StandardError.ReadToEnd()
-        if (-not $process.WaitForExit(3600000)) {
+        $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+        $stderrTask = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
             try { $process.Kill() } catch { }
+            try { [void]$process.WaitForExit(10000) } catch { }
             Fail 'real negative evidence proof harness exceeded 60 minutes.'
         }
+        $process.WaitForExit()
+        $stdout = $stdoutTask.GetAwaiter().GetResult()
+        $stderr = $stderrTask.GetAwaiter().GetResult()
         if ($process.ExitCode -ne 0) {
             Fail "real negative evidence proof harness failed with exit $($process.ExitCode): $stdout $stderr"
         }
@@ -555,6 +562,11 @@ Require-Equal $contract.process_exit_diagnostic_schema 'pixel-tart-p3-runner-pro
 Require-Equal $contract.runner_session_result_schema 'pixel-tart-p3-runner-session-result/v1' 'contract runner session result schema'
 Require-Equal $contract.process_table_convergence_schema 'pixel-tart-p3-process-table-convergence/v1' 'contract process table convergence schema'
 Require-Equal $contract.run_failure_model_schema 'pixel-tart-p3-run-failure-model/v1' 'contract run failure model schema'
+Require-Equal ([int]$contract.negative_evidence_proof_timeout_seconds) 3600 'contract negative evidence proof timeout'
+Require-Equal ([int]$contract.validator_process_timeout_seconds) 3900 'contract validator process timeout'
+if ([int]$contract.validator_process_timeout_seconds -le [int]$contract.negative_evidence_proof_timeout_seconds) {
+    Fail 'contract validator process timeout must exceed the negative evidence proof timeout.'
+}
 Require-Equal $contract.process_exit_wait_strategy 'shared-deadline-staged-evidence-and-exit' 'contract process exit wait strategy'
 Require-Equal ([int]$contract.process_exit_total_timeout_seconds) 300 'contract process exit total timeout'
 $fixedProcessStageCaps = [ordered]@{
@@ -1745,7 +1757,7 @@ Require-Equal $applicationSafety.status 'pending' 'application safety measuremen
 $negativeFixtureProof = if ($SkipNegativeProofs) {
     [pscustomobject]@{ count = 0; sha256 = Sha256Text 'negative proofs skipped only by the recursive mutation validator' }
 } else {
-    Invoke-NegativeEvidenceProofs $root $negativeNames
+    Invoke-NegativeEvidenceProofs $root $negativeNames ([int]$contract.negative_evidence_proof_timeout_seconds)
 }
 if ($SkipNegativeProofs) {
     Require-Equal ([int]$negativeFixtureProof.count) 0 'recursive negative fixture proof count'

@@ -2592,9 +2592,15 @@ function Invoke-Validator {
     catch { throw "Validator target contract is not valid JSON: $sealedContractPath`n$($_.Exception.Message)" }
     $expectedNegativeProofCount = @($sealedContract.required_negative_fixtures).Count
     if ($expectedNegativeProofCount -le 0) { throw 'Validator target contract has no negative fixtures.' }
+    $validatorTimeoutSeconds = [int]$sealedContract.validator_process_timeout_seconds
+    $negativeProofTimeoutSeconds = [int]$sealedContract.negative_evidence_proof_timeout_seconds
+    if ($negativeProofTimeoutSeconds -ne 3600 -or $validatorTimeoutSeconds -ne 3900 -or
+        $validatorTimeoutSeconds -le $negativeProofTimeoutSeconds) {
+        throw 'Validator target contract has invalid timeout bounds.'
+    }
     $result = Invoke-LoggedProcess -FilePath 'powershell.exe' `
         -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $validator, '-RunRoot', $ActiveRunRoot) `
-        -Name $Name -LogDirectory $LogDirectory -Timeout 300
+        -Name $Name -LogDirectory $LogDirectory -Timeout $validatorTimeoutSeconds
     $stderrText = Get-Content -LiteralPath $result.stderr -Raw -Encoding UTF8 -ErrorAction Stop
     if (-not [string]::IsNullOrWhiteSpace($stderrText)) {
         throw "Validator emitted unexpected stderr. See $($result.stderr)."
@@ -2669,6 +2675,9 @@ function Invoke-DryRun {
         [string]$contract.runner_session_result_schema -cne 'pixel-tart-p3-runner-session-result/v1' -or
         [string]$contract.process_table_convergence_schema -cne 'pixel-tart-p3-process-table-convergence/v1' -or
         [string]$contract.run_failure_model_schema -cne 'pixel-tart-p3-run-failure-model/v1' -or
+        [int]$contract.negative_evidence_proof_timeout_seconds -ne 3600 -or
+        [int]$contract.validator_process_timeout_seconds -ne 3900 -or
+        [int]$contract.validator_process_timeout_seconds -le [int]$contract.negative_evidence_proof_timeout_seconds -or
         [string]$contract.process_exit_wait_strategy -cne 'shared-deadline-staged-evidence-and-exit' -or
         [int]$contract.process_exit_total_timeout_seconds -ne $script:p3ProcessStageTotalTimeoutSeconds -or
         [int]$contract.process_table_required_consecutive_empty_observations -ne 2 -or

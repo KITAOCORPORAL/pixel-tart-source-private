@@ -15,6 +15,8 @@ public sealed class AssetLibraryP3AutomatedRunSetContractTests
     {
         var script = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedRunSet.ps1");
         ContainsAll(script,
+            "[ValidateRange(3900, 7200)]",
+            "[int]$ValidatorTimeoutSeconds = 3900",
             "$RunRoots.Count -ne 3", "exactly 3 run roots are required",
             "Test-P3AssetLibraryAutomatedEvidence.ps1", "Invoke-NormalValidator",
             "runner\\acceptance-inputs\\Test-P3AssetLibraryAutomatedEvidence.ps1",

@@ -7,8 +7,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputDirectory,
 
-    [ValidateRange(30, 7200)]
-    [int]$ValidatorTimeoutSeconds = 1800
+    [ValidateRange(3900, 7200)]
+    [int]$ValidatorTimeoutSeconds = 3900
 )
 
 Set-StrictMode -Version Latest

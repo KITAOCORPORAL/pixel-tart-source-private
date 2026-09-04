@@ -19,6 +19,8 @@
   "runner_session_result_schema": "pixel-tart-p3-runner-session-result/v1",
   "process_table_convergence_schema": "pixel-tart-p3-process-table-convergence/v1",
   "run_failure_model_schema": "pixel-tart-p3-run-failure-model/v1",
+  "negative_evidence_proof_timeout_seconds": 3600,
+  "validator_process_timeout_seconds": 3900,
   "process_exit_wait_strategy": "shared-deadline-staged-evidence-and-exit",
   "process_exit_total_timeout_seconds": 300,
   "process_exit_stage_timeouts_seconds": {
