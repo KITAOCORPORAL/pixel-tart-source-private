@@ -50,6 +50,10 @@ $script:p3LifecycleResults = @(
 $script:p3LifecyclePending = @(
     $false,$false,$true,$true,$true,$false,$true,$false,$false,$true,$true,$false,$false,$true,$false,$false,$false
 )
+$script:p3LifecyclePendingOperationCountRules = @(
+    'zero','zero','one','one','observed-nonnegative','zero','one','zero','zero',
+    'one','one','zero','zero','one','zero','zero','zero'
+)
 $script:p3ProcessStageTimeoutSeconds = [ordered]@{
     completion_handshake = 235
     shutdown_preparation = 20
@@ -647,6 +651,32 @@ function Get-RequiredPropertyValue {
     return $property.Value
 }
 
+function Get-RequiredJsonIntegerValue {
+    param($Object, [string]$Name, [string]$Context)
+    $value = Get-RequiredPropertyValue $Object $Name $Context
+    if (-not ($value -is [sbyte] -or $value -is [byte] -or $value -is [int16] -or $value -is [uint16] -or
+        $value -is [int32] -or $value -is [uint32] -or $value -is [int64] -or $value -is [uint64])) {
+        throw "$Context property '$Name' must be a JSON integer number."
+    }
+    return [int64]$value
+}
+
+function Assert-P3LifecyclePendingOperationCount {
+    param($Record, [int]$Index)
+    if ($Index -lt 0 -or $Index -ge $script:p3LifecyclePendingOperationCountRules.Count) {
+        throw "P3 lifecycle pending-operation rule index is invalid: $Index."
+    }
+    $count = Get-RequiredJsonIntegerValue $Record 'pending_operation_count' "P3 lifecycle record[$Index]"
+    $rule = $script:p3LifecyclePendingOperationCountRules[$Index]
+    if (($rule -ceq 'zero' -and $count -ne 0) -or
+        ($rule -ceq 'one' -and $count -ne 1) -or
+        ($rule -ceq 'observed-nonnegative' -and $count -lt 0) -or
+        ($rule -cnotin @('zero','one','observed-nonnegative'))) {
+        throw "P3 lifecycle record[$Index] pending_operation_count violates rule '$rule' (actual=$count)."
+    }
+    return $count
+}
+
 function Read-SharedUtf8Text {
     param([string]$Path)
     $stream = [IO.FileStream]::new(
@@ -756,11 +786,10 @@ function Read-P3LifecycleObservation {
             throw "P3 lifecycle record[$index] sequence or transition is invalid."
         }
         if ([string](Get-RequiredPropertyValue $record 'result' "P3 lifecycle record[$index]") -cne $script:p3LifecycleResults[$index] -or
-            [bool](Get-RequiredPropertyValue $record 'pending' "P3 lifecycle record[$index]") -ne [bool]$script:p3LifecyclePending[$index] -or
-            [int](Get-RequiredPropertyValue $record 'pending_operation_count' "P3 lifecycle record[$index]") -ne
-                $(if ($script:p3LifecyclePending[$index]) { 1 } else { 0 })) {
+            [bool](Get-RequiredPropertyValue $record 'pending' "P3 lifecycle record[$index]") -ne [bool]$script:p3LifecyclePending[$index]) {
             throw "P3 lifecycle record[$index] result or pending-state contract is invalid."
         }
+        [void](Assert-P3LifecyclePendingOperationCount $record $index)
         $exceptionProperty = $record.PSObject.Properties['exception']
         if ($null -eq $exceptionProperty -or $null -ne $exceptionProperty.Value) {
             throw "P3 lifecycle record[$index] exception state is invalid for a successful transition."
@@ -2707,6 +2736,18 @@ function Invoke-DryRun {
     if ((@($contract.required_application_lifecycle_events | ForEach-Object { [string]$_ }) -join '|') -cne
         ($script:p3LifecycleEvents -join '|')) {
         throw 'Automated acceptance application lifecycle event contract preflight failed.'
+    }
+    if ((@($contract.required_application_lifecycle_results | ForEach-Object { [string]$_ }) -join '|') -cne
+        ($script:p3LifecycleResults -join '|')) {
+        throw 'Automated acceptance application lifecycle result contract preflight failed.'
+    }
+    if ((@($contract.required_application_lifecycle_pending | ForEach-Object { [bool]$_ }) -join '|') -cne
+        (@($script:p3LifecyclePending | ForEach-Object { [bool]$_ }) -join '|')) {
+        throw 'Automated acceptance application lifecycle pending-state contract preflight failed.'
+    }
+    if ((@($contract.required_application_lifecycle_pending_operation_count_rules | ForEach-Object { [string]$_ }) -join '|') -cne
+        ($script:p3LifecyclePendingOperationCountRules -join '|')) {
+        throw 'Automated acceptance application lifecycle pending-operation contract preflight failed.'
     }
     $contractStageNames = @($contract.process_exit_stage_timeouts_seconds.PSObject.Properties.Name)
     $fixedStageNames = @($script:p3ProcessStageTimeoutSeconds.Keys)

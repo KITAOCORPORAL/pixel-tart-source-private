@@ -17,6 +17,12 @@ from typing import Any, Callable
 
 
 SHA0 = "0" * 64
+EXPECTED_REJECTION_FRAGMENTS = {
+    "lifecycle-pending-count-missing": ".pending_operation_count is missing or null.",
+    "lifecycle-pending-count-string": ".pending_operation_count must be a JSON integer number.",
+    "lifecycle-pending-count-negative": ".pending_operation_count violates rule 'observed-nonnegative'",
+    "lifecycle-completed-count-nonzero": ".pending_operation_count violates rule 'zero'",
+}
 TEXT_SUFFIXES = {
     ".json", ".ndjson", ".log", ".txt", ".ps1", ".py", ".md", ".cs", ".xaml", ".csproj"
 }
@@ -470,6 +476,25 @@ class Mutator:
         write_json(path, manifest)
         self.mark(path)
 
+    def sync_lifecycle_binding(
+        self, manifest: dict[str, Any], index: int, lifecycle_path: pathlib.Path
+    ) -> None:
+        """Keep every independent integrity binding valid so semantic lifecycle guards run."""
+        session = manifest["sessions"][index]
+        session["lifecycle_sha256"] = sha_file(lifecycle_path)
+        result_path = pathlib.Path(session["result_path"])
+        result = read_json(result_path)
+        result["lifecycle_sha256"] = session["lifecycle_sha256"]
+        with_record_sha256(result)
+        write_json(result_path, result)
+        session["record_sha256"] = result["record_sha256"]
+        session["result_sha256"] = sha_file(result_path)
+        manifest_path = self.root / "run-manifest.json"
+        write_json(manifest_path, manifest)
+        self.mark(lifecycle_path)
+        self.mark(result_path)
+        self.mark(manifest_path)
+
     def lifecycle(self, callback: Callable[[list[dict[str, Any]]], None], index: int = 0,
                   *, renumber: bool = False) -> None:
         manifest_path = self.root / "run-manifest.json"
@@ -479,10 +504,7 @@ class Mutator:
         rows = [json.loads(line) for line in path.read_text(encoding="utf-8-sig").splitlines() if line.strip()]
         callback(rows)
         write_lifecycle(path, rows, renumber=renumber)
-        session["lifecycle_sha256"] = sha_file(path)
-        write_json(manifest_path, manifest)
-        self.mark(path)
-        self.mark(manifest_path)
+        self.sync_lifecycle_binding(manifest, index, path)
 
     def process_exit(self, callback: Callable[[dict[str, Any]], None], index: int = 0) -> None:
         manifest_path = self.root / "run-manifest.json"
@@ -619,8 +641,8 @@ def mutate(root: pathlib.Path, name: str) -> list[str]:
         row.pop("record_sha256", None)
         row["record_sha256"] = sha_bytes(json_bytes(row, pretty=False))
         lines[1] = json_bytes(row, pretty=False).decode()
-        path.write_text("\n".join(lines) + "\n", encoding="utf-8"); m.mark(path)
-        m.manifest(lambda x: x["sessions"][0].__setitem__("lifecycle_sha256", sha_file(path)))
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        m.sync_lifecycle_binding(manifest, 0, path)
     elif name == "missing-completion-handshake":
         m.process_exit(lambda x: x["timeline"].__setitem__(
             slice(None), [row for row in x["timeline"] if row.get("event") != "completion-handshake-observed"]))
@@ -631,6 +653,18 @@ def mutate(root: pathlib.Path, name: str) -> list[str]:
             row["pending"] = True
             row["pending_operation_count"] = 1
         m.lifecycle(regress_state)
+    elif name == "lifecycle-pending-count-missing":
+        m.lifecycle(lambda rows: next(
+            item for item in rows if item["event"] == "page-dispose-start").pop("pending_operation_count"))
+    elif name == "lifecycle-pending-count-string":
+        m.lifecycle(lambda rows: next(
+            item for item in rows if item["event"] == "page-dispose-start").__setitem__("pending_operation_count", "0"))
+    elif name == "lifecycle-pending-count-negative":
+        m.lifecycle(lambda rows: next(
+            item for item in rows if item["event"] == "page-dispose-start").__setitem__("pending_operation_count", -1))
+    elif name == "lifecycle-completed-count-nonzero":
+        m.lifecycle(lambda rows: next(
+            item for item in rows if item["event"] == "page-dispose-completed").__setitem__("pending_operation_count", 1))
     elif name == "lifecycle-duplicate-transition":
         def duplicate_transition(rows: list[dict[str, Any]]) -> None:
             index = next(i for i, item in enumerate(rows) if item["event"] == "page-dispose-completed")
@@ -805,6 +839,12 @@ def main() -> int:
             output = (result.stdout + "\n" + result.stderr).strip()
             if "P3 automated evidence rejected" not in output:
                 raise RuntimeError(f"negative mutation failed outside the validator contract: {name}: {output}")
+            expected_fragment = EXPECTED_REJECTION_FRAGMENTS.get(name)
+            if expected_fragment is not None and expected_fragment not in output:
+                raise RuntimeError(
+                    f"negative mutation rejection did not reach intended validator guard: "
+                    f"{name}: expected {expected_fragment!r}: {output}"
+                )
             proofs.append({"name": name, "changed_paths": changed, "exit_code": result.returncode, "rejection_sha256": sha_bytes(output.encode("utf-8"))})
         result = {"schema": "pixel-tart-p3-negative-evidence-proof/v1", "count": len(proofs), "proof_sha256": sha_bytes(json_bytes(proofs, pretty=False)), "proofs": proofs}
         print(json.dumps(result, ensure_ascii=True, separators=(",", ":")))

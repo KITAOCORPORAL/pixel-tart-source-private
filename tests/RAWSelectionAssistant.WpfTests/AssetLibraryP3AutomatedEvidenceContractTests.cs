@@ -41,7 +41,10 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
         "smart-folder-roundtrip-mismatch", "smart-folder-invalid-ref-expanded",
         "smart-folder-migration-mismatch", "tag-merge-membership-duplicate", "tag-group-cycle-accepted",
         "batch-partial-commit", "journal-chain-mismatch", "lifecycle-chain-mismatch",
-        "missing-completion-handshake", "lifecycle-state-regression", "lifecycle-duplicate-transition",
+        "missing-completion-handshake", "lifecycle-state-regression",
+        "lifecycle-pending-count-missing", "lifecycle-pending-count-string",
+        "lifecycle-pending-count-negative", "lifecycle-completed-count-nonzero",
+        "lifecycle-duplicate-transition",
         "lifecycle-run-id-mismatch", "lifecycle-session-id-mismatch", "lifecycle-source-head-mismatch",
         "lifecycle-binary-hash-mismatch", "partial-phase-summary", "phase-summary-record-hash-mismatch",
         "forced-cleanup-false-success", "missing-exit-code", "missing-on-exit-completed",
@@ -93,6 +96,22 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             "application-shutdown-start", "window-close-completed", "application-on-exit-enter",
             "summary-commit-start", "phase-summary-written", "summary-commit-end", "application-on-exit-completed"
         }, Strings(root.GetProperty("required_application_lifecycle_events")));
+        CollectionAssert.AreEqual(new[]
+        {
+            "passed", "completed", "accepted", "started", "started", "completed", "started", "completed", "completed",
+            "started", "started", "completed", "prepared", "passed", "passed", "passed", "completed"
+        }, Strings(root.GetProperty("required_application_lifecycle_results")));
+        CollectionAssert.AreEqual(new[]
+        {
+            false, false, true, true, true, false, true, false, false,
+            true, true, false, false, true, false, false, false
+        }, root.GetProperty("required_application_lifecycle_pending").EnumerateArray()
+            .Select(item => item.GetBoolean()).ToArray());
+        CollectionAssert.AreEqual(new[]
+        {
+            "zero", "zero", "one", "one", "observed-nonnegative", "zero", "one", "zero", "zero",
+            "one", "one", "zero", "zero", "one", "zero", "zero", "zero"
+        }, Strings(root.GetProperty("required_application_lifecycle_pending_operation_count_rules")));
         CollectionAssert.AreEqual(new[]
         {
             "Pid", "ProcessName", "StartTimeUtc", "ExecutablePath", "ExecutableSha256", "RunId",
@@ -218,7 +237,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             "changed = mutate(mutant, name)", "reseal(self.root)", "result = run_validator(mutant)",
             "negative mutation was accepted", "sqlite3.connect", ".unlink()", ".write_bytes(",
             "Test-P3AssetLibraryAutomatedEvidence.ps1", "-SkipNegativeProofs",
-            "P3 automated evidence rejected");
+            "P3 automated evidence rejected", "EXPECTED_REJECTION_FRAGMENTS",
+            "result[\"lifecycle_sha256\"]", "negative mutation rejection did not reach intended validator guard");
         foreach (var fixture in NegativeFixtures) StringAssert.Contains(harness, $"\"{fixture}\"");
         Assert.IsFalse(harness.Contains("in-memory", StringComparison.OrdinalIgnoreCase));
     }
@@ -439,6 +459,58 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void RunnerAcceptsObservedZeroPendingCountAndRejectsMalformedLifecycleCountsInWindowsPowerShell51()
+    {
+        var temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"pixel-tart-p3-lifecycle-count-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(temp);
+        try
+        {
+            var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");
+            var executionMarker = runner.IndexOf("$script:repo = Get-RepositoryRoot", StringComparison.Ordinal);
+            Assert.IsGreaterThan(0, executionMarker);
+            var harness = runner[..executionMarker] + """
+                function Test-Rejected($Record, [int]$Index, [string]$ExpectedMessage) {
+                    try { [void](Assert-P3LifecyclePendingOperationCount $Record $Index); return $false }
+                    catch { return $_.Exception.Message.Contains($ExpectedMessage) }
+                }
+                $observedZero = [pscustomobject]@{ pending_operation_count = 0 }
+                $fixedOne = [pscustomobject]@{ pending_operation_count = 1 }
+                $observedZeroAccepted = (Assert-P3LifecyclePendingOperationCount $observedZero 4) -eq 0
+                $legacyObservedOneAccepted = (Assert-P3LifecyclePendingOperationCount $fixedOne 4) -eq 1
+                $fixedOneAccepted = (Assert-P3LifecyclePendingOperationCount $fixedOne 3) -eq 1
+                [pscustomobject]@{
+                    powershell_major_minor="$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
+                    observed_zero_accepted=$observedZeroAccepted
+                    legacy_observed_one_accepted=$legacyObservedOneAccepted
+                    fixed_one_accepted=$fixedOneAccepted
+                    missing_rejected=(Test-Rejected ([pscustomobject]@{}) 4 "missing required property 'pending_operation_count'")
+                    string_rejected=(Test-Rejected ([pscustomobject]@{ pending_operation_count = '0' }) 4 'must be a JSON integer number')
+                    negative_rejected=(Test-Rejected ([pscustomobject]@{ pending_operation_count = -1 }) 4 'observed-nonnegative')
+                    completed_nonzero_rejected=(Test-Rejected ([pscustomobject]@{ pending_operation_count = 1 }) 5 "rule 'zero'")
+                } | ConvertTo-Json -Compress
+                """;
+            var harnessPath = System.IO.Path.Combine(temp, "LifecyclePendingCountHarness.ps1");
+            File.WriteAllText(harnessPath, harness, new System.Text.UTF8Encoding(false));
+            var result = Start("powershell.exe",
+                ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", harnessPath]);
+            Assert.AreEqual(0, result.ExitCode, result.Output + result.Error);
+            using var payload = JsonDocument.Parse(result.Output);
+            var root = payload.RootElement;
+            Assert.AreEqual("5.1", root.GetProperty("powershell_major_minor").GetString());
+            foreach (var property in new[]
+                     {
+                         "observed_zero_accepted", "legacy_observed_one_accepted", "fixed_one_accepted", "missing_rejected", "string_rejected",
+                         "negative_rejected", "completed_nonzero_rejected"
+                     })
+                Assert.IsTrue(root.GetProperty(property).GetBoolean(), property);
+        }
+        finally
+        {
+            if (Directory.Exists(temp)) Directory.Delete(temp, true);
+        }
+    }
+
+    [TestMethod]
     public void StagedRunnerEvidenceExitAndCleanupPathsExecuteInWindowsPowerShell51()
     {
         var temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"pixel-tart-p3-staged-exit-{Guid.NewGuid():N}");
@@ -480,12 +552,13 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     $summaryJournalPath = Join-Path $Directory 'summary.ndjson'
                     $builder = [Text.StringBuilder]::new(); $previous = '0' * 64
                     for ($index = 0; $index -lt $script:p3LifecycleEvents.Count; $index++) {
+                        $pendingCountRule = $script:p3LifecyclePendingOperationCountRules[$index]
                         $row = [ordered]@{
                             schema=$Identity.schema; sequence=$index + 1
                             timestamp_utc=[DateTimeOffset]::UtcNow.AddMilliseconds($index).ToString('O')
                             stopwatch_elapsed_ms=[double]$index; event=$script:p3LifecycleEvents[$index]
                             result=$script:p3LifecycleResults[$index]; pending=[bool]$script:p3LifecyclePending[$index]
-                            pending_operation_count=$(if ($script:p3LifecyclePending[$index]) { 1 } else { 0 }); exception=$null
+                            pending_operation_count=$(if ($pendingCountRule -ceq 'one') { 1 } else { 0 }); exception=$null
                             run_id=$Identity.run_id; scenario_id=$Identity.scenario_id; phase=$Identity.phase
                             process_session_id=$Identity.process_session_id; pid=$Identity.pid; hwnd='0x1'
                             source_head=$Identity.source_head; executable_sha256=$Identity.executable_sha256
@@ -697,6 +770,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
         ContainsAll(runner,
             "public sealed class PixelTartP3ProcessIdentitySnapshotRow",
             "public sealed class PixelTartP3ProcessTableSnapshot",
+            "function Get-RequiredJsonIntegerValue", "function Assert-P3LifecyclePendingOperationCount",
+            "'observed-nonnegative'", "pending_operation_count violates rule",
             "function New-RunnerProcessOwnerToken", "function Test-RunnerOwnedProcessIdentity",
             "function Wait-RunnerOwnedProcessExit", "function Wait-DevPreviewProcessTableConvergence",
             "function Invoke-FinalDevPreviewCheck", "function New-P3FinalFailureException",
@@ -727,6 +802,7 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
 
         var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
         ContainsAll(validator,
+            "function Require-PendingOperationCount", "required_application_lifecycle_pending_operation_count_rules",
             "contract process exit diagnostic schema", "embedded process exit diagnostic binding",
             "process owner fields", "process convergence required empty count",
             "'required','started','owner_identity_verified','kill_requested_through_retained_handle'", "process exit timeline",

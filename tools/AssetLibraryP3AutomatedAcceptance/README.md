@@ -103,7 +103,7 @@ schema v6 fixture，共 64 条（60 活动、4 归档）。生成器、两份数
 性能上限（毫秒）：10k 首屏 1500、搜索建议 200、单筛选 300、八规则嵌套查询 600、
 智能文件夹预览 750、范围切换 400、批量标签 100 项 750、500 项 2000、UI 阻塞 100。
 validator 会按产品写入端的精确 UTF-8 字节契约，逐行重算 `events.ndjson` 和
-`summary.ndjson` 的 record hash，并同时核验 previous hash 链。契约列出的 66 类负例
+`summary.ndjson` 的 record hash，并同时核验 previous hash 链。契约列出的 70 类负例
 不是名称清单：每次验证都会为每类负例创建独立的内存副本、施加对应变异，再由独立
 validator 子进程逐项证明 fail closed；sealed run 本身始终只读。
 

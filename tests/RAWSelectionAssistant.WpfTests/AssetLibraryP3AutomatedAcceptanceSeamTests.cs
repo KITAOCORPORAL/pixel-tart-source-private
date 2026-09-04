@@ -60,11 +60,24 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "RecordLifecycle(\"shutdown-requested\"",
             "RecordLifecycle(\"completion-ack-written\"",
             "RecordLifecycle(\"page-dispose-start\"",
+            "pendingOperationCount: page.ViewModel.P3PendingOperationCount",
             "await TeardownAssetLibraryP3AutomatedAcceptanceAsync();",
             "RecordLifecycle(\"page-dispose-completed\"",
             "await driver.DisposeAsync();",
             "await application.PrepareP3AutomatedShutdownAsync(controller);",
             "Close();");
+        var pageDisposeStart = window.IndexOf("controller.RecordLifecycle(\"page-dispose-start\"", StringComparison.Ordinal);
+        var pageTeardownStart = window.IndexOf("await TeardownAssetLibraryP3AutomatedAcceptanceAsync();", pageDisposeStart, StringComparison.Ordinal);
+        var pageDisposeCompleted = window.IndexOf("controller.RecordLifecycle(\"page-dispose-completed\"", pageTeardownStart, StringComparison.Ordinal);
+        var applicationPreparationStart = window.IndexOf("await application.PrepareP3AutomatedShutdownAsync(controller);", pageDisposeCompleted, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, pageDisposeStart);
+        Assert.IsGreaterThan(pageDisposeStart, pageTeardownStart);
+        Assert.IsGreaterThan(pageTeardownStart, pageDisposeCompleted);
+        Assert.IsGreaterThan(pageDisposeCompleted, applicationPreparationStart);
+        StringAssert.Contains(window[pageDisposeStart..pageTeardownStart],
+            "pendingOperationCount: page.ViewModel.P3PendingOperationCount");
+        StringAssert.Contains(window[pageDisposeCompleted..applicationPreparationStart],
+            "pendingOperationCount: page.ViewModel.P3PendingOperationCount");
         Assert.IsFalse(window.Contains("_assetLibraryP3AutomatedDriver?.Dispose();", StringComparison.Ordinal));
         AssertOrdered(window,
         [

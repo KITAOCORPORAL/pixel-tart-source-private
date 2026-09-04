@@ -282,6 +282,16 @@ function Require-IntegerProperty($Object, [string]$Name, [string]$Owner) {
     }
     return [int64]$value
 }
+function Require-PendingOperationCount($Object, [string]$Rule, [string]$Owner) {
+    $count = Require-IntegerProperty $Object 'pending_operation_count' $Owner
+    if (($Rule -ceq 'zero' -and $count -ne 0) -or
+        ($Rule -ceq 'one' -and $count -ne 1) -or
+        ($Rule -ceq 'observed-nonnegative' -and $count -lt 0) -or
+        ($Rule -cnotin @('zero','one','observed-nonnegative'))) {
+        Fail "$Owner.pending_operation_count violates rule '$Rule' (actual=$count)."
+    }
+    return $count
+}
 function Require-ZeroFields($Object, [string[]]$Names, [string]$Owner) {
     foreach ($name in $Names) {
         $value = Require-IntegerProperty $Object $name $Owner
@@ -601,6 +611,20 @@ $fixedLifecycleEvents = @(
     'summary-commit-start','phase-summary-written','summary-commit-end','application-on-exit-completed')
 Require-Equal (@($contract.required_application_lifecycle_events | ForEach-Object { [string]$_ }) -join '|') `
     ($fixedLifecycleEvents -join '|') 'contract application lifecycle events'
+$fixedLifecycleResults = @(
+    'passed','completed','accepted','started','started','completed','started','completed','completed',
+    'started','started','completed','prepared','passed','passed','passed','completed')
+$fixedLifecyclePending = @(
+    $false,$false,$true,$true,$true,$false,$true,$false,$false,$true,$true,$false,$false,$true,$false,$false,$false)
+$fixedLifecyclePendingOperationCountRules = @(
+    'zero','zero','one','one','observed-nonnegative','zero','one','zero','zero',
+    'one','one','zero','zero','one','zero','zero','zero')
+Require-Equal (@($contract.required_application_lifecycle_results | ForEach-Object { [string]$_ }) -join '|') `
+    ($fixedLifecycleResults -join '|') 'contract application lifecycle results'
+Require-Equal (@($contract.required_application_lifecycle_pending | ForEach-Object { [bool]$_ }) -join '|') `
+    (@($fixedLifecyclePending | ForEach-Object { [bool]$_ }) -join '|') 'contract application lifecycle pending states'
+Require-Equal (@($contract.required_application_lifecycle_pending_operation_count_rules | ForEach-Object { [string]$_ }) -join '|') `
+    ($fixedLifecyclePendingOperationCountRules -join '|') 'contract application lifecycle pending-operation rules'
 
 $expectedScenarios = @($contract.required_scenario_order | ForEach-Object { [string]$_ })
 $fixedScenarios = @(
@@ -676,6 +700,10 @@ $negativeGuardMap = [ordered]@{
     'lifecycle-chain-mismatch'='application shutdown lifecycle identity, order, and hash chain';
     'missing-completion-handshake'='runner completion handshake is mandatory';
     'lifecycle-state-regression'='lifecycle result and pending state may not regress';
+    'lifecycle-pending-count-missing'='lifecycle pending operation count is mandatory';
+    'lifecycle-pending-count-string'='lifecycle pending operation count is a JSON integer';
+    'lifecycle-pending-count-negative'='observed lifecycle pending operation count is nonnegative';
+    'lifecycle-completed-count-nonzero'='completed lifecycle pending operation count is zero';
     'lifecycle-duplicate-transition'='lifecycle transitions are unique and exactly ordered';
     'lifecycle-run-id-mismatch'='lifecycle run ownership';
     'lifecycle-session-id-mismatch'='lifecycle process-session ownership';
@@ -958,11 +986,9 @@ for ($index = 0; $index -lt $sessions.Count; $index++) {
     Require-Equal (Hash $lifecyclePath) $session.lifecycle_sha256 "session[$index] lifecycle journal hash"
     $lifecycleLines = @([IO.File]::ReadAllLines($lifecyclePath, [Text.Encoding]::UTF8))
     Require-Equal $lifecycleLines.Count @($contract.required_application_lifecycle_events).Count "session[$index] lifecycle record count"
-    $expectedLifecycleResults = @(
-        'passed','completed','accepted','started','started','completed','started','completed','completed',
-        'started','started','completed','prepared','passed','passed','passed','completed')
-    $expectedLifecyclePending = @(
-        $false,$false,$true,$true,$true,$false,$true,$false,$false,$true,$true,$false,$false,$true,$false,$false,$false)
+    $expectedLifecycleResults = $fixedLifecycleResults
+    $expectedLifecyclePending = $fixedLifecyclePending
+    $expectedLifecyclePendingOperationCountRules = $fixedLifecyclePendingOperationCountRules
     $previousLifecycleHash = '0' * 64
     $previousLifecycleTimestamp = [DateTimeOffset]::MinValue
     $previousLifecycleElapsed = -1.0
@@ -980,8 +1006,8 @@ for ($index = 0; $index -lt $sessions.Count; $index++) {
         Require-Equal $record.event $contract.required_application_lifecycle_events[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] event"
         Require-Equal $record.result $expectedLifecycleResults[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] result"
         Require-Equal ([bool]$record.pending) $expectedLifecyclePending[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] pending"
-        Require-Equal ([int]$record.pending_operation_count) $(if ($expectedLifecyclePending[$lifecycleIndex]) { 1 } else { 0 }) `
-            "session[$index] lifecycle[$lifecycleIndex] pending operation count"
+        [void](Require-PendingOperationCount $record $expectedLifecyclePendingOperationCountRules[$lifecycleIndex] `
+            "session[$index] lifecycle[$lifecycleIndex]")
         if ($null -ne (Property-Value $record 'exception')) { Fail "session[$index] lifecycle[$lifecycleIndex] contains an exception on a successful exit." }
         Require-Equal $record.run_id $manifest.run_id "session[$index] lifecycle[$lifecycleIndex] run id"
         Require-Equal $record.scenario_id $session.scenario_id "session[$index] lifecycle[$lifecycleIndex] scenario"
