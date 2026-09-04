@@ -155,6 +155,51 @@ def rehash_journal(path: pathlib.Path, kind: str, summary: Any | None = None) ->
     path.write_text("\n".join(output) + "\n", encoding="utf-8", newline="")
 
 
+def with_record_sha256(value: dict[str, Any]) -> dict[str, Any]:
+    value.pop("record_sha256", None)
+    value["record_sha256"] = sha_bytes(json_bytes(value, pretty=False))
+    return value
+
+
+def rehash_summary_journal(
+    path: pathlib.Path, phase_summaries: dict[str, dict[str, Any]]
+) -> None:
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8-sig").splitlines() if line.strip()]
+    previous = SHA0
+    output = []
+    for row in rows:
+        session_id = str(row["process_session_id"])
+        if session_id not in phase_summaries:
+            raise RuntimeError(f"summary journal has no phase summary for process session {session_id}")
+        row["summary"] = phase_summaries[session_id]
+        row.pop("summary_hash", None)
+        row.pop("record_sha256", None)
+        row["previous_summary_hash"] = previous
+        row["previous_record_sha256"] = previous
+        digest = sha_bytes(json_bytes(row, pretty=False))
+        row["summary_hash"] = digest
+        row["record_sha256"] = digest
+        output.append(json_bytes(row, pretty=False).decode("utf-8"))
+        previous = digest
+    path.write_text("\n".join(output) + "\n", encoding="utf-8", newline="")
+
+
+def write_lifecycle(path: pathlib.Path, rows: list[dict[str, Any]], *, renumber: bool = False) -> None:
+    """Write a valid lifecycle hash chain so mutations reach semantic validation."""
+    previous = SHA0
+    output = []
+    for index, row in enumerate(rows):
+        row.pop("record_sha256", None)
+        if renumber:
+            row["sequence"] = index + 1
+        row["previous_record_sha256"] = previous
+        digest = sha_bytes(json_bytes(row, pretty=False))
+        row["record_sha256"] = digest
+        output.append(json_bytes(row, pretty=False).decode("utf-8"))
+        previous = digest
+    path.write_text("\n".join(output) + "\n", encoding="utf-8", newline="")
+
+
 def update_binary_snapshot(root: pathlib.Path, snapshot: dict[str, Any]) -> None:
     directory = pathlib.Path(snapshot["directory"])
     rows = []
@@ -243,8 +288,11 @@ def update_integrity(root: pathlib.Path) -> None:
             ("stdout", "stdout_sha256"), ("stderr", "stderr_sha256"),
             ("executable_path", "executable_sha256"), ("application_path", "application_sha256"),
             ("asset_module_path", "asset_module_sha256"),
+            ("process_exit_diagnostic_path", "process_exit_diagnostic_sha256"),
+            ("lifecycle_path", "lifecycle_sha256"),
         ]:
             session[hash_key] = sha_file(pathlib.Path(session[path_key]))
+        session["process_exit_diagnostic"] = read_json(pathlib.Path(session["process_exit_diagnostic_path"]))
     if "binary_snapshot" in manifest:
         update_binary_snapshot(root, manifest["binary_snapshot"])
     inputs = manifest["acceptance_inputs"]
@@ -290,8 +338,6 @@ def update_integrity(root: pathlib.Path) -> None:
         for path_key, hash_key in (("stdout", "stdout_sha256"), ("stderr", "stderr_sha256")):
             if path_key in audit_result:
                 audit_result[hash_key] = sha_file(pathlib.Path(audit_result[path_key]))
-    write_json(manifest_path, manifest)
-
     build_path = root / "build-manifest.json"
     build = read_json(build_path)
     for path_key, hash_key in [
@@ -312,9 +358,34 @@ def update_integrity(root: pathlib.Path) -> None:
         database["sha256"] = sha_file(evidence_path)
     for artifact in summary["artifacts"]:
         artifact["sha256"] = sha_file(root / pathlib.PurePosixPath(artifact["path"]))
+    with_record_sha256(summary)
     write_json(summary_path, summary)
+    # The last immutable phase summary is the exact published summary. Earlier
+    # phase files retain their own cumulative snapshots but all record hashes
+    # must be recomputed after rebasing absolute run-owned paths.
+    last_session = manifest["sessions"][-1]
+    write_json(pathlib.Path(last_session["phase_summary_path"]), summary)
+    phase_summaries: dict[str, dict[str, Any]] = {}
+    for session in manifest["sessions"]:
+        phase_path = pathlib.Path(session["phase_summary_path"])
+        phase_summary = with_record_sha256(read_json(phase_path))
+        write_json(phase_path, phase_summary)
+        session["phase_summary_sha256"] = sha_file(phase_path)
+        session["phase_summary_record_sha256"] = phase_summary["record_sha256"]
+        phase_summaries[str(session["process_session_id"])] = phase_summary
     rehash_journal(root / "app/evidence/events.ndjson", "event")
-    rehash_journal(root / "app/evidence/summary.ndjson", "summary", summary)
+    rehash_summary_journal(root / "app/evidence/summary.ndjson", phase_summaries)
+    for session in manifest["sessions"]:
+        result_path = pathlib.Path(session["result_path"])
+        result = read_json(result_path)
+        for key in list(result):
+            if key != "record_sha256" and key in session:
+                result[key] = session[key]
+        with_record_sha256(result)
+        write_json(result_path, result)
+        session["record_sha256"] = result["record_sha256"]
+        session["result_sha256"] = sha_file(result_path)
+    write_json(manifest_path, manifest)
 
 
 def reseal(root: pathlib.Path) -> None:
@@ -398,6 +469,59 @@ class Mutator:
         manifest["pre_cleanup_database_audit"]["sha256"] = sha_file(audit_path)
         write_json(path, manifest)
         self.mark(path)
+
+    def lifecycle(self, callback: Callable[[list[dict[str, Any]]], None], index: int = 0,
+                  *, renumber: bool = False) -> None:
+        manifest_path = self.root / "run-manifest.json"
+        manifest = read_json(manifest_path)
+        session = manifest["sessions"][index]
+        path = pathlib.Path(session["lifecycle_path"])
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8-sig").splitlines() if line.strip()]
+        callback(rows)
+        write_lifecycle(path, rows, renumber=renumber)
+        session["lifecycle_sha256"] = sha_file(path)
+        write_json(manifest_path, manifest)
+        self.mark(path)
+        self.mark(manifest_path)
+
+    def process_exit(self, callback: Callable[[dict[str, Any]], None], index: int = 0) -> None:
+        manifest_path = self.root / "run-manifest.json"
+        manifest = read_json(manifest_path)
+        session = manifest["sessions"][index]
+        path = pathlib.Path(session["process_exit_diagnostic_path"])
+        diagnostic = read_json(path)
+        callback(diagnostic)
+        write_json(path, diagnostic)
+        session["process_exit_diagnostic"] = diagnostic
+        session["process_exit_diagnostic_sha256"] = sha_file(path)
+        write_json(manifest_path, manifest)
+        self.mark(path)
+        self.mark(manifest_path)
+
+    def phase_summary_path(self, index: int = 0) -> pathlib.Path:
+        manifest = read_json(self.root / "run-manifest.json")
+        return pathlib.Path(manifest["sessions"][index]["phase_summary_path"])
+
+    def sync_phase_summary_binding(self, index: int = 0, *, sync_record_alias: bool) -> None:
+        manifest_path = self.root / "run-manifest.json"
+        manifest = read_json(manifest_path)
+        session = manifest["sessions"][index]
+        phase_path = pathlib.Path(session["phase_summary_path"])
+        session["phase_summary_sha256"] = sha_file(phase_path)
+        if sync_record_alias:
+            session["phase_summary_record_sha256"] = read_json(phase_path)["record_sha256"]
+        result_path = pathlib.Path(session["result_path"])
+        result = read_json(result_path)
+        result["phase_summary_sha256"] = session["phase_summary_sha256"]
+        result["phase_summary_record_sha256"] = session["phase_summary_record_sha256"]
+        with_record_sha256(result)
+        write_json(result_path, result)
+        session["record_sha256"] = result["record_sha256"]
+        session["result_sha256"] = sha_file(result_path)
+        write_json(manifest_path, manifest)
+        self.mark(phase_path)
+        self.mark(result_path)
+        self.mark(manifest_path)
 
     def artifact(self, file_name: str, callback: Callable[[dict[str, Any]], None]) -> None:
         matches = [a for a in self.summary["artifacts"] if pathlib.PurePosixPath(a["path"]).name == file_name]
@@ -487,6 +611,94 @@ def mutate(root: pathlib.Path, name: str) -> list[str]:
     elif name == "batch-partial-commit": m.artifact("batch-500.json", lambda x: payload(x).__setitem__("atomic", False))
     elif name == "journal-chain-mismatch":
         path = root / "app/evidence/events.ndjson"; lines = path.read_text(encoding="utf-8").splitlines(); row = json.loads(lines[1]); row["previous_event_hash"] = zero; lines[1] = json_bytes(row, pretty=False).decode(); path.write_text("\n".join(lines)+"\n", encoding="utf-8"); m.mark(path)
+    elif name == "lifecycle-chain-mismatch":
+        manifest = read_json(root / "run-manifest.json")
+        path = pathlib.Path(manifest["sessions"][0]["lifecycle_path"])
+        lines = path.read_text(encoding="utf-8").splitlines()
+        row = json.loads(lines[1]); row["previous_record_sha256"] = zero
+        row.pop("record_sha256", None)
+        row["record_sha256"] = sha_bytes(json_bytes(row, pretty=False))
+        lines[1] = json_bytes(row, pretty=False).decode()
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8"); m.mark(path)
+        m.manifest(lambda x: x["sessions"][0].__setitem__("lifecycle_sha256", sha_file(path)))
+    elif name == "missing-completion-handshake":
+        m.process_exit(lambda x: x["timeline"].__setitem__(
+            slice(None), [row for row in x["timeline"] if row.get("event") != "completion-handshake-observed"]))
+    elif name == "lifecycle-state-regression":
+        def regress_state(rows: list[dict[str, Any]]) -> None:
+            row = next(item for item in rows if item["event"] == "application-async-dispose-completed")
+            row["result"] = "started"
+            row["pending"] = True
+            row["pending_operation_count"] = 1
+        m.lifecycle(regress_state)
+    elif name == "lifecycle-duplicate-transition":
+        def duplicate_transition(rows: list[dict[str, Any]]) -> None:
+            index = next(i for i, item in enumerate(rows) if item["event"] == "page-dispose-completed")
+            rows[index]["event"] = rows[index - 1]["event"]
+        m.lifecycle(duplicate_transition)
+    elif name == "lifecycle-run-id-mismatch":
+        m.lifecycle(lambda rows: rows[0].__setitem__("run_id", "spliced-lifecycle-run"))
+    elif name == "lifecycle-session-id-mismatch":
+        m.lifecycle(lambda rows: rows[0].__setitem__("process_session_id", "f" * 32))
+    elif name == "lifecycle-source-head-mismatch":
+        m.lifecycle(lambda rows: rows[0].__setitem__("source_head", "f" * 40))
+    elif name == "lifecycle-binary-hash-mismatch":
+        m.lifecycle(lambda rows: rows[0].__setitem__("executable_sha256", zero))
+    elif name == "partial-phase-summary":
+        path = m.phase_summary_path()
+        content = path.read_bytes()
+        if not content:
+            raise RuntimeError("phase summary is unexpectedly empty before truncation")
+        path.write_bytes(content[:-1])
+        m.sync_phase_summary_binding(sync_record_alias=False)
+    elif name == "phase-summary-record-hash-mismatch":
+        path = m.phase_summary_path()
+        summary = read_json(path)
+        summary["record_sha256"] = zero
+        write_json(path, summary)
+        m.sync_phase_summary_binding(sync_record_alias=True)
+    elif name == "forced-cleanup-false-success":
+        def false_success(diagnostic: dict[str, Any]) -> None:
+            diagnostic["outcome"] = "completed"
+            diagnostic["forced_cleanup"]["required"] = True
+            diagnostic["forced_cleanup"]["started"] = True
+            diagnostic["forced_cleanup"]["owner_identity_verified"] = True
+            diagnostic["forced_cleanup"]["kill_requested_through_retained_handle"] = True
+            diagnostic["forced_cleanup"]["process_exit_observed"] = True
+            diagnostic["forced_cleanup"]["completed"] = True
+        m.process_exit(false_success)
+    elif name == "missing-exit-code":
+        def remove_exit_code(manifest: dict[str, Any]) -> None:
+            manifest["sessions"][0].pop("exit_code", None)
+            diagnostic = manifest["sessions"][0]["process_exit_diagnostic"]
+            diagnostic["timeline"] = [
+                row for row in diagnostic["timeline"] if row.get("event") != "exit-code-observed"
+            ]
+            diagnostic_path = pathlib.Path(manifest["sessions"][0]["process_exit_diagnostic_path"])
+            write_json(diagnostic_path, diagnostic)
+            manifest["sessions"][0]["process_exit_diagnostic_sha256"] = sha_file(diagnostic_path)
+            m.mark(diagnostic_path)
+        m.manifest(remove_exit_code)
+    elif name == "missing-on-exit-completed":
+        m.lifecycle(
+            lambda rows: rows.__setitem__(
+                slice(None), [row for row in rows if row.get("event") != "application-on-exit-completed"]),
+            renumber=True)
+    elif name == "lifecycle-timing-regression":
+        def regress_timing(rows: list[dict[str, Any]]) -> None:
+            index = next(i for i, item in enumerate(rows) if item["event"] == "page-dispose-completed")
+            rows[index]["timestamp_utc"] = "2000-01-01T00:00:00.0000000+00:00"
+            rows[index]["stopwatch_elapsed_ms"] = -1.0
+        m.lifecycle(regress_timing)
+    elif name == "lifecycle-old-root-splice":
+        def splice_old_root(manifest: dict[str, Any]) -> None:
+            session = manifest["sessions"][0]
+            source = pathlib.Path(session["lifecycle_path"])
+            old_path = root.parent / "old-run-root" / "app" / "evidence" / source.name
+            old_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, old_path)
+            session["lifecycle_path"] = str(old_path)
+        m.manifest(splice_old_root)
     elif name == "undo-redo-mismatch": m.artifact("batch-500.json", lambda x: payload(x).__setitem__("redo_passed", False))
     elif name == "restart-identity-reused":
         row = next(s for s in m.summary["scenarios"] if s["id"] == "search-suggestions-history/v1"); row["restart_pid"] = row["pid"]; m.summary_dirty = True
@@ -503,6 +715,8 @@ def mutate(root: pathlib.Path, name: str) -> list[str]:
         def safety(x: dict[str, Any]) -> None:
             x["safety"][field] = 1; x["safety_measurement"]["path_confinement"][field] = 1
         m.manifest(safety)
+    elif name == "safety-counter-null":
+        m.manifest(lambda x: x["safety"].__setitem__("desktop_input_injection_count", None))
     elif name in {"eagle-write", "network-upload"}:
         rule = "eagle_io" if name.startswith("eagle") else "network_upload"
         token = "// Eagle.exe\n" if rule == "eagle_io" else "// HttpClient\n"

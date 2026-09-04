@@ -59,6 +59,30 @@ generator、真实负例证明器、contract 和本说明复制到 `runner/accep
 会话。每个会话都绑定 run id、source HEAD、进程会话 id、PID/HWND 和 run-owned 二进制
 hash，禁止跨 run、跨进程或跨二进制拼接。
 
+runner 对 `Get-Process` 与 CIM 使用不可枚举的强类型快照表；空、单项和多项结果都只由
+`Items` 表达，进程身份行固定记录 PID、进程名、启动时间、可执行文件路径及 hash、
+run/session/HWND 所有权、退出状态和观察错误。查询错误会 fail closed。每个应用会话都
+写入独立的 `app-*.process-exit.json`。runner 不再先盲等进程 300 秒，而是在同一个 300 秒
+截止时间内依次观察完成握手、异步释放与关闭准备、`OnExit`、不可变 phase summary 原子
+提交、正常退出与 exit code，以及两张进程表连续两次同 run 归零；每段都有独立上限，
+因此失败会定位到具体关闭阶段。若执行超时，runner 只在 PID、路径、启动时间
+和二进制 hash 均匹配启动时 owner token 后，通过保留的进程 handle 终止该进程，并记录
+强制清理开始和完成；不会按裸 PID 终止。主失败、清理失败和观察失败分栏保存，收尾失败
+不会覆盖最先发生的业务或超时异常。
+
+应用还为每个会话写入 `lifecycle-<scenario>-<phase>.ndjson`。runner 在 plan 中预分配唯一的
+32 位小写十六进制进程会话 ID，应用必须原样用于 lifecycle、summary 和全部证据。validator
+逐行重算 lifecycle hash，检查 previous-hash 链、严格递增的序号/时间、固定退出状态顺序，
+并把 run、scenario、phase、session、PID/HWND、source HEAD 和三份二进制 hash 绑定到同一
+runner 会话；缺记录、重复/倒序、部分写入、伪造强制清理成功或旧 run 记录混入都会拒绝。
+固定尾序为 `application-on-exit-enter` → `summary-commit-start` → `phase-summary-written` →
+`summary-commit-end` → `application-on-exit-completed`。其中 `phase-summary-written` 只能在不可变
+phase summary 原子发布成功后记录；真正完成提交还必须由该文件的 `record_sha256`、文件 hash
+以及 summary journal 内嵌的同一字节记录共同证明。发布后任何 lifecycle 追加失败都会设置非零
+退出码并被拒绝；lifecycle 完整但 phase 文件缺失（或反向情况）同样不能通过。
+每个 `app-*.result.json` 也有固定 schema、状态、会话/进程/二进制/退出身份和可复算
+`record_sha256`，manifest 再用独立结果路径与文件 hash 绑定它。
+
 ## Fixture 与证据
 
 当前 fixture 是 schema v7，共 10,128 条：10,000 条活动、128 条归档、512 条缺失；
@@ -79,7 +103,7 @@ schema v6 fixture，共 64 条（60 活动、4 归档）。生成器、两份数
 性能上限（毫秒）：10k 首屏 1500、搜索建议 200、单筛选 300、八规则嵌套查询 600、
 智能文件夹预览 750、范围切换 400、批量标签 100 项 750、500 项 2000、UI 阻塞 100。
 validator 会按产品写入端的精确 UTF-8 字节契约，逐行重算 `events.ndjson` 和
-`summary.ndjson` 的 record hash，并同时核验 previous hash 链。契约列出的 50 类负例
+`summary.ndjson` 的 record hash，并同时核验 previous hash 链。契约列出的 66 类负例
 不是名称清单：每次验证都会为每类负例创建独立的内存副本、施加对应变异，再由独立
 validator 子进程逐项证明 fail closed；sealed run 本身始终只读。
 

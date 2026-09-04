@@ -36,6 +36,30 @@ $script:environmentKeys = @(
     'PIXEL_TART_P3_AUTOMATED_FIXTURE_ROOT',
     'MSBUILDDISABLENODEREUSE'
 )
+$script:p3LifecycleEvents = @(
+    'plan-completed','completion-ack-written','shutdown-requested','shutdown-dispatch-started',
+    'page-dispose-start','page-dispose-completed','application-async-dispose-start',
+    'application-async-dispose-completed','shutdown-preparation-complete','window-close-start',
+    'application-shutdown-start','window-close-completed','application-on-exit-enter',
+    'summary-commit-start','phase-summary-written','summary-commit-end','application-on-exit-completed'
+)
+$script:p3LifecycleResults = @(
+    'passed','completed','accepted','started','started','completed','started','completed','completed',
+    'started','started','completed','prepared','passed','passed','passed','completed'
+)
+$script:p3LifecyclePending = @(
+    $false,$false,$true,$true,$true,$false,$true,$false,$false,$true,$true,$false,$false,$true,$false,$false,$false
+)
+$script:p3ProcessStageTimeoutSeconds = [ordered]@{
+    completion_handshake = 235
+    shutdown_preparation = 20
+    application_on_exit_enter = 10
+    phase_summary_commit = 10
+    application_on_exit_completed = 5
+    process_exit = 10
+    process_table_convergence = 10
+}
+$script:p3ProcessStageTotalTimeoutSeconds = 300
 
 function Get-RepositoryRoot {
     $candidate = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
@@ -92,26 +116,1255 @@ function Get-DotNetPath {
     return $command.Source
 }
 
+if (-not ('PixelTartP3ProcessTableSnapshot' -as [type])) {
+    Add-Type -TypeDefinition @'
+public sealed class PixelTartP3ProcessIdentitySnapshotRow
+{
+    public int Pid { get; set; }
+    public string ProcessName { get; set; }
+    public string StartTimeUtc { get; set; }
+    public string ExecutablePath { get; set; }
+    public string ExecutableSha256 { get; set; }
+    public string RunId { get; set; }
+    public string ProcessSessionId { get; set; }
+    public string WindowHandle { get; set; }
+    public bool OwnedByRun { get; set; }
+    public bool HasExited { get; set; }
+    public string ObservationError { get; set; }
+}
+
+public sealed class PixelTartP3ProcessTableSnapshot
+{
+    public string Schema { get; set; }
+    public string Source { get; set; }
+    public string CapturedAtUtc { get; set; }
+    public string ObservationError { get; set; }
+    public PixelTartP3ProcessIdentitySnapshotRow[] Items { get; set; }
+}
+'@
+}
+
+function ConvertTo-NormalizedProcessPath {
+    param([AllowNull()][string]$Path)
+    if ([string]::IsNullOrWhiteSpace($Path)) { return '' }
+    try { return [IO.Path]::GetFullPath($Path) }
+    catch { return $Path }
+}
+
+function New-ProcessIdentitySnapshotRow {
+    param(
+        [int]$ProcessId,
+        [string]$ProcessName,
+        [AllowNull()][string]$StartTimeUtc,
+        [AllowNull()][string]$ExecutablePath,
+        [AllowNull()][string]$ExecutableSha256,
+        [AllowNull()][string]$RunId,
+        [AllowNull()][string]$ProcessSessionId,
+        [AllowNull()][string]$WindowHandle,
+        [bool]$OwnedByRun,
+        [bool]$HasExited,
+        [AllowNull()][string]$ObservationError
+    )
+    $row = [PixelTartP3ProcessIdentitySnapshotRow]::new()
+    $row.Pid = $ProcessId
+    $row.ProcessName = $ProcessName
+    $row.StartTimeUtc = [string]$StartTimeUtc
+    $row.ExecutablePath = ConvertTo-NormalizedProcessPath $ExecutablePath
+    $row.ExecutableSha256 = [string]$ExecutableSha256
+    $row.RunId = [string]$RunId
+    $row.ProcessSessionId = [string]$ProcessSessionId
+    $row.WindowHandle = [string]$WindowHandle
+    $row.OwnedByRun = $OwnedByRun
+    $row.HasExited = $HasExited
+    $row.ObservationError = [string]$ObservationError
+    return $row
+}
+
+function New-ProcessTableSnapshot {
+    param(
+        [ValidateSet('Get-Process', 'CIM')]
+        [string]$Source,
+        [AllowEmptyCollection()][PixelTartP3ProcessIdentitySnapshotRow[]]$Items = @(),
+        [AllowNull()][string]$ObservationError = ''
+    )
+    # This CLR table is intentionally not IEnumerable. Windows PowerShell 5.1
+    # enumerates function output arrays, while StrictMode rejects member access
+    # such as $emptyArray.Pid on a zero-length array.
+    $snapshot = [PixelTartP3ProcessTableSnapshot]::new()
+    $snapshot.Schema = 'pixel-tart-p3-process-table-snapshot/v1'
+    $snapshot.Source = $Source
+    $snapshot.CapturedAtUtc = [DateTimeOffset]::UtcNow.ToString('O')
+    $snapshot.ObservationError = [string]$ObservationError
+    $snapshot.Items = [PixelTartP3ProcessIdentitySnapshotRow[]]@($Items)
+    return $snapshot
+}
+
+function Test-ProcessOwnerTokenValues {
+    param(
+        [AllowNull()]$OwnerToken,
+        [int]$ProcessId,
+        [AllowNull()][string]$ExecutablePath,
+        [AllowNull()][string]$StartTimeUtc
+    )
+    if ($null -eq $OwnerToken) { return $false }
+    if ($ProcessId -ne [int]$OwnerToken.Pid) { return $false }
+    if (-not [string]::Equals(
+        (ConvertTo-NormalizedProcessPath $ExecutablePath),
+        (ConvertTo-NormalizedProcessPath ([string]$OwnerToken.ExecutablePath)),
+        [StringComparison]::OrdinalIgnoreCase)) { return $false }
+    if ([string]::IsNullOrWhiteSpace($StartTimeUtc)) { return $false }
+    try {
+        $actualStart = [DateTimeOffset]::Parse($StartTimeUtc, [Globalization.CultureInfo]::InvariantCulture)
+        $ownerStart = [DateTimeOffset]::Parse([string]$OwnerToken.StartTimeUtc, [Globalization.CultureInfo]::InvariantCulture)
+        return [Math]::Abs(($actualStart - $ownerStart).TotalMilliseconds) -lt 1000
+    } catch { return $false }
+}
+
+function Get-ObservedExecutableSha256 {
+    param([AllowNull()][string]$ExecutablePath, [Collections.Generic.List[string]]$Errors)
+    if ([string]::IsNullOrWhiteSpace($ExecutablePath)) {
+        $Errors.Add('ExecutablePath unavailable.')
+        return ''
+    }
+    try {
+        if (-not (Test-Path -LiteralPath $ExecutablePath -PathType Leaf)) {
+            $Errors.Add('ExecutablePath is not a readable file.')
+            return ''
+        }
+        return Get-FileSha256 $ExecutablePath
+    } catch {
+        $Errors.Add("ExecutableSha256 observation failed: $($_.Exception.Message)")
+        return ''
+    }
+}
+
 function Get-ProcessSnapshot {
-    return @(Get-Process -Name $script:expectedProcessName -ErrorAction SilentlyContinue | ForEach-Object {
-        [pscustomobject]@{ pid = $_.Id; path = $(try { $_.Path } catch { $null }) }
-    })
+    param([AllowNull()]$OwnerToken)
+    $rows = [Collections.Generic.List[PixelTartP3ProcessIdentitySnapshotRow]]::new()
+    $processes = [Collections.Generic.List[object]]::new()
+    try {
+        foreach ($candidate in @(Get-Process -ErrorAction Stop)) {
+            if ($null -eq $candidate) { continue }
+            $nameProperty = $candidate.PSObject.Properties['ProcessName']
+            if ($null -eq $nameProperty) {
+                throw 'Get-Process returned an object without the required ProcessName field.'
+            }
+            if ([string]$nameProperty.Value -ceq $script:expectedProcessName) { $processes.Add($candidate) }
+        }
+    } catch {
+        throw "Get-Process DevPreview observation failed closed: $($_.Exception.Message)"
+    }
+    foreach ($process in $processes) {
+        $errors = [Collections.Generic.List[string]]::new()
+        $path = ''
+        $startTimeUtc = ''
+        $windowHandle = ''
+        $hasExited = $false
+        try { $path = ConvertTo-NormalizedProcessPath ([string]$process.Path) }
+        catch { $errors.Add("ExecutablePath observation failed: $($_.Exception.Message)") }
+        try { $startTimeUtc = $process.StartTime.ToUniversalTime().ToString('O') }
+        catch { $errors.Add("StartTimeUtc observation failed: $($_.Exception.Message)") }
+        try { $windowHandle = ('0x{0:x}' -f $process.MainWindowHandle.ToInt64()) }
+        catch { $errors.Add("WindowHandle observation failed: $($_.Exception.Message)") }
+        try { $hasExited = [bool]$process.HasExited }
+        catch { $errors.Add("HasExited observation failed: $($_.Exception.Message)") }
+        $sha256 = Get-ObservedExecutableSha256 $path $errors
+        $ownedByRun = Test-ProcessOwnerTokenValues $OwnerToken ([int]$process.Id) $path $startTimeUtc
+        $rows.Add((New-ProcessIdentitySnapshotRow `
+            ([int]$process.Id) ([string]$process.ProcessName) $startTimeUtc $path $sha256 `
+            $(if ($ownedByRun) { [string]$OwnerToken.RunId } else { '' }) `
+            $(if ($ownedByRun) { [string]$OwnerToken.ProcessSessionId } else { '' }) `
+            $windowHandle $ownedByRun $hasExited ($errors -join ' | ')))
+    }
+    return New-ProcessTableSnapshot 'Get-Process' ([PixelTartP3ProcessIdentitySnapshotRow[]]$rows.ToArray())
 }
 
 function Get-CimProcessSnapshot {
+    param([AllowNull()]$OwnerToken)
+    $rows = [Collections.Generic.List[PixelTartP3ProcessIdentitySnapshotRow]]::new()
+    $processes = [Collections.Generic.List[object]]::new()
     $executableName = "$($script:expectedProcessName).exe"
-    return @(Get-CimInstance -ClassName Win32_Process -Filter "Name='$executableName'" -ErrorAction Stop | ForEach-Object {
-        [pscustomobject]@{ pid = [int]$_.ProcessId; path = $_.ExecutablePath }
-    })
+    try {
+        foreach ($candidate in @(Get-CimInstance -ClassName Win32_Process -Filter "Name='$executableName'" -ErrorAction Stop)) {
+            if ($null -eq $candidate) { continue }
+            foreach ($requiredField in 'ProcessId','Name','ExecutablePath','CreationDate') {
+                if ($null -eq $candidate.PSObject.Properties[$requiredField]) {
+                    throw "CIM returned an object without the required $requiredField field."
+                }
+            }
+            $processes.Add($candidate)
+        }
+    } catch {
+        throw "CIM DevPreview observation failed closed: $($_.Exception.Message)"
+    }
+    foreach ($process in $processes) {
+        $errors = [Collections.Generic.List[string]]::new()
+        $path = ConvertTo-NormalizedProcessPath ([string]$process.ExecutablePath)
+        $startTimeUtc = ''
+        try {
+            $creationDate = $process.CreationDate
+            if ($creationDate -is [DateTimeOffset]) {
+                $startTimeUtc = ([DateTimeOffset]$creationDate).ToUniversalTime().ToString('O')
+            } elseif ($creationDate -is [DateTime]) {
+                $startTimeUtc = ([DateTime]$creationDate).ToUniversalTime().ToString('O')
+            } else {
+                $startTimeUtc = [Management.ManagementDateTimeConverter]::ToDateTime(
+                    [string]$creationDate).ToUniversalTime().ToString('O')
+            }
+        } catch { $errors.Add("StartTimeUtc observation failed: $($_.Exception.Message)") }
+        $sha256 = Get-ObservedExecutableSha256 $path $errors
+        $ownedByRun = Test-ProcessOwnerTokenValues $OwnerToken ([int]$process.ProcessId) $path $startTimeUtc
+        $rows.Add((New-ProcessIdentitySnapshotRow `
+            ([int]$process.ProcessId) ([IO.Path]::GetFileNameWithoutExtension([string]$process.Name)) $startTimeUtc $path $sha256 `
+            $(if ($ownedByRun) { [string]$OwnerToken.RunId } else { '' }) `
+            $(if ($ownedByRun) { [string]$OwnerToken.ProcessSessionId } else { '' }) `
+            '' $ownedByRun $false ($errors -join ' | ')))
+    }
+    return New-ProcessTableSnapshot 'CIM' ([PixelTartP3ProcessIdentitySnapshotRow[]]$rows.ToArray())
+}
+
+function Assert-ProcessTableSnapshot {
+    param($Snapshot, [string]$ExpectedSource)
+    if ($null -eq $Snapshot -or
+        -not ($Snapshot -is [PixelTartP3ProcessTableSnapshot]) -or
+        [string]$Snapshot.Schema -cne 'pixel-tart-p3-process-table-snapshot/v1' -or
+        [string]$Snapshot.Source -cne $ExpectedSource -or
+        $null -eq $Snapshot.Items) {
+        throw "The $ExpectedSource DevPreview process table snapshot is malformed."
+    }
+    if (-not [string]::IsNullOrWhiteSpace([string]$Snapshot.ObservationError)) {
+        throw "The $ExpectedSource DevPreview process table query failed closed: $($Snapshot.ObservationError)"
+    }
+    foreach ($row in [PixelTartP3ProcessIdentitySnapshotRow[]]$Snapshot.Items) {
+        if ($null -eq $row -or [int]$row.Pid -le 0) {
+            throw "The $ExpectedSource DevPreview process table contains a malformed identity row."
+        }
+    }
+}
+
+function New-DevPreviewProcessObservation {
+    param(
+        [AllowNull()]$GetProcessSnapshot,
+        [AllowNull()]$CimProcessSnapshot
+    )
+    if (-not $PSBoundParameters.ContainsKey('GetProcessSnapshot')) { $GetProcessSnapshot = Get-ProcessSnapshot }
+    if (-not $PSBoundParameters.ContainsKey('CimProcessSnapshot')) { $CimProcessSnapshot = Get-CimProcessSnapshot }
+    Assert-ProcessTableSnapshot $GetProcessSnapshot 'Get-Process'
+    Assert-ProcessTableSnapshot $CimProcessSnapshot 'CIM'
+    $observation = [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-devpreview-process-observation/v1'
+        captured_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+        GetProcess = $GetProcessSnapshot
+        Cim = $CimProcessSnapshot
+    }
+    $observation.PSObject.TypeNames.Insert(0, 'PixelTart.P3.DevPreviewProcessObservation')
+    return $observation
+}
+
+function Assert-DevPreviewProcessObservation {
+    param($Observation)
+    if ($null -eq $Observation -or
+        [string]$Observation.schema -cne 'pixel-tart-p3-devpreview-process-observation/v1' -or
+        $null -eq $Observation.PSObject.Properties['GetProcess'] -or
+        $null -eq $Observation.PSObject.Properties['Cim']) {
+        throw 'The combined DevPreview process observation is malformed.'
+    }
+    Assert-ProcessTableSnapshot $Observation.GetProcess 'Get-Process'
+    Assert-ProcessTableSnapshot $Observation.Cim 'CIM'
+}
+
+function Get-DevPreviewProcessPids {
+    param($Observation)
+    Assert-DevPreviewProcessObservation $Observation
+    $pids = [Collections.Generic.List[int]]::new()
+    foreach ($row in [PixelTartP3ProcessIdentitySnapshotRow[]]$Observation.GetProcess.Items) { $pids.Add([int]$row.Pid) }
+    foreach ($row in [PixelTartP3ProcessIdentitySnapshotRow[]]$Observation.Cim.Items) { $pids.Add([int]$row.Pid) }
+    return @($pids.ToArray() | Sort-Object -Unique)
 }
 
 function Assert-NoDevPreview {
-    $processes = @(Get-ProcessSnapshot)
-    $cimProcesses = @(Get-CimProcessSnapshot)
-    if ($processes.Count -ne 0 -or $cimProcesses.Count -ne 0) {
-        $pids = @($processes.pid) + @($cimProcesses.pid) | Sort-Object -Unique
+    param([AllowNull()]$Observation)
+    if (-not $PSBoundParameters.ContainsKey('Observation')) { $Observation = New-DevPreviewProcessObservation }
+    Assert-DevPreviewProcessObservation $Observation
+    if ($Observation.GetProcess.Items.Count -ne 0 -or $Observation.Cim.Items.Count -ne 0) {
+        $pids = @(Get-DevPreviewProcessPids $Observation)
         throw "Automated acceptance requires both DevPreview process tables to be empty; found PID(s): $($pids -join ', ')."
     }
+}
+
+function ConvertTo-StructuredFailure {
+    param(
+        [string]$Category,
+        [string]$Stage,
+        [AllowNull()]$Failure
+    )
+    $exception = if ($Failure -is [Management.Automation.ErrorRecord]) { $Failure.Exception }
+        elseif ($Failure -is [Exception]) { $Failure }
+        else { $null }
+    $message = if ($null -ne $exception) { [string]$exception.Message } else { [string]$Failure }
+    $type = if ($null -ne $exception) { [string]$exception.GetType().FullName } else { [string]$Failure.GetType().FullName }
+    $fullyQualifiedErrorId = if ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.FullyQualifiedErrorId } else { '' }
+    $scriptStackTrace = if ($Failure -is [Management.Automation.ErrorRecord]) { [string]$Failure.ScriptStackTrace } else { '' }
+    return [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-structured-failure/v1'
+        category = $Category
+        stage = $Stage
+        type = $type
+        message = $message
+        fully_qualified_error_id = $fullyQualifiedErrorId
+        script_stack_trace = $scriptStackTrace
+        observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+    }
+}
+
+function Add-ProcessExitTimelineEvent {
+    param(
+        [Collections.Generic.List[object]]$Timeline,
+        [string]$Event,
+        [string]$Outcome,
+        [AllowNull()]$Detail
+    )
+    $Timeline.Add([pscustomobject][ordered]@{
+        sequence = $Timeline.Count + 1
+        timestamp_utc = [DateTimeOffset]::UtcNow.ToString('O')
+        event = $Event
+        outcome = $Outcome
+        detail = $Detail
+    })
+}
+
+function Assert-RunOwnedNonReparseFile {
+    param(
+        [string]$Path,
+        [string]$OwnedRoot
+    )
+    $fullPath = [IO.Path]::GetFullPath($Path)
+    $fullRoot = [IO.Path]::GetFullPath($OwnedRoot).TrimEnd('\', '/')
+    if (-not (Test-PathWithin $fullPath $fullRoot) -or
+        -not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+        throw "Runner-owned executable must be a file below the sealed binary root: $fullPath"
+    }
+    $cursor = $fullPath
+    while ($true) {
+        $item = Get-Item -LiteralPath $cursor -Force
+        if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Runner-owned executable identity traverses a reparse point: $cursor"
+        }
+        if ([string]::Equals($cursor.TrimEnd('\', '/'), $fullRoot, [StringComparison]::OrdinalIgnoreCase)) { break }
+        $parent = Split-Path -Parent $cursor
+        if ([string]::IsNullOrWhiteSpace($parent) -or
+            -not (Test-PathWithin $parent $fullRoot)) {
+            throw "Runner-owned executable traversal escaped the sealed binary root: $cursor"
+        }
+        $cursor = $parent
+    }
+    return $fullPath
+}
+
+function New-RunnerProcessOwnerToken {
+    param(
+        [Diagnostics.Process]$Process,
+        [string]$ExpectedExecutablePath,
+        [string]$ExpectedExecutableSha256,
+        [string]$RunId,
+        [string]$ProcessSessionId,
+        [string]$RunOwnedBinaryRoot,
+        [string]$RunStartedAtUtc
+    )
+    if ($ProcessSessionId -cnotmatch '^[0-9a-f]{32}$') {
+        throw 'Runner-owned process identity requires a preassigned lowercase hex32 process session id.'
+    }
+    $expectedOwnedPath = Assert-RunOwnedNonReparseFile $ExpectedExecutablePath $RunOwnedBinaryRoot
+    try {
+        $runStarted = [DateTimeOffset]::Parse(
+            $RunStartedAtUtc,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::RoundtripKind)
+        $Process.Refresh()
+        if ($Process.HasExited) { throw 'The process exited before its owner token could be captured.' }
+        $actualPath = ConvertTo-NormalizedProcessPath ([string]$Process.MainModule.FileName)
+        $actualStart = [DateTimeOffset]$Process.StartTime.ToUniversalTime()
+        $actualStartTimeUtc = $actualStart.ToString('O')
+        $actualSha256 = Get-FileSha256 $actualPath
+    } catch {
+        throw "Runner-owned process identity capture failed closed: $($_.Exception.Message)"
+    }
+    if ($actualStart -le $runStarted) {
+        throw 'The launched process start time is not later than the sealed run creation time.'
+    }
+    if (-not [string]::Equals($actualPath, $expectedOwnedPath, [StringComparison]::OrdinalIgnoreCase) -or
+        $actualSha256 -cne $ExpectedExecutableSha256) {
+        throw 'The launched process identity differs from the sealed executable.'
+    }
+    return [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-runner-process-owner/v1'
+        Pid = [int]$Process.Id
+        ProcessName = [string]$Process.ProcessName
+        StartTimeUtc = $actualStartTimeUtc
+        ExecutablePath = $actualPath
+        ExecutableSha256 = $actualSha256
+        RunId = $RunId
+        ProcessSessionId = $ProcessSessionId
+        WindowHandle = ''
+        OwnedByRun = $true
+        HasExited = $false
+        ObservationError = ''
+    }
+}
+
+function Test-RunnerOwnedProcessIdentity {
+    param(
+        [Diagnostics.Process]$Process,
+        $OwnerToken
+    )
+    $observation = New-DevPreviewProcessObservation `
+        (Get-ProcessSnapshot $OwnerToken) (Get-CimProcessSnapshot $OwnerToken)
+    $getProcessOwnerRows = [Collections.Generic.List[PixelTartP3ProcessIdentitySnapshotRow]]::new()
+    $cimOwnerRows = [Collections.Generic.List[PixelTartP3ProcessIdentitySnapshotRow]]::new()
+    $extraPids = [Collections.Generic.HashSet[int]]::new()
+    foreach ($row in [PixelTartP3ProcessIdentitySnapshotRow[]]$observation.GetProcess.Items) {
+        if ($row.Pid -eq [int]$OwnerToken.Pid) { $getProcessOwnerRows.Add($row) }
+        else { [void]$extraPids.Add($row.Pid) }
+    }
+    foreach ($row in [PixelTartP3ProcessIdentitySnapshotRow[]]$observation.Cim.Items) {
+        if ($row.Pid -eq [int]$OwnerToken.Pid) { $cimOwnerRows.Add($row) }
+        else { [void]$extraPids.Add($row.Pid) }
+    }
+    $handlePath = ''
+    $handleStartTimeUtc = ''
+    $handleHasExited = $true
+    $handleObservationError = ''
+    try {
+        $Process.Refresh()
+        $handleHasExited = [bool]$Process.HasExited
+        if (-not $handleHasExited) {
+            $handlePath = ConvertTo-NormalizedProcessPath ([string]$Process.MainModule.FileName)
+            $handleStartTimeUtc = $Process.StartTime.ToUniversalTime().ToString('O')
+        }
+    } catch { $handleObservationError = $_.Exception.Message }
+    $getProcessOwner = if ($getProcessOwnerRows.Count -eq 1) { $getProcessOwnerRows[0] } else { $null }
+    $cimOwner = if ($cimOwnerRows.Count -eq 1) { $cimOwnerRows[0] } else { $null }
+    $valid = -not $handleHasExited -and [string]::IsNullOrWhiteSpace($handleObservationError) -and
+        (Test-ProcessOwnerTokenValues $OwnerToken ([int]$Process.Id) $handlePath $handleStartTimeUtc) -and
+        $getProcessOwnerRows.Count -eq 1 -and $cimOwnerRows.Count -eq 1 -and
+        $getProcessOwner.OwnedByRun -and $cimOwner.OwnedByRun -and
+        [string]::IsNullOrWhiteSpace($getProcessOwner.ObservationError) -and
+        [string]::IsNullOrWhiteSpace($cimOwner.ObservationError) -and
+        $getProcessOwner.ExecutableSha256 -ceq [string]$OwnerToken.ExecutableSha256 -and
+        $cimOwner.ExecutableSha256 -ceq [string]$OwnerToken.ExecutableSha256
+    return [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-runner-process-ownership-validation/v1'
+        valid = [bool]$valid
+        owner_pid = [int]$OwnerToken.Pid
+        retained_handle_pid = [int]$Process.Id
+        retained_handle_path = $handlePath
+        retained_handle_start_time_utc = $handleStartTimeUtc
+        retained_handle_has_exited = $handleHasExited
+        retained_handle_observation_error = $handleObservationError
+        get_process_owner_row_count = $getProcessOwnerRows.Count
+        cim_owner_row_count = $cimOwnerRows.Count
+        extra_same_name_pids = @($extraPids | Sort-Object)
+        observation = $observation
+    }
+}
+
+function New-DevPreviewProcessObservationSample {
+    param($Observation, [int]$Sequence)
+    $pids = @(Get-DevPreviewProcessPids $Observation)
+    return [pscustomobject][ordered]@{
+        sequence = $Sequence
+        timestamp_utc = [DateTimeOffset]::UtcNow.ToString('O')
+        get_process_count = $Observation.GetProcess.Items.Count
+        cim_count = $Observation.Cim.Items.Count
+        pids = $pids
+    }
+}
+
+function Wait-DevPreviewProcessTableConvergence {
+    param(
+        [AllowNull()]$OwnerToken,
+        [int]$TimeoutMilliseconds = 10000,
+        [int]$PollIntervalMilliseconds = 100,
+        [int]$RequiredConsecutiveEmptyObservations = 2,
+        [AllowNull()][scriptblock]$SnapshotProvider
+    )
+    if ($TimeoutMilliseconds -le 0 -or $PollIntervalMilliseconds -le 0 -or $RequiredConsecutiveEmptyObservations -lt 2) {
+        throw 'Process table convergence bounds are invalid.'
+    }
+    if ($null -eq $SnapshotProvider) {
+        $SnapshotProvider = {
+            param($Token)
+            New-DevPreviewProcessObservation (Get-ProcessSnapshot $Token) (Get-CimProcessSnapshot $Token)
+        }
+    }
+    $started = [Diagnostics.Stopwatch]::StartNew()
+    $samples = [Collections.Generic.List[object]]::new()
+    $observationFailures = [Collections.Generic.List[object]]::new()
+    $consecutiveEmpty = 0
+    $sequence = 0
+    while ($started.ElapsedMilliseconds -le $TimeoutMilliseconds) {
+        $sequence++
+        try {
+            $observation = & $SnapshotProvider $OwnerToken
+            Assert-DevPreviewProcessObservation $observation
+            $sample = New-DevPreviewProcessObservationSample $observation $sequence
+            $samples.Add($sample)
+            if ($sample.get_process_count -eq 0 -and $sample.cim_count -eq 0) { $consecutiveEmpty++ }
+            else { $consecutiveEmpty = 0 }
+            if ($consecutiveEmpty -ge $RequiredConsecutiveEmptyObservations) { break }
+        } catch {
+            $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'process-table-convergence' $_))
+            break
+        }
+        $remaining = $TimeoutMilliseconds - [int]$started.ElapsedMilliseconds
+        if ($remaining -le 0) { break }
+        [Threading.Thread]::Sleep([Math]::Min($PollIntervalMilliseconds, $remaining))
+    }
+    $started.Stop()
+    $lastPids = @()
+    if ($samples.Count -ne 0) { $lastPids = @($samples[$samples.Count - 1].pids) }
+    return [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-process-table-convergence/v1'
+        timeout_milliseconds = $TimeoutMilliseconds
+        poll_interval_milliseconds = $PollIntervalMilliseconds
+        required_consecutive_empty_observations = $RequiredConsecutiveEmptyObservations
+        observed_consecutive_empty_observations = $consecutiveEmpty
+        converged = $consecutiveEmpty -ge $RequiredConsecutiveEmptyObservations
+        elapsed_milliseconds = [int64]$started.ElapsedMilliseconds
+        samples = @($samples)
+        final_pids = $lastPids
+        observation_failures = @($observationFailures)
+    }
+}
+
+function Get-RequiredPropertyValue {
+    param($Object, [string]$Name, [string]$Context)
+    if ($null -eq $Object) { throw "$Context is null." }
+    $property = $Object.PSObject.Properties[$Name]
+    if ($null -eq $property -or $null -eq $property.Value) {
+        throw "$Context is missing required property '$Name'."
+    }
+    return $property.Value
+}
+
+function Read-SharedUtf8Text {
+    param([string]$Path)
+    $stream = [IO.FileStream]::new(
+        $Path,
+        [IO.FileMode]::Open,
+        [IO.FileAccess]::Read,
+        ([IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete))
+    try {
+        $reader = [IO.StreamReader]::new($stream, [Text.UTF8Encoding]::new($false), $true)
+        try { return $reader.ReadToEnd() }
+        finally { $reader.Dispose() }
+    } finally { $stream.Dispose() }
+}
+
+function Get-P3LifecycleCanonicalText {
+    param([string]$Line)
+    $match = [regex]::Match(
+        $Line,
+        '^(?<prefix>\{.*),"record_sha256":"(?<hash>[0-9a-f]{64})"\}$',
+        [Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    if (-not $match.Success) {
+        throw 'P3 lifecycle record does not use the terminal record_sha256 layout.'
+    }
+    return [pscustomobject][ordered]@{
+        canonical = $match.Groups['prefix'].Value + '}'
+        claimed_hash = $match.Groups['hash'].Value
+    }
+}
+
+function Get-P3SummaryJournalCanonicalText {
+    param([string]$Line)
+    $match = [regex]::Match(
+        $Line,
+        '^(?<prefix>\{.*),"summary_hash":"(?<primary>[0-9a-f]{64})","record_sha256":"(?<alias>[0-9a-f]{64})"\}$',
+        [Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    if (-not $match.Success) {
+        throw 'P3 summary journal record does not use the production terminal hash layout.'
+    }
+    if ($match.Groups['primary'].Value -cne $match.Groups['alias'].Value) {
+        throw 'P3 summary journal terminal hash aliases differ.'
+    }
+    return [pscustomobject][ordered]@{
+        canonical = $match.Groups['prefix'].Value + '}'
+        claimed_hash = $match.Groups['primary'].Value
+    }
+}
+
+function Get-P3EmbeddedPhaseSummaryCanonicalText {
+    param([string]$Line)
+    $match = [regex]::Match(
+        $Line,
+        '"summary":(?<prefix>\{.*),"record_sha256":"(?<hash>[0-9a-f]{64})"\},"previous_summary_hash"',
+        [Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    if (-not $match.Success) {
+        throw 'P3 summary journal does not embed a terminal-hashed immutable phase summary.'
+    }
+    return [pscustomobject][ordered]@{
+        canonical = $match.Groups['prefix'].Value + '}'
+        claimed_hash = $match.Groups['hash'].Value
+    }
+}
+
+function Read-P3LifecycleObservation {
+    param(
+        [string]$Path,
+        $ExpectedIdentity
+    )
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return [pscustomobject][ordered]@{
+            exists = $false
+            complete_record_count = 0
+            has_partial_tail = $false
+            events = @()
+            hwnd = ''
+            last_record_sha256 = ''
+        }
+    }
+    $text = Read-SharedUtf8Text $Path
+    $parts = [regex]::Split($text, "`r?`n")
+    $hasTrailingNewline = $text.EndsWith("`n", [StringComparison]::Ordinal)
+    $completeCount = if ($hasTrailingNewline) { [Math]::Max(0, $parts.Count - 1) }
+        else { [Math]::Max(0, $parts.Count - 1) }
+    $hasPartialTail = -not $hasTrailingNewline -and
+        $parts.Count -ne 0 -and -not [string]::IsNullOrWhiteSpace($parts[$parts.Count - 1])
+    $records = [Collections.Generic.List[object]]::new()
+    $events = [Collections.Generic.List[string]]::new()
+    $previousHash = '0' * 64
+    $previousTimestamp = [DateTimeOffset]::MinValue
+    $previousElapsed = -1.0
+    $observedHwnd = ''
+    for ($index = 0; $index -lt $completeCount; $index++) {
+        $line = $parts[$index]
+        if ([string]::IsNullOrWhiteSpace($line)) { throw "P3 lifecycle record[$index] is empty." }
+        try { $record = $line | ConvertFrom-Json -ErrorAction Stop }
+        catch { throw "P3 lifecycle record[$index] is invalid JSON: $($_.Exception.Message)" }
+        if ($index -ge $script:p3LifecycleEvents.Count) { throw 'P3 lifecycle has more records than the fixed contract.' }
+        $canonical = Get-P3LifecycleCanonicalText $line
+        if ((Get-TextSha256 $canonical.canonical) -cne $canonical.claimed_hash -or
+            [string](Get-RequiredPropertyValue $record 'record_sha256' "P3 lifecycle record[$index]") -cne $canonical.claimed_hash) {
+            throw "P3 lifecycle record[$index] hash is invalid."
+        }
+        if ([string](Get-RequiredPropertyValue $record 'previous_record_sha256' "P3 lifecycle record[$index]") -cne $previousHash) {
+            throw "P3 lifecycle record[$index] hash chain is invalid."
+        }
+        if ([int](Get-RequiredPropertyValue $record 'sequence' "P3 lifecycle record[$index]") -ne ($index + 1) -or
+            [string](Get-RequiredPropertyValue $record 'event' "P3 lifecycle record[$index]") -cne $script:p3LifecycleEvents[$index]) {
+            throw "P3 lifecycle record[$index] sequence or transition is invalid."
+        }
+        if ([string](Get-RequiredPropertyValue $record 'result' "P3 lifecycle record[$index]") -cne $script:p3LifecycleResults[$index] -or
+            [bool](Get-RequiredPropertyValue $record 'pending' "P3 lifecycle record[$index]") -ne [bool]$script:p3LifecyclePending[$index] -or
+            [int](Get-RequiredPropertyValue $record 'pending_operation_count' "P3 lifecycle record[$index]") -ne
+                $(if ($script:p3LifecyclePending[$index]) { 1 } else { 0 })) {
+            throw "P3 lifecycle record[$index] result or pending-state contract is invalid."
+        }
+        $exceptionProperty = $record.PSObject.Properties['exception']
+        if ($null -eq $exceptionProperty -or $null -ne $exceptionProperty.Value) {
+            throw "P3 lifecycle record[$index] exception state is invalid for a successful transition."
+        }
+        if ([int](Get-RequiredPropertyValue $record 'managed_thread_id' "P3 lifecycle record[$index]") -le 0 -or
+            [int](Get-RequiredPropertyValue $record 'dispatcher_thread_id' "P3 lifecycle record[$index]") -le 0) {
+            throw "P3 lifecycle record[$index] thread identity is invalid."
+        }
+        foreach ($binding in @(
+            @('schema','schema'), @('run_id','run_id'), @('scenario_id','scenario_id'),
+            @('phase','phase'), @('process_session_id','process_session_id'), @('source_head','source_head'),
+            @('executable_sha256','executable_sha256'), @('application_sha256','application_sha256'),
+            @('asset_module_sha256','asset_module_sha256'))) {
+            if ([string](Get-RequiredPropertyValue $record $binding[0] "P3 lifecycle record[$index]") -cne
+                [string](Get-RequiredPropertyValue $ExpectedIdentity $binding[1] 'P3 expected lifecycle identity')) {
+                throw "P3 lifecycle record[$index] identity field '$($binding[0])' is invalid."
+            }
+        }
+        if ([int](Get-RequiredPropertyValue $record 'pid' "P3 lifecycle record[$index]") -ne [int]$ExpectedIdentity.pid) {
+            throw "P3 lifecycle record[$index] PID is invalid."
+        }
+        $hwnd = [string](Get-RequiredPropertyValue $record 'hwnd' "P3 lifecycle record[$index]")
+        if ($hwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
+            (-not [string]::IsNullOrWhiteSpace($observedHwnd) -and $hwnd -cne $observedHwnd)) {
+            throw "P3 lifecycle record[$index] HWND identity is invalid."
+        }
+        $observedHwnd = $hwnd
+        $timestamp = [DateTimeOffset]::MinValue
+        if (-not [DateTimeOffset]::TryParse(
+            [string](Get-RequiredPropertyValue $record 'timestamp_utc' "P3 lifecycle record[$index]"),
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::RoundtripKind,
+            [ref]$timestamp) -or $timestamp -lt $previousTimestamp) {
+            throw "P3 lifecycle record[$index] wall-clock time is invalid or moved backwards."
+        }
+        $elapsed = [double](Get-RequiredPropertyValue $record 'stopwatch_elapsed_ms' "P3 lifecycle record[$index]")
+        if ($elapsed -lt $previousElapsed) { throw "P3 lifecycle record[$index] stopwatch moved backwards." }
+        $previousTimestamp = $timestamp
+        $previousElapsed = $elapsed
+        $previousHash = $canonical.claimed_hash
+        $records.Add($record)
+        $events.Add([string]$record.event)
+    }
+    return [pscustomobject][ordered]@{
+        exists = $true
+        complete_record_count = $records.Count
+        has_partial_tail = $hasPartialTail
+        events = @($events)
+        hwnd = $observedHwnd
+        last_record_sha256 = $previousHash
+        records = @($records)
+    }
+}
+
+function Read-P3PhaseSummaryObservation {
+    param(
+        [string]$Path,
+        $ExpectedIdentity,
+        [string]$LifecycleHwnd
+    )
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return [pscustomobject][ordered]@{
+            exists = $false; payload = $null; sha256 = ''; record_sha256 = ''; hwnd = ''
+        }
+    }
+    try { $payload = (Read-SharedUtf8Text $Path) | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw "P3 immutable phase summary is invalid JSON: $($_.Exception.Message)" }
+    if ([string](Get-RequiredPropertyValue $payload 'schema' 'P3 immutable phase summary') -cne
+            'pixel-tart-p3-automated-summary/v1' -or
+        [string](Get-RequiredPropertyValue $payload 'status' 'P3 immutable phase summary') -cne 'completed') {
+        throw 'P3 immutable phase summary schema or completion status is invalid.'
+    }
+    foreach ($binding in @(
+        @('run_id','run_id'), @('phase','phase'), @('process_session_id','process_session_id'),
+        @('source_head','source_head'), @('executable_sha256','executable_sha256'),
+        @('application_sha256','application_sha256'), @('asset_module_sha256','asset_module_sha256'))) {
+        if ([string](Get-RequiredPropertyValue $payload $binding[0] 'P3 immutable phase summary') -cne
+            [string](Get-RequiredPropertyValue $ExpectedIdentity $binding[1] 'P3 expected summary identity')) {
+            throw "P3 immutable phase summary identity field '$($binding[0])' is invalid."
+        }
+    }
+    $recordSha256 = [string](Get-RequiredPropertyValue $payload 'record_sha256' 'P3 immutable phase summary')
+    if ($recordSha256 -cnotmatch '^[0-9a-f]{64}$') { throw 'P3 immutable phase summary record_sha256 is invalid.' }
+    $scenario = @((Get-RequiredPropertyValue $payload 'scenarios' 'P3 immutable phase summary') |
+        Where-Object { [string]$_.id -ceq [string]$ExpectedIdentity.scenario_id })
+    if ($scenario.Count -ne 1) { throw 'P3 immutable phase summary has no unique expected scenario.' }
+    $summaryPid = if ([string]$ExpectedIdentity.phase -ceq 'primary') { [int]$scenario[0].pid } else { [int]$scenario[0].restart_pid }
+    $summaryHwnd = if ([string]$ExpectedIdentity.phase -ceq 'primary') { [string]$scenario[0].hwnd } else { [string]$scenario[0].restart_hwnd }
+    if ($summaryPid -ne [int]$ExpectedIdentity.pid -or $summaryHwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
+        (-not [string]::IsNullOrWhiteSpace($LifecycleHwnd) -and $summaryHwnd -cne $LifecycleHwnd)) {
+        throw 'P3 immutable phase summary process identity does not match the lifecycle handshake.'
+    }
+    return [pscustomobject][ordered]@{
+        exists = $true
+        payload = $payload
+        sha256 = Get-FileSha256 $Path
+        record_sha256 = $recordSha256
+        hwnd = $summaryHwnd
+    }
+}
+
+function Read-P3SummaryJournalBindingObservation {
+    param(
+        [string]$Path,
+        $ExpectedIdentity,
+        $PhaseSummaryPayload,
+        [string]$PhaseSummaryRecordSha256
+    )
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return [pscustomobject][ordered]@{
+            exists = $false
+            matched = $false
+            complete_record_count = 0
+            sha256 = ''
+            record_sha256 = ''
+        }
+    }
+    $text = Read-SharedUtf8Text $Path
+    $parts = [regex]::Split($text, "`r?`n")
+    $hasTrailingNewline = $text.EndsWith("`n", [StringComparison]::Ordinal)
+    $completeCount = [Math]::Max(0, $parts.Count - 1)
+    $hasPartialTail = -not $hasTrailingNewline -and
+        $parts.Count -ne 0 -and -not [string]::IsNullOrWhiteSpace($parts[$parts.Count - 1])
+    if ($hasPartialTail) { throw 'P3 summary journal has a partial trailing record.' }
+
+    $previousHash = '0' * 64
+    $matchCount = 0
+    $matchedRecordSha256 = ''
+    for ($index = 0; $index -lt $completeCount; $index++) {
+        $line = $parts[$index]
+        if ([string]::IsNullOrWhiteSpace($line)) { throw "P3 summary journal record[$index] is empty." }
+        try { $record = $line | ConvertFrom-Json -ErrorAction Stop }
+        catch { throw "P3 summary journal record[$index] is invalid JSON: $($_.Exception.Message)" }
+        $canonical = Get-P3SummaryJournalCanonicalText $line
+        if ((Get-TextSha256 $canonical.canonical) -cne $canonical.claimed_hash -or
+            [string](Get-RequiredPropertyValue $record 'summary_hash' "P3 summary journal record[$index]") -cne $canonical.claimed_hash -or
+            [string](Get-RequiredPropertyValue $record 'record_sha256' "P3 summary journal record[$index]") -cne $canonical.claimed_hash) {
+            throw "P3 summary journal record[$index] terminal hash is invalid."
+        }
+        if ([string](Get-RequiredPropertyValue $record 'previous_summary_hash' "P3 summary journal record[$index]") -cne $previousHash -or
+            [string](Get-RequiredPropertyValue $record 'previous_record_sha256' "P3 summary journal record[$index]") -cne $previousHash) {
+            throw "P3 summary journal record[$index] hash chain is invalid."
+        }
+        $embedded = Get-P3EmbeddedPhaseSummaryCanonicalText $line
+        $embeddedPayload = Get-RequiredPropertyValue $record 'summary' "P3 summary journal record[$index]"
+        if ((Get-TextSha256 $embedded.canonical) -cne $embedded.claimed_hash -or
+            [string](Get-RequiredPropertyValue $embeddedPayload 'record_sha256' "P3 summary journal record[$index] embedded summary") -cne $embedded.claimed_hash) {
+            throw "P3 summary journal record[$index] embedded phase-summary hash is invalid."
+        }
+
+        if ([string](Get-RequiredPropertyValue $record 'process_session_id' "P3 summary journal record[$index]") -ceq
+                [string]$ExpectedIdentity.process_session_id) {
+            $matchCount++
+            foreach ($binding in @(
+                @('run_id','run_id'), @('scenario_id','scenario_id'), @('phase','phase'),
+                @('process_session_id','process_session_id'), @('source_head','source_head'),
+                @('executable_sha256','executable_sha256'), @('application_sha256','application_sha256'),
+                @('asset_module_sha256','asset_module_sha256'))) {
+                if ([string](Get-RequiredPropertyValue $record $binding[0] "P3 summary journal record[$index]") -cne
+                    [string](Get-RequiredPropertyValue $ExpectedIdentity $binding[1] 'P3 expected summary journal identity')) {
+                    throw "P3 summary journal record[$index] identity field '$($binding[0])' is invalid."
+                }
+            }
+            if ([string](Get-RequiredPropertyValue $record 'schema' "P3 summary journal record[$index]") -cne
+                    'pixel-tart-p3-automated-summary/v1' -or
+                [int](Get-RequiredPropertyValue $record 'pid' "P3 summary journal record[$index]") -ne [int]$ExpectedIdentity.pid) {
+                throw "P3 summary journal record[$index] schema or PID is invalid."
+            }
+            $hwnd = [string](Get-RequiredPropertyValue $record 'hwnd' "P3 summary journal record[$index]")
+            if ($hwnd -cnotmatch '^0x[0-9a-fA-F]+$') {
+                throw "P3 summary journal record[$index] HWND is invalid."
+            }
+            if ($embedded.claimed_hash -cne $PhaseSummaryRecordSha256) {
+                throw 'P3 immutable phase summary record hash is not bound to its summary journal record.'
+            }
+            $journalSemanticHash = Get-TextSha256 ($embeddedPayload | ConvertTo-Json -Depth 100 -Compress)
+            $phaseSemanticHash = Get-TextSha256 ($PhaseSummaryPayload | ConvertTo-Json -Depth 100 -Compress)
+            if ($journalSemanticHash -cne $phaseSemanticHash) {
+                throw 'P3 immutable phase summary payload is not semantically bound to its summary journal record.'
+            }
+            $matchedRecordSha256 = $canonical.claimed_hash
+        }
+        $previousHash = $canonical.claimed_hash
+    }
+    if ($matchCount -gt 1) { throw 'P3 summary journal contains duplicate records for the current process session.' }
+    return [pscustomobject][ordered]@{
+        exists = $true
+        matched = $matchCount -eq 1
+        complete_record_count = $completeCount
+        sha256 = Get-FileSha256 $Path
+        record_sha256 = $matchedRecordSha256
+    }
+}
+
+function Update-P3RetainedProcessExitState {
+    param(
+        [Diagnostics.Process]$Process,
+        $State,
+        [Collections.Generic.List[object]]$Timeline,
+        [string]$Outcome = 'normal'
+    )
+    if ([bool]$State.observed) { return }
+    $Process.Refresh()
+    if (-not $Process.HasExited) { return }
+    # The parameterless wait flushes redirected stdout/stderr after the process
+    # handle is signalled; without it the evidence hashes can race async drains.
+    $Process.WaitForExit()
+    $State.observed = $true
+    $State.exit_code = [int]$Process.ExitCode
+    $State.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+    Add-ProcessExitTimelineEvent $Timeline 'process-exit-observed' $Outcome $null
+    if ($Outcome -ceq 'normal') {
+        Add-ProcessExitTimelineEvent $Timeline 'normal-exit' 'completed' $null
+        Add-ProcessExitTimelineEvent $Timeline 'exit-code-observed' 'captured' ([pscustomobject]@{ exit_code = [int]$State.exit_code })
+    } else {
+        Add-ProcessExitTimelineEvent $Timeline 'premature-exit' 'failed' ([pscustomobject]@{ observation_context = $Outcome })
+        Add-ProcessExitTimelineEvent $Timeline 'exit-code-observed' 'captured-after-premature-exit' `
+            ([pscustomobject]@{ exit_code = [int]$State.exit_code })
+    }
+}
+
+function Invoke-P3ObservedStage {
+    param(
+        [string]$Name,
+        [int]$CapSeconds,
+        [Diagnostics.Stopwatch]$SharedClock,
+        [int64]$SharedBudgetMilliseconds,
+        [Diagnostics.Process]$Process,
+        $ProcessState,
+        [Collections.Generic.List[object]]$Timeline,
+        [Collections.Generic.List[object]]$Stages,
+        [Collections.Generic.List[object]]$ObservationFailures,
+        [scriptblock]$Probe,
+        [bool]$FailIfProcessAlreadyExited = $true
+    )
+    $stageStarted = [int64]$SharedClock.ElapsedMilliseconds
+    $stageCapMilliseconds = [int64]$CapSeconds * 1000L
+    $stage = [pscustomobject][ordered]@{
+        name = $Name
+        cap_seconds = $CapSeconds
+        started_at_elapsed_milliseconds = $stageStarted
+        completed_at_elapsed_milliseconds = $null
+        elapsed_milliseconds = 0
+        outcome = 'waiting'
+        detail = $null
+    }
+    try {
+        while ($true) {
+            $stageElapsed = [int64]$SharedClock.ElapsedMilliseconds - $stageStarted
+            $sharedRemaining = $SharedBudgetMilliseconds - [int64]$SharedClock.ElapsedMilliseconds
+            $stageRemaining = $stageCapMilliseconds - $stageElapsed
+            if ($sharedRemaining -le 0 -or $stageRemaining -le 0) {
+                $timeout = [TimeoutException]::new(
+                    "P3 app phase stage '$Name' timed out (stage cap ${CapSeconds}s; shared budget $([int]($SharedBudgetMilliseconds / 1000))s).")
+                $timeout.Data['p3_stage'] = $Name
+                throw $timeout
+            }
+            try { $observation = & $Probe }
+            catch {
+                $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' $Name $_))
+                $_.Exception.Data['p3_stage'] = $Name
+                $_.Exception.Data['p3_observation_failure'] = $true
+                throw
+            }
+            if ($null -ne $observation -and [bool]$observation.satisfied) {
+                $stage.outcome = 'observed'
+                $stage.detail = $observation.detail
+                return $observation.detail
+            }
+            if ($FailIfProcessAlreadyExited) {
+                Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'premature'
+                if ([bool]$ProcessState.observed) {
+                    $missing = [InvalidOperationException]::new(
+                        "P3 app process exited before required stage '$Name' evidence was complete.")
+                    $missing.Data['p3_stage'] = $Name
+                    throw $missing
+                }
+            }
+            $sleepMilliseconds = [int][Math]::Min(100, [Math]::Min($sharedRemaining, $stageRemaining))
+            if ($sleepMilliseconds -gt 0) { [Threading.Thread]::Sleep($sleepMilliseconds) }
+        }
+    } finally {
+        $stage.completed_at_elapsed_milliseconds = [int64]$SharedClock.ElapsedMilliseconds
+        $stage.elapsed_milliseconds = [int64]$SharedClock.ElapsedMilliseconds - $stageStarted
+        if ($stage.outcome -ceq 'waiting') { $stage.outcome = 'failed' }
+        $Stages.Add($stage)
+    }
+}
+
+function Wait-RunnerOwnedProcessExit {
+    param(
+        [Diagnostics.Process]$Process,
+        $OwnerToken,
+        [int]$ExecutionTimeoutSeconds,
+        [string]$Phase,
+        [string]$SessionName,
+        [string]$ScenarioId,
+        [string]$LifecyclePath,
+        [string]$PhaseSummaryPath,
+        [string]$SummaryJournalPath,
+        $ExpectedIdentity,
+        [ref]$Diagnostic
+    )
+    if ($ExecutionTimeoutSeconds -le 0) { throw 'P3 process execution timeout must be positive.' }
+    $timeline = [Collections.Generic.List[object]]::new()
+    $stages = [Collections.Generic.List[object]]::new()
+    $cleanupFailures = [Collections.Generic.List[object]]::new()
+    $observationFailures = [Collections.Generic.List[object]]::new()
+    $processState = [pscustomobject][ordered]@{ observed = $false; exit_code = $null; observed_at_utc = '' }
+    $sharedBudgetSeconds = [Math]::Min($ExecutionTimeoutSeconds, $script:p3ProcessStageTotalTimeoutSeconds)
+    $sharedBudgetMilliseconds = [int64]$sharedBudgetSeconds * 1000L
+    $diagnosticValue = [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-runner-process-exit-diagnostic/v1'
+        phase = $Phase
+        session_name = $SessionName
+        scenario_id = $ScenarioId
+        owner = $OwnerToken
+        execution_wait = [pscustomobject][ordered]@{
+            strategy = 'shared-deadline-staged-evidence-and-exit'
+            timeout_seconds = $sharedBudgetSeconds
+            slice_milliseconds = 100
+            stage_caps_seconds = $script:p3ProcessStageTimeoutSeconds
+            stages = $stages
+            elapsed_milliseconds = 0
+            process_exit_observed = $false
+        }
+        forced_cleanup = [pscustomobject][ordered]@{
+            required = $false
+            started = $false
+            owner_identity = $null
+            owner_identity_verified = $false
+            kill_requested_through_retained_handle = $false
+            process_exit_observed = $false
+            completed = $false
+        }
+        process_table_convergence = $null
+        primary_failure = $null
+        cleanup_failures = $cleanupFailures
+        observation_failures = $observationFailures
+        timeline = $timeline
+        outcome = 'running'
+    }
+    $Diagnostic.Value = $diagnosticValue
+    Add-ProcessExitTimelineEvent $timeline 'execution-wait-start' 'started' ([pscustomobject]@{
+        timeout_seconds = $sharedBudgetSeconds
+        stage_caps_seconds = $script:p3ProcessStageTimeoutSeconds
+    })
+    $sharedClock = [Diagnostics.Stopwatch]::StartNew()
+    $primaryException = $null
+    try {
+        $completion = Invoke-P3ObservedStage 'completion-handshake' $script:p3ProcessStageTimeoutSeconds.completion_handshake `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                [pscustomobject]@{
+                    satisfied = $lifecycle.complete_record_count -ge 2
+                    detail = [pscustomobject]@{
+                        lifecycle_path = $LifecyclePath
+                        complete_record_count = $lifecycle.complete_record_count
+                        events = @($lifecycle.events)
+                        hwnd = $lifecycle.hwnd
+                    }
+                }
+            }
+        Add-ProcessExitTimelineEvent $timeline 'completion-handshake-observed' 'matched' $completion
+
+        $shutdown = Invoke-P3ObservedStage 'shutdown-preparation' $script:p3ProcessStageTimeoutSeconds.shutdown_preparation `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                [pscustomobject]@{
+                    satisfied = $lifecycle.complete_record_count -ge 9
+                    detail = [pscustomobject]@{ complete_record_count = $lifecycle.complete_record_count; events = @($lifecycle.events) }
+                }
+            }
+        Add-ProcessExitTimelineEvent $timeline 'shutdown-preparation-observed' 'completed' $shutdown
+
+        $onExit = Invoke-P3ObservedStage 'application-on-exit-enter' $script:p3ProcessStageTimeoutSeconds.application_on_exit_enter `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                [pscustomobject]@{
+                    satisfied = $lifecycle.complete_record_count -ge 13
+                    detail = [pscustomobject]@{ complete_record_count = $lifecycle.complete_record_count; events = @($lifecycle.events); hwnd = $lifecycle.hwnd }
+                }
+            }
+        Add-ProcessExitTimelineEvent $timeline 'application-on-exit-enter-observed' 'entered' $onExit
+
+        $summaryCommit = Invoke-P3ObservedStage 'phase-summary-commit' $script:p3ProcessStageTimeoutSeconds.phase_summary_commit `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                $summary = Read-P3PhaseSummaryObservation $PhaseSummaryPath $ExpectedIdentity $lifecycle.hwnd
+                $summaryJournal = if ($lifecycle.complete_record_count -ge 16 -and [bool]$summary.exists) {
+                    Read-P3SummaryJournalBindingObservation $SummaryJournalPath $ExpectedIdentity `
+                        $summary.payload $summary.record_sha256
+                } else {
+                    [pscustomobject]@{ exists = $false; matched = $false; complete_record_count = 0; sha256 = ''; record_sha256 = '' }
+                }
+                [pscustomobject]@{
+                    satisfied = $lifecycle.complete_record_count -ge 16 -and [bool]$summary.exists -and [bool]$summaryJournal.matched
+                    detail = [pscustomobject]@{
+                        lifecycle_path = $LifecyclePath
+                        lifecycle_record_count = $lifecycle.complete_record_count
+                        lifecycle_last_record_sha256 = $lifecycle.last_record_sha256
+                        phase_summary_path = $PhaseSummaryPath
+                        phase_summary_sha256 = $summary.sha256
+                        phase_summary_record_sha256 = $summary.record_sha256
+                        summary_journal_path = $SummaryJournalPath
+                        summary_journal_sha256 = $summaryJournal.sha256
+                        summary_journal_record_sha256 = $summaryJournal.record_sha256
+                        summary_journal_record_count = $summaryJournal.complete_record_count
+                        hwnd = $summary.hwnd
+                    }
+                }
+            }
+        Add-ProcessExitTimelineEvent $timeline 'summary-observed' 'atomic-commit-observed' $summaryCommit
+
+        $onExitCompleted = Invoke-P3ObservedStage 'application-on-exit-completed' $script:p3ProcessStageTimeoutSeconds.application_on_exit_completed `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                $lifecycle = Read-P3LifecycleObservation $LifecyclePath $ExpectedIdentity
+                [pscustomobject]@{
+                    satisfied = $lifecycle.complete_record_count -eq $script:p3LifecycleEvents.Count -and -not $lifecycle.has_partial_tail
+                    detail = [pscustomobject]@{
+                        lifecycle_path = $LifecyclePath
+                        lifecycle_sha256 = $(if ($lifecycle.complete_record_count -eq $script:p3LifecycleEvents.Count -and -not $lifecycle.has_partial_tail) { Get-FileSha256 $LifecyclePath } else { '' })
+                        lifecycle_record_count = $lifecycle.complete_record_count
+                        lifecycle_last_record_sha256 = $lifecycle.last_record_sha256
+                        hwnd = $lifecycle.hwnd
+                    }
+                }
+            }
+        Add-ProcessExitTimelineEvent $timeline 'application-on-exit-completed-observed' 'completed' $onExitCompleted
+        Add-ProcessExitTimelineEvent $timeline 'application-lifecycle-observed' 'complete-and-hash-checked' $onExitCompleted
+
+        $exitDetail = Invoke-P3ObservedStage 'process-exit' $script:p3ProcessStageTimeoutSeconds.process_exit `
+            $sharedClock $sharedBudgetMilliseconds $Process $processState $timeline $stages $observationFailures {
+                Update-P3RetainedProcessExitState $Process $processState $timeline
+                [pscustomobject]@{
+                    satisfied = [bool]$processState.observed
+                    detail = [pscustomobject]@{ exit_code = $processState.exit_code; observed_at_utc = $processState.observed_at_utc }
+                }
+            } $false
+        $diagnosticValue.execution_wait.process_exit_observed = $true
+        if ([int]$exitDetail.exit_code -ne 0) {
+            $nonzero = [InvalidOperationException]::new("Automated app phase '$Phase' exited with non-zero code $([int]$exitDetail.exit_code).")
+            $nonzero.Data['p3_stage'] = 'process-exit-code'
+            throw $nonzero
+        }
+
+        $convergenceStageStarted = [int64]$sharedClock.ElapsedMilliseconds
+        $remainingMilliseconds = $sharedBudgetMilliseconds - $convergenceStageStarted
+        if ($remainingMilliseconds -le 0) {
+            $deadline = [TimeoutException]::new(
+                "P3 app phase exhausted its shared ${sharedBudgetSeconds}s deadline before process-table convergence.")
+            $deadline.Data['p3_stage'] = 'process-table-convergence'
+            throw $deadline
+        }
+        $convergenceTimeout = [int][Math]::Min(
+            [int64]$script:p3ProcessStageTimeoutSeconds.process_table_convergence * 1000L,
+            $remainingMilliseconds)
+        $convergence = Wait-DevPreviewProcessTableConvergence $OwnerToken $convergenceTimeout 100 2
+        $diagnosticValue.process_table_convergence = $convergence
+        foreach ($failure in @($convergence.observation_failures)) { $observationFailures.Add($failure) }
+        $convergenceCompleted = [int64]$sharedClock.ElapsedMilliseconds
+        $stages.Add([pscustomobject][ordered]@{
+            name = 'process-table-convergence'
+            cap_seconds = $script:p3ProcessStageTimeoutSeconds.process_table_convergence
+            started_at_elapsed_milliseconds = $convergenceStageStarted
+            completed_at_elapsed_milliseconds = $convergenceCompleted
+            elapsed_milliseconds = $convergenceCompleted - $convergenceStageStarted
+            outcome = $(if ($convergence.converged) { 'observed' } else { 'failed' })
+            detail = $convergence
+        })
+        if ($convergenceCompleted -gt $sharedBudgetMilliseconds) {
+            $deadline = [TimeoutException]::new(
+                "P3 app phase exceeded its shared ${sharedBudgetSeconds}s deadline during process-table convergence.")
+            $deadline.Data['p3_stage'] = 'process-table-convergence'
+            throw $deadline
+        }
+        if (-not $convergence.converged) {
+            $message = if ($observationFailures.Count -ne 0) {
+                'DevPreview process-table observation failed closed after normal process exit.'
+            } else {
+                "DevPreview process tables did not converge to empty after normal process exit; PID(s): $(@($convergence.final_pids) -join ', ')."
+            }
+            $exception = [InvalidOperationException]::new($message)
+            $exception.Data['p3_stage'] = 'process-table-convergence'
+            throw $exception
+        }
+        Add-ProcessExitTimelineEvent $timeline 'same-run-process-zero' 'observed' ([pscustomobject]@{
+            consecutive_empty_observations = $convergence.observed_consecutive_empty_observations
+        })
+    } catch {
+        $primaryException = $_.Exception
+        $failureStage = if ($null -ne $primaryException.Data['p3_stage']) { [string]$primaryException.Data['p3_stage'] } else { 'staged-process-exit' }
+        $diagnosticValue.primary_failure = ConvertTo-StructuredFailure 'primary' $failureStage $_
+    }
+
+    if ($null -ne $primaryException) {
+        try { Update-P3RetainedProcessExitState $Process $processState $timeline 'failure-observation' }
+        catch { $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'post-failure-process-state' $_)) }
+        if (-not [bool]$processState.observed) {
+            $diagnosticValue.forced_cleanup.required = $true
+            $diagnosticValue.forced_cleanup.started = $true
+            Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-start' 'started' ([pscustomobject]@{ owner_pid = [int]$OwnerToken.Pid })
+            try {
+                $ownership = Test-RunnerOwnedProcessIdentity $Process $OwnerToken
+                $diagnosticValue.forced_cleanup.owner_identity = $ownership
+                $diagnosticValue.forced_cleanup.owner_identity_verified = [bool]$ownership.valid
+                if (-not $ownership.valid) { throw 'Runner-owned process identity could not be proven; refusing to kill by PID.' }
+                $Process.Kill()
+                $diagnosticValue.forced_cleanup.kill_requested_through_retained_handle = $true
+                if (-not $Process.WaitForExit(10000)) {
+                    throw 'Runner-owned process did not exit within the bounded 10000 ms cleanup interval.'
+                }
+                $Process.WaitForExit()
+                $processState.observed = $true
+                $processState.exit_code = [int]$Process.ExitCode
+                $processState.observed_at_utc = [DateTimeOffset]::UtcNow.ToString('O')
+                $diagnosticValue.forced_cleanup.process_exit_observed = $true
+                Add-ProcessExitTimelineEvent $timeline 'process-exit-observed' 'forced-cleanup' $null
+            } catch {
+                $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'owner-scoped-process-termination' $_))
+            } finally {
+                $diagnosticValue.forced_cleanup.completed = $true
+                Add-ProcessExitTimelineEvent $timeline 'forced-cleanup-completed' $(if ($cleanupFailures.Count -eq 0) { 'completed' } else { 'failed' }) $null
+            }
+        }
+        if ($null -eq $diagnosticValue.process_table_convergence -or -not $diagnosticValue.process_table_convergence.converged) {
+            try {
+                $convergence = Wait-DevPreviewProcessTableConvergence $OwnerToken 10000 100 2
+                $diagnosticValue.process_table_convergence = $convergence
+                foreach ($failure in @($convergence.observation_failures)) { $observationFailures.Add($failure) }
+                if (-not $convergence.converged -and $convergence.observation_failures.Count -eq 0) {
+                    $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'post-failure-process-table-convergence' `
+                        "DevPreview process tables retained PID(s): $(@($convergence.final_pids) -join ', ')."))
+                }
+                if ($convergence.converged) {
+                    Add-ProcessExitTimelineEvent $timeline 'same-run-process-zero' 'observed' ([pscustomobject]@{
+                        consecutive_empty_observations = $convergence.observed_consecutive_empty_observations
+                    })
+                }
+            } catch {
+                $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'post-failure-process-table-convergence' $_))
+            }
+        }
+        $sharedClock.Stop()
+        $diagnosticValue.execution_wait.elapsed_milliseconds = [int64]$sharedClock.ElapsedMilliseconds
+        $diagnosticValue.execution_wait.process_exit_observed = [bool]$processState.observed
+        $diagnosticValue.outcome = 'failed'
+        $primaryException.Data['process_exit_diagnostic'] = $diagnosticValue | ConvertTo-Json -Compress -Depth 30
+        $primaryException.Data['cleanup_failures'] = @($cleanupFailures) | ConvertTo-Json -Compress -Depth 12
+        $primaryException.Data['observation_failures'] = @($observationFailures) | ConvertTo-Json -Compress -Depth 12
+        throw $primaryException
+    }
+
+    $sharedClock.Stop()
+    $diagnosticValue.execution_wait.elapsed_milliseconds = [int64]$sharedClock.ElapsedMilliseconds
+    $diagnosticValue.execution_wait.process_exit_observed = $true
+    $diagnosticValue.outcome = 'process-exited-and-tables-empty'
+    return $diagnosticValue
+}
+
+function Invoke-FinalDevPreviewCheck {
+    param(
+        [AllowNull()][Exception]$PrimaryException,
+        [AllowNull()][Collections.Generic.List[object]]$CleanupFailures,
+        [AllowNull()][Collections.Generic.List[object]]$ObservationFailures,
+        [int]$TimeoutMilliseconds = 5000,
+        [AllowNull()][scriptblock]$SnapshotProvider
+    )
+    if ($null -eq $CleanupFailures) { $CleanupFailures = [Collections.Generic.List[object]]::new() }
+    if ($null -eq $ObservationFailures) { $ObservationFailures = [Collections.Generic.List[object]]::new() }
+    $convergence = Wait-DevPreviewProcessTableConvergence $null $TimeoutMilliseconds 100 2 $SnapshotProvider
+    foreach ($failure in @($convergence.observation_failures)) { $ObservationFailures.Add($failure) }
+    if ($convergence.converged) { return $convergence }
+    $message = if ($ObservationFailures.Count -ne 0) {
+        'Final DevPreview process observation failed closed.'
+    } else {
+        "Final DevPreview process cleanup did not converge; PID(s): $(@($convergence.final_pids) -join ', ')."
+    }
+    $failure = [InvalidOperationException]::new($message)
+    if ($ObservationFailures.Count -eq 0) {
+        $CleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'final-process-table-convergence' $failure))
+    }
+    if ($null -ne $PrimaryException) {
+        $PrimaryException.Data['devpreview_cleanup_failure'] = $message
+        $PrimaryException.Data['cleanup_failures'] = @($CleanupFailures) | ConvertTo-Json -Compress -Depth 12
+        $PrimaryException.Data['observation_failures'] = @($ObservationFailures) | ConvertTo-Json -Compress -Depth 12
+        return $convergence
+    }
+    throw $failure
+}
+
+function New-P3FinalFailureException {
+    param(
+        [string]$ActiveRunRoot,
+        [Exception]$PrimaryException,
+        [AllowEmptyCollection()][object[]]$CleanupFailures,
+        [AllowEmptyCollection()][object[]]$ObservationFailures
+    )
+    $message = "P3 automated acceptance failed. Run root retained: $ActiveRunRoot`n$($PrimaryException.Message)"
+    $outer = [InvalidOperationException]::new($message, $PrimaryException)
+    $outer.Data['primary_failure'] = (ConvertTo-StructuredFailure 'primary' 'run' $PrimaryException) | ConvertTo-Json -Compress -Depth 12
+    $outer.Data['cleanup_failures'] = @($CleanupFailures) | ConvertTo-Json -Compress -Depth 12
+    $outer.Data['observation_failures'] = @($ObservationFailures) | ConvertTo-Json -Compress -Depth 12
+    return $outer
 }
 
 function Get-DisplayObservation {
@@ -155,18 +1408,47 @@ function Invoke-WithEnvironment {
 
 function Write-JsonAtomic {
     param([string]$Path, $Value)
-    $parent = Split-Path -Parent $Path
+    $fullPath = [IO.Path]::GetFullPath($Path)
+    $parent = Split-Path -Parent $fullPath
     [IO.Directory]::CreateDirectory($parent) | Out-Null
-    $temporary = "$Path.tmp"
+    $writeToken = [guid]::NewGuid().ToString('N')
+    $temporary = Join-Path $parent ('.{0}.{1}.tmp' -f [IO.Path]::GetFileName($fullPath), $writeToken)
+    $backup = Join-Path $parent ('.{0}.{1}.bak' -f [IO.Path]::GetFileName($fullPath), $writeToken)
     $json = $Value | ConvertTo-Json -Depth 20
-    [IO.File]::WriteAllText($temporary, $json, [Text.UTF8Encoding]::new($false))
-    if ([IO.File]::Exists($Path)) {
-        $backup = "$Path.bak"
-        if ([IO.File]::Exists($backup)) { [IO.File]::Delete($backup) }
-        try { [IO.File]::Replace($temporary, $Path, $backup) }
-        finally { if ([IO.File]::Exists($backup)) { [IO.File]::Delete($backup) } }
-    } else {
-        [IO.File]::Move($temporary, $Path)
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($json)
+    $committed = $false
+    try {
+        $stream = [IO.FileStream]::new(
+            $temporary,
+            [IO.FileMode]::CreateNew,
+            [IO.FileAccess]::Write,
+            [IO.FileShare]::None,
+            4096,
+            [IO.FileOptions]::WriteThrough)
+        try {
+            $stream.Write($bytes, 0, $bytes.Length)
+            $stream.Flush($true)
+        } finally { $stream.Dispose() }
+        if ([IO.File]::Exists($fullPath)) {
+            [IO.File]::Replace($temporary, $fullPath, $backup)
+        } else {
+            try { [IO.File]::Move($temporary, $fullPath) }
+            catch {
+                if (-not [IO.File]::Exists($fullPath)) { throw }
+                [IO.File]::Replace($temporary, $fullPath, $backup)
+            }
+        }
+        $committed = $true
+    } finally {
+        # The unique staging name is owned by this invocation. Never delete a
+        # shared wildcard, a caller path, or another writer's staging file.
+        if (-not $committed -and [IO.File]::Exists($temporary)) {
+            [IO.File]::Delete($temporary)
+        }
+        # A successful Replace has already durably committed the target, so its
+        # invocation-owned backup is no longer needed.  If Replace itself fails,
+        # retain the backup rather than deleting the only recoverable prior value.
+        if ($committed -and [IO.File]::Exists($backup)) { [IO.File]::Delete($backup) }
     }
 }
 
@@ -722,6 +2004,7 @@ function Invoke-AppPhase {
         [string]$Executable,
         [string]$ActiveRunRoot,
         [string]$RunId,
+        [string]$RunStartedAtUtc,
         [string]$LogDirectory,
         [AllowNull()]$BinarySnapshot
     )
@@ -758,12 +2041,14 @@ function Invoke-AppPhase {
     if (-not (Test-PathWithin $fixtureDatabasePath $fixtureRoot) -or -not (Test-Path -LiteralPath $fixtureDatabasePath -PathType Leaf)) {
         throw "The selected $fixtureVariant fixture database is missing or escaped its root: $fixtureDatabasePath"
     }
+    $expectedProcessSessionId = [guid]::NewGuid().ToString('N')
     Write-JsonAtomic $planPath ([ordered]@{
         schema_version = 'pixel-tart-p3-automated-plan/v1'
         validation_mode = 'automated'
         owner_manual_ux_smoke = 'waived'
         manual_evidence_claimed = $false
         run_id = $RunId
+        process_session_id = $expectedProcessSessionId
         phase = $Phase
         source_head = $Head
         executable_path = $expectedExecutablePath
@@ -801,35 +2086,77 @@ function Invoke-AppPhase {
         Start-Process -FilePath $Executable -WorkingDirectory (Split-Path -Parent $Executable) `
             -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr
     }
-    if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
-        try { Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue } catch { }
-        throw "Automated app phase '$Phase' timed out; forced cleanup was required."
-    }
-    $process.WaitForExit()
+    $ownerToken = New-RunnerProcessOwnerToken $process $expectedExecutablePath $expectedExecutableHash $RunId `
+        $expectedProcessSessionId (Join-Path $ActiveRunRoot 'binaries') $RunStartedAtUtc
+    $processExitDiagnosticPath = Join-Path $LogDirectory "app-$SessionName.process-exit.json"
     $phaseSummaryPath = Join-Path $ActiveRunRoot ("app\evidence\summary-{0}-{1}.json" -f $scenarioDirectory, $Phase)
-    if (-not (Test-Path -LiteralPath $phaseSummaryPath -PathType Leaf)) {
-        throw "Automated app phase '$Phase' did not write its immutable phase summary: $phaseSummaryPath"
+    $lifecyclePath = Join-Path $ActiveRunRoot ("app\evidence\lifecycle-{0}-{1}.ndjson" -f $scenarioDirectory, $Phase)
+    $summaryJournalPath = Join-Path $ActiveRunRoot 'app\evidence\summary.ndjson'
+    $expectedLifecycleIdentity = [pscustomobject][ordered]@{
+        schema = 'pixel-tart-p3-automated-lifecycle/v1'
+        run_id = $RunId
+        scenario_id = $ScenarioIds[0]
+        phase = $Phase
+        process_session_id = $expectedProcessSessionId
+        source_head = $Head
+        executable_sha256 = $expectedExecutableHash
+        application_sha256 = $expectedApplicationHash
+        asset_module_sha256 = $expectedModuleHash
+        pid = [int]$process.Id
     }
-    $phaseSummary = Get-Content -LiteralPath $phaseSummaryPath -Raw -Encoding UTF8 | ConvertFrom-Json
-    $phaseScenario = @($phaseSummary.scenarios | Where-Object { $_.id -ceq $ScenarioIds[0] })
-    if ($phaseScenario.Count -ne 1) { throw "Automated app phase '$Phase' has no unique scenario summary." }
-    $processSessionId = [string]$phaseSummary.process_session_id
-    if ($processSessionId -cnotmatch '^[0-9a-f]{32}$') { throw "Automated app phase '$Phase' has an invalid process_session_id." }
-    if ([string]$phaseSummary.status -cne 'completed') {
-        throw "Automated app phase '$Phase' failed in the application: $([string]$phaseSummary.failure)"
+    $processExitDiagnostic = $null
+    try {
+        [void](Wait-RunnerOwnedProcessExit $process $ownerToken $TimeoutSeconds $Phase $SessionName $ScenarioIds[0] `
+            $lifecyclePath $phaseSummaryPath $summaryJournalPath $expectedLifecycleIdentity ([ref]$processExitDiagnostic))
+    } catch {
+        $phaseFailure = $_
+        if ($null -ne $processExitDiagnostic) {
+            try { Write-JsonAtomic $processExitDiagnosticPath $processExitDiagnostic }
+            catch { $phaseFailure.Exception.Data['process_exit_diagnostic_write_failure'] = $_.Exception.ToString() }
+        }
+        throw
     }
-    $phasePid = if ($Phase -ceq 'primary') { [int]$phaseScenario[0].pid } else { [int]$phaseScenario[0].restart_pid }
-    $phaseHwnd = if ($Phase -ceq 'primary') { [string]$phaseScenario[0].hwnd } else { [string]$phaseScenario[0].restart_hwnd }
-    if ($phasePid -ne $process.Id -or $phaseHwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
-        [string]$phaseSummary.run_id -cne $RunId -or [string]$phaseSummary.source_head -cne $Head -or
-        [string]$phaseSummary.phase -cne $Phase -or [string]$phaseSummary.status -cne 'completed' -or
-        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.executable_path), $expectedExecutablePath, [StringComparison]::OrdinalIgnoreCase) -or
-        [string]$phaseSummary.executable_sha256 -cne $expectedExecutableHash -or
-        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.application_path), $expectedApplicationPath, [StringComparison]::OrdinalIgnoreCase) -or
-        [string]$phaseSummary.application_sha256 -cne $expectedApplicationHash -or
-        -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.asset_module_path), $expectedModulePath, [StringComparison]::OrdinalIgnoreCase) -or
-        [string]$phaseSummary.asset_module_sha256 -cne $expectedModuleHash) {
-        throw "Automated app phase '$Phase' summary identity does not match the runner-owned process."
+    try {
+        if (-not (Test-Path -LiteralPath $phaseSummaryPath -PathType Leaf)) {
+            throw "Automated app phase '$Phase' did not write its immutable phase summary: $phaseSummaryPath"
+        }
+        $phaseSummary = Get-Content -LiteralPath $phaseSummaryPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if (-not (Test-Path -LiteralPath $lifecyclePath -PathType Leaf)) {
+            throw "Automated app phase '$Phase' did not write its lifecycle handshake journal: $lifecyclePath"
+        }
+        $lifecycleSha256 = Get-FileSha256 $lifecyclePath
+        $phaseScenario = @($phaseSummary.scenarios | Where-Object { $_.id -ceq $ScenarioIds[0] })
+        if ($phaseScenario.Count -ne 1) { throw "Automated app phase '$Phase' has no unique scenario summary." }
+        $processSessionId = [string]$phaseSummary.process_session_id
+        if ($processSessionId -cnotmatch '^[0-9a-f]{32}$' -or $processSessionId -cne $expectedProcessSessionId) {
+            throw "Automated app phase '$Phase' did not return its runner-preassigned process_session_id."
+        }
+        if ([string]$phaseSummary.status -cne 'completed') {
+            throw "Automated app phase '$Phase' failed in the application: $([string]$phaseSummary.failure)"
+        }
+        $phasePid = if ($Phase -ceq 'primary') { [int]$phaseScenario[0].pid } else { [int]$phaseScenario[0].restart_pid }
+        $phaseHwnd = if ($Phase -ceq 'primary') { [string]$phaseScenario[0].hwnd } else { [string]$phaseScenario[0].restart_hwnd }
+        if ($phasePid -ne $process.Id -or $phaseHwnd -cnotmatch '^0x[0-9a-fA-F]+$' -or
+            [string]$phaseSummary.run_id -cne $RunId -or [string]$phaseSummary.source_head -cne $Head -or
+            [string]$phaseSummary.phase -cne $Phase -or [string]$phaseSummary.status -cne 'completed' -or
+            -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.executable_path), $expectedExecutablePath, [StringComparison]::OrdinalIgnoreCase) -or
+            [string]$phaseSummary.executable_sha256 -cne $expectedExecutableHash -or
+            -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.application_path), $expectedApplicationPath, [StringComparison]::OrdinalIgnoreCase) -or
+            [string]$phaseSummary.application_sha256 -cne $expectedApplicationHash -or
+            -not [string]::Equals([IO.Path]::GetFullPath([string]$phaseSummary.asset_module_path), $expectedModulePath, [StringComparison]::OrdinalIgnoreCase) -or
+            [string]$phaseSummary.asset_module_sha256 -cne $expectedModuleHash) {
+            throw "Automated app phase '$Phase' summary identity does not match the runner-owned process."
+        }
+        $ownerToken.ProcessSessionId = $processSessionId
+        $ownerToken.WindowHandle = $phaseHwnd
+        $ownerToken.HasExited = $true
+    } catch {
+        $summaryFailure = $_
+        $processExitDiagnostic.primary_failure = ConvertTo-StructuredFailure 'primary' 'completion-summary-handshake' $summaryFailure
+        $processExitDiagnostic.outcome = 'failed'
+        try { Write-JsonAtomic $processExitDiagnosticPath $processExitDiagnostic }
+        catch { $summaryFailure.Exception.Data['process_exit_diagnostic_write_failure'] = $_.Exception.ToString() }
+        throw
     }
     $snapshotTreeAfter = Assert-BinarySnapshotState $BinarySnapshot
     if ($snapshotTreeAfter -cne $snapshotTreeBefore -or
@@ -838,7 +2165,21 @@ function Invoke-AppPhase {
         (Get-FileSha256 $expectedModulePath) -cne $expectedModuleHash) {
         throw "Automated app phase '$Phase' changed its sealed executable, application assembly, or module."
     }
+    if ([int]$process.ExitCode -ne 0) {
+        $nonzeroExit = [InvalidOperationException]::new("Automated app phase '$Phase' failed with exit $([int]$process.ExitCode).")
+        $processExitDiagnostic.primary_failure = ConvertTo-StructuredFailure 'primary' 'process-exit-code' $nonzeroExit
+        $processExitDiagnostic.outcome = 'failed'
+        try { Write-JsonAtomic $processExitDiagnosticPath $processExitDiagnostic }
+        catch { $nonzeroExit.Data['process_exit_diagnostic_write_failure'] = $_.Exception.ToString() }
+        throw $nonzeroExit
+    }
+    $processExitDiagnostic.outcome = 'completed'
+    Write-JsonAtomic $processExitDiagnosticPath $processExitDiagnostic
+    $processExitDiagnosticSha256 = Get-FileSha256 $processExitDiagnosticPath
+    $resultPath = Join-Path $LogDirectory "app-$SessionName.result.json"
     $result = [ordered]@{
+        schema = 'pixel-tart-p3-runner-session-result/v1'
+        status = 'completed'
         phase = $Phase
         session_name = $SessionName
         scenario_id = $ScenarioIds[0]
@@ -855,6 +2196,10 @@ function Invoke-AppPhase {
         scenario_root = $scenarioRoot
         plan_path = $planPath
         phase_summary_path = $phaseSummaryPath
+        phase_summary_sha256 = Get-FileSha256 $phaseSummaryPath
+        phase_summary_record_sha256 = [string]$phaseSummary.record_sha256
+        lifecycle_path = $lifecyclePath
+        lifecycle_sha256 = $lifecycleSha256
         executable_path = $expectedExecutablePath
         executable_sha256 = $expectedExecutableHash
         application_path = $expectedApplicationPath
@@ -867,12 +2212,17 @@ function Invoke-AppPhase {
         stderr = $stderr
         stdout_sha256 = Get-FileSha256 $stdout
         stderr_sha256 = Get-FileSha256 $stderr
+        process_exit_diagnostic_path = $processExitDiagnosticPath
+        process_exit_diagnostic_sha256 = $processExitDiagnosticSha256
+        process_exit_diagnostic = $processExitDiagnostic
+        result_path = $resultPath
     }
-    Write-JsonAtomic (Join-Path $LogDirectory "app-$SessionName.result.json") $result
-    if ($result.exit_code -ne 0) { throw "Automated app phase '$Phase' failed with exit $($result.exit_code)." }
-    Start-Sleep -Milliseconds 500
-    Assert-NoDevPreview
-    return $result
+    $result.record_sha256 = Get-TextSha256 ($result | ConvertTo-Json -Depth 30 -Compress)
+    Write-JsonAtomic $resultPath $result
+    $session = [ordered]@{}
+    foreach ($entry in $result.GetEnumerator()) { $session[$entry.Key] = $entry.Value }
+    $session.result_sha256 = Get-FileSha256 $resultPath
+    return $session
 }
 
 function New-P3SyntheticFixture {
@@ -1237,6 +2587,11 @@ function Invoke-Validator {
     catch { throw "Validator target manifest is not valid JSON: $targetManifestPath`n$($_.Exception.Message)" }
     $targetHead = [string]$targetManifest.source_head
     if ($targetHead -notmatch '^[0-9a-f]{40}$') { throw "Validator target manifest has an invalid source_head: $targetManifestPath" }
+    $sealedContractPath = Get-SealedAcceptanceInputPath $targetRoot 'automated-acceptance-contract.json'
+    try { $sealedContract = Get-Content -LiteralPath $sealedContractPath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw "Validator target contract is not valid JSON: $sealedContractPath`n$($_.Exception.Message)" }
+    $expectedNegativeProofCount = @($sealedContract.required_negative_fixtures).Count
+    if ($expectedNegativeProofCount -le 0) { throw 'Validator target contract has no negative fixtures.' }
     $result = Invoke-LoggedProcess -FilePath 'powershell.exe' `
         -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $validator, '-RunRoot', $ActiveRunRoot) `
         -Name $Name -LogDirectory $LogDirectory -Timeout 300
@@ -1255,7 +2610,7 @@ function Invoke-Validator {
         [bool]$validation.negative_proofs_skipped -or
         $validationRoot -cne $targetRoot -or
         [string]$validation.source_head -cne $targetHead -or
-        [int]$validation.negative_fixture_proof_count -ne 50 -or
+        [int]$validation.negative_fixture_proof_count -ne $expectedNegativeProofCount -or
         [string]$validation.negative_fixture_proof_sha256 -notmatch '^[0-9a-f]{64}$') {
         throw "Validator stdout failed the result contract. See $($result.stdout)."
     }
@@ -1307,6 +2662,19 @@ function Invoke-DryRun {
         [string]$contract.owner_manual_ux_smoke -cne 'waived' -or
         [bool]$contract.manual_evidence_claimed -or
         [int]$contract.required_runner_session_count -ne 17 -or
+        [string]$contract.process_table_snapshot_schema -cne 'pixel-tart-p3-process-table-snapshot/v1' -or
+        [string]$contract.process_observation_schema -cne 'pixel-tart-p3-devpreview-process-observation/v1' -or
+        [string]$contract.process_owner_schema -cne 'pixel-tart-p3-runner-process-owner/v1' -or
+        [string]$contract.process_exit_diagnostic_schema -cne 'pixel-tart-p3-runner-process-exit-diagnostic/v1' -or
+        [string]$contract.runner_session_result_schema -cne 'pixel-tart-p3-runner-session-result/v1' -or
+        [string]$contract.process_table_convergence_schema -cne 'pixel-tart-p3-process-table-convergence/v1' -or
+        [string]$contract.run_failure_model_schema -cne 'pixel-tart-p3-run-failure-model/v1' -or
+        [string]$contract.process_exit_wait_strategy -cne 'shared-deadline-staged-evidence-and-exit' -or
+        [int]$contract.process_exit_total_timeout_seconds -ne $script:p3ProcessStageTotalTimeoutSeconds -or
+        [int]$contract.process_table_required_consecutive_empty_observations -ne 2 -or
+        -not [bool]$contract.forced_cleanup_requires_retained_process_handle -or
+        -not [bool]$contract.runner_preassigns_process_session_id -or
+        [string]$contract.application_lifecycle_schema -cne 'pixel-tart-p3-automated-lifecycle/v1' -or
         [string]$contract.acceptance_input_snapshot_schema -cne 'pixel-tart-p3-acceptance-input-snapshot/v1' -or
         [string]$contract.run_seal_schema -cne 'pixel-tart-p3-run-seal/v1' -or
         [string]$contract.run_seal_file -cne 'runner/run-seal.json' -or
@@ -1319,6 +2687,32 @@ function Invoke-DryRun {
         [int]$contract.fixture.total_count -ne 10128 -or
         [int]$contract.repository.schema_version -ne 7) {
         throw 'Automated acceptance contract preflight failed.'
+    }
+    $fixedProcessIdentityFields = @(
+        'Pid','ProcessName','StartTimeUtc','ExecutablePath','ExecutableSha256','RunId',
+        'ProcessSessionId','WindowHandle','OwnedByRun','HasExited','ObservationError')
+    if ((@($contract.process_identity_fields | ForEach-Object { [string]$_ }) -join '|') -cne
+        ($fixedProcessIdentityFields -join '|')) {
+        throw 'Automated acceptance process identity field contract preflight failed.'
+    }
+    if ((@($contract.required_application_lifecycle_events | ForEach-Object { [string]$_ }) -join '|') -cne
+        ($script:p3LifecycleEvents -join '|')) {
+        throw 'Automated acceptance application lifecycle event contract preflight failed.'
+    }
+    $contractStageNames = @($contract.process_exit_stage_timeouts_seconds.PSObject.Properties.Name)
+    $fixedStageNames = @($script:p3ProcessStageTimeoutSeconds.Keys)
+    $contractStageTotal = 0
+    foreach ($stageName in $contractStageNames) {
+        $contractStageValue = [int]$contract.process_exit_stage_timeouts_seconds.$stageName
+        $contractStageTotal += $contractStageValue
+        if (-not $script:p3ProcessStageTimeoutSeconds.Contains($stageName) -or
+            $contractStageValue -ne [int]$script:p3ProcessStageTimeoutSeconds[$stageName]) {
+            throw "Automated acceptance process exit stage contract differs at '$stageName'."
+        }
+    }
+    if (($contractStageNames -join '|') -cne ($fixedStageNames -join '|') -or
+        $contractStageTotal -gt [int]$contract.process_exit_total_timeout_seconds) {
+        throw 'Automated acceptance process exit stage bounds exceed the shared deadline.'
     }
     foreach ($scriptPath in @($script:requiredAcceptanceInputFiles | Where-Object { $_ -like '*.ps1' } | ForEach-Object { Join-Path $PSScriptRoot $_ })) {
         $parseErrors = $null
@@ -1381,8 +2775,8 @@ if ($Mode -eq 'ValidateExistingRun') {
 
 $sourceHead = Assert-CleanCommit
 Assert-NoDevPreview
-$devPreviewGetProcessCountBefore = @(Get-ProcessSnapshot).Count
-$devPreviewCimCountBefore = @(Get-CimProcessSnapshot).Count
+$devPreviewGetProcessCountBefore = (Get-ProcessSnapshot).Items.Count
+$devPreviewCimCountBefore = (Get-CimProcessSnapshot).Items.Count
 $activeRunRoot = New-RunRoot
 $acceptanceInputs = New-AcceptanceInputSnapshot $activeRunRoot
 $logDirectory = Join-Path $activeRunRoot 'logs'
@@ -1392,6 +2786,7 @@ $runSealed = $false
 $environmentBefore = @{}
 foreach ($key in $script:environmentKeys) { $environmentBefore[$key] = [Environment]::GetEnvironmentVariable($key, 'Process') }
 $manifestPath = Join-Path $activeRunRoot 'run-manifest.json'
+$runCreatedAtUtc = [DateTimeOffset]::UtcNow.ToString('O')
 $manifest = [ordered]@{
     schema_version = 'pixel-tart-p3-automated-run/v1'
     validation_mode = 'automated'
@@ -1404,7 +2799,12 @@ $manifest = [ordered]@{
     repository_root = $script:repo
     branch = $script:expectedBranch
     source_head = $sourceHead
-    started_at = [DateTimeOffset]::UtcNow.ToString('O')
+    created_at = $runCreatedAtUtc
+    started_at = $runCreatedAtUtc
+    failure_model_schema = 'pixel-tart-p3-run-failure-model/v1'
+    primary_failure = $null
+    cleanup_failures = @()
+    observation_failures = @()
     acceptance_inputs = $acceptanceInputs
     run_seal = [ordered]@{
         schema = 'pixel-tart-p3-run-seal/v1'
@@ -1418,6 +2818,10 @@ $displayBefore = Get-DisplayObservation
 $dotnetPidsBefore = @(Get-Process -Name dotnet -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id)
 Write-JsonAtomic $manifestPath $manifest
 
+$firstFailure = $null
+$cleanupFailures = [Collections.Generic.List[object]]::new()
+$observationFailures = [Collections.Generic.List[object]]::new()
+$runCompleted = $false
 try {
     $safetyStaticBefore = New-SafetyStaticScanInput $activeRunRoot
     $fixture = New-P3SyntheticFixture $activeRunRoot $acceptanceInputs
@@ -1519,7 +2923,8 @@ try {
         $scenarioBase = $scenarioId -replace '/v1$', ''
         $scenarioToken = $scenarioBase -replace '[^a-zA-Z0-9.-]', '-'
         $sessionName = ('{0:D2}-{1}' -f $sessionIndex, $scenarioToken)
-        $sessions.Add((Invoke-AppPhase 'primary' @($scenarioId) $sessionName $sourceHead $executable $activeRunRoot $runId $logDirectory $binarySnapshot))
+        $sessions.Add((Invoke-AppPhase 'primary' @($scenarioId) $sessionName $sourceHead $executable $activeRunRoot $runId `
+            $manifest.created_at $logDirectory $binarySnapshot))
     }
     $restartScenarios = @(
         'search-suggestions-history/v1',
@@ -1530,7 +2935,8 @@ try {
         $sessionIndex++
         $restartToken = (($restartScenario -replace '/v1$', '') -replace '[^a-zA-Z0-9.-]', '-')
         $restartName = ('{0:D2}-{1}-restart' -f $sessionIndex, $restartToken)
-        $sessions.Add((Invoke-AppPhase 'restart' @($restartScenario) $restartName $sourceHead $executable $activeRunRoot $runId $logDirectory $binarySnapshot))
+        $sessions.Add((Invoke-AppPhase 'restart' @($restartScenario) $restartName $sourceHead $executable $activeRunRoot $runId `
+            $manifest.created_at $logDirectory $binarySnapshot))
     }
     # Compare every closed active SQLite repository with its immutable evidence
     # backup before cleaning generated runtime databases.
@@ -1546,8 +2952,8 @@ try {
         all_scenarios_closed_normally = $true
         devpreview_get_process_count_before = $devPreviewGetProcessCountBefore
         devpreview_cim_count_before = $devPreviewCimCountBefore
-        devpreview_get_process_count_after = @(Get-ProcessSnapshot).Count
-        devpreview_cim_count_after = @(Get-CimProcessSnapshot).Count
+        devpreview_get_process_count_after = (Get-ProcessSnapshot).Items.Count
+        devpreview_cim_count_after = (Get-CimProcessSnapshot).Items.Count
         dotnet_process_count_before = $dotnetPidsBefore.Count
         dotnet_process_count_after = $dotnetPidsAfter.Count
         dotnet_residual_pid_count = $dotnetResidualPids.Count
@@ -1572,7 +2978,8 @@ try {
         if (-not [string]::IsNullOrWhiteSpace([string]$path)) { $pathConfinementPaths.Add([IO.Path]::GetFullPath([string]$path)) }
     }
     foreach ($session in @($sessions)) {
-        foreach ($field in 'stdout','stderr','scenario_root','executable_path','application_path','asset_module_path') {
+        foreach ($field in 'stdout','stderr','scenario_root','executable_path','application_path','asset_module_path',
+            'process_exit_diagnostic_path','lifecycle_path','phase_summary_path','result_path') {
             $pathConfinementPaths.Add([IO.Path]::GetFullPath([string]$session.$field))
         }
     }
@@ -1669,16 +3076,54 @@ try {
     [void](New-RunSeal $activeRunRoot $runId $sourceHead)
     $runSealed = $true
     [void](Invoke-Validator $activeRunRoot $validatorLogDirectory)
-    Write-Output $activeRunRoot
+    $runCompleted = $true
 } catch {
+    $firstFailure = $_
+    foreach ($binding in @(
+        [pscustomobject]@{ key = 'cleanup_failures'; target = $cleanupFailures },
+        [pscustomobject]@{ key = 'observation_failures'; target = $observationFailures })) {
+        try {
+            $serialized = [string]$firstFailure.Exception.Data[$binding.key]
+            if (-not [string]::IsNullOrWhiteSpace($serialized)) {
+                foreach ($failure in @($serialized | ConvertFrom-Json -ErrorAction Stop)) { $binding.target.Add($failure) }
+            }
+        } catch {
+            $observationFailures.Add((ConvertTo-StructuredFailure 'observation' 'exception-diagnostic-deserialization' $_))
+        }
+    }
+} finally {
+    foreach ($key in $environmentBefore.Keys) {
+        try { [Environment]::SetEnvironmentVariable($key, $environmentBefore[$key], 'Process') }
+        catch {
+            if ($null -eq $firstFailure) { $firstFailure = $_ }
+            $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' "environment-restore:$key" $_))
+        }
+    }
+    try {
+        $primaryException = if ($null -ne $firstFailure) { $firstFailure.Exception } else { $null }
+        [void](Invoke-FinalDevPreviewCheck $primaryException $cleanupFailures $observationFailures)
+    } catch {
+        if ($null -eq $firstFailure) { $firstFailure = $_ }
+        else { $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'final-devpreview-check' $_)) }
+    }
+}
+
+if ($null -ne $firstFailure) {
     if (-not $runSealed) {
         $manifest.automated_capture_status = 'failed'
         $manifest.finished_at = [DateTimeOffset]::UtcNow.ToString('O')
-        $manifest.failure = $_.Exception.ToString()
-        Write-JsonAtomic $manifestPath $manifest
+        $manifest.failure = $firstFailure.Exception.ToString()
+        $manifest.primary_failure = ConvertTo-StructuredFailure 'primary' 'run' $firstFailure
+        $manifest.cleanup_failures = @($cleanupFailures)
+        $manifest.observation_failures = @($observationFailures)
+        try { Write-JsonAtomic $manifestPath $manifest }
+        catch {
+            $cleanupFailures.Add((ConvertTo-StructuredFailure 'cleanup' 'failed-run-manifest-write' $_))
+            $firstFailure.Exception.Data['failed_run_manifest_write'] = $_.Exception.ToString()
+        }
     }
-    throw "P3 automated acceptance failed. Run root retained: $activeRunRoot`n$($_.Exception.Message)"
-} finally {
-    foreach ($key in $environmentBefore.Keys) { [Environment]::SetEnvironmentVariable($key, $environmentBefore[$key], 'Process') }
-    Assert-NoDevPreview
+    throw (New-P3FinalFailureException $activeRunRoot $firstFailure.Exception @($cleanupFailures) @($observationFailures))
 }
+
+if (-not $runCompleted) { throw 'P3 automated acceptance ended without a success or failure outcome.' }
+Write-Output $activeRunRoot

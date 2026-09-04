@@ -53,6 +53,34 @@ function Get-JournalCanonicalText([string]$Line, [ValidateSet('event','summary')
         claimed_hash = $match.Groups['primary'].Value
     }
 }
+function Get-LifecycleCanonicalText([string]$Line) {
+    $pattern = '^(?<prefix>\{.*),"record_sha256":"(?<hash>[0-9a-f]{64})"\}$'
+    $match = [regex]::Match($Line, $pattern, [Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    if (-not $match.Success) { Fail 'lifecycle journal record does not use the production terminal hash layout.' }
+    return [pscustomobject]@{
+        canonical = $match.Groups['prefix'].Value + '}'
+        claimed_hash = $match.Groups['hash'].Value
+    }
+}
+function Get-EmbeddedPhaseSummaryCanonicalText([string]$Line) {
+    # A summary journal record embeds the exact compact producer JSON for the
+    # immutable phase summary.  Recover that byte prefix so PS 5.1 does not
+    # reserialize System.Text.Json escaping or number forms differently.
+    $pattern = '"summary":(?<prefix>\{.*),"record_sha256":"(?<hash>[0-9a-f]{64})"\},"previous_summary_hash"'
+    $match = [regex]::Match($Line, $pattern, [Text.RegularExpressions.RegexOptions]::CultureInvariant)
+    if (-not $match.Success) { Fail 'summary journal does not embed a terminal-hashed phase summary.' }
+    return [pscustomobject]@{
+        canonical = $match.Groups['prefix'].Value + '}'
+        claimed_hash = $match.Groups['hash'].Value
+    }
+}
+function Get-ObjectCanonicalTextWithoutProperty($Object, [string]$ExcludedProperty) {
+    $canonical = [ordered]@{}
+    foreach ($property in $Object.PSObject.Properties) {
+        if ([string]$property.Name -cne $ExcludedProperty) { $canonical[$property.Name] = $property.Value }
+    }
+    return $canonical | ConvertTo-Json -Depth 100 -Compress
+}
 function Inside([string]$Path, [string]$Parent) {
     $child = Full $Path; $root = Full $Parent
     return $child.StartsWith($root + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
@@ -62,6 +90,21 @@ function Require-File([string]$Path, [string]$Name) {
     $item = Get-Item -LiteralPath $Path -Force
     if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { Fail "$Name is a reparse point." }
     return $item
+}
+function Require-NoReparsePathChain([string]$Path, [string]$OwnedRoot, [string]$Name) {
+    $cursor = Full $Path
+    $rootFull = Full $OwnedRoot
+    if (-not (Inside $cursor $rootFull)) { Fail "$Name escapes its owned root." }
+    while ($true) {
+        if (-not (Test-Path -LiteralPath $cursor)) { Fail "$Name path chain is missing: $cursor" }
+        $item = Get-Item -LiteralPath $cursor -Force
+        if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { Fail "$Name path chain contains a reparse point: $cursor" }
+        if ([string]::Equals($cursor, $rootFull, [StringComparison]::OrdinalIgnoreCase)) { break }
+        $cursor = Full (Split-Path -Parent $cursor)
+        if (-not ([string]::Equals($cursor, $rootFull, [StringComparison]::OrdinalIgnoreCase) -or (Inside $cursor $rootFull))) {
+            Fail "$Name path chain escaped its owned root."
+        }
+    }
 }
 function Read-Json([string]$Path, [string]$Name) {
     [void](Require-File $Path $Name)
@@ -228,10 +271,21 @@ function Property-Value($Object, [string]$Name) {
     if ($null -eq $property) { return $null }
     return $property.Value
 }
+function Require-IntegerProperty($Object, [string]$Name, [string]$Owner) {
+    if ($null -eq $Object) { Fail "$Owner is null." }
+    $property = $Object.PSObject.Properties[$Name]
+    if ($null -eq $property -or $null -eq $property.Value) { Fail "$Owner.$Name is missing or null." }
+    $value = $property.Value
+    if (-not ($value -is [sbyte] -or $value -is [byte] -or $value -is [int16] -or $value -is [uint16] -or
+        $value -is [int32] -or $value -is [uint32] -or $value -is [int64] -or $value -is [uint64])) {
+        Fail "$Owner.$Name must be a JSON integer number."
+    }
+    return [int64]$value
+}
 function Require-ZeroFields($Object, [string[]]$Names, [string]$Owner) {
     foreach ($name in $Names) {
-        $property = $Object.PSObject.Properties[$name]
-        if ($null -eq $property -or [int64]$property.Value -ne 0) { Fail "$Owner.$name must exist and equal zero." }
+        $value = Require-IntegerProperty $Object $name $Owner
+        if ($value -ne 0) { Fail "$Owner.$name must exist and equal zero." }
     }
 }
 function Tree-Fingerprint([string]$Root) {
@@ -494,6 +548,47 @@ Require-Equal ([bool]$contract.manual_evidence_claimed) $false 'contract.manual_
 Require-Equal $contract.safety_measurement_schema 'pixel-tart-p3-safety-measurement/v1' 'contract safety measurement schema'
 Require-Equal $contract.safety_static_scan_schema 'pixel-tart-p3-safety-static-scan/v1' 'contract safety static scan schema'
 Require-Equal $contract.safety_path_confinement_schema 'pixel-tart-p3-run-owned-path-confinement/v1' 'contract safety path schema'
+Require-Equal $contract.process_table_snapshot_schema 'pixel-tart-p3-process-table-snapshot/v1' 'contract process table snapshot schema'
+Require-Equal $contract.process_observation_schema 'pixel-tart-p3-devpreview-process-observation/v1' 'contract process observation schema'
+Require-Equal $contract.process_owner_schema 'pixel-tart-p3-runner-process-owner/v1' 'contract process owner schema'
+Require-Equal $contract.process_exit_diagnostic_schema 'pixel-tart-p3-runner-process-exit-diagnostic/v1' 'contract process exit diagnostic schema'
+Require-Equal $contract.runner_session_result_schema 'pixel-tart-p3-runner-session-result/v1' 'contract runner session result schema'
+Require-Equal $contract.process_table_convergence_schema 'pixel-tart-p3-process-table-convergence/v1' 'contract process table convergence schema'
+Require-Equal $contract.run_failure_model_schema 'pixel-tart-p3-run-failure-model/v1' 'contract run failure model schema'
+Require-Equal $contract.process_exit_wait_strategy 'shared-deadline-staged-evidence-and-exit' 'contract process exit wait strategy'
+Require-Equal ([int]$contract.process_exit_total_timeout_seconds) 300 'contract process exit total timeout'
+$fixedProcessStageCaps = [ordered]@{
+    completion_handshake = 235; shutdown_preparation = 20; application_on_exit_enter = 10
+    phase_summary_commit = 10; application_on_exit_completed = 5; process_exit = 10; process_table_convergence = 10
+}
+$observedProcessStageCapTotal = 0
+Require-Equal (@($contract.process_exit_stage_timeouts_seconds.PSObject.Properties.Name) -join '|') `
+    (@($fixedProcessStageCaps.Keys) -join '|') 'contract process exit stage names'
+foreach ($stageName in $fixedProcessStageCaps.Keys) {
+    $stageCap = [int](Property-Value $contract.process_exit_stage_timeouts_seconds $stageName)
+    Require-Equal $stageCap ([int]$fixedProcessStageCaps[$stageName]) "contract process exit stage $stageName cap"
+    $observedProcessStageCapTotal += $stageCap
+}
+if ($observedProcessStageCapTotal -gt [int]$contract.process_exit_total_timeout_seconds) {
+    Fail 'contract process exit stage caps exceed the shared deadline.'
+}
+Require-Equal ([int]$contract.process_table_required_consecutive_empty_observations) 2 'contract process empty observation count'
+Require-Equal ([bool]$contract.forced_cleanup_requires_retained_process_handle) $true 'contract retained process handle requirement'
+Require-Equal ([bool]$contract.runner_preassigns_process_session_id) $true 'contract runner-preassigned process session requirement'
+Require-Equal $contract.application_lifecycle_schema 'pixel-tart-p3-automated-lifecycle/v1' 'contract application lifecycle schema'
+$fixedProcessIdentityFields = @(
+    'Pid','ProcessName','StartTimeUtc','ExecutablePath','ExecutableSha256','RunId',
+    'ProcessSessionId','WindowHandle','OwnedByRun','HasExited','ObservationError')
+Require-Equal (@($contract.process_identity_fields | ForEach-Object { [string]$_ }) -join '|') `
+    ($fixedProcessIdentityFields -join '|') 'contract process identity fields'
+$fixedLifecycleEvents = @(
+    'plan-completed','completion-ack-written','shutdown-requested','shutdown-dispatch-started',
+    'page-dispose-start','page-dispose-completed','application-async-dispose-start',
+    'application-async-dispose-completed','shutdown-preparation-complete','window-close-start',
+    'application-shutdown-start','window-close-completed','application-on-exit-enter',
+    'summary-commit-start','phase-summary-written','summary-commit-end','application-on-exit-completed')
+Require-Equal (@($contract.required_application_lifecycle_events | ForEach-Object { [string]$_ }) -join '|') `
+    ($fixedLifecycleEvents -join '|') 'contract application lifecycle events'
 
 $expectedScenarios = @($contract.required_scenario_order | ForEach-Object { [string]$_ })
 $fixedScenarios = @(
@@ -566,11 +661,27 @@ $negativeGuardMap = [ordered]@{
     'smart-folder-invalid-ref-expanded'='invalid reference fail-closed'; 'smart-folder-migration-mismatch'='v6 to v7 migration evidence';
     'tag-merge-membership-duplicate'='deduplicated merged memberships'; 'tag-group-cycle-accepted'='acyclic group validation';
     'batch-partial-commit'='atomic 100/500 tag batches'; 'journal-chain-mismatch'='journal previous-hash chain';
+    'lifecycle-chain-mismatch'='application shutdown lifecycle identity, order, and hash chain';
+    'missing-completion-handshake'='runner completion handshake is mandatory';
+    'lifecycle-state-regression'='lifecycle result and pending state may not regress';
+    'lifecycle-duplicate-transition'='lifecycle transitions are unique and exactly ordered';
+    'lifecycle-run-id-mismatch'='lifecycle run ownership';
+    'lifecycle-session-id-mismatch'='lifecycle process-session ownership';
+    'lifecycle-source-head-mismatch'='lifecycle source HEAD ownership';
+    'lifecycle-binary-hash-mismatch'='lifecycle sealed binary ownership';
+    'partial-phase-summary'='immutable phase summary must be complete JSON';
+    'phase-summary-record-hash-mismatch'='phase summary record hash';
+    'forced-cleanup-false-success'='forced cleanup cannot be reported as normal success';
+    'missing-exit-code'='runner session exit code and observation';
+    'missing-on-exit-completed'='application on-exit completion transition';
+    'lifecycle-timing-regression'='lifecycle wall-clock and stopwatch monotonicity';
+    'lifecycle-old-root-splice'='lifecycle path remains bound to the current run root';
     'undo-redo-mismatch'='command undo/redo snapshots'; 'restart-identity-reused'='restart process identity differs';
     'view-result-divergence'='four view result hashes'; 'selection-hash-divergence'='selection preserved across views';
     'dpi-overflow'='four DPI bounds with no overflow'; 'contrast-threshold-failed'='contrast evidence pass';
     'accessibility-identity-missing'='nonempty unique identities'; 'performance-threshold-exceeded'='fixed metric thresholds';
     'ui-block-exceeded'='100ms UI block threshold'; 'user-source-write'='safety source counters';
+    'safety-counter-null'='safety counters require non-null JSON integer zeros';
     'eagle-write'='Eagle counters'; 'network-upload'='upload counters'; 'permanent-delete'='delete counter';
     'residual-process'='runner cleanup'; 'database-not-v7'='read-only SQLite v7 audit';
     'cross-run-splice'='run and head binding'; 'runner-session-splice'='17 unique sessions';
@@ -588,10 +699,21 @@ Require-Equal $manifest.validation_mode 'automated' 'manifest validation mode'
 Require-Equal $manifest.owner_manual_ux_smoke 'waived' 'manifest owner smoke'
 Require-Equal ([bool]$manifest.manual_evidence_claimed) $false 'manifest manual claim'
 Require-Equal $manifest.automated_capture_status 'captured' 'manifest status'
+Require-Equal $manifest.failure_model_schema 'pixel-tart-p3-run-failure-model/v1' 'manifest failure model schema'
+if ($null -ne (Property-Value $manifest 'primary_failure')) { Fail 'successful manifest primary_failure must be null.' }
+Require-Equal @($manifest.cleanup_failures).Count 0 'successful manifest cleanup failure count'
+Require-Equal @($manifest.observation_failures).Count 0 'successful manifest observation failure count'
 Require-Equal (Full $manifest.run_root) $root 'manifest run root'
 Require-String $manifest.run_id 'run id' '^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'
 Require-String $manifest.source_head 'source head' '^[0-9a-f]{40}$'
 Require-Equal $manifest.branch 'feature/asset-library-eagle-parity-p3-query-metadata' 'branch'
+$runCreatedAt = [DateTimeOffset]::MinValue
+if (-not [DateTimeOffset]::TryParse(
+    [string](Property-Value $manifest 'created_at'),
+    [Globalization.CultureInfo]::InvariantCulture,
+    [Globalization.DateTimeStyles]::RoundtripKind,
+    [ref]$runCreatedAt)) { Fail 'manifest created_at is invalid.' }
+Require-Equal $manifest.started_at $manifest.created_at 'manifest creation/start timestamp binding'
 
 $fixture = $manifest.fixture
 Require-Equal $fixture.schema 'pixel-tart-p3-synthetic-fixture/v1' 'fixture schema'
@@ -617,12 +739,11 @@ Require-Equal ([int]$fixture.legacy_variant.archived_count) 4 'legacy fixture ar
 Require-Equal $fixture.source_path_observation 'sqlite-sourcepath-enumeration/v1' 'fixture source path observation'
 Require-Equal ([int]$fixture.source_path_count) 10192 'fixture source path count'
 Require-Equal ([int]$fixture.source_paths_inside_fixture_count) 10192 'fixture source paths inside fixture count'
-Require-Equal ([int]$fixture.source_paths_outside_fixture_count) 0 'fixture source paths outside fixture count'
+Require-ZeroFields $fixture @('source_paths_outside_fixture_count') 'fixture'
 Require-String $fixture.current_source_path_sha256 'fixture current source path hash' '^[0-9a-f]{64}$'
 Require-String $fixture.legacy_source_path_sha256 'fixture legacy source path hash' '^[0-9a-f]{64}$'
 Require-String $fixture.source_path_tree_sha256 'fixture source path tree hash' '^[0-9a-f]{64}$'
-Require-Equal ([int]$fixture.user_source_read_count) 0 'fixture user source read count'
-Require-Equal ([int]$fixture.user_source_write_count) 0 'fixture user source write count'
+Require-ZeroFields $fixture @('user_source_read_count','user_source_write_count') 'fixture'
 $fixtureDirectory = Full $fixture.directory
 if (-not (Inside $fixtureDirectory $root) -or -not (Test-Path -LiteralPath $fixtureDirectory -PathType Container)) {
     Fail 'fixture directory is absent or escapes the run root.'
@@ -751,21 +872,226 @@ $sessions = @($manifest.sessions)
 Require-Equal $sessions.Count 17 'runner session count'
 $expectedSessionScenarios = @($expectedScenarios + $expectedRestarts)
 $seenSessions = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+$phaseSummaryByProcessSession = @{}
 for ($index = 0; $index -lt $sessions.Count; $index++) {
     $session = $sessions[$index]
+    Require-Equal $session.schema $contract.runner_session_result_schema "session[$index] schema"
+    Require-Equal $session.status 'completed' "session[$index] status"
     Require-Equal $session.scenario_id $expectedSessionScenarios[$index] "session[$index] scenario"
-    Require-Equal ([int]$session.exit_code) 0 "session[$index] exit"
+    Require-Equal (Require-IntegerProperty $session 'exit_code' "session[$index]") 0 "session[$index] exit"
     Require-String $session.process_session_id "session[$index] process session" '^[0-9a-f]{32}$'
     if (-not $seenSessions.Add([string]$session.process_session_id)) { Fail 'runner process session id is reused.' }
     Require-Equal $session.source_head $manifest.source_head "session[$index] head"
-    foreach ($field in 'stdout','stderr','scenario_root','executable_path','application_path','asset_module_path') {
+    foreach ($field in 'stdout','stderr','scenario_root','executable_path','application_path','asset_module_path','result_path','phase_summary_path') {
         $value = Full $session.$field
         if (-not (Inside $value $root)) { Fail "session[$index].$field escapes the run root." }
+    }
+    $binaryRoot = Join-Path $root 'binaries'
+    foreach ($field in 'executable_path','application_path','asset_module_path') {
+        if (-not (Inside (Full $session.$field) $binaryRoot)) { Fail "session[$index].$field is not run-owned by the sealed binary root." }
     }
     foreach ($pair in @(@('stdout','stdout_sha256'),@('stderr','stderr_sha256'),@('executable_path','executable_sha256'),@('application_path','application_sha256'),@('asset_module_path','asset_module_sha256'))) {
         [void](Require-File $session.($pair[0]) "session[$index] $($pair[0])")
         Require-Equal (Hash $session.($pair[0])) $session.($pair[1]) "session[$index] $($pair[1])"
     }
+    $resultPath = Full $session.result_path
+    [void](Require-File $resultPath "session[$index] independent result")
+    Require-Equal (Hash $resultPath) $session.result_sha256 "session[$index] independent result file hash"
+    $independentResult = Read-Json $resultPath "session[$index] independent result"
+    Require-Equal $independentResult.schema $contract.runner_session_result_schema "session[$index] independent result schema"
+    Require-Equal $independentResult.status 'completed' "session[$index] independent result status"
+    Require-String $independentResult.record_sha256 "session[$index] independent result record hash" '^[0-9a-f]{64}$'
+    Require-Equal (Sha256Text (Get-ObjectCanonicalTextWithoutProperty $independentResult 'record_sha256')) `
+        $independentResult.record_sha256 "session[$index] independent result recomputed record hash"
+    foreach ($field in 'schema','status','run_id','process_session_id','phase','session_name','scenario_id','pid','hwnd',
+        'source_head','executable_sha256','application_sha256','asset_module_sha256','exit_code',
+        'phase_summary_sha256','phase_summary_record_sha256','lifecycle_sha256',
+        'process_exit_diagnostic_sha256','record_sha256') {
+        Require-Equal (Property-Value $independentResult $field) (Property-Value $session $field) `
+            "session[$index] independent result $field binding"
+    }
+    Require-Equal (Require-IntegerProperty $independentResult 'exit_code' "session[$index] independent result") 0 `
+        "session[$index] independent result exit"
+
+    $phaseSummaryPath = Full $session.phase_summary_path
+    [void](Require-File $phaseSummaryPath "session[$index] immutable phase summary")
+    Require-Equal (Hash $phaseSummaryPath) $session.phase_summary_sha256 "session[$index] immutable phase summary file hash"
+    $phaseSummary = Read-Json $phaseSummaryPath "session[$index] immutable phase summary"
+    Require-String $phaseSummary.record_sha256 "session[$index] phase summary record hash" '^[0-9a-f]{64}$'
+    Require-Equal $phaseSummary.record_sha256 $session.phase_summary_record_sha256 `
+        "session[$index] phase summary record hash binding"
+    Require-Equal $phaseSummary.status 'completed' "session[$index] phase summary status"
+    Require-Equal $phaseSummary.run_id $manifest.run_id "session[$index] phase summary run id"
+    Require-Equal $phaseSummary.process_session_id $session.process_session_id "session[$index] phase summary process session"
+    Require-Equal $phaseSummary.phase $session.phase "session[$index] phase summary phase"
+    Require-Equal $phaseSummary.source_head $manifest.source_head "session[$index] phase summary head"
+    Require-Equal $phaseSummary.executable_sha256 $session.executable_sha256 "session[$index] phase summary executable hash"
+    Require-Equal $phaseSummary.application_sha256 $session.application_sha256 "session[$index] phase summary application hash"
+    Require-Equal $phaseSummary.asset_module_sha256 $session.asset_module_sha256 "session[$index] phase summary module hash"
+    $phaseSummaryScenario = @($phaseSummary.scenarios | Where-Object { [string]$_.id -ceq [string]$session.scenario_id })
+    if ($phaseSummaryScenario.Count -ne 1) { Fail "session[$index] phase summary has no unique scenario." }
+    $phaseSummaryPid = if ([string]$session.phase -ceq 'primary') { Require-IntegerProperty $phaseSummaryScenario[0] 'pid' "session[$index] phase summary scenario" }
+        else { Require-IntegerProperty $phaseSummaryScenario[0] 'restart_pid' "session[$index] phase summary scenario" }
+    $phaseSummaryHwnd = if ([string]$session.phase -ceq 'primary') { [string]$phaseSummaryScenario[0].hwnd }
+        else { [string]$phaseSummaryScenario[0].restart_hwnd }
+    Require-Equal $phaseSummaryPid (Require-IntegerProperty $session 'pid' "session[$index]") "session[$index] phase summary PID"
+    Require-Equal $phaseSummaryHwnd $session.hwnd "session[$index] phase summary HWND"
+    $phaseSummaryByProcessSession[[string]$session.process_session_id] = [pscustomobject]@{
+        payload = $phaseSummary
+        record_sha256 = [string]$phaseSummary.record_sha256
+    }
+    $lifecyclePath = Full $session.lifecycle_path
+    if (-not (Inside $lifecyclePath $root)) { Fail "session[$index] lifecycle journal escapes the run root." }
+    [void](Require-File $lifecyclePath "session[$index] lifecycle journal")
+    Require-Equal (Hash $lifecyclePath) $session.lifecycle_sha256 "session[$index] lifecycle journal hash"
+    $lifecycleLines = @([IO.File]::ReadAllLines($lifecyclePath, [Text.Encoding]::UTF8))
+    Require-Equal $lifecycleLines.Count @($contract.required_application_lifecycle_events).Count "session[$index] lifecycle record count"
+    $expectedLifecycleResults = @(
+        'passed','completed','accepted','started','started','completed','started','completed','completed',
+        'started','started','completed','prepared','passed','passed','passed','completed')
+    $expectedLifecyclePending = @(
+        $false,$false,$true,$true,$true,$false,$true,$false,$false,$true,$true,$false,$false,$true,$false,$false,$false)
+    $previousLifecycleHash = '0' * 64
+    $previousLifecycleTimestamp = [DateTimeOffset]::MinValue
+    $previousLifecycleElapsed = -1.0
+    for ($lifecycleIndex = 0; $lifecycleIndex -lt $lifecycleLines.Count; $lifecycleIndex++) {
+        $line = $lifecycleLines[$lifecycleIndex]
+        if ([string]::IsNullOrWhiteSpace($line)) { Fail "session[$index] lifecycle[$lifecycleIndex] is empty or partial." }
+        try { $record = $line | ConvertFrom-Json -ErrorAction Stop }
+        catch { Fail "session[$index] lifecycle[$lifecycleIndex] is invalid JSON: $($_.Exception.Message)" }
+        $canonical = Get-LifecycleCanonicalText $line
+        Require-Equal (Sha256Text $canonical.canonical) $canonical.claimed_hash "session[$index] lifecycle[$lifecycleIndex] record hash"
+        Require-Equal $record.record_sha256 $canonical.claimed_hash "session[$index] lifecycle[$lifecycleIndex] terminal hash"
+        Require-Equal $record.previous_record_sha256 $previousLifecycleHash "session[$index] lifecycle[$lifecycleIndex] previous hash"
+        Require-Equal $record.schema $contract.application_lifecycle_schema "session[$index] lifecycle[$lifecycleIndex] schema"
+        Require-Equal ([int]$record.sequence) ($lifecycleIndex + 1) "session[$index] lifecycle[$lifecycleIndex] sequence"
+        Require-Equal $record.event $contract.required_application_lifecycle_events[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] event"
+        Require-Equal $record.result $expectedLifecycleResults[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] result"
+        Require-Equal ([bool]$record.pending) $expectedLifecyclePending[$lifecycleIndex] "session[$index] lifecycle[$lifecycleIndex] pending"
+        Require-Equal ([int]$record.pending_operation_count) $(if ($expectedLifecyclePending[$lifecycleIndex]) { 1 } else { 0 }) `
+            "session[$index] lifecycle[$lifecycleIndex] pending operation count"
+        if ($null -ne (Property-Value $record 'exception')) { Fail "session[$index] lifecycle[$lifecycleIndex] contains an exception on a successful exit." }
+        Require-Equal $record.run_id $manifest.run_id "session[$index] lifecycle[$lifecycleIndex] run id"
+        Require-Equal $record.scenario_id $session.scenario_id "session[$index] lifecycle[$lifecycleIndex] scenario"
+        Require-Equal $record.phase $session.phase "session[$index] lifecycle[$lifecycleIndex] phase"
+        Require-Equal $record.process_session_id $session.process_session_id "session[$index] lifecycle[$lifecycleIndex] process session"
+        Require-Equal ([int]$record.pid) ([int]$session.pid) "session[$index] lifecycle[$lifecycleIndex] PID"
+        Require-Equal $record.hwnd $session.hwnd "session[$index] lifecycle[$lifecycleIndex] HWND"
+        Require-Equal $record.source_head $manifest.source_head "session[$index] lifecycle[$lifecycleIndex] head"
+        Require-Equal $record.executable_sha256 $session.executable_sha256 "session[$index] lifecycle[$lifecycleIndex] executable hash"
+        Require-Equal $record.application_sha256 $session.application_sha256 "session[$index] lifecycle[$lifecycleIndex] application hash"
+        Require-Equal $record.asset_module_sha256 $session.asset_module_sha256 "session[$index] lifecycle[$lifecycleIndex] module hash"
+        if ([int]$record.managed_thread_id -le 0 -or [int]$record.dispatcher_thread_id -le 0) {
+            Fail "session[$index] lifecycle[$lifecycleIndex] thread identity is invalid."
+        }
+        $timestamp = [DateTimeOffset]::MinValue
+        if (-not [DateTimeOffset]::TryParse(
+            [string]$record.timestamp_utc,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::RoundtripKind,
+            [ref]$timestamp)) { Fail "session[$index] lifecycle[$lifecycleIndex] timestamp is invalid." }
+        if ($timestamp -lt $previousLifecycleTimestamp) { Fail "session[$index] lifecycle timestamp moved backwards." }
+        $elapsed = [double]$record.stopwatch_elapsed_ms
+        if ($elapsed -lt $previousLifecycleElapsed) { Fail "session[$index] lifecycle stopwatch moved backwards." }
+        $previousLifecycleTimestamp = $timestamp
+        $previousLifecycleElapsed = $elapsed
+        $previousLifecycleHash = [string]$record.record_sha256
+    }
+    $processExitDiagnosticPath = Full $session.process_exit_diagnostic_path
+    if (-not (Inside $processExitDiagnosticPath $root)) { Fail "session[$index] process exit diagnostic escapes the run root." }
+    [void](Require-File $processExitDiagnosticPath "session[$index] process exit diagnostic")
+    Require-Equal (Hash $processExitDiagnosticPath) $session.process_exit_diagnostic_sha256 "session[$index] process exit diagnostic hash"
+    $processExitDiagnostic = Read-Json $processExitDiagnosticPath "session[$index] process exit diagnostic"
+    Require-Equal (Sha256Text ($processExitDiagnostic | ConvertTo-Json -Depth 100 -Compress)) `
+        (Sha256Text ($session.process_exit_diagnostic | ConvertTo-Json -Depth 100 -Compress)) `
+        "session[$index] embedded process exit diagnostic binding"
+    Require-Equal $processExitDiagnostic.schema $contract.process_exit_diagnostic_schema "session[$index] process exit diagnostic schema"
+    Require-Equal $processExitDiagnostic.phase $session.phase "session[$index] process exit diagnostic phase"
+    Require-Equal $processExitDiagnostic.session_name $session.session_name "session[$index] process exit diagnostic session"
+    Require-Equal $processExitDiagnostic.scenario_id $session.scenario_id "session[$index] process exit diagnostic scenario"
+    Require-Equal $processExitDiagnostic.outcome 'completed' "session[$index] process exit diagnostic outcome"
+    if ($null -ne (Property-Value $processExitDiagnostic 'primary_failure')) { Fail "session[$index] process exit primary failure must be null." }
+    Require-Equal @($processExitDiagnostic.cleanup_failures).Count 0 "session[$index] process exit cleanup failure count"
+    Require-Equal @($processExitDiagnostic.observation_failures).Count 0 "session[$index] process exit observation failure count"
+
+    $owner = $processExitDiagnostic.owner
+    Require-Equal $owner.schema $contract.process_owner_schema "session[$index] process owner schema"
+    $ownerFields = @($owner.PSObject.Properties.Name | Where-Object { $_ -cne 'schema' })
+    Require-Equal ($ownerFields -join '|') (@($contract.process_identity_fields) -join '|') "session[$index] process owner fields"
+    Require-Equal ([int]$owner.Pid) ([int]$session.pid) "session[$index] process owner PID"
+    Require-Equal $owner.ProcessName 'PixelTart_ModularHarness_V1_DevPreview' "session[$index] process owner name"
+    Require-String $owner.StartTimeUtc "session[$index] process owner start time" '^\d{4}-\d{2}-\d{2}T'
+    $ownerStart = [DateTimeOffset]::MinValue
+    if (-not [DateTimeOffset]::TryParse(
+        [string]$owner.StartTimeUtc,
+        [Globalization.CultureInfo]::InvariantCulture,
+        [Globalization.DateTimeStyles]::RoundtripKind,
+        [ref]$ownerStart) -or $ownerStart -le $runCreatedAt) {
+        Fail "session[$index] process owner start time is not later than manifest.created_at."
+    }
+    Require-Equal (Full $owner.ExecutablePath) (Full $session.executable_path) "session[$index] process owner executable"
+    Require-NoReparsePathChain $owner.ExecutablePath (Join-Path $root 'binaries') "session[$index] process owner executable"
+    Require-Equal $owner.ExecutableSha256 $session.executable_sha256 "session[$index] process owner executable hash"
+    Require-Equal $owner.RunId $manifest.run_id "session[$index] process owner run id"
+    Require-Equal $owner.ProcessSessionId $session.process_session_id "session[$index] process owner process session id"
+    Require-Equal $owner.WindowHandle $session.hwnd "session[$index] process owner window handle"
+    Require-Equal ([bool]$owner.OwnedByRun) $true "session[$index] process owner ownership"
+    Require-Equal ([bool]$owner.HasExited) $true "session[$index] process owner exit state"
+    Require-Equal ([string]$owner.ObservationError) '' "session[$index] process owner observation error"
+
+    Require-Equal $processExitDiagnostic.execution_wait.strategy $contract.process_exit_wait_strategy "session[$index] process exit wait strategy"
+    if ([int]$processExitDiagnostic.execution_wait.timeout_seconds -le 0 -or
+        [int]$processExitDiagnostic.execution_wait.timeout_seconds -gt [int]$contract.process_exit_total_timeout_seconds -or
+        [int]$processExitDiagnostic.execution_wait.slice_milliseconds -le 0) {
+        Fail "session[$index] process exit wait bounds are invalid."
+    }
+    foreach ($stageName in $fixedProcessStageCaps.Keys) {
+        Require-Equal ([int](Property-Value $processExitDiagnostic.execution_wait.stage_caps_seconds $stageName)) `
+            ([int]$fixedProcessStageCaps[$stageName]) "session[$index] process exit stage cap $stageName"
+    }
+    $stageRows = @($processExitDiagnostic.execution_wait.stages)
+    Require-Equal ($stageRows.Count) $fixedProcessStageCaps.Count "session[$index] process exit stage count"
+    $expectedStageNames = @($fixedProcessStageCaps.Keys)
+    for ($stageIndex = 0; $stageIndex -lt $stageRows.Count; $stageIndex++) {
+        Require-Equal $stageRows[$stageIndex].name $expectedStageNames[$stageIndex] "session[$index] process stage[$stageIndex] name"
+        Require-Equal $stageRows[$stageIndex].outcome 'observed' "session[$index] process stage[$stageIndex] outcome"
+        Require-Equal ([int]$stageRows[$stageIndex].cap_seconds) `
+            ([int]$fixedProcessStageCaps[$expectedStageNames[$stageIndex]]) "session[$index] process stage[$stageIndex] cap"
+        if ([int64]$stageRows[$stageIndex].elapsed_milliseconds -lt 0 -or
+            [int64]$stageRows[$stageIndex].elapsed_milliseconds -gt ([int64]$stageRows[$stageIndex].cap_seconds * 1000L + 250L)) {
+            Fail "session[$index] process stage[$stageIndex] exceeded its bounded cap."
+        }
+    }
+    Require-Equal ([bool]$processExitDiagnostic.execution_wait.process_exit_observed) $true "session[$index] process exit observation"
+    foreach ($field in 'required','started','owner_identity_verified','kill_requested_through_retained_handle','process_exit_observed','completed') {
+        Require-Equal ([bool](Property-Value $processExitDiagnostic.forced_cleanup $field)) $false "session[$index] forced cleanup $field"
+    }
+    $convergence = $processExitDiagnostic.process_table_convergence
+    Require-Equal $convergence.schema $contract.process_table_convergence_schema "session[$index] process convergence schema"
+    Require-Equal ([bool]$convergence.converged) $true "session[$index] process convergence outcome"
+    Require-Equal ([int]$convergence.required_consecutive_empty_observations) `
+        ([int]$contract.process_table_required_consecutive_empty_observations) "session[$index] process convergence required empty count"
+    if ([int]$convergence.observed_consecutive_empty_observations -lt
+        [int]$contract.process_table_required_consecutive_empty_observations) {
+        Fail "session[$index] process convergence did not observe enough consecutive empty tables."
+    }
+    Require-Equal @($convergence.final_pids).Count 0 "session[$index] process convergence final PID count"
+    Require-Equal @($convergence.observation_failures).Count 0 "session[$index] process convergence observation failure count"
+    $convergenceSamples = @($convergence.samples)
+    if ($convergenceSamples.Count -lt [int]$contract.process_table_required_consecutive_empty_observations) {
+        Fail "session[$index] process convergence samples are incomplete."
+    }
+    foreach ($sample in @($convergenceSamples | Select-Object -Last ([int]$contract.process_table_required_consecutive_empty_observations))) {
+        Require-Equal ([int]$sample.get_process_count) 0 "session[$index] final Get-Process sample"
+        Require-Equal ([int]$sample.cim_count) 0 "session[$index] final CIM sample"
+        Require-Equal @($sample.pids).Count 0 "session[$index] final process sample PID count"
+    }
+    $timelineEvents = @($processExitDiagnostic.timeline | ForEach-Object { [string]$_.event })
+    $expectedTimelineEvents = @(
+        'execution-wait-start','completion-handshake-observed','shutdown-preparation-observed',
+        'application-on-exit-enter-observed','summary-observed','application-on-exit-completed-observed','application-lifecycle-observed',
+        'process-exit-observed','normal-exit','exit-code-observed','same-run-process-zero')
+    Require-Equal ($timelineEvents -join '|') ($expectedTimelineEvents -join '|') "session[$index] process exit timeline"
 }
 
 $build = Read-Json (Join-Path $root 'build-manifest.json') 'build manifest'
@@ -871,6 +1197,7 @@ $finalSummaryRecord = $null
 foreach ($line in $summaryLines) {
     try { $record = $line | ConvertFrom-Json } catch { Fail 'summary journal contains invalid JSON.' }
     $journalHash = Get-JournalCanonicalText $line 'summary'
+    $embeddedPhaseSummary = Get-EmbeddedPhaseSummaryCanonicalText $line
     Require-Equal $record.schema 'pixel-tart-p3-automated-summary/v1' 'summary journal schema'
     Require-Equal $record.run_id $manifest.run_id 'summary journal run id'
     Require-Equal $record.source_head $manifest.source_head 'summary journal head'
@@ -881,6 +1208,19 @@ foreach ($line in $summaryLines) {
     Require-Equal $record.summary_hash $journalHash.claimed_hash 'summary journal terminal claimed hash'
     Require-Equal (Sha256Text $journalHash.canonical) $record.summary_hash 'summary journal recomputed record hash'
     Require-String $record.process_session_id 'summary journal process session' '^[0-9a-f]{32}$'
+    Require-Equal (Sha256Text $embeddedPhaseSummary.canonical) $embeddedPhaseSummary.claimed_hash `
+        'summary journal embedded phase summary recomputed record hash'
+    Require-Equal $record.summary.record_sha256 $embeddedPhaseSummary.claimed_hash `
+        'summary journal embedded phase summary record hash alias'
+    if (-not $phaseSummaryByProcessSession.ContainsKey([string]$record.process_session_id)) {
+        Fail 'summary journal process session has no immutable phase summary.'
+    }
+    $boundPhaseSummary = $phaseSummaryByProcessSession[[string]$record.process_session_id]
+    Require-Equal $boundPhaseSummary.record_sha256 $embeddedPhaseSummary.claimed_hash `
+        'immutable phase summary record hash binding to summary journal'
+    Require-Equal (Sha256Text ($record.summary | ConvertTo-Json -Depth 100 -Compress)) `
+        (Sha256Text ($boundPhaseSummary.payload | ConvertTo-Json -Depth 100 -Compress)) `
+        'immutable phase summary semantic binding to summary journal'
     [void]$summarySessions.Add([string]$record.process_session_id)
     $finalSummaryRecord = $record
     $previousSummary = [string]$record.summary_hash
@@ -1311,7 +1651,12 @@ for ($auditIndex = 0; $auditIndex -lt $auditRows.Count; $auditIndex++) {
 
 Require-Equal ([bool]$manifest.process_cleanup_verified) $true 'process cleanup verified'
 $cleanup = $manifest.process_cleanup
-foreach ($field in 'devpreview_get_process_count_before','devpreview_cim_count_before','devpreview_get_process_count_after','devpreview_cim_count_after','dotnet_residual_pid_count','db_sidecar_count_after','runtime_database_count_after','environment_residual_count') { Require-Equal ([int]$cleanup.$field) 0 "cleanup.$field" }
+$cleanupZeroFields = @(
+    'devpreview_get_process_count_before','devpreview_cim_count_before','devpreview_get_process_count_after',
+    'devpreview_cim_count_after','dotnet_residual_pid_count','db_sidecar_count_after',
+    'runtime_database_count_after','environment_residual_count'
+)
+Require-ZeroFields $cleanup $cleanupZeroFields 'cleanup'
 Require-Equal ([bool]$cleanup.display_settings_unchanged) $true 'display settings unchanged'
 
 $safetyMeasurement = $manifest.safety_measurement
@@ -1327,7 +1672,11 @@ $pathConfinement = $safetyMeasurement.path_confinement
 Require-Equal $pathConfinement.schema 'pixel-tart-p3-run-owned-path-confinement/v1' 'safety path confinement schema'
 Require-Equal (Full $pathConfinement.run_root) $root 'safety path confinement run root'
 if ([int]$pathConfinement.observed_path_count -lt 100) { Fail 'safety path confinement observed too few runtime paths.' }
-Require-Equal ([int]$pathConfinement.outside_run_root_path_count) 0 'safety outside run-root path count'
+Require-ZeroFields $pathConfinement @(
+    'outside_run_root_path_count','source_paths_outside_fixture_count','user_source_read_count',
+    'user_source_write_count','user_source_move_count','user_source_delete_count',
+    'user_source_rename_count','permanent_delete_count'
+) 'safety path confinement'
 Require-Equal @($pathConfinement.outside_run_root_paths).Count 0 'safety outside run-root path list'
 Require-Equal $pathConfinement.source_path_observation $fixture.source_path_observation 'safety source path observation binding'
 Require-Equal ([int]$pathConfinement.source_path_count) ([int]$fixture.source_path_count) 'safety source path count binding'
@@ -1357,8 +1706,10 @@ Require-Equal ([int]$displayObservation.before.primary_height) ([int]$cleanup.di
 Require-Equal ([int]$displayObservation.after.primary_width) ([int]$cleanup.display_after.primary_width) 'safety display after width'
 Require-Equal ([int]$displayObservation.after.primary_height) ([int]$cleanup.display_after.primary_height) 'safety display after height'
 $processObservation = $safetyMeasurement.process_observation
-foreach ($field in 'devpreview_get_process_count_before','devpreview_cim_count_before','devpreview_get_process_count_after','devpreview_cim_count_after','dotnet_residual_pid_count','db_sidecar_count_after','runtime_database_count_after','environment_residual_count') {
-    Require-Equal ([int]$processObservation.$field) ([int]$cleanup.$field) "safety process observation $field"
+Require-ZeroFields $processObservation $cleanupZeroFields 'safety process observation'
+foreach ($field in $cleanupZeroFields) {
+    Require-Equal (Require-IntegerProperty $processObservation $field 'safety process observation') `
+        (Require-IntegerProperty $cleanup $field 'cleanup') "safety process observation $field"
 }
 $derivedSafety = [ordered]@{
     desktop_input_injection_count = [int]$safetyAfterCounts.desktop_input_injection
@@ -1381,8 +1732,10 @@ $derivedSafety = [ordered]@{
     mcp_upload_count = [int]$safetyAfterCounts.network_upload
     permanent_delete_count = [int]$pathConfinement.permanent_delete_count
 }
+Require-ZeroFields $manifest.safety @($contract.safety_zero_fields) 'manifest.safety'
 foreach ($name in @($contract.safety_zero_fields)) {
-    Require-Equal ([int](Property-Value $manifest.safety ([string]$name))) ([int]$derivedSafety[[string]$name]) "manifest.safety.$name provenance"
+    Require-Equal (Require-IntegerProperty $manifest.safety ([string]$name) 'manifest.safety') `
+        ([int]$derivedSafety[[string]$name]) "manifest.safety.$name provenance"
     Require-Equal ([int]$derivedSafety[[string]$name]) 0 "derived safety.$name"
 }
 $applicationSafety = $summary.safety_measurement
