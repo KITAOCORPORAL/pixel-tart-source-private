@@ -148,20 +148,21 @@ public sealed partial class AssetLibraryViewModel
     private void InitializeP3SmartFolderEditor()
     {
         P3SmartFolderRoot = P3QueryNodeView.CreateRoot(OnP3SmartFolderTreeChanged, "SmartFolder");
-        NewP3SmartFolderCommand = new(() => OpenP3SmartFolderEditor(null));
-        SaveP3SmartFolderCommand = new(SaveP3SmartFolderAsync,
+        NewP3SmartFolderCommand = new(() => { if (!P3ShutdownStarted) OpenP3SmartFolderEditor(null); });
+        SaveP3SmartFolderCommand = new(() => RunTrackedP3OperationAsync(SaveP3SmartFolderAsync),
             () => IsReady && !P3SmartFolderLoading && P3SmartFolderIsValid && !string.IsNullOrWhiteSpace(P3SmartFolderName));
-        CancelP3SmartFolderCommand = new(CloseP3SmartFolderEditor);
-        CopyP3SmartFolderCommand = new(CopyP3SmartFolderAsync,
+        CancelP3SmartFolderCommand = new(() => { if (!P3ShutdownStarted) CloseP3SmartFolderEditor(); });
+        CopyP3SmartFolderCommand = new(() => RunTrackedP3OperationAsync(CopyP3SmartFolderAsync),
             () => IsReady && P3SmartFolderIsEditing && !P3SmartFolderLoading);
-        ToggleArchiveP3SmartFolderCommand = new(ToggleArchiveP3SmartFolderAsync,
+        ToggleArchiveP3SmartFolderCommand = new(() => RunTrackedP3OperationAsync(ToggleArchiveP3SmartFolderAsync),
             () => IsReady && P3SmartFolderIsEditing && !P3SmartFolderLoading);
-        RetryP3SmartFolderPreviewCommand = new(PreviewP3SmartFolderNowAsync,
+        RetryP3SmartFolderPreviewCommand = new(() => RunTrackedP3OperationAsync(PreviewP3SmartFolderNowAsync),
             () => IsReady && P3SmartFolderOpen && P3SmartFolderIsValid);
     }
 
     internal void OpenP3SmartFolderEditor(SmartFolder? folder)
     {
+        if (P3ShutdownStarted) return;
         CancelP3SmartFolderWork();
         P3SmartFolderOpen = true;
         _p3SmartFolderId = folder?.SmartFolderId;
@@ -195,7 +196,9 @@ public sealed partial class AssetLibraryViewModel
         var generation = Interlocked.Increment(ref _p3SmartFolderLoadGeneration);
         P3SmartFolderLoading = true;
         P3SmartFolderPreviewStatus = "正在载入已保存规则…";
-        _ = LoadP3SmartFolderAsync(folder, generation, cancellation);
+        _ = RunTrackedP3OperationAsync(
+            () => LoadP3SmartFolderAsync(folder, generation, cancellation),
+            () => { Interlocked.CompareExchange(ref _p3SmartFolderLoadCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
     }
 
     private async Task LoadP3SmartFolderAsync(SmartFolder folder, long generation, CancellationTokenSource cancellation)
@@ -297,11 +300,14 @@ public sealed partial class AssetLibraryViewModel
 
     private void ScheduleP3SmartFolderPreview()
     {
+        if (P3ShutdownStarted) return;
         CancelP3SmartFolderPreview();
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
         _p3SmartFolderPreviewCancellation = cancellation;
         var generation = Interlocked.Increment(ref _p3SmartFolderPreviewGeneration);
-        _ = LoadP3SmartFolderPreviewAsync(generation, cancellation, delay: true);
+        _ = RunTrackedP3OperationAsync(
+            () => LoadP3SmartFolderPreviewAsync(generation, cancellation, delay: true),
+            () => { Interlocked.CompareExchange(ref _p3SmartFolderPreviewCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
     }
 
     private Task PreviewP3SmartFolderNowAsync()

@@ -33,6 +33,10 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
     private readonly CancellationTokenSource _lifetimeCancellation = new();
     private readonly object _loadMoreSync = new();
+    private readonly object _p3OperationSync = new();
+    private readonly object _disposeSync = new();
+    private readonly HashSet<Task> _p3Operations = [];
+    private Task? _disposeTask;
     private CancellationTokenSource? _analysisCancellation;
     private CancellationTokenSource? _queryCancellation;
     private CancellationTokenSource? _loadMoreCancellation;
@@ -99,6 +103,49 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private string? _loadExceptionType;
     private string? _loadInjectionId;
     private int _disposeStarted;
+    private int _p3ShutdownStarted;
+    private int _p3RepositoryDisposeStarted;
+
+    internal bool P3ShutdownStarted => Volatile.Read(ref _p3ShutdownStarted) != 0;
+    internal int P3TrackedOperationCount { get { lock (_p3OperationSync) return _p3Operations.Count; } }
+    public int P3PendingOperationCount => P3TrackedOperationCount;
+    internal bool P3RepositoryDisposeStarted => Volatile.Read(ref _p3RepositoryDisposeStarted) != 0;
+
+    internal Task RunTrackedP3OperationAsync(Func<Task> operation, Action? rejected = null)
+    {
+        ArgumentNullException.ThrowIfNull(operation);
+        Task task;
+        lock (_p3OperationSync)
+        {
+            if (Volatile.Read(ref _p3ShutdownStarted) != 0)
+            {
+                rejected?.Invoke();
+                return Task.CompletedTask;
+            }
+            task = operation();
+            _p3Operations.Add(task);
+        }
+        return ObserveP3OperationAsync(task);
+    }
+
+    private async Task ObserveP3OperationAsync(Task task)
+    {
+        try { await task; }
+        finally { lock (_p3OperationSync) _p3Operations.Remove(task); }
+    }
+
+    private async Task DrainP3OperationsAsync()
+    {
+        Task[] pending;
+        lock (_p3OperationSync)
+        {
+            Volatile.Write(ref _p3ShutdownStarted, 1);
+            pending = _p3Operations.ToArray();
+        }
+        if (pending.Length == 0) return;
+        try { await Task.WhenAll(pending); }
+        catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
+    }
 
     public AssetLibraryViewModel(
         string databasePath,
@@ -1672,9 +1719,34 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     };
     private static string UniqueName(string seed, IEnumerable<string> names) { var set = names.ToHashSet(StringComparer.OrdinalIgnoreCase); if (!set.Contains(seed)) return seed; for (var i = 2; ; i++) if (!set.Contains($"{seed} {i}")) return $"{seed} {i}"; }
     private void RaiseActions() { AddFolderCommand.RaiseCanExecuteChanged(); ApplyTagsCommand.RaiseCanExecuteChanged(); NewSubfolderCommand.RaiseCanExecuteChanged(); UndoCommand.RaiseCanExecuteChanged(); RateCommand.RaiseCanExecuteChanged(); }
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
-        if (Interlocked.Exchange(ref _disposeStarted, 1) != 0) return;
+        TaskCompletionSource? starter = null;
+        Task task;
+        lock (_disposeSync)
+        {
+            if (_disposeTask is null)
+            {
+                starter = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposeTask = starter.Task;
+            }
+            task = _disposeTask;
+        }
+        if (starter is not null) _ = CompleteDisposeAsync(starter);
+        return new ValueTask(task);
+    }
+
+    private async Task CompleteDisposeAsync(TaskCompletionSource completion)
+    {
+        try { await DisposeCoreAsync(); completion.TrySetResult(); }
+        catch (Exception exception) { completion.TrySetException(exception); }
+    }
+
+    private async Task DisposeCoreAsync()
+    {
+        Interlocked.Exchange(ref _disposeStarted, 1);
+        Volatile.Write(ref _p3ShutdownStarted, 1);
+        IsReady = false;
         _lifetimeCancellation.Cancel();
         StopSearchDebounce();
         DisposeP3QueryComposer();
@@ -1686,6 +1758,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _batchCancellation?.Cancel();
         _smartFolderEditorCancellation?.Cancel();
         _analysisCoordinator.ClearSelection();
+        await DrainP3OperationsAsync();
         await _initializationGate.WaitAsync();
         try
         {
@@ -1694,6 +1767,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _analysisCancellation?.Dispose();
             _queryCancellation?.Dispose();
             _batchCancellation?.Dispose();
+            Volatile.Write(ref _p3RepositoryDisposeStarted, 1);
             await _repository.DisposeAsync();
         }
         finally

@@ -19,6 +19,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private readonly string? _demoDirectory;
     private bool _initialized;
     private bool _disposed;
+    private readonly object _disposeSync = new();
+    private Task? _disposeTask;
     private bool _applyingViewModelSelection;
     // WPF raises one SelectionChanged event for every item added to SelectedItems.
     // Keep the grid event path at one dispatcher turn so a bulk selection performs
@@ -94,9 +96,31 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         await DisposeAsync();
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
-        if (_disposed) return;
+        TaskCompletionSource? starter = null;
+        Task task;
+        lock (_disposeSync)
+        {
+            if (_disposeTask is null)
+            {
+                starter = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposeTask = starter.Task;
+            }
+            task = _disposeTask;
+        }
+        if (starter is not null) _ = CompleteDisposeAsync(starter);
+        return new ValueTask(task);
+    }
+
+    private async Task CompleteDisposeAsync(TaskCompletionSource completion)
+    {
+        try { await DisposeCoreAsync(); completion.TrySetResult(); }
+        catch (Exception exception) { completion.TrySetException(exception); }
+    }
+
+    private async Task DisposeCoreAsync()
+    {
         _disposed = true;
         _pendingSelectionSync?.Abort();
         _pendingSelectionSync = null;

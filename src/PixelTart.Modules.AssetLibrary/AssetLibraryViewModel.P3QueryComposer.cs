@@ -158,16 +158,16 @@ public sealed partial class AssetLibraryViewModel
         foreach (var entry in _workspaceSettings.QueryHistory.OrderByDescending(entry => entry.UsedAt)) P3QueryHistory.Add(entry);
         RebuildP3QueryChips();
 
-        ToggleP3QueryPanelCommand = new(() => P3QueryPanelOpen = !P3QueryPanelOpen);
-        ClearP3UnlockedCommand = new(ClearP3UnlockedQueryConditions);
-        ClearP3AllCommand = new(ClearP3AllQueryConditions);
-        SubmitP3SearchCommand = new(SubmitP3SearchAsync);
-        ApplyP3SuggestionCommand = new(ApplyP3SuggestionAsync);
-        ApplyP3HistoryCommand = new(ApplyP3HistoryAsync);
-        RemoveP3HistoryCommand = new(RemoveP3History);
-        RemoveP3ChipCommand = new(RemoveP3Chip);
-        ClearP3HistoryCommand = new(ClearP3History);
-        SaveP3QueryAsSmartFolderCommand = new(SaveP3QueryAsSmartFolderAsync,
+        ToggleP3QueryPanelCommand = new(() => { if (!P3ShutdownStarted) P3QueryPanelOpen = !P3QueryPanelOpen; });
+        ClearP3UnlockedCommand = new(() => { if (!P3ShutdownStarted) ClearP3UnlockedQueryConditions(); });
+        ClearP3AllCommand = new(() => { if (!P3ShutdownStarted) ClearP3AllQueryConditions(); });
+        SubmitP3SearchCommand = new(() => RunTrackedP3OperationAsync(SubmitP3SearchAsync));
+        ApplyP3SuggestionCommand = new(value => RunTrackedP3OperationAsync(() => ApplyP3SuggestionAsync(value)));
+        ApplyP3HistoryCommand = new(value => RunTrackedP3OperationAsync(() => ApplyP3HistoryAsync(value)));
+        RemoveP3HistoryCommand = new(value => { if (!P3ShutdownStarted) RemoveP3History(value); });
+        RemoveP3ChipCommand = new(value => { if (!P3ShutdownStarted) RemoveP3Chip(value); });
+        ClearP3HistoryCommand = new(() => { if (!P3ShutdownStarted) ClearP3History(); });
+        SaveP3QueryAsSmartFolderCommand = new(() => RunTrackedP3OperationAsync(SaveP3QueryAsSmartFolderAsync),
             () => IsReady && P3QueryIsValid && !string.IsNullOrWhiteSpace(P3NewSmartFolderName));
     }
 
@@ -362,12 +362,14 @@ public sealed partial class AssetLibraryViewModel
 
     private void ScheduleP3Suggestions()
     {
+        if (P3ShutdownStarted) return;
         _p3SuggestionCancellation?.Cancel();
-        _p3SuggestionCancellation?.Dispose();
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
         _p3SuggestionCancellation = cancellation;
         var generation = Interlocked.Increment(ref _p3SuggestionGeneration);
-        _ = LoadP3SuggestionsAsync(SearchText, generation, cancellation);
+        _ = RunTrackedP3OperationAsync(
+            () => LoadP3SuggestionsAsync(SearchText, generation, cancellation),
+            () => { Interlocked.CompareExchange(ref _p3SuggestionCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
     }
 
     private async Task LoadP3SuggestionsAsync(string text, long generation, CancellationTokenSource cancellation)
@@ -682,7 +684,6 @@ public sealed partial class AssetLibraryViewModel
     private void DisposeP3QueryComposer()
     {
         _p3SuggestionCancellation?.Cancel();
-        _p3SuggestionCancellation?.Dispose();
         _p3SuggestionCancellation = null;
     }
 }

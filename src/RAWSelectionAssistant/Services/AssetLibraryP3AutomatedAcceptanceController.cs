@@ -25,6 +25,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     internal const string PlanSchema = "pixel-tart-p3-automated-plan/v1";
     internal const string EventSchema = "pixel-tart-p3-automated-event/v1";
     internal const string SummarySchema = "pixel-tart-p3-automated-summary/v1";
+    internal const string LifecycleSchema = "pixel-tart-p3-automated-lifecycle/v1";
     internal const string ExpectedProcessName = "PixelTart_ModularHarness_V1_DevPreview";
     internal const string AssetLibraryRoute = "asset-library";
     internal const string ScopeSwitchScenario = "scope-switch/v1";
@@ -79,6 +80,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private readonly string _summaryPath;
     private readonly string _summaryJournalPath;
     private readonly string _phaseSummaryPath;
+    private readonly string _lifecyclePath;
     private readonly string _databasePath;
     private readonly string _sourceHead;
     private readonly string _runId;
@@ -88,7 +90,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private readonly string? _fixtureRoot;
     private readonly string _fixtureVariant;
     private readonly string _fixtureDatabasePath;
-    private readonly string _processSessionId = Guid.NewGuid().ToString("N");
+    private readonly string _processSessionId;
     private readonly string _executablePath;
     private readonly string _executableSha256;
     private readonly string _applicationAssemblyPath;
@@ -96,6 +98,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private readonly string _modulePath;
     private readonly string _moduleSha256;
     private readonly DateTimeOffset _startedAt = DateTimeOffset.UtcNow;
+    private readonly Stopwatch _lifecycleClock = Stopwatch.StartNew();
     private readonly TaskCompletionSource<bool> _initialLoadingRelease = new(TaskCreationOptions.RunContinuationsAsynchronously);
     private readonly Dictionary<string, ScenarioState> _scenarios = FixedScenarioIds
         .Select((id, index) => new ScenarioState(id, index + 1))
@@ -106,10 +109,16 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private string _previousEventHash = new('0', 64);
     private string _previousSummaryHash = new('0', 64);
     private long _sequence;
+    private long _lifecycleSequence;
+    private int _lifecycleStage;
+    private int _dispatcherThreadId;
+    private string _previousLifecycleHash = new('0', 64);
     private int _loadingReleased;
     private int _boundToWindow;
     private int _executionCompleted;
     private int _summaryWritten;
+    private int _summaryCommitStarted;
+    private int _exitPreparationCompleted;
     private int? _primaryPid;
     private int? _restartPid;
     private nint _hwnd;
@@ -131,6 +140,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         _sourceHead = sourceHead;
         _runId = plan.RunId;
         _phase = plan.Phase;
+        _processSessionId = plan.ProcessSessionId;
         _scenarioId = plan.ScenarioIds.Single();
         _scenarioRoot = string.IsNullOrWhiteSpace(plan.ScenarioRoot)
             ? NormalizePath(Path.GetDirectoryName(_applicationRoot)
@@ -148,6 +158,11 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             "app",
             "evidence",
             $"summary-{SanitizeFileName(_scenarioId.Replace('/', '-'))}-{_phase}.json");
+        _lifecyclePath = Path.Combine(
+            _runRoot,
+            "app",
+            "evidence",
+            $"lifecycle-{SanitizeFileName(_scenarioId.Replace('/', '-'))}-{_phase}.ndjson");
         _databasePath = Path.Combine(_applicationRoot, "Data", "asset-library-v16.db");
         _executablePath = NormalizePath(Environment.ProcessPath
             ?? throw new InvalidOperationException("The automated acceptance process path is unavailable."));
@@ -268,6 +283,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         ArgumentNullException.ThrowIfNull(window);
         if (Interlocked.CompareExchange(ref _boundToWindow, 1, 0) != 0)
             throw new InvalidOperationException("The automated acceptance controller may bind only one live window.");
+        _dispatcherThreadId = Environment.CurrentManagedThreadId;
         void AttachHandle()
         {
             _hwnd = new WindowInteropHelper(window).Handle;
@@ -503,18 +519,75 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
 
     internal void MarkExecutionCompleted()
     {
-        Interlocked.Exchange(ref _executionCompleted, 1);
+        if (Interlocked.CompareExchange(ref _executionCompleted, 1, 0) != 0) return;
         RecordEvent(_activeScenarioId, "automated-plan-execution-completed", "MainWindow", null, new { phase = _phase }, null);
+        RecordLifecycle("plan-completed", "passed", pending: false);
+    }
+
+    internal void RecordLifecycle(
+        string eventName,
+        string result,
+        bool pending,
+        Exception? exception = null,
+        int? pendingOperationCount = null)
+    {
+        lock (_gate)
+        {
+            var requestedStage = LifecycleStage(eventName);
+            if (requestedStage != 0 && requestedStage <= _lifecycleStage)
+                throw new InvalidOperationException(
+                    $"P3 lifecycle event '{eventName}' is out of order (stage={requestedStage}, current={_lifecycleStage}).");
+            var sequence = _lifecycleSequence + 1;
+            var record = new Dictionary<string, object?>(StringComparer.Ordinal)
+            {
+                ["schema"] = LifecycleSchema,
+                ["sequence"] = sequence,
+                ["timestamp_utc"] = DateTimeOffset.UtcNow.ToString("O"),
+                ["stopwatch_elapsed_ms"] = _lifecycleClock.Elapsed.TotalMilliseconds,
+                ["run_id"] = _runId,
+                ["scenario_id"] = _scenarioId,
+                ["phase"] = _phase,
+                ["process_session_id"] = _processSessionId,
+                ["pid"] = Environment.ProcessId,
+                ["hwnd"] = FormatHwnd(_hwnd.ToInt64()),
+                ["source_head"] = _sourceHead,
+                ["executable_sha256"] = _executableSha256,
+                ["application_sha256"] = _applicationAssemblySha256,
+                ["asset_module_sha256"] = _moduleSha256,
+                ["managed_thread_id"] = Environment.CurrentManagedThreadId,
+                ["dispatcher_thread_id"] = _dispatcherThreadId,
+                ["event"] = eventName,
+                ["result"] = result,
+                ["pending"] = pending,
+                ["pending_operation_count"] = pendingOperationCount ?? (pending ? 1 : 0),
+                ["exception"] = exception is null ? null : new
+                {
+                    type = exception.GetType().FullName,
+                    exception.Message,
+                    exception.StackTrace,
+                },
+                ["previous_record_sha256"] = _previousLifecycleHash,
+            };
+            var canonical = JsonSerializer.Serialize(record, LineJsonOptions);
+            var hash = HashBytes(Encoding.UTF8.GetBytes(canonical));
+            record["record_sha256"] = hash;
+            Directory.CreateDirectory(Path.GetDirectoryName(_lifecyclePath)!);
+            AppendLineDurably(_lifecyclePath, JsonSerializer.Serialize(record, LineJsonOptions));
+            _lifecycleSequence = sequence;
+            if (requestedStage != 0) _lifecycleStage = requestedStage;
+            _previousLifecycleHash = hash;
+        }
     }
 
     internal void Fail(Exception exception)
     {
         ArgumentNullException.ThrowIfNull(exception);
-        _failure = $"{exception.GetType().FullName}: {exception.Message}";
+        SetFailureOnce($"{exception.GetType().FullName}: {exception.Message}");
         ReleaseInitialLoadingBarrier();
         try
         {
             RecordEvent(_activeScenarioId, "automated-plan-execution-failed", "MainWindow", null, new { failure = _failure }, null);
+            RecordLifecycle("failure-observed", "failed", pending: false, exception);
         }
         catch
         {
@@ -522,50 +595,91 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         }
     }
 
-    internal void FinalizeOnApplicationExit(int exitCode)
+    internal async Task PrepareForApplicationExitAsync()
     {
-        if (Interlocked.CompareExchange(ref _summaryWritten, 1, 0) != 0) return;
-        ReleaseInitialLoadingBarrier();
-        var completed = Volatile.Read(ref _executionCompleted) == 1 && _failure is null && exitCode == 0;
-        if (!completed && _failure is null)
-            _failure = $"Application exited before the automated plan completed (exit code {exitCode}).";
-
         try
         {
             ValidateLiveBinaryIdentityAtExit();
+            await UpdateFinalDatabaseEvidenceAsync().ConfigureAwait(false);
+            Volatile.Write(ref _exitPreparationCompleted, 1);
         }
         catch (Exception exception)
         {
-            completed = false;
-            _failure = $"Automated binary identity finalization failed: {exception.GetType().FullName}: {exception.Message}";
+            Fail(exception);
+            throw;
         }
+    }
 
+    internal void FinalizeOnApplicationExit(int exitCode)
+    {
+        if (Interlocked.CompareExchange(ref _summaryCommitStarted, 1, 0) != 0) return;
         try
         {
-            UpdateFinalDatabaseEvidenceAsync().GetAwaiter().GetResult();
+            ReleaseInitialLoadingBarrier();
+            var completed = Volatile.Read(ref _executionCompleted) == 1 &&
+                            Volatile.Read(ref _exitPreparationCompleted) == 1 &&
+                            _failure is null && exitCode == 0;
+            if (!completed && _failure is null)
+                SetFailureOnce($"Application exit was not fully prepared (exit code {exitCode}).");
+            RecordEvent(_activeScenarioId, "process-session-ending", "MainWindow", null,
+                new { exit_code = exitCode, plan_completed = completed }, null);
+            RecordLifecycle("summary-commit-start", completed ? "passed" : "failed", pending: true);
+            WriteSummary(completed ? "completed" : "failed", exitCode);
+            Volatile.Write(ref _summaryWritten, 1);
         }
-        catch (Exception exception)
+        catch
         {
-            completed = false;
-            _failure = $"{exception.GetType().FullName}: {exception.Message}";
-            try
-            {
-                RecordEvent(_activeScenarioId, "database-evidence-finalization-failed", "SqliteAssetLibraryRepository", null, new { failure = _failure }, null);
-            }
-            catch
-            {
-                // Preserve the finalization failure when the append-only event sink is also unavailable.
-            }
+            Volatile.Write(ref _summaryCommitStarted, 0);
+            throw;
         }
-        RecordEvent(
-            _activeScenarioId,
-            "process-session-ending",
-            "MainWindow",
-            null,
-            new { exit_code = exitCode, plan_completed = completed },
-            null);
-        WriteSummary(completed ? "completed" : "failed", exitCode);
     }
+
+    internal void FinalizeIncompleteApplicationExit(int exitCode)
+    {
+        Fail(new InvalidOperationException("Application exit reached before asynchronous P3 shutdown preparation completed."));
+        if (Interlocked.CompareExchange(ref _summaryCommitStarted, 1, 0) != 0) return;
+        try
+        {
+            ReleaseInitialLoadingBarrier();
+            RecordLifecycle("summary-commit-start", "failed", pending: true);
+            RecordEvent(_activeScenarioId, "process-session-ending", "MainWindow", null,
+                new { exit_code = exitCode, plan_completed = false }, null);
+            WriteSummary("failed", exitCode);
+            Volatile.Write(ref _summaryWritten, 1);
+        }
+        catch
+        {
+            Volatile.Write(ref _summaryCommitStarted, 0);
+            throw;
+        }
+    }
+
+    private void SetFailureOnce(string failure)
+    {
+        lock (_gate) _failure ??= failure;
+    }
+
+    private static int LifecycleStage(string eventName) => eventName switch
+    {
+        "plan-completed" => 10,
+        "completion-ack-written" => 20,
+        "shutdown-requested" => 30,
+        "shutdown-dispatch-started" => 40,
+        "page-dispose-start" => 50,
+        "page-dispose-completed" => 60,
+        "application-async-dispose-start" => 70,
+        "application-async-dispose-completed" => 80,
+        "shutdown-preparation-complete" => 90,
+        "window-close-start" => 100,
+        "application-shutdown-start" => 110,
+        "window-close-completed" => 120,
+        "application-on-exit-enter" => 130,
+        "summary-commit-start" => 140,
+        "phase-summary-written" => 150,
+        "summary-commit-end" => 160,
+        "application-on-exit-completed" => 170,
+        _ => 0,
+    };
 
     public async Task BeforeRepositoryInitializationAsync(int attempt, CancellationToken cancellationToken)
     {
@@ -633,7 +747,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         var scenario = EnsureScenario(scenarioId);
         lock (_gate)
         {
-            var sequence = ++_sequence;
+            var sequence = _sequence + 1;
             var identity = new
             {
                 run_id = _runId,
@@ -692,7 +806,8 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             envelope["event_hash"] = eventHash;
             envelope["record_sha256"] = eventHash;
             var line = JsonSerializer.Serialize(envelope, LineJsonOptions);
-            File.AppendAllText(_eventsPath, line + Environment.NewLine, new UTF8Encoding(false));
+            AppendLineDurably(_eventsPath, line);
+            _sequence = sequence;
             _previousEventHash = eventHash;
             if (IsRestartPhase)
             {
@@ -785,7 +900,13 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
                 database_shm_present = File.Exists(_databasePath + "-shm"),
             },
         };
-        var summaryElement = JsonSerializer.SerializeToElement(summary, LineJsonOptions);
+        var summaryWithoutRecordHash = JsonSerializer.SerializeToElement(summary, LineJsonOptions);
+        var recordHash = HashBytes(Encoding.UTF8.GetBytes(summaryWithoutRecordHash.GetRawText()));
+        var summaryPayload = JsonSerializer.Deserialize<Dictionary<string, object?>>(
+            summaryWithoutRecordHash.GetRawText(), LineJsonOptions)
+            ?? throw new InvalidOperationException("The P3 phase summary could not be materialized.");
+        summaryPayload["record_sha256"] = recordHash;
+        var summaryElement = JsonSerializer.SerializeToElement(summaryPayload, LineJsonOptions);
         var journal = new Dictionary<string, object?>(StringComparer.Ordinal)
         {
             ["schema"] = SummarySchema,
@@ -817,13 +938,12 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         var summaryHash = HashBytes(Encoding.UTF8.GetBytes(summaryCanonical));
         journal["summary_hash"] = summaryHash;
         journal["record_sha256"] = summaryHash;
-        File.AppendAllText(
-            _summaryJournalPath,
-            JsonSerializer.Serialize(journal, LineJsonOptions) + Environment.NewLine,
-            new UTF8Encoding(false));
+        AppendLineDurably(_summaryJournalPath, JsonSerializer.Serialize(journal, LineJsonOptions));
         _previousSummaryHash = summaryHash;
-        WriteJsonAtomically(_phaseSummaryPath, summary, overwrite: false);
-        WriteJsonAtomically(_summaryPath, summary, overwrite: true);
+        WriteJsonAtomically(_summaryPath, summaryPayload, overwrite: true);
+        WriteJsonAtomically(_phaseSummaryPath, summaryPayload, overwrite: false);
+        RecordLifecycle("phase-summary-written", status == "completed" ? "passed" : "failed", pending: false);
+        RecordLifecycle("summary-commit-end", status == "completed" ? "passed" : "failed", pending: false);
     }
 
     private async Task UpdateFinalDatabaseEvidenceAsync()
@@ -1151,6 +1271,9 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         var sourceHead = GetString(root, "source_head") ?? GetString(root, "head")
             ?? throw new InvalidOperationException("The automated acceptance plan is missing source_head.");
         if (!IsFullHead(sourceHead)) throw new InvalidOperationException("The automated acceptance plan source_head is invalid.");
+        var processSessionId = RequireString(root, "process_session_id");
+        if (!Regex.IsMatch(processSessionId, "^[0-9a-f]{32}$", RegexOptions.CultureInvariant))
+            throw new InvalidOperationException("The automated acceptance process_session_id must be exactly 32 lowercase hexadecimal characters.");
         if (!root.TryGetProperty("scenario_ids", out var scenarioArray) || scenarioArray.ValueKind != JsonValueKind.Array)
             throw new InvalidOperationException("The automated acceptance plan is missing scenario_ids.");
         var ids = scenarioArray.EnumerateArray().Select(item => item.GetString() ?? string.Empty).ToArray();
@@ -1173,6 +1296,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         return new(
             runId,
             phase,
+            processSessionId,
             sourceHead,
             RequireString(root, "scenario_root"),
             GetString(root, "fixture_root"),
@@ -1203,9 +1327,44 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private static void WriteJsonAtomically(string path, object value, bool overwrite)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        var temporaryPath = path + $".{Environment.ProcessId}.tmp";
-        File.WriteAllText(temporaryPath, JsonSerializer.Serialize(value, JsonOptions), new UTF8Encoding(false));
-        File.Move(temporaryPath, path, overwrite);
+        var temporaryPath = path + $".{Environment.ProcessId}.{Guid.NewGuid():N}.tmp";
+        var bytes = new UTF8Encoding(false).GetBytes(JsonSerializer.Serialize(value, JsonOptions));
+        try
+        {
+            using (var stream = new FileStream(
+                       temporaryPath,
+                       FileMode.CreateNew,
+                       FileAccess.Write,
+                       FileShare.None,
+                       bufferSize: 4096,
+                       FileOptions.WriteThrough))
+            {
+                stream.Write(bytes);
+                stream.Flush(flushToDisk: true);
+            }
+
+            if (overwrite && File.Exists(path)) File.Replace(temporaryPath, path, null);
+            else File.Move(temporaryPath, path, overwrite: false);
+        }
+        finally
+        {
+            if (File.Exists(temporaryPath)) File.Delete(temporaryPath);
+        }
+    }
+
+    private static void AppendLineDurably(string path, string line)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        var bytes = new UTF8Encoding(false).GetBytes(line + Environment.NewLine);
+        using var stream = new FileStream(
+            path,
+            FileMode.Append,
+            FileAccess.Write,
+            FileShare.None,
+            bufferSize: 4096,
+            FileOptions.WriteThrough);
+        stream.Write(bytes);
+        stream.Flush(flushToDisk: true);
     }
 
     private static string SanitizeFileName(string value)
@@ -1318,6 +1477,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
     private sealed record AutomatedPlan(
         string RunId,
         string Phase,
+        string ProcessSessionId,
         string SourceHead,
         string ScenarioRoot,
         string? FixtureRoot,

@@ -156,24 +156,25 @@ public sealed partial class AssetLibraryViewModel
     {
         ToggleP3TagManagerCommand = new(() =>
         {
+            if (P3ShutdownStarted) return;
             P3TagManagerOpen = !P3TagManagerOpen;
-            if (P3TagManagerOpen) _ = LoadP3TagManagerAsync();
+            if (P3TagManagerOpen) _ = RunTrackedP3OperationAsync(LoadP3TagManagerAsync);
             else CancelP3TagManagerWork();
         });
-        RefreshP3TagManagerCommand = new(LoadP3TagManagerAsync, () => IsReady && !P3TagManagerLoading);
-        CreateP3TagGroupCommand = new(CreateP3TagGroupAsync, () => IsReady && !string.IsNullOrWhiteSpace(P3TagGroupNameInput));
-        RenameP3TagGroupCommand = new(RenameP3TagGroupAsync, () => IsReady && P3SelectedManagedTagGroup is not null && !string.IsNullOrWhiteSpace(P3TagGroupNameInput));
-        ToggleArchiveP3TagGroupCommand = new(ToggleArchiveP3TagGroupAsync, () => IsReady && P3SelectedManagedTagGroup is not null);
-        MoveP3TagGroupCommand = new(MoveP3TagGroupAsync, _ => IsReady && P3SelectedManagedTagGroup is not null);
-        CreateP3TagCommand = new(CreateP3TagAsync, () => IsReady && !string.IsNullOrWhiteSpace(P3TagNameInput));
-        RenameP3TagCommand = new(RenameP3TagAsync, () => IsReady && P3SelectedManagedTag is not null && !string.IsNullOrWhiteSpace(P3TagNameInput));
-        MoveP3TagCommand = new(MoveP3TagAsync, () => IsReady && P3SelectedManagedTag is not null);
-        ReorderP3TagCommand = new(ReorderP3TagAsync, _ => IsReady && P3SelectedManagedTag is not null);
-        PreviewP3TagMergeCommand = new(PreviewP3TagMergeAsync, CanPreviewP3TagMerge);
-        MergeP3TagCommand = new(MergeP3TagAsync, () => IsReady && P3TagMergePreviewReady && CanPreviewP3TagMerge());
-        ToggleArchiveP3TagCommand = new(ToggleArchiveP3TagAsync, () => IsReady && P3SelectedManagedTag is not null);
-        PreviewP3BatchMetadataCommand = new(PreviewP3BatchMetadataAsync, () => IsReady && SelectionCount > 0);
-        ApplyP3BatchMetadataCommand = new(ApplyP3BatchMetadataAsync, () => IsReady && SelectionCount > 0 && P3BatchPreviewReady);
+        RefreshP3TagManagerCommand = new(() => RunTrackedP3OperationAsync(LoadP3TagManagerAsync), () => IsReady && !P3TagManagerLoading);
+        CreateP3TagGroupCommand = new(() => RunTrackedP3OperationAsync(CreateP3TagGroupAsync), () => IsReady && !string.IsNullOrWhiteSpace(P3TagGroupNameInput));
+        RenameP3TagGroupCommand = new(() => RunTrackedP3OperationAsync(RenameP3TagGroupAsync), () => IsReady && P3SelectedManagedTagGroup is not null && !string.IsNullOrWhiteSpace(P3TagGroupNameInput));
+        ToggleArchiveP3TagGroupCommand = new(() => RunTrackedP3OperationAsync(ToggleArchiveP3TagGroupAsync), () => IsReady && P3SelectedManagedTagGroup is not null);
+        MoveP3TagGroupCommand = new(value => RunTrackedP3OperationAsync(() => MoveP3TagGroupAsync(value)), _ => IsReady && P3SelectedManagedTagGroup is not null);
+        CreateP3TagCommand = new(() => RunTrackedP3OperationAsync(CreateP3TagAsync), () => IsReady && !string.IsNullOrWhiteSpace(P3TagNameInput));
+        RenameP3TagCommand = new(() => RunTrackedP3OperationAsync(RenameP3TagAsync), () => IsReady && P3SelectedManagedTag is not null && !string.IsNullOrWhiteSpace(P3TagNameInput));
+        MoveP3TagCommand = new(() => RunTrackedP3OperationAsync(MoveP3TagAsync), () => IsReady && P3SelectedManagedTag is not null);
+        ReorderP3TagCommand = new(value => RunTrackedP3OperationAsync(() => ReorderP3TagAsync(value)), _ => IsReady && P3SelectedManagedTag is not null);
+        PreviewP3TagMergeCommand = new(() => RunTrackedP3OperationAsync(PreviewP3TagMergeAsync), CanPreviewP3TagMerge);
+        MergeP3TagCommand = new(() => RunTrackedP3OperationAsync(MergeP3TagAsync), () => IsReady && P3TagMergePreviewReady && CanPreviewP3TagMerge());
+        ToggleArchiveP3TagCommand = new(() => RunTrackedP3OperationAsync(ToggleArchiveP3TagAsync), () => IsReady && P3SelectedManagedTag is not null);
+        PreviewP3BatchMetadataCommand = new(() => RunTrackedP3OperationAsync(PreviewP3BatchMetadataAsync), () => IsReady && SelectionCount > 0);
+        ApplyP3BatchMetadataCommand = new(() => RunTrackedP3OperationAsync(ApplyP3BatchMetadataAsync), () => IsReady && SelectionCount > 0 && P3BatchPreviewReady);
     }
 
     private async Task LoadP3TagManagerAsync()
@@ -195,13 +196,16 @@ public sealed partial class AssetLibraryViewModel
 
     private void ScheduleP3TagFilter()
     {
+        if (P3ShutdownStarted) return;
         if (!P3TagManagerOpen) return;
         var previous = Interlocked.Exchange(ref _p3TagSearchCancellation, null);
         previous?.Cancel();
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
         _p3TagSearchCancellation = cancellation;
         var generation = Interlocked.Increment(ref _p3TagSearchGeneration);
-        _ = ApplyP3TagFilterAfterDelayAsync(generation, cancellation);
+        _ = RunTrackedP3OperationAsync(
+            () => ApplyP3TagFilterAfterDelayAsync(generation, cancellation),
+            () => { Interlocked.CompareExchange(ref _p3TagSearchCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
     }
 
     private async Task ApplyP3TagFilterAfterDelayAsync(long generation, CancellationTokenSource cancellation)

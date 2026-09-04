@@ -41,6 +41,9 @@ public partial class App : Application
 #endif
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
     private AssetLibraryP3AutomatedAcceptanceController? _assetLibraryP3AutomatedController;
+    private Task? _assetLibraryP3ShutdownPreparation;
+    private readonly object _assetLibraryP3ShutdownSync = new();
+    private int _assetLibraryP3ShutdownPrepared;
 #endif
 
     public PixelTartModuleRegistry? ModuleRegistry => _moduleRegistry;
@@ -312,6 +315,9 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+        CompleteP3AutomatedExit(e);
+#else
         try
         {
             _compositionRoot?.BookingReminderScheduler.StopAsync().GetAwaiter().GetResult();
@@ -326,9 +332,6 @@ public partial class App : Application
 #endif
 #if ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
             _assetLibraryP2AutomatedController?.Fail(ex);
-#endif
-#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
-            _assetLibraryP3AutomatedController?.Fail(ex);
 #endif
         }
 
@@ -364,25 +367,109 @@ public partial class App : Application
             _assetLibraryP2AutomatedController?.Fail(ex);
         }
         _assetLibraryP2AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
-#elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
-        try
-        {
-            if (MainWindow is RAWSelectionAssistant.MainWindow automatedWindow)
-                automatedWindow.TeardownAssetLibraryP3AutomatedAcceptanceAsync().GetAwaiter().GetResult();
-            _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
-        }
-        catch (Exception ex)
-        {
-            _logService?.Error("P3 自动验收退出时关闭模块失败。", ex);
-            _assetLibraryP3AutomatedController?.Fail(ex);
-        }
-        _assetLibraryP3AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
 #else
         _moduleRegistry?.ShutdownAsync().GetAwaiter().GetResult();
 #endif
         _logService?.Info("应用程序已退出。");
         base.OnExit(e);
+#endif
     }
+
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    private void CompleteP3AutomatedExit(ExitEventArgs e)
+    {
+        var baseExitInvoked = false;
+        try
+        {
+            _assetLibraryP3AutomatedController?.RecordLifecycle(
+                "application-on-exit-enter",
+                Volatile.Read(ref _assetLibraryP3ShutdownPrepared) == 1 ? "prepared" : "not-prepared",
+                pending: Volatile.Read(ref _assetLibraryP3ShutdownPrepared) != 1);
+            if (Volatile.Read(ref _assetLibraryP3ShutdownPrepared) != 1 ||
+                _assetLibraryP3ShutdownPreparation is not { IsCompletedSuccessfully: true })
+                throw new InvalidOperationException("P3 asynchronous shutdown preparation was not completed before OnExit.");
+            _singleInstance?.Dispose();
+            _mainViewModel?.WorkbenchSchedule?.Dispose();
+            _mainViewModel?.ReminderNotifications?.Dispose();
+            _weatherHttpClient?.Dispose();
+            _appearanceService?.Dispose();
+            _logService?.Info("应用程序已退出。");
+            _assetLibraryP3AutomatedController?.FinalizeOnApplicationExit(e.ApplicationExitCode);
+            baseExitInvoked = true;
+            base.OnExit(e);
+            _assetLibraryP3AutomatedController?.RecordLifecycle(
+                "application-on-exit-completed", "completed", pending: false);
+        }
+        catch (Exception exception)
+        {
+            var failedExitCode = ResolveFailedP3ExitCode(e.ApplicationExitCode);
+            Environment.ExitCode = failedExitCode;
+            _logService?.Error("P3 自动验收退出失败。", exception);
+            _assetLibraryP3AutomatedController?.Fail(exception);
+            try { _assetLibraryP3AutomatedController?.FinalizeIncompleteApplicationExit(failedExitCode); }
+            catch (Exception finalizationException) { _logService?.Error("P3 自动验收失败摘要写入失败。", finalizationException); }
+            if (!baseExitInvoked)
+            {
+                try
+                {
+                    baseExitInvoked = true;
+                    base.OnExit(e);
+                }
+                catch (Exception baseExitException)
+                {
+                    _logService?.Error("P3 自动验收基础退出钩子失败。", baseExitException);
+                    _assetLibraryP3AutomatedController?.Fail(baseExitException);
+                }
+            }
+        }
+    }
+
+    public static int ResolveFailedP3ExitCode(int requestedExitCode) =>
+        requestedExitCode == 0 ? -1 : requestedExitCode;
+#endif
+
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    internal Task PrepareP3AutomatedShutdownAsync(AssetLibraryP3AutomatedAcceptanceController controller)
+    {
+        ArgumentNullException.ThrowIfNull(controller);
+        if (!Dispatcher.CheckAccess())
+            return Dispatcher.InvokeAsync(() => PrepareP3AutomatedShutdownAsync(controller)).Task.Unwrap();
+        lock (_assetLibraryP3ShutdownSync)
+        {
+            _assetLibraryP3ShutdownPreparation ??= PrepareP3AutomatedShutdownCoreAsync(controller);
+            return _assetLibraryP3ShutdownPreparation;
+        }
+    }
+
+    private async Task PrepareP3AutomatedShutdownCoreAsync(AssetLibraryP3AutomatedAcceptanceController controller)
+    {
+        try
+        {
+            controller.RecordLifecycle("application-async-dispose-start", "started", pending: true);
+            if (_compositionRoot is not null)
+                await _compositionRoot.BookingReminderScheduler.StopAsync();
+            if (_mainViewModel is not null)
+            {
+                await _mainViewModel.SaveSettingsAsync();
+                if (_mainViewModel.TetherPage is not null)
+                    await _mainViewModel.TetherPage.DisposeAsync();
+            }
+            if (_moduleRegistry is not null)
+                await _moduleRegistry.ShutdownAsync();
+            if (_compositionRoot is not null)
+                await _compositionRoot.BookingReminderScheduler.DisposeAsync();
+            controller.RecordLifecycle("application-async-dispose-completed", "completed", pending: false);
+            await controller.PrepareForApplicationExitAsync();
+            Volatile.Write(ref _assetLibraryP3ShutdownPrepared, 1);
+            controller.RecordLifecycle("shutdown-preparation-complete", "completed", pending: false);
+        }
+        catch (Exception exception)
+        {
+            controller.Fail(exception);
+            throw;
+        }
+    }
+#endif
 
     private bool TryAcquireSingleInstance()
     {

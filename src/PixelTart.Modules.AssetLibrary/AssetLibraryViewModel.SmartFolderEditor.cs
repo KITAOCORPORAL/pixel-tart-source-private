@@ -89,6 +89,7 @@ public sealed partial class AssetLibraryViewModel
     /// </summary>
     private void BeginSmartFolderEditorLoad(SmartFolder? folder)
     {
+        if (P3ShutdownStarted) return;
         // Let the in-flight load own and dispose its CTS in its finally block.
         // Disposing it here races the repository await when a user switches
         // folders quickly and can turn a normal cancellation into an error.
@@ -114,7 +115,9 @@ public sealed partial class AssetLibraryViewModel
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
         _smartFolderEditorCancellation = cancellation;
         IsSmartFolderEditorLoading = true;
-        _ = LoadSmartFolderEditorAsync(folder.SmartFolderId, generation, cancellation);
+        _ = RunTrackedP3OperationAsync(
+            () => LoadSmartFolderEditorAsync(folder.SmartFolderId, generation, cancellation),
+            () => { Interlocked.CompareExchange(ref _smartFolderEditorCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
     }
 
     /// <summary>Clears an editor session when the query source changes without invoking the public setter.</summary>

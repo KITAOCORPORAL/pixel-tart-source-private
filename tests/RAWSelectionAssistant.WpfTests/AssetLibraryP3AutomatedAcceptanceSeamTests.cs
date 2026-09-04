@@ -44,9 +44,146 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
         var app = Read("src/RAWSelectionAssistant/App.xaml.cs");
         ContainsAll(app, "#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE",
             "AssetLibraryP3AutomatedAcceptanceController.TryCreate", "ApplyStartRoute(_mainViewModel)",
-            "ConfigureAssetLibraryP3AutomatedAcceptance", "TeardownAssetLibraryP3AutomatedAcceptanceAsync",
-            "FinalizeOnApplicationExit", "assetLibraryP1StateController = _assetLibraryP3AutomatedController");
+            "ConfigureAssetLibraryP3AutomatedAcceptance",
+            "PrepareP3AutomatedShutdownAsync", "PrepareForApplicationExitAsync", "FinalizeOnApplicationExit",
+            "FinalizeIncompleteApplicationExit", "_assetLibraryP3ShutdownPrepared");
         ContainsAll(app, "AssetLibraryP1AutomatedAcceptanceController.TryCreate", "AssetLibraryP2AutomatedAcceptanceController.TryCreate");
+    }
+
+    [TestMethod]
+    public void P3ShutdownIsAwaitedBeforeCloseAndOnExitDoesNotSynchronouslyWait()
+    {
+        var app = Read("src/RAWSelectionAssistant/App.xaml.cs");
+        var window = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP3AutomatedAcceptance.cs");
+        ContainsAll(window,
+            "controller.MarkExecutionCompleted();",
+            "RecordLifecycle(\"shutdown-requested\"",
+            "RecordLifecycle(\"completion-ack-written\"",
+            "RecordLifecycle(\"page-dispose-start\"",
+            "await TeardownAssetLibraryP3AutomatedAcceptanceAsync();",
+            "RecordLifecycle(\"page-dispose-completed\"",
+            "await driver.DisposeAsync();",
+            "await application.PrepareP3AutomatedShutdownAsync(controller);",
+            "Close();");
+        Assert.IsFalse(window.Contains("_assetLibraryP3AutomatedDriver?.Dispose();", StringComparison.Ordinal));
+        AssertOrdered(window,
+        [
+            "controller.MarkExecutionCompleted();",
+            "await TeardownAssetLibraryP3AutomatedAcceptanceAsync();",
+            "await application.PrepareP3AutomatedShutdownAsync(controller);",
+            "Close();",
+        ]);
+
+        ContainsAll(app,
+            "private async Task PrepareP3AutomatedShutdownCoreAsync",
+            "await _compositionRoot.BookingReminderScheduler.StopAsync();",
+            "await _mainViewModel.SaveSettingsAsync();",
+            "await _mainViewModel.TetherPage.DisposeAsync();",
+            "await _moduleRegistry.ShutdownAsync();",
+            "await _compositionRoot.BookingReminderScheduler.DisposeAsync();",
+            "await controller.PrepareForApplicationExitAsync();",
+            "_assetLibraryP3ShutdownPreparation is not { IsCompletedSuccessfully: true }");
+        var p3ExitStart = app.IndexOf("private void CompleteP3AutomatedExit", StringComparison.Ordinal);
+        var p3ExitEnd = app.IndexOf("#endif", p3ExitStart, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, p3ExitStart);
+        Assert.IsGreaterThan(p3ExitStart, p3ExitEnd);
+        var p3Exit = app[p3ExitStart..p3ExitEnd];
+        Assert.IsFalse(p3Exit.Contains("GetAwaiter().GetResult()", StringComparison.Ordinal));
+        Assert.IsFalse(p3Exit.Contains(".Result", StringComparison.Ordinal));
+        Assert.IsFalse(p3Exit.Contains(".Wait(", StringComparison.Ordinal));
+    }
+
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    [TestMethod]
+    public void P3ExitFailureAlwaysResolvesToANonZeroProcessExitCode()
+    {
+        Assert.AreEqual(-1, RAWSelectionAssistant.App.ResolveFailedP3ExitCode(0));
+        Assert.AreEqual(-7, RAWSelectionAssistant.App.ResolveFailedP3ExitCode(-7));
+        Assert.AreEqual(9, RAWSelectionAssistant.App.ResolveFailedP3ExitCode(9));
+    }
+#endif
+
+    [TestMethod]
+    public void ImmutablePhaseSummaryPublishesBeforeTerminalLifecycleEvents()
+    {
+        var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs");
+        AssertOrdered(controller,
+        [
+            "WriteJsonAtomically(_phaseSummaryPath, summaryPayload, overwrite: false);",
+            "RecordLifecycle(\"phase-summary-written\"",
+            "RecordLifecycle(\"summary-commit-end\"",
+        ]);
+
+        var app = Read("src/RAWSelectionAssistant/App.xaml.cs");
+        AssertOrdered(app,
+        [
+            "FinalizeOnApplicationExit(e.ApplicationExitCode);",
+            "base.OnExit(e);",
+            "RecordLifecycle(\n                \"application-on-exit-completed\"",
+        ]);
+    }
+
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+    [TestMethod]
+    public void AtomicWriterDoesNotReplaceExistingImmutablePhaseOnPublishFailure()
+    {
+        var root = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart-P3AtomicSummary", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var path = System.IO.Path.Combine(root, "summary-phase.json");
+        File.WriteAllText(path, "original");
+        try
+        {
+            var controllerType = typeof(RAWSelectionAssistant.App).Assembly.GetType(
+                "RAWSelectionAssistant.Services.AssetLibraryP3AutomatedAcceptanceController", throwOnError: true)!;
+            var method = controllerType.GetMethod(
+                "WriteJsonAtomically",
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!;
+            var thrown = Assert.Throws<System.Reflection.TargetInvocationException>(() =>
+                method.Invoke(null, [path, new { status = "completed" }, false]));
+            Assert.IsInstanceOfType<IOException>(thrown.InnerException);
+            Assert.AreEqual("original", File.ReadAllText(path));
+            Assert.IsEmpty(Directory.GetFiles(root, "*.tmp"));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
+    [TestMethod]
+    public void ControllerPreservesTheFirstFailureWhenCleanupAlsoFails()
+    {
+        var controllerType = typeof(RAWSelectionAssistant.App).Assembly.GetType(
+            "RAWSelectionAssistant.Services.AssetLibraryP3AutomatedAcceptanceController", throwOnError: true)!;
+        var controller = System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(controllerType);
+        var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+        controllerType.GetField("_gate", flags)!.SetValue(controller, new object());
+        var setFailure = controllerType.GetMethod("SetFailureOnce", flags)!;
+        setFailure.Invoke(controller, ["primary failure"]);
+        setFailure.Invoke(controller, ["cleanup failure"]);
+        Assert.AreEqual("primary failure", controllerType.GetField("_failure", flags)!.GetValue(controller));
+    }
+#endif
+
+    [TestMethod]
+    public void P3LifecycleTimelineIsRunOwnedHashChainedAndFailureIsFirstWriterWins()
+    {
+        var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs");
+        ContainsAll(controller,
+            "pixel-tart-p3-automated-lifecycle/v1",
+            "lifecycle-{SanitizeFileName(_scenarioId.Replace('/', '-'))}-{_phase}.ndjson",
+            "timestamp_utc", "stopwatch_elapsed_ms", "run_id", "phase", "process_session_id",
+            "pid", "hwnd", "source_head", "executable_sha256", "application_sha256",
+            "asset_module_sha256", "managed_thread_id", "event", "result", "pending", "exception",
+            "previous_record_sha256", "record_sha256",
+            "plan-completed", "completion-ack-written", "shutdown-requested",
+            "shutdown-dispatch-started", "page-dispose-start", "page-dispose-completed",
+            "application-async-dispose-start", "application-async-dispose-completed",
+            "window-close-start", "window-close-completed", "application-shutdown-start",
+            "application-on-exit-enter", "application-on-exit-completed",
+            "summary-commit-start", "phase-summary-written", "summary-commit-end",
+            "dispatcher_thread_id", "pending_operation_count", "exception.StackTrace",
+            "P3 lifecycle event", "requestedStage <= _lifecycleStage",
+            "lock (_gate) _failure ??= failure;");
+        Assert.IsFalse(controller.Contains("_failure = $\"{exception.GetType().FullName}", StringComparison.Ordinal));
+        Assert.IsFalse(controller.Contains("PrepareForApplicationExitAsync().GetAwaiter().GetResult()", StringComparison.Ordinal));
     }
 
     [TestMethod]
@@ -60,6 +197,17 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "legacyMigration ? 4 : 128", "schemaVersion != 7",
             "process_session_id", "executable_sha256", "application_sha256", "asset_module_sha256",
             "previous_event_hash", "event_hash", "previous_summary_hash", "summary_hash");
+        ContainsAll(controller,
+            "var processSessionId = RequireString(root, \"process_session_id\");",
+            "^[0-9a-f]{32}$",
+            "_processSessionId = plan.ProcessSessionId;",
+            "string ProcessSessionId,",
+            "summaryPayload[\"record_sha256\"] = recordHash;",
+            "FileMode.CreateNew", "FileOptions.WriteThrough", "Flush(flushToDisk: true)",
+            "File.Replace(temporaryPath, path, null)", "Guid.NewGuid():N");
+        Assert.IsFalse(controller.Contains(
+            "private readonly string _processSessionId = Guid.NewGuid().ToString(\"N\")",
+            StringComparison.Ordinal));
         foreach (var directory in new[]
                  {
                      "bounds", "query-documents", "query-plans", "result-hashes", "histories",

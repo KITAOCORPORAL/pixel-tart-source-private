@@ -27,6 +27,8 @@ public partial class MainWindow
     private AssetLibraryP3AutomatedAcceptanceController? _assetLibraryP3AutomatedController;
     private AssetLibraryP3AutomatedAcceptanceDriver? _assetLibraryP3AutomatedDriver;
     private AssetLibraryWpfPage? _assetLibraryP3AutomatedPage;
+    private int _assetLibraryP3ExecutionStarted;
+    private Task? _assetLibraryP3Teardown;
 
     internal void ConfigureAssetLibraryP3AutomatedAcceptance(AssetLibraryP3AutomatedAcceptanceController controller)
     {
@@ -35,11 +37,15 @@ public partial class MainWindow
             throw new InvalidOperationException("The live window may host only one P3 automated acceptance controller.");
         _assetLibraryP3AutomatedController = controller;
         Loaded += AssetLibraryP3AutomatedAcceptance_Loaded;
-        Closed += (_, _) => _assetLibraryP3AutomatedDriver?.Dispose();
+        Closed += (_, _) =>
+        {
+            controller.RecordLifecycle("window-close-completed", "completed", pending: false);
+        };
     }
 
     private async void AssetLibraryP3AutomatedAcceptance_Loaded(object sender, RoutedEventArgs e)
     {
+        if (Interlocked.CompareExchange(ref _assetLibraryP3ExecutionStarted, 1, 0) != 0) return;
         var controller = _assetLibraryP3AutomatedController
             ?? throw new InvalidOperationException("The P3 automated acceptance controller is unavailable.");
         try
@@ -54,7 +60,19 @@ public partial class MainWindow
             controller.Observe(_viewModel, driver);
             await ExecuteAssetLibraryP3AutomatedScenarioAsync(controller, driver);
             controller.MarkExecutionCompleted();
+            controller.RecordLifecycle("completion-ack-written", "completed", pending: false);
+            controller.RecordLifecycle("shutdown-requested", "accepted", pending: true);
+            controller.RecordLifecycle("shutdown-dispatch-started", "started", pending: true);
+            controller.RecordLifecycle("page-dispose-start", "started", pending: true,
+                pendingOperationCount: page.ViewModel.P3PendingOperationCount);
             await TeardownAssetLibraryP3AutomatedAcceptanceAsync();
+            controller.RecordLifecycle("page-dispose-completed", "completed", pending: false,
+                pendingOperationCount: page.ViewModel.P3PendingOperationCount);
+            if (Application.Current is not App application)
+                throw new InvalidOperationException("The P3 automated acceptance application is unavailable during shutdown.");
+            await application.PrepareP3AutomatedShutdownAsync(controller);
+            controller.RecordLifecycle("window-close-start", "started", pending: true);
+            controller.RecordLifecycle("application-shutdown-start", "started", pending: true);
             Close();
         }
         catch (Exception exception)
@@ -66,10 +84,27 @@ public partial class MainWindow
         }
     }
 
-    internal async Task TeardownAssetLibraryP3AutomatedAcceptanceAsync()
+    internal Task TeardownAssetLibraryP3AutomatedAcceptanceAsync()
     {
-        _assetLibraryP3AutomatedDriver?.Dispose();
-        _assetLibraryP3AutomatedDriver = null;
+        _assetLibraryP3Teardown ??= TeardownAssetLibraryP3AutomatedAcceptanceCoreAsync();
+        return _assetLibraryP3Teardown;
+    }
+
+    private async Task TeardownAssetLibraryP3AutomatedAcceptanceCoreAsync()
+    {
+        var driver = _assetLibraryP3AutomatedDriver;
+        if (driver is not null)
+        {
+            try
+            {
+                await driver.DisposeAsync();
+            }
+            finally
+            {
+                if (ReferenceEquals(_assetLibraryP3AutomatedDriver, driver))
+                    _assetLibraryP3AutomatedDriver = null;
+            }
+        }
         var page = _assetLibraryP3AutomatedPage ?? AssetLibraryWorkspace.Content as AssetLibraryWpfPage;
         if (page is null) return;
         _assetLibraryP3AutomatedPage = page;

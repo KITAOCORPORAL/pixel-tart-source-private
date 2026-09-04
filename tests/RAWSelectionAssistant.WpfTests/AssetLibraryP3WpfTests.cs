@@ -1232,6 +1232,84 @@ public sealed class AssetLibraryP3WpfTests
         Assert.AreEqual(operationId, type.GetProperty("P3BatchApplyCompletionOperationId", flags)?.GetValue(viewModel));
     }
 
+    [TestMethod]
+    public async Task DisposeClosesP3GateDrainsTrackedWorkAndOnlyThenDisposesRepository()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Shutdown", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(async () =>
+            {
+                var viewModel = new AssetLibraryViewModel(Path.Combine(root, "library.db"), new TaskOperationBridge());
+                var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+                var runTracked = typeof(AssetLibraryViewModel).GetMethod("RunTrackedP3OperationAsync", flags)!;
+                object? Read(string name) => typeof(AssetLibraryViewModel).GetProperty(name, flags)!.GetValue(viewModel);
+                Task Run(Func<Task> operation) => (Task)runTracked.Invoke(viewModel, [operation, null])!;
+                var tracked = Run(async () => await release.Task);
+                Assert.AreEqual(1, Read("P3TrackedOperationCount"));
+
+                var dispose = viewModel.DisposeAsync().AsTask();
+                var concurrentDispose = viewModel.DisposeAsync().AsTask();
+                await Task.Yield();
+                Assert.IsTrue((bool)Read("P3ShutdownStarted")!);
+                Assert.IsFalse(dispose.IsCompleted);
+                Assert.IsFalse(concurrentDispose.IsCompleted,
+                    "A concurrent DisposeAsync caller must await the shared cleanup task.");
+                Assert.IsFalse((bool)Read("P3RepositoryDisposeStarted")!);
+
+                var rejectedStarted = false;
+                await Run(() =>
+                {
+                    rejectedStarted = true;
+                    return Task.CompletedTask;
+                });
+                Assert.IsFalse(rejectedStarted);
+
+                release.SetResult();
+                await tracked;
+                await dispose;
+                await concurrentDispose;
+                Assert.AreEqual(0, Read("P3TrackedOperationCount"));
+                Assert.IsTrue((bool)Read("P3RepositoryDisposeStarted")!);
+                await viewModel.DisposeAsync();
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
+    public async Task PageConcurrentDisposeCallersAwaitTheSameViewModelCleanup()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3PageShutdown", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(async () =>
+            {
+                var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(Path.Combine(root, "library.db"), new TaskOperationBridge(), []);
+                var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var runTracked = typeof(AssetLibraryViewModel).GetMethod(
+                    "RunTrackedP3OperationAsync",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!;
+                var tracked = (Task)runTracked.Invoke(page.ViewModel, [(Func<Task>)(async () => await release.Task), null])!;
+
+                var first = page.DisposeAsync().AsTask();
+                var second = page.DisposeAsync().AsTask();
+                await Task.Yield();
+                Assert.IsFalse(first.IsCompleted);
+                Assert.IsFalse(second.IsCompleted,
+                    "A concurrent page DisposeAsync caller must await the shared cleanup task.");
+
+                release.SetResult();
+                await tracked;
+                await Task.WhenAll(first, second);
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
     private static void InvokePrivateVoid(AssetLibraryViewModel viewModel, string methodName, object? argument)
     {
         var method = typeof(AssetLibraryViewModel).GetMethod(

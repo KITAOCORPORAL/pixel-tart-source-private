@@ -24,7 +24,7 @@ namespace PixelTart.Modules.AssetLibrary;
 /// Drives the public WPF surface used by the P3 automated acceptance build.
 /// It deliberately owns no evidence files and makes no pass/fail decision.
 /// </summary>
-public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
+public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
 {
     private static readonly HashSet<string> MustFitAutomationIds = new(StringComparer.Ordinal)
     {
@@ -97,8 +97,10 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
     private readonly ListBox _assetGrid;
     private readonly TextBox _searchBox;
     private readonly SqliteAssetLibraryRepository _acceptanceRepository;
+    private readonly object _disposeGate = new();
     private Border? _buttonStateSurface;
-    private bool _disposed;
+    private Task? _disposeTask;
+    private int _disposeStarted;
 
     public AssetLibraryP3AutomatedAcceptanceDriver(AssetLibraryPage page, string databasePath)
     {
@@ -1917,11 +1919,19 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         await _page.Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.ApplicationIdle);
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
-        if (_disposed) return;
+        lock (_disposeGate)
+        {
+            _disposeTask ??= DisposeCoreAsync();
+            return new ValueTask(_disposeTask);
+        }
+    }
+
+    private async Task DisposeCoreAsync()
+    {
+        Interlocked.Exchange(ref _disposeStarted, 1);
         RemoveButtonStateSurface();
-        _disposed = true;
         _page.RemoveHandler(Thumb.DragStartedEvent, new DragStartedEventHandler(OnDragStarted));
         _page.RemoveHandler(Thumb.DragDeltaEvent, new DragDeltaEventHandler(OnDragDelta));
         _page.RemoveHandler(Thumb.DragCompletedEvent, new DragCompletedEventHandler(OnDragCompleted));
@@ -1934,7 +1944,8 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
         _page.RemoveHandler(TextCompositionManager.TextInputEvent, new TextCompositionEventHandler(OnTextInput));
         _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
         _viewModel.AssetCards.CollectionChanged -= OnAssetCardsChanged;
-        _acceptanceRepository.DisposeAsync().AsTask().GetAwaiter().GetResult();
+        await _acceptanceRepository.DisposeAsync();
+        GC.SuppressFinalize(this);
     }
 
     private async Task ExecuteBoundButtonCommandAsync(string automationId)
@@ -2216,7 +2227,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IDisposable
 
     private void EnsureNotDisposed()
     {
-        ObjectDisposedException.ThrowIf(_disposed, this);
+        ObjectDisposedException.ThrowIf(Volatile.Read(ref _disposeStarted) != 0, this);
         if (!_page.Dispatcher.CheckAccess())
             throw new InvalidOperationException("The automated acceptance driver must run on the live WPF Dispatcher.");
     }
