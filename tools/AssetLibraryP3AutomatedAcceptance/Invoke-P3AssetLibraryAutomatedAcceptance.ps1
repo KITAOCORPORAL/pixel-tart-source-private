@@ -488,6 +488,62 @@ function Assert-RunOwnedNonReparseFile {
     return $fullPath
 }
 
+function Get-RunnerProcessIdentityObservation {
+    param(
+        [Diagnostics.Process]$Process,
+        [AllowNull()][scriptblock]$ObservationProvider = $null,
+        [ValidateRange(1, 200)][int]$MaxAttempts = 40,
+        [ValidateRange(0, 1000)][int]$RetryDelayMilliseconds = 25
+    )
+    $lastObservationError = ''
+    for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+        try {
+            $Process.Refresh()
+            if ($Process.HasExited) { throw 'The process exited before its owner token could be captured.' }
+            if ($null -eq $ObservationProvider) {
+                $observedPath = [string]$Process.MainModule.FileName
+                $observedStart = [DateTimeOffset]$Process.StartTime.ToUniversalTime()
+            } else {
+                $provided = & $ObservationProvider $Process
+                if ($null -eq $provided) { throw 'The process identity observation provider returned no observation.' }
+                $observedPath = [string]$provided.ExecutablePath
+                $observedStart = [DateTimeOffset]::Parse(
+                    [string]$provided.StartTimeUtc,
+                    [Globalization.CultureInfo]::InvariantCulture,
+                    [Globalization.DateTimeStyles]::RoundtripKind)
+            }
+            if ([string]::IsNullOrWhiteSpace($observedPath)) {
+                throw 'MainModule.FileName was temporarily empty.'
+            }
+            $actualPath = ConvertTo-NormalizedProcessPath $observedPath
+            if ([string]::IsNullOrWhiteSpace($actualPath)) {
+                throw 'The normalized process executable path was temporarily empty.'
+            }
+            $actualSha256 = Get-FileSha256 $actualPath
+            return [pscustomobject][ordered]@{
+                ExecutablePath = $actualPath
+                StartTime = $observedStart
+                StartTimeUtc = $observedStart.ToString('O')
+                ExecutableSha256 = $actualSha256
+            }
+        } catch {
+            $lastObservationError = $_.Exception.Message
+            $processExited = $false
+            try {
+                $Process.Refresh()
+                $processExited = [bool]$Process.HasExited
+            } catch {
+                $lastObservationError = "$lastObservationError Process state refresh failed: $($_.Exception.Message)"
+            }
+            if ($processExited) { throw 'The process exited before its owner token could be captured.' }
+            if ($attempt -lt $MaxAttempts -and $RetryDelayMilliseconds -gt 0) {
+                Start-Sleep -Milliseconds $RetryDelayMilliseconds
+            }
+        }
+    }
+    throw "Runner-owned process identity observation did not stabilize after $MaxAttempts attempts. Last error: $lastObservationError"
+}
+
 function New-RunnerProcessOwnerToken {
     param(
         [Diagnostics.Process]$Process,
@@ -496,7 +552,10 @@ function New-RunnerProcessOwnerToken {
         [string]$RunId,
         [string]$ProcessSessionId,
         [string]$RunOwnedBinaryRoot,
-        [string]$RunStartedAtUtc
+        [string]$RunStartedAtUtc,
+        [AllowNull()][scriptblock]$IdentityObservationProvider = $null,
+        [ValidateRange(1, 200)][int]$IdentityCaptureMaxAttempts = 40,
+        [ValidateRange(0, 1000)][int]$IdentityCaptureRetryDelayMilliseconds = 25
     )
     if ($ProcessSessionId -cnotmatch '^[0-9a-f]{32}$') {
         throw 'Runner-owned process identity requires a preassigned lowercase hex32 process session id.'
@@ -507,12 +566,12 @@ function New-RunnerProcessOwnerToken {
             $RunStartedAtUtc,
             [Globalization.CultureInfo]::InvariantCulture,
             [Globalization.DateTimeStyles]::RoundtripKind)
-        $Process.Refresh()
-        if ($Process.HasExited) { throw 'The process exited before its owner token could be captured.' }
-        $actualPath = ConvertTo-NormalizedProcessPath ([string]$Process.MainModule.FileName)
-        $actualStart = [DateTimeOffset]$Process.StartTime.ToUniversalTime()
-        $actualStartTimeUtc = $actualStart.ToString('O')
-        $actualSha256 = Get-FileSha256 $actualPath
+        $identityObservation = Get-RunnerProcessIdentityObservation $Process $IdentityObservationProvider `
+            $IdentityCaptureMaxAttempts $IdentityCaptureRetryDelayMilliseconds
+        $actualPath = [string]$identityObservation.ExecutablePath
+        $actualStart = [DateTimeOffset]$identityObservation.StartTime
+        $actualStartTimeUtc = [string]$identityObservation.StartTimeUtc
+        $actualSha256 = [string]$identityObservation.ExecutableSha256
     } catch {
         throw "Runner-owned process identity capture failed closed: $($_.Exception.Message)"
     }

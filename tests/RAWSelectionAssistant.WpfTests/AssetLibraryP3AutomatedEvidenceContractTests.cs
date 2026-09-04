@@ -1034,6 +1034,39 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 $identityProbe = Start-HarnessProcess 'Start-Sleep -Seconds 10; exit 0'
                 $actualHash = Get-FileSha256 $powershellPath
                 $runCreated = [DateTimeOffset]::UtcNow.AddSeconds(-2).ToString('O')
+                $script:transientIdentityCaptureCount = 0
+                $transientIdentityProvider = {
+                    param([Diagnostics.Process]$Candidate)
+                    $script:transientIdentityCaptureCount++
+                    [pscustomobject]@{
+                        ExecutablePath=$(if ($script:transientIdentityCaptureCount -eq 1) { '' } else { $powershellPath })
+                        StartTimeUtc=$Candidate.StartTime.ToUniversalTime().ToString('O')
+                    }
+                }
+                $transientOwner = New-RunnerProcessOwnerToken $identityProbe $powershellPath $actualHash `
+                    'p3-auto-harness' ('1' * 32) (Split-Path -Parent $powershellPath) $runCreated `
+                    $transientIdentityProvider 3 0
+                $transientEmptyPathRetried = $script:transientIdentityCaptureCount -eq 2 -and
+                    $transientOwner.ExecutablePath -ceq $powershellPath -and
+                    $transientOwner.ExecutableSha256 -ceq $actualHash
+                $persistentIdentityProvider = {
+                    param([Diagnostics.Process]$Candidate)
+                    [pscustomobject]@{
+                        ExecutablePath=''
+                        StartTimeUtc=$Candidate.StartTime.ToUniversalTime().ToString('O')
+                    }
+                }
+                $persistentEmptyPathFailedClosed = $false
+                try {
+                    New-RunnerProcessOwnerToken $identityProbe $powershellPath $actualHash `
+                        'p3-auto-harness' ('1' * 32) (Split-Path -Parent $powershellPath) $runCreated `
+                        $persistentIdentityProvider 3 0 | Out-Null
+                } catch {
+                    $persistentEmptyPathFailedClosed =
+                        $_.Exception.Message.Contains('did not stabilize after 3 attempts') -and
+                        $_.Exception.Message.Contains('MainModule.FileName was temporarily empty') -and
+                        -not $_.Exception.Message.Contains('Empty path name is not legal')
+                }
                 $outsideRootRejected = $false; $wrongHashRejected = $false
                 try { New-RunnerProcessOwnerToken $identityProbe $powershellPath $actualHash 'p3-auto-harness' ('1' * 32) $harnessRoot $runCreated | Out-Null }
                 catch { $outsideRootRejected = $_.Exception.Message.Contains('sealed binary root') }
@@ -1299,6 +1332,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     transient_contention_precedes_exit_check=$transientContentionPrecedesExitCheck
                     persistent_contention_timed_out=$persistentContentionTimedOut
                     nonsharing_io_failed_closed=$nonSharingIoFailedClosed
+                    transient_empty_path_retried=$transientEmptyPathRetried
+                    persistent_empty_path_failed_closed=$persistentEmptyPathFailedClosed
                     cim_datetime_accepted=$cimDateTimeAccepted; cim_throw_failed_closed=$cimThrowClosed; outside_root_rejected=$outsideRootRejected
                     wrong_hash_rejected=$wrongHashRejected; exited_identity_rejected=$exitedIdentityRejected
                     normal_process_passed=($normalDiagnostic.outcome -ceq 'process-exited-and-tables-empty')
@@ -1328,6 +1363,7 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                           "partial_tail_natural_exit_preserved_primary", "partial_tail_timeout_preserved_primary",
                           "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
                           "transient_contention_recovered", "transient_contention_precedes_exit_check", "persistent_contention_timed_out", "nonsharing_io_failed_closed",
+                          "transient_empty_path_retried", "persistent_empty_path_failed_closed",
                           "wrong_hash_rejected", "exited_identity_rejected", "normal_process_passed",
                           "nonzero_process_rejected", "premature_exit_marked_failed", "natural_exit_skipped_kill", "owner_check_exit_skipped_kill", "timeout_killed", "primary_preserved_with_cleanup_failure"
                      })
