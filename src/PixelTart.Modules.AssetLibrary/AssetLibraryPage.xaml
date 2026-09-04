@@ -817,12 +817,12 @@
                             <Grid>
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="54" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="预览" Style="{StaticResource AssetCaption}" />
-                                <Button Grid.Column="1" Content="名称" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetListSortName" />
+                                <Button Grid.Column="1" Content="名称" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortName" />
                                 <TextBlock Grid.Column="2" Text="类型" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
                                 <TextBlock Grid.Column="3" Text="尺寸" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
-                                <Button Grid.Column="4" Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetListSortCaptureTime" />
-                                <Button Grid.Column="5" Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetListSortAddedAt" />
-                                <Button Grid.Column="6" Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetListSortRating" />
+                                <Button Grid.Column="4" Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortCaptureTime" />
+                                <Button Grid.Column="5" Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortAddedAt" />
+                                <Button Grid.Column="6" Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortRating" />
                                 <TextBlock Grid.Column="7" Text="标签" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
                             </Grid>
                         </Border>
