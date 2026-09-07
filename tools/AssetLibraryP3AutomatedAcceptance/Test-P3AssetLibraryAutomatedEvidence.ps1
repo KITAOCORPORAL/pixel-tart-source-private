@@ -1184,11 +1184,14 @@ for ($index = 0; $index -lt 14; $index++) {
     Assert-CanonicalRunFilePath $databaseRelativePath "scenario[$index] DB evidence path"
     $scenarioToken = ([string]$scenario.id).Replace('/', '-')
     $hasRestartDatabase = $expectedRestarts -ccontains [string]$scenario.id
-    $expectedDatabaseEvidencePaths = if ($hasRestartDatabase) {
-        @("app/evidence/databases/$scenarioToken-primary.db", "app/evidence/databases/$scenarioToken-restart.db")
-    } else {
-        @("app/evidence/databases/$scenarioToken-primary.db")
-    }
+    # The outer array expression is intentional: a primary-only history must
+    # remain a one-item array so [-1] returns the path, not its final character.
+    $expectedDatabaseEvidencePaths = @(
+        "app/evidence/databases/$scenarioToken-primary.db"
+        if ($hasRestartDatabase) {
+            "app/evidence/databases/$scenarioToken-restart.db"
+        }
+    )
     Require-Equal $databaseRelativePath $expectedDatabaseEvidencePaths[-1] "scenario[$index] final DB evidence path"
     $databaseEvidencePath = Full (Join-Path $root $databaseRelativePath.Replace('/', [IO.Path]::DirectorySeparatorChar))
     if (-not (Inside $databaseEvidencePath $databaseEvidenceRoot)) { Fail "scenario[$index] DB evidence escapes the dedicated database evidence root." }

@@ -1550,11 +1550,15 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
             "state.Database.EvidencePaths.Add(state.Database.EvidencePath)");
         ContainsAll(validator,
             "$databaseEvidenceRoot = Full (Join-Path $root 'app\\evidence\\databases')",
+            "$expectedDatabaseEvidencePaths = @(",
             "app/evidence/databases/$scenarioToken-primary.db",
             "app/evidence/databases/$scenarioToken-restart.db",
+            "Require-Equal $databaseRelativePath $expectedDatabaseEvidencePaths[-1]",
             "DB evidence escapes the dedicated database evidence root",
             "DB evidence history escapes the dedicated database evidence root",
             "active DB path escapes scenario root");
+        Assert.IsFalse(validator.Contains("$expectedDatabaseEvidencePaths = if ($hasRestartDatabase)", StringComparison.Ordinal),
+            "A one-item conditional result is unwrapped to a string and makes [-1] return the last character.");
         Assert.IsFalse(validator.Contains("DB evidence escapes scenario root", StringComparison.Ordinal));
         Assert.IsFalse(validator.Contains("DB evidence history escapes scenario root", StringComparison.Ordinal));
     }
