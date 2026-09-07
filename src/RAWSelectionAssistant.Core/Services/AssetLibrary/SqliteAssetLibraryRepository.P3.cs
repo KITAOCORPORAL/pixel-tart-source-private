@@ -1082,22 +1082,14 @@ public sealed partial class SqliteAssetLibraryRepository
         if (before.Assets.Length != ids.Count)
             throw new KeyNotFoundException($"批量请求包含 {ids.Count - before.Assets.Length} 个不存在的素材标识，未执行任何更改。");
 
-        await ExecuteAsync(connection, transaction, """
-            UPDATE AssetItems
-            SET Rating=CASE WHEN $setRating=1 THEN $rating ELSE Rating END,
-                Comment=CASE WHEN $setComment=1 THEN $comment ELSE Comment END,
-                IsArchived=CASE WHEN $setArchived=1 THEN $archived ELSE IsArchived END,
-                IsMissing=CASE WHEN $setMissing=1 THEN $missing ELSE IsMissing END
-            WHERE AssetId IN (SELECT AssetId FROM P3SelectedAssets);
-            """, cancellationToken,
-            ("$setRating", request.ClearRating || request.Rating is not null ? 1 : 0),
-            ("$rating", request.ClearRating ? 0 : request.Rating ?? 0),
-            ("$setComment", request.ClearComment || request.Comment is not null ? 1 : 0),
-            ("$comment", request.ClearComment ? string.Empty : request.Comment ?? string.Empty),
-            ("$setArchived", request.IsArchived is not null ? 1 : 0),
-            ("$archived", request.IsArchived == true ? 1 : 0),
-            ("$setMissing", request.IsMissing is not null ? 1 : 0),
-            ("$missing", request.IsMissing == true ? 1 : 0)).ConfigureAwait(false);
+        foreach (var asset in before.Assets)
+        {
+            var rating = request.ClearRating ? 0 : request.Rating ?? asset.Rating;
+            var comment = request.ClearComment ? string.Empty : request.Comment ?? asset.Comment;
+            await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment,IsArchived=$archived,IsMissing=$missing WHERE AssetId=$id;", cancellationToken,
+                ("$rating", rating), ("$comment", comment), ("$archived", (request.IsArchived ?? asset.IsArchived) ? 1 : 0),
+                ("$missing", (request.IsMissing ?? asset.IsMissing) ? 1 : 0), ("$id", asset.AssetId.ToString("D"))).ConfigureAwait(false);
+        }
         await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetTagMemberships", "TagId", addTags, removeTags, cancellationToken).ConfigureAwait(false);
         await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetFolderMemberships", "FolderId", addFolders, removeFolders, cancellationToken).ConfigureAwait(false);
         await ApplyP3FolderAutoTagsAsync(connection, transaction, addFolders, cancellationToken).ConfigureAwait(false);
@@ -1509,15 +1501,8 @@ public sealed partial class SqliteAssetLibraryRepository
             create.CommandText = "CREATE TEMP TABLE IF NOT EXISTS P3SelectedAssets(AssetId TEXT NOT NULL PRIMARY KEY); DELETE FROM P3SelectedAssets;";
             await create.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
-        await using var insert = connection.CreateCommand();
-        insert.Transaction = transaction;
-        insert.CommandText = "INSERT INTO P3SelectedAssets(AssetId) VALUES($id);";
-        var idParameter = insert.Parameters.Add("$id", SqliteType.Text);
         foreach (var id in ids)
-        {
-            idParameter.Value = id.ToString("D");
-            await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-        }
+            await ExecuteP3Async(connection, transaction, "INSERT INTO P3SelectedAssets(AssetId) VALUES($id);", cancellationToken, ("$id", id.ToString("D"))).ConfigureAwait(false);
     }
 
     private static async Task ValidateActiveIdsAsync(SqliteConnection connection, SqliteTransaction transaction, string table, string idColumn, IEnumerable<Guid> ids, CancellationToken cancellationToken)
