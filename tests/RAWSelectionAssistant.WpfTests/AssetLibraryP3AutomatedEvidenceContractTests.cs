@@ -1564,6 +1564,16 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void ScopeChangesBypassFreeTextDebounce()
+    {
+        var viewModel = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3QueryComposer.cs");
+        ContainsAll(viewModel,
+            "// Scope changes are explicit navigation, not free-text input.",
+            "CommitP3QueryDocument(scheduleRefresh: false);",
+            "if (IsReady && !_isRestoringWorkspace) _ = RefreshAsync();");
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");

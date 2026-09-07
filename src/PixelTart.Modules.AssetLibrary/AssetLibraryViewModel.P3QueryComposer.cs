@@ -45,7 +45,10 @@ public sealed partial class AssetLibraryViewModel
             _workspaceSettings.QueryScope = value;
             OnPropertyChanged(nameof(IsP3CurrentScope));
             OnPropertyChanged(nameof(IsP3AllAssetsScope));
-            CommitP3QueryDocument(scheduleRefresh: true);
+            // Scope changes are explicit navigation, not free-text input. Refresh
+            // immediately so the user does not pay the search debounce twice.
+            CommitP3QueryDocument(scheduleRefresh: false);
+            if (IsReady && !_isRestoringWorkspace) _ = RefreshAsync();
         }
     }
 
