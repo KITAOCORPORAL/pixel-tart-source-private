@@ -54,6 +54,7 @@ public sealed partial class AssetLibraryViewModel
 
     internal async Task SetP3AcceptanceScopeAsync(AssetQueryScope scope)
     {
+        StopSearchDebounce();
         if (!Enum.IsDefined(scope)) scope = AssetQueryScope.Current;
         if (_p3QueryScope != scope)
         {
