@@ -19,6 +19,7 @@ public sealed partial class AssetLibraryViewModel
     private string _multipleRatingSummary = string.Empty;
     private AssetLibraryCommandPreview? _lastDropPreview;
     private long _inspectorGeneration;
+    private bool _p2JournalBusy;
     private readonly Dictionary<Guid, string> _p2TagSummaryByAsset = [];
 
     public ObservableCollection<AssetLibrarySystemCollectionView> SystemCollections { get; } = [];
@@ -128,8 +129,8 @@ public sealed partial class AssetLibraryViewModel
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
-        P2UndoCommand = new(UndoP2Async, () => _browserCommands.CanUndo);
-        P2RedoCommand = new(RedoP2Async, () => _browserCommands.CanRedo);
+        P2UndoCommand = new(() => RunTrackedP3OperationAsync(UndoP2Async), () => !_p2JournalBusy && _browserCommands.CanUndo);
+        P2RedoCommand = new(() => RunTrackedP3OperationAsync(RedoP2Async), () => !_p2JournalBusy && _browserCommands.CanRedo);
     }
 
     private void BuildSystemCollections()
@@ -336,7 +337,11 @@ public sealed partial class AssetLibraryViewModel
         OrganizationError = string.Empty;
         try
         {
-            var tree = await _repository.GetFolderTreeAsync(includeArchived: true, cancellationToken);
+            var data = await Task.Run(async () => (
+                Tree: await _repository.GetFolderTreeAsync(includeArchived: true, cancellationToken),
+                Memberships: await _repository.ListTagMembershipsAsync(cancellationToken: cancellationToken)), cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+            var tree = data.Tree;
             OrganizationFolders.Clear(); foreach (var node in tree) OrganizationFolders.Add(new(this, node));
             OrganizationSmartFolders.Clear(); foreach (var folder in SmartFolders) OrganizationSmartFolders.Add(new(this, folder));
             OrganizationTagGroups.Clear();
@@ -346,7 +351,7 @@ public sealed partial class AssetLibraryViewModel
             var ungrouped = tagViews.Where(tag => tag.Tag.TagGroupId is null || TagGroups.All(group => group.TagGroupId != tag.Tag.TagGroupId)).ToArray();
             if (ungrouped.Length > 0) OrganizationTagGroups.Add(new(this, null, ungrouped));
             var tagNames = Tags.ToDictionary(tag => tag.TagId, tag => tag.Name);
-            var memberships = await _repository.ListTagMembershipsAsync(cancellationToken: cancellationToken);
+            var memberships = data.Memberships;
             _p2TagSummaryByAsset.Clear();
             foreach (var group in memberships.GroupBy(item => item.AssetId))
                 _p2TagSummaryByAsset[group.Key] = string.Join("、", group.Select(item => tagNames.GetValueOrDefault(item.TagId)).Where(name => !string.IsNullOrWhiteSpace(name)).Distinct(StringComparer.OrdinalIgnoreCase));
@@ -413,17 +418,21 @@ public sealed partial class AssetLibraryViewModel
         OnPropertyChanged(nameof(P2QuerySummary));
     }
 
+    private Task _p2InspectorTask = Task.CompletedTask;
+
     private void OnP2SelectionChanged(IReadOnlyList<AssetItem> selected)
     {
         OnPropertyChanged(nameof(IsQueryInspectorVisible));
         OnPropertyChanged(nameof(IsSingleInspectorVisible));
         OnPropertyChanged(nameof(IsMultipleInspectorVisible));
         var generation = Interlocked.Increment(ref _inspectorGeneration);
-        _ = RefreshP2InspectorAsync(selected, SelectionCount, generation);
+        var count = SelectionCount;
+        _p2InspectorTask = RunTrackedP3OperationAsync(() => RefreshP2InspectorAsync(selected, count, generation));
     }
 
     private async Task RefreshP2InspectorAsync(IReadOnlyList<AssetItem> selected, int selectedIdCount, long generation)
     {
+        using var timing = RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryOperationTiming.Measure("viewmodel.inspector");
         try
         {
             if (selectedIdCount == 0)
@@ -438,8 +447,11 @@ public sealed partial class AssetLibraryViewModel
                 return;
             }
             var ids = selected.Select(asset => asset.AssetId).ToHashSet();
-            var folderMemberships = await _repository.ListFolderMembershipsAsync(cancellationToken: _lifetimeCancellation.Token);
-            var tagMemberships = await _repository.ListTagMembershipsAsync(cancellationToken: _lifetimeCancellation.Token);
+            var memberships = await Task.Run(async () => (
+                Folders: await _repository.ListFolderMembershipsAsync(cancellationToken: _lifetimeCancellation.Token),
+                Tags: await _repository.ListTagMembershipsAsync(cancellationToken: _lifetimeCancellation.Token)), _lifetimeCancellation.Token);
+            var folderMemberships = memberships.Folders;
+            var tagMemberships = memberships.Tags;
             if (generation != Volatile.Read(ref _inspectorGeneration)) return;
             if (selected.Count == 1)
             {
@@ -455,8 +467,9 @@ public sealed partial class AssetLibraryViewModel
             MultipleRatingSummary = selected.Select(asset => asset.Rating).Distinct().Take(2).Count() == 1 ? $"共同评分：{selected[0].Rating}" : "评分：混合值";
         }
         catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
-        catch (Exception exception) when (generation == Volatile.Read(ref _inspectorGeneration))
+        catch (Exception exception)
         {
+            if (generation != Volatile.Read(ref _inspectorGeneration)) return;
             _logService?.Error("检查器信息加载失败。", exception);
             SingleFolderSummary = SingleTagSummary = MultipleFolderSummary = MultipleTagSummary = MultipleRatingSummary = "检查器信息暂不可用，请重试。";
             Status = "检查器信息加载失败，请重试。";
@@ -727,15 +740,29 @@ public sealed partial class AssetLibraryViewModel
     }
     private async Task UndoP2Async()
     {
-        Status = await _browserCommands.UndoAsync(_lifetimeCancellation.Token) ? "已撤销素材库操作。" : "没有可撤销的素材库操作。";
-        LastUndoToken = _browserCommands.UndoToken;
-        RaiseP2CommandStates(); await RefreshFilterListsAsync(_lifetimeCancellation.Token); await RefreshAsync();
+        await ExecuteP2JournalAsync(undo: true);
     }
     private async Task RedoP2Async()
     {
-        Status = await _browserCommands.RedoAsync(_lifetimeCancellation.Token) ? "已重做素材库操作。" : "没有可重做的素材库操作。";
-        LastUndoToken = _browserCommands.UndoToken;
-        RaiseP2CommandStates(); await RefreshFilterListsAsync(_lifetimeCancellation.Token); await RefreshAsync();
+        await ExecuteP2JournalAsync(undo: false);
+    }
+
+    private async Task ExecuteP2JournalAsync(bool undo)
+    {
+        _p2JournalBusy = true;
+        RaiseP2CommandStates();
+        try
+        {
+            var changed = await Task.Run(() => undo
+                ? _browserCommands.UndoAsync(_lifetimeCancellation.Token)
+                : _browserCommands.RedoAsync(_lifetimeCancellation.Token), _lifetimeCancellation.Token);
+            Status = changed ? (undo ? "已撤销素材库操作。" : "已重做素材库操作。") : "没有可恢复的素材库操作。";
+            LastUndoToken = _browserCommands.UndoToken;
+            await RefreshFilterListsAsync(_lifetimeCancellation.Token);
+            await RefreshAsync();
+        }
+        catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
+        finally { _p2JournalBusy = false; RaiseP2CommandStates(); }
     }
 
     private void RememberBrowserMutationResult(AssetLibraryBatchResult result)

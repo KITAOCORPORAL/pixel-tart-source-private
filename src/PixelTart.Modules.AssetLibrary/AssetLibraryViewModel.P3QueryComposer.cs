@@ -16,6 +16,7 @@ public sealed partial class AssetLibraryViewModel
     private string _p3QueryValidationMessage = string.Empty;
     private string _p3NewSmartFolderName = "新智能文件夹";
     private AssetQueryScope _p3QueryScope = AssetQueryScope.Current;
+    private Task _p3ScopeRefreshTask = Task.CompletedTask;
     private AssetQueryDocument _p3CurrentQueryDocument = new();
     private P3QueryNodeView _p3QueryRoot = null!;
 
@@ -42,31 +43,25 @@ public sealed partial class AssetLibraryViewModel
         {
             if (!Enum.IsDefined(value)) value = AssetQueryScope.Current;
             if (!SetProperty(ref _p3QueryScope, value)) return;
+            StopSearchDebounce();
             _workspaceSettings.QueryScope = value;
             OnPropertyChanged(nameof(IsP3CurrentScope));
             OnPropertyChanged(nameof(IsP3AllAssetsScope));
             // Scope changes are explicit navigation, not free-text input. Refresh
             // immediately so the user does not pay the search debounce twice.
             CommitP3QueryDocument(scheduleRefresh: false);
-            if (IsReady && !_isRestoringWorkspace) _ = RefreshAsync();
+            if (IsReady && !_isRestoringWorkspace) _p3ScopeRefreshTask = RefreshAsync();
         }
     }
 
+#if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
     internal async Task SetP3AcceptanceScopeAsync(AssetQueryScope scope)
     {
-        StopSearchDebounce();
-        if (!Enum.IsDefined(scope)) scope = AssetQueryScope.Current;
-        if (_p3QueryScope != scope)
-        {
-            _p3QueryScope = scope;
-            _workspaceSettings.QueryScope = scope;
-            OnPropertyChanged(nameof(P3QueryScope));
-            OnPropertyChanged(nameof(IsP3CurrentScope));
-            OnPropertyChanged(nameof(IsP3AllAssetsScope));
-            CommitP3QueryDocument(scheduleRefresh: false);
-        }
-        if (IsReady && !_isRestoringWorkspace) await RefreshAsync();
+        // Observe exactly the same transition as the two normal UI bindings.
+        P3QueryScope = scope;
+        await _p3ScopeRefreshTask;
     }
+#endif
 
     public bool IsP3CurrentScope
     {

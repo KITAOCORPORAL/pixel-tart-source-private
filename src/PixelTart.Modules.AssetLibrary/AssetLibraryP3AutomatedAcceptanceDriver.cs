@@ -435,8 +435,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
     {
         EnsureNotDisposed();
         var previousGeneration = _viewModel.P3AcceptanceQueryGeneration;
+        var changed = _viewModel.P3QueryScope != scope;
         await _viewModel.SetP3AcceptanceScopeAsync(scope);
-        await WaitForPublishedQueryAfterAsync(previousGeneration, $"the P3 scope '{scope}' query");
+        if (changed) await WaitForPublishedQueryAfterAsync(previousGeneration, $"the P3 scope '{scope}' query");
         if (_viewModel.P3QueryScope != scope)
             throw new InvalidOperationException($"The P3 scope switch did not publish '{scope}'.");
     }
@@ -1158,6 +1159,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.PreviewP3BatchMetadataCommand.CanExecute(null))
             throw new InvalidOperationException("The public Batch Metadata Preview command rejected the live selection.");
         _viewModel.PreviewP3BatchMetadataCommand.Execute(null);
+        await _viewModel.PreviewP3BatchMetadataCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3BatchPreviewReady &&
                                  _viewModel.P3BatchPreviewSummary.Contains(batchSize.ToString("N0"), StringComparison.Ordinal),
             "the public Batch Metadata Preview command");
@@ -1167,6 +1169,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.ApplyP3BatchMetadataCommand.CanExecute(null))
             throw new InvalidOperationException("The public Batch Metadata Apply command was unavailable after preview.");
         _viewModel.ApplyP3BatchMetadataCommand.Execute(null);
+        await _viewModel.ApplyP3BatchMetadataCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3BatchApplyCompletionGeneration > previousCompletionGeneration,
             "the public Batch Metadata Apply command");
         if (_viewModel.P3BatchApplyCompletionOutcome != AssetLibraryP3BatchApplyOutcome.Succeeded)
@@ -1189,6 +1192,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             if (!_viewModel.P2UndoCommand.CanExecute(null))
                 throw new InvalidOperationException("The public Undo command was unavailable after batch metadata apply.");
             _viewModel.P2UndoCommand.Execute(null);
+            await _viewModel.P2UndoCommand.ExecutionTask;
             await WaitUntilAsync(async () =>
                 (await _acceptanceRepository.ListTagMembershipsAsync(tagId: tag.TagId, cancellationToken: cancellationToken)).Count == 0,
                 "the public Undo command");
@@ -1196,6 +1200,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             if (!_viewModel.P2RedoCommand.CanExecute(null))
                 throw new InvalidOperationException("The public Redo command was unavailable after batch metadata undo.");
             _viewModel.P2RedoCommand.Execute(null);
+            await _viewModel.P2RedoCommand.ExecutionTask;
             await WaitUntilAsync(async () =>
                 (await _acceptanceRepository.ListTagMembershipsAsync(tagId: tag.TagId, cancellationToken: cancellationToken)).Count == batchSize,
                 "the public Redo command");
@@ -1481,8 +1486,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         EnsureNotDisposed();
         if (count <= 0 || count > _assetGrid.Items.Count)
             throw new InvalidOperationException($"Cannot select {count} items from {_assetGrid.Items.Count} realized query items.");
-        _assetGrid.SelectedItems.Clear();
-        for (var index = 0; index < count; index++) _assetGrid.SelectedItems.Add(_assetGrid.Items[index]);
+        ((AssetLibrarySelectionListBox)_assetGrid).ReplaceSelection(_assetGrid.Items.Cast<object>().Take(count).ToArray());
         _assetGrid.ScrollIntoView(_assetGrid.Items[count - 1]);
         await DrainDispatcherAsync();
         if (_viewModel.SelectionCount != count)

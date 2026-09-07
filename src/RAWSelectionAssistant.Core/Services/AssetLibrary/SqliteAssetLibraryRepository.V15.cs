@@ -156,6 +156,16 @@ public sealed partial class SqliteAssetLibraryRepository
             _ => "a.IsArchived=0"
         } };
         if (query.SystemCollection == AssetLibrarySystemCollection.RecycleBin) where.Add("0=1");
+        if (query.CandidateAssetIds is { } candidates)
+        {
+            var parameters = candidates.Distinct().Select(id =>
+            {
+                var name = "$candidate" + command.Parameters.Count;
+                command.Parameters.AddWithValue(name, id.ToString("D"));
+                return name;
+            }).ToArray();
+            where.Add(parameters.Length == 0 ? "0=1" : $"a.AssetId IN ({string.Join(",", parameters)})");
+        }
         foreach (var searchClause in GetEffectiveSearchClauses(query))
         {
             var parameter = "$search" + command.Parameters.Count;
@@ -607,7 +617,11 @@ public sealed partial class SqliteAssetLibraryRepository
             query.SystemCollection
             ,DocumentHash = query.Document is null ? null : AssetQueryDocumentCodec.ComputeHash(query.Document)
         };
-        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(contract))));
+        var serialized = JsonSerializer.Serialize(contract);
+        // Keep existing cursors compatible when there is no candidate intersection.
+        if (query.CandidateAssetIds is not null)
+            serialized += "|candidates:" + string.Join(",", NormalizeIds(query.CandidateAssetIds));
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(serialized)));
     }
 
     private static string[] GetEffectiveSearchClauses(AssetLibraryQuery query)

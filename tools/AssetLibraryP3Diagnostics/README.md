@@ -1,0 +1,13 @@
+# P3 bounded diagnostics (not formal acceptance)
+
+`Audit-P3Runs.py` reads only explicitly supplied parents and the dated run directories beneath them. Its output is a new file (`x` mode); it never changes evidence, seals, database paths, or validator results. `seal_present` means a seal file exists, not that its contents have passed validation. Interrupted runs without a recorded failure remain `NOT_FOUND`, not an invented crash or disk failure.
+
+`AssetLibraryP3PerformanceDiagnosticsTests` runs three fresh database copies from a newly generated 10,128-row synthetic fixture. Enable its `P3Diagnostic` test category explicitly with absolute `PIXEL_TART_P3_DIAGNOSTIC_FIXTURE` and **nonexistent** `PIXEL_TART_P3_DIAGNOSTIC_OUTPUT` paths. Normal regression excludes this opt-in category. Each sample retains its own database and measured JSON, including on failure.
+
+Measurements call the public selection, preview, apply, undo, and redo paths on a serviced WPF STA dispatcher. Apply ends only after the product command's completion task and stable UI state; undo/redo include their refresh. First-screen queued binding/render work settles before the first measurement, without executing a warm-up batch. A real Current-to-All transition includes the query and selected-record reconciliation. Timing hooks observe the real operation; they never change scheduling, commit behavior, results, or acceptance thresholds.
+
+The opt-in diagnostic reports nested repository/VM phase timings, command totals, per-stage dispatcher gaps, and GC counts. Nested spans overlap and must **not** be summed. It does not currently collect ETW disk I/O, antivirus activity, or a standalone SQLite lock-wait counter; absence of those values is not zero. The 500-item SQL transaction was not replaced: preview simulation, fingerprint, complete v2 journal, commit, and durable undo/redo remain the same implementation.
+
+`AssetLibraryP3DatabaseEvidenceBehaviorTests` requires the Debug P3 acceptance compilation symbols. It executes the real snapshot writer/SQLite validation and primary-history loader/contract producer, then runs the **current validator's exact database-check block** under Windows PowerShell 5.1. Five positive paths and 39 negative paths are checked. This focused test does not certify process ownership, full seal inventory, 17 sessions, or the 70-case formal negative-evidence suite. Those still require the independent full validator/run-set gate.
+
+Historical P1/P2/P3 runs remain read-only. A relocated old run or a directory junction is not repaired by changing the validator or rewriting its manifest.

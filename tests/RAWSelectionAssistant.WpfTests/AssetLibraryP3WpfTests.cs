@@ -217,11 +217,11 @@ public sealed class AssetLibraryP3WpfTests
         Assert.IsGreaterThan(methodStart, methodEnd);
         var body = source[methodStart..methodEnd];
 
-        var repositoryApply = body.IndexOf("await _repository.ApplyBatchMetadataAsync", StringComparison.Ordinal);
+        var repositoryApply = body.IndexOf("_repository.ApplyBatchMetadataAsync", StringComparison.Ordinal);
         var rememberResult = body.IndexOf("RememberP3MetadataResult(result);", StringComparison.Ordinal);
         var refreshFilters = body.IndexOf("await RefreshFilterListsAsync", StringComparison.Ordinal);
         var refreshAssets = body.IndexOf("await RefreshAsync(initializationAttempt: null", StringComparison.Ordinal);
-        var refreshSelection = body.IndexOf("await RefreshSelectionSummaryAsync();", StringComparison.Ordinal);
+        var refreshSelection = body.IndexOf("await Task.WhenAll(_selectionSummaryTask, _p2InspectorTask);", StringComparison.Ordinal);
         var publishSuccess = body.IndexOf("P3BatchPreviewSummary = $\"已安全更新", StringComparison.Ordinal);
         var publishCompletion = body.IndexOf("PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Succeeded", StringComparison.Ordinal);
 
@@ -1188,7 +1188,7 @@ public sealed class AssetLibraryP3WpfTests
         }) StringAssert.Contains(manager, token);
         StringAssert.Contains(manager, "tag.TagGroupId is null || visibleGroupIds.Contains");
         StringAssert.Contains(managerView, "SelectionMode=\"Extended\"");
-        StringAssert.Contains(viewModel, "var archiveScope = BuildQuery().EffectiveArchiveScope;");
+        StringAssert.Contains(viewModel, "var restricted = query with { CandidateAssetIds = chunk };");
     }
 
     [TestMethod]

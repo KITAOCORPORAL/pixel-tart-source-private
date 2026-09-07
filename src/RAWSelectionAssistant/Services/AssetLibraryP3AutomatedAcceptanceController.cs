@@ -965,6 +965,17 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             "evidence",
             "databases",
             $"{scenarioToken}-{_phase}.db");
+        await WriteDatabaseEvidenceSnapshotAsync(_databasePath, snapshotPath, state).ConfigureAwait(false);
+        state.Database.RecordEvidence(RelativeToRunRoot(snapshotPath), snapshotPath, HashFile(snapshotPath));
+        _artifacts.Add(new(
+            state.Database.EvidencePath!, state.Database.Sha256!, "database", _scenarioId,
+            Environment.ProcessId, _hwnd.ToInt64(), _scenarioRoot, _phase, _processSessionId,
+            _runId, _sourceHead, _executablePath, _executableSha256,
+            _applicationAssemblyPath, _applicationAssemblySha256, _modulePath, _moduleSha256));
+    }
+
+    private static async Task WriteDatabaseEvidenceSnapshotAsync(string databasePath, string snapshotPath, ScenarioState state)
+    {
         Directory.CreateDirectory(Path.GetDirectoryName(snapshotPath)!);
         if (File.Exists(snapshotPath))
             throw new InvalidOperationException("The immutable database evidence path already exists.");
@@ -975,7 +986,7 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             SqliteConnection.ClearAllPools();
             var sourceBuilder = new SqliteConnectionStringBuilder
             {
-                DataSource = _databasePath,
+                DataSource = databasePath,
                 Mode = SqliteOpenMode.ReadWrite,
                 Cache = SqliteCacheMode.Private,
                 Pooling = false,
@@ -1002,8 +1013,8 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             }
 
             SqliteConnection.ClearAllPools();
-            state.Database.WalPresentAfterClose = File.Exists(_databasePath + "-wal");
-            state.Database.ShmPresentAfterClose = File.Exists(_databasePath + "-shm");
+            state.Database.WalPresentAfterClose = File.Exists(databasePath + "-wal");
+            state.Database.ShmPresentAfterClose = File.Exists(databasePath + "-shm");
             if (state.Database.WalPresentAfterClose || state.Database.ShmPresentAfterClose)
                 throw new InvalidOperationException("The real Asset Library SQLite WAL/SHM files remained after explicit teardown and checkpoint.");
             if (File.Exists(stagingPath + "-wal") || File.Exists(stagingPath + "-shm"))
@@ -1019,28 +1030,6 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
             if (File.Exists(stagingPath + "-shm")) File.Delete(stagingPath + "-shm");
         }
 
-        state.Database.EvidencePath = RelativeToRunRoot(snapshotPath);
-        state.Database.EvidenceAbsolutePath = snapshotPath;
-        state.Database.Sha256 = HashFile(snapshotPath);
-        state.Database.EvidencePaths.Add(state.Database.EvidencePath);
-        _artifacts.Add(new(
-            state.Database.EvidencePath,
-            state.Database.Sha256,
-            "database",
-            _scenarioId,
-            Environment.ProcessId,
-            _hwnd.ToInt64(),
-            _scenarioRoot,
-            _phase,
-            _processSessionId,
-            _runId,
-            _sourceHead,
-            _executablePath,
-            _executableSha256,
-            _applicationAssemblyPath,
-            _applicationAssemblySha256,
-            _modulePath,
-            _moduleSha256));
     }
 
     private static async Task CheckpointWalAsync(SqliteConnection connection)
@@ -1586,6 +1575,14 @@ internal sealed class AssetLibraryP3AutomatedAcceptanceController : IAssetLibrar
         internal int? ArchivedAssetCount { get; set; }
         internal bool WalPresentAfterClose { get; set; }
         internal bool ShmPresentAfterClose { get; set; }
+
+        internal void RecordEvidence(string relativePath, string absolutePath, string sha256)
+        {
+            EvidencePath = relativePath;
+            EvidenceAbsolutePath = absolutePath;
+            Sha256 = sha256;
+            EvidencePaths.Add(relativePath);
+        }
 
         internal void Load(JsonElement database)
         {

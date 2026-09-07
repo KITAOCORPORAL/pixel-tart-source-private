@@ -915,6 +915,7 @@ public sealed partial class SqliteAssetLibraryRepository
         AssetBatchMetadataRequest request,
         CancellationToken cancellationToken = default)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("repository.preview");
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         var ids = NormalizeBatchAssetIds(request.AssetIds);
         var requestFingerprint = ComputeP3BatchRequestFingerprint(request, ids);
@@ -955,6 +956,7 @@ public sealed partial class SqliteAssetLibraryRepository
         AssetBatchMetadataPreview previewContract,
         CancellationToken cancellationToken = default)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("repository.apply");
         ArgumentNullException.ThrowIfNull(previewContract);
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         var ids = NormalizeBatchAssetIds(request.AssetIds);
@@ -991,8 +993,10 @@ public sealed partial class SqliteAssetLibraryRepository
             return new(0, null, []);
         }
         var token = CreateUndoToken($"Update {changedCount} asset metadata rows");
-        await WriteUndoJournalAsync(connection, transaction, token, "asset-batch-metadata-v2", new P3BatchMetadataChange(simulation.Before, simulation.After), cancellationToken, journalVersion: 2).ConfigureAwait(false);
-        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        using (AssetLibraryOperationTiming.Measure("batch.journal"))
+            await WriteUndoJournalAsync(connection, transaction, token, "asset-batch-metadata-v2", new P3BatchMetadataChange(simulation.Before, simulation.After), cancellationToken, journalVersion: 2).ConfigureAwait(false);
+        using (AssetLibraryOperationTiming.Measure("batch.commit"))
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
         return new(changedCount, token, []);
     }
 
@@ -1077,11 +1081,15 @@ public sealed partial class SqliteAssetLibraryRepository
         // mutation path. Preview runs it in a transaction that is rolled back.
         await ValidateActiveIdsAsync(connection, transaction, "AssetTags", "TagId", addTags.Concat(removeTags), cancellationToken).ConfigureAwait(false);
         await ValidateActiveIdsAsync(connection, transaction, "AssetFolders", "FolderId", addFolders.Concat(removeFolders), cancellationToken).ConfigureAwait(false);
-        await CreateP3SelectionTableAsync(connection, transaction, ids, cancellationToken).ConfigureAwait(false);
-        var before = await ReadP3BatchSnapshotAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
+        using (AssetLibraryOperationTiming.Measure("batch.selection-table"))
+            await CreateP3SelectionTableAsync(connection, transaction, ids, cancellationToken).ConfigureAwait(false);
+        P3BatchSnapshot before;
+        using (AssetLibraryOperationTiming.Measure("batch.before-state"))
+            before = await ReadP3BatchSnapshotAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
         if (before.Assets.Length != ids.Count)
             throw new KeyNotFoundException($"批量请求包含 {ids.Count - before.Assets.Length} 个不存在的素材标识，未执行任何更改。");
 
+        using (AssetLibraryOperationTiming.Measure("batch.scalar-writes"))
         foreach (var asset in before.Assets)
         {
             var rating = request.ClearRating ? 0 : request.Rating ?? asset.Rating;
@@ -1090,10 +1098,15 @@ public sealed partial class SqliteAssetLibraryRepository
                 ("$rating", rating), ("$comment", comment), ("$archived", (request.IsArchived ?? asset.IsArchived) ? 1 : 0),
                 ("$missing", (request.IsMissing ?? asset.IsMissing) ? 1 : 0), ("$id", asset.AssetId.ToString("D"))).ConfigureAwait(false);
         }
+        using (AssetLibraryOperationTiming.Measure("batch.membership-writes"))
+        {
         await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetTagMemberships", "TagId", addTags, removeTags, cancellationToken).ConfigureAwait(false);
         await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetFolderMemberships", "FolderId", addFolders, removeFolders, cancellationToken).ConfigureAwait(false);
         await ApplyP3FolderAutoTagsAsync(connection, transaction, addFolders, cancellationToken).ConfigureAwait(false);
-        var after = await ReadP3BatchSnapshotAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
+        }
+        P3BatchSnapshot after;
+        using (AssetLibraryOperationTiming.Measure("batch.after-state"))
+            after = await ReadP3BatchSnapshotAsync(connection, transaction, cancellationToken).ConfigureAwait(false);
         return new(before, after);
     }
 

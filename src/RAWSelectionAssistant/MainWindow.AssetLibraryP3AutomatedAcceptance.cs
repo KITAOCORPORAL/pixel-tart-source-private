@@ -694,6 +694,7 @@ public partial class MainWindow
         var nestedElapsed = await driver.MeasureFirstPageQueryAsync(NestedEightRuleDocument());
         var preview = await driver.SaveSmartFolderAndPreviewAsync("验收性能预览", Document(AssetQueryScope.AllAssets,
             Rule(AssetQueryField.Rating, AssetQueryOperator.GreaterThanOrEqual, "4")));
+        await driver.SwitchScopeAsync(AssetQueryScope.Current);
         var scopeClock = Stopwatch.StartNew();
         await driver.SwitchScopeAsync(AssetQueryScope.AllAssets);
         scopeClock.Stop();

@@ -60,8 +60,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     new TaskOperationBridge(),
                     [new("AssetLibraryModuleDiagnostic", "asset")]);
 
-                page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
-                page.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                page.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
 
                 Assert.IsFalse(page.ViewModel.IsPreviewDiagnosticsEnabled);
                 Assert.HasCount(0, page.ViewModel.ModuleDiagnostics);
@@ -79,7 +79,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.HasCount(1, page.ViewModel.AssetCards);
                 Assert.AreEqual("synthetic-reference.jpg", page.ViewModel.AssetCards[0].Asset.DisplayName);
                 CollectionAssert.AreEqual(before, SHA256.HashData(File.ReadAllBytes(source)));
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -106,19 +106,19 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     new TaskOperationBridge(),
                     [],
                     workspaceSettings: state);
-                firstPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
-                firstPage.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                firstPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                firstPage.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
                 var asset = firstPage.ViewModel.AssetCards.Single().Asset;
                 firstPage.ViewModel.SyncSelection([asset]);
                 Assert.AreEqual(asset.AssetId, state.SelectedAssetId);
-                firstPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                firstPage.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
 
                 var restoredPage = new AssetLibraryPage(
                     databasePath,
                     new TaskOperationBridge(),
                     [],
                     workspaceSettings: state);
-                restoredPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                restoredPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 ArrangePage(restoredPage, 1600, 900);
                 var restoredGrid = FindVisualByAutomationId<ListBox>(restoredPage, "AssetGrid");
                 Assert.HasCount(1, restoredPage.ViewModel.SelectedAssets);
@@ -129,7 +129,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     () => AsyncThumbnail.PendingRequestCount == 0,
                     TimeSpan.FromSeconds(10)),
                     $"Restored selection thumbnails did not drain; pending={AsyncThumbnail.PendingRequestCount}.");
-                restoredPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                restoredPage.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
 
                 state.SelectedAssetId = Guid.NewGuid();
                 var fallbackPage = new AssetLibraryPage(
@@ -137,7 +137,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     new TaskOperationBridge(),
                     [],
                     workspaceSettings: state);
-                fallbackPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                fallbackPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 ArrangePage(fallbackPage, 1600, 900);
                 var fallbackGrid = FindVisualByAutomationId<ListBox>(fallbackPage, "AssetGrid");
                 Assert.IsNull(state.SelectedAssetId);
@@ -147,7 +147,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     () => AsyncThumbnail.PendingRequestCount == 0,
                     TimeSpan.FromSeconds(10)),
                     $"Fallback selection thumbnails did not drain; pending={AsyncThumbnail.PendingRequestCount}.");
-                fallbackPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                fallbackPage.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -178,7 +178,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     ],
                     enablePreviewFeatures: true);
 
-                page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                page.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 Assert.IsTrue(page.ViewModel.IsPreviewDiagnosticsEnabled);
                 Assert.HasCount(3, page.ViewModel.ModuleDiagnostics);
                 Assert.IsNotEmpty(page.ViewModel.Folders);
@@ -226,7 +226,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.HasCount(1, page.ViewModel.SmartFolders);
                 var savedSmartFolder = page.ViewModel.SmartFolders.Single();
                 var verificationRepository = new SqliteAssetLibraryRepository(new AssetLibraryDatabase(databasePath));
-                var savedRules = verificationRepository.ListSmartFolderRulesAsync(savedSmartFolder.SmartFolderId).GetAwaiter().GetResult();
+                var savedRules = verificationRepository.ListSmartFolderRulesAsync(savedSmartFolder.SmartFolderId).CompleteOnDispatcher();
                 Assert.HasCount(6, savedRules);
                 CollectionAssert.AreEquivalent(
                     new[]
@@ -241,13 +241,13 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     savedRules.Select(rule => rule.Field).ToArray());
                 StringAssert.Contains(page.ViewModel.Status, "已保存智能文件夹：精选参考");
                 StringAssert.Contains(page.ViewModel.Status, "视觉状态=Analyzed");
-                verificationRepository.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                verificationRepository.DisposeAsync().AsTask().CompleteOnDispatcher();
 
                 Assert.IsFalse(page.ViewModel.AnalyzeVisibleCommand.CanExecute(null));
                 var visibleStateChanges = 0;
                 page.ViewModel.AnalyzeVisibleCommand.CanExecuteChanged += (_, _) => Interlocked.Increment(ref visibleStateChanges);
 
-                page.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
 
                 Assert.IsGreaterThan(0, visibleStateChanges);
                 Assert.HasCount(0, page.ViewModel.SelectedAssets);
@@ -267,28 +267,29 @@ public sealed class EmbeddedAssetLibraryWpfTests
 
                 page.ViewModel.ExecuteVisualContextActionAsync(
                     page.ViewModel.AssetCards[0].Asset,
-                    VisualContextAction.Analyze).GetAwaiter().GetResult();
+                    VisualContextAction.Analyze).CompleteOnDispatcher();
 
                 Assert.IsGreaterThan(0, paletteStateChanges);
                 Assert.IsNotNull(page.ViewModel.Analysis);
                 Assert.IsTrue(page.ViewModel.FindPaletteSimilarCommand.CanExecute(null));
 
                 var folder = page.ViewModel.Folders[0];
-                page.ViewModel.ApplyFoldersAsync([folder.FolderId]).GetAwaiter().GetResult();
+                page.ViewModel.ApplyFoldersAsync([folder.FolderId]).CompleteOnDispatcher();
                 page.ViewModel.SyncSelection([]);
                 var folderRefreshStateChanges = Volatile.Read(ref visibleStateChanges);
                 page.ViewModel.BatchScope = nameof(VisualBatchScope.Folder);
                 Assert.IsFalse(page.ViewModel.AnalyzeVisibleCommand.CanExecute(null));
                 page.ViewModel.SelectedFolder = folder;
-                Assert.IsTrue(SpinWait.SpinUntil(
-                    () => Volatile.Read(ref visibleStateChanges) > folderRefreshStateChanges,
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => Volatile.Read(ref visibleStateChanges) > folderRefreshStateChanges &&
+                          !page.ViewModel.IsLoading && page.ViewModel.P3PendingOperationCount == 0,
                     TimeSpan.FromSeconds(5)));
                 Assert.HasCount(0, page.ViewModel.SelectedAssets);
                 Assert.HasCount(1, page.ViewModel.AssetCards);
                 Assert.IsTrue(page.ViewModel.AnalyzeVisibleCommand.CanExecute(null));
                 page.ViewModel.ExecuteVisualContextActionAsync(
                     page.ViewModel.AssetCards[0].Asset,
-                    VisualContextAction.Analyze).GetAwaiter().GetResult();
+                    VisualContextAction.Analyze).CompleteOnDispatcher();
                 Assert.IsNotNull(page.ViewModel.Analysis);
 
                 page.Measure(new Size(1600, 900));
@@ -336,7 +337,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     Assert.IsNotNull(brush);
                     Assert.AreEqual(expected, brush.Color);
                 }
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -361,12 +362,12 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     Path.Combine(root, "asset-library.db"),
                     new TaskOperationBridge(),
                     []);
-                page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
-                page.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                page.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
                 var assetA = page.ViewModel.AssetCards.Single(card => card.Asset.DisplayName == "asset-a.jpg").Asset;
                 var assetB = page.ViewModel.AssetCards.Single(card => card.Asset.DisplayName == "asset-b.jpg").Asset;
 
-                page.ViewModel.ExecuteVisualContextActionAsync(assetA, VisualContextAction.Analyze).GetAwaiter().GetResult();
+                page.ViewModel.ExecuteVisualContextActionAsync(assetA, VisualContextAction.Analyze).CompleteOnDispatcher();
                 Assert.AreEqual(assetA.AssetId, page.ViewModel.Analysis?.AssetId);
                 Assert.IsNotNull(page.ViewModel.SelectedFeatures);
                 Assert.IsTrue(page.ViewModel.FindPaletteSimilarCommand.CanExecute(null));
@@ -379,16 +380,16 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.AreNotEqual(assetA.AssetId, page.ViewModel.SelectedFeatures?.AssetId);
                 Assert.IsFalse(page.ViewModel.FindPaletteSimilarCommand.CanExecute(null));
                 Assert.IsFalse(page.ViewModel.FindSimilarCommand.CanExecute(null));
-                Assert.IsTrue(SpinWait.SpinUntil(() => !page.ViewModel.IsAnalyzing, TimeSpan.FromSeconds(5)));
+                Assert.IsTrue(PumpDispatcherUntil(() => !page.ViewModel.IsAnalyzing, TimeSpan.FromSeconds(5)));
 
                 WriteSyntheticJpeg(assetBPath, 17, 1024, 1024);
-                page.ViewModel.ExecuteVisualContextActionAsync(assetB, VisualContextAction.Analyze).GetAwaiter().GetResult();
-                Assert.IsTrue(SpinWait.SpinUntil(
+                page.ViewModel.ExecuteVisualContextActionAsync(assetB, VisualContextAction.Analyze).CompleteOnDispatcher();
+                Assert.IsTrue(PumpDispatcherUntil(
                     () => page.ViewModel.Analysis?.AssetId == assetB.AssetId && !page.ViewModel.IsAnalyzing,
                     TimeSpan.FromSeconds(10)));
                 Assert.AreEqual(assetB.AssetId, page.ViewModel.Analysis?.AssetId);
                 Assert.AreEqual(assetB.AssetId, page.ViewModel.SelectedFeatures?.AssetId);
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -451,7 +452,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
 
                 viewModel.ThumbnailWidth = 248;
                 Assert.AreEqual(248d, state.ThumbnailWidth);
-                viewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                viewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -548,7 +549,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsTrue(BindingOperations.IsDataBound(organizationColumn, ColumnDefinition.WidthProperty));
                 Assert.IsTrue(BindingOperations.IsDataBound(inspectorColumn, ColumnDefinition.WidthProperty));
                 Assert.IsTrue(collectionColumn.Width.IsStar);
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -598,7 +599,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.AreEqual(520d, state.InspectorPaneWidth,
                     "Responsive hiding or temporary fitting must not overwrite the persisted inspector width.");
                 Assert.IsTrue(state.InspectorPinned);
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -622,10 +623,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     Path.Combine(root, "asset-library.db"),
                     new TaskOperationBridge(),
                     []);
-                page.ViewModel.InitializeAsync().GetAwaiter().GetResult();
-                page.ViewModel.ImportDemoDirectoryAsync(root).GetAwaiter().GetResult();
+                page.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
                 var asset = page.ViewModel.AssetCards.Single().Asset;
-                page.ViewModel.ExecuteVisualContextActionAsync(asset, VisualContextAction.Analyze).GetAwaiter().GetResult();
+                page.ViewModel.ExecuteVisualContextActionAsync(asset, VisualContextAction.Analyze).CompleteOnDispatcher();
                 Assert.IsNotNull(page.ViewModel.SelectedFeatures);
 
                 ArrangePage(page, 1280, 820);
@@ -665,7 +666,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.HasCount(0, page.ViewModel.ActiveVisualChips);
                 Assert.IsFalse(page.ViewModel.HasActiveQuery);
                 Assert.AreEqual(asset.AssetId, page.ViewModel.AssetCards.Single().Asset.AssetId);
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -719,7 +720,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     $"Collection became unusable at {physicalWidth}x{physicalHeight} / {scale:P0}.");
                 Assert.IsGreaterThanOrEqualTo(120d, search.ActualWidth,
                     $"Search became unusable at {physicalWidth}x{physicalHeight} / {scale:P0}.");
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -747,13 +748,13 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 emptyPage.UpdateLayout();
                 Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryLoadingState").Visibility);
 
-                emptyPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                emptyPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 emptyPage.UpdateLayout();
                 Assert.IsFalse(emptyPage.ViewModel.IsLoading);
                 Assert.IsFalse(emptyPage.ViewModel.HasLoadError);
                 Assert.IsTrue(emptyPage.ViewModel.IsEmptyStateVisible);
                 Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryEmptyState").Visibility);
-                emptyPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                emptyPage.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
 
                 var blockedParent = Path.Combine(root, "blocked-parent");
                 File.WriteAllText(blockedParent, "not a directory");
@@ -761,7 +762,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     Path.Combine(blockedParent, "asset-library.db"),
                     new TaskOperationBridge(),
                     []);
-                errorPage.ViewModel.InitializeAsync().GetAwaiter().GetResult();
+                errorPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 errorPage.Measure(new Size(1280, 820));
                 errorPage.Arrange(new Rect(0, 0, 1280, 820));
                 errorPage.UpdateLayout();
@@ -770,7 +771,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsFalse(errorPage.ViewModel.IsEmptyStateVisible);
                 Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(errorPage, "AssetLibraryErrorState").Visibility);
                 Assert.IsNotNull(FindVisualByAutomationId<Button>(errorPage, "RetryAssetLibraryLoad").Command);
-                errorPage.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                errorPage.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -835,7 +836,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsFalse(page.ViewModel.IsLoading);
                 Assert.IsFalse(page.ViewModel.IsReady);
 
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -923,7 +924,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsFalse(state.OrganizationPaneCollapsed, "Tab traversal must not collapse the organization pane.");
                 Assert.IsFalse(state.InspectorPaneCollapsed, "Tab traversal must not collapse the inspector pane.");
 
-                page.ViewModel.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
         finally
@@ -1188,7 +1189,11 @@ public sealed class EmbeddedAssetLibraryWpfTests
         var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var thread = new Thread(() =>
         {
-            try { action(); completion.SetResult(); }
+            try
+            {
+                SynchronizationContext.SetSynchronizationContext(new System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Threading.Dispatcher.CurrentDispatcher));
+                action(); completion.SetResult();
+            }
             catch (Exception exception) { completion.SetException(exception); }
         });
         thread.SetApartmentState(ApartmentState.STA);

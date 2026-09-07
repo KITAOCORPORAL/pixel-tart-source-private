@@ -464,6 +464,7 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task PreviewP3BatchMetadataAsync()
     {
+        using var timing = RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryOperationTiming.Measure("viewmodel.preview");
         var previous = Interlocked.Exchange(ref _p3BatchPreviewCancellation, null);
         previous?.Cancel();
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(_lifetimeCancellation.Token);
@@ -479,7 +480,8 @@ public sealed partial class AssetLibraryViewModel
         }
         try
         {
-            var preview = await _repository.PreviewBatchMetadataAsync(BuildP3BatchMetadataRequest(), cancellation.Token);
+            var request = BuildP3BatchMetadataRequest();
+            var preview = await Task.Run(() => _repository.PreviewBatchMetadataAsync(request, cancellation.Token), cancellation.Token);
             if (generation != Volatile.Read(ref _p3BatchPreviewGeneration) || !ReferenceEquals(_p3BatchPreviewCancellation, cancellation)) return;
             _p3BatchPreviewContract = preview;
             var mixed = string.Join("、", new[] { preview.HasMixedRatings ? "评分为混合值" : null, preview.HasMixedComments ? "备注为混合值" : null }.Where(item => item is not null));
@@ -500,6 +502,7 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task ApplyP3BatchMetadataAsync()
     {
+        using var timing = RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryOperationTiming.Measure("viewmodel.apply-complete");
         var preview = _p3BatchPreviewContract;
         if (preview is null)
         {
@@ -514,7 +517,7 @@ public sealed partial class AssetLibraryViewModel
         AssetLibraryBatchResult result;
         try
         {
-            result = await _repository.ApplyBatchMetadataAsync(request, preview, _lifetimeCancellation.Token);
+            result = await Task.Run(() => _repository.ApplyBatchMetadataAsync(request, preview, _lifetimeCancellation.Token), _lifetimeCancellation.Token);
         }
         catch (Exception exception)
         {
@@ -545,7 +548,8 @@ public sealed partial class AssetLibraryViewModel
                 PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.CommittedRefreshIncomplete, result.UndoToken?.OperationId);
                 return;
             }
-            await RefreshSelectionSummaryAsync();
+            // RefreshAsync awaited the selection's current summary and inspector.
+            await Task.WhenAll(_selectionSummaryTask, _p2InspectorTask);
         }
         catch (Exception exception)
         {

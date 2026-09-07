@@ -338,6 +338,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public ObservableCollection<VisualFilterChipView> ActiveVisualChips { get; } = [];
     public ObservableCollection<VisualSearchHistoryEntry> VisualSearchHistory { get; } = [];
     public ObservableCollection<AssetItem> SelectedAssets { get; } = [];
+    private Task _selectionSummaryTask = Task.CompletedTask;
+    private long _selectionSummaryGeneration;
     public IReadOnlyList<Guid> SelectedAssetIds => _workspaceSettings.SelectedAssetIds;
     public event EventHandler? SelectionRestoreRequested;
     public ObservableCollection<AssetFolderTreeItem> FolderTree { get; } = [];
@@ -730,6 +732,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         var selected = items.DistinctBy(x => x.AssetId).ToArray();
         ApplySelectionState(selected, selected.Select(item => item.AssetId).ToArray(), replacePersistedIds: true);
+        // Programmatic product commands (for example Analyze from a context
+        // menu) must also cancel an older queued grid-selection reconciliation.
+        SelectionRestoreRequested?.Invoke(this, EventArgs.Empty);
     }
 
     public void SyncVisibleSelection(IEnumerable<AssetItem> selectedVisibleItems, IEnumerable<Guid> visibleAssetIds)
@@ -749,6 +754,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private void ApplySelectionState(IReadOnlyList<AssetItem> materialized, IReadOnlyList<Guid> desiredIds, bool replacePersistedIds)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.selection-publication");
         var previousSingleAssetId = SelectionCount == 1 ? _workspaceSettings.SelectedAssetIds[0] : (Guid?)null;
         var nextSingleAssetId = desiredIds.Count == 1 ? desiredIds[0] : (Guid?)null;
         if (previousSingleAssetId != nextSingleAssetId)
@@ -765,10 +771,10 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _workspaceSettings.SelectedAssetId = nextSingleAssetId;
         var singleMaterialized = nextSingleAssetId is Guid singleId ? materialized.FirstOrDefault(item => item.AssetId == singleId) : null;
         if (singleMaterialized is null) { _selectedAsset = null; OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
-        else if (_selectedAsset?.AssetId != singleMaterialized.AssetId) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
+        else if (_selectedAsset != singleMaterialized) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
-        _ = RefreshSelectionSummaryAsync(); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
+        _selectionSummaryTask = RunTrackedP3OperationAsync(RefreshSelectionSummaryAsync); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
         OnP2SelectionChanged(materialized);
         OnP3SelectionChanged(materialized);
         RaiseActions(); RaiseVisualActions();
@@ -776,11 +782,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task RefreshAsync()
     {
-        _ = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token);
+        await RunTrackedP3OperationAsync(async () =>
+            _ = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token));
     }
 
     private async Task<AssetLibraryRefreshOutcome> RefreshAsync(int? initializationAttempt, CancellationToken cancellationToken)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.refresh");
         CancelLoadMoreRequest();
         _queryCancellation?.Cancel();
         _queryCancellation?.Dispose();
@@ -830,7 +838,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 #endif
                 var page = initializationAttempt is int attempt && _loadStateController is not null
                     ? await _loadStateController.ExecuteInitialQueryAsync(attempt, ct => _repository.QueryAsync(query, ct), token)
-                    : await _repository.QueryAsync(query, token);
+                    : await Task.Run(() => _repository.QueryAsync(query, token), token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
                 if (initializationAttempt is not null && _loadStateController is not null)
                     _repositoryAssetCount = page.TotalCount;
@@ -840,6 +848,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                 UpdateP2QuerySummary(page.TotalCount);
             }
             await ReconcilePersistedSelectionAsync(token);
+            if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
             OnPropertyChanged(nameof(VisibleCount)); NotifyLoadMoreState();
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
             Volatile.Write(ref _p3AcceptancePublishedQueryGeneration, generation);
@@ -1491,6 +1500,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private void SetAssetCards(IEnumerable<AssetItem> assets)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.cards");
         AssetCards.Clear(); _visualMatchByAsset.Clear();
         foreach (var asset in assets) AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) });
         ReconcileSelectionWithVisibleCards();
@@ -1520,30 +1530,40 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private async Task ReconcilePersistedSelectionAsync(CancellationToken cancellationToken)
     {
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.selection-reconcile");
         var snapshot = _workspaceSettings.SelectedAssetIds.Distinct().ToArray();
         if (snapshot.Length == 0) return;
-        // The selected cards already carry the authoritative asset state for
-        // the common case. Re-query only ids that are not materialized locally;
-        // issuing one SQLite connection per selected id made a scope switch
-        // scale linearly with a large batch selection.
-        var materialized = SelectedAssets.ToDictionary(asset => asset.AssetId);
-        var missingIds = snapshot.Where(id => !materialized.ContainsKey(id)).ToArray();
-        var fetched = missingIds.Length == 0
-            ? Array.Empty<AssetItem?>()
-            : await Task.WhenAll(missingIds.Select(id => _repository.GetAssetAsync(id, cancellationToken)));
-        var fetchedById = fetched.Where(asset => asset is not null).Cast<AssetItem>()
-            .ToDictionary(asset => asset.AssetId);
-        var assets = snapshot.Select(id => materialized.GetValueOrDefault(id) ?? fetchedById.GetValueOrDefault(id)).ToArray();
-        var archiveScope = BuildQuery().EffectiveArchiveScope;
-        var resolved = assets
-            .Where(asset => asset is not null && (asset.IsArchived
-                ? archiveScope is AssetLibraryArchiveScope.ArchivedOnly or AssetLibraryArchiveScope.All
-                : archiveScope is AssetLibraryArchiveScope.ActiveOnly or AssetLibraryArchiveScope.All))
-            .Cast<AssetItem>()
-            .ToArray();
+        // Only freshly queried cards prove membership. Cached selected records
+        // can be stale or outside the current folder/tag/smart-folder result.
+        var current = AssetCards.ToDictionary(card => card.Asset.AssetId, card => card.Asset);
+        var missingIds = snapshot.Where(id => !current.ContainsKey(id)).ToArray();
+        var query = BuildQuery() with { Cursor = null, PageSize = 500 };
+        foreach (var chunk in missingIds.Chunk(500))
+        {
+            var restricted = query with { CandidateAssetIds = chunk };
+            if (_visualResultMode == VisualResultMode.Filter && _visualFilter is not null)
+            {
+                string? cursor = null;
+                do
+                {
+                    var page = await _visualQuery.QueryAsync(new(restricted, _visualFilter, 500, cursor), cancellationToken);
+                    foreach (var match in page.Items) current[match.Asset.AssetId] = match.Asset;
+                    cursor = page.NextCursor;
+                } while (cursor is not null);
+            }
+            else if (_visualResultMode == VisualResultMode.None)
+            {
+                var page = await Task.Run(() => _repository.QueryAsync(restricted, cancellationToken), cancellationToken);
+                foreach (var asset in page.Items) current[asset.AssetId] = asset;
+            }
+            // Similarity/color results are bounded, fully materialized lists.
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        var resolved = snapshot.Where(current.ContainsKey).Select(id => current[id]).ToArray();
         if (!_workspaceSettings.SelectedAssetIds.SequenceEqual(snapshot)) return;
         ApplySelectionState(resolved, resolved.Select(asset => asset.AssetId).ToArray(), replacePersistedIds: true);
         SelectionRestoreRequested?.Invoke(this, EventArgs.Empty);
+        await Task.WhenAll(_selectionSummaryTask, _p2InspectorTask);
     }
 
     private void UpdateActiveVisualLabel() => VisualModeLabel = string.Join(" + ", ActiveVisualChips.Select(chip => chip.Label));
@@ -1624,7 +1644,21 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         else if (BatchStatus.StartsWith("批量分析未开始：", StringComparison.Ordinal)) BatchStatus = string.Empty;
     }
 
-    private async Task RefreshSelectionSummaryAsync() { SelectedTagSummary.Clear(); if (SelectedAssets.Count == 0) return; foreach (var item in await _repository.GetTagUsageSummaryAsync(SelectedAssets.Select(x => x.AssetId))) SelectedTagSummary.Add(item); }
+    private async Task RefreshSelectionSummaryAsync()
+    {
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.tag-summary");
+        var generation = ++_selectionSummaryGeneration;
+        var ids = SelectedAssets.Select(x => x.AssetId).ToArray();
+        SelectedTagSummary.Clear();
+        if (ids.Length == 0) return;
+        try
+        {
+            var items = await Task.Run(() => _repository.GetTagUsageSummaryAsync(ids, _lifetimeCancellation.Token), _lifetimeCancellation.Token);
+            if (generation != _selectionSummaryGeneration || !SelectedAssets.Select(x => x.AssetId).SequenceEqual(ids)) return;
+            foreach (var item in items) SelectedTagSummary.Add(item);
+        }
+        catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
+    }
     private async Task RefreshSelectedFeaturesAsync(AssetItem asset)
     {
         try { var features = await _featureStore.GetFeaturesAsync(asset.AssetId); if (SelectedAssets.Count == 1 && SelectedAssets[0].AssetId == asset.AssetId) SelectedFeatures = features.Summary; }
@@ -1632,11 +1666,19 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     }
     private async Task RefreshFilterListsAsync(CancellationToken cancellationToken = default)
     {
-        Folders.Clear(); foreach (var folder in await _repository.ListFoldersAsync(cancellationToken: cancellationToken)) Folders.Add(folder); RefreshClassifierFolders();
-        FolderTree.Clear(); foreach (var node in await _repository.GetFolderTreeAsync(cancellationToken: cancellationToken)) FolderTree.Add(node);
-        Tags.Clear(); foreach (var tag in await _repository.ListTagsAsync(cancellationToken: cancellationToken)) Tags.Add(tag); TagGroups.Clear(); foreach (var group in await _repository.ListTagGroupsAsync(cancellationToken: cancellationToken)) TagGroups.Add(group);
+        using var timing = AssetLibraryOperationTiming.Measure("viewmodel.organizations");
+        var data = await Task.Run(async () => (
+            Folders: await _repository.ListFoldersAsync(cancellationToken: cancellationToken),
+            Tree: await _repository.GetFolderTreeAsync(cancellationToken: cancellationToken),
+            Tags: await _repository.ListTagsAsync(cancellationToken: cancellationToken),
+            Groups: await _repository.ListTagGroupsAsync(cancellationToken: cancellationToken),
+            Smart: await _repository.ListSmartFoldersAsync(cancellationToken: cancellationToken)), cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        Folders.Clear(); foreach (var folder in data.Folders) Folders.Add(folder); RefreshClassifierFolders();
+        FolderTree.Clear(); foreach (var node in data.Tree) FolderTree.Add(node);
+        Tags.Clear(); foreach (var tag in data.Tags) Tags.Add(tag); TagGroups.Clear(); foreach (var group in data.Groups) TagGroups.Add(group);
         OnPropertyChanged(nameof(P3FolderReferenceOptions)); OnPropertyChanged(nameof(P3TagReferenceOptions));
-        SmartFolders.Clear(); foreach (var folder in await _repository.ListSmartFoldersAsync(cancellationToken: cancellationToken)) SmartFolders.Add(folder);
+        SmartFolders.Clear(); foreach (var folder in data.Smart) SmartFolders.Add(folder);
         FavoriteFolders.Clear(); foreach (var folder in Folders.Where(x => !string.IsNullOrWhiteSpace(x.Color)).Take(6)) FavoriteFolders.Add(folder);
         await RefreshP2OrganizationAsync(cancellationToken);
     }

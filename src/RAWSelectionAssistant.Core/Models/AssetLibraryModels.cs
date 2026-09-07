@@ -230,6 +230,9 @@ public sealed record AssetLibraryQuery(
     /// </summary>
     public AssetQueryDocument? Document { get; init; }
 
+    /// <summary>Optional candidate intersection, never an alternative to the query's filters.</summary>
+    public IReadOnlyList<Guid>? CandidateAssetIds { get; init; }
+
     /// <summary>
     /// Parameterized global-search clauses that are ANDed independently. This is
     /// used when a transient current-scope query is composed with a saved smart

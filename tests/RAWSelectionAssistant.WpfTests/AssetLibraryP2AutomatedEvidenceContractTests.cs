@@ -183,6 +183,9 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
                 {
                     try
                     {
+                        var directory = new DirectoryInfo(path);
+                        if ((directory.Attributes & FileAttributes.ReparsePoint) != 0)
+                            return false;
                         using var document = JsonDocument.Parse(File.ReadAllText(System.IO.Path.Combine(path, "run-manifest.json")));
                         return document.RootElement.TryGetProperty("automated_capture_status", out var status) &&
                                status.GetString() == "captured";
@@ -190,7 +193,7 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
                     catch { return false; }
                 })
             : null;
-        if (candidate is null) Assert.Inconclusive("No captured P2 run root is available for the read-only integration probe.");
+        if (candidate is null) Assert.Inconclusive("No captured non-reparse P2 run root is available for the read-only integration probe.");
         var before = TreeFingerprint(candidate);
         var runner = Path("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");
         var result = StartPowerShell(new[] { "-File", runner, "-Mode", "ValidateExistingRun", "-RunRoot", candidate }, repository);

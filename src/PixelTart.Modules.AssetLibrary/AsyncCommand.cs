@@ -5,13 +5,14 @@ namespace PixelTart.Modules.AssetLibrary;
 public sealed class AsyncCommand(Func<Task> execute, Func<bool>? canExecute = null) : ICommand
 {
     private bool _running;
+    public Task ExecutionTask { get; private set; } = Task.CompletedTask;
     public event EventHandler? CanExecuteChanged;
     public bool CanExecute(object? parameter) => !_running && (canExecute?.Invoke() ?? true);
     public async void Execute(object? parameter)
     {
         if (!CanExecute(parameter)) return;
         _running = true; RaiseCanExecuteChanged();
-        try { await execute(); }
+        try { ExecutionTask = execute(); await ExecutionTask; }
         finally { _running = false; RaiseCanExecuteChanged(); }
     }
     public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);

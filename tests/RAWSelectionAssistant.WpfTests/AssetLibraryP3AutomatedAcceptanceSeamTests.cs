@@ -402,7 +402,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             "CaptureResultAssetIds", "ResolveAcceptanceDocumentAsync", "ResolveQueryReferencesAsync",
             "P3SmartFolderSortField = document.SortField", "P3SmartFolderSortDirection = document.SortDirection",
             "P3SmartFolderIncludeArchived = document.IncludeArchived",
-            "P3QueryScope = scope", "SwitchViewCommand.Execute",
+            "SetP3AcceptanceScopeAsync(scope)", "SwitchViewCommand.Execute",
             "SaveP3SmartFolderCommand.Execute", "RetryP3SmartFolderPreviewCommand.Execute",
             "CreateP3TagGroupCommand.Execute", "RenameP3TagGroupCommand.Execute",
             "MoveP3TagGroupCommand.Execute", "CreateP3TagCommand.Execute", "RenameP3TagCommand.Execute",

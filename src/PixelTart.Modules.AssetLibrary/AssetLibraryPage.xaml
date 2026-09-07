@@ -828,7 +828,7 @@
                         </Border>
                     </StackPanel>
 
-                     <ListBox x:Name="AssetGrid" Grid.Row="2" ItemsSource="{Binding AssetCards}"
+                     <local:AssetLibrarySelectionListBox x:Name="AssetGrid" Grid.Row="2" ItemsSource="{Binding AssetCards}"
                              IsEnabled="{Binding IsReady}"
                              Background="Transparent"
                              SelectionMode="Extended" SelectionChanged="AssetGrid_SelectionChanged"
@@ -848,7 +848,7 @@
                                     ThumbnailWidth="{Binding DataContext.ThumbnailWidth, RelativeSource={RelativeSource AncestorType=ListBox}}" />
                              </ItemsPanelTemplate>
                          </ListBox.ItemsPanel>
-                      </ListBox>
+                      </local:AssetLibrarySelectionListBox>
 
                       <Border Grid.Row="3" Margin="0,8,0,0" Padding="8,5"
                               Background="{DynamicResource SurfaceSecondaryBrush}"

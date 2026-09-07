@@ -284,8 +284,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _applyingViewModelSelection = true;
         try
         {
-            AssetGrid.SelectedItems.Clear();
-            foreach (var card in cards) AssetGrid.SelectedItems.Add(card);
+            AssetGrid.ReplaceSelection(cards);
         }
         finally { _applyingViewModelSelection = false; }
 
@@ -361,12 +360,12 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             if (pendingSelectionSync.Status == DispatcherOperationStatus.Pending) pendingSelectionSync.Abort();
         }
         var selectedIds = _viewModel.SelectedAssetIds.ToHashSet();
+        var desiredCards = _viewModel.AssetCards.Where(card => selectedIds.Contains(card.Asset.AssetId)).ToArray();
+        if (AssetGrid.SelectedItems.Cast<AssetVisualMatchView>().ToHashSet().SetEquals(desiredCards)) return;
         _applyingViewModelSelection = true;
         try
         {
-            AssetGrid.SelectedItems.Clear();
-            foreach (var card in _viewModel.AssetCards.Where(card => selectedIds.Contains(card.Asset.AssetId)))
-                AssetGrid.SelectedItems.Add(card);
+            AssetGrid.ReplaceSelection(desiredCards);
         }
         finally
         {

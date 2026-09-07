@@ -1547,7 +1547,8 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
         ContainsAll(controller,
             "\"app\",", "\"evidence\",", "\"databases\",",
             "$\"{scenarioToken}-{_phase}.db\"",
-            "state.Database.EvidencePaths.Add(state.Database.EvidencePath)");
+            "state.Database.RecordEvidence(RelativeToRunRoot(snapshotPath), snapshotPath, HashFile(snapshotPath))",
+            "EvidencePaths.Add(relativePath)");
         ContainsAll(validator,
             "$databaseEvidenceRoot = Full (Join-Path $root 'app\\evidence\\databases')",
             "$expectedDatabaseEvidencePaths = @(",
@@ -1561,27 +1562,6 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
             "A one-item conditional result is unwrapped to a string and makes [-1] return the last character.");
         Assert.IsFalse(validator.Contains("DB evidence escapes scenario root", StringComparison.Ordinal));
         Assert.IsFalse(validator.Contains("DB evidence history escapes scenario root", StringComparison.Ordinal));
-    }
-
-    [TestMethod]
-    public void ScopeChangesBypassFreeTextDebounce()
-    {
-        var viewModel = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3QueryComposer.cs");
-        ContainsAll(viewModel,
-            "// Scope changes are explicit navigation, not free-text input.",
-            "CommitP3QueryDocument(scheduleRefresh: false);",
-            "internal async Task SetP3AcceptanceScopeAsync(AssetQueryScope scope)",
-            "if (IsReady && !_isRestoringWorkspace) await RefreshAsync();");
-    }
-
-    [TestMethod]
-    public void SelectionReconciliationReusesMaterializedAssets()
-    {
-        var viewModel = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs");
-        ContainsAll(viewModel,
-            "var materialized = SelectedAssets.ToDictionary(asset => asset.AssetId);",
-            "var missingIds = snapshot.Where(id => !materialized.ContainsKey(id)).ToArray();",
-            "var fetchedById = fetched.Where(asset => asset is not null)");
     }
 
     [TestMethod]
