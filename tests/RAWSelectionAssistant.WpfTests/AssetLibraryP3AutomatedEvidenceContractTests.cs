@@ -1540,6 +1540,26 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void DatabaseEvidenceProducerAndValidatorUseDedicatedImmutableRunDirectory()
+    {
+        var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs");
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        ContainsAll(controller,
+            "\"app\",", "\"evidence\",", "\"databases\",",
+            "$\"{scenarioToken}-{_phase}.db\"",
+            "state.Database.EvidencePaths.Add(state.Database.EvidencePath)");
+        ContainsAll(validator,
+            "$databaseEvidenceRoot = Full (Join-Path $root 'app\\evidence\\databases')",
+            "app/evidence/databases/$scenarioToken-primary.db",
+            "app/evidence/databases/$scenarioToken-restart.db",
+            "DB evidence escapes the dedicated database evidence root",
+            "DB evidence history escapes the dedicated database evidence root",
+            "active DB path escapes scenario root");
+        Assert.IsFalse(validator.Contains("DB evidence escapes scenario root", StringComparison.Ordinal));
+        Assert.IsFalse(validator.Contains("DB evidence history escapes scenario root", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");

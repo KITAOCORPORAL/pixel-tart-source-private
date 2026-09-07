@@ -1158,6 +1158,7 @@ Require-Equal $summary.run_id $manifest.run_id 'summary run id'
 Require-Equal $summary.source_head $manifest.source_head 'summary head'
 $scenarios = @($summary.scenarios)
 Require-Equal $scenarios.Count 14 'summary scenario count'
+$databaseEvidenceRoot = Full (Join-Path $root 'app\evidence\databases')
 for ($index = 0; $index -lt 14; $index++) {
     $scenario = $scenarios[$index]
     Require-Equal $scenario.id $expectedScenarios[$index] "scenario[$index] id"
@@ -1181,19 +1182,26 @@ for ($index = 0; $index -lt 14; $index++) {
     Require-Equal ([bool]$scenario.database.shm_present_after_close) $false "scenario[$index] DB SHM after close"
     $databaseRelativePath = [string]$scenario.database.path
     Assert-CanonicalRunFilePath $databaseRelativePath "scenario[$index] DB evidence path"
+    $scenarioToken = ([string]$scenario.id).Replace('/', '-')
+    $hasRestartDatabase = $expectedRestarts -ccontains [string]$scenario.id
+    $expectedDatabaseEvidencePaths = if ($hasRestartDatabase) {
+        @("app/evidence/databases/$scenarioToken-primary.db", "app/evidence/databases/$scenarioToken-restart.db")
+    } else {
+        @("app/evidence/databases/$scenarioToken-primary.db")
+    }
+    Require-Equal $databaseRelativePath $expectedDatabaseEvidencePaths[-1] "scenario[$index] final DB evidence path"
     $databaseEvidencePath = Full (Join-Path $root $databaseRelativePath.Replace('/', [IO.Path]::DirectorySeparatorChar))
-    if (-not (Inside $databaseEvidencePath $scenarioRoot)) { Fail "scenario[$index] DB evidence escapes scenario root." }
+    if (-not (Inside $databaseEvidencePath $databaseEvidenceRoot)) { Fail "scenario[$index] DB evidence escapes the dedicated database evidence root." }
     [void](Require-File $databaseEvidencePath "scenario[$index] DB evidence")
     Require-Equal (Full $scenario.database.absolute_path) $databaseEvidencePath "scenario[$index] DB evidence absolute path"
     Require-Equal (Hash $databaseEvidencePath) $scenario.database.sha256 "scenario[$index] DB evidence hash"
     $databaseEvidencePaths = @($scenario.database.evidence_paths | ForEach-Object { [string]$_ })
-    if ($databaseEvidencePaths.Count -lt 1 -or $databaseEvidencePaths[-1] -cne $databaseRelativePath) {
-        Fail "scenario[$index] final DB evidence is not the final database reference."
-    }
+    Require-Equal ($databaseEvidencePaths -join '|') ($expectedDatabaseEvidencePaths -join '|') `
+        "scenario[$index] DB evidence history"
     foreach ($databaseEvidenceRelativePath in $databaseEvidencePaths) {
         Assert-CanonicalRunFilePath $databaseEvidenceRelativePath "scenario[$index] DB evidence history path"
         $databaseEvidenceHistoryPath = Full (Join-Path $root $databaseEvidenceRelativePath.Replace('/', [IO.Path]::DirectorySeparatorChar))
-        if (-not (Inside $databaseEvidenceHistoryPath $scenarioRoot)) { Fail "scenario[$index] DB evidence history escapes scenario root." }
+        if (-not (Inside $databaseEvidenceHistoryPath $databaseEvidenceRoot)) { Fail "scenario[$index] DB evidence history escapes the dedicated database evidence root." }
         [void](Require-File $databaseEvidenceHistoryPath "scenario[$index] DB evidence history")
     }
     $activeDatabasePath = Full $scenario.database.active_database_absolute_path
