@@ -1584,6 +1584,18 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void ScopePerformanceMeasuresOneExplicitNavigation()
+    {
+        var acceptance = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP3AutomatedAcceptance.cs");
+        var start = acceptance.IndexOf("var scopeClock = Stopwatch.StartNew();", StringComparison.Ordinal);
+        var end = acceptance.IndexOf("scopeClock.Stop();", start, StringComparison.Ordinal);
+        Assert.IsTrue(start >= 0 && end > start);
+        var measured = acceptance[start..end];
+        Assert.HasCount(1, Regex.Matches(measured, "SwitchScopeAsync\\("));
+        StringAssert.Contains(measured, "AssetQueryScope.AllAssets");
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");

@@ -695,7 +695,6 @@ public partial class MainWindow
         var preview = await driver.SaveSmartFolderAndPreviewAsync("验收性能预览", Document(AssetQueryScope.AllAssets,
             Rule(AssetQueryField.Rating, AssetQueryOperator.GreaterThanOrEqual, "4")));
         var scopeClock = Stopwatch.StartNew();
-        await driver.SwitchScopeAsync(AssetQueryScope.Current);
         await driver.SwitchScopeAsync(AssetQueryScope.AllAssets);
         scopeClock.Stop();
         var measuredBatch100 = await driver.ExecuteMeasuredBatchTagCommandAsync(100);
