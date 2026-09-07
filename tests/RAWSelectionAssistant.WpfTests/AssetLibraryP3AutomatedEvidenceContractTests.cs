@@ -1427,6 +1427,40 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
     }
 
     [TestMethod]
+    public void ValidatorExitCodeContractAcceptsCurrentAndLegacyIntegerWidthsRejectsMissingField()
+    {
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        ContainsAll(validator, "function Require-IntegerEqual", "Require-IntegerProperty $session 'exit_code'", "must compare JSON integer numbers");
+        var helperStart = validator.IndexOf("function Fail", StringComparison.Ordinal);
+        var helperEnd = validator.IndexOf("function Quote-ProcessArgument", helperStart, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, helperStart);
+        Assert.IsGreaterThan(helperStart, helperEnd);
+        var helperScript = validator[helperStart..helperEnd];
+        var temp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"pixel-tart-p3-exit-contract-{Guid.NewGuid():N}.ps1");
+        try
+        {
+            var probe = helperScript + @"
+$currentProducer = [pscustomobject]@{ exit_code = [int64]0 }
+$legacyProducer = [pscustomobject]@{ exit_code = [int32]0 }
+Require-IntegerEqual (Require-IntegerProperty $currentProducer 'exit_code' 'current') 0 'current exit'
+Require-IntegerEqual (Require-IntegerProperty $legacyProducer 'exit_code' 'legacy') 0 'legacy exit'
+$missingRejected = $false
+try { [void](Require-IntegerProperty ([pscustomobject]@{}) 'exit_code' 'missing') } catch { $missingRejected = $true }
+if (-not $missingRejected) { throw 'missing exit_code was accepted' }
+'pass'
+";
+            File.WriteAllText(temp, probe, System.Text.Encoding.UTF8);
+            var result = Start("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", temp]);
+            Assert.AreEqual(0, result.ExitCode, $"Exit-code contract probe failed: {result.Output} {result.Error}");
+            StringAssert.Contains(result.Output, "pass");
+        }
+        finally
+        {
+            if (File.Exists(temp)) File.Delete(temp);
+        }
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");

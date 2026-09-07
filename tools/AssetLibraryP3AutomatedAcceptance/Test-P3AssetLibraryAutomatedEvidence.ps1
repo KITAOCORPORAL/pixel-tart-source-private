@@ -262,6 +262,17 @@ print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
 function Require-Equal($Actual, $Expected, [string]$Name) {
     if (-not [object]::Equals($Actual, $Expected)) { Fail "$Name differs (actual='$Actual', expected='$Expected')." }
 }
+function Require-IntegerEqual($Actual, $Expected, [string]$Name) {
+    $integerTypes = [type[]]@([sbyte], [byte], [int16], [uint16], [int32], [uint32], [int64])
+    if ($null -eq $Actual -or $null -eq $Expected -or
+        -not ($integerTypes -contains $Actual.GetType()) -or
+        -not ($integerTypes -contains $Expected.GetType())) {
+        Fail "$Name must compare JSON integer numbers."
+    }
+    if ([int64]$Actual -ne [int64]$Expected) {
+        Fail "$Name differs (actual='$Actual', expected='$Expected')."
+    }
+}
 function Require-String($Value, [string]$Name, [string]$Pattern = '^.+$') {
     if ($Value -isnot [string] -or $Value -cnotmatch $Pattern) { Fail "$Name is missing or invalid." }
 }
@@ -918,7 +929,7 @@ for ($index = 0; $index -lt $sessions.Count; $index++) {
     Require-Equal $session.schema $contract.runner_session_result_schema "session[$index] schema"
     Require-Equal $session.status 'completed' "session[$index] status"
     Require-Equal $session.scenario_id $expectedSessionScenarios[$index] "session[$index] scenario"
-    Require-Equal (Require-IntegerProperty $session 'exit_code' "session[$index]") 0 "session[$index] exit"
+    Require-IntegerEqual (Require-IntegerProperty $session 'exit_code' "session[$index]") 0 "session[$index] exit"
     Require-String $session.process_session_id "session[$index] process session" '^[0-9a-f]{32}$'
     if (-not $seenSessions.Add([string]$session.process_session_id)) { Fail 'runner process session id is reused.' }
     Require-Equal $session.source_head $manifest.source_head "session[$index] head"
@@ -950,7 +961,7 @@ for ($index = 0; $index -lt $sessions.Count; $index++) {
         Require-Equal (Property-Value $independentResult $field) (Property-Value $session $field) `
             "session[$index] independent result $field binding"
     }
-    Require-Equal (Require-IntegerProperty $independentResult 'exit_code' "session[$index] independent result") 0 `
+    Require-IntegerEqual (Require-IntegerProperty $independentResult 'exit_code' "session[$index] independent result") 0 `
         "session[$index] independent result exit"
 
     $phaseSummaryPath = Full $session.phase_summary_path
