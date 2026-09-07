@@ -1522,7 +1522,18 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         var snapshot = _workspaceSettings.SelectedAssetIds.Distinct().ToArray();
         if (snapshot.Length == 0) return;
-        var assets = await Task.WhenAll(snapshot.Select(id => _repository.GetAssetAsync(id, cancellationToken)));
+        // The selected cards already carry the authoritative asset state for
+        // the common case. Re-query only ids that are not materialized locally;
+        // issuing one SQLite connection per selected id made a scope switch
+        // scale linearly with a large batch selection.
+        var materialized = SelectedAssets.ToDictionary(asset => asset.AssetId);
+        var missingIds = snapshot.Where(id => !materialized.ContainsKey(id)).ToArray();
+        var fetched = missingIds.Length == 0
+            ? Array.Empty<AssetItem?>()
+            : await Task.WhenAll(missingIds.Select(id => _repository.GetAssetAsync(id, cancellationToken)));
+        var fetchedById = fetched.Where(asset => asset is not null).Cast<AssetItem>()
+            .ToDictionary(asset => asset.AssetId);
+        var assets = snapshot.Select(id => materialized.GetValueOrDefault(id) ?? fetchedById.GetValueOrDefault(id)).ToArray();
         var archiveScope = BuildQuery().EffectiveArchiveScope;
         var resolved = assets
             .Where(asset => asset is not null && (asset.IsArchived

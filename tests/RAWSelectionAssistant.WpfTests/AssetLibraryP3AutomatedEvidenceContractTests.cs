@@ -1574,6 +1574,16 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void SelectionReconciliationReusesMaterializedAssets()
+    {
+        var viewModel = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs");
+        ContainsAll(viewModel,
+            "var materialized = SelectedAssets.ToDictionary(asset => asset.AssetId);",
+            "var missingIds = snapshot.Where(id => !materialized.ContainsKey(id)).ToArray();",
+            "var fetchedById = fetched.Where(asset => asset is not null)");
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");
