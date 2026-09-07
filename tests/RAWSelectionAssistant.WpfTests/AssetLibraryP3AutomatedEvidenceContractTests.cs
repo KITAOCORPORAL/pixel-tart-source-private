@@ -1512,6 +1512,34 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void RunnerProcessStageNamesMatchContractAndRejectLegacyHyphenNames()
+    {
+        var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        var contract = Read("tools/AssetLibraryP3AutomatedAcceptance/automated-acceptance-contract.json");
+        ContainsAll(runner,
+            "$stageContractNames = @",
+            "'completion-handshake' = 'completion_handshake'",
+            "'shutdown-preparation' = 'shutdown_preparation'",
+            "'application-on-exit-enter' = 'application_on_exit_enter'",
+            "'phase-summary-commit' = 'phase_summary_commit'",
+            "'application-on-exit-completed' = 'application_on_exit_completed'",
+            "'process-exit' = 'process_exit'",
+            "name = 'process_table_convergence'");
+        ContainsAll(validator,
+            "completion_handshake", "shutdown_preparation", "application_on_exit_enter",
+            "phase_summary_commit", "application_on_exit_completed", "process_exit",
+            "process_table_convergence");
+        ContainsAll(contract,
+            "\"completion_handshake\"", "\"shutdown_preparation\"", "\"application_on_exit_enter\"",
+            "\"phase_summary_commit\"", "\"application_on_exit_completed\"", "\"process_exit\"",
+            "\"process_table_convergence\"");
+        Assert.IsFalse(runner.Contains("name = 'completion-handshake'", StringComparison.Ordinal));
+        Assert.IsFalse(runner.Contains("name = 'phase-summary-commit'", StringComparison.Ordinal));
+        Assert.IsFalse(runner.Contains("name = 'process-table-convergence'", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
     public void RunnerImplementsFourModesSealedSiblingValidationAndFourWayHandshake()
     {
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");

@@ -1242,10 +1242,19 @@ function Invoke-P3ObservedStage {
         [scriptblock]$Probe,
         [bool]$FailIfProcessAlreadyExited = $true
     )
+    $stageContractNames = @{
+        'completion-handshake' = 'completion_handshake'
+        'shutdown-preparation' = 'shutdown_preparation'
+        'application-on-exit-enter' = 'application_on_exit_enter'
+        'phase-summary-commit' = 'phase_summary_commit'
+        'application-on-exit-completed' = 'application_on_exit_completed'
+        'process-exit' = 'process_exit'
+    }
+    $stageContractName = if ($stageContractNames.ContainsKey($Name)) { $stageContractNames[$Name] } else { $Name }
     $stageStarted = [int64]$SharedClock.ElapsedMilliseconds
     $stageCapMilliseconds = [int64]$CapSeconds * 1000L
     $stage = [pscustomobject][ordered]@{
-        name = $Name
+        name = $stageContractName
         cap_seconds = $CapSeconds
         started_at_elapsed_milliseconds = $stageStarted
         completed_at_elapsed_milliseconds = $null
@@ -1684,7 +1693,7 @@ function Wait-RunnerOwnedProcessExit {
         foreach ($failure in @($convergence.observation_failures)) { $observationFailures.Add($failure) }
         $convergenceCompleted = [int64]$sharedClock.ElapsedMilliseconds
         $stages.Add([pscustomobject][ordered]@{
-            name = 'process-table-convergence'
+            name = 'process_table_convergence'
             cap_seconds = $script:p3ProcessStageTimeoutSeconds.process_table_convergence
             started_at_elapsed_milliseconds = $convergenceStageStarted
             completed_at_elapsed_milliseconds = $convergenceCompleted
