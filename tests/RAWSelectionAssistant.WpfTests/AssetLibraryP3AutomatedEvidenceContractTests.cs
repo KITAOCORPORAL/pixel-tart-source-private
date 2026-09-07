@@ -985,6 +985,54 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     [int]$exitedContentionStages[0].transient_file_contention_count -eq 1 -and
                     $exitedContentionFailures.Count -eq 0 -and $exitedContentionTimeline.Count -eq 0
 
+                $exitBoundaryProcess = Start-HarnessProcess 'exit 0'
+                [void]$exitBoundaryProcess.WaitForExit(5000); $exitBoundaryProcess.WaitForExit()
+                $exitBoundaryClock = [Diagnostics.Stopwatch]::StartNew()
+                $exitBoundaryState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $exitBoundaryTimeline = [Collections.Generic.List[object]]::new()
+                $exitBoundaryStages = [Collections.Generic.List[object]]::new()
+                $exitBoundaryFailures = [Collections.Generic.List[object]]::new()
+                $script:exitBoundaryProbeCount = 0
+                $exitBoundaryDetail = Invoke-P3ObservedStage 'exit-boundary-final-read' 2 `
+                    $exitBoundaryClock 2000 $exitBoundaryProcess $exitBoundaryState $exitBoundaryTimeline `
+                    $exitBoundaryStages $exitBoundaryFailures {
+                        $script:exitBoundaryProbeCount++
+                        [pscustomobject]@{
+                            satisfied=$script:exitBoundaryProbeCount -ge 2
+                            detail=$(if ($script:exitBoundaryProbeCount -ge 2) { 'complete-after-exit-flush' } else { 'not-yet-complete' })
+                        }
+                    } $true
+                $exitBoundaryProcess.Dispose()
+                $exitBoundaryFinalReadAccepted = $exitBoundaryDetail -ceq 'complete-after-exit-flush' -and
+                    $script:exitBoundaryProbeCount -eq 2 -and -not $exitBoundaryState.observed -and
+                    $exitBoundaryStages[0].outcome -ceq 'observed' -and
+                    $exitBoundaryFailures.Count -eq 0 -and $exitBoundaryTimeline.Count -eq 0
+
+                $exitBoundaryMissingProcess = Start-HarnessProcess 'exit 0'
+                [void]$exitBoundaryMissingProcess.WaitForExit(5000); $exitBoundaryMissingProcess.WaitForExit()
+                $exitBoundaryMissingClock = [Diagnostics.Stopwatch]::StartNew()
+                $exitBoundaryMissingState = [pscustomobject]@{ observed=$false; exit_code=$null; observed_at_utc='' }
+                $exitBoundaryMissingTimeline = [Collections.Generic.List[object]]::new()
+                $exitBoundaryMissingStages = [Collections.Generic.List[object]]::new()
+                $exitBoundaryMissingFailures = [Collections.Generic.List[object]]::new()
+                $script:exitBoundaryMissingProbeCount = 0; $exitBoundaryMissingFailure = $null
+                try {
+                    [void](Invoke-P3ObservedStage 'exit-boundary-missing' 2 $exitBoundaryMissingClock 2000 `
+                        $exitBoundaryMissingProcess $exitBoundaryMissingState $exitBoundaryMissingTimeline `
+                        $exitBoundaryMissingStages $exitBoundaryMissingFailures {
+                            $script:exitBoundaryMissingProbeCount++
+                            [pscustomobject]@{ satisfied=$false; detail='still-missing' }
+                        } $true)
+                } catch { $exitBoundaryMissingFailure = $_ }
+                $exitBoundaryMissingProcess.Dispose()
+                $exitBoundaryMissingStillRejected = $null -ne $exitBoundaryMissingFailure -and
+                    $exitBoundaryMissingFailure.Exception.Message.Contains("exited before required stage 'exit-boundary-missing'") -and
+                    $script:exitBoundaryMissingProbeCount -eq 2 -and $exitBoundaryMissingState.observed -and
+                    $exitBoundaryMissingStages[0].outcome -ceq 'failed' -and $exitBoundaryMissingFailures.Count -eq 0 -and
+                    @($exitBoundaryMissingTimeline | Where-Object {
+                        $_.event -ceq 'premature-exit' -and $_.outcome -ceq 'failed'
+                    }).Count -eq 1
+
                 $persistentPath = Join-Path $harnessRoot 'persistent-contention.ndjson'
                 $persistentMarker = Join-Path $harnessRoot 'persistent-contention.locked'
                 [IO.File]::WriteAllText($persistentPath, 'ready', [Text.UTF8Encoding]::new($false))
@@ -1330,6 +1378,8 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     partial_tail_timeout_preserved_primary=$partialTailTimeoutPreservedPrimary
                     transient_contention_recovered=$transientContentionRecovered
                     transient_contention_precedes_exit_check=$transientContentionPrecedesExitCheck
+                    exit_boundary_final_read_accepted=$exitBoundaryFinalReadAccepted
+                    exit_boundary_missing_still_rejected=$exitBoundaryMissingStillRejected
                     persistent_contention_timed_out=$persistentContentionTimedOut
                     nonsharing_io_failed_closed=$nonSharingIoFailedClosed
                     transient_empty_path_retried=$transientEmptyPathRetried
@@ -1363,6 +1413,7 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                           "partial_tail_natural_exit_preserved_primary", "partial_tail_timeout_preserved_primary",
                           "id_to_pid", "cim_datetime_accepted", "cim_throw_failed_closed", "outside_root_rejected",
                           "transient_contention_recovered", "transient_contention_precedes_exit_check", "persistent_contention_timed_out", "nonsharing_io_failed_closed",
+                          "exit_boundary_final_read_accepted", "exit_boundary_missing_still_rejected",
                           "transient_empty_path_retried", "persistent_empty_path_failed_closed",
                           "wrong_hash_rejected", "exited_identity_rejected", "normal_process_passed",
                           "nonzero_process_rejected", "premature_exit_marked_failed", "natural_exit_skipped_kill", "owner_check_exit_skipped_kill", "timeout_killed", "primary_preserved_with_cleanup_failure"

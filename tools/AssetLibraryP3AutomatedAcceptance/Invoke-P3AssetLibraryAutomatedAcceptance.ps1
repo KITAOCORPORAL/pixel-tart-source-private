@@ -1410,8 +1410,66 @@ function Invoke-P3ObservedStage {
                 return $observation.detail
             }
             if ($FailIfProcessAlreadyExited -and -not $transientContentionObserved) {
-                Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'premature'
-                if ([bool]$ProcessState.observed) {
+                $Process.Refresh()
+                if ($Process.HasExited) {
+                    # A process handle can become signalled after the first probe but before
+                    # its final write-through evidence is visible to that probe. Flush the
+                    # redirected streams and perform one final authenticated read before
+                    # classifying the exit as premature. Missing or invalid evidence still
+                    # fails closed below.
+                    $Process.WaitForExit()
+                    $finalObservation = $null
+                    $finalContention = $null
+                    try { $finalObservation = & $Probe }
+                    catch {
+                        $finalContention = Get-P3TransientFileContention $_.Exception
+                        if ($null -ne $finalContention) {
+                            $stage.transient_file_contention_count = [int]$stage.transient_file_contention_count + 1
+                            $stage.last_transient_file_contention = [pscustomobject][ordered]@{
+                                observed_at_elapsed_milliseconds = [int64]$SharedClock.ElapsedMilliseconds
+                                win32_error_code = [int]$finalContention.win32_error_code
+                                hresult = [int]$finalContention.hresult
+                                message = [string]$finalContention.message
+                            }
+                        } else {
+                            $ObservationFailures.Add((ConvertTo-StructuredFailure 'observation' $Name $_))
+                            $_.Exception.Data['p3_stage'] = $Name
+                            $_.Exception.Data['p3_observation_failure'] = $true
+                            throw
+                        }
+                    }
+                    if ($null -ne $finalObservation) {
+                        $finalTailFailureProperty = $finalObservation.PSObject.Properties['failure_tail_observation_failure']
+                        if ($null -ne $finalTailFailureProperty -and $null -ne $finalTailFailureProperty.Value) {
+                            $ObservationFailures.Add($finalTailFailureProperty.Value)
+                        }
+                        $finalApplicationFailureProperty = $finalObservation.PSObject.Properties['application_failure']
+                        if ($null -ne $finalApplicationFailureProperty -and $null -ne $finalApplicationFailureProperty.Value) {
+                            $pendingApplicationFailure = $finalApplicationFailureProperty.Value
+                            $stage.outcome = 'application-reported-failure'
+                            $stage.detail = $pendingApplicationFailure
+                            if (-not $applicationFailureAnnounced) {
+                                Add-ProcessExitTimelineEvent $Timeline 'application-reported-failure' 'authenticated' `
+                                    $pendingApplicationFailure
+                                $applicationFailureAnnounced = $true
+                            }
+                            Update-P3RetainedProcessExitState $Process $ProcessState $Timeline `
+                                'application-reported-failure'
+                            & $readFinalFailureTailAfterProcessExit $pendingApplicationFailure
+                            throw (New-P3ApplicationReportedFailureException $pendingApplicationFailure)
+                        }
+                        if ([bool]$finalObservation.satisfied) {
+                            $stage.outcome = 'observed'
+                            $stage.detail = $finalObservation.detail
+                            return $finalObservation.detail
+                        }
+                    }
+                    if ($null -ne $finalContention) {
+                        $sleepMilliseconds = [int][Math]::Min(100, [Math]::Min($sharedRemaining, $stageRemaining))
+                        if ($sleepMilliseconds -gt 0) { [Threading.Thread]::Sleep($sleepMilliseconds) }
+                        continue
+                    }
+                    Update-P3RetainedProcessExitState $Process $ProcessState $Timeline 'premature'
                     $missing = [InvalidOperationException]::new(
                         "P3 app process exited before required stage '$Name' evidence was complete.")
                     $missing.Data['p3_stage'] = $Name
