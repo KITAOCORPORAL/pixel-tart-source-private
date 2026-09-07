@@ -52,6 +52,21 @@ public sealed partial class AssetLibraryViewModel
         }
     }
 
+    internal async Task SetP3AcceptanceScopeAsync(AssetQueryScope scope)
+    {
+        if (!Enum.IsDefined(scope)) scope = AssetQueryScope.Current;
+        if (_p3QueryScope != scope)
+        {
+            _p3QueryScope = scope;
+            _workspaceSettings.QueryScope = scope;
+            OnPropertyChanged(nameof(P3QueryScope));
+            OnPropertyChanged(nameof(IsP3CurrentScope));
+            OnPropertyChanged(nameof(IsP3AllAssetsScope));
+            CommitP3QueryDocument(scheduleRefresh: false);
+        }
+        if (IsReady && !_isRestoringWorkspace) await RefreshAsync();
+    }
+
     public bool IsP3CurrentScope
     {
         get => P3QueryScope == AssetQueryScope.Current;

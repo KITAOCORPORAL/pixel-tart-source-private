@@ -435,7 +435,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
     {
         EnsureNotDisposed();
         var previousGeneration = _viewModel.P3AcceptanceQueryGeneration;
-        _viewModel.P3QueryScope = scope;
+        await _viewModel.SetP3AcceptanceScopeAsync(scope);
         await WaitForPublishedQueryAfterAsync(previousGeneration, $"the P3 scope '{scope}' query");
         if (_viewModel.P3QueryScope != scope)
             throw new InvalidOperationException($"The P3 scope switch did not publish '{scope}'.");
