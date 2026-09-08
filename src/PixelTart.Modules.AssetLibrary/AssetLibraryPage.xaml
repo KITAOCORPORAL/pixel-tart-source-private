@@ -738,7 +738,7 @@
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />
-                        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
+                        <ScrollViewer x:Name="LegacyBrowserToolbar" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
                                       HorizontalScrollBarVisibility="Hidden"
                                       VerticalScrollBarVisibility="Disabled"
                                       CanContentScroll="False"
@@ -769,10 +769,16 @@
                                 <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserRedo" />
                             </StackPanel>
                         </ScrollViewer>
+                        <StackPanel x:Name="FocusedBrowserToolbar" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,4,0,0" Orientation="Horizontal">
+                            <Button Content="视图" Click="ViewMenu_Click" Style="{StaticResource AssetLibraryChipButton}" ToolTip="网格、瀑布流、两端对齐或列表" />
+                            <Button Content="排序" Click="SortMenu_Click" Style="{StaticResource AssetLibraryChipButton}" ToolTip="选择排序字段和方向" />
+                            <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibraryChipButton}" />
+                        </StackPanel>
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" IsEnabled="{Binding IsReady}" AutomationProperties.AutomationId="VisualFilterChips">
-                        <WrapPanel>
+                        <WrapPanel x:Name="VisualPresetButtons">
                             <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryChipButton}" />
                             <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryChipButton}" />
                             <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" Style="{StaticResource AssetLibraryChipButton}" />

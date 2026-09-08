@@ -551,7 +551,8 @@ public partial class App : Application
                     assetLibraryDemoDirectory,
                     workspaceSettings,
                     _logService,
-                    assetLibraryP1StateController),
+                    assetLibraryP1StateController,
+                    focusedChrome: true),
                 portableSettings,
                 _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
 #endif

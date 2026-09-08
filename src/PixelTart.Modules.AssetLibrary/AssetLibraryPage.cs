@@ -17,6 +17,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private readonly AssetLibraryViewModel _viewModel;
     private readonly bool _enablePreviewFeatures;
     private readonly string? _demoDirectory;
+    private readonly bool _focusedChrome;
     private bool _initialized;
     private bool _disposed;
     private readonly object _disposeSync = new();
@@ -51,9 +52,14 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         string? demoDirectory = null,
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
         ILogService? logService = null,
-        IAssetLibraryLoadStateController? loadStateController = null)
+        IAssetLibraryLoadStateController? loadStateController = null,
+        bool focusedChrome = false)
     {
         InitializeComponent();
+        _focusedChrome = focusedChrome;
+        LegacyBrowserToolbar.Visibility = focusedChrome ? Visibility.Collapsed : Visibility.Visible;
+        FocusedBrowserToolbar.Visibility = focusedChrome ? Visibility.Visible : Visibility.Collapsed;
+        VisualPresetButtons.Visibility = focusedChrome ? Visibility.Collapsed : Visibility.Visible;
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
@@ -194,6 +200,26 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     }
 
     private static MenuItem CreateMoreItem(string header, ICommand command) => new() { Header = header, Command = command };
+
+    private void ViewMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        var menu = new ContextMenu { PlacementTarget = button, Placement = PlacementMode.Bottom };
+        foreach (var pair in new[] { ("网格", "Grid"), ("瀑布流", "Masonry"), ("两端对齐", "Justified"), ("列表", "List") })
+            menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SwitchViewCommand, CommandParameter = pair.Item2 });
+        menu.IsOpen = true;
+    }
+
+    private void SortMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        var menu = new ContextMenu { PlacementTarget = button, Placement = PlacementMode.Bottom };
+        foreach (var pair in new[] { ("添加时间", "AddedAt"), ("拍摄时间", "CaptureTime"), ("文件名", "FileName"), ("文件大小", "FileSize"), ("评分", "Rating"), ("颜色", "Color"), ("视觉分析", "VisualAnalysis") })
+            menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SortBrowserCommand, CommandParameter = pair.Item2 });
+        menu.Items.Add(new Separator());
+        menu.Items.Add(new MenuItem { Header = _viewModel.SortDirectionLabel, Command = _viewModel.ToggleSortDirectionCommand });
+        menu.IsOpen = true;
+    }
 
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
