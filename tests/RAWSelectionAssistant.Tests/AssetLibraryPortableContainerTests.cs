@@ -86,4 +86,59 @@ public sealed class AssetLibraryPortableContainerTests
 
         await Assert.ThrowsExactlyAsync<InvalidDataException>(() => new AssetLibraryContainerService().OpenAsync(path));
     }
+
+    [TestMethod]
+    public async Task Open_RejectsTamperedOrDuplicateManifestProperties()
+    {
+        using var temp = new TempDirectory();
+        var service = new AssetLibraryContainerService();
+        var tampered = temp.Combine("tampered.ptlibrary");
+        await service.CreateAsync(tampered, "可信名称");
+        var manifestPath = Path.Combine(tampered, AssetLibraryContainerService.ManifestFileName);
+        var json = await File.ReadAllTextAsync(manifestPath);
+        await File.WriteAllTextAsync(manifestPath, System.Text.RegularExpressions.Regex.Replace(
+            json,
+            "\\\"payload_sha256\\\": \\\"[0-9a-f]{64}\\\"",
+            "\\\"payload_sha256\\\": \\\"0000000000000000000000000000000000000000000000000000000000000000\\\""));
+        await Assert.ThrowsExactlyAsync<InvalidDataException>(() => service.OpenAsync(tampered));
+
+        var duplicate = temp.Combine("duplicate.ptlibrary");
+        await service.CreateAsync(duplicate, "重复属性");
+        manifestPath = Path.Combine(duplicate, AssetLibraryContainerService.ManifestFileName);
+        json = await File.ReadAllTextAsync(manifestPath);
+        await File.WriteAllTextAsync(manifestPath, json.Replace("{", "{\n  \"display_name\": \"伪造\",", StringComparison.Ordinal));
+        await Assert.ThrowsExactlyAsync<InvalidDataException>(() => service.OpenAsync(duplicate));
+    }
+
+    [TestMethod]
+    public async Task WriterLease_RejectsSecondWriterAndAllowsReopenAfterRelease()
+    {
+        using var temp = new TempDirectory();
+        var service = new AssetLibraryContainerService();
+        var descriptor = await service.CreateAsync(temp.Combine("locked.ptlibrary"), "锁测试");
+
+        await using (var first = await service.AcquireWriteLeaseAsync(descriptor))
+        {
+            Assert.AreEqual(descriptor.LibraryId, first.Owner.LibraryId);
+            Assert.IsGreaterThan(0, first.Owner.ProcessId);
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(() => service.AcquireWriteLeaseAsync(descriptor));
+        }
+
+        await using var reopened = await service.AcquireWriteLeaseAsync(descriptor);
+        Assert.AreNotEqual(Guid.Empty, reopened.Owner.LeaseId);
+    }
+
+    [TestMethod]
+    public async Task Create_TargetExists_DoesNotOverwriteOrDeleteIt()
+    {
+        using var temp = new TempDirectory();
+        var path = temp.Combine("existing.ptlibrary");
+        Directory.CreateDirectory(path);
+        var sentinel = Path.Combine(path, "keep.txt");
+        await File.WriteAllTextAsync(sentinel, "keep");
+
+        await Assert.ThrowsExactlyAsync<IOException>(() => new AssetLibraryContainerService().CreateAsync(path, "existing"));
+        Assert.AreEqual("keep", await File.ReadAllTextAsync(sentinel));
+        Assert.HasCount(0, Directory.GetDirectories(temp.Path, ".existing.ptlibrary.staging-*"));
+    }
 }
