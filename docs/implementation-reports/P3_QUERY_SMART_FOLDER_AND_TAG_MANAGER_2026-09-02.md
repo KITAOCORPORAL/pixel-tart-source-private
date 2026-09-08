@@ -1,15 +1,15 @@
 # Pixel Tart P3 通用筛选、智能文件夹与标签管理实施报告
 
-日期：2026-09-03  
-结论：**BLOCKED（产品候选已实现，正式自动验收闭环未关闭）**
+日期：2026-09-03（2026-09-08 完成正式关闭）
+结论：**COMPLETE（2026-09-08：同一最终候选 HEAD 三轮正式自动验收、每轮独立 validator 与 run-set 全部通过）**
 
 起点分支：`source-private/feature/asset-library-eagle-parity-p2`  
 起点完整 SHA：`c5fde036e13abd2039d517f2a4022e9a32452c2f`  
 P3 分支：`feature/asset-library-eagle-parity-p3-query-metadata`  
-当前验收候选代码 HEAD：`689692a5e87cfb3db94d1080dbb9392894fb5487`
+当前验收候选代码 HEAD：`2d47b88767952a589805579814cc20572146c12b`
 交付文档提交后的最终 SHA：由包含本报告的 Git 提交决定，以最终 `git ls-remote` 核验和交付回传为准；Git 提交无法在自身正文中自含自己的哈希。
 
-> `BLOCKED` 同时包含两项事实：附件要求的“同一最终 HEAD 三轮独立正式 Run + 每轮只读 validator + run-set 聚合”尚未产生，当前计数为 `0/3`；2026-09-03 新授权窗口的两次诊断修复 campaign 已用完，第三个最终 campaign 的第一轮又因场景完成后的进程退出超时失败，触发限定停止。它不否定已经提交并通过本地测试的产品候选，也绝不把失败轮次的局部证据拼接成成功闭环。
+> 2026-09-03 的 `BLOCKED` 结论作为历史诊断保留；它已被本文末尾“2026-09-08 正式关闭记录”取代。关闭只使用最终候选 `2d47b887...` 的三个完整成功根，不拼接任何失败轮次的局部证据。
 
 ## 1. 结论与 P3 边界
 
@@ -424,3 +424,52 @@ P3 提交的回滚必须用 `git revert <完整 SHA>`，不得 reset/clean。对
 - 本地验收候选代码 HEAD：`689692a5e87cfb3db94d1080dbb9392894fb5487`
 - 报告提交后最终 HEAD：以最终 `git rev-parse HEAD` 与 `git ls-remote source-private refs/heads/feature/asset-library-eagle-parity-p3-query-metadata` 的完全一致结果为准，并在最终回传给出完整 SHA。
 - 不创建 PR、不合并 `main`、不合并其他功能分支、不改写历史。
+
+## 16. 2026-09-08 正式关闭记录
+
+本节取代第 9、10、11、14、15 节中的旧 `BLOCKED` 总结，但不删除其历史诊断价值。最终受测产品代码 HEAD 为 `2d47b88767952a589805579814cc20572146c12b`；包含本文更新的交付提交是该 HEAD 的纯文档后继，以最终远端核验为准。
+
+### 16.1 定点修复与回归
+
+- 等待智能文件夹归档/恢复、公开验收命令和选中项检查器稳定完成，消除异步竞态。
+- 批量应用不再重建全库标签摘要；完整卡片刷新通过一次 collection reset 发布，避免 500 项刷新形成 UI 长阻塞。
+- 性能驱动只计量公开 Apply 到稳定完成的产品边界，setup、undo/redo 不混入门槛。
+- validator 的安全来源整数比较按数值语义处理，消除 `Int64(0)` 与 `Int32(0)` 的误拒绝。
+- 定向 WPF/验收 seam 回归 `48/48`，证据契约回归 `24/24`。此前已通过的数据库 `44/44`、Core `1260/1260`、Modular Harness `14/14` 和 WPF 全量 `1133 passed / 0 failed / 2 skipped` 未重复运行。
+
+### 16.2 10,128 项性能诊断
+
+物理证据根：`D:\AI AGENT\worktrees\modular-harness-v1\.validation\P3-Performance-20260908-092307`。fixture 为 schema v7，10,128 项（10,000 active、128 archived）。修复后 3 个独立样本位于 `samples-after-global-summary-fix`：
+
+| 指标 | 三样本范围/最差值 | 门槛 | 结果 |
+|---|---:|---:|---|
+| 100 项公开批量应用 | 260.87–292.48 ms | ≤750 ms | PASS |
+| 500 项公开批量应用 | 359.19–362.39 ms | ≤2000 ms | PASS |
+| UI dispatcher 最大间隔 | 最差 72.99 ms（另一批最差 67.91 ms） | ≤100 ms | PASS |
+
+未修改任何正式阈值。
+
+### 16.3 三轮正式自动验收
+
+三个根均为真实物理目录、非重解析点，使用同一 source HEAD `2d47b887...`。每轮均完成 17/17 个真实 WPF 进程会话、封存输入、进程退出/清理、安全计数和正常独立 validator；每个 validator 均执行 70 项负向证明。
+
+| 轮次 | Run ID | 证据根尾段 | 100 项 | 500 项 | UI block | 结果 |
+|---:|---|---|---:|---:|---:|---|
+| 1 | `p3-auto-1d1a1d95d5a948b2a5be0e6658a4e63f` | `P3-Automated-Acceptance-20260908-103340-404b54ae6377` | 322.95 ms | 398.85 ms | 78.35 ms | PASS |
+| 2 | `p3-auto-221270162e274a9b82c13b65dcf7c4d5` | `P3-Automated-Acceptance-20260908-113223-d11d6351ee0c` | 335.95 ms | 412.65 ms | 70.39 ms | PASS |
+| 3 | `p3-auto-1ea81e085f504b2a8cdd4d3b11d19e50` | `P3-Automated-Acceptance-20260908-123744-16be9840baf8` | 340.12 ms | 406.42 ms | 49.80 ms | PASS |
+
+三轮最差：首屏 21.08 ms、建议 7.11 ms、单筛选 26.88 ms、8 规则嵌套查询 84.60 ms、智能文件夹预览 26 ms、scope 切换 215.63 ms、100 项 340.12 ms、500 项 412.65 ms、UI block 78.35 ms；全部低于固定门槛。
+
+一次候选第三轮 `P3-Automated-Acceptance-20260908-123029-dab85521e3dd` 的 UI block 为 106.89 ms，validator 正确拒绝；该失败根保留且不计数。空闲环境中的全新替代轮通过。更早的竞态、真实性能失败、validator 类型错误及并行误启动根也全部保留，不计入三轮。
+
+### 16.4 run-set 与安全关闭
+
+run-set：`D:\AI AGENT\worktrees\modular-harness-v1\.validation\P3-Formal-2d47b88-20260908\P3-Automated-RunSet-20260908\p3-automated-run-set-2d47b8876795-20260908T081732057Z-e3ecb46afa1e4a638ab7195bb12d411e.json`。
+
+- 状态 `passed`，run count `3`；三个 run root、run ID、51 个 process identity/session 全部唯一。
+- 630 个证据文件路径互不重叠；三个 run-owned validator 的 SHA-256 一致，均再次完整执行 70 项负向证明并 PASS。
+- 三轮 `process_cleanup_verified=true`；数据库均为 schema v7，WAL/SHM 清理完成。
+- 用户源文件写/移/删、Eagle IO、网络上传、永久删除、桌面输入注入、UIA Invoke、真实显示设置写入和 residual process 均为 0。
+
+因此 P3 十二层门已全部关闭，总状态由历史 `BLOCKED` 更新为 **COMPLETE**。P3.5 只允许从包含本关闭记录的最终 P3 交付点创建新分支。
