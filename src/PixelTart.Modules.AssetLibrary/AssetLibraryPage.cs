@@ -72,6 +72,13 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     public AssetLibraryViewModel ViewModel => _viewModel;
 
+    public async Task RefreshForSessionAsync()
+    {
+        if (!_viewModel.RefreshCommand.CanExecute(null)) return;
+        _viewModel.RefreshCommand.Execute(null);
+        await _viewModel.RefreshCommand.ExecutionTask;
+    }
+
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
         await InitializeForSessionAsync();

@@ -17,6 +17,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     private readonly Func<string, AssetLibraryPage> _pageFactory;
     private readonly AssetLibraryContainerService _containers = new();
     private readonly AssetLibraryPackageService _packages = new();
+    private readonly AssetLibraryMergeService _merger = new();
     private readonly AssetLibraryPortableSettings _settings;
     private readonly Func<Task>? _persistSettings;
     private readonly string _legacyDatabasePath;
@@ -97,6 +98,10 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         _menu.Items.Add(MenuItem("迁移本机旧库…", (_, _) => MigrateLegacyLibraryAsync()));
         _menu.Items.Add(MenuItem("导出素材包…", (_, _) => ExportPackageAsync()));
         _menu.Items.Add(MenuItem("从素材包导入新库…", (_, _) => ImportPackageAsync()));
+        var mergeMenu = new MenuItem { Header = "合并…" };
+        mergeMenu.Items.Add(MenuItem("合并素材库…", (_, _) => MergeLibraryAsync()));
+        mergeMenu.Items.Add(MenuItem("合并素材包…", (_, _) => MergePackageAsync()));
+        _menu.Items.Add(mergeMenu);
         _menu.Items.Add(new Separator());
         _menu.Items.Add(MenuItem("重新定位离线库…", (_, _) => RelocateOfflineLibraryAsync()));
         _menu.Items.Add(MenuItem("定位当前库…", (_, _) => LocateCurrentLibrary()));
@@ -115,7 +120,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     private void RefreshRecentMenu()
     {
-        while (_menu.Items.Count > 10) _menu.Items.RemoveAt(10);
+        while (_menu.Items.Count > 11) _menu.Items.RemoveAt(11);
         if (_settings.RecentLibraries.Count == 0)
         {
             _menu.Items.Add(new MenuItem { Header = "暂无最近素材库", IsEnabled = false });
@@ -338,6 +343,45 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
         { _state.Text = $"素材包导入失败：{exception.Message}；当前库保持不变。"; }
     }
+
+    private async void MergeLibraryAsync()
+    {
+        if (_descriptor is null) { _state.Text = "请先打开目标可迁移素材库。"; return; }
+        var dialog = new OpenFolderDialog { Title = "选择要合并的素材库", Multiselect = false };
+        if (dialog.ShowDialog() != true) return;
+        try
+        {
+            var source = await _containers.OpenAsync(dialog.FolderName);
+            var preview = await _merger.PreviewLibraryAsync(_descriptor, source);
+            if (!ConfirmMerge(source.DisplayName, preview)) return;
+            var result = await _merger.MergeLibraryAsync(_descriptor, source);
+            await _page!.RefreshForSessionAsync();
+            _state.Text = result.AlreadyApplied ? "此来源已合并过，没有重复写入。" : $"合并完成 · 新增 {result.AddedAssets} · 复用重复 {result.ReusedAssets}";
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or ArgumentException)
+        { _state.Text = $"合并失败：{exception.Message}；目标库已回滚。"; }
+    }
+
+    private async void MergePackageAsync()
+    {
+        if (_descriptor is null) { _state.Text = "请先打开目标可迁移素材库。"; return; }
+        var dialog = new OpenFileDialog { Title = "选择要合并的素材包", Filter = "素材包 (*.ptpack)|*.ptpack", Multiselect = false };
+        if (dialog.ShowDialog() != true) return;
+        try
+        {
+            var preview = await _merger.PreviewPackageAsync(_descriptor, dialog.FileName);
+            if (!ConfirmMerge(Path.GetFileName(dialog.FileName), preview)) return;
+            var result = await _merger.MergePackageAsync(_descriptor, dialog.FileName);
+            await _page!.RefreshForSessionAsync();
+            _state.Text = result.AlreadyApplied ? "此素材包已合并过，没有重复写入。" : $"素材包合并完成 · 新增 {result.AddedAssets} · 复用重复 {result.ReusedAssets}";
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or ArgumentException)
+        { _state.Text = $"素材包合并失败：{exception.Message}；目标库已回滚。"; }
+    }
+
+    private static bool ConfirmMerge(string sourceName, AssetLibraryMergePreview preview) => MessageBox.Show(
+        $"来源：{sourceName}\n新增素材：{preview.NewAssets}\n按内容复用：{preview.DuplicateAssets}\nID 冲突：{preview.IdConflicts}\n文件夹：{preview.NewFolders}\n标签：{preview.NewTags}\n智能文件夹：{preview.NewSmartFolders}\n预计复制：{preview.EstimatedCopyBytes / 1024d / 1024d:F1} MB\n\n确认后以单事务合并。",
+        "合并预览", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK;
 
     private void LocateCurrentLibrary()
     {
