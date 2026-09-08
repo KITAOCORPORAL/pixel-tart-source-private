@@ -272,6 +272,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         document = await ResolveAcceptanceDocumentAsync(document);
         var previousGeneration = BeginApplyQueryDocument(document);
         await WaitForPublishedQueryAfterAsync(previousGeneration, "the real P3 query composer refresh");
+        await _viewModel.SubmitP3SearchCommand.ExecutionTask;
     }
 
     public async Task<AssetQueryDocument> ResolveAcceptanceDocumentAsync(
@@ -585,10 +586,11 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         await WaitUntilAsync(() => _viewModel.P3QuerySuggestions.Count > 0, "the real repository-backed P3 suggestions");
         var suggestionCount = _viewModel.P3QuerySuggestions.Count;
         _viewModel.SubmitP3SearchCommand.Execute(null);
-        await WaitUntilAsync(() => _viewModel.SubmitP3SearchCommand.CanExecute(null) &&
-                                 _viewModel.P3QueryHistory.Any(item => string.Equals(item.Text, searchText, StringComparison.Ordinal)),
+        await _viewModel.SubmitP3SearchCommand.ExecutionTask;
+        await WaitUntilAsync(() => _viewModel.P3QueryHistory.Any(item => string.Equals(item.Text, searchText, StringComparison.Ordinal)),
             "the persisted P3 search history");
         _viewModel.SubmitP3SearchCommand.Execute(null);
+        await _viewModel.SubmitP3SearchCommand.ExecutionTask;
         await DrainDispatcherAsync();
         var deduplicated = _viewModel.P3QueryHistory.Count(item =>
             string.Equals(item.Text, searchText, StringComparison.OrdinalIgnoreCase)) == 1;
@@ -602,6 +604,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
 
         _viewModel.SearchText = searchText;
         _viewModel.SubmitP3SearchCommand.Execute(null);
+        await _viewModel.SubmitP3SearchCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3QueryHistory.Any(item =>
             string.Equals(item.Text, searchText, StringComparison.OrdinalIgnoreCase)),
             "the restored P3 history entry");
@@ -611,6 +614,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
 
         _viewModel.SearchText = searchText;
         _viewModel.SubmitP3SearchCommand.Execute(null);
+        await _viewModel.SubmitP3SearchCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3QueryHistory.Any(item =>
             string.Equals(item.Text, searchText, StringComparison.OrdinalIgnoreCase)),
             "the final persisted P3 history entry");
@@ -654,6 +658,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.SaveP3SmartFolderCommand.CanExecute(null))
             throw new InvalidOperationException("The public Save Smart Folder command rejected the valid acceptance document.");
         _viewModel.SaveP3SmartFolderCommand.Execute(null);
+        await _viewModel.SaveP3SmartFolderCommand.ExecutionTask;
         await WaitUntilAsync(() => !_viewModel.P3SmartFolderLoading &&
                                  _viewModel.SmartFolders.Any(item => string.Equals(item.Name, name, StringComparison.Ordinal)),
             "the public Save Smart Folder command");
@@ -663,6 +668,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.CopyP3SmartFolderCommand.CanExecute(null))
             throw new InvalidOperationException("The public Copy Smart Folder command was unavailable after save.");
         _viewModel.CopyP3SmartFolderCommand.Execute(null);
+        await _viewModel.CopyP3SmartFolderCommand.ExecutionTask;
         await WaitUntilAsync(() => !_viewModel.P3SmartFolderLoading &&
                                  !string.Equals(_viewModel.P3SmartFolderName, name, StringComparison.Ordinal),
             "the public Copy Smart Folder command");
@@ -692,6 +698,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             ?? throw new InvalidOperationException("The persisted Smart Folder disappeared before preview.");
         var persistedBeforeCanonical = AssetQueryDocumentCodec.SerializeCanonical(persistedBeforePreview.Document);
         _viewModel.RetryP3SmartFolderPreviewCommand.Execute(null);
+        await _viewModel.RetryP3SmartFolderPreviewCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.RetryP3SmartFolderPreviewCommand.CanExecute(null) &&
                                  !_viewModel.P3SmartFolderPreviewLoading,
             "the real P3 smart-folder preview");
@@ -739,6 +746,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             ?? throw new InvalidOperationException("The persisted P3 Smart Folder disappeared before restart preview.");
         var persistedBeforeCanonical = AssetQueryDocumentCodec.SerializeCanonical(persistedBefore.Document);
         _viewModel.RetryP3SmartFolderPreviewCommand.Execute(null);
+        await _viewModel.RetryP3SmartFolderPreviewCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.RetryP3SmartFolderPreviewCommand.CanExecute(null) &&
                                  !_viewModel.P3SmartFolderPreviewLoading,
             "the persisted P3 Smart Folder explicit restart preview");
@@ -844,6 +852,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.RenameP3TagGroupCommand.CanExecute(null))
             throw new InvalidOperationException("The public Rename Tag Group command was unavailable for the selected group.");
         _viewModel.RenameP3TagGroupCommand.Execute(null);
+        await _viewModel.RenameP3TagGroupCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var groups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
@@ -900,6 +909,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.RenameP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Rename Tag command was unavailable for the selected tag.");
         _viewModel.RenameP3TagCommand.Execute(null);
+        await _viewModel.RenameP3TagCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
@@ -942,6 +952,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.MoveP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Move Tag command was unavailable for the selected tag.");
         _viewModel.MoveP3TagCommand.Execute(null);
+        await _viewModel.MoveP3TagCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
@@ -958,6 +969,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.ToggleArchiveP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Archive Tag command was unavailable for the selected tag.");
         _viewModel.ToggleArchiveP3TagCommand.Execute(null);
+        await _viewModel.ToggleArchiveP3TagCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
@@ -975,6 +987,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.ToggleArchiveP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Restore Tag command was unavailable for the selected archived tag.");
         _viewModel.ToggleArchiveP3TagCommand.Execute(null);
+        await _viewModel.ToggleArchiveP3TagCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
@@ -1010,11 +1023,13 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.PreviewP3TagMergeCommand.CanExecute(null))
             throw new InvalidOperationException("The public Tag Merge Preview command rejected a valid source and target.");
         _viewModel.PreviewP3TagMergeCommand.Execute(null);
+        await _viewModel.PreviewP3TagMergeCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3TagMergePreviewReady,
             "the public Tag Merge Preview command");
         if (!_viewModel.MergeP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Merge Tags command was unavailable after preview.");
         _viewModel.MergeP3TagCommand.Execute(null);
+        await _viewModel.MergeP3TagCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var tags = await _acceptanceRepository.ListTagsAsync(includeArchived: true, cancellationToken: cancellationToken);
@@ -1083,6 +1098,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.CreateP3TagGroupCommand.CanExecute(null))
             throw new InvalidOperationException("The public Create Tag Group command rejected a valid name.");
         _viewModel.CreateP3TagGroupCommand.Execute(null);
+        await _viewModel.CreateP3TagGroupCommand.ExecutionTask;
         await WaitUntilAsync(async () =>
         {
             var groups = await _acceptanceRepository.ListTagGroupsAsync(includeArchived: true, cancellationToken);
@@ -1103,6 +1119,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.CreateP3TagCommand.CanExecute(null))
             throw new InvalidOperationException("The public Create Tag command rejected a valid name.");
         _viewModel.CreateP3TagCommand.Execute(null);
+        await _viewModel.CreateP3TagCommand.ExecutionTask;
         await WaitUntilAsync(() => !_viewModel.P3TagManagerLoading &&
                                  _viewModel.P3ManagedTags.Any(item => string.Equals(item.Name, name, StringComparison.Ordinal)),
             "the public Create Tag command");
@@ -1524,11 +1541,13 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.P2UndoCommand.CanExecute(null))
             throw new InvalidOperationException("The public undo command is unavailable after the metadata command.");
         _viewModel.P2UndoCommand.Execute(null);
+        await _viewModel.P2UndoCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P2RedoCommand.CanExecute(null), "the public P2 redo command after undo");
         var undoStatus = _viewModel.Status;
         if (!_viewModel.P2RedoCommand.CanExecute(null))
             throw new InvalidOperationException("The public redo command is unavailable after undo.");
         _viewModel.P2RedoCommand.Execute(null);
+        await _viewModel.P2RedoCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P2UndoCommand.CanExecute(null), "the public P2 undo command after redo");
         return new("undo-redo", _viewModel.SelectionCount, string.Empty, undoStatus, _viewModel.Status, _viewModel.P2UndoCommand.CanExecute(null));
     }
