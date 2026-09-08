@@ -16,6 +16,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 {
     private readonly Func<string, AssetLibraryPage> _pageFactory;
     private readonly AssetLibraryContainerService _containers = new();
+    private readonly AssetLibraryPackageService _packages = new();
     private readonly AssetLibraryPortableSettings _settings;
     private readonly Func<Task>? _persistSettings;
     private readonly string _legacyDatabasePath;
@@ -94,6 +95,8 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         _menu.Items.Add(MenuItem("新建素材库…", (_, _) => CreateLibraryAsync()));
         _menu.Items.Add(MenuItem("打开素材库…", (_, _) => OpenLibraryAsync()));
         _menu.Items.Add(MenuItem("迁移本机旧库…", (_, _) => MigrateLegacyLibraryAsync()));
+        _menu.Items.Add(MenuItem("导出素材包…", (_, _) => ExportPackageAsync()));
+        _menu.Items.Add(MenuItem("从素材包导入新库…", (_, _) => ImportPackageAsync()));
         _menu.Items.Add(new Separator());
         _menu.Items.Add(MenuItem("重新定位离线库…", (_, _) => RelocateOfflineLibraryAsync()));
         _menu.Items.Add(MenuItem("定位当前库…", (_, _) => LocateCurrentLibrary()));
@@ -112,7 +115,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     private void RefreshRecentMenu()
     {
-        while (_menu.Items.Count > 8) _menu.Items.RemoveAt(8);
+        while (_menu.Items.Count > 10) _menu.Items.RemoveAt(10);
         if (_settings.RecentLibraries.Count == 0)
         {
             _menu.Items.Add(new MenuItem { Header = "暂无最近素材库", IsEnabled = false });
@@ -302,6 +305,38 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
         { _state.Text = $"迁移失败：{exception.Message}；旧库未修改。"; }
+    }
+
+    private async void ExportPackageAsync()
+    {
+        if (_descriptor is null) { _state.Text = "请先打开可迁移素材库，再导出素材包。"; return; }
+        var dialog = new SaveFileDialog { Title = "导出素材包（包含托管原图）", Filter = "素材包 (*.ptpack)|*.ptpack", AddExtension = true, OverwritePrompt = false, FileName = _descriptor.DisplayName };
+        if (dialog.ShowDialog() != true) return;
+        try
+        {
+            _state.Text = "正在创建一致性快照并流式打包…";
+            var result = await _packages.ExportAsync(_descriptor, dialog.FileName, AssetLibraryPackageScope.ManagedAssets, includePreviews: true);
+            _state.Text = $"素材包完成 · {result.IncludedOriginalCount} 个原图 · {result.PackageBytes / 1024d / 1024d:F1} MB · {result.PackagePath}";
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
+        { _state.Text = $"打包失败：{exception.Message}；未覆盖既有文件。"; }
+    }
+
+    private async void ImportPackageAsync()
+    {
+        var packageDialog = new OpenFileDialog { Title = "选择素材包", Filter = "素材包 (*.ptpack)|*.ptpack", Multiselect = false };
+        if (packageDialog.ShowDialog() != true) return;
+        var targetDialog = new SaveFileDialog { Title = "将素材包导入为新素材库", Filter = "素材库 (*.ptlibrary)|*.ptlibrary", AddExtension = true, OverwritePrompt = true, FileName = Path.GetFileNameWithoutExtension(packageDialog.FileName) };
+        if (targetDialog.ShowDialog() != true) return;
+        try
+        {
+            _state.Text = "正在验证素材包并安全导入…";
+            var descriptor = await _packages.ImportAsync(packageDialog.FileName, targetDialog.FileName, Path.GetFileNameWithoutExtension(targetDialog.FileName));
+            await SwitchToDescriptorAsync(descriptor, recordRecent: true);
+            _state.Text = $"素材包已导入并打开 · {descriptor.ContainerPath}";
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
+        { _state.Text = $"素材包导入失败：{exception.Message}；当前库保持不变。"; }
     }
 
     private void LocateCurrentLibrary()
