@@ -109,7 +109,7 @@ public sealed class NavigationWorkbenchClosureTests
         var focusRouter = source[start..end];
         ContainsAll(focusRouter,
             "IsAssetLibraryPage",
-            "AssetLibraryWorkspace.Content",
+            "GetHostedAssetLibraryPage()",
             "FocusSearch()",
             "AssetLibraryWorkspace.RequestInitialFocus()",
             "SearchBox.Focus()");

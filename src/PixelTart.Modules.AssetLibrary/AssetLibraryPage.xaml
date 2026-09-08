@@ -770,10 +770,20 @@
                             </StackPanel>
                         </ScrollViewer>
                         <StackPanel x:Name="FocusedBrowserToolbar" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,4,0,0" Orientation="Horizontal">
-                            <Button Content="视图" Click="ViewMenu_Click" Style="{StaticResource AssetLibraryChipButton}" ToolTip="网格、瀑布流、两端对齐或列表" />
-                            <Button Content="排序" Click="SortMenu_Click" Style="{StaticResource AssetLibraryChipButton}" ToolTip="选择排序字段和方向" />
-                            <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibraryChipButton}" />
+                            <Button Content="视图" Click="ViewMenu_Click" Style="{StaticResource AssetLibraryChipButton}"
+                                    ToolTip="网格、瀑布流、两端对齐或列表"
+                                    AutomationProperties.AutomationId="AssetLibraryViewMenu"
+                                    AutomationProperties.Name="选择素材视图" />
+                            <Button Content="排序" Click="SortMenu_Click" Style="{StaticResource AssetLibraryChipButton}"
+                                    ToolTip="选择排序字段和方向"
+                                    AutomationProperties.AutomationId="AssetLibrarySortMenu"
+                                    AutomationProperties.Name="选择素材排序" />
+                            <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibraryChipButton}"
+                                    AutomationProperties.AutomationId="AssetBrowserUndoFocused"
+                                    AutomationProperties.Name="撤销最近素材操作" />
+                            <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibraryChipButton}"
+                                    AutomationProperties.AutomationId="AssetBrowserRedoFocused"
+                                    AutomationProperties.Name="重做最近素材操作" />
                         </StackPanel>
                     </Grid>
 

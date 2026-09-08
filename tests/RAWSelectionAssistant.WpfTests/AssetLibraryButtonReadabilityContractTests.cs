@@ -15,7 +15,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         {
             ["{StaticResource AssetLibraryPrimaryButton}"] = 4,
             ["{StaticResource AssetLibrarySecondaryButton}"] = 19,
-            ["{StaticResource AssetLibraryChipButton}"] = 24,
+            ["{StaticResource AssetLibraryChipButton}"] = 28,
             ["{StaticResource AssetLibraryIconButton}"] = 1,
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
         };
@@ -24,8 +24,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     [
         "{Binding OrganizationPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetOrganizationPane|{Binding OrganizationPaneToggleLabel}",
         "{Binding InspectorPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetInspectorPane|{Binding InspectorPaneToggleLabel}",
-        "{Binding InspectorPinLabel}|||AssetLibrarySecondaryButton|PinAssetInspectorPane|",
-        "导入引用|||AssetLibraryPrimaryButton|AssetLibraryImport|",
+        "导入|||AssetLibraryPrimaryButton|AssetLibraryImport|",
+        "更多|||AssetLibrarySecondaryButton|AssetLibraryMore|",
         "{Binding Label}|||AssetLibrarySecondaryButton|{Binding AutomationId}|{Binding AccessibleName}",
         "+|||AssetLibraryIconButton||新建文件夹",
         "编辑|||AssetLibrarySecondaryButton||编辑智能文件夹条件",
@@ -45,6 +45,10 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         "{Binding SortDirectionLabel}|||AssetLibrarySecondaryButton|AssetSortDirection|切换排序方向",
         "撤销|||AssetLibrarySecondaryButton|AssetBrowserUndo|",
         "重做|||AssetLibrarySecondaryButton|AssetBrowserRedo|",
+        "视图|||AssetLibraryChipButton|AssetLibraryViewMenu|选择素材视图",
+        "排序|||AssetLibraryChipButton|AssetLibrarySortMenu|选择素材排序",
+        "撤销|||AssetLibraryChipButton|AssetBrowserUndoFocused|撤销最近素材操作",
+        "重做|||AssetLibraryChipButton|AssetBrowserRedoFocused|重做最近素材操作",
         "已分析|Valid||AssetLibraryChipButton||",
         "未分析|NotAnalyzed||AssetLibraryChipButton||",
         "主色绿|Green||AssetLibraryChipButton||",
@@ -79,7 +83,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = LoadPage();
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(49, buttons, "Update the audited role map when an Asset Library button is added or removed.");
+        Assert.HasCount(53, buttons, "Update the audited role map when an Asset Library button is added or removed.");
         foreach (var button in buttons)
         {
             var style = Attribute(button, "Style");
@@ -312,7 +316,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     public void UserFacingActionsRemainMappedToTheirAuditedRoles()
     {
         var document = LoadPage();
-        AssertContentRole(document, "导入引用", "AssetLibraryPrimaryButton", 2);
+        AssertContentRole(document, "导入", "AssetLibraryPrimaryButton", 1);
+        AssertContentRole(document, "导入引用", "AssetLibraryPrimaryButton", 1);
         AssertContentRole(document, "重试", "AssetLibraryPrimaryButton", 1);
         AssertContentRole(document, "已分析", "AssetLibraryChipButton", 1);
         AssertContentRole(document, "低饱和", "AssetLibraryChipButton", 1);
@@ -322,7 +327,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
 
         AssertAutomationRole(document, "ToggleAssetOrganizationPane", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "ToggleAssetInspectorPane", "AssetLibrarySecondaryButton");
-        AssertAutomationRole(document, "PinAssetInspectorPane", "AssetLibrarySecondaryButton");
+        AssertAutomationRole(document, "AssetLibraryMore", "AssetLibrarySecondaryButton");
         AssertAutomationRole(document, "SaveVisualSmartFolder", "AssetLibrarySecondaryButton");
 
         var activeChip = document.Descendants(Presentation + "Button")
