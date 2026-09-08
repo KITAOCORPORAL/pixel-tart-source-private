@@ -431,6 +431,26 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void SmartFolderArchiveAndRestoreAwaitTheSamePublicCommandBetweenTransitions()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
+        var start = driver.IndexOf("SaveSmartFolderAndPreviewAsync", StringComparison.Ordinal);
+        var end = driver.IndexOf("CapturePersistedSmartFolderAsync", start, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, start);
+        Assert.IsGreaterThan(start, end);
+        AssertOrdered(driver[start..end],
+        [
+            "ToggleArchiveP3SmartFolderCommand.Execute(null);",
+            "await _viewModel.ToggleArchiveP3SmartFolderCommand.ExecutionTask;",
+            "_viewModel.P3SmartFolderIsArchived",
+            "ToggleArchiveP3SmartFolderCommand.CanExecute(null)",
+            "ToggleArchiveP3SmartFolderCommand.Execute(null);",
+            "await _viewModel.ToggleArchiveP3SmartFolderCommand.ExecutionTask;",
+            "!_viewModel.P3SmartFolderIsArchived",
+        ]);
+    }
+
+    [TestMethod]
     public void TagLifecycleReorderProofUsesAnAdjacentPermutationAndCanonicalOrderHashes()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
