@@ -472,6 +472,31 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void SelectionSeamAwaitsTrackedInspectorAndSummaryWorkBeforeCapture()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
+        var selectStart = driver.IndexOf("SelectFirstAssetsAsync", StringComparison.Ordinal);
+        var clearStart = driver.IndexOf("ClearSelectionAsync", selectStart, StringComparison.Ordinal);
+        var clearEnd = driver.IndexOf("DropSelectionOnFirstFolderAsync", clearStart, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, selectStart);
+        Assert.IsGreaterThan(selectStart, clearStart);
+        Assert.IsGreaterThan(clearStart, clearEnd);
+        AssertOrdered(driver[selectStart..clearStart],
+        [
+            "ReplaceSelection(",
+            "await DrainDispatcherAsync();",
+            "_viewModel.SelectionCount == count && _viewModel.P3PendingOperationCount == 0",
+            "return _viewModel.SelectedAssets",
+        ]);
+        AssertOrdered(driver[clearStart..clearEnd],
+        [
+            "_assetGrid.SelectedItems.Clear();",
+            "await DrainDispatcherAsync();",
+            "_viewModel.SelectionCount == 0 && _viewModel.P3PendingOperationCount == 0",
+        ]);
+    }
+
+    [TestMethod]
     public void TagLifecycleReorderProofUsesAnAdjacentPermutationAndCanonicalOrderHashes()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
