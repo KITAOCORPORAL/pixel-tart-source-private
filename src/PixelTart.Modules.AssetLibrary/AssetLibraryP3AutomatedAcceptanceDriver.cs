@@ -1510,6 +1510,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         ((AssetLibrarySelectionListBox)_assetGrid).ReplaceSelection(_assetGrid.Items.Cast<object>().Take(count).ToArray());
         _assetGrid.ScrollIntoView(_assetGrid.Items[count - 1]);
         await DrainDispatcherAsync();
+        await WaitUntilAsync(
+            () => _viewModel.SelectionCount == count && _viewModel.P3PendingOperationCount == 0,
+            $"the inspector and selection summaries for the {count}-item WPF selection");
         if (_viewModel.SelectionCount != count)
             throw new InvalidOperationException($"The WPF selection seam selected {_viewModel.SelectionCount} items; expected {count}.");
         return _viewModel.SelectedAssets.Select(asset => asset.AssetId.ToString("D")).ToArray();
@@ -1520,6 +1523,9 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         EnsureNotDisposed();
         _assetGrid.SelectedItems.Clear();
         await DrainDispatcherAsync();
+        await WaitUntilAsync(
+            () => _viewModel.SelectionCount == 0 && _viewModel.P3PendingOperationCount == 0,
+            "the empty-selection inspector and summaries");
     }
 
     public async Task<AssetLibraryP3CommandSnapshot> DropSelectionOnFirstFolderAsync()
