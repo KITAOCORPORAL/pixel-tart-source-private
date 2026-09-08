@@ -497,6 +497,23 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void BatchPerformanceTimerCoversOnlyThePublicApplyCompletionBoundary()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
+        var applyStart = driver.IndexOf("ApplyTagToSelectedBatchThroughCommandsAsync", StringComparison.Ordinal);
+        var measuredStart = driver.IndexOf("measuredApplyStarted?.Invoke();", applyStart, StringComparison.Ordinal);
+        var execute = driver.IndexOf("_viewModel.ApplyP3BatchMetadataCommand.Execute(null);", measuredStart, StringComparison.Ordinal);
+        var stable = driver.IndexOf("did not reach a stable UI state", execute, StringComparison.Ordinal);
+        var measuredStop = driver.IndexOf("measuredApplyCompleted?.Invoke();", stable, StringComparison.Ordinal);
+        var undo = driver.IndexOf("_viewModel.P2UndoCommand.Execute(null);", measuredStop, StringComparison.Ordinal);
+        Assert.IsTrue(
+            applyStart >= 0 && measuredStart > applyStart && execute > measuredStart &&
+            stable > execute && measuredStop > stable && undo > measuredStop,
+            "The dispatcher timer must measure public Apply through stable completion, excluding setup and undo/redo.");
+        StringAssert.Contains(driver, "ExecuteBatchTagCommandCore(\n                batchSize, cancellationToken, StartSampling, StopSampling)");
+    }
+
+    [TestMethod]
     public void TagLifecycleReorderProofUsesAnAdjacentPermutationAndCanonicalOrderHashes()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");

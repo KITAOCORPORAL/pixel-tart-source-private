@@ -1154,6 +1154,15 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         int batchSize,
         CancellationToken cancellationToken = default)
     {
+        return await ExecuteBatchTagCommandCore(batchSize, cancellationToken);
+    }
+
+    private async Task<AssetLibraryP3BatchSnapshot> ExecuteBatchTagCommandCore(
+        int batchSize,
+        CancellationToken cancellationToken,
+        Action? measuredApplyStarted = null,
+        Action? measuredApplyCompleted = null)
+    {
         EnsureNotDisposed();
         await _acceptanceRepository.InitializeAsync(cancellationToken);
         if (!_viewModel.P3TagManagerOpen) _viewModel.ToggleP3TagManagerCommand.Execute(null);
@@ -1162,14 +1171,18 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         _viewModel.P3SelectedManagedTagGroup = null;
         var tag = await CreateManagedTagThroughCommandAsync(
             $"验收批量 {batchSize}-{Guid.NewGuid():N}", cancellationToken);
-        return await ApplyTagToSelectedBatchThroughCommandsAsync(tag, batchSize, exerciseUndoRedo: true, cancellationToken);
+        return await ApplyTagToSelectedBatchThroughCommandsAsync(
+            tag, batchSize, exerciseUndoRedo: true, cancellationToken,
+            measuredApplyStarted, measuredApplyCompleted);
     }
 
     private async Task<AssetLibraryP3BatchSnapshot> ApplyTagToSelectedBatchThroughCommandsAsync(
         AssetTag tag,
         int batchSize,
         bool exerciseUndoRedo,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        Action? measuredApplyStarted = null,
+        Action? measuredApplyCompleted = null)
     {
         await ApplyQueryDocumentAsync(new AssetQueryDocument { Scope = AssetQueryScope.AllAssets });
         var selectedIds = (await SelectFirstAssetsAsync(batchSize)).Select(Guid.Parse).ToArray();
@@ -1186,6 +1199,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             "the public Batch Metadata Preview command");
         var previousOperationId = _viewModel.LastUndoToken?.OperationId;
         var previousCompletionGeneration = _viewModel.P3BatchApplyCompletionGeneration;
+        measuredApplyStarted?.Invoke();
         var started = System.Diagnostics.Stopwatch.StartNew();
         if (!_viewModel.ApplyP3BatchMetadataCommand.CanExecute(null))
             throw new InvalidOperationException("The public Batch Metadata Apply command was unavailable after preview.");
@@ -1205,6 +1219,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
             _viewModel.IsOrganizationLoading || _viewModel.HasOrganizationError)
             throw new InvalidOperationException($"The public Batch Metadata Apply command did not reach a stable UI state: {_viewModel.P3BatchPreviewSummary}");
         started.Stop();
+        measuredApplyCompleted?.Invoke();
         var undoToken = _viewModel.LastUndoToken!;
         var undoPassed = true;
         var redoPassed = true;
@@ -1238,29 +1253,43 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         CancellationToken cancellationToken = default)
     {
         EnsureNotDisposed();
-        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-        var lastSample = stopwatch.Elapsed;
+        var stopwatch = new System.Diagnostics.Stopwatch();
+        var lastSample = TimeSpan.Zero;
         var gaps = new List<double>();
+        var sampling = false;
         var timer = new DispatcherTimer(DispatcherPriority.Background, _page.Dispatcher)
         {
             Interval = TimeSpan.FromMilliseconds(10),
         };
         timer.Tick += OnTick;
-        timer.Start();
         try
         {
-            var batch = await ExecuteBatchTagCommand(batchSize, cancellationToken);
-            await _page.Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.Background);
-            SampleGap();
+            var batch = await ExecuteBatchTagCommandCore(
+                batchSize, cancellationToken, StartSampling, StopSampling);
             return new(batch, gaps.Count, gaps.Count == 0 ? 0 : gaps.Max(), gaps.Count == 0 ? 0 : gaps.Average());
         }
         finally
         {
-            timer.Stop();
+            StopSampling();
             timer.Tick -= OnTick;
         }
 
         void OnTick(object? sender, EventArgs eventArgs) => SampleGap();
+        void StartSampling()
+        {
+            gaps.Clear();
+            stopwatch.Restart();
+            lastSample = TimeSpan.Zero;
+            sampling = true;
+            timer.Start();
+        }
+        void StopSampling()
+        {
+            if (!sampling) return;
+            SampleGap();
+            timer.Stop();
+            sampling = false;
+        }
         void SampleGap()
         {
             var current = stopwatch.Elapsed;

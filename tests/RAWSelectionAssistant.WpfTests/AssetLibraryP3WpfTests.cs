@@ -274,6 +274,7 @@ public sealed class AssetLibraryP3WpfTests
                 Assert.IsFalse(viewModel.IsOrganizationLoading);
                 Assert.IsFalse(viewModel.HasOrganizationError);
                 Assert.HasCount(1, viewModel.SelectedAssets);
+                StringAssert.Contains(viewModel.AssetCards.Single().TagSummary, "稳定提交标签");
 
                 var selectedAfterRefresh = viewModel.SelectedAssets.ToArray();
                 viewModel.SyncVisibleSelection(
