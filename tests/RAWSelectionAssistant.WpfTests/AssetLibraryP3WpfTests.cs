@@ -16,6 +16,20 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class AssetLibraryP3WpfTests
 {
+    [TestMethod]
+    public void BulkCardReplacementPublishesOneResetNotification()
+    {
+        var collection = new BulkObservableCollection<int> { 1, 2 };
+        var changes = new List<System.Collections.Specialized.NotifyCollectionChangedEventArgs>();
+        collection.CollectionChanged += (_, change) => changes.Add(change);
+
+        collection.ReplaceAll([3, 4, 5]);
+
+        CollectionAssert.AreEqual(new[] { 3, 4, 5 }, collection.ToArray());
+        Assert.HasCount(1, changes);
+        Assert.AreEqual(System.Collections.Specialized.NotifyCollectionChangedAction.Reset, changes[0].Action);
+    }
+
     private static readonly string[] P3ControlFiles =
     [
         "AssetQueryComposerView.xaml",
@@ -34,9 +48,9 @@ public sealed class AssetLibraryP3WpfTests
         Assert.AreEqual(1, page.Descendants().Count(element => Attribute(element, "x:Name") == "AssetGrid"));
 
         var viewModel = File.ReadAllText(ModulePath("AssetLibraryViewModel.cs"));
-        StringAssert.Contains(viewModel, "public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];");
+        StringAssert.Contains(viewModel, "public BulkObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];");
         StringAssert.Contains(viewModel, "public IReadOnlyList<Guid> SelectedAssetIds => _workspaceSettings.SelectedAssetIds;");
-        Assert.AreEqual(1, Count(viewModel, "public ObservableCollection<AssetVisualMatchView> AssetCards"));
+        Assert.AreEqual(1, Count(viewModel, "public BulkObservableCollection<AssetVisualMatchView> AssetCards"));
     }
 
     [TestMethod]
