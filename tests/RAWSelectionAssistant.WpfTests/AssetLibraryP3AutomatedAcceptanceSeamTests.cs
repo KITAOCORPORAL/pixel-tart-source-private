@@ -451,6 +451,27 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void DriverAwaitsEveryInvokedNonGenericPublicAsyncCommand()
+    {
+        var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
+        foreach (var command in new[]
+                 {
+                     "SubmitP3SearchCommand", "SaveP3SmartFolderCommand", "CopyP3SmartFolderCommand",
+                     "ToggleArchiveP3SmartFolderCommand", "RetryP3SmartFolderPreviewCommand",
+                     "RenameP3TagGroupCommand", "RenameP3TagCommand", "MoveP3TagCommand",
+                     "ToggleArchiveP3TagCommand", "PreviewP3TagMergeCommand", "MergeP3TagCommand",
+                     "CreateP3TagGroupCommand", "CreateP3TagCommand", "PreviewP3BatchMetadataCommand",
+                     "ApplyP3BatchMetadataCommand", "P2UndoCommand", "P2RedoCommand",
+                 })
+        {
+            var executeCount = CountOccurrences(driver, $"{command}.Execute(");
+            Assert.IsGreaterThan(0, executeCount, $"The acceptance driver no longer invokes {command}.");
+            Assert.AreEqual(executeCount, CountOccurrences(driver, $"{command}.ExecutionTask"),
+                $"Every {command} invocation must await its public execution task before dependent state is observed.");
+        }
+    }
+
+    [TestMethod]
     public void TagLifecycleReorderProofUsesAnAdjacentPermutationAndCanonicalOrderHashes()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs");
@@ -492,6 +513,13 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
     private static void ContainsAll(string text, params string[] values)
     {
         foreach (var value in values) StringAssert.Contains(text, value);
+    }
+    private static int CountOccurrences(string text, string value)
+    {
+        var count = 0;
+        for (var index = 0; (index = text.IndexOf(value, index, StringComparison.Ordinal)) >= 0; index += value.Length)
+            count++;
+        return count;
     }
     private static void AssertOrdered(string text, string[] values)
     {
