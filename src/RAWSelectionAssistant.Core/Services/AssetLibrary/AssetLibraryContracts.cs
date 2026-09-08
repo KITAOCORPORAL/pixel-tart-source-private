@@ -2,6 +2,29 @@ using RAWSelectionAssistant.Core.Models;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
+/// <summary>
+/// Durable cross-feature identity for referring to an asset without depending on a library path.
+/// P4 consumers must resolve the library and asset identities and verify the content hash before use.
+/// </summary>
+public sealed record AssetLibraryStableReference
+{
+    public AssetLibraryStableReference(Guid libraryId, Guid assetId, string contentHash)
+    {
+        if (libraryId == Guid.Empty) throw new ArgumentException("素材库身份不能为空。", nameof(libraryId));
+        if (assetId == Guid.Empty) throw new ArgumentException("素材身份不能为空。", nameof(assetId));
+        if (string.IsNullOrWhiteSpace(contentHash) || contentHash.Length != 64 || !contentHash.All(Uri.IsHexDigit))
+            throw new ArgumentException("素材内容 hash 必须是完整的 SHA-256。", nameof(contentHash));
+
+        LibraryId = libraryId;
+        AssetId = assetId;
+        ContentHash = contentHash.ToLowerInvariant();
+    }
+
+    public Guid LibraryId { get; }
+    public Guid AssetId { get; }
+    public string ContentHash { get; }
+}
+
 public interface IAssetLibraryRepository : IAsyncDisposable
 {
     string DatabasePath { get; }
