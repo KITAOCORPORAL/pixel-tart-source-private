@@ -746,6 +746,12 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public double SidebarWidth => IsSidebarCollapsed
         ? SidebarLayoutMetrics.CollapsedWidth
         : SidebarLayoutMetrics.ExpandedWidth;
+    public void RefreshSidebarPresentation()
+    {
+        OnPropertyChanged(nameof(IsSidebarCollapsed));
+        OnPropertyChanged(nameof(IsSidebarExpanded));
+        OnPropertyChanged(nameof(SidebarWidth));
+    }
     public int PendingTaskCount => IsBusy ? 1 : 0;
     public int AttentionCount => ConflictCount + NotFoundCount + PartialMatchedCount;
     public int WorkbenchInProgressCount => ProjectHistory.Count(project => project.Status != PhotoProjectStatus.Completed);

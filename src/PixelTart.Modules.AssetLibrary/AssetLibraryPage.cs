@@ -178,6 +178,23 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel.ClearFilters();
 
+    private void More_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { ContextMenu: { } menu } button)
+        {
+            menu.Items.Clear();
+            menu.Items.Add(CreateMoreItem("新建智能文件夹", _viewModel.NewP3SmartFolderCommand));
+            menu.Items.Add(CreateMoreItem("标签管理与批量编辑", _viewModel.ToggleP3TagManagerCommand));
+            menu.Items.Add(new Separator());
+            menu.Items.Add(CreateMoreItem("固定/取消固定检查器", _viewModel.ToggleInspectorPinCommand));
+            menu.PlacementTarget = button;
+            menu.Placement = PlacementMode.Bottom;
+            menu.IsOpen = true;
+        }
+    }
+
+    private static MenuItem CreateMoreItem(string header, ICommand command) => new() { Header = header, Command = command };
+
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_applyingViewModelSelection || _disposed || _pendingSelectionSync is not null) return;

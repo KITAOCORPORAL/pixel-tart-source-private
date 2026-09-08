@@ -536,6 +536,11 @@ public partial class App : Application
             var workspaceSettings = _mainViewModel?.Settings.AssetLibraryWorkspace ?? new AssetLibraryWorkspaceSettings();
             var legacyDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
             var portableSettings = _mainViewModel?.Settings.AssetLibraryPortable ?? new AssetLibraryPortableSettings();
+#if ASSET_LIBRARY_P1_STATE_ACCEPTANCE || ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE || ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE || ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
+            return new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                legacyDatabasePath, taskOperationBridge, diagnostics, enableAssetLibraryPreview,
+                assetLibraryDemoDirectory, workspaceSettings, _logService, assetLibraryP1StateController);
+#else
             return new PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost(
                 legacyDatabasePath,
                 path => new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
@@ -549,6 +554,7 @@ public partial class App : Application
                     assetLibraryP1StateController),
                 portableSettings,
                 _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
+#endif
         }));
         registry.Register(new RawToolModule());
         registry.Register(new OnlineSelectionModule());

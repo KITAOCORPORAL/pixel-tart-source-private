@@ -8,10 +8,23 @@ public sealed class AssetLibraryPortableSettings
     public int Version { get; set; } = CurrentVersion;
     public string CurrentContainerPath { get; set; } = string.Empty;
     public List<AssetLibraryRecentEntry> RecentLibraries { get; set; } = [];
+    public bool AutoFocusWorkspace { get; set; } = true;
+    public bool FocusRestorePending { get; set; }
+    public int FocusPreviousWindowState { get; set; }
+    public double? FocusPreviousLeft { get; set; }
+    public double? FocusPreviousTop { get; set; }
+    public double? FocusPreviousWidth { get; set; }
+    public double? FocusPreviousHeight { get; set; }
+    public bool FocusPreviousSidebarCollapsed { get; set; }
 
     public void Normalize()
     {
         Version = CurrentVersion;
+        if (FocusPreviousWindowState is < 0 or > 2) FocusPreviousWindowState = 0;
+        FocusPreviousLeft = NormalizeFinite(FocusPreviousLeft);
+        FocusPreviousTop = NormalizeFinite(FocusPreviousTop);
+        FocusPreviousWidth = NormalizeFinite(FocusPreviousWidth, 320);
+        FocusPreviousHeight = NormalizeFinite(FocusPreviousHeight, 240);
         CurrentContainerPath = NormalizePath(CurrentContainerPath);
         RecentLibraries = (RecentLibraries ?? [])
             .Where(entry => entry is not null)
@@ -47,6 +60,9 @@ public sealed class AssetLibraryPortableSettings
         try { return Path.GetFullPath(path.Trim()).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar); }
         catch (Exception ex) when (ex is ArgumentException or NotSupportedException or PathTooLongException) { return string.Empty; }
     }
+
+    private static double? NormalizeFinite(double? value, double minimum = double.MinValue) =>
+        value is { } number && double.IsFinite(number) && number >= minimum ? number : null;
 }
 
 public sealed class AssetLibraryRecentEntry

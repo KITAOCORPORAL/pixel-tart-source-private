@@ -356,7 +356,7 @@ public partial class MainWindow
         DependencyObject? source,
         out AcceptanceControlState state)
     {
-        if (AssetLibraryWorkspace.Content is not PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
+        if (GetHostedAssetLibraryPage() is not { } assetLibraryPage)
         {
             state = AcceptanceControlState.None;
             return false;
@@ -437,7 +437,7 @@ public partial class MainWindow
     private void RecordAssetLibraryWorkspaceRestoreState()
     {
         if (_viewModel?.IsAssetLibraryPage != true ||
-            AssetLibraryWorkspace.Content is not PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
+            GetHostedAssetLibraryPage() is not { } assetLibraryPage)
             return;
 
         var splitters = FindVisualChildren<GridSplitter>(assetLibraryPage).ToArray();

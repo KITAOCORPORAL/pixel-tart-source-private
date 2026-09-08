@@ -44,6 +44,7 @@ public partial class MainWindow : Window
     private ShootBookingEditorViewModel? _activeBookingEditor;
     private readonly IModalHost _modalHost = new ModalHost();
     private IShellEscapeService? _shellEscapeService;
+    private bool _assetLibraryFocusActive;
 #if UI_REVIEW_BUILD
     private DispatcherTimer? _uiReviewTimer;
     private string _uiReviewStateContent = string.Empty;
@@ -77,6 +78,7 @@ public partial class MainWindow : Window
 
     public void ApplySavedBounds(AppSettings settings)
     {
+        RecoverInterruptedAssetLibraryFocus(settings);
         var restoredPage = _viewModel?.CurrentPage ?? PrimaryNavigationPolicy.Normalize(settings.LastPrimaryPage);
 #if MODULAR_HARNESS_DEV_PREVIEW
         restoredPage = _viewModel?.CurrentPage ?? PrimaryNavigationPolicy.Workbench;
@@ -296,12 +298,83 @@ public partial class MainWindow : Window
         WorkbenchToolboxPopup.IsOpen = false;
         QuickToolsOverflowPopup.IsOpen = false;
         ApplySurfaceMinimumSize(e.CurrentPage);
+        ApplyAssetLibraryFocusTransition(e.PreviousPage, e.CurrentPage);
         _viewModel?.UpdateSidebarForWidth(ActualWidth);
         Keyboard.ClearFocus();
         Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, () =>
         {
             if (_viewModel?.CurrentPage == e.CurrentPage) FocusActivePage();
         });
+    }
+
+    private void ApplyAssetLibraryFocusTransition(string previousPage, string currentPage)
+    {
+        if (_viewModel is null) return;
+        var entering = !string.Equals(previousPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal) &&
+            string.Equals(currentPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal);
+        var leaving = string.Equals(previousPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal) &&
+            !string.Equals(currentPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal);
+        var focus = _viewModel.Settings.AssetLibraryPortable;
+        if (entering && focus.AutoFocusWorkspace && !_assetLibraryFocusActive)
+        {
+            var bounds = WindowState == WindowState.Normal ? new Rect(Left, Top, ActualWidth, ActualHeight) : RestoreBounds;
+            focus.FocusPreviousWindowState = (int)WindowState;
+            focus.FocusPreviousLeft = bounds.Left;
+            focus.FocusPreviousTop = bounds.Top;
+            focus.FocusPreviousWidth = bounds.Width;
+            focus.FocusPreviousHeight = bounds.Height;
+            focus.FocusPreviousSidebarCollapsed = _viewModel.Settings.Appearance.SidebarCollapsed;
+            focus.FocusRestorePending = true;
+            _viewModel.Settings.Appearance.SidebarCollapsed = true;
+            _assetLibraryFocusActive = true;
+            SetAssetLibraryShellChrome(focused: true);
+            WindowState = WindowState.Maximized;
+            _viewModel.RefreshSidebarPresentation();
+            _ = _viewModel.SaveSettingsAsync();
+        }
+        else if (leaving && _assetLibraryFocusActive)
+        {
+            RestoreAssetLibraryFocus(focus);
+            _assetLibraryFocusActive = false;
+            SetAssetLibraryShellChrome(focused: false);
+            _ = _viewModel.SaveSettingsAsync();
+        }
+    }
+
+    private void SetAssetLibraryShellChrome(bool focused)
+    {
+        if (RootGrid.RowDefinitions.Count < 3) return;
+        RootGrid.RowDefinitions[0].Height = focused ? new GridLength(0) : new GridLength(36);
+        RootGrid.RowDefinitions[2].Height = focused ? new GridLength(0) : new GridLength(34);
+        TopMenu.Visibility = focused ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    private void RestoreAssetLibraryFocus(AssetLibraryPortableSettings focus)
+    {
+        if (_viewModel is null || !focus.FocusRestorePending) return;
+        WindowState = WindowState.Normal;
+        if (focus.FocusPreviousWidth is { } width) Width = Math.Max(DefaultShellMinWidth, width);
+        if (focus.FocusPreviousHeight is { } height) Height = Math.Max(DefaultShellMinHeight, height);
+        if (focus.FocusPreviousLeft is { } left) Left = left;
+        if (focus.FocusPreviousTop is { } top) Top = top;
+        _viewModel.Settings.Appearance.SidebarCollapsed = focus.FocusPreviousSidebarCollapsed;
+        _viewModel.RefreshSidebarPresentation();
+        WindowState = Enum.IsDefined(typeof(WindowState), focus.FocusPreviousWindowState)
+            ? (WindowState)focus.FocusPreviousWindowState
+            : WindowState.Normal;
+        focus.FocusRestorePending = false;
+    }
+
+    private static void RecoverInterruptedAssetLibraryFocus(AppSettings settings)
+    {
+        var focus = settings.AssetLibraryPortable;
+        if (!focus.FocusRestorePending) return;
+        settings.WindowLeft = focus.FocusPreviousLeft;
+        settings.WindowTop = focus.FocusPreviousTop;
+        settings.WindowWidth = focus.FocusPreviousWidth;
+        settings.WindowHeight = focus.FocusPreviousHeight;
+        settings.Appearance.SidebarCollapsed = focus.FocusPreviousSidebarCollapsed;
+        focus.FocusRestorePending = false;
     }
 
     private void ApplySurfaceMinimumSize(string page)
@@ -317,6 +390,8 @@ public partial class MainWindow : Window
         {
             if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
                 assetLibraryPage.FocusInitial();
+            else if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host && host.CurrentPage is { } hostedPage)
+                hostedPage.FocusInitial();
             else
                 AssetLibraryWorkspace.RequestInitialFocus();
             return;
@@ -343,6 +418,8 @@ public partial class MainWindow : Window
         StartUiReviewController();
 #endif
         _viewModel?.UpdateSidebarForWidth(ActualWidth);
+        if (_viewModel?.IsAssetLibraryPage == true)
+            ApplyAssetLibraryFocusTransition(string.Empty, PrimaryNavigationPolicy.AssetLibrary);
         _viewModel?.SetQuickToolsCompact(ActualWidth < 1180);
         UpdateWorkbenchResponsiveLayout();
         ScheduleTutorialLayout();
@@ -430,11 +507,18 @@ public partial class MainWindow : Window
         }
     }
 
+    private PixelTart.Modules.AssetLibrary.AssetLibraryPage? GetHostedAssetLibraryPage() => AssetLibraryWorkspace.Content switch
+    {
+        PixelTart.Modules.AssetLibrary.AssetLibraryPage page => page,
+        PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host => host.CurrentPage,
+        _ => null
+    };
+
     private void FocusSearchForActivePage()
     {
         if (_viewModel?.IsAssetLibraryPage == true)
         {
-            if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryPage assetLibraryPage)
+            if (GetHostedAssetLibraryPage() is { } assetLibraryPage)
                 assetLibraryPage.FocusSearch();
             else
                 AssetLibraryWorkspace.RequestInitialFocus();

@@ -102,6 +102,9 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         mergeMenu.Items.Add(MenuItem("合并素材库…", (_, _) => MergeLibraryAsync()));
         mergeMenu.Items.Add(MenuItem("合并素材包…", (_, _) => MergePackageAsync()));
         _menu.Items.Add(mergeMenu);
+        var focusItem = new MenuItem { Header = "进入素材库时自动专注", IsCheckable = true, IsChecked = _settings.AutoFocusWorkspace };
+        focusItem.Click += async (_, _) => { _settings.AutoFocusWorkspace = focusItem.IsChecked; if (_persistSettings is not null) await _persistSettings(); };
+        _menu.Items.Add(focusItem);
         _menu.Items.Add(new Separator());
         _menu.Items.Add(MenuItem("重新定位离线库…", (_, _) => RelocateOfflineLibraryAsync()));
         _menu.Items.Add(MenuItem("定位当前库…", (_, _) => LocateCurrentLibrary()));
@@ -120,7 +123,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     private void RefreshRecentMenu()
     {
-        while (_menu.Items.Count > 11) _menu.Items.RemoveAt(11);
+        while (_menu.Items.Count > 12) _menu.Items.RemoveAt(12);
         if (_settings.RecentLibraries.Count == 0)
         {
             _menu.Items.Add(new MenuItem { Header = "暂无最近素材库", IsEnabled = false });
@@ -232,6 +235,8 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
             nextPage = _pageFactory(descriptor.DatabasePath);
             await nextPage.InitializeForSessionAsync();
             if (nextPage.ViewModel.HasLoadError) throw new InvalidDataException(nextPage.ViewModel.LoadErrorMessage);
+            if (nextPage.ViewModel.SelectionCount == 0 && !nextPage.ViewModel.IsInspectorPinned)
+                nextPage.ViewModel.IsInspectorPaneCollapsed = true;
 
             var oldPage = _page;
             var oldLease = _lease;

@@ -517,11 +517,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="14,10,14,10">
+        <Grid Margin="12,5,12,5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -529,20 +526,15 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.ColumnSpan="4" Margin="0,0,0,7">
-                <TextBlock Text="素材库" FontSize="24" FontWeight="SemiBold" />
-                <TextBlock Text="内置 Workspace Module · 本地视觉检索 · 引用导入默认不移动、不改名、不删除源文件"
-                           Style="{StaticResource AssetCaption}" />
-            </StackPanel>
-            <TextBox x:Name="AssetLibrarySearchBox" Grid.Row="1" Grid.Column="0" MinWidth="120" Margin="0,0,8,0"
+            <TextBox x:Name="AssetLibrarySearchBox" Grid.Row="0" Grid.Column="0" MinWidth="120" Margin="0,0,8,0"
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      PreviewKeyDown="AssetLibrarySearchBox_PreviewKeyDown"
                      ToolTip="搜索名称、标签、文件夹与备注"
                      AutomationProperties.AutomationId="AssetLibrarySearch"
                      VerticalAlignment="Center" />
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                 <Button Content="{Binding OrganizationPaneToggleLabel}" Command="{Binding ToggleOrganizationPaneCommand}"
                         Style="{StaticResource AssetLibrarySecondaryButton}"
                         ToolTip="展开或收起左侧组织栏"
@@ -555,17 +547,18 @@
                         AutomationProperties.AutomationId="ToggleAssetInspectorPane"
                         AutomationProperties.Name="{Binding InspectorPaneToggleLabel}"
                         Focusable="True" IsTabStop="True" />
-                <Button Content="{Binding InspectorPinLabel}" Command="{Binding ToggleInspectorPinCommand}" Margin="4,0,0,0"
-                        Style="{StaticResource AssetLibrarySecondaryButton}"
-                        ToolTip="固定检查器；空间不足时优先保留，极窄窗口仍会收起" AutomationProperties.AutomationId="PinAssetInspectorPane" />
             </StackPanel>
-            <Button Grid.Row="1" Grid.Column="2" Content="导入引用" Margin="8,0,0,0"
+            <Button Grid.Row="0" Grid.Column="2" Content="导入" Margin="6,0,0,0"
                     Style="{StaticResource AssetLibraryPrimaryButton}"
                     Command="{Binding ImportCommand}"
                     AutomationProperties.AutomationId="AssetLibraryImport" />
-            <local:AssetQueryComposerView Grid.Row="2" Grid.ColumnSpan="4" Margin="0,7,0,0" />
-            <local:AssetSmartFolderEditorView Grid.Row="3" Grid.ColumnSpan="4" />
-            <local:AssetTagManagerView Grid.Row="4" Grid.ColumnSpan="4" />
+            <Button Grid.Row="0" Grid.Column="3" Content="更多" Margin="4,0,0,0" Click="More_Click"
+                    Style="{StaticResource AssetLibrarySecondaryButton}"
+                    AutomationProperties.AutomationId="AssetLibraryMore"
+                    ToolTip="智能文件夹、标签、检查器固定等低频操作">
+                <Button.ContextMenu><ContextMenu><MenuItem Header="固定/取消固定检查器" IsEnabled="False" AutomationProperties.AutomationId="PinAssetInspectorPane" /></ContextMenu></Button.ContextMenu>
+            </Button>
+            <local:AssetQueryComposerView Grid.Row="1" Grid.ColumnSpan="4" Margin="0,4,0,0" />
         </Grid>
 
         <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
@@ -1177,6 +1170,21 @@
                 </ScrollViewer>
             </Border>
         </Grid>
+
+        <Border Grid.Row="2" Panel.ZIndex="30" Width="820" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                MaxHeight="520" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
+                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
+                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:AssetSmartFolderEditorView />
+        </Border>
+        <Border Grid.Row="2" Panel.ZIndex="29" Width="900" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                MaxHeight="620" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
+                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
+                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Visibility="{Binding P3TagManagerOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <local:AssetTagManagerView />
+        </Border>
 
         <DockPanel Grid.Row="3" Margin="0,8,0,0">
             <TextBlock Text="F 聚焦分类 · Shift+D 重复分类 · T 标签 · 0–5 评分" Style="{StaticResource AssetCaption}" />
