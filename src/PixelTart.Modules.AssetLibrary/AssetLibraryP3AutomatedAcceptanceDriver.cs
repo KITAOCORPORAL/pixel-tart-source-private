@@ -669,9 +669,13 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriver : IAsyncDisposable
         if (!_viewModel.ToggleArchiveP3SmartFolderCommand.CanExecute(null))
             throw new InvalidOperationException("The public Smart Folder archive command was unavailable for the copy.");
         _viewModel.ToggleArchiveP3SmartFolderCommand.Execute(null);
+        await _viewModel.ToggleArchiveP3SmartFolderCommand.ExecutionTask;
         await WaitUntilAsync(() => _viewModel.P3SmartFolderIsArchived,
             "the public Smart Folder archive command");
+        if (!_viewModel.ToggleArchiveP3SmartFolderCommand.CanExecute(null))
+            throw new InvalidOperationException("The public Smart Folder restore command was unavailable after archive completed.");
         _viewModel.ToggleArchiveP3SmartFolderCommand.Execute(null);
+        await _viewModel.ToggleArchiveP3SmartFolderCommand.ExecutionTask;
         await WaitUntilAsync(() => !_viewModel.P3SmartFolderIsArchived,
             "the public Smart Folder restore command");
         var archiveRestorePassed = !_viewModel.P3SmartFolderIsArchived;
