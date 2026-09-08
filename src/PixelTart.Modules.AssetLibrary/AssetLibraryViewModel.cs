@@ -1664,7 +1664,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         try { var features = await _featureStore.GetFeaturesAsync(asset.AssetId); if (SelectedAssets.Count == 1 && SelectedAssets[0].AssetId == asset.AssetId) SelectedFeatures = features.Summary; }
         catch (KeyNotFoundException) { if (SelectedAssets.Count == 1 && SelectedAssets[0].AssetId == asset.AssetId) SelectedFeatures = null; }
     }
-    private async Task RefreshFilterListsAsync(CancellationToken cancellationToken = default)
+    private async Task RefreshFilterListsAsync(
+        CancellationToken cancellationToken = default,
+        bool refreshTagSummaryCache = true)
     {
         using var timing = AssetLibraryOperationTiming.Measure("viewmodel.organizations");
         var data = await Task.Run(async () => (
@@ -1680,7 +1682,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         OnPropertyChanged(nameof(P3FolderReferenceOptions)); OnPropertyChanged(nameof(P3TagReferenceOptions));
         SmartFolders.Clear(); foreach (var folder in data.Smart) SmartFolders.Add(folder);
         FavoriteFolders.Clear(); foreach (var folder in Folders.Where(x => !string.IsNullOrWhiteSpace(x.Color)).Take(6)) FavoriteFolders.Add(folder);
-        await RefreshP2OrganizationAsync(cancellationToken);
+        await RefreshP2OrganizationAsync(cancellationToken, data.Tree, refreshTagSummaryCache);
     }
     private void RefreshClassifierFolders() { ClassifierFolders.Clear(); foreach (var folder in Folders.Where(x => string.IsNullOrWhiteSpace(FolderSearch) || x.Name.Contains(FolderSearch, StringComparison.OrdinalIgnoreCase))) ClassifierFolders.Add(folder); }
     private async Task SeedPreviewStructureAsync() { await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光\n灯光/柔光"); var groups = new[] { new TagGroup(Guid.NewGuid(), "人物"), new TagGroup(Guid.NewGuid(), "视觉"), new TagGroup(Guid.NewGuid(), "概念") }; foreach (var group in groups) await _repository.SaveTagGroupAsync(group); await _repository.BatchCreateTagsAsync("人体,身体,宗教,凝视", groups[2].TagGroupId); await _repository.BatchCreateTagsAsync("红,蓝,绿色", groups[1].TagGroupId); await RefreshFilterListsAsync(); }

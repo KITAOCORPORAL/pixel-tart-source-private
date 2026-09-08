@@ -529,7 +529,8 @@ public sealed partial class AssetLibraryViewModel
         RememberP3MetadataResult(result);
         try
         {
-            await RefreshFilterListsAsync(_lifetimeCancellation.Token);
+            ApplyP2BatchTagSummaryChanges(request);
+            await RefreshFilterListsAsync(_lifetimeCancellation.Token, refreshTagSummaryCache: false);
             var refreshOutcome = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token);
             if (refreshOutcome != AssetLibraryRefreshOutcome.Completed || IsLoading || HasLoadError ||
                 IsOrganizationLoading || HasOrganizationError)

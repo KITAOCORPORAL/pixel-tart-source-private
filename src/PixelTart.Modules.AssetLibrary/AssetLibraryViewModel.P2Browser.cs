@@ -331,15 +331,32 @@ public sealed partial class AssetLibraryViewModel
         Status = $"已将“{node.Name}”提升一级。";
     }
 
-    private async Task RefreshP2OrganizationAsync(CancellationToken cancellationToken)
+    private async Task RefreshP2OrganizationAsync(
+        CancellationToken cancellationToken,
+        IReadOnlyList<AssetFolderTreeItem>? prefetchedTree = null,
+        bool refreshTagSummaryCache = true)
     {
         IsOrganizationLoading = true;
         OrganizationError = string.Empty;
         try
         {
-            var data = await Task.Run(async () => (
-                Tree: await _repository.GetFolderTreeAsync(includeArchived: true, cancellationToken),
-                Memberships: await _repository.ListTagMembershipsAsync(cancellationToken: cancellationToken)), cancellationToken);
+            var tagNames = Tags.ToDictionary(tag => tag.TagId, tag => tag.Name);
+            var data = await Task.Run(async () =>
+            {
+                var tree = prefetchedTree ?? await _repository.GetFolderTreeAsync(includeArchived: true, cancellationToken);
+                if (!refreshTagSummaryCache)
+                    return (Tree: tree, TagSummaries: (IReadOnlyDictionary<Guid, string>)new Dictionary<Guid, string>());
+                var memberships = await _repository.ListTagMembershipsAsync(cancellationToken: cancellationToken);
+                var summaries = memberships
+                    .GroupBy(item => item.AssetId)
+                    .ToDictionary(
+                        group => group.Key,
+                        group => string.Join("、", group
+                            .Select(item => tagNames.GetValueOrDefault(item.TagId))
+                            .Where(name => !string.IsNullOrWhiteSpace(name))
+                            .Distinct(StringComparer.OrdinalIgnoreCase)));
+                return (Tree: tree, TagSummaries: (IReadOnlyDictionary<Guid, string>)summaries);
+            }, cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
             var tree = data.Tree;
             OrganizationFolders.Clear(); foreach (var node in tree) OrganizationFolders.Add(new(this, node));
@@ -350,15 +367,36 @@ public sealed partial class AssetLibraryViewModel
                 OrganizationTagGroups.Add(new(this, group, tagViews.Where(tag => tag.Tag.TagGroupId == group.TagGroupId)));
             var ungrouped = tagViews.Where(tag => tag.Tag.TagGroupId is null || TagGroups.All(group => group.TagGroupId != tag.Tag.TagGroupId)).ToArray();
             if (ungrouped.Length > 0) OrganizationTagGroups.Add(new(this, null, ungrouped));
-            var tagNames = Tags.ToDictionary(tag => tag.TagId, tag => tag.Name);
-            var memberships = data.Memberships;
-            _p2TagSummaryByAsset.Clear();
-            foreach (var group in memberships.GroupBy(item => item.AssetId))
-                _p2TagSummaryByAsset[group.Key] = string.Join("、", group.Select(item => tagNames.GetValueOrDefault(item.TagId)).Where(name => !string.IsNullOrWhiteSpace(name)).Distinct(StringComparer.OrdinalIgnoreCase));
+            if (refreshTagSummaryCache)
+            {
+                _p2TagSummaryByAsset.Clear();
+                foreach (var summary in data.TagSummaries)
+                    _p2TagSummaryByAsset[summary.Key] = summary.Value;
+            }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
         catch (Exception exception) { OrganizationError = $"组织栏加载失败：{exception.Message}"; }
         finally { IsOrganizationLoading = false; NotifyP2OrganizationState(); }
+    }
+
+    private void ApplyP2BatchTagSummaryChanges(AssetBatchMetadataRequest request)
+    {
+        var addIds = (request.AddTagIds ?? []).ToHashSet();
+        var removeIds = (request.RemoveTagIds ?? []).Where(id => !addIds.Contains(id)).ToHashSet();
+        if (addIds.Count == 0 && removeIds.Count == 0) return;
+        var addNames = Tags.Where(tag => addIds.Contains(tag.TagId)).Select(tag => tag.Name).ToArray();
+        var removeNames = Tags.Where(tag => removeIds.Contains(tag.TagId)).Select(tag => tag.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var assetId in request.AssetIds.Distinct())
+        {
+            var names = _p2TagSummaryByAsset.TryGetValue(assetId, out var summary)
+                ? summary.Split('、', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
+                : [];
+            names.RemoveAll(removeNames.Contains);
+            foreach (var name in addNames)
+                if (!names.Contains(name, StringComparer.OrdinalIgnoreCase)) names.Add(name);
+            if (names.Count == 0) _p2TagSummaryByAsset.Remove(assetId);
+            else _p2TagSummaryByAsset[assetId] = string.Join("、", names);
+        }
     }
 
     private async Task SwitchViewAsync(string? value)
