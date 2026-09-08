@@ -1623,6 +1623,21 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
     }
 
     [TestMethod]
+    public void ValidatorComparesDerivedSafetyProvenanceAsJsonIntegerValues()
+    {
+        var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
+        var start = validator.IndexOf("foreach ($name in @($contract.safety_zero_fields))", StringComparison.Ordinal);
+        var end = validator.IndexOf("$applicationSafety", start, StringComparison.Ordinal);
+        Assert.IsGreaterThanOrEqualTo(0, start);
+        Assert.IsGreaterThan(start, end);
+        var block = validator[start..end];
+        StringAssert.Contains(block, "Require-IntegerEqual (Require-IntegerProperty $manifest.safety");
+        StringAssert.Contains(block, "Require-IntegerEqual ([int]$derivedSafety");
+        Assert.IsFalse(block.Contains("Require-Equal", StringComparison.Ordinal),
+            "PowerShell object equality rejects numerically equal Int64 and Int32 safety counts.");
+    }
+
+    [TestMethod]
     public void RecursiveNegativeProofModeCannotProduceAReleasePassingResult()
     {
         var validator = Read("tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedEvidence.ps1");
