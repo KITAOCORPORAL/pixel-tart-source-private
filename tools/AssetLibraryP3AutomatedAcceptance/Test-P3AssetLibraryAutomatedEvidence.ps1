@@ -1794,9 +1794,9 @@ $derivedSafety = [ordered]@{
 }
 Require-ZeroFields $manifest.safety @($contract.safety_zero_fields) 'manifest.safety'
 foreach ($name in @($contract.safety_zero_fields)) {
-    Require-Equal (Require-IntegerProperty $manifest.safety ([string]$name) 'manifest.safety') `
+    Require-IntegerEqual (Require-IntegerProperty $manifest.safety ([string]$name) 'manifest.safety') `
         ([int]$derivedSafety[[string]$name]) "manifest.safety.$name provenance"
-    Require-Equal ([int]$derivedSafety[[string]$name]) 0 "derived safety.$name"
+    Require-IntegerEqual ([int]$derivedSafety[[string]$name]) 0 "derived safety.$name"
 }
 $applicationSafety = $summary.safety_measurement
 Require-Equal $applicationSafety.owner 'independent-runner-after-process-exit' 'application safety measurement owner'
