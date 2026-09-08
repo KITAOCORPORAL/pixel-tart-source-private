@@ -141,4 +141,22 @@ public sealed class AssetLibraryPortableContainerTests
         Assert.AreEqual("keep", await File.ReadAllTextAsync(sentinel));
         Assert.HasCount(0, Directory.GetDirectories(temp.Path, ".existing.ptlibrary.staging-*"));
     }
+
+    [TestMethod]
+    public async Task MigrateLegacyDatabase_UsesSqliteBackupAndLeavesSourceUntouched()
+    {
+        using var temp = new TempDirectory();
+        var legacyPath = temp.Combine("asset-library-v16.db");
+        await using (var legacy = new SqliteAssetLibraryRepository(new AssetLibraryDatabase(legacyPath)))
+            await legacy.InitializeAsync();
+        var before = await File.ReadAllBytesAsync(legacyPath);
+        var target = temp.Combine("迁移后的素材库.ptlibrary");
+
+        var migrated = await new AssetLibraryContainerService().MigrateLegacyDatabaseAsync(legacyPath, target, "迁移后的素材库");
+
+        CollectionAssert.AreEqual(before, await File.ReadAllBytesAsync(legacyPath));
+        Assert.AreEqual("迁移后的素材库", migrated.DisplayName);
+        Assert.IsTrue(File.Exists(migrated.DatabasePath));
+        Assert.AreEqual(migrated.DatabasePath, (await new AssetLibraryContainerService().OpenAsync(target)).DatabasePath);
+    }
 }

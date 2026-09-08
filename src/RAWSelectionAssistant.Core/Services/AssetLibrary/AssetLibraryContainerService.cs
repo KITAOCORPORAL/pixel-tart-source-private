@@ -92,6 +92,38 @@ public sealed class AssetLibraryContainerService
         return ToDescriptor(root, manifest);
     }
 
+    /// <summary>
+    /// Copies a legacy fixed-path SQLite database into a new portable container.
+    /// The source is opened read-only and is never moved, deleted, or vacuumed.
+    /// </summary>
+    public async Task<AssetLibraryContainerDescriptor> MigrateLegacyDatabaseAsync(
+        string legacyDatabasePath,
+        string containerPath,
+        string displayName,
+        CancellationToken cancellationToken = default)
+    {
+        var source = AssetLibraryPortableSettings.NormalizePath(legacyDatabasePath);
+        if (source.Length == 0 || !File.Exists(source)) throw new FileNotFoundException("旧素材库数据库不存在。", source);
+        var descriptor = await CreateAsync(containerPath, displayName, cancellationToken).ConfigureAwait(false);
+        try
+        {
+            var sourceBuilder = new SqliteConnectionStringBuilder { DataSource = source, Mode = SqliteOpenMode.ReadOnly, Pooling = false };
+            var destinationBuilder = new SqliteConnectionStringBuilder { DataSource = descriptor.DatabasePath, Mode = SqliteOpenMode.ReadWrite, Pooling = false };
+            await using var sourceConnection = new SqliteConnection(sourceBuilder.ToString());
+            await using var destinationConnection = new SqliteConnection(destinationBuilder.ToString());
+            await sourceConnection.OpenAsync(cancellationToken).ConfigureAwait(false);
+            await destinationConnection.OpenAsync(cancellationToken).ConfigureAwait(false);
+            sourceConnection.BackupDatabase(destinationConnection);
+            await ValidateDatabaseAsync(descriptor.DatabasePath, cancellationToken).ConfigureAwait(false);
+            return await OpenAsync(descriptor.ContainerPath, cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            try { if (Directory.Exists(descriptor.ContainerPath)) Directory.Delete(descriptor.ContainerPath, recursive: true); } catch { }
+            throw;
+        }
+    }
+
     public async Task<AssetLibraryWriteLease> AcquireWriteLeaseAsync(AssetLibraryContainerDescriptor descriptor, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(descriptor);

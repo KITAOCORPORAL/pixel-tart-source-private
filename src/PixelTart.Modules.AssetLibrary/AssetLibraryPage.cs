@@ -74,6 +74,12 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
+        await InitializeForSessionAsync();
+    }
+
+    /// <summary>Initializes a page before it is placed in a visible host during a library switch.</summary>
+    public async Task InitializeForSessionAsync()
+    {
         if (_initialized || _disposed) return;
         _initialized = true;
         _viewModel.UpdateViewportWidth(ActualWidth);

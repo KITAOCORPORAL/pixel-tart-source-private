@@ -535,20 +535,20 @@ public partial class App : Application
             IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
             var workspaceSettings = _mainViewModel?.Settings.AssetLibraryWorkspace ?? new AssetLibraryWorkspaceSettings();
             var legacyDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
-            var databasePath = AssetLibraryContainerService.TryResolveStartupDatabasePath(
-                _mainViewModel?.Settings.AssetLibraryPortable,
-                out var portableDatabasePath)
-                ? portableDatabasePath
-                : legacyDatabasePath;
-            return new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
-                databasePath,
-                taskOperationBridge,
-                diagnostics,
-                enableAssetLibraryPreview,
-                assetLibraryDemoDirectory,
-                workspaceSettings,
-                _logService,
-                assetLibraryP1StateController);
+            var portableSettings = _mainViewModel?.Settings.AssetLibraryPortable ?? new AssetLibraryPortableSettings();
+            return new PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost(
+                legacyDatabasePath,
+                path => new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
+                    path,
+                    taskOperationBridge,
+                    diagnostics,
+                    enableAssetLibraryPreview,
+                    assetLibraryDemoDirectory,
+                    workspaceSettings,
+                    _logService,
+                    assetLibraryP1StateController),
+                portableSettings,
+                _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
         }));
         registry.Register(new RawToolModule());
         registry.Register(new OnlineSelectionModule());
