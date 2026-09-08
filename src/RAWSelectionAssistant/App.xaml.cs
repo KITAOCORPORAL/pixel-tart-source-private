@@ -3,6 +3,7 @@ using System.Windows.Threading;
 using System.Net.Http;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
@@ -533,8 +534,14 @@ public partial class App : Application
         {
             IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
             var workspaceSettings = _mainViewModel?.Settings.AssetLibraryWorkspace ?? new AssetLibraryWorkspaceSettings();
+            var legacyDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
+            var databasePath = AssetLibraryContainerService.TryResolveStartupDatabasePath(
+                _mainViewModel?.Settings.AssetLibraryPortable,
+                out var portableDatabasePath)
+                ? portableDatabasePath
+                : legacyDatabasePath;
             return new PixelTart.Modules.AssetLibrary.AssetLibraryPage(
-                Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db"),
+                databasePath,
                 taskOperationBridge,
                 diagnostics,
                 enableAssetLibraryPreview,

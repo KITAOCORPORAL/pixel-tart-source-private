@@ -561,7 +561,11 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     public Task<bool> RedoAsync(AssetLibraryUndoToken token, CancellationToken cancellationToken = default) =>
         ApplyPersistedRedoAtomicallyAsync(token.OperationId, cancellationToken);
 
-    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+    public ValueTask DisposeAsync()
+    {
+        _database.ClearConnectionPool();
+        return ValueTask.CompletedTask;
+    }
 
     private async Task<AssetLibraryBatchResult> ChangeFolderMembershipAsync(IEnumerable<Guid> assetIds, Guid folderId, bool add, CancellationToken cancellationToken)
     {

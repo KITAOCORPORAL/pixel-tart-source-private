@@ -84,19 +84,17 @@ public sealed class AssetLibraryDatabase
 
     public string DatabasePath { get; }
 
+    public void ClearConnectionPool()
+    {
+        using var connection = new Microsoft.Data.Sqlite.SqliteConnection(CreateConnectionString(write: true));
+        Microsoft.Data.Sqlite.SqliteConnection.ClearPool(connection);
+    }
+
     public async Task<Microsoft.Data.Sqlite.SqliteConnection> OpenConnectionAsync(bool write = false, CancellationToken cancellationToken = default)
     {
         var directory = Path.GetDirectoryName(DatabasePath);
         if (write && !string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
-        var builder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
-        {
-            DataSource = DatabasePath,
-            Mode = write ? Microsoft.Data.Sqlite.SqliteOpenMode.ReadWriteCreate : Microsoft.Data.Sqlite.SqliteOpenMode.ReadWriteCreate,
-            Cache = Microsoft.Data.Sqlite.SqliteCacheMode.Shared,
-            Pooling = true,
-            DefaultTimeout = 5
-        };
-        var connection = new Microsoft.Data.Sqlite.SqliteConnection(builder.ToString());
+        var connection = new Microsoft.Data.Sqlite.SqliteConnection(CreateConnectionString(write));
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         connection.CreateFunction<string, string, bool>("regexp", (pattern, input) =>
         {
@@ -124,5 +122,18 @@ public sealed class AssetLibraryDatabase
         pragma.CommandText = "PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;";
         await pragma.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         return connection;
+    }
+
+    private string CreateConnectionString(bool write)
+    {
+        var builder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
+        {
+            DataSource = DatabasePath,
+            Mode = write ? Microsoft.Data.Sqlite.SqliteOpenMode.ReadWriteCreate : Microsoft.Data.Sqlite.SqliteOpenMode.ReadWriteCreate,
+            Cache = Microsoft.Data.Sqlite.SqliteCacheMode.Shared,
+            Pooling = true,
+            DefaultTimeout = 5
+        };
+        return builder.ToString();
     }
 }
