@@ -228,7 +228,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         timer.Start();
     }
 
-    public ObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
+    public BulkObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
     public IReadOnlyList<AssetLibraryModuleDiagnostic> ModuleDiagnostics { get; }
     public bool IsPreviewDiagnosticsEnabled => _enablePreviewFeatures && ModuleDiagnostics.Count > 0;
     public int LoadAttempt => Volatile.Read(ref _loadAttempt);
@@ -1484,16 +1484,28 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
 
     private void SetSimilarityMatches(IEnumerable<VisualSimilarityMatch> matches)
     {
-        AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, match.Scores, null) { Owner = this, TagSummary = GetP2TagSummary(match.Asset.AssetId) }; AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        var cards = matches.Select(match => new AssetVisualMatchView(match.Asset, match.Scores, null)
+        {
+            Owner = this,
+            TagSummary = GetP2TagSummary(match.Asset.AssetId),
+        }).ToArray();
+        _visualMatchByAsset.Clear();
+        foreach (var card in cards) _visualMatchByAsset[card.Asset.AssetId] = card;
+        AssetCards.ReplaceAll(cards);
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
 
     private void SetColorMatches(IEnumerable<VisualAssetMatch> matches)
     {
-        AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var match in matches) { var card = new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE) { Owner = this, TagSummary = GetP2TagSummary(match.Asset.AssetId) }; AssetCards.Add(card); _visualMatchByAsset[match.Asset.AssetId] = card; }
+        var cards = matches.Select(match => new AssetVisualMatchView(match.Asset, null, match.ColorDeltaE)
+        {
+            Owner = this,
+            TagSummary = GetP2TagSummary(match.Asset.AssetId),
+        }).ToArray();
+        _visualMatchByAsset.Clear();
+        foreach (var card in cards) _visualMatchByAsset[card.Asset.AssetId] = card;
+        AssetCards.ReplaceAll(cards);
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
     }
@@ -1501,8 +1513,12 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private void SetAssetCards(IEnumerable<AssetItem> assets)
     {
         using var timing = AssetLibraryOperationTiming.Measure("viewmodel.cards");
-        AssetCards.Clear(); _visualMatchByAsset.Clear();
-        foreach (var asset in assets) AssetCards.Add(new(asset) { Owner = this, TagSummary = GetP2TagSummary(asset.AssetId) });
+        AssetCards.ReplaceAll(assets.Select(asset => new AssetVisualMatchView(asset)
+        {
+            Owner = this,
+            TagSummary = GetP2TagSummary(asset.AssetId),
+        }));
+        _visualMatchByAsset.Clear();
         ReconcileSelectionWithVisibleCards();
         NotifyContentState();
         RefreshBatchScopeAvailability();
