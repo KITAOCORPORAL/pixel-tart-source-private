@@ -243,7 +243,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         if (!nextIds.SetEquals(_viewModel.SelectedAssetIds))
         {
             _applyingViewModelSelection = true;
-            try { AssetGrid.ReplaceSelection([card]); }
+            try { AssetGrid.ReplaceSelection(new[] { card }); }
             finally { _applyingViewModelSelection = false; }
             _viewModel.SyncSelection([card.Asset]);
             UpdateGridDiagnostics();

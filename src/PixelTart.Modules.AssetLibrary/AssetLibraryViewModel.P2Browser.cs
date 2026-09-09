@@ -1,8 +1,10 @@
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Windows;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -29,7 +31,7 @@ public sealed partial class AssetLibraryViewModel
     public ObservableCollection<AssetLibraryFolderNodeView> OrganizationFolders { get; } = [];
     public ObservableCollection<AssetLibrarySmartFolderNodeView> OrganizationSmartFolders { get; } = [];
     public ObservableCollection<AssetLibraryTagGroupNodeView> OrganizationTagGroups { get; } = [];
-    public ObservableCollection<InspirationTrayEntry> InspirationTrayEntries { get; } = [];
+    public BulkObservableCollection<InspirationTrayEntry> InspirationTrayEntries { get; } = [];
 
     public AssetLibraryViewMode ViewMode => _workspaceSettings.ViewMode;
     public AssetLibrarySortField SortField => _workspaceSettings.SortField;
@@ -167,8 +169,12 @@ public sealed partial class AssetLibraryViewModel
             var manifestPath = Path.Combine(directory.FullName, "library.manifest.json");
             try
             {
-                if (File.Exists(manifestPath) && JsonDocument.Parse(File.ReadAllText(manifestPath)).RootElement.TryGetProperty("library_id", out var value) && Guid.TryParse(value.GetString(), out var id) && id != Guid.Empty)
-                    return id;
+                if (File.Exists(manifestPath))
+                {
+                    using var document = JsonDocument.Parse(File.ReadAllText(manifestPath));
+                    if (document.RootElement.TryGetProperty("library_id", out var value) && Guid.TryParse(value.GetString(), out var id) && id != Guid.Empty)
+                        return id;
+                }
             }
             catch (JsonException) { }
             directory = directory.Parent;
