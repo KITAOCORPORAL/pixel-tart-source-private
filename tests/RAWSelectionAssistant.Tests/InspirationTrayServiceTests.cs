@@ -37,7 +37,7 @@ public sealed class InspirationTrayServiceTests
             ids = (await service.ListAsync()).Select(x => x.TrayEntryId).ToArray();
             await service.ReorderAsync([ids[2], ids[0], ids[1]]);
             await service.ResolveAsync([new InspirationTrayResolution(refs[2], InspirationTrayResolutionState.AssetMissing)]);
-            Assert.AreEqual(3, (await service.SaveAsInspirationCollectionAsync()).Entries.Count);
+            Assert.HasCount(3, (await service.SaveAsInspirationCollectionAsync()).Entries);
         }
         await using var restarted = new SqliteInspirationTrayService(path);
         var entries = await restarted.ListAsync();
