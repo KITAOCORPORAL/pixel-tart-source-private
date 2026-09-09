@@ -374,7 +374,7 @@
             <MenuItem Header="打开原文件位置 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenSourceLocation" />
             <Separator />
             <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
-                <MenuItem Header="加入灵感托盘" IsEnabled="False" ToolTip="灵感托盘服务正在接入" AutomationProperties.AutomationId="AssetContextAddToTray" />
+                <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
                 <MenuItem Header="加入上次使用的灵感集" IsEnabled="False" AutomationProperties.AutomationId="AssetContextAddLastCollection" />
                 <MenuItem Header="选择灵感集…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseCollection" />
                 <MenuItem Header="加入当前策划" IsEnabled="False" ToolTip="P4 策划中心尚未启用" AutomationProperties.AutomationId="AssetContextAddCurrentPlan" />
@@ -431,9 +431,9 @@
             </MenuItem>
             <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
                 <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
-                <MenuItem Header="查找相似配色" Click="FindSimilarPaletteMenu_Click" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
-                <MenuItem Header="查找相似视觉" Click="FindSimilarVisualMenu_Click" AutomationProperties.AutomationId="FindSimilarVisualContext" />
-                <MenuItem Header="分析视觉数据" Click="AnalyzeVisualMenu_Click" AutomationProperties.AutomationId="AnalyzeVisualContext" />
+                <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
+                <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarVisualContext" />
+                <MenuItem Header="分析视觉数据" Command="{Binding Owner.AnalyzeSelectionCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AnalyzeVisualContext" />
             </MenuItem>
             <MenuItem Header="更多 ›" AutomationProperties.AutomationId="AssetContextMore">
                 <MenuItem Header="刷新缩略图" IsEnabled="False" />
@@ -586,6 +586,9 @@
                         AutomationProperties.AutomationId="ToggleAssetInspectorPane"
                         AutomationProperties.Name="{Binding InspectorPaneToggleLabel}"
                         Focusable="True" IsTabStop="True" />
+                <Button Content="♡ {Binding InspirationTrayCount}" Command="{Binding ToggleInspirationTrayCommand}" Margin="4,0,0,0"
+                        Style="{StaticResource AssetLibraryIconButton}" ToolTip="打开灵感托盘"
+                        AutomationProperties.AutomationId="InspirationTrayToggle" AutomationProperties.Name="灵感托盘" />
             </StackPanel>
             <Button Grid.Row="0" Grid.Column="2" Content="导入" Margin="6,0,0,0"
                     Style="{StaticResource AssetLibraryPrimaryButton}"
@@ -1239,6 +1242,23 @@
                 BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
                 Visibility="{Binding P3TagManagerOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:AssetTagManagerView />
+        </Border>
+
+        <Border Grid.Row="2" Panel.ZIndex="28" Width="760" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                MaxHeight="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12"
+                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
+                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Visibility="{Binding IsInspirationTrayOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="InspirationTrayDrawer">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="灵感托盘" FontSize="15" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding InspirationTrayCount, StringFormat={} · {0} 项}" Style="{StaticResource AssetCaption}" Margin="6,2,0,0" />
+                    <Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" Margin="12,0,0,0" AutomationProperties.AutomationId="InspirationTrayClear" />
+                    <Button DockPanel.Dock="Right" Content="收起" Command="{Binding ToggleInspirationTrayCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" Margin="4,0,0,0" AutomationProperties.AutomationId="InspirationTrayClose" />
+                </StackPanel>
+                <ListBox ItemsSource="{Binding InspirationTrayEntries}" DisplayMemberPath="Reference.AssetId" MaxHeight="190" AutomationProperties.AutomationId="InspirationTrayItems" />
+            </DockPanel>
         </Border>
 
         <DockPanel Grid.Row="3" Margin="0,8,0,0">

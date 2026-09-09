@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Security.Cryptography;
+using System.Text.Json;
 using System.Windows;
 using RAWSelectionAssistant.Core.Models;
 
@@ -21,11 +23,13 @@ public sealed partial class AssetLibraryViewModel
     private long _inspectorGeneration;
     private bool _p2JournalBusy;
     private readonly Dictionary<Guid, string> _p2TagSummaryByAsset = [];
+    private int _inspirationTrayCount;
 
     public ObservableCollection<AssetLibrarySystemCollectionView> SystemCollections { get; } = [];
     public ObservableCollection<AssetLibraryFolderNodeView> OrganizationFolders { get; } = [];
     public ObservableCollection<AssetLibrarySmartFolderNodeView> OrganizationSmartFolders { get; } = [];
     public ObservableCollection<AssetLibraryTagGroupNodeView> OrganizationTagGroups { get; } = [];
+    public ObservableCollection<InspirationTrayEntry> InspirationTrayEntries { get; } = [];
 
     public AssetLibraryViewMode ViewMode => _workspaceSettings.ViewMode;
     public AssetLibrarySortField SortField => _workspaceSettings.SortField;
@@ -99,6 +103,12 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> RestoreContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RemoveContextFromViewCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> ShowContextInfoCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> AddToInspirationTrayCommand { get; private set; } = null!;
+    public AsyncCommand ToggleInspirationTrayCommand { get; private set; } = null!;
+    public AsyncCommand ClearInspirationTrayCommand { get; private set; } = null!;
+    public int InspirationTrayCount { get => _inspirationTrayCount; private set => SetProperty(ref _inspirationTrayCount, value); }
+    private bool _isInspirationTrayOpen;
+    public bool IsInspirationTrayOpen { get => _isInspirationTrayOpen; private set => SetProperty(ref _isInspirationTrayOpen, value); }
     public AsyncCommand P2UndoCommand { get; private set; } = null!;
     public AsyncCommand P2RedoCommand { get; private set; } = null!;
 
@@ -129,8 +139,61 @@ public sealed partial class AssetLibraryViewModel
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
+        AddToInspirationTrayCommand = new(AddToInspirationTrayAsync, _ => IsReady && SelectedAssets.Count > 0);
+        ToggleInspirationTrayCommand = new(ToggleInspirationTrayAsync, () => IsReady);
+        ClearInspirationTrayCommand = new(ClearInspirationTrayAsync, () => IsReady && InspirationTrayEntries.Count > 0);
         P2UndoCommand = new(() => RunTrackedP3OperationAsync(UndoP2Async), () => !_p2JournalBusy && _browserCommands.CanUndo);
         P2RedoCommand = new(() => RunTrackedP3OperationAsync(RedoP2Async), () => !_p2JournalBusy && _browserCommands.CanRedo);
+    }
+
+    private void InitializeInspirationTray() => _ = RefreshInspirationTrayAsync();
+
+    private async Task AddToInspirationTrayAsync(AssetVisualMatchView? card)
+    {
+        var assets = ContextIds(card).Select(id => SelectedAssets.FirstOrDefault(asset => asset.AssetId == id) ?? AssetCards.FirstOrDefault(item => item.Asset.AssetId == id)?.Asset).Where(asset => asset is not null).Cast<AssetItem>().ToArray();
+        var refs = assets.Where(asset => !string.IsNullOrWhiteSpace(asset.ContentHash) && asset.ContentHash!.Length == 64).Select(asset => new AssetLibraryStableReference(_libraryIdForTray, asset.AssetId, asset.ContentHash!)).ToArray();
+        if (refs.Length == 0) { Status = "所选素材缺少 SHA-256，暂不能加入灵感托盘。"; return; }
+        var result = await _inspirationTray.AddRangeAsync(refs, P2QueryDescription);
+        await RefreshInspirationTrayAsync();
+        Status = $"灵感托盘：新增 {result.AddedCount} 项，已存在 {result.ExistingCount} 项。";
+    }
+
+    private Guid _libraryIdForTray => ResolveLibraryId(_databasePath);
+    private static Guid ResolveLibraryId(string databasePath)
+    {
+        var directory = new DirectoryInfo(Path.GetDirectoryName(databasePath) ?? string.Empty);
+        while (directory is not null)
+        {
+            var manifestPath = Path.Combine(directory.FullName, "library.manifest.json");
+            try
+            {
+                if (File.Exists(manifestPath) && JsonDocument.Parse(File.ReadAllText(manifestPath)).RootElement.TryGetProperty("library_id", out var value) && Guid.TryParse(value.GetString(), out var id) && id != Guid.Empty)
+                    return id;
+            }
+            catch (JsonException) { }
+            directory = directory.Parent;
+        }
+        return new Guid(MD5.HashData(System.Text.Encoding.UTF8.GetBytes(Path.GetFullPath(databasePath)))[..16]);
+    }
+    private async Task RefreshInspirationTrayAsync()
+    {
+        var entries = await _inspirationTray.ListAsync(_lifetimeCancellation.Token);
+        InspirationTrayEntries.ReplaceAll(entries);
+        InspirationTrayCount = entries.Count;
+        ClearInspirationTrayCommand.RaiseCanExecuteChanged();
+    }
+
+    private async Task ToggleInspirationTrayAsync()
+    {
+        IsInspirationTrayOpen = !IsInspirationTrayOpen;
+        if (IsInspirationTrayOpen) await RefreshInspirationTrayAsync();
+    }
+
+    private async Task ClearInspirationTrayAsync()
+    {
+        await _inspirationTray.ClearAsync(_lifetimeCancellation.Token);
+        await RefreshInspirationTrayAsync();
+        Status = "灵感托盘已清空；素材引用和源文件均未删除。";
     }
 
     private void BuildSystemCollections()

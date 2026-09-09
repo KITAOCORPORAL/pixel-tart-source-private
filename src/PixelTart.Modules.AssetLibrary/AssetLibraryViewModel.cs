@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Win32;
@@ -27,6 +29,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly ILogService? _logService;
     private readonly bool _enablePreviewFeatures;
     private readonly IAssetLibraryLoadStateController? _loadStateController;
+    private readonly IInspirationTrayService _inspirationTray;
     private readonly string _databasePath;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
@@ -158,6 +161,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         _database = new AssetLibraryDatabase(databasePath);
         _databasePath = _database.DatabasePath;
+        _inspirationTray = new SqliteInspirationTrayService(Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _loadStateController = loadStateController;
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
@@ -200,6 +204,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         InitializeP3QueryComposer();
         InitializeP3SmartFolderEditor();
         InitializeP3TagManager();
+        InitializeInspirationTray();
     }
 
     private async void OnSearchDebounceTick(DispatcherTimer timer, long generation)
@@ -649,6 +654,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             lifetimeToken.ThrowIfCancellationRequested();
             RecordLoadState("repository-initialization-entered", attempt);
             await _repository.InitializeAsync(lifetimeToken);
+            await _inspirationTray.InitializeAsync(lifetimeToken);
             if (_loadStateController is not null)
                 await CaptureRepositoryIdentityAndSchemaAsync(lifetimeToken);
             RecordLoadState("repository-initialized", attempt);
@@ -1840,6 +1846,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _batchCancellation?.Dispose();
             Volatile.Write(ref _p3RepositoryDisposeStarted, 1);
             await _repository.DisposeAsync();
+            await _inspirationTray.DisposeAsync();
         }
         finally
         {
