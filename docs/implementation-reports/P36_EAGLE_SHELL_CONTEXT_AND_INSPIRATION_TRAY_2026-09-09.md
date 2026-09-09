@@ -1,7 +1,7 @@
 # P3.6 Eagle 式素材库操作壳、分层右键菜单与灵感托盘
 
 基线：`feature/asset-library-portable-focus-p35` @ `427c079b71dad83375e69692fc83b829db569666`。  
-交付分支：`feature/asset-library-eagle-shell-context-p36` @ `a557e2e428bd198e4ebe88f1e2319d6e269b85fa`。
+交付分支：`feature/asset-library-eagle-shell-context-p36`；最终完整 SHA 以该分支 HEAD 为准。
 
 ## 交付
 
