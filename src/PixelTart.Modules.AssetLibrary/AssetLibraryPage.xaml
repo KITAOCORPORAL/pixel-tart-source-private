@@ -366,45 +366,84 @@
         <ContextMenu x:Key="AssetP2ContextMenu" x:Shared="False"
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <MenuItem Header="打开所在位置（仅入口，不自动执行）" IsEnabled="False"
-                      AutomationProperties.AutomationId="AssetContextOpenLocation" />
-            <MenuItem Header="复制路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextCopyPath" />
+            <MenuItem Header="打开大图预览" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenPreview" />
+            <MenuItem Header="在新窗口打开" IsEnabled="False" ToolTip="此版本暂未提供独立预览窗口" AutomationProperties.AutomationId="AssetContextOpenNewWindow" />
+            <MenuItem Header="在默认应用打开" IsEnabled="False" ToolTip="为保护源文件，默认应用打开将在后续版本提供" AutomationProperties.AutomationId="AssetContextOpenDefault" />
+            <MenuItem Header="使用其他应用打开 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenWith" />
+            <MenuItem Header="在文件资源管理器中显示" IsEnabled="False" ToolTip="文件位置打开契约将在后续版本启用" AutomationProperties.AutomationId="AssetContextShowInExplorer" />
+            <MenuItem Header="打开原文件位置 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenSourceLocation" />
             <Separator />
-            <MenuItem Header="加入当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextAddFolder" />
-            <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextRemoveFolder" />
-            <MenuItem Header="加入当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextAddTag" />
-            <MenuItem Header="移出当前标签" Command="{Binding Owner.RemoveContextTagCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextRemoveTag" />
-            <MenuItem Header="评分" AutomationProperties.AutomationId="AssetContextRating">
-                <MenuItem Header="0 星" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="1 星" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="2 星" Command="{Binding Owner.RateContextTwoCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="3 星" Command="{Binding Owner.RateContextThreeCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="4 星" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
+            <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
+                <MenuItem Header="加入灵感托盘" IsEnabled="False" ToolTip="灵感托盘服务正在接入" AutomationProperties.AutomationId="AssetContextAddToTray" />
+                <MenuItem Header="加入上次使用的灵感集" IsEnabled="False" AutomationProperties.AutomationId="AssetContextAddLastCollection" />
+                <MenuItem Header="选择灵感集…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseCollection" />
+                <MenuItem Header="加入当前策划" IsEnabled="False" ToolTip="P4 策划中心尚未启用" AutomationProperties.AutomationId="AssetContextAddCurrentPlan" />
+                <MenuItem Header="查看引用关系" IsEnabled="False" AutomationProperties.AutomationId="AssetContextViewReferences" />
             </MenuItem>
-            <MenuItem Header="标记缺失" Command="{Binding Owner.MarkContextMissingCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextMarkMissing" />
-            <MenuItem Header="清除缺失标记" Command="{Binding Owner.ClearContextMissingCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextClearMissing" />
-            <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextArchive" />
-            <MenuItem Header="恢复" Command="{Binding Owner.RestoreContextCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextRestore" />
-            <MenuItem Header="从当前视图移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextRemoveFromView" />
+            <MenuItem Header="加入与整理 ›" AutomationProperties.AutomationId="AssetContextOrganize">
+                <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
+                <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFolder" />
+                <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
+                <MenuItem Header="移出当前标签" Command="{Binding Owner.RemoveContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveTag" />
+                <MenuItem Header="添加至文件夹…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseFolder" />
+                <MenuItem Header="添加至灵感集…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextAddCollection" />
+                <MenuItem Header="设置评分 ›" AutomationProperties.AutomationId="AssetContextRating">
+                    <MenuItem Header="0 星" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="1 星" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="2 星" Command="{Binding Owner.RateContextTwoCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="3 星" Command="{Binding Owner.RateContextThreeCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="4 星" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
+                </MenuItem>
+                <MenuItem Header="添加至其他素材库…" IsEnabled="False" ToolTip="需要目标库写锁与迁移策略确认" AutomationProperties.AutomationId="AssetContextAddOtherLibrary" />
+            </MenuItem>
+            <MenuItem Header="素材编辑 ›" AutomationProperties.AutomationId="AssetContextEdit">
+                <MenuItem Header="裁切与校正" IsEnabled="False" ToolTip="当前没有非破坏编辑引擎" />
+                <MenuItem Header="向左旋转" IsEnabled="False" />
+                <MenuItem Header="向右旋转" IsEnabled="False" />
+                <MenuItem Header="水平翻转" IsEnabled="False" />
+                <MenuItem Header="垂直翻转" IsEnabled="False" />
+                <MenuItem Header="创建修整版本" IsEnabled="False" />
+                <MenuItem Header="用其他文件替换" IsEnabled="False" />
+                <MenuItem Header="恢复原始版本" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="工作流 ›" AutomationProperties.AutomationId="AssetContextWorkflow">
+                <MenuItem Header="加入待拍摄参考" IsEnabled="False" />
+                <MenuItem Header="加入归片任务" IsEnabled="False" />
+                <MenuItem Header="标记为已采用" IsEnabled="False" />
+                <MenuItem Header="关联拍摄项目" IsEnabled="False" />
+                <MenuItem Header="关联拍摄日期" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="导出 ›" AutomationProperties.AutomationId="AssetContextExport">
+                <MenuItem Header="导出原文件" IsEnabled="False" />
+                <MenuItem Header="导出副本" IsEnabled="False" />
+                <MenuItem Header="导出选中素材包" IsEnabled="False" />
+                <MenuItem Header="导出清单" IsEnabled="False" />
+            </MenuItem>
             <Separator />
-            <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}"
-                      AutomationProperties.AutomationId="AssetContextShowInfo" />
-            <MenuItem Header="视觉" AutomationProperties.AutomationId="AssetContextVisual">
+            <MenuItem Header="重命名" IsEnabled="False" AutomationProperties.AutomationId="AssetContextRename" />
+            <MenuItem Header="创建副本" IsEnabled="False" AutomationProperties.AutomationId="AssetContextDuplicate" />
+            <MenuItem Header="复制 ›" AutomationProperties.AutomationId="AssetContextCopy">
+                <MenuItem Header="复制文件路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="复制文件名" IsEnabled="False" />
+                <MenuItem Header="复制像素蛋挞内部素材链接" IsEnabled="False" />
+                <MenuItem Header="复制标签" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
+                <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
                 <MenuItem Header="查找相似配色" Click="FindSimilarPaletteMenu_Click" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
                 <MenuItem Header="查找相似视觉" Click="FindSimilarVisualMenu_Click" AutomationProperties.AutomationId="FindSimilarVisualContext" />
                 <MenuItem Header="分析视觉数据" Click="AnalyzeVisualMenu_Click" AutomationProperties.AutomationId="AnalyzeVisualContext" />
             </MenuItem>
+            <MenuItem Header="更多 ›" AutomationProperties.AutomationId="AssetContextMore">
+                <MenuItem Header="刷新缩略图" IsEnabled="False" />
+                <MenuItem Header="重新分析颜色" IsEnabled="False" />
+                <MenuItem Header="查看技术信息" IsEnabled="False" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
+            <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
+            <MenuItem Header="丢到回收站" IsEnabled="False" ToolTip="回收站写入契约尚未启用" AutomationProperties.AutomationId="AssetContextRecycle" />
         </ContextMenu>
 
         <Style x:Key="AssetP2ListBoxItem" TargetType="ListBoxItem">

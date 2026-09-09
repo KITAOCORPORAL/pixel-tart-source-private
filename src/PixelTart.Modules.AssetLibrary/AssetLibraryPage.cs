@@ -70,6 +70,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseMove += AssetGrid_PreviewMouseMove;
         AssetGrid.PreviewMouseLeftButtonUp += AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
+        AssetGrid.PreviewMouseRightButtonDown += AssetGrid_PreviewMouseRightButtonDown;
         TextCompositionManager.AddPreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.AddPreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.AddTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -152,6 +153,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseMove -= AssetGrid_PreviewMouseMove;
         AssetGrid.PreviewMouseLeftButtonUp -= AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
+        AssetGrid.PreviewMouseRightButtonDown -= AssetGrid_PreviewMouseRightButtonDown;
         TextCompositionManager.RemovePreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -227,6 +229,25 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _pendingSelectionSync = Dispatcher.BeginInvoke(
             DispatcherPriority.DataBind,
             new Action(FlushAssetGridSelection));
+    }
+
+    private void AssetGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (_disposed || e.ChangedButton != MouseButton.Right) return;
+        var container = FindVisualParent<ListBoxItem>(e.OriginalSource as DependencyObject);
+        if (container?.DataContext is not AssetVisualMatchView card) return;
+
+        // Keep an existing extended selection when the context target is already selected;
+        // otherwise promote the target to a single selection before ContextMenu opens.
+        var nextIds = AssetLibraryContextSelectionPolicy.ResolveSelection(_viewModel.SelectedAssetIds, card.Asset.AssetId);
+        if (!nextIds.SetEquals(_viewModel.SelectedAssetIds))
+        {
+            _applyingViewModelSelection = true;
+            try { AssetGrid.ReplaceSelection([card]); }
+            finally { _applyingViewModelSelection = false; }
+            _viewModel.SyncSelection([card.Asset]);
+            UpdateGridDiagnostics();
+        }
     }
 
     private void FlushAssetGridSelection()
