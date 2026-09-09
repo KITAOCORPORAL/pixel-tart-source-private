@@ -586,7 +586,7 @@
                         AutomationProperties.AutomationId="ToggleAssetInspectorPane"
                         AutomationProperties.Name="{Binding InspectorPaneToggleLabel}"
                         Focusable="True" IsTabStop="True" />
-                <Button Content="♡ {Binding InspirationTrayCount}" Command="{Binding ToggleInspirationTrayCommand}" Margin="4,0,0,0"
+                <Button Content="{Binding InspirationTrayCount, StringFormat={}♡ {0}}" Command="{Binding ToggleInspirationTrayCommand}" Margin="4,0,0,0"
                         Style="{StaticResource AssetLibraryIconButton}" ToolTip="打开灵感托盘"
                         AutomationProperties.AutomationId="InspirationTrayToggle" AutomationProperties.Name="灵感托盘" />
             </StackPanel>
