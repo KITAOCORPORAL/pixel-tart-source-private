@@ -1,6 +1,6 @@
 # AL-F01 Asset Library Import Foundation Hardening
 
-日期：2026-09-10  
+日期：2026-09-10
 状态：实现与自动验收完成
 
 ## 1. Branch / HEAD
