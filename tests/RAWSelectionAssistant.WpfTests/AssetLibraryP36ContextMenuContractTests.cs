@@ -28,7 +28,7 @@ public sealed class AssetLibraryP36ContextMenuContractTests
         var menu = document.Descendants().First(element => element.Name.LocalName == "ContextMenu" &&
             element.Attributes().Any(attribute => attribute.Value == "AssetVisualContextMenu"));
         var headers = menu.Elements().Where(e => e.Name.LocalName == "MenuItem").Select(e => (string?)e.Attribute("Header")).ToArray();
-        CollectionAssert.AreEqual(new[] { "打开大图预览", "在新窗口打开", "在默认应用打开", "使用其他应用打开 ›", "在文件资源管理器中显示", "打开原文件位置 ›", "用于策划 ›", "加入与整理 ›", "素材编辑 ›", "工作流 ›", "导出 ›" }, headers.Take(11).ToArray());
+        CollectionAssert.AreEqual(new[] { "查看信息", "在新窗口打开", "在默认应用打开", "使用其他应用打开 ›", "在文件资源管理器中显示", "打开原文件位置 ›", "用于策划 ›", "加入与整理 ›", "素材编辑 ›", "工作流 ›", "导出 ›" }, headers.Take(11).ToArray());
         Assert.AreEqual(1, document.Descendants().Count(e => e.Name.LocalName == "MenuItem" && (string?)e.Attribute("Header") == "加入灵感托盘"));
         Assert.AreEqual(1, document.Descendants().Count(e => e.Name.LocalName == "MenuItem" && (string?)e.Attribute("Header") == "用其他文件替换"));
     }

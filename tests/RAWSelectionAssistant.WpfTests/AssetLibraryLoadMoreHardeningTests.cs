@@ -34,7 +34,7 @@ public sealed class AssetLibraryLoadMoreHardeningTests
             var repository = new SqliteAssetLibraryRepository(databasePath);
             repository.InitializeAsync().GetAwaiter().GetResult();
             var requests = Enumerable.Range(0, 501)
-                .Select(index => new AssetImportRequest(Path.Combine(root, $"missing-{index:000}.jpg")))
+                .Select(index => new AssetImportRequest(Path.Combine(root, $"missing-{index:000}.jpg"), AllowMissingMetadataPlaceholder: true))
                 .ToArray();
             var imported = repository.ImportAsync(requests).GetAwaiter().GetResult();
             Assert.AreEqual(501, imported.ImportedCount);

@@ -25,7 +25,7 @@ public sealed class AssetLibraryP3MigrationTests
 
         await setup.RestartAsync();
 
-        Assert.AreEqual(7L, await ScalarInt64Async(setup.DatabasePath, "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;"));
+        Assert.AreEqual(8L, await ScalarInt64Async(setup.DatabasePath, "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;"));
         var migrated = await setup.Repository.GetSmartFolderQueryDocumentAsync(folderId);
         Assert.IsNotNull(migrated);
         Assert.AreEqual(AssetQueryDocument.CurrentVersion, migrated.Document.Version);
@@ -147,7 +147,7 @@ public sealed class AssetLibraryP3MigrationTests
         Assert.AreEqual(before.QueryJson, after.QueryJson);
         Assert.AreEqual(before.QueryHash, after.QueryHash);
         Assert.AreEqual("{broken-json", after.BackupJson);
-        Assert.AreEqual(7L, await ScalarInt64Async(setup.DatabasePath, "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;"));
+        Assert.AreEqual(8L, await ScalarInt64Async(setup.DatabasePath, "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;"));
     }
 
     [TestMethod]

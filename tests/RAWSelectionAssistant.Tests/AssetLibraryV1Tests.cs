@@ -165,7 +165,7 @@ public sealed class AssetLibraryV1Tests
     {
         await using var setup = await TestSetup.CreateAsync();
         var requests = Enumerable.Range(0, 100_000)
-            .Select(index => new AssetImportRequest(setup.Combine($"synthetic-{index:000000}.metadata")))
+            .Select(index => new AssetImportRequest(setup.Combine($"synthetic-{index:000000}.jpg"), AllowMissingMetadataPlaceholder: true))
             .ToArray();
 
         var result = await setup.Repository.ImportAsync(requests);

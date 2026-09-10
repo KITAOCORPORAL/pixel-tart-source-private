@@ -116,7 +116,7 @@ public sealed class AssetLibraryP3ScopeBehaviorTests
         var database = Path.Combine(root, "library.db");
         await using var repository = new SqliteAssetLibraryRepository(database);
         await repository.InitializeAsync();
-        await repository.ImportAsync(Enumerable.Range(0, 601).Select(index => new AssetImportRequest(Path.Combine(root, $"asset-{index:D4}.jpg"))));
+        await repository.ImportAsync(Enumerable.Range(0, 601).Select(index => new AssetImportRequest(Path.Combine(root, $"asset-{index:D4}.jpg"), AllowMissingMetadataPlaceholder: true)));
         await AssetLibraryP3PerformanceDiagnosticsTests.RunSta(async () =>
         {
             await using var vm = new AssetLibraryViewModel(database, new TaskOperationBridge());

@@ -127,7 +127,7 @@ public sealed class AssetLibraryV15Tests
     public async Task KeysetPagingTraversesAllRowsWithoutDuplicates()
     {
         await using var setup = await TestSetup.CreateAsync();
-        await setup.Repository.ImportAsync(Enumerable.Range(0, 513).Select(index => new AssetImportRequest(setup.Combine($"deep-{index:0000}.asset"))));
+        await setup.Repository.ImportAsync(Enumerable.Range(0, 513).Select(index => new AssetImportRequest(setup.Combine($"deep-{index:0000}.jpg"), AllowMissingMetadataPlaceholder: true)));
         var ids = new HashSet<Guid>(); string? cursor = null;
         do
         {
@@ -193,7 +193,7 @@ public sealed class AssetLibraryV15Tests
     {
         await using var setup = await TestSetup.CreateAsync();
         var missing = setup.Combine("old/moved.jpg");
-        await setup.Repository.ImportAsync([new(missing)]);
+        await setup.Repository.ImportAsync([new(missing, AllowMissingMetadataPlaceholder: true)]);
         var newRoot = setup.Combine("new-root"); Directory.CreateDirectory(newRoot);
         var target = Path.Combine(newRoot, "moved.jpg"); await File.WriteAllTextAsync(target, "new bytes", Encoding.UTF8);
         var before = await File.ReadAllBytesAsync(target);
@@ -220,7 +220,7 @@ public sealed class AssetLibraryV15Tests
     public async Task IndexedPagingUsesSqlLimitAndRatingIndexPlan()
     {
         await using var setup = await TestSetup.CreateAsync();
-        await setup.Repository.ImportAsync(Enumerable.Range(0, 2_000).Select(x => new AssetImportRequest(setup.Combine($"meta-{x:0000}.asset"))));
+        await setup.Repository.ImportAsync(Enumerable.Range(0, 2_000).Select(x => new AssetImportRequest(setup.Combine($"meta-{x:0000}.jpg"), AllowMissingMetadataPlaceholder: true)));
         var page = await setup.Repository.QueryAsync(new(PageSize: 64));
         Assert.HasCount(64, page.Items);
         Assert.AreEqual(2_000, page.TotalCount);
