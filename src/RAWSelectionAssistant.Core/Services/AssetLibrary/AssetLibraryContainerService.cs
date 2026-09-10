@@ -88,6 +88,14 @@ public sealed class AssetLibraryContainerService
         EnsureCriticalPathsArePhysical(root, manifest);
         var databasePath = ResolveContainedPath(root, manifest.DatabaseRelativePath);
         if (!File.Exists(databasePath)) throw new InvalidDataException("素材库数据库缺失。");
+        if (manifest.DatabaseSchemaVersion < AssetLibrarySchema.Version)
+        {
+            await using var repository = new SqliteAssetLibraryRepository(databasePath);
+            await repository.InitializeAsync(cancellationToken).ConfigureAwait(false);
+            manifest.DatabaseSchemaVersion = AssetLibrarySchema.Version;
+            manifest.UpdatedAt = DateTimeOffset.UtcNow;
+            await WriteManifestAsync(root, manifest, cancellationToken).ConfigureAwait(false);
+        }
         await ValidateDatabaseAsync(databasePath, cancellationToken).ConfigureAwait(false);
         return ToDescriptor(root, manifest);
     }
@@ -172,8 +180,15 @@ public sealed class AssetLibraryContainerService
         manifest.PayloadSha256 = ComputePayloadHash(manifest);
         var path = Path.Combine(root, ManifestFileName);
         var temporary = path + $".tmp-{Guid.NewGuid():N}";
-        await File.WriteAllBytesAsync(temporary, SerializeManifest(manifest), cancellationToken).ConfigureAwait(false);
-        File.Move(temporary, path);
+        try
+        {
+            await File.WriteAllBytesAsync(temporary, SerializeManifest(manifest), cancellationToken).ConfigureAwait(false);
+            File.Move(temporary, path, overwrite: true);
+        }
+        finally
+        {
+            try { if (File.Exists(temporary)) File.Delete(temporary); } catch { }
+        }
     }
 
     private static async Task<ContainerManifest> ReadManifestAsync(string root, CancellationToken cancellationToken)
@@ -252,7 +267,7 @@ public sealed class AssetLibraryContainerService
         if (manifest.LibraryId == Guid.Empty) throw new InvalidDataException("素材库身份无效。");
         ValidateDisplayName(manifest.DisplayName);
         if (manifest.CreatedAt == default || manifest.UpdatedAt < manifest.CreatedAt) throw new InvalidDataException("素材库时间字段无效。");
-        if (manifest.DatabaseSchemaVersion != AssetLibrarySchema.Version) throw new InvalidDataException("素材库声明的数据库 schema 版本不受支持。");
+        if (manifest.DatabaseSchemaVersion < 1 || manifest.DatabaseSchemaVersion > AssetLibrarySchema.Version) throw new InvalidDataException("素材库声明的数据库 schema 版本不受支持。");
         ValidateExactRelativePath(manifest.DatabaseRelativePath, DatabaseRelativePath, "数据库");
         ValidateExactRelativePath(manifest.ManagedAssetsRelativePath, ManagedAssetsRelativePath, "托管素材");
         ValidateExactRelativePath(manifest.PreviewCacheRelativePath, PreviewCacheRelativePath, "预览缓存");

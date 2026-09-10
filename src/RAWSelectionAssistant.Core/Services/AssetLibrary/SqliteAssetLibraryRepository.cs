@@ -17,12 +17,22 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryRepository
 {
     private readonly AssetLibraryDatabase _database;
+    private readonly AssetFormatCapabilityRegistry _formatCapabilities;
+    private readonly IAssetMetadataExtractor _metadataExtractor;
     private readonly ConcurrentDictionary<Guid, Func<CancellationToken, Task>> _undo = new();
     private int _initialized;
 
     public SqliteAssetLibraryRepository(string databasePath) : this(new AssetLibraryDatabase(databasePath)) { }
 
-    public SqliteAssetLibraryRepository(AssetLibraryDatabase database) => _database = database;
+    public SqliteAssetLibraryRepository(
+        AssetLibraryDatabase database,
+        AssetFormatCapabilityRegistry? formatCapabilities = null,
+        IAssetMetadataExtractor? metadataExtractor = null)
+    {
+        _database = database;
+        _formatCapabilities = formatCapabilities ?? AssetFormatCapabilityRegistry.Default;
+        _metadataExtractor = metadataExtractor ?? new MetadataExtractorAssetMetadataExtractor();
+    }
 
     public string DatabasePath => _database.DatabasePath;
 
@@ -30,22 +40,24 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     {
         if (Volatile.Read(ref _initialized) != 0) return;
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await CreateSchemaV6BackupIfNeededAsync(connection, cancellationToken).ConfigureAwait(false);
+        await CreateSchemaBackupIfNeededAsync(connection, cancellationToken).ConfigureAwait(false);
         await AssetLibrarySchema.EnsureAsync(connection, cancellationToken).ConfigureAwait(false);
+        await EnsureIntegrityAsync(connection, cancellationToken).ConfigureAwait(false);
         Volatile.Write(ref _initialized, 1);
     }
 
-    private async Task CreateSchemaV6BackupIfNeededAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    private async Task CreateSchemaBackupIfNeededAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {
         await using var exists = connection.CreateCommand();
         exists.CommandText = "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='AssetLibrarySchemaInfo';";
         if (Convert.ToInt32(await exists.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) == 0) return;
         await using var read = connection.CreateCommand();
         read.CommandText = "SELECT COALESCE(MAX(Version),0) FROM AssetLibrarySchemaInfo;";
-        if (Convert.ToInt32(await read.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) != 6) return;
-        var primaryBackupPath = DatabasePath + ".schema-v6-backup.sqlite";
+        var sourceVersion = Convert.ToInt32(await read.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+        if (sourceVersion <= 0 || sourceVersion >= AssetLibrarySchema.Version) return;
+        var primaryBackupPath = DatabasePath + $".schema-v{sourceVersion}-backup.sqlite";
         var backupPath = File.Exists(primaryBackupPath)
-            ? DatabasePath + $".schema-v6-backup-{DateTimeOffset.UtcNow:yyyyMMddTHHmmssfff}-{Guid.NewGuid():N}.sqlite"
+            ? DatabasePath + $".schema-v{sourceVersion}-backup-{DateTimeOffset.UtcNow:yyyyMMddTHHmmssfff}-{Guid.NewGuid():N}.sqlite"
             : primaryBackupPath;
         var partialPath = backupPath + $".partial-{Guid.NewGuid():N}";
         var builder = new SqliteConnectionStringBuilder
@@ -63,11 +75,11 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
                 await using var integrity = destination.CreateCommand();
                 integrity.CommandText = "PRAGMA quick_check;";
                 if (!string.Equals(Convert.ToString(await integrity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)), "ok", StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidDataException("v6 迁移备份未通过 SQLite 完整性检查。");
+                    throw new InvalidDataException($"v{sourceVersion} 迁移备份未通过 SQLite 完整性检查。");
                 await using var version = destination.CreateCommand();
                 version.CommandText = "SELECT COALESCE(MAX(Version),0) FROM AssetLibrarySchemaInfo;";
-                if (Convert.ToInt32(await version.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) != 6)
-                    throw new InvalidDataException("v6 迁移备份的 schema 版本不匹配。");
+                if (Convert.ToInt32(await version.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)) != sourceVersion)
+                    throw new InvalidDataException($"v{sourceVersion} 迁移备份的 schema 版本不匹配。");
             }
             File.Move(partialPath, backupPath, overwrite: false);
         }
@@ -79,69 +91,143 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         }
     }
 
+    private static async Task EnsureIntegrityAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        await using var integrity = connection.CreateCommand();
+        integrity.CommandText = "PRAGMA quick_check;";
+        if (!string.Equals(Convert.ToString(await integrity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false)), "ok", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("素材库迁移后未通过 SQLite 完整性检查。");
+    }
+
     public async Task<AssetLibraryMetadataIndexResult> ImportAsync(
         IEnumerable<AssetImportRequest> requests,
         CancellationToken cancellationToken = default,
-        IProgress<int>? progress = null)
+        IProgress<int>? progress = null,
+        IProgress<AssetImportProgress>? detailedProgress = null)
     {
         var started = DateTimeOffset.UtcNow;
         var imported = 0;
         var skipped = 0;
         var missing = 0;
         var warnings = new List<string>();
+        var issues = new List<AssetImportIssue>();
+        var unsupported = 0;
+        var failed = 0;
+        var metadataFailed = 0;
         var createdManagedCopies = new List<string>();
         var materialized = requests.Where(x => !string.IsNullOrWhiteSpace(x.SourcePath)).ToArray();
         try
         {
+            detailedProgress?.Report(new(AssetImportStage.Scanning, 0, materialized.Length));
             await InitializeAsync(cancellationToken).ConfigureAwait(false);
             await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-            await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
             for (var index = 0; index < materialized.Length; index++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var request = materialized[index];
                 var sourcePath = Path.GetFullPath(request.SourcePath);
-                var normalized = NormalizePath(sourcePath);
-                var duplicateDiscriminator = request.DuplicateBehavior == AssetDuplicateBehavior.ImportIndependentRecord ? Guid.NewGuid().ToString("N") : string.Empty;
-                var info = new FileInfo(sourcePath);
-                if (!info.Exists)
+                detailedProgress?.Report(new(AssetImportStage.Validating, index, materialized.Length, Path.GetFileName(sourcePath), imported, skipped, missing, unsupported, failed));
+                var capability = _formatCapabilities.GetOrUnknown(sourcePath);
+                if (!capability.CanImport || !capability.CanIndex)
                 {
-                    missing++;
-                    warnings.Add($"Missing source: {Path.GetFileName(sourcePath)}");
-                    await UpsertAssetAsync(connection, transaction, Guid.NewGuid(), sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath: null, precomputedContentHash: null, cancellationToken).ConfigureAwait(false);
-                    imported++;
+                    unsupported++;
+                    issues.Add(new(Path.GetFileName(sourcePath), capability.Extension, capability.LimitationReason ?? "当前素材库不支持此格式。", ErrorCodeCatalog.UnsupportedFormat));
                     progress?.Report(index + 1);
+                    detailedProgress?.Report(new(AssetImportStage.Validating, index + 1, materialized.Length, Path.GetFileName(sourcePath), imported, skipped, missing, unsupported, failed));
                     continue;
                 }
-
-                var existingId = request.DuplicateBehavior == AssetDuplicateBehavior.Skip ? await FindAssetIdAsync(connection, transaction, normalized, cancellationToken).ConfigureAwait(false) : null;
-                var contentHash = request.ComputeContentHash ? await ComputeHashAsync(sourcePath, cancellationToken).ConfigureAwait(false) : null;
-                if (request.DuplicateBehavior == AssetDuplicateBehavior.Skip && contentHash is not null)
-                {
-                    var hashMatch = await FindAssetIdByContentHashAsync(connection, transaction, contentHash, cancellationToken).ConfigureAwait(false);
-                    if (hashMatch is not null && hashMatch != existingId) { skipped++; progress?.Report(index + 1); continue; }
-                }
-                var assetId = existingId ?? Guid.NewGuid();
+                string? uncommittedManagedCopyPath = null;
                 string? managedCopyPath = null;
-                if (request.Mode == AssetImportMode.ManagedCopy)
+                try
                 {
-                    if (string.IsNullOrWhiteSpace(request.ManagedLibraryRoot))
-                        throw new ArgumentException("Managed copy imports require a library root.", nameof(requests));
-                    var managedCopy = await EnsureManagedCopyAsync(sourcePath, request.ManagedLibraryRoot!, assetId, cancellationToken).ConfigureAwait(false);
-                    managedCopyPath = managedCopy.Path;
-                    if (managedCopy.Created) createdManagedCopies.Add(managedCopy.Path);
-                }
+                    var normalized = NormalizePath(sourcePath);
+                    var duplicateDiscriminator = request.DuplicateBehavior == AssetDuplicateBehavior.ImportIndependentRecord ? Guid.NewGuid().ToString("N") : string.Empty;
+                    var info = new FileInfo(sourcePath);
+                    await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+                    if (!info.Exists)
+                    {
+                        missing++;
+                        warnings.Add($"Missing source: {Path.GetFileName(sourcePath)}");
+                        issues.Add(new(Path.GetFileName(sourcePath), capability.Extension, "源文件不存在或当前不可访问。", ErrorCodeCatalog.SourceNotFound));
+                        if (request.AllowMissingMetadataPlaceholder)
+                        {
+                            var placeholder = new AssetTechnicalMetadata(null, null, null, null, AssetMetadataStatus.NotApplicable, []);
+                            await UpsertAssetAsync(connection, transaction, Guid.NewGuid(), sourcePath, normalized, duplicateDiscriminator, info, request, null, null, capability, placeholder, cancellationToken).ConfigureAwait(false);
+                            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+                            imported++;
+                        }
+                        progress?.Report(index + 1);
+                        detailedProgress?.Report(new(AssetImportStage.Validating, index + 1, materialized.Length, Path.GetFileName(sourcePath), imported, skipped, missing, unsupported, failed));
+                        continue;
+                    }
 
-                await UpsertAssetAsync(connection, transaction, assetId, sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath, contentHash, cancellationToken).ConfigureAwait(false);
-                if (existingId is null) imported++; else skipped++;
-                progress?.Report(index + 1);
+                    detailedProgress?.Report(new(AssetImportStage.DuplicateCheck, index, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed));
+                    var existingId = request.DuplicateBehavior == AssetDuplicateBehavior.Skip ? await FindAssetIdAsync(connection, transaction, normalized, cancellationToken).ConfigureAwait(false) : null;
+                    var contentHash = request.ComputeContentHash ? await ComputeHashAsync(sourcePath, cancellationToken).ConfigureAwait(false) : null;
+                    if (request.DuplicateBehavior == AssetDuplicateBehavior.Skip && contentHash is not null)
+                    {
+                        var hashMatch = await FindAssetIdByContentHashAsync(connection, transaction, contentHash, cancellationToken).ConfigureAwait(false);
+                        if (hashMatch is not null && hashMatch != existingId) { skipped++; progress?.Report(index + 1); detailedProgress?.Report(new(AssetImportStage.DuplicateCheck, index + 1, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed)); continue; }
+                    }
+                    var assetId = existingId ?? Guid.NewGuid();
+                    detailedProgress?.Report(new(AssetImportStage.ReadingMetadata, index, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed));
+                    var metadata = await _metadataExtractor.ExtractAsync(sourcePath, cancellationToken).ConfigureAwait(false);
+                    if (metadata.Status == AssetMetadataStatus.Failed)
+                    {
+                        metadataFailed++;
+                        issues.Add(new(info.Name, capability.Extension, metadata.ErrorMessage ?? "图片基础元数据读取失败；素材仍可索引。", metadata.ErrorCode));
+                    }
+                    if (request.Mode == AssetImportMode.ManagedCopy)
+                    {
+                        detailedProgress?.Report(new(AssetImportStage.Materializing, index, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed));
+                        if (string.IsNullOrWhiteSpace(request.ManagedLibraryRoot))
+                            throw new ArgumentException("Managed copy imports require a library root.", nameof(requests));
+                        var managedCopy = await EnsureManagedCopyAsync(sourcePath, request.ManagedLibraryRoot!, assetId, cancellationToken).ConfigureAwait(false);
+                        managedCopyPath = managedCopy.Path;
+                        uncommittedManagedCopyPath = managedCopy.Created ? managedCopy.Path : null;
+                        if (uncommittedManagedCopyPath is not null) createdManagedCopies.Add(uncommittedManagedCopyPath);
+                    }
+
+                    detailedProgress?.Report(new(AssetImportStage.Indexing, index, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed));
+                    await UpsertAssetAsync(connection, transaction, assetId, sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath, contentHash, capability, metadata, cancellationToken).ConfigureAwait(false);
+                    progress?.Report(index + 1);
+                    await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+                    if (uncommittedManagedCopyPath is not null) createdManagedCopies.Remove(uncommittedManagedCopyPath);
+                    uncommittedManagedCopyPath = null;
+                    if (existingId is null) imported++; else skipped++;
+                    detailedProgress?.Report(new(AssetImportStage.Indexing, index + 1, materialized.Length, info.Name, imported, skipped, missing, unsupported, failed));
+                }
+                catch (Exception exception) when (IsRecoverableImportItemFailure(exception))
+                {
+                    if (uncommittedManagedCopyPath is not null)
+                    {
+                        createdManagedCopies.Remove(uncommittedManagedCopyPath);
+                        DeleteManagedCopies([uncommittedManagedCopyPath]);
+                    }
+                    var sourceMissing = exception is FileNotFoundException or DirectoryNotFoundException;
+                    if (sourceMissing) missing++; else failed++;
+                    var errorCode = sourceMissing ? ErrorCodeCatalog.SourceNotFound :
+                        exception is UnauthorizedAccessException ? ErrorCodeCatalog.PermissionDenied : ErrorCodeCatalog.FileLocked;
+                    var reason = sourceMissing ? "源文件在导入期间消失或断开。" :
+                        exception is UnauthorizedAccessException ? "没有权限读取源文件或写入托管副本。" : "文件当前无法读取或写入；已跳过此项并继续导入。";
+                    issues.Add(new(Path.GetFileName(sourcePath), capability.Extension, reason, errorCode));
+                    progress?.Report(index + 1);
+                    detailedProgress?.Report(new(AssetImportStage.Indexing, index + 1, materialized.Length, Path.GetFileName(sourcePath), imported, skipped, missing, unsupported, failed));
+                }
             }
-            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+            detailedProgress?.Report(new(AssetImportStage.Finalizing, materialized.Length, materialized.Length, null, imported, skipped, missing, unsupported, failed));
         }
         catch (OperationCanceledException)
         {
             DeleteManagedCopies(createdManagedCopies);
-            return new(0, 0, 0, true, DateTimeOffset.UtcNow - started, warnings);
+            return new(imported, skipped, missing, true, DateTimeOffset.UtcNow - started, warnings)
+            {
+                TotalCount = materialized.Length,
+                UnsupportedCount = unsupported,
+                FailedCount = failed,
+                MetadataFailedCount = metadataFailed,
+                Issues = issues
+            };
         }
         catch
         {
@@ -149,7 +235,91 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
             throw;
         }
 
-        return new(imported, skipped, missing, false, DateTimeOffset.UtcNow - started, warnings);
+        return new(imported, skipped, missing, false, DateTimeOffset.UtcNow - started, warnings)
+        {
+            TotalCount = materialized.Length,
+            UnsupportedCount = unsupported,
+            FailedCount = failed,
+            MetadataFailedCount = metadataFailed,
+            Issues = issues
+        };
+    }
+
+    public async Task<AssetMetadataBackfillResult> BackfillTechnicalMetadataAsync(
+        bool rebuildExisting = false,
+        CancellationToken cancellationToken = default,
+        IProgress<AssetImportProgress>? progress = null)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        var candidates = new List<MetadataBackfillCandidate>();
+        await using (var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+        await using (var command = connection.CreateCommand())
+        {
+            command.CommandText = $"SELECT AssetId,SourcePath,ContentHash,FileSize,ModifiedAt FROM AssetItems WHERE IsMissing=0{(rebuildExisting ? string.Empty : " AND (MetadataStatus='NotApplicable' OR Width IS NULL OR Height IS NULL)")} ORDER BY AssetId;";
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                candidates.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.IsDBNull(2) ? null : reader.GetString(2), reader.GetInt64(3), DateTimeOffset.Parse(reader.GetString(4))));
+        }
+
+        var updated = 0;
+        var changed = 0;
+        var failed = 0;
+        var issues = new List<AssetImportIssue>();
+        try
+        {
+            for (var index = 0; index < candidates.Count; index++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var candidate = candidates[index];
+                var capability = _formatCapabilities.GetOrUnknown(candidate.SourcePath);
+                progress?.Report(new(AssetImportStage.ReadingMetadata, index, candidates.Count, Path.GetFileName(candidate.SourcePath), updated, changed, 0, 0, failed));
+                if (!File.Exists(candidate.SourcePath)) { changed++; continue; }
+                var metadata = await _metadataExtractor.ExtractAsync(candidate.SourcePath, cancellationToken).ConfigureAwait(false);
+                if (metadata.Status == AssetMetadataStatus.Failed)
+                {
+                    failed++;
+                    issues.Add(new(Path.GetFileName(candidate.SourcePath), capability.Extension, metadata.ErrorMessage ?? "元数据读取失败。", metadata.ErrorCode));
+                }
+
+                var info = new FileInfo(candidate.SourcePath);
+                if (info.Length != candidate.FileSize || new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero) != candidate.ModifiedAt)
+                {
+                    changed++;
+                    continue;
+                }
+                if (candidate.ContentHash is not null && !string.Equals(
+                        await ComputeHashAsync(candidate.SourcePath, cancellationToken).ConfigureAwait(false),
+                        candidate.ContentHash,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    changed++;
+                    issues.Add(new(info.Name, capability.Extension, "文件内容在元数据任务期间发生变化，旧结果未写入。", ErrorCodeCatalog.SourceChanged));
+                    continue;
+                }
+
+                await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+                await using var command = connection.CreateCommand();
+                command.CommandText = """
+                    UPDATE AssetItems SET Width=$width,Height=$height,Orientation=$orientation,CaptureTime=$capture,
+                        ExifOrientation=$exif,CaptureTimeLocal=$local,CaptureTimeOffsetMinutes=$offset,
+                        CaptureTimeSource=$source,MetadataStatus=$status,MetadataWarning=$warning
+                    WHERE AssetId=$id AND FileSize=$size AND ModifiedAt=$modified
+                      AND (($hash IS NULL AND ContentHash IS NULL) OR ContentHash=$hash);
+                    """;
+                BindTechnicalMetadata(command, metadata);
+                command.Parameters.AddWithValue("$id", candidate.AssetId.ToString("D"));
+                command.Parameters.AddWithValue("$size", candidate.FileSize);
+                command.Parameters.AddWithValue("$modified", candidate.ModifiedAt.ToString("O"));
+                command.Parameters.AddWithValue("$hash", (object?)candidate.ContentHash ?? DBNull.Value);
+                if (await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) == 1) updated++; else changed++;
+                progress?.Report(new(AssetImportStage.Indexing, index + 1, candidates.Count, Path.GetFileName(candidate.SourcePath), updated, changed, 0, 0, failed));
+            }
+            return new(candidates.Count, updated, changed, failed, false, issues);
+        }
+        catch (OperationCanceledException)
+        {
+            return new(candidates.Count, updated, changed, failed, true, issues);
+        }
     }
 
     public async Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default)
@@ -773,15 +943,38 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = "SELECT AssetId FROM AssetItems WHERE ContentHash=$hash LIMIT 1;"; command.Parameters.AddWithValue("$hash", contentHash); var value = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false); return value is string id && Guid.TryParse(id, out var parsed) ? parsed : null;
     }
 
-    private static async Task UpsertAssetAsync(SqliteConnection connection, SqliteTransaction transaction, Guid assetId, string sourcePath, string normalized, string duplicateDiscriminator, FileInfo info, AssetImportRequest request, string? managedCopyPath, string? precomputedContentHash, CancellationToken cancellationToken)
+    private static async Task UpsertAssetAsync(SqliteConnection connection, SqliteTransaction transaction, Guid assetId, string sourcePath, string normalized, string duplicateDiscriminator, FileInfo info, AssetImportRequest request, string? managedCopyPath, string? precomputedContentHash, AssetFormatCapability capability, AssetTechnicalMetadata metadata, CancellationToken cancellationToken)
     {
-        var now = DateTimeOffset.UtcNow; var displayName = info.Name; var extension = NormalizeExtension(info.Extension); var mediaType = ClassifyMediaType(extension); var contentHash = precomputedContentHash ?? (request.ComputeContentHash && info.Exists ? await ComputeHashAsync(sourcePath, cancellationToken).ConfigureAwait(false) : null); var modified = info.Exists ? new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero) : now;
+        var now = DateTimeOffset.UtcNow; var displayName = info.Name; var extension = capability.Extension; var mediaType = capability.MediaType; var contentHash = precomputedContentHash ?? (request.ComputeContentHash && info.Exists ? await ComputeHashAsync(sourcePath, cancellationToken).ConfigureAwait(false) : null); var modified = info.Exists ? new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero) : now;
         await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = """
-            INSERT INTO AssetItems(AssetId,SourcePath,NormalizedSourcePath,DuplicateDiscriminator,DisplayName,Extension,MediaType,FileSize,ContentHash,Width,Height,Orientation,CaptureTime,AddedAt,ModifiedAt,Rating,Comment,IsMissing,IsArchived,ImportMode,ManagedCopyPath)
-            VALUES($id,$source,$normalized,$discriminator,$name,$extension,$media,$size,$hash,NULL,NULL,NULL,NULL,$added,$modified,0,'',$missing,0,$mode,$managed)
-            ON CONFLICT(NormalizedSourcePath,DuplicateDiscriminator) DO UPDATE SET SourcePath=excluded.SourcePath,DisplayName=excluded.DisplayName,Extension=excluded.Extension,MediaType=excluded.MediaType,FileSize=excluded.FileSize,ContentHash=COALESCE(excluded.ContentHash,AssetItems.ContentHash),ModifiedAt=excluded.ModifiedAt,IsMissing=excluded.IsMissing,ImportMode=excluded.ImportMode,ManagedCopyPath=COALESCE(excluded.ManagedCopyPath,AssetItems.ManagedCopyPath);
+            INSERT INTO AssetItems(AssetId,SourcePath,NormalizedSourcePath,DuplicateDiscriminator,DisplayName,Extension,MediaType,FileSize,ContentHash,Width,Height,Orientation,CaptureTime,AddedAt,ModifiedAt,Rating,Comment,IsMissing,IsArchived,ImportMode,ManagedCopyPath,ExifOrientation,CaptureTimeLocal,CaptureTimeOffsetMinutes,CaptureTimeSource,MetadataStatus,MetadataWarning)
+            VALUES($id,$source,$normalized,$discriminator,$name,$extension,$media,$size,$hash,$width,$height,$orientation,$capture,$added,$modified,0,'',$missing,0,$mode,$managed,$exifOrientation,$captureLocal,$captureOffset,$captureSource,$metadataStatus,$metadataWarning)
+            ON CONFLICT(NormalizedSourcePath,DuplicateDiscriminator) DO UPDATE SET SourcePath=excluded.SourcePath,DisplayName=excluded.DisplayName,Extension=excluded.Extension,MediaType=excluded.MediaType,FileSize=excluded.FileSize,ContentHash=COALESCE(excluded.ContentHash,AssetItems.ContentHash),Width=excluded.Width,Height=excluded.Height,Orientation=excluded.Orientation,CaptureTime=excluded.CaptureTime,ModifiedAt=excluded.ModifiedAt,IsMissing=excluded.IsMissing,ImportMode=excluded.ImportMode,ManagedCopyPath=COALESCE(excluded.ManagedCopyPath,AssetItems.ManagedCopyPath),ExifOrientation=excluded.ExifOrientation,CaptureTimeLocal=excluded.CaptureTimeLocal,CaptureTimeOffsetMinutes=excluded.CaptureTimeOffsetMinutes,CaptureTimeSource=excluded.CaptureTimeSource,MetadataStatus=excluded.MetadataStatus,MetadataWarning=excluded.MetadataWarning;
             """;
-        command.Parameters.AddWithValue("$id", assetId.ToString("D")); command.Parameters.AddWithValue("$source", sourcePath); command.Parameters.AddWithValue("$normalized", normalized); command.Parameters.AddWithValue("$discriminator", duplicateDiscriminator); command.Parameters.AddWithValue("$name", displayName); command.Parameters.AddWithValue("$extension", extension); command.Parameters.AddWithValue("$media", mediaType); command.Parameters.AddWithValue("$size", info.Exists ? info.Length : 0); command.Parameters.AddWithValue("$hash", (object?)contentHash ?? DBNull.Value); command.Parameters.AddWithValue("$added", now.ToString("O")); command.Parameters.AddWithValue("$modified", modified.ToString("O")); command.Parameters.AddWithValue("$missing", info.Exists ? 0 : 1); command.Parameters.AddWithValue("$mode", request.Mode.ToString()); command.Parameters.AddWithValue("$managed", (object?)managedCopyPath ?? DBNull.Value); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        var captureInstant = metadata.CaptureInstant;
+        var geometricOrientation = metadata.PixelWidth is > 0 && metadata.PixelHeight is > 0
+            ? metadata.PixelWidth == metadata.PixelHeight ? "Square" : metadata.PixelWidth > metadata.PixelHeight ? "Landscape" : "Portrait"
+            : null;
+        var metadataWarning = metadata.Warnings.Count == 0 ? metadata.ErrorMessage : string.Join("；", metadata.Warnings.Append(metadata.ErrorMessage).Where(value => !string.IsNullOrWhiteSpace(value)));
+        command.Parameters.AddWithValue("$id", assetId.ToString("D")); command.Parameters.AddWithValue("$source", sourcePath); command.Parameters.AddWithValue("$normalized", normalized); command.Parameters.AddWithValue("$discriminator", duplicateDiscriminator); command.Parameters.AddWithValue("$name", displayName); command.Parameters.AddWithValue("$extension", extension); command.Parameters.AddWithValue("$media", mediaType); command.Parameters.AddWithValue("$size", info.Exists ? info.Length : 0); command.Parameters.AddWithValue("$hash", (object?)contentHash ?? DBNull.Value); command.Parameters.AddWithValue("$width", (object?)metadata.PixelWidth ?? DBNull.Value); command.Parameters.AddWithValue("$height", (object?)metadata.PixelHeight ?? DBNull.Value); command.Parameters.AddWithValue("$orientation", (object?)geometricOrientation ?? DBNull.Value); command.Parameters.AddWithValue("$capture", (object?)captureInstant?.ToString("O") ?? DBNull.Value); command.Parameters.AddWithValue("$added", now.ToString("O")); command.Parameters.AddWithValue("$modified", modified.ToString("O")); command.Parameters.AddWithValue("$missing", info.Exists ? 0 : 1); command.Parameters.AddWithValue("$mode", request.Mode.ToString()); command.Parameters.AddWithValue("$managed", (object?)managedCopyPath ?? DBNull.Value); command.Parameters.AddWithValue("$exifOrientation", (object?)(metadata.ExifOrientation is null ? null : (int)metadata.ExifOrientation.Value) ?? DBNull.Value); command.Parameters.AddWithValue("$captureLocal", (object?)metadata.CaptureTime?.LocalTime.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFFFFF", System.Globalization.CultureInfo.InvariantCulture) ?? DBNull.Value); command.Parameters.AddWithValue("$captureOffset", (object?)(metadata.CaptureTimeOffset is null ? null : checked((int)metadata.CaptureTimeOffset.Value.TotalMinutes)) ?? DBNull.Value); command.Parameters.AddWithValue("$captureSource", metadata.CaptureTimeSource.ToString()); command.Parameters.AddWithValue("$metadataStatus", metadata.Status.ToString()); command.Parameters.AddWithValue("$metadataWarning", (object?)metadataWarning ?? DBNull.Value); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    private static void BindTechnicalMetadata(SqliteCommand command, AssetTechnicalMetadata metadata)
+    {
+        var orientation = metadata.PixelWidth is > 0 && metadata.PixelHeight is > 0
+            ? metadata.PixelWidth == metadata.PixelHeight ? "Square" : metadata.PixelWidth > metadata.PixelHeight ? "Landscape" : "Portrait"
+            : null;
+        var warning = metadata.Warnings.Count == 0 ? metadata.ErrorMessage : string.Join("；", metadata.Warnings.Append(metadata.ErrorMessage).Where(value => !string.IsNullOrWhiteSpace(value)));
+        command.Parameters.AddWithValue("$width", (object?)metadata.PixelWidth ?? DBNull.Value);
+        command.Parameters.AddWithValue("$height", (object?)metadata.PixelHeight ?? DBNull.Value);
+        command.Parameters.AddWithValue("$orientation", (object?)orientation ?? DBNull.Value);
+        command.Parameters.AddWithValue("$capture", (object?)metadata.CaptureInstant?.ToString("O") ?? DBNull.Value);
+        command.Parameters.AddWithValue("$exif", (object?)(metadata.ExifOrientation is null ? null : (int)metadata.ExifOrientation.Value) ?? DBNull.Value);
+        command.Parameters.AddWithValue("$local", (object?)metadata.CaptureTime?.LocalTime.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFFFFF", System.Globalization.CultureInfo.InvariantCulture) ?? DBNull.Value);
+        command.Parameters.AddWithValue("$offset", (object?)(metadata.CaptureTimeOffset is null ? null : checked((int)metadata.CaptureTimeOffset.Value.TotalMinutes)) ?? DBNull.Value);
+        command.Parameters.AddWithValue("$source", metadata.CaptureTimeSource.ToString());
+        command.Parameters.AddWithValue("$status", metadata.Status.ToString());
+        command.Parameters.AddWithValue("$warning", (object?)warning ?? DBNull.Value);
     }
 
     private static async Task<(string Path, bool Created)> EnsureManagedCopyAsync(string sourcePath, string root, Guid assetId, CancellationToken cancellationToken)
@@ -811,6 +1004,9 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         foreach (var path in paths) try { File.Delete(path); } catch { }
     }
 
+    private static bool IsRecoverableImportItemFailure(Exception exception) =>
+        exception is IOException or UnauthorizedAccessException;
+
     private static async Task<string> ComputeHashAsync(string path, CancellationToken cancellationToken)
     {
         await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 131072, true); var hash = await SHA256.HashDataAsync(stream, cancellationToken).ConfigureAwait(false); return Convert.ToHexString(hash);
@@ -818,7 +1014,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 
     private static AssetItem ReadAsset(SqliteDataReader reader)
     {
-        return new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18));
+        return new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18), reader.IsDBNull(19) ? null : (AssetExifOrientation)reader.GetInt32(19), reader.IsDBNull(20) ? null : DateTime.Parse(reader.GetString(20), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None), reader.IsDBNull(21) ? null : reader.GetInt32(21), reader.IsDBNull(22) || !Enum.TryParse<AssetCaptureTimeSource>(reader.GetString(22), out var source) ? AssetCaptureTimeSource.Unknown : source, reader.IsDBNull(23) || !Enum.TryParse<AssetMetadataStatus>(reader.GetString(23), out var status) ? AssetMetadataStatus.NotApplicable : status, reader.IsDBNull(24) ? null : reader.GetString(24));
     }
 
     private static AssetFolder ReadFolder(SqliteDataReader reader)
@@ -826,13 +1022,14 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         return new(Guid.Parse(reader.GetString(0)), reader.IsDBNull(1) ? null : Guid.Parse(reader.GetString(1)), reader.GetString(2), reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), reader.IsDBNull(5) ? null : reader.GetString(5), reader.GetInt32(6), DateTimeOffset.Parse(reader.GetString(7)), DateTimeOffset.Parse(reader.GetString(8)), reader.GetInt32(9) != 0, reader.GetInt32(10) != 0, []);
     }
 
-    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath FROM AssetItems a";
+    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,a.ExifOrientation,a.CaptureTimeLocal,a.CaptureTimeOffsetMinutes,a.CaptureTimeSource,a.MetadataStatus,a.MetadataWarning FROM AssetItems a";
 
     private static string NormalizePath(string path) => OperatingSystem.IsWindows() ? path.ToUpperInvariant() : path;
-    private static string NormalizeExtension(string extension) => string.IsNullOrWhiteSpace(extension) ? string.Empty : (extension.StartsWith('.') ? extension : "." + extension).ToUpperInvariant();
-    private static string ClassifyMediaType(string extension) => extension switch { ".JPG" or ".JPEG" or ".PNG" or ".WEBP" or ".TIFF" or ".TIF" => "Image", ".ARW" or ".CR2" or ".CR3" or ".NEF" or ".RAF" or ".DNG" or ".ORF" or ".RW2" => "Raw", ".PSD" or ".PSB" => "Document", ".MP4" or ".MOV" or ".AVI" => "Video", _ => "Other" };
+    private static string NormalizeExtension(string extension) => AssetFormatCapabilityRegistry.NormalizeExtension(extension);
+    private static string ClassifyMediaType(string extension) => AssetFormatCapabilityRegistry.Default.GetOrUnknown(extension).MediaType;
     private static bool EvaluateText(string actual, SmartFolderOperator op, string expected) => op switch { SmartFolderOperator.Contains => actual.Contains(expected, StringComparison.OrdinalIgnoreCase), SmartFolderOperator.Equals => string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase), SmartFolderOperator.NotEquals => !string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase), SmartFolderOperator.StartsWith => actual.StartsWith(expected, StringComparison.OrdinalIgnoreCase), SmartFolderOperator.EndsWith => actual.EndsWith(expected, StringComparison.OrdinalIgnoreCase), SmartFolderOperator.Regex => Regex.IsMatch(actual, expected, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, TimeSpan.FromSeconds(1)), SmartFolderOperator.IsTrue => !string.IsNullOrWhiteSpace(actual), SmartFolderOperator.IsFalse => string.IsNullOrWhiteSpace(actual), _ => false };
     private static bool EvaluateNumber(double actual, SmartFolderOperator op, string expected) => double.TryParse(expected, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var value) && op switch { SmartFolderOperator.Equals => Math.Abs(actual - value) < 0.0001, SmartFolderOperator.NotEquals => Math.Abs(actual - value) >= 0.0001, SmartFolderOperator.GreaterThan => actual > value, SmartFolderOperator.GreaterThanOrEqual => actual >= value, SmartFolderOperator.LessThan => actual < value, SmartFolderOperator.LessThanOrEqual => actual <= value, _ => false };
     private static bool EvaluateBoolean(bool actual, SmartFolderOperator op) => op switch { SmartFolderOperator.IsTrue => actual, SmartFolderOperator.IsFalse => !actual, SmartFolderOperator.Equals => actual, SmartFolderOperator.NotEquals => !actual, _ => false };
     private static bool EvaluateDate(DateTimeOffset actual, SmartFolderOperator op, string expected) => DateTimeOffset.TryParse(expected, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal, out var value) && op switch { SmartFolderOperator.Equals => actual.Date == value.Date, SmartFolderOperator.NotEquals => actual.Date != value.Date, SmartFolderOperator.GreaterThan => actual > value, SmartFolderOperator.GreaterThanOrEqual => actual >= value, SmartFolderOperator.LessThan => actual < value, SmartFolderOperator.LessThanOrEqual => actual <= value, _ => false };
+    private sealed record MetadataBackfillCandidate(Guid AssetId, string SourcePath, string? ContentHash, long FileSize, DateTimeOffset ModifiedAt);
 }

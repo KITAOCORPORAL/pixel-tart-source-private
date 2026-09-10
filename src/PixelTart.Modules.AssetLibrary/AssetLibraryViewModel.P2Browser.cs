@@ -160,7 +160,7 @@ public sealed partial class AssetLibraryViewModel
         Status = $"灵感托盘：新增 {result.AddedCount} 项，已存在 {result.ExistingCount} 项。";
     }
 
-    private Guid _libraryIdForTray => ResolveLibraryId(_databasePath);
+    private Guid _libraryIdForTray => _targetLibraryId;
     private static Guid ResolveLibraryId(string databasePath)
     {
         var directory = new DirectoryInfo(Path.GetDirectoryName(databasePath) ?? string.Empty);

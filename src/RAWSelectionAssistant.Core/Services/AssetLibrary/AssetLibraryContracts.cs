@@ -33,7 +33,13 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetLibraryMetadataIndexResult> ImportAsync(
         IEnumerable<AssetImportRequest> requests,
         CancellationToken cancellationToken = default,
-        IProgress<int>? progress = null);
+        IProgress<int>? progress = null,
+        IProgress<AssetImportProgress>? detailedProgress = null);
+
+    Task<AssetMetadataBackfillResult> BackfillTechnicalMetadataAsync(
+        bool rebuildExisting = false,
+        CancellationToken cancellationToken = default,
+        IProgress<AssetImportProgress>? progress = null);
 
     Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default);
     Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default);

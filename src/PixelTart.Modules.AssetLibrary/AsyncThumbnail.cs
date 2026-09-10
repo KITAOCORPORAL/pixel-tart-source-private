@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -39,6 +40,12 @@ public static class AsyncThumbnail
         SetFailureState(image, false, null);
         var path = GetSourcePath(image);
         if (string.IsNullOrWhiteSpace(path)) return;
+        var capability = AssetFormatCapabilityRegistry.Default.GetOrUnknown(path);
+        if (!capability.CanThumbnail)
+        {
+            RecordFailure(image, capability.LimitationReason ?? "此格式没有可用的缩略图 provider。");
+            return;
+        }
         if (!File.Exists(path))
         {
             RecordFailure(image, "缩略图不可用：文件不存在。");

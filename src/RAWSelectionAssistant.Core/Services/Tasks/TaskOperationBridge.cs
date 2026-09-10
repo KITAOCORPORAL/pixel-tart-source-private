@@ -10,13 +10,20 @@ public sealed class TaskOperationBridge : ITaskHandler
     private ITaskEngine? _engine;
 
     public string TaskType => "ExistingOperation";
+    public bool IsAttached => _engine is not null;
     public void Attach(ITaskEngine engine) => _engine = engine;
 
-    public async Task<Guid> RunAsync(string displayName, Func<TaskExecutionContext, CancellationToken, Task<TaskResultSummary>> operation, Guid? projectId = null, string inputSnapshot = "", CancellationToken cancellationToken = default)
+    public async Task<Guid> RunAsync(
+        string displayName,
+        Func<TaskExecutionContext, CancellationToken, Task<TaskResultSummary>> operation,
+        Guid? projectId = null,
+        string inputSnapshot = "",
+        CancellationToken cancellationToken = default,
+        Func<TaskResultSummary, TaskExecutionResult>? resultFactory = null)
     {
         var engine = _engine ?? throw new InvalidOperationException("Task operation bridge is not attached to an engine.");
         var id = Guid.NewGuid();
-        var pending = new PendingOperation(operation, SynchronizationContext.Current);
+        var pending = new PendingOperation(operation, SynchronizationContext.Current, resultFactory);
         if (!_operations.TryAdd(id, pending)) throw new InvalidOperationException("Duplicate task id.");
         _operationOrder.Enqueue(id);
         while (_operationOrder.Count > 200 && _operationOrder.TryDequeue(out var expired)) _operations.TryRemove(expired, out _);
@@ -41,6 +48,8 @@ public sealed class TaskOperationBridge : ITaskHandler
             try { summary = await pending.InvokeAsync(context, cancellationToken); }
             finally { TaskExecutionAmbient.CurrentTaskId.Value = previous; TaskExecutionAmbient.CurrentContext.Value = previousContext; }
             pending.Completion.TrySetResult(summary);
+            if (pending.ResultFactory is not null)
+                return pending.ResultFactory(summary);
             if (summary.WaitingForAttention > 0 && summary.Succeeded == 0)
                 return new(TaskLifecycleState.NeedsAttention, summary, ErrorCodeCatalog.NeedsUserDecision, "任务需要用户确认后继续。");
             if (summary.Failed > 0 && summary.Succeeded == 0)
@@ -61,9 +70,13 @@ public sealed class TaskOperationBridge : ITaskHandler
         }
     }
 
-    private sealed class PendingOperation(Func<TaskExecutionContext, CancellationToken, Task<TaskResultSummary>> operation, SynchronizationContext? synchronizationContext)
+    private sealed class PendingOperation(
+        Func<TaskExecutionContext, CancellationToken, Task<TaskResultSummary>> operation,
+        SynchronizationContext? synchronizationContext,
+        Func<TaskResultSummary, TaskExecutionResult>? resultFactory)
     {
         public TaskCompletionSource<TaskResultSummary> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public Func<TaskResultSummary, TaskExecutionResult>? ResultFactory { get; } = resultFactory;
 
         public Task<TaskResultSummary> InvokeAsync(TaskExecutionContext context, CancellationToken cancellationToken)
         {

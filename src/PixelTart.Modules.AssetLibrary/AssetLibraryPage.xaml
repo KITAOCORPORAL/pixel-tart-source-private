@@ -366,7 +366,7 @@
         <ContextMenu x:Key="AssetP2ContextMenu" x:Shared="False"
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <MenuItem Header="打开大图预览" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenPreview" />
+            <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenPreview" />
             <MenuItem Header="在新窗口打开" IsEnabled="False" ToolTip="此版本暂未提供独立预览窗口" AutomationProperties.AutomationId="AssetContextOpenNewWindow" />
             <MenuItem Header="在默认应用打开" IsEnabled="False" ToolTip="为保护源文件，默认应用打开将在后续版本提供" AutomationProperties.AutomationId="AssetContextOpenDefault" />
             <MenuItem Header="使用其他应用打开 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenWith" />

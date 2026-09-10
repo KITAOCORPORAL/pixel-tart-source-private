@@ -31,6 +31,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly IAssetLibraryLoadStateController? _loadStateController;
     private readonly IInspirationTrayService _inspirationTray;
     private readonly string _databasePath;
+    private readonly Guid _targetLibraryId;
+    private readonly string _targetLibraryName;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
@@ -161,6 +163,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         _database = new AssetLibraryDatabase(databasePath);
         _databasePath = _database.DatabasePath;
+        _targetLibraryId = ResolveLibraryId(_databasePath);
+        _targetLibraryName = ResolveLibraryDisplayName(_databasePath);
         _inspirationTray = new SqliteInspirationTrayService(Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _loadStateController = loadStateController;
@@ -188,7 +192,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         SaveSmartFolderCommand = new(SaveSmartFolderAsync, () => IsReady && !IsSmartFolderEditorLoading); RelinkCommand = new(RelinkAsync, () => IsReady); RateCommand = new AsyncCommand<int>(value => RateSelectedAsync(value), _ => IsReady && SelectedAssets.Count > 0);
         VisualChipCommand = new AsyncCommand<string>(ApplyVisualChipAsync, _ => IsReady); ClearVisualModeCommand = new(ClearVisualModeAsync, () => IsReady && IsTemporaryVisualMode);
         FindSimilarCommand = new(FindSimilarAsync, () => IsReady && SelectedAssets.Count == 1 && SelectedFeatures?.State == AssetVisualFeatureState.Valid);
-        AnalyzeSelectionCommand = new(AnalyzeSelectionCanonicalAsync, () => IsReady && SelectedAssets.Count == 1);
+        AnalyzeSelectionCommand = new(AnalyzeSelectionCanonicalAsync, () => IsReady && SelectedAssets.Count == 1 && CanAnalyze(SelectedAssets[0]));
         AnalyzeVisibleCommand = new(AnalyzeVisibleAsync, () => IsReady && CanAnalyzeVisible());
         CancelBatchCommand = new(CancelBatchAsync, () => IsReady && IsBatchAnalyzing);
         SearchColorCommand = new(SearchColorAsync, () => IsReady && IsVisualQueryScopeSupported); SearchPaletteColorCommand = new(SearchPaletteColorAsync, _ => IsReady && IsVisualQueryScopeSupported); FindPaletteSimilarCommand = new(FindPaletteSimilarAsync, () => IsReady && SelectedAssets.Count == 1 && Analysis is not null && IsVisualQueryScopeSupported);
@@ -335,6 +339,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         : IsInspectorPaneCollapsed ? "展开检查器" : "检查器（窗口过窄）";
     public string InspectorPinLabel => IsInspectorPinned ? "取消固定检查器" : "固定检查器";
     public PreviewImportDiagnostics ImportDiagnostics => _importDiagnostics.Snapshot;
+    public Guid LibraryId => _targetLibraryId;
     public void UpdateAssetGridDiagnostics(int itemCount, string itemsSourceInstance, bool itemsSourceIsViewModelCollection, string dataContextType) =>
         _importDiagnostics.SetBindingState(itemCount, itemsSourceInstance, itemsSourceIsViewModelCollection, dataContextType, CurrentCollectionDiagnostic);
     public IEnumerable<AssetItem> Assets => AssetCards.Select(card => card.Asset);
@@ -1034,22 +1039,21 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         string[] selected = [];
         try
         {
-            var dialog = new OpenFileDialog { Multiselect = true, Filter = "Images|*.jpg;*.jpeg;*.png;*.webp;*.tif;*.tiff;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng|All files|*.*" };
+            var dialog = new OpenFileDialog { Multiselect = true, Filter = AssetFormatCapabilityRegistry.Default.BuildPickerFilter() };
             if (dialog.ShowDialog() != true) return;
-            selected = dialog.FileNames.Where(IsSupportedReferencePath).ToArray();
+            selected = dialog.FileNames;
             _importDiagnostics.Snapshot.PickerAccepted = true;
             _importDiagnostics.SetSource("file-picker", selected.Length, CountExtensions(selected));
             _importDiagnostics.Snapshot.RepositoryAssetCountBefore = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
             _importDiagnostics.Snapshot.ImportServiceEntered = true;
             _importDiagnostics.Save();
-            var result = await _repository.ImportAsync(selected.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            var result = await RunTrackedImportAsync(selected, "file-picker");
             _importDiagnostics.Snapshot.ImportedCount = result.ImportedCount;
             _importDiagnostics.Snapshot.SkippedCount = result.SkippedCount;
             _importDiagnostics.Snapshot.FailedCount = result.MissingCount;
             _importDiagnostics.Snapshot.RepositoryAssetCountAfter = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
             _importDiagnostics.Save();
-            Status = result.Cancelled ? "导入已取消" : $"已索引 {result.ImportedCount:N0} 项，跳过重复 {result.SkippedCount:N0} 项；未修改源文件。";
-            await RefreshAsync();
+            Status = FormatImportResult(result);
         }
         catch (Exception exception)
         {
@@ -1065,21 +1069,20 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         string[] files = [];
         try
         {
-            files = Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories).Where(IsSupportedReferencePath).ToArray();
+            files = Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories).ToArray();
             _importDiagnostics.Snapshot.PickerAccepted = files.Length > 0;
             _importDiagnostics.SetSource("synthetic-directory-recursive", files.Length, CountExtensions(files));
             if (files.Length == 0) { _importDiagnostics.Snapshot.FailedCount++; _importDiagnostics.Save(); return; }
             _importDiagnostics.Snapshot.RepositoryAssetCountBefore = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
             _importDiagnostics.Snapshot.ImportServiceEntered = true;
             _importDiagnostics.Save();
-            var result = await _repository.ImportAsync(files.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            var result = await RunTrackedImportAsync(files, "synthetic-directory-recursive");
             _importDiagnostics.Snapshot.ImportedCount = result.ImportedCount;
             _importDiagnostics.Snapshot.SkippedCount = result.SkippedCount;
             _importDiagnostics.Snapshot.FailedCount = result.MissingCount;
             _importDiagnostics.Snapshot.RepositoryAssetCountAfter = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
             _importDiagnostics.Save();
-            Status = $"合成测试图库：新索引 {result.ImportedCount}，已存在 {result.SkippedCount}；未修改源文件。";
-            await RefreshAsync();
+            Status = FormatImportResult(result);
         }
         catch (Exception exception)
         {
@@ -1089,21 +1092,141 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         }
     }
 
-    private static bool IsSupportedReferencePath(string path)
+    private static bool IsSupportedReferencePath(string path) =>
+        AssetFormatCapabilityRegistry.Default.GetOrUnknown(path) is { CanImport: true, CanIndex: true };
+
+    internal Task<AssetLibraryMetadataIndexResult> ImportFilesForSessionAsync(IEnumerable<string> paths) =>
+        RunTrackedImportAsync(paths.ToArray(), "session");
+
+    private async Task<AssetLibraryMetadataIndexResult> RunTrackedImportAsync(IReadOnlyList<string> paths, string source)
     {
-        var extension = Path.GetExtension(path);
-        return extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".png", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".tif", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".tiff", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".webp", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".arw", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".cr2", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".cr3", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".nef", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".raf", StringComparison.OrdinalIgnoreCase)
-            || extension.Equals(".dng", StringComparison.OrdinalIgnoreCase);
+        // The recursive synthetic import is a test/diagnostic seam used by the
+        // embedded module harness, which historically constructs an unattached
+        // bridge. Production picker/session imports always require Task Center.
+        if (source == "synthetic-directory-recursive" && !_taskOperationBridge.IsAttached)
+        {
+            var diagnosticResult = await _repository.ImportAsync(
+                paths.Select(path => new AssetImportRequest(path, ComputeContentHash: true)),
+                _lifetimeCancellation.Token).ConfigureAwait(true);
+            if (!_lifetimeCancellation.IsCancellationRequested && diagnosticResult.ImportedCount > 0)
+                await RefreshAsync();
+            return diagnosticResult;
+        }
+
+        AssetLibraryMetadataIndexResult? result = null;
+        await RunTrackedP3OperationAsync(async () =>
+        {
+            await _taskOperationBridge.RunAsync(
+                $"素材导入 · {_targetLibraryName}",
+                async (context, engineToken) =>
+                {
+                    using var linked = CancellationTokenSource.CreateLinkedTokenSource(engineToken, _lifetimeCancellation.Token);
+                    var token = linked.Token;
+                    var progress = new AwaitableProgress<AssetImportProgress>(value =>
+                    {
+                        var completed = Math.Clamp(value.Completed, 0, Math.Max(1, value.Total));
+                        var summary = new TaskResultSummary(value.Total, value.Imported, value.Failed + value.Missing, value.Skipped + value.Unsupported, 0, 0, 0, 0);
+                        return context.ReportProgressAsync(value.Total == 0 ? 100 : completed * 100d / value.Total,
+                            ImportStageLabel(value.Stage, value.Completed, value.Total), value.CurrentFile, summary, token);
+                    });
+                    result = await _repository.ImportAsync(
+                        paths.Select(path => new AssetImportRequest(path, ComputeContentHash: true)),
+                        token,
+                        detailedProgress: progress).ConfigureAwait(false);
+                    await progress.DrainAsync().ConfigureAwait(false);
+                    var final = result;
+                    var summary = new TaskResultSummary(final.TotalCount, final.ImportedCount,
+                        final.FailedCount + final.MissingCount, final.SkippedCount + final.UnsupportedCount,
+                        final.Cancelled ? Math.Max(0, final.TotalCount - final.ImportedCount - final.SkippedCount - final.MissingCount - final.UnsupportedCount) : 0,
+                        0, 0, 0);
+                    await context.ReportProgressAsync(final.Cancelled ? 99 : 100, final.Cancelled ? "安全取消" : "完成", null, summary, CancellationToken.None).ConfigureAwait(false);
+                    return summary;
+                },
+                inputSnapshot: JsonSerializer.Serialize(new { TargetLibraryId = _targetLibraryId, LibraryName = _targetLibraryName, Source = source, Total = paths.Count }),
+                // The operation observes the lifetime token internally. Keep the
+                // bridge wait alive so disposal drains the repository transaction
+                // before the page releases it.
+                cancellationToken: CancellationToken.None,
+                resultFactory: summary => BuildImportTaskExecutionResult(result, summary));
+        });
+
+        result ??= new(0, 0, 0, true, TimeSpan.Zero, ["导入任务未开始。"])
+        {
+            TotalCount = paths.Count,
+            FailedCount = paths.Count,
+            Issues = paths.Select(path => new AssetImportIssue(Path.GetFileName(path), AssetFormatCapabilityRegistry.NormalizeExtension(path), "导入任务未开始。", ErrorCodeCatalog.CancelledByUser)).ToArray()
+        };
+
+        // This view model owns one immutable repository/library identity. Disposal
+        // cancels and drains the task before a workspace host can publish another page.
+        if (!_lifetimeCancellation.IsCancellationRequested && result.ImportedCount > 0)
+            await RefreshAsync();
+        return result;
+    }
+
+    private static string ImportStageLabel(AssetImportStage stage, int completed, int total) => stage switch
+    {
+        AssetImportStage.Scanning => "正在扫描…",
+        AssetImportStage.Validating => "正在验证…",
+        AssetImportStage.DuplicateCheck => "正在判断重复…",
+        AssetImportStage.ReadingMetadata => "正在读取元数据…",
+        AssetImportStage.Materializing => "正在复制托管素材…",
+        AssetImportStage.Indexing => $"正在导入 {completed:N0} / {total:N0}",
+        _ => "正在完成…"
+    };
+
+    private static string FormatImportResult(AssetLibraryMetadataIndexResult result) => result.Cancelled
+        ? $"导入已安全取消 · 已完成 {result.ImportedCount:N0} · 跳过 {result.SkippedCount:N0} · 不支持 {result.UnsupportedCount:N0} · 缺失 {result.MissingCount:N0} · 失败 {result.FailedCount:N0}"
+        : $"导入完成 · 成功 {result.ImportedCount:N0} · 跳过 {result.SkippedCount:N0} · 不支持 {result.UnsupportedCount:N0} · 缺失 {result.MissingCount:N0} · 失败 {result.FailedCount:N0}；未修改源文件。";
+
+    private static TaskExecutionResult BuildImportTaskExecutionResult(
+        AssetLibraryMetadataIndexResult? result,
+        TaskResultSummary summary)
+    {
+        if (result is null)
+            return new(TaskLifecycleState.Failed, summary, ErrorCodeCatalog.CheckpointInvalid, "导入结果未能安全收束。");
+
+        var firstIssue = result.Issues.FirstOrDefault();
+        var state = result.Cancelled
+            ? summary.Succeeded > 0 ? TaskLifecycleState.PartiallyCompleted : TaskLifecycleState.Cancelled
+            : summary.IsPartial ? TaskLifecycleState.PartiallyCompleted : TaskLifecycleState.Completed;
+        if (firstIssue is null)
+            return new(state, summary, result.Cancelled ? ErrorCodeCatalog.CancelledByUser : null,
+                result.Cancelled ? "任务已在安全边界停止；已提交素材保留，未提交项已回滚。" : null);
+
+        var code = firstIssue.ErrorCode ?? ErrorCodeCatalog.MetadataReadFailed;
+        var technical = string.Join(Environment.NewLine, result.Issues.Select(issue =>
+            $"{issue.FileName} [{issue.Extension}] {issue.Reason} ({issue.ErrorCode ?? "Unknown"})"));
+        var detail = new MediaTaskFailureDetail(
+            firstIssue.FileName,
+            "素材导入",
+            code,
+            firstIssue.Reason,
+            technical,
+            MediaTaskFailureMessages.Retryable(code),
+            OutputOwned: false);
+        return new(state, summary, code, MediaTaskFailurePayload.Serialize(detail));
+    }
+
+    private static string ResolveLibraryDisplayName(string databasePath)
+    {
+        var directory = new DirectoryInfo(Path.GetDirectoryName(databasePath) ?? string.Empty);
+        while (directory is not null)
+        {
+            var manifestPath = Path.Combine(directory.FullName, AssetLibraryContainerService.ManifestFileName);
+            try
+            {
+                if (File.Exists(manifestPath))
+                {
+                    using var document = JsonDocument.Parse(File.ReadAllText(manifestPath));
+                    if (document.RootElement.TryGetProperty("display_name", out var value) && !string.IsNullOrWhiteSpace(value.GetString()))
+                        return value.GetString()!;
+                }
+            }
+            catch (JsonException) { }
+            directory = directory.Parent;
+        }
+        return Path.GetFileNameWithoutExtension(databasePath);
     }
 
     private static Dictionary<string, int> CountExtensions(IEnumerable<string> paths) => paths
@@ -1161,6 +1284,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private async Task AnalyzeSelectionCanonicalAsync()
     {
         var asset = SelectedAssets.Count == 1 ? SelectedAssets[0] : null; if (asset is null) return;
+        var capability = AssetFormatCapabilityRegistry.Default.GetOrUnknown(asset.Extension);
+        if (!capability.CanAnalyze) { Status = capability.LimitationReason ?? "此格式没有可用的视觉分析 provider。"; return; }
         var generation = Interlocked.Increment(ref _analysisGeneration);
         _analysisCancellation?.Cancel(); _analysisCancellation?.Dispose(); _analysisCancellation = new(); var token = _analysisCancellation.Token;
         IsAnalyzing = true;
@@ -1368,8 +1493,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private async Task AnalyzeVisibleAsync()
     {
         _batchCancellation?.Cancel(); _batchCancellation?.Dispose(); _batchCancellation = new(); var token = _batchCancellation.Token;
-        var assets = await ResolveBatchAssetsAsync(token);
-        if (assets.Count == 0) { BatchStatus = "没有可分析的素材"; return; }
+        var assets = (await ResolveBatchAssetsAsync(token)).Where(CanAnalyze).ToArray();
+        if (assets.Length == 0) { BatchStatus = "没有可分析的素材"; return; }
         IsBatchAnalyzing = true;
         try
         {
@@ -1385,7 +1510,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                     var succeeded = 0; var failed = 0; var cancelled = 0;
 
                     await context.ReportProgressAsync(0, "视觉分析排队", null,
-                        new TaskResultSummary(assets.Count, 0, 0, 0, 0, 0, 0, 0), operationToken);
+                        new TaskResultSummary(assets.Length, 0, 0, 0, 0, 0, 0, 0), operationToken);
 
                     foreach (var asset in interactive)
                     {
@@ -1400,9 +1525,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                         catch { failed++; }
 
                         var completed = succeeded + failed + cancelled;
-                        var summary = new TaskResultSummary(assets.Count, succeeded, failed, 0, cancelled, 0, 0, 0);
-                        BatchStatus = $"Interactive {completed}/{assets.Count} · 成功 {succeeded} · 失败 {failed}";
-                        await context.ReportProgressAsync(completed * 100d / assets.Count, "优先分析当前选择", asset.DisplayName, summary, operationToken);
+                        var summary = new TaskResultSummary(assets.Length, succeeded, failed, 0, cancelled, 0, 0, 0);
+                        BatchStatus = $"Interactive {completed}/{assets.Length} · 成功 {succeeded} · 失败 {failed}";
+                        await context.ReportProgressAsync(completed * 100d / assets.Length, "优先分析当前选择", asset.DisplayName, summary, operationToken);
                     }
 
                     if (background.Length > 0)
@@ -1413,9 +1538,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                             var currentSucceeded = succeeded + value.Succeeded;
                             var currentFailed = failed + value.Failed;
                             var currentCancelled = cancelled + value.Cancelled;
-                            BatchStatus = $"视觉批量分析 {completed}/{assets.Count} · 成功 {currentSucceeded} · 失败 {currentFailed} · 取消 {currentCancelled}";
-                            var summary = new TaskResultSummary(assets.Count, currentSucceeded, currentFailed, 0, currentCancelled, 0, 0, 0);
-                            _ = context.ReportProgressAsync(completed * 100d / assets.Count, "本地视觉分析", null, summary, CancellationToken.None);
+                            BatchStatus = $"视觉批量分析 {completed}/{assets.Length} · 成功 {currentSucceeded} · 失败 {currentFailed} · 取消 {currentCancelled}";
+                            var summary = new TaskResultSummary(assets.Length, currentSucceeded, currentFailed, 0, currentCancelled, 0, 0, 0);
+                            _ = context.ReportProgressAsync(completed * 100d / assets.Length, "本地视觉分析", null, summary, CancellationToken.None);
                         });
                         var result = await _batchProcessor.ProcessAsync(background.Select(asset =>
                             new VisualAnalysisBatchItem(asset.AssetId, asset.ContentHash, VisualAnalysisPriority.Background,
@@ -1423,12 +1548,12 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
                         succeeded += result.Succeeded; failed += result.Failed; cancelled += result.CancelledCount;
                     }
 
-                    var finalSummary = new TaskResultSummary(assets.Count, succeeded, failed, 0, cancelled, 0, 0, 0);
-                    BatchStatus = $"批量完成：{assets.Count} 项 · 成功 {succeeded} · 失败 {failed} · 取消 {cancelled}";
+                    var finalSummary = new TaskResultSummary(assets.Length, succeeded, failed, 0, cancelled, 0, 0, 0);
+                    BatchStatus = $"批量完成：{assets.Length} 项 · 成功 {succeeded} · 失败 {failed} · 取消 {cancelled}";
                     await context.ReportProgressAsync(100, "视觉分析完成", null, finalSummary, CancellationToken.None);
                     return finalSummary;
                 },
-                inputSnapshot: $"asset-library scope={BatchScope}; count={assets.Count}",
+                inputSnapshot: $"asset-library scope={BatchScope}; count={assets.Length}",
                 cancellationToken: CancellationToken.None);
 
             await RefreshAsync();
@@ -1636,7 +1761,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         SelectedAssets.Count == 1 &&
         SelectedAssets[0].AssetId == asset.AssetId;
 
-    private bool CanAnalyzeVisible() => AssetCards.Count > 0 && !IsBatchAnalyzing && HasBatchScopePrerequisites(out _, out _);
+    private static bool CanAnalyze(AssetItem asset) => AssetFormatCapabilityRegistry.Default.GetOrUnknown(asset.Extension).CanAnalyze;
+    private bool CanAnalyzeVisible() => AssetCards.Any(card => CanAnalyze(card.Asset)) && !IsBatchAnalyzing && HasBatchScopePrerequisites(out _, out _);
 
     private bool HasBatchScopePrerequisites(out VisualBatchScope scope, out string? error)
     {
@@ -1904,7 +2030,9 @@ public sealed record AssetVisualMatchView(AssetItem Asset, VisualSimilarityScore
     public string AccessibleName => $"素材 {Asset.DisplayName}，评分 {Asset.Rating}{(Asset.IsMissing ? "，文件缺失" : string.Empty)}{(Asset.IsArchived ? "，已归档" : string.Empty)}";
     public double AspectRatio => Asset.Width is > 0 && Asset.Height is > 0 ? Math.Clamp((double)Asset.Width.Value / Asset.Height.Value, 0.2d, 5d) : 1.5d;
     public string DimensionsText => Asset.Width is > 0 && Asset.Height is > 0 ? $"{Asset.Width} × {Asset.Height}" : "未知";
-    public string CaptureTimeText => Asset.CaptureTime?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? "—";
+    public string CaptureTimeText => Asset.CaptureTime is { } instant
+        ? instant.ToString("yyyy-MM-dd HH:mm zzz")
+        : Asset.CaptureTimeLocal?.ToString("yyyy-MM-dd HH:mm") ?? "—";
     public string AddedTimeText => Asset.AddedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
     public string FileSizeText => Asset.FileSize <= 0 ? "—" : Asset.FileSize >= 1024L * 1024 ? $"{Asset.FileSize / 1024d / 1024d:F1} MB" : $"{Asset.FileSize / 1024d:F0} KB";
     public string MissingText => Asset.IsMissing ? "缺失" : string.Empty;

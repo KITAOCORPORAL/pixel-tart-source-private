@@ -1,3 +1,5 @@
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
+
 namespace RAWSelectionAssistant.Core.Models;
 
 /// <summary>
@@ -24,7 +26,13 @@ public sealed record AssetItem(
     bool IsMissing = false,
     bool IsArchived = false,
     AssetImportMode ImportMode = AssetImportMode.Reference,
-    string? ManagedCopyPath = null)
+    string? ManagedCopyPath = null,
+    AssetExifOrientation? ExifOrientation = null,
+    DateTime? CaptureTimeLocal = null,
+    int? CaptureTimeOffsetMinutes = null,
+    AssetCaptureTimeSource CaptureTimeSource = AssetCaptureTimeSource.Unknown,
+    AssetMetadataStatus MetadataStatus = AssetMetadataStatus.NotApplicable,
+    string? MetadataWarning = null)
 {
     public string FileName => Path.GetFileName(SourcePath);
     public string OriginalStem => Path.GetFileNameWithoutExtension(DisplayName);
@@ -41,7 +49,8 @@ public sealed record AssetImportRequest(
     AssetImportMode Mode = AssetImportMode.Reference,
     string? ManagedLibraryRoot = null,
     bool ComputeContentHash = false,
-    AssetDuplicateBehavior DuplicateBehavior = AssetDuplicateBehavior.Skip);
+    AssetDuplicateBehavior DuplicateBehavior = AssetDuplicateBehavior.Skip,
+    bool AllowMissingMetadataPlaceholder = false);
 
 public enum AssetDuplicateBehavior
 {
@@ -273,4 +282,47 @@ public sealed record AssetLibraryMetadataIndexResult(
     int MissingCount,
     bool Cancelled,
     TimeSpan Elapsed,
-    IReadOnlyList<string> Warnings);
+    IReadOnlyList<string> Warnings)
+{
+    public int UnsupportedCount { get; init; }
+    public int FailedCount { get; init; }
+    public int MetadataFailedCount { get; init; }
+    public int TotalCount { get; init; }
+    public IReadOnlyList<AssetImportIssue> Issues { get; init; } = [];
+}
+
+public sealed record AssetImportIssue(
+    string FileName,
+    string Extension,
+    string Reason,
+    string? ErrorCode = null);
+
+public enum AssetImportStage
+{
+    Scanning,
+    Validating,
+    DuplicateCheck,
+    ReadingMetadata,
+    Materializing,
+    Indexing,
+    Finalizing
+}
+
+public sealed record AssetImportProgress(
+    AssetImportStage Stage,
+    int Completed,
+    int Total,
+    string? CurrentFile = null,
+    int Imported = 0,
+    int Skipped = 0,
+    int Missing = 0,
+    int Unsupported = 0,
+    int Failed = 0);
+
+public sealed record AssetMetadataBackfillResult(
+    int TotalCandidates,
+    int Updated,
+    int SkippedChanged,
+    int Failed,
+    bool Cancelled,
+    IReadOnlyList<AssetImportIssue> Issues);

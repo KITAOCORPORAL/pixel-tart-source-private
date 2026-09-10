@@ -6,7 +6,7 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 internal static class AssetLibrarySchema
 {
-    public const int Version = 7;
+    public const int Version = 8;
 
     public static async Task EnsureAsync(SqliteConnection connection, CancellationToken cancellationToken)
     {
@@ -37,6 +37,12 @@ internal static class AssetLibrarySchema
                 IsArchived INTEGER NOT NULL DEFAULT 0 CHECK(IsArchived IN(0,1)),
                 ImportMode TEXT NOT NULL DEFAULT 'Reference',
                 ManagedCopyPath TEXT NULL,
+                ExifOrientation INTEGER NULL CHECK(ExifOrientation BETWEEN 1 AND 8),
+                CaptureTimeLocal TEXT NULL,
+                CaptureTimeOffsetMinutes INTEGER NULL CHECK(CaptureTimeOffsetMinutes BETWEEN -840 AND 840),
+                CaptureTimeSource TEXT NOT NULL DEFAULT 'Unknown',
+                MetadataStatus TEXT NOT NULL DEFAULT 'NotApplicable',
+                MetadataWarning TEXT NULL,
                 UNIQUE(NormalizedSourcePath,DuplicateDiscriminator)
             );
             """,
@@ -263,6 +269,57 @@ internal static class AssetLibrarySchema
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupId", "TEXT NULL", cancellationToken).ConfigureAwait(false);
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupLogic", "TEXT NOT NULL DEFAULT 'And'", cancellationToken).ConfigureAwait(false);
         await EnsureP3QueryDocumentsAsync(connection, cancellationToken).ConfigureAwait(false);
+        // v8 is deliberately last: a rejected v6 -> v7 semantic migration must
+        // leave the original schema version and DDL untouched.
+        await EnsureAssetTechnicalMetadataSchemaAsync(connection, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task EnsureAssetTechnicalMetadataSchemaAsync(SqliteConnection connection, CancellationToken cancellationToken)
+    {
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            foreach (var (column, declaration) in new[]
+            {
+                ("ExifOrientation", "INTEGER NULL CHECK(ExifOrientation BETWEEN 1 AND 8)"),
+                ("CaptureTimeLocal", "TEXT NULL"),
+                ("CaptureTimeOffsetMinutes", "INTEGER NULL CHECK(CaptureTimeOffsetMinutes BETWEEN -840 AND 840)"),
+                ("CaptureTimeSource", "TEXT NOT NULL DEFAULT 'Unknown'"),
+                ("MetadataStatus", "TEXT NOT NULL DEFAULT 'NotApplicable'"),
+                ("MetadataWarning", "TEXT NULL")
+            })
+            {
+                if (await HasColumnAsync(connection, transaction, "AssetItems", column, cancellationToken).ConfigureAwait(false)) continue;
+                await using var alter = connection.CreateCommand();
+                alter.Transaction = transaction;
+                alter.CommandText = $"ALTER TABLE AssetItems ADD COLUMN {column} {declaration};";
+                await alter.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            await using var version = connection.CreateCommand();
+            version.Transaction = transaction;
+            version.CommandText = "INSERT OR IGNORE INTO AssetLibrarySchemaInfo(Version,AppliedAt) VALUES($version,$at);";
+            version.Parameters.AddWithValue("$version", Version);
+            version.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O"));
+            await version.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            await transaction.RollbackAsync(CancellationToken.None).ConfigureAwait(false);
+            throw;
+        }
+    }
+
+    private static async Task<bool> HasColumnAsync(SqliteConnection connection, SqliteTransaction transaction, string table, string column, CancellationToken cancellationToken)
+    {
+        await using var info = connection.CreateCommand();
+        info.Transaction = transaction;
+        info.CommandText = $"PRAGMA table_info({table});";
+        await using var reader = await info.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+            if (string.Equals(reader.GetString(1), column, StringComparison.OrdinalIgnoreCase)) return true;
+        return false;
     }
 
     private static async Task RejectFutureVersionAsync(SqliteConnection connection, CancellationToken cancellationToken)
@@ -354,7 +411,7 @@ internal static class AssetLibrarySchema
             {
                 version.Transaction = transaction;
                 version.CommandText = "INSERT OR IGNORE INTO AssetLibrarySchemaInfo(Version,AppliedAt) VALUES($version,$at);";
-                version.Parameters.AddWithValue("$version", Version);
+                version.Parameters.AddWithValue("$version", 7);
                 version.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O"));
                 await version.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
             }
