@@ -37,11 +37,6 @@ public static class AsyncThumbnail
         SetFailureState(image, false, null);
         var path = GetSourcePath(image);
         if (string.IsNullOrWhiteSpace(path)) return;
-        if (!File.Exists(path))
-        {
-            RecordFailure(image, "缩略图不可用：文件不存在。");
-            return;
-        }
         var cancellation = new CancellationTokenSource();
         Requests[image] = cancellation;
         var dispatcher = image.Dispatcher;
@@ -63,7 +58,7 @@ public static class AsyncThumbnail
         var cancellationToken = cancellation.Token;
         try
         {
-            var bitmap = await Provider.GetAsync(new(requestedPath, width), cancellationToken).ConfigureAwait(false);
+            var result = await Provider.GetAsync(new(requestedPath, width), cancellationToken).ConfigureAwait(false);
             if (dispatcher.HasShutdownStarted || dispatcher.HasShutdownFinished) return;
             var publication = dispatcher.InvokeAsync(() =>
             {
@@ -71,8 +66,11 @@ public static class AsyncThumbnail
                     && Requests.TryGetValue(image, out var current)
                     && ReferenceEquals(current, cancellation))
                 {
-                    image.Source = bitmap;
-                    SetFailureState(image, false, null, cancellation);
+                    image.Source = result.Bitmap;
+                    if (result.IsAvailable)
+                        SetFailureState(image, false, null, cancellation);
+                    else
+                        RecordFailure(image, result.PlaceholderMessage ?? "缩略图不可用。", cancellation);
                 }
             }, DispatcherPriority.DataBind);
             await publication.Task.ConfigureAwait(false);

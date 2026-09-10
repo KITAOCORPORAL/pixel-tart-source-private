@@ -5,12 +5,30 @@ using System.Windows.Media.Imaging;
 
 namespace PixelTart.Modules.AssetLibrary;
 
-public sealed record AssetThumbnailRequest(string SourcePath, int DecodePixelWidth);
+public enum AssetThumbnailState
+{
+    Available,
+    Missing,
+    Offline
+}
+
+public sealed record AssetThumbnailRequest(
+    string? SourcePath,
+    int DecodePixelWidth,
+    AssetThumbnailState KnownState = AssetThumbnailState.Available);
+
+public sealed record AssetThumbnailResult(
+    AssetThumbnailState State,
+    BitmapSource? Bitmap = null,
+    string? PlaceholderMessage = null)
+{
+    public bool IsAvailable => State == AssetThumbnailState.Available && Bitmap is not null;
+}
 
 /// <summary>Single thumbnail loading seam shared by the library and future creative surfaces.</summary>
 public interface IAssetThumbnailProvider
 {
-    Task<BitmapSource> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default);
+    Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default);
 }
 
 /// <summary>Bounded, fingerprinted WPF thumbnail provider used by every asset-library thumbnail.</summary>
@@ -22,12 +40,22 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
     private readonly LinkedList<string> _lru = new();
     private long _cacheBytes;
 
-    public Task<BitmapSource> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
+    public Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
+        cancellationToken.ThrowIfCancellationRequested();
+        if (request.KnownState == AssetThumbnailState.Offline)
+            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Offline, PlaceholderMessage: "素材库离线。"));
+        if (request.KnownState == AssetThumbnailState.Missing || string.IsNullOrWhiteSpace(request.SourcePath))
+            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Missing, PlaceholderMessage: "缩略图不可用：文件不存在。"));
+
         var path = Path.GetFullPath(request.SourcePath);
+        if (!File.Exists(path))
+            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Missing, PlaceholderMessage: "缩略图不可用：文件不存在。"));
         var width = Math.Clamp(request.DecodePixelWidth, 96, 512);
-        return Task.Run(() => GetOrDecode(path, width, cancellationToken), cancellationToken);
+        return Task.Run(
+            () => new AssetThumbnailResult(AssetThumbnailState.Available, GetOrDecode(path, width, cancellationToken)),
+            cancellationToken);
     }
 
     private BitmapSource GetOrDecode(string path, int width, CancellationToken cancellationToken)
