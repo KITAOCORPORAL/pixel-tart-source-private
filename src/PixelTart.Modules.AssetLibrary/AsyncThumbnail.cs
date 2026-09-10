@@ -1,25 +1,23 @@
-using System.Collections.Concurrent;
 using System.IO;
-using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace PixelTart.Modules.AssetLibrary;
 
 public static class AsyncThumbnail
 {
-    private const long MaxCacheBytes = 64L * 1024 * 1024;
-    private static readonly object Gate = new();
-    private static readonly ConcurrentDictionary<string, CacheEntry> Cache = new(StringComparer.Ordinal);
-    private static readonly LinkedList<string> Lru = new();
-    private static readonly ConcurrentDictionary<Image, CancellationTokenSource> Requests = new();
-    private static long _cacheBytes;
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<Image, CancellationTokenSource> Requests = new();
+    private static IAssetThumbnailProvider _provider = new WpfAssetThumbnailProvider();
     private static int _failureCount;
 
     public static int PendingRequestCount => Requests.Count;
     public static int FailureCount => Volatile.Read(ref _failureCount);
+    public static IAssetThumbnailProvider Provider
+    {
+        get => Volatile.Read(ref _provider);
+        set => Volatile.Write(ref _provider, value ?? throw new ArgumentNullException(nameof(value)));
+    }
 
     public static readonly DependencyProperty SourcePathProperty = DependencyProperty.RegisterAttached("SourcePath", typeof(string), typeof(AsyncThumbnail), new PropertyMetadata(null, OnSourceChanged));
     public static readonly DependencyProperty DecodeWidthProperty = DependencyProperty.RegisterAttached("DecodeWidth", typeof(double), typeof(AsyncThumbnail), new PropertyMetadata(180d, OnSourceChanged));
@@ -65,12 +63,7 @@ public static class AsyncThumbnail
         var cancellationToken = cancellation.Token;
         try
         {
-            var key = await Task.Run(() => Fingerprint(requestedPath, width, cancellationToken), cancellationToken).ConfigureAwait(false);
-            if (!Cache.TryGetValue(key, out var cached))
-            {
-                var bitmap = await Task.Run(() => Decode(requestedPath, width, cancellationToken), cancellationToken).ConfigureAwait(false);
-                cached = AddCache(key, bitmap);
-            }
+            var bitmap = await Provider.GetAsync(new(requestedPath, width), cancellationToken).ConfigureAwait(false);
             if (dispatcher.HasShutdownStarted || dispatcher.HasShutdownFinished) return;
             var publication = dispatcher.InvokeAsync(() =>
             {
@@ -78,7 +71,7 @@ public static class AsyncThumbnail
                     && Requests.TryGetValue(image, out var current)
                     && ReferenceEquals(current, cancellation))
                 {
-                    image.Source = cached.Bitmap;
+                    image.Source = bitmap;
                     SetFailureState(image, false, null, cancellation);
                 }
             }, DispatcherPriority.DataBind);
@@ -142,22 +135,4 @@ public static class AsyncThumbnail
         catch (InvalidOperationException) when (image.Dispatcher.HasShutdownStarted || image.Dispatcher.HasShutdownFinished) { }
     }
 
-    private static string Fingerprint(string path, int width, CancellationToken cancellationToken)
-    {
-        cancellationToken.ThrowIfCancellationRequested(); var info = new FileInfo(path); var text = $"{path}|{info.Length}|{info.LastWriteTimeUtc.Ticks}|{width}|thumb-v1"; return Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text)));
-    }
-    private static BitmapImage Decode(string path, int width, CancellationToken cancellationToken)
-    {
-        cancellationToken.ThrowIfCancellationRequested(); var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.DecodePixelWidth = width; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); cancellationToken.ThrowIfCancellationRequested(); return image;
-    }
-    private static CacheEntry AddCache(string key, BitmapImage bitmap)
-    {
-        var bytes = Math.Max(1L, bitmap.PixelWidth * (long)bitmap.PixelHeight * 4); lock (Gate)
-        {
-            if (Cache.TryGetValue(key, out var existing)) { Lru.Remove(key); Lru.AddLast(key); return existing; }
-            while (_cacheBytes + bytes > MaxCacheBytes && Lru.First is { } oldest) { Lru.RemoveFirst(); if (Cache.TryRemove(oldest.Value, out var removed)) _cacheBytes -= removed.Bytes; }
-            var entry = new CacheEntry(bitmap, bytes); Cache[key] = entry; Lru.AddLast(key); _cacheBytes += bytes; return entry;
-        }
-    }
-    private sealed record CacheEntry(BitmapImage Bitmap, long Bytes);
 }

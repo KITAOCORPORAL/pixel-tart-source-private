@@ -366,7 +366,7 @@
         <ContextMenu x:Key="AssetP2ContextMenu" x:Shared="False"
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <MenuItem Header="打开大图预览" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenPreview" />
+            <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
             <MenuItem Header="在新窗口打开" IsEnabled="False" ToolTip="此版本暂未提供独立预览窗口" AutomationProperties.AutomationId="AssetContextOpenNewWindow" />
             <MenuItem Header="在默认应用打开" IsEnabled="False" ToolTip="为保护源文件，默认应用打开将在后续版本提供" AutomationProperties.AutomationId="AssetContextOpenDefault" />
             <MenuItem Header="使用其他应用打开 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenWith" />
@@ -375,10 +375,6 @@
             <Separator />
             <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
                 <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
-                <MenuItem Header="加入上次使用的灵感集" IsEnabled="False" AutomationProperties.AutomationId="AssetContextAddLastCollection" />
-                <MenuItem Header="选择灵感集…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseCollection" />
-                <MenuItem Header="加入当前策划" IsEnabled="False" ToolTip="P4 策划中心尚未启用" AutomationProperties.AutomationId="AssetContextAddCurrentPlan" />
-                <MenuItem Header="查看引用关系" IsEnabled="False" AutomationProperties.AutomationId="AssetContextViewReferences" />
             </MenuItem>
             <MenuItem Header="加入与整理 ›" AutomationProperties.AutomationId="AssetContextOrganize">
                 <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
@@ -386,7 +382,6 @@
                 <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
                 <MenuItem Header="移出当前标签" Command="{Binding Owner.RemoveContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveTag" />
                 <MenuItem Header="添加至文件夹…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseFolder" />
-                <MenuItem Header="添加至灵感集…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextAddCollection" />
                 <MenuItem Header="设置评分 ›" AutomationProperties.AutomationId="AssetContextRating">
                     <MenuItem Header="0 星" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
                     <MenuItem Header="1 星" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
@@ -430,7 +425,6 @@
                 <MenuItem Header="复制标签" IsEnabled="False" />
             </MenuItem>
             <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
-                <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
                 <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
                 <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarVisualContext" />
                 <MenuItem Header="分析视觉数据" Command="{Binding Owner.AnalyzeSelectionCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AnalyzeVisualContext" />

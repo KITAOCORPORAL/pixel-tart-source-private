@@ -48,8 +48,8 @@ public sealed class AssetLibraryP2BrowserWpfTests
 
         foreach (var header in new[]
         {
-            "打开所在位置（仅入口，不自动执行）", "复制路径", "加入当前文件夹", "移出当前文件夹",
-            "加入当前标签", "移出当前标签", "评分", "标记缺失", "归档", "恢复", "从当前视图移除", "查看信息"
+            "查看信息", "在文件资源管理器中显示", "复制文件路径", "添加至当前文件夹", "移出当前文件夹",
+            "添加至当前标签", "移出当前标签", "设置评分", "从当前文件夹移除", "归档", "丢到回收站"
         })
             StringAssert.Contains(allText, header);
         foreach (var forbidden in new[] { "永久删除", "删除原文件", "覆盖源文件", "Eagle 同步写入" })

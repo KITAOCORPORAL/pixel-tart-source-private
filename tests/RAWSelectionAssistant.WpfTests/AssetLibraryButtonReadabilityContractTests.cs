@@ -14,9 +14,9 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         new Dictionary<string, int>(StringComparer.Ordinal)
         {
             ["{StaticResource AssetLibraryPrimaryButton}"] = 4,
-            ["{StaticResource AssetLibrarySecondaryButton}"] = 19,
+            ["{StaticResource AssetLibrarySecondaryButton}"] = 21,
             ["{StaticResource AssetLibraryChipButton}"] = 28,
-            ["{StaticResource AssetLibraryIconButton}"] = 1,
+            ["{StaticResource AssetLibraryIconButton}"] = 2,
             ["{StaticResource AssetLibraryPaletteSwatchButton}"] = 1,
         };
 
@@ -24,6 +24,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     [
         "{Binding OrganizationPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetOrganizationPane|{Binding OrganizationPaneToggleLabel}",
         "{Binding InspectorPaneToggleLabel}|||AssetLibrarySecondaryButton|ToggleAssetInspectorPane|{Binding InspectorPaneToggleLabel}",
+        "{Binding InspirationTrayCount, StringFormat={}♡ {0}}|||AssetLibraryIconButton|InspirationTrayToggle|灵感托盘",
         "导入|||AssetLibraryPrimaryButton|AssetLibraryImport|",
         "更多|||AssetLibrarySecondaryButton|AssetLibraryMore|",
         "{Binding Label}|||AssetLibrarySecondaryButton|{Binding AutomationId}|{Binding AccessibleName}",
@@ -75,6 +76,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         "查颜色|||AssetLibrarySecondaryButton|SearchByColor|",
         "开始|||AssetLibraryPrimaryButton|AnalyzeVisibleAssets|",
         "取消|||AssetLibrarySecondaryButton||",
+        "清空|||AssetLibrarySecondaryButton|InspirationTrayClear|",
+        "收起|||AssetLibrarySecondaryButton|InspirationTrayClose|",
     ];
 
     [TestMethod]
@@ -83,7 +86,7 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = LoadPage();
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(53, buttons, "Update the audited role map when an Asset Library button is added or removed.");
+        Assert.HasCount(56, buttons, "Update the audited role map when an Asset Library button is added or removed.");
         foreach (var button in buttons)
         {
             var style = Attribute(button, "Style");
