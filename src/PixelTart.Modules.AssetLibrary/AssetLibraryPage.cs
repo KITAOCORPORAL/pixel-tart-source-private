@@ -67,6 +67,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseLeftButtonUp += AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown += AssetGrid_PreviewMouseRightButtonDown;
+        AssetGrid.MouseDoubleClick += AssetGrid_MouseDoubleClick;
         TextCompositionManager.AddPreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.AddPreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.AddTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -150,6 +151,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.PreviewMouseLeftButtonUp -= AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown -= AssetGrid_PreviewMouseRightButtonDown;
+        AssetGrid.MouseDoubleClick -= AssetGrid_MouseDoubleClick;
         TextCompositionManager.RemovePreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -637,6 +639,15 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         finally { _applyingViewModelSelection = false; }
         _viewModel.SyncSelection(cards.Select(card => card.Asset));
         UpdateGridDiagnostics();
+    }
+
+    private void AssetGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (FindVisualParent<ListBoxItem>(e.OriginalSource as DependencyObject)?.DataContext is not AssetVisualMatchView card) return;
+        var paths = _viewModel.AssetCards.Select(item => _viewModel.GetDisplaySourcePath(item.Asset)).Where(path => path.Length != 0).ToArray();
+        var index = Array.IndexOf(paths, _viewModel.GetDisplaySourcePath(card.Asset));
+        new AssetViewerWindow(paths, Math.Max(0, index)).Show();
+        e.Handled = true;
     }
 
     private void AssetGrid_DragOver(object sender, DragEventArgs e)

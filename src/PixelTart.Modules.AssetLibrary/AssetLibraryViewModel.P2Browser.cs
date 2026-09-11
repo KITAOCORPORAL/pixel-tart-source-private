@@ -32,6 +32,7 @@ public sealed partial class AssetLibraryViewModel
     public ObservableCollection<AssetLibrarySmartFolderNodeView> OrganizationSmartFolders { get; } = [];
     public ObservableCollection<AssetLibraryTagGroupNodeView> OrganizationTagGroups { get; } = [];
     public BulkObservableCollection<InspirationTrayEntry> InspirationTrayEntries { get; } = [];
+    public BulkObservableCollection<InspirationTrayCardView> InspirationTrayCards { get; } = [];
 
     public AssetLibraryViewMode ViewMode => _workspaceSettings.ViewMode;
     public AssetLibrarySortField SortField => _workspaceSettings.SortField;
@@ -111,6 +112,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> AddToInspirationTrayCommand { get; private set; } = null!;
     public AsyncCommand ToggleInspirationTrayCommand { get; private set; } = null!;
     public AsyncCommand ClearInspirationTrayCommand { get; private set; } = null!;
+    public AsyncCommand<InspirationTrayCardView> RemoveInspirationTrayEntryCommand { get; private set; } = null!;
     public int InspirationTrayCount { get => _inspirationTrayCount; private set => SetProperty(ref _inspirationTrayCount, value); }
     private bool _isInspirationTrayOpen;
     public bool IsInspirationTrayOpen { get => _isInspirationTrayOpen; private set => SetProperty(ref _isInspirationTrayOpen, value); }
@@ -150,6 +152,7 @@ public sealed partial class AssetLibraryViewModel
         AddToInspirationTrayCommand = new(AddToInspirationTrayAsync, _ => IsReady && SelectedAssets.Count > 0);
         ToggleInspirationTrayCommand = new(ToggleInspirationTrayAsync, () => IsReady);
         ClearInspirationTrayCommand = new(ClearInspirationTrayAsync, () => IsReady && InspirationTrayEntries.Count > 0);
+        RemoveInspirationTrayEntryCommand = new(RemoveInspirationTrayEntryAsync, card => IsReady && card is not null);
         P2UndoCommand = new(() => RunTrackedP3OperationAsync(UndoP2Async), () => !_p2JournalBusy && _browserCommands.CanUndo);
         P2RedoCommand = new(() => RunTrackedP3OperationAsync(RedoP2Async), () => !_p2JournalBusy && _browserCommands.CanRedo);
     }
@@ -191,8 +194,25 @@ public sealed partial class AssetLibraryViewModel
     {
         var entries = await _inspirationTray.ListAsync(_lifetimeCancellation.Token);
         InspirationTrayEntries.ReplaceAll(entries);
+        var cards = new List<InspirationTrayCardView>(entries.Count);
+        foreach (var entry in entries)
+        {
+            var asset = await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token);
+            var sameLibrary = entry.Reference.LibraryId == _libraryIdForTray;
+            cards.Add(new(entry, sameLibrary && asset is not null ? GetDisplaySourcePath(asset) : null,
+                sameLibrary && asset is not null ? "本素材库" : "离线素材库"));
+        }
+        InspirationTrayCards.ReplaceAll(cards);
         InspirationTrayCount = entries.Count;
         ClearInspirationTrayCommand.RaiseCanExecuteChanged();
+    }
+
+    private async Task RemoveInspirationTrayEntryAsync(InspirationTrayCardView? card)
+    {
+        if (card is null) return;
+        await _inspirationTray.RemoveAsync(card.Entry.TrayEntryId, _lifetimeCancellation.Token);
+        await RefreshInspirationTrayAsync();
+        Status = "已从灵感托盘移除；素材引用和源文件均未删除。";
     }
 
     private async Task ToggleInspirationTrayAsync()
@@ -940,6 +960,20 @@ public sealed partial class AssetLibraryViewModel
     {
         OnPropertyChanged(nameof(HasOrganizationError)); OnPropertyChanged(nameof(IsOrganizationEmpty));
     }
+}
+
+public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string? ThumbnailPath, string SourceBadge)
+{
+    public Guid TrayEntryId => Entry.TrayEntryId;
+    public string AssetLabel => Entry.Reference.AssetId.ToString("N")[..8];
+    public string ResolutionLabel => Entry.ResolutionState switch
+    {
+        InspirationTrayResolutionState.Resolved => SourceBadge,
+        InspirationTrayResolutionState.LibraryOffline => "素材库离线",
+        InspirationTrayResolutionState.AssetMissing => "文件缺失",
+        _ => "引用校验失败"
+    };
+    public bool IsOffline => Entry.ResolutionState is InspirationTrayResolutionState.LibraryOffline or InspirationTrayResolutionState.HashMismatch || SourceBadge == "离线素材库";
 }
 
 public sealed record AssetLibraryViewModeChangedEventArgs(AssetLibraryViewMode Previous, AssetLibraryViewMode Current);

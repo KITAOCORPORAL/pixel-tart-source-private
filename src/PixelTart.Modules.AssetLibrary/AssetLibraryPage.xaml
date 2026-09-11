@@ -688,7 +688,32 @@
                     <Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" AutomationProperties.AutomationId="InspirationTrayClear" />
                     <Button DockPanel.Dock="Right" Content="收起" Command="{Binding ToggleInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0,0,0" AutomationProperties.AutomationId="InspirationTrayClose" />
                 </StackPanel>
-                <ListBox ItemsSource="{Binding InspirationTrayEntries}" DisplayMemberPath="Reference.AssetId" MaxHeight="190" AutomationProperties.AutomationId="InspirationTrayItems" />
+                <ScrollViewer MaxHeight="190" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding InspirationTrayCards}" AutomationProperties.AutomationId="InspirationTrayItems">
+                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Width="116" Height="132" Margin="4" Padding="4" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4">
+                                    <Grid>
+                                        <Grid.RowDefinitions><RowDefinition Height="88" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                        <Border Background="{DynamicResource Brush.Background}">
+                                            <Grid>
+                                                <TextBlock Text="缩略图不可用" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="112" />
+                                                <TextBlock Text="离线" Foreground="{DynamicResource Brush.Text.Primary}" Background="{DynamicResource Brush.Surface.Elevated}" Padding="3" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            </Grid>
+                                        </Border>
+                                        <TextBlock Grid.Row="1" Text="{Binding AssetLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                        <DockPanel Grid.Row="2">
+                                            <TextBlock Text="{Binding ResolutionLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis" />
+                                            <Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveInspirationTrayEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" AutomationProperties.Name="移除灵感托盘素材" />
+                                        </DockPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </DockPanel>
         </Border>
 
