@@ -105,6 +105,9 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> RestoreContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RemoveContextFromViewCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> ShowContextInfoCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> OpenContextViewerCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> OpenContextExternalCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> RevealContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> AddToInspirationTrayCommand { get; private set; } = null!;
     public AsyncCommand ToggleInspirationTrayCommand { get; private set; } = null!;
     public AsyncCommand ClearInspirationTrayCommand { get; private set; } = null!;
@@ -141,6 +144,9 @@ public sealed partial class AssetLibraryViewModel
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
+        OpenContextViewerCommand = new(OpenContextViewerAsync);
+        OpenContextExternalCommand = new(OpenContextExternalAsync);
+        RevealContextCommand = new(RevealContextAsync);
         AddToInspirationTrayCommand = new(AddToInspirationTrayAsync, _ => IsReady && SelectedAssets.Count > 0);
         ToggleInspirationTrayCommand = new(ToggleInspirationTrayAsync, () => IsReady);
         ClearInspirationTrayCommand = new(ClearInspirationTrayAsync, () => IsReady && InspirationTrayEntries.Count > 0);
@@ -777,6 +783,41 @@ public sealed partial class AssetLibraryViewModel
         if (card is null) return;
         try { await _browserCommands.CopyPathAsync(card.Asset.SourcePath); Status = "路径已复制；未修改源文件。"; }
         catch (Exception exception) { Status = $"复制路径失败：{exception.Message}"; }
+    }
+
+    private Task OpenContextViewerAsync(AssetVisualMatchView? card)
+    {
+        if (card is null) return Task.CompletedTask;
+        var paths = AssetCards.Select(item => GetDisplaySourcePath(item.Asset)).Where(path => path.Length != 0).ToArray();
+        var index = Array.IndexOf(paths, GetDisplaySourcePath(card.Asset));
+        new AssetViewerWindow(paths, Math.Max(0, index)).Show();
+        return Task.CompletedTask;
+    }
+
+    private Task OpenContextExternalAsync(AssetVisualMatchView? card)
+    {
+        var path = card is null ? string.Empty : GetDisplaySourcePath(card.Asset);
+        if (path.Length == 0 || !File.Exists(path)) { Status = "原文件不存在，无法安全打开。"; return Task.CompletedTask; }
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
+            Status = "已请求默认应用打开；未修改源文件。";
+        }
+        catch (Exception exception) { Status = $"打开原文件失败：{exception.Message}"; }
+        return Task.CompletedTask;
+    }
+
+    private Task RevealContextAsync(AssetVisualMatchView? card)
+    {
+        var path = card is null ? string.Empty : GetDisplaySourcePath(card.Asset);
+        if (path.Length == 0 || !File.Exists(path)) { Status = "原文件不存在，无法定位。"; return Task.CompletedTask; }
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", $"/select,\"{path}\"") { UseShellExecute = true });
+            Status = "已在资源管理器中定位；未修改源文件。";
+        }
+        catch (Exception exception) { Status = $"定位原文件失败：{exception.Message}"; }
+        return Task.CompletedTask;
     }
 
     private async Task AddContextFolderAsync(AssetVisualMatchView? card)
