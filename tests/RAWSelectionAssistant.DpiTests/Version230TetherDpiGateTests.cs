@@ -31,7 +31,7 @@ public sealed class Version230TetherDpiGateTests
     public void TetherView_UsesRecyclingVirtualizedScrollableAssetList()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        StringAssert.Contains(xaml, "Width=\"104\"");
+        StringAssert.Contains(xaml, "Height=\"118\"");
         StringAssert.Contains(xaml, "ScrollViewer.HorizontalScrollBarVisibility=\"Disabled\"");
         StringAssert.Contains(xaml, "VirtualizingPanel.VirtualizationMode=\"Recycling\"");
         StringAssert.Contains(xaml, "<VirtualizingStackPanel />");

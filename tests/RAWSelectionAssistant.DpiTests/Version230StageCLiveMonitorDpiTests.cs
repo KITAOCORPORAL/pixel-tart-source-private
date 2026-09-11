@@ -40,7 +40,7 @@ public sealed class Version230StageCLiveMonitorDpiTests
     public void Full1600Workspace_UsesRecommendedColumnBounds()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        foreach (var token in new[] { "Width=\"270\" MinWidth=\"220\" MaxWidth=\"300\"", "MinWidth=\"640\"", "Width=\"320\" MinWidth=\"280\" MaxWidth=\"340\"" }) StringAssert.Contains(xaml, token);
+        foreach (var token in new[] { "Width=\"236\" MinWidth=\"220\" MaxWidth=\"280\"", "MinWidth=\"640\"", "Width=\"296\" MinWidth=\"280\" MaxWidth=\"320\"" }) StringAssert.Contains(xaml, token);
     }
 
     [TestMethod]

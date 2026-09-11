@@ -7,6 +7,34 @@
              AutomationProperties.HelpText="使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!-- Asset Library phase 2: image-first thumbnail treatment. Selection is carried by a
+             quiet outline and a small accent rail; the photo remains the visual focus. -->
+        <Style x:Key="AssetLibraryThumbnailItemStyle" TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <EventSetter Event="Loaded" Handler="ThumbnailItem_Loaded" />
+            <EventSetter Event="Unloaded" Handler="ThumbnailItem_Unloaded" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SurfaceTertiaryBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AssetLibraryThumbnailFrame" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource SurfaceTertiaryBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+            <Setter Property="Padding" Value="{DynamicResource Space4Thickness}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="ThumbnailItemStyle" TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
@@ -19,7 +47,35 @@
         <DataTemplate x:Key="InspectorTemplate">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="现场监看右侧检查器">
                 <StackPanel Margin="10">
-                    <Expander x:Name="SessionGroup" Header="拍摄会话" IsExpanded="True" AutomationProperties.Name="拍摄会话工具组">
+                    <Border Style="{StaticResource PixelTartPanel}" Padding="{DynamicResource Space12Thickness}" Margin="0,0,0,12" AutomationProperties.Name="当前照片摘要">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="84" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <Border Width="76" Height="76" Background="{DynamicResource SurfaceTertiaryBrush}" CornerRadius="{DynamicResource ControlCornerRadius}" ClipToBounds="True">
+                                <Image Source="{Binding SelectedAsset.Thumbnail}" Stretch="Uniform" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedAsset.FileName}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Style="{StaticResource CaptionText}" Margin="0,4,0,0"><Run Text="素材库 · " /><Run Text="{Binding SelectedAsset.MediaKindText}" /></TextBlock>
+                                <TextBlock Text="{Binding SelectedAsset.RatingText}" Foreground="{DynamicResource PhotographyGoldBrush}" Margin="0,4,0,0" />
+                                <TextBlock Text="{Binding SelectedAsset.PairText}" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Expander x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
+                        <StackPanel Margin="0,8,0,10">
+                    <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
+                    <UniformGrid Columns="6" Margin="0,8,0,0"><Button Content="0" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="0" AutomationProperties.Name="清除星级" /><Button Content="★1" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="1" AutomationProperties.Name="设置一星" /><Button Content="★2" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="2" AutomationProperties.Name="设置二星" /><Button Content="★3" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="3" AutomationProperties.Name="设置三星" /><Button Content="★4" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="4" AutomationProperties.Name="设置四星" /><Button Content="★5" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="5" AutomationProperties.Name="设置五星" /></UniformGrid>
+                    <ComboBox ItemsSource="{Binding ColorLabels}" SelectedItem="{Binding CurrentColorLabel}" Margin="0,7,0,0" AutomationProperties.Name="颜色标签"><ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding TargetNullValue=无颜色标签}" /></DataTemplate></ComboBox.ItemTemplate></ComboBox>
+                    <Button Content="保存颜色标签" Style="{StaticResource GhostButton}" HorizontalAlignment="Left" Margin="0,5,0,0" Command="{Binding SetColorLabelCommand}" CommandParameter="{Binding CurrentColorLabel}" AutomationProperties.Name="保存颜色标签" />
+                    <TextBlock Text="摄影师备注" FontWeight="SemiBold" Margin="0,10,0,4" /><TextBox Text="{Binding PhotographerNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="72" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="摄影师备注" />
+                    <TextBlock Text="客户备注" FontWeight="SemiBold" Margin="0,10,0,4" /><TextBox Text="{Binding ClientNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="64" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" GotKeyboardFocus="Note_GotKeyboardFocus" LostKeyboardFocus="Note_LostKeyboardFocus" AutomationProperties.Name="客户备注" />
+                    <WrapPanel Margin="0,8,0,0"><Button Content="保存备注" Style="{StaticResource PrimaryButton}" Command="{Binding SaveNotesCommand}" AutomationProperties.Name="保存联机照片备注" /><Button Content="客户收藏" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleFavoriteCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换客户收藏" /><Button Content="快速拒绝 / 取消" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleRejectedCommand}" Margin="7,0,0,0" AutomationProperties.Name="切换快速拒绝标记" AutomationProperties.HelpText="只设置拒绝标记，不删除、不移动照片" /></WrapPanel>
+                    <TextBlock Text="快速拒绝仅设置 IsRejected；不删除、不移动、不进入回收站、不调用UndoJournal。" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander x:Name="SessionGroup" Header="拍摄会话" IsExpanded="False" AutomationProperties.Name="拍摄会话工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding UserFacingProviderText, StringFormat=● {0}}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
                             <TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -28,7 +84,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander x:Name="HistogramGroup" Header="直方图" IsExpanded="True" AutomationProperties.Name="直方图工具组">
+                    <Expander x:Name="HistogramGroup" Header="直方图" IsExpanded="False" AutomationProperties.Name="直方图工具组">
                         <StackPanel Margin="0,8,0,10">
                             <Grid><TextBlock Text="RGB直方图" Style="{StaticResource SectionTitleText}" /><Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding RefreshAnalysisCommand}" AutomationProperties.Name="刷新RGB直方图" /></Grid>
                             <views:TetherHistogramView Histogram="{Binding Histogram}" Height="132" Margin="0,8,0,0" AutomationProperties.Name="RGB直方图" />
@@ -83,7 +139,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
+                    <Expander x:Name="AnnotationGroupLegacy" Header="标记与备注（兼容入口）" IsExpanded="False" Visibility="Collapsed" AutomationProperties.Name="标记与备注工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
                     <UniformGrid Columns="6" Margin="0,8,0,0"><Button Content="0" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="0" AutomationProperties.Name="清除星级" /><Button Content="★1" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="1" AutomationProperties.Name="设置一星" /><Button Content="★2" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="2" AutomationProperties.Name="设置二星" /><Button Content="★3" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="3" AutomationProperties.Name="设置三星" /><Button Content="★4" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="4" AutomationProperties.Name="设置四星" /><Button Content="★5" Style="{StaticResource GhostButton}" Command="{Binding SetRatingCommand}" CommandParameter="5" AutomationProperties.Name="设置五星" /></UniformGrid>
@@ -166,7 +222,7 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="8">
+    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="{DynamicResource Space8Thickness}">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="8" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
         <Border Style="{StaticResource PanelBorder}" Padding="8,6" Visibility="{Binding ShowMonitorWorkspace, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -181,14 +237,23 @@
                     <Button x:Name="BrowserToolbarButton" Content="照片浏览器" Style="{StaticResource GhostButton}" Click="ToggleBrowser_Click" AutomationProperties.Name="显示或隐藏照片浏览器" />
                     <CheckBox Content="自动最新" IsChecked="{Binding AutoLatest}" Margin="8,0,0,0" VerticalAlignment="Center" AutomationProperties.Name="自动跟随最新照片" />
                     <Button Content="{Binding LockButtonText}" Style="{StaticResource GhostButton}" Command="{Binding ToggleLockCommand}" Margin="6,0,0,0" AutomationProperties.Name="锁定或解锁当前照片" />
-                    <Button Content="LUT" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.ToggleLutCommand}" Margin="6,0,0,0" AutomationProperties.Name="切换LUT" />
-                    <Button x:Name="ClientMonitorToolbarButton" Content="客户监看" Style="{StaticResource GhostButton}" Command="{Binding ColorSettings.OpenClientMonitorCommand}" Margin="6,0,0,0" AutomationProperties.Name="开启客户监看窗口" />
-                    <Button x:Name="InspectorToolbarButton" Content="检查器" Style="{StaticResource GhostButton}" Command="{Binding ToggleInspectorCommand}" Margin="6,0,0,0" AutomationProperties.Name="显示或隐藏现场监看检查器" />
-                    <Button x:Name="TaskCenterToolbarButton" Content="任务中心" Style="{StaticResource GhostButton}" Click="OpenTaskCenter_Click" Margin="6,0,0,0" AutomationProperties.Name="打开任务中心" />
+                    <Button x:Name="ClientMonitorToolbarButton" Content="更多 ▾" Style="{StaticResource GhostButton}" Margin="6,0,0,0" AutomationProperties.Name="更多素材库工具">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="LUT" Command="{Binding ColorSettings.ToggleLutCommand}" />
+                                <MenuItem Header="客户监看" Command="{Binding ColorSettings.OpenClientMonitorCommand}" />
+                                <MenuItem Header="检查器" Command="{Binding ToggleInspectorCommand}" />
+                                <MenuItem Header="任务中心" Click="OpenTaskCenter_Click" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button x:Name="InspectorToolbarButton" Visibility="Collapsed" />
+                    <Button x:Name="TaskCenterToolbarButton" Visibility="Collapsed" />
                     <Button x:Name="CompactMoreButton" Content="更多 ▾" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Visibility="Collapsed" Click="OpenCompactMenu_Click" AutomationProperties.Name="更多联机监看工具">
                         <Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="照片浏览器" Click="ToggleBrowser_Click" />
+                                <MenuItem Header="LUT" Command="{Binding ColorSettings.ToggleLutCommand}" />
                                 <MenuItem Header="客户监看" Command="{Binding ColorSettings.OpenClientMonitorCommand}" />
                                 <MenuItem Header="检查器" Command="{Binding ToggleInspectorCommand}" />
                                 <MenuItem Header="任务中心" Click="OpenTaskCenter_Click" />
@@ -221,17 +286,21 @@
         </Border>
 
         <Grid x:Name="MonitorWorkspace" Grid.Row="2" Visibility="{Binding ShowMonitorWorkspace, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid.ColumnDefinitions><ColumnDefinition x:Name="ThumbnailColumn" Width="270" MinWidth="220" MaxWidth="300" /><ColumnDefinition x:Name="BrowserSplitterColumn" Width="8" /><ColumnDefinition Width="*" MinWidth="640" /><ColumnDefinition Width="8" /><ColumnDefinition x:Name="InspectorColumn" Width="320" MinWidth="280" MaxWidth="340" /></Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition x:Name="ThumbnailColumn" Width="236" MinWidth="220" MaxWidth="280" /><ColumnDefinition x:Name="BrowserSplitterColumn" Width="8" /><ColumnDefinition Width="*" MinWidth="640" /><ColumnDefinition Width="8" /><ColumnDefinition x:Name="InspectorColumn" Width="296" MinWidth="280" MaxWidth="320" /></Grid.ColumnDefinitions>
 
-            <Border x:Name="BrowserPanel" Style="{StaticResource PanelBorder}" Padding="8">
+            <Border x:Name="BrowserPanel" Style="{StaticResource PixelTartPanel}" Padding="{DynamicResource Space12Thickness}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><ComboBox ItemsSource="{Binding FilterOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedFilter}" AutomationProperties.Name="缩略图筛选" /><ComboBox Grid.Column="1" ItemsSource="{Binding SortOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedSort}" Margin="6,0,0,0" AutomationProperties.Name="缩略图排序" /></Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <ComboBox ItemsSource="{Binding FilterOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedFilter}" AutomationProperties.Name="缩略图筛选" ToolTip="筛选照片" />
+                        <ComboBox Grid.Column="1" ItemsSource="{Binding SortOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedSort}" Margin="{DynamicResource Space8Thickness}" AutomationProperties.Name="缩略图排序" ToolTip="排序照片" />
+                    </Grid>
                     <ListBox x:Name="AssetList" Grid.Row="1" ItemsSource="{Binding AssetsView}" SelectedItem="{Binding SelectedAsset}" BorderThickness="0" Background="Transparent" Margin="0,7,0,0"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
                              VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Pixel"
-                             ItemContainerStyle="{StaticResource ThumbnailItemStyle}" AutomationProperties.Name="联机文件列表">
+                             ItemContainerStyle="{StaticResource AssetLibraryThumbnailItemStyle}" AutomationProperties.Name="联机文件列表">
                         <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate><DataTemplate><Border Padding="6" Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="6"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="104" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Grid Width="104" Height="78" Background="{DynamicResource SurfaceTertiaryBrush}" ClipToBounds="True"><Image Source="{Binding Thumbnail}" Stretch="Uniform" /><Border Background="{DynamicResource SurfaceSecondaryBrush}"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding IsRaw}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style><StackPanel VerticalAlignment="Center"><TextBlock Text="RAW" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource AccentBrush}" /><TextBlock Text="安全占位预览" Style="{StaticResource CaptionText}" HorizontalAlignment="Center" /></StackPanel></Border></Grid><StackPanel Grid.Column="1" Margin="8,0,0,0"><Grid><TextBlock Text="{Binding MediaKindText}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" /><TextBlock Text="{Binding CaptureTimeText}" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid><TextBlock Text="{Binding FileName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" /><TextBlock Text="{Binding RatingText}" Foreground="{DynamicResource WarningBrush}" /><WrapPanel><TextBlock Text="{Binding PairText}" Style="{StaticResource CaptionText}" /><TextBlock Text="  ♥" Foreground="{DynamicResource DangerBrush}" Visibility="{Binding ClientFavorite, Converter={StaticResource BooleanToVisibilityConverter}}" /><TextBlock Text="  拒绝" Foreground="{DynamicResource WarningBrush}" Visibility="{Binding IsRejected, Converter={StaticResource BooleanToVisibilityConverter}}" /></WrapPanel><Grid Margin="0,3,0,0"><TextBlock Text="{Binding StateText}" Style="{StaticResource CaptionText}" /><Button Content="加入比较" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="4,1" MinHeight="22" Command="{Binding DataContext.SetCompareCandidateCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" AutomationProperties.Name="将照片加入比较" /></Grid></StackPanel></Grid></Border></DataTemplate></ListBox.ItemTemplate>
+                         <ListBox.ItemTemplate><DataTemplate><Border Style="{StaticResource AssetLibraryThumbnailFrame}"><Grid><Grid.RowDefinitions><RowDefinition Height="118" /><RowDefinition Height="Auto" /></Grid.RowDefinitions><Grid Background="{DynamicResource SurfaceSecondaryBrush}" ClipToBounds="True"><Image Source="{Binding Thumbnail}" Stretch="Uniform" /><Border Background="{DynamicResource SurfaceSecondaryBrush}"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding IsRaw}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style><StackPanel VerticalAlignment="Center"><TextBlock Text="RAW" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource PhotographyGoldBrush}" /><TextBlock Text="安全占位预览" Style="{StaticResource CaptionText}" HorizontalAlignment="Center" /></StackPanel></Border></Grid><Grid Grid.Row="1" Margin="{DynamicResource Space8Thickness}"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions><TextBlock Text="{Binding FileName}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" /><Grid Grid.Row="1" Margin="0,4,0,0"><TextBlock Text="{Binding CaptureTimeText}" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding RatingText}" Foreground="{DynamicResource PhotographyGoldBrush}" HorizontalAlignment="Right" /></Grid></Grid></Grid></Border></DataTemplate></ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ShowWaitingForFirstPhoto, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <TextBlock Text="等待照片" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
