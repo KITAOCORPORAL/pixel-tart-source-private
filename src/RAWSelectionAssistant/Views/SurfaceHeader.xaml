@@ -9,12 +9,16 @@
     </UserControl.Resources>
     <Border Style="{StaticResource ModalHeader}">
         <Grid>
-            <StackPanel Margin="0,0,48,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="48" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,12,0">
                 <TextBlock Text="{Binding Title, ElementName=Root}" Style="{StaticResource ModalTitleText}" />
                 <TextBlock Text="{Binding Subtitle, ElementName=Root}" Style="{StaticResource CaptionText}"
                            Margin="0,4,0,0" TextWrapping="Wrap" />
             </StackPanel>
-            <views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top"
+            <views:SurfaceCloseButton Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
                                       ToolTipText="{Binding CloseToolTip, ElementName=Root}"
                                       AutomationName="{Binding CloseAutomationName, ElementName=Root}"
                                       AutomationId="{Binding CloseAutomationId, ElementName=Root}"

@@ -88,6 +88,25 @@ public sealed class NavigationWorkbenchClosureTests
     }
 
     [TestMethod]
+    public void ToolboxSidebar_IsFirstClassWorkspaceNavigation()
+    {
+        var source = Read("src/RAWSelectionAssistant/MainWindow.xaml");
+        var document = XDocument.Parse(source);
+        var sidebar = document.Descendants().Single(element => Attribute(element, "Name") == "SidebarContainer");
+        var toolbox = sidebar.Descendants().Single(element => Attribute(element, "AutomationProperties.AutomationId") == "PrimaryNavigationToolbox");
+        Assert.AreEqual("Toolbox", Attribute(toolbox, "CommandParameter"));
+        Assert.IsNotNull(Attribute(toolbox, "Command"));
+        Assert.IsFalse(toolbox.Attributes().Any(attribute => attribute.Name.LocalName == "Click"));
+        StringAssert.Contains(source, "IsToolboxPage");
+        var code = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
+        var start = code.IndexOf("private void ToolboxQuickButton_Click", StringComparison.Ordinal);
+        var end = code.IndexOf("private void WorkbenchToolboxPopup_Closed", start, StringComparison.Ordinal);
+        var handler = code[start..end];
+        StringAssert.Contains(handler, "This handler is reserved for the Workbench quick-action button.");
+        Assert.IsFalse(handler.Contains("NavigateCommand.Execute(\"Workbench\")", StringComparison.Ordinal));
+    }
+
+    [TestMethod]
     public void OnlineSelection_KeepsRouteAndViewHostWithoutAFirstLevelSidebarEntry()
     {
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml");

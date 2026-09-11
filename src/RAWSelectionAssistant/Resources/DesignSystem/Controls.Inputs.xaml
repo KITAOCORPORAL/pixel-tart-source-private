@@ -105,7 +105,7 @@
     </Style>
     <Style TargetType="Calendar" BasedOn="{StaticResource PixelTartCalendarStyle}" />
     <Style x:Key="PixelTartCalendarDayButtonStyle" TargetType="CalendarDayButton">
-        <Setter Property="Width" Value="36" /><Setter Property="Height" Value="32" /><Setter Property="Margin" Value="1" />
+        <Setter Property="Width" Value="40" /><Setter Property="Height" Value="36" /><Setter Property="MinWidth" Value="40" /><Setter Property="MinHeight" Value="36" /><Setter Property="Margin" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" /><Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -132,21 +132,21 @@
         <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="CalendarButton"><Border x:Name="YearBorder" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5"><TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="YearBorder" Property="Background" Value="{DynamicResource DropdownHoverBrush}" /></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="YearBorder" Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger><Trigger Property="IsInactive" Value="True"><Setter Property="Opacity" Value="0.48" /></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
     </Style>
     <Style x:Key="PixelTartCalendarItemStyle" TargetType="CalendarItem">
-        <Setter Property="Background" Value="{DynamicResource DropdownBackgroundBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DropdownBackgroundBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="MinWidth" Value="320" /><Setter Property="MinHeight" Value="330" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarItem">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="7" Padding="8">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="7" Padding="12" MinWidth="320" MinHeight="330">
                         <Grid>
-                            <Grid.RowDefinitions><RowDefinition Height="34" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
-                            <Button x:Name="PART_PreviousButton" Grid.Row="0" Content="‹" Style="{DynamicResource GhostButton}" Width="30" Height="28" Padding="0" HorizontalAlignment="Left" AutomationProperties.Name="上个月" />
-                            <Button x:Name="PART_HeaderButton" Grid.Row="0" Style="{DynamicResource GhostButton}" HorizontalAlignment="Center" Padding="12,4" FontWeight="SemiBold" AutomationProperties.Name="切换月份和年份" />
-                            <Button x:Name="PART_NextButton" Grid.Row="0" Content="›" Style="{DynamicResource GhostButton}" Width="30" Height="28" Padding="0" HorizontalAlignment="Right" AutomationProperties.Name="下个月" />
-                            <Grid Grid.Row="1" Margin="0,4,0,2">
+                            <Grid.RowDefinitions><RowDefinition Height="42" /><RowDefinition Height="28" /><RowDefinition Height="252" /></Grid.RowDefinitions>
+                            <Button x:Name="PART_PreviousButton" Grid.Row="0" Content="‹" Style="{DynamicResource GhostButton}" Width="36" Height="36" MinWidth="36" MinHeight="36" Padding="0" HorizontalAlignment="Left" AutomationProperties.Name="上个月" />
+                            <Button x:Name="PART_HeaderButton" Grid.Row="0" Style="{DynamicResource GhostButton}" Height="36" MinHeight="36" HorizontalAlignment="Center" Padding="12,4" FontWeight="SemiBold" AutomationProperties.Name="切换月份和年份" />
+                            <Button x:Name="PART_NextButton" Grid.Row="0" Content="›" Style="{DynamicResource GhostButton}" Width="36" Height="36" MinWidth="36" MinHeight="36" Padding="0" HorizontalAlignment="Right" AutomationProperties.Name="下个月" />
+                            <Grid Grid.Row="1" Margin="0,2,0,2" MinHeight="24">
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
                                 <TextBlock Text="一" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="1" Text="二" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="2" Text="三" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="3" Text="四" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="4" Text="五" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="5" Text="六" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="6" Text="日" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" />
                             </Grid>
-                            <Grid x:Name="PART_MonthView" Grid.Row="2" HorizontalAlignment="Center" />
+                            <Grid x:Name="PART_MonthView" Grid.Row="2" MinWidth="294" MinHeight="252" HorizontalAlignment="Center" />
                             <Grid x:Name="PART_YearView" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Visibility="Collapsed" />
                         </Grid>
                     </Border>

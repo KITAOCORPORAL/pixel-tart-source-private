@@ -779,13 +779,9 @@ public partial class MainWindow : Window
 
     private void ToolboxQuickButton_Click(object sender, RoutedEventArgs e)
     {
-        if (_viewModel?.IsWorkbenchPage != true)
-        {
-            _viewModel?.NavigateCommand.Execute("Workbench");
-            Dispatcher.BeginInvoke(() => WorkbenchToolboxPopup.IsOpen = true, DispatcherPriority.Loaded);
-            e.Handled = true;
-            return;
-        }
+        // This handler is reserved for the Workbench quick-action button.
+        // The sidebar entry is a first-class workspace navigation command.
+        if (_viewModel?.IsWorkbenchPage != true) return;
         WorkbenchToolboxPopup.IsOpen = !WorkbenchToolboxPopup.IsOpen;
         e.Handled = true;
     }

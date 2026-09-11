@@ -213,9 +213,21 @@
                             <TextBlock Text="工具" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <Button Content="{Binding ToolboxEntry.DisplayName}"
                                     Tag="{Binding ToolboxEntry.IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"
-                                    Style="{StaticResource SidebarNavButton}" Click="ToolboxQuickButton_Click"
+                                    Command="{Binding NavigateCommand}" CommandParameter="Toolbox"
                                     ToolTip="{Binding ToolboxEntry.Description}"
-                                    AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" />
+                                    AutomationProperties.Name="{Binding ToolboxEntry.DisplayName}" AutomationProperties.AutomationId="PrimaryNavigationToolbox">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsToolboxPage}" Value="True">
+                                                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                                                <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                             <Button Content="在线选片" Tag="{StaticResource IconOnlineSelection}" Command="{Binding NavigateCommand}" CommandParameter="OnlineSelection" ToolTip="在线选片" AutomationProperties.Name="在线选片" AutomationProperties.AutomationId="SecondaryNavigationOnlineSelection">
                                 <Button.Style><Style TargetType="Button" BasedOn="{StaticResource SidebarNavButton}"><Style.Triggers><DataTrigger Binding="{Binding IsOnlineSelectionPage}" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></DataTrigger></Style.Triggers></Style></Button.Style>
                             </Button>
