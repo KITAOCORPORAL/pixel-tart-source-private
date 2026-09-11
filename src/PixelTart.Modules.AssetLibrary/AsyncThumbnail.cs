@@ -50,6 +50,17 @@ public static class AsyncThumbnail
         catch (ArgumentException) { RemoveRequest(image, cancellation); cancellation.Dispose(); RecordFailure(image, "缩略图加载失败。"); return; }
         catch (NotSupportedException) { RemoveRequest(image, cancellation); cancellation.Dispose(); RecordFailure(image, "缩略图加载失败。"); return; }
 
+        // Publish the common offline/missing-source state immediately. Besides avoiding
+        // needless decoder work, this keeps a virtualized image from retaining a pending
+        // request when it unloads before the provider gets scheduled.
+        if (!File.Exists(requestedPath))
+        {
+            RemoveRequest(image, cancellation);
+            cancellation.Dispose();
+            RecordFailure(image, "文件不存在：源文件离线或已移动。");
+            return;
+        }
+
         _ = LoadAsync(image, dispatcher, requestedPath, width, cancellation);
     }
 
