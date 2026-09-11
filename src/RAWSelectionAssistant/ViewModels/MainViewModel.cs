@@ -317,16 +317,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         new(SourceDirectoryType.Mixed, "JPG + RAW 混合目录"),
         new(SourceDirectoryType.Other, "其他格式目录")
     ];
-    public IReadOnlyList<ThemeOption> ThemeOptions { get; } =
-    [
-        new(ThemeMode.System, "跟随 Windows"), new(ThemeMode.Light, "浅色"), new(ThemeMode.Dark, "深色")
-    ];
-    public IReadOnlyList<AccentOption> AccentOptions { get; } =
-    [
-        new(AccentPreset.System, "Windows 强调色"), new(AccentPreset.KitaoBlue, "蛋挞黄"), new(AccentPreset.MossGreen, "苔藓绿"),
-        new(AccentPreset.WineRed, "酒红"), new(AccentPreset.NightPurple, "夜紫"), new(AccentPreset.WarmAmber, "暖琥珀"),
-        new(AccentPreset.Graphite, "石墨灰"), new(AccentPreset.Custom, "自定义")
-    ];
+    // Theme and accent selectors were removed from the user surface in RC8.
     public IReadOnlyList<DensityOption> DensityOptions { get; } =
     [
         new(InterfaceDensity.Comfortable, "舒适"), new(InterfaceDensity.Compact, "紧凑")
@@ -660,7 +651,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         set
         {
             if (Settings.Appearance.Theme == value) return;
-            Settings.Appearance.Theme = value;
+            Settings.Appearance.Theme = ThemeMode.Dark;
             ApplyAppearance("主题已更新");
             OnPropertyChanged();
             OnPropertyChanged(nameof(ThemeSummary));
@@ -672,7 +663,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         set
         {
             if (Settings.Appearance.Accent == value) return;
-            Settings.Appearance.Accent = value;
+            Settings.Appearance.Accent = AccentPreset.KitaoBlue;
             ApplyAppearance("强调色已更新");
             OnPropertyChanged();
             OnPropertyChanged(nameof(IsCustomAccent));
@@ -759,7 +750,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public int WorkbenchAwaitingReturnCount => WorkCalendarPage.AwaitingReturnCount;
     public int WorkbenchCompletedCount => ProjectHistory.Count(project => project.Status == PhotoProjectStatus.Completed);
     public string TaskCenterSummary => IsBusy ? $"正在处理：{StatusMessage}" : "暂无待处理任务";
-    public string ThemeSummary => SelectedTheme switch { ThemeMode.Light => "浅色", ThemeMode.Dark => "深色", _ => "跟随系统" };
+    public string ThemeSummary => "PixelTart Dark Theme";
     public int CurrentWorkflowStep
     {
         get => _currentWorkflowStep;
@@ -2057,13 +2048,12 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private void SetTheme(object? parameter)
     {
-        if (parameter is ThemeMode mode) SelectedTheme = mode;
-        else if (Enum.TryParse<ThemeMode>(parameter?.ToString(), true, out var parsed)) SelectedTheme = parsed;
+        SelectedTheme = ThemeMode.Dark;
     }
 
     private void ResetAppearance()
     {
-        Settings.Appearance = new AppearanceSettings();
+        Settings.Appearance = new AppearanceSettings { Theme = ThemeMode.Dark, Accent = AccentPreset.KitaoBlue, CustomAccentColor = "#18A88C" };
         _appearanceService.Apply(Settings.Appearance);
         OnPropertyChanged(nameof(SelectedTheme));
         OnPropertyChanged(nameof(SelectedAccent));
@@ -2089,7 +2079,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             ShowToast("请输入 #RRGGBB 格式的颜色，例如 #C98220");
             return;
         }
-        Settings.Appearance.Accent = AccentPreset.Custom;
+        Settings.Appearance.Accent = AccentPreset.KitaoBlue;
         ApplyAppearance("自定义强调色已应用");
         OnPropertyChanged(nameof(SelectedAccent));
         OnPropertyChanged(nameof(IsCustomAccent));

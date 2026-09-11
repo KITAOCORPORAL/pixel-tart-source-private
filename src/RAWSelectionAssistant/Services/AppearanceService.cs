@@ -48,25 +48,10 @@ public sealed class AppearanceService : IAppearanceService
         }
     }
 
-    private static string ResolveTheme(AppThemeMode mode) => mode switch
-    {
-        AppThemeMode.Light => "Light",
-        AppThemeMode.Dark => "Dark",
-        _ => IsWindowsLightTheme() ? "Light" : "Dark"
-    };
-
-    private static bool IsWindowsLightTheme()
-    {
-        try
-        {
-            using var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
-            return key?.GetValue("AppsUseLightTheme") is not int value || value != 0;
-        }
-        catch
-        {
-            return true;
-        }
-    }
+    // Pixel Tart deliberately has one product theme. Legacy AppsUseLightTheme is intentionally ignored.
+    // Windows High Contrast remains
+    // the only exception because it is an accessibility mode owned by the OS.
+    private static string ResolveTheme(AppThemeMode mode) => "Dark";
 
     private static void ReplaceThemeDictionary(string themeName)
     {

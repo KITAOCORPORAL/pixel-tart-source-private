@@ -5,7 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Replaceable runtime theme slot. AppearanceService depends on this top-level entry. -->
+                <!-- RC8 product theme: one dark surface system; High Contrast is OS-owned. -->
+                <!-- Resources/DesignSystem/DesignTokens.xaml remains a compatibility token source. -->
                 <ResourceDictionary Source="Resources/DesignSystem/Theme.Dark.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Theme.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Components.xaml" />

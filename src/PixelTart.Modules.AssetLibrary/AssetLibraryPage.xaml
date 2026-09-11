@@ -20,11 +20,19 @@
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      Style="{DynamicResource PixelTart.Menu.Context}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <!-- Only implemented, context-valid actions are surfaced. -->
             <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
-            <MenuItem Header="复制文件路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" />
+            <MenuItem Header="在新窗口打开" IsEnabled="False" ToolTip="独立预览窗口尚未接入" />
+            <MenuItem Header="在默认应用打开" IsEnabled="False" ToolTip="安全外部打开尚未接入" />
+            <MenuItem Header="使用其他应用打开 ›" IsEnabled="False" />
+            <MenuItem Header="在文件资源管理器中显示" IsEnabled="False" />
+            <MenuItem Header="打开原文件位置 ›" IsEnabled="False" />
             <Separator />
-            <MenuItem Header="整理" AutomationProperties.AutomationId="AssetContextOrganize">
+            <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
+                <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
+                <MenuItem Header="加入当前情绪板" IsEnabled="False" />
+                <MenuItem Header="加入项目策划" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="加入与整理 ›" AutomationProperties.AutomationId="AssetContextOrganize">
                 <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
                 <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFolder" />
                 <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
@@ -38,13 +46,23 @@
                     <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="素材编辑 ›" AutomationProperties.AutomationId="AssetContextEdit">
+                <MenuItem Header="用其他文件替换" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="工作流 ›" AutomationProperties.AutomationId="AssetContextWorkflow">
+                <MenuItem Header="客户选择" IsEnabled="False" />
+                <MenuItem Header="待精修" IsEnabled="False" />
+                <MenuItem Header="已精修" IsEnabled="False" />
+                <MenuItem Header="已交付" IsEnabled="False" />
+            </MenuItem>
+            <MenuItem Header="导出 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextExport" />
             <Separator />
-            <MenuItem Header="视觉工具" AutomationProperties.AutomationId="AssetContextViewMode">
+            <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
                 <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
                 <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarVisualContext" />
                 <MenuItem Header="分析视觉数据" Command="{Binding Owner.AnalyzeSelectionCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AnalyzeVisualContext" />
             </MenuItem>
-            <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
+            <MenuItem Header="复制 ›"><MenuItem Header="复制文件路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" /></MenuItem>
             <Separator />
             <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
             <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />

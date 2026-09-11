@@ -4,6 +4,7 @@ using System.Windows.Automation;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
+using System.Windows.Media;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -27,7 +28,12 @@ public sealed class NewAssetLibraryDialog : Window
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
         ResizeMode = ResizeMode.NoResize;
         ShowInTaskbar = false;
+        Background = FindBrush("WindowBackgroundBrush");
+        Foreground = FindBrush("TextPrimaryBrush");
+        WindowStyle = WindowStyle.None;
+        AllowsTransparency = false;
 
+        var shell = new Border { Margin = new Thickness(16), Background = FindBrush("RaisedSurfaceBrush"), BorderBrush = FindBrush("BorderStrongBrush"), BorderThickness = new Thickness(1), CornerRadius = new CornerRadius(10) };
         var root = new Grid { Margin = new Thickness(24) };
         root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -101,7 +107,8 @@ public sealed class NewAssetLibraryDialog : Window
         Grid.SetRow(actions, 4);
         root.Children.Add(actions);
 
-        Content = root;
+        shell.Child = root;
+        Content = shell;
         RefreshPreview();
         Loaded += (_, _) => { _nameInput.Focus(); RefreshPreview(); };
     }
@@ -162,4 +169,6 @@ public sealed class NewAssetLibraryDialog : Window
         var pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         return Directory.Exists(pictures) ? pictures : Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
     }
+
+    private static Brush FindBrush(string key) => Application.Current?.TryFindResource(key) as Brush ?? Brushes.Transparent;
 }

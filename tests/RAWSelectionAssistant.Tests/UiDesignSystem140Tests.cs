@@ -36,7 +36,7 @@ public sealed class UiDesignSystem140Tests
         await service.SaveAsync(settings);
         var loaded = await service.LoadAsync();
         Assert.AreEqual(ThemeMode.Dark, loaded.Appearance.Theme);
-        Assert.AreEqual(AccentPreset.WineRed, loaded.Appearance.Accent);
+        Assert.AreEqual(AccentPreset.KitaoBlue, loaded.Appearance.Accent);
         Assert.AreEqual(InterfaceDensity.Compact, loaded.Appearance.Density);
         Assert.IsTrue(loaded.Appearance.SidebarCollapsed);
     }
@@ -48,7 +48,7 @@ public sealed class UiDesignSystem140Tests
         var path = temp.Combine("settings.json");
         await File.WriteAllTextAsync(path, "{\"Appearance\":{\"CustomAccentColor\":\"invalid\"}}");
         var settings = await new SettingsService(new TestLogService(), path).LoadAsync();
-        Assert.AreEqual("#C98220", settings.Appearance.CustomAccentColor);
+        Assert.AreEqual("#18A88C", settings.Appearance.CustomAccentColor);
     }
 
     [TestMethod]
@@ -58,7 +58,7 @@ public sealed class UiDesignSystem140Tests
         var path = temp.Combine("settings.json");
         await File.WriteAllTextAsync(path, "{\"Appearance\":{\"Theme\":999,\"Accent\":999,\"Density\":999,\"Sidebar\":999,\"Motion\":999,\"FontScale\":999}}");
         var settings = await new SettingsService(new TestLogService(), path).LoadAsync();
-        Assert.AreEqual(ThemeMode.System, settings.Appearance.Theme);
+        Assert.AreEqual(ThemeMode.Dark, settings.Appearance.Theme);
         Assert.AreEqual(AccentPreset.KitaoBlue, settings.Appearance.Accent);
         Assert.AreEqual(InterfaceDensity.Comfortable, settings.Appearance.Density);
         Assert.AreEqual(SidebarMode.Remember, settings.Appearance.Sidebar);
@@ -106,8 +106,8 @@ public sealed class UiDesignSystem140Tests
         Assert.IsLessThan(text.IndexOf("Header=\"标准化名称\"", StringComparison.Ordinal), text.IndexOf("x:Name=\"DetailsColumn\"", StringComparison.Ordinal));
     }
 
-    [TestMethod] public void MainWindow_AppearancePageExposesAllOptions() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "ThemeOptions", "AccentOptions", "DensityOptions", "SidebarOptions", "MotionOptions", "FontScaleOptions");
-    [TestMethod] public void MainWindow_AppearanceHasRealtimePreviewAndReset() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "实时预览", "AccentPreviewHex", "ResetAppearanceCommand");
+    [TestMethod] public void MainWindow_AppearancePageExposesSingleDarkThemeAndRemainingOptions() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "PixelTart Dark Theme", "DensityOptions", "SidebarOptions", "MotionOptions", "FontScaleOptions");
+    [TestMethod] public void MainWindow_AppearanceHasReset() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "ResetAppearanceCommand");
     [TestMethod] public void MainWindow_ToastIsNonModalAndDismissible() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "IsToastVisible", "ToastMessage", "DismissToastCommand");
     [TestMethod] public void MainWindow_TutorialTargetsRemainAvailable() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "AddSourceButton", "CustomerDropArea", "MatchButton", "ResultsGrid", "BrowseOutputButton", "TutorialPrimaryButton");
     [TestMethod] public void MainWindow_UsesDynamicSemanticColors() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "DynamicResource WindowBackgroundBrush", "DynamicResource SurfacePrimaryBrush", "DynamicResource AccentBrush", "DynamicResource TextSecondaryBrush");
@@ -116,7 +116,7 @@ public sealed class UiDesignSystem140Tests
     [TestMethod] public void CandidateDialog_UsesDynamicThemeAndDefaultAction() => Contains("src/RAWSelectionAssistant/Views/CandidateSelectionWindow.xaml", "DynamicResource WindowBackgroundBrush", "IsDefault=\"True\"", "IsCancel=\"True\"");
     [TestMethod] public void HelpDialog_ShowsVersion230() => Contains("src/RAWSelectionAssistant/Views/HelpWindow.xaml", "版本 2.3.0", "DynamicResource WindowBackgroundBrush");
     [TestMethod] public void TutorialOfferDialog_UsesDynamicTheme() => Contains("src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml", "DynamicResource WindowBackgroundBrush", "DynamicResource TextSecondaryBrush");
-    [TestMethod] public void AppearanceService_RespondsToWindowsAndHighContrast() => Contains("src/RAWSelectionAssistant/Services/AppearanceService.cs", "AppsUseLightTheme", "SystemParameters.HighContrast", "UserPreferenceChanged");
+    [TestMethod] public void AppearanceService_UsesSingleDarkThemeAndHighContrast() => Contains("src/RAWSelectionAssistant/Services/AppearanceService.cs", "ResolveTheme", "SystemParameters.HighContrast", "UserPreferenceChanged");
     [TestMethod] public void AppearanceService_DoesNotResetMainViewModel() => DoesNotContain("src/RAWSelectionAssistant/Services/AppearanceService.cs", "MainViewModel");
     [TestMethod] public void AccentService_UsesContrastNotFixedForeground() => Contains("src/RAWSelectionAssistant/Services/AppearanceService.cs", "GetReadableForeground", "RelativeLuminance", "ContrastRatio");
     [TestMethod] public void Version_BrandingSourceIs230() => Contains("src/RAWSelectionAssistant.Core/Models/Branding.cs", "ProductVersion = \"2.3.0\"");

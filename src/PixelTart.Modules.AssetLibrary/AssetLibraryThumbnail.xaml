@@ -4,7 +4,7 @@
             <Setter Property="Padding" Value="{DynamicResource Space.Inset.1}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
@@ -15,7 +15,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
-                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter TargetName="ThumbnailFrame" Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /></Trigger>
+                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter TargetName="ThumbnailFrame" Property="Background" Value="Transparent" /></Trigger>
                             <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
                             <Trigger Property="IsEnabled" Value="False"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /></Trigger>
                         </ControlTemplate.Triggers>

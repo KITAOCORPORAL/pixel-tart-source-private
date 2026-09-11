@@ -62,19 +62,33 @@
     </Style>
     <Style TargetType="DatePickerTextBox"><Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}" /><Setter Property="Foreground" Value="{DynamicResource InputForegroundBrush}" /><Setter Property="BorderBrush" Value="Transparent" /><Setter Property="BorderThickness" Value="0" /><Setter Property="CaretBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="SelectionBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="Padding" Value="6,4" /><Setter Property="VerticalContentAlignment" Value="Center" /></Style>
     <Style x:Key="PixelTartCalendarNativeStyle" TargetType="Calendar">
+        <Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuPopupBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <!-- Keep the framework Calendar/CalendarItem/MonthView templates. This local empty
              Button style prevents the application-wide Button MinHeight/Padding from entering
              the native calendar navigation buttons. -->
         <Style.Resources>
             <Style TargetType="Button" />
+            <Style TargetType="CalendarItem">
+                <Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource MenuPopupBorderBrush}" />
+            </Style>
             <Style TargetType="CalendarDayButton">
                 <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
                 <Style.Triggers>
                     <Trigger Property="IsInactive" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextTertiaryBrush}" /></Trigger>
-                    <Trigger Property="IsSelected" Value="True"><Setter Property="Foreground" Value="White" /></Trigger>
+                    <Trigger Property="IsSelected" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger>
+                    <Trigger Property="IsToday" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource CalendarTodayOutlineBrush}" /></Trigger>
+                    <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" /></Trigger>
                 </Style.Triggers>
             </Style>
-            <Style TargetType="CalendarButton"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Style>
+            <Style TargetType="CalendarButton"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
         </Style.Resources>
     </Style>
     <Style TargetType="Slider"><Setter Property="Foreground" Value="{DynamicResource AccentBrush}" /><Setter Property="Background" Value="{DynamicResource InputBorderBrush}" /><Setter Property="MinHeight" Value="24" /><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Slider"><Grid Height="24"><Track x:Name="PART_Track" VerticalAlignment="Center"><Track.DecreaseRepeatButton><RepeatButton Command="{x:Static Slider.DecreaseLarge}"><RepeatButton.Template><ControlTemplate TargetType="RepeatButton"><Border Height="4" Background="{DynamicResource AccentBrush}" CornerRadius="2"/></ControlTemplate></RepeatButton.Template></RepeatButton></Track.DecreaseRepeatButton><Track.Thumb><Thumb Width="14" Height="14"><Thumb.Template><ControlTemplate TargetType="Thumb"><Ellipse Fill="{DynamicResource RaisedSurfaceBrush}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="2"/></ControlTemplate></Thumb.Template></Thumb></Track.Thumb><Track.IncreaseRepeatButton><RepeatButton Command="{x:Static Slider.IncreaseLarge}"><RepeatButton.Template><ControlTemplate TargetType="RepeatButton"><Border Height="4" Background="{DynamicResource InputBorderBrush}" CornerRadius="2"/></ControlTemplate></RepeatButton.Template></RepeatButton></Track.IncreaseRepeatButton></Track></Grid><ControlTemplate.Triggers><Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="PART_Track" Property="Opacity" Value="1"/></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>

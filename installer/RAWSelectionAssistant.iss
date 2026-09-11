@@ -7,6 +7,10 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\win-x64"
 #endif
+#ifdef CandidateRc8
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc8-win-x64"
+#endif
 #ifdef CandidateRc7
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc7-win-x64"
@@ -230,6 +234,9 @@ OutputDir=..\artifacts\releases\2.3.0\installer
 #ifdef CandidateRc6
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC6_x64
 #else
+#ifdef CandidateRc8
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC8_x64
+#else
 #ifdef CandidateRc7
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC7_x64
 #else
@@ -250,6 +257,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC2_x64
 #else
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
+#endif
 #endif
 #endif
 #endif
@@ -384,14 +392,12 @@ begin
   Result := ExpandConstant('{localappdata}\PixelTart_Validation\PhysicalPointerDiagnosticDevValidation2');
 #endif
 end;
-
 procedure NotifyEnvironmentChanged();
 var
   MessageResult: LongWord;
 begin
   SendMessageTimeout(PhysicalPointerHwndBroadcast, PhysicalPointerWmSettingChange, 0, 'Environment', PhysicalPointerSmtoAbortIfHung, 5000, MessageResult);
 end;
-
 procedure ConfigurePhysicalPointerDiagnosticEnvironment();
 var
   PreviousRoot: string;
@@ -531,3 +537,4 @@ begin
     ConfigurePhysicalPointerDiagnosticEnvironment();
 #endif
 end;
+

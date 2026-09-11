@@ -28,7 +28,7 @@
                     <Condition Property="OverridesDefaultStyle" Value="True" />
                     <Condition Property="IsKeyboardFocused" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
                 <Setter TargetName="FocusInner" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
@@ -126,7 +126,7 @@
             <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
             <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
             </Trigger>
@@ -154,7 +154,7 @@
                     <Condition Property="IsPressed" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </MultiTrigger>
             <MultiTrigger>
@@ -170,7 +170,7 @@
                     <Condition Property="OverridesDefaultStyle" Value="True" />
                     <Condition Property="IsEnabled" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </MultiTrigger>
@@ -233,9 +233,9 @@
             <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
             <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -268,7 +268,7 @@
                     <Condition Property="OverridesDefaultStyle" Value="True" />
                     <Condition Property="IsEnabled" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </MultiTrigger>
@@ -351,7 +351,7 @@
             <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
             <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
             </Trigger>
@@ -369,7 +369,7 @@
                     <Condition Property="OverridesDefaultStyle" Value="True" />
                     <Condition Property="IsDropDownOpen" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </MultiTrigger>
@@ -386,7 +386,7 @@
                     <Condition Property="OverridesDefaultStyle" Value="True" />
                     <Condition Property="IsEnabled" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </MultiTrigger>

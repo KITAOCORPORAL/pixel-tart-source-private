@@ -107,8 +107,9 @@ public sealed class SettingsService
         settings.AssetLibraryPortable ??= new AssetLibraryPortableSettings();
         settings.AssetLibraryPortable.Normalize();
         settings.Appearance.CustomAccentColor = NormalizeAccent(settings.Appearance.CustomAccentColor);
-        if (!Enum.IsDefined(settings.Appearance.Theme)) settings.Appearance.Theme = ThemeMode.System;
-        if (!Enum.IsDefined(settings.Appearance.Accent)) settings.Appearance.Accent = AccentPreset.KitaoBlue;
+        settings.Appearance.Theme = ThemeMode.Dark;
+        settings.Appearance.Accent = AccentPreset.KitaoBlue;
+        settings.Appearance.CustomAccentColor = "#18A88C";
         if (!Enum.IsDefined(settings.Appearance.Density)) settings.Appearance.Density = InterfaceDensity.Comfortable;
         if (!Enum.IsDefined(settings.Appearance.Sidebar)) settings.Appearance.Sidebar = SidebarMode.Remember;
         if (!Enum.IsDefined(settings.Appearance.Motion)) settings.Appearance.Motion = MotionPreference.Normal;

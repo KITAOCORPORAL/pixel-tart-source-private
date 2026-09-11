@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--
         Pixel Tart Design System v1.0 token entry point.
-        Theme.Dark/Light/HighContrast stays in App.xaml as the replaceable runtime slot.
+        Resources/DesignSystem/DesignTokens.xaml remains the compatibility token source.
+        RC8 keeps Theme.Dark as the only product surface. HighContrast is selected only
+        when Windows forces its accessibility mode.
         Legacy dictionaries remain merged here until all pages have migrated.
     -->
     <ResourceDictionary.MergedDictionaries>
