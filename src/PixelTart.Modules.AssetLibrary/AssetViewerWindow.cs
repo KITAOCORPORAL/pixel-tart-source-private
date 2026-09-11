@@ -11,6 +11,10 @@ public sealed class AssetViewerWindow : Window
     private readonly IReadOnlyList<string> _paths;
     private readonly Image _image = new() { Stretch = Stretch.Uniform };
     private readonly ScaleTransform _scale = new(1, 1);
+    private readonly ScrollViewer _scroller = new() { HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, PanningMode = PanningMode.Both };
+    private Point? _panStart;
+    private double _panHorizontal;
+    private double _panVertical;
     private int _index;
 
     public AssetViewerWindow(IReadOnlyList<string> paths, int startIndex, IAssetThumbnailProvider? thumbnails = null)
@@ -24,13 +28,17 @@ public sealed class AssetViewerWindow : Window
         WindowStyle = WindowStyle.None;
         KeyDown += OnKeyDown;
         MouseWheel += OnMouseWheel;
-        _image.RenderTransformOrigin = new Point(.5, .5);
-        _image.RenderTransform = _scale;
+        _image.LayoutTransform = _scale;
+        _image.Cursor = Cursors.Hand;
+        _image.MouseLeftButtonDown += BeginPan;
+        _image.MouseMove += ContinuePan;
+        _image.MouseLeftButtonUp += EndPan;
 
         var grid = new Grid();
         grid.RowDefinitions.Add(new RowDefinition());
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-        grid.Children.Add(_image);
+        _scroller.Content = _image;
+        grid.Children.Add(_scroller);
         var controls = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(10) };
         foreach (var item in new[] { ("上一张", (Action)Previous), ("适应", Fit), ("100%", Actual), ("−", ZoomOut), ("+", ZoomIn), ("下一张", Next), ("返回", Close) })
         {
@@ -51,11 +59,27 @@ public sealed class AssetViewerWindow : Window
         Fit();
     }
 
-    private void Fit() { _image.Stretch = Stretch.Uniform; _scale.ScaleX = _scale.ScaleY = 1; }
+    private void Fit() { _image.Stretch = Stretch.Uniform; _scale.ScaleX = _scale.ScaleY = 1; _scroller.ScrollToHome(); }
     private void Actual() { _image.Stretch = Stretch.None; _scale.ScaleX = _scale.ScaleY = 1; }
     private void ZoomIn() => SetZoom(_scale.ScaleX * 1.2);
     private void ZoomOut() => SetZoom(_scale.ScaleX / 1.2);
     private void SetZoom(double value) { var zoom = Math.Clamp(value, .1, 8); _scale.ScaleX = _scale.ScaleY = zoom; }
+    private void BeginPan(object sender, MouseButtonEventArgs e)
+    {
+        _panStart = e.GetPosition(_scroller); _panHorizontal = _scroller.HorizontalOffset; _panVertical = _scroller.VerticalOffset;
+        _image.Cursor = Cursors.ScrollAll; _image.CaptureMouse(); e.Handled = true;
+    }
+    private void ContinuePan(object sender, MouseEventArgs e)
+    {
+        if (_panStart is not Point start || e.LeftButton != MouseButtonState.Pressed) return;
+        var current = e.GetPosition(_scroller);
+        _scroller.ScrollToHorizontalOffset(_panHorizontal + start.X - current.X);
+        _scroller.ScrollToVerticalOffset(_panVertical + start.Y - current.Y);
+    }
+    private void EndPan(object sender, MouseButtonEventArgs e)
+    {
+        _panStart = null; _image.ReleaseMouseCapture(); _image.Cursor = Cursors.Hand; e.Handled = true;
+    }
     private async void Previous() { if (_index > 0) { _index--; await LoadCurrentAsync(); } }
     private async void Next() { if (_index + 1 < _paths.Count) { _index++; await LoadCurrentAsync(); } }
     private void OnMouseWheel(object sender, MouseWheelEventArgs e) { if (e.Delta > 0) ZoomIn(); else ZoomOut(); }
