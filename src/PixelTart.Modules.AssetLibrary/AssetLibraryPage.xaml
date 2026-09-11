@@ -50,12 +50,16 @@
                 <MenuItem Header="用其他文件替换" IsEnabled="False" />
             </MenuItem>
             <MenuItem Header="工作流 ›" AutomationProperties.AutomationId="AssetContextWorkflow">
-                <MenuItem Header="客户选择" IsEnabled="False" />
-                <MenuItem Header="待精修" IsEnabled="False" />
-                <MenuItem Header="已精修" IsEnabled="False" />
-                <MenuItem Header="已交付" IsEnabled="False" />
+                <MenuItem Header="客户选择" Command="{Binding Owner.WorkflowClientSelectedCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="待精修" Command="{Binding Owner.WorkflowPendingRetouchCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="已精修" Command="{Binding Owner.WorkflowRetouchedCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="已交付" Command="{Binding Owner.WorkflowDeliveredCommand}" CommandParameter="{Binding}" />
             </MenuItem>
-            <MenuItem Header="导出 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextExport" />
+            <MenuItem Header="导出 ›" AutomationProperties.AutomationId="AssetContextExport">
+                <MenuItem Header="原文件副本" Command="{Binding Owner.ExportOriginalContextCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="托管副本" Command="{Binding Owner.ExportManagedContextCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="元数据 CSV" Command="{Binding Owner.ExportMetadataContextCommand}" CommandParameter="{Binding}" />
+            </MenuItem>
             <Separator />
             <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
                 <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />

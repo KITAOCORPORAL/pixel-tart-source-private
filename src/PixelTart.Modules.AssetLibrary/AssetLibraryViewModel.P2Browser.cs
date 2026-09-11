@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Windows;
+using Microsoft.Win32;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 
@@ -106,6 +107,13 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> RestoreContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> TrashContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RestoreTrashContextCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> WorkflowClientSelectedCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> WorkflowPendingRetouchCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> WorkflowRetouchedCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> WorkflowDeliveredCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> ExportOriginalContextCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> ExportManagedContextCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> ExportMetadataContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RemoveContextFromViewCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> ShowContextInfoCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> OpenContextViewerCommand { get; private set; } = null!;
@@ -148,6 +156,13 @@ public sealed partial class AssetLibraryViewModel
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
         TrashContextCommand = new(card => SetContextTrashedAsync(card, true));
         RestoreTrashContextCommand = new(card => SetContextTrashedAsync(card, false));
+        WorkflowClientSelectedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.ClientSelected));
+        WorkflowPendingRetouchCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.PendingRetouch));
+        WorkflowRetouchedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Retouched));
+        WorkflowDeliveredCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Delivered));
+        ExportOriginalContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: false));
+        ExportManagedContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: true));
+        ExportMetadataContextCommand = new(ExportContextMetadataAsync);
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
         OpenContextViewerCommand = new(OpenContextViewerAsync);
@@ -807,6 +822,53 @@ public sealed partial class AssetLibraryViewModel
         return SelectedAssetIds.Contains(card.Asset.AssetId)
             ? SelectedAssetIds.ToArray()
             : [card.Asset.AssetId];
+    }
+
+    private IReadOnlyList<AssetItem> ContextAssets(AssetVisualMatchView? card)
+    {
+        var ids = ContextIds(card).ToHashSet();
+        return AssetCards.Select(item => item.Asset).Where(asset => ids.Contains(asset.AssetId)).ToArray();
+    }
+
+    private async Task SetContextWorkflowAsync(AssetVisualMatchView? card, AssetWorkflowStatus workflowStatus)
+    {
+        if (card is null) return;
+        var assets = ContextAssets(card);
+        foreach (var asset in assets)
+        {
+            var existing = await _repository.GetAssetWorkflowMetadataAsync(asset.AssetId, _lifetimeCancellation.Token);
+            await _repository.SaveAssetWorkflowMetadataAsync(new(asset.AssetId, existing?.AssetOrigin ?? "素材库", workflowStatus), _lifetimeCancellation.Token);
+        }
+        Status = $"已更新 {assets.Count} 项工作流状态。";
+        OnP2SelectionChanged(SelectedAssets.ToArray());
+        await _p2InspectorTask;
+    }
+
+    private async Task ExportContextFilesAsync(AssetVisualMatchView? card, bool preferManagedCopy)
+    {
+        if (card is null) return;
+        var dialog = new OpenFolderDialog { Title = preferManagedCopy ? "导出托管副本" : "导出原文件副本", Multiselect = false };
+        if (dialog.ShowDialog() != true) return;
+        try
+        {
+            var result = await new AssetSelectionExportService().ExportFilesAsync(ContextAssets(card), dialog.FolderName, preferManagedCopy, _lifetimeCancellation.Token);
+            Status = $"已导出 {result.ExportedCount} 项，跳过缺失 {result.MissingCount} 项；同名文件已自动编号。";
+        }
+        catch (Exception exception) { Status = $"导出失败：{exception.Message}"; }
+    }
+
+    private async Task ExportContextMetadataAsync(AssetVisualMatchView? card)
+    {
+        if (card is null) return;
+        var dialog = new SaveFileDialog { Title = "导出素材元数据", Filter = "CSV 文件 (*.csv)|*.csv", DefaultExt = ".csv", AddExtension = true, OverwritePrompt = false, FileName = "pixel-tart-assets.csv" };
+        if (dialog.ShowDialog() != true) return;
+        try
+        {
+            await new AssetSelectionExportService().ExportMetadataCsvAsync(ContextAssets(card), dialog.FileName, _lifetimeCancellation.Token);
+            Status = "素材元数据已导出；现有文件不会被覆盖。";
+        }
+        catch (IOException) { Status = "目标 CSV 已存在；为避免覆盖，导出已取消。"; }
+        catch (Exception exception) { Status = $"导出失败：{exception.Message}"; }
     }
 
     private async Task CopyContextPathAsync(AssetVisualMatchView? card)
