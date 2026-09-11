@@ -55,7 +55,7 @@
                             </Border>
                             <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding SelectedAsset.FileName}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" />
-                                <TextBlock Style="{StaticResource CaptionText}" Margin="0,4,0,0"><Run Text="素材库 · " /><Run Text="{Binding SelectedAsset.MediaKindText}" /></TextBlock>
+                                <TextBlock Style="{StaticResource CaptionText}" Margin="0,4,0,0"><Run Text="素材库 · " /><Run Text="{Binding SelectedAsset.MediaKindText, Mode=OneWay}" /></TextBlock>
                                 <TextBlock Text="{Binding SelectedAsset.RatingText}" Foreground="{DynamicResource PhotographyGoldBrush}" Margin="0,4,0,0" />
                                 <TextBlock Text="{Binding SelectedAsset.PairText}" Style="{StaticResource CaptionText}" Margin="0,2,0,0" />
                             </StackPanel>

@@ -4,10 +4,10 @@
          Phase 1 so pages can move one surface at a time. -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Controls.Buttons.xaml" />
+        <ResourceDictionary Source="Controls.Navigation.xaml" />
         <ResourceDictionary Source="Controls.Inputs.xaml" />
         <ResourceDictionary Source="Controls.Cards.xaml" />
         <ResourceDictionary Source="Controls.Tables.xaml" />
-        <ResourceDictionary Source="Controls.Navigation.xaml" />
         <ResourceDictionary Source="Controls.Menu.xaml" />
         <ResourceDictionary Source="Controls.Dialogs.xaml" />
         <ResourceDictionary Source="Controls.Status.xaml" />
@@ -40,3 +40,4 @@
     <Style x:Key="PixelTartCard" TargetType="Border" BasedOn="{StaticResource CardSurface}" />
     <Style x:Key="PixelTartElevated" TargetType="Border" BasedOn="{StaticResource ElevatedSurface}" />
 </ResourceDictionary>
+

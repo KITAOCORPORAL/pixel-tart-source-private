@@ -102,24 +102,9 @@ public sealed class DesignSystemAv2LockTests
     {
         var required = new[]
         {
-            "Resources/DesignSystem/Theme.Dark.xaml",
-            "Resources/DesignSystem/AccentColors.xaml",
-            "Resources/DesignSystem/Spacing.xaml",
-            "Resources/DesignSystem/Radius.xaml",
-            "Resources/DesignSystem/DesignTokens.xaml",
-            "Resources/DesignSystem/Typography.xaml",
-            "Resources/DesignSystem/Buttons.xaml",
-            "Resources/DesignSystem/Inputs.xaml",
-            "Resources/DesignSystem/Cards.xaml",
-            "Resources/DesignSystem/Navigation.xaml",
-            "Resources/DesignSystem/Icons.xaml",
-            "Resources/DesignSystem/Calendar.xaml",
-            "Resources/DesignSystem/Modal.xaml",
-            "Resources/DesignSystem/Drawer.xaml",
-            "Resources/DesignSystem/Tooltip.xaml",
-            "Resources/DesignSystem/ContextMenu.xaml",
-            "Resources/DesignSystem/ScrollBars.xaml",
-            "Resources/DesignSystem/EmptyState.xaml"
+            "Resources/DesignSystem/PixelTart.Theme.xaml",
+            "Resources/DesignSystem/Controls.Buttons.xaml",
+            "Resources/DesignSystem/PixelTart.Components.xaml"
         };
         var sources = Load("src/RAWSelectionAssistant/App.xaml")
             .Descendants()
@@ -127,7 +112,8 @@ public sealed class DesignSystemAv2LockTests
             .Select(attribute => attribute.Value)
             .ToArray();
 
-        CollectionAssert.AreEqual(required, sources.Where(required.Contains).ToArray());
+        var actual = sources.Where(required.Contains).ToArray();
+        CollectionAssert.AreEqual(required, actual);
         foreach (var source in required)
         {
             Assert.IsTrue(File.Exists(Path.Combine(Root(), "src", "RAWSelectionAssistant", source.Replace('/', Path.DirectorySeparatorChar))),

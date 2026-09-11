@@ -6,29 +6,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Theme.xaml" />
+                <!-- Base control styles are application-level prerequisites for semantic component
+                     dictionaries that use StaticResource BasedOn chains. -->
+                <ResourceDictionary Source="Resources/DesignSystem/Controls.Buttons.xaml" />
+                <ResourceDictionary Source="Resources/DesignSystem/Controls.Cards.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Components.xaml" />
-                <!-- Compatibility merge list retained for existing resource-audit tooling and
-                     third-party views; canonical ownership is PixelTart.Theme/Components above. -->
-                <ResourceDictionary Source="Resources/DesignSystem/Theme.Dark.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/AccentColors.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Spacing.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Radius.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/DesignTokens.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Typography.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Buttons.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Inputs.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Cards.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Navigation.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Icons.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Calendar.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Modal.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Drawer.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Tooltip.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/ContextMenu.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/ScrollBars.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/EmptyState.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Controls.Status.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Icons.Navigation.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
