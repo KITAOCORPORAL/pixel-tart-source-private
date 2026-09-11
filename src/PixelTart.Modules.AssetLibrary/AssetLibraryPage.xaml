@@ -182,10 +182,7 @@
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
         <Grid Margin="{DynamicResource Space.Inset.3}" MinWidth="1280">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="240" />
                 <ColumnDefinition Width="Auto" />
@@ -207,6 +204,12 @@
                     Style="{DynamicResource PixelTart.Button.Ghost}"
                     AutomationProperties.AutomationId="AssetLibraryFilter"
                     AutomationProperties.Name="展开或收起筛选" />
+            <Border Grid.Row="0" Grid.Column="1" Panel.ZIndex="2" Margin="0,-8,-6,0" Padding="5,1" CornerRadius="8"
+                    Background="{DynamicResource Brush.Accent}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    IsHitTestVisible="False" Visibility="{Binding HasActiveFilters, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    AutomationProperties.AutomationId="AssetFilterCountBadge">
+                <TextBlock Text="{Binding ActiveFilterCount}" Foreground="{DynamicResource Brush.Background}" FontWeight="SemiBold" />
+            </Border>
             <Button Grid.Row="0" Grid.Column="2" Content="排序" Click="SortMenu_Click"
                     Margin="{DynamicResource Space.Inline.Start.1}"
                     Style="{DynamicResource PixelTart.Button.Ghost}"
@@ -233,14 +236,19 @@
                     ToolTip="组织栏、检查器、灵感托盘与整理工具">
                 <Button.ContextMenu><ContextMenu Style="{DynamicResource PixelTart.Menu.Context}" /></Button.ContextMenu>
             </Button>
-            <Border Grid.Row="1" Grid.ColumnSpan="8" Margin="{DynamicResource Space.Stack.1}"
-                    Style="{DynamicResource PixelTart.Surface.Panel}"
-                    Visibility="{Binding P3QuerySurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    AutomationProperties.AutomationId="AssetFilterPanel">
-                <local:AssetQueryComposerView />
-            </Border>
         </Grid>
         </ScrollViewer>
+
+        <Border Grid.Row="0" Panel.ZIndex="60" Width="760" MaxHeight="560" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="260,52,12,0" Padding="12" Background="{DynamicResource Brush.Surface.Elevated}"
+                Style="{DynamicResource PixelTart.Surface.Border}"
+                Visibility="{Binding P3QuerySurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="AssetFilterPopover"
+                AutomationProperties.Name="素材筛选浮层">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <local:AssetQueryComposerView />
+            </ScrollViewer>
+        </Border>
 
         <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
             <Grid.ColumnDefinitions>
