@@ -179,13 +179,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="{DynamicResource Space.Inset.3}">
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
+                      AutomationProperties.AutomationId="AssetBrowserToolbar">
+        <Grid Margin="{DynamicResource Space.Inset.3}" MinWidth="1280">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="240" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -219,19 +223,24 @@
                     Style="{DynamicResource PixelTart.Button.Primary}"
                     Command="{Binding ImportCommand}"
                     AutomationProperties.AutomationId="AssetLibraryImport" />
-            <Button Grid.Row="0" Grid.Column="5" Content="更多" Margin="{DynamicResource Space.Inline.Start.1}" Click="More_Click"
+            <Button Grid.Row="0" Grid.Column="5" Content="撤销" Margin="{DynamicResource Space.Inline.Start.1}" Command="{Binding P2UndoCommand}"
+                    Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.AutomationId="AssetBrowserUndo" />
+            <Button Grid.Row="0" Grid.Column="6" Content="重做" Margin="{DynamicResource Space.Inline.Start.1}" Command="{Binding P2RedoCommand}"
+                    Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.AutomationId="AssetBrowserRedo" />
+            <Button Grid.Row="0" Grid.Column="7" Content="更多" Margin="{DynamicResource Space.Inline.Start.1}" Click="More_Click"
                     Style="{DynamicResource PixelTart.Button.Ghost}"
                     AutomationProperties.AutomationId="AssetLibraryMore"
                     ToolTip="组织栏、检查器、灵感托盘与整理工具">
                 <Button.ContextMenu><ContextMenu Style="{DynamicResource PixelTart.Menu.Context}" /></Button.ContextMenu>
             </Button>
-            <Border Grid.Row="1" Grid.ColumnSpan="6" Margin="{DynamicResource Space.Stack.1}"
+            <Border Grid.Row="1" Grid.ColumnSpan="8" Margin="{DynamicResource Space.Stack.1}"
                     Style="{DynamicResource PixelTart.Surface.Panel}"
-                    Visibility="{Binding P3QueryPanelOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Visibility="{Binding P3QuerySurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                     AutomationProperties.AutomationId="AssetFilterPanel">
                 <local:AssetQueryComposerView />
             </Border>
         </Grid>
+        </ScrollViewer>
 
         <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
             <Grid.ColumnDefinitions>
@@ -462,6 +471,7 @@
                              VirtualizingPanel.IsVirtualizing="True"
                              VirtualizingPanel.VirtualizationMode="Recycling"
                              local:AssetLibraryDragDropBehavior.IsAssetSource="True"
+                             AllowDrop="True" DragOver="AssetGrid_DragOver" Drop="AssetGrid_Drop"
                              AutomationProperties.AutomationId="AssetGrid"
                              AutomationProperties.Name="素材浏览结果">
                         <ListBox.ItemsPanel>
@@ -575,14 +585,23 @@
                             </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="项目：暂未建立关联" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Stack.1}" />
+                        <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Stack.1}" />
+                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=存储模式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorProject, StringFormat=项目：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorBooking, StringFormat=预约：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorClient, StringFormat=客户：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
                         <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
                         <Expander Header="拍摄信息" IsExpanded="False" Margin="{DynamicResource SpacingVertical12}">
-                            <StackPanel><TextBlock Text="{Binding SelectedAsset.CaptureTime, TargetNullValue=未记录, StringFormat=拍摄时间：{0:yyyy-MM-dd HH:mm}}" Style="{DynamicResource PixelTart.Type.Metadata}"
-                                   AutomationProperties.AutomationId="AssetInspectorCaptureTime" AutomationProperties.Name="拍摄时间" /></StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="{Binding InspectorShootDate, StringFormat=拍摄时间：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorCaptureTime" />
+                                <TextBlock Text="{Binding InspectorCamera, StringFormat=相机：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorLens, StringFormat=镜头：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorExposure}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                            </StackPanel>
                         </Expander>
                         <Expander Header="技术信息" IsExpanded="False" Margin="{DynamicResource Space.Stack.1}">
                             <StackPanel>

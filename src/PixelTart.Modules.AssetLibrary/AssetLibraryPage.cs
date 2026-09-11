@@ -639,6 +639,24 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         UpdateGridDiagnostics();
     }
 
+    private void AssetGrid_DragOver(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = true;
+        }
+        else e.Effects = DragDropEffects.None;
+    }
+
+    private async void AssetGrid_Drop(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+        e.Handled = true;
+        if (e.Data.GetData(DataFormats.FileDrop) is string[] paths)
+            await _viewModel.ImportDroppedFilesAsync(paths);
+    }
+
     private void NavigateAssetGrid(Key key)
     {
         if (AssetGrid.Items.Count == 0) return;

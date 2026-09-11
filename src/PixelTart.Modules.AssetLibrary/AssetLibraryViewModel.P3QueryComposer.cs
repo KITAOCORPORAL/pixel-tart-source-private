@@ -23,6 +23,8 @@ public sealed partial class AssetLibraryViewModel
     public ObservableCollection<AssetQuerySuggestion> P3QuerySuggestions { get; } = [];
     public ObservableCollection<AssetQueryHistoryEntry> P3QueryHistory { get; } = [];
     public ObservableCollection<P3QueryChipView> P3QueryChips { get; } = [];
+    public int ActiveFilterCount => P3QueryChips.Count;
+    public bool HasActiveFilters => ActiveFilterCount > 0;
 
     public P3QueryNodeView P3QueryRoot
     {
@@ -78,7 +80,7 @@ public sealed partial class AssetLibraryViewModel
     public bool P3QueryPanelOpen
     {
         get => _p3QueryPanelOpen;
-        set => SetProperty(ref _p3QueryPanelOpen, value);
+        set { if (SetProperty(ref _p3QueryPanelOpen, value)) OnPropertyChanged(nameof(P3QuerySurfaceVisible)); }
     }
 
     public bool P3SuggestionsVisible
@@ -88,8 +90,11 @@ public sealed partial class AssetLibraryViewModel
         {
             if (!SetProperty(ref _p3SuggestionsVisible, value)) return;
             OnPropertyChanged(nameof(P3SuggestionsVisible));
+            OnPropertyChanged(nameof(P3QuerySurfaceVisible));
         }
     }
+
+    public bool P3QuerySurfaceVisible => P3QueryPanelOpen || P3SuggestionsVisible;
 
     public bool P3QueryIsValid
     {
@@ -685,6 +690,8 @@ public sealed partial class AssetLibraryViewModel
         }
         NotifyContentState();
         OnPropertyChanged(nameof(P3QueryResultSummary));
+        OnPropertyChanged(nameof(ActiveFilterCount));
+        OnPropertyChanged(nameof(HasActiveFilters));
     }
 
     private void SetP3NodeValidation(IReadOnlyList<AssetQueryValidationIssue> errors)

@@ -364,10 +364,12 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         {
             if (!SetProperty(ref _searchText, value)) return;
             _workspaceSettings.SearchText = value;
+            OnPropertyChanged(nameof(HasSearchText));
             NotifyContentState();
             OnP3SearchTextChanged();
         }
     }
+    public bool HasSearchText => !string.IsNullOrWhiteSpace(SearchText);
     public string TagInput { get => _tagInput; set { if (SetProperty(ref _tagInput, value)) ApplyTagsCommand.RaiseCanExecuteChanged(); } }
     public string FolderSearch { get => _folderSearch; set { if (SetProperty(ref _folderSearch, value)) RefreshClassifierFolders(); } }
     public string NewFolderName { get => _newFolderName; set => SetProperty(ref _newFolderName, value); }
@@ -446,6 +448,16 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
     public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) SyncSelection(value is null ? [] : [value]); } }
+    public string InspectorAssetOrigin => "未指定";
+    public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "托管副本" : "原位引用";
+    public string InspectorShootDate => SelectedAsset?.CaptureTime?.ToString("yyyy-MM-dd HH:mm") ?? "未记录";
+    public string InspectorCamera => "未记录";
+    public string InspectorLens => "未记录";
+    public string InspectorExposure => "ISO / 快门 / 光圈 / 焦距：未记录";
+    public string InspectorWorkflowStatus => "未处理";
+    public string InspectorProject => "未关联";
+    public string InspectorBooking => "未关联";
+    public string InspectorClient => "未关联";
     public AssetFolder? SelectedFolder
     {
         get => _selectedFolder;
@@ -780,6 +792,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         if (singleMaterialized is null) { _selectedAsset = null; OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset != singleMaterialized) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
+        foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
+            OnPropertyChanged(property);
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         NotifyWorkspaceLayout();
         _selectionSummaryTask = RunTrackedP3OperationAsync(RefreshSelectionSummaryAsync); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
@@ -1059,6 +1073,19 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _importDiagnostics.Save();
             Status = $"导入失败（{exception.GetType().Name}）；未修改源文件。";
         }
+    }
+
+    public async Task ImportDroppedFilesAsync(IEnumerable<string> paths)
+    {
+        var selected = paths.Where(IsSupportedReferencePath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+        if (selected.Length == 0) { Status = "拖入内容中没有可索引的摄影素材。"; return; }
+        try
+        {
+            var result = await _repository.ImportAsync(selected.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            Status = $"已从资源管理器索引 {result.ImportedCount:N0} 项，跳过重复 {result.SkippedCount:N0} 项；未移动或修改源文件。";
+            await RefreshAsync();
+        }
+        catch (Exception exception) { Status = $"拖入索引失败（{exception.GetType().Name}）；未修改源文件。"; }
     }
 
     public async Task ImportDemoDirectoryAsync(string directory)

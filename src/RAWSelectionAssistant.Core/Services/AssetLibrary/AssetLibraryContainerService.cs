@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,6 +23,8 @@ public sealed class AssetLibraryContainerService
     public const string PreviewCacheRelativePath = "previews";
     private const string StagingOwnerFileName = ".pixel-tart-staging-owner.json";
     private const int MaximumDisplayNameLength = 160;
+    private static readonly ConcurrentDictionary<string, ValidatedContainerCacheEntry> ValidatedContainers =
+        new(StringComparer.OrdinalIgnoreCase);
 
     private static readonly HashSet<string> KnownManifestProperties = new(StringComparer.Ordinal)
     {
@@ -84,12 +87,25 @@ public sealed class AssetLibraryContainerService
         var root = NormalizeContainerPath(containerPath);
         if (!Directory.Exists(root)) throw new DirectoryNotFoundException($"素材库不存在：{root}");
         EnsureNotReparsePoint(root, "素材库根目录");
+        var manifestPath = Path.Combine(root, ManifestFileName);
+        var databasePath = ResolveContainedPath(root, DatabaseRelativePath);
+        var fingerprint = ContainerFingerprint.TryCreate(manifestPath, databasePath);
+        if (fingerprint is not null && ValidatedContainers.TryGetValue(root, out var cached) && cached.Fingerprint == fingerprint)
+        {
+            // A cache hit skips repeated JSON/SQLite validation, but it never skips the
+            // physical-path boundary checks that protect portable libraries from links.
+            EnsureDescriptorPathsArePhysical(cached.Descriptor);
+            return cached.Descriptor;
+        }
         var manifest = await ReadManifestAsync(root, cancellationToken).ConfigureAwait(false);
         EnsureCriticalPathsArePhysical(root, manifest);
-        var databasePath = ResolveContainedPath(root, manifest.DatabaseRelativePath);
+        databasePath = ResolveContainedPath(root, manifest.DatabaseRelativePath);
         if (!File.Exists(databasePath)) throw new InvalidDataException("素材库数据库缺失。");
         await ValidateDatabaseAsync(databasePath, cancellationToken).ConfigureAwait(false);
-        return ToDescriptor(root, manifest);
+        var descriptor = ToDescriptor(root, manifest);
+        var validatedFingerprint = ContainerFingerprint.TryCreate(manifestPath, databasePath);
+        if (validatedFingerprint is not null) ValidatedContainers[root] = new(validatedFingerprint, descriptor);
+        return descriptor;
     }
 
     /// <summary>
@@ -288,6 +304,16 @@ public sealed class AssetLibraryContainerService
         foreach (var relative in new[] { manifest.DatabaseRelativePath, manifest.ManagedAssetsRelativePath, manifest.PreviewCacheRelativePath, "backups", "locks" }) EnsureNoReparseComponents(root, ResolveContainedPath(root, relative));
     }
 
+    private static void EnsureDescriptorPathsArePhysical(AssetLibraryContainerDescriptor descriptor)
+    {
+        EnsureNotReparsePoint(descriptor.ContainerPath, "素材库根目录");
+        foreach (var path in new[]
+        {
+            descriptor.DatabasePath, descriptor.ManagedAssetsPath, descriptor.PreviewCachePath,
+            ResolveContainedPath(descriptor.ContainerPath, "backups"), ResolveContainedPath(descriptor.ContainerPath, "locks")
+        }) EnsureNoReparseComponents(descriptor.ContainerPath, path);
+    }
+
     private static void EnsureNoReparseComponents(string root, string candidate)
     {
         var normalizedRoot = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar); var relative = Path.GetRelativePath(normalizedRoot, candidate); var current = normalizedRoot;
@@ -353,6 +379,17 @@ public sealed class AssetLibraryContainerService
     }
 
     private sealed record StagingOwner(Guid OperationId, string TargetPath);
+    private sealed record ValidatedContainerCacheEntry(ContainerFingerprint Fingerprint, AssetLibraryContainerDescriptor Descriptor);
+    private sealed record ContainerFingerprint(long ManifestLength, long ManifestWriteTicks, long DatabaseLength, long DatabaseWriteTicks)
+    {
+        public static ContainerFingerprint? TryCreate(string manifestPath, string databasePath)
+        {
+            if (!File.Exists(manifestPath) || !File.Exists(databasePath)) return null;
+            var manifest = new FileInfo(manifestPath);
+            var database = new FileInfo(databasePath);
+            return new(manifest.Length, manifest.LastWriteTimeUtc.Ticks, database.Length, database.LastWriteTimeUtc.Ticks);
+        }
+    }
 }
 
 public sealed class AssetLibraryWriteLease : IAsyncDisposable
