@@ -34,6 +34,11 @@ public sealed record AssetTrashEntry(
     Guid OperationId,
     bool PreviousArchived);
 
+public enum AssetWorkflowStatus { Unprocessed, ClientSelected, PendingRetouch, Retouched, Delivered }
+public sealed record ProjectAssetLink(Guid ProjectId, Guid AssetId, string Role, DateTimeOffset AddedAtUtc);
+public sealed record BookingAssetLink(Guid BookingId, Guid AssetId, DateTimeOffset LinkedAtUtc);
+public sealed record AssetWorkflowMetadata(Guid AssetId, string AssetOrigin, AssetWorkflowStatus WorkflowStatus);
+
 public enum AssetRelinkMatchMode
 {
     FileName,

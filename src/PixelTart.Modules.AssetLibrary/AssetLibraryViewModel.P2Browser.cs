@@ -594,6 +594,14 @@ public sealed partial class AssetLibraryViewModel
                 var id = selected[0].AssetId;
                 SingleFolderSummary = JoinNames(folderMemberships.Where(item => item.AssetId == id).Select(item => Folders.FirstOrDefault(folder => folder.FolderId == item.FolderId)?.Name));
                 SingleTagSummary = JoinNames(tagMemberships.Where(item => item.AssetId == id).Select(item => Tags.FirstOrDefault(tag => tag.TagId == item.TagId)?.Name));
+                var workflow = await _repository.GetAssetWorkflowMetadataAsync(id, _lifetimeCancellation.Token);
+                var projectLinks = await _repository.ListProjectAssetLinksAsync(assetId: id, cancellationToken: _lifetimeCancellation.Token);
+                var bookingLinks = await _repository.ListBookingAssetLinksAsync(assetId: id, cancellationToken: _lifetimeCancellation.Token);
+                if (generation != Volatile.Read(ref _inspectorGeneration)) return;
+                InspectorAssetOrigin = workflow?.AssetOrigin ?? "未指定";
+                InspectorWorkflowStatus = workflow?.WorkflowStatus switch { AssetWorkflowStatus.ClientSelected => "客户选择", AssetWorkflowStatus.PendingRetouch => "待精修", AssetWorkflowStatus.Retouched => "已精修", AssetWorkflowStatus.Delivered => "已交付", _ => "未处理" };
+                InspectorProject = projectLinks.Count == 0 ? "未关联" : string.Join("、", projectLinks.Select(link => link.ProjectId.ToString("N")[..8]));
+                InspectorBooking = bookingLinks.Count == 0 ? "未关联" : string.Join("、", bookingLinks.Select(link => link.BookingId.ToString("N")[..8]));
                 return;
             }
             var commonFolderIds = folderMemberships.Where(item => ids.Contains(item.AssetId)).GroupBy(item => item.FolderId).Where(group => group.Select(item => item.AssetId).Distinct().Count() == ids.Count).Select(group => group.Key);

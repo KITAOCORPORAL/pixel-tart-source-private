@@ -45,6 +45,12 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetLibraryBatchResult> SetAssetsArchivedAsync(IEnumerable<Guid> assetIds, bool isArchived, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> SetAssetsTrashedAsync(IEnumerable<Guid> assetIds, bool isTrashed, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetTrashEntry>> ListTrashEntriesAsync(CancellationToken cancellationToken = default);
+    Task SaveProjectAssetLinkAsync(ProjectAssetLink link, CancellationToken cancellationToken = default);
+    Task SaveBookingAssetLinkAsync(BookingAssetLink link, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<ProjectAssetLink>> ListProjectAssetLinksAsync(Guid? assetId = null, Guid? projectId = null, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<BookingAssetLink>> ListBookingAssetLinksAsync(Guid? assetId = null, Guid? bookingId = null, CancellationToken cancellationToken = default);
+    Task SaveAssetWorkflowMetadataAsync(AssetWorkflowMetadata metadata, CancellationToken cancellationToken = default);
+    Task<AssetWorkflowMetadata?> GetAssetWorkflowMetadataAsync(Guid assetId, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> SetAssetsMissingAsync(IEnumerable<Guid> assetIds, bool isMissing, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<AssetFolder>> ListFoldersAsync(bool includeArchived = false, CancellationToken cancellationToken = default);

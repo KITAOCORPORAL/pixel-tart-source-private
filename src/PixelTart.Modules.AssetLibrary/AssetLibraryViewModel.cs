@@ -448,15 +448,19 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
     public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) SyncSelection(value is null ? [] : [value]); } }
-    public string InspectorAssetOrigin => "未指定";
+    private string _inspectorAssetOrigin = "未指定";
+    private string _inspectorWorkflowStatus = "未处理";
+    private string _inspectorProject = "未关联";
+    private string _inspectorBooking = "未关联";
+    public string InspectorAssetOrigin { get => _inspectorAssetOrigin; private set => SetProperty(ref _inspectorAssetOrigin, value); }
     public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "托管副本" : "原位引用";
     public string InspectorShootDate => SelectedAsset?.CaptureTime?.ToString("yyyy-MM-dd HH:mm") ?? "未记录";
     public string InspectorCamera => "未记录";
     public string InspectorLens => "未记录";
     public string InspectorExposure => "ISO / 快门 / 光圈 / 焦距：未记录";
-    public string InspectorWorkflowStatus => "未处理";
-    public string InspectorProject => "未关联";
-    public string InspectorBooking => "未关联";
+    public string InspectorWorkflowStatus { get => _inspectorWorkflowStatus; private set => SetProperty(ref _inspectorWorkflowStatus, value); }
+    public string InspectorProject { get => _inspectorProject; private set => SetProperty(ref _inspectorProject, value); }
+    public string InspectorBooking { get => _inspectorBooking; private set => SetProperty(ref _inspectorBooking, value); }
     public string InspectorClient => "未关联";
     public AssetFolder? SelectedFolder
     {

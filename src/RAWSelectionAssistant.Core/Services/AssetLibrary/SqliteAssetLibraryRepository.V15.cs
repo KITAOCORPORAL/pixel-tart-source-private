@@ -61,6 +61,42 @@ public sealed partial class SqliteAssetLibraryRepository
         return result;
     }
 
+    public async Task SaveProjectAssetLinkAsync(ProjectAssetLink link, CancellationToken cancellationToken = default)
+    {
+        if (link.ProjectId == Guid.Empty || link.AssetId == Guid.Empty) throw new ArgumentException("Project and asset identities are required.");
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO ProjectAssetLinks(ProjectId,AssetId,Role,AddedAtUtc) VALUES($project,$asset,$role,$at) ON CONFLICT(ProjectId,AssetId) DO UPDATE SET Role=excluded.Role;";
+        command.Parameters.AddWithValue("$project", link.ProjectId.ToString("D")); command.Parameters.AddWithValue("$asset", link.AssetId.ToString("D")); command.Parameters.AddWithValue("$role", link.Role); command.Parameters.AddWithValue("$at", link.AddedAtUtc.ToString("O")); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task SaveBookingAssetLinkAsync(BookingAssetLink link, CancellationToken cancellationToken = default)
+    {
+        if (link.BookingId == Guid.Empty || link.AssetId == Guid.Empty) throw new ArgumentException("Booking and asset identities are required.");
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO BookingAssetLinks(BookingId,AssetId,LinkedAtUtc) VALUES($booking,$asset,$at) ON CONFLICT(BookingId,AssetId) DO NOTHING;";
+        command.Parameters.AddWithValue("$booking", link.BookingId.ToString("D")); command.Parameters.AddWithValue("$asset", link.AssetId.ToString("D")); command.Parameters.AddWithValue("$at", link.LinkedAtUtc.ToString("O")); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<ProjectAssetLink>> ListProjectAssetLinksAsync(Guid? assetId = null, Guid? projectId = null, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT ProjectId,AssetId,Role,AddedAtUtc FROM ProjectAssetLinks WHERE ($asset IS NULL OR AssetId=$asset) AND ($project IS NULL OR ProjectId=$project) ORDER BY AddedAtUtc;"; command.Parameters.AddWithValue("$asset", (object?)assetId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$project", (object?)projectId?.ToString("D") ?? DBNull.Value); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); var result = new List<ProjectAssetLink>(); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), reader.GetString(2), DateTimeOffset.Parse(reader.GetString(3)))); return result;
+    }
+
+    public async Task<IReadOnlyList<BookingAssetLink>> ListBookingAssetLinksAsync(Guid? assetId = null, Guid? bookingId = null, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT BookingId,AssetId,LinkedAtUtc FROM BookingAssetLinks WHERE ($asset IS NULL OR AssetId=$asset) AND ($booking IS NULL OR BookingId=$booking) ORDER BY LinkedAtUtc;"; command.Parameters.AddWithValue("$asset", (object?)assetId?.ToString("D") ?? DBNull.Value); command.Parameters.AddWithValue("$booking", (object?)bookingId?.ToString("D") ?? DBNull.Value); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); var result = new List<BookingAssetLink>(); while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), DateTimeOffset.Parse(reader.GetString(2)))); return result;
+    }
+
+    public async Task SaveAssetWorkflowMetadataAsync(AssetWorkflowMetadata metadata, CancellationToken cancellationToken = default)
+    {
+        if (metadata.AssetId == Guid.Empty || !Enum.IsDefined(metadata.WorkflowStatus)) throw new ArgumentException("Asset workflow metadata is invalid."); await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "INSERT INTO AssetWorkflowMetadata(AssetId,AssetOrigin,WorkflowStatus) VALUES($asset,$origin,$status) ON CONFLICT(AssetId) DO UPDATE SET AssetOrigin=excluded.AssetOrigin,WorkflowStatus=excluded.WorkflowStatus;"; command.Parameters.AddWithValue("$asset", metadata.AssetId.ToString("D")); command.Parameters.AddWithValue("$origin", string.IsNullOrWhiteSpace(metadata.AssetOrigin) ? "Unspecified" : metadata.AssetOrigin.Trim()); command.Parameters.AddWithValue("$status", metadata.WorkflowStatus.ToString()); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<AssetWorkflowMetadata?> GetAssetWorkflowMetadataAsync(Guid assetId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand(); command.CommandText = "SELECT AssetOrigin,WorkflowStatus FROM AssetWorkflowMetadata WHERE AssetId=$asset;"; command.Parameters.AddWithValue("$asset", assetId.ToString("D")); await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) return null; return new(assetId, reader.GetString(0), Enum.TryParse<AssetWorkflowStatus>(reader.GetString(1), out var status) ? status : AssetWorkflowStatus.Unprocessed);
+    }
+
     public async Task<AssetLibraryBatchResult> SetAssetsTrashedAsync(IEnumerable<Guid> assetIds, bool isTrashed, CancellationToken cancellationToken = default)
     {
         var ids = assetIds.Where(id => id != Guid.Empty).Distinct().ToArray();

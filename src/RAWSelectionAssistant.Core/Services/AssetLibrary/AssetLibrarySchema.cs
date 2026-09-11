@@ -154,6 +154,17 @@ internal static class AssetLibrarySchema
             );
             """,
             """
+            CREATE TABLE IF NOT EXISTS ProjectAssetLinks(
+                ProjectId TEXT NOT NULL, AssetId TEXT NOT NULL, Role TEXT NOT NULL DEFAULT 'Original', AddedAtUtc TEXT NOT NULL,
+                PRIMARY KEY(ProjectId,AssetId), FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE);
+            CREATE TABLE IF NOT EXISTS BookingAssetLinks(
+                BookingId TEXT NOT NULL, AssetId TEXT NOT NULL, LinkedAtUtc TEXT NOT NULL,
+                PRIMARY KEY(BookingId,AssetId), FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE);
+            CREATE TABLE IF NOT EXISTS AssetWorkflowMetadata(
+                AssetId TEXT NOT NULL PRIMARY KEY, AssetOrigin TEXT NOT NULL DEFAULT 'Unspecified', WorkflowStatus TEXT NOT NULL DEFAULT 'Unprocessed',
+                FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE);
+            """,
+            """
             CREATE TABLE IF NOT EXISTS AssetVisualAnalysis(
                 AssetId TEXT NOT NULL,
                 AnalysisVersion TEXT NOT NULL,
