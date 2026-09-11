@@ -1,10 +1,28 @@
 **/bin/
 **/obj/
 .vs/
+**/.vs/
+node_modules/
+**/node_modules/
 TestResults/
 *.trx
 *.coverage
 *.coveragexml
+
+# Local caches and temporary files
+.cache/
+**/.cache/
+cache/
+**/cache/
+Cache/
+**/Cache/
+tmp/
+**/tmp/
+temp/
+**/temp/
+*.cache
+*.tmp
+*.temp
 
 # Generated release, verification and media artifacts
 artifacts/**
@@ -25,6 +43,47 @@ artifacts/releases/**/*.exe
 artifacts/releases/**/*.msi
 artifacts/releases/**/*.msix
 artifacts/releases/**/*.zip
+**/artifacts/
+
+# Source media and camera RAW files stay outside Git
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.webp
+*.heic
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.raw
+*.arw
+*.cr2
+*.cr3
+*.nef
+*.nrw
+*.raf
+*.orf
+*.rw2
+*.pef
+*.srw
+*.dng
+
+# Local databases and user data
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+user-data/
+**/user-data/
+userdata/
+**/userdata/
 
 # External references, migration bundles and customer material
 reference/
@@ -49,12 +108,18 @@ appsettings.license.local.json
 *.p12
 *.license
 activation*.json
+*.token
+credentials.json
+**/credentials.json
 
 # Runtime logs and local application copies
 *.log
 logs/
+**/logs/
 LocalAppData/
 AppData/
+**/LocalAppData/
+**/AppData/
 
 # Generated installers and archives outside the versioned manifest folders
 *.exe
