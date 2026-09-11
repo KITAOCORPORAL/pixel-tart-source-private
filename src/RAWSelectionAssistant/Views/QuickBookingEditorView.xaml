@@ -16,11 +16,12 @@
 
         <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="24,20,24,16">
             <Grid>
-                <StackPanel>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,12,0">
                     <TextBlock Text="{Binding QuickDialogTitle}" Style="{StaticResource ModalTitleText}" />
                     <TextBlock Text="{Binding QuickDescription}" Style="{StaticResource SecondaryBodyText}" Margin="0,4,0,0" TextWrapping="Wrap" />
                 </StackPanel>
-                <views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top"
+                <views:SurfaceCloseButton Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
                                           AutomationName="关闭拍摄快速编辑器并返回" />
             </Grid>
         </Border>

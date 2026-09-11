@@ -7,6 +7,10 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\win-x64"
 #endif
+#ifdef CandidateRc7
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc7-win-x64"
+#endif
 #ifdef CandidateCoreHotfix2
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\corehotfix2-win-x64"
@@ -226,6 +230,9 @@ OutputDir=..\artifacts\releases\2.3.0\installer
 #ifdef CandidateRc6
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC6_x64
 #else
+#ifdef CandidateRc7
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC7_x64
+#else
 #ifdef CandidateRc5
 #ifdef CandidateCoreHotfix2
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_CoreHotfix2_x64
@@ -243,6 +250,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC2_x64
 #else
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
+#endif
 #endif
 #endif
 #endif

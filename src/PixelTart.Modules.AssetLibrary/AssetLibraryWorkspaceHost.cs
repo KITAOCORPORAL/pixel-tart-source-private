@@ -266,15 +266,21 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     private async void CreateLibraryAsync()
     {
-        var dialog = new SaveFileDialog { Title = "新建可迁移素材库", Filter = "素材库 (*.ptlibrary)|*.ptlibrary", AddExtension = true, OverwritePrompt = true };
-        if (dialog.ShowDialog() != true) return;
+        var initialParent = _descriptor is null ? null : Path.GetDirectoryName(_descriptor.ContainerPath);
+        var dialog = new NewAssetLibraryDialog(initialParent) { Owner = Window.GetWindow(this) };
+        if (dialog.ShowDialog() != true || dialog.Request is null) return;
         try
         {
-            var descriptor = await _containers.CreateAsync(dialog.FileName, Path.GetFileNameWithoutExtension(dialog.FileName));
+            _state.Text = $"正在创建素材库：{dialog.Request.DisplayName}…";
+            var descriptor = await _containers.CreateAsync(dialog.Request.ContainerPath, dialog.Request.DisplayName);
             await SwitchToDescriptorAsync(descriptor, recordRecent: true);
+            _state.Text = $"已创建并打开 · {descriptor.DisplayName} · {descriptor.ContainerPath}";
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
-        { _state.Text = $"新建失败：{exception.Message}；仍保留当前库。"; }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or ArgumentException)
+        {
+            _state.Text = $"新建失败：{exception.Message}；仍保留当前库。";
+            MessageBox.Show(Window.GetWindow(this), exception.Message, "无法创建素材库", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private async void OpenLibraryAsync()

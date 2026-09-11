@@ -110,8 +110,8 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
 
     private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
     {
-        "LocalSplit", "Workflow", "OnlineSelection", "AssetLibrary", "Finance", "BatchCompress", "RawToJpeg", "Watermark",
-        "DeleteRejects", "FtpTool", "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
+        "LocalSplit", "BatchCompress", "RawToJpeg", "Watermark", "DeleteRejects", "FtpTool",
+        "PhotoGrouping", "Collage", "BatchRename", "BatchConvert"
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
@@ -534,7 +534,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     public bool IsPhotoGroupingPage => CurrentPage == "PhotoGrouping";
     public bool IsCollagePage => CurrentPage == "Collage";
     public bool IsToolboxPage => CurrentPage == "Toolbox";
-    public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || CurrentPage is not ("Workbench" or "ProjectCenter");
+    public bool IsCurrentSurfaceClosable => IsOnboardingActive || IsSettingsModalOpen || ClosableSurfaces.Contains(CurrentPage);
     public string CurrentSurfaceCloseToolTip => IsOnboardingActive ? "退出教程并返回" : "关闭并返回";
     public ObservableCollection<ToolboxItemViewModel> ToolboxItems { get; } =
         new(ProductCatalogForCurrentBuild()

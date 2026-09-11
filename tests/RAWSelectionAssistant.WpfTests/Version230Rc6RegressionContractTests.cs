@@ -7,16 +7,19 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class Version230Rc6RegressionContractTests
 {
     [TestMethod]
-    public void Calendar_UsesIndependentSemanticDimensions()
+    public void Calendar_PreservesNativeLayoutSkeleton()
     {
         var source = Read("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Inputs.xaml");
-        StringAssert.Contains(source, "x:Key=\"PixelTartCalendarDayButtonStyle\"");
-        StringAssert.Contains(source, "MinWidth\" Value=\"40\"");
-        StringAssert.Contains(source, "MinHeight\" Value=\"36\"");
-        StringAssert.Contains(source, "MinWidth\" Value=\"320\"");
-        StringAssert.Contains(source, "MinHeight\" Value=\"330\"");
-        StringAssert.Contains(source, "MinWidth=\"294\" MinHeight=\"252\"");
-        StringAssert.Contains(source, "<RowDefinition Height=\"252\" />");
+        StringAssert.Contains(source, "<Style TargetType=\"DatePicker\">");
+        StringAssert.Contains(source, "x:Key=\"PixelTartCalendarNativeStyle\"");
+        StringAssert.Contains(source, "<Style.Resources>");
+        StringAssert.Contains(source, "<Style TargetType=\"Button\" />");
+        Assert.IsFalse(source.Contains("PixelTartCalendarItemStyle", StringComparison.Ordinal));
+        Assert.IsFalse(source.Contains("PixelTartCalendarDayButtonStyle", StringComparison.Ordinal));
+        Assert.IsFalse(source.Contains("PixelTartCalendarButtonStyle", StringComparison.Ordinal));
+        Assert.IsFalse(source.Contains("PART_MonthView", StringComparison.Ordinal));
+        Assert.IsFalse(source.Contains("<ControlTemplate TargetType=\"DatePicker\"", StringComparison.Ordinal));
+        Assert.IsFalse(source.Contains("<ControlTemplate TargetType=\"CalendarDayButton\"", StringComparison.Ordinal));
     }
 
     [TestMethod]

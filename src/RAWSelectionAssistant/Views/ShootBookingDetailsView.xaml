@@ -20,8 +20,9 @@
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Border BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="14">
                 <Grid>
-                    <StackPanel><TextBlock Text="{Binding Title}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding BookingStatusText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
-                    <views:SurfaceCloseButton HorizontalAlignment="Right" VerticalAlignment="Top" AutomationName="关闭排期详情" />
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,12,0"><TextBlock Text="{Binding Title}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding BookingStatusText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" /></StackPanel>
+                    <views:SurfaceCloseButton Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" AutomationName="关闭排期详情" />
                 </Grid>
             </Border>
 
