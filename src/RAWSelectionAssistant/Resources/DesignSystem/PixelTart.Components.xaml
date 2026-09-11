@@ -1,0 +1,15 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Pixel Tart Design System v1.0 component entry point. -->
+    <ResourceDictionary.MergedDictionaries>
+        <!-- The implicit menu template must exist before the canonical keyed menu API. -->
+        <ResourceDictionary Source="/Resources/DesignSystem/Controls.Menu.xaml" />
+        <ResourceDictionary Source="/Resources/DesignSystem/Components.Foundation.xaml" />
+
+        <!--
+            Existing Controls.* and legacy dictionaries stay top-level in App.xaml while they
+            migrate. WPF StaticResource lookup cannot safely resolve their sibling dependencies
+            when they are nested here.
+        -->
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

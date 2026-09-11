@@ -289,9 +289,9 @@ public sealed partial class SqliteAssetLibraryRepository
                 await using var command = connection.CreateCommand();
                 if (value.StartsWith("id:", StringComparison.Ordinal))
                 {
-            command.CommandText = entry.Rule.Field == AssetQueryField.Tag
-                ? $"SELECT COUNT(*) FROM AssetTags t LEFT JOIN TagGroups g ON g.TagGroupId=t.TagGroupId WHERE t.{idColumn}=$value AND t.IsArchived=0 AND (t.TagGroupId IS NULL OR g.IsArchived=0);"
-                : $"SELECT COUNT(*) FROM {table} WHERE {idColumn}=$value AND IsArchived=0;";
+                    command.CommandText = entry.Rule.Field == AssetQueryField.Tag
+                        ? $"SELECT COUNT(*) FROM AssetTags t LEFT JOIN TagGroups g ON g.TagGroupId=t.TagGroupId WHERE t.{idColumn}=$value AND t.IsArchived=0 AND (t.TagGroupId IS NULL OR g.IsArchived=0);"
+                        : $"SELECT COUNT(*) FROM {table} WHERE {idColumn}=$value AND IsArchived=0;";
                     command.Parameters.AddWithValue("$value", value[3..]);
                 }
                 else if (value.StartsWith("name:", StringComparison.Ordinal))
@@ -1090,19 +1090,19 @@ public sealed partial class SqliteAssetLibraryRepository
             throw new KeyNotFoundException($"批量请求包含 {ids.Count - before.Assets.Length} 个不存在的素材标识，未执行任何更改。");
 
         using (AssetLibraryOperationTiming.Measure("batch.scalar-writes"))
-        foreach (var asset in before.Assets)
-        {
-            var rating = request.ClearRating ? 0 : request.Rating ?? asset.Rating;
-            var comment = request.ClearComment ? string.Empty : request.Comment ?? asset.Comment;
-            await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment,IsArchived=$archived,IsMissing=$missing WHERE AssetId=$id;", cancellationToken,
-                ("$rating", rating), ("$comment", comment), ("$archived", (request.IsArchived ?? asset.IsArchived) ? 1 : 0),
-                ("$missing", (request.IsMissing ?? asset.IsMissing) ? 1 : 0), ("$id", asset.AssetId.ToString("D"))).ConfigureAwait(false);
-        }
+            foreach (var asset in before.Assets)
+            {
+                var rating = request.ClearRating ? 0 : request.Rating ?? asset.Rating;
+                var comment = request.ClearComment ? string.Empty : request.Comment ?? asset.Comment;
+                await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment,IsArchived=$archived,IsMissing=$missing WHERE AssetId=$id;", cancellationToken,
+                    ("$rating", rating), ("$comment", comment), ("$archived", (request.IsArchived ?? asset.IsArchived) ? 1 : 0),
+                    ("$missing", (request.IsMissing ?? asset.IsMissing) ? 1 : 0), ("$id", asset.AssetId.ToString("D"))).ConfigureAwait(false);
+            }
         using (AssetLibraryOperationTiming.Measure("batch.membership-writes"))
         {
-        await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetTagMemberships", "TagId", addTags, removeTags, cancellationToken).ConfigureAwait(false);
-        await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetFolderMemberships", "FolderId", addFolders, removeFolders, cancellationToken).ConfigureAwait(false);
-        await ApplyP3FolderAutoTagsAsync(connection, transaction, addFolders, cancellationToken).ConfigureAwait(false);
+            await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetTagMemberships", "TagId", addTags, removeTags, cancellationToken).ConfigureAwait(false);
+            await ApplyP3MembershipDeltaAsync(connection, transaction, "AssetFolderMemberships", "FolderId", addFolders, removeFolders, cancellationToken).ConfigureAwait(false);
+            await ApplyP3FolderAutoTagsAsync(connection, transaction, addFolders, cancellationToken).ConfigureAwait(false);
         }
         P3BatchSnapshot after;
         using (AssetLibraryOperationTiming.Measure("batch.after-state"))
@@ -1703,11 +1703,11 @@ public sealed partial class SqliteAssetLibraryRepository
             case "tag-group-state-v2": await ApplyP3TagGroupStateAsync(connection, transaction, Deserialize<P3TagGroupStateChange>(operation.PayloadJson).Before, cancellationToken).ConfigureAwait(false); return true;
             case "smart-folder-state-v2": await ApplySmartFolderStateAsync(connection, transaction, Deserialize<P3SmartFolderStateChange>(operation.PayloadJson).Before, cancellationToken).ConfigureAwait(false); return true;
             case "tag-group-order-v2" or "tag-order-v2":
-            {
-                var change = Deserialize<P3OrderChange>(operation.PayloadJson);
-                await ApplyP3OrderAsync(connection, transaction, change.Table, change.IdColumn, change.Before, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var change = Deserialize<P3OrderChange>(operation.PayloadJson);
+                    await ApplyP3OrderAsync(connection, transaction, change.Table, change.IdColumn, change.Before, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             default: return false;
         }
     }
@@ -1725,11 +1725,11 @@ public sealed partial class SqliteAssetLibraryRepository
             case "tag-group-state-v2": await ApplyP3TagGroupStateAsync(connection, transaction, Deserialize<P3TagGroupStateChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false); return true;
             case "smart-folder-state-v2": await ApplySmartFolderStateAsync(connection, transaction, Deserialize<P3SmartFolderStateChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false); return true;
             case "tag-group-order-v2" or "tag-order-v2":
-            {
-                var change = Deserialize<P3OrderChange>(operation.PayloadJson);
-                await ApplyP3OrderAsync(connection, transaction, change.Table, change.IdColumn, change.After, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var change = Deserialize<P3OrderChange>(operation.PayloadJson);
+                    await ApplyP3OrderAsync(connection, transaction, change.Table, change.IdColumn, change.After, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             default: return false;
         }
     }

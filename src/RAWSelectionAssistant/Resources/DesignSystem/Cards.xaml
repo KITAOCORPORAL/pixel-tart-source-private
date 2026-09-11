@@ -7,4 +7,6 @@
     <Style x:Key="SemanticWarningPanel" TargetType="Border" BasedOn="{StaticResource PanelSurface}"><Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}" /></Style>
     <Style x:Key="SemanticDangerPanel" TargetType="Border" BasedOn="{StaticResource PanelSurface}"><Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" /></Style>
     <Style x:Key="SemanticSuccessPanel" TargetType="Border" BasedOn="{StaticResource PanelSurface}"><Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" /></Style>
+    <Style x:Key="InspectorSurface" TargetType="Border" BasedOn="{StaticResource PanelSurface}"><Setter Property="BorderThickness" Value="1,0,0,0" /><Setter Property="MinWidth" Value="280" /><Setter Property="MaxWidth" Value="360" /></Style>
+    <Style x:Key="LoadingSurface" TargetType="Border" BasedOn="{StaticResource PanelSurface}"><Setter Property="Opacity" Value="0.72" /><Setter Property="IsHitTestVisible" Value="False" /></Style>
 </ResourceDictionary>

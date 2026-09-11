@@ -87,6 +87,6 @@ public static class CollageTemplateCatalog
     ];
 
     public static CollageTemplate Get(string id) => All.FirstOrDefault(x => x.Id == id) ?? All[0];
-    private static CollageTemplate T(string id, string name, int count, params CollageSlot[] slots) => new() { Id=id, DisplayName=name, ImageCount=count, Slots=slots };
-    private static CollageSlot[] Grid(int columns, int rows) => Enumerable.Range(0, columns * rows).Select(i => S((i+1).ToString(), (double)(i%columns)/columns, (double)(i/columns)/rows, 1d/columns, 1d/rows)).ToArray();
+    private static CollageTemplate T(string id, string name, int count, params CollageSlot[] slots) => new() { Id = id, DisplayName = name, ImageCount = count, Slots = slots };
+    private static CollageSlot[] Grid(int columns, int rows) => Enumerable.Range(0, columns * rows).Select(i => S((i + 1).ToString(), (double)(i % columns) / columns, (double)(i / columns) / rows, 1d / columns, 1d / rows)).ToArray();
 }

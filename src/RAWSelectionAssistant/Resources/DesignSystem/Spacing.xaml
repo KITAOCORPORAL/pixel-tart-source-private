@@ -5,4 +5,24 @@
     <Thickness x:Key="Spacing16Thickness">16</Thickness><Thickness x:Key="Spacing24Thickness">24</Thickness><Thickness x:Key="Spacing32Thickness">32</Thickness><Thickness x:Key="Spacing48Thickness">48</Thickness>
     <Thickness x:Key="SpacingHorizontal8">8,0</Thickness><Thickness x:Key="SpacingHorizontal12">12,0</Thickness><Thickness x:Key="SpacingHorizontal16">16,0</Thickness><Thickness x:Key="SpacingHorizontal24">24,0</Thickness>
     <Thickness x:Key="SpacingVertical8">0,8</Thickness><Thickness x:Key="SpacingVertical12">0,12</Thickness><Thickness x:Key="SpacingVertical16">0,16</Thickness><Thickness x:Key="SpacingVertical24">0,24</Thickness>
+
+    <!-- Pixel Tart v1.0 canonical space tokens. -->
+    <sys:Double x:Key="Space.1">4</sys:Double><sys:Double x:Key="Space.2">8</sys:Double><sys:Double x:Key="Space.3">12</sys:Double>
+    <sys:Double x:Key="Space.4">16</sys:Double><sys:Double x:Key="Space.6">24</sys:Double><sys:Double x:Key="Space.8">32</sys:Double><sys:Double x:Key="Space.12">48</sys:Double>
+    <Thickness x:Key="Space.Control.Padding">16,8</Thickness>
+    <Thickness x:Key="Space.Control.Compact.Padding">12,4</Thickness>
+    <Thickness x:Key="Space.Inset.1">4</Thickness>
+    <Thickness x:Key="Space.Inset.2">8</Thickness>
+    <Thickness x:Key="Space.Inset.3">12</Thickness>
+    <Thickness x:Key="Space.Inline.1">4,0</Thickness>
+    <Thickness x:Key="Space.Inline.Start.1">4,0,0,0</Thickness>
+    <Thickness x:Key="Space.Inline.End.1">0,0,4,0</Thickness>
+    <Thickness x:Key="Space.Stack.1">0,4,0,0</Thickness>
+    <Thickness x:Key="Space.Stack.1.Symmetric">0,4</Thickness>
+    <Thickness x:Key="Space.Panel.Padding">16</Thickness>
+    <Thickness x:Key="Space.Card.Padding">16</Thickness>
+    <Thickness x:Key="Space.Menu.Padding">8</Thickness>
+    <Thickness x:Key="Space.MenuItem.Padding">12,8</Thickness>
+    <Thickness x:Key="Space.Page.Margin">24</Thickness>
+    <Thickness x:Key="Space.Gallery.Gap">12</Thickness>
 </ResourceDictionary>

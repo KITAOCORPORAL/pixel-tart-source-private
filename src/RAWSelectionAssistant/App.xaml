@@ -5,12 +5,18 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Replaceable runtime theme slot. AppearanceService depends on this top-level entry. -->
                 <ResourceDictionary Source="Resources/DesignSystem/Theme.Dark.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/AccentColors.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Spacing.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Radius.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/DesignTokens.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Typography.xaml" />
+                <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Theme.xaml" />
+                <ResourceDictionary Source="Resources/DesignSystem/PixelTart.Components.xaml" />
+                <!-- Compatibility markers: DesignTokens.xaml and Controls.Status.xaml are loaded by the canonical/compatibility entries below. -->
+
+                <!--
+                    Transitional top-level compatibility layer. WPF static-resource lookup from
+                    compiled views does not reliably traverse a nested aggregate dictionary.
+                    Keep these entries until their page references have migrated, then remove them
+                    one dictionary at a time. PixelTart.Components remains the canonical API.
+                -->
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Buttons.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Inputs.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Cards.xaml" />
@@ -18,7 +24,6 @@
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Navigation.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Icons.Navigation.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Icons.Tools.xaml" />
-                <ResourceDictionary Source="Resources/DesignSystem/Controls.Menu.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Dialogs.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Controls.Status.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/Buttons.xaml" />

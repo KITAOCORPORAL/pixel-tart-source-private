@@ -59,4 +59,28 @@
     <SolidColorBrush x:Key="CalendarShotForegroundBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="CalendarPendingReturnForegroundBrush" Color="#1D1503" />
     <SolidColorBrush x:Key="CalendarReturnedForegroundBrush" Color="#FFFFFF" />
+
+    <!-- Pixel Tart v1.0 canonical semantic aliases. -->
+    <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource AppBackgroundColor}" />
+    <SolidColorBrush x:Key="Brush.Surface" Color="{StaticResource Surface01Color}" />
+    <SolidColorBrush x:Key="Brush.Surface.Hover" Color="{StaticResource Surface03Color}" />
+    <SolidColorBrush x:Key="Brush.Surface.Elevated" Color="{StaticResource SurfaceElevatedColor}" />
+    <SolidColorBrush x:Key="Brush.Panel" Color="{StaticResource Surface02Color}" />
+    <SolidColorBrush x:Key="Brush.Border" Color="{StaticResource BorderSubtleColor}" />
+    <SolidColorBrush x:Key="Brush.Border.Strong" Color="{StaticResource BorderStrongColor}" />
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{StaticResource TextSecondaryColor}" />
+    <SolidColorBrush x:Key="Brush.Text.Muted" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="Brush.Text.Disabled" Color="{StaticResource TextDisabledColor}" />
+    <SolidColorBrush x:Key="Brush.Accent" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="Brush.Accent.Hover" Color="{StaticResource PrimaryHoverColor}" />
+    <SolidColorBrush x:Key="Brush.Accent.Active" Color="{StaticResource PrimaryPressedColor}" />
+    <SolidColorBrush x:Key="Brush.Accent.Subtle" Color="{StaticResource PrimaryColor}" Opacity="0.12" />
+    <SolidColorBrush x:Key="Brush.OnAccent" Color="#07100E" />
+    <SolidColorBrush x:Key="Brush.Status.Success" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="Brush.Status.Warning" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="Brush.Status.Error" Color="{StaticResource DangerColor}" />
+    <SolidColorBrush x:Key="Brush.Status.Info" Color="{StaticResource InfoColor}" />
+    <SolidColorBrush x:Key="Brush.Overlay" Color="#C80D0F12" />
+    <Color x:Key="Color.Shadow">#000000</Color>
 </ResourceDictionary>

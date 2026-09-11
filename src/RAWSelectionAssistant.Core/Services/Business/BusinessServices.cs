@@ -15,12 +15,12 @@ public sealed class BookingPeopleService(IBookingPeopleRepository repository) : 
         if (staff.Any(item => string.IsNullOrWhiteSpace(item.DisplayName))) throw new ArgumentException("工作人员姓名或代号不能为空。", nameof(staff));
         if (contacts.Count(item => item.IsPrimary) > 1) throw new ArgumentException("同一排期只能设置一个主要联系人。", nameof(contacts));
         var now = DateTimeOffset.UtcNow;
-        var normalizedContacts = contacts.Select(item => item with { BookingId=bookingId,DisplayName=item.DisplayName.Trim(),Phone=Clean(item.Phone),WeChat=Clean(item.WeChat),Email=Clean(item.Email),OtherContact=Clean(item.OtherContact),Note=Clean(item.Note),UpdatedAtUtc=now }).ToArray();
-        var normalizedStaff = staff.Select((item,index) => item with { BookingId=bookingId,DisplayName=item.DisplayName.Trim(),Phone=Clean(item.Phone),WeChat=Clean(item.WeChat),Email=Clean(item.Email),Note=Clean(item.Note),SortOrder=index,UpdatedAtUtc=now }).ToArray();
+        var normalizedContacts = contacts.Select(item => item with { BookingId = bookingId, DisplayName = item.DisplayName.Trim(), Phone = Clean(item.Phone), WeChat = Clean(item.WeChat), Email = Clean(item.Email), OtherContact = Clean(item.OtherContact), Note = Clean(item.Note), UpdatedAtUtc = now }).ToArray();
+        var normalizedStaff = staff.Select((item, index) => item with { BookingId = bookingId, DisplayName = item.DisplayName.Trim(), Phone = Clean(item.Phone), WeChat = Clean(item.WeChat), Email = Clean(item.Email), Note = Clean(item.Note), SortOrder = index, UpdatedAtUtc = now }).ToArray();
         return repository.ReplaceAsync(bookingId, normalizedContacts, normalizedStaff, cancellationToken);
     }
 
-    private static string? Clean(string? value)=>string.IsNullOrWhiteSpace(value)?null:value.Trim();
+    private static string? Clean(string? value) => string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 }
 
 public sealed class FinanceService(IFinanceRepository repository) : IFinanceService

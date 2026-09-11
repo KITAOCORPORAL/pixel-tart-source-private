@@ -313,17 +313,31 @@ internal sealed class WatchFolderCameraSession : ICameraSession
             var stability = await _stabilityProbe.WaitForStableAsync(path, cancellationToken).ConfigureAwait(false);
             if (stability.State != TetherStabilityState.Stable)
             {
-                asset = asset with { FileSize = stability.Length, ModifiedAtUtc = stability.ModifiedAtUtc, StabilityState = stability.State,
-                    ProcessingState = TetherProcessingState.NeedsAttention, LastErrorCode = stability.ErrorCode, UpdatedAtUtc = DateTimeOffset.UtcNow };
+                asset = asset with
+                {
+                    FileSize = stability.Length,
+                    ModifiedAtUtc = stability.ModifiedAtUtc,
+                    StabilityState = stability.State,
+                    ProcessingState = TetherProcessingState.NeedsAttention,
+                    LastErrorCode = stability.ErrorCode,
+                    UpdatedAtUtc = DateTimeOffset.UtcNow
+                };
                 await _assetRepository.UpdateAsync(asset, cancellationToken).ConfigureAwait(false);
                 await NotifyAttentionAsync("文件仍在写入或暂时不可访问", cancellationToken).ConfigureAwait(false);
                 return;
             }
 
-            asset = asset with { FileSize = stability.Length, ModifiedAtUtc = stability.ModifiedAtUtc, ReadyAtUtc = DateTimeOffset.UtcNow,
-                StabilityState = TetherStabilityState.Stable, ProcessingState = TetherProcessingState.Ready,
+            asset = asset with
+            {
+                FileSize = stability.Length,
+                ModifiedAtUtc = stability.ModifiedAtUtc,
+                ReadyAtUtc = DateTimeOffset.UtcNow,
+                StabilityState = TetherStabilityState.Stable,
+                ProcessingState = TetherProcessingState.Ready,
                 PreviewState = asset.MediaKind == TetherMediaKind.Raw ? TetherPreviewState.Placeholder : TetherPreviewState.Pending,
-                LastErrorCode = null, UpdatedAtUtc = DateTimeOffset.UtcNow };
+                LastErrorCode = null,
+                UpdatedAtUtc = DateTimeOffset.UtcNow
+            };
             await _assetRepository.UpdateAsync(asset, cancellationToken).ConfigureAwait(false);
             await CompleteStableAssetAsync(asset, cancellationToken).ConfigureAwait(false);
         }

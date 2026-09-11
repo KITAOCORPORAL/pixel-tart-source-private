@@ -397,10 +397,10 @@ public sealed class OrganizeService(ILogService? logService = null)
 
     private static PhotoGroupDefinition NewGroup(string name, IEnumerable<OrganizePhotoItem> items) => new() { Name = SafeGroupName(name), SourcePaths = items.Select(x => x.SourcePath).ToList() };
     private static string ValueOrMissing(string value) => string.IsNullOrWhiteSpace(value) ? "元数据缺失" : value.Trim();
-    private static string Prefix(string name) { var stem=Path.GetFileNameWithoutExtension(name); var index=stem.IndexOfAny("0123456789".ToCharArray()); return SafeGroupName(index > 0 ? stem[..index] : stem); }
-    private static string Digits(string name) { var digits=new string(Path.GetFileNameWithoutExtension(name).Where(char.IsDigit).ToArray()); return digits.Length == 0 ? "无数字段" : digits; }
-    private static string SizeRange(long bytes) => bytes switch { < 1024*1024 => "小于 1 MB", < 5L*1024*1024 => "1-5 MB", < 20L*1024*1024 => "5-20 MB", _ => "大于 20 MB" };
-    private static string SafeGroupName(string value) { var cleaned=string.Concat((value ?? "").Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '_' : ch)).Trim().Trim('.'); return string.IsNullOrWhiteSpace(cleaned) ? "未分组" : cleaned; }
+    private static string Prefix(string name) { var stem = Path.GetFileNameWithoutExtension(name); var index = stem.IndexOfAny("0123456789".ToCharArray()); return SafeGroupName(index > 0 ? stem[..index] : stem); }
+    private static string Digits(string name) { var digits = new string(Path.GetFileNameWithoutExtension(name).Where(char.IsDigit).ToArray()); return digits.Length == 0 ? "无数字段" : digits; }
+    private static string SizeRange(long bytes) => bytes switch { < 1024 * 1024 => "小于 1 MB", < 5L * 1024 * 1024 => "1-5 MB", < 20L * 1024 * 1024 => "5-20 MB", _ => "大于 20 MB" };
+    private static string SafeGroupName(string value) { var cleaned = string.Concat((value ?? "").Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '_' : ch)).Trim().Trim('.'); return string.IsNullOrWhiteSpace(cleaned) ? "未分组" : cleaned; }
     private static string SafeDestination(string root, string group, OrganizePhotoItem photo, OrganizeConflictPolicy policy) => Path.Combine(root, SafeGroupName(group), FileNameForPolicy(photo, policy));
     private static string FileNameForPolicy(OrganizePhotoItem photo, OrganizeConflictPolicy policy) => policy switch
     {
@@ -427,7 +427,7 @@ public sealed class OrganizeService(ILogService? logService = null)
     private static string AutoNumber(string path)
     {
         var directory = Path.GetDirectoryName(path)!; var stem = Path.GetFileNameWithoutExtension(path); var extension = Path.GetExtension(path);
-        for (var index=2; index<int.MaxValue; index++) { var candidate=Path.Combine(directory,$"{stem}_{index}{extension}"); if(!File.Exists(candidate)) return candidate; }
+        for (var index = 2; index < int.MaxValue; index++) { var candidate = Path.Combine(directory, $"{stem}_{index}{extension}"); if (!File.Exists(candidate)) return candidate; }
         throw new IOException("无法生成不冲突的目标文件名。");
     }
 
@@ -441,8 +441,8 @@ public sealed class OrganizeService(ILogService? logService = null)
 
     private static async Task CopyOneAsync(string source, string destination, FileMode destinationMode, CancellationToken cancellationToken)
     {
-        await using var input = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read, 1024*128, FileOptions.Asynchronous | FileOptions.SequentialScan);
-        await using var output = new FileStream(destination, destinationMode, FileAccess.Write, FileShare.None, 1024*128, FileOptions.Asynchronous | FileOptions.SequentialScan);
+        await using var input = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 128, FileOptions.Asynchronous | FileOptions.SequentialScan);
+        await using var output = new FileStream(destination, destinationMode, FileAccess.Write, FileShare.None, 1024 * 128, FileOptions.Asynchronous | FileOptions.SequentialScan);
         await input.CopyToAsync(output, cancellationToken).ConfigureAwait(false);
         await output.FlushAsync(cancellationToken).ConfigureAwait(false);
         output.Flush(true);
@@ -450,13 +450,13 @@ public sealed class OrganizeService(ILogService? logService = null)
 
     private static async Task<string> HashAsync(string path, CancellationToken cancellationToken)
     {
-        await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1024*128, FileOptions.Asynchronous | FileOptions.SequentialScan);
+        await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 128, FileOptions.Asynchronous | FileOptions.SequentialScan);
         return Convert.ToHexString(await SHA256.HashDataAsync(stream, cancellationToken).ConfigureAwait(false));
     }
 
     private static string ShortHash(string path) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(path)))[..8];
     private static string ErrorCode(Exception ex) => ex switch { UnauthorizedAccessException => "ACCESS_DENIED", FileNotFoundException => "SOURCE_NOT_FOUND", OperationCanceledException => "CANCELLED", _ => "IO_ERROR" };
     private static string Csv(string value) => $"\"{(value ?? "").Replace("\"", "\"\"")}\"";
-    private static OrganizeManifestItem CloneItem(OrganizeManifestItem item) => new() { SchemaVersion=item.SchemaVersion, OperationId=item.OperationId, SourcePath=item.SourcePath, DestinationPath=item.DestinationPath, OperationType=item.OperationType, ConflictPolicy=item.ConflictPolicy, ExpectedSourceSize=item.ExpectedSourceSize, ExpectedSourceModifiedAt=item.ExpectedSourceModifiedAt, OptionalSourceHash=item.OptionalSourceHash, State=item.State, ErrorCode=item.ErrorCode, ErrorMessage=item.ErrorMessage };
+    private static OrganizeManifestItem CloneItem(OrganizeManifestItem item) => new() { SchemaVersion = item.SchemaVersion, OperationId = item.OperationId, SourcePath = item.SourcePath, DestinationPath = item.DestinationPath, OperationType = item.OperationType, ConflictPolicy = item.ConflictPolicy, ExpectedSourceSize = item.ExpectedSourceSize, ExpectedSourceModifiedAt = item.ExpectedSourceModifiedAt, OptionalSourceHash = item.OptionalSourceHash, State = item.State, ErrorCode = item.ErrorCode, ErrorMessage = item.ErrorMessage };
     private static Task SaveManifestAsync(string root, OrganizeManifest manifest, CancellationToken cancellationToken) => File.WriteAllTextAsync(Path.Combine(root, $"organize-manifest-{manifest.OperationId:N}.json"), JsonSerializer.Serialize(manifest, JsonOptions), cancellationToken);
 }

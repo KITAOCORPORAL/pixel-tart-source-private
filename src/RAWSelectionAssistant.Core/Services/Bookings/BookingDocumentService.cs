@@ -49,8 +49,18 @@ public sealed class BookingDocumentService(IBookingDocumentRepository repository
         var info = new FileInfo(document.FilePath);
         await repository.UpdateLocationAsync(document.Id, info.FullName, Normalize(info.FullName), info.Extension.ToLowerInvariant(), info.Length,
             new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), false, now, cancellationToken).ConfigureAwait(false);
-        return document with { FilePath = info.FullName, NormalizedPath = Normalize(info.FullName), FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
-            LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
+        return document with
+        {
+            FilePath = info.FullName,
+            NormalizedPath = Normalize(info.FullName),
+            FileExtension = info.Extension.ToLowerInvariant(),
+            FileSize = info.Length,
+            LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero),
+            IsMissing = false,
+            MissingSinceAtUtc = null,
+            LastVerifiedAtUtc = now,
+            UpdatedAtUtc = now
+        };
     }
 
     public async Task<BookingDocumentRecord> RelocateAsync(Guid documentId, string newFilePath, CancellationToken cancellationToken = default)
@@ -61,8 +71,18 @@ public sealed class BookingDocumentService(IBookingDocumentRepository repository
         var now = DateTimeOffset.UtcNow;
         await repository.UpdateLocationAsync(document.Id, fullPath, Normalize(fullPath), info.Extension.ToLowerInvariant(), info.Length,
             new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), false, now, cancellationToken).ConfigureAwait(false);
-        return document with { FilePath = fullPath, NormalizedPath = Normalize(fullPath), FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
-            LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
+        return document with
+        {
+            FilePath = fullPath,
+            NormalizedPath = Normalize(fullPath),
+            FileExtension = info.Extension.ToLowerInvariant(),
+            FileSize = info.Length,
+            LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero),
+            IsMissing = false,
+            MissingSinceAtUtc = null,
+            LastVerifiedAtUtc = now,
+            UpdatedAtUtc = now
+        };
     }
 
     public Task<bool> RemoveAssociationAsync(Guid documentId, CancellationToken cancellationToken = default) =>

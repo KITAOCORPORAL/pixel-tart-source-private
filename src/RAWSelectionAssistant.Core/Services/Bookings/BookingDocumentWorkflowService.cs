@@ -200,7 +200,7 @@ public sealed class BookingDocumentWorkflowService(
         }
         catch (Exception)
         {
-            var outcome = new BookingDocumentItemOutcome(string.Empty, null, BookingDocumentFileState.Failed, null, null, ErrorCodeCatalog.DestinationNotWritable, "复制任务未完成，源文件保持不变。" );
+            var outcome = new BookingDocumentItemOutcome(string.Empty, null, BookingDocumentFileState.Failed, null, null, ErrorCodeCatalog.DestinationNotWritable, "复制任务未完成，源文件保持不变。");
             return BuildBatchResult(taskId, [.. initialOutcomes, outcome], 0, 0);
         }
         return completedResult ?? BuildBatchResult(taskId, initialOutcomes, 0, 0);
@@ -217,7 +217,7 @@ public sealed class BookingDocumentWorkflowService(
             {
                 await repository.SetMissingAsync(document.Id, true, now, cancellationToken).ConfigureAwait(false);
                 var missing = document with { IsMissing = true, MissingSinceAtUtc = document.MissingSinceAtUtc ?? now, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
-                return new(missing, BookingDocumentFileState.Missing, "文件已移动或当前不可访问。" );
+                return new(missing, BookingDocumentFileState.Missing, "文件已移动或当前不可访问。");
             }
             var info = new FileInfo(document.FilePath);
             var modified = document.FileSize != info.Length || document.LastKnownModifiedAtUtc is DateTimeOffset last && Math.Abs((info.LastWriteTimeUtc - last.UtcDateTime).TotalSeconds) > 1;
@@ -229,25 +229,35 @@ public sealed class BookingDocumentWorkflowService(
             if (modified)
             {
                 await repository.SetMissingAsync(document.Id, false, now, cancellationToken).ConfigureAwait(false);
-                return new(document with { IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now }, BookingDocumentFileState.Modified, "文件内容或元数据与上次记录不同。" );
+                return new(document with { IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now }, BookingDocumentFileState.Modified, "文件内容或元数据与上次记录不同。");
             }
             await repository.UpdateLocationAsync(document.Id, info.FullName, Normalize(info.FullName), info.Extension.ToLowerInvariant(), info.Length,
                 new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), false, now, cancellationToken).ConfigureAwait(false);
-            var normal = document with { FilePath = info.FullName, NormalizedPath = Normalize(info.FullName), FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
-                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
-            return new(normal, BookingDocumentFileState.Normal, "文件可访问。" );
+            var normal = document with
+            {
+                FilePath = info.FullName,
+                NormalizedPath = Normalize(info.FullName),
+                FileExtension = info.Extension.ToLowerInvariant(),
+                FileSize = info.Length,
+                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero),
+                IsMissing = false,
+                MissingSinceAtUtc = null,
+                LastVerifiedAtUtc = now,
+                UpdatedAtUtc = now
+            };
+            return new(normal, BookingDocumentFileState.Normal, "文件可访问。");
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             await repository.SetMissingAsync(document.Id, true, now, cancellationToken).ConfigureAwait(false);
-            return new(document with { IsMissing = true, MissingSinceAtUtc = document.MissingSinceAtUtc ?? now, LastVerifiedAtUtc = now, UpdatedAtUtc = now }, BookingDocumentFileState.Missing, "文件已移动或当前不可访问。" );
+            return new(document with { IsMissing = true, MissingSinceAtUtc = document.MissingSinceAtUtc ?? now, LastVerifiedAtUtc = now, UpdatedAtUtc = now }, BookingDocumentFileState.Missing, "文件已移动或当前不可访问。");
         }
     }
 
     public async Task<BookingDocumentRelocationResult> RelocateAsync(Guid documentId, string newFilePath, bool acceptHashMismatch = false, CancellationToken cancellationToken = default)
     {
         var document = await repository.GetAsync(documentId, cancellationToken).ConfigureAwait(false);
-        if (document is null) return new(BookingDocumentRelocationStatus.NotFound, null, false, "文档关联不存在。" );
+        if (document is null) return new(BookingDocumentRelocationStatus.NotFound, null, false, "文档关联不存在。");
         try
         {
             var fullPath = ValidateSupportedFile(newFilePath);
@@ -256,7 +266,7 @@ public sealed class BookingDocumentWorkflowService(
             if (duplicate is not null && duplicate.Id != document.Id)
             {
                 await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "NeedsAttention", document.ImportTaskId, ErrorCodeCatalog.DuplicateConflict, cancellationToken).ConfigureAwait(false);
-                return new(BookingDocumentRelocationStatus.Failed, document, false, "所选文件已经关联到当前拍摄，未修改现有记录。" );
+                return new(BookingDocumentRelocationStatus.Failed, document, false, "所选文件已经关联到当前拍摄，未修改现有记录。");
             }
             string? newHash = null;
             if (!string.IsNullOrWhiteSpace(document.OptionalHash))
@@ -265,18 +275,28 @@ public sealed class BookingDocumentWorkflowService(
                 if (!string.Equals(newHash, document.OptionalHash, StringComparison.OrdinalIgnoreCase) && !acceptHashMismatch)
                 {
                     await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "NeedsAttention", document.ImportTaskId, ErrorCodeCatalog.HashMismatch, cancellationToken).ConfigureAwait(false);
-                    return new(BookingDocumentRelocationStatus.HashMismatch, document, true, "所选文件与原记录哈希不一致，需要确认。" );
+                    return new(BookingDocumentRelocationStatus.HashMismatch, document, true, "所选文件与原记录哈希不一致，需要确认。");
                 }
             }
             var info = new FileInfo(fullPath);
             var now = DateTimeOffset.UtcNow;
             var updatedHash = acceptHashMismatch && newHash is not null ? newHash : document.OptionalHash;
             await repository.UpdateLocationAndHashAsync(document.Id, fullPath, normalizedPath, info.Extension.ToLowerInvariant(), info.Length, new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), updatedHash, false, now, cancellationToken).ConfigureAwait(false);
-            var relocated = document with { FilePath = fullPath, NormalizedPath = normalizedPath, FileExtension = info.Extension.ToLowerInvariant(), FileSize = info.Length,
-                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero), OptionalHash = updatedHash,
-                IsMissing = false, MissingSinceAtUtc = null, LastVerifiedAtUtc = now, UpdatedAtUtc = now };
+            var relocated = document with
+            {
+                FilePath = fullPath,
+                NormalizedPath = normalizedPath,
+                FileExtension = info.Extension.ToLowerInvariant(),
+                FileSize = info.Length,
+                LastKnownModifiedAtUtc = new DateTimeOffset(info.LastWriteTimeUtc, TimeSpan.Zero),
+                OptionalHash = updatedHash,
+                IsMissing = false,
+                MissingSinceAtUtc = null,
+                LastVerifiedAtUtc = now,
+                UpdatedAtUtc = now
+            };
             await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "Succeeded", document.ImportTaskId, null, cancellationToken).ConfigureAwait(false);
-            return new(BookingDocumentRelocationStatus.Relocated, relocated, false, "文件位置已更新。" );
+            return new(BookingDocumentRelocationStatus.Relocated, relocated, false, "文件位置已更新。");
         }
         catch (Exception ex) when (ex is ArgumentException or FileNotFoundException or NotSupportedException or IOException or UnauthorizedAccessException)
         {
@@ -287,7 +307,7 @@ public sealed class BookingDocumentWorkflowService(
         catch (Exception)
         {
             await WriteAuditAsync(document.BookingId, document.ProjectId, document.DocumentType, "Relocated", "Failed", document.ImportTaskId, ErrorCodeCatalog.DatabaseUnavailable, cancellationToken).ConfigureAwait(false);
-            return new(BookingDocumentRelocationStatus.Failed, document, false, "文件位置未更新，原关联记录保持不变。" );
+            return new(BookingDocumentRelocationStatus.Failed, document, false, "文件位置未更新，原关联记录保持不变。");
         }
     }
 
@@ -307,22 +327,22 @@ public sealed class BookingDocumentWorkflowService(
         try
         {
             var booking = await EnsureBookingEditableAsync(pending.BookingId, cancellationToken).ConfigureAwait(false);
-            if (!File.Exists(pending.DestinationPath)) return new(false, null, pending, ErrorCodeCatalog.SourceNotFound, "已复制文件当前不存在，无法重试关联。" );
+            if (!File.Exists(pending.DestinationPath)) return new(false, null, pending, ErrorCodeCatalog.SourceNotFound, "已复制文件当前不存在，无法重试关联。");
             var info = new FileInfo(pending.DestinationPath);
-            if (pending.OutputSize is long size && info.Length != size) return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。" );
+            if (pending.OutputSize is long size && info.Length != size) return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。");
             if (!string.IsNullOrWhiteSpace(pending.OutputHash) && !string.Equals(pending.OutputHash, await verification.ComputeSha256Async(pending.DestinationPath, cancellationToken).ConfigureAwait(false), StringComparison.OrdinalIgnoreCase))
-                return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。" );
+                return new(false, null, pending, ErrorCodeCatalog.SourceChanged, "已复制文件已被修改，无法自动保存关联。");
             var existing = await repository.GetByNormalizedPathAsync(pending.BookingId, Normalize(pending.DestinationPath), cancellationToken).ConfigureAwait(false);
-            if (existing is not null) return new(true, existing, null, null, "关联记录已经存在。" );
+            if (existing is not null) return new(true, existing, null, null, "关联记录已经存在。");
             var document = BuildDocument(pending.BookingId, booking.ProjectId, pending.DocumentType, pending.DestinationPath, BookingDocumentLinkMode.ManagedCopy, pending.TaskId, pending.OutputHash);
             await repository.AddAsync(document, cancellationToken).ConfigureAwait(false);
             await WriteAuditAsync(pending.BookingId, booking.ProjectId, pending.DocumentType, "AssociationRetried", "Succeeded", pending.TaskId, null, cancellationToken).ConfigureAwait(false);
-            return new(true, document, null, null, "关联记录已保存。" );
+            return new(true, document, null, null, "关联记录已保存。");
         }
         catch (Exception)
         {
             await WriteAuditAsync(pending.BookingId, pending.ProjectId, pending.DocumentType, "AssociationRetried", "Failed", pending.TaskId, ErrorCodeCatalog.DatabaseUnavailable, cancellationToken).ConfigureAwait(false);
-            return new(false, null, pending, ErrorCodeCatalog.DatabaseUnavailable, "关联记录仍未保存，文件保持不变。" );
+            return new(false, null, pending, ErrorCodeCatalog.DatabaseUnavailable, "关联记录仍未保存，文件保持不变。");
         }
     }
 
@@ -407,8 +427,8 @@ public sealed class BookingDocumentWorkflowService(
 
     private async Task<ShootBooking> EnsureBookingEditableAsync(Guid bookingId, CancellationToken cancellationToken)
     {
-        var booking = await bookingService.GetAsync(bookingId, includeArchived: true, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("拍摄排期不存在。" );
-        if (booking.IsArchived) throw new InvalidOperationException("已归档排期不能修改文档关联。" );
+        var booking = await bookingService.GetAsync(bookingId, includeArchived: true, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException("拍摄排期不存在。");
+        if (booking.IsArchived) throw new InvalidOperationException("已归档排期不能修改文档关联。");
         return booking;
     }
 
@@ -455,11 +475,11 @@ public sealed class BookingDocumentWorkflowService(
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("文件路径不能为空。", nameof(path));
         var fullPath = Path.GetFullPath(path);
-        if (Directory.Exists(fullPath)) throw new NotSupportedException("当前版本只支持添加单个或多个文件。" );
+        if (Directory.Exists(fullPath)) throw new NotSupportedException("当前版本只支持添加单个或多个文件。");
         if (!File.Exists(fullPath)) throw new FileNotFoundException("文件不存在或当前不可访问。", fullPath);
         var extension = Path.GetExtension(fullPath);
         if (!SupportedReferenceExtensions.Contains(extension) && !BookingDocumentFileSafety.IsSafeExtension(extension))
-            throw new NotSupportedException("为避免误执行，程序或脚本文件不能作为拍摄资料关联。" );
+            throw new NotSupportedException("为避免误执行，程序或脚本文件不能作为拍摄资料关联。");
         return fullPath;
     }
 
@@ -468,7 +488,7 @@ public sealed class BookingDocumentWorkflowService(
         if (string.IsNullOrWhiteSpace(destinationRoot)) throw new ArgumentException("请选择目标资料目录。", nameof(destinationRoot));
         var fullPath = Path.GetFullPath(destinationRoot).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         if (IsInside(fullPath, Path.GetFullPath(AppContext.BaseDirectory)) || IsInside(fullPath, Path.GetFullPath(AppDataPaths.Root)))
-            throw new UnauthorizedAccessException("不能将拍摄资料复制到安装目录或应用数据目录。" );
+            throw new UnauthorizedAccessException("不能将拍摄资料复制到安装目录或应用数据目录。");
         return fullPath;
     }
 

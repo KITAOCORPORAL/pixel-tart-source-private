@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <!-- Thumbnail component: image pixels remain unchanged in every interaction state. -->
+        <Style x:Key="PixelTart.Thumbnail" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="{DynamicResource Space.Inset.1}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ThumbnailFrame" Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+                            <Trigger Property="IsSelected" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter TargetName="ThumbnailFrame" Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /></Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ThumbnailFrame" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+                            <Trigger Property="IsEnabled" Value="False"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+</ResourceDictionary>

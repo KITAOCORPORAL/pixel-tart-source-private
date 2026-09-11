@@ -100,38 +100,80 @@ public sealed class DesignSystemAv2LockTests
     [TestMethod]
     public void App_MergesCompleteAv2ResourceSetInDependencyOrder()
     {
-        var required = new[]
-        {
-            "Resources/DesignSystem/Theme.Dark.xaml",
-            "Resources/DesignSystem/AccentColors.xaml",
-            "Resources/DesignSystem/Spacing.xaml",
-            "Resources/DesignSystem/Radius.xaml",
-            "Resources/DesignSystem/DesignTokens.xaml",
-            "Resources/DesignSystem/Typography.xaml",
-            "Resources/DesignSystem/Buttons.xaml",
-            "Resources/DesignSystem/Inputs.xaml",
-            "Resources/DesignSystem/Cards.xaml",
-            "Resources/DesignSystem/Navigation.xaml",
-            "Resources/DesignSystem/Icons.xaml",
-            "Resources/DesignSystem/Calendar.xaml",
-            "Resources/DesignSystem/Modal.xaml",
-            "Resources/DesignSystem/Drawer.xaml",
-            "Resources/DesignSystem/Tooltip.xaml",
-            "Resources/DesignSystem/ContextMenu.xaml",
-            "Resources/DesignSystem/ScrollBars.xaml",
-            "Resources/DesignSystem/EmptyState.xaml"
-        };
-        var sources = Load("src/RAWSelectionAssistant/App.xaml")
+        var appSources = Load("src/RAWSelectionAssistant/App.xaml")
             .Descendants()
             .Attributes("Source")
             .Select(attribute => attribute.Value)
             .ToArray();
+        var canonicalEntries = new[]
+        {
+            "Resources/DesignSystem/Theme.Dark.xaml",
+            "Resources/DesignSystem/PixelTart.Theme.xaml",
+            "Resources/DesignSystem/PixelTart.Components.xaml"
+        };
+        CollectionAssert.AreEqual(canonicalEntries, appSources.Take(canonicalEntries.Length).ToArray());
 
-        CollectionAssert.AreEqual(required, sources.Where(required.Contains).ToArray());
+        var compatibilityEntries = new[]
+        {
+            "Controls.Buttons.xaml", "Controls.Inputs.xaml", "Controls.Cards.xaml", "Controls.Tables.xaml",
+            "Controls.Navigation.xaml", "Icons.Navigation.xaml", "Icons.Tools.xaml", "Controls.Dialogs.xaml",
+            "Controls.Status.xaml",
+            "Buttons.xaml", "Inputs.xaml", "Cards.xaml", "Navigation.xaml", "Icons.xaml", "Calendar.xaml",
+            "Modal.xaml", "Drawer.xaml", "Tooltip.xaml", "ContextMenu.xaml", "ScrollBars.xaml", "EmptyState.xaml"
+        };
+        CollectionAssert.AreEqual(compatibilityEntries,
+            appSources.Skip(canonicalEntries.Length).Select(Path.GetFileName).ToArray());
+
+        var required = new[]
+        {
+            "AccentColors.xaml", "Spacing.xaml", "Radius.xaml", "DesignTokens.xaml", "Typography.xaml", "Elevation.xaml",
+            "Components.Foundation.xaml", "Controls.Menu.xaml"
+        };
+        var aggregateSources = new[] { "PixelTart.Theme.xaml", "PixelTart.Components.xaml" }
+            .SelectMany(file => Load($"src/RAWSelectionAssistant/Resources/DesignSystem/{file}")
+            .Descendants()
+            .Attributes("Source")
+            .Select(attribute => Path.GetFileName(attribute.Value))
+            .ToArray())
+            .ToArray();
+
+        CollectionAssert.AreEquivalent(required, aggregateSources);
         foreach (var source in required)
         {
-            Assert.IsTrue(File.Exists(Path.Combine(Root(), "src", "RAWSelectionAssistant", source.Replace('/', Path.DirectorySeparatorChar))),
+            Assert.IsTrue(File.Exists(Path.Combine(Root(), "src", "RAWSelectionAssistant", "Resources", "DesignSystem", source)),
                 $"Missing merged resource: {source}");
+        }
+
+        foreach (var source in compatibilityEntries)
+        {
+            Assert.IsTrue(File.Exists(Path.Combine(Root(), "src", "RAWSelectionAssistant", "Resources", "DesignSystem", source)),
+                $"Missing compatibility resource: {source}");
+        }
+    }
+
+    [TestMethod]
+    public void CanonicalFoundation_ExposesV1ComponentStatesAndTokenFamilies()
+    {
+        var foundation = Read("src/RAWSelectionAssistant/Resources/DesignSystem/Components.Foundation.xaml");
+        foreach (var token in new[]
+        {
+            "PixelTart.Button.Primary", "PixelTart.Button.Secondary", "PixelTart.Button.Ghost",
+            "PixelTart.Button.Danger", "PixelTart.Button.Loading", "IsMouseOver", "IsPressed",
+            "IsKeyboardFocused", "IsEnabled", "PixelTart.Surface.Panel", "PixelTart.Surface.Card",
+            "PixelTart.Surface.Inspector", "PixelTart.Surface.Loading", "PixelTart.Menu.Context",
+            "PixelTart.Menu.Item", "PixelTart.Menu.Loading"
+        }) StringAssert.Contains(foundation, token);
+
+        foreach (var palette in new[] { "Colors.Dark.xaml", "Colors.Light.xaml", "Colors.HighContrast.xaml" })
+        {
+            var source = Read($"src/RAWSelectionAssistant/Resources/DesignSystem/{palette}");
+            foreach (var token in new[]
+            {
+                "Brush.Background", "Brush.Surface", "Brush.Surface.Elevated", "Brush.Panel", "Brush.Border",
+                "Brush.Text.Primary", "Brush.Text.Secondary", "Brush.Text.Muted", "Brush.Text.Disabled",
+                "Brush.Accent", "Brush.Accent.Hover", "Brush.Accent.Active", "Brush.Accent.Subtle",
+                "Brush.Status.Success", "Brush.Status.Warning", "Brush.Status.Error", "Brush.Status.Info"
+            }) StringAssert.Contains(source, token, $"{palette} is missing {token}.");
         }
     }
 

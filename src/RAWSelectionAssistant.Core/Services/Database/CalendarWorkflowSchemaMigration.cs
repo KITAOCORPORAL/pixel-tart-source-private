@@ -18,7 +18,7 @@ public sealed class CalendarWorkflowSchemaMigration : IMigration
 
         await using var backfill = connection.CreateCommand();
         backfill.Transaction = transaction;
-            backfill.CommandText = "UPDATE ShootBookings SET ShotCompletedAtUtc=UpdatedAtUtc WHERE ShotCompletedAtUtc IS NULL AND Status IN ('Shooting','Completed','AwaitingSelectionDelivery','AwaitingSelection','Selected','AwaitingRetouch','Retouched','AwaitingDelivery');";
+        backfill.CommandText = "UPDATE ShootBookings SET ShotCompletedAtUtc=UpdatedAtUtc WHERE ShotCompletedAtUtc IS NULL AND Status IN ('Shooting','Completed','AwaitingSelectionDelivery','AwaitingSelection','Selected','AwaitingRetouch','Retouched','AwaitingDelivery');";
         await backfill.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 }

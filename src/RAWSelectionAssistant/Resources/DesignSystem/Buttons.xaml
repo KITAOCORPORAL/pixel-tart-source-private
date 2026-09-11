@@ -8,4 +8,5 @@
     <Style x:Key="Av2GhostButton" TargetType="Button" BasedOn="{StaticResource Av2SecondaryButton}"><Setter Property="Background" Value="Transparent" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
     <Style x:Key="Av2DangerButton" TargetType="Button" BasedOn="{StaticResource Av2SecondaryButton}"><Setter Property="Foreground" Value="{DynamicResource DangerBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" /></Style>
     <Style x:Key="Av2IconButton" TargetType="Button" BasedOn="{StaticResource Av2GhostButton}"><Setter Property="Width" Value="40" /><Setter Property="Height" Value="40" /><Setter Property="MinWidth" Value="40" /><Setter Property="Padding" Value="8" /></Style>
+    <Style x:Key="Av2LoadingButton" TargetType="Button" BasedOn="{StaticResource Av2SecondaryButton}"><Setter Property="IsHitTestVisible" Value="False" /><Setter Property="Opacity" Value="0.72" /></Style>
 </ResourceDictionary>

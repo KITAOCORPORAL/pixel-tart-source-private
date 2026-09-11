@@ -206,11 +206,18 @@ public sealed class AssetLibraryContainerService
             var root = document.RootElement;
             var manifest = new ContainerManifest
             {
-                ContainerFormatVersion = ReadInt(root, "container_format_version"), LibraryId = ReadGuid(root, "library_id"),
-                DisplayName = ReadString(root, "display_name"), CreatedAt = ReadDate(root, "created_at"), UpdatedAt = ReadDate(root, "updated_at"),
-                DatabaseRelativePath = ReadString(root, "database_relative_path"), DatabaseSchemaVersion = ReadInt(root, "database_schema_version"),
-                ManagedAssetsRelativePath = ReadString(root, "managed_assets_relative_path"), PreviewCacheRelativePath = ReadString(root, "preview_cache_relative_path"),
-                ContentMode = ReadString(root, "content_mode"), AppMinimumVersion = ReadString(root, "app_minimum_version"), PayloadSha256 = ReadString(root, "payload_sha256")
+                ContainerFormatVersion = ReadInt(root, "container_format_version"),
+                LibraryId = ReadGuid(root, "library_id"),
+                DisplayName = ReadString(root, "display_name"),
+                CreatedAt = ReadDate(root, "created_at"),
+                UpdatedAt = ReadDate(root, "updated_at"),
+                DatabaseRelativePath = ReadString(root, "database_relative_path"),
+                DatabaseSchemaVersion = ReadInt(root, "database_schema_version"),
+                ManagedAssetsRelativePath = ReadString(root, "managed_assets_relative_path"),
+                PreviewCacheRelativePath = ReadString(root, "preview_cache_relative_path"),
+                ContentMode = ReadString(root, "content_mode"),
+                AppMinimumVersion = ReadString(root, "app_minimum_version"),
+                PayloadSha256 = ReadString(root, "payload_sha256")
             };
             ValidateManifest(manifest);
             return manifest;
@@ -346,9 +353,14 @@ public sealed class AssetLibraryContainerService
 
     private sealed class ContainerManifest
     {
-        public int ContainerFormatVersion { get; set; } public Guid LibraryId { get; set; } public string DisplayName { get; set; } = string.Empty;
-        public DateTimeOffset CreatedAt { get; set; } public DateTimeOffset UpdatedAt { get; set; } public string DatabaseRelativePath { get; set; } = string.Empty;
-        public int DatabaseSchemaVersion { get; set; } public string ManagedAssetsRelativePath { get; set; } = string.Empty; public string PreviewCacheRelativePath { get; set; } = string.Empty;
+        public int ContainerFormatVersion { get; set; }
+        public Guid LibraryId { get; set; }
+        public string DisplayName { get; set; } = string.Empty;
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
+        public string DatabaseRelativePath { get; set; } = string.Empty;
+        public int DatabaseSchemaVersion { get; set; }
+        public string ManagedAssetsRelativePath { get; set; } = string.Empty; public string PreviewCacheRelativePath { get; set; } = string.Empty;
         public string ContentMode { get; set; } = string.Empty; public string AppMinimumVersion { get; set; } = string.Empty; public string PayloadSha256 { get; set; } = string.Empty;
     }
 

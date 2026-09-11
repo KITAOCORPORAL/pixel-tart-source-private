@@ -11,378 +11,25 @@
              AutomationProperties.AutomationId="AssetLibraryPage"
              AutomationProperties.Name="素材库工作区">
     <UserControl.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="AssetLibraryThumbnail.xaml" />
+        </ResourceDictionary.MergedDictionaries>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <local:HexToBrushConverter x:Key="HexToBrushConverter" />
-
-        <!-- Asset Library button roles intentionally stay local to this page. -->
-        <Color x:Key="AssetLibraryPrimaryForegroundColor">#F5FFFC</Color>
-        <Color x:Key="AssetLibraryPrimaryNormalColor">#0B6658</Color>
-        <Color x:Key="AssetLibraryPrimaryHoverColor">#0D7464</Color>
-        <Color x:Key="AssetLibraryPrimaryPressedColor">#074D43</Color>
-        <Color x:Key="AssetLibrarySecondaryForegroundColor">#F2F6F7</Color>
-        <Color x:Key="AssetLibrarySecondaryNormalColor">#192129</Color>
-        <Color x:Key="AssetLibrarySecondaryHoverColor">#24303A</Color>
-        <Color x:Key="AssetLibrarySecondaryPressedColor">#111820</Color>
-        <Color x:Key="AssetLibraryChipForegroundColor">#EAF1F3</Color>
-        <Color x:Key="AssetLibraryChipNormalColor">#172027</Color>
-        <Color x:Key="AssetLibraryChipHoverColor">#22313A</Color>
-        <Color x:Key="AssetLibraryChipPressedColor">#0F171D</Color>
-        <Color x:Key="AssetLibraryChipActiveNormalColor">#114238</Color>
-        <Color x:Key="AssetLibraryChipActiveHoverColor">#155247</Color>
-        <Color x:Key="AssetLibraryChipActivePressedColor">#0C332C</Color>
-        <Color x:Key="AssetLibraryFocusRingColor">#65E6C7</Color>
-        <Color x:Key="AssetLibraryButtonFocusOuterColor">#061311</Color>
-        <Color x:Key="AssetLibraryButtonFocusInnerColor">#F5FFFC</Color>
-        <Color x:Key="AssetLibraryDisabledBackgroundColor">#252C32</Color>
-        <Color x:Key="AssetLibraryDisabledForegroundColor">#ADB8C0</Color>
-        <Color x:Key="AssetLibraryDisabledBorderColor">#71808C</Color>
-        <Color x:Key="AssetLibraryBorderColor">#5F7180</Color>
-        <Color x:Key="AssetLibraryActiveBorderColor">#42CEAF</Color>
-        <Color x:Key="AssetLibraryPaletteBorderColor">#5F7180</Color>
-        <Color x:Key="AssetLibraryPaletteHoverBorderColor">#91B5C2</Color>
-        <Color x:Key="AssetLibraryPalettePressedBorderColor">#55D0B3</Color>
-        <Color x:Key="AssetLibraryPaletteFocusInnerColor">#061311</Color>
-
-        <SolidColorBrush x:Key="AssetLibraryPrimaryForegroundBrush" Color="{StaticResource AssetLibraryPrimaryForegroundColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPrimaryNormalBrush" Color="{StaticResource AssetLibraryPrimaryNormalColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPrimaryHoverBrush" Color="{StaticResource AssetLibraryPrimaryHoverColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPrimaryPressedBrush" Color="{StaticResource AssetLibraryPrimaryPressedColor}" />
-        <SolidColorBrush x:Key="AssetLibrarySecondaryForegroundBrush" Color="{StaticResource AssetLibrarySecondaryForegroundColor}" />
-        <SolidColorBrush x:Key="AssetLibrarySecondaryNormalBrush" Color="{StaticResource AssetLibrarySecondaryNormalColor}" />
-        <SolidColorBrush x:Key="AssetLibrarySecondaryHoverBrush" Color="{StaticResource AssetLibrarySecondaryHoverColor}" />
-        <SolidColorBrush x:Key="AssetLibrarySecondaryPressedBrush" Color="{StaticResource AssetLibrarySecondaryPressedColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipForegroundBrush" Color="{StaticResource AssetLibraryChipForegroundColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipNormalBrush" Color="{StaticResource AssetLibraryChipNormalColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipHoverBrush" Color="{StaticResource AssetLibraryChipHoverColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipPressedBrush" Color="{StaticResource AssetLibraryChipPressedColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipActiveNormalBrush" Color="{StaticResource AssetLibraryChipActiveNormalColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipActiveHoverBrush" Color="{StaticResource AssetLibraryChipActiveHoverColor}" />
-        <SolidColorBrush x:Key="AssetLibraryChipActivePressedBrush" Color="{StaticResource AssetLibraryChipActivePressedColor}" />
-        <SolidColorBrush x:Key="AssetLibraryFocusRingBrush" Color="{StaticResource AssetLibraryFocusRingColor}" />
-        <SolidColorBrush x:Key="AssetLibraryButtonFocusOuterBrush" Color="{StaticResource AssetLibraryButtonFocusOuterColor}" />
-        <SolidColorBrush x:Key="AssetLibraryButtonFocusInnerBrush" Color="{StaticResource AssetLibraryButtonFocusInnerColor}" />
-        <SolidColorBrush x:Key="AssetLibraryDisabledBackgroundBrush" Color="{StaticResource AssetLibraryDisabledBackgroundColor}" />
-        <SolidColorBrush x:Key="AssetLibraryDisabledForegroundBrush" Color="{StaticResource AssetLibraryDisabledForegroundColor}" />
-        <SolidColorBrush x:Key="AssetLibraryDisabledBorderBrush" Color="{StaticResource AssetLibraryDisabledBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryBorderBrush" Color="{StaticResource AssetLibraryBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryActiveBorderBrush" Color="{StaticResource AssetLibraryActiveBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPaletteBorderBrush" Color="{StaticResource AssetLibraryPaletteBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPaletteHoverBorderBrush" Color="{StaticResource AssetLibraryPaletteHoverBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPalettePressedBorderBrush" Color="{StaticResource AssetLibraryPalettePressedBorderColor}" />
-        <SolidColorBrush x:Key="AssetLibraryPaletteFocusInnerBrush" Color="{StaticResource AssetLibraryPaletteFocusInnerColor}" />
-
-        <ControlTemplate x:Key="AssetLibraryButtonTemplate" TargetType="{x:Type Button}">
-            <Grid>
-                <Border x:Name="ButtonFocusOuterRing"
-                        BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" />
-                <Border x:Name="ButtonFocusInnerRing"
-                        BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Margin="2" />
-                <Border x:Name="Chrome"
-                        Margin="3"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="5"
-                        Padding="{TemplateBinding Padding}">
-                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      RecognizesAccessKey="True"
-                                      SnapsToDevicePixels="True" />
-                </Border>
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter TargetName="ButtonFocusOuterRing" Property="BorderBrush" Value="{StaticResource AssetLibraryButtonFocusOuterBrush}" />
-                    <Setter TargetName="ButtonFocusInnerRing" Property="BorderBrush" Value="{StaticResource AssetLibraryButtonFocusInnerBrush}" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-
-        <Style x:Key="AssetLibraryPaletteFocusVisualStyle" TargetType="{x:Type Control}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid Margin="-4" IsHitTestVisible="False">
-                            <Border x:Name="PaletteOuterFocus"
-                                    BorderBrush="{StaticResource AssetLibraryFocusRingBrush}"
-                                    BorderThickness="2" CornerRadius="8" />
-                            <Border x:Name="PaletteInnerFocus"
-                                    BorderBrush="{StaticResource AssetLibraryPaletteFocusInnerBrush}"
-                                    BorderThickness="2" CornerRadius="6" Margin="2" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <ControlTemplate x:Key="AssetLibraryPaletteButtonTemplate" TargetType="{x:Type Button}">
-            <Border x:Name="Chrome"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="4"
-                    Padding="{TemplateBinding Padding}">
-                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                  SnapsToDevicePixels="True" />
-            </Border>
-        </ControlTemplate>
-
-        <Style x:Key="AssetLibraryButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="MinHeight" Value="34" />
-            <Setter Property="Padding" Value="12,5" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Template" Value="{StaticResource AssetLibraryButtonTemplate}" />
-        </Style>
-
-        <Style x:Key="AssetLibraryPrimaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
-            <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryNormalBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryNormalBrush}" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryHoverBrush}" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryPrimaryPressedBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPrimaryPressedBrush}" />
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AssetLibrarySecondaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
-            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryPressedBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AssetLibraryChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
-            <Setter Property="Background" Value="{StaticResource AssetLibraryChipNormalBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibraryChipForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="MinHeight" Value="30" />
-            <Setter Property="Padding" Value="9,3" />
-            <Setter Property="Margin" Value="0,0,5,4" />
-            <Style.Triggers>
-                <Trigger Property="Tag" Value="Active">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveNormalBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryActiveBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipPressedBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </Trigger>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="Tag" Value="Active" />
-                        <Condition Property="IsMouseOver" Value="True" />
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </MultiTrigger>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="Tag" Value="Active" />
-                        <Condition Property="IsPressed" Value="True" />
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActivePressedBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </MultiTrigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AssetLibraryIconButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
-            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="MinWidth" Value="34" />
-            <Setter Property="MinHeight" Value="34" />
-            <Setter Property="Padding" Value="7,3" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryPressedBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AssetLibraryPaletteSwatchButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryButtonBase}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="MinWidth" Value="40" />
-            <Setter Property="MinHeight" Value="40" />
-            <Setter Property="Padding" Value="1" />
-            <Setter Property="Template" Value="{StaticResource AssetLibraryPaletteButtonTemplate}" />
-            <Setter Property="FocusVisualStyle" Value="{StaticResource AssetLibraryPaletteFocusVisualStyle}" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPalettePressedBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <ControlTemplate x:Key="AssetLibraryVisualTabItemTemplate" TargetType="{x:Type TabItem}">
-            <Border x:Name="FocusRing" BorderBrush="Transparent" BorderThickness="2" CornerRadius="7" Padding="1">
-                <Border x:Name="Chrome"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="5"
-                        Padding="{TemplateBinding Padding}">
-                    <ContentPresenter ContentSource="Header"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      RecognizesAccessKey="True"
-                                      SnapsToDevicePixels="True" />
-                </Border>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter TargetName="FocusRing" Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-
-        <Style x:Key="AssetLibraryVisualTabItem" TargetType="{x:Type TabItem}">
-            <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryNormalBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource AssetLibrarySecondaryForegroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="11,5" />
-            <Setter Property="Margin" Value="0,0,3,0" />
-            <Setter Property="MinHeight" Value="32" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="Template" Value="{StaticResource AssetLibraryVisualTabItemTemplate}" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibrarySecondaryHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryPaletteHoverBorderBrush}" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveNormalBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryPrimaryForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryActiveBorderBrush}" />
-                    <Setter Property="FontWeight" Value="SemiBold" />
-                </Trigger>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsSelected" Value="True" />
-                        <Condition Property="IsMouseOver" Value="True" />
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryChipActiveHoverBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryFocusRingBrush}" />
-                </MultiTrigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource AssetLibraryDisabledBackgroundBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource AssetLibraryDisabledForegroundBrush}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource AssetLibraryDisabledBorderBrush}" />
-                    <Setter Property="Cursor" Value="Arrow" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AssetPanel" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="0" />
-            <Setter Property="Padding" Value="12" />
-        </Style>
-        <Style x:Key="AssetCaption" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
-            <Setter Property="FontSize" Value="12" />
-        </Style>
-        <Style x:Key="AssetSection" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-
         <ContextMenu x:Key="AssetP2ContextMenu" x:Shared="False"
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
+                     Style="{DynamicResource PixelTart.Menu.Context}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
+            <!-- Only implemented, context-valid actions are surfaced. -->
             <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
-            <MenuItem Header="在新窗口打开" IsEnabled="False" ToolTip="此版本暂未提供独立预览窗口" AutomationProperties.AutomationId="AssetContextOpenNewWindow" />
-            <MenuItem Header="在默认应用打开" IsEnabled="False" ToolTip="为保护源文件，默认应用打开将在后续版本提供" AutomationProperties.AutomationId="AssetContextOpenDefault" />
-            <MenuItem Header="使用其他应用打开 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenWith" />
-            <MenuItem Header="在文件资源管理器中显示" IsEnabled="False" ToolTip="文件位置打开契约将在后续版本启用" AutomationProperties.AutomationId="AssetContextShowInExplorer" />
-            <MenuItem Header="打开原文件位置 ›" IsEnabled="False" AutomationProperties.AutomationId="AssetContextOpenSourceLocation" />
+            <MenuItem Header="复制文件路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" />
             <Separator />
-            <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
-                <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
-            </MenuItem>
-            <MenuItem Header="加入与整理 ›" AutomationProperties.AutomationId="AssetContextOrganize">
+            <MenuItem Header="整理" AutomationProperties.AutomationId="AssetContextOrganize">
                 <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
                 <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFolder" />
                 <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
                 <MenuItem Header="移出当前标签" Command="{Binding Owner.RemoveContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveTag" />
-                <MenuItem Header="添加至文件夹…" IsEnabled="False" AutomationProperties.AutomationId="AssetContextChooseFolder" />
-                <MenuItem Header="设置评分 ›" AutomationProperties.AutomationId="AssetContextRating">
+                <MenuItem Header="设置评分" AutomationProperties.AutomationId="AssetContextRating">
                     <MenuItem Header="0 星" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
                     <MenuItem Header="1 星" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
                     <MenuItem Header="2 星" Command="{Binding Owner.RateContextTwoCommand}" CommandParameter="{Binding}" />
@@ -390,57 +37,20 @@
                     <MenuItem Header="4 星" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
                     <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
                 </MenuItem>
-                <MenuItem Header="添加至其他素材库…" IsEnabled="False" ToolTip="需要目标库写锁与迁移策略确认" AutomationProperties.AutomationId="AssetContextAddOtherLibrary" />
-            </MenuItem>
-            <MenuItem Header="素材编辑 ›" AutomationProperties.AutomationId="AssetContextEdit">
-                <MenuItem Header="裁切与校正" IsEnabled="False" ToolTip="当前没有非破坏编辑引擎" />
-                <MenuItem Header="向左旋转" IsEnabled="False" />
-                <MenuItem Header="向右旋转" IsEnabled="False" />
-                <MenuItem Header="水平翻转" IsEnabled="False" />
-                <MenuItem Header="垂直翻转" IsEnabled="False" />
-                <MenuItem Header="创建修整版本" IsEnabled="False" />
-                <MenuItem Header="用其他文件替换" IsEnabled="False" />
-                <MenuItem Header="恢复原始版本" IsEnabled="False" />
-            </MenuItem>
-            <MenuItem Header="工作流 ›" AutomationProperties.AutomationId="AssetContextWorkflow">
-                <MenuItem Header="加入待拍摄参考" IsEnabled="False" />
-                <MenuItem Header="加入归片任务" IsEnabled="False" />
-                <MenuItem Header="标记为已采用" IsEnabled="False" />
-                <MenuItem Header="关联拍摄项目" IsEnabled="False" />
-                <MenuItem Header="关联拍摄日期" IsEnabled="False" />
-            </MenuItem>
-            <MenuItem Header="导出 ›" AutomationProperties.AutomationId="AssetContextExport">
-                <MenuItem Header="导出原文件" IsEnabled="False" />
-                <MenuItem Header="导出副本" IsEnabled="False" />
-                <MenuItem Header="导出选中素材包" IsEnabled="False" />
-                <MenuItem Header="导出清单" IsEnabled="False" />
             </MenuItem>
             <Separator />
-            <MenuItem Header="重命名" IsEnabled="False" AutomationProperties.AutomationId="AssetContextRename" />
-            <MenuItem Header="创建副本" IsEnabled="False" AutomationProperties.AutomationId="AssetContextDuplicate" />
-            <MenuItem Header="复制 ›" AutomationProperties.AutomationId="AssetContextCopy">
-                <MenuItem Header="复制文件路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="复制文件名" IsEnabled="False" />
-                <MenuItem Header="复制像素蛋挞内部素材链接" IsEnabled="False" />
-                <MenuItem Header="复制标签" IsEnabled="False" />
-            </MenuItem>
-            <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
+            <MenuItem Header="视觉工具" AutomationProperties.AutomationId="AssetContextViewMode">
                 <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
                 <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarVisualContext" />
                 <MenuItem Header="分析视觉数据" Command="{Binding Owner.AnalyzeSelectionCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AnalyzeVisualContext" />
             </MenuItem>
-            <MenuItem Header="更多 ›" AutomationProperties.AutomationId="AssetContextMore">
-                <MenuItem Header="刷新缩略图" IsEnabled="False" />
-                <MenuItem Header="重新分析颜色" IsEnabled="False" />
-                <MenuItem Header="查看技术信息" IsEnabled="False" />
-            </MenuItem>
+            <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
             <Separator />
             <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
             <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
-            <MenuItem Header="丢到回收站" IsEnabled="False" ToolTip="回收站写入契约尚未启用" AutomationProperties.AutomationId="AssetContextRecycle" />
         </ContextMenu>
 
-        <Style x:Key="AssetP2ListBoxItem" TargetType="ListBoxItem">
+        <Style x:Key="AssetP2ListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource PixelTart.Thumbnail}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
@@ -451,77 +61,77 @@
         </Style>
 
         <DataTemplate x:Key="AssetGridCardTemplate">
-            <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="6" Padding="5" Margin="3">
-                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
-                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="240" Stretch="UniformToFill" />
-                        <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
+                    <Border Background="{DynamicResource Brush.Background}"><Grid>
+                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="240" Stretch="Uniform" />
+                        <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
-                            <TextBlock Text="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                            <TextBlock Text="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
-                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Right" VerticalAlignment="Top" CornerRadius="3"
+                        <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Right" VerticalAlignment="Top" CornerRadius="{DynamicResource RadiusSmall}"
                                 AutomationProperties.AutomationId="VisualMatchScores">
                             <Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding HasDetail}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style>
-                            <TextBlock Text="{Binding Detail}" Foreground="White" FontSize="10" ToolTip="{Binding Detail}" />
+                            <TextBlock Text="{Binding Detail}" Foreground="{DynamicResource Brush.Text.Primary}" FontSize="{DynamicResource Type.Caption.FontSize}" ToolTip="{Binding Detail}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="2,5,2,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{StaticResource AssetCaption}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="AssetMasonryCardTemplate">
-            <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="6" Padding="5" Margin="3">
-                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
-                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="280" Stretch="UniformToFill" />
-                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
+                    <Border Background="{DynamicResource Brush.Background}"><Grid>
+                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="280" Stretch="Uniform" />
+                        <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
-                            <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                            <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="2,5,2,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{StaticResource AssetCaption}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="AssetJustifiedCardTemplate">
-            <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="5" Padding="4" Margin="2">
-                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="42" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource ContentBackgroundBrush}"><Grid>
-                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
-                        <Border Background="#D9222529" Padding="5,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
+                    <Border Background="{DynamicResource Brush.Background}"><Grid>
+                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
+                        <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
-                            <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                            <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="2,4,2,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.MediaType}" Style="{StaticResource AssetCaption}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.MediaType}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="AssetListRowTemplate">
-            <Border Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1" Padding="5,3">
+            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
                 <Grid>
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="54" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
-                    <Border Width="46" Height="54" Background="{DynamicResource ContentBackgroundBrush}"><Grid>
-                        <Image x:Name="AssetListThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="96" Stretch="UniformToFill" />
-                        <TextBlock Text="缩略图失败" Foreground="White" Background="#D9222529" Padding="2" FontSize="9"
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="56" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
+                    <Border Width="46" Height="54" Background="{DynamicResource Brush.Background}"><Grid>
+                        <Image x:Name="AssetListThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="96" Stretch="Uniform" />
+                        <TextBlock Text="缩略图失败" Foreground="{DynamicResource Brush.Text.Primary}" Background="{DynamicResource Brush.Surface.Elevated}" Padding="2" FontSize="{DynamicResource Type.Caption.FontSize}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Visibility="{Binding ElementName=AssetListThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                    AutomationProperties.AutomationId="AssetThumbnailFailure" />
                     </Grid></Border>
-                    <TextBlock Grid.Column="1" Text="{Binding Asset.DisplayName}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="7,0" />
-                    <TextBlock Grid.Column="2" Text="{Binding Asset.MediaType}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                    <TextBlock Grid.Column="3" Text="{Binding DimensionsText}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                    <TextBlock Grid.Column="4" Text="{Binding CaptureTimeText}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                    <TextBlock Grid.Column="5" Text="{Binding AddedTimeText}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                    <TextBlock Grid.Column="6" Text="{Binding Asset.Rating, StringFormat=★ {0}}" VerticalAlignment="Center" Style="{StaticResource AssetCaption}" />
-                    <TextBlock Grid.Column="7" Text="{Binding TagSummary}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{StaticResource AssetCaption}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Asset.DisplayName}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="{DynamicResource SpacingHorizontal8}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Asset.MediaType}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="3" Text="{Binding DimensionsText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="4" Text="{Binding CaptureTimeText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="5" Text="{Binding AddedTimeText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="6" Text="{Binding Asset.Rating, StringFormat=★ {0}}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="7" Text="{Binding TagSummary}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{DynamicResource PixelTart.Type.Metadata}" />
                 </Grid>
             </Border>
         </DataTemplate>
@@ -540,9 +150,10 @@
                 </ContentControl.Style>
             </ContentControl>
         </DataTemplate>
+            </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource ContentBackgroundBrush}">
+    <Grid Background="{DynamicResource Brush.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1" />
@@ -550,51 +161,58 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="12,5,12,5">
+        <Grid Margin="{DynamicResource Space.Inset.3}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" MinWidth="240" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="AssetLibrarySearchBox" Grid.Row="0" Grid.Column="0" MinWidth="120" Margin="0,0,8,0"
+            <TextBox x:Name="AssetLibrarySearchBox" Grid.Row="0" Grid.Column="0" MinWidth="240" Margin="{DynamicResource Space.Inline.End.1}"
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      PreviewKeyDown="AssetLibrarySearchBox_PreviewKeyDown"
-                     ToolTip="搜索名称、标签、文件夹与备注"
+                     ToolTip="搜索名称、标签、文件夹与备注" AutomationProperties.Name="搜索素材"
                      AutomationProperties.AutomationId="AssetLibrarySearch"
                      VerticalAlignment="Center" />
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="{Binding OrganizationPaneToggleLabel}" Command="{Binding ToggleOrganizationPaneCommand}"
-                        Style="{StaticResource AssetLibrarySecondaryButton}"
-                        ToolTip="展开或收起左侧组织栏"
-                        AutomationProperties.AutomationId="ToggleAssetOrganizationPane"
-                        AutomationProperties.Name="{Binding OrganizationPaneToggleLabel}"
-                        Focusable="True" IsTabStop="True" />
-                <Button Content="{Binding InspectorPaneToggleLabel}" Command="{Binding ToggleInspectorPaneCommand}" Margin="4,0,0,0"
-                        Style="{StaticResource AssetLibrarySecondaryButton}"
-                        ToolTip="展开或收起右侧检查器"
-                        AutomationProperties.AutomationId="ToggleAssetInspectorPane"
-                        AutomationProperties.Name="{Binding InspectorPaneToggleLabel}"
-                        Focusable="True" IsTabStop="True" />
-                <Button Content="{Binding InspirationTrayCount, StringFormat={}♡ {0}}" Command="{Binding ToggleInspirationTrayCommand}" Margin="4,0,0,0"
-                        Style="{StaticResource AssetLibraryIconButton}" ToolTip="打开灵感托盘"
-                        AutomationProperties.AutomationId="InspirationTrayToggle" AutomationProperties.Name="灵感托盘" />
-            </StackPanel>
-            <Button Grid.Row="0" Grid.Column="2" Content="导入" Margin="6,0,0,0"
-                    Style="{StaticResource AssetLibraryPrimaryButton}"
+            <Button Grid.Row="0" Grid.Column="1" Content="筛选" Click="Filter_Click"
+                    Margin="{DynamicResource Space.Inline.Start.1}"
+                    Style="{DynamicResource PixelTart.Button.Ghost}"
+                    AutomationProperties.AutomationId="AssetLibraryFilter"
+                    AutomationProperties.Name="展开或收起筛选" />
+            <Button Grid.Row="0" Grid.Column="2" Content="排序" Click="SortMenu_Click"
+                    Margin="{DynamicResource Space.Inline.Start.1}"
+                    Style="{DynamicResource PixelTart.Button.Ghost}"
+                    ToolTip="选择排序字段和方向"
+                    AutomationProperties.AutomationId="AssetLibrarySortMenu"
+                    AutomationProperties.Name="选择素材排序" />
+            <Button Grid.Row="0" Grid.Column="3" Content="布局" Click="ViewMenu_Click"
+                    Margin="{DynamicResource Space.Inline.Start.1}"
+                    Style="{DynamicResource PixelTart.Button.Ghost}"
+                    ToolTip="网格、瀑布流、两端对齐或列表"
+                    AutomationProperties.AutomationId="AssetLibraryViewMenu"
+                    AutomationProperties.Name="选择素材布局" />
+            <Button Grid.Row="0" Grid.Column="4" Content="导入" Margin="{DynamicResource Space.Inline.Start.1}"
+                    Style="{DynamicResource PixelTart.Button.Primary}"
                     Command="{Binding ImportCommand}"
                     AutomationProperties.AutomationId="AssetLibraryImport" />
-            <Button Grid.Row="0" Grid.Column="3" Content="更多" Margin="4,0,0,0" Click="More_Click"
-                    Style="{StaticResource AssetLibrarySecondaryButton}"
+            <Button Grid.Row="0" Grid.Column="5" Content="更多" Margin="{DynamicResource Space.Inline.Start.1}" Click="More_Click"
+                    Style="{DynamicResource PixelTart.Button.Ghost}"
                     AutomationProperties.AutomationId="AssetLibraryMore"
-                    ToolTip="智能文件夹、标签、检查器固定等低频操作">
-                <Button.ContextMenu><ContextMenu><MenuItem Header="固定/取消固定检查器" IsEnabled="False" AutomationProperties.AutomationId="PinAssetInspectorPane" /></ContextMenu></Button.ContextMenu>
+                    ToolTip="组织栏、检查器、灵感托盘与整理工具">
+                <Button.ContextMenu><ContextMenu Style="{DynamicResource PixelTart.Menu.Context}" /></Button.ContextMenu>
             </Button>
-            <local:AssetQueryComposerView Grid.Row="1" Grid.ColumnSpan="4" Margin="0,4,0,0" />
+            <Border Grid.Row="1" Grid.ColumnSpan="6" Margin="{DynamicResource Space.Stack.1}"
+                    Style="{DynamicResource PixelTart.Surface.Panel}"
+                    Visibility="{Binding P3QueryPanelOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    AutomationProperties.AutomationId="AssetFilterPanel">
+                <local:AssetQueryComposerView />
+            </Border>
         </Grid>
 
         <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
@@ -602,31 +220,31 @@
                 <ColumnDefinition x:Name="AssetOrganizationColumn"
                                   Width="{Binding OrganizationPaneColumnWidth}"
                                   MinWidth="{Binding OrganizationPaneMinimumWidth}"
-                                  MaxWidth="{Binding OrganizationPaneMaximumWidth}" />
+                                  MaxWidth="240" />
                 <ColumnDefinition Width="{Binding OrganizationSplitterColumnWidth}" />
                 <ColumnDefinition x:Name="AssetCollectionColumn" Width="*" MinWidth="360" />
                 <ColumnDefinition Width="{Binding InspectorSplitterColumnWidth}" />
                 <ColumnDefinition x:Name="AssetInspectorColumn"
                                   Width="{Binding InspectorPaneColumnWidth}"
                                   MinWidth="{Binding InspectorPaneMinimumWidth}"
-                                  MaxWidth="{Binding InspectorPaneMaximumWidth}" />
+                                  MaxWidth="{DynamicResource Size.Inspector.MaxWidth}" />
             </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource AssetPanel}"
+            <Border Style="{DynamicResource PixelTart.Surface.Panel}"
                     IsEnabled="{Binding IsReady}"
                     Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                     BorderThickness="0,0,1,0"
                     AutomationProperties.AutomationId="AssetOrganizationPane">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
-                        <TextBlock Text="分类" Style="{StaticResource AssetSection}" />
-                        <ItemsControl ItemsSource="{Binding SystemCollections}" Margin="0,7,0,2"
+                        <TextBlock Text="分类" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                        <ItemsControl ItemsSource="{Binding SystemCollections}" Margin="0,8,0,4"
                                       AutomationProperties.AutomationId="AssetSystemCollections">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Button Content="{Binding Label}" Command="{Binding SelectCommand}"
                                             IsEnabled="{Binding IsEnabled}" HorizontalContentAlignment="Left"
-                                            Style="{StaticResource AssetLibrarySecondaryButton}"
+                                            Style="{DynamicResource PixelTart.Button.Ghost}"
                                             AutomationProperties.AutomationId="{Binding AutomationId}"
                                             AutomationProperties.Name="{Binding AccessibleName}"
                                             ToolTip="{Binding Description}"
@@ -641,27 +259,27 @@
                                   AutomationProperties.AutomationId="ModuleDiagnostics">
                             <ItemsControl ItemsSource="{Binding ModuleDiagnostics}">
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate><TextBlock Text="{Binding Text}" AutomationProperties.AutomationId="{Binding AutomationId}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,3" /></DataTemplate>
+                                    <DataTemplate><TextBlock Text="{Binding Text}" AutomationProperties.AutomationId="{Binding AutomationId}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1.Symmetric}" /></DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Expander>
                         <DockPanel>
-                            <TextBlock Text="文件夹" Style="{StaticResource AssetSection}" />
+                            <TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
                             <Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}"
-                                    Style="{StaticResource AssetLibraryIconButton}"
+                                    Style="{DynamicResource PixelTart.Button.Ghost}"
                                     ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
                         </DockPanel>
-                        <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="新文件夹名称" Margin="0,5,0,4" />
-                            <TextBlock Text="正在加载组织栏…" Style="{StaticResource AssetCaption}"
+                        <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="新文件夹名称" Margin="{DynamicResource Space.Stack.1}" />
+                            <TextBlock Text="正在加载组织栏…" Style="{DynamicResource PixelTart.Type.Metadata}"
                                        Visibility="{Binding IsOrganizationLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationLoadingState" />
                             <TextBlock Text="{Binding OrganizationError}" Foreground="{DynamicResource ErrorBrush}" TextWrapping="Wrap"
                                        Visibility="{Binding HasOrganizationError, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationErrorState" />
-                            <TextBlock Text="还没有文件夹、智能文件夹或标签。" Style="{StaticResource AssetCaption}" TextWrapping="Wrap"
+                            <TextBlock Text="还没有文件夹、智能文件夹或标签。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                        Visibility="{Binding IsOrganizationEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationEmptyState" />
-                            <TreeView ItemsSource="{Binding OrganizationFolders}"
+                            <TreeView BorderThickness="0" Background="Transparent" ItemsSource="{Binding OrganizationFolders}"
                                       AutomationProperties.AutomationId="AssetFolderTree" MaxHeight="260">
                                 <TreeView.Resources>
                                     <Style TargetType="TreeViewItem">
@@ -678,7 +296,7 @@
                                             <TextBlock x:Name="FolderNameText" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
                                             <TextBox x:Name="FolderNameEditor" Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
                                                      AutomationProperties.Name="重命名文件夹" />
-                                            <TextBlock Grid.Column="1" Text="{Binding CountText}" Style="{StaticResource AssetCaption}" Margin="6,0,2,0" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="1" Text="{Binding CountText}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,2,0" VerticalAlignment="Center" />
                                             <Grid.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <MenuItem Header="重命名" Command="{Binding BeginRenameCommand}" />
@@ -703,22 +321,22 @@
                                     </HierarchicalDataTemplate>
                                 </TreeView.Resources>
                             </TreeView>
-                            <TextBlock Text="智能文件夹" Style="{StaticResource AssetSection}" Margin="0,12,0,4" />
+                            <TextBlock Text="智能文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
                             <ItemsControl ItemsSource="{Binding OrganizationSmartFolders}" AutomationProperties.AutomationId="SmartFolders">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <DockPanel ToolTip="{Binding Description}">
-                                            <Button DockPanel.Dock="Right" Content="编辑" Command="{Binding EditCommand}" Padding="5,1" Margin="4,0,0,0"
-                                                    Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.Name="编辑智能文件夹条件" />
+                                            <Button DockPanel.Dock="Right" Content="编辑" Command="{Binding EditCommand}" Margin="{DynamicResource Space.Inline.Start.1}"
+                                                    Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.Name="编辑智能文件夹条件" />
                                             <Button Content="{Binding Name}" Command="{Binding SelectCommand}" HorizontalContentAlignment="Left"
-                                                    Style="{StaticResource AssetLibrarySecondaryButton}"
+                                                    Style="{DynamicResource PixelTart.Button.Ghost}"
                                                     AutomationProperties.AutomationId="{Binding AutomationId}"
                                                     AutomationProperties.Name="{Binding AccessibleName}" />
                                         </DockPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <TextBlock Text="标签分组" Style="{StaticResource AssetSection}" Margin="0,12,0,4" />
+                            <TextBlock Text="标签分组" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
                             <ItemsControl ItemsSource="{Binding OrganizationTagGroups}" AutomationProperties.AutomationId="AssetTags">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -729,11 +347,11 @@
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <Button Command="{Binding SelectCommand}" HorizontalContentAlignment="Left"
-                                                                Style="{StaticResource AssetLibrarySecondaryButton}"
+                                                                Style="{DynamicResource PixelTart.Button.Ghost}"
                                                                 AutomationProperties.AutomationId="{Binding AutomationId}"
                                                                 AutomationProperties.Name="{Binding AccessibleName}"
                                                                 local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}">
-                                                            <DockPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{StaticResource AssetCaption}" Margin="6,0,0,0" /></DockPanel>
+                                                            <DockPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,0,0" /></DockPanel>
                                                         </Button>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
@@ -746,7 +364,7 @@
                 </ScrollViewer>
             </Border>
 
-            <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <GridSplitter Grid.Column="1" Width="6" Background="{DynamicResource Brush.Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
                           DragCompleted="OnPaneSplitterDragCompleted"
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
@@ -755,7 +373,7 @@
                           AutomationProperties.Name="调整组织栏宽度"
                           Focusable="True" IsTabStop="True" />
 
-            <Border Grid.Column="2" Style="{StaticResource AssetPanel}" AutomationProperties.AutomationId="AssetCollectionPane">
+            <Border Grid.Column="2" Style="{DynamicResource PixelTart.Surface.Panel}" AutomationProperties.AutomationId="AssetCollectionPane">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -764,87 +382,29 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid Margin="0,0,0,8" IsEnabled="{Binding IsReady}">
-                        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="170" /></Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="176" /></Grid.ColumnDefinitions>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CurrentViewLabel, StringFormat={}素材{0}}" Style="{StaticResource AssetSection}" />
-                            <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{StaticResource AssetCaption}" Margin="8,2,0,0" />
+                            <TextBlock Text="{Binding CurrentViewLabel, StringFormat={}素材{0}}" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                            <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Inline.Start.1}" VerticalAlignment="Center" />
                         </StackPanel>
                         <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />
-                        <ScrollViewer x:Name="LegacyBrowserToolbar" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Disabled"
-                                      CanContentScroll="False"
-                                      PanningMode="HorizontalOnly"
-                                      AutomationProperties.AutomationId="AssetBrowserToolbar"
-                                      AutomationProperties.Name="素材浏览工具栏"
-                                      AutomationProperties.HelpText="使用键盘 Tab 键切换到右侧按钮，或水平滚动查看">
-                            <StackPanel Orientation="Horizontal">
-                                <Button Content="网格" Command="{Binding SwitchViewCommand}" CommandParameter="Grid" Style="{StaticResource AssetLibraryChipButton}"
-                                        AutomationProperties.AutomationId="AssetViewGrid" AutomationProperties.Name="切换到网格视图" />
-                                <Button Content="瀑布流" Command="{Binding SwitchViewCommand}" CommandParameter="Masonry" Style="{StaticResource AssetLibraryChipButton}"
-                                        AutomationProperties.AutomationId="AssetViewMasonry" AutomationProperties.Name="切换到瀑布流视图" />
-                                <Button Content="两端对齐" Command="{Binding SwitchViewCommand}" CommandParameter="Justified" Style="{StaticResource AssetLibraryChipButton}"
-                                        AutomationProperties.AutomationId="AssetViewJustified" AutomationProperties.Name="切换到两端对齐视图" />
-                                <Button Content="列表" Command="{Binding SwitchViewCommand}" CommandParameter="List" Style="{StaticResource AssetLibraryChipButton}"
-                                        AutomationProperties.AutomationId="AssetViewList" AutomationProperties.Name="切换到列表视图" />
-                                <Separator Width="10" Opacity="0" />
-                                <Button Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortAddedAt" />
-                                <Button Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortCaptureTime" />
-                                <Button Content="文件名" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileName" />
-                                <Button Content="文件大小" Command="{Binding SortBrowserCommand}" CommandParameter="FileSize" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortFileSize" />
-                                <Button Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortRating" />
-                                <Button Content="颜色" Command="{Binding SortBrowserCommand}" CommandParameter="Color" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortColor" />
-                                <Button Content="视觉分析" Command="{Binding SortBrowserCommand}" CommandParameter="VisualAnalysis" Style="{StaticResource AssetLibraryChipButton}" AutomationProperties.AutomationId="AssetSortVisualAnalysis" />
-                                <Button Content="{Binding SortDirectionLabel}" Command="{Binding ToggleSortDirectionCommand}" Style="{StaticResource AssetLibrarySecondaryButton}"
-                                        AutomationProperties.AutomationId="AssetSortDirection" AutomationProperties.Name="切换排序方向" />
-                                <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserUndo" />
-                                <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" AutomationProperties.AutomationId="AssetBrowserRedo" />
-                            </StackPanel>
-                        </ScrollViewer>
-                        <StackPanel x:Name="FocusedBrowserToolbar" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,4,0,0" Orientation="Horizontal">
-                            <Button Content="视图" Click="ViewMenu_Click" Style="{StaticResource AssetLibraryChipButton}"
-                                    ToolTip="网格、瀑布流、两端对齐或列表"
-                                    AutomationProperties.AutomationId="AssetLibraryViewMenu"
-                                    AutomationProperties.Name="选择素材视图" />
-                            <Button Content="排序" Click="SortMenu_Click" Style="{StaticResource AssetLibraryChipButton}"
-                                    ToolTip="选择排序字段和方向"
-                                    AutomationProperties.AutomationId="AssetLibrarySortMenu"
-                                    AutomationProperties.Name="选择素材排序" />
-                            <Button Content="撤销" Command="{Binding P2UndoCommand}" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetBrowserUndoFocused"
-                                    AutomationProperties.Name="撤销最近素材操作" />
-                            <Button Content="重做" Command="{Binding P2RedoCommand}" Style="{StaticResource AssetLibraryChipButton}"
-                                    AutomationProperties.AutomationId="AssetBrowserRedoFocused"
-                                    AutomationProperties.Name="重做最近素材操作" />
-                        </StackPanel>
                     </Grid>
 
                     <StackPanel Grid.Row="1" Margin="0,0,0,8" IsEnabled="{Binding IsReady}" AutomationProperties.AutomationId="VisualFilterChips">
-                        <WrapPanel x:Name="VisualPresetButtons">
-                            <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="主色绿" Command="{Binding VisualChipCommand}" CommandParameter="Green" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="低饱和" Command="{Binding VisualChipCommand}" CommandParameter="LowSaturation" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="低调" Command="{Binding VisualChipCommand}" CommandParameter="LowKey" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="高对比" Command="{Binding VisualChipCommand}" CommandParameter="HighContrast" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="暖色" Command="{Binding VisualChipCommand}" CommandParameter="Warm" Style="{StaticResource AssetLibraryChipButton}" />
-                            <Button Content="冷色" Command="{Binding VisualChipCommand}" CommandParameter="Cool" Style="{StaticResource AssetLibraryChipButton}" />
-                        </WrapPanel>
-                        <DockPanel Margin="0,5,0,0">
+                        <DockPanel>
                             <ItemsControl ItemsSource="{Binding ActiveVisualChips}" AutomationProperties.AutomationId="ActiveVisualFilterChips">
                                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Button Command="{Binding DataContext.RemoveVisualChipCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding Key}"
-                                                Style="{StaticResource AssetLibraryChipButton}"
-                                                Tag="Active"
-                                                Padding="7,3"
-                                                Margin="0,0,5,0"
+                                                 Style="{DynamicResource PixelTart.Button.Ghost}"
+                                                 Tag="Active"
+                                                 Padding="{DynamicResource Space.Control.Compact.Padding}"
+                                                 Margin="{DynamicResource Space.Inline.End.1}"
                                                 AutomationProperties.Name="{Binding Label, StringFormat={}移除筛选 {0}}">
                                             <TextBlock><Run Text="{Binding Label}" /><Run Text="  ×" /></TextBlock>
                                         </Button>
@@ -852,28 +412,28 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Button DockPanel.Dock="Right" Content="退出临时结果" Command="{Binding ClearVisualModeCommand}"
-                                    Style="{StaticResource AssetLibrarySecondaryButton}"
+                                    Style="{DynamicResource PixelTart.Button.Secondary}"
                                     Visibility="{Binding IsTemporaryVisualMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     AutomationProperties.AutomationId="ClearVisualResults" />
                         </DockPanel>
-                        <Border Margin="0,7,0,0" Padding="5,3" Background="{DynamicResource SurfaceSecondaryBrush}"
+                        <Border Margin="{DynamicResource Space.Stack.1}" Padding="{DynamicResource Space.Control.Compact.Padding}" Background="{DynamicResource Brush.Panel}"
                                 Visibility="{Binding IsListView, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetListColumnHeaders">
                             <Grid>
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="54" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="预览" Style="{StaticResource AssetCaption}" />
-                                <Button Grid.Column="1" Content="名称" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortName" />
-                                <TextBlock Grid.Column="2" Text="类型" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
-                                <TextBlock Grid.Column="3" Text="尺寸" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
-                                <Button Grid.Column="4" Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortCaptureTime" />
-                                <Button Grid.Column="5" Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortAddedAt" />
-                                <Button Grid.Column="6" Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{StaticResource AssetLibraryChipButton}" Height="30" MinHeight="0" Padding="7,1" AutomationProperties.AutomationId="AssetListSortRating" />
-                                <TextBlock Grid.Column="7" Text="标签" Style="{StaticResource AssetCaption}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="0" Text="预览" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <Button Grid.Column="1" Content="名称" Command="{Binding SortBrowserCommand}" CommandParameter="FileName" Style="{DynamicResource PixelTart.Button.Ghost}" Height="{DynamicResource Size.Control.Compact}" MinHeight="0" Padding="{DynamicResource Space.Control.Compact.Padding}" AutomationProperties.AutomationId="AssetListSortName" />
+                                <TextBlock Grid.Column="2" Text="类型" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="3" Text="尺寸" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
+                                <Button Grid.Column="4" Content="拍摄时间" Command="{Binding SortBrowserCommand}" CommandParameter="CaptureTime" Style="{DynamicResource PixelTart.Button.Ghost}" Height="{DynamicResource Size.Control.Compact}" MinHeight="0" Padding="{DynamicResource Space.Control.Compact.Padding}" AutomationProperties.AutomationId="AssetListSortCaptureTime" />
+                                <Button Grid.Column="5" Content="添加时间" Command="{Binding SortBrowserCommand}" CommandParameter="AddedAt" Style="{DynamicResource PixelTart.Button.Ghost}" Height="{DynamicResource Size.Control.Compact}" MinHeight="0" Padding="{DynamicResource Space.Control.Compact.Padding}" AutomationProperties.AutomationId="AssetListSortAddedAt" />
+                                <Button Grid.Column="6" Content="评分" Command="{Binding SortBrowserCommand}" CommandParameter="Rating" Style="{DynamicResource PixelTart.Button.Ghost}" Height="{DynamicResource Size.Control.Compact}" MinHeight="0" Padding="{DynamicResource Space.Control.Compact.Padding}" AutomationProperties.AutomationId="AssetListSortRating" />
+                                <TextBlock Grid.Column="7" Text="标签" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
                             </Grid>
                         </Border>
                     </StackPanel>
 
-                     <local:AssetLibrarySelectionListBox x:Name="AssetGrid" Grid.Row="2" ItemsSource="{Binding AssetCards}"
+                     <local:AssetLibrarySelectionListBox x:Name="AssetGrid" BorderThickness="0" Grid.Row="2" ItemsSource="{Binding AssetCards}"
                              IsEnabled="{Binding IsReady}"
                              Background="Transparent"
                              SelectionMode="Extended" SelectionChanged="AssetGrid_SelectionChanged"
@@ -895,17 +455,17 @@
                          </ListBox.ItemsPanel>
                       </local:AssetLibrarySelectionListBox>
 
-                      <Border Grid.Row="3" Margin="0,8,0,0" Padding="8,5"
-                              Background="{DynamicResource SurfaceSecondaryBrush}"
+                      <Border Grid.Row="3" Margin="0,8,0,0" Padding="{DynamicResource Space.Inset.2}"
+                              Background="{DynamicResource Brush.Panel}"
                               Visibility="{Binding IsLoadMoreVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                               AutomationProperties.AutomationId="AssetLoadMoreBar">
                           <DockPanel LastChildFill="True">
                               <Button DockPanel.Dock="Right" Content="加载更多" Command="{Binding LoadMoreCommand}"
                                       IsEnabled="{Binding CanLoadMore}"
-                                      Style="{StaticResource AssetLibrarySecondaryButton}"
+                                      Style="{DynamicResource PixelTart.Button.Secondary}"
                                       AutomationProperties.AutomationId="AssetLoadMoreButton"
                                       AutomationProperties.Name="加载更多素材" />
-                              <TextBlock Text="{Binding LoadMoreStatus}" Style="{StaticResource AssetCaption}"
+                              <TextBlock Text="{Binding LoadMoreStatus}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                          VerticalAlignment="Center" TextWrapping="Wrap"
                                          AutomationProperties.AutomationId="AssetLoadMoreStatus" />
                           </DockPanel>
@@ -915,49 +475,49 @@
                              IsHitTestVisible="False" ClipToBounds="True"
                              AutomationProperties.AutomationId="AssetSelectionMarqueeLayer">
                          <Border x:Name="AssetSelectionMarquee" Width="0" Height="0" Visibility="Collapsed"
-                                 Background="#2842CEAF" BorderBrush="{StaticResource AssetLibraryFocusRingBrush}"
+                                 Background="{DynamicResource Brush.Accent.Subtle}" BorderBrush="{DynamicResource Brush.Accent}"
                                  BorderThickness="1" AutomationProperties.AutomationId="AssetSelectionMarquee"
                                  AutomationProperties.Name="框选范围" />
                      </Canvas>
 
-                     <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource ContentBackgroundBrush}"
+                     <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource Brush.Background}"
                             Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryLoadingState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
                             <ProgressBar IsIndeterminate="True" Width="180" Height="5"
                                          AutomationProperties.AutomationId="AssetLibraryLoadingProgress" />
-                            <TextBlock Text="正在加载素材库…" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,0" />
-                            <TextBlock Text="正在读取本地索引与已保存的视觉分析，不会修改源文件。" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0" />
+                            <TextBlock Text="正在加载素材库…" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,14,0,0" />
+                            <TextBlock Text="正在读取本地索引与已保存的视觉分析，不会修改源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0" />
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="2" Panel.ZIndex="5" Background="{DynamicResource ContentBackgroundBrush}"
+                    <Border Grid.Row="2" Panel.ZIndex="5" Background="{DynamicResource Brush.Background}"
                             Visibility="{Binding HasLoadError, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryErrorState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
-                            <TextBlock Text="素材库暂时无法加载" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                            <TextBlock Text="{Binding LoadErrorMessage}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12"
+                            <TextBlock Text="素材库暂时无法加载" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding LoadErrorMessage}" Style="{DynamicResource PixelTart.Type.Metadata}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,8,0,12"
                                        AutomationProperties.AutomationId="AssetLibraryLoadErrorMessage" />
                             <Button Content="重试" Command="{Binding RetryLoadCommand}" HorizontalAlignment="Center"
-                                    Style="{StaticResource AssetLibraryPrimaryButton}"
+                                    Style="{DynamicResource PixelTart.Button.Primary}"
                                     AutomationProperties.AutomationId="RetryAssetLibraryLoad"
                                     AutomationProperties.Name="重试"
                                     Focusable="True" IsTabStop="True" />
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="2" Panel.ZIndex="3" Background="{DynamicResource ContentBackgroundBrush}"
+                    <Border Grid.Row="2" Panel.ZIndex="3" Background="{DynamicResource Brush.Background}"
                             Visibility="{Binding IsEmptyStateVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryEmptyState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
-                            <TextBlock Text="{Binding EmptyStateTitle}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"
+                            <TextBlock Text="{Binding EmptyStateTitle}" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" HorizontalAlignment="Center"
                                        AutomationProperties.AutomationId="AssetLibraryEmptyStateTitle" />
-                            <TextBlock Text="{Binding EmptyStateDescription}" Style="{StaticResource AssetCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,7,0,12" />
+                            <TextBlock Text="{Binding EmptyStateDescription}" Style="{DynamicResource PixelTart.Type.Metadata}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,8,0,12" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{StaticResource AssetLibraryPrimaryButton}"
+                                <Button Content="导入引用" Command="{Binding ImportCommand}" Style="{DynamicResource PixelTart.Button.Secondary}"
                                         AutomationProperties.AutomationId="ImportFromEmptyAssetLibrary" />
-                                <Button Content="清除条件" Click="ClearFilters_Click" Margin="7,0,0,0"
-                                        Style="{StaticResource AssetLibrarySecondaryButton}"
+                                <Button Content="清除条件" Click="ClearFilters_Click" Margin="{DynamicResource Space.Inline.Start.1}"
+                                        Style="{DynamicResource PixelTart.Button.Secondary}"
                                         Visibility="{Binding HasActiveQuery, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </StackPanel>
                         </StackPanel>
@@ -965,7 +525,7 @@
                 </Grid>
             </Border>
 
-            <GridSplitter Grid.Column="3" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <GridSplitter Grid.Column="3" Width="6" Background="{DynamicResource Brush.Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
                           DragCompleted="OnPaneSplitterDragCompleted"
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
@@ -974,248 +534,80 @@
                           AutomationProperties.Name="调整检查器宽度"
                           Focusable="True" IsTabStop="True" />
 
-            <Border Grid.Column="4" Style="{StaticResource AssetPanel}"
+            <Border Grid.Column="4" Style="{DynamicResource PixelTart.Surface.Inspector}"
                     Visibility="{Binding IsInspectorPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    BorderThickness="1,0,0,0"
                     AutomationProperties.AutomationId="AssetInspectorPane">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" AutomationProperties.AutomationId="AssetInspectorScroll">
                     <StackPanel>
                         <DockPanel>
-                            <TextBlock Text="检查器" Style="{StaticResource AssetSection}" />
-                            <TextBlock Text="{Binding SelectionCount, StringFormat={}{0} 项}" Style="{StaticResource AssetCaption}" HorizontalAlignment="Right" />
+                            <TextBlock Text="检查器" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                            <TextBlock Text="{Binding SelectionCount, StringFormat={}{0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Right" />
                         </DockPanel>
-                        <Border Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="6" Padding="12" Margin="0,8,0,2"
-                                Visibility="{Binding IsQueryInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                AutomationProperties.AutomationId="AssetInspectorEmptyState">
-                            <StackPanel AutomationProperties.AutomationId="AssetInspectorQueryState">
-                                <TextBlock Text="当前查询" FontWeight="SemiBold" />
-                                <TextBlock Text="{Binding P2QuerySummary}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,4,0,0"
-                                           AutomationProperties.AutomationId="AssetInspectorQuerySummary" />
-                                <TextBlock Text="选择一项查看安全元数据；多选会显示共同信息。" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,4,0,0" />
-                            </StackPanel>
-                        </Border>
+                        <Border x:Name="AssetInspectorEmptyState" Visibility="Collapsed" AutomationProperties.AutomationId="AssetInspectorEmptyState" />
                         <StackPanel Visibility="{Binding IsSingleInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     AutomationProperties.AutomationId="AssetInspectorSingleState">
-                        <Border Height="150" Background="{DynamicResource ContentBackgroundBrush}" Margin="0,8">
+                        <Border Height="200" Background="{DynamicResource Brush.Background}" Margin="{DynamicResource SpacingVertical8}">
                             <Grid>
                                 <Image x:Name="SelectedAssetThumbnail" local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
-                                <Border Background="#D9222529" Padding="6,3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Visibility="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                         AutomationProperties.AutomationId="SelectedAssetThumbnailFailure">
-                                    <TextBlock Text="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="White" Style="{StaticResource AssetCaption}" />
+                                    <TextBlock Text="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                                 </Border>
                             </Grid>
                         </Border>
-                        <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{StaticResource AssetCaption}" />
-                        <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{StaticResource AssetCaption}" TextTrimming="CharacterEllipsis"
+                        <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="项目：暂未建立关联" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Stack.1}" />
+                        <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
+                        <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
+                                   AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
+                        <Expander Header="拍摄信息" IsExpanded="False" Margin="{DynamicResource SpacingVertical12}">
+                            <StackPanel><TextBlock Text="{Binding SelectedAsset.CaptureTime, TargetNullValue=未记录, StringFormat=拍摄时间：{0:yyyy-MM-dd HH:mm}}" Style="{DynamicResource PixelTart.Type.Metadata}"
+                                   AutomationProperties.AutomationId="AssetInspectorCaptureTime" AutomationProperties.Name="拍摄时间" /></StackPanel>
+                        </Expander>
+                        <Expander Header="技术信息" IsExpanded="False" Margin="{DynamicResource Space.Stack.1}">
+                            <StackPanel>
+                        <TextBlock Text="{Binding SingleFolderSummary, StringFormat=所属文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="AssetInspectorFolders" AutomationProperties.Name="所属文件夹" />
+                        <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis"
                                    AutomationProperties.AutomationId="AssetInspectorSourcePath" AutomationProperties.Name="素材路径" />
-                        <TextBlock Text="{Binding SelectedAsset.FileSize, StringFormat=文件大小：{0:N0} 字节}" Style="{StaticResource AssetCaption}"
+                        <TextBlock Text="{Binding SelectedAsset.FileSize, StringFormat=文件大小：{0:N0} 字节}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorFileSize" AutomationProperties.Name="文件大小" />
-                        <TextBlock Style="{StaticResource AssetCaption}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
+                        <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
                             <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
                         </TextBlock>
-                        <TextBlock Text="{Binding SelectedAsset.CaptureTime, TargetNullValue=未记录, StringFormat=拍摄时间：{0:yyyy-MM-dd HH:mm}}" Style="{StaticResource AssetCaption}"
-                                   AutomationProperties.AutomationId="AssetInspectorCaptureTime" AutomationProperties.Name="拍摄时间" />
-                        <TextBlock Text="{Binding SelectedAsset.AddedAt, StringFormat=添加时间：{0:yyyy-MM-dd HH:mm}}" Style="{StaticResource AssetCaption}"
+
+                        <TextBlock Text="{Binding SelectedAsset.AddedAt, StringFormat=添加时间：{0:yyyy-MM-dd HH:mm}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorAddedTime" AutomationProperties.Name="添加时间" />
-                        <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{StaticResource AssetCaption}"
-                                   AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
-                        <TextBlock Text="{Binding SelectedAsset.IsMissing, StringFormat=文件缺失：{0}}" Style="{StaticResource AssetCaption}"
+
+                        <TextBlock Text="{Binding SelectedAsset.IsMissing, StringFormat=文件缺失：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorMissingState" AutomationProperties.Name="文件缺失状态" />
-                        <TextBlock Text="{Binding SingleFolderSummary, StringFormat=所属文件夹：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap"
-                                   AutomationProperties.AutomationId="AssetInspectorFolders" AutomationProperties.Name="所属文件夹" />
-                        <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap"
-                                   AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
-                        <TextBlock Text="{Binding FeatureStatus}" Style="{StaticResource AssetCaption}" AutomationProperties.AutomationId="VisualFeatureStatus" />
-                        <WrapPanel Margin="0,6,0,0">
-                            <Button Content="重新分析" Command="{Binding AnalyzeSelectionCommand}"
-                                    Style="{StaticResource AssetLibrarySecondaryButton}"
-                                    AutomationProperties.AutomationId="ReanalyzeSelected" />
-                            <Button Content="视觉相似" Command="{Binding FindSimilarCommand}"
-                                    Style="{StaticResource AssetLibrarySecondaryButton}"
-                                    AutomationProperties.AutomationId="FindSimilarAssets" />
-                        </WrapPanel>
-
-                        </StackPanel>
-
-                        <Expander Margin="0,10,0,0" IsExpanded="True" HorizontalContentAlignment="Stretch"
-                                  AutomationProperties.AutomationId="VisualSmartFolderBuilder">
-                            <Expander.Header>
-                                <DockPanel LastChildFill="True">
-                                    <Button DockPanel.Dock="Right" Content="保存" Command="{Binding SaveSmartFolderCommand}"
-                                            Focusable="True" IsTabStop="True" Margin="8,0,0,0"
-                                            Style="{StaticResource AssetLibrarySecondaryButton}"
-                                            AutomationProperties.Name="保存智能文件夹"
-                                            AutomationProperties.AutomationId="SaveVisualSmartFolder" />
-                                    <TextBlock Text="Smart Folder Builder" VerticalAlignment="Center" />
-                                </DockPanel>
-                            </Expander.Header>
-                            <StackPanel Margin="6">
-                                <TextBox Text="{Binding SmartFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="智能文件夹名称"
-                                         AutomationProperties.AutomationId="SmartFolderName" AutomationProperties.Name="智能文件夹名称" />
-                                <TextBlock Text="{Binding SmartFolderEditorStatus}" Style="{StaticResource AssetCaption}" Margin="0,3,0,0"
-                                           AutomationProperties.AutomationId="SmartFolderEditorStatus" />
-                                <Border Margin="0,5,0,0" Padding="5" Background="{DynamicResource SurfaceSecondaryBrush}"
-                                        AutomationProperties.AutomationId="SmartFolderBasicFields">
-                                    <StackPanel>
-                                        <TextBlock Text="基础条件" FontWeight="SemiBold" />
-                                        <Grid Margin="0,4,0,0">
-                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="文件名包含" Style="{StaticResource AssetCaption}" />
-                                                <TextBox Text="{Binding SmartFileNameValue, UpdateSourceTrigger=PropertyChanged}"
-                                                         AutomationProperties.AutomationId="SmartFolderFileName" AutomationProperties.Name="文件名条件" />
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2">
-                                                <TextBlock Text="扩展名" Style="{StaticResource AssetCaption}" />
-                                                <TextBox Text="{Binding SmartExtensionValue, UpdateSourceTrigger=PropertyChanged}"
-                                                         AutomationProperties.AutomationId="SmartFolderExtension" AutomationProperties.Name="扩展名条件" />
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Margin="0,4,0,0">
-                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="媒体类型" Style="{StaticResource AssetCaption}" />
-                                                <TextBox Text="{Binding SmartMediaTypeValue, UpdateSourceTrigger=PropertyChanged}"
-                                                         AutomationProperties.AutomationId="SmartFolderMediaType" AutomationProperties.Name="媒体类型条件" />
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2">
-                                                <TextBlock Text="所属文件夹" Style="{StaticResource AssetCaption}" />
-                                                <TextBox Text="{Binding SmartFolderValue, UpdateSourceTrigger=PropertyChanged}"
-                                                         AutomationProperties.AutomationId="SmartFolderFolder" AutomationProperties.Name="文件夹条件" />
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Margin="0,4,0,0">
-                                            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="文件缺失" Style="{StaticResource AssetCaption}" />
-                                                <ComboBox ItemsSource="{Binding SmartMissingOptions}" SelectedItem="{Binding SmartMissingValue, UpdateSourceTrigger=PropertyChanged}"
-                                                          AutomationProperties.AutomationId="SmartFolderMissing" AutomationProperties.Name="文件缺失条件" />
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2">
-                                                <TextBlock Text="添加时间起点" Style="{StaticResource AssetCaption}" />
-                                                <TextBox Text="{Binding SmartAddedAtFrom, UpdateSourceTrigger=PropertyChanged}" ToolTip="yyyy-MM-dd"
-                                                         AutomationProperties.AutomationId="SmartFolderAddedFrom" AutomationProperties.Name="添加时间起点" />
-                                            </StackPanel>
-                                        </Grid>
-                                        <StackPanel Margin="0,4,0,0">
-                                            <TextBlock Text="添加时间终点" Style="{StaticResource AssetCaption}" />
-                                            <TextBox Text="{Binding SmartAddedAtTo, UpdateSourceTrigger=PropertyChanged}" ToolTip="yyyy-MM-dd"
-                                                     AutomationProperties.AutomationId="SmartFolderAddedTo" AutomationProperties.Name="添加时间终点" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Grid Margin="0,4,0,0">
-                                    <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="标签" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartTagValue, UpdateSourceTrigger=PropertyChanged}"
-                                             AutomationProperties.AutomationId="SmartFolderTag" AutomationProperties.Name="标签条件" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="影调" Style="{StaticResource AssetCaption}" /><ComboBox Text="{Binding SmartToneKey, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"
-                                              AutomationProperties.AutomationId="SmartFolderVisualTone" AutomationProperties.Name="影调条件"><ComboBoxItem Content="Low" /><ComboBoxItem Content="Mid" /><ComboBoxItem Content="High" /></ComboBox></StackPanel>
-                                </Grid>
-                                <Grid Margin="0,4,0,0">
-                                    <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="平均饱和度 ≤" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartAverageSaturationMaximum, UpdateSourceTrigger=PropertyChanged}"
-                                             AutomationProperties.AutomationId="SmartFolderAverageSaturation" AutomationProperties.Name="平均饱和度条件" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="主色 Hue 范围" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartDominantHueRange, UpdateSourceTrigger=PropertyChanged}"
-                                             AutomationProperties.AutomationId="SmartFolderDominantHue" AutomationProperties.Name="主色 Hue 条件" /></StackPanel>
-                                </Grid>
-                                <Grid Margin="0,4,0,0">
-                                    <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="8" /><ColumnDefinition /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="评分 ≥" Style="{StaticResource AssetCaption}" /><TextBox Text="{Binding SmartRuleValue, UpdateSourceTrigger=PropertyChanged}"
-                                             AutomationProperties.AutomationId="SmartFolderRating" AutomationProperties.Name="评分条件" /></StackPanel>
-                                    <StackPanel Grid.Column="2"><TextBlock Text="视觉状态" Style="{StaticResource AssetCaption}" /><ComboBox ItemsSource="{Binding SmartAnalysisStatusOptions}" SelectedItem="{Binding SmartAnalysisStatus, UpdateSourceTrigger=PropertyChanged}"
-                                              AutomationProperties.AutomationId="SmartFolderVisualAnalysisStatus" AutomationProperties.Name="视觉分析状态条件" /></StackPanel>
-                                </Grid>
-                                <TextBlock Text="{Binding SmartBuilderExplanation}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,5" />
                             </StackPanel>
                         </Expander>
-
-                        <StackPanel Visibility="{Binding IsSingleInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    AutomationProperties.AutomationId="AssetInspectorSingleVisualState">
-                        <TabControl Margin="0,9,0,0" AutomationProperties.AutomationId="VisualAnalysisTabs">
-                            <TabItem Header="配色" Style="{StaticResource AssetLibraryVisualTabItem}"
-                                     AutomationProperties.AutomationId="VisualPaletteTab">
-                                <StackPanel Margin="7" AutomationProperties.AutomationId="VisualPalettePanel">
-                                    <ItemsControl ItemsSource="{Binding Analysis.Palette}">
-                                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Width="48" Margin="2">
-                                                    <Button Command="{Binding DataContext.SearchPaletteColorCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                            CommandParameter="{Binding Hex}" Padding="0" ToolTip="查找相近颜色"
-                                                            Style="{StaticResource AssetLibraryPaletteSwatchButton}"
-                                                            AutomationProperties.Name="{Binding Hex, StringFormat={}查找相近颜色 {0}}"
-                                                            HorizontalContentAlignment="Stretch">
-                                                        <Border Height="34" Background="{Binding Hex, Converter={StaticResource HexToBrushConverter}}" CornerRadius="3" />
-                                                    </Button>
-                                                    <TextBlock Text="{Binding Weight, StringFormat={}{0:P0}}" Style="{StaticResource AssetCaption}" HorizontalAlignment="Center" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                    <Button Content="查找相似配色" Command="{Binding FindPaletteSimilarCommand}" Margin="0,5,0,0"
-                                            Style="{StaticResource AssetLibrarySecondaryButton}"
-                                            AutomationProperties.AutomationId="FindSimilarPalette" />
-                                    <TextBlock Text="{Binding Analysis.AverageSaturation, StringFormat=平均饱和度：{0:P0}}" Style="{StaticResource AssetCaption}" />
-                                    <TextBlock Text="{Binding Analysis.WarmCool, StringFormat=冷暖倾向：{0}}" Style="{StaticResource AssetCaption}" />
-                                </StackPanel>
-                            </TabItem>
-                            <TabItem Header="直方图" Style="{StaticResource AssetLibraryVisualTabItem}"
-                                     AutomationProperties.AutomationId="VisualHistogramTab">
-                                <StackPanel Margin="7" AutomationProperties.AutomationId="VisualHistogramPanel">
-                                    <local:HistogramDrawing Analysis="{Binding Analysis}" Height="100" />
-                                    <TextBlock Text="{Binding Analysis.BlackClipRatio, StringFormat=暗部剪切：{0:P2}}" />
-                                    <TextBlock Text="{Binding Analysis.WhiteClipRatio, StringFormat=高光剪切：{0:P2}}" />
-                                </StackPanel>
-                            </TabItem>
-                            <TabItem Header="影调" Style="{StaticResource AssetLibraryVisualTabItem}"
-                                     AutomationProperties.AutomationId="VisualToneTab">
-                                <StackPanel Margin="7" AutomationProperties.AutomationId="VisualTonePanel">
-                                    <TextBlock Text="{Binding Analysis.ToneKey, StringFormat=影调：{0}}" />
-                                    <TextBlock Text="{Binding Analysis.Contrast, StringFormat=对比：{0}}" />
-                                    <TextBlock Text="{Binding Analysis.LuminanceSpan, StringFormat=亮度跨度：{0}}" />
-                                    <TextBlock Text="{Binding Analysis.ToneZones.DeepShadow, StringFormat=深暗部 {0:P0}}" />
-                                    <TextBlock Text="{Binding Analysis.ToneZones.Midtone, StringFormat=中间调 {0:P0}}" />
-                                    <TextBlock Text="{Binding Analysis.ToneZones.Specular, StringFormat=极亮部 {0:P0}}" />
-                                </StackPanel>
-                            </TabItem>
-                        </TabControl>
-
-                        <Expander Header="视觉筛选与颜色检索" Margin="0,10,0,0" IsExpanded="True">
-                            <StackPanel Margin="6">
-                                <DockPanel>
-                                    <TextBox Text="{Binding TargetColor}" Width="92" />
-                                    <Slider Minimum="1" Maximum="100" Value="{Binding ColorTolerance}" Width="105" Margin="6,0" />
-                                    <Button Content="查颜色" Command="{Binding SearchColorCommand}"
-                                            Style="{StaticResource AssetLibrarySecondaryButton}"
-                                            AutomationProperties.AutomationId="SearchByColor" />
-                                </DockPanel>
-                                <TextBlock Text="{Binding VisualModeLabel, StringFormat=当前：{0}}" Style="{StaticResource AssetCaption}" Margin="0,5,0,0" />
-                            </StackPanel>
-                        </Expander>
-
-                        <Separator Margin="0,10" />
-                        <TextBlock Text="批量视觉分析（进入全局任务中心）" Style="{StaticResource AssetSection}" />
-                        <DockPanel Margin="0,4,0,0">
-                            <ComboBox ItemsSource="{Binding BatchScopeOptions}" SelectedItem="{Binding BatchScope}" Width="105" AutomationProperties.AutomationId="VisualBatchScope" />
-                            <Button Content="开始" Command="{Binding AnalyzeVisibleCommand}" Margin="6,0,0,0"
-                                    Style="{StaticResource AssetLibraryPrimaryButton}"
-                                    AutomationProperties.AutomationId="AnalyzeVisibleAssets" />
-                            <Button Content="取消" Command="{Binding CancelBatchCommand}" Margin="4,0,0,0"
-                                    Style="{StaticResource AssetLibrarySecondaryButton}" />
-                        </DockPanel>
-                        <TextBlock Text="{Binding BatchStatus}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" AutomationProperties.AutomationId="VisualBatchStatus" />
                         </StackPanel>
-                        <Border Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="6" Padding="12" Margin="0,8,0,2"
+                        <Expander AutomationProperties.AutomationId="VisualSmartFolderBuilder"
+                                  Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  IsExpanded="{Binding P3SmartFolderOpen, Mode=OneWay}"
+                                  HorizontalContentAlignment="Stretch" Header="智能文件夹">
+                            <DockPanel>
+                                <Button DockPanel.Dock="Right" Content="保存" Command="{Binding SaveSmartFolderCommand}"
+                                        Style="{DynamicResource PixelTart.Button.Secondary}"
+                                        AutomationProperties.AutomationId="SaveVisualSmartFolder"
+                                        AutomationProperties.Name="保存智能文件夹" Focusable="True" IsTabStop="True" />
+                                <TextBlock Text="在“更多”中打开智能文件夹编辑器。" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                            </DockPanel>
+                        </Expander>
+                        <Border Style="{DynamicResource PixelTart.Surface.Border}" Padding="{DynamicResource Space.Inset.3}" Margin="{DynamicResource SpacingVertical8}"
                                 Visibility="{Binding IsMultipleInspectorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetInspectorMultipleState">
                             <StackPanel>
-                                <TextBlock Text="{Binding SelectionCount, StringFormat={}已选择 {0} 项}" FontSize="16" FontWeight="SemiBold" />
-                                <TextBlock Text="{Binding MultipleFolderSummary, StringFormat={}共同文件夹：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,6,0,0" />
-                                <TextBlock Text="{Binding MultipleTagSummary, StringFormat={}共同标签：{0}}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,3,0,0" />
-                                <TextBlock Text="{Binding MultipleRatingSummary}" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,3,0,0" />
-                                <TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{StaticResource AssetCaption}" TextWrapping="Wrap" Margin="0,8,0,0" />
+                                <TextBlock Text="{Binding SelectionCount, StringFormat={}已选择 {0} 项}" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                                <TextBlock Text="{Binding MultipleFolderSummary, StringFormat={}共同文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
+                                <TextBlock Text="{Binding MultipleTagSummary, StringFormat={}共同标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
+                                <TextBlock Text="{Binding MultipleRatingSummary}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
+                                <TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -1225,39 +617,39 @@
 
         <Border Grid.Row="2" Panel.ZIndex="30" Width="820" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 MaxHeight="520" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
-                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
-                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Padding="{DynamicResource Space.Inset.3}" Background="{DynamicResource Brush.Surface.Elevated}"
+                Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:AssetSmartFolderEditorView />
         </Border>
         <Border Grid.Row="2" Panel.ZIndex="29" Width="900" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 MaxHeight="620" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
-                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
-                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Padding="{DynamicResource Space.Inset.3}" Background="{DynamicResource Brush.Surface.Elevated}"
+                Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding P3TagManagerOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:AssetTagManagerView />
         </Border>
 
         <Border Grid.Row="2" Panel.ZIndex="28" Width="760" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 MaxHeight="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12"
-                Padding="10" CornerRadius="8" Background="{DynamicResource ContentBackgroundBrush}"
-                BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1"
+                Padding="{DynamicResource Space.Inset.3}" Background="{DynamicResource Brush.Surface.Elevated}"
+                Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding IsInspirationTrayOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
                 AutomationProperties.AutomationId="InspirationTrayDrawer">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
-                    <TextBlock Text="灵感托盘" FontSize="15" FontWeight="SemiBold" />
-                    <TextBlock Text="{Binding InspirationTrayCount, StringFormat={} · {0} 项}" Style="{StaticResource AssetCaption}" Margin="6,2,0,0" />
-                    <Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" Margin="12,0,0,0" AutomationProperties.AutomationId="InspirationTrayClear" />
-                    <Button DockPanel.Dock="Right" Content="收起" Command="{Binding ToggleInspirationTrayCommand}" Style="{StaticResource AssetLibrarySecondaryButton}" Margin="4,0,0,0" AutomationProperties.AutomationId="InspirationTrayClose" />
+                    <TextBlock Text="灵感托盘" FontSize="{DynamicResource Type.Body.FontSize}" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding InspirationTrayCount, StringFormat={} · {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,2,0,0" />
+                    <Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" AutomationProperties.AutomationId="InspirationTrayClear" />
+                    <Button DockPanel.Dock="Right" Content="收起" Command="{Binding ToggleInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0,0,0" AutomationProperties.AutomationId="InspirationTrayClose" />
                 </StackPanel>
                 <ListBox ItemsSource="{Binding InspirationTrayEntries}" DisplayMemberPath="Reference.AssetId" MaxHeight="190" AutomationProperties.AutomationId="InspirationTrayItems" />
             </DockPanel>
         </Border>
 
         <DockPanel Grid.Row="3" Margin="0,8,0,0">
-            <TextBlock Text="F 聚焦分类 · Shift+D 重复分类 · T 标签 · 0–5 评分" Style="{StaticResource AssetCaption}" />
-            <TextBlock Text="{Binding Status}" Style="{StaticResource AssetCaption}" HorizontalAlignment="Right" />
+            <TextBlock Text="F 聚焦分类 · Shift+D 重复分类 · T 标签 · 0–5 评分" Style="{DynamicResource PixelTart.Type.Metadata}" />
+            <TextBlock Text="{Binding Status}" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Right" />
         </DockPanel>
     </Grid>
 </UserControl>

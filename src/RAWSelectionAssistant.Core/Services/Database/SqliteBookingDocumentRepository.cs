@@ -150,11 +150,25 @@ public sealed class SqliteBookingDocumentRepository(IPixelTartDatabase database)
 
     private static BookingDocumentRecord Read(SqliteDataReader reader) => new()
     {
-        Id = Guid.Parse(reader.GetString(0)), BookingId = Guid.Parse(reader.GetString(1)), ProjectId = GuidOrNull(reader, 2),
-        DocumentType = EnumValue(reader.GetString(3), BookingDocumentType.Other), DisplayName = reader.GetString(4), FilePath = reader.GetString(5), NormalizedPath = reader.GetString(6),
-        FileExtension = reader.GetString(7), FileSize = LongOrNull(reader, 8), LastKnownModifiedAtUtc = DateOrNull(reader, 9), OptionalHash = TextOrNull(reader, 10),
-        LinkMode = EnumValue(reader.GetString(11), BookingDocumentLinkMode.Reference), ImportTaskId = GuidOrNull(reader, 12), AddedAtUtc = ParseUtc(reader.GetString(13)),
-        UpdatedAtUtc = ParseUtc(reader.GetString(14)), LastVerifiedAtUtc = DateOrNull(reader, 15), IsMissing = reader.GetInt32(16) != 0, MissingSinceAtUtc = DateOrNull(reader, 17), Notes = TextOrNull(reader, 18)
+        Id = Guid.Parse(reader.GetString(0)),
+        BookingId = Guid.Parse(reader.GetString(1)),
+        ProjectId = GuidOrNull(reader, 2),
+        DocumentType = EnumValue(reader.GetString(3), BookingDocumentType.Other),
+        DisplayName = reader.GetString(4),
+        FilePath = reader.GetString(5),
+        NormalizedPath = reader.GetString(6),
+        FileExtension = reader.GetString(7),
+        FileSize = LongOrNull(reader, 8),
+        LastKnownModifiedAtUtc = DateOrNull(reader, 9),
+        OptionalHash = TextOrNull(reader, 10),
+        LinkMode = EnumValue(reader.GetString(11), BookingDocumentLinkMode.Reference),
+        ImportTaskId = GuidOrNull(reader, 12),
+        AddedAtUtc = ParseUtc(reader.GetString(13)),
+        UpdatedAtUtc = ParseUtc(reader.GetString(14)),
+        LastVerifiedAtUtc = DateOrNull(reader, 15),
+        IsMissing = reader.GetInt32(16) != 0,
+        MissingSinceAtUtc = DateOrNull(reader, 17),
+        Notes = TextOrNull(reader, 18)
     };
 
     private const string Select = "SELECT Id,BookingId,ProjectId,DocumentType,DisplayName,FilePath,NormalizedPath,FileExtension,FileSize,LastKnownModifiedAtUtc,OptionalHash,LinkMode,ImportTaskId,AddedAtUtc,UpdatedAtUtc,LastVerifiedAtUtc,IsMissing,MissingSinceAtUtc,Notes FROM BookingDocuments";

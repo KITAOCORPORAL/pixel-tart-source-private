@@ -376,13 +376,34 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
 
     private static ShootBooking ReadBooking(SqliteDataReader reader) => new()
     {
-        Id = Guid.Parse(reader.GetString(0)), ProjectId = GuidOrNull(reader, 1), Title = reader.GetString(2), ClientDisplayName = reader.GetString(3),
-        StartAtUtc = ParseUtc(reader.GetString(4)), EndAtUtc = ParseUtc(reader.GetString(5)), TimeZoneId = reader.GetString(6), IsAllDay = reader.GetInt32(7) != 0,
-        Status = EnumValue(reader.GetString(8), ShootBookingStatus.Tentative), Location = TextOrNull(reader, 9), ShootingType = reader.GetString(10),
-        ShotCompletedAtUtc = DateOrNull(reader, 11), ShootingRequirements = TextOrNull(reader, 12), PreparationNotes = TextOrNull(reader, 13), TotalAmountMinor = LongOrNull(reader, 14), DepositAmountMinor = LongOrNull(reader, 15),
-        PaidAmountMinor = LongOrNull(reader, 16), CurrencyCode = reader.GetString(17), CurrencyScale = reader.GetInt32(18), ContactName = TextOrNull(reader, 19), ContactPhone = TextOrNull(reader, 20),
-        AllowOverlap = reader.GetInt32(21) != 0, ConflictOverride = reader.GetInt32(22) != 0, Notes = TextOrNull(reader, 23), CreatedAtUtc = ParseUtc(reader.GetString(24)),
-        UpdatedAtUtc = ParseUtc(reader.GetString(25)), IsArchived = reader.GetInt32(26) != 0, ArchivedAtUtc = DateOrNull(reader, 27)
+        Id = Guid.Parse(reader.GetString(0)),
+        ProjectId = GuidOrNull(reader, 1),
+        Title = reader.GetString(2),
+        ClientDisplayName = reader.GetString(3),
+        StartAtUtc = ParseUtc(reader.GetString(4)),
+        EndAtUtc = ParseUtc(reader.GetString(5)),
+        TimeZoneId = reader.GetString(6),
+        IsAllDay = reader.GetInt32(7) != 0,
+        Status = EnumValue(reader.GetString(8), ShootBookingStatus.Tentative),
+        Location = TextOrNull(reader, 9),
+        ShootingType = reader.GetString(10),
+        ShotCompletedAtUtc = DateOrNull(reader, 11),
+        ShootingRequirements = TextOrNull(reader, 12),
+        PreparationNotes = TextOrNull(reader, 13),
+        TotalAmountMinor = LongOrNull(reader, 14),
+        DepositAmountMinor = LongOrNull(reader, 15),
+        PaidAmountMinor = LongOrNull(reader, 16),
+        CurrencyCode = reader.GetString(17),
+        CurrencyScale = reader.GetInt32(18),
+        ContactName = TextOrNull(reader, 19),
+        ContactPhone = TextOrNull(reader, 20),
+        AllowOverlap = reader.GetInt32(21) != 0,
+        ConflictOverride = reader.GetInt32(22) != 0,
+        Notes = TextOrNull(reader, 23),
+        CreatedAtUtc = ParseUtc(reader.GetString(24)),
+        UpdatedAtUtc = ParseUtc(reader.GetString(25)),
+        IsArchived = reader.GetInt32(26) != 0,
+        ArchivedAtUtc = DateOrNull(reader, 27)
     };
 
     private static ShootBookingSummary ReadSummary(SqliteDataReader reader) => new(
@@ -391,9 +412,15 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
 
     private static ShootRequirementItem ReadRequirement(SqliteDataReader reader) => new()
     {
-        Id = Guid.Parse(reader.GetString(0)), BookingId = Guid.Parse(reader.GetString(1)), ItemText = reader.GetString(2), IsCompleted = reader.GetInt32(3) != 0,
-        Priority = EnumValue(reader.GetString(4), ShootRequirementPriority.Normal), SortOrder = reader.GetInt32(5), CompletedAtUtc = DateOrNull(reader, 6),
-        CreatedAtUtc = ParseUtc(reader.GetString(7)), UpdatedAtUtc = ParseUtc(reader.GetString(8))
+        Id = Guid.Parse(reader.GetString(0)),
+        BookingId = Guid.Parse(reader.GetString(1)),
+        ItemText = reader.GetString(2),
+        IsCompleted = reader.GetInt32(3) != 0,
+        Priority = EnumValue(reader.GetString(4), ShootRequirementPriority.Normal),
+        SortOrder = reader.GetInt32(5),
+        CompletedAtUtc = DateOrNull(reader, 6),
+        CreatedAtUtc = ParseUtc(reader.GetString(7)),
+        UpdatedAtUtc = ParseUtc(reader.GetString(8))
     };
 
     private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShotCompletedAtUtc,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc FROM ShootBookings";

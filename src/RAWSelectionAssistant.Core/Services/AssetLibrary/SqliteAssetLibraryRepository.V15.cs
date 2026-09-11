@@ -413,9 +413,13 @@ public sealed partial class SqliteAssetLibraryRepository
     };
     private static string BuildScalarRule(string column, SmartFolderRule rule, string parameter) => rule.Operator switch
     {
-        SmartFolderOperator.Equals => $"{column}={parameter}", SmartFolderOperator.NotEquals => $"{column}<>{parameter}",
-        SmartFolderOperator.GreaterThan => $"{column}>{parameter}", SmartFolderOperator.GreaterThanOrEqual => $"{column}>={parameter}",
-        SmartFolderOperator.LessThan => $"{column}<{parameter}", SmartFolderOperator.LessThanOrEqual => $"{column}<={parameter}", _ => "0=1"
+        SmartFolderOperator.Equals => $"{column}={parameter}",
+        SmartFolderOperator.NotEquals => $"{column}<>{parameter}",
+        SmartFolderOperator.GreaterThan => $"{column}>{parameter}",
+        SmartFolderOperator.GreaterThanOrEqual => $"{column}>={parameter}",
+        SmartFolderOperator.LessThan => $"{column}<{parameter}",
+        SmartFolderOperator.LessThanOrEqual => $"{column}<={parameter}",
+        _ => "0=1"
     };
     private static string BuildBooleanRule(string truthExpression, SmartFolderRule rule) => rule.Operator switch
     {
@@ -615,7 +619,8 @@ public sealed partial class SqliteAssetLibraryRepository
             SortField = query.EffectiveSortField,
             SortDirection = query.EffectiveSortDirection,
             query.SystemCollection
-            ,DocumentHash = query.Document is null ? null : AssetQueryDocumentCodec.ComputeHash(query.Document)
+            ,
+            DocumentHash = query.Document is null ? null : AssetQueryDocumentCodec.ComputeHash(query.Document)
         };
         var serialized = JsonSerializer.Serialize(contract);
         // Keep existing cursors compatible when there is no candidate intersection.
@@ -1064,65 +1069,65 @@ public sealed partial class SqliteAssetLibraryRepository
                 await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
                 return true;
             case "folder-membership-v2":
-            {
-                if (undo.JournalVersion < 2) return false;
-                var payload = Deserialize<FolderMembershipChange>(undo.PayloadJson);
-                await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    if (undo.JournalVersion < 2) return false;
+                    var payload = Deserialize<FolderMembershipChange>(undo.PayloadJson);
+                    await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             case "tag-membership-v2":
-            {
-                if (undo.JournalVersion < 2) return false;
-                var payload = Deserialize<TagMembershipChange>(undo.PayloadJson);
-                await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    if (undo.JournalVersion < 2) return false;
+                    var payload = Deserialize<TagMembershipChange>(undo.PayloadJson);
+                    await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.BeforePresent, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             case "asset-metadata":
-            {
-                var payload = Deserialize<AssetMetadataUndo>(undo.PayloadJson);
-                await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", payload.Rating), ("$comment", payload.Comment), ("$id", payload.AssetId.ToString("D"))).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var payload = Deserialize<AssetMetadataUndo>(undo.PayloadJson);
+                    await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", payload.Rating), ("$comment", payload.Comment), ("$id", payload.AssetId.ToString("D"))).ConfigureAwait(false);
+                    return true;
+                }
             case "asset-metadata-batch":
-            {
-                var payload = Deserialize<AssetMetadataBatchUndo>(undo.PayloadJson);
-                foreach (var item in payload.Items) await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", item.Rating), ("$comment", item.Comment), ("$id", item.AssetId.ToString("D"))).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var payload = Deserialize<AssetMetadataBatchUndo>(undo.PayloadJson);
+                    foreach (var item in payload.Items) await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", item.Rating), ("$comment", item.Comment), ("$id", item.AssetId.ToString("D"))).ConfigureAwait(false);
+                    return true;
+                }
             case "folder-membership":
-            {
-                var payload = Deserialize<FolderMembershipUndo>(undo.PayloadJson);
-                foreach (var row in payload.Memberships)
                 {
-                    if (payload.Restore) await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetFolderMemberships(AssetId,FolderId,AddedAt) VALUES($asset,$folder,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
-                    else await ExecuteAsync(connection, transaction, "DELETE FROM AssetFolderMemberships WHERE AssetId=$asset AND FolderId=$folder;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D"))).ConfigureAwait(false);
+                    var payload = Deserialize<FolderMembershipUndo>(undo.PayloadJson);
+                    foreach (var row in payload.Memberships)
+                    {
+                        if (payload.Restore) await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetFolderMemberships(AssetId,FolderId,AddedAt) VALUES($asset,$folder,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+                        else await ExecuteAsync(connection, transaction, "DELETE FROM AssetFolderMemberships WHERE AssetId=$asset AND FolderId=$folder;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D"))).ConfigureAwait(false);
+                    }
+                    if (!payload.Restore)
+                        foreach (var row in payload.AddedAutoTags) await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D"))).ConfigureAwait(false);
+                    return true;
                 }
-                if (!payload.Restore)
-                    foreach (var row in payload.AddedAutoTags) await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D"))).ConfigureAwait(false);
-                return true;
-            }
             case "tag-membership":
-            {
-                var payload = Deserialize<TagMembershipUndo>(undo.PayloadJson);
-                foreach (var row in payload.Memberships)
                 {
-                    if (payload.Restore) await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
-                    else await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D"))).ConfigureAwait(false);
+                    var payload = Deserialize<TagMembershipUndo>(undo.PayloadJson);
+                    foreach (var row in payload.Memberships)
+                    {
+                        if (payload.Restore) await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+                        else await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", row.TagId.ToString("D"))).ConfigureAwait(false);
+                    }
+                    return true;
                 }
-                return true;
-            }
             case "tag-merge":
-            {
-                var payload = Deserialize<TagMergeUndo>(undo.PayloadJson);
-                await SaveTagInTransactionAsync(connection, transaction, payload.Source with { IsArchived = false }, cancellationToken).ConfigureAwait(false);
-                var existingTarget = payload.TargetMemberIds.ToHashSet();
-                foreach (var row in payload.SourceMembers)
                 {
-                    if (!existingTarget.Contains(row.AssetId)) await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", payload.Target.TagId.ToString("D"))).ConfigureAwait(false);
-                    await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", payload.Source.TagId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+                    var payload = Deserialize<TagMergeUndo>(undo.PayloadJson);
+                    await SaveTagInTransactionAsync(connection, transaction, payload.Source with { IsArchived = false }, cancellationToken).ConfigureAwait(false);
+                    var existingTarget = payload.TargetMemberIds.ToHashSet();
+                    foreach (var row in payload.SourceMembers)
+                    {
+                        if (!existingTarget.Contains(row.AssetId)) await ExecuteAsync(connection, transaction, "DELETE FROM AssetTagMemberships WHERE AssetId=$asset AND TagId=$tag;", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", payload.Target.TagId.ToString("D"))).ConfigureAwait(false);
+                        await ExecuteAsync(connection, transaction, "INSERT OR IGNORE INTO AssetTagMemberships(AssetId,TagId,AddedAt) VALUES($asset,$tag,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$tag", payload.Source.TagId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
+                    }
+                    return true;
                 }
-                return true;
-            }
             case "folder-restore": await SaveFolderInTransactionAsync(connection, transaction, Deserialize<AssetFolder>(undo.PayloadJson), cancellationToken).ConfigureAwait(false); return true;
             case "folders-restore": foreach (var folder in Deserialize<AssetFolder[]>(undo.PayloadJson)) await SaveFolderInTransactionAsync(connection, transaction, folder, cancellationToken).ConfigureAwait(false); return true;
             case "tag-restore": await SaveTagInTransactionAsync(connection, transaction, Deserialize<AssetTag>(undo.PayloadJson), cancellationToken).ConfigureAwait(false); return true;
@@ -1148,17 +1153,17 @@ public sealed partial class SqliteAssetLibraryRepository
                 await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
                 return true;
             case "folder-membership-v2":
-            {
-                var payload = Deserialize<FolderMembershipChange>(operation.PayloadJson);
-                await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var payload = Deserialize<FolderMembershipChange>(operation.PayloadJson);
+                    await ApplyFolderMembershipStateInTransactionAsync(connection, transaction, payload, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             case "tag-membership-v2":
-            {
-                var payload = Deserialize<TagMembershipChange>(operation.PayloadJson);
-                await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                {
+                    var payload = Deserialize<TagMembershipChange>(operation.PayloadJson);
+                    await ApplyTagMembershipStateInTransactionAsync(connection, transaction, payload.Memberships, payload.AfterPresent, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             default:
                 return await TryApplyP3RedoInTransactionAsync(connection, transaction, operation, cancellationToken).ConfigureAwait(false);
         }

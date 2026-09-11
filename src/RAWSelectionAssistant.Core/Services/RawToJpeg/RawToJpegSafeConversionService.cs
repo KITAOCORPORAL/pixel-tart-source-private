@@ -166,17 +166,17 @@ public sealed class RawToJpegSafeConversionService(
                 : ownedCopy?.Hash;
             committed = true;
             if (!journalWrittenByExecutor) try
-            {
-                await undoJournal.AppendAsync(new(Guid.NewGuid(), taskId, item.Sequence, FileOperationType.DeleteCreatedOutput,
-                    item.SourcePath, outputPath, outputInfo.Length, hash,
-                    "output created by RAW conversion and unchanged", UndoJournalState.Pending, DateTimeOffset.UtcNow), cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
-            {
-                return new(item.Sequence, RawToJpegItemState.PartiallyCompleted, item.SourcePath, outputPath,
-                    outputInfo.Length, hash, ErrorCodeCatalog.DatabaseUnavailable, SafeMessage(ex),
-                    CreateFailure(item.SourcePath, MediaTaskStages.TaskPersistence, ErrorCodeCatalog.DatabaseUnavailable, ex, true));
-            }
+                {
+                    await undoJournal.AppendAsync(new(Guid.NewGuid(), taskId, item.Sequence, FileOperationType.DeleteCreatedOutput,
+                        item.SourcePath, outputPath, outputInfo.Length, hash,
+                        "output created by RAW conversion and unchanged", UndoJournalState.Pending, DateTimeOffset.UtcNow), cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
+                {
+                    return new(item.Sequence, RawToJpegItemState.PartiallyCompleted, item.SourcePath, outputPath,
+                        outputInfo.Length, hash, ErrorCodeCatalog.DatabaseUnavailable, SafeMessage(ex),
+                        CreateFailure(item.SourcePath, MediaTaskStages.TaskPersistence, ErrorCodeCatalog.DatabaseUnavailable, ex, true));
+                }
             return new(item.Sequence, RawToJpegItemState.Completed, item.SourcePath, outputPath,
                 outputInfo.Length, hash, null, null);
         }
