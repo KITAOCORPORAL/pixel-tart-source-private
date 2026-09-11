@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Single component entry point. The legacy aliases below remain deliberately available during
+         Phase 1 so pages can move one surface at a time. -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Controls.Buttons.xaml" />
+        <ResourceDictionary Source="Controls.Inputs.xaml" />
+        <ResourceDictionary Source="Controls.Cards.xaml" />
+        <ResourceDictionary Source="Controls.Tables.xaml" />
+        <ResourceDictionary Source="Controls.Navigation.xaml" />
+        <ResourceDictionary Source="Controls.Menu.xaml" />
+        <ResourceDictionary Source="Controls.Dialogs.xaml" />
+        <ResourceDictionary Source="Controls.Status.xaml" />
+        <ResourceDictionary Source="Buttons.xaml" />
+        <ResourceDictionary Source="Inputs.xaml" />
+        <ResourceDictionary Source="Cards.xaml" />
+        <ResourceDictionary Source="Navigation.xaml" />
+        <ResourceDictionary Source="Icons.Navigation.xaml" />
+        <ResourceDictionary Source="Icons.Tools.xaml" />
+        <ResourceDictionary Source="Icons.xaml" />
+        <ResourceDictionary Source="Calendar.xaml" />
+        <ResourceDictionary Source="Modal.xaml" />
+        <ResourceDictionary Source="Drawer.xaml" />
+        <ResourceDictionary Source="Tooltip.xaml" />
+        <ResourceDictionary Source="ContextMenu.xaml" />
+        <ResourceDictionary Source="ScrollBars.xaml" />
+        <ResourceDictionary Source="EmptyState.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Canonical component aliases for new views. Existing Av2/legacy keys remain valid. -->
+    <Style x:Key="PixelTartPrimaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}" />
+    <Style x:Key="PixelTartSecondaryButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}" />
+    <Style x:Key="PixelTartGhostButton" TargetType="Button" BasedOn="{StaticResource GhostButton}" />
+    <Style x:Key="PixelTartDangerButton" TargetType="Button" BasedOn="{StaticResource DangerButton}" />
+    <Style x:Key="PixelTartIconButton" TargetType="Button" BasedOn="{StaticResource Av2IconButton}">
+        <Setter Property="AutomationProperties.Name" Value="按钮" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+    </Style>
+    <Style x:Key="PixelTartPanel" TargetType="Border" BasedOn="{StaticResource PanelSurface}" />
+    <Style x:Key="PixelTartCard" TargetType="Border" BasedOn="{StaticResource CardSurface}" />
+    <Style x:Key="PixelTartElevated" TargetType="Border" BasedOn="{StaticResource ElevatedSurface}" />
+</ResourceDictionary>

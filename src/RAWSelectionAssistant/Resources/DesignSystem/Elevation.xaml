@@ -1,0 +1,8 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Pixel Tart elevation is intentionally quiet: depth comes from surface contrast first. -->
+    <DropShadowEffect x:Key="ElevationNone" BlurRadius="0" ShadowDepth="0" Opacity="0" />
+    <DropShadowEffect x:Key="ElevationLow" BlurRadius="8" ShadowDepth="1" Opacity="0.18" Color="Black" />
+    <DropShadowEffect x:Key="ElevationFloating" BlurRadius="18" ShadowDepth="4" Opacity="0.32" Color="Black" />
+    <sys:Double x:Key="ElevationFloatingOpacity" xmlns:sys="clr-namespace:System;assembly=System.Runtime">0.32</sys:Double>
+</ResourceDictionary>
