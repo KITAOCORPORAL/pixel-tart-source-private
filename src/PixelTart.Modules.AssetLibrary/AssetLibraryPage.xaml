@@ -66,6 +66,8 @@
             <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
             <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
             <MenuItem Header="恢复归档" Command="{Binding Owner.RestoreContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRestore" />
+            <MenuItem Header="移到回收站" Command="{Binding Owner.TrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrash" />
+            <MenuItem Header="从回收站恢复" Command="{Binding Owner.RestoreTrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrashRestore" />
         </ContextMenu>
 
         <Style x:Key="AssetP2ListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource PixelTart.Thumbnail}">

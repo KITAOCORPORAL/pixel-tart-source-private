@@ -48,6 +48,52 @@ public sealed partial class SqliteAssetLibraryRepository
     public Task<AssetLibraryBatchResult> SetAssetsMissingAsync(IEnumerable<Guid> assetIds, bool isMissing, CancellationToken cancellationToken = default) =>
         SetAssetFlagAsync(assetIds, "IsMissing", isMissing, "asset-missing-state-v2", isMissing ? "Mark assets missing" : "Clear missing assets", cancellationToken);
 
+    public async Task<IReadOnlyList<AssetTrashEntry>> ListTrashEntriesAsync(CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT AssetId,TrashedAtUtc,OperationId,PreviousArchived FROM AssetTrashEntries ORDER BY TrashedAtUtc DESC,AssetId;";
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        var result = new List<AssetTrashEntry>();
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+            result.Add(new(Guid.Parse(reader.GetString(0)), DateTimeOffset.Parse(reader.GetString(1)), Guid.Parse(reader.GetString(2)), reader.GetInt32(3) != 0));
+        return result;
+    }
+
+    public async Task<AssetLibraryBatchResult> SetAssetsTrashedAsync(IEnumerable<Guid> assetIds, bool isTrashed, CancellationToken cancellationToken = default)
+    {
+        var ids = assetIds.Where(id => id != Guid.Empty).Distinct().ToArray();
+        if (ids.Length == 0) return new(0, null, []);
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        var before = new List<AssetTrashState>();
+        var operationId = Guid.NewGuid();
+        foreach (var id in ids)
+        {
+            await using var read = connection.CreateCommand(); read.Transaction = transaction;
+            read.CommandText = "SELECT a.IsArchived,t.PreviousArchived FROM AssetItems a LEFT JOIN AssetTrashEntries t ON t.AssetId=a.AssetId WHERE a.AssetId=$id;";
+            read.Parameters.AddWithValue("$id", id.ToString("D"));
+            await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) continue;
+            var archived = reader.GetInt32(0) != 0; var trashed = !reader.IsDBNull(1); var previousArchived = trashed ? reader.GetInt32(1) != 0 : archived;
+            await reader.DisposeAsync().ConfigureAwait(false);
+            if (trashed == isTrashed) continue;
+            before.Add(new(id, trashed, previousArchived));
+            if (isTrashed)
+                await ExecuteAsync(connection, transaction, "INSERT INTO AssetTrashEntries(AssetId,TrashedAtUtc,OperationId,PreviousArchived) VALUES($id,$at,$operation,$archived);", cancellationToken, ("$id", id.ToString("D")), ("$at", DateTimeOffset.UtcNow.ToString("O")), ("$operation", operationId.ToString("D")), ("$archived", archived ? 1 : 0)).ConfigureAwait(false);
+            else
+                await ExecuteAsync(connection, transaction, "DELETE FROM AssetTrashEntries WHERE AssetId=$id; UPDATE AssetItems SET IsArchived=$archived WHERE AssetId=$id;", cancellationToken, ("$id", id.ToString("D")), ("$archived", previousArchived ? 1 : 0)).ConfigureAwait(false);
+        }
+        if (before.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, []); }
+        var token = CreateUndoToken(isTrashed ? "Move assets to recoverable trash" : "Restore assets from trash");
+        var after = before.Select(item => item with { IsTrashed = isTrashed }).ToArray();
+        await WriteUndoJournalAsync(connection, transaction, token, "asset-trash-state-v2", new AssetTrashChange(before.ToArray(), after), cancellationToken, journalVersion: 2).ConfigureAwait(false);
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return new(before.Count, token, []);
+    }
+
     private async Task<AssetLibraryBatchResult> SetAssetFlagAsync(
         IEnumerable<Guid> assetIds,
         string column,
@@ -149,13 +195,19 @@ public sealed partial class SqliteAssetLibraryRepository
 
     private static string BuildIndexedWhere(AssetLibraryQuery query, SqliteCommand command)
     {
-        var where = new List<string> { query.EffectiveArchiveScope switch
+        var where = new List<string> { query.SystemCollection == AssetLibrarySystemCollection.RecycleBin ? "1=1" : query.EffectiveArchiveScope switch
         {
             AssetLibraryArchiveScope.ArchivedOnly => "a.IsArchived=1",
             AssetLibraryArchiveScope.All => "1=1",
             _ => "a.IsArchived=0"
         } };
         if (query.SystemCollection == AssetLibrarySystemCollection.RecycleBin) where.Add("0=1");
+        if (query.SystemCollection == AssetLibrarySystemCollection.RecycleBin)
+        {
+            where.RemoveAt(where.Count - 1);
+            where.Add("EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId)");
+        }
+        else where.Add("NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId)");
         if (query.CandidateAssetIds is { } candidates)
         {
             var parameters = candidates.Distinct().Select(id =>
@@ -1059,6 +1111,10 @@ public sealed partial class SqliteAssetLibraryRepository
                 if (undo.JournalVersion < 2) return false;
                 await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsMissing", Deserialize<AssetFlagChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
                 return true;
+            case "asset-trash-state-v2":
+                if (undo.JournalVersion < 2) return false;
+                await ApplyTrashStatesInTransactionAsync(connection, transaction, Deserialize<AssetTrashChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                return true;
             case "folder-archive-state-v2":
                 if (undo.JournalVersion < 2) return false;
                 await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
@@ -1144,6 +1200,9 @@ public sealed partial class SqliteAssetLibraryRepository
             case "asset-missing-state-v2":
                 await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsMissing", Deserialize<AssetFlagChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
                 return true;
+            case "asset-trash-state-v2":
+                await ApplyTrashStatesInTransactionAsync(connection, transaction, Deserialize<AssetTrashChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                return true;
             case "folder-archive-state-v2":
                 await SaveFolderInTransactionAsync(connection, transaction, Deserialize<FolderArchiveChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
                 return true;
@@ -1218,6 +1277,17 @@ public sealed partial class SqliteAssetLibraryRepository
         foreach (var state in states)
             await ExecuteAsync(connection, transaction, $"UPDATE AssetItems SET {column}=$value WHERE AssetId=$id;", cancellationToken,
                 ("$value", state.Value ? 1 : 0), ("$id", state.AssetId.ToString("D"))).ConfigureAwait(false);
+    }
+
+    private static async Task ApplyTrashStatesInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, IEnumerable<AssetTrashState> states, CancellationToken cancellationToken)
+    {
+        foreach (var state in states)
+        {
+            if (state.IsTrashed)
+                await ExecuteAsync(connection, transaction, "INSERT OR REPLACE INTO AssetTrashEntries(AssetId,TrashedAtUtc,OperationId,PreviousArchived) VALUES($id,$at,$operation,$archived);", cancellationToken, ("$id", state.AssetId.ToString("D")), ("$at", DateTimeOffset.UtcNow.ToString("O")), ("$operation", Guid.NewGuid().ToString("D")), ("$archived", state.PreviousArchived ? 1 : 0)).ConfigureAwait(false);
+            else
+                await ExecuteAsync(connection, transaction, "DELETE FROM AssetTrashEntries WHERE AssetId=$id; UPDATE AssetItems SET IsArchived=$archived WHERE AssetId=$id;", cancellationToken, ("$id", state.AssetId.ToString("D")), ("$archived", state.PreviousArchived ? 1 : 0)).ConfigureAwait(false);
+        }
     }
 
     private static async Task SaveFolderInTransactionAsync(SqliteConnection connection, SqliteTransaction transaction, AssetFolder folder, CancellationToken cancellationToken)
@@ -1339,6 +1409,8 @@ public sealed partial class SqliteAssetLibraryRepository
     private sealed record AssetMetadataChange(AssetMetadataUndo[] Before, AssetMetadataUndo[] After);
     private sealed record AssetFlagState(Guid AssetId, bool Value);
     private sealed record AssetFlagChange(AssetFlagState[] Before, AssetFlagState[] After);
+    private sealed record AssetTrashState(Guid AssetId, bool IsTrashed, bool PreviousArchived);
+    private sealed record AssetTrashChange(AssetTrashState[] Before, AssetTrashState[] After);
     private sealed record FolderArchiveChange(AssetFolder Before, AssetFolder After);
     private sealed record FolderMembershipUndo(bool Restore, AssetFolderMembership[] Memberships, AssetTagMembership[] AddedAutoTags);
     private sealed record TagMembershipUndo(bool Restore, AssetTagMembership[] Memberships);

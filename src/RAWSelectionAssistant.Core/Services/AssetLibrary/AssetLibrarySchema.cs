@@ -145,6 +145,15 @@ internal static class AssetLibrarySchema
             );
             """,
             """
+            CREATE TABLE IF NOT EXISTS AssetTrashEntries(
+                AssetId TEXT NOT NULL PRIMARY KEY,
+                TrashedAtUtc TEXT NOT NULL,
+                OperationId TEXT NOT NULL,
+                PreviousArchived INTEGER NOT NULL CHECK(PreviousArchived IN(0,1)),
+                FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE
+            );
+            """,
+            """
             CREATE TABLE IF NOT EXISTS AssetVisualAnalysis(
                 AssetId TEXT NOT NULL,
                 AnalysisVersion TEXT NOT NULL,
@@ -237,6 +246,7 @@ internal static class AssetLibrarySchema
             "CREATE INDEX IF NOT EXISTS IX_AssetFolderAutoTags_Tag ON AssetFolderAutoTags(TagId,FolderId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetTagMemberships_Tag ON AssetTagMemberships(TagId,AssetId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetLibraryUndoJournal_Recent ON AssetLibraryUndoJournal(UndoneAt,CreatedAt DESC);",
+            "CREATE INDEX IF NOT EXISTS IX_AssetTrashEntries_Recent ON AssetTrashEntries(TrashedAtUtc DESC,AssetId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Outcome ON AssetVisualFeatures(AnalysisVersion,Outcome,AssetId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Hue ON AssetVisualFeatures(AnalysisVersion,Outcome,DominantHue,AssetId);",
             "CREATE INDEX IF NOT EXISTS IX_AssetVisualFeatures_Luma ON AssetVisualFeatures(AnalysisVersion,Outcome,AverageLuma,AssetId);",

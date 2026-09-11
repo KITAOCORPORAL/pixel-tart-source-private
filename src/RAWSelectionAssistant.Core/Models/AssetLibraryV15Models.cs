@@ -28,6 +28,12 @@ public sealed record AssetUndoJournalEntry(
     bool IsUndone,
     DateTimeOffset? UndoneAt = null);
 
+public sealed record AssetTrashEntry(
+    Guid AssetId,
+    DateTimeOffset TrashedAtUtc,
+    Guid OperationId,
+    bool PreviousArchived);
+
 public enum AssetRelinkMatchMode
 {
     FileName,

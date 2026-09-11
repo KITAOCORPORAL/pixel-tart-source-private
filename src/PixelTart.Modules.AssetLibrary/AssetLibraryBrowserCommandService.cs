@@ -203,6 +203,13 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
         return result;
     }
 
+    public async Task<AssetLibraryBatchResult> SetTrashedAsync(IEnumerable<Guid> ids, bool trashed, CancellationToken cancellationToken = default)
+    {
+        var result = await repository.SetAssetsTrashedAsync(ids, trashed, cancellationToken).ConfigureAwait(false);
+        Remember(result);
+        return result;
+    }
+
     public async Task<bool> UndoAsync(CancellationToken cancellationToken = default)
     {
         if (_undoToken is null) return false;

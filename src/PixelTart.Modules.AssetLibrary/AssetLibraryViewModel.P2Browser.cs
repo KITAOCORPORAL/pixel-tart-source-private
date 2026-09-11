@@ -104,6 +104,8 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> ClearContextMissingCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> ArchiveContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RestoreContextCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> TrashContextCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> RestoreTrashContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RemoveContextFromViewCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> ShowContextInfoCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> OpenContextViewerCommand { get; private set; } = null!;
@@ -144,6 +146,8 @@ public sealed partial class AssetLibraryViewModel
         ClearContextMissingCommand = new(card => SetContextMissingAsync(card, false));
         ArchiveContextCommand = new(card => SetContextArchivedAsync(card, true));
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
+        TrashContextCommand = new(card => SetContextTrashedAsync(card, true));
+        RestoreTrashContextCommand = new(card => SetContextTrashedAsync(card, false));
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
         OpenContextViewerCommand = new(OpenContextViewerAsync);
@@ -237,12 +241,11 @@ public sealed partial class AssetLibraryViewModel
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.Untagged, "未打标签", "尚未添加标签", "AssetLibraryUntaggedAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.MissingFiles, "缺失文件", "源路径目前不可用", "AssetLibraryMissingAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.Archived, "已归档", "仅显示已归档素材", "AssetLibraryArchivedAssets"));
-        SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecycleBin, "回收站", "暂未启用", "AssetLibraryRecycleBin", isEnabled: false));
+        SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecycleBin, "回收站", "可恢复素材；不会删除源文件", "AssetLibraryRecycleBin"));
     }
 
     internal void SelectSystemCollection(AssetLibrarySystemCollection collection)
     {
-        if (collection == AssetLibrarySystemCollection.RecycleBin) { Status = "回收站暂未启用；P2 不提供删除流程。"; return; }
         _changingP2QuerySource = true;
         try
         {
@@ -884,6 +887,16 @@ public sealed partial class AssetLibraryViewModel
         if (archived && ActiveCollection != AssetLibrarySystemCollection.Archived || !archived && ActiveCollection == AssetLibrarySystemCollection.Archived)
             RemoveSelectedIds(ids);
         Status = archived ? $"已归档 {result.ChangedCount} 项。" : $"已恢复 {result.ChangedCount} 项。"; RaiseP2CommandStates(); await RefreshAsync();
+    }
+
+    private async Task SetContextTrashedAsync(AssetVisualMatchView? card, bool trashed)
+    {
+        if (card is null) return;
+        var ids = ContextIds(card);
+        var result = await _browserCommands.SetTrashedAsync(ids, trashed, _lifetimeCancellation.Token);
+        RemoveSelectedIds(ids);
+        Status = trashed ? $"已将 {result.ChangedCount} 项移入可恢复回收站；源文件未删除。" : $"已恢复 {result.ChangedCount} 项，并保留原归档状态。";
+        RaiseP2CommandStates(); await RefreshAsync();
     }
 
     private void RemoveSelectedIds(IEnumerable<Guid> ids)
