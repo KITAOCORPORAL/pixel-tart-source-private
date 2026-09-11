@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <!-- Calm hierarchy: surface brightness and borders come before shadow. -->
+    <sys:Double x:Key="Elevation.None">0</sys:Double>
+    <sys:Double x:Key="Elevation.Floating.BlurRadius">16</sys:Double>
+    <sys:Double x:Key="Elevation.Dialog.BlurRadius">28</sys:Double>
+    <sys:Double x:Key="Elevation.Floating.Opacity">0.24</sys:Double>
+    <sys:Double x:Key="Elevation.Dialog.Opacity">0.34</sys:Double>
+
+    <DropShadowEffect x:Key="Elevation.Floating"
+                      BlurRadius="{StaticResource Elevation.Floating.BlurRadius}"
+                      ShadowDepth="0"
+                      Opacity="{StaticResource Elevation.Floating.Opacity}"
+                      Color="{DynamicResource Color.Shadow}" />
+    <DropShadowEffect x:Key="Elevation.Dialog"
+                      BlurRadius="{StaticResource Elevation.Dialog.BlurRadius}"
+                      ShadowDepth="0"
+                      Opacity="{StaticResource Elevation.Dialog.Opacity}"
+                      Color="{DynamicResource Color.Shadow}" />
+</ResourceDictionary>

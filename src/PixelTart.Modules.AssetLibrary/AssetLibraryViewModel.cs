@@ -316,7 +316,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private bool CanShowOrganizationPaneWhenExpanded =>
         IsInspectorPaneCollapsed || !IsInspectorPinned ? CanFitOrganizationPane : CanFitBothPanes;
     private bool CanShowInspectorPaneWhenExpanded =>
-        IsOrganizationPaneCollapsed || IsInspectorPinned ? CanFitInspectorPane : CanFitBothPanes;
+        HasSelection && (IsOrganizationPaneCollapsed || IsInspectorPinned ? CanFitInspectorPane : CanFitBothPanes);
     public bool IsOrganizationPaneVisible => !IsOrganizationPaneCollapsed && CanShowOrganizationPaneWhenExpanded;
     public bool IsInspectorPaneVisible => !IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded;
     public GridLength OrganizationPaneColumnWidth => IsOrganizationPaneVisible ? new(OrganizationPaneWidth) : new(0);
@@ -332,6 +332,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         : IsOrganizationPaneCollapsed ? "展开组织栏" : "组织栏（窗口过窄）";
     public string InspectorPaneToggleLabel => IsInspectorPaneVisible
         ? "收起检查器"
+        : !HasSelection ? "检查器（选择素材后显示）"
         : IsInspectorPaneCollapsed ? "展开检查器" : "检查器（窗口过窄）";
     public string InspectorPinLabel => IsInspectorPinned ? "取消固定检查器" : "固定检查器";
     public PreviewImportDiagnostics ImportDiagnostics => _importDiagnostics.Snapshot;
@@ -780,6 +781,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         else if (_selectedAsset != singleMaterialized) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
+        NotifyWorkspaceLayout();
         _selectionSummaryTask = RunTrackedP3OperationAsync(RefreshSelectionSummaryAsync); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
         OnP2SelectionChanged(materialized);
         OnP3SelectionChanged(materialized);

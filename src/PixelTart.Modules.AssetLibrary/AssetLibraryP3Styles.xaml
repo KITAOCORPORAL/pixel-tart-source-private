@@ -20,8 +20,8 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="#071412" />
-                <Setter TargetName="FocusInner" Property="BorderBrush" Value="#65E6C7" />
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="{DynamicResource Brush.Background}" />
+                <Setter TargetName="FocusInner" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -48,8 +48,8 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="#071412" />
-                <Setter TargetName="FocusInner" Property="BorderBrush" Value="#65E6C7" />
+                <Setter TargetName="FocusOuter" Property="BorderBrush" Value="{DynamicResource Brush.Background}" />
+                <Setter TargetName="FocusInner" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -57,8 +57,8 @@
     <Style x:Key="AssetLibraryP3ButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="MinWidth" Value="36" />
-        <Setter Property="Padding" Value="10,6" />
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Control.Compact.Padding}" />
+        <Setter Property="Margin" Value="{DynamicResource Space.Inline.End.1}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -66,53 +66,53 @@
         <Setter Property="Template" Value="{StaticResource AssetLibraryP3ButtonTemplate}" />
     </Style>
     <Style x:Key="AssetLibraryP3PrimaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
-        <Setter Property="Background" Value="#0B6658" />
-        <Setter Property="Foreground" Value="#F5FFFC" />
-        <Setter Property="BorderBrush" Value="#42CEAF" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.OnAccent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
         <Setter Property="BorderThickness" Value="1" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#0D7464" /></Trigger>
-            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#074D43" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Hover}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Active}" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3SecondaryButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
-        <Setter Property="Background" Value="#192129" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
-            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#111820" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3ChipButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3ButtonBase}">
-        <Setter Property="Background" Value="#172027" />
-        <Setter Property="Foreground" Value="#EAF1F3" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
         <Style.Triggers>
-            <Trigger Property="Tag" Value="Active"><Setter Property="Background" Value="#114238" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#22313A" /></Trigger>
-            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#0F171D" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
+            <Trigger Property="Tag" Value="Active"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface}" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /><Setter Property="Cursor" Value="Arrow" /></Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3DangerButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AssetLibraryP3SecondaryButton}">
-        <Setter Property="Foreground" Value="#FFB4AB" />
-        <Setter Property="BorderBrush" Value="#D87872" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Status.Error}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Status.Error}" />
     </Style>
 
     <Style x:Key="AssetLibraryP3Toggle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="MinWidth" Value="0" />
-        <Setter Property="Padding" Value="9,5" />
-        <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="#172027" />
-        <Setter Property="Foreground" Value="#EAF1F3" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
+        <Setter Property="Margin" Value="{DynamicResource Space.Inline.End.1}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="OverridesDefaultStyle" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}" />
@@ -120,11 +120,11 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template" Value="{StaticResource AssetLibraryP3ToggleTemplate}" />
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#22313A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
-            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="#0F171D" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="IsChecked" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+            <Trigger Property="IsPressed" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -179,27 +179,27 @@
 
     <Style x:Key="AssetLibraryP3TextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="MinHeight" Value="34" />
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="CaretBrush" Value="#65E6C7" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Brush.Accent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3DatePicker" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type DatePicker}}">
         <Setter Property="MinHeight" Value="34" />
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Style.Triggers>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /></Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /></Trigger>
         </Style.Triggers>
     </Style>
 
@@ -217,9 +217,9 @@
     <Style x:Key="AssetLibraryP3ComboBoxItem" TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="MinHeight" Value="30" />
-        <Setter Property="Padding" Value="9,6" />
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -228,10 +228,10 @@
         <Setter Property="OverridesDefaultStyle" Value="{DynamicResource {x:Static SystemParameters.HighContrastKey}}" />
         <Setter Property="Template" Value="{StaticResource AssetLibraryP3ComboBoxItemTemplate}" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
-            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /><Setter Property="BorderBrush" Value="#42CEAF" /></Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
@@ -330,11 +330,11 @@
     <Style x:Key="AssetLibraryP3ComboBox" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="MinWidth" Value="0" />
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
         <Setter Property="MaxDropDownHeight" Value="320" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -346,10 +346,10 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource AssetLibraryP3ComboBoxItem}" />
         <Setter Property="Template" Value="{StaticResource AssetLibraryP3ComboBoxTemplate}" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#1C2830" /><Setter Property="BorderBrush" Value="#91B5C2" /></Trigger>
-            <Trigger Property="IsDropDownOpen" Value="True"><Setter Property="Background" Value="#111820" /><Setter Property="BorderBrush" Value="#65E6C7" /></Trigger>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="2" /></Trigger>
-            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="#252C32" /><Setter Property="Foreground" Value="#ADB8C0" /><Setter Property="BorderBrush" Value="#71808C" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
+            <Trigger Property="IsDropDownOpen" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="2" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="1" /><Setter Property="Background" Value="{DynamicResource Brush.Panel}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" /></Trigger>
             <Trigger Property="OverridesDefaultStyle" Value="True">
                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
@@ -393,52 +393,52 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3ListBox" TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
     <Style x:Key="AssetLibraryP3ListItem" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.2}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#24303A" /></Trigger>
-            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#114238" /><Setter Property="Foreground" Value="#F5FFFC" /></Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="#65E6C7" /><Setter Property="BorderThickness" Value="1" /></Trigger>
+            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" /></Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="BorderThickness" Value="1" /></Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="AssetLibraryP3Tree" TargetType="{x:Type TreeView}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
     <Style x:Key="AssetLibraryP3TreeItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="IsExpanded" Value="True" />
-        <Setter Property="Foreground" Value="#F2F6F7" />
-        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="Margin" Value="{DynamicResource Space.Stack.1.Symmetric}" />
         <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}" />
         <Setter Property="AutomationProperties.Name" Value="{Binding AccessibleName}" />
     </Style>
     <Style x:Key="AssetLibraryP3PopupSurface" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="#151D23" />
-        <Setter Property="BorderBrush" Value="#5F7180" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Elevated}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="7" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="{DynamicResource Space.Inset.3}" />
     </Style>
     <Style x:Key="AssetLibraryP3ErrorSurface" TargetType="{x:Type Border}" BasedOn="{StaticResource AssetLibraryP3PopupSurface}">
-        <Setter Property="Background" Value="#352024" />
-        <Setter Property="BorderBrush" Value="#D87872" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Panel}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Status.Error}" />
     </Style>
 
     <HierarchicalDataTemplate x:Key="AssetLibraryP3QueryNodeTemplate"
                               DataType="{x:Type local:P3QueryNodeView}"
                               ItemsSource="{Binding Children}">
-        <Border Background="#11181E" BorderBrush="#455966" BorderThickness="1" CornerRadius="5" Padding="7" MinWidth="0">
+        <Border Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="{DynamicResource RadiusControl}" Padding="{DynamicResource Space.Inset.2}" MinWidth="0">
             <Grid>
                 <StackPanel Visibility="{Binding IsGroup, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                     <WrapPanel>
-                        <TextBlock Text="规则组" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,7,0" />
+                        <TextBlock Text="规则组" FontWeight="SemiBold" VerticalAlignment="Center" Margin="{DynamicResource Space.Inline.End.1}" />
                         <ComboBox ItemsSource="{Binding LogicOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Logic, Mode=TwoWay}"
                                   Style="{StaticResource AssetLibraryP3ComboBox}" Width="105"
                                   AutomationProperties.AutomationId="{Binding LogicAutomationId}"
@@ -469,14 +469,14 @@
                                   Style="{StaticResource AssetLibraryP3ComboBox}" Width="145"
                                   AutomationProperties.AutomationId="{Binding FieldAutomationId}" AutomationProperties.Name="筛选字段" />
                         <ComboBox ItemsSource="{Binding OperatorOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}"
-                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="145" Margin="5,0,0,0"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="145" Margin="{DynamicResource Space.Inline.Start.1}"
                                   AutomationProperties.AutomationId="{Binding OperatorAutomationId}" AutomationProperties.Name="筛选操作符" />
                         <ToggleButton Content="区分大小写" IsChecked="{Binding IsCaseSensitive, Mode=TwoWay}"
-                                      Style="{StaticResource AssetLibraryP3Toggle}" Margin="5,0,0,0"
+                                      Style="{StaticResource AssetLibraryP3Toggle}" Margin="{DynamicResource Space.Inline.Start.1}"
                                       Visibility="{Binding CanChooseCaseSensitivity, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                       AutomationProperties.AutomationId="{Binding CaseSensitivityAutomationId}"
                                       AutomationProperties.Name="切换文字筛选是否区分大小写" />
-                        <StackPanel Margin="5,0,0,0"
+                        <StackPanel Margin="{DynamicResource Space.Inline.Start.1}"
                                     Visibility="{Binding IsReferenceEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                             <WrapPanel>
                                 <ComboBox DisplayMemberPath="Label" SelectedValuePath="Value"
@@ -527,37 +527,37 @@
                             </ItemsControl>
                         </StackPanel>
                         <ComboBox ItemsSource="{Binding ValueOptions}" DisplayMemberPath="Label" SelectedValuePath="Value"
-                                  SelectedValue="{Binding ValueText, Mode=TwoWay}" Width="185" Margin="5,0,0,0"
+                                  SelectedValue="{Binding ValueText, Mode=TwoWay}" Width="185" Margin="{DynamicResource Space.Inline.Start.1}"
                                   Style="{StaticResource AssetLibraryP3ComboBox}"
                                   Visibility="{Binding IsEnumEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                   AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择枚举筛选值" />
-                        <DatePicker SelectedDate="{Binding DateValue, Mode=TwoWay}" Width="185" Margin="5,0,0,0"
+                        <DatePicker SelectedDate="{Binding DateValue, Mode=TwoWay}" Width="185" Margin="{DynamicResource Space.Inline.Start.1}"
                                     Style="{StaticResource AssetLibraryP3DatePicker}"
                                     Visibility="{Binding IsDateEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                     AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择筛选日期" />
-                        <WrapPanel Margin="5,0,0,0" Visibility="{Binding IsDateRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                        <WrapPanel Margin="{DynamicResource Space.Inline.Start.1}" Visibility="{Binding IsDateRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                             <DatePicker SelectedDate="{Binding RangeStartDate, Mode=TwoWay}" Width="112" Style="{StaticResource AssetLibraryP3DatePicker}"
                                         AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_Start}" AutomationProperties.Name="选择日期区间开始" />
-                            <TextBlock Text="至" Margin="5,0" VerticalAlignment="Center" />
+                            <TextBlock Text="至" Margin="{DynamicResource Space.Inline.1}" VerticalAlignment="Center" />
                             <DatePicker SelectedDate="{Binding RangeEndDate, Mode=TwoWay}" Width="112" Style="{StaticResource AssetLibraryP3DatePicker}"
                                         AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_End}" AutomationProperties.Name="选择日期区间结束" />
                         </WrapPanel>
-                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" Margin="5,0,0,0"
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" Margin="{DynamicResource Space.Inline.Start.1}"
                                  Style="{StaticResource AssetLibraryP3TextBox}" ToolTip="请输入数字"
                                  Visibility="{Binding IsNumericEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入数字筛选值" />
-                        <WrapPanel Margin="5,0,0,0" Visibility="{Binding IsNumericRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                        <WrapPanel Margin="{DynamicResource Space.Inline.Start.1}" Visibility="{Binding IsNumericRangeEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                             <TextBox Text="{Binding FirstValue, UpdateSourceTrigger=PropertyChanged}" Width="82" Style="{StaticResource AssetLibraryP3TextBox}"
                                      AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_Start}" AutomationProperties.Name="输入数值区间开始" />
-                            <TextBlock Text="至" Margin="5,0" VerticalAlignment="Center" />
+                            <TextBlock Text="至" Margin="{DynamicResource Space.Inline.1}" VerticalAlignment="Center" />
                             <TextBox Text="{Binding SecondValue, UpdateSourceTrigger=PropertyChanged}" Width="82" Style="{StaticResource AssetLibraryP3TextBox}"
                                      AutomationProperties.AutomationId="{Binding ValueAutomationId, StringFormat={}{0}_End}" AutomationProperties.Name="输入数值区间结束" />
                         </WrapPanel>
-                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" MaxLength="7" Margin="5,0,0,0"
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="135" MaxLength="7" Margin="{DynamicResource Space.Inline.Start.1}"
                                  Style="{StaticResource AssetLibraryP3TextBox}" ToolTip="请输入 #RRGGBB 颜色"
                                  Visibility="{Binding IsColorEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入十六进制颜色值" />
-                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="185" Margin="5,0,0,0"
+                        <TextBox Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" Width="185" Margin="{DynamicResource Space.Inline.Start.1}"
                                  Style="{StaticResource AssetLibraryP3TextBox}"
                                  Visibility="{Binding IsTextEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入文字筛选值" />
@@ -574,7 +574,7 @@
                         <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
                                 AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除规则" />
                     </WrapPanel>
-                    <TextBlock Text="{Binding ValidationMessage}" Foreground="#FFB4AB" Margin="0,4,0,0" TextWrapping="Wrap"
+                    <TextBlock Text="{Binding ValidationMessage}" Foreground="{DynamicResource Brush.Status.Error}" Margin="0,4,0,0" TextWrapping="Wrap"
                                AutomationProperties.AutomationId="{Binding ValidationAutomationId}" />
                 </StackPanel>
             </Grid>

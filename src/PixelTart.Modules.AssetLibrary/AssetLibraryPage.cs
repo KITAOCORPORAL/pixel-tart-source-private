@@ -17,7 +17,6 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private readonly AssetLibraryViewModel _viewModel;
     private readonly bool _enablePreviewFeatures;
     private readonly string? _demoDirectory;
-    private readonly bool _focusedChrome;
     private bool _initialized;
     private bool _disposed;
     private readonly object _disposeSync = new();
@@ -56,10 +55,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         bool focusedChrome = false)
     {
         InitializeComponent();
-        _focusedChrome = focusedChrome;
-        LegacyBrowserToolbar.Visibility = focusedChrome ? Visibility.Collapsed : Visibility.Visible;
-        FocusedBrowserToolbar.Visibility = focusedChrome ? Visibility.Visible : Visibility.Collapsed;
-        VisualPresetButtons.Visibility = focusedChrome ? Visibility.Collapsed : Visibility.Visible;
+        _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
@@ -186,15 +182,29 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel.ClearFilters();
 
+    private void Filter_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.ToggleP3QueryPanelCommand.Execute(null);
+    }
+
     private void More_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button { ContextMenu: { } menu } button)
         {
             menu.Items.Clear();
+            menu.Items.Add(CreateMoreItem(_viewModel.OrganizationPaneToggleLabel, _viewModel.ToggleOrganizationPaneCommand));
+            menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
+            menu.Items.Add(CreateMoreItem("打开灵感托盘", _viewModel.ToggleInspirationTrayCommand));
+            menu.Items.Add(new Separator());
             menu.Items.Add(CreateMoreItem("新建智能文件夹", _viewModel.NewP3SmartFolderCommand));
             menu.Items.Add(CreateMoreItem("标签管理与批量编辑", _viewModel.ToggleP3TagManagerCommand));
-            menu.Items.Add(new Separator());
-            menu.Items.Add(CreateMoreItem("固定/取消固定检查器", _viewModel.ToggleInspectorPinCommand));
+            menu.Items.Add(CreateMoreItem("分析选中素材", _viewModel.AnalyzeSelectionCommand));
+            menu.Items.Add(CreateMoreItem("撤销", _viewModel.P2UndoCommand));
+            menu.Items.Add(CreateMoreItem("重做", _viewModel.P2RedoCommand));
+            var visualFilters = new MenuItem { Header = "视觉筛选" };
+            foreach (var pair in new[] { ("已分析", "Valid"), ("未分析", "NotAnalyzed"), ("主色绿", "Green"), ("低饱和", "LowSaturation"), ("低调", "LowKey"), ("高对比", "HighContrast"), ("暖色", "Warm"), ("冷色", "Cool") })
+                visualFilters.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.VisualChipCommand, CommandParameter = pair.Item2 });
+            menu.Items.Add(visualFilters);
             menu.PlacementTarget = button;
             menu.Placement = PlacementMode.Bottom;
             menu.IsOpen = true;
@@ -207,6 +217,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         if (sender is not Button button) return;
         var menu = new ContextMenu { PlacementTarget = button, Placement = PlacementMode.Bottom };
+        if (TryFindResource("PixelTart.Menu.Context") is Style style) menu.Style = style;
         foreach (var pair in new[] { ("网格", "Grid"), ("瀑布流", "Masonry"), ("两端对齐", "Justified"), ("列表", "List") })
             menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SwitchViewCommand, CommandParameter = pair.Item2 });
         menu.IsOpen = true;
@@ -216,6 +227,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         if (sender is not Button button) return;
         var menu = new ContextMenu { PlacementTarget = button, Placement = PlacementMode.Bottom };
+        if (TryFindResource("PixelTart.Menu.Context") is Style style) menu.Style = style;
         foreach (var pair in new[] { ("添加时间", "AddedAt"), ("拍摄时间", "CaptureTime"), ("文件名", "FileName"), ("文件大小", "FileSize"), ("评分", "Rating"), ("颜色", "Color"), ("视觉分析", "VisualAnalysis") })
             menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SortBrowserCommand, CommandParameter = pair.Item2 });
         menu.Items.Add(new Separator());

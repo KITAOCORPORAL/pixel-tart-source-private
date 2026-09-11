@@ -11,4 +11,6 @@
     <Style x:Key="WarningCard" TargetType="Border" BasedOn="{StaticResource PanelBorder}"><Setter Property="Background" Value="{DynamicResource WarningSoftBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource WarningBrush}" /></Style>
     <Style x:Key="DangerCard" TargetType="Border" BasedOn="{StaticResource PanelBorder}"><Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" /></Style>
     <Style x:Key="SuccessCard" TargetType="Border" BasedOn="{StaticResource PanelBorder}"><Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" /></Style>
+    <Style x:Key="InspectorPanel" TargetType="Border" BasedOn="{StaticResource PanelBorder}"><Setter Property="BorderThickness" Value="1,0,0,0" /><Setter Property="MinWidth" Value="280" /><Setter Property="MaxWidth" Value="360" /></Style>
+    <Style x:Key="LoadingPanel" TargetType="Border" BasedOn="{StaticResource PanelBorder}"><Setter Property="Opacity" Value="0.72" /><Setter Property="IsHitTestVisible" Value="False" /></Style>
 </ResourceDictionary>
