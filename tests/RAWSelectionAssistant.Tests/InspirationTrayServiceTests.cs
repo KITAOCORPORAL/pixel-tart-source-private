@@ -58,4 +58,33 @@ public sealed class InspirationTrayServiceTests
         Assert.AreEqual(7, await service.ClearAsync());
         Assert.IsEmpty(await service.ListAsync());
     }
+
+    [TestMethod]
+    public async Task Collections_CreateEditMembershipAndPersistAcrossRestart()
+    {
+        using var temp = new TempDirectory();
+        var path = temp.Combine("tray.sqlite");
+        Guid collectionId;
+        Guid[] entryIds;
+        await using (var service = new SqliteInspirationTrayService(path))
+        {
+            var refs = Enumerable.Range(0, 3).Select(_ => new AssetLibraryStableReference(Guid.NewGuid(), Guid.NewGuid(), new string('a', 64))).ToArray();
+            var added = await service.AddRangeAsync(refs);
+            entryIds = added.AddedEntries.Select(x => x.TrayEntryId).ToArray();
+            var created = await service.CreateCollectionAsync("Weekend selects", Guid.NewGuid());
+            collectionId = created.CollectionId;
+            Assert.AreEqual(0, created.EntryCount);
+            Assert.AreEqual(2, await service.AddEntriesToCollectionAsync(collectionId, entryIds.Take(2)));
+            Assert.AreEqual(1, await service.RemoveEntriesFromCollectionAsync(collectionId, [entryIds[0]]));
+            Assert.AreEqual(1, await service.RenameCollectionAsync(collectionId, "Final selects"));
+            Assert.AreEqual(1, (await service.ListCollectionsAsync()).Single().EntryCount);
+        }
+        await using var restarted = new SqliteInspirationTrayService(path);
+        var listed = await restarted.ListCollectionsAsync();
+        Assert.HasCount(1, listed);
+        Assert.AreEqual("Final selects", listed[0].Name);
+        Assert.AreEqual(1, listed[0].EntryCount);
+        Assert.AreEqual(1, await restarted.ArchiveCollectionAsync(collectionId));
+        Assert.IsEmpty(await restarted.ListCollectionsAsync());
+    }
 }

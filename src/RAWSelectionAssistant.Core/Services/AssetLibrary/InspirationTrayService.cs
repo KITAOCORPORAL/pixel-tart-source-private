@@ -25,6 +25,7 @@ public sealed record InspirationTrayEntry(
 public sealed record InspirationTrayAddResult(int AddedCount, int ExistingCount, IReadOnlyList<InspirationTrayEntry> AddedEntries);
 public sealed record InspirationTrayResolution(AssetLibraryStableReference Reference, InspirationTrayResolutionState State);
 public sealed record InspirationCollectionSnapshot(IReadOnlyList<InspirationTrayEntry> Entries, DateTimeOffset CreatedAtUtc);
+public sealed record InspirationCollectionSummary(Guid CollectionId, string Name, Guid? ProjectId, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, int EntryCount);
 
 /// <summary>
 /// Persists temporary inspiration references in one SQLite transaction per operation.
@@ -43,6 +44,13 @@ public interface IInspirationTrayService : IAsyncDisposable
     Task<int> ResolveAsync(IEnumerable<InspirationTrayResolution> resolutions, CancellationToken cancellationToken = default);
     Task<int> DeduplicateAsync(CancellationToken cancellationToken = default);
     Task<InspirationCollectionSnapshot> SaveAsInspirationCollectionAsync(CancellationToken cancellationToken = default);
+    Task<InspirationCollectionSummary> CreateCollectionAsync(string name, Guid? projectId = null, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<InspirationCollectionSummary>> ListCollectionsAsync(CancellationToken cancellationToken = default);
+    Task<int> RenameCollectionAsync(Guid collectionId, string name, CancellationToken cancellationToken = default);
+    Task<int> ArchiveCollectionAsync(Guid collectionId, CancellationToken cancellationToken = default);
+    Task<int> AddEntriesToCollectionAsync(Guid collectionId, IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default);
+    Task<int> RemoveEntriesFromCollectionAsync(Guid collectionId, IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default);
+    Task<int> ReorderCollectionAsync(Guid collectionId, IReadOnlyList<Guid> trayEntryIds, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetLibraryStableReference>> GetSelectedReferencesAsync(IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default);
 }
 
@@ -79,6 +87,21 @@ public sealed class SqliteInspirationTrayService : IInspirationTrayService
                 LastResolvedAtUtc TEXT NULL,
                 UNIQUE(LibraryId,AssetId));
             CREATE INDEX IF NOT EXISTS IX_InspirationTrayEntries_Order ON InspirationTrayEntries(SortOrder,AddedAtUtc,TrayEntryId);
+            CREATE TABLE IF NOT EXISTS InspirationCollections(
+                CollectionId TEXT NOT NULL PRIMARY KEY,
+                Name TEXT NOT NULL,
+                ProjectId TEXT NULL,
+                CreatedAtUtc TEXT NOT NULL,
+                UpdatedAtUtc TEXT NOT NULL,
+                IsArchived INTEGER NOT NULL DEFAULT 0);
+            CREATE TABLE IF NOT EXISTS InspirationCollectionEntries(
+                CollectionId TEXT NOT NULL,
+                TrayEntryId TEXT NOT NULL,
+                SortOrder INTEGER NOT NULL,
+                PRIMARY KEY(CollectionId,TrayEntryId),
+                FOREIGN KEY(CollectionId) REFERENCES InspirationCollections(CollectionId) ON DELETE CASCADE,
+                FOREIGN KEY(TrayEntryId) REFERENCES InspirationTrayEntries(TrayEntryId) ON DELETE CASCADE);
+            CREATE INDEX IF NOT EXISTS IX_InspirationCollectionEntries_Order ON InspirationCollectionEntries(CollectionId,SortOrder);
             """;
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         Volatile.Write(ref _initialized, 1);
@@ -153,6 +176,31 @@ public sealed class SqliteInspirationTrayService : IInspirationTrayService
 
     public async Task<int> DeduplicateAsync(CancellationToken cancellationToken = default) { await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var cmd = c.CreateCommand(); cmd.CommandText = "DELETE FROM InspirationTrayEntries WHERE TrayEntryId NOT IN (SELECT TrayEntryId FROM (SELECT TrayEntryId,ROW_NUMBER() OVER (PARTITION BY LibraryId,AssetId ORDER BY AddedAtUtc,SortOrder,TrayEntryId) AS rn FROM InspirationTrayEntries) WHERE rn=1);"; return await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
     public async Task<InspirationCollectionSnapshot> SaveAsInspirationCollectionAsync(CancellationToken cancellationToken = default) => new(await ListAsync(cancellationToken).ConfigureAwait(false), DateTimeOffset.UtcNow);
+    public async Task<InspirationCollectionSummary> CreateCollectionAsync(string name, Guid? projectId = null, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Collection name is required.", nameof(name));
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); var id = Guid.NewGuid(); var now = DateTimeOffset.UtcNow;
+        await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var cmd = c.CreateCommand();
+        cmd.CommandText = "INSERT INTO InspirationCollections(CollectionId,Name,ProjectId,CreatedAtUtc,UpdatedAtUtc) VALUES($id,$name,$project,$created,$updated);";
+        cmd.Parameters.AddWithValue("$id", id.ToString("D")); cmd.Parameters.AddWithValue("$name", name.Trim()); cmd.Parameters.AddWithValue("$project", (object?)projectId?.ToString("D") ?? DBNull.Value); cmd.Parameters.AddWithValue("$created", now.ToString("O")); cmd.Parameters.AddWithValue("$updated", now.ToString("O")); await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        return new(id, name.Trim(), projectId, now, now, 0);
+    }
+    public async Task<IReadOnlyList<InspirationCollectionSummary>> ListCollectionsAsync(CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var cmd = c.CreateCommand();
+        cmd.CommandText = "SELECT c.CollectionId,c.Name,c.ProjectId,c.CreatedAtUtc,c.UpdatedAtUtc,COUNT(e.TrayEntryId) FROM InspirationCollections c LEFT JOIN InspirationCollectionEntries e ON e.CollectionId=c.CollectionId WHERE c.IsArchived=0 GROUP BY c.CollectionId ORDER BY c.UpdatedAtUtc DESC;";
+        await using var r = await cmd.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false); var result = new List<InspirationCollectionSummary>(); while (await r.ReadAsync(cancellationToken).ConfigureAwait(false)) result.Add(new(Guid.Parse(r.GetString(0)), r.GetString(1), r.IsDBNull(2) ? null : Guid.Parse(r.GetString(2)), DateTimeOffset.Parse(r.GetString(3)), DateTimeOffset.Parse(r.GetString(4)), r.GetInt32(5))); return result;
+    }
+    public async Task<int> RenameCollectionAsync(Guid collectionId, string name, CancellationToken cancellationToken = default)
+    { if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Collection name is required.", nameof(name)); await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var cmd = c.CreateCommand(); cmd.CommandText = "UPDATE InspirationCollections SET Name=$name,UpdatedAtUtc=$updated WHERE CollectionId=$id AND IsArchived=0;"; cmd.Parameters.AddWithValue("$name", name.Trim()); cmd.Parameters.AddWithValue("$updated", DateTimeOffset.UtcNow.ToString("O")); cmd.Parameters.AddWithValue("$id", collectionId.ToString("D")); return await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
+    public async Task<int> ArchiveCollectionAsync(Guid collectionId, CancellationToken cancellationToken = default)
+    { await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var cmd = c.CreateCommand(); cmd.CommandText = "UPDATE InspirationCollections SET IsArchived=1,UpdatedAtUtc=$updated WHERE CollectionId=$id AND IsArchived=0;"; cmd.Parameters.AddWithValue("$updated", DateTimeOffset.UtcNow.ToString("O")); cmd.Parameters.AddWithValue("$id", collectionId.ToString("D")); return await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); }
+    public Task<int> AddEntriesToCollectionAsync(Guid collectionId, IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default) => UpdateCollectionEntriesAsync(collectionId, trayEntryIds, false, cancellationToken);
+    public Task<int> RemoveEntriesFromCollectionAsync(Guid collectionId, IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default) => UpdateCollectionEntriesAsync(collectionId, trayEntryIds, true, cancellationToken);
+    private async Task<int> UpdateCollectionEntriesAsync(Guid collectionId, IEnumerable<Guid> trayEntryIds, bool remove, CancellationToken cancellationToken)
+    { var ids = trayEntryIds?.Distinct().ToArray() ?? throw new ArgumentNullException(nameof(trayEntryIds)); await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); var changed = 0; foreach (var id in ids) { await using var cmd = c.CreateCommand(); cmd.CommandText = remove ? "DELETE FROM InspirationCollectionEntries WHERE CollectionId=$collection AND TrayEntryId=$entry;" : "INSERT OR IGNORE INTO InspirationCollectionEntries(CollectionId,TrayEntryId,SortOrder) VALUES($collection,$entry,COALESCE((SELECT MAX(SortOrder)+1 FROM InspirationCollectionEntries WHERE CollectionId=$collection),0));"; cmd.Parameters.AddWithValue("$collection", collectionId.ToString("D")); cmd.Parameters.AddWithValue("$entry", id.ToString("D")); changed += await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); } return changed; }
+    public async Task<int> ReorderCollectionAsync(Guid collectionId, IReadOnlyList<Guid> trayEntryIds, CancellationToken cancellationToken = default)
+    { if (trayEntryIds is null) throw new ArgumentNullException(nameof(trayEntryIds)); await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var c = await OpenAsync(cancellationToken).ConfigureAwait(false); await using var tx = (SqliteTransaction)await c.BeginTransactionAsync(cancellationToken).ConfigureAwait(false); var changed = 0; for (var i=0;i<trayEntryIds.Count;i++){ await using var cmd=c.CreateCommand(); cmd.Transaction=tx; cmd.CommandText="UPDATE InspirationCollectionEntries SET SortOrder=$order WHERE CollectionId=$collection AND TrayEntryId=$entry;"; cmd.Parameters.AddWithValue("$order",i); cmd.Parameters.AddWithValue("$collection",collectionId.ToString("D")); cmd.Parameters.AddWithValue("$entry",trayEntryIds[i].ToString("D")); changed += await cmd.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);} await tx.CommitAsync(cancellationToken).ConfigureAwait(false); return changed; }
     public async Task<IReadOnlyList<AssetLibraryStableReference>> GetSelectedReferencesAsync(IEnumerable<Guid> trayEntryIds, CancellationToken cancellationToken = default) { var ids = trayEntryIds?.ToHashSet() ?? throw new ArgumentNullException(nameof(trayEntryIds)); return (await ListAsync(cancellationToken).ConfigureAwait(false)).Where(x => ids.Contains(x.TrayEntryId)).Select(x => x.Reference).ToArray(); }
 
     private async Task<SqliteConnection> OpenAsync(CancellationToken cancellationToken) { var connection = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = _databasePath, Mode = SqliteOpenMode.ReadWriteCreate, Cache = SqliteCacheMode.Shared, Pooling = true }.ToString()); await connection.OpenAsync(cancellationToken).ConfigureAwait(false); await using var pragma = connection.CreateCommand(); pragma.CommandText = "PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL;"; await pragma.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false); return connection; }
