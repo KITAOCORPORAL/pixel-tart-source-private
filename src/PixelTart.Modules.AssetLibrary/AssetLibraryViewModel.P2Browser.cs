@@ -6,10 +6,19 @@ using System.Windows;
 using Microsoft.Win32;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
+using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Database;
+using RAWSelectionAssistant.Core.Services.OnlineSelection;
 
 namespace PixelTart.Modules.AssetLibrary;
 
-public sealed record AssetRelationPickerItem(Guid Id, string Name, string Details);
+public sealed record AssetRelationPickerItem(
+    Guid Id,
+    string Name,
+    string Details,
+    Guid? ProjectId = null,
+    DateTimeOffset? EventDate = null,
+    string Group = "全部");
 
 public sealed partial class AssetLibraryViewModel
 {
@@ -33,6 +42,10 @@ public sealed partial class AssetLibraryViewModel
     private bool _isBookingPickerOpen;
     private bool _isCollectionPanelOpen;
     private Guid? _activeCollectionId;
+    private string _projectPickerSearch = string.Empty;
+    private string _bookingPickerSearch = string.Empty;
+    private AssetRelationPickerItem[] _allProjectPickerItems = [];
+    private AssetRelationPickerItem[] _allBookingPickerItems = [];
 
     public ObservableCollection<AssetLibrarySystemCollectionView> SystemCollections { get; } = [];
     public ObservableCollection<AssetLibraryFolderNodeView> OrganizationFolders { get; } = [];
@@ -120,6 +133,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetVisualMatchView> TrashContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RestoreTrashContextCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> WorkflowClientSelectedCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> WorkflowUnprocessedCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> WorkflowPendingRetouchCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> WorkflowRetouchedCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> WorkflowDeliveredCommand { get; private set; } = null!;
@@ -142,6 +156,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetRelationPickerItem> SelectBookingRelationCommand { get; private set; } = null!;
     public AsyncCommand<AssetRelationPickerItem> RemoveProjectRelationCommand { get; private set; } = null!;
     public AsyncCommand<AssetRelationPickerItem> RemoveBookingRelationCommand { get; private set; } = null!;
+    public AsyncCommand<string> SetInspectorWorkflowCommand { get; private set; } = null!;
     public AsyncCommand OpenCollectionsCommand { get; private set; } = null!;
     public AsyncCommand CreateCollectionCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> OpenCollectionCommand { get; private set; } = null!;
@@ -150,6 +165,9 @@ public sealed partial class AssetLibraryViewModel
     public int InspirationTrayCount { get => _inspirationTrayCount; private set => SetProperty(ref _inspirationTrayCount, value); }
     public bool IsProjectPickerOpen { get => _isProjectPickerOpen; private set => SetProperty(ref _isProjectPickerOpen, value); }
     public bool IsBookingPickerOpen { get => _isBookingPickerOpen; private set => SetProperty(ref _isBookingPickerOpen, value); }
+    public string ProjectPickerSearch { get => _projectPickerSearch; set { if (SetProperty(ref _projectPickerSearch, value)) FilterProjectPicker(); } }
+    public string BookingPickerSearch { get => _bookingPickerSearch; set { if (SetProperty(ref _bookingPickerSearch, value)) FilterBookingPicker(); } }
+    public IReadOnlyList<string> WorkflowStatusOptions { get; } = ["未处理", "客户选择", "待精修", "已精修", "已交付"];
     public bool IsCollectionPanelOpen { get => _isCollectionPanelOpen; private set => SetProperty(ref _isCollectionPanelOpen, value); }
     public Guid? ActiveCollectionId { get => _activeCollectionId; private set => SetProperty(ref _activeCollectionId, value); }
     private bool _isInspirationTrayOpen;
@@ -184,6 +202,7 @@ public sealed partial class AssetLibraryViewModel
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
         TrashContextCommand = new(card => SetContextTrashedAsync(card, true));
         RestoreTrashContextCommand = new(card => SetContextTrashedAsync(card, false));
+        WorkflowUnprocessedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Unprocessed));
         WorkflowClientSelectedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.ClientSelected));
         WorkflowPendingRetouchCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.PendingRetouch));
         WorkflowRetouchedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Retouched));
@@ -207,6 +226,7 @@ public sealed partial class AssetLibraryViewModel
         SelectBookingRelationCommand = new(SelectBookingRelationAsync, _ => IsReady);
         RemoveProjectRelationCommand = new(RemoveProjectRelationAsync, _ => IsReady);
         RemoveBookingRelationCommand = new(RemoveBookingRelationAsync, _ => IsReady);
+        SetInspectorWorkflowCommand = new(SetInspectorWorkflowAsync, _ => IsReady && SelectedAssets.Count > 0);
         OpenCollectionsCommand = new(OpenCollectionsAsync, () => IsReady);
         CreateCollectionCommand = new(CreateCollectionAsync, () => IsReady);
         OpenCollectionCommand = new(OpenCollectionAsync, _ => IsReady);
@@ -220,19 +240,79 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task OpenProjectPickerAsync()
     {
-        IsBookingPickerOpen = false; ProjectPickerItems.Clear();
-        var projects = await new RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository(new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).ListAsync(_lifetimeCancellation.Token).ConfigureAwait(false);
-        foreach (var project in projects) ProjectPickerItems.Add(new(project.Id, project.Name, $"{project.Status} · {project.Category}"));
+        IsBookingPickerOpen = false;
+        var database = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+        var projects = await new SqliteProjectRepository(database).ListAsync(_lifetimeCancellation.Token);
+        var selectedAssetIds = SelectedAssets.Select(asset => asset.AssetId).ToArray();
+        var bookingLinks = new List<BookingAssetLink>();
+        foreach (var assetId in selectedAssetIds)
+            bookingLinks.AddRange(await _repository.ListBookingAssetLinksAsync(assetId: assetId, cancellationToken: _lifetimeCancellation.Token));
+        var bookingRepository = new SqliteShootBookingRepository(database);
+        var currentProjectIds = new HashSet<Guid>();
+        foreach (var link in bookingLinks.DistinctBy(link => link.BookingId))
+        {
+            var booking = await bookingRepository.GetAsync(link.BookingId, cancellationToken: _lifetimeCancellation.Token);
+            if (booking?.ProjectId is Guid projectId) currentProjectIds.Add(projectId);
+        }
+        _allProjectPickerItems = projects
+            .OrderByDescending(project => currentProjectIds.Contains(project.Id))
+            .ThenByDescending(project => project.UpdatedAt)
+            .Select((project, index) => new AssetRelationPickerItem(
+                project.Id,
+                project.Name,
+                $"{project.Status} · {project.Category}",
+                Group: currentProjectIds.Contains(project.Id) ? "当前拍摄对应项目" : index < 8 ? "最近项目" : "全部项目"))
+            .ToArray();
+        ProjectPickerSearch = string.Empty;
+        FilterProjectPicker();
         IsProjectPickerOpen = true;
     }
 
     private async Task OpenBookingPickerAsync()
     {
-        IsProjectPickerOpen = false; BookingPickerItems.Clear();
-        var bookings = await new RAWSelectionAssistant.Core.Services.Database.SqliteShootBookingRepository(new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).SearchAllUnarchivedAsync(new(null, PageSize: 100), _lifetimeCancellation.Token).ConfigureAwait(false);
-        foreach (var booking in bookings.Items.OrderByDescending(item => item.StartAtUtc)) BookingPickerItems.Add(new(booking.Id, $"{booking.StartAtUtc.ToLocalTime():yyyy-MM-dd} · {booking.Title}", $"{booking.ClientDisplayName} · {booking.Location ?? "未填写地点"}"));
+        IsProjectPickerOpen = false;
+        var database = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+        var projectRepository = new SqliteProjectRepository(database);
+        var projects = await projectRepository.ListAsync(_lifetimeCancellation.Token);
+        var projectNames = projects.ToDictionary(project => project.Id, project => project.Name);
+        var currentProjectIds = new HashSet<Guid>();
+        foreach (var asset in SelectedAssets)
+            foreach (var link in await _repository.ListProjectAssetLinksAsync(assetId: asset.AssetId, cancellationToken: _lifetimeCancellation.Token))
+                currentProjectIds.Add(link.ProjectId);
+        var bookings = await new SqliteShootBookingRepository(database).SearchAllUnarchivedAsync(new(null, PageSize: 100), _lifetimeCancellation.Token);
+        _allBookingPickerItems = bookings.Items
+            .OrderByDescending(item => item.ProjectId is Guid projectId && currentProjectIds.Contains(projectId))
+            .ThenByDescending(item => item.StartAtUtc)
+            .Select((booking, index) => new AssetRelationPickerItem(
+                booking.Id,
+                $"{booking.StartAtUtc.ToLocalTime():yyyy-MM-dd} · {booking.Title}",
+                $"项目：{(booking.ProjectId is Guid projectId && projectNames.TryGetValue(projectId, out var projectName) ? projectName : "未关联")} · 客户：{ValueOrMissing(booking.ClientDisplayName)} · 地点：{booking.Location ?? "未填写"}",
+                booking.ProjectId,
+                booking.StartAtUtc,
+                booking.ProjectId is Guid currentId && currentProjectIds.Contains(currentId) ? "当前项目下拍摄" : index < 12 ? "最近拍摄" : "全部拍摄"))
+            .ToArray();
+        BookingPickerSearch = string.Empty;
+        FilterBookingPicker();
         IsBookingPickerOpen = true;
     }
+
+    private void FilterProjectPicker()
+    {
+        var keyword = ProjectPickerSearch.Trim();
+        ProjectPickerItems.Clear();
+        foreach (var item in _allProjectPickerItems.Where(item => RelationMatches(item, keyword))) ProjectPickerItems.Add(item);
+    }
+
+    private void FilterBookingPicker()
+    {
+        var keyword = BookingPickerSearch.Trim();
+        BookingPickerItems.Clear();
+        foreach (var item in _allBookingPickerItems.Where(item => RelationMatches(item, keyword))) BookingPickerItems.Add(item);
+    }
+
+    private static bool RelationMatches(AssetRelationPickerItem item, string keyword) =>
+        keyword.Length == 0 || item.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+        item.Details.Contains(keyword, StringComparison.OrdinalIgnoreCase) || item.Group.Contains(keyword, StringComparison.OrdinalIgnoreCase);
 
     private async Task SelectProjectRelationAsync(AssetRelationPickerItem? item)
     {
@@ -260,6 +340,26 @@ public sealed partial class AssetLibraryViewModel
         if (item is null) return;
         foreach (var asset in SelectedAssets) await _repository.RemoveBookingAssetLinkAsync(item.Id, asset.AssetId, _lifetimeCancellation.Token).ConfigureAwait(false);
         Status = $"已移除拍摄关联：{item.Name}"; OnP2SelectionChanged(SelectedAssets.ToArray());
+    }
+
+    public async Task SetInspectorWorkflowAsync(string? displayName)
+    {
+        var workflowStatus = displayName switch
+        {
+            "客户选择" => AssetWorkflowStatus.ClientSelected,
+            "待精修" => AssetWorkflowStatus.PendingRetouch,
+            "已精修" => AssetWorkflowStatus.Retouched,
+            "已交付" => AssetWorkflowStatus.Delivered,
+            _ => AssetWorkflowStatus.Unprocessed
+        };
+        var assets = SelectedAssets.ToArray();
+        foreach (var asset in assets)
+        {
+            var existing = await _repository.GetAssetWorkflowMetadataAsync(asset.AssetId, _lifetimeCancellation.Token);
+            await _repository.SaveAssetWorkflowMetadataAsync(new(asset.AssetId, existing?.AssetOrigin ?? "素材库", workflowStatus), _lifetimeCancellation.Token);
+        }
+        InspectorWorkflowStatus = WorkflowDisplayName(workflowStatus);
+        Status = $"已更新 {assets.Length} 项工作流状态：{InspectorWorkflowStatus}。";
     }
 
     private async Task OpenCollectionsAsync()
@@ -739,14 +839,52 @@ public sealed partial class AssetLibraryViewModel
                 var bookingLinks = await _repository.ListBookingAssetLinksAsync(assetId: id, cancellationToken: _lifetimeCancellation.Token);
                 if (generation != Volatile.Read(ref _inspectorGeneration)) return;
                 InspectorProjectLinks.Clear(); InspectorBookingLinks.Clear();
-                var projects = await new RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository(new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).ListAsync(_lifetimeCancellation.Token).ConfigureAwait(false);
-                var bookings = await new RAWSelectionAssistant.Core.Services.Database.SqliteShootBookingRepository(new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).SearchAllUnarchivedAsync(new(null, PageSize: 100), _lifetimeCancellation.Token).ConfigureAwait(false);
-                foreach (var link in projectLinks) { var project = projects.FirstOrDefault(item => item.Id == link.ProjectId); InspectorProjectLinks.Add(new(link.ProjectId, project?.Name ?? $"项目 {link.ProjectId:N}"[..15], link.Role)); }
-                foreach (var link in bookingLinks) { var booking = bookings.Items.FirstOrDefault(item => item.Id == link.BookingId); InspectorBookingLinks.Add(new(link.BookingId, booking?.Title ?? $"拍摄 {link.BookingId:N}"[..15], booking is null ? "未找到拍摄记录" : $"{booking.StartAtUtc.ToLocalTime():yyyy-MM-dd} · {booking.ClientDisplayName}")); }
+                var mainDatabase = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+                var projects = await new SqliteProjectRepository(mainDatabase).ListAsync(_lifetimeCancellation.Token);
+                var bookingRepository = new SqliteShootBookingRepository(mainDatabase);
+                var linkedBookings = new List<ShootBooking>();
+                foreach (var link in bookingLinks)
+                {
+                    var booking = await bookingRepository.GetAsync(link.BookingId, includeArchived: true, cancellationToken: _lifetimeCancellation.Token);
+                    if (booking is not null) linkedBookings.Add(booking);
+                }
+                IReadOnlyList<SelectionProject> onlineProjects = [];
+                try
+                {
+                    onlineProjects = (await new JsonSelectionWorkspaceStore(RAWSelectionAssistant.Core.Utilities.AppDataPaths.OnlineSelectionWorkspaceFile).LoadAsync(_lifetimeCancellation.Token)).Projects;
+                }
+                catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException)
+                {
+                    _logService?.Error("在线选片客户显示信息暂不可用。", exception);
+                }
+                var linkedProjectNames = projectLinks
+                    .Select(link => projects.FirstOrDefault(project => project.Id == link.ProjectId)?.Name)
+                    .Where(name => !string.IsNullOrWhiteSpace(name))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                var projectClientNames = onlineProjects
+                    .Where(project => linkedProjectNames.Contains(project.Name))
+                    .Select(project => project.ClientDisplayName);
+                foreach (var link in projectLinks)
+                {
+                    var project = projects.FirstOrDefault(item => item.Id == link.ProjectId);
+                    InspectorProjectLinks.Add(new(link.ProjectId, project?.Name ?? $"项目 {link.ProjectId:N}"[..15], link.Role));
+                }
+                foreach (var link in bookingLinks)
+                {
+                    var booking = linkedBookings.FirstOrDefault(item => item.Id == link.BookingId);
+                    var projectName = booking?.ProjectId is Guid projectId ? projects.FirstOrDefault(project => project.Id == projectId)?.Name : null;
+                    InspectorBookingLinks.Add(new(
+                        link.BookingId,
+                        booking?.Title ?? $"拍摄 {link.BookingId:N}"[..15],
+                        booking is null ? "未找到拍摄记录" : $"{booking.StartAtUtc.ToLocalTime():yyyy-MM-dd} · 项目：{projectName ?? "未关联"} · 客户：{ValueOrMissing(booking.ClientDisplayName)} · 地点：{booking.Location ?? "未填写"}",
+                        booking?.ProjectId,
+                        booking?.StartAtUtc));
+                }
                 InspectorAssetOrigin = workflow?.AssetOrigin ?? "未指定";
-                InspectorWorkflowStatus = workflow?.WorkflowStatus switch { AssetWorkflowStatus.ClientSelected => "客户选择", AssetWorkflowStatus.PendingRetouch => "待精修", AssetWorkflowStatus.Retouched => "已精修", AssetWorkflowStatus.Delivered => "已交付", _ => "未处理" };
-                InspectorProject = projectLinks.Count == 0 ? "未关联" : string.Join("、", projectLinks.Select(link => link.ProjectId.ToString("N")[..8]));
-                InspectorBooking = bookingLinks.Count == 0 ? "未关联" : string.Join("、", bookingLinks.Select(link => link.BookingId.ToString("N")[..8]));
+                InspectorWorkflowStatus = WorkflowDisplayName(workflow?.WorkflowStatus ?? AssetWorkflowStatus.Unprocessed);
+                InspectorProject = InspectorProjectLinks.Count == 0 ? "未关联" : string.Join("、", InspectorProjectLinks.Select(link => link.Name));
+                InspectorBooking = InspectorBookingLinks.Count == 0 ? "未关联" : string.Join("、", InspectorBookingLinks.Select(link => link.Name));
+                InspectorClient = new ClientDisplayResolver().Resolve(linkedBookings.Select(booking => booking.ClientDisplayName), projectClientNames);
                 return;
             }
             var commonFolderIds = folderMemberships.Where(item => ids.Contains(item.AssetId)).GroupBy(item => item.FolderId).Where(group => group.Select(item => item.AssetId).Distinct().Count() == ids.Count).Select(group => group.Key);
@@ -973,6 +1111,15 @@ public sealed partial class AssetLibraryViewModel
         OnP2SelectionChanged(SelectedAssets.ToArray());
         await _p2InspectorTask;
     }
+
+    private static string WorkflowDisplayName(AssetWorkflowStatus workflowStatus) => workflowStatus switch
+    {
+        AssetWorkflowStatus.ClientSelected => "客户选择",
+        AssetWorkflowStatus.PendingRetouch => "待精修",
+        AssetWorkflowStatus.Retouched => "已精修",
+        AssetWorkflowStatus.Delivered => "已交付",
+        _ => "未处理"
+    };
 
     private async Task ExportContextFilesAsync(AssetVisualMatchView? card, bool preferManagedCopy)
     {

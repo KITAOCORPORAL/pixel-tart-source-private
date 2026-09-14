@@ -452,17 +452,22 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private string _inspectorWorkflowStatus = "未处理";
     private string _inspectorProject = "未关联";
     private string _inspectorBooking = "未关联";
+    private string _inspectorClient = "未关联";
     private JpegQualityInfo? _inspectorMetadata;
     public string InspectorAssetOrigin { get => _inspectorAssetOrigin; private set => SetProperty(ref _inspectorAssetOrigin, value); }
     public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "托管副本" : "原位引用";
     public string InspectorShootDate => SelectedAsset?.CaptureTime?.ToString("yyyy-MM-dd HH:mm") ?? "未记录";
     public string InspectorCamera => _inspectorMetadata is null ? "未记录" : string.Join(' ', new[] { _inspectorMetadata.CameraMake, _inspectorMetadata.CameraModel }.Where(x => !string.IsNullOrWhiteSpace(x))).Trim() is { Length: > 0 } camera ? camera : "未记录";
     public string InspectorLens => string.IsNullOrWhiteSpace(_inspectorMetadata?.Lens) ? "未记录" : _inspectorMetadata!.Lens;
+    public string InspectorIso => ValueOrMissing(_inspectorMetadata?.Iso);
+    public string InspectorShutter => ValueOrMissing(_inspectorMetadata?.ExposureTime);
+    public string InspectorAperture => ValueOrMissing(_inspectorMetadata?.Aperture);
+    public string InspectorFocalLength => ValueOrMissing(_inspectorMetadata?.FocalLength);
     public string InspectorExposure => _inspectorMetadata is null ? "ISO / 快门 / 光圈 / 焦距：未记录" : $"ISO {ValueOrMissing(_inspectorMetadata.Iso)} / 快门 {ValueOrMissing(_inspectorMetadata.ExposureTime)} / 光圈 {ValueOrMissing(_inspectorMetadata.Aperture)} / 焦距 {ValueOrMissing(_inspectorMetadata.FocalLength)}";
     public string InspectorWorkflowStatus { get => _inspectorWorkflowStatus; private set => SetProperty(ref _inspectorWorkflowStatus, value); }
     public string InspectorProject { get => _inspectorProject; private set => SetProperty(ref _inspectorProject, value); }
     public string InspectorBooking { get => _inspectorBooking; private set => SetProperty(ref _inspectorBooking, value); }
-    public string InspectorClient => "未关联";
+    public string InspectorClient { get => _inspectorClient; private set => SetProperty(ref _inspectorClient, value); }
     public AssetFolder? SelectedFolder
     {
         get => _selectedFolder;
@@ -797,8 +802,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         if (singleMaterialized is null) { _selectedAsset = null; OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset != singleMaterialized) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
         _inspectorMetadata = null;
+        InspectorClient = "未关联";
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
-        foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
+        foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorIso), nameof(InspectorShutter), nameof(InspectorAperture), nameof(InspectorFocalLength), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
             OnPropertyChanged(property);
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         NotifyWorkspaceLayout();
@@ -818,7 +824,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         {
             if (SelectedAsset?.AssetId != asset.AssetId) return;
             _inspectorMetadata = metadata;
-            OnPropertyChanged(nameof(InspectorCamera)); OnPropertyChanged(nameof(InspectorLens)); OnPropertyChanged(nameof(InspectorExposure));
+            OnPropertyChanged(nameof(InspectorCamera)); OnPropertyChanged(nameof(InspectorLens)); OnPropertyChanged(nameof(InspectorIso));
+            OnPropertyChanged(nameof(InspectorShutter)); OnPropertyChanged(nameof(InspectorAperture)); OnPropertyChanged(nameof(InspectorFocalLength));
+            OnPropertyChanged(nameof(InspectorExposure));
         });
     }
 

@@ -20,19 +20,14 @@
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      Style="{DynamicResource PixelTart.Menu.Context}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
-            <MenuItem Header="在新窗口打开" Command="{Binding Owner.OpenContextViewerCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenViewer" />
-            <MenuItem Header="在默认应用打开" Command="{Binding Owner.OpenContextExternalCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenExternal" />
-            <MenuItem Header="使用其他应用打开 ›" Command="{Binding Owner.OpenContextExternalCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenWith" />
-            <MenuItem Header="在文件资源管理器中显示" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextReveal" />
-            <MenuItem Header="打开原文件位置 ›" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenLocation" />
-            <Separator />
-            <MenuItem Header="用于策划 ›" AutomationProperties.AutomationId="AssetContextPlanning">
-                <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
-                <MenuItem Header="加入当前情绪板" IsEnabled="False" />
-                <MenuItem Header="加入项目策划" IsEnabled="False" />
+            <MenuItem Header="查看" AutomationProperties.AutomationId="AssetContextView">
+                <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
+                <MenuItem Header="Viewer" Command="{Binding Owner.OpenContextViewerCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenViewer" />
+                <MenuItem Header="默认应用" Command="{Binding Owner.OpenContextExternalCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenExternal" />
+                <MenuItem Header="Explorer 显示" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextReveal" />
+                <MenuItem Header="复制路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextCopyPath" />
             </MenuItem>
-            <MenuItem Header="加入与整理 ›" AutomationProperties.AutomationId="AssetContextOrganize">
+            <MenuItem Header="整理" AutomationProperties.AutomationId="AssetContextOrganize">
                 <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
                 <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFolder" />
                 <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
@@ -45,33 +40,38 @@
                     <MenuItem Header="4 星" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
                     <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
                 </MenuItem>
+                <MenuItem Header="颜色">
+                    <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" />
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="素材编辑 ›" AutomationProperties.AutomationId="AssetContextEdit">
-                <MenuItem Header="用其他文件替换" IsEnabled="False" />
+            <MenuItem Header="摄影工作流" AutomationProperties.AutomationId="AssetContextWorkflow">
+                <MenuItem Header="项目" Command="{Binding Owner.OpenProjectPickerCommand}" />
+                <MenuItem Header="拍摄" Command="{Binding Owner.OpenBookingPickerCommand}" />
+                <MenuItem Header="工作流状态">
+                    <MenuItem Header="未处理" Command="{Binding Owner.WorkflowUnprocessedCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="客户选择" Command="{Binding Owner.WorkflowClientSelectedCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="待精修" Command="{Binding Owner.WorkflowPendingRetouchCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="已精修" Command="{Binding Owner.WorkflowRetouchedCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="已交付" Command="{Binding Owner.WorkflowDeliveredCommand}" CommandParameter="{Binding}" />
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="工作流 ›" AutomationProperties.AutomationId="AssetContextWorkflow">
-                <MenuItem Header="客户选择" Command="{Binding Owner.WorkflowClientSelectedCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="待精修" Command="{Binding Owner.WorkflowPendingRetouchCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="已精修" Command="{Binding Owner.WorkflowRetouchedCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="已交付" Command="{Binding Owner.WorkflowDeliveredCommand}" CommandParameter="{Binding}" />
+            <MenuItem Header="创作" AutomationProperties.AutomationId="AssetContextCreative">
+                <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
+                <MenuItem Header="加入灵感集…" Command="{Binding Owner.OpenCollectionsCommand}" AutomationProperties.AutomationId="AssetContextAddToCollection" />
             </MenuItem>
-            <MenuItem Header="导出 ›" AutomationProperties.AutomationId="AssetContextExport">
+            <MenuItem Header="导出" AutomationProperties.AutomationId="AssetContextExport">
                 <MenuItem Header="原文件副本" Command="{Binding Owner.ExportOriginalContextCommand}" CommandParameter="{Binding}" />
                 <MenuItem Header="托管副本" Command="{Binding Owner.ExportManagedContextCommand}" CommandParameter="{Binding}" />
                 <MenuItem Header="元数据 CSV" Command="{Binding Owner.ExportMetadataContextCommand}" CommandParameter="{Binding}" />
             </MenuItem>
-            <Separator />
-            <MenuItem Header="查看模式 ›" AutomationProperties.AutomationId="AssetContextViewMode">
-                <MenuItem Header="查找相似配色" Command="{Binding Owner.FindPaletteSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarPaletteContext" />
-                <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="FindSimilarVisualContext" />
-                <MenuItem Header="分析视觉数据" Command="{Binding Owner.AnalyzeSelectionCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AnalyzeVisualContext" />
+            <MenuItem Header="生命周期" AutomationProperties.AutomationId="AssetContextLifecycle">
+                <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
+                <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
+                <MenuItem Header="恢复归档" Command="{Binding Owner.RestoreContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRestore" />
+                <MenuItem Header="移到回收站" Command="{Binding Owner.TrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrash" />
+                <MenuItem Header="从回收站恢复" Command="{Binding Owner.RestoreTrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrashRestore" />
             </MenuItem>
-            <Separator />
-            <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
-            <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
-            <MenuItem Header="恢复归档" Command="{Binding Owner.RestoreContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRestore" />
-            <MenuItem Header="移到回收站" Command="{Binding Owner.TrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrash" />
-            <MenuItem Header="从回收站恢复" Command="{Binding Owner.RestoreTrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrashRestore" />
         </ContextMenu>
 
         <Style x:Key="AssetP2ListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource PixelTart.Thumbnail}">
@@ -599,9 +599,15 @@
                             </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Stack.1}" />
-                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=存储模式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <TextBlock Text="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <Button Content="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" Padding="4,2" Margin="0,4,0,0" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
+                            <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
+                                <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
+                                <MenuItem Header="客户选择" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="客户选择" />
+                                <MenuItem Header="待精修" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="待精修" />
+                                <MenuItem Header="已精修" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已精修" />
+                                <MenuItem Header="已交付" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已交付" />
+                            </ContextMenu></Button.ContextMenu>
+                        </Button>
                         <TextBlock Text="项目" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <ItemsControl ItemsSource="{Binding InspectorProjectLinks}"><ItemsControl.ItemTemplate><DataTemplate><DockPanel Margin="0,2"><TextBlock Text="{Binding Name}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveProjectRelationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" /></DockPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
                         <TextBlock Text="{Binding InspectorProject, StringFormat=项目摘要：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
@@ -622,7 +628,10 @@
                                 <TextBlock Text="{Binding InspectorShootDate, StringFormat=拍摄时间：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorCaptureTime" />
                                 <TextBlock Text="{Binding InspectorCamera, StringFormat=相机：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                                 <TextBlock Text="{Binding InspectorLens, StringFormat=镜头：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                                <TextBlock Text="{Binding InspectorExposure}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorIso, StringFormat=ISO：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorShutter, StringFormat=快门：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorAperture, StringFormat=光圈：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                <TextBlock Text="{Binding InspectorFocalLength, StringFormat=焦距：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                             </StackPanel>
                         </Expander>
                         <Expander Header="技术信息" IsExpanded="False" Margin="{DynamicResource Space.Stack.1}">
@@ -630,6 +639,9 @@
                         <TextBlock Text="{Binding SingleFolderSummary, StringFormat=所属文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="AssetInspectorFolders" AutomationProperties.Name="所属文件夹" />
                         <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding SelectedAsset.Orientation, StringFormat=方向：{0}, TargetNullValue=方向：未记录}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=存储模式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis"
                                    AutomationProperties.AutomationId="AssetInspectorSourcePath" AutomationProperties.Name="素材路径" />
                         <TextBlock Text="{Binding SelectedAsset.FileSize, StringFormat=文件大小：{0:N0} 字节}" Style="{DynamicResource PixelTart.Type.Metadata}"
@@ -666,6 +678,19 @@
                                 <TextBlock Text="{Binding MultipleFolderSummary, StringFormat={}共同文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
                                 <TextBlock Text="{Binding MultipleTagSummary, StringFormat={}共同标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
                                 <TextBlock Text="{Binding MultipleRatingSummary}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
+                                <WrapPanel Margin="0,8,0,0">
+                                    <Button Content="批量关联项目" Command="{Binding OpenProjectPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" />
+                                    <Button Content="批量关联拍摄" Command="{Binding OpenBookingPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" Margin="4,0,0,0" />
+                                    <Button Content="批量工作流 ▾" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" Margin="4,0,0,0">
+                                        <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
+                                            <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
+                                            <MenuItem Header="客户选择" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="客户选择" />
+                                            <MenuItem Header="待精修" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="待精修" />
+                                            <MenuItem Header="已精修" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已精修" />
+                                            <MenuItem Header="已交付" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已交付" />
+                                        </ContextMenu></Button.ContextMenu>
+                                    </Button>
+                                </WrapPanel>
                                 <TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </Border>
@@ -746,16 +771,16 @@
                 Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding IsProjectPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="ProjectRelationPicker">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top"><TextBlock Text="关联项目" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="关闭" Command="{Binding CloseRelationPickerCommand}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
-                <ListBox ItemsSource="{Binding ProjectPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectProjectRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
+                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联项目" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding ProjectPickerSearch, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource PixelTart.TextBox.Standard}" Margin="0,8" AutomationProperties.Name="搜索项目" /></StackPanel>
+                <ListBox ItemsSource="{Binding ProjectPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectProjectRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Group}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
             </DockPanel>
         </Border>
         <Border Grid.Row="2" Panel.ZIndex="31" Width="420" MaxHeight="420" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
                 Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding IsBookingPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="BookingRelationPicker">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top"><TextBlock Text="关联拍摄" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="关闭" Command="{Binding CloseRelationPickerCommand}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
-                <ListBox ItemsSource="{Binding BookingPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectBookingRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
+                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联拍摄" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding BookingPickerSearch, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource PixelTart.TextBox.Standard}" Margin="0,8" AutomationProperties.Name="搜索拍摄" /></StackPanel>
+                <ListBox ItemsSource="{Binding BookingPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectBookingRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Group}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
             </DockPanel>
         </Border>
 

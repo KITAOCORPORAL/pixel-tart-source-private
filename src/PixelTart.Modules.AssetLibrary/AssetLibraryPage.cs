@@ -198,6 +198,14 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void ClearFilters_Click(object sender, RoutedEventArgs e) => _viewModel.ClearFilters();
 
+    private void OpenButtonContextMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { ContextMenu: { } menu } button) return;
+        menu.PlacementTarget = button;
+        menu.Placement = PlacementMode.Bottom;
+        menu.IsOpen = true;
+    }
+
     private void Filter_Click(object sender, RoutedEventArgs e)
     {
         _viewModel.ToggleP3QueryPanelCommand.Execute(null);
