@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
              xmlns:asset="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary"
+             asset:AsyncThumbnail.ScopedProvider="{Binding ThumbnailProvider}"
              AutomationProperties.Name="拍摄排期详情"
              AutomationProperties.HelpText="切换排期时默认回到概览并重置滚动位置；金额默认遮罩，归档不会删除任何电脑文件">
     <UserControl.Resources>
@@ -50,6 +51,10 @@
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" MaxHeight="116">
                                 <ItemsControl ItemsSource="{Binding AssetThumbnails}" AutomationProperties.AutomationId="BookingAssetThumbnailStrip"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Width="96" Height="100" Margin="0,0,6,0" Background="{DynamicResource SurfaceSecondaryBrush}"><Grid><Image Stretch="UniformToFill" asset:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" asset:AsyncThumbnail.DecodeWidth="192" /><TextBlock Text="{Binding WorkflowLabel}" VerticalAlignment="Bottom" Background="#CC171A20" Foreground="White" FontSize="10" Padding="4,2" /><TextBlock Text="离线" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#CC171A20" Foreground="White" FontSize="10" Padding="3" Visibility="{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}" /></Grid></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
                             </ScrollViewer>
+                            <WrapPanel Margin="0,8,0,4">
+                                <Button Content="查看全部素材" Style="{StaticResource SecondaryButton}" Command="{Binding ViewAllAssetsCommand}" AutomationProperties.AutomationId="CalendarViewBookingAssets" />
+                                <Button Content="查看项目素材" Style="{StaticResource GhostButton}" Command="{Binding ViewProjectAssetsCommand}" Margin="7,0,0,0" AutomationProperties.AutomationId="CalendarViewProjectAssets" />
+                            </WrapPanel>
                             <Separator />
                             <TextBlock Text="具体拍摄要求" FontWeight="SemiBold" Margin="0,8,0,3" /><TextBlock Text="{Binding ShootingRequirementsText}" TextWrapping="Wrap" />
                             <TextBlock Text="准备说明" FontWeight="SemiBold" Margin="0,12,0,3" /><TextBlock Text="{Binding PreparationNotesText}" TextWrapping="Wrap" />

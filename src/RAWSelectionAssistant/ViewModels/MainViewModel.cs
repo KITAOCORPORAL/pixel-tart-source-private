@@ -115,6 +115,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
+    public event EventHandler<AssetLibraryNavigationRequestEventArgs>? AssetLibraryFilterRequested;
 
     public MainViewModel(
         FileNameNormalizer normalizer,
@@ -175,6 +176,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
         SurfaceNavigationHost = new SurfaceNavigationHost(_currentPage, IsValidNavigationSurface);
         WorkCalendarPage = workCalendarPage;
         WorkCalendarPage.CalendarPageRequested += WorkCalendarPage_CalendarPageRequested;
+        WorkCalendarPage.AssetLibraryRequested += WorkCalendarPage_AssetLibraryRequested;
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
         TetherPage = tetherPage;
@@ -1097,6 +1099,18 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     {
         WorkCalendarPage.ViewDayDetailsCommand.Execute(date.Date);
         await Task.CompletedTask;
+    }
+
+    public async Task NavigateToCalendarBookingAsync(Guid bookingId)
+    {
+        NavigateToSurface("WorkCalendar");
+        await WorkCalendarPage.NavigateToBookingAsync(bookingId).ConfigureAwait(true);
+    }
+
+    private void WorkCalendarPage_AssetLibraryRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
+    {
+        NavigateToSurface("AssetLibrary");
+        AssetLibraryFilterRequested?.Invoke(this, request);
     }
 
     public async Task HandleDropAsync(string[]? paths, string? text)

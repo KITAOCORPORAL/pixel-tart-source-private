@@ -91,6 +91,20 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     public AssetLibraryContainerDescriptor? CurrentDescriptor => _descriptor;
     public bool IsOffline => _descriptor is null && !string.IsNullOrWhiteSpace(_settings.CurrentContainerPath);
 
+    public async Task ApplyBookingFilterAsync(Guid bookingId)
+    {
+        StartStartup(_legacyDatabasePath);
+        if (_startupTask is not null) await _startupTask;
+        if (_page is not null) await _page.ViewModel.ApplyBookingFilterAsync(bookingId);
+    }
+
+    public async Task ApplyProjectFilterAsync(Guid projectId)
+    {
+        StartStartup(_legacyDatabasePath);
+        if (_startupTask is not null) await _startupTask;
+        if (_page is not null) await _page.ViewModel.ApplyProjectFilterAsync(projectId);
+    }
+
     private void BuildMenu(string initialDatabasePath)
     {
         _menu.Items.Add(MenuItem("新建素材库…", (_, _) => CreateLibraryAsync()));

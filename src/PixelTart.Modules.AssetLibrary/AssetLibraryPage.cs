@@ -52,7 +52,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
         ILogService? logService = null,
         IAssetLibraryLoadStateController? loadStateController = null,
-        bool focusedChrome = false)
+        bool focusedChrome = false,
+        Func<Guid, Task>? openCalendarBooking = null)
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
@@ -61,7 +62,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AsyncThumbnail.SetScopedProvider(this, thumbnailProvider);
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
-        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
+        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController, openCalendarBooking);
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;

@@ -163,8 +163,25 @@ public partial class App : Application
             var clipboardService = new WpfClipboardService();
             _appearanceService = new AppearanceService();
 
-            var calendarAssetDatabasePath = Path.Combine(AppDataPaths.Root, "AssetLibrary", "asset-library.sqlite");
-            var calendarAssetRepository = new SqliteAssetLibraryRepository(calendarAssetDatabasePath);
+            var calendarAssetDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
+            IAssetLibraryRepository? CreateCurrentAssetRepository()
+            {
+                var portable = _mainViewModel?.Settings.AssetLibraryPortable ?? startupSettings.AssetLibraryPortable;
+                if (AssetLibraryContainerService.TryResolveStartupDatabasePath(portable, out var currentDatabasePath))
+                    return new SqliteAssetLibraryRepository(currentDatabasePath);
+                return File.Exists(calendarAssetDatabasePath) ? new SqliteAssetLibraryRepository(calendarAssetDatabasePath) : null;
+            }
+            IAssetThumbnailProvider? CreateCurrentAssetThumbnailProvider()
+            {
+                var portable = _mainViewModel?.Settings.AssetLibraryPortable ?? startupSettings.AssetLibraryPortable;
+                if (AssetLibraryContainerService.TryResolveStartupDatabasePath(portable, out var currentDatabasePath))
+                {
+                    var databaseDirectory = Path.GetDirectoryName(currentDatabasePath)!;
+                    var containerDirectory = Directory.GetParent(databaseDirectory)?.FullName;
+                    return new WpfAssetThumbnailProvider(containerDirectory is null ? null : Path.Combine(containerDirectory, "previews"));
+                }
+                return new WpfAssetThumbnailProvider(Path.Combine(AppDataPaths.DataDirectory, "previews"));
+            }
             var calendarViewModel = new WorkCalendarViewModel(
                 _compositionRoot.ShootBookingService,
                 _compositionRoot.ProjectRepository,
@@ -179,9 +196,11 @@ public partial class App : Application
                 _compositionRoot.FinanceService,
                 currentLocationService,
                 _compositionRoot.BookingWorkflowService,
-                assetRepository: calendarAssetRepository,
+                assetRepository: null,
                 thumbnailProvider: new WpfAssetThumbnailProvider(Path.Combine(AppDataPaths.Root, "AssetLibrary", "previews")),
-                assetDatabasePath: calendarAssetDatabasePath);
+                assetDatabasePath: calendarAssetDatabasePath,
+                assetRepositoryFactory: CreateCurrentAssetRepository,
+                thumbnailProviderFactory: CreateCurrentAssetThumbnailProvider);
             var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,
@@ -557,7 +576,8 @@ public partial class App : Application
                     workspaceSettings,
                     _logService,
                     assetLibraryP1StateController,
-                    focusedChrome: true),
+                    focusedChrome: true,
+                    openCalendarBooking: bookingId => _mainViewModel?.NavigateToCalendarBookingAsync(bookingId) ?? Task.CompletedTask),
                 portableSettings,
                 _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
 #endif

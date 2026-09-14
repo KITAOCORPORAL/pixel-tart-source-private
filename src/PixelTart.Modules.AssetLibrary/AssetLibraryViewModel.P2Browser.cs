@@ -46,6 +46,8 @@ public sealed partial class AssetLibraryViewModel
     private string _bookingPickerSearch = string.Empty;
     private AssetRelationPickerItem[] _allProjectPickerItems = [];
     private AssetRelationPickerItem[] _allBookingPickerItems = [];
+    private IReadOnlyList<Guid>? _relationshipFilterAssetIds;
+    private string? _relationshipFilterDescription;
 
     public ObservableCollection<AssetLibrarySystemCollectionView> SystemCollections { get; } = [];
     public ObservableCollection<AssetLibraryFolderNodeView> OrganizationFolders { get; } = [];
@@ -156,6 +158,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<AssetRelationPickerItem> SelectBookingRelationCommand { get; private set; } = null!;
     public AsyncCommand<AssetRelationPickerItem> RemoveProjectRelationCommand { get; private set; } = null!;
     public AsyncCommand<AssetRelationPickerItem> RemoveBookingRelationCommand { get; private set; } = null!;
+    public AsyncCommand<AssetRelationPickerItem> OpenCalendarBookingCommand { get; private set; } = null!;
     public AsyncCommand<string> SetInspectorWorkflowCommand { get; private set; } = null!;
     public AsyncCommand OpenCollectionsCommand { get; private set; } = null!;
     public AsyncCommand CreateCollectionCommand { get; private set; } = null!;
@@ -226,6 +229,7 @@ public sealed partial class AssetLibraryViewModel
         SelectBookingRelationCommand = new(SelectBookingRelationAsync, _ => IsReady);
         RemoveProjectRelationCommand = new(RemoveProjectRelationAsync, _ => IsReady);
         RemoveBookingRelationCommand = new(RemoveBookingRelationAsync, _ => IsReady);
+        OpenCalendarBookingCommand = new(OpenCalendarBookingAsync, item => IsReady && item is not null && _openCalendarBooking is not null);
         SetInspectorWorkflowCommand = new(SetInspectorWorkflowAsync, _ => IsReady && SelectedAssets.Count > 0);
         OpenCollectionsCommand = new(OpenCollectionsAsync, () => IsReady);
         CreateCollectionCommand = new(CreateCollectionAsync, () => IsReady);
@@ -360,6 +364,43 @@ public sealed partial class AssetLibraryViewModel
         }
         InspectorWorkflowStatus = WorkflowDisplayName(workflowStatus);
         Status = $"已更新 {assets.Length} 项工作流状态：{InspectorWorkflowStatus}。";
+    }
+
+    private async Task OpenCalendarBookingAsync(AssetRelationPickerItem? item)
+    {
+        if (item is null || _openCalendarBooking is null) return;
+        await _openCalendarBooking(item.Id);
+    }
+
+    public async Task ApplyBookingFilterAsync(Guid bookingId)
+    {
+        var links = await _repository.ListBookingAssetLinksAsync(bookingId: bookingId, cancellationToken: _lifetimeCancellation.Token);
+        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), $"拍摄素材 · {bookingId:N}"[..23]);
+    }
+
+    public async Task ApplyProjectFilterAsync(Guid projectId)
+    {
+        var links = await _repository.ListProjectAssetLinksAsync(projectId: projectId, cancellationToken: _lifetimeCancellation.Token);
+        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), $"项目素材 · {projectId:N}"[..23]);
+    }
+
+    private async Task ApplyRelationshipFilterAsync(IReadOnlyList<Guid> assetIds, string description)
+    {
+        StopSearchDebounce();
+        ResetVisualModeState();
+        SetActiveCollectionWithoutRefresh(AssetLibrarySystemCollection.AllAssets);
+        _selectedFolder = null;
+        _selectedTag = null;
+        ClearSmartFolderSelectionState();
+        _searchText = string.Empty;
+        _workspaceSettings.SearchText = string.Empty;
+        _relationshipFilterAssetIds = assetIds.Distinct().ToArray();
+        _relationshipFilterDescription = description;
+        OnPropertyChanged(nameof(SearchText));
+        OnPropertyChanged(nameof(SelectedFolder));
+        OnPropertyChanged(nameof(SelectedTag));
+        OnPropertyChanged(nameof(SelectedSmartFolder));
+        await RefreshAsync();
     }
 
     private async Task OpenCollectionsAsync()
@@ -779,7 +820,8 @@ public sealed partial class AssetLibraryViewModel
 
     private void UpdateP2QueryDescription()
     {
-        P2QueryDescription = SelectedFolder?.Name
+        P2QueryDescription = _relationshipFilterDescription
+            ?? SelectedFolder?.Name
             ?? SelectedTag?.Name
             ?? SelectedSmartFolder?.Name
             ?? ActiveCollection switch

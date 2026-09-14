@@ -29,6 +29,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly ILogService? _logService;
     private readonly bool _enablePreviewFeatures;
     private readonly IAssetLibraryLoadStateController? _loadStateController;
+    private readonly Func<Guid, Task>? _openCalendarBooking;
     private readonly IInspirationTrayService _inspirationTray;
     private readonly string _databasePath;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
@@ -157,7 +158,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         bool enablePreviewFeatures = false,
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
         ILogService? logService = null,
-        IAssetLibraryLoadStateController? loadStateController = null)
+        IAssetLibraryLoadStateController? loadStateController = null,
+        Func<Guid, Task>? openCalendarBooking = null)
     {
         _database = new AssetLibraryDatabase(databasePath);
         _databasePath = _database.DatabasePath;
@@ -166,6 +168,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _loadStateController = loadStateController;
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _logService = logService;
+        _openCalendarBooking = openCalendarBooking;
         _workspaceSettings = workspaceSettings ?? new AssetLibraryWorkspaceSettings();
         if (_workspaceSettings.SelectedAssetId is Guid legacySelectedAssetId &&
             (_workspaceSettings.SelectedAssetIds.Count != 1 || _workspaceSettings.SelectedAssetIds[0] != legacySelectedAssetId))
@@ -1781,6 +1784,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _workspaceSettings.SelectedTagId = null;
         _workspaceSettings.SelectedSmartFolderId = null;
         _workspaceSettings.SearchText = string.Empty;
+        _relationshipFilterAssetIds = null;
+        _relationshipFilterDescription = null;
         OnPropertyChanged(nameof(SearchText));
         OnPropertyChanged(nameof(SelectedFolder));
         OnPropertyChanged(nameof(SelectedTag));
@@ -1814,7 +1819,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             AddedTo = addedTo,
             SortField = SortField,
             SortDirection = SortDirection,
-            Document = GetP3QueryDocumentForExecution()
+            Document = GetP3QueryDocumentForExecution(),
+            CandidateAssetIds = _relationshipFilterAssetIds
         };
     }
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE

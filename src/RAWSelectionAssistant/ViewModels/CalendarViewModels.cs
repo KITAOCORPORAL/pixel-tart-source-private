@@ -81,7 +81,9 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         IBookingTimeDisplayService? timeDisplay = null,
         RAWSelectionAssistant.Core.Services.AssetLibrary.IAssetLibraryRepository? assetRepository = null,
         PixelTart.Modules.AssetLibrary.IAssetThumbnailProvider? thumbnailProvider = null,
-        string? assetDatabasePath = null)
+        string? assetDatabasePath = null,
+        Func<RAWSelectionAssistant.Core.Services.AssetLibrary.IAssetLibraryRepository?>? assetRepositoryFactory = null,
+        Func<PixelTart.Modules.AssetLibrary.IAssetThumbnailProvider?>? thumbnailProviderFactory = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
@@ -136,12 +138,13 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
         DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync, CreateForDate);
-        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState, bookingPeopleService, financeService, currentLocationService, _timeDisplay, workflowService, assetRepository, thumbnailProvider, assetDatabasePath);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState, bookingPeopleService, financeService, currentLocationService, _timeDisplay, workflowService, assetRepository, thumbnailProvider, assetDatabasePath, assetRepositoryFactory, thumbnailProviderFactory);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.Archived += (_, _) => _ = RefreshAsync();
         Details.Completed += (_, _) => _ = RefreshAfterBookingChangeAsync();
         Details.WorkflowStatusChanged += (_, _) => _ = RefreshAfterBookingChangeAsync();
         Details.FinanceRequested += (_, request) => FinanceRequested?.Invoke(this, request);
+        Details.AssetLibraryRequested += (_, request) => AssetLibraryRequested?.Invoke(this, request);
         Archived = new ArchivedBookingsViewModel(bookingService, _timeDisplay);
         Archived.OpenDetailsRequested += (_, id) => _ = OpenBookingAsync(id, includeArchived: true);
         Archived.Restored += (_, _) => _ = RefreshAsync();
@@ -182,6 +185,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public event EventHandler? DayDetailsNavigationRequested;
     public event EventHandler? CalendarPageRequested;
     public event EventHandler<BookingFinanceRequestEventArgs>? FinanceRequested;
+    public event EventHandler<AssetLibraryNavigationRequestEventArgs>? AssetLibraryRequested;
 
     public IReadOnlyList<CalendarStatusOption> StatusOptions { get; }
     public IReadOnlyList<CalendarStatusOption> DetailedStatusOptions { get; }
@@ -568,6 +572,21 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     }
 
     public Task OpenBookingDetailsAsync(Guid bookingId, bool includeArchived = false) => OpenBookingAsync(bookingId, includeArchived);
+
+    public async Task NavigateToBookingAsync(Guid bookingId)
+    {
+        var booking = await _bookingService.GetAsync(bookingId, includeArchived: true).ConfigureAwait(true);
+        if (booking is null) { StatusText = "无法定位拍摄：排期不存在。"; return; }
+        var target = _timeDisplay.ToBookingTime(booking.StartAtUtc, booking.TimeZoneId).Date;
+        _selectedDate = target;
+        ClearSelection();
+        OnPropertyChanged(nameof(SelectedDate));
+        if (ViewMode != CalendarViewMode.Month) ViewMode = CalendarViewMode.Month;
+        NotifyDisplayPeriod();
+        await RefreshAsync().ConfigureAwait(true);
+        await OpenBookingAsync(bookingId, includeArchived: booking.IsArchived).ConfigureAwait(true);
+        DayDetailsNavigationRequested?.Invoke(this, EventArgs.Empty);
+    }
 
     public async Task OpenDayDetailsForDateAsync(DateTime date)
     {

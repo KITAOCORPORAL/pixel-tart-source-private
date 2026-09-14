@@ -8,17 +8,17 @@ Final HEAD: recorded by the final commit on this branch (see repository HEAD).
 
 RC12 began at RC11 `15dbe966`. `RC12_START_TRUTH_AUDIT.md` classifies every requested area as DONE, SERVICE ONLY, UI ONLY, PARTIAL or MISSING. `WPF_FULL_SUITE_RC12.md` separates current product-gate suites from legacy archival WPF evidence. The Release solution build is green with 0 warnings and 0 errors.
 
-## Product integration status
+## Product integration status — Completion Pass II checkpoint
 
-- Project / Booking links: Asset Inspector now exposes dark picker panels backed by existing Projects/ShootBookings, with multi-select add/remove persistence; Calendar navigation remains open.
-- Client: existing booking client fields were audited and a unified resolver exists; wiring the resolved display into Inspector remains open.
-- Calendar ↔ assets: Booking Detail now loads BookingAssetLink records into a shared-thumbnail strip with real workflow counts; deep-link navigation and BookingId-filtered library routing remain open.
+- Project / Booking links: Asset Inspector now exposes dark picker panels backed by existing Projects/ShootBookings, with search, recency/context grouping, multi-select add/remove persistence and restart-safe link tables. Current full end-to-end UI evidence remains PARTIAL.
+- Client: `ClientDisplayResolver` is wired to real Booking client fields and online-selection Project client fields; multiple clients are explicit. Current full UI evidence remains PARTIAL.
+- Calendar ↔ assets: Booking Detail loads BookingAssetLink records into a shared-thumbnail strip with real workflow counts. “查看全部素材 / 查看项目素材” applies logical BookingId/ProjectId filters, and Asset Inspector “查看拍摄” returns to the dated Booking detail. Current product harness evidence remains PARTIAL.
 - Persistent Preview: RC11 implementation remains active and restart/offline-tested through the shared provider.
-- Inspiration Collections: visual panel/grid, create/open/archive and add-selection actions are now connected to the RC11 SQLite service; drag/drop, rename, project header and offline thumbnail routing remain open.
-- Recent Libraries: switching APIs remain available; full recent-library UI and safe session-drain acceptance are open.
-- EXIF: Inspector now loads real JPEG metadata through `JpegMetadataService` for camera, lens, ISO, exposure, aperture and focal length. Missing tags remain `未记录`; no values are fabricated.
-- Context Menu: existing real actions remain; Project/Booking/Collection entries are not promoted until their UI commands are connected.
-- Visual Harness / DPI: current product screenshot harness and process-isolated WPF host are not yet complete; historical evidence remains archival-only.
+- Inspiration Collections: visual panel/grid, create/open/archive and add-selection actions are connected to the RC11 SQLite service; rename, project header, drag/drop and manual reorder UI remain open.
+- Recent Libraries: current/recent UI now shows path/time/Online-Offline, open/switch, Explorer locate and remove-entry-only. Safe task-drain is implemented; a full background-task acceptance remains open.
+- EXIF: Inspector loads real JPEG metadata through `JpegMetadataService` for camera, lens, ISO, exposure, aperture, focal length, capture time, dimensions and orientation. Missing tags remain `未记录`; no values are fabricated. TIFF/RAW safe-read expansion remains open.
+- Context Menu: six product groups are wired to live viewer, organize, Project/Booking/Workflow, Inspiration, export and lifecycle actions. Current UI contract passes; remaining unavailable actions are intentionally not claimed.
+- Visual Harness / DPI: current product screenshot harness, process-isolated WPF host and current-version DPI producer are not yet complete; historical evidence remains archival-only.
 - Performance: inherited 10K/50K/100K repository gate is green; RC12 visual-library timing awaits a real themed MainWindow harness.
 
 ## Tests
@@ -42,4 +42,4 @@ Build outputs remain ignored and no source files are deleted or modified.
 
 ## Remaining gaps
 
-The explicit RC12 target rows requiring real UI acceptance remain PARTIAL: Project/Booking/Client picker controls, Calendar visual asset workflow, Inspiration Collection visual UI, recent-library switcher presentation, complete contextual actions, current-version process-isolated WPF/DPI harness, themed 12-screenshot set, and RC12-specific visual timing. These are tracked honestly rather than promoted from service-layer evidence.
+The explicit RC12 target rows requiring real UI acceptance remain PARTIAL/FAIL as detailed in `RC12_COMPLETION_GAP_AUDIT.md`: relation/client end-to-end UI evidence, Calendar visual workflow, Inspiration drag/drop/rename/project header, safe background-task switching acceptance, TIFF/RAW EXIF, process-isolated WPF, current DPI producer, themed 12-screenshot set and RC12-specific visual timing. These are tracked honestly rather than promoted from service-layer evidence.

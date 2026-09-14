@@ -197,6 +197,7 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
             _viewModel.PageChanged -= ViewModel_PageChanged;
+            _viewModel.AssetLibraryFilterRequested -= ViewModel_AssetLibraryFilterRequested;
             _viewModel.WorkCalendarPage.EditorRequested -= ViewModel_EditorRequested;
         }
         _viewModel = e.NewValue as MainViewModel;
@@ -206,9 +207,28 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested += ViewModel_CloseRequested;
             _viewModel.PageChanged += ViewModel_PageChanged;
+            _viewModel.AssetLibraryFilterRequested += ViewModel_AssetLibraryFilterRequested;
             _viewModel.WorkCalendarPage.EditorRequested += ViewModel_EditorRequested;
         }
         ScheduleTutorialLayout();
+    }
+
+    private async void ViewModel_AssetLibraryFilterRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
+    {
+        await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Loaded);
+        if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host)
+        {
+            if (request.BookingId is Guid hostBookingId) await host.ApplyBookingFilterAsync(hostBookingId);
+            else if (request.ProjectId is Guid hostProjectId) await host.ApplyProjectFilterAsync(hostProjectId);
+            host.CurrentPage?.FocusInitial();
+            return;
+        }
+        var page = GetHostedAssetLibraryPage();
+        if (page is null) return;
+        await page.InitializeForSessionAsync();
+        if (request.BookingId is Guid bookingId) await page.ViewModel.ApplyBookingFilterAsync(bookingId);
+        else if (request.ProjectId is Guid projectId) await page.ViewModel.ApplyProjectFilterAsync(projectId);
+        page.FocusInitial();
     }
 
     private void Window_Closed(object? sender, EventArgs e)
