@@ -164,6 +164,9 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand CreateCollectionCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> OpenCollectionCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> ArchiveCollectionCommand { get; private set; } = null!;
+    public AsyncCommand<InspirationCollectionSummary> RenameCollectionCommand { get; private set; } = null!;
+    public AsyncCommand<InspirationCollectionSummary> SetCollectionProjectCommand { get; private set; } = null!;
+    public AsyncCommand<InspirationTrayCardView> RemoveCollectionEntryCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> AddSelectionToCollectionCommand { get; private set; } = null!;
     public int InspirationTrayCount { get => _inspirationTrayCount; private set => SetProperty(ref _inspirationTrayCount, value); }
     public bool IsProjectPickerOpen { get => _isProjectPickerOpen; private set => SetProperty(ref _isProjectPickerOpen, value); }
@@ -235,6 +238,9 @@ public sealed partial class AssetLibraryViewModel
         CreateCollectionCommand = new(CreateCollectionAsync, () => IsReady);
         OpenCollectionCommand = new(OpenCollectionAsync, _ => IsReady);
         ArchiveCollectionCommand = new(ArchiveCollectionAsync, _ => IsReady);
+        RenameCollectionCommand = new(RenameCollectionAsync, _ => IsReady);
+        SetCollectionProjectCommand = new(SetCollectionProjectAsync, _ => IsReady);
+        RemoveCollectionEntryCommand = new(RemoveCollectionEntryAsync, _ => IsReady);
         AddSelectionToCollectionCommand = new(AddSelectionToCollectionAsync, _ => IsReady && SelectedAssets.Count > 0);
         P2UndoCommand = new(() => RunTrackedP3OperationAsync(UndoP2Async), () => !_p2JournalBusy && _browserCommands.CanUndo);
         P2RedoCommand = new(() => RunTrackedP3OperationAsync(RedoP2Async), () => !_p2JournalBusy && _browserCommands.CanRedo);
@@ -417,6 +423,36 @@ public sealed partial class AssetLibraryViewModel
         InspirationCollections.Insert(0, created); Status = $"已创建灵感集：{created.Name}";
     }
 
+    private async Task RenameCollectionAsync(InspirationCollectionSummary? collection)
+    {
+        if (collection is null) return;
+        var name = $"{collection.Name} · {DateTime.Now:HHmm}";
+        await ((SqliteInspirationTrayService)_inspirationTray).RenameCollectionAsync(collection.CollectionId, name, _lifetimeCancellation.Token);
+        var index = InspirationCollections.IndexOf(collection);
+        if (index >= 0) InspirationCollections[index] = collection with { Name = name, UpdatedAtUtc = DateTimeOffset.UtcNow };
+        Status = $"已重命名灵感集：{name}";
+    }
+
+    private async Task SetCollectionProjectAsync(InspirationCollectionSummary? collection)
+    {
+        if (collection is null) return;
+        var projects = await new SqliteProjectRepository(new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).ListAsync(_lifetimeCancellation.Token);
+        var project = projects.FirstOrDefault();
+        if (project is null) { Status = "暂无可关联项目。"; return; }
+        await ((SqliteInspirationTrayService)_inspirationTray).SetCollectionProjectAsync(collection.CollectionId, project.Id, _lifetimeCancellation.Token);
+        var index = InspirationCollections.IndexOf(collection);
+        if (index >= 0) InspirationCollections[index] = collection with { ProjectId = project.Id, UpdatedAtUtc = DateTimeOffset.UtcNow };
+        Status = $"灵感集已关联项目：{project.Name}";
+    }
+
+    private async Task RemoveCollectionEntryAsync(InspirationTrayCardView? card)
+    {
+        if (card is null || ActiveCollectionId is not Guid collectionId) return;
+        await ((SqliteInspirationTrayService)_inspirationTray).RemoveEntriesFromCollectionAsync(collectionId, [card.TrayEntryId], _lifetimeCancellation.Token);
+        await OpenCollectionAsync(InspirationCollections.FirstOrDefault(item => item.CollectionId == collectionId));
+        Status = "已从当前灵感集移除引用；托盘和源文件均未删除。";
+    }
+
     private async Task OpenCollectionAsync(InspirationCollectionSummary? collection)
     {
         if (collection is null) return;
@@ -482,8 +518,8 @@ public sealed partial class AssetLibraryViewModel
         var cards = new List<InspirationTrayCardView>(entries.Count);
         foreach (var entry in entries)
         {
-            var asset = await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token);
             var sameLibrary = entry.Reference.LibraryId == _libraryIdForTray;
+            var asset = sameLibrary ? await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token) : null;
             cards.Add(new(entry, sameLibrary && asset is not null ? GetDisplaySourcePath(asset) : null,
                 sameLibrary && asset is not null ? "本素材库" : "离线素材库"));
         }
