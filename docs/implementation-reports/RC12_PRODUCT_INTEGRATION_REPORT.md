@@ -2,7 +2,7 @@
 
 Date: 2026-09-14  
 Branch: `integration/pixel-tart-developer-preview`  
-Final HEAD: `37b3857`
+Final HEAD: recorded by the final commit on this branch (see repository HEAD).
 
 ## Git and test infrastructure
 
