@@ -33,3 +33,19 @@ Permanent Delete is `NOT PLANNED / DEFERRED` for this sprint. Reference assets n
 ## RC10 closure result
 
 The Weekend Sprint report records the before/after status and concrete persistence/test evidence for every promoted row. Rows without all five proof layers remain `PARTIAL`; no placeholder-only surface is promoted to `DONE`.
+
+## RC11 closure result
+
+| Capability | RC11 evidence | Status |
+|---|---|---|
+| Persistent shared preview cache | Memory + bounded 512 MiB disk LRU, stable content-hash key, offline/restart WPF test | DONE |
+| Inspiration Collections persistence | SQLite CRUD, Project relation, membership add/remove/reorder/archive, restart test | DONE (service layer) |
+| Acceptance branch coupling | P1/P2/P3 runners and validators accept any named development branch and reject protected branches | DONE |
+| Project / Booking / Client picker UI | Existing relationship tables only; picker/client/calendar UI not connected | PARTIAL |
+| Calendar ↔ Asset deep link | No end-to-end visual navigation proof | PARTIAL |
+| Recent library switching UI | Workspace APIs exist; complete recent-library presentation not evidenced | PARTIAL |
+| Photography inspector fields | File metadata remains the source; no fabricated camera/lens/exposure values | PARTIAL |
+| RC11 visual screenshot harness | No real themed product screenshot set with the required 11 filenames | PARTIAL |
+| 10K/50K/100K performance | Existing RC10 gate remains green; RC11 cache-specific restart/offline path is covered | DONE (inherited gate + cache coverage) |
+
+The RC11 report records the exact commits, tests, installer hash and unresolved evidence. Rows remain `PARTIAL` where UI, real product screenshots or full WPF isolation proof is absent.
