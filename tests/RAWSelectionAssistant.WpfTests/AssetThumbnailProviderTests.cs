@@ -94,8 +94,9 @@ public sealed class AssetThumbnailProviderTests
             Assert.IsTrue(first.IsAvailable);
             Assert.IsTrue(Directory.EnumerateFiles(cache, "*.png").Any());
             File.Delete(path);
-            var restarted = await new WpfAssetThumbnailProvider(cache).GetAsync(request with { KnownState = AssetThumbnailState.Missing });
-            Assert.IsTrue(restarted.IsAvailable, "A cached preview should remain visible when the reference source is offline.");
+            var disconnectedPath = Path.Combine(root, "disconnected-volume", "pixel.png");
+            var restarted = await new WpfAssetThumbnailProvider(cache).GetAsync(request with { SourcePath = disconnectedPath, KnownState = AssetThumbnailState.Offline });
+            Assert.IsTrue(restarted.IsAvailable, "A content-addressed cached preview should remain visible after its source volume and path go offline.");
         }
         finally { try { Directory.Delete(root, recursive: true); } catch { } }
     }

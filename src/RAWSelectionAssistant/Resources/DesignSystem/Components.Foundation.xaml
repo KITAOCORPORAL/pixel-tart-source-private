@@ -112,13 +112,55 @@
 
     <!-- Canonical menu API; existing implicit menu templates remain compatible. -->
     <Style x:Key="PixelTart.Menu.Context" TargetType="ContextMenu" BasedOn="{StaticResource {x:Type ContextMenu}}">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Elevated}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="MaxWidth" Value="280" />
         <Setter Property="Padding" Value="{DynamicResource Space.Menu.Padding}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+    <ControlTemplate x:Key="PixelTart.Menu.Item.Template" TargetType="MenuItem">
+        <Grid Background="{DynamicResource Brush.Surface.Elevated}" TextElement.Foreground="{TemplateBinding Foreground}" SnapsToDevicePixels="True">
+            <Border x:Name="ItemSurface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="16" /></Grid.ColumnDefinitions>
+                    <ContentPresenter Grid.Column="0" Margin="4,0,18,0" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" />
+                    <TextBlock Grid.Column="1" Margin="18,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource Brush.Text.Secondary}" Text="{TemplateBinding InputGestureText}" />
+                    <Path x:Name="SubmenuArrow" Grid.Column="2" Width="6" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 5 5 L 0 10" Fill="Transparent" Stroke="{DynamicResource Brush.Text.Secondary}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+                </Grid>
+            </Border>
+            <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-3" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" PlacementTarget="{Binding ElementName=ItemSurface}" VerticalOffset="-5">
+                <Border MinWidth="220" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="6" Padding="4">
+                    <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" /></ScrollViewer>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Role" Value="TopLevelHeader"><Setter TargetName="PART_Popup" Property="Placement" Value="Bottom" /><Setter TargetName="PART_Popup" Property="HorizontalOffset" Value="0" /><Setter TargetName="PART_Popup" Property="VerticalOffset" Value="-1" /><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
+            <Trigger Property="Role" Value="TopLevelItem"><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
+            <Trigger Property="Role" Value="SubmenuItem"><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
+            <Trigger Property="IsHighlighted" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ItemSurface" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
+            <Trigger Property="IsEnabled" Value="False"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter TargetName="ItemSurface" Property="Opacity" Value="0.72" /></Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
     <Style x:Key="PixelTart.Menu.Item" TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
         <Setter Property="MinHeight" Value="{DynamicResource Size.MenuItem.Default}" />
         <Setter Property="Padding" Value="{DynamicResource Space.MenuItem.Padding}" />
+        <Setter Property="Template" Value="{StaticResource PixelTart.Menu.Item.Template}" />
     </Style>
     <Style x:Key="PixelTart.Menu.Loading" TargetType="MenuItem" BasedOn="{StaticResource PixelTart.Menu.Item}">
         <Setter Property="IsHitTestVisible" Value="False" />

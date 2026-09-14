@@ -87,7 +87,10 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
         // after the source drive is disconnected.
         var modified = request.SourceModifiedUtc?.UtcTicks ?? (string.IsNullOrWhiteSpace(request.ContentHash) ? info?.LastWriteTimeUtc.Ticks ?? 0 : 0);
         var length = string.IsNullOrWhiteSpace(request.ContentHash) ? info?.Length ?? 0 : 0;
-        var text = $"{request.AssetId:D}|{request.ContentHash}|{path}|{length}|{modified}|{width}|{request.Orientation}|thumb-v2";
+        var durableIdentity = !string.IsNullOrWhiteSpace(request.ContentHash)
+            ? $"{request.AssetId:D}|{request.ContentHash}"
+            : path;
+        var text = $"{durableIdentity}|{length}|{modified}|{width}|{request.Orientation}|thumb-v3";
         return Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text)));
     }
 

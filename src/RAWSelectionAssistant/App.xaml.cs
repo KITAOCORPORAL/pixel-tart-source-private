@@ -5,6 +5,7 @@ using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.Bookings;
+using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.FileOperations;
 using RAWSelectionAssistant.Core.Services.Tethering;
@@ -139,6 +140,10 @@ public partial class App : Application
                 : File.Exists(legacySettings) ? legacySettings : null;
             var settingsService = new SettingsService(_logService, settingsPath);
             var startupSettings = await settingsService.LoadAsync();
+#if UI_REVIEW_BUILD
+            if (string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal))
+                await ConfigureRc12ProductHarnessAsync(startupSettings, settingsService);
+#endif
             _weatherState = new WeatherFeatureState();
             _weatherState.Apply(startupSettings.Weather);
             _weatherHttpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
@@ -512,7 +517,7 @@ public partial class App : Application
         registry.Capabilities.Register(new("core.task-center", "pixel-tart.kernel", "kernel/v1"));
         registry.Capabilities.Register(new("core.settings", "pixel-tart.kernel", "kernel/v1"));
         registry.Capabilities.Register(new("core.file-safety", "pixel-tart.kernel", "kernel/v1"));
-#if MODULAR_HARNESS_DEV_PREVIEW
+#if MODULAR_HARNESS_DEV_PREVIEW || UI_REVIEW_BUILD
         var enableAssetLibraryPreview = true;
         var assetLibraryDemoDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR");
 #else
@@ -556,7 +561,15 @@ public partial class App : Application
 #endif
         registry.Register(new AssetLibraryModule(() =>
         {
-            IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : [];
+            var productVisualHarness =
+#if UI_REVIEW_BUILD
+                string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal);
+#else
+                false;
+#endif
+            IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview && !productVisualHarness
+                ? BuildModuleDiagnostics(registry)
+                : [];
             var workspaceSettings = _mainViewModel?.Settings.AssetLibraryWorkspace ?? new AssetLibraryWorkspaceSettings();
             var legacyDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
             var portableSettings = _mainViewModel?.Settings.AssetLibraryPortable ?? new AssetLibraryPortableSettings();
@@ -605,6 +618,67 @@ public partial class App : Application
                 return new AssetLibraryModuleDiagnostic(automationId, text);
             })
             .ToArray();
+
+#if UI_REVIEW_BUILD
+    private static async Task ConfigureRc12ProductHarnessAsync(AppSettings settings, SettingsService settingsService)
+    {
+        var librariesRoot = Path.Combine(AppDataPaths.Root, "ProductHarnessLibraries");
+        Directory.CreateDirectory(librariesRoot);
+        var containers = new AssetLibraryContainerService();
+        var primaryPath = Path.Combine(librariesRoot, "RC12 Product Library.ptlibrary");
+        var secondaryPath = Path.Combine(librariesRoot, "Recent Studio Library.ptlibrary");
+        var primary = Directory.Exists(primaryPath)
+            ? await containers.OpenAsync(primaryPath)
+            : await containers.CreateAsync(primaryPath, "RC12 Product Library");
+        var secondary = Directory.Exists(secondaryPath)
+            ? await containers.OpenAsync(secondaryPath)
+            : await containers.CreateAsync(secondaryPath, "Recent Studio Library");
+        var now = DateTimeOffset.UtcNow;
+        settings.AssetLibraryPortable.RecordOpened(secondary.LibraryId, secondary.DisplayName, secondary.ContainerPath, now.AddHours(-3));
+        settings.AssetLibraryPortable.RecordOpened(primary.LibraryId, primary.DisplayName, primary.ContainerPath, now);
+        settings.AssetLibraryPortable.RecentLibraries.Add(new AssetLibraryRecentEntry
+        {
+            LibraryId = Guid.Parse("7d70a428-e3f0-4cb9-a280-7593324a2b26"),
+            DisplayName = "Archive Library (Offline)",
+            ContainerPath = Path.Combine(librariesRoot, "Archive Library Offline.ptlibrary"),
+            LastOpenedAt = now.AddDays(-2)
+        });
+        settings.AssetLibraryPortable.Normalize();
+        settings.AssetLibraryPortable.AutoFocusWorkspace = false;
+        settings.AssetLibraryWorkspace.InspectorPaneCollapsed = false;
+        settings.Appearance.Theme = RAWSelectionAssistant.Core.Models.ThemeMode.Dark;
+        settings.OnboardingLegacyUser = true;
+        settings.OnboardingUpgradeOfferShown = true;
+        await settingsService.SaveAsync(settings);
+
+        var database = new PixelTartDatabase(AppDataPaths.DatabaseFile);
+        var projectId = Guid.Parse("9b338f05-bc81-4d68-88b6-7f68e2722a8b");
+        await new SqliteProjectRepository(database).UpsertAsync(new PhotoProjectRecord
+        {
+            Id = projectId,
+            Name = "Lumen Atelier · Autumn Campaign",
+            Status = PhotoProjectStatus.Ready,
+            CreatedAt = now.AddDays(-21),
+            UpdatedAt = now.AddHours(-1),
+            Summary = "RC12 synthetic product-visual fixture"
+        });
+        var bookingId = Guid.Parse("683cc235-d659-4b07-bc39-d923155e7c79");
+        await new SqliteShootBookingRepository(database).SaveAsync(new ShootBooking
+        {
+            Id = bookingId,
+            ProjectId = projectId,
+            Title = "Autumn Editorial Session",
+            ClientDisplayName = "Lumen Atelier / 陈知夏",
+            StartAtUtc = now.Date.AddDays(3).AddHours(2),
+            EndAtUtc = now.Date.AddDays(3).AddHours(6),
+            Status = ShootBookingStatus.Confirmed,
+            Location = "Studio 07 · Shanghai",
+            ShootingType = "Editorial",
+            CreatedAtUtc = now.AddDays(-14),
+            UpdatedAtUtc = now
+        }, []);
+    }
+#endif
 
     private void ActivateMainWindow()
     {

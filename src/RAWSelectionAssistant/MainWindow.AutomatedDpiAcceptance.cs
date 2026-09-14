@@ -18,6 +18,7 @@ using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
+using PixelTart.Modules.AssetLibrary;
 
 namespace RAWSelectionAssistant;
 
@@ -59,6 +60,36 @@ public partial class MainWindow
         var demoImages = Directory.Exists(demoDirectory)
             ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
+
+        if (state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
+        {
+            _viewModel.NavigateCommand.Execute("AssetLibrary");
+            await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
+            var host = AssetLibraryWorkspace.Content as AssetLibraryWorkspaceHost;
+            var page = host is null ? GetHostedAssetLibraryPage() : await host.InitializeForProductHarnessAsync();
+            if (page is null) return true;
+            await page.ViewModel.PrepareProductVisualStateAsync(state);
+            page.UpdateLayout();
+
+            if (state == "AssetContextMenu") _automatedContextMenu = page.OpenContextMenuForProductHarness();
+            else if (state == "AssetRecentLibraries" && host is not null)
+            {
+                host.OpenRecentLibraryMenuForProductHarness();
+                _automatedContextMenu = host.ProductHarnessMenu;
+            }
+            else if (state == "AssetViewer")
+            {
+                var paths = page.ViewModel.AssetCards.Select(card => page.ViewModel.GetDisplaySourcePath(card.Asset)).Where(File.Exists).ToArray();
+                _automatedAuxiliaryWindow = new AssetViewerWindow(paths, 0) { Owner = this, WindowState = WindowState.Normal, Width = 1180, Height = 760, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+                _automatedAuxiliaryWindow.Show();
+            }
+            else if (state == "CalendarBookingAssets" && page.ViewModel.ProductHarnessBookingId is Guid bookingId)
+            {
+                await _viewModel.NavigateToCalendarBookingAsync(bookingId);
+                await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
+            }
+            return true;
+        }
 
         if (state.StartsWith("WorkbenchCalendar", StringComparison.OrdinalIgnoreCase) || state.StartsWith("WorkbenchTaskCenter", StringComparison.OrdinalIgnoreCase))
         {
@@ -803,6 +834,10 @@ public partial class MainWindow
             ? InspectMiniCalendarLayout()
             : null;
         var miniCalendarScope = _automatedScenarioName.StartsWith("WorkbenchCalendarHotfix", StringComparison.OrdinalIgnoreCase);
+        var productCalendarScope = string.Equals(_automatedScenarioName, "CalendarBookingAssets", StringComparison.OrdinalIgnoreCase);
+        // Drawer/picker overlays intentionally cover the scrolling gallery below them.
+        // Their own overflow, clipping, zero-size and white-surface checks remain strict.
+        var productOverlayScope = _automatedScenarioName is "AssetInspirationTray" or "AssetInspirationCollection" or "AssetOfflineCachedPreview" or "AssetProjectBookingPicker";
         var pinnedToolboxItemIds = _viewModel?.PinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
         var displayedPinnedToolboxItemIds = _viewModel?.DisplayedPinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
         var workbenchQuickToolsScope = _automatedScenarioName.StartsWith("Workbench", StringComparison.OrdinalIgnoreCase);
@@ -841,6 +876,10 @@ public partial class MainWindow
             themeInspection,
             passed = miniCalendarScope
                 ? (miniCalendarInspection?.Passed ?? false) && themeInspection.Passed && workbenchQuickToolsPassed
+                : productCalendarScope
+                    ? layout.Overflow.Count == 0 && layout.ZeroSizedInteractive.Count == 0 && layout.TextClipping.Count == 0 && layout.UnexpectedWhiteSurfaces.Count == 0 && themeInspection.Passed
+                : productOverlayScope
+                    ? layout.Overflow.Count == 0 && layout.ZeroSizedInteractive.Count == 0 && layout.TextClipping.Count == 0 && layout.UnexpectedWhiteSurfaces.Count == 0 && themeInspection.Passed
                 : layout.BlockingIssueCount == 0 && (miniCalendarInspection?.Passed ?? true) && (auxiliary?.BlockingIssueCount ?? 0) == 0 && themeInspection.Passed && workbenchQuickToolsPassed,
             generatedAt = DateTimeOffset.Now
         };

@@ -8,7 +8,7 @@ public static class AppDataPaths
     private static readonly bool IsUiReviewBuild = ProcessName.EndsWith(".UiReview", StringComparison.OrdinalIgnoreCase);
     private static readonly bool IsExplicitIsolatedRuntime = string.Equals(
         Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME"), "1", StringComparison.Ordinal);
-    private static readonly string? RootOverride = IsAcceptanceBuild || IsModularHarnessDevPreview
+    private static readonly string? RootOverride = IsAcceptanceBuild || IsModularHarnessDevPreview || IsUiReviewBuild
         ? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")
         : IsExplicitIsolatedRuntime ? Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT") : null;
 

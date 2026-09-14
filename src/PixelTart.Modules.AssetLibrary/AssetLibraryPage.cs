@@ -536,6 +536,18 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     public void FocusInitial() => FocusSearch();
 
+    public ContextMenu? OpenContextMenuForProductHarness()
+    {
+        if (AssetGrid.Items.Count == 0) return null;
+        AssetGrid.ScrollIntoView(AssetGrid.Items[0]);
+        AssetGrid.UpdateLayout();
+        if (AssetGrid.ItemContainerGenerator.ContainerFromIndex(0) is not ListBoxItem item || item.ContextMenu is null) return null;
+        item.ContextMenu.PlacementTarget = item;
+        item.ContextMenu.Placement = PlacementMode.MousePoint;
+        item.ContextMenu.IsOpen = true;
+        return item.ContextMenu;
+    }
+
     private void OnSizeChanged(object sender, SizeChangedEventArgs e) => _viewModel.UpdateViewportWidth(e.NewSize.Width);
 
     private void OnPaneSplitterDragCompleted(object sender, DragCompletedEventArgs e) => SchedulePaneWidthCommit();

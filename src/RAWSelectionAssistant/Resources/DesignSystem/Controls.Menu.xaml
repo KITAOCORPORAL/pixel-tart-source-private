@@ -51,7 +51,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
-                    <Grid SnapsToDevicePixels="True" TextElement.Foreground="{TemplateBinding Foreground}">
+                    <Grid Background="{DynamicResource MenuPopupBackgroundBrush}" SnapsToDevicePixels="True" TextElement.Foreground="{TemplateBinding Foreground}">
                         <Border x:Name="ItemBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="Transparent"
@@ -60,7 +60,7 @@
                                 Padding="{TemplateBinding Padding}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="22" />
+                                    <ColumnDefinition Width="0" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="16" />
@@ -73,6 +73,7 @@
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   ContentSource="Icon"
+                                                  Visibility="Collapsed"
                                                   SnapsToDevicePixels="True" />
                                 <Path x:Name="CheckMark"
                                       Grid.Column="0"

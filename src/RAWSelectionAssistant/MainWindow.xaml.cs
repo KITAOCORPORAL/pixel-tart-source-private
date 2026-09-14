@@ -56,6 +56,10 @@ public partial class MainWindow : Window
 #if MODULAR_HARNESS_DEV_PREVIEW
         Title = "像素蛋挞 [Modular Harness Dev]";
 #endif
+#if UI_REVIEW_BUILD
+        if (string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal))
+            Title = "像素蛋挞 · RC12 Product Visual Harness";
+#endif
         if (Application.Current is App app && app.ModuleRegistry is not null)
             AssetLibraryWorkspace.ModuleRegistry = app.ModuleRegistry;
 #if INPUT_ROUTING_DIAGNOSTICS
@@ -1019,6 +1023,8 @@ public partial class MainWindow : Window
         ConfigureAutomatedDpiAcceptance(root);
 
         WindowState = WindowState.Normal;
+        if (!string.IsNullOrWhiteSpace(reviewState) && reviewState.StartsWith("Asset", StringComparison.OrdinalIgnoreCase))
+            ApplySurfaceMinimumSize(PrimaryNavigationPolicy.AssetLibrary);
         Width = width;
         Height = height;
         new AppearanceService().Apply(new AppearanceSettings

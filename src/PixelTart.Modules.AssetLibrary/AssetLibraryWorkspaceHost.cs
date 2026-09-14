@@ -90,6 +90,21 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     public AssetLibraryPage? CurrentPage => _page;
     public AssetLibraryContainerDescriptor? CurrentDescriptor => _descriptor;
     public bool IsOffline => _descriptor is null && !string.IsNullOrWhiteSpace(_settings.CurrentContainerPath);
+    public ContextMenu ProductHarnessMenu => _menu;
+
+    public async Task<AssetLibraryPage?> InitializeForProductHarnessAsync()
+    {
+        StartStartup(_legacyDatabasePath);
+        if (_startupTask is not null) await _startupTask;
+        return _page;
+    }
+
+    public void OpenRecentLibraryMenuForProductHarness()
+    {
+        RefreshRecentMenu();
+        _menu.PlacementTarget = _libraryButton;
+        _menu.IsOpen = true;
+    }
 
     public async Task ApplyBookingFilterAsync(Guid bookingId)
     {

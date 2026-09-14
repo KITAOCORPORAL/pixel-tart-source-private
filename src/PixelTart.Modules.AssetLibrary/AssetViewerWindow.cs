@@ -43,6 +43,7 @@ public sealed class AssetViewerWindow : Window
         foreach (var item in new[] { ("上一张", (Action)Previous), ("适应", Fit), ("100%", Actual), ("−", ZoomOut), ("+", ZoomIn), ("下一张", Next), ("返回", Close) })
         {
             var button = new Button { Content = item.Item1, Margin = new Thickness(4), Padding = new Thickness(12, 6, 12, 6), Command = new ViewerCommand(item.Item2) };
+            button.SetResourceReference(FrameworkElement.StyleProperty, "PixelTart.Button.Secondary");
             controls.Children.Add(button);
         }
         Grid.SetRow(controls, 1); grid.Children.Add(controls); Content = grid;

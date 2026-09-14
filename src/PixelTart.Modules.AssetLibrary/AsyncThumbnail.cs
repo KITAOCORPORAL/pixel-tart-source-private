@@ -27,6 +27,8 @@ public static class AsyncThumbnail
 
     public static readonly DependencyProperty SourcePathProperty = DependencyProperty.RegisterAttached("SourcePath", typeof(string), typeof(AsyncThumbnail), new PropertyMetadata(null, OnSourceChanged));
     public static readonly DependencyProperty DecodeWidthProperty = DependencyProperty.RegisterAttached("DecodeWidth", typeof(double), typeof(AsyncThumbnail), new PropertyMetadata(180d, OnSourceChanged));
+    public static readonly DependencyProperty AssetIdProperty = DependencyProperty.RegisterAttached("AssetId", typeof(Guid?), typeof(AsyncThumbnail), new PropertyMetadata(null, OnSourceChanged));
+    public static readonly DependencyProperty ContentHashProperty = DependencyProperty.RegisterAttached("ContentHash", typeof(string), typeof(AsyncThumbnail), new PropertyMetadata(null, OnSourceChanged));
     public static readonly DependencyProperty ScopedProviderProperty = DependencyProperty.RegisterAttached(
         "ScopedProvider",
         typeof(IAssetThumbnailProvider),
@@ -36,6 +38,8 @@ public static class AsyncThumbnail
     public static readonly DependencyProperty FailureMessageProperty = DependencyProperty.RegisterAttached("FailureMessage", typeof(string), typeof(AsyncThumbnail), new PropertyMetadata(null));
     public static void SetSourcePath(DependencyObject target, string? value) => target.SetValue(SourcePathProperty, value); public static string? GetSourcePath(DependencyObject target) => (string?)target.GetValue(SourcePathProperty);
     public static void SetDecodeWidth(DependencyObject target, double value) => target.SetValue(DecodeWidthProperty, value); public static int GetDecodeWidth(DependencyObject target) => (int)Math.Round((double)target.GetValue(DecodeWidthProperty));
+    public static void SetAssetId(DependencyObject target, Guid? value) => target.SetValue(AssetIdProperty, value); public static Guid? GetAssetId(DependencyObject target) => (Guid?)target.GetValue(AssetIdProperty);
+    public static void SetContentHash(DependencyObject target, string? value) => target.SetValue(ContentHashProperty, value); public static string? GetContentHash(DependencyObject target) => (string?)target.GetValue(ContentHashProperty);
     public static void SetScopedProvider(DependencyObject target, IAssetThumbnailProvider? value) => target.SetValue(ScopedProviderProperty, value); public static IAssetThumbnailProvider? GetScopedProvider(DependencyObject target) => (IAssetThumbnailProvider?)target.GetValue(ScopedProviderProperty);
     public static void SetHasFailure(DependencyObject target, bool value) => target.SetValue(HasFailureProperty, value); public static bool GetHasFailure(DependencyObject target) => (bool)target.GetValue(HasFailureProperty);
     public static void SetFailureMessage(DependencyObject target, string? value) => target.SetValue(FailureMessageProperty, value); public static string? GetFailureMessage(DependencyObject target) => (string?)target.GetValue(FailureMessageProperty);
@@ -48,15 +52,16 @@ public static class AsyncThumbnail
         image.Source = null;
         SetFailureState(image, false, null);
         var path = GetSourcePath(image);
-        if (string.IsNullOrWhiteSpace(path)) return;
+        var contentHash = GetContentHash(image);
+        if (string.IsNullOrWhiteSpace(path) && string.IsNullOrWhiteSpace(contentHash)) return;
         var request = new RequestState();
         Requests[image] = request;
         var dispatcher = image.Dispatcher;
-        string requestedPath;
+        string? requestedPath;
         int width;
         try
         {
-            requestedPath = Path.GetFullPath(path);
+            requestedPath = string.IsNullOrWhiteSpace(path) ? null : Path.GetFullPath(path);
             width = Math.Clamp(GetDecodeWidth(image), 96, 512);
         }
         catch (ArgumentException) { RemoveRequest(image, request); request.Cancellation.Dispose(); RecordFailure(image, "缩略图加载失败。"); return; }
@@ -65,7 +70,7 @@ public static class AsyncThumbnail
         // Publish the common offline/missing-source state immediately. Besides avoiding
         // needless decoder work, this keeps a virtualized image from retaining a pending
         // request when it unloads before the provider gets scheduled.
-        if (!File.Exists(requestedPath))
+        if (!File.Exists(requestedPath) && string.IsNullOrWhiteSpace(contentHash))
         {
             RemoveRequest(image, request);
             request.Cancellation.Dispose();
@@ -74,7 +79,7 @@ public static class AsyncThumbnail
         }
 
         var provider = GetScopedProvider(image) ?? Provider;
-        request.Completion = LoadAsync(image, dispatcher, requestedPath, width, provider, request);
+        request.Completion = LoadAsync(image, dispatcher, requestedPath, width, GetAssetId(image), contentHash, provider, request);
     }
 
     public static async Task CancelAndDrainAsync(DependencyObject scope)
@@ -102,12 +107,13 @@ public static class AsyncThumbnail
         return false;
     }
 
-    private static async Task LoadAsync(Image image, Dispatcher dispatcher, string requestedPath, int width, IAssetThumbnailProvider provider, RequestState request)
+    private static async Task LoadAsync(Image image, Dispatcher dispatcher, string? requestedPath, int width, Guid? assetId, string? contentHash, IAssetThumbnailProvider provider, RequestState request)
     {
         var cancellationToken = request.Cancellation.Token;
         try
         {
-            var result = await provider.GetAsync(new(requestedPath, width), cancellationToken).ConfigureAwait(false);
+            var knownState = File.Exists(requestedPath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline;
+            var result = await provider.GetAsync(new(requestedPath, width, knownState, assetId, contentHash), cancellationToken).ConfigureAwait(false);
             if (dispatcher.HasShutdownStarted || dispatcher.HasShutdownFinished) return;
             var publication = dispatcher.InvokeAsync(() =>
             {

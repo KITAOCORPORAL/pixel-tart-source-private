@@ -184,6 +184,7 @@ public sealed partial class AssetLibraryViewModel
 
     public event EventHandler<AssetLibraryViewModeChangedEventArgs>? ViewModeChanging;
     public event EventHandler<AssetLibraryViewModeChangedEventArgs>? ViewModeChanged;
+    public Guid? ProductHarnessBookingId { get; private set; }
 
     private void InitializeP2Browser()
     {
@@ -459,8 +460,9 @@ public sealed partial class AssetLibraryViewModel
     {
         if (collection is null) return;
         ActiveCollectionId = collection.CollectionId;
-        var entries = await ((SqliteInspirationTrayService)_inspirationTray).ListCollectionEntriesAsync(collection.CollectionId, _lifetimeCancellation.Token).ConfigureAwait(false);
-        ActiveCollectionCards.Clear(); foreach (var card in entries.Select(entry => new InspirationTrayCardView(entry, null, entry.ResolutionState == InspirationTrayResolutionState.Resolved ? "本素材库" : "离线素材库"))) ActiveCollectionCards.Add(card);
+        var entries = await ((SqliteInspirationTrayService)_inspirationTray).ListCollectionEntriesAsync(collection.CollectionId, _lifetimeCancellation.Token);
+        ActiveCollectionCards.Clear();
+        foreach (var entry in entries) ActiveCollectionCards.Add(await ResolveInspirationCardAsync(entry));
     }
 
     private async Task ArchiveCollectionAsync(InspirationCollectionSummary? collection)
@@ -575,6 +577,64 @@ public sealed partial class AssetLibraryViewModel
             await OpenCollectionAsync(collection);
     }
 
+    public async Task PrepareProductVisualStateAsync(string state)
+    {
+        if (!IsReady || AssetCards.Count == 0) return;
+        var cards = AssetCards.Take(Math.Min(8, AssetCards.Count)).Select(card => card.Asset).ToArray();
+        SyncSelection(state is "AssetInspirationTray" or "AssetInspirationCollection" ? cards : [cards[0]]);
+
+        if (state == "AssetLibraryMasonry") await SwitchViewAsync(nameof(AssetLibraryViewMode.Masonry));
+        else await SwitchViewAsync(nameof(AssetLibraryViewMode.Grid));
+        if (state == "AssetFilter") P3QueryPanelOpen = true;
+
+        if (state is "AssetInspectorProject" or "AssetProjectBookingPicker" or "CalendarBookingAssets")
+        {
+            await OpenProjectPickerAsync();
+            if (ProjectPickerItems.FirstOrDefault() is { } project)
+            {
+                foreach (var asset in cards.Take(4))
+                    await _repository.SaveProjectAssetLinkAsync(new(project.Id, asset.AssetId, "Referenced", DateTimeOffset.UtcNow), _lifetimeCancellation.Token);
+            }
+            await OpenBookingPickerAsync();
+            if (BookingPickerItems.FirstOrDefault() is { } booking)
+            {
+                ProductHarnessBookingId = booking.Id;
+                var statuses = new[] { AssetWorkflowStatus.ClientSelected, AssetWorkflowStatus.PendingRetouch, AssetWorkflowStatus.Retouched, AssetWorkflowStatus.Delivered };
+                for (var index = 0; index < Math.Min(4, cards.Length); index++)
+                {
+                    await _repository.SaveBookingAssetLinkAsync(new(booking.Id, cards[index].AssetId, DateTimeOffset.UtcNow), _lifetimeCancellation.Token);
+                    await _repository.SaveAssetWorkflowMetadataAsync(new(cards[index].AssetId, "拍摄导入", statuses[index]), _lifetimeCancellation.Token);
+                }
+            }
+            OnP2SelectionChanged([cards[0]]);
+            await _p2InspectorTask;
+            if (state == "AssetInspectorProject") { IsProjectPickerOpen = false; IsBookingPickerOpen = false; }
+            if (state == "AssetProjectBookingPicker") { IsProjectPickerOpen = true; IsBookingPickerOpen = false; }
+        }
+
+        if (state == "AssetInspirationTray")
+            await AddAssetIdsToInspirationTrayAsync(cards.Select(asset => asset.AssetId).ToArray());
+        if (state == "AssetOfflineCachedPreview")
+        {
+            await AddAssetIdsToInspirationTrayAsync(cards.Take(4).Select(asset => asset.AssetId).ToArray());
+            await PrepareOfflineCachedPreviewAsync();
+            IsInspirationTrayOpen = true;
+            Status = "素材库离线 · 正在使用 .ptlibrary/previews 缓存预览";
+        }
+        if (state == "AssetInspirationCollection")
+        {
+            await OpenCollectionsAsync();
+            var collection = InspirationCollections.FirstOrDefault(item => item.Name == "Light · Form · Gesture");
+            if (collection is null)
+            {
+                collection = await ((SqliteInspirationTrayService)_inspirationTray).CreateCollectionAsync("Light · Form · Gesture", cancellationToken: _lifetimeCancellation.Token);
+                InspirationCollections.Insert(0, collection);
+            }
+            await AddAssetIdsToCollectionAsync(collection.CollectionId, cards.Select(asset => asset.AssetId).ToArray());
+            IsCollectionPanelOpen = true;
+        }
+    }
+
     private async Task AddToInspirationTrayAsync(AssetVisualMatchView? card)
     {
         var assets = ContextIds(card).Select(id => SelectedAssets.FirstOrDefault(asset => asset.AssetId == id) ?? AssetCards.FirstOrDefault(item => item.Asset.AssetId == id)?.Asset).Where(asset => asset is not null).Cast<AssetItem>().ToArray();
@@ -611,16 +671,47 @@ public sealed partial class AssetLibraryViewModel
         var entries = await _inspirationTray.ListAsync(_lifetimeCancellation.Token);
         InspirationTrayEntries.ReplaceAll(entries);
         var cards = new List<InspirationTrayCardView>(entries.Count);
-        foreach (var entry in entries)
-        {
-            var sameLibrary = entry.Reference.LibraryId == _libraryIdForTray;
-            var asset = sameLibrary ? await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token) : null;
-            cards.Add(new(entry, sameLibrary && asset is not null ? GetDisplaySourcePath(asset) : null,
-                sameLibrary && asset is not null ? "本素材库" : "离线素材库"));
-        }
+        foreach (var entry in entries) cards.Add(await ResolveInspirationCardAsync(entry));
         InspirationTrayCards.ReplaceAll(cards);
         InspirationTrayCount = entries.Count;
         ClearInspirationTrayCommand.RaiseCanExecuteChanged();
+    }
+
+    private async Task<InspirationTrayCardView> ResolveInspirationCardAsync(InspirationTrayEntry entry)
+    {
+        var sameLibrary = entry.Reference.LibraryId == _libraryIdForTray;
+        var asset = sameLibrary ? await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token) : null;
+        if (asset is null) return new(entry, null, "离线素材库", true);
+        var source = GetDisplaySourcePath(asset);
+        var isOffline = !File.Exists(source);
+        return new(entry, source, isOffline ? ".ptlibrary 缓存" : "本素材库", isOffline);
+    }
+
+    private async Task PrepareOfflineCachedPreviewAsync()
+    {
+        var cacheDirectory = ResolvePreviewCacheDirectory(_databasePath);
+        var provider = new WpfAssetThumbnailProvider(cacheDirectory);
+        var offlineCards = new List<InspirationTrayCardView>();
+        foreach (var card in InspirationTrayCards)
+        {
+            var asset = await _repository.GetAssetAsync(card.AssetId, _lifetimeCancellation.Token);
+            if (asset is null || string.IsNullOrWhiteSpace(asset.ContentHash)) continue;
+            var source = GetDisplaySourcePath(asset);
+            var primed = await provider.GetAsync(new(source, 112, AssetThumbnailState.Available, asset.AssetId, asset.ContentHash), _lifetimeCancellation.Token);
+            if (!primed.IsAvailable) continue;
+            var unavailableSource = Path.Combine(Path.GetDirectoryName(source) ?? string.Empty, "offline-source", Path.GetFileName(source));
+            offlineCards.Add(new(card.Entry, unavailableSource, ".ptlibrary 缓存", true));
+        }
+        if (offlineCards.Count > 0) InspirationTrayCards.ReplaceAll(offlineCards);
+    }
+
+    private static string ResolvePreviewCacheDirectory(string databasePath)
+    {
+        var databaseDirectory = Path.GetDirectoryName(Path.GetFullPath(databasePath)) ?? string.Empty;
+        var parent = Directory.GetParent(databaseDirectory);
+        return parent is not null && string.Equals(new DirectoryInfo(databaseDirectory).Name, "database", StringComparison.OrdinalIgnoreCase)
+            ? Path.Combine(parent.FullName, AssetLibraryContainerService.PreviewCacheRelativePath)
+            : Path.Combine(databaseDirectory, AssetLibraryContainerService.PreviewCacheRelativePath);
     }
 
     private async Task RemoveInspirationTrayEntryAsync(InspirationTrayCardView? card)
@@ -1495,9 +1586,11 @@ public sealed partial class AssetLibraryViewModel
     }
 }
 
-public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string? ThumbnailPath, string SourceBadge)
+public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string? ThumbnailPath, string SourceBadge, bool ForceOffline = false)
 {
     public Guid TrayEntryId => Entry.TrayEntryId;
+    public Guid AssetId => Entry.Reference.AssetId;
+    public string ContentHash => Entry.Reference.ContentHash;
     public string AssetLabel => Entry.Reference.AssetId.ToString("N")[..8];
     public string ResolutionLabel => Entry.ResolutionState switch
     {
@@ -1506,7 +1599,7 @@ public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string?
         InspirationTrayResolutionState.AssetMissing => "文件缺失",
         _ => "引用校验失败"
     };
-    public bool IsOffline => Entry.ResolutionState is InspirationTrayResolutionState.LibraryOffline or InspirationTrayResolutionState.HashMismatch || SourceBadge == "离线素材库";
+    public bool IsOffline => ForceOffline || Entry.ResolutionState is InspirationTrayResolutionState.LibraryOffline or InspirationTrayResolutionState.HashMismatch || SourceBadge == "离线素材库";
 }
 
 public sealed record AssetLibraryViewModeChangedEventArgs(AssetLibraryViewMode Previous, AssetLibraryViewMode Current);

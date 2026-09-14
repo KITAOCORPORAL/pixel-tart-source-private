@@ -20,14 +20,17 @@
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      Style="{DynamicResource PixelTart.Menu.Context}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
-            <MenuItem Header="查看" AutomationProperties.AutomationId="AssetContextView">
+            <ContextMenu.Resources>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource PixelTart.Menu.Item}" />
+            </ContextMenu.Resources>
+            <MenuItem Header="查看" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextView">
                 <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
                 <MenuItem Header="Viewer" Command="{Binding Owner.OpenContextViewerCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenViewer" />
                 <MenuItem Header="默认应用" Command="{Binding Owner.OpenContextExternalCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenExternal" />
                 <MenuItem Header="Explorer 显示" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextReveal" />
                 <MenuItem Header="复制路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextCopyPath" />
             </MenuItem>
-            <MenuItem Header="整理" AutomationProperties.AutomationId="AssetContextOrganize">
+            <MenuItem Header="整理" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextOrganize">
                 <MenuItem Header="添加至当前文件夹" Command="{Binding Owner.AddContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddFolder" />
                 <MenuItem Header="移出当前文件夹" Command="{Binding Owner.RemoveContextFolderCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFolder" />
                 <MenuItem Header="添加至当前标签" Command="{Binding Owner.AddContextTagCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextAddTag" />
@@ -45,7 +48,7 @@
                     <MenuItem Header="查找相似视觉" Command="{Binding Owner.FindSimilarCommand}" CommandParameter="{Binding}" />
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="摄影工作流" AutomationProperties.AutomationId="AssetContextWorkflow">
+            <MenuItem Header="摄影工作流" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextWorkflow">
                 <MenuItem Header="项目" Command="{Binding Owner.OpenProjectPickerCommand}" />
                 <MenuItem Header="拍摄" Command="{Binding Owner.OpenBookingPickerCommand}" />
                 <MenuItem Header="工作流状态">
@@ -56,16 +59,16 @@
                     <MenuItem Header="已交付" Command="{Binding Owner.WorkflowDeliveredCommand}" CommandParameter="{Binding}" />
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="创作" AutomationProperties.AutomationId="AssetContextCreative">
+            <MenuItem Header="创作" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextCreative">
                 <MenuItem Header="加入灵感托盘" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
                 <MenuItem Header="加入灵感集…" Command="{Binding Owner.OpenCollectionsCommand}" AutomationProperties.AutomationId="AssetContextAddToCollection" />
             </MenuItem>
-            <MenuItem Header="导出" AutomationProperties.AutomationId="AssetContextExport">
+            <MenuItem Header="导出" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextExport">
                 <MenuItem Header="原文件副本" Command="{Binding Owner.ExportOriginalContextCommand}" CommandParameter="{Binding}" />
                 <MenuItem Header="托管副本" Command="{Binding Owner.ExportManagedContextCommand}" CommandParameter="{Binding}" />
                 <MenuItem Header="元数据 CSV" Command="{Binding Owner.ExportMetadataContextCommand}" CommandParameter="{Binding}" />
             </MenuItem>
-            <MenuItem Header="生命周期" AutomationProperties.AutomationId="AssetContextLifecycle">
+            <MenuItem Header="生命周期" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextLifecycle">
                 <MenuItem Header="从当前文件夹移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView" />
                 <MenuItem Header="归档" Command="{Binding Owner.ArchiveContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextArchive" />
                 <MenuItem Header="恢复归档" Command="{Binding Owner.RestoreContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRestore" />
@@ -88,7 +91,7 @@
             <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="240" Stretch="Uniform" />
+                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="240" Stretch="Uniform" />
                         <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -110,7 +113,7 @@
             <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="280" Stretch="Uniform" />
+                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="280" Stretch="Uniform" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
@@ -126,7 +129,7 @@
             <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
+                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
@@ -143,7 +146,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions><ColumnDefinition Width="56" /><ColumnDefinition Width="3*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="1.6*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="2*" /></Grid.ColumnDefinitions>
                     <Border Width="46" Height="54" Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetListThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="96" Stretch="Uniform" />
+                        <Image x:Name="AssetListThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="96" Stretch="Uniform" />
                         <TextBlock Text="缩略图失败" Foreground="{DynamicResource Brush.Text.Primary}" Background="{DynamicResource Brush.Surface.Elevated}" Padding="2" FontSize="{DynamicResource Type.Caption.FontSize}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Visibility="{Binding ElementName=AssetListThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -590,7 +593,7 @@
                                     AutomationProperties.AutomationId="AssetInspectorSingleState">
                         <Border Height="200" Background="{DynamicResource Brush.Background}" Margin="{DynamicResource SpacingVertical8}">
                             <Grid>
-                                <Image x:Name="SelectedAssetThumbnail" local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
+                                <Image x:Name="SelectedAssetThumbnail" local:AsyncThumbnail.SourcePath="{Binding SelectedAssetThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding SelectedAsset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding SelectedAsset.ContentHash}" local:AsyncThumbnail.DecodeWidth="420" Stretch="Uniform" />
                                 <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Visibility="{Binding ElementName=SelectedAssetThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                         AutomationProperties.AutomationId="SelectedAssetThumbnailFailure">
@@ -742,7 +745,7 @@
                                         <Border Background="{DynamicResource Brush.Background}">
                                             <Grid>
                                                 <TextBlock Text="缩略图不可用" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                <Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="112" />
+                                                <Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="112" />
                                                 <TextBlock Text="离线" Foreground="{DynamicResource Brush.Text.Primary}" Background="{DynamicResource Brush.Surface.Elevated}" Padding="3" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                             </Grid>
                                         </Border>
@@ -766,7 +769,7 @@
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"><TextBlock Text="灵感集" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="新建" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" /><Button Content="关闭" Command="{Binding CloseCollectionPanelCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalAlignment="Right" /></StackPanel>
                 <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="220" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
                     <ListBox ItemsSource="{Binding InspirationCollections}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><StackPanel Margin="4" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding CollectionId}"><Button Content="{Binding Name}" Command="{Binding DataContext.OpenCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><TextBlock Text="{Binding EntryCount, StringFormat={} {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding ProjectId, StringFormat=项目：{0}, TargetNullValue=未关联项目}" Style="{DynamicResource PixelTart.Type.Metadata}" /><WrapPanel><Button Content="重命名" Command="{Binding DataContext.RenameCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><Button Content="关联项目" Command="{Binding DataContext.SetCollectionProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><Button Content="归档" Command="{Binding DataContext.ArchiveCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /></WrapPanel></StackPanel></DataTemplate></ListBox.ItemTemplate></ListBox>
-                    <ListBox Grid.Column="1" ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}"><ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel><ListBox.ItemTemplate><DataTemplate><Border Width="140" Height="140" Margin="4" Background="{DynamicResource Brush.Background}" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.SourceCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetKind="CollectionOrder" local:InspirationDragDropBehavior.TargetCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}"><Grid><Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="136" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /><Button Content="移除" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding DataContext.RemoveCollectionEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="3,0" /></Grid></Border></DataTemplate></ListBox.ItemTemplate></ListBox>
+                    <ListBox Grid.Column="1" ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}"><ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel><ListBox.ItemTemplate><DataTemplate><Border Width="140" Height="140" Margin="4" Background="{DynamicResource Brush.Background}" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.SourceCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetKind="CollectionOrder" local:InspirationDragDropBehavior.TargetCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}"><Grid><Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="136" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /><Button Content="移除" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding DataContext.RemoveCollectionEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="3,0" /></Grid></Border></DataTemplate></ListBox.ItemTemplate></ListBox>
                 </Grid>
             </DockPanel>
         </Border>
@@ -775,7 +778,7 @@
                 Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding IsProjectPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="ProjectRelationPicker">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联项目" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding ProjectPickerSearch, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource PixelTart.TextBox.Standard}" Margin="0,8" AutomationProperties.Name="搜索项目" /></StackPanel>
+                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联项目" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding ProjectPickerSearch, UpdateSourceTrigger=PropertyChanged}" Margin="0,8" AutomationProperties.Name="搜索项目" /></StackPanel>
                 <ListBox ItemsSource="{Binding ProjectPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectProjectRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Group}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
             </DockPanel>
         </Border>
@@ -783,7 +786,7 @@
                 Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding IsBookingPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="BookingRelationPicker">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联拍摄" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding BookingPickerSearch, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource PixelTart.TextBox.Standard}" Margin="0,8" AutomationProperties.Name="搜索拍摄" /></StackPanel>
+                <StackPanel DockPanel.Dock="Top"><DockPanel><TextBlock Text="关联拍摄" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseRelationPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" /></DockPanel><TextBox Text="{Binding BookingPickerSearch, UpdateSourceTrigger=PropertyChanged}" Margin="0,8" AutomationProperties.Name="搜索拍摄" /></StackPanel>
                 <ListBox ItemsSource="{Binding BookingPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectBookingRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Group}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
             </DockPanel>
         </Border>
