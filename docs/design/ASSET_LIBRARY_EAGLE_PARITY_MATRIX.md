@@ -49,3 +49,7 @@ The Weekend Sprint report records the before/after status and concrete persisten
 | 10K/50K/100K performance | Existing RC10 gate remains green; RC11 cache-specific restart/offline path is covered | DONE (inherited gate + cache coverage) |
 
 The RC11 report records the exact commits, tests, installer hash and unresolved evidence. Rows remain `PARTIAL` where UI, real product screenshots or full WPF isolation proof is absent.
+
+## RC12 truth status
+
+RC12 connects the existing photography metadata pipeline to the Inspector and preserves RC11's persistent preview cache and collection service foundations. The following target rows remain `PARTIAL` until real product UI and acceptance proof exists: Library tree recent-switcher presentation, Inspector workflow pickers/client resolution, Calendar ↔ Asset visual navigation, Inspiration Collection visual UI, full contextual Project/Booking/Collection actions, and the real themed screenshot harness. These are deliberately not promoted to `DONE` by persistence alone.

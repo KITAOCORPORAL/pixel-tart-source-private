@@ -31,6 +31,11 @@ public sealed class JpegQualityInfo
     public bool? HasExif { get; set; }
     public string CameraMake { get; set; } = string.Empty;
     public string CameraModel { get; set; } = string.Empty;
+    public string Lens { get; set; } = string.Empty;
+    public string Iso { get; set; } = string.Empty;
+    public string ExposureTime { get; set; } = string.Empty;
+    public string Aperture { get; set; } = string.Empty;
+    public string FocalLength { get; set; } = string.Empty;
     public DateTime? DateTimeOriginal { get; set; }
     public bool? HasIccProfile { get; set; }
     public string SoftwareTag { get; set; } = string.Empty;

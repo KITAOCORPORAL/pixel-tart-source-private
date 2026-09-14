@@ -44,6 +44,11 @@ public sealed class JpegMetadataService(ILogService? logService = null) : IJpegM
             result.HasExif = directories.Any(directory => directory is ExifDirectoryBase);
             result.CameraMake = ReadString(ifd0, ExifDirectoryBase.TagMake);
             result.CameraModel = ReadString(ifd0, ExifDirectoryBase.TagModel);
+            result.Lens = ReadString(subIfd, ExifDirectoryBase.TagLensModel);
+            result.Iso = ReadString(subIfd, ExifDirectoryBase.TagIsoEquivalent);
+            result.ExposureTime = ReadString(subIfd, ExifDirectoryBase.TagExposureTime);
+            result.Aperture = ReadString(subIfd, ExifDirectoryBase.TagFNumber);
+            result.FocalLength = ReadString(subIfd, ExifDirectoryBase.TagFocalLength);
             result.SoftwareTag = ReadString(ifd0, ExifDirectoryBase.TagSoftware);
             if (subIfd?.TryGetDateTime(ExifDirectoryBase.TagDateTimeOriginal, out var originalTime) == true)
             {

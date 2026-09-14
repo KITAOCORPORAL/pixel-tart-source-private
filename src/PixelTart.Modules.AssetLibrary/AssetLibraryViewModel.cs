@@ -452,12 +452,13 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private string _inspectorWorkflowStatus = "未处理";
     private string _inspectorProject = "未关联";
     private string _inspectorBooking = "未关联";
+    private JpegQualityInfo? _inspectorMetadata;
     public string InspectorAssetOrigin { get => _inspectorAssetOrigin; private set => SetProperty(ref _inspectorAssetOrigin, value); }
     public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "托管副本" : "原位引用";
     public string InspectorShootDate => SelectedAsset?.CaptureTime?.ToString("yyyy-MM-dd HH:mm") ?? "未记录";
-    public string InspectorCamera => "未记录";
-    public string InspectorLens => "未记录";
-    public string InspectorExposure => "ISO / 快门 / 光圈 / 焦距：未记录";
+    public string InspectorCamera => _inspectorMetadata is null ? "未记录" : string.Join(' ', new[] { _inspectorMetadata.CameraMake, _inspectorMetadata.CameraModel }.Where(x => !string.IsNullOrWhiteSpace(x))).Trim() is { Length: > 0 } camera ? camera : "未记录";
+    public string InspectorLens => string.IsNullOrWhiteSpace(_inspectorMetadata?.Lens) ? "未记录" : _inspectorMetadata!.Lens;
+    public string InspectorExposure => _inspectorMetadata is null ? "ISO / 快门 / 光圈 / 焦距：未记录" : $"ISO {ValueOrMissing(_inspectorMetadata.Iso)} / 快门 {ValueOrMissing(_inspectorMetadata.ExposureTime)} / 光圈 {ValueOrMissing(_inspectorMetadata.Aperture)} / 焦距 {ValueOrMissing(_inspectorMetadata.FocalLength)}";
     public string InspectorWorkflowStatus { get => _inspectorWorkflowStatus; private set => SetProperty(ref _inspectorWorkflowStatus, value); }
     public string InspectorProject { get => _inspectorProject; private set => SetProperty(ref _inspectorProject, value); }
     public string InspectorBooking { get => _inspectorBooking; private set => SetProperty(ref _inspectorBooking, value); }
@@ -795,6 +796,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         var singleMaterialized = nextSingleAssetId is Guid singleId ? materialized.FirstOrDefault(item => item.AssetId == singleId) : null;
         if (singleMaterialized is null) { _selectedAsset = null; OnPropertyChanged(nameof(SelectedAsset)); _analysisCoordinator.ClearSelection(); Analysis = null; SelectedFeatures = null; IsAnalyzing = false; }
         else if (_selectedAsset != singleMaterialized) { _selectedAsset = singleMaterialized; OnPropertyChanged(nameof(SelectedAsset)); }
+        _inspectorMetadata = null;
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
         foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
             OnPropertyChanged(property);
@@ -804,7 +806,23 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         OnP2SelectionChanged(materialized);
         OnP3SelectionChanged(materialized);
         RaiseActions(); RaiseVisualActions();
+        if (singleMaterialized is not null) _ = LoadInspectorMetadataAsync(singleMaterialized);
     }
+
+    private async Task LoadInspectorMetadataAsync(AssetItem asset)
+    {
+        var path = asset.SourcePath;
+        if (!File.Exists(path)) return;
+        var metadata = await Task.Run(() => new JpegMetadataService(_logService).Read(path), _lifetimeCancellation.Token).ConfigureAwait(false);
+        await Application.Current.Dispatcher.InvokeAsync(() =>
+        {
+            if (SelectedAsset?.AssetId != asset.AssetId) return;
+            _inspectorMetadata = metadata;
+            OnPropertyChanged(nameof(InspectorCamera)); OnPropertyChanged(nameof(InspectorLens)); OnPropertyChanged(nameof(InspectorExposure));
+        });
+    }
+
+    private static string ValueOrMissing(string? value) => string.IsNullOrWhiteSpace(value) ? "未记录" : value;
 
     private async Task RefreshAsync()
     {
