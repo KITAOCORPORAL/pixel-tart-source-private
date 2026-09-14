@@ -2,7 +2,7 @@
 
 Date: 2026-09-14  
 Branch: `integration/pixel-tart-developer-preview`  
-Final HEAD: `a1d8e44`
+Final HEAD: `65bb28f`
 
 ## Git and test infrastructure
 
