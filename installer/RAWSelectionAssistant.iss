@@ -19,6 +19,10 @@
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc11-win-x64"
 #endif
+#ifdef CandidateRc12
+  #undef MyPublishDir
+  #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc12-win-x64"
+#endif
 #ifdef CandidateRc7
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\rc7-win-x64"
@@ -245,6 +249,9 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC10_x64
 #ifdef CandidateRc11
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC11_x64
 #else
+#ifdef CandidateRc12
+OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC12_x64
+#else
 #ifdef CandidateRc6
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC6_x64
 #else
@@ -271,6 +278,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC2_x64
 #else
 OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
+#endif
 #endif
 #endif
 #endif
