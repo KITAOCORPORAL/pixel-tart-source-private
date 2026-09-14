@@ -10,7 +10,7 @@ namespace PixelTart.Modules.AssetLibrary;
 
 /// <summary>
 /// Keeps the library switch affordance deliberately small so the image workspace owns the space.
-/// The next page is fully validated and initialized before the current page is released.
+/// The next page is fully validated and initialized, then the current page is drained before activation.
 /// </summary>
 public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 {
@@ -131,7 +131,11 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         }
         foreach (var recent in _settings.RecentLibraries.Take(AssetLibraryPortableSettings.MaximumRecentLibraries))
         {
-            var item = MenuItem($"{recent.DisplayName}  ·  {recent.ContainerPath}", async (_, _) => await SwitchToContainerAsync(recent.ContainerPath));
+            var state = Directory.Exists(recent.ContainerPath) ? "Online" : "Offline";
+            var item = new MenuItem { Header = $"{recent.DisplayName}  ·  {recent.LastOpenedAt.ToLocalTime():yyyy-MM-dd HH:mm}  ·  {state}" };
+            item.Items.Add(MenuItem("打开 / 切换", async (_, _) => await SwitchToContainerAsync(recent.ContainerPath)));
+            item.Items.Add(MenuItem("在 Explorer 中定位", (_, _) => LocateRecentLibrary(recent)));
+            item.Items.Add(MenuItem("从最近列表移除", async (_, _) => await RemoveRecentLibraryAsync(recent)));
             item.ToolTip = recent.ContainerPath;
             System.Windows.Automation.AutomationProperties.SetAutomationId(item, "AssetLibraryRecent_" + recent.LibraryId.ToString("N"));
             _menu.Items.Add(item);
@@ -240,6 +244,9 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
             var oldPage = _page;
             var oldLease = _lease;
+            _state.Text = "正在安全结束当前库的后台任务…";
+            if (oldPage is not null) await oldPage.DisposeAsync();
+            if (oldLease is not null) await oldLease.DisposeAsync();
             _page = nextPage;
             _descriptor = descriptor;
             _content.Content = nextPage;
@@ -253,8 +260,6 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
             }
             _libraryButton.Content = $"当前库 · {descriptor.DisplayName}";
             _state.Text = $"{descriptor.ContentMode} · {descriptor.ContainerPath}";
-            if (oldPage is not null) await oldPage.DisposeAsync();
-            if (oldLease is not null) await oldLease.DisposeAsync();
         }
         finally
         {
@@ -281,6 +286,20 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
             _state.Text = $"新建失败：{exception.Message}；仍保留当前库。";
             MessageBox.Show(Window.GetWindow(this), exception.Message, "无法创建素材库", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    private void LocateRecentLibrary(AssetLibraryRecentEntry recent)
+    {
+        try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", $"/select,\"{recent.ContainerPath}\"") { UseShellExecute = true }); }
+        catch (Exception exception) { _state.Text = $"无法定位最近库：{exception.Message}"; }
+    }
+
+    private async Task RemoveRecentLibraryAsync(AssetLibraryRecentEntry recent)
+    {
+        if (!_settings.RemoveRecent(recent.LibraryId)) return;
+        if (_persistSettings is not null) await _persistSettings();
+        RefreshRecentMenu();
+        _state.Text = $"已从最近列表移除：{recent.DisplayName}；素材库文件未删除。";
     }
 
     private async void OpenLibraryAsync()

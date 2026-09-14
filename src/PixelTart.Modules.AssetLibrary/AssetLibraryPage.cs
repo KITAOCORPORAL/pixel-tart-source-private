@@ -56,7 +56,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
-        AsyncThumbnail.Provider = new WpfAssetThumbnailProvider(ResolvePreviewCacheDirectory(databasePath));
+        var thumbnailProvider = new WpfAssetThumbnailProvider(ResolvePreviewCacheDirectory(databasePath));
+        AsyncThumbnail.Provider = thumbnailProvider;
+        AsyncThumbnail.SetScopedProvider(this, thumbnailProvider);
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
@@ -167,6 +169,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
         CancelMarqueeSelection();
+        await AsyncThumbnail.CancelAndDrainAsync(this);
         await _viewModel.DisposeAsync();
     }
 

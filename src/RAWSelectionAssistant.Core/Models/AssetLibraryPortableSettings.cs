@@ -54,6 +54,13 @@ public sealed class AssetLibraryPortableSettings
         Normalize();
     }
 
+    public bool RemoveRecent(Guid libraryId)
+    {
+        var removed = RecentLibraries.RemoveAll(entry => entry.LibraryId == libraryId) > 0;
+        Normalize();
+        return removed;
+    }
+
     internal static string NormalizePath(string? path)
     {
         if (string.IsNullOrWhiteSpace(path)) return string.Empty;

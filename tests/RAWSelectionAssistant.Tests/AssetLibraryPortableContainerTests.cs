@@ -69,6 +69,27 @@ public sealed class AssetLibraryPortableContainerTests
     }
 
     [TestMethod]
+    public void RecentRegistry_RemoveOnlyDeletesTheRecentEntry()
+    {
+        using var temp = new TempDirectory();
+        var settings = new AssetLibraryPortableSettings();
+        var id = Guid.NewGuid();
+        var path = temp.Combine("keep.ptlibrary");
+        Directory.CreateDirectory(path);
+        var sentinel = Path.Combine(path, "keep.txt");
+        File.WriteAllText(sentinel, "source remains");
+        settings.RecordOpened(id, "Keep", path, DateTimeOffset.Parse("2026-09-14T01:00:00Z"));
+
+        Assert.IsTrue(settings.RemoveRecent(id));
+
+        Assert.IsEmpty(settings.RecentLibraries);
+        Assert.AreEqual(Path.GetFullPath(path), settings.CurrentContainerPath, "移除最近项不得改变当前库定位记录。");
+        Assert.IsTrue(Directory.Exists(path), "移除最近项不得删除 .ptlibrary。");
+        Assert.AreEqual("source remains", File.ReadAllText(sentinel));
+        Assert.IsFalse(settings.RemoveRecent(id));
+    }
+
+    [TestMethod]
     public async Task Open_RejectsFutureContainerVersion()
     {
         using var temp = new TempDirectory();
