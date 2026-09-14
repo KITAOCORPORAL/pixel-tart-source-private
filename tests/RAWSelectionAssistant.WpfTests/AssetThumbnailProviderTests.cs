@@ -76,4 +76,24 @@ public sealed class AssetThumbnailProviderTests
         Assert.IsNull(offline.Bitmap);
         StringAssert.Contains(offline.PlaceholderMessage, "离线");
     }
+
+    [TestMethod]
+    public async Task DiskPreviewCacheSurvivesProviderRestartAndServesOfflineSource()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-thumbnail-disk-cache", Guid.NewGuid().ToString("N"));
+        var cache = Path.Combine(root, "previews"); Directory.CreateDirectory(root);
+        var path = Path.Combine(root, "pixel.png");
+        await File.WriteAllBytesAsync(path, Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="));
+        try
+        {
+            var request = new AssetThumbnailRequest(path, 256, AssetThumbnailState.Available, Guid.NewGuid(), new string('a', 64), null, cache);
+            var first = await new WpfAssetThumbnailProvider(cache).GetAsync(request);
+            Assert.IsTrue(first.IsAvailable);
+            Assert.IsTrue(Directory.EnumerateFiles(cache, "*.png").Any());
+            File.Delete(path);
+            var restarted = await new WpfAssetThumbnailProvider(cache).GetAsync(request with { KnownState = AssetThumbnailState.Missing });
+            Assert.IsTrue(restarted.IsAvailable, "A cached preview should remain visible when the reference source is offline.");
+        }
+        finally { try { Directory.Delete(root, recursive: true); } catch { } }
+    }
 }

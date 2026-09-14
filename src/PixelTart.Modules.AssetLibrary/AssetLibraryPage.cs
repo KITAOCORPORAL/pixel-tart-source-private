@@ -56,6 +56,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
+        AsyncThumbnail.Provider = new WpfAssetThumbnailProvider(ResolvePreviewCacheDirectory(databasePath));
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
         _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController);
@@ -75,6 +76,16 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     }
 
     public AssetLibraryViewModel ViewModel => _viewModel;
+
+    private static string? ResolvePreviewCacheDirectory(string databasePath)
+    {
+        var databaseDirectory = Path.GetDirectoryName(Path.GetFullPath(databasePath));
+        if (string.IsNullOrWhiteSpace(databaseDirectory)) return null;
+        var parent = Directory.GetParent(databaseDirectory);
+        return parent is not null && string.Equals(new DirectoryInfo(databaseDirectory).Name, "database", StringComparison.OrdinalIgnoreCase)
+            ? Path.Combine(parent.FullName, "previews")
+            : Path.Combine(databaseDirectory, "previews");
+    }
 
     public async Task RefreshForSessionAsync()
     {

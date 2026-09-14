@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -15,7 +16,12 @@ public enum AssetThumbnailState
 public sealed record AssetThumbnailRequest(
     string? SourcePath,
     int DecodePixelWidth,
-    AssetThumbnailState KnownState = AssetThumbnailState.Available);
+    AssetThumbnailState KnownState = AssetThumbnailState.Available,
+    Guid? AssetId = null,
+    string? ContentHash = null,
+    DateTimeOffset? SourceModifiedUtc = null,
+    string? CacheDirectory = null,
+    string? Orientation = null);
 
 public sealed record AssetThumbnailResult(
     AssetThumbnailState State,
@@ -35,43 +41,104 @@ public interface IAssetThumbnailProvider
 public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
 {
     private const long MaxCacheBytes = 64L * 1024 * 1024;
+    private const long MaxDiskCacheBytes = 512L * 1024 * 1024;
     private readonly object _gate = new();
     private readonly ConcurrentDictionary<string, CacheEntry> _cache = new(StringComparer.Ordinal);
     private readonly LinkedList<string> _lru = new();
     private long _cacheBytes;
+    private readonly string? _defaultCacheDirectory;
+
+    public WpfAssetThumbnailProvider(string? diskCacheDirectory = null)
+    {
+        _defaultCacheDirectory = string.IsNullOrWhiteSpace(diskCacheDirectory) ? null : Path.GetFullPath(diskCacheDirectory);
+    }
 
     public Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
         cancellationToken.ThrowIfCancellationRequested();
-        if (request.KnownState == AssetThumbnailState.Offline)
-            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Offline, PlaceholderMessage: "素材库离线。"));
-        if (request.KnownState == AssetThumbnailState.Missing || string.IsNullOrWhiteSpace(request.SourcePath))
-            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Missing, PlaceholderMessage: "缩略图不可用：文件不存在。"));
-
-        var path = Path.GetFullPath(request.SourcePath);
-        if (!File.Exists(path))
-            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Missing, PlaceholderMessage: "缩略图不可用：文件不存在。"));
         var width = Math.Clamp(request.DecodePixelWidth, 96, 512);
         return Task.Run(
-            () => new AssetThumbnailResult(AssetThumbnailState.Available, GetOrDecode(path, width, cancellationToken)),
+            () => GetThumbnail(request, width, cancellationToken),
             cancellationToken);
     }
 
-    private BitmapSource GetOrDecode(string path, int width, CancellationToken cancellationToken)
+    private AssetThumbnailResult GetThumbnail(AssetThumbnailRequest request, int width, CancellationToken cancellationToken)
     {
-        var key = Fingerprint(path, width, cancellationToken);
-        if (_cache.TryGetValue(key, out var cached)) return cached.Bitmap;
+        var path = string.IsNullOrWhiteSpace(request.SourcePath) ? null : Path.GetFullPath(request.SourcePath);
+        var key = Fingerprint(request, path, width, cancellationToken);
+        var cacheDirectory = request.CacheDirectory ?? _defaultCacheDirectory;
+        if (TryGetMemory(key, out var memory)) return new(AssetThumbnailState.Available, memory);
+        if (TryLoadDisk(cacheDirectory, key, out var disk)) return new(AssetThumbnailState.Available, AddCache(key, disk).Bitmap);
+        if (request.KnownState != AssetThumbnailState.Available || path is null || !File.Exists(path))
+            return new(request.KnownState == AssetThumbnailState.Offline ? AssetThumbnailState.Offline : AssetThumbnailState.Missing,
+                PlaceholderMessage: request.KnownState == AssetThumbnailState.Offline ? "素材库离线。" : "缩略图不可用：文件不存在。");
         var bitmap = Decode(path, width, cancellationToken);
-        return AddCache(key, bitmap).Bitmap;
+        WriteDisk(cacheDirectory, key, bitmap);
+        return new(AssetThumbnailState.Available, AddCache(key, bitmap).Bitmap);
     }
 
-    private static string Fingerprint(string path, int width, CancellationToken cancellationToken)
+    private static string Fingerprint(AssetThumbnailRequest request, string? path, int width, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        var info = new FileInfo(path);
-        var text = $"{path}|{info.Length}|{info.LastWriteTimeUtc.Ticks}|{width}|thumb-v1";
+        var info = path is not null && File.Exists(path) ? new FileInfo(path) : null;
+        // A content hash is the durable identity for offline references. When it is
+        // available, do not make the cache key depend on metadata that cannot be read
+        // after the source drive is disconnected.
+        var modified = request.SourceModifiedUtc?.UtcTicks ?? (string.IsNullOrWhiteSpace(request.ContentHash) ? info?.LastWriteTimeUtc.Ticks ?? 0 : 0);
+        var length = string.IsNullOrWhiteSpace(request.ContentHash) ? info?.Length ?? 0 : 0;
+        var text = $"{request.AssetId:D}|{request.ContentHash}|{path}|{length}|{modified}|{width}|{request.Orientation}|thumb-v2";
         return Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text)));
+    }
+
+    private bool TryGetMemory(string key, out BitmapSource bitmap)
+    {
+        if (_cache.TryGetValue(key, out var cached)) { bitmap = cached.Bitmap; return true; }
+        bitmap = null!; return false;
+    }
+
+    private static bool TryLoadDisk(string? directory, string key, out BitmapImage bitmap)
+    {
+        bitmap = null!;
+        if (string.IsNullOrWhiteSpace(directory)) return false;
+        var path = Path.Combine(directory, key + ".png");
+        try
+        {
+            if (!File.Exists(path)) return false;
+            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); bitmap = image; return true;
+        }
+        catch (IOException) { return false; }
+        catch (NotSupportedException) { return false; }
+        catch (ArgumentException) { return false; }
+    }
+
+    private static void WriteDisk(string? directory, string key, BitmapImage bitmap)
+    {
+        if (string.IsNullOrWhiteSpace(directory)) return;
+        try
+        {
+            Directory.CreateDirectory(directory);
+            var path = Path.Combine(directory, key + ".png");
+            if (!File.Exists(path))
+            {
+                using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Read);
+                var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); encoder.Save(stream);
+            }
+            TrimDisk(directory);
+        }
+        catch (IOException) { }
+        catch (UnauthorizedAccessException) { }
+    }
+
+    private static void TrimDisk(string directory)
+    {
+        var files = new DirectoryInfo(directory).EnumerateFiles("*.png").OrderBy(file => file.LastAccessTimeUtc).ToList();
+        long total = files.Sum(file => file.Length);
+        foreach (var file in files)
+        {
+            if (total <= MaxDiskCacheBytes) break;
+            try { total -= file.Length; file.Delete(); } catch (IOException) { }
+        }
     }
 
     private static BitmapImage Decode(string path, int width, CancellationToken cancellationToken)
