@@ -163,6 +163,8 @@ public partial class App : Application
             var clipboardService = new WpfClipboardService();
             _appearanceService = new AppearanceService();
 
+            var calendarAssetDatabasePath = Path.Combine(AppDataPaths.Root, "AssetLibrary", "asset-library.sqlite");
+            var calendarAssetRepository = new SqliteAssetLibraryRepository(calendarAssetDatabasePath);
             var calendarViewModel = new WorkCalendarViewModel(
                 _compositionRoot.ShootBookingService,
                 _compositionRoot.ProjectRepository,
@@ -176,7 +178,10 @@ public partial class App : Application
                 _compositionRoot.BookingPeopleService,
                 _compositionRoot.FinanceService,
                 currentLocationService,
-                _compositionRoot.BookingWorkflowService);
+                _compositionRoot.BookingWorkflowService,
+                assetRepository: calendarAssetRepository,
+                thumbnailProvider: new WpfAssetThumbnailProvider(Path.Combine(AppDataPaths.Root, "AssetLibrary", "previews")),
+                assetDatabasePath: calendarAssetDatabasePath);
             var workbenchSchedule = new WorkbenchCalendarSummaryViewModel(_compositionRoot.WorkbenchScheduleService, _compositionRoot.ShootBookingService as IBookingChangeNotifier, weatherService: weatherService);
             var reminderNotifications = new ReminderNotificationCenterViewModel(
                 _compositionRoot.BookingReminderNotificationService,

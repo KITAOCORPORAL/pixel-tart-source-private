@@ -10,11 +10,11 @@ RC12 began at RC11 `15dbe966`. `RC12_START_TRUTH_AUDIT.md` classifies every requ
 
 ## Product integration status
 
-- Project / Booking links: durable repository service remains available; picker UI and Calendar navigation are not yet connected.
-- Client: existing booking client fields were audited; no duplicate client model was introduced. Asset Inspector client resolver remains open.
-- Calendar ↔ assets: no proven Booking Detail mini-gallery or deep-link navigation yet.
+- Project / Booking links: Asset Inspector now exposes dark picker panels backed by existing Projects/ShootBookings, with multi-select add/remove persistence; Calendar navigation remains open.
+- Client: existing booking client fields were audited and a unified resolver exists; wiring the resolved display into Inspector remains open.
+- Calendar ↔ assets: Booking Detail now loads BookingAssetLink records into a shared-thumbnail strip with real workflow counts; deep-link navigation and BookingId-filtered library routing remain open.
 - Persistent Preview: RC11 implementation remains active and restart/offline-tested through the shared provider.
-- Inspiration Collections: RC11 service CRUD is durable, but visual collection grid, drag/drop and header UI remain open.
+- Inspiration Collections: visual panel/grid, create/open/archive and add-selection actions are now connected to the RC11 SQLite service; drag/drop, rename, project header and offline thumbnail routing remain open.
 - Recent Libraries: switching APIs remain available; full recent-library UI and safe session-drain acceptance are open.
 - EXIF: Inspector now loads real JPEG metadata through `JpegMetadataService` for camera, lens, ISO, exposure, aperture and focal length. Missing tags remain `未记录`; no values are fabricated.
 - Context Menu: existing real actions remain; Project/Booking/Collection entries are not promoted until their UI commands are connected.

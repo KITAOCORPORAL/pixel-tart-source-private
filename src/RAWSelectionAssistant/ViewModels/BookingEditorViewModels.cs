@@ -7,12 +7,20 @@ using RAWSelectionAssistant.Core.Services.Bookings;
 using RAWSelectionAssistant.Core.Services.Business;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Utilities;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
+using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
 public sealed record ProjectOption(Guid? Id, string Name) { public override string ToString() => Name; }
+public sealed record BookingAssetThumbnailViewModel(AssetItem Asset, AssetWorkflowStatus WorkflowStatus)
+{
+    public string ThumbnailPath => Asset.ImportMode == AssetImportMode.ManagedCopy && File.Exists(Asset.ManagedCopyPath) ? Asset.ManagedCopyPath! : Asset.SourcePath;
+    public bool IsOffline => Asset.IsMissing || !File.Exists(ThumbnailPath);
+    public string WorkflowLabel => WorkflowStatus switch { AssetWorkflowStatus.ClientSelected => "客户选择", AssetWorkflowStatus.PendingRetouch => "待精修", AssetWorkflowStatus.Retouched => "已精修", AssetWorkflowStatus.Delivered => "已交付", _ => "未处理" };
+}
 public sealed record TimeZoneOption(string Id, string Label) { public override string ToString() => Label; }
 public sealed record BookingStatusEditorOption(ShootBookingStatus Value, string Label) { public override string ToString() => Label; }
 public sealed record CalendarWorkflowStatusOption(CalendarWorkflowStatus Value, string Label) { public override string ToString() => Label; }
@@ -100,6 +108,9 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     private CalendarWorkflowStatusOption? _selectedWorkflowStatus;
     private bool _suppressWorkflowStatusChange;
     private readonly IBookingWorkflowService? _workflowService;
+    private readonly IAssetLibraryRepository? _assetRepository;
+    private readonly IAssetThumbnailProvider? _thumbnailProvider;
+    private readonly string _assetDatabasePath;
 
     public ShootBookingDetailsViewModel(IShootBookingService service, IBookingDocumentWorkflowService? documentWorkflow = null, IDialogService? dialogs = null,
         IBookingReminderService? reminderService = null, IBookingReminderScheduler? reminderScheduler = null,
@@ -107,7 +118,10 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         IBookingPeopleService? peopleService = null, IFinanceService? financeService = null,
         ICurrentLocationService? currentLocationService = null,
         IBookingTimeDisplayService? timeDisplay = null,
-        IBookingWorkflowService? workflowService = null)
+        IBookingWorkflowService? workflowService = null,
+        IAssetLibraryRepository? assetRepository = null,
+        IAssetThumbnailProvider? thumbnailProvider = null,
+        string? assetDatabasePath = null)
     {
         _service = service;
         _reminderScheduler = reminderScheduler;
@@ -116,6 +130,9 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         _peopleService = peopleService;
         _financeService = financeService;
         _workflowService = workflowService;
+        _assetRepository = assetRepository;
+        _thumbnailProvider = thumbnailProvider;
+        _assetDatabasePath = assetDatabasePath ?? RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile;
         if (documentWorkflow is not null && dialogs is not null) Documents = new BookingDocumentsViewModel(documentWorkflow, dialogs);
         if (reminderService is not null) Reminders = new BookingRemindersViewModel(reminderService, reminderScheduler);
         if (weatherService is not null && weatherState is not null) Weather = new BookingWeatherViewModel(weatherService, weatherState, currentLocationService, _timeDisplay);
@@ -143,6 +160,13 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
     public ObservableCollection<ShootRequirementItem> Requirements { get; } = [];
     public ObservableCollection<BookingContactDetailsViewModel> Contacts { get; } = [];
     public ObservableCollection<BookingStaffDetailsViewModel> Staff { get; } = [];
+    public ObservableCollection<BookingAssetThumbnailViewModel> AssetThumbnails { get; } = [];
+    public int AssetCount => AssetThumbnails.Count;
+    public int ClientSelectedAssetCount => AssetThumbnails.Count(item => item.WorkflowStatus == AssetWorkflowStatus.ClientSelected);
+    public int PendingRetouchAssetCount => AssetThumbnails.Count(item => item.WorkflowStatus == AssetWorkflowStatus.PendingRetouch);
+    public int RetouchedAssetCount => AssetThumbnails.Count(item => item.WorkflowStatus == AssetWorkflowStatus.Retouched);
+    public int DeliveredAssetCount => AssetThumbnails.Count(item => item.WorkflowStatus == AssetWorkflowStatus.Delivered);
+    public bool HasAssetThumbnails => AssetThumbnails.Count > 0;
     public IReadOnlyList<CalendarWorkflowStatusOption> WorkflowStatusOptions { get; }
     public BookingDocumentsViewModel? Documents { get; }
     public BookingRemindersViewModel? Reminders { get; }
@@ -216,6 +240,7 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
             Requirements.Clear();
             if (Booking is not null)
             {
+                await LoadAssetThumbnailsAsync(Booking.Id).ConfigureAwait(true);
                 foreach (var item in await _service.GetRequirementsAsync(bookingId).ConfigureAwait(true)) Requirements.Add(item);
                 Contacts.Clear(); Staff.Clear();
                 if (_peopleService is not null)
@@ -237,6 +262,22 @@ public sealed class ShootBookingDetailsViewModel : ObservableObject
         catch (Exception ex) { StatusText = $"加载失败：{ex.Message}"; }
         finally { IsBusy = false; }
     }
+
+    private async Task LoadAssetThumbnailsAsync(Guid bookingId)
+    {
+        AssetThumbnails.Clear();
+        if (_assetRepository is null) return;
+        var links = await _assetRepository.ListBookingAssetLinksAsync(bookingId: bookingId).ConfigureAwait(true);
+        foreach (var link in links)
+        {
+            var asset = await _assetRepository.GetAssetAsync(link.AssetId).ConfigureAwait(true);
+            if (asset is null) continue;
+            var workflow = await _assetRepository.GetAssetWorkflowMetadataAsync(asset.AssetId).ConfigureAwait(true);
+            AssetThumbnails.Add(new(asset, workflow?.WorkflowStatus ?? AssetWorkflowStatus.Unprocessed));
+        }
+        NotifyAssets();
+    }
+    private void NotifyAssets() { OnPropertyChanged(nameof(AssetCount)); OnPropertyChanged(nameof(ClientSelectedAssetCount)); OnPropertyChanged(nameof(PendingRetouchAssetCount)); OnPropertyChanged(nameof(RetouchedAssetCount)); OnPropertyChanged(nameof(DeliveredAssetCount)); OnPropertyChanged(nameof(HasAssetThumbnails)); }
 
     public void Clear()
     {

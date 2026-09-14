@@ -78,7 +78,10 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         IFinanceService? financeService = null,
         ICurrentLocationService? currentLocationService = null,
         IBookingWorkflowService? workflowService = null,
-        IBookingTimeDisplayService? timeDisplay = null)
+        IBookingTimeDisplayService? timeDisplay = null,
+        RAWSelectionAssistant.Core.Services.AssetLibrary.IAssetLibraryRepository? assetRepository = null,
+        PixelTart.Modules.AssetLibrary.IAssetThumbnailProvider? thumbnailProvider = null,
+        string? assetDatabasePath = null)
     {
         _bookingService = bookingService;
         _projectRepository = projectRepository;
@@ -133,7 +136,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Week = new WeekCalendarViewModel(SelectDate, OpenBookingAsync, CreateAt);
         Day = new DayCalendarViewModel(OpenBookingAsync, CreateAt);
         DaySchedule = new DaySchedulePanelViewModel(OpenBookingAsync, CreateForDate);
-        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState, bookingPeopleService, financeService, currentLocationService, _timeDisplay, workflowService);
+        Details = new ShootBookingDetailsViewModel(bookingService, documentWorkflow, dialogs, reminderService, reminderScheduler, weatherService, weatherState, bookingPeopleService, financeService, currentLocationService, _timeDisplay, workflowService, assetRepository, thumbnailProvider, assetDatabasePath);
         Details.CloseRequested += (_, _) => IsDetailsOpen = false;
         Details.Archived += (_, _) => _ = RefreshAsync();
         Details.Completed += (_, _) => _ = RefreshAfterBookingChangeAsync();

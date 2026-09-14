@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
+             xmlns:asset="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary"
              AutomationProperties.Name="拍摄排期详情"
              AutomationProperties.HelpText="切换排期时默认回到概览并重置滚动位置；金额默认遮罩，归档不会删除任何电脑文件">
     <UserControl.Resources>
@@ -37,6 +38,18 @@
                             <TextBlock Text="客户" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding ClientDisplayName}" Margin="0,2,0,10" />
                             <TextBlock Text="时间" Style="{StaticResource CaptionText}" /><TextBlock Text="{Binding TimeText}" TextWrapping="Wrap" Margin="0,2,0,2" /><TextBlock Text="{Binding TimeZoneText}" Style="{StaticResource CaptionText}" Margin="0,0,0,10" />
                             <TextBlock Text="地点 / 类型" Style="{StaticResource CaptionText}" /><TextBlock Margin="0,2,0,10"><Run Text="{Binding LocationText, Mode=OneWay}" /><Run Text=" · " /><Run Text="{Binding ShootingTypeText, Mode=OneWay}" /></TextBlock>
+                            <Separator />
+                            <TextBlock Text="关联素材" FontWeight="SemiBold" Margin="0,10,0,3" />
+                            <WrapPanel Margin="0,2,0,8">
+                                <TextBlock Text="{Binding AssetCount, StringFormat={}全部 {0}}" Style="{StaticResource CaptionText}" Margin="0,0,12,0" />
+                                <TextBlock Text="{Binding ClientSelectedAssetCount, StringFormat={}客户选 {0}}" Style="{StaticResource CaptionText}" Margin="0,0,12,0" />
+                                <TextBlock Text="{Binding PendingRetouchAssetCount, StringFormat={}待精修 {0}}" Style="{StaticResource CaptionText}" Margin="0,0,12,0" />
+                                <TextBlock Text="{Binding RetouchedAssetCount, StringFormat={}已精修 {0}}" Style="{StaticResource CaptionText}" Margin="0,0,12,0" />
+                                <TextBlock Text="{Binding DeliveredAssetCount, StringFormat={}已交付 {0}}" Style="{StaticResource CaptionText}" />
+                            </WrapPanel>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" MaxHeight="116">
+                                <ItemsControl ItemsSource="{Binding AssetThumbnails}" AutomationProperties.AutomationId="BookingAssetThumbnailStrip"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Width="96" Height="100" Margin="0,0,6,0" Background="{DynamicResource SurfaceSecondaryBrush}"><Grid><Image Stretch="UniformToFill" asset:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" asset:AsyncThumbnail.DecodeWidth="192" /><TextBlock Text="{Binding WorkflowLabel}" VerticalAlignment="Bottom" Background="#CC171A20" Foreground="White" FontSize="10" Padding="4,2" /><TextBlock Text="离线" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#CC171A20" Foreground="White" FontSize="10" Padding="3" Visibility="{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}" /></Grid></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                            </ScrollViewer>
                             <Separator />
                             <TextBlock Text="具体拍摄要求" FontWeight="SemiBold" Margin="0,8,0,3" /><TextBlock Text="{Binding ShootingRequirementsText}" TextWrapping="Wrap" />
                             <TextBlock Text="准备说明" FontWeight="SemiBold" Margin="0,12,0,3" /><TextBlock Text="{Binding PreparationNotesText}" TextWrapping="Wrap" />

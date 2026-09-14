@@ -10,9 +10,9 @@ This is a code-truth audit. Service contracts, database tables, inherited tests 
 | Project Picker | SERVICE_ONLY | ProjectAssetLink repository exists; no search/recent/add/remove dark picker UI. |
 | Booking Picker | SERVICE_ONLY | BookingAssetLink repository exists; no picker UI or booking search surface in Inspector. |
 | Client Resolver | DONE | Unified resolver added; uses existing booking/project display names and explicitly reports multiple clients. Unit coverage added. Inspector wiring remains PARTIAL. |
-| Calendar asset strip | MISSING | Booking detail currently shows booking metadata/documents/people; no shared-thumbnail visual asset strip. |
+| Calendar asset strip | PARTIAL | Booking detail now loads BookingAssetLink records and renders a shared-provider thumbnail strip with workflow counts; full navigate-all filtering remains open. |
 | Calendar deep link | MISSING | No proven Booking → Asset Library or Asset → Calendar navigation contract. |
-| Inspiration Collection UI | SERVICE_ONLY | SQLite CRUD/membership/reorder/archive and ordered-member listing exist; no visual collection page/grid. |
+| Inspiration Collection UI | PARTIAL | Asset Library now exposes a dark visual collection panel/grid with create/open/archive/add-selection actions; rename, project header and full offline thumbnail routing remain incomplete. |
 | Collection DragDrop | MISSING | Existing drag/drop covers folder/tag and Explorer import; collection targets are not connected. |
 | Recent Library Switcher | PARTIAL | Portable library host and switching foundation exist; complete recent list/open/remove/online state UI is not evidenced. |
 | Real EXIF | PARTIAL | JPEG pipeline now exposes camera/lens/ISO/exposure/aperture/focal length; capture time/dimensions/orientation are already available from asset metadata; TIFF/RAW coverage and Inspector end-to-end fixture remain incomplete. |

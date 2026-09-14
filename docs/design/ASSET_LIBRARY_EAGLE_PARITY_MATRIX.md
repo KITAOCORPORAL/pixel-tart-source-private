@@ -17,7 +17,7 @@ Eagle behavior is based on `docs/product/eagle-reference/`. A row is `DONE` only
 | Layout | Yes | Yes | Yes | Yes | DONE — Grid/Masonry/Justified/List and formal viewport behavior are tested. |
 | Inspector core metadata | Yes | Read-only | Yes | Yes | DONE — file, dimensions, dates, rating, folders and tags read real repository data. |
 | Inspector workflow fields | Yes | Partial | Yes | Yes | PARTIAL — AssetOrigin, WorkflowStatus and dedicated many-to-many Project/Booking links are real and reload-tested. Camera/lens/exposure remain file metadata, Client and cross-module Calendar navigation are not yet connected. |
-| Context menu | Yes | Yes | Yes | Yes | PARTIAL — selection-aware Viewer/external/reveal, organize/rating, workflow state, tray, export, archive and recoverable Trash are live. Project/Booking picker and Inspiration Collection actions remain intentionally disabled. |
+| Context menu | Yes | Yes | Yes | Yes | PARTIAL — selection-aware Viewer/external/reveal, organize/rating, workflow state, tray, export, archive and recoverable Trash are live. Project/Booking/Collection actions are available from the Inspector/more panel; context-menu wiring remains open. |
 | Preview / Viewer | Yes | Yes | N/A | Yes | DONE — double click and context command open the dark source-safe Viewer with Fit/100%/zoom/wheel/pan/previous/next/Esc; it shares the thumbnail provider and never writes source files. RAW is preview/proxy only, not claimed as full decode. |
 | Import | Yes | Yes | Yes | Yes | DONE — picker and Explorer drop both create source-safe reference records; managed-copy remains explicit. |
 | Export | Yes | Yes | N/A | Yes | DONE — multi-selection original/managed-copy export and metadata CSV are exposed; conflict auto-numbering and no-overwrite/source-hash contracts are tested. Existing package export remains reused separately. |
@@ -25,8 +25,8 @@ Eagle behavior is based on `docs/product/eagle-reference/`. A row is `DONE` only
 | Trash | Yes | Yes | Yes | Yes | DONE — recoverable Trash persists across restart, supports restore/undo/redo, preserves prior archive state and never deletes source files. Permanent Delete stays deferred. |
 | Multi-select | Yes | Yes | Yes | Yes | DONE — extended/marquee/context selection survives paging and query refresh. |
 | Drag & drop | Yes | Yes | Yes | Yes | DONE — gallery single/multi selection to Folder/Tag changes metadata membership only; Explorer drop imports references without moving source files. |
-| Inspiration Tray | Yes | Yes | Yes | Yes | PARTIAL — it is now a thumbnail card tray with source/offline badges and per-item removal over durable stable references. Named collection CRUD, drag reorder and Project relation remain foundation gaps. |
-| Project / Booking / Client | Partial | Partial | Yes | Yes | PARTIAL — dedicated ProjectAssetLink and BookingAssetLink many-to-many persistence exists and Inspector reads it; Project/Booking pickers, Client resolution and Calendar deep links remain unconnected. |
+| Inspiration Tray | Yes | Yes | Yes | Yes | PARTIAL — thumbnail card tray with source/offline badges and removal is live; visual Collection panel/grid is now exposed, while drag reorder and Project header relation remain open. |
+| Project / Booking / Client | Yes | Yes | Yes | Yes | PARTIAL — dark Project/Booking picker panels and multi-select add/remove persistence are live over the existing link tables; Client resolver wiring and Calendar deep links remain open. |
 
 Permanent Delete is `NOT PLANNED / DEFERRED` for this sprint. Reference assets never authorize deletion or mutation of source files.
 
