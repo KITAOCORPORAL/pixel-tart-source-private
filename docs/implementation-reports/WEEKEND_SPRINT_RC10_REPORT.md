@@ -76,8 +76,8 @@ The specifically requested named product captures (`01_eagle_shell.png` through 
 
 - File: `像素蛋挞_Setup_2.3.0_RC10_x64.exe`
 - Local ignored path: `artifacts/releases/2.3.0/installer/像素蛋挞_Setup_2.3.0_RC10_x64.exe`
-- Size: 51,167,098 bytes
-- SHA-256: `3A207C22EE30D7D1B6A24370B93507076A5BB4FF7636A99F12C74A2EAC0F388D`
+- Size: 51,166,623 bytes
+- SHA-256: `A0F37DB9C601E7302573A34BD66EA5F92356B1BBB1A9DD9106F67255602C21E2`
 - RC8 and RC9 outputs were not overwritten. The installer and publish directory are ignored and are not committed.
 
 ## Remaining Gaps
