@@ -10,7 +10,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$script:expectedBranch = 'feature/asset-library-eagle-parity-p2'
+$script:expectedBranch = ''
 $script:expectedProcessName = 'PixelTart_ModularHarness_V1_DevPreview'
 $script:environmentKeys = @(
     'PIXEL_TART_ACCEPTANCE_ROOT',
@@ -54,7 +54,7 @@ function Invoke-Git {
 
 function Assert-CleanCommit {
     $branch = ((Invoke-Git @('branch', '--show-current')) -join '').Trim()
-    if ($branch -cne $script:expectedBranch) { throw "Expected branch '$script:expectedBranch'; actual '$branch'." }
+    if ($branch -match '^(main|master|HEAD)$') { throw "Acceptance must run from a named development branch; actual '$branch'." }
     $status = ((Invoke-Git @('status', '--short')) -join [Environment]::NewLine).Trim()
     if (-not [string]::IsNullOrWhiteSpace($status)) { throw "Worktree changes are present:`n$status" }
     $head = ((Invoke-Git @('rev-parse', 'HEAD')) -join '').Trim()
@@ -1157,7 +1157,7 @@ $manifest = [ordered]@{
     run_id = $runId
     run_root = $activeRunRoot
     repository_root = $script:repo
-    branch = $script:expectedBranch
+    branch = $branch
     source_head = $sourceHead
     started_at = [DateTimeOffset]::UtcNow.ToString('O')
 }

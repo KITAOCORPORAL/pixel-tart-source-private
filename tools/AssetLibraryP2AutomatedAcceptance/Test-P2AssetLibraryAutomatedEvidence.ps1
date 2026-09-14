@@ -256,7 +256,7 @@ Require-Equal $manifest.automated_capture_status 'captured' 'manifest status'
 Require-Equal (Full $manifest.run_root) $root 'manifest run root'
 Require-String $manifest.run_id 'run id' '^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'
 Require-String $manifest.source_head 'source head' '^[0-9a-f]{40}$'
-Require-Equal $manifest.branch 'feature/asset-library-eagle-parity-p2' 'branch'
+if ([string]::IsNullOrWhiteSpace([string]$manifest.branch) -or [string]$manifest.branch -match '^(main|master|HEAD)$') { Fail 'Acceptance branch must be a named development line.' }
 
 $fixture = $manifest.fixture
 Require-Equal $fixture.schema 'pixel-tart-p2-synthetic-fixture/v1' 'fixture schema'

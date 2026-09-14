@@ -1582,7 +1582,7 @@ if (-not $missingRejected) { throw 'missing exit_code was accepted' }
         var runner = Read("tools/AssetLibraryP3AutomatedAcceptance/Invoke-P3AssetLibraryAutomatedAcceptance.ps1");
         ContainsAll(runner,
             "[ValidateSet('Run', 'DryRun', 'ValidateExistingRun', 'RecoveryTest')]",
-            "feature/asset-library-eagle-parity-p3-query-metadata", "New-P3SyntheticFixture",
+            "Acceptance must run from a named development branch", "New-P3SyntheticFixture",
             "New-P3SyntheticFixture.py", "Test-P3AssetLibraryAutomatedEvidence.ps1",
             "Validator emitted unexpected stderr", "Validator stdout is not valid JSON",
             "Validator stdout failed the result contract", "pixel-tart-p3-automated-validation-result/v1",
