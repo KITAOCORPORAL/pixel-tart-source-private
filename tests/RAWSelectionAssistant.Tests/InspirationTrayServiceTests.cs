@@ -78,6 +78,7 @@ public sealed class InspirationTrayServiceTests
             Assert.AreEqual(1, await service.RemoveEntriesFromCollectionAsync(collectionId, [entryIds[0]]));
             Assert.AreEqual(1, await service.RenameCollectionAsync(collectionId, "Final selects"));
             Assert.AreEqual(1, (await service.ListCollectionsAsync()).Single().EntryCount);
+            Assert.AreEqual(entryIds[1], (await service.ListCollectionEntriesAsync(collectionId)).Single().TrayEntryId);
         }
         await using var restarted = new SqliteInspirationTrayService(path);
         var listed = await restarted.ListCollectionsAsync();
