@@ -26,6 +26,10 @@ public sealed class AssetLibraryWorkflowLinkTests
             Assert.HasCount(2, await reopened.ListBookingAssetLinksAsync(assetId: assetId));
             var metadata = await reopened.GetAssetWorkflowMetadataAsync(assetId);
             Assert.AreEqual("CameraImport", metadata!.AssetOrigin); Assert.AreEqual(AssetWorkflowStatus.PendingRetouch, metadata.WorkflowStatus);
+            Assert.AreEqual(1, await reopened.RemoveProjectAssetLinkAsync(projects[0], assetId));
+            Assert.AreEqual(1, await reopened.RemoveBookingAssetLinkAsync(bookings[0], assetId));
+            Assert.HasCount(1, await reopened.ListProjectAssetLinksAsync(assetId: assetId));
+            Assert.HasCount(1, await reopened.ListBookingAssetLinksAsync(assetId: assetId));
         }
         finally { try { Directory.Delete(root, true); } catch { } }
     }

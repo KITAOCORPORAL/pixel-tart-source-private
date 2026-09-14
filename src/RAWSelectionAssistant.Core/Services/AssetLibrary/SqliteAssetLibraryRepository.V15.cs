@@ -69,12 +69,34 @@ public sealed partial class SqliteAssetLibraryRepository
         command.Parameters.AddWithValue("$project", link.ProjectId.ToString("D")); command.Parameters.AddWithValue("$asset", link.AssetId.ToString("D")); command.Parameters.AddWithValue("$role", link.Role); command.Parameters.AddWithValue("$at", link.AddedAtUtc.ToString("O")); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task<int> RemoveProjectAssetLinkAsync(Guid projectId, Guid assetId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM ProjectAssetLinks WHERE ProjectId=$project AND AssetId=$asset;";
+        command.Parameters.AddWithValue("$project", projectId.ToString("D"));
+        command.Parameters.AddWithValue("$asset", assetId.ToString("D"));
+        return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     public async Task SaveBookingAssetLinkAsync(BookingAssetLink link, CancellationToken cancellationToken = default)
     {
         if (link.BookingId == Guid.Empty || link.AssetId == Guid.Empty) throw new ArgumentException("Booking and asset identities are required.");
         await InitializeAsync(cancellationToken).ConfigureAwait(false); await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false); await using var command = connection.CreateCommand();
         command.CommandText = "INSERT INTO BookingAssetLinks(BookingId,AssetId,LinkedAtUtc) VALUES($booking,$asset,$at) ON CONFLICT(BookingId,AssetId) DO NOTHING;";
         command.Parameters.AddWithValue("$booking", link.BookingId.ToString("D")); command.Parameters.AddWithValue("$asset", link.AssetId.ToString("D")); command.Parameters.AddWithValue("$at", link.LinkedAtUtc.ToString("O")); await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<int> RemoveBookingAssetLinkAsync(Guid bookingId, Guid assetId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM BookingAssetLinks WHERE BookingId=$booking AND AssetId=$asset;";
+        command.Parameters.AddWithValue("$booking", bookingId.ToString("D"));
+        command.Parameters.AddWithValue("$asset", assetId.ToString("D"));
+        return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<IReadOnlyList<ProjectAssetLink>> ListProjectAssetLinksAsync(Guid? assetId = null, Guid? projectId = null, CancellationToken cancellationToken = default)

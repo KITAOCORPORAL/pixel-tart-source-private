@@ -46,7 +46,9 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetLibraryBatchResult> SetAssetsTrashedAsync(IEnumerable<Guid> assetIds, bool isTrashed, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetTrashEntry>> ListTrashEntriesAsync(CancellationToken cancellationToken = default);
     Task SaveProjectAssetLinkAsync(ProjectAssetLink link, CancellationToken cancellationToken = default);
+    Task<int> RemoveProjectAssetLinkAsync(Guid projectId, Guid assetId, CancellationToken cancellationToken = default);
     Task SaveBookingAssetLinkAsync(BookingAssetLink link, CancellationToken cancellationToken = default);
+    Task<int> RemoveBookingAssetLinkAsync(Guid bookingId, Guid assetId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ProjectAssetLink>> ListProjectAssetLinksAsync(Guid? assetId = null, Guid? projectId = null, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<BookingAssetLink>> ListBookingAssetLinksAsync(Guid? assetId = null, Guid? bookingId = null, CancellationToken cancellationToken = default);
     Task SaveAssetWorkflowMetadataAsync(AssetWorkflowMetadata metadata, CancellationToken cancellationToken = default);

@@ -602,9 +602,17 @@
                         <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Stack.1}" />
                         <TextBlock Text="{Binding InspectorStorageMode, StringFormat=存储模式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <TextBlock Text="{Binding InspectorProject, StringFormat=项目：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <TextBlock Text="{Binding InspectorBooking, StringFormat=预约：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="项目" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <ItemsControl ItemsSource="{Binding InspectorProjectLinks}"><ItemsControl.ItemTemplate><DataTemplate><DockPanel Margin="0,2"><TextBlock Text="{Binding Name}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveProjectRelationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" /></DockPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                        <TextBlock Text="{Binding InspectorProject, StringFormat=项目摘要：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="拍摄" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <ItemsControl ItemsSource="{Binding InspectorBookingLinks}"><ItemsControl.ItemTemplate><DataTemplate><DockPanel Margin="0,2"><StackPanel><TextBlock Text="{Binding Name}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveBookingRelationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" /></DockPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                        <TextBlock Text="{Binding InspectorBooking, StringFormat=拍摄摘要：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorClient, StringFormat=客户：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <Button Content="＋ 关联项目" Command="{Binding OpenProjectPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" />
+                            <Button Content="＋ 关联拍摄" Command="{Binding OpenBookingPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" Margin="4,0,0,0" />
+                        </StackPanel>
                         <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
                         <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
@@ -720,6 +728,34 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="2" Panel.ZIndex="30" Width="860" MaxHeight="620" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="12"
+                Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
+                Visibility="{Binding IsCollectionPanelOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="InspirationCollectionsPanel">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"><TextBlock Text="灵感集" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="新建" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" /><Button Content="关闭" Command="{Binding ToggleInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalAlignment="Right" /></StackPanel>
+                <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="220" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding InspirationCollections}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><StackPanel Margin="4"><Button Content="{Binding Name}" Command="{Binding DataContext.OpenCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><TextBlock Text="{Binding EntryCount, StringFormat={} {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button Content="归档" Command="{Binding DataContext.ArchiveCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /></StackPanel></DataTemplate></ListBox.ItemTemplate></ListBox>
+                    <ItemsControl Grid.Column="1" ItemsSource="{Binding ActiveCollectionCards}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Width="140" Height="120" Margin="4" Background="{DynamicResource Brush.Background}"><Grid><Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.DecodeWidth="136" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /></Grid></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+                </Grid>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Row="2" Panel.ZIndex="31" Width="380" MaxHeight="420" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
+                Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
+                Visibility="{Binding IsProjectPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="ProjectRelationPicker">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"><TextBlock Text="关联项目" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="关闭" Command="{Binding CloseRelationPickerCommand}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
+                <ListBox ItemsSource="{Binding ProjectPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectProjectRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="2" Panel.ZIndex="31" Width="420" MaxHeight="420" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12"
+                Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
+                Visibility="{Binding IsBookingPickerOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="BookingRelationPicker">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"><TextBlock Text="关联拍摄" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="关闭" Command="{Binding CloseRelationPickerCommand}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
+                <ListBox ItemsSource="{Binding BookingPickerItems}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><Button Command="{Binding DataContext.SelectBookingRelationCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6"><StackPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding Details}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></Button></DataTemplate></ListBox.ItemTemplate></ListBox>
             </DockPanel>
         </Border>
 

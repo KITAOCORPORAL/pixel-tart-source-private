@@ -208,6 +208,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem(_viewModel.OrganizationPaneToggleLabel, _viewModel.ToggleOrganizationPaneCommand));
             menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
             menu.Items.Add(CreateMoreItem("打开灵感托盘", _viewModel.ToggleInspirationTrayCommand));
+            menu.Items.Add(CreateMoreItem("打开灵感集", _viewModel.OpenCollectionsCommand));
             menu.Items.Add(new Separator());
             menu.Items.Add(CreateMoreItem("新建智能文件夹", _viewModel.NewP3SmartFolderCommand));
             menu.Items.Add(CreateMoreItem("标签管理与批量编辑", _viewModel.ToggleP3TagManagerCommand));
