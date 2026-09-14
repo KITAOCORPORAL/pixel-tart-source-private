@@ -168,6 +168,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<InspirationCollectionSummary> SetCollectionProjectCommand { get; private set; } = null!;
     public AsyncCommand<InspirationTrayCardView> RemoveCollectionEntryCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> AddSelectionToCollectionCommand { get; private set; } = null!;
+    public AsyncCommand CloseCollectionPanelCommand { get; private set; } = null!;
     public int InspirationTrayCount { get => _inspirationTrayCount; private set => SetProperty(ref _inspirationTrayCount, value); }
     public bool IsProjectPickerOpen { get => _isProjectPickerOpen; private set => SetProperty(ref _isProjectPickerOpen, value); }
     public bool IsBookingPickerOpen { get => _isBookingPickerOpen; private set => SetProperty(ref _isBookingPickerOpen, value); }
@@ -242,6 +243,7 @@ public sealed partial class AssetLibraryViewModel
         SetCollectionProjectCommand = new(SetCollectionProjectAsync, _ => IsReady);
         RemoveCollectionEntryCommand = new(RemoveCollectionEntryAsync, _ => IsReady);
         AddSelectionToCollectionCommand = new(AddSelectionToCollectionAsync, _ => IsReady && SelectedAssets.Count > 0);
+        CloseCollectionPanelCommand = new(() => { IsCollectionPanelOpen = false; return Task.CompletedTask; });
         P2UndoCommand = new(() => RunTrackedP3OperationAsync(UndoP2Async), () => !_p2JournalBusy && _browserCommands.CanUndo);
         P2RedoCommand = new(() => RunTrackedP3OperationAsync(RedoP2Async), () => !_p2JournalBusy && _browserCommands.CanRedo);
     }
@@ -478,6 +480,99 @@ public sealed partial class AssetLibraryViewModel
         await service.AddEntriesToCollectionAsync(collection.CollectionId, added.AddedEntries.Select(entry => entry.TrayEntryId), _lifetimeCancellation.Token).ConfigureAwait(false);
         Status = $"已将 {added.AddedCount} 项加入灵感集：{collection.Name}";
         await OpenCollectionAsync(collection);
+    }
+
+    public async Task AddAssetIdsToInspirationTrayAsync(IReadOnlyList<Guid> assetIds)
+    {
+        var references = ResolveStableReferences(assetIds);
+        if (references.Length == 0) { Status = "所选素材缺少稳定 SHA-256，暂不能加入灵感托盘。"; return; }
+        var result = await _inspirationTray.AddRangeAsync(references, P2QueryDescription, _lifetimeCancellation.Token);
+        await RefreshInspirationTrayAsync();
+        IsInspirationTrayOpen = true;
+        Status = $"灵感托盘：新增 {result.AddedCount} 项，已存在 {result.ExistingCount} 项。";
+    }
+
+    public async Task AddAssetIdsToCollectionAsync(Guid collectionId, IReadOnlyList<Guid> assetIds)
+    {
+        var collection = InspirationCollections.FirstOrDefault(item => item.CollectionId == collectionId);
+        if (collection is null) { Status = "目标灵感集不存在或已归档。"; return; }
+        var references = ResolveStableReferences(assetIds);
+        if (references.Length == 0) { Status = "所选素材缺少稳定 SHA-256，暂不能加入灵感集。"; return; }
+        var service = (SqliteInspirationTrayService)_inspirationTray;
+        var added = await service.AddRangeAsync(references, "gallery-drag", _lifetimeCancellation.Token);
+        var entries = await service.ListAsync(_lifetimeCancellation.Token);
+        var referenceSet = references.ToHashSet();
+        var entryIds = entries.Where(entry => referenceSet.Contains(entry.Reference)).Select(entry => entry.TrayEntryId).ToArray();
+        await service.AddEntriesToCollectionAsync(collectionId, entryIds, _lifetimeCancellation.Token);
+        await RefreshInspirationTrayAsync();
+        await OpenCollectionAsync(collection);
+        await RefreshCollectionsAsync();
+        Status = $"已将 {entryIds.Length} 项加入灵感集：{collection.Name}。";
+    }
+
+    public async Task MoveEntriesToCollectionAsync(Guid targetCollectionId, IReadOnlyList<Guid> trayEntryIds, Guid? sourceCollectionId)
+    {
+        var target = InspirationCollections.FirstOrDefault(item => item.CollectionId == targetCollectionId);
+        if (target is null) { Status = "目标灵感集不存在或已归档。"; return; }
+        var ids = trayEntryIds.Where(id => id != Guid.Empty).Distinct().ToArray();
+        var service = (SqliteInspirationTrayService)_inspirationTray;
+        await service.AddEntriesToCollectionAsync(targetCollectionId, ids, _lifetimeCancellation.Token);
+        if (sourceCollectionId is Guid source && source != targetCollectionId)
+            await service.RemoveEntriesFromCollectionAsync(source, ids, _lifetimeCancellation.Token);
+        await OpenCollectionAsync(target);
+        await RefreshCollectionsAsync();
+        Status = sourceCollectionId is null
+            ? $"已将 {ids.Length} 项从托盘加入灵感集：{target.Name}。"
+            : $"已将 {ids.Length} 项移动到灵感集：{target.Name}。";
+    }
+
+    public async Task ReorderCollectionEntriesAsync(Guid collectionId, IReadOnlyList<Guid> movingIds, Guid beforeEntryId)
+    {
+        var service = (SqliteInspirationTrayService)_inspirationTray;
+        var current = (await service.ListCollectionEntriesAsync(collectionId, _lifetimeCancellation.Token)).Select(item => item.TrayEntryId).ToList();
+        var moving = movingIds.Where(current.Contains).Distinct().ToArray();
+        current.RemoveAll(moving.Contains);
+        var index = current.IndexOf(beforeEntryId);
+        if (index < 0) index = current.Count;
+        current.InsertRange(index, moving);
+        await service.ReorderCollectionAsync(collectionId, current, _lifetimeCancellation.Token);
+        var collection = InspirationCollections.FirstOrDefault(item => item.CollectionId == collectionId);
+        if (collection is not null) await OpenCollectionAsync(collection);
+        Status = $"已保存灵感集手动排序（{moving.Length} 项）。";
+    }
+
+    public async Task ReorderTrayEntriesAsync(IReadOnlyList<Guid> movingIds, Guid beforeEntryId)
+    {
+        var current = (await _inspirationTray.ListAsync(_lifetimeCancellation.Token)).Select(item => item.TrayEntryId).ToList();
+        var moving = movingIds.Where(current.Contains).Distinct().ToArray();
+        current.RemoveAll(moving.Contains);
+        var index = current.IndexOf(beforeEntryId);
+        if (index < 0) index = current.Count;
+        current.InsertRange(index, moving);
+        await _inspirationTray.ReorderAsync(current, _lifetimeCancellation.Token);
+        await RefreshInspirationTrayAsync();
+        Status = $"已保存灵感托盘手动排序（{moving.Length} 项）。";
+    }
+
+    private AssetLibraryStableReference[] ResolveStableReferences(IEnumerable<Guid> assetIds)
+    {
+        var ids = assetIds.Where(id => id != Guid.Empty).ToHashSet();
+        return AssetCards.Select(card => card.Asset)
+            .Concat(SelectedAssets)
+            .Where(asset => ids.Contains(asset.AssetId) && asset.ContentHash?.Length == 64)
+            .DistinctBy(asset => asset.AssetId)
+            .Select(asset => new AssetLibraryStableReference(_libraryIdForTray, asset.AssetId, asset.ContentHash!))
+            .ToArray();
+    }
+
+    private async Task RefreshCollectionsAsync()
+    {
+        var current = ActiveCollectionId;
+        var service = (SqliteInspirationTrayService)_inspirationTray;
+        InspirationCollections.Clear();
+        foreach (var item in await service.ListCollectionsAsync(_lifetimeCancellation.Token)) InspirationCollections.Add(item);
+        if (current is Guid active && InspirationCollections.FirstOrDefault(item => item.CollectionId == active) is { } collection)
+            await OpenCollectionAsync(collection);
     }
 
     private async Task AddToInspirationTrayAsync(AssetVisualMatchView? card)

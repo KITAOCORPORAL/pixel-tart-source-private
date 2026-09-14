@@ -35,6 +35,29 @@ public sealed class AssetLibraryProductRelationUiTests
         Assert.DoesNotContain("永久删除", xaml, StringComparison.Ordinal);
     }
 
+    [TestMethod]
+    public void InspirationUiConnectsGalleryTrayAndCollectionDragDrop()
+    {
+        var root = RepositoryRoot();
+        var xaml = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml"));
+        var behavior = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "InspirationDragDropBehavior.cs"));
+        var viewModel = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryViewModel.P2Browser.cs"));
+
+        foreach (var token in new[]
+        {
+            "TargetKind=\"Tray\"", "TargetKind=\"Collection\"", "TargetKind=\"TrayOrder\"",
+            "TargetKind=\"CollectionOrder\"", "SelectionMode=\"Extended\"", "CloseCollectionPanelCommand"
+        }) StringAssert.Contains(xaml, token);
+        foreach (var token in new[]
+        {
+            "PixelTart.AssetLibrary.AssetIds.v1", "PixelTart.Inspiration.TrayEntryIds.v1",
+            "ResolveSelectedEntryIds", "AddAssetIdsToCollectionAsync", "MoveEntriesToCollectionAsync",
+            "ReorderCollectionEntriesAsync", "ReorderTrayEntriesAsync"
+        }) Assert.IsTrue(behavior.Contains(token, StringComparison.Ordinal) || viewModel.Contains(token, StringComparison.Ordinal), token);
+        Assert.DoesNotContain("File.Move", behavior, StringComparison.Ordinal);
+        Assert.DoesNotContain("File.Delete", behavior, StringComparison.Ordinal);
+    }
+
     private static string RepositoryRoot()
     {
         for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)

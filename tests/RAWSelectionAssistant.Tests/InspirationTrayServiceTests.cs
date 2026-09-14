@@ -88,4 +88,37 @@ public sealed class InspirationTrayServiceTests
         Assert.AreEqual(1, await restarted.ArchiveCollectionAsync(collectionId));
         Assert.IsEmpty(await restarted.ListCollectionsAsync());
     }
+
+    [TestMethod]
+    public async Task CollectionDragSemantics_MoveAndManualReorderPersistAcrossRestart()
+    {
+        using var temp = new TempDirectory();
+        var path = temp.Combine("tray.sqlite");
+        Guid sourceId;
+        Guid targetId;
+        Guid[] entryIds;
+        await using (var service = new SqliteInspirationTrayService(path))
+        {
+            var refs = Enumerable.Range(0, 4)
+                .Select(i => new AssetLibraryStableReference(Guid.NewGuid(), Guid.NewGuid(), i.ToString("x").PadLeft(64, '0')))
+                .ToArray();
+            entryIds = (await service.AddRangeAsync(refs)).AddedEntries.Select(entry => entry.TrayEntryId).ToArray();
+            sourceId = (await service.CreateCollectionAsync("Source")).CollectionId;
+            targetId = (await service.CreateCollectionAsync("Target")).CollectionId;
+            await service.AddEntriesToCollectionAsync(sourceId, entryIds);
+
+            await service.AddEntriesToCollectionAsync(targetId, entryIds.Take(2));
+            await service.RemoveEntriesFromCollectionAsync(sourceId, entryIds.Take(2));
+            await service.ReorderCollectionAsync(targetId, [entryIds[1], entryIds[0]]);
+            await service.ReorderAsync([entryIds[3], entryIds[2], entryIds[1], entryIds[0]]);
+        }
+
+        await using var restarted = new SqliteInspirationTrayService(path);
+        CollectionAssert.AreEqual(new[] { entryIds[1], entryIds[0] },
+            (await restarted.ListCollectionEntriesAsync(targetId)).Select(entry => entry.TrayEntryId).ToArray());
+        CollectionAssert.AreEqual(new[] { entryIds[2], entryIds[3] },
+            (await restarted.ListCollectionEntriesAsync(sourceId)).Select(entry => entry.TrayEntryId).ToArray());
+        CollectionAssert.AreEqual(new[] { entryIds[3], entryIds[2], entryIds[1], entryIds[0] },
+            (await restarted.ListAsync()).Select(entry => entry.TrayEntryId).ToArray());
+    }
 }
