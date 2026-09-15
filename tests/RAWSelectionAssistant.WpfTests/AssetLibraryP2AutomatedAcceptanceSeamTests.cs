@@ -115,6 +115,7 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
         ContainsAll(driver, "_assetGrid.SelectedItems.Add", "SwitchViewCommand.Execute", "SortBrowserCommand.Execute",
             "PreviewDropAsync", "ExecuteDropAsync", "P2UndoCommand.Execute", "P2RedoCommand.Execute",
             "SwitchViewCommand.ExecutionTask", "DispatcherPriority.Loaded",
+            "RaiseKeyboardRouteAsync(_searchBox, Key.Enter)",
             "VirtualizingPanel.GetIsVirtualizing", "CaptureVisibleBounds");
         foreach (var forbidden in new[] { "SendInput", "SetForegroundWindow", "AutomationElement", "InvokePattern", "BindingFlags", "GetField(", "GetProperty(" })
             Assert.IsFalse(driver.Contains(forbidden, StringComparison.Ordinal), forbidden);

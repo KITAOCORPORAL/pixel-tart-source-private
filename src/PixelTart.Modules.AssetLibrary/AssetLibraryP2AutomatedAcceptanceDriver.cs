@@ -239,7 +239,10 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
         if (!string.Equals(_viewModel.SearchText, text, StringComparison.Ordinal))
             throw new InvalidOperationException("The WPF text-composition route did not update the bound Asset Library search query.");
         if (string.Equals(text, "P2_00", StringComparison.Ordinal))
+        {
+            await RaiseKeyboardRouteAsync(_searchBox, Key.Enter);
             await WaitUntilAsync(() => _viewModel.P2QueryTotalCount == 100, "the deterministic persisted search query");
+        }
     }
 
     public async Task ClearSearchThroughEditingCommandAsync()
