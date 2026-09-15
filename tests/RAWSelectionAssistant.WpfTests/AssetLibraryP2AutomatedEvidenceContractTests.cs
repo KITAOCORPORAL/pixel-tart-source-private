@@ -25,7 +25,7 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         "sort-unstable", "selection-truncated", "invalid-drop-accepted", "undo-mismatch",
         "prohibited-command-present", "inspector-mode-mismatch", "restart-identity-reused", "dpi-overflow",
         "performance-threshold-exceeded", "ui-block-exceeded", "user-source-write", "eagle-write",
-        "residual-process", "database-not-v6", "cross-run-splice", "runner-session-splice",
+        "residual-process", "database-not-v7", "cross-run-splice", "runner-session-splice",
         "process-session-splice", "binary-hash-mismatch", "input-tree-mutated"
     ];
 
@@ -48,6 +48,7 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         using var document = JsonDocument.Parse(Read("tools/AssetLibraryP2AutomatedAcceptance/automated-acceptance-contract.json"));
         var root = document.RootElement;
         var fixture = root.GetProperty("fixture");
+        Assert.AreEqual(7, root.GetProperty("repository").GetProperty("schema_version").GetInt32());
         Assert.AreEqual(512, fixture.GetProperty("total_count").GetInt32());
         Assert.AreEqual(500, fixture.GetProperty("active_count").GetInt32());
         Assert.AreEqual(12, fixture.GetProperty("archived_count").GetInt32());

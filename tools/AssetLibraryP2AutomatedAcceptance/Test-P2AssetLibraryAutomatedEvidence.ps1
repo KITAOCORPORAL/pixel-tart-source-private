@@ -209,6 +209,7 @@ Require-Equal ([int]$contract.fixture.total_count) 512 'fixture total'
 Require-Equal ([int]$contract.fixture.active_count) 500 'fixture active'
 Require-Equal ([int]$contract.fixture.archived_count) 12 'fixture archived'
 Require-Equal ([int]$contract.fixture.schema_version) 6 'fixture schema version'
+Require-Equal ([int]$contract.repository.schema_version) 7 'runtime repository schema version'
 Require-Equal ([int]$contract.fixture.display_name_count) 512 'fixture display-name count'
 Require-Equal $contract.fixture.display_name_language 'zh-CN' 'fixture display-name language'
 Require-Equal ([int]$contract.fixture.content_hash_count) 512 'fixture content-hash count'
@@ -239,7 +240,7 @@ $negativeGuardMap = [ordered]@{
     'restart-identity-reused'='restart PID/HWND/process-session differ'; 'dpi-overflow'='four bounds snapshots with no overflow';
     'performance-threshold-exceeded'='all fixed duration thresholds'; 'ui-block-exceeded'='100ms dispatcher threshold';
     'user-source-write'='safety zero counters'; 'eagle-write'='Eagle read/write zero counters';
-    'residual-process'='runner process cleanup'; 'database-not-v6'='read-only SQLite schema audit';
+    'residual-process'='runner process cleanup'; 'database-not-v7'='read-only migrated SQLite schema audit';
     'cross-run-splice'='run id/root/head on every record'; 'runner-session-splice'='11 unique runner sessions';
     'process-session-splice'='event/artifact process-session ownership'; 'binary-hash-mismatch'='run-owned binary tree and live hashes';
     'input-tree-mutated'='validator before/after tree fingerprint'
@@ -355,7 +356,7 @@ for ($index = 0; $index -lt 10; $index++) {
     Require-Equal $scenario.status 'passed' "scenario[$index] status"
     Require-String $scenario.primary_process_session_id "scenario[$index] primary session" '^[0-9a-f]{32}$'
     $scenarioRoot = Full $scenario.scenario_root; if (-not (Inside $scenarioRoot $root)) { Fail "scenario[$index] root escapes run root." }
-    Require-Equal ([int]$scenario.database.schema_version) 6 "scenario[$index] DB schema"
+    Require-Equal ([int]$scenario.database.schema_version) ([int]$contract.repository.schema_version) "scenario[$index] DB schema"
     Require-Equal ([int]$scenario.database.asset_count) 512 "scenario[$index] DB total"
     Require-Equal ([int]$scenario.database.active_asset_count) 500 "scenario[$index] DB active"
     Require-Equal ([int]$scenario.database.archived_asset_count) 12 "scenario[$index] DB archived"
@@ -463,7 +464,7 @@ Require-Equal $audit.schema 'pixel-tart-p2-pre-cleanup-database-audit/v1' 'datab
 Require-Equal $audit.status 'passed' 'database audit status'; Require-Equal ([int]$audit.scenario_count) 10 'database audit scenario count'
 foreach ($row in @($audit.scenarios)) {
     foreach ($side in 'active','evidence') {
-        Require-Equal ([int]$row.$side.schema_version) 6 "audit $side schema"
+        Require-Equal ([int]$row.$side.schema_version) ([int]$contract.repository.schema_version) "audit $side schema"
         Require-Equal ([int]$row.$side.asset_count) 512 "audit $side total"
         Require-Equal ([int]$row.$side.active_count) 500 "audit $side active"
         Require-Equal ([int]$row.$side.archived_count) 12 "audit $side archived"

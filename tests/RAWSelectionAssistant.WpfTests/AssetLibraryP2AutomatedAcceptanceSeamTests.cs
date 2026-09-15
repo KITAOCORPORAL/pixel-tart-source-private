@@ -134,6 +134,16 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
     }
 
     [TestMethod]
+    public void P2FixtureStartsAtV6AndRuntimeEvidenceRequiresV7()
+    {
+        using var contract = JsonDocument.Parse(Read("tools/AssetLibraryP2AutomatedAcceptance/automated-acceptance-contract.json"));
+        Assert.AreEqual(6, contract.RootElement.GetProperty("fixture").GetProperty("schema_version").GetInt32());
+        Assert.AreEqual(7, contract.RootElement.GetProperty("repository").GetProperty("schema_version").GetInt32());
+        var controller = Read("src/RAWSelectionAssistant/Services/AssetLibraryP2AutomatedAcceptanceController.cs");
+        ContainsAll(controller, "RuntimeDatabaseSchemaVersion = 7", "schemaVersion != RuntimeDatabaseSchemaVersion");
+    }
+
+    [TestMethod]
     public void RunnerPublishesTheValidatedBranchOutsideStrictModeFunctionScope()
     {
         var runner = Read("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");

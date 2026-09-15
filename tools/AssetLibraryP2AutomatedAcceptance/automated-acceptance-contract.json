@@ -23,7 +23,7 @@
   "binary_snapshot_schema": "pixel-tart-p2-run-owned-binary-snapshot/v1",
   "repository": {
     "implementation": "SqliteAssetLibraryRepository",
-    "schema_version": 6,
+    "schema_version": 7,
     "schema_query": "SELECT MAX(Version) FROM AssetLibrarySchemaInfo;",
     "database_header": "SQLite format 3",
     "required_schema_marker": "AssetLibrarySchemaInfo"
@@ -109,7 +109,7 @@
     "undo-mismatch", "prohibited-command-present", "inspector-mode-mismatch",
     "restart-identity-reused", "dpi-overflow", "performance-threshold-exceeded",
     "ui-block-exceeded", "user-source-write", "eagle-write", "residual-process",
-    "database-not-v6", "cross-run-splice", "runner-session-splice",
+    "database-not-v7", "cross-run-splice", "runner-session-splice",
     "process-session-splice", "binary-hash-mismatch", "input-tree-mutated"
   ]
 }

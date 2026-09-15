@@ -17,6 +17,7 @@ namespace RAWSelectionAssistant.Services;
 
 internal sealed class AssetLibraryP2AutomatedAcceptanceController : IAssetLibraryLoadStateController
 {
+    internal const int RuntimeDatabaseSchemaVersion = 7;
     internal const string OptInEnvironmentVariable = "PIXEL_TART_P2_AUTOMATED_ACCEPTANCE";
     internal const string RunRootEnvironmentVariable = "PIXEL_TART_P2_AUTOMATED_RUN_ROOT";
     internal const string PlanPathEnvironmentVariable = "PIXEL_TART_P2_AUTOMATED_PLAN_PATH";
@@ -945,8 +946,8 @@ internal sealed class AssetLibraryP2AutomatedAcceptanceController : IAssetLibrar
             schema.CommandText = SchemaQuery;
             schemaVersion = Convert.ToInt32(await schema.ExecuteScalarAsync().ConfigureAwait(false));
         }
-        if (schemaVersion != 6)
-            throw new InvalidDataException($"The SQLite evidence backup schema is {schemaVersion}; expected v6.");
+        if (schemaVersion != RuntimeDatabaseSchemaVersion)
+            throw new InvalidDataException($"The SQLite evidence backup schema is {schemaVersion}; expected v{RuntimeDatabaseSchemaVersion}.");
         if (state.Database.SchemaVersion is int observedSchema && observedSchema != schemaVersion)
             throw new InvalidDataException("The SQLite evidence schema does not match the repository-observed schema.");
 

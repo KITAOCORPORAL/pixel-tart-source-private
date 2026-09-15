@@ -130,7 +130,7 @@ public partial class MainWindow
         controller.WriteJsonArtifact(controller.ScenarioId, "query-snapshot", "fixture-query.json", Evidence(controller, new
         {
             total_count = 512, active_count = 500, archived_count = 12, browser = snapshot,
-            repository = "SqliteAssetLibraryRepository", schema_version = 6
+            repository = "SqliteAssetLibraryRepository", schema_version = AssetLibraryP2AutomatedAcceptanceController.RuntimeDatabaseSchemaVersion
         }));
         controller.RecordScenarioCheck(controller.ScenarioId, "fixture_counts", new { total = 512, active = 500, archived = 12 });
         await CaptureFrameAsync(controller, driver, "fixture-integrity", 1366, 768, 1);

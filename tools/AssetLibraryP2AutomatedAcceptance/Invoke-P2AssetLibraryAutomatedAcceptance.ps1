@@ -938,7 +938,7 @@ def inspect(path):
     after = hashlib.sha256(path.read_bytes()).hexdigest()
     if before != after:
         raise RuntimeError(f"read-only audit changed database: {path}")
-    if quick_check != "ok" or schema_version != 6 or (asset_count, active_count, archived_count) != (512, 500, 12):
+    if quick_check != "ok" or schema_version != 7 or (asset_count, active_count, archived_count) != (512, 500, 12):
         raise RuntimeError(f"invalid database {path}: quick_check={quick_check}, schema={schema_version}, counts={(asset_count,active_count,archived_count)}")
     return {"path": str(path), "sha256": before, "quick_check": quick_check,
             "schema_version": schema_version, "asset_count": asset_count,
