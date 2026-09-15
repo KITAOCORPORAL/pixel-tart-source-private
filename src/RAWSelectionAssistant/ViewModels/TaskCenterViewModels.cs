@@ -213,19 +213,19 @@ public sealed class TaskSnapshotViewModel : ObservableObject
     private MediaTaskFailureDetail? FailureDetail => MediaTaskFailurePayload.TryParse(_snapshot.ErrorMessage, out var detail) ? detail : null;
     public string ErrorSummary => IsFailure ? LocalizeError(_snapshot.ErrorCode, _snapshot.ErrorMessage) : string.Empty;
     public string PrimaryFailureReason => IsFailure ? ErrorSummary : string.Empty;
-    public string FailedFileText => $"失败文件：{Math.Max(1, _snapshot.Summary.Failed + _snapshot.Summary.WaitingForAttention)}";
-    public string SuccessfulFileText => $"成功：{_snapshot.Summary.Succeeded}";
+    public string FailedFileText => $"{Math.Max(1, _snapshot.Summary.Failed + _snapshot.Summary.WaitingForAttention)} 张照片处理失败";
+    public string SuccessfulFileText => _snapshot.Summary.Succeeded > 0 ? $"已完成 {_snapshot.Summary.Succeeded} 张" : string.Empty;
     public string FailureFileName => FailureDetail?.FileName ?? CurrentFile;
     public string FailureStage => FailureDetail?.Stage ?? "任务处理";
     public string FailureResult => "失败";
-    public string SourceSafetyText => "未修改";
+    public string SourceSafetyText => "源照片未修改";
     public string OutputSafetyText => FailureDetail?.OutputOwned == true ? "已生成但未通过最终验证" : "未生成";
-    public string RetryabilityText => FailureDetail?.Retryable == false ? "否" : "是";
+    public string RetryabilityText => FailureDetail?.Retryable == false ? "暂时无法重试" : "可以重试";
     public string UserAdvice => FailureDetail is null
-        ? "请复制诊断信息并重试失败项。"
+        ? "请检查照片是否仍可访问，然后重试。"
         : FailureDetail.Retryable
-            ? "请确认源文件可访问、输出目录可写，然后重试失败项。"
-            : "该文件当前无法安全处理，请复制诊断信息用于兼容性排查。";
+            ? "请确认照片所在硬盘已连接、保存位置可用，然后重试。"
+            : "这张照片暂时无法安全处理。可在技术信息中复制诊断内容。";
     public string TechnicalInformation => FailureDetail?.TechnicalMessage ?? _snapshot.ErrorMessage ?? string.Empty;
     public bool HasTechnicalInformation => !string.IsNullOrWhiteSpace(TechnicalInformation);
     public bool IsFailure => State is TaskLifecycleState.Failed or TaskLifecycleState.NeedsAttention or TaskLifecycleState.PartiallyCompleted or TaskLifecycleState.Cancelled;
