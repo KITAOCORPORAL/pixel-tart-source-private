@@ -287,9 +287,12 @@
                           AutomationProperties.Name="打开或关闭筛选选项">
                 <Grid>
                     <ContentPresenter x:Name="SelectionContent" Margin="0" IsHitTestVisible="False"
-                                      Content="{TemplateBinding SelectionBoxItem}"
-                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                      Content="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ContentTemplate="{TemplateBinding ItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      ContentStringFormat="{TemplateBinding ItemStringFormat}"
+                                      ContentSource="Content"
+                                      TextElement.Foreground="{TemplateBinding Foreground}"
                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     <Path Width="8" Height="5" HorizontalAlignment="Right" VerticalAlignment="Center"

@@ -4,8 +4,14 @@ using RAWSelectionAssistant.Core.Utilities;
 
 namespace PixelTart.Modules.AssetLibrary;
 
-public sealed record P3QueryOption<T>(T Value, string Label) where T : struct, Enum;
-public sealed record P3QueryValueOption(string Value, string Label);
+public sealed record P3QueryOption<T>(T Value, string Label) where T : struct, Enum
+{
+    public override string ToString() => Label;
+}
+public sealed record P3QueryValueOption(string Value, string Label)
+{
+    public override string ToString() => Label;
+}
 
 /// <summary>
 /// Editable presentation node shared by the P3 query composer and Smart Folder
