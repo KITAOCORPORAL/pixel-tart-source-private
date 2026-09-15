@@ -104,7 +104,7 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
         var window = Read("src/RAWSelectionAssistant/MainWindow.AssetLibraryP2AutomatedAcceptance.cs");
         ContainsAll(driver,
             "IsMustFitElement", "IsInsideScrollableViewport", "candidate.MustFit",
-            "HasLayoutOverflow", "double.IsFinite");
+            "HasLayoutOverflow", "double.IsFinite", "CountFolderNodes(_viewModel.OrganizationFolders)");
         ContainsAll(window, "AssetLibraryP2AutomatedAcceptanceDriver.HasLayoutOverflow");
     }
 

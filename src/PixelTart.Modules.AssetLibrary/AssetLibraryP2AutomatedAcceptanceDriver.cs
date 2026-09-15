@@ -274,7 +274,7 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
             _viewModel.MultipleFolderSummary,
             _viewModel.MultipleTagSummary,
             _viewModel.MultipleRatingSummary,
-            _viewModel.OrganizationFolders.Count,
+            CountFolderNodes(_viewModel.OrganizationFolders),
             _viewModel.OrganizationSmartFolders.Count,
             _viewModel.OrganizationTagGroups.Sum(group => group.Children.Count),
             IsFolderTreeAcyclic(),
@@ -401,6 +401,9 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
         }
         return _viewModel.OrganizationFolders.All(Visit);
     }
+
+    private static int CountFolderNodes(IEnumerable<AssetLibraryFolderNodeView> roots) =>
+        roots.Sum(root => 1 + CountFolderNodes(root.Children));
 
     public IReadOnlyList<AssetLibraryP2AutomatedElementBounds> CaptureVisibleBounds()
     {
