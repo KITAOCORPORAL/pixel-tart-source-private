@@ -112,9 +112,9 @@
 
     <!-- Canonical menu API; existing implicit menu templates remain compatible. -->
     <Style x:Key="PixelTart.Menu.Context" TargetType="ContextMenu" BasedOn="{StaticResource {x:Type ContextMenu}}">
-        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Elevated}" />
+        <Setter Property="Background" Value="{DynamicResource MenuPopupBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border.Strong}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuPopupBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="MaxWidth" Value="280" />
@@ -130,17 +130,18 @@
         </Setter>
     </Style>
     <ControlTemplate x:Key="PixelTart.Menu.Item.Template" TargetType="MenuItem">
-        <Grid Background="{DynamicResource Brush.Surface.Elevated}" TextElement.Foreground="{TemplateBinding Foreground}" SnapsToDevicePixels="True">
+        <Grid Background="{DynamicResource MenuPopupBackgroundBrush}" TextElement.Foreground="{TemplateBinding Foreground}" SnapsToDevicePixels="True">
             <Border x:Name="ItemSurface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4" Padding="{TemplateBinding Padding}">
                 <Grid>
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="16" /></Grid.ColumnDefinitions>
-                    <ContentPresenter Grid.Column="0" Margin="4,0,18,0" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" />
-                    <TextBlock Grid.Column="1" Margin="18,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource Brush.Text.Secondary}" Text="{TemplateBinding InputGestureText}" />
-                    <Path x:Name="SubmenuArrow" Grid.Column="2" Width="6" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 5 5 L 0 10" Fill="Transparent" Stroke="{DynamicResource Brush.Text.Secondary}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="16" /></Grid.ColumnDefinitions>
+                    <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Margin="1,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Icon" />
+                    <ContentPresenter Grid.Column="1" Margin="3,0,18,0" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" />
+                    <TextBlock Grid.Column="2" Margin="18,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource MenuShortcutBrush}" Text="{TemplateBinding InputGestureText}" />
+                    <Path x:Name="SubmenuArrow" Grid.Column="3" Width="6" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 5 5 L 0 10" Fill="Transparent" Stroke="{DynamicResource MenuShortcutBrush}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
                 </Grid>
             </Border>
             <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-3" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" PlacementTarget="{Binding ElementName=ItemSurface}" VerticalOffset="-5">
-                <Border MinWidth="220" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="6" Padding="4">
+                <Border MinWidth="220" Background="{DynamicResource MenuPopupBackgroundBrush}" BorderBrush="{DynamicResource MenuPopupBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="4">
                     <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" /></ScrollViewer>
                 </Border>
             </Popup>
@@ -149,8 +150,8 @@
             <Trigger Property="Role" Value="TopLevelHeader"><Setter TargetName="PART_Popup" Property="Placement" Value="Bottom" /><Setter TargetName="PART_Popup" Property="HorizontalOffset" Value="0" /><Setter TargetName="PART_Popup" Property="VerticalOffset" Value="-1" /><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
             <Trigger Property="Role" Value="TopLevelItem"><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
             <Trigger Property="Role" Value="SubmenuItem"><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>
-            <Trigger Property="IsHighlighted" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
-            <Trigger Property="IsSubmenuOpen" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            <Trigger Property="IsHighlighted" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource MenuItemHoverBrush}" /></Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True"><Setter TargetName="ItemSurface" Property="Background" Value="{DynamicResource MenuItemOpenedBrush}" /></Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="ItemSurface" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /></Trigger>
             <Trigger Property="IsEnabled" Value="False"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Disabled}" /><Setter TargetName="ItemSurface" Property="Opacity" Value="0.72" /></Trigger>
         </ControlTemplate.Triggers>

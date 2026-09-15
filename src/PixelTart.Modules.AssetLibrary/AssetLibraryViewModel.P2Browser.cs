@@ -119,6 +119,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<string> SortBrowserCommand { get; private set; } = null!;
     public AsyncCommand ToggleSortDirectionCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> CopyContextPathCommand { get; private set; } = null!;
+    public AsyncCommand<AssetVisualMatchView> CopyContextFileCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> AddContextFolderCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> RemoveContextFolderCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> AddContextTagCommand { get; private set; } = null!;
@@ -197,6 +198,7 @@ public sealed partial class AssetLibraryViewModel
         SortBrowserCommand = new(SortBrowserAsync);
         ToggleSortDirectionCommand = new(ToggleSortDirectionAsync);
         CopyContextPathCommand = new(CopyContextPathAsync);
+        CopyContextFileCommand = new(CopyContextFileAsync);
         AddContextFolderCommand = new(card => AddContextFolderAsync(card), _ => SelectedFolder is not null);
         RemoveContextFolderCommand = new(card => RemoveContextFolderAsync(card), _ => SelectedFolder is not null);
         AddContextTagCommand = new(card => AddContextTagAsync(card), _ => SelectedTag is not null);
@@ -1514,6 +1516,15 @@ public sealed partial class AssetLibraryViewModel
         if (card is null) return;
         try { await _browserCommands.CopyPathAsync(card.Asset.SourcePath); Status = "路径已复制；未修改源文件。"; }
         catch (Exception exception) { Status = $"复制路径失败：{exception.Message}"; }
+    }
+
+    private async Task CopyContextFileAsync(AssetVisualMatchView? card)
+    {
+        if (card is null) return;
+        var path = GetDisplaySourcePath(card.Asset);
+        if (path.Length == 0 || !File.Exists(path)) { Status = "原文件不存在，无法复制文件。"; return; }
+        try { await _browserCommands.CopyFileAsync(path); Status = "文件已复制到剪贴板；未修改源文件。"; }
+        catch (Exception exception) { Status = $"复制文件失败：{exception.Message}"; }
     }
 
     private Task OpenContextViewerAsync(AssetVisualMatchView? card)

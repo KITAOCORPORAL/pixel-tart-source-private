@@ -1,5 +1,7 @@
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
+using System.Collections.Specialized;
+using System.IO;
 using System.Windows;
 
 namespace PixelTart.Modules.AssetLibrary;
@@ -72,6 +74,14 @@ internal sealed class AssetLibraryBrowserCommandService(IAssetLibraryRepository 
     {
         if (string.IsNullOrWhiteSpace(path)) return Task.CompletedTask;
         Clipboard.SetText(path);
+        return Task.CompletedTask;
+    }
+
+    public Task CopyFileAsync(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path)) return Task.CompletedTask;
+        var files = new StringCollection { path };
+        Clipboard.SetFileDropList(files);
         return Task.CompletedTask;
     }
 
