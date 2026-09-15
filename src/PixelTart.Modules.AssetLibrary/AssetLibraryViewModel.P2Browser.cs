@@ -772,7 +772,45 @@ public sealed partial class AssetLibraryViewModel
     private async Task ToggleInspirationTrayAsync()
     {
         IsInspirationTrayOpen = !IsInspirationTrayOpen;
-        if (IsInspirationTrayOpen) await RefreshInspirationTrayAsync();
+        if (IsInspirationTrayOpen)
+        {
+            ClosePrimaryAuxiliarySurfacesExceptInspirationTray();
+            await RefreshInspirationTrayAsync();
+        }
+    }
+
+    private void ClosePrimaryAuxiliarySurfacesExceptSmartFolder()
+    {
+        P3QueryPanelOpen = false;
+        P3TagManagerOpen = false;
+        IsInspirationTrayOpen = false;
+        IsCollectionPanelOpen = false;
+        IsProjectPickerOpen = false;
+        IsBookingPickerOpen = false;
+    }
+
+    private void ClosePrimaryAuxiliarySurfacesExceptQuery()
+    {
+        if (P3SmartFolderOpen) CloseP3SmartFolderEditor();
+        P3TagManagerOpen = false;
+        IsInspirationTrayOpen = false;
+        IsCollectionPanelOpen = false;
+    }
+
+    private void ClosePrimaryAuxiliarySurfacesExceptTagManager()
+    {
+        P3QueryPanelOpen = false;
+        if (P3SmartFolderOpen) CloseP3SmartFolderEditor();
+        IsInspirationTrayOpen = false;
+        IsCollectionPanelOpen = false;
+    }
+
+    private void ClosePrimaryAuxiliarySurfacesExceptInspirationTray()
+    {
+        P3QueryPanelOpen = false;
+        if (P3SmartFolderOpen) CloseP3SmartFolderEditor();
+        P3TagManagerOpen = false;
+        IsCollectionPanelOpen = false;
     }
 
     private async Task ClearInspirationTrayAsync()
@@ -886,7 +924,7 @@ public sealed partial class AssetLibraryViewModel
     {
         if (SelectedSmartFolder?.SmartFolderId != node.Folder.SmartFolderId) SelectedSmartFolder = node.Folder;
         OpenP3SmartFolderEditor(node.Folder);
-        Status = "已打开智能文件夹通用规则编辑器。";
+        Status = "已打开智能文件夹编辑器。";
     }
 
     private void ClearSmartFolderSelectionState()

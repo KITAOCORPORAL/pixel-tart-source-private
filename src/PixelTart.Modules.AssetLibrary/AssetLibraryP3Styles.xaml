@@ -438,29 +438,29 @@
             <Grid>
                 <StackPanel Visibility="{Binding IsGroup, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                     <WrapPanel>
-                        <TextBlock Text="规则组" FontWeight="SemiBold" VerticalAlignment="Center" Margin="{DynamicResource Space.Inline.End.1}" />
+                        <TextBlock Text="满足：" FontWeight="SemiBold" VerticalAlignment="Center" Margin="{DynamicResource Space.Inline.End.1}" />
                         <ComboBox ItemsSource="{Binding LogicOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Logic, Mode=TwoWay}"
                                   Style="{StaticResource AssetLibraryP3ComboBox}" Width="105"
                                   AutomationProperties.AutomationId="{Binding LogicAutomationId}"
-                                  AutomationProperties.Name="规则组匹配方式" />
+                                  AutomationProperties.Name="选择需要满足哪些条件" />
                         <ToggleButton Content="停用" IsChecked="{Binding IsDisabled, Mode=TwoWay}"
                                       Style="{StaticResource AssetLibraryP3Toggle}"
                                       AutomationProperties.AutomationId="{Binding EnabledAutomationId}"
-                                      AutomationProperties.Name="停用或启用规则组" />
+                                      AutomationProperties.Name="暂时不使用这组条件" />
                         <ToggleButton Content="否定" IsChecked="{Binding Negated, Mode=TwoWay}"
                                       Style="{StaticResource AssetLibraryP3Toggle}"
                                       AutomationProperties.AutomationId="{Binding NegatedAutomationId}"
-                                      AutomationProperties.Name="切换规则组否定状态" />
-                        <Button Content="新增规则" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="在当前组新增规则" />
-                        <Button Content="新增子组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="在当前组新增子规则组" />
+                                      AutomationProperties.Name="排除满足这些条件的照片" />
+                        <Button Content="＋ 添加条件" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="添加条件" />
+                        <Button Content="添加条件组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="添加一组条件" />
                         <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动规则组" />
+                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动条件组" />
                         <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动规则组" />
+                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动条件组" />
                         <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
-                                AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除规则组" />
+                                AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除条件组" />
                     </WrapPanel>
                 </StackPanel>
                 <StackPanel Visibility="{Binding IsRule, Converter={StaticResource P3BooleanToVisibilityConverter}}">
@@ -470,7 +470,7 @@
                                   AutomationProperties.AutomationId="{Binding FieldAutomationId}" AutomationProperties.Name="筛选字段" />
                         <ComboBox ItemsSource="{Binding OperatorOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}"
                                   Style="{StaticResource AssetLibraryP3ComboBox}" Width="145" Margin="{DynamicResource Space.Inline.Start.1}"
-                                  AutomationProperties.AutomationId="{Binding OperatorAutomationId}" AutomationProperties.Name="筛选操作符" />
+                                  AutomationProperties.AutomationId="{Binding OperatorAutomationId}" AutomationProperties.Name="条件关系" />
                         <ToggleButton Content="区分大小写" IsChecked="{Binding IsCaseSensitive, Mode=TwoWay}"
                                       Style="{StaticResource AssetLibraryP3Toggle}" Margin="{DynamicResource Space.Inline.Start.1}"
                                       Visibility="{Binding CanChooseCaseSensitivity, Converter={StaticResource P3BooleanToVisibilityConverter}}"
@@ -483,7 +483,7 @@
                                           SelectedValue="{Binding PendingReferenceValue, Mode=TwoWay}"
                                           Width="185" Style="{StaticResource AssetLibraryP3ComboBox}"
                                           AutomationProperties.AutomationId="{Binding ReferencePickerAutomationId}"
-                                          AutomationProperties.Name="选择要添加的稳定引用">
+                                          AutomationProperties.Name="选择文件夹或标签">
                                     <ComboBox.ItemsSource>
                                         <MultiBinding Converter="{StaticResource P3ReferenceOptionsConverter}">
                                             <Binding Path="Field" />
@@ -495,7 +495,7 @@
                                 <Button Content="添加" Command="{Binding AddReferenceValueCommand}"
                                         Style="{StaticResource AssetLibraryP3SecondaryButton}"
                                         AutomationProperties.AutomationId="{Binding AddReferenceAutomationId}"
-                                        AutomationProperties.Name="添加所选筛选引用" />
+                                        AutomationProperties.Name="添加所选项目" />
                             </WrapPanel>
                             <ItemsControl ItemsSource="{Binding ReferenceValues}" Margin="0,4,0,0">
                                 <ItemsControl.ItemsPanel>
@@ -530,7 +530,7 @@
                                   SelectedValue="{Binding ValueText, Mode=TwoWay}" Width="185" Margin="{DynamicResource Space.Inline.Start.1}"
                                   Style="{StaticResource AssetLibraryP3ComboBox}"
                                   Visibility="{Binding IsEnumEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
-                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择枚举筛选值" />
+                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="选择条件值" />
                         <DatePicker SelectedDate="{Binding DateValue, Mode=TwoWay}" Width="185" Margin="{DynamicResource Space.Inline.Start.1}"
                                     Style="{StaticResource AssetLibraryP3DatePicker}"
                                     Visibility="{Binding IsDateEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"

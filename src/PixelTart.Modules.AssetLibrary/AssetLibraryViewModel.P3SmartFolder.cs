@@ -164,6 +164,7 @@ public sealed partial class AssetLibraryViewModel
     internal void OpenP3SmartFolderEditor(SmartFolder? folder)
     {
         if (P3ShutdownStarted) return;
+        ClosePrimaryAuxiliarySurfacesExceptSmartFolder();
         CancelP3SmartFolderWork();
         P3SmartFolderOpen = true;
         _p3SmartFolderId = folder?.SmartFolderId;
@@ -196,7 +197,7 @@ public sealed partial class AssetLibraryViewModel
         _p3SmartFolderLoadCancellation = cancellation;
         var generation = Interlocked.Increment(ref _p3SmartFolderLoadGeneration);
         P3SmartFolderLoading = true;
-        P3SmartFolderPreviewStatus = "正在载入已保存规则…";
+        P3SmartFolderPreviewStatus = "正在载入已保存条件…";
         _ = RunTrackedP3OperationAsync(
             () => LoadP3SmartFolderAsync(folder, generation, cancellation),
             () => { Interlocked.CompareExchange(ref _p3SmartFolderLoadCancellation, null, cancellation); cancellation.Cancel(); cancellation.Dispose(); });
@@ -210,7 +211,7 @@ public sealed partial class AssetLibraryViewModel
             if (!IsCurrentP3SmartFolderLoad(folder.SmartFolderId, generation, cancellation)) return;
             if (saved is null)
             {
-                P3SmartFolderValidationMessage = "此旧智能文件夹没有通用规则文档；请在旧编辑器确认条件后另存。";
+                P3SmartFolderValidationMessage = "无法读取这个智能文件夹的条件。请重新设置并保存。";
                 P3SmartFolderIsValid = false;
                 ReplaceP3SmartFolderRoot(AssetQueryNode.Group(AssetQueryLogic.All));
                 return;
@@ -226,7 +227,7 @@ public sealed partial class AssetLibraryViewModel
         {
             P3SmartFolderValidationMessage = $"规则载入失败：{exception.Message}";
             P3SmartFolderIsValid = false;
-            P3SmartFolderPreviewStatus = "规则未载入，未扩大为全部素材。";
+            P3SmartFolderPreviewStatus = "条件未载入，照片范围保持不变。";
         }
         finally
         {
@@ -293,7 +294,7 @@ public sealed partial class AssetLibraryViewModel
         if (!validation.IsValid)
         {
             CancelP3SmartFolderPreview();
-            P3SmartFolderPreviewStatus = "请先修正规则，再查看预览。";
+            P3SmartFolderPreviewStatus = "请先修正条件，再查看结果。";
             return;
         }
         ScheduleP3SmartFolderPreview();
@@ -327,7 +328,7 @@ public sealed partial class AssetLibraryViewModel
             if (delay) await Task.Delay(TimeSpan.FromMilliseconds(280), cancellation.Token);
             if (!ValidateP3SmartFolderDocument(out var document)) return;
             P3SmartFolderPreviewLoading = true;
-            P3SmartFolderPreviewStatus = "正在计算预览…";
+            P3SmartFolderPreviewStatus = "正在查找照片…";
             var clock = Stopwatch.StartNew();
             var query = BuildQuery() with { Cursor = null, PageSize = 6, SmartFolderId = null, Document = document };
             var page = await _repository.QueryAsync(query, cancellation.Token);
@@ -343,12 +344,12 @@ public sealed partial class AssetLibraryViewModel
                 P3SmartFolderValidationMessage = page.RegexError;
                 P3SmartFolderPreviewStatus = "预览失败，未修改正式智能文件夹。";
             }
-            else P3SmartFolderPreviewStatus = $"预览 {page.TotalCount:N0} 项 · {clock.ElapsedMilliseconds:N0} 毫秒";
+            else P3SmartFolderPreviewStatus = $"找到 {page.TotalCount:N0} 张照片";
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
         catch (Exception exception) when (IsCurrentP3SmartFolderPreview(generation, cancellation))
         {
-            P3SmartFolderPreviewStatus = $"预览失败：{exception.Message}";
+            P3SmartFolderPreviewStatus = $"暂时无法查找照片：{exception.Message}";
         }
         finally
         {

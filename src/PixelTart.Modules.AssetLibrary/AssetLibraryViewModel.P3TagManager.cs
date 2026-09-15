@@ -158,7 +158,11 @@ public sealed partial class AssetLibraryViewModel
         {
             if (P3ShutdownStarted) return;
             P3TagManagerOpen = !P3TagManagerOpen;
-            if (P3TagManagerOpen) _ = RunTrackedP3OperationAsync(LoadP3TagManagerAsync);
+            if (P3TagManagerOpen)
+            {
+                ClosePrimaryAuxiliarySurfacesExceptTagManager();
+                _ = RunTrackedP3OperationAsync(LoadP3TagManagerAsync);
+            }
             else CancelP3TagManagerWork();
         });
         RefreshP3TagManagerCommand = new(() => RunTrackedP3OperationAsync(LoadP3TagManagerAsync), () => IsReady && !P3TagManagerLoading);

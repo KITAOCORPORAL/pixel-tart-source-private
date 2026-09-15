@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              AutomationProperties.AutomationId="P3SmartFolderEditor"
-             AutomationProperties.Name="智能文件夹通用规则编辑器">
+             AutomationProperties.Name="智能文件夹编辑器">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,13 +12,13 @@
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                  MaxHeight="220" ClipToBounds="True">
+                  MaxHeight="430" ClipToBounds="True">
     <StackPanel>
         <Button Content="新建智能文件夹" Command="{Binding NewP3SmartFolderCommand}" HorizontalAlignment="Left" Margin="0,7,0,0"
                 Style="{StaticResource AssetLibraryP3SecondaryButton}"
                 Visibility="{Binding P3SmartFolderClosed, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                 AutomationProperties.AutomationId="P3SmartFolderNew"
-                AutomationProperties.Name="打开新建智能文件夹通用规则编辑器" />
+                AutomationProperties.Name="新建智能文件夹" />
     <Border Margin="0,7,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
             Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
         <StackPanel>
@@ -38,10 +38,10 @@
                             Style="{StaticResource AssetLibraryP3SecondaryButton}"
                             AutomationProperties.AutomationId="P3SmartFolderCancel"
                             AutomationProperties.Name="取消编辑且不保存" />
-                    <Button Content="保存" Command="{Binding SaveP3SmartFolderCommand}"
+                    <Button Content="保存智能文件夹" Command="{Binding SaveP3SmartFolderCommand}"
                             Style="{StaticResource AssetLibraryP3PrimaryButton}"
                             AutomationProperties.AutomationId="P3SmartFolderSave"
-                            AutomationProperties.Name="保存智能文件夹名称、说明和规则" />
+                            AutomationProperties.Name="保存智能文件夹" />
                 </WrapPanel>
             </DockPanel>
 
@@ -92,22 +92,22 @@
                               ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
                               Style="{StaticResource AssetLibraryP3Tree}"
                               AutomationProperties.AutomationId="P3SmartFolderRuleTree"
-                              AutomationProperties.Name="可嵌套的智能文件夹规则树" />
+                              AutomationProperties.Name="智能文件夹条件" />
                 </ScrollViewer>
                 <Border Grid.Column="2" Style="{StaticResource AssetLibraryP3PopupSurface}"
                         AutomationProperties.AutomationId="P3SmartFolderPreview"
                         AutomationProperties.Name="智能文件夹实时预览">
                     <StackPanel>
                         <DockPanel>
-                            <TextBlock Text="实时预览" FontWeight="SemiBold" Foreground="#F2F6F7" />
-                            <Button DockPanel.Dock="Right" Content="重试预览" Command="{Binding RetryP3SmartFolderPreviewCommand}"
+                            <TextBlock Text="匹配照片" FontWeight="SemiBold" Foreground="#F2F6F7" />
+                            <Button DockPanel.Dock="Right" Content="重新查找" Command="{Binding RetryP3SmartFolderPreviewCommand}"
                                     Style="{StaticResource AssetLibraryP3SecondaryButton}"
                                     AutomationProperties.AutomationId="P3SmartFolderPreviewRetry"
-                                    AutomationProperties.Name="重新计算智能文件夹预览" />
+                                    AutomationProperties.Name="重新查找符合条件的照片" />
                         </DockPanel>
                         <TextBlock Text="{Binding P3SmartFolderPreviewStatus}" Foreground="#CBD5DA" Margin="0,5,0,0" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="P3SmartFolderPreviewStatus"
-                                   AutomationProperties.Name="预览状态、结果数和耗时" />
+                                   AutomationProperties.Name="符合条件的照片数量" />
                         <ItemsControl ItemsSource="{Binding P3SmartFolderPreviewItems}" Margin="0,5,0,0"
                                       AutomationProperties.AutomationId="P3SmartFolderPreviewItems">
                             <ItemsControl.ItemTemplate>

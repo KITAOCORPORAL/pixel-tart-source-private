@@ -130,7 +130,7 @@ public sealed partial class AssetLibraryViewModel
     }
 
     public string P3QueryScopeLabel => P3QueryScope == AssetQueryScope.Current ? "当前范围" : "全部素材";
-    public string P3QueryResultSummary => $"{P3QueryScopeLabel} · {P2QueryTotalCount:N0} 项 · {P3QueryChips.Count} 条有效条件";
+    public string P3QueryResultSummary => $"找到 {P2QueryTotalCount:N0} 张照片";
     public IReadOnlyList<P3QueryValueOption> P3FolderReferenceOptions => Folders
         .Where(folder => !folder.IsArchived)
         .OrderBy(folder => folder.Name, StringComparer.CurrentCultureIgnoreCase)
@@ -177,7 +177,12 @@ public sealed partial class AssetLibraryViewModel
         foreach (var entry in _workspaceSettings.QueryHistory.OrderByDescending(entry => entry.UsedAt)) P3QueryHistory.Add(entry);
         RebuildP3QueryChips();
 
-        ToggleP3QueryPanelCommand = new(() => { if (!P3ShutdownStarted) P3QueryPanelOpen = !P3QueryPanelOpen; });
+        ToggleP3QueryPanelCommand = new(() =>
+        {
+            if (P3ShutdownStarted) return;
+            P3QueryPanelOpen = !P3QueryPanelOpen;
+            if (P3QueryPanelOpen) ClosePrimaryAuxiliarySurfacesExceptQuery();
+        });
         ClearP3UnlockedCommand = new(() => { if (!P3ShutdownStarted) ClearP3UnlockedQueryConditions(); });
         ClearP3AllCommand = new(() => { if (!P3ShutdownStarted) ClearP3AllQueryConditions(); });
         SubmitP3SearchCommand = new(() => RunTrackedP3OperationAsync(SubmitP3SearchAsync));
