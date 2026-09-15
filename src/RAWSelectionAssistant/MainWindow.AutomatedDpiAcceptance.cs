@@ -281,9 +281,6 @@ public partial class MainWindow
                     }, System.Windows.Threading.DispatcherPriority.Loaded);
                 }
                 return true;
-            case "ToolboxFullPage":
-                _viewModel.NavigateCommand.Execute("Toolbox");
-                return true;
             case "OnlineSelectionHome":
                 _viewModel.NavigateCommand.Execute("OnlineSelection");
                 await _viewModel.OnlineSelectionPage.RefreshAsync().ConfigureAwait(true);
