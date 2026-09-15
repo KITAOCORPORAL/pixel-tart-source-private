@@ -93,9 +93,9 @@ public sealed class RawToJpegWpfTests
         StringAssert.Contains(xaml, "Drop=\"OnDrop\"");
         StringAssert.Contains(xaml, "源文件不会被移动、删除或覆盖");
         StringAssert.Contains(xaml, "使用相机白平衡");
-        StringAssert.Contains(xaml, "保留 EXIF");
+        StringAssert.Contains(xaml, "保留拍摄信息");
         StringAssert.Contains(xaml, "自动旋转");
-        StringAssert.Contains(xaml, "sRGB（固定输出）");
+        StringAssert.Contains(xaml, "<TextBlock Text=\"sRGB\"");
         StringAssert.Contains(xaml, "Width=\"320\"");
         StringAssert.Contains(xaml, "Av2PrimaryButton");
     }

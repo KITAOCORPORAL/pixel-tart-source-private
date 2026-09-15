@@ -21,8 +21,9 @@ Assert-Evidence ([bool]$manifest.process_per_fixture -and -not [bool]$manifest.a
 Assert-Evidence ([bool]$manifest.source_files_unchanged) 'Synthetic source assets changed during capture.'
 
 $captures = @($manifest.captures)
-Assert-Evidence ($captures.Count -eq 50) "Expected 50 captures, found $($captures.Count)."
+Assert-Evidence ($captures.Count -eq 60) "Expected 60 captures, found $($captures.Count)."
 Assert-Evidence (@($captures | Where-Object group -eq 'product-screenshot').Count -eq 12) 'The 12 product screenshots are incomplete.'
+Assert-Evidence (@($captures | Where-Object group -eq 'ux-simplification').Count -eq 10) 'The 10 UX simplification screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'dpi-current').Count -eq 32) 'The 32 current-DPI captures are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-resolution').Count -eq 6) 'The six Asset Library resolution captures are incomplete.'
 Assert-Evidence (@($captures | Where-Object { -not $_.passed -or -not $_.process_exited_before_next }).Count -eq 0) 'A capture failed or its process remained alive.'

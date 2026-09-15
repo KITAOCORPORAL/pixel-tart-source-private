@@ -51,8 +51,8 @@ public sealed class Baseline2031AcceptanceTests
         var organize = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml".Replace('/', Path.DirectorySeparatorChar)));
         var collage = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/CollageView.xaml".Replace('/', Path.DirectorySeparatorChar)));
         var organizeService = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant.Core/Services/OrganizeService.cs".Replace('/', Path.DirectorySeparatorChar)));
-        StringAssert.Contains(organize, "生成并预览操作清单");
-        StringAssert.Contains(organize, "目标始终新建文件，同名自动编号");
+        StringAssert.Contains(organize, "预览整理结果");
+        StringAssert.Contains(organize, "默认保留原文件");
         StringAssert.Contains(organizeService, "FileMode.CreateNew");
         StringAssert.Contains(organizeService, "AutoNumber");
         StringAssert.Contains(collage, "导出重新读取原图");

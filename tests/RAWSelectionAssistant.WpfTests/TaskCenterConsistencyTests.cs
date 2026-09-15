@@ -21,10 +21,10 @@ public sealed class TaskCenterConsistencyTests
     }
 
     [TestMethod]
-    public void TaskCenterSurface_ExposesStableIdAndCopyAction()
+    public void TaskCenterSurface_HidesStableIdButKeepsCopyActionInDetails()
     {
         var source = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/MainWindow.xaml"));
-        StringAssert.Contains(source, "TaskIdText");
+        Assert.DoesNotContain("Text=\"{Binding TaskIdText}\"", source);
         StringAssert.Contains(source, "CopyDiagnosticsCommand");
     }
 
@@ -43,7 +43,7 @@ public sealed class TaskCenterConsistencyTests
         Assert.AreEqual("无法完成 RAW 解码。", item.PrimaryFailureReason);
         Assert.AreEqual("DSC09403.ARW", item.FailureFileName);
         Assert.AreEqual("RAW 解码", item.FailureStage);
-        Assert.AreEqual("未修改", item.SourceSafetyText);
+        Assert.AreEqual("源照片未修改", item.SourceSafetyText);
         Assert.AreEqual("未生成", item.OutputSafetyText);
         Assert.IsTrue(item.CanRetry);
         Assert.DoesNotContain(@"C:\Users\Example", item.DiagnosticText);
@@ -56,7 +56,7 @@ public sealed class TaskCenterConsistencyTests
         var source = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/MainWindow.xaml"));
         StringAssert.Contains(source, "FailedFileText");
         StringAssert.Contains(source, "重试失败项");
-        StringAssert.Contains(source, "展开技术信息");
+        StringAssert.Contains(source, "Header=\"技术信息\"");
         StringAssert.Contains(source, "复制诊断");
     }
 

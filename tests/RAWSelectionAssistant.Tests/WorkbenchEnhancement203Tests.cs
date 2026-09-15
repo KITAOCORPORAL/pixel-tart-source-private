@@ -24,7 +24,7 @@ public sealed class WorkbenchEnhancement203Tests
     [TestMethod] public void Toolbox_RemainsFixedEntry() => Contains(ViewModel(), "工具箱始终可从工作台和侧栏打开", "ToolCatalogItems", "ToolId.Toolbox");
     [TestMethod] public void ToolboxPopup_HasGroupingAndCollage() => Contains(Popup(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "ToolEntryButton", "TogglePinnedToolCommand", "ResourceKeyToGeometryConverter");
     [TestMethod] public void ToolboxFullPage_HasGroupingAndIconOnlyPin() => Contains(MainXaml(), "ItemsSource=\"{Binding ToolCatalogItems}\"", "UniformGrid Columns=\"3\"", "ToolCatalogCard", "PinToolTip", "PinAutomationName", "PinIconResourceKey");
-    [TestMethod] public void GroupingPage_IsUsable() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "来源和分组规则", "新建组", "生成并预览操作清单", "执行当前清单");
+    [TestMethod] public void GroupingPage_IsUsable() => Contains(Text("src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"), "整理图片", "整理哪些照片？", "怎么整理？", "预览整理结果", "开始整理");
     [TestMethod] public void CollagePage_IsUsable() { Contains(Text("src/RAWSelectionAssistant/Views/CollageView.xaml"), "拼图", "模板和参数", "背景颜色", "导出重新读取原图"); Contains(Text("src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs"), "纵向长图", "横向长图"); }
     [TestMethod] public void Navigation_AllowsNewToolPages() => Contains(ViewModel(), "\"PhotoGrouping\"", "\"Collage\"", "IsPhotoGroupingPage", "IsCollagePage");
     [TestMethod] public void ExistingSettingsAndToolboxFixesRemain() => Contains(MainXaml(), "SidebarSettingsButton", "OpenSettingsCommand", "ViewAllToolsButton", "OpenToolboxPage_Click");

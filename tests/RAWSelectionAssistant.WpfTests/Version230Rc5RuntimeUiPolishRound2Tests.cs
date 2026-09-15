@@ -29,7 +29,7 @@ public sealed class Version230Rc5RuntimeUiPolishRound2Tests
     }
 
     [TestMethod]
-    [DataRow("查看详情")]
+    [DataRow("查看详细信息")]
     [DataRow("HasMoreActions")]
     [DataRow("更多任务操作")]
     [DataRow("Visibility=\"{Binding CanPause")]
@@ -72,7 +72,7 @@ public sealed class Version230Rc5RuntimeUiPolishRound2Tests
     [DataRow("IsGroupedStage")]
     [DataRow("IsPlanReady")]
     [DataRow("HasResult")]
-    [DataRow("生成并预览操作清单")]
+    [DataRow("预览整理结果")]
     public void Organize_UsesProgressiveStageActions(string token) => ContainsAny(token, "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml", "src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs");
 
     [TestMethod]

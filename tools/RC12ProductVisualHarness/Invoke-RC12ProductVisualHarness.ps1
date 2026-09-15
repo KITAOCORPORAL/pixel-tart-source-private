@@ -148,6 +148,17 @@ $scenes = @(
 )
 foreach ($scene in $scenes) { Invoke-ProductCapture $scene[0] (Join-Path $screenshotsRoot $scene[1]) 1.0 1920 1080 'product-screenshot' }
 
+$uxScreenshotsRoot = Join-Path $OutputRoot 'ux-simplification'
+[IO.Directory]::CreateDirectory($uxScreenshotsRoot) | Out-Null
+$uxScenes = @(
+    @('ToolboxFullPage','01_toolbox.png'), @('OrganizeNoOverlap','02_organize_simple.png'),
+    @('OrganizeManifest','03_organize_preview.png'), @('RawToJpeg','04_raw_to_jpg_simple.png'),
+    @('RawToJpegAdvanced','05_raw_to_jpg_advanced.png'), @('AssetLibraryGrid','06_asset_library_clean.png'),
+    @('AssetSmartFolder','07_smart_folder_human.png'), @('AssetInspectorProject','08_inspector_clean.png'),
+    @('WorkbenchTaskCenterClean','09_task_center_clean.png'), @('WorkbenchErrorDetailsCollapsed','10_error_details_collapsed.png')
+)
+foreach ($scene in $uxScenes) { Invoke-ProductCapture $scene[0] (Join-Path $uxScreenshotsRoot $scene[1]) 1.0 1920 1080 'ux-simplification' }
+
 $dpiStates = @('MainWindow','AssetLibraryGrid','AssetFilter','AssetContextMenu','AssetViewer','CalendarBookingAssets','AssetInspirationCollection','AssetRecentLibraries')
 foreach ($scale in @(1.0,1.25,1.5,2.0)) {
     foreach ($state in $dpiStates) {
@@ -178,6 +189,7 @@ $manifest = [ordered]@{
     real_app_xaml=$true; real_main_window=$true; pixel_tart_dark_theme=$true; synthetic_assets_only=$true
     process_per_fixture=$true; application_singleton_shared=$false; source_files_unchanged=$sourceSafe
     required_product_screenshot_count=12; product_screenshot_count=@($script:captures | Where-Object group -eq 'product-screenshot').Count
+    required_ux_screenshot_count=10; ux_screenshot_count=@($script:captures | Where-Object group -eq 'ux-simplification').Count
     required_dpi_percentages=@(100,125,150,200); dpi_capture_count=@($script:captures | Where-Object group -eq 'dpi-current').Count
     resolution_capture_count=@($script:captures | Where-Object group -eq 'asset-library-resolution').Count
     # Windows may reuse a PID after its owner exits. Lifecycle separation is proven
@@ -189,5 +201,5 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'rc12-product-visual-evidence.json') -Encoding UTF8
 if (-not $sourceSafe) { throw 'Synthetic source assets changed during the RC12 visual run.' }
 if (-not $allExited) { throw 'Process-per-fixture lifecycle isolation was not proven.' }
-if ($manifest.product_screenshot_count -ne 12 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6) { throw 'RC12 visual evidence set is incomplete.' }
-[pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,dpi_capture_count,resolution_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json
+if ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6) { throw 'RC12 visual evidence set is incomplete.' }
+[pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,ux_screenshot_count,dpi_capture_count,resolution_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json
