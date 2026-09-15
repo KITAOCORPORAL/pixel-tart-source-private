@@ -967,7 +967,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
         Assert.DoesNotContain("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR", page, StringComparison.Ordinal);
         StringAssert.Contains(app, "#if MODULAR_HARNESS_DEV_PREVIEW");
         StringAssert.Contains(app, "Environment.GetEnvironmentVariable(\"PIXEL_TART_ASSET_LIBRARY_DEMO_DIR\")");
-        StringAssert.Contains(app, "enableAssetLibraryPreview ? BuildModuleDiagnostics(registry) : []");
+        StringAssert.Contains(app, "IReadOnlyList<AssetLibraryModuleDiagnostic> diagnostics = enableAssetLibraryPreview && !productVisualHarness");
         StringAssert.Contains(viewModel, "if (_enablePreviewFeatures && Folders.Count == 0)");
         StringAssert.Contains(viewModel, "if (IsCurrentAnalysis(asset, generation)) { IsAnalyzing = false; RaiseVisualActions(); }");
         var assetHostStart = mainWindow.IndexOf("<views:ModuleWorkspaceHost x:Name=\"AssetLibraryWorkspace\"", StringComparison.Ordinal);
@@ -977,7 +977,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
         var assetHost = mainWindow[assetHostStart..assetHostEnd];
         StringAssert.Contains(assetHost, "HorizontalContentAlignment=\"Stretch\"");
         StringAssert.Contains(assetHost, "VerticalContentAlignment=\"Stretch\"");
-        StringAssert.Contains(thumbnail, "var cancellationToken = cancellation.Token;");
+        StringAssert.Contains(thumbnail, "var cancellationToken = request.Cancellation.Token;");
         Assert.DoesNotContain("async void OnSourceChanged", thumbnail, StringComparison.Ordinal);
         StringAssert.Contains(thumbnail, "dispatcher.InvokeAsync(");
         StringAssert.Contains(xaml, "<local:HexToBrushConverter x:Key=\"HexToBrushConverter\" />");
@@ -1019,7 +1019,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
 
     private static T FindVisualByAutomationId<T>(DependencyObject root, string automationId)
         where T : FrameworkElement =>
-        FindVisualChildren<T>(root).Single(element => AutomationProperties.GetAutomationId(element) == automationId);
+        FindVisualChildren<T>(root).SingleOrDefault(element => AutomationProperties.GetAutomationId(element) == automationId)
+        ?? throw new InvalidOperationException($"Missing automation id '{automationId}' on {typeof(T).Name}. Seen: {string.Join(", ", FindVisualChildren<FrameworkElement>(root).Select(AutomationProperties.GetAutomationId).Where(value => !string.IsNullOrWhiteSpace(value)).Distinct())}");
 
     private static void ArrangePage(AssetLibraryPage page, double width, double height)
     {

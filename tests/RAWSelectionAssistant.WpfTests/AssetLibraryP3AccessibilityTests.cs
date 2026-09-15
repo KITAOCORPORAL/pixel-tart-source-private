@@ -43,7 +43,7 @@ public sealed class AssetLibraryP3AccessibilityTests
     [TestMethod]
     public void HighContrastTracksWindowsAndUsesOnlyDynamicSystemBrushes()
     {
-        var source = File.ReadAllText(StylesPath);
+        var source = File.ReadAllText(StylesPath) + File.ReadAllText(FindRepositoryFile("src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.HighContrast.xaml"));
         Assert.IsGreaterThanOrEqualTo(3, Count(source, "{DynamicResource {x:Static SystemParameters.HighContrastKey}}"));
         foreach (var key in new[]
                  {
@@ -53,7 +53,11 @@ public sealed class AssetLibraryP3AccessibilityTests
                      "SystemColors.GrayTextBrushKey"
                  })
         {
-            StringAssert.Contains(source, $"{{DynamicResource {{x:Static {key}}}}}");
+            var dynamicToken = $"{{DynamicResource {{x:Static {key}}}}}";
+            var colorKey = key[(key.LastIndexOf('.') + 1)..].Replace("BrushKey", "Color", StringComparison.Ordinal);
+            var colorToken = $"{{x:Static SystemColors.{colorKey}}}";
+            Assert.IsTrue(source.Contains(dynamicToken, StringComparison.Ordinal) || source.Contains(colorToken, StringComparison.Ordinal),
+                $"High contrast resource '{key}' must use a dynamic system brush or its system color equivalent.");
         }
 
         foreach (var state in new[]

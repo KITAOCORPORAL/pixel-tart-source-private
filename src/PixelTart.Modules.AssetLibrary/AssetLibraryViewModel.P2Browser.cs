@@ -44,6 +44,7 @@ public sealed partial class AssetLibraryViewModel
     private Guid? _activeCollectionId;
     private string _projectPickerSearch = string.Empty;
     private string _bookingPickerSearch = string.Empty;
+    private InspirationCollectionSummary? _collectionProjectTarget;
     private AssetRelationPickerItem[] _allProjectPickerItems = [];
     private AssetRelationPickerItem[] _allBookingPickerItems = [];
     private IReadOnlyList<Guid>? _relationshipFilterAssetIds;
@@ -166,6 +167,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<InspirationCollectionSummary> ArchiveCollectionCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> RenameCollectionCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> SetCollectionProjectCommand { get; private set; } = null!;
+    public AsyncCommand<InspirationCollectionSummary> RemoveCollectionProjectCommand { get; private set; } = null!;
     public AsyncCommand<InspirationTrayCardView> RemoveCollectionEntryCommand { get; private set; } = null!;
     public AsyncCommand<InspirationCollectionSummary> AddSelectionToCollectionCommand { get; private set; } = null!;
     public AsyncCommand CloseCollectionPanelCommand { get; private set; } = null!;
@@ -174,6 +176,7 @@ public sealed partial class AssetLibraryViewModel
     public bool IsBookingPickerOpen { get => _isBookingPickerOpen; private set => SetProperty(ref _isBookingPickerOpen, value); }
     public string ProjectPickerSearch { get => _projectPickerSearch; set { if (SetProperty(ref _projectPickerSearch, value)) FilterProjectPicker(); } }
     public string BookingPickerSearch { get => _bookingPickerSearch; set { if (SetProperty(ref _bookingPickerSearch, value)) FilterBookingPicker(); } }
+    public string ProjectPickerTitle => _collectionProjectTarget is null ? "关联项目" : "关联灵感集项目";
     public IReadOnlyList<string> WorkflowStatusOptions { get; } = ["未处理", "客户选择", "待精修", "已精修", "已交付"];
     public bool IsCollectionPanelOpen { get => _isCollectionPanelOpen; private set => SetProperty(ref _isCollectionPanelOpen, value); }
     public Guid? ActiveCollectionId { get => _activeCollectionId; private set => SetProperty(ref _activeCollectionId, value); }
@@ -229,7 +232,7 @@ public sealed partial class AssetLibraryViewModel
         RemoveInspirationTrayEntryCommand = new(RemoveInspirationTrayEntryAsync, card => IsReady && card is not null);
         OpenProjectPickerCommand = new(OpenProjectPickerAsync, () => IsReady && SelectedAssets.Count > 0);
         OpenBookingPickerCommand = new(OpenBookingPickerAsync, () => IsReady && SelectedAssets.Count > 0);
-        CloseRelationPickerCommand = new(() => { IsProjectPickerOpen = false; IsBookingPickerOpen = false; return Task.CompletedTask; });
+        CloseRelationPickerCommand = new(() => { IsProjectPickerOpen = false; IsBookingPickerOpen = false; SetCollectionProjectTarget(null); return Task.CompletedTask; });
         SelectProjectRelationCommand = new(SelectProjectRelationAsync, _ => IsReady);
         SelectBookingRelationCommand = new(SelectBookingRelationAsync, _ => IsReady);
         RemoveProjectRelationCommand = new(RemoveProjectRelationAsync, _ => IsReady);
@@ -242,6 +245,7 @@ public sealed partial class AssetLibraryViewModel
         ArchiveCollectionCommand = new(ArchiveCollectionAsync, _ => IsReady);
         RenameCollectionCommand = new(RenameCollectionAsync, _ => IsReady);
         SetCollectionProjectCommand = new(SetCollectionProjectAsync, _ => IsReady);
+        RemoveCollectionProjectCommand = new(RemoveCollectionProjectAsync, item => IsReady && item?.ProjectId is not null);
         RemoveCollectionEntryCommand = new(RemoveCollectionEntryAsync, _ => IsReady);
         AddSelectionToCollectionCommand = new(AddSelectionToCollectionAsync, _ => IsReady && SelectedAssets.Count > 0);
         CloseCollectionPanelCommand = new(() => { IsCollectionPanelOpen = false; return Task.CompletedTask; });
@@ -253,8 +257,9 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task OpenProjectPickerAsync()
     {
+        SetCollectionProjectTarget(null);
         IsBookingPickerOpen = false;
-        var database = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+        var database = new PixelTartDatabase(_productDatabasePath);
         var projects = await new SqliteProjectRepository(database).ListAsync(_lifetimeCancellation.Token);
         var selectedAssetIds = SelectedAssets.Select(asset => asset.AssetId).ToArray();
         var bookingLinks = new List<BookingAssetLink>();
@@ -284,7 +289,7 @@ public sealed partial class AssetLibraryViewModel
     private async Task OpenBookingPickerAsync()
     {
         IsProjectPickerOpen = false;
-        var database = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+        var database = new PixelTartDatabase(_productDatabasePath);
         var projectRepository = new SqliteProjectRepository(database);
         var projects = await projectRepository.ListAsync(_lifetimeCancellation.Token);
         var projectNames = projects.ToDictionary(project => project.Id, project => project.Name);
@@ -330,6 +335,15 @@ public sealed partial class AssetLibraryViewModel
     private async Task SelectProjectRelationAsync(AssetRelationPickerItem? item)
     {
         if (item is null) return;
+        if (_collectionProjectTarget is { } collection)
+        {
+            await ((SqliteInspirationTrayService)_inspirationTray).SetCollectionProjectAsync(collection.CollectionId, item.Id, _lifetimeCancellation.Token);
+            ReplaceCollection(collection with { ProjectId = item.Id, ProjectName = item.Name, UpdatedAtUtc = DateTimeOffset.UtcNow });
+            SetCollectionProjectTarget(null);
+            IsProjectPickerOpen = false;
+            Status = $"灵感集已关联项目：{item.Name}";
+            return;
+        }
         foreach (var asset in SelectedAssets) await _repository.SaveProjectAssetLinkAsync(new(item.Id, asset.AssetId, "Asset", DateTimeOffset.UtcNow), _lifetimeCancellation.Token).ConfigureAwait(false);
         IsProjectPickerOpen = false; Status = $"已关联项目：{item.Name}（{SelectedAssets.Count} 项）"; OnP2SelectionChanged(SelectedAssets.ToArray());
     }
@@ -415,7 +429,11 @@ public sealed partial class AssetLibraryViewModel
     private async Task OpenCollectionsAsync()
     {
         var service = (SqliteInspirationTrayService)_inspirationTray;
-        InspirationCollections.Clear(); foreach (var item in await service.ListCollectionsAsync(_lifetimeCancellation.Token).ConfigureAwait(false)) InspirationCollections.Add(item);
+        var projects = await new SqliteProjectRepository(new PixelTartDatabase(_productDatabasePath)).ListAsync(_lifetimeCancellation.Token);
+        var projectNames = projects.ToDictionary(project => project.Id, project => project.Name);
+        InspirationCollections.Clear();
+        foreach (var item in await service.ListCollectionsAsync(_lifetimeCancellation.Token).ConfigureAwait(false))
+            InspirationCollections.Add(item with { ProjectName = item.ProjectId is Guid projectId && projectNames.TryGetValue(projectId, out var name) ? name : null });
         IsCollectionPanelOpen = true;
     }
 
@@ -439,13 +457,42 @@ public sealed partial class AssetLibraryViewModel
     private async Task SetCollectionProjectAsync(InspirationCollectionSummary? collection)
     {
         if (collection is null) return;
-        var projects = await new SqliteProjectRepository(new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile)).ListAsync(_lifetimeCancellation.Token);
-        var project = projects.FirstOrDefault();
-        if (project is null) { Status = "暂无可关联项目。"; return; }
-        await ((SqliteInspirationTrayService)_inspirationTray).SetCollectionProjectAsync(collection.CollectionId, project.Id, _lifetimeCancellation.Token);
-        var index = InspirationCollections.IndexOf(collection);
-        if (index >= 0) InspirationCollections[index] = collection with { ProjectId = project.Id, UpdatedAtUtc = DateTimeOffset.UtcNow };
-        Status = $"灵感集已关联项目：{project.Name}";
+        var projects = await new SqliteProjectRepository(new PixelTartDatabase(_productDatabasePath)).ListAsync(_lifetimeCancellation.Token);
+        if (projects.Count == 0) { Status = "暂无可关联项目。"; return; }
+        SetCollectionProjectTarget(collection);
+        _allProjectPickerItems = projects
+            .OrderByDescending(project => project.UpdatedAt)
+            .Select((project, index) => new AssetRelationPickerItem(
+                project.Id,
+                project.Name,
+                $"{project.Status} · {project.Category}",
+                Group: project.Id == collection.ProjectId ? "当前关联项目" : index < 8 ? "最近项目" : "全部项目"))
+            .ToArray();
+        ProjectPickerSearch = string.Empty;
+        FilterProjectPicker();
+        IsBookingPickerOpen = false;
+        IsProjectPickerOpen = true;
+    }
+
+    private async Task RemoveCollectionProjectAsync(InspirationCollectionSummary? collection)
+    {
+        if (collection?.ProjectId is null) return;
+        await ((SqliteInspirationTrayService)_inspirationTray).SetCollectionProjectAsync(collection.CollectionId, null, _lifetimeCancellation.Token);
+        ReplaceCollection(collection with { ProjectId = null, ProjectName = null, UpdatedAtUtc = DateTimeOffset.UtcNow });
+        Status = $"已移除灵感集项目关联：{collection.Name}";
+    }
+
+    private void ReplaceCollection(InspirationCollectionSummary collection)
+    {
+        var current = InspirationCollections.FirstOrDefault(item => item.CollectionId == collection.CollectionId);
+        var index = current is null ? -1 : InspirationCollections.IndexOf(current);
+        if (index >= 0) InspirationCollections[index] = collection;
+    }
+
+    private void SetCollectionProjectTarget(InspirationCollectionSummary? collection)
+    {
+        _collectionProjectTarget = collection;
+        OnPropertyChanged(nameof(ProjectPickerTitle));
     }
 
     private async Task RemoveCollectionEntryAsync(InspirationTrayCardView? card)
@@ -1103,7 +1150,7 @@ public sealed partial class AssetLibraryViewModel
                 var bookingLinks = await _repository.ListBookingAssetLinksAsync(assetId: id, cancellationToken: _lifetimeCancellation.Token);
                 if (generation != Volatile.Read(ref _inspectorGeneration)) return;
                 InspectorProjectLinks.Clear(); InspectorBookingLinks.Clear();
-                var mainDatabase = new PixelTartDatabase(RAWSelectionAssistant.Core.Utilities.AppDataPaths.DatabaseFile);
+                var mainDatabase = new PixelTartDatabase(_productDatabasePath);
                 var projects = await new SqliteProjectRepository(mainDatabase).ListAsync(_lifetimeCancellation.Token);
                 var bookingRepository = new SqliteShootBookingRepository(mainDatabase);
                 var linkedBookings = new List<ShootBooking>();
@@ -1115,7 +1162,7 @@ public sealed partial class AssetLibraryViewModel
                 IReadOnlyList<SelectionProject> onlineProjects = [];
                 try
                 {
-                    onlineProjects = (await new JsonSelectionWorkspaceStore(RAWSelectionAssistant.Core.Utilities.AppDataPaths.OnlineSelectionWorkspaceFile).LoadAsync(_lifetimeCancellation.Token)).Projects;
+                    onlineProjects = (await new JsonSelectionWorkspaceStore(_onlineSelectionWorkspaceFile).LoadAsync(_lifetimeCancellation.Token)).Projects;
                 }
                 catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException)
                 {

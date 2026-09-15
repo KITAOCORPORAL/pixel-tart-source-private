@@ -20,13 +20,14 @@ public sealed class AsyncCommand(Func<Task> execute, Func<bool>? canExecute = nu
 public sealed class AsyncCommand<T>(Func<T?, Task> execute, Func<T?, bool>? canExecute = null) : ICommand
 {
     private bool _running;
+    public Task ExecutionTask { get; private set; } = Task.CompletedTask;
     public event EventHandler? CanExecuteChanged;
     public bool CanExecute(object? parameter) => !_running && (canExecute?.Invoke(Convert(parameter)) ?? true);
     public async void Execute(object? parameter)
     {
         var converted = Convert(parameter); if (!CanExecute(parameter)) return;
         _running = true; RaiseCanExecuteChanged();
-        try { await execute(converted); }
+        try { ExecutionTask = execute(converted); await ExecutionTask; }
         finally { _running = false; RaiseCanExecuteChanged(); }
     }
     public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);

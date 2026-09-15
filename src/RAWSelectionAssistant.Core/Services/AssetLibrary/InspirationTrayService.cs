@@ -25,7 +25,7 @@ public sealed record InspirationTrayEntry(
 public sealed record InspirationTrayAddResult(int AddedCount, int ExistingCount, IReadOnlyList<InspirationTrayEntry> AddedEntries);
 public sealed record InspirationTrayResolution(AssetLibraryStableReference Reference, InspirationTrayResolutionState State);
 public sealed record InspirationCollectionSnapshot(IReadOnlyList<InspirationTrayEntry> Entries, DateTimeOffset CreatedAtUtc);
-public sealed record InspirationCollectionSummary(Guid CollectionId, string Name, Guid? ProjectId, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, int EntryCount);
+public sealed record InspirationCollectionSummary(Guid CollectionId, string Name, Guid? ProjectId, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, int EntryCount, string? ProjectName = null);
 
 /// <summary>
 /// Persists temporary inspiration references in one SQLite transaction per operation.

@@ -7,7 +7,7 @@ Eagle behavior is based on `docs/product/eagle-reference/`. A row is `DONE` only
 
 | Capability | UI | Command | Persistence | Reload test | Status / evidence |
 |---|---:|---:|---:|---:|---|
-| Library tree | Yes | Yes | Yes | Partial | PARTIAL — portable-library switching is covered; recent-library tree presentation remains incomplete. |
+| Library tree | Yes | Yes | Yes | Yes | DONE — current/recent library presentation includes name, path, last-opened time and Online/Offline state. Current two-container WPF coverage proves switch, settings reload/restart and remove-entry-only source safety. |
 | Folder | Yes | Yes | Yes | Yes | DONE — hierarchy/create/rename/move/reorder/archive, multi-drop membership and undo/redo are covered by `AssetLibraryV15Tests`, `AssetLibraryP2CoreTests` and P2/P3 WPF acceptance. |
 | Smart Folder | Yes | Yes | Yes | Yes | DONE — one canonical Query AST is stored in `SmartFolderQueryDocuments`; save/copy/edit/archive/reopen and invalid-reference behavior are covered by P3 repository/integrity/WPF tests. |
 | Tag | Yes | Yes | Yes | Yes | DONE — groups, create/rename/move/reorder/archive/merge, batch membership and drag targets are covered by P3 repository/integrity/WPF tests. |
@@ -16,8 +16,8 @@ Eagle behavior is based on `docs/product/eagle-reference/`. A row is `DONE` only
 | Density | Yes | Yes | Yes | Yes | DONE — thumbnail continuum and viewport anchor are covered by WPF layout tests. |
 | Layout | Yes | Yes | Yes | Yes | DONE — Grid/Masonry/Justified/List and formal viewport behavior are tested. |
 | Inspector core metadata | Yes | Read-only | Yes | Yes | DONE — file, dimensions, dates, rating, folders and tags read real repository data. |
-| Inspector workflow fields | Yes | Partial | Yes | Yes | PARTIAL — AssetOrigin, WorkflowStatus and dedicated many-to-many Project/Booking links are real and reload-tested. Camera/lens/exposure remain file metadata, Client and cross-module Calendar navigation are not yet connected. |
-| Context menu | Yes | Yes | Yes | Yes | PARTIAL — selection-aware Viewer/external/reveal, organize/rating, workflow state, tray, export, archive and recoverable Trash are live. Project/Booking/Collection actions are available from the Inspector/more panel; context-menu wiring remains open. |
+| Inspector workflow fields | Yes | Yes | Yes | Yes | DONE — AssetOrigin, five-state WorkflowStatus and dedicated many-to-many Project/Booking links are real and reload-tested; Client resolves real names and the Asset → Calendar route is covered. Camera/lens/exposure remain truthful file metadata. |
+| Context menu | Yes | Yes | Yes | Yes | DONE — exactly six groups expose selection-aware Viewer/default app/Explorer/copy path, organize/rating/color, Project/Booking/Workflow, Inspiration, export, archive and recoverable Trash. Multi-select persistence/restart and source safety have current WPF coverage; permanent delete is absent. |
 | Preview / Viewer | Yes | Yes | N/A | Yes | DONE — double click and context command open the dark source-safe Viewer with Fit/100%/zoom/wheel/pan/previous/next/Esc; it shares the thumbnail provider and never writes source files. RAW is preview/proxy only, not claimed as full decode. |
 | Import | Yes | Yes | Yes | Yes | DONE — picker and Explorer drop both create source-safe reference records; managed-copy remains explicit. |
 | Export | Yes | Yes | N/A | Yes | DONE — multi-selection original/managed-copy export and metadata CSV are exposed; conflict auto-numbering and no-overwrite/source-hash contracts are tested. Existing package export remains reused separately. |
@@ -25,8 +25,8 @@ Eagle behavior is based on `docs/product/eagle-reference/`. A row is `DONE` only
 | Trash | Yes | Yes | Yes | Yes | DONE — recoverable Trash persists across restart, supports restore/undo/redo, preserves prior archive state and never deletes source files. Permanent Delete stays deferred. |
 | Multi-select | Yes | Yes | Yes | Yes | DONE — extended/marquee/context selection survives paging and query refresh. |
 | Drag & drop | Yes | Yes | Yes | Yes | DONE — gallery single/multi selection to Folder/Tag changes metadata membership only; Explorer drop imports references without moving source files. |
-| Inspiration Tray | Yes | Yes | Yes | Yes | PARTIAL — thumbnail card tray with source/offline badges and removal is live; visual Collection panel/grid is now exposed, while drag reorder and Project header relation remain open. |
-| Project / Booking / Client | Yes | Yes | Yes | Yes | PARTIAL — dark Project/Booking picker panels and multi-select add/remove persistence are live over the existing link tables; Client resolver wiring and Calendar deep links remain open. |
+| Inspiration Tray | Yes | Yes | Yes | Yes | DONE — thumbnail tray and visual Collection grid expose source/offline badges, add/remove, multi-select drag/reorder, archive and a real Project picker with remove/restart proof. |
+| Project / Booking / Client | Yes | Yes | Yes | Yes | DONE — dark Project/Booking pickers cover search/context groups and multi-select add/remove over existing link tables; Client and both Calendar directions have current real-database restart/round-trip proof. |
 
 Permanent Delete is `NOT PLANNED / DEFERRED` for this sprint. Reference assets never authorize deletion or mutation of source files.
 
@@ -41,9 +41,9 @@ The Weekend Sprint report records the before/after status and concrete persisten
 | Persistent shared preview cache | Memory + bounded 512 MiB disk LRU, stable content-hash key, offline/restart WPF test | DONE |
 | Inspiration Collections persistence | SQLite CRUD, Project relation, membership add/remove/reorder/archive, restart test | DONE (service layer) |
 | Acceptance branch coupling | P1/P2/P3 runners and validators accept any named development branch and reject protected branches | DONE |
-| Project / Booking / Client picker UI | Existing relationship tables only; picker/client/calendar UI not connected | PARTIAL |
-| Calendar ↔ Asset deep link | No end-to-end visual navigation proof | PARTIAL |
-| Recent library switching UI | Workspace APIs exist; complete recent-library presentation not evidenced | PARTIAL |
+| Project / Booking / Client picker UI | Real picker/client/restart flow verified against current WPF product code | DONE |
+| Calendar ↔ Asset deep link | Booking/Project logical filters and Asset → Calendar callback verified with linked and unrelated assets | DONE |
+| Recent library switching UI | Real two-container switch/reload/remove-without-delete flow verified | DONE |
 | Photography inspector fields | File metadata remains the source; no fabricated camera/lens/exposure values | PARTIAL |
 | RC11 visual screenshot harness | No real themed product screenshot set with the required 11 filenames | PARTIAL |
 | 10K/50K/100K performance | Existing RC10 gate remains green; RC11 cache-specific restart/offline path is covered | DONE (inherited gate + cache coverage) |
@@ -52,4 +52,4 @@ The RC11 report records the exact commits, tests, installer hash and unresolved 
 
 ## RC12 truth status
 
-RC12 connects the existing photography metadata pipeline to the Inspector and preserves RC11's persistent preview cache and collection service foundations. The following target rows remain `PARTIAL` until real product UI and acceptance proof exists: Library tree recent-switcher presentation, Inspector workflow pickers/client resolution, Calendar ↔ Asset visual navigation, Inspiration Collection visual UI, full contextual Project/Booking/Collection actions, and the real themed screenshot harness. These are deliberately not promoted to `DONE` by persistence alone.
+RC12 now has current WPF product evidence for recent libraries, Project/Booking/Client, Calendar ↔ Asset, Inspiration Collection, the six-group Context Menu and 10K/50K/100K visual performance. The remaining release blocker is the fail-closed P2 sealed-run/zero-skip isolation seal tracked in `RC12_COMPLETION_GAP_AUDIT.md`. These rows are not promoted from service persistence alone.

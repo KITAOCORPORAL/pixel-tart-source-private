@@ -49,6 +49,7 @@ public sealed partial class AssetLibraryViewModel
         {
             if (!SetProperty(ref _p3SmartFolderOpen, value)) return;
             OnPropertyChanged(nameof(P3SmartFolderClosed));
+            OnPropertyChanged(nameof(IsVisualSmartFolderSurfaceVisible));
         }
     }
     public bool P3SmartFolderClosed => !P3SmartFolderOpen;

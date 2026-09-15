@@ -2,6 +2,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using PixelTart.Modules.AssetLibrary;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -134,6 +135,59 @@ public sealed class AssetThumbnailProviderTests
         finally { try { Directory.Delete(root, recursive: true); } catch { } }
     });
 
+    [TestMethod]
+    public Task CancelAndDrainPreventsOldLibraryWritebackWhileNewLibraryThumbnailCompletes() => AssetLibraryP3PerformanceDiagnosticsTests.RunSta(async () =>
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-thumbnail-switch", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var path = Path.Combine(root, "pixel.png");
+        await File.WriteAllBytesAsync(path, Convert.FromBase64String(
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="));
+        var providerA = new ControlledThumbnailProvider(waitForRelease: true, blue: 16);
+        var providerB = new ControlledThumbnailProvider(waitForRelease: false, blue: 224);
+        var scopeA = new Grid(); var imageA = new Image(); scopeA.Children.Add(imageA); AsyncThumbnail.SetScopedProvider(scopeA, providerA);
+        var scopeB = new Grid(); var imageB = new Image(); scopeB.Children.Add(imageB); AsyncThumbnail.SetScopedProvider(scopeB, providerB);
+        try
+        {
+            AsyncThumbnail.SetSourcePath(imageA, path);
+            await providerA.Started.Task.WaitAsync(TimeSpan.FromSeconds(5));
+
+            var oldLibraryDrain = AsyncThumbnail.CancelAndDrainAsync(scopeA);
+            Assert.IsFalse(oldLibraryDrain.IsCompleted, "The old library drain must wait for its in-flight thumbnail provider call.");
+
+            AsyncThumbnail.SetSourcePath(imageB, path);
+            await providerB.Started.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            await WaitUntilAsync(() => ReferenceEquals(imageB.Source, providerB.Bitmap));
+            Assert.IsNull(imageA.Source, "The old library published a thumbnail after its scope was cancelled.");
+
+            providerA.Release.TrySetResult();
+            await oldLibraryDrain;
+            await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+
+            Assert.IsNull(imageA.Source, "A cancelled old-library request wrote back after the provider completed.");
+            Assert.AreSame(providerB.Bitmap, imageB.Source, "The active library did not retain its own provider result.");
+            Assert.AreEqual(1, providerA.CallCount);
+            Assert.AreEqual(1, providerB.CallCount);
+            Assert.AreEqual(0, AsyncThumbnail.PendingRequestCount);
+        }
+        finally
+        {
+            providerA.Release.TrySetResult();
+            await Task.WhenAll(AsyncThumbnail.CancelAndDrainAsync(scopeA), AsyncThumbnail.CancelAndDrainAsync(scopeB));
+            try { Directory.Delete(root, recursive: true); } catch { }
+        }
+    });
+
+    private static async Task WaitUntilAsync(Func<bool> condition)
+    {
+        var timeout = DateTime.UtcNow.AddSeconds(5);
+        while (!condition())
+        {
+            if (DateTime.UtcNow >= timeout) Assert.Fail("Timed out waiting for the thumbnail publication.");
+            await Task.Delay(10);
+        }
+    }
+
     private sealed class RecordingThumbnailProvider : IAssetThumbnailProvider
     {
         private int _callCount;
@@ -149,6 +203,30 @@ public sealed class AssetThumbnailProviderTests
             var bitmap = BitmapSource.Create(1, 1, 96, 96, PixelFormats.Bgra32, null, new byte[] { 0, 0, 0, 255 }, 4);
             bitmap.Freeze();
             return new(AssetThumbnailState.Available, bitmap);
+        }
+    }
+
+    private sealed class ControlledThumbnailProvider(bool waitForRelease, byte blue) : IAssetThumbnailProvider
+    {
+        private int _callCount;
+        public int CallCount => Volatile.Read(ref _callCount);
+        public TaskCompletionSource Started { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public BitmapSource Bitmap { get; } = CreateBitmap(blue);
+
+        public async Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
+        {
+            Interlocked.Increment(ref _callCount);
+            Started.TrySetResult();
+            if (waitForRelease) await Release.Task;
+            return new(AssetThumbnailState.Available, Bitmap);
+        }
+
+        private static BitmapSource CreateBitmap(byte blue)
+        {
+            var bitmap = BitmapSource.Create(1, 1, 96, 96, PixelFormats.Bgra32, null, new byte[] { blue, 0, 0, 255 }, 4);
+            bitmap.Freeze();
+            return bitmap;
         }
     }
 }

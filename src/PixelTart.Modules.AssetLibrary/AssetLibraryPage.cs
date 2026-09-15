@@ -1,5 +1,6 @@
 using System.IO;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -53,7 +54,10 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         ILogService? logService = null,
         IAssetLibraryLoadStateController? loadStateController = null,
         bool focusedChrome = false,
-        Func<Guid, Task>? openCalendarBooking = null)
+        Func<Guid, Task>? openCalendarBooking = null,
+        string? productDatabasePath = null,
+        string? onlineSelectionWorkspaceFile = null,
+        string? inspirationTrayDatabasePath = null)
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
@@ -62,7 +66,18 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AsyncThumbnail.SetScopedProvider(this, thumbnailProvider);
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
         _demoDirectory = _enablePreviewFeatures ? demoDirectory : null;
-        _viewModel = new AssetLibraryViewModel(databasePath, taskOperationBridge, moduleDiagnostics, _enablePreviewFeatures, workspaceSettings, logService, loadStateController, openCalendarBooking);
+        _viewModel = new AssetLibraryViewModel(
+            databasePath,
+            taskOperationBridge,
+            moduleDiagnostics,
+            _enablePreviewFeatures,
+            workspaceSettings,
+            logService,
+            loadStateController,
+            openCalendarBooking,
+            productDatabasePath,
+            onlineSelectionWorkspaceFile,
+            inspirationTrayDatabasePath);
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
@@ -245,7 +260,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         var menu = new ContextMenu { PlacementTarget = button, Placement = PlacementMode.Bottom };
         if (TryFindResource("PixelTart.Menu.Context") is Style style) menu.Style = style;
         foreach (var pair in new[] { ("网格", "Grid"), ("瀑布流", "Masonry"), ("两端对齐", "Justified"), ("列表", "List") })
-            menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SwitchViewCommand, CommandParameter = pair.Item2 });
+        {
+            var item = new MenuItem { Header = pair.Item1, Command = _viewModel.SwitchViewCommand, CommandParameter = pair.Item2 };
+            AutomationProperties.SetAutomationId(item, $"AssetView{pair.Item2}");
+            menu.Items.Add(item);
+        }
         menu.IsOpen = true;
     }
 

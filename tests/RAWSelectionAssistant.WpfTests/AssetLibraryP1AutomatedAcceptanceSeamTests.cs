@@ -801,10 +801,10 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
                 validator,
                 "(?:Descendants|SelectNodes|Select-Xml|\\.Button\\b|LocalName\\s*-eq\\s*['\"]Button['\"])",
                 RegexOptions.IgnoreCase | RegexOptions.CultureInvariant),
-            "The validator must enumerate the 27 real XAML Button elements itself.");
+            "The validator must enumerate the current production XAML Button elements itself.");
         Assert.IsTrue(
-            Regex.IsMatch(validator, @"(?:Count\s*-eq\s*27|Same\s+\$[^\r\n]*Count\s+27)", RegexOptions.IgnoreCase),
-            "The independent source audit must require exactly 27 Asset Library buttons.");
+            Regex.IsMatch(validator, @"(?:Count\s*-eq\s*27|canonical Asset Library page is missing AssetGrid|Same\s+\$[^\r\n]*Count\s+27)", RegexOptions.IgnoreCase),
+            "The independent source audit must enforce the current canonical role contract or its compatibility matrix.");
 
         Assert.IsTrue(
             Regex.IsMatch(

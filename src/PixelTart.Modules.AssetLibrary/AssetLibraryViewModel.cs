@@ -32,6 +32,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly Func<Guid, Task>? _openCalendarBooking;
     private readonly IInspirationTrayService _inspirationTray;
     private readonly string _databasePath;
+    private readonly string _productDatabasePath;
+    private readonly string _onlineSelectionWorkspaceFile;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
@@ -159,11 +161,16 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         AssetLibraryWorkspaceSettings? workspaceSettings = null,
         ILogService? logService = null,
         IAssetLibraryLoadStateController? loadStateController = null,
-        Func<Guid, Task>? openCalendarBooking = null)
+        Func<Guid, Task>? openCalendarBooking = null,
+        string? productDatabasePath = null,
+        string? onlineSelectionWorkspaceFile = null,
+        string? inspirationTrayDatabasePath = null)
     {
         _database = new AssetLibraryDatabase(databasePath);
         _databasePath = _database.DatabasePath;
-        _inspirationTray = new SqliteInspirationTrayService(Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
+        _productDatabasePath = productDatabasePath ?? AppDataPaths.DatabaseFile;
+        _onlineSelectionWorkspaceFile = onlineSelectionWorkspaceFile ?? AppDataPaths.OnlineSelectionWorkspaceFile;
+        _inspirationTray = new SqliteInspirationTrayService(inspirationTrayDatabasePath ?? Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _loadStateController = loadStateController;
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
@@ -201,7 +208,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             () => IsOrganizationPaneVisible || IsOrganizationPaneCollapsed && CanShowOrganizationPaneWhenExpanded);
         ToggleInspectorPaneCommand = new(
             () => IsInspectorPaneCollapsed = !IsInspectorPaneCollapsed,
-            () => !IsInspectorPinned && (IsInspectorPaneVisible || IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded));
+            () => !IsInspectorPinned);
         ToggleInspectorPinCommand = new(() => IsInspectorPinned = !IsInspectorPinned);
         InitializeP2Browser();
         InitializeP3QueryComposer();
@@ -239,6 +246,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public BulkObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
     public IReadOnlyList<AssetLibraryModuleDiagnostic> ModuleDiagnostics { get; }
     public bool IsPreviewDiagnosticsEnabled => _enablePreviewFeatures && ModuleDiagnostics.Count > 0;
+    public bool IsVisualSmartFolderSurfaceVisible => P3SmartFolderOpen || IsPreviewDiagnosticsEnabled;
     public int LoadAttempt => Volatile.Read(ref _loadAttempt);
     public bool IsReady { get => _isReady; private set { if (SetProperty(ref _isReady, value)) RaiseWorkspaceCommandStates(); } }
     public bool IsLoading
@@ -319,7 +327,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private bool CanShowOrganizationPaneWhenExpanded =>
         IsInspectorPaneCollapsed || !IsInspectorPinned ? CanFitOrganizationPane : CanFitBothPanes;
     private bool CanShowInspectorPaneWhenExpanded =>
-        HasSelection && (IsOrganizationPaneCollapsed || IsInspectorPinned ? CanFitInspectorPane : CanFitBothPanes);
+        IsOrganizationPaneCollapsed || IsInspectorPinned ? CanFitInspectorPane : CanFitBothPanes;
     public bool IsOrganizationPaneVisible => !IsOrganizationPaneCollapsed && CanShowOrganizationPaneWhenExpanded;
     public bool IsInspectorPaneVisible => !IsInspectorPaneCollapsed && CanShowInspectorPaneWhenExpanded;
     public GridLength OrganizationPaneColumnWidth => IsOrganizationPaneVisible ? new(OrganizationPaneWidth) : new(0);
@@ -335,7 +343,6 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         : IsOrganizationPaneCollapsed ? "展开组织栏" : "组织栏（窗口过窄）";
     public string InspectorPaneToggleLabel => IsInspectorPaneVisible
         ? "收起检查器"
-        : !HasSelection ? "检查器（选择素材后显示）"
         : IsInspectorPaneCollapsed ? "展开检查器" : "检查器（窗口过窄）";
     public string InspectorPinLabel => IsInspectorPinned ? "取消固定检查器" : "固定检查器";
     public PreviewImportDiagnostics ImportDiagnostics => _importDiagnostics.Snapshot;

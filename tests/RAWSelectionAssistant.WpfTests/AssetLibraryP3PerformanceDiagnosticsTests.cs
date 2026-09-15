@@ -5,6 +5,9 @@ using System.Text.Json;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Microsoft.Data.Sqlite;
 using System.Windows.Threading;
 using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.Core.Models;
@@ -141,7 +144,203 @@ public sealed class AssetLibraryP3PerformanceDiagnosticsTests
                     await page.DisposeAsync();
                 }
             }
+
+            var scaleRoot = Environment.GetEnvironmentVariable("PIXEL_TART_RC12_SCALE_FIXTURE_ROOT");
+            if (!string.IsNullOrWhiteSpace(scaleRoot))
+                await RunScaleMatrixAsync(scaleRoot, Path.Combine(output, "scale-matrix"));
         });
+    }
+
+    private static async Task RunScaleMatrixAsync(string fixtureRoot, string outputRoot)
+    {
+        Assert.IsTrue(Path.IsPathFullyQualified(fixtureRoot));
+        Assert.IsFalse(Directory.Exists(outputRoot));
+        Directory.CreateDirectory(outputRoot);
+        foreach (var size in new[] { 10000, 50000, 100000 })
+        {
+            var fixture = Path.Combine(fixtureRoot, $"asset-library-{size}.db");
+            Assert.IsTrue(File.Exists(fixture), fixture);
+            for (var sample = 0; sample < 3; sample++)
+            {
+                var database = Path.Combine(outputRoot, $"scale-{size}-{sample}.db");
+                File.Copy(fixture, database, overwrite: false);
+                await SeedVisibleThumbnailsAsync(database, outputRoot, size, sample);
+                var process = Process.GetCurrentProcess();
+                process.Refresh();
+                var workingSetBefore = process.WorkingSet64;
+                var metrics = new Dictionary<string, object?> { ["size"] = size, ["sample"] = sample };
+                await using var repository = new SqliteAssetLibraryRepository(database);
+                await repository.InitializeAsync();
+                var candidates = (await repository.QueryAsync(new(PageSize: 50))).Items.Select(item => item.AssetId).ToArray();
+                var projectId = Guid.NewGuid();
+                var bookingId = Guid.NewGuid();
+                foreach (var assetId in candidates)
+                {
+                    await repository.SaveProjectAssetLinkAsync(new(projectId, assetId, "Asset", DateTimeOffset.UtcNow));
+                    await repository.SaveBookingAssetLinkAsync(new(bookingId, assetId, DateTimeOffset.UtcNow));
+                }
+
+                var page = new PixelTart.Modules.AssetLibrary.AssetLibraryPage(database, new TaskOperationBridge(), []);
+                try
+                {
+                    var open = Stopwatch.StartNew();
+                    await page.ViewModel.InitializeAsync();
+                    page.Measure(new Size(1600, 1000));
+                    page.Arrange(new Rect(0, 0, 1600, 1000));
+                    page.UpdateLayout();
+                    await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+                    metrics["library_open_ms"] = open.Elapsed.TotalMilliseconds;
+                    metrics["total_count"] = page.ViewModel.P2QueryTotalCount;
+                    metrics["loaded_items"] = page.ViewModel.AssetCards.Count;
+                    Assert.AreEqual(size, page.ViewModel.P2QueryTotalCount);
+                    Assert.IsLessThanOrEqualTo(500, page.ViewModel.AssetCards.Count);
+
+                    var queueMax = AsyncThumbnail.PendingRequestCount;
+                    var firstVisible = Stopwatch.StartNew();
+                    await WaitUntil(() =>
+                    {
+                        queueMax = Math.Max(queueMax, AsyncThumbnail.PendingRequestCount);
+                        return FindVisualChildren<Image>(page).Any(image => image.Source is not null);
+                    });
+                    metrics["first_visible_thumbnail_ms"] = firstVisible.Elapsed.TotalMilliseconds;
+                    await WaitUntil(() => AsyncThumbnail.PendingRequestCount == 0);
+                    metrics["thumbnail_queue_drained_ms"] = firstVisible.Elapsed.TotalMilliseconds;
+                    metrics["thumbnail_queue_max"] = queueMax;
+
+                    var grid = (ListBox)page.FindName("AssetGrid");
+                    var panel = FindVisualChild<VirtualizingAssetPanel>(grid);
+                    Assert.IsNotNull(panel);
+                    metrics["realized_items_initial"] = panel.RealizedItemCount;
+                    Assert.IsLessThan(page.ViewModel.AssetCards.Count, panel.RealizedItemCount);
+                    metrics["scroll_ms"] = await MeasureAsync(async () =>
+                    {
+                        grid.ScrollIntoView(grid.Items[^1]);
+                        page.UpdateLayout();
+                        await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+                    });
+                    metrics["realized_items_after_scroll"] = panel.RealizedItemCount;
+
+                    page.ViewModel.SearchText = $"RC12_SCALE_{size}_{size / 2:000000}";
+                    metrics["search_ms"] = await MeasureAsync(async () =>
+                    {
+                        await Task.Delay(350);
+                        await WaitUntil(() => !page.ViewModel.IsLoading && page.ViewModel.P3PendingOperationCount == 0);
+                    });
+                    Assert.AreEqual(1, page.ViewModel.P2QueryTotalCount);
+                    page.ViewModel.ClearFilters();
+                    await WaitUntil(() => !page.ViewModel.IsLoading && page.ViewModel.P2QueryTotalCount == size);
+
+                    page.ViewModel.MinimumRatingFilterText = "4";
+                    metrics["rating_filter_ms"] = await MeasureAsync(async () =>
+                    {
+                        page.ViewModel.RefreshCommand.Execute(null);
+                        await page.ViewModel.RefreshCommand.ExecutionTask;
+                    });
+                    Assert.IsGreaterThan(0, page.ViewModel.P2QueryTotalCount);
+                    page.ViewModel.MinimumRatingFilterText = string.Empty;
+                    page.ViewModel.ClearFilters();
+                    await WaitUntil(() => !page.ViewModel.IsLoading && page.ViewModel.P2QueryTotalCount == size);
+
+                    metrics["project_filter_ms"] = await MeasureAsync(() => page.ViewModel.ApplyProjectFilterAsync(projectId));
+                    Assert.AreEqual(candidates.Length, page.ViewModel.P2QueryTotalCount);
+                    metrics["booking_filter_ms"] = await MeasureAsync(() => page.ViewModel.ApplyBookingFilterAsync(bookingId));
+                    Assert.AreEqual(candidates.Length, page.ViewModel.P2QueryTotalCount);
+
+                    var cacheDirectory = Path.Combine(outputRoot, $"preview-cache-{size}-{sample}");
+                    var source = Path.Combine(outputRoot, $"preview-source-{size}-{sample}.png");
+                    WriteDiagnosticPng(source);
+                    var request = new AssetThumbnailRequest(source, 160, AssetThumbnailState.Available, Guid.NewGuid(), new string('A', 64));
+                    var provider = new WpfAssetThumbnailProvider(cacheDirectory);
+                    var firstThumbnail = await provider.GetAsync(request);
+                    Assert.IsTrue(firstThumbnail.IsAvailable);
+                    File.Delete(source);
+                    var restartedProvider = new WpfAssetThumbnailProvider(cacheDirectory);
+                    metrics["restart_cached_preview_ms"] = await MeasureAsync(async () =>
+                    {
+                        var cached = await restartedProvider.GetAsync(request with { KnownState = AssetThumbnailState.Offline });
+                        Assert.IsTrue(cached.IsAvailable);
+                    });
+                }
+                finally { await page.DisposeAsync(); }
+                process.Refresh();
+                metrics["working_set_before_bytes"] = workingSetBefore;
+                metrics["working_set_after_bytes"] = process.WorkingSet64;
+                metrics["working_set_delta_bytes"] = process.WorkingSet64 - workingSetBefore;
+                await File.WriteAllTextAsync(
+                    Path.Combine(outputRoot, $"scale-{size}-{sample}.json"),
+                    JsonSerializer.Serialize(metrics, new JsonSerializerOptions { WriteIndented = true }));
+            }
+        }
+    }
+
+    private static async Task<double> MeasureAsync(Func<Task> action)
+    {
+        var clock = Stopwatch.StartNew();
+        await action();
+        return clock.Elapsed.TotalMilliseconds;
+    }
+
+    private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (var index = 0; index < VisualTreeHelper.GetChildrenCount(parent); index++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, index);
+            if (child is T match) return match;
+            var nested = FindVisualChild<T>(child);
+            if (nested is not null) return nested;
+        }
+        return null;
+    }
+
+    private static IEnumerable<T> FindVisualChildren<T>(DependencyObject grid) where T : DependencyObject
+    {
+        for (var index = 0; index < VisualTreeHelper.GetChildrenCount(grid); index++)
+        {
+            var child = VisualTreeHelper.GetChild(grid, index);
+            if (child is T match) yield return match;
+            foreach (var nested in FindVisualChildren<T>(child)) yield return nested;
+        }
+    }
+
+    private static async Task SeedVisibleThumbnailsAsync(string database, string outputRoot, int size, int sample)
+    {
+        var sources = new List<string>();
+        for (var index = 0; index < 20; index++)
+        {
+            var source = Path.Combine(outputRoot, $"visible-{size}-{sample}-{index}.png");
+            WriteDiagnosticPng(source);
+            sources.Add(source);
+        }
+        await using var connection = new SqliteConnection($"Data Source={database}");
+        await connection.OpenAsync();
+        var ids = new List<string>();
+        await using (var read = connection.CreateCommand())
+        {
+            read.CommandText = "SELECT AssetId FROM AssetItems ORDER BY AddedAt DESC,AssetId LIMIT 20;";
+            await using var reader = await read.ExecuteReaderAsync();
+            while (await reader.ReadAsync()) ids.Add(reader.GetString(0));
+        }
+        Assert.HasCount(20, ids);
+        for (var index = 0; index < ids.Count; index++)
+        {
+            await using var update = connection.CreateCommand();
+            update.CommandText = "UPDATE AssetItems SET SourcePath=$path,NormalizedSourcePath=$normalized,DisplayName=$name,Extension='.png',MediaType='Image',IsMissing=0 WHERE AssetId=$id;";
+            update.Parameters.AddWithValue("$path", sources[index]);
+            update.Parameters.AddWithValue("$normalized", sources[index].ToUpperInvariant());
+            update.Parameters.AddWithValue("$name", $"VISIBLE_{index:00}.png");
+            update.Parameters.AddWithValue("$id", ids[index]);
+            Assert.AreEqual(1, await update.ExecuteNonQueryAsync());
+        }
+    }
+
+    private static void WriteDiagnosticPng(string path)
+    {
+        var pixels = Enumerable.Repeat<byte>(96, 64 * 48 * 4).ToArray();
+        var bitmap = BitmapSource.Create(64, 48, 96, 96, PixelFormats.Bgra32, null, pixels, 64 * 4);
+        using var stream = File.Create(path);
+        var encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+        encoder.Save(stream);
     }
 
     private static async Task WaitUntil(Func<bool> condition)

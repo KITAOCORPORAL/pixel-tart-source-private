@@ -3,8 +3,8 @@
     <!-- Pixel Tart Design System v1.0 component entry point. -->
     <ResourceDictionary.MergedDictionaries>
         <!-- The implicit menu template must exist before the canonical keyed menu API. -->
-        <ResourceDictionary Source="/Resources/DesignSystem/Controls.Menu.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/Components.Foundation.xaml" />
+        <ResourceDictionary Source="Controls.Menu.xaml" />
+        <ResourceDictionary Source="Components.Foundation.xaml" />
 
         <!--
             Existing Controls.* and legacy dictionaries stay top-level in App.xaml while they

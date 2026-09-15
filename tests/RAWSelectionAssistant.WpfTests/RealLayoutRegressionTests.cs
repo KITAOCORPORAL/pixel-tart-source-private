@@ -232,7 +232,14 @@ public sealed class RealLayoutRegressionTests
                 relative.EndsWith("PixelTart.Components.xaml", StringComparison.OrdinalIgnoreCase))
             {
                 foreach (var source in document.Descendants().Attributes("Source"))
-                    Load(source.Value.TrimStart('/', '\\'));
+                {
+                    var nested = source.Value.TrimStart('/', '\\');
+                    var baseDirectory = Path.GetDirectoryName(relative) ?? string.Empty;
+                    if (!nested.StartsWith("Resources/", StringComparison.OrdinalIgnoreCase) &&
+                        !nested.StartsWith("Resources\\", StringComparison.OrdinalIgnoreCase))
+                        nested = Path.Combine(baseDirectory, nested);
+                    Load(nested);
+                }
                 return;
             }
             application.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(

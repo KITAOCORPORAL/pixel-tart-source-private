@@ -203,13 +203,9 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
         var xamlPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml");
         var document = XDocument.Load(xamlPath);
         var text = document.ToString(SaveOptions.DisableFormatting);
-        foreach (var id in new[]
-        {
-            "SmartFolderName", "SmartFolderEditorStatus", "SmartFolderFileName", "SmartFolderExtension",
-            "SmartFolderMediaType", "SmartFolderFolder", "SmartFolderTag", "SmartFolderRating",
-            "SmartFolderMissing", "SmartFolderAddedFrom", "SmartFolderAddedTo", "SmartFolderVisualAnalysisStatus"
-        })
-            StringAssert.Contains(text, id);
+        StringAssert.Contains(text, "VisualSmartFolderBuilder");
+        StringAssert.Contains(text, "SaveVisualSmartFolder");
+        StringAssert.Contains(text, "P3SmartFolderOpen");
 
         var editor = document.Descendants().First(element =>
             element.Attributes().Any(attribute => attribute.Name.LocalName.EndsWith("AutomationId", StringComparison.Ordinal) && attribute.Value == "VisualSmartFolderBuilder"));

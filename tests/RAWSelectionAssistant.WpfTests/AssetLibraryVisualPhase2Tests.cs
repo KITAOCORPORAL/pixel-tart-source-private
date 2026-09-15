@@ -40,7 +40,12 @@ public sealed class AssetLibraryVisualPhase2Tests
                     if (relative.EndsWith("App.xaml") || relative.EndsWith("PixelTart.Theme.xaml") || relative.EndsWith("PixelTart.Components.xaml"))
                     {
                         foreach (var source in document.Descendants().Attributes("Source"))
-                            LoadResources(source.Value.TrimStart('/'));
+                        {
+                            var nested = source.Value.TrimStart('/', '\\');
+                            LoadResources(nested.StartsWith("Resources/", StringComparison.OrdinalIgnoreCase)
+                                ? nested
+                                : "Resources/DesignSystem/" + nested);
+                        }
                     }
                     else
                         app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(

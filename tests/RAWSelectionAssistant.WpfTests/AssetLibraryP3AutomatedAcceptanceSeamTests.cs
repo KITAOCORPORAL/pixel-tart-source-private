@@ -239,7 +239,7 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
         [
             "FinalizeOnApplicationExit(e.ApplicationExitCode);",
             "base.OnExit(e);",
-            "RecordLifecycle(\n                \"application-on-exit-completed\"",
+            "\"application-on-exit-completed\", \"completed\", pending: false",
         ]);
     }
 
@@ -510,7 +510,8 @@ public sealed class AssetLibraryP3AutomatedAcceptanceSeamTests
             applyStart >= 0 && measuredStart > applyStart && execute > measuredStart &&
             stable > execute && measuredStop > stable && undo > measuredStop,
             "The dispatcher timer must measure public Apply through stable completion, excluding setup and undo/redo.");
-        StringAssert.Contains(driver, "ExecuteBatchTagCommandCore(\n                batchSize, cancellationToken, StartSampling, StopSampling)");
+        StringAssert.Contains(driver, "ExecuteBatchTagCommandCore(");
+        StringAssert.Contains(driver, "StartSampling, StopSampling");
     }
 
     [TestMethod]

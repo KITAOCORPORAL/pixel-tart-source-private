@@ -50,8 +50,8 @@ public sealed class Version230Rc3RuntimeUiTests
     public void TetherRuntime_ContainsCompactSafeUserFacingStates(string token) => Contains("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml", token);
 
     [TestMethod]
-    [DataRow("CalendarItemStyle")][DataRow("CalendarDayButtonStyle")][DataRow("DatePickerTextBox")][DataRow("PART_Popup")]
-    [DataRow("PART_PreviousButton")][DataRow("PART_NextButton")][DataRow("PART_HeaderButton")][DataRow("PART_Calendar")]
+    [DataRow("PixelTartCalendarNativeStyle")][DataRow("CalendarItem")][DataRow("CalendarDayButton")][DataRow("DatePickerTextBox")][DataRow("PART_Popup")]
+    [DataRow("CalendarButton")][DataRow("CalendarTodayOutlineBrush")][DataRow("CalendarStyle")]
     [DataRow("DropdownBackgroundBrush")][DataRow("TextPrimaryBrush")][DataRow("AccentBrush")][DataRow("InputBorderBrush")]
     public void DatePickerTheme_ContainsCompleteRuntimeTemplate(string token) => Contains("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Inputs.xaml", token);
 

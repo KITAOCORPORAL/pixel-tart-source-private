@@ -25,7 +25,7 @@ if (-not $SkipBuild) {
 
 $classes = Get-ChildItem -LiteralPath $sourceRoot -File -Filter '*.cs' | ForEach-Object {
     $source = Get-Content -LiteralPath $_.FullName -Raw
-    [regex]::Matches($source, '(?s)\[TestClass(?:Attribute)?\]\s*(?:public|internal)\s+(?:sealed\s+)?class\s+(?<name>[A-Za-z0-9_]+)') | ForEach-Object {
+    [regex]::Matches($source, '(?s)\[TestClass(?:Attribute)?\]\s*(?:public|internal)\s+(?:(?:sealed|partial|abstract)\s+)*class\s+(?<name>[A-Za-z0-9_]+)') | ForEach-Object {
         $_.Groups['name'].Value
     }
 } | Where-Object { $_ -like $ClassPattern } | Sort-Object -Unique
@@ -40,9 +40,9 @@ foreach ($className in $classes) {
     $stdoutPath = Join-Path $OutputRoot ('{0:000}-{1}.stdout.txt' -f $fixtureIndex, $safeName)
     $stderrPath = Join-Path $OutputRoot ('{0:000}-{1}.stderr.txt' -f $fixtureIndex, $safeName)
     $arguments = @(
-        'test', $project, '-c', 'Release', '--no-build', '--no-restore',
+        'test', ('"' + $project + '"'), '-c', 'Release', '--no-build', '--no-restore',
         '--filter', ('FullyQualifiedName~RAWSelectionAssistant.WpfTests.' + $className),
-        '--results-directory', $OutputRoot,
+        '--results-directory', ('"' + $OutputRoot + '"'),
         '--logger', ('trx;LogFileName=' + $trxName),
         '--logger', 'console;verbosity=minimal'
     )
@@ -60,7 +60,8 @@ foreach ($className in $classes) {
             $total = [int]$counters.total
             $passed = [int]$counters.passed
             $failed = [int]$counters.failed
-            $skipped = [int]$counters.notExecuted
+            $executed = if ($null -ne $counters.executed) { [int]$counters.executed } else { $passed + $failed }
+            $skipped = [Math]::Max([int]$counters.notExecuted, $total - $executed)
         }
     }
     $results.Add([ordered]@{
@@ -73,11 +74,17 @@ foreach ($className in $classes) {
 }
 Write-Progress -Activity 'RC12 WPF fixture isolation' -Completed
 
+$testCount = 0; $passedCount = 0; $failedCount = 0; $skippedCount = 0
+foreach ($fixture in $results) {
+    $testCount += [int]$fixture['total']
+    $passedCount += [int]$fixture['passed']
+    $failedCount += [int]$fixture['failed']
+    $skippedCount += [int]$fixture['skipped']
+}
 $manifest = [ordered]@{
     schema='pixel-tart-rc12-wpf-process-isolation/v1'; product_version='2.3.0-RC12'; source_commit=$sourceCommit
     process_per_fixture=$true; application_singleton_shared=$false; fixture_count=@($results).Count
-    test_count=($results | Measure-Object total -Sum).Sum; passed_count=($results | Measure-Object passed -Sum).Sum
-    failed_count=($results | Measure-Object failed -Sum).Sum; skipped_count=($results | Measure-Object skipped -Sum).Sum
+    test_count=$testCount; passed_count=$passedCount; failed_count=$failedCount; skipped_count=$skippedCount
     failed_fixture_count=@($results | Where-Object { $_.exit_code -ne 0 -or $_.failed -ne 0 -or $_.skipped -ne 0 }).Count
     generated_at=[DateTimeOffset]::Now.ToString('O'); fixtures=$results
 }

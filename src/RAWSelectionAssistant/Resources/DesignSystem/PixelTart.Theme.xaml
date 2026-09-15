@@ -8,11 +8,11 @@
         Legacy dictionaries remain merged here until all pages have migrated.
     -->
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Resources/DesignSystem/AccentColors.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/Spacing.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/Radius.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/DesignTokens.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/Typography.xaml" />
-        <ResourceDictionary Source="/Resources/DesignSystem/Elevation.xaml" />
+        <ResourceDictionary Source="AccentColors.xaml" />
+        <ResourceDictionary Source="Spacing.xaml" />
+        <ResourceDictionary Source="Radius.xaml" />
+        <ResourceDictionary Source="DesignTokens.xaml" />
+        <ResourceDictionary Source="Typography.xaml" />
+        <ResourceDictionary Source="Elevation.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

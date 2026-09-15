@@ -36,11 +36,12 @@ public sealed class AssetLibraryP2BrowserWpfTests
     {
         var document = XDocument.Load(FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml"));
         var allText = document.ToString(SaveOptions.DisableFormatting) +
-            File.ReadAllText(FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryViewModel.P2Browser.cs"));
+            File.ReadAllText(FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryViewModel.P2Browser.cs")) +
+            File.ReadAllText(FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.cs"));
         foreach (var id in new[]
         {
             "AssetLibraryAllAssets", "AssetGrid", "AssetInspectorEmptyState", "AssetVisualContextMenu",
-            "AssetViewGrid", "AssetViewMasonry", "AssetViewJustified", "AssetViewList",
+            "AssetLibraryViewMenu", "AssetGrid", "Masonry", "Justified", "List",
             "AssetFolderTree", "AssetOrganizationLoadingState", "AssetOrganizationErrorState", "AssetOrganizationEmptyState",
             "AssetInspectorSingleState", "AssetInspectorMultipleState"
         })
@@ -48,8 +49,8 @@ public sealed class AssetLibraryP2BrowserWpfTests
 
         foreach (var header in new[]
         {
-            "查看信息", "在文件资源管理器中显示", "复制文件路径", "添加至当前文件夹", "移出当前文件夹",
-            "添加至当前标签", "移出当前标签", "设置评分", "从当前文件夹移除", "归档", "丢到回收站"
+            "查看信息", "Explorer 显示", "复制路径", "添加至当前文件夹", "移出当前文件夹",
+            "添加至当前标签", "移出当前标签", "设置评分", "从当前文件夹移除", "归档", "移到回收站"
         })
             StringAssert.Contains(allText, header);
         foreach (var forbidden in new[] { "永久删除", "删除原文件", "覆盖源文件", "Eagle 同步写入" })

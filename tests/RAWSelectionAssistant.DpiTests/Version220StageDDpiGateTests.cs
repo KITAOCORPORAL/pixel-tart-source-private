@@ -20,9 +20,10 @@ public sealed class Version220StageDDpiGateTests
 
     [TestMethod] public void PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation()
     {
-        var existing = Text("tests/RAWSelectionAssistant.DpiTests/AutomatedDpiEvidenceTests.cs");
-        StringAssert.Contains(existing, "PhysicalDpiManuallyTested");
-        StringAssert.Contains(existing, "Assert.IsFalse");
+        var metadata = Directory.GetFiles(Path.Combine(Root, "artifacts", "rc12-product-visual", "dpi-current"), "*.png.json").First();
+        var existing = File.ReadAllText(metadata);
+        StringAssert.Contains(existing, "\"physicalDpiManuallyTested\": false");
+        StringAssert.Contains(existing, "\"validationMode\": \"automated-logical-simulation\"");
     }
 
     [TestMethod] public void StageDViews_HaveScrollOrBoundedNotificationSurfaces()
