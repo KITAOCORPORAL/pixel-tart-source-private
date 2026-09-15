@@ -101,7 +101,7 @@ public sealed class GlobalSurfaceCloseSmokeTests
         {
             var view = Read(relative);
             XDocument.Parse(view);
-            ContainsAll(view, "SurfaceHeader", "Content=\"取消任务\"", "Command=\"{Binding CancelCommand}\"");
+            ContainsAll(view, "SurfaceHeader", "Content=\"停止\"", "Command=\"{Binding CancelCommand}\"");
             Assert.IsFalse(SurfaceChromeMarkup(view).Contains("CancelCommand", StringComparison.Ordinal));
             Assert.IsFalse(SurfaceChromeMarkup(view).Contains("Command=", StringComparison.Ordinal));
         }

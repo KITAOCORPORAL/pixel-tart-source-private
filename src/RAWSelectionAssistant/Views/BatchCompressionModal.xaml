@@ -54,7 +54,7 @@
 
                     <Border Style="{StaticResource SemanticInfoPanel}" Padding="12" Margin="0,16,0,0">
                         <StackPanel>
-                            <TextBlock Text="冲突策略：自动编号" Style="{StaticResource CardTitleText}" />
+                            <TextBlock Text="同名文件：自动重命名" Style="{StaticResource CardTitleText}" />
                             <TextBlock Text="始终新建输出并完成写入刷新；不覆盖、不移动、不删除源照片。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" TextWrapping="Wrap" />
                         </StackPanel>
                     </Border>
@@ -70,7 +70,7 @@
                     <ProgressBar Width="180" Height="6" Value="{Binding Progress, Mode=OneWay}" Margin="0,8,0,0" HorizontalAlignment="Left" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
+                    <Button Content="停止" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
                             AutomationProperties.AutomationId="BatchCompressCancelTaskButton" />
                     <Button Content="开始压缩" Style="{StaticResource Av2PrimaryButton}" Command="{Binding StartCommand}" IsDefault="True" />
                 </StackPanel>

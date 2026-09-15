@@ -24,6 +24,14 @@ public sealed class UXSimplificationRegressionTests
     }
 
     [TestMethod]
+    public void CompressionUsesTheSharedTaskAndFileConflictLanguage()
+    {
+        var xaml = Text("src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml");
+        ContainsAll(xaml, "开始压缩", "Content=\"停止\"", "同名文件：自动重命名");
+        ContainsNone(xaml, "取消任务", "冲突策略", "自动编号");
+    }
+
+    [TestMethod]
     public void SmartFolderUsesHumanConditionsAndLivePhotoCount()
     {
         var editor = Text("src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml");
