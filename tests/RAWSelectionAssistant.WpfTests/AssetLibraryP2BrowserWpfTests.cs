@@ -125,7 +125,7 @@ public sealed class AssetLibraryP2BrowserWpfTests
                     Assert.IsNotNull(panel, mode.ToString());
                     Assert.AreSame(page.ViewModel.AssetCards, grid.ItemsSource, mode.ToString());
                     Assert.IsGreaterThan(0, panel.RealizedItemCount, mode.ToString());
-                    Assert.IsLessThan(150, panel.RealizedItemCount, $"{mode} must not create 500 item containers.");
+                    Assert.IsLessThan(80, panel.RealizedItemCount, $"{mode} must keep the realized transition window compact.");
                     Assert.AreEqual(0d, panel.HorizontalOffset, 0.01d, mode.ToString());
                     page.DisposeAsync().AsTask().GetAwaiter().GetResult();
                 }

@@ -8,6 +8,7 @@ namespace PixelTart.Modules.AssetLibrary;
 
 public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
 {
+    private const double Overscan = 24d;
     public static readonly DependencyProperty ViewModeProperty = DependencyProperty.Register(
         nameof(ViewMode), typeof(AssetLibraryViewMode), typeof(VirtualizingAssetPanel),
         new FrameworkPropertyMetadata(AssetLibraryViewMode.Grid, FrameworkPropertyMetadataOptions.AffectsMeasure));
@@ -52,7 +53,7 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
         for (var index = 0; index < _layout.Items.Count; index++)
         {
             var rect = _layout.Items[index];
-            if (rect.Bottom < top - 80d || rect.Top > bottom + 80d) continue;
+            if (rect.Bottom < top - Overscan || rect.Top > bottom + Overscan) continue;
             if (first < 0) first = index;
             last = index;
         }
