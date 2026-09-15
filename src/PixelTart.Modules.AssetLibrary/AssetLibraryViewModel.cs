@@ -465,7 +465,25 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private string _inspectorClient = "未关联";
     private JpegQualityInfo? _inspectorMetadata;
     public string InspectorAssetOrigin { get => _inspectorAssetOrigin; private set => SetProperty(ref _inspectorAssetOrigin, value); }
-    public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "托管副本" : "原位引用";
+    public string InspectorStorageMode => SelectedAsset?.ImportMode == AssetImportMode.ManagedCopy ? "已复制到素材库" : "保留在原位置";
+    public string InspectorFormat => SelectedAsset is null ? "未识别" : Path.GetExtension(SelectedAsset.SourcePath).ToLowerInvariant() switch
+    {
+        ".jpg" or ".jpeg" => "JPEG",
+        ".png" => "PNG",
+        ".tif" or ".tiff" => "TIFF",
+        ".heic" or ".heif" => "HEIF",
+        ".arw" or ".cr2" or ".cr3" or ".dng" or ".nef" or ".nrw" or ".orf" or ".raf" or ".raw" or ".rw2" => "RAW",
+        var extension when extension.Length > 1 => extension[1..].ToUpperInvariant(),
+        _ => "未识别"
+    };
+    public string InspectorFileSize => SelectedAsset is null || SelectedAsset.FileSize <= 0
+        ? "未记录"
+        : SelectedAsset.FileSize >= 1024L * 1024L * 1024L
+            ? $"{SelectedAsset.FileSize / 1024d / 1024d / 1024d:F1} GB"
+            : SelectedAsset.FileSize >= 1024L * 1024L
+                ? $"{SelectedAsset.FileSize / 1024d / 1024d:F1} MB"
+                : $"{SelectedAsset.FileSize / 1024d:F0} KB";
+    public bool InspectorFileUnavailable => SelectedAsset?.IsMissing == true;
     public string InspectorShootDate => SelectedAsset?.CaptureTime?.ToString("yyyy-MM-dd HH:mm") ?? "未记录";
     public string InspectorCamera => _inspectorMetadata is null ? "未记录" : string.Join(' ', new[] { _inspectorMetadata.CameraMake, _inspectorMetadata.CameraModel }.Where(x => !string.IsNullOrWhiteSpace(x))).Trim() is { Length: > 0 } camera ? camera : "未记录";
     public string InspectorLens => string.IsNullOrWhiteSpace(_inspectorMetadata?.Lens) ? "未记录" : _inspectorMetadata!.Lens;
@@ -814,7 +832,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _inspectorMetadata = null;
         InspectorClient = "未关联";
         OnPropertyChanged(nameof(SelectedAssetThumbnailPath));
-        foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorIso), nameof(InspectorShutter), nameof(InspectorAperture), nameof(InspectorFocalLength), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
+        foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorFormat), nameof(InspectorFileSize), nameof(InspectorFileUnavailable), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorIso), nameof(InspectorShutter), nameof(InspectorAperture), nameof(InspectorFocalLength), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
             OnPropertyChanged(property);
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
         NotifyWorkspaceLayout();
@@ -1980,8 +1998,9 @@ public sealed record AssetVisualMatchView(AssetItem Asset, VisualSimilarityScore
     public string AddedTimeText => Asset.AddedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
     public string FileSizeText => Asset.FileSize <= 0 ? "—" : Asset.FileSize >= 1024L * 1024 ? $"{Asset.FileSize / 1024d / 1024d:F1} MB" : $"{Asset.FileSize / 1024d:F0} KB";
     public string MissingText => Asset.IsMissing ? "缺失" : string.Empty;
+    public bool HasRating => Asset.Rating > 0;
     public bool HasDetail => Scores is not null || ColorDeltaE is not null;
-    public string Detail => Scores is not null ? $"相似 {Scores.Overall:F0} · 色 {Scores.Color:F0} · 调 {Scores.Tone:F0} · 对 {Scores.Contrast:F0} · 饱 {Scores.Saturation:F0}" : ColorDeltaE is not null ? $"ΔE76 {ColorDeltaE:F1}" : string.Empty;
+    public string Detail => Scores is not null ? $"相似度 {Scores.Overall:F0}%" : ColorDeltaE is not null ? "颜色匹配" : string.Empty;
 }
 
 public sealed record VisualFilterChipView(string Key, string Label, VisualAssetFilter Filter);

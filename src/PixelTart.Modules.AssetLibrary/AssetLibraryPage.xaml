@@ -66,7 +66,7 @@
             </MenuItem>
             <MenuItem Header="导出" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextExport">
                 <MenuItem Header="原文件副本" Command="{Binding Owner.ExportOriginalContextCommand}" CommandParameter="{Binding}" />
-                <MenuItem Header="托管副本" Command="{Binding Owner.ExportManagedContextCommand}" CommandParameter="{Binding}" />
+                <MenuItem Header="素材库中的副本" Command="{Binding Owner.ExportManagedContextCommand}" CommandParameter="{Binding}" />
                 <MenuItem Header="元数据 CSV" Command="{Binding Owner.ExportMetadataContextCommand}" CommandParameter="{Binding}" />
             </MenuItem>
             <MenuItem Header="生命周期" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextLifecycle">
@@ -105,7 +105,7 @@
                             <TextBlock Text="{Binding Detail}" Foreground="{DynamicResource Brush.Text.Primary}" FontSize="{DynamicResource Type.Caption.FontSize}" ToolTip="{Binding Detail}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -121,7 +121,7 @@
                             <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -137,7 +137,7 @@
                             <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.MediaType}" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -158,7 +158,7 @@
                     <TextBlock Grid.Column="3" Text="{Binding DimensionsText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
                     <TextBlock Grid.Column="4" Text="{Binding CaptureTimeText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
                     <TextBlock Grid.Column="5" Text="{Binding AddedTimeText}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                    <TextBlock Grid.Column="6" Text="{Binding Asset.Rating, StringFormat=★ {0}}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    <TextBlock Grid.Column="6" Text="{Binding Asset.Rating, StringFormat=★ {0}}" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <TextBlock Grid.Column="7" Text="{Binding TagSummary}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{DynamicResource PixelTart.Type.Metadata}" />
                 </Grid>
             </Border>
@@ -677,6 +677,12 @@
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
                         <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
+                        <TextBlock Text="{Binding InspectorFormat, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorFileSize, StringFormat=大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=位置：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="源文件不可访问" Foreground="{DynamicResource ErrorBrush}" Style="{DynamicResource PixelTart.Type.Metadata}"
+                                   Visibility="{Binding InspectorFileUnavailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   AutomationProperties.AutomationId="AssetInspectorMissingState" />
                         <Expander Header="拍摄信息" IsExpanded="False" Margin="{DynamicResource SpacingVertical12}">
                             <StackPanel>
                                 <TextBlock Text="{Binding InspectorShootDate, StringFormat=拍摄时间：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorCaptureTime" />
@@ -688,17 +694,15 @@
                                 <TextBlock Text="{Binding InspectorFocalLength, StringFormat=焦距：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                             </StackPanel>
                         </Expander>
-                        <Expander Header="技术信息" IsExpanded="False" Margin="{DynamicResource Space.Stack.1}">
+                        <Expander Header="查看详细信息" IsExpanded="False" Margin="{DynamicResource Space.Stack.1}">
                             <StackPanel>
                         <TextBlock Text="{Binding SingleFolderSummary, StringFormat=所属文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="AssetInspectorFolders" AutomationProperties.Name="所属文件夹" />
-                        <TextBlock Text="{Binding SelectedAsset.MediaType, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding SelectedAsset.Orientation, StringFormat=方向：{0}, TargetNullValue=方向：未记录}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=存储模式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis"
                                    AutomationProperties.AutomationId="AssetInspectorSourcePath" AutomationProperties.Name="素材路径" />
-                        <TextBlock Text="{Binding SelectedAsset.FileSize, StringFormat=文件大小：{0:N0} 字节}" Style="{DynamicResource PixelTart.Type.Metadata}"
+                        <TextBlock Text="{Binding InspectorFileSize, StringFormat=文件大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorFileSize" AutomationProperties.Name="文件大小" />
                         <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
                             <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
@@ -707,8 +711,6 @@
                         <TextBlock Text="{Binding SelectedAsset.AddedAt, StringFormat=添加时间：{0:yyyy-MM-dd HH:mm}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorAddedTime" AutomationProperties.Name="添加时间" />
 
-                        <TextBlock Text="{Binding SelectedAsset.IsMissing, StringFormat=文件缺失：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
-                                   AutomationProperties.AutomationId="AssetInspectorMissingState" AutomationProperties.Name="文件缺失状态" />
                             </StackPanel>
                         </Expander>
                         </StackPanel>
