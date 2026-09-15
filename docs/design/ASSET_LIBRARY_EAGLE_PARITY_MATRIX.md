@@ -52,4 +52,4 @@ The RC11 report records the exact commits, tests, installer hash and unresolved 
 
 ## RC12 truth status
 
-RC12 now has current WPF product evidence for recent libraries, Project/Booking/Client, Calendar ↔ Asset, Inspiration Collection, the six-group Context Menu and 10K/50K/100K visual performance. The remaining release blocker is the fail-closed P2 sealed-run/zero-skip isolation seal tracked in `RC12_COMPLETION_GAP_AUDIT.md`. These rows are not promoted from service persistence alone.
+RC12 now has current WPF product evidence for recent libraries, Project/Booking/Client, Calendar ↔ Asset, Inspiration Collection, the six-group Context Menu and 10K/50K/100K visual performance. The sealed P2 acceptance and final 83-fixture WPF isolation run both pass; the latter reports 1162/1162 with zero failures and zero skips. Rows are promoted only where UI, command, persistence/reload and current test evidence agree.
