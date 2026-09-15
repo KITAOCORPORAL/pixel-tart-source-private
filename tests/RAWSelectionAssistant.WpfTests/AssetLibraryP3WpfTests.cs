@@ -769,7 +769,7 @@ public sealed class AssetLibraryP3WpfTests
     [TestMethod]
     public async Task RuntimePageCreatesAllP3UserControlsWithSharedViewModel()
     {
-        await RunSta(() =>
+        await RunSta(async () =>
         {
             var root = Path.Combine(Path.GetTempPath(), "PixelTart-P3Page", Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(root);
@@ -782,7 +782,7 @@ public sealed class AssetLibraryP3WpfTests
                 Assert.AreSame(page.ViewModel, FindLogical<AssetQueryComposerView>(page).DataContext);
                 Assert.AreSame(page.ViewModel, FindLogical<AssetSmartFolderEditorView>(page).DataContext);
                 Assert.AreSame(page.ViewModel, FindLogical<AssetTagManagerView>(page).DataContext);
-                page.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                await page.DisposeAsync();
             }
             finally { try { Directory.Delete(root, true); } catch { } }
         });
