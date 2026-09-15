@@ -170,8 +170,7 @@
                     <Style TargetType="ContentControl">
                         <Setter Property="ContentTemplate" Value="{StaticResource AssetGridCardTemplate}" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="Masonry"><Setter Property="ContentTemplate" Value="{StaticResource AssetMasonryCardTemplate}" /></DataTrigger>
-                            <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="Justified"><Setter Property="ContentTemplate" Value="{StaticResource AssetJustifiedCardTemplate}" /></DataTrigger>
+                            <!-- Grid, Masonry, and Justified share the photo-card tree; VirtualizingAssetPanel supplies their distinct geometry. -->
                             <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="List"><Setter Property="ContentTemplate" Value="{StaticResource AssetListRowTemplate}" /></DataTrigger>
                         </Style.Triggers>
                     </Style>

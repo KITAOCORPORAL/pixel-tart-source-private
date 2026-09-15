@@ -57,6 +57,7 @@ public sealed class AssetLibraryP2BrowserWpfTests
             Assert.IsFalse(allText.Contains(forbidden, StringComparison.Ordinal), forbidden);
 
         StringAssert.Contains(allText, "VirtualizingAssetPanel");
+        StringAssert.Contains(allText, "Grid, Masonry, and Justified share the photo-card tree");
         StringAssert.Contains(allText, "OrganizationFolders");
         StringAssert.Contains(allText, "OrganizationTagGroups");
         StringAssert.Contains(allText, "MoveUpCommand");
