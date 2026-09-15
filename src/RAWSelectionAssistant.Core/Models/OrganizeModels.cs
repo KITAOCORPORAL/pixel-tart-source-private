@@ -43,6 +43,7 @@ public sealed class OrganizePhotoItem
     public int PixelWidth { get; init; }
     public int PixelHeight { get; init; }
     public bool MetadataMissing { get; init; }
+    public bool HasCaptureTime => CaptureTime.HasValue;
     public bool Excluded { get; set; }
     public string GroupName { get; set; } = "未分组";
 }

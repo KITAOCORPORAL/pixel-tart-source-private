@@ -28,7 +28,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     private string _outputPath = string.Empty;
     private string _customParameter = string.Empty;
     private int _fixedCount = 100;
-    private bool _verifySha256;
+    private bool _verifySha256 = true;
     private bool _isBusy;
     private double _progress;
     private string _statusMessage = "请选择照片或文件夹";
@@ -68,15 +68,15 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     public ObservableCollection<PhotoGroupDefinition> Groups { get; } = [];
     public IReadOnlyList<OptionItem<OrganizeRuleType>> RuleOptions { get; } =
     [
-        new(OrganizeRuleType.OriginalFolder,"原文件夹"), new(OrganizeRuleType.CaptureDate,"拍摄日期"), new(OrganizeRuleType.CaptureYear,"拍摄年份"),
+        new(OrganizeRuleType.OriginalFolder,"按当前文件夹结构"), new(OrganizeRuleType.CaptureDate,"按拍摄日期"), new(OrganizeRuleType.CaptureYear,"按拍摄年份"),
         new(OrganizeRuleType.CaptureYearMonth,"拍摄年月"), new(OrganizeRuleType.CaptureDateHour,"日期和小时"), new(OrganizeRuleType.CameraMake,"相机品牌"),
-        new(OrganizeRuleType.CameraModel,"相机型号"), new(OrganizeRuleType.LensModel,"镜头型号"), new(OrganizeRuleType.FileFormat,"文件格式"),
+        new(OrganizeRuleType.CameraModel,"按相机"), new(OrganizeRuleType.LensModel,"按镜头"), new(OrganizeRuleType.FileFormat,"按文件格式"),
         new(OrganizeRuleType.Landscape,"横图"), new(OrganizeRuleType.Portrait,"竖图"), new(OrganizeRuleType.Square,"方图"),
         new(OrganizeRuleType.FileNamePrefix,"文件名前缀"), new(OrganizeRuleType.FileNameNumber,"文件名数字段"), new(OrganizeRuleType.FileSizeRange,"文件大小区间"),
         new(OrganizeRuleType.FixedCount,"每 N 张一组"), new(OrganizeRuleType.CustomKeyword,"自定义关键词"), new(OrganizeRuleType.Manual,"手动分组")
     ];
-    public IReadOnlyList<OptionItem<OrganizeOperationType>> OperationOptions { get; } = [new(OrganizeOperationType.SavePlan, "仅保存方案"), new(OrganizeOperationType.Copy, "复制到新目录（默认）"), new(OrganizeOperationType.Move, "移动到新目录（高风险）")];
-    public IReadOnlyList<OptionItem<OrganizeConflictPolicy>> ConflictOptions { get; } = [new(OrganizeConflictPolicy.AutoNumber, "自动编号（默认）"), new(OrganizeConflictPolicy.Skip, "跳过"), new(OrganizeConflictPolicy.AddSourceFolder, "添加原文件夹名"), new(OrganizeConflictPolicy.AddCaptureDate, "添加拍摄日期"), new(OrganizeConflictPolicy.AddShortHash, "添加短哈希"), new(OrganizeConflictPolicy.Overwrite, "覆盖（需额外确认）")];
+    public IReadOnlyList<OptionItem<OrganizeOperationType>> OperationOptions { get; } = [new(OrganizeOperationType.SavePlan, "只保存整理方案"), new(OrganizeOperationType.Copy, "保留原文件（推荐）"), new(OrganizeOperationType.Move, "整理后移走原文件")];
+    public IReadOnlyList<OptionItem<OrganizeConflictPolicy>> ConflictOptions { get; } = [new(OrganizeConflictPolicy.AutoNumber, "同名时自动重命名（推荐）"), new(OrganizeConflictPolicy.Skip, "跳过同名照片"), new(OrganizeConflictPolicy.AddSourceFolder, "加上原文件夹名"), new(OrganizeConflictPolicy.AddCaptureDate, "加上拍摄日期"), new(OrganizeConflictPolicy.AddShortHash, "加上唯一短码"), new(OrganizeConflictPolicy.Overwrite, "替换已有文件（需确认）")];
 
     public OptionItem<OrganizeRuleType> SelectedRule { get => _selectedRule; set { if (SetProperty(ref _selectedRule, value)) Regroup(); } }
     public OptionItem<OrganizeOperationType> SelectedOperation { get => _selectedOperation; set { if (SetProperty(ref _selectedOperation, value)) InvalidatePlan(); } }
@@ -99,8 +99,17 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     public bool IsEmptyStage => !HasPhotos;
     public bool IsGroupedStage => HasGroups && !HasPlan;
     public bool IsPlanReady => HasPlan && !HasResult;
-    public string PlanSummary => CurrentPlan is null ? "尚未生成操作清单" : $"来源 {Photos.Count} · 有效 {CurrentPlan.Items.Count} · 分组 {CurrentPlan.Groups.Count} · 元数据缺失 {CurrentPlan.MetadataMissingCount} · 预计 {FormatBytes(CurrentPlan.EstimatedOutputBytes)}";
-    public string RiskSummary => CurrentPlan is null ? "默认复制、不覆盖、不删除源文件" : $"操作：{SelectedOperation.Label}；冲突：{SelectedConflict.Label}；重名风险 {CurrentPlan.ConflictRiskCount}";
+    public string PlanSummary => CurrentPlan is null
+        ? "添加照片后，可以先预览整理结果。"
+        : $"将整理 {CurrentPlan.Items.Count:N0} 张照片\n预计占用 {FormatBytes(CurrentPlan.EstimatedOutputBytes)}\n将建立 {CurrentPlan.Groups.Count:N0} 个文件夹";
+    public string RiskSummary => CurrentPlan is null
+        ? "默认保留原文件，同名时自动重命名。"
+        : string.Join(Environment.NewLine, new[]
+        {
+            CurrentPlan.MetadataMissingCount > 0 ? $"{CurrentPlan.MetadataMissingCount:N0} 张照片缺少部分拍摄信息。" : null,
+            CurrentPlan.ConflictRiskCount > 0 ? $"{CurrentPlan.ConflictRiskCount:N0} 张照片可能同名，将按高级设置处理。" : null,
+            CurrentPlan.OperationType == OrganizeOperationType.Copy ? "整理完成后保留原文件。" : "文件确认复制完整后才会处理原文件。"
+        }.Where(value => value is not null));
 
     public RelayCommand BrowseOutputCommand { get; }
     public RelayCommand GroupCommand { get; }
@@ -168,13 +177,12 @@ public sealed class OrganizePhotosViewModel : ObservableObject
         OnPropertyChanged(nameof(HasPhotos)); OnPropertyChanged(nameof(HasGroups)); OnPropertyChanged(nameof(HasPlan)); OnPropertyChanged(nameof(HasResult));
         OnPropertyChanged(nameof(IsEmptyStage)); OnPropertyChanged(nameof(IsGroupedStage)); OnPropertyChanged(nameof(IsPlanReady));
     }
-    private void PreviewPlan() { try { CurrentPlan = _service.BuildPlan(Photos, Groups, SourceInputs, OutputPath, new OrganizeRule(SelectedRule.Value, CustomParameter, FixedCount), SelectedOperation.Value, SelectedConflict.Value, VerifySha256); StatusMessage = "操作清单已生成，请核对摘要后执行"; } catch (Exception ex) { _dialogs.ShowError(ex.Message); } }
+    private void PreviewPlan() { try { CurrentPlan = _service.BuildPlan(Photos, Groups, SourceInputs, OutputPath, new OrganizeRule(SelectedRule.Value, CustomParameter, FixedCount), SelectedOperation.Value, SelectedConflict.Value, VerifySha256); StatusMessage = "整理结果已准备好，请确认后开始。"; } catch (Exception ex) { _dialogs.ShowError(ex.Message); } }
     private async Task ExecuteAsync()
     {
         if (CurrentPlan is null) return;
-        var sourceSummary = string.Join("；", CurrentPlan.SourceRoots.Take(3));
-        var message = $"{PlanSummary}\n{RiskSummary}\n来源：{sourceSummary}\n输出：{(string.IsNullOrWhiteSpace(CurrentPlan.OutputRoot) ? "仅保存方案，不写照片" : CurrentPlan.OutputRoot)}\n\n用户确认的是当前具体清单。是否继续？";
-        if (!_dialogs.Confirm(message, "确认整理操作")) return;
+        var message = $"{PlanSummary}\n\n{RiskSummary}\n\n保存到：{(string.IsNullOrWhiteSpace(CurrentPlan.OutputRoot) ? "只保存整理方案" : CurrentPlan.OutputRoot)}";
+        if (!_dialogs.Confirm(message, "开始整理？")) return;
         if (CurrentPlan.OperationType == OrganizeOperationType.SavePlan)
         {
             var planPath = _dialogs.ChooseSaveFile("保存整理方案", "像素蛋挞整理方案|*.json", ".json", $"整理方案_{DateTime.Now:yyyyMMdd_HHmm}.json");
@@ -186,7 +194,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
         if (CurrentPlan.ConflictPolicy == OrganizeConflictPolicy.Overwrite && !_dialogs.Confirm("覆盖会替换已有目标文件。是否明确允许覆盖？", "覆盖额外确认")) return;
         IsBusy = true;
         _cancellation = new();
-        StatusMessage = "正在执行整理清单…";
+        StatusMessage = "正在整理照片…";
         try
         {
             var resourceSnapshot = $"write-root:{CurrentPlan.OutputRoot}" + (CurrentPlan.OperationType == OrganizeOperationType.Move ? Environment.NewLine + string.Join(Environment.NewLine, CurrentPlan.SourceRoots.Select(x => $"write-source:{x}")) : string.Empty);
@@ -199,7 +207,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
                     if (context is not null)
                     {
                         var summary = new TaskResultSummary(x.Total, x.Completed, 0, 0, 0, 0, 0, 0);
-                        _ = context.ReportProgressAsync(Progress, "执行整理清单", x.CurrentFile, summary, token);
+                        _ = context.ReportProgressAsync(Progress, "正在整理照片", x.CurrentFile, summary, token);
                     }
                 });
                 LastResult = await _service.ExecuteAsync(CurrentPlan, CurrentPlan.OperationType == OrganizeOperationType.Move, CurrentPlan.ConflictPolicy == OrganizeConflictPolicy.Overwrite, token, progress);
@@ -233,7 +241,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
     private async Task UndoMoveAsync()
     {
         if (LastResult is null) return;
-        if (!_dialogs.Confirm("撤销前会重新校验目标文件、原路径和哈希；任何前提不满足都会停止。", "撤销移动整理")) return;
+        if (!_dialogs.Confirm("撤销前会重新检查目标文件和原位置；任何文件不符合安全条件都会停止。", "撤销移动整理")) return;
         IsBusy = true;
         try
         {

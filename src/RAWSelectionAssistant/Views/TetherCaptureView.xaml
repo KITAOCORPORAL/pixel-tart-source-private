@@ -146,7 +146,7 @@
                             <Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToProject}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding ProjectDestination}" IsReadOnly="True" AutomationProperties.Name="项目复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseProjectDestinationCommand}" AutomationProperties.Name="选择项目复制目标目录" /></Grid>
                             <CheckBox Content="复制到独立备份目录" IsChecked="{Binding CopyToBackup}" Margin="0,5,0,0" AutomationProperties.Name="复制到独立备份目录" />
                             <Grid Margin="20,4,0,0" IsEnabled="{Binding CopyToBackup}"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding BackupDestination}" IsReadOnly="True" AutomationProperties.Name="备份复制目标目录" /><Button Grid.Column="1" Content="选择" Style="{StaticResource GhostButton}" Margin="6,0,0,0" Command="{Binding ChooseBackupDestinationCommand}" AutomationProperties.Name="选择备份复制目标目录" /></Grid>
-                            <CheckBox Content="复制后同时校验 SHA-256（更慢）" IsChecked="{Binding VerifySha256}" Margin="0,5,0,0" AutomationProperties.Name="复制后校验SHA256" />
+                            <CheckBox Content="复制完成后检查文件完整性" IsChecked="{Binding VerifySha256}" Margin="0,5,0,0" AutomationProperties.Name="复制完成后检查文件完整性" />
                             <TextBlock Text="复制固定使用复制、新建文件和自动编号；不覆盖、不移动、不删除源文件。" Style="{StaticResource CaptionText}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0" />
                         </StackPanel>
                     </Expander>

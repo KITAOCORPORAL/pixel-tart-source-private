@@ -49,7 +49,7 @@
 
             <Border Grid.Column="2" Style="{StaticResource PanelSurface}">
                 <StackPanel>
-                    <TextBlock Text="输出参数" Style="{StaticResource SectionTitleText}" />
+                    <TextBlock Text="转换设置" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="输出目录" Style="{StaticResource Av2FieldLabel}" Margin="0,16,0,4" />
                     <TextBox Style="{StaticResource Av2TextBox}" Text="{Binding DestinationDirectory, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AutomationProperties.Name="JPG 输出目录" />
                     <Button Content="选择输出目录" Style="{StaticResource Av2SecondaryButton}" Command="{Binding ChooseDestinationCommand}" Margin="0,8,0,0" HorizontalAlignment="Stretch" />
@@ -73,18 +73,17 @@
                         <TextBlock Grid.Column="1" Text="{Binding JpegQuality}" Style="{StaticResource NumericLargeText}" FontSize="{DynamicResource SectionFontSize}" TextAlignment="Right" VerticalAlignment="Center" />
                     </Grid>
 
-                    <TextBlock Text="色彩" Style="{StaticResource Av2FieldLabel}" Margin="0,16,0,4" />
-                    <Border Style="{StaticResource CardSurface}" Padding="12,8">
-                        <TextBlock Text="sRGB（固定输出）" Style="{StaticResource SecondaryBodyText}" />
-                    </Border>
-                    <CheckBox Content="使用相机白平衡" IsChecked="{Binding UseCameraWhiteBalance}" Margin="0,16,0,0" />
-                    <CheckBox Content="保留 EXIF" IsChecked="{Binding PreserveExif}" Margin="0,8,0,0" />
-                    <CheckBox Content="自动旋转" IsChecked="{Binding AutoRotate}" Margin="0,8,0,0" />
-
-                    <Border Style="{StaticResource SemanticInfoPanel}" Padding="12" Margin="0,16,0,0">
-                        <TextBlock Text="{Binding CapabilityText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" />
-                    </Border>
-                    <TextBlock Text="冲突时自动编号；始终新建 JPG，不覆盖已有文件。" Style="{StaticResource MinimumCaptionText}" Margin="0,12,0,0" TextWrapping="Wrap" />
+                    <Expander Header="高级设置" Margin="0,16,0,0">
+                        <StackPanel Margin="0,8,0,0">
+                            <CheckBox Content="使用相机白平衡" IsChecked="{Binding UseCameraWhiteBalance}" />
+                            <CheckBox Content="保留拍摄信息" IsChecked="{Binding PreserveExif}" Margin="0,8,0,0" />
+                            <CheckBox Content="自动旋转照片" IsChecked="{Binding AutoRotate}" Margin="0,8,0,0" />
+                            <TextBlock Text="色彩空间" Style="{StaticResource Av2FieldLabel}" Margin="0,12,0,4" />
+                            <Border Style="{StaticResource CardSurface}" Padding="12,8"><TextBlock Text="sRGB" Style="{StaticResource SecondaryBodyText}" /></Border>
+                        </StackPanel>
+                    </Expander>
+                    <Border Style="{StaticResource SemanticInfoPanel}" Padding="12" Margin="0,16,0,0"><TextBlock Text="{Binding CapabilityText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" /></Border>
+                    <TextBlock Text="同名时自动重命名，不会覆盖已有照片。" Style="{StaticResource MinimumCaptionText}" Margin="0,12,0,0" TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
         </Grid>
@@ -97,7 +96,7 @@
                     <ProgressBar Width="180" Height="6" Value="{Binding Progress, Mode=OneWay}" Margin="0,8,0,0" HorizontalAlignment="Left" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Button Content="取消任务" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
+                    <Button Content="停止" Style="{StaticResource Av2SecondaryButton}" Command="{Binding CancelCommand}" Margin="0,0,8,0"
                             AutomationProperties.AutomationId="RawToJpegCancelTaskButton" />
                     <Button Content="开始转换" Style="{StaticResource Av2PrimaryButton}" Command="{Binding StartCommand}" IsDefault="True" />
                 </StackPanel>

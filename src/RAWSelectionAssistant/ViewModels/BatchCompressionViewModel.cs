@@ -143,12 +143,12 @@ public sealed class BatchCompressionViewModel : ObservableObject
             {
                 Progress = 100;
                 foreach (var item in Items) { item.State = BatchCompressionItemState.Completed; item.StatusText = "已安全生成 JPG"; }
-                StatusText = $"压缩完成 · TaskId {taskId:N}";
+                StatusText = $"已压缩 {Items.Count:N0} 张照片";
             }
             else if (terminal is not null)
             {
                 foreach (var item in Items) { item.State = BatchCompressionItemState.Failed; item.StatusText = "请在任务中心查看原因"; }
-                StatusText = $"{MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "压缩未完成，请打开任务中心查看原因。")} · TaskId {taskId:N}";
+                StatusText = MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "压缩未完成，请打开任务中心查看原因。");
             }
             RaiseCommands();
         }

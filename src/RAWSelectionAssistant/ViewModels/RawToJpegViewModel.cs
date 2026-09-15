@@ -51,8 +51,8 @@ public sealed class RawToJpegViewModel : ObservableObject
         _dialogs = dialogs;
         var capability = coordinator.GetCapability();
         CapabilityText = capability.IsAvailable
-            ? $"{capability.DecoderName} {capability.Version ?? ""}；已验证格式：{(capability.VerifiedExtensions.Count == 0 ? "尚未探测" : string.Join(", ", capability.VerifiedExtensions))}"
-            : "RAW 解码器当前不可用；不会生成伪造 JPG。";
+            ? $"可以转换{(capability.VerifiedExtensions.Count == 0 ? "常见 RAW 格式" : string.Join("、", capability.VerifiedExtensions.Select(value => value.TrimStart('.').ToUpperInvariant())))}。"
+            : "这台电脑暂时无法转换 RAW，请安装完整版本后重试。";
         AddFilesCommand = new RelayCommand(_ => AddFiles());
         ChooseDestinationCommand = new RelayCommand(_ => ChooseDestination());
         StartCommand = new AsyncRelayCommand(_ => StartAsync(), _ => CanStart);
@@ -102,7 +102,7 @@ public sealed class RawToJpegViewModel : ObservableObject
                 new RawToJpegOptions(JpegQuality, LongestEdge, UseCameraWhiteBalance, PreserveExif: PreserveExif, AutoRotate: AutoRotate));
             var taskId = await _coordinator.StartAsync(request, CancellationToken.None).ConfigureAwait(true);
             _activeTaskId = taskId;
-            StatusText = $"任务已提交：{taskId:N}";
+            StatusText = $"正在转换 {Items.Count:N0} 张照片…";
             RaiseCommands();
             await _coordinator.WaitForCompletionAsync(taskId, CancellationToken.None).ConfigureAwait(true);
             var terminal = await _coordinator.GetTaskStateAsync(taskId, CancellationToken.None).ConfigureAwait(true);
@@ -110,18 +110,18 @@ public sealed class RawToJpegViewModel : ObservableObject
             {
                 Progress = 100;
                 foreach (var item in Items) { item.State = RawToJpegItemState.Completed; item.Status = "已安全生成 JPG"; }
-                StatusText = $"转换完成 · TaskId {taskId:N}";
+                StatusText = $"已转换 {Items.Count:N0} 张照片";
             }
             else if (!_cancelRequested)
             {
                 foreach (var item in Items) { item.State = RawToJpegItemState.Failed; item.Status = "请在任务中心查看原因"; }
                 StatusText = terminal is null
                     ? "转换未完成：任务状态暂不可用，请打开任务中心查看原因。"
-                    : $"{MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "转换未完成，请打开任务中心查看原因。")} · TaskId {taskId:N}";
+                    : MediaTaskFailurePayload.UserSummary(terminal.LastErrorMessage, "转换未完成，请打开任务中心查看原因。");
             }
         }
         catch (OperationCanceledException) { StatusText = "已取消；源 RAW 保持不变。"; }
-        catch (Exception) { StatusText = "任务提交失败；请检查输出目录和解码器状态。"; }
+        catch (Exception) { StatusText = "无法开始转换。请检查输出位置，然后重试。"; }
         finally
         {
             _activeTaskId = null;
