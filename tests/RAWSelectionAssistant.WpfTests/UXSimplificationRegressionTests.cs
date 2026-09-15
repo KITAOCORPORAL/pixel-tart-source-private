@@ -75,6 +75,16 @@ public sealed class UXSimplificationRegressionTests
     }
 
     [TestMethod]
+    public void ErrorEvidenceUsesTheFailureStateWithDetailsCollapsed()
+    {
+        var acceptance = Text("src/RAWSelectionAssistant/MainWindow.AutomatedDpiAcceptance.cs");
+        var mainWindow = Text("src/RAWSelectionAssistant/MainWindow.xaml");
+        ContainsAll(acceptance, "case \"WorkbenchErrorDetailsCollapsed\":", "ApplyTaskCenterReviewState(state)");
+        ContainsAll(mainWindow, "TaskCenterReviewList", "查看详细信息");
+        ContainsNone(mainWindow, "TaskCenterReviewItem.DiagnosticText");
+    }
+
+    [TestMethod]
     public void AuxiliarySurfacesAreMutuallyExclusive()
     {
         var sources = string.Join('\n', new[]

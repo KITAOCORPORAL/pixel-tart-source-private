@@ -329,7 +329,7 @@ public partial class MainWindow
             case "WorkbenchTaskCenterClean":
             case "WorkbenchErrorDetailsCollapsed":
                 _viewModel.NavigateCommand.Execute("Workbench");
-                ApplyTaskCenterReviewState("WorkbenchTaskCenter5Tasks");
+                ApplyTaskCenterReviewState(state);
                 return true;
             case "CollageEmpty":
                 _viewModel.NavigateCommand.Execute("Collage");
