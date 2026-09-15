@@ -133,6 +133,13 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
         CollectionAssert.AreEqual(offsets.Order().ToArray(), offsets);
     }
 
+    [TestMethod]
+    public void RunnerPublishesTheValidatedBranchOutsideStrictModeFunctionScope()
+    {
+        var runner = Read("tools/AssetLibraryP2AutomatedAcceptance/Invoke-P2AssetLibraryAutomatedAcceptance.ps1");
+        ContainsAll(runner, "$script:branch = $branch", "branch = $branch", "$sourceHead = Assert-CleanCommit");
+    }
+
     private static void ContainsAll(string text, params string[] values)
     {
         foreach (var value in values) StringAssert.Contains(text, value);

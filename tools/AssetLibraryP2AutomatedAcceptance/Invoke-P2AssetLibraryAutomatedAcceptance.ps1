@@ -55,6 +55,7 @@ function Invoke-Git {
 function Assert-CleanCommit {
     $branch = ((Invoke-Git @('branch', '--show-current')) -join '').Trim()
     if ($branch -match '^(main|master|HEAD)$') { throw "Acceptance must run from a named development branch; actual '$branch'." }
+    $script:branch = $branch
     $status = ((Invoke-Git @('status', '--short')) -join [Environment]::NewLine).Trim()
     if (-not [string]::IsNullOrWhiteSpace($status)) { throw "Worktree changes are present:`n$status" }
     $head = ((Invoke-Git @('rev-parse', 'HEAD')) -join '').Trim()
