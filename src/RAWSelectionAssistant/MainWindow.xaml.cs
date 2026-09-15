@@ -1145,16 +1145,18 @@ public partial class MainWindow : Window
     {
         if (string.Equals(state, "WorkbenchTaskCenterEmpty", StringComparison.OrdinalIgnoreCase)) return;
         var count = state.Contains("20Tasks", StringComparison.OrdinalIgnoreCase) || state.Contains("Scrolled", StringComparison.OrdinalIgnoreCase) ? 20 : 5;
+        var showError = state.Contains("ErrorDetailsCollapsed", StringComparison.OrdinalIgnoreCase);
         TaskCenterRuntimeContent.Visibility = Visibility.Collapsed;
         TaskCenterReviewContent.Visibility = Visibility.Visible;
         TaskCenterReviewList.ItemsSource = Enumerable.Range(1, count).Select(index => new TaskCenterReviewItem(
             $"界面验收任务 {index:00}", (index % 4) switch { 0 => "来源：联机拍摄", 1 => "来源：文件复制", 2 => "来源：批量压缩", _ => "来源：归片工作区" },
-            index % 5 == 0 ? "等待确认" : "处理中", Math.Min(96, 12 + index * 4), $"更新 08-07 {14 + index / 6:00}:{index * 3 % 60:00}" )).ToArray();
+            showError && index == 1 ? "处理失败" : index % 5 == 0 ? "等待确认" : "处理中", Math.Min(96, 12 + index * 4), $"更新 08-07 {14 + index / 6:00}:{index * 3 % 60:00}",
+            showError && index == 1)).ToArray();
         if (state.Contains("Scrolled", StringComparison.OrdinalIgnoreCase))
             _ = Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () => TaskCenterReviewContent.ScrollToVerticalOffset(520));
     }
 
-    private sealed record TaskCenterReviewItem(string DisplayName, string Source, string StateLabel, double Progress, string UpdatedAt);
+    private sealed record TaskCenterReviewItem(string DisplayName, string Source, string StateLabel, double Progress, string UpdatedAt, bool IsFailure);
 
     private void CaptureUiReviewFrame(string outputPath)
     {

@@ -443,25 +443,20 @@
                                   Style="{StaticResource AssetLibraryP3ComboBox}" Width="105"
                                   AutomationProperties.AutomationId="{Binding LogicAutomationId}"
                                   AutomationProperties.Name="选择需要满足哪些条件" />
-                        <ToggleButton Content="停用" IsChecked="{Binding IsDisabled, Mode=TwoWay}"
-                                      Style="{StaticResource AssetLibraryP3Toggle}"
-                                      AutomationProperties.AutomationId="{Binding EnabledAutomationId}"
-                                      AutomationProperties.Name="暂时不使用这组条件" />
-                        <ToggleButton Content="否定" IsChecked="{Binding Negated, Mode=TwoWay}"
-                                      Style="{StaticResource AssetLibraryP3Toggle}"
-                                      AutomationProperties.AutomationId="{Binding NegatedAutomationId}"
-                                      AutomationProperties.Name="排除满足这些条件的照片" />
                         <Button Content="＋ 添加条件" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
                                 AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="添加条件" />
                         <Button Content="添加条件组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
                                 AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="添加一组条件" />
-                        <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动条件组" />
-                        <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动条件组" />
-                        <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
-                                AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除条件组" />
                     </WrapPanel>
+                    <Expander Header="更多" Margin="0,5,0,0" Visibility="{Binding IsNested, Converter={StaticResource P3BooleanToVisibilityConverter}}">
+                        <WrapPanel Margin="0,5,0,0">
+                            <ToggleButton Content="暂不使用" IsChecked="{Binding IsDisabled, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding EnabledAutomationId}" AutomationProperties.Name="暂时不使用这组条件" />
+                            <ToggleButton Content="排除结果" IsChecked="{Binding Negated, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding NegatedAutomationId}" AutomationProperties.Name="排除满足这些条件的照片" />
+                            <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动条件组" />
+                            <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动条件组" />
+                            <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}" AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除条件组" />
+                        </WrapPanel>
+                    </Expander>
                 </StackPanel>
                 <StackPanel Visibility="{Binding IsRule, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                     <WrapPanel>
@@ -561,19 +556,18 @@
                                  Style="{StaticResource AssetLibraryP3TextBox}"
                                  Visibility="{Binding IsTextEditor, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                                  AutomationProperties.AutomationId="{Binding ValueAutomationId}" AutomationProperties.Name="输入文字筛选值" />
-                        <ToggleButton Content="停用" IsChecked="{Binding IsDisabled, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
-                                      AutomationProperties.AutomationId="{Binding EnabledAutomationId}" AutomationProperties.Name="停用或启用此规则" />
-                        <ToggleButton Content="锁定" IsChecked="{Binding Locked, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
-                                      AutomationProperties.AutomationId="{Binding LockedAutomationId}" AutomationProperties.Name="切换筛选锁定状态" />
-                        <ToggleButton Content="否定" IsChecked="{Binding Negated, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}"
-                                      AutomationProperties.AutomationId="{Binding NegatedAutomationId}" AutomationProperties.Name="切换规则否定状态" />
-                        <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动规则" />
-                        <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动规则" />
                         <Button Content="移除" Command="{Binding RemoveCommand}" Style="{StaticResource AssetLibraryP3DangerButton}"
                                 AutomationProperties.AutomationId="{Binding RemoveAutomationId}" AutomationProperties.Name="移除规则" />
                     </WrapPanel>
+                    <Expander Header="更多" Margin="0,5,0,0">
+                        <WrapPanel Margin="0,5,0,0">
+                            <ToggleButton Content="暂不使用" IsChecked="{Binding IsDisabled, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding EnabledAutomationId}" AutomationProperties.Name="暂时不使用此条件" />
+                            <ToggleButton Content="切换范围时保留" IsChecked="{Binding Locked, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding LockedAutomationId}" AutomationProperties.Name="切换照片范围时保留此条件" />
+                            <ToggleButton Content="排除结果" IsChecked="{Binding Negated, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding NegatedAutomationId}" AutomationProperties.Name="排除满足此条件的照片" />
+                            <Button Content="上移" Command="{Binding MoveUpCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="{Binding MoveUpAutomationId}" AutomationProperties.Name="向上移动条件" />
+                            <Button Content="下移" Command="{Binding MoveDownCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="{Binding MoveDownAutomationId}" AutomationProperties.Name="向下移动条件" />
+                        </WrapPanel>
+                    </Expander>
                     <TextBlock Text="{Binding ValidationMessage}" Foreground="{DynamicResource Brush.Status.Error}" Margin="0,4,0,0" TextWrapping="Wrap"
                                AutomationProperties.AutomationId="{Binding ValidationAutomationId}" />
                 </StackPanel>

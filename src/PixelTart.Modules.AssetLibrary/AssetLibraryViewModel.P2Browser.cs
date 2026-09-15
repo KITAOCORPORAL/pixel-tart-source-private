@@ -398,13 +398,13 @@ public sealed partial class AssetLibraryViewModel
     public async Task ApplyBookingFilterAsync(Guid bookingId)
     {
         var links = await _repository.ListBookingAssetLinksAsync(bookingId: bookingId, cancellationToken: _lifetimeCancellation.Token);
-        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), $"拍摄素材 · {bookingId:N}"[..23]);
+        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), "这次拍摄的照片");
     }
 
     public async Task ApplyProjectFilterAsync(Guid projectId)
     {
         var links = await _repository.ListProjectAssetLinksAsync(projectId: projectId, cancellationToken: _lifetimeCancellation.Token);
-        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), $"项目素材 · {projectId:N}"[..23]);
+        await ApplyRelationshipFilterAsync(links.Select(link => link.AssetId).ToArray(), "这个项目的照片");
     }
 
     private async Task ApplyRelationshipFilterAsync(IReadOnlyList<Guid> assetIds, string description)
@@ -534,7 +534,7 @@ public sealed partial class AssetLibraryViewModel
     public async Task AddAssetIdsToInspirationTrayAsync(IReadOnlyList<Guid> assetIds)
     {
         var references = ResolveStableReferences(assetIds);
-        if (references.Length == 0) { Status = "所选素材缺少稳定 SHA-256，暂不能加入灵感托盘。"; return; }
+        if (references.Length == 0) { Status = "暂时无法加入灵感托盘；请等待照片信息读取完成后重试。"; return; }
         var result = await _inspirationTray.AddRangeAsync(references, P2QueryDescription, _lifetimeCancellation.Token);
         await RefreshInspirationTrayAsync();
         IsInspirationTrayOpen = true;
@@ -546,7 +546,7 @@ public sealed partial class AssetLibraryViewModel
         var collection = InspirationCollections.FirstOrDefault(item => item.CollectionId == collectionId);
         if (collection is null) { Status = "目标灵感集不存在或已归档。"; return; }
         var references = ResolveStableReferences(assetIds);
-        if (references.Length == 0) { Status = "所选素材缺少稳定 SHA-256，暂不能加入灵感集。"; return; }
+        if (references.Length == 0) { Status = "暂时无法加入灵感集；请等待照片信息读取完成后重试。"; return; }
         var service = (SqliteInspirationTrayService)_inspirationTray;
         var added = await service.AddRangeAsync(references, "gallery-drag", _lifetimeCancellation.Token);
         var entries = await service.ListAsync(_lifetimeCancellation.Token);
@@ -633,6 +633,18 @@ public sealed partial class AssetLibraryViewModel
         if (state == "AssetLibraryMasonry") await SwitchViewAsync(nameof(AssetLibraryViewMode.Masonry));
         else await SwitchViewAsync(nameof(AssetLibraryViewMode.Grid));
         if (state == "AssetFilter") P3QueryPanelOpen = true;
+        if (state == "AssetSmartFolder")
+        {
+            OpenP3SmartFolderEditor(null);
+            P3SmartFolderName = "四星精选";
+            P3SmartFolderRoot.AddRuleCommand.Execute(null);
+            if (P3SmartFolderRoot.Children.FirstOrDefault() is { } rule)
+            {
+                rule.Field = AssetQueryField.Rating;
+                rule.Operator = AssetQueryOperator.GreaterThanOrEqual;
+                rule.ValueText = "4";
+            }
+        }
 
         if (state is "AssetInspectorProject" or "AssetProjectBookingPicker" or "CalendarBookingAssets")
         {
@@ -686,7 +698,7 @@ public sealed partial class AssetLibraryViewModel
     {
         var assets = ContextIds(card).Select(id => SelectedAssets.FirstOrDefault(asset => asset.AssetId == id) ?? AssetCards.FirstOrDefault(item => item.Asset.AssetId == id)?.Asset).Where(asset => asset is not null).Cast<AssetItem>().ToArray();
         var refs = assets.Where(asset => !string.IsNullOrWhiteSpace(asset.ContentHash) && asset.ContentHash!.Length == 64).Select(asset => new AssetLibraryStableReference(_libraryIdForTray, asset.AssetId, asset.ContentHash!)).ToArray();
-        if (refs.Length == 0) { Status = "所选素材缺少 SHA-256，暂不能加入灵感托盘。"; return; }
+        if (refs.Length == 0) { Status = "暂时无法加入灵感托盘；请等待照片信息读取完成后重试。"; return; }
         var result = await _inspirationTray.AddRangeAsync(refs, P2QueryDescription);
         await RefreshInspirationTrayAsync();
         Status = $"灵感托盘：新增 {result.AddedCount} 项，已存在 {result.ExistingCount} 项。";
@@ -728,10 +740,10 @@ public sealed partial class AssetLibraryViewModel
     {
         var sameLibrary = entry.Reference.LibraryId == _libraryIdForTray;
         var asset = sameLibrary ? await _repository.GetAssetAsync(entry.Reference.AssetId, _lifetimeCancellation.Token) : null;
-        if (asset is null) return new(entry, null, "离线素材库", true);
+        if (asset is null) return new(entry, null, "离线素材库", true, "照片暂时不可用");
         var source = GetDisplaySourcePath(asset);
         var isOffline = !File.Exists(source);
-        return new(entry, source, isOffline ? ".ptlibrary 缓存" : "本素材库", isOffline);
+        return new(entry, source, isOffline ? "已缓存预览" : "本素材库", isOffline, asset.DisplayName);
     }
 
     private async Task PrepareOfflineCachedPreviewAsync()
@@ -747,7 +759,7 @@ public sealed partial class AssetLibraryViewModel
             var primed = await provider.GetAsync(new(source, 112, AssetThumbnailState.Available, asset.AssetId, asset.ContentHash), _lifetimeCancellation.Token);
             if (!primed.IsAvailable) continue;
             var unavailableSource = Path.Combine(Path.GetDirectoryName(source) ?? string.Empty, "offline-source", Path.GetFileName(source));
-            offlineCards.Add(new(card.Entry, unavailableSource, ".ptlibrary 缓存", true));
+            offlineCards.Add(new(card.Entry, unavailableSource, "已缓存预览", true, card.AssetLabel));
         }
         if (offlineCards.Count > 0) InspirationTrayCards.ReplaceAll(offlineCards);
     }
@@ -1216,7 +1228,7 @@ public sealed partial class AssetLibraryViewModel
                 foreach (var link in projectLinks)
                 {
                     var project = projects.FirstOrDefault(item => item.Id == link.ProjectId);
-                    InspectorProjectLinks.Add(new(link.ProjectId, project?.Name ?? $"项目 {link.ProjectId:N}"[..15], link.Role));
+                    InspectorProjectLinks.Add(new(link.ProjectId, project?.Name ?? "未命名项目", link.Role));
                 }
                 foreach (var link in bookingLinks)
                 {
@@ -1224,7 +1236,7 @@ public sealed partial class AssetLibraryViewModel
                     var projectName = booking?.ProjectId is Guid projectId ? projects.FirstOrDefault(project => project.Id == projectId)?.Name : null;
                     InspectorBookingLinks.Add(new(
                         link.BookingId,
-                        booking?.Title ?? $"拍摄 {link.BookingId:N}"[..15],
+                        booking?.Title ?? "未命名拍摄",
                         booking is null ? "未找到拍摄记录" : $"{booking.StartAtUtc.ToLocalTime():yyyy-MM-dd} · 项目：{projectName ?? "未关联"} · 客户：{ValueOrMissing(booking.ClientDisplayName)} · 地点：{booking.Location ?? "未填写"}",
                         booking?.ProjectId,
                         booking?.StartAtUtc));
@@ -1473,7 +1485,7 @@ public sealed partial class AssetLibraryViewModel
     private async Task ExportContextFilesAsync(AssetVisualMatchView? card, bool preferManagedCopy)
     {
         if (card is null) return;
-        var dialog = new OpenFolderDialog { Title = preferManagedCopy ? "导出托管副本" : "导出原文件副本", Multiselect = false };
+        var dialog = new OpenFolderDialog { Title = preferManagedCopy ? "导出素材库中的副本" : "导出原照片副本", Multiselect = false };
         if (dialog.ShowDialog() != true) return;
         try
         {
@@ -1671,12 +1683,12 @@ public sealed partial class AssetLibraryViewModel
     }
 }
 
-public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string? ThumbnailPath, string SourceBadge, bool ForceOffline = false)
+public sealed record InspirationTrayCardView(InspirationTrayEntry Entry, string? ThumbnailPath, string SourceBadge, bool ForceOffline = false, string? DisplayName = null)
 {
     public Guid TrayEntryId => Entry.TrayEntryId;
     public Guid AssetId => Entry.Reference.AssetId;
     public string ContentHash => Entry.Reference.ContentHash;
-    public string AssetLabel => Entry.Reference.AssetId.ToString("N")[..8];
+    public string AssetLabel => string.IsNullOrWhiteSpace(DisplayName) ? "照片" : DisplayName;
     public string ResolutionLabel => Entry.ResolutionState switch
     {
         InspirationTrayResolutionState.Resolved => SourceBadge,

@@ -288,7 +288,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
                 if (_persistSettings is not null) await _persistSettings();
             }
             _libraryButton.Content = $"当前库 · {descriptor.DisplayName}";
-            _state.Text = $"{descriptor.ContentMode} · {descriptor.ContainerPath}";
+            _state.Text = $"{ContentModeLabel(descriptor.ContentMode)} · {descriptor.ContainerPath}";
         }
         finally
         {
@@ -439,7 +439,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     }
 
     private static bool ConfirmMerge(string sourceName, AssetLibraryMergePreview preview) => MessageBox.Show(
-        $"来源：{sourceName}\n新增素材：{preview.NewAssets}\n按内容复用：{preview.DuplicateAssets}\nID 冲突：{preview.IdConflicts}\n文件夹：{preview.NewFolders}\n标签：{preview.NewTags}\n智能文件夹：{preview.NewSmartFolders}\n预计复制：{preview.EstimatedCopyBytes / 1024d / 1024d:F1} MB\n\n确认后以单事务合并。",
+        $"来源：{sourceName}\n新增照片：{preview.NewAssets}\n跳过重复照片：{preview.DuplicateAssets}\n需要另存的同名记录：{preview.IdConflicts}\n文件夹：{preview.NewFolders}\n标签：{preview.NewTags}\n智能文件夹：{preview.NewSmartFolders}\n预计复制：{preview.EstimatedCopyBytes / 1024d / 1024d:F1} MB\n\n合并失败时不会改变当前素材库。",
         "合并预览", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK;
 
     private void LocateCurrentLibrary()
@@ -451,9 +451,14 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     private void ShowCurrentInfo()
     {
-        if (_descriptor is null) { MessageBox.Show("当前使用本机旧数据库。可从菜单新建或打开 .ptlibrary。", "当前库", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-        MessageBox.Show($"{_descriptor.DisplayName}\n\n路径：{_descriptor.ContainerPath}\n库 ID：{_descriptor.LibraryId}\n内容模式：{_descriptor.ContentMode}", "当前库信息", MessageBoxButton.OK, MessageBoxImage.Information);
+        if (_descriptor is null) { MessageBox.Show("当前照片保存在本机素材库中。可从菜单新建或打开其他素材库。", "当前素材库", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+        var location = ContentModeLabel(_descriptor.ContentMode);
+        MessageBox.Show($"{_descriptor.DisplayName}\n\n位置：{_descriptor.ContainerPath}\n照片：{location}", "当前素材库", MessageBoxButton.OK, MessageBoxImage.Information);
     }
+
+    private static string ContentModeLabel(string mode) => string.Equals(mode, "Managed", StringComparison.OrdinalIgnoreCase)
+        ? "已复制到素材库"
+        : "保留在原位置";
 
     public ValueTask DisposeAsync()
     {

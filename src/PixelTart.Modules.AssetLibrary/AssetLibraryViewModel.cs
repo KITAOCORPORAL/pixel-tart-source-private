@@ -285,8 +285,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public bool HasAssetCards => AssetCards.Count > 0;
     public bool IsEmptyStateVisible => !IsLoading && !HasLoadError && !HasAssetCards;
     public bool HasActiveQuery => P3QueryChips.Count > 0 || SelectedFolder is not null || SelectedTag is not null || SelectedSmartFolder is not null || IsTemporaryVisualMode;
-    public string EmptyStateTitle => HasActiveQuery ? "没有符合当前条件的素材" : "素材库还是空的";
-    public string EmptyStateDescription => HasActiveQuery ? "清除搜索或筛选后重试，现有素材和文件不会被修改。" : "导入文件引用以开始整理；默认不会移动、改名或删除源文件。";
+    public string EmptyStateTitle => HasActiveQuery ? "没有找到符合条件的照片" : "这里还没有照片";
+    public string EmptyStateDescription => HasActiveQuery ? "尝试减少筛选条件。现有照片不会被修改。" : "拖入照片，或点击“导入照片”开始。源照片不会被移动、改名或删除。";
     public double OrganizationPaneWidth => _workspaceSettings.OrganizationPaneWidth;
     public double InspectorPaneWidth => _workspaceSettings.InspectorPaneWidth;
     public bool IsOrganizationPaneCollapsed
@@ -450,7 +450,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public string AddedFromFilterText { get => _addedFromFilterText; set => SetProperty(ref _addedFromFilterText, value); }
     public string AddedToFilterText { get => _addedToFilterText; set => SetProperty(ref _addedToFilterText, value); }
     public bool IsVisualQueryScopeSupported => SelectedSmartFolder is null && string.IsNullOrWhiteSpace(FileNameRegexFilterText);
-    public string VisualQueryScopeStatus => IsVisualQueryScopeSupported ? "视觉查询会叠加当前搜索、文件夹、标签与评分/日期范围。" : "已保存 Smart Folder 或正则范围暂不支持视觉查询；请先清除该范围。";
+    public string VisualQueryScopeStatus => IsVisualQueryScopeSupported ? "视觉查找会在当前搜索、文件夹、标签与评分范围内进行。" : "当前照片范围不支持视觉查找；请先清除已保存条件。";
     public string FileNameRegexFilterText { get; set; } = string.Empty;
     public string TargetColor { get => _targetColor; set => SetProperty(ref _targetColor, value); }
     public double ColorTolerance { get => _colorTolerance; set => SetProperty(ref _colorTolerance, Math.Clamp(value, 1, 100)); }

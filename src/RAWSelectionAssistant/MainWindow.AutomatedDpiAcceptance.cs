@@ -58,7 +58,7 @@ public partial class MainWindow
 
         var demoDirectory = Path.Combine(AppDataPaths.Root, "DemoImages");
         var demoImages = Directory.Exists(demoDirectory)
-            ? Directory.GetFiles(demoDirectory, "DPI_TEST_*.png").OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
+            ? Directory.GetFiles(demoDirectory).Where(path => new[] { ".jpg", ".jpeg", ".png", ".tif", ".tiff" }.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase)).OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
         if (state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
@@ -268,6 +268,22 @@ public partial class MainWindow
                     Directory.CreateDirectory(_viewModel.RawToJpegPage.DestinationDirectory);
                 }
                 return true;
+            case "RawToJpegAdvanced":
+                _viewModel.NavigateCommand.Execute("RawToJpeg");
+                if (_viewModel.RawToJpegPage is not null)
+                {
+                    _viewModel.RawToJpegPage.DestinationDirectory = Path.Combine(AppDataPaths.Root, "RawOutput");
+                    Directory.CreateDirectory(_viewModel.RawToJpegPage.DestinationDirectory);
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        var advanced = FindVisualChildren<Expander>(this).FirstOrDefault(item => string.Equals(item.Header?.ToString(), "高级设置", StringComparison.Ordinal));
+                        if (advanced is not null) advanced.IsExpanded = true;
+                    }, System.Windows.Threading.DispatcherPriority.Loaded);
+                }
+                return true;
+            case "ToolboxFullPage":
+                _viewModel.NavigateCommand.Execute("Toolbox");
+                return true;
             case "OnlineSelectionHome":
                 _viewModel.NavigateCommand.Execute("OnlineSelection");
                 await _viewModel.OnlineSelectionPage.RefreshAsync().ConfigureAwait(true);
@@ -312,6 +328,11 @@ public partial class MainWindow
                     if (_viewModel.OrganizePhotosPage.PreviewPlanCommand.CanExecute(null))
                         _viewModel.OrganizePhotosPage.PreviewPlanCommand.Execute(null);
                 }
+                return true;
+            case "WorkbenchTaskCenterClean":
+            case "WorkbenchErrorDetailsCollapsed":
+                _viewModel.NavigateCommand.Execute("Workbench");
+                ApplyTaskCenterReviewState("WorkbenchTaskCenter5Tasks");
                 return true;
             case "CollageEmpty":
                 _viewModel.NavigateCommand.Execute("Collage");

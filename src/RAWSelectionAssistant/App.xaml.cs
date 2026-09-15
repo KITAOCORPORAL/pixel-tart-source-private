@@ -622,6 +622,17 @@ public partial class App : Application
 #if UI_REVIEW_BUILD
     private static async Task ConfigureRc12ProductHarnessAsync(AppSettings settings, SettingsService settingsService)
     {
+        var demoSource = Environment.GetEnvironmentVariable("PIXEL_TART_ASSET_LIBRARY_DEMO_DIR");
+        var harnessDemoImages = Path.Combine(AppDataPaths.Root, "DemoImages");
+        Directory.CreateDirectory(harnessDemoImages);
+        if (!string.IsNullOrWhiteSpace(demoSource) && Directory.Exists(demoSource))
+        {
+            foreach (var source in Directory.EnumerateFiles(demoSource))
+            {
+                var destination = Path.Combine(harnessDemoImages, Path.GetFileName(source));
+                File.Copy(source, destination, overwrite: true);
+            }
+        }
         var librariesRoot = Path.Combine(AppDataPaths.Root, "ProductHarnessLibraries");
         Directory.CreateDirectory(librariesRoot);
         var containers = new AssetLibraryContainerService();

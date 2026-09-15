@@ -57,6 +57,7 @@ public sealed class P3QueryNodeView : ObservableObject
     public AssetQueryNodeKind Kind { get; }
     public bool IsGroup => Kind == AssetQueryNodeKind.Group;
     public bool IsRule => Kind == AssetQueryNodeKind.Rule;
+    public bool IsNested => _parent is not null;
     public ObservableCollection<P3QueryNodeView> Children { get; } = [];
     public ObservableCollection<P3QueryReferenceValueView> ReferenceValues { get; } = [];
 
