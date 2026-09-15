@@ -52,3 +52,21 @@ Complete paths, hashes, internal task IDs, decoder/backend versions, raw metadat
 `P1`, `P2`, `P3`, `QueryOption`, `TaskId`, `LibraryId`, `AssetId`, `BookingId`, `ProjectId`, `LibRaw`, `SQLite`, `SHA-256`, `ContentHash`, raw `True` and raw `False`.
 
 Internal source symbols, bindings, AutomationIds, logs, tests and explicit developer diagnostics may retain technical names. User-facing Automation Name and HelpText may not.
+
+## Smart Folder language
+
+- Default sentence: `满足： [全部满足 ▼]`.
+- A condition is a single human-readable row: field, relationship, value.
+- Use `＋ 添加条件`; introduce `添加条件组` only when the user asks for another logical group.
+- Movement, exclusion, temporary disable and range-lock controls stay under `更多`.
+- Result feedback reads `找到 N 张照片`; do not expose evaluation time, tree terminology or internal document names.
+
+## Error language template
+
+Every normal error answers three questions, in this order:
+
+1. What happened: `无法读取 3 张照片`.
+2. What is affected: `这些照片可能已被移动，或外置硬盘未连接。`
+3. What to do next: `重新连接硬盘后点击“重试”。`
+
+Stack traces, error codes and internal IDs belong in the collapsed `技术信息` section of `查看详细信息`.

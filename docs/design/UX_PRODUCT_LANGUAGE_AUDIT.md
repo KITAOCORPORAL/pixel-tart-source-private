@@ -44,3 +44,15 @@ Scope: RC12 user-visible XAML, primary ViewModel status text, dialogs, menus, to
 - Confirmed dynamic primary-text leaks: 3.
 - Primary workflows using manifest/query/task-ID language: Organize, RAW failure, Task Center and Smart Folder assistive naming.
 - Target after this pass: 0 leaks in normal product UI, with technical values available only from **查看详细信息**.
+
+## RC12 simplification result
+
+- Static visible-XAML internal-term leaks: **0**.
+- Dynamic primary status/error leaks in audited workflow ViewModels: **0**.
+- Task IDs: removed from task cards and retained only in copied diagnostics inside the detail surface.
+- RAW decoder/library names: not shown in the normal conversion surface.
+- Smart Folder: photographer-facing controls use “满足”“添加条件”“添加条件组” and live photo count; internal query symbols remain binding/automation implementation only.
+- Gallery: unrated photos show no `★ 0`; similarity cards show one understandable percentage.
+- Inspector: format, size, storage location and missing-file state are translated; normal files do not show a false missing state.
+- Portable library dialogs: internal IDs, content modes and transaction wording are no longer shown.
+- Enforcement: `ProductLanguageLeakTests`, `UXSimplificationRegressionTests`, and `FirstTimePhotographerUXTests` protect the boundary.
