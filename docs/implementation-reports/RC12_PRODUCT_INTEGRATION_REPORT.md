@@ -28,13 +28,20 @@ RC12 began at RC11 `15dbe966`. `RC12_START_TRUTH_AUDIT.md` classifies every requ
 - P2 automated acceptance: PASS. The sealed current-HEAD run completed all ten scenarios plus restart, schema-v7 database audit, process cleanup and source-safety checks; `ValidateExistingRun` then passed without mutating the sealed tree.
 - Current WPF process isolation: PASS, 83 fixtures / 1162 tests / 1162 passed / 0 failed / 0 skipped. This includes the sealed P2 validation probe and opt-in scale-performance fixture.
 
-## Installer — AUTHORIZED / BUILD PENDING
+## Final RC12 installer — BUILT
 
-All P0 product gates are green. The earlier file at the final path remains unaccepted until it is overwritten by the final build from the clean report checkpoint:
+All P0 product gates were green before packaging. The earlier file at the final path was overwritten by a fresh self-contained win-x64 publish and Inno Setup 7 build from clean source HEAD `3639f7e03f47522ef84391064ba88d140c5e8f0b`:
 
 `artifacts/releases/2.3.0/installer/像素蛋挞_Setup_2.3.0_RC12_x64.exe`
 
-Final size, SHA-256 and build time will be recorded immediately after packaging.
+- File size: 51,209,065 bytes
+- SHA-256: `4FDD855257A4F854CF0C347B40556E3A8BF832ACAC6FA810D14BF34D2FB51D97` (independently calculated twice; hashes match)
+- Build window: 2026-09-15 11:36:19–11:37:09 +08:00
+- Publish + packaging duration: 49.867 seconds
+- Published files: 284
+- Published product/file version: 2.3.0 / 2.3.0.0
+- Authenticode: `NotSigned` (explicitly reported; no signing claim is made)
+- Git: installer and publish output are untracked release artifacts and were not committed
 
 ## Current evidence artifacts
 
@@ -52,4 +59,4 @@ Final size, SHA-256 and build time will be recorded immediately after packaging.
 
 ## Gate conclusion
 
-Completion Pass II has no remaining P0 product-integration blocker. Project/Booking/Client, both Calendar directions, Inspiration Project relation, Recent Libraries, Context Menu, EXIF, current visual evidence, sealed P2 acceptance and 10K/50K/100K performance are all backed by current product evidence. The only remaining action is final RC12 packaging and recording its immutable artifact metadata; no RC13 work is authorized.
+Completion Pass II has no remaining P0 product-integration blocker. Project/Booking/Client, both Calendar directions, Inspiration Project relation, Recent Libraries, Context Menu, EXIF, current visual evidence, sealed P2 acceptance and 10K/50K/100K performance are all backed by current product evidence. Final RC12 packaging is complete and its immutable artifact metadata is recorded above. The release now waits for the user's real Windows install verification; no RC13 work is authorized.
