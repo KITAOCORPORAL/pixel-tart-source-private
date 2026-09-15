@@ -19,7 +19,7 @@ public sealed class ProductToolboxWpfTests
         StringAssert.Contains(source, "AllowDrop=\"True\"");
         StringAssert.Contains(source, "Width=\"320\"");
         StringAssert.Contains(source, "Av2PrimaryButton");
-        StringAssert.Contains(source, "冲突策略：自动编号");
+        StringAssert.Contains(source, "同名文件：自动重命名");
     }
 
     [TestMethod]
