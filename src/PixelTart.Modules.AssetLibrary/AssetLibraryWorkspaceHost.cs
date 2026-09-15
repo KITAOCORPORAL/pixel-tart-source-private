@@ -288,7 +288,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
                 if (_persistSettings is not null) await _persistSettings();
             }
             _libraryButton.Content = $"当前库 · {descriptor.DisplayName}";
-            _state.Text = $"{ContentModeLabel(descriptor.ContentMode)} · {descriptor.ContainerPath}";
+            _state.Text = $"照片{ContentModeLabel(descriptor.ContentMode)}";
         }
         finally
         {

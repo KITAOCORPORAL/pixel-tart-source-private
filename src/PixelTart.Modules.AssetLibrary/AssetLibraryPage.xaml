@@ -275,6 +275,16 @@
         </Border>
 
         <Grid Grid.Row="2" AutomationProperties.AutomationId="AssetLibraryThreePaneWorkspace">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding P3SmartFolderOpen}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="AssetOrganizationColumn"
                                   Width="{Binding OrganizationPaneColumnWidth}"
