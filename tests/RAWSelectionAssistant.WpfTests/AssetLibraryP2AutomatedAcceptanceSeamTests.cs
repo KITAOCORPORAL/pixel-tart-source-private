@@ -112,7 +112,7 @@ public sealed class AssetLibraryP2AutomatedAcceptanceSeamTests
     public void DriverUsesPublicWpfAndCommandSeamsNotDesktopOrReflection()
     {
         var driver = Read("src/PixelTart.Modules.AssetLibrary/AssetLibraryP2AutomatedAcceptanceDriver.cs");
-        ContainsAll(driver, "_assetGrid.SelectedItems.Add", "SwitchViewCommand.Execute", "SortBrowserCommand.Execute",
+        ContainsAll(driver, "ReplaceSelection(_assetGrid.Items.Cast<object>().Take(count).ToArray())", "SwitchViewCommand.Execute", "SortBrowserCommand.Execute",
             "PreviewDropAsync", "ExecuteDropAsync", "P2UndoCommand.Execute", "P2RedoCommand.Execute",
             "SwitchViewCommand.ExecutionTask", "DispatcherPriority.Loaded",
             "RaiseKeyboardRouteAsync(_searchBox, Key.Enter)",

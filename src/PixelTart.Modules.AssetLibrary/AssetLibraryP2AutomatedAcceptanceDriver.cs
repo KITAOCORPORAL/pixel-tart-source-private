@@ -339,8 +339,7 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
         EnsureNotDisposed();
         if (count <= 0 || count > _assetGrid.Items.Count)
             throw new InvalidOperationException($"Cannot select {count} items from {_assetGrid.Items.Count} realized query items.");
-        _assetGrid.SelectedItems.Clear();
-        for (var index = 0; index < count; index++) _assetGrid.SelectedItems.Add(_assetGrid.Items[index]);
+        ((AssetLibrarySelectionListBox)_assetGrid).ReplaceSelection(_assetGrid.Items.Cast<object>().Take(count).ToArray());
         _assetGrid.ScrollIntoView(_assetGrid.Items[count - 1]);
         await DrainDispatcherAsync();
         if (_viewModel.SelectionCount != count)
