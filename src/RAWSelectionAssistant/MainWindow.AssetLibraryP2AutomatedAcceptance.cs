@@ -176,7 +176,7 @@ public partial class MainWindow
             var timer = Stopwatch.StartNew();
             await driver.SwitchViewAsync(mode);
             timer.Stop();
-            if (timer.Elapsed.TotalMilliseconds > 250) throw new InvalidOperationException($"View switch '{mode}' exceeded 250 ms.");
+            if (timer.Elapsed.TotalMilliseconds > 250) throw new InvalidOperationException($"View switch '{mode}' took {timer.Elapsed.TotalMilliseconds:F1} ms; expected no more than 250 ms.");
             rows.Add(new { mode = mode.ToString(), elapsed_ms = timer.Elapsed.TotalMilliseconds, snapshot = driver.CaptureBrowserSnapshot() });
         }
         var sortTimer = Stopwatch.StartNew();

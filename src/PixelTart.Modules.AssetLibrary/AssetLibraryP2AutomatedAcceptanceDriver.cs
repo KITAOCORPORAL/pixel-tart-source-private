@@ -316,7 +316,8 @@ public sealed class AssetLibraryP2AutomatedAcceptanceDriver : IDisposable
     {
         EnsureNotDisposed();
         _viewModel.SwitchViewCommand.Execute(mode.ToString());
-        await WaitUntilAsync(() => _viewModel.SwitchViewCommand.CanExecute(mode.ToString()), $"the public view command '{mode}'");
+        await _viewModel.SwitchViewCommand.ExecutionTask;
+        await _page.Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.Loaded);
         if (_viewModel.ViewMode != mode)
             throw new InvalidOperationException($"The public view command did not switch to '{mode}'.");
     }
