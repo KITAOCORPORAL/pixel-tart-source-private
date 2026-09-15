@@ -18,13 +18,13 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = XDocument.Load(PagePath);
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(54, buttons, "Update the RC12 button inventory when a product action changes.");
+        Assert.HasCount(53, buttons, "Update the RC12 button inventory when a product action changes.");
         Assert.IsTrue(buttons.All(button =>
             Attribute(button, "Style") is "{DynamicResource PixelTart.Button.Ghost}"
                 or "{DynamicResource PixelTart.Button.Primary}"
                 or "{DynamicResource PixelTart.Button.Secondary}"));
-        Assert.AreEqual(40, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
-        Assert.AreEqual(12, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
+        Assert.AreEqual(36, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
+        Assert.AreEqual(15, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
         Assert.AreEqual(2, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Primary}"));
         Assert.IsFalse(buttons.Any(button => Attribute(button, "Style").Contains("AssetLibrary", StringComparison.Ordinal)),
             "The RC12 page must not regress to the removed page-local button-role system.");

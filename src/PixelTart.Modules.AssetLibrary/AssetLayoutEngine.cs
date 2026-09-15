@@ -8,7 +8,7 @@ public sealed record AssetLayoutResult(IReadOnlyList<Rect> Items, Size Extent);
 public static class AssetLayoutEngine
 {
     private const double Gap = 8d;
-    private const double CaptionHeight = 44d;
+    private const double CaptionHeight = 40d;
 
     public static AssetLayoutResult Arrange(
         AssetLibraryViewMode mode,
@@ -23,24 +23,29 @@ public static class AssetLayoutEngine
             AssetLibraryViewMode.Masonry => ArrangeMasonry(aspectRatios, width, target),
             AssetLibraryViewMode.Justified => ArrangeJustified(aspectRatios, width, target),
             AssetLibraryViewMode.List => ArrangeList(aspectRatios.Count, width),
-            _ => ArrangeGrid(aspectRatios.Count, width, target)
+            _ => ArrangeGrid(aspectRatios, width, target)
         };
     }
 
-    private static AssetLayoutResult ArrangeGrid(int count, double width, double target)
+    private static AssetLayoutResult ArrangeGrid(IReadOnlyList<double> ratios, double width, double target)
     {
         var columns = Math.Max(1, (int)Math.Floor((width + Gap) / (target + Gap)));
         var itemWidth = Math.Max(96d, (width - Gap * (columns - 1)) / columns);
-        var itemHeight = itemWidth + CaptionHeight;
-        var items = new Rect[count];
-        for (var index = 0; index < count; index++)
+        var items = new Rect[ratios.Count];
+        var y = 0d;
+        for (var rowStart = 0; rowStart < ratios.Count; rowStart += columns)
         {
-            var row = index / columns;
-            var column = index % columns;
-            items[index] = new(column * (itemWidth + Gap), row * (itemHeight + Gap), itemWidth, itemHeight);
+            var rowEnd = Math.Min(ratios.Count, rowStart + columns);
+            var rowHeight = 0d;
+            for (var index = rowStart; index < rowEnd; index++)
+            {
+                var itemHeight = itemWidth / NormalizeRatio(ratios[index]) + CaptionHeight;
+                items[index] = new((index - rowStart) * (itemWidth + Gap), y, itemWidth, itemHeight);
+                rowHeight = Math.Max(rowHeight, itemHeight);
+            }
+            y += rowHeight + Gap;
         }
-        var rows = count == 0 ? 0 : (int)Math.Ceiling(count / (double)columns);
-        return new(items, new(width, rows == 0 ? 0d : rows * itemHeight + (rows - 1) * Gap));
+        return new(items, new(width, Math.Max(0d, y - Gap)));
     }
 
     private static AssetLayoutResult ArrangeMasonry(IReadOnlyList<double> ratios, double width, double target)

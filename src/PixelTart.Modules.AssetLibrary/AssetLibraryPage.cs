@@ -35,6 +35,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _marqueeControlSelection;
     private bool _marqueeShiftSelection;
     private HashSet<Guid> _marqueeBaseSelection = [];
+    private const int QuickLoupeDelayMilliseconds = 420;
+    private readonly AssetQuickLoupePreviewProvider _quickLoupeProvider = new();
+    private DispatcherTimer? _quickLoupeTimer;
+    private CancellationTokenSource? _quickLoupeCancellation;
+    private AssetVisualMatchView? _quickLoupeCard;
 
     public AssetLibraryPage()
         : this(
@@ -83,6 +88,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
         AssetGrid.PreviewMouseLeftButtonDown += AssetGrid_PreviewMouseLeftButtonDown;
         AssetGrid.PreviewMouseMove += AssetGrid_PreviewMouseMove;
+        AssetGrid.MouseLeave += AssetGrid_MouseLeave;
         AssetGrid.PreviewMouseLeftButtonUp += AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown += AssetGrid_PreviewMouseRightButtonDown;
@@ -177,6 +183,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.ViewModeChanged -= ViewModel_ViewModeChanged;
         AssetGrid.PreviewMouseLeftButtonDown -= AssetGrid_PreviewMouseLeftButtonDown;
         AssetGrid.PreviewMouseMove -= AssetGrid_PreviewMouseMove;
+        AssetGrid.MouseLeave -= AssetGrid_MouseLeave;
         AssetGrid.PreviewMouseLeftButtonUp -= AssetGrid_PreviewMouseLeftButtonUp;
         AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown -= AssetGrid_PreviewMouseRightButtonDown;
@@ -185,6 +192,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
         CancelMarqueeSelection();
+        HideQuickLoupe();
         await AsyncThumbnail.CancelAndDrainAsync(this);
         await _viewModel.DisposeAsync();
     }
@@ -234,8 +242,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Clear();
             menu.Items.Add(CreateMoreItem(_viewModel.OrganizationPaneToggleLabel, _viewModel.ToggleOrganizationPaneCommand));
             menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
-            menu.Items.Add(CreateMoreItem("打开灵感托盘", _viewModel.ToggleInspirationTrayCommand));
-            menu.Items.Add(CreateMoreItem("打开灵感集", _viewModel.OpenCollectionsCommand));
+            menu.Items.Add(CreateMoreItem("打开灵感板", _viewModel.OpenCollectionsCommand));
             menu.Items.Add(new Separator());
             menu.Items.Add(CreateMoreItem("新建智能文件夹", _viewModel.NewP3SmartFolderCommand));
             menu.Items.Add(CreateMoreItem("标签管理与批量编辑", _viewModel.ToggleP3TagManagerCommand));
@@ -243,6 +250,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem("撤销", _viewModel.P2UndoCommand));
             menu.Items.Add(CreateMoreItem("重做", _viewModel.P2RedoCommand));
             var visualFilters = new MenuItem { Header = "视觉筛选" };
+            visualFilters.Items.Add(CreateMoreItem("按颜色…", _viewModel.SearchColorCommand));
             foreach (var pair in new[] { ("已分析", "Valid"), ("未分析", "NotAnalyzed"), ("主色绿", "Green"), ("低饱和", "LowSaturation"), ("低调", "LowKey"), ("高对比", "HighContrast"), ("暖色", "Warm"), ("冷色", "Cool") })
                 visualFilters.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.VisualChipCommand, CommandParameter = pair.Item2 });
             menu.Items.Add(visualFilters);
@@ -339,6 +347,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void AssetGrid_PreviewMouseMove(object sender, MouseEventArgs e)
     {
+        UpdateQuickLoupeCandidate(e);
         if (!_isMarqueeSelecting || e.LeftButton != MouseButtonState.Pressed) return;
         UpdateMarqueeSelection(e.GetPosition(AssetGrid));
         e.Handled = true;
@@ -565,6 +574,64 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         item.ContextMenu.Placement = PlacementMode.MousePoint;
         item.ContextMenu.IsOpen = true;
         return item.ContextMenu;
+    }
+
+    private void UpdateQuickLoupeCandidate(MouseEventArgs e)
+    {
+        if (_disposed || e.LeftButton == MouseButtonState.Pressed)
+        {
+            HideQuickLoupe();
+            return;
+        }
+        var card = FindVisualParent<ListBoxItem>(e.OriginalSource as DependencyObject)?.DataContext as AssetVisualMatchView;
+        if (ReferenceEquals(card, _quickLoupeCard)) return;
+        HideQuickLoupe();
+        if (card is null) return;
+        _quickLoupeCard = card;
+        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(QuickLoupeDelayMilliseconds) };
+        timer.Tick += async (_, _) =>
+        {
+            timer.Stop();
+            if (!ReferenceEquals(_quickLoupeTimer, timer) || !ReferenceEquals(_quickLoupeCard, card)) return;
+            await ShowQuickLoupeAsync(card);
+        };
+        _quickLoupeTimer = timer;
+        timer.Start();
+    }
+
+    private async Task ShowQuickLoupeAsync(AssetVisualMatchView card)
+    {
+        _quickLoupeCancellation?.Cancel();
+        _quickLoupeCancellation?.Dispose();
+        _quickLoupeCancellation = new CancellationTokenSource();
+        var token = _quickLoupeCancellation.Token;
+        QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 正在载入高清预览…";
+        QuickLoupeImage.Source = null;
+        AssetQuickLoupePopup.IsOpen = true;
+        try
+        {
+            var bitmap = await _quickLoupeProvider.LoadAsync(card.ThumbnailPath, token);
+            if (token.IsCancellationRequested || !ReferenceEquals(_quickLoupeCard, card)) return;
+            QuickLoupeImage.Source = bitmap;
+            QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · {bitmap.PixelWidth} × {bitmap.PixelHeight}";
+        }
+        catch (OperationCanceledException) { }
+        catch (IOException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }
+        catch (NotSupportedException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 暂不支持此格式"; }
+        catch (ArgumentException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }
+    }
+
+    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
+
+    private void HideQuickLoupe()
+    {
+        _quickLoupeTimer?.Stop();
+        _quickLoupeTimer = null;
+        _quickLoupeCancellation?.Cancel();
+        _quickLoupeCancellation?.Dispose();
+        _quickLoupeCancellation = null;
+        _quickLoupeCard = null;
+        if (AssetQuickLoupePopup is not null) AssetQuickLoupePopup.IsOpen = false;
     }
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e) => _viewModel.UpdateViewportWidth(e.NewSize.Width);

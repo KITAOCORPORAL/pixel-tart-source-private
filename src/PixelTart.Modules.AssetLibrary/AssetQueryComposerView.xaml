@@ -79,6 +79,26 @@
                 AutomationProperties.AutomationId="P3QueryRulesPanel"
                 AutomationProperties.Name="筛选条件">
             <StackPanel>
+                <Border Margin="0,0,0,7" Padding="8" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4"
+                        AutomationProperties.AutomationId="AssetFilterColorPicker">
+                    <StackPanel>
+                        <TextBlock Text="按颜色筛选" Foreground="#F2F6F7" FontWeight="SemiBold" />
+                        <TextBlock Text="选择预设色或输入颜色；结果只改变当前视图，不修改照片。" Foreground="#ADB8C0" Margin="0,2,0,6" />
+                        <WrapPanel>
+                            <Button Content="红" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D75A45" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorRed" AutomationProperties.Name="筛选红色" />
+                            <Button Content="橙" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D9822B" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorOrange" AutomationProperties.Name="筛选橙色" />
+                            <Button Content="黄" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D6B94C" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorYellow" AutomationProperties.Name="筛选黄色" />
+                            <Button Content="绿" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#3E9B68" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorGreen" AutomationProperties.Name="筛选绿色" />
+                            <Button Content="蓝" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#467DC2" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorBlue" AutomationProperties.Name="筛选蓝色" />
+                            <Button Content="紫" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#8A65B8" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorPurple" AutomationProperties.Name="筛选紫色" />
+                            <Button Content="黑白" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#808080" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorNeutral" AutomationProperties.Name="筛选黑白灰" />
+                        </WrapPanel>
+                        <DockPanel Margin="0,6,0,0">
+                            <TextBox Text="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}" Width="110" Style="{StaticResource AssetLibraryP3TextBox}" AutomationProperties.AutomationId="AssetFilterColorValue" AutomationProperties.Name="颜色值" />
+                            <Button Content="应用颜色" Command="{Binding SearchColorCommand}" Style="{StaticResource AssetLibraryP3PrimaryButton}" Margin="6,0,0,0" AutomationProperties.AutomationId="AssetFilterApplyColor" />
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
                 <DockPanel LastChildFill="True">
                     <WrapPanel DockPanel.Dock="Left">
                         <Button Content="清除未锁定" Command="{Binding ClearP3UnlockedCommand}"

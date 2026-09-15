@@ -49,7 +49,7 @@ public sealed class AssetLibraryP2BrowserWpfTests
 
         foreach (var header in new[]
         {
-            "查看信息", "在文件夹中显示", "复制路径", "添加至当前文件夹", "移出当前文件夹",
+            "查看大图", "在资源管理器中显示", "复制文件", "添加当前文件夹", "移出当前文件夹",
             "添加至当前标签", "移出当前标签", "设置评分", "从当前文件夹移除", "归档", "移到回收站"
         })
             StringAssert.Contains(allText, header);

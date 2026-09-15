@@ -237,7 +237,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         StopSearchDebounce();
         var generation = Volatile.Read(ref _searchDebounceGeneration);
-        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(280) };
+        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(180) };
         timer.Tick += (_, _) => OnSearchDebounceTick(timer, generation);
         _searchDebounce = timer;
         timer.Start();
@@ -929,6 +929,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             }
             await ReconcilePersistedSelectionAsync(token);
             if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
+            await RefreshSystemCollectionCountsAsync(token);
+            if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
             OnPropertyChanged(nameof(VisibleCount)); NotifyLoadMoreState();
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
             Volatile.Write(ref _p3AcceptancePublishedQueryGeneration, generation);
@@ -1213,7 +1215,16 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     }
 
     public async Task RepeatLastFolderMembershipAsync() { if (_lastFolderIds.Count == 0) { Status = "Shift+D：尚无上一次文件夹分类"; return; } await ApplyFoldersAsync(_lastFolderIds); Status = $"已重复上次分类：{_lastFolderIds.Count} 个文件夹"; }
-    public async Task RateSelectedAsync(int rating) { rating = Math.Clamp(rating, 0, 5); var result = await _repository.UpdateAssetsMetadataAsync(SelectedAssets.Select(asset => asset.AssetId), rating: rating); RememberBrowserMutationResult(result); Status = $"已将 {SelectionCount} 项评分设为 {rating}"; RaiseActions(); }
+    public async Task RateSelectedAsync(int rating)
+    {
+        rating = Math.Clamp(rating, 0, 5);
+        if (SelectedAssets.Count == 1 && SelectedAssets[0].Rating == rating) rating = 0;
+        var result = await _repository.UpdateAssetsMetadataAsync(SelectedAssets.Select(asset => asset.AssetId), rating: rating);
+        RememberBrowserMutationResult(result);
+        Status = rating == 0 ? $"已清除 {SelectionCount} 项评分" : $"已将 {SelectionCount} 项评分设为 {rating}";
+        await RefreshAsync();
+        RaiseActions();
+    }
     private async Task UndoAsync()
     {
         if (!_browserCommands.CanUndo) return;

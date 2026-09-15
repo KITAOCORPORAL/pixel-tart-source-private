@@ -46,7 +46,7 @@ public sealed class AssetLibraryProductRelationEndToEndTests
                     first.SetCollectionProjectCommand.Execute(collection);
                     await first.SetCollectionProjectCommand.ExecutionTask;
                     Assert.IsTrue(first.IsProjectPickerOpen);
-                    Assert.AreEqual("关联灵感集项目", first.ProjectPickerTitle);
+                    Assert.AreEqual("关联灵感板项目", first.ProjectPickerTitle);
                     var selected = first.ProjectPickerItems.Single(item => item.Id == selectedProject.Id);
                     first.SelectProjectRelationCommand.Execute(selected);
                     await first.SelectProjectRelationCommand.ExecutionTask;

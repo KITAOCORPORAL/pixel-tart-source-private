@@ -18,6 +18,22 @@
         </ResourceDictionary.MergedDictionaries>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
+        <local:RatingAtLeastConverter x:Key="RatingAtLeastConverter" />
+        <Style x:Key="AssetInspectorStarButton" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Muted}" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="MinWidth" Value="32" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"><Setter Property="Foreground" Value="{DynamicResource PhotographyGoldBrush}" /></Trigger>
+                <Trigger Property="IsChecked" Value="True"><Setter Property="Foreground" Value="{DynamicResource PhotographyGoldBrush}" /></Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="AssetContextSectionHeader" TargetType="MenuItem">
             <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="Focusable" Value="False" />
@@ -139,10 +155,10 @@
         </Style>
 
         <DataTemplate x:Key="AssetGridCardTemplate">
-            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+            <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="240" Stretch="Uniform" />
+                    <Border Background="Transparent" ClipToBounds="True"><Grid>
+                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
                         <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -155,39 +171,39 @@
                             <TextBlock Text="{Binding Detail}" Foreground="{DynamicResource Brush.Text.Primary}" FontSize="{DynamicResource Type.Caption.FontSize}" ToolTip="{Binding Detail}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="AssetMasonryCardTemplate">
-            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+            <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="280" Stretch="Uniform" />
+                    <Border Background="Transparent" ClipToBounds="True"><Grid>
+                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
                             <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="AssetJustifiedCardTemplate">
-            <Border Background="Transparent" Padding="{DynamicResource Space.Inset.1}">
+            <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
-                    <Border Background="{DynamicResource Brush.Background}"><Grid>
-                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
+                    <Border Background="Transparent" ClipToBounds="True"><Grid>
+                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="360" Stretch="UniformToFill" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
                             <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="{DynamicResource Space.Stack.1}"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -221,6 +237,8 @@
                         <Setter Property="ContentTemplate" Value="{StaticResource AssetGridCardTemplate}" />
                         <Style.Triggers>
                             <!-- Grid, Masonry, and Justified share the photo-card tree; VirtualizingAssetPanel supplies their distinct geometry. -->
+                            <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="Masonry"><Setter Property="ContentTemplate" Value="{StaticResource AssetMasonryCardTemplate}" /></DataTrigger>
+                            <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="Justified"><Setter Property="ContentTemplate" Value="{StaticResource AssetJustifiedCardTemplate}" /></DataTrigger>
                             <DataTrigger Binding="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}" Value="List"><Setter Property="ContentTemplate" Value="{StaticResource AssetListRowTemplate}" /></DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -237,7 +255,15 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+        <Popup x:Name="AssetQuickLoupePopup" Placement="MousePoint" HorizontalOffset="18" VerticalOffset="18" AllowsTransparency="True" StaysOpen="False"
+               AutomationProperties.AutomationId="AssetQuickLoupePopup" AutomationProperties.Name="素材高清速览">
+            <Border Width="430" MaxHeight="390" Padding="7" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="6">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <Image x:Name="QuickLoupeImage" MaxHeight="340" Stretch="Uniform" AutomationProperties.AutomationId="AssetQuickLoupeImage" />
+                    <TextBlock x:Name="QuickLoupeTitle" Grid.Row="1" Margin="2,6,2,1" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />
+                </Grid>
+            </Border>
+        </Popup>
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
         <Grid Margin="{DynamicResource Space.Inset.3}" MinWidth="1280">
@@ -295,7 +321,7 @@
             <Button Grid.Row="0" Grid.Column="7" Content="更多" Margin="{DynamicResource Space.Inline.Start.1}" Click="More_Click"
                     Style="{DynamicResource PixelTart.Button.Ghost}"
                     AutomationProperties.AutomationId="AssetLibraryMore"
-                    ToolTip="组织栏、检查器、灵感托盘与整理工具">
+                    ToolTip="组织、检查器、灵感板与整理工具">
                 <Button.ContextMenu><ContextMenu Style="{DynamicResource PixelTart.Menu.Context}" /></Button.ContextMenu>
             </Button>
             <Button Grid.Row="0" Grid.Column="8" Content="组织" Margin="{DynamicResource Space.Inline.Start.1}"
@@ -361,13 +387,19 @@
                                       AutomationProperties.AutomationId="AssetSystemCollections">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Label}" Command="{Binding SelectCommand}"
-                                            IsEnabled="{Binding IsEnabled}" HorizontalContentAlignment="Left"
+                                    <Button Command="{Binding SelectCommand}" IsEnabled="{Binding IsEnabled}" HorizontalContentAlignment="Stretch"
                                             Style="{DynamicResource PixelTart.Button.Ghost}"
                                             AutomationProperties.AutomationId="{Binding AutomationId}"
                                             AutomationProperties.Name="{Binding AccessibleName}"
                                             ToolTip="{Binding Description}"
-                                            local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}" />
+                                            local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                            <Path Data="{Binding IconData}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" />
+                                            <TextBlock Grid.Column="1" Text="{Binding Label}" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2" Text="{Binding Count, StringFormat=N0}" Foreground="{DynamicResource Brush.Text.Muted}" VerticalAlignment="Center" Margin="8,0,2,0" />
+                                        </Grid>
+                                    </Button>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -404,18 +436,23 @@
                                     <Style TargetType="TreeViewItem">
                                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                        <Setter Property="MinHeight" Value="30" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                         <Setter Property="IsTabStop" Value="True" />
                                         <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}" />
                                         <Setter Property="AutomationProperties.Name" Value="{Binding AccessibleName}" />
                                         <Setter Property="local:AssetLibraryDragDropBehavior.DropTarget" Value="{Binding DropTarget}" />
                                     </Style>
                                     <HierarchicalDataTemplate DataType="{x:Type local:AssetLibraryFolderNodeView}" ItemsSource="{Binding Children}">
-                                        <Grid MinWidth="150" ToolTip="{Binding Path}">
-                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                            <TextBlock x:Name="FolderNameText" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
-                                            <TextBox x:Name="FolderNameEditor" Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
+                                        <Grid MinWidth="150" MinHeight="30" ToolTip="{Binding Path}">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                            <Path Data="{StaticResource AssetAction.Folder}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" VerticalAlignment="Center" />
+                                            <TextBlock x:Name="FolderNameText" Grid.Column="1" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                                            <TextBox x:Name="FolderNameEditor" Grid.Column="1" Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
                                                      AutomationProperties.Name="重命名文件夹" />
-                                            <TextBlock Grid.Column="1" Text="{Binding CountText}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,2,0" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2" Text="{Binding CountText}" Style="{DynamicResource PixelTart.Type.Metadata}" Foreground="{DynamicResource Brush.Text.Muted}" Margin="8,0,2,0" VerticalAlignment="Center" />
                                             <Grid.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                                     <MenuItem Header="重命名" Command="{Binding BeginRenameCommand}" />
@@ -686,7 +723,7 @@
                             </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
-                        <Button Content="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" Padding="4,2" Margin="0,4,0,0" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
+                        <Button Content="{Binding InspectorWorkflowStatus, StringFormat=工作流：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Left" Padding="8,4" Margin="0,6,0,4" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
                             <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
                                 <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
                                 <MenuItem Header="客户选择" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="客户选择" />
@@ -703,8 +740,8 @@
                         <TextBlock Text="{Binding InspectorBooking, StringFormat=拍摄摘要：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorClient, StringFormat=客户：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                            <Button Content="＋ 关联项目" Command="{Binding OpenProjectPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" />
-                            <Button Content="＋ 关联拍摄" Command="{Binding OpenBookingPickerCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" Margin="4,0,0,0" />
+                            <Button Content="＋ 关联项目" Command="{Binding OpenProjectPickerCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Padding="8,4" />
+                            <Button Content="＋ 关联拍摄" Command="{Binding OpenBookingPickerCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Padding="8,4" Margin="4,0,0,0" />
                         </StackPanel>
                         <TabControl AutomationProperties.AutomationId="VisualAnalysisTabs" Margin="0,10,0,0">
                             <TabItem Header="配色" AutomationProperties.AutomationId="VisualPaletteTab">
@@ -735,8 +772,16 @@
                         </StackPanel>
                         <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap"
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
-                        <TextBlock Text="{Binding SelectedAsset.Rating, StringFormat=评分：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
-                                   AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分" />
+                        <StackPanel Margin="0,8,0,4" AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分">
+                            <TextBlock Text="评分" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton Content="★" IsChecked="{Binding SelectedAsset.Rating, Converter={StaticResource RatingAtLeastConverter}, ConverterParameter=1, Mode=OneWay}" Command="{Binding RateCommand}" CommandParameter="1" Style="{StaticResource AssetInspectorStarButton}" AutomationProperties.AutomationId="AssetInspectorRating1" AutomationProperties.Name="1 星" />
+                                <ToggleButton Content="★" IsChecked="{Binding SelectedAsset.Rating, Converter={StaticResource RatingAtLeastConverter}, ConverterParameter=2, Mode=OneWay}" Command="{Binding RateCommand}" CommandParameter="2" Style="{StaticResource AssetInspectorStarButton}" AutomationProperties.AutomationId="AssetInspectorRating2" AutomationProperties.Name="2 星" />
+                                <ToggleButton Content="★" IsChecked="{Binding SelectedAsset.Rating, Converter={StaticResource RatingAtLeastConverter}, ConverterParameter=3, Mode=OneWay}" Command="{Binding RateCommand}" CommandParameter="3" Style="{StaticResource AssetInspectorStarButton}" AutomationProperties.AutomationId="AssetInspectorRating3" AutomationProperties.Name="3 星" />
+                                <ToggleButton Content="★" IsChecked="{Binding SelectedAsset.Rating, Converter={StaticResource RatingAtLeastConverter}, ConverterParameter=4, Mode=OneWay}" Command="{Binding RateCommand}" CommandParameter="4" Style="{StaticResource AssetInspectorStarButton}" AutomationProperties.AutomationId="AssetInspectorRating4" AutomationProperties.Name="4 星" />
+                                <ToggleButton Content="★" IsChecked="{Binding SelectedAsset.Rating, Converter={StaticResource RatingAtLeastConverter}, ConverterParameter=5, Mode=OneWay}" Command="{Binding RateCommand}" CommandParameter="5" Style="{StaticResource AssetInspectorStarButton}" AutomationProperties.AutomationId="AssetInspectorRating5" AutomationProperties.Name="5 星" />
+                            </StackPanel>
+                        </StackPanel>
                         <TextBlock Text="{Binding InspectorFormat, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorFileSize, StringFormat=大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorStorageMode, StringFormat=位置：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
@@ -829,59 +874,55 @@
             <local:AssetTagManagerView />
         </Border>
 
-        <Border Grid.Row="2" Panel.ZIndex="28" Width="760" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                MaxHeight="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12"
-                Padding="{DynamicResource Space.Inset.3}" Background="{DynamicResource Brush.Surface.Elevated}"
-                Style="{DynamicResource PixelTart.Surface.Border}"
-                Visibility="{Binding IsInspirationTrayOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
-                local:InspirationDragDropBehavior.TargetKind="Tray"
-                AutomationProperties.AutomationId="InspirationTrayDrawer">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
-                    <TextBlock Text="灵感托盘" FontSize="{DynamicResource Type.Body.FontSize}" FontWeight="SemiBold" />
-                    <TextBlock Text="{Binding InspirationTrayCount, StringFormat={} · {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,2,0,0" />
-                    <Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" AutomationProperties.AutomationId="InspirationTrayClear" />
-                    <Button DockPanel.Dock="Right" Content="收起" Command="{Binding ToggleInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0,0,0" AutomationProperties.AutomationId="InspirationTrayClose" />
-                </StackPanel>
-                <ScrollViewer MaxHeight="190" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <ListBox ItemsSource="{Binding InspirationTrayCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" AutomationProperties.AutomationId="InspirationTrayItems">
-                        <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border Width="116" Height="132" Margin="4" Padding="4" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4"
-                                        local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}"
-                                        local:InspirationDragDropBehavior.TargetKind="TrayOrder"
-                                        local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}">
-                                    <Grid>
-                                        <Grid.RowDefinitions><RowDefinition Height="88" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                                        <Border Background="{DynamicResource Brush.Background}">
-                                            <Grid>
-                                                <TextBlock Text="缩略图不可用" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                <Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="112" />
-                                                <TextBlock Text="离线" Foreground="{DynamicResource Brush.Text.Primary}" Background="{DynamicResource Brush.Surface.Elevated}" Padding="3" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                            </Grid>
-                                        </Border>
-                                        <TextBlock Grid.Row="1" Text="{Binding AssetLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                                        <DockPanel Grid.Row="2">
-                                            <TextBlock Text="{Binding ResolutionLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis" />
-                                            <Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveInspirationTrayEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" AutomationProperties.Name="移除灵感托盘素材" />
-                                        </DockPanel>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </DockPanel>
-        </Border>
-        <Border Grid.Row="2" Panel.ZIndex="30" Width="860" MaxHeight="620" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="12"
+        <Border Grid.Row="2" Panel.ZIndex="30" Width="960" MaxHeight="620" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="12"
                 Padding="12" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
-                Visibility="{Binding IsCollectionPanelOpen, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="InspirationCollectionsPanel">
+                Visibility="{Binding IsCollectionPanelOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="InspirationBoardPanel" AutomationProperties.Name="灵感板">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"><TextBlock Text="灵感集" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><Button Content="新建" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="12,0,0,0" /><Button Content="关闭" Command="{Binding CloseCollectionPanelCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalAlignment="Right" /></StackPanel>
-                <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="220" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                    <ListBox ItemsSource="{Binding InspirationCollections}" BorderThickness="0" Background="Transparent"><ListBox.ItemTemplate><DataTemplate><StackPanel Margin="4" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding CollectionId}"><Button Content="{Binding Name}" Command="{Binding DataContext.OpenCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><TextBlock Text="{Binding EntryCount, StringFormat={} {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding ProjectName, StringFormat=项目：{0}, TargetNullValue=未关联项目}" Style="{DynamicResource PixelTart.Type.Metadata}" /><WrapPanel><Button Content="重命名" Command="{Binding DataContext.RenameCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><Button Content="选择项目" Command="{Binding DataContext.SetCollectionProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><Button Content="移除项目" Command="{Binding DataContext.RemoveCollectionProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /><Button Content="归档" Command="{Binding DataContext.ArchiveCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left" /></WrapPanel></StackPanel></DataTemplate></ListBox.ItemTemplate></ListBox>
-                    <ListBox Grid.Column="1" ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}"><ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel><ListBox.ItemTemplate><DataTemplate><Border Width="140" Height="140" Margin="4" Background="{DynamicResource Brush.Background}" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.SourceCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetKind="CollectionOrder" local:InspirationDragDropBehavior.TargetCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}"><Grid><Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="136" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /><Button Content="移除" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding DataContext.RemoveCollectionEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="3,0" /></Grid></Border></DataTemplate></ListBox.ItemTemplate></ListBox>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                    <Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseCollectionPanelCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.AutomationId="InspirationBoardClose" />
+                    <Button DockPanel.Dock="Right" Content="新建灵感板" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0" />
+                    <TextBlock Text="灵感板" Style="{DynamicResource PixelTart.Type.SectionTitle}" VerticalAlignment="Center" />
+                </DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="230" /><ColumnDefinition Width="1" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,10,0">
+                        <Button Command="{Binding OpenTemporaryInspirationCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Stretch" local:InspirationDragDropBehavior.TargetKind="Tray" AutomationProperties.AutomationId="InspirationTrayDrawer">
+                            <DockPanel><TextBlock Text="临时收集" /><TextBlock Text="{Binding InspirationTrayCount, StringFormat={}{0} 项}" Foreground="{DynamicResource Brush.Text.Muted}" HorizontalAlignment="Right" /></DockPanel>
+                        </Button>
+                        <TextBlock Text="已保存" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="4,12,0,4" />
+                        <ListBox ItemsSource="{Binding InspirationCollections}" BorderThickness="0" Background="Transparent" AutomationProperties.AutomationId="InspirationCollectionsPanel">
+                            <ListBox.ItemTemplate><DataTemplate>
+                                <StackPanel Margin="2" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding CollectionId}">
+                                    <Button Command="{Binding DataContext.OpenCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Stretch">
+                                        <DockPanel><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding EntryCount, StringFormat={}{0}}" Foreground="{DynamicResource Brush.Text.Muted}" HorizontalAlignment="Right" /></DockPanel>
+                                    </Button>
+                                    <TextBlock Text="{Binding ProjectName, StringFormat=项目：{0}, TargetNullValue=未关联项目}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="8,0" />
+                                    <WrapPanel Margin="4,2"><Button Content="重命名" Command="{Binding DataContext.RenameCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="项目" Command="{Binding DataContext.SetCollectionProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="归档" Command="{Binding DataContext.ArchiveCollectionCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" /></WrapPanel>
+                                </StackPanel>
+                            </DataTemplate></ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <Border Grid.Column="1" Background="{DynamicResource Brush.Border}" />
+                    <Grid Grid.Column="2" Margin="10,0,0,0">
+                        <DockPanel Visibility="{Binding IsTemporaryInspirationSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel DockPanel.Dock="Top"><Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" AutomationProperties.AutomationId="InspirationTrayClear" /><TextBlock Text="临时收集" Style="{DynamicResource PixelTart.Type.SectionTitle}" /></DockPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <ListBox ItemsSource="{Binding InspirationTrayCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" AutomationProperties.AutomationId="InspirationTrayItems" local:InspirationDragDropBehavior.TargetKind="Tray">
+                                    <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate><DataTemplate>
+                                        <Border Width="132" Height="148" Margin="4" Padding="4" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.TargetKind="TrayOrder" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}">
+                                            <Grid><Grid.RowDefinitions><RowDefinition Height="100" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions><Image Stretch="UniformToFill" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="160" /><TextBlock Grid.Row="1" Text="{Binding AssetLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" /><DockPanel Grid.Row="2"><TextBlock Text="{Binding ResolutionLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveInspirationTrayEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.Name="从临时收集移除" /></DockPanel></Grid>
+                                        </Border>
+                                    </DataTemplate></ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
+                        </DockPanel>
+                        <ListBox ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" Visibility="{Binding IsSavedInspirationBoardSelected, Converter={StaticResource BooleanToVisibilityConverter}}" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}">
+                            <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate><DataTemplate><Border Width="148" Height="148" Margin="4" Background="{DynamicResource Brush.Panel}" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.SourceCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetKind="CollectionOrder" local:InspirationDragDropBehavior.TargetCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}"><Grid><Image Stretch="UniformToFill" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="180" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /><Button Content="移除" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding DataContext.RemoveCollectionEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" /></Grid></Border></DataTemplate></ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </Grid>
             </DockPanel>
         </Border>

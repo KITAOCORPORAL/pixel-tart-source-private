@@ -30,7 +30,7 @@ public sealed class AssetLibraryProductRelationUiTests
     public void ContextMenuHasOnlyTheSixProductGroupsAndNoPermanentDelete()
     {
         var xaml = File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml"));
-        foreach (var token in new[] { "Header=\"查看\"", "Header=\"整理\"", "Header=\"摄影工作流\"", "Header=\"创作\"", "Header=\"导出\"", "Header=\"生命周期\"", "复制路径", "加入灵感集" })
+        foreach (var token in new[] { "Header=\"查看\"", "Header=\"整理\"", "Header=\"摄影工作流\"", "Header=\"创作与导出\"", "Header=\"管理\"", "复制文件", "加入灵感板" })
             StringAssert.Contains(xaml, token);
         Assert.DoesNotContain("永久删除", xaml, StringComparison.Ordinal);
     }
