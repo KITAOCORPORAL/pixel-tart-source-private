@@ -42,7 +42,7 @@ Counts start from the relevant primary product page and include the final action
 
 ## Screenshots
 
-The real themed application harness produces ten UX acceptance images in `artifacts/rc12-ux-simplification/ux-simplification`: toolbox, simple/preview organize, simple/advanced RAW conversion, clean library, human Smart Folder, clean Inspector, clean Task Center and collapsed error details.
+The real themed application harness produces ten UX acceptance images in `artifacts/rc12-ux-simplification/ux-simplification`: toolbox, simple/preview organize, simple/advanced RAW conversion, clean library, human Smart Folder, clean Inspector, clean Task Center and collapsed error details. The sealed visual manifest contains 60 real-application captures: 12 product scenes, 10 UX scenes, 32 current-DPI scenes and 6 Asset Library resolution scenes. The UX contact sheet is `artifacts/rc12-ux-simplification/ux-simplification-contact-sheet.png`.
 
 ## Tests
 
@@ -50,6 +50,7 @@ The real themed application harness produces ten UX acceptance images in `artifa
 - `UXSimplificationRegressionTests`: required language, gallery/Inspector/Task Center cleanup and auxiliary-surface exclusivity.
 - `FirstTimePhotographerUXTests`: direct actions for import, organize, conversion, four-star filtering, Smart Folder and project association.
 - Existing organize, RAW conversion and task-card contracts were updated to the photographer-facing language.
+- The final process-isolated WPF gate runs 86 fixtures in separate processes and covers 1,182 tests, including the opt-in 10,128-row performance diagnostic with no skipped fixture.
 
 ## Acceptance status
 
