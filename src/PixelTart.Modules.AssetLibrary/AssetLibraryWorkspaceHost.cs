@@ -160,10 +160,10 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         }
         foreach (var recent in _settings.RecentLibraries.Take(AssetLibraryPortableSettings.MaximumRecentLibraries))
         {
-            var state = Directory.Exists(recent.ContainerPath) ? "Online" : "Offline";
+            var state = Directory.Exists(recent.ContainerPath) ? "可用" : "暂时不可用";
             var item = new MenuItem { Header = $"{recent.DisplayName}  ·  {recent.LastOpenedAt.ToLocalTime():yyyy-MM-dd HH:mm}  ·  {state}" };
             item.Items.Add(MenuItem("打开 / 切换", async (_, _) => await SwitchToContainerAsync(recent.ContainerPath)));
-            item.Items.Add(MenuItem("在 Explorer 中定位", (_, _) => LocateRecentLibrary(recent)));
+            item.Items.Add(MenuItem("在文件夹中显示", (_, _) => LocateRecentLibrary(recent)));
             item.Items.Add(MenuItem("从最近列表移除", async (_, _) => await RemoveRecentLibraryAsync(recent)));
             item.ToolTip = recent.ContainerPath;
             System.Windows.Automation.AutomationProperties.SetAutomationId(item, "AssetLibraryRecent_" + recent.LibraryId.ToString("N"));

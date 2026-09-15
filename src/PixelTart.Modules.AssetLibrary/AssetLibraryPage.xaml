@@ -26,9 +26,9 @@
             </ContextMenu.Resources>
             <MenuItem Header="查看" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextView">
                 <MenuItem Header="查看信息" Command="{Binding Owner.ShowContextInfoCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextShowInfo" />
-                <MenuItem Header="Viewer" Command="{Binding Owner.OpenContextViewerCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenViewer" />
+                <MenuItem Header="照片查看器" Command="{Binding Owner.OpenContextViewerCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenViewer" />
                 <MenuItem Header="默认应用" Command="{Binding Owner.OpenContextExternalCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextOpenExternal" />
-                <MenuItem Header="Explorer 显示" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextReveal" />
+                <MenuItem Header="在文件夹中显示" Command="{Binding Owner.RevealContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextReveal" />
                 <MenuItem Header="复制路径" Command="{Binding Owner.CopyContextPathCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextCopyPath" />
             </MenuItem>
             <MenuItem Header="整理" Style="{StaticResource PixelTart.Menu.Item}" AutomationProperties.AutomationId="AssetContextOrganize">

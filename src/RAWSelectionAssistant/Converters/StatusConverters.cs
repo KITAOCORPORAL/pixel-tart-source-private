@@ -13,6 +13,14 @@ public sealed class StatusToTextConverter : IValueConverter
         {
             MatchStatus status => status.ToChinese(),
             MediaOverallStatus status => status.ToChinese(),
+            PhotoProjectStatus status => status switch
+            {
+                PhotoProjectStatus.Completed => "已完成",
+                PhotoProjectStatus.Matching => "匹配中",
+                PhotoProjectStatus.Ready => "可继续",
+                PhotoProjectStatus.Failed => "需要检查",
+                _ => "草稿"
+            },
             ShootBookingStatus status => status switch
             {
                 ShootBookingStatus.Draft => "草稿",

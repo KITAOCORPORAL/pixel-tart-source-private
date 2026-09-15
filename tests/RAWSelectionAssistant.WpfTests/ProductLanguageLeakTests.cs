@@ -92,7 +92,7 @@ public sealed partial class ProductLanguageLeakTests
     [GeneratedRegex("(^|[^A-Za-z0-9])(P1|P2|P3)([^A-Za-z0-9]|$)|QueryOption|TaskId|LibraryId|AssetId|BookingId|ProjectId|LibRaw|SQLite|SHA-256|ContentHash|(^|[^A-Za-z])(True|False)([^A-Za-z]|$)", RegexOptions.IgnoreCase)]
     private static partial Regex ForbiddenTermRegex();
 
-    [GeneratedRegex("TaskId|LibraryId|AssetId|BookingId|ProjectId|LibRaw|SQLite|SHA-256|ContentHash|原位引用|托管副本|文件缺失：(True|False)", RegexOptions.IgnoreCase)]
+    [GeneratedRegex("TaskId|LibraryId|AssetId|BookingId|ProjectId|LibRaw|SQLite|SHA-256|ContentHash|canonical|原位引用|托管副本|文件缺失：(True|False)", RegexOptions.IgnoreCase)]
     private static partial Regex ForbiddenRuntimeTermRegex();
 
     [GeneratedRegex("\"(?:\\\\.|[^\"\\\\])*\"")]

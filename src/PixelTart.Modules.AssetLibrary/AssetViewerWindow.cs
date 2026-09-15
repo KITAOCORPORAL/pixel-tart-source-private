@@ -22,7 +22,7 @@ public sealed class AssetViewerWindow : Window
         _paths = paths.Where(path => !string.IsNullOrWhiteSpace(path)).ToArray();
         _index = Math.Clamp(startIndex, 0, Math.Max(0, _paths.Count - 1));
         _thumbnails = thumbnails ?? AsyncThumbnail.Provider;
-        Title = "Pixel Tart Viewer";
+        Title = "像素蛋挞 · 照片查看器";
         Background = new SolidColorBrush(Color.FromRgb(8, 10, 12));
         WindowState = WindowState.Maximized;
         WindowStyle = WindowStyle.None;
@@ -52,11 +52,11 @@ public sealed class AssetViewerWindow : Window
 
     private async Task LoadCurrentAsync()
     {
-        if (_paths.Count == 0) { Title = "Pixel Tart Viewer · 没有可查看的素材"; return; }
+        if (_paths.Count == 0) { Title = "像素蛋挞 · 没有可查看的照片"; return; }
         var path = _paths[_index];
         var result = await _thumbnails.GetAsync(new(path, 512));
         _image.Source = result.Bitmap;
-        Title = result.IsAvailable ? $"Pixel Tart Viewer · {System.IO.Path.GetFileName(path)}" : $"Pixel Tart Viewer · {result.PlaceholderMessage}";
+        Title = result.IsAvailable ? $"照片查看器 · {System.IO.Path.GetFileName(path)}" : $"照片查看器 · {result.PlaceholderMessage}";
         Fit();
     }
 

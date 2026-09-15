@@ -61,6 +61,20 @@ public sealed class UXSimplificationRegressionTests
     }
 
     [TestMethod]
+    public void ProjectStatesAndViewerUseProductLanguage()
+    {
+        var mainWindow = Text("src/RAWSelectionAssistant/MainWindow.xaml");
+        var converter = Text("src/RAWSelectionAssistant/Converters/StatusConverters.cs");
+        var viewer = Text("src/PixelTart.Modules.AssetLibrary/AssetViewerWindow.cs");
+        var libraryViewModel = Text("src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs");
+        ContainsAll(mainWindow, "Status, Converter={StaticResource StatusToTextConverter}");
+        ContainsAll(converter, "PhotoProjectStatus.Ready => \"可继续\"", "PhotoProjectStatus.Failed => \"需要检查\"");
+        ContainsAll(viewer, "像素蛋挞 · 照片查看器", "没有可查看的照片");
+        ContainsNone(viewer, "Pixel Tart Viewer");
+        ContainsNone(libraryViewModel, "canonical 视觉特征");
+    }
+
+    [TestMethod]
     public void AuxiliarySurfacesAreMutuallyExclusive()
     {
         var sources = string.Join('\n', new[]

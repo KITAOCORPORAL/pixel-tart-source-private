@@ -1259,7 +1259,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             if (!IsCurrentAnalysis(asset, generation)) return;
             Analysis = result;
             SelectedFeatures = features;
-            Status = "已重新生成当前素材的 canonical 视觉特征";
+            Status = "已重新分析当前照片的视觉特征";
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
         catch (Exception exception) when (IsCurrentAnalysis(asset, generation)) { Status = $"视觉分析失败：{exception.Message}"; }
