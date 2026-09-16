@@ -36,6 +36,7 @@ public partial class MainWindow
     private ContextMenu? _automatedContextMenu;
     private ToolTip? _automatedToolTip;
     private Popup? _automatedPopup;
+    private FrameworkElement? _automatedProductPopup;
 
     private void ConfigureAutomatedDpiAcceptance(JsonElement root)
     {
@@ -73,7 +74,11 @@ public partial class MainWindow
 
             if (state == "AssetContextMenu") _automatedContextMenu = page.OpenContextMenuForProductHarness();
             else if (state == "AssetContextSubmenu") _automatedContextMenu = page.OpenContextSubmenuForProductHarness("评分");
-            else if (state == "AssetQuickLoupeActive") await page.OpenQuickLoupeForProductHarnessAsync();
+            else if (state == "AssetQuickLoupeActive")
+            {
+                if (await page.OpenQuickLoupeForProductHarnessAsync())
+                    _automatedProductPopup = page.GetQuickLoupeContentForProductHarness();
+            }
             else if (state == "AssetRecentLibraries" && host is not null)
             {
                 host.OpenRecentLibraryMenuForProductHarness();
@@ -795,6 +800,7 @@ public partial class MainWindow
             DrawPopup(drawing, _automatedContextMenu, logicalWidth, logicalHeight, .46, .17);
             DrawPopup(drawing, _automatedToolTip, logicalWidth, logicalHeight, .60, .15);
             DrawPopup(drawing, _automatedPopup?.Child as FrameworkElement, logicalWidth, logicalHeight, .44, .18);
+            DrawPopup(drawing, _automatedProductPopup, logicalWidth, logicalHeight, .52, .20);
             DrawAuxiliaryWindow(drawing, logicalWidth, logicalHeight);
             drawing.Pop();
         }
@@ -1346,6 +1352,7 @@ public partial class MainWindow
             _automatedPopup.IsOpen = false;
             _automatedPopup = null;
         }
+        _automatedProductPopup = null;
         if (_automatedAuxiliaryWindow is not null)
         {
             _automatedAuxiliaryWindow.Close();

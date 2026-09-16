@@ -594,6 +594,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         return true;
     }
 
+    public FrameworkElement? GetQuickLoupeContentForProductHarness() =>
+        AssetQuickLoupePopup.IsOpen ? AssetQuickLoupePopup.Child as FrameworkElement : null;
+
     public AssetViewerWindow? CreateViewerForProductHarness()
     {
         var paths = _viewModel.AssetCards.Select(card => _viewModel.GetDisplaySourcePath(card.Asset)).Where(File.Exists).ToArray();
