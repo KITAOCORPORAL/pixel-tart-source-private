@@ -88,7 +88,7 @@ public sealed class AssetThumbnailProviderTests
         Directory.CreateDirectory(root);
         var path = Path.Combine(root, "pixel.png");
         await File.WriteAllBytesAsync(path, Convert.FromBase64String(
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASUVORK5CYII="));
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="));
         try
         {
             IAssetPreviewProvider contract = new WpfAssetThumbnailProvider(memoryBudgetBytes: 4L * 1024 * 1024);
