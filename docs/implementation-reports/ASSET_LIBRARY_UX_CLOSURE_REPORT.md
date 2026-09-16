@@ -4,7 +4,9 @@
 
 - Product phase: **RC12 Post-Freeze UX Candidate**.
 - Closure baseline: `3f8f8450a3b663a2112095eaf722826fa03b974f`.
-- Validated source: the commit containing this report; its exact immutable SHA is recorded by the WPF, visual, DPI, scale and installer manifests generated from the clean checkout.
+- Closure implementation baseline: `cf05486c8c5c96c474c4e9895602212cdb705bf2`.
+- Acceptance hardening commits: WPF gate ownership, valid preview-cache fixture data, modal-overlay inspection and real Quick Loupe popup capture.
+- Validated source: the final report commit itself. Its exact immutable SHA is recorded as `source_commit` by the WPF, visual, scale and installer manifests generated after this report is committed.
 - Explicitly out of scope: RC13, Moodboard, Planning Center, AI, Browser Clipper and unrelated feature development.
 
 ## Completed
@@ -16,6 +18,7 @@
 5. **Color picker closure** — the filter contains a draggable two-dimensional saturation/brightness plane, hue slider, hexadecimal input, range slider, presets and an 80 ms live-query debounce. UI copy does not expose DeltaE, RGB distance or feature vectors.
 6. **True aspect presentation** — Gallery, Masonry, Justified, Quick Loupe and full preview use proportional `Uniform` presentation. Synthetic acceptance data includes landscape, portrait, ultra-wide and ultra-tall sources.
 7. **Current-HEAD evidence seam** — the Product Visual Harness adds clean, context menu, submenu, folder tree, color filter, inspector rating, inspiration board, Loupe idle/active and full-preview captures. Every fixture launches the real themed app in an isolated process with real bindings.
+8. **Evidence accuracy hardening** — the layout inspector recognizes only explicit empty-state and inspiration-board overlay relationships, and the capture composer renders the real bound Quick Loupe popup surface. The active evidence now visibly contains the 1600-pixel high-quality preview instead of only recording that an off-window WPF popup was open.
 
 ## Remaining
 
@@ -36,9 +39,12 @@ The validator rejects a manifest whose source commit differs from current `HEAD`
 ## Test evidence
 
 - Release solution build: zero warnings and zero errors.
+- Core tests: 1,307 passed; DPI tests: 90 passed; modular harness: 14 passed.
 - WPF isolation: `artifacts/rc12-wpf-process-isolation/asset-library-ux-closure-current-head/rc12-wpf-process-isolation.json`.
 - Product Visual Harness: `artifacts/rc12-product-visual/rc12-product-visual-evidence.json`.
 - 10K/50K/100K scale gate: `artifacts/rc12-asset-library-ux-scale-current-head/rc12-visual-performance-scale-evidence.json` plus raw samples.
 - RC12 candidate installer identity: `artifacts/releases/2.3.0/installer/rc12-ux-candidate-current-head.json`.
+
+The WPF gate requires 96 fixtures and 1,193 passing tests with zero failures and zero skips. The visual gate requires 71 passing real-app captures: 12 product states, 10 UX states, 10 Asset Library closure states, 32 DPI states, six resolution states and one aspect-ratio result. The scale gate requires three fresh samples at each of 10K, 50K and 100K.
 
 Only passing artifacts generated after the closure commit are acceptance evidence. Historical RC12 screenshots and manifests are retained only as history/before comparison and are not reused as current-HEAD proof.
