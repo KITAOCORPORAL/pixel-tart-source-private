@@ -14,7 +14,8 @@ public sealed class InspirationBoardUnifiedUxTests
         var viewModel = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryViewModel.P2Browser.cs"));
         StringAssert.Contains(xaml, "AutomationProperties.AutomationId=\"InspirationBoardPanel\"");
         StringAssert.Contains(xaml, "Text=\"临时收集\"");
-        StringAssert.Contains(xaml, "Text=\"已保存\"");
+        StringAssert.Contains(xaml, "Text=\"灵感收藏\"");
+        StringAssert.Contains(xaml, "Text=\"Creative Board\"");
         StringAssert.Contains(xaml, "ItemsSource=\"{Binding InspirationTrayCards}\"");
         StringAssert.Contains(xaml, "ItemsSource=\"{Binding InspirationCollections}\"");
         StringAssert.Contains(code, "打开灵感板");

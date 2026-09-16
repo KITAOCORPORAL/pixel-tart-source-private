@@ -25,7 +25,7 @@ public sealed class AssetLibraryWorkspaceSettings
     public Guid? SelectedTagId { get; set; }
     public Guid? SelectedSmartFolderId { get; set; }
     public Guid? SelectedAssetId { get; set; }
-    public AssetLibraryViewMode ViewMode { get; set; } = AssetLibraryViewMode.Grid;
+    public AssetLibraryViewMode ViewMode { get; set; } = AssetLibraryViewMode.Masonry;
     public AssetLibrarySortField SortField { get; set; } = AssetLibrarySortField.AddedAt;
     public AssetLibrarySortDirection SortDirection { get; set; } = AssetLibrarySortDirection.Descending;
     public AssetLibrarySystemCollection ActiveCollection { get; set; } = AssetLibrarySystemCollection.AllAssets;
@@ -45,7 +45,7 @@ public sealed class AssetLibraryWorkspaceSettings
         if (InspectorPinned) InspectorPaneCollapsed = false;
         SearchText = (SearchText ?? string.Empty).Trim();
         if (SearchText.Length > 500) SearchText = SearchText[..500];
-        if (!Enum.IsDefined(ViewMode)) ViewMode = AssetLibraryViewMode.Grid;
+        if (!Enum.IsDefined(ViewMode)) ViewMode = AssetLibraryViewMode.Masonry;
         if (!Enum.IsDefined(SortField)) SortField = AssetLibrarySortField.AddedAt;
         if (!Enum.IsDefined(SortDirection)) SortDirection = AssetLibrarySortDirection.Descending;
         if (!Enum.IsDefined(ActiveCollection)) ActiveCollection = AssetLibrarySystemCollection.AllAssets;

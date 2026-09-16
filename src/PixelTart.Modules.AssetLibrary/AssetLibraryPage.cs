@@ -235,6 +235,21 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.ToggleP3QueryPanelCommand.Execute(null);
     }
 
+    private void TagFilter_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.OpenFilterPanel();
+    }
+
+    private void RatingFilter_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.OpenFilterPanel();
+    }
+
+    private void DateFilter_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.OpenFilterPanel();
+    }
+
     private void More_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button { ContextMenu: { } menu } button)
@@ -585,10 +600,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.ScrollIntoView(AssetGrid.Items[0]);
         AssetGrid.UpdateLayout();
         if (AssetGrid.ItemContainerGenerator.ContainerFromIndex(0) is not ListBoxItem item || item.DataContext is not AssetVisualMatchView card) return false;
-        AssetQuickLoupePopup.PlacementTarget = item;
-        AssetQuickLoupePopup.Placement = PlacementMode.Right;
-        AssetQuickLoupePopup.HorizontalOffset = 12;
-        AssetQuickLoupePopup.VerticalOffset = 0;
+        ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
         return true;
@@ -606,10 +618,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void QuickLoupeButton_MouseEnter(object sender, MouseEventArgs e)
     {
         if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
-        AssetQuickLoupePopup.PlacementTarget = sender as UIElement;
-        AssetQuickLoupePopup.Placement = PlacementMode.Right;
-        AssetQuickLoupePopup.HorizontalOffset = 8;
-        AssetQuickLoupePopup.VerticalOffset = 0;
+        ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
     }
@@ -617,13 +626,29 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void QuickLoupeButton_Click(object sender, RoutedEventArgs e)
     {
         if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
-        AssetQuickLoupePopup.PlacementTarget = sender as UIElement;
-        AssetQuickLoupePopup.Placement = PlacementMode.Right;
-        AssetQuickLoupePopup.HorizontalOffset = 8;
-        AssetQuickLoupePopup.VerticalOffset = 0;
+        ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
         e.Handled = true;
+    }
+
+    private async void ContextQuickPreview_Click(object sender, RoutedEventArgs e)
+    {
+        if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        ConfigureCenteredQuickLoupe();
+        _quickLoupeCard = card;
+        await ShowQuickLoupeAsync(card);
+        e.Handled = true;
+    }
+
+    private void ConfigureCenteredQuickLoupe()
+    {
+        AssetQuickLoupePopup.PlacementTarget = this;
+        AssetQuickLoupePopup.Placement = PlacementMode.Center;
+        AssetQuickLoupePopup.HorizontalOffset = 0;
+        AssetQuickLoupePopup.VerticalOffset = 0;
+        QuickLoupeContainer.Width = Math.Clamp(ActualWidth * 0.5d, 420d, 860d);
+        QuickLoupeContainer.Height = Math.Clamp(ActualHeight * 0.55d, 300d, 680d);
     }
 
     private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) =>

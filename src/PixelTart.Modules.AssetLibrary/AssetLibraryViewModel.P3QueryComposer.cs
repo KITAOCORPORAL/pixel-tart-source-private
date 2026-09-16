@@ -164,6 +164,13 @@ public sealed partial class AssetLibraryViewModel
     public AssetCommand ClearP3HistoryCommand { get; private set; } = null!;
     public AsyncCommand SaveP3QueryAsSmartFolderCommand { get; private set; } = null!;
 
+    public void OpenFilterPanel()
+    {
+        if (P3ShutdownStarted) return;
+        P3QueryPanelOpen = true;
+        ClosePrimaryAuxiliarySurfacesExceptQuery();
+    }
+
     private void InitializeP3QueryComposer()
     {
         _p3QueryScope = Enum.IsDefined(_workspaceSettings.QueryScope) ? _workspaceSettings.QueryScope : AssetQueryScope.Current;

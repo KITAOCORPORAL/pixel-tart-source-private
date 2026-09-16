@@ -30,7 +30,7 @@
                         AutomationProperties.AutomationId="P3QueryPanelToggle"
                         AutomationProperties.Name="打开或关闭筛选条件" />
             </StackPanel>
-            <TextBlock Text="{Binding P3QueryResultSummary}" Foreground="#CBD5DA" VerticalAlignment="Center"
+            <TextBlock Text="{Binding P3QueryResultSummary}" Foreground="{DynamicResource Brush.Text.Secondary}" VerticalAlignment="Center"
                        TextAlignment="Right" AutomationProperties.AutomationId="P3QueryResultSummary"
                        AutomationProperties.Name="当前筛选范围和结果数量" />
         </DockPanel>
@@ -66,9 +66,9 @@
                                     AutomationProperties.AutomationId="{Binding Value, StringFormat=P3QuerySuggestion_{0}}"
                                     AutomationProperties.Name="{Binding Label, StringFormat=使用搜索建议 {0}}">
                                 <DockPanel>
-                                    <TextBlock Text="{Binding Kind}" Foreground="#8FE7D1" Margin="0,0,8,0" />
-                                    <TextBlock Text="{Binding Label}" Foreground="#F2F6F7" />
-                                    <TextBlock Text="{Binding Detail}" Foreground="#ADB8C0" Margin="8,0,0,0" />
+                                    <TextBlock Text="{Binding Kind}" Foreground="{DynamicResource Brush.Accent}" Margin="0,0,8,0" />
+                                    <TextBlock Text="{Binding Label}" Foreground="{DynamicResource Brush.Text.Primary}" />
+                                    <TextBlock Text="{Binding Detail}" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="8,0,0,0" />
                                 </DockPanel>
                             </Button>
                         </DataTemplate>
@@ -82,21 +82,21 @@
                 AutomationProperties.AutomationId="P3QueryRulesPanel"
                 AutomationProperties.Name="筛选条件">
             <StackPanel>
-                <TextBlock Text="基础" Foreground="#F2F6F7" FontWeight="SemiBold" Margin="0,0,0,5" />
-                <TextBlock Text="名称 · 类型 · 评分 · 尺寸" Foreground="#ADB8C0" Margin="0,0,0,7" />
+                <TextBlock Text="基础" Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" Margin="0,0,0,5" />
+                <TextBlock Text="名称 · 类型 · 评分 · 尺寸" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,0,0,7" />
                 <Border Margin="0,0,0,7" Padding="8" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4"
                         AutomationProperties.AutomationId="AssetFilterColorPicker">
                     <StackPanel>
-                        <TextBlock Text="颜色" Foreground="#F2F6F7" FontWeight="SemiBold" />
-                        <TextBlock Text="在色板上拖动即可实时筛选；结果只改变当前视图。" Foreground="#ADB8C0" Margin="0,2,0,6" />
+                        <TextBlock Text="颜色" Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" />
+                        <TextBlock Text="在色板上拖动即可实时筛选；结果只改变当前视图。" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,2,0,6" />
                         <Grid x:Name="ColorPlane" Height="150" Background="{Binding ColorHue, Converter={StaticResource HueToBrushConverter}}" Cursor="Cross"
                               MouseLeftButtonDown="ColorPlane_MouseLeftButtonDown" MouseMove="ColorPlane_MouseMove" MouseLeftButtonUp="ColorPlane_MouseLeftButtonUp"
                               AutomationProperties.AutomationId="AssetFilterColorPlane" AutomationProperties.Name="二维颜色选择区">
-                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="White" Offset="0" /><GradientStop Color="#00FFFFFF" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
-                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="Black" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
-                            <Canvas IsHitTestVisible="False"><Ellipse x:Name="ColorPlaneCursor" Width="12" Height="12" Stroke="White" StrokeThickness="2" /></Canvas>
+                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="{DynamicResource TextPrimaryColor}" Offset="0" /><GradientStop Color="{DynamicResource Color.Transparent}" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
+                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="{DynamicResource Color.Transparent}" Offset="0" /><GradientStop Color="{DynamicResource Color.Shadow}" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
+                            <Canvas IsHitTestVisible="False"><Ellipse x:Name="ColorPlaneCursor" Width="12" Height="12" Stroke="{DynamicResource Brush.Text.Primary}" StrokeThickness="2" /></Canvas>
                         </Grid>
-                        <TextBlock Text="色相" Foreground="#ADB8C0" Margin="0,7,0,2" />
+                        <TextBlock Text="色相" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,7,0,2" />
                         <Slider Minimum="0" Maximum="360" Value="{Binding ColorHue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"
                                 AutomationProperties.AutomationId="AssetFilterHueSlider" AutomationProperties.Name="色相">
                             <Slider.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#FFFF0000" Offset="0" /><GradientStop Color="#FFFFFF00" Offset="0.166" /><GradientStop Color="#FF00FF00" Offset="0.333" /><GradientStop Color="#FF00FFFF" Offset="0.5" /><GradientStop Color="#FF0000FF" Offset="0.666" /><GradientStop Color="#FFFF00FF" Offset="0.833" /><GradientStop Color="#FFFF0000" Offset="1" /></LinearGradientBrush></Slider.Background>
@@ -114,23 +114,23 @@
                             <TextBox Text="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}" Width="110" Style="{StaticResource AssetLibraryP3TextBox}" AutomationProperties.AutomationId="AssetFilterColorValue" AutomationProperties.Name="颜色值" />
                             <Border Width="34" Height="24" Margin="6,0,0,0" Background="{Binding TargetColor, Converter={StaticResource HexToBrushConverter}}" />
                         </DockPanel>
-                        <TextBlock Text="颜色范围" Foreground="#ADB8C0" Margin="0,7,0,2" />
+                        <TextBlock Text="颜色范围" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,7,0,2" />
                         <Slider Minimum="1" Maximum="100" Value="{Binding ColorTolerance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="AssetFilterColorRange" AutomationProperties.Name="颜色范围" />
                     </StackPanel>
                 </Border>
-                <TextBlock Text="视觉相似" Foreground="#F2F6F7" FontWeight="SemiBold" Margin="0,0,0,4" />
+                <TextBlock Text="视觉相似" Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" Margin="0,0,0,4" />
                 <WrapPanel Margin="0,0,0,7">
                     <Button Content="与选中照片相似" Command="{Binding FindSimilarCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterVisualSimilar" AutomationProperties.Name="与选中照片相似" />
                     <Button Content="相似配色" Command="{Binding FindPaletteSimilarCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterPaletteSimilar" AutomationProperties.Name="查找相似配色" />
                     <Button Content="已分析" Command="{Binding VisualChipCommand}" CommandParameter="Valid" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterAnalyzed" AutomationProperties.Name="只看已分析照片" />
                     <Button Content="未分析" Command="{Binding VisualChipCommand}" CommandParameter="NotAnalyzed" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterNotAnalyzed" AutomationProperties.Name="只看未分析照片" />
                 </WrapPanel>
-                <TextBlock Text="摄影与项目" Foreground="#F2F6F7" FontWeight="SemiBold" Margin="0,0,0,4" />
+                <TextBlock Text="摄影与项目" Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" Margin="0,0,0,4" />
                 <WrapPanel Margin="0,0,0,7">
                     <Button Content="项目" Command="{Binding OpenProjectFilterPickerCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
                             AutomationProperties.AutomationId="AssetFilterProject" AutomationProperties.Name="按项目筛选" />
-                    <TextBlock Text="相机 · 镜头 · 日期 · 文件夹 · 标签可在下方条件中选择" Foreground="#ADB8C0" VerticalAlignment="Center" />
+                    <TextBlock Text="相机 · 镜头 · 日期 · 文件夹 · 标签可在下方条件中选择" Foreground="{DynamicResource Brush.Text.Secondary}" VerticalAlignment="Center" />
                 </WrapPanel>
                 <DockPanel LastChildFill="True">
                     <WrapPanel DockPanel.Dock="Left">
@@ -143,7 +143,7 @@
                                 AutomationProperties.AutomationId="P3QueryClearAll"
                                 AutomationProperties.Name="清除全部筛选条件" />
                     </WrapPanel>
-                    <TextBlock Text="锁定条件会在切换文件夹或标签后保留。" Foreground="#ADB8C0" VerticalAlignment="Center" />
+                    <TextBlock Text="锁定条件会在切换文件夹或标签后保留。" Foreground="{DynamicResource Brush.Text.Secondary}" VerticalAlignment="Center" />
                 </DockPanel>
 
                 <TreeView ItemsSource="{Binding P3QueryRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
@@ -154,7 +154,7 @@
 
                 <Border Margin="0,6,0,0" Style="{StaticResource AssetLibraryP3ErrorSurface}"
                         Visibility="{Binding P3QueryHasError, Converter={StaticResource P3BooleanToVisibilityConverter}}">
-                    <TextBlock Text="{Binding P3QueryValidationMessage}" Foreground="#FFCBC5" TextWrapping="Wrap"
+                    <TextBlock Text="{Binding P3QueryValidationMessage}" Foreground="{DynamicResource ErrorBrush}" TextWrapping="Wrap"
                                AutomationProperties.AutomationId="P3QueryValidationError"
                                AutomationProperties.Name="筛选条件错误" />
                 </Border>
@@ -171,7 +171,7 @@
                             AutomationProperties.Name="把当前条件保存为智能文件夹" />
                 </DockPanel>
 
-                <Expander Header="搜索历史" Margin="0,7,0,0" Foreground="#F2F6F7"
+                <Expander Header="搜索历史" Margin="0,7,0,0" Foreground="{DynamicResource Brush.Text.Primary}"
                           AutomationProperties.AutomationId="P3QueryHistory"
                           AutomationProperties.Name="搜索历史">
                     <StackPanel Margin="5">

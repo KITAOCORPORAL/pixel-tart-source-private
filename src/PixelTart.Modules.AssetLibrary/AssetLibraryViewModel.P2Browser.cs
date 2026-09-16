@@ -119,6 +119,8 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand<string> SwitchViewCommand { get; private set; } = null!;
     public AsyncCommand<string> SortBrowserCommand { get; private set; } = null!;
     public AsyncCommand ToggleSortDirectionCommand { get; private set; } = null!;
+    public AsyncCommand CopySelectedPathCommand { get; private set; } = null!;
+    public AsyncCommand ExportSelectedOriginalCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> CopyContextPathCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> CopyContextFileCommand { get; private set; } = null!;
     public AsyncCommand<AssetVisualMatchView> AddContextFolderCommand { get; private set; } = null!;
@@ -211,6 +213,8 @@ public sealed partial class AssetLibraryViewModel
         SwitchViewCommand = new(SwitchViewAsync);
         SortBrowserCommand = new(SortBrowserAsync);
         ToggleSortDirectionCommand = new(ToggleSortDirectionAsync);
+        CopySelectedPathCommand = new(CopySelectedPathAsync, () => SelectedAsset is not null);
+        ExportSelectedOriginalCommand = new(ExportSelectedOriginalAsync, () => SelectedAsset is not null);
         CopyContextPathCommand = new(CopyContextPathAsync);
         CopyContextFileCommand = new(CopyContextFileAsync);
         AddContextFolderCommand = new(card => AddContextFolderAsync(card), _ => SelectedFolder is not null);
@@ -912,12 +916,14 @@ public sealed partial class AssetLibraryViewModel
     {
         SystemCollections.Clear();
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.AllAssets, "全部素材", "显示当前素材库中的全部未归档素材", "AssetLibraryAllAssets"));
+        SystemCollections.Add(new(this, AssetLibrarySystemCollection.Uncategorized, "未分类", "尚未加入文件夹", "AssetLibraryUncategorizedAssets"));
+        SystemCollections.Add(new(this, AssetLibrarySystemCollection.Untagged, "未标签", "尚未添加标签", "AssetLibraryUntaggedAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecentlyAdded, "最近添加", "按添加时间从新到旧", "AssetLibraryRecentAssets"));
-        SystemCollections.Add(new(this, AssetLibrarySystemCollection.Uncategorized, "未归类", "尚未加入文件夹", "AssetLibraryUncategorizedAssets"));
-        SystemCollections.Add(new(this, AssetLibrarySystemCollection.Untagged, "未打标签", "尚未添加标签", "AssetLibraryUntaggedAssets"));
+        SystemCollections.Add(new(this, AssetLibrarySystemCollection.HighRating, "收藏", "显示四星及以上照片", "AssetLibraryFavorites"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.MissingFiles, "缺失文件", "源路径目前不可用", "AssetLibraryMissingAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.Archived, "已归档", "仅显示已归档素材", "AssetLibraryArchivedAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecycleBin, "回收站", "可恢复素材；不会删除源文件", "AssetLibraryRecycleBin"));
+        UpdateSystemCollectionActiveStates();
     }
 
     private async Task RefreshSystemCollectionCountsAsync(CancellationToken cancellationToken)
@@ -952,7 +958,13 @@ public sealed partial class AssetLibraryViewModel
     {
         _workspaceSettings.ActiveCollection = collection;
         OnPropertyChanged(nameof(ActiveCollection));
+        UpdateSystemCollectionActiveStates();
         UpdateP2QueryDescription();
+    }
+
+    private void UpdateSystemCollectionActiveStates()
+    {
+        foreach (var item in SystemCollections) item.IsActive = item.Collection == ActiveCollection;
     }
 
     private void RestoreP2QuerySourceAfterLists()
@@ -1235,8 +1247,9 @@ public sealed partial class AssetLibraryViewModel
             ?? ActiveCollection switch
             {
                 AssetLibrarySystemCollection.RecentlyAdded => "最近添加",
-                AssetLibrarySystemCollection.Uncategorized => "未归类",
-                AssetLibrarySystemCollection.Untagged => "未打标签",
+                AssetLibrarySystemCollection.Uncategorized => "未分类",
+                AssetLibrarySystemCollection.Untagged => "未标签",
+                AssetLibrarySystemCollection.HighRating => "收藏",
                 AssetLibrarySystemCollection.MissingFiles => "缺失文件",
                 AssetLibrarySystemCollection.Archived => "已归档",
                 _ => "全部素材"
@@ -1604,6 +1617,14 @@ public sealed partial class AssetLibraryViewModel
         try { await _browserCommands.CopyPathAsync(card.Asset.SourcePath); Status = "路径已复制；未修改源文件。"; }
         catch (Exception exception) { Status = $"复制路径失败：{exception.Message}"; }
     }
+
+    private Task CopySelectedPathAsync() => CopyContextPathAsync(SelectedCard());
+
+    private Task ExportSelectedOriginalAsync() => ExportContextFilesAsync(SelectedCard(), preferManagedCopy: false);
+
+    private AssetVisualMatchView? SelectedCard() => SelectedAsset is null
+        ? null
+        : AssetCards.FirstOrDefault(card => card.Asset.AssetId == SelectedAsset.AssetId);
 
     private async Task CopyContextFileAsync(AssetVisualMatchView? card)
     {

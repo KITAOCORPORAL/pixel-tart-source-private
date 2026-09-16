@@ -18,13 +18,13 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = XDocument.Load(PagePath);
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(56, buttons, "Update the RC12 button inventory when a product action changes.");
+        Assert.HasCount(61, buttons, "Update the Eagle-layout button inventory when a product action changes.");
         Assert.IsTrue(buttons.All(button =>
             Attribute(button, "Style") is "{DynamicResource PixelTart.Button.Ghost}"
                 or "{DynamicResource PixelTart.Button.Primary}"
                 or "{DynamicResource PixelTart.Button.Secondary}"));
-        Assert.AreEqual(39, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
-        Assert.AreEqual(15, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
+        Assert.AreEqual(43, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
+        Assert.AreEqual(16, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
         Assert.AreEqual(2, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Primary}"));
         Assert.IsFalse(buttons.Any(button => Attribute(button, "Style").Contains("AssetLibrary", StringComparison.Ordinal)),
             "The RC12 page must not regress to the removed page-local button-role system.");
@@ -50,9 +50,10 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         foreach (var button in document.Descendants(Presentation + "Button"))
         {
             var content = Attribute(button, "Content");
-            var hasAutomation = button.Attributes().Any(attribute => attribute.Name.LocalName is "Name" or "AutomationId")
-                || button.Descendants().Attributes().Any(attribute => attribute.Name.LocalName is "Name" or "AutomationId");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(content) || hasAutomation || button.Attributes().Any(attribute => attribute.Name.LocalName == "Command"),
+            var hasAutomation = button.Attributes().Any(attribute => attribute.Name.LocalName.EndsWith(".Name", StringComparison.Ordinal) || attribute.Name.LocalName.EndsWith(".AutomationId", StringComparison.Ordinal))
+                || button.Descendants().Attributes().Any(attribute => attribute.Name.LocalName.EndsWith(".Name", StringComparison.Ordinal) || attribute.Name.LocalName.EndsWith(".AutomationId", StringComparison.Ordinal));
+            var hasTooltip = !string.IsNullOrWhiteSpace(Attribute(button, "ToolTip"));
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(content) || hasAutomation || hasTooltip || button.Attributes().Any(attribute => attribute.Name.LocalName == "Command"),
                 "Every action needs a visible label, automation identity, or a bound command.");
         }
     }

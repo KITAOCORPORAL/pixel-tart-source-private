@@ -8,6 +8,7 @@ namespace PixelTart.Modules.AssetLibrary;
 public sealed class AssetLibrarySystemCollectionView : ObservableObject
 {
     private int _count;
+    private bool _isActive;
 
     internal AssetLibrarySystemCollectionView(AssetLibraryViewModel owner, AssetLibrarySystemCollection collection, string label, string description, string automationId, bool isEnabled = true)
     {
@@ -22,6 +23,7 @@ public sealed class AssetLibrarySystemCollectionView : ObservableObject
             AssetLibrarySystemCollection.RecentlyAdded => "M10,3 A7,7 0 1 0 17,10 A7,7 0 1 0 10,3 M10,6 L10,10 L13,12",
             AssetLibrarySystemCollection.Uncategorized => "M2.5,5 L8,5 L10,7 L17.5,7 L17.5,16 L2.5,16 Z",
             AssetLibrarySystemCollection.Untagged => "M3,9 L9,3 L17,3 L17,11 L11,17 Z M13.5,6.5 L13.6,6.5",
+            AssetLibrarySystemCollection.HighRating => "M10,2.5 L12.3,7.2 L17.5,8 L13.8,11.7 L14.7,17 L10,14.5 L5.3,17 L6.2,11.7 L2.5,8 L7.7,7.2 Z",
             AssetLibrarySystemCollection.MissingFiles => "M3,4 L17,4 L17,16 L3,16 Z M6,7 L14,15 M14,7 L6,15",
             AssetLibrarySystemCollection.Archived => "M3,7 L17,7 L16,17 L4,17 Z M2.5,3 L17.5,3 L17.5,7 L2.5,7 Z",
             _ => "M5,6 L15,6 L14,17 L6,17 Z M3.5,6 L16.5,6 M8,3 L12,3"
@@ -36,6 +38,7 @@ public sealed class AssetLibrarySystemCollectionView : ObservableObject
     public string AutomationId { get; }
     public Geometry IconData { get; }
     public int Count { get => _count; internal set { if (SetProperty(ref _count, value)) OnPropertyChanged(nameof(AccessibleName)); } }
+    public bool IsActive { get => _isActive; internal set => SetProperty(ref _isActive, value); }
     public string AccessibleName => $"{Label}，{Count:N0} 项，{Description}";
     public bool IsEnabled { get; }
     public object? DropTarget => Collection == AssetLibrarySystemCollection.AllAssets

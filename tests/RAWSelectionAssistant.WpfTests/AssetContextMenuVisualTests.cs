@@ -17,7 +17,7 @@ public sealed class AssetContextMenuVisualTests
 
         var sectionHeaders = direct.Where(element => ((string?)element.Attribute("Style") ?? string.Empty).Contains("AssetContextSectionHeader", StringComparison.Ordinal))
             .Select(element => (string?)element.Attribute("Header")).ToArray();
-        CollectionAssert.AreEqual(new[] { "查看", "整理", "摄影工作流", "创作与导出", "管理" }, sectionHeaders);
+        CollectionAssert.AreEqual(new[] { "查看", "整理", "项目", "灵感", "导出", "管理" }, sectionHeaders);
 
         var actionHeaders = direct.Where(element => !sectionHeaders.Contains((string?)element.Attribute("Header")))
             .Select(element => (string?)element.Attribute("Header")).ToArray();
@@ -26,9 +26,10 @@ public sealed class AssetContextMenuVisualTests
         Assert.IsLessThan(Array.IndexOf(actionHeaders, "加入灵感板"), Array.IndexOf(actionHeaders, "关联项目…"));
         Assert.IsLessThan(Array.IndexOf(actionHeaders, "移到回收站"), Array.IndexOf(actionHeaders, "加入灵感板"));
 
-        foreach (var header in new[] { "查看大图", "默认程序打开", "在资源管理器中显示", "复制文件", "移到文件夹", "添加标签", "评分", "加入灵感板", "导出", "归档", "移到回收站" })
+        foreach (var header in new[] { "查看大图", "快速预览", "默认程序打开", "打开文件位置", "复制文件", "移到文件夹", "添加标签", "评分", "加入灵感板", "导出图片", "复制路径", "归档", "移到回收站" })
         {
-            var item = direct.Single(element => (string?)element.Attribute("Header") == header);
+            var item = direct.Single(element => (string?)element.Attribute("Header") == header &&
+                !((string?)element.Attribute("Style") ?? string.Empty).Contains("AssetContextSectionHeader", StringComparison.Ordinal));
             Assert.IsTrue(item.Elements().Any(element => element.Name.LocalName == "MenuItem.Icon"), $"{header} should use the Asset Action icon family.");
         }
 

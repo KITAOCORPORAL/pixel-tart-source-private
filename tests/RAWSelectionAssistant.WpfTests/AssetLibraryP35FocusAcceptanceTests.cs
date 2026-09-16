@@ -78,7 +78,8 @@ public sealed class AssetLibraryP35FocusAcceptanceTests
         StringAssert.Contains(portable, "FocusRestorePending");
         Assert.DoesNotContain("<local:AssetSmartFolderEditorView Grid.Row=\"", page, StringComparison.Ordinal);
         Assert.DoesNotContain("<local:AssetTagManagerView Grid.Row=\"", page, StringComparison.Ordinal);
-        StringAssert.Contains(page, "Content=\"更多\"");
+        StringAssert.Contains(page, "ToolTip=\"更多\"");
+        StringAssert.Contains(page, "AutomationProperties.AutomationId=\"AssetLibraryMore\"");
     }
 
     private static T FindByAutomationId<T>(DependencyObject root, string id) where T : DependencyObject

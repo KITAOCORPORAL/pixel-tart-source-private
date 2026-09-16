@@ -312,6 +312,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsTrue(saveSmartFolder.Focusable);
                 Assert.IsTrue(saveSmartFolder.IsTabStop);
                 Assert.IsGreaterThan(0d, saveSmartFolder.ActualHeight);
+                saveSmartFolder.BringIntoView();
+                page.UpdateLayout();
                 var savePosition = saveSmartFolder.TranslatePoint(new Point(0, 0), inspectorScroll);
                 Assert.IsGreaterThanOrEqualTo(0d, savePosition.Y);
                 Assert.IsLessThanOrEqualTo(inspectorScroll.ActualHeight, savePosition.Y + saveSmartFolder.ActualHeight);
@@ -480,8 +482,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     new TaskOperationBridge(),
                     [],
                     workspaceSettings: state);
-                using var presentation = AttachToPresentationSource(page, 1500, 820);
-                ArrangePage(page, 1500, 820);
+                // HwndSource dimensions are device pixels. Use the same 1600 DIP
+                // three-pane acceptance viewport as the keyboard test below.
+                using var presentation = AttachToPresentationSource(page, 2400, 1230);
+                ArrangePage(page, 1600, 820);
 
                 var workspace = FindVisualByAutomationId<Grid>(page, "AssetLibraryThreePaneWorkspace");
                 var organizationColumn = workspace.ColumnDefinitions[0];
@@ -534,7 +538,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 page.ViewModel.ToggleOrganizationPaneCommand.Execute(null);
                 page.UpdateLayout();
                 Assert.AreEqual(0d, organizationColumn.ActualWidth, .1);
-                page.ViewModel.UpdateViewportWidth(1500);
+                page.ViewModel.UpdateViewportWidth(1600);
                 page.ViewModel.ToggleOrganizationPaneCommand.Execute(null);
                 page.UpdateLayout();
                 Assert.AreEqual(keyboardAdjustedOrganizationWidth, organizationColumn.ActualWidth, 1d);
@@ -542,7 +546,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 page.ViewModel.ToggleInspectorPaneCommand.Execute(null);
                 page.UpdateLayout();
                 Assert.AreEqual(0d, inspectorColumn.ActualWidth, .1);
-                page.ViewModel.UpdateViewportWidth(1500);
+                page.ViewModel.UpdateViewportWidth(1600);
                 page.ViewModel.ToggleInspectorPaneCommand.Execute(null);
                 page.UpdateLayout();
                 Assert.AreEqual(retainedInspectorWidth, inspectorColumn.ActualWidth, 1d);
@@ -886,16 +890,28 @@ public sealed class EmbeddedAssetLibraryWpfTests
 
                 Control[] targets =
                 [
-                    FindVisualByAutomationId<Button>(page, "ToggleAssetOrganizationPane"),
-                    FindVisualByAutomationId<Button>(page, "ToggleAssetInspectorPane"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryColorFilter"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryTagFilter"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryRatingFilter"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryDateFilter"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibrarySortMenu"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryViewMenu"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryImport"),
+                    FindVisualByAutomationId<Button>(page, "AssetLibraryMore"),
                     FindVisualByAutomationId<GridSplitter>(page, "AssetOrganizationSplitter"),
                     FindVisualByAutomationId<Slider>(page, "AssetThumbnailSizeSlider"),
                     FindVisualByAutomationId<GridSplitter>(page, "AssetInspectorSplitter"),
                 ];
                 var expectedNames = new[]
                 {
-                    page.ViewModel.OrganizationPaneToggleLabel,
-                    page.ViewModel.InspectorPaneToggleLabel,
+                    "颜色筛选",
+                    "标签筛选",
+                    "评分筛选",
+                    "日期筛选",
+                    "选择素材排序",
+                    "选择素材布局",
+                    "导入素材",
+                    "更多操作",
                     "调整组织栏宽度",
                     "缩略图大小",
                     "调整检查器宽度",

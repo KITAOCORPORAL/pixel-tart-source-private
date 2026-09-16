@@ -948,11 +948,18 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         foreach (var property in new[] { nameof(InspectorAssetOrigin), nameof(InspectorStorageMode), nameof(InspectorFormat), nameof(InspectorFileSize), nameof(InspectorFileUnavailable), nameof(InspectorShootDate), nameof(InspectorCamera), nameof(InspectorLens), nameof(InspectorIso), nameof(InspectorShutter), nameof(InspectorAperture), nameof(InspectorFocalLength), nameof(InspectorExposure), nameof(InspectorWorkflowStatus), nameof(InspectorProject), nameof(InspectorBooking), nameof(InspectorClient) })
             OnPropertyChanged(property);
         OnPropertyChanged(nameof(SelectedAssetIds)); OnPropertyChanged(nameof(SelectionCount)); OnPropertyChanged(nameof(HasSelection)); OnPropertyChanged(nameof(IsSelectionEmpty)); OnPropertyChanged(nameof(HasMultipleSelection)); OnPropertyChanged(nameof(HasSingleSelection)); OnPropertyChanged(nameof(AnalysisStatus));
+        // Record the user's intent immediately, even when the page is still at its
+        // zero-width initialization pass. Responsive visibility remains governed by
+        // IsInspectorPaneVisible and will expose the pane as soon as the host fits it.
+        if (singleMaterialized is not null && IsInspectorPaneCollapsed)
+            IsInspectorPaneCollapsed = false;
         NotifyWorkspaceLayout();
         _selectionSummaryTask = RunTrackedP3OperationAsync(RefreshSelectionSummaryAsync); if (singleMaterialized is not null) { _ = RefreshSelectedFeaturesAsync(singleMaterialized); _ = AnalyzeSelectionCanonicalAsync(); }
         OnP2SelectionChanged(materialized);
         OnP3SelectionChanged(materialized);
         RaiseActions(); RaiseVisualActions();
+        CopySelectedPathCommand.RaiseCanExecuteChanged();
+        ExportSelectedOriginalCommand.RaiseCanExecuteChanged();
         if (singleMaterialized is not null) _ = LoadInspectorMetadataAsync(singleMaterialized);
     }
 

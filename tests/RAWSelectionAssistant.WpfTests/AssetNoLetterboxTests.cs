@@ -19,7 +19,7 @@ public sealed class AssetNoLetterboxTests
         var xaml = File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml"));
         StringAssert.Contains(xaml, "AssetGridThumbnail");
         StringAssert.Contains(xaml, "Background=\"Transparent\" ClipToBounds=\"True\"");
-        StringAssert.Contains(xaml, "Stretch=\"UniformToFill\"");
+        StringAssert.Contains(xaml, "Stretch=\"Uniform\"");
     }
 
     private static string RepositoryRoot()
