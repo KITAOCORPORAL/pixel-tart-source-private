@@ -72,16 +72,25 @@ public partial class MainWindow
             page.UpdateLayout();
 
             if (state == "AssetContextMenu") _automatedContextMenu = page.OpenContextMenuForProductHarness();
+            else if (state == "AssetContextSubmenu") _automatedContextMenu = page.OpenContextSubmenuForProductHarness("评分");
+            else if (state == "AssetQuickLoupeActive") await page.OpenQuickLoupeForProductHarnessAsync();
             else if (state == "AssetRecentLibraries" && host is not null)
             {
                 host.OpenRecentLibraryMenuForProductHarness();
                 _automatedContextMenu = host.ProductHarnessMenu;
             }
-            else if (state == "AssetViewer")
+            else if (state is "AssetViewer" or "AssetFullPreview")
             {
-                var paths = page.ViewModel.AssetCards.Select(card => page.ViewModel.GetDisplaySourcePath(card.Asset)).Where(File.Exists).ToArray();
-                _automatedAuxiliaryWindow = new AssetViewerWindow(paths, 0) { Owner = this, WindowState = WindowState.Normal, Width = 1180, Height = 760, WindowStartupLocation = WindowStartupLocation.CenterOwner };
-                _automatedAuxiliaryWindow.Show();
+                _automatedAuxiliaryWindow = page.CreateViewerForProductHarness();
+                if (_automatedAuxiliaryWindow is not null)
+                {
+                    _automatedAuxiliaryWindow.Owner = this;
+                    _automatedAuxiliaryWindow.WindowState = WindowState.Normal;
+                    _automatedAuxiliaryWindow.Width = 1180;
+                    _automatedAuxiliaryWindow.Height = 760;
+                    _automatedAuxiliaryWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    _automatedAuxiliaryWindow.Show();
+                }
             }
             else if (state == "CalendarBookingAssets" && page.ViewModel.ProductHarnessBookingId is Guid bookingId)
             {

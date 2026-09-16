@@ -104,14 +104,12 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
     {
         "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
-        "Activation", "Help", "BatchCompress", "RawToJpeg", "Watermark", "DeleteRejects", "FtpTool",
-        "PhotoGrouping", "Collage", "BatchRename", "BatchConvert", "Toolbox"
+        "Activation", "Help", "BatchCompress", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
     };
 
     private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
     {
-        "LocalSplit", "BatchCompress", "RawToJpeg", "Watermark", "DeleteRejects", "FtpTool",
-        "PhotoGrouping", "Collage", "BatchRename", "BatchConvert"
+        "LocalSplit", "BatchCompress", "RawToJpeg", "PhotoGrouping", "Collage"
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
@@ -534,7 +532,7 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
             .Append(ToolRegistry.Get(ToolId.Toolbox))
             .Select(definition => new ToolboxItemViewModel(definition)));
     public IReadOnlyList<ToolboxItemViewModel> ToolCatalogItems =>
-        ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox && item.Availability != FeatureAvailability.Hidden).ToList();
+        ToolboxItems.Where(item => item.Definition.Id != ToolId.Toolbox && item.Availability == FeatureAvailability.Production).ToList();
     public IReadOnlyList<ToolDefinition> ToolMenuItems => ProductCatalogForCurrentBuild();
     public ToolboxItemViewModel ToolboxEntry => ToolboxItems.Single(item => item.Definition.Id == ToolId.Toolbox);
     public IReadOnlyList<ToolboxItemViewModel> PinnedToolboxItems => CurrentProductQuickTools()
@@ -2392,9 +2390,9 @@ public sealed class MainViewModel : ObservableObject, IShellEscapeService
     private static IReadOnlyList<ToolDefinition> ProductCatalogForCurrentBuild()
     {
 #if MODULAR_HARNESS_DEV_PREVIEW
-        return ProductToolboxPolicy.Catalog.Where(definition => definition.Id != ToolId.PhotoOrganize).ToArray();
+        return ProductToolboxPolicy.ProductionCatalog.Where(definition => definition.Id != ToolId.PhotoOrganize).ToArray();
 #else
-        return ProductToolboxPolicy.Catalog;
+        return ProductToolboxPolicy.ProductionCatalog;
 #endif
     }
 

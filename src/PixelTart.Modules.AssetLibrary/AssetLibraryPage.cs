@@ -35,9 +35,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _marqueeControlSelection;
     private bool _marqueeShiftSelection;
     private HashSet<Guid> _marqueeBaseSelection = [];
-    private const int QuickLoupeDelayMilliseconds = 420;
-    private readonly AssetQuickLoupePreviewProvider _quickLoupeProvider = new();
-    private DispatcherTimer? _quickLoupeTimer;
+    private readonly IAssetPreviewProvider _previewProvider;
     private CancellationTokenSource? _quickLoupeCancellation;
     private AssetVisualMatchView? _quickLoupeCard;
 
@@ -67,6 +65,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
         var thumbnailProvider = new WpfAssetThumbnailProvider(ResolvePreviewCacheDirectory(databasePath));
+        _previewProvider = thumbnailProvider;
         AsyncThumbnail.Provider = thumbnailProvider;
         AsyncThumbnail.SetScopedProvider(this, thumbnailProvider);
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
@@ -82,7 +81,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             openCalendarBooking,
             productDatabasePath,
             onlineSelectionWorkspaceFile,
-            inspirationTrayDatabasePath);
+            inspirationTrayDatabasePath,
+            thumbnailProvider);
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
@@ -249,11 +249,6 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem("分析选中素材", _viewModel.AnalyzeSelectionCommand));
             menu.Items.Add(CreateMoreItem("撤销", _viewModel.P2UndoCommand));
             menu.Items.Add(CreateMoreItem("重做", _viewModel.P2RedoCommand));
-            var visualFilters = new MenuItem { Header = "视觉筛选" };
-            visualFilters.Items.Add(CreateMoreItem("按颜色…", _viewModel.SearchColorCommand));
-            foreach (var pair in new[] { ("已分析", "Valid"), ("未分析", "NotAnalyzed"), ("主色绿", "Green"), ("低饱和", "LowSaturation"), ("低调", "LowKey"), ("高对比", "HighContrast"), ("暖色", "Warm"), ("冷色", "Cool") })
-                visualFilters.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.VisualChipCommand, CommandParameter = pair.Item2 });
-            menu.Items.Add(visualFilters);
             menu.PlacementTarget = button;
             menu.Placement = PlacementMode.Bottom;
             menu.IsOpen = true;
@@ -347,7 +342,6 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void AssetGrid_PreviewMouseMove(object sender, MouseEventArgs e)
     {
-        UpdateQuickLoupeCandidate(e);
         if (!_isMarqueeSelecting || e.LeftButton != MouseButtonState.Pressed) return;
         UpdateMarqueeSelection(e.GetPosition(AssetGrid));
         e.Handled = true;
@@ -576,28 +570,66 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         return item.ContextMenu;
     }
 
-    private void UpdateQuickLoupeCandidate(MouseEventArgs e)
+    public ContextMenu? OpenContextSubmenuForProductHarness(string header)
     {
-        if (_disposed || e.LeftButton == MouseButtonState.Pressed)
-        {
-            HideQuickLoupe();
-            return;
-        }
-        var card = FindVisualParent<ListBoxItem>(e.OriginalSource as DependencyObject)?.DataContext as AssetVisualMatchView;
-        if (ReferenceEquals(card, _quickLoupeCard)) return;
-        HideQuickLoupe();
-        if (card is null) return;
-        _quickLoupeCard = card;
-        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(QuickLoupeDelayMilliseconds) };
-        timer.Tick += async (_, _) =>
-        {
-            timer.Stop();
-            if (!ReferenceEquals(_quickLoupeTimer, timer) || !ReferenceEquals(_quickLoupeCard, card)) return;
-            await ShowQuickLoupeAsync(card);
-        };
-        _quickLoupeTimer = timer;
-        timer.Start();
+        var menu = OpenContextMenuForProductHarness();
+        menu?.UpdateLayout();
+        if (menu?.Items.OfType<MenuItem>().FirstOrDefault(item => string.Equals(item.Header?.ToString(), header, StringComparison.Ordinal)) is { } submenu)
+            submenu.IsSubmenuOpen = true;
+        return menu;
     }
+
+    public async Task<bool> OpenQuickLoupeForProductHarnessAsync()
+    {
+        if (AssetGrid.Items.Count == 0) return false;
+        AssetGrid.ScrollIntoView(AssetGrid.Items[0]);
+        AssetGrid.UpdateLayout();
+        if (AssetGrid.ItemContainerGenerator.ContainerFromIndex(0) is not ListBoxItem item || item.DataContext is not AssetVisualMatchView card) return false;
+        AssetQuickLoupePopup.PlacementTarget = item;
+        AssetQuickLoupePopup.Placement = PlacementMode.Right;
+        AssetQuickLoupePopup.HorizontalOffset = 12;
+        AssetQuickLoupePopup.VerticalOffset = 0;
+        _quickLoupeCard = card;
+        await ShowQuickLoupeAsync(card);
+        return true;
+    }
+
+    public AssetViewerWindow? CreateViewerForProductHarness()
+    {
+        var paths = _viewModel.AssetCards.Select(card => _viewModel.GetDisplaySourcePath(card.Asset)).Where(File.Exists).ToArray();
+        return paths.Length == 0 ? null : new AssetViewerWindow(paths, 0, _previewProvider);
+    }
+
+    private async void QuickLoupeButton_MouseEnter(object sender, MouseEventArgs e)
+    {
+        if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        AssetQuickLoupePopup.PlacementTarget = sender as UIElement;
+        AssetQuickLoupePopup.Placement = PlacementMode.Right;
+        AssetQuickLoupePopup.HorizontalOffset = 8;
+        AssetQuickLoupePopup.VerticalOffset = 0;
+        _quickLoupeCard = card;
+        await ShowQuickLoupeAsync(card);
+    }
+
+    private async void QuickLoupeButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        AssetQuickLoupePopup.PlacementTarget = sender as UIElement;
+        AssetQuickLoupePopup.Placement = PlacementMode.Right;
+        AssetQuickLoupePopup.HorizontalOffset = 8;
+        AssetQuickLoupePopup.VerticalOffset = 0;
+        _quickLoupeCard = card;
+        await ShowQuickLoupeAsync(card);
+        e.Handled = true;
+    }
+
+    private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) =>
+        _ = Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
+        {
+            if (!AssetQuickLoupePopup.IsMouseOver) HideQuickLoupe();
+        }));
+
+    private void QuickLoupePopup_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
 
     private async Task ShowQuickLoupeAsync(AssetVisualMatchView card)
     {
@@ -610,8 +642,17 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetQuickLoupePopup.IsOpen = true;
         try
         {
-            var bitmap = await _quickLoupeProvider.LoadAsync(card.ThumbnailPath, token);
+            var result = await _previewProvider.GetAsync(new(
+                card.ThumbnailPath,
+                AssetPreviewPurpose.QuickLoupe,
+                AssetPreviewQuality.High,
+                1600,
+                card.Asset.IsMissing ? AssetThumbnailState.Missing : AssetThumbnailState.Available,
+                card.Asset.AssetId,
+                card.Asset.ContentHash), token);
             if (token.IsCancellationRequested || !ReferenceEquals(_quickLoupeCard, card)) return;
+            if (!result.IsAvailable || result.Bitmap is null) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; return; }
+            var bitmap = result.Bitmap;
             QuickLoupeImage.Source = bitmap;
             QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · {bitmap.PixelWidth} × {bitmap.PixelHeight}";
         }
@@ -625,8 +666,6 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void HideQuickLoupe()
     {
-        _quickLoupeTimer?.Stop();
-        _quickLoupeTimer = null;
         _quickLoupeCancellation?.Cancel();
         _quickLoupeCancellation?.Dispose();
         _quickLoupeCancellation = null;
@@ -768,7 +807,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         if (FindVisualParent<ListBoxItem>(e.OriginalSource as DependencyObject)?.DataContext is not AssetVisualMatchView card) return;
         var paths = _viewModel.AssetCards.Select(item => _viewModel.GetDisplaySourcePath(item.Asset)).Where(path => path.Length != 0).ToArray();
         var index = Array.IndexOf(paths, _viewModel.GetDisplaySourcePath(card.Asset));
-        new AssetViewerWindow(paths, Math.Max(0, index)).Show();
+        new AssetViewerWindow(paths, Math.Max(0, index), _previewProvider).Show();
         e.Handled = true;
     }
 

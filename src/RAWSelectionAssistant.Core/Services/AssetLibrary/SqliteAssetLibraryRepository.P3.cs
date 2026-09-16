@@ -419,6 +419,8 @@ public sealed partial class SqliteAssetLibraryRepository
             AssetQueryField.PixelCount => "CASE WHEN a.Width IS NULL OR a.Height IS NULL THEN NULL ELSE CAST(a.Width AS INTEGER)*a.Height END",
             AssetQueryField.AspectRatio => "CASE WHEN a.Width IS NULL OR a.Height IS NULL OR a.Height=0 THEN NULL ELSE CAST(a.Width AS REAL)/a.Height END",
             AssetQueryField.Orientation => "a.Orientation",
+            AssetQueryField.Camera => "a.Camera",
+            AssetQueryField.Lens => "a.Lens",
             AssetQueryField.Rating => "a.Rating",
             _ => throw new InvalidOperationException($"Unsupported P3 query field {field}.")
         };
@@ -573,7 +575,8 @@ public sealed partial class SqliteAssetLibraryRepository
     }
 
     private static bool IsP3TextField(AssetQueryField field) => field is
-        AssetQueryField.FileName or AssetQueryField.Extension or AssetQueryField.MediaType or AssetQueryField.Comment or AssetQueryField.Orientation;
+        AssetQueryField.FileName or AssetQueryField.Extension or AssetQueryField.MediaType or AssetQueryField.Comment or AssetQueryField.Orientation or
+        AssetQueryField.Camera or AssetQueryField.Lens;
 
     private static bool IsP3NumericField(AssetQueryField field) => field is
         AssetQueryField.Rating or AssetQueryField.FileSize or AssetQueryField.Width or AssetQueryField.Height or

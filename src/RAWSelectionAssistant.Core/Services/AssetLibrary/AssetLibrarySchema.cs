@@ -29,6 +29,8 @@ internal static class AssetLibrarySchema
                 Height INTEGER NULL,
                 Orientation TEXT NULL,
                 CaptureTime TEXT NULL,
+                Camera TEXT NULL,
+                Lens TEXT NULL,
                 AddedAt TEXT NOT NULL,
                 ModifiedAt TEXT NOT NULL,
                 Rating INTEGER NOT NULL DEFAULT 0 CHECK(Rating BETWEEN 0 AND 5),
@@ -283,6 +285,13 @@ internal static class AssetLibrarySchema
 
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupId", "TEXT NULL", cancellationToken).ConfigureAwait(false);
         await EnsureColumnAsync(connection, "SmartFolderRules", "GroupLogic", "TEXT NOT NULL DEFAULT 'And'", cancellationToken).ConfigureAwait(false);
+        await EnsureColumnAsync(connection, "AssetItems", "Camera", "TEXT NULL", cancellationToken).ConfigureAwait(false);
+        await EnsureColumnAsync(connection, "AssetItems", "Lens", "TEXT NULL", cancellationToken).ConfigureAwait(false);
+        await using (var cameraIndex = connection.CreateCommand())
+        {
+            cameraIndex.CommandText = "CREATE INDEX IF NOT EXISTS IX_AssetItems_Camera ON AssetItems(Camera COLLATE NOCASE); CREATE INDEX IF NOT EXISTS IX_AssetItems_Lens ON AssetItems(Lens COLLATE NOCASE);";
+            await cameraIndex.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
         await EnsureP3QueryDocumentsAsync(connection, cancellationToken).ConfigureAwait(false);
     }
 

@@ -19,7 +19,7 @@ public sealed class AssetFullPreviewResolutionTests
             WriteImage(path, 1600, 900);
             await RunSta(async () =>
             {
-                var provider = new RecordingThumbnailProvider();
+                var provider = new RecordingPreviewProvider();
                 var viewer = new AssetViewerWindow([path], 0, provider)
                 {
                     WindowState = WindowState.Normal,
@@ -30,7 +30,8 @@ public sealed class AssetFullPreviewResolutionTests
                 };
                 viewer.Show();
                 await WaitUntilAsync(() => viewer.IsShowingFullResolution);
-                Assert.AreEqual(512, provider.RequestedWidth);
+                CollectionAssert.AreEqual(new[] { AssetPreviewPurpose.ViewerPreview, AssetPreviewPurpose.Original }, provider.Purposes);
+                Assert.AreEqual(2048, provider.RequestedWidth);
                 Assert.AreEqual(1600, viewer.DisplayedPixelWidth);
                 Assert.AreEqual(900, viewer.DisplayedPixelHeight);
                 StringAssert.Contains(viewer.Title, "1600 × 900");
@@ -83,15 +84,19 @@ public sealed class AssetFullPreviewResolutionTests
         return completion.Task;
     }
 
-    private sealed class RecordingThumbnailProvider : IAssetThumbnailProvider
+    private sealed class RecordingPreviewProvider : IAssetPreviewProvider
     {
         public int RequestedWidth { get; private set; }
-        public Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
+        public List<AssetPreviewPurpose> Purposes { get; } = [];
+        public Task<AssetPreviewResult> GetAsync(AssetPreviewRequest request, CancellationToken cancellationToken = default)
         {
-            RequestedWidth = request.DecodePixelWidth;
-            var bitmap = BitmapSource.Create(64, 36, 96, 96, PixelFormats.Bgra32, null, new byte[64 * 36 * 4], 64 * 4);
+            Purposes.Add(request.Purpose);
+            RequestedWidth = Math.Max(RequestedWidth, request.RequestedPixelWidth);
+            var width = request.Purpose == AssetPreviewPurpose.Original ? 1600 : 64;
+            var height = request.Purpose == AssetPreviewPurpose.Original ? 900 : 36;
+            var bitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, new byte[width * height * 4], width * 4);
             bitmap.Freeze();
-            return Task.FromResult(new AssetThumbnailResult(AssetThumbnailState.Available, bitmap));
+            return Task.FromResult(new AssetPreviewResult(AssetThumbnailState.Available, request.Purpose, request.Quality, bitmap));
         }
     }
 }

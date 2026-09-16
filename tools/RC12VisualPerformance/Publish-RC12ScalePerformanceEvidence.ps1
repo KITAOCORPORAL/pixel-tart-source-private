@@ -5,6 +5,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+$sourceCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
 $src = [IO.Path]::GetFullPath($DiagnosticRoot)
 $scale = Join-Path $src 'scale-matrix'
 if (-not (Test-Path -LiteralPath $scale -PathType Container)) { throw "Scale matrix is missing: $scale" }
@@ -40,6 +41,7 @@ foreach ($size in @(10000,50000,100000)) {
 $manifest = [ordered]@{
     schema = 'pixel-tart-rc12-visual-performance-scale/v1'
     product_version = '2.3.0-RC12'
+    source_commit = $sourceCommit
     fixture_sizes = @(10000,50000,100000)
     samples_per_size = 3
     source_test = 'AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture'

@@ -82,6 +82,33 @@ public sealed class AssetThumbnailProviderTests
     }
 
     [TestMethod]
+    public async Task UnifiedPreviewCacheUsesBytesAndKeepsPurposeQualityDistinct()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-preview-provider", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var path = Path.Combine(root, "pixel.png");
+        await File.WriteAllBytesAsync(path, Convert.FromBase64String(
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASUVORK5CYII="));
+        try
+        {
+            IAssetPreviewProvider contract = new WpfAssetThumbnailProvider(memoryBudgetBytes: 4L * 1024 * 1024);
+            var provider = (WpfAssetThumbnailProvider)contract;
+            var gallery = await contract.GetAsync(new(path, AssetPreviewPurpose.GalleryThumbnail, AssetPreviewQuality.Balanced, 320));
+            var loupe = await contract.GetAsync(new(path, AssetPreviewPurpose.QuickLoupe, AssetPreviewQuality.High, 1600));
+            var viewer = await contract.GetAsync(new(path, AssetPreviewPurpose.ViewerPreview, AssetPreviewQuality.High, 2048));
+            var original = await contract.GetAsync(new(path, AssetPreviewPurpose.Original, AssetPreviewQuality.Original));
+
+            Assert.AreEqual(AssetPreviewPurpose.GalleryThumbnail, gallery.Purpose);
+            Assert.AreEqual(AssetPreviewPurpose.QuickLoupe, loupe.Purpose);
+            Assert.AreEqual(AssetPreviewPurpose.ViewerPreview, viewer.Purpose);
+            Assert.AreEqual(AssetPreviewPurpose.Original, original.Purpose);
+            Assert.IsTrue(new[] { gallery, loupe, viewer, original }.All(result => result.IsAvailable && result.Bitmap!.IsFrozen));
+            Assert.IsLessThanOrEqualTo(provider.MemoryBudgetBytes, provider.CachedBytes);
+        }
+        finally { try { Directory.Delete(root, recursive: true); } catch { } }
+    }
+
+    [TestMethod]
     public async Task DiskPreviewCacheSurvivesProviderRestartAndServesOfflineSource()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-thumbnail-disk-cache", Guid.NewGuid().ToString("N"));

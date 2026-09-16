@@ -16,10 +16,28 @@ $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
 $screenshotsRoot = Join-Path $OutputRoot 'screenshots'
 $dpiRoot = Join-Path $OutputRoot 'dpi-current'
 $resolutionRoot = Join-Path $OutputRoot 'asset-library-resolutions'
+$closureRoot = Join-Path $OutputRoot 'asset-library-ux-closure'
+$ratioRoot = Join-Path $OutputRoot 'aspect-ratio-comparison'
 $profilesRoot = Join-Path $OutputRoot 'isolated-profiles'
 $fixtureRoot = Join-Path $OutputRoot 'synthetic-assets'
-foreach ($path in @($OutputRoot,$screenshotsRoot,$dpiRoot,$resolutionRoot,$profilesRoot,$fixtureRoot)) {
+foreach ($path in @($OutputRoot,$screenshotsRoot,$dpiRoot,$resolutionRoot,$closureRoot,$ratioRoot,$profilesRoot,$fixtureRoot)) {
     [IO.Directory]::CreateDirectory($path) | Out-Null
+}
+
+$baselinePath = Join-Path $ratioRoot 'before_previous_head.png'
+$previousManifestPath = Join-Path $OutputRoot 'rc12-product-visual-evidence.json'
+$previousGridPath = Join-Path $screenshotsRoot '01_asset_library_grid.png'
+$baselineCommit = $null
+if (-not (Test-Path -LiteralPath $baselinePath) -and (Test-Path -LiteralPath $previousManifestPath) -and (Test-Path -LiteralPath $previousGridPath)) {
+    $previousManifest = Get-Content -LiteralPath $previousManifestPath -Raw | ConvertFrom-Json
+    if ($previousManifest.source_commit -ne $sourceCommit) {
+        Copy-Item -LiteralPath $previousGridPath -Destination $baselinePath
+        $baselineCommit = $previousManifest.source_commit
+        Set-Content -LiteralPath (Join-Path $ratioRoot 'before_previous_head.txt') -Value $baselineCommit -Encoding UTF8
+    }
+}
+elseif (Test-Path -LiteralPath (Join-Path $ratioRoot 'before_previous_head.txt')) {
+    $baselineCommit = (Get-Content -LiteralPath (Join-Path $ratioRoot 'before_previous_head.txt') -Raw).Trim()
 }
 
 if (-not $SkipBuild) {
@@ -37,8 +55,8 @@ function New-SyntheticAssets {
         @('#272A31','#F0ECE4'), @('#1D3C30','#A8D7A8'), @('#432744','#E4A2E1'), @('#29384B','#BCD4EE')
     )
     for ($index = 0; $index -lt $palette.Count; $index++) {
-        $width = if ($index % 3 -eq 0) { 1400 } elseif ($index % 3 -eq 1) { 900 } else { 1200 }
-        $height = if ($index % 3 -eq 0) { 900 } elseif ($index % 3 -eq 1) { 1350 } else { 1200 }
+        $width = if ($index -eq 0) { 2400 } elseif ($index -eq 1) { 600 } elseif ($index % 3 -eq 0) { 1400 } elseif ($index % 3 -eq 1) { 900 } else { 1200 }
+        $height = if ($index -eq 0) { 600 } elseif ($index -eq 1) { 2400 } elseif ($index % 3 -eq 0) { 900 } elseif ($index % 3 -eq 1) { 1350 } else { 1200 }
         $path = Join-Path $Directory ('RC12_SYNTHETIC_{0:00}.jpg' -f ($index + 1))
         $bitmap = [Drawing.Bitmap]::new($width,$height)
         $graphics = [Drawing.Graphics]::FromImage($bitmap)
@@ -159,6 +177,16 @@ $uxScenes = @(
 )
 foreach ($scene in $uxScenes) { Invoke-ProductCapture $scene[0] (Join-Path $uxScreenshotsRoot $scene[1]) 1.0 1920 1080 'ux-simplification' }
 
+$closureScenes = @(
+    @('AssetLibraryGrid','01_clean.png'), @('AssetContextMenu','02_context_menu.png'),
+    @('AssetContextSubmenu','03_submenu.png'), @('AssetFolderTree','04_folder_tree.png'),
+    @('AssetFilterColor','05_filter_color.png'), @('AssetInspectorRating','06_inspector_rating.png'),
+    @('AssetInspirationBoard','07_inspiration_board.png'), @('AssetQuickLoupeIdle','08_loupe_idle.png'),
+    @('AssetQuickLoupeActive','09_loupe_active.png'), @('AssetFullPreview','10_full_preview.png')
+)
+foreach ($scene in $closureScenes) { Invoke-ProductCapture $scene[0] (Join-Path $closureRoot $scene[1]) 1.0 1920 1080 'asset-library-ux-closure' }
+Invoke-ProductCapture 'AssetAspectRatiosAfter' (Join-Path $ratioRoot 'after_current_head.png') 1.0 1920 1080 'asset-library-aspect-ratio'
+
 $dpiStates = @('MainWindow','AssetLibraryGrid','AssetFilter','AssetContextMenu','AssetViewer','CalendarBookingAssets','AssetInspirationCollection','AssetRecentLibraries')
 foreach ($scale in @(1.0,1.25,1.5,2.0)) {
     foreach ($state in $dpiStates) {
@@ -192,6 +220,9 @@ $manifest = [ordered]@{
     required_ux_screenshot_count=10; ux_screenshot_count=@($script:captures | Where-Object group -eq 'ux-simplification').Count
     required_dpi_percentages=@(100,125,150,200); dpi_capture_count=@($script:captures | Where-Object group -eq 'dpi-current').Count
     resolution_capture_count=@($script:captures | Where-Object group -eq 'asset-library-resolution').Count
+    ux_closure_capture_count=@($script:captures | Where-Object group -eq 'asset-library-ux-closure').Count
+    aspect_ratio_capture_count=@($script:captures | Where-Object group -eq 'asset-library-aspect-ratio').Count
+    aspect_ratio_baseline=[ordered]@{ source_commit=$baselineCommit; path=$baselinePath; exists=(Test-Path -LiteralPath $baselinePath) }
     # Windows may reuse a PID after its owner exits. Lifecycle separation is proven
     # by the exit acknowledgement on every capture; PID uniqueness is diagnostic only.
     unique_process_id_per_capture=$uniquePids; lifecycle_isolated_per_capture=$allExited; all_processes_exited_before_next=$allExited
@@ -201,5 +232,5 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'rc12-product-visual-evidence.json') -Encoding UTF8
 if (-not $sourceSafe) { throw 'Synthetic source assets changed during the RC12 visual run.' }
 if (-not $allExited) { throw 'Process-per-fixture lifecycle isolation was not proven.' }
-if ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6) { throw 'RC12 visual evidence set is incomplete.' }
-[pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,ux_screenshot_count,dpi_capture_count,resolution_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json
+if ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6 -or $manifest.ux_closure_capture_count -ne 10 -or $manifest.aspect_ratio_capture_count -ne 1) { throw 'RC12 visual evidence set is incomplete.' }
+[pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,ux_screenshot_count,dpi_capture_count,resolution_capture_count,ux_closure_capture_count,aspect_ratio_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json

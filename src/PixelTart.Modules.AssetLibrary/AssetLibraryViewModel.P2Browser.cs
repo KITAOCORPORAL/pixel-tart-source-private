@@ -47,6 +47,7 @@ public sealed partial class AssetLibraryViewModel
     private InspirationCollectionSummary? _collectionProjectTarget;
     private AssetRelationPickerItem[] _allProjectPickerItems = [];
     private AssetRelationPickerItem[] _allBookingPickerItems = [];
+    private bool _projectPickerIsFilter;
     private IReadOnlyList<Guid>? _relationshipFilterAssetIds;
     private string? _relationshipFilterDescription;
 
@@ -155,6 +156,7 @@ public sealed partial class AssetLibraryViewModel
     public AsyncCommand ClearInspirationTrayCommand { get; private set; } = null!;
     public AsyncCommand<InspirationTrayCardView> RemoveInspirationTrayEntryCommand { get; private set; } = null!;
     public AsyncCommand OpenProjectPickerCommand { get; private set; } = null!;
+    public AsyncCommand OpenProjectFilterPickerCommand { get; private set; } = null!;
     public AsyncCommand OpenBookingPickerCommand { get; private set; } = null!;
     public AsyncCommand CloseRelationPickerCommand { get; private set; } = null!;
     public AsyncCommand<AssetRelationPickerItem> SelectProjectRelationCommand { get; private set; } = null!;
@@ -178,7 +180,7 @@ public sealed partial class AssetLibraryViewModel
     public bool IsBookingPickerOpen { get => _isBookingPickerOpen; private set => SetProperty(ref _isBookingPickerOpen, value); }
     public string ProjectPickerSearch { get => _projectPickerSearch; set { if (SetProperty(ref _projectPickerSearch, value)) FilterProjectPicker(); } }
     public string BookingPickerSearch { get => _bookingPickerSearch; set { if (SetProperty(ref _bookingPickerSearch, value)) FilterBookingPicker(); } }
-    public string ProjectPickerTitle => _collectionProjectTarget is null ? "关联项目" : "关联灵感板项目";
+    public string ProjectPickerTitle => _projectPickerIsFilter ? "按项目筛选" : _collectionProjectTarget is null ? "关联项目" : "关联灵感板项目";
     public IReadOnlyList<string> WorkflowStatusOptions { get; } = ["未处理", "客户选择", "待精修", "已精修", "已交付"];
     public bool IsCollectionPanelOpen { get => _isCollectionPanelOpen; private set => SetProperty(ref _isCollectionPanelOpen, value); }
     public Guid? ActiveCollectionId
@@ -246,6 +248,7 @@ public sealed partial class AssetLibraryViewModel
         ClearInspirationTrayCommand = new(ClearInspirationTrayAsync, () => IsReady && InspirationTrayEntries.Count > 0);
         RemoveInspirationTrayEntryCommand = new(RemoveInspirationTrayEntryAsync, card => IsReady && card is not null);
         OpenProjectPickerCommand = new(OpenProjectPickerAsync, () => IsReady && SelectedAssets.Count > 0);
+        OpenProjectFilterPickerCommand = new(OpenProjectFilterPickerAsync, () => IsReady);
         OpenBookingPickerCommand = new(OpenBookingPickerAsync, () => IsReady && SelectedAssets.Count > 0);
         CloseRelationPickerCommand = new(() => { IsProjectPickerOpen = false; IsBookingPickerOpen = false; SetCollectionProjectTarget(null); return Task.CompletedTask; });
         SelectProjectRelationCommand = new(SelectProjectRelationAsync, _ => IsReady);
@@ -272,6 +275,8 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task OpenProjectPickerAsync()
     {
+        _projectPickerIsFilter = false;
+        OnPropertyChanged(nameof(ProjectPickerTitle));
         SetCollectionProjectTarget(null);
         IsBookingPickerOpen = false;
         var database = new PixelTartDatabase(_productDatabasePath);
@@ -295,6 +300,22 @@ public sealed partial class AssetLibraryViewModel
                 project.Name,
                 $"{project.Status} · {project.Category}",
                 Group: currentProjectIds.Contains(project.Id) ? "当前拍摄对应项目" : index < 8 ? "最近项目" : "全部项目"))
+            .ToArray();
+        ProjectPickerSearch = string.Empty;
+        FilterProjectPicker();
+        IsProjectPickerOpen = true;
+    }
+
+    private async Task OpenProjectFilterPickerAsync()
+    {
+        _projectPickerIsFilter = true;
+        OnPropertyChanged(nameof(ProjectPickerTitle));
+        SetCollectionProjectTarget(null);
+        IsBookingPickerOpen = false;
+        var projects = await new SqliteProjectRepository(new PixelTartDatabase(_productDatabasePath)).ListAsync(_lifetimeCancellation.Token);
+        _allProjectPickerItems = projects
+            .OrderByDescending(project => project.UpdatedAt)
+            .Select(project => new AssetRelationPickerItem(project.Id, project.Name, $"{project.Status} · {project.Category}", Group: "筛选项目"))
             .ToArray();
         ProjectPickerSearch = string.Empty;
         FilterProjectPicker();
@@ -350,6 +371,12 @@ public sealed partial class AssetLibraryViewModel
     private async Task SelectProjectRelationAsync(AssetRelationPickerItem? item)
     {
         if (item is null) return;
+        if (string.Equals(item.Group, "筛选项目", StringComparison.Ordinal))
+        {
+            IsProjectPickerOpen = false;
+            await ApplyProjectFilterAsync(item.Id);
+            return;
+        }
         if (_collectionProjectTarget is { } collection)
         {
             await ((SqliteInspirationTrayService)_inspirationTray).SetCollectionProjectAsync(collection.CollectionId, item.Id, _lifetimeCancellation.Token);
@@ -649,11 +676,25 @@ public sealed partial class AssetLibraryViewModel
     {
         if (!IsReady || AssetCards.Count == 0) return;
         var cards = AssetCards.Take(Math.Min(8, AssetCards.Count)).Select(card => card.Asset).ToArray();
-        SyncSelection(state is "AssetInspirationTray" or "AssetInspirationCollection" ? cards : [cards[0]]);
+        SyncSelection(state is "AssetInspirationTray" or "AssetInspirationCollection" or "AssetInspirationBoard" ? cards : [cards[0]]);
 
         if (state == "AssetLibraryMasonry") await SwitchViewAsync(nameof(AssetLibraryViewMode.Masonry));
         else await SwitchViewAsync(nameof(AssetLibraryViewMode.Grid));
         if (state == "AssetFilter") P3QueryPanelOpen = true;
+        if (state == "AssetFilterColor")
+        {
+            P3QueryPanelOpen = true;
+            TargetColor = "#D58A5A";
+            ColorTolerance = 28;
+        }
+        if (state == "AssetFolderTree") IsOrganizationPaneCollapsed = false;
+        if (state == "AssetInspectorRating")
+        {
+            await _browserCommands.RateAsync([cards[0].AssetId], 4, _lifetimeCancellation.Token);
+            await RefreshAsync();
+            if (AssetCards.FirstOrDefault(item => item.Asset.AssetId == cards[0].AssetId) is { } rated)
+                SyncSelection([rated.Asset]);
+        }
         if (state == "AssetSmartFolder")
         {
             OpenP3SmartFolderEditor(null);
@@ -701,7 +742,7 @@ public sealed partial class AssetLibraryViewModel
             IsInspirationTrayOpen = true;
             Status = "素材库离线 · 正在使用 .ptlibrary/previews 缓存预览";
         }
-        if (state == "AssetInspirationCollection")
+        if (state is "AssetInspirationCollection" or "AssetInspirationBoard")
         {
             await OpenCollectionsAsync();
             var collection = InspirationCollections.FirstOrDefault(item => item.Name == "Light · Form · Gesture");
@@ -780,7 +821,7 @@ public sealed partial class AssetLibraryViewModel
             var asset = await _repository.GetAssetAsync(card.AssetId, _lifetimeCancellation.Token);
             if (asset is null || string.IsNullOrWhiteSpace(asset.ContentHash)) continue;
             var source = GetDisplaySourcePath(asset);
-            var primed = await provider.GetAsync(new(source, 112, AssetThumbnailState.Available, asset.AssetId, asset.ContentHash), _lifetimeCancellation.Token);
+            var primed = await ((IAssetThumbnailProvider)provider).GetAsync(new(source, 112, AssetThumbnailState.Available, asset.AssetId, asset.ContentHash), _lifetimeCancellation.Token);
             if (!primed.IsAvailable) continue;
             var unavailableSource = Path.Combine(Path.GetDirectoryName(source) ?? string.Empty, "offline-source", Path.GetFileName(source));
             offlineCards.Add(new(card.Entry, unavailableSource, "已缓存预览", true, card.AssetLabel));
@@ -1578,7 +1619,7 @@ public sealed partial class AssetLibraryViewModel
         if (card is null) return Task.CompletedTask;
         var paths = AssetCards.Select(item => GetDisplaySourcePath(item.Asset)).Where(path => path.Length != 0).ToArray();
         var index = Array.IndexOf(paths, GetDisplaySourcePath(card.Asset));
-        new AssetViewerWindow(paths, Math.Max(0, index)).Show();
+        new AssetViewerWindow(paths, Math.Max(0, index), _previewProvider).Show();
         return Task.CompletedTask;
     }
 

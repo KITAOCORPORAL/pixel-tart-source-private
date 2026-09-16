@@ -31,6 +31,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly IAssetLibraryLoadStateController? _loadStateController;
     private readonly Func<Guid, Task>? _openCalendarBooking;
     private readonly IInspirationTrayService _inspirationTray;
+    private readonly IAssetPreviewProvider _previewProvider;
     private readonly string _databasePath;
     private readonly string _productDatabasePath;
     private readonly string _onlineSelectionWorkspaceFile;
@@ -52,6 +53,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private long _analysisGeneration;
     private DispatcherTimer? _searchDebounce;
     private long _searchDebounceGeneration;
+    private DispatcherTimer? _colorFilterDebounce;
+    private long _colorFilterDebounceGeneration;
+    private bool _updatingColorPicker;
     private string _searchText = string.Empty;
     private string _status = "正在准备素材库";
     private string _tagInput = string.Empty;
@@ -89,6 +93,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private VisualAssetQuery? _colorQuery;
     private string _targetColor = "#D75A45";
     private double _colorTolerance = 20;
+    private double _colorHue = 9;
+    private double _colorSaturation = .68;
+    private double _colorBrightness = .84;
     private double _minimumVisualValue;
     private double _maximumVisualValue = 1;
     private readonly ObservableCollection<VisualAssetFilter> _visualFilterStack = [];
@@ -164,13 +171,15 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         Func<Guid, Task>? openCalendarBooking = null,
         string? productDatabasePath = null,
         string? onlineSelectionWorkspaceFile = null,
-        string? inspirationTrayDatabasePath = null)
+        string? inspirationTrayDatabasePath = null,
+        IAssetPreviewProvider? previewProvider = null)
     {
         _database = new AssetLibraryDatabase(databasePath);
         _databasePath = _database.DatabasePath;
         _productDatabasePath = productDatabasePath ?? AppDataPaths.DatabaseFile;
         _onlineSelectionWorkspaceFile = onlineSelectionWorkspaceFile ?? AppDataPaths.OnlineSelectionWorkspaceFile;
         _inspirationTray = new SqliteInspirationTrayService(inspirationTrayDatabasePath ?? Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
+        _previewProvider = previewProvider ?? AsyncThumbnail.Provider as IAssetPreviewProvider ?? new WpfAssetThumbnailProvider();
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _loadStateController = loadStateController;
         _enablePreviewFeatures = enablePreviewFeatures && loadStateController?.DisablePreviewFixtures != true;
@@ -241,6 +250,82 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         timer.Tick += (_, _) => OnSearchDebounceTick(timer, generation);
         _searchDebounce = timer;
         timer.Start();
+    }
+
+    private void ScheduleColorSearch()
+    {
+        Interlocked.Increment(ref _colorFilterDebounceGeneration);
+        _colorFilterDebounce?.Stop();
+        _colorFilterDebounce = null;
+        if (!IsReady || !IsVisualQueryScopeSupported || !TryParseRgb(TargetColor, out _)) return;
+        var generation = Volatile.Read(ref _colorFilterDebounceGeneration);
+        var timer = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(80) };
+        timer.Tick += async (_, _) =>
+        {
+            timer.Stop();
+            if (!ReferenceEquals(_colorFilterDebounce, timer) || generation != Volatile.Read(ref _colorFilterDebounceGeneration)) return;
+            _colorFilterDebounce = null;
+            await SearchColorAsync();
+        };
+        _colorFilterDebounce = timer;
+        timer.Start();
+    }
+
+    private void StopColorSearchDebounce()
+    {
+        Interlocked.Increment(ref _colorFilterDebounceGeneration);
+        _colorFilterDebounce?.Stop();
+        _colorFilterDebounce = null;
+    }
+
+    private void UpdateTargetColorFromPicker()
+    {
+        if (_updatingColorPicker) return;
+        var rgb = HsvToRgb(ColorHue, ColorSaturation, ColorBrightness);
+        _updatingColorPicker = true;
+        try { TargetColor = $"#{rgb.R:X2}{rgb.G:X2}{rgb.B:X2}"; }
+        finally { _updatingColorPicker = false; }
+        ScheduleColorSearch();
+    }
+
+    private void UpdatePickerFromRgb(VisualRgb24 rgb)
+    {
+        var (hue, saturation, brightness) = RgbToHsv(rgb);
+        _updatingColorPicker = true;
+        try
+        {
+            ColorHue = hue;
+            ColorSaturation = saturation;
+            ColorBrightness = brightness;
+        }
+        finally { _updatingColorPicker = false; }
+    }
+
+    private static VisualRgb24 HsvToRgb(double hue, double saturation, double value)
+    {
+        hue = hue >= 360 ? 0 : hue;
+        var chroma = value * saturation;
+        var x = chroma * (1 - Math.Abs(hue / 60 % 2 - 1));
+        var m = value - chroma;
+        var (r, g, b) = hue switch
+        {
+            < 60 => (chroma, x, 0d),
+            < 120 => (x, chroma, 0d),
+            < 180 => (0d, chroma, x),
+            < 240 => (0d, x, chroma),
+            < 300 => (x, 0d, chroma),
+            _ => (chroma, 0d, x)
+        };
+        return new((byte)Math.Round((r + m) * 255), (byte)Math.Round((g + m) * 255), (byte)Math.Round((b + m) * 255));
+    }
+
+    private static (double Hue, double Saturation, double Brightness) RgbToHsv(VisualRgb24 rgb)
+    {
+        var r = rgb.R / 255d; var g = rgb.G / 255d; var b = rgb.B / 255d;
+        var max = Math.Max(r, Math.Max(g, b)); var min = Math.Min(r, Math.Min(g, b)); var delta = max - min;
+        var hue = delta == 0 ? 0 : max == r ? 60 * (((g - b) / delta) % 6) : max == g ? 60 * ((b - r) / delta + 2) : 60 * ((r - g) / delta + 4);
+        if (hue < 0) hue += 360;
+        return (hue, max == 0 ? 0 : delta / max, max);
     }
 
     public BulkObservableCollection<AssetVisualMatchView> AssetCards { get; } = [];
@@ -452,8 +537,36 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public bool IsVisualQueryScopeSupported => SelectedSmartFolder is null && string.IsNullOrWhiteSpace(FileNameRegexFilterText);
     public string VisualQueryScopeStatus => IsVisualQueryScopeSupported ? "视觉查找会在当前搜索、文件夹、标签与评分范围内进行。" : "当前照片范围不支持视觉查找；请先清除已保存条件。";
     public string FileNameRegexFilterText { get; set; } = string.Empty;
-    public string TargetColor { get => _targetColor; set => SetProperty(ref _targetColor, value); }
-    public double ColorTolerance { get => _colorTolerance; set => SetProperty(ref _colorTolerance, Math.Clamp(value, 1, 100)); }
+    public string TargetColor
+    {
+        get => _targetColor;
+        set
+        {
+            if (!SetProperty(ref _targetColor, value)) return;
+            if (!_updatingColorPicker && TryParseRgb(value, out var rgb)) UpdatePickerFromRgb(rgb);
+            ScheduleColorSearch();
+        }
+    }
+    public double ColorTolerance
+    {
+        get => _colorTolerance;
+        set { if (SetProperty(ref _colorTolerance, Math.Clamp(value, 1, 100))) ScheduleColorSearch(); }
+    }
+    public double ColorHue
+    {
+        get => _colorHue;
+        set { if (SetProperty(ref _colorHue, Math.Clamp(value, 0, 360))) UpdateTargetColorFromPicker(); }
+    }
+    public double ColorSaturation
+    {
+        get => _colorSaturation;
+        set { if (SetProperty(ref _colorSaturation, Math.Clamp(value, 0, 1))) UpdateTargetColorFromPicker(); }
+    }
+    public double ColorBrightness
+    {
+        get => _colorBrightness;
+        set { if (SetProperty(ref _colorBrightness, Math.Clamp(value, 0, 1))) UpdateTargetColorFromPicker(); }
+    }
     public double MinimumVisualValue { get => _minimumVisualValue; set => SetProperty(ref _minimumVisualValue, Math.Clamp(value, 0, 1)); }
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
@@ -904,7 +1017,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             {
                 var matches = await _visualQuery.SearchByColorAsync(_colorQuery with { Scope = BuildQuery() }, token);
                 if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-                SetColorMatches(matches); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; SetNextCursor(null); UpdateP2QuerySummary(matches.Count);
+                SetColorMatches(matches); Status = $"颜色筛选 · {matches.Count} 项"; SetNextCursor(null); UpdateP2QuerySummary(matches.Count);
             }
             else
             {
@@ -1392,8 +1505,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _colorQuery = new(BuildQuery(), filter, 100);
             var matches = await _visualQuery.SearchByColorAsync(_colorQuery, token);
             if (generation != Volatile.Read(ref _queryGeneration)) return;
-            _visualResultMode = VisualResultMode.Color; _visualFilter = null; VisualModeLabel = $"颜色 {TargetColor} · ΔE76≤{ColorTolerance:F0}";
-            SetColorMatches(matches); SetNextCursor(null); Status = $"临时颜色结果 · {matches.Count} 项 · DeltaE76"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
+            _visualResultMode = VisualResultMode.Color; _visualFilter = null; VisualModeLabel = $"颜色 {TargetColor} · 范围 {ColorTolerance:F0}";
+            SetColorMatches(matches); SetNextCursor(null); Status = $"颜色筛选 · {matches.Count} 项"; NotifyVisualMode(); OnPropertyChanged(nameof(VisibleCount));
             AddVisualSearchHistory(VisualSearchKind.Color, VisualModeLabel, $"{TargetColor}|{ColorTolerance:F2}");
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
@@ -1403,7 +1516,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private Task SearchPaletteColorAsync(string? hex)
     {
         if (string.IsNullOrWhiteSpace(hex)) return Task.CompletedTask;
-        TargetColor = hex; return SearchColorAsync();
+        TargetColor = hex; return Task.CompletedTask;
     }
 
     private async Task FindPaletteSimilarAsync()
@@ -1927,6 +2040,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         IsReady = false;
         _lifetimeCancellation.Cancel();
         StopSearchDebounce();
+        StopColorSearchDebounce();
         DisposeP3QueryComposer();
         DisposeP3SmartFolderEditor();
         DisposeP3TagManager();

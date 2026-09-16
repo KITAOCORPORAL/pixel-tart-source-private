@@ -18,7 +18,23 @@
         </ResourceDictionary.MergedDictionaries>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
+        <local:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
         <local:RatingAtLeastConverter x:Key="RatingAtLeastConverter" />
+        <Style x:Key="QuickLoupeRevealHost" TargetType="Grid">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                    <Setter Property="IsHitTestVisible" Value="True" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.14" /></Storyboard></BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.10" /></Storyboard></BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="AssetInspectorStarButton" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
@@ -158,7 +174,7 @@
             <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="Transparent" ClipToBounds="True"><Grid>
-                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
+                        <Image x:Name="AssetGridThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
                         <TextBlock Text="文件缺失" Visibility="{Binding Asset.IsMissing, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetGridThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -170,6 +186,11 @@
                             <Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed" /><Style.Triggers><DataTrigger Binding="{Binding HasDetail}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers></Style></Border.Style>
                             <TextBlock Text="{Binding Detail}" Foreground="{DynamicResource Brush.Text.Primary}" FontSize="{DynamicResource Type.Caption.FontSize}" ToolTip="{Binding Detail}" />
                         </Border>
+                        <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
+                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetGridQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                        </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
@@ -180,12 +201,17 @@
             <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="Transparent" ClipToBounds="True"><Grid>
-                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="UniformToFill" />
+                        <Image x:Name="AssetMasonryThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="320" Stretch="Uniform" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
                             <TextBlock Text="{Binding ElementName=AssetMasonryThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
+                        <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
+                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetMasonryQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                        </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
@@ -196,12 +222,17 @@
             <Border Background="Transparent">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="40" /></Grid.RowDefinitions>
                     <Border Background="Transparent" ClipToBounds="True"><Grid>
-                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="360" Stretch="UniformToFill" />
+                        <Image x:Name="AssetJustifiedThumbnail" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="360" Stretch="Uniform" />
                         <Border Background="{DynamicResource Brush.Surface.Elevated}" Padding="{DynamicResource Space.Control.Compact.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Visibility="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.HasFailure), Converter={StaticResource BooleanToVisibilityConverter}}"
                                 AutomationProperties.AutomationId="AssetThumbnailFailure">
                             <TextBlock Text="{Binding ElementName=AssetJustifiedThumbnail, Path=(local:AsyncThumbnail.FailureMessage)}" Foreground="{DynamicResource Brush.Text.Primary}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         </Border>
+                        <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
+                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetJustifiedQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                        </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
                 </Grid>
@@ -257,7 +288,7 @@
         </Grid.RowDefinitions>
         <Popup x:Name="AssetQuickLoupePopup" Placement="MousePoint" HorizontalOffset="18" VerticalOffset="18" AllowsTransparency="True" StaysOpen="False"
                AutomationProperties.AutomationId="AssetQuickLoupePopup" AutomationProperties.Name="素材高清速览">
-            <Border Width="430" MaxHeight="390" Padding="7" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="6">
+            <Border Width="430" MaxHeight="390" Padding="7" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="6" MouseLeave="QuickLoupePopup_MouseLeave">
                 <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                     <Image x:Name="QuickLoupeImage" MaxHeight="340" Stretch="Uniform" AutomationProperties.AutomationId="AssetQuickLoupeImage" />
                     <TextBlock x:Name="QuickLoupeTitle" Grid.Row="1" Margin="2,6,2,1" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />

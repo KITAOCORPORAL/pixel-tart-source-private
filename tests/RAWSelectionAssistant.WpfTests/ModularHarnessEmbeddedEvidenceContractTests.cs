@@ -83,7 +83,7 @@ public sealed class ModularHarnessEmbeddedEvidenceContractTests
             "public async Task InitializeAsync()",
             "Settings.OnboardingLegacyUser = true;",
             "Settings.OnboardingUpgradeOfferShown = true;",
-            "return ProductToolboxPolicy.Catalog.Where(definition => definition.Id != ToolId.PhotoOrganize).ToArray();",
+            "return ProductToolboxPolicy.ProductionCatalog.Where(definition => definition.Id != ToolId.PhotoOrganize).ToArray();",
             "normalized.RemoveAll(id => string.Equals(id, ToolId.PhotoOrganize.ToString(), StringComparison.OrdinalIgnoreCase));");
     }
 

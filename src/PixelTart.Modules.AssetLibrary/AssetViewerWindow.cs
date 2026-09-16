@@ -9,12 +9,11 @@ using System.Windows.Media.Imaging;
 namespace PixelTart.Modules.AssetLibrary;
 
 /// <summary>
-/// Read-only, staged full-resolution viewer. The bounded thumbnail channel provides the
-/// first frame; a separate source decoder then replaces it with original pixels.
+/// Read-only, staged full-resolution viewer backed exclusively by the shared preview provider.
 /// </summary>
 public sealed class AssetViewerWindow : Window
 {
-    private readonly IAssetThumbnailProvider _thumbnails;
+    private readonly IAssetPreviewProvider _previews;
     private readonly IReadOnlyList<string> _paths;
     private readonly Image _image = new() { Stretch = Stretch.Uniform };
     private readonly TextBlock _loading = new()
@@ -27,7 +26,6 @@ public sealed class AssetViewerWindow : Window
     };
     private readonly ScaleTransform _scale = new(1, 1);
     private readonly ScrollViewer _scroller = new() { HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, PanningMode = PanningMode.Both };
-    private readonly Dictionary<string, BitmapSource> _fullResolutionCache = new(StringComparer.OrdinalIgnoreCase);
     private CancellationTokenSource? _loadCancellation;
     private Point? _panStart;
     private double _panHorizontal;
@@ -35,11 +33,11 @@ public sealed class AssetViewerWindow : Window
     private int _loadGeneration;
     private int _index;
 
-    public AssetViewerWindow(IReadOnlyList<string> paths, int startIndex, IAssetThumbnailProvider? thumbnails = null)
+    public AssetViewerWindow(IReadOnlyList<string> paths, int startIndex, IAssetPreviewProvider? previews = null)
     {
         _paths = paths.Where(path => !string.IsNullOrWhiteSpace(path)).ToArray();
         _index = Math.Clamp(startIndex, 0, Math.Max(0, _paths.Count - 1));
-        _thumbnails = thumbnails ?? AsyncThumbnail.Provider;
+        _previews = previews ?? AsyncThumbnail.Provider as IAssetPreviewProvider ?? new WpfAssetThumbnailProvider();
         Title = "像素蛋挞 · 查看大图";
         Background = new SolidColorBrush(Color.FromRgb(8, 10, 12));
         WindowState = WindowState.Maximized;
@@ -96,7 +94,11 @@ public sealed class AssetViewerWindow : Window
 
         try
         {
-            var firstFrame = await _thumbnails.GetAsync(new(path, 512), cancellationToken);
+            var firstFrame = await _previews.GetAsync(new(
+                path,
+                AssetPreviewPurpose.ViewerPreview,
+                AssetPreviewQuality.High,
+                2048), cancellationToken);
             if (!IsCurrent(generation, cancellationToken)) return;
             _image.Source = firstFrame.Bitmap;
             Title = firstFrame.IsAvailable ? $"查看大图 · {Path.GetFileName(path)}" : $"查看大图 · {firstFrame.PlaceholderMessage}";
@@ -104,62 +106,23 @@ public sealed class AssetViewerWindow : Window
             if (!firstFrame.IsAvailable || !File.Exists(path)) return;
 
             _loading.Visibility = Visibility.Visible;
-            var fullResolution = await LoadFullResolutionAsync(path, cancellationToken);
+            var original = await _previews.GetAsync(new(
+                path,
+                AssetPreviewPurpose.Original,
+                AssetPreviewQuality.Original), cancellationToken);
             if (!IsCurrent(generation, cancellationToken)) return;
+            if (!original.IsAvailable || original.Bitmap is null) { ShowFullResolutionFailure(path); return; }
+            var fullResolution = original.Bitmap;
             _image.Source = fullResolution;
             IsShowingFullResolution = true;
             _loading.Visibility = Visibility.Collapsed;
             Title = $"查看大图 · {Path.GetFileName(path)} · {fullResolution.PixelWidth} × {fullResolution.PixelHeight}";
             Fit();
-            PruneCache(path);
-            PreloadNeighbor(_index - 1, cancellationToken);
-            PreloadNeighbor(_index + 1, cancellationToken);
         }
         catch (OperationCanceledException) { }
         catch (IOException) { ShowFullResolutionFailure(path); }
         catch (NotSupportedException) { ShowFullResolutionFailure(path); }
         catch (ArgumentException) { ShowFullResolutionFailure(path); }
-    }
-
-    private async Task<BitmapSource> LoadFullResolutionAsync(string path, CancellationToken cancellationToken)
-    {
-        if (_fullResolutionCache.TryGetValue(path, out var cached)) return cached;
-        var result = await Task.Run(() =>
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            var image = new BitmapImage();
-            image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-            // Deliberately no DecodePixelWidth: 100% means one source pixel per image pixel.
-            image.UriSource = new Uri(Path.GetFullPath(path));
-            image.EndInit();
-            image.Freeze();
-            cancellationToken.ThrowIfCancellationRequested();
-            return (BitmapSource)image;
-        }, cancellationToken);
-        _fullResolutionCache[path] = result;
-        return result;
-    }
-
-    private async void PreloadNeighbor(int index, CancellationToken parentToken)
-    {
-        if (index < 0 || index >= _paths.Count) return;
-        var path = _paths[index];
-        if (!File.Exists(path) || _fullResolutionCache.ContainsKey(path)) return;
-        try { _ = await LoadFullResolutionAsync(path, parentToken); }
-        catch (OperationCanceledException) { }
-        catch (IOException) { }
-        catch (NotSupportedException) { }
-        catch (ArgumentException) { }
-    }
-
-    private void PruneCache(string currentPath)
-    {
-        var keep = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { currentPath };
-        if (_index > 0) keep.Add(_paths[_index - 1]);
-        if (_index + 1 < _paths.Count) keep.Add(_paths[_index + 1]);
-        foreach (var key in _fullResolutionCache.Keys.Where(key => !keep.Contains(key)).ToArray()) _fullResolutionCache.Remove(key);
     }
 
     private bool IsCurrent(int generation, CancellationToken cancellationToken) =>

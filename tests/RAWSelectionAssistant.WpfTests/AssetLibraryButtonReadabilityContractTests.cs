@@ -18,12 +18,12 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = XDocument.Load(PagePath);
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(53, buttons, "Update the RC12 button inventory when a product action changes.");
+        Assert.HasCount(56, buttons, "Update the RC12 button inventory when a product action changes.");
         Assert.IsTrue(buttons.All(button =>
             Attribute(button, "Style") is "{DynamicResource PixelTart.Button.Ghost}"
                 or "{DynamicResource PixelTart.Button.Primary}"
                 or "{DynamicResource PixelTart.Button.Secondary}"));
-        Assert.AreEqual(36, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
+        Assert.AreEqual(39, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
         Assert.AreEqual(15, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
         Assert.AreEqual(2, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Primary}"));
         Assert.IsFalse(buttons.Any(button => Attribute(button, "Style").Contains("AssetLibrary", StringComparison.Ordinal)),

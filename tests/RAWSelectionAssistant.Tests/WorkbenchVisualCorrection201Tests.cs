@@ -47,7 +47,7 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void LightTheme_HasSameShellResources() => Contains(Light(), "ShellTopBrush", "TaskCenterBackgroundBrush", "ToolTileBrush", "WorkbenchCardBrush", "WorkbenchHeroBrush");
     [TestMethod] public void Settings_UsesCenteredDarkModal() => Contains(MainXaml(), "x:Name=\"SettingsModal\"", "RaisedSurfaceBrush", "Header=\"常规\"", "Header=\"外观\"", "Header=\"输出与报告\"");
     [TestMethod] public void SettingsEscape_ClosesModal() => Contains(CodeBehind(), "Key.Escape", "IsSettingsModalOpen = false", "RequestModalActionAsync", "RequestCancelAsync");
-    [TestMethod] public void ProviderNoneStatus_IsVisibleInSidebar() => Contains(MainXaml(), "授权服务准备中", "x:Name=\"EditionStatusArea\"");
+    [TestMethod] public void ProviderNoneStatus_IsVisibleInSidebar() => Contains(MainXaml(), "授权与版本", "x:Name=\"EditionStatusArea\"");
     [TestMethod] public void MainMenu_Remains() => Contains(MainXaml(), "Header=\"文件(_F)\"", "Header=\"项目(_P)\"", "Header=\"编辑(_E)\"", "Header=\"视图(_V)\"", "Header=\"工具(_T)\"", "Header=\"帮助(_H)\"");
     [TestMethod] public void BusinessModules_AreAbsent() => DoesNotContain(MainXaml(), "极速选片", "预约管理", "我的收入", "客资管理", "团队管理", "橱窗管理", "AI挑图", "AI 挑图", "会员促销");
     [TestMethod] public void OldWorkbenchLayout_IsDeleted() => DoesNotContain(MainXaml(), "8 个本地工具", "本地处理优先", "MaxWidth=\"1240\" HorizontalAlignment=\"Left\"", "<TextBlock Text=\"工作台\" Style=\"{StaticResource PageTitleText}\"");

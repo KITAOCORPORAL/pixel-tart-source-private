@@ -21,11 +21,14 @@ Assert-Evidence ([bool]$manifest.process_per_fixture -and -not [bool]$manifest.a
 Assert-Evidence ([bool]$manifest.source_files_unchanged) 'Synthetic source assets changed during capture.'
 
 $captures = @($manifest.captures)
-Assert-Evidence ($captures.Count -eq 60) "Expected 60 captures, found $($captures.Count)."
+Assert-Evidence ($captures.Count -eq 71) "Expected 71 captures, found $($captures.Count)."
 Assert-Evidence (@($captures | Where-Object group -eq 'product-screenshot').Count -eq 12) 'The 12 product screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'ux-simplification').Count -eq 10) 'The 10 UX simplification screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'dpi-current').Count -eq 32) 'The 32 current-DPI captures are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-resolution').Count -eq 6) 'The six Asset Library resolution captures are incomplete.'
+Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-ux-closure').Count -eq 10) 'The ten Asset Library UX closure captures are incomplete.'
+Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-aspect-ratio').Count -eq 1) 'The Asset Library aspect-ratio capture is incomplete.'
+Assert-Evidence ([bool]$manifest.aspect_ratio_baseline.exists -and (Test-Path -LiteralPath $manifest.aspect_ratio_baseline.path -PathType Leaf)) 'The pre-closure aspect-ratio baseline screenshot is missing.'
 Assert-Evidence (@($captures | Where-Object { -not $_.passed -or -not $_.process_exited_before_next }).Count -eq 0) 'A capture failed or its process remained alive.'
 
 $requiredScreenshots = @(
@@ -35,6 +38,12 @@ $requiredScreenshots = @(
 )
 $actualScreenshots = @($captures | Where-Object group -eq 'product-screenshot' | ForEach-Object file_name | Sort-Object)
 Assert-Evidence ((@($requiredScreenshots | Sort-Object) -join '|') -ceq ($actualScreenshots -join '|')) 'Product screenshot names differ from the RC12 contract.'
+$requiredClosureScreenshots = @(
+    '01_clean.png','02_context_menu.png','03_submenu.png','04_folder_tree.png','05_filter_color.png',
+    '06_inspector_rating.png','07_inspiration_board.png','08_loupe_idle.png','09_loupe_active.png','10_full_preview.png'
+)
+$actualClosureScreenshots = @($captures | Where-Object group -eq 'asset-library-ux-closure' | ForEach-Object file_name | Sort-Object)
+Assert-Evidence ((@($requiredClosureScreenshots | Sort-Object) -join '|') -ceq ($actualClosureScreenshots -join '|')) 'Asset Library UX closure screenshot names differ from the contract.'
 $dpi = @($captures | Where-Object group -eq 'dpi-current')
 foreach ($percent in @(100,125,150,200)) { Assert-Evidence (@($dpi | Where-Object dpi_percent -eq $percent).Count -eq 8) "DPI $percent% does not contain eight product states." }
 

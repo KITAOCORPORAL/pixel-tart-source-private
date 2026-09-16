@@ -32,11 +32,12 @@ public sealed class ProductToolboxPolicyTests
     }
 
     [TestMethod]
-    public void PreviewWatermark_RemainsVisibleButNeverDefaultPinned()
+    public void PreviewWatermark_RemainsImplementedButIsNotOnPublicProductionSurface()
     {
         var watermark = ProductToolboxPolicy.Get(ToolId.Watermark);
         Assert.AreEqual(FeatureAvailability.Preview, watermark.Availability);
         Assert.IsTrue(ProductToolboxPolicy.Catalog.Contains(watermark));
+        Assert.IsFalse(ProductToolboxPolicy.ProductionCatalog.Contains(watermark));
         Assert.DoesNotContain(watermark.SettingsId, ProductToolboxPolicy.DefaultPinnedTools);
         CollectionAssert.AreEqual(new[] { "Collage" },
             ProductToolboxPolicy.Normalize(["Watermark", "unknown", "Collage", "Collage"]));

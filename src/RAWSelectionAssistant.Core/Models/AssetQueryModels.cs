@@ -49,6 +49,8 @@ public enum AssetQueryField
     PixelCount,
     AspectRatio,
     Orientation,
+    Camera,
+    Lens,
     IsUncategorized,
     IsUntagged,
     IsMissing,

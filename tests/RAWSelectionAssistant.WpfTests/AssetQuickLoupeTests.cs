@@ -6,22 +6,26 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class AssetQuickLoupeTests
 {
     [TestMethod]
-    public void QuickLoupeUsesDelayedHighQualityPreviewAndBoundedCache()
+    public void QuickLoupeUsesExplicitHoverButtonAndSharedHighQualityPreview()
     {
         var root = RepositoryRoot();
         var page = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.cs"));
         var xaml = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.xaml"));
-        var provider = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetQuickLoupePreviewProvider.cs"));
-        StringAssert.Contains(page, "QuickLoupeDelayMilliseconds = 420");
+        var provider = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetThumbnailProvider.cs"));
+        Assert.DoesNotContain("UpdateQuickLoupeCandidate", page, StringComparison.Ordinal);
         StringAssert.Contains(page, "ShowQuickLoupeAsync");
         StringAssert.Contains(page, "HideQuickLoupe");
+        StringAssert.Contains(page, "AssetPreviewPurpose.QuickLoupe");
         StringAssert.Contains(xaml, "AssetQuickLoupePopup");
         StringAssert.Contains(xaml, "AssetQuickLoupeImage");
-        StringAssert.Contains(provider, "DecodePixelWidth = 1600");
-        StringAssert.Contains(provider, "CacheLimit = 4");
-        Assert.DoesNotContain("File.Write", provider, StringComparison.Ordinal);
-        Assert.DoesNotContain("File.Delete", provider, StringComparison.Ordinal);
-        Assert.DoesNotContain("File.Move", provider, StringComparison.Ordinal);
+        StringAssert.Contains(xaml, "AssetGridQuickLoupeButton");
+        StringAssert.Contains(xaml, "QuickLoupeRevealHost");
+        StringAssert.Contains(xaml, "DoubleAnimation");
+        StringAssert.Contains(xaml, "Segoe MDL2 Assets");
+        StringAssert.Contains(xaml, "MouseEnter=\"QuickLoupeButton_MouseEnter\"");
+        StringAssert.Contains(provider, "IAssetPreviewProvider");
+        StringAssert.Contains(provider, "DefaultMemoryBudgetBytes");
+        Assert.DoesNotContain("CacheLimit", page, StringComparison.Ordinal);
     }
 
     private static string RepositoryRoot()

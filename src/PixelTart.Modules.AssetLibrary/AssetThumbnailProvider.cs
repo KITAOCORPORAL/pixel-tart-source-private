@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Security.Cryptography;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -11,6 +11,48 @@ public enum AssetThumbnailState
     Available,
     Missing,
     Offline
+}
+
+public enum AssetPreviewPurpose
+{
+    GalleryThumbnail,
+    QuickLoupe,
+    ViewerPreview,
+    Original
+}
+
+public enum AssetPreviewQuality
+{
+    Balanced,
+    High,
+    Original
+}
+
+public sealed record AssetPreviewRequest(
+    string? SourcePath,
+    AssetPreviewPurpose Purpose,
+    AssetPreviewQuality Quality = AssetPreviewQuality.Balanced,
+    int RequestedPixelWidth = 0,
+    AssetThumbnailState KnownState = AssetThumbnailState.Available,
+    Guid? AssetId = null,
+    string? ContentHash = null,
+    DateTimeOffset? SourceModifiedUtc = null,
+    string? CacheDirectory = null,
+    string? Orientation = null);
+
+public sealed record AssetPreviewResult(
+    AssetThumbnailState State,
+    AssetPreviewPurpose Purpose,
+    AssetPreviewQuality Quality,
+    BitmapSource? Bitmap = null,
+    string? PlaceholderMessage = null)
+{
+    public bool IsAvailable => State == AssetThumbnailState.Available && Bitmap is not null;
+}
+
+public interface IAssetPreviewProvider
+{
+    Task<AssetPreviewResult> GetAsync(AssetPreviewRequest request, CancellationToken cancellationToken = default);
 }
 
 public sealed record AssetThumbnailRequest(
@@ -31,73 +73,119 @@ public sealed record AssetThumbnailResult(
     public bool IsAvailable => State == AssetThumbnailState.Available && Bitmap is not null;
 }
 
-/// <summary>Single thumbnail loading seam shared by the library and future creative surfaces.</summary>
+/// <summary>Compatibility seam for existing gallery bindings. The implementation delegates to the unified preview provider.</summary>
 public interface IAssetThumbnailProvider
 {
     Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default);
 }
 
-/// <summary>Bounded, fingerprinted WPF thumbnail provider used by every asset-library thumbnail.</summary>
-public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
+/// <summary>
+/// One cancellable, byte-budgeted preview pipeline for gallery thumbnails, Quick Loupe,
+/// full preview and original pixels. Viewer and Loupe deliberately own no image cache.
+/// </summary>
+public sealed class WpfAssetThumbnailProvider : IAssetPreviewProvider, IAssetThumbnailProvider
 {
-    private const long MaxCacheBytes = 64L * 1024 * 1024;
-    private const long MaxDiskCacheBytes = 512L * 1024 * 1024;
+    public const long DefaultMemoryBudgetBytes = 64L * 1024 * 1024;
+    public const long DefaultDiskBudgetBytes = 512L * 1024 * 1024;
+
     private readonly object _gate = new();
     private readonly ConcurrentDictionary<string, CacheEntry> _cache = new(StringComparer.Ordinal);
     private readonly LinkedList<string> _lru = new();
-    private long _cacheBytes;
     private readonly string? _defaultCacheDirectory;
+    private readonly long _memoryBudgetBytes;
+    private readonly long _diskBudgetBytes;
+    private long _cacheBytes;
 
-    public WpfAssetThumbnailProvider(string? diskCacheDirectory = null)
+    public WpfAssetThumbnailProvider(
+        string? diskCacheDirectory = null,
+        long memoryBudgetBytes = DefaultMemoryBudgetBytes,
+        long diskBudgetBytes = DefaultDiskBudgetBytes)
     {
         _defaultCacheDirectory = string.IsNullOrWhiteSpace(diskCacheDirectory) ? null : Path.GetFullPath(diskCacheDirectory);
+        _memoryBudgetBytes = Math.Max(4L * 1024 * 1024, memoryBudgetBytes);
+        _diskBudgetBytes = Math.Max(16L * 1024 * 1024, diskBudgetBytes);
     }
 
-    public Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
+    public long MemoryBudgetBytes => _memoryBudgetBytes;
+    public long CachedBytes { get { lock (_gate) return _cacheBytes; } }
+
+    public async Task<AssetThumbnailResult> GetAsync(AssetThumbnailRequest request, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var result = await GetAsync(new AssetPreviewRequest(
+            request.SourcePath,
+            AssetPreviewPurpose.GalleryThumbnail,
+            AssetPreviewQuality.Balanced,
+            request.DecodePixelWidth,
+            request.KnownState,
+            request.AssetId,
+            request.ContentHash,
+            request.SourceModifiedUtc,
+            request.CacheDirectory,
+            request.Orientation), cancellationToken).ConfigureAwait(false);
+        return new(result.State, result.Bitmap, result.PlaceholderMessage);
+    }
+
+    public Task<AssetPreviewResult> GetAsync(AssetPreviewRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
         cancellationToken.ThrowIfCancellationRequested();
-        var width = Math.Clamp(request.DecodePixelWidth, 96, 512);
-        return Task.Run(
-            () => GetThumbnail(request, width, cancellationToken),
-            cancellationToken);
+        var width = ResolveDecodeWidth(request);
+        return Task.Run(() => GetPreview(request, width, cancellationToken), cancellationToken);
     }
 
-    private AssetThumbnailResult GetThumbnail(AssetThumbnailRequest request, int width, CancellationToken cancellationToken)
+    private AssetPreviewResult GetPreview(AssetPreviewRequest request, int width, CancellationToken cancellationToken)
     {
         var path = string.IsNullOrWhiteSpace(request.SourcePath) ? null : Path.GetFullPath(request.SourcePath);
         var key = Fingerprint(request, path, width, cancellationToken);
         var cacheDirectory = request.CacheDirectory ?? _defaultCacheDirectory;
-        if (TryGetMemory(key, out var memory)) return new(AssetThumbnailState.Available, memory);
-        if (TryLoadDisk(cacheDirectory, key, out var disk)) return new(AssetThumbnailState.Available, AddCache(key, disk).Bitmap);
+
+        if (TryGetMemory(key, out var memory))
+            return new(AssetThumbnailState.Available, request.Purpose, request.Quality, memory);
+        if (request.Purpose != AssetPreviewPurpose.Original && TryLoadDisk(cacheDirectory, key, out var disk))
+            return new(AssetThumbnailState.Available, request.Purpose, request.Quality, AddCache(key, disk));
         if (request.KnownState != AssetThumbnailState.Available || path is null || !File.Exists(path))
-            return new(request.KnownState == AssetThumbnailState.Offline ? AssetThumbnailState.Offline : AssetThumbnailState.Missing,
-                PlaceholderMessage: request.KnownState == AssetThumbnailState.Offline ? "素材库离线。" : "缩略图不可用：文件不存在。");
+            return new(
+                request.KnownState == AssetThumbnailState.Offline ? AssetThumbnailState.Offline : AssetThumbnailState.Missing,
+                request.Purpose,
+                request.Quality,
+                PlaceholderMessage: request.KnownState == AssetThumbnailState.Offline ? "素材库离线。" : "图片不可用：文件不存在。");
+
         var bitmap = Decode(path, width, cancellationToken);
-        WriteDisk(cacheDirectory, key, bitmap);
-        return new(AssetThumbnailState.Available, AddCache(key, bitmap).Bitmap);
+        if (request.Purpose != AssetPreviewPurpose.Original) WriteDisk(cacheDirectory, key, bitmap);
+        return new(AssetThumbnailState.Available, request.Purpose, request.Quality, AddCache(key, bitmap));
     }
 
-    private static string Fingerprint(AssetThumbnailRequest request, string? path, int width, CancellationToken cancellationToken)
+    private static int ResolveDecodeWidth(AssetPreviewRequest request) => request.Purpose switch
+    {
+        AssetPreviewPurpose.GalleryThumbnail => Math.Clamp(request.RequestedPixelWidth <= 0 ? 320 : request.RequestedPixelWidth, 96, 512),
+        AssetPreviewPurpose.QuickLoupe => Math.Clamp(request.RequestedPixelWidth <= 0 ? 1600 : request.RequestedPixelWidth, 768, 2048),
+        AssetPreviewPurpose.ViewerPreview => Math.Clamp(request.RequestedPixelWidth <= 0 ? 2048 : request.RequestedPixelWidth, 1024, 3072),
+        AssetPreviewPurpose.Original => 0,
+        _ => 512
+    };
+
+    private static string Fingerprint(AssetPreviewRequest request, string? path, int width, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         var info = path is not null && File.Exists(path) ? new FileInfo(path) : null;
-        // A content hash is the durable identity for offline references. When it is
-        // available, do not make the cache key depend on metadata that cannot be read
-        // after the source drive is disconnected.
         var modified = request.SourceModifiedUtc?.UtcTicks ?? (string.IsNullOrWhiteSpace(request.ContentHash) ? info?.LastWriteTimeUtc.Ticks ?? 0 : 0);
         var length = string.IsNullOrWhiteSpace(request.ContentHash) ? info?.Length ?? 0 : 0;
-        var durableIdentity = !string.IsNullOrWhiteSpace(request.ContentHash)
-            ? $"{request.AssetId:D}|{request.ContentHash}"
-            : path;
-        var text = $"{durableIdentity}|{length}|{modified}|{width}|{request.Orientation}|thumb-v3";
+        var durableIdentity = !string.IsNullOrWhiteSpace(request.ContentHash) ? $"{request.AssetId:D}|{request.ContentHash}" : path;
+        var text = $"{durableIdentity}|{length}|{modified}|{request.Purpose}|{request.Quality}|{width}|{request.Orientation}|preview-v1";
         return Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text)));
     }
 
     private bool TryGetMemory(string key, out BitmapSource bitmap)
     {
-        if (_cache.TryGetValue(key, out var cached)) { bitmap = cached.Bitmap; return true; }
-        bitmap = null!; return false;
+        if (!_cache.TryGetValue(key, out var cached)) { bitmap = null!; return false; }
+        lock (_gate)
+        {
+            _lru.Remove(key);
+            _lru.AddLast(key);
+        }
+        bitmap = cached.Bitmap;
+        return true;
     }
 
     private static bool TryLoadDisk(string? directory, string key, out BitmapImage bitmap)
@@ -108,14 +196,23 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
         try
         {
             if (!File.Exists(path)) return false;
-            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); bitmap = image; return true;
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.UriSource = new Uri(path);
+            image.EndInit();
+            image.Freeze();
+            File.SetLastAccessTimeUtc(path, DateTime.UtcNow);
+            bitmap = image;
+            return true;
         }
         catch (IOException) { return false; }
+        catch (UnauthorizedAccessException) { return false; }
         catch (NotSupportedException) { return false; }
         catch (ArgumentException) { return false; }
     }
 
-    private static void WriteDisk(string? directory, string key, BitmapImage bitmap)
+    private void WriteDisk(string? directory, string key, BitmapSource bitmap)
     {
         if (string.IsNullOrWhiteSpace(directory)) return;
         try
@@ -125,7 +222,9 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
             if (!File.Exists(path))
             {
                 using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Read);
-                var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); encoder.Save(stream);
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                encoder.Save(stream);
             }
             TrimDisk(directory);
         }
@@ -133,13 +232,13 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
         catch (UnauthorizedAccessException) { }
     }
 
-    private static void TrimDisk(string directory)
+    private void TrimDisk(string directory)
     {
         var files = new DirectoryInfo(directory).EnumerateFiles("*.png").OrderBy(file => file.LastAccessTimeUtc).ToList();
         long total = files.Sum(file => file.Length);
         foreach (var file in files)
         {
-            if (total <= MaxDiskCacheBytes) break;
+            if (total <= _diskBudgetBytes) break;
             try { total -= file.Length; file.Delete(); } catch (IOException) { }
         }
     }
@@ -150,7 +249,7 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
         var image = new BitmapImage();
         image.BeginInit();
         image.CacheOption = BitmapCacheOption.OnLoad;
-        image.DecodePixelWidth = width;
+        if (width > 0) image.DecodePixelWidth = width;
         image.UriSource = new Uri(path);
         image.EndInit();
         image.Freeze();
@@ -158,31 +257,31 @@ public sealed class WpfAssetThumbnailProvider : IAssetThumbnailProvider
         return image;
     }
 
-    private CacheEntry AddCache(string key, BitmapImage bitmap)
+    private BitmapSource AddCache(string key, BitmapSource bitmap)
     {
-        var bytes = Math.Max(1L, bitmap.PixelWidth * (long)bitmap.PixelHeight * 4);
+        var bytesPerPixel = Math.Max(1, (bitmap.Format.BitsPerPixel + 7) / 8);
+        var bytes = Math.Max(1L, bitmap.PixelWidth * (long)bitmap.PixelHeight * bytesPerPixel);
+        if (bytes > _memoryBudgetBytes) return bitmap;
+
         lock (_gate)
         {
             if (_cache.TryGetValue(key, out var existing))
             {
                 _lru.Remove(key);
                 _lru.AddLast(key);
-                return existing;
+                return existing.Bitmap;
             }
-
-            while (_cacheBytes + bytes > MaxCacheBytes && _lru.First is { } oldest)
+            while (_cacheBytes + bytes > _memoryBudgetBytes && _lru.First is { } oldest)
             {
                 _lru.RemoveFirst();
                 if (_cache.TryRemove(oldest.Value, out var removed)) _cacheBytes -= removed.Bytes;
             }
-
-            var entry = new CacheEntry(bitmap, bytes);
-            _cache[key] = entry;
+            _cache[key] = new(bitmap, bytes);
             _lru.AddLast(key);
             _cacheBytes += bytes;
-            return entry;
+            return bitmap;
         }
     }
 
-    private sealed record CacheEntry(BitmapImage Bitmap, long Bytes);
+    private sealed record CacheEntry(BitmapSource Bitmap, long Bytes);
 }

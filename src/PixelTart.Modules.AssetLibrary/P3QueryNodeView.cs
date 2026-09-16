@@ -541,7 +541,7 @@ public sealed class P3QueryNodeView : ObservableObject
         AssetQueryField.Comment => "备注", AssetQueryField.AddedAt => "导入日期", AssetQueryField.CaptureTime => "拍摄日期",
         AssetQueryField.FileSize => "文件大小", AssetQueryField.Width => "宽度", AssetQueryField.Height => "高度",
         AssetQueryField.LongEdge => "长边", AssetQueryField.ShortEdge => "短边", AssetQueryField.PixelCount => "像素总数",
-        AssetQueryField.AspectRatio => "宽高比", AssetQueryField.Orientation => "方向", AssetQueryField.IsUncategorized => "未归类",
+        AssetQueryField.AspectRatio => "宽高比", AssetQueryField.Orientation => "方向", AssetQueryField.Camera => "相机", AssetQueryField.Lens => "镜头", AssetQueryField.IsUncategorized => "未归类",
         AssetQueryField.IsUntagged => "未打标签", AssetQueryField.IsMissing => "缺失状态", AssetQueryField.IsArchived => "归档状态",
         AssetQueryField.VisualAnalysisStatus => "视觉分析状态", AssetQueryField.VisualHarmony => "配色和谐度",
         AssetQueryField.VisualToneKey => "影调", AssetQueryField.VisualContrast => "视觉对比",
