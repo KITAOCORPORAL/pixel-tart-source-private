@@ -39,9 +39,9 @@ public sealed class AssetContextMenuVisualTests
         Assert.IsFalse(menu.Descendants().Any(element => ((string?)element.Attribute("Header") ?? string.Empty).Contains("永久删除", StringComparison.Ordinal)));
 
         var theme = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.Dark.xaml"));
-        StringAssert.Contains(theme, "MenuItemHoverBrush\" Color=\"#303843");
+        StringAssert.Contains(theme, "MenuItemHoverBrush\" Color=\"#1D2228");
         StringAssert.Contains(theme, "MenuItemOpenedBrush\" Color=\"#36414C");
-        StringAssert.Contains(theme, "MenuShortcutBrush\" Color=\"#AAB2BC");
+        StringAssert.Contains(theme, "MenuShortcutBrush\" Color=\"#747C86");
 
         var template = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Components.Foundation.xaml"));
         StringAssert.Contains(template, "ContentSource=\"Icon\"");

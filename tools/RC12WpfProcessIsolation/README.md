@@ -9,5 +9,7 @@ and static resource state from leaking between fixtures.
 ```
 
 The gate writes one TRX and log pair per fixture plus a JSON manifest. A failed,
-missing, or skipped test makes the gate fail. `-ClassPattern` is available for
-targeted diagnosis without changing the full-gate fixture inventory.
+missing, or skipped product test makes the gate fail. The opt-in `P3Diagnostic`
+performance fixture is intentionally owned by the separate 10K/50K/100K scale
+gate and is excluded here. `-ClassPattern` is available for targeted diagnosis
+without changing the full-gate fixture inventory.
