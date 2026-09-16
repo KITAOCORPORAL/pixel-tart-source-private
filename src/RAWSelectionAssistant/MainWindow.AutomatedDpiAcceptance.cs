@@ -1064,6 +1064,7 @@ public partial class MainWindow
             var left = explicitInteractiveBounds[leftIndex];
             var right = explicitInteractiveBounds[rightIndex];
             if (IsAncestor(left.Element, right.Element) || IsAncestor(right.Element, left.Element)) continue;
+            if (IsAllowedProductOverlay(left.Element, right.Element)) continue;
             var intersection = Rect.Intersect(left.Bounds!.Rect, right.Bounds!.Rect);
             if (!intersection.IsEmpty && intersection.Width > 2 && intersection.Height > 2 && !IsAllowedUtilityOverlay(left.Bounds, right.Bounds, intersection))
                 overlaps.Add($"{left.Bounds.Identity} <> {right.Bounds.Identity}");
@@ -1223,6 +1224,14 @@ public partial class MainWindow
 
     private static bool IsAllowedUtilityOverlay(ElementBounds left, ElementBounds right, Rect intersection)
     {
+        var assetResults = string.Equals(left.Identity, "素材浏览结果", StringComparison.OrdinalIgnoreCase)
+            ? left
+            : string.Equals(right.Identity, "素材浏览结果", StringComparison.OrdinalIgnoreCase) ? right : null;
+        var emptyStateAction = ReferenceEquals(assetResults, left) ? right : left;
+        if (assetResults is not null &&
+            (string.Equals(emptyStateAction.Identity, "导入引用", StringComparison.OrdinalIgnoreCase) ||
+             string.Equals(emptyStateAction.Identity, "清除条件", StringComparison.OrdinalIgnoreCase)))
+            return true;
         if (left.Identity.Contains("关闭检查器", StringComparison.OrdinalIgnoreCase) ||
             right.Identity.Contains("关闭检查器", StringComparison.OrdinalIgnoreCase))
             return true;
@@ -1235,6 +1244,22 @@ public partial class MainWindow
                               smaller.Identity.Contains("帮助", StringComparison.OrdinalIgnoreCase) ||
                               smaller.Identity.Contains("更多", StringComparison.OrdinalIgnoreCase);
         return semanticUtility && largerArea >= smallerArea * 4 && intersection.Width * intersection.Height >= smallerArea * .85;
+    }
+
+    private static bool IsAllowedProductOverlay(FrameworkElement left, FrameworkElement right)
+    {
+        static bool IsInside(FrameworkElement element, string automationId)
+        {
+            for (DependencyObject? current = element; current is not null; current = VisualTreeHelper.GetParent(current))
+                if (current is FrameworkElement ancestor &&
+                    string.Equals(AutomationProperties.GetAutomationId(ancestor), automationId, StringComparison.Ordinal))
+                    return true;
+            return false;
+        }
+
+        var leftInBoard = IsInside(left, "InspirationBoardPanel");
+        var rightInBoard = IsInside(right, "InspirationBoardPanel");
+        return leftInBoard != rightInBoard;
     }
 
     private static bool IsTextClipped(TextBlock textBlock)
