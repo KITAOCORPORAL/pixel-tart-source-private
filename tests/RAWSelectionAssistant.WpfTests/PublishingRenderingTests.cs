@@ -17,6 +17,17 @@ public sealed class PublishingRenderingTests
     [TestMethod] public async Task PublishingHslTests(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),640,480);var logo=CreateLogo(temp.File("logo.png"));var normal=temp.File("normal.png");var adjusted=temp.File("adjusted.png");var renderer=new WpfPublishingRenderer();await renderer.RenderAsync(source,normal,new(new(false),true,[new(Guid.NewGuid(),WatermarkLayerType.Image,ImagePath:logo)],PublishingOutputFormat.Png));await renderer.RenderAsync(source,adjusted,new(new(false),true,[new(Guid.NewGuid(),WatermarkLayerType.Image,ImagePath:logo,ColorAdjustments:new(90,.2,.1,true))],PublishingOutputFormat.Png));CollectionAssert.AreNotEqual(SHA256.HashData(File.ReadAllBytes(normal)),SHA256.HashData(File.ReadAllBytes(adjusted)));}
     [TestMethod] public async Task PublishingNoCompressionWatermarkTests(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),613,417);var output=temp.File("out.jpg");await new WpfPublishingRenderer().RenderAsync(source,output,new(new(false,PublishingSizeMode.Original),true,[new(Guid.NewGuid(),WatermarkLayerType.Text,Text:"Mark")]));Assert.AreEqual((613,417),ReadSize(output));}
     [TestMethod] public async Task PublishingExactDimensionsPreserveAspectRatio(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),800,600);var output=temp.File("fitted.jpg");await new WpfPublishingRenderer().RenderAsync(source,output,new(new(true,PublishingSizeMode.Exact,Width:400,Height:400),false,[]));Assert.AreEqual((400,300),ReadSize(output));}
+    [TestMethod] public async Task PublishingTextLetterSpacingChangesOutput()
+    {
+        using var temp = new TemporaryDirectory();
+        var source = CreateImage(temp.File("source.png"), 640, 480);
+        var renderer = new WpfPublishingRenderer();
+        var baseLayer = new WatermarkLayer(Guid.NewGuid(), WatermarkLayerType.Text, Text: "Kitao Soma", Position: WatermarkPosition.Center, FontSize: 92);
+        var plain = temp.File("plain.png"); var spaced = temp.File("spaced.png");
+        await renderer.RenderAsync(source, plain, new(new(false), true, [baseLayer], PublishingOutputFormat.Png));
+        await renderer.RenderAsync(source, spaced, new(new(false), true, [baseLayer with { LetterSpacing = 12 }], PublishingOutputFormat.Png));
+        CollectionAssert.AreNotEqual(SHA256.HashData(File.ReadAllBytes(plain)), SHA256.HashData(File.ReadAllBytes(spaced)));
+    }
     [TestMethod] public async Task PublishingSourceSafetyTests()
     {
         using var temp = new TemporaryDirectory();

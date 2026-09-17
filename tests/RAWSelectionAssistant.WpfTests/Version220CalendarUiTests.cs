@@ -277,8 +277,12 @@ public sealed class Version220CalendarUiTests
 
     [TestMethod] public Task CalendarControls_MeasureInIsolatedLogicalDpiViewports() => RunSta(() =>
     {
-        var app = new App();
-        app.InitializeComponent();
+        if (Application.Current is null)
+        {
+            var app = new App();
+            app.InitializeComponent();
+        }
+        Assert.IsTrue(Application.Current!.Resources.Contains("GhostButton"), "Calendar layout requires product resources.");
         try
         {
             foreach (var viewport in new[] { new Size(1024, 640), new Size(854, 534), new Size(720, 480) })
@@ -302,7 +306,7 @@ public sealed class Version220CalendarUiTests
                 }
             }
         }
-        finally { app.Shutdown(); }
+        finally { /* The process-wide Application belongs to the WPF test host. */ }
         return Task.CompletedTask;
     });
 

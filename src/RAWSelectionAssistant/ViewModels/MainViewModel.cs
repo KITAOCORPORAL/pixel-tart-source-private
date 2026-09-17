@@ -500,6 +500,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
             if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
+            if (IsPublishingPage && PublishingPage is not null) _ = PublishingPage.ActivateProjectAsync(_currentProject.Id);
             if (_initialized && !IsOnboardingActive && PrimaryNavigationPolicy.IsPrimaryPage(value))
                 Settings.LastPrimaryPage = value;
             PageChanged?.Invoke(this, new(previousPage, value));

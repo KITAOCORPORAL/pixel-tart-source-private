@@ -146,7 +146,7 @@ function Invoke-ProductCapture {
         if ($null -ne $process) {
             if (-not $process.HasExited) { [void]$process.CloseMainWindow(); [void]$process.WaitForExit(5000) }
             if (-not $process.HasExited) { $process.Kill(); [void]$process.WaitForExit(10000) }
-            if ($script:captures.Count -gt 0 -and $script:captures[$script:captures.Count-1].process_id -eq $process.Id)
+            if ($script:captures.Count -gt 0 -and $script:captures[$script:captures.Count-1]['process_id'] -eq $process.Id)
                 { $script:captures[$script:captures.Count-1].process_exited_before_next = $process.HasExited }
             $process.Dispose()
         }

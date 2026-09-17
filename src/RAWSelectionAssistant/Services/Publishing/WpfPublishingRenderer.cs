@@ -75,9 +75,25 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
 
         var typeface = new Typeface(new FontFamily(layer.FontFamily), FontStyles.Normal, ParseWeight(layer.FontWeight), FontStretches.Normal);
         var brush = new SolidColorBrush(Adjust(ParseColor(layer.Color), layer.EffectiveColorAdjustments)); brush.Freeze();
-        var text = new FormattedText(layer.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, layer.FontSize * outputWidth / 1920d, brush, 1.0);
-        var location = Position(layer, outputWidth, outputHeight, text.WidthIncludingTrailingWhitespace, text.Height).Location;
-        context.PushOpacity(layer.Opacity); context.DrawText(text, location); context.Pop();
+        var fontSize = layer.FontSize * outputWidth / 1920d;
+        var text = new FormattedText(layer.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, fontSize, brush, 1.0);
+        var elements = new List<FormattedText>();
+        var iterator = StringInfo.GetTextElementEnumerator(layer.Text);
+        while (iterator.MoveNext()) elements.Add(new FormattedText(iterator.GetTextElement(), CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, fontSize, brush, 1.0));
+        var advance = layer.LetterSpacing * outputWidth / 1920d;
+        var textWidth = Math.Max(1, elements.Sum(item => item.WidthIncludingTrailingWhitespace) + Math.Max(0, elements.Count - 1) * advance);
+        var location = Position(layer, outputWidth, outputHeight, textWidth, text.Height).Location;
+        context.PushOpacity(layer.Opacity);
+        if (Math.Abs(layer.LetterSpacing) < .001) context.DrawText(text, location);
+        else
+        {
+            foreach (var element in elements)
+            {
+                context.DrawText(element, location);
+                location.X += element.WidthIncludingTrailingWhitespace + advance;
+            }
+        }
+        context.Pop();
     }
 
     private static Rect Position(WatermarkLayer layer, double outputWidth, double outputHeight, double width, double height)

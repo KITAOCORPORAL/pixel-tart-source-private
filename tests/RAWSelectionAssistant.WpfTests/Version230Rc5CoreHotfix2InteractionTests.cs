@@ -130,7 +130,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     [DataRow(200)]
     public Task BookingEditor_ActualBoundsHaveNoUnexpectedOverlapAtHighDpiProfiles(int dpiPercent) => RunSta(() =>
     {
-        var application = EnsureApplication(out var ownsApplication);
+        EnsureApplication();
         try
         {
             var editor = new ShootBookingEditorView { Width = 1080, Height = 800 };
@@ -148,7 +148,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
         }
         finally
         {
-            if (ownsApplication) application.Shutdown();
+            // Retain process-wide WPF Application across parameterized cases.
         }
         return Task.CompletedTask;
     });
@@ -403,13 +403,16 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
         }
     }
 
-    private static App EnsureApplication(out bool ownsApplication)
+    private static void EnsureApplication()
     {
-        ownsApplication = Application.Current is null;
-        if (Application.Current is App current) return current;
+        if (Application.Current is App) return;
+        if (Application.Current is not null)
+        {
+            Assert.IsTrue(Application.Current.Resources.Contains("GhostButton"), "Existing Application must provide production resources.");
+            return;
+        }
         var application = new App();
         application.InitializeComponent();
-        return application;
     }
 
     private static Task RunSta(Func<Task> action)

@@ -20,7 +20,7 @@ public sealed class Version230Rc5MiniCalendarHotfixLayoutTests
     [DataRow(320, 420)]
     public Task MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap(int width, int height) => RunSta(() =>
     {
-        var app = EnsureApplication(out var ownsApplication);
+        EnsureApplication();
         try
         {
             var panel = CreatePanel(width, height);
@@ -69,7 +69,8 @@ public sealed class Version230Rc5MiniCalendarHotfixLayoutTests
         }
         finally
         {
-            if (ownsApplication) app.Shutdown();
+            // WPF permits one Application per process. Keep it alive for the
+            // remaining layout cases; each case owns only its panel.
         }
         return Task.CompletedTask;
     });
@@ -82,7 +83,7 @@ public sealed class Version230Rc5MiniCalendarHotfixLayoutTests
     [DataRow(200)]
     public Task MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi(int dpiPercent) => RunSta(() =>
     {
-        var app = EnsureApplication(out var ownsApplication);
+        EnsureApplication();
         try
         {
             var panel = CreatePanel(280, 420);
@@ -96,7 +97,7 @@ public sealed class Version230Rc5MiniCalendarHotfixLayoutTests
         }
         finally
         {
-            if (ownsApplication) app.Shutdown();
+            // Do not dispose the process-wide Application between data rows.
         }
         return Task.CompletedTask;
     });
@@ -142,15 +143,17 @@ public sealed class Version230Rc5MiniCalendarHotfixLayoutTests
         }).ToArray();
     }
 
-    private static App EnsureApplication(out bool ownsApplication)
+    private static void EnsureApplication()
     {
-        ownsApplication = Application.Current is null;
-        if (Application.Current is App current) return current;
+        if (Application.Current is App) return;
+        if (Application.Current is not null)
+        {
+            Assert.IsTrue(Application.Current.Resources.Contains("GhostButton"), "Existing Application must provide production resources.");
+            return;
+        }
         var app = new App();
         app.InitializeComponent();
-        return app;
     }
-
     private static IEnumerable<T> Children<T>(DependencyObject root) where T : DependencyObject
     {
         for (var index = 0; index < VisualTreeHelper.GetChildrenCount(root); index++)

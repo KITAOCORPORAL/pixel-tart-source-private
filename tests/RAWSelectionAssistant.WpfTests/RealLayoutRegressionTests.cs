@@ -210,7 +210,6 @@ public sealed class RealLayoutRegressionTests
     {
         if (Application.Current is not null)
         {
-            Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             return;
         }
         var application = new Application();

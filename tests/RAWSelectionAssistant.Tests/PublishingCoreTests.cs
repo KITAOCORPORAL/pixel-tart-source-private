@@ -30,6 +30,15 @@ public sealed class PublishingPresetTests
         await store.SaveAsync(preset);var loaded=(await new PublishingPresetStore(path).LoadAsync()).Single(item=>item.Id==preset.Id);
         Assert.AreEqual("_web",loaded.Options.Suffix);Assert.IsFalse(loaded.Options.EffectiveDimensions.Enabled);Assert.AreEqual(93,loaded.Options.EffectiveDimensions.JpegQuality);Assert.AreEqual(WatermarkPosition.TopLeft,loaded.Options.EffectiveWatermarkLayers[0].Position);Assert.IsTrue(loaded.Options.EffectiveWatermarkLayers[0].EffectiveColorAdjustments.Invert);
     }
+
+    [TestMethod]
+    public async Task ProjectDefaultPresetRoundTrips()
+    {
+        using var temp = new TempDirectory(); var store = new ProjectPublishingDefaultStore(temp.Combine("project-defaults.json"));
+        var projectId = Guid.NewGuid(); var presetId = Guid.NewGuid();
+        await store.SetAsync(new(projectId, presetId));
+        Assert.AreEqual(presetId, await new ProjectPublishingDefaultStore(temp.Combine("project-defaults.json")).GetAsync(projectId));
+    }
 }
 
 [TestClass]
