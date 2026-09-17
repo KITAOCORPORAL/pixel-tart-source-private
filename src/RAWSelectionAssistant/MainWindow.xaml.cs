@@ -1127,7 +1127,7 @@ public partial class MainWindow : Window
         }
         if (!string.IsNullOrWhiteSpace(outputPath) && !string.Equals(outputPath, "KEEP_OPEN", StringComparison.OrdinalIgnoreCase))
         {
-            var captureDelay = IsTetherColorReviewState(reviewState) ? 2200 : 550;
+            var captureDelay = IsTetherColorReviewState(reviewState) || reviewState?.StartsWith("Publishing", StringComparison.OrdinalIgnoreCase) == true ? 2200 : 550;
             var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(captureDelay) };
             captureTimer.Tick += async (_, _) =>
             {

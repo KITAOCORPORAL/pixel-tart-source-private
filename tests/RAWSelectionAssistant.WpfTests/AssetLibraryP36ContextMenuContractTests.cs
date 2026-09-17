@@ -30,7 +30,7 @@ public sealed class AssetLibraryP36ContextMenuContractTests
         var headers = menu.Elements().Where(e => e.Name.LocalName == "MenuItem").Select(e => (string?)e.Attribute("Header")).ToArray();
         CollectionAssert.AreEqual(new[]
         {
-            "查看", "查看大图", "快速预览", "默认程序打开", "打开文件位置", "复制文件", "用于创作",
+            "查看", "查看大图", "快速预览", "默认程序打开", "打开文件位置", "复制文件", "用于创作", "视觉分析",
             "整理", "移到文件夹", "添加标签", "颜色标记", "评分",
             "项目", "关联项目…", "关联拍摄…", "处理状态",
             "灵感", "加入灵感板", "导出", "导出图片", "复制路径",

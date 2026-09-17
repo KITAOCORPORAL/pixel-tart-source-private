@@ -130,15 +130,12 @@ public sealed partial class AssetLibraryViewModel
     private async Task ReplaceDuplicateReferencesAsync(DuplicateCandidateView? target)
     {
         if (target is null || string.IsNullOrWhiteSpace(target.Asset.ContentHash)) return;
-        var protection = CreateReferenceProtection(); var replaced = 0;
+        var protection = CreateReferenceProtection();
         try
         {
-            foreach (var source in target.Owner.Items.Where(item => item.Asset.AssetId != target.Asset.AssetId))
-            {
-                var result = await protection.ReplaceAsync(source.Asset.AssetId, new(CanvasLibraryId, target.Asset), _lifetimeCancellation.Token);
-                replaced += result.UpdatedReferenceCount;
-            }
-            Status = $"已将 {replaced:N0} 处引用安全替换为 {target.Asset.DisplayName}；未移除素材。";
+            var sources = target.Owner.Items.Where(item => item.Asset.AssetId != target.Asset.AssetId).Select(item => item.Asset.AssetId);
+            var result = await protection.ReplaceGroupAsync(sources, new(CanvasLibraryId, target.Asset), _lifetimeCancellation.Token);
+            Status = $"已将 {result.UpdatedReferenceCount:N0} 处引用安全替换为 {target.Asset.DisplayName}；未移除素材。";
             await OpenDuplicateWorkspaceAsync();
         }
         catch (Exception error) { Status = error.Message; }
@@ -154,5 +151,37 @@ public sealed partial class AssetLibraryViewModel
             await OpenDuplicateWorkspaceAsync();
         }
         catch (InvalidOperationException error) { Status = error.Message; }
+    }
+
+    public async Task PrepareDuplicateProductVisualStateAsync(string state)
+    {
+        var assets = AssetCards.Take(4).Select(card => card.Asset).ToArray();
+        if (assets.Length < 2) return;
+        // The product harness uses real indexed image files and real library records.
+        // This opt-in fixture creates independent references to an existing source, never a mock page.
+        var first = assets[0];
+        await _repository.ImportAsync([new AssetImportRequest(first.SourcePath, ComputeContentHash: true, DuplicateBehavior: AssetDuplicateBehavior.ImportIndependentRecord)], _lifetimeCancellation.Token);
+        if (state is "DuplicateReferenceProtection" or "DuplicateReferenceReplacement")
+        {
+            var canvasId = Guid.NewGuid();
+            var document = new CanvasDocument
+            {
+                CanvasId = canvasId,
+                Objects = [new CanvasObject
+                {
+                    CanvasId = canvasId, LibraryId = CanvasLibraryId, AssetId = first.AssetId,
+                    SourcePath = first.SourcePath, ContentHash = first.ContentHash ?? "",
+                    Name = first.DisplayName, SourceWidth = first.Width ?? 1, SourceHeight = first.Height ?? 1
+                }]
+            };
+            await new CanvasDocumentStore(CanvasDirectory).SaveAsync(document, _lifetimeCancellation.Token);
+        }
+        await OpenDuplicateWorkspaceAsync();
+    }
+
+    public async Task ReplaceDuplicateProductVisualReferencesAsync()
+    {
+        if (DuplicateGroups.FirstOrDefault()?.Items.LastOrDefault() is { } keep)
+            await ReplaceDuplicateReferencesAsync(keep);
     }
 }

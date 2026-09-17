@@ -1125,7 +1125,7 @@
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" Text="严格" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
                         <TextBlock DockPanel.Dock="Right" Text="宽松" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
-                        <Slider Minimum="0" Maximum="1" FlowDirection="RightToLeft" Value="{Binding DuplicateStrictness, UpdateSourceTrigger=PropertyChanged}" Margin="10,0" AutomationProperties.Name="相似程度严格到宽松" />
+                        <Slider Minimum="0" Maximum="1" Width="420" HorizontalAlignment="Center" FlowDirection="RightToLeft" Value="{Binding DuplicateStrictness, UpdateSourceTrigger=PropertyChanged}" Margin="10,0" AutomationProperties.Name="相似程度严格到宽松" />
                     </DockPanel>
                     <ProgressBar IsIndeterminate="True" Height="4" Margin="0,8,0,0" Visibility="{Binding IsDuplicateScanRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
@@ -1147,7 +1147,7 @@
                                                                 <Border HorizontalAlignment="Left" VerticalAlignment="Top" Background="{DynamicResource Brush.Accent.Subtle}" Padding="6,3" Visibility="{Binding IsSuggested, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="建议保留" Foreground="{DynamicResource Brush.Accent}" /></Border>
                                                             </Grid>
                                                             <TextBlock Text="{Binding Asset.DisplayName}" FontWeight="SemiBold" Margin="0,8,0,2" TextTrimming="CharacterEllipsis" />
-                                                            <TextBlock><Run Text="{Binding Dimensions}" /><Run Text="  ·  " /><Run Text="{Binding FileSize}" /></TextBlock>
+                                                            <TextBlock><Run Text="{Binding Dimensions, Mode=OneWay}" /><Run Text="  ·  " /><Run Text="{Binding FileSize, Mode=OneWay}" /></TextBlock>
                                                             <TextBlock Text="{Binding Rating}" Foreground="{DynamicResource Brush.Accent}" />
                                                             <TextBlock Text="{Binding Asset.SourcePath}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Asset.SourcePath}" />
                                                             <TextBlock Text="{Binding UsageLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,4" />

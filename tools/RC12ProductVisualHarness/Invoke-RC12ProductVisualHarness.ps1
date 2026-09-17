@@ -19,7 +19,7 @@ $dpiRoot = Join-Path $OutputRoot 'dpi-current'
 $resolutionRoot = Join-Path $OutputRoot 'asset-library-resolutions'
 $closureRoot = Join-Path $OutputRoot 'asset-library-ux-closure'
 $ratioRoot = Join-Path $OutputRoot 'aspect-ratio-comparison'
-$profilesRoot = Join-Path $OutputRoot 'isolated-profiles'
+$profilesRoot = Join-Path $OutputRoot ('isolated-profiles\run-' + [Guid]::NewGuid().ToString('N'))
 $fixtureRoot = Join-Path $OutputRoot 'synthetic-assets'
 foreach ($path in @($OutputRoot,$screenshotsRoot,$dpiRoot,$resolutionRoot,$closureRoot,$ratioRoot,$profilesRoot,$fixtureRoot)) {
     [IO.Directory]::CreateDirectory($path) | Out-Null
@@ -188,6 +188,32 @@ $closureScenes = @(
     @('AssetQuickLoupeClosed','11_loupe_closed.png')
 )
 foreach ($scene in $closureScenes) { Invoke-ProductCapture $scene[0] (Join-Path $closureRoot $scene[1]) 1.0 1920 1080 'asset-library-ux-closure' }
+
+$visualAnalysisRoot = Join-Path $OutputRoot 'visual-analysis'
+$duplicateRoot = Join-Path $OutputRoot 'duplicate-finder'
+$publishingRoot = Join-Path $OutputRoot 'publishing'
+foreach ($path in @($visualAnalysisRoot,$duplicateRoot,$publishingRoot)) { [IO.Directory]::CreateDirectory($path) | Out-Null }
+$analysisScenes = @(
+    @('AssetVisualAnalysisPalette','01_palette_single.png'), @('AssetVisualAnalysisGroup','02_palette_group.png'),
+    @('AssetVisualAnalysisCanvas','03_palette_canvas_object.png'), @('AssetVisualAnalysisMonochrome','04_monochrome.png'),
+    @('AssetVisualAnalysisHistogram','05_histogram.png'), @('AssetVisualAnalysisZones','06_zone_distribution.png'),
+    @('AssetVisualAnalysisZoneMap','07_zone_overlay.png')
+)
+foreach ($scene in $analysisScenes) { Invoke-ProductCapture $scene[0] (Join-Path $visualAnalysisRoot $scene[1]) 1.0 1920 1080 'visual-analysis' }
+$duplicateScenes = @(
+    @('DuplicateFinder','01_exact_duplicates.png'), @('DuplicateFinderCompare','02_similar_group.png'),
+    @('DuplicateFinderCompare','03_compare_versions.png'), @('DuplicateReferenceProtection','04_reference_protection.png'),
+    @('DuplicateReferenceReplacement','05_replace_reference.png')
+)
+foreach ($scene in $duplicateScenes) { Invoke-ProductCapture $scene[0] (Join-Path $duplicateRoot $scene[1]) 1.0 1920 1080 'duplicate-finder' }
+$publishingScenes = @(
+    @('PublishingHome','01_publish_home.png'), @('PublishingCompression','02_compression.png'),
+    @('PublishingImageWatermark','03_image_watermark.png'), @('PublishingTextWatermark','04_text_watermark.png'),
+    @('PublishingHsl','05_watermark_hsl.png'), @('PublishingPosition','06_watermark_position.png'),
+    @('PublishingWatermarkOnly','07_no_compression_watermark.png'), @('PublishingLivePreview','08_live_preview.png'),
+    @('PublishingPreset','09_preset.png'), @('PublishingProgress','10_export_progress.png')
+)
+foreach ($scene in $publishingScenes) { Invoke-ProductCapture $scene[0] (Join-Path $publishingRoot $scene[1]) 1.0 1920 1080 'publishing' }
 Invoke-ProductCapture 'AssetAspectRatiosAfter' (Join-Path $ratioRoot 'after_current_head.png') 1.0 1920 1080 'asset-library-aspect-ratio'
 
 $canvasRoot = Join-Path $OutputRoot 'free-canvas'

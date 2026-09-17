@@ -51,18 +51,36 @@ public sealed class DuplicateReferenceProtectionService(IEnumerable<IDuplicateRe
         DuplicateReplacementAsset target,
         CancellationToken cancellationToken = default)
     {
-        if (sourceAssetId == Guid.Empty || target.Asset.AssetId == Guid.Empty) throw new ArgumentException("素材身份不能为空。");
-        if (sourceAssetId == target.Asset.AssetId) return new(new(), 0);
+        return await ReplaceGroupAsync([sourceAssetId], target, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>Capture the whole requested group before writing any store, then restore it in reverse order on failure.</summary>
+    public async Task<DuplicateReferenceReplacementResult> ReplaceGroupAsync(
+        IEnumerable<Guid> sourceAssetIds,
+        DuplicateReplacementAsset target,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(sourceAssetIds);
+        var sources = sourceAssetIds.Distinct().ToArray();
+        if (sources.Any(id => id == Guid.Empty) || target.Asset.AssetId == Guid.Empty) throw new ArgumentException("素材身份不能为空。");
+        sources = sources.Where(id => id != target.Asset.AssetId).ToArray();
+        if (sources.Length == 0) return new(new(), 0);
         _ = target.StableReference;
-        var usage = await GetUsageAsync(sourceAssetId, cancellationToken).ConfigureAwait(false);
-        var snapshots = new List<(IDuplicateReferenceParticipant Participant, object Snapshot)>(_participants.Length);
-        foreach (var participant in _participants)
-            snapshots.Add((participant, await participant.CaptureAsync(sourceAssetId, target, cancellationToken).ConfigureAwait(false)));
+        var usages = new List<DuplicateReferenceUsage>(sources.Length);
+        var snapshots = new List<(IDuplicateReferenceParticipant Participant, object Snapshot)>(_participants.Length * sources.Length);
+        foreach (var source in sources)
+        {
+            usages.Add(await GetUsageAsync(source, cancellationToken).ConfigureAwait(false));
+            foreach (var participant in _participants)
+                snapshots.Add((participant, await participant.CaptureAsync(source, target, cancellationToken).ConfigureAwait(false)));
+        }
 
         try
         {
-            foreach (var participant in _participants)
-                await participant.ReplaceAsync(sourceAssetId, target, cancellationToken).ConfigureAwait(false);
+            foreach (var source in sources)
+                foreach (var participant in _participants)
+                    await participant.ReplaceAsync(source, target, cancellationToken).ConfigureAwait(false);
+            var usage = new DuplicateReferenceUsage(usages.Sum(item => item.InspirationBoardCount), usages.Sum(item => item.CanvasCount), usages.Sum(item => item.ProjectCount), usages.Sum(item => item.PlanningCount));
             return new(usage, usage.Total);
         }
         catch (Exception replacementFailure)

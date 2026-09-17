@@ -49,7 +49,13 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
     private static (int Width, int Height) OutputSize(int sourceWidth, int sourceHeight, PublishingDimensions options)
     {
         if (!options.Enabled || options.Mode == PublishingSizeMode.Original) return (sourceWidth, sourceHeight);
-        if (options.Mode == PublishingSizeMode.Exact) return (options.Width, options.Height);
+        if (options.Mode == PublishingSizeMode.Exact)
+        {
+            // The requested box is a maximum extent. Never stretch a photograph
+            // into another aspect ratio merely to fill that box.
+            var fit = Math.Min(options.Width / (double)sourceWidth, options.Height / (double)sourceHeight);
+            return (Math.Max(1, (int)Math.Round(sourceWidth * fit)), Math.Max(1, (int)Math.Round(sourceHeight * fit)));
+        }
         var scale = Math.Min(1, options.LongestEdge / (double)Math.Max(sourceWidth, sourceHeight));
         return (Math.Max(1, (int)Math.Round(sourceWidth * scale)), Math.Max(1, (int)Math.Round(sourceHeight * scale)));
     }

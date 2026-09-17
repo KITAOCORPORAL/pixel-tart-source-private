@@ -216,7 +216,7 @@ public sealed class AssetLibraryP2CoreTests
             ScrollAnchors = new() { ["grid"] = anchor, ["invalid-view"] = Guid.NewGuid() }
         };
         settings.Normalize();
-        Assert.AreEqual(AssetLibraryViewMode.Grid, settings.ViewMode);
+        Assert.AreEqual(AssetLibraryViewMode.Masonry, settings.ViewMode);
         Assert.AreEqual(AssetLibrarySortField.AddedAt, settings.SortField);
         Assert.AreEqual(AssetLibrarySortDirection.Descending, settings.SortDirection);
         Assert.AreEqual(AssetLibrarySystemCollection.AllAssets, settings.ActiveCollection);

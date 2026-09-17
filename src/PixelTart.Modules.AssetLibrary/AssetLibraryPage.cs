@@ -907,6 +907,18 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void OpenVisualAnalysisZones_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),3);
     private void CloseVisualAnalysis_Click(object sender,RoutedEventArgs e)=>VisualAnalysisSurface.Visibility=Visibility.Collapsed;
     private void CloseDuplicateWorkspace_Click(object sender, RoutedEventArgs e) => _viewModel.IsDuplicateWorkspaceOpen = false;
+    public bool IsVisualAnalysisSurfaceVisibleForProductHarness => VisualAnalysisSurface.Visibility == Visibility.Visible;
+    public async Task OpenVisualAnalysisForProductHarnessAsync(int tab = 0, bool combined = false)
+    {
+        if (combined)
+        {
+            _visualSurfaceAssets = _viewModel.AssetCards.Take(4).Select(card => card.Asset).ToArray();
+            VisualAnalysisContextTabs.SelectedIndex = tab;
+            await RefreshVisualSurfaceAsync();
+            VisualAnalysisSurface.Visibility = Visibility.Visible;
+        }
+        else await OpenVisualAnalysisAsync(_viewModel.AssetCards.FirstOrDefault()?.Asset, tab);
+    }
     private async void VisualPalette3_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=3;await RefreshVisualSurfaceAsync();}
     private async void VisualPalette5_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=5;await RefreshVisualSurfaceAsync();}
     private async void VisualPalette7_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=7;await RefreshVisualSurfaceAsync();}

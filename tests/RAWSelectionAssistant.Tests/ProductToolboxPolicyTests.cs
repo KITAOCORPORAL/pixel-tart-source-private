@@ -8,15 +8,15 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ProductToolboxPolicyTests
 {
     [TestMethod]
-    public void ProductionCatalog_HasFocusedFourToolsInRequiredOrder()
+    public void ProductionCatalog_IncludesPublishingWithoutChangingFourDefaultPins()
     {
         CollectionAssert.AreEqual(new[]
         {
-            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Collage
+            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Publishing, ToolId.Collage
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.Id).ToArray());
         CollectionAssert.AreEqual(new[]
         {
-            "整理图片", "RAW 转 JPG", "批量压缩", "拼图"
+            "整理图片", "RAW 转 JPG", "批量压缩", "发布导出", "拼图"
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.DisplayName).ToArray());
     }
 

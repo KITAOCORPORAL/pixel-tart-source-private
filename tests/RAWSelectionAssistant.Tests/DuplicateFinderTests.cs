@@ -205,6 +205,36 @@ public sealed class DuplicateReferenceReplacementTests
         await Assert.ThrowsAsync<InvalidOperationException>(() => service.ReplaceAsync(Guid.NewGuid(), new(Guid.NewGuid(), target)));
         Assert.AreEqual(2, first.Value); Assert.AreEqual(1, second.Value); Assert.AreEqual(1, third.Value);
     }
+
+    [TestMethod]
+    public async Task GroupFailureRestoresEarlierSourceAndTargetReferences()
+    {
+        var sourceA = Guid.NewGuid(); var sourceB = Guid.NewGuid();
+        var participant = new GroupParticipant(sourceA, sourceB);
+        var service = new DuplicateReferenceProtectionService([participant]);
+        var target = ExactDuplicateTests.Candidate("keep.jpg", new string('D', 64), 2000, 1200).Asset;
+        await Assert.ThrowsAsync<InvalidOperationException>(() => service.ReplaceGroupAsync([sourceA, sourceB], new(Guid.NewGuid(), target)));
+        CollectionAssert.AreEquivalent(new[] { sourceA, sourceB }, participant.References.ToArray());
+    }
+
+    private sealed class GroupParticipant(Guid sourceA, Guid sourceB) : IDuplicateReferenceParticipant
+    {
+        public DuplicateReferenceKind Kind => DuplicateReferenceKind.Canvas;
+        public HashSet<Guid> References { get; } = [sourceA, sourceB];
+        public Task<int> CountAsync(Guid assetId, CancellationToken cancellationToken = default) => Task.FromResult(References.Contains(assetId) ? 1 : 0);
+        public Task<object> CaptureAsync(Guid sourceAssetId, DuplicateReplacementAsset target, CancellationToken cancellationToken = default) => Task.FromResult<object>(References.ToArray());
+        public Task ReplaceAsync(Guid sourceAssetId, DuplicateReplacementAsset target, CancellationToken cancellationToken = default)
+        {
+            References.Remove(sourceAssetId); References.Add(target.Asset.AssetId);
+            if (sourceAssetId == sourceB) throw new IOException("second source failed");
+            return Task.CompletedTask;
+        }
+        public Task RestoreAsync(object snapshot, CancellationToken cancellationToken = default)
+        {
+            References.Clear(); foreach (var reference in (Guid[])snapshot) References.Add(reference);
+            return Task.CompletedTask;
+        }
+    }
 }
 
 [TestClass]

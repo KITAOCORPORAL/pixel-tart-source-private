@@ -16,9 +16,11 @@ public sealed class CollageExportService
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
         try
         {
-            var bitmap = Application.Current is null
-                ? Render(project, cancellationToken)
-                : await Application.Current.Dispatcher.InvokeAsync(() => Render(project, cancellationToken));
+            // Rendering owns its STA thread and returns a frozen bitmap. A previous
+            // window's dispatcher may already be shutting down (including when a
+            // collage is exported after switching workspaces), so never queue work
+            // onto the process-global Application dispatcher.
+            var bitmap = await RenderOnStaAsync(project, cancellationToken).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             await using var stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 1024 * 128, true);
             BitmapEncoder encoder = string.Equals(project.Export.Format, "PNG", StringComparison.OrdinalIgnoreCase)
@@ -35,6 +37,24 @@ public sealed class CollageExportService
             if (File.Exists(outputPath)) try { File.Delete(outputPath); } catch { }
             throw;
         }
+    }
+
+    private Task<RenderTargetBitmap> RenderOnStaAsync(CollageProject project, CancellationToken cancellationToken)
+    {
+        var completion = new TaskCompletionSource<RenderTargetBitmap>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var thread = new Thread(() =>
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                completion.TrySetResult(Render(project, cancellationToken));
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { completion.TrySetCanceled(cancellationToken); }
+            catch (Exception error) { completion.TrySetException(error); }
+        }) { IsBackground = true, Name = "Pixel Tart Collage Render" };
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+        return completion.Task;
     }
 
     public RenderTargetBitmap Render(CollageProject project, CancellationToken cancellationToken = default)

@@ -95,7 +95,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
             {
                 var colors=palette.Colors.OrderByDescending(color=>color.Weight).ToArray();var total=Math.Max(.0001,colors.Sum(color=>color.Weight));var x=rect.X;
                 foreach(var color in colors){Brush swatch;try{swatch=new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Hex));}catch{swatch=Brushes.Gray;}var width=rect.Width*color.Weight/total;dc.DrawRectangle(swatch,null,new(x,rect.Y,width,rect.Height-34));x+=width;}
-                DrawLabel(dc,palette.Combined?$"组合配色 · {palette.SourceAssetIds.Count} 张":$"配色 · {colors.Length} 色",new(rect.X+8,rect.Bottom-28));
+                var paletteLabel = palette.Combined ? "组合配色 · " + palette.SourceAssetIds.Count + " 张" : "配色 · " + colors.Length + " 色";
+                DrawLabel(dc,paletteLabel,new(rect.X+8,rect.Bottom-28));
             }
             else if (_images.TryGetValue(item.ObjectId,out var bitmap))
             {

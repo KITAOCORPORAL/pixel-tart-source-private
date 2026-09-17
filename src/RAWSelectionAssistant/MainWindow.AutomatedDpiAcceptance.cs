@@ -99,7 +99,7 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory).Where(path => new[] { ".jpg", ".jpeg", ".png", ".tif", ".tiff" }.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase)).OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
-        if (state.StartsWith("Canvas", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
+        if (state.StartsWith("Canvas", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Duplicate", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
         {
             _viewModel.NavigateCommand.Execute("AssetLibrary");
             await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
@@ -142,6 +142,30 @@ public partial class MainWindow
                 else editor.Select(null);
                 canvas.UpdateLayout(); canvas.Surface.Fit(); await canvas.Surface.LoadPreviewsAsync();
                 if(!await canvas.FlushAsync())throw new IOException("Canvas evidence document failed to save.");
+                return true;
+            }
+            if (state.StartsWith("AssetVisualAnalysis", StringComparison.Ordinal))
+            {
+                if (state == "AssetVisualAnalysisCanvas")
+                {
+                    await page.OpenCanvasAsync(page.ViewModel.AssetCards.Take(4).Select(card => card.Asset).ToArray());
+                    if (page.ActiveCanvas is { } paletteCanvas)
+                    {
+                        paletteCanvas.Editor.AddPalette(60, 60, new RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasPalette(
+                            [new("#29384B", 215, .29, .23, .4), new("#D8A85C", 37, .62, .60, .35), new("#E3E3DB", 60, .13, .87, .25)],
+                            page.ViewModel.AssetCards.Take(4).Select(card => card.Asset.AssetId).ToArray(), true));
+                        paletteCanvas.UpdateLayout();
+                    }
+                    return true;
+                }
+                var tab = state switch { "AssetVisualAnalysisMonochrome" => 1, "AssetVisualAnalysisHistogram" => 2, "AssetVisualAnalysisZones" or "AssetVisualAnalysisZoneMap" => 3, _ => 0 };
+                await page.OpenVisualAnalysisForProductHarnessAsync(tab, state == "AssetVisualAnalysisGroup");
+                return true;
+            }
+            if (state.StartsWith("Duplicate", StringComparison.Ordinal))
+            {
+                await page.ViewModel.PrepareDuplicateProductVisualStateAsync(state);
+                if (state == "DuplicateReferenceReplacement") await page.ViewModel.ReplaceDuplicateProductVisualReferencesAsync();
                 return true;
             }
             if (state == "AssetInspectorNone") page.ViewModel.SyncSelection([]);
@@ -355,6 +379,44 @@ public partial class MainWindow
                     _viewModel.RawToJpegPage.AddFiles(rawFiles);
                     _viewModel.RawToJpegPage.DestinationDirectory = Path.Combine(AppDataPaths.Root, "RawOutput");
                     Directory.CreateDirectory(_viewModel.RawToJpegPage.DestinationDirectory);
+                }
+                return true;
+            case "PublishingHome":
+            case "PublishingCompression":
+            case "PublishingImageWatermark":
+            case "PublishingTextWatermark":
+            case "PublishingHsl":
+            case "PublishingPosition":
+            case "PublishingWatermarkOnly":
+            case "PublishingLivePreview":
+            case "PublishingPreset":
+            case "PublishingProgress":
+                _viewModel.NavigateCommand.Execute("Publishing");
+                if (_viewModel.PublishingPage is not null)
+                {
+                    _viewModel.PublishingPage.AddFiles(demoImages.Take(8));
+                    _viewModel.PublishingPage.DestinationDirectory = Path.Combine(AppDataPaths.Root, "PublishingOutput");
+                    Directory.CreateDirectory(_viewModel.PublishingPage.DestinationDirectory);
+                    if (state == "PublishingWatermarkOnly") _viewModel.PublishingPage.DimensionsEnabled = false;
+                    if (state == "PublishingLivePreview") _viewModel.PublishingPage.PreviewIndex = 2;
+                    if (state is "PublishingImageWatermark" or "PublishingHsl" or "PublishingPosition" or "PublishingWatermarkOnly")
+                    {
+                        var watermark = demoImages.FirstOrDefault(path => string.Equals(Path.GetExtension(path), ".png", StringComparison.OrdinalIgnoreCase)) ?? demoImages.FirstOrDefault();
+                        if (watermark is not null)
+                        {
+                            var layer = new PublishingWatermarkLayerViewModel { Type = WatermarkLayerType.Image, Name = "Kitao Logo", ImagePath = watermark };
+                            if (state == "PublishingHsl") { layer.Hue = 38; layer.Saturation = .2; layer.Lightness = .08; }
+                            if (state == "PublishingPosition") layer.Position = WatermarkPosition.TopLeft;
+                            _viewModel.PublishingPage.WatermarkLayers.Add(layer);
+                        }
+                    }
+                    if (state == "PublishingTextWatermark")
+                        _viewModel.PublishingPage.WatermarkLayers.Add(new PublishingWatermarkLayerViewModel { Type = WatermarkLayerType.Text, Name = "文字水印", Text = "Kitao Soma" });
+                    if (state == "PublishingProgress")
+                    {
+                        await ((AsyncRelayCommand)_viewModel.PublishingPage.StartCommand).ExecuteAsync(null);
+                        _viewModel.NavigateCommand.Execute("Workbench");
+                    }
                 }
                 return true;
             case "RawToJpegAdvanced":
@@ -960,7 +1022,9 @@ public partial class MainWindow
         var productCalendarScope = string.Equals(_automatedScenarioName, "CalendarBookingAssets", StringComparison.OrdinalIgnoreCase);
         // Drawer/picker overlays intentionally cover the scrolling gallery below them.
         // Their own overflow, clipping, zero-size and white-surface checks remain strict.
-        var productOverlayScope = _automatedScenarioName is "AssetInspirationTray" or "AssetInspirationCollection" or "AssetOfflineCachedPreview" or "AssetProjectBookingPicker";
+        var productOverlayScope = _automatedScenarioName is "AssetInspirationTray" or "AssetInspirationCollection" or "AssetOfflineCachedPreview" or "AssetProjectBookingPicker" ||
+            _automatedScenarioName.StartsWith("AssetVisualAnalysis", StringComparison.Ordinal) ||
+            _automatedScenarioName.StartsWith("Duplicate", StringComparison.Ordinal);
         var pinnedToolboxItemIds = _viewModel?.PinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
         var displayedPinnedToolboxItemIds = _viewModel?.DisplayedPinnedToolboxItems.Select(item => item.Id).ToArray() ?? [];
         var workbenchQuickToolsScope = _automatedScenarioName.StartsWith("Workbench", StringComparison.OrdinalIgnoreCase);
@@ -983,6 +1047,19 @@ public partial class MainWindow
             layoutRoot = layoutRoot.Name,
             screenshot = outputPath,
             sourceCommit = ResolveSourceCommit(),
+            creativeEvidence = new
+            {
+                visualSurfaceVisible = GetHostedAssetLibraryPage()?.IsVisualAnalysisSurfaceVisibleForProductHarness,
+                duplicateWorkspaceVisible = GetHostedAssetLibraryPage()?.ViewModel.IsDuplicateWorkspaceOpen,
+                duplicateGroupCount = GetHostedAssetLibraryPage()?.ViewModel.DuplicateGroups.Count,
+                duplicateReferenceUsageCount = GetHostedAssetLibraryPage()?.ViewModel.DuplicateGroups.SelectMany(group => group.Items).Sum(item => item.Candidate.EffectiveUsage.Total),
+                publishingPageVisible = _viewModel?.IsPublishingPage,
+                publishingWatermarkLayerCount = _viewModel?.PublishingPage?.WatermarkLayers.Count,
+                publishingPreviewReady = _viewModel?.PublishingPage?.PreviewImage is not null,
+                publishingPreviewCounter = _viewModel?.PublishingPage?.PreviewCounter,
+                publishingDimensionsEnabled = _viewModel?.PublishingPage?.DimensionsEnabled,
+                publishingTaskCount = _viewModel?.TaskCenter.Tasks.Count
+            },
             canvasEvidence = GetHostedAssetLibraryPage()?.ActiveCanvas is { } activeCanvas ? new
             {
                 objectCount=activeCanvas.Editor.Document.Objects.Count,
