@@ -115,6 +115,52 @@ public sealed class CanvasEditor
         return new((1 - width) / 2, (1 - height) / 2, width, height);
     }
     public void EditText(string text, double fontSize, string color) => Transform(item => item.IsText ? item with { Text = text, FontSize = Math.Clamp(fontSize, 8, 300), TextColor = color } : item);
+    public void Group()
+    {
+        if (Selected.Count < 2 || Selected.Any(item => !Editable(item))) return;
+        var group = Guid.NewGuid(); Transform(item => item with { GroupId = group });
+    }
+    public void Ungroup() => Transform(item => item with { GroupId = null });
+    public void SetLocked(bool locked)
+    {
+        if (Selected.Count > 0) Commit(Document with { Objects = Document.Objects.Select(item => Selection.Contains(item.ObjectId) ? item with { Locked = locked } : item).ToArray() });
+    }
+    public void Layer(bool top)
+    {
+        var ordered = Document.Objects.OrderBy(item => item.ZIndex).ToArray();
+        var movable = ordered.Where(Editable).ToArray(); var others = ordered.Where(item => !Editable(item)).ToArray();
+        if (movable.Length == 0) return;
+        Commit(Document with { Objects = (top ? others.Concat(movable) : movable.Concat(others)).Select((item, index) => item with { ZIndex = index }).ToArray() });
+    }
+    public void Align(string mode)
+    {
+        var bounds = Bounds();
+        Transform(item => mode switch
+        {
+            "left" => item with { X = bounds.X },
+            "top" => item with { Y = bounds.Y },
+            "center" => item with { X = bounds.X + (bounds.Width - item.Width) / 2 },
+            _ => item
+        });
+    }
+    public void Arrange(string mode)
+    {
+        var units = Document.Objects.Where(Editable).GroupBy(item => item.GroupId ?? item.ObjectId).ToArray();
+        if (units.Length == 0) return;
+        var columns = mode == "horizontal" ? units.Length : Math.Max(1, (int)Math.Ceiling(Math.Sqrt(units.Length)));
+        var bounds = Bounds(); var x = bounds.X; var y = bounds.Y; var rowHeight = 0d; var column = 0;
+        var updates = new Dictionary<Guid, CanvasObject>();
+        var cellWidth = units.Max(unit => unit.Max(item => item.X + item.Width) - unit.Min(item => item.X));
+        foreach (var unit in units)
+        {
+            var left = unit.Min(item => item.X); var top = unit.Min(item => item.Y);
+            var width = unit.Max(item => item.X + item.Width) - left; var height = unit.Max(item => item.Y + item.Height) - top;
+            foreach (var item in unit) updates[item.ObjectId] = item with { X = x + item.X - left, Y = y + item.Y - top };
+            x += (mode == "grid" ? cellWidth : width) + 24; rowHeight = Math.Max(rowHeight, height);
+            if (++column == columns) { x = bounds.X; y += rowHeight + 24; rowHeight = 0; column = 0; }
+        }
+        Commit(Document with { Objects = Document.Objects.Select(item => updates.GetValueOrDefault(item.ObjectId, item)).ToArray() });
+    }
     public void SetProject(Guid? id) => Commit(Document with { ProjectId = id });
     public void Rename(string name) { if (!string.IsNullOrWhiteSpace(name)) Commit(Document with { Name = name.Trim() }); }
     public void Undo() { if (_undo.TryPop(out var before)) { _redo.Push(Document); Document = before; Selection.IntersectWith(Document.Objects.Select(item => item.ObjectId)); Changed?.Invoke(this, EventArgs.Empty); } }
