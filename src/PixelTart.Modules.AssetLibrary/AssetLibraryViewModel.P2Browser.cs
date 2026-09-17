@@ -687,9 +687,11 @@ public sealed partial class AssetLibraryViewModel
         if (state == "AssetFilter") P3QueryPanelOpen = true;
         if (state == "AssetFilterColor")
         {
+            await AnalyzeSelectionCanonicalAsync();
             P3QueryPanelOpen = true;
-            TargetColor = "#D58A5A";
+            TargetColor = "#29384B";
             ColorTolerance = 28;
+            await SearchColorAsync();
         }
         if (state == "AssetFolderTree") IsOrganizationPaneCollapsed = false;
         if (state == "AssetInspectorRating")

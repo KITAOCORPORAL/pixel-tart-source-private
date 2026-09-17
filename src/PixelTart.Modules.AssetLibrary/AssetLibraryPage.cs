@@ -585,6 +585,28 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         return item.ContextMenu;
     }
 
+    private void AssetContextMenu_Opened(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ContextMenu menu) return;
+        var style = TryFindResource("PixelTart.Menu.Item") as Style;
+        if (style is null) return;
+        var template = TryFindResource("PixelTart.Menu.Item.Template") as ControlTemplate;
+        var sectionStyle = TryFindResource("AssetContextSectionHeader") as Style;
+        void Apply(ItemsControl parent)
+        {
+            foreach (var child in parent.Items.OfType<MenuItem>())
+            {
+                if (!ReferenceEquals(child.Style, sectionStyle))
+                {
+                    child.Style = style;
+                    if (template is not null) child.Template = template;
+                }
+                Apply(child);
+            }
+        }
+        Apply(menu);
+    }
+
     public ContextMenu? OpenContextSubmenuForProductHarness(string header)
     {
         var menu = OpenContextMenuForProductHarness();
@@ -608,6 +630,27 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     public FrameworkElement? GetQuickLoupeContentForProductHarness() =>
         AssetQuickLoupePopup.IsOpen ? AssetQuickLoupePopup.Child as FrameworkElement : null;
+
+    public bool FocusQuickLoupeCardForProductHarness()
+    {
+        if (AssetGrid.Items.Count == 0) return false;
+        AssetGrid.ScrollIntoView(AssetGrid.Items[0]);
+        AssetGrid.UpdateLayout();
+        return AssetGrid.ItemContainerGenerator.ContainerFromIndex(0) is ListBoxItem item && item.Focus();
+    }
+
+    public bool LeaveQuickLoupeForProductHarness()
+    {
+        QuickLoupeContainer.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseLeaveEvent });
+        return !AssetQuickLoupePopup.IsOpen;
+    }
+
+    public FrameworkElement? GetContextSubmenuContentForProductHarness(ContextMenu menu, string header)
+    {
+        var item = menu.Items.OfType<MenuItem>().FirstOrDefault(candidate => candidate.Header?.ToString() == header);
+        item?.ApplyTemplate();
+        return item?.Template.FindName("PART_Popup", item) is Popup { IsOpen: true, Child: FrameworkElement child } ? child : null;
+    }
 
     public AssetViewerWindow? CreateViewerForProductHarness()
     {
@@ -690,7 +733,15 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         catch (ArgumentException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }
     }
 
-    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
+    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e)
+    {
+        // A centered popup can receive the pointer directly from the gallery.
+        // Let that transition finish before deciding whether the preview was left.
+        Dispatcher.BeginInvoke(DispatcherPriority.Input, () =>
+        {
+            if (!AssetQuickLoupePopup.IsMouseOver) HideQuickLoupe();
+        });
+    }
 
     private void HideQuickLoupe()
     {

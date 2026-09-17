@@ -1128,11 +1128,12 @@ public partial class MainWindow : Window
         {
             var captureDelay = IsTetherColorReviewState(reviewState) ? 2200 : 550;
             var captureTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(captureDelay) };
-            captureTimer.Tick += (_, _) =>
+            captureTimer.Tick += async (_, _) =>
             {
                 captureTimer.Stop();
                 if (IsTetherColorReviewState(reviewState))
                     TetherMonitorView.ApplyReviewPresentation(reviewState!, width);
+                await PrepareFloatingProductCaptureAsync();
                 CaptureUiReviewFrame(outputPath);
             };
             captureTimer.Start();

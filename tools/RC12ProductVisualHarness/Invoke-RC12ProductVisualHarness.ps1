@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$OutputRoot = '',
+    [string]$StatePattern = '*',
     [switch]$SkipBuild
 )
 
@@ -95,6 +96,7 @@ $script:captures = [Collections.Generic.List[object]]::new()
 $script:captureIndex = 0
 function Invoke-ProductCapture {
     param([string]$State,[string]$OutputPath,[double]$Scale,[int]$PhysicalWidth,[int]$PhysicalHeight,[string]$Group)
+    if ($State -notlike $StatePattern) { return }
     $script:captureIndex++
     $profile = Join-Path $profilesRoot ('capture-{0:000}' -f $script:captureIndex)
     [IO.Directory]::CreateDirectory($profile) | Out-Null
@@ -121,7 +123,7 @@ function Invoke-ProductCapture {
     $env:DOTNET_ROOT = Split-Path -Parent $dotnet
     $process = $null
     try {
-        $process = Start-Process -FilePath $executable -PassThru
+        $process = Start-Process -FilePath $executable -PassThru -WindowStyle Hidden
         $startedAt = [DateTimeOffset]::Now
         $deadline = [DateTime]::UtcNow.AddSeconds(60)
         while ((-not (Test-Path -LiteralPath $OutputPath) -or -not (Test-Path -LiteralPath $metadataPath)) -and [DateTime]::UtcNow -lt $deadline) {
@@ -182,7 +184,8 @@ $closureScenes = @(
     @('AssetContextSubmenu','03_submenu.png'), @('AssetFolderTree','04_folder_tree.png'),
     @('AssetFilterColor','05_filter_color.png'), @('AssetInspectorRating','06_inspector_rating.png'),
     @('AssetInspirationBoard','07_inspiration_board.png'), @('AssetQuickLoupeIdle','08_loupe_idle.png'),
-    @('AssetQuickLoupeActive','09_loupe_active.png'), @('AssetFullPreview','10_full_preview.png')
+    @('AssetQuickLoupeActive','09_loupe_active.png'), @('AssetFullPreview','10_full_preview.png'),
+    @('AssetQuickLoupeClosed','11_loupe_closed.png')
 )
 foreach ($scene in $closureScenes) { Invoke-ProductCapture $scene[0] (Join-Path $closureRoot $scene[1]) 1.0 1920 1080 'asset-library-ux-closure' }
 Invoke-ProductCapture 'AssetAspectRatiosAfter' (Join-Path $ratioRoot 'after_current_head.png') 1.0 1920 1080 'asset-library-aspect-ratio'
@@ -232,5 +235,5 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'rc12-product-visual-evidence.json') -Encoding UTF8
 if (-not $sourceSafe) { throw 'Synthetic source assets changed during the RC12 visual run.' }
 if (-not $allExited) { throw 'Process-per-fixture lifecycle isolation was not proven.' }
-if ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6 -or $manifest.ux_closure_capture_count -ne 10 -or $manifest.aspect_ratio_capture_count -ne 1) { throw 'RC12 visual evidence set is incomplete.' }
+if ($StatePattern -eq '*' -and ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6 -or $manifest.ux_closure_capture_count -ne 11 -or $manifest.aspect_ratio_capture_count -ne 1)) { throw 'RC12 visual evidence set is incomplete.' }
 [pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,ux_screenshot_count,dpi_capture_count,resolution_capture_count,ux_closure_capture_count,aspect_ratio_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json

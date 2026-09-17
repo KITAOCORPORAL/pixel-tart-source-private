@@ -23,6 +23,37 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public async Task RealQuickPreviewLoadsHighQualityAndClosesOnPointerLeave()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-LoupeClosure", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                WriteSyntheticJpeg(Path.Combine(root, "preview.jpg"));
+                var page = new AssetLibraryPage(Path.Combine(root, "library.db"), new TaskOperationBridge(), []);
+                page.InitializeForSessionAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
+                using var source = AttachToPresentationSource(page, 2400, 1350);
+                page.Measure(new Size(1600, 900));
+                page.Arrange(new Rect(0, 0, 1600, 900));
+                page.UpdateLayout();
+                page.OpenQuickLoupeForProductHarnessAsync().CompleteOnDispatcher();
+                var popup = page.GetQuickLoupeContentForProductHarness();
+                Assert.IsNotNull(popup);
+                var preview = FindVisualByAutomationId<Image>(popup, "AssetQuickLoupeImage");
+                Assert.IsInstanceOfType<BitmapSource>(preview.Source);
+                Assert.IsGreaterThan(420, ((BitmapSource)preview.Source).PixelWidth);
+                Assert.IsTrue(page.LeaveQuickLoupeForProductHarness());
+                Assert.IsNull(page.GetQuickLoupeContentForProductHarness());
+                page.DisposeAsync().AsTask().CompleteOnDispatcher();
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
     public void LocalPixelProviderExecutesDeterministicPixelFixture()
     {
         var pixels = Enumerable.Repeat(new byte[] { 220, 30, 40 }, 64).SelectMany(value => value).ToArray();
@@ -482,6 +513,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     new TaskOperationBridge(),
                     [],
                     workspaceSettings: state);
+                // Complete initialization before Loaded can start asynchronous work while
+                // synthetic keys are dispatched to IsReady-bound controls.
+                page.InitializeForSessionAsync().CompleteOnDispatcher();
+                Assert.IsTrue(page.ViewModel.IsReady);
                 // HwndSource dimensions are device pixels. Use the same 1600 DIP
                 // three-pane acceptance viewport as the keyboard test below.
                 using var presentation = AttachToPresentationSource(page, 2400, 1230);
@@ -527,6 +562,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     "Keyboard splitter adjustment must restore the elastic collection star column.");
 
                 var thumbnailWidthBeforeKeyboard = state.ThumbnailWidth;
+                Assert.IsTrue(thumbnailSlider.IsEnabled, "Keyboard input requires the ready toolbar.");
+                Assert.AreEqual(thumbnailWidthBeforeKeyboard, thumbnailSlider.Value, .01);
                 Assert.IsTrue(thumbnailSlider.Focus(), "The attached thumbnail-size slider must accept keyboard focus.");
                 RaiseKeyboardAdjustment(thumbnailSlider, Key.Right);
                 Assert.IsTrue(PumpDispatcherUntil(

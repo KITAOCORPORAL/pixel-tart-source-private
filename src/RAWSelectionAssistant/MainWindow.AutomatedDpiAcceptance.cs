@@ -37,6 +37,43 @@ public partial class MainWindow
     private ToolTip? _automatedToolTip;
     private Popup? _automatedPopup;
     private FrameworkElement? _automatedProductPopup;
+    private FrameworkElement? _automatedProductSubmenu;
+    private bool _quickPreviewLeftClosed;
+
+    private async Task PrepareFloatingProductCaptureAsync()
+    {
+        if (_automatedScenarioName is not ("AssetContextMenu" or "AssetContextSubmenu" or "AssetQuickLoupeActive" or "AssetQuickLoupeIdle" or "AssetQuickLoupeClosed")) return;
+        var page = GetHostedAssetLibraryPage() ?? throw new InvalidOperationException("Real Asset Library page is missing.");
+        if (_automatedScenarioName == "AssetQuickLoupeIdle")
+        {
+            if (!page.FocusQuickLoupeCardForProductHarness()) throw new InvalidOperationException("Quick Preview card could not receive focus.");
+            await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+            return;
+        }
+        if (_automatedScenarioName == "AssetQuickLoupeClosed")
+        {
+            if (!await page.OpenQuickLoupeForProductHarnessAsync()) throw new InvalidOperationException("Quick Preview did not open before leave.");
+            _quickPreviewLeftClosed = page.LeaveQuickLoupeForProductHarness();
+            if (!_quickPreviewLeftClosed) throw new InvalidOperationException("Quick Preview remained open after leave.");
+            return;
+        }
+        if (_automatedScenarioName == "AssetQuickLoupeActive")
+        {
+            if (!await page.OpenQuickLoupeForProductHarnessAsync()) throw new InvalidOperationException("Quick Preview did not open.");
+            _automatedProductPopup = page.GetQuickLoupeContentForProductHarness()
+                ?? throw new InvalidOperationException("Quick Preview popup is not visible.");
+        }
+        else
+        {
+            _automatedContextMenu = _automatedScenarioName == "AssetContextSubmenu"
+                ? page.OpenContextSubmenuForProductHarness("评分") : page.OpenContextMenuForProductHarness();
+            if (_automatedContextMenu is null) throw new InvalidOperationException("Context menu did not open.");
+        }
+        await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+        if (_automatedScenarioName == "AssetContextSubmenu")
+            _automatedProductSubmenu = page.GetContextSubmenuContentForProductHarness(_automatedContextMenu!, "评分")
+                ?? throw new InvalidOperationException("The rating submenu popup is missing.");
+    }
 
     private void ConfigureAutomatedDpiAcceptance(JsonElement root)
     {
@@ -798,9 +835,24 @@ public partial class MainWindow
             DrawPopup(drawing, toolboxPopupChild, logicalWidth, logicalHeight, .63, .12);
             DrawPopup(drawing, QuickToolsOverflowPopup.IsOpen ? QuickToolsOverflowPopup.Child as FrameworkElement : null, logicalWidth, logicalHeight, .58, .12);
             DrawPopup(drawing, _automatedContextMenu, logicalWidth, logicalHeight, .46, .17);
+            if (_automatedProductSubmenu is not null && _automatedContextMenu is { } parentMenu)
+            {
+                var rating = parentMenu.Items.OfType<MenuItem>().First(item => item.Header?.ToString() == "评分");
+                var parentX = Math.Clamp(logicalWidth * .46, 12, Math.Max(12, logicalWidth - parentMenu.ActualWidth - 12));
+                var parentY = Math.Clamp(logicalHeight * .17, 12, Math.Max(12, logicalHeight - parentMenu.ActualHeight - 12));
+                var row = rating.TransformToAncestor(parentMenu).Transform(new Point());
+                DrawPopup(drawing, _automatedProductSubmenu, logicalWidth, logicalHeight,
+                    (parentX + row.X + rating.ActualWidth - 3) / logicalWidth, (parentY + row.Y - 5) / logicalHeight);
+            }
             DrawPopup(drawing, _automatedToolTip, logicalWidth, logicalHeight, .60, .15);
             DrawPopup(drawing, _automatedPopup?.Child as FrameworkElement, logicalWidth, logicalHeight, .44, .18);
-            DrawPopup(drawing, _automatedProductPopup, logicalWidth, logicalHeight, .52, .20);
+            if (_automatedProductPopup is { } preview)
+            {
+                preview.UpdateLayout();
+                DrawPopup(drawing, preview, logicalWidth, logicalHeight,
+                    (logicalWidth - preview.ActualWidth) / (2 * logicalWidth),
+                    (logicalHeight - preview.ActualHeight) / (2 * logicalHeight));
+            }
             DrawAuxiliaryWindow(drawing, logicalWidth, logicalHeight);
             drawing.Pop();
         }
@@ -893,6 +945,12 @@ public partial class MainWindow
             layoutRoot = layoutRoot.Name,
             screenshot = outputPath,
             sourceCommit = ResolveSourceCommit(),
+            floatingSurfaceEvidence = new
+            {
+                submenuVisible = _automatedProductSubmenu?.ActualWidth > 0 && _automatedProductSubmenu?.ActualHeight > 0,
+                quickPreviewVisible = _automatedProductPopup?.ActualWidth > 0 && _automatedProductPopup?.ActualHeight > 0,
+                quickPreviewLeftClosed = _quickPreviewLeftClosed
+            },
             pinnedToolboxItemIds,
             displayedPinnedToolboxItemIds,
             workbenchQuickToolsPassed,
@@ -1265,7 +1323,9 @@ public partial class MainWindow
 
         var leftInBoard = IsInside(left, "InspirationBoardPanel");
         var rightInBoard = IsInside(right, "InspirationBoardPanel");
-        return leftInBoard != rightInBoard;
+        var leftInFilter = IsInside(left, "AssetFilterPopover");
+        var rightInFilter = IsInside(right, "AssetFilterPopover");
+        return leftInBoard != rightInBoard || leftInFilter != rightInFilter;
     }
 
     private static bool IsTextClipped(TextBlock textBlock)

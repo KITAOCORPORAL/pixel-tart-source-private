@@ -21,7 +21,8 @@ public sealed class AssetQuickLoupeTests
         StringAssert.Contains(xaml, "AssetGridQuickLoupeButton");
         StringAssert.Contains(xaml, "QuickLoupeRevealHost");
         StringAssert.Contains(xaml, "DoubleAnimation");
-        StringAssert.Contains(xaml, "Segoe MDL2 Assets");
+        StringAssert.Contains(xaml, "AssetAction.Search");
+        Assert.DoesNotContain("Content=\"&#xE71E;\"", xaml, StringComparison.Ordinal);
         StringAssert.Contains(xaml, "MouseEnter=\"QuickLoupeButton_MouseEnter\"");
         StringAssert.Contains(provider, "IAssetPreviewProvider");
         StringAssert.Contains(provider, "DefaultMemoryBudgetBytes");

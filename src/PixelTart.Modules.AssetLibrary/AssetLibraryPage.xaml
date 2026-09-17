@@ -24,6 +24,10 @@
             <Setter Property="Opacity" Value="0" />
             <Setter Property="IsHitTestVisible" Value="False" />
             <Style.Triggers>
+                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="IsHitTestVisible" Value="True" />
+                </DataTrigger>
                 <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
                     <Setter Property="IsHitTestVisible" Value="True" />
                     <DataTrigger.EnterActions>
@@ -89,6 +93,7 @@
             </Setter>
         </Style>
         <ContextMenu x:Key="AssetP2ContextMenu" x:Shared="False"
+                     Opened="AssetContextMenu_Opened"
                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
                      Style="{DynamicResource PixelTart.Menu.Context}"
                      AutomationProperties.AutomationId="AssetVisualContextMenu">
@@ -223,8 +228,10 @@
                         </Border>
                         <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
-                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetGridQuickLoupeButton"
-                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                                    AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetGridQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave">
+                                <Path Data="{StaticResource AssetAction.Search}" Style="{StaticResource AssetActionIcon}" Width="16" Height="16" />
+                            </Button>
                         </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
@@ -244,8 +251,10 @@
                         </Border>
                         <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
-                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetMasonryQuickLoupeButton"
-                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                                    AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetMasonryQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave">
+                                <Path Data="{StaticResource AssetAction.Search}" Style="{StaticResource AssetActionIcon}" Width="16" Height="16" />
+                            </Button>
                         </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
@@ -265,8 +274,10 @@
                         </Border>
                         <Grid Style="{StaticResource QuickLoupeRevealHost}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Button Style="{DynamicResource PixelTart.Button.Ghost}" Width="32" Height="32" Padding="6" Margin="6" ToolTip="快速查看"
-                                    FontFamily="Segoe MDL2 Assets" Content="&#xE71E;" AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetJustifiedQuickLoupeButton"
-                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave" />
+                                    AutomationProperties.Name="快速查看高清预览" AutomationProperties.AutomationId="AssetJustifiedQuickLoupeButton"
+                                    Click="QuickLoupeButton_Click" MouseEnter="QuickLoupeButton_MouseEnter" MouseLeave="QuickLoupeButton_MouseLeave">
+                                <Path Data="{StaticResource AssetAction.Search}" Style="{StaticResource AssetActionIcon}" Width="16" Height="16" />
+                            </Button>
                         </Grid>
                     </Grid></Border>
                     <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
@@ -420,8 +431,8 @@
         </Grid>
         </ScrollViewer>
 
-        <Border Grid.Row="0" Panel.ZIndex="60" Width="540" MaxHeight="480" HorizontalAlignment="Left" VerticalAlignment="Top"
-                Margin="260,50,12,0" Padding="12" Background="{DynamicResource Brush.Surface.Elevated}"
+        <Border Grid.Row="0" Grid.RowSpan="3" Panel.ZIndex="60" Width="360" MaxHeight="440" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="12,50,12,0" Padding="8" Background="{DynamicResource Brush.Surface.Elevated}"
                 Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding P3QuerySurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                 AutomationProperties.AutomationId="AssetFilterPopover"

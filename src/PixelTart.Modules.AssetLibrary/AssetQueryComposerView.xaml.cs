@@ -6,7 +6,29 @@ namespace PixelTart.Modules.AssetLibrary;
 
 public partial class AssetQueryComposerView : UserControl
 {
-    public AssetQueryComposerView() => InitializeComponent();
+    public AssetQueryComposerView()
+    {
+        InitializeComponent();
+        DataContextChanged += (_, e) =>
+        {
+            if (e.OldValue is AssetLibraryViewModel oldModel) oldModel.PropertyChanged -= ColorChanged;
+            if (e.NewValue is AssetLibraryViewModel newModel) newModel.PropertyChanged += ColorChanged;
+            UpdateCursor();
+        };
+        ColorPlane.SizeChanged += (_, _) => UpdateCursor();
+    }
+
+    private void ColorChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is nameof(AssetLibraryViewModel.ColorSaturation) or nameof(AssetLibraryViewModel.ColorBrightness)) UpdateCursor();
+    }
+
+    private void UpdateCursor()
+    {
+        if (DataContext is not AssetLibraryViewModel model) return;
+        Canvas.SetLeft(ColorPlaneCursor, model.ColorSaturation * ColorPlane.ActualWidth - 6);
+        Canvas.SetTop(ColorPlaneCursor, (1 - model.ColorBrightness) * ColorPlane.ActualHeight - 6);
+    }
 
     private void ColorPlane_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
