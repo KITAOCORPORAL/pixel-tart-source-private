@@ -22,6 +22,11 @@ public sealed partial class ProductLanguageLeakTests
         "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3SmartFolder.cs",
         "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3QueryComposer.cs",
         "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3TagManager.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.Canvas.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.ContextualInspector.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
         "src/PixelTart.Modules.AssetLibrary/AssetLibraryWorkspaceHost.cs"
     ];
 
@@ -64,6 +69,7 @@ public sealed partial class ProductLanguageLeakTests
                 foreach (Match literal in CSharpStringRegex().Matches(line))
                 {
                     var value = literal.Value;
+                    if (value.StartsWith("\"{Binding ", StringComparison.Ordinal)) continue; // Binding expressions are not user-visible literals.
                     if (value.Contains("booking.ProjectId", StringComparison.Ordinal) ||
                         value.Contains("P2QueryTotalCount", StringComparison.Ordinal)) continue;
                     if (ForbiddenRuntimeTermRegex().IsMatch(value))

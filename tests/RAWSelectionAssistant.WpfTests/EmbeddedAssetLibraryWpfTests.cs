@@ -23,6 +23,29 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public Task IconComposedToolbarButtonsRealizeAfterInitializationAndOpenMenus()=>RunSta(()=>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"PixelTart-IconClosure",Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+        var page=new AssetLibraryPage(Path.Combine(root,"library.db"),new TaskOperationBridge(),[]);
+        try
+        {
+            page.InitializeForSessionAsync().CompleteOnDispatcher();
+            using var source=AttachToPresentationSource(page,1600,900);
+            ArrangePage(page,1600,900);
+            Assert.IsTrue(PumpDispatcherUntil(()=>page.ViewModel.IsReady,TimeSpan.FromSeconds(1)));
+            foreach(var id in new[]{"AssetLibraryColorFilter","AssetLibraryTagFilter","AssetLibraryRatingFilter","AssetLibraryDateFilter","AssetLibrarySortMenu","AssetLibraryViewMenu","AssetLibraryImport","AssetLibraryMore"})
+            {
+                var button=FindVisualByAutomationId<Button>(page,id);Assert.IsTrue(button.IsEnabled,id);
+                Assert.IsInstanceOfType<System.Windows.Shapes.Path>(button.Content);
+                var icon=(System.Windows.Shapes.Path)button.Content;Assert.IsNotNull(icon.Data);Assert.IsGreaterThan(0d,icon.ActualWidth,id);Assert.IsGreaterThan(0d,icon.ActualHeight,id);
+            }
+            var more=FindVisualByAutomationId<Button>(page,"AssetLibraryMore");more.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Assert.IsTrue(more.ContextMenu!.IsOpen);Assert.IsTrue(more.ContextMenu.Items.OfType<MenuItem>().Any(item=>Equals(item.Header,"打开已保存画布")));more.ContextMenu.IsOpen=false;
+        }
+        finally{page.DisposeAsync().AsTask().CompleteOnDispatcher();try{Directory.Delete(root,true);}catch{}}
+    });
+
+    [TestMethod]
     public async Task ContextualInspectorPersistsAnnotationsAndNeverUsesFirstPhotoForMultipleSelection()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-ContextualInspector", Guid.NewGuid().ToString("N"));
@@ -399,6 +422,9 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     () => AsyncThumbnail.PendingRequestCount == 0,
                     TimeSpan.FromSeconds(10)),
                     $"Async thumbnails did not drain; pending={AsyncThumbnail.PendingRequestCount}.");
+                var visualDetails=FindVisualChildren<Expander>(page).Single(expander=>Equals(expander.Header,"视觉分析"));
+                Assert.IsFalse(visualDetails.IsExpanded,"Optional visual detail stays collapsed until requested.");
+                visualDetails.IsExpanded=true;page.UpdateLayout();
                 var paletteSwatches = FindVisualChildren<Border>(page)
                     .Where(border => border.DataContext is DominantColor && border.Height == 34)
                     .ToArray();

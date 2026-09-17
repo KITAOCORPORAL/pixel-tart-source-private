@@ -60,6 +60,7 @@ public sealed class CanvasDocumentStore(string directory)
         {
             Directory.CreateDirectory(DirectoryPath);
             var target = Path.Combine(DirectoryPath, document.CanvasId.ToString("N") + ".json");
+            if(document.Objects.Any(item=>!string.IsNullOrWhiteSpace(item.SourcePath)&&string.Equals(Path.GetFullPath(item.SourcePath),target,StringComparison.OrdinalIgnoreCase)))throw new InvalidDataException("画布保存位置不能覆盖源文件。");
             temporary = target + "." + Guid.NewGuid().ToString("N") + ".tmp";
             await File.WriteAllTextAsync(temporary, JsonSerializer.Serialize(document, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false);
             File.Move(temporary, target, true);
@@ -87,6 +88,6 @@ public sealed class CanvasDocumentStore(string directory)
     {
         if (document.SchemaVersion != 1 || document.CanvasId == Guid.Empty || document.Objects.Count > 10000 || document.Objects.Select(item => item.ObjectId).Distinct().Count() != document.Objects.Count) throw new InvalidDataException("画布数据无效。");
         foreach (var item in document.Objects)
-            if (item.CanvasId != document.CanvasId || item.ObjectId == Guid.Empty || !new[] { item.X, item.Y, item.Width, item.Height, item.Rotation, item.FontSize, item.CropRect.X, item.CropRect.Y, item.CropRect.Width, item.CropRect.Height }.All(double.IsFinite) || item.Width <= 0 || item.Height <= 0 || item.CropRect != item.CropRect.Normalize()) throw new InvalidDataException("画布对象数据无效。");
+            if (item.CanvasId != document.CanvasId || item.ObjectId == Guid.Empty || !new[] { item.X, item.Y, item.Width, item.Height, item.Rotation, item.FontSize, item.SourceWidth, item.SourceHeight,item.CropRect.X, item.CropRect.Y, item.CropRect.Width, item.CropRect.Height }.All(double.IsFinite) || item.Width <= 0 || item.Height <= 0 || item.SourceWidth<=0||item.SourceHeight<=0||item.FontSize<=0||item.CropRect != item.CropRect.Normalize()) throw new InvalidDataException("画布对象数据无效。");
     }
 }

@@ -23,6 +23,12 @@ internal static class CanvasFixtures
 }
 [TestClass] public sealed class CanvasRotationTests
 {
+    [TestMethod] public void MultiRotationUsesSharedCenterAndPreservesSpacing()
+    {
+        var e=CanvasFixtures.Create(2);var first=e.Selected[0];var second=e.Selected[1];e.Rotate(90);
+        Assert.AreEqual(e.Selected[0].X,e.Selected[1].X,.001);Assert.AreEqual(second.X-first.X,e.Selected[1].Y-e.Selected[0].Y,.001);
+        e.Undo();Assert.AreEqual(first,e.Document.Objects[0]);
+    }
     [TestMethod] public void RotationNormalizesAndSnapsAtFifteenDegrees()
     {
         var e = CanvasFixtures.Create(); e.Rotate(-90); Assert.AreEqual(270, e.Selected[0].Rotation);

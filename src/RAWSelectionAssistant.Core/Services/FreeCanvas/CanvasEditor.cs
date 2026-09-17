@@ -74,12 +74,13 @@ public sealed class CanvasEditor
         return new(left, top, items.Max(item => item.X + item.Width) - left, items.Max(item => item.Y + item.Height) - top);
     }
     public void Move(double dx, double dy) => Transform(item => item with { X = item.X + dx, Y = item.Y + dy });
-    public void Scale(double factor)
+    public void Scale(double factor, double? anchorX = null, double? anchorY = null)
     {
         if (!double.IsFinite(factor) || factor <= 0 || Selected.Any(item => !Editable(item))) return;
         var bounds = Bounds();
+        var x=anchorX??bounds.X;var y=anchorY??bounds.Y;
         factor = Math.Clamp(factor, .02, 50);
-        Transform(item => item with { X = bounds.X + (item.X - bounds.X) * factor, Y = bounds.Y + (item.Y - bounds.Y) * factor, Width = Math.Max(1, item.Width * factor), Height = Math.Max(1, item.Height * factor), FontSize = item.IsText ? Math.Max(1, item.FontSize * factor) : item.FontSize });
+        Transform(item => item with { X = x + (item.X - x) * factor, Y = y + (item.Y - y) * factor, Width = Math.Max(1, item.Width * factor), Height = Math.Max(1, item.Height * factor), FontSize = item.IsText ? Math.Max(1, item.FontSize * factor) : item.FontSize });
     }
     public void Remove() { var ids = Document.Objects.Where(Editable).Select(item => item.ObjectId).ToHashSet(); if (ids.Count > 0) Commit(Document with { Objects = Document.Objects.Where(item => !ids.Contains(item.ObjectId)).ToArray() }); }
     public void Copy() => _clipboard = Selected.ToArray();
@@ -92,7 +93,14 @@ public sealed class CanvasEditor
     public void Rotate(double degrees, bool snap = false)
     {
         if (!double.IsFinite(degrees)) return;
-        Transform(item => item with { Rotation = NormalizeAngle(snap ? Math.Round((item.Rotation + degrees) / 15) * 15 : item.Rotation + degrees) });
+        if(Selected.Count>1&&Selected.Any(item=>!Editable(item)))return;
+        if(snap)degrees=Math.Round(((Selected.FirstOrDefault()?.Rotation??0)+degrees)/15)*15-(Selected.FirstOrDefault()?.Rotation??0);
+        var bounds=Bounds();var cx=bounds.X+bounds.Width/2;var cy=bounds.Y+bounds.Height/2;var radians=degrees*Math.PI/180;
+        Transform(item =>
+        {
+            var x=item.X+item.Width/2-cx;var y=item.Y+item.Height/2-cy;
+            return item with { X=Selected.Count>1?cx+x*Math.Cos(radians)-y*Math.Sin(radians)-item.Width/2:item.X,Y=Selected.Count>1?cy+x*Math.Sin(radians)+y*Math.Cos(radians)-item.Height/2:item.Y,Rotation=NormalizeAngle(item.Rotation+degrees) };
+        });
     }
     private static double NormalizeAngle(double angle) => ((angle % 360) + 360) % 360;
     public void Flip(bool horizontal) => Transform(item => horizontal ? item with { FlipX = !item.FlipX } : item with { FlipY = !item.FlipY });

@@ -462,6 +462,7 @@ public partial class MainWindow : Window
             _viewModel?.CurrentPage ?? string.Empty,
             CurrentOverlayName(),
             _viewModel?.IsOnboardingActive == true ? _viewModel.TutorialStepNumber : null);
+        if (_viewModel?.IsAssetLibraryPage == true && GetHostedAssetLibraryPage()?.ActiveCanvas?.IsKeyboardFocusWithin == true) return;
         if (_viewModel?.IsTetherPage == true && e.Key == Key.F11 && _viewModel.TetherPage?.ToggleFullScreenCommand.CanExecute(null) == true)
         {
             _viewModel.TetherPage.ToggleFullScreenCommand.Execute(null);

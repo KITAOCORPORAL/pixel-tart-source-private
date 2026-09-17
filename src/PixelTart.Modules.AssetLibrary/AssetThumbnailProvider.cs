@@ -18,7 +18,8 @@ public enum AssetPreviewPurpose
     GalleryThumbnail,
     QuickLoupe,
     ViewerPreview,
-    Original
+    Original,
+    Canvas
 }
 
 public enum AssetPreviewQuality
@@ -162,6 +163,7 @@ public sealed class WpfAssetThumbnailProvider : IAssetPreviewProvider, IAssetThu
         AssetPreviewPurpose.QuickLoupe => Math.Clamp(request.RequestedPixelWidth <= 0 ? 1600 : request.RequestedPixelWidth, 768, 2048),
         AssetPreviewPurpose.ViewerPreview => Math.Clamp(request.RequestedPixelWidth <= 0 ? 2048 : request.RequestedPixelWidth, 1024, 3072),
         AssetPreviewPurpose.Original => 0,
+        AssetPreviewPurpose.Canvas => Math.Clamp(request.RequestedPixelWidth <= 0 ? 1024 : request.RequestedPixelWidth, 256, 4096),
         _ => 512
     };
 

@@ -1814,7 +1814,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         while (VisualSearchHistory.Count > 10) VisualSearchHistory.RemoveAt(VisualSearchHistory.Count - 1);
     }
 
-    private void NotifyVisualMode() { OnPropertyChanged(nameof(IsTemporaryVisualMode)); NotifyContentState(); ClearVisualModeCommand.RaiseCanExecuteChanged(); }
+    private void NotifyVisualMode() { OnPropertyChanged(nameof(IsTemporaryVisualMode)); NotifyContentState(); ClearVisualModeCommand.RaiseCanExecuteChanged(); UpdateP2QuerySummary(AssetCards.Count); }
     private void RaiseVisualActions() { AnalyzeSelectionCommand.RaiseCanExecuteChanged(); RefreshBatchScopeAvailability(); CancelBatchCommand.RaiseCanExecuteChanged(); FindSimilarCommand.RaiseCanExecuteChanged(); }
 
     private void RaiseWorkspaceCommandStates()

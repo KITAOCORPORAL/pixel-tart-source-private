@@ -118,6 +118,7 @@
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.CopyFile}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
             </MenuItem>
 
+            <MenuItem Header="用于创作"><MenuItem Header="放到自由画布" Click="ContextCanvas_Click" /></MenuItem>
             <MenuItem Header="整理" Style="{StaticResource AssetContextSectionHeader}" AutomationProperties.AutomationId="AssetContextOrganizeGroup" />
             <Separator />
             <MenuItem Header="移到文件夹" AutomationProperties.AutomationId="AssetContextFolder">
@@ -326,6 +327,7 @@
     </UserControl.Resources>
 
     <Grid Background="{DynamicResource Brush.Background}">
+      <Grid x:Name="LibraryWorkspace">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1" />
@@ -855,7 +857,7 @@
                          </StackPanel>
                         <TextBlock Text="颜色标签" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,2" />
                         <DockPanel AutomationProperties.AutomationId="AssetInspectorColorLabels">
-                            <Button DockPanel.Dock="Right" Content="应用" Command="{Binding ApplyInspectorColorCommand}" Padding="6,2" />
+                            <Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="应用" Command="{Binding ApplyInspectorColorCommand}" Padding="6,2" />
                             <ComboBox ItemsSource="{Binding InspectorColors}" SelectedItem="{Binding InspectorColor}" ToolTip="颜色标记；空白表示无标记" />
                         </DockPanel>
                         <TextBlock Text="备注" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,2" />
@@ -867,10 +869,10 @@
                         </DockPanel>
                         <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,8,0,0"
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
-<DockPanel Margin="0,6,0,8"><Button DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
+<DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
                         <TextBlock Text="{Binding SingleFolderSummary, StringFormat=文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,4,0,0"
                                    AutomationProperties.AutomationId="AssetInspectorFolderSummary" AutomationProperties.Name="文件夹" />
-<DockPanel Margin="0,6,0,8"><Button DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
+<DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
                         <Button Content="{Binding InspectorWorkflowStatus, StringFormat=处理状态：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Left" Padding="8,4" Margin="0,6,0,4" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
                             <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
                                 <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
@@ -982,17 +984,17 @@
 <ItemsControl.ItemTemplate><DataTemplate><Image Width="64" Height="64" Margin="2" Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="128" /></DataTemplate></ItemsControl.ItemTemplate>
 </ItemsControl>
 <TextBlock Text="{Binding InspectorSelectionSize}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,6" />
-<TextBlock Text="批量标签" Margin="0,10,0,0" /><DockPanel Margin="0,6,0,8"><Button DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
-<TextBlock Text="批量文件夹" /><DockPanel Margin="0,6,0,8"><Button DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
+<TextBlock Text="批量标签" Margin="0,10,0,0" /><DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
+<TextBlock Text="批量文件夹" /><DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
 <TextBlock Text="批量评分" /><UniformGrid Columns="6">
-<Button Content="清除" Command="{Binding RateCommand}" CommandParameter="0" Padding="1" />
-<Button Content="1 ★" Command="{Binding RateCommand}" CommandParameter="1" Padding="1" />
-<Button Content="2 ★" Command="{Binding RateCommand}" CommandParameter="2" Padding="1" />
-<Button Content="3 ★" Command="{Binding RateCommand}" CommandParameter="3" Padding="1" />
-<Button Content="4 ★" Command="{Binding RateCommand}" CommandParameter="4" Padding="1" />
-<Button Content="5 ★" Command="{Binding RateCommand}" CommandParameter="5" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="清除" Command="{Binding RateCommand}" CommandParameter="0" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="1 ★" Command="{Binding RateCommand}" CommandParameter="1" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="2 ★" Command="{Binding RateCommand}" CommandParameter="2" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="3 ★" Command="{Binding RateCommand}" CommandParameter="3" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="4 ★" Command="{Binding RateCommand}" CommandParameter="4" Padding="1" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="5 ★" Command="{Binding RateCommand}" CommandParameter="5" Padding="1" />
 </UniformGrid>
-<TextBlock Text="批量颜色" Margin="0,10,0,4" /><DockPanel><Button DockPanel.Dock="Right" Content="应用" Command="{Binding ApplyInspectorColorCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding InspectorColors}" SelectedItem="{Binding InspectorColor}" /></DockPanel>
+<TextBlock Text="批量颜色" Margin="0,10,0,4" /><DockPanel><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="应用" Command="{Binding ApplyInspectorColorCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding InspectorColors}" SelectedItem="{Binding InspectorColor}" /></DockPanel>
 
                                 <TextBlock Text="{Binding MultipleFolderSummary, StringFormat={}共同文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
                                 <TextBlock Text="{Binding MultipleTagSummary, StringFormat={}共同标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource Space.Stack.1}" />
@@ -1016,12 +1018,12 @@
 <StackPanel Margin="0,14,0,6" Visibility="{Binding HasSelection, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="AssetInspectorQuickTools">
 <TextBlock Text="快速工具" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,0,0,6" />
 <WrapPanel>
-<Button Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
-<Button Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
-<Button Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" Padding="8,4" Margin="2" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" Padding="8,4" Margin="2" />
-<Button Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" Padding="8,4" Margin="2" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" Padding="8,4" Margin="2" />
 </WrapPanel></StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -1049,6 +1051,7 @@
             <DockPanel>
                 <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
                     <Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseCollectionPanelCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.AutomationId="InspirationBoardClose" />
+                    <Button DockPanel.Dock="Right" Content="在自由画布中打开" Click="OpenBoardCanvas_Click" Style="{DynamicResource PixelTart.Button.Secondary}" />
                     <Button DockPanel.Dock="Right" Content="新建灵感收藏" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0" />
                     <StackPanel><TextBlock Text="Creative Board" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock Text="灵感收藏 · 项目参考" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
                 </DockPanel>
@@ -1076,7 +1079,7 @@
                         <DockPanel Visibility="{Binding IsTemporaryInspirationSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <DockPanel DockPanel.Dock="Top"><Button DockPanel.Dock="Right" Content="清空" Command="{Binding ClearInspirationTrayCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" AutomationProperties.AutomationId="InspirationTrayClear" /><TextBlock Text="临时收集" Style="{DynamicResource PixelTart.Type.SectionTitle}" /></DockPanel>
                             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <ListBox ItemsSource="{Binding InspirationTrayCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" AutomationProperties.AutomationId="InspirationTrayItems" local:InspirationDragDropBehavior.TargetKind="Tray">
+                                <ListBox ItemsSource="{Binding InspirationTrayCards}" SelectionMode="Extended" SelectionChanged="CanvasBoardSelectionChanged" Background="Transparent" BorderThickness="0" AutomationProperties.AutomationId="InspirationTrayItems" local:InspirationDragDropBehavior.TargetKind="Tray">
                                     <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate><DataTemplate>
                                         <Border Width="132" Height="148" Margin="4" Padding="4" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.TargetKind="TrayOrder" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}">
@@ -1086,7 +1089,7 @@
                                 </ListBox>
                             </ScrollViewer>
                         </DockPanel>
-                        <ListBox ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" Background="Transparent" BorderThickness="0" Visibility="{Binding IsSavedInspirationBoardSelected, Converter={StaticResource BooleanToVisibilityConverter}}" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}">
+                        <ListBox ItemsSource="{Binding ActiveCollectionCards}" SelectionMode="Extended" SelectionChanged="CanvasBoardSelectionChanged" Background="Transparent" BorderThickness="0" Visibility="{Binding IsSavedInspirationBoardSelected, Converter={StaticResource BooleanToVisibilityConverter}}" local:InspirationDragDropBehavior.TargetKind="Collection" local:InspirationDragDropBehavior.TargetCollectionId="{Binding ActiveCollectionId}">
                             <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ListBox.ItemsPanel>
                             <ListBox.ItemTemplate><DataTemplate><Border Width="148" Height="148" Margin="4" Background="{DynamicResource Brush.Panel}" local:InspirationDragDropBehavior.SourceEntryId="{Binding TrayEntryId}" local:InspirationDragDropBehavior.SourceCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetKind="CollectionOrder" local:InspirationDragDropBehavior.TargetCollectionId="{Binding DataContext.ActiveCollectionId, RelativeSource={RelativeSource AncestorType=UserControl}}" local:InspirationDragDropBehavior.TargetEntryId="{Binding TrayEntryId}"><Grid><Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="180" /><TextBlock Text="{Binding SourceBadge}" VerticalAlignment="Bottom" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="4" /><Button Content="移除" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding DataContext.RemoveCollectionEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" /></Grid></Border></DataTemplate></ListBox.ItemTemplate>
                         </ListBox>
@@ -1116,5 +1119,7 @@
             <TextBlock Text="F 聚焦分类 · Shift+D 重复分类 · T 标签 · 0–5 评分" Style="{DynamicResource PixelTart.Type.Metadata}" />
             <TextBlock Text="{Binding Status}" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Right" />
         </DockPanel>
+      </Grid>
+      <ContentControl x:Name="CanvasWorkspace" Panel.ZIndex="100" Visibility="Collapsed" AutomationProperties.AutomationId="FreeCanvasWorkspace" />
     </Grid>
 </UserControl>

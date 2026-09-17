@@ -85,6 +85,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             inspirationTrayDatabasePath,
             thumbnailProvider);
         _viewModel.SelectionToolHandler = selectionToolHandler;
+        _viewModel.OpenCanvasHandler = OpenCanvasAsync;
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
@@ -175,6 +176,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async Task DisposeCoreAsync()
     {
+        if (_canvas is not null && !await _canvas.FlushAsync()) throw new IOException("画布未能保存，无法释放工作区。");
+        if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
         _disposed = true;
         _pendingSelectionSync?.Abort();
         _pendingSelectionSync = null;
@@ -260,6 +263,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem(_viewModel.OrganizationPaneToggleLabel, _viewModel.ToggleOrganizationPaneCommand));
             menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
             menu.Items.Add(CreateMoreItem("打开灵感板", _viewModel.OpenCollectionsCommand));
+            var savedCanvases=new MenuItem { Header="打开已保存画布" };
+            savedCanvases.Click+=async(_,_)=>await OpenSavedCanvasMenuAsync(button);
+            menu.Items.Add(savedCanvases);
             menu.Items.Add(new Separator());
             menu.Items.Add(CreateMoreItem("新建智能文件夹", _viewModel.NewP3SmartFolderCommand));
             menu.Items.Add(CreateMoreItem("标签管理与批量编辑", _viewModel.ToggleP3TagManagerCommand));
@@ -816,6 +822,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (_canvas is not null) return;
         if (e.Key is Key.ImeProcessed or Key.DeadCharProcessed || IsTextInputContext(e.OriginalSource)) return;
         if (_isMarqueeSelecting && e.Key == Key.Escape)
         {
