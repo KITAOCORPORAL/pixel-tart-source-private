@@ -7,6 +7,7 @@ public enum ToolId
     PhotoOrganize,
     Collage,
     BatchCompress,
+    Publishing,
     Watermark,
     DeleteRejects,
     FtpTool,

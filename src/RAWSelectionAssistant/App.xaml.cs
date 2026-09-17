@@ -276,7 +276,8 @@ public partial class App : Application
                 financePage,
                 onlineSelectionPage: onlineSelectionPage,
                 rawToJpegPage: new RawToJpegViewModel(_compositionRoot.RawToJpegCoordinator, dialogService),
-                batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService));
+                batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService),
+                publishingPage: new PublishingExportViewModel(_compositionRoot.PublishingCoordinator, new Services.Publishing.WpfPublishingRenderer(), dialogService));
 
             calendarViewModel.FinanceRequested += async (_, request) =>
             {

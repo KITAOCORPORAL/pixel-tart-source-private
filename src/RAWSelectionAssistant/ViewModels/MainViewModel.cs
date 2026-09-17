@@ -104,12 +104,12 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
     {
         "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
-        "Activation", "Help", "BatchCompress", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
+        "Activation", "Help", "BatchCompress", "Publishing", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
     };
 
     private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
     {
-        "LocalSplit", "BatchCompress", "RawToJpeg", "PhotoGrouping", "Collage"
+        "LocalSplit", "BatchCompress", "Publishing", "RawToJpeg", "PhotoGrouping", "Collage"
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
@@ -146,7 +146,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         FinanceViewModel? financePage = null,
         OnlineSelectionViewModel? onlineSelectionPage = null,
         RawToJpegViewModel? rawToJpegPage = null,
-        BatchCompressionViewModel? batchCompressionPage = null)
+        BatchCompressionViewModel? batchCompressionPage = null,
+        PublishingExportViewModel? publishingPage = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -183,6 +184,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             store: new Core.Services.OnlineSelection.JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile));
         RawToJpegPage = rawToJpegPage;
         BatchCompressionPage = batchCompressionPage;
+        PublishingPage = publishingPage;
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
         if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
@@ -290,6 +292,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public OnlineSelectionViewModel OnlineSelectionPage { get; }
     public RawToJpegViewModel? RawToJpegPage { get; }
     public BatchCompressionViewModel? BatchCompressionPage { get; }
+    public PublishingExportViewModel? PublishingPage { get; }
     public ISurfaceNavigationHost SurfaceNavigationHost { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
@@ -475,6 +478,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             OnPropertyChanged(nameof(IsSettingsPage));
             OnPropertyChanged(nameof(IsHelpPage));
             OnPropertyChanged(nameof(IsBatchCompressPage));
+            OnPropertyChanged(nameof(IsPublishingPage));
             OnPropertyChanged(nameof(IsWatermarkPage));
             OnPropertyChanged(nameof(IsDeleteRejectsPage));
             OnPropertyChanged(nameof(IsFtpToolPage));
@@ -516,6 +520,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public bool IsSettingsPage => CurrentPage == "Settings";
     public bool IsHelpPage => CurrentPage == "Help";
     public bool IsBatchCompressPage => CurrentPage == "BatchCompress";
+    public bool IsPublishingPage => CurrentPage == "Publishing";
     public bool IsWatermarkPage => CurrentPage == "Watermark";
     public bool IsDeleteRejectsPage => CurrentPage == "DeleteRejects";
     public bool IsFtpToolPage => CurrentPage == "FtpTool";
@@ -871,6 +876,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         "History" => ProjectHistory.Count == 0 ? "暂无本地项目历史" : $"共 {ProjectHistory.Count} 个本地项目",
         "Toolbox" => "工具箱准备就绪",
         "BatchCompress" => BatchCompressionPage?.StatusText ?? "批量压缩准备就绪",
+        "Publishing" => PublishingPage?.StatusText ?? "发布导出准备就绪",
         "Watermark" => "水印工具准备就绪",
         "DeleteRejects" => "快速拒绝准备就绪",
         "FtpTool" => "FTP 工具准备就绪",

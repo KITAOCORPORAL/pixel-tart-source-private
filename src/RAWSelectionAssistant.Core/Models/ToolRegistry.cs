@@ -9,6 +9,7 @@ public static class ToolRegistry
         new(ToolId.PhotoOrganize, "整理图片", "按日期、相机、格式或自定义规则安全分组并复制照片。", "ToolIconOrganize", "PhotoGrouping", true, true, FeatureAvailability.Production, ToolMenuGroup.Organize, 30),
         new(ToolId.Collage, "拼图", "使用数据驱动模板制作拼图、纵向长图和横向长图。", "ToolIconCollage", "Collage", true, true, FeatureAvailability.Production, ToolMenuGroup.Organize, 40),
         new(ToolId.BatchCompress, "批量压缩", "预设尺寸、质量与元数据保留方式。", "ToolIconBatchCompress", "BatchCompress", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 50),
+        new(ToolId.Publishing, "发布导出", "将摄影成片安全输出为社媒、客户预览或作品集版本。", "ToolIconPublishing", "Publishing", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 55),
         new(ToolId.Watermark, "批量水印", "为交付照片配置文字或图片水印。", "ToolIconWatermark", "Watermark", true, true, FeatureAvailability.Preview, ToolMenuGroup.Output, 60),
         new(ToolId.DeleteRejects, "删废片", "浏览、标记并安全确认待删除照片。", "ToolIconDeleteRejects", "DeleteRejects", true, false, FeatureAvailability.Hidden, ToolMenuGroup.Organize, 70),
         new(ToolId.FtpTool, "FTP 工具", "配置本地文件和远程目录传输任务。", "ToolIconFtp", "FtpTool", true, false, FeatureAvailability.Hidden, ToolMenuGroup.Transfer, 80),

@@ -8,6 +8,7 @@ using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Services.BatchCompression;
 using RAWSelectionAssistant.Core.Services.OnlineSelection;
+using RAWSelectionAssistant.Core.Services.Publishing;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Services;
@@ -29,6 +30,7 @@ public sealed class ApplicationCompositionRoot
         IUndoJournalService undoJournalService,
         IRawToJpegTaskCoordinator rawToJpegCoordinator,
         IBatchCompressionTaskCoordinator batchCompressionCoordinator,
+        IPublishingTaskCoordinator publishingCoordinator,
         SelectionProxyJpegService selectionProxyJpegService)
     {
         Database = database;
@@ -45,6 +47,7 @@ public sealed class ApplicationCompositionRoot
         UndoJournalService = undoJournalService;
         RawToJpegCoordinator = rawToJpegCoordinator;
         BatchCompressionCoordinator = batchCompressionCoordinator;
+        PublishingCoordinator = publishingCoordinator;
         SelectionProxyJpegService = selectionProxyJpegService;
         ProjectRepository = new SqliteProjectRepository(database);
         MediaIndexRepository = new SqliteMediaIndexRepository(database);
@@ -88,6 +91,7 @@ public sealed class ApplicationCompositionRoot
     public IUndoJournalService UndoJournalService { get; }
     public IRawToJpegTaskCoordinator RawToJpegCoordinator { get; }
     public IBatchCompressionTaskCoordinator BatchCompressionCoordinator { get; }
+    public IPublishingTaskCoordinator PublishingCoordinator { get; }
     public SelectionProxyJpegService SelectionProxyJpegService { get; }
     public IProjectRepository ProjectRepository { get; }
     public IMediaIndexRepository MediaIndexRepository { get; }
@@ -153,7 +157,9 @@ public sealed class ApplicationCompositionRoot
             new RAWSelectionAssistant.Services.BatchCompression.WpfBatchCompressionEncoder(),
             new FileOperationValidator(), new FileConflictResolver(), verification, audit, notifications, executor);
         var batchHandler = new BatchCompressionTaskHandler(batchRequests, batchCompression);
-        var engine = new TaskEngine(repository, new ConservativeTaskScheduler(), [bridge, rawHandler, batchHandler], audit, notifications);
+        var publishingRequests = new PublishingRequestStore();
+        var publishingHandler = new PublishingTaskHandler(publishingRequests, new PublishingExportService(new RAWSelectionAssistant.Services.Publishing.WpfPublishingRenderer()));
+        var engine = new TaskEngine(repository, new ConservativeTaskScheduler(), [bridge, rawHandler, batchHandler, publishingHandler], audit, notifications);
         bridge.Attach(engine);
         await new TaskRecoveryService(repository, audit).RecoverInterruptedAsync(cancellationToken);
         var recovery = new RecoveryCoordinator(database, repository, executor, undo, audit, engine);
@@ -162,6 +168,7 @@ public sealed class ApplicationCompositionRoot
         return new(database, migration, jsonMigration, bridge, engine, taskCenter, notifications, audit, planner, executor, verification, undo,
             new RawToJpegTaskCoordinator(engine, rawRequests, rawDecoder),
             new BatchCompressionTaskCoordinator(engine, batchRequests),
+            new PublishingTaskCoordinator(engine, publishingRequests),
             selectionProxyJpegService);
     }
 }

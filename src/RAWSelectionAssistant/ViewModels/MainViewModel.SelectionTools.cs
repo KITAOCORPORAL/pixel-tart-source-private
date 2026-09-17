@@ -15,6 +15,10 @@ public partial class MainViewModel
                 if (BatchCompressionPage is null) throw new InvalidOperationException("压缩工具不可用。");
                 BatchCompressionPage.AddFiles(paths);
                 break;
+            case "Publishing":
+                if (PublishingPage is null) throw new InvalidOperationException("发布导出不可用。");
+                PublishingPage.AddFiles(paths);
+                break;
             case "Collage": CollagePage.AddPaths(paths); break;
             default: throw new ArgumentException("未知快速工具。", nameof(tool));
         }

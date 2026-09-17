@@ -1029,6 +1029,7 @@
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" Padding="8,4" Margin="2" />
+<Button Content="发布导出" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Publishing" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" Padding="8,4" Margin="2" />
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" Padding="8,4" Margin="2" />
 </WrapPanel></StackPanel>

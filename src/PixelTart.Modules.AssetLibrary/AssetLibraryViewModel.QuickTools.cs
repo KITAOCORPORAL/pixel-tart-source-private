@@ -43,7 +43,7 @@ public sealed partial class AssetLibraryViewModel
             }
             var paths = selected.Select(GetDisplaySourcePath).Where(File.Exists).ToArray();
             if (paths.Length == 0) { Status = "所选源照片暂不可访问。"; return; }
-            if (action is "RawToJpeg" or "BatchCompress" or "Collage" && SelectionToolHandler is not null)
+            if (action is "RawToJpeg" or "BatchCompress" or "Publishing" or "Collage" && SelectionToolHandler is not null)
                 await SelectionToolHandler(action, paths);
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidOperationException)
