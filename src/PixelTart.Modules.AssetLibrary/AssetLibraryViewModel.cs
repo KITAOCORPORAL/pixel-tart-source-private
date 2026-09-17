@@ -1847,6 +1847,9 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         RaiseP3SmartFolderCommands();
         RaiseP3TagCommands();
         PreviewP3BatchMetadataCommand?.RaiseCanExecuteChanged();
+        OpenProjectPickerCommand?.RaiseCanExecuteChanged(); OpenBookingPickerCommand?.RaiseCanExecuteChanged();
+        SelectionToolCommand?.RaiseCanExecuteChanged(); SaveInspectorDetailsCommand?.RaiseCanExecuteChanged();
+        ApplyInspectorColorCommand?.RaiseCanExecuteChanged(); AddInspectorFolderCommand?.RaiseCanExecuteChanged(); AddInspectorTagsCommand?.RaiseCanExecuteChanged();
     }
 
     private bool IsCurrentAnalysis(AssetItem asset, long generation) =>

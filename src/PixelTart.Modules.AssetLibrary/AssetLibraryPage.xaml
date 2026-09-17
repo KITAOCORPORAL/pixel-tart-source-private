@@ -822,7 +822,7 @@
                     <StackPanel>
                         <DockPanel>
                             <TextBlock Text="{Binding InspectorHeading}" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
-                            <TextBlock Text="{Binding SelectionCount, StringFormat={}{0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding SelectionCount, StringFormat={}{0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" HorizontalAlignment="Right" Visibility="{Binding HasSelection, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </DockPanel>
                         <Border x:Name="AssetInspectorEmptyState" Visibility="{Binding IsSelectionEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="AssetInspectorEmptyState">
                             <StackPanel Margin="0,20">

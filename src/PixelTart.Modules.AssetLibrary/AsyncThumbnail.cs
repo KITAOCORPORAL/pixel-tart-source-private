@@ -99,6 +99,7 @@ public static class AsyncThumbnail
 
     private static bool IsWithinScope(DependencyObject candidate, DependencyObject scope)
     {
+        if (candidate.Dispatcher != scope.Dispatcher) return false;
         for (DependencyObject? current = candidate; current is not null; current = LogicalTreeHelper.GetParent(current) ??
              (current is System.Windows.Media.Visual or System.Windows.Media.Media3D.Visual3D ? System.Windows.Media.VisualTreeHelper.GetParent(current) : null))
         {

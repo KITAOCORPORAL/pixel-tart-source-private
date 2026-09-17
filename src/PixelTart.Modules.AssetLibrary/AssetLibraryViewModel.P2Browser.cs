@@ -391,15 +391,17 @@ public sealed partial class AssetLibraryViewModel
         Status = $"灵感板已关联项目：{item.Name}";
             return;
         }
-        foreach (var asset in SelectedAssets) await _repository.SaveProjectAssetLinkAsync(new(item.Id, asset.AssetId, "Asset", DateTimeOffset.UtcNow), _lifetimeCancellation.Token).ConfigureAwait(false);
-        IsProjectPickerOpen = false; Status = $"已关联项目：{item.Name}（{SelectedAssets.Count} 项）"; OnP2SelectionChanged(SelectedAssets.ToArray());
+        var assets=SelectedAssets.ToArray();
+        foreach (var asset in assets) await _repository.SaveProjectAssetLinkAsync(new(item.Id, asset.AssetId, "Asset", DateTimeOffset.UtcNow), _lifetimeCancellation.Token);
+        IsProjectPickerOpen = false; Status = $"已关联项目：{item.Name}（{assets.Length} 项）"; OnP2SelectionChanged(SelectedAssets.ToArray());
     }
 
     private async Task SelectBookingRelationAsync(AssetRelationPickerItem? item)
     {
         if (item is null) return;
-        foreach (var asset in SelectedAssets) await _repository.SaveBookingAssetLinkAsync(new(item.Id, asset.AssetId, DateTimeOffset.UtcNow), _lifetimeCancellation.Token).ConfigureAwait(false);
-        IsBookingPickerOpen = false; Status = $"已关联拍摄：{item.Name}（{SelectedAssets.Count} 项）"; OnP2SelectionChanged(SelectedAssets.ToArray());
+        var assets=SelectedAssets.ToArray();
+        foreach (var asset in assets) await _repository.SaveBookingAssetLinkAsync(new(item.Id, asset.AssetId, DateTimeOffset.UtcNow), _lifetimeCancellation.Token);
+        IsBookingPickerOpen = false; Status = $"已关联拍摄：{item.Name}（{assets.Length} 项）"; OnP2SelectionChanged(SelectedAssets.ToArray());
     }
 
     private async Task RemoveProjectRelationAsync(AssetRelationPickerItem? item)

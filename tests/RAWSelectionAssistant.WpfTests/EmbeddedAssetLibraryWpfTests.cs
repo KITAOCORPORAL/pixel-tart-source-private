@@ -64,6 +64,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsTrue(vm.IsQueryInspectorVisible);
                 Assert.IsTrue(PumpDispatcherUntil(() => vm.CollectionTotalSize != "正在统计…", TimeSpan.FromSeconds(5)));
                 var assets = vm.AssetCards.Select(card => card.Asset).ToArray();
+                ArrangePage(page,1600,900);
+                var projectButton=FindVisualChildren<Button>(page).Single(button=>Equals(button.Content,"批量关联项目"));
+                var bookingButton=FindVisualChildren<Button>(page).Single(button=>Equals(button.Content,"批量关联拍摄"));
+                Assert.IsFalse(projectButton.IsEnabled);Assert.IsFalse(bookingButton.IsEnabled);
                 vm.SyncSelection([assets[0]]);
                 vm.InspectorNote = "构图参考"; vm.InspectorUrl = "https://example.test/reference";
                 vm.SaveInspectorDetailsCommand.Execute(null); vm.SaveInspectorDetailsCommand.ExecutionTask.CompleteOnDispatcher();
@@ -72,6 +76,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 vm.SyncSelection(assets);
                 Assert.IsTrue(vm.IsMultipleInspectorVisible); Assert.IsNull(vm.SelectedAsset);
                 Assert.HasCount(2, vm.InspectorSelectedCards);
+                Assert.IsTrue(projectButton.IsEnabled,"Batch project must enable immediately after selection.");
+                Assert.IsTrue(bookingButton.IsEnabled,"Batch booking must enable immediately after selection.");
                 IReadOnlyList<string>? routedPaths = null;
                 vm.SelectionToolHandler = (tool, paths) => { Assert.AreEqual("Collage", tool); routedPaths = paths; return Task.CompletedTask; };
                 vm.SelectionToolCommand.Execute("Collage"); vm.SelectionToolCommand.ExecutionTask.CompleteOnDispatcher();
@@ -81,6 +87,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 var store = new AssetPresentationMetadataStore(new AssetLibraryDatabase(Path.Combine(root, "library.db")));
                 foreach (var asset in assets) Assert.AreEqual("蓝", store.GetAsync(asset.AssetId).GetAwaiter().GetResult().Color);
                 CollectionAssert.AreEqual(before, Directory.GetFiles(root, "*.jpg").Select(path => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)))).ToArray());
+                Assert.IsTrue(PumpDispatcherUntil(()=>AsyncThumbnail.PendingRequestCount==0,TimeSpan.FromSeconds(10)),"Contextual inspector thumbnails must drain before its STA dispatcher ends.");
                 page.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }

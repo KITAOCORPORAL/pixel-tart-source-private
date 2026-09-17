@@ -63,6 +63,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void NotifyContextualInspector()
     {
+        OpenProjectPickerCommand.RaiseCanExecuteChanged(); OpenBookingPickerCommand.RaiseCanExecuteChanged();
         SelectionToolCommand.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(QuickCompressLabel)); OnPropertyChanged(nameof(QuickExportLabel));
         InspectorNote = SelectedAsset?.Comment ?? ""; InspectorUrl = ""; InspectorColor = "";
