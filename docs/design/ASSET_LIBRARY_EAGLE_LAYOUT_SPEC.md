@@ -110,3 +110,24 @@ Key screenshots:
 ## Next acceptance stage
 
 This reconstruction is ready for physical-machine verification at 1920×1080, 2560×1440, and 4K across 100%, 125%, 150%, and 200% DPI. Automated logical-DPI evidence is not a substitute for the remaining human physical-machine pass.
+
+## Acceptance boundary (2026-09-17)
+
+The implementation and automated checks do not establish 100% Eagle parity. The current-HEAD visual audit is recorded in `docs/implementation-reports/ASSET_LIBRARY_EAGLE_SHELL_RECONSTRUCTION_REPORT.md` with these deliberately separate statuses:
+
+| Area | Status | Remaining visible difference or evidence gap |
+| --- | --- | --- |
+| Three-pane layout | PARTIAL | Pixel Tart's application navigation remains an additional left rail. |
+| Information structure | PARTIAL | The photo pane contains additional project/booking and analysis controls. |
+| Gallery aspect ratio and metadata | DONE | Current synthetic examples retain source proportions and show filename plus resolution. |
+| Toolbar | PARTIAL | Actions are icon-first, but the current-library tab is visually bright. |
+| Inspector | PARTIAL | Single selection exposes it; visual density and labels still need photographer review. |
+| Filter | MISMATCH | The expanded color filter occupies too much vertical gallery area in the captured state. |
+| Context menu | PARTIAL | Grouping and icons are visible; the secondary menu panel is not proven by the current screenshot. |
+| Folder tree | PARTIAL | Hierarchy is visible; the named capture does not show expanded child folders. |
+| Keyboard operation | PARTIAL | Automated focus contracts pass; physical keyboard acceptance remains. |
+| Quick Preview | PARTIAL | Provider/close behavior has contract coverage, but the active screenshot does not visibly show the popup. |
+| Creative Board | PARTIAL | The overlay is captured; real drag and collection switching await user-machine acceptance. |
+| Dark theme tokens | PARTIAL | Automated contrast/layout checks pass; current-library tab and selected-star brightness need physical review. |
+
+No database schema, AssetOrigin, thumbnail provider, project/booking relationship or source-media semantics were changed by this acceptance pass. No new page or feature was added.

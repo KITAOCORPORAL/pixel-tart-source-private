@@ -19,7 +19,7 @@ $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
 [IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
 
 if (-not $SkipBuild) {
-    & $dotnet build $project -c Release --no-restore -warnaserror
+    & $dotnet build $project -c Release -p:Platform=x64 --no-restore -warnaserror
     if ($LASTEXITCODE -ne 0) { throw 'RC12 WPF isolation build failed.' }
 }
 
@@ -41,7 +41,7 @@ foreach ($className in $classes) {
     $stdoutPath = Join-Path $OutputRoot ('{0:000}-{1}.stdout.txt' -f $fixtureIndex, $safeName)
     $stderrPath = Join-Path $OutputRoot ('{0:000}-{1}.stderr.txt' -f $fixtureIndex, $safeName)
     $arguments = @(
-        'test', ('"' + $project + '"'), '-c', 'Release', '--no-build', '--no-restore',
+        'test', ('"' + $project + '"'), '-c', 'Release', '-p:Platform=x64', '--no-build', '--no-restore',
         '--filter', ('FullyQualifiedName~RAWSelectionAssistant.WpfTests.' + $className),
         '--results-directory', ('"' + $OutputRoot + '"'),
         '--logger', ('trx;LogFileName=' + $trxName),
