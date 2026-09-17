@@ -926,6 +926,7 @@ public sealed partial class AssetLibraryViewModel
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecentlyAdded, "最近添加", "按添加时间从新到旧", "AssetLibraryRecentAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.HighRating, "收藏", "显示四星及以上照片", "AssetLibraryFavorites"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.MissingFiles, "缺失文件", "源路径目前不可用", "AssetLibraryMissingAssets"));
+        SystemCollections.Add(new(this, AssetLibrarySystemCollection.DuplicateAssets, "重复素材", "完全相同与视觉相似素材", "AssetLibraryDuplicateAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.Archived, "已归档", "仅显示已归档素材", "AssetLibraryArchivedAssets"));
         SystemCollections.Add(new(this, AssetLibrarySystemCollection.RecycleBin, "回收站", "可恢复素材；不会删除源文件", "AssetLibraryRecycleBin"));
         UpdateSystemCollectionActiveStates();
@@ -936,6 +937,8 @@ public sealed partial class AssetLibraryViewModel
         var collections = SystemCollections.ToArray();
         var tasks = collections.Select(async item =>
         {
+            if (item.Collection == AssetLibrarySystemCollection.DuplicateAssets)
+                return (item, await CountDuplicateGroupsAsync(cancellationToken).ConfigureAwait(false));
             var query = AssetLibrarySystemCollections.CreateQuery(item.Collection) with { PageSize = 1, Cursor = null };
             var page = await _repository.QueryAsync(query, cancellationToken).ConfigureAwait(false);
             return (item, page.TotalCount);
@@ -946,6 +949,13 @@ public sealed partial class AssetLibraryViewModel
 
     internal void SelectSystemCollection(AssetLibrarySystemCollection collection)
     {
+        if (collection == AssetLibrarySystemCollection.DuplicateAssets)
+        {
+            SetActiveCollectionWithoutRefresh(collection);
+            _ = OpenDuplicateWorkspaceAsync();
+            return;
+        }
+        IsDuplicateWorkspaceOpen = false;
         _changingP2QuerySource = true;
         try
         {

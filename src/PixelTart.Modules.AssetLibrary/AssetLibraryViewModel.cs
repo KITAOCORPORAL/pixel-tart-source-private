@@ -9,6 +9,7 @@ using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.Duplicates;
 using RAWSelectionAssistant.Core.Services.Tasks;
 using RAWSelectionAssistant.Core.Utilities;
 using AssetLibraryPageResult = RAWSelectionAssistant.Core.Models.AssetLibraryPage;
@@ -35,6 +36,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     private readonly string _databasePath;
     private readonly string _productDatabasePath;
     private readonly string _onlineSelectionWorkspaceFile;
+    private readonly string _inspirationTrayDatabasePath;
     private readonly AssetVisualAnalysisSelectionCoordinator _analysisCoordinator = new();
     private readonly PreviewImportDiagnosticsWriter _importDiagnostics;
     private readonly SemaphoreSlim _initializationGate = new(1, 1);
@@ -178,7 +180,8 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         _databasePath = _database.DatabasePath;
         _productDatabasePath = productDatabasePath ?? AppDataPaths.DatabaseFile;
         _onlineSelectionWorkspaceFile = onlineSelectionWorkspaceFile ?? AppDataPaths.OnlineSelectionWorkspaceFile;
-        _inspirationTray = new SqliteInspirationTrayService(inspirationTrayDatabasePath ?? Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite"));
+        _inspirationTrayDatabasePath = inspirationTrayDatabasePath ?? Path.Combine(AppDataPaths.Root, "InspirationTray", "tray.sqlite");
+        _inspirationTray = new SqliteInspirationTrayService(_inspirationTrayDatabasePath);
         _previewProvider = previewProvider ?? AsyncThumbnail.Provider as IAssetPreviewProvider ?? new WpfAssetThumbnailProvider();
         _taskOperationBridge = taskOperationBridge ?? throw new ArgumentNullException(nameof(taskOperationBridge));
         _loadStateController = loadStateController;
@@ -224,6 +227,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         InitializeP3SmartFolderEditor();
         InitializeP3TagManager();
         InitializeInspirationTray();
+        InitializeDuplicateFinder();
     }
 
     private async void OnSearchDebounceTick(DispatcherTimer timer, long generation)

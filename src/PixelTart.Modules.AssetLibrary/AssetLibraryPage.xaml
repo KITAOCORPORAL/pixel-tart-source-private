@@ -1106,6 +1106,72 @@
             </DockPanel>
         </Border>
 
+        <Border Grid.Row="2" Panel.ZIndex="39" Width="1080" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" MaxHeight="720"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="18" Padding="16"
+                Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}"
+                Visibility="{Binding IsDuplicateWorkspaceOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                AutomationProperties.AutomationId="DuplicateFinderWorkspace" AutomationProperties.Name="重复素材">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+                    <Button DockPanel.Dock="Right" Content="关闭" Click="CloseDuplicateWorkspace_Click" Style="{DynamicResource PixelTart.Button.Ghost}" />
+                    <Button DockPanel.Dock="Right" Content="重新扫描" Command="{Binding RefreshDuplicatesCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0" />
+                    <StackPanel>
+                        <TextBlock Text="重复素材" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                        <TextBlock Text="横向比较版本；建议仅供参考，不会自动删除" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                    </StackPanel>
+                </DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" Text="严格" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
+                        <TextBlock DockPanel.Dock="Right" Text="宽松" Style="{DynamicResource PixelTart.Type.Metadata}" VerticalAlignment="Center" />
+                        <Slider Minimum="0" Maximum="1" FlowDirection="RightToLeft" Value="{Binding DuplicateStrictness, UpdateSourceTrigger=PropertyChanged}" Margin="10,0" AutomationProperties.Name="相似程度严格到宽松" />
+                    </DockPanel>
+                    <ProgressBar IsIndeterminate="True" Height="4" Margin="0,8,0,0" Visibility="{Binding IsDuplicateScanRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding DuplicateGroups}">
+                            <ItemsControl.ItemTemplate><DataTemplate>
+                                <Border Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <DockPanel Margin="0,0,0,10"><TextBlock DockPanel.Dock="Right" Text="{Binding SimilarityLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" /><TextBlock Text="{Binding Header}" Style="{DynamicResource PixelTart.Type.SectionTitle}" /></DockPanel>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                            <ItemsControl ItemsSource="{Binding Items}">
+                                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate><DataTemplate>
+                                                    <Border Width="220" Margin="0,0,10,0" Padding="8" Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="5">
+                                                        <StackPanel>
+                                                            <Grid Height="150" Background="{DynamicResource Brush.Background}">
+                                                                <Image Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding Asset.SourcePath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="360" />
+                                                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Background="{DynamicResource Brush.Accent.Subtle}" Padding="6,3" Visibility="{Binding IsSuggested, Converter={StaticResource BooleanToVisibilityConverter}}"><TextBlock Text="建议保留" Foreground="{DynamicResource Brush.Accent}" /></Border>
+                                                            </Grid>
+                                                            <TextBlock Text="{Binding Asset.DisplayName}" FontWeight="SemiBold" Margin="0,8,0,2" TextTrimming="CharacterEllipsis" />
+                                                            <TextBlock><Run Text="{Binding Dimensions}" /><Run Text="  ·  " /><Run Text="{Binding FileSize}" /></TextBlock>
+                                                            <TextBlock Text="{Binding Rating}" Foreground="{DynamicResource Brush.Accent}" />
+                                                            <TextBlock Text="{Binding Asset.SourcePath}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Asset.SourcePath}" />
+                                                            <TextBlock Text="{Binding UsageLabel}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,4" />
+                                                            <WrapPanel Margin="0,4,0,0">
+                                                                <Button Content="用此版本替换引用" Command="{Binding DataContext.ReplaceDuplicateReferencesCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Secondary}" Padding="6,3" />
+                                                                <Button Content="移到回收站" Command="{Binding DataContext.TrashDuplicateCandidateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,3" />
+                                                            </WrapPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate></ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasNoDuplicateGroups, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="没有发现重复素材" Style="{DynamicResource PixelTart.Type.SectionTitle}" HorizontalAlignment="Center" />
+                        <TextBlock Text="完全相同按内容确认；相似素材需要已有视觉分析结果。" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,6" />
+                    </StackPanel>
+                </Grid>
+            </DockPanel>
+        </Border>
+
         <Border x:Name="VisualAnalysisSurface" Grid.Row="2" Panel.ZIndex="40" Width="820" MaxHeight="680" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="18"
                 Padding="16" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}" Visibility="Collapsed"
                 AutomationProperties.AutomationId="VisualAnalysisContextSurface">

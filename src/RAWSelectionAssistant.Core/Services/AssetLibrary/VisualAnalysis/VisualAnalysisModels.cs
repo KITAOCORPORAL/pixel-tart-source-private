@@ -140,7 +140,7 @@ public sealed record AssetVisualAnalysisResult(
     DateTimeOffset CreatedAt,
     bool CacheHit = false)
 {
-    public const string CurrentVersion = "visual-analysis-v3";
+    public const string CurrentVersion = "visual-analysis-v4";
 
     /// <summary>
     /// Fingerprint of the current source/managed-copy bytes when the analysis was
@@ -157,6 +157,11 @@ public sealed record AssetVisualAnalysisResult(
     public string PaletteSignature { get; init; } = string.Empty;
     public bool HasDominantChromaticColor { get; init; }
     public ElevenZoneDistribution ZoneDistribution { get; init; } = ElevenZoneDistribution.Empty;
+    /// <summary>
+    /// Scale- and encoding-tolerant image signatures used only by the duplicate finder.
+    /// Product surfaces deliberately expose a friendly similarity percentage instead.
+    /// </summary>
+    public IReadOnlyList<string> SimilaritySignatures { get; init; } = [];
 }
 
 public sealed record AssetVisualAnalysisRequest(

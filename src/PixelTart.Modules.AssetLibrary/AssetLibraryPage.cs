@@ -906,6 +906,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void OpenVisualAnalysisHistogram_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),2);
     private async void OpenVisualAnalysisZones_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),3);
     private void CloseVisualAnalysis_Click(object sender,RoutedEventArgs e)=>VisualAnalysisSurface.Visibility=Visibility.Collapsed;
+    private void CloseDuplicateWorkspace_Click(object sender, RoutedEventArgs e) => _viewModel.IsDuplicateWorkspaceOpen = false;
     private async void VisualPalette3_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=3;await RefreshVisualSurfaceAsync();}
     private async void VisualPalette5_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=5;await RefreshVisualSurfaceAsync();}
     private async void VisualPalette7_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=7;await RefreshVisualSurfaceAsync();}

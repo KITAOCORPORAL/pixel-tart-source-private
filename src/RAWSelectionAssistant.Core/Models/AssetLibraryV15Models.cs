@@ -61,6 +61,7 @@ public enum AssetLibrarySystemCollection
     Untagged,
     MissingFiles,
     HighRating,
+    DuplicateAssets,
     Archived,
     RecycleBin
 }
@@ -78,6 +79,7 @@ public static class AssetLibrarySystemCollections
         AssetLibrarySystemCollection.MissingFiles => new(MissingOnly: true, SystemCollection: collection),
         AssetLibrarySystemCollection.HighRating => new(MinimumRating: 4, SystemCollection: collection),
         AssetLibrarySystemCollection.RecentlyAdded => new(PageSize: 100, SortField: AssetLibrarySortField.AddedAt, SortDirection: AssetLibrarySortDirection.Descending, SystemCollection: collection),
+        AssetLibrarySystemCollection.DuplicateAssets => new(SystemCollection: collection),
         AssetLibrarySystemCollection.Archived => new(ArchiveScope: AssetLibraryArchiveScope.ArchivedOnly, SystemCollection: collection),
         _ => new(SystemCollection: collection)
     };

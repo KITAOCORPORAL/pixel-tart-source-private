@@ -80,7 +80,8 @@ public static class VisualAnalysisEngine
             HistogramLumaSignature = HistogramSignature(histLuma),
             PaletteSignature = string.Join("|", palette.Select(color => $"{color.Hex}:{color.Weight:F6}")),
             HasDominantChromaticColor = materialPalette.Length > 0,
-            ZoneDistribution = new(elevenZoneCounts.Select(value => value / denominator).ToArray())
+            ZoneDistribution = new(elevenZoneCounts.Select(value => value / denominator).ToArray()),
+            SimilaritySignatures = CreateSimilaritySignatures(request.Pixels)
         };
     }
 
@@ -265,6 +266,70 @@ public static class VisualAnalysisEngine
         var bytes = new byte[histogram.Length * sizeof(uint)];
         Buffer.BlockCopy(histogram, 0, bytes, 0, bytes.Length);
         return Convert.ToHexString(SHA256.HashData(bytes));
+    }
+
+    private static IReadOnlyList<string> CreateSimilaritySignatures(VisualPixelBuffer pixels)
+    {
+        // Several centred crops make the signature tolerant of common social crops while
+        // retaining dHash's useful resistance to resizing, recompression and light grading.
+        return new[] { 1d, .9d, .8d, .7d }
+            .SelectMany((scale, index) => new[]
+            {
+                $"D{index}:{CreateDifferenceHash(pixels, scale):X16}",
+                $"A{index}:{CreateAverageHash(pixels, scale):X16}"
+            })
+            .ToArray();
+    }
+
+    private static ulong CreateDifferenceHash(VisualPixelBuffer pixels, double cropScale)
+    {
+        var cropWidth = Math.Max(1, (int)Math.Round(pixels.Width * cropScale));
+        var cropHeight = Math.Max(1, (int)Math.Round(pixels.Height * cropScale));
+        var cropX = (pixels.Width - cropWidth) / 2;
+        var cropY = (pixels.Height - cropHeight) / 2;
+        var bytes = pixels.Rgb24.Span;
+        Span<byte> samples = stackalloc byte[9 * 8];
+        for (var y = 0; y < 8; y++)
+        for (var x = 0; x < 9; x++)
+        {
+            var sourceX = Math.Clamp(cropX + (int)Math.Round(x * (cropWidth - 1d) / 8d), 0, pixels.Width - 1);
+            var sourceY = Math.Clamp(cropY + (int)Math.Round(y * (cropHeight - 1d) / 7d), 0, pixels.Height - 1);
+            var offset = (sourceY * pixels.Width + sourceX) * 3;
+            samples[y * 9 + x] = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(bytes[offset], bytes[offset + 1], bytes[offset + 2])), 0, 255);
+        }
+
+        ulong hash = 0;
+        for (var y = 0; y < 8; y++)
+        for (var x = 0; x < 8; x++)
+        {
+            hash <<= 1;
+            if (samples[y * 9 + x] > samples[y * 9 + x + 1]) hash |= 1;
+        }
+        return hash;
+    }
+
+    private static ulong CreateAverageHash(VisualPixelBuffer pixels, double cropScale)
+    {
+        var cropWidth = Math.Max(1, (int)Math.Round(pixels.Width * cropScale));
+        var cropHeight = Math.Max(1, (int)Math.Round(pixels.Height * cropScale));
+        var cropX = (pixels.Width - cropWidth) / 2;
+        var cropY = (pixels.Height - cropHeight) / 2;
+        var bytes = pixels.Rgb24.Span;
+        Span<byte> samples = stackalloc byte[64];
+        double total = 0;
+        for (var y = 0; y < 8; y++)
+        for (var x = 0; x < 8; x++)
+        {
+            var sourceX = Math.Clamp(cropX + (int)Math.Round((x + .5) * cropWidth / 8d - .5), 0, pixels.Width - 1);
+            var sourceY = Math.Clamp(cropY + (int)Math.Round((y + .5) * cropHeight / 8d - .5), 0, pixels.Height - 1);
+            var offset = (sourceY * pixels.Width + sourceX) * 3;
+            var value = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(bytes[offset], bytes[offset + 1], bytes[offset + 2])), 0, 255);
+            samples[y * 8 + x] = value; total += value;
+        }
+        var average = total / samples.Length;
+        ulong hash = 0;
+        foreach (var sample in samples) { hash <<= 1; if (sample >= average) hash |= 1; }
+        return hash;
     }
     private static double CircularSpan(IReadOnlyList<double> hues) { if (hues.Count < 2) return 0; var sorted = hues.Order().ToArray(); var largestGap = Enumerable.Range(0, sorted.Length).Max(i => i == sorted.Length - 1 ? 360 - sorted[i] + sorted[0] : sorted[i + 1] - sorted[i]); return 360 - largestGap; }
     private static double AngularDistance(double a, double b) { var distance = Math.Abs(a - b) % 360; return distance > 180 ? 360 - distance : distance; }
