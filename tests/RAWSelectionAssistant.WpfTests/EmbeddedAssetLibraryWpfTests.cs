@@ -23,6 +23,44 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public async Task ContextualInspectorPersistsAnnotationsAndNeverUsesFirstPhotoForMultipleSelection()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ContextualInspector", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                WriteSyntheticJpeg(Path.Combine(root, "one.jpg")); WriteSyntheticJpeg(Path.Combine(root, "two.jpg"), 40);
+                var before = Directory.GetFiles(root, "*.jpg").Select(path => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)))).ToArray();
+                var page = new AssetLibraryPage(Path.Combine(root, "library.db"), new TaskOperationBridge(), []);
+                page.InitializeForSessionAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
+                var vm = page.ViewModel;
+                vm.SyncSelection([]);
+                Assert.IsTrue(vm.IsQueryInspectorVisible);
+                Assert.IsTrue(PumpDispatcherUntil(() => vm.CollectionTotalSize != "正在统计…", TimeSpan.FromSeconds(5)));
+                var assets = vm.AssetCards.Select(card => card.Asset).ToArray();
+                vm.SyncSelection([assets[0]]);
+                vm.InspectorNote = "构图参考"; vm.InspectorUrl = "https://example.test/reference";
+                vm.SaveInspectorDetailsCommand.Execute(null); vm.SaveInspectorDetailsCommand.ExecutionTask.CompleteOnDispatcher();
+                Assert.AreEqual("构图参考", vm.SelectedAsset!.Comment);
+                Assert.AreEqual("https://example.test/reference", vm.InspectorUrl);
+                vm.SyncSelection(assets);
+                Assert.IsTrue(vm.IsMultipleInspectorVisible); Assert.IsNull(vm.SelectedAsset);
+                Assert.HasCount(2, vm.InspectorSelectedCards);
+                vm.InspectorColor = "蓝";
+                vm.ApplyInspectorColorCommand.Execute(null); vm.ApplyInspectorColorCommand.ExecutionTask.CompleteOnDispatcher();
+                var store = new AssetPresentationMetadataStore(new AssetLibraryDatabase(Path.Combine(root, "library.db")));
+                foreach (var asset in assets) Assert.AreEqual("蓝", store.GetAsync(asset.AssetId).GetAwaiter().GetResult().Color);
+                CollectionAssert.AreEqual(before, Directory.GetFiles(root, "*.jpg").Select(path => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)))).ToArray());
+                page.DisposeAsync().AsTask().CompleteOnDispatcher();
+            });
+        }
+        finally { try { Directory.Delete(root, true); } catch { } }
+    }
+
+    [TestMethod]
     public async Task RealQuickPreviewLoadsHighQualityAndClosesOnPointerLeave()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-LoupeClosure", Guid.NewGuid().ToString("N"));

@@ -209,6 +209,7 @@ public sealed partial class AssetLibraryViewModel
     private void InitializeP2Browser()
     {
         _browserCommands = new(_repository);
+        InitializeContextualInspector();
         BuildSystemCollections();
         SwitchViewCommand = new(SwitchViewAsync);
         SortBrowserCommand = new(SortBrowserAsync);
@@ -1238,6 +1239,7 @@ public sealed partial class AssetLibraryViewModel
         UpdateP2QueryDescription();
         OnPropertyChanged(nameof(P2QuerySummary));
         NotifyP3QueryResultChanged();
+        _ = RunTrackedP3OperationAsync(RefreshCollectionSizeAsync);
     }
 
     private void UpdateP2QueryDescription()
@@ -1263,6 +1265,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void OnP2SelectionChanged(IReadOnlyList<AssetItem> selected)
     {
+        NotifyContextualInspector();
         OnPropertyChanged(nameof(IsQueryInspectorVisible));
         OnPropertyChanged(nameof(IsSingleInspectorVisible));
         OnPropertyChanged(nameof(IsMultipleInspectorVisible));
@@ -1288,6 +1291,7 @@ public sealed partial class AssetLibraryViewModel
                 return;
             }
             var ids = selected.Select(asset => asset.AssetId).ToHashSet();
+            await RefreshPresentationMetadataAsync(selected, generation);
             var memberships = await Task.Run(async () => (
                 Folders: await _repository.ListFolderMembershipsAsync(cancellationToken: _lifetimeCancellation.Token),
                 Tags: await _repository.ListTagMembershipsAsync(cancellationToken: _lifetimeCancellation.Token)), _lifetimeCancellation.Token);
