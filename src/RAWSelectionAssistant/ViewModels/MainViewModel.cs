@@ -12,7 +12,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed class MainViewModel : ObservableObject, IShellEscapeService
+public sealed partial class MainViewModel : ObservableObject, IShellEscapeService
 {
     private const string QuickToolsCapacityShortLabel = "快捷工具已满";
     private const string QuickToolsCapacityMessage = "工作台快捷区已满，请先取消一个已固定工具。";

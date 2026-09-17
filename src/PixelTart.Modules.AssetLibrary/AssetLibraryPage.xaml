@@ -1013,6 +1013,16 @@
                                 <TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </Border>
+<StackPanel Margin="0,14,0,6" Visibility="{Binding HasSelection, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="AssetInspectorQuickTools">
+<TextBlock Text="快速工具" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,0,0,6" />
+<WrapPanel>
+<Button Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+<Button Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+<Button Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" Padding="8,4" Margin="2" />
+<Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" Padding="8,4" Margin="2" />
+<Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" Padding="8,4" Margin="2" />
+<Button Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" Padding="8,4" Margin="2" />
+</WrapPanel></StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Border>

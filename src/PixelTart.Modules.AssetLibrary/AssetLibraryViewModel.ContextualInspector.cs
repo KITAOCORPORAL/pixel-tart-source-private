@@ -26,6 +26,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void InitializeContextualInspector()
     {
+        InitializeQuickTools();
         SaveInspectorDetailsCommand = new(() => InspectorMutationAsync(async () =>
         {
             if (SelectedAsset is not { } asset) return;
@@ -62,6 +63,8 @@ public sealed partial class AssetLibraryViewModel
 
     private void NotifyContextualInspector()
     {
+        SelectionToolCommand.RaiseCanExecuteChanged();
+        OnPropertyChanged(nameof(QuickCompressLabel)); OnPropertyChanged(nameof(QuickExportLabel));
         InspectorNote = SelectedAsset?.Comment ?? ""; InspectorUrl = ""; InspectorColor = "";
         foreach (var property in new[] { nameof(InspectorHeading), nameof(InspectorSelectedCards), nameof(InspectorSelectionSize), nameof(InspectorFilterSummary) }) OnPropertyChanged(property);
         SaveInspectorDetailsCommand.RaiseCanExecuteChanged(); ApplyInspectorColorCommand.RaiseCanExecuteChanged(); AddInspectorFolderCommand.RaiseCanExecuteChanged(); AddInspectorTagsCommand.RaiseCanExecuteChanged();

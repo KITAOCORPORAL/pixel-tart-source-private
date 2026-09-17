@@ -49,6 +49,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 vm.SyncSelection(assets);
                 Assert.IsTrue(vm.IsMultipleInspectorVisible); Assert.IsNull(vm.SelectedAsset);
                 Assert.HasCount(2, vm.InspectorSelectedCards);
+                IReadOnlyList<string>? routedPaths = null;
+                vm.SelectionToolHandler = (tool, paths) => { Assert.AreEqual("Collage", tool); routedPaths = paths; return Task.CompletedTask; };
+                vm.SelectionToolCommand.Execute("Collage"); vm.SelectionToolCommand.ExecutionTask.CompleteOnDispatcher();
+                CollectionAssert.AreEqual(assets.Select(asset => asset.SourcePath).ToArray(), routedPaths!.ToArray());
                 vm.InspectorColor = "蓝";
                 vm.ApplyInspectorColorCommand.Execute(null); vm.ApplyInspectorColorCommand.ExecutionTask.CompleteOnDispatcher();
                 var store = new AssetPresentationMetadataStore(new AssetLibraryDatabase(Path.Combine(root, "library.db")));

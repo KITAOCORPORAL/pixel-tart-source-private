@@ -60,7 +60,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         Func<Guid, Task>? openCalendarBooking = null,
         string? productDatabasePath = null,
         string? onlineSelectionWorkspaceFile = null,
-        string? inspirationTrayDatabasePath = null)
+        string? inspirationTrayDatabasePath = null,
+        Func<string, IReadOnlyList<string>, Task>? selectionToolHandler = null)
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
@@ -83,6 +84,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             onlineSelectionWorkspaceFile,
             inspirationTrayDatabasePath,
             thumbnailProvider);
+        _viewModel.SelectionToolHandler = selectionToolHandler;
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;

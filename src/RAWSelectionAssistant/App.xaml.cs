@@ -590,7 +590,8 @@ public partial class App : Application
                     _logService,
                     assetLibraryP1StateController,
                     focusedChrome: true,
-                    openCalendarBooking: bookingId => _mainViewModel?.NavigateToCalendarBookingAsync(bookingId) ?? Task.CompletedTask),
+                    openCalendarBooking: bookingId => _mainViewModel?.NavigateToCalendarBookingAsync(bookingId) ?? Task.CompletedTask,
+                    selectionToolHandler: (tool, paths) => _mainViewModel?.OpenSelectionToolAsync(tool, paths) ?? Task.CompletedTask),
                 portableSettings,
                 _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
 #endif
