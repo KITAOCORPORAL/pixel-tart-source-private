@@ -495,6 +495,9 @@ public sealed class ModularHarnessVisualScaleAcceptanceTests
         public Task StoreAsync(AssetVisualAnalysisResult result, CancellationToken cancellationToken = default) =>
             inner.StoreAsync(result, cancellationToken);
 
+        public Task InvalidateAsync(Guid assetId, CancellationToken cancellationToken = default) =>
+            inner.InvalidateAsync(assetId, cancellationToken);
+
         public Task<AssetVisualFeatures> GetFeaturesAsync(Guid assetId, CancellationToken cancellationToken = default)
         {
             Interlocked.Increment(ref _getFeaturesCalls);

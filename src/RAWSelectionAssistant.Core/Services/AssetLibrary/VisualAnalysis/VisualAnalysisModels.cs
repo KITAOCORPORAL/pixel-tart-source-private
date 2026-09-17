@@ -55,6 +55,51 @@ public sealed record ToneZoneRatios(double DeepShadow, double Shadow, double Mid
     public double Sum => DeepShadow + Shadow + Midtone + Highlight + Specular;
 }
 
+/// <summary>
+/// Eleven equal-width output-luminance regions. These describe the pixels in the
+/// current rendered image; they are not a claim about capture exposure.
+/// </summary>
+public sealed record ElevenZoneDistribution(IReadOnlyList<double> Ratios)
+{
+    public static ElevenZoneDistribution Empty { get; } = new(new double[11]);
+    public double this[int zone] => zone is >= 0 and <= 10 ? Ratios[zone] : throw new ArgumentOutOfRangeException(nameof(zone));
+    public double Sum => Ratios.Sum();
+    public double DarkRatio => Ratios.Take(4).Sum();
+    public double MidRatio => Ratios.Skip(4).Take(3).Sum();
+    public double BrightRatio => Ratios.Skip(7).Take(4).Sum();
+    public int FirstPrimaryZone
+    {
+        get
+        {
+            if (Ratios.Count != 11 || Ratios.All(value => value <= 0)) return 0;
+            var threshold = Ratios.Max() * .35;
+            return Enumerable.Range(0, 11).First(zone => Ratios[zone] >= threshold);
+        }
+    }
+    public int LastPrimaryZone
+    {
+        get
+        {
+            if (Ratios.Count != 11 || Ratios.All(value => value <= 0)) return 0;
+            var threshold = Ratios.Max() * .35;
+            return Enumerable.Range(0, 11).Last(zone => Ratios[zone] >= threshold);
+        }
+    }
+}
+
+public sealed record CombinedVisualAnalysisResult(
+    IReadOnlyList<DominantColor> Palette,
+    WarmCoolTendency WarmCool,
+    double AverageSaturation,
+    double AverageLightness,
+    ElevenZoneDistribution Zones,
+    int SourceCount)
+{
+    public double DarkRatio => Zones.DarkRatio;
+    public double MidRatio => Zones.MidRatio;
+    public double BrightRatio => Zones.BrightRatio;
+}
+
 public sealed record ColorDerivatives(
     VisualRgb24 Complementary,
     IReadOnlyList<VisualRgb24> Analogous,
@@ -95,7 +140,7 @@ public sealed record AssetVisualAnalysisResult(
     DateTimeOffset CreatedAt,
     bool CacheHit = false)
 {
-    public const string CurrentVersion = "visual-analysis-v2";
+    public const string CurrentVersion = "visual-analysis-v3";
 
     /// <summary>
     /// Fingerprint of the current source/managed-copy bytes when the analysis was
@@ -111,6 +156,7 @@ public sealed record AssetVisualAnalysisResult(
     public string HistogramLumaSignature { get; init; } = string.Empty;
     public string PaletteSignature { get; init; } = string.Empty;
     public bool HasDominantChromaticColor { get; init; }
+    public ElevenZoneDistribution ZoneDistribution { get; init; } = ElevenZoneDistribution.Empty;
 }
 
 public sealed record AssetVisualAnalysisRequest(
@@ -147,4 +193,17 @@ public interface IAssetVisualAnalysisQuery
 {
     Task<IReadOnlyList<Guid>> QueryVisualAsync(VisualSmartFilterQuery query, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Guid>> SearchByColorAsync(VisualColorSearchQuery query, CancellationToken cancellationToken = default);
+}
+
+/// <summary>
+/// Unified objective visual-analysis surface shared by the library, inspiration
+/// boards and Free Canvas. Implementations must not mutate an image source.
+/// </summary>
+public interface IVisualAnalysisService
+{
+    Task<AssetVisualAnalysisResult> AnalyzeAsync(AssetVisualAnalysisRequest request, CancellationToken cancellationToken = default);
+    Task InvalidateAsync(Guid assetId, CancellationToken cancellationToken = default);
+    CombinedVisualAnalysisResult Combine(IEnumerable<AssetVisualAnalysisResult> analyses, int paletteSize = 5, CancellationToken cancellationToken = default);
+    VisualPixelBuffer CreateMonochrome(VisualPixelBuffer source, CancellationToken cancellationToken = default);
+    VisualPixelBuffer CreateZoneMap(VisualPixelBuffer source, int? highlightedZone = null, CancellationToken cancellationToken = default);
 }

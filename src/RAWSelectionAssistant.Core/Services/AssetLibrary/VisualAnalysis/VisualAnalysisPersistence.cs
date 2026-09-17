@@ -7,6 +7,7 @@ public interface IAssetVisualAnalysisCache
 {
     Task<AssetVisualAnalysisResult?> TryGetAsync(Guid assetId, string contentHash, int paletteSize, PaletteSortMode paletteSort, string analysisVersion = AssetVisualAnalysisResult.CurrentVersion, CancellationToken cancellationToken = default);
     Task StoreAsync(AssetVisualAnalysisResult result, CancellationToken cancellationToken = default);
+    Task InvalidateAsync(Guid assetId, CancellationToken cancellationToken = default);
 }
 public interface IAssetVisualFeatureStore : IAssetVisualAnalysisCache
 {
@@ -115,6 +116,24 @@ public sealed class SqliteAssetVisualAnalysisCache(AssetLibraryDatabase database
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task InvalidateAsync(Guid assetId, CancellationToken cancellationToken = default)
+    {
+        await EnsureInitializedAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        foreach (var statement in new[]
+        {
+            "DELETE FROM AssetVisualPaletteColors WHERE AssetId=$asset;",
+            "DELETE FROM AssetVisualFeatures WHERE AssetId=$asset;",
+            "DELETE FROM AssetVisualAnalysis WHERE AssetId=$asset;"
+        })
+        {
+            await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = statement; command.Parameters.AddWithValue("$asset", assetId.ToString("D"));
+            await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     public async Task<AssetVisualFeatures> GetFeaturesAsync(Guid assetId, CancellationToken cancellationToken = default)
     {
         await EnsureInitializedAsync(cancellationToken).ConfigureAwait(false);
@@ -208,7 +227,7 @@ public sealed class SqliteAssetVisualAnalysisCache(AssetLibraryDatabase database
     }
 }
 
-public sealed class AssetVisualAnalysisService(IAssetVisualAnalysisCache cache)
+public sealed class AssetVisualAnalysisService(IAssetVisualAnalysisCache cache) : IVisualAnalysisService
 {
     private readonly System.Collections.Concurrent.ConcurrentDictionary<Guid, AssetLock> _assetLocks = new();
 
@@ -248,6 +267,11 @@ public sealed class AssetVisualAnalysisService(IAssetVisualAnalysisCache cache)
             ReleaseAssetLock(request.AssetId, assetLock, acquiredSemaphore: true);
         }
     }
+
+    public Task InvalidateAsync(Guid assetId, CancellationToken cancellationToken = default) => cache.InvalidateAsync(assetId, cancellationToken);
+    public CombinedVisualAnalysisResult Combine(IEnumerable<AssetVisualAnalysisResult> analyses, int paletteSize = 5, CancellationToken cancellationToken = default) => VisualAnalysisEngine.Combine(analyses, paletteSize, cancellationToken);
+    public VisualPixelBuffer CreateMonochrome(VisualPixelBuffer source, CancellationToken cancellationToken = default) => VisualAnalysisEngine.CreateMonochrome(source, cancellationToken);
+    public VisualPixelBuffer CreateZoneMap(VisualPixelBuffer source, int? highlightedZone = null, CancellationToken cancellationToken = default) => VisualAnalysisEngine.CreateZoneMap(source, highlightedZone, cancellationToken);
 
     private AssetLock AcquireAssetLock(Guid assetId)
     {

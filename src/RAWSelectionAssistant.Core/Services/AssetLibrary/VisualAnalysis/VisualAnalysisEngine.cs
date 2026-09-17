@@ -13,6 +13,7 @@ public static class VisualAnalysisEngine
         var bytes = request.Pixels.Rgb24.Span;
         var histR = new uint[256]; var histG = new uint[256]; var histB = new uint[256]; var histLuma = new uint[256];
         var zoneCounts = new long[5];
+        var elevenZoneCounts = new long[11];
         var lumaValues = new byte[request.Pixels.PixelCount];
         var saturationValues = new double[request.Pixels.PixelCount];
         double lumaSum = 0; double saturationSum = 0; double lightnessSum = 0; double warmCoolSum = 0; double warmCoolWeight = 0; double hueX = 0; double hueY = 0; double hueWeight = 0;
@@ -24,6 +25,7 @@ public static class VisualAnalysisEngine
             var luma = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(r, g, b)), 0, 255);
             histLuma[luma]++; lumaValues[pixel] = luma; lumaSum += luma;
             zoneCounts[luma < 32 ? 0 : luma < 80 ? 1 : luma < 176 ? 2 : luma < 224 ? 3 : 4]++;
+            elevenZoneCounts[Math.Min(10, luma * 11 / 256)]++;
             var hsl = RgbToHsl(r, g, b); saturationValues[pixel] = hsl.S; saturationSum += hsl.S; lightnessSum += hsl.L;
             if (hsl.S >= 0.08)
             {
@@ -77,8 +79,84 @@ public static class VisualAnalysisEngine
             AverageLightness = lightnessSum / count,
             HistogramLumaSignature = HistogramSignature(histLuma),
             PaletteSignature = string.Join("|", palette.Select(color => $"{color.Hex}:{color.Weight:F6}")),
-            HasDominantChromaticColor = materialPalette.Length > 0
+            HasDominantChromaticColor = materialPalette.Length > 0,
+            ZoneDistribution = new(elevenZoneCounts.Select(value => value / denominator).ToArray())
         };
+    }
+
+    public static CombinedVisualAnalysisResult Combine(IEnumerable<AssetVisualAnalysisResult> source, int paletteSize = 5, CancellationToken cancellationToken = default)
+    {
+        if (paletteSize is not (3 or 5 or 7)) throw new ArgumentOutOfRangeException(nameof(paletteSize));
+        var analyses = source.ToArray();
+        if (analyses.Length == 0) throw new ArgumentException("At least one analysis is required.", nameof(source));
+
+        // Each source contributes the same total sample weight, preventing one
+        // high-resolution photograph from overwhelming the visual group.
+        const int samplesPerImage = 420;
+        var rgb = new byte[checked(analyses.Length * samplesPerImage * 3)];
+        var cursor = 0;
+        foreach (var analysis in analyses)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var palette = analysis.Palette.Count == 0
+                ? [new DominantColor(new(128, 128, 128), ToLab(new(128, 128, 128)), 0, 0, .5, 1, "#808080")]
+                : analysis.Palette;
+            var allocated = 0;
+            for (var index = 0; index < palette.Count; index++)
+            {
+                var remaining = samplesPerImage - allocated;
+                var count = index == palette.Count - 1 ? remaining : Math.Min(remaining, Math.Max(0, (int)Math.Round(palette[index].Weight * samplesPerImage)));
+                for (var sample = 0; sample < count; sample++)
+                {
+                    rgb[cursor++] = palette[index].Rgb.R;
+                    rgb[cursor++] = palette[index].Rgb.G;
+                    rgb[cursor++] = palette[index].Rgb.B;
+                }
+                allocated += count;
+            }
+            while (allocated++ < samplesPerImage)
+            {
+                var fallback = palette[0].Rgb;
+                rgb[cursor++] = fallback.R; rgb[cursor++] = fallback.G; rgb[cursor++] = fallback.B;
+            }
+        }
+        var synthetic = new VisualPixelBuffer(analyses.Length * samplesPerImage, 1, rgb);
+        var aggregate = Analyze(new(Guid.Empty, VisualAnalysisFingerprint.Compute(synthetic), synthetic, paletteSize), cancellationToken);
+        var zones = new ElevenZoneDistribution(Enumerable.Range(0, 11).Select(zone => analyses.Average(analysis => analysis.ZoneDistribution.Ratios.Count == 11 ? analysis.ZoneDistribution[zone] : 0)).ToArray());
+        return new(aggregate.Palette, aggregate.WarmCool, analyses.Average(item => item.AverageSaturation), analyses.Average(item => item.AverageLightness), zones, analyses.Length);
+    }
+
+    public static VisualPixelBuffer CreateMonochrome(VisualPixelBuffer source, CancellationToken cancellationToken = default)
+    {
+        var input = source.Rgb24.Span; var output = new byte[input.Length];
+        for (var pixel = 0; pixel < source.PixelCount; pixel++)
+        {
+            if ((pixel & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
+            var offset = pixel * 3;
+            var luma = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(input[offset], input[offset + 1], input[offset + 2])), 0, 255);
+            output[offset] = output[offset + 1] = output[offset + 2] = luma;
+        }
+        return new(source.Width, source.Height, output);
+    }
+
+    public static VisualPixelBuffer CreateZoneMap(VisualPixelBuffer source, int? highlightedZone = null, CancellationToken cancellationToken = default)
+    {
+        if (highlightedZone is < 0 or > 10) throw new ArgumentOutOfRangeException(nameof(highlightedZone));
+        var input = source.Rgb24.Span; var output = new byte[input.Length];
+        for (var pixel = 0; pixel < source.PixelCount; pixel++)
+        {
+            if ((pixel & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
+            var offset = pixel * 3;
+            var luma = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(input[offset], input[offset + 1], input[offset + 2])), 0, 255);
+            var zone = Math.Min(10, luma * 11 / 256);
+            var gray = (byte)Math.Round(zone * 255d / 10);
+            if (highlightedZone is int selected && selected == zone)
+            {
+                output[offset] = 21; output[offset + 1] = 199; output[offset + 2] = 174;
+            }
+            else output[offset] = output[offset + 1] = output[offset + 2] = gray;
+        }
+        return new(source.Width, source.Height, output);
     }
 
     public static ColorDerivatives Derive(VisualRgb24 color)

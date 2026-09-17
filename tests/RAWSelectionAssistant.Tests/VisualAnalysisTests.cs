@@ -54,6 +54,50 @@ public sealed class VisualAnalysisTests
     }
 
     [TestMethod]
+    public void ElevenZoneDistributionDescribesFinalRenderedLuminance()
+    {
+        var gradient = new byte[256 * 3];
+        for (var value = 0; value < 256; value++) gradient.AsSpan(value * 3, 3).Fill((byte)value);
+        var result = VisualAnalysisEngine.Analyze(Request(new(256, 1, gradient), "zones", 5));
+        Assert.HasCount(11, result.ZoneDistribution.Ratios);
+        Assert.AreEqual(1d, result.ZoneDistribution.Sum, .000001);
+        Assert.AreEqual(0, result.ZoneDistribution.FirstPrimaryZone);
+        Assert.IsGreaterThan(0, result.ZoneDistribution[10]);
+        Assert.AreEqual(1d, result.ZoneDistribution.DarkRatio + result.ZoneDistribution.MidRatio + result.ZoneDistribution.BrightRatio, .000001);
+    }
+
+    [TestMethod]
+    public void MonochromeAndZoneMapsAreNonDestructiveAndObjective()
+    {
+        var source = Stripes(33, 1, [(255, 0, 0), (0, 255, 0), (0, 0, 255)]);
+        var before = source.Rgb24.ToArray();
+        var monochrome = VisualAnalysisEngine.CreateMonochrome(source);
+        var mapped = VisualAnalysisEngine.CreateZoneMap(source, 5);
+        CollectionAssert.AreEqual(before, source.Rgb24.ToArray());
+        for (var offset = 0; offset < monochrome.Rgb24.Length; offset += 3)
+        {
+            Assert.AreEqual(monochrome.Rgb24.Span[offset], monochrome.Rgb24.Span[offset + 1]);
+            Assert.AreEqual(monochrome.Rgb24.Span[offset], monochrome.Rgb24.Span[offset + 2]);
+        }
+        Assert.AreEqual(source.Rgb24.Length, mapped.Rgb24.Length);
+        Assert.IsLessThanOrEqualTo(12, mapped.Rgb24.ToArray().Where((_, index) => index % 3 == 0).Distinct().Count());
+    }
+
+    [TestMethod]
+    public void CombinedPaletteAggregatesWholeGroupInsteadOfConcatenatingPerImagePalettes()
+    {
+        var red = VisualAnalysisEngine.Analyze(Request(Solid(20, 20, 220, 30, 30), "red", 5));
+        var blue = VisualAnalysisEngine.Analyze(Request(Solid(20, 20, 30, 60, 220), "blue", 5));
+        var combined = VisualAnalysisEngine.Combine([red, blue], 5);
+        Assert.AreEqual(2, combined.SourceCount);
+        Assert.IsLessThanOrEqualTo(5, combined.Palette.Count);
+        Assert.AreEqual(1d, combined.Palette.Sum(color => color.Weight), .000001);
+        Assert.IsTrue(combined.Palette.Any(color => color.Rgb.R > color.Rgb.B));
+        Assert.IsTrue(combined.Palette.Any(color => color.Rgb.B > color.Rgb.R));
+        Assert.AreEqual(1d, combined.DarkRatio + combined.MidRatio + combined.BrightRatio, .000001);
+    }
+
+    [TestMethod]
     public void PaletteSizesSortingDerivativesAndHarmonyAreDeterministic()
     {
         var stripes = Stripes(210, 30, [(220, 30, 30), (30, 210, 45), (35, 60, 220), (220, 190, 30), (200, 40, 190), (25, 190, 195), (120, 70, 30)]);
