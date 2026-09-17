@@ -89,6 +89,31 @@ public sealed class CanvasEditor
         Add(_clipboard.Select(item => item with { X = item.X + 24, Y = item.Y + 24, GroupId = item.GroupId is Guid group ? groups[group] : null, Locked = false }));
     }
     public void Duplicate() { Copy(); Paste(); }
+    public void Rotate(double degrees, bool snap = false)
+    {
+        if (!double.IsFinite(degrees)) return;
+        Transform(item => item with { Rotation = NormalizeAngle(snap ? Math.Round((item.Rotation + degrees) / 15) * 15 : item.Rotation + degrees) });
+    }
+    private static double NormalizeAngle(double angle) => ((angle % 360) + 360) % 360;
+    public void Flip(bool horizontal) => Transform(item => horizontal ? item with { FlipX = !item.FlipX } : item with { FlipY = !item.FlipY });
+    public void Crop(CanvasCrop crop)
+    {
+        if (!new[] { crop.X, crop.Y, crop.Width, crop.Height }.All(double.IsFinite)) return;
+        crop = crop.Normalize();
+        Transform(item => item.IsText ? item : item with
+        {
+            CropRect = crop,
+            Height = item.Width * item.SourceHeight * crop.Height / (Math.Max(1, item.SourceWidth) * crop.Width)
+        });
+    }
+    public static CanvasCrop CropForAspect(CanvasObject item, double? ratio)
+    {
+        if (ratio is null || ratio <= 0) return new();
+        var original = Math.Max(1, item.SourceWidth) / Math.Max(1, item.SourceHeight);
+        var width = Math.Min(1, ratio.Value / original);
+        var height = Math.Min(1, original / ratio.Value);
+        return new((1 - width) / 2, (1 - height) / 2, width, height);
+    }
     public void EditText(string text, double fontSize, string color) => Transform(item => item.IsText ? item with { Text = text, FontSize = Math.Clamp(fontSize, 8, 300), TextColor = color } : item);
     public void SetProject(Guid? id) => Commit(Document with { ProjectId = id });
     public void Rename(string name) { if (!string.IsNullOrWhiteSpace(name)) Commit(Document with { Name = name.Trim() }); }
