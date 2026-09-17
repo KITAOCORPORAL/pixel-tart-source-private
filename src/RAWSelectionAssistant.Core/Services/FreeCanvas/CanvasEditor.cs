@@ -43,6 +43,7 @@ public sealed class CanvasEditor
         Selection.Clear(); Selection.UnionWith(added.Select(item => item.ObjectId)); Changed?.Invoke(this, EventArgs.Empty);
     }
     public void AddText(double x, double y, string text = "输入文字") => Add([new() { X = x, Y = y, Width = 300, Height = 80, Text = text, Name = "文字" }]);
+    public void AddPalette(double x, double y, CanvasPalette palette) => Add([new() { X = x, Y = y, Width = 360, Height = 160, Palette = palette, Name = palette.Combined ? "组合配色" : "配色" }]);
     public void BeginGesture() => _gesture ??= Document;
     public void EndGesture(bool cancel = false)
     {
@@ -108,7 +109,7 @@ public sealed class CanvasEditor
     {
         if (!new[] { crop.X, crop.Y, crop.Width, crop.Height }.All(double.IsFinite)) return;
         crop = crop.Normalize();
-        Transform(item => item.IsText ? item : item with
+        Transform(item => !item.IsImage ? item : item with
         {
             CropRect = crop,
             Height = item.Width * item.SourceHeight * crop.Height / (Math.Max(1, item.SourceWidth) * crop.Width)

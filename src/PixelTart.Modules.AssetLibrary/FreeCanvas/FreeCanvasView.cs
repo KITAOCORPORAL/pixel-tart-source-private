@@ -79,6 +79,7 @@ public sealed class FreeCanvasView : UserControl
     public Func<Task<IReadOnlyList<(Guid Id,string Name)>>>? BoardLoader { get; set; }
     public Func<CanvasObject,Task>? ViewAsset { get; set; }
     public Func<CanvasObject,Task>? RevealAsset { get; set; }
+    public Func<IReadOnlyList<CanvasObject>,int,Task<CanvasPalette>>? AnalyzePalette { get; set; }
     public Func<Task>? CloseRequested { get; set; }
     public Func<CanvasDocument,Task>? OpenDocument { get; set; }
     public Panel HeaderPanel => (Panel)((DockPanel)Content).Children[0];
@@ -111,7 +112,7 @@ public sealed class FreeCanvasView : UserControl
     private void AddSources(){var center=Surface.ScreenToWorld(new(Surface.ActualWidth/2,Surface.ActualHeight/2));Editor.Add(_sources.SelectedItems.Cast<CanvasObject>().Select((item,index)=>item with{X=center.X+index*24,Y=center.Y+index*24}));Surface.Focus();}
     private async Task SaveBoardAsync(bool selection,Guid? board=null)
     {
-        var objects=(selection?Editor.Selected:Editor.Document.Objects).Where(item=>!item.IsText).ToArray();
+        var objects=(selection?Editor.Selected:Editor.Document.Objects).Where(item=>item.IsImage).ToArray();
         if(objects.Length==0||SaveBoard is null)return;
         try{await SaveBoard(objects,board);_status.Text="已加入灵感板 · 保留素材引用";}catch(Exception exception)when(exception is IOException or InvalidOperationException or ArgumentException){_status.Text=$"未能加入灵感板：{exception.Message}";}
     }
@@ -127,7 +128,7 @@ public sealed class FreeCanvasView : UserControl
         }
         if(Editor.Selected.Count==1)
         {
-            if(Editor.Selected[0].IsText)_floating.Children.Add(Button("编辑文字",EditText));else _floating.Children.Add(Button("裁切",Surface.BeginCrop));
+            if(Editor.Selected[0].IsText)_floating.Children.Add(Button("编辑文字",EditText));else if(Editor.Selected[0].IsImage)_floating.Children.Add(Button("裁切",Surface.BeginCrop));
             _floating.Children.Add(MenuButton("旋转",RotationActions()));_floating.Children.Add(MenuButton("镜像",new[]{("水平翻转",(Action)(()=>Editor.Flip(true))),("垂直翻转",()=>Editor.Flip(false))}));
         }
         else{_floating.Children.Add(Button("组合",Editor.Group));_floating.Children.Add(Button("解组",Editor.Ungroup));_floating.Children.Add(MenuButton("对齐",new[]{("左对齐",(Action)(()=>Editor.Align("left"))),("顶对齐",()=>Editor.Align("top")),("居中",()=>Editor.Align("center"))}));}
@@ -149,17 +150,30 @@ public sealed class FreeCanvasView : UserControl
     {
         if(Editor.Selected.Count==0)return;var menu=new ContextMenu();menu.SetResourceReference(StyleProperty,"PixelTart.Menu.Context");
         void Add(string title,Action action){var entry=new MenuItem{Header=title};entry.Click+=(_,_)=>action();menu.Items.Add(entry);}
-        if(Editor.Selected.Count==1&&!Editor.Selected[0].IsText){var item=Editor.Selected[0];Add("查看大图",()=>{if(ViewAsset is not null)_=ViewAsset(item);});Add("在素材库中显示",()=>{if(RevealAsset is not null)_=RevealAsset(item);});}
+        if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage){var item=Editor.Selected[0];Add("查看大图",()=>{if(ViewAsset is not null)_=ViewAsset(item);});Add("在素材库中显示",()=>{if(RevealAsset is not null)_=RevealAsset(item);});}
         var boards=new MenuItem{Header="加入灵感板"};menu.Items.Add(boards);
         if(BoardLoader is not null)foreach(var board in await BoardLoader()){var entry=new MenuItem{Header=board.Name};entry.Click+=async(_,_)=>await SaveBoardAsync(true,board.Id);boards.Items.Add(entry);}
         Add("保存为灵感板",()=>_=SaveBoardAsync(true));menu.Items.Add(new Separator());
         void Submenu(string label,IEnumerable<(string,Action)> actions){var parent=new MenuItem{Header=label};foreach(var(title,action)in actions){var child=new MenuItem{Header=title};child.Click+=(_,_)=>action();parent.Items.Add(child);}menu.Items.Add(parent);}
-        Add("复制",Editor.Duplicate);if(Editor.Selected.Count==1&&!Editor.Selected[0].IsText)Add("裁切",Surface.BeginCrop);
+        if(Editor.Selected.Any(item=>item.IsImage)&&AnalyzePalette is not null)
+        {
+            var visual=new MenuItem{Header=Editor.Selected.Count==1?"视觉分析":"比较视觉"};
+            foreach(var count in new[]{3,5,7}){var entry=new MenuItem{Header=$"提取 {count} 色到画布"};entry.Click+=async(_,_)=>await AddAnalyzedPaletteAsync(count);visual.Items.Add(entry);}
+            if(Editor.Selected.Count==1){var monochrome=new MenuItem{Header="创建黑白参考副本"};monochrome.Click+=(_,_)=>{var selected=Editor.Selected[0];Editor.Add([selected with{X=selected.X+32,Y=selected.Y+32,Monochrome=true,Locked=false,GroupId=null,Name=selected.Name+" · 黑白"}]);};visual.Items.Add(monochrome);}
+            menu.Items.Add(visual);
+        }
+        Add("复制",Editor.Duplicate);if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage)Add("裁切",Surface.BeginCrop);
         Submenu("旋转",RotationActions());
         Submenu("镜像",[("水平翻转",()=>Editor.Flip(true)),("垂直翻转",()=>Editor.Flip(false))]);
         Submenu("层级",[("置于顶层",()=>Editor.Layer(true)),("置于底层",()=>Editor.Layer(false))]);
         Add("组合",Editor.Group);Add("解除组合",Editor.Ungroup);Add(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked)));
         menu.Items.Add(new Separator());Add("移出画布",Editor.Remove);menu.PlacementTarget=Surface;menu.IsOpen=true;
+    }
+    private async Task AddAnalyzedPaletteAsync(int count)
+    {
+        if(AnalyzePalette is null)return;var images=Editor.Selected.Where(item=>item.IsImage).ToArray();if(images.Length==0)return;
+        try{var palette=await AnalyzePalette(images,count);var bounds=Editor.Bounds();Editor.AddPalette(bounds.X+bounds.Width+32,bounds.Y,palette);_status.Text="配色已作为可编辑对象加入画布";}
+        catch(Exception exception)when(exception is IOException or InvalidOperationException or NotSupportedException){_status.Text=$"视觉分析暂不可用：{exception.Message}";}
     }
     public static Button Button(string label,Action action){var b=new Button{Content=label,Padding=new(8,5,8,5),Margin=new(2)};b.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");b.Click+=(_,_)=>action();return b;}
     private static Button MenuButton(string label,IEnumerable<(string,Action)> actions){var b=Button(label,()=>{});b.Click+=(_,_)=>{var menu=new ContextMenu{PlacementTarget=b};foreach(var(title,action)in actions){var item=new MenuItem{Header=title};item.Click+=(_,_)=>action();menu.Items.Add(item);}menu.IsOpen=true;};return b;}

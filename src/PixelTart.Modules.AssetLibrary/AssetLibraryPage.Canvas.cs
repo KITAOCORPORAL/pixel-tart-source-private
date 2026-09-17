@@ -42,6 +42,7 @@ public partial class AssetLibraryPage
         canvas.BoardLoader=_viewModel.CanvasBoardsAsync;
         canvas.ViewAsset=item=>{var window=new AssetViewerWindow([item.SourcePath],0,_previewProvider){Owner=Window.GetWindow(this)};window.Show();return Task.CompletedTask;};
         canvas.RevealAsset=async item=>{if(await canvas.FlushAsync()){await _viewModel.RevealCanvasAssetAsync(item);HideCanvas();}};
+        canvas.AnalyzePalette=_viewModel.AnalyzeCanvasPaletteAsync;
         canvas.CloseRequested=()=>{HideCanvas();return Task.CompletedTask;};canvas.OpenDocument=ShowCanvasAsync;
         var projects=await _viewModel.CanvasProjectsAsync();
         var picker=new ComboBox{Width=220,Margin=new(8,2,8,2),ItemsSource=projects.Select(item=>new CanvasProjectChoice(item.Id,item.Name)).ToArray(),DisplayMemberPath=nameof(CanvasProjectChoice.Name),SelectedValuePath=nameof(CanvasProjectChoice.Id),ToolTip="关联项目"};

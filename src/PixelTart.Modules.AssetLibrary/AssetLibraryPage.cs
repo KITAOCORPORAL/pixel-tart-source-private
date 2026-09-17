@@ -6,9 +6,11 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace PixelTart.Modules.AssetLibrary;
@@ -31,6 +33,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private DispatcherOperation? _pendingPaneWidthCommit;
     private Guid? _viewTransitionAnchor;
     private bool _isMarqueeSelecting;
+    private IReadOnlyList<AssetItem> _visualSurfaceAssets=[];
+    private int _visualSurfacePaletteSize=5;
     private Point _marqueeStart;
     private bool _marqueeControlSelection;
     private bool _marqueeShiftSelection;
@@ -889,6 +893,69 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _viewModel.SyncSelection(cards.Select(card => card.Asset));
         UpdateGridDiagnostics();
     }
+
+    private AssetItem? ContextAsset(object sender)
+    {
+        if(sender is FrameworkElement{DataContext:AssetVisualMatchView card})return card.Asset;
+        if(sender is MenuItem menu&&menu.DataContext is AssetVisualMatchView menuCard)return menuCard.Asset;
+        return _viewModel.CaptureOrderedSelection().FirstOrDefault();
+    }
+
+    private async void OpenVisualAnalysisPalette_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),0);
+    private async void OpenVisualAnalysisMonochrome_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),1);
+    private async void OpenVisualAnalysisHistogram_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),2);
+    private async void OpenVisualAnalysisZones_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),3);
+    private void CloseVisualAnalysis_Click(object sender,RoutedEventArgs e)=>VisualAnalysisSurface.Visibility=Visibility.Collapsed;
+    private async void VisualPalette3_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=3;await RefreshVisualSurfaceAsync();}
+    private async void VisualPalette5_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=5;await RefreshVisualSurfaceAsync();}
+    private async void VisualPalette7_Click(object sender,RoutedEventArgs e){_visualSurfacePaletteSize=7;await RefreshVisualSurfaceAsync();}
+
+    private async void AnalyzeBoard_Click(object sender,RoutedEventArgs e)
+    {
+        var cards=_boardSelection.Count>0?_boardSelection.ToArray():_viewModel.IsTemporaryInspirationSelected?_viewModel.InspirationTrayCards.ToArray():_viewModel.ActiveCollectionCards.ToArray();
+        var assets=new List<AssetItem>();
+        foreach(var card in cards)if(card.Entry.Reference.LibraryId==_viewModel.CanvasLibraryId&&await _viewModel.GetAssetForAnalysisAsync(card.AssetId) is {} asset)assets.Add(asset);
+        if(assets.Count==0){MessageBox.Show(Window.GetWindow(this),"当前灵感板没有可在本素材库分析的照片。","视觉分析",MessageBoxButton.OK,MessageBoxImage.Information);return;}
+        _visualSurfaceAssets=assets;VisualAnalysisContextTabs.SelectedIndex=0;await RefreshVisualSurfaceAsync();VisualAnalysisSurface.Visibility=Visibility.Visible;
+    }
+
+    private async Task OpenVisualAnalysisAsync(AssetItem? asset,int tab)
+    {
+        if(asset is null)return;_visualSurfaceAssets=[asset];VisualAnalysisContextTabs.SelectedIndex=tab;await RefreshVisualSurfaceAsync();VisualAnalysisSurface.Visibility=Visibility.Visible;
+    }
+
+    private async Task RefreshVisualSurfaceAsync()
+    {
+        if(_visualSurfaceAssets.Count==0)return;
+        try
+        {
+            VisualAnalysisSubtitle.Text="正在分析…";
+            var payload=await _viewModel.AnalyzeAssetsForSurfaceAsync(_visualSurfaceAssets,_visualSurfacePaletteSize);
+            var result=payload.Aggregate;VisualAnalysisTitle.Text=payload.Items.Count==1?$"视觉分析 · {payload.Items[0].Asset.DisplayName}":$"视觉分析 · {payload.Items.Count} 张";
+            VisualAnalysisPaletteSwatches.Children.Clear();
+            foreach(var color in result.Palette)
+            {
+                var panel=new StackPanel{Margin=new(4),Width=120};var swatch=new Border{Height=72,CornerRadius=new(4)};swatch.Background=new SolidColorBrush(Color.FromRgb(color.Rgb.R,color.Rgb.G,color.Rgb.B));
+                var hsl=$"H {color.Hue:F0}°  S {color.Saturation:P0}  L {color.Lightness:P0}";var button=new Button{Content=$"{color.Hex}\n{hsl}\n{color.Weight:P0}",ToolTip="点击复制 HEX"};button.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");button.Click+=(_,_)=>Clipboard.SetText(color.Hex);panel.Children.Add(swatch);panel.Children.Add(button);VisualAnalysisPaletteSwatches.Children.Add(panel);
+            }
+            VisualAnalysisPaletteSummary.Text=$"冷暖倾向：{result.WarmCool} · 平均饱和度 {result.AverageSaturation:P0} · 平均明度 {result.AverageLightness:P0}";
+            VisualContextHistogram.Analysis=payload.Items[0].Analysis;VisualHistogramSummary.Text=$"阴影裁切 {payload.Items.Average(item=>item.Analysis.BlackClipRatio):P2} · 高光裁切 {payload.Items.Average(item=>item.Analysis.WhiteClipRatio):P2}";
+            VisualZoneRows.ItemsSource=Enumerable.Range(0,11).Select(zone=>$"Zone {RomanZone(zone),-4}  {result.Zones[zone]:P1}").ToArray();VisualZoneSummary.Text=$"主要影调：Zone {RomanZone(result.Zones.FirstPrimaryZone)} - {RomanZone(result.Zones.LastPrimaryZone)} · 暗调 {result.DarkRatio:P0} · 中调 {result.MidRatio:P0} · 亮调 {result.BrightRatio:P0}";
+            if(payload.Items.Count==1)
+            {
+                var pixels=payload.Items[0].Pixels;VisualMonochromeImage.Source=Bitmap(_viewModel.VisualAnalysisService.CreateMonochrome(pixels));VisualZoneMapImage.Source=Bitmap(_viewModel.VisualAnalysisService.CreateZoneMap(pixels));
+            }
+            else{VisualMonochromeImage.Source=null;VisualZoneMapImage.Source=null;}
+            VisualAnalysisSubtitle.Text="分析当前图像的最终视觉分布 · 不修改源文件";
+        }
+        catch(Exception exception)when(exception is IOException or NotSupportedException or InvalidOperationException){VisualAnalysisSubtitle.Text=$"暂时无法分析：{exception.Message}";}
+    }
+
+    private static BitmapSource Bitmap(VisualPixelBuffer pixels)
+    {
+        var bitmap=BitmapSource.Create(pixels.Width,pixels.Height,96,96,PixelFormats.Rgb24,null,pixels.Rgb24.ToArray(),pixels.Width*3);bitmap.Freeze();return bitmap;
+    }
+    private static string RomanZone(int zone)=>zone switch{0=>"0",1=>"I",2=>"II",3=>"III",4=>"IV",5=>"V",6=>"VI",7=>"VII",8=>"VIII",9=>"IX",_=>"X"};
 
     private void AssetGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {

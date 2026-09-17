@@ -6,8 +6,32 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.FreeCanvas;
 using RAWSelectionAssistant.Core.Services.Tasks;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.WpfTests;
+
+[TestClass] public sealed class PaletteCanvasObjectTests
+{
+    [TestMethod] public async Task PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile()
+    {
+        var root=Path.Combine(Path.GetTempPath(),"PixelTart-PaletteCanvas",Guid.NewGuid().ToString("N"));
+        try
+        {
+            var sourceAsset=Guid.NewGuid();var editor=new CanvasEditor(new());
+            editor.AddPalette(40,60,new([new("#102030",210,.5,.12,.4),new("#405060",210,.2,.31,.35),new("#A0B0C0",210,.2,.69,.25)],[sourceAsset]));
+            var palette=editor.Selected.Single();Assert.IsTrue(palette.IsPalette);Assert.IsFalse(palette.IsImage);Assert.AreEqual(sourceAsset,palette.Palette!.SourceAssetIds.Single());
+            editor.Move(25,10);editor.Scale(1.2);editor.Duplicate();editor.Layer(false);editor.SetLocked(true);
+            var store=new CanvasDocumentStore(root);await store.SaveAsync(editor.Document);var loaded=await store.LoadAsync(editor.Document.CanvasId);
+            Assert.IsNotNull(loaded);Assert.HasCount(2,loaded!.Objects);Assert.IsTrue(loaded.Objects.All(item=>item.Palette is not null));Assert.IsEmpty(Directory.EnumerateFiles(root,"*.jpg"));Assert.IsEmpty(Directory.EnumerateFiles(root,"*.png"));
+        }
+        finally{if(Directory.Exists(root))Directory.Delete(root,true);}
+    }
+    [TestMethod] public void CombinedPaletteKeepsAllSourceReferences()
+    {
+        var first=Guid.NewGuid();var second=Guid.NewGuid();var editor=new CanvasEditor(new());editor.AddPalette(0,0,new([new("#111111",0,0,.07,.34),new("#777777",0,0,.47,.33),new("#EEEEEE",0,0,.93,.33)],[first,second],true));
+        var palette=editor.Selected.Single().Palette;Assert.IsNotNull(palette);Assert.IsTrue(palette!.Combined);CollectionAssert.AreEquivalent(new[]{first,second},palette.SourceAssetIds.ToArray());
+    }
+}
 
 [TestClass] public sealed class CanvasSourceSafetyTests
 {

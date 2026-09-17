@@ -119,6 +119,13 @@
             </MenuItem>
 
             <MenuItem Header="用于创作"><MenuItem Header="放到自由画布" Click="ContextCanvas_Click" /></MenuItem>
+            <MenuItem Header="视觉分析" AutomationProperties.AutomationId="AssetContextVisualAnalysis">
+                <MenuItem Header="查看配色" Click="OpenVisualAnalysisPalette_Click" />
+                <MenuItem Header="黑白预览" Click="OpenVisualAnalysisMonochrome_Click" />
+                <MenuItem Header="影调分区" Click="OpenVisualAnalysisZones_Click" />
+                <MenuItem Header="直方图" Click="OpenVisualAnalysisHistogram_Click" />
+                <MenuItem Header="查找相似图片" Click="FindSimilarVisualMenu_Click" />
+            </MenuItem>
             <MenuItem Header="整理" Style="{StaticResource AssetContextSectionHeader}" AutomationProperties.AutomationId="AssetContextOrganizeGroup" />
             <Separator />
             <MenuItem Header="移到文件夹" AutomationProperties.AutomationId="AssetContextFolder">
@@ -1052,6 +1059,7 @@
                 <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
                     <Button DockPanel.Dock="Right" Content="关闭" Command="{Binding CloseCollectionPanelCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.AutomationId="InspirationBoardClose" />
                     <Button DockPanel.Dock="Right" Content="在自由画布中打开" Click="OpenBoardCanvas_Click" Style="{DynamicResource PixelTart.Button.Secondary}" />
+                    <Button DockPanel.Dock="Right" Content="分析灵感板" Click="AnalyzeBoard_Click" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0" />
                     <Button DockPanel.Dock="Right" Content="新建灵感收藏" Command="{Binding CreateCollectionCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="4,0" />
                     <StackPanel><TextBlock Text="Creative Board" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock Text="灵感收藏 · 项目参考" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel>
                 </DockPanel>
@@ -1095,6 +1103,20 @@
                         </ListBox>
                     </Grid>
                 </Grid>
+            </DockPanel>
+        </Border>
+
+        <Border x:Name="VisualAnalysisSurface" Grid.Row="2" Panel.ZIndex="40" Width="820" MaxHeight="680" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="18"
+                Padding="16" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Surface.Border}" Visibility="Collapsed"
+                AutomationProperties.AutomationId="VisualAnalysisContextSurface">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12"><Button DockPanel.Dock="Right" Content="关闭" Click="CloseVisualAnalysis_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><StackPanel><TextBlock x:Name="VisualAnalysisTitle" Text="视觉分析" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock x:Name="VisualAnalysisSubtitle" Text="客观分析当前图像，不修改源文件" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></DockPanel>
+                <TabControl x:Name="VisualAnalysisContextTabs" Background="Transparent" BorderBrush="{DynamicResource Brush.Border}" ItemContainerStyle="{StaticResource AssetInspectorTabItem}">
+                    <TabItem Header="配色"><ScrollViewer><StackPanel Margin="12"><WrapPanel x:Name="VisualAnalysisPaletteSwatches" /><TextBlock x:Name="VisualAnalysisPaletteSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" TextWrapping="Wrap" /><WrapPanel><Button Content="3 色" Click="VisualPalette3_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="5 色" Click="VisualPalette5_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="7 色" Click="VisualPalette7_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></WrapPanel></StackPanel></ScrollViewer></TabItem>
+                    <TabItem Header="黑白"><Grid Margin="12"><Image x:Name="VisualMonochromeImage" Stretch="Uniform" /><TextBlock VerticalAlignment="Bottom" Text="用于观察明暗结构、主体分离与视觉重心；不写入源文件。" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="8" /></Grid></TabItem>
+                    <TabItem Header="直方图"><StackPanel Margin="12"><local:HistogramDrawing x:Name="VisualContextHistogram" Height="220" /><TextBlock x:Name="VisualHistogramSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" /></StackPanel></TabItem>
+                    <TabItem Header="影调分区"><ScrollViewer><StackPanel Margin="12"><Image x:Name="VisualZoneMapImage" Height="340" Stretch="Uniform" /><ItemsControl x:Name="VisualZoneRows" Margin="0,10" /><TextBlock x:Name="VisualZoneSummary" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></ScrollViewer></TabItem>
+                </TabControl>
             </DockPanel>
         </Border>
 

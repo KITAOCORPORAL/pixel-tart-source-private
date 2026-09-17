@@ -46,7 +46,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var currentIds=Editor.Document.Objects.Select(item=>item.ObjectId).ToHashSet();
         foreach(var id in _images.Keys.Where(id=>!currentIds.Contains(id)).ToArray()){_images.Remove(id);_widths.Remove(id);}
         var viewport=new Rect(ScreenToWorld(new(-300,-300)),ScreenToWorld(new(Math.Max(1,ActualWidth)+300,Math.Max(1,ActualHeight)+300)));
-        foreach (var item in Editor.Document.Objects.Where(item => !item.IsText && (ActualWidth==0 || viewport.IntersectsWith(new Rect(item.X,item.Y,item.Width,item.Height)))).Take(128).ToArray())
+        foreach (var item in Editor.Document.Objects.Where(item => item.IsImage && (ActualWidth==0 || viewport.IntersectsWith(new Rect(item.X,item.Y,item.Width,item.Height)))).Take(128).ToArray())
         {
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
             if (_loading.Contains(item.ObjectId) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
@@ -91,18 +91,25 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 var text = new FormattedText(item.Text ?? "",CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Microsoft YaHei UI"),item.FontSize,textBrush,VisualTreeHelper.GetDpi(this).PixelsPerDip) { MaxTextWidth=item.Width,MaxTextHeight=item.Height };
                 dc.DrawText(text,new(item.X,item.Y));
             }
+            else if (item.Palette is { } palette)
+            {
+                var colors=palette.Colors.OrderByDescending(color=>color.Weight).ToArray();var total=Math.Max(.0001,colors.Sum(color=>color.Weight));var x=rect.X;
+                foreach(var color in colors){Brush swatch;try{swatch=new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Hex));}catch{swatch=Brushes.Gray;}var width=rect.Width*color.Weight/total;dc.DrawRectangle(swatch,null,new(x,rect.Y,width,rect.Height-34));x+=width;}
+                DrawLabel(dc,palette.Combined?$"组合配色 · {palette.SourceAssetIds.Count} 张":$"配色 · {colors.Length} 色",new(rect.X+8,rect.Bottom-28));
+            }
             else if (_images.TryGetValue(item.ObjectId,out var bitmap))
             {
                 dc.PushClip(new RectangleGeometry(rect));
                 dc.PushTransform(new ScaleTransform(item.FlipX ? -1 : 1,item.FlipY ? -1 : 1,rect.X+rect.Width/2,rect.Y+rect.Height/2));
                 var crop = CropMode && Editor.Selection.Contains(item.ObjectId) ? new CanvasCrop() : item.CropRect;
+                if(item.Monochrome)bitmap=new FormatConvertedBitmap(bitmap,PixelFormats.Gray8,null,0);
                 dc.DrawImage(bitmap,new(rect.X-crop.X*rect.Width/crop.Width,rect.Y-crop.Y*rect.Height/crop.Height,rect.Width/crop.Width,rect.Height/crop.Height));
                 dc.Pop(); dc.Pop();
             }
             else { dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect); DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12)); }
             if (Editor.Selection.Contains(item.ObjectId)) dc.DrawRectangle(null,new Pen(accent,1.5/_zoom),rect);
             if (item.Locked) DrawLabel(dc,"已锁定",new(item.X+6,item.Y+6));
-            if (!item.IsText && !File.Exists(item.SourcePath)) DrawLabel(dc,"离线",new(item.X+6,item.Y+item.Height-24/_zoom));
+            if (item.IsImage && !File.Exists(item.SourcePath)) DrawLabel(dc,"离线",new(item.X+6,item.Y+item.Height-24/_zoom));
             if (CropMode && Editor.Selection.Contains(item.ObjectId))
             {
                 var crop = PendingCrop.Normalize();
@@ -200,7 +207,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var b=Editor.Bounds(selection);_zoom=Math.Clamp(Math.Min(Math.Max(100,ActualWidth-140)/b.Width,Math.Max(100,ActualHeight-140)/b.Height),.03,2);_pan=new((ActualWidth-b.Width*_zoom)/2-b.X*_zoom,(ActualHeight-b.Height*_zoom)/2-b.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();
     }
     public void ActualSize() { _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync(); }
-    public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||Editor.Selected[0].IsText)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
+    public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||!Editor.Selected[0].IsImage)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     public void FinishCrop(bool apply) { if(!CropMode)return;if(apply)Editor.Crop(PendingCrop);CropMode=false;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     protected override void OnKeyUp(KeyEventArgs e) { base.OnKeyUp(e);if(e.Key==Key.Space)_space=false; }
     protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e){base.OnLostKeyboardFocus(e);_space=false;}
