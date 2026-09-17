@@ -21,7 +21,9 @@ Assert-Evidence ([bool]$manifest.process_per_fixture -and -not [bool]$manifest.a
 Assert-Evidence ([bool]$manifest.source_files_unchanged) 'Synthetic source assets changed during capture.'
 
 $captures = @($manifest.captures)
-Assert-Evidence ($captures.Count -eq 72) "Expected 72 captures, found $($captures.Count)."
+Assert-Evidence ($captures.Count -eq 84) "Expected 84 captures, found $($captures.Count)."
+Assert-Evidence (@($captures | Where-Object group -eq 'free-canvas').Count -eq 10) 'The ten Free Canvas screenshots are incomplete.'
+Assert-Evidence (@($captures | Where-Object group -eq 'contextual-inspector').Count -eq 2) 'The no-selection and multi-selection Inspector screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'product-screenshot').Count -eq 12) 'The 12 product screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'ux-simplification').Count -eq 10) 'The 10 UX simplification screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'dpi-current').Count -eq 32) 'The 32 current-DPI captures are incomplete.'
@@ -57,6 +59,17 @@ foreach ($capture in $captures) {
         $metadata = Get-Content -LiteralPath $capture.metadata_path -Raw | ConvertFrom-Json
         Assert-Evidence ([bool]$metadata.passed) "Layout/theme metadata failed: $($capture.state)"
         Assert-Evidence ($metadata.sourceCommit -eq $manifest.source_commit) "Metadata source commit mismatch: $($capture.state)"
+        if ($capture.group -eq 'free-canvas') {
+            $canvas = $metadata.canvasEvidence
+            Assert-Evidence ($canvas.objectCount -ge 6 -and $canvas.loadedPreviewCount -ge 6 -and [bool]$canvas.documentExists) "Canvas sources or saved document missing: $($capture.state)"
+            if ($capture.state -eq 'CanvasMultiSelect') { Assert-Evidence ($canvas.selectedCount -eq 6) 'Canvas multi-selection is missing.' }
+            if ($capture.state -eq 'CanvasCrop') { Assert-Evidence ([bool]$canvas.cropMode) 'Canvas crop mode is missing.' }
+            if ($capture.state -eq 'CanvasRotateFlip') { Assert-Evidence ($canvas.rotatedCount -gt 0 -and $canvas.flippedCount -gt 0) 'Canvas rotation/flip state is missing.' }
+            if ($capture.state -eq 'CanvasGroup') { Assert-Evidence ($canvas.groupedCount -eq 2) 'Canvas group is missing.' }
+            if ($capture.state -eq 'CanvasLocked') { Assert-Evidence ($canvas.lockedCount -eq 1) 'Canvas lock is missing.' }
+            if ($capture.state -eq 'CanvasText') { Assert-Evidence ($canvas.textCount -eq 1) 'Canvas text is missing.' }
+            if ($capture.state -eq 'CanvasProjectLink') { Assert-Evidence ($null -ne $canvas.projectId) 'Canvas project relation is missing.' }
+        }
         if ($capture.state -eq 'AssetContextSubmenu') { Assert-Evidence ([bool]$metadata.floatingSurfaceEvidence.submenuVisible) 'The real submenu popup is missing.' }
         if ($capture.state -eq 'AssetQuickLoupeActive') { Assert-Evidence ([bool]$metadata.floatingSurfaceEvidence.quickPreviewVisible) 'The real quick preview popup is missing.' }
         if ($capture.state -eq 'AssetQuickLoupeClosed') { Assert-Evidence ([bool]$metadata.floatingSurfaceEvidence.quickPreviewLeftClosed) 'Quick preview did not close on leave.' }

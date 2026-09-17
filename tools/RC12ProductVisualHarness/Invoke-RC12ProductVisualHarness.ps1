@@ -190,6 +190,18 @@ $closureScenes = @(
 foreach ($scene in $closureScenes) { Invoke-ProductCapture $scene[0] (Join-Path $closureRoot $scene[1]) 1.0 1920 1080 'asset-library-ux-closure' }
 Invoke-ProductCapture 'AssetAspectRatiosAfter' (Join-Path $ratioRoot 'after_current_head.png') 1.0 1920 1080 'asset-library-aspect-ratio'
 
+$canvasRoot = Join-Path $OutputRoot 'free-canvas'
+[IO.Directory]::CreateDirectory($canvasRoot) | Out-Null
+$canvasScenes = @(
+    @('CanvasInitial','01_canvas_initial.png'), @('CanvasFreeLayout','02_canvas_free_layout.png'),
+    @('CanvasMultiSelect','03_canvas_multi_select.png'), @('CanvasCrop','04_canvas_crop.png'),
+    @('CanvasRotateFlip','05_canvas_rotate_flip.png'), @('CanvasGroup','06_canvas_group.png'),
+    @('CanvasLocked','07_canvas_locked.png'), @('CanvasText','08_canvas_text.png'),
+    @('CanvasInspirationDrawer','09_canvas_inspiration_drawer.png'), @('CanvasProjectLink','10_canvas_project_link.png')
+)
+foreach ($scene in $canvasScenes) { Invoke-ProductCapture $scene[0] (Join-Path $canvasRoot $scene[1]) 1.0 1920 1080 'free-canvas' }
+foreach ($state in @('AssetInspectorNone','AssetInspectorMulti')) { Invoke-ProductCapture $state (Join-Path $canvasRoot ($state + '.png')) 1.0 1920 1080 'contextual-inspector' }
+
 $dpiStates = @('MainWindow','AssetLibraryGrid','AssetFilter','AssetContextMenu','AssetViewer','CalendarBookingAssets','AssetInspirationCollection','AssetRecentLibraries')
 foreach ($scale in @(1.0,1.25,1.5,2.0)) {
     foreach ($state in $dpiStates) {
@@ -225,6 +237,8 @@ $manifest = [ordered]@{
     resolution_capture_count=@($script:captures | Where-Object group -eq 'asset-library-resolution').Count
     ux_closure_capture_count=@($script:captures | Where-Object group -eq 'asset-library-ux-closure').Count
     aspect_ratio_capture_count=@($script:captures | Where-Object group -eq 'asset-library-aspect-ratio').Count
+    canvas_capture_count=@($script:captures | Where-Object group -eq 'free-canvas').Count
+    contextual_inspector_capture_count=@($script:captures | Where-Object group -eq 'contextual-inspector').Count
     aspect_ratio_baseline=[ordered]@{ source_commit=$baselineCommit; path=$baselinePath; exists=(Test-Path -LiteralPath $baselinePath) }
     # Windows may reuse a PID after its owner exits. Lifecycle separation is proven
     # by the exit acknowledgement on every capture; PID uniqueness is diagnostic only.
@@ -235,5 +249,6 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'rc12-product-visual-evidence.json') -Encoding UTF8
 if (-not $sourceSafe) { throw 'Synthetic source assets changed during the RC12 visual run.' }
 if (-not $allExited) { throw 'Process-per-fixture lifecycle isolation was not proven.' }
+if ($StatePattern -eq '*' -and ($manifest.canvas_capture_count -ne 10 -or $manifest.contextual_inspector_capture_count -ne 2)) { throw 'Creative workflow evidence set is incomplete.' }
 if ($StatePattern -eq '*' -and ($manifest.product_screenshot_count -ne 12 -or $manifest.ux_screenshot_count -ne 10 -or $manifest.dpi_capture_count -ne 32 -or $manifest.resolution_capture_count -ne 6 -or $manifest.ux_closure_capture_count -ne 11 -or $manifest.aspect_ratio_capture_count -ne 1)) { throw 'RC12 visual evidence set is incomplete.' }
 [pscustomobject]$manifest | Select-Object product_version,source_commit,product_screenshot_count,ux_screenshot_count,dpi_capture_count,resolution_capture_count,ux_closure_capture_count,aspect_ratio_capture_count,lifecycle_isolated_per_capture,unique_process_id_per_capture,source_files_unchanged | ConvertTo-Json

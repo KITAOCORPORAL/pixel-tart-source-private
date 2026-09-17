@@ -99,7 +99,7 @@ public partial class MainWindow
             ? Directory.GetFiles(demoDirectory).Where(path => new[] { ".jpg", ".jpeg", ".png", ".tif", ".tiff" }.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase)).OrderBy(path => path, StringComparer.OrdinalIgnoreCase).ToArray()
             : [];
 
-        if (state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
+        if (state.StartsWith("Canvas", StringComparison.OrdinalIgnoreCase) || state.StartsWith("Asset", StringComparison.OrdinalIgnoreCase) || state == "CalendarBookingAssets")
         {
             _viewModel.NavigateCommand.Execute("AssetLibrary");
             await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
@@ -108,6 +108,44 @@ public partial class MainWindow
             if (page is null) return true;
             await page.ViewModel.PrepareProductVisualStateAsync(state);
             page.UpdateLayout();
+
+            if (state.StartsWith("Canvas", StringComparison.Ordinal))
+            {
+                await page.OpenCanvasAsync(page.ViewModel.AssetCards.Take(6).Select(card => card.Asset).ToArray());
+                var canvas = page.ActiveCanvas ?? throw new InvalidOperationException("Canvas workspace is missing.");
+                var editor = canvas.Editor;
+                await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
+                page.UpdateLayout();
+                editor.SelectAll();
+                if (state != "CanvasInitial")
+                {
+                    editor.Select(editor.Document.Objects[0].ObjectId); editor.Move(-80, 45); editor.Rotate(-8);
+                    editor.Select(editor.Document.Objects[2].ObjectId); editor.Move(50, -35); editor.Rotate(12);
+                }
+                if (state == "CanvasMultiSelect") { editor.SelectAll(); }
+                else if (state == "CanvasCrop") { editor.Select(editor.Document.Objects[0].ObjectId); canvas.Surface.BeginCrop(); canvas.Surface.PendingCrop = new(.15,.12,.65,.7); }
+                else if (state == "CanvasRotateFlip") { editor.Select(editor.Document.Objects[0].ObjectId); editor.Rotate(35); editor.Flip(true); }
+                else if (state == "CanvasGroup") { editor.Select(editor.Document.Objects[0].ObjectId); editor.Select(editor.Document.Objects[1].ObjectId, true); editor.Group(); }
+                else if (state == "CanvasLocked") { editor.Select(editor.Document.Objects[0].ObjectId); editor.SetLocked(true); }
+                else if (state == "CanvasText") { editor.AddText(60, -150, "光线 · 色彩 · 构图\n让图片先说话"); }
+                else if (state == "CanvasInspirationDrawer")
+                {
+                    await page.ViewModel.SaveCanvasBoardAsync(editor.Document.Objects, null, null);
+                    canvas.ShowSources("灵感板");
+                }
+                else if (state == "CanvasProjectLink")
+                {
+                    var project = (await page.ViewModel.CanvasProjectsAsync()).FirstOrDefault(item => item.Id is not null);
+                    if (project.Id is null) throw new InvalidOperationException("Product project fixture is missing.");
+                    editor.SetProject(project.Id);
+                }
+                else editor.Select(null);
+                canvas.UpdateLayout(); canvas.Surface.Fit(); await canvas.Surface.LoadPreviewsAsync();
+                if(!await canvas.FlushAsync())throw new IOException("Canvas evidence document failed to save.");
+                return true;
+            }
+            if (state == "AssetInspectorNone") page.ViewModel.SyncSelection([]);
+            if (state == "AssetInspectorMulti") page.ViewModel.SyncSelection(page.ViewModel.AssetCards.Take(6).Select(card => card.Asset));
 
             if (state == "AssetContextMenu") _automatedContextMenu = page.OpenContextMenuForProductHarness();
             else if (state == "AssetContextSubmenu") _automatedContextMenu = page.OpenContextSubmenuForProductHarness("评分");
@@ -945,6 +983,20 @@ public partial class MainWindow
             layoutRoot = layoutRoot.Name,
             screenshot = outputPath,
             sourceCommit = ResolveSourceCommit(),
+            canvasEvidence = GetHostedAssetLibraryPage()?.ActiveCanvas is { } activeCanvas ? new
+            {
+                objectCount=activeCanvas.Editor.Document.Objects.Count,
+                selectedCount=activeCanvas.Editor.Selected.Count,
+                loadedPreviewCount=activeCanvas.Surface.LoadedPreviews.Count,
+                cropMode=activeCanvas.Surface.CropMode,
+                groupedCount=activeCanvas.Editor.Document.Objects.Count(item=>item.GroupId is not null),
+                lockedCount=activeCanvas.Editor.Document.Objects.Count(item=>item.Locked),
+                textCount=activeCanvas.Editor.Document.Objects.Count(item=>item.IsText),
+                rotatedCount=activeCanvas.Editor.Document.Objects.Count(item=>item.Rotation!=0),
+                flippedCount=activeCanvas.Editor.Document.Objects.Count(item=>item.FlipX||item.FlipY),
+                projectId=activeCanvas.Editor.Document.ProjectId,
+                documentExists=File.Exists(Path.Combine(GetHostedAssetLibraryPage()!.ViewModel.CanvasDirectory,activeCanvas.Editor.Document.CanvasId.ToString("N")+".json"))
+            } : null,
             floatingSurfaceEvidence = new
             {
                 submenuVisible = _automatedProductSubmenu?.ActualWidth > 0 && _automatedProductSubmenu?.ActualHeight > 0,
