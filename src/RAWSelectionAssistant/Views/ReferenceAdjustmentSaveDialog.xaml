@@ -1,0 +1,18 @@
+<Window x:Class="RAWSelectionAssistant.Views.ReferenceAdjustmentSaveDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="保存当前调整" Width="440" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Background="{DynamicResource ContentBackgroundBrush}">
+    <Border Style="{StaticResource ModalSurface}" Margin="18" Padding="20">
+        <StackPanel>
+            <TextBlock Text="保存当前调整" Style="{StaticResource PageTitleText}"/>
+            <TextBlock Text="现场调整默认只属于本次拍摄；只有在这里确认后才写入色彩方案。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,16"/>
+            <RadioButton x:Name="UpdateExistingOption" Content="更新当前色彩方案" GroupName="Mode" Checked="Mode_Changed"/>
+            <RadioButton x:Name="SaveAsNewOption" Content="另存为新色彩方案" GroupName="Mode" IsChecked="True" Margin="0,9,0,0" Checked="Mode_Changed"/>
+            <TextBlock Text="名称" Style="{StaticResource CaptionText}" Margin="0,14,0,4"/>
+            <TextBox x:Name="NameInput" AutomationProperties.Name="新色彩方案名称"/>
+            <CheckBox x:Name="SetDefaultOption" Content="设为项目默认色彩方案" Margin="0,12,0,0"/>
+            <Grid Margin="0,20,0,0"><Button Content="取消" Style="{StaticResource GhostButton}" IsCancel="True" HorizontalAlignment="Left"/><Button Content="保存" Style="{StaticResource SecondaryButton}" IsDefault="True" HorizontalAlignment="Right" Click="Save_Click"/></Grid>
+        </StackPanel>
+    </Border>
+</Window>

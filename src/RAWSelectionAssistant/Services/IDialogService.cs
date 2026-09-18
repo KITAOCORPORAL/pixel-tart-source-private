@@ -18,6 +18,13 @@ public interface IDialogService
     void RevealFile(string path);
 }
 
+public sealed record ReferenceAdjustmentSaveChoice(bool UpdateExisting, string Name, bool SetProjectDefault);
+
+public interface IReferenceAdjustmentDialogService
+{
+    ReferenceAdjustmentSaveChoice? ChooseReferenceAdjustmentSave(string currentName);
+}
+
 public enum HelpAction
 {
     None,

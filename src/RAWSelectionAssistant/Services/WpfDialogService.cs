@@ -7,7 +7,7 @@ using RAWSelectionAssistant.Views;
 
 namespace RAWSelectionAssistant.Services;
 
-public sealed class WpfDialogService : IDialogService
+public sealed class WpfDialogService : IDialogService, IReferenceAdjustmentDialogService
 {
     private readonly IFeedbackService _feedbackService;
 
@@ -40,6 +40,12 @@ public sealed class WpfDialogService : IDialogService
     {
         var dialog = new QuickToolsManagerWindow(currentToolIds) { Owner = Application.Current.MainWindow };
         return dialog.ShowDialog() == true ? dialog.ResultToolIds : null;
+    }
+
+    public ReferenceAdjustmentSaveChoice? ChooseReferenceAdjustmentSave(string currentName)
+    {
+        var dialog = new ReferenceAdjustmentSaveDialog(currentName) { Owner = Application.Current.MainWindow };
+        return dialog.ShowDialog() == true ? dialog.Choice : null;
     }
 
     public void ShowInfo(string message) =>

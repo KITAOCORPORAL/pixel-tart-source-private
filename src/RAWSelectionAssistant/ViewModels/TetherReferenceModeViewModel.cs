@@ -44,7 +44,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => SelectedLook is not null && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
         ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null && _allowReferenceManagement);
-        SaveCurrentAdjustmentCommand = new AsyncRelayCommand(_ => SaveCurrentAdjustmentAsync(), _ => HasSessionAdjustment && SelectedLook is not null);
+        SaveCurrentAdjustmentCommand = new AsyncRelayCommand(_ => SaveCurrentAdjustmentAsync(), _ => HasSessionAdjustment && SelectedLook is not null && _dialogs is IReferenceAdjustmentDialogService);
         RestoreSchemeCommand = new RelayCommand(_ => RestoreScheme(), _ => HasSessionAdjustment);
         OpenFullEditorCommand = new RelayCommand(_ => FullEditorRequested?.Invoke(this, EventArgs.Empty));
         ToggleSourcePickerCommand = new RelayCommand(_ => IsSourcePickerOpen = !IsSourcePickerOpen);
@@ -197,11 +197,15 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     }
     private async Task SaveCurrentAdjustmentAsync()
     {
-        if (_selectedLook is null) return;
-        var updated = _selectedLook.Normalize(); await _store.SaveAsync(updated, token: _lifetime.Token);
-        var index = Looks.IndexOf(_persistedLook ?? _selectedLook); if (index >= 0) Looks[index] = updated;
+        if (_selectedLook is null || _dialogs is not IReferenceAdjustmentDialogService picker) return;
+        var choice = picker.ChooseReferenceAdjustmentSave(_persistedLook?.Name ?? _selectedLook.Name); if (choice is null) return;
+        var now = DateTimeOffset.UtcNow;
+        var updated = (choice.UpdateExisting ? _selectedLook with { Name = choice.Name, UpdatedAt = now } : _selectedLook with { ReferenceLookId = Guid.NewGuid(), Name = choice.Name, CreatedAt = now, UpdatedAt = now }).Normalize();
+        await _store.SaveAsync(updated, choice.SetProjectDefault, _lifetime.Token);
+        if (choice.UpdateExisting) { var index = Looks.IndexOf(_persistedLook ?? _selectedLook); if (index >= 0) Looks[index] = updated; }
+        else Looks.Insert(0, updated);
         _persistedLook = updated; _selectedLook = updated; CopyParameters(updated.Parameters);
-        StatusText = "当前调整已保存为色彩方案。"; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
+        StatusText = choice.UpdateExisting ? "当前色彩方案已按确认更新。" : "当前调整已另存为新色彩方案。"; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(CurrentLookText)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
     }
     private void RestoreScheme()
     {

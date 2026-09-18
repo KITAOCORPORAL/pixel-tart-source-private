@@ -45,6 +45,15 @@ public sealed class StageIVReferenceWorkflowTests
         Assert.DoesNotContain("_store.SaveAsync",keepTone,"保持原片影调不得隐式保存色彩方案。");
         StringAssert.Contains(viewModel,"SaveCurrentAdjustmentCommand");
         StringAssert.Contains(viewModel,"RestoreSchemeCommand");
+        StringAssert.Contains(viewModel,"ChooseReferenceAdjustmentSave");
+        StringAssert.Contains(viewModel,"ReferenceLookId = Guid.NewGuid()");
+    }
+
+    [TestMethod]
+    public void ExplicitReferenceSaveRequiresUpdateOrSaveAsChoice()
+    {
+        var xaml=File.ReadAllText(Path.Combine(Root(),"src/RAWSelectionAssistant/Views/ReferenceAdjustmentSaveDialog.xaml"));
+        foreach(var value in new[]{"更新当前色彩方案","另存为新色彩方案","名称","设为项目默认色彩方案"}) StringAssert.Contains(xaml,value);
     }
 
     [TestMethod]
