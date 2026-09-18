@@ -25,7 +25,7 @@ Ran the preserved 67362b1 installer, not extraction, with VERYSILENT/SUPPRESSMSG
 
 ## SECONDARY ERRORS
 
-None in the three original user traces. Remaining runtime checks are pending, not inferred PASS. Source inspection also finds the reference workspace Visibility binding resolving against its child DataContext; this must be tested after construction works.
+None in the three original user traces. Subsequent real source startup at 16:58:23 exposed two masked secondary errors: InvalidOperationException from an implicit TwoWay binding to read-only TetherCaptureViewModel.NextCaptureFolder, and XamlParseException for missing IconButton in Tether's reference item template. These were fixed with OneWay binding and an existing icon-button style alias. Reference workspace Visibility was also bound to its child context rather than shell; corrected with ancestor binding. Later installed startup evidence is recorded in the closure report; it does not imply every UI workflow is accepted.
 
 ## AFFECTED FILES
 
