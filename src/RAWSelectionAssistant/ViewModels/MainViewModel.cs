@@ -104,12 +104,12 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
     {
         "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "Planning", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
-        "Activation", "Help", "BatchCompress", "Publishing", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
+        "Activation", "Help", "BatchCompress", "Publishing", "ReferenceColor", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
     };
 
     private static readonly HashSet<string> ClosableSurfaces = new(StringComparer.Ordinal)
     {
-        "LocalSplit", "BatchCompress", "Publishing", "RawToJpeg", "PhotoGrouping", "Collage"
+        "LocalSplit", "BatchCompress", "Publishing", "ReferenceColor", "RawToJpeg", "PhotoGrouping", "Collage"
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
@@ -186,6 +186,12 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         RawToJpegPage = rawToJpegPage;
         BatchCompressionPage = batchCompressionPage;
         PublishingPage = publishingPage;
+        ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService);
+        if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
+        {
+            await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, TetherPage.SelectedAsset?.Record.Id, TetherPage.CurrentImage).ConfigureAwait(true);
+            NavigateToSurface("ReferenceColor");
+        };
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;
         if (WorkbenchSchedule is not null) WorkbenchSchedule.PropertyChanged += ChildPage_PropertyChanged;
         if (TetherPage is not null) TetherPage.PropertyChanged += ChildPage_PropertyChanged;
@@ -295,6 +301,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public RawToJpegViewModel? RawToJpegPage { get; }
     public BatchCompressionViewModel? BatchCompressionPage { get; }
     public PublishingExportViewModel? PublishingPage { get; }
+    public ReferenceColorWorkspaceViewModel ReferenceColorPage { get; }
     public ISurfaceNavigationHost SurfaceNavigationHost { get; }
     public IReadOnlyList<CollectionCategoryOption> CollectionCategories { get; } =
     [
@@ -482,6 +489,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             OnPropertyChanged(nameof(IsHelpPage));
             OnPropertyChanged(nameof(IsBatchCompressPage));
             OnPropertyChanged(nameof(IsPublishingPage));
+            OnPropertyChanged(nameof(IsReferenceColorPage));
             OnPropertyChanged(nameof(IsWatermarkPage));
             OnPropertyChanged(nameof(IsDeleteRejectsPage));
             OnPropertyChanged(nameof(IsFtpToolPage));
@@ -504,6 +512,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
             if (IsPublishingPage && PublishingPage is not null) _ = PublishingPage.ActivateProjectAsync(_currentProject.Id);
+            if (IsReferenceColorPage) _ = ReferenceColorPage.InitializeAsync();
             if (_initialized && !IsOnboardingActive && PrimaryNavigationPolicy.IsPrimaryPage(value))
                 Settings.LastPrimaryPage = value;
             PageChanged?.Invoke(this, new(previousPage, value));
@@ -526,6 +535,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public bool IsHelpPage => CurrentPage == "Help";
     public bool IsBatchCompressPage => CurrentPage == "BatchCompress";
     public bool IsPublishingPage => CurrentPage == "Publishing";
+    public bool IsReferenceColorPage => CurrentPage == "ReferenceColor";
     public bool IsWatermarkPage => CurrentPage == "Watermark";
     public bool IsDeleteRejectsPage => CurrentPage == "DeleteRejects";
     public bool IsFtpToolPage => CurrentPage == "FtpTool";

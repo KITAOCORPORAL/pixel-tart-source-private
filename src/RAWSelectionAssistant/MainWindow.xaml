@@ -671,6 +671,8 @@
                     <views:PublishingExportView DataContext="{Binding PublishingPage}" />
                 </Grid>
 
+                <views:ReferenceColorWorkspaceView DataContext="{Binding ReferenceColorPage}" Visibility="{Binding IsReferenceColorPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
                 <ScrollViewer Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsWatermarkPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel MaxWidth="1320" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal"><TextBlock Text="批量水印" Style="{StaticResource PageTitleText}" /><Border Background="{DynamicResource AccentSoftBrush}" CornerRadius="5" Padding="8,3" Margin="12,4,0,0" VerticalAlignment="Top"><TextBlock Text="预览功能" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" /></Border></StackPanel>

@@ -8,11 +8,11 @@ public sealed class Baseline2031AcceptanceTests
     [TestMethod]
     public void ToolRegistry_HasUniqueDefinitionsAndRequiredEntries()
     {
-        Assert.HasCount(12, ToolRegistry.All);
-        Assert.HasCount(11, ToolRegistry.Catalog);
-        Assert.HasCount(11, ToolRegistry.Pinnable);
+        Assert.HasCount(13, ToolRegistry.All);
+        Assert.HasCount(12, ToolRegistry.Catalog);
+        Assert.HasCount(12, ToolRegistry.Pinnable);
         CollectionAssert.AreEqual(
-            new[] { "本地分片", "归片工作区", "整理图片", "拼图", "批量压缩", "发布导出", "批量水印", "删废片", "FTP 工具", "批量重命名", "批量转档", "工具箱" },
+            new[] { "本地分片", "归片工作区", "整理图片", "拼图", "批量压缩", "发布导出", "参考仿色", "批量水印", "删废片", "FTP 工具", "批量重命名", "批量转档", "工具箱" },
             ToolRegistry.All.Select(definition => definition.DisplayName).ToArray());
     }
 

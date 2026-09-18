@@ -10,6 +10,7 @@ public static class ProductToolboxPolicy
         new(ToolId.RawToJpeg, "RAW 转 JPG", "只读解码 RAW 并输出 JPG，源文件始终保留。", "ToolIconRawToJpeg", "RawToJpeg", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 20),
         new(ToolId.BatchCompress, "批量压缩", "将照片压缩到独立输出目录，不覆盖源文件。", "ToolIconBatchCompress", "BatchCompress", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 30),
         new(ToolId.Publishing, "发布导出", "尺寸、图片/文字水印与命名组成一个安全发布流程。", "ToolIconPublishing", "Publishing", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 35),
+        new(ToolId.ReferenceColor, "参考仿色", "借用参考图片的影调与色彩，建立可重复使用的色彩方案。", "ToolIconReferenceColor", "ReferenceColor", true, true, FeatureAvailability.Production, ToolMenuGroup.Output, 37),
         new(ToolId.Collage, "拼图", "使用模板制作拼图并安全导出到新文件。", "ToolIconCollage", "Collage", true, true, FeatureAvailability.Production, ToolMenuGroup.Organize, 40),
         new(ToolId.Watermark, "批量水印", "预览交付照片的文字或图片水印。", "ToolIconWatermark", "Watermark", true, true, FeatureAvailability.Preview, ToolMenuGroup.Output, 50)
     ];

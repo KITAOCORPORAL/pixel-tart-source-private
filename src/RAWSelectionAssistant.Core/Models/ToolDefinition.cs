@@ -14,7 +14,8 @@ public enum ToolId
     BatchRename,
     BatchConvert,
     Toolbox,
-    RawToJpeg
+    RawToJpeg,
+    ReferenceColor
 }
 
 public enum FeatureAvailability

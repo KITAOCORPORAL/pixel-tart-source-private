@@ -12,11 +12,11 @@ public sealed class ProductToolboxPolicyTests
     {
         CollectionAssert.AreEqual(new[]
         {
-            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Publishing, ToolId.Collage
+            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Publishing, ToolId.ReferenceColor, ToolId.Collage
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.Id).ToArray());
         CollectionAssert.AreEqual(new[]
         {
-            "整理图片", "RAW 转 JPG", "批量压缩", "发布导出", "拼图"
+            "整理图片", "RAW 转 JPG", "批量压缩", "发布导出", "参考仿色", "拼图"
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.DisplayName).ToArray());
     }
 
