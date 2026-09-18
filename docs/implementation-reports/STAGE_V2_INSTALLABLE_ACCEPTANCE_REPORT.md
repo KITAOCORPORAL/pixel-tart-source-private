@@ -6,12 +6,12 @@
 
 ## 构建
 
-- ProductSourceSha：`35d7d742151397be27ec084361bb55e2910010bd`
-- FinalHead / InstallerPackagingSha：`35d7d742151397be27ec084361bb55e2910010bd`
+- ProductSourceSha：`67362b112e873ec165508c39ec543ddba73e3b7e`
+- FinalHead / InstallerPackagingSha：`67362b112e873ec165508c39ec543ddba73e3b7e`
 - Branch：`integration/pixel-tart-developer-preview`
 - Final package metadata：见 `artifacts/stage-v2-installable-acceptance/installer/INSTALLER_PROVENANCE.json`
-- Installer：`PixelTart-DeveloperPreview-2.3.0-dev-x64-Setup.exe`
-- Installer SHA-256：`EB6CE87F1F15851247BC8E55BCB577A304850AAAD182ADB80E6EDEFA1B56986D`
+- Installer：`PixelTart-DeveloperPreview-2.3.0-dev.67362b1-x64-Setup.exe`
+- Installer SHA-256：`16373B8F5374DA92A9159FFEA4971E47E876BEE460496A23335F2F79219F8BB2`
 - Publish：Release、self-contained、win-x64、clean staging
 - Release build：PASS，0 warnings / 0 errors
 
