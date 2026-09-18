@@ -1,10 +1,20 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Globalization;
+using System.Windows.Data;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Views;
+
+public sealed class NullToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is null ? Visibility.Visible : Visibility.Collapsed;
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+}
+
+
 
 public partial class PlanningCenterView : UserControl
 {
@@ -15,6 +25,11 @@ public partial class PlanningCenterView : UserControl
     private void FilterAll_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.SelectedFilter=null;}
     private void FilterPending_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.SelectedFilter=ProjectShotStatus.NotStarted;}
     private void FilterCompleted_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.SelectedFilter=ProjectShotStatus.Completed;}
+    private void ReferenceFilterAll_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.ReferenceFilter=null;}
+    private void ReferenceFilterLighting_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.ReferenceFilter=ShotReferenceKind.Lighting;}
+    private void ReferenceFilterPose_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.ReferenceFilter=ShotReferenceKind.Pose;}
+    private void ReferenceFilterStoryboard_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.ReferenceFilter=ShotReferenceKind.Storyboard;}
+    private void ReferenceFilterStyling_Click(object sender,RoutedEventArgs e){if(ViewModel is not null)ViewModel.ReferenceFilter=ShotReferenceKind.Styling;}
     private void ReferenceCard_MouseLeftButtonDown(object sender,MouseButtonEventArgs e){if(sender is Border{DataContext:ProjectShotReference reference}&&ViewModel is{} vm){vm.SelectedReference=reference;if(e.ClickCount==2&&vm.OpenQuickPreviewCommand.CanExecute(null))vm.OpenQuickPreviewCommand.Execute(null);}}
     private void PreviousReference_Click(object sender,RoutedEventArgs e)=>MoveReference(-1);
     private void NextReference_Click(object sender,RoutedEventArgs e)=>MoveReference(1);

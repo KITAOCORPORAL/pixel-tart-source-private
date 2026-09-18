@@ -42,6 +42,8 @@ public sealed class PlanningCenterViewModel : ObservableObject
     private string _shotNotes="";
     private string _referenceNote="";
     private int _shotEstimatedMinutes;
+    private bool _isInspectorEditing;
+    private ShotReferenceKind? _referenceFilter;
 
     public PlanningCenterViewModel(IProjectRepository projects, IShootBookingService bookings, IDialogService dialogs,
         ProjectShotStore? shots=null, PlanningProjectStore? planning=null, ProjectVisualReferenceStore? visuals=null,
@@ -53,7 +55,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
         _visuals=visuals??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectVisuals"));
         _looks=looks??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectVisuals"));
         _canvases=canvases??new(Path.Combine(AppDataPaths.DataDirectory,"FreeCanvas"));_inspiration=inspiration;
-        ShotsView=CollectionViewSource.GetDefaultView(Shots);ShotsView.Filter=FilterShot;
+        ShotsView=CollectionViewSource.GetDefaultView(Shots);ShotsView.Filter=FilterShot;ReferencesView=CollectionViewSource.GetDefaultView(References);ReferencesView.Filter=FilterReference;
         NewShotCommand=new AsyncRelayCommand(_=>NewShotAsync());DuplicateShotCommand=new AsyncRelayCommand(_=>DuplicateShotAsync(),_=>SelectedShot is not null);
         ArchiveShotCommand=new AsyncRelayCommand(_=>ArchiveShotAsync(),_=>SelectedShot is not null);SetCurrentShotCommand=new AsyncRelayCommand(_=>SetCurrentShotAsync(),_=>SelectedShot is not null);
         MarkShotCompletedCommand=new AsyncRelayCommand(_=>SetStatusAsync(ProjectShotStatus.Completed),_=>SelectedShot is not null);MarkShotSkippedCommand=new AsyncRelayCommand(_=>SetStatusAsync(ProjectShotStatus.Skipped),_=>SelectedShot is not null);
@@ -65,6 +67,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
         MoveReferenceDownCommand=new AsyncRelayCommand(_=>MoveReferenceAsync(1),_=>CanMoveReference(1));
         OpenQuickPreviewCommand=new RelayCommand(_=>IsQuickPreviewOpen=SelectedReference is not null,_=>SelectedReference is not null);CloseQuickPreviewCommand=new RelayCommand(_=>IsQuickPreviewOpen=false);
         ToggleSourceDrawerCommand=new RelayCommand(_=>IsSourceDrawerOpen=!IsSourceDrawerOpen);
+        ToggleInspectorEditCommand=new RelayCommand(_=>IsInspectorEditing=!IsInspectorEditing);
         ViewCapturedAssetsCommand=new RelayCommand(_=>{if(ProjectId is Guid project)ViewAssetsRequested?.Invoke(this,new(null,project));},_=>ProjectId is not null);
         EnterTetherCommand=new AsyncRelayCommand(_=>EnterTetherAsync(),_=>ProjectId is not null&&SelectedShot is not null);
     }
@@ -72,11 +75,11 @@ public sealed class PlanningCenterViewModel : ObservableObject
     public event EventHandler<ShootExecutionContext>? EnterTetherRequested;
     public event EventHandler<AssetLibraryNavigationRequestEventArgs>? ViewAssetsRequested;
     public ObservableCollection<ProjectShot> Shots{get;}=[]; public ICollectionView ShotsView{get;}
-    public ObservableCollection<ProjectShotReference> References{get;}=[];public ObservableCollection<PlanningVisualLink> VisualLinks{get;}=[];
+    public ObservableCollection<ProjectShotReference> References{get;}=[]; public ICollectionView ReferencesView{get;} public ObservableCollection<PlanningVisualLink> VisualLinks{get;}=[];
     public ObservableCollection<CanvasDocument> ProjectCanvases{get;}=[];public ObservableCollection<InspirationCollectionSummary> ProjectBoards{get;}=[];
     public ObservableCollection<ProjectPaletteColorItem> PaletteColors{get;}=[];public ObservableCollection<ReferenceLook> ColorSchemes{get;}=[];
     public ObservableCollection<PlanningToneZoneItem> ToneZones{get;}=[];
-    public RelayCommand OpenQuickPreviewCommand{get;} public RelayCommand CloseQuickPreviewCommand{get;} public RelayCommand ToggleSourceDrawerCommand{get;} public RelayCommand ViewCapturedAssetsCommand{get;}
+    public RelayCommand OpenQuickPreviewCommand{get;} public RelayCommand CloseQuickPreviewCommand{get;} public RelayCommand ToggleSourceDrawerCommand{get;} public RelayCommand ToggleInspectorEditCommand{get;} public RelayCommand ViewCapturedAssetsCommand{get;}
     public AsyncRelayCommand NewShotCommand{get;} public AsyncRelayCommand DuplicateShotCommand{get;} public AsyncRelayCommand ArchiveShotCommand{get;} public AsyncRelayCommand SetCurrentShotCommand{get;}
     public AsyncRelayCommand MarkShotCompletedCommand{get;} public AsyncRelayCommand MarkShotSkippedCommand{get;} public AsyncRelayCommand MoveShotUpCommand{get;} public AsyncRelayCommand MoveShotDownCommand{get;}
     public AsyncRelayCommand RemoveReferenceCommand{get;} public AsyncRelayCommand TogglePinCommand{get;}
@@ -91,6 +94,10 @@ public sealed class PlanningCenterViewModel : ObservableObject
     public string ShotHeading=>SelectedShot is null?"尚未建立拍摄清单":$"Shot {SelectedShot.Order+1:00} · {SelectedShot.Name}";public string InspectorHeading=>SelectedReference?.Title??SelectedShot?.Name??ProjectName;
     public string SearchText{get=>_searchText;set{if(SetProperty(ref _searchText,value))ShotsView.Refresh();}}public ProjectShotStatus? SelectedFilter{get=>_filter;set{if(SetProperty(ref _filter,value))ShotsView.Refresh();}}
     public bool IsQuickPreviewOpen{get=>_isQuickPreviewOpen;set=>SetProperty(ref _isQuickPreviewOpen,value);}public bool IsSourceDrawerOpen{get=>_isSourceDrawerOpen;set=>SetProperty(ref _isSourceDrawerOpen,value);}
+    public bool IsInspectorEditing{get=>_isInspectorEditing;set{if(SetProperty(ref _isInspectorEditing,value)){OnPropertyChanged(nameof(InspectorEditText));OnPropertyChanged(nameof(InspectorEditTooltip));}}}
+    public string InspectorEditText=>IsInspectorEditing?"完成":"编辑";
+    public string InspectorEditTooltip=>IsInspectorEditing?"完成编辑":"编辑拍摄信息";
+    public ShotReferenceKind? ReferenceFilter{get=>_referenceFilter;set{if(SetProperty(ref _referenceFilter,value))ReferencesView.Refresh();}}
     public IReadOnlyList<ShotReferenceKindOption> ReferenceKinds=>ShotReferenceKindOption.All;
     public ShotReferenceKindOption SelectedReferenceKind{get=>_selectedReferenceKind;set=>SetProperty(ref _selectedReferenceKind,value);}
     public string ShotTitle{get=>_shotTitle;set{if(SetProperty(ref _shotTitle,value))QueueShotAutosave();}}
@@ -147,6 +154,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
     private void UpdateSummary(Func<PlanningSummary,PlanningSummary> update){if(_state is null)return;_state=_state with{Summary=update(_state.Summary??new())};foreach(var name in new[]{nameof(ShootGoal),nameof(Keywords),nameof(ClientRequirements),nameof(MustCapture),nameof(PlanningNotes),nameof(OutputPurpose)})OnPropertyChanged(name);QueueAutosave();}
     private async void QueueAutosave(){_autosave?.Cancel();_autosave?.Dispose();_autosave=new();var token=_autosave.Token;SaveStatus="正在保存…";try{await Task.Delay(350,token);if(_state is null)return;await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(_state.ProjectId,token);SaveStatus="已保存";}catch(OperationCanceledException){}catch{SaveStatus="保存失败，请稍后重试";}}
     private bool FilterShot(object value)=>value is ProjectShot shot&&(_filter is null||shot.Status==_filter)&&(string.IsNullOrWhiteSpace(_searchText)||shot.Name.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)||(shot.Notes?.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)??false));
+    private bool FilterReference(object value)=>value is ProjectShotReference reference&&(_referenceFilter is null||reference.Kind==_referenceFilter);
     private void ReplaceShot(ProjectShot shot){var index=Shots.ToList().FindIndex(item=>item.ShotId==shot.ShotId);if(index>=0)Shots[index]=shot;_selectedShot=shot;OnPropertyChanged(nameof(SelectedShot));RefreshReferences();NotifyAll();}
     private void RefreshReferences(){References.Clear();if(SelectedShot is not null)foreach(var reference in SelectedShot.References)References.Add(reference);SelectedReference=References.FirstOrDefault();}
     private void NotifyAll(){foreach(var name in new[]{nameof(ProjectId),nameof(ProjectName),nameof(BookingDate),nameof(Location),nameof(ProgressText),nameof(EstimatedTimeText),nameof(CapturedAssetText),nameof(HasProject),nameof(HasShots),nameof(ShotHeading),nameof(InspectorHeading)})OnPropertyChanged(name);ShotsView.Refresh();}

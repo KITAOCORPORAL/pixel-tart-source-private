@@ -21,6 +21,37 @@ public sealed class PlanningLayoutTests
         var xaml=Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
         StringAssert.Contains(xaml,"Stretch=\"Uniform\"");StringAssert.Contains(xaml,"MinWidth=\"210\"");StringAssert.Contains(xaml,"MaxWidth=\"310\"");StringAssert.Contains(xaml,"MinWidth=\"280\"");StringAssert.Contains(xaml,"MaxWidth=\"380\"");
     }
+
+    [TestMethod]
+    public void PlanningImageFirstLayoutUsesHeroAndResponsiveReferenceStrip()
+    {
+        var xaml=Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
+        StringAssert.Contains(xaml,"Height=\"330\"");
+        StringAssert.Contains(xaml,"当前参考");
+        StringAssert.Contains(xaml,"ItemsSource=\"{Binding ReferencesView}\"");
+        StringAssert.Contains(xaml,"Width=\"150\"");
+        StringAssert.Contains(xaml,"Background=\"{DynamicResource OverlayBrush}\"");
+    }
+
+    [TestMethod]
+    public void PlanningInspectorDefaultsToViewModeAndExposesExplicitEditAction()
+    {
+        var xaml=Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
+        var vm=Read("src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs");
+        StringAssert.Contains(xaml,"ToggleInspectorEditCommand");
+        StringAssert.Contains(xaml,"InverseBooleanToVisibilityConverter");
+        StringAssert.Contains(vm,"IsInspectorEditing");
+        StringAssert.Contains(vm,"InspectorEditText");
+    }
+
+    [TestMethod]
+    public void PlanningPopupsAndMenusUseProductThemeResources()
+    {
+        var xaml=Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
+        StringAssert.Contains(xaml,"Style=\"{StaticResource Av2ContextMenu}\"");
+        StringAssert.Contains(xaml,"Style=\"{StaticResource Av2ContextMenuItem}\"");
+        StringAssert.Contains(xaml,"DialogCornerRadius");
+    }
 }
 
 [TestClass]
