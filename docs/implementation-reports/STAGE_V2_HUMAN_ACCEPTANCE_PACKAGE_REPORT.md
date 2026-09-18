@@ -53,6 +53,10 @@ Planning/Tether 用户可见文案继续使用中文；构建/审计文档中的
 
 完成普通用户电脑测试后，请把截图、发现问题、修复记录和最终通过项追加到本报告；只有 Crash、错位、乱码或功能不可理解才允许在 RC12 范围内修复。
 
+## 启动阻塞修复记录
+
+2026-09-18 首次人工启动发现 Planning 页面加载失败：`ToggleButton` 错误引用了 `Button` 类型的 `GhostButton` 样式，触发 WPF `XamlParseException`。已新增仅适用于 `ToggleButton` 的本页筛选样式并重新完成 AcceptanceBuild/publish；随后出现的关闭阶段空引用属于启动失败后的连带清理，不是独立产品故障。
+
 ## 包文件清单（按扩展名）
 
 当前包包含：`.exe` 3 个（含根入口与运行时辅助程序）、`.dll` 270 个、`.json` 4 个、`.md` 6 个、`.bat` 2 个、`.txt` 8 个，以及 `DemoWorkspace/.keep`。自包含运行时文件均位于 `PixelTart-DeveloperPreview` 根目录，用户无需进入 `bin/Release`。
