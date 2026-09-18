@@ -42,7 +42,8 @@
 - `BUTTON_UI_AUDIT.md`：常驻动作与低频菜单入口审计
 - `ROUNDED_UI_AUDIT.md`：圆角 token 与历史组件例外审计
 - `BUILD_PROVENANCE.json`：产品源、包哈希和构建命令
-- `PackageMetadataSha`：`a7643bba53cf6b3fea7d37d803e9f37002132ffad3101eabb674f84cc5edcbb6`（将该字段置空后的规范 JSON UTF-8 SHA-256）
+- `PackageMetadataSha`：`33c42e6bd3cba33aba596444d4729cb8f2256a08fecf4316fceba5465764eac7`（将该字段置空后的规范 JSON UTF-8 SHA-256）
+- `PixelTart.exe` SHA-256：`BDE0059CEEF20AA4757F53D9596581D2A5B4496BD0330E27E12642FEB69BDF77`
 
 ## 语言扫描
 
