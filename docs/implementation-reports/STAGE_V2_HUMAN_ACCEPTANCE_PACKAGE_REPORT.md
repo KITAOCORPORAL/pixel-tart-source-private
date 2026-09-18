@@ -9,7 +9,7 @@
 ## 构建与包
 
 - 版本：`2.3.0-RC12`（当前工程统一版本 `2.3.0`，RC12 为发布阶段标记）
-- 产品源 SHA：`1b85a6603237fb26d638f06414a142711361985d`
+- 产品源 SHA：`5aeb417991449578e6c83bba36cc92396dde2687`
 - 分支：`integration/pixel-tart-developer-preview`
 - 构建：`dotnet publish -c Release -r win-x64 --self-contained true -p:AcceptanceBuild=true`
 - 编译结果：0 warnings / 0 errors
@@ -42,7 +42,7 @@
 - `BUTTON_UI_AUDIT.md`：常驻动作与低频菜单入口审计
 - `ROUNDED_UI_AUDIT.md`：圆角 token 与历史组件例外审计
 - `BUILD_PROVENANCE.json`：产品源、包哈希和构建命令
-- `PackageMetadataSha`：`33c42e6bd3cba33aba596444d4729cb8f2256a08fecf4316fceba5465764eac7`（将该字段置空后的规范 JSON UTF-8 SHA-256）
+- `PackageMetadataSha`：`0ead337f723b262175b7f88589286c71dab62821fe344092f6121d744f7779d8`（将该字段置空后的规范 JSON UTF-8 SHA-256）
 - `PixelTart.exe` SHA-256：`BDE0059CEEF20AA4757F53D9596581D2A5B4496BD0330E27E12642FEB69BDF77`
 
 ## 语言扫描
