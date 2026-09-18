@@ -1,5 +1,6 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Tethering;
 
 namespace RAWSelectionAssistant.Tests;
 
@@ -147,5 +148,22 @@ public sealed class StageIVReferenceResolutionTests
         Assert.AreEqual(project,ReferenceLookResolver.Resolve(null,project,session));
         Assert.AreEqual(session,ReferenceLookResolver.Resolve(null,null,session));
         Assert.IsNull(ReferenceLookResolver.Resolve(null,null,null));
+    }
+}
+
+[TestClass]
+public sealed class NextCaptureRuleTests
+{
+    [TestMethod]
+    public void NamingUsesProjectDateCounterAndSafeCustomPrefix()
+    {
+        var rule=new NextCaptureRule("Kitao",true,true,"Hero/",125);
+        Assert.AreEqual("Hero_Kitao_20260918_0125",rule.Example(new(2026,9,18)));
+    }
+    [TestMethod]
+    public void NamingCanOmitProjectAndDateButAlwaysKeepsCounter()
+    {
+        var rule=new NextCaptureRule("Kitao",false,false,"",3);
+        Assert.AreEqual("0003",rule.Example(new(2026,9,18)));
     }
 }
