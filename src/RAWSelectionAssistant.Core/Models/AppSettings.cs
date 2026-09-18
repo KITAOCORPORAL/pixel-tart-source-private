@@ -12,6 +12,8 @@ public sealed class AppSettings
     public QuickToolLayout QuickToolLayout { get; set; } = new();
     public ProductQuickToolLayout ProductQuickToolLayout { get; set; } = new();
     public string LastPrimaryPage { get; set; } = PrimaryNavigationPolicy.Workbench;
+    public Guid? LastPlanningProjectId { get; set; }
+    public Guid? LastPlanningShotId { get; set; }
     public AssetLibraryWorkspaceSettings AssetLibraryWorkspace { get; set; } = new();
     public AssetLibraryPortableSettings AssetLibraryPortable { get; set; } = new();
     public List<string> RecentRawDirectories { get; set; } = [];

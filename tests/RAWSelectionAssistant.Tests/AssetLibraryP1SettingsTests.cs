@@ -7,7 +7,7 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class AssetLibraryP1SettingsTests
 {
     [TestMethod]
-    public void PrimaryNavigationPolicy_HasTheExactSevenPagesAndSafeAliases()
+    public void PrimaryNavigationPolicy_HasTheExactNinePagesAndSafeAliases()
     {
         CollectionAssert.AreEqual(
             new[]
@@ -16,7 +16,9 @@ public sealed class AssetLibraryP1SettingsTests
                 "AssetLibrary",
                 "Workflow",
                 "WorkCalendar",
+                "Planning",
                 "Tether",
+                "OnlineSelection",
                 "Finance",
                 "History"
             },
@@ -26,7 +28,24 @@ public sealed class AssetLibraryP1SettingsTests
         Assert.AreEqual(PrimaryNavigationPolicy.Workbench, PrimaryNavigationPolicy.Normalize("ProjectCenter"));
         Assert.AreEqual(PrimaryNavigationPolicy.Workbench, PrimaryNavigationPolicy.Normalize("Toolbox"));
         Assert.AreEqual(PrimaryNavigationPolicy.Workbench, PrimaryNavigationPolicy.Normalize(null));
-        Assert.IsFalse(PrimaryNavigationPolicy.IsPrimaryPage("OnlineSelection"));
+        Assert.IsTrue(PrimaryNavigationPolicy.IsPrimaryPage("OnlineSelection"));
+        Assert.IsTrue(PrimaryNavigationPolicy.IsPrimaryPage("Planning"));
+    }
+
+    [TestMethod]
+    public async Task Settings_RoundTripPlanningAndOnlineSelectionNavigation()
+    {
+        using var temp = new TempDirectory();
+        var service = new SettingsService(new TestLogService(), temp.Combine("settings.json"));
+        foreach (var page in new[] { "Planning", "OnlineSelection" })
+        {
+            var settings = new AppSettings { LastPrimaryPage = page, LastPlanningProjectId = Guid.NewGuid(), LastPlanningShotId = Guid.NewGuid() };
+            await service.SaveAsync(settings);
+            var restored = await service.LoadAsync();
+            Assert.AreEqual(page, restored.LastPrimaryPage);
+            Assert.AreEqual(settings.LastPlanningProjectId, restored.LastPlanningProjectId);
+            Assert.AreEqual(settings.LastPlanningShotId, restored.LastPlanningShotId);
+        }
     }
 
     [TestMethod]

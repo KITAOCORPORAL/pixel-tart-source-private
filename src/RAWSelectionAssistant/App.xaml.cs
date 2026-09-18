@@ -310,17 +310,6 @@ public partial class App : Application
             StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
             StartupStage("09 Restore Session");
-#if PLANNING_HUMAN_ACCEPTANCE
-            try
-            {
-                await _mainViewModel.OpenPlanningAsync(PlanningHumanAcceptanceDemoSeeder.ProjectId, PlanningHumanAcceptanceDemoSeeder.BookingId);
-            }
-            catch (Exception restoreError) when (restoreError is System.Text.Json.JsonException or InvalidDataException or IOException or UnauthorizedAccessException)
-            {
-                _logService.Error("上次项目资料未能恢复；保留数据并进入工作台。", restoreError);
-                _mainViewModel.RecoverStartupWorkspace();
-            }
-#endif
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
             _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
 #endif

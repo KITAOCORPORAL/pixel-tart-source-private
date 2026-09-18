@@ -1,5 +1,7 @@
 # Pixel Tart Page Design Spec v1.0
 
+一级导航的当前顺序与项目跳转规则见 [PRIMARY_NAVIGATION_SPEC.md](PRIMARY_NAVIGATION_SPEC.md)；策划中心和在线选片均属于“工作”一级模块。
+
 ## 1. 全局页面骨架
 
 ```text

@@ -91,7 +91,9 @@ public static class PrimaryNavigationPolicy
     public const string AssetLibrary = "AssetLibrary";
     public const string Workflow = "Workflow";
     public const string WorkCalendar = "WorkCalendar";
+    public const string Planning = "Planning";
     public const string Tether = "Tether";
+    public const string OnlineSelection = "OnlineSelection";
     public const string Finance = "Finance";
     public const string History = "History";
 
@@ -101,7 +103,9 @@ public static class PrimaryNavigationPolicy
         AssetLibrary,
         Workflow,
         WorkCalendar,
+        Planning,
         Tether,
+        OnlineSelection,
         Finance,
         History
     ];

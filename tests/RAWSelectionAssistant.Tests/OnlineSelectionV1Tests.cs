@@ -41,12 +41,12 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
-    [DataRow(SelectionProjectStatus.Draft, "草稿")]
-    [DataRow(SelectionProjectStatus.Uploading, "上传中")]
-    [DataRow(SelectionProjectStatus.Ready, "待发布")]
-    [DataRow(SelectionProjectStatus.Published, "已发布")]
-    [DataRow(SelectionProjectStatus.Selecting, "客户选片中")]
-    [DataRow(SelectionProjectStatus.ClientConfirmed, "客户已确认")]
+    [DataRow(SelectionProjectStatus.Draft, "准备中")]
+    [DataRow(SelectionProjectStatus.Uploading, "准备中")]
+    [DataRow(SelectionProjectStatus.Ready, "准备中")]
+    [DataRow(SelectionProjectStatus.Published, "待客户选择")]
+    [DataRow(SelectionProjectStatus.Selecting, "客户选择中")]
+    [DataRow(SelectionProjectStatus.ClientConfirmed, "已完成")]
     [DataRow(SelectionProjectStatus.Closed, "已关闭")]
     [DataRow(SelectionProjectStatus.Archived, "已归档")]
     public void ProjectStatus_HasChinesePresentation(SelectionProjectStatus status, string expected) =>

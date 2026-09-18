@@ -245,12 +245,12 @@ public static class SelectionDisplayText
 {
     public static string ProjectStatus(SelectionProjectStatus status) => status switch
     {
-        SelectionProjectStatus.Draft => "草稿",
-        SelectionProjectStatus.Uploading => "上传中",
-        SelectionProjectStatus.Ready => "待发布",
-        SelectionProjectStatus.Published => "已发布",
-        SelectionProjectStatus.Selecting => "客户选片中",
-        SelectionProjectStatus.ClientConfirmed => "客户已确认",
+        SelectionProjectStatus.Draft => "准备中",
+        SelectionProjectStatus.Uploading => "准备中",
+        SelectionProjectStatus.Ready => "准备中",
+        SelectionProjectStatus.Published => "待客户选择",
+        SelectionProjectStatus.Selecting => "客户选择中",
+        SelectionProjectStatus.ClientConfirmed => "已完成",
         SelectionProjectStatus.Closed => "已关闭",
         SelectionProjectStatus.Archived => "已归档",
         _ => "未知状态"

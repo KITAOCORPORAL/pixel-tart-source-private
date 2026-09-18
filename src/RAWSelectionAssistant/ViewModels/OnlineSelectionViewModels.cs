@@ -86,7 +86,19 @@ public sealed class OnlineSelectionAssetViewModel : ObservableObject
 
 public sealed class OnlineSelectionProjectListItemViewModel
 {
-    public OnlineSelectionProjectListItemViewModel(SelectionProject project) => Project = project;
+    public OnlineSelectionProjectListItemViewModel(SelectionProject project, IEnumerable<SelectionAsset>? assets = null, SelectionFinalResult? result = null)
+    {
+        Project = project;
+        var photos = assets?.Where(asset => asset.ProjectId == project.Id).ToArray() ?? [];
+        var cover = photos.FirstOrDefault(asset => asset.IsCover) ?? photos.FirstOrDefault();
+        Cover = cover is null ? null : new OnlineSelectionAssetViewModel(cover).Thumbnail;
+        PhotoCount = photos.Length;
+        SelectedCount = result?.Items.Count(item => item.Selected) ?? 0;
+    }
+    public ImageSource? Cover { get; }
+    public int PhotoCount { get; }
+    public int SelectedCount { get; }
+    public string CountText => $"{PhotoCount} 张照片 · 已选 {SelectedCount} 张";
     public SelectionProject Project { get; }
     public string Name => Project.Name;
     public string ClientDisplayName => Project.ClientDisplayName;
@@ -563,6 +575,10 @@ public sealed class OnlineSelectionViewModel : ObservableObject
         _proxyRootDirectory = proxyRootDirectory;
         _dialogs = dialogService;
         Projects = [];
+        ProjectsView = System.Windows.Data.CollectionViewSource.GetDefaultView(Projects);
+        ProjectsView.Filter = value => value is OnlineSelectionProjectListItemViewModel item
+            && (string.IsNullOrWhiteSpace(ProjectSearch) || (item.Name + " " + item.ClientDisplayName).Contains(ProjectSearch, StringComparison.CurrentCultureIgnoreCase))
+            && (StatusFilter == "全部项目" || item.StatusText == StatusFilter);
         ProjectPage = new OnlineSelectionProjectViewModel(_provider, _store, _syncService,
             _proxyService, _proxyRootDirectory, _dialogs);
         CreateProjectCommand = new RelayCommand(_ => IsCreateModalOpen = true, _ => !IsBusy);
@@ -580,6 +596,12 @@ public sealed class OnlineSelectionViewModel : ObservableObject
     }
 
     public ObservableCollection<OnlineSelectionProjectListItemViewModel> Projects { get; }
+    public System.ComponentModel.ICollectionView ProjectsView { get; }
+    private string _projectSearch = "";
+    private string _statusFilter = "全部项目";
+    public string ProjectSearch { get => _projectSearch; set { if (SetProperty(ref _projectSearch, value)) ProjectsView.Refresh(); } }
+    public string StatusFilter { get => _statusFilter; set { if (SetProperty(ref _statusFilter, value)) ProjectsView.Refresh(); } }
+    public IReadOnlyList<string> StatusFilters { get; } = ["全部项目", "准备中", "待客户选择", "客户选择中", "已完成", "已关闭", "已归档"];
     public OnlineSelectionProjectViewModel ProjectPage { get; }
     public IOnlineSelectionProvider Provider => _provider;
     public string ServiceStatusText => _provider.IsConfigured ? "在线服务已配置" : "在线选片服务尚未配置";
@@ -604,11 +626,19 @@ public sealed class OnlineSelectionViewModel : ObservableObject
 
     public async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
-        var snapshot = await _store.LoadAsync(cancellationToken).ConfigureAwait(true);
-        Projects.Clear();
-        foreach (var project in snapshot.Projects) Projects.Add(new(project));
-        OnPropertyChanged(nameof(HasProjects));
-        StatusText = Projects.Count == 0 ? "尚未创建选片项目。" : $"共有 {Projects.Count} 个本地选片项目。";
+        try
+        {
+            var snapshot = await _store.LoadAsync(cancellationToken).ConfigureAwait(true);
+            Projects.Clear();
+            foreach (var project in snapshot.Projects) Projects.Add(new(project, snapshot.Assets, snapshot.FinalResults.FirstOrDefault(result => result.SelectionProjectId == project.Id)));
+            OnPropertyChanged(nameof(HasProjects));
+            StatusText = Projects.Count == 0 ? "尚未创建选片项目。" : $"共有 {Projects.Count} 个本地选片项目。";
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException)
+        {
+            new FileLogService().Error("选片项目读取失败，保留原有资料。", error);
+            StatusText = "暂时无法读取选片项目，请稍后重试。原有资料已保留。";
+        }
     }
 
     private async Task CreateProjectFromCommandAsync()

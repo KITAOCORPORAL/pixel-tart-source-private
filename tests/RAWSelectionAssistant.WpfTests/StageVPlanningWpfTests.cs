@@ -66,11 +66,11 @@ public sealed class PlanningInteractionTests
     }
 
     [TestMethod]
-    public void PlanningNavigationIsProjectFlowNotPrimarySidebarEntry()
+    public void PlanningNavigationSupportsPrimaryEntryAndProjectFlow()
     {
         var main=Read("src/RAWSelectionAssistant/MainWindow.xaml");var vm=Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
         StringAssert.Contains(main,"<views:PlanningCenterView");StringAssert.Contains(vm,"OpenPlanningAsync");StringAssert.Contains(vm,"ApplyExecutionContextAsync");
-        Assert.DoesNotContain("CommandParameter=\"Planning\"",main,StringComparison.Ordinal);
+        StringAssert.Contains(main,"CommandParameter=\"Planning\"");
     }
 }
 

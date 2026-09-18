@@ -242,6 +242,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         GoToWorkflowStepCommand = new RelayCommand(GoToWorkflowStep, _ => !IsBusy);
         NewProjectCommand = new RelayCommand(_ => StartNewProject(), _ => !IsBusy && !IsOnboardingRequired);
         ContinueProjectCommand = new AsyncRelayCommand(ContinueProjectAsync, _ => !IsBusy && ProjectHistory.Count > 0 && !IsOnboardingRequired);
+        OpenProjectPlanningCommand = new AsyncRelayCommand(parameter => parameter is PhotoProjectRecord project ? OpenPlanningAsync(project.Id) : Task.CompletedTask, _ => !IsBusy);
+        ReturnToPlanningCommand = new AsyncRelayCommand(_ => TetherPage?.SelectedProject?.Id is Guid projectId ? OpenPlanningAsync(projectId, shotId: TetherPage.ShotExecution.Current?.ShotId) : ShowPlanningOverviewAsync());
         RefreshProjectHistoryCommand = new AsyncRelayCommand(_ => ReloadProjectHistoryAsync());
         ActivateLicenseCommand = new AsyncRelayCommand(_ => ActivateLicenseAsync(), _ => !IsBusy && LicenseKeyFormatter.IsComplete(LicenseKeyInput));
         DeactivateLicenseCommand = new AsyncRelayCommand(_ => DeactivateLicenseAsync(), _ => !IsBusy && IsProEdition);
@@ -510,6 +512,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             if (IsTetherPage) TetherPage?.OnActivated();
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
             if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
+            if (IsPlanningPage && PlanningPage is not null) _ = PlanningPage.EnterWorkspaceAsync(Settings.LastPlanningProjectId, Settings.LastPlanningShotId);
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
             if (IsPublishingPage && PublishingPage is not null) _ = PublishingPage.ActivateProjectAsync(_currentProject.Id);
             if (IsReferenceColorPage) _ = ReferenceColorPage.InitializeAsync();
@@ -971,6 +974,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public RelayCommand GoToWorkflowStepCommand { get; }
     public RelayCommand NewProjectCommand { get; }
     public AsyncRelayCommand ContinueProjectCommand { get; }
+    public AsyncRelayCommand OpenProjectPlanningCommand { get; }
+    public AsyncRelayCommand ReturnToPlanningCommand { get; }
     public AsyncRelayCommand RefreshProjectHistoryCommand { get; }
     public AsyncRelayCommand ActivateLicenseCommand { get; }
     public AsyncRelayCommand DeactivateLicenseCommand { get; }
@@ -1126,16 +1131,27 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         await WorkCalendarPage.NavigateToBookingAsync(bookingId).ConfigureAwait(true);
     }
 
-    public async Task OpenPlanningAsync(Guid projectId, Guid? bookingId = null)
+    public async Task OpenPlanningAsync(Guid projectId, Guid? bookingId = null, Guid? shotId = null)
     {
         if (PlanningPage is null) return;
-        await PlanningPage.LoadAsync(projectId, bookingId).ConfigureAwait(true);
+        await PlanningPage.OpenProjectSafelyAsync(projectId, bookingId, shotId).ConfigureAwait(true);
         NavigateToSurface("Planning");
+    }
+
+    private async Task ShowPlanningOverviewAsync()
+    {
+        NavigateToSurface("Planning");
+        if (PlanningPage is not null) await PlanningPage.ShowOverviewAsync();
     }
 
     public void AttachPlanningPage(PlanningCenterViewModel planningPage)
     {
         PlanningPage = planningPage;
+        PlanningPage.ProjectContextChanged += (_, _) =>
+        {
+            Settings.LastPlanningProjectId = PlanningPage.ProjectId;
+            Settings.LastPlanningShotId = PlanningPage.SelectedShot?.ShotId;
+        };
         PlanningPage.EnterTetherRequested += async (_, context) =>
         {
             if (TetherPage is not null) await TetherPage.ApplyExecutionContextAsync(context).ConfigureAwait(true);

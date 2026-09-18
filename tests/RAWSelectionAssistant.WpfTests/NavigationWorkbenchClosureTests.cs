@@ -7,7 +7,7 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class NavigationWorkbenchClosureTests
 {
     [TestMethod]
-    public void Sidebar_HasTheExactSevenPrimaryPagesInProductOrder()
+    public void Sidebar_HasTheExactNinePrimaryPagesInProductOrder()
     {
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         var document = XDocument.Parse(source);
@@ -15,7 +15,7 @@ public sealed class NavigationWorkbenchClosureTests
         var primaryGroup = sidebar.Descendants().Single(element => Attribute(element, "Name") == "PrimaryNavigationGroup");
         var primaryKeys = new HashSet<string>(StringComparer.Ordinal)
         {
-            "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Tether", "Finance", "History"
+            "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "OnlineSelection", "Finance", "History"
         };
         var primaryButtons = primaryGroup.Descendants()
             .Where(element => element.Name.LocalName == "Button")
@@ -23,14 +23,14 @@ public sealed class NavigationWorkbenchClosureTests
             .ToArray();
 
         CollectionAssert.AreEqual(
-            new[] { "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Tether", "Finance", "History" },
+            new[] { "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "OnlineSelection", "Finance", "History" },
             primaryButtons.Select(element => Attribute(element, "CommandParameter")).ToArray());
         CollectionAssert.AreEqual(
-            new[] { "工作台", "素材库", "归片工作区", "工作日历", "联机拍摄", "摄影收支", "项目历史" },
+            new[] { "工作台", "素材库", "归片工作区", "工作日历", "策划中心", "联机拍摄", "在线选片", "摄影收支", "项目历史" },
             primaryButtons.Select(element => Attribute(element, "Content")).ToArray());
         Assert.AreEqual("AssetLibraryNavigationButton", Attribute(primaryButtons[1], "AutomationProperties.AutomationId"));
         Assert.AreEqual(1, sidebar.Descendants().Count(element => Attribute(element, "CommandParameter") == "AssetLibrary"));
-        Assert.IsFalse(primaryGroup.Descendants().Any(element => Attribute(element, "CommandParameter") == "OnlineSelection"));
+        Assert.IsTrue(primaryGroup.Descendants().Any(element => Attribute(element, "CommandParameter") == "OnlineSelection"));
         Assert.IsFalse(sidebar.Descendants().Any(element =>
             Attribute(element, "AutomationProperties.AutomationId") is "ToolboxAssetLibraryEntry" or "ToolboxPageAssetLibraryEntry"));
 
@@ -107,14 +107,14 @@ public sealed class NavigationWorkbenchClosureTests
     }
 
     [TestMethod]
-    public void OnlineSelection_KeepsRouteAndViewHostWithoutAFirstLevelSidebarEntry()
+    public void OnlineSelection_KeepsRouteAndViewHostWithPrimarySidebarEntry()
     {
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         ContainsAll(source, "<views:OnlineSelectionView");
         ContainsAll(Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "IsOnlineSelectionPage", "\"OnlineSelection\"");
         var document = XDocument.Parse(source);
         var primaryGroup = document.Descendants().Single(element => Attribute(element, "Name") == "PrimaryNavigationGroup");
-        Assert.IsFalse(primaryGroup.Descendants().Any(element => Attribute(element, "CommandParameter") == "OnlineSelection"));
+        Assert.IsTrue(primaryGroup.Descendants().Any(element => Attribute(element, "CommandParameter") == "OnlineSelection"));
     }
 
     [TestMethod]

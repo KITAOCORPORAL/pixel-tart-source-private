@@ -13,7 +13,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed class PlanningCenterViewModel : ObservableObject
+public sealed partial class PlanningCenterViewModel : ObservableObject
 {
     private readonly IProjectRepository _projects;
     private readonly IShootBookingService _bookings;
@@ -70,6 +70,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
         ToggleInspectorEditCommand=new RelayCommand(_=>IsInspectorEditing=!IsInspectorEditing);
         ViewCapturedAssetsCommand=new RelayCommand(_=>{if(ProjectId is Guid project)ViewAssetsRequested?.Invoke(this,new(null,project));},_=>ProjectId is not null);
         EnterTetherCommand=new AsyncRelayCommand(_=>EnterTetherAsync(),_=>ProjectId is not null&&SelectedShot is not null);
+        InitializeOverview();
     }
 
     public event EventHandler<ShootExecutionContext>? EnterTetherRequested;
@@ -89,7 +90,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
     public string ProgressText=>$"{Shots.Count(shot=>shot.Status==ProjectShotStatus.Completed)} / {Shots.Count} 已拍";public string EstimatedTimeText=>$"预计 {Shots.Sum(shot=>shot.EstimatedMinutes)} 分钟";
     public string CapturedAssetText=>$"已拍素材 {_state?.CapturedAssets?.Count??0} 张";
     public string SaveStatus{get=>_saveStatus;private set=>SetProperty(ref _saveStatus,value);}public bool HasProject=>ProjectId is not null;public bool HasShots=>Shots.Count>0;
-    public ProjectShot? SelectedShot{get=>_selectedShot;set{if(SetProperty(ref _selectedShot,value)){LoadShotEditor(value);RefreshReferences();OnPropertyChanged(nameof(ShotHeading));OnPropertyChanged(nameof(InspectorHeading));}}}
+    public ProjectShot? SelectedShot{get=>_selectedShot;set{if(SetProperty(ref _selectedShot,value)){LoadShotEditor(value);RefreshReferences();OnPropertyChanged(nameof(ShotHeading));OnPropertyChanged(nameof(InspectorHeading));ProjectContextChanged?.Invoke(this,EventArgs.Empty);}}}
     public ProjectShotReference? SelectedReference{get=>_selectedReference;set{if(SetProperty(ref _selectedReference,value)){_referenceNote=value?.Note??"";OnPropertyChanged(nameof(ReferenceNote));OnPropertyChanged(nameof(InspectorHeading));}}}
     public string ShotHeading=>SelectedShot is null?"尚未建立拍摄清单":$"Shot {SelectedShot.Order+1:00} · {SelectedShot.Name}";public string InspectorHeading=>SelectedReference?.Title??SelectedShot?.Name??ProjectName;
     public string SearchText{get=>_searchText;set{if(SetProperty(ref _searchText,value))ShotsView.Refresh();}}public ProjectShotStatus? SelectedFilter{get=>_filter;set{if(SetProperty(ref _filter,value))ShotsView.Refresh();}}
@@ -112,13 +113,14 @@ public sealed class PlanningCenterViewModel : ObservableObject
     public async Task LoadAsync(Guid projectId,Guid? bookingId=null,CancellationToken token=default)
     {
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");
-        _state=await _planning.LoadAsync(projectId,token);if(bookingId is Guid id){_booking=await _bookings.GetAsync(id,false,token);if(_state.BookingId!=id){_state=_state with{BookingId=id};await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(projectId,token);}}
+        _state=await _planning.LoadAsync(projectId,token);_booking=null;if((bookingId??_state.BookingId) is Guid id){_booking=await _bookings.GetAsync(id,false,token);if(_state.BookingId!=id){_state=_state with{BookingId=id};await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(projectId,token);}}
         var catalog=await _shots.LoadAsync(projectId,token);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==_state.CurrentShotId)??Shots.FirstOrDefault();
         VisualLinks.Clear();foreach(var link in _state.VisualLinks??[])VisualLinks.Add(link);ProjectCanvases.Clear();foreach(var canvas in await _canvases.ListAsync(projectId,token))ProjectCanvases.Add(canvas);
         ProjectBoards.Clear();if(_inspiration is not null)foreach(var board in (await _inspiration.ListCollectionsAsync(token)).Where(item=>item.ProjectId==projectId))ProjectBoards.Add(board);
         var visual=await _visuals.LoadAsync(projectId,token);PaletteColors.Clear();if(visual.DefaultPalette is not null)foreach(var color in visual.DefaultPalette.Colors)PaletteColors.Add(new(color.Hex,color.Weight));ToneZones.Clear();if(visual.DefaultToneTarget is not null)foreach(var item in visual.DefaultToneTarget.Zones.Ratios.Select((ratio,index)=>new PlanningToneZoneItem(index,ratio)))ToneZones.Add(item);
         ColorSchemes.Clear();var catalogLooks=await _looks.LoadAsync(token);foreach(var look in catalogLooks.Looks.Where(item=>item.ProjectId==projectId))ColorSchemes.Add(look);
         NotifyAll();EnterTetherCommand.RaiseCanExecuteChanged();
+        IsOverview=false; ProjectContextChanged?.Invoke(this,EventArgs.Empty);
     }
 
     private async Task NewShotAsync(){if(ProjectId is not Guid project)return;var now=DateTimeOffset.UtcNow;var shot=new ProjectShot(Guid.NewGuid(),project,Shots.Count,"未命名拍摄",ProjectShotStatus.NotStarted,null,null,[],now,now,EstimatedMinutes:10);await _shots.SaveAsync(shot);Shots.Add(shot);SelectedShot=shot;NotifyAll();}
@@ -150,7 +152,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
     private void LoadShotEditor(ProjectShot? shot){_shotTitle=shot?.Name??"";_shotScene=shot?.Scene??"";_shotNotes=shot?.Notes??"";_shotEstimatedMinutes=shot?.EstimatedMinutes??0;foreach(var name in new[]{nameof(ShotTitle),nameof(ShotScene),nameof(ShotNotes),nameof(ShotEstimatedMinutes)})OnPropertyChanged(name);}
     private async void QueueShotAutosave(){_shotAutosave?.Cancel();_shotAutosave?.Dispose();_shotAutosave=new();var token=_shotAutosave.Token;SaveStatus="正在保存…";try{await Task.Delay(350,token);if(SelectedShot is not{} shot||string.IsNullOrWhiteSpace(_shotTitle))return;var updated=shot with{Name=_shotTitle,Scene=_shotScene,Notes=_shotNotes,EstimatedMinutes=_shotEstimatedMinutes,UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated,token);ReplaceShot(updated);SaveStatus="已保存";}catch(OperationCanceledException){}catch{SaveStatus="保存失败，请稍后重试";}}
     private async void QueueReferenceAutosave(){if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;try{var updatedReference=reference with{Note=_referenceNote};var updated=shot with{References=shot.References.Select(item=>item.ReferenceId==reference.ReferenceId?updatedReference:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);SelectedReference=References.First(item=>item.ReferenceId==reference.ReferenceId);}catch{SaveStatus="保存失败，请稍后重试";}}
-    private async Task EnterTetherAsync(){if(ProjectId is not Guid project)return;var context=await new PlanningExecutionContextService(_shots,_planning,_visuals,_looks).BuildAsync(project);EnterTetherRequested?.Invoke(this,context);}
+    private async Task EnterTetherAsync(){if(ProjectId is not Guid project)return;await SetCurrentShotAsync();var context=await new PlanningExecutionContextService(_shots,_planning,_visuals,_looks).BuildAsync(project);EnterTetherRequested?.Invoke(this,context);}
     private void UpdateSummary(Func<PlanningSummary,PlanningSummary> update){if(_state is null)return;_state=_state with{Summary=update(_state.Summary??new())};foreach(var name in new[]{nameof(ShootGoal),nameof(Keywords),nameof(ClientRequirements),nameof(MustCapture),nameof(PlanningNotes),nameof(OutputPurpose)})OnPropertyChanged(name);QueueAutosave();}
     private async void QueueAutosave(){_autosave?.Cancel();_autosave?.Dispose();_autosave=new();var token=_autosave.Token;SaveStatus="正在保存…";try{await Task.Delay(350,token);if(_state is null)return;await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(_state.ProjectId,token);SaveStatus="已保存";}catch(OperationCanceledException){}catch{SaveStatus="保存失败，请稍后重试";}}
     private bool FilterShot(object value)=>value is ProjectShot shot&&(_filter is null||shot.Status==_filter)&&(string.IsNullOrWhiteSpace(_searchText)||shot.Name.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)||(shot.Notes?.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)??false));

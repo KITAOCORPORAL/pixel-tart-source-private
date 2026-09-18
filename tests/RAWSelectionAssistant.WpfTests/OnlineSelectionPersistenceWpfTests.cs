@@ -53,7 +53,7 @@ public sealed class OnlineSelectionPersistenceWpfTests
         var item = AssertExactlyOne(workspace.Projects);
         await workspace.OpenProjectAsync(item);
 
-        Assert.AreEqual("客户选片中", item.StatusText);
+        Assert.AreEqual("客户选择中", item.StatusText);
         Assert.AreSame(result, workspace.ProjectPage.FinalResult);
         var reopenedAsset = AssertExactlyOne(workspace.ProjectPage.Assets);
         Assert.IsTrue(reopenedAsset.IsSelected);

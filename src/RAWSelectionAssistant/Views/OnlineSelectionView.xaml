@@ -68,12 +68,19 @@
             <Border Grid.Column="0" Style="{StaticResource PanelSurface}" Padding="{DynamicResource Spacing16Thickness}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Text="选片项目" Style="{StaticResource SectionTitleText}" Margin="{DynamicResource SpacingVertical12}" />
-                    <ListBox ItemsSource="{Binding Projects}" SelectedValuePath="Project" SelectedValue="{Binding SelectedProject, Mode=OneWay}" BorderThickness="0" Background="Transparent">
+                    <TextBox DockPanel.Dock="Top" Text="{Binding ProjectSearch,UpdateSourceTrigger=PropertyChanged}" ToolTip="搜索项目或客户" AutomationProperties.Name="搜索选片项目"/>
+                    <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding StatusFilters}" SelectedItem="{Binding StatusFilter}" Margin="0,8" AutomationProperties.Name="选片项目状态筛选"/>
+                    <ListBox ItemsSource="{Binding ProjectsView}" SelectedValuePath="Project" SelectedValue="{Binding SelectedProject, Mode=OneWay}" BorderThickness="0" Background="Transparent">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.OpenProjectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Style="{StaticResource Av2GhostButton}" HorizontalContentAlignment="Stretch" Padding="{DynamicResource Spacing8Thickness}">
                                     <StackPanel>
+                                        <Grid Height="130" Background="{DynamicResource SurfaceSecondaryBrush}" Margin="0,0,0,8">
+                                            <TextBlock Text="选片项目" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MinimumCaptionText}"/>
+                                            <Image Source="{Binding Cover}" Stretch="UniformToFill" ClipToBounds="True"/>
+                                        </Grid>
                                         <TextBlock Text="{Binding Name}" Style="{StaticResource CardTitleText}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding CountText}" Style="{StaticResource MinimumCaptionText}" Margin="0,6,0,0"/>
                                         <TextBlock Text="{Binding ClientDisplayName}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
                                         <WrapPanel Margin="{DynamicResource Spacing4Thickness}">
                                             <TextBlock Text="{Binding StatusText}" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" />

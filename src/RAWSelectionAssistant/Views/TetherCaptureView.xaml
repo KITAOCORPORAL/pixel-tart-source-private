@@ -76,6 +76,7 @@
                         </StackPanel>
                     </Expander>
 
+                    <Button Content="返回策划" Style="{StaticResource GhostButton}" Command="{Binding DataContext.ReturnToPlanningCommand,RelativeSource={RelativeSource AncestorType=Window}}" AutomationProperties.Name="返回当前项目策划"/>
                     <Expander x:Name="ShotReferenceGroup" Header="拍摄参考" IsExpanded="True" AutomationProperties.Name="拍摄参考工具组">
                         <StackPanel Margin="0,8,0,10">
                             <Grid><Button Content="‹" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.PreviousShotCommand}" AutomationProperties.Name="上一个拍摄段落" /><TextBlock Text="{Binding ShotExecution.ShotPositionText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" /><Button Content="›" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.NextShotCommand}" HorizontalAlignment="Right" AutomationProperties.Name="下一个拍摄段落" /></Grid>
