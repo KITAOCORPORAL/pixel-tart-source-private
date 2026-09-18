@@ -8,12 +8,14 @@ public enum ThemedMessageKind { Information, Success, Warning, Error, Question }
 public partial class ThemedMessageDialog : Window
 {
     private readonly bool _confirmation;
+    private string? _logDirectory;
 
     private ThemedMessageDialog(string title, string message, ThemedMessageKind kind, bool confirmation)
     {
         InitializeComponent();
         _confirmation = confirmation;
         TitleTextBlock.Text = title;
+        Title = title;
         MessageTextBlock.Text = message;
         GlyphTextBlock.Text = kind switch
         {
@@ -40,6 +42,32 @@ public partial class ThemedMessageDialog : Window
         var dialog = new ThemedMessageDialog(title, message, kind, confirmation);
         if (owner is { IsLoaded: true }) dialog.Owner = owner;
         return dialog.ShowDialog() == true;
+    }
+
+    public static void ShowStartupFailure(string summary, string logDirectory)
+    {
+        var dialog = new ThemedMessageDialog("软件启动失败", summary, ThemedMessageKind.Error, false)
+        {
+            _logDirectory = logDirectory,
+            WindowStartupLocation = WindowStartupLocation.CenterScreen
+        };
+        dialog.CopyErrorButton.Visibility = Visibility.Visible;
+        dialog.OpenLogsButton.Visibility = Visibility.Visible;
+        dialog.ShowDialog();
+    }
+
+    private void CopyError_Click(object sender, RoutedEventArgs e)
+    {
+        try { Clipboard.SetText(MessageTextBlock.Text); }
+        catch (System.Runtime.InteropServices.ExternalException) { CopyErrorButton.Content = "剪贴板忙，请重试"; }
+    }
+
+    private void OpenLogs_Click(object sender, RoutedEventArgs e)
+    {
+        if (_logDirectory is null) return;
+        try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_logDirectory) { UseShellExecute = true }); }
+        catch (Exception exception) when (exception is System.ComponentModel.Win32Exception or System.IO.IOException)
+        { MessageTextBlock.Text += "\n日志位置：" + _logDirectory; }
     }
 
     private void YesButton_Click(object sender, RoutedEventArgs e) { DialogResult = true; Close(); }

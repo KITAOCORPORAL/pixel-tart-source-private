@@ -671,7 +671,7 @@
                     <views:PublishingExportView DataContext="{Binding PublishingPage}" />
                 </Grid>
 
-                <views:ReferenceColorWorkspaceView DataContext="{Binding ReferenceColorPage}" Visibility="{Binding IsReferenceColorPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <views:ReferenceColorWorkspaceView DataContext="{Binding ReferenceColorPage}" Visibility="{Binding DataContext.IsReferenceColorPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <ScrollViewer Margin="28" VerticalScrollBarVisibility="Auto" Visibility="{Binding IsWatermarkPage, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel MaxWidth="1320" HorizontalAlignment="Center">

@@ -7,7 +7,9 @@
 #endif
 #define AppPublisher "像素蛋挞"
 #define AppExe "PixelTart.exe"
+#ifndef PublishDir
 #define PublishDir "..\artifacts\stage-v2-installable-acceptance\publish"
+#endif
 
 [Setup]
 AppId={{3A5A5B1B-8A11-4E85-9C54-1B18D0E5D2F4}

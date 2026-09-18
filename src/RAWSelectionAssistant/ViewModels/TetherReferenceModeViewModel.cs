@@ -109,7 +109,16 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 
     public async Task LoadAsync(CancellationToken token = default)
     {
-        var selected = SelectedLook?.ReferenceLookId ?? _sessionLookId; var catalog = await _store.LoadAsync(token);
+        var selected = SelectedLook?.ReferenceLookId ?? _sessionLookId;
+        ReferenceLookCatalog catalog;
+        try { catalog = await _store.LoadAsync(token); }
+        catch (Exception exception) when (exception is System.Text.Json.JsonException or InvalidDataException or IOException or UnauthorizedAccessException)
+        {
+            new RAWSelectionAssistant.Core.Services.FileLogService().Error("色彩方案未能加载；保留原文件并恢复空方案列表。", exception);
+            StatusText = "部分色彩方案未能加载，原文件已保留。可继续使用其他工作区。";
+            Looks.Clear(); SelectedLook = null; RefreshSourceChoices();
+            return;
+        }
         Looks.Clear(); foreach (var look in catalog.Looks.OrderByDescending(item => item.UpdatedAt)) Looks.Add(look);
         _projectDefaultLookId = _projectId is Guid project && catalog.ProjectDefaults.TryGetValue(project, out var defaultId) ? defaultId : null;
         var effective = ReferenceLookResolver.Resolve(null, _projectDefaultLookId, selected);
@@ -119,7 +128,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) _selectedLook = null; _projectId = projectId; await LoadAsync(token); }
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
-        _assetId = assetId; _source = source; MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
+        _assetId = assetId; _source = source; OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         if (ApplyToFollowing && Enabled && source is not null) await RenderAsync(token);
     }
     public async Task SelectLookAsync(Guid? lookId)

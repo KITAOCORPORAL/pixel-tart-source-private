@@ -24,6 +24,11 @@ public static class PlanningHumanAcceptanceDemoSeeder
     public static async Task SeedAsync(SettingsService settingsService, CancellationToken token = default)
     {
         AppDataPaths.EnsureCreated();
+        // A demo is a first-run fixture, not a migration. Never overwrite an existing
+        // preview user's projects, edited shots, canvas, or saved color scheme.
+        var existingDatabase = new PixelTartDatabase(AppDataPaths.DatabaseFile);
+        if ((await new SqliteProjectRepository(existingDatabase).ListAsync(token).ConfigureAwait(false)).Any(project => project.Id == ProjectId))
+            return;
         var root = AppDataPaths.Root;
         var demoAssets = Path.Combine(root, "SyntheticAssets");
         Directory.CreateDirectory(demoAssets);

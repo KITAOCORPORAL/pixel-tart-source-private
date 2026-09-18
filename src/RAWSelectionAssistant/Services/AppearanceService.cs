@@ -57,7 +57,8 @@ public sealed class AppearanceService : IAppearanceService
     {
         var dictionaries = Application.Current.Resources.MergedDictionaries;
         var current = dictionaries.FirstOrDefault(dictionary => dictionary.Source?.OriginalString.Contains(ThemeMarker, StringComparison.OrdinalIgnoreCase) == true);
-        var replacement = new ResourceDictionary { Source = new Uri($"Resources/DesignSystem/Theme.{themeName}.xaml", UriKind.Relative) };
+        var assembly = typeof(App).Assembly.GetName().Name;
+        var replacement = new ResourceDictionary { Source = new Uri($"/{assembly};component/Resources/DesignSystem/Theme.{themeName}.xaml", UriKind.Relative) };
         if (current is null) dictionaries.Insert(0, replacement);
         else dictionaries[dictionaries.IndexOf(current)] = replacement;
     }

@@ -32,6 +32,13 @@ public partial class App : Application
     private HttpClient? _weatherHttpClient;
     private WeatherFeatureState? _weatherState;
     private PixelTartModuleRegistry? _moduleRegistry;
+    private string _startupStage = "01 Bootstrap";
+
+    private void StartupStage(string stage)
+    {
+        _startupStage = stage;
+        _logService?.Info("STARTUP_STAGE=" + stage);
+    }
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
     private AssetLibraryP1AcceptanceStateController? _assetLibraryP1StateController;
 #endif
@@ -87,6 +94,7 @@ public partial class App : Application
 #endif
         new AppDataMigrationService().MigrateLegacyData();
         _logService = new FileLogService();
+        StartupStage("02 Logging");
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
@@ -100,7 +108,9 @@ public partial class App : Application
 
         try
         {
+            StartupStage("04 Database and composition");
             _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
+            StartupStage("05 Services and modules");
             _moduleRegistry = CreateModuleRegistry(_compositionRoot.OperationBridge);
             await _moduleRegistry.InitializeAsync();
             await _moduleRegistry.ActivateAllAsync();
@@ -139,6 +149,7 @@ public partial class App : Application
                 ? AppDataPaths.SettingsFile
                 : File.Exists(legacySettings) ? legacySettings : null;
             var settingsService = new SettingsService(_logService, settingsPath);
+            StartupStage("03 Settings");
             var startupSettings = await settingsService.LoadAsync();
 #if PLANNING_HUMAN_ACCEPTANCE
             await PlanningHumanAcceptanceDemoSeeder.SeedAsync(settingsService);
@@ -169,6 +180,7 @@ public partial class App : Application
                 _logService);
             var dialogService = new WpfDialogService(feedbackService);
             var clipboardService = new WpfClipboardService();
+            StartupStage("06 Theme");
             _appearanceService = new AppearanceService();
 
             var calendarAssetDatabasePath = Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db");
@@ -295,9 +307,19 @@ public partial class App : Application
                 await financePage.OpenForBookingAsync(request.BookingId, request.Kind);
             };
 
+            StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
+            StartupStage("09 Restore Session");
 #if PLANNING_HUMAN_ACCEPTANCE
-            await _mainViewModel.OpenPlanningAsync(PlanningHumanAcceptanceDemoSeeder.ProjectId, PlanningHumanAcceptanceDemoSeeder.BookingId);
+            try
+            {
+                await _mainViewModel.OpenPlanningAsync(PlanningHumanAcceptanceDemoSeeder.ProjectId, PlanningHumanAcceptanceDemoSeeder.BookingId);
+            }
+            catch (Exception restoreError) when (restoreError is System.Text.Json.JsonException or InvalidDataException or IOException or UnauthorizedAccessException)
+            {
+                _logService.Error("上次项目资料未能恢复；保留数据并进入工作台。", restoreError);
+                _mainViewModel.RecoverStartupWorkspace();
+            }
 #endif
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
             _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
@@ -312,7 +334,11 @@ public partial class App : Application
             _assetLibraryP3AutomatedController?.ApplyStartRoute(_mainViewModel);
 #endif
             await reminderNotifications.InitializeAsync();
+            StartupStage("07 MainWindow");
             var window = new MainWindow { DataContext = _mainViewModel };
+#if PLANNING_HUMAN_ACCEPTANCE
+            window.Title += " · 开发预览版 " + StartupDiagnostics.BuildId;
+#endif
             window.ApplySavedBounds(_mainViewModel.Settings);
             MainWindow = window;
 #if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
@@ -339,10 +365,11 @@ public partial class App : Application
             window.Show();
             await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
+            _logService.Info($"STARTUP_OK BuildId={StartupDiagnostics.BuildId} ProductSourceSha={StartupDiagnostics.ProductSourceSha} Windows={Environment.OSVersion.VersionString} DataRoot=AppData-or-explicit-override LibraryRoot=user-managed LastWorkspace={_mainViewModel.Settings.LastPrimaryPage}");
         }
         catch (Exception ex)
         {
-            _logService.Error("应用程序启动失败。", ex);
+            _logService.Error($"应用程序启动失败。 FAILED_AT_STAGE={_startupStage} ErrorCode={StartupDiagnostics.ErrorCode(_startupStage)}", ex);
 #if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
             _assetLibraryP1AutomatedController?.Fail(ex);
 #elif ASSET_LIBRARY_P2_AUTOMATED_ACCEPTANCE
@@ -350,7 +377,7 @@ public partial class App : Application
 #elif ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
             _assetLibraryP3AutomatedController?.Fail(ex);
 #else
-            ThemedMessageDialog.Show(null, Branding.ProductName, "软件启动失败，已记录详细信息。请重新打开；如果仍然失败，请提供日志文件。", ThemedMessageKind.Error);
+            ThemedMessageDialog.ShowStartupFailure(StartupDiagnostics.ErrorSummary(_startupStage), Path.Combine(AppDataPaths.Root, "Logs"));
 #endif
             _singleInstance?.Dispose();
             Shutdown(-1);

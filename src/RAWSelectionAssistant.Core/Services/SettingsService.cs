@@ -35,6 +35,8 @@ public sealed class SettingsService
 
             var json = await File.ReadAllTextAsync(_settingsFilePath, cancellationToken).ConfigureAwait(false);
             using var document = JsonDocument.Parse(json);
+            if (document.RootElement.ValueKind != JsonValueKind.Object)
+                throw new JsonException("Settings root must be an object.");
             WasLegacySettings = !document.RootElement.TryGetProperty("onboardingVersion", out _) &&
                                 !document.RootElement.TryGetProperty(nameof(AppSettings.OnboardingVersion), out _);
             using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json));
@@ -50,7 +52,9 @@ public sealed class SettingsService
         {
             WasSettingsFileCorrupted = true;
             _logService.Error("设置文件损坏或无法读取，已恢复默认设置。", ex);
-            return new AppSettings();
+            var defaults = new AppSettings();
+            Upgrade(defaults);
+            return defaults;
         }
     }
 
@@ -90,12 +94,13 @@ public sealed class SettingsService
     private static void Upgrade(AppSettings settings)
     {
         settings.Appearance ??= new AppearanceSettings();
+        settings.Weather ??= new WeatherSettings();
         settings.ReportSettings ??= new ReportSettings();
         settings.PinnedQuickTools = QuickToolsService.Normalize(settings.PinnedQuickTools);
         settings.QuickToolLayout ??= new QuickToolLayout();
         settings.QuickToolLayout.SchemaVersion = QuickToolLayout.CurrentSchemaVersion;
         settings.QuickToolLayout.OrderedToolIds = QuickToolsService.Normalize(
-            settings.QuickToolLayout.OrderedToolIds.Count > 0 ? settings.QuickToolLayout.OrderedToolIds : settings.PinnedQuickTools);
+            settings.QuickToolLayout.OrderedToolIds is { Count: > 0 } ? settings.QuickToolLayout.OrderedToolIds : settings.PinnedQuickTools);
         settings.PinnedQuickTools = settings.QuickToolLayout.OrderedToolIds.ToList();
         settings.ProductQuickToolLayout ??= new ProductQuickToolLayout();
         settings.ProductQuickToolLayout.SchemaVersion = ProductQuickToolLayout.CurrentSchemaVersion;
@@ -116,11 +121,12 @@ public sealed class SettingsService
         if (!Enum.IsDefined(settings.Appearance.FontScale)) settings.Appearance.FontScale = FontScale.Standard;
         settings.EnabledJpegExtensions = NormalizeOrDefault(settings.EnabledJpegExtensions, MediaExtensionPolicy.DefaultJpegExtensions);
         settings.EnabledRawExtensions = NormalizeOrDefault(
-            settings.EnabledRawExtensions.Concat(settings.CustomRawExtensions ?? []),
+            (settings.EnabledRawExtensions ?? []).Concat(settings.CustomRawExtensions ?? []),
             MediaExtensionPolicy.DefaultRawExtensions);
         settings.CustomExtensions = NormalizeOrDefault(settings.CustomExtensions, []);
         settings.CustomRawExtensions ??= [];
         settings.SourceDirectories ??= [];
+        settings.RecentRawDirectories ??= [];
         settings.CustomerJpegMode ??= settings.AllowCustomerJpegFallback
             ? CustomerJpegHandlingMode.AllowCustomerFile
             : CustomerJpegHandlingMode.Strict;

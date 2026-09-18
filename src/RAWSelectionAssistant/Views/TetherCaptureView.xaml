@@ -8,6 +8,7 @@
              AutomationProperties.HelpText="使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource Av2IconButton}" />
         <Style x:Key="ThumbnailItemStyle" TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
@@ -215,7 +216,7 @@
                         <TextBlock Text="自定义前缀" Style="{StaticResource CaptionText}" Margin="0,5,0,0"/><TextBox Text="{Binding NextCapturePrefix,UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="下一张拍摄自定义前缀"/>
                         <WrapPanel Margin="0,5,0,0"><CheckBox Content="包含项目名" IsChecked="{Binding NextCaptureIncludeProject}" AutomationProperties.Name="下一张拍摄包含项目名"/><CheckBox Content="包含日期" IsChecked="{Binding NextCaptureIncludeDate}" Margin="10,0,0,0" AutomationProperties.Name="下一张拍摄包含日期"/></WrapPanel>
                         <TextBlock Text="计数器" Style="{StaticResource CaptionText}" Margin="0,5,0,0"/><TextBox Text="{Binding NextCaptureCounter,UpdateSourceTrigger=LostFocus}" AutomationProperties.Name="下一张拍摄计数器"/>
-                        <TextBlock Text="目标文件夹" Style="{StaticResource CaptionText}" Margin="0,7,0,0"/><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBox Text="{Binding NextCaptureFolder}" IsReadOnly="True" AutomationProperties.Name="下一张拍摄目标文件夹"/><Button Grid.Column="1" Content="选择" Style="{StaticResource SecondaryButton}" Command="{Binding ChooseNextCaptureFolderCommand}" Margin="6,0,0,0" AutomationProperties.Name="选择下一张拍摄目标文件夹"/></Grid><TextBlock Text="{Binding NextCaptureFreeSpace}" Style="{StaticResource CaptionText}" Margin="0,4,0,0"/>
+                        <TextBlock Text="目标文件夹" Style="{StaticResource CaptionText}" Margin="0,7,0,0"/><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBox Text="{Binding NextCaptureFolder, Mode=OneWay}" IsReadOnly="True" AutomationProperties.Name="下一张拍摄目标文件夹"/><Button Grid.Column="1" Content="选择" Style="{StaticResource SecondaryButton}" Command="{Binding ChooseNextCaptureFolderCommand}" Margin="6,0,0,0" AutomationProperties.Name="选择下一张拍摄目标文件夹"/></Grid><TextBlock Text="{Binding NextCaptureFreeSpace}" Style="{StaticResource CaptionText}" Margin="0,4,0,0"/>
                         <TextBlock Text="下一张拍摄调整" Style="{StaticResource CaptionText}" Margin="0,7,0,0"/><ComboBox ItemsSource="{Binding NextCaptureAdjustmentOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding NextCaptureAdjustment}" AutomationProperties.Name="下一张拍摄调整选择"/>
                         <TextBlock Text="规则只用于新照片稳定写入后的后续处理；不会在相机仍写入时重命名。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,0"/>
                     </StackPanel></Expander>

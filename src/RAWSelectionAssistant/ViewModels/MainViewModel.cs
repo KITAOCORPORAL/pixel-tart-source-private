@@ -1666,6 +1666,13 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         _tutorialExitCleanupTask = CompleteTutorialExitAsync(pendingTasks);
     }
 
+    public void RecoverStartupWorkspace()
+    {
+        ForceExitTutorial();
+        NavigateToSurface("Workbench", recordHistory: false);
+        StatusMessage = "已恢复到安全启动状态，部分上次会话设置未加载。";
+    }
+
     private async Task CompleteTutorialExitAsync(IEnumerable<Task?> pendingTasks)
     {
         var cleanupTasks = pendingTasks

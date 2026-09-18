@@ -35,6 +35,8 @@ public sealed class ReferenceLookStore(string directory)
         var catalog = await JsonSerializer.DeserializeAsync<ReferenceLookCatalog>(stream, cancellationToken: token).ConfigureAwait(false)
             ?? throw new InvalidDataException("Look catalog is empty.");
         if (catalog.Version != 1) throw new InvalidDataException("Unsupported Look catalog version.");
+        if (catalog.Looks is null || catalog.ProjectDefaults is null || catalog.Looks.Any(look => look is null || look.ReferenceSources is null || look.Parameters is null))
+            throw new InvalidDataException("Incomplete Look catalog.");
         return catalog;
     }
     private async Task UpdateAsync(Func<ReferenceLookCatalog, ReferenceLookCatalog> update, CancellationToken token)

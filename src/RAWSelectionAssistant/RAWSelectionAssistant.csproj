@@ -41,6 +41,7 @@
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(DeveloperPreviewBuild)' == 'true'">true</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and ('$(AssetLibraryP1StateAcceptance)' == 'true' or ('$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(Configuration)' == 'Debug')) and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP3AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
