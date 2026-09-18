@@ -6,12 +6,12 @@
 
 ## 构建
 
-- ProductSourceSha：`5830fc00807d52421b2f856807a08aef687befe0`
-- FinalHead / InstallerPackagingSha：`5830fc00807d52421b2f856807a08aef687befe0`
+- ProductSourceSha：`35d7d742151397be27ec084361bb55e2910010bd`
+- FinalHead / InstallerPackagingSha：`35d7d742151397be27ec084361bb55e2910010bd`
 - Branch：`integration/pixel-tart-developer-preview`
 - Final package metadata：见 `artifacts/stage-v2-installable-acceptance/installer/INSTALLER_PROVENANCE.json`
 - Installer：`PixelTart-DeveloperPreview-2.3.0-dev-x64-Setup.exe`
-- Installer SHA-256：`0324F5AA9CE70BBE567EF6DCB4D3F101710E2FBC8B6D857C863C992FA861A343`
+- Installer SHA-256：`EB6CE87F1F15851247BC8E55BCB577A304850AAAD182ADB80E6EDEFA1B56986D`
 - Publish：Release、self-contained、win-x64、clean staging
 - Release build：PASS，0 warnings / 0 errors
 
@@ -24,7 +24,7 @@
 - Tether slider isolation：源码修复 PASS；安装后验证 PENDING USER
 - Forbidden runtime files：PASS，Acceptance/TestHost/Tests/PDB/TRX/source/XAML absent
 - Source safety：PASS（核心测试覆盖源文件哈希不变）
-- Reference workflow / Chinese / compare WPF tests：PASS，12/12
+- Reference workflow / Chinese / compare WPF tests：PASS，16/16
 - Registry / toolbox / color / reference core focused tests：PASS，67/67
 
 ## 安装验收状态
