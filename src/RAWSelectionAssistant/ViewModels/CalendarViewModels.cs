@@ -145,6 +145,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         Details.WorkflowStatusChanged += (_, _) => _ = RefreshAfterBookingChangeAsync();
         Details.FinanceRequested += (_, request) => FinanceRequested?.Invoke(this, request);
         Details.AssetLibraryRequested += (_, request) => AssetLibraryRequested?.Invoke(this, request);
+        Details.FullPlanningRequested += async (_, bookingId) => await RequestPlanningAsync(bookingId).ConfigureAwait(true);
         Archived = new ArchivedBookingsViewModel(bookingService, _timeDisplay);
         Archived.OpenDetailsRequested += (_, id) => _ = OpenBookingAsync(id, includeArchived: true);
         Archived.Restored += (_, _) => _ = RefreshAsync();
@@ -169,13 +170,12 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             ? RequestEditorAsync(bookingId, null, BookingEditorPresentation.QuickEdit)
             : Task.CompletedTask, parameter => TryResolveBookingId(parameter, out _));
         OpenFullPlanningCommand = new AsyncRelayCommand(parameter => TryResolveBookingId(parameter, out var bookingId)
-            ? RequestEditorAsync(bookingId, null, BookingEditorPresentation.FullPlanning)
+            ? RequestPlanningAsync(bookingId)
             : Task.CompletedTask, parameter => TryResolveBookingId(parameter, out _));
         ChangeWorkflowStatusCommand = new AsyncRelayCommand(ChangeWorkflowStatusAsync,
             parameter => parameter is CalendarWorkflowStatusChangeRequest);
         ArchiveBookingCommand = new AsyncRelayCommand(ArchiveBookingAsync, parameter => TryResolveBookingId(parameter, out _));
         Details.EditRequested += (_, bookingId) => EditBookingCommand.Execute(bookingId);
-        Details.FullPlanningRequested += (_, bookingId) => OpenFullPlanningCommand.Execute(bookingId);
         ToggleArchivedCommand = new AsyncRelayCommand(_ => ToggleArchivedAsync());
         CloseDetailsCommand = new RelayCommand(_ => IsDetailsOpen = false);
         FocusSearchCommand = new RelayCommand(_ => FocusSearchRequested());
@@ -186,6 +186,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
     public event EventHandler? CalendarPageRequested;
     public event EventHandler<BookingFinanceRequestEventArgs>? FinanceRequested;
     public event EventHandler<AssetLibraryNavigationRequestEventArgs>? AssetLibraryRequested;
+    public event EventHandler<PlanningNavigationRequestEventArgs>? PlanningRequested;
 
     public IReadOnlyList<CalendarStatusOption> StatusOptions { get; }
     public IReadOnlyList<CalendarStatusOption> DetailedStatusOptions { get; }
@@ -690,7 +691,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         var editor = new ShootBookingEditorViewModel(_bookingService, _projectRepository, bookingId, suggestedStart, _bookingPeopleService, _documentWorkflow, _dialogs, _weatherService, _weatherState, _currentLocationService);
         await editor.InitializeAsync().ConfigureAwait(true);
         editor.OpenConflictingBookingRequested += async (_, conflictId) => await OpenBookingAsync(conflictId).ConfigureAwait(true);
-        editor.ContinuePlanningRequested += saved => RequestEditorAsync(saved.Id, null, BookingEditorPresentation.FullPlanning);
+        editor.ContinuePlanningRequested += saved => RequestPlanningAsync(saved.Id);
         editor.SavedAsync += async saved =>
         {
             _weatherState?.MarkNeedsRefresh(saved.Id);
@@ -721,6 +722,13 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             await OpenBookingAsync(saved.Id).ConfigureAwait(true);
         };
         EditorRequested?.Invoke(this, new BookingEditorRequestEventArgs(editor, presentation));
+    }
+
+    private async Task RequestPlanningAsync(Guid bookingId)
+    {
+        var booking=await _bookingService.GetAsync(bookingId).ConfigureAwait(true);
+        if(booking?.ProjectId is Guid projectId)PlanningRequested?.Invoke(this,new(projectId,bookingId));
+        else await RequestEditorAsync(bookingId,null,BookingEditorPresentation.FullPlanning).ConfigureAwait(true);
     }
 
     private async Task RefreshAfterBookingChangeAsync()
@@ -829,6 +837,8 @@ public sealed class BookingEditorRequestEventArgs(ShootBookingEditorViewModel ed
     public ShootBookingEditorViewModel Editor { get; } = editor;
     public BookingEditorPresentation Presentation { get; } = presentation;
 }
+
+public sealed record PlanningNavigationRequestEventArgs(Guid ProjectId,Guid BookingId);
 
 public sealed class CalendarBookingItemViewModel : ICalendarWorkflowBooking
 {

@@ -10,6 +10,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed class TetherShotExecutionViewModel : ObservableObject
 {
     private readonly ProjectShotStore _store;
+    private readonly PlanningProjectStore _planning;
     private readonly ProjectShotExecution _execution = new();
     private Guid? _projectId;
     private ProjectShot? _current;
@@ -21,9 +22,10 @@ public sealed class TetherShotExecutionViewModel : ObservableObject
     private bool _quickPreviewOpen;
     public Func<Guid?, Task>? EffectiveLookChanged { get; set; }
 
-    public TetherShotExecutionViewModel(ProjectShotStore? store = null)
+    public TetherShotExecutionViewModel(ProjectShotStore? store = null, PlanningProjectStore? planning = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectShots"));
+        _planning = planning ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectPlanning"));
         PreviousShotCommand = new AsyncRelayCommand(_ => MoveAsync(-1), _ => Current is not null && CurrentIndex > 0);
         NextShotCommand = new AsyncRelayCommand(_ => MoveAsync(1), _ => Current is not null && CurrentIndex < Shots.Count - 1);
         MarkInProgressCommand = new AsyncRelayCommand(_ => SetShotStatusAsync(ProjectShotStatus.InProgress), _ => Current is not null);
@@ -71,6 +73,14 @@ public sealed class TetherShotExecutionViewModel : ObservableObject
         await NotifyLookAsync();
     }
 
+    public async Task SelectAsync(Guid shotId)
+    {
+        if (Shots.All(shot => shot.ShotId != shotId)) return;
+        Current = _execution.Select(shotId);
+        if (Current.Status == ProjectShotStatus.NotStarted) Current = _execution.SetStatus(ProjectShotStatus.InProgress);
+        await SaveCurrentAsync(); await NotifyLookAsync();
+    }
+
     private async Task MoveAsync(int delta) { Current = _execution.Move(delta); if (Current is not null && Current.Status == ProjectShotStatus.NotStarted) Current = _execution.SetStatus(ProjectShotStatus.InProgress); await SaveCurrentAsync(); await NotifyLookAsync(); }
     private async Task SetShotStatusAsync(ProjectShotStatus status) { Current = _execution.SetStatus(status); await SaveCurrentAsync(); }
     private async Task SetPoseCompletedAsync(ProjectShotReference? reference) { if (reference is null) return; Current = _execution.SetPoseStatus(reference.ReferenceId, PoseExecutionStatus.Completed, advance: true); await SaveCurrentAsync(); }
@@ -83,7 +93,7 @@ public sealed class TetherShotExecutionViewModel : ObservableObject
     }
     private async Task LoadSelectedPinnedAsync(){var path=ResolvePath(PinnedReference);if(path is null){PinnedReferenceImage=null;return;}try{PinnedReferenceImage=await BitmapFileLoader.LoadAsync(path,1024,CancellationToken.None);}catch{PinnedReferenceImage=null;}}
     private static string? ResolvePath(ProjectShotReference? reference)=>reference?.ExternalReference is { Length:>0 } value && File.Exists(value)?value:null;
-    private async Task SaveCurrentAsync() { if (Current is not null) { await _store.SaveAsync(Current); ReplaceCollection(Current); } }
+    private async Task SaveCurrentAsync() { if (Current is not null) { await _store.SaveAsync(Current);if(_projectId is Guid project)await _planning.SetCurrentShotAsync(project,Current.ShotId); ReplaceCollection(Current); } }
     private Task NotifyLookAsync() => EffectiveLookChanged?.Invoke(Current?.ReferenceLookId) ?? Task.CompletedTask;
     private void ReplaceCollection(ProjectShot shot) { var index = Shots.ToList().FindIndex(item => item.ShotId == shot.ShotId); if (index >= 0) Shots[index] = shot; RefreshReferences(); RaiseCommands(); }
     private void RefreshReferences() { VisibleReferences.Clear(); if (Current is not null) foreach (var reference in Current.References.Where(item => item.Kind == SelectedKind)) VisibleReferences.Add(reference); SelectedReference = VisibleReferences.FirstOrDefault(item => item.PoseStatus == PoseExecutionStatus.Current) ?? VisibleReferences.FirstOrDefault(); OnPropertyChanged(nameof(HasPinnedReference));OnPropertyChanged(nameof(PinnedReference)); }

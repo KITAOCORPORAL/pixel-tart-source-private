@@ -103,7 +103,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
 
     private static readonly HashSet<string> NavigableSurfaces = new(StringComparer.Ordinal)
     {
-        "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
+        "Workbench", "LocalSplit", "Workflow", "History", "WorkCalendar", "Planning", "OnlineSelection", "AssetLibrary", "Tether", "Finance",
         "Activation", "Help", "BatchCompress", "Publishing", "RawToJpeg", "PhotoGrouping", "Collage", "Toolbox"
     };
 
@@ -176,6 +176,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         WorkCalendarPage = workCalendarPage;
         WorkCalendarPage.CalendarPageRequested += WorkCalendarPage_CalendarPageRequested;
         WorkCalendarPage.AssetLibraryRequested += WorkCalendarPage_AssetLibraryRequested;
+        WorkCalendarPage.PlanningRequested += async (_,request)=>await OpenPlanningAsync(request.ProjectId,request.BookingId).ConfigureAwait(true);
         WorkbenchSchedule = workbenchSchedule;
         ReminderNotifications = reminderNotifications;
         TetherPage = tetherPage;
@@ -285,6 +286,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public OrganizePhotosViewModel OrganizePhotosPage { get; }
     public CollageViewModel CollagePage { get; }
     public WorkCalendarViewModel WorkCalendarPage { get; }
+    public PlanningCenterViewModel? PlanningPage { get; private set; }
     public WorkbenchScheduleViewModel? WorkbenchSchedule { get; }
     public ReminderNotificationCenterViewModel? ReminderNotifications { get; }
     public TetherCaptureViewModel? TetherPage { get; }
@@ -466,6 +468,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             OnPropertyChanged(nameof(IsWorkflowPage));
             OnPropertyChanged(nameof(IsHistoryPage));
             OnPropertyChanged(nameof(IsWorkCalendarPage));
+            OnPropertyChanged(nameof(IsPlanningPage));
             OnPropertyChanged(nameof(IsTetherPage));
             OnPropertyChanged(nameof(IsFinancePage));
             OnPropertyChanged(nameof(IsOnlineSelectionPage));
@@ -512,6 +515,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public bool IsWorkflowPage => CurrentPage == "Workflow";
     public bool IsHistoryPage => CurrentPage == "History";
     public bool IsWorkCalendarPage => CurrentPage == "WorkCalendar";
+    public bool IsPlanningPage => CurrentPage == "Planning";
     public bool IsTetherPage => CurrentPage == "Tether";
     public bool IsFinancePage => CurrentPage == "Finance";
     public bool IsOnlineSelectionPage => CurrentPage == "OnlineSelection";
@@ -1110,6 +1114,24 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     {
         NavigateToSurface("WorkCalendar");
         await WorkCalendarPage.NavigateToBookingAsync(bookingId).ConfigureAwait(true);
+    }
+
+    public async Task OpenPlanningAsync(Guid projectId, Guid? bookingId = null)
+    {
+        if (PlanningPage is null) return;
+        await PlanningPage.LoadAsync(projectId, bookingId).ConfigureAwait(true);
+        NavigateToSurface("Planning");
+    }
+
+    public void AttachPlanningPage(PlanningCenterViewModel planningPage)
+    {
+        PlanningPage = planningPage;
+        PlanningPage.EnterTetherRequested += async (_, context) =>
+        {
+            if (TetherPage is not null) await TetherPage.ApplyExecutionContextAsync(context).ConfigureAwait(true);
+            NavigateToSurface("Tether");
+        };
+        OnPropertyChanged(nameof(PlanningPage));
     }
 
     private void WorkCalendarPage_AssetLibraryRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)

@@ -34,13 +34,13 @@ public sealed record PlanningVisualLink(Guid LinkId, PlanningVisualLinkKind Kind
 }
 
 /// <summary>Non-owning relationship. It never owns, moves, renames or deletes an asset source.</summary>
-public sealed record ShotCaptureRelation(Guid LibraryId, Guid AssetId, Guid ShotId, Guid ProjectId, Guid? BookingId,
-    DateTimeOffset CapturedAt, long ExecutionRevision)
+public sealed record ShotCaptureRelation(Guid? LibraryId, Guid AssetId, Guid ShotId, Guid ProjectId, Guid? BookingId,
+    DateTimeOffset CapturedAt, long ExecutionRevision, string SourceKind = "Library")
 {
-    public string StableKey => $"{LibraryId:N}:{AssetId:N}:{ShotId:N}";
+    public string StableKey => $"{SourceKind}:{LibraryId?.ToString("N")??"none"}:{AssetId:N}:{ShotId:N}";
     public ShotCaptureRelation Validate()
     {
-        if (LibraryId == Guid.Empty || AssetId == Guid.Empty || ShotId == Guid.Empty || ProjectId == Guid.Empty || ExecutionRevision < 0)
+        if (LibraryId == Guid.Empty || AssetId == Guid.Empty || ShotId == Guid.Empty || ProjectId == Guid.Empty || ExecutionRevision < 0 || string.IsNullOrWhiteSpace(SourceKind))
             throw new ArgumentException("A capture relation requires stable asset, project and shot identities.");
         return this;
     }
@@ -116,6 +116,11 @@ public sealed record ShootExecutionContext(Guid ProjectId, Guid? BookingId, Guid
     {
         if (CurrentShotId is not Guid shotId) throw new InvalidOperationException("No current shot was frozen for this capture.");
         return new ShotCaptureRelation(libraryId, assetId, shotId, ProjectId, BookingId, capturedAt, Revision).Validate();
+    }
+    public ShotCaptureRelation BindTetherCapture(Guid tetherAssetId, DateTimeOffset capturedAt)
+    {
+        if (CurrentShotId is not Guid shotId) throw new InvalidOperationException("No current shot was frozen for this capture.");
+        return new ShotCaptureRelation(null, tetherAssetId, shotId, ProjectId, BookingId, capturedAt, Revision, "Tether").Validate();
     }
 }
 

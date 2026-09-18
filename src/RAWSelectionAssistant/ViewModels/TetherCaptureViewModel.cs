@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Database;
+using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -37,6 +38,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly CancellationTokenSource _lifetime = new();
     private readonly Dictionary<Guid, TetherAssetItemViewModel> _assetIndex = [];
     private readonly HashSet<Guid> _knownReadyAssets = [];
+    private readonly Dictionary<Guid, ShootExecutionContext> _captureContexts = [];
+    private readonly PlanningProjectStore _planningStore = new(Path.Combine(AppDataPaths.DataDirectory,"ProjectPlanning"));
     private readonly HashSet<Task> _backgroundTasks = [];
     private readonly object _backgroundSync = new();
     private readonly DispatcherTimer _blinkTimer;
@@ -119,6 +122,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private bool _nextCaptureIncludeProject=true,_nextCaptureIncludeDate=true;
     private int _nextCaptureCounter=1;
     private NextCaptureAdjustment _nextCaptureAdjustment;
+    private ShootExecutionContext? _executionContext;
 
     public TetherCaptureViewModel(
         WatchFolderCameraAdapter adapter,
@@ -407,6 +411,16 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public string NextCaptureFreeSpace { get { try { if(string.IsNullOrWhiteSpace(NextCaptureFolder))return "未选择目标文件夹";var drive=new DriveInfo(Path.GetPathRoot(Path.GetFullPath(NextCaptureFolder))!);return $"剩余空间 {FormatBytes(drive.AvailableFreeSpace)}";}catch{return "剩余空间暂时不可读取";} } }
     public IReadOnlyList<TetherChoice<NextCaptureAdjustment>> NextCaptureAdjustmentOptions { get; }=[new(NextCaptureAdjustment.None,"无"),new(NextCaptureAdjustment.PreviousRatingAndLabel,"上一张评分 / 标签"),new(NextCaptureAdjustment.CurrentColorScheme,"当前色彩方案"),new(NextCaptureAdjustment.ProjectDefaultColorScheme,"项目默认色彩方案")];
 
+    public async Task ApplyExecutionContextAsync(ShootExecutionContext context, CancellationToken cancellationToken = default)
+    {
+        _executionContext=context;
+        SelectedProject = ProjectOptions.FirstOrDefault(item => item.Id == context.ProjectId) ?? new(context.ProjectId, "当前项目");
+        await ReferenceMode.SetProjectAsync(context.ProjectId, cancellationToken);
+        await ShotExecution.LoadAsync(context.ProjectId, cancellationToken);
+        if (context.CurrentShotId is Guid shotId) await ShotExecution.SelectAsync(shotId);
+        StatusText = "已载入策划中心的当前拍摄与参考；可选择看守文件夹开始现场拍摄。";
+    }
+
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await ColorSettings.InitializeAsync(cancellationToken);
@@ -666,6 +680,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
         foreach (var record in snapshot.Assets)
         {
+            if(_executionContext is{} context&&record.ProjectId==context.ProjectId&&!_captureContexts.ContainsKey(record.Id))_captureContexts[record.Id]=context;
             if (_assetIndex.TryGetValue(record.Id, out var existing)) existing.Update(record, _proxyCache.ResolvePath(record.ProxyCacheKey));
             else
             {
@@ -679,6 +694,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         foreach (var ready in snapshot.Assets.Where(IsReady).OrderBy(asset => asset.ReadyAtUtc ?? asset.FirstSeenAtUtc))
         {
             if (!_knownReadyAssets.Add(ready.Id)) continue;
+            if(_captureContexts.Remove(ready.Id,out var frozen)&&frozen.CurrentShotId is not null)Track(RelationCaptureAsync(frozen,ready));
             ColorSettings.NotifyLatest(ready.Id);
             var selected = _selectionCoordinator.OnReady(ready.Id);
             if (selected.HasValue && _assetIndex.TryGetValue(selected.Value, out var item)) SetSelected(item, false);
@@ -694,6 +710,13 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             _ => "看守已停止。"
         };
         NotifyCounts();
+    }
+
+    private async Task RelationCaptureAsync(ShootExecutionContext context,TetherAssetRecord asset)
+    {
+        try{await _planningStore.AddCaptureRelationAsync(context.BindTetherCapture(asset.Id,asset.ReadyAtUtc??asset.FirstSeenAtUtc),_lifetime.Token);}
+        catch(OperationCanceledException){}
+        catch(Exception ex)when(ex is IOException or UnauthorizedAccessException or InvalidDataException){StatusText="照片已进入联机监看；拍摄关联将在稍后重试。";}
     }
 
     private async Task LoadSelectedAsync(TetherAssetItemViewModel item, CancellationToken cancellationToken)

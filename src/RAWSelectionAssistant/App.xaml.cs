@@ -279,6 +279,12 @@ public partial class App : Application
                 rawToJpegPage: new RawToJpegViewModel(_compositionRoot.RawToJpegCoordinator, dialogService),
                 batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService),
                 publishingPage: new PublishingExportViewModel(_compositionRoot.PublishingCoordinator, new Services.Publishing.WpfPublishingRenderer(), dialogService));
+            var planningPage = new PlanningCenterViewModel(
+                _compositionRoot.ProjectRepository,
+                _compositionRoot.ShootBookingService,
+                dialogService,
+                inspiration: new SqliteInspirationTrayService(calendarAssetDatabasePath));
+            _mainViewModel.AttachPlanningPage(planningPage);
 
             calendarViewModel.FinanceRequested += async (_, request) =>
             {
