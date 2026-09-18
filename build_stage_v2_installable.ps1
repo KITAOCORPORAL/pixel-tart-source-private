@@ -11,6 +11,7 @@ if (Test-Path -LiteralPath $publish) { Remove-Item -LiteralPath $publish -Recurs
 if (Test-Path -LiteralPath $installer) { Remove-Item -LiteralPath $installer -Recurse -Force }
 New-Item -ItemType Directory -Force -Path $publish,$installer | Out-Null
 $productSourceSha = (& git -C $repoRoot rev-parse HEAD).Trim()
+$buildId = '2.3.0-dev.' + $productSourceSha.Substring(0,7)
 if (& git -C $repoRoot status --porcelain -- src tests | Select-String -Pattern '^ M|^\?\?' ) { throw 'Product source and test tree must be clean before packaging.' }
 & $dotnet publish (Join-Path $repoRoot 'src\RAWSelectionAssistant\RAWSelectionAssistant.csproj') -c Release -r win-x64 --self-contained true -p:DeveloperPreviewBuild=true -p:ContinuousIntegrationBuild=true -p:DebugType=None -p:DebugSymbols=false -p:SourceRevisionId=$productSourceSha -warnaserror -o $publish --no-restore
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -18,11 +19,12 @@ $forbidden = @(Get-ChildItem -LiteralPath $publish -Recurse -File | Where-Object
 if ($forbidden.Count -gt 0) { throw ('Forbidden runtime files: ' + ($forbidden.Name -join ', ')) }
 $iscc = @((Join-Path $env:LOCALAPPDATA 'Programs\Inno Setup 7\ISCC.exe'),(Join-Path $env:LOCALAPPDATA 'Programs\Inno Setup 6\ISCC.exe'),'C:\Program Files (x86)\Inno Setup 6\ISCC.exe','C:\Program Files\Inno Setup 6\ISCC.exe') | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 if (-not $iscc) { throw 'Inno Setup was not found.' }
-& $iscc (Join-Path $repoRoot 'installer\PixelTartDeveloperPreview.iss')
+$outputBaseName = "PixelTart-DeveloperPreview-$buildId-x64-Setup"
+& $iscc "/DAppVersion=$buildId" "/DOutputBaseFilename=$outputBaseName" (Join-Path $repoRoot 'installer\PixelTartDeveloperPreview.iss')
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 $setup = Get-ChildItem -LiteralPath $installer -Filter '*Setup.exe' -File | Select-Object -First 1
 if (-not $setup) { throw 'Installer was not created.' }
-$manifest = [ordered]@{ ProductName='像素蛋挞 Pixel Tart 开发预览版'; BuildId=('2.3.0-dev.' + $productSourceSha.Substring(0,7)); Branch='integration/pixel-tart-developer-preview'; ProductSourceSha=$productSourceSha; InstallerPackagingSha=$productSourceSha; InstallerFileName=$setup.Name; InstallerSha256=(Get-FileHash -LiteralPath $setup.FullName -Algorithm SHA256).Hash; PublishMode='Release self-contained'; RuntimeIdentifier='win-x64'; SelfContained=$true; BuildTime=[DateTimeOffset]::Now.ToString('O'); ReleaseBuildResult='PASS · 0 warnings / 0 errors'; CoreResult='PASS · StageIV color/core tests'; WpfResult='PASS · StageV2 startup compatibility 3/3'; StartupSmokeResult='NOT RUN (user desktop launch not automated)'; InstallSmokeResult='NOT RUN (installer is not auto-run)' }
+$manifest = [ordered]@{ ProductName='像素蛋挞 Pixel Tart 开发预览版'; BuildId=$buildId; Branch='integration/pixel-tart-developer-preview'; ProductSourceSha=$productSourceSha; InstallerPackagingSha=$productSourceSha; InstallerFileName=$setup.Name; InstallerSha256=(Get-FileHash -LiteralPath $setup.FullName -Algorithm SHA256).Hash; PublishMode='Release self-contained'; RuntimeIdentifier='win-x64'; SelfContained=$true; BuildTime=[DateTimeOffset]::Now.ToString('O'); ReleaseBuildResult='PASS · 0 warnings / 0 errors'; CoreResult='PASS · StageIV color/core tests'; WpfResult='PASS · StageV2 startup compatibility 3/3'; StartupSmokeResult='NOT RUN (user desktop launch not automated)'; InstallSmokeResult='NOT RUN (installer is not auto-run)' }
 $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $installer 'INSTALLER_PROVENANCE.json') -Encoding UTF8
 $rows = foreach ($file in Get-ChildItem -LiteralPath $publish -Recurse -File) { [ordered]@{ RelativePath=$file.FullName.Substring($publish.Length+1).Replace('\','/'); Size=$file.Length; SHA256=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash } }
 @{ ProductSourceSha=$productSourceSha; Files=$rows } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $installer 'INSTALL_FILE_MANIFEST.json') -Encoding UTF8
