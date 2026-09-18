@@ -4,4 +4,11 @@
     <CornerRadius x:Key="RadiusCard">8</CornerRadius>
     <CornerRadius x:Key="RadiusDrawer">10</CornerRadius>
     <CornerRadius x:Key="RadiusModal">12</CornerRadius>
+    <!-- Product-level aliases keep feature views free of one-off radii. -->
+    <CornerRadius x:Key="CompactCornerRadius">4</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius>
+    <CornerRadius x:Key="CardCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="PopoverCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="DialogCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="LargePanelCornerRadius">10</CornerRadius>
 </ResourceDictionary>

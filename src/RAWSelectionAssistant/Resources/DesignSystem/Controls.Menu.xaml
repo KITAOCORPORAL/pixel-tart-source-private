@@ -25,7 +25,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
+                            CornerRadius="{DynamicResource PopoverCornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             SnapsToDevicePixels="True">
                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -131,7 +131,7 @@
                                     Background="{DynamicResource MenuPopupBackgroundBrush}"
                                     BorderBrush="{DynamicResource MenuPopupBorderBrush}"
                                     BorderThickness="1"
-                                    CornerRadius="6"
+                                    CornerRadius="{DynamicResource PopoverCornerRadius}"
                                     Padding="4"
                                     SnapsToDevicePixels="True">
                                 <ScrollViewer CanContentScroll="True"

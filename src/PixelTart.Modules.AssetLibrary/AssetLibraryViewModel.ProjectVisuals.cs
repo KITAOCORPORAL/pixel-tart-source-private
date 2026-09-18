@@ -33,7 +33,7 @@ public sealed partial class AssetLibraryViewModel
             item.Asset.DisplayName, GetDisplaySourcePath(item.Asset), item.Asset.ContentHash ?? item.Analysis.ContentHash,
             weight, item.Analysis, kind, containerId)).ToArray();
         var now = DateTimeOffset.UtcNow;
-        var look = new ReferenceLook(Guid.NewGuid(), string.IsNullOrWhiteSpace(name) ? $"项目 Look {now:MMdd-HHmm}" : name,
+        var look = new ReferenceLook(Guid.NewGuid(), string.IsNullOrWhiteSpace(name) ? $"项目色彩方案 {now:MMdd-HHmm}" : name,
             projectId, sources, new(), now, now).Normalize();
         await new ReferenceLookStore(ProjectVisualDirectory).SaveAsync(look, token: _lifetimeCancellation.Token);
         return look;

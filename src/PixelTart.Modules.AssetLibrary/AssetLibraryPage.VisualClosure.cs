@@ -78,10 +78,10 @@ public partial class AssetLibraryPage
         try
         {
             var look = await _viewModel.CreateProjectLookAsync(project.Id, VisualLookName.Text, _visualPayload, _visualSourceKind, _visualContainerId);
-            await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目 Look 已创建");
+            await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目色彩方案已创建");
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or ArgumentException)
-        { ShowVisualToast("项目 Look 未保存，请检查参考和存储位置。"); }
+        { ShowVisualToast("项目色彩方案未保存，请检查参考和存储位置。"); }
     }
     private async void VisualProject_SelectionChanged(object sender, SelectionChangedEventArgs e) => await RefreshProjectLooksAsync();
     private async Task RefreshProjectLooksAsync(Guid? select = null)
@@ -94,23 +94,23 @@ public partial class AssetLibraryPage
     private async void RenameProjectLook_Click(object sender, RoutedEventArgs e)
     {
         if (VisualLookPicker.SelectedItem is not ReferenceLook look || string.IsNullOrWhiteSpace(VisualLookName.Text)) return;
-        await _viewModel.SaveProjectLookAsync(look with { Name = VisualLookName.Text.Trim() }); await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目 Look 已重命名");
+        await _viewModel.SaveProjectLookAsync(look with { Name = VisualLookName.Text.Trim() }); await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目色彩方案已重命名");
     }
     private async void DuplicateProjectLook_Click(object sender, RoutedEventArgs e)
     {
         if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
         var copy = look with { ReferenceLookId = Guid.NewGuid(), Name = look.Name + " 副本", CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow };
-        await _viewModel.SaveProjectLookAsync(copy); await RefreshProjectLooksAsync(copy.ReferenceLookId); ShowVisualToast("项目 Look 已复制");
+        await _viewModel.SaveProjectLookAsync(copy); await RefreshProjectLooksAsync(copy.ReferenceLookId); ShowVisualToast("项目色彩方案已复制");
     }
     private async void DefaultProjectLook_Click(object sender, RoutedEventArgs e)
     {
         if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
-        await _viewModel.SaveProjectLookAsync(look, true); ShowVisualToast("已设为项目默认 Look");
+        await _viewModel.SaveProjectLookAsync(look, true); ShowVisualToast("已设为项目默认色彩方案");
     }
     private async void DeleteProjectLook_Click(object sender, RoutedEventArgs e)
     {
         if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
-        await _viewModel.DeleteProjectLookAsync(look.ReferenceLookId); await RefreshProjectLooksAsync(); ShowVisualToast("Look 引用已删除；参考照片未删除");
+        await _viewModel.DeleteProjectLookAsync(look.ReferenceLookId); await RefreshProjectLooksAsync(); ShowVisualToast("色彩方案引用已删除；参考照片未删除");
     }
     private sealed record VisualProjectChoice(Guid Id, string Name);
 }

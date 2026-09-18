@@ -22,7 +22,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private bool _advancedExpanded;
     private string _viewMode = "左右对比";
     private double _splitPosition = .5;
-    private string _statusText = "选择项目 Look 后可进行现场监看仿色。";
+    private string _statusText = "选择项目色彩方案后可进行现场监看仿色。";
     private bool _originalHeld;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
 
@@ -37,7 +37,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public AsyncRelayCommand ApplyCommand { get; }
     public AsyncRelayCommand ReloadCommand { get; }
     public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); _ = RenderAsync(); } } }
-    public string CurrentLookText => SelectedLook?.Name ?? "未选择 Look";
+    public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
     public bool ApplyToFollowing { get => _applyToFollowing; set => SetProperty(ref _applyToFollowing, value); }

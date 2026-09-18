@@ -17,7 +17,8 @@
     <sys:Double x:Key="PageContentMaxWidth">1360</sys:Double><sys:Double x:Key="ToolModalMinWidth">760</sys:Double><sys:Double x:Key="ToolModalMaxWidth">960</sys:Double><sys:Double x:Key="PlanningModalMaxWidth">1000</sys:Double>
     <sys:Double x:Key="DrawerCompactWidth">360</sys:Double><sys:Double x:Key="DrawerDefaultWidth">420</sys:Double><sys:Double x:Key="DrawerWideWidth">480</sys:Double>
     <Thickness x:Key="SectionSpacing">0,24,0,0</Thickness><Thickness x:Key="CardSpacing">0,0,12,12</Thickness><Thickness x:Key="CardPadding">16</Thickness>
-    <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius><CornerRadius x:Key="CardCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="CompactCornerRadius">4</CornerRadius><CornerRadius x:Key="ControlCornerRadius">6</CornerRadius><CornerRadius x:Key="CardCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="PopoverCornerRadius">10</CornerRadius><CornerRadius x:Key="DialogCornerRadius">12</CornerRadius><CornerRadius x:Key="LargePanelCornerRadius">10</CornerRadius>
     <Duration x:Key="FastAnimationDuration">0:0:0.12</Duration><Duration x:Key="StandardAnimationDuration">0:0:0.16</Duration><Duration x:Key="SlowAnimationDuration">0:0:0.18</Duration>
     <!-- Pixel Tart v1.0 canonical size and motion tokens. -->
     <sys:Double x:Key="Size.Control.Compact">32</sys:Double><sys:Double x:Key="Size.Control.Default">38</sys:Double><sys:Double x:Key="Size.Control.Large">44</sys:Double>
