@@ -1242,7 +1242,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _importDiagnostics.Snapshot.RepositoryAssetCountBefore = (await _repository.QueryAsync(new(PageSize: 1))).TotalCount;
             _importDiagnostics.Snapshot.ImportServiceEntered = true;
             _importDiagnostics.Save();
-            var result = await _repository.ImportAsync(selected.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            var result = await ImportWithDecisionsAsync(selected);
             _importDiagnostics.Snapshot.ImportedCount = result.ImportedCount;
             _importDiagnostics.Snapshot.SkippedCount = result.SkippedCount;
             _importDiagnostics.Snapshot.FailedCount = result.MissingCount;
@@ -1265,7 +1265,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         if (selected.Length == 0) { Status = "拖入内容中没有可索引的摄影素材。"; return; }
         try
         {
-            var result = await _repository.ImportAsync(selected.Select(path => new AssetImportRequest(path, ComputeContentHash: true)));
+            var result = await ImportWithDecisionsAsync(selected);
             Status = $"已从资源管理器索引 {result.ImportedCount:N0} 项，跳过重复 {result.SkippedCount:N0} 项；未移动或修改源文件。";
             await RefreshAsync();
         }

@@ -1178,11 +1178,15 @@
                 AutomationProperties.AutomationId="VisualAnalysisContextSurface">
             <DockPanel>
                 <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12"><Button DockPanel.Dock="Right" Content="关闭" Click="CloseVisualAnalysis_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><StackPanel><TextBlock x:Name="VisualAnalysisTitle" Text="视觉分析" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock x:Name="VisualAnalysisSubtitle" Text="客观分析当前图像，不修改源文件" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                    <TextBlock x:Name="VisualCopyToast" Visibility="Collapsed" Foreground="{DynamicResource Brush.Accent}" Margin="6" />
+                    <WrapPanel><TextBlock Text="保存到项目" VerticalAlignment="Center" Margin="0,0,8,0" /><ComboBox x:Name="VisualProjectPicker" Width="190" DisplayMemberPath="Name" ToolTip="选择项目" /><Button Content="设为默认配色" Click="SaveVisualPalette_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="设为影调目标" Click="SaveVisualTone_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></WrapPanel>
+                </StackPanel>
                 <TabControl x:Name="VisualAnalysisContextTabs" Background="Transparent" BorderBrush="{DynamicResource Brush.Border}" ItemContainerStyle="{StaticResource AssetInspectorTabItem}">
                     <TabItem Header="配色"><ScrollViewer><StackPanel Margin="12"><WrapPanel x:Name="VisualAnalysisPaletteSwatches" /><TextBlock x:Name="VisualAnalysisPaletteSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" TextWrapping="Wrap" /><WrapPanel><Button Content="3 色" Click="VisualPalette3_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="5 色" Click="VisualPalette5_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="7 色" Click="VisualPalette7_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></WrapPanel></StackPanel></ScrollViewer></TabItem>
                     <TabItem Header="黑白"><Grid Margin="12"><Image x:Name="VisualMonochromeImage" Stretch="Uniform" /><TextBlock VerticalAlignment="Bottom" Text="用于观察明暗结构、主体分离与视觉重心；不写入源文件。" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="8" /></Grid></TabItem>
                     <TabItem Header="直方图"><StackPanel Margin="12"><local:HistogramDrawing x:Name="VisualContextHistogram" Height="220" /><TextBlock x:Name="VisualHistogramSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" /></StackPanel></TabItem>
-                    <TabItem Header="影调分区"><ScrollViewer><StackPanel Margin="12"><Image x:Name="VisualZoneMapImage" Height="340" Stretch="Uniform" /><ItemsControl x:Name="VisualZoneRows" Margin="0,10" /><TextBlock x:Name="VisualZoneSummary" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></ScrollViewer></TabItem>
+                    <TabItem Header="影调分区"><ScrollViewer><StackPanel Margin="12"><Image x:Name="VisualZoneMapImage" Height="340" Stretch="Uniform" /><TextBlock Text="悬停分区查看对应区域 · 基于当前图像" Style="{DynamicResource PixelTart.Type.Metadata}" /><ItemsControl x:Name="VisualZoneRows" Margin="0,10"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel></ItemsControl><TextBlock x:Name="VisualZoneSummary" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></ScrollViewer></TabItem>
                 </TabControl>
             </DockPanel>
         </Border>
@@ -1210,5 +1214,11 @@
         </DockPanel>
       </Grid>
       <ContentControl x:Name="CanvasWorkspace" Panel.ZIndex="100" Visibility="Collapsed" AutomationProperties.AutomationId="FreeCanvasWorkspace" />
+      <Border x:Name="DuplicateImportSurface" Panel.ZIndex="120" Visibility="Collapsed" Width="760" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="8" Padding="22" AutomationProperties.Name="发现完全重复素材">
+          <StackPanel><TextBlock Text="发现完全重复素材" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock x:Name="DuplicateImportName" Margin="0,8" /><TextBlock Text="内容与已有素材一致。默认跳过，不修改原照片。" Style="{DynamicResource PixelTart.Type.Metadata}" />
+              <Grid x:Name="DuplicateImportComparison" Visibility="Collapsed" Margin="0,16"><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions><StackPanel><Image x:Name="DuplicateIncomingImage" Height="240" Stretch="Uniform" /><TextBlock x:Name="DuplicateIncomingName" TextTrimming="CharacterEllipsis" /></StackPanel><StackPanel Grid.Column="1" Margin="12,0,0,0"><Image x:Name="DuplicateExistingImage" Height="240" Stretch="Uniform" /><TextBlock x:Name="DuplicateExistingName" TextTrimming="CharacterEllipsis" /></StackPanel></Grid>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0"><Button x:Name="DuplicateSkipButton" Content="跳过" IsDefault="True" Click="DuplicateSkip_Click" Style="{DynamicResource PixelTart.Button.Primary}" /><Button Content="查看重复" Click="DuplicateView_Click" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="8,0" /><Button Content="仍然导入" Click="DuplicateAnyway_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
+          </StackPanel>
+      </Border>
     </Grid>
 </UserControl>

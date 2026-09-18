@@ -90,6 +90,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             thumbnailProvider);
         _viewModel.SelectionToolHandler = selectionToolHandler;
         _viewModel.OpenCanvasHandler = OpenCanvasAsync;
+        _viewModel.DuplicateImportDecision = ShowDuplicateImportAsync;
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;
         _viewModel.ViewModeChanging += ViewModel_ViewModeChanging;
         _viewModel.ViewModeChanged += ViewModel_ViewModeChanged;
@@ -183,6 +184,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         if (_canvas is not null && !await _canvas.FlushAsync()) throw new IOException("画布未能保存，无法释放工作区。");
         if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
         _disposed = true;
+        _visualRevision++;
+        _visualToastTimer?.Stop();
+        _duplicateImportCompletion?.TrySetResult(RAWSelectionAssistant.Core.Services.AssetLibrary.Duplicates.DuplicateImportChoice.Skip);
         _pendingSelectionSync?.Abort();
         _pendingSelectionSync = null;
         _pendingPaneWidthCommit?.Abort();
@@ -905,7 +909,11 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void OpenVisualAnalysisMonochrome_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),1);
     private async void OpenVisualAnalysisHistogram_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),2);
     private async void OpenVisualAnalysisZones_Click(object sender,RoutedEventArgs e)=>await OpenVisualAnalysisAsync(ContextAsset(sender),3);
-    private void CloseVisualAnalysis_Click(object sender,RoutedEventArgs e)=>VisualAnalysisSurface.Visibility=Visibility.Collapsed;
+    private void CloseVisualAnalysis_Click(object sender,RoutedEventArgs e)
+    {
+        VisualAnalysisSurface.Visibility=Visibility.Collapsed;
+        if(_visualSourceKind=="Canvas"&&_canvas is not null){CanvasWorkspace.Visibility=Visibility.Visible;LibraryWorkspace.Visibility=Visibility.Collapsed;}
+    }
     private void CloseDuplicateWorkspace_Click(object sender, RoutedEventArgs e) => _viewModel.IsDuplicateWorkspaceOpen = false;
     public bool IsVisualAnalysisSurfaceVisibleForProductHarness => VisualAnalysisSurface.Visibility == Visibility.Visible;
     public async Task OpenVisualAnalysisForProductHarnessAsync(int tab = 0, bool combined = false)
@@ -929,36 +937,50 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         var assets=new List<AssetItem>();
         foreach(var card in cards)if(card.Entry.Reference.LibraryId==_viewModel.CanvasLibraryId&&await _viewModel.GetAssetForAnalysisAsync(card.AssetId) is {} asset)assets.Add(asset);
         if(assets.Count==0){MessageBox.Show(Window.GetWindow(this),"当前灵感板没有可在本素材库分析的照片。","视觉分析",MessageBoxButton.OK,MessageBoxImage.Information);return;}
+        _visualSourceKind="Board";_visualContainerId=_viewModel.ActiveCollectionId;
         _visualSurfaceAssets=assets;VisualAnalysisContextTabs.SelectedIndex=0;await RefreshVisualSurfaceAsync();VisualAnalysisSurface.Visibility=Visibility.Visible;
     }
 
     private async Task OpenVisualAnalysisAsync(AssetItem? asset,int tab)
     {
-        if(asset is null)return;_visualSurfaceAssets=[asset];VisualAnalysisContextTabs.SelectedIndex=tab;await RefreshVisualSurfaceAsync();VisualAnalysisSurface.Visibility=Visibility.Visible;
+        if(asset is null)return;_visualSourceKind="Asset";_visualContainerId=null;_visualSurfaceAssets=[asset];VisualAnalysisContextTabs.SelectedIndex=tab;await RefreshVisualSurfaceAsync();VisualAnalysisSurface.Visibility=Visibility.Visible;
     }
 
     private async Task RefreshVisualSurfaceAsync()
     {
         if(_visualSurfaceAssets.Count==0)return;
+        var revision=++_visualRevision;
         try
         {
             VisualAnalysisSubtitle.Text="正在分析…";
             var payload=await _viewModel.AnalyzeAssetsForSurfaceAsync(_visualSurfaceAssets,_visualSurfacePaletteSize);
+            if(revision!=_visualRevision||_disposed)return;
+            _visualPayload=payload;
             var result=payload.Aggregate;VisualAnalysisTitle.Text=payload.Items.Count==1?$"视觉分析 · {payload.Items[0].Asset.DisplayName}":$"视觉分析 · {payload.Items.Count} 张";
             VisualAnalysisPaletteSwatches.Children.Clear();
             foreach(var color in result.Palette)
             {
                 var panel=new StackPanel{Margin=new(4),Width=120};var swatch=new Border{Height=72,CornerRadius=new(4)};swatch.Background=new SolidColorBrush(Color.FromRgb(color.Rgb.R,color.Rgb.G,color.Rgb.B));
-                var hsl=$"H {color.Hue:F0}°  S {color.Saturation:P0}  L {color.Lightness:P0}";var button=new Button{Content=$"{color.Hex}\n{hsl}\n{color.Weight:P0}",ToolTip="点击复制 HEX"};button.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");button.Click+=(_,_)=>Clipboard.SetText(color.Hex);panel.Children.Add(swatch);panel.Children.Add(button);VisualAnalysisPaletteSwatches.Children.Add(panel);
+                var hsl=$"H {color.Hue:F0}°  S {color.Saturation:P0}  L {color.Lightness:P0}";var button=new Button{Content=$"{color.Hex}\n{hsl}\n{color.Weight:P0}",ToolTip="点击复制 HEX"};button.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");button.Click+=(_,_)=>CopyPaletteValue(color.Hex);
+                var copyHsl=new Button{Content="复制 HSL"};copyHsl.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");copyHsl.Click+=(_,_)=>CopyPaletteValue(PaletteClipboardText.Hsl(color));
+                panel.Children.Add(swatch);panel.Children.Add(button);panel.Children.Add(copyHsl);VisualAnalysisPaletteSwatches.Children.Add(panel);
             }
             VisualAnalysisPaletteSummary.Text=$"冷暖倾向：{result.WarmCool} · 平均饱和度 {result.AverageSaturation:P0} · 平均明度 {result.AverageLightness:P0}";
             VisualContextHistogram.Analysis=payload.Items[0].Analysis;VisualHistogramSummary.Text=$"阴影裁切 {payload.Items.Average(item=>item.Analysis.BlackClipRatio):P2} · 高光裁切 {payload.Items.Average(item=>item.Analysis.WhiteClipRatio):P2}";
-            VisualZoneRows.ItemsSource=Enumerable.Range(0,11).Select(zone=>$"Zone {RomanZone(zone),-4}  {result.Zones[zone]:P1}").ToArray();VisualZoneSummary.Text=$"主要影调：Zone {RomanZone(result.Zones.FirstPrimaryZone)} - {RomanZone(result.Zones.LastPrimaryZone)} · 暗调 {result.DarkRatio:P0} · 中调 {result.MidRatio:P0} · 亮调 {result.BrightRatio:P0}";
+            PopulateZoneRows(result);VisualZoneSummary.Text=$"主要影调：Zone {RomanZone(result.Zones.FirstPrimaryZone)} - {RomanZone(result.Zones.LastPrimaryZone)} · 暗调 {result.DarkRatio:P0} · 中调 {result.MidRatio:P0} · 亮调 {result.BrightRatio:P0}";
             if(payload.Items.Count==1)
             {
-                var pixels=payload.Items[0].Pixels;VisualMonochromeImage.Source=Bitmap(_viewModel.VisualAnalysisService.CreateMonochrome(pixels));VisualZoneMapImage.Source=Bitmap(_viewModel.VisualAnalysisService.CreateZoneMap(pixels));
+                var pixels=payload.Items[0].Pixels;
+                var frames=await Task.Run(()=>
+                {
+                    var hover=new VisualZoneHoverPreview(pixels,_viewModel.VisualAnalysisService.CreateZoneMap(pixels));
+                    return (Original:Bitmap(pixels),Mono:Bitmap(_viewModel.VisualAnalysisService.CreateMonochrome(pixels)),Hover:Enumerable.Range(0,11).Select(zone=>Bitmap(hover.Select(zone))).ToArray());
+                });
+                if(revision!=_visualRevision||_disposed)return;
+                _zoneOriginal=frames.Original;_zoneHoverFrames=frames.Hover;VisualMonochromeImage.Source=frames.Mono;SelectVisualZone(null);
             }
-            else{VisualMonochromeImage.Source=null;VisualZoneMapImage.Source=null;}
+            else{_zoneOriginal=null;_zoneHoverFrames=[];VisualMonochromeImage.Source=null;VisualZoneMapImage.Source=null;}
+            await LoadVisualProjectsAsync();
             VisualAnalysisSubtitle.Text="分析当前图像的最终视觉分布 · 不修改源文件";
         }
         catch(Exception exception)when(exception is IOException or NotSupportedException or InvalidOperationException){VisualAnalysisSubtitle.Text=$"暂时无法分析：{exception.Message}";}

@@ -48,6 +48,21 @@ public partial class AssetLibraryPage
         var picker=new ComboBox{Width=220,Margin=new(8,2,8,2),ItemsSource=projects.Select(item=>new CanvasProjectChoice(item.Id,item.Name)).ToArray(),DisplayMemberPath=nameof(CanvasProjectChoice.Name),SelectedValuePath=nameof(CanvasProjectChoice.Id),ToolTip="关联项目"};
         picker.SelectedItem=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==document.ProjectId)??picker.Items[0];
         picker.SelectionChanged+=(_,_)=>{if(picker.SelectedItem is CanvasProjectChoice item)editor.SetProject(item.Id);};canvas.HeaderPanel.Children.Add(picker);
+        var analyzeProject = new Button { Content="保存配色 / 影调到项目", Margin=new(4), ToolTip="分析选中的照片并保存项目视觉参考" };
+        analyzeProject.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");
+        analyzeProject.Click += async (_,_) =>
+        {
+            var selected = editor.Selected.Where(item=>item.IsImage).ToArray();
+            var assets = new List<AssetItem>();
+            foreach(var item in selected)
+                if(item.LibraryId==_viewModel.CanvasLibraryId && item.AssetId is Guid id && await _viewModel.GetAssetForAnalysisAsync(id) is {} asset) assets.Add(asset);
+            if(assets.Count==0){MessageBox.Show(Window.GetWindow(this),"请先选择画布中的照片。","项目视觉参考");return;}
+            _visualSourceKind="Canvas";_visualContainerId=editor.Document.CanvasId;_visualSurfaceAssets=assets;
+            VisualAnalysisContextTabs.SelectedIndex=0;await RefreshVisualSurfaceAsync();
+            VisualProjectPicker.SelectedItem=VisualProjectPicker.Items.Cast<VisualProjectChoice>().FirstOrDefault(item=>item.Id==editor.Document.ProjectId);
+            LibraryWorkspace.Visibility=Visibility.Visible;CanvasWorkspace.Visibility=Visibility.Collapsed;VisualAnalysisSurface.Visibility=Visibility.Visible;
+        };
+        canvas.HeaderPanel.Children.Add(analyzeProject);
         editor.Changed+=(_,_)=>{var choice=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==editor.Document.ProjectId);if(choice is not null&&!Equals(choice,picker.SelectedItem))picker.SelectedItem=choice;};
         LibraryWorkspace.Visibility=Visibility.Collapsed;
         CanvasWorkspace.Content=canvas;CanvasWorkspace.Visibility=Visibility.Visible;
