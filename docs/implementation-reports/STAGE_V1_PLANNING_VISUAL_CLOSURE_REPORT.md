@@ -11,7 +11,7 @@ Stage V.1 完成了策划中心的视觉产品化和验收准备，但没有把�
 | 项目 | 结果 |
 |---|---|
 | Start SHA | `d0a7d846c03ecb7b6d6427e3defc5ab0f53710d2` |
-| Final SHA | 本报告发布提交后的 `git rev-parse HEAD` |
+| Final SHA | `b258f08355408d7e531dc7d98f5cfe46e0a52d1c` |
 | Branch | `integration/pixel-tart-developer-preview` |
 | Scope | Stage V.1 Planning UI / UX / Acceptance Closure |
 
