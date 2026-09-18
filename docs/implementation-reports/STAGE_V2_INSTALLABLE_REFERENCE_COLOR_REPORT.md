@@ -27,6 +27,8 @@ Fresh Install、Installed Launch、Planning Toggle、Tether、Reference Mode、U
 - `PlanningCenterView` 的 `ToggleButton` 不再使用 `Button` 类型样式。
 - 启动失败后的 booking editor 清理链增加空引用保护。
 - 新增 `StageV2StartupCompatibilityTests`，3/3 通过。
+- 独立工具箱入口、共享对比、中文语言、Session 隔离与显式保存相关 WPF 聚焦测试 12/12 通过。
+- 工具注册、工具箱、色彩与参考核心聚焦测试 67/67 通过。
 
 ## 运行时包安全
 
