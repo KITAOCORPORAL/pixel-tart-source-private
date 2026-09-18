@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="5ae15a45-bfed-4001-99ec-2f556f80586a" name="Administrator@PC-20250309WEIZ 2026-09-18 13:28:10" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-18T13:28:10.5194571+08:00" queuing="2026-09-18T13:28:10.5194572+08:00" start="2026-09-18T13:28:09.6408674+08:00" finish="2026-09-18T13:28:10.5241414+08:00" />
+  <TestSettings name="default" id="25018052-0977-4ace-bfbf-66058340b86d">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-18_13_28_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8220300a-63c5-4ef2-b28e-a84ff58d3f50" testId="1712adcf-0d33-8209-8097-cec3f116a765" testName="DuplicateCaptureRelationsRemainIdempotentAtScale" computerName="PC-20250309WEIZ" duration="00:00:00.3047082" startTime="2026-09-18T13:28:10.1054477+08:00" endTime="2026-09-18T13:28:10.4263240+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8220300a-63c5-4ef2-b28e-a84ff58d3f50" />
+    <UnitTestResult executionId="e81618b9-6062-4b0a-bc43-814a81cf5afe" testId="11151a27-7c95-8c72-b610-5170c6f7170d" testName="EmptyStageIvProjectMigratesWithoutCentralDatabaseMutation" computerName="PC-20250309WEIZ" duration="00:00:00.0140269" startTime="2026-09-18T13:28:10.1054397+08:00" endTime="2026-09-18T13:28:10.1369820+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e81618b9-6062-4b0a-bc43-814a81cf5afe" />
+    <UnitTestResult executionId="86247ad3-4533-4471-bc96-bf02d09d4c31" testId="146d0f91-021f-8a24-8730-1ff92b6c9306" testName="MoodboardAndPlanningReferencesSupportLibraryAndExternalSources" computerName="PC-20250309WEIZ" duration="00:00:00.0123834" startTime="2026-09-18T13:28:10.1054146+08:00" endTime="2026-09-18T13:28:10.1369819+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86247ad3-4533-4471-bc96-bf02d09d4c31" />
+    <UnitTestResult executionId="967d080f-9dd2-4883-b4d8-123faaceddc6" testId="184204ad-7c7a-8b9d-9286-5cb10c946e9c" testName="ContextUsesSharedColorResolverAndCarriesReferencesWithoutBitmaps" computerName="PC-20250309WEIZ" duration="00:00:00.0961091" startTime="2026-09-18T13:28:10.1053991+08:00" endTime="2026-09-18T13:28:10.2187122+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="967d080f-9dd2-4883-b4d8-123faaceddc6" />
+    <UnitTestResult executionId="c7c9ea37-67d1-44ed-a0f1-b51b452746ba" testId="1449880d-d9a0-8a61-830f-8a411183e9f0" testName="FrozenCaptureContextIsRaceSafeAndRelationsAreIdempotent" computerName="PC-20250309WEIZ" duration="00:00:00.1014984" startTime="2026-09-18T13:28:10.1054228+08:00" endTime="2026-09-18T13:28:10.2224876+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c7c9ea37-67d1-44ed-a0f1-b51b452746ba" />
+    <UnitTestResult executionId="40dcb37c-a828-4fe5-bc8f-ae3e262948f2" testId="16ccbc7d-9f9f-824c-92d0-eac075277da6" testName="SummaryLinksAndCurrentShotPersistAcrossStoreReopen" computerName="PC-20250309WEIZ" duration="00:00:00.0985190" startTime="2026-09-18T13:28:10.1054522+08:00" endTime="2026-09-18T13:28:10.2195166+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="40dcb37c-a828-4fe5-bc8f-ae3e262948f2" />
+    <UnitTestResult executionId="96ec59b9-dc88-4d32-a6be-f6f5bad72677" testId="18116b70-d022-87cf-b8ed-8a4056a161e4" testName="PlanningOperationsNeverModifyOrDeleteReferencedSource" computerName="PC-20250309WEIZ" duration="00:00:00.1007498" startTime="2026-09-18T13:28:10.1054318+08:00" endTime="2026-09-18T13:28:10.2217345+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="96ec59b9-dc88-4d32-a6be-f6f5bad72677" />
+    <UnitTestResult executionId="95685b60-a6d3-4e5b-87f5-d0333e0497c5" testId="15a6ffac-0214-8e3b-ba87-2743f88195a2" testName="Planning200ShotsAnd1000ReferencesSmokeTest" computerName="PC-20250309WEIZ" duration="00:00:00.1100036" startTime="2026-09-18T13:28:10.1054068+08:00" endTime="2026-09-18T13:28:10.2309817+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95685b60-a6d3-4e5b-87f5-d0333e0497c5" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="EmptyStageIvProjectMigratesWithoutCentralDatabaseMutation" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="11151a27-7c95-8c72-b610-5170c6f7170d">
+      <Execution id="e81618b9-6062-4b0a-bc43-814a81cf5afe" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPersistenceTests" name="EmptyStageIvProjectMigratesWithoutCentralDatabaseMutation" />
+    </UnitTest>
+    <UnitTest name="ContextUsesSharedColorResolverAndCarriesReferencesWithoutBitmaps" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="184204ad-7c7a-8b9d-9286-5cb10c946e9c">
+      <Execution id="967d080f-9dd2-4883-b4d8-123faaceddc6" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningExecutionContextTests" name="ContextUsesSharedColorResolverAndCarriesReferencesWithoutBitmaps" />
+    </UnitTest>
+    <UnitTest name="MoodboardAndPlanningReferencesSupportLibraryAndExternalSources" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="146d0f91-021f-8a24-8730-1ff92b6c9306">
+      <Execution id="86247ad3-4533-4471-bc96-bf02d09d4c31" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.CreativeAssetContractTests" name="MoodboardAndPlanningReferencesSupportLibraryAndExternalSources" />
+    </UnitTest>
+    <UnitTest name="DuplicateCaptureRelationsRemainIdempotentAtScale" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1712adcf-0d33-8209-8097-cec3f116a765">
+      <Execution id="8220300a-63c5-4ef2-b28e-a84ff58d3f50" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningPerformanceSmokeTests" name="DuplicateCaptureRelationsRemainIdempotentAtScale" />
+    </UnitTest>
+    <UnitTest name="FrozenCaptureContextIsRaceSafeAndRelationsAreIdempotent" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1449880d-d9a0-8a61-830f-8a411183e9f0">
+      <Execution id="c7c9ea37-67d1-44ed-a0f1-b51b452746ba" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningExecutionContextTests" name="FrozenCaptureContextIsRaceSafeAndRelationsAreIdempotent" />
+    </UnitTest>
+    <UnitTest name="Planning200ShotsAnd1000ReferencesSmokeTest" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="15a6ffac-0214-8e3b-ba87-2743f88195a2">
+      <Execution id="95685b60-a6d3-4e5b-87f5-d0333e0497c5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningPerformanceSmokeTests" name="Planning200ShotsAnd1000ReferencesSmokeTest" />
+    </UnitTest>
+    <UnitTest name="PlanningOperationsNeverModifyOrDeleteReferencedSource" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="18116b70-d022-87cf-b8ed-8a4056a161e4">
+      <Execution id="96ec59b9-dc88-4d32-a6be-f6f5bad72677" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningSourceSafetyTests" name="PlanningOperationsNeverModifyOrDeleteReferencedSource" />
+    </UnitTest>
+    <UnitTest name="SummaryLinksAndCurrentShotPersistAcrossStoreReopen" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="16ccbc7d-9f9f-824c-92d0-eac075277da6">
+      <Execution id="40dcb37c-a828-4fe5-bc8f-ae3e262948f2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPersistenceTests" name="SummaryLinksAndCurrentShotPersistAcrossStoreReopen" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1712adcf-0d33-8209-8097-cec3f116a765" executionId="8220300a-63c5-4ef2-b28e-a84ff58d3f50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11151a27-7c95-8c72-b610-5170c6f7170d" executionId="e81618b9-6062-4b0a-bc43-814a81cf5afe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="146d0f91-021f-8a24-8730-1ff92b6c9306" executionId="86247ad3-4533-4471-bc96-bf02d09d4c31" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="184204ad-7c7a-8b9d-9286-5cb10c946e9c" executionId="967d080f-9dd2-4883-b4d8-123faaceddc6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1449880d-d9a0-8a61-830f-8a411183e9f0" executionId="c7c9ea37-67d1-44ed-a0f1-b51b452746ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16ccbc7d-9f9f-824c-92d0-eac075277da6" executionId="40dcb37c-a828-4fe5-bc8f-ae3e262948f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18116b70-d022-87cf-b8ed-8a4056a161e4" executionId="96ec59b9-dc88-4d32-a6be-f6f5bad72677" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15a6ffac-0214-8e3b-ba87-2743f88195a2" executionId="95685b60-a6d3-4e5b-87f5-d0333e0497c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
