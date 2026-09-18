@@ -23,4 +23,28 @@ public sealed partial class AssetLibraryViewModel
         else await store.SavePaletteAsync(projectId, new(payload.Aggregate.Palette, sources,
             DateTimeOffset.UtcNow, AssetVisualAnalysisResult.CurrentVersion), _lifetimeCancellation.Token);
     }
+
+    public async Task<ReferenceLook> CreateProjectLookAsync(Guid projectId, string name, VisualAnalysisSurfacePayload payload,
+        string kind = "Asset", Guid? containerId = null)
+    {
+        if (projectId == Guid.Empty) throw new ArgumentException("请选择项目。", nameof(projectId));
+        var weight = 1d / payload.Items.Count;
+        var sources = payload.Items.Select(item => new ReferenceLookSource(CanvasLibraryId, item.Asset.AssetId,
+            item.Asset.DisplayName, GetDisplaySourcePath(item.Asset), item.Asset.ContentHash ?? item.Analysis.ContentHash,
+            weight, item.Analysis, kind, containerId)).ToArray();
+        var now = DateTimeOffset.UtcNow;
+        var look = new ReferenceLook(Guid.NewGuid(), string.IsNullOrWhiteSpace(name) ? $"项目 Look {now:MMdd-HHmm}" : name,
+            projectId, sources, new(), now, now).Normalize();
+        await new ReferenceLookStore(ProjectVisualDirectory).SaveAsync(look, token: _lifetimeCancellation.Token);
+        return look;
+    }
+
+    public Task<ReferenceLookCatalog> LoadProjectLooksAsync() =>
+        new ReferenceLookStore(ProjectVisualDirectory).LoadAsync(_lifetimeCancellation.Token);
+
+    public Task SaveProjectLookAsync(ReferenceLook look, bool makeDefault = false) =>
+        new ReferenceLookStore(ProjectVisualDirectory).SaveAsync(look with { UpdatedAt = DateTimeOffset.UtcNow }, makeDefault, _lifetimeCancellation.Token);
+
+    public Task DeleteProjectLookAsync(Guid lookId) =>
+        new ReferenceLookStore(ProjectVisualDirectory).RemoveAsync(lookId, _lifetimeCancellation.Token);
 }

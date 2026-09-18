@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Projects;
 
 namespace PixelTart.Modules.AssetLibrary;
 
@@ -55,6 +56,7 @@ public partial class AssetLibraryPage
             .Select(item => new VisualProjectChoice(item.Id!.Value, item.Name)).ToArray();
         VisualProjectPicker.ItemsSource = choices;
         VisualProjectPicker.SelectedItem = choices.FirstOrDefault(item => item.Id == previous);
+        await RefreshProjectLooksAsync();
     }
     private async void SaveVisualPalette_Click(object sender, RoutedEventArgs e) => await SaveVisualProjectAsync(false);
     private async void SaveVisualTone_Click(object sender, RoutedEventArgs e) => await SaveVisualProjectAsync(true);
@@ -69,6 +71,46 @@ public partial class AssetLibraryPage
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or ArgumentException)
         { ShowVisualToast("项目视觉参考未保存，请检查存储位置后重试。"); }
+    }
+    private async void CreateProjectLook_Click(object sender, RoutedEventArgs e)
+    {
+        if (_visualPayload is null || VisualProjectPicker.SelectedItem is not VisualProjectChoice project) { ShowVisualToast("请先选择项目和参考照片。"); return; }
+        try
+        {
+            var look = await _viewModel.CreateProjectLookAsync(project.Id, VisualLookName.Text, _visualPayload, _visualSourceKind, _visualContainerId);
+            await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目 Look 已创建");
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or ArgumentException)
+        { ShowVisualToast("项目 Look 未保存，请检查参考和存储位置。"); }
+    }
+    private async void VisualProject_SelectionChanged(object sender, SelectionChangedEventArgs e) => await RefreshProjectLooksAsync();
+    private async Task RefreshProjectLooksAsync(Guid? select = null)
+    {
+        if (VisualProjectPicker.SelectedItem is not VisualProjectChoice project) { VisualLookPicker.ItemsSource = null; return; }
+        var catalog = await _viewModel.LoadProjectLooksAsync();
+        var looks = catalog.Looks.Where(item => item.ProjectId == project.Id).OrderByDescending(item => item.UpdatedAt).ToArray();
+        VisualLookPicker.ItemsSource = looks; VisualLookPicker.SelectedItem = looks.FirstOrDefault(item => item.ReferenceLookId == select) ?? looks.FirstOrDefault();
+    }
+    private async void RenameProjectLook_Click(object sender, RoutedEventArgs e)
+    {
+        if (VisualLookPicker.SelectedItem is not ReferenceLook look || string.IsNullOrWhiteSpace(VisualLookName.Text)) return;
+        await _viewModel.SaveProjectLookAsync(look with { Name = VisualLookName.Text.Trim() }); await RefreshProjectLooksAsync(look.ReferenceLookId); ShowVisualToast("项目 Look 已重命名");
+    }
+    private async void DuplicateProjectLook_Click(object sender, RoutedEventArgs e)
+    {
+        if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
+        var copy = look with { ReferenceLookId = Guid.NewGuid(), Name = look.Name + " 副本", CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow };
+        await _viewModel.SaveProjectLookAsync(copy); await RefreshProjectLooksAsync(copy.ReferenceLookId); ShowVisualToast("项目 Look 已复制");
+    }
+    private async void DefaultProjectLook_Click(object sender, RoutedEventArgs e)
+    {
+        if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
+        await _viewModel.SaveProjectLookAsync(look, true); ShowVisualToast("已设为项目默认 Look");
+    }
+    private async void DeleteProjectLook_Click(object sender, RoutedEventArgs e)
+    {
+        if (VisualLookPicker.SelectedItem is not ReferenceLook look) return;
+        await _viewModel.DeleteProjectLookAsync(look.ReferenceLookId); await RefreshProjectLooksAsync(); ShowVisualToast("Look 引用已删除；参考照片未删除");
     }
     private sealed record VisualProjectChoice(Guid Id, string Name);
 }
