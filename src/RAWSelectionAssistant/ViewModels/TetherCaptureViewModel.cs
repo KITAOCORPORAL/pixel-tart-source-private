@@ -31,6 +31,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly ITetherExifService _exifService;
     private readonly ITetherDisplaySettingsStore _displaySettingsStore;
     private readonly IProjectRepository? _projectRepository;
+    private readonly TetherZonePreviewService _zonePreview = new();
+    private readonly NextCaptureRuleStore _nextCaptureStore = new();
     private readonly LiveSelectionCoordinator _selectionCoordinator = new();
     private readonly CancellationTokenSource _lifetime = new();
     private readonly Dictionary<Guid, TetherAssetItemViewModel> _assetIndex = [];
@@ -111,6 +113,12 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private bool _reviewStateActive;
     private bool _isPageActive;
     private TetherProjectOption? _selectedProject;
+    private IReadOnlyList<BitmapSource> _zoneFrames = [];
+    private BitmapSource? _zoneHoverImage;
+    private string _nextCaptureProjectName="Project",_nextCapturePrefix="",_nextCaptureFolder="";
+    private bool _nextCaptureIncludeProject=true,_nextCaptureIncludeDate=true;
+    private int _nextCaptureCounter=1;
+    private NextCaptureAdjustment _nextCaptureAdjustment;
 
     public TetherCaptureViewModel(
         WatchFolderCameraAdapter adapter,
@@ -178,6 +186,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         UnlockLatestCommand = new RelayCommand(_ => UnlockAndSelectLatest(), _ => NewAssetCount > 0 || IsCurrentLocked);
         ToggleFullScreenCommand = new RelayCommand(_ => IsFullScreen = !IsFullScreen, _ => SelectedAsset is not null);
         ToggleInspectorCommand = new RelayCommand(_ => ShowInspectorDrawer = !ShowInspectorDrawer);
+        ChooseNextCaptureFolderCommand = new RelayCommand(_ => ChooseNextCaptureFolder());
         SetRatingCommand = new AsyncRelayCommand(SetRatingAsync, _ => SelectedAsset is not null && !IsAnnotationSaving);
         SetColorLabelCommand = new AsyncRelayCommand(SetColorLabelAsync, _ => SelectedAsset is not null && !IsAnnotationSaving);
         SaveNotesCommand = new AsyncRelayCommand(_ => SaveAnnotationAsync(), _ => SelectedAsset is not null && !IsAnnotationSaving);
@@ -260,6 +269,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public AsyncRelayCommand ClearReferenceCommand { get; }
     public AsyncRelayCommand RefreshAnalysisCommand { get; }
     public RelayCommand TogglePathCommand { get; }
+    public RelayCommand ChooseNextCaptureFolderCommand { get; }
 
     public string WatchDirectory { get => _watchDirectory; set { if (SetProperty(ref _watchDirectory, value)) { ExistingCandidateCount = 0; RefreshCommands(); } } }
     public string ProjectDestination { get => _projectDestination; set { if (SetProperty(ref _projectDestination, value)) RefreshCommands(); } }
@@ -319,6 +329,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public BitmapSource? ComparisonPrimaryImage { get => _comparisonPrimaryImage; private set => SetProperty(ref _comparisonPrimaryImage, value); }
     public BitmapSource? ComparisonSecondaryImage { get => _comparisonSecondaryImage; private set => SetProperty(ref _comparisonSecondaryImage, value); }
     public BitmapSource? ClippingOverlay { get => _clippingOverlay; private set => SetProperty(ref _clippingOverlay, value); }
+    public BitmapSource? ZoneHoverImage { get => _zoneHoverImage; private set => SetProperty(ref _zoneHoverImage, value); }
     public BitmapSource? ReferenceImage { get => _referenceImage; private set => SetProperty(ref _referenceImage, value); }
     public TetherHistogramData? Histogram { get => _histogram; private set => SetProperty(ref _histogram, value); }
     public TetherExifInfo? ExifInfo { get => _exifInfo; private set => SetProperty(ref _exifInfo, value); }
@@ -385,10 +396,22 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool IsRejected { get => _isRejected; set => SetProperty(ref _isRejected, value); }
     public bool IsAnnotationSaving { get => _isAnnotationSaving; private set { if (SetProperty(ref _isAnnotationSaving, value)) RefreshCommands(); } }
     public string AnnotationStatus { get => _annotationStatus; private set => SetProperty(ref _annotationStatus, value); }
+    public string NextCaptureProjectName { get=>_nextCaptureProjectName; set { if(SetProperty(ref _nextCaptureProjectName,value)){OnPropertyChanged(nameof(NextCaptureExample));Track(SaveNextCaptureRuleAsync());} } }
+    public string NextCapturePrefix { get=>_nextCapturePrefix; set { if(SetProperty(ref _nextCapturePrefix,value)){OnPropertyChanged(nameof(NextCaptureExample));Track(SaveNextCaptureRuleAsync());} } }
+    public bool NextCaptureIncludeProject { get=>_nextCaptureIncludeProject; set { if(SetProperty(ref _nextCaptureIncludeProject,value)){OnPropertyChanged(nameof(NextCaptureExample));Track(SaveNextCaptureRuleAsync());} } }
+    public bool NextCaptureIncludeDate { get=>_nextCaptureIncludeDate; set { if(SetProperty(ref _nextCaptureIncludeDate,value)){OnPropertyChanged(nameof(NextCaptureExample));Track(SaveNextCaptureRuleAsync());} } }
+    public int NextCaptureCounter { get=>_nextCaptureCounter; set { if(SetProperty(ref _nextCaptureCounter,Math.Max(1,value))){OnPropertyChanged(nameof(NextCaptureExample));Track(SaveNextCaptureRuleAsync());} } }
+    public string NextCaptureFolder { get=>_nextCaptureFolder; private set { if(SetProperty(ref _nextCaptureFolder,value)){OnPropertyChanged(nameof(NextCaptureFreeSpace));Track(SaveNextCaptureRuleAsync());} } }
+    public NextCaptureAdjustment NextCaptureAdjustment { get=>_nextCaptureAdjustment; set { if(SetProperty(ref _nextCaptureAdjustment,value))Track(SaveNextCaptureRuleAsync()); } }
+    public string NextCaptureExample=>Rule().Example(DateOnly.FromDateTime(DateTime.Now));
+    public string NextCaptureFreeSpace { get { try { if(string.IsNullOrWhiteSpace(NextCaptureFolder))return "未选择目标文件夹";var drive=new DriveInfo(Path.GetPathRoot(Path.GetFullPath(NextCaptureFolder))!);return $"剩余空间 {FormatBytes(drive.AvailableFreeSpace)}";}catch{return "剩余空间暂时不可读取";} } }
+    public IReadOnlyList<TetherChoice<NextCaptureAdjustment>> NextCaptureAdjustmentOptions { get; }=[new(NextCaptureAdjustment.None,"无"),new(NextCaptureAdjustment.PreviousRatingAndLabel,"上一张评分 / 标签"),new(NextCaptureAdjustment.CurrentColorScheme,"当前色彩方案"),new(NextCaptureAdjustment.ProjectDefaultColorScheme,"项目默认色彩方案")];
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await ColorSettings.InitializeAsync(cancellationToken);
+        var next=await _nextCaptureStore.LoadAsync(cancellationToken);_nextCaptureProjectName=next.ProjectName;_nextCaptureIncludeProject=next.IncludeProject;_nextCaptureIncludeDate=next.IncludeDate;_nextCapturePrefix=next.CustomPrefix;_nextCaptureCounter=next.Counter;_nextCaptureFolder=next.TargetFolder??string.Empty;_nextCaptureAdjustment=next.Adjustment;
+        foreach(var name in new[]{nameof(NextCaptureProjectName),nameof(NextCaptureIncludeProject),nameof(NextCaptureIncludeDate),nameof(NextCapturePrefix),nameof(NextCaptureCounter),nameof(NextCaptureFolder),nameof(NextCaptureAdjustment),nameof(NextCaptureExample),nameof(NextCaptureFreeSpace)})OnPropertyChanged(name);
         ProjectOptions.Clear(); ProjectOptions.Add(new(null, "无项目"));
         if (_projectRepository is not null) foreach (var project in await _projectRepository.ListAsync(cancellationToken)) ProjectOptions.Add(new(project.Id, project.Name));
         SelectedProject = ProjectOptions[0];
@@ -695,7 +718,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             ExifInfo = await exifTask;
             if (result.Image is not null)
             {
-                var histogram = await _histogramService.CalculateAsync(result.Image, true, request.Token);
+                var histogramTask = _histogramService.CalculateAsync(result.Image, true, request.Token); var zoneTask = _zonePreview.BuildAsync(result.Image, request.Token);
+                var histogram = await histogramTask; _zoneFrames = await zoneTask;
                 if (!_requestCoordinator.IsCurrent(item.Record.Id, request.Version)) return;
                 Histogram = histogram;
                 await RefreshClippingAsync(request.Token);
@@ -763,11 +787,18 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         var request = _requestCoordinator.Begin(SelectedAsset.Record.Id, _lifetime.Token);
         try
         {
-            Histogram = await _histogramService.CalculateAsync(CurrentImage, !IsActualSize, request.Token);
+            var histogramTask=_histogramService.CalculateAsync(CurrentImage,!IsActualSize,request.Token);var zoneTask=_zonePreview.BuildAsync(CurrentImage,request.Token);
+            Histogram=await histogramTask;_zoneFrames=await zoneTask;
             await RefreshClippingAsync(request.Token);
         }
         catch (OperationCanceledException) { }
     }
+
+    public void SetZoneHover(int? zone) => ZoneHoverImage = zone is >= 0 and <= 10 && _zoneFrames.Count == 11 ? _zoneFrames[zone.Value] : null;
+    private void ChooseNextCaptureFolder(){var value=_dialogs.ChooseFolder("选择下一张拍摄目标文件夹",Directory.Exists(NextCaptureFolder)?NextCaptureFolder:null);if(value is not null)NextCaptureFolder=value;}
+    private NextCaptureRule Rule()=>new(NextCaptureProjectName,NextCaptureIncludeProject,NextCaptureIncludeDate,NextCapturePrefix,NextCaptureCounter,string.IsNullOrWhiteSpace(NextCaptureFolder)?null:NextCaptureFolder,NextCaptureAdjustment);
+    private Task SaveNextCaptureRuleAsync()=>_nextCaptureStore.SaveAsync(Rule(),_lifetime.Token);
+    private static string FormatBytes(long bytes){var units=new[]{"B","KB","MB","GB","TB"};var value=(double)bytes;var index=0;while(value>=1024&&index<units.Length-1){value/=1024;index++;}return $"{value:0.#} {units[index]}";}
 
     private async Task RefreshClippingAsync(CancellationToken cancellationToken = default)
     {

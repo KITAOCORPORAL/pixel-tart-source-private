@@ -21,6 +21,7 @@ public partial class TetherCaptureView : UserControl
     private bool _isBrowserCollapsed;
     private readonly Services.TetherWorkspacePreferenceStore _workspacePreferences = new();
     private bool _preferencesLoaded;
+    private ShotReferenceWindow? _shotReferenceWindow;
 
     public TetherCaptureView()
     {
@@ -169,6 +170,14 @@ public partial class TetherCaptureView : UserControl
         menu.DataContext = DataContext;
         menu.PlacementTarget = button;
         menu.IsOpen = true;
+    }
+
+    private void ZoneButton_MouseEnter(object sender, MouseEventArgs e) { if(sender is Button { Tag: string text } && int.TryParse(text,out var zone)) ViewModel?.SetZoneHover(zone); }
+    private void ZoneStrip_MouseLeave(object sender, MouseEventArgs e) => ViewModel?.SetZoneHover(null);
+    private void OpenShotReferenceWindow_Click(object sender, RoutedEventArgs e)
+    {
+        if(ViewModel is null)return;if(_shotReferenceWindow is { IsVisible:true }){_shotReferenceWindow.Activate();return;}
+        _shotReferenceWindow=new ShotReferenceWindow{Owner=Window.GetWindow(this),DataContext=ViewModel.ShotExecution};_shotReferenceWindow.Closed+=(_,_)=>_shotReferenceWindow=null;_shotReferenceWindow.Show();
     }
 
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
