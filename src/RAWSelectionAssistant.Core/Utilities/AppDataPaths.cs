@@ -4,11 +4,13 @@ public static class AppDataPaths
 {
     private static readonly string ProcessName = Path.GetFileNameWithoutExtension(Environment.ProcessPath ?? string.Empty);
     private static readonly bool IsAcceptanceBuild = ProcessName.EndsWith(".Acceptance", StringComparison.OrdinalIgnoreCase);
+    private static readonly bool IsHumanAcceptanceBuild = string.Equals(ProcessName, "PixelTart", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE"), "1", StringComparison.Ordinal);
     private static readonly bool IsModularHarnessDevPreview = string.Equals(ProcessName, "PixelTart_ModularHarness_V1_DevPreview", StringComparison.OrdinalIgnoreCase);
     private static readonly bool IsUiReviewBuild = ProcessName.EndsWith(".UiReview", StringComparison.OrdinalIgnoreCase);
     private static readonly bool IsExplicitIsolatedRuntime = string.Equals(
         Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME"), "1", StringComparison.Ordinal);
-    private static readonly string? RootOverride = IsAcceptanceBuild || IsModularHarnessDevPreview || IsUiReviewBuild
+    private static readonly string? RootOverride = IsAcceptanceBuild || IsHumanAcceptanceBuild || IsModularHarnessDevPreview || IsUiReviewBuild
         ? Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")
         : IsExplicitIsolatedRuntime ? Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT") : null;
 
@@ -39,6 +41,8 @@ public static class AppDataPaths
 
     private static string ResolveRoot()
     {
+        if (IsHumanAcceptanceBuild && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
+            return Path.Combine(Path.GetDirectoryName(Environment.ProcessPath ?? string.Empty)!, "DemoWorkspace");
         if ((IsAcceptanceBuild || IsModularHarnessDevPreview) && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
             throw new InvalidOperationException("Acceptance and Modular Harness Dev Preview builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
         if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))
@@ -50,6 +54,8 @@ public static class AppDataPaths
 
     private static string ResolveLegacyRoot()
     {
+        if (IsHumanAcceptanceBuild && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
+            return Path.Combine(Path.GetDirectoryName(Environment.ProcessPath ?? string.Empty)!, "DemoWorkspace", "Legacy");
         if ((IsAcceptanceBuild || IsModularHarnessDevPreview) && (string.IsNullOrWhiteSpace(RootOverride) || !Path.IsPathFullyQualified(RootOverride)))
             throw new InvalidOperationException("Acceptance and Modular Harness Dev Preview builds require an explicit PIXEL_TART_ACCEPTANCE_ROOT.");
         if (!string.IsNullOrWhiteSpace(RootOverride) && Path.IsPathFullyQualified(RootOverride))

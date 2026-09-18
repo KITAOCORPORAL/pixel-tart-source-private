@@ -140,6 +140,9 @@ public partial class App : Application
                 : File.Exists(legacySettings) ? legacySettings : null;
             var settingsService = new SettingsService(_logService, settingsPath);
             var startupSettings = await settingsService.LoadAsync();
+#if PLANNING_HUMAN_ACCEPTANCE
+            await PlanningHumanAcceptanceDemoSeeder.SeedAsync(settingsService);
+#endif
 #if UI_REVIEW_BUILD
             if (string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal))
                 await ConfigureRc12ProductHarnessAsync(startupSettings, settingsService);
@@ -293,6 +296,9 @@ public partial class App : Application
             };
 
             await _mainViewModel.InitializeAsync();
+#if PLANNING_HUMAN_ACCEPTANCE
+            await _mainViewModel.OpenPlanningAsync(PlanningHumanAcceptanceDemoSeeder.ProjectId, PlanningHumanAcceptanceDemoSeeder.BookingId);
+#endif
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
             _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
 #endif

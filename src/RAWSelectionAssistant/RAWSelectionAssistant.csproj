@@ -27,6 +27,7 @@
     <AssemblyName Condition="'$(UiReviewBuild)' == 'true'">KitaoPhotoSelector.UiReview</AssemblyName>
     <AssemblyName Condition="'$(ModularHarnessDevPreview)' == 'true'">PixelTart_ModularHarness_V1_DevPreview</AssemblyName>
     <DefineConstants Condition="'$(UiReviewBuild)' == 'true'">$(DefineConstants);UI_REVIEW_BUILD;RC3_REVIEW_ONLY</DefineConstants>
+    <DefineConstants Condition="'$(AcceptanceBuild)' == 'true'">$(DefineConstants);PLANNING_HUMAN_ACCEPTANCE</DefineConstants>
     <DefineConstants Condition="'$(InputRoutingDiagnostics)' == 'true'">$(DefineConstants);INPUT_ROUTING_DIAGNOSTICS</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true'">$(DefineConstants);MODULAR_HARNESS_DEV_PREVIEW</DefineConstants>
     <DefineConstants Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP1StateAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">$(DefineConstants);ASSET_LIBRARY_P1_STATE_ACCEPTANCE</DefineConstants>
