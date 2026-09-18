@@ -1,0 +1,14 @@
+{
+  "branch": "integration/pixel-tart-developer-preview",
+  "headSha": "PENDING_FINAL_COMMIT_SHA",
+  "configuration": "Release",
+  "runtime": "net10.0-windows10.0.19041.0",
+  "target": "win-x64",
+  "buildCommand": "dotnet build src/RAWSelectionAssistant/RAWSelectionAssistant.csproj -c Release --no-restore -warnaserror",
+  "buildResult": "PASS: 0 warnings, 0 errors",
+  "planningCore": "8 passed, 0 failed, 0 skipped",
+  "planningWpf": "17 passed, 0 failed, 0 skipped",
+  "physicalAcceptance": "NOT_TESTED",
+  "realAppScreenshot": "NO",
+  "packageExecutable": "app/KitaoPhotoSelector.exe"
+}
