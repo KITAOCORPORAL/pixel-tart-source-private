@@ -18,6 +18,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private Guid? _assetId;
     private long _revision;
     private ReferenceLook? _selectedLook;
+    private ReferenceLook? _persistedLook;
     private BitmapSource? _matchedImage;
     private bool _enabled;
     private bool _applyToFollowing;
@@ -31,21 +32,27 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private Guid? _projectId;
     private Guid? _projectDefaultLookId;
     private Guid? _sessionLookId;
+    private readonly bool _allowReferenceManagement;
+    public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
 
-    public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null)
+    public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null, bool allowReferenceManagement = false)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _dialogs = dialogs;
+        _allowReferenceManagement = allowReferenceManagement;
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => SelectedLook is not null && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
-        ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null);
+        ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null && _allowReferenceManagement);
+        SaveCurrentAdjustmentCommand = new AsyncRelayCommand(_ => SaveCurrentAdjustmentAsync(), _ => HasSessionAdjustment && SelectedLook is not null);
+        RestoreSchemeCommand = new RelayCommand(_ => RestoreScheme(), _ => HasSessionAdjustment);
+        OpenFullEditorCommand = new RelayCommand(_ => FullEditorRequested?.Invoke(this, EventArgs.Empty));
         ToggleSourcePickerCommand = new RelayCommand(_ => IsSourcePickerOpen = !IsSourcePickerOpen);
         SelectSourceCategoryCommand = new RelayCommand(value => { if (value is ReferenceSourceCategory category) SelectedSourceCategory = category; });
-        ImportExternalReferenceCommand = new AsyncRelayCommand(_ => ImportExternalReferenceAsync(), _ => _dialogs is not null);
-        RemoveReferenceCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Remove), value => value is ReferenceSourceWeightViewModel && ReferenceSources.Count > 1);
-        MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => value is ReferenceSourceWeightViewModel);
-        MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => value is ReferenceSourceWeightViewModel);
+        ImportExternalReferenceCommand = new AsyncRelayCommand(_ => ImportExternalReferenceAsync(), _ => _dialogs is not null && _allowReferenceManagement);
+        RemoveReferenceCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Remove), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel && ReferenceSources.Count > 1);
+        MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel);
+        MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel);
         SourceCategories = [new("项目色彩方案", null), new("灵感板", "Board"), new("自由画布", "Canvas"), new("素材库", "Asset"), new("最近使用", "Recent"), new("导入参考图", "External")];
         _selectedSourceCategory = SourceCategories[0];
     }
@@ -57,6 +64,10 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public AsyncRelayCommand ApplyCommand { get; }
     public AsyncRelayCommand ReloadCommand { get; }
     public AsyncRelayCommand ExportCubeCommand { get; }
+    public AsyncRelayCommand SaveCurrentAdjustmentCommand { get; }
+    public RelayCommand RestoreSchemeCommand { get; }
+    public RelayCommand OpenFullEditorCommand { get; }
+    public bool IsReferenceManagementEnabled => _allowReferenceManagement;
     public RelayCommand ToggleSourcePickerCommand { get; }
     public RelayCommand SelectSourceCategoryCommand { get; }
     public AsyncRelayCommand ImportExternalReferenceCommand { get; }
@@ -65,9 +76,12 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public AsyncRelayCommand MoveReferenceDownCommand { get; }
     public bool IsSourcePickerOpen { get => _sourcePickerOpen; set => SetProperty(ref _sourcePickerOpen, value); }
     public ReferenceSourceCategory SelectedSourceCategory { get => _selectedSourceCategory; set { if (SetProperty(ref _selectedSourceCategory, value)) RefreshSourceChoices(); } }
-    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
+    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
+    public BitmapSource? SourceImage => _source;
+    public bool HasSessionAdjustment => _persistedLook is not null && _selectedLook is not null && !_selectedLook.Parameters.Equals(_persistedLook.Parameters);
+    public string SessionAdjustmentText => HasSessionAdjustment ? "本次拍摄已调整" : string.Empty;
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
     public bool ApplyToFollowing { get => _applyToFollowing; set => SetProperty(ref _applyToFollowing, value); }
     public bool AdvancedExpanded { get => _advancedExpanded; set => SetProperty(ref _advancedExpanded, value); }
@@ -89,7 +103,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public double SkinProtection { get => SelectedLook?.Parameters.SkinProtection ?? _skin; set => SetParameter(value, p => p with { SkinProtection = value }, ref _skin); }
     public double HighlightProtection { get => SelectedLook?.Parameters.HighlightProtection ?? _highlight; set => SetParameter(value, p => p with { HighlightProtection = value }, ref _highlight); }
     public double NeutralProtection { get => SelectedLook?.Parameters.NeutralProtection ?? _neutral; set => SetParameter(value, p => p with { NeutralProtection = value }, ref _neutral); }
-    public bool KeepOriginalTone { get => SelectedLook?.Parameters.KeepOriginalTone ?? _keepOriginalTone; set { _keepOriginalTone = value; if (SelectedLook is not null) { _selectedLook = SelectedLook with { Parameters = SelectedLook.Parameters with { KeepOriginalTone = value }, UpdatedAt = DateTimeOffset.UtcNow }; OnPropertyChanged(nameof(SelectedLook)); _ = _store.SaveAsync(_selectedLook); } OnPropertyChanged(); _ = DebouncedRenderAsync(); } }
+    public bool KeepOriginalTone { get => SelectedLook?.Parameters.KeepOriginalTone ?? _keepOriginalTone; set { _keepOriginalTone = value; if (SelectedLook is not null) { _selectedLook = SelectedLook with { Parameters = SelectedLook.Parameters with { KeepOriginalTone = value }, UpdatedAt = DateTimeOffset.UtcNow }; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); } OnPropertyChanged(); _ = DebouncedRenderAsync(); } }
     private double _match=100,_tone=50,_color=70,_contrast=50,_saturation=50,_skin=60,_highlight=70,_neutral=65;
     private bool _keepOriginalTone;
 
@@ -123,7 +137,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         {
             _selectedLook = SelectedLook with { Parameters = update(SelectedLook.Parameters), UpdatedAt = DateTimeOffset.UtcNow };
             OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(_selectedLook.Parameters);
-            _ = _store.SaveAsync(_selectedLook);
+            OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
         }
         _ = DebouncedRenderAsync();
     }
@@ -160,12 +174,14 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 
     private async Task UpdateReferenceWeightAsync(ReferenceSourceWeightViewModel edited, double percent)
     {
+        if (!_allowReferenceManagement) return;
         var look = SelectedLook; if (look is null) return; var sources = look.ReferenceSources.ToArray(); var index = Array.FindIndex(sources, item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
         sources[index] = sources[index] with { Weight = Math.Max(.001, percent) }; await SaveReferencesAsync(look, sources);
     }
 
     private async Task UpdateReferencesAsync(ReferenceSourceWeightViewModel? edited, ReferenceEdit edit)
     {
+        if (!_allowReferenceManagement) return;
         var look = SelectedLook; if (look is null || edited is null) return; var sources = look.ReferenceSources.ToList(); var index = sources.FindIndex(item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
         if (edit == ReferenceEdit.Remove && sources.Count > 1) sources.RemoveAt(index);
         else if (edit == ReferenceEdit.Up && index > 0) (sources[index - 1], sources[index]) = (sources[index], sources[index - 1]);
@@ -177,7 +193,20 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private async Task SaveReferencesAsync(ReferenceLook look, IReadOnlyList<ReferenceLookSource> sources)
     {
         var updated = (look with { ReferenceSources = sources, UpdatedAt = DateTimeOffset.UtcNow }).Normalize(); await _store.SaveAsync(updated, token: _lifetime.Token);
-        var index = Looks.IndexOf(look); if (index >= 0) Looks[index] = updated; _selectedLook = updated; OnPropertyChanged(nameof(SelectedLook)); RefreshReferenceSources(); await DebouncedRenderAsync();
+        var index = Looks.IndexOf(look); if (index >= 0) Looks[index] = updated; _persistedLook = updated; _selectedLook = updated; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RefreshReferenceSources(); await DebouncedRenderAsync();
+    }
+    private async Task SaveCurrentAdjustmentAsync()
+    {
+        if (_selectedLook is null) return;
+        var updated = _selectedLook.Normalize(); await _store.SaveAsync(updated, token: _lifetime.Token);
+        var index = Looks.IndexOf(_persistedLook ?? _selectedLook); if (index >= 0) Looks[index] = updated;
+        _persistedLook = updated; _selectedLook = updated; CopyParameters(updated.Parameters);
+        StatusText = "当前调整已保存为色彩方案。"; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
+    }
+    private void RestoreScheme()
+    {
+        if (_persistedLook is null) return;
+        _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();
     }
     private void RaiseReferenceCommands() { RemoveReferenceCommand.RaiseCanExecuteChanged(); MoveReferenceUpCommand.RaiseCanExecuteChanged(); MoveReferenceDownCommand.RaiseCanExecuteChanged(); }
     private async Task ExportCubeAsync()
