@@ -231,7 +231,8 @@ public partial class App : Application
                 new TetherAnnotationService(
                     _compositionRoot.TetherAnnotationRepository,
                     _compositionRoot.AuditLog,
-                    _compositionRoot.NotificationCenter));
+                    _compositionRoot.NotificationCenter),
+                projectRepository: _compositionRoot.ProjectRepository);
             var financePage = new FinanceViewModel(
                 _compositionRoot.FinanceService,
                 dialogService,

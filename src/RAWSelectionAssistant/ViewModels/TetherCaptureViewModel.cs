@@ -30,6 +30,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly IPreviewRequestCoordinator _requestCoordinator;
     private readonly ITetherExifService _exifService;
     private readonly ITetherDisplaySettingsStore _displaySettingsStore;
+    private readonly IProjectRepository? _projectRepository;
     private readonly LiveSelectionCoordinator _selectionCoordinator = new();
     private readonly CancellationTokenSource _lifetime = new();
     private readonly Dictionary<Guid, TetherAssetItemViewModel> _assetIndex = [];
@@ -109,6 +110,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private bool _suppressManualSelection;
     private bool _reviewStateActive;
     private bool _isPageActive;
+    private TetherProjectOption? _selectedProject;
 
     public TetherCaptureViewModel(
         WatchFolderCameraAdapter adapter,
@@ -125,7 +127,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ITetherExifService? exifService = null,
         ITetherDisplaySettingsStore? displaySettingsStore = null,
         IPreviewMemoryManager? memoryManager = null,
-        TetherColorViewModel? color = null)
+        TetherColorViewModel? color = null,
+        IProjectRepository? projectRepository = null)
     {
         _adapter = adapter;
         _sessionRepository = sessionRepository;
@@ -141,6 +144,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _requestCoordinator = requestCoordinator ?? new PreviewRequestCoordinator();
         _exifService = exifService ?? new TetherExifService();
         _displaySettingsStore = displaySettingsStore ?? new JsonTetherDisplaySettingsStore();
+        _projectRepository = projectRepository;
         ColorSettings = color ?? new TetherColorViewModel(dialogs);
         ReferenceMode = new TetherReferenceModeViewModel(dialogs: dialogs);
         ReferenceMode.PostProcessor = ColorSettings.RenderAfterReferenceLookAsync;
@@ -299,6 +303,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         }
     }
     public bool HasSelection => SelectedAsset is not null;
+    public ObservableCollection<TetherProjectOption> ProjectOptions { get; } = [];
+    public TetherProjectOption? SelectedProject { get => _selectedProject; set => SetProperty(ref _selectedProject, value); }
     public bool ShowPreSessionPage => !IsRunning;
     public bool ShowMonitorWorkspace => IsRunning;
     public bool ShowWaitingForFirstPhoto => IsRunning && Assets.Count == 0;
@@ -383,11 +389,16 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await ColorSettings.InitializeAsync(cancellationToken);
+        ProjectOptions.Clear(); ProjectOptions.Add(new(null, "无项目"));
+        if (_projectRepository is not null) foreach (var project in await _projectRepository.ListAsync(cancellationToken)) ProjectOptions.Add(new(project.Id, project.Name));
+        SelectedProject = ProjectOptions[0];
         await ReferenceMode.LoadAsync(cancellationToken);
         var recovered = await _adapter.RecoverLatestAsync(cancellationToken);
         if (recovered is not null)
         {
             Attach(recovered);
+            SelectedProject = ProjectOptions.FirstOrDefault(item => item.Id == recovered.Session.ProjectId) ?? ProjectOptions[0];
+            await ReferenceMode.SetProjectAsync(recovered.Session.ProjectId, cancellationToken);
             await LoadDisplaySettingsAsync(recovered.Session.Id, cancellationToken);
             ApplySnapshot(new(recovered.Session, await LoadAssetsAsync(recovered.Session.Id, cancellationToken), 0, true));
             StatusText = "已恢复上次未停止的看守会话，并按数据库状态继续。";
@@ -582,11 +593,12 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         IsBusy = true;
         try
         {
-            var session = await _adapter.StartAsync(new(WatchDirectory, ImportExisting: ImportExisting, CopyToProject: CopyToProject,
+            var session = await _adapter.StartAsync(new(WatchDirectory, ProjectId: SelectedProject?.Id, ImportExisting: ImportExisting, CopyToProject: CopyToProject,
                 ProjectDestination: ProjectDestination, CopyToBackup: CopyToBackup, BackupDestination: BackupDestination, VerifySha256: VerifySha256));
             Attach(session);
             Assets.Clear(); _assetIndex.Clear(); _knownReadyAssets.Clear();
             await LoadDisplaySettingsAsync(session.Session.Id, _lifetime.Token);
+            await ReferenceMode.SetProjectAsync(session.Session.ProjectId, _lifetime.Token);
             await ShotExecution.LoadAsync(session.Session.ProjectId, _lifetime.Token);
             StatusText = ImportExisting ? "看守已启动，正在检查顶层已有文件。" : "看守已启动，只接收本次开始后创建的顶层文件。";
         }
@@ -1096,6 +1108,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         public Task<TetherAnnotationSaveResult> SaveAsync(TetherAnnotationRecord annotation, Guid? projectId = null, CancellationToken cancellationToken = default) => Task.FromResult(new TetherAnnotationSaveResult(false, null, "DatabaseUnavailable", "标注服务尚未连接。"));
     }
 }
+
+public sealed record TetherProjectOption(Guid? Id, string Label);
 
 public sealed record TetherChoice<T>(T Value, string Label)
 {

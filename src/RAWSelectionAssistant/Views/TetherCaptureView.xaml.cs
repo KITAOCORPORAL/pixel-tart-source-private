@@ -19,12 +19,15 @@ public partial class TetherCaptureView : UserControl
     private double _panStartY;
     private bool _isDragging;
     private bool _isBrowserCollapsed;
+    private readonly Services.TetherWorkspacePreferenceStore _workspacePreferences = new();
+    private bool _preferencesLoaded;
 
     public TetherCaptureView()
     {
         InitializeComponent();
         DataContextChanged += View_DataContextChanged;
-        Loaded += (_, _) => UpdateResponsiveLayout();
+        Loaded += async (_, _) => { await LoadWorkspacePreferencesAsync(); UpdateResponsiveLayout(); };
+        Unloaded += async (_, _) => await SaveWorkspacePreferencesAsync();
     }
 
     public event EventHandler<TetherFullScreenChangedEventArgs>? FullScreenChanged;
@@ -52,6 +55,25 @@ public partial class TetherCaptureView : UserControl
         var availableWidth = ActualWidth > 0 ? ActualWidth : Window.GetWindow(this)?.ActualWidth ?? 0;
         ApplyResponsiveLayout(availableWidth);
     }
+
+    private async Task LoadWorkspacePreferencesAsync()
+    {
+        if (_preferencesLoaded) return; var value = await _workspacePreferences.LoadAsync(); _preferencesLoaded = true;
+        InspectorColumn.Width = new GridLength(value.InspectorWidth); InspectorPanel.UpdateLayout();
+        Group("曝光评估").IsExpanded=value.ExposureExpanded; Group("参考模式").IsExpanded=value.ReferenceExpanded;
+        Group("拍摄参考").IsExpanded=value.ShotExpanded; Group("相机 / 拍摄会话").IsExpanded=value.SessionExpanded; Group("拍摄信息").IsExpanded=value.InformationExpanded;
+        Group("标记与备注").IsExpanded=value.AnnotationExpanded; Group("LUT 与色彩").IsExpanded=value.LutExpanded; Group("客户监看").IsExpanded=value.ClientExpanded; Group("文件处理").IsExpanded=value.FileExpanded;
+    }
+
+    private Task SaveWorkspacePreferencesAsync()
+    {
+        if (!_preferencesLoaded) return Task.CompletedTask;
+        return _workspacePreferences.SaveAsync(new(InspectorColumn.ActualWidth > 0 ? InspectorColumn.ActualWidth : InspectorColumn.Width.Value,
+            Group("曝光评估").IsExpanded,Group("参考模式").IsExpanded,Group("拍摄参考").IsExpanded,Group("相机 / 拍摄会话").IsExpanded,Group("拍摄信息").IsExpanded,
+            Group("标记与备注").IsExpanded,Group("LUT 与色彩").IsExpanded,Group("客户监看").IsExpanded,Group("文件处理").IsExpanded));
+    }
+
+    private Expander Group(string header) => FindVisualChildren<Expander>(InspectorPanel).First(item => string.Equals(item.Header?.ToString(),header,StringComparison.Ordinal));
 
     public void ApplyReviewPresentation(string state, double windowWidth)
     {

@@ -26,6 +26,11 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private double _splitPosition = .5;
     private string _statusText = "选择项目色彩方案后可进行现场监看仿色。";
     private bool _originalHeld;
+    private bool _sourcePickerOpen;
+    private ReferenceSourceCategory _selectedSourceCategory;
+    private Guid? _projectId;
+    private Guid? _projectDefaultLookId;
+    private Guid? _sessionLookId;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
 
     public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null)
@@ -35,13 +40,32 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => SelectedLook is not null && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
         ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null);
+        ToggleSourcePickerCommand = new RelayCommand(_ => IsSourcePickerOpen = !IsSourcePickerOpen);
+        SelectSourceCategoryCommand = new RelayCommand(value => { if (value is ReferenceSourceCategory category) SelectedSourceCategory = category; });
+        ImportExternalReferenceCommand = new AsyncRelayCommand(_ => ImportExternalReferenceAsync(), _ => _dialogs is not null);
+        RemoveReferenceCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Remove), value => value is ReferenceSourceWeightViewModel && ReferenceSources.Count > 1);
+        MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => value is ReferenceSourceWeightViewModel);
+        MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => value is ReferenceSourceWeightViewModel);
+        SourceCategories = [new("项目色彩方案", null), new("灵感板", "Board"), new("自由画布", "Canvas"), new("素材库", "Asset"), new("最近使用", "Recent"), new("导入参考图", "External")];
+        _selectedSourceCategory = SourceCategories[0];
     }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
+    public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
+    public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
+    public IReadOnlyList<ReferenceSourceCategory> SourceCategories { get; }
     public IReadOnlyList<string> ViewModes { get; } = ["原片", "仿色", "左右对比", "并排对比"];
     public AsyncRelayCommand ApplyCommand { get; }
     public AsyncRelayCommand ReloadCommand { get; }
     public AsyncRelayCommand ExportCubeCommand { get; }
-    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); _ = RenderAsync(); } } }
+    public RelayCommand ToggleSourcePickerCommand { get; }
+    public RelayCommand SelectSourceCategoryCommand { get; }
+    public AsyncRelayCommand ImportExternalReferenceCommand { get; }
+    public AsyncRelayCommand RemoveReferenceCommand { get; }
+    public AsyncRelayCommand MoveReferenceUpCommand { get; }
+    public AsyncRelayCommand MoveReferenceDownCommand { get; }
+    public bool IsSourcePickerOpen { get => _sourcePickerOpen; set => SetProperty(ref _sourcePickerOpen, value); }
+    public ReferenceSourceCategory SelectedSourceCategory { get => _selectedSourceCategory; set { if (SetProperty(ref _selectedSourceCategory, value)) RefreshSourceChoices(); } }
+    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
@@ -71,10 +95,14 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 
     public async Task LoadAsync(CancellationToken token = default)
     {
-        var selected = SelectedLook?.ReferenceLookId; var catalog = await _store.LoadAsync(token);
+        var selected = SelectedLook?.ReferenceLookId ?? _sessionLookId; var catalog = await _store.LoadAsync(token);
         Looks.Clear(); foreach (var look in catalog.Looks.OrderByDescending(item => item.UpdatedAt)) Looks.Add(look);
-        SelectedLook = Looks.FirstOrDefault(item => item.ReferenceLookId == selected) ?? Looks.FirstOrDefault();
+        _projectDefaultLookId = _projectId is Guid project && catalog.ProjectDefaults.TryGetValue(project, out var defaultId) ? defaultId : null;
+        var effective = ReferenceLookResolver.Resolve(null, _projectDefaultLookId, selected);
+        SelectedLook = Looks.FirstOrDefault(item => item.ReferenceLookId == effective) ?? Looks.FirstOrDefault(); _sessionLookId = SelectedLook?.ReferenceLookId;
+        RefreshSourceChoices();
     }
+    public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) _selectedLook = null; _projectId = projectId; await LoadAsync(token); }
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
         _assetId = assetId; _source = source; MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
@@ -82,7 +110,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     }
     public async Task SelectLookAsync(Guid? lookId)
     {
-        if (lookId is null) return;
+        if (lookId is null) { var fallback = ReferenceLookResolver.Resolve(null, _projectDefaultLookId, _sessionLookId); SelectedLook = Looks.FirstOrDefault(look => look.ReferenceLookId == fallback) ?? SelectedLook; return; }
         if (Looks.Count == 0) await LoadAsync();
         SelectedLook = Looks.FirstOrDefault(look => look.ReferenceLookId == lookId) ?? SelectedLook;
     }
@@ -100,6 +128,58 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         _ = DebouncedRenderAsync();
     }
     private async Task EnableAndRenderAsync() { if (!Enabled) { Enabled = true; return; } await RenderAsync(); }
+    private async Task ImportExternalReferenceAsync()
+    {
+        if (_dialogs is null) return; var path = _dialogs.ChooseFiles("导入参考图（仅关联原位置）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault(); if (path is null) return;
+        try
+        {
+            StatusText = "正在分析参考图…"; var source = await _preview.AnalyzeExternalReferenceAsync(path, _lifetime.Token); var now = DateTimeOffset.UtcNow;
+            var look = new ReferenceLook(Guid.NewGuid(), Path.GetFileNameWithoutExtension(path), _projectId, [source], new(), now, now);
+            await _store.SaveAsync(look, token: _lifetime.Token); Looks.Insert(0, look); SelectedLook = look; StatusText = "参考图已安全关联；原文件未复制、未修改。";
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or FileFormatException)
+        { StatusText = "参考图无法读取；现有色彩方案保持不变。"; }
+    }
+
+    private void RefreshSourceChoices()
+    {
+        SourceChoices.Clear(); IEnumerable<ReferenceLook> choices = Looks;
+        if (SelectedSourceCategory.Kind == "Recent") choices = choices.OrderByDescending(item => item.UpdatedAt).Take(8);
+        else if (SelectedSourceCategory.Kind is { } kind) choices = choices.Where(item => item.ReferenceSources.Any(source => string.Equals(source.Kind, kind, StringComparison.OrdinalIgnoreCase)));
+        foreach (var choice in choices) SourceChoices.Add(choice);
+    }
+
+    private void RefreshReferenceSources()
+    {
+        ReferenceSources.Clear(); if (SelectedLook is null) return;
+        foreach (var source in SelectedLook.Normalize().ReferenceSources)
+            ReferenceSources.Add(new(source, source.Weight * 100, UpdateReferenceWeightAsync));
+        RaiseReferenceCommands();
+    }
+
+    private async Task UpdateReferenceWeightAsync(ReferenceSourceWeightViewModel edited, double percent)
+    {
+        var look = SelectedLook; if (look is null) return; var sources = look.ReferenceSources.ToArray(); var index = Array.FindIndex(sources, item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
+        sources[index] = sources[index] with { Weight = Math.Max(.001, percent) }; await SaveReferencesAsync(look, sources);
+    }
+
+    private async Task UpdateReferencesAsync(ReferenceSourceWeightViewModel? edited, ReferenceEdit edit)
+    {
+        var look = SelectedLook; if (look is null || edited is null) return; var sources = look.ReferenceSources.ToList(); var index = sources.FindIndex(item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
+        if (edit == ReferenceEdit.Remove && sources.Count > 1) sources.RemoveAt(index);
+        else if (edit == ReferenceEdit.Up && index > 0) (sources[index - 1], sources[index]) = (sources[index], sources[index - 1]);
+        else if (edit == ReferenceEdit.Down && index < sources.Count - 1) (sources[index + 1], sources[index]) = (sources[index], sources[index + 1]);
+        else return;
+        await SaveReferencesAsync(look, sources);
+    }
+
+    private async Task SaveReferencesAsync(ReferenceLook look, IReadOnlyList<ReferenceLookSource> sources)
+    {
+        var updated = (look with { ReferenceSources = sources, UpdatedAt = DateTimeOffset.UtcNow }).Normalize(); await _store.SaveAsync(updated, token: _lifetime.Token);
+        var index = Looks.IndexOf(look); if (index >= 0) Looks[index] = updated; _selectedLook = updated; OnPropertyChanged(nameof(SelectedLook)); RefreshReferenceSources(); await DebouncedRenderAsync();
+    }
+    private void RaiseReferenceCommands() { RemoveReferenceCommand.RaiseCanExecuteChanged(); MoveReferenceUpCommand.RaiseCanExecuteChanged(); MoveReferenceDownCommand.RaiseCanExecuteChanged(); }
     private async Task ExportCubeAsync()
     {
         var source = _source; var look = SelectedLook; if (source is null || look is null || _dialogs is null) return;
@@ -140,3 +220,13 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide)})OnPropertyChanged(name);}
     public void Dispose(){_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();}
 }
+
+public sealed record ReferenceSourceCategory(string Label, string? Kind);
+public sealed class ReferenceSourceWeightViewModel : ObservableObject
+{
+    private readonly Func<ReferenceSourceWeightViewModel, double, Task> _changed; private double _weightPercent;
+    public ReferenceSourceWeightViewModel(ReferenceLookSource source, double weightPercent, Func<ReferenceSourceWeightViewModel, double, Task> changed) { Source=source;_weightPercent=weightPercent;_changed=changed; }
+    public ReferenceLookSource Source { get; } public string Name => Source.Name; public string SourceLabel => Source.Kind switch { "Board"=>"灵感板", "Canvas"=>"自由画布", "External"=>"外部参考图", _=>"素材库" };
+    public double WeightPercent { get=>_weightPercent; set { var bounded=Math.Clamp(value,.1,100); if(SetProperty(ref _weightPercent,bounded)) _=_changed(this,bounded); } }
+}
+internal enum ReferenceEdit { Remove, Up, Down }

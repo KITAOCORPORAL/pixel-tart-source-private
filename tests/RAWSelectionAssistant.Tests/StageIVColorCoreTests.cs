@@ -135,3 +135,17 @@ internal static class ColorFixtures
         return(new(Guid.NewGuid(),"方案",Guid.NewGuid(),[new(Guid.NewGuid(),target.AssetId,"参考","managed://reference","hash",1,target)],new(),now,now),source,analysis);
     }
 }
+
+[TestClass]
+public sealed class StageIVReferenceResolutionTests
+{
+    [TestMethod]
+    public void ShotThenProjectThenSessionPriorityIsExplicit()
+    {
+        var shot=Guid.NewGuid();var project=Guid.NewGuid();var session=Guid.NewGuid();
+        Assert.AreEqual(shot,ReferenceLookResolver.Resolve(shot,project,session));
+        Assert.AreEqual(project,ReferenceLookResolver.Resolve(null,project,session));
+        Assert.AreEqual(session,ReferenceLookResolver.Resolve(null,null,session));
+        Assert.IsNull(ReferenceLookResolver.Resolve(null,null,null));
+    }
+}

@@ -37,6 +37,17 @@ public sealed class ReferenceLookPreviewService
         return ReferenceCubeLutBuilder.Build(65, transform.Apply, transform.Pipeline);
     }, token);
 
+    public async Task<ReferenceLookSource> AnalyzeExternalReferenceAsync(string path, CancellationToken token = default)
+    {
+        var image = await BitmapFileLoader.LoadAsync(path, 2048, token).ConfigureAwait(false);
+        return await Task.Run(() =>
+        {
+            token.ThrowIfCancellationRequested(); var (_, _, _, buffer, analysis) = Prepare(image);
+            return new ReferenceLookSource(Guid.Empty, analysis.AssetId, Path.GetFileNameWithoutExtension(path), Path.GetFullPath(path),
+                VisualAnalysisFingerprint.Compute(buffer), 1, analysis, "External");
+        }, token).ConfigureAwait(false);
+    }
+
     private static (BitmapSource Input, byte[] Bgra, int Stride, VisualPixelBuffer Buffer, AssetVisualAnalysisResult Analysis) Prepare(BitmapSource source)
     {
         var input = HistogramService.EnsureBgra32(source); var stride = input.PixelWidth * 4;

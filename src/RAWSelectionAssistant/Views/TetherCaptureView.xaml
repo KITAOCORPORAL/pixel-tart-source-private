@@ -33,7 +33,25 @@
                     <Expander x:Name="ReferenceModeGroup" Header="参考模式" IsExpanded="True" AutomationProperties.Name="参考仿色工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding ReferenceMode.CurrentLookText}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                            <Button x:Name="ReferenceSourceButton" Content="选择参考来源" Style="{StaticResource SecondaryButton}" Command="{Binding ReferenceMode.ToggleSourcePickerCommand}" HorizontalAlignment="Stretch" Margin="0,6,0,0" AutomationProperties.Name="打开参考来源选择器" />
+                            <Popup IsOpen="{Binding ReferenceMode.IsSourcePickerOpen}" PlacementTarget="{Binding ElementName=ReferenceSourceButton}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                                <Border Background="{DynamicResource SurfaceElevatedBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="{StaticResource PopoverCornerRadius}" Padding="12" Width="420" MaxHeight="480">
+                                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                        <ListBox ItemsSource="{Binding ReferenceMode.SourceCategories}" SelectedItem="{Binding ReferenceMode.SelectedSourceCategory}" DisplayMemberPath="Label" AutomationProperties.Name="参考来源分类" />
+                                        <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                            <TextBlock Text="参考来源" Style="{StaticResource SectionTitleText}" />
+                                            <Button Content="导入本地参考图" Style="{StaticResource SecondaryButton}" Command="{Binding ReferenceMode.ImportExternalReferenceCommand}" Margin="0,8,0,0" AutomationProperties.Name="导入外部参考图" />
+                                            <ListBox ItemsSource="{Binding ReferenceMode.SourceChoices}" SelectedItem="{Binding ReferenceMode.SelectedLook}" MaxHeight="350" Margin="0,8,0,0" AutomationProperties.Name="可用参考色彩方案">
+                                                <ListBox.ItemTemplate><DataTemplate><Grid Margin="3"><Grid.ColumnDefinitions><ColumnDefinition Width="42" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><Border Width="36" Height="36" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="{StaticResource CompactCornerRadius}"><TextBlock Text="◫" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" /></Border><StackPanel Grid.Column="1"><TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding UpdatedAt, StringFormat=最近使用 {0:MM-dd HH:mm}}" Style="{StaticResource CaptionText}" /></StackPanel></Grid></DataTemplate></ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Popup>
                             <ComboBox ItemsSource="{Binding ReferenceMode.Looks}" DisplayMemberPath="Name" SelectedItem="{Binding ReferenceMode.SelectedLook}" Margin="0,6,0,0" AutomationProperties.Name="选择项目色彩方案" />
+                            <ItemsControl ItemsSource="{Binding ReferenceMode.ReferenceSources}" Margin="0,7,0,0">
+                                <ItemsControl.ItemTemplate><DataTemplate><Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="90" /><ColumnDefinition Width="*" /><ColumnDefinition Width="52" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><StackPanel><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding SourceLabel}" Style="{StaticResource CaptionText}" /></StackPanel><Slider Grid.Column="1" Minimum="0.1" Maximum="100" Value="{Binding WeightPercent, UpdateSourceTrigger=PropertyChanged}" Margin="6,0" AutomationProperties.Name="参考权重滑块" /><TextBox Grid.Column="2" Text="{Binding WeightPercent, UpdateSourceTrigger=LostFocus, StringFormat=0.#}" AutomationProperties.Name="参考权重百分比" /><StackPanel Grid.Column="3" Orientation="Horizontal"><Button Content="↑" Style="{StaticResource IconButton}" Command="{Binding DataContext.ReferenceMode.MoveReferenceUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" ToolTip="上移参考" AutomationProperties.Name="上移参考" /><Button Content="↓" Style="{StaticResource IconButton}" Command="{Binding DataContext.ReferenceMode.MoveReferenceDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" ToolTip="下移参考" AutomationProperties.Name="下移参考" /><Button Content="×" Style="{StaticResource IconButton}" Command="{Binding DataContext.ReferenceMode.RemoveReferenceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" ToolTip="移除参考引用；不删除原图" AutomationProperties.Name="移除参考引用" /></StackPanel></Grid></DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
                             <TextBlock Text="仿色强度" Style="{StaticResource CaptionText}" Margin="0,7,0,0" />
                             <Slider Minimum="0" Maximum="100" Value="{Binding ReferenceMode.MatchStrength, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="仿色强度" />
                             <ComboBox ItemsSource="{Binding ReferenceMode.ViewModes}" SelectedItem="{Binding ReferenceMode.ViewMode}" Margin="0,6,0,0" AutomationProperties.Name="参考查看模式" />
@@ -244,6 +262,8 @@
                         <StackPanel>
                             <TextBlock Text="看守文件夹" Style="{StaticResource CaptionText}" />
                             <TextBlock Text="{Binding WatchDirectory, TargetNullValue=尚未选择}" TextTrimming="CharacterEllipsis" Margin="0,5,0,0" AutomationProperties.Name="当前看守文件夹" />
+                            <TextBlock Text="关联项目" Style="{StaticResource CaptionText}" Margin="0,10,0,0" />
+                            <ComboBox ItemsSource="{Binding ProjectOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedProject}" Margin="0,5,0,0" AutomationProperties.Name="选择联机会话关联项目" />
                             <TextBlock Text="只监看所选目录顶层；不会递归扫描，不会删除、移动或修改源照片。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0" />
                         </StackPanel>
                     </Border>
