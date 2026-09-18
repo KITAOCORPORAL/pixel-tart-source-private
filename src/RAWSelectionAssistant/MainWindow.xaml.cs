@@ -308,13 +308,13 @@ public partial class MainWindow : Window
             _activeBookingEditor.CloseRequested -= ActiveBookingEditor_CloseRequested;
         }
         _activeBookingEditor = null;
-        QuickBookingEditorHost.DataContext = null;
-        DrawerBookingEditorHost.DataContext = null;
-        PlanningBookingEditorHost.DataContext = null;
-        BookingEditorModalSurface.Visibility = Visibility.Collapsed;
-        BookingEditorPlanningSurface.Visibility = Visibility.Collapsed;
-        BookingEditorDrawerSurface.Visibility = Visibility.Collapsed;
-        BookingEditorOverlay.Visibility = Visibility.Collapsed;
+        if (QuickBookingEditorHost is not null) QuickBookingEditorHost.DataContext = null;
+        if (DrawerBookingEditorHost is not null) DrawerBookingEditorHost.DataContext = null;
+        if (PlanningBookingEditorHost is not null) PlanningBookingEditorHost.DataContext = null;
+        if (BookingEditorModalSurface is not null) BookingEditorModalSurface.Visibility = Visibility.Collapsed;
+        if (BookingEditorPlanningSurface is not null) BookingEditorPlanningSurface.Visibility = Visibility.Collapsed;
+        if (BookingEditorDrawerSurface is not null) BookingEditorDrawerSurface.Visibility = Visibility.Collapsed;
+        if (BookingEditorOverlay is not null) BookingEditorOverlay.Visibility = Visibility.Collapsed;
     }
 
     private void ViewModel_PageChanged(object? sender, PageChangedEventArgs e)

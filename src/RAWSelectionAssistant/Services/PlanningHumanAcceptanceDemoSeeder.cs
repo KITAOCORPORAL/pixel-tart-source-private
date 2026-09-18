@@ -68,8 +68,9 @@ public static class PlanningHumanAcceptanceDemoSeeder
         await shotStore.SaveCatalogAsync(new ProjectShotCatalog(ProjectId, shots), token).ConfigureAwait(false);
 
         var planningStore = new PlanningProjectStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectPlanning"));
-        var board = await new SqliteInspirationTrayService(Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db"))
-            .CreateCollectionAsync("Autumn Editorial · 灵感板", ProjectId, token).ConfigureAwait(false);
+        var inspiration = new SqliteInspirationTrayService(Path.Combine(AppDataPaths.DataDirectory, "asset-library-v16.db"));
+        var board = (await inspiration.ListCollectionsAsync(token).ConfigureAwait(false)).FirstOrDefault(item => item.ProjectId == ProjectId && item.Name == "Autumn Editorial · 灵感板")
+            ?? await inspiration.CreateCollectionAsync("Autumn Editorial · 灵感板", ProjectId, token).ConfigureAwait(false);
         var canvasId = Guid.Parse("4d4d2cf4-88b9-4318-8f67-1b422dc66e14");
         await new CanvasDocumentStore(Path.Combine(AppDataPaths.DataDirectory, "FreeCanvas")).SaveAsync(new CanvasDocument
         {
