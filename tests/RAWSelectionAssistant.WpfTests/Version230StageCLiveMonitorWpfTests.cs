@@ -27,8 +27,8 @@ public sealed class Version230StageCLiveMonitorWpfTests
     public void Workspace_XamlContainsThreeColumnAndVirtualizationContract(string token) => StringAssert.Contains(TetherXaml(), token);
 
     [TestMethod]
-    [DataRow("Content=\"Fit\"")]
-    [DataRow("Content=\"Fill\"")]
+    [DataRow("Content=\"适合窗口\"")]
+    [DataRow("Content=\"填满窗口\"")]
     [DataRow("Content=\"100%\"")]
     [DataRow("MouseWheel=\"PreviewViewport_MouseWheel\"")]
     [DataRow("PreviewImage_MouseLeftButtonDown")]
@@ -66,7 +66,7 @@ public sealed class Version230StageCLiveMonitorWpfTests
     [DataRow("客户收藏")]
     [DataRow("快速拒绝 / 取消")]
     [DataRow("不进入回收站")]
-    [DataRow("不调用UndoJournal")]
+    [DataRow("只设置本地拒绝标记")]
     [DataRow("SetRatingCommand")]
     [DataRow("SetColorLabelCommand")]
     public void Workspace_XamlContainsLocalAnnotationContract(string token) => StringAssert.Contains(TetherXaml() + ViewModelSource(), token);

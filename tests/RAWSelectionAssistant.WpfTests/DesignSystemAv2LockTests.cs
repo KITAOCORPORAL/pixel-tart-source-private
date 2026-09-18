@@ -89,7 +89,13 @@ public sealed class DesignSystemAv2LockTests
             ["RadiusControl"] = "6",
             ["RadiusCard"] = "8",
             ["RadiusDrawer"] = "10",
-            ["RadiusModal"] = "12"
+            ["RadiusModal"] = "12",
+            ["CompactCornerRadius"] = "4",
+            ["ControlCornerRadius"] = "6",
+            ["CardCornerRadius"] = "8",
+            ["PopoverCornerRadius"] = "10",
+            ["DialogCornerRadius"] = "12",
+            ["LargePanelCornerRadius"] = "10"
         };
 
         AssertKeyedValues("src/RAWSelectionAssistant/Resources/DesignSystem/Radius.xaml", "CornerRadius", expected);

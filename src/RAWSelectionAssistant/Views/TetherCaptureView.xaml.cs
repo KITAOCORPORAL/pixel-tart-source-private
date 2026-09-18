@@ -207,7 +207,8 @@ public partial class TetherCaptureView : UserControl
         if (e.Key == Key.F11) { viewModel.ToggleFullScreenCommand.Execute(null); e.Handled = true; return; }
         if (e.Key == Key.Escape)
         {
-            if (viewModel.IsFullScreen) viewModel.ToggleFullScreenCommand.Execute(null);
+            if (viewModel.ShotExecution.IsQuickPreviewOpen) viewModel.ShotExecution.CloseQuickPreviewCommand.Execute(null);
+            else if (viewModel.IsFullScreen) viewModel.ToggleFullScreenCommand.Execute(null);
             else if (viewModel.CompareMode != Core.Models.TetherCompareMode.None) viewModel.ExitComparisonCommand.Execute(null);
             else if (viewModel.ShowInspectorDrawer) viewModel.ToggleInspectorCommand.Execute(null);
             else return;
