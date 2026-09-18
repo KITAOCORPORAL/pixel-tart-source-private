@@ -14,7 +14,7 @@ Stage V Planning Center v1 已完成代码、持久化、UI、跨模块衔接与
 | Planning domain/persistence | `06027b6` |
 | Planning workspace | `e58baa4` |
 | Visual/captured-asset closure | `00f64e4` |
-| Final HEAD | 以最终提交后的 `git rev-parse HEAD` 为准 |
+| Final HEAD | `ecb00e35c50b6afc48f3c26ccc33403cad0ed830` |
 
 ## 实现范围
 
@@ -64,4 +64,3 @@ TRX evidence is stored under `artifacts/stage-v-planning/test-results/`.
 ## 已知限制与后续人工门
 
 WPF 全套中有 1 项因当前环境能力跳过；它不构成代码失败，但需要在具备对应桌面能力的机器上重跑。Stage IV 历史报告仍标记为 PARTIAL 的项目保持原状态；本阶段没有扩大范围去做视觉重设计。正式 Release Candidate 需在真实设备清单、真人第一次使用记录和真实截图补齐后再签署。
-
