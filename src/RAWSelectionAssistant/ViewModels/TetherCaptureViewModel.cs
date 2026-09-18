@@ -142,7 +142,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _exifService = exifService ?? new TetherExifService();
         _displaySettingsStore = displaySettingsStore ?? new JsonTetherDisplaySettingsStore();
         ColorSettings = color ?? new TetherColorViewModel(dialogs);
-        ReferenceMode = new TetherReferenceModeViewModel();
+        ReferenceMode = new TetherReferenceModeViewModel(dialogs: dialogs);
         ReferenceMode.PostProcessor = ColorSettings.RenderAfterReferenceLookAsync;
         ShotExecution = new TetherShotExecutionViewModel();
         ShotExecution.EffectiveLookChanged = ReferenceMode.SelectLookAsync;

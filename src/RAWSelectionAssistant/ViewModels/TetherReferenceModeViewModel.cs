@@ -10,7 +10,9 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 {
     private readonly ReferenceLookStore _store;
+    private readonly IDialogService? _dialogs;
     private readonly ReferenceLookPreviewService _preview = new();
+    private readonly CancellationTokenSource _lifetime = new();
     private CancellationTokenSource? _render;
     private BitmapSource? _source;
     private Guid? _assetId;
@@ -26,17 +28,20 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private bool _originalHeld;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
 
-    public TetherReferenceModeViewModel(ReferenceLookStore? store = null)
+    public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
+        _dialogs = dialogs;
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => SelectedLook is not null && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
+        ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null);
     }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public IReadOnlyList<string> ViewModes { get; } = ["原片", "仿色", "左右对比", "并排对比"];
     public AsyncRelayCommand ApplyCommand { get; }
     public AsyncRelayCommand ReloadCommand { get; }
-    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); _ = RenderAsync(); } } }
+    public AsyncRelayCommand ExportCubeCommand { get; }
+    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (SetProperty(ref _selectedLook, value)) { OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
@@ -59,7 +64,10 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public double SaturationStrength { get => SelectedLook?.Parameters.SaturationStrength ?? _saturation; set => SetParameter(value, p => p with { SaturationStrength = value }, ref _saturation); }
     public double SkinProtection { get => SelectedLook?.Parameters.SkinProtection ?? _skin; set => SetParameter(value, p => p with { SkinProtection = value }, ref _skin); }
     public double HighlightProtection { get => SelectedLook?.Parameters.HighlightProtection ?? _highlight; set => SetParameter(value, p => p with { HighlightProtection = value }, ref _highlight); }
-    private double _match=100,_tone=50,_color=70,_contrast=50,_saturation=50,_skin=60,_highlight=70;
+    public double NeutralProtection { get => SelectedLook?.Parameters.NeutralProtection ?? _neutral; set => SetParameter(value, p => p with { NeutralProtection = value }, ref _neutral); }
+    public bool KeepOriginalTone { get => SelectedLook?.Parameters.KeepOriginalTone ?? _keepOriginalTone; set { _keepOriginalTone = value; if (SelectedLook is not null) { _selectedLook = SelectedLook with { Parameters = SelectedLook.Parameters with { KeepOriginalTone = value }, UpdatedAt = DateTimeOffset.UtcNow }; OnPropertyChanged(nameof(SelectedLook)); _ = _store.SaveAsync(_selectedLook); } OnPropertyChanged(); _ = DebouncedRenderAsync(); } }
+    private double _match=100,_tone=50,_color=70,_contrast=50,_saturation=50,_skin=60,_highlight=70,_neutral=65;
+    private bool _keepOriginalTone;
 
     public async Task LoadAsync(CancellationToken token = default)
     {
@@ -69,7 +77,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     }
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
-        _assetId = assetId; _source = source; MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged();
+        _assetId = assetId; _source = source; MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         if (ApplyToFollowing && Enabled && source is not null) await RenderAsync(token);
     }
     public async Task SelectLookAsync(Guid? lookId)
@@ -92,8 +100,22 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         _ = DebouncedRenderAsync();
     }
     private async Task EnableAndRenderAsync() { if (!Enabled) { Enabled = true; return; } await RenderAsync(); }
+    private async Task ExportCubeAsync()
+    {
+        var source = _source; var look = SelectedLook; if (source is null || look is null || _dialogs is null) return;
+        var safeName = string.Concat(look.Name.Select(character => Path.GetInvalidFileNameChars().Contains(character) ? '_' : character));
+        var path = _dialogs.ChooseSaveFile("导出 3D LUT", "Cube LUT|*.cube", ".cube", $"{safeName}_65.cube"); if (path is null) return;
+        try
+        {
+            StatusText = "正在生成 65³ 3D LUT…"; var lut = await _preview.BuildExportLutAsync(source, look, _lifetime.Token);
+            await ReferenceCubeLutBuilder.ExportAsync(lut, path, look.Name, _lifetime.Token); StatusText = "3D LUT 已独立导出；源照片和色彩方案未修改。";
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException)
+        { StatusText = "3D LUT 导出失败；源照片和色彩方案未修改。"; }
+    }
     private void CopyParameters(ReferenceLookParameters value)
-    { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection)})OnPropertyChanged(name); }
+    { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection;_neutral=value.NeutralProtection;_keepOriginalTone=value.KeepOriginalTone; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection),nameof(NeutralProtection),nameof(KeepOriginalTone)})OnPropertyChanged(name); }
     private async Task DebouncedRenderAsync()
     {
         var revision = Interlocked.Increment(ref _revision); await Task.Delay(80);
@@ -107,14 +129,14 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         var revision = Interlocked.Increment(ref _revision); StatusText = "正在后台生成监看仿色…";
         try
         {
-            var image = await _preview.RenderAsync(source, look, _render.Token);
+            var rendered = await _preview.RenderWithResultAsync(source, look, _render.Token); var image = rendered.Image;
             if (PostProcessor is not null) image = await PostProcessor(image, _render.Token);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
-            MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPG 源文件未修改。"; RaiseViewProperties();
+            MatchedImage = image; StatusText = rendered.DifferenceWarning ?? "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
     }
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide)})OnPropertyChanged(name);}
-    public void Dispose(){_render?.Cancel();_render?.Dispose();}
+    public void Dispose(){_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();}
 }
