@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public enum ProjectShotStatus { NotStarted, InProgress, Completed }
+public enum ProjectShotStatus { NotStarted, InProgress, Completed, Skipped }
 public enum ShotReferenceKind { Lighting, Pose, Storyboard, Styling, General }
 public enum PoseExecutionStatus { NotShot, Current, Completed }
 
@@ -48,16 +48,20 @@ public sealed record ProjectShot(
     IReadOnlyList<ProjectShotReference> References,
     DateTimeOffset CreatedAt,
     DateTimeOffset UpdatedAt,
-    int Version = 1)
+    int Version = 1,
+    int EstimatedMinutes = 0,
+    string? Scene = null,
+    DateTimeOffset? CapturedAt = null,
+    bool IsArchived = false)
 {
     public ProjectShot Normalize()
     {
-        if (ShotId == Guid.Empty || ProjectId == Guid.Empty || Order < 0 || string.IsNullOrWhiteSpace(Name) || Version != 1)
+        if (ShotId == Guid.Empty || ProjectId == Guid.Empty || Order < 0 || EstimatedMinutes is < 0 or > 1440 || string.IsNullOrWhiteSpace(Name) || Version != 1)
             throw new ArgumentException("Shot identity, project, order and name must be valid.");
         var references = References.Select(reference => reference.Normalize()).ToArray();
         if (references.Select(reference => reference.ReferenceId).Distinct().Count() != references.Length)
             throw new ArgumentException("Shot reference identities must be unique.");
-        return this with { Name = Name.Trim(), Notes = string.IsNullOrWhiteSpace(Notes) ? null : Notes.Trim(), References = references };
+        return this with { Name = Name.Trim(), Notes = string.IsNullOrWhiteSpace(Notes) ? null : Notes.Trim(), Scene = string.IsNullOrWhiteSpace(Scene) ? null : Scene.Trim(), References = references };
     }
 }
 
@@ -89,6 +93,26 @@ public sealed class ProjectShotStore(string directory)
 
     public Task RemoveAsync(Guid projectId, Guid shotId, CancellationToken token = default) =>
         UpdateAsync(projectId, catalog => catalog with { Shots = catalog.Shots.Where(item => item.ShotId != shotId).ToArray() }, token);
+
+    public Task SaveCatalogAsync(ProjectShotCatalog catalog, CancellationToken token = default)
+    {
+        if (catalog.Version != 1 || catalog.ProjectId == Guid.Empty || catalog.Shots.Any(shot => shot.ProjectId != catalog.ProjectId))
+            throw new ArgumentException("Shot catalog identity or version is invalid.", nameof(catalog));
+        var normalized = catalog.Shots.Select(shot => shot.Normalize()).OrderBy(shot => shot.Order).ToArray();
+        if (normalized.Select(shot => shot.ShotId).Distinct().Count() != normalized.Length)
+            throw new ArgumentException("Shot identities must be unique.", nameof(catalog));
+        return UpdateAsync(catalog.ProjectId, _ => catalog with { Shots = normalized }, token);
+    }
+
+    public Task ReorderAsync(Guid projectId, IReadOnlyList<Guid> orderedShotIds, CancellationToken token = default) =>
+        UpdateAsync(projectId, catalog =>
+        {
+            var active = catalog.Shots.Where(shot => !shot.IsArchived).ToDictionary(shot => shot.ShotId);
+            if (orderedShotIds.Count != active.Count || orderedShotIds.Distinct().Count() != active.Count || orderedShotIds.Any(id => !active.ContainsKey(id)))
+                throw new ArgumentException("The reorder list must contain every active shot exactly once.", nameof(orderedShotIds));
+            var order = orderedShotIds.Select((id, index) => active[id] with { Order = index, UpdatedAt = DateTimeOffset.UtcNow });
+            return catalog with { Shots = order.Concat(catalog.Shots.Where(shot => shot.IsArchived)).ToArray() };
+        }, token);
 
     private static async Task<ProjectShotCatalog> ReadAsync(Guid projectId, string path, CancellationToken token)
     {
