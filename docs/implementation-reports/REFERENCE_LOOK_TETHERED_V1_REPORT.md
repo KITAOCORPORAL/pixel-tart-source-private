@@ -44,13 +44,13 @@ Baseline began at `f3216f61bc8929a3ebabbe70f77744342a605857` on `integration/pix
 
 - Phase A core: 4 passed, 0 failed, 0 skipped.
 - Phase A WPF: 2 passed, 0 failed, 0 skipped.
-- Stage III core focus: 15 passed, 0 failed, 0 skipped (`stage-iii-core.trx`).
-- Tether/Stage III WPF focus: 54 passed, 0 failed, 0 skipped (`stage-iii-wpf.trx`).
+- Stage III core gate: 20 passed, 0 failed, 0 skipped (`stage-iii-core-final.trx`).
+- Tether/Stage III/Asset-button-contract WPF gate: 62 passed, 0 failed, 0 skipped (`stage-iii-wpf-gate.trx`).
 - Release x64: 0 warnings, 0 errors.
 
 ## Visual Evidence / Physical Machine Status
 
-- Real-App Stage III screenshots: **NOT IMPLEMENTED in this environment checkpoint**; no synthetic screenshot is claimed as physical evidence.
+- Real-App Stage III screenshots: **NOT IMPLEMENTED in this environment checkpoint**. Native app binding was unavailable to the UI automation surface (browser-only surfaces were exposed); no synthetic screenshot is claimed as physical evidence.
 - Physical camera: **NOT TESTED**. The implemented provider remains explicitly “文件夹监看”.
 - Physical multi-DPI/monitor acceptance: **NOT TESTED**.
 - Therefore this report is an honest implementation/test report, not final release acceptance and not authorization for RC13 or `main` merge.
