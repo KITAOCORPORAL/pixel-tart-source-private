@@ -49,7 +49,7 @@ public sealed class AssetLibraryVisualPhase2Tests
                     }
                     else
                         app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(
-                            new Uri("/KitaoPhotoSelector;component/" + relative, UriKind.Relative)));
+                            new Uri("/" + typeof(App).Assembly.GetName().Name + ";component/" + relative, UriKind.Relative)));
                 }
                 LoadResources("App.xaml");
                 var root = Path.Combine(Path.GetTempPath(), "PixelTart-VisualPhase2", Guid.NewGuid().ToString("N"));
