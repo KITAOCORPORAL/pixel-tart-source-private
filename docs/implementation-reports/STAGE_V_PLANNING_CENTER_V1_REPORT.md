@@ -14,7 +14,7 @@ Stage V Planning Center v1 已完成代码、持久化、UI、跨模块衔接与
 | Planning domain/persistence | `06027b6` |
 | Planning workspace | `e58baa4` |
 | Visual/captured-asset closure | `00f64e4` |
-| Final HEAD | `ecb00e35c50b6afc48f3c26ccc33403cad0ed830` |
+| Final HEAD | `29314c6d69a742ba8c906b6e3c8f3d46f0b690dd` |
 
 ## 实现范围
 
