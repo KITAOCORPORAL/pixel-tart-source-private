@@ -218,6 +218,27 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         await RenderAsync(cancellationToken);
     }
 
+    /// <summary>Applies the existing optional LUT and display transform to a Reference Look
+    /// preview without replacing the original comparison source or using its cache key.</summary>
+    public async Task<BitmapSource> RenderAfterReferenceLookAsync(BitmapSource source, CancellationToken cancellationToken = default)
+    {
+        var display = Displays.FirstOrDefault(item => item.IsPrimary) ?? Displays.FirstOrDefault();
+        var profile = display is null ? null : await _displayColors.ResolveAsync(display, cancellationToken);
+        if (!LutEnabled || SelectedLut is null)
+            return new WpfColorConversionService().ConvertToDisplay(source, profile, out _);
+        if (!File.Exists(SelectedLut.SourcePath) && !SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) return source;
+        LutDefinition? definition;
+        if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal))
+            definition = new("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+        else
+        {
+            var parsed = await _parser.ParseAsync(SelectedLut.SourcePath, cancellationToken);
+            if (!parsed.Success || parsed.Definition is null) return source;
+            definition = parsed.Definition;
+        }
+        return (await _previewService.RenderAsync(source, definition, LutStrengthPercent / 100d, profile, cancellationToken)).Image;
+    }
+
     public void ReleasePageImageResources()
     {
         _renderRequests.CancelCurrent();

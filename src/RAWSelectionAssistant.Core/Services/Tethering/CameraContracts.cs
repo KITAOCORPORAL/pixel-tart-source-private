@@ -3,7 +3,31 @@ using RAWSelectionAssistant.Core.Models;
 namespace RAWSelectionAssistant.Core.Services.Tethering;
 
 public sealed record CameraDescriptor(string Id, string DisplayName, CameraProviderType ProviderType, bool IsAvailable);
-public sealed record CameraCapabilities(bool FileTransfer, bool LiveView, bool RemoteShutter, bool CameraSettings);
+public interface ITetherCameraCapabilities
+{
+    bool CanRemoteCapture { get; }
+    bool CanFocus { get; }
+    bool CanReadExposure { get; }
+    bool CanSetIso { get; }
+    bool CanSetShutter { get; }
+    bool CanSetAperture { get; }
+    bool CanSetWhiteBalance { get; }
+    bool CanReportBattery { get; }
+    bool CanReportStorage { get; }
+}
+
+public sealed record CameraCapabilities(bool FileTransfer, bool LiveView, bool RemoteShutter, bool CameraSettings) : ITetherCameraCapabilities
+{
+    public bool CanRemoteCapture => RemoteShutter;
+    public bool CanFocus => false;
+    public bool CanReadExposure => CameraSettings;
+    public bool CanSetIso => CameraSettings;
+    public bool CanSetShutter => CameraSettings;
+    public bool CanSetAperture => CameraSettings;
+    public bool CanSetWhiteBalance => CameraSettings;
+    public bool CanReportBattery => false;
+    public bool CanReportStorage => false;
+}
 
 public interface ICameraDiscoveryService
 {

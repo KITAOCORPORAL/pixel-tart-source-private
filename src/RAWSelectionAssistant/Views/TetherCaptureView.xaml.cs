@@ -59,8 +59,10 @@ public partial class TetherCaptureView : UserControl
         ApplyResponsiveLayout(windowWidth);
         if (ViewModel is not null)
             ViewModel.ShowInspectorDrawer = string.Equals(state, "TetherCompact1280", StringComparison.Ordinal);
-        SetReviewGroup("拍摄会话", true);
-        SetReviewGroup("直方图", state is not "TetherViewer");
+        SetReviewGroup("相机 / 拍摄会话", true);
+        SetReviewGroup("曝光评估", state is not "TetherViewer");
+        SetReviewGroup("参考模式", state.Contains("Reference", StringComparison.Ordinal));
+        SetReviewGroup("拍摄参考", state.Contains("Shot", StringComparison.Ordinal));
         SetReviewGroup("拍摄信息", state is "TetherInspector" or "TetherExifExpanded");
         SetReviewGroup("标记与备注", state is not "TetherViewer");
         SetReviewGroup("LUT 与色彩", state is "TetherLutExpanded");
@@ -105,14 +107,13 @@ public partial class TetherCaptureView : UserControl
     {
         var compact = windowWidth < 1350;
         var compactToolbar = windowWidth < 1520;
-        ThumbnailColumn.MinWidth = _isBrowserCollapsed ? 0 : 220;
-        ThumbnailColumn.MaxWidth = _isBrowserCollapsed ? 0 : 300;
-        ThumbnailColumn.Width = _isBrowserCollapsed ? new GridLength(0) : new GridLength(compact ? 230 : 270);
-        BrowserSplitterColumn.Width = _isBrowserCollapsed ? new GridLength(0) : new GridLength(8);
+        ThumbnailColumn.MinWidth = ThumbnailColumn.MaxWidth = 0;
+        ThumbnailColumn.Width = new GridLength(0);
+        BrowserSplitterColumn.Width = new GridLength(0);
         BrowserPanel.Visibility = _isBrowserCollapsed ? Visibility.Collapsed : Visibility.Visible;
-        InspectorColumn.MinWidth = compact ? 0 : 280;
-        InspectorColumn.MaxWidth = compact ? 0 : 340;
-        InspectorColumn.Width = compact ? new GridLength(0) : new GridLength(320);
+        InspectorColumn.MinWidth = compact ? 0 : 320;
+        InspectorColumn.MaxWidth = compact ? 0 : 480;
+        if (!compact && (InspectorColumn.Width.Value < 320 || InspectorColumn.Width.Value > 480)) InspectorColumn.Width = new GridLength(360);
         InspectorPanel.Visibility = compact ? Visibility.Collapsed : Visibility.Visible;
         BrowserToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
         ClientMonitorToolbarButton.Visibility = compactToolbar ? Visibility.Collapsed : Visibility.Visible;
@@ -208,14 +209,17 @@ public partial class TetherCaptureView : UserControl
                 if (clientCommand.CanExecute(null)) clientCommand.Execute(null);
                 e.Handled = true;
                 break;
-            case Key.B: viewModel.ColorSettings.ShowBefore = true; e.Handled = true; break;
+            case Key.B:
+                if (viewModel.ReferenceMode.Enabled) viewModel.ReferenceMode.HoldOriginal(true);
+                else viewModel.ColorSettings.ShowBefore = true;
+                e.Handled = true; break;
         }
     }
 
     private void LutBefore_MouseDown(object sender, MouseButtonEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = true; }
     private void LutBefore_MouseUp(object sender, MouseButtonEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = false; }
     private void LutBefore_MouseLeave(object sender, MouseEventArgs e) { if (ViewModel is not null) ViewModel.ColorSettings.ShowBefore = false; }
-    private void View_PreviewKeyUp(object sender, KeyEventArgs e) { if (e.Key == Key.B && ViewModel is not null) { ViewModel.ColorSettings.ShowBefore = false; e.Handled = true; } }
+    private void View_PreviewKeyUp(object sender, KeyEventArgs e) { if (e.Key == Key.B && ViewModel is not null) { ViewModel.ReferenceMode.HoldOriginal(false); ViewModel.ColorSettings.ShowBefore = false; e.Handled = true; } }
 
     private static void SetRating(TetherCaptureViewModel viewModel, int rating, KeyEventArgs e)
     {
