@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Diagnostics;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 
@@ -99,6 +100,27 @@ public sealed class PlanningSourceSafetyTests
         var second = first with { ShotId = Guid.NewGuid(), Order = 1, Name = "姿势副本", References = first.References.Select(item => item with { ReferenceId = Guid.NewGuid() }).ToArray() };
         await shotStore.SaveCatalogAsync(new(project, [first, second])); await shotStore.ReorderAsync(project, [second.ShotId, first.ShotId]); await shotStore.SaveAsync(first with { References = [] }); await shotStore.RemoveAsync(project, second.ShotId);
         Assert.IsTrue(File.Exists(source)); CollectionAssert.AreEqual(before, SHA256.HashData(await File.ReadAllBytesAsync(source)));
+    }
+}
+
+[TestClass]
+public sealed class PlanningPerformanceSmokeTests
+{
+    [TestMethod]
+    public async Task Planning200ShotsAnd1000ReferencesSmokeTest()
+    {
+        using var temp=new PlanningTempDirectory();var project=Guid.NewGuid();var now=DateTimeOffset.UtcNow;var store=new ProjectShotStore(temp.Path);
+        var watch=Stopwatch.StartNew();var shots=Enumerable.Range(0,200).Select(index=>new ProjectShot(Guid.NewGuid(),project,index,$"拍摄 {index}",ProjectShotStatus.NotStarted,null,null,
+            Enumerable.Range(0,5).Select(item=>new ProjectShotReference(Guid.NewGuid(),(ShotReferenceKind)(item%5),ExternalReference:temp.Combine($"{index}-{item}.jpg"))).ToArray(),now,now)).ToArray();
+        await store.SaveCatalogAsync(new(project,shots));var loaded=await store.LoadAsync(project);await store.ReorderAsync(project,loaded.Shots.Reverse().Select(item=>item.ShotId).ToArray());watch.Stop();
+        Assert.HasCount(200,loaded.Shots);Assert.AreEqual(1000,loaded.Shots.Sum(item=>item.References.Count));Assert.IsLessThan(TimeSpan.FromSeconds(10),watch.Elapsed,$"Smoke elapsed: {watch.Elapsed.TotalMilliseconds:F0} ms");
+    }
+
+    [TestMethod]
+    public async Task DuplicateCaptureRelationsRemainIdempotentAtScale()
+    {
+        using var temp=new PlanningTempDirectory();var project=Guid.NewGuid();var shot=Guid.NewGuid();var store=new PlanningProjectStore(temp.Path);var relation=new ShotCaptureRelation(null,Guid.NewGuid(),shot,project,null,DateTimeOffset.UtcNow,4,"Tether");
+        for(var index=0;index<100;index++)await store.AddCaptureRelationAsync(relation);var state=await store.LoadAsync(project);Assert.HasCount(1,state.CapturedAssets!);
     }
 }
 

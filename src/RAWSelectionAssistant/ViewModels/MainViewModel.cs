@@ -1131,6 +1131,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             if (TetherPage is not null) await TetherPage.ApplyExecutionContextAsync(context).ConfigureAwait(true);
             NavigateToSurface("Tether");
         };
+        PlanningPage.ViewAssetsRequested += (_,request)=>WorkCalendarPage_AssetLibraryRequested(this,request);
         OnPropertyChanged(nameof(PlanningPage));
     }
 

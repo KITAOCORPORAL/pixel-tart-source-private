@@ -65,15 +65,18 @@ public sealed class PlanningCenterViewModel : ObservableObject
         MoveReferenceDownCommand=new AsyncRelayCommand(_=>MoveReferenceAsync(1),_=>CanMoveReference(1));
         OpenQuickPreviewCommand=new RelayCommand(_=>IsQuickPreviewOpen=SelectedReference is not null,_=>SelectedReference is not null);CloseQuickPreviewCommand=new RelayCommand(_=>IsQuickPreviewOpen=false);
         ToggleSourceDrawerCommand=new RelayCommand(_=>IsSourceDrawerOpen=!IsSourceDrawerOpen);
+        ViewCapturedAssetsCommand=new RelayCommand(_=>{if(ProjectId is Guid project)ViewAssetsRequested?.Invoke(this,new(null,project));},_=>ProjectId is not null);
         EnterTetherCommand=new AsyncRelayCommand(_=>EnterTetherAsync(),_=>ProjectId is not null&&SelectedShot is not null);
     }
 
     public event EventHandler<ShootExecutionContext>? EnterTetherRequested;
+    public event EventHandler<AssetLibraryNavigationRequestEventArgs>? ViewAssetsRequested;
     public ObservableCollection<ProjectShot> Shots{get;}=[]; public ICollectionView ShotsView{get;}
     public ObservableCollection<ProjectShotReference> References{get;}=[];public ObservableCollection<PlanningVisualLink> VisualLinks{get;}=[];
     public ObservableCollection<CanvasDocument> ProjectCanvases{get;}=[];public ObservableCollection<InspirationCollectionSummary> ProjectBoards{get;}=[];
     public ObservableCollection<ProjectPaletteColorItem> PaletteColors{get;}=[];public ObservableCollection<ReferenceLook> ColorSchemes{get;}=[];
-    public RelayCommand OpenQuickPreviewCommand{get;} public RelayCommand CloseQuickPreviewCommand{get;} public RelayCommand ToggleSourceDrawerCommand{get;}
+    public ObservableCollection<PlanningToneZoneItem> ToneZones{get;}=[];
+    public RelayCommand OpenQuickPreviewCommand{get;} public RelayCommand CloseQuickPreviewCommand{get;} public RelayCommand ToggleSourceDrawerCommand{get;} public RelayCommand ViewCapturedAssetsCommand{get;}
     public AsyncRelayCommand NewShotCommand{get;} public AsyncRelayCommand DuplicateShotCommand{get;} public AsyncRelayCommand ArchiveShotCommand{get;} public AsyncRelayCommand SetCurrentShotCommand{get;}
     public AsyncRelayCommand MarkShotCompletedCommand{get;} public AsyncRelayCommand MarkShotSkippedCommand{get;} public AsyncRelayCommand MoveShotUpCommand{get;} public AsyncRelayCommand MoveShotDownCommand{get;}
     public AsyncRelayCommand RemoveReferenceCommand{get;} public AsyncRelayCommand TogglePinCommand{get;}
@@ -81,6 +84,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
     public AsyncRelayCommand EnterTetherCommand{get;private set;}=null!;
     public Guid? ProjectId=>_project?.Id;public string ProjectName=>_project?.Name??"未选择项目";public string BookingDate=>_booking?.StartAtUtc.ToLocalTime().ToString("MM月dd日")??"未安排日期";public string Location=>_booking?.Location??"未填写地点";
     public string ProgressText=>$"{Shots.Count(shot=>shot.Status==ProjectShotStatus.Completed)} / {Shots.Count} 已拍";public string EstimatedTimeText=>$"预计 {Shots.Sum(shot=>shot.EstimatedMinutes)} 分钟";
+    public string CapturedAssetText=>$"已拍素材 {_state?.CapturedAssets?.Count??0} 张";
     public string SaveStatus{get=>_saveStatus;private set=>SetProperty(ref _saveStatus,value);}public bool HasProject=>ProjectId is not null;public bool HasShots=>Shots.Count>0;
     public ProjectShot? SelectedShot{get=>_selectedShot;set{if(SetProperty(ref _selectedShot,value)){LoadShotEditor(value);RefreshReferences();OnPropertyChanged(nameof(ShotHeading));OnPropertyChanged(nameof(InspectorHeading));}}}
     public ProjectShotReference? SelectedReference{get=>_selectedReference;set{if(SetProperty(ref _selectedReference,value)){_referenceNote=value?.Note??"";OnPropertyChanged(nameof(ReferenceNote));OnPropertyChanged(nameof(InspectorHeading));}}}
@@ -105,7 +109,7 @@ public sealed class PlanningCenterViewModel : ObservableObject
         var catalog=await _shots.LoadAsync(projectId,token);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==_state.CurrentShotId)??Shots.FirstOrDefault();
         VisualLinks.Clear();foreach(var link in _state.VisualLinks??[])VisualLinks.Add(link);ProjectCanvases.Clear();foreach(var canvas in await _canvases.ListAsync(projectId,token))ProjectCanvases.Add(canvas);
         ProjectBoards.Clear();if(_inspiration is not null)foreach(var board in (await _inspiration.ListCollectionsAsync(token)).Where(item=>item.ProjectId==projectId))ProjectBoards.Add(board);
-        var visual=await _visuals.LoadAsync(projectId,token);PaletteColors.Clear();if(visual.DefaultPalette is not null)foreach(var color in visual.DefaultPalette.Colors)PaletteColors.Add(new(color.Hex,color.Weight));
+        var visual=await _visuals.LoadAsync(projectId,token);PaletteColors.Clear();if(visual.DefaultPalette is not null)foreach(var color in visual.DefaultPalette.Colors)PaletteColors.Add(new(color.Hex,color.Weight));ToneZones.Clear();if(visual.DefaultToneTarget is not null)foreach(var item in visual.DefaultToneTarget.Zones.Ratios.Select((ratio,index)=>new PlanningToneZoneItem(index,ratio)))ToneZones.Add(item);
         ColorSchemes.Clear();var catalogLooks=await _looks.LoadAsync(token);foreach(var look in catalogLooks.Looks.Where(item=>item.ProjectId==projectId))ColorSchemes.Add(look);
         NotifyAll();EnterTetherCommand.RaiseCanExecuteChanged();
     }
@@ -145,10 +149,11 @@ public sealed class PlanningCenterViewModel : ObservableObject
     private bool FilterShot(object value)=>value is ProjectShot shot&&(_filter is null||shot.Status==_filter)&&(string.IsNullOrWhiteSpace(_searchText)||shot.Name.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)||(shot.Notes?.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)??false));
     private void ReplaceShot(ProjectShot shot){var index=Shots.ToList().FindIndex(item=>item.ShotId==shot.ShotId);if(index>=0)Shots[index]=shot;_selectedShot=shot;OnPropertyChanged(nameof(SelectedShot));RefreshReferences();NotifyAll();}
     private void RefreshReferences(){References.Clear();if(SelectedShot is not null)foreach(var reference in SelectedShot.References)References.Add(reference);SelectedReference=References.FirstOrDefault();}
-    private void NotifyAll(){foreach(var name in new[]{nameof(ProjectId),nameof(ProjectName),nameof(BookingDate),nameof(Location),nameof(ProgressText),nameof(EstimatedTimeText),nameof(HasProject),nameof(HasShots),nameof(ShotHeading),nameof(InspectorHeading)})OnPropertyChanged(name);ShotsView.Refresh();}
+    private void NotifyAll(){foreach(var name in new[]{nameof(ProjectId),nameof(ProjectName),nameof(BookingDate),nameof(Location),nameof(ProgressText),nameof(EstimatedTimeText),nameof(CapturedAssetText),nameof(HasProject),nameof(HasShots),nameof(ShotHeading),nameof(InspectorHeading)})OnPropertyChanged(name);ShotsView.Refresh();}
 }
 
 public sealed record ProjectPaletteColorItem(string Hex,double Weight);
+public sealed record PlanningToneZoneItem(int Zone,double Ratio){public double BarHeight=>Math.Max(2,Math.Min(64,Ratio*64));}
 public sealed record ShotReferenceKindOption(ShotReferenceKind Kind,string Label)
 {
     public static IReadOnlyList<ShotReferenceKindOption> All { get; } =
