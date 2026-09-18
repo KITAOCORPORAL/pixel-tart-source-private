@@ -4,15 +4,19 @@
 
 | 项目 | 结果 | 证据 |
 |---|---|---|
-| 独立参考仿色核心 | PASS | `ReferenceLookMatcher` / `ReferenceLookPreviewService` / 工具箱注册 |
+| 独立参考仿色核心 | PASS | `ReferenceLookMatcher` / `ReferenceLookPreviewService` / `ReferenceLookStore` |
+| 独立参考仿色完整工具入口 | PASS（源码，待安装后验收） | `ReferenceColorWorkspaceView` / `ReferenceColorWorkspaceViewModel` / 正式工具箱入口 |
 | 联机折叠参考模式 | PASS | `TetherCaptureView.xaml` 的「参考模式」Expander |
 | 联机高级调整折叠 | PASS | `Advanced` Expander 与统一 `ReferenceLookParameters` |
 | 共享仿色引擎 | PASS | `TetherReferenceModeViewModel` 调用 `ReferenceLookPreviewService` / `ReferenceLookMatcher` |
 | 共享参数模型 | PASS | `ReferenceLookParameters` |
 | 共享左右对比 | PASS | `TetherReferenceSplitView` 与同一 Preview 状态 |
-| Session 临时状态 | PARTIAL | 当前实现已有 session look 选择与 preview revision；现场参数持久化/显式另存的完整 round-trip 仍待人工验收 |
+| Session 临时状态 | PASS（源码修复，待安装后验收） | Tether 现场参数改为内存中的 session look，不再由滑块直接写入 `ReferenceLookStore`；安装后 round-trip 仍待人工验收 |
 | 结果一致性 | PASS（核心） | Stage IV 色彩核心与 LUT 测试 19/19 通过 |
 | Capture ingest 不阻塞 | PASS（代码契约） | Tether ingest 与参考 preview 分离、带 cancellation/revision |
+| 显式保存当前调整 | PASS（源码，待安装后验收） | Tether UI 已接入显式保存命令；Slider 不再隐式写 Store |
+| 恢复色彩方案 | PASS（源码，待安装后验收） | Tether UI 已接入恢复命令，恢复持久化方案参数 |
+| 完整编辑器跳转 / Round Trip | PASS（源码，待安装后验收） | Tether 通过 `FullEditorRequested` 传入稳定 ID、项目、当前照片引用并导航到独立 workspace |
 
 ## 安装后流程状态
 
@@ -30,4 +34,4 @@ Fresh Install、Installed Launch、Planning Toggle、Tether、Reference Mode、U
 
 ## 结论
 
-安装包已达到“可交给用户双击安装”的候选状态；真实安装、升级、卸载、重装及物理 UI 结果必须由用户在普通电脑上确认后，才能将最终 Release Readiness 标记为通过。不要进入 Stage VI。
+源码架构门已闭合，安装包已达到“可交给用户双击安装”的候选状态；真实安装、升级、卸载、重装、独立↔Tether round trip 及物理 UI 结果必须由用户在普通电脑上确认后，才能将最终 Release Readiness 标记为通过。不要进入 Stage VI。
