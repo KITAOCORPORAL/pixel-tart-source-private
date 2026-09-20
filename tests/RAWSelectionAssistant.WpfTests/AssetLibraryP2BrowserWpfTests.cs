@@ -128,7 +128,20 @@ public sealed class AssetLibraryP2BrowserWpfTests
                     Assert.IsGreaterThan(0, panel.RealizedItemCount, mode.ToString());
                     Assert.IsLessThan(80, panel.RealizedItemCount, $"{mode} must keep the realized transition window compact.");
                     Assert.AreEqual(0d, panel.HorizontalOffset, 0.01d, mode.ToString());
-                    page.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                    // Keep WPF continuations on the fixture's STA dispatcher.
+                    // Blocking GetResult without a synchronization context sends
+                    // disposal notifications to the pool while Buttons remain bound.
+                    var previous = SynchronizationContext.Current;
+                    SynchronizationContext.SetSynchronizationContext(new System.Windows.Threading.DispatcherSynchronizationContext());
+                    try
+                    {
+                        var dispose = page.DisposeAsync().AsTask();
+                        var deadline = DateTime.UtcNow.AddSeconds(30);
+                        while (!dispose.IsCompleted && DateTime.UtcNow < deadline) PumpDispatcher();
+                        Assert.IsTrue(dispose.IsCompleted, "Fixture disposal timed out");
+                        dispose.GetAwaiter().GetResult();
+                    }
+                    finally { SynchronizationContext.SetSynchronizationContext(previous); }
                 }
                 finally { try { Directory.Delete(root, true); } catch { } }
             }
