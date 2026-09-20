@@ -862,11 +862,17 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 emptyPage.Measure(new Size(1280, 820));
                 emptyPage.Arrange(new Rect(0, 0, 1280, 820));
                 emptyPage.UpdateLayout();
-                Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryLoadingState").Visibility);
+                var loadingState = FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryLoadingState");
+                Assert.AreEqual(Visibility.Collapsed, loadingState.Visibility,
+                    "Studio feedback must not flash before the 300 ms threshold.");
+                Assert.IsTrue(StudioBusyFeedback.GetIsBusy(loadingState),
+                    "The loading mask must bind the real busy state; loaded timing is covered by StudioLoadingTests.");
 
                 emptyPage.ViewModel.InitializeAsync().CompleteOnDispatcher();
                 emptyPage.UpdateLayout();
                 Assert.IsFalse(emptyPage.ViewModel.IsLoading);
+                Assert.AreEqual(Visibility.Collapsed, loadingState.Visibility,
+                    "Completion must reset delayed feedback.");
                 Assert.IsFalse(emptyPage.ViewModel.HasLoadError);
                 Assert.IsTrue(emptyPage.ViewModel.IsEmptyStateVisible);
                 Assert.AreEqual(Visibility.Visible, FindVisualByAutomationId<Border>(emptyPage, "AssetLibraryEmptyState").Visibility);
