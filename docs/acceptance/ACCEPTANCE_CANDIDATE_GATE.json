@@ -1,0 +1,35 @@
+{
+  "Status": "FAIL",
+  "ProductSourceSha": "44009930e2fa40ef785b6bd85c16a31518f8acab",
+  "UserDebugRunsRequired": 0,
+  "UserVisualAcceptance": "PENDING USER",
+  "Checks": {
+    "Full124Contract": "INCOMPLETE",
+    "Upgrade70Contract": "INCOMPLETE",
+    "PlanLint": "PASS",
+    "ProductAccessibility": "PASS",
+    "RunnerTests": "PASS",
+    "V1Regression": "PASS",
+    "V2Regression": "PASS",
+    "V3Regression": "PASS",
+    "ReleaseBuild": "PASS",
+    "Core": "PASS",
+    "Wpf": "PASS",
+    "RealApp": "PASS",
+    "Dpi": "PASS",
+    "PortableKit": "PASS",
+    "InstallerHash": "PASS",
+    "FreshInstallation": "PASS",
+    "NativeDialogs": "BLOCKED",
+    "Internal124Rehearsal": "INCOMPLETE",
+    "InternalUpgrade70Rehearsal": "INCOMPLETE"
+  },
+  "EvidenceReport": "docs/implementation-reports/INSTALLED_ACCEPTANCE_ONE_PASS_CLOSURE.md",
+  "Limitations": [
+    "V1/V2/V3 regression PASS refers to internal selector and production peer tests, not installed full replay.",
+    "PortableKit PASS is seven internal staging preflight cases; no final Candidate ZIP was produced.",
+    "DPI PASS refers to software tests, not physical display acceptance.",
+    "Supported Windows screenshot failed twice with E_NOINTERFACE; observed click failed because coordinate geometry was unavailable.",
+    "Six native file-dialog contracts, full state-transition replay, and installed old-to-new upgrade remain unverified."
+  ]
+}

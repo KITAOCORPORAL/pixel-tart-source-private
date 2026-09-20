@@ -1,0 +1,5643 @@
+{
+  "Count": 124,
+  "Verified": 91,
+  "AccessibilityGap": 0,
+  "PlanBug": 6,
+  "NotApplicable": 27,
+  "Assumed": 0,
+  "CandidateGate": "FAIL",
+  "Rows": [
+    {
+      "StepId": "startup-alive",
+      "Stage": "BOOT",
+      "UserIntent": "startup-alive",
+      "Action": "assertProcessAlive",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "exit-tutorial",
+      "Stage": "ONBOARDING",
+      "UserIntent": "exit-tutorial",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "MainWindow",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "TutorialExitButton",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": "0 or 1 (conditional)",
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-exit-tutorial",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "tutorial-gone",
+      "Stage": "ONBOARDING",
+      "UserIntent": "onboarding",
+      "Action": "waitAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": "MainWindow",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "TutorialExitButton",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "BOOT"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-exit-tutorial",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "planning-enabled",
+      "Stage": "PRIMARY_NAVIGATION",
+      "UserIntent": "planning-enabled",
+      "Action": "assertEnabled",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationPlanning",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-enabled",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "planning",
+      "Stage": "PRIMARY_NAVIGATION",
+      "UserIntent": "planning",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationPlanning",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-enabled",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "planning-list",
+      "Stage": "PLANNING_LIST",
+      "UserIntent": "planning",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "DocumentList",
+      "AutomationName": "策划案列表",
+      "ControlType": "List",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-list",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "home-shot",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "home-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-open",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新建策划",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-heading",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-heading",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新建策划案",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-heading",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-name",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-name",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新策划名称",
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-name",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-location",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-location",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "拍摄地点",
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-location",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-value",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-value",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "拍摄日期",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PART_TextBox",
+      "AutomationName": "拍摄日期",
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-value",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-open",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "拍摄日期",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PART_Button",
+      "AutomationName": "选择拍摄日期",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-calendar",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-calendar",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "ControlType": "Calendar"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "Calendar",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "DATE_PICKER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-calendar",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-shot",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-next-day",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-next-day",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "ControlType": "Calendar"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "Calendar",
+      "RequiredPattern": null,
+      "Focusable": true,
+      "KeyboardInteraction": "{RIGHT}",
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "DATE_PICKER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-calendar",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-confirm",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date-confirm",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "ControlType": "Calendar"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "Calendar",
+      "RequiredPattern": null,
+      "Focusable": true,
+      "KeyboardInteraction": "{ENTER}",
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "DATE_PICKER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-calendar",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "date-check",
+      "Stage": "DATE_PICKER",
+      "UserIntent": "date",
+      "Action": "assertDate",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "拍摄日期",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PART_TextBox",
+      "AutomationName": "拍摄日期",
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-date-value",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-confirm",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-confirm",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新建策划",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATE_PLANNING_MODAL"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-confirm",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "create-closed",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create-closed",
+      "Action": "waitAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新建策划案",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-create-heading",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "created-list-item",
+      "Stage": "CREATE_PLANNING_MODAL",
+      "UserIntent": "create",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "策划案列表",
+        "AncestorType": "List"
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "ListItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-created-list-item",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "select-created",
+      "Stage": "PLANNING_LIST",
+      "UserIntent": "select-created",
+      "Action": "select",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "策划案列表",
+        "AncestorType": "List"
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "ListItem",
+      "RequiredPattern": "SelectionItem",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-created-list-item",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "text-open",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "text-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "edit",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "edit",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "编辑",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "MODULE-文字",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-edit",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "edit-body",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "edit-body",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "策划正文",
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_EDITOR"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-edit-body",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "edit-verify",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "text-edit",
+      "Action": "assertText",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "策划正文",
+      "ControlType": "Edit",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_EDITOR"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-edit-body",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-switch",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "save-switch",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-switch",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-return",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "save-return",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-content",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "save-content",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "FRESH_PREVIEW",
+          "MODULE-文字",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG",
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-content",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-close-request",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "restart-close-request",
+      "Action": "requestClose",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-close-confirm",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "restart-close-confirm",
+      "Action": "waitExit",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-close",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "restart-close",
+      "Action": "waitExit",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "restart",
+      "Action": "restart",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-exit-tutorial",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "restart-exit-tutorial",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "MainWindow",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "TutorialExitButton",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": "0 or 1 (conditional)",
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-exit-tutorial",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-planning",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "restart-planning",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationPlanning",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-enabled",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-select",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "restart-select",
+      "Action": "select",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "策划案列表",
+        "AncestorType": "List"
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": "ListItem",
+      "RequiredPattern": "SelectionItem",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-created-list-item",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "restart-text",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "restart-text",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "persisted-body",
+      "Stage": "PERSISTENCE",
+      "UserIntent": "persistence",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "FRESH_PREVIEW",
+          "MODULE-文字",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG",
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-content",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-text",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-text",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-text",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "text",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "FRESH_PREVIEW",
+          "MODULE-文字",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG",
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-content",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-text",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "capture-text",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-references",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-references",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-switch",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-references",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "references",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-参考图"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-references",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-references",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "capture-references",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-moodboard",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-moodboard",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "情绪板",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-moodboard",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-moodboard",
+      "Stage": "MOODBOARD",
+      "UserIntent": "moodboard",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-情绪板"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-moodboard",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-moodboard",
+      "Stage": "MOODBOARD",
+      "UserIntent": "capture-moodboard",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-shots",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-shots",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "镜头清单",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-shots",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-shots",
+      "Stage": "SHOT_LIST",
+      "UserIntent": "shots",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "0 / 0 已拍",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-镜头清单"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-shots",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-shots",
+      "Stage": "SHOT_LIST",
+      "UserIntent": "capture-shots",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-lighting",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-lighting",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "灯光图",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-lighting",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-lighting",
+      "Stage": "LIGHTING",
+      "UserIntent": "lighting",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-灯光图",
+          "MODULE-灯光图"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-lighting",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-lighting",
+      "Stage": "LIGHTING",
+      "UserIntent": "capture-lighting",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-styling",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-styling",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "服化道",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-styling",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-styling",
+      "Stage": "STYLING",
+      "UserIntent": "styling",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-服化道"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-styling",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-styling",
+      "Stage": "STYLING",
+      "UserIntent": "capture-styling",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "module-files",
+      "Stage": "CONTENT_NAVIGATION",
+      "UserIntent": "module-files",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文件",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-files",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "landmark-files",
+      "Stage": "FILES",
+      "UserIntent": "files",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "项目文件",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-文件",
+          "MODULE-文件"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-landmark-files",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "capture-files",
+      "Stage": "FILES",
+      "UserIntent": "capture-files",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-text",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-text",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-open",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "预览策划案",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-preview-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-list-hidden",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview",
+      "Action": "assertAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "DocumentList",
+      "AutomationName": "策划案列表",
+      "ControlType": "List",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "FRESH_PREVIEW"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-list",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-nav-hidden",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-nav-hidden",
+      "Action": "assertAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "FRESH_PREVIEW"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-edit-hidden",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-edit-hidden",
+      "Action": "assertAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "编辑",
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "FRESH_PREVIEW"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-edit",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-body",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-body",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "FRESH_PREVIEW",
+          "MODULE-文字",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG",
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-content",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-shot",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-escape",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-escape",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "摄影策划案工作区",
+      "ControlType": "Custom",
+      "RequiredPattern": null,
+      "Focusable": true,
+      "KeyboardInteraction": "{ESC}",
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "FRESH_PREVIEW",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-preview-escape",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "preview-restored",
+      "Stage": "PREVIEW_MODE",
+      "UserIntent": "preview-restored",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "DocumentList",
+      "AutomationName": "策划案列表",
+      "ControlType": "List",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-list",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "fixture",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "fixture",
+      "Action": "fixture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "import-page",
+      "Stage": "REFERENCE_IMPORT",
+      "UserIntent": "import-page",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-switch",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "import-open",
+      "Stage": "REFERENCE_IMPORT",
+      "UserIntent": "import-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "关联本地图片",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-灯光图",
+          "MODULE-服化道"
+        ],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-import-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "import-dialog",
+      "Stage": "REFERENCE_IMPORT",
+      "UserIntent": "import-dialog",
+      "Action": "waitPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "关联参考图（不复制原图）",
+      "ControlType": "Window",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-import-dialog",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "import-file",
+      "Stage": "REFERENCE_IMPORT",
+      "UserIntent": "import-file",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "关联参考图（不复制原图）",
+        "AncestorType": "Window"
+      },
+      "AutomationId": "1148",
+      "AutomationName": null,
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-import-file",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "import-submit",
+      "Stage": "REFERENCE_IMPORT",
+      "UserIntent": "import-submit",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "关联参考图（不复制原图）",
+        "AncestorType": "Window"
+      },
+      "AutomationId": "1",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": true
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-import-submit",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "reference-loaded",
+      "Stage": "REFERENCE_ITEM",
+      "UserIntent": "reference-loaded",
+      "Action": "waitPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PlanningReferences",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图：验收参考",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": true,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "MODULE-参考图"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-reference-loaded",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quick-open",
+      "Stage": "QUICK_PREVIEW",
+      "UserIntent": "quick-open",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PlanningReferences",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图：验收参考",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": true,
+      "KeyboardInteraction": "{ENTER}",
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "MODULE-参考图"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-reference-loaded",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quick-landmark",
+      "Stage": "QUICK_PREVIEW",
+      "UserIntent": "quick-preview",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "CloseImageButton",
+      "AutomationName": "关闭参考大图",
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "QUICK_PREVIEW"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-quick-landmark",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quick-shot",
+      "Stage": "QUICK_PREVIEW",
+      "UserIntent": "quick-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quick-close",
+      "Stage": "QUICK_PREVIEW",
+      "UserIntent": "quick-close",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "CloseImageButton",
+      "AutomationName": "关闭参考大图",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "QUICK_PREVIEW"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-quick-landmark",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-open",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-open",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PlanningReferences",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "参考图：验收参考",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": true,
+      "KeyboardInteraction": "+{F10}",
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "MODULE-参考图"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-reference-loaded",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-0",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-0",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "打开来源",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-0",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-1",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-1",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "加入情绪板",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-1",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-2",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-2",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "用于当前镜头",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-2",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-3",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-3",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "用于灯光",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-3",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-4",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-4",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "用于造型",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-4",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-5",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-item-5",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "用于参考仿色",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-5",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-item-6",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "context-menu",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "从策划中移除",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-6",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-shot",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "menu-escape",
+      "Stage": "CONTEXT_MENU",
+      "UserIntent": "menu-escape",
+      "Action": "focusKey",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "打开来源",
+      "ControlType": "MenuItem",
+      "RequiredPattern": null,
+      "Focusable": true,
+      "KeyboardInteraction": "{ESC}",
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "CONTEXT_MENU",
+          "CONTEXT_MENU-参考图",
+          "CONTEXT_MENU-情绪板",
+          "CONTEXT_MENU-灯光图",
+          "CONTEXT_MENU-服化道"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-menu-item-0",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "booking-open",
+      "Stage": "BOOKING_PICKER",
+      "UserIntent": "booking-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "关联档期",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-booking-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "booking-landmark",
+      "Stage": "BOOKING_PICKER",
+      "UserIntent": "booking",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "可关联档期",
+      "ControlType": "List",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "BOOKING_PICKER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-booking-landmark",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "booking-shot",
+      "Stage": "BOOKING_PICKER",
+      "UserIntent": "booking-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "booking-close",
+      "Stage": "BOOKING_PICKER",
+      "UserIntent": "booking-close",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "关联工作日历档期",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "取消",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "BOOKING_PICKER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-booking-close",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "export-open",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "export-open",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "导出策划案 PDF",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-export-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quality-expand",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "quality-expand",
+      "Action": "expand",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "导出策划案 PDF",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "PDF 导出质量",
+      "ControlType": "ComboBox",
+      "RequiredPattern": "ExpandCollapse",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-quality-expand",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "quality-select",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "quality-select",
+      "Action": "select",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "PDF 导出质量",
+        "AncestorType": "ComboBox"
+      },
+      "AutomationId": null,
+      "AutomationName": "高质量 · 300 DPI",
+      "ControlType": "ListItem",
+      "RequiredPattern": "SelectionItem",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EXPORT_QUALITY_POPUP"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-quality-select",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "export-confirm",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "export-confirm",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "导出策划案 PDF",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "导出 PDF",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-export-confirm",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-dialog",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "save-dialog",
+      "Action": "waitPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "导出策划案 PDF",
+      "ControlType": "Window",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-save-dialog",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-path",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "save-path",
+      "Action": "setValue",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "导出策划案 PDF",
+        "AncestorType": "Window"
+      },
+      "AutomationId": "1148",
+      "AutomationName": null,
+      "ControlType": "Edit",
+      "RequiredPattern": "Value",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-save-path",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "save-submit",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "save-submit",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "导出策划案 PDF",
+        "AncestorType": "Window"
+      },
+      "AutomationId": "1",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Windows file dialog",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No complete scoped peer evidence for this exact required contract; gate remains closed",
+      "Status": "PLAN_BUG",
+      "SelectorRef": "selector-save-submit",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "export-message",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "export-message",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "像素蛋挞消息对话框",
+            "ControlType": "Window"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "MessageTextBlock",
+      "AutomationName": "策划案 PDF 已导出（图片式，文字不可选择）。",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EXPORT_MESSAGE"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-export-message",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "export-shot",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "export-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "export-dismiss",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "export-dismiss",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "像素蛋挞消息对话框",
+            "ControlType": "Window"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "YesButton",
+      "AutomationName": "确定",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EXPORT_MESSAGE"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-export-dismiss",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "pdf-exists",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "pdf-exists",
+      "Action": "assertFileSize",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "pdf-pages",
+      "Stage": "PDF_EXPORT",
+      "UserIntent": "pdf",
+      "Action": "assertPdfPages",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "shot-page",
+      "Stage": "SHOT_LIST",
+      "UserIntent": "shot-page",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "镜头清单",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-module-shots",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "shot-new",
+      "Stage": "SHOT_LIST",
+      "UserIntent": "shot-new",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "新建镜头",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "EMPTY-镜头清单",
+          "MODULE-镜头清单"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-shot-new",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "more",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "more",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "更多策划操作",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-more",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "shoot",
+      "Stage": "TETHER",
+      "UserIntent": "shoot",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": "Menu"
+      },
+      "AutomationId": null,
+      "AutomationName": "开始拍摄",
+      "ControlType": "MenuItem",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": "Owned PID Menu",
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "MORE_MENU"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-shoot",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "tether-workspace",
+      "Stage": "TETHER",
+      "UserIntent": "tether",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "联机拍摄现场监看工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "联机拍摄现场监看工作区",
+      "ControlType": "Custom",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-tether-workspace",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "tether-context",
+      "Stage": "TETHER",
+      "UserIntent": "tether-context",
+      "Action": "assertEnabled",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "联机拍摄现场监看工作区",
+        "AncestorType": "Custom"
+      },
+      "AutomationId": null,
+      "AutomationName": "返回当前项目策划",
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-tether-context",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "tether-shot-context",
+      "Stage": "TETHER",
+      "UserIntent": "tether-shot-context",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "联机拍摄现场监看工作区",
+        "AncestorType": "Custom"
+      },
+      "AutomationId": null,
+      "AutomationName": "Shot 01 / 01 · 未命名拍摄",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-tether-shot-context",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "tether-shot",
+      "Stage": "TETHER",
+      "UserIntent": "tether-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "back-planning",
+      "Stage": "PRIMARY_NAVIGATION",
+      "UserIntent": "back-planning",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationPlanning",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-enabled",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "back-text",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "back-text",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "文字",
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "PLANNING_LIST",
+          "CREATE_PLANNING_MODAL",
+          "CREATED_PROJECT",
+          "TEXT_READING",
+          "TEXT_EDITOR",
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "EMPTY-参考图",
+          "EMPTY-情绪板",
+          "EMPTY-镜头清单",
+          "EMPTY-灯光图",
+          "EMPTY-服化道",
+          "EMPTY-文件",
+          "REFERENCE_IMPORTED",
+          "参考图",
+          "QUICK_PREVIEW",
+          "情绪板",
+          "灯光图",
+          "服化道",
+          "MODULE-文字",
+          "MODULE-参考图",
+          "MODULE-情绪板",
+          "MODULE-镜头清单",
+          "MODULE-灯光图",
+          "MODULE-服化道",
+          "MODULE-文件",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-text-open",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "back-body",
+      "Stage": "TEXT_EDITOR",
+      "UserIntent": "return-planning",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "TEXT_SAVED",
+          "EMPTY-文字",
+          "FRESH_PREVIEW",
+          "MODULE-文字",
+          "PREVIEW_MODE",
+          "BOOKING_PICKER",
+          "EXPORT_DIALOG",
+          "TETHER"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-save-content",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "online",
+      "Stage": "ONLINE_SELECTION",
+      "UserIntent": "online",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationOnlineSelection",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-online",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "online-landmark",
+      "Stage": "ONLINE_SELECTION",
+      "UserIntent": "online",
+      "Action": "assertPresent",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": "在线选片",
+        "AncestorType": "Custom"
+      },
+      "AutomationId": null,
+      "AutomationName": "创建选片项目",
+      "ControlType": "Button",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-online-landmark",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "online-not-toolbox",
+      "Stage": "ONLINE_SELECTION",
+      "UserIntent": "online-not-toolbox",
+      "Action": "assertAbsent",
+      "ExpectedUIState": "Target absent in required state",
+      "Scope": {
+        "Preset": null,
+        "Path": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ],
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": "摄影策划案工作区",
+      "ControlType": "Custom",
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 0,
+      "ObservedStructuralMatch": 0,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Verified absent in named production peer state; installed transition remains separate",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-preview-escape",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "online-shot",
+      "Stage": "ONLINE_SELECTION",
+      "UserIntent": "online-shot",
+      "Action": "capture",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "final-planning",
+      "Stage": "PRIMARY_NAVIGATION",
+      "UserIntent": "final-planning",
+      "Action": "invoke",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": "PrimaryNavigation",
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": "PrimaryNavigationPlanning",
+      "AutomationName": null,
+      "ControlType": "Button",
+      "RequiredPattern": "Invoke",
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": 1,
+      "ObservedStructuralMatch": 1,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [
+          "ONBOARDING",
+          "BOOT",
+          "TETHER",
+          "ONLINE_SELECTION"
+        ],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "Structural peer contract only; step-specific transition must also pass",
+      "Status": "VERIFIED",
+      "SelectorRef": "selector-planning-enabled",
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "final-close-request",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "final-close-request",
+      "Action": "requestClose",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "final-close-confirm",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "final-close-confirm",
+      "Action": "waitExit",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    },
+    {
+      "StepId": "final-close",
+      "Stage": "NORMAL_CLOSE",
+      "UserIntent": "normal-close",
+      "Action": "waitExit",
+      "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
+      "Scope": {
+        "Preset": null,
+        "Path": null,
+        "AncestorName": null,
+        "AncestorType": null
+      },
+      "AutomationId": null,
+      "AutomationName": null,
+      "ControlType": null,
+      "RequiredPattern": null,
+      "Focusable": false,
+      "KeyboardInteraction": null,
+      "PopupRoot": null,
+      "ExpectedMatchCount": null,
+      "ObservedStructuralMatch": null,
+      "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "ContractEvidence": {
+        "PeerArtifact": "artifacts/one-pass-contract/4400993",
+        "CurrentInstalledProof": false,
+        "HistoricalProduct": "8cb95e6",
+        "PeerStates": [],
+        "HistoricalV3StepPass": false
+      },
+      "Risk": "No UI selector; action/state evidence still required",
+      "Status": "NOT_APPLICABLE",
+      "SelectorRef": null,
+      "StateTransition": "PENDING_PER_STEP_REPLAY"
+    }
+  ]
+}

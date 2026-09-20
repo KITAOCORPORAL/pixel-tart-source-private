@@ -1,8 +1,8 @@
 # Pixel Tart 安装版一键验收
 
-AcceptanceKit v3：修复全局导航作用域，保留日期输入修复，加入计划 lint、作用域失败诊断和第七项进程冲突检查。产品源码及安装器未修改。请先正常关闭所有 Pixel Tart 窗口，并解压到新的文件夹；旧失败证据不要删除或覆盖。每次正式验收均创建时间戳和随机编号的新结果目录，从 Fresh Install 重跑，不拼接旧结果。
+当前为内部收敛阶段，Candidate Gate 未通过时禁止交付。产品已修复参考图片可访问性及联机拍摄项目上下文，并使用新安装器。用户不参与 Runner 调试；最终候选说明见 `README_最终候选验收.md`。旧失败证据不要删除或覆盖。每次正式验收均创建时间戳和随机编号的新结果目录，从 Fresh Install 重跑，不拼接旧结果。
 
-完整交付文件：`PixelTart-Installed-Acceptance-Kit-8cb95e6-v3.zip`。不要只下载 BAT，也不要在压缩包预览窗口内运行。
+唯一允许的下一次完整交付文件：`PixelTart-DeveloperPreview-AcceptanceCandidate-01.zip`，只能在内部 Gate 全部通过后生成。不要单独分发 BAT。
 
 适用：Windows 10 2004 或以上的 x64 独立测试机器/测试虚拟机，交互桌面保持解锁，建议 1920×1080、100% 缩放。无需 Visual Studio、.NET 安装、命令输入或 JSON 编辑。
 
@@ -10,7 +10,7 @@ AcceptanceKit v3：修复全局导航作用域，保留日期输入修复，加�
 
 1. 下载完整 ZIP。
 2. 将 ZIP 全部解压到可写目录。
-3. 双击「运行安装版验收.bat」；检查通过后按提示开始。
+3. 双击「运行最终候选验收.bat」；检查通过后按提示开始。
 4. 如果 Windows 询问是否允许运行，确认。
 5. 测试完成后把同目录的 `acceptance-result.zip` 发给 Codex。不会自动上传。
 
@@ -20,7 +20,7 @@ AcceptanceKit v3：修复全局导航作用域，保留日期输入修复，加�
 
 ## 安全边界
 
-安装和数据只放在 `%LOCALAPPDATA%\PixelTart-TestAcceptance\InstalledAcceptance_8cb95e6_<模式>_<唯一编号>`。每次是新目录，不删除旧证据，不读写真实素材库、项目和设置；只用自动生成的测试图。旧、新安装包已随包提供并按 SHA256 验证。
+安装和数据只放在 `%LOCALAPPDATA%\PixelTart-TestAcceptance\InstalledAcceptance_<产品短版本号>_<模式>_<唯一编号>`。每次是新目录，不删除旧证据，不读写真实素材库、项目和设置；只用自动生成的测试图。旧、新安装包须随最终包提供并按 SHA256 验证。
 
 请用没有正式使用版本的独立测试 Windows/虚拟机。原安装器需要管理员权限并共用安装注册项；检测到正式安装或正在运行的 PixelTart 会停止保护数据。预检不请求提升，开始安装时才请求；Runner 与它启动的 Pixel Tart 继承相同权限。测试安装和证据保留，不自动删除。
 

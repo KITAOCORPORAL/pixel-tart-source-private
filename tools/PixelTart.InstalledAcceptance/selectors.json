@@ -1,0 +1,697 @@
+{
+  "selector-exit-tutorial": {
+    "ControlType": "Button",
+    "AutomationId": "TutorialExitButton",
+    "ScopePreset": "MainWindow"
+  },
+  "selector-planning-enabled": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationPlanning",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-planning-list": {
+    "Name": "策划案列表",
+    "ControlType": "List",
+    "AutomationId": "DocumentList",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-create-open": {
+    "Name": "新建策划",
+    "ControlType": "Button",
+    "HelpText": "新建策划",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-create-heading": {
+    "Name": "新建策划案",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-create-name": {
+    "Name": "新策划名称",
+    "ControlType": "Edit",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "新建策划案",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-create-location": {
+    "Name": "拍摄地点",
+    "ControlType": "Edit",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "新建策划案",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-date-value": {
+    "Name": "拍摄日期",
+    "ControlType": "Edit",
+    "AutomationId": "PART_TextBox",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "新建策划案",
+        "ControlType": "Text",
+        "Heading": true
+      },
+      {
+        "Name": "拍摄日期",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-date-open": {
+    "Name": "选择拍摄日期",
+    "ControlType": "Button",
+    "AutomationId": "PART_Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "新建策划案",
+        "ControlType": "Text",
+        "Heading": true
+      },
+      {
+        "Name": "拍摄日期",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-date-calendar": {
+    "ControlType": "Calendar",
+    "ScopePath": [
+      {
+        "ControlType": "Calendar"
+      }
+    ]
+  },
+  "selector-create-confirm": {
+    "Name": "新建策划",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "新建策划案",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-created-list-item": {
+    "ControlType": "ListItem",
+    "AncestorAutomationId": "DocumentList",
+    "AncestorName": "策划案列表",
+    "AncestorControlType": "List",
+    "DescendantName": "{project}"
+  },
+  "selector-text-open": {
+    "Name": "文字",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-edit": {
+    "Name": "编辑",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-edit-body": {
+    "Name": "策划正文",
+    "ControlType": "Edit",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-save-switch": {
+    "Name": "参考图",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-save-content": {
+    "Name": "Installed Acceptance Persistence {shortsha}",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-restart-close-confirm": {
+    "Name": "保存",
+    "ControlType": "Button",
+    "AncestorName": "像素蛋挞消息对话框",
+    "AncestorControlType": "Window"
+  },
+  "selector-landmark-references": {
+    "Name": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-module-moodboard": {
+    "Name": "情绪板",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-landmark-moodboard": {
+    "Name": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-module-shots": {
+    "Name": "镜头清单",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-landmark-shots": {
+    "Name": "0 / 0 已拍",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-module-lighting": {
+    "Name": "灯光图",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-landmark-lighting": {
+    "Name": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-module-styling": {
+    "Name": "服化道",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-landmark-styling": {
+    "Name": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-module-files": {
+    "Name": "文件",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-landmark-files": {
+    "Name": "项目文件",
+    "ControlType": "Text",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-preview-open": {
+    "Name": "预览策划案",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-preview-escape": {
+    "Name": "摄影策划案工作区",
+    "ControlType": "Custom",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-import-open": {
+    "Name": "关联本地图片",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-import-dialog": {
+    "Name": "关联参考图（不复制原图）",
+    "ControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-import-file": {
+    "ControlType": "Edit",
+    "AutomationId": "1148",
+    "AncestorName": "关联参考图（不复制原图）",
+    "AncestorControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-import-submit": {
+    "ControlType": "Button",
+    "AutomationId": "1",
+    "AncestorName": "关联参考图（不复制原图）",
+    "AncestorControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-reference-loaded": {
+    "Name": "参考图：验收参考",
+    "ControlType": "Button",
+    "ScopePreset": "PlanningReferences",
+    "RequiredPattern": "Invoke",
+    "RequireFocusable": true
+  },
+  "selector-quick-landmark": {
+    "Name": "关闭参考大图",
+    "ControlType": "Button",
+    "AutomationId": "CloseImageButton",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-menu-item-0": {
+    "Name": "打开来源",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-1": {
+    "Name": "加入情绪板",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-2": {
+    "Name": "用于当前镜头",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-3": {
+    "Name": "用于灯光",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-4": {
+    "Name": "用于造型",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-5": {
+    "Name": "用于参考仿色",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-menu-item-6": {
+    "Name": "从策划中移除",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-booking-open": {
+    "Name": "关联档期",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-booking-landmark": {
+    "Name": "可关联档期",
+    "ControlType": "List",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-booking-close": {
+    "Name": "取消",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "关联工作日历档期",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-export-open": {
+    "Name": "导出策划案 PDF",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-quality-expand": {
+    "Name": "PDF 导出质量",
+    "ControlType": "ComboBox",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "导出策划案 PDF",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-quality-select": {
+    "Name": "高质量 · 300 DPI",
+    "ControlType": "ListItem",
+    "AncestorName": "PDF 导出质量",
+    "AncestorControlType": "ComboBox"
+  },
+  "selector-export-confirm": {
+    "Name": "导出 PDF",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "Name": "导出策划案 PDF",
+        "ControlType": "Text",
+        "Heading": true
+      }
+    ]
+  },
+  "selector-save-dialog": {
+    "Name": "导出策划案 PDF",
+    "ControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-save-path": {
+    "ControlType": "Edit",
+    "AutomationId": "1148",
+    "AncestorName": "导出策划案 PDF",
+    "AncestorControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-save-submit": {
+    "ControlType": "Button",
+    "AutomationId": "1",
+    "AncestorName": "导出策划案 PDF",
+    "AncestorControlType": "Window",
+    "ExternalDialog": true
+  },
+  "selector-export-message": {
+    "Name": "策划案 PDF 已导出（图片式，文字不可选择）。",
+    "ControlType": "Text",
+    "AutomationId": "MessageTextBlock",
+    "ScopePath": [
+      {
+        "Name": "像素蛋挞消息对话框",
+        "ControlType": "Window"
+      }
+    ]
+  },
+  "selector-export-dismiss": {
+    "Name": "确定",
+    "ControlType": "Button",
+    "AutomationId": "YesButton",
+    "ScopePath": [
+      {
+        "Name": "像素蛋挞消息对话框",
+        "ControlType": "Window"
+      }
+    ]
+  },
+  "selector-shot-new": {
+    "Name": "新建镜头",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-more": {
+    "Name": "更多策划操作",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-shoot": {
+    "Name": "开始拍摄",
+    "ControlType": "MenuItem",
+    "AncestorControlType": "Menu"
+  },
+  "selector-tether-workspace": {
+    "Name": "联机拍摄现场监看工作区",
+    "ControlType": "Custom",
+    "ScopePath": [
+      {
+        "Name": "联机拍摄现场监看工作区",
+        "ControlType": "Custom"
+      }
+    ]
+  },
+  "selector-tether-context": {
+    "Name": "返回当前项目策划",
+    "ControlType": "Button",
+    "AncestorName": "联机拍摄现场监看工作区",
+    "AncestorControlType": "Custom"
+  },
+  "selector-tether-shot-context": {
+    "Name": "Shot 01 / 01 · 未命名拍摄",
+    "ControlType": "Text",
+    "AncestorName": "联机拍摄现场监看工作区",
+    "AncestorControlType": "Custom"
+  },
+  "selector-online": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationOnlineSelection",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-online-landmark": {
+    "Name": "创建选片项目",
+    "ControlType": "Button",
+    "AncestorName": "在线选片",
+    "AncestorControlType": "Custom"
+  },
+  "selector-check-finish-edit": {
+    "Name": "完成编辑",
+    "ControlType": "Button",
+    "ScopePath": [
+      {
+        "Name": "摄影策划案工作区",
+        "ControlType": "Custom"
+      },
+      {
+        "AutomationId": "DocumentScroll",
+        "ControlType": "Pane"
+      }
+    ]
+  },
+  "selector-nav-audit-0": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationWorkbench",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-1": {
+    "ControlType": "Button",
+    "AutomationId": "AssetLibraryNavigationButton",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-2": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationWorkflow",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-3": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationWorkCalendar",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-5": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationTether",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-7": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationFinance",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-8": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationHistory",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-9": {
+    "ControlType": "Button",
+    "AutomationId": "PrimaryNavigationToolbox",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-audit-10": {
+    "ControlType": "Button",
+    "AutomationId": "SidebarSettingsButton",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-system-0": {
+    "Name": "授权与版本",
+    "ControlType": "Button",
+    "ScopePreset": "PrimaryNavigation"
+  },
+  "selector-nav-system-1": {
+    "Name": "帮助",
+    "ControlType": "Button",
+    "ScopePreset": "PrimaryNavigation"
+  }
+}

@@ -7,5 +7,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AcceptanceDotnet Condition="'$(DotNetHostPath)' != ''">$(DotNetHostPath)</AcceptanceDotnet>
+    <AcceptanceDotnet Condition="'$(AcceptanceDotnet)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildToolsPath)\..\..\dotnet.exe'))</AcceptanceDotnet>
   </PropertyGroup>
+  <ItemGroup>
+    <None Update="planning-full.plan.json;upgrade-full.plan.json;selectors.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="InstalledAcceptancePlanLint" AfterTargets="Build">
+    <Exec Command="&quot;$(AcceptanceDotnet)&quot; &quot;$(TargetPath)&quot; --lint-plan &quot;$(MSBuildProjectDirectory)\planning-full.plan.json&quot;" IgnoreStandardErrorWarningFormat="true" />
+    <Exec Command="&quot;$(AcceptanceDotnet)&quot; &quot;$(TargetPath)&quot; --lint-plan &quot;$(MSBuildProjectDirectory)\upgrade-full.plan.json&quot;" IgnoreStandardErrorWarningFormat="true" />
+  </Target>
 </Project>

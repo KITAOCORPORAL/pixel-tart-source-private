@@ -22,7 +22,7 @@ internal static partial class Program
         if (args is ["--selector-tests"]) return SelectorTests();
         if (args.Length == 2 && args[0] == "--audit-selectors")
         {
-            try { PlanDirectory = Path.GetFullPath(args[1]); VerifyKitManifest(); var p = JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, "planning-full.plan.json")), Json)!; Validate(p); return new Runner(p, true).Run(); }
+            try { PlanDirectory = Path.GetFullPath(args[1]); VerifyKitManifest(); var p = LoadPlan(Child(PlanDirectory, "planning-full.plan.json")); Validate(p); return new Runner(p, true).Run(); }
             catch (Exception e) { Console.Error.WriteLine(e.Message); return 1; }
         }
         if (args.Length == 3 && args[0] == "--kit" && args[2] == "--preflight-only")
@@ -32,7 +32,7 @@ internal static partial class Program
                 PlanDirectory = Path.GetFullPath(args[1]);
                 VerifyKitManifest();
                 foreach (var file in new[] { "planning-full.plan.json", "upgrade-full.plan.json" })
-                    Validate(JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, file)), Json)!);
+                    Validate(LoadPlan(Child(PlanDirectory, file)));
                 Console.WriteLine("Runner PASS：--kit 参数已识别；两份完整计划与安装器校验通过。仅预检，没有安装或 UI 自动化。");
                 return 0;
             }
@@ -45,7 +45,7 @@ internal static partial class Program
         try
         {
             PlanDirectory = Path.GetDirectoryName(Path.GetFullPath(args[1]))!;
-            var plan = JsonSerializer.Deserialize<Plan>(File.ReadAllText(args[1]), Json) ?? throw new InvalidDataException("Empty plan");
+            var plan = LoadPlan(args[1]);
             Validate(plan);
             if (args[0] == "--validate") { Console.WriteLine("Plan schema/path/hash validation PASS. NO UI executed."); return 0; }
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.PerMonitorV2);
@@ -161,7 +161,7 @@ internal static partial class Program
                 if (process.HasExited) throw new IOException("App exited before MainWindow");
                 var candidates = AutomationElement.RootElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ProcessIdProperty, process.Id)).Cast<AutomationElement>()
                     .Where(e => e.Current.ControlType == ControlType.Window && e.Current.Name.Contains(CurrentSource[..7], StringComparison.Ordinal)).ToArray();
-                if (candidates.Length == 1) { window = candidates[0]; break; }
+                if (candidates.Length == 1) { window = RequireUnique(candidates, "main-window"); break; }
                 Thread.Sleep(200);
             }
             if (window is null) throw new TimeoutException("Unique PID-bound MainWindow unavailable");
@@ -185,7 +185,15 @@ internal static partial class Program
                 AutomationElement[] found;
                 try { found = Find(step); scopeFailure = null; }
                 catch (MissingScopeException e) { scopeFailure = e; Thread.Sleep(200); continue; }
-                if (found.Length == 1) return RequireUnique(found, step.Id);
+                if (found.Length == 1)
+                {
+                    var target = RequireUnique(found, step.Id);
+                    if (step.RequireFocusable && (!target.Current.IsKeyboardFocusable || !target.Current.IsEnabled || target.Current.IsOffscreen))
+                        throw new InvalidOperationException("Interactive target must be visible, enabled and keyboard focusable: " + step.Id);
+                    if (step.RequiredPattern is { } pattern && !target.GetSupportedPatterns().Any(p => p.ProgrammaticName == pattern + "PatternIdentifiers.Pattern"))
+                        throw new InvalidOperationException("Required pattern missing: " + step.Id + "/" + pattern);
+                    return target;
+                }
                 if (found.Length > 1) { Diagnose(step, found, "target"); return RequireUnique(found, step.Id); }
                 Thread.Sleep(200);
             }
@@ -217,8 +225,9 @@ internal static partial class Program
                 case "select": ((SelectionItemPattern)element.GetCurrentPattern(SelectionItemPattern.Pattern)).Select(); break;
                 case "expand": ((ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand(); break;
                 case "focusKey":
+                    if (!element.Current.IsKeyboardFocusable || !element.Current.IsEnabled) throw new InvalidOperationException("Target cannot receive keyboard input: " + s.Id);
                     element.SetFocus();
-                    Until(() => { GetWindowThreadProcessId(GetForegroundWindow(), out var pid); return pid == process!.Id && AutomationElement.FocusedElement.Current.ProcessId == process.Id; }, s.TimeoutMs);
+                    Until(() => { GetWindowThreadProcessId(GetForegroundWindow(), out var pid); return pid == process!.Id && Automation.Compare(AutomationElement.FocusedElement, element); }, s.TimeoutMs);
                     System.Windows.Forms.SendKeys.SendWait(s.Value!); break;
                 case "assertText":
                     var value = element.TryGetCurrentPattern(ValuePattern.Pattern, out var vp) ? ((ValuePattern)vp).Current.Value : element.TryGetCurrentPattern(TextPattern.Pattern, out var tp) ? ((TextPattern)tp).DocumentRange.GetText(-1) : element.Current.Name;
@@ -261,5 +270,6 @@ internal static partial class Program
         string? AutomationId = null, string? AncestorAutomationId = null, string? AncestorName = null, string? AncestorControlType = null,
         string? ScopeAnchorName = null, string? DescendantName = null, string? HelpText = null, bool Optional = false, bool IncludeOffscreen = false,
         string? Path = null, string? ExpectedHash = null, long Minimum = 1, int TimeoutMs = 10000, int Milliseconds = 100,
-        string? Coverage = null, bool ExternalDialog = false, string[]? MustContain = null, SelectorScope[]? ScopePath = null, string? ScopePreset = null);
+        string? Coverage = null, bool ExternalDialog = false, string[]? MustContain = null, SelectorScope[]? ScopePath = null, string? ScopePreset = null,
+        string? SelectorRef = null, string? RequiredPattern = null, bool RequireFocusable = false);
 }

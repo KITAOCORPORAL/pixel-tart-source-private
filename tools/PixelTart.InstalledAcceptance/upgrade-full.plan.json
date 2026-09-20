@@ -1,8 +1,8 @@
 {
-  "ProductSourceSha": "8cb95e6d2c4814717dc31a8c6aa19f8b2c89c9cc",
-  "InstallerPath": "installer/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe",
-  "InstallerSha256": "C2E5F26A1D00BFE2A466450C0BB9D015CDD35D6733E909FE8ADCB5BAEFA6247D",
-  "RunDirectory": "InstalledAcceptance_8cb95e6",
+  "ProductSourceSha": "44009930e2fa40ef785b6bd85c16a31518f8acab",
+  "InstallerPath": "installer/PixelTart-DeveloperPreview-2.3.0-dev.4400993-x64-Setup.exe",
+  "InstallerSha256": "C03F74A11AB5FA5BD6111C78EE71819FEB349296A6DFF3A4D078F530C5CC6C98",
+  "RunDirectory": "InstalledAcceptance_4400993",
   "FullPlan": true,
   "Mode": "upgrade",
   "Steps": [
@@ -13,361 +13,148 @@
     {
       "Id": "exit-tutorial",
       "Action": "invoke",
-      "AutomationId": "TutorialExitButton",
       "Optional": true,
       "TimeoutMs": 2000,
-      "ControlType": "Button",
-      "ScopePreset": "MainWindow"
+      "SelectorRef": "selector-exit-tutorial"
     },
     {
       "Id": "tutorial-gone",
       "Action": "waitAbsent",
-      "AutomationId": "TutorialExitButton",
-      "ControlType": "Button",
-      "ScopePreset": "MainWindow"
+      "SelectorRef": "selector-exit-tutorial"
     },
     {
       "Id": "planning-enabled",
       "Action": "assertEnabled",
-      "AutomationId": "PrimaryNavigationPlanning",
-      "ControlType": "Button",
-      "ScopePreset": "PrimaryNavigation"
+      "SelectorRef": "selector-planning-enabled"
     },
     {
       "Id": "planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning",
-      "ControlType": "Button",
-      "ScopePreset": "PrimaryNavigation"
+      "SelectorRef": "selector-planning-enabled"
     },
     {
       "Id": "planning-list",
       "Action": "assertPresent",
-      "Name": "策划案列表",
-      "ControlType": "List",
-      "AutomationId": "DocumentList",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-planning-list"
     },
     {
       "Id": "create-open",
       "Action": "invoke",
-      "Name": "新建策划",
-      "ControlType": "Button",
-      "HelpText": "新建策划",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-create-open"
     },
     {
       "Id": "create-heading",
       "Action": "assertPresent",
-      "Name": "新建策划案",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-create-heading"
     },
     {
       "Id": "create-name",
       "Action": "setValue",
-      "Name": "新策划名称",
-      "ControlType": "Edit",
       "Value": "{project}",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        }
-      ]
+      "SelectorRef": "selector-create-name"
     },
     {
       "Id": "create-location",
       "Action": "setValue",
-      "Name": "拍摄地点",
-      "ControlType": "Edit",
       "Value": "杭州测试摄影棚",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        }
-      ]
+      "SelectorRef": "selector-create-location"
     },
     {
       "Id": "date-value",
       "Action": "setValue",
-      "Name": "拍摄日期",
       "Value": "2026-09-19",
-      "AutomationId": "PART_TextBox",
-      "ControlType": "Edit",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        },
-        {
-          "Name": "拍摄日期",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-date-value"
     },
     {
       "Id": "date-open",
       "Action": "invoke",
-      "Name": "选择拍摄日期",
-      "ControlType": "Button",
-      "AutomationId": "PART_Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        },
-        {
-          "Name": "拍摄日期",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-date-open"
     },
     {
       "Id": "date-calendar",
       "Action": "assertPresent",
-      "ControlType": "Calendar",
       "IncludeOffscreen": false,
-      "ScopePath": [
-        {
-          "ControlType": "Calendar"
-        }
-      ]
+      "SelectorRef": "selector-date-calendar"
     },
     {
       "Id": "date-next-day",
       "Action": "focusKey",
-      "ControlType": "Calendar",
       "Value": "{RIGHT}",
-      "ScopePath": [
-        {
-          "ControlType": "Calendar"
-        }
-      ]
+      "SelectorRef": "selector-date-calendar"
     },
     {
       "Id": "date-confirm",
       "Action": "focusKey",
-      "ControlType": "Calendar",
       "Value": "{ENTER}",
-      "ScopePath": [
-        {
-          "ControlType": "Calendar"
-        }
-      ]
+      "SelectorRef": "selector-date-calendar"
     },
     {
       "Id": "date-check",
       "Action": "assertDate",
-      "Name": "拍摄日期",
       "Value": "2026-09-20",
-      "AutomationId": "PART_TextBox",
-      "ControlType": "Edit",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        },
-        {
-          "Name": "拍摄日期",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-date-value"
     },
     {
       "Id": "create-confirm",
       "Action": "invoke",
-      "Name": "新建策划",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "Name": "新建策划案",
-          "ControlType": "Text",
-          "Heading": true
-        }
-      ]
+      "SelectorRef": "selector-create-confirm"
     },
     {
       "Id": "create-closed",
       "Action": "waitAbsent",
-      "Name": "新建策划案",
-      "ControlType": "Text",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-create-heading"
     },
     {
       "Id": "created-list-item",
       "Action": "assertPresent",
-      "AncestorName": "策划案列表",
-      "ControlType": "ListItem",
-      "DescendantName": "{project}",
       "Coverage": "old-create",
-      "AncestorAutomationId": "DocumentList",
-      "AncestorControlType": "List"
+      "SelectorRef": "selector-created-list-item"
     },
     {
       "Id": "select-created",
       "Action": "select",
-      "AncestorName": "策划案列表",
-      "ControlType": "ListItem",
-      "DescendantName": "{project}",
-      "AncestorAutomationId": "DocumentList",
-      "AncestorControlType": "List"
+      "SelectorRef": "selector-created-list-item"
     },
     {
       "Id": "text-open",
       "Action": "invoke",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "edit",
       "Action": "invoke",
-      "Name": "编辑",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-edit"
     },
     {
       "Id": "edit-body",
       "Action": "setValue",
-      "Name": "策划正文",
-      "ControlType": "Edit",
       "IncludeOffscreen": true,
       "Value": "Installed Acceptance Persistence {shortsha}",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-edit-body"
     },
     {
       "Id": "edit-verify",
       "Action": "assertText",
-      "Name": "策划正文",
-      "ControlType": "Edit",
       "IncludeOffscreen": true,
       "Value": "Installed Acceptance Persistence {shortsha}",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-edit-body"
     },
     {
       "Id": "save-switch",
       "Action": "invoke",
-      "Name": "参考图",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-save-switch"
     },
     {
       "Id": "save-return",
       "Action": "invoke",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "save-content",
       "Action": "assertPresent",
-      "Name": "Installed Acceptance Persistence {shortsha}",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-save-content"
     },
     {
       "Id": "restart-close-request",
@@ -375,13 +162,8 @@
     },
     {
       "Id": "restart-close-confirm",
-      "Action": "invoke",
-      "Name": "保存",
-      "ControlType": "Button",
-      "Optional": true,
-      "TimeoutMs": 1000,
-      "AncestorControlType": "Window",
-      "AncestorName": "像素蛋挞消息对话框"
+      "Action": "waitExit",
+      "TimeoutMs": 30000
     },
     {
       "Id": "restart-close",
@@ -400,87 +182,43 @@
     {
       "Id": "restart-exit-tutorial",
       "Action": "invoke",
-      "AutomationId": "TutorialExitButton",
       "Optional": true,
       "TimeoutMs": 1000,
-      "ControlType": "Button",
-      "ScopePreset": "MainWindow"
+      "SelectorRef": "selector-exit-tutorial"
     },
     {
       "Id": "restart-planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning",
-      "ControlType": "Button",
-      "ScopePreset": "PrimaryNavigation"
+      "SelectorRef": "selector-planning-enabled"
     },
     {
       "Id": "restart-select",
       "Action": "select",
-      "AncestorName": "策划案列表",
-      "ControlType": "ListItem",
-      "DescendantName": "{project}",
-      "AncestorAutomationId": "DocumentList",
-      "AncestorControlType": "List"
+      "SelectorRef": "selector-created-list-item"
     },
     {
       "Id": "restart-text",
       "Action": "invoke",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "persisted-body",
       "Action": "assertPresent",
-      "Name": "Installed Acceptance Persistence {shortsha}",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "persistence",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-save-content"
     },
     {
       "Id": "module-text",
       "Action": "invoke",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "landmark-text",
       "Action": "assertPresent",
-      "Name": "Installed Acceptance Persistence {shortsha}",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "text",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-save-content"
     },
     {
       "Id": "capture-text",
@@ -490,32 +228,14 @@
     {
       "Id": "module-references",
       "Action": "invoke",
-      "Name": "参考图",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-save-switch"
     },
     {
       "Id": "landmark-references",
       "Action": "assertPresent",
-      "Name": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "references",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-references"
     },
     {
       "Id": "capture-references",
@@ -525,32 +245,14 @@
     {
       "Id": "module-moodboard",
       "Action": "invoke",
-      "Name": "情绪板",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-module-moodboard"
     },
     {
       "Id": "landmark-moodboard",
       "Action": "assertPresent",
-      "Name": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "moodboard",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-moodboard"
     },
     {
       "Id": "capture-moodboard",
@@ -560,31 +262,13 @@
     {
       "Id": "module-shots",
       "Action": "invoke",
-      "Name": "镜头清单",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-module-shots"
     },
     {
       "Id": "landmark-shots",
       "Action": "assertPresent",
-      "Name": "0 / 0 已拍",
-      "ControlType": "Text",
       "Coverage": "shots",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-shots"
     },
     {
       "Id": "capture-shots",
@@ -594,32 +278,14 @@
     {
       "Id": "module-lighting",
       "Action": "invoke",
-      "Name": "灯光图",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-module-lighting"
     },
     {
       "Id": "landmark-lighting",
       "Action": "assertPresent",
-      "Name": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "lighting",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-lighting"
     },
     {
       "Id": "capture-lighting",
@@ -629,32 +295,14 @@
     {
       "Id": "module-styling",
       "Action": "invoke",
-      "Name": "服化道",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-module-styling"
     },
     {
       "Id": "landmark-styling",
       "Action": "assertPresent",
-      "Name": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "styling",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-styling"
     },
     {
       "Id": "capture-styling",
@@ -664,32 +312,14 @@
     {
       "Id": "module-files",
       "Action": "invoke",
-      "Name": "文件",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-module-files"
     },
     {
       "Id": "landmark-files",
       "Action": "assertPresent",
-      "Name": "项目文件",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
       "Coverage": "files",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-landmark-files"
     },
     {
       "Id": "capture-files",
@@ -699,85 +329,34 @@
     {
       "Id": "preview-text",
       "Action": "invoke",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "preview-open",
       "Action": "invoke",
-      "Name": "预览策划案",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-preview-open"
     },
     {
       "Id": "preview-list-hidden",
       "Action": "assertAbsent",
-      "Name": "策划案列表",
       "Coverage": "preview",
-      "AutomationId": "DocumentList",
-      "ControlType": "List",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-planning-list"
     },
     {
       "Id": "preview-nav-hidden",
       "Action": "assertAbsent",
-      "Name": "文字",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-text-open"
     },
     {
       "Id": "preview-edit-hidden",
       "Action": "assertAbsent",
-      "Name": "编辑",
-      "ControlType": "Button",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-edit"
     },
     {
       "Id": "preview-body",
       "Action": "assertPresent",
-      "Name": "Installed Acceptance Persistence {shortsha}",
-      "ControlType": "Text",
       "IncludeOffscreen": true,
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        },
-        {
-          "AutomationId": "DocumentScroll",
-          "ControlType": "Pane"
-        }
-      ]
+      "SelectorRef": "selector-save-content"
     },
     {
       "Id": "preview-shot",
@@ -787,28 +366,13 @@
     {
       "Id": "preview-escape",
       "Action": "focusKey",
-      "Name": "摄影策划案工作区",
       "Value": "{ESC}",
-      "ControlType": "Custom",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-preview-escape"
     },
     {
       "Id": "preview-restored",
       "Action": "assertPresent",
-      "Name": "策划案列表",
-      "AutomationId": "DocumentList",
-      "ControlType": "List",
-      "ScopePath": [
-        {
-          "Name": "摄影策划案工作区",
-          "ControlType": "Custom"
-        }
-      ]
+      "SelectorRef": "selector-planning-list"
     },
     {
       "Id": "final-close-request",
@@ -816,13 +380,8 @@
     },
     {
       "Id": "final-close-confirm",
-      "Action": "invoke",
-      "Name": "保存",
-      "ControlType": "Button",
-      "Optional": true,
-      "TimeoutMs": 1000,
-      "AncestorControlType": "Window",
-      "AncestorName": "像素蛋挞消息对话框"
+      "Action": "waitExit",
+      "TimeoutMs": 30000
     },
     {
       "Id": "final-close",
@@ -839,385 +398,185 @@
       {
         "Id": "check-create-name",
         "Action": "assertPresent",
-        "Name": "新策划名称",
-        "ControlType": "Edit",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "Name": "新建策划案",
-            "ControlType": "Text",
-            "Heading": true
-          }
-        ]
+        "SelectorRef": "selector-create-name"
       },
       {
         "Id": "check-create-location",
         "Action": "assertPresent",
-        "Name": "拍摄地点",
-        "ControlType": "Edit",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "Name": "新建策划案",
-            "ControlType": "Text",
-            "Heading": true
-          }
-        ]
+        "SelectorRef": "selector-create-location"
       },
       {
         "Id": "check-date-value",
         "Action": "assertPresent",
-        "Name": "拍摄日期",
-        "AutomationId": "PART_TextBox",
-        "ControlType": "Edit",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "Name": "新建策划案",
-            "ControlType": "Text",
-            "Heading": true
-          },
-          {
-            "Name": "拍摄日期",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-date-value"
       },
       {
         "Id": "check-date-open",
         "Action": "assertPresent",
-        "Name": "选择拍摄日期",
-        "ControlType": "Button",
-        "AutomationId": "PART_Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "Name": "新建策划案",
-            "ControlType": "Text",
-            "Heading": true
-          },
-          {
-            "Name": "拍摄日期",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-date-open"
       },
       {
         "Id": "check-create-confirm",
         "Action": "assertPresent",
-        "Name": "新建策划",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "Name": "新建策划案",
-            "ControlType": "Text",
-            "Heading": true
-          }
-        ]
+        "SelectorRef": "selector-create-confirm"
       }
     ],
     "select-created": [
       {
         "Id": "check-module-text",
         "Action": "assertPresent",
-        "Name": "文字",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-text-open"
       },
       {
         "Id": "check-module-references",
         "Action": "assertPresent",
-        "Name": "参考图",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-save-switch"
       },
       {
         "Id": "check-module-moodboard",
         "Action": "assertPresent",
-        "Name": "情绪板",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-module-moodboard"
       },
       {
         "Id": "check-module-shots",
         "Action": "assertPresent",
-        "Name": "镜头清单",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-module-shots"
       },
       {
         "Id": "check-module-lighting",
         "Action": "assertPresent",
-        "Name": "灯光图",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-module-lighting"
       },
       {
         "Id": "check-module-styling",
         "Action": "assertPresent",
-        "Name": "服化道",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-module-styling"
       },
       {
         "Id": "check-module-files",
         "Action": "assertPresent",
-        "Name": "文件",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-module-files"
       },
       {
         "Id": "check-edit",
         "Action": "assertPresent",
-        "Name": "编辑",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "AutomationId": "DocumentScroll",
-            "ControlType": "Pane"
-          }
-        ]
+        "SelectorRef": "selector-edit"
       },
       {
         "Id": "check-preview-open",
         "Action": "assertPresent",
-        "Name": "预览策划案",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          }
-        ]
+        "SelectorRef": "selector-preview-open"
       }
     ],
     "edit": [
       {
         "Id": "check-edit-body",
         "Action": "assertPresent",
-        "Name": "策划正文",
-        "ControlType": "Edit",
         "IncludeOffscreen": true,
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "AutomationId": "DocumentScroll",
-            "ControlType": "Pane"
-          }
-        ]
+        "SelectorRef": "selector-edit-body"
       },
       {
         "Id": "check-finish-edit",
         "Action": "assertPresent",
-        "Name": "完成编辑",
-        "ControlType": "Button",
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "AutomationId": "DocumentScroll",
-            "ControlType": "Pane"
-          }
-        ]
+        "SelectorRef": "selector-check-finish-edit"
       }
     ],
     "preview-open": [
       {
         "Id": "check-preview-body",
         "Action": "assertPresent",
-        "Name": "Installed Acceptance Persistence {shortsha}",
-        "ControlType": "Text",
         "IncludeOffscreen": true,
-        "ScopePath": [
-          {
-            "Name": "摄影策划案工作区",
-            "ControlType": "Custom"
-          },
-          {
-            "AutomationId": "DocumentScroll",
-            "ControlType": "Pane"
-          }
-        ]
+        "SelectorRef": "selector-save-content"
       }
     ],
     "date-open": [
       {
         "Id": "check-date-calendar",
         "Action": "assertPresent",
-        "ControlType": "Calendar",
         "IncludeOffscreen": false,
-        "ScopePath": [
-          {
-            "ControlType": "Calendar"
-          }
-        ]
+        "SelectorRef": "selector-date-calendar"
       }
     ],
     "tutorial-gone": [
       {
         "Id": "nav-audit-0",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationWorkbench",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-0"
       },
       {
         "Id": "nav-audit-1",
         "Action": "assertPresent",
-        "AutomationId": "AssetLibraryNavigationButton",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-1"
       },
       {
         "Id": "nav-audit-2",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationWorkflow",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-2"
       },
       {
         "Id": "nav-audit-3",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationWorkCalendar",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-3"
       },
       {
         "Id": "nav-audit-4",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationPlanning",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-planning-enabled"
       },
       {
         "Id": "nav-audit-5",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationTether",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-5"
       },
       {
         "Id": "nav-audit-6",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationOnlineSelection",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-online"
       },
       {
         "Id": "nav-audit-7",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationFinance",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-7"
       },
       {
         "Id": "nav-audit-8",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationHistory",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-8"
       },
       {
         "Id": "nav-audit-9",
         "Action": "assertPresent",
-        "AutomationId": "PrimaryNavigationToolbox",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-9"
       },
       {
         "Id": "nav-audit-10",
         "Action": "assertPresent",
-        "AutomationId": "SidebarSettingsButton",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-audit-10"
       },
       {
         "Id": "nav-system-0",
         "Action": "assertPresent",
-        "Name": "授权与版本",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-system-0"
       },
       {
         "Id": "nav-system-1",
         "Action": "assertPresent",
-        "Name": "帮助",
-        "ControlType": "Button",
-        "ScopePreset": "PrimaryNavigation",
-        "IncludeOffscreen": true
+        "IncludeOffscreen": true,
+        "SelectorRef": "selector-nav-system-1"
       }
     ]
-  }
+  },
+  "SelectorCatalog": "selectors.json"
 }

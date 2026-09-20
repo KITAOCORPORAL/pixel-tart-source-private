@@ -1,0 +1,3913 @@
+{
+  "Plan": "upgrade-full.plan.json",
+  "StepCount": 70,
+  "Errors": 0,
+  "Warnings": 55,
+  "Issues": [
+    {
+      "StepId": "create-open",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "create-heading",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "create-name",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "create-location",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "create-confirm",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "create-closed",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "text-open",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "edit",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "edit",
+      "Severity": "WARNING",
+      "Code": "GENERIC_LABEL",
+      "Explanation": "Generic label must stay in its declared content/modal scope; live checkpoint verifies uniqueness."
+    },
+    {
+      "StepId": "edit-body",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "edit-verify",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "save-switch",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "save-return",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "save-content",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "restart-text",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "persisted-body",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-text",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-text",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-references",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-references",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-moodboard",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-moodboard",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-shots",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-shots",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-lighting",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-lighting",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-styling",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-styling",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "module-files",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "landmark-files",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-text",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-open",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-nav-hidden",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-edit-hidden",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-edit-hidden",
+      "Severity": "WARNING",
+      "Code": "GENERIC_LABEL",
+      "Explanation": "Generic label must stay in its declared content/modal scope; live checkpoint verifies uniqueness."
+    },
+    {
+      "StepId": "preview-body",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "preview-escape",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-create-name",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-create-location",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-create-confirm",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-text",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-references",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-moodboard",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-shots",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-lighting",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-styling",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-module-files",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-edit",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-edit",
+      "Severity": "WARNING",
+      "Code": "GENERIC_LABEL",
+      "Explanation": "Generic label must stay in its declared content/modal scope; live checkpoint verifies uniqueness."
+    },
+    {
+      "StepId": "check-preview-open",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-edit-body",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-finish-edit",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "check-preview-body",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "nav-system-0",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    },
+    {
+      "StepId": "nav-system-1",
+      "Severity": "WARNING",
+      "Code": "SCOPED_NAME",
+      "Explanation": "No stable ID supplied; typed and scoped semantic name used. Framework exposure/locale still requires live exactly-one verification; no first-match fallback."
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "startup-alive",
+      "Action": "assertProcessAlive",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "startup-alive",
+        "Action": "assertProcessAlive",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "exit-tutorial",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "exit-tutorial",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "TutorialExitButton",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": true,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 2000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "MainWindow",
+        "SelectorRef": "selector-exit-tutorial",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "0 or 1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "tutorial-gone",
+      "Action": "waitAbsent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "tutorial-gone",
+        "Action": "waitAbsent",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "TutorialExitButton",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "MainWindow",
+        "SelectorRef": "selector-exit-tutorial",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "0",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "planning-enabled",
+      "Action": "assertEnabled",
+      "Category": "GLOBAL_NAV",
+      "Selector": {
+        "Id": "planning-enabled",
+        "Action": "assertEnabled",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "PrimaryNavigationPlanning",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "PrimaryNavigation",
+        "SelectorRef": "selector-planning-enabled",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": "SidebarNavigationScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "planning",
+      "Action": "invoke",
+      "Category": "GLOBAL_NAV",
+      "Selector": {
+        "Id": "planning",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "PrimaryNavigationPlanning",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "PrimaryNavigation",
+        "SelectorRef": "selector-planning-enabled",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": "SidebarNavigationScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "planning-list",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "planning-list",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u7B56\u5212\u6848\u5217\u8868",
+        "ControlType": "List",
+        "Value": null,
+        "AutomationId": "DocumentList",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-planning-list",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-open",
+      "Action": "invoke",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-open",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u65B0\u5EFA\u7B56\u5212",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": "\u65B0\u5EFA\u7B56\u5212",
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-heading",
+      "Action": "assertPresent",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-heading",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-heading",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-name",
+      "Action": "setValue",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-name",
+        "Action": "setValue",
+        "IdSelector": null,
+        "Name": "\u65B0\u7B56\u5212\u540D\u79F0",
+        "ControlType": "Edit",
+        "Value": "{project}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-name",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-location",
+      "Action": "setValue",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-location",
+        "Action": "setValue",
+        "IdSelector": null,
+        "Name": "\u62CD\u6444\u5730\u70B9",
+        "ControlType": "Edit",
+        "Value": "\u676D\u5DDE\u6D4B\u8BD5\u6444\u5F71\u68DA",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-location",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-value",
+      "Action": "setValue",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-value",
+        "Action": "setValue",
+        "IdSelector": null,
+        "Name": "\u62CD\u6444\u65E5\u671F",
+        "ControlType": "Edit",
+        "Value": "2026-09-19",
+        "AutomationId": "PART_TextBox",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "\u62CD\u6444\u65E5\u671F",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-value",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "\u62CD\u6444\u65E5\u671F",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-open",
+      "Action": "invoke",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-open",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u9009\u62E9\u62CD\u6444\u65E5\u671F",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "PART_Button",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "\u62CD\u6444\u65E5\u671F",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "\u62CD\u6444\u65E5\u671F",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-calendar",
+      "Action": "assertPresent",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-calendar",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Calendar",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": null,
+            "AutomationId": null,
+            "ControlType": "Calendar",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-calendar",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": null,
+          "ControlType": "Calendar",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-next-day",
+      "Action": "focusKey",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-next-day",
+        "Action": "focusKey",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Calendar",
+        "Value": "{RIGHT}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": null,
+            "AutomationId": null,
+            "ControlType": "Calendar",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-calendar",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": null,
+          "ControlType": "Calendar",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-confirm",
+      "Action": "focusKey",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-confirm",
+        "Action": "focusKey",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Calendar",
+        "Value": "{ENTER}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": null,
+            "AutomationId": null,
+            "ControlType": "Calendar",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-calendar",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": null,
+          "ControlType": "Calendar",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "date-check",
+      "Action": "assertDate",
+      "Category": "DATE_PICKER",
+      "Selector": {
+        "Id": "date-check",
+        "Action": "assertDate",
+        "IdSelector": null,
+        "Name": "\u62CD\u6444\u65E5\u671F",
+        "ControlType": "Edit",
+        "Value": "2026-09-20",
+        "AutomationId": "PART_TextBox",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "\u62CD\u6444\u65E5\u671F",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-date-value",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "\u62CD\u6444\u65E5\u671F",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-confirm",
+      "Action": "invoke",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-confirm",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u65B0\u5EFA\u7B56\u5212",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+            "AutomationId": null,
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-confirm",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+          "AutomationId": null,
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "create-closed",
+      "Action": "waitAbsent",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "create-closed",
+        "Action": "waitAbsent",
+        "IdSelector": null,
+        "Name": "\u65B0\u5EFA\u7B56\u5212\u6848",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-create-heading",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "0",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "created-list-item",
+      "Action": "assertPresent",
+      "Category": "PLANNING_MODAL",
+      "Selector": {
+        "Id": "created-list-item",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "ListItem",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": "DocumentList",
+        "AncestorName": "\u7B56\u5212\u6848\u5217\u8868",
+        "AncestorControlType": "List",
+        "ScopeAnchorName": null,
+        "DescendantName": "{project}",
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "old-create",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": "selector-created-list-item",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "select-created",
+      "Action": "select",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "select-created",
+        "Action": "select",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "ListItem",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": "DocumentList",
+        "AncestorName": "\u7B56\u5212\u6848\u5217\u8868",
+        "AncestorControlType": "List",
+        "ScopeAnchorName": null,
+        "DescendantName": "{project}",
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": "selector-created-list-item",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "text-open",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "text-open",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "edit",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "edit",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u7F16\u8F91",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-edit",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "edit-body",
+      "Action": "setValue",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "edit-body",
+        "Action": "setValue",
+        "IdSelector": null,
+        "Name": "\u7B56\u5212\u6B63\u6587",
+        "ControlType": "Edit",
+        "Value": "Installed Acceptance Persistence {shortsha}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-edit-body",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "edit-verify",
+      "Action": "assertText",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "edit-verify",
+        "Action": "assertText",
+        "IdSelector": null,
+        "Name": "\u7B56\u5212\u6B63\u6587",
+        "ControlType": "Edit",
+        "Value": "Installed Acceptance Persistence {shortsha}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-edit-body",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "save-switch",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "save-switch",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u53C2\u8003\u56FE",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-switch",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "save-return",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "save-return",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "save-content",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "save-content",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "Installed Acceptance Persistence {shortsha}",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-content",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-close-request",
+      "Action": "requestClose",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "restart-close-request",
+        "Action": "requestClose",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-close-confirm",
+      "Action": "waitExit",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "restart-close-confirm",
+        "Action": "waitExit",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 30000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-close",
+      "Action": "waitExit",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "restart-close",
+        "Action": "waitExit",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 15000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "upgrade-install",
+      "Action": "upgrade",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "upgrade-install",
+        "Action": "upgrade",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "upgrade",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart",
+      "Action": "restart",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "restart",
+        "Action": "restart",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-exit-tutorial",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "restart-exit-tutorial",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "TutorialExitButton",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": true,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 1000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "MainWindow",
+        "SelectorRef": "selector-exit-tutorial",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "0 or 1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-planning",
+      "Action": "invoke",
+      "Category": "GLOBAL_NAV",
+      "Selector": {
+        "Id": "restart-planning",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": "PrimaryNavigationPlanning",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": "PrimaryNavigation",
+        "SelectorRef": "selector-planning-enabled",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": null,
+          "AutomationId": "SidebarNavigationScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-select",
+      "Action": "select",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "restart-select",
+        "Action": "select",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": "ListItem",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": "DocumentList",
+        "AncestorName": "\u7B56\u5212\u6848\u5217\u8868",
+        "AncestorControlType": "List",
+        "ScopeAnchorName": null,
+        "DescendantName": "{project}",
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": "selector-created-list-item",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "restart-text",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "restart-text",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "persisted-body",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "persisted-body",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "Installed Acceptance Persistence {shortsha}",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "persistence",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-content",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-text",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-text",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-text",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-text",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "Installed Acceptance Persistence {shortsha}",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "text",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-content",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-text",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-text",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/02_\u6587\u5B57.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-references",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-references",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u53C2\u8003\u56FE",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-switch",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-references",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-references",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u8FD8\u6CA1\u6709\u53C2\u8003\u56FE\u3002\u5173\u8054\u5DF2\u6709\u53C2\u8003\uFF0C\u6216\u4ECE\u672C\u5730\u6DFB\u52A0\uFF1B\u539F\u56FE\u4FDD\u6301\u4E0D\u53D8\u3002",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "references",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-references",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-references",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-references",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/03_\u53C2\u8003\u56FE.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-moodboard",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-moodboard",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u60C5\u7EEA\u677F",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-module-moodboard",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-moodboard",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-moodboard",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u8FD8\u6CA1\u6709\u60C5\u7EEA\u677F\u3002\u5173\u8054\u5DF2\u6709\u53C2\u8003\uFF0C\u6216\u4ECE\u672C\u5730\u6DFB\u52A0\uFF1B\u539F\u56FE\u4FDD\u6301\u4E0D\u53D8\u3002",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "moodboard",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-moodboard",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-moodboard",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-moodboard",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/04_\u60C5\u7EEA\u677F.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-shots",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-shots",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u955C\u5934\u6E05\u5355",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-module-shots",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-shots",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-shots",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "0 / 0 \u5DF2\u62CD",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "shots",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-shots",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-shots",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-shots",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/05_\u955C\u5934\u6E05\u5355.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-lighting",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-lighting",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u706F\u5149\u56FE",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-module-lighting",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-lighting",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-lighting",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u8FD8\u6CA1\u6709\u706F\u5149\u56FE\u3002\u5173\u8054\u5DF2\u6709\u53C2\u8003\uFF0C\u6216\u4ECE\u672C\u5730\u6DFB\u52A0\uFF1B\u539F\u56FE\u4FDD\u6301\u4E0D\u53D8\u3002",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "lighting",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-lighting",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-lighting",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-lighting",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/06_\u706F\u5149\u56FE.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-styling",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-styling",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u670D\u5316\u9053",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-module-styling",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-styling",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-styling",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u8FD8\u6CA1\u6709\u670D\u5316\u9053\u3002\u5173\u8054\u5DF2\u6709\u53C2\u8003\uFF0C\u6216\u4ECE\u672C\u5730\u6DFB\u52A0\uFF1B\u539F\u56FE\u4FDD\u6301\u4E0D\u53D8\u3002",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "styling",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-styling",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-styling",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-styling",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/07_\u670D\u5316\u9053.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "module-files",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "module-files",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u4EF6",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-module-files",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "landmark-files",
+      "Action": "assertPresent",
+      "Category": "PLANNING_CONTENT",
+      "Selector": {
+        "Id": "landmark-files",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u9879\u76EE\u6587\u4EF6",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "files",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-landmark-files",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "capture-files",
+      "Action": "capture",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "capture-files",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/08_\u6587\u4EF6.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-text",
+      "Action": "invoke",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "preview-text",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-open",
+      "Action": "invoke",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-open",
+        "Action": "invoke",
+        "IdSelector": null,
+        "Name": "\u9884\u89C8\u7B56\u5212\u6848",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-preview-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-list-hidden",
+      "Action": "assertAbsent",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-list-hidden",
+        "Action": "assertAbsent",
+        "IdSelector": null,
+        "Name": "\u7B56\u5212\u6848\u5217\u8868",
+        "ControlType": "List",
+        "Value": null,
+        "AutomationId": "DocumentList",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": "preview",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-planning-list",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "0",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-nav-hidden",
+      "Action": "assertAbsent",
+      "Category": "PLANNING_CONTENT_NAV",
+      "Selector": {
+        "Id": "preview-nav-hidden",
+        "Action": "assertAbsent",
+        "IdSelector": null,
+        "Name": "\u6587\u5B57",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-text-open",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "0",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-edit-hidden",
+      "Action": "assertAbsent",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-edit-hidden",
+        "Action": "assertAbsent",
+        "IdSelector": null,
+        "Name": "\u7F16\u8F91",
+        "ControlType": "Button",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-edit",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "0",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-body",
+      "Action": "assertPresent",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-body",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "Installed Acceptance Persistence {shortsha}",
+        "ControlType": "Text",
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": true,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          },
+          {
+            "Name": null,
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-save-content",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        },
+        {
+          "Name": null,
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-shot",
+      "Action": "capture",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-shot",
+        "Action": "capture",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": "screenshots/09_\u9884\u89C8\u6A21\u5F0F.png",
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-escape",
+      "Action": "focusKey",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-escape",
+        "Action": "focusKey",
+        "IdSelector": null,
+        "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+        "ControlType": "Custom",
+        "Value": "{ESC}",
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-preview-escape",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "preview-restored",
+      "Action": "assertPresent",
+      "Category": "PLANNING_HEADER",
+      "Selector": {
+        "Id": "preview-restored",
+        "Action": "assertPresent",
+        "IdSelector": null,
+        "Name": "\u7B56\u5212\u6848\u5217\u8868",
+        "ControlType": "List",
+        "Value": null,
+        "AutomationId": "DocumentList",
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": [
+          {
+            "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+            "AutomationId": null,
+            "ControlType": "Custom",
+            "Heading": false
+          }
+        ],
+        "ScopePreset": null,
+        "SelectorRef": "selector-planning-list",
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": [
+        {
+          "Name": "\u6444\u5F71\u7B56\u5212\u6848\u5DE5\u4F5C\u533A",
+          "AutomationId": null,
+          "ControlType": "Custom",
+          "Heading": false
+        }
+      ],
+      "ExpectedMatchCount": "1",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "final-close-request",
+      "Action": "requestClose",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "final-close-request",
+        "Action": "requestClose",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 10000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "final-close-confirm",
+      "Action": "waitExit",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "final-close-confirm",
+        "Action": "waitExit",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 30000,
+        "Milliseconds": 100,
+        "Coverage": null,
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    },
+    {
+      "Id": "final-close",
+      "Action": "waitExit",
+      "Category": "LIFECYCLE_OR_EVIDENCE",
+      "Selector": {
+        "Id": "final-close",
+        "Action": "waitExit",
+        "IdSelector": null,
+        "Name": null,
+        "ControlType": null,
+        "Value": null,
+        "AutomationId": null,
+        "AncestorAutomationId": null,
+        "AncestorName": null,
+        "AncestorControlType": null,
+        "ScopeAnchorName": null,
+        "DescendantName": null,
+        "HelpText": null,
+        "Optional": false,
+        "IncludeOffscreen": false,
+        "Path": null,
+        "ExpectedHash": null,
+        "Minimum": 1,
+        "TimeoutMs": 15000,
+        "Milliseconds": 100,
+        "Coverage": "normal-close",
+        "ExternalDialog": false,
+        "MustContain": null,
+        "ScopePath": null,
+        "ScopePreset": null,
+        "SelectorRef": null,
+        "RequiredPattern": null,
+        "RequireFocusable": false
+      },
+      "ResolvedScope": null,
+      "ExpectedMatchCount": "N/A",
+      "Evidence": "Static schema/source audit; not live verification"
+    }
+  ]
+}

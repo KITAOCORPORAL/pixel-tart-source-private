@@ -11,6 +11,15 @@ internal static partial class Program
         null => s,
         "PrimaryNavigation" => s with { ScopePath = [new(AutomationId: "SidebarNavigationScroll", ControlType: "Pane")] },
         "MainWindow" => s,
+        "PlanningWorkspace" or "PlanningContentNavigation" => s with { ScopePath = [new(Name: "摄影策划案工作区", ControlType: "Custom")] },
+        "PlanningReferences" or "PlanningReferenceItem" => s with { ScopePath = [new(AutomationId: "PlanningWorkspace", ControlType: "Custom"), new(AutomationId: "PlanningReferencesSurface", ControlType: "Pane")] },
+        "PlanningCreateDialog" => s with { ScopePath = [new(AutomationId: "PlanningWorkspace", ControlType: "Custom"), new(AutomationId: "PlanningCreateDialog", ControlType: "Pane")] },
+        "PlanningPreview" => s with { ScopePath = [new(AutomationId: "PlanningWorkspace", ControlType: "Custom"), new(AutomationId: "PlanningPreviewSurface", ControlType: "Pane")] },
+        "PlanningBooking" => s with { ScopePath = [new(AutomationId: "PlanningWorkspace", ControlType: "Custom"), new(AutomationId: "PlanningBookingPicker", ControlType: "Pane")] },
+        "PlanningExport" => s with { ScopePath = [new(AutomationId: "PlanningWorkspace", ControlType: "Custom"), new(AutomationId: "PlanningExportDialog", ControlType: "Pane")] },
+        "TetherWorkspace" => s with { ScopePath = [new(Name: "联机拍摄现场监看工作区", ControlType: "Custom")] },
+        "OnlineSelectionWorkspace" => s with { ScopePath = [new(Name: "在线选片", ControlType: "Custom")] },
+        "WindowsFileDialog" => s with { ScopePath = [new(Name: s.AncestorName ?? throw new InvalidDataException("File dialog name required"), ControlType: "Window")], AncestorName = null, AncestorControlType = null },
         _ => throw new InvalidDataException("Unknown ScopePreset: " + s.ScopePreset)
     };
     internal sealed record LintIssue(string StepId, string Severity, string Code, string Explanation);
@@ -28,8 +37,14 @@ internal static partial class Program
             if(s.AutomationId is null && s.IdSelector is null && s.Name is null && s.DescendantName is null && !(Scoped(s)&&s.ControlType is not null)) Add(s,"ERROR","MISSING_SELECTOR","No specific selector");
             if(s.ControlType is null) Add(s,"ERROR","MISSING_TYPE","ControlType required");
             if(s.AncestorAutomationId=="SidebarRoot" || s.AncestorName=="侧栏根区域" || s.ScopePath?.Any(x=>x.AutomationId=="SidebarRoot" || x.Name=="侧栏根区域")==true) Add(s,"ERROR","LANDMARK_AS_SCOPE","SidebarRoot is a sibling landmark, never an ancestor");
-            if(s.ScopePreset is not (null or "PrimaryNavigation" or "MainWindow")) Add(s,"ERROR","UNKNOWN_PRESET","Unrecognized preset");
-            if(s.ScopePreset is not null && (s.ScopePath is not null || s.AncestorAutomationId is not null || s.AncestorName is not null || s.AncestorControlType is not null)) Add(s,"ERROR","MIXED_PRESET","Preset cannot be combined with manual ancestor");
+            try { ResolvePreset(s); } catch(InvalidDataException) { Add(s,"ERROR","UNKNOWN_PRESET","Invalid preset parameters"); } catch(InvalidOperationException) { Add(s,"ERROR","UNKNOWN_PRESET","Unrecognized preset"); }
+            bool VerifiedCustom(string? name, string? id) => name is "摄影策划案工作区" or "拍摄日期" or "联机拍摄现场监看工作区" or "在线选片" || id == "PlanningWorkspace";
+            if(s.ControlType == "Custom" && !VerifiedCustom(s.Name, s.AutomationId)) Add(s,"ERROR","UNVERIFIED_CUSTOM","No production peer contract for Custom target");
+            foreach(var scope in s.ScopePath ?? []) if(scope.ControlType == "Custom" && !VerifiedCustom(scope.Name, scope.AutomationId)) Add(s,"ERROR","UNVERIFIED_CUSTOM_SCOPE","No production peer contract for Custom scope");
+            if(s.Name == "拍摄日期" && s.AutomationId != "PART_TextBox") Add(s,"ERROR","GENERIC_DATE","Use inner PART_TextBox/Edit, never date Name alone");
+            if(s.Optional && s.AutomationId != "TutorialExitButton" && s.Name != "保存") Add(s,"ERROR","OPTIONAL_REQUIRED","Only explicitly conditional tutorial/dirty-close invocations may be optional");
+            if(s.ScopeAnchorName is not null) Add(s,"ERROR","ANCESTOR_FALLBACK","Unbounded ancestor search forbidden");
+            if(s.ScopePreset is not null && s.ScopePreset != "WindowsFileDialog" && (s.ScopePath is not null || s.AncestorAutomationId is not null || s.AncestorName is not null || s.AncestorControlType is not null)) Add(s,"ERROR","MIXED_PRESET","Preset cannot be combined with manual ancestor");
             if((s.AutomationId?.StartsWith("PrimaryNavigation",StringComparison.Ordinal)==true || s.AutomationId is "AssetLibraryNavigationButton" or "SidebarSettingsButton") && s.ScopePreset!="PrimaryNavigation") Add(s,"ERROR","NAV_PRESET_REQUIRED","All sidebar navigation must use PrimaryNavigation");
             if(!Scoped(s) && s.ControlType!="Window") Add(s,"ERROR","UNSCOPED_GLOBAL","Scope required even for unique global ID");
             if(s.Name is not null && s.AutomationId is null && s.IdSelector is null)
@@ -37,6 +52,9 @@ internal static partial class Program
             if(s.Name is "编辑" or "关闭" or "确定" or "保存" or "导出" or "更多" or "下一步")
                 Add(s,Scoped(s)?"WARNING":"ERROR","GENERIC_LABEL","Generic label must stay in its declared content/modal scope; live checkpoint verifies uniqueness.");
         }
+        foreach(var capture in p.Steps.Where(s => s.Action == "capture"))
+            foreach(var name in capture.MustContain ?? [])
+                if(!p.Steps.Any(s => s.Name == name && s.ControlType is not null && Scoped(s))) Add(capture,"ERROR","CAPTURE_UNSCOPED","Screenshot bounds must use an explicit formal selector: " + name);
         return issues;
     }
     private static string Category(Step s)
@@ -59,7 +77,7 @@ internal static partial class Program
     private static int LintPlanFile(string file)
     {
         try {
-            var p=JsonSerializer.Deserialize<Plan>(File.ReadAllText(file),Json)!;var issues=Lint(p);
+            var p=LoadPlan(file);var issues=Lint(p);
             var output=Path.ChangeExtension(Path.GetFullPath(file),null)!.Replace(".plan","")+".selector-lint.json";
             File.WriteAllText(output,JsonSerializer.Serialize(new {Plan=Path.GetFileName(file), StepCount=p.Steps.Length,Errors=issues.Count(x=>x.Severity=="ERROR"),Warnings=issues.Count(x=>x.Severity=="WARNING"),Issues=issues,Steps=p.Steps.Select(s=>new {s.Id,s.Action,Category=Category(s),Selector=s,ResolvedScope=ResolvePreset(s).ScopePath,ExpectedMatchCount=HasSelector(s)?(s.Action is "assertAbsent" or "waitAbsent"?"0":s.Optional?"0 or 1":"1"):"N/A",Evidence="Static schema/source audit; not live verification"})},Json));
             Console.WriteLine($"Selector lint: {p.Steps.Length} steps, {issues.Count(x=>x.Severity=="ERROR")} ERROR, {issues.Count(x=>x.Severity=="WARNING")} WARNING: {output}");
@@ -72,7 +90,7 @@ internal static partial class Program
         Step Nav(string id)=>new("nav","assertPresent",AutomationId:id,ControlType:"Button",ScopePreset:"PrimaryNavigation");
         void Correct(Step s){var x=ResolvePreset(s);if(x.ScopePath?.Single().AutomationId!="SidebarNavigationScroll" || x.ControlType!="Button")throw new Exception("Bad navigation preset");}
         Test("PrimaryNavigationUsesSidebarNavigationScrollTests",()=>Correct(Nav("PrimaryNavigationPlanning")));
-        var p=JsonSerializer.Deserialize<Plan>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"planning-full.plan.json")),Json)!;
+        var p=LoadPlan(Path.Combine(AppContext.BaseDirectory,"planning-full.plan.json"));
         Test("SidebarRootCannotBeUsedAsNavigationAncestorTests",()=>{if(!Lint(p with {Steps=[new("bad","invoke",AutomationId:"PrimaryNavigationPlanning",ControlType:"Button",AncestorAutomationId:"SidebarRoot")]}).Any(x=>x.Code=="LANDMARK_AS_SCOPE"))throw new Exception("Landmark accepted");});
         Test("PlanningNavigationSelectorResolvesUniqueButtonTests",()=>{var nodes=new[]{(Parent:"SidebarRoot",Id:""),(Parent:"SidebarNavigationScroll",Id:"PrimaryNavigationPlanning")};var s=ResolvePreset(Nav("PrimaryNavigationPlanning"));RequireUnique(nodes.Where(x=>x.Parent==s.ScopePath!.Single().AutomationId&&x.Id==s.AutomationId).ToArray(),"nav");});
         Test("OnlineSelectionNavigationSelectorUsesSameScopeTests",()=>Correct(Nav("PrimaryNavigationOnlineSelection")));
@@ -81,6 +99,13 @@ internal static partial class Program
         Test("AmbiguousSelectorStillFailsClosedTests",()=>{foreach(var n in new[]{0,2}){try{RequireUnique(Enumerable.Range(0,n).ToArray(),"ambiguous");}catch(InvalidOperationException){continue;}throw new Exception("Uniqueness weakened");}});
         Test("ScopeResolutionFailureReportsScopeTests",()=>{try{RequireScope(Array.Empty<int>(),"planning-enabled");}catch(MissingScopeException e)when(e.Message.StartsWith("Scope resolution failed",StringComparison.Ordinal)){return;}throw new Exception("Wrong diagnostic");});
         Test("LintRegressionTests",()=>{var bad=p with {Steps=[new("same","invoke",Name:"编辑"),new("same","invoke")]};var codes=Lint(bad).Select(x=>x.Code).ToArray();foreach(var code in new[]{"MISSING_TYPE","MISSING_SELECTOR","UNSCOPED_GLOBAL","DUPLICATE_ID","GENERIC_LABEL"})if(!codes.Contains(code))throw new Exception(code);});
+        Test("CustomAssumptionRejected",()=>{if(!Lint(p with {Steps=[new("bad","assertPresent",Name:"image",ControlType:"Custom",ScopePreset:"MainWindow")]}).Any(x=>x.Code=="UNVERIFIED_CUSTOM"))throw new Exception("Custom accepted");});
+        Test("DateGenericRejected",()=>{if(!Lint(p with {Steps=[new("bad","setValue",Name:"拍摄日期",ControlType:"Edit",ScopePreset:"MainWindow")]}).Any(x=>x.Code=="GENERIC_DATE"))throw new Exception("Date ambiguity accepted");});
+        Test("UnknownPresetRejected",()=>{if(!Lint(p with {Steps=[new("bad","invoke",AutomationId:"x",ControlType:"Button",ScopePreset:"GuessedScope")]}).Any(x=>x.Code=="UNKNOWN_PRESET"))throw new Exception("Unknown accepted");});
+        Test("OptionalCannotHideReference",()=>{if(!Lint(p with {Steps=[new("bad","invoke",Name:"参考图",ControlType:"Button",ScopePreset:"MainWindow",Optional:true)]}).Any(x=>x.Code=="OPTIONAL_REQUIRED"))throw new Exception("Optional accepted");});
+        Test("AncestorFallbackRejected",()=>{if(!Lint(p with {Steps=[new("bad","invoke",Name:"编辑",ControlType:"Button",ScopeAnchorName:"guess")]}).Any(x=>x.Code=="ANCESTOR_FALLBACK"))throw new Exception("Ancestor fallback accepted");});
+        Test("ReferenceFamilyContractRequired",()=>{var s=p.Steps.Single(s=>s.Id=="reference-loaded");if(s.ControlType!="Button"||s.ScopePreset!="PlanningReferences"||!s.RequireFocusable||s.RequiredPattern!="Invoke")throw new Exception("Reference regression");});
+        Test("PlansShareSelectors",()=>{var upgrade=LoadPlan(Path.Combine(AppContext.BaseDirectory,"upgrade-full.plan.json"));foreach(var s in p.Steps.Where(s=>s.SelectorRef is not null)){foreach(var other in upgrade.Steps.Where(o=>o.SelectorRef==s.SelectorRef)){if(s.Name!=other.Name||s.AutomationId!=other.AutomationId||s.ControlType!=other.ControlType||s.ScopePreset!=other.ScopePreset)throw new Exception("Catalog drift");}}});
         Console.WriteLine($"Navigation regression: {count} PASS, 0 FAIL; offline only");return 0;
     }
 }

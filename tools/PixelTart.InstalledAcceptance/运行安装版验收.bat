@@ -4,7 +4,7 @@ chcp 65001 >nul
 title Pixel Tart - Installed Acceptance
 set "PIXEL_TART_KIT=%~dp0"
 echo ========================================
-echo Pixel Tart 安装版自动验收 - AcceptanceKit v3
+echo Pixel Tart 安装版自动验收
 echo ========================================
 echo 验收包目录："%PIXEL_TART_KIT%"
 echo 正在检查验收环境...

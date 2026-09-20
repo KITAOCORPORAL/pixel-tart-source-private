@@ -18,7 +18,7 @@ internal static partial class Program
     private static void VerifyKitManifest()
     {
         var entries = JsonSerializer.Deserialize<KitFile[]>(File.ReadAllText(Child(PlanDirectory, "KIT_MANIFEST.json")), Json) ?? throw new InvalidDataException("Missing manifest");
-        foreach (var required in new[] { "PixelTart.InstalledAcceptance.exe", "PixelTart.InstalledAcceptance.dll", "planning-full.plan.json", "upgrade-full.plan.json" })
+        foreach (var required in new[] { "PixelTart.InstalledAcceptance.exe", "PixelTart.InstalledAcceptance.dll", "planning-full.plan.json", "upgrade-full.plan.json", "selectors.json" })
             if (entries.Count(e => e.RelativePath == required) != 1) throw new InvalidDataException("Manifest missing/duplicate: " + required);
         if (entries.Select(e => e.RelativePath).Distinct(StringComparer.OrdinalIgnoreCase).Count() != entries.Length) throw new InvalidDataException("Duplicate manifest paths");
         foreach (var entry in entries)
@@ -38,7 +38,7 @@ internal static partial class Program
         try
         {
             VerifyKitManifest();
-            var plans = new[] { "planning-full.plan.json", "upgrade-full.plan.json" }.Select(file => JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, file)), Json)!).ToArray();
+            var plans = new[] { "planning-full.plan.json", "upgrade-full.plan.json" }.Select(file => LoadPlan(Child(PlanDirectory, file))).ToArray();
             foreach (var p in plans) Validate(p);
             foreach (var p in plans)
             {
@@ -94,7 +94,7 @@ internal static partial class Program
         if (!Child(Path.GetTempPath(), "safe/file.json").EndsWith("file.json", StringComparison.Ordinal)) throw new Exception("Safe path rejected"); tests++;
         foreach (var file in new[] { "planning-full.plan.json", "upgrade-full.plan.json" })
         {
-            var p = JsonSerializer.Deserialize<Plan>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, file)), Json)!;
+            var p = LoadPlan(Path.Combine(AppContext.BaseDirectory, file));
             PlanDirectory = AppContext.BaseDirectory; Validate(p); tests++;
             try { Validate(p with { Steps = p.Steps.Where(s => s.Coverage != "persistence").ToArray() }); throw new Exception("Missing gate accepted"); }
             catch (InvalidDataException) { tests++; }
@@ -228,7 +228,8 @@ internal static partial class Program
             {
                 var selectors = plan.Steps.Where(x => x.Name == name && x.Action is "assertPresent" or "waitPresent" or "invoke").ToArray();
                 var distinct = selectors.Select(x => JsonSerializer.Serialize(x with { Id = "capture-bound", Action = "assertPresent", Coverage = null, Value = null })).Distinct().ToArray();
-                var selector = distinct.Length == 1 ? JsonSerializer.Deserialize<Step>(distinct.Single(), Json)! : new Step(s.Id, "assertPresent", Name: name, ControlType: name == "选择拍摄日期" ? "Button" : null);
+                if (distinct.Length != 1) throw new InvalidDataException("Capture requires one formal typed/scoped selector: " + name);
+                var selector = JsonSerializer.Deserialize<Step>(distinct.Single(), Json)!;
                 bounds.Union(One(selector).Current.BoundingRectangle);
             }
             var rect = new Rectangle((int)Math.Floor(bounds.X), (int)Math.Floor(bounds.Y), (int)Math.Ceiling(bounds.Width), (int)Math.Ceiling(bounds.Height));

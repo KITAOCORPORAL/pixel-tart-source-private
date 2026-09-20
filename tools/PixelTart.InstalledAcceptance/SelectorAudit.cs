@@ -83,7 +83,7 @@ internal static partial class Program
         });
         foreach (var file in new[] { "planning-full.plan.json", "upgrade-full.plan.json" })
         {
-            var p = JsonSerializer.Deserialize<Plan>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, file)), Json)!;
+            var p = LoadPlan(Path.Combine(AppContext.BaseDirectory, file));
             Test("DateValueSelectorUsesInnerPartTextBoxTests:" + file, () => {
                 foreach (var id in new[] { "date-value", "date-check" }) {
                     var s = RequireUnique(p.Steps.Where(s => s.Id == id).ToArray(), id);

@@ -1,5 +1,7 @@
 # Independent installed UI acceptance runner
 
+**Current status: INTERNAL WORK / CANDIDATE GATE FAIL.** The v1–v3 sections below document historical deliveries only; they are not instructions to run another debug kit. The Candidate-only policy at the end supersedes older delivery guidance.
+
 ## AcceptanceKit v3 navigation regression
 
 Current delivery is PixelTart-Installed-Acceptance-Kit-8cb95e6-v3.zip. ScopePreset=PrimaryNavigation resolves centrally to SidebarNavigationScroll, never SidebarRoot (a sibling landmark). MainWindow preset means the actual PID-bound window. Both plans pre-audit all 13 navigation entries. --lint-plan <file> emits a per-step classified selector-lint.json with error/warning explanations. --navigation-tests adds 9 offline regressions; total offline cases 40. Any required scope resolution failure is identified separately from a missing target. Date PART_TextBox/Edit fix is retained.
@@ -43,3 +45,10 @@ Local user entry: download and extract the complete ZIP, double-click `运行安
 Each run uses a unique test namespace, never deletes old evidence, and blocks if the shared installer registration belongs outside that namespace or any PixelTart process is running. Setup receives NOCLOSEAPPLICATIONS and no shortcuts/tasks. Application data and legacy migration are isolated with the existing acceptance-root environment override. No product state is written by the runner. Path traversal, alternate streams and reparse targets are rejected.
 
 Evidence lives in `acceptance-result/<timestamp-id>/{fresh,upgrade}`: acceptance.json, uia.jsonl, environment, install logs, actual screenshots/PDF and failure UIA tree. No missing artifact is synthesized. Two completed plans yield TECHNICAL_ACCEPTANCE_PASS; visual stays NOT_REVIEWED and user acceptance PENDING_USER. Source-derived selectors may require follow-up after actual UIA results. Product src/installer remain frozen and original Setup is reused.
+# Candidate-only delivery policy
+
+该验收包只能在内部 selector/accessibility readiness 全部通过后生成。用户运行用于最终候选验收，不用于调试验收工具本身。
+
+v1–v3 are historical, not candidate releases. Do not distribute a v4/v5, standalone BAT, or a temporary plan. `Package-Kit.ps1` now refuses packaging without complete, source-bound Candidate Gate evidence. Any `src/` change requires a new product commit, all regressions, publish, installer and isolated installation; the historical 8cb95e6 installer must not be relabelled.
+
+Failure neighborhood audit is mandatory: a selector/scope/pattern/focus/popup failure triggers review of the entire related family (reference/moodboard/lighting/styling, all dialogs, or all navigation), not just the first failing step. Both plans resolve shared definitions from `selectors.json`; inline overrides are rejected. In-process WPF peer/keyboard-handler tests are structural product evidence, never installed OS interaction evidence.

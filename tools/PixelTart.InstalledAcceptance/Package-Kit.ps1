@@ -1,19 +1,31 @@
 param(
     [string]$Dotnet = 'D:\AI AGENT\.dotnet\dotnet.exe',
     [string]$Poppler = 'C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\poppler',
-    [string]$Destination
+    [string]$Destination,
+    [string]$CandidateGate,
+    [Parameter(Mandatory)][string]$Installer,
+    [Parameter(Mandatory)][string]$OldInstaller
 )
 $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+if (!$CandidateGate -or !(Test-Path -LiteralPath $CandidateGate)) { throw 'Candidate Gate evidence required. No further user debug kit may be built.' }
+$gate = Get-Content -LiteralPath $CandidateGate -Raw | ConvertFrom-Json
+if ($gate.Status -ne 'PASS' -or $gate.ProductSourceSha -ne (& git -C $repo log -1 --format=%H -- src).Trim()) { throw 'Candidate Gate FAIL or stale product source.' }
+foreach ($required in @('Full124Contract','Upgrade70Contract','PlanLint','ProductAccessibility','RunnerTests','V1Regression','V2Regression','V3Regression','ReleaseBuild','Core','Wpf','RealApp','Dpi','PortableKit','InstallerHash','FreshInstallation','NativeDialogs','Internal124Rehearsal','InternalUpgrade70Rehearsal')) {
+    if ($gate.Checks.$required -ne 'PASS') { throw "Candidate gate missing: $required" }
+}
 if (-not $Destination) { $Destination = Join-Path $repo ('artifacts\installed-acceptance-kit-portable-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 $Destination = [IO.Path]::GetFullPath($Destination)
 if (-not $Destination.StartsWith($repo + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Package destination must stay inside this repository.' }
 New-Item -ItemType Directory -Path $Destination -Force | Out-Null
 & $Dotnet publish (Join-Path $PSScriptRoot 'PixelTart.InstalledAcceptance.csproj') -c Release -r win-x64 --self-contained true -o $Destination
 if ($LASTEXITCODE -ne 0) { throw 'Runner publish failed.' }
-foreach ($file in @('planning-full.plan.json','upgrade-full.plan.json','运行安装版验收.bat','Launch-Acceptance.ps1','README_验收说明.md','THIRD_PARTY_NOTICES.md','KIT_VERSION.txt')) {
+foreach ($file in @('planning-full.plan.json','upgrade-full.plan.json','selectors.json','运行安装版验收.bat','Launch-Acceptance.ps1','README_验收说明.md','THIRD_PARTY_NOTICES.md','KIT_VERSION.txt')) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot $file) -Destination $Destination -Force
 }
+foreach($file in @('运行最终候选验收.bat','README_最终候选验收.md')) { Copy-Item -LiteralPath (Join-Path $PSScriptRoot $file) -Destination $Destination }
+$candidateBat=Join-Path $Destination '运行最终候选验收.bat'
+[IO.File]::WriteAllText($candidateBat,([IO.File]::ReadAllText($candidateBat)-replace '\r?\n',"`r`n"),[Text.UTF8Encoding]::new($false))
 # Mechanical encoding normalization: CMD requires CRLF; Windows PowerShell 5.1
 # requires BOM for Chinese source. No SDK/build script is shipped.
 $batPath = Join-Path $Destination '运行安装版验收.bat'
@@ -22,10 +34,7 @@ $launcherPath = Join-Path $Destination 'Launch-Acceptance.ps1'
 [IO.File]::WriteAllText($launcherPath, ([IO.File]::ReadAllText($launcherPath) -replace '\r?\n', "`r`n"), [Text.UTF8Encoding]::new($true))
 $installerDir = Join-Path $Destination 'installer'
 New-Item -ItemType Directory -Path $installerDir -Force | Out-Null
-foreach ($version in @('8cb95e6','8729d17')) {
-    $name = "PixelTart-DeveloperPreview-2.3.0-dev.$version-x64-Setup.exe"
-    Copy-Item -LiteralPath (Join-Path $repo "artifacts\planning-proposal-final\builds\2.3.0-dev.$version\installer\$name") -Destination $installerDir -Force
-}
+foreach ($path in @($Installer,$OldInstaller)) { Copy-Item -LiteralPath $path -Destination $installerDir }
 $popplerDir = Join-Path $Destination 'poppler'
 New-Item -ItemType Directory -Path $popplerDir -Force | Out-Null
 Get-ChildItem -LiteralPath (Join-Path $Poppler 'Library\bin') -File | Where-Object { $_.Extension -eq '.dll' -or $_.Name -in @('pdfinfo.exe','pdftoppm.exe') } | Copy-Item -Destination $popplerDir -Force
@@ -47,7 +56,7 @@ $manifest = Get-ChildItem -LiteralPath $Destination -File -Recurse | Where-Objec
 }
 # Generated build artifact, not a source edit.
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $Destination 'KIT_MANIFEST.json') -Encoding utf8
-$zip = Join-Path (Split-Path $Destination -Parent) 'PixelTart-Installed-Acceptance-Kit-8cb95e6-v3.zip'
+$zip = Join-Path (Split-Path $Destination -Parent) 'PixelTart-DeveloperPreview-AcceptanceCandidate-01.zip'
 if (Test-Path -LiteralPath $zip) { throw "ZIP already exists; preserve previous delivery: $zip" }
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [IO.Compression.ZipFile]::CreateFromDirectory($Destination, $zip, [IO.Compression.CompressionLevel]::Optimal, $false)

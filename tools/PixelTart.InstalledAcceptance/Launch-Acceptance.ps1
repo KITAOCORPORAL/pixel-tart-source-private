@@ -55,8 +55,6 @@ try {
     New-Item -ItemType Directory -Path $result -Force | Out-Null
     Write-Launch "Time=$($launchTime.ToString('O')); KIT_ROOT=$kitRoot"
     Write-Launch "Windows Version=$([Environment]::OSVersion.VersionString); Runner Exists=$(Test-Path -LiteralPath $runner)"
-    $installerPaths = @('installer/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe','installer/PixelTart-DeveloperPreview-2.3.0-dev.8729d17-x64-Setup.exe')
-    foreach ($path in $installerPaths) { Write-Launch "Installer Exists=$(Test-Path -LiteralPath (Join-Path $kitRoot $path)); $path" }
     $manifestPath = Safe-Path 'KIT_MANIFEST.json'
     if (-not (Test-Path -LiteralPath $manifestPath)) { throw '未找到 KIT_MANIFEST.json，请重新解压完整 ZIP。' }
     $script:manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -67,7 +65,7 @@ try {
         Check-Files @($script:manifest | Where-Object { $_.RelativePath -notmatch '(^installer[/\\]|\.plan\.json$)' } | ForEach-Object { $_.RelativePath })
     }
     Check-Gate '[3/7] Full Plan' {
-        Check-Files @('planning-full.plan.json')
+        Check-Files @('planning-full.plan.json','selectors.json')
         $raw = Get-Content -LiteralPath (Join-Path $kitRoot 'planning-full.plan.json') -Raw -Encoding UTF8
         if ($raw -match '(?i)D:\\|AI AGENT|worktrees|pixel-tart-developer-preview-rc6') { throw 'PORTABILITY BUG：计划包含开发机路径。' }
         $script:fresh = $raw | ConvertFrom-Json
@@ -81,6 +79,7 @@ try {
         if (-not $script:upgrade.FullPlan -or $script:upgrade.Mode -ne 'upgrade') { throw 'Upgrade Plan 模式错误。' }
     }
     Check-Gate '[5/7] Installer' {
+        $installerPaths = @($script:fresh.InstallerPath,$script:upgrade.InstallerPath,$script:upgrade.OldInstallerPath)
         foreach ($path in $installerPaths) { if (-not (Test-Path -LiteralPath (Safe-Path $path))) { throw "未找到 Pixel Tart Developer Preview 安装包。预期位置：$path" } }
         Check-Files @($script:fresh.InstallerPath, $script:upgrade.InstallerPath, $script:upgrade.OldInstallerPath)
         foreach ($pair in @(@($script:fresh.InstallerPath,$script:fresh.InstallerSha256),@($script:upgrade.OldInstallerPath,$script:upgrade.OldInstallerSha256))) {

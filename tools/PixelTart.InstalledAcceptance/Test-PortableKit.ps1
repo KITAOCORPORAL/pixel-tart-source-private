@@ -1,18 +1,23 @@
-param([Parameter(Mandatory)][string]$Zip, [Parameter(Mandatory)][string]$TestDirectory)
+param([string]$Zip, [Parameter(Mandatory)][string]$TestDirectory, [string]$InternalStage)
 $ErrorActionPreference = 'Stop'
 $TestDirectory = [IO.Path]::GetFullPath($TestDirectory)
 if (Test-Path -LiteralPath $TestDirectory) { throw 'Use a fresh test directory to preserve prior evidence.' }
 New-Item -ItemType Directory -Path $TestDirectory | Out-Null
-$zipCopy = Join-Path $TestDirectory ([IO.Path]::GetFileName($Zip))
-Copy-Item -LiteralPath $Zip -Destination $zipCopy
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $kit = Join-Path $TestDirectory '解压 验收包'
-[IO.Compression.ZipFile]::ExtractToDirectory($zipCopy, $kit)
+if($InternalStage) { Copy-Item -LiteralPath $InternalStage -Destination $kit -Recurse }
+else {
+    if(!$Zip){throw 'ZIP or internal stage required'}
+    $zipCopy = Join-Path $TestDirectory ([IO.Path]::GetFileName($Zip))
+    Copy-Item -LiteralPath $Zip -Destination $zipCopy
+    [IO.Compression.ZipFile]::ExtractToDirectory($zipCopy, $kit)
+}
+$freshPlan=Get-Content -LiteralPath (Join-Path $kit 'planning-full.plan.json') -Raw|ConvertFrom-Json
 $results = @()
 function Invoke-Probe([string]$Name, [int]$Expected, [string]$Text) {
     Push-Location -LiteralPath $kit
     try {
-        $output = @(& $env:ComSpec /d /c 'call "运行安装版验收.bat" --preflight-only <nul' 2>&1)
+        $output = @(& $env:ComSpec /d /c 'call "运行最终候选验收.bat" --preflight-only <nul' 2>&1)
         $code = $LASTEXITCODE
         $output | Set-Content -LiteralPath (Join-Path $TestDirectory "$Name.txt") -Encoding utf8
         if ($code -ne $Expected -or ($output -join "`n") -notmatch [regex]::Escape($Text)) { throw "$Name failed: code=$code; $($output -join "`n")" }
@@ -26,7 +31,7 @@ Invoke-Probe 'portable-success' 0 'PORTABLE PREFLIGHT PASS'
 foreach ($case in @(
     @('missing-runner','PixelTart.InstalledAcceptance.exe','未找到：PixelTart.InstalledAcceptance.exe'),
     @('missing-dependency','coreclr.dll','[2/7] 依赖文件 FAIL'),
-    @('missing-installer','installer/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe','[5/7] Installer FAIL'),
+    @('missing-installer',$freshPlan.InstallerPath,'[5/7] Installer FAIL'),
     @('missing-full-plan','planning-full.plan.json','[3/7] Full Plan FAIL')
 )) {
     $source = Join-Path $kit $case[1]
