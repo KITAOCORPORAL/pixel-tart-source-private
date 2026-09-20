@@ -16,12 +16,12 @@
 
     <Style x:Key="HorizontalScrollThumb" TargetType="Thumb">
         <Setter Property="MinWidth" Value="28" />
-        <Setter Property="Margin" Value="2" />
+        <Setter Property="Margin" Value="2,4" />
         <Setter Property="Background" Value="{DynamicResource ScrollBarThumbBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="3" Opacity=".4" />
+                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="5" Opacity=".4" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource ScrollBarThumbHoverBrush}" /><Setter TargetName="ThumbBorder" Property="Opacity" Value="1" />
@@ -91,8 +91,8 @@
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
-                <Setter Property="Height" Value="10" />
-                <Setter Property="MinHeight" Value="10" />
+                <Setter Property="Height" Value="14" />
+                <Setter Property="MinHeight" Value="14" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ScrollBar">
