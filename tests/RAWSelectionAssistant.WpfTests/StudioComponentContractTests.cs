@@ -31,6 +31,9 @@ internal static class StudioTestSource
     }
 }
 [TestClass] public sealed class StudioNoWhiteSurfaceLeakTests {
+    [TestMethod] public void SegmentedAndDatePicker_UseExplicitDarkTemplates() {
+        StudioTestSource.Contains("Studio.Controls.xaml", "ControlTemplate TargetType=\"ListBox\"", "TargetType=\"DatePicker\" BasedOn=\"{StaticResource ProposalDatePicker}\"");
+    }
     [TestMethod] public void StudioTemplates_DoNotHardcodeWhiteSurfaces() {
         var x=XDocument.Parse(StudioTestSource.Read("Studio.Controls.xaml"));
         foreach(var a in x.Descendants().Attributes().Where(a=>a.Name.LocalName=="Background"))
