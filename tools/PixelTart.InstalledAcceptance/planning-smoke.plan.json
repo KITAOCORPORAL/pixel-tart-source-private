@@ -1,0 +1,15 @@
+{
+  "ProductSourceSha": "8cb95e6d2c4814717dc31a8c6aa19f8b2c89c9cc",
+  "InstallerPath": "D:\\AI AGENT\\worktrees\\pixel-tart-developer-preview-rc6\\artifacts\\planning-proposal-final\\builds\\2.3.0-dev.8cb95e6\\installer\\PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe",
+  "InstallerSha256": "C2E5F26A1D00BFE2A466450C0BB9D015CDD35D6733E909FE8ADCB5BAEFA6247D",
+  "RunDirectory": "InstalledAcceptance_8cb95e6",
+  "Steps": [
+    { "Id": "exit-tutorial", "Action": "invoke", "IdSelector": "TutorialExitButton" },
+    { "Id": "navigate-planning", "Action": "invoke", "IdSelector": "PrimaryNavigationPlanning" },
+    { "Id": "planning-workspace", "Action": "assertPresent", "Name": "摄影策划案工作区" },
+    { "Id": "planning-list", "Action": "assertPresent", "Name": "策划案列表" },
+    { "Id": "planning-tree", "Action": "dump" },
+    { "Id": "planning-screenshot", "Action": "capture", "Value": "installed-screenshots/01_installed_planning_home.png" },
+    { "Id": "normal-close", "Action": "close" }
+  ]
+}

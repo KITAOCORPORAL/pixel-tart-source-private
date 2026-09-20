@@ -6,6 +6,24 @@
 
 本轮停止在验收阻塞，不进入 Stage VI，不制作宣传片，不替用户完成视觉签收。
 
+## Installed UI Automation — Recovery Pass
+
+2026-09-20：读取恢复指令后复核远端 HEAD `9befb2e`、现有完整报告/索引/视觉审计，确认 `src/`、`installer/` 无后续变化。保持 PRODUCT_SOURCE_SHA `8cb95e6`，安装包 SHA256 再核验一致，没有无意义重建产品。
+
+新增独立 `tools/PixelTart.InstalledAcceptance`：不引用生产 App 项目，采用外部 PID 绑定的 `System.Windows.Automation`，实现唯一元素选择、Invoke/Value/Selection/Expand/Window patterns、焦点检查、屏幕截图、JSON 日志和隔离安装基础代码。Release 编译 0 warning / 0 error；`--validate` 初始计划 schema/path/hash PASS，明确没有 UI 操作。
+
+**该 Runner 仅部分实现且没有 live 执行。** 当前 computer-use 技能要求 Windows 自动化只能通过其 JS API，故未通过 shell 执行自建 UIA、SendKeys、CopyFromScreen 来绕过限制。没有再循环重试已失败的截图/点击接口，也没有据此判定 Microsoft UIA 本身不可用。
+
+- Installed PID / UIA root：本轮无，JSON 中为 null；不复用旧 PID 冒充新运行。
+- Installed EXE：仍为前轮隔离安装路径，文件 SHA256 为 `F4FBB25234E253E17229CF3C554B9B19C002E565C62EA4BFABD358C479856EB1`。
+- API 异常：本轮未运行直接 UIA，无新 exception；前轮支持接口的 `0x80004002`/coordinate geometry 错误仍是历史证据，不标成本轮重复运行。
+- 新 Recovery Fresh Install、创建/七模块/编辑/重启/预览/弹层/PDF/联机/在线选片/正常关闭/完整升级：全部 NOT_RUN。
+- Runner 完整工作流尚未实现，初始 smoke 计划仅用于后续验证选择器；不能称验收工具已完整交付。
+- 机器可读结果：`docs/implementation-reports/PLANNING_INSTALLED_ACCEPTANCE.json`。
+- 安装版视觉记录：`docs/design/PLANNING_INSTALLED_VISUAL_REVIEW.md`，无新截图，NOT REVIEWED。
+
+最终状态仍 **BLOCKED**，不是 READY FOR USER ACCEPTANCE。需要可执行受支持桌面输入/捕获的环境，才能继续运行安装版验收。本轮只新增工具/报告，没有修改产品源码或生成新安装器。
+
 ## HEAD 与证据边界
 
 - START_SHA：`be7055285b23fcc5b03bbe2b580493c0e2092bc7`
