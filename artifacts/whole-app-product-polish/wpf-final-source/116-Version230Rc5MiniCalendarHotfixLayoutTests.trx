@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1f1eb2f0-5995-4c9f-a6ec-cccaa06ae1f2" name="Administrator@PC-20250309WEIZ 2026-09-20 18:19:23" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:19:23.9403980+08:00" queuing="2026-09-20T18:19:23.9403983+08:00" start="2026-09-20T18:19:22.3889644+08:00" finish="2026-09-20T18:19:24.0729493+08:00" />
+  <TestSettings name="default" id="77402558-c91f-4f5b-85a4-220622c0800b">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_19_23" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a5224416-5966-411f-b57e-ae131fd8aa5a" testId="1dfa3118-29c9-8936-b5fb-5e2b16856d98" testName="MiniCalendar_HotfixDoesNotUseCompressionTransformsOrNegativeMargins" computerName="PC-20250309WEIZ" duration="00:00:00.0013316" startTime="2026-09-20T18:19:23.9068732+08:00" endTime="2026-09-20T18:19:23.9105576+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5224416-5966-411f-b57e-ae131fd8aa5a" />
+    <UnitTestResult executionId="42d9b759-9e64-42a6-8e6f-f2d5537d17d3" testId="1038ab49-b6f5-813b-99a0-e0977368e279" testName="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (175)" computerName="PC-20250309WEIZ" duration="00:00:00.0849009" startTime="2026-09-20T18:19:23.6968462+08:00" endTime="2026-09-20T18:19:23.7818470+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42d9b759-9e64-42a6-8e6f-f2d5537d17d3" />
+    <UnitTestResult executionId="b998962a-82ee-4be8-a1e9-a095116d7e61" testId="107b8f3f-e465-8159-b6f0-e5b6a386f638" testName="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (280,420)" computerName="PC-20250309WEIZ" duration="00:00:00.0746048" startTime="2026-09-20T18:19:23.2886959+08:00" endTime="2026-09-20T18:19:23.3636083+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b998962a-82ee-4be8-a1e9-a095116d7e61" />
+    <UnitTestResult executionId="e1787611-fd87-4830-b79f-1bc06750232b" testId="1df13f95-3d84-8948-be1e-003a03d22920" testName="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (320,420)" computerName="PC-20250309WEIZ" duration="00:00:00.0719492" startTime="2026-09-20T18:19:23.4210807+08:00" endTime="2026-09-20T18:19:23.4931026+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1787611-fd87-4830-b79f-1bc06750232b" />
+    <UnitTestResult executionId="71937759-e8c3-4d47-a237-42ca81b3d706" testId="14d4e469-4a58-80e6-9356-8843a2e87d0f" testName="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (280,384)" computerName="PC-20250309WEIZ" duration="00:00:00.4383412" startTime="2026-09-20T18:19:22.8317811+08:00" endTime="2026-09-20T18:19:23.2852667+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71937759-e8c3-4d47-a237-42ca81b3d706" />
+    <UnitTestResult executionId="39f18fd6-41f5-4503-9b18-c9f468624df5" testId="10d36db6-7c3b-893e-9da8-ec0d3de1bb71" testName="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (125)" computerName="PC-20250309WEIZ" duration="00:00:00.0559687" startTime="2026-09-20T18:19:23.5623874+08:00" endTime="2026-09-20T18:19:23.6184215+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="39f18fd6-41f5-4503-9b18-c9f468624df5" />
+    <UnitTestResult executionId="5f6f961d-9b62-475a-a947-5bcdbb093e07" testId="15fa7f86-b798-85c4-8409-30716196a366" testName="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (100)" computerName="PC-20250309WEIZ" duration="00:00:00.0691342" startTime="2026-09-20T18:19:23.4931371+08:00" endTime="2026-09-20T18:19:23.5623477+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5f6f961d-9b62-475a-a947-5bcdbb093e07" />
+    <UnitTestResult executionId="634a077d-5900-4d29-b6c6-015ca7a641aa" testId="17f4cfd3-87f4-8b01-839f-d7f407117584" testName="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (200)" computerName="PC-20250309WEIZ" duration="00:00:00.0951444" startTime="2026-09-20T18:19:23.7819038+08:00" endTime="2026-09-20T18:19:23.8772547+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="634a077d-5900-4d29-b6c6-015ca7a641aa" />
+    <UnitTestResult executionId="400848f0-6138-475c-aa8e-25f6297c0c99" testId="1b40b579-83f4-8846-899f-842230ae2871" testName="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (150)" computerName="PC-20250309WEIZ" duration="00:00:00.0782453" startTime="2026-09-20T18:19:23.6184589+08:00" endTime="2026-09-20T18:19:23.6967889+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="400848f0-6138-475c-aa8e-25f6297c0c99" />
+    <UnitTestResult executionId="444b5f18-1e98-413a-9748-122232d85132" testId="1ddf8320-b986-8886-8d9a-8a71abb50e99" testName="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (260,384)" computerName="PC-20250309WEIZ" duration="00:00:00.0568882" startTime="2026-09-20T18:19:23.3640735+08:00" endTime="2026-09-20T18:19:23.4210394+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="444b5f18-1e98-413a-9748-122232d85132" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="MiniCalendar_HotfixDoesNotUseCompressionTransformsOrNegativeMargins" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1dfa3118-29c9-8936-b5fb-5e2b16856d98">
+      <Execution id="a5224416-5966-411f-b57e-ae131fd8aa5a" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_HotfixDoesNotUseCompressionTransformsOrNegativeMargins" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (200)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17f4cfd3-87f4-8b01-839f-d7f407117584">
+      <Execution id="634a077d-5900-4d29-b6c6-015ca7a641aa" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (280,384)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14d4e469-4a58-80e6-9356-8843a2e87d0f">
+      <Execution id="71937759-e8c3-4d47-a237-42ca81b3d706" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (280,420)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="107b8f3f-e465-8159-b6f0-e5b6a386f638">
+      <Execution id="b998962a-82ee-4be8-a1e9-a095116d7e61" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (100)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15fa7f86-b798-85c4-8409-30716196a366">
+      <Execution id="5f6f961d-9b62-475a-a947-5bcdbb093e07" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (150)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b40b579-83f4-8846-899f-842230ae2871">
+      <Execution id="400848f0-6138-475c-aa8e-25f6297c0c99" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (320,420)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1df13f95-3d84-8948-be1e-003a03d22920">
+      <Execution id="e1787611-fd87-4830-b79f-1bc06750232b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (175)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1038ab49-b6f5-813b-99a0-e0977368e279">
+      <Execution id="42d9b759-9e64-42a6-8e6f-f2d5537d17d3" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi (125)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10d36db6-7c3b-893e-9da8-ec0d3de1bb71">
+      <Execution id="39f18fd6-41f5-4503-9b18-c9f468624df5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_LogicalMetricsRemainStableAcrossSupportedDpi" />
+    </UnitTest>
+    <UnitTest name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap (260,384)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ddf8320-b986-8886-8d9a-8a71abb50e99">
+      <Execution id="444b5f18-1e98-413a-9748-122232d85132" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc5MiniCalendarHotfixLayoutTests" name="MiniCalendar_ActualLayoutPreservesTextInsetsRowsAndDetailsGap" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1dfa3118-29c9-8936-b5fb-5e2b16856d98" executionId="a5224416-5966-411f-b57e-ae131fd8aa5a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1038ab49-b6f5-813b-99a0-e0977368e279" executionId="42d9b759-9e64-42a6-8e6f-f2d5537d17d3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="107b8f3f-e465-8159-b6f0-e5b6a386f638" executionId="b998962a-82ee-4be8-a1e9-a095116d7e61" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1df13f95-3d84-8948-be1e-003a03d22920" executionId="e1787611-fd87-4830-b79f-1bc06750232b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14d4e469-4a58-80e6-9356-8843a2e87d0f" executionId="71937759-e8c3-4d47-a237-42ca81b3d706" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10d36db6-7c3b-893e-9da8-ec0d3de1bb71" executionId="39f18fd6-41f5-4503-9b18-c9f468624df5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15fa7f86-b798-85c4-8409-30716196a366" executionId="5f6f961d-9b62-475a-a947-5bcdbb093e07" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17f4cfd3-87f4-8b01-839f-d7f407117584" executionId="634a077d-5900-4d29-b6c6-015ca7a641aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b40b579-83f4-8846-899f-842230ae2871" executionId="400848f0-6138-475c-aa8e-25f6297c0c99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ddf8320-b986-8886-8d9a-8a71abb50e99" executionId="444b5f18-1e98-413a-9748-122232d85132" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

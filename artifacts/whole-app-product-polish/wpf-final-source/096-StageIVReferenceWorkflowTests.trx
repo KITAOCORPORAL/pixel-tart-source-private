@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3863ab4d-2289-40a8-99c6-3b3a64264f91" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:52" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:52.5104971+08:00" queuing="2026-09-20T18:18:52.5104974+08:00" start="2026-09-20T18:18:51.9047054+08:00" finish="2026-09-20T18:18:52.5148423+08:00" />
+  <TestSettings name="default" id="54990dae-9174-49c0-998b-8205e41169d5">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_52" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ad249323-5260-4814-b733-4db4ed7a6a52" testId="1c58ab1d-b397-8efa-af7b-7549f208a194" testName="TetherXamlContainsZoneQuickPreviewPinnedSecondDisplayAndNextCapture" computerName="PC-20250309WEIZ" duration="00:00:00.0008783" startTime="2026-09-20T18:18:52.4125948+08:00" endTime="2026-09-20T18:18:52.4135199+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad249323-5260-4814-b733-4db4ed7a6a52" />
+    <UnitTestResult executionId="bdedfa14-19ee-49b1-bd26-bbeaca898dc3" testId="150447d3-f0f7-8b88-8f88-6eb95bb83cd9" testName="TetherAdvancedReferenceEditorExposesExplicitRestoreAndSave" computerName="PC-20250309WEIZ" duration="00:00:00.0004126" startTime="2026-09-20T18:18:52.4145890+08:00" endTime="2026-09-20T18:18:52.4150271+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdedfa14-19ee-49b1-bd26-bbeaca898dc3" />
+    <UnitTestResult executionId="52c77044-c476-43b7-bcae-aaa5c87f423b" testId="1f074685-467a-8bcd-92f3-783a2ae5a517" testName="StandaloneReferenceColorToolAndTetherRoundTripEntryExist" computerName="PC-20250309WEIZ" duration="00:00:00.0011493" startTime="2026-09-20T18:18:52.4150434+08:00" endTime="2026-09-20T18:18:52.4171784+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="52c77044-c476-43b7-bcae-aaa5c87f423b" />
+    <UnitTestResult executionId="edc4b890-5ce8-4cf6-ad53-45854da5a831" testId="1d9da8d9-42e3-89c4-9dd1-80228e085321" testName="ExplicitReferenceSaveRequiresUpdateOrSaveAsChoice" computerName="PC-20250309WEIZ" duration="00:00:00.0002968" startTime="2026-09-20T18:18:52.4142476+08:00" endTime="2026-09-20T18:18:52.4145716+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="edc4b890-5ce8-4cf6-ad53-45854da5a831" />
+    <UnitTestResult executionId="b7d376f3-191c-4364-8ce4-d1a457f0f7fa" testId="1b47c188-5dbb-851c-9d4a-519bf1551f7f" testName="TetherXamlContainsReferencePickerWeightsAndProjectSelection" computerName="PC-20250309WEIZ" duration="00:00:00.0015893" startTime="2026-09-20T18:18:52.4104163+08:00" endTime="2026-09-20T18:18:52.4123345+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7d376f3-191c-4364-8ce4-d1a457f0f7fa" />
+    <UnitTestResult executionId="ef77e27e-3fc3-4914-a839-3f45efeb1553" testId="15325c6f-c4c7-8997-89ed-fcf1a41ec748" testName="TetherSessionAdjustmentDoesNotMutateColorSchemeUntilExplicitSave" computerName="PC-20250309WEIZ" duration="00:00:00.0006576" startTime="2026-09-20T18:18:52.4135415+08:00" endTime="2026-09-20T18:18:52.4142283+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef77e27e-3fc3-4914-a839-3f45efeb1553" />
+    <UnitTestResult executionId="2f81407f-9b82-4dae-8e70-6dae05b4a154" testId="1f9a7e53-503b-83ee-a4e2-c049d20169ae" testName="AccordionAndInspectorWidthSurviveStoreReopen" computerName="PC-20250309WEIZ" duration="00:00:00.0440718" startTime="2026-09-20T18:18:52.3472351+08:00" endTime="2026-09-20T18:18:52.4068591+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f81407f-9b82-4dae-8e70-6dae05b4a154" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TetherXamlContainsReferencePickerWeightsAndProjectSelection" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b47c188-5dbb-851c-9d4a-519bf1551f7f">
+      <Execution id="b7d376f3-191c-4364-8ce4-d1a457f0f7fa" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="TetherXamlContainsReferencePickerWeightsAndProjectSelection" />
+    </UnitTest>
+    <UnitTest name="TetherAdvancedReferenceEditorExposesExplicitRestoreAndSave" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="150447d3-f0f7-8b88-8f88-6eb95bb83cd9">
+      <Execution id="bdedfa14-19ee-49b1-bd26-bbeaca898dc3" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="TetherAdvancedReferenceEditorExposesExplicitRestoreAndSave" />
+    </UnitTest>
+    <UnitTest name="TetherXamlContainsZoneQuickPreviewPinnedSecondDisplayAndNextCapture" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c58ab1d-b397-8efa-af7b-7549f208a194">
+      <Execution id="ad249323-5260-4814-b733-4db4ed7a6a52" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="TetherXamlContainsZoneQuickPreviewPinnedSecondDisplayAndNextCapture" />
+    </UnitTest>
+    <UnitTest name="AccordionAndInspectorWidthSurviveStoreReopen" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f9a7e53-503b-83ee-a4e2-c049d20169ae">
+      <Execution id="2f81407f-9b82-4dae-8e70-6dae05b4a154" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="AccordionAndInspectorWidthSurviveStoreReopen" />
+    </UnitTest>
+    <UnitTest name="ExplicitReferenceSaveRequiresUpdateOrSaveAsChoice" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d9da8d9-42e3-89c4-9dd1-80228e085321">
+      <Execution id="edc4b890-5ce8-4cf6-ad53-45854da5a831" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="ExplicitReferenceSaveRequiresUpdateOrSaveAsChoice" />
+    </UnitTest>
+    <UnitTest name="TetherSessionAdjustmentDoesNotMutateColorSchemeUntilExplicitSave" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15325c6f-c4c7-8997-89ed-fcf1a41ec748">
+      <Execution id="ef77e27e-3fc3-4914-a839-3f45efeb1553" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="TetherSessionAdjustmentDoesNotMutateColorSchemeUntilExplicitSave" />
+    </UnitTest>
+    <UnitTest name="StandaloneReferenceColorToolAndTetherRoundTripEntryExist" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f074685-467a-8bcd-92f3-783a2ae5a517">
+      <Execution id="52c77044-c476-43b7-bcae-aaa5c87f423b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StageIVReferenceWorkflowTests" name="StandaloneReferenceColorToolAndTetherRoundTripEntryExist" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1c58ab1d-b397-8efa-af7b-7549f208a194" executionId="ad249323-5260-4814-b733-4db4ed7a6a52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="150447d3-f0f7-8b88-8f88-6eb95bb83cd9" executionId="bdedfa14-19ee-49b1-bd26-bbeaca898dc3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f074685-467a-8bcd-92f3-783a2ae5a517" executionId="52c77044-c476-43b7-bcae-aaa5c87f423b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d9da8d9-42e3-89c4-9dd1-80228e085321" executionId="edc4b890-5ce8-4cf6-ad53-45854da5a831" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b47c188-5dbb-851c-9d4a-519bf1551f7f" executionId="b7d376f3-191c-4364-8ce4-d1a457f0f7fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15325c6f-c4c7-8997-89ed-fcf1a41ec748" executionId="ef77e27e-3fc3-4914-a839-3f45efeb1553" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f9a7e53-503b-83ee-a4e2-c049d20169ae" executionId="2f81407f-9b82-4dae-8e70-6dae05b4a154" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

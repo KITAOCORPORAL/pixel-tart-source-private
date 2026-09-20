@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="787449db-9eba-47f2-b583-267871fb08c5" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:21" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:21.3738814+08:00" queuing="2026-09-20T18:17:21.3738816+08:00" start="2026-09-20T18:17:20.7546919+08:00" finish="2026-09-20T18:17:21.3797893+08:00" />
+  <TestSettings name="default" id="69d921ac-f0b9-486e-9e9b-a57ef1786e39">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="43ea73d6-d7f0-480a-bffe-29241e9ad226" testId="110714ef-d79a-8244-974e-6fbd2e5d826c" testName="ComponentDictionaries_DoNotDeclareArbitraryHexColors" computerName="PC-20250309WEIZ" duration="00:00:00.0043595" startTime="2026-09-20T18:17:21.2713238+08:00" endTime="2026-09-20T18:17:21.2757252+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43ea73d6-d7f0-480a-bffe-29241e9ad226" />
+    <UnitTestResult executionId="2e2c5672-3020-4a1f-831f-c333b8e6e6ea" testId="16a46ebf-498f-812e-80f8-b2e07c308637" testName="Av2ComboBox_InheritsThemedControlTemplate" computerName="PC-20250309WEIZ" duration="00:00:00.0005233" startTime="2026-09-20T18:17:21.2757551+08:00" endTime="2026-09-20T18:17:21.2763154+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2e2c5672-3020-4a1f-831f-c333b8e6e6ea" />
+    <UnitTestResult executionId="e837d50e-4de0-4d8b-a42a-2eee33f248b2" testId="129dd22e-df94-81e6-9638-3954490e2303" testName="FormalDesignDocumentsAndMasters_ExistAndAreNotEmpty" computerName="PC-20250309WEIZ" duration="00:00:00.0020268" startTime="2026-09-20T18:17:21.2763371+08:00" endTime="2026-09-20T18:17:21.2793916+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e837d50e-4de0-4d8b-a42a-2eee33f248b2" />
+    <UnitTestResult executionId="7b99379b-27ef-4503-9241-3ee0888125b5" testId="14bbb696-897d-8712-b1c1-85fe02192e07" testName="Typography_LocksAv2FamiliesAndScale" computerName="PC-20250309WEIZ" duration="00:00:00.0015807" startTime="2026-09-20T18:17:21.2593107+08:00" endTime="2026-09-20T18:17:21.2611571+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b99379b-27ef-4503-9241-3ee0888125b5" />
+    <UnitTestResult executionId="c8fa4bd6-b5e9-4883-8943-2706d9e20d33" testId="1dae8be0-a21a-82c8-8c26-f198f2276bbb" testName="DarkPalette_LocksAv2SemanticColors" computerName="PC-20250309WEIZ" duration="00:00:00.0069794" startTime="2026-09-20T18:17:21.2338918+08:00" endTime="2026-09-20T18:17:21.2558466+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8fa4bd6-b5e9-4883-8943-2706d9e20d33" />
+    <UnitTestResult executionId="2b9ce604-c6de-4a74-abb1-8955c72b4993" testId="15c10061-5352-8344-8129-266a6359f8f5" testName="Spacing_LocksAv2Scale" computerName="PC-20250309WEIZ" duration="00:00:00.0050444" startTime="2026-09-20T18:17:21.2614140+08:00" endTime="2026-09-20T18:17:21.2665029+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b9ce604-c6de-4a74-abb1-8955c72b4993" />
+    <UnitTestResult executionId="8f899ed6-dc5a-4cc8-ad5e-2acac0c1fc1b" testId="1e674d48-b67e-860e-bc18-13f7384f551b" testName="App_MergesCompleteAv2ResourceSetInDependencyOrder" computerName="PC-20250309WEIZ" duration="00:00:00.0026808" startTime="2026-09-20T18:17:21.2685855+08:00" endTime="2026-09-20T18:17:21.2713012+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8f899ed6-dc5a-4cc8-ad5e-2acac0c1fc1b" />
+    <UnitTestResult executionId="0c6e7e7b-df0e-440d-996b-2cacb013ed5f" testId="141a9fcc-608a-822f-b69f-864fb1ca650b" testName="Radius_LocksAv2Scale" computerName="PC-20250309WEIZ" duration="00:00:00.0019991" startTime="2026-09-20T18:17:21.2665288+08:00" endTime="2026-09-20T18:17:21.2685624+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c6e7e7b-df0e-440d-996b-2cacb013ed5f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Spacing_LocksAv2Scale" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15c10061-5352-8344-8129-266a6359f8f5">
+      <Execution id="2b9ce604-c6de-4a74-abb1-8955c72b4993" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="Spacing_LocksAv2Scale" />
+    </UnitTest>
+    <UnitTest name="DarkPalette_LocksAv2SemanticColors" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1dae8be0-a21a-82c8-8c26-f198f2276bbb">
+      <Execution id="c8fa4bd6-b5e9-4883-8943-2706d9e20d33" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="DarkPalette_LocksAv2SemanticColors" />
+    </UnitTest>
+    <UnitTest name="FormalDesignDocumentsAndMasters_ExistAndAreNotEmpty" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="129dd22e-df94-81e6-9638-3954490e2303">
+      <Execution id="e837d50e-4de0-4d8b-a42a-2eee33f248b2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="FormalDesignDocumentsAndMasters_ExistAndAreNotEmpty" />
+    </UnitTest>
+    <UnitTest name="Av2ComboBox_InheritsThemedControlTemplate" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16a46ebf-498f-812e-80f8-b2e07c308637">
+      <Execution id="2e2c5672-3020-4a1f-831f-c333b8e6e6ea" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="Av2ComboBox_InheritsThemedControlTemplate" />
+    </UnitTest>
+    <UnitTest name="App_MergesCompleteAv2ResourceSetInDependencyOrder" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e674d48-b67e-860e-bc18-13f7384f551b">
+      <Execution id="8f899ed6-dc5a-4cc8-ad5e-2acac0c1fc1b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="App_MergesCompleteAv2ResourceSetInDependencyOrder" />
+    </UnitTest>
+    <UnitTest name="Radius_LocksAv2Scale" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="141a9fcc-608a-822f-b69f-864fb1ca650b">
+      <Execution id="0c6e7e7b-df0e-440d-996b-2cacb013ed5f" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="Radius_LocksAv2Scale" />
+    </UnitTest>
+    <UnitTest name="Typography_LocksAv2FamiliesAndScale" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14bbb696-897d-8712-b1c1-85fe02192e07">
+      <Execution id="7b99379b-27ef-4503-9241-3ee0888125b5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="Typography_LocksAv2FamiliesAndScale" />
+    </UnitTest>
+    <UnitTest name="ComponentDictionaries_DoNotDeclareArbitraryHexColors" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="110714ef-d79a-8244-974e-6fbd2e5d826c">
+      <Execution id="43ea73d6-d7f0-480a-bffe-29241e9ad226" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests" name="ComponentDictionaries_DoNotDeclareArbitraryHexColors" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="110714ef-d79a-8244-974e-6fbd2e5d826c" executionId="43ea73d6-d7f0-480a-bffe-29241e9ad226" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16a46ebf-498f-812e-80f8-b2e07c308637" executionId="2e2c5672-3020-4a1f-831f-c333b8e6e6ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="129dd22e-df94-81e6-9638-3954490e2303" executionId="e837d50e-4de0-4d8b-a42a-2eee33f248b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14bbb696-897d-8712-b1c1-85fe02192e07" executionId="7b99379b-27ef-4503-9241-3ee0888125b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dae8be0-a21a-82c8-8c26-f198f2276bbb" executionId="c8fa4bd6-b5e9-4883-8943-2706d9e20d33" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15c10061-5352-8344-8129-266a6359f8f5" executionId="2b9ce604-c6de-4a74-abb1-8955c72b4993" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e674d48-b67e-860e-bc18-13f7384f551b" executionId="8f899ed6-dc5a-4cc8-ad5e-2acac0c1fc1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="141a9fcc-608a-822f-b69f-864fb1ca650b" executionId="0c6e7e7b-df0e-440d-996b-2cacb013ed5f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

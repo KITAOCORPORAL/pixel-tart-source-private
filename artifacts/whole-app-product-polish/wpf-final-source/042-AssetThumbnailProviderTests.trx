@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6db7c1ba-9a9c-45a8-8df1-b66a4b176878" name="Administrator@PC-20250309WEIZ 2026-09-20 18:16:48" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:16:48.6775682+08:00" queuing="2026-09-20T18:16:48.6775686+08:00" start="2026-09-20T18:16:47.7036815+08:00" finish="2026-09-20T18:16:48.6824214+08:00" />
+  <TestSettings name="default" id="4857ca16-517b-4f4d-93a2-5e294733627e">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_16_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1085bf8e-9ecd-478d-b7b5-323ece4c4f0a" testId="157c9339-e43c-8e1d-89aa-c619871793dc" testName="UnifiedPreviewCacheUsesBytesAndKeepsPurposeQualityDistinct" computerName="PC-20250309WEIZ" duration="00:00:00.0168754" startTime="2026-09-20T18:16:48.2593978+08:00" endTime="2026-09-20T18:16:48.2763230+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1085bf8e-9ecd-478d-b7b5-323ece4c4f0a" />
+    <UnitTestResult executionId="2130cdb4-8777-4cf8-8983-22637a1976ce" testId="1ddb1c9a-cc09-8bfd-92d4-b10f53eab1e4" testName="SharedProviderInvalidatesWhenTheSourceFingerprintChanges" computerName="PC-20250309WEIZ" duration="00:00:00.0055304" startTime="2026-09-20T18:16:48.2514218+08:00" endTime="2026-09-20T18:16:48.2572486+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2130cdb4-8777-4cf8-8983-22637a1976ce" />
+    <UnitTestResult executionId="077482d0-8875-46a3-a13f-a39b03eb5d16" testId="1d2c3ccc-d6e5-820c-a805-d3c027d80c8a" testName="CancelAndDrainPreventsOldLibraryWritebackWhileNewLibraryThumbnailCompletes" computerName="PC-20250309WEIZ" duration="00:00:00.1033239" startTime="2026-09-20T18:16:48.4710759+08:00" endTime="2026-09-20T18:16:48.5755223+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="077482d0-8875-46a3-a13f-a39b03eb5d16" />
+    <UnitTestResult executionId="4fddce14-021e-40b3-a157-4ac0464f08f9" testId="17483a8e-2102-8012-813a-def513a58abc" testName="SharedProviderReturnsDistinctMissingAndOfflinePlaceholderStates" computerName="PC-20250309WEIZ" duration="00:00:00.0017667" startTime="2026-09-20T18:16:48.2575606+08:00" endTime="2026-09-20T18:16:48.2593739+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fddce14-021e-40b3-a157-4ac0464f08f9" />
+    <UnitTestResult executionId="01bba36b-e1ca-4de4-9f3d-da27e1368fb8" testId="11f7077d-e8b0-8316-9ce7-f24775015745" testName="SharedProviderReturnsFrozenCachedThumbnailForSameFileVersion" computerName="PC-20250309WEIZ" duration="00:00:00.0717576" startTime="2026-09-20T18:16:48.1604132+08:00" endTime="2026-09-20T18:16:48.2478104+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="01bba36b-e1ca-4de4-9f3d-da27e1368fb8" />
+    <UnitTestResult executionId="98ae87fc-2402-4af3-9ff2-3b63bc479279" testId="1cdcc216-a91d-8c55-b32b-22fcaa53ac4f" testName="DiskPreviewCacheSurvivesProviderRestartAndServesOfflineSource" computerName="PC-20250309WEIZ" duration="00:00:00.0219853" startTime="2026-09-20T18:16:48.2763624+08:00" endTime="2026-09-20T18:16:48.2984120+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="98ae87fc-2402-4af3-9ff2-3b63bc479279" />
+    <UnitTestResult executionId="e3ba4102-547a-43e3-a8ca-53a7b10a3a9d" testId="115bd2c2-0e98-83d9-b2ee-266dbbddf4c6" testName="ScopedProviderKeepsConcurrentLibraryRequestsIsolated" computerName="PC-20250309WEIZ" duration="00:00:00.1725270" startTime="2026-09-20T18:16:48.2984505+08:00" endTime="2026-09-20T18:16:48.4710401+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3ba4102-547a-43e3-a8ca-53a7b10a3a9d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="DiskPreviewCacheSurvivesProviderRestartAndServesOfflineSource" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cdcc216-a91d-8c55-b32b-22fcaa53ac4f">
+      <Execution id="98ae87fc-2402-4af3-9ff2-3b63bc479279" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="DiskPreviewCacheSurvivesProviderRestartAndServesOfflineSource" />
+    </UnitTest>
+    <UnitTest name="SharedProviderReturnsDistinctMissingAndOfflinePlaceholderStates" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17483a8e-2102-8012-813a-def513a58abc">
+      <Execution id="4fddce14-021e-40b3-a157-4ac0464f08f9" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="SharedProviderReturnsDistinctMissingAndOfflinePlaceholderStates" />
+    </UnitTest>
+    <UnitTest name="CancelAndDrainPreventsOldLibraryWritebackWhileNewLibraryThumbnailCompletes" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d2c3ccc-d6e5-820c-a805-d3c027d80c8a">
+      <Execution id="077482d0-8875-46a3-a13f-a39b03eb5d16" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="CancelAndDrainPreventsOldLibraryWritebackWhileNewLibraryThumbnailCompletes" />
+    </UnitTest>
+    <UnitTest name="SharedProviderReturnsFrozenCachedThumbnailForSameFileVersion" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11f7077d-e8b0-8316-9ce7-f24775015745">
+      <Execution id="01bba36b-e1ca-4de4-9f3d-da27e1368fb8" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="SharedProviderReturnsFrozenCachedThumbnailForSameFileVersion" />
+    </UnitTest>
+    <UnitTest name="ScopedProviderKeepsConcurrentLibraryRequestsIsolated" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="115bd2c2-0e98-83d9-b2ee-266dbbddf4c6">
+      <Execution id="e3ba4102-547a-43e3-a8ca-53a7b10a3a9d" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="ScopedProviderKeepsConcurrentLibraryRequestsIsolated" />
+    </UnitTest>
+    <UnitTest name="SharedProviderInvalidatesWhenTheSourceFingerprintChanges" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ddb1c9a-cc09-8bfd-92d4-b10f53eab1e4">
+      <Execution id="2130cdb4-8777-4cf8-8983-22637a1976ce" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="SharedProviderInvalidatesWhenTheSourceFingerprintChanges" />
+    </UnitTest>
+    <UnitTest name="UnifiedPreviewCacheUsesBytesAndKeepsPurposeQualityDistinct" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="157c9339-e43c-8e1d-89aa-c619871793dc">
+      <Execution id="1085bf8e-9ecd-478d-b7b5-323ece4c4f0a" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetThumbnailProviderTests" name="UnifiedPreviewCacheUsesBytesAndKeepsPurposeQualityDistinct" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="157c9339-e43c-8e1d-89aa-c619871793dc" executionId="1085bf8e-9ecd-478d-b7b5-323ece4c4f0a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ddb1c9a-cc09-8bfd-92d4-b10f53eab1e4" executionId="2130cdb4-8777-4cf8-8983-22637a1976ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d2c3ccc-d6e5-820c-a805-d3c027d80c8a" executionId="077482d0-8875-46a3-a13f-a39b03eb5d16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17483a8e-2102-8012-813a-def513a58abc" executionId="4fddce14-021e-40b3-a157-4ac0464f08f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11f7077d-e8b0-8316-9ce7-f24775015745" executionId="01bba36b-e1ca-4de4-9f3d-da27e1368fb8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cdcc216-a91d-8c55-b32b-22fcaa53ac4f" executionId="98ae87fc-2402-4af3-9ff2-3b63bc479279" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="115bd2c2-0e98-83d9-b2ee-266dbbddf4c6" executionId="e3ba4102-547a-43e3-a8ca-53a7b10a3a9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

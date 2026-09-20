@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7ca9109f-876e-4644-8dc2-6df7d22eafc1" name="Administrator@PC-20250309WEIZ 2026-09-20 18:16:35" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:16:35.2088529+08:00" queuing="2026-09-20T18:16:35.2088531+08:00" start="2026-09-20T18:16:34.0401432+08:00" finish="2026-09-20T18:16:35.2143162+08:00" />
+  <TestSettings name="default" id="656b2024-9238-463d-bdce-29215acedc6a">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_16_35" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7b3fb35b-9f64-4f47-93dd-00f9aaf1fca1" testId="18ee97e7-c147-81da-b82c-b51fe55c5ae7" testName="LegacyVisualRulesRemainWhenAddingABasicEditorRule" computerName="PC-20250309WEIZ" duration="00:00:00.0387734" startTime="2026-09-20T18:16:35.0505381+08:00" endTime="2026-09-20T18:16:35.0893878+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b3fb35b-9f64-4f47-93dd-00f9aaf1fca1" />
+    <UnitTestResult executionId="8da7115d-9fcb-4eb4-ad81-fd8588586eb5" testId="13efffdc-face-8ac3-9fe9-cf52b8c22b0e" testName="MissingConditionDefaultsToAnyAndRoundTripsBothPolarityValues" computerName="PC-20250309WEIZ" duration="00:00:00.0468731" startTime="2026-09-20T18:16:35.0028828+08:00" endTime="2026-09-20T18:16:35.0501659+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8da7115d-9fcb-4eb4-ad81-fd8588586eb5" />
+    <UnitTestResult executionId="a5cd5f83-7190-4c11-a200-dfc251fdc317" testId="16a2c0dd-fc26-854b-b5ff-7593ce9721f3" testName="SmartFolderEditorXamlExposesStableBasicFieldAutomationIds" computerName="PC-20250309WEIZ" duration="00:00:00.0144924" startTime="2026-09-20T18:16:35.0894269+08:00" endTime="2026-09-20T18:16:35.1049264+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5cd5f83-7190-4c11-a200-dfc251fdc317" />
+    <UnitTestResult executionId="71e98b81-afb5-46c0-aae4-207c8879e906" testId="1b159d56-1fdc-8002-be19-dc3140311e82" testName="ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds" computerName="PC-20250309WEIZ" duration="00:00:00.4937208" startTime="2026-09-20T18:16:34.4882841+08:00" endTime="2026-09-20T18:16:34.9975793+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71e98b81-afb5-46c0-aae4-207c8879e906" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LegacyVisualRulesRemainWhenAddingABasicEditorRule" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18ee97e7-c147-81da-b82c-b51fe55c5ae7">
+      <Execution id="7b3fb35b-9f64-4f47-93dd-00f9aaf1fca1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests" name="LegacyVisualRulesRemainWhenAddingABasicEditorRule" />
+    </UnitTest>
+    <UnitTest name="SmartFolderEditorXamlExposesStableBasicFieldAutomationIds" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16a2c0dd-fc26-854b-b5ff-7593ce9721f3">
+      <Execution id="a5cd5f83-7190-4c11-a200-dfc251fdc317" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests" name="SmartFolderEditorXamlExposesStableBasicFieldAutomationIds" />
+    </UnitTest>
+    <UnitTest name="MissingConditionDefaultsToAnyAndRoundTripsBothPolarityValues" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13efffdc-face-8ac3-9fe9-cf52b8c22b0e">
+      <Execution id="8da7115d-9fcb-4eb4-ad81-fd8588586eb5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests" name="MissingConditionDefaultsToAnyAndRoundTripsBothPolarityValues" />
+    </UnitTest>
+    <UnitTest name="ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b159d56-1fdc-8002-be19-dc3140311e82">
+      <Execution id="71e98b81-afb5-46c0-aae4-207c8879e906" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests" name="ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="18ee97e7-c147-81da-b82c-b51fe55c5ae7" executionId="7b3fb35b-9f64-4f47-93dd-00f9aaf1fca1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13efffdc-face-8ac3-9fe9-cf52b8c22b0e" executionId="8da7115d-9fcb-4eb4-ad81-fd8588586eb5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16a2c0dd-fc26-854b-b5ff-7593ce9721f3" executionId="a5cd5f83-7190-4c11-a200-dfc251fdc317" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b159d56-1fdc-8002-be19-dc3140311e82" executionId="71e98b81-afb5-46c0-aae4-207c8879e906" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

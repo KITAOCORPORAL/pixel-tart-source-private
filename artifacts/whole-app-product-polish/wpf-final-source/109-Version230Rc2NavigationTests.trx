@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="08bbd77f-9fb6-4aac-9721-288b578a8c2b" name="Administrator@PC-20250309WEIZ 2026-09-20 18:19:12" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:19:12.3080025+08:00" queuing="2026-09-20T18:19:12.3080026+08:00" start="2026-09-20T18:19:11.7417190+08:00" finish="2026-09-20T18:19:12.3126017+08:00" />
+  <TestSettings name="default" id="2924429b-b265-4124-8923-ef1fee335a78">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_19_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4fcc47e3-3a81-42f2-85fe-9843d1128487" testId="116ab0bd-b0c1-86d5-8f0e-7bdeab2f7819" testName="LutCoordinator_ExposesBoundedCancellationForPageDeactivation" computerName="PC-20250309WEIZ" duration="00:00:00.0007636" startTime="2026-09-20T18:19:12.2160140+08:00" endTime="2026-09-20T18:19:12.2178371+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fcc47e3-3a81-42f2-85fe-9843d1128487" />
+    <UnitTestResult executionId="d99186cb-b973-4652-91c0-01714e7d50b5" testId="1dbfba35-3a38-847e-9f5c-78d9b867ba13" testName="Navigation_ExposesExplicitPageLifecycleAndSingleTaskCenter" computerName="PC-20250309WEIZ" duration="00:00:00.0064873" startTime="2026-09-20T18:19:12.1898030+08:00" endTime="2026-09-20T18:19:12.2104371+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d99186cb-b973-4652-91c0-01714e7d50b5" />
+    <UnitTestResult executionId="a9a6a357-833c-45ea-914a-dfdda43643fe" testId="1d352bd2-4b9a-8ae8-816b-21d6e740827b" testName="TetherDeactivation_ReleasesPageImagesWithoutStoppingSession" computerName="PC-20250309WEIZ" duration="00:00:00.0004703" startTime="2026-09-20T18:19:12.2154899+08:00" endTime="2026-09-20T18:19:12.2159953+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9a6a357-833c-45ea-914a-dfdda43643fe" />
+    <UnitTestResult executionId="7c214df0-fb83-48c0-a8d0-70b48f080f0d" testId="175cf0ef-1be8-8647-8251-6acab687b961" testName="Toolbox_ClosesBeforeNavigationAndPinUsesGlyphWithTooltip" computerName="PC-20250309WEIZ" duration="00:00:00.0011697" startTime="2026-09-20T18:19:12.2138029+08:00" endTime="2026-09-20T18:19:12.2152292+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7c214df0-fb83-48c0-a8d0-70b48f080f0d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LutCoordinator_ExposesBoundedCancellationForPageDeactivation" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="116ab0bd-b0c1-86d5-8f0e-7bdeab2f7819">
+      <Execution id="4fcc47e3-3a81-42f2-85fe-9843d1128487" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc2NavigationTests" name="LutCoordinator_ExposesBoundedCancellationForPageDeactivation" />
+    </UnitTest>
+    <UnitTest name="Navigation_ExposesExplicitPageLifecycleAndSingleTaskCenter" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1dbfba35-3a38-847e-9f5c-78d9b867ba13">
+      <Execution id="d99186cb-b973-4652-91c0-01714e7d50b5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc2NavigationTests" name="Navigation_ExposesExplicitPageLifecycleAndSingleTaskCenter" />
+    </UnitTest>
+    <UnitTest name="TetherDeactivation_ReleasesPageImagesWithoutStoppingSession" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d352bd2-4b9a-8ae8-816b-21d6e740827b">
+      <Execution id="a9a6a357-833c-45ea-914a-dfdda43643fe" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc2NavigationTests" name="TetherDeactivation_ReleasesPageImagesWithoutStoppingSession" />
+    </UnitTest>
+    <UnitTest name="Toolbox_ClosesBeforeNavigationAndPinUsesGlyphWithTooltip" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="175cf0ef-1be8-8647-8251-6acab687b961">
+      <Execution id="7c214df0-fb83-48c0-a8d0-70b48f080f0d" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230Rc2NavigationTests" name="Toolbox_ClosesBeforeNavigationAndPinUsesGlyphWithTooltip" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="116ab0bd-b0c1-86d5-8f0e-7bdeab2f7819" executionId="4fcc47e3-3a81-42f2-85fe-9843d1128487" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dbfba35-3a38-847e-9f5c-78d9b867ba13" executionId="d99186cb-b973-4652-91c0-01714e7d50b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d352bd2-4b9a-8ae8-816b-21d6e740827b" executionId="a9a6a357-833c-45ea-914a-dfdda43643fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="175cf0ef-1be8-8647-8251-6acab687b961" executionId="7c214df0-fb83-48c0-a8d0-70b48f080f0d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

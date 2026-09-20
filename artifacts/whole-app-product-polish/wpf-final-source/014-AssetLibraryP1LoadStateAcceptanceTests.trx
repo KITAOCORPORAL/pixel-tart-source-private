@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0c8e6a3a-c677-45cf-8fd6-c4c1a9fc3c53" name="Administrator@PC-20250309WEIZ 2026-09-20 18:15:01" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:15:01.3456816+08:00" queuing="2026-09-20T18:15:01.3456818+08:00" start="2026-09-20T18:15:00.3575174+08:00" finish="2026-09-20T18:15:01.3504958+08:00" />
+  <TestSettings name="default" id="869930e4-645d-425c-a672-931b6d71c1a0">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_15_01" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="51be543e-f548-49cd-ac48-5f293c919cc6" testId="18e7599b-f34d-8ac0-a163-ce1f8a73633a" testName="ProductionLoadingErrorRetryControllerInjectsOnceThenAwaitsTheRealQuery" computerName="PC-20250309WEIZ" duration="00:00:00.0026454" startTime="2026-09-20T18:15:01.2416838+08:00" endTime="2026-09-20T18:15:01.2443702+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="51be543e-f548-49cd-ac48-5f293c919cc6" />
+    <UnitTestResult executionId="811a9f66-52cc-4e7d-a907-8ad021825c64" testId="1387f6fb-2ffc-8ced-8994-10702db07578" testName="LoadingBarrierThenRecoverableErrorAndRetryUseTheSameViewModelAndRealEmptyV6Repository" computerName="PC-20250309WEIZ" duration="00:00:00.0346367" startTime="2026-09-20T18:15:01.0690966+08:00" endTime="2026-09-20T18:15:01.1040307+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="811a9f66-52cc-4e7d-a907-8ad021825c64" />
+    <UnitTestResult executionId="02f6092e-5c6b-4804-aff7-18dc41eeac13" testId="1cd728ba-2c80-84e8-865a-3ce0150d1120" testName="ProductionControllerRejectsAnyExistingAssetDatabaseArtifact" computerName="PC-20250309WEIZ" duration="00:00:00.0002566" startTime="2026-09-20T18:15:01.2443953+08:00" endTime="2026-09-20T18:15:01.2456714+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02f6092e-5c6b-4804-aff7-18dc41eeac13" />
+    <UnitTestResult executionId="6a91be49-241f-4616-9706-804885453876" testId="197b5702-a7eb-8915-80b3-c97196859565" testName="DisposeWhileLoadingBarrierIsHeldCancelsInitializationBeforeRepositoryDisposal" computerName="PC-20250309WEIZ" duration="00:00:00.0064180" startTime="2026-09-20T18:15:01.2319653+08:00" endTime="2026-09-20T18:15:01.2384385+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a91be49-241f-4616-9706-804885453876" />
+    <UnitTestResult executionId="542c204d-200b-49cf-8668-0f2c161457bb" testId="10336239-0ca0-8f4b-a0f6-46db11034415" testName="ProductionFirstEmptyControllerUsesAnIndependentFreshDatabaseSession" computerName="PC-20250309WEIZ" duration="00:00:00.0031334" startTime="2026-09-20T18:15:01.2384738+08:00" endTime="2026-09-20T18:15:01.2416545+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="542c204d-200b-49cf-8668-0f2c161457bb" />
+    <UnitTestResult executionId="a59978b0-ca29-4fc4-8318-6c1904914ebe" testId="1a4b5574-d8fa-8c7b-b4e7-63ecb0525e35" testName="RepositoryProofReflectsARealNonEmptyDatabaseInsteadOfAConstant" computerName="PC-20250309WEIZ" duration="00:00:00.1274314" startTime="2026-09-20T18:15:01.1044405+08:00" endTime="2026-09-20T18:15:01.2319330+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a59978b0-ca29-4fc4-8318-6c1904914ebe" />
+    <UnitTestResult executionId="95994817-f3ca-4a48-b1c0-154ab23a5684" testId="1e641e80-651a-846e-915b-2813decdf2f4" testName="FirstEmptyScenarioUsesOneRealInitializationWithoutPreviewFixtures" computerName="PC-20250309WEIZ" duration="00:00:00.2480568" startTime="2026-09-20T18:15:00.8016593+08:00" endTime="2026-09-20T18:15:01.0654494+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95994817-f3ca-4a48-b1c0-154ab23a5684" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ProductionControllerRejectsAnyExistingAssetDatabaseArtifact" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cd728ba-2c80-84e8-865a-3ce0150d1120">
+      <Execution id="02f6092e-5c6b-4804-aff7-18dc41eeac13" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="ProductionControllerRejectsAnyExistingAssetDatabaseArtifact" />
+    </UnitTest>
+    <UnitTest name="ProductionFirstEmptyControllerUsesAnIndependentFreshDatabaseSession" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10336239-0ca0-8f4b-a0f6-46db11034415">
+      <Execution id="542c204d-200b-49cf-8668-0f2c161457bb" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="ProductionFirstEmptyControllerUsesAnIndependentFreshDatabaseSession" />
+    </UnitTest>
+    <UnitTest name="LoadingBarrierThenRecoverableErrorAndRetryUseTheSameViewModelAndRealEmptyV6Repository" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1387f6fb-2ffc-8ced-8994-10702db07578">
+      <Execution id="811a9f66-52cc-4e7d-a907-8ad021825c64" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="LoadingBarrierThenRecoverableErrorAndRetryUseTheSameViewModelAndRealEmptyV6Repository" />
+    </UnitTest>
+    <UnitTest name="DisposeWhileLoadingBarrierIsHeldCancelsInitializationBeforeRepositoryDisposal" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="197b5702-a7eb-8915-80b3-c97196859565">
+      <Execution id="6a91be49-241f-4616-9706-804885453876" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="DisposeWhileLoadingBarrierIsHeldCancelsInitializationBeforeRepositoryDisposal" />
+    </UnitTest>
+    <UnitTest name="RepositoryProofReflectsARealNonEmptyDatabaseInsteadOfAConstant" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a4b5574-d8fa-8c7b-b4e7-63ecb0525e35">
+      <Execution id="a59978b0-ca29-4fc4-8318-6c1904914ebe" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="RepositoryProofReflectsARealNonEmptyDatabaseInsteadOfAConstant" />
+    </UnitTest>
+    <UnitTest name="ProductionLoadingErrorRetryControllerInjectsOnceThenAwaitsTheRealQuery" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18e7599b-f34d-8ac0-a163-ce1f8a73633a">
+      <Execution id="51be543e-f548-49cd-ac48-5f293c919cc6" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="ProductionLoadingErrorRetryControllerInjectsOnceThenAwaitsTheRealQuery" />
+    </UnitTest>
+    <UnitTest name="FirstEmptyScenarioUsesOneRealInitializationWithoutPreviewFixtures" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e641e80-651a-846e-915b-2813decdf2f4">
+      <Execution id="95994817-f3ca-4a48-b1c0-154ab23a5684" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1LoadStateAcceptanceTests" name="FirstEmptyScenarioUsesOneRealInitializationWithoutPreviewFixtures" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="18e7599b-f34d-8ac0-a163-ce1f8a73633a" executionId="51be543e-f548-49cd-ac48-5f293c919cc6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1387f6fb-2ffc-8ced-8994-10702db07578" executionId="811a9f66-52cc-4e7d-a907-8ad021825c64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cd728ba-2c80-84e8-865a-3ce0150d1120" executionId="02f6092e-5c6b-4804-aff7-18dc41eeac13" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="197b5702-a7eb-8915-80b3-c97196859565" executionId="6a91be49-241f-4616-9706-804885453876" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10336239-0ca0-8f4b-a0f6-46db11034415" executionId="542c204d-200b-49cf-8668-0f2c161457bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a4b5574-d8fa-8c7b-b4e7-63ecb0525e35" executionId="a59978b0-ca29-4fc4-8318-6c1904914ebe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e641e80-651a-846e-915b-2813decdf2f4" executionId="95994817-f3ca-4a48-b1c0-154ab23a5684" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

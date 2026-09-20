@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1cb3edf2-37ab-4106-a3fe-1e799466011b" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:21" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:21.6827713+08:00" queuing="2026-09-20T18:18:21.6827714+08:00" start="2026-09-20T18:18:21.0401420+08:00" finish="2026-09-20T18:18:21.6871667+08:00" />
+  <TestSettings name="default" id="238e4cfe-901f-4c7d-95cf-3f4c943b34a5">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="23e2790f-2814-47d7-852d-e5aada7d54ba" testId="13e42aa5-9719-8f60-9123-597eebdabb77" testName="RuntimeStatusAndErrorMessages_ContainNoPrimaryUiLeaks" computerName="PC-20250309WEIZ" duration="00:00:00.0113289" startTime="2026-09-20T18:18:21.5773250+08:00" endTime="2026-09-20T18:18:21.5889293+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23e2790f-2814-47d7-852d-e5aada7d54ba" />
+    <UnitTestResult executionId="254d1fb4-79cc-43f2-9176-4db54d94c75b" testId="1eacfa7c-749f-8ece-aa51-19db66f8ef33" testName="TechnicalTaskId_RemainsOnlyInDiagnosticDetails" computerName="PC-20250309WEIZ" duration="00:00:00.0011362" startTime="2026-09-20T18:18:21.5892408+08:00" endTime="2026-09-20T18:18:21.5913831+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="254d1fb4-79cc-43f2-9176-4db54d94c75b" />
+    <UnitTestResult executionId="bff79451-5adf-480b-9ea2-bac2f0861e14" testId="18fce826-6b3c-8f49-88a9-efdeae168f16" testName="UserVisibleXamlLiterals_ContainNoInternalTerms" computerName="PC-20250309WEIZ" duration="00:00:00.0768234" startTime="2026-09-20T18:18:21.4829458+08:00" endTime="2026-09-20T18:18:21.5739331+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bff79451-5adf-480b-9ea2-bac2f0861e14" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="UserVisibleXamlLiterals_ContainNoInternalTerms" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18fce826-6b3c-8f49-88a9-efdeae168f16">
+      <Execution id="bff79451-5adf-480b-9ea2-bac2f0861e14" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductLanguageLeakTests" name="UserVisibleXamlLiterals_ContainNoInternalTerms" />
+    </UnitTest>
+    <UnitTest name="TechnicalTaskId_RemainsOnlyInDiagnosticDetails" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1eacfa7c-749f-8ece-aa51-19db66f8ef33">
+      <Execution id="254d1fb4-79cc-43f2-9176-4db54d94c75b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductLanguageLeakTests" name="TechnicalTaskId_RemainsOnlyInDiagnosticDetails" />
+    </UnitTest>
+    <UnitTest name="RuntimeStatusAndErrorMessages_ContainNoPrimaryUiLeaks" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13e42aa5-9719-8f60-9123-597eebdabb77">
+      <Execution id="23e2790f-2814-47d7-852d-e5aada7d54ba" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductLanguageLeakTests" name="RuntimeStatusAndErrorMessages_ContainNoPrimaryUiLeaks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="13e42aa5-9719-8f60-9123-597eebdabb77" executionId="23e2790f-2814-47d7-852d-e5aada7d54ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1eacfa7c-749f-8ece-aa51-19db66f8ef33" executionId="254d1fb4-79cc-43f2-9176-4db54d94c75b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18fce826-6b3c-8f49-88a9-efdeae168f16" executionId="bff79451-5adf-480b-9ea2-bac2f0861e14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

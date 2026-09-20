@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ecfe06b3-f110-40b8-bea5-434503d3f9b1" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:33" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:33.7816580+08:00" queuing="2026-09-20T18:17:33.7816582+08:00" start="2026-09-20T18:17:33.2156781+08:00" finish="2026-09-20T18:17:33.7863091+08:00" />
+  <TestSettings name="default" id="b4b29826-51fb-487d-b0ae-68d61594ac11">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_33" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1a31fb3b-e31e-449e-92cf-dbd72eba217b" testId="15690548-b8dd-8c54-bd86-d599aba4021c" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;整理照片&quot;,&quot;src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml&quot;,&quot;开始整理&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0005219" startTime="2026-09-20T18:17:33.6850407+08:00" endTime="2026-09-20T18:17:33.6858160+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a31fb3b-e31e-449e-92cf-dbd72eba217b" />
+    <UnitTestResult executionId="17838edb-ebd4-4bc4-afae-34fc96fc2b5c" testId="1aaf4e68-17ac-8d7d-bace-704395f26cd6" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;导入照片&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml&quot;,&quot;导入&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0054754" startTime="2026-09-20T18:17:33.6621012+08:00" endTime="2026-09-20T18:17:33.6815322+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="17838edb-ebd4-4bc4-afae-34fc96fc2b5c" />
+    <UnitTestResult executionId="086dfe13-cff0-466c-9237-9b7b39fe9187" testId="19f8cf15-b423-863e-b8cf-87ada35c0757" testName="FirstTimeTaskSurfacesRequireNoArchitectureVocabulary" computerName="PC-20250309WEIZ" duration="00:00:00.0009800" startTime="2026-09-20T18:17:33.6871685+08:00" endTime="2026-09-20T18:17:33.6905663+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="086dfe13-cff0-466c-9237-9b7b39fe9187" />
+    <UnitTestResult executionId="4a1167a2-38b5-4d78-8a85-e6984f94ebe5" testId="1158c16b-25cc-840e-b35f-2bfbd0f84078" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;筛选 4 星照片&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryP3Styles.xaml&quot;,&quot;筛选字段&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0002355" startTime="2026-09-20T18:17:33.6863676+08:00" endTime="2026-09-20T18:17:33.6866237+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a1167a2-38b5-4d78-8a85-e6984f94ebe5" />
+    <UnitTestResult executionId="284feac0-bc6a-44c7-8a47-1facc719e523" testId="16b3bc91-3546-8fc4-8f62-bd7694837d77" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;RAW 转 JPG&quot;,&quot;src/RAWSelectionAssistant/Views/RawToJpegModal.xaml&quot;,&quot;开始转换&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0002031" startTime="2026-09-20T18:17:33.6861083+08:00" endTime="2026-09-20T18:17:33.6863496+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="284feac0-bc6a-44c7-8a47-1facc719e523" />
+    <UnitTestResult executionId="e362fd8a-de52-47e5-875e-0972e4538b96" testId="13d7107b-c565-8101-b33c-6a63e1df5406" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;关联拍摄项目&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml&quot;,&quot;关联项目&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0003328" startTime="2026-09-20T18:17:33.6868114+08:00" endTime="2026-09-20T18:17:33.6871587+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e362fd8a-de52-47e5-875e-0972e4538b96" />
+    <UnitTestResult executionId="cf0d87cd-ff3b-44bb-9e50-473854786da1" testId="10e828ef-c4f2-8f7c-90fb-607cf9563179" testName="FirstTimeTaskHasDirectUserFacingAction (&quot;建立智能文件夹&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml&quot;,&quot;保存智能文件夹&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.0001497" startTime="2026-09-20T18:17:33.6866359+08:00" endTime="2026-09-20T18:17:33.6868012+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf0d87cd-ff3b-44bb-9e50-473854786da1" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;整理照片&quot;,&quot;src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml&quot;,&quot;开始整理&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15690548-b8dd-8c54-bd86-d599aba4021c">
+      <Execution id="1a31fb3b-e31e-449e-92cf-dbd72eba217b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;建立智能文件夹&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml&quot;,&quot;保存智能文件夹&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10e828ef-c4f2-8f7c-90fb-607cf9563179">
+      <Execution id="cf0d87cd-ff3b-44bb-9e50-473854786da1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;筛选 4 星照片&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryP3Styles.xaml&quot;,&quot;筛选字段&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1158c16b-25cc-840e-b35f-2bfbd0f84078">
+      <Execution id="4a1167a2-38b5-4d78-8a85-e6984f94ebe5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;RAW 转 JPG&quot;,&quot;src/RAWSelectionAssistant/Views/RawToJpegModal.xaml&quot;,&quot;开始转换&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16b3bc91-3546-8fc4-8f62-bd7694837d77">
+      <Execution id="284feac0-bc6a-44c7-8a47-1facc719e523" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskSurfacesRequireNoArchitectureVocabulary" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19f8cf15-b423-863e-b8cf-87ada35c0757">
+      <Execution id="086dfe13-cff0-466c-9237-9b7b39fe9187" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskSurfacesRequireNoArchitectureVocabulary" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;导入照片&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml&quot;,&quot;导入&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1aaf4e68-17ac-8d7d-bace-704395f26cd6">
+      <Execution id="17838edb-ebd4-4bc4-afae-34fc96fc2b5c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+    <UnitTest name="FirstTimeTaskHasDirectUserFacingAction (&quot;关联拍摄项目&quot;,&quot;src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml&quot;,&quot;关联项目&quot;)" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13d7107b-c565-8101-b33c-6a63e1df5406">
+      <Execution id="e362fd8a-de52-47e5-875e-0972e4538b96" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.FirstTimePhotographerUXTests" name="FirstTimeTaskHasDirectUserFacingAction" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="15690548-b8dd-8c54-bd86-d599aba4021c" executionId="1a31fb3b-e31e-449e-92cf-dbd72eba217b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1aaf4e68-17ac-8d7d-bace-704395f26cd6" executionId="17838edb-ebd4-4bc4-afae-34fc96fc2b5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19f8cf15-b423-863e-b8cf-87ada35c0757" executionId="086dfe13-cff0-466c-9237-9b7b39fe9187" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1158c16b-25cc-840e-b35f-2bfbd0f84078" executionId="4a1167a2-38b5-4d78-8a85-e6984f94ebe5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16b3bc91-3546-8fc4-8f62-bd7694837d77" executionId="284feac0-bc6a-44c7-8a47-1facc719e523" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13d7107b-c565-8101-b33c-6a63e1df5406" executionId="e362fd8a-de52-47e5-875e-0972e4538b96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10e828ef-c4f2-8f7c-90fb-607cf9563179" executionId="cf0d87cd-ff3b-44bb-9e50-473854786da1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="52d5ab79-3178-4723-b811-408ade0780cc" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:03" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:03.6458691+08:00" queuing="2026-09-20T18:17:03.6458692+08:00" start="2026-09-20T18:17:03.0080842+08:00" finish="2026-09-20T18:17:03.6503375+08:00" />
+  <TestSettings name="default" id="fb3386d6-202b-4bf0-8850-4de123b5fbca">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_03" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f407b5a5-d83d-4c2c-bc1d-effe93c1c4a1" testId="1c0d9d8d-af63-8e09-b41c-657adb39c158" testName="AtomicDocumentRoundTripPreservesReferences" computerName="PC-20250309WEIZ" duration="00:00:00.0603344" startTime="2026-09-20T18:17:03.4922895+08:00" endTime="2026-09-20T18:17:03.5550264+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f407b5a5-d83d-4c2c-bc1d-effe93c1c4a1" />
+    <UnitTestResult executionId="9b5e902e-adb1-43d8-a7eb-c6c80e5d4004" testId="1d464490-1d8b-80fd-99f2-79d903bb20e6" testName="AddMoveScaleDuplicateAndRemoveOnlyChangeObjects" computerName="PC-20250309WEIZ" duration="00:00:00.0187558" startTime="2026-09-20T18:17:03.4565907+08:00" endTime="2026-09-20T18:17:03.4889400+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b5e902e-adb1-43d8-a7eb-c6c80e5d4004" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AtomicDocumentRoundTripPreservesReferences" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c0d9d8d-af63-8e09-b41c-657adb39c158">
+      <Execution id="f407b5a5-d83d-4c2c-bc1d-effe93c1c4a1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests" name="AtomicDocumentRoundTripPreservesReferences" />
+    </UnitTest>
+    <UnitTest name="AddMoveScaleDuplicateAndRemoveOnlyChangeObjects" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d464490-1d8b-80fd-99f2-79d903bb20e6">
+      <Execution id="9b5e902e-adb1-43d8-a7eb-c6c80e5d4004" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests" name="AddMoveScaleDuplicateAndRemoveOnlyChangeObjects" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1c0d9d8d-af63-8e09-b41c-657adb39c158" executionId="f407b5a5-d83d-4c2c-bc1d-effe93c1c4a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d464490-1d8b-80fd-99f2-79d903bb20e6" executionId="9b5e902e-adb1-43d8-a7eb-c6c80e5d4004" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

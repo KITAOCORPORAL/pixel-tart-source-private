@@ -1,4 +1,5 @@
 {
+  "ProductSourceSha": "f505a177106a38fc23550edd87949f235238fb79",
   "Count": 70,
   "Verified": 53,
   "AccessibilityGap": 0,
@@ -15,9 +16,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -30,11 +31,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -49,9 +50,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": "MainWindow",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "TutorialExitButton",
       "AutomationName": null,
@@ -64,13 +65,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "ONBOARDING"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -85,9 +86,9 @@
       "ExpectedUIState": "Target absent in required state",
       "Scope": {
         "Preset": "MainWindow",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "TutorialExitButton",
       "AutomationName": null,
@@ -100,13 +101,13 @@
       "ObservedStructuralMatch": 0,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "BOOT"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Verified absent in named production peer state; installed transition remains separate",
       "Status": "VERIFIED",
@@ -121,9 +122,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": "PrimaryNavigation",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "PrimaryNavigationPlanning",
       "AutomationName": null,
@@ -136,16 +137,16 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "ONBOARDING",
           "BOOT",
           "TETHER",
           "ONLINE_SELECTION"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -160,9 +161,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": "PrimaryNavigation",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "PrimaryNavigationPlanning",
       "AutomationName": null,
@@ -175,16 +176,16 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "ONBOARDING",
           "BOOT",
           "TETHER",
           "ONLINE_SELECTION"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -199,14 +200,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "DocumentList",
       "AutomationName": "策划案列表",
@@ -219,9 +220,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -252,7 +252,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -267,14 +268,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "新建策划",
@@ -287,9 +288,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT",
           "TEXT_READING",
@@ -318,7 +318,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -333,14 +334,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "新建策划案",
@@ -353,13 +354,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -374,6 +375,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -384,9 +387,7 @@
             "ControlType": "Text",
             "Heading": true
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "新策划名称",
@@ -399,13 +400,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -420,6 +421,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -430,9 +433,7 @@
             "ControlType": "Text",
             "Heading": true
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "拍摄地点",
@@ -445,13 +446,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -466,6 +467,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -480,9 +483,7 @@
             "Name": "拍摄日期",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "PART_TextBox",
       "AutomationName": "拍摄日期",
@@ -495,13 +496,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -516,6 +517,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -530,9 +533,7 @@
             "Name": "拍摄日期",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "PART_Button",
       "AutomationName": "选择拍摄日期",
@@ -545,13 +546,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -566,13 +567,13 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "ControlType": "Calendar"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -585,13 +586,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "DATE_PICKER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -606,13 +607,13 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "ControlType": "Calendar"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -625,13 +626,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "DATE_PICKER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -646,13 +647,13 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "ControlType": "Calendar"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -665,13 +666,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "DATE_PICKER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -686,6 +687,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -700,9 +703,7 @@
             "Name": "拍摄日期",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "PART_TextBox",
       "AutomationName": "拍摄日期",
@@ -715,13 +716,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -736,6 +737,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -746,9 +749,7 @@
             "ControlType": "Text",
             "Heading": true
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "新建策划",
@@ -761,13 +762,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATE_PLANNING_MODAL"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -782,14 +783,14 @@
       "ExpectedUIState": "Target absent in required state",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "新建策划案",
@@ -802,13 +803,13 @@
       "ObservedStructuralMatch": 0,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Verified absent in named production peer state; installed transition remains separate",
       "Status": "VERIFIED",
@@ -823,9 +824,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": "List",
         "AncestorName": "策划案列表",
-        "AncestorType": "List"
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -838,9 +839,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT",
           "TEXT_READING",
@@ -869,7 +869,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -884,9 +885,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": "List",
         "AncestorName": "策划案列表",
-        "AncestorType": "List"
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -899,9 +900,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT",
           "TEXT_READING",
@@ -930,7 +930,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -945,14 +946,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -965,9 +966,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -998,7 +998,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1013,6 +1014,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1022,9 +1025,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "编辑",
@@ -1037,9 +1038,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT",
           "TEXT_READING",
@@ -1049,7 +1049,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1064,6 +1065,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1073,9 +1076,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "策划正文",
@@ -1088,13 +1089,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_EDITOR"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1109,6 +1110,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1118,9 +1121,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "策划正文",
@@ -1133,13 +1134,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_EDITOR"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1154,14 +1155,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "参考图",
@@ -1174,9 +1175,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -1207,7 +1207,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1222,14 +1223,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -1242,9 +1243,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -1275,7 +1275,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1290,6 +1291,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1299,9 +1302,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "Installed Acceptance Persistence {shortsha}",
@@ -1314,9 +1315,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_SAVED",
           "EMPTY-文字",
@@ -1327,7 +1327,8 @@
           "EXPORT_DIALOG",
           "TETHER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1342,9 +1343,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1357,11 +1358,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1376,9 +1377,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1391,11 +1392,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": false
+        "HistoricalV3StepPass": false,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1410,9 +1411,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1425,11 +1426,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1444,9 +1445,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1459,11 +1460,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": false
+        "HistoricalV3StepPass": false,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1478,9 +1479,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1493,11 +1494,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1512,9 +1513,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": "MainWindow",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "TutorialExitButton",
       "AutomationName": null,
@@ -1527,13 +1528,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "ONBOARDING"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1548,9 +1549,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": "PrimaryNavigation",
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": "PrimaryNavigationPlanning",
       "AutomationName": null,
@@ -1563,16 +1564,16 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/MainWindow.xaml",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "ONBOARDING",
           "BOOT",
           "TETHER",
           "ONLINE_SELECTION"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1587,9 +1588,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": "List",
         "AncestorName": "策划案列表",
-        "AncestorType": "List"
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1602,9 +1603,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "CREATED_PROJECT",
           "TEXT_READING",
@@ -1633,7 +1633,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1648,14 +1649,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -1668,9 +1669,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -1701,7 +1701,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1716,6 +1717,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1725,9 +1728,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "Installed Acceptance Persistence {shortsha}",
@@ -1740,9 +1741,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_SAVED",
           "EMPTY-文字",
@@ -1753,7 +1753,8 @@
           "EXPORT_DIALOG",
           "TETHER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1768,14 +1769,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -1788,9 +1789,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -1821,7 +1821,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1836,6 +1837,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1845,9 +1848,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "Installed Acceptance Persistence {shortsha}",
@@ -1860,9 +1861,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_SAVED",
           "EMPTY-文字",
@@ -1873,7 +1873,8 @@
           "EXPORT_DIALOG",
           "TETHER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1888,9 +1889,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -1903,11 +1904,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -1922,14 +1923,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "参考图",
@@ -1942,9 +1943,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -1975,7 +1975,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -1990,6 +1991,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -1999,9 +2002,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
@@ -2014,13 +2015,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-参考图"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2035,9 +2036,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2050,11 +2051,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2069,14 +2070,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "情绪板",
@@ -2089,9 +2090,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2122,7 +2122,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2137,6 +2138,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -2146,9 +2149,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
@@ -2161,13 +2162,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-情绪板"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2182,9 +2183,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2197,11 +2198,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2216,14 +2217,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "镜头清单",
@@ -2236,9 +2237,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2269,7 +2269,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2284,6 +2285,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -2293,9 +2296,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "0 / 0 已拍",
@@ -2308,13 +2309,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-镜头清单"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2329,9 +2330,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2344,11 +2345,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2363,14 +2364,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "灯光图",
@@ -2383,9 +2384,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2416,7 +2416,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2431,6 +2432,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -2440,9 +2443,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
@@ -2455,14 +2456,14 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-灯光图",
           "MODULE-灯光图"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2477,9 +2478,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2492,11 +2493,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2511,14 +2512,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "服化道",
@@ -2531,9 +2532,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2564,7 +2564,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2579,6 +2580,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -2588,9 +2591,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
@@ -2603,13 +2604,13 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-服化道"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2624,9 +2625,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2639,11 +2640,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2658,14 +2659,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文件",
@@ -2678,9 +2679,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2711,7 +2711,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2726,6 +2727,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -2735,9 +2738,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "项目文件",
@@ -2750,14 +2751,14 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "EMPTY-文件",
           "MODULE-文件"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2772,9 +2773,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -2787,11 +2788,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -2806,14 +2807,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -2826,9 +2827,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2859,7 +2859,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2874,14 +2875,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "预览策划案",
@@ -2894,9 +2895,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -2927,7 +2927,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -2942,14 +2943,14 @@
       "ExpectedUIState": "Target absent in required state",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "DocumentList",
       "AutomationName": "策划案列表",
@@ -2962,13 +2963,13 @@
       "ObservedStructuralMatch": 0,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "FRESH_PREVIEW"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Verified absent in named production peer state; installed transition remains separate",
       "Status": "VERIFIED",
@@ -2983,14 +2984,14 @@
       "ExpectedUIState": "Target absent in required state",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "文字",
@@ -3003,13 +3004,13 @@
       "ObservedStructuralMatch": 0,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "FRESH_PREVIEW"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Verified absent in named production peer state; installed transition remains separate",
       "Status": "VERIFIED",
@@ -3024,6 +3025,8 @@
       "ExpectedUIState": "Target absent in required state",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -3033,9 +3036,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "编辑",
@@ -3048,13 +3049,13 @@
       "ObservedStructuralMatch": 0,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "FRESH_PREVIEW"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Verified absent in named production peer state; installed transition remains separate",
       "Status": "VERIFIED",
@@ -3069,6 +3070,8 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
@@ -3078,9 +3081,7 @@
             "AutomationId": "DocumentScroll",
             "ControlType": "Pane"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "Installed Acceptance Persistence {shortsha}",
@@ -3093,9 +3094,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "TEXT_SAVED",
           "EMPTY-文字",
@@ -3106,7 +3106,8 @@
           "EXPORT_DIALOG",
           "TETHER"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -3121,9 +3122,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -3136,11 +3137,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -3155,14 +3156,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": null,
       "AutomationName": "摄影策划案工作区",
@@ -3175,9 +3176,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -3210,7 +3210,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -3225,14 +3226,14 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
+        "AncestorType": null,
+        "AncestorName": null,
         "Path": [
           {
             "Name": "摄影策划案工作区",
             "ControlType": "Custom"
           }
-        ],
-        "AncestorName": null,
-        "AncestorType": null
+        ]
       },
       "AutomationId": "DocumentList",
       "AutomationName": "策划案列表",
@@ -3245,9 +3246,8 @@
       "ObservedStructuralMatch": 1,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [
           "PLANNING_LIST",
           "CREATE_PLANNING_MODAL",
@@ -3278,7 +3278,8 @@
           "BOOKING_PICKER",
           "EXPORT_DIALOG"
         ],
-        "HistoricalV3StepPass": true
+        "HistoricalV3StepPass": true,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "Structural peer contract only; step-specific transition must also pass",
       "Status": "VERIFIED",
@@ -3293,9 +3294,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -3308,11 +3309,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": false
+        "HistoricalV3StepPass": false,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -3327,9 +3328,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -3342,11 +3343,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": false
+        "HistoricalV3StepPass": false,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",
@@ -3361,9 +3362,9 @@
       "ExpectedUIState": "Required state from formal plan; not implied by arbitrary peer snapshot",
       "Scope": {
         "Preset": null,
-        "Path": null,
+        "AncestorType": null,
         "AncestorName": null,
-        "AncestorType": null
+        "Path": null
       },
       "AutomationId": null,
       "AutomationName": null,
@@ -3376,11 +3377,11 @@
       "ObservedStructuralMatch": null,
       "ProductSourceLocation": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
       "ContractEvidence": {
-        "PeerArtifact": "artifacts/one-pass-contract/4400993",
-        "CurrentInstalledProof": false,
         "HistoricalProduct": "8cb95e6",
+        "CurrentInstalledProof": false,
         "PeerStates": [],
-        "HistoricalV3StepPass": false
+        "HistoricalV3StepPass": false,
+        "PeerArtifact": "artifacts/whole-app-product-polish/peers-final"
       },
       "Risk": "No UI selector; action/state evidence still required",
       "Status": "NOT_APPLICABLE",

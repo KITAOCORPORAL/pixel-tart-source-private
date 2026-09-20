@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="44ce6a73-e7b9-4143-bda1-46332f835024" name="Administrator@PC-20250309WEIZ 2026-09-20 18:20:29" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:20:30.0026544+08:00" queuing="2026-09-20T18:20:30.0026546+08:00" start="2026-09-20T18:20:29.4308038+08:00" finish="2026-09-20T18:20:30.0072638+08:00" />
+  <TestSettings name="default" id="6206cd37-04c3-46d9-9980-4d9bffd11a48">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_20_29" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="bc329ec8-ce16-4363-b70e-3219fd2d544e" testId="1be1117e-5939-8adc-9e5f-b2f9685e444b" testName="ProjectOverview_UsesExistingDataAndRaisesTargetedNotifications" computerName="PC-20250309WEIZ" duration="00:00:00.0010779" startTime="2026-09-20T18:20:29.9095483+08:00" endTime="2026-09-20T18:20:29.9119647+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc329ec8-ce16-4363-b70e-3219fd2d544e" />
+    <UnitTestResult executionId="bc56042c-468c-4812-b11c-ea0431e27bc9" testId="189451c9-261a-8655-8aaf-2d97024bb235" testName="ProjectOverview_RendersOnlyFourProductStates" computerName="PC-20250309WEIZ" duration="00:00:00.0060105" startTime="2026-09-20T18:20:29.8856942+08:00" endTime="2026-09-20T18:20:29.9060271+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc56042c-468c-4812-b11c-ea0431e27bc9" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ProjectOverview_RendersOnlyFourProductStates" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="189451c9-261a-8655-8aaf-2d97024bb235">
+      <Execution id="bc56042c-468c-4812-b11c-ea0431e27bc9" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WorkbenchOverviewClosureTests" name="ProjectOverview_RendersOnlyFourProductStates" />
+    </UnitTest>
+    <UnitTest name="ProjectOverview_UsesExistingDataAndRaisesTargetedNotifications" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1be1117e-5939-8adc-9e5f-b2f9685e444b">
+      <Execution id="bc329ec8-ce16-4363-b70e-3219fd2d544e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WorkbenchOverviewClosureTests" name="ProjectOverview_UsesExistingDataAndRaisesTargetedNotifications" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1be1117e-5939-8adc-9e5f-b2f9685e444b" executionId="bc329ec8-ce16-4363-b70e-3219fd2d544e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="189451c9-261a-8655-8aaf-2d97024bb235" executionId="bc56042c-468c-4812-b11c-ea0431e27bc9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

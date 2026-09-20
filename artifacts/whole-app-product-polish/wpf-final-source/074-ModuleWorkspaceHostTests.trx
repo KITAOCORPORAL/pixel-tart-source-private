@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="77d3cf3d-e2e6-4e80-901d-bdc7bd6c9ea1" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:46" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:46.0996843+08:00" queuing="2026-09-20T18:17:46.0996845+08:00" start="2026-09-20T18:17:44.9413580+08:00" finish="2026-09-20T18:17:46.1044363+08:00" />
+  <TestSettings name="default" id="42b49581-03e8-4bd1-9455-406506c7f1e6">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="86bc066a-c381-4c30-abcb-108af5e0843d" testId="19f93a82-110a-8b1d-a089-6722ba038da0" testName="VisibleHost_RequestsInitialKeyboardFocusInsideTheRouteView" computerName="PC-20250309WEIZ" duration="00:00:00.2777440" startTime="2026-09-20T18:17:45.6830799+08:00" endTime="2026-09-20T18:17:45.9620975+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86bc066a-c381-4c30-abcb-108af5e0843d" />
+    <UnitTestResult executionId="b8f0667a-20cc-47fd-9552-22de15b358d2" testId="139e16e0-5c95-80c8-939c-ed66e0db9480" testName="FactoryFailure_ShowsSharedErrorStateAndRetryCanRecover" computerName="PC-20250309WEIZ" duration="00:00:00.0048979" startTime="2026-09-20T18:17:45.6780960+08:00" endTime="2026-09-20T18:17:45.6830516+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8f0667a-20cc-47fd-9552-22de15b358d2" />
+    <UnitTestResult executionId="f5dd868a-7011-4338-a3fd-86642b594d66" testId="1dcb4dfd-64d3-8c88-b4d7-fd7e189b12a1" testName="RouteViews_AreCreatedOnceAndReusedPerRegistryAndRoute" computerName="PC-20250309WEIZ" duration="00:00:00.2581925" startTime="2026-09-20T18:17:45.3902449+08:00" endTime="2026-09-20T18:17:45.6647696+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5dd868a-7011-4338-a3fd-86642b594d66" />
+    <UnitTestResult executionId="ace320f3-a7f0-4a87-8d32-9991677792e2" testId="1edc0b76-7f1a-83a3-b0aa-a858b4e85623" testName="MissingRoute_ShowsSafeInlineStateAndCanRetryAfterRegistration" computerName="PC-20250309WEIZ" duration="00:00:00.0091829" startTime="2026-09-20T18:17:45.6682496+08:00" endTime="2026-09-20T18:17:45.6777244+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ace320f3-a7f0-4a87-8d32-9991677792e2" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FactoryFailure_ShowsSharedErrorStateAndRetryCanRecover" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="139e16e0-5c95-80c8-939c-ed66e0db9480">
+      <Execution id="b8f0667a-20cc-47fd-9552-22de15b358d2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ModuleWorkspaceHostTests" name="FactoryFailure_ShowsSharedErrorStateAndRetryCanRecover" />
+    </UnitTest>
+    <UnitTest name="RouteViews_AreCreatedOnceAndReusedPerRegistryAndRoute" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1dcb4dfd-64d3-8c88-b4d7-fd7e189b12a1">
+      <Execution id="f5dd868a-7011-4338-a3fd-86642b594d66" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ModuleWorkspaceHostTests" name="RouteViews_AreCreatedOnceAndReusedPerRegistryAndRoute" />
+    </UnitTest>
+    <UnitTest name="VisibleHost_RequestsInitialKeyboardFocusInsideTheRouteView" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19f93a82-110a-8b1d-a089-6722ba038da0">
+      <Execution id="86bc066a-c381-4c30-abcb-108af5e0843d" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ModuleWorkspaceHostTests" name="VisibleHost_RequestsInitialKeyboardFocusInsideTheRouteView" />
+    </UnitTest>
+    <UnitTest name="MissingRoute_ShowsSafeInlineStateAndCanRetryAfterRegistration" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1edc0b76-7f1a-83a3-b0aa-a858b4e85623">
+      <Execution id="ace320f3-a7f0-4a87-8d32-9991677792e2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ModuleWorkspaceHostTests" name="MissingRoute_ShowsSafeInlineStateAndCanRetryAfterRegistration" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19f93a82-110a-8b1d-a089-6722ba038da0" executionId="86bc066a-c381-4c30-abcb-108af5e0843d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="139e16e0-5c95-80c8-939c-ed66e0db9480" executionId="b8f0667a-20cc-47fd-9552-22de15b358d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dcb4dfd-64d3-8c88-b4d7-fd7e189b12a1" executionId="f5dd868a-7011-4338-a3fd-86642b594d66" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1edc0b76-7f1a-83a3-b0aa-a858b4e85623" executionId="ace320f3-a7f0-4a87-8d32-9991677792e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="484a572a-7cc9-4abd-84fe-b5cd0358f5c3" name="Administrator@PC-20250309WEIZ 2026-09-20 18:16:42" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:16:42.5776912+08:00" queuing="2026-09-20T18:16:42.5776914+08:00" start="2026-09-20T18:16:36.0788742+08:00" finish="2026-09-20T18:16:42.5824058+08:00" />
+  <TestSettings name="default" id="4ef0b97f-de46-40f5-85d5-f511810b3005">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_16_42" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="5ac29610-e2a8-4d19-a75f-7234c241e7ce" testId="1e9a3132-7bb5-8873-af82-29b53be96339" testName="ThemeImportBrowseAndResolutionMatrix" computerName="PC-20250309WEIZ" duration="00:00:05.9064147" startTime="2026-09-20T18:16:36.5413418+08:00" endTime="2026-09-20T18:16:42.4661105+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ac29610-e2a8-4d19-a75f-7234c241e7ce" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ThemeImportBrowseAndResolutionMatrix" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e9a3132-7bb5-8873-af82-29b53be96339">
+      <Execution id="5ac29610-e2a8-4d19-a75f-7234c241e7ce" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryVisualPhase2Tests" name="ThemeImportBrowseAndResolutionMatrix" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1e9a3132-7bb5-8873-af82-29b53be96339" executionId="5ac29610-e2a8-4d19-a75f-7234c241e7ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

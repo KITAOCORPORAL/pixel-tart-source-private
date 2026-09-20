@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="825ef513-bf3a-4869-9611-719f31873d54" name="Administrator@PC-20250309WEIZ 2026-09-20 18:15:39" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:15:39.2647654+08:00" queuing="2026-09-20T18:15:39.2647658+08:00" start="2026-09-20T18:15:36.6509569+08:00" finish="2026-09-20T18:15:39.2693954+08:00" />
+  <TestSettings name="default" id="1cbdd1b9-2bcc-4141-a011-efa67cf1e23d">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_15_39" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d64412c8-4f52-4faf-9258-e51851486c21" testId="19253eb6-209f-8862-8dd1-c94ef5ecc8d5" testName="FocusedWorkspaceLayoutMatrix_CapturesFourScaledViewsWithImagePriority" computerName="PC-20250309WEIZ" duration="00:00:02.0070868" startTime="2026-09-20T18:15:37.1399167+08:00" endTime="2026-09-20T18:15:39.1648601+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d64412c8-4f52-4faf-9258-e51851486c21" />
+    <UnitTestResult executionId="1a306d68-094d-405e-8946-cddd1754711e" testId="1a35c000-3ccb-8310-a18f-fcaac43fe4f2" testName="FocusModeContract_PersistsCrashRecoveryAndKeepsAdvancedToolsOffThePrimaryRow" computerName="PC-20250309WEIZ" duration="00:00:00.0020182" startTime="2026-09-20T18:15:39.1683471+08:00" endTime="2026-09-20T18:15:39.1718140+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a306d68-094d-405e-8946-cddd1754711e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FocusedWorkspaceLayoutMatrix_CapturesFourScaledViewsWithImagePriority" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19253eb6-209f-8862-8dd1-c94ef5ecc8d5">
+      <Execution id="d64412c8-4f52-4faf-9258-e51851486c21" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP35FocusAcceptanceTests" name="FocusedWorkspaceLayoutMatrix_CapturesFourScaledViewsWithImagePriority" />
+    </UnitTest>
+    <UnitTest name="FocusModeContract_PersistsCrashRecoveryAndKeepsAdvancedToolsOffThePrimaryRow" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a35c000-3ccb-8310-a18f-fcaac43fe4f2">
+      <Execution id="1a306d68-094d-405e-8946-cddd1754711e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP35FocusAcceptanceTests" name="FocusModeContract_PersistsCrashRecoveryAndKeepsAdvancedToolsOffThePrimaryRow" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19253eb6-209f-8862-8dd1-c94ef5ecc8d5" executionId="d64412c8-4f52-4faf-9258-e51851486c21" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a35c000-3ccb-8310-a18f-fcaac43fe4f2" executionId="1a306d68-094d-405e-8946-cddd1754711e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="243bff72-1eda-4885-b21b-6ef34f151dfa" name="Administrator@PC-20250309WEIZ 2026-09-20 18:19:09" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:19:09.5411950+08:00" queuing="2026-09-20T18:19:09.5411952+08:00" start="2026-09-20T18:19:08.9054414+08:00" finish="2026-09-20T18:19:09.5681416+08:00" />
+  <TestSettings name="default" id="c63e0cf1-c086-4e7e-a8b2-bac90c48fcda">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_19_09" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6b319da6-068d-4561-bc45-9caf42a1ddda" testId="12beda2b-934a-829c-8cb8-3270772af473" testName="WeatherCacheOnlyCalendarLoading_CatchesOptionalServiceFailures" computerName="PC-20250309WEIZ" duration="00:00:00.0006051" startTime="2026-09-20T18:19:09.5079378+08:00" endTime="2026-09-20T18:19:09.5095708+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b319da6-068d-4561-bc45-9caf42a1ddda" />
+    <UnitTestResult executionId="9dc8aa30-5520-4c8c-b553-54f31ed6527b" testId="15432d5f-356d-8693-9208-10e4425c0a5d" testName="WeekAndDayCards_ShowIconTemperatureRainAndWind" computerName="PC-20250309WEIZ" duration="00:00:00.0009777" startTime="2026-09-20T18:19:09.4618868+08:00" endTime="2026-09-20T18:19:09.4631376+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9dc8aa30-5520-4c8c-b553-54f31ed6527b" />
+    <UnitTestResult executionId="715b1c9c-1f9f-4c10-a145-1213bf6ab0c5" testId="17b1cf38-c807-8f2a-b77e-68ddba4e6d63" testName="MonthCalendar_KeepsTaskCardCompactAndShowsDayWeatherGlyph" computerName="PC-20250309WEIZ" duration="00:00:00.0960262" startTime="2026-09-20T18:19:09.3473747+08:00" endTime="2026-09-20T18:19:09.4578650+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="715b1c9c-1f9f-4c10-a145-1213bf6ab0c5" />
+    <UnitTestResult executionId="a7812a55-5572-496b-b272-97de6e86507a" testId="181a5f39-5695-8f09-beda-db21079bfc56" testName="WeatherViewModel_DependsOnlyOnForecastServiceNotProviders" computerName="PC-20250309WEIZ" duration="00:00:00.0003325" startTime="2026-09-20T18:19:09.4849481+08:00" endTime="2026-09-20T18:19:09.4853071+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a7812a55-5572-496b-b272-97de6e86507a" />
+    <UnitTestResult executionId="3fda487f-81d0-4bf5-9828-b0fa9b7ba9a3" testId="16ceb4a1-b4d5-8e3c-8de5-7cc50a1c5a18" testName="WorkbenchFuture_UsesDailyMinimumMaximumAndRain" computerName="PC-20250309WEIZ" duration="00:00:00.0007815" startTime="2026-09-20T18:19:09.4779953+08:00" endTime="2026-09-20T18:19:09.4788075+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3fda487f-81d0-4bf5-9828-b0fa9b7ba9a3" />
+    <UnitTestResult executionId="22516d07-02f7-4b01-b84f-758effc2abb9" testId="1618c48a-7557-81e5-84bc-424f5203b0aa" testName="WorkbenchToday_ShowsRepresentativeWeatherAndStrongWindRisk" computerName="PC-20250309WEIZ" duration="00:00:00.0008920" startTime="2026-09-20T18:19:09.4770477+08:00" endTime="2026-09-20T18:19:09.4779743+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22516d07-02f7-4b01-b84f-758effc2abb9" />
+    <UnitTestResult executionId="05b0c917-0551-48e0-a2a8-c76d766a509e" testId="1110baf4-0d44-8ed0-b032-bcd31e407837" testName="CalendarMonthWeekDay_ReceiveWeatherWithoutChangingBookingCollection" computerName="PC-20250309WEIZ" duration="00:00:00.0127565" startTime="2026-09-20T18:19:09.4634228+08:00" endTime="2026-09-20T18:19:09.4762305+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05b0c917-0551-48e0-a2a8-c76d766a509e" />
+    <UnitTestResult executionId="35216720-19e4-48b0-ab86-ce8951cef5c4" testId="11eb497f-2047-86e8-9676-3501eecc2fa5" testName="WeatherUi_IsAccessibleThemeAwareAndHasNoFixedScaleTransform" computerName="PC-20250309WEIZ" duration="00:00:00.0010282" startTime="2026-09-20T18:19:09.5068196+08:00" endTime="2026-09-20T18:19:09.5079070+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35216720-19e4-48b0-ab86-ce8951cef5c4" />
+    <UnitTestResult executionId="58d17440-7feb-4505-907c-8dcc03370b36" testId="1c0c71de-363d-84a8-9860-b2668dc1f039" testName="BookingDetailsWeather_ShowsAllRequiredFieldsAndProviderAttribution" computerName="PC-20250309WEIZ" duration="00:00:00.0007177" startTime="2026-09-20T18:19:09.4762635+08:00" endTime="2026-09-20T18:19:09.4770239+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58d17440-7feb-4505-907c-8dcc03370b36" />
+    <UnitTestResult executionId="15021c52-7477-47db-b3ea-8eb305e75725" testId="1600ace8-4cc4-831e-ac1a-72d8075c16af" testName="WeatherFailure_DoesNotPreventBookingDetailsFromLoading" computerName="PC-20250309WEIZ" duration="00:00:00.0053285" startTime="2026-09-20T18:19:09.4788267+08:00" endTime="2026-09-20T18:19:09.4841872+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15021c52-7477-47db-b3ea-8eb305e75725" />
+    <UnitTestResult executionId="6f0edc6e-77d9-4919-bb56-acc24434c89f" testId="12a6fc07-0515-8426-8462-51342bf0f821" testName="BookingChanges_MarkWeatherStaleAndAutoRefreshOnlyOnceWhenEnabled" computerName="PC-20250309WEIZ" duration="00:00:00.0006919" startTime="2026-09-20T18:19:09.4842076+08:00" endTime="2026-09-20T18:19:09.4849286+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f0edc6e-77d9-4919-bb56-acc24434c89f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="WeatherFailure_DoesNotPreventBookingDetailsFromLoading" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1600ace8-4cc4-831e-ac1a-72d8075c16af">
+      <Execution id="15021c52-7477-47db-b3ea-8eb305e75725" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WeatherFailure_DoesNotPreventBookingDetailsFromLoading" />
+    </UnitTest>
+    <UnitTest name="WeatherViewModel_DependsOnlyOnForecastServiceNotProviders" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="181a5f39-5695-8f09-beda-db21079bfc56">
+      <Execution id="a7812a55-5572-496b-b272-97de6e86507a" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WeatherViewModel_DependsOnlyOnForecastServiceNotProviders" />
+    </UnitTest>
+    <UnitTest name="WeatherCacheOnlyCalendarLoading_CatchesOptionalServiceFailures" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12beda2b-934a-829c-8cb8-3270772af473">
+      <Execution id="6b319da6-068d-4561-bc45-9caf42a1ddda" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WeatherCacheOnlyCalendarLoading_CatchesOptionalServiceFailures" />
+    </UnitTest>
+    <UnitTest name="MonthCalendar_KeepsTaskCardCompactAndShowsDayWeatherGlyph" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17b1cf38-c807-8f2a-b77e-68ddba4e6d63">
+      <Execution id="715b1c9c-1f9f-4c10-a145-1213bf6ab0c5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="MonthCalendar_KeepsTaskCardCompactAndShowsDayWeatherGlyph" />
+    </UnitTest>
+    <UnitTest name="WorkbenchFuture_UsesDailyMinimumMaximumAndRain" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16ceb4a1-b4d5-8e3c-8de5-7cc50a1c5a18">
+      <Execution id="3fda487f-81d0-4bf5-9828-b0fa9b7ba9a3" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WorkbenchFuture_UsesDailyMinimumMaximumAndRain" />
+    </UnitTest>
+    <UnitTest name="BookingChanges_MarkWeatherStaleAndAutoRefreshOnlyOnceWhenEnabled" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12a6fc07-0515-8426-8462-51342bf0f821">
+      <Execution id="6f0edc6e-77d9-4919-bb56-acc24434c89f" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="BookingChanges_MarkWeatherStaleAndAutoRefreshOnlyOnceWhenEnabled" />
+    </UnitTest>
+    <UnitTest name="WeekAndDayCards_ShowIconTemperatureRainAndWind" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15432d5f-356d-8693-9208-10e4425c0a5d">
+      <Execution id="9dc8aa30-5520-4c8c-b553-54f31ed6527b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WeekAndDayCards_ShowIconTemperatureRainAndWind" />
+    </UnitTest>
+    <UnitTest name="WorkbenchToday_ShowsRepresentativeWeatherAndStrongWindRisk" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1618c48a-7557-81e5-84bc-424f5203b0aa">
+      <Execution id="22516d07-02f7-4b01-b84f-758effc2abb9" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WorkbenchToday_ShowsRepresentativeWeatherAndStrongWindRisk" />
+    </UnitTest>
+    <UnitTest name="WeatherUi_IsAccessibleThemeAwareAndHasNoFixedScaleTransform" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11eb497f-2047-86e8-9676-3501eecc2fa5">
+      <Execution id="35216720-19e4-48b0-ab86-ce8951cef5c4" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="WeatherUi_IsAccessibleThemeAwareAndHasNoFixedScaleTransform" />
+    </UnitTest>
+    <UnitTest name="CalendarMonthWeekDay_ReceiveWeatherWithoutChangingBookingCollection" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1110baf4-0d44-8ed0-b032-bcd31e407837">
+      <Execution id="05b0c917-0551-48e0-a2a8-c76d766a509e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="CalendarMonthWeekDay_ReceiveWeatherWithoutChangingBookingCollection" />
+    </UnitTest>
+    <UnitTest name="BookingDetailsWeather_ShowsAllRequiredFieldsAndProviderAttribution" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c0c71de-363d-84a8-9860-b2668dc1f039">
+      <Execution id="58d17440-7feb-4505-907c-8dcc03370b36" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220WeatherUiTests" name="BookingDetailsWeather_ShowsAllRequiredFieldsAndProviderAttribution" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="12beda2b-934a-829c-8cb8-3270772af473" executionId="6b319da6-068d-4561-bc45-9caf42a1ddda" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15432d5f-356d-8693-9208-10e4425c0a5d" executionId="9dc8aa30-5520-4c8c-b553-54f31ed6527b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17b1cf38-c807-8f2a-b77e-68ddba4e6d63" executionId="715b1c9c-1f9f-4c10-a145-1213bf6ab0c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="181a5f39-5695-8f09-beda-db21079bfc56" executionId="a7812a55-5572-496b-b272-97de6e86507a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16ceb4a1-b4d5-8e3c-8de5-7cc50a1c5a18" executionId="3fda487f-81d0-4bf5-9828-b0fa9b7ba9a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1618c48a-7557-81e5-84bc-424f5203b0aa" executionId="22516d07-02f7-4b01-b84f-758effc2abb9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1110baf4-0d44-8ed0-b032-bcd31e407837" executionId="05b0c917-0551-48e0-a2a8-c76d766a509e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11eb497f-2047-86e8-9676-3501eecc2fa5" executionId="35216720-19e4-48b0-ab86-ce8951cef5c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c0c71de-363d-84a8-9860-b2668dc1f039" executionId="58d17440-7feb-4505-907c-8dcc03370b36" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1600ace8-4cc4-831e-ac1a-72d8075c16af" executionId="15021c52-7477-47db-b3ea-8eb305e75725" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12a6fc07-0515-8426-8462-51342bf0f821" executionId="6f0edc6e-77d9-4919-bb56-acc24434c89f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="11" executed="11" passed="11" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

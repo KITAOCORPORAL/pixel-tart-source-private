@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6a93deb9-add0-47de-9073-24b0707b7867" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:56" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:56.5739181+08:00" queuing="2026-09-20T18:17:56.5739182+08:00" start="2026-09-20T18:17:55.9957369+08:00" finish="2026-09-20T18:17:56.5785946+08:00" />
+  <TestSettings name="default" id="6e62ccdf-0bcf-4400-bdfa-6349eb237992">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_56" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="25a2c26a-21c9-4c28-a218-207398f0ce34" testId="163bd263-6333-8bbc-8d48-c88e81979e1e" testName="PointerDownEscape_CorrelatesBeforeUpWithoutRelaxingNonPhysicalActions" computerName="PC-20250309WEIZ" duration="00:00:00.0005555" startTime="2026-09-20T18:17:56.4814468+08:00" endTime="2026-09-20T18:17:56.4829975+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="25a2c26a-21c9-4c28-a218-207398f0ce34" />
+    <UnitTestResult executionId="e72d2cb8-73de-4d95-9f37-078032bb9e80" testId="1cc2b474-0274-89eb-b4c3-96316cd09ff8" testName="Diagnostic_SeparatesFourPhysicalPointerLayersAndEffectiveState" computerName="PC-20250309WEIZ" duration="00:00:00.0005270" startTime="2026-09-20T18:17:56.4764775+08:00" endTime="2026-09-20T18:17:56.4770423+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e72d2cb8-73de-4d95-9f37-078032bb9e80" />
+    <UnitTestResult executionId="f46a701b-5486-48e0-b0d2-18ab5306bcb3" testId="1a1e4a38-dac4-8d2e-959e-da74a46056a2" testName="Diagnostic_AutomatesCollapsedAndRestartWorkspaceRestoreContracts" computerName="PC-20250309WEIZ" duration="00:00:00.0011477" startTime="2026-09-20T18:17:56.4794690+08:00" endTime="2026-09-20T18:17:56.4806448+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f46a701b-5486-48e0-b0d2-18ab5306bcb3" />
+    <UnitTestResult executionId="5b3a3d4e-a52c-484d-9d01-ab6e02d662f1" testId="11308aa1-88ce-84dd-978b-9e2e1a5a80d4" testName="MainWindow_CapturesNativeAndHandledWpfPointerLayers" computerName="PC-20250309WEIZ" duration="00:00:00.0055671" startTime="2026-09-20T18:17:56.4515009+08:00" endTime="2026-09-20T18:17:56.4711612+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b3a3d4e-a52c-484d-9d01-ab6e02d662f1" />
+    <UnitTestResult executionId="21cb412f-2f87-4f90-b7a8-de82e1c156c9" testId="192db108-94fe-8e9c-bd0a-681b65af2496" testName="PaneToggleButtonsFlowThroughAllFourWpfKeyEventsWithoutTheRetryEarlyExit" computerName="PC-20250309WEIZ" duration="00:00:00.0007925" startTime="2026-09-20T18:17:56.4779636+08:00" endTime="2026-09-20T18:17:56.4787837+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="21cb412f-2f87-4f90-b7a8-de82e1c156c9" />
+    <UnitTestResult executionId="9564f1cb-a740-427c-a313-c532bc3615cf" testId="1da7bdca-a8e2-8a0e-886c-f4fda89beca8" testName="Diagnostic_IsAcceptanceOrExplicitDevPreviewOnlyAndWritesFixedSanitizedArtifact" computerName="PC-20250309WEIZ" duration="00:00:00.0012842" startTime="2026-09-20T18:17:56.4746397+08:00" endTime="2026-09-20T18:17:56.4761891+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9564f1cb-a740-427c-a313-c532bc3615cf" />
+    <UnitTestResult executionId="91204329-9623-4ddd-9dbd-3b9fa2361fb2" testId="13fe984d-9d4d-83da-832d-169554868efa" testName="Diagnostic_CorrelatesRealSplitterAndSliderStateTransitions" computerName="PC-20250309WEIZ" duration="00:00:00.0008528" startTime="2026-09-20T18:17:56.4770631+08:00" endTime="2026-09-20T18:17:56.4779443+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="91204329-9623-4ddd-9dbd-3b9fa2361fb2" />
+    <UnitTestResult executionId="73966355-c204-4d28-af9f-c582bce2218c" testId="12902bf1-edf1-8bc6-adf9-170eb76585dd" testName="RetryEnter_CapturesFirstChanceNativeInputAndTruthfullyFinalizesAfterTargetDisappears" computerName="PC-20250309WEIZ" duration="00:00:00.0006158" startTime="2026-09-20T18:17:56.4788041+08:00" endTime="2026-09-20T18:17:56.4794493+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73966355-c204-4d28-af9f-c582bce2218c" />
+    <UnitTestResult executionId="35e3f4ce-f1e9-41c7-891d-94763b082a86" testId="1a84f0e4-5226-80d8-803e-babfc664c8d6" testName="ShellActions_AreCorrelatedWithoutTreatingUiaInvokeAsPhysicalInput" computerName="PC-20250309WEIZ" duration="00:00:00.0007401" startTime="2026-09-20T18:17:56.4806634+08:00" endTime="2026-09-20T18:17:56.4814294+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35e3f4ce-f1e9-41c7-891d-94763b082a86" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RetryEnter_CapturesFirstChanceNativeInputAndTruthfullyFinalizesAfterTargetDisappears" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12902bf1-edf1-8bc6-adf9-170eb76585dd">
+      <Execution id="73966355-c204-4d28-af9f-c582bce2218c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="RetryEnter_CapturesFirstChanceNativeInputAndTruthfullyFinalizesAfterTargetDisappears" />
+    </UnitTest>
+    <UnitTest name="Diagnostic_SeparatesFourPhysicalPointerLayersAndEffectiveState" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cc2b474-0274-89eb-b4c3-96316cd09ff8">
+      <Execution id="e72d2cb8-73de-4d95-9f37-078032bb9e80" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="Diagnostic_SeparatesFourPhysicalPointerLayersAndEffectiveState" />
+    </UnitTest>
+    <UnitTest name="MainWindow_CapturesNativeAndHandledWpfPointerLayers" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11308aa1-88ce-84dd-978b-9e2e1a5a80d4">
+      <Execution id="5b3a3d4e-a52c-484d-9d01-ab6e02d662f1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="MainWindow_CapturesNativeAndHandledWpfPointerLayers" />
+    </UnitTest>
+    <UnitTest name="ShellActions_AreCorrelatedWithoutTreatingUiaInvokeAsPhysicalInput" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a84f0e4-5226-80d8-803e-babfc664c8d6">
+      <Execution id="35e3f4ce-f1e9-41c7-891d-94763b082a86" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="ShellActions_AreCorrelatedWithoutTreatingUiaInvokeAsPhysicalInput" />
+    </UnitTest>
+    <UnitTest name="Diagnostic_CorrelatesRealSplitterAndSliderStateTransitions" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13fe984d-9d4d-83da-832d-169554868efa">
+      <Execution id="91204329-9623-4ddd-9dbd-3b9fa2361fb2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="Diagnostic_CorrelatesRealSplitterAndSliderStateTransitions" />
+    </UnitTest>
+    <UnitTest name="Diagnostic_IsAcceptanceOrExplicitDevPreviewOnlyAndWritesFixedSanitizedArtifact" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1da7bdca-a8e2-8a0e-886c-f4fda89beca8">
+      <Execution id="9564f1cb-a740-427c-a313-c532bc3615cf" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="Diagnostic_IsAcceptanceOrExplicitDevPreviewOnlyAndWritesFixedSanitizedArtifact" />
+    </UnitTest>
+    <UnitTest name="PaneToggleButtonsFlowThroughAllFourWpfKeyEventsWithoutTheRetryEarlyExit" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="192db108-94fe-8e9c-bd0a-681b65af2496">
+      <Execution id="21cb412f-2f87-4f90-b7a8-de82e1c156c9" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="PaneToggleButtonsFlowThroughAllFourWpfKeyEventsWithoutTheRetryEarlyExit" />
+    </UnitTest>
+    <UnitTest name="PointerDownEscape_CorrelatesBeforeUpWithoutRelaxingNonPhysicalActions" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="163bd263-6333-8bbc-8d48-c88e81979e1e">
+      <Execution id="25a2c26a-21c9-4c28-a218-207398f0ce34" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="PointerDownEscape_CorrelatesBeforeUpWithoutRelaxingNonPhysicalActions" />
+    </UnitTest>
+    <UnitTest name="Diagnostic_AutomatesCollapsedAndRestartWorkspaceRestoreContracts" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a1e4a38-dac4-8d2e-959e-da74a46056a2">
+      <Execution id="f46a701b-5486-48e0-b0d2-18ab5306bcb3" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhysicalPointerDiagnosticContractTests" name="Diagnostic_AutomatesCollapsedAndRestartWorkspaceRestoreContracts" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="163bd263-6333-8bbc-8d48-c88e81979e1e" executionId="25a2c26a-21c9-4c28-a218-207398f0ce34" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cc2b474-0274-89eb-b4c3-96316cd09ff8" executionId="e72d2cb8-73de-4d95-9f37-078032bb9e80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a1e4a38-dac4-8d2e-959e-da74a46056a2" executionId="f46a701b-5486-48e0-b0d2-18ab5306bcb3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11308aa1-88ce-84dd-978b-9e2e1a5a80d4" executionId="5b3a3d4e-a52c-484d-9d01-ab6e02d662f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="192db108-94fe-8e9c-bd0a-681b65af2496" executionId="21cb412f-2f87-4f90-b7a8-de82e1c156c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1da7bdca-a8e2-8a0e-886c-f4fda89beca8" executionId="9564f1cb-a740-427c-a313-c532bc3615cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13fe984d-9d4d-83da-832d-169554868efa" executionId="91204329-9623-4ddd-9dbd-3b9fa2361fb2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12902bf1-edf1-8bc6-adf9-170eb76585dd" executionId="73966355-c204-4d28-af9f-c582bce2218c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a84f0e4-5226-80d8-803e-babfc664c8d6" executionId="35e3f4ce-f1e9-41c7-891d-94763b082a86" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="9" executed="9" passed="9" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

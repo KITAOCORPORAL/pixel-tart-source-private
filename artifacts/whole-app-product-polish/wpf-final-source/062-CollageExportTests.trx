@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fa60fb2c-6433-4486-ab21-edc7938febcf" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:19" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:19.8829935+08:00" queuing="2026-09-20T18:17:19.8829937+08:00" start="2026-09-20T18:17:19.0458754+08:00" finish="2026-09-20T18:17:19.8875893+08:00" />
+  <TestSettings name="default" id="421bfe83-929b-4798-a380-3d27f75f02b2">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_19" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="86ce7255-9a01-47fa-807e-0c15d79e2332" testId="1128464d-b020-8a9c-a3cf-4fd62cff7794" testName="ExportPng_SupportsTransparentBackground" computerName="PC-20250309WEIZ" duration="00:00:00.0220974" startTime="2026-09-20T18:17:19.7361536+08:00" endTime="2026-09-20T18:17:19.7585861+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86ce7255-9a01-47fa-807e-0c15d79e2332" />
+    <UnitTestResult executionId="f43594b9-0e53-410c-a5a7-506008f6a2c1" testId="11bbda7d-f5ac-8e27-94ce-64fbfaf12195" testName="ExportJpg_UsesOriginalFilesAndPreservesSources" computerName="PC-20250309WEIZ" duration="00:00:00.2150735" startTime="2026-09-20T18:17:19.5004106+08:00" endTime="2026-09-20T18:17:19.7324428+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f43594b9-0e53-410c-a5a7-506008f6a2c1" />
+    <UnitTestResult executionId="dd768c9b-e745-489b-be03-16e3f0ee7d98" testId="175b642b-d8af-85a1-b368-664169a94dd4" testName="ExportConflict_AutoNumbersAndDoesNotOverwrite" computerName="PC-20250309WEIZ" duration="00:00:00.0176159" startTime="2026-09-20T18:17:19.7589788+08:00" endTime="2026-09-20T18:17:19.7779224+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd768c9b-e745-489b-be03-16e3f0ee7d98" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExportConflict_AutoNumbersAndDoesNotOverwrite" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="175b642b-d8af-85a1-b368-664169a94dd4">
+      <Execution id="dd768c9b-e745-489b-be03-16e3f0ee7d98" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CollageExportTests" name="ExportConflict_AutoNumbersAndDoesNotOverwrite" />
+    </UnitTest>
+    <UnitTest name="ExportPng_SupportsTransparentBackground" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1128464d-b020-8a9c-a3cf-4fd62cff7794">
+      <Execution id="86ce7255-9a01-47fa-807e-0c15d79e2332" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CollageExportTests" name="ExportPng_SupportsTransparentBackground" />
+    </UnitTest>
+    <UnitTest name="ExportJpg_UsesOriginalFilesAndPreservesSources" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11bbda7d-f5ac-8e27-94ce-64fbfaf12195">
+      <Execution id="f43594b9-0e53-410c-a5a7-506008f6a2c1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CollageExportTests" name="ExportJpg_UsesOriginalFilesAndPreservesSources" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1128464d-b020-8a9c-a3cf-4fd62cff7794" executionId="86ce7255-9a01-47fa-807e-0c15d79e2332" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11bbda7d-f5ac-8e27-94ce-64fbfaf12195" executionId="f43594b9-0e53-410c-a5a7-506008f6a2c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="175b642b-d8af-85a1-b368-664169a94dd4" executionId="dd768c9b-e745-489b-be03-16e3f0ee7d98" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

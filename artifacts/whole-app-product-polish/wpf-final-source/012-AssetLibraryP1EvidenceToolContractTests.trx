@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="41f2b699-88f3-4e47-ab79-975e6a57d056" name="Administrator@PC-20250309WEIZ 2026-09-20 18:13:18" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:13:18.0687805+08:00" queuing="2026-09-20T18:13:18.0687807+08:00" start="2026-09-20T18:13:17.5061661+08:00" finish="2026-09-20T18:13:18.0732714+08:00" />
+  <TestSettings name="default" id="8d35ed88-5c59-4f61-9fe9-8b0a55b8f76f">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_13_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e92ec671-9445-4811-be14-2f6d8aafe799" testId="19b2c3ca-7827-8459-be2d-e6d89a90544b" testName="CaptureHelperCannotGenerateInputOrOverwriteEvidence" computerName="PC-20250309WEIZ" duration="00:00:00.0006884" startTime="2026-09-20T18:13:17.9758943+08:00" endTime="2026-09-20T18:13:17.9768467+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e92ec671-9445-4811-be14-2f6d8aafe799" />
+    <UnitTestResult executionId="b99af6fd-52b6-42fa-a2f1-29aad9371184" testId="10daf105-7ea8-8560-b36d-022380fc7964" testName="CaptureHelperRequiresExactForegroundIdentityAndRecordsPhysicalDpiAndHashes" computerName="PC-20250309WEIZ" duration="00:00:00.0059988" startTime="2026-09-20T18:13:17.9517864+08:00" endTime="2026-09-20T18:13:17.9724368+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b99af6fd-52b6-42fa-a2f1-29aad9371184" />
+    <UnitTestResult executionId="a021c2a6-1eb8-47e3-b8bd-d26b9a239a1b" testId="1f417c14-23e3-8ee5-992e-34c9dc856e9f" testName="CaptureHelperPreservesAnEmptyPostCaptureAuxiliaryWindowCollectionOnPowerShell51" computerName="PC-20250309WEIZ" duration="00:00:00.0003233" startTime="2026-09-20T18:13:17.9771489+08:00" endTime="2026-09-20T18:13:17.9775077+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a021c2a6-1eb8-47e3-b8bd-d26b9a239a1b" />
+    <UnitTestResult executionId="e1627cc6-de70-4dfd-b71f-827e9b1f1dbc" testId="179ae27d-a470-8cb9-875c-14da52cc956f" testName="ReadmeLimitsTheHelperToPostActionRealScreenEvidence" computerName="PC-20250309WEIZ" duration="00:00:00.0002560" startTime="2026-09-20T18:13:17.9778353+08:00" endTime="2026-09-20T18:13:17.9790743+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1627cc6-de70-4dfd-b71f-827e9b1f1dbc" />
+    <UnitTestResult executionId="7cb99f64-e6fe-4c0d-a2d8-44463f5f5a64" testId="182317af-428e-84da-8392-49d0c6b50af0" testName="CaptureHelperPreservesAnEmptyTimeoutAuxiliaryWindowCollectionOnPowerShell51" computerName="PC-20250309WEIZ" duration="00:00:00.0002721" startTime="2026-09-20T18:13:17.9775272+08:00" endTime="2026-09-20T18:13:17.9778213+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7cb99f64-e6fe-4c0d-a2d8-44463f5f5a64" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ReadmeLimitsTheHelperToPostActionRealScreenEvidence" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="179ae27d-a470-8cb9-875c-14da52cc956f">
+      <Execution id="e1627cc6-de70-4dfd-b71f-827e9b1f1dbc" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1EvidenceToolContractTests" name="ReadmeLimitsTheHelperToPostActionRealScreenEvidence" />
+    </UnitTest>
+    <UnitTest name="CaptureHelperCannotGenerateInputOrOverwriteEvidence" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19b2c3ca-7827-8459-be2d-e6d89a90544b">
+      <Execution id="e92ec671-9445-4811-be14-2f6d8aafe799" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1EvidenceToolContractTests" name="CaptureHelperCannotGenerateInputOrOverwriteEvidence" />
+    </UnitTest>
+    <UnitTest name="CaptureHelperPreservesAnEmptyTimeoutAuxiliaryWindowCollectionOnPowerShell51" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="182317af-428e-84da-8392-49d0c6b50af0">
+      <Execution id="7cb99f64-e6fe-4c0d-a2d8-44463f5f5a64" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1EvidenceToolContractTests" name="CaptureHelperPreservesAnEmptyTimeoutAuxiliaryWindowCollectionOnPowerShell51" />
+    </UnitTest>
+    <UnitTest name="CaptureHelperRequiresExactForegroundIdentityAndRecordsPhysicalDpiAndHashes" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10daf105-7ea8-8560-b36d-022380fc7964">
+      <Execution id="b99af6fd-52b6-42fa-a2f1-29aad9371184" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1EvidenceToolContractTests" name="CaptureHelperRequiresExactForegroundIdentityAndRecordsPhysicalDpiAndHashes" />
+    </UnitTest>
+    <UnitTest name="CaptureHelperPreservesAnEmptyPostCaptureAuxiliaryWindowCollectionOnPowerShell51" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f417c14-23e3-8ee5-992e-34c9dc856e9f">
+      <Execution id="a021c2a6-1eb8-47e3-b8bd-d26b9a239a1b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1EvidenceToolContractTests" name="CaptureHelperPreservesAnEmptyPostCaptureAuxiliaryWindowCollectionOnPowerShell51" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19b2c3ca-7827-8459-be2d-e6d89a90544b" executionId="e92ec671-9445-4811-be14-2f6d8aafe799" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10daf105-7ea8-8560-b36d-022380fc7964" executionId="b99af6fd-52b6-42fa-a2f1-29aad9371184" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f417c14-23e3-8ee5-992e-34c9dc856e9f" executionId="a021c2a6-1eb8-47e3-b8bd-d26b9a239a1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="179ae27d-a470-8cb9-875c-14da52cc956f" executionId="e1627cc6-de70-4dfd-b71f-827e9b1f1dbc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="182317af-428e-84da-8392-49d0c6b50af0" executionId="7cb99f64-e6fe-4c0d-a2d8-44463f5f5a64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,14 @@
+{
+  "ProductSourceSha": "f505a177106a38fc23550edd87949f235238fb79",
+  "Configuration": "Release",
+  "SolutionPlatform": "x64",
+  "ReleaseBuild": { "Warnings": 0, "Errors": 0, "LocalBinlog": "artifacts/whole-app-product-polish/release-final.binlog" },
+  "Core": { "Passed": 1376, "Failed": 0, "Skipped": 0, "Trx": "core.trx" },
+  "FullWpf": { "Fixtures": 125, "Passed": 1264, "Failed": 0, "Skipped": 0, "ProductDirty": false, "Manifest": "../wpf-final-source/rc12-wpf-process-isolation.json", "IncludesRealAppStartup": true },
+  "LogicalDpi": { "Passed": 90, "Failed": 0, "Skipped": 0, "Trx": "dpi.trx", "PhysicalDisplayProof": false },
+  "Modular": { "Passed": 14, "Failed": 0, "Skipped": 0, "Trx": "modular.trx" },
+  "VisualProducer": { "Passed": 1, "Trx": "visual.trx", "DesktopScreenshot": false, "FullStateCoverage": false },
+  "ProductionPeers": { "Passed": 1, "Checks": 39, "Trx": "contract.trx", "InstalledAcceptance": false },
+  "OfflineRunner": { "SelectorPassed": 8, "NavigationPassed": 16, "SelfTest": "BLOCKED_MISSING_HISTORICAL_INSTALLER_PAYLOAD", "PlanningLintErrors": 0, "PlanningLintWarnings": 108, "UpgradeLintErrors": 0, "UpgradeLintWarnings": 55 },
+  "Candidate": "NOT_GENERATED"
+}

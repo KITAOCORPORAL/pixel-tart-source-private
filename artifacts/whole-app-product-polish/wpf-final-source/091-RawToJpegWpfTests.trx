@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1c7cf02d-02e5-4978-824d-dd52fdff2656" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:32" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:32.9568309+08:00" queuing="2026-09-20T18:18:32.9568312+08:00" start="2026-09-20T18:18:31.8984586+08:00" finish="2026-09-20T18:18:32.9613888+08:00" />
+  <TestSettings name="default" id="8f347dc6-76fd-4472-be92-585fb734b85a">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_32" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b48d5a9b-bf59-4d89-9f78-d261e9b887e1" testId="19b2c852-b972-838c-9714-ace7bfff0653" testName="Modal_DeclaresDropAndSourceSafetyContract" computerName="PC-20250309WEIZ" duration="00:00:00.0008986" startTime="2026-09-20T18:18:32.8407311+08:00" endTime="2026-09-20T18:18:32.8426261+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b48d5a9b-bf59-4d89-9f78-d261e9b887e1" />
+    <UnitTestResult executionId="f5374124-181a-48bd-8925-bcb5f693c506" testId="130b4693-2fd5-82f2-86c5-170cf6ab286d" testName="Encoder_PreservesExifAndNormalizesOrientationAfterRotation" computerName="PC-20250309WEIZ" duration="00:00:00.1313983" startTime="2026-09-20T18:18:32.7060613+08:00" endTime="2026-09-20T18:18:32.8375175+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5374124-181a-48bd-8925-bcb5f693c506" />
+    <UnitTestResult executionId="87cdd66f-c74c-450c-bca7-1623c38928de" testId="1fd829f6-cb58-8ade-a942-a7eb0acde44d" testName="Encoder_WritesReadableJpegAtRealRawDimensionsWithoutFullSizeThumbnail" computerName="PC-20250309WEIZ" duration="00:00:00.2674290" startTime="2026-09-20T18:18:32.4345327+08:00" endTime="2026-09-20T18:18:32.7022583+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="87cdd66f-c74c-450c-bca7-1623c38928de" />
+    <UnitTestResult executionId="7e7eb1b5-5191-42e7-9da1-1c3ce7042681" testId="1973ec5f-17d1-8ce7-a324-c5cd068b6b54" testName="Encoder_AppliesNinetyDegreeOrientation" computerName="PC-20250309WEIZ" duration="00:00:00.0030301" startTime="2026-09-20T18:18:32.7029207+08:00" endTime="2026-09-20T18:18:32.7060241+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e7eb1b5-5191-42e7-9da1-1c3ce7042681" />
+    <UnitTestResult executionId="dd41e965-ec38-4265-a925-f19d45bb015a" testId="10414be7-eac6-8c20-a3b1-6cec6bb80db8" testName="Encoder_WhenAutoRotateIsDisabled_KeepsPixelsAndOrientationTag" computerName="PC-20250309WEIZ" duration="00:00:00.0030870" startTime="2026-09-20T18:18:32.8375576+08:00" endTime="2026-09-20T18:18:32.8406978+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd41e965-ec38-4265-a925-f19d45bb015a" />
+    <UnitTestResult executionId="cc9f7b85-76e4-4c12-aa23-33acc2e6a864" testId="1690e6e3-b6f5-8569-a71c-522482f47147" testName="Encoder_WritesReadableJpegAtRequestedLongestEdge" computerName="PC-20250309WEIZ" duration="00:00:00.0715821" startTime="2026-09-20T18:18:32.3441109+08:00" endTime="2026-09-20T18:18:32.4311031+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc9f7b85-76e4-4c12-aa23-33acc2e6a864" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Encoder_WritesReadableJpegAtRealRawDimensionsWithoutFullSizeThumbnail" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1fd829f6-cb58-8ade-a942-a7eb0acde44d">
+      <Execution id="87cdd66f-c74c-450c-bca7-1623c38928de" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Encoder_WritesReadableJpegAtRealRawDimensionsWithoutFullSizeThumbnail" />
+    </UnitTest>
+    <UnitTest name="Modal_DeclaresDropAndSourceSafetyContract" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19b2c852-b972-838c-9714-ace7bfff0653">
+      <Execution id="b48d5a9b-bf59-4d89-9f78-d261e9b887e1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Modal_DeclaresDropAndSourceSafetyContract" />
+    </UnitTest>
+    <UnitTest name="Encoder_WritesReadableJpegAtRequestedLongestEdge" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1690e6e3-b6f5-8569-a71c-522482f47147">
+      <Execution id="cc9f7b85-76e4-4c12-aa23-33acc2e6a864" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Encoder_WritesReadableJpegAtRequestedLongestEdge" />
+    </UnitTest>
+    <UnitTest name="Encoder_AppliesNinetyDegreeOrientation" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1973ec5f-17d1-8ce7-a324-c5cd068b6b54">
+      <Execution id="7e7eb1b5-5191-42e7-9da1-1c3ce7042681" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Encoder_AppliesNinetyDegreeOrientation" />
+    </UnitTest>
+    <UnitTest name="Encoder_WhenAutoRotateIsDisabled_KeepsPixelsAndOrientationTag" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10414be7-eac6-8c20-a3b1-6cec6bb80db8">
+      <Execution id="dd41e965-ec38-4265-a925-f19d45bb015a" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Encoder_WhenAutoRotateIsDisabled_KeepsPixelsAndOrientationTag" />
+    </UnitTest>
+    <UnitTest name="Encoder_PreservesExifAndNormalizesOrientationAfterRotation" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="130b4693-2fd5-82f2-86c5-170cf6ab286d">
+      <Execution id="f5374124-181a-48bd-8925-bcb5f693c506" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawToJpegWpfTests" name="Encoder_PreservesExifAndNormalizesOrientationAfterRotation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19b2c852-b972-838c-9714-ace7bfff0653" executionId="b48d5a9b-bf59-4d89-9f78-d261e9b887e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="130b4693-2fd5-82f2-86c5-170cf6ab286d" executionId="f5374124-181a-48bd-8925-bcb5f693c506" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fd829f6-cb58-8ade-a942-a7eb0acde44d" executionId="87cdd66f-c74c-450c-bca7-1623c38928de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1973ec5f-17d1-8ce7-a324-c5cd068b6b54" executionId="7e7eb1b5-5191-42e7-9da1-1c3ce7042681" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10414be7-eac6-8c20-a3b1-6cec6bb80db8" executionId="dd41e965-ec38-4265-a925-f19d45bb015a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1690e6e3-b6f5-8569-a71c-522482f47147" executionId="cc9f7b85-76e4-4c12-aa23-33acc2e6a864" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,6 +1,6 @@
 # Product accessibility map
 
-Source: `44009930e2fa40ef785b6bd85c16a31518f8acab`. Actual production App.xaml/MainWindow peer evidence: `artifacts/one-pass-contract/4400993/peer-states.json`, 39 behavioral/peer checks in `checks.json`, passing `contract.trx`. This map does not claim installed native dialog coverage.
+Source: `f505a177106a38fc23550edd87949f235238fb79`. Re-run production App.xaml/MainWindow peer evidence: `artifacts/whole-app-product-polish/peers-final/peer-states.json`, 39 behavioral/peer checks in `checks.json`, passing `artifacts/whole-app-product-polish/tests-final-source/contract.trx`. This map does not claim installed native dialog coverage. Historical 4400993 evidence is superseded for this UI source, not relabelled.
 
 ```text
 MainWindow (Window; owned process)

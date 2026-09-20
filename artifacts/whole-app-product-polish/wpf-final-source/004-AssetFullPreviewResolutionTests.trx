@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="27ce5805-a201-428e-9562-c97a5248c8f4" name="Administrator@PC-20250309WEIZ 2026-09-20 18:08:55" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:08:55.6283731+08:00" queuing="2026-09-20T18:08:55.6283732+08:00" start="2026-09-20T18:08:54.5692277+08:00" finish="2026-09-20T18:08:55.6326371+08:00" />
+  <TestSettings name="default" id="ee9488ae-ee1f-4240-975d-9fd2e56a2b18">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_08_55" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a5d34594-9c14-480b-802a-b122ece2c2df" testId="16098c54-bc16-82f7-a2ae-a36487d2f603" testName="ViewerReplacesBoundedFirstFrameWithOriginalPixels" computerName="PC-20250309WEIZ" duration="00:00:00.4873231" startTime="2026-09-20T18:08:55.0152241+08:00" endTime="2026-09-20T18:08:55.5189553+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5d34594-9c14-480b-802a-b122ece2c2df" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ViewerReplacesBoundedFirstFrameWithOriginalPixels" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16098c54-bc16-82f7-a2ae-a36487d2f603">
+      <Execution id="a5d34594-9c14-480b-802a-b122ece2c2df" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetFullPreviewResolutionTests" name="ViewerReplacesBoundedFirstFrameWithOriginalPixels" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16098c54-bc16-82f7-a2ae-a36487d2f603" executionId="a5d34594-9c14-480b-802a-b122ece2c2df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="47f71ac3-55f5-4d48-b4d6-bc9786d5815f" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:35" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:35.1480856+08:00" queuing="2026-09-20T18:17:35.1480858+08:00" start="2026-09-20T18:17:34.5979094+08:00" finish="2026-09-20T18:17:35.1751662+08:00" />
+  <TestSettings name="default" id="ab06593f-c470-458b-97c0-1afc52e07fc1">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_35" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="49bf25c7-527e-428d-b05a-d5116a313bbd" testId="1589c430-9ef6-8edc-8306-30d736b72f2b" testName="ShellCloseAndEscape_UseOneNavigationOnlyPath" computerName="PC-20250309WEIZ" duration="00:00:00.0014948" startTime="2026-09-20T18:17:35.0759975+08:00" endTime="2026-09-20T18:17:35.0777460+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49bf25c7-527e-428d-b05a-d5116a313bbd" />
+    <UnitTestResult executionId="7f2e19c8-b958-4a14-948a-17626d6da0f5" testId="1ae7b62e-ea13-848e-9cc0-4be31b749c4a" testName="ShellCloseNeverClosesApplicationOrDeletesFiles" computerName="PC-20250309WEIZ" duration="00:00:00.0007274" startTime="2026-09-20T18:17:35.0903178+08:00" endTime="2026-09-20T18:17:35.0910809+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7f2e19c8-b958-4a14-948a-17626d6da0f5" />
+    <UnitTestResult executionId="10d25552-3dbc-4bff-9fab-b0509f1e572c" testId="1322a011-94e8-8c5d-b6eb-45e623da5f2c" testName="RawAndBatch_SeparateCloseSurfaceFromCancelTask" computerName="PC-20250309WEIZ" duration="00:00:00.0011738" startTime="2026-09-20T18:17:35.0802984+08:00" endTime="2026-09-20T18:17:35.0815000+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="10d25552-3dbc-4bff-9fab-b0509f1e572c" />
+    <UnitTestResult executionId="a3fad3ed-7764-46b1-82f0-d07a90afc617" testId="12b3ec0c-646b-8992-872e-33e2ad2f25f4" testName="SurfaceNavigationContract_DeclaresHistoryOriginAndFallbackOperations" computerName="PC-20250309WEIZ" duration="00:00:00.0002400" startTime="2026-09-20T18:17:35.0911030+08:00" endTime="2026-09-20T18:17:35.0913690+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a3fad3ed-7764-46b1-82f0-d07a90afc617" />
+    <UnitTestResult executionId="05f936f3-8907-42b3-b009-2d4f5bc65f24" testId="1885aaf6-4b7d-8751-989d-8f773a435cd7" testName="TutorialButtonTutorialXAndEscape_ConvergeOnSingleForceExitTutorial" computerName="PC-20250309WEIZ" duration="00:00:00.0016910" startTime="2026-09-20T18:17:35.0785577+08:00" endTime="2026-09-20T18:17:35.0802788+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05f936f3-8907-42b3-b009-2d4f5bc65f24" />
+    <UnitTestResult executionId="2bae2c8b-c816-4f3a-b1da-7a7f31643d26" testId="13ebb47c-f062-8713-85fc-c3835cd063b0" testName="RequiredSurfaceMatrix_ExposesShellOwnedClose" computerName="PC-20250309WEIZ" duration="00:00:00.0078084" startTime="2026-09-20T18:17:35.0815193+08:00" endTime="2026-09-20T18:17:35.0893702+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2bae2c8b-c816-4f3a-b1da-7a7f31643d26" />
+    <UnitTestResult executionId="fd70e669-b53c-44dd-9812-8a1cd1c72d1c" testId="15fb0d8f-c3cd-8276-8c27-240de722eed9" testName="Escape_ClosesInputPopupBeforeClosingSurface" computerName="PC-20250309WEIZ" duration="00:00:00.0004874" startTime="2026-09-20T18:17:35.0780090+08:00" endTime="2026-09-20T18:17:35.0785372+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fd70e669-b53c-44dd-9812-8a1cd1c72d1c" />
+    <UnitTestResult executionId="103b70a1-438f-4548-ae14-1875afa816ae" testId="1b682db4-6613-80f7-b566-2ade3b77b9f4" testName="SharedEscapeHatch_IsVector40DipAndHasNoBusinessCommandDependency" computerName="PC-20250309WEIZ" duration="00:00:00.0062721" startTime="2026-09-20T18:17:35.0520489+08:00" endTime="2026-09-20T18:17:35.0723620+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="103b70a1-438f-4548-ae14-1875afa816ae" />
+    <UnitTestResult executionId="966b045a-d508-41cd-bace-d4f49fc35c43" testId="12242af3-ba6e-8aa9-837b-53417121b477" testName="TaskDetailAndErrorDetail_HaveRealCloseRoutes" computerName="PC-20250309WEIZ" duration="00:00:00.0012592" startTime="2026-09-20T18:17:35.1144560+08:00" endTime="2026-09-20T18:17:35.1167584+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="966b045a-d508-41cd-bace-d4f49fc35c43" />
+    <UnitTestResult executionId="599fb3e1-780d-4083-90ad-69a9758b2a4e" testId="1c086c06-670e-8d49-b9e7-79b4e0a34ae0" testName="FailureAndBusyStates_CannotDisableSurfaceClose" computerName="PC-20250309WEIZ" duration="00:00:00.0008398" startTime="2026-09-20T18:17:35.0894078+08:00" endTime="2026-09-20T18:17:35.0902907+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="599fb3e1-780d-4083-90ad-69a9758b2a4e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Escape_ClosesInputPopupBeforeClosingSurface" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15fb0d8f-c3cd-8276-8c27-240de722eed9">
+      <Execution id="fd70e669-b53c-44dd-9812-8a1cd1c72d1c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="Escape_ClosesInputPopupBeforeClosingSurface" />
+    </UnitTest>
+    <UnitTest name="RawAndBatch_SeparateCloseSurfaceFromCancelTask" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1322a011-94e8-8c5d-b6eb-45e623da5f2c">
+      <Execution id="10d25552-3dbc-4bff-9fab-b0509f1e572c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="RawAndBatch_SeparateCloseSurfaceFromCancelTask" />
+    </UnitTest>
+    <UnitTest name="ShellCloseNeverClosesApplicationOrDeletesFiles" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ae7b62e-ea13-848e-9cc0-4be31b749c4a">
+      <Execution id="7f2e19c8-b958-4a14-948a-17626d6da0f5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="ShellCloseNeverClosesApplicationOrDeletesFiles" />
+    </UnitTest>
+    <UnitTest name="TaskDetailAndErrorDetail_HaveRealCloseRoutes" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12242af3-ba6e-8aa9-837b-53417121b477">
+      <Execution id="966b045a-d508-41cd-bace-d4f49fc35c43" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="TaskDetailAndErrorDetail_HaveRealCloseRoutes" />
+    </UnitTest>
+    <UnitTest name="SurfaceNavigationContract_DeclaresHistoryOriginAndFallbackOperations" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12b3ec0c-646b-8992-872e-33e2ad2f25f4">
+      <Execution id="a3fad3ed-7764-46b1-82f0-d07a90afc617" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="SurfaceNavigationContract_DeclaresHistoryOriginAndFallbackOperations" />
+    </UnitTest>
+    <UnitTest name="RequiredSurfaceMatrix_ExposesShellOwnedClose" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13ebb47c-f062-8713-85fc-c3835cd063b0">
+      <Execution id="2bae2c8b-c816-4f3a-b1da-7a7f31643d26" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="RequiredSurfaceMatrix_ExposesShellOwnedClose" />
+    </UnitTest>
+    <UnitTest name="SharedEscapeHatch_IsVector40DipAndHasNoBusinessCommandDependency" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b682db4-6613-80f7-b566-2ade3b77b9f4">
+      <Execution id="103b70a1-438f-4548-ae14-1875afa816ae" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="SharedEscapeHatch_IsVector40DipAndHasNoBusinessCommandDependency" />
+    </UnitTest>
+    <UnitTest name="TutorialButtonTutorialXAndEscape_ConvergeOnSingleForceExitTutorial" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1885aaf6-4b7d-8751-989d-8f773a435cd7">
+      <Execution id="05f936f3-8907-42b3-b009-2d4f5bc65f24" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="TutorialButtonTutorialXAndEscape_ConvergeOnSingleForceExitTutorial" />
+    </UnitTest>
+    <UnitTest name="FailureAndBusyStates_CannotDisableSurfaceClose" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c086c06-670e-8d49-b9e7-79b4e0a34ae0">
+      <Execution id="599fb3e1-780d-4083-90ad-69a9758b2a4e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="FailureAndBusyStates_CannotDisableSurfaceClose" />
+    </UnitTest>
+    <UnitTest name="ShellCloseAndEscape_UseOneNavigationOnlyPath" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1589c430-9ef6-8edc-8306-30d736b72f2b">
+      <Execution id="49bf25c7-527e-428d-b05a-d5116a313bbd" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.GlobalSurfaceCloseSmokeTests" name="ShellCloseAndEscape_UseOneNavigationOnlyPath" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1589c430-9ef6-8edc-8306-30d736b72f2b" executionId="49bf25c7-527e-428d-b05a-d5116a313bbd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ae7b62e-ea13-848e-9cc0-4be31b749c4a" executionId="7f2e19c8-b958-4a14-948a-17626d6da0f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1322a011-94e8-8c5d-b6eb-45e623da5f2c" executionId="10d25552-3dbc-4bff-9fab-b0509f1e572c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12b3ec0c-646b-8992-872e-33e2ad2f25f4" executionId="a3fad3ed-7764-46b1-82f0-d07a90afc617" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1885aaf6-4b7d-8751-989d-8f773a435cd7" executionId="05f936f3-8907-42b3-b009-2d4f5bc65f24" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13ebb47c-f062-8713-85fc-c3835cd063b0" executionId="2bae2c8b-c816-4f3a-b1da-7a7f31643d26" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15fb0d8f-c3cd-8276-8c27-240de722eed9" executionId="fd70e669-b53c-44dd-9812-8a1cd1c72d1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b682db4-6613-80f7-b566-2ade3b77b9f4" executionId="103b70a1-438f-4548-ae14-1875afa816ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12242af3-ba6e-8aa9-837b-53417121b477" executionId="966b045a-d508-41cd-bace-d4f49fc35c43" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c086c06-670e-8d49-b9e7-79b4e0a34ae0" executionId="599fb3e1-780d-4083-90ad-69a9758b2a4e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

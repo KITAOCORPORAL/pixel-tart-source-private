@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ffe25cf6-64f5-435e-aab2-13b635683923" name="Administrator@PC-20250309WEIZ 2026-09-20 18:19:08" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:19:08.0843752+08:00" queuing="2026-09-20T18:19:08.0843756+08:00" start="2026-09-20T18:19:07.5403577+08:00" finish="2026-09-20T18:19:08.1115196+08:00" />
+  <TestSettings name="default" id="7e8b72a7-6cf9-49bf-b290-e352bbc55498">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_19_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="9dd16a2e-3951-4952-9c31-b41eb5feefd8" testId="1a3a9a13-2dcc-84dd-af84-5b9a0ea2a458" testName="ReminderAndWorkbench_DeclareKeyboardFocusableButtonsAndLiveStatus" computerName="PC-20250309WEIZ" duration="00:00:00.0003579" startTime="2026-09-20T18:19:08.0276602+08:00" endTime="2026-09-20T18:19:08.0280436+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9dd16a2e-3951-4952-9c31-b41eb5feefd8" />
+    <UnitTestResult executionId="d038d4f8-652c-4395-a1cd-ce1a1b7ce7b1" testId="18677678-3776-882b-8395-2af04e26b36c" testName="ReminderNotifications_ExposeOpenLaterAndAcknowledgeWithAccessibilityNames" computerName="PC-20250309WEIZ" duration="00:00:00.0002743" startTime="2026-09-20T18:19:08.0256116+08:00" endTime="2026-09-20T18:19:08.0259101+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d038d4f8-652c-4395-a1cd-ce1a1b7ce7b1" />
+    <UnitTestResult executionId="8d132a94-63c8-4405-8ef4-02ad7dc91a78" testId="1462a064-3f80-82ec-96d8-a6006e32233c" testName="StageDViewModels_DoNotAccessSqliteOrDirectFileOperations" computerName="PC-20250309WEIZ" duration="00:00:00.0003296" startTime="2026-09-20T18:19:08.0252364+08:00" endTime="2026-09-20T18:19:08.0255943+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d132a94-63c8-4405-8ef4-02ad7dc91a78" />
+    <UnitTestResult executionId="c801014f-fa2c-49c2-80d4-be8060889793" testId="18dce385-60ec-8af3-8f57-677623065088" testName="WorkbenchSchedule_IsIndependentFromMainViewModelBusinessLogic" computerName="PC-20250309WEIZ" duration="00:00:00.0008404" startTime="2026-09-20T18:19:08.0243395+08:00" endTime="2026-09-20T18:19:08.0252142+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c801014f-fa2c-49c2-80d4-be8060889793" />
+    <UnitTestResult executionId="2a6bc164-3e62-48c8-951c-d3aec29f26f1" testId="19842c26-a600-8137-82cf-74ff840db428" testName="PersistedUnreadReminder_IsRestoredIntoNotificationUiAfterRestart" computerName="PC-20250309WEIZ" duration="00:00:00.0039151" startTime="2026-09-20T18:19:08.0501717+08:00" endTime="2026-09-20T18:19:08.0550980+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a6bc164-3e62-48c8-951c-d3aec29f26f1" />
+    <UnitTestResult executionId="540e8c78-7416-4739-afe4-5a7724fb42aa" testId="123f09ff-98c1-80b7-b030-5615dcc14c1b" testName="ReminderPanel_IsEmbeddedInSharedBookingDetails" computerName="PC-20250309WEIZ" duration="00:00:00.0005948" startTime="2026-09-20T18:19:08.0222410+08:00" endTime="2026-09-20T18:19:08.0231175+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="540e8c78-7416-4739-afe4-5a7724fb42aa" />
+    <UnitTestResult executionId="20396184-271a-4d46-8f16-263f38cc7ddc" testId="1547dd75-9e63-8904-8587-9b696424b162" testName="StageDXaml_IsWellFormed" computerName="PC-20250309WEIZ" duration="00:00:00.0008973" startTime="2026-09-20T18:19:08.0267174+08:00" endTime="2026-09-20T18:19:08.0276428+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="20396184-271a-4d46-8f16-263f38cc7ddc" />
+    <UnitTestResult executionId="43ede03c-c4ac-4b36-bb7a-f82d57ca19dc" testId="15baf758-0a80-8b5d-b6b3-f7433bce2d00" testName="StageDViews_UseDynamicThemesAndNoScaleTransforms" computerName="PC-20250309WEIZ" duration="00:00:00.0007442" startTime="2026-09-20T18:19:08.0259261+08:00" endTime="2026-09-20T18:19:08.0266992+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43ede03c-c4ac-4b36-bb7a-f82d57ca19dc" />
+    <UnitTestResult executionId="b35622ef-7d0f-4e90-8c48-bd622a1e14b4" testId="1c810cf7-cd62-8e62-9aa3-90d420ec691a" testName="Workbench_HasTodayFutureSevenAndOpenDetailsRoute" computerName="PC-20250309WEIZ" duration="00:00:00.0008111" startTime="2026-09-20T18:19:08.0234556+08:00" endTime="2026-09-20T18:19:08.0243150+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b35622ef-7d0f-4e90-8c48-bd622a1e14b4" />
+    <UnitTestResult executionId="fdb47d8c-b0a0-472f-9fa8-3be9d7ea169e" testId="1b430aa2-2238-8c5e-975b-c2a70c4e0950" testName="ReminderPanel_DeclaresDefaultOffMessageAndAllActions" computerName="PC-20250309WEIZ" duration="00:00:00.0052285" startTime="2026-09-20T18:19:07.9988808+08:00" endTime="2026-09-20T18:19:08.0185719+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fdb47d8c-b0a0-472f-9fa8-3be9d7ea169e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ReminderPanel_DeclaresDefaultOffMessageAndAllActions" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b430aa2-2238-8c5e-975b-c2a70c4e0950">
+      <Execution id="fdb47d8c-b0a0-472f-9fa8-3be9d7ea169e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="ReminderPanel_DeclaresDefaultOffMessageAndAllActions" />
+    </UnitTest>
+    <UnitTest name="ReminderPanel_IsEmbeddedInSharedBookingDetails" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="123f09ff-98c1-80b7-b030-5615dcc14c1b">
+      <Execution id="540e8c78-7416-4739-afe4-5a7724fb42aa" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="ReminderPanel_IsEmbeddedInSharedBookingDetails" />
+    </UnitTest>
+    <UnitTest name="WorkbenchSchedule_IsIndependentFromMainViewModelBusinessLogic" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18dce385-60ec-8af3-8f57-677623065088">
+      <Execution id="c801014f-fa2c-49c2-80d4-be8060889793" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="WorkbenchSchedule_IsIndependentFromMainViewModelBusinessLogic" />
+    </UnitTest>
+    <UnitTest name="PersistedUnreadReminder_IsRestoredIntoNotificationUiAfterRestart" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19842c26-a600-8137-82cf-74ff840db428">
+      <Execution id="2a6bc164-3e62-48c8-951c-d3aec29f26f1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="PersistedUnreadReminder_IsRestoredIntoNotificationUiAfterRestart" />
+    </UnitTest>
+    <UnitTest name="ReminderAndWorkbench_DeclareKeyboardFocusableButtonsAndLiveStatus" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a3a9a13-2dcc-84dd-af84-5b9a0ea2a458">
+      <Execution id="9dd16a2e-3951-4952-9c31-b41eb5feefd8" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="ReminderAndWorkbench_DeclareKeyboardFocusableButtonsAndLiveStatus" />
+    </UnitTest>
+    <UnitTest name="StageDViews_UseDynamicThemesAndNoScaleTransforms" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15baf758-0a80-8b5d-b6b3-f7433bce2d00">
+      <Execution id="43ede03c-c4ac-4b36-bb7a-f82d57ca19dc" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="StageDViews_UseDynamicThemesAndNoScaleTransforms" />
+    </UnitTest>
+    <UnitTest name="ReminderNotifications_ExposeOpenLaterAndAcknowledgeWithAccessibilityNames" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18677678-3776-882b-8395-2af04e26b36c">
+      <Execution id="d038d4f8-652c-4395-a1cd-ce1a1b7ce7b1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="ReminderNotifications_ExposeOpenLaterAndAcknowledgeWithAccessibilityNames" />
+    </UnitTest>
+    <UnitTest name="StageDXaml_IsWellFormed" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1547dd75-9e63-8904-8587-9b696424b162">
+      <Execution id="20396184-271a-4d46-8f16-263f38cc7ddc" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="StageDXaml_IsWellFormed" />
+    </UnitTest>
+    <UnitTest name="StageDViewModels_DoNotAccessSqliteOrDirectFileOperations" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1462a064-3f80-82ec-96d8-a6006e32233c">
+      <Execution id="8d132a94-63c8-4405-8ef4-02ad7dc91a78" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="StageDViewModels_DoNotAccessSqliteOrDirectFileOperations" />
+    </UnitTest>
+    <UnitTest name="Workbench_HasTodayFutureSevenAndOpenDetailsRoute" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c810cf7-cd62-8e62-9aa3-90d420ec691a">
+      <Execution id="b35622ef-7d0f-4e90-8c48-bd622a1e14b4" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version220StageDUiTests" name="Workbench_HasTodayFutureSevenAndOpenDetailsRoute" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1a3a9a13-2dcc-84dd-af84-5b9a0ea2a458" executionId="9dd16a2e-3951-4952-9c31-b41eb5feefd8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18677678-3776-882b-8395-2af04e26b36c" executionId="d038d4f8-652c-4395-a1cd-ce1a1b7ce7b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1462a064-3f80-82ec-96d8-a6006e32233c" executionId="8d132a94-63c8-4405-8ef4-02ad7dc91a78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18dce385-60ec-8af3-8f57-677623065088" executionId="c801014f-fa2c-49c2-80d4-be8060889793" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19842c26-a600-8137-82cf-74ff840db428" executionId="2a6bc164-3e62-48c8-951c-d3aec29f26f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="123f09ff-98c1-80b7-b030-5615dcc14c1b" executionId="540e8c78-7416-4739-afe4-5a7724fb42aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1547dd75-9e63-8904-8587-9b696424b162" executionId="20396184-271a-4d46-8f16-263f38cc7ddc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15baf758-0a80-8b5d-b6b3-f7433bce2d00" executionId="43ede03c-c4ac-4b36-bb7a-f82d57ca19dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c810cf7-cd62-8e62-9aa3-90d420ec691a" executionId="b35622ef-7d0f-4e90-8c48-bd622a1e14b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b430aa2-2238-8c5e-975b-c2a70c4e0950" executionId="fdb47d8c-b0a0-472f-9fa8-3be9d7ea169e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

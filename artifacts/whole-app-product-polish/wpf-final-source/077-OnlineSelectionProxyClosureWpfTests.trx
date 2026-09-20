@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="faba10d8-aec9-4b04-8faf-80a4342da107" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:50" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:50.7922626+08:00" queuing="2026-09-20T18:17:50.7922630+08:00" start="2026-09-20T18:17:49.8697337+08:00" finish="2026-09-20T18:17:50.8285338+08:00" />
+  <TestSettings name="default" id="32cb8ff1-425c-4db9-b5eb-df045602cdba">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_50" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a9008aa1-1519-4709-97c7-60e7df1d33a5" testId="148986df-aa9f-813b-9579-031c72d2389a" testName="ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart" computerName="PC-20250309WEIZ" duration="00:00:00.1176768" startTime="2026-09-20T18:17:50.4866386+08:00" endTime="2026-09-20T18:17:50.6043786+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9008aa1-1519-4709-97c7-60e7df1d33a5" />
+    <UnitTestResult executionId="eeab4a33-6eb6-48eb-a003-7661a501711e" testId="1b9965d1-2c5b-8db2-90ca-673a61ee9883" testName="CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft" computerName="PC-20250309WEIZ" duration="00:00:00.0585320" startTime="2026-09-20T18:17:50.6460252+08:00" endTime="2026-09-20T18:17:50.7046328+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eeab4a33-6eb6-48eb-a003-7661a501711e" />
+    <UnitTestResult executionId="acfa9648-33c9-4302-a2a1-4ef8503b1d84" testId="13b01e44-1680-852f-bd17-879cf80e8b33" testName="PublicRawSamples_WhenPresentGeneratePrivateProxiesWithoutChangingSources" computerName="PC-20250309WEIZ" duration="00:00:00.0017205" startTime="2026-09-20T18:17:50.7573968+08:00" endTime="2026-09-20T18:17:50.7601672+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="acfa9648-33c9-4302-a2a1-4ef8503b1d84" />
+    <UnitTestResult executionId="53b2b5a8-bf6c-4627-bcd6-d737e9b4b1b1" testId="14c2b6d0-16e1-8429-84fa-8479dce56010" testName="JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged" computerName="PC-20250309WEIZ" duration="00:00:00.1363861" startTime="2026-09-20T18:17:50.3183087+08:00" endTime="2026-09-20T18:17:50.4704518+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53b2b5a8-bf6c-4627-bcd6-d737e9b4b1b1" />
+    <UnitTestResult executionId="64aada29-63d0-4fa1-beb4-3905dfaa3a88" testId="19a5fa2b-43b8-89e6-8049-c06d055413ac" testName="ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch" computerName="PC-20250309WEIZ" duration="00:00:00.0104497" startTime="2026-09-20T18:17:50.6193475+08:00" endTime="2026-09-20T18:17:50.6298658+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64aada29-63d0-4fa1-beb4-3905dfaa3a88" />
+    <UnitTestResult executionId="c3b852da-95f2-410d-9ce7-3bd014d6beb5" testId="1f602578-96f5-8bb9-bafc-f2f92dbbac5b" testName="OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure" computerName="PC-20250309WEIZ" duration="00:00:00.0040475" startTime="2026-09-20T18:17:50.6151980+08:00" endTime="2026-09-20T18:17:50.6193109+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c3b852da-95f2-410d-9ce7-3bd014d6beb5" />
+    <UnitTestResult executionId="686073fc-b0d5-4d99-8088-dd87396ab8dd" testId="14adf43c-3aaa-889e-b20c-bd099e1f14e9" testName="RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults" computerName="PC-20250309WEIZ" duration="00:00:00.0120307" startTime="2026-09-20T18:17:50.4739730+08:00" endTime="2026-09-20T18:17:50.4863030+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="686073fc-b0d5-4d99-8088-dd87396ab8dd" />
+    <UnitTestResult executionId="37adda83-dfa9-47b0-8735-19bb3f79ae57" testId="11b988f7-9e0d-8dbf-b293-e3f3a9ae2424" testName="ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit" computerName="PC-20250309WEIZ" duration="00:00:00.0106888" startTime="2026-09-20T18:17:50.6044120+08:00" endTime="2026-09-20T18:17:50.6151613+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="37adda83-dfa9-47b0-8735-19bb3f79ae57" />
+    <UnitTestResult executionId="4177df33-e219-4760-aee6-f4e0aecc2136" testId="111d9a84-3e29-8d9a-b5cc-9c8350fe7678" testName="SyncResultsCommand_WithoutParameterChoosesArchiveDirectory" computerName="PC-20250309WEIZ" duration="00:00:00.0277465" startTime="2026-09-20T18:17:50.7046729+08:00" endTime="2026-09-20T18:17:50.7324957+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4177df33-e219-4760-aee6-f4e0aecc2136" />
+    <UnitTestResult executionId="2ff81b11-e0dd-4552-be06-f054fa8d0dc2" testId="1d3abdbc-46bf-8237-a9cd-4efbc84701f5" testName="AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog" computerName="PC-20250309WEIZ" duration="00:00:00.0159842" startTime="2026-09-20T18:17:50.6299067+08:00" endTime="2026-09-20T18:17:50.6459686+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ff81b11-e0dd-4552-be06-f054fa8d0dc2" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="148986df-aa9f-813b-9579-031c72d2389a">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="a9008aa1-1519-4709-97c7-60e7df1d33a5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart" />
+    </UnitTest>
+    <UnitTest name="RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14adf43c-3aaa-889e-b20c-bd099e1f14e9">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="686073fc-b0d5-4d99-8088-dd87396ab8dd" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults" />
+    </UnitTest>
+    <UnitTest name="SyncResultsCommand_WithoutParameterChoosesArchiveDirectory" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="111d9a84-3e29-8d9a-b5cc-9c8350fe7678">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="4177df33-e219-4760-aee6-f4e0aecc2136" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="SyncResultsCommand_WithoutParameterChoosesArchiveDirectory" />
+    </UnitTest>
+    <UnitTest name="ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19a5fa2b-43b8-89e6-8049-c06d055413ac">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="64aada29-63d0-4fa1-beb4-3905dfaa3a88" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch" />
+    </UnitTest>
+    <UnitTest name="PublicRawSamples_WhenPresentGeneratePrivateProxiesWithoutChangingSources" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13b01e44-1680-852f-bd17-879cf80e8b33">
+      <TestCategory>
+        <TestCategoryItem TestCategory="RawProbe" />
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="acfa9648-33c9-4302-a2a1-4ef8503b1d84" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="PublicRawSamples_WhenPresentGeneratePrivateProxiesWithoutChangingSources" />
+    </UnitTest>
+    <UnitTest name="JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14c2b6d0-16e1-8429-84fa-8479dce56010">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="53b2b5a8-bf6c-4627-bcd6-d737e9b4b1b1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged" />
+    </UnitTest>
+    <UnitTest name="OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f602578-96f5-8bb9-bafc-f2f92dbbac5b">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="c3b852da-95f2-410d-9ce7-3bd014d6beb5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure" />
+    </UnitTest>
+    <UnitTest name="AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d3abdbc-46bf-8237-a9cd-4efbc84701f5">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="2ff81b11-e0dd-4552-be06-f054fa8d0dc2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog" />
+    </UnitTest>
+    <UnitTest name="CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b9965d1-2c5b-8db2-90ca-673a61ee9883">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="eeab4a33-6eb6-48eb-a003-7661a501711e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft" />
+    </UnitTest>
+    <UnitTest name="ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11b988f7-9e0d-8dbf-b293-e3f3a9ae2424">
+      <TestCategory>
+        <TestCategoryItem TestCategory="OnlineSelection" />
+      </TestCategory>
+      <Execution id="37adda83-dfa9-47b0-8735-19bb3f79ae57" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests" name="ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="148986df-aa9f-813b-9579-031c72d2389a" executionId="a9008aa1-1519-4709-97c7-60e7df1d33a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b9965d1-2c5b-8db2-90ca-673a61ee9883" executionId="eeab4a33-6eb6-48eb-a003-7661a501711e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13b01e44-1680-852f-bd17-879cf80e8b33" executionId="acfa9648-33c9-4302-a2a1-4ef8503b1d84" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14c2b6d0-16e1-8429-84fa-8479dce56010" executionId="53b2b5a8-bf6c-4627-bcd6-d737e9b4b1b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19a5fa2b-43b8-89e6-8049-c06d055413ac" executionId="64aada29-63d0-4fa1-beb4-3905dfaa3a88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f602578-96f5-8bb9-bafc-f2f92dbbac5b" executionId="c3b852da-95f2-410d-9ce7-3bd014d6beb5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14adf43c-3aaa-889e-b20c-bd099e1f14e9" executionId="686073fc-b0d5-4d99-8088-dd87396ab8dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11b988f7-9e0d-8dbf-b293-e3f3a9ae2424" executionId="37adda83-dfa9-47b0-8735-19bb3f79ae57" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="111d9a84-3e29-8d9a-b5cc-9c8350fe7678" executionId="4177df33-e219-4760-aee6-f4e0aecc2136" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d3abdbc-46bf-8237-a9cd-4efbc84701f5" executionId="2ff81b11-e0dd-4552-be06-f054fa8d0dc2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="727968c9-3623-4154-ae53-878e7bef1206" name="Administrator@PC-20250309WEIZ 2026-09-20 18:16:51" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:16:51.6670447+08:00" queuing="2026-09-20T18:16:51.6670450+08:00" start="2026-09-20T18:16:50.9324794+08:00" finish="2026-09-20T18:16:51.6718895+08:00" />
+  <TestSettings name="default" id="168ae5a9-7ecb-4892-b9e1-a4275fb3c9f8">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_16_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f39a39d4-9709-41d4-8f25-190ce3644012" testId="14bdd45d-cd59-8821-bb8a-a0ca03c1d38a" testName="UnsavedEditor_CancelReplacementAndWindowCloseKeepCurrentInput" computerName="PC-20250309WEIZ" duration="00:00:00.1182617" startTime="2026-09-20T18:16:51.3888902+08:00" endTime="2026-09-20T18:16:51.5216310+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f39a39d4-9709-41d4-8f25-190ce3644012" />
+    <UnitTestResult executionId="f6e666bc-2191-4afb-991b-2787224acc5c" testId="19d1e12b-5197-8c28-99cd-14141911447b" testName="NewBookingCommand_RaisesForSelectedDateAndClosedDayChanges" computerName="PC-20250309WEIZ" duration="00:00:00.0222852" startTime="2026-09-20T18:16:51.5462528+08:00" endTime="2026-09-20T18:16:51.5695054+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6e666bc-2191-4afb-991b-2787224acc5c" />
+    <UnitTestResult executionId="7e4bb119-17b7-4c3a-b3dd-144c72363fd1" testId="1e4447b1-462d-8a6c-9f8a-c71462372603" testName="DraftDocumentOnly_CancelReplacementAndWindowCloseKeepSourceFileSafe" computerName="PC-20250309WEIZ" duration="00:00:00.0195711" startTime="2026-09-20T18:16:51.5250317+08:00" endTime="2026-09-20T18:16:51.5460076+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e4bb119-17b7-4c3a-b3dd-144c72363fd1" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="UnsavedEditor_CancelReplacementAndWindowCloseKeepCurrentInput" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14bdd45d-cd59-8821-bb8a-a0ca03c1d38a">
+      <Execution id="f39a39d4-9709-41d4-8f25-190ce3644012" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BookingCalendarSafetyClosureTests" name="UnsavedEditor_CancelReplacementAndWindowCloseKeepCurrentInput" />
+    </UnitTest>
+    <UnitTest name="NewBookingCommand_RaisesForSelectedDateAndClosedDayChanges" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19d1e12b-5197-8c28-99cd-14141911447b">
+      <Execution id="f6e666bc-2191-4afb-991b-2787224acc5c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BookingCalendarSafetyClosureTests" name="NewBookingCommand_RaisesForSelectedDateAndClosedDayChanges" />
+    </UnitTest>
+    <UnitTest name="DraftDocumentOnly_CancelReplacementAndWindowCloseKeepSourceFileSafe" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e4447b1-462d-8a6c-9f8a-c71462372603">
+      <Execution id="7e4bb119-17b7-4c3a-b3dd-144c72363fd1" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BookingCalendarSafetyClosureTests" name="DraftDocumentOnly_CancelReplacementAndWindowCloseKeepSourceFileSafe" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="14bdd45d-cd59-8821-bb8a-a0ca03c1d38a" executionId="f39a39d4-9709-41d4-8f25-190ce3644012" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19d1e12b-5197-8c28-99cd-14141911447b" executionId="f6e666bc-2191-4afb-991b-2787224acc5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e4447b1-462d-8a6c-9f8a-c71462372603" executionId="7e4bb119-17b7-4c3a-b3dd-144c72363fd1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

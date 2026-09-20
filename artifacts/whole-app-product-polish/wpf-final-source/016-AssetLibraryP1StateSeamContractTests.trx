@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="cef45862-cef3-44e0-8ab2-460c6b6c3a6d" name="Administrator@PC-20250309WEIZ 2026-09-20 18:15:08" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:15:08.0480549+08:00" queuing="2026-09-20T18:15:08.0480551+08:00" start="2026-09-20T18:15:07.4362002+08:00" finish="2026-09-20T18:15:08.0527721+08:00" />
+  <TestSettings name="default" id="6d16aa45-806c-477e-a930-2400ef82832a">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_15_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d6bdc9b5-c894-44e2-96a1-2ad1c0beaa53" testId="1a5bd80f-56fd-85bd-9484-28f2751a9b8d" testName="DedicatedBuildPropertyIsDevPreviewOnlyAndRejectedForAcceptanceAndRelease" computerName="PC-20250309WEIZ" duration="00:00:00.0086924" startTime="2026-09-20T18:15:07.9122383+08:00" endTime="2026-09-20T18:15:07.9380234+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d6bdc9b5-c894-44e2-96a1-2ad1c0beaa53" />
+    <UnitTestResult executionId="68aeb842-a1d6-42f4-9dfb-57488c0f5ac4" testId="15b9f42b-e25e-809e-b6fa-0c417607ac91" testName="RuntimeControllerHasExactOptInProcessAndIsolatedRootAllowlist" computerName="PC-20250309WEIZ" duration="00:00:00.0013567" startTime="2026-09-20T18:15:07.9418910+08:00" endTime="2026-09-20T18:15:07.9435194+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68aeb842-a1d6-42f4-9dfb-57488c0f5ac4" />
+    <UnitTestResult executionId="c22ab9ed-5b6f-4b22-ba92-ee73df9083e0" testId="1696ccc0-2342-84d5-9fbf-457b585bfce1" testName="SeamPreservesRealRepositoryStateBindingsAndStableAutomationIds" computerName="PC-20250309WEIZ" duration="00:00:00.0014120" startTime="2026-09-20T18:15:07.9453436+08:00" endTime="2026-09-20T18:15:07.9478752+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c22ab9ed-5b6f-4b22-ba92-ee73df9083e0" />
+    <UnitTestResult executionId="208b9ddd-47e6-446f-a5c8-d93f104eb0d6" testId="1a0dec01-cc86-8f6e-9de8-de8bd5233592" testName="SyntheticRouteOnlyControllerRejectsANonFreshFirstRoot" computerName="PC-20250309WEIZ" duration="00:00:00.0002586" startTime="2026-09-20T18:15:07.9450437+08:00" endTime="2026-09-20T18:15:07.9453277+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="208b9ddd-47e6-446f-a5c8-d93f104eb0d6" />
+    <UnitTestResult executionId="be242a81-2ead-48da-886b-ef48215e3ff0" testId="11c72ecf-d7ac-8378-9fc1-d80a5a1504d2" testName="AcceptanceStartRouteRuntimeGateRejectsMissingOrInvalidInputs" computerName="PC-20250309WEIZ" duration="00:00:00.0007741" startTime="2026-09-20T18:15:07.9437800+08:00" endTime="2026-09-20T18:15:07.9445964+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="be242a81-2ead-48da-886b-ef48215e3ff0" />
+    <UnitTestResult executionId="fc2c4bcf-ed0d-472f-85b3-16b463aaa888" testId="1bca0c92-0902-8ac0-bad0-fe0a4b4433bf" testName="SyntheticRouteOnlyControllerKeepsPreviewFixturesAndWritesFreshProvenance" computerName="PC-20250309WEIZ" duration="00:00:00.0003737" startTime="2026-09-20T18:15:07.9446210+08:00" endTime="2026-09-20T18:15:07.9450254+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc2c4bcf-ed0d-472f-85b3-16b463aaa888" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SyntheticRouteOnlyControllerKeepsPreviewFixturesAndWritesFreshProvenance" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1bca0c92-0902-8ac0-bad0-fe0a4b4433bf">
+      <Execution id="fc2c4bcf-ed0d-472f-85b3-16b463aaa888" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="SyntheticRouteOnlyControllerKeepsPreviewFixturesAndWritesFreshProvenance" />
+    </UnitTest>
+    <UnitTest name="RuntimeControllerHasExactOptInProcessAndIsolatedRootAllowlist" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15b9f42b-e25e-809e-b6fa-0c417607ac91">
+      <Execution id="68aeb842-a1d6-42f4-9dfb-57488c0f5ac4" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="RuntimeControllerHasExactOptInProcessAndIsolatedRootAllowlist" />
+    </UnitTest>
+    <UnitTest name="DedicatedBuildPropertyIsDevPreviewOnlyAndRejectedForAcceptanceAndRelease" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a5bd80f-56fd-85bd-9484-28f2751a9b8d">
+      <Execution id="d6bdc9b5-c894-44e2-96a1-2ad1c0beaa53" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="DedicatedBuildPropertyIsDevPreviewOnlyAndRejectedForAcceptanceAndRelease" />
+    </UnitTest>
+    <UnitTest name="SyntheticRouteOnlyControllerRejectsANonFreshFirstRoot" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a0dec01-cc86-8f6e-9de8-de8bd5233592">
+      <Execution id="208b9ddd-47e6-446f-a5c8-d93f104eb0d6" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="SyntheticRouteOnlyControllerRejectsANonFreshFirstRoot" />
+    </UnitTest>
+    <UnitTest name="AcceptanceStartRouteRuntimeGateRejectsMissingOrInvalidInputs" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11c72ecf-d7ac-8378-9fc1-d80a5a1504d2">
+      <Execution id="be242a81-2ead-48da-886b-ef48215e3ff0" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="AcceptanceStartRouteRuntimeGateRejectsMissingOrInvalidInputs" />
+    </UnitTest>
+    <UnitTest name="SeamPreservesRealRepositoryStateBindingsAndStableAutomationIds" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1696ccc0-2342-84d5-9fbf-457b585bfce1">
+      <Execution id="c22ab9ed-5b6f-4b22-ba92-ee73df9083e0" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP1StateSeamContractTests" name="SeamPreservesRealRepositoryStateBindingsAndStableAutomationIds" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1a5bd80f-56fd-85bd-9484-28f2751a9b8d" executionId="d6bdc9b5-c894-44e2-96a1-2ad1c0beaa53" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15b9f42b-e25e-809e-b6fa-0c417607ac91" executionId="68aeb842-a1d6-42f4-9dfb-57488c0f5ac4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1696ccc0-2342-84d5-9fbf-457b585bfce1" executionId="c22ab9ed-5b6f-4b22-ba92-ee73df9083e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a0dec01-cc86-8f6e-9de8-de8bd5233592" executionId="208b9ddd-47e6-446f-a5c8-d93f104eb0d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11c72ecf-d7ac-8378-9fc1-d80a5a1504d2" executionId="be242a81-2ead-48da-886b-ef48215e3ff0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bca0c92-0902-8ac0-bad0-fe0a4b4433bf" executionId="fc2c4bcf-ed0d-472f-85b3-16b463aaa888" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

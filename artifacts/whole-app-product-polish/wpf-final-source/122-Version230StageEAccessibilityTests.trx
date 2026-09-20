@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0579e7e3-72db-44a0-a393-7c2ccc847574" name="Administrator@PC-20250309WEIZ 2026-09-20 18:19:33" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:19:33.1107916+08:00" queuing="2026-09-20T18:19:33.1107918+08:00" start="2026-09-20T18:19:32.5485239+08:00" finish="2026-09-20T18:19:33.1153741+08:00" />
+  <TestSettings name="default" id="6d405880-992a-4666-9ab6-df5e59a7a907">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_19_33" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8bf48d91-807c-41ce-9738-6ffb93f9b622" testId="14a9a9ab-2b82-80a8-b255-2f67285dde96" testName="TetherWorkspace_AllInteractiveControlsHaveAccessibleNames" computerName="PC-20250309WEIZ" duration="00:00:00.0073926" startTime="2026-09-20T18:19:32.9931702+08:00" endTime="2026-09-20T18:19:33.0147439+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8bf48d91-807c-41ce-9738-6ffb93f9b622" />
+    <UnitTestResult executionId="88b5444e-a738-417a-b0cf-18c056090be5" testId="1d6b6600-4e3e-8f39-883a-b74ddad01ef9" testName="ClientMonitor_AllInteractiveControlsHaveAccessibleNames" computerName="PC-20250309WEIZ" duration="00:00:00.0006467" startTime="2026-09-20T18:19:33.0186078+08:00" endTime="2026-09-20T18:19:33.0195523+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="88b5444e-a738-417a-b0cf-18c056090be5" />
+    <UnitTestResult executionId="ac37fefb-dfb7-4e23-97fe-ea14fe6879ea" testId="1cc834b4-e7ab-8d8b-9e00-26c2c85713b5" testName="ClientMonitor_PrivacyAndFailureStatesUseReadableText" computerName="PC-20250309WEIZ" duration="00:00:00.0005656" startTime="2026-09-20T18:19:33.0205509+08:00" endTime="2026-09-20T18:19:33.0221056+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac37fefb-dfb7-4e23-97fe-ea14fe6879ea" />
+    <UnitTestResult executionId="0f052602-ab11-43bb-8449-7fd425a421db" testId="1693ee2c-b628-83fb-abc0-ec5069e7cd9d" testName="TetherKeyboardContract_CoversNavigationRatingLockLutAndFullscreen" computerName="PC-20250309WEIZ" duration="00:00:00.0006440" startTime="2026-09-20T18:19:33.0198453+08:00" endTime="2026-09-20T18:19:33.0205311+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f052602-ab11-43bb-8449-7fd425a421db" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ClientMonitor_PrivacyAndFailureStatesUseReadableText" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cc834b4-e7ab-8d8b-9e00-26c2c85713b5">
+      <Execution id="ac37fefb-dfb7-4e23-97fe-ea14fe6879ea" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230StageEAccessibilityTests" name="ClientMonitor_PrivacyAndFailureStatesUseReadableText" />
+    </UnitTest>
+    <UnitTest name="TetherWorkspace_AllInteractiveControlsHaveAccessibleNames" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14a9a9ab-2b82-80a8-b255-2f67285dde96">
+      <Execution id="8bf48d91-807c-41ce-9738-6ffb93f9b622" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230StageEAccessibilityTests" name="TetherWorkspace_AllInteractiveControlsHaveAccessibleNames" />
+    </UnitTest>
+    <UnitTest name="ClientMonitor_AllInteractiveControlsHaveAccessibleNames" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d6b6600-4e3e-8f39-883a-b74ddad01ef9">
+      <Execution id="88b5444e-a738-417a-b0cf-18c056090be5" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230StageEAccessibilityTests" name="ClientMonitor_AllInteractiveControlsHaveAccessibleNames" />
+    </UnitTest>
+    <UnitTest name="TetherKeyboardContract_CoversNavigationRatingLockLutAndFullscreen" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1693ee2c-b628-83fb-abc0-ec5069e7cd9d">
+      <Execution id="0f052602-ab11-43bb-8449-7fd425a421db" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.Version230StageEAccessibilityTests" name="TetherKeyboardContract_CoversNavigationRatingLockLutAndFullscreen" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="14a9a9ab-2b82-80a8-b255-2f67285dde96" executionId="8bf48d91-807c-41ce-9738-6ffb93f9b622" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d6b6600-4e3e-8f39-883a-b74ddad01ef9" executionId="88b5444e-a738-417a-b0cf-18c056090be5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cc834b4-e7ab-8d8b-9e00-26c2c85713b5" executionId="ac37fefb-dfb7-4e23-97fe-ea14fe6879ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1693ee2c-b628-83fb-abc0-ec5069e7cd9d" executionId="0f052602-ab11-43bb-8449-7fd425a421db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

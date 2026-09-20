@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="959e18fd-c28e-48d2-b2c9-eee93fa00797" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:38" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:38.5266455+08:00" queuing="2026-09-20T18:17:38.5266458+08:00" start="2026-09-20T18:17:37.9605142+08:00" finish="2026-09-20T18:17:38.5311001+08:00" />
+  <TestSettings name="default" id="d6d67770-0dfb-4b3a-a08f-00558bea6c08">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_38" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="041beff3-d342-4fda-ab64-ff4363944f02" testId="11734869-1557-8089-8b8c-07a9c7c23d7f" testName="PrimaryInspectorActionsUseBorderedSecondaryStyle" computerName="PC-20250309WEIZ" duration="00:00:00.0083328" startTime="2026-09-20T18:17:38.4090140+08:00" endTime="2026-09-20T18:17:38.4326016+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="041beff3-d342-4fda-ab64-ff4363944f02" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="PrimaryInspectorActionsUseBorderedSecondaryStyle" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11734869-1557-8089-8b8c-07a9c7c23d7f">
+      <Execution id="041beff3-d342-4fda-ab64-ff4363944f02" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InspectorButtonContrastTests" name="PrimaryInspectorActionsUseBorderedSecondaryStyle" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="11734869-1557-8089-8b8c-07a9c7c23d7f" executionId="041beff3-d342-4fda-ab64-ff4363944f02" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

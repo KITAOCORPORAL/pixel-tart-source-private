@@ -1,5 +1,7 @@
 # UPGRADE_FULL_AUTOMATION_CONTRACT
 
+Product source: `f505a177106a38fc23550edd87949f235238fb79`. Evidence: `artifacts/whole-app-product-polish/peers-final`.
+
 Interim exhaustive structural inventory, not a passed readiness gate. VERIFIED means an exact scoped/type/pattern match in production peer snapshots, not that the formal step transition was replayed. PLAN_BUG includes missing proof/contract coverage; it does not assert a product defect. NOT_APPLICABLE means selector-free only. Native OS dialogs and upgrade execution remain unproven.
 
 | Step | Stage | Action | Selector | Pattern | Status | Peer evidence |

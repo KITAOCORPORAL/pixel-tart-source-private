@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="785d527c-9c1d-4905-8cb5-b4aa4f4b0500" name="Administrator@PC-20250309WEIZ 2026-09-20 18:15:29" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:15:29.2533632+08:00" queuing="2026-09-20T18:15:29.2533636+08:00" start="2026-09-20T18:15:27.3891007+08:00" finish="2026-09-20T18:15:29.8699154+08:00" />
+  <TestSettings name="default" id="de410c62-bb07-410a-8fda-3328f7ba34d2">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_15_29" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d7cfe771-539b-4692-bf30-2100afd03394" testId="1d19350c-a3da-8034-a0c3-c5e9816332ee" testName="EveryViewUsesTheSameAssetGridAndRealizesOnlyTheVisibleWindow" computerName="PC-20250309WEIZ" duration="00:00:01.6995782" startTime="2026-09-20T18:15:28.0281016+08:00" endTime="2026-09-20T18:15:29.7288691+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7cfe771-539b-4692-bf30-2100afd03394" />
+    <UnitTestResult executionId="1df0baa6-80b2-4d21-b400-7ffe5fc9e1fd" testId="18191020-db6b-8de3-990e-1eb785e10674" testName="FourLayoutAlgorithmsKeepFiveHundredItemsInsideOneVerticalExtent" computerName="PC-20250309WEIZ" duration="00:00:00.0314137" startTime="2026-09-20T18:15:27.8318179+08:00" endTime="2026-09-20T18:15:27.8775966+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1df0baa6-80b2-4d21-b400-7ffe5fc9e1fd" />
+    <UnitTestResult executionId="2c64dd61-f5a2-4b1c-8cf2-e2173e571c4a" testId="13e3fae9-2113-80c1-9e28-117d8c90c512" testName="VisibleSelectionChangesDoNotDiscardSelectedIdsOutsideTheLoadedPage" computerName="PC-20250309WEIZ" duration="00:00:00.1385758" startTime="2026-09-20T18:15:27.8882571+08:00" endTime="2026-09-20T18:15:28.0280590+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c64dd61-f5a2-4b1c-8cf2-e2173e571c4a" />
+    <UnitTestResult executionId="d3701530-48c3-4fd3-9b3c-def37e8fd512" testId="10cdf1a9-8905-8d30-a98e-78170d15d7f8" testName="XamlKeepsP1IdsAndDeclaresP2TreeViewsSafeContextCommandsAndInspectorStates" computerName="PC-20250309WEIZ" duration="00:00:00.0066967" startTime="2026-09-20T18:15:27.8809847+08:00" endTime="2026-09-20T18:15:27.8879547+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3701530-48c3-4fd3-9b3c-def37e8fd512" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="VisibleSelectionChangesDoNotDiscardSelectedIdsOutsideTheLoadedPage" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13e3fae9-2113-80c1-9e28-117d8c90c512">
+      <Execution id="2c64dd61-f5a2-4b1c-8cf2-e2173e571c4a" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests" name="VisibleSelectionChangesDoNotDiscardSelectedIdsOutsideTheLoadedPage" />
+    </UnitTest>
+    <UnitTest name="XamlKeepsP1IdsAndDeclaresP2TreeViewsSafeContextCommandsAndInspectorStates" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10cdf1a9-8905-8d30-a98e-78170d15d7f8">
+      <Execution id="d3701530-48c3-4fd3-9b3c-def37e8fd512" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests" name="XamlKeepsP1IdsAndDeclaresP2TreeViewsSafeContextCommandsAndInspectorStates" />
+    </UnitTest>
+    <UnitTest name="FourLayoutAlgorithmsKeepFiveHundredItemsInsideOneVerticalExtent" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18191020-db6b-8de3-990e-1eb785e10674">
+      <Execution id="1df0baa6-80b2-4d21-b400-7ffe5fc9e1fd" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests" name="FourLayoutAlgorithmsKeepFiveHundredItemsInsideOneVerticalExtent" />
+    </UnitTest>
+    <UnitTest name="EveryViewUsesTheSameAssetGridAndRealizesOnlyTheVisibleWindow" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d19350c-a3da-8034-a0c3-c5e9816332ee">
+      <Execution id="d7cfe771-539b-4692-bf30-2100afd03394" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests" name="EveryViewUsesTheSameAssetGridAndRealizesOnlyTheVisibleWindow" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1d19350c-a3da-8034-a0c3-c5e9816332ee" executionId="d7cfe771-539b-4692-bf30-2100afd03394" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18191020-db6b-8de3-990e-1eb785e10674" executionId="1df0baa6-80b2-4d21-b400-7ffe5fc9e1fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13e3fae9-2113-80c1-9e28-117d8c90c512" executionId="2c64dd61-f5a2-4b1c-8cf2-e2173e571c4a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10cdf1a9-8905-8d30-a98e-78170d15d7f8" executionId="d3701530-48c3-4fd3-9b3c-def37e8fd512" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

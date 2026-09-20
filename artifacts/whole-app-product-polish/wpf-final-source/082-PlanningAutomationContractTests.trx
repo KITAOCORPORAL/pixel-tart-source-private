@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ce20f3db-6040-4e61-9735-698d104c9c19" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:18" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:18.8695179+08:00" queuing="2026-09-20T18:18:18.8695181+08:00" start="2026-09-20T18:17:57.3676103+08:00" finish="2026-09-20T18:18:18.8744107+08:00" />
+  <TestSettings name="default" id="e957de24-a126-44e0-b0c7-dd3d8914a481">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="bfb767b8-04bf-4bdf-a65b-8b59e0b5bc1e" testId="180e1356-c0f8-8fd2-ba20-fbed3a09e968" testName="ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts" computerName="PC-20250309WEIZ" duration="00:00:20.9292899" startTime="2026-09-20T18:17:57.8136343+08:00" endTime="2026-09-20T18:18:18.7581842+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bfb767b8-04bf-4bdf-a65b-8b59e0b5bc1e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="180e1356-c0f8-8fd2-ba20-fbed3a09e968">
+      <Execution id="bfb767b8-04bf-4bdf-a65b-8b59e0b5bc1e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests" name="ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="180e1356-c0f8-8fd2-ba20-fbed3a09e968" executionId="bfb767b8-04bf-4bdf-a65b-8b59e0b5bc1e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3cf01b54-48ca-471e-9601-664165aaec24" name="Administrator@PC-20250309WEIZ 2026-09-20 18:08:57" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:08:57.0341258+08:00" queuing="2026-09-20T18:08:57.0341259+08:00" start="2026-09-20T18:08:56.4414106+08:00" finish="2026-09-20T18:08:57.0389669+08:00" />
+  <TestSettings name="default" id="37c2b586-6406-44e5-8bd7-8f3d273b1a0a">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_08_57" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7262721c-c8da-4d0a-90fa-f557a8e47bc4" testId="17d91f83-3d1e-8e68-9140-b2b4772d712d" testName="RoleColorsMeetDeterministicWcagContrastThresholds" computerName="PC-20250309WEIZ" duration="00:00:00.0003209" startTime="2026-09-20T18:08:56.9412144+08:00" endTime="2026-09-20T18:08:56.9425414+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7262721c-c8da-4d0a-90fa-f557a8e47bc4" />
+    <UnitTestResult executionId="93b676ba-903a-4821-9987-8010d33c4fa8" testId="17d1a912-fa35-86c5-9b11-662022dd21fc" testName="LocalRoleStylesDeclareHoverPressedAndExplicitDisabledStates" computerName="PC-20250309WEIZ" duration="00:00:00.0017249" startTime="2026-09-20T18:08:56.9379612+08:00" endTime="2026-09-20T18:08:56.9397270+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93b676ba-903a-4821-9987-8010d33c4fa8" />
+    <UnitTestResult executionId="7fee209c-e20d-48d2-a155-4ea1b5be20ca" testId="176cbe24-93b6-8187-a1b0-76ee3ba635e5" testName="UserFacingActionsHaveStableAutomationNamesOrVisibleLabels" computerName="PC-20250309WEIZ" duration="00:00:00.0028951" startTime="2026-09-20T18:08:56.9349870+08:00" endTime="2026-09-20T18:08:56.9379327+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fee209c-e20d-48d2-a155-4ea1b5be20ca" />
+    <UnitTestResult executionId="bbcef243-20b9-4b8f-b826-80d1bebb4953" testId="1d6d29c0-7b47-8c07-a27c-1d9bda0b479d" testName="ProductionControlsExposeCurrentProjectBookingCollectionAndWorkflowActions" computerName="PC-20250309WEIZ" duration="00:00:00.0017871" startTime="2026-09-20T18:08:56.9326574+08:00" endTime="2026-09-20T18:08:56.9347147+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bbcef243-20b9-4b8f-b826-80d1bebb4953" />
+    <UnitTestResult executionId="d08d0c76-8910-4dc1-919c-74730edddef2" testId="1cac7c66-4673-8864-a106-ad2dad0f2434" testName="EveryAssetLibraryButtonUsesOneExplicitCanonicalRole" computerName="PC-20250309WEIZ" duration="00:00:00.0086603" startTime="2026-09-20T18:08:56.9058837+08:00" endTime="2026-09-20T18:08:56.9293076+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d08d0c76-8910-4dc1-919c-74730edddef2" />
+    <UnitTestResult executionId="57164087-cb40-4e08-9d6c-926c457e4b51" testId="179a2bab-6f1b-8138-ad87-193c2bc59831" testName="StandardButtonFocusRingAndDarkTokensAreDefined" computerName="PC-20250309WEIZ" duration="00:00:00.0013955" startTime="2026-09-20T18:08:56.9397537+08:00" endTime="2026-09-20T18:08:56.9411862+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57164087-cb40-4e08-9d6c-926c457e4b51" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="StandardButtonFocusRingAndDarkTokensAreDefined" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="179a2bab-6f1b-8138-ad87-193c2bc59831">
+      <Execution id="57164087-cb40-4e08-9d6c-926c457e4b51" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="StandardButtonFocusRingAndDarkTokensAreDefined" />
+    </UnitTest>
+    <UnitTest name="LocalRoleStylesDeclareHoverPressedAndExplicitDisabledStates" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17d1a912-fa35-86c5-9b11-662022dd21fc">
+      <Execution id="93b676ba-903a-4821-9987-8010d33c4fa8" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="LocalRoleStylesDeclareHoverPressedAndExplicitDisabledStates" />
+    </UnitTest>
+    <UnitTest name="ProductionControlsExposeCurrentProjectBookingCollectionAndWorkflowActions" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d6d29c0-7b47-8c07-a27c-1d9bda0b479d">
+      <Execution id="bbcef243-20b9-4b8f-b826-80d1bebb4953" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="ProductionControlsExposeCurrentProjectBookingCollectionAndWorkflowActions" />
+    </UnitTest>
+    <UnitTest name="EveryAssetLibraryButtonUsesOneExplicitCanonicalRole" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cac7c66-4673-8864-a106-ad2dad0f2434">
+      <Execution id="d08d0c76-8910-4dc1-919c-74730edddef2" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="EveryAssetLibraryButtonUsesOneExplicitCanonicalRole" />
+    </UnitTest>
+    <UnitTest name="RoleColorsMeetDeterministicWcagContrastThresholds" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17d91f83-3d1e-8e68-9140-b2b4772d712d">
+      <Execution id="7262721c-c8da-4d0a-90fa-f557a8e47bc4" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="RoleColorsMeetDeterministicWcagContrastThresholds" />
+    </UnitTest>
+    <UnitTest name="UserFacingActionsHaveStableAutomationNamesOrVisibleLabels" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="176cbe24-93b6-8187-a1b0-76ee3ba635e5">
+      <Execution id="7fee209c-e20d-48d2-a155-4ea1b5be20ca" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryButtonReadabilityContractTests" name="UserFacingActionsHaveStableAutomationNamesOrVisibleLabels" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="17d91f83-3d1e-8e68-9140-b2b4772d712d" executionId="7262721c-c8da-4d0a-90fa-f557a8e47bc4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17d1a912-fa35-86c5-9b11-662022dd21fc" executionId="93b676ba-903a-4821-9987-8010d33c4fa8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="176cbe24-93b6-8187-a1b0-76ee3ba635e5" executionId="7fee209c-e20d-48d2-a155-4ea1b5be20ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d6d29c0-7b47-8c07-a27c-1d9bda0b479d" executionId="bbcef243-20b9-4b8f-b826-80d1bebb4953" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cac7c66-4673-8864-a106-ad2dad0f2434" executionId="d08d0c76-8910-4dc1-919c-74730edddef2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="179a2bab-6f1b-8138-ad87-193c2bc59831" executionId="57164087-cb40-4e08-9d6c-926c457e4b51" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

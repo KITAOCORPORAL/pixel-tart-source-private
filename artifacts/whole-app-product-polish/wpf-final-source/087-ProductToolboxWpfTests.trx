@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="88621a08-1275-402d-8dc7-dd181f4a7c49" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:25" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:25.9191629+08:00" queuing="2026-09-20T18:18:25.9191630+08:00" start="2026-09-20T18:18:25.3532365+08:00" finish="2026-09-20T18:18:25.9236624+08:00" />
+  <TestSettings name="default" id="8f0140be-0311-4e7a-bb01-95cebb82a574">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_25" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="9a9d426e-5b76-49b6-872c-52c261b0c03c" testId="18ea5920-db18-8c2e-ac36-7e043d4c9a1f" testName="RawToJpegTool_HasStableVectorIcon" computerName="PC-20250309WEIZ" duration="00:00:00.0034495" startTime="2026-09-20T18:18:25.8235112+08:00" endTime="2026-09-20T18:18:25.8269911+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a9d426e-5b76-49b6-872c-52c261b0c03c" />
+    <UnitTestResult executionId="96ee583a-75e7-473c-bd6d-1ef55df7331d" testId="15eb5426-946f-88cd-a9b5-e047f1b6829e" testName="BatchCompressionImplementation_UsesCreateNewAndAutoNumberPolicy" computerName="PC-20250309WEIZ" duration="00:00:00.0006102" startTime="2026-09-20T18:18:25.8220380+08:00" endTime="2026-09-20T18:18:25.8229326+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="96ee583a-75e7-473c-bd6d-1ef55df7331d" />
+    <UnitTestResult executionId="840bd8f6-f530-4ec9-b2da-bc8b72465d96" testId="17469c10-ded6-8556-97c0-5c975b6f89a4" testName="BatchCompressionModal_CommunicatesSafeOutputContract" computerName="PC-20250309WEIZ" duration="00:00:00.0050436" startTime="2026-09-20T18:18:25.7989510+08:00" endTime="2026-09-20T18:18:25.8183616+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="840bd8f6-f530-4ec9-b2da-bc8b72465d96" />
+    <UnitTestResult executionId="6ef15627-6519-47f3-b54a-3d1c22a5b68e" testId="1da56b18-af0f-81cd-b5b5-cca71b725656" testName="RuntimeQuickTools_UseProductLayoutAsCanonicalLoadSaveContract" computerName="PC-20250309WEIZ" duration="00:00:00.0007002" startTime="2026-09-20T18:18:25.8270109+08:00" endTime="2026-09-20T18:18:25.8286614+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ef15627-6519-47f3-b54a-3d1c22a5b68e" />
+    <UnitTestResult executionId="d3ed8c80-c080-45e7-8624-79addf10a633" testId="14768f33-f3ee-8ae7-88b3-cdee7b50ba3c" testName="BatchCompressionEncoder_HasSupportedWpfImplementation" computerName="PC-20250309WEIZ" duration="00:00:00.0002542" startTime="2026-09-20T18:18:25.8231979+08:00" endTime="2026-09-20T18:18:25.8234909+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3ed8c80-c080-45e7-8624-79addf10a633" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RuntimeQuickTools_UseProductLayoutAsCanonicalLoadSaveContract" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1da56b18-af0f-81cd-b5b5-cca71b725656">
+      <Execution id="6ef15627-6519-47f3-b54a-3d1c22a5b68e" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductToolboxWpfTests" name="RuntimeQuickTools_UseProductLayoutAsCanonicalLoadSaveContract" />
+    </UnitTest>
+    <UnitTest name="BatchCompressionModal_CommunicatesSafeOutputContract" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17469c10-ded6-8556-97c0-5c975b6f89a4">
+      <Execution id="840bd8f6-f530-4ec9-b2da-bc8b72465d96" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductToolboxWpfTests" name="BatchCompressionModal_CommunicatesSafeOutputContract" />
+    </UnitTest>
+    <UnitTest name="BatchCompressionImplementation_UsesCreateNewAndAutoNumberPolicy" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15eb5426-946f-88cd-a9b5-e047f1b6829e">
+      <Execution id="96ee583a-75e7-473c-bd6d-1ef55df7331d" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductToolboxWpfTests" name="BatchCompressionImplementation_UsesCreateNewAndAutoNumberPolicy" />
+    </UnitTest>
+    <UnitTest name="BatchCompressionEncoder_HasSupportedWpfImplementation" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14768f33-f3ee-8ae7-88b3-cdee7b50ba3c">
+      <Execution id="d3ed8c80-c080-45e7-8624-79addf10a633" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductToolboxWpfTests" name="BatchCompressionEncoder_HasSupportedWpfImplementation" />
+    </UnitTest>
+    <UnitTest name="RawToJpegTool_HasStableVectorIcon" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18ea5920-db18-8c2e-ac36-7e043d4c9a1f">
+      <Execution id="9a9d426e-5b76-49b6-872c-52c261b0c03c" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProductToolboxWpfTests" name="RawToJpegTool_HasStableVectorIcon" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="18ea5920-db18-8c2e-ac36-7e043d4c9a1f" executionId="9a9d426e-5b76-49b6-872c-52c261b0c03c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15eb5426-946f-88cd-a9b5-e047f1b6829e" executionId="96ee583a-75e7-473c-bd6d-1ef55df7331d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17469c10-ded6-8556-97c0-5c975b6f89a4" executionId="840bd8f6-f530-4ec9-b2da-bc8b72465d96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1da56b18-af0f-81cd-b5b5-cca71b725656" executionId="6ef15627-6519-47f3-b54a-3d1c22a5b68e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14768f33-f3ee-8ae7-88b3-cdee7b50ba3c" executionId="d3ed8c80-c080-45e7-8624-79addf10a633" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

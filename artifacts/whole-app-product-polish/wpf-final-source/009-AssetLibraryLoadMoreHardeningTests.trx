@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6fcd1d9f-d443-43c9-a057-cfbb0546ddbc" name="Administrator@PC-20250309WEIZ 2026-09-20 18:09:03" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:09:03.6229442+08:00" queuing="2026-09-20T18:09:03.6229445+08:00" start="2026-09-20T18:09:02.5929538+08:00" finish="2026-09-20T18:09:03.6276614+08:00" />
+  <TestSettings name="default" id="3965b181-83be-47da-9579-950ab6a9bdf2">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_09_03" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="cd70598a-b973-488a-b4b5-69ef6aa39900" testId="176d636a-ebae-8832-a862-dc19ab163fe7" testName="LoadMoreAppendsOnlyTheNextCursorPageAndExposesRetryAffordance" computerName="PC-20250309WEIZ" duration="00:00:00.4602031" startTime="2026-09-20T18:09:03.0585141+08:00" endTime="2026-09-20T18:09:03.5214800+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd70598a-b973-488a-b4b5-69ef6aa39900" />
+    <UnitTestResult executionId="2f344f11-6f9e-4c1b-b627-c9c58ea55eeb" testId="17a14faf-4284-8415-8eb0-d8e27518d271" testName="LoadMoreDeclaresCancellationGenerationAndVisibleStateContract" computerName="PC-20250309WEIZ" duration="00:00:00.0055708" startTime="2026-09-20T18:09:03.0350617+08:00" endTime="2026-09-20T18:09:03.0549566+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f344f11-6f9e-4c1b-b627-c9c58ea55eeb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LoadMoreDeclaresCancellationGenerationAndVisibleStateContract" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17a14faf-4284-8415-8eb0-d8e27518d271">
+      <Execution id="2f344f11-6f9e-4c1b-b627-c9c58ea55eeb" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryLoadMoreHardeningTests" name="LoadMoreDeclaresCancellationGenerationAndVisibleStateContract" />
+    </UnitTest>
+    <UnitTest name="LoadMoreAppendsOnlyTheNextCursorPageAndExposesRetryAffordance" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="176d636a-ebae-8832-a862-dc19ab163fe7">
+      <Execution id="cd70598a-b973-488a-b4b5-69ef6aa39900" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.AssetLibraryLoadMoreHardeningTests" name="LoadMoreAppendsOnlyTheNextCursorPageAndExposesRetryAffordance" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="176d636a-ebae-8832-a862-dc19ab163fe7" executionId="cd70598a-b973-488a-b4b5-69ef6aa39900" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17a14faf-4284-8415-8eb0-d8e27518d271" executionId="2f344f11-6f9e-4c1b-b627-c9c58ea55eeb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

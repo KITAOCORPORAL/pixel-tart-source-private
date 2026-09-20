@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="cf76c390-2c55-46a2-b68b-65b83c7b320d" name="Administrator@PC-20250309WEIZ 2026-09-20 18:17:52" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:17:52.3162585+08:00" queuing="2026-09-20T18:17:52.3162588+08:00" start="2026-09-20T18:17:51.6448649+08:00" finish="2026-09-20T18:17:52.3210232+08:00" />
+  <TestSettings name="default" id="f0be6961-0b0c-48f4-88b6-73ecf79492ef">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_17_52" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="921936ab-e48f-485a-9e36-bfee38f0d714" testId="16d6dd3a-49e3-8d14-80f6-a296022e4cf9" testName="ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage" computerName="PC-20250309WEIZ" duration="00:00:00.0013452" startTime="2026-09-20T18:17:52.2144266+08:00" endTime="2026-09-20T18:17:52.2158202+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="921936ab-e48f-485a-9e36-bfee38f0d714" />
+    <UnitTestResult executionId="f56c2bc6-843c-4fae-bf9f-06ef6e219f16" testId="161c9c6c-c65e-8cdd-a5d9-10a5ce56218e" testName="ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable" computerName="PC-20250309WEIZ" duration="00:00:00.0356547" startTime="2026-09-20T18:17:52.0967042+08:00" endTime="2026-09-20T18:17:52.1463024+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f56c2bc6-843c-4fae-bf9f-06ef6e219f16" />
+    <UnitTestResult executionId="236928f4-66bf-4c7a-b621-bd9dcc8a4bb0" testId="14433da5-a6bd-878d-b8ec-dbc0e79e3633" testName="CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService" computerName="PC-20250309WEIZ" duration="00:00:00.0451783" startTime="2026-09-20T18:17:52.1496913+08:00" endTime="2026-09-20T18:17:52.1951740+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="236928f4-66bf-4c7a-b621-bd9dcc8a4bb0" />
+    <UnitTestResult executionId="4dc46c70-1769-4173-906d-2262fe5ec9ef" testId="10de2d1d-372b-84fe-b208-dc2de5768e7d" testName="OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts" computerName="PC-20250309WEIZ" duration="00:00:00.0006789" startTime="2026-09-20T18:17:52.2158430+08:00" endTime="2026-09-20T18:17:52.2175336+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4dc46c70-1769-4173-906d-2262fe5ec9ef" />
+    <UnitTestResult executionId="d3bbd723-4fdc-497f-a7a5-9c7f219d1547" testId="1b20de4f-5fe3-876b-bb7c-7ae63ce9748c" testName="ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles" computerName="PC-20250309WEIZ" duration="00:00:00.0177455" startTime="2026-09-20T18:17:52.1954328+08:00" endTime="2026-09-20T18:17:52.2143895+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3bbd723-4fdc-497f-a7a5-9c7f219d1547" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10de2d1d-372b-84fe-b208-dc2de5768e7d">
+      <Execution id="4dc46c70-1769-4173-906d-2262fe5ec9ef" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests" name="OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts" />
+    </UnitTest>
+    <UnitTest name="ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="161c9c6c-c65e-8cdd-a5d9-10a5ce56218e">
+      <Execution id="f56c2bc6-843c-4fae-bf9f-06ef6e219f16" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests" name="ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable" />
+    </UnitTest>
+    <UnitTest name="CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14433da5-a6bd-878d-b8ec-dbc0e79e3633">
+      <Execution id="236928f4-66bf-4c7a-b621-bd9dcc8a4bb0" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests" name="CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService" />
+    </UnitTest>
+    <UnitTest name="ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b20de4f-5fe3-876b-bb7c-7ae63ce9748c">
+      <Execution id="d3bbd723-4fdc-497f-a7a5-9c7f219d1547" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests" name="ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles" />
+    </UnitTest>
+    <UnitTest name="ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16d6dd3a-49e3-8d14-80f6-a296022e4cf9">
+      <Execution id="921936ab-e48f-485a-9e36-bfee38f0d714" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests" name="ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16d6dd3a-49e3-8d14-80f6-a296022e4cf9" executionId="921936ab-e48f-485a-9e36-bfee38f0d714" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="161c9c6c-c65e-8cdd-a5d9-10a5ce56218e" executionId="f56c2bc6-843c-4fae-bf9f-06ef6e219f16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14433da5-a6bd-878d-b8ec-dbc0e79e3633" executionId="236928f4-66bf-4c7a-b621-bd9dcc8a4bb0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10de2d1d-372b-84fe-b208-dc2de5768e7d" executionId="4dc46c70-1769-4173-906d-2262fe5ec9ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b20de4f-5fe3-876b-bb7c-7ae63ce9748c" executionId="d3bbd723-4fdc-497f-a7a5-9c7f219d1547" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

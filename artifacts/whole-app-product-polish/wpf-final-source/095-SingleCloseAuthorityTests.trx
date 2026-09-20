@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fdf272d2-00ec-457d-9f20-345175d3c391" name="Administrator@PC-20250309WEIZ 2026-09-20 18:18:51" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T18:18:51.1121678+08:00" queuing="2026-09-20T18:18:51.1121680+08:00" start="2026-09-20T18:18:50.5253749+08:00" finish="2026-09-20T18:18:51.1168497+08:00" />
+  <TestSettings name="default" id="d2320fb2-3f70-417b-b232-9f8bfab1dbfa">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_18_18_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="99e6fc7f-7344-4a39-86d7-01fa90c52961" testId="1280cce1-5fb1-8be5-b538-f59fa2225294" testName="ModalDrawerAndTutorial_HideShellWhileTheirSingleHeaderXIsVisible" computerName="PC-20250309WEIZ" duration="00:00:00.0034625" startTime="2026-09-20T18:18:51.0050871+08:00" endTime="2026-09-20T18:18:51.0086047+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99e6fc7f-7344-4a39-86d7-01fa90c52961" />
+    <UnitTestResult executionId="1e43eb69-ff7a-424d-8db3-735c93f76ea9" testId="18f2c005-bf47-8998-9fac-2f906816508a" testName="CurrentSurface_VisibleCloseButtonCountIsExactlyOne" computerName="PC-20250309WEIZ" duration="00:00:00.0115470" startTime="2026-09-20T18:18:51.0093876+08:00" endTime="2026-09-20T18:18:51.0219493+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1e43eb69-ff7a-424d-8db3-735c93f76ea9" />
+    <UnitTestResult executionId="eabacd01-4997-4518-86f0-e4f534e70a02" testId="1ac5df72-c146-81a4-9d30-8f13d4889417" testName="WorkspaceSurfaces_HaveNoLocalCloseAndUseSingleShellAuthority" computerName="PC-20250309WEIZ" duration="00:00:00.0122654" startTime="2026-09-20T18:18:50.9700306+08:00" endTime="2026-09-20T18:18:50.9964109+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eabacd01-4997-4518-86f0-e4f534e70a02" />
+    <UnitTestResult executionId="07fc0b2e-906a-4cd5-92d5-101b20f34ded" testId="1d723fa2-2f48-86c9-8d9b-dc3e30bf092d" testName="SharedCloseHitTarget_IsAtLeast40By40Dip" computerName="PC-20250309WEIZ" duration="00:00:00.0006991" startTime="2026-09-20T18:18:51.0086324+08:00" endTime="2026-09-20T18:18:51.0093669+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="07fc0b2e-906a-4cd5-92d5-101b20f34ded" />
+    <UnitTestResult executionId="ee4051f0-f76c-4f6e-bfde-82608848c650" testId="16795fca-c31e-8a2c-9704-40fda422c58e" testName="RawBatchCollage_HaveExactlyOneVisibleCloseAuthorityByContract" computerName="PC-20250309WEIZ" duration="00:00:00.0047277" startTime="2026-09-20T18:18:50.9997626+08:00" endTime="2026-09-20T18:18:51.0047564+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee4051f0-f76c-4f6e-bfde-82608848c650" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RawBatchCollage_HaveExactlyOneVisibleCloseAuthorityByContract" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16795fca-c31e-8a2c-9704-40fda422c58e">
+      <Execution id="ee4051f0-f76c-4f6e-bfde-82608848c650" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.SingleCloseAuthorityTests" name="RawBatchCollage_HaveExactlyOneVisibleCloseAuthorityByContract" />
+    </UnitTest>
+    <UnitTest name="ModalDrawerAndTutorial_HideShellWhileTheirSingleHeaderXIsVisible" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1280cce1-5fb1-8be5-b538-f59fa2225294">
+      <Execution id="99e6fc7f-7344-4a39-86d7-01fa90c52961" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.SingleCloseAuthorityTests" name="ModalDrawerAndTutorial_HideShellWhileTheirSingleHeaderXIsVisible" />
+    </UnitTest>
+    <UnitTest name="WorkspaceSurfaces_HaveNoLocalCloseAndUseSingleShellAuthority" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ac5df72-c146-81a4-9d30-8f13d4889417">
+      <Execution id="eabacd01-4997-4518-86f0-e4f534e70a02" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.SingleCloseAuthorityTests" name="WorkspaceSurfaces_HaveNoLocalCloseAndUseSingleShellAuthority" />
+    </UnitTest>
+    <UnitTest name="CurrentSurface_VisibleCloseButtonCountIsExactlyOne" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18f2c005-bf47-8998-9fac-2f906816508a">
+      <Execution id="1e43eb69-ff7a-424d-8db3-735c93f76ea9" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.SingleCloseAuthorityTests" name="CurrentSurface_VisibleCloseButtonCountIsExactlyOne" />
+    </UnitTest>
+    <UnitTest name="SharedCloseHitTarget_IsAtLeast40By40Dip" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d723fa2-2f48-86c9-8d9b-dc3e30bf092d">
+      <Execution id="07fc0b2e-906a-4cd5-92d5-101b20f34ded" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.SingleCloseAuthorityTests" name="SharedCloseHitTarget_IsAtLeast40By40Dip" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1280cce1-5fb1-8be5-b538-f59fa2225294" executionId="99e6fc7f-7344-4a39-86d7-01fa90c52961" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18f2c005-bf47-8998-9fac-2f906816508a" executionId="1e43eb69-ff7a-424d-8db3-735c93f76ea9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ac5df72-c146-81a4-9d30-8f13d4889417" executionId="eabacd01-4997-4518-86f0-e4f534e70a02" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d723fa2-2f48-86c9-8d9b-dc3e30bf092d" executionId="07fc0b2e-906a-4cd5-92d5-101b20f34ded" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16795fca-c31e-8a2c-9704-40fda422c58e" executionId="ee4051f0-f76c-4f6e-bfde-82608848c650" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
