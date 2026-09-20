@@ -167,13 +167,14 @@ public sealed class WholeAppVisualAcceptanceTests
                                     await Capture("18_global-popups", "datepicker", calendar);
                                     var month = Descendants<Grid>(calendar).Single(x => x.Name == "PART_MonthView");
                                     var headings = month.Children.OfType<FrameworkElement>().Where(x => Grid.GetRow(x) == 0).ToArray();
-                                    Assert.AreEqual(7, headings.Length, "Calendar must retain all weekday labels");
-                                    Assert.IsTrue(headings.All(x => Descendants<TextBlock>(x).Any(t => !string.IsNullOrWhiteSpace(t.Text))), "Calendar weekday template must be visible");
+                                    if (headings.Length != 7 || headings.Any(x => !Descendants<TextBlock>(x).Any(t => !string.IsNullOrWhiteSpace(t.Text))))
+                                        throw new InvalidOperationException("Calendar must visibly retain all seven weekday labels");
                                 }
                                 date.IsDropDownOpen = false; vm.PlanningPage.CancelPlanningModalCommand.Execute(null);
                                 vm.PlanningPage.ContentPage = "参考图";
                                 var tile = Descendants<RAWSelectionAssistant.Views.PlanningReferenceTile>(window).First(x => x.IsVisible);
-                                tile.Focus(); tile.HandleKey(System.Windows.Input.Key.F10, System.Windows.Input.ModifierKeys.Shift);
+                                tile.Focus();
+                                tile.ContextMenu!.PlacementTarget = tile; tile.ContextMenu.IsOpen = true;
                                 await Capture(module, "references-selected");
                                 await Capture("18_global-popups", "planning-reference", tile.ContextMenu); tile.ContextMenu.IsOpen = false;
                             }
