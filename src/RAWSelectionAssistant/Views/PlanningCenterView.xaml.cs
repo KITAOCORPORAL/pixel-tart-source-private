@@ -28,6 +28,7 @@ public partial class PlanningCenterView : UserControl
     private bool _rendering;
     private bool _switchingDocument;
     private readonly List<TextBlock> _referenceCaptions = [];
+    private PlanningReferenceTile? _previewReturnTarget;
     public PlanningCenterView()
     {
         InitializeComponent();
@@ -88,6 +89,12 @@ public partial class PlanningCenterView : UserControl
         try
         {
             var preview = _vm.IsPreviewMode;
+            AutomationProperties.SetAutomationId(DocumentContent, preview ? "PlanningPreviewSurface" : _vm.ContentPage switch
+            {
+                "参考图" => "PlanningReferencesSurface", "情绪板" => "PlanningMoodboardSurface",
+                "镜头清单" => "PlanningShotListSurface", "灯光图" => "PlanningLightingSurface",
+                "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", _ => "PlanningTextSurface"
+            });
             DocumentListColumn.Width = new GridLength(preview ? 0 : 280);
             DocumentListPane.Visibility = EditorHeader.Visibility = ContentNavigationBorder.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
             ContextDrawer.Visibility = Visibility.Collapsed;
@@ -142,6 +149,7 @@ public partial class PlanningCenterView : UserControl
         {
             var page = PlanningCenterViewModel.ContentPages[i];
             var button = Action(page, () => { _vm.ContentPage = page; DocumentScroll.ScrollToTop(); });
+            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files" }[i]);
             button.Padding = new Thickness(5, 12, 5, 12); button.MinWidth = 0;
             var content = new StackPanel { Orientation = Orientation.Horizontal };
             content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource(icons[i]), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
@@ -275,7 +283,8 @@ public partial class PlanningCenterView : UserControl
     }
     private FrameworkElement ImageTile(PlanningReferenceItem item, double height, bool interactive)
     {
-        var stack = new StackPanel { Margin = new Thickness(0, 0, 18, 22) };
+        StackPanel stack = interactive ? new PlanningReferenceTile() : new StackPanel();
+        stack.Margin = new Thickness(0, 0, 18, 22);
         stack.Children.Add(new Image { Source = LoadImage(item.PreviewPath), Height = height, Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Center });
         var caption = Text(item.Title, 13); caption.Margin = new Thickness(0, 8, 0, 0); stack.Children.Add(caption); _referenceCaptions.Add(caption);
         var status = Text(item.Availability, 11); status.Foreground = Brush("TextSecondaryBrush"); stack.Children.Add(status);
@@ -286,11 +295,13 @@ public partial class PlanningCenterView : UserControl
         }
         if (interactive)
         {
-            stack.Focusable = true; AutomationProperties.SetName(stack, "参考图：" + item.Title);
+            var tile = (PlanningReferenceTile)stack;
+            AutomationProperties.SetName(tile, "参考图：" + item.Title);
             void Select() { if (_vm is null) return; _vm.SelectedDocumentReference = item; foreach (var other in _referenceCaptions) other.Foreground = Brush("TextPrimaryBrush"); caption.Foreground = Brush("AccentBrush"); }
-            stack.MouseLeftButtonDown += (_, e) => { Select(); stack.Focus(); if (e.ClickCount == 2) ShowImage(item); e.Handled = true; };
-            stack.KeyDown += (_, e) => { if (e.Key is Key.Enter or Key.Space) { Select(); ShowImage(item); e.Handled = true; } };
+            tile.Selected += (_, _) => Select();
+            tile.OpenRequested += (_, _) => { _previewReturnTarget = tile; ShowImage(item); };
             stack.ContextMenu = ReferenceMenu(item);
+            stack.ContextMenu.Closed += (_, _) => { if (tile.IsVisible && ImagePreview.Visibility != Visibility.Visible) tile.Focus(); };
         }
         return stack;
     }
@@ -375,11 +386,13 @@ public partial class PlanningCenterView : UserControl
             var number = Text((shot.Order + 1).ToString("00"), 24); number.Foreground = Brush("TextSecondaryBrush"); row.Children.Add(number);
             var body = new StackPanel(); Grid.SetColumn(body, 1); body.Children.Add(Text(shot.Name, 21, true)); body.Children.Add(Text(shot.Scene ?? "场景待定", 14)); body.Children.Add(Text(shot.Notes ?? "", 14)); row.Children.Add(body);
             var state = Text(shot.Status switch { ProjectShotStatus.Completed => "已拍", ProjectShotStatus.InProgress => "当前", ProjectShotStatus.Skipped => "跳过", _ => "待拍" }, 13); Grid.SetColumn(state, 2); row.Children.Add(state);
-            var border = new Border { Child = row, BorderBrush = Brush("DividerBrush"), BorderThickness = new Thickness(0, 0, 0, 1), Padding = new Thickness(0, 0, 0, 22) };
+            Border border = interactive ? new PlanningShotRow() : new Border();
+            border.Child = row; border.BorderBrush = Brush("DividerBrush"); border.BorderThickness = new Thickness(0, 0, 0, 1); border.Padding = new Thickness(0, 0, 0, 22);
             if (interactive)
             {
                 void Open() { _vm.SelectedShot = shot; _vm.IsShotDrawerOpen = true; RenderShotDrawer(); FocusOverlay(DrawerContent); }
                 border.Focusable = true; AutomationProperties.SetName(border, "镜头 " + (shot.Order + 1) + "：" + shot.Name);
+                ((PlanningShotRow)border).OpenRequested = Open;
                 border.MouseLeftButtonDown += (_, _) => Open();
                 border.KeyDown += (_, e) => { if (e.Key is Key.Enter or Key.Space) { Open(); e.Handled = true; } };
             }
@@ -431,6 +444,7 @@ public partial class PlanningCenterView : UserControl
         ModalContent.Children.Clear(); ModalOverlay.Visibility = _vm.IsCreateOpen || _vm.IsBookingOpen ? Visibility.Visible : Visibility.Collapsed;
         if (_vm.IsCreateOpen)
         {
+            AutomationProperties.SetAutomationId(ModalContent, "PlanningCreateDialog");
             Heading(ModalContent, "新建策划案"); ModalContent.Children.Add(Text("名称", 13)); ModalContent.Children.Add(Editor(nameof(_vm.NewPlanningName)));
             ModalContent.Children.Add(Text("关联已有项目（可选）", 13));
             var project = new ComboBox { ItemsSource = _vm.AvailableProjects, DisplayMemberPath = "Name", Margin = new Thickness(0, 8, 0, 16) }; project.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.NewLinkedProject))); AutomationProperties.SetName(project, "关联已有项目"); ModalContent.Children.Add(project);
@@ -440,6 +454,7 @@ public partial class PlanningCenterView : UserControl
         }
         if (_vm.IsBookingOpen)
         {
+            AutomationProperties.SetAutomationId(ModalContent, "PlanningBookingPicker");
             Heading(ModalContent, "关联工作日历档期"); ModalContent.Children.Add(Text("选择未关联或属于当前项目的档期，不复制日历资料。", 14));
             var list = new ListBox { ItemsSource = _vm.AvailableBookings, DisplayMemberPath = "Title", MaxHeight = 330, Margin = new Thickness(0, 20, 0, 20) }; list.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.SelectedBooking))); AutomationProperties.SetName(list, "可关联档期"); ModalContent.Children.Add(list);
             ModalContent.Children.Add(AsyncAction("关联", () => _vm.LinkBookingCommand.ExecuteAsync(null), "PrimaryButton"));
@@ -451,6 +466,7 @@ public partial class PlanningCenterView : UserControl
     {
         if (_vm is null) return;
         ModalContent.Children.Clear(); ModalOverlay.Visibility = Visibility.Visible; Heading(ModalContent, "关联现有视觉资料");
+        AutomationProperties.SetAutomationId(ModalContent, "PlanningSourcePicker");
         var category = new ComboBox { ItemsSource = _vm.SourceCategories, SelectedItem = _vm.SourceCategory }; category.SelectionChanged += (_, _) => _vm.SourceCategory = category.SelectedItem?.ToString() ?? "素材库"; AutomationProperties.SetName(category, "参考来源"); ModalContent.Children.Add(category);
         ModalContent.Children.Add(Editor(nameof(_vm.SourceSearch)));
         var candidates = new ListBox { ItemsSource = _vm.SourceCandidates, DisplayMemberPath = "Name", MaxHeight = 340 }; candidates.SelectionChanged += (_, _) => _vm.SelectedSourceCandidate = candidates.SelectedItem as CanvasObject; AutomationProperties.SetName(candidates, "参考来源搜索结果");
@@ -487,11 +503,18 @@ public partial class PlanningCenterView : UserControl
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException) { _vm!.Dialogs.ShowInfo("源文件暂不可用。"); }
     }
-    private void ClosePreview_Click(object sender, RoutedEventArgs e) => ImagePreview.Visibility = Visibility.Collapsed;
+    private void CloseImagePreview()
+    {
+        ImagePreview.Visibility = Visibility.Collapsed;
+        if (_previewReturnTarget is { IsVisible: true } target) target.Focus();
+        _previewReturnTarget = null;
+    }
+    private void ClosePreview_Click(object sender, RoutedEventArgs e) => CloseImagePreview();
     private async void Export_Click(object sender, RoutedEventArgs e)
     {
         if (_vm is null || !await _vm.FlushAsync()) return;
         ModalContent.Children.Clear(); Heading(ModalContent, "导出策划案 PDF");
+        AutomationProperties.SetAutomationId(ModalContent, "PlanningExportDialog");
         ModalContent.Children.Add(Text("按 A4 排版输出图片式 PDF，文字不可选择。高质量适合审阅和打印。", 14));
         var quality = new ComboBox { ItemsSource = new[] { "高质量 · 300 DPI", "标准 · 216 DPI" }, SelectedIndex = 0, Margin = new Thickness(0, 20, 0, 20) };
         AutomationProperties.SetName(quality, "PDF 导出质量"); ModalContent.Children.Add(quality);
@@ -513,7 +536,7 @@ public partial class PlanningCenterView : UserControl
         { FocusOverlay(overlay); e.Handled = true; return; }
         if (e.Key == Key.Escape)
         {
-            if (ImagePreview.Visibility == Visibility.Visible) ImagePreview.Visibility = Visibility.Collapsed;
+            if (ImagePreview.Visibility == Visibility.Visible) CloseImagePreview();
             else if (ModalOverlay.Visibility == Visibility.Visible) { ModalOverlay.Visibility = Visibility.Collapsed; _vm.CancelPlanningModalCommand.Execute(null); }
             else if (_vm.IsShotDrawerOpen) _vm.IsShotDrawerOpen = false;
             else _vm.IsPreviewMode = false;
