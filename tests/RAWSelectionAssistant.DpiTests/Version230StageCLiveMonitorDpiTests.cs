@@ -33,14 +33,14 @@ public sealed class Version230StageCLiveMonitorDpiTests
     public void Compact1280_CollapsesInspectorAndKeepsCentralMinimum()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml"); var code = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs");
-        foreach (var token in new[] { "MinWidth=\"640\"", "MinWidth=\"220\"", "windowWidth < 1350", "InspectorColumn.Width = compact ? new GridLength(0)", "InspectorDrawer" }) StringAssert.Contains(xaml + code, token);
+        foreach (var token in new[] { "MinWidth=\"640\"", "windowWidth < 1350", "InspectorColumn.MinWidth = compact ? 0 : 320", "InspectorColumn.MaxWidth = compact ? 0 : 480", "InspectorPanel.Visibility = compact ? Visibility.Collapsed", "InspectorDrawer" }) StringAssert.Contains(xaml + code, token);
     }
 
     [TestMethod]
     public void Full1600Workspace_UsesRecommendedColumnBounds()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        foreach (var token in new[] { "Width=\"270\" MinWidth=\"220\" MaxWidth=\"300\"", "MinWidth=\"640\"", "Width=\"320\" MinWidth=\"280\" MaxWidth=\"340\"" }) StringAssert.Contains(xaml, token);
+        foreach (var token in new[] { "x:Name=\"ThumbnailColumn\" Width=\"0\"", "MinWidth=\"640\"", "Width=\"360\" MinWidth=\"320\" MaxWidth=\"480\"", "x:Name=\"BrowserPanel\" Grid.Row=\"1\" Grid.ColumnSpan=\"5\"" }) StringAssert.Contains(xaml, token);
     }
 
     [TestMethod]

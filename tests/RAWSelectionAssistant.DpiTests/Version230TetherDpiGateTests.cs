@@ -32,9 +32,9 @@ public sealed class Version230TetherDpiGateTests
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
         StringAssert.Contains(xaml, "Width=\"104\"");
-        StringAssert.Contains(xaml, "ScrollViewer.HorizontalScrollBarVisibility=\"Disabled\"");
+        StringAssert.Contains(xaml, "ScrollViewer.HorizontalScrollBarVisibility=\"Auto\" ScrollViewer.VerticalScrollBarVisibility=\"Disabled\"");
         StringAssert.Contains(xaml, "VirtualizingPanel.VirtualizationMode=\"Recycling\"");
-        StringAssert.Contains(xaml, "<VirtualizingStackPanel />");
+        StringAssert.Contains(xaml, "<VirtualizingStackPanel Orientation=\"Horizontal\" />");
     }
 
     [TestMethod]
