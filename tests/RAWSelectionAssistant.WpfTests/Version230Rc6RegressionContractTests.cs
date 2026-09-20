@@ -18,7 +18,15 @@ public sealed class Version230Rc6RegressionContractTests
         Assert.IsFalse(source.Contains("PixelTartCalendarDayButtonStyle", StringComparison.Ordinal));
         Assert.IsFalse(source.Contains("PixelTartCalendarButtonStyle", StringComparison.Ordinal));
         Assert.IsFalse(source.Contains("PART_MonthView", StringComparison.Ordinal));
-        Assert.IsFalse(source.Contains("<ControlTemplate TargetType=\"DatePicker\"", StringComparison.Ordinal));
+        var document = XDocument.Parse(source);
+        XNamespace xaml = "http://schemas.microsoft.com/winfx/2006/xaml";
+        var dateStyles = document.Descendants().Where(element => element.Name.LocalName == "Style" && element.Attribute("TargetType")?.Value == "DatePicker").ToArray();
+        var globalDateStyle = dateStyles.Single(element => element.Attribute(xaml + "Key") is null);
+        Assert.IsFalse(globalDateStyle.Descendants().Any(element => element.Name.LocalName == "ControlTemplate"), "Global date picker must retain its native skeleton.");
+        var proposalDateStyle = dateStyles.Single(element => element.Attribute(xaml + "Key")?.Value == "ProposalDatePicker");
+        foreach (var part in new[] { "PART_TextBox", "PART_Button", "PART_Popup" })
+            Assert.IsTrue(proposalDateStyle.Descendants().Any(element => element.Attribute(xaml + "Name")?.Value == part), "Proposal date picker must preserve native part: " + part);
+        Assert.IsTrue(proposalDateStyle.Elements().Any(element => element.Attribute("Property")?.Value == "CalendarStyle" && element.Attribute("Value")?.Value == "{DynamicResource PixelTartCalendarNativeStyle}"));
         Assert.IsFalse(source.Contains("<ControlTemplate TargetType=\"CalendarDayButton\"", StringComparison.Ordinal));
     }
 
