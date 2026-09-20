@@ -414,7 +414,14 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public async Task ApplyExecutionContextAsync(ShootExecutionContext context, CancellationToken cancellationToken = default)
     {
         _executionContext=context;
-        SelectedProject = ProjectOptions.FirstOrDefault(item => item.Id == context.ProjectId) ?? new(context.ProjectId, "当前项目");
+        var option = ProjectOptions.FirstOrDefault(item => item.Id == context.ProjectId);
+        if (option is null)
+        {
+            var projects = _projectRepository is null ? [] : await _projectRepository.ListAsync(cancellationToken);
+            option = new(context.ProjectId, projects.FirstOrDefault(project => project.Id == context.ProjectId)?.Name ?? "当前项目");
+            ProjectOptions.Add(option);
+        }
+        SelectedProject = option;
         await ReferenceMode.SetProjectAsync(context.ProjectId, cancellationToken);
         await ShotExecution.LoadAsync(context.ProjectId, cancellationToken);
         if (context.CurrentShotId is Guid shotId) await ShotExecution.SelectAsync(shotId);

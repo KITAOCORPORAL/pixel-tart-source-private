@@ -104,6 +104,7 @@ public sealed class PlanningAutomationContractTests
             bitmap.Render(root); var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap));
             using var file = File.Create(Path.Combine(output, name + ".png")); encoder.Save(file);
         }
+        await Idle(); Snapshot("ONBOARDING", window);
         main.ForceExitTutorial(); window.WindowState = WindowState.Normal; window.Width = 1920; window.Height = 1080;
         await PlanningHumanAcceptanceDemoSeeder.SeedAsync(new RAWSelectionAssistant.Core.Services.SettingsService(new RAWSelectionAssistant.Core.Services.FileLogService()));
         await Idle(); Snapshot("BOOT", window);
@@ -190,6 +191,11 @@ public sealed class PlanningAutomationContractTests
         Check("shot-peer", () => { Assert.AreEqual(AutomationControlType.Button, Peer(shotRow).GetAutomationControlType()); Assert.IsNotNull(Peer(shotRow).GetPattern(PatternInterface.Invoke)); Assert.IsTrue(Peer(shotRow).IsKeyboardFocusable()); });
         ((IInvokeProvider)Peer(shotRow).GetPattern(PatternInterface.Invoke)!).Invoke(); await Idle(); Check("shot-invoke", () => Assert.IsTrue(vm.IsShotDrawerOpen)); vm.IsShotDrawerOpen = false;
         vm.ContentPage = "文字"; vm.IsPreviewMode = true; await Idle(); Snapshot("PREVIEW_MODE", view); vm.IsPreviewMode = false;
+        var more = Visuals<Button>(view).Single(x => AutomationProperties.GetName(x) == "更多策划操作");
+        more.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); await Idle();
+        var contextMenus = PresentationSource.CurrentSources.Cast<PresentationSource>().Select(source => source.RootVisual).OfType<DependencyObject>().SelectMany(Visuals<ContextMenu>).Where(menu => menu.IsOpen && ReferenceEquals(menu.PlacementTarget, more)).ToArray();
+        Check("more-popup", () => Assert.HasCount(1, contextMenus));
+        Snapshot("MORE_MENU", contextMenus.Single()); contextMenus.Single().IsOpen = false;
         await vm.ShowBookingCommand.ExecuteAsync(null); await Idle(); Snapshot("BOOKING_PICKER", view); vm.CancelPlanningModalCommand.Execute(null);
         var export = Visuals<Button>(view).Single(x => AutomationProperties.GetName(x) == "导出策划案 PDF"); export.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); await Idle(); Snapshot("EXPORT_DIALOG", view);
         Check("export-quality", () => { var quality = Walk(Peer(view)).Single(p => p.GetName() == "PDF 导出质量"); Assert.AreEqual(AutomationControlType.ComboBox, quality.GetAutomationControlType()); Assert.IsNotNull(quality.GetPattern(PatternInterface.ExpandCollapse)); });
@@ -198,7 +204,19 @@ public sealed class PlanningAutomationContractTests
         Check("quality-item-selection", () => Assert.IsNotNull(Walk(Peer(combo)).Single(p => p.GetName() == "高质量 · 300 DPI" && p.GetAutomationControlType() == AutomationControlType.ListItem).GetPattern(PatternInterface.SelectionItem)));
         combo.IsDropDownOpen = false;
         await view.HandleWorkspaceKeyAsync(new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(window)!, 0, Key.Escape) { RoutedEvent = Keyboard.PreviewKeyDownEvent });
-        await vm.EnterTetherCommand.ExecuteAsync(null); await Idle(); Snapshot("TETHER", window);
+        var message = (ThemedMessageDialog)Activator.CreateInstance(typeof(ThemedMessageDialog), BindingFlags.NonPublic | BindingFlags.Instance, null, ["像素蛋挞", "策划案 PDF 已导出（图片式，文字不可选择）。", ThemedMessageKind.Information, false], null)!;
+        message.Owner = window; message.Show(); await Idle(); Snapshot("EXPORT_MESSAGE", message); message.Close();
+        await vm.EnterTetherCommand.ExecuteAsync(null);
+        for(var wait=0;wait<100 && !main.IsTetherPage;wait++) await Task.Delay(100);
+        await Idle(); Check("tether-route", () => Assert.IsTrue(main.IsTetherPage)); Snapshot("TETHER", window);
+        Check("tether-context-visible", () =>
+        {
+            var peers = Walk(Peer(window)).Where(p => !p.IsOffscreen()).ToArray();
+            Assert.HasCount(1, peers.Where(p => p.GetName() == "返回当前项目策划" && p.GetAutomationControlType() == AutomationControlType.Button).ToArray());
+            Assert.HasCount(1, peers.Where(p => p.GetName() == main.TetherPage!.ShotExecution.ShotPositionText && p.GetAutomationControlType() == AutomationControlType.Text).ToArray());
+            Assert.AreEqual(vm.ProjectId, main.TetherPage!.SelectedProject?.Id);
+        });
+        Capture("tether-context", window);
         await main.ReturnToPlanningCommand.ExecuteAsync(null); await Idle(); Check("return-planning", () => Assert.IsTrue(main.IsPlanningPage));
         main.NavigateCommand.Execute("OnlineSelection"); await Idle(); Snapshot("ONLINE_SELECTION", window);
         Check("online-route", () => Assert.AreEqual("OnlineSelection", main.CurrentPage));

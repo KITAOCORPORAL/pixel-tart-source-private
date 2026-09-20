@@ -282,6 +282,11 @@
                             <TextBlock Text="{Binding WatchDirectory, TargetNullValue=尚未选择}" TextTrimming="CharacterEllipsis" Margin="0,5,0,0" AutomationProperties.Name="当前看守文件夹" />
                             <TextBlock Text="关联项目" Style="{StaticResource CaptionText}" Margin="0,10,0,0" />
                             <ComboBox ItemsSource="{Binding ProjectOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedProject}" Margin="0,5,0,0" AutomationProperties.Name="选择联机会话关联项目" />
+                            <StackPanel Margin="0,10,0,0">
+                                <StackPanel.Style><Style TargetType="StackPanel"><Setter Property="Visibility" Value="Visible"/><Style.Triggers><DataTrigger Binding="{Binding ShotExecution.Current}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></StackPanel.Style>
+                                <TextBlock Text="{Binding ShotExecution.ShotPositionText}" TextWrapping="Wrap"/>
+                                <Button Content="返回策划" HorizontalAlignment="Left" Style="{StaticResource GhostButton}" Command="{Binding DataContext.ReturnToPlanningCommand,RelativeSource={RelativeSource AncestorType=Window}}" AutomationProperties.Name="返回当前项目策划"/>
+                            </StackPanel>
                             <TextBlock Text="只监看所选目录顶层；不会递归扫描，不会删除、移动或修改源照片。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,8,0,0" />
                         </StackPanel>
                     </Border>
