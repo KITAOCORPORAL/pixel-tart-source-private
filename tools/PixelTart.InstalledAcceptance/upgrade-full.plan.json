@@ -1,0 +1,465 @@
+{
+  "ProductSourceSha": "8cb95e6d2c4814717dc31a8c6aa19f8b2c89c9cc",
+  "InstallerPath": "installers/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe",
+  "InstallerSha256": "C2E5F26A1D00BFE2A466450C0BB9D015CDD35D6733E909FE8ADCB5BAEFA6247D",
+  "RunDirectory": "InstalledAcceptance_8cb95e6",
+  "FullPlan": true,
+  "Mode": "upgrade",
+  "Steps": [
+    {
+      "Id": "startup-alive",
+      "Action": "assertProcessAlive"
+    },
+    {
+      "Id": "exit-tutorial",
+      "Action": "invoke",
+      "AutomationId": "TutorialExitButton",
+      "Optional": true,
+      "TimeoutMs": 2000
+    },
+    {
+      "Id": "tutorial-gone",
+      "Action": "waitAbsent",
+      "AutomationId": "TutorialExitButton"
+    },
+    {
+      "Id": "planning-enabled",
+      "Action": "assertEnabled",
+      "AutomationId": "PrimaryNavigationPlanning"
+    },
+    {
+      "Id": "planning",
+      "Action": "invoke",
+      "AutomationId": "PrimaryNavigationPlanning"
+    },
+    {
+      "Id": "planning-list",
+      "Action": "assertPresent",
+      "Name": "策划案列表",
+      "ControlType": "List"
+    },
+    {
+      "Id": "create-open",
+      "Action": "invoke",
+      "Name": "新建策划",
+      "ControlType": "Button",
+      "HelpText": "新建策划"
+    },
+    {
+      "Id": "create-heading",
+      "Action": "assertPresent",
+      "Name": "新建策划案",
+      "ControlType": "Text",
+      "IncludeOffscreen": true
+    },
+    {
+      "Id": "create-name",
+      "Action": "setValue",
+      "Name": "新策划名称",
+      "ControlType": "Edit",
+      "ScopeAnchorName": "新建策划案",
+      "Value": "{project}"
+    },
+    {
+      "Id": "create-location",
+      "Action": "setValue",
+      "Name": "拍摄地点",
+      "ControlType": "Edit",
+      "ScopeAnchorName": "新建策划案",
+      "Value": "杭州测试摄影棚"
+    },
+    {
+      "Id": "date-value",
+      "Action": "setValue",
+      "Name": "拍摄日期",
+      "ScopeAnchorName": "新建策划案",
+      "Value": "2026-09-19"
+    },
+    {
+      "Id": "date-open",
+      "Action": "invoke",
+      "Name": "选择拍摄日期",
+      "ControlType": "Button",
+      "ScopeAnchorName": "新建策划案"
+    },
+    {
+      "Id": "date-calendar",
+      "Action": "assertPresent",
+      "ControlType": "Calendar",
+      "Name": "",
+      "IncludeOffscreen": false
+    },
+    {
+      "Id": "date-next-day",
+      "Action": "focusKey",
+      "Name": "",
+      "ControlType": "Calendar",
+      "Value": "{RIGHT}"
+    },
+    {
+      "Id": "date-confirm",
+      "Action": "focusKey",
+      "Name": "",
+      "ControlType": "Calendar",
+      "Value": "{ENTER}"
+    },
+    {
+      "Id": "date-check",
+      "Action": "assertDate",
+      "Name": "拍摄日期",
+      "ScopeAnchorName": "新建策划案",
+      "Value": "2026-09-20"
+    },
+    {
+      "Id": "create-confirm",
+      "Action": "invoke",
+      "Name": "新建策划",
+      "ControlType": "Button",
+      "ScopeAnchorName": "新建策划案"
+    },
+    {
+      "Id": "create-closed",
+      "Action": "waitAbsent",
+      "Name": "新建策划案",
+      "ControlType": "Text"
+    },
+    {
+      "Id": "created-list-item",
+      "Action": "assertPresent",
+      "AncestorName": "策划案列表",
+      "ControlType": "ListItem",
+      "DescendantName": "{project}",
+      "Coverage": "old-create"
+    },
+    {
+      "Id": "select-created",
+      "Action": "select",
+      "AncestorName": "策划案列表",
+      "ControlType": "ListItem",
+      "DescendantName": "{project}"
+    },
+    {
+      "Id": "text-open",
+      "Action": "invoke",
+      "Name": "文字",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "edit",
+      "Action": "invoke",
+      "Name": "编辑",
+      "ControlType": "Button"
+    },
+    {
+      "Id": "edit-body",
+      "Action": "setValue",
+      "Name": "策划正文",
+      "ControlType": "Edit",
+      "IncludeOffscreen": true,
+      "Value": "Installed Acceptance Persistence {shortsha}"
+    },
+    {
+      "Id": "edit-verify",
+      "Action": "assertText",
+      "Name": "策划正文",
+      "ControlType": "Edit",
+      "IncludeOffscreen": true,
+      "Value": "Installed Acceptance Persistence {shortsha}"
+    },
+    {
+      "Id": "save-switch",
+      "Action": "invoke",
+      "Name": "参考图",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "save-return",
+      "Action": "invoke",
+      "Name": "文字",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "save-content",
+      "Action": "assertPresent",
+      "Name": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "IncludeOffscreen": true
+    },
+    {
+      "Id": "restart-close-request",
+      "Action": "requestClose"
+    },
+    {
+      "Id": "restart-close-confirm",
+      "Action": "invoke",
+      "Name": "保存",
+      "ControlType": "Button",
+      "Optional": true,
+      "TimeoutMs": 1000
+    },
+    {
+      "Id": "restart-close",
+      "Action": "waitExit",
+      "TimeoutMs": 15000
+    },
+    {
+      "Id": "upgrade-install",
+      "Action": "upgrade",
+      "Coverage": "upgrade"
+    },
+    {
+      "Id": "restart",
+      "Action": "restart"
+    },
+    {
+      "Id": "restart-exit-tutorial",
+      "Action": "invoke",
+      "AutomationId": "TutorialExitButton",
+      "Optional": true,
+      "TimeoutMs": 1000
+    },
+    {
+      "Id": "restart-planning",
+      "Action": "invoke",
+      "AutomationId": "PrimaryNavigationPlanning"
+    },
+    {
+      "Id": "restart-select",
+      "Action": "select",
+      "AncestorName": "策划案列表",
+      "ControlType": "ListItem",
+      "DescendantName": "{project}"
+    },
+    {
+      "Id": "restart-text",
+      "Action": "invoke",
+      "Name": "文字",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "persisted-body",
+      "Action": "assertPresent",
+      "Name": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "persistence"
+    },
+    {
+      "Id": "module-text",
+      "Action": "invoke",
+      "Name": "文字",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-text",
+      "Action": "assertPresent",
+      "Name": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "text"
+    },
+    {
+      "Id": "capture-text",
+      "Action": "capture",
+      "Path": "screenshots/02_文字.png"
+    },
+    {
+      "Id": "module-references",
+      "Action": "invoke",
+      "Name": "参考图",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-references",
+      "Action": "assertPresent",
+      "Name": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "references"
+    },
+    {
+      "Id": "capture-references",
+      "Action": "capture",
+      "Path": "screenshots/03_参考图.png"
+    },
+    {
+      "Id": "module-moodboard",
+      "Action": "invoke",
+      "Name": "情绪板",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-moodboard",
+      "Action": "assertPresent",
+      "Name": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "moodboard"
+    },
+    {
+      "Id": "capture-moodboard",
+      "Action": "capture",
+      "Path": "screenshots/04_情绪板.png"
+    },
+    {
+      "Id": "module-shots",
+      "Action": "invoke",
+      "Name": "镜头清单",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-shots",
+      "Action": "assertPresent",
+      "Name": "0 / 0 已拍",
+      "ControlType": "Text",
+      "Coverage": "shots"
+    },
+    {
+      "Id": "capture-shots",
+      "Action": "capture",
+      "Path": "screenshots/05_镜头清单.png"
+    },
+    {
+      "Id": "module-lighting",
+      "Action": "invoke",
+      "Name": "灯光图",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-lighting",
+      "Action": "assertPresent",
+      "Name": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "lighting"
+    },
+    {
+      "Id": "capture-lighting",
+      "Action": "capture",
+      "Path": "screenshots/06_灯光图.png"
+    },
+    {
+      "Id": "module-styling",
+      "Action": "invoke",
+      "Name": "服化道",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-styling",
+      "Action": "assertPresent",
+      "Name": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "styling"
+    },
+    {
+      "Id": "capture-styling",
+      "Action": "capture",
+      "Path": "screenshots/07_服化道.png"
+    },
+    {
+      "Id": "module-files",
+      "Action": "invoke",
+      "Name": "文件",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "landmark-files",
+      "Action": "assertPresent",
+      "Name": "项目文件",
+      "ControlType": "Text",
+      "IncludeOffscreen": true,
+      "Coverage": "files"
+    },
+    {
+      "Id": "capture-files",
+      "Action": "capture",
+      "Path": "screenshots/08_文件.png"
+    },
+    {
+      "Id": "preview-text",
+      "Action": "invoke",
+      "Name": "文字",
+      "ControlType": "Button",
+      "AncestorName": "策划内容导航"
+    },
+    {
+      "Id": "preview-open",
+      "Action": "invoke",
+      "Name": "预览策划案",
+      "ControlType": "Button"
+    },
+    {
+      "Id": "preview-list-hidden",
+      "Action": "assertAbsent",
+      "Name": "策划案列表",
+      "Coverage": "preview"
+    },
+    {
+      "Id": "preview-nav-hidden",
+      "Action": "assertAbsent",
+      "Name": "策划内容导航"
+    },
+    {
+      "Id": "preview-edit-hidden",
+      "Action": "assertAbsent",
+      "Name": "编辑",
+      "ControlType": "Button"
+    },
+    {
+      "Id": "preview-body",
+      "Action": "assertPresent",
+      "Name": "Installed Acceptance Persistence {shortsha}",
+      "ControlType": "Text",
+      "IncludeOffscreen": true
+    },
+    {
+      "Id": "preview-shot",
+      "Action": "capture",
+      "Path": "screenshots/09_预览模式.png"
+    },
+    {
+      "Id": "preview-escape",
+      "Action": "focusKey",
+      "Name": "摄影策划案工作区",
+      "Value": "{ESC}"
+    },
+    {
+      "Id": "preview-restored",
+      "Action": "assertPresent",
+      "Name": "策划案列表"
+    },
+    {
+      "Id": "final-close-request",
+      "Action": "requestClose"
+    },
+    {
+      "Id": "final-close-confirm",
+      "Action": "invoke",
+      "Name": "保存",
+      "ControlType": "Button",
+      "Optional": true,
+      "TimeoutMs": 1000
+    },
+    {
+      "Id": "final-close",
+      "Action": "waitExit",
+      "TimeoutMs": 15000,
+      "Coverage": "normal-close"
+    }
+  ],
+  "OldInstallerPath": "installers/PixelTart-DeveloperPreview-2.3.0-dev.8729d17-x64-Setup.exe",
+  "OldInstallerSha256": "BCCD62FAEADC8F711074AB913760DDD564C4D19DEC0A5E384795E7F814140A78",
+  "OldSourceSha": "8729d17fd0b19c1f2a984f8e12d1c4a8f8189d51"
+}

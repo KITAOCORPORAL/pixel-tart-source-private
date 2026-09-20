@@ -2,9 +2,9 @@
 
 ## 最终状态
 
-**BLOCKED / 未达到安装包交付门槛。** 新 Setup 已生成，隔离安装及进程启动、升级文件替换通过；源码全量自动 Gate 通过。安装版七模块、预览、导出、联机返回、在线选片和正常关闭的真实操作未完成，不能宣布 Final Product Closure 或正式可交付。
+**AWAITING LOCAL ACCEPTANCE RUN / 产品尚未达到最终交付门槛。** 2026-09-20 Completion Pass 已补齐独立 Runner、fresh/upgrade 完整计划及自包含一键本机验收包。Release Build 0 warning / 0 error，两份计划离线校验 PASS，23 项离线自测 PASS；没有实机执行，不等于安装版验收通过。
 
-本轮停止在验收阻塞，不进入 Stage VI，不制作宣传片，不替用户完成视觉签收。
+本轮按明确的环境限制采用用户指定的本机包交付路径。产品源码和现有安装器不变；不进入 Stage VI，不制作宣传片，不替用户完成视觉签收。完整本轮记录见 `INSTALLED_ACCEPTANCE_RUNNER_COMPLETION.md`。以下 Recovery Pass 为历史记录，其中“部分实现”已被本轮代码与完整计划替代，实机 NOT_RUN 仍然成立。
 
 ## Installed UI Automation — Recovery Pass
 
@@ -163,4 +163,4 @@ Core 最终使用项目默认平台完整重建运行；之前 x64 缓存程序�
 
 ## 下一步（不扩展功能）
 
-恢复可用的 Windows 桌面截图/输入接口后，由 Codex 补安装版七模块、编辑/重启、预览、PDF、联机返回、在线选片、正常关闭以及右键菜单/弹层截图，随后再判定安装包交付。若因此需要改产品源码，则重新 commit/freeze，再完整重跑同 SHA Gate 和打包；不能沿用本报告旧证据。
+在独立测试 Windows 上双击 `artifacts/installed-acceptance-kit/运行安装版验收.bat` 并确认 UAC；将生成的 acceptance-result 回传后再检查实际截图和 PDF。若实际证据证明必须改产品源码，则重新 commit/freeze、完整重跑同 SHA Gate 和打包，不能沿用旧证据。
