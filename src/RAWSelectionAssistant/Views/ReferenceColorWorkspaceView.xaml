@@ -31,7 +31,7 @@
                 <Border Grid.Column="2" Background="{DynamicResource SurfacePrimaryBrush}" Padding="24">
                     <StackPanel VerticalAlignment="Center" MaxWidth="360"><TextBlock Text="参考图片" FontSize="24" Margin="0,0,0,20"/><Button Content="添加参考图片" Command="{Binding Editor.ImportExternalReferenceCommand}" Style="{StaticResource SecondaryButton}"/><TextBlock Text="或使用已有色彩方案" Style="{StaticResource CaptionText}" Margin="0,16,0,8"/><ComboBox ItemsSource="{Binding Editor.Looks}" SelectedItem="{Binding Editor.SelectedLook}" DisplayMemberPath="Name"/><TextBlock Text="{Binding Editor.StatusText}" TextWrapping="Wrap" Style="{StaticResource CaptionText}" Margin="0,12,0,0"/></StackPanel>
                 </Border>
-                <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,20,0,0"><TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/><ProgressBar Height="3" IsIndeterminate="True" Margin="0,8,0,0" Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsLoading}"/></StackPanel>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,20,0,0"><TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/><ProgressBar Height="20" IsIndeterminate="True" Margin="0,8,0,0" Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsLoading}"/></StackPanel>
             </Grid>
         </Grid>
     </Grid>
