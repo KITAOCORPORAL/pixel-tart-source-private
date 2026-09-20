@@ -41,7 +41,7 @@ public static class PlanningProposalPdf
                 var width = Math.Min(640, bitmap.PixelWidth * 96d / dpi);
                 var image = new Image { Source = bitmap, Width = width, Height = Math.Min(430, width * bitmap.PixelHeight / bitmap.PixelWidth), Stretch = Stretch.Uniform };
                 var group = new StackPanel(); group.Children.Add(image);
-                group.Children.Add(new TextBlock { Text = reference.Title, FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 8, 0, 0) });
+                group.Children.Add(new TextBlock { Text = reference.Title, FontFamily = new FontFamily("Microsoft YaHei UI"), Foreground = Brushes.Black, Background = Brushes.White, FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 8, 0, 0) });
                 doc.Blocks.Add(new BlockUIContainer(group) { Margin = new Thickness(0, 18, 0, 8) });
             }
             catch (Exception error) when (error is IOException or NotSupportedException) { Text(reference.Title + " · 图片暂不可用"); }
