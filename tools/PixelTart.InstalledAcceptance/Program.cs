@@ -17,6 +17,27 @@ internal static partial class Program
     private static int Main(string[] args)
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
+        if (args.Length == 2 && args[0] == "--lint-plan") return LintPlanFile(args[1]);
+        if (args is ["--navigation-tests"]) return NavigationTests();
+        if (args is ["--selector-tests"]) return SelectorTests();
+        if (args.Length == 2 && args[0] == "--audit-selectors")
+        {
+            try { PlanDirectory = Path.GetFullPath(args[1]); VerifyKitManifest(); var p = JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, "planning-full.plan.json")), Json)!; Validate(p); return new Runner(p, true).Run(); }
+            catch (Exception e) { Console.Error.WriteLine(e.Message); return 1; }
+        }
+        if (args.Length == 3 && args[0] == "--kit" && args[2] == "--preflight-only")
+        {
+            try
+            {
+                PlanDirectory = Path.GetFullPath(args[1]);
+                VerifyKitManifest();
+                foreach (var file in new[] { "planning-full.plan.json", "upgrade-full.plan.json" })
+                    Validate(JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, file)), Json)!);
+                Console.WriteLine("Runner PASS：--kit 参数已识别；两份完整计划与安装器校验通过。仅预检，没有安装或 UI 自动化。");
+                return 0;
+            }
+            catch (Exception error) { Console.Error.WriteLine("Runner 预检失败：" + error.Message); return 1; }
+        }
         if (args is ["--self-test"]) return SelfTest();
         if (args.Length == 2 && args[0] == "--kit") return RunKit(args[1]);
         if (args.Length != 2 || args[0] is not ("--validate" or "--run"))
@@ -58,15 +79,15 @@ internal static partial class Program
         {
             if (!known.Contains(s.Action)) throw new InvalidDataException("Unknown action: " + s.Action);
             if (s.Action is "invoke" or "setValue" or "select" or "expand" or "focusKey" or "assertPresent" or "assertAbsent" or "waitPresent" or "waitAbsent" or "assertEnabled" or "assertSelected" or "assertText")
-                if (s.IdSelector is null && s.AutomationId is null && s.Name is null && s.DescendantName is null) throw new InvalidDataException("Selector required: " + s.Id);
+                if (s.IdSelector is null && s.AutomationId is null && s.Name is null && s.DescendantName is null && !(s.ControlType is not null && s.ScopePath is { Length: > 0 })) throw new InvalidDataException("Selector required: " + s.Id);
             if (s.Action == "focusKey" && s.Value is not ("{ESC}" or "+{F10}" or "{ENTER}" or "{TAB}" or "{HOME}" or "{LEFT}" or "{RIGHT}" or "{UP}" or "{DOWN}")) throw new InvalidDataException("Unsupported keyboard action");
             if (s.Action == "capture") Child(root, s.Path ?? s.Value ?? throw new InvalidDataException("Screenshot path missing"));
         }
         ValidateFull(p);
     }
-    private sealed partial class Runner(Plan plan)
+    private sealed partial class Runner(Plan plan, bool auditOnly = false)
     {
-        private readonly string root = Child(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PixelTart-TestAcceptance"), plan.RunDirectory + "_" + plan.Mode + "_" + Guid.NewGuid().ToString("N"));
+        private readonly string root = Child(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PixelTart-TestAcceptance"), plan.RunDirectory + "_" + (auditOnly ? "selector-audit" : plan.Mode) + "_" + Guid.NewGuid().ToString("N"));
         private readonly List<object> results = [];
         private readonly List<object> screenshots = [];
         private Process? process;
@@ -96,6 +117,13 @@ internal static partial class Program
                     if (step.Optional && !OptionalPresent(step)) { Record(currentStep, "SKIPPED_EXPECTED"); continue; }
                     Execute(step);
                     Record(currentStep, "PASS");
+                    AuditCheckpoint(step.Id);
+                    if (auditOnly && step.Id == "create-open")
+                    {
+                        Save("SELECTOR_AUDIT_ONLY", "Create modal selectors checked without entering/creating project data. Later states NOT_VISITED; not acceptance PASS.");
+                        Console.WriteLine("选择器审计结束：新建弹窗已检查，未创建策划；应用保留供检查，不代表正式验收通过。");
+                        return 0;
+                    }
                 }
                 // Never infer complete acceptance from a partial declarative plan.
                 if (exitResult != "PASS" || process is { HasExited: false }) throw new IOException("Final normal exit required");
@@ -126,6 +154,7 @@ internal static partial class Program
             start.Environment["PIXEL_TART_HUMAN_ACCEPTANCE"] = "1";
             start.Environment["PIXEL_TART_ACCEPTANCE_ROOT"] = Child(root, "fresh-data");
             process = Process.Start(start) ?? throw new IOException("App did not start"); processId = process.Id;
+            File.WriteAllText(Out("owned-process.json"), JsonSerializer.Serialize(new { PID = process.Id, InstalledExePath = Exe, AcceptanceRoot = root, Started = process.StartTime.ToUniversalTime() }, Json));
             var watch = Stopwatch.StartNew();
             while (watch.Elapsed < TimeSpan.FromSeconds(30))
             {
@@ -145,22 +174,23 @@ internal static partial class Program
         }
         private AutomationElement[] Find(Step step)
         {
-            // A DatePicker and its adjacent Text label can share a name. Require
-            // the value provider for date operations instead of guessing a peer type.
-            var found = FindScoped(step);
-            return step.Action == "assertDate" || (step.Action == "setValue" && step.Name == "拍摄日期")
-                ? found.Where(e => e.TryGetCurrentPattern(ValuePattern.Pattern, out _)).ToArray() : found;
+            return FindScoped(step);
         }
         private AutomationElement One(Step step)
         {
             var watch = Stopwatch.StartNew();
+            MissingScopeException? scopeFailure = null;
             while (watch.ElapsedMilliseconds < step.TimeoutMs)
             {
-                var found = Find(step);
-                if (found.Length == 1) return found[0];
-                if (found.Length > 1) throw new InvalidOperationException("Ambiguous selector; refusing arbitrary match: " + step.Id);
+                AutomationElement[] found;
+                try { found = Find(step); scopeFailure = null; }
+                catch (MissingScopeException e) { scopeFailure = e; Thread.Sleep(200); continue; }
+                if (found.Length == 1) return RequireUnique(found, step.Id);
+                if (found.Length > 1) { Diagnose(step, found, "target"); return RequireUnique(found, step.Id); }
                 Thread.Sleep(200);
             }
+            if (scopeFailure is not null) throw scopeFailure;
+            Diagnose(step, [], "target-timeout");
             throw new TimeoutException((step.ExternalDialog ? "EXTERNAL_DIALOG_BLOCKED: " : "No unique element: ") + step.Id);
         }
         private void Execute(Step s)
@@ -170,7 +200,7 @@ internal static partial class Program
             if (s.Action == "restart") { if (process is { HasExited: false }) throw new IOException("Close first"); window = null; Start(); return; }
             if (s.Action == "close")
             {
-                ((WindowPattern)window!.GetCurrentPattern(WindowPattern.Pattern)).Close(); WaitExit(s.TimeoutMs); return;
+                VerifyOwnedProcess(); ((WindowPattern)window!.GetCurrentPattern(WindowPattern.Pattern)).Close(); WaitExit(s.TimeoutMs); return;
             }
             if (s.Action == "dump")
             {
@@ -178,7 +208,7 @@ internal static partial class Program
                 File.WriteAllText(Out(s.Id + ".tree.json"), JsonSerializer.Serialize(nodes, Json)); return;
             }
             if (s.Action == "assertAbsent")
-            { Until(() => Find(s).Length == 0, s.TimeoutMs); return; }
+            { Until(() => IsAbsent(s), s.TimeoutMs); return; }
             var element = One(s);
             switch (s.Action)
             {
@@ -216,7 +246,7 @@ internal static partial class Program
             screenshots.Add(new { Path = path, SHA256 = Hash(path), bitmap.Width, bitmap.Height, VisualReview = "PENDING", PopupCompleteness = "PENDING" });
         }
         private void Save(string status, string detail) => File.WriteAllText(Out("acceptance.json"), JsonSerializer.Serialize(new {
-            Status = status, Detail = detail, plan.ProductSourceSha, plan.InstallerSha256, InstalledExePath = Exe,
+            Status = status, Detail = detail, AcceptanceKitVersion = "v3", plan.ProductSourceSha, plan.InstallerSha256, InstalledExePath = Exe, AcceptanceRoot = root,
             InstalledExeSha256 = File.Exists(Exe) ? Hash(Exe) : null, ProcessId = processId, WindowTitle = title,
             AutomationTechnology = "System.Windows.Automation (external PID-bound UIA)", Steps = results, Screenshots = screenshots,
             RunStarted = runStarted, RunEnded = DateTimeOffset.UtcNow, ExportedPdf = pdfPath, ExportedPdfSha256 = pdfPath is null ? null : Hash(pdfPath), ExportedPdfPages = pdfPages,
@@ -225,10 +255,11 @@ internal static partial class Program
         [DllImport("user32.dll")] private static extern nint GetForegroundWindow();
         [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(nint hwnd, out int processId);
     }
-    internal sealed record Plan(string ProductSourceSha, string InstallerPath, string InstallerSha256, string RunDirectory, Step[] Steps, string Mode = "fresh", bool FullPlan = false, string? OldInstallerPath = null, string? OldInstallerSha256 = null, string? OldSourceSha = null);
+    internal sealed record Plan(string ProductSourceSha, string InstallerPath, string InstallerSha256, string RunDirectory, Step[] Steps, string Mode = "fresh", bool FullPlan = false, string? OldInstallerPath = null, string? OldInstallerSha256 = null, string? OldSourceSha = null, Dictionary<string, Step[]>? AuditCheckpoints = null);
+    internal sealed record SelectorScope(string? Name = null, string? AutomationId = null, string? ControlType = null, bool Heading = false);
     internal sealed record Step(string Id, string Action, string? IdSelector = null, string? Name = null, string? ControlType = null, string? Value = null,
         string? AutomationId = null, string? AncestorAutomationId = null, string? AncestorName = null, string? AncestorControlType = null,
         string? ScopeAnchorName = null, string? DescendantName = null, string? HelpText = null, bool Optional = false, bool IncludeOffscreen = false,
         string? Path = null, string? ExpectedHash = null, long Minimum = 1, int TimeoutMs = 10000, int Milliseconds = 100,
-        string? Coverage = null, bool ExternalDialog = false, string[]? MustContain = null);
+        string? Coverage = null, bool ExternalDialog = false, string[]? MustContain = null, SelectorScope[]? ScopePath = null, string? ScopePreset = null);
 }

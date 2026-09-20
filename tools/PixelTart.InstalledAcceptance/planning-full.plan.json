@@ -1,6 +1,6 @@
 {
   "ProductSourceSha": "8cb95e6d2c4814717dc31a8c6aa19f8b2c89c9cc",
-  "InstallerPath": "installers/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe",
+  "InstallerPath": "installer/PixelTart-DeveloperPreview-2.3.0-dev.8cb95e6-x64-Setup.exe",
   "InstallerSha256": "C2E5F26A1D00BFE2A466450C0BB9D015CDD35D6733E909FE8ADCB5BAEFA6247D",
   "RunDirectory": "InstalledAcceptance_8cb95e6",
   "FullPlan": true,
@@ -15,30 +15,45 @@
       "Action": "invoke",
       "AutomationId": "TutorialExitButton",
       "Optional": true,
-      "TimeoutMs": 2000
+      "TimeoutMs": 2000,
+      "ControlType": "Button",
+      "ScopePreset": "MainWindow"
     },
     {
       "Id": "tutorial-gone",
       "Action": "waitAbsent",
       "AutomationId": "TutorialExitButton",
-      "Coverage": "onboarding"
+      "Coverage": "onboarding",
+      "ControlType": "Button",
+      "ScopePreset": "MainWindow"
     },
     {
       "Id": "planning-enabled",
       "Action": "assertEnabled",
-      "AutomationId": "PrimaryNavigationPlanning"
+      "AutomationId": "PrimaryNavigationPlanning",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning"
+      "AutomationId": "PrimaryNavigationPlanning",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "planning-list",
       "Action": "assertPresent",
       "Name": "策划案列表",
       "ControlType": "List",
-      "Coverage": "planning"
+      "Coverage": "planning",
+      "AutomationId": "DocumentList",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "home-shot",
@@ -50,51 +65,118 @@
       "Action": "invoke",
       "Name": "新建策划",
       "ControlType": "Button",
-      "HelpText": "新建策划"
+      "HelpText": "新建策划",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "create-heading",
       "Action": "assertPresent",
       "Name": "新建策划案",
       "ControlType": "Text",
-      "IncludeOffscreen": true
+      "IncludeOffscreen": true,
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "create-name",
       "Action": "setValue",
       "Name": "新策划名称",
       "ControlType": "Edit",
-      "ScopeAnchorName": "新建策划案",
-      "Value": "{project}"
+      "Value": "{project}",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "create-location",
       "Action": "setValue",
       "Name": "拍摄地点",
       "ControlType": "Edit",
-      "ScopeAnchorName": "新建策划案",
-      "Value": "杭州测试摄影棚"
+      "Value": "杭州测试摄影棚",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "date-value",
       "Action": "setValue",
       "Name": "拍摄日期",
-      "ScopeAnchorName": "新建策划案",
-      "Value": "2026-09-19"
+      "Value": "2026-09-19",
+      "AutomationId": "PART_TextBox",
+      "ControlType": "Edit",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "拍摄日期",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "date-open",
       "Action": "invoke",
       "Name": "选择拍摄日期",
       "ControlType": "Button",
-      "ScopeAnchorName": "新建策划案"
+      "AutomationId": "PART_Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "拍摄日期",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "date-calendar",
       "Action": "assertPresent",
       "ControlType": "Calendar",
-      "Name": "",
-      "IncludeOffscreen": false
+      "IncludeOffscreen": false,
+      "ScopePath": [
+        {
+          "ControlType": "Calendar"
+        }
+      ]
     },
     {
       "Id": "date-shot",
@@ -107,37 +189,77 @@
     {
       "Id": "date-next-day",
       "Action": "focusKey",
-      "Name": "",
       "ControlType": "Calendar",
-      "Value": "{RIGHT}"
+      "Value": "{RIGHT}",
+      "ScopePath": [
+        {
+          "ControlType": "Calendar"
+        }
+      ]
     },
     {
       "Id": "date-confirm",
       "Action": "focusKey",
-      "Name": "",
       "ControlType": "Calendar",
-      "Value": "{ENTER}"
+      "Value": "{ENTER}",
+      "ScopePath": [
+        {
+          "ControlType": "Calendar"
+        }
+      ]
     },
     {
       "Id": "date-check",
       "Action": "assertDate",
       "Name": "拍摄日期",
-      "ScopeAnchorName": "新建策划案",
       "Value": "2026-09-20",
-      "Coverage": "date"
+      "Coverage": "date",
+      "AutomationId": "PART_TextBox",
+      "ControlType": "Edit",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        },
+        {
+          "Name": "拍摄日期",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "create-confirm",
       "Action": "invoke",
       "Name": "新建策划",
       "ControlType": "Button",
-      "ScopeAnchorName": "新建策划案"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "新建策划案",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "create-closed",
       "Action": "waitAbsent",
       "Name": "新建策划案",
-      "ControlType": "Text"
+      "ControlType": "Text",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "created-list-item",
@@ -145,27 +267,46 @@
       "AncestorName": "策划案列表",
       "ControlType": "ListItem",
       "DescendantName": "{project}",
-      "Coverage": "create"
+      "Coverage": "create",
+      "AncestorAutomationId": "DocumentList",
+      "AncestorControlType": "List"
     },
     {
       "Id": "select-created",
       "Action": "select",
       "AncestorName": "策划案列表",
       "ControlType": "ListItem",
-      "DescendantName": "{project}"
+      "DescendantName": "{project}",
+      "AncestorAutomationId": "DocumentList",
+      "AncestorControlType": "List"
     },
     {
       "Id": "text-open",
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "edit",
       "Action": "invoke",
       "Name": "编辑",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "edit-body",
@@ -173,7 +314,17 @@
       "Name": "策划正文",
       "ControlType": "Edit",
       "IncludeOffscreen": true,
-      "Value": "Installed Acceptance Persistence {shortsha}"
+      "Value": "Installed Acceptance Persistence {shortsha}",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "edit-verify",
@@ -182,28 +333,58 @@
       "ControlType": "Edit",
       "IncludeOffscreen": true,
       "Value": "Installed Acceptance Persistence {shortsha}",
-      "Coverage": "text-edit"
+      "Coverage": "text-edit",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "save-switch",
       "Action": "invoke",
       "Name": "参考图",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "save-return",
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "save-content",
       "Action": "assertPresent",
       "Name": "Installed Acceptance Persistence {shortsha}",
       "ControlType": "Text",
-      "IncludeOffscreen": true
+      "IncludeOffscreen": true,
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "restart-close-request",
@@ -215,7 +396,9 @@
       "Name": "保存",
       "ControlType": "Button",
       "Optional": true,
-      "TimeoutMs": 1000
+      "TimeoutMs": 1000,
+      "AncestorControlType": "Window",
+      "AncestorName": "像素蛋挞消息对话框"
     },
     {
       "Id": "restart-close",
@@ -231,26 +414,37 @@
       "Action": "invoke",
       "AutomationId": "TutorialExitButton",
       "Optional": true,
-      "TimeoutMs": 1000
+      "TimeoutMs": 1000,
+      "ControlType": "Button",
+      "ScopePreset": "MainWindow"
     },
     {
       "Id": "restart-planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning"
+      "AutomationId": "PrimaryNavigationPlanning",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "restart-select",
       "Action": "select",
       "AncestorName": "策划案列表",
       "ControlType": "ListItem",
-      "DescendantName": "{project}"
+      "DescendantName": "{project}",
+      "AncestorAutomationId": "DocumentList",
+      "AncestorControlType": "List"
     },
     {
       "Id": "restart-text",
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "persisted-body",
@@ -258,14 +452,29 @@
       "Name": "Installed Acceptance Persistence {shortsha}",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "persistence"
+      "Coverage": "persistence",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "module-text",
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-text",
@@ -273,7 +482,17 @@
       "Name": "Installed Acceptance Persistence {shortsha}",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "text"
+      "Coverage": "text",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-text",
@@ -285,7 +504,12 @@
       "Action": "invoke",
       "Name": "参考图",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-references",
@@ -293,7 +517,17 @@
       "Name": "还没有参考图。关联已有参考，或从本地添加；原图保持不变。",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "references"
+      "Coverage": "references",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-references",
@@ -305,7 +539,12 @@
       "Action": "invoke",
       "Name": "情绪板",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-moodboard",
@@ -313,7 +552,17 @@
       "Name": "还没有情绪板。关联已有参考，或从本地添加；原图保持不变。",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "moodboard"
+      "Coverage": "moodboard",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-moodboard",
@@ -325,14 +574,29 @@
       "Action": "invoke",
       "Name": "镜头清单",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-shots",
       "Action": "assertPresent",
       "Name": "0 / 0 已拍",
       "ControlType": "Text",
-      "Coverage": "shots"
+      "Coverage": "shots",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-shots",
@@ -344,7 +608,12 @@
       "Action": "invoke",
       "Name": "灯光图",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-lighting",
@@ -352,7 +621,17 @@
       "Name": "还没有灯光图。关联已有参考，或从本地添加；原图保持不变。",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "lighting"
+      "Coverage": "lighting",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-lighting",
@@ -364,7 +643,12 @@
       "Action": "invoke",
       "Name": "服化道",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-styling",
@@ -372,7 +656,17 @@
       "Name": "还没有服化道。关联已有参考，或从本地添加；原图保持不变。",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "styling"
+      "Coverage": "styling",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-styling",
@@ -384,7 +678,12 @@
       "Action": "invoke",
       "Name": "文件",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "landmark-files",
@@ -392,7 +691,17 @@
       "Name": "项目文件",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "files"
+      "Coverage": "files",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "capture-files",
@@ -404,37 +713,83 @@
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "preview-open",
       "Action": "invoke",
       "Name": "预览策划案",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "preview-list-hidden",
       "Action": "assertAbsent",
       "Name": "策划案列表",
-      "Coverage": "preview"
+      "Coverage": "preview",
+      "AutomationId": "DocumentList",
+      "ControlType": "List",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "preview-nav-hidden",
       "Action": "assertAbsent",
-      "Name": "策划内容导航"
+      "Name": "文字",
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "preview-edit-hidden",
       "Action": "assertAbsent",
       "Name": "编辑",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "preview-body",
       "Action": "assertPresent",
       "Name": "Installed Acceptance Persistence {shortsha}",
       "ControlType": "Text",
-      "IncludeOffscreen": true
+      "IncludeOffscreen": true,
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "preview-shot",
@@ -445,12 +800,27 @@
       "Id": "preview-escape",
       "Action": "focusKey",
       "Name": "摄影策划案工作区",
-      "Value": "{ESC}"
+      "Value": "{ESC}",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "preview-restored",
       "Action": "assertPresent",
-      "Name": "策划案列表"
+      "Name": "策划案列表",
+      "AutomationId": "DocumentList",
+      "ControlType": "List",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "fixture",
@@ -461,13 +831,24 @@
       "Action": "invoke",
       "Name": "参考图",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "import-open",
       "Action": "invoke",
       "Name": "关联本地图片",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "import-dialog",
@@ -498,20 +879,49 @@
     {
       "Id": "reference-loaded",
       "Action": "waitPresent",
-      "Name": "参考图：验收参考"
+      "Name": "参考图：验收参考",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "quick-open",
       "Action": "focusKey",
       "Name": "参考图：验收参考",
-      "Value": "{ENTER}"
+      "Value": "{ENTER}",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "quick-landmark",
       "Action": "assertPresent",
       "Name": "关闭参考大图",
       "ControlType": "Button",
-      "Coverage": "quick-preview"
+      "Coverage": "quick-preview",
+      "AutomationId": "CloseImageButton",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "quick-shot",
@@ -525,56 +935,81 @@
       "Id": "quick-close",
       "Action": "invoke",
       "Name": "关闭参考大图",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "AutomationId": "CloseImageButton",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "menu-open",
       "Action": "focusKey",
       "Name": "参考图：验收参考",
-      "Value": "+{F10}"
+      "Value": "+{F10}",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "menu-item-0",
       "Action": "assertPresent",
       "Name": "打开来源",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-1",
       "Action": "assertPresent",
       "Name": "加入情绪板",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-2",
       "Action": "assertPresent",
       "Name": "用于当前镜头",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-3",
       "Action": "assertPresent",
       "Name": "用于灯光",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-4",
       "Action": "assertPresent",
       "Name": "用于造型",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-5",
       "Action": "assertPresent",
       "Name": "用于参考仿色",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-item-6",
       "Action": "assertPresent",
       "Name": "从策划中移除",
       "ControlType": "MenuItem",
-      "Coverage": "context-menu"
+      "Coverage": "context-menu",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "menu-shot",
@@ -595,20 +1030,33 @@
       "Action": "focusKey",
       "Name": "打开来源",
       "ControlType": "MenuItem",
-      "Value": "{ESC}"
+      "Value": "{ESC}",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "booking-open",
       "Action": "invoke",
       "Name": "关联档期",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "booking-landmark",
       "Action": "assertPresent",
       "Name": "可关联档期",
       "ControlType": "List",
-      "Coverage": "booking"
+      "Coverage": "booking",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "booking-shot",
@@ -623,32 +1071,71 @@
       "Action": "invoke",
       "Name": "取消",
       "ControlType": "Button",
-      "ScopeAnchorName": "关联工作日历档期"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "关联工作日历档期",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "export-open",
       "Action": "invoke",
       "Name": "导出策划案 PDF",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "quality-expand",
       "Action": "expand",
       "Name": "PDF 导出质量",
-      "ControlType": "ComboBox"
+      "ControlType": "ComboBox",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "导出策划案 PDF",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "quality-select",
       "Action": "select",
       "Name": "高质量 · 300 DPI",
-      "ControlType": "ListItem"
+      "ControlType": "ListItem",
+      "AncestorName": "PDF 导出质量",
+      "AncestorControlType": "ComboBox"
     },
     {
       "Id": "export-confirm",
       "Action": "invoke",
       "Name": "导出 PDF",
       "ControlType": "Button",
-      "ScopeAnchorName": "导出策划案 PDF"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "Name": "导出策划案 PDF",
+          "ControlType": "Text",
+          "Heading": true
+        }
+      ]
     },
     {
       "Id": "save-dialog",
@@ -681,7 +1168,14 @@
       "Action": "assertPresent",
       "Name": "策划案 PDF 已导出（图片式，文字不可选择）。",
       "ControlType": "Text",
-      "IncludeOffscreen": true
+      "IncludeOffscreen": true,
+      "ScopePath": [
+        {
+          "Name": "像素蛋挞消息对话框",
+          "ControlType": "Window"
+        }
+      ],
+      "AutomationId": "MessageTextBlock"
     },
     {
       "Id": "export-shot",
@@ -695,7 +1189,14 @@
       "Id": "export-dismiss",
       "Action": "invoke",
       "Name": "确定",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "像素蛋挞消息对话框",
+          "ControlType": "Window"
+        }
+      ],
+      "AutomationId": "YesButton"
     },
     {
       "Id": "pdf-exists",
@@ -714,44 +1215,72 @@
       "Action": "invoke",
       "Name": "镜头清单",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "shot-new",
       "Action": "invoke",
       "Name": "新建镜头",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "more",
       "Action": "invoke",
       "Name": "更多策划操作",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "shoot",
       "Action": "invoke",
       "Name": "开始拍摄",
-      "ControlType": "MenuItem"
+      "ControlType": "MenuItem",
+      "AncestorControlType": "Menu"
     },
     {
       "Id": "tether-workspace",
       "Action": "assertPresent",
       "Name": "联机拍摄现场监看工作区",
-      "Coverage": "tether"
+      "Coverage": "tether",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "联机拍摄现场监看工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "tether-context",
       "Action": "assertEnabled",
       "Name": "返回当前项目策划",
-      "ControlType": "Button"
+      "ControlType": "Button",
+      "AncestorName": "联机拍摄现场监看工作区",
+      "AncestorControlType": "Custom"
     },
     {
       "Id": "tether-shot-context",
       "Action": "assertPresent",
       "Name": "Shot 01 / 01 · 未命名拍摄",
       "ControlType": "Text",
-      "AncestorName": "联机拍摄现场监看工作区"
+      "AncestorName": "联机拍摄现场监看工作区",
+      "AncestorControlType": "Custom"
     },
     {
       "Id": "tether-shot",
@@ -761,14 +1290,21 @@
     {
       "Id": "back-planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning"
+      "AutomationId": "PrimaryNavigationPlanning",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "back-text",
       "Action": "invoke",
       "Name": "文字",
       "ControlType": "Button",
-      "AncestorName": "策划内容导航"
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "back-body",
@@ -776,24 +1312,45 @@
       "Name": "Installed Acceptance Persistence {shortsha}",
       "ControlType": "Text",
       "IncludeOffscreen": true,
-      "Coverage": "return-planning"
+      "Coverage": "return-planning",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        },
+        {
+          "AutomationId": "DocumentScroll",
+          "ControlType": "Pane"
+        }
+      ]
     },
     {
       "Id": "online",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationOnlineSelection"
+      "AutomationId": "PrimaryNavigationOnlineSelection",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "online-landmark",
       "Action": "assertPresent",
       "Name": "创建选片项目",
       "ControlType": "Button",
-      "Coverage": "online"
+      "Coverage": "online",
+      "AncestorName": "在线选片",
+      "AncestorControlType": "Custom"
     },
     {
       "Id": "online-not-toolbox",
       "Action": "assertAbsent",
-      "Name": "摄影策划案工作区"
+      "Name": "摄影策划案工作区",
+      "ControlType": "Custom",
+      "ScopePath": [
+        {
+          "Name": "摄影策划案工作区",
+          "ControlType": "Custom"
+        }
+      ]
     },
     {
       "Id": "online-shot",
@@ -803,7 +1360,9 @@
     {
       "Id": "final-planning",
       "Action": "invoke",
-      "AutomationId": "PrimaryNavigationPlanning"
+      "AutomationId": "PrimaryNavigationPlanning",
+      "ControlType": "Button",
+      "ScopePreset": "PrimaryNavigation"
     },
     {
       "Id": "final-close-request",
@@ -815,7 +1374,9 @@
       "Name": "保存",
       "ControlType": "Button",
       "Optional": true,
-      "TimeoutMs": 1000
+      "TimeoutMs": 1000,
+      "AncestorControlType": "Window",
+      "AncestorName": "像素蛋挞消息对话框"
     },
     {
       "Id": "final-close",
@@ -823,5 +1384,663 @@
       "TimeoutMs": 15000,
       "Coverage": "normal-close"
     }
-  ]
+  ],
+  "AuditCheckpoints": {
+    "create-open": [
+      {
+        "Id": "check-create-name",
+        "Action": "assertPresent",
+        "Name": "新策划名称",
+        "ControlType": "Edit",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      },
+      {
+        "Id": "check-create-location",
+        "Action": "assertPresent",
+        "Name": "拍摄地点",
+        "ControlType": "Edit",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      },
+      {
+        "Id": "check-date-value",
+        "Action": "assertPresent",
+        "Name": "拍摄日期",
+        "AutomationId": "PART_TextBox",
+        "ControlType": "Edit",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "拍摄日期",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-date-open",
+        "Action": "assertPresent",
+        "Name": "选择拍摄日期",
+        "ControlType": "Button",
+        "AutomationId": "PART_Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          },
+          {
+            "Name": "拍摄日期",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-create-confirm",
+        "Action": "assertPresent",
+        "Name": "新建策划",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "新建策划案",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      }
+    ],
+    "select-created": [
+      {
+        "Id": "check-module-text",
+        "Action": "assertPresent",
+        "Name": "文字",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-references",
+        "Action": "assertPresent",
+        "Name": "参考图",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-moodboard",
+        "Action": "assertPresent",
+        "Name": "情绪板",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-shots",
+        "Action": "assertPresent",
+        "Name": "镜头清单",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-lighting",
+        "Action": "assertPresent",
+        "Name": "灯光图",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-styling",
+        "Action": "assertPresent",
+        "Name": "服化道",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-module-files",
+        "Action": "assertPresent",
+        "Name": "文件",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-edit",
+        "Action": "assertPresent",
+        "Name": "编辑",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      },
+      {
+        "Id": "check-preview-open",
+        "Action": "assertPresent",
+        "Name": "预览策划案",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-booking-open",
+        "Action": "assertPresent",
+        "Name": "关联档期",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-export-open",
+        "Action": "assertPresent",
+        "Name": "导出策划案 PDF",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-more",
+        "Action": "assertPresent",
+        "Name": "更多策划操作",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      }
+    ],
+    "edit": [
+      {
+        "Id": "check-edit-body",
+        "Action": "assertPresent",
+        "Name": "策划正文",
+        "ControlType": "Edit",
+        "IncludeOffscreen": true,
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      },
+      {
+        "Id": "check-finish-edit",
+        "Action": "assertPresent",
+        "Name": "完成编辑",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      }
+    ],
+    "preview-open": [
+      {
+        "Id": "check-preview-body",
+        "Action": "assertPresent",
+        "Name": "Installed Acceptance Persistence {shortsha}",
+        "ControlType": "Text",
+        "IncludeOffscreen": true,
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      }
+    ],
+    "date-open": [
+      {
+        "Id": "check-date-calendar",
+        "Action": "assertPresent",
+        "ControlType": "Calendar",
+        "IncludeOffscreen": false,
+        "ScopePath": [
+          {
+            "ControlType": "Calendar"
+          }
+        ]
+      }
+    ],
+    "import-dialog": [
+      {
+        "Id": "check-import-file",
+        "Action": "assertPresent",
+        "AutomationId": "1148",
+        "ControlType": "Edit",
+        "AncestorName": "关联参考图（不复制原图）",
+        "AncestorControlType": "Window",
+        "ExternalDialog": true
+      },
+      {
+        "Id": "check-import-submit",
+        "Action": "assertPresent",
+        "AutomationId": "1",
+        "ControlType": "Button",
+        "AncestorName": "关联参考图（不复制原图）",
+        "AncestorControlType": "Window",
+        "ExternalDialog": true
+      }
+    ],
+    "reference-loaded": [
+      {
+        "Id": "check-quick-open",
+        "Action": "assertPresent",
+        "Name": "参考图：验收参考",
+        "ControlType": "Custom",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      },
+      {
+        "Id": "check-menu-open",
+        "Action": "assertPresent",
+        "Name": "参考图：验收参考",
+        "ControlType": "Custom",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "AutomationId": "DocumentScroll",
+            "ControlType": "Pane"
+          }
+        ]
+      }
+    ],
+    "quick-open": [
+      {
+        "Id": "check-quick-close",
+        "Action": "assertPresent",
+        "Name": "关闭参考大图",
+        "ControlType": "Button",
+        "AutomationId": "CloseImageButton",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      }
+    ],
+    "menu-open": [
+      {
+        "Id": "check-menu-item-0",
+        "Action": "assertPresent",
+        "Name": "打开来源",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-1",
+        "Action": "assertPresent",
+        "Name": "加入情绪板",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-2",
+        "Action": "assertPresent",
+        "Name": "用于当前镜头",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-3",
+        "Action": "assertPresent",
+        "Name": "用于灯光",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-4",
+        "Action": "assertPresent",
+        "Name": "用于造型",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-5",
+        "Action": "assertPresent",
+        "Name": "用于参考仿色",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      },
+      {
+        "Id": "check-menu-item-6",
+        "Action": "assertPresent",
+        "Name": "从策划中移除",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      }
+    ],
+    "booking-open": [
+      {
+        "Id": "check-booking-landmark",
+        "Action": "assertPresent",
+        "Name": "可关联档期",
+        "ControlType": "List",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          }
+        ]
+      },
+      {
+        "Id": "check-booking-close",
+        "Action": "assertPresent",
+        "Name": "取消",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "关联工作日历档期",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      }
+    ],
+    "export-open": [
+      {
+        "Id": "check-quality-expand",
+        "Action": "assertPresent",
+        "Name": "PDF 导出质量",
+        "ControlType": "ComboBox",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "导出策划案 PDF",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      },
+      {
+        "Id": "check-export-confirm",
+        "Action": "assertPresent",
+        "Name": "导出 PDF",
+        "ControlType": "Button",
+        "ScopePath": [
+          {
+            "Name": "摄影策划案工作区",
+            "ControlType": "Custom"
+          },
+          {
+            "Name": "导出策划案 PDF",
+            "ControlType": "Text",
+            "Heading": true
+          }
+        ]
+      }
+    ],
+    "quality-expand": [
+      {
+        "Id": "check-quality-select",
+        "Action": "assertPresent",
+        "Name": "高质量 · 300 DPI",
+        "ControlType": "ListItem",
+        "AncestorName": "PDF 导出质量",
+        "AncestorControlType": "ComboBox"
+      }
+    ],
+    "save-dialog": [
+      {
+        "Id": "check-save-path",
+        "Action": "assertPresent",
+        "AutomationId": "1148",
+        "ControlType": "Edit",
+        "AncestorName": "导出策划案 PDF",
+        "AncestorControlType": "Window",
+        "ExternalDialog": true
+      },
+      {
+        "Id": "check-save-submit",
+        "Action": "assertPresent",
+        "AutomationId": "1",
+        "ControlType": "Button",
+        "AncestorName": "导出策划案 PDF",
+        "AncestorControlType": "Window",
+        "ExternalDialog": true
+      }
+    ],
+    "more": [
+      {
+        "Id": "check-shoot",
+        "Action": "assertPresent",
+        "Name": "开始拍摄",
+        "ControlType": "MenuItem",
+        "AncestorControlType": "Menu"
+      }
+    ],
+    "online": [
+      {
+        "Id": "check-online-landmark",
+        "Action": "assertPresent",
+        "Name": "创建选片项目",
+        "ControlType": "Button",
+        "AncestorName": "在线选片",
+        "AncestorControlType": "Custom"
+      }
+    ],
+    "tutorial-gone": [
+      {
+        "Id": "nav-audit-0",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationWorkbench",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-1",
+        "Action": "assertPresent",
+        "AutomationId": "AssetLibraryNavigationButton",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-2",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationWorkflow",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-3",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationWorkCalendar",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-4",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationPlanning",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-5",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationTether",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-6",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationOnlineSelection",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-7",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationFinance",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-8",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationHistory",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-9",
+        "Action": "assertPresent",
+        "AutomationId": "PrimaryNavigationToolbox",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-audit-10",
+        "Action": "assertPresent",
+        "AutomationId": "SidebarSettingsButton",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-system-0",
+        "Action": "assertPresent",
+        "Name": "授权与版本",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      },
+      {
+        "Id": "nav-system-1",
+        "Action": "assertPresent",
+        "Name": "帮助",
+        "ControlType": "Button",
+        "ScopePreset": "PrimaryNavigation",
+        "IncludeOffscreen": true
+      }
+    ]
+  }
 }

@@ -14,6 +14,19 @@ internal static partial class Program
 {
     private static string PlanDirectory = AppContext.BaseDirectory;
     private static string? KitOutput;
+    private sealed record KitFile(string RelativePath, long Size, string SHA256);
+    private static void VerifyKitManifest()
+    {
+        var entries = JsonSerializer.Deserialize<KitFile[]>(File.ReadAllText(Child(PlanDirectory, "KIT_MANIFEST.json")), Json) ?? throw new InvalidDataException("Missing manifest");
+        foreach (var required in new[] { "PixelTart.InstalledAcceptance.exe", "PixelTart.InstalledAcceptance.dll", "planning-full.plan.json", "upgrade-full.plan.json" })
+            if (entries.Count(e => e.RelativePath == required) != 1) throw new InvalidDataException("Manifest missing/duplicate: " + required);
+        if (entries.Select(e => e.RelativePath).Distinct(StringComparer.OrdinalIgnoreCase).Count() != entries.Length) throw new InvalidDataException("Duplicate manifest paths");
+        foreach (var entry in entries)
+        {
+            var path = Child(PlanDirectory, entry.RelativePath);
+            if (!File.Exists(path) || new FileInfo(path).Length != entry.Size || Hash(path) != entry.SHA256) throw new InvalidDataException("Kit hash mismatch: " + entry.RelativePath);
+        }
+    }
     private static int RunKit(string directory)
     {
         System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.PerMonitorV2);
@@ -24,6 +37,7 @@ internal static partial class Program
         var passed = false;
         try
         {
+            VerifyKitManifest();
             var plans = new[] { "planning-full.plan.json", "upgrade-full.plan.json" }.Select(file => JsonSerializer.Deserialize<Plan>(File.ReadAllText(Child(PlanDirectory, file)), Json)!).ToArray();
             foreach (var p in plans) Validate(p);
             foreach (var p in plans)
@@ -48,7 +62,7 @@ internal static partial class Program
         {
             if (p.OldSourceSha?.Length != 40 || Hash(Child(PlanDirectory, p.OldInstallerPath!)) != p.OldInstallerSha256) throw new InvalidDataException("Old installer identity");
         }
-        foreach (var s in p.Steps)
+        foreach (var s in p.Steps.Concat(p.AuditCheckpoints?.Values.SelectMany(x => x) ?? []))
         {
             if (!Regex.IsMatch(s.Id, "^[a-z0-9-]+$")) throw new InvalidDataException("Step ID");
             if (s.TimeoutMs is < 100 or > 60000) throw new InvalidDataException("Timeout");
@@ -57,10 +71,15 @@ internal static partial class Program
             if (s.Path is not null) Child(PlanDirectory, s.Path);
             if (s.Action is "assertFileExists" or "assertFileHash" or "assertFileSize" or "assertPdfPages" or "assertScreenshot" && string.IsNullOrWhiteSpace(s.Path)) throw new InvalidDataException("File path required");
             if (s.ControlType is not null && typeof(ControlType).GetField(s.ControlType) is null) throw new InvalidDataException("Unknown ControlType");
+            foreach (var scope in s.ScopePath ?? [])
+                if (scope.ControlType is null || typeof(ControlType).GetField(scope.ControlType) is null || (scope.Heading && scope.ControlType != "Text")) throw new InvalidDataException("Invalid selector scope: " + s.Id);
             if (s.Action == "assertFileHash" && (s.ExpectedHash?.Length != 64 || !s.ExpectedHash.All(Uri.IsHexDigit))) throw new InvalidDataException("Expected file SHA256 required");
             if (s.Action == "assertDate" && (s.Name is null || !DateTime.TryParseExact(s.Value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))) throw new InvalidDataException("Date selector/value required");
         }
         if (!p.FullPlan) return;
+        if (Lint(p).Any(i => i.Severity == "ERROR")) throw new InvalidDataException("Selector lint has errors; run --lint-plan");
+        foreach (var checkpoint in p.AuditCheckpoints ?? [])
+            if (!p.Steps.Any(s => s.Id == checkpoint.Key) || checkpoint.Value.Any(s => s.Action != "assertPresent" || s.Optional)) throw new InvalidDataException("Invalid audit checkpoint");
         var required = p.Mode == "fresh" ? new[] { "onboarding", "planning", "create", "date", "text-edit", "text", "references", "moodboard", "shots", "lighting", "styling", "files", "persistence", "preview", "quick-preview", "context-menu", "booking", "pdf", "tether", "return-planning", "online", "normal-close" } : new[] { "old-create", "upgrade", "persistence", "text", "references", "moodboard", "shots", "lighting", "styling", "files", "preview", "normal-close" };
         foreach (var gate in required)
             if (!p.Steps.Any(s => s.Coverage == gate && !s.Optional && (s.Action.StartsWith("assert", StringComparison.Ordinal) || s.Action is "waitAbsent" or "waitPresent" or "waitExit" or "upgrade"))) throw new InvalidDataException("Coverage missing: " + gate);
@@ -101,6 +120,7 @@ internal static partial class Program
         private static void Until(Func<bool> test, int timeout)
         { var timer = Stopwatch.StartNew(); do { try { if (test()) return; } catch (ElementNotAvailableException) { } Thread.Sleep(100); } while (timer.ElapsedMilliseconds < timeout); throw new TimeoutException("Condition timed out"); }
         private bool OptionalPresent(Step s) { if (process is { HasExited: true }) return false; try { One(s); return true; } catch (TimeoutException) { return false; } catch (IOException) when (process is { HasExited: true }) { return false; } }
+        private bool IsAbsent(Step s) { try { return Find(s).Length == 0; } catch (MissingScopeException) { return true; } }
         private void Install(string path, string hash)
         {
             var safe = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PixelTart-TestAcceptance")) + Path.DirectorySeparatorChar;
@@ -127,7 +147,7 @@ internal static partial class Program
         {
             var terms = new List<Condition>(); var id = s.AutomationId ?? s.IdSelector;
             if (id is not null) terms.Add(new PropertyCondition(AutomationElement.AutomationIdProperty, id));
-            else if (s.Name is not null) terms.Add(new PropertyCondition(AutomationElement.NameProperty, Expand(s.Name)));
+            if (s.Name is not null) terms.Add(new PropertyCondition(AutomationElement.NameProperty, Expand(s.Name)));
             if (s.ControlType is not null) terms.Add(new PropertyCondition(AutomationElement.ControlTypeProperty, typeof(ControlType).GetField(s.ControlType)?.GetValue(null) ?? throw new InvalidDataException("ControlType " + s.ControlType)));
             if (s.HelpText is not null) terms.Add(new PropertyCondition(AutomationElement.HelpTextProperty, s.HelpText));
             var condition = terms.Count switch { 0 => Condition.TrueCondition, 1 => terms[0], _ => new AndCondition(terms.ToArray()) };
@@ -135,22 +155,31 @@ internal static partial class Program
         }
         private AutomationElement[] FindScoped(Step s)
         {
+            var requested = s;
+            s = ResolvePreset(s);
             var roots = Roots();
-            if (s.AncestorAutomationId is not null || s.AncestorName is not null)
+            if(s.ScopePreset == "MainWindow") roots = [window ?? throw new InvalidOperationException("Scope resolution failed: MainWindow unavailable")];
+            foreach (var scope in s.ScopePath ?? [])
             {
-                roots = roots.SelectMany(r => In(r, new Step(s.Id, "scope", AutomationId: s.AncestorAutomationId, Name: s.AncestorName, ControlType: s.AncestorControlType))).ToArray();
-                if (roots.Length > 1) throw new InvalidOperationException("Ambiguous ancestor: " + s.Id);
+                var candidates = roots.SelectMany(r => In(r, new Step(s.Id, "scope", AutomationId: scope.AutomationId, Name: scope.Name, ControlType: scope.ControlType))).Distinct(AutomationElementIdentity.Instance).ToArray();
+                if (candidates.Length != 1) { Diagnose(requested, candidates, "scope-path"); RequireScope(candidates, s.Id); }
+                var selected = RequireScope(candidates, s.Id);
+                roots = scope.Heading ? [TreeWalker.RawViewWalker.GetParent(selected) ?? throw new InvalidOperationException("Heading parent missing")] : [selected];
+            }
+            if (s.AncestorAutomationId is not null || s.AncestorName is not null || s.AncestorControlType is not null)
+            {
+                roots = roots.SelectMany(r => In(r, new Step(s.Id, "scope", AutomationId: s.AncestorAutomationId, Name: s.AncestorName, ControlType: s.AncestorControlType))).Distinct(AutomationElementIdentity.Instance).ToArray();
+                if (roots.Length != 1) { Diagnose(requested, roots, "ancestor-scope"); RequireScope(roots, s.Id); }
             }
             if (s.ScopeAnchorName is not null)
             {
                 var anchors = roots.SelectMany(r => In(r, new Step(s.Id, "anchor", Name: s.ScopeAnchorName, ControlType: "Text"))).ToArray();
-                if (anchors.Length == 0) return [];
-                if (anchors.Length != 1) throw new InvalidOperationException("Ambiguous modal heading");
-                for (var parent = TreeWalker.RawViewWalker.GetParent(anchors[0]); parent is not null && parent.Current.ProcessId == process!.Id; parent = TreeWalker.RawViewWalker.GetParent(parent))
+                if (anchors.Length != 1) { Diagnose(requested, anchors, "modal-heading-scope"); RequireScope(anchors, s.Id); }
+                for (var parent = TreeWalker.RawViewWalker.GetParent(RequireUnique(anchors, s.Id)); parent is not null && parent.Current.ProcessId == process!.Id; parent = TreeWalker.RawViewWalker.GetParent(parent))
                 { var found = In(parent, s); if (found.Length > 0) return found; }
                 return [];
             }
-            return roots.SelectMany(r => In(r, s)).ToArray();
+            return roots.SelectMany(r => In(r, s)).Distinct(AutomationElementIdentity.Instance).ToArray();
         }
         private void WaitExit(int timeout)
         {
@@ -169,12 +198,12 @@ internal static partial class Program
                     using (var bitmap = new Bitmap(1200, 800)) { using var g = Graphics.FromImage(bitmap); g.Clear(Color.DarkSlateGray); g.FillEllipse(Brushes.Coral, 100, 100, 400, 400); g.FillRectangle(Brushes.Gold, 600, 150, 350, 450); bitmap.Save(Child(root, "fixtures/验收参考.png"), ImageFormat.Png); } return true;
                 case "sleep": Thread.Sleep(s.Milliseconds); return true;
                 case "upgrade": if (process is { HasExited: false }) throw new IOException("Close before upgrade"); upgraded = true; Install(plan.InstallerPath, plan.InstallerSha256); return true;
-                case "requestClose": ((WindowPattern)window!.GetCurrentPattern(WindowPattern.Pattern)).Close(); return true;
+                case "requestClose": VerifyOwnedProcess(); ((WindowPattern)window!.GetCurrentPattern(WindowPattern.Pattern)).Close(); return true;
                 case "waitExit": WaitExit(s.TimeoutMs); return true;
                 case "assertProcessAlive": process!.Refresh(); if (process.HasExited || !process.Responding) throw new IOException("Process not responding"); return true;
                 case "assertWindowTitle": if (!window!.Current.Name.Contains(Expand(s.Value), StringComparison.Ordinal)) throw new IOException("Window title mismatch"); return true;
                 case "waitPresent": One(s); return true;
-                case "waitAbsent": Until(() => Find(s).Length == 0, s.TimeoutMs); return true;
+                case "waitAbsent": Until(() => IsAbsent(s), s.TimeoutMs); return true;
                 case "assertEnabled": if (!One(s).Current.IsEnabled) throw new IOException("Element disabled"); return true;
                 case "assertSelected": if (!((SelectionItemPattern)One(s).GetCurrentPattern(SelectionItemPattern.Pattern)).Current.IsSelected) throw new IOException("Element not selected"); return true;
                 case "assertDate":
@@ -195,7 +224,13 @@ internal static partial class Program
             Until(() => { GetWindowThreadProcessId(GetForegroundWindow(), out var pid); return pid == process!.Id; }, s.TimeoutMs);
             var bounds = window!.Current.BoundingRectangle;
             foreach (var top in Roots().Where(e => !e.Current.IsOffscreen)) bounds.Union(top.Current.BoundingRectangle);
-            foreach (var name in s.MustContain ?? []) bounds.Union(One(new Step(s.Id, "assertPresent", Name: name)).Current.BoundingRectangle);
+            foreach (var name in s.MustContain ?? [])
+            {
+                var selectors = plan.Steps.Where(x => x.Name == name && x.Action is "assertPresent" or "waitPresent" or "invoke").ToArray();
+                var distinct = selectors.Select(x => JsonSerializer.Serialize(x with { Id = "capture-bound", Action = "assertPresent", Coverage = null, Value = null })).Distinct().ToArray();
+                var selector = distinct.Length == 1 ? JsonSerializer.Deserialize<Step>(distinct.Single(), Json)! : new Step(s.Id, "assertPresent", Name: name, ControlType: name == "选择拍摄日期" ? "Button" : null);
+                bounds.Union(One(selector).Current.BoundingRectangle);
+            }
             var rect = new Rectangle((int)Math.Floor(bounds.X), (int)Math.Floor(bounds.Y), (int)Math.Ceiling(bounds.Width), (int)Math.Ceiling(bounds.Height));
             if (rect.Width <= 0 || rect.Height <= 0 || window.Current.IsOffscreen || !System.Windows.Forms.SystemInformation.VirtualScreen.Contains(rect)) throw new IOException("Clipped/hidden window or popup");
             var path = Out(s.Path ?? s.Value!); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
