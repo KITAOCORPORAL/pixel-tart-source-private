@@ -59,7 +59,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         ImportExternalReferenceCommand = new AsyncRelayCommand(_ => ImportExternalReferenceAsync(), _ => _dialogs is not null && _allowReferenceManagement);
         RemoveReferenceCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Remove), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel && ReferenceSources.Count > 1);
         MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel item && ReferenceSources.IndexOf(item) > 0);
-        MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel);
+        MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel item && ReferenceSources.IndexOf(item) >= 0 && ReferenceSources.IndexOf(item) < ReferenceSources.Count - 1);
         SourceCategories = [new("项目色彩方案", null), new("灵感板", "Board"), new("自由画布", "Canvas"), new("素材库", "Asset"), new("最近使用", "Recent"), new("导入参考图", "External")];
         _selectedSourceCategory = SourceCategories[0];
     }
@@ -205,7 +205,9 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     {
         if (!_allowReferenceManagement) return;
         var look = SelectedLook; if (look is null) return; var sources = look.ReferenceSources.ToArray(); var index = Array.FindIndex(sources, item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
-        sources[index] = sources[index] with { Weight = Math.Max(.001, percent) }; await SaveReferencesAsync(look, sources);
+        // Slider values are percentages; the persisted model stores relative 0..1
+        // weights. Normalize only after converting to the same unit as its peers.
+        sources[index] = sources[index] with { Weight = Math.Clamp(percent / 100d, .001, 1d) }; await SaveReferencesAsync(look, sources);
     }
 
     private async Task UpdateReferencesAsync(ReferenceSourceWeightViewModel? edited, ReferenceEdit edit)
@@ -300,6 +302,7 @@ public sealed class ReferenceSourceWeightViewModel : ObservableObject
     public ReferenceSourceWeightViewModel(ReferenceLookSource source, double weightPercent, Func<ReferenceSourceWeightViewModel, double, Task> changed) { Source=source;_weightPercent=weightPercent;_changed=changed; }
     public ReferenceLookSource Source { get; } public string Name => Source.Name; public string SourceLabel => Source.Kind switch { "Board"=>"灵感板", "Canvas"=>"自由画布", "External"=>"外部参考图", _=>"素材库" };
     public string AvailabilityText => string.IsNullOrWhiteSpace(Source.SourcePath) ? "使用已保存的参考分析" : File.Exists(Source.SourcePath) ? "参考文件可用" : "参考文件离线 · 使用已保存分析";
-    public double WeightPercent { get=>_weightPercent; set { var bounded=Math.Clamp(value,.1,100); if(SetProperty(ref _weightPercent,bounded)) _=_changed(this,bounded); } }
+    public Task WeightUpdateTask { get; private set; } = Task.CompletedTask;
+    public double WeightPercent { get=>_weightPercent; set { var bounded=Math.Clamp(value,.1,100); if(SetProperty(ref _weightPercent,bounded)) WeightUpdateTask=_changed(this,bounded); } }
 }
 internal enum ReferenceEdit { Remove, Up, Down }

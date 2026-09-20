@@ -47,6 +47,11 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         var path = _dialogs.ChooseFiles("选择待调色照片（源文件只读）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault();
         if (path is null) return;
+        await LoadTargetAsync(path);
+    }
+
+    public async Task LoadTargetAsync(string path)
+    {
         try
         {
             IsLoading = true; StatusText = "正在载入照片…";

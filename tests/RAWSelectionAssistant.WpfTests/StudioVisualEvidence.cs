@@ -14,16 +14,50 @@ namespace RAWSelectionAssistant.WpfTests;
 // DEV-only gallery and software layout audit. Never registered in product navigation.
 internal static class StudioVisualEvidence
 {
-    internal static async Task MeasureOperation(string output, string name, Func<Task> action, Func<bool> feedback)
+    internal static void AuditGeometry(FrameworkElement root, string state, double scale, string output)
     {
-        var clock=System.Diagnostics.Stopwatch.StartNew(); double? feedbackAt=null; var beats=0;
+        var rows = new List<object>();
+        foreach (var text in Walk<TextBlock>(root).Where(t => t.IsVisible && t.ActualWidth > 0 && !string.IsNullOrWhiteSpace(t.Text)))
+        {
+            var width = Math.Max(1, text.ActualWidth - text.Padding.Left - text.Padding.Right);
+            var measured = new FormattedText(text.Text, System.Globalization.CultureInfo.CurrentCulture, text.FlowDirection,
+                new Typeface(text.FontFamily, text.FontStyle, text.FontWeight, text.FontStretch), text.FontSize, Brushes.Black, scale);
+            if (text.TextWrapping != TextWrapping.NoWrap) measured.MaxTextWidth = width;
+            if (!double.IsNaN(text.LineHeight)) measured.LineHeight = text.LineHeight;
+            var own = new Rect(0, 0, text.ActualWidth, text.ActualHeight);
+            var bounds = text.TransformToAncestor(root).TransformBounds(own);
+            var clipped = false; var scrollable = false; string? control = null;
+            for (DependencyObject? parent = VisualTreeHelper.GetParent(text); parent is not null; parent = VisualTreeHelper.GetParent(parent))
+            {
+                if (parent is ScrollViewer) scrollable = true;
+                if (parent is Control c && control is null) control = c.GetType().Name;
+                if (parent is FrameworkElement e && (e.ClipToBounds || e is ScrollContentPresenter))
+                {
+                    var relative = text.TransformToAncestor(e).TransformBounds(own);
+                    if (relative.Left < -2 || relative.Top < -2 || relative.Right > e.ActualWidth + 2 || relative.Bottom > e.ActualHeight + 2) clipped = true;
+                }
+                if (ReferenceEquals(parent, root)) break;
+            }
+            var outside = bounds.Left < -2 || bounds.Top < -2 || bounds.Right > root.ActualWidth + 2 || bounds.Bottom > root.ActualHeight + 2;
+            var overflow = measured.WidthIncludingTrailingWhitespace > width + 2.1 || measured.Height > text.ActualHeight - text.Padding.Top - text.Padding.Bottom + 3;
+            var disposition = scrollable && (outside || clipped) ? "SCROLL_REACHABLE_REQUIRES_INTERACTION_CHECK" :
+                text.TextTrimming != TextTrimming.None ? "EXPLICIT_ELLIPSIS" : overflow || outside || clipped ? "REVIEW_REQUIRED" : "WITHIN_RECORDED_BOUNDS";
+            rows.Add(new { State = state, LogicalScale = scale, Control = control, text.Text, TextBounds = new { bounds.X, bounds.Y, bounds.Width, bounds.Height }, Desired = new[] { measured.WidthIncludingTrailingWhitespace, measured.Height }, OutsideRoot = outside, AncestorClipped = clipped, ScrollAncestor = scrollable, Disposition = disposition });
+        }
+        Directory.CreateDirectory(output);
+        File.AppendAllText(Path.Combine(output, "geometry-observations.jsonl"), JsonSerializer.Serialize(new { ProductSourceSha = Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA") ?? "UNFROZEN_WORKTREE", State = state, Rows = rows }) + Environment.NewLine);
+    }
+    internal static async Task MeasureOperation(string output, string name, Func<Task> action, Func<bool> feedback, FrameworkElement? visualRoot = null)
+    {
+        var clock=System.Diagnostics.Stopwatch.StartNew(); double? feedbackAt=null; double? indicatorAt=null; var beats=0;
         var timer=new DispatcherTimer(DispatcherPriority.Background){Interval=TimeSpan.FromMilliseconds(20)};
-        timer.Tick+=(_,_)=>{beats++;if(feedbackAt is null && feedback())feedbackAt=clock.Elapsed.TotalMilliseconds;};
+        timer.Tick+=(_,_)=>{beats++;if(feedbackAt is null && feedback())feedbackAt=clock.Elapsed.TotalMilliseconds;
+            if(indicatorAt is null && visualRoot is not null && Walk<FrameworkElement>(visualRoot).Any(e=>e.IsVisible && PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsVisible(e))) indicatorAt=clock.Elapsed.TotalMilliseconds;};
         timer.Start();
         try {var task=action();if(feedback())feedbackAt=clock.Elapsed.TotalMilliseconds;await task;}
         finally {
             timer.Stop();clock.Stop();Directory.CreateDirectory(output);
-            File.AppendAllText(Path.Combine(output,"loading-timing.jsonl"),JsonSerializer.Serialize(new {ProductSourceSha=Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA")??"UNFROZEN_WORKTREE",Operation=name,ElapsedMs=clock.Elapsed.TotalMilliseconds,FeedbackStartMs=feedbackAt,DispatcherHeartbeats=beats,Responsive=beats>0?"OBSERVED":"TOO_SHORT_OR_NO_HEARTBEAT",SyntheticData=true})+Environment.NewLine);
+            File.AppendAllText(Path.Combine(output,"loading-timing.jsonl"),JsonSerializer.Serialize(new {ProductSourceSha=Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA")??"UNFROZEN_WORKTREE",Operation=name,ElapsedMs=clock.Elapsed.TotalMilliseconds,BusyStateStartMs=feedbackAt,IndicatorStartMs=indicatorAt,IndicatorObserved=visualRoot is not null,DispatcherHeartbeats=beats,Responsive=beats>0?"OBSERVED":"TOO_SHORT_OR_NO_HEARTBEAT",SyntheticData=true})+Environment.NewLine);
         }
     }
     internal static IEnumerable<T> Walk<T>(DependencyObject root) where T:DependencyObject {
@@ -107,6 +141,7 @@ internal static class StudioVisualEvidence
                 if(Math.Abs(root.ActualWidth*scale-width)>.5 || Math.Abs(root.ActualHeight*scale-height)>.5)
                     throw new InvalidOperationException("Production client render dimensions do not match requested pixels");
                 var path=Path.Combine(output,"dpi",route+"-"+width+"x"+height+"-"+(int)(scale*100)+".png");Png(root,path,scale);
+                AuditGeometry(root, route + "/" + width + "x" + height, scale, output);
                 captures.Add(new{Route=route,RequestedPixels=new[]{width,height},LogicalScale=scale,ActualDip=new[]{root.ActualWidth,root.ActualHeight},Filename=Path.GetRelativePath(output,path)});
                 foreach(var text in Walk<TextBlock>(root).Where(t=>t.IsVisible && t.ActualWidth>0 && !string.IsNullOrWhiteSpace(t.Text))) {
                     textCount++;

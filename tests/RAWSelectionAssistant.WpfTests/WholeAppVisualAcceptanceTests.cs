@@ -86,6 +86,7 @@ public sealed class WholeAppVisualAcceptanceTests
                                 root.Arrange(new Rect(root.DesiredSize)); root.UpdateLayout();
                             }
                             if (root.ActualWidth <= 0 || root.ActualHeight <= 0) throw new InvalidOperationException($"Unrendered production surface: {module}/{state}");
+                            StudioVisualEvidence.AuditGeometry(root, module + "/" + state, 1, output);
                             var bitmap = new RenderTargetBitmap((int)Math.Ceiling(root.ActualWidth), (int)Math.Ceiling(root.ActualHeight), 96, 96, PixelFormats.Pbgra32);
                             bitmap.Render(root);
                             var dir = Path.Combine(output, module); Directory.CreateDirectory(dir);
@@ -103,6 +104,13 @@ public sealed class WholeAppVisualAcceptanceTests
                             // Settings is a real overlay and deliberately does not change CurrentPage.
                             if (route != "Settings" && route != vm.CurrentPage) throw new InvalidOperationException("Route failed: " + route + "; actual=" + vm.CurrentPage);
                             await Capture(module, "default");
+                            if (route == "Workflow" && Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                            {
+                                vm.TextInput = "0001,0002,0003";
+                                vm.ParseTextCommand.Execute(null);
+                                if (vm.Selections.Count == 0) throw new InvalidOperationException("RAW match fixture has no selections");
+                                await StudioVisualEvidence.MeasureOperation(output, "RAW match (empty-index recovery)", () => vm.MatchCommand.ExecuteAsync(null), () => vm.IsBusy);
+                            }
                             if (route == "Tether" && Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
                             {
                                 var tether = vm.TetherPage!;
@@ -146,10 +154,10 @@ public sealed class WholeAppVisualAcceptanceTests
                                 var publishing = Descendants<RAWSelectionAssistant.Views.PublishingExportView>(window).Single();
                                 var publisher = (PublishingExportViewModel)publishing.DataContext;
                                 publisher.AddFiles(Directory.GetFiles(fixtureDirectory, "*.png").Take(3));
-                                await StudioVisualEvidence.MeasureOperation(output,"Publishing preview",async () => { await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.RefreshPreviewCommand).ExecuteAsync(null); while(publisher.IsPreviewing) await Task.Delay(20); },()=>publisher.IsPreviewing); await Capture(module, "content");
+                                await StudioVisualEvidence.MeasureOperation(output,"Publishing preview",async () => { await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.RefreshPreviewCommand).ExecuteAsync(null); while(publisher.IsPreviewing) await Task.Delay(20); },()=>publisher.IsPreviewing, publishing); await Capture(module, "content");
                                 if(Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE")=="1") {
                                     publisher.DestinationDirectory=Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!,"PublishingOutput");Directory.CreateDirectory(publisher.DestinationDirectory);
-                                    await StudioVisualEvidence.MeasureOperation(output,"Publishing export",()=>((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.StartCommand).ExecuteAsync(null),()=>publisher.IsBusy);
+                                    await StudioVisualEvidence.MeasureOperation(output,"Publishing export",()=>((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.StartCommand).ExecuteAsync(null),()=>publisher.IsBusy, publishing);
                                 }
                                 var preset = Descendants<ComboBox>(publishing).Last(x => x.IsVisible && x.Items.Count > 0);
                                 preset.IsDropDownOpen = true; await Task.Delay(150);
@@ -163,7 +171,7 @@ public sealed class WholeAppVisualAcceptanceTests
                                 await host.SwitchToContainerAsync(container.ContainerPath);
                                 window.Width = 1920; window.Height = 1080;
                                 await Capture(module, "empty-library");
-                                await StudioVisualEvidence.MeasureOperation(output,"Asset import",()=>host.CurrentPage!.ViewModel.ImportDemoDirectoryAsync(Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!, "SyntheticAssets")),()=>host.CurrentPage!.ViewModel.IsLoading);
+                                await StudioVisualEvidence.MeasureOperation(output,"Asset import",()=>host.CurrentPage!.ViewModel.ImportDemoDirectoryAsync(Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!, "SyntheticAssets")),()=>host.CurrentPage!.ViewModel.IsLoading, host);
                                 await Capture(module, "content");
                                 var context = host.CurrentPage!.OpenContextMenuForProductHarness();
                                 if (context is not null)
@@ -214,9 +222,14 @@ public sealed class WholeAppVisualAcceptanceTests
                             }
                             if (route == "ReferenceColor")
                             {
+                                if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                                {
+                                    await StudioVisualEvidence.MeasureOperation(output, "Reference decode", () => vm.ReferenceColorPage.LoadTargetAsync(Path.Combine(fixtureDirectory, "demo-shot-01.png")), () => vm.ReferenceColorPage.IsLoading, window);
+                                    await Capture(module, "target");
+                                }
                                 var drawing = new DrawingVisual(); using (var context = drawing.RenderOpen()) { context.DrawRectangle(Brushes.SlateGray, null, new Rect(0, 0, 1200, 800)); context.DrawEllipse(Brushes.Coral, null, new Point(400, 400), 160, 240); }
                                 var fixture = new RenderTargetBitmap(1200, 800, 96, 96, PixelFormats.Pbgra32); fixture.Render(drawing); fixture.Freeze();
-                                await StudioVisualEvidence.MeasureOperation(output,"Reference render",()=>vm.ReferenceColorPage.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, fixture),()=>vm.ReferenceColorPage.Editor.IsBusy);
+                                await StudioVisualEvidence.MeasureOperation(output,"Reference render",()=>vm.ReferenceColorPage.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, fixture),()=>vm.ReferenceColorPage.Editor.IsBusy, window);
                                 if (vm.ReferenceColorPage.Editor.SelectedLook is null || vm.ReferenceColorPage.Editor.ReferenceSources.Count == 0) throw new InvalidOperationException("Catalog refresh lost the selected scheme or references");
                                 await Capture(module, "loaded-synthetic");
                                 foreach (var mode in vm.ReferenceColorPage.Editor.ViewModes) { vm.ReferenceColorPage.Editor.ViewMode = mode; await Capture(module, mode); }

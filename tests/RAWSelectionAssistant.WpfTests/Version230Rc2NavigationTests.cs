@@ -38,7 +38,7 @@ public sealed class Version230Rc2NavigationTests
     public void TetherDeactivation_ReleasesPageImagesWithoutStoppingSession()
     {
         var source = Text("src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs");
-        var method = Slice(source, "public void OnDeactivated()", "public async ValueTask DisposeAsync()");
+        var method = Slice(source, "public void OnDeactivated()", "public ValueTask DisposeAsync()");
         foreach (var value in new[] { "CancelCurrent", "ReleaseExcept(null)", "CurrentImage = null", "Histogram = null", "ExifInfo = null", "ReleaseThumbnail", "ReleasePageImageResources" })
             StringAssert.Contains(method, value);
         Assert.DoesNotContain("StopAsync", method, StringComparison.Ordinal);

@@ -64,6 +64,31 @@ public sealed class ReferenceColorRefreshTests
         Assert.AreEqual("Reference 1", reloaded.ReferenceSources[0].Name);
         Assert.AreEqual(1d, reloaded.SelectedLook!.ReferenceSources.Sum(s => s.Weight), .0001);
     }
+    [TestMethod]
+    public async Task MultiReference_WeightPercentUsesSameUnitAsPeers_AndDisablesBoundaryMoves()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "PixelTart-StudioWeight", Guid.NewGuid().ToString("N"));
+        var store = new ReferenceLookStore(directory);
+        var look = CreateLook("Weights", null, DateTimeOffset.UtcNow);
+        var source = look.ReferenceSources[0];
+        look = look with { ReferenceSources = Enumerable.Range(0, 3).Select(i => source with
+            { Name = "Reference " + i, SourcePath = "synthetic-" + i + ".png", ContentHash = "weight-" + i, Weight = 1d / 3 }).ToArray() };
+        await store.SaveAsync(look);
+        using var vm = new TetherReferenceModeViewModel(store, allowReferenceManagement: true);
+        await vm.LoadAsync();
+        Assert.IsFalse(vm.MoveReferenceUpCommand.CanExecute(vm.ReferenceSources[0]));
+        Assert.IsFalse(vm.MoveReferenceDownCommand.CanExecute(vm.ReferenceSources[^1]));
+        Assert.IsTrue(vm.MoveReferenceDownCommand.CanExecute(vm.ReferenceSources[0]));
+        var edited = vm.ReferenceSources[0];
+        edited.WeightPercent = 50;
+        await edited.WeightUpdateTask;
+        using var reloaded = new TetherReferenceModeViewModel(store);
+        await reloaded.LoadAsync();
+        Assert.AreEqual(3d / 7, reloaded.SelectedLook!.ReferenceSources[0].Weight, .0001);
+        Assert.AreEqual(2d / 7, reloaded.SelectedLook.ReferenceSources[1].Weight, .0001);
+        Assert.AreEqual(1d, reloaded.SelectedLook.ReferenceSources.Sum(s => s.Weight), .0001);
+    }
+
     private static ReferenceLook CreateLook(string name, Guid? project, DateTimeOffset now)
     {
         var pixels = new VisualPixelBuffer(16, 16, Enumerable.Range(0, 256).SelectMany(i => new[] { (byte)i, (byte)100, (byte)180 }).ToArray());

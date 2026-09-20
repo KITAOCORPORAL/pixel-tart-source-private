@@ -19,7 +19,36 @@ internal static class StudioTestSource
 [TestClass] public sealed class StudioToggleTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Studio.Controls.xaml","PixelTart.Toggle","IsChecked","Width=\"30\" Height=\"18\"","Width=\"14\" Height=\"14\""); }
 [TestClass] public sealed class StudioSegmentedTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Studio.Controls.xaml","PixelTart.Segmented","ListBoxItem","IsSelected"); }
 [TestClass] public sealed class StudioPopupTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Components.Foundation.xaml","PixelTart.Menu.Context","RadiusPopup","MenuPopupBackgroundBrush"); }
-[TestClass] public sealed class StudioLoadingTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Studio.Controls.xaml","PixelTart.LoadingRing","PixelTart.ProgressBar","PixelTart.LoadingOverlay"); }
+[TestClass] public sealed class StudioLoadingTests {
+    [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Studio.Controls.xaml","PixelTart.LoadingRing","PixelTart.ProgressBar","PixelTart.LoadingOverlay");
+    [TestMethod] public void FeedbackThresholds_DoNotFlashForShortOperations() {
+        Assert.AreEqual(0, PixelTart.Modules.AssetLibrary.StudioBusyFeedback.StageForElapsed(TimeSpan.FromMilliseconds(299)));
+        Assert.AreEqual(1, PixelTart.Modules.AssetLibrary.StudioBusyFeedback.StageForElapsed(TimeSpan.FromMilliseconds(300)));
+        Assert.AreEqual(1, PixelTart.Modules.AssetLibrary.StudioBusyFeedback.StageForElapsed(TimeSpan.FromMilliseconds(1499)));
+        Assert.AreEqual(2, PixelTart.Modules.AssetLibrary.StudioBusyFeedback.StageForElapsed(TimeSpan.FromMilliseconds(1500)));
+    }
+    [TestMethod] public Task DelayedFeedback_ResetsOnCompletionAndUnload() => AssetLibraryP3PerformanceDiagnosticsTests.RunSta(async () => {
+        var element = new System.Windows.Controls.Border();
+        var window = new System.Windows.Window { Content = element, Width = 200, Height = 100 };
+        window.Show();
+        try {
+            PixelTart.Modules.AssetLibrary.StudioBusyFeedback.SetIsBusy(element, true);
+            Assert.IsFalse(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsVisible(element));
+            PixelTart.Modules.AssetLibrary.StudioBusyFeedback.SetIsBusy(element, false);
+            await Task.Delay(350);
+            Assert.IsFalse(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsVisible(element));
+            PixelTart.Modules.AssetLibrary.StudioBusyFeedback.SetIsBusy(element, true);
+            await Task.Delay(450);
+            Assert.IsTrue(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsVisible(element));
+            Assert.IsFalse(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsLongRunning(element));
+            await Task.Delay(1200);
+            Assert.IsTrue(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsLongRunning(element));
+            PixelTart.Modules.AssetLibrary.StudioBusyFeedback.SetIsBusy(element, false);
+            Assert.IsFalse(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsVisible(element));
+            Assert.IsFalse(PixelTart.Modules.AssetLibrary.StudioBusyFeedback.GetIsLongRunning(element));
+        } finally { window.Close(); }
+    });
+}
 [TestClass] public sealed class StudioFocusTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Studio.Controls.xaml","PixelTart.Focus","AccentBrush","FocusVisualStyle"); }
 [TestClass] public sealed class StudioSymbolTests {
     [TestMethod] public void Symbols_AreDistinctAuthoredVectorGeometry() {

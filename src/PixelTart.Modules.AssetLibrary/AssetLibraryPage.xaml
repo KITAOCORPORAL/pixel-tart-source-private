@@ -772,7 +772,8 @@
                      </Canvas>
 
                      <Border Grid.Row="2" Panel.ZIndex="4" Background="{DynamicResource Brush.Background}"
-                            Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            local:StudioBusyFeedback.IsBusy="{Binding IsLoading}"
+                            Visibility="{Binding RelativeSource={RelativeSource Self}, Path=(local:StudioBusyFeedback.IsVisible), Converter={StaticResource BooleanToVisibilityConverter}}"
                             AutomationProperties.AutomationId="AssetLibraryLoadingState">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
                             <ProgressBar IsIndeterminate="True" Width="180" Height="5"
