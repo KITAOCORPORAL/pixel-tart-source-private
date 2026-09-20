@@ -73,6 +73,7 @@
                                 <WrapPanel Margin="0,6,0,0"><Button Content="恢复色彩方案" AutomationProperties.Name="恢复色彩方案" Style="{StaticResource GhostButton}" Command="{Binding ReferenceMode.RestoreSchemeCommand}" /><Button Content="保存当前调整为色彩方案" AutomationProperties.Name="保存当前调整为色彩方案" Style="{StaticResource SecondaryButton}" Command="{Binding ReferenceMode.SaveCurrentAdjustmentCommand}" Margin="6,0,0,0" /></WrapPanel>
                             </StackPanel></Expander>
                             <TextBlock Text="{Binding ReferenceMode.StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,6,0,0" />
+                            <ProgressBar IsIndeterminate="True" Height="3" Margin="0,6,0,0" Visibility="{Binding ReferenceMode.IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="正在生成仿色预览" />
                         </StackPanel>
                     </Expander>
 

@@ -32,10 +32,10 @@ public sealed class AssetLibraryP36ContextMenuContractTests
         {
             "查看", "查看大图", "快速预览", "默认程序打开", "打开文件位置", "复制文件", "用于创作", "视觉分析",
             "整理", "移到文件夹", "添加标签", "颜色标记", "评分",
-            "项目", "关联项目…", "关联拍摄…", "处理状态",
-            "灵感", "加入灵感板", "导出", "导出图片", "复制路径",
-            "管理", "从当前位置移除", "归档", "恢复归档", "移到回收站", "从回收站恢复"
+            "工作流", "导出", "管理"
         }, headers);
+        foreach (var action in new[] { "关联项目…", "关联拍摄…", "处理状态", "加入灵感板", "导出图片", "复制路径", "归档", "恢复归档", "移到回收站", "从回收站恢复" })
+            Assert.IsTrue(menu.Descendants().Any(e => e.Name.LocalName == "MenuItem" && (string?)e.Attribute("Header") == action), action + " remains available in a submenu");
         Assert.AreEqual(1, document.Descendants().Count(e => e.Name.LocalName == "MenuItem" && (string?)e.Attribute("Header") == "临时收集"));
         Assert.AreEqual(2, document.Descendants().Count(e => e.Name.LocalName == "MenuItem" && ((string?)e.Attribute("Header") ?? string.Empty).Contains("灵感板", StringComparison.Ordinal)));
         Assert.AreEqual(0, document.Descendants().Count(e => e.Name.LocalName == "MenuItem" && ((string?)e.Attribute("Header") ?? string.Empty).Contains("永久", StringComparison.Ordinal)));

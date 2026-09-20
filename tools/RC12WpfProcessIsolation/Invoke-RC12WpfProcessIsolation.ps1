@@ -2,6 +2,7 @@
 param(
     [string]$OutputRoot = '',
     [string]$ClassPattern = '*',
+    [string]$IsolationRoot = '',
     [switch]$SkipBuild
 )
 
@@ -12,6 +13,8 @@ $dotnet = [IO.Path]::GetFullPath((Join-Path $repoRoot '..\..\.dotnet\dotnet.exe'
 $project = Join-Path $repoRoot 'tests\RAWSelectionAssistant.WpfTests\RAWSelectionAssistant.WpfTests.csproj'
 $sourceRoot = Join-Path $repoRoot 'tests\RAWSelectionAssistant.WpfTests'
 $sourceCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
+$productDirty = @(& git -C $repoRoot status --porcelain -- src tests tools).Count -gt 0
+$evidenceSource = if ($productDirty) { 'UNFROZEN_WORKTREE' } else { $sourceCommit }
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
     $OutputRoot = Join-Path $repoRoot ('artifacts\rc12-wpf-process-isolation\' + [DateTimeOffset]::Now.ToString('yyyyMMdd-HHmmss'))
 }
@@ -37,6 +40,16 @@ $fixtureIndex = 0
 foreach ($className in $classes) {
     $fixtureIndex++
     $safeName = $className -replace '[^A-Za-z0-9_.-]', '_'
+    if (-not [string]::IsNullOrWhiteSpace($IsolationRoot)) {
+        $fixtureRoot = Join-Path ([IO.Path]::GetFullPath($IsolationRoot)) $safeName
+        $env:PIXEL_TART_HUMAN_ACCEPTANCE = '1'
+        $env:PIXEL_TART_ACCEPTANCE_ROOT = Join-Path $fixtureRoot 'data'
+        $env:PIXEL_TART_CONTRACT_EVIDENCE = Join-Path $fixtureRoot 'contract'
+        $env:PIXEL_TART_NAVIGATION_EVIDENCE = Join-Path $fixtureRoot 'navigation'
+        $env:PIXEL_TART_WHOLE_APP_EVIDENCE = Join-Path $fixtureRoot 'whole-app'
+        $env:PIXEL_TART_CONTRACT_SOURCE = $evidenceSource
+        $env:PIXEL_TART_PRODUCT_SOURCE_SHA = $evidenceSource
+    }
     $trxName = ('{0:000}-{1}.trx' -f $fixtureIndex, $safeName)
     $stdoutPath = Join-Path $OutputRoot ('{0:000}-{1}.stdout.txt' -f $fixtureIndex, $safeName)
     $stderrPath = Join-Path $OutputRoot ('{0:000}-{1}.stderr.txt' -f $fixtureIndex, $safeName)
@@ -83,7 +96,7 @@ foreach ($fixture in $results) {
     $skippedCount += [int]$fixture['skipped']
 }
 $manifest = [ordered]@{
-    schema='pixel-tart-rc12-wpf-process-isolation/v1'; product_version='2.3.0-RC12'; source_commit=$sourceCommit
+    schema='pixel-tart-rc12-wpf-process-isolation/v1'; product_version='2.3.0-RC12'; source_commit=$evidenceSource; checkout_head=$sourceCommit; product_dirty=$productDirty
     process_per_fixture=$true; application_singleton_shared=$false; fixture_count=@($results).Count
     test_count=$testCount; passed_count=$passedCount; failed_count=$failedCount; skipped_count=$skippedCount
     failed_fixture_count=@($results | Where-Object { $_.exit_code -ne 0 -or $_.failed -ne 0 -or $_.skipped -ne 0 }).Count

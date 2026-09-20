@@ -10,8 +10,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 {
     private readonly IDialogService _dialogs;
     private BitmapSource? _targetImage;
-    private string _targetName = "尚未选择目标图片";
-    private string _statusText = "选择目标图片，再选择或导入参考来源。源照片始终只读。";
+    private string _targetName = "尚未选择待调色照片";
+    private string _statusText = "选择待调色照片，再添加希望借用色彩与影调的参考图片。源照片始终只读。";
+    private bool _isLoading;
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs)
     {
@@ -24,9 +25,11 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     public TetherReferenceModeViewModel Editor { get; }
     public AsyncRelayCommand ChooseTargetCommand { get; }
-    public BitmapSource? TargetImage { get => _targetImage; private set => SetProperty(ref _targetImage, value); }
+    public BitmapSource? TargetImage { get => _targetImage; private set { if (SetProperty(ref _targetImage, value)) OnPropertyChanged(nameof(HasTarget)); } }
+    public bool HasTarget => TargetImage is not null;
     public string TargetName { get => _targetName; private set => SetProperty(ref _targetName, value); }
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
+    public bool IsLoading { get => _isLoading; private set => SetProperty(ref _isLoading, value); }
 
     public async Task InitializeAsync(CancellationToken token = default) => await Editor.LoadAsync(token);
 
@@ -42,18 +45,24 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     private async Task ChooseTargetAsync()
     {
-        var path = _dialogs.ChooseFiles("选择目标图片（源文件只读）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault();
+        var path = _dialogs.ChooseFiles("选择待调色照片（源文件只读）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault();
         if (path is null) return;
         try
         {
-            var image = new BitmapImage();
-            image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze();
+            IsLoading = true; StatusText = "正在载入照片…";
+            var image = await Task.Run(() =>
+            {
+                var decoded = new BitmapImage();
+                decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.UriSource = new Uri(path); decoded.EndInit(); decoded.Freeze();
+                return decoded;
+            });
             TargetImage = image; TargetName = Path.GetFileName(path);
             await Editor.SetSourceAsync(null, image);
-            StatusText = "目标图片已只读加载；可在右侧制作色彩方案或导出 3D LUT。";
+            StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException)
-        { StatusText = "目标图片无法读取；现有色彩方案保持不变。"; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException)
+        { StatusText = "待调色照片无法读取；现有色彩方案保持不变。"; }
+        finally { IsLoading = false; }
     }
 
     public void Dispose() => Editor.Dispose();

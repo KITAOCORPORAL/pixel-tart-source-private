@@ -153,7 +153,7 @@
                     <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
             </MenuItem>
 
-            <MenuItem Header="项目" Style="{StaticResource AssetContextSectionHeader}" AutomationProperties.AutomationId="AssetContextProjectGroup" />
+            <MenuItem Header="工作流" AutomationProperties.AutomationId="AssetContextProjectGroup">
             <Separator />
             <MenuItem Header="关联项目…" Command="{Binding Owner.OpenProjectPickerCommand}" AutomationProperties.AutomationId="AssetContextProject">
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.Project}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
@@ -177,7 +177,8 @@
                 <MenuItem Header="临时收集" Command="{Binding Owner.AddToInspirationTrayCommand}" CommandParameter="{Binding}" ToolTip="仅保存素材引用，不复制源文件" AutomationProperties.AutomationId="AssetContextAddToTray" />
                 <MenuItem Header="选择灵感板…" Command="{Binding Owner.OpenCollectionsCommand}" AutomationProperties.AutomationId="AssetContextAddToCollection" />
             </MenuItem>
-            <MenuItem Header="导出" Style="{StaticResource AssetContextSectionHeader}" AutomationProperties.AutomationId="AssetContextExportGroup" />
+            </MenuItem>
+            <MenuItem Header="导出" AutomationProperties.AutomationId="AssetContextExportGroup">
             <Separator />
             <MenuItem Header="导出图片" AutomationProperties.AutomationId="AssetContextExport">
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.Export}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
@@ -189,7 +190,8 @@
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.CopyFile}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="管理" Style="{StaticResource AssetContextSectionHeader}" AutomationProperties.AutomationId="AssetContextManageGroup" />
+            </MenuItem>
+            <MenuItem Header="管理" AutomationProperties.AutomationId="AssetContextManageGroup">
             <Separator />
             <MenuItem Header="从当前位置移除" Command="{Binding Owner.RemoveContextFromViewCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextRemoveFromView">
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.Remove}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
@@ -205,6 +207,7 @@
             </MenuItem>
             <MenuItem Header="从回收站恢复" Command="{Binding Owner.RestoreTrashContextCommand}" CommandParameter="{Binding}" AutomationProperties.AutomationId="AssetContextTrashRestore">
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.Undo}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
+            </MenuItem>
             </MenuItem>
         </ContextMenu>
 
@@ -354,10 +357,10 @@
         </Popup>
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
-        <Grid Margin="12,8" MinWidth="980">
+        <Grid Margin="12,8" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="240" />
+                <ColumnDefinition Width="*" MinWidth="300" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -372,7 +375,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" MinWidth="240" Margin="0,0,8,0">
+            <Grid Grid.Row="0" Grid.Column="0" MinWidth="300" Margin="0,0,8,0">
                 <TextBox x:Name="AssetLibrarySearchBox" Padding="30,0,8,0"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          PreviewKeyDown="AssetLibrarySearchBox_PreviewKeyDown"

@@ -73,7 +73,7 @@ public sealed class StageIVReferenceWorkflowTests
         foreach(var value in new[]{"参考仿色","ToolIconReferenceColor","ReferenceColor"}) StringAssert.Contains(product,value);
         StringAssert.Contains(main,"AcceptContextAsync"); StringAssert.Contains(main,"NavigateToSurface(\"ReferenceColor\")");
         StringAssert.Contains(tether,"打开完整参考仿色");
-        foreach(var value in new[]{"选择目标图片","仿色参数","保存为色彩方案","导出 3D LUT","TetherReferenceSplitView"}) StringAssert.Contains(workspace,value);
+        foreach(var value in new[]{"选择照片","待调色照片","参考图片","仿色参数","保存为色彩方案","导出 3D LUT","TetherReferenceSplitView"}) StringAssert.Contains(workspace,value);
     }
 
     private static string Root(){for(var directory=new DirectoryInfo(AppContext.BaseDirectory);directory is not null;directory=directory.Parent)if(File.Exists(Path.Combine(directory.FullName,"RAWSelectionAssistant.sln")))return directory.FullName;throw new DirectoryNotFoundException();}

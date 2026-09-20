@@ -57,6 +57,10 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         _libraryButton.ToolTip = "打开素材库菜单（当前库、最近库、新建、打开、信息）";
         _libraryButton.Padding = new Thickness(10, 3, 10, 3);
         _libraryButton.MinHeight = 28;
+        _libraryButton.SetResourceReference(StyleProperty, "PixelTart.Button.Ghost");
+        _libraryButton.SetResourceReference(BackgroundProperty, "SurfaceSecondaryBrush");
+        _libraryButton.SetResourceReference(ForegroundProperty, "TextPrimaryBrush");
+        _menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
         _libraryButton.HorizontalContentAlignment = HorizontalAlignment.Left;
         _libraryButton.Click += (_, _) => _menu.IsOpen = true;
         _libraryButton.ContextMenu = _menu;
@@ -65,13 +69,14 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         _state.Text = "正在准备素材库…";
         _state.Margin = new Thickness(10, 0, 0, 0);
         _state.VerticalAlignment = VerticalAlignment.Center;
-        _state.Foreground = SystemColors.GrayTextBrush;
+        _state.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondaryBrush");
         _state.TextTrimming = TextTrimming.CharacterEllipsis;
         Grid.SetColumn(_state, 1);
         bar.Children.Add(_state);
         Grid.SetRow(bar, 0);
         root.Children.Add(bar);
-        var divider = new Border { Background = new SolidColorBrush(Color.FromArgb(45, 128, 128, 128)) };
+        var divider = new Border();
+        divider.SetResourceReference(Border.BackgroundProperty, "DividerBrush");
         Grid.SetRow(divider, 1);
         root.Children.Add(divider);
         Grid.SetRow(_content, 2);
@@ -161,11 +166,16 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         foreach (var recent in _settings.RecentLibraries.Take(AssetLibraryPortableSettings.MaximumRecentLibraries))
         {
             var state = Directory.Exists(recent.ContainerPath) ? "可用" : "暂时不可用";
-            var item = new MenuItem { Header = $"{recent.DisplayName}  ·  {recent.LastOpenedAt.ToLocalTime():yyyy-MM-dd HH:mm}  ·  {state}" };
+            var item = new MenuItem { Header = recent.DisplayName };
+            var header = new FrameworkElementFactory(typeof(TextBlock));
+            header.SetBinding(TextBlock.TextProperty, new System.Windows.Data.Binding());
+            header.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis);
+            header.SetValue(TextBlock.MaxWidthProperty, 160d);
+            item.HeaderTemplate = new DataTemplate { VisualTree = header };
             item.Items.Add(MenuItem("打开 / 切换", async (_, _) => await SwitchToContainerAsync(recent.ContainerPath)));
             item.Items.Add(MenuItem("在文件夹中显示", (_, _) => LocateRecentLibrary(recent)));
             item.Items.Add(MenuItem("从最近列表移除", async (_, _) => await RemoveRecentLibraryAsync(recent)));
-            item.ToolTip = recent.ContainerPath;
+            item.ToolTip = $"{recent.DisplayName}\n{recent.LastOpenedAt.ToLocalTime():yyyy-MM-dd HH:mm} · {state}\n{recent.ContainerPath}";
             System.Windows.Automation.AutomationProperties.SetAutomationId(item, "AssetLibraryRecent_" + recent.LibraryId.ToString("N"));
             _menu.Items.Add(item);
         }
@@ -239,6 +249,7 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         panel.Children.Add(new TextBlock { Text = title, FontSize = 22, FontWeight = FontWeights.SemiBold, HorizontalAlignment = HorizontalAlignment.Center });
         panel.Children.Add(new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center, Margin = new Thickness(0, 10, 0, 16), Foreground = SystemColors.GrayTextBrush });
         var button = new Button { Content = actionText, MinWidth = 130, MinHeight = 34, Padding = new Thickness(12, 5, 12, 5), HorizontalAlignment = HorizontalAlignment.Center };
+        button.SetResourceReference(StyleProperty, "PixelTart.Button.Primary");
         button.Click += (_, _) => action();
         panel.Children.Add(button);
         _content.Content = panel;

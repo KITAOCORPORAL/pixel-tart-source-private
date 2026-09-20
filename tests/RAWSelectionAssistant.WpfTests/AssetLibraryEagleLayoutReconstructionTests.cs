@@ -94,7 +94,9 @@ public sealed class AssetLibraryEagleLayoutReconstructionTests
         var groups = menu.Elements(Presentation + "MenuItem")
             .Where(node => ((string?)node.Attribute("Style") ?? string.Empty).Contains("AssetContextSectionHeader", StringComparison.Ordinal))
             .Select(node => (string?)node.Attribute("Header")).ToArray();
-        CollectionAssert.AreEqual(new[] { "查看", "整理", "项目", "灵感", "导出", "管理" }, groups);
+        CollectionAssert.AreEqual(new[] { "查看", "整理" }, groups);
+        foreach (var group in new[] { "工作流", "导出", "管理" })
+            Assert.IsTrue(menu.Elements(Presentation + "MenuItem").Single(node => (string?)node.Attribute("Header") == group).Elements(Presentation + "MenuItem").Any());
         foreach (var label in new[] { "快速预览", "关联项目…", "关联拍摄…", "加入灵感板", "复制路径", "归档" })
             Assert.IsTrue(menu.Descendants(Presentation + "MenuItem").Any(node => (string?)node.Attribute("Header") == label), label);
 

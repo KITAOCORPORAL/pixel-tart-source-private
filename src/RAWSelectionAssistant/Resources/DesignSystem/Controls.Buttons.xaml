@@ -3,6 +3,10 @@
         <Setter Property="FontFamily" Value="Microsoft YaHei UI" /><Setter Property="FontSize" Value="{DynamicResource BodyFontSize}" />
         <Setter Property="Padding" Value="{DynamicResource ControlPadding}" /><Setter Property="MinHeight" Value="{DynamicResource ControlHeight}" />
         <Setter Property="Cursor" Value="Hand" /><Setter Property="BorderThickness" Value="1" /><Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
+        <Setter Property="Template" Value="{DynamicResource RoundedButtonTemplate}" />
     </Style>
     <ControlTemplate x:Key="RoundedButtonTemplate" TargetType="Button">
         <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" Padding="{TemplateBinding Padding}">

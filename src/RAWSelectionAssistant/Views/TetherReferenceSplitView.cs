@@ -21,6 +21,13 @@ public sealed class TetherReferenceSplitView : Grid
     public TetherReferenceSplitView()
     {
         ClipToBounds = true; Children.Add(_original); Children.Add(_matched); Children.Add(_line); Children.Add(_handle); Children.Add(_hitArea);
+        foreach (var (label, alignment) in new[] { ("原片", HorizontalAlignment.Left), ("仿色结果", HorizontalAlignment.Right) })
+        {
+            var text = new TextBlock { Text = label, Margin = new Thickness(12, 10, 12, 0), Padding = new Thickness(8, 4, 8, 4), HorizontalAlignment = alignment, VerticalAlignment = VerticalAlignment.Top, IsHitTestVisible = false };
+            text.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimaryBrush");
+            text.SetResourceReference(TextBlock.BackgroundProperty, "SurfaceElevatedBrush");
+            Children.Add(text);
+        }
         AutomationProperties.SetName(_hitArea, "拖动参考仿色分割线");
         SizeChanged += (_, _) => UpdateGeometry();
         _hitArea.MouseLeftButtonDown += (_, e) => { if (e.ClickCount == 2) { SplitPosition = .5; e.Handled = true; return; } _dragging = true; _hitArea.CaptureMouse(); UpdateFrom(e); e.Handled = true; };

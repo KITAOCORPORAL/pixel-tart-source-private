@@ -7,17 +7,14 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class Version230Rc6RegressionContractTests
 {
     [TestMethod]
-    public void Calendar_PreservesNativeLayoutSkeleton()
+    public void Calendar_PreservesRequiredPartsAndUsesExplicitDarkStyles()
     {
         var source = Read("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Inputs.xaml");
         StringAssert.Contains(source, "<Style TargetType=\"DatePicker\">");
         StringAssert.Contains(source, "x:Key=\"PixelTartCalendarNativeStyle\"");
         StringAssert.Contains(source, "<Style.Resources>");
-        StringAssert.Contains(source, "<Style TargetType=\"Button\" />");
-        Assert.IsFalse(source.Contains("PixelTartCalendarItemStyle", StringComparison.Ordinal));
-        Assert.IsFalse(source.Contains("PixelTartCalendarDayButtonStyle", StringComparison.Ordinal));
-        Assert.IsFalse(source.Contains("PixelTartCalendarButtonStyle", StringComparison.Ordinal));
-        Assert.IsFalse(source.Contains("PART_MonthView", StringComparison.Ordinal));
+        foreach (var part in new[] { "PART_PreviousButton", "PART_HeaderButton", "PART_NextButton", "PART_MonthView", "PART_YearView" }) StringAssert.Contains(source, part);
+        foreach (var property in new[] { "CalendarItemStyle", "CalendarDayButtonStyle", "CalendarButtonStyle" }) StringAssert.Contains(source, "Property=\"" + property + "\"");
         var document = XDocument.Parse(source);
         XNamespace xaml = "http://schemas.microsoft.com/winfx/2006/xaml";
         var dateStyles = document.Descendants().Where(element => element.Name.LocalName == "Style" && element.Attribute("TargetType")?.Value == "DatePicker").ToArray();
@@ -27,7 +24,7 @@ public sealed class Version230Rc6RegressionContractTests
         foreach (var part in new[] { "PART_TextBox", "PART_Button", "PART_Popup" })
             Assert.IsTrue(proposalDateStyle.Descendants().Any(element => element.Attribute(xaml + "Name")?.Value == part), "Proposal date picker must preserve native part: " + part);
         Assert.IsTrue(proposalDateStyle.Elements().Any(element => element.Attribute("Property")?.Value == "CalendarStyle" && element.Attribute("Value")?.Value == "{DynamicResource PixelTartCalendarNativeStyle}"));
-        Assert.IsFalse(source.Contains("<ControlTemplate TargetType=\"CalendarDayButton\"", StringComparison.Ordinal));
+        StringAssert.Contains(source, "<ControlTemplate TargetType=\"CalendarDayButton\"");
     }
 
     [TestMethod]

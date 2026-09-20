@@ -224,7 +224,7 @@ public partial class PlanningCenterView : UserControl
         if (heroes.Length > 0)
         {
             var hero = new Grid { Margin = new Thickness(0, 4, 0, 20) };
-            hero.ColumnDefinitions.Add(new() { Width = new GridLength(heroes.Length == 1 ? 1 : 2, GridUnitType.Star) });
+            hero.ColumnDefinitions.Add(new() { Width = new GridLength(heroes.Length <= 2 ? 1 : 2, GridUnitType.Star) });
             if (heroes.Length > 1) hero.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) });
             hero.Children.Add(ImageTile(heroes[0], 350, !_vm.IsPreviewMode));
             if (heroes.Length > 1)
@@ -258,6 +258,19 @@ public partial class PlanningCenterView : UserControl
         }
         if (!_vm.IsPreviewMode) direction.Children.Add(Action("编辑色彩方案", () => _vm.OpenColorSchemeCommand.Execute(null)));
         DocumentContent.Children.Add(direction);
+        if (!editing && !_vm.IsPreviewMode && _vm.Shots.Count > 0)
+        {
+            Heading(DocumentContent, "镜头摘要");
+            DocumentContent.Children.Add(Text(_vm.ProgressText, 13));
+            foreach (var shot in _vm.Shots.Take(3))
+            {
+                var summary = new StackPanel { Margin = new Thickness(0, 14, 0, 8) };
+                summary.Children.Add(Text($"{shot.Order + 1:00}   {shot.Name}", 18, true));
+                if (!string.IsNullOrWhiteSpace(shot.Notes)) summary.Children.Add(Text(shot.Notes, 14));
+                DocumentContent.Children.Add(summary);
+            }
+            DocumentContent.Children.Add(Action("查看完整镜头清单", () => { _vm.ContentPage = "镜头清单"; DocumentScroll.ScrollToTop(); }));
+        }
         foreach (var section in new[] { ("拍摄目标", nameof(_vm.ShootGoal), _vm.ShootGoal), ("视觉关键词", nameof(_vm.Keywords), _vm.Keywords), ("客户要求", nameof(_vm.ClientRequirements), _vm.ClientRequirements), ("必拍内容", nameof(_vm.MustCapture), _vm.MustCapture), ("注意事项", nameof(_vm.PlanningNotes), _vm.PlanningNotes), ("交付用途", nameof(_vm.OutputPurpose), _vm.OutputPurpose) })
         {
             if (_vm.IsPreviewMode && string.IsNullOrWhiteSpace(section.Item3)) continue;

@@ -49,12 +49,12 @@ public sealed class AssetLibraryRecentLibrarySwitcherEndToEndTests
                     var firstMenu = host.ProductHarnessMenu.Items
                         .OfType<MenuItem>()
                         .Single(item => item.Header?.ToString()?.StartsWith("第一素材库", StringComparison.Ordinal) == true);
-                    StringAssert.Contains(firstMenu.Header!.ToString()!, "可用");
+                    StringAssert.Contains(firstMenu.ToolTip!.ToString()!, "可用");
                     StringAssert.Contains(firstMenu.ToolTip!.ToString()!, Path.GetFullPath(firstPath));
                     var offlineMenu = host.ProductHarnessMenu.Items
                         .OfType<MenuItem>()
                         .Single(item => item.Header?.ToString()?.StartsWith("离线素材库", StringComparison.Ordinal) == true);
-                    StringAssert.Contains(offlineMenu.Header!.ToString()!, "暂时不可用");
+                    StringAssert.Contains(offlineMenu.ToolTip!.ToString()!, "暂时不可用");
                     var remove = firstMenu.Items.OfType<MenuItem>().Single(item => Equals(item.Header, "从最近列表移除"));
                     remove.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
                     await WaitUntilAsync(() => settings.RecentLibraries.All(item => item.LibraryId != first.LibraryId));
