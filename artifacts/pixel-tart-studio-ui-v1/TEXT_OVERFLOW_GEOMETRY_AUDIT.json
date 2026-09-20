@@ -1,0 +1,21 @@
+{
+  "ProductSourceSha": "993854ce0fd2437bd1fc05dc36c6bac316305a48",
+  "Status": "PARTIAL",
+  "FullGatePassed": false,
+  "Reason": "Scroll interaction and complete state/DPI coverage remain unverified",
+  "Groups": [
+    {
+      "Name": "EXPLICIT_ELLIPSIS",
+      "Count": 257
+    },
+    {
+      "Name": "SCROLL_REACHABLE_REQUIRES_INTERACTION_CHECK",
+      "Count": 1154
+    },
+    {
+      "Name": "WITHIN_RECORDED_BOUNDS",
+      "Count": 4716
+    }
+  ],
+  "Details": "review-closure/geometry-observations.jsonl"
+}
