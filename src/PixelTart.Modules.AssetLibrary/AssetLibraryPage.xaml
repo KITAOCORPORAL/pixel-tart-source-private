@@ -355,9 +355,9 @@
                 </Grid>
             </Border>
         </Popup>
-        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="12,0"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
-        <Grid Margin="12,8" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+        <Grid Margin="0,8" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="300" />

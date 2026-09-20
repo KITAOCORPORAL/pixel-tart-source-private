@@ -32,6 +32,14 @@ public sealed class RealAppStartupIntegrationTests
             {
                 Require(Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") == "1",
                     "Run with an isolated data root, never user data.");
+                Require(!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")),
+                    "Explicit isolated root required for synthetic fixtures.");
+                var database = new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase();
+                var migration = new RAWSelectionAssistant.Core.Services.Database.DatabaseMigrator(database,
+                    new RAWSelectionAssistant.Core.Services.Database.DatabaseBackupService(database, AppDataPaths.MigrationBackupDirectory)).MigrateAsync().GetAwaiter().GetResult();
+                Require(migration.Success, "Synthetic fixture database initialization failed");
+                RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.SeedAsync(
+                    new RAWSelectionAssistant.Core.Services.SettingsService(new RAWSelectionAssistant.Core.Services.FileLogService())).GetAwaiter().GetResult();
                 var app = new App();
                 app.InitializeComponent();
                 var started = DateTime.UtcNow;
