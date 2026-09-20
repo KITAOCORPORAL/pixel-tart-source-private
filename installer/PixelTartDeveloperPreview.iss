@@ -46,6 +46,17 @@ Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: 
 [Files]
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.xml,*.Tests.dll,*TestHost*,*Acceptance.dll,*.trx,*.cs,*.xaml"
 
+; Only shipped runtime files are replaced. Projects, DemoWorkspace, user data and
+; external libraries are never targets. This also removes stale preview binaries.
+[InstallDelete]
+Type: files; Name: "{app}\*.dll"
+Type: files; Name: "{app}\*.deps.json"
+Type: files; Name: "{app}\*.runtimeconfig.json"
+Type: files; Name: "{app}\KitaoPhotoSelector.exe"
+Type: files; Name: "{app}\KitaoPhotoSelector.Acceptance.exe"
+Type: files; Name: "{app}\PixelTart_ModularHarness_V1_DevPreview.exe"
+Type: filesandordirs; Name: "{app}\runtimes"
+
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExe}"; IconFilename: "{app}\{#AppExe}"; WorkingDir: "{app}"
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; IconFilename: "{app}\{#AppExe}"; WorkingDir: "{app}"; Tasks: desktopicon

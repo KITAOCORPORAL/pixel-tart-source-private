@@ -9,6 +9,7 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed record PlanningReferenceItem(PlanningDocumentReference Link, string? PreviewPath, bool SourceAvailable)
 {
+    public string? OriginalPath { get; init; }
     public Guid Id => Link.Source.ReferenceId;
     public string Title => Link.Source.Title ?? "未命名参考";
     public string Category => Link.Category;
@@ -62,7 +63,7 @@ public sealed partial class PlanningCenterViewModel
                 }
                 catch (Exception error) when (error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException) { }
             }
-            AllProjectReferences.Add(new(reference, File.Exists(cache) ? cache : available ? path : null, available));
+            AllProjectReferences.Add(new(reference, File.Exists(cache) ? cache : available ? path : null, available) { OriginalPath = available ? path : null });
         }
         OnPropertyChanged(nameof(HeroReferences)); PresentationChanged();
     }

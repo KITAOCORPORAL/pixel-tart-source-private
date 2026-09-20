@@ -100,6 +100,43 @@ internal static class PlanningProposalAcceptance
         File.Copy(Path.Combine(output, "08_预览模式.png"), Path.Combine(output, "09_preview_mode.png"), true);
         File.Copy(Path.Combine(output, "01_文字.png"), Path.Combine(output, "10_planning_1080p.png"), true);
         var planningView = Find<PlanningCenterView>(window)!;
+        vm.ContentPage = "镜头清单"; vm.SelectedShot = vm.Shots[0]; vm.IsShotDrawerOpen = true;
+        await Capture("09_镜头详情抽屉.png", rerender: false); vm.IsShotDrawerOpen = false;
+        vm.ContentPage = "参考图"; window.UpdateLayout();
+        var referenceTile = Descendants<System.Windows.Controls.StackPanel>(planningView).First(panel => panel.ContextMenu is not null);
+        referenceTile.ContextMenu!.PlacementTarget = referenceTile; referenceTile.ContextMenu.IsOpen = true;
+        await Capture("10_参考图右键菜单.png", rerender: false, popup: referenceTile.ContextMenu);
+        referenceTile.ContextMenu.IsOpen = false;
+        await vm.ShowCreatePlanningCommand.ExecuteAsync(null); await Capture("11_创建策划.png", rerender: false);
+        vm.CancelPlanningModalCommand.Execute(null);
+        vm.ContentPage = "文字"; await Capture("12_1080p.png");
+        var root = (FrameworkElement)window.Content;
+        var dpiRows = new List<object>();
+        foreach (var dpi in new[] { 100, 125, 150, 200 })
+        {
+            var scale = dpi / 100d;
+            root.LayoutTransform = new ScaleTransform(scale, scale);
+            window.UpdateLayout(); await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
+            var nav = (System.Windows.Controls.Primitives.UniformGrid)planningView.FindName("ContentNavigation");
+            Assert.AreEqual(1, nav.Rows);
+            Assert.IsLessThanOrEqualTo(planningView.ActualWidth - 280, nav.ActualWidth, $"{dpi}% navigation exceeds editor");
+            foreach (var page in PlanningCenterViewModel.ContentPages)
+            {
+                vm.ContentPage = page; window.UpdateLayout();
+                var scroll = (System.Windows.Controls.ScrollViewer)planningView.FindName("DocumentScroll");
+                Assert.IsLessThan(1d, scroll.ScrollableWidth, $"{dpi}% {page} horizontal overflow");
+                foreach (var label in Descendants<System.Windows.Controls.TextBlock>(nav))
+                {
+                    var width = new FormattedText(label.Text, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(label.FontFamily, label.FontStyle, label.FontWeight, label.FontStretch), label.FontSize, Brushes.White, 1).Width;
+                    Assert.IsGreaterThanOrEqualTo(width, label.ActualWidth + 1, $"{dpi}% clipped navigation: {label.Text}");
+                }
+            }
+            vm.ContentPage = "文字";
+            if (dpi != 100) await Capture($"{(dpi == 125 ? 13 : dpi == 150 ? 14 : 15):00}_{dpi}dpi.png");
+            dpiRows.Add(new { dpi, passed = true, logicalWidth = root.ActualWidth, logicalHeight = root.ActualHeight, mode = "software-layout-transform", physicalTested = false });
+        }
+        root.LayoutTransform = Transform.Identity; window.UpdateLayout(); vm.ContentPage = "文字";
+        await File.WriteAllTextAsync(Path.Combine(output, "planning-dpi.json"), System.Text.Json.JsonSerializer.Serialize(dpiRows));
         var content = (System.Windows.Controls.StackPanel)planningView.FindName("DocumentContent");
         Assert.IsNull(Find<System.Windows.Controls.TextBox>(content), "Default body must be reading mode.");
         vm.IsDocumentEditing = true; window.UpdateLayout();
@@ -119,20 +156,45 @@ internal static class PlanningProposalAcceptance
         await vm.UpdateReferenceAsync(removeRef, "移除");
         Assert.IsTrue(File.Exists(refs[23].ExternalReference));
         Assert.IsFalse(vm.AllProjectReferences.Any(item => item.Id == removeRef.Id));
-        async Task Capture(string name, bool overview = false)
+        async Task Capture(string name, bool overview = false, bool rerender = true, System.Windows.Controls.ContextMenu? popup = null)
         {
             if (overview) await vm.ShowOverviewAsync();
             await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
             await Task.Delay(120);
-            var view = Find<PlanningCenterView>(window)!; view.Render(); view.UpdateLayout();
+            var view = Find<PlanningCenterView>(window)!; if (rerender) view.Render(); view.UpdateLayout();
             var scroll = (System.Windows.Controls.ScrollViewer)view.FindName("DocumentScroll"); scroll.ScrollToTop();
             window.UpdateLayout();
             Assert.AreEqual(1920d, window.ActualWidth); Assert.AreEqual(1080d, window.ActualHeight);
-            Assert.IsGreaterThan(1400d, view.ActualWidth);
+            Assert.IsGreaterThan(700d, view.ActualWidth);
             var column = (System.Windows.Controls.ColumnDefinition)view.FindName("DocumentListColumn");
             Assert.AreEqual(vm.IsPreviewMode ? 0d : 280d, column.ActualWidth);
-            var bitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32); bitmap.Render(window);
+            // Capture actual production client content, not a surrogate Window or padded non-client bounds.
+            var rootVisual = (FrameworkElement)window.Content;
+            var drawing = new DrawingVisual();
+            using (var context = drawing.RenderOpen())
+            {
+                var clientSize = rootVisual.LayoutTransform.TransformBounds(new Rect(rootVisual.RenderSize)).Size;
+                context.DrawRectangle(new VisualBrush(window) { ViewboxUnits = BrushMappingMode.Absolute, Viewbox = new Rect(clientSize) }, null, new Rect(0, 0, 1920, 1080));
+                if (popup is not null)
+                {
+                    popup.UpdateLayout();
+                    var popupOrigin = popup.PointToScreen(new Point()); var rootOrigin = rootVisual.PointToScreen(new Point());
+                    var device = PresentationSource.FromVisual(rootVisual)!.CompositionTarget.TransformFromDevice;
+                    var offset = device.Transform(popupOrigin - rootOrigin);
+                    var scaleX = 1920 / rootVisual.ActualWidth; var scaleY = 1080 / rootVisual.ActualHeight;
+                    context.DrawRectangle(new VisualBrush(popup), null, new Rect(offset.X * scaleX, offset.Y * scaleY, popup.ActualWidth * scaleX, popup.ActualHeight * scaleY));
+                }
+            }
+            var bitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32); bitmap.Render(drawing);
             var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var stream = File.Create(Path.Combine(output, name)); encoder.Save(stream);
+        }
+    }
+    private static IEnumerable<T> Descendants<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i); if (child is T found) yield return found;
+            foreach (var descendant in Descendants<T>(child)) yield return descendant;
         }
     }
     private static T? Find<T>(DependencyObject parent) where T : DependencyObject

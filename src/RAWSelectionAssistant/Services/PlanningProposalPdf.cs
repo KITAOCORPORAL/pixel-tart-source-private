@@ -10,10 +10,10 @@ using RAWSelectionAssistant.ViewModels;
 namespace RAWSelectionAssistant.Services;
 
 /// <summary>A local, dependency-free visual PDF. WPF paginates the document with
-/// Windows Chinese fonts; pages are embedded at 144 DPI. Text is not selectable.</summary>
+/// Windows Chinese fonts; pages are embedded at 216 or 300 DPI. Text is not selectable.</summary>
 public static class PlanningProposalPdf
 {
-    public static FlowDocument CreateDocument(PlanningCenterViewModel vm)
+    public static FlowDocument CreateDocument(PlanningCenterViewModel vm, int dpi = 300)
     {
         var doc = new FlowDocument
         {
@@ -32,13 +32,17 @@ public static class PlanningProposalPdf
         }
         void Picture(PlanningReferenceItem reference)
         {
-            if (reference.PreviewPath is not string path || !File.Exists(path)) { Text(reference.Title + " · 源文件暂不可用"); return; }
+            var path = File.Exists(reference.OriginalPath) ? reference.OriginalPath : reference.PreviewPath;
+            if (path is null || !File.Exists(path)) { Text(reference.Title + " · 源文件暂不可用"); return; }
             try
             {
                 var bitmap = new BitmapImage(); bitmap.BeginInit(); bitmap.CacheOption = BitmapCacheOption.OnLoad; bitmap.UriSource = new Uri(path); bitmap.EndInit(); bitmap.Freeze();
-                var image = new Image { Source = bitmap, Width = 640, Height = Math.Min(430, 640d * bitmap.PixelHeight / bitmap.PixelWidth), Stretch = Stretch.Uniform };
-                doc.Blocks.Add(new BlockUIContainer(image) { Margin = new Thickness(0, 18, 0, 8) });
-                Text(reference.Title, 11);
+                // Never manufacture detail by enlarging a small derived preview beyond its pixels.
+                var width = Math.Min(640, bitmap.PixelWidth * 96d / dpi);
+                var image = new Image { Source = bitmap, Width = width, Height = Math.Min(430, width * bitmap.PixelHeight / bitmap.PixelWidth), Stretch = Stretch.Uniform };
+                var group = new StackPanel(); group.Children.Add(image);
+                group.Children.Add(new TextBlock { Text = reference.Title, FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 8, 0, 0) });
+                doc.Blocks.Add(new BlockUIContainer(group) { Margin = new Thickness(0, 18, 0, 8) });
             }
             catch (Exception error) when (error is IOException or NotSupportedException) { Text(reference.Title + " · 图片暂不可用"); }
         }
@@ -46,6 +50,7 @@ public static class PlanningProposalPdf
         Text(vm.DocumentDate + " · " + vm.DocumentLocation + " · " + vm.DocumentPeople, 12);
         foreach (var line in vm.DocumentBody.Split('\n'))
         {
+            if (string.IsNullOrWhiteSpace(line)) continue;
             if (line.Trim() == "---") { doc.Blocks.Add(new Paragraph { BorderBrush = Brushes.LightGray, BorderThickness = new Thickness(0, 0, 0, 1) }); continue; }
             var heading = line.StartsWith("# ", StringComparison.Ordinal);
             var value = heading || line.StartsWith("> ", StringComparison.Ordinal) ? line[2..] : line.StartsWith("- ", StringComparison.Ordinal) ? "• " + line[2..] : line;
@@ -55,7 +60,7 @@ public static class PlanningProposalPdf
         }
         foreach (var reference in vm.HeroReferences) Picture(reference);
         foreach (var section in new[] { ("拍摄目标", vm.ShootGoal), ("视觉关键词", vm.Keywords), ("客户要求", vm.ClientRequirements), ("必拍内容", vm.MustCapture), ("注意事项", vm.PlanningNotes), ("交付用途", vm.OutputPurpose) })
-        { Text(section.Item1, 22, true); Text(section.Item2); }
+        { if (!string.IsNullOrWhiteSpace(section.Item2)) { Text(section.Item1, 22, true); Text(section.Item2); } }
         Text("视觉方向", 22, true);
         Text("项目配色：" + string.Join("  ", vm.PaletteColors.Select(color => color.Hex)));
         Text("项目色彩方案：" + string.Join(" / ", vm.ColorSchemes.Select(look => look.Name)));
@@ -71,9 +76,10 @@ public static class PlanningProposalPdf
         return doc;
     }
 
-    public static void Export(PlanningCenterViewModel vm, string path)
+    public static void Export(PlanningCenterViewModel vm, string path, int dpi = 300)
     {
-        var document = CreateDocument(vm);
+        if (dpi is not (216 or 300)) throw new ArgumentOutOfRangeException(nameof(dpi));
+        var document = CreateDocument(vm, dpi);
         var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
         paginator.PageSize = new Size(794, 1123); paginator.ComputePageCount();
         var pages = new List<byte[]>();
@@ -88,15 +94,15 @@ public static class PlanningProposalPdf
                 var footer = new FormattedText($"{i + 1} / {paginator.PageCount}", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Microsoft YaHei UI"), 10, Brushes.Gray, 1);
                 drawing.DrawText(footer, new Point(730 - footer.Width, 1090));
             }
-            var bitmap = new RenderTargetBitmap(1191, 1685, 144, 144, PixelFormats.Pbgra32); bitmap.Render(visual);
+            var bitmap = new RenderTargetBitmap((int)Math.Ceiling(794d * dpi / 96), (int)Math.Ceiling(1123d * dpi / 96), dpi, dpi, PixelFormats.Pbgra32); bitmap.Render(visual);
             var encoder = new JpegBitmapEncoder { QualityLevel = 94 }; encoder.Frames.Add(BitmapFrame.Create(bitmap));
             using var buffer = new MemoryStream(); encoder.Save(buffer); pages.Add(buffer.ToArray());
         }
         var temporary = Path.GetFullPath(path) + "." + Guid.NewGuid().ToString("N") + ".tmp";
-        try { WritePdf(temporary, pages); File.Move(temporary, Path.GetFullPath(path), true); }
+        try { WritePdf(temporary, pages, dpi); File.Move(temporary, Path.GetFullPath(path), true); }
         finally { if (File.Exists(temporary)) File.Delete(temporary); }
     }
-    private static void WritePdf(string path, IReadOnlyList<byte[]> pages)
+    private static void WritePdf(string path, IReadOnlyList<byte[]> pages, int dpi)
     {
         using var stream = File.Create(path);
         void Write(string value) { var data = Encoding.ASCII.GetBytes(value); stream.Write(data); }
@@ -109,7 +115,7 @@ public static class PlanningProposalPdf
         {
             var n = 3 + i * 3;
             Object(n, $"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.5 842.25] /Resources << /XObject << /Im0 {n + 1} 0 R >> >> /Contents {n + 2} 0 R >>");
-            offsets.Add(stream.Position); Write($"{n + 1} 0 obj\n<< /Type /XObject /Subtype /Image /Width 1191 /Height 1685 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length {pages[i].Length} >>\nstream\n");
+            offsets.Add(stream.Position); Write($"{n + 1} 0 obj\n<< /Type /XObject /Subtype /Image /Width {(int)Math.Ceiling(794d * dpi / 96)} /Height {(int)Math.Ceiling(1123d * dpi / 96)} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length {pages[i].Length} >>\nstream\n");
             stream.Write(pages[i]); Write("\nendstream\nendobj\n");
             const string content = "q 595.5 0 0 842.25 0 0 cm /Im0 Do Q";
             Object(n + 2, $"<< /Length {content.Length} >>\nstream\n{content}\nendstream");

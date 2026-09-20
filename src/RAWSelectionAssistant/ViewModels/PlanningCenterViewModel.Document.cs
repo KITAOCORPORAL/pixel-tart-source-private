@@ -57,7 +57,7 @@ public sealed partial class PlanningCenterViewModel
     public IEnumerable<PlanningReferenceItem> VisibleDocumentReferences => AllProjectReferences.Where(item =>
         (ContentPage != "情绪板" || item.IsMoodboard) && (ContentPage != "灯光图" || item.Category == "灯光")
         && (ContentPage != "服化道" || item.Category == "造型") && (ReferenceCategory == "全部" || item.Category == ReferenceCategory));
-    public IEnumerable<PlanningReferenceItem> HeroReferences => AllProjectReferences.Where(item => item.IsHero).Take(3);
+    public IEnumerable<PlanningReferenceItem> HeroReferences => AllProjectReferences.Where(item => item.IsHero);
     public AsyncRelayCommand FlushPlanningCommand { get; private set; } = null!;
     public AsyncRelayCommand PreviewDocumentCommand { get; private set; } = null!;
     public RelayCommand EditDocumentCommand { get; private set; } = null!;

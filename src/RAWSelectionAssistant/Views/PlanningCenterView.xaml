@@ -22,7 +22,7 @@
    <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="280"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,1,0">
     <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-     <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="19" FontWeight="SemiBold"/><Button Content="＋" HorizontalAlignment="Right" Style="{StaticResource GhostButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"/></Grid>
+     <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="19" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
      <Grid Grid.Row="1">
       <TextBox x:Name="ProjectSearchBox" Text="{Binding ProjectSearch,UpdateSourceTrigger=PropertyChanged}" ToolTip="搜索项目、模特或日期" AutomationProperties.Name="搜索项目、模特或日期"/>
       <TextBlock Text="搜索项目、模特或日期" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="False" Foreground="{DynamicResource TextSecondaryBrush}">
@@ -32,7 +32,7 @@
      <StackPanel x:Name="StatusChips" Grid.Row="2" Orientation="Horizontal" Margin="0,12,0,16"/>
      <ListBox x:Name="DocumentList" Grid.Row="3" ItemsSource="{Binding PlanningProjectsView}" BorderThickness="0" Background="Transparent" ItemContainerStyle="{StaticResource DocumentListItem}" SelectionChanged="DocumentList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="策划案列表">
       <ListBox.ItemTemplate><DataTemplate><StackPanel>
-       <TextBlock Text="{Binding Name}" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap"/>
+       <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="44" LineHeight="22"/>
        <TextBlock Text="{Binding Detail}" Style="{StaticResource CaptionText}" Margin="0,9,0,0" TextWrapping="Wrap"/>
        <TextBlock Text="{Binding CountText}" Style="{StaticResource CaptionText}" Margin="0,8,0,0"/>
       </StackPanel></DataTemplate></ListBox.ItemTemplate>
@@ -48,27 +48,27 @@
       <Button Content="关联档期" Command="{Binding ShowBookingCommand}" Style="{StaticResource GhostButton}" AutomationProperties.Name="关联档期"/>
       <Button Content="预览" Command="{Binding PreviewDocumentCommand}" Style="{StaticResource SecondaryButton}" Margin="10,0" AutomationProperties.Name="预览策划案"/>
       <Button Content="导出" Click="Export_Click" Style="{StaticResource PrimaryButton}" AutomationProperties.Name="导出策划案 PDF"/>
-      <Button Content="•••" Click="More_Click" Style="{StaticResource GhostButton}" Margin="8,0,0,0" ToolTip="更多：开始拍摄、工作日历" AutomationProperties.Name="更多策划操作"/>
+      <Button Click="More_Click" Style="{StaticResource Av2IconButton}" Margin="8,0,0,0" ToolTip="更多：开始拍摄、工作日历" AutomationProperties.Name="更多策划操作"><Path Data="{StaticResource IconMore}" Style="{StaticResource Icon20}"/></Button>
      </StackPanel>
     </Grid>
     <Border x:Name="ContentNavigationBorder" Grid.Row="1" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
-     <WrapPanel x:Name="ContentNavigation" Margin="24,0" AutomationProperties.Name="策划内容导航"/>
+     <UniformGrid x:Name="ContentNavigation" Rows="1" Margin="16,0" MaxWidth="720" HorizontalAlignment="Left" AutomationProperties.Name="策划内容导航"/>
     </Border>
     <ScrollViewer x:Name="DocumentScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
      <StackPanel x:Name="DocumentContent" Margin="40,36,40,64" MaxWidth="1320" HorizontalAlignment="Stretch"/>
     </ScrollViewer>
    </Grid>
   </Grid>
-  <Border x:Name="ContextDrawer" Width="360" HorizontalAlignment="Right" Background="{DynamicResource SurfaceElevatedBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1,0,0,0" Padding="24" Visibility="Collapsed">
+  <Border x:Name="ContextDrawer" Width="360" MaxWidth="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Right" Background="{DynamicResource SurfaceElevatedBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="{StaticResource LargePanelCornerRadius}" Padding="24" KeyboardNavigation.TabNavigation="Cycle" Visibility="Collapsed">
    <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="DrawerContent"/></ScrollViewer>
   </Border>
   <Border x:Name="ModalOverlay" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
-   <Border Width="500" Padding="28" MaxHeight="780" VerticalAlignment="Center" Background="{DynamicResource SurfaceElevatedBrush}">
+   <Border Width="500" Padding="28" Margin="16" MaxHeight="780" VerticalAlignment="Center" Background="{DynamicResource SurfaceElevatedBrush}" CornerRadius="{StaticResource DialogCornerRadius}" Effect="{StaticResource Elevation.Dialog}" KeyboardNavigation.TabNavigation="Cycle">
     <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="ModalContent"/></ScrollViewer>
    </Border>
   </Border>
   <Border x:Name="ImagePreview" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
-   <Grid Margin="40"><Image x:Name="PreviewImage" Stretch="Uniform"/><StackPanel HorizontalAlignment="Right" VerticalAlignment="Top"><Button Content="关闭" Click="ClosePreview_Click" Style="{StaticResource SecondaryButton}" AutomationProperties.Name="关闭参考大图"/><TextBlock x:Name="PreviewCaption" Margin="0,12"/></StackPanel></Grid>
+   <Grid Margin="32" KeyboardNavigation.TabNavigation="Cycle"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions><TextBlock x:Name="PreviewCaption" Margin="0,12,48,12" TextWrapping="Wrap"/><Button x:Name="CloseImageButton" Click="ClosePreview_Click" Style="{StaticResource Av2IconButton}" HorizontalAlignment="Right" ToolTip="关闭大图（Esc）" AutomationProperties.Name="关闭参考大图"><Path Data="{StaticResource IconClose}" Style="{StaticResource Icon20}"/></Button><Image x:Name="PreviewImage" Grid.Row="1" Stretch="Uniform"/></Grid>
   </Border>
  </Grid>
 </UserControl>
