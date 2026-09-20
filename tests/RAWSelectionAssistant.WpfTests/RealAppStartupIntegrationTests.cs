@@ -93,6 +93,7 @@ public sealed class RealAppStartupIntegrationTests
                             using var stream = File.Create(Path.Combine(screenshotRoot, "left-navigation-workflow.png"));
                             encoder.Save(stream);
                         }
+                        await PlanningProposalAcceptance.RunAsync(window, vm);
                         var canvas = new FreeCanvasView(new CanvasEditor(new CanvasDocument()), new WpfAssetThumbnailProvider(),
                             new CanvasDocumentStore(Path.Combine(AppDataPaths.DataDirectory, "FreeCanvas")));
                         canvas.Measure(new Size(1000, 700)); canvas.Arrange(new Rect(0, 0, 1000, 700)); canvas.UpdateLayout();
@@ -154,7 +155,7 @@ public sealed class RealAppStartupIntegrationTests
         }) { IsBackground = true };
         thread.SetApartmentState(ApartmentState.STA);
         thread.Start();
-        Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(75)), "Production startup/navigation/clean shutdown timed out.");
+        Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(180)), "Production startup/navigation/clean shutdown timed out.");
         if (failure is not null) throw new AssertFailedException("Production runtime failure: " + failure, failure);
         Assert.IsTrue(completed, "Full startup gate must complete.");
     }

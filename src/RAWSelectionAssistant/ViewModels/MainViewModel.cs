@@ -1147,6 +1147,9 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public void AttachPlanningPage(PlanningCenterViewModel planningPage)
     {
         PlanningPage = planningPage;
+        PlanningPage.ColorSchemeRequested += async (_, projectId) => { await ReferenceColorPage.AcceptContextAsync(projectId, null, null); NavigateToSurface("ReferenceColor"); };
+        PlanningPage.ColorReferenceRequested += async (_, context) => { await ReferenceColorPage.AcceptContextAsync(context.ProjectId, null, null); await ReferenceColorPage.Editor.SelectLookAsync(context.LookId); NavigateToSurface("ReferenceColor"); };
+        PlanningPage.CalendarRequested += async (_, bookingId) => await NavigateToCalendarBookingAsync(bookingId);
         PlanningPage.ProjectContextChanged += (_, _) =>
         {
             Settings.LastPlanningProjectId = PlanningPage.ProjectId;

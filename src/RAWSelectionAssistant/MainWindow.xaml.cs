@@ -180,11 +180,24 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
-    private void Window_Closing(object? sender, CancelEventArgs e)
+    private bool _planningCloseFlushed;
+    private bool _planningCloseSaving;
+    private async void Window_Closing(object? sender, CancelEventArgs e)
     {
+        if (!_planningCloseFlushed && _viewModel?.PlanningPage is { } planning)
+        {
+            e.Cancel = true;
+            if (_planningCloseSaving) return;
+            _planningCloseSaving = true;
+            var saved = await planning.FlushAsync();
+            _planningCloseSaving = false;
+            if (saved) { _planningCloseFlushed = true; _ = Dispatcher.BeginInvoke(new Action(Close)); }
+            return;
+        }
         if (!TryCloseBookingEditorVisual())
         {
             e.Cancel = true;
+            _planningCloseFlushed = false;
             return;
         }
 
@@ -208,6 +221,33 @@ public partial class MainWindow : Window
         _shellEscapeService = e.NewValue as IShellEscapeService;
         if (_viewModel is not null)
         {
+            if (_viewModel.PlanningPage is { } planning)
+            {
+                planning.ReferenceSourceLoader = async (source, search, project) =>
+                {
+                    var host = AssetLibraryWorkspace.Content as PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost;
+                    var page = host is null ? GetHostedAssetLibraryPage() : await host.InitializeForProductHarnessAsync();
+                    if (page is null) return [];
+                    await page.InitializeForSessionAsync();
+                    if (source == "自由画布")
+                        return (await new RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore(page.ViewModel.CanvasDirectory).ListAsync())
+                            .SelectMany(canvas => canvas.Objects).Where(item => item.IsImage && (string.IsNullOrWhiteSpace(search) || item.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase))).ToArray();
+                    return await page.ViewModel.LoadCanvasSourcesAsync(source, search, project);
+                };
+                planning.ReferencePathResolver = async reference =>
+                {
+                    var page = GetHostedAssetLibraryPage();
+                    if (page is null || reference.LibraryId != page.ViewModel.CanvasLibraryId || reference.AssetId is not Guid id) return null;
+                    return (await page.ViewModel.GetAssetForAnalysisAsync(id))?.SourcePath;
+                };
+                planning.CanvasRequested += async (_, canvas) =>
+                {
+                    _viewModel.NavigateCommand.Execute("AssetLibrary");
+                    var host = AssetLibraryWorkspace.Content as PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost;
+                    var page = host is null ? GetHostedAssetLibraryPage() : await host.InitializeForProductHarnessAsync();
+                    if (page is not null) await page.ShowCanvasAsync(canvas);
+                };
+            }
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested += ViewModel_CloseRequested;
             _viewModel.PageChanged += ViewModel_PageChanged;
@@ -457,6 +497,12 @@ public partial class MainWindow : Window
 
     private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (_viewModel?.IsPlanningPage == true && (e.Key == Key.Escape || Keyboard.Modifiers == ModifierKeys.Control && e.Key is Key.S or Key.P or Key.F))
+        {
+            var planningView = FindVisualChild<RAWSelectionAssistant.Views.PlanningCenterView>(RootGrid);
+            if (planningView is not null) await planningView.HandleWorkspaceKeyAsync(e);
+            if (e.Handled) return;
+        }
         InputRoutingDiagnostics.RecordWindowKey(
             e,
             _viewModel?.CurrentPage ?? string.Empty,

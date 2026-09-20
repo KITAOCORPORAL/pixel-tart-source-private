@@ -35,8 +35,6 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     private bool _isQuickPreviewOpen;
     private bool _isSourceDrawerOpen;
     private ShotReferenceKindOption _selectedReferenceKind=ShotReferenceKindOption.All[0];
-    private CancellationTokenSource? _autosave;
-    private CancellationTokenSource? _shotAutosave;
     private string _shotTitle="";
     private string _shotScene="";
     private string _shotNotes="";
@@ -71,6 +69,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
         ViewCapturedAssetsCommand=new RelayCommand(_=>{if(ProjectId is Guid project)ViewAssetsRequested?.Invoke(this,new(null,project));},_=>ProjectId is not null);
         EnterTetherCommand=new AsyncRelayCommand(_=>EnterTetherAsync(),_=>ProjectId is not null&&SelectedShot is not null);
         InitializeOverview();
+        InitializeDocument();
     }
 
     public event EventHandler<ShootExecutionContext>? EnterTetherRequested;
@@ -90,7 +89,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     public string ProgressText=>$"{Shots.Count(shot=>shot.Status==ProjectShotStatus.Completed)} / {Shots.Count} 已拍";public string EstimatedTimeText=>$"预计 {Shots.Sum(shot=>shot.EstimatedMinutes)} 分钟";
     public string CapturedAssetText=>$"已拍素材 {_state?.CapturedAssets?.Count??0} 张";
     public string SaveStatus{get=>_saveStatus;private set=>SetProperty(ref _saveStatus,value);}public bool HasProject=>ProjectId is not null;public bool HasShots=>Shots.Count>0;
-    public ProjectShot? SelectedShot{get=>_selectedShot;set{if(SetProperty(ref _selectedShot,value)){LoadShotEditor(value);RefreshReferences();OnPropertyChanged(nameof(ShotHeading));OnPropertyChanged(nameof(InspectorHeading));ProjectContextChanged?.Invoke(this,EventArgs.Empty);}}}
+    public ProjectShot? SelectedShot{get=>_selectedShot;set{var current=value is null?null:_pendingShots.GetValueOrDefault(value.ShotId,value);if(SetProperty(ref _selectedShot,current)){LoadShotEditor(current);RefreshReferences();OnPropertyChanged(nameof(ShotHeading));OnPropertyChanged(nameof(InspectorHeading));ProjectContextChanged?.Invoke(this,EventArgs.Empty);}}}
     public ProjectShotReference? SelectedReference{get=>_selectedReference;set{if(SetProperty(ref _selectedReference,value)){_referenceNote=value?.Note??"";OnPropertyChanged(nameof(ReferenceNote));OnPropertyChanged(nameof(InspectorHeading));}}}
     public string ShotHeading=>SelectedShot is null?"尚未建立拍摄清单":$"Shot {SelectedShot.Order+1:00} · {SelectedShot.Name}";public string InspectorHeading=>SelectedReference?.Title??SelectedShot?.Name??ProjectName;
     public string SearchText{get=>_searchText;set{if(SetProperty(ref _searchText,value))ShotsView.Refresh();}}public ProjectShotStatus? SelectedFilter{get=>_filter;set{if(SetProperty(ref _filter,value))ShotsView.Refresh();}}
@@ -112,6 +111,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
 
     public async Task LoadAsync(Guid projectId,Guid? bookingId=null,CancellationToken token=default)
     {
+        if (!await FlushAsync()) throw new IOException("请先保存当前策划。");
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");
         _state=await _planning.LoadAsync(projectId,token);_booking=null;if((bookingId??_state.BookingId) is Guid id){_booking=await _bookings.GetAsync(id,false,token);if(_state.BookingId!=id){_state=_state with{BookingId=id};await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(projectId,token);}}
         var catalog=await _shots.LoadAsync(projectId,token);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==_state.CurrentShotId)??Shots.FirstOrDefault();
@@ -121,21 +121,24 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
         ColorSchemes.Clear();var catalogLooks=await _looks.LoadAsync(token);foreach(var look in catalogLooks.Looks.Where(item=>item.ProjectId==projectId))ColorSchemes.Add(look);
         NotifyAll();EnterTetherCommand.RaiseCanExecuteChanged();
         IsOverview=false; ProjectContextChanged?.Invoke(this,EventArgs.Empty);
+        ContentPage="文字"; IsDocumentEditing=false; IsPreviewMode=false;
+        await LoadDocumentAsync();
+        await RefreshPlanningListAsync(token);
     }
 
     private async Task NewShotAsync(){if(ProjectId is not Guid project)return;var now=DateTimeOffset.UtcNow;var shot=new ProjectShot(Guid.NewGuid(),project,Shots.Count,"未命名拍摄",ProjectShotStatus.NotStarted,null,null,[],now,now,EstimatedMinutes:10);await _shots.SaveAsync(shot);Shots.Add(shot);SelectedShot=shot;NotifyAll();}
-    private async Task DuplicateShotAsync(){if(SelectedShot is not{} source)return;var now=DateTimeOffset.UtcNow;var copy=source with{ShotId=Guid.NewGuid(),Order=Shots.Count,Name=source.Name+" 副本",Status=ProjectShotStatus.NotStarted,CapturedAt=null,CreatedAt=now,UpdatedAt=now,References=source.References.Select(item=>item with{ReferenceId=Guid.NewGuid(),PoseStatus=PoseExecutionStatus.NotShot}).ToArray()};await _shots.SaveAsync(copy);Shots.Add(copy);SelectedShot=copy;NotifyAll();}
-    private async Task ArchiveShotAsync(){if(SelectedShot is not{} shot)return;await _shots.SaveAsync(shot with{IsArchived=true,UpdatedAt=DateTimeOffset.UtcNow});Shots.Remove(shot);SelectedShot=Shots.FirstOrDefault();NotifyAll();}
+    private async Task DuplicateShotAsync(){if(!await FlushAsync() || SelectedShot is not{} source)return;var now=DateTimeOffset.UtcNow;var copy=source with{ShotId=Guid.NewGuid(),Order=Shots.Count,Name=source.Name+" 副本",Status=ProjectShotStatus.NotStarted,CapturedAt=null,CreatedAt=now,UpdatedAt=now,References=source.References.Select(item=>item with{ReferenceId=Guid.NewGuid(),PoseStatus=PoseExecutionStatus.NotShot}).ToArray()};await _shots.SaveAsync(copy);Shots.Add(copy);SelectedShot=copy;NotifyAll();}
+    private async Task ArchiveShotAsync(){if(!await FlushAsync() || SelectedShot is not{} shot)return;await _shots.SaveAsync(shot with{IsArchived=true,UpdatedAt=DateTimeOffset.UtcNow});Shots.Remove(shot);SelectedShot=Shots.FirstOrDefault();NotifyAll();}
     private async Task SetCurrentShotAsync(){if(ProjectId is not Guid project||SelectedShot is null)return;await _planning.SetCurrentShotAsync(project,SelectedShot.ShotId);_state=await _planning.LoadAsync(project);await SetStatusAsync(ProjectShotStatus.InProgress);}
-    private async Task SetStatusAsync(ProjectShotStatus status){if(SelectedShot is not{} shot)return;var updated=shot with{Status=status,CapturedAt=status==ProjectShotStatus.Completed?DateTimeOffset.UtcNow:shot.CapturedAt,UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
+    private async Task SetStatusAsync(ProjectShotStatus status){if(!await FlushAsync() || SelectedShot is not{} shot)return;var updated=shot with{Status=status,CapturedAt=status==ProjectShotStatus.Completed?DateTimeOffset.UtcNow:shot.CapturedAt,UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
     private bool CanMove(int delta)=>SelectedShot is not null&&Shots.IndexOf(SelectedShot)+delta>=0&&Shots.IndexOf(SelectedShot)+delta<Shots.Count;
-    private async Task MoveShotAsync(int delta){if(ProjectId is not Guid project||SelectedShot is null)return;var index=Shots.IndexOf(SelectedShot);var target=index+delta;if(target<0||target>=Shots.Count)return;Shots.Move(index,target);await _shots.ReorderAsync(project,Shots.Select(item=>item.ShotId).ToArray());var catalog=await _shots.LoadAsync(project);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived))Shots.Add(shot);SelectedShot=Shots.First(item=>item.ShotId==_selectedShot!.ShotId);}
-    public async Task ReorderShotAsync(ProjectShot source,ProjectShot target){if(ProjectId is not Guid project||source.ShotId==target.ShotId)return;var from=Shots.IndexOf(source);var to=Shots.IndexOf(target);if(from<0||to<0)return;Shots.Move(from,to);await _shots.ReorderAsync(project,Shots.Select(item=>item.ShotId).ToArray());var catalog=await _shots.LoadAsync(project);var selected=SelectedShot?.ShotId;Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==selected)??Shots.FirstOrDefault();}
-    private async Task RemoveReferenceAsync(){if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Where(item=>item.ReferenceId!=reference.ReferenceId).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
-    private async Task TogglePinAsync(){if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Select(item=>item.ReferenceId==reference.ReferenceId?item with{IsPinned=!item.IsPinned}:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
+    private async Task MoveShotAsync(int delta){if(!await FlushAsync() || ProjectId is not Guid project||SelectedShot is null)return;var index=Shots.IndexOf(SelectedShot);var target=index+delta;if(target<0||target>=Shots.Count)return;Shots.Move(index,target);await _shots.ReorderAsync(project,Shots.Select(item=>item.ShotId).ToArray());var catalog=await _shots.LoadAsync(project);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived))Shots.Add(shot);SelectedShot=Shots.First(item=>item.ShotId==_selectedShot!.ShotId);}
+    public async Task ReorderShotAsync(ProjectShot source,ProjectShot target){if(!await FlushAsync() || ProjectId is not Guid project||source.ShotId==target.ShotId)return;var from=Shots.ToList().FindIndex(item=>item.ShotId==source.ShotId);var to=Shots.ToList().FindIndex(item=>item.ShotId==target.ShotId);if(from<0||to<0)return;Shots.Move(from,to);await _shots.ReorderAsync(project,Shots.Select(item=>item.ShotId).ToArray());var catalog=await _shots.LoadAsync(project);var selected=SelectedShot?.ShotId;Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==selected)??Shots.FirstOrDefault();}
+    private async Task RemoveReferenceAsync(){if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Where(item=>item.ReferenceId!=reference.ReferenceId).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
+    private async Task TogglePinAsync(){if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Select(item=>item.ReferenceId==reference.ReferenceId?item with{IsPinned=!item.IsPinned}:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
     private async Task AddLocalReferenceAsync()
     {
-        if(SelectedShot is not{} shot)return;
+        if(!await FlushAsync() || SelectedShot is not{} shot)return;
         var paths=_dialogs.ChooseFiles("选择拍摄参考（仅关联原位置）","图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.webp|所有文件|*.*",true);
         if(paths.Count==0)return;
         var additions=paths.Select(path=>new ProjectShotReference(Guid.NewGuid(),SelectedReferenceKind.Kind,ExternalReference:Path.GetFullPath(path),Title:Path.GetFileNameWithoutExtension(path))).ToArray();
@@ -145,16 +148,16 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     private bool CanMoveReference(int delta)=>SelectedReference is not null&&References.IndexOf(SelectedReference)+delta>=0&&References.IndexOf(SelectedReference)+delta<References.Count;
     private async Task MoveReferenceAsync(int delta)
     {
-        if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;
+        if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;
         var references=shot.References.ToList();var index=references.FindIndex(item=>item.ReferenceId==reference.ReferenceId);var target=index+delta;if(index<0||target<0||target>=references.Count)return;
         (references[index],references[target])=(references[target],references[index]);var updated=shot with{References=references,UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);SelectedReference=References.First(item=>item.ReferenceId==reference.ReferenceId);
     }
     private void LoadShotEditor(ProjectShot? shot){_shotTitle=shot?.Name??"";_shotScene=shot?.Scene??"";_shotNotes=shot?.Notes??"";_shotEstimatedMinutes=shot?.EstimatedMinutes??0;foreach(var name in new[]{nameof(ShotTitle),nameof(ShotScene),nameof(ShotNotes),nameof(ShotEstimatedMinutes)})OnPropertyChanged(name);}
-    private async void QueueShotAutosave(){_shotAutosave?.Cancel();_shotAutosave?.Dispose();_shotAutosave=new();var token=_shotAutosave.Token;SaveStatus="正在保存…";try{await Task.Delay(350,token);if(SelectedShot is not{} shot||string.IsNullOrWhiteSpace(_shotTitle))return;var updated=shot with{Name=_shotTitle,Scene=_shotScene,Notes=_shotNotes,EstimatedMinutes=_shotEstimatedMinutes,UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated,token);ReplaceShot(updated);SaveStatus="已保存";}catch(OperationCanceledException){}catch{SaveStatus="保存失败，请稍后重试";}}
-    private async void QueueReferenceAutosave(){if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;try{var updatedReference=reference with{Note=_referenceNote};var updated=shot with{References=shot.References.Select(item=>item.ReferenceId==reference.ReferenceId?updatedReference:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);SelectedReference=References.First(item=>item.ReferenceId==reference.ReferenceId);}catch{SaveStatus="保存失败，请稍后重试";}}
-    private async Task EnterTetherAsync(){if(ProjectId is not Guid project)return;await SetCurrentShotAsync();var context=await new PlanningExecutionContextService(_shots,_planning,_visuals,_looks).BuildAsync(project);EnterTetherRequested?.Invoke(this,context);}
+    private void QueueShotAutosave() => CaptureShotSave();
+    private void QueueReferenceAutosave(){if(SelectedShot is not{} shot||SelectedReference is not{} reference)return;var basis=_pendingShots.GetValueOrDefault(shot.ShotId,shot);_pendingShots[shot.ShotId]=basis with{References=basis.References.Select(item=>item.ReferenceId==reference.ReferenceId?item with{Note=_referenceNote}:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};QueueDocumentSave();}
+    private async Task EnterTetherAsync(){if(ProjectId is not Guid project || !await FlushAsync())return;await SetCurrentShotAsync();var context=await new PlanningExecutionContextService(_shots,_planning,_visuals,_looks).BuildAsync(project);EnterTetherRequested?.Invoke(this,context);}
     private void UpdateSummary(Func<PlanningSummary,PlanningSummary> update){if(_state is null)return;_state=_state with{Summary=update(_state.Summary??new())};foreach(var name in new[]{nameof(ShootGoal),nameof(Keywords),nameof(ClientRequirements),nameof(MustCapture),nameof(PlanningNotes),nameof(OutputPurpose)})OnPropertyChanged(name);QueueAutosave();}
-    private async void QueueAutosave(){_autosave?.Cancel();_autosave?.Dispose();_autosave=new();var token=_autosave.Token;SaveStatus="正在保存…";try{await Task.Delay(350,token);if(_state is null)return;await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(_state.ProjectId,token);SaveStatus="已保存";}catch(OperationCanceledException){}catch{SaveStatus="保存失败，请稍后重试";}}
+    private void QueueAutosave() => QueueDocumentSave();
     private bool FilterShot(object value)=>value is ProjectShot shot&&(_filter is null||shot.Status==_filter)&&(string.IsNullOrWhiteSpace(_searchText)||shot.Name.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)||(shot.Notes?.Contains(_searchText,StringComparison.CurrentCultureIgnoreCase)??false));
     private bool FilterReference(object value)=>value is ProjectShotReference reference&&(_referenceFilter is null||reference.Kind==_referenceFilter);
     private void ReplaceShot(ProjectShot shot){var index=Shots.ToList().FindIndex(item=>item.ShotId==shot.ShotId);if(index>=0)Shots[index]=shot;_selectedShot=shot;OnPropertyChanged(nameof(SelectedShot));RefreshReferences();NotifyAll();}

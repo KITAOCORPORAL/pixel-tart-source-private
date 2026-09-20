@@ -10,8 +10,8 @@ public sealed class StageV2StartupCompatibilityTests
     public void PlanningFilterToggleStyleTargetTypeTests()
     {
         var xaml = Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
-        StringAssert.Contains(xaml, "x:Key=\"FilterToggleButton\"");
-        StringAssert.Contains(xaml, "TargetType=\"ToggleButton\"");
+        StringAssert.Contains(xaml, "x:Key=\"DocumentListItem\"");
+        StringAssert.Contains(xaml, "TargetType=\"ListBoxItem\"");
         Assert.IsFalse(Regex.IsMatch(xaml, "<ToggleButton[^>]*Style=\"\\{StaticResource (?:GhostButton|PrimaryButton|SecondaryButton)", RegexOptions.Singleline));
     }
 
@@ -31,9 +31,9 @@ public sealed class StageV2StartupCompatibilityTests
     public void MainWindowCanLoadPlanningResourcesTests()
     {
         var planning = Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
-        StringAssert.Contains(planning, "FilterToggleButton");
-        StringAssert.Contains(planning, "RadiusControl");
-        StringAssert.Contains(planning, "DropdownSelectedBrush");
+        StringAssert.Contains(planning, "DocumentListItem");
+        StringAssert.Contains(planning, "SurfaceSecondaryBrush");
+        StringAssert.Contains(planning, "AccentBrush");
         StringAssert.Contains(Read("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml"), "参考模式");
     }
 

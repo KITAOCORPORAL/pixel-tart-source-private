@@ -152,7 +152,8 @@ public partial class App : Application
             StartupStage("03 Settings");
             var startupSettings = await settingsService.LoadAsync();
 #if PLANNING_HUMAN_ACCEPTANCE
-            await PlanningHumanAcceptanceDemoSeeder.SeedAsync(settingsService);
+            if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") == "1")
+                await PlanningHumanAcceptanceDemoSeeder.SeedAsync(settingsService);
 #endif
 #if UI_REVIEW_BUILD
             if (string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal))
@@ -534,6 +535,11 @@ public partial class App : Application
     private bool TryAcquireSingleInstance()
     {
         var assemblyName = typeof(App).Assembly.GetName().Name ?? "RAWSelectionAssistant";
+#if PLANNING_HUMAN_ACCEPTANCE
+        // Explicit isolated acceptance runs must never activate or close a user's running app.
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") == "1")
+            assemblyName += "-Acceptance-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(AppDataPaths.Root)))[..16];
+#endif
         _singleInstance = new SingleInstanceManager($"{assemblyName}-96AFD8F1-7EF9-4D10-AFA9-18C6BE383E17");
         if (!_singleInstance.TryAcquire()) return false;
         _singleInstance.ActivationRequested += ActivateMainWindow;

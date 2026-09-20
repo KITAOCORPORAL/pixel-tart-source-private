@@ -51,6 +51,8 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
     IReadOnlyList<ShotCaptureRelation>? CapturedAssets = null, long Revision = 0,
     DateTimeOffset? UpdatedAt = null, int Version = 1)
 {
+    // Optional additive extension: existing version-1 plans and execution relations stay intact.
+    public PlanningDocument? Document { get; init; }
     public PlanningProjectState Normalize()
     {
         if (ProjectId == Guid.Empty || Revision < 0 || Version != 1) throw new ArgumentException("Planning state identity, revision or version is invalid.");
@@ -63,6 +65,36 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
 
 public sealed class PlanningProjectStore(string directory)
 {
+    public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
+    public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
+        UpdateAsync(projectId, state => state with { Document = document, Summary = summary }, token);
+    public Task LinkBookingAsync(Guid projectId, Guid bookingId, CancellationToken token = default) =>
+        UpdateAsync(projectId, state => state with { BookingId = bookingId }, token);
+    public string DraftPath(Guid projectId) => FilePath(projectId) + ".draft";
+    public async Task WriteDraftAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default, IReadOnlyList<ProjectShot>? shots = null)
+    {
+        var path = DraftPath(projectId);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+        try
+        {
+            await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            { await JsonSerializer.SerializeAsync(stream, new PlanningDocumentDraft(projectId, document, summary, shots), cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
+            File.Move(temporary, path, true);
+        }
+        finally { if (File.Exists(temporary)) File.Delete(temporary); }
+    }
+    public async Task<PlanningDocumentDraft?> LoadDraftAsync(Guid projectId, CancellationToken token = default)
+    {
+        var path = DraftPath(projectId);
+        if (!File.Exists(path)) return null;
+        await using var stream = File.OpenRead(path);
+        var draft = await JsonSerializer.DeserializeAsync<PlanningDocumentDraft>(stream, cancellationToken: token).ConfigureAwait(false);
+        if (draft?.ProjectId != projectId) throw new InvalidDataException("Draft project identity mismatch.");
+        if (draft.Shots?.Any(shot => shot.ProjectId != projectId) == true) throw new InvalidDataException("Draft shot project identity mismatch.");
+        return draft;
+    }
+    public void ClearDraft(Guid projectId) { var path = DraftPath(projectId); if (File.Exists(path)) File.Delete(path); }
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Gates = new(StringComparer.OrdinalIgnoreCase);
     private string FilePath(Guid projectId) => Path.Combine(Path.GetFullPath(directory), $"{projectId:N}.planning.json");
 

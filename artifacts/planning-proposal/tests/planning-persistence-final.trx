@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9d4ff5fc-ebf4-4fdf-aab6-6fe73e00e847" name="Administrator@PC-20250309WEIZ 2026-09-20 10:19:40" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-20T10:19:40.6591481+08:00" queuing="2026-09-20T10:19:40.6591483+08:00" start="2026-09-20T10:19:40.0179103+08:00" finish="2026-09-20T10:19:40.6638000+08:00" />
+  <TestSettings name="default" id="7ad1b540-acfc-4961-9e15-a3ef0ba1e008">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-09-20_10_19_40" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c5d1bb8b-053c-48a6-b9a9-ff3bd43f9b1b" testId="1386f1c0-ff44-8777-af53-17672063cae3" testName="CrashDraftRoundTripsAndClearsOnlyAfterExplicitCommit" computerName="PC-20250309WEIZ" duration="00:00:00.0717622" startTime="2026-09-20T10:19:40.4764813+08:00" endTime="2026-09-20T10:19:40.5632370+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5d1bb8b-053c-48a6-b9a9-ff3bd43f9b1b" />
+    <UnitTestResult executionId="9049aaff-6025-42f0-ac9c-3697ad5b1004" testId="136c2ded-3eef-87c0-af99-e7c979af090a" testName="LegacyVersionOneJsonDoesNotRequireDocumentAndShotEnumsAreUnchanged" computerName="PC-20250309WEIZ" duration="00:00:00.0613934" startTime="2026-09-20T10:19:40.4764729+08:00" endTime="2026-09-20T10:19:40.5539805+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9049aaff-6025-42f0-ac9c-3697ad5b1004" />
+    <UnitTestResult executionId="956c322a-ec24-4e53-871a-0ec6bfda0761" testId="1bef8f5a-ca92-8819-ba85-e8147b00bf62" testName="DocumentAutosaveMergesWithoutOverwritingExecutionAndLegacyLinks" computerName="PC-20250309WEIZ" duration="00:00:00.0825083" startTime="2026-09-20T10:19:40.4764869+08:00" endTime="2026-09-20T10:19:40.5735451+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="956c322a-ec24-4e53-871a-0ec6bfda0761" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CrashDraftRoundTripsAndClearsOnlyAfterExplicitCommit" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1386f1c0-ff44-8777-af53-17672063cae3">
+      <Execution id="c5d1bb8b-053c-48a6-b9a9-ff3bd43f9b1b" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests" name="CrashDraftRoundTripsAndClearsOnlyAfterExplicitCommit" />
+    </UnitTest>
+    <UnitTest name="LegacyVersionOneJsonDoesNotRequireDocumentAndShotEnumsAreUnchanged" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="136c2ded-3eef-87c0-af99-e7c979af090a">
+      <Execution id="9049aaff-6025-42f0-ac9c-3697ad5b1004" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests" name="LegacyVersionOneJsonDoesNotRequireDocumentAndShotEnumsAreUnchanged" />
+    </UnitTest>
+    <UnitTest name="DocumentAutosaveMergesWithoutOverwritingExecutionAndLegacyLinks" storage="d:\ai agent\worktrees\pixel-tart-developer-preview-rc6\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1bef8f5a-ca92-8819-ba85-e8147b00bf62">
+      <Execution id="956c322a-ec24-4e53-871a-0ec6bfda0761" />
+      <TestMethod codeBase="D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests" name="DocumentAutosaveMergesWithoutOverwritingExecutionAndLegacyLinks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1386f1c0-ff44-8777-af53-17672063cae3" executionId="c5d1bb8b-053c-48a6-b9a9-ff3bd43f9b1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="136c2ded-3eef-87c0-af99-e7c979af090a" executionId="9049aaff-6025-42f0-ac9c-3697ad5b1004" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bef8f5a-ca92-8819-ba85-e8147b00bf62" executionId="956c322a-ec24-4e53-871a-0ec6bfda0761" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 D:\AI AGENT\worktrees\pixel-tart-developer-preview-rc6\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
