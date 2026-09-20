@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Original Pixel Tart Symbols v1: authored 24-unit stroke geometry. No external icon assets. -->
+    <Geometry x:Key="PixelTart.Symbol.Workbench">M3,8 V3 H8 M16,3 H21 V8 M3,16 V21 H8 M16,21 H21 V16 M8,8 H16 V16 H8 Z M11,11 H13 V13 H11 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Library">M3,7 V3 H8 M16,3 H21 V7 M4,10 H20 V21 H4 Z M8,13 H11 V16 H8 Z M14,13 H17 M8,19 H17</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Ingest">M3,4 H9 M3,4 V10 M15,4 H21 V10 M4,15 V21 H20 V15 M12,6 V17 M8,13 L12,17 16,13</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Calendar">M4,5 H20 V21 H4 Z M8,3 V7 M16,3 V7 M4,10 H20 M8,14 H10 V16 H8 Z M14,14 H16 M8,19 H16</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Planning">M3,7 V3 H9 M15,3 H21 V7 M5,8 H19 V21 H5 Z M8,12 H16 M8,16 H16 M8,19 H12</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Tether">M3,8 H7 L9,5 H15 L17,8 H21 V19 H3 Z M12,10 A3,3 0 1 0 12,16 A3,3 0 1 0 12,10 M21,12 H23 M1,12 H3</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Selection">M3,8 V3 H9 M15,3 H21 V8 M4,11 V20 H12 M7,16 L10,13 13,16 M14,18 L17,21 22,15</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Finance">M3,7 V3 H8 M4,9 H20 V21 H4 Z M4,13 H20 M15,15 H20 V19 H15 Z M8,6 H17</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.History">M4,7 A9,9 0 1 1 3,15 M3,3 V8 H8 M12,7 V12 L16,15 M18,4 H21 V7</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Toolbox">M3,8 H21 V21 H3 Z M8,8 V4 H16 V8 M3,13 H21 M10,11 H14 V15 H10 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.ReferenceColor">M3,7 V3 H8 M16,3 H21 V7 M3,17 V21 H8 M16,21 H21 V17 M10,8 A4,4 0 1 0 10,16 A4,4 0 1 0 10,8 M15,8 A4,4 0 0 1 15,16</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Publish">M3,8 V3 H8 M16,3 H21 V8 M4,14 V21 H20 V14 M12,18 V7 M8,11 L12,7 16,11</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.RawJpg">M3,8 V3 H8 M3,16 V21 H8 M16,3 H21 V8 M16,21 H21 V16 M7,12 H17 M13,8 L17,12 13,16</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Organize">M3,7 V3 H8 M16,3 H21 V7 M4,11 H10 V17 H4 Z M14,11 H20 V17 H14 Z M7,21 H17</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Collage">M3,8 V3 H8 M16,3 H21 V8 M3,16 V21 H8 M16,21 H21 V16 M7,7 H17 V17 H7 Z M12,7 V17 M12,12 H17</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Search">M10,4 A6,6 0 1 0 10,16 A6,6 0 1 0 10,4 M15,15 L21,21 M3,3 H5 V5 H3 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Filter">M3,4 H21 L14,12 V20 L10,18 V12 Z M18,18 H21 V21 H18 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Sort">M5,3 V21 M2,18 L5,21 8,18 M11,5 H21 M11,11 H18 M11,17 H15</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Grid">M3,3 H10 V10 H3 Z M14,3 H21 V10 H14 Z M3,14 H10 V21 H3 Z M14,14 H21 V21 H14 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Waterfall">M3,3 H10 V14 H3 Z M14,3 H21 V9 H14 Z M3,18 H10 V21 H3 Z M14,13 H21 V21 H14 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.List">M3,4 H6 V7 H3 Z M10,5 H21 M3,10 H6 V13 H3 Z M10,11 H21 M3,17 H6 V20 H3 Z M10,18 H21</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.More">M3,10 H6 V13 H3 Z M10,10 H13 V13 H10 Z M17,10 H20 V13 H17 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Add">M12,4 V20 M4,12 H20 M3,3 H5 V5 H3 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Close">M5,5 L19,19 M19,5 L5,19</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Forward">M4,12 H20 M13,5 L20,12 13,19</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Back">M20,12 H4 M11,5 L4,12 11,19</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Refresh">M20,8 A8,8 0 1 0 20,16 M20,3 V8 H15 M3,3 H5 V5 H3 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Preview">M2,12 Q12,0 22,12 Q12,24 2,12 M12,8 A4,4 0 1 0 12,16 A4,4 0 1 0 12,8</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Lighting">M5,4 H15 L19,8 15,12 H5 Z M10,12 V20 M5,21 L10,18 15,21 M20,4 L22,2 M21,8 H23 M20,12 L22,14</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Pose">M12,3 A2,2 0 1 0 12,7 A2,2 0 1 0 12,3 M12,7 L10,13 6,21 M10,13 L16,17 19,21 M10,10 L4,12 M11,9 L17,11 M3,3 H5 V5 H3 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Storyboard">M3,3 H21 V21 H3 Z M3,9 H21 M3,15 H21 M9,3 V21 M6,5 V7 M6,11 V13 M6,17 V19 M12,5 H17 M12,11 H17</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Styling">M7,4 L10,7 H14 L17,4 22,9 18,13 17,11 V21 H7 V11 L6,13 2,9 Z M11,3 H13</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Palette">M3,7 V3 H8 M16,3 H21 V7 M4,11 H8 V20 H4 Z M10,8 H14 V20 H10 Z M16,13 H20 V20 H16 Z</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Import">M3,7 V3 H8 M16,3 H21 V7 M4,16 V21 H20 V16 M12,4 V16 M8,12 L12,16 16,12</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Export">M3,7 V3 H8 M16,3 H21 V7 M4,16 V21 H20 V16 M12,17 V6 M8,10 L12,6 16,10</Geometry>
+    <Geometry x:Key="PixelTart.Symbol.Link">M9,15 L15,9 M7,13 L4,16 A3,3 0 0 0 8,20 L11,17 M13,7 L16,4 A3,3 0 0 1 20,8 L17,11</Geometry>
+    <Geometry x:Key="IconWorkbench">M3,8 V3 H8 M16,3 H21 V8 M3,16 V21 H8 M16,21 H21 V16 M8,8 H16 V16 H8 Z M11,11 H13 V13 H11 Z</Geometry>
+    <Geometry x:Key="IconDashboard">M3,8 V3 H8 M16,3 H21 V8 M3,16 V21 H8 M16,21 H21 V16 M8,8 H16 V16 H8 Z M11,11 H13 V13 H11 Z</Geometry>
+    <Geometry x:Key="IconAssetLibrary">M3,7 V3 H8 M16,3 H21 V7 M4,10 H20 V21 H4 Z M8,13 H11 V16 H8 Z M14,13 H17 M8,19 H17</Geometry>
+    <Geometry x:Key="IconLocalSplit">M3,4 H9 M3,4 V10 M15,4 H21 V10 M4,15 V21 H20 V15 M12,6 V17 M8,13 L12,17 16,13</Geometry>
+    <Geometry x:Key="IconCalendar">M4,5 H20 V21 H4 Z M8,3 V7 M16,3 V7 M4,10 H20 M8,14 H10 V16 H8 Z M14,14 H16 M8,19 H16</Geometry>
+    <Geometry x:Key="IconPlanning">M3,7 V3 H9 M15,3 H21 V7 M5,8 H19 V21 H5 Z M8,12 H16 M8,16 H16 M8,19 H12</Geometry>
+    <Geometry x:Key="IconCameraTether">M3,8 H7 L9,5 H15 L17,8 H21 V19 H3 Z M12,10 A3,3 0 1 0 12,16 A3,3 0 1 0 12,10 M21,12 H23 M1,12 H3</Geometry>
+    <Geometry x:Key="IconOnlineSelection">M3,8 V3 H9 M15,3 H21 V8 M4,11 V20 H12 M7,16 L10,13 13,16 M14,18 L17,21 22,15</Geometry>
+    <Geometry x:Key="IconWallet">M3,7 V3 H8 M4,9 H20 V21 H4 Z M4,13 H20 M15,15 H20 V19 H15 Z M8,6 H17</Geometry>
+    <Geometry x:Key="IconArchiveHistory">M4,7 A9,9 0 1 1 3,15 M3,3 V8 H8 M12,7 V12 L16,15 M18,4 H21 V7</Geometry>
+    <Geometry x:Key="IconToolbox">M3,8 H21 V21 H3 Z M8,8 V4 H16 V8 M3,13 H21 M10,11 H14 V15 H10 Z</Geometry>
+    <Geometry x:Key="IconPhotoStack">M3,4 H9 M3,4 V10 M15,4 H21 V10 M4,15 V21 H20 V15 M12,6 V17 M8,13 L12,17 16,13</Geometry>
+    <Geometry x:Key="IconProjectCenter">M9,15 L15,9 M7,13 L4,16 A3,3 0 0 0 8,20 L11,17 M13,7 L16,4 A3,3 0 0 1 20,8 L17,11</Geometry>
+    <Geometry x:Key="IconHistory">M4,7 A9,9 0 1 1 3,15 M3,3 V8 H8 M12,7 V12 L16,15 M18,4 H21 V7</Geometry>
+    <Geometry x:Key="ToolIconReferenceColor">M3,7 V3 H8 M16,3 H21 V7 M3,17 V21 H8 M16,21 H21 V17 M10,8 A4,4 0 1 0 10,16 A4,4 0 1 0 10,8 M15,8 A4,4 0 0 1 15,16</Geometry>
+    <Geometry x:Key="IconReferenceColor">M3,7 V3 H8 M16,3 H21 V7 M3,17 V21 H8 M16,21 H21 V17 M10,8 A4,4 0 1 0 10,16 A4,4 0 1 0 10,8 M15,8 A4,4 0 0 1 15,16</Geometry>
+    <Style x:Key="PixelTart.Symbol" TargetType="Path"><Setter Property="Width" Value="18"/><Setter Property="Height" Value="18"/><Setter Property="Stretch" Value="Uniform"/><Setter Property="Fill" Value="Transparent"/><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}"/><Setter Property="StrokeThickness" Value="1.5"/><Setter Property="StrokeStartLineCap" Value="Round"/><Setter Property="StrokeEndLineCap" Value="Round"/><Setter Property="StrokeLineJoin" Value="Round"/><Setter Property="IsHitTestVisible" Value="False"/></Style>
+</ResourceDictionary>

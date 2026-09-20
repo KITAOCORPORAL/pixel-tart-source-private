@@ -21,7 +21,7 @@
  <Grid>
   <Grid x:Name="WorkspaceLayout">
    <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="280"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-   <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,1,0">
+   <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="0">
     <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
      <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="19" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
      <Grid Grid.Row="1">
@@ -52,7 +52,7 @@
       <Button Click="More_Click" Style="{StaticResource Av2IconButton}" Margin="8,0,0,0" ToolTip="更多：开始拍摄、工作日历" AutomationProperties.Name="更多策划操作"><Path Data="{StaticResource IconMore}" Style="{StaticResource Icon20}"/></Button>
      </StackPanel>
     </Grid>
-    <Border x:Name="ContentNavigationBorder" Grid.Row="1" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
+    <Border x:Name="ContentNavigationBorder" Grid.Row="1" BorderThickness="0">
      <UniformGrid x:Name="ContentNavigation" Rows="1" Margin="16,0" MaxWidth="720" HorizontalAlignment="Left" AutomationProperties.Name="策划内容导航"/>
     </Border>
     <ScrollViewer x:Name="DocumentScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

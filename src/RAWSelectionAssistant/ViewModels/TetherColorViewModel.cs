@@ -130,8 +130,8 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
     public AsyncRelayCommand SaveClientNoteCommand { get; }
     public AsyncRelayCommand ToggleClientFavoriteCommand { get; }
 
-    public BitmapSource? SourceImage { get => _sourceImage; private set => SetProperty(ref _sourceImage, value); }
-    public BitmapSource? DisplayImage { get => _displayImage; private set { if (SetProperty(ref _displayImage, value)) UpdateClientImage(); } }
+    public BitmapSource? SourceImage { get => _sourceImage; private set { if (SetProperty(ref _sourceImage, value)) OnPropertyChanged(nameof(VisibleImage)); } }
+    public BitmapSource? DisplayImage { get => _displayImage; private set { if (SetProperty(ref _displayImage, value)) { OnPropertyChanged(nameof(VisibleImage)); UpdateClientImage(); } } }
     public LutPresetReference? SelectedLut { get => _selectedLut; set { if (SetProperty(ref _selectedLut, value)) { OnPropertyChanged(nameof(CurrentLutText)); OnPropertyChanged(nameof(SelectedInputInterpretation)); OnPropertyChanged(nameof(InputSpaceWarning)); RaiseCommands(); _ = RenderAsync(); } } }
     public LutInputInterpretation SelectedInputInterpretation
     {

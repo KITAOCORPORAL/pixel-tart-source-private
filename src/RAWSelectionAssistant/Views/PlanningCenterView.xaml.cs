@@ -144,7 +144,7 @@ public partial class PlanningCenterView : UserControl
             StatusChips.Children.Add(chip);
         }
         ContentNavigation.Children.Clear();
-        var icons = new[] { "IconPlanning", "IconPhotoStack", "IconAssetLibrary", "IconArchiveHistory", "IconCameraTether", "IconProjectCenter", "IconHistory" };
+        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link" };
         for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
         {
             var page = PlanningCenterViewModel.ContentPages[i];
@@ -361,7 +361,7 @@ public partial class PlanningCenterView : UserControl
     private ContextMenu ReferenceMenu(PlanningReferenceItem item)
     {
         var menu = new ContextMenu(); menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
-        void Add(string label, Action action) { var entry = MenuEntry(label); entry.Click += (_, _) => action(); menu.Items.Add(entry); }
+        void Add(string label, Action action) { var symbol = label switch { "查看大图" => "Preview", "打开来源" => "Link", "用于灯光" => "Lighting", "用于造型" => "Styling", "用于当前镜头" => "Storyboard", "用于参考仿色" => "ReferenceColor", "上移" => "Back", "下移" => "Forward", "从策划中移除" => "Close", _ when label.Contains("情绪板") => "Collage", _ => "Planning" }; var entry = MenuEntry(label, "PixelTart.Symbol." + symbol); entry.Click += (_, _) => action(); menu.Items.Add(entry); }
         async Task Safely(Func<Task> action) { try { await action(); } catch (Exception error) { System.Diagnostics.Trace.TraceError(error.ToString()); _vm!.Dialogs.ShowError("操作未完成，原资料已保留。请重试。"); } }
         void AddAsync(string label, Func<Task> action) => Add(label, async () => await Safely(action));
         Add("查看大图", () => ShowImage(item));
@@ -400,7 +400,7 @@ public partial class PlanningCenterView : UserControl
             var body = new StackPanel(); Grid.SetColumn(body, 1); body.Children.Add(Text(shot.Name, 21, true)); body.Children.Add(Text(shot.Scene ?? "场景待定", 14)); body.Children.Add(Text(shot.Notes ?? "", 14)); row.Children.Add(body);
             var state = Text(shot.Status switch { ProjectShotStatus.Completed => "已拍", ProjectShotStatus.InProgress => "当前", ProjectShotStatus.Skipped => "跳过", _ => "待拍" }, 13); Grid.SetColumn(state, 2); row.Children.Add(state);
             Border border = interactive ? new PlanningShotRow() : new Border();
-            border.Child = row; border.BorderBrush = Brush("DividerBrush"); border.BorderThickness = new Thickness(0, 0, 0, 1); border.Padding = new Thickness(0, 0, 0, 22);
+            border.Child = row; border.BorderBrush = Brush("DividerBrush"); border.BorderThickness = new Thickness(0); border.Padding = new Thickness(0, 0, 0, 22);
             if (interactive)
             {
                 void Open() { _vm.SelectedShot = shot; _vm.IsShotDrawerOpen = true; RenderShotDrawer(); FocusOverlay(DrawerContent); }

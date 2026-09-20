@@ -21,13 +21,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="5" />
+                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="3" Opacity=".4" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource ScrollBarThumbHoverBrush}" />
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource ScrollBarThumbHoverBrush}" /><Setter TargetName="ThumbBorder" Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="True">
-                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource AccentBrush}" /><Setter TargetName="ThumbBorder" Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -42,13 +42,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="5" />
+                    <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}" CornerRadius="3" Opacity=".4" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource ScrollBarThumbHoverBrush}" />
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource ScrollBarThumbHoverBrush}" /><Setter TargetName="ThumbBorder" Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="True">
-                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource AccentBrush}" />
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{DynamicResource AccentBrush}" /><Setter TargetName="ThumbBorder" Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -57,8 +57,8 @@
     </Style>
 
     <Style TargetType="ScrollBar">
-        <Setter Property="Width" Value="14" />
-        <Setter Property="MinWidth" Value="14" />
+        <Setter Property="Width" Value="10" />
+        <Setter Property="MinWidth" Value="10" />
         <Setter Property="Background" Value="{DynamicResource ScrollBarTrackBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ScrollBarThumbBrush}" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -91,8 +91,8 @@
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
-                <Setter Property="Height" Value="14" />
-                <Setter Property="MinHeight" Value="14" />
+                <Setter Property="Height" Value="10" />
+                <Setter Property="MinHeight" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ScrollBar">

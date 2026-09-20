@@ -35,6 +35,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private readonly bool _allowReferenceManagement;
     private int _busyOperations;
     private bool _refreshingLookChoices;
+    private bool _hasError;
+    public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0;
     private void BeginBusy() { _busyOperations++; OnPropertyChanged(nameof(IsBusy)); }
     private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); OnPropertyChanged(nameof(IsBusy)); }
@@ -56,7 +58,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         SelectSourceCategoryCommand = new RelayCommand(value => { if (value is ReferenceSourceCategory category) SelectedSourceCategory = category; });
         ImportExternalReferenceCommand = new AsyncRelayCommand(_ => ImportExternalReferenceAsync(), _ => _dialogs is not null && _allowReferenceManagement);
         RemoveReferenceCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Remove), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel && ReferenceSources.Count > 1);
-        MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel);
+        MoveReferenceUpCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Up), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel item && ReferenceSources.IndexOf(item) > 0);
         MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel);
         SourceCategories = [new("项目色彩方案", null), new("灵感板", "Board"), new("自由画布", "Canvas"), new("素材库", "Asset"), new("最近使用", "Recent"), new("导入参考图", "External")];
         _selectedSourceCategory = SourceCategories[0];
@@ -65,7 +67,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
     public IReadOnlyList<ReferenceSourceCategory> SourceCategories { get; }
-    public IReadOnlyList<string> ViewModes { get; } = ["原片", "仿色", "左右对比", "并排对比"];
+    public IReadOnlyList<string> ViewModes { get; } = ["原片", "仿色结果", "左右对比", "并排对比"];
     public AsyncRelayCommand ApplyCommand { get; }
     public AsyncRelayCommand ReloadCommand { get; }
     public AsyncRelayCommand ExportCubeCommand { get; }
@@ -95,7 +97,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public System.Windows.GridLength SplitLeft => new(SplitPosition, System.Windows.GridUnitType.Star);
     public System.Windows.GridLength SplitRight => new(1 - SplitPosition, System.Windows.GridUnitType.Star);
     public bool ShowOriginal => _originalHeld || !Enabled || MatchedImage is null || ViewMode == "原片";
-    public bool ShowMatched => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "仿色";
+    public bool ShowMatched => !_originalHeld && Enabled && MatchedImage is not null && (ViewMode == "仿色" || ViewMode == "仿色结果");
     public bool ShowSplit => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "左右对比";
     public bool ShowSideBySide => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "并排对比";
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
@@ -219,7 +221,10 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 
     private async Task SaveReferencesAsync(ReferenceLook look, IReadOnlyList<ReferenceLookSource> sources)
     {
-        var updated = (look with { ReferenceSources = sources, UpdatedAt = DateTimeOffset.UtcNow }).Normalize(); await _store.SaveAsync(updated, token: _lifetime.Token);
+        var updated = (look with { ReferenceSources = sources, UpdatedAt = DateTimeOffset.UtcNow }).Normalize();
+        try { await _store.SaveAsync(updated, token: _lifetime.Token); }
+        catch (OperationCanceledException) { return; }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException) { HasError = true; StatusText = "参考调整未能保存；原方案已保留，请检查存储位置后重试。"; RefreshReferenceSources(); return; }
         var index = Looks.IndexOf(look); if (index >= 0) Looks[index] = updated; _persistedLook = updated; _selectedLook = updated; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RefreshReferenceSources(); await DebouncedRenderAsync();
     }
     private async Task SaveCurrentAdjustmentAsync()
@@ -271,7 +276,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         if (!Enabled || source is null || look is null) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
         _render?.Dispose(); _render = CancellationTokenSource.CreateLinkedTokenSource(outer, _lifetime.Token);
         var renderToken = _render.Token;
-        StatusText = "正在生成仿色预览…";
+        HasError = false; StatusText = "正在生成预览…";
         BeginBusy();
         try
         {
@@ -281,7 +286,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             MatchedImage = image; StatusText = rendered.DifferenceWarning ?? "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { }
-        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
+        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { HasError = true; MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
     }
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide)})OnPropertyChanged(name);}
@@ -294,6 +299,7 @@ public sealed class ReferenceSourceWeightViewModel : ObservableObject
     private readonly Func<ReferenceSourceWeightViewModel, double, Task> _changed; private double _weightPercent;
     public ReferenceSourceWeightViewModel(ReferenceLookSource source, double weightPercent, Func<ReferenceSourceWeightViewModel, double, Task> changed) { Source=source;_weightPercent=weightPercent;_changed=changed; }
     public ReferenceLookSource Source { get; } public string Name => Source.Name; public string SourceLabel => Source.Kind switch { "Board"=>"灵感板", "Canvas"=>"自由画布", "External"=>"外部参考图", _=>"素材库" };
+    public string AvailabilityText => string.IsNullOrWhiteSpace(Source.SourcePath) ? "使用已保存的参考分析" : File.Exists(Source.SourcePath) ? "参考文件可用" : "参考文件离线 · 使用已保存分析";
     public double WeightPercent { get=>_weightPercent; set { var bounded=Math.Clamp(value,.1,100); if(SetProperty(ref _weightPercent,bounded)) _=_changed(this,bounded); } }
 }
 internal enum ReferenceEdit { Remove, Up, Down }

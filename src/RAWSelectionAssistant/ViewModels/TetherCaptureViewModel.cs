@@ -517,7 +517,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         Track(ReferenceMode.SetSourceAsync(null, null));
     }
 
-    public async ValueTask DisposeAsync()
+    private Task? _disposeTask;
+    public ValueTask DisposeAsync() => new(_disposeTask ??= DisposeCoreAsync());
+
+    private async Task DisposeCoreAsync()
     {
         _lifetime.Cancel();
         _requestCoordinator.CancelCurrent();

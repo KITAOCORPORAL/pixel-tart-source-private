@@ -182,6 +182,8 @@ public partial class MainWindow : Window
 
     private bool _planningCloseFlushed;
     private bool _planningCloseSaving;
+    private bool _tetherCloseDisposed;
+    private bool _tetherCloseDisposing;
     private async void Window_Closing(object? sender, CancelEventArgs e)
     {
         if (!_planningCloseFlushed && _viewModel?.PlanningPage is { } planning)
@@ -201,6 +203,22 @@ public partial class MainWindow : Window
             return;
         }
 
+        // Drain dispatcher-affine preview work before synchronous App.OnExit cleanup.
+        if (!_tetherCloseDisposed && _viewModel?.TetherPage is { } tether)
+        {
+            e.Cancel = true;
+            if (_tetherCloseDisposing) return;
+            _tetherCloseDisposing = true;
+            try { await tether.DisposeAsync(); }
+            catch (Exception ex) { System.Diagnostics.Trace.TraceError("Tether shutdown: {0}", ex); }
+            finally
+            {
+                _tetherCloseDisposing = false;
+                _tetherCloseDisposed = true;
+                _ = Dispatcher.BeginInvoke(new Action(Close));
+            }
+            return;
+        }
         if (DataContext is MainViewModel viewModel)
         {
             viewModel.CaptureWindowState(ActualWidth, ActualHeight, Left, Top);
@@ -267,6 +285,7 @@ public partial class MainWindow : Window
             host.CurrentPage?.FocusInitial();
             return;
         }
+
         var page = GetHostedAssetLibraryPage();
         if (page is null) return;
         await page.InitializeForSessionAsync();

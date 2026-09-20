@@ -77,6 +77,14 @@ public sealed class WholeAppVisualAcceptanceTests
                             root.UpdateLayout();
                             for (var attempt = 0; (root.ActualWidth <= 0 || root.ActualHeight <= 0) && attempt < 10; attempt++)
                             { await Task.Delay(100); root.UpdateLayout(); }
+                            // Menu mode may dismiss an OS popup while this offscreen render harness waits.
+                            // Arrange the actual production popup subtree, never a reconstructed menu.
+                            // This is render evidence only, not proof of desktop popup interaction.
+                            if (popup is not null && (root.ActualWidth <= 0 || root.ActualHeight <= 0))
+                            {
+                                root.Measure(new Size(800, 1000));
+                                root.Arrange(new Rect(root.DesiredSize)); root.UpdateLayout();
+                            }
                             if (root.ActualWidth <= 0 || root.ActualHeight <= 0) throw new InvalidOperationException($"Unrendered production surface: {module}/{state}");
                             var bitmap = new RenderTargetBitmap((int)Math.Ceiling(root.ActualWidth), (int)Math.Ceiling(root.ActualHeight), 96, 96, PixelFormats.Pbgra32);
                             bitmap.Render(root);
@@ -95,6 +103,28 @@ public sealed class WholeAppVisualAcceptanceTests
                             // Settings is a real overlay and deliberately does not change CurrentPage.
                             if (route != "Settings" && route != vm.CurrentPage) throw new InvalidOperationException("Route failed: " + route + "; actual=" + vm.CurrentPage);
                             await Capture(module, "default");
+                            if (route == "Tether" && Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                            {
+                                var tether = vm.TetherPage!;
+                                tether.WatchDirectory = fixtureDirectory; tether.ImportExisting = true;
+                                tether.CopyToProject = false; tether.CopyToBackup = false;
+                                await tether.StartCommand.ExecuteAsync(null);
+                                await tether.ReconcileCommand.ExecuteAsync(null);
+                                for (var wait = 0; tether.Assets.Count == 0 && wait < 40; wait++) await Task.Delay(250);
+                                if (!tether.IsRunning) throw new InvalidOperationException("Synthetic watch-folder session did not start");
+                                if (tether.Assets.Count > 0) tether.SelectedAsset = tether.Assets[0];
+                                for (var wait = 0; tether.IsPreviewLoading && wait < 120; wait++) await Task.Delay(250);
+                                if (tether.IsPreviewLoading) throw new InvalidOperationException("Tether preview did not settle");
+                                if (tether.CurrentImage is null) throw new InvalidOperationException("Tether ready state must include a real loaded image");
+                                var boundPreview = Descendants<Image>(window).First(x => System.Windows.Data.BindingOperations.GetBinding(x, Image.SourceProperty)?.Path.Path == "ColorSettings.VisibleImage");
+                                if (!ReferenceEquals(tether.ColorSettings.VisibleImage, boundPreview.Source)) throw new InvalidOperationException("Tether image binding must update after decode");
+                                await Capture(module, "watch-folder-monitor");
+                                tether.ReferenceMode.AdvancedExpanded = false; await Capture(module, "reference-collapsed");
+                                tether.ReferenceMode.AdvancedExpanded = true; await Capture(module, "reference-expanded");
+                                tether.ReferenceMode.AdvancedExpanded = false;
+                                await Capture(module, "shot-references");
+                                await tether.StopCommand.ExecuteAsync(null); await Capture(module, "session-stopped");
+                            }
                             if (route == "Settings")
                             {
                                 var tabs = Descendants<TabControl>(window).First(x => x.IsVisible);
@@ -116,7 +146,11 @@ public sealed class WholeAppVisualAcceptanceTests
                                 var publishing = Descendants<RAWSelectionAssistant.Views.PublishingExportView>(window).Single();
                                 var publisher = (PublishingExportViewModel)publishing.DataContext;
                                 publisher.AddFiles(Directory.GetFiles(fixtureDirectory, "*.png").Take(3));
-                                await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.RefreshPreviewCommand).ExecuteAsync(null); await Capture(module, "content");
+                                await StudioVisualEvidence.MeasureOperation(output,"Publishing preview",async () => { await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.RefreshPreviewCommand).ExecuteAsync(null); while(publisher.IsPreviewing) await Task.Delay(20); },()=>publisher.IsPreviewing); await Capture(module, "content");
+                                if(Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE")=="1") {
+                                    publisher.DestinationDirectory=Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!,"PublishingOutput");Directory.CreateDirectory(publisher.DestinationDirectory);
+                                    await StudioVisualEvidence.MeasureOperation(output,"Publishing export",()=>((RAWSelectionAssistant.Utilities.AsyncRelayCommand)publisher.StartCommand).ExecuteAsync(null),()=>publisher.IsBusy);
+                                }
                                 var preset = Descendants<ComboBox>(publishing).Last(x => x.IsVisible && x.Items.Count > 0);
                                 preset.IsDropDownOpen = true; await Task.Delay(150);
                                 if ((preset.Template.FindName("PART_Popup", preset) as System.Windows.Controls.Primitives.Popup)?.Child is FrameworkElement child) await Capture("18_global-popups", "publish-preset", child);
@@ -129,9 +163,9 @@ public sealed class WholeAppVisualAcceptanceTests
                                 await host.SwitchToContainerAsync(container.ContainerPath);
                                 window.Width = 1920; window.Height = 1080;
                                 await Capture(module, "empty-library");
-                                await host.CurrentPage!.ViewModel.ImportDemoDirectoryAsync(Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!, "SyntheticAssets"));
+                                await StudioVisualEvidence.MeasureOperation(output,"Asset import",()=>host.CurrentPage!.ViewModel.ImportDemoDirectoryAsync(Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_ROOT")!, "SyntheticAssets")),()=>host.CurrentPage!.ViewModel.IsLoading);
                                 await Capture(module, "content");
-                                var context = host.CurrentPage.OpenContextMenuForProductHarness();
+                                var context = host.CurrentPage!.OpenContextMenuForProductHarness();
                                 if (context is not null)
                                 {
                                     await Capture("18_global-popups", "asset-context", context);
@@ -182,7 +216,7 @@ public sealed class WholeAppVisualAcceptanceTests
                             {
                                 var drawing = new DrawingVisual(); using (var context = drawing.RenderOpen()) { context.DrawRectangle(Brushes.SlateGray, null, new Rect(0, 0, 1200, 800)); context.DrawEllipse(Brushes.Coral, null, new Point(400, 400), 160, 240); }
                                 var fixture = new RenderTargetBitmap(1200, 800, 96, 96, PixelFormats.Pbgra32); fixture.Render(drawing); fixture.Freeze();
-                                await vm.ReferenceColorPage.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, fixture);
+                                await StudioVisualEvidence.MeasureOperation(output,"Reference render",()=>vm.ReferenceColorPage.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, fixture),()=>vm.ReferenceColorPage.Editor.IsBusy);
                                 if (vm.ReferenceColorPage.Editor.SelectedLook is null || vm.ReferenceColorPage.Editor.ReferenceSources.Count == 0) throw new InvalidOperationException("Catalog refresh lost the selected scheme or references");
                                 await Capture(module, "loaded-synthetic");
                                 foreach (var mode in vm.ReferenceColorPage.Editor.ViewModes) { vm.ReferenceColorPage.Editor.ViewMode = mode; await Capture(module, mode); }
@@ -191,6 +225,23 @@ public sealed class WholeAppVisualAcceptanceTests
                                 var render = vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null);
                                 try { await renderStarted.Task.WaitAsync(TimeSpan.FromSeconds(20)); if (!vm.ReferenceColorPage.Editor.IsBusy) throw new InvalidOperationException("Loading feedback missing"); await Capture(module, "loading"); }
                                 finally { releaseRender.TrySetResult(); await render; vm.ReferenceColorPage.Editor.PostProcessor = null; }
+                                if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                                {
+                                    vm.ReferenceColorPage.Editor.AdvancedExpanded = true; await Capture(module, "advanced");
+                                    vm.ReferenceColorPage.Editor.AdvancedExpanded = false;
+                                    vm.ReferenceColorPage.Editor.PostProcessor = (_, _) => throw new IOException("Synthetic render failure");
+                                    await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null);
+                                    if (!vm.ReferenceColorPage.Editor.HasError) throw new InvalidOperationException("Error recovery feedback missing");
+                                    await Capture(module, "error");
+                                    vm.ReferenceColorPage.Editor.PostProcessor = null;
+                                    await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null);
+                                    if (vm.ReferenceColorPage.Editor.HasError) throw new InvalidOperationException("Retry did not clear error");
+                                    await Capture(module, "recovered");
+                                    var originalLook = vm.ReferenceColorPage.Editor.SelectedLook!;
+                                    var sources = originalLook.ReferenceSources.Take(1).SelectMany(source => Enumerable.Range(0,3).Select(i => source with { Name = "合成参考 " + (i+1), SourcePath = Path.Combine(fixtureDirectory, $"demo-shot-{i+1:00}.png"), ContentHash = "studio-"+i, Weight = 1d/3 })).ToArray();
+                                    vm.ReferenceColorPage.Editor.SelectedLook = originalLook with { ReferenceSources = sources };
+                                    await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null); await Capture(module,"multi-reference");
+                                }
                                 var combo = Descendants<ComboBox>(window).First(x => x.IsVisible);
                                 combo.IsDropDownOpen = true; await Task.Delay(150);
                                 if ((combo.Template.FindName("PART_Popup", combo) as System.Windows.Controls.Primitives.Popup)?.Child is FrameworkElement dropdown) await Capture("18_global-popups", "reference-color", dropdown);
@@ -204,10 +255,21 @@ public sealed class WholeAppVisualAcceptanceTests
                         {
                             foreach (var item in mainMenu.Items.OfType<MenuItem>().Where(x => x.HasItems))
                             {
-                                item.IsSubmenuOpen = true; await Task.Delay(150);
+                                window.Activate(); item.Focus(); item.IsSubmenuOpen = true; await Task.Delay(250);
+                                if (item.Template.FindName("PART_Popup", item) is System.Windows.Controls.Primitives.Popup mainPopup)
+                                {
+                                    mainPopup.IsOpen = true;
+                                    await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
+                                    await Task.Delay(250);
+                                }
                                 if ((item.Template.FindName("PART_Popup", item) as System.Windows.Controls.Primitives.Popup)?.Child is FrameworkElement child) await Capture("18_global-popups", "main-" + mainMenu.Items.IndexOf(item), child);
                                 item.IsSubmenuOpen = false;
                             }
+                        }
+                        if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                        {
+                            await StudioVisualEvidence.Gallery(window, output);
+                            await StudioVisualEvidence.Dpi(window, vm, output);
                         }
                         var sheetCount = (int)Math.Ceiling(images.Count / 9d);
                         var sheetSize = (int)Math.Ceiling(images.Count / (double)sheetCount);
@@ -243,10 +305,18 @@ public sealed class WholeAppVisualAcceptanceTests
                         }
                         var popupSheet = new RenderTargetBitmap(1600, (int)Math.Ceiling(popupImages.Count / 4d) * 500, 96, 96, PixelFormats.Pbgra32); popupSheet.Render(popupDrawing);
                         var popupEncoder = new PngBitmapEncoder(); popupEncoder.Frames.Add(BitmapFrame.Create(popupSheet)); using (var file = File.Create(Path.Combine(output, "GLOBAL_POPUP_CONTACT_SHEET.png"))) popupEncoder.Save(file);
+                        if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
+                        {
+                            StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_COMPONENTS",Directory.GetFiles(Path.Combine(output,"components"),"*.png").Order());
+                            StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_SYMBOLS",[Path.Combine(output,"components","10_symbols.png")]);
+                            StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_CORE_PAGES_01",images.Where(x=>x.Module is "02_asset-library" or "05_planning").Select(x=>x.Path));
+                            StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_CORE_PAGES_02",images.Where(x=>x.Module is "06_tether" or "11_reference-color").Select(x=>x.Path));
+                            StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_WHOLE_APP_SMOKE",images.Where(x=>x.State=="default").Select(x=>x.Path));
+                        }
                         complete = true;
                     }
                     catch (Exception ex) { failure = ex; }
-                    finally { timer.Stop(); window.Close(); app.Shutdown(); }
+                    finally { timer.Stop(); window.Close(); }
                 };
                 timer.Start(); app.Run();
             }

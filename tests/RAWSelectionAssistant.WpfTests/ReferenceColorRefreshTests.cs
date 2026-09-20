@@ -43,6 +43,27 @@ public sealed class ReferenceColorRefreshTests
         Assert.IsFalse(vm.IsBusy);
         await Task.CompletedTask;
     }
+    [TestMethod]
+    public async Task MultiReference_MoveAndRemove_PersistReferencesWithoutDeletingSource()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "PixelTart-StudioMulti", Guid.NewGuid().ToString("N"));
+        var store = new ReferenceLookStore(directory);
+        var look = CreateLook("Multiple", null, DateTimeOffset.UtcNow);
+        var source = look.ReferenceSources[0];
+        look = look with { ReferenceSources = Enumerable.Range(0, 3).Select(i => source with { Name = "Reference " + i, SourcePath = "synthetic-" + i + ".png", ContentHash = "hash-" + i, Weight = 1d/3 }).ToArray() };
+        await store.SaveAsync(look);
+        using var vm = new TetherReferenceModeViewModel(store, allowReferenceManagement: true);
+        await vm.LoadAsync();
+        await vm.MoveReferenceDownCommand.ExecuteAsync(vm.ReferenceSources[0]);
+        Assert.AreEqual("Reference 1", vm.ReferenceSources[0].Name);
+        await vm.RemoveReferenceCommand.ExecuteAsync(vm.ReferenceSources[1]);
+        Assert.HasCount(2, vm.ReferenceSources);
+        using var reloaded = new TetherReferenceModeViewModel(store);
+        await reloaded.LoadAsync();
+        Assert.HasCount(2, reloaded.ReferenceSources);
+        Assert.AreEqual("Reference 1", reloaded.ReferenceSources[0].Name);
+        Assert.AreEqual(1d, reloaded.SelectedLook!.ReferenceSources.Sum(s => s.Weight), .0001);
+    }
     private static ReferenceLook CreateLook(string name, Guid? project, DateTimeOffset now)
     {
         var pixels = new VisualPixelBuffer(16, 16, Enumerable.Range(0, 256).SelectMany(i => new[] { (byte)i, (byte)100, (byte)180 }).ToArray());

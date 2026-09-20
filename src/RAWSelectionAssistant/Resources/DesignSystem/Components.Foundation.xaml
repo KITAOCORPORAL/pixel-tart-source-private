@@ -122,7 +122,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource RadiusPopup}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
                     </Border>
                 </ControlTemplate>
@@ -141,7 +141,7 @@
                 </Grid>
             </Border>
             <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-3" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" PlacementTarget="{Binding ElementName=ItemSurface}" VerticalOffset="-5">
-                <Border MinWidth="220" Background="{DynamicResource MenuPopupBackgroundBrush}" BorderBrush="{DynamicResource MenuPopupBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="4">
+                <Border MinWidth="220" Background="{DynamicResource MenuPopupBackgroundBrush}" BorderBrush="{DynamicResource MenuPopupBorderBrush}" BorderThickness="1" CornerRadius="{DynamicResource RadiusPopup}" Padding="4">
                     <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" /></ScrollViewer>
                 </Border>
             </Popup>

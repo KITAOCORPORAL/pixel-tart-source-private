@@ -39,6 +39,8 @@
                 <ResourceDictionary Source="Resources/DesignSystem/ContextMenu.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/ScrollBars.xaml" />
                 <ResourceDictionary Source="Resources/DesignSystem/EmptyState.xaml" />
+                <ResourceDictionary Source="Resources/DesignSystem/Studio.Symbols.xaml" />
+                <ResourceDictionary Source="Resources/DesignSystem/Studio.Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

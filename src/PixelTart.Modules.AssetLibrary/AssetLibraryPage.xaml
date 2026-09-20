@@ -855,6 +855,21 @@
                             </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
+                        <Expander Header="图片信息" IsExpanded="True" AutomationProperties.AutomationId="AssetInspectorImageInformation"><StackPanel>
+                        <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
+                            <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
+                        </TextBlock>
+                        <TextBlock Text="{Binding InspectorFormat, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="{Binding InspectorFileSize, StringFormat=大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        </StackPanel></Expander>
+                        <Expander Header="拍摄 / 来源" IsExpanded="True" AutomationProperties.AutomationId="AssetInspectorSource"><StackPanel>
+                        <TextBlock Text="{Binding InspectorShootDate, StringFormat=拍摄时间：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorCaptureTime" />
+                        <TextBlock Text="{Binding InspectorStorageMode, StringFormat=位置：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                        <TextBlock Text="源文件不可访问" Foreground="{DynamicResource ErrorBrush}" Style="{DynamicResource PixelTart.Type.Metadata}"
+                                   Visibility="{Binding InspectorFileUnavailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   AutomationProperties.AutomationId="AssetInspectorMissingState" />
+                        <Button Content="导出图片" Command="{Binding ExportSelectedOriginalCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalAlignment="Left" Margin="0,8,0,0" AutomationProperties.AutomationId="AssetInspectorExport" />
+                        </StackPanel></Expander>
                          <StackPanel Margin="0,8,0,4" AutomationProperties.AutomationId="AssetInspectorRating" AutomationProperties.Name="评分">
                             <TextBlock Text="评分" Style="{DynamicResource PixelTart.Type.Metadata}" />
                             <StackPanel Orientation="Horizontal">
@@ -870,6 +885,7 @@
                             <Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="应用" Command="{Binding ApplyInspectorColorCommand}" Padding="6,2" />
                             <ComboBox ItemsSource="{Binding InspectorColors}" SelectedItem="{Binding InspectorColor}" ToolTip="颜色标记；空白表示无标记" />
                         </DockPanel>
+                        <Expander Header="备注与链接" IsExpanded="False" Margin="0,8,0,0"><StackPanel>
                         <TextBlock Text="备注" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,2" />
                         <TextBox Text="{Binding InspectorNote, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinHeight="44" AutomationProperties.AutomationId="AssetInspectorComment" />
                         <TextBlock Text="URL" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,2" />
@@ -877,6 +893,7 @@
                             <Button DockPanel.Dock="Right" Content="保存" Command="{Binding SaveInspectorDetailsCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Margin="4,0,0,0" AutomationProperties.Name="保存备注和链接" />
                             <TextBox Text="{Binding InspectorUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto" AutomationProperties.AutomationId="AssetInspectorUrl" />
                         </DockPanel>
+                        </StackPanel></Expander>
                         <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,8,0,0"
                                    AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
 <DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
@@ -892,6 +909,7 @@
                                 <MenuItem Header="已交付" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已交付" />
                             </ContextMenu></Button.ContextMenu>
                         </Button>
+                        <Expander Header="项目关系" AutomationProperties.AutomationId="AssetInspectorRelations" Margin="0,12,0,8"><Expander.Style><Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}"><Setter Property="IsExpanded" Value="True"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding InspectorProjectLinks.Count}" Value="0"/><Condition Binding="{Binding InspectorBookingLinks.Count}" Value="0"/></MultiDataTrigger.Conditions><Setter Property="IsExpanded" Value="False"/></MultiDataTrigger></Style.Triggers></Style></Expander.Style><StackPanel>
                         <TextBlock Text="项目" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <ItemsControl ItemsSource="{Binding InspectorProjectLinks}"><ItemsControl.ItemTemplate><DataTemplate><DockPanel Margin="0,2"><TextBlock Text="{Binding Name}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveProjectRelationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" /></DockPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
                         <TextBlock Text="{Binding InspectorProject, StringFormat=项目摘要：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
@@ -903,18 +921,7 @@
                             <Button Content="＋ 关联项目" Command="{Binding OpenProjectPickerCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Padding="8,4" />
                             <Button Content="＋ 关联拍摄" Command="{Binding OpenBookingPickerCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Padding="8,4" Margin="4,0,0,0" />
                         </StackPanel>
-                        <TextBlock Text="基本信息" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,6" />
-                        <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
-                            <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
-                        </TextBlock>
-                                <TextBlock Text="{Binding InspectorShootDate, StringFormat=拍摄时间：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorCaptureTime" />
-                        <TextBlock Text="{Binding InspectorFormat, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <TextBlock Text="{Binding InspectorFileSize, StringFormat=大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                         <TextBlock Text="{Binding InspectorStorageMode, StringFormat=位置：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                        <Button Content="导出图片" Command="{Binding ExportSelectedOriginalCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="0,10,0,0" AutomationProperties.AutomationId="AssetInspectorExport" />
-                        <TextBlock Text="源文件不可访问" Foreground="{DynamicResource ErrorBrush}" Style="{DynamicResource PixelTart.Type.Metadata}"
-                                   Visibility="{Binding InspectorFileUnavailable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                   AutomationProperties.AutomationId="AssetInspectorMissingState" />
+                        </StackPanel></Expander>
 <Expander Header="视觉分析" IsExpanded="False" Margin="0,12,0,0"><StackPanel>
                         <TabControl AutomationProperties.AutomationId="VisualAnalysisTabs" Margin="0,10,0,0" Background="Transparent" BorderBrush="{DynamicResource Brush.Border}" ItemContainerStyle="{StaticResource AssetInspectorTabItem}">
                             <TabItem Header="配色" AutomationProperties.AutomationId="VisualPaletteTab">
@@ -944,7 +951,7 @@
                             <Button Content="视觉相似" Command="{Binding FindSimilarCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" AutomationProperties.AutomationId="FindSimilarAssets" Margin="4,0,0,0" />
                         </StackPanel>
 </StackPanel></Expander>
-                        <Expander Header="相机与 EXIF" IsExpanded="False" Margin="{DynamicResource SpacingVertical12}">
+                        <Expander Header="拍摄 / 来源" IsExpanded="True" Margin="{DynamicResource SpacingVertical12}">
                             <StackPanel>
                                 <TextBlock Text="{Binding InspectorCamera, StringFormat=相机：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                                 <TextBlock Text="{Binding InspectorLens, StringFormat=镜头：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
