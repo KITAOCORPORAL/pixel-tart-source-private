@@ -319,7 +319,8 @@ public partial class PlanningCenterView : UserControl
         }
         var items = ReferencesFor(page).ToArray();
         if (items.Length == 0 && interactive) { var empty = Text("还没有" + page + "。关联已有参考，或从本地添加；原图保持不变。", 18); empty.Margin = new Thickness(0, 70, 0, 40); DocumentContent.Children.Add(empty); }
-        foreach (var group in items.GroupBy(item => page is "情绪板" or "服化道" ? item.Group : "").OrderBy(group => page == "服化道" ? Array.IndexOf(new[] { "服装", "妆发", "道具" }, group.Key) : 0))
+        foreach (var group in items.GroupBy(item => page == "服化道" ? (_vm.StylingGroups.Contains(item.Group) ? item.Group : "未分组造型参考") : page == "情绪板" ? item.Group : "")
+            .OrderBy(group => page == "服化道" ? group.Key switch { "服装" => 0, "妆发" => 1, "道具" => 2, _ => 3 } : 0))
         {
             if (group.Key.Length > 0) Heading(DocumentContent, group.Key);
             var gallery = new WrapPanel();
