@@ -29,6 +29,7 @@ if (-not $SkipBuild) {
 $classes = Get-ChildItem -LiteralPath $sourceRoot -File -Filter '*.cs' | ForEach-Object {
     $source = Get-Content -LiteralPath $_.FullName -Raw
     if ($source -match '\[TestCategory\("P3Diagnostic"\)\]') { return }
+    if ($source -match '\[TestCategory\("VisualEvidence"\)\]') { return }
     [regex]::Matches($source, '(?s)\[TestClass(?:Attribute)?\]\s*(?:\[[^\]]+\]\s*)*(?:public|internal)\s+(?:(?:sealed|partial|abstract)\s+)*class\s+(?<name>[A-Za-z0-9_]+)') | ForEach-Object {
         $_.Groups['name'].Value
     }
