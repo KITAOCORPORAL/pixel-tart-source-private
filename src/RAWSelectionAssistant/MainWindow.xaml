@@ -26,6 +26,7 @@
         <conv:ZeroIntToVisibilityConverter x:Key="ZeroIntToVisibilityConverter" />
         <conv:ResourceKeyToGeometryConverter x:Key="ResourceKeyToGeometryConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <GridLength x:Key="ShellSurfaceCloseReservedWidth">56</GridLength>
         <Style x:Key="ShellSurfaceCloseStyle" TargetType="{x:Type views:SurfaceCloseButton}">
             <Setter Property="Visibility" Value="{Binding IsCurrentSurfaceClosable, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Style.Triggers>
@@ -155,6 +156,23 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition x:Name="ShellCloseSafeAreaColumn">
+                    <ColumnDefinition.Style>
+                        <Style TargetType="ColumnDefinition">
+                            <Setter Property="Width" Value="{DynamicResource ShellSurfaceCloseReservedWidth}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCurrentSurfaceClosable}" Value="False"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding IsOnboardingActive}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding IsSettingsModalOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding TaskCenter.IsTaskDetailsOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding WorkCalendarPage.IsDetailsOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding OnlineSelectionPage.IsCreateModalOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding FinancePage.IsEditorOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=BookingEditorOverlay, Path=Visibility}" Value="Visible"><Setter Property="Width" Value="0" /></DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border x:Name="SidebarContainer" Width="{Binding SidebarWidth}"
                     MinWidth="{DynamicResource SidebarCollapsedWidth}"
@@ -805,7 +823,7 @@
                                   Height="40"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Top"
-                                  Margin="0,12,16,0"
+                                  Margin="0,12,8,0"
                                   Panel.ZIndex="30000"
                                   IsHitTestVisible="True"
                                   Focusable="True"

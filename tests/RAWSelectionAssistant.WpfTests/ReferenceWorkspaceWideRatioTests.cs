@@ -1,4 +1,8 @@
 using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using RAWSelectionAssistant.ViewModels;
+using RAWSelectionAssistant.Views;
 
 namespace RAWSelectionAssistant.WpfTests;
 
@@ -33,6 +37,43 @@ public sealed class ReferenceWorkspaceWideRatioTests
         foreach (var value in new[] { "中性胶片", "暖调柔化", "冷银灰", "细纤维", "纸面颗粒", "柔雾", "扫描细纹" }) StringAssert.Contains(film, value);
         StringAssert.Contains(view, "SelectedValuePath=\"Id\"");
         StringAssert.Contains(view, "DisplayName");
+    }
+
+    [TestMethod]
+    public void RuntimeGeometry_UsesWideRatioAndResponsiveRails()
+    {
+        Exception? failure = null; var thread = new Thread(() =>
+        {
+            try
+            {
+                var app = new App(); app.InitializeComponent();
+                using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+                Arrange(view, 1920, 900); var columns = FindColumns(view); var total = columns.Sum(); Assert.AreEqual(.21, columns[0] / total, .02); Assert.AreEqual(.61, columns[1] / total, .02); Assert.AreEqual(.18, columns[2] / total, .02);
+                Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "RightRail"); Assert.IsFalse(right.IsVisible);
+                editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340, $"drawer width {right.ActualWidth}");
+                Arrange(view, 979, 760); var left = FindNamed<FrameworkElement>(view, "LeftRail"); Assert.IsFalse(left.IsVisible);
+                editor.FocusView = true; Arrange(view, 1600, 900); Assert.IsFalse(left.IsVisible); Assert.IsFalse(right.IsVisible);
+            }
+            catch (Exception ex) { failure = ex; }
+        }); thread.SetApartmentState(ApartmentState.STA); thread.Start(); Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(20))); if (failure is not null) throw failure;
+    }
+
+    private static void Arrange(FrameworkElement view, double width, double height) { view.Width = width; view.Height = height; view.Measure(new Size(width, height)); view.Arrange(new Rect(0, 0, width, height)); view.UpdateLayout(); }
+    private static double[] FindColumns(ReferenceColorWorkspaceView view) { var grid = FindNamed<System.Windows.Controls.Grid>(view, "WorkspaceGrid"); return grid.ColumnDefinitions.Select(x => x.ActualWidth).ToArray(); }
+    private static T FindNamed<T>(DependencyObject root, string name) where T : FrameworkElement { if (root is T match && match.Name == name) return match; for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++) { try { return FindNamed<T>(VisualTreeHelper.GetChild(root, i), name); } catch (InvalidOperationException) { } } throw new InvalidOperationException(name); }
+    private sealed class TestDialogs : RAWSelectionAssistant.Services.IDialogService
+    {
+        public IReadOnlyList<string> ChooseFiles(string title, string filter, bool multiselect) => [];
+        public string? ChooseFolder(string title, string? initialDirectory = null) => null;
+        public string? ChooseSaveFile(string title, string filter, string defaultExtension, string? suggestedFileName = null) => null;
+        public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> currentToolIds) => currentToolIds;
+        public void ShowInfo(string message) { } public void ShowError(string message) { }
+        public bool Confirm(string message, string title) => false;
+        public RAWSelectionAssistant.Services.HelpAction ShowHelp() => RAWSelectionAssistant.Services.HelpAction.None;
+        public void ShowFeedback() { }
+        public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> candidates) => null;
+        public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem item, bool showAdvancedDetails) => false;
+        public void RevealFile(string path) { }
     }
 
     private static string Root()

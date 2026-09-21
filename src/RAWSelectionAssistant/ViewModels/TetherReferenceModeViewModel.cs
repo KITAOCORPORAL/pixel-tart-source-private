@@ -15,6 +15,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private readonly CancellationTokenSource _lifetime = new();
     private CancellationTokenSource? _render;
     private BitmapSource? _source;
+    private BitmapSource? _interactiveSource;
     private Guid? _assetId;
     private long _revision;
     private ReferenceLook? _selectedLook;
@@ -179,7 +180,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
         _render?.Cancel(); Interlocked.Increment(ref _revision);
-        _assetId = assetId; _source = source; OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
+        _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 1600); OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         RaiseViewProperties();
         if ((_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
     }
@@ -311,23 +312,25 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection;_neutral=value.NeutralProtection;_keepOriginalTone=value.KeepOriginalTone; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection),nameof(NeutralProtection),nameof(KeepOriginalTone)})OnPropertyChanged(name); }
     private async Task DebouncedRenderAsync()
     {
-        var revision = Interlocked.Increment(ref _revision); await Task.Delay(80);
-        if (revision == Volatile.Read(ref _revision)) await RenderAsync();
+        var revision = Interlocked.Increment(ref _revision); await Task.Delay(100);
+        if (revision == Volatile.Read(ref _revision)) await RenderAsync(interactive: true);
+        await Task.Delay(300);
+        if (revision + 1 == Volatile.Read(ref _revision)) await RenderAsync(interactive: false);
     }
-    private async Task RenderAsync(CancellationToken outer = default)
+    private async Task RenderAsync(CancellationToken outer = default, bool interactive = false)
     {
-        var source = _source; var look = SelectedLook; var asset = _assetId;
+        var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);
         if (!Enabled || source is null || look is null) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
         _render?.Dispose(); _render = CancellationTokenSource.CreateLinkedTokenSource(outer, _lifetime.Token);
         var renderToken = _render.Token;
-        HasError = false; StatusText = "正在生成预览…";
+        HasError = false; StatusText = interactive ? "正在生成快速预览…" : "正在生成高质量预览…";
         BeginBusy();
         try
         {
             var rendered = await _preview.RenderWithResultAsync(source, look, renderToken); var image = rendered.Image;
-            if (FilmSettings.Enabled) image = await _preview.ApplyFilmAsync(image, FilmSettings, renderToken);
+            if (FilmSettings.Enabled) { StatusText = "正在应用胶片质感…"; image = await _preview.ApplyFilmAsync(image, FilmSettings, renderToken); }
             if (PostProcessor is not null) image = await PostProcessor(image, renderToken);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
             MatchedImage = image; StatusText = rendered.DifferenceWarning ?? "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
@@ -335,6 +338,11 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         catch (OperationCanceledException) { }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { HasError = true; MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
+    }
+    private static BitmapSource CreateInteractiveProxy(BitmapSource source, int maximumEdge)
+    {
+        var edge = Math.Max(source.PixelWidth, source.PixelHeight); if (edge <= maximumEdge) return source;
+        var scale = maximumEdge / (double)edge; var transformed = new TransformedBitmap(source, new System.Windows.Media.ScaleTransform(scale, scale)); transformed.Freeze(); return transformed;
     }
     private void SetFilm(PixelTartFilmSettings value)
     {

@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using System.Buffers;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -53,38 +54,49 @@ public static class PixelTartFilmPipeline
         settings.Validate();
         if (!settings.Enabled || IsIdentity(settings)) return new(input.Width, input.Height, input.Rgb24.ToArray());
         var output = input.Rgb24.ToArray();
-        var luminance = new float[input.PixelCount];
-        for (var pixel = 0; pixel < input.PixelCount; pixel++)
+        var pool = ArrayPool<float>.Shared;
+        var luminance = pool.Rent(input.PixelCount); var highlightMask = pool.Rent(input.PixelCount);
+        var bloomSpread = pool.Rent(input.PixelCount); var halationSpread = pool.Rent(input.PixelCount); var scratch = pool.Rent(input.PixelCount);
+        try
         {
-            var offset = pixel * 3; var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d);
-            luminance[pixel] = (float)(.2126 * r + .7152 * g + .0722 * b);
+            for (var pixel = 0; pixel < input.PixelCount; pixel++)
+            {
+                if ((pixel & 8191) == 0) token.ThrowIfCancellationRequested();
+                var offset = pixel * 3; var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d);
+                luminance[pixel] = (float)(.2126 * r + .7152 * g + .0722 * b);
+                highlightMask[pixel] = Math.Clamp((luminance[pixel] - .62f) / .38f, 0, 1);
+            }
+            var minDimension = Math.Min(input.Width, input.Height); var bloomRadius = Math.Clamp(minDimension / 320, 2, 8);
+            Blur(highlightMask, bloomSpread, scratch, input.Width, input.Height, bloomRadius, token);
+            Blur(highlightMask, halationSpread, scratch, input.Width, input.Height, Math.Max(2, bloomRadius / 2), token);
+            for (var y = 0; y < input.Height; y++) for (var x = 0; x < input.Width; x++)
+            {
+                var pixel = y * input.Width + x; if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3;
+                var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d); var luma = luminance[pixel];
+                var profile = settings.ProfileId switch { "PT-W01" => (r: .018, g: .004, b: -.012), "PT-C01" => (r: -.008, g: .002, b: .018), _ => (r: 0d, g: 0d, b: 0d) }; var profileAmount = settings.ProfileAmount / 100;
+                r += profile.r * profileAmount; g += profile.g * profileAmount; b += profile.b * profileAmount;
+                var halo = Math.Clamp(halationSpread[pixel] - highlightMask[pixel] * .72f, 0, 1) * settings.HalationAmount / 100d; var edge = halo * Math.Clamp((luma - .12f) / .7f, 0, 1); r += edge * .12; g += edge * .020;
+                var bloom = bloomSpread[pixel] * settings.BloomAmount / 100d * .14; r += bloom; g += bloom; b += bloom;
+                var nx = (x + .5) / input.Width * 2 - 1; var ny = (y + .5) / input.Height * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
+                var grainScale = 1d + settings.GrainSize / 24d * 5d; var high = DeterministicNoise(x, y, settings.Seed); var low = SmoothNoise(x / grainScale, y / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
+                var surface = Surface(settings.TextureId, x, y, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06; r += surface; g += surface; b += surface;
+                output[offset] = Channel(r); output[offset + 1] = Channel(g); output[offset + 2] = Channel(b);
+            }
+            return new(input.Width, input.Height, output);
         }
-        var highlightMask = new float[input.PixelCount];
-        for (var i = 0; i < luminance.Length; i++) highlightMask[i] = Math.Clamp((luminance[i] - .62f) / .38f, 0, 1);
-        var minDimension = Math.Min(input.Width, input.Height); var bloomRadius = Math.Clamp(minDimension / 320, 2, 8);
-        var bloomSpread = Blur(highlightMask, input.Width, input.Height, bloomRadius); var halationSpread = Blur(highlightMask, input.Width, input.Height, Math.Max(2, bloomRadius / 2));
-        for (var y = 0; y < input.Height; y++) for (var x = 0; x < input.Width; x++)
+        finally
         {
-            var pixel = y * input.Width + x; if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3;
-            var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d); var luma = luminance[pixel];
-            var profile = settings.ProfileId switch { "PT-W01" => (r: .018, g: .004, b: -.012), "PT-C01" => (r: -.008, g: .002, b: .018), _ => (r: 0d, g: 0d, b: 0d) }; var profileAmount = settings.ProfileAmount / 100;
-            r += profile.r * profileAmount; g += profile.g * profileAmount; b += profile.b * profileAmount;
-            var halo = Math.Clamp(halationSpread[pixel] - highlightMask[pixel] * .72f, 0, 1) * settings.HalationAmount / 100d; var edge = halo * Math.Clamp((luma - .12f) / .7f, 0, 1); r += edge * .12; g += edge * .020;
-            var bloom = bloomSpread[pixel] * settings.BloomAmount / 100d * .14; r += bloom; g += bloom; b += bloom;
-            var nx = (x + .5) / input.Width * 2 - 1; var ny = (y + .5) / input.Height * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
-            var grainScale = 1d + settings.GrainSize / 24d * 5d; var high = DeterministicNoise(x, y, settings.Seed); var low = SmoothNoise(x / grainScale, y / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
-            var surface = Surface(settings.TextureId, x, y, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06; r += surface; g += surface; b += surface;
-            output[offset] = Channel(r); output[offset + 1] = Channel(g); output[offset + 2] = Channel(b);
+            pool.Return(luminance); pool.Return(highlightMask); pool.Return(bloomSpread); pool.Return(halationSpread); pool.Return(scratch);
         }
-        return new(input.Width, input.Height, output);
     }
     public static bool IsIdentity(PixelTartFilmSettings settings) => (settings.ProfileId == "PT-N01" || settings.ProfileAmount == 0) && settings.GrainAmount == 0 && settings.HalationAmount == 0 && settings.BloomAmount == 0 && settings.VignetteAmount == 0 && (settings.SurfaceAmount == 0 || settings.TextureAmount == 0 || settings.TextureId == "None");
     public static double SrgbToLinear(double value) => value <= .04045 ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4);
     public static double LinearToSrgb(double value) => value <= .0031308 ? value * 12.92 : 1.055 * Math.Pow(Math.Max(0, value), 1 / 2.4) - .055;
-    private static float[] Blur(float[] source, int width, int height, int radius)
+    private static void Blur(float[] source, float[] output, float[] horizontal, int width, int height, int radius, CancellationToken token)
     {
         var kernel = new double[radius * 2 + 1]; var sigma = Math.Max(1d, radius * .55); var sum = 0d; for (var i = -radius; i <= radius; i++) { var weight = Math.Exp(-(i * i) / (2 * sigma * sigma)); kernel[i + radius] = weight; sum += weight; } for (var i = 0; i < kernel.Length; i++) kernel[i] /= sum;
-        var horizontal = new float[source.Length]; var output = new float[source.Length]; for (var y = 0; y < height; y++) for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += source[y * width + Math.Clamp(x + k, 0, width - 1)] * kernel[k + radius]; horizontal[y * width + x] = (float)value; } for (var y = 0; y < height; y++) for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += horizontal[Math.Clamp(y + k, 0, height - 1) * width + x] * kernel[k + radius]; output[y * width + x] = (float)value; } return output;
+        for (var y = 0; y < height; y++) { if ((y & 15) == 0) token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += source[y * width + Math.Clamp(x + k, 0, width - 1)] * kernel[k + radius]; horizontal[y * width + x] = (float)value; } }
+        for (var y = 0; y < height; y++) { if ((y & 15) == 0) token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += horizontal[Math.Clamp(y + k, 0, height - 1) * width + x] * kernel[k + radius]; output[y * width + x] = (float)value; } }
     }
     private static double DeterministicNoise(int x, int y, int seed) { unchecked { var n = x * 374761393 + y * 668265263 + seed * 1442695041; n = (n ^ (n >> 13)) * 1274126177; return ((n ^ (n >> 16)) & 0xFFFF) / 32767.5 - 1; } }
     private static double SmoothNoise(double x, double y, int seed) { var x0 = (int)Math.Floor(x); var y0 = (int)Math.Floor(y); var tx = x - x0; var ty = y - y0; var sx = tx * tx * (3 - 2 * tx); var sy = ty * ty * (3 - 2 * ty); var a = DeterministicNoise(x0, y0, seed); var b = DeterministicNoise(x0 + 1, y0, seed); var c = DeterministicNoise(x0, y0 + 1, seed); var d = DeterministicNoise(x0 + 1, y0 + 1, seed); var ab = a + (b - a) * sx; return ab + ((c + (d - c) * sx) - ab) * sy; }

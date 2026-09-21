@@ -89,5 +89,41 @@ public sealed class PixelTartFilmTests
         Assert.AreEqual(look.Film, roundTrip?.Film);
     }
 
+    [TestMethod]
+    public void VignetteFallsOffSmoothlyFromCenterToCorners()
+    {
+        const int size = 33; var source = new VisualPixelBuffer(size, size, Enumerable.Repeat((byte)180, size * size * 3).ToArray());
+        var result = PixelTartFilmPipeline.Apply(source, new(Enabled: true, VignetteAmount: 100));
+        byte Pixel(int x, int y) => result.Rgb24.Span[(y * size + x) * 3];
+        var samples = Enumerable.Range(0, 17).Select(i => Pixel(16 + i, 16)).ToArray();
+        for (var index = 1; index < samples.Length; index++) Assert.IsTrue(samples[index] <= samples[index - 1] + 1, $"radial step {index}: {samples[index - 1]} -> {samples[index]}");
+        Assert.IsTrue(Pixel(16, 16) > Pixel(0, 0), $"center {Pixel(16, 16)} must remain brighter than corner {Pixel(0, 0)}");
+    }
+
+    [TestMethod]
+    public void ProceduralTexturesDoNotRepeatOnShortPeriods()
+    {
+        var source = new VisualPixelBuffer(96, 64, Enumerable.Repeat((byte)128, 96 * 64 * 3).ToArray());
+        foreach (var texture in PixelTartFilmTextures.All.Where(item => item.Id != "None"))
+        {
+            var result = PixelTartFilmPipeline.Apply(source, new(true, SurfaceAmount: 100, TextureId: texture.Id, TextureAmount: 100, Seed: 31));
+            foreach (var period in new[] { 2, 3, 4, 5, 8, 12, 16 })
+            {
+                var identical = true;
+                for (var y = 0; y < 64 && identical; y++) for (var x = 0; x < 96 - period && identical; x++)
+                    identical = result.Rgb24.Span[(y * 96 + x) * 3] == result.Rgb24.Span[(y * 96 + x + period) * 3];
+                Assert.IsFalse(identical, $"{texture.Id} repeated every {period}px");
+            }
+        }
+    }
+
+    [TestMethod]
+    public void FilmPipelineHonorsCancellationInsideSpatialPasses()
+    {
+        var source = new VisualPixelBuffer(1400, 900, Enumerable.Repeat((byte)170, 1400 * 900 * 3).ToArray());
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        Assert.ThrowsExactly<OperationCanceledException>(() => PixelTartFilmPipeline.Apply(source, new(true, BloomAmount: 100, HalationAmount: 100), cancellation.Token));
+    }
+
     private static VisualPixelBuffer Fixture() => new(8, 8, Enumerable.Range(0, 64).SelectMany(i => new[] { (byte)(i * 3), (byte)(255 - i * 2), (byte)(i * 2) }).ToArray());
 }

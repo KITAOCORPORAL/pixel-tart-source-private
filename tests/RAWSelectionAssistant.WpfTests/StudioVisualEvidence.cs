@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Automation;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -14,6 +15,52 @@ namespace RAWSelectionAssistant.WpfTests;
 // DEV-only gallery and software layout audit. Never registered in product navigation.
 internal static class StudioVisualEvidence
 {
+    internal static void AssertNoShellCloseCollision(FrameworkElement root, string state, string output)
+    {
+        var close = Walk<SurfaceCloseButton>(root).FirstOrDefault(element =>
+            element.IsVisible && element.IsHitTestVisible &&
+            AutomationProperties.GetAutomationId(element) == "ShellEmergencyCloseButton");
+        if (close is null) return;
+        var closeRect = close.TransformToAncestor(root).TransformBounds(new Rect(close.RenderSize));
+        var collisions = new List<object>();
+        foreach (var element in Walk<FrameworkElement>(root).Where(IsHeaderCollisionCandidate))
+        {
+            if (ReferenceEquals(element, close) || IsDescendantOf(element, close)) continue;
+            Rect bounds;
+            try { bounds = element.TransformToAncestor(root).TransformBounds(new Rect(element.RenderSize)); }
+            catch (InvalidOperationException) { continue; }
+            if (!bounds.IntersectsWith(closeRect)) continue;
+            collisions.Add(new
+            {
+                Type = element.GetType().Name,
+                Name = element.Name,
+                AutomationId = AutomationProperties.GetAutomationId(element),
+                Text = element is TextBlock text ? text.Text : element is ContentControl content ? content.Content?.ToString() : null,
+                Bounds = new[] { bounds.X, bounds.Y, bounds.Width, bounds.Height }
+            });
+        }
+        Directory.CreateDirectory(output);
+        File.AppendAllText(Path.Combine(output, "close-collision-runtime.jsonl"), JsonSerializer.Serialize(new
+        {
+            ProductSourceSha = Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA") ?? "UNFROZEN_WORKTREE",
+            State = state,
+            CloseBounds = new[] { closeRect.X, closeRect.Y, closeRect.Width, closeRect.Height },
+            CollisionCount = collisions.Count,
+            Collisions = collisions
+        }) + Environment.NewLine);
+        if (collisions.Count > 0) throw new InvalidOperationException($"Shell close collision at {state}: {JsonSerializer.Serialize(collisions)}");
+
+        static bool IsHeaderCollisionCandidate(FrameworkElement element) =>
+            element.IsVisible && element.IsEnabled && element.IsHitTestVisible && element.ActualWidth > 0 && element.ActualHeight > 0 &&
+            element is ButtonBase or Selector or TextBoxBase or TextBlock;
+        static bool IsDescendantOf(DependencyObject element, DependencyObject ancestor)
+        {
+            for (DependencyObject? current = element; current is not null; current = VisualTreeHelper.GetParent(current))
+                if (ReferenceEquals(current, ancestor)) return true;
+            return false;
+        }
+    }
+
     internal static void AuditGeometry(FrameworkElement root, string state, double scale, string output)
     {
         var rows = new List<object>();
@@ -124,6 +171,46 @@ internal static class StudioVisualEvidence
         Directory.CreateDirectory(Path.Combine(output,"contact-sheets"));
         using var file=File.Create(Path.Combine(output,"contact-sheets",name+".png"));encoder.Save(file);
     }
+    internal static async Task AccentComparison(FrameworkElement root, string output)
+    {
+        var resources = Application.Current.Resources;
+        var keys = new[] { "AccentBrush", "ToolAccentBrush", "AccentValueBrush", "PrimaryBrush", "Brush.Accent", "Brush.Accent.Hover", "Brush.Accent.Active", "Brush.Accent.Subtle" };
+        var original = keys.ToDictionary(key => key, key => resources.Contains(key) ? resources[key] : Application.Current.TryFindResource(key));
+        var directory = Path.Combine(output, "accent-ab"); Directory.CreateDirectory(directory);
+        var emerald = Path.Combine(directory, "A_EMERALD.png"); Png(root, emerald);
+        var violet = new Dictionary<string, Brush>
+        {
+            ["AccentBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)), ["ToolAccentBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)),
+            ["AccentValueBrush"] = new SolidColorBrush(Color.FromRgb(190, 168, 214)), ["PrimaryBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)),
+            ["Brush.Accent"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)), ["Brush.Accent.Hover"] = new SolidColorBrush(Color.FromRgb(148, 124, 178)),
+            ["Brush.Accent.Active"] = new SolidColorBrush(Color.FromRgb(112, 91, 139)), ["Brush.Accent.Subtle"] = new SolidColorBrush(Color.FromArgb(42, 132, 108, 162))
+        };
+        try
+        {
+            foreach (var item in violet) { item.Value.Freeze(); resources[item.Key] = item.Value; }
+            await root.Dispatcher.InvokeAsync(root.UpdateLayout, DispatcherPriority.ApplicationIdle); await Task.Delay(120);
+            Png(root, Path.Combine(directory, "B_MUTED_VIOLET.png"));
+        }
+        finally
+        {
+            foreach (var item in original) if (item.Value is not null) resources[item.Key] = item.Value;
+            await root.Dispatcher.InvokeAsync(root.UpdateLayout, DispatcherPriority.ApplicationIdle);
+        }
+        var frames = new[] { ("A · Emerald", emerald), ("B · Muted Violet", Path.Combine(directory, "B_MUTED_VIOLET.png")) };
+        var drawing = new DrawingVisual();
+        using (var context = drawing.RenderOpen())
+        {
+            context.DrawRectangle(new SolidColorBrush(Color.FromRgb(16, 18, 21)), null, new Rect(0, 0, 3840, 1080));
+            for (var index = 0; index < frames.Length; index++)
+            {
+                var bitmap = new BitmapImage(new Uri(frames[index].Item2)); var scale = Math.Min(1880d / bitmap.PixelWidth, 1000d / bitmap.PixelHeight);
+                var x = index * 1920d + 20; context.DrawText(new FormattedText(frames[index].Item1, System.Globalization.CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI Semibold"), 24, Brushes.White, 1), new Point(x, 12));
+                context.DrawImage(bitmap, new Rect(x, 60, bitmap.PixelWidth * scale, bitmap.PixelHeight * scale));
+            }
+        }
+        var sheet = new RenderTargetBitmap(3840, 1080, 96, 96, PixelFormats.Pbgra32); sheet.Render(drawing); var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(sheet));
+        using var file = File.Create(Path.Combine(directory, "10_ACCENT_AB.png")); encoder.Save(file);
+    }
     internal static async Task Dpi(Window window,RAWSelectionAssistant.ViewModels.MainViewModel vm,string output) {
         var findings=new List<object>();var captures=new List<object>();int textCount=0;
         foreach(var route in new[]{"AssetLibrary","Planning","ReferenceColor","Tether"}) {
@@ -141,6 +228,7 @@ internal static class StudioVisualEvidence
                 if(Math.Abs(root.ActualWidth*scale-width)>.5 || Math.Abs(root.ActualHeight*scale-height)>.5)
                     throw new InvalidOperationException("Production client render dimensions do not match requested pixels");
                 var path=Path.Combine(output,"dpi",route+"-"+width+"x"+height+"-"+(int)(scale*100)+".png");Png(root,path,scale);
+                AssertNoShellCloseCollision(root, route + "/" + width + "x" + height + "/" + (int)(scale * 100), output);
                 AuditGeometry(root, route + "/" + width + "x" + height, scale, output);
                 captures.Add(new{Route=route,RequestedPixels=new[]{width,height},LogicalScale=scale,ActualDip=new[]{root.ActualWidth,root.ActualHeight},Filename=Path.GetRelativePath(output,path)});
                 foreach(var text in Walk<TextBlock>(root).Where(t=>t.IsVisible && t.ActualWidth>0 && !string.IsNullOrWhiteSpace(t.Text))) {

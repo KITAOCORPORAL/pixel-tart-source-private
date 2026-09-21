@@ -86,6 +86,7 @@ public sealed class WholeAppVisualAcceptanceTests
                                 root.Arrange(new Rect(root.DesiredSize)); root.UpdateLayout();
                             }
                             if (root.ActualWidth <= 0 || root.ActualHeight <= 0) throw new InvalidOperationException($"Unrendered production surface: {module}/{state}");
+                            if (popup is null) StudioVisualEvidence.AssertNoShellCloseCollision(root, module + "/" + state, output);
                             StudioVisualEvidence.AuditGeometry(root, module + "/" + state, 1, output);
                             var bitmap = new RenderTargetBitmap((int)Math.Ceiling(root.ActualWidth), (int)Math.Ceiling(root.ActualHeight), 96, 96, PixelFormats.Pbgra32);
                             bitmap.Render(root);
@@ -235,6 +236,7 @@ public sealed class WholeAppVisualAcceptanceTests
                                 vm.ReferenceColorPage.Editor.WorkspaceMode = "简洁"; await Capture(module, "reference_simple");
                                 vm.ReferenceColorPage.Editor.WorkspaceMode = "专业"; await Capture(module, "reference_pro");
                                 vm.ReferenceColorPage.Editor.WorkspaceSection = "胶片"; vm.ReferenceColorPage.Editor.FilmEnabled = true; vm.ReferenceColorPage.Editor.FilmGrainAmount = 35; vm.ReferenceColorPage.Editor.FilmHalationAmount = 28; vm.ReferenceColorPage.Editor.FilmBloomAmount = 22; vm.ReferenceColorPage.Editor.FilmTextureId = "Paper"; vm.ReferenceColorPage.Editor.FilmSurfaceAmount = 32; vm.ReferenceColorPage.Editor.FilmTextureAmount = 45; await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null); await Capture(module, "reference_film"); await Capture(module, "reference_texture_grid");
+                                if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1") await StudioVisualEvidence.AccentComparison((FrameworkElement)window.Content, output);
                                 vm.ReferenceColorPage.Editor.WorkspaceSection = "仿色";
                                 foreach (var mode in vm.ReferenceColorPage.Editor.ViewModes) { vm.ReferenceColorPage.Editor.ViewMode = mode; await Capture(module, mode); }
                                 var renderStarted = new TaskCompletionSource(); var releaseRender = new TaskCompletionSource();
