@@ -232,6 +232,10 @@ public sealed class WholeAppVisualAcceptanceTests
                                 await StudioVisualEvidence.MeasureOperation(output,"Reference render",()=>vm.ReferenceColorPage.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, fixture),()=>vm.ReferenceColorPage.Editor.IsBusy, window);
                                 if (vm.ReferenceColorPage.Editor.SelectedLook is null || vm.ReferenceColorPage.Editor.ReferenceSources.Count == 0) throw new InvalidOperationException("Catalog refresh lost the selected scheme or references");
                                 await Capture(module, "loaded-synthetic");
+                                vm.ReferenceColorPage.Editor.WorkspaceMode = "简洁"; await Capture(module, "reference_simple");
+                                vm.ReferenceColorPage.Editor.WorkspaceMode = "专业"; await Capture(module, "reference_pro");
+                                vm.ReferenceColorPage.Editor.WorkspaceSection = "胶片"; vm.ReferenceColorPage.Editor.FilmEnabled = true; vm.ReferenceColorPage.Editor.FilmGrainAmount = 35; vm.ReferenceColorPage.Editor.FilmHalationAmount = 28; vm.ReferenceColorPage.Editor.FilmBloomAmount = 22; vm.ReferenceColorPage.Editor.FilmTextureId = "Paper"; vm.ReferenceColorPage.Editor.FilmSurfaceAmount = 32; vm.ReferenceColorPage.Editor.FilmTextureAmount = 45; await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null); await Capture(module, "reference_film"); await Capture(module, "reference_texture_grid");
+                                vm.ReferenceColorPage.Editor.WorkspaceSection = "仿色";
                                 foreach (var mode in vm.ReferenceColorPage.Editor.ViewModes) { vm.ReferenceColorPage.Editor.ViewMode = mode; await Capture(module, mode); }
                                 var renderStarted = new TaskCompletionSource(); var releaseRender = new TaskCompletionSource();
                                 vm.ReferenceColorPage.Editor.PostProcessor = async (value, token) => { renderStarted.TrySetResult(); await releaseRender.Task.WaitAsync(token); return value; };
@@ -255,6 +259,10 @@ public sealed class WholeAppVisualAcceptanceTests
                                     vm.ReferenceColorPage.Editor.SelectedLook = originalLook with { ReferenceSources = sources };
                                     await vm.ReferenceColorPage.Editor.ApplyCommand.ExecuteAsync(null); await Capture(module,"multi-reference");
                                 }
+                                window.Width = 1280; window.Height = 900; await Capture(module, "compact_drawer_closed"); vm.ReferenceColorPage.Editor.ContextRailOpen = true; await Capture(module, "compact_drawer_open"); vm.ReferenceColorPage.Editor.ContextRailOpen = false;
+                                window.Width = 960; window.Height = 900; await Capture(module, "narrow_canvas_first"); vm.ReferenceColorPage.Editor.FocusView = true; await Capture(module, "focus_view"); vm.ReferenceColorPage.Editor.FocusView = false;
+                                window.Width = 1920; window.Height = 1080; vm.ReferenceColorPage.Editor.ContextRailOpen = true;
+                                vm.ReferenceColorPage.Editor.WorkspaceSection = "胶片";
                                 var combo = Descendants<ComboBox>(window).First(x => x.IsVisible);
                                 combo.IsDropDownOpen = true; await Task.Delay(150);
                                 if ((combo.Template.FindName("PART_Popup", combo) as System.Windows.Controls.Primitives.Popup)?.Child is FrameworkElement dropdown) await Capture("18_global-popups", "reference-color", dropdown);

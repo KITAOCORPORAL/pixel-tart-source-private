@@ -48,7 +48,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
     public IReadOnlyList<PixelTartFilmProfile> FilmProfiles => PixelTartFilmProfiles.All;
-    public IReadOnlyList<string> FilmTextures { get; } = ["None", "FineFiber", "Paper", "SoftMist", "Scanline"];
+    public IReadOnlyList<PixelTartFilmTextureOption> FilmTextures => PixelTartFilmTextures.All;
     public PixelTartFilmSettings FilmSettings { get => _filmSettings; private set => SetProperty(ref _filmSettings, value); }
     public bool FilmEnabled { get => FilmSettings.Enabled; set => SetFilm(FilmSettings with { Enabled = value }); }
     public string FilmProfileId { get => FilmSettings.ProfileId; set => SetFilm(FilmSettings with { ProfileId = value }); }
@@ -182,6 +182,11 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         _assetId = assetId; _source = source; OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         RaiseViewProperties();
         if ((_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
+    }
+
+    public void SetResponsiveContext(bool compact)
+    {
+        if (compact && !FocusView && ContextRailOpen) ContextRailOpen = false;
     }
     public async Task SelectLookAsync(Guid? lookId)
     {

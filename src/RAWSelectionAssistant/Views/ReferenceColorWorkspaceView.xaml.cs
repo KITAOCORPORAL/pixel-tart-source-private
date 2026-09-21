@@ -8,6 +8,7 @@ namespace RAWSelectionAssistant.Views;
 public partial class ReferenceColorWorkspaceView : UserControl
 {
     private TetherReferenceModeViewModel? _editor;
+    private bool _wasCompact;
 
     public ReferenceColorWorkspaceView()
     {
@@ -34,13 +35,16 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (LeftColumn is null || RightColumn is null || CenterColumn is null) return;
         var focus = _editor?.FocusView == true;
-        var compact = ActualWidth is > 0 and < 1320;
+        var compact = ActualWidth is > 0 and < 1440;
         var narrow = ActualWidth is > 0 and < 980;
+
+        if (compact && !_wasCompact) _editor?.SetResponsiveContext(true);
+        _wasCompact = compact;
 
         LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 212 : 240;
         RightColumn.MinWidth = focus || compact ? 0 : 224;
         LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(compact ? .24 : .21, GridUnitType.Star);
-        CenterColumn.Width = new GridLength(1, GridUnitType.Star);
+        CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.61, GridUnitType.Star);
         RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
         if (compact)
         {
