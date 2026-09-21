@@ -96,8 +96,8 @@ public sealed class PixelTartFilmTests
         var result = PixelTartFilmPipeline.Apply(source, new(Enabled: true, VignetteAmount: 100));
         byte Pixel(int x, int y) => result.Rgb24.Span[(y * size + x) * 3];
         var samples = Enumerable.Range(0, 17).Select(i => Pixel(16 + i, 16)).ToArray();
-        for (var index = 1; index < samples.Length; index++) Assert.IsTrue(samples[index] <= samples[index - 1] + 1, $"radial step {index}: {samples[index - 1]} -> {samples[index]}");
-        Assert.IsTrue(Pixel(16, 16) > Pixel(0, 0), $"center {Pixel(16, 16)} must remain brighter than corner {Pixel(0, 0)}");
+        for (var index = 1; index < samples.Length; index++) Assert.IsLessThanOrEqualTo(samples[index - 1] + 1, samples[index], $"radial step {index}: {samples[index - 1]} -> {samples[index]}");
+        Assert.IsGreaterThan(Pixel(0, 0), Pixel(16, 16), $"center {Pixel(16, 16)} must remain brighter than corner {Pixel(0, 0)}");
     }
 
     [TestMethod]
