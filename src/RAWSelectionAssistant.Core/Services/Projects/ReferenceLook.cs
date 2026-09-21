@@ -17,11 +17,13 @@ public sealed record ReferenceLookSource(Guid LibraryId, Guid? AssetId, string N
     string ContentHash, double Weight, AssetVisualAnalysisResult Analysis, string Kind = "Asset", Guid? ContainerId = null);
 public sealed record ReferenceLook(Guid ReferenceLookId, string Name, Guid? ProjectId,
     IReadOnlyList<ReferenceLookSource> ReferenceSources, ReferenceLookParameters Parameters,
-    DateTimeOffset CreatedAt, DateTimeOffset UpdatedAt, int Version = 1)
+    DateTimeOffset CreatedAt, DateTimeOffset UpdatedAt, int Version = 1,
+    PixelTartFilmSettings? Film = null)
 {
     public ReferenceLook Normalize()
     {
         Parameters.Validate();
+        Film?.Validate();
         if (ReferenceLookId == Guid.Empty || string.IsNullOrWhiteSpace(Name) || Version != 1 || ReferenceSources.Count == 0 ||
             ReferenceSources.Any(source => !double.IsFinite(source.Weight) || source.Weight < 0 || source.Analysis.Palette.Count == 0 ||
                 source.Analysis.HistogramLuma.Length != 256)) throw new ArgumentException("Look identity, references and weights must be valid.");

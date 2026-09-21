@@ -5,7 +5,16 @@ using RAWSelectionAssistant.Core.Services.Projects;
 
 namespace RAWSelectionAssistant.Services;
 
-public sealed class ReferenceLookPreviewService
+public interface IReferenceRenderBackend
+{
+    Task<ReferenceLookPreviewRenderResult> RenderWithResultAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default);
+    Task<ReferenceCubeLut> BuildExportLutAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default);
+    Task<BitmapSource> ApplyFilmAsync(BitmapSource source, PixelTartFilmSettings settings, CancellationToken token = default);
+    Task<ReferenceLookSource> AnalyzeExternalReferenceAsync(string path, CancellationToken token = default);
+}
+
+/// <summary>Current CPU reference renderer behind a replaceable backend boundary.</summary>
+public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
 {
     private readonly ReferenceLookMatcher _matcher = new();
     public async Task<BitmapSource> RenderAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default) =>
@@ -35,6 +44,21 @@ public sealed class ReferenceLookPreviewService
         token.ThrowIfCancellationRequested(); var (_, _, _, buffer, analysis) = Prepare(source);
         var transform = _matcher.BuildTransform(buffer, analysis, look);
         return ReferenceCubeLutBuilder.Build(65, transform.Apply, transform.Pipeline);
+    }, token);
+
+    public Task<BitmapSource> ApplyFilmAsync(BitmapSource source, PixelTartFilmSettings settings, CancellationToken token = default) => Task.Run(() =>
+    {
+        token.ThrowIfCancellationRequested();
+        var input = HistogramService.EnsureBgra32(source);
+        var stride = input.PixelWidth * 4;
+        var bgra = new byte[stride * input.PixelHeight]; input.CopyPixels(bgra, stride, 0);
+        var rgb = new byte[input.PixelWidth * input.PixelHeight * 3];
+        for (var pixel = 0; pixel < input.PixelWidth * input.PixelHeight; pixel++)
+        { var offset = pixel * 4; var rgbOffset = pixel * 3; rgb[rgbOffset] = bgra[offset + 2]; rgb[rgbOffset + 1] = bgra[offset + 1]; rgb[rgbOffset + 2] = bgra[offset]; }
+        var result = PixelTartFilmPipeline.Apply(new(input.PixelWidth, input.PixelHeight, rgb), settings, token);
+        for (var pixel = 0; pixel < result.PixelCount; pixel++)
+        { var offset = pixel * 4; var rgbOffset = pixel * 3; bgra[offset] = result.Rgb24.Span[rgbOffset + 2]; bgra[offset + 1] = result.Rgb24.Span[rgbOffset + 1]; bgra[offset + 2] = result.Rgb24.Span[rgbOffset]; bgra[offset + 3] = 255; }
+        var output = BitmapSource.Create(input.PixelWidth, input.PixelHeight, input.DpiX, input.DpiY, PixelFormats.Bgra32, null, bgra, stride); output.Freeze(); return output;
     }, token);
 
     public async Task<ReferenceLookSource> AnalyzeExternalReferenceAsync(string path, CancellationToken token = default)

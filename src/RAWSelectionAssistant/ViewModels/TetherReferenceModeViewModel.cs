@@ -11,7 +11,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 {
     private readonly ReferenceLookStore _store;
     private readonly IDialogService? _dialogs;
-    private readonly ReferenceLookPreviewService _preview = new();
+    private readonly IReferenceRenderBackend _preview;
     private readonly CancellationTokenSource _lifetime = new();
     private CancellationTokenSource? _render;
     private BitmapSource? _source;
@@ -36,17 +36,52 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private int _busyOperations;
     private bool _refreshingLookChoices;
     private bool _hasError;
+    private PixelTartFilmSettings _filmSettings = new();
+    private string _workspaceMode = "简洁";
+    private string _workspaceSection = "仿色";
+    private bool _focusView;
+    private bool _contextRailOpen = true;
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0;
     private void BeginBusy() { _busyOperations++; OnPropertyChanged(nameof(IsBusy)); }
     private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); OnPropertyChanged(nameof(IsBusy)); }
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
+    public IReadOnlyList<PixelTartFilmProfile> FilmProfiles => PixelTartFilmProfiles.All;
+    public IReadOnlyList<string> FilmTextures { get; } = ["None", "FineFiber", "Paper", "SoftMist", "Scanline"];
+    public PixelTartFilmSettings FilmSettings { get => _filmSettings; private set => SetProperty(ref _filmSettings, value); }
+    public bool FilmEnabled { get => FilmSettings.Enabled; set => SetFilm(FilmSettings with { Enabled = value }); }
+    public string FilmProfileId { get => FilmSettings.ProfileId; set => SetFilm(FilmSettings with { ProfileId = value }); }
+    public double FilmProfileAmount { get => FilmSettings.ProfileAmount; set => SetFilm(FilmSettings with { ProfileAmount = value }); }
+    public double FilmGrainAmount { get => FilmSettings.GrainAmount; set => SetFilm(FilmSettings with { GrainAmount = value }); }
+    public double FilmGrainSize { get => FilmSettings.GrainSize; set => SetFilm(FilmSettings with { GrainSize = value }); }
+    public double FilmHalationAmount { get => FilmSettings.HalationAmount; set => SetFilm(FilmSettings with { HalationAmount = value }); }
+    public double FilmBloomAmount { get => FilmSettings.BloomAmount; set => SetFilm(FilmSettings with { BloomAmount = value }); }
+    public double FilmVignetteAmount { get => FilmSettings.VignetteAmount; set => SetFilm(FilmSettings with { VignetteAmount = value }); }
+    public double FilmSurfaceAmount { get => FilmSettings.SurfaceAmount; set => SetFilm(FilmSettings with { SurfaceAmount = value }); }
+    public string FilmTextureId { get => FilmSettings.TextureId; set => SetFilm(FilmSettings with { TextureId = value }); }
+    public double FilmTextureAmount { get => FilmSettings.TextureAmount; set => SetFilm(FilmSettings with { TextureAmount = value }); }
+    public int FilmSeed { get => FilmSettings.Seed; set => SetFilm(FilmSettings with { Seed = value }); }
+    public RelayCommand RegenerateFilmCommand { get; }
+    public RelayCommand ToggleFocusViewCommand { get; }
+    public RelayCommand ToggleContextRailCommand { get; }
+    public IReadOnlyList<string> WorkspaceModes { get; } = ["简洁", "专业"];
+    public IReadOnlyList<string> WorkspaceSections { get; } = ["调色", "仿色", "预设", "胶片", "输出"];
+    public string WorkspaceSection { get => _workspaceSection; set => SetProperty(ref _workspaceSection, value); }
+    public string WorkspaceMode { get => _workspaceMode; set { if (SetProperty(ref _workspaceMode, value)) { OnPropertyChanged(nameof(IsSimpleMode)); OnPropertyChanged(nameof(IsProMode)); } } }
+    public bool IsSimpleMode => WorkspaceMode == "简洁";
+    public bool IsProMode => WorkspaceMode == "专业";
+    public bool FocusView { get => _focusView; set { if (SetProperty(ref _focusView, value)) { OnPropertyChanged(nameof(IsContextVisible)); OnPropertyChanged(nameof(IsLeftRailVisible)); } } }
+    public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
+    public bool IsContextVisible => !FocusView && ContextRailOpen;
+    public bool IsLeftRailVisible => !FocusView;
 
-    public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null, bool allowReferenceManagement = false)
+    public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null, bool allowReferenceManagement = false,
+        IReferenceRenderBackend? renderBackend = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _dialogs = dialogs;
+        _preview = renderBackend ?? new ReferenceLookPreviewService();
         _allowReferenceManagement = allowReferenceManagement;
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => SelectedLook is not null && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
@@ -62,6 +97,9 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         MoveReferenceDownCommand = new AsyncRelayCommand(value => UpdateReferencesAsync(value as ReferenceSourceWeightViewModel, ReferenceEdit.Down), value => _allowReferenceManagement && value is ReferenceSourceWeightViewModel item && ReferenceSources.IndexOf(item) >= 0 && ReferenceSources.IndexOf(item) < ReferenceSources.Count - 1);
         SourceCategories = [new("项目色彩方案", null), new("灵感板", "Board"), new("自由画布", "Canvas"), new("素材库", "Asset"), new("最近使用", "Recent"), new("导入参考图", "External")];
         _selectedSourceCategory = SourceCategories[0];
+        RegenerateFilmCommand = new RelayCommand(_ => SetFilm(FilmSettings with { Seed = Random.Shared.Next(0, int.MaxValue) }));
+        ToggleFocusViewCommand = new RelayCommand(_ => FocusView = !FocusView);
+        ToggleContextRailCommand = new RelayCommand(_ => ContextRailOpen = !ContextRailOpen);
     }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
@@ -83,11 +121,12 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public AsyncRelayCommand MoveReferenceDownCommand { get; }
     public bool IsSourcePickerOpen { get => _sourcePickerOpen; set => SetProperty(ref _sourcePickerOpen, value); }
     public ReferenceSourceCategory SelectedSourceCategory { get => _selectedSourceCategory; set { if (SetProperty(ref _selectedSourceCategory, value)) RefreshSourceChoices(); } }
-    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (_refreshingLookChoices && value is null) return; if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
+    public ReferenceLook? SelectedLook { get => _selectedLook; set { if (_refreshingLookChoices && value is null) return; if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); CopyFilm(value?.Film ?? new()); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
     public BitmapSource? SourceImage => _source;
-    public bool HasSessionAdjustment => _persistedLook is not null && _selectedLook is not null && !_selectedLook.Parameters.Equals(_persistedLook.Parameters);
+    public bool HasSessionAdjustment => _persistedLook is not null && _selectedLook is not null &&
+        (!_selectedLook.Parameters.Equals(_persistedLook.Parameters) || !FilmSettings.Equals(_persistedLook.Film ?? new()));
     public string SessionAdjustmentText => HasSessionAdjustment ? "本次拍摄已调整" : string.Empty;
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
     public bool ApplyToFollowing { get => _applyToFollowing; set => SetProperty(ref _applyToFollowing, value); }
@@ -244,7 +283,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private void RestoreScheme()
     {
         if (_persistedLook is null) return;
-        _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();
+        _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); CopyFilm(_persistedLook.Film ?? new()); OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();
     }
     private void RaiseReferenceCommands() { RemoveReferenceCommand.RaiseCanExecuteChanged(); MoveReferenceUpCommand.RaiseCanExecuteChanged(); MoveReferenceDownCommand.RaiseCanExecuteChanged(); }
     private async Task ExportCubeAsync()
@@ -283,6 +322,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         try
         {
             var rendered = await _preview.RenderWithResultAsync(source, look, renderToken); var image = rendered.Image;
+            if (FilmSettings.Enabled) image = await _preview.ApplyFilmAsync(image, FilmSettings, renderToken);
             if (PostProcessor is not null) image = await PostProcessor(image, renderToken);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
             MatchedImage = image; StatusText = rendered.DifferenceWarning ?? "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
@@ -290,6 +330,19 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         catch (OperationCanceledException) { }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { HasError = true; MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
+    }
+    private void SetFilm(PixelTartFilmSettings value)
+    {
+        value.Validate(); FilmSettings = value;
+        if (_selectedLook is not null) _selectedLook = _selectedLook with { Film = value, UpdatedAt = DateTimeOffset.UtcNow };
+        foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed), nameof(HasSessionAdjustment), nameof(SessionAdjustmentText) }) OnPropertyChanged(name);
+        SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
+        _ = DebouncedRenderAsync();
+    }
+    private void CopyFilm(PixelTartFilmSettings value)
+    {
+        FilmSettings = value;
+        foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed) }) OnPropertyChanged(name);
     }
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide)})OnPropertyChanged(name);}
     public void Dispose(){_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();}

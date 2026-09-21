@@ -58,4 +58,11 @@
     <SolidColorBrush x:Key="CalendarStatusDeliveredForegroundBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="CalendarTodayOutlineBrush" Color="#F2F4F6" />
     <SolidColorBrush x:Key="WorkbenchHeroBrush" Color="#1D2228" />
+    <!-- Reference Color / Film workspace semantic surfaces. -->
+    <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="#0A0C0F" />
+    <SolidColorBrush x:Key="InspectorBackgroundBrush" Color="#121519" />
+    <SolidColorBrush x:Key="ControlTrackBrush" Color="#3A424C" />
+    <SolidColorBrush x:Key="ControlThumbBrush" Color="#E3E6E8" />
+    <SolidColorBrush x:Key="AccentValueBrush" Color="#8BE5D4" />
+    <SolidColorBrush x:Key="FilmTileBackgroundBrush" Color="#171B20" />
 </ResourceDictionary>
