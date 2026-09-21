@@ -1,28 +1,40 @@
 # Reference Color + Film Quality Closure
 
-- START_SHA: `8c2999378651cbb3704d7a80d3512a6d485d67ef`
-- Product source status: implementation updated; final source SHA recorded after commit.
-- Installed Candidate: NOT GENERATED.
-- User QA: NOT REQUIRED.
+- START_SHA: `9e2b6143e5f7b2d914c8859b4adafa8cee9dbcc8`
+- Product source SHA: `9bcce6098ce876096bdd444030f554b968384fa0`
+- Installed Candidate: NOT GENERATED
+- User QA: NOT REQUESTED
 
-## Workspace
+## Workspace and Studio UI
 
-Wide layout uses the intended 21/61/18 star ratio. At widths below 1440 DIP the context rail becomes a 280–340 DIP overlay and is collapsed when entering compact mode. Below 980 DIP the left rail collapses and the canvas remains primary. Focus mode collapses both rails. Simple and Pro retain the same engine state; Pro discloses protection, grain-size, Bloom, vignette, surface, texture and reference controls.
+The 1920 DIP production view measures the intended 21/61/18 ratio within ±2%. At 1439 DIP context starts closed; at 1200 DIP it is a 280–340 DIP overlay; below 980 DIP the left rail collapses; Focus hides both rails. Simple and Pro preserve a single engine state while Pro exposes protection, Film advanced controls and multi-reference management.
 
-## Studio UI
+The shell owns a 56 DIP close-safe column around the 40×40 target. Production-DI evidence recorded 33 closable render states with zero intersecting visible/enabled/hit-test header controls. The same gate covers Reference at 100%, 125%, 150%, 200%, 2K and 4K logical matrices.
 
-The Studio slider keeps a 4 DIP track and 19 DIP warm-gray thumb. The idle accent outline was reduced to a quiet 1 DIP divider; focus remains available through the Studio focus visual. Accent values, toggle geometry and grouped parameter rhythm remain shared system resources. Film profiles and material labels are Chinese. The texture selector now binds to an explicit option model rather than raw internal identifiers.
+Texture tiles now contain cached 100×60 Pixel Tart procedural thumbnails for None, Fine Fiber, Paper, Soft Mist and Scanline. Description moved to tooltip so the texture remains primary. Accent evidence renders the same UI/state twice: production Emerald and Pixel Tart-owned muted violet; production default remains Emerald.
 
-## Reference and Film
+## Film quality
 
-Reference details are recorded in `REFERENCE_COLOR_ENGINE_AUDIT.md`; color spaces in `REFERENCE_FILM_COLORSPACE_AUDIT.md`. Match 0% and neutral/zero Film remain identity operations. Film runs after the 33³ reference preview; 65³ LUT export remains color-only. Grain uses continuous correlated monochrome noise, Bloom uses a neutral spatial Gaussian spread, Halation uses a warmer surrounding-edge spread, surface patterns use Pixel Tart-owned multi-scale deterministic noise, and unsupported `FrameStyle` was removed from the public v1 settings.
+The 12-frame evidence uses one synthetic photographic fixture with a skin-like patch, neutral gray, saturated bands, shadow, fine detail, high-contrast edge and highlight lamps.
 
-## Evidence and regression
+| Effect | Review |
+|---|---|
+| Grain | PASS — fine/coarse scale visibly differs; no square blocks |
+| Halation | PASS — warm contribution remains around highlight edges |
+| Bloom | PASS — neutral spatial spread is visible outside highlight sources |
+| Vignette | PASS — smooth radial falloff, no rings |
+| Fine Fiber | PASS — directional material, no short tiling |
+| Paper | PASS — low/mid-frequency variation, no short-period repeat |
+| Soft Mist | PASS — broad variation rather than electronic noise |
+| Scanline | PASS — irregular restrained lines, not a fixed short stripe repeat |
+| Combined | PASS — effects remain restrained and no block discontinuities were observed |
 
-Release x64 builds with zero warnings and errors. Core, modular, DPI and process-isolated Reference/Workspace gates are recorded under `artifacts/reference-film-quality-review`. Historical RC12 acceptance reports remain outside this closure and are not product-source evidence.
+Film remains after 33³ reference preview; 65³ LUT export remains color-only. Tether and standalone Reference Color continue to share `TetherReferenceModeViewModel` and `ReferenceLookPreviewService`.
 
-## Known issues
+## Evidence and known issues
 
-- P0: none identified by automated gates.
-- P1: final visual design judgment remains the purpose of the Design Review package.
-- P2: CPU Film preview can be further optimized with buffer reuse and an explicit interactive proxy tier.
+The ten review sheets now match their names: real Simple/Pro, five responsive states, four compare modes, 1/3 references, Film Simple/Pro, visual texture grid, 12 per-effect images, 100/200% DPI, Loading/Error/Retry/Recovered, and true Emerald/Violet A/B. Full-size effect images are retained beside the contact sheet.
+
+- P0: 0
+- Design P1: 0
+- P2: 2048px Film proxy is slower than the 1080p settled path on this CPU; production correctly selects 1600px for interaction. 24MP final remains a multi-second output path.

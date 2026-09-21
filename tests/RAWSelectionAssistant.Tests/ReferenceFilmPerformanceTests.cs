@@ -27,10 +27,11 @@ public sealed class ReferenceFilmPerformanceTests
             var rgb = new byte[width * height * 3];
             for (var i = 0; i < width * height; i++) { rgb[i * 3] = (byte)(i % 256); rgb[i * 3 + 1] = (byte)((i / width) % 256); rgb[i * 3 + 2] = (byte)((i / 17) % 256); }
             var input = new VisualPixelBuffer(width, height, rgb);
+            _ = PixelTartFilmPipeline.Apply(input, new(true, "PT-W01", 70, 42, 38, 35, 28, 20, 40, "Paper", 55, 17));
             var before = GC.GetTotalMemory(true); var allocated = GC.GetAllocatedBytesForCurrentThread(); var watch = Stopwatch.StartNew();
             _ = PixelTartFilmPipeline.Apply(input, new(true, "PT-W01", 70, 42, 38, 35, 28, 20, 40, "Paper", 55, 17));
             watch.Stop(); var after = GC.GetTotalMemory(false);
-            rows.Add(new { name, width, height, film_ms = watch.Elapsed.TotalMilliseconds, managed_memory_delta_mb = Math.Max(0, after - before) / 1048576d, allocated_mb = (GC.GetAllocatedBytesForCurrentThread() - allocated) / 1048576d, backend = "CPU" });
+            rows.Add(new { name, width, height, film_ms = watch.Elapsed.TotalMilliseconds, managed_memory_delta_mb = Math.Max(0, after - before) / 1048576d, allocated_mb = (GC.GetAllocatedBytesForCurrentThread() - allocated) / 1048576d, warm_buffer_pool = true, backend = "CPU" });
         }
         void MeasureCancellation(int width, int height)
         {
@@ -38,8 +39,8 @@ public sealed class ReferenceFilmPerformanceTests
             using var cancellation = new CancellationTokenSource(); var started = new ManualResetEventSlim(); var watch = new Stopwatch();
             var task = Task.Run(() => { started.Set(); return PixelTartFilmPipeline.Apply(input, new(true, "PT-W01", 70, 42, 38, 35, 28, 20, 40, "Paper", 55, 17), cancellation.Token); });
             started.Wait(); Thread.Sleep(50); watch.Start(); cancellation.Cancel();
-            try { task.GetAwaiter().GetResult(); } catch (OperationCanceledException) { }
-            watch.Stop(); rows.Add(new { name = "24MP cancel", width, height, cancel_latency_ms = watch.Elapsed.TotalMilliseconds, canceled = task.IsCanceled, backend = "CPU" });
+            var canceled = false; try { task.GetAwaiter().GetResult(); } catch (OperationCanceledException) { canceled = true; }
+            watch.Stop(); rows.Add(new { name = "24MP cancel", width, height, cancel_latency_ms = watch.Elapsed.TotalMilliseconds, canceled, backend = "CPU" });
         }
     }
 }

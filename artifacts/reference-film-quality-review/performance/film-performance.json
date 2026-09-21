@@ -1,18 +1,53 @@
-[
-  {
-    "name": "1080p",
-    "width": 1920,
-    "height": 1080,
-    "film_ms": 702.7198,
-    "managed_memory_delta_mb": 53.418968200683594,
-    "backend": "CPU"
-  },
-  {
-    "name": "24MP",
-    "width": 6000,
-    "height": 4000,
-    "film_ms": 9502.6011,
-    "managed_memory_delta_mb": 618.2798614501953,
-    "backend": "CPU"
-  }
-]
+{
+  "source_commit": "9bcce6098ce876096bdd444030f554b968384fa0",
+  "rows": [
+    {
+      "name": "1600px interactive proxy",
+      "width": 1600,
+      "height": 1067,
+      "film_ms": 574.9962,
+      "managed_memory_delta_mb": 4.900047302246094,
+      "allocated_mb": 4.884788513183594,
+      "warm_buffer_pool": true,
+      "backend": "CPU"
+    },
+    {
+      "name": "2048px proxy",
+      "width": 2048,
+      "height": 1365,
+      "film_ms": 962.9632,
+      "managed_memory_delta_mb": 8.009757995605469,
+      "allocated_mb": 7.998512268066406,
+      "warm_buffer_pool": true,
+      "backend": "CPU"
+    },
+    {
+      "name": "1080p settled",
+      "width": 1920,
+      "height": 1080,
+      "film_ms": 688.5635,
+      "managed_memory_delta_mb": 5.948326110839844,
+      "allocated_mb": 5.933067321777344,
+      "warm_buffer_pool": true,
+      "backend": "CPU"
+    },
+    {
+      "name": "24MP final",
+      "width": 6000,
+      "height": 4000,
+      "film_ms": 9382.979,
+      "managed_memory_delta_mb": 68.67626190185547,
+      "allocated_mb": 68.66510772705078,
+      "warm_buffer_pool": true,
+      "backend": "CPU"
+    },
+    {
+      "name": "24MP cancel",
+      "width": 6000,
+      "height": 4000,
+      "cancel_latency_ms": 1.0921,
+      "canceled": true,
+      "backend": "CPU"
+    }
+  ]
+}

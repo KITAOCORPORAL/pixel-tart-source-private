@@ -19,7 +19,7 @@ internal static class StudioVisualEvidence
     {
         var close = Walk<SurfaceCloseButton>(root).FirstOrDefault(element =>
             element.IsVisible && element.IsHitTestVisible &&
-            AutomationProperties.GetAutomationId(element) == "ShellEmergencyCloseButton");
+            (element.Name == "ShellSurfaceCloseButton" || AutomationProperties.GetAutomationId(element) == "ShellEmergencyCloseButton"));
         if (close is null) return;
         var closeRect = close.TransformToAncestor(root).TransformBounds(new Rect(close.RenderSize));
         var collisions = new List<object>();
