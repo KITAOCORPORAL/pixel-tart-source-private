@@ -23,7 +23,7 @@
    <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="280"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="0">
     <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-     <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="19" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
+     <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="{DynamicResource Type.Proposal.ListTitle.FontSize}" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
      <Grid Grid.Row="1">
       <TextBox x:Name="ProjectSearchBox" Text="{Binding ProjectSearch,UpdateSourceTrigger=PropertyChanged}" ToolTip="搜索项目、模特或日期" AutomationProperties.Name="搜索项目、模特或日期"/>
       <TextBlock Text="搜索项目、模特或日期" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="False" Foreground="{DynamicResource TextSecondaryBrush}">
@@ -33,7 +33,7 @@
      <StackPanel x:Name="StatusChips" Grid.Row="2" Orientation="Horizontal" Margin="0,12,0,16"/>
      <ListBox x:Name="DocumentList" Grid.Row="3" ItemsSource="{Binding PlanningProjectsView}" BorderThickness="0" Background="Transparent" ItemContainerStyle="{StaticResource DocumentListItem}" SelectionChanged="DocumentList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="策划案列表">
       <ListBox.ItemTemplate><DataTemplate><StackPanel>
-       <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="44" LineHeight="22"/>
+       <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" FontSize="{DynamicResource Type.Proposal.Project.FontSize}" FontWeight="SemiBold" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="44" LineHeight="22"/>
        <TextBlock Text="{Binding Detail}" Style="{StaticResource CaptionText}" Margin="0,9,0,0" TextWrapping="Wrap"/>
        <TextBlock Text="{Binding CountText}" Style="{StaticResource CaptionText}" Margin="0,8,0,0"/>
       </StackPanel></DataTemplate></ListBox.ItemTemplate>
@@ -44,7 +44,7 @@
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
     <Grid x:Name="EditorHeader" Margin="32,22,32,16">
      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-     <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="21" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/></StackPanel>
+     <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="{DynamicResource Type.Proposal.Header.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/></StackPanel>
      <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" IsEnabled="{Binding HasProject}">
       <Button Content="关联档期" Command="{Binding ShowBookingCommand}" Style="{StaticResource GhostButton}" AutomationProperties.Name="关联档期"/>
       <Button Content="预览" Command="{Binding PreviewDocumentCommand}" Style="{StaticResource SecondaryButton}" Margin="10,0" AutomationProperties.Name="预览策划案"/>

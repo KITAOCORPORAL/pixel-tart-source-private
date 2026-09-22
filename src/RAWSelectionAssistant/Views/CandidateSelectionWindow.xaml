@@ -17,10 +17,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Margin="0,0,0,14">
-            <TextBlock Text="选择正确的 RAW 文件" Style="{StaticResource SectionTitleText}" FontSize="18" />
+            <TextBlock Text="选择正确的 RAW 文件" Style="{StaticResource SectionTitleText}" FontSize="{DynamicResource Type.SectionTitle.FontSize}" />
             <TextBlock Text="存在多个精确候选，系统不会自动替你选择。" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0" />
         </StackPanel>
-        <DataGrid x:Name="CandidatesGrid" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False"
+        <DataGrid Style="{StaticResource PixelTart.DataGrid}" x:Name="CandidatesGrid" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False"
                   IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="文件名" Binding="{Binding FileName}" Width="180" />

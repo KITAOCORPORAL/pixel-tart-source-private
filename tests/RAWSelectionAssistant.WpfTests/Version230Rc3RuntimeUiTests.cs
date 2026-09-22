@@ -18,7 +18,7 @@ public sealed class Version230Rc3RuntimeUiTests
     public void ProfessionalCalendar_ContainsRequiredRuntimeSurface(string token) => Contains("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml", token);
 
     [TestMethod]
-    [DataRow("摄影收支")][DataRow("金额信息仅保存在本机")][DataRow("＋ 收入")][DataRow("＋ 支出")][DataRow("导出 CSV")]
+    [DataRow("摄影收支")][DataRow("金额信息仅保存在本机")][DataRow("新建收入")][DataRow("新建支出")][DataRow("导出 CSV")]
     [DataRow("本月收入")][DataRow("本月支出")][DataRow("本月净现金流")][DataRow("待收款")][DataRow("待付款")][DataRow("项目预计利润")]
     [DataRow("按收入支出筛选")][DataRow("按支付状态筛选")][DataRow("按分类筛选")][DataRow("按项目筛选")][DataRow("按拍摄任务筛选")]
     [DataRow("本月收支记录")][DataRow("付款方或收款方")][DataRow("支付方式")][DataRow("附件（仅关联原位置）")]

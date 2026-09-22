@@ -1033,7 +1033,7 @@ public partial class MainWindow : Window
         if (WorkbenchOverviewRow is not null)
         {
             WorkbenchOverviewRow.Height = new GridLength(veryShortWorkbench ? 170 : shortWorkbench ? 190 : 230);
-            WorkbenchScheduleRow.Height = new GridLength(veryShortWorkbench ? 115 : shortWorkbench ? 140 : 170);
+            WorkbenchScheduleRow.Height = new GridLength(170);
         }
         TaskDrawerButton.Visibility = compact ? Visibility.Visible : Visibility.Collapsed;
         WorkbenchQuickActions.Margin = compact ? new Thickness(0, 0, 116, 0) : new Thickness(0);

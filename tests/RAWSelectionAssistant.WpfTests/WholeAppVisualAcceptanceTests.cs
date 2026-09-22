@@ -68,7 +68,7 @@ public sealed class WholeAppVisualAcceptanceTests
                         window.WindowState = WindowState.Normal; window.Width = 1920; window.Height = 1080;
                         var rows = new List<object>();
                         var images = new List<(string Module, string State, string Path)>();
-                        var routes = new[] { ("01_workbench", "Workbench"), ("02_asset-library", "AssetLibrary"), ("03_ingest", "Workflow"), ("04_calendar", "WorkCalendar"), ("05_planning", "Planning"), ("06_tether", "Tether"), ("07_online-selection", "OnlineSelection"), ("08_finance", "Finance"), ("09_history", "History"), ("10_toolbox", "Toolbox"), ("11_reference-color", "ReferenceColor"), ("12_publish", "Publishing"), ("13_raw-jpg", "RawToJpeg"), ("14_organize", "PhotoGrouping"), ("15_collage", "Collage"), ("16_settings", "Settings"), ("17_license", "Activation"), ("18_help", "Help") };
+                        var routes = new[] { ("01_workbench", "Workbench"), ("02_asset-library", "AssetLibrary"), ("03_ingest", "Workflow"), ("04_calendar", "WorkCalendar"), ("05_planning", "Planning"), ("06_tether", "Tether"), ("07_online-selection", "OnlineSelection"), ("08_finance", "Finance"), ("09_history", "History"), ("10_toolbox", "Toolbox"), ("11_reference-color", "ReferenceColor"), ("12_publish", "Publishing"), ("13_raw-jpg", "RawToJpeg"), ("14_organize", "PhotoGrouping"), ("15_collage", "Collage"), ("16_settings", "Settings"), ("17_license", "Activation"), ("18_help", "Help"), ("19_local-split", "LocalSplit"), ("20_batch-compress", "BatchCompress") };
                         async Task Capture(string module, string state, FrameworkElement? popup = null)
                         {
                             await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
@@ -88,6 +88,7 @@ public sealed class WholeAppVisualAcceptanceTests
                             if (root.ActualWidth <= 0 || root.ActualHeight <= 0) throw new InvalidOperationException($"Unrendered production surface: {module}/{state}");
                             if (popup is null) StudioVisualEvidence.AssertNoShellCloseCollision(root, module + "/" + state, output);
                             StudioVisualEvidence.AuditGeometry(root, module + "/" + state, 1, output);
+                            if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1") StudioGlobalRolloutEvidence.AuditControlText(root, module + "/" + state, output);
                             var bitmap = new RenderTargetBitmap((int)Math.Ceiling(root.ActualWidth), (int)Math.Ceiling(root.ActualHeight), 96, 96, PixelFormats.Pbgra32);
                             bitmap.Render(root);
                             var dir = Path.Combine(output, module); Directory.CreateDirectory(dir);
@@ -105,6 +106,15 @@ public sealed class WholeAppVisualAcceptanceTests
                             // Settings is a real overlay and deliberately does not change CurrentPage.
                             if (route != "Settings" && route != vm.CurrentPage) throw new InvalidOperationException("Route failed: " + route + "; actual=" + vm.CurrentPage);
                             await Capture(module, "default");
+                            if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1")
+                            {
+                                await StudioGlobalRolloutEvidence.ScrollAndGeometry((FrameworkElement)window.Content, module, output);
+                                window.Width = 1180; window.Height = 720;
+                                await Capture(module, "minimum-1180");
+                                await StudioGlobalRolloutEvidence.ScrollAndGeometry((FrameworkElement)window.Content, module + "-minimum", output);
+                                window.Width = 1920; window.Height = 1080;
+                                await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
+                            }
                             if (route == "Workflow" && Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_EVIDENCE") == "1")
                             {
                                 vm.TextInput = "0001,0002,0003";
@@ -140,6 +150,7 @@ public sealed class WholeAppVisualAcceptanceTests
                                 for (var tab = 0; tab < tabs.Items.Count; tab++)
                                 {
                                     tabs.SelectedIndex = tab; await Capture(module, "tab-" + tab);
+                                    if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1") await StudioGlobalRolloutEvidence.ScrollAndGeometry((FrameworkElement)window.Content, module + "-tab-" + tab, output);
                                     var dropdown = Descendants<ComboBox>(tabs).FirstOrDefault(x => x.IsVisible && x.Items.Count > 0);
                                     if (dropdown is not null)
                                     {
@@ -336,6 +347,18 @@ public sealed class WholeAppVisualAcceptanceTests
                             StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_CORE_PAGES_01",images.Where(x=>x.Module is "02_asset-library" or "05_planning").Select(x=>x.Path));
                             StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_CORE_PAGES_02",images.Where(x=>x.Module is "06_tether" or "11_reference-color").Select(x=>x.Path));
                             StudioVisualEvidence.ContactSheet(output,"PIXEL_TART_STUDIO_UI_V1_WHOLE_APP_SMOKE",images.Where(x=>x.State=="default").Select(x=>x.Path));
+                        }
+                        if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1")
+                        {
+                            var defaults = images.Where(x => x.State == "default").ToArray();
+                            StudioVisualEvidence.ContactSheet(output, "01_WORK_PAGES", defaults.Where(x => x.Module is "01_workbench" or "02_asset-library" or "03_ingest" or "04_calendar" or "08_finance" or "09_history").Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "02_CREATIVE_PAGES", images.Where(x => (x.Module is "05_planning" or "06_tether" or "07_online-selection" or "11_reference-color") && x.State is "default" or "content" or "preview" or "watch-folder-monitor" or "reference_simple" or "film_pro").Take(10).Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "03_TOOL_PAGES", defaults.Where(x => x.Module is "10_toolbox" or "12_publish" or "13_raw-jpg" or "14_organize" or "15_collage" or "19_local-split" or "20_batch-compress").Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "04_SYSTEM_PAGES", images.Where(x => (x.Module is "16_settings" or "17_license" or "18_help") && (x.State == "default" || x.State.StartsWith("tab-"))).Take(10).Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "05_POPUPS_MENUS", images.Where(x => x.Module == "18_global-popups").Take(10).Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "06_LOADING_EMPTY_ERROR", images.Where(x => x.State is "empty-library" or "loading" or "error" or "recovered" or "session-stopped" or "content").Take(10).Select(x => x.Path));
+                            StudioVisualEvidence.ContactSheet(output, "07_DPI_100_200", Directory.GetFiles(Path.Combine(output, "dpi"), "*.png").Where(x => x.EndsWith("-100.png") || x.EndsWith("-125.png") || x.EndsWith("-150.png") || x.EndsWith("-200.png")).Take(10));
+                            StudioVisualEvidence.ContactSheet(output, "08_CLOSE_HEADERS", images.Where(x => x.State is "default" or "minimum-1180").Take(10).Select(x => x.Path));
                         }
                         complete = true;
                     }

@@ -21,21 +21,21 @@
         <conv:StatusToTextConverter x:Key="StatusToTextConverter" />
         <Style x:Key="FilterToggleButton" TargetType="ToggleButton"><Setter Property="Padding" Value="12,7" /><Setter Property="MinHeight" Value="34" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /><Setter Property="BorderThickness" Value="1" /><Style.Triggers><Trigger Property="IsChecked" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /></Trigger></Style.Triggers></Style>
     </UserControl.Resources>
-    <Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="20,16,20,16">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"><Grid Background="{DynamicResource ContentBackgroundBrush}" Margin="20,16,20,16" MinWidth="820" MinHeight="620">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
 
-        <Grid>
+        <views:StudioPageHeader Style="{StaticResource PixelTart.PageHeader}">
             <StackPanel>
                 <TextBlock Text="工作日历" Style="{StaticResource PageTitleText}" />
                 <TextBlock Text="拍摄时间、地点、准备事项和本地金额记录集中管理" Style="{StaticResource CaptionText}" Margin="0,4,0,0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="已归档" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleArchivedCommand}" AutomationProperties.Name="查看已归档排期" />
-                <Button Content="＋ 新建排期" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Command="{Binding NewBookingCommand}" AutomationProperties.Name="新建拍摄排期" AutomationProperties.HelpText="快捷键 Ctrl+N" />
+                <Button Content="新建排期" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Command="{Binding NewBookingCommand}" AutomationProperties.Name="新建拍摄排期" AutomationProperties.HelpText="快捷键 Ctrl+N" />
             </StackPanel>
-        </Grid>
+        </views:StudioPageHeader>
 
-        <Border Grid.Row="1" Style="{StaticResource PanelBorder}" Padding="12" Margin="0,14,0,18">
+        <Border Grid.Row="1" Style="{StaticResource PixelTart.SectionSurface}" Padding="12" Margin="0,14,0,18">
             <Grid x:Name="CalendarToolbar" SizeChanged="CalendarToolbar_SizeChanged">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="24" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
@@ -44,12 +44,12 @@
             </StackPanel>
             <Grid x:Name="CalendarDateNavigationGroup" Grid.Column="2" MinWidth="392" VerticalAlignment="Center" AutomationProperties.Name="年月导航组">
                 <Grid.ColumnDefinitions><ColumnDefinition Width="36" /><ColumnDefinition Width="*" /><ColumnDefinition Width="36" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="‹" Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" />
+                <Button Grid.Column="0"  Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding PreviousCommand}" AutomationProperties.Name="上一个周期" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Back}"/></Button>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0">
-                    <TextBlock Text="{Binding DisplayYear}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" MinWidth="76" TextAlignment="Center" />
-                    <TextBlock Text="{Binding DisplayMonth}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0" MinWidth="48" TextAlignment="Center" />
+                    <TextBlock Text="{Binding DisplayYear}" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" VerticalAlignment="Center" MinWidth="76" TextAlignment="Center" />
+                    <TextBlock Text="{Binding DisplayMonth}" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="16,0,0,0" MinWidth="48" TextAlignment="Center" />
                 </StackPanel>
-                <Button Grid.Column="2" Content="›" Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" />
+                <Button Grid.Column="2"  Style="{StaticResource SecondaryButton}" Width="36" Padding="0" Command="{Binding NextCommand}" AutomationProperties.Name="下一个周期" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Forward}"/></Button>
                 <Button Grid.Column="3" Content="今天" Style="{StaticResource SecondaryButton}" Margin="12,0,0,0" Command="{Binding TodayCommand}" AutomationProperties.Name="回到今天" AutomationProperties.HelpText="今日；快捷键 Ctrl+T" />
             </Grid>
             <StackPanel x:Name="CalendarFilterSearchGroup" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" AutomationProperties.Name="日历筛选与搜索组">
@@ -72,7 +72,7 @@
         </Border>
 
         <Expander Grid.Row="2" Header="四态工作流图例" IsExpanded="True" Margin="0,0,0,12" AutomationProperties.Name="四态工作流图例" AutomationProperties.HelpText="可折叠状态图例">
-            <Border Style="{StaticResource PanelBorder}" Padding="10,7">
+            <Border Style="{StaticResource PixelTart.SectionSurface}" Padding="10,7">
             <WrapPanel VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusFreeBrush}" VerticalAlignment="Center" /><TextBlock Text="空闲" Margin="4,0,0,0" /></StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0"><Ellipse Width="8" Height="8" Fill="{DynamicResource CalendarStatusScheduledBrush}" VerticalAlignment="Center" /><TextBlock Text="有拍摄" Margin="4,0,0,0" /></StackPanel>
@@ -84,24 +84,24 @@
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions><ColumnDefinition Width="60*" MinWidth="520" /><ColumnDefinition Width="8" /><ColumnDefinition Width="40*" MinWidth="320" /></Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Style="{StaticResource PanelBorder}" Padding="0" ClipToBounds="True">
+            <Border Grid.Column="0" Style="{StaticResource PixelTart.SectionSurface}" Padding="0" ClipToBounds="True">
                 <Grid>
                     <views:MonthCalendarView DataContext="{Binding Month}" Visibility="{Binding DataContext.IsMonthView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <views:WeekCalendarView DataContext="{Binding Week}" Visibility="{Binding DataContext.IsWeekView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <views:DayCalendarView DataContext="{Binding Day}" Visibility="{Binding DataContext.IsDayView, RelativeSource={RelativeSource AncestorType={x:Type views:WorkCalendarView}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <Grid Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="8" Visibility="{Binding IsListPresentation, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
-                        <TextBlock Text="当前周期拍摄列表" FontSize="16" FontWeight="SemiBold" Margin="16,14" />
+                        <TextBlock Text="当前周期拍摄列表" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" Margin="16,14" />
                         <ListBox Grid.Row="1" ItemsSource="{Binding CurrentDisplayItems}" BorderThickness="0" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto"><ListBox.ItemTemplate><DataTemplate>
                             <Button Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"><Grid Margin="8"><Grid.ColumnDefinitions><ColumnDefinition Width="150" /><ColumnDefinition Width="2*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="100" /></Grid.ColumnDefinitions><TextBlock Text="{Binding StartText}" /><StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" FontWeight="SemiBold" /><TextBlock Text="{Binding ClientDisplayName}" Style="{StaticResource CaptionText}" /></StackPanel><TextBlock Grid.Column="2" Text="{Binding Location}" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="3" Text="{Binding StatusText}" /></Grid></Button>
                         </DataTemplate></ListBox.ItemTemplate></ListBox>
                     </Grid>
                     <Grid Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="8" Visibility="{Binding IsOverviewPresentation, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <StackPanel Margin="22"><TextBlock Text="当前周期总览" FontSize="20" FontWeight="SemiBold" /><UniformGrid Columns="2" Margin="0,18,0,0"><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,8"><StackPanel><TextBlock Text="{Binding UnshotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="进行中" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,0,8"><StackPanel><TextBlock Text="{Binding ShotCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="待确认" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}" Margin="0,0,8,0"><StackPanel><TextBlock Text="{Binding AwaitingReturnCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="后期待处理" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource DashboardPanelCard}"><StackPanel><TextBlock Text="{Binding DeliveredCount}" FontSize="30" FontWeight="SemiBold" /><TextBlock Text="已完成" Style="{StaticResource CaptionText}" /></StackPanel></Border></UniformGrid></StackPanel>
+                        <StackPanel Margin="22"><TextBlock Text="当前周期总览" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" /><UniformGrid Columns="2" Margin="0,18,0,0"><Border Style="{StaticResource PixelTart.StatusStrip.Item}" Margin="0,0,8,8"><StackPanel><TextBlock Text="{Binding UnshotCount}" FontSize="{DynamicResource Type.Metric.FontSize}" FontWeight="SemiBold" /><TextBlock Text="进行中" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource PixelTart.StatusStrip.Item}" Margin="0,0,0,8"><StackPanel><TextBlock Text="{Binding ShotCount}" FontSize="{DynamicResource Type.Metric.FontSize}" FontWeight="SemiBold" /><TextBlock Text="待确认" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource PixelTart.StatusStrip.Item}" Margin="0,0,8,0"><StackPanel><TextBlock Text="{Binding AwaitingReturnCount}" FontSize="{DynamicResource Type.Metric.FontSize}" FontWeight="SemiBold" /><TextBlock Text="后期待处理" Style="{StaticResource CaptionText}" /></StackPanel></Border><Border Style="{StaticResource PixelTart.StatusStrip.Item}"><StackPanel><TextBlock Text="{Binding DeliveredCount}" FontSize="{DynamicResource Type.Metric.FontSize}" FontWeight="SemiBold" /><TextBlock Text="已完成" Style="{StaticResource CaptionText}" /></StackPanel></Border></UniformGrid></StackPanel>
                     </Grid>
                     <Grid Visibility="{Binding IsGlobalSearch, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="10">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                        <TextBlock Text="全部未归档排期（每页50条）" FontSize="16" FontWeight="SemiBold" Margin="16,14" />
+                        <TextBlock Text="全部未归档排期（每页50条）" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" Margin="16,14" />
                         <ListBox Grid.Row="1" ItemsSource="{Binding GlobalSearchDisplayItems}" BorderThickness="0" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListBox.ItemTemplate><DataTemplate><Button Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" AutomationProperties.Name="{Binding Title}"><Grid Margin="6"><Grid.ColumnDefinitions><ColumnDefinition Width="170" /><ColumnDefinition Width="2*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="120" /></Grid.ColumnDefinitions><TextBlock Text="{Binding StartText}" /><StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding ClientDisplayName}" Style="{StaticResource CaptionText}" /></StackPanel><TextBlock Grid.Column="2" Text="{Binding Location}" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="3" Text="{Binding StatusText}" /></Grid></Button></DataTemplate></ListBox.ItemTemplate>
                         </ListBox>
@@ -124,5 +124,5 @@
             <TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" />
             <ProgressBar IsIndeterminate="True" Width="120" Height="3" HorizontalAlignment="Right" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
-    </Grid>
+    </Grid></ScrollViewer>
 </UserControl>

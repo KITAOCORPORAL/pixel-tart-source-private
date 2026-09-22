@@ -21,11 +21,11 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-            <TextBlock Text="工作日历" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" />
+            <TextBlock Text="工作日历" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" VerticalAlignment="Center" />
             <Button Grid.Column="1" Content="打开完整日历" Style="{StaticResource GhostButton}" Margin="8,0,8,0" Padding="5,2" HorizontalAlignment="Left"
                     MinHeight="26" Click="OpenFullCalendar_Click" AutomationProperties.Name="打开完整工作日历" />
-            <Button Grid.Column="2" Content="＋" Style="{StaticResource PrimaryButton}" Width="32" Height="30" Padding="0"
-                    Command="{Binding NewBookingCommand}" ToolTip="新建拍摄排期" AutomationProperties.Name="新建拍摄排期" />
+            <Button Grid.Column="2"  Style="{StaticResource PrimaryButton}" Width="32" Height="30" Padding="0"
+                    Command="{Binding NewBookingCommand}" ToolTip="新建拍摄排期" AutomationProperties.Name="新建拍摄排期" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Add}"/></Button>
         </Grid>
         <WrapPanel Grid.Row="1" Margin="0,7,0,2">
             <StackPanel Orientation="Horizontal" Margin="0,0,10,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusFreeBrush}" VerticalAlignment="Center" /><TextBlock Text="空闲" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
@@ -34,9 +34,9 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,2"><Ellipse Width="7" Height="7" Fill="{DynamicResource CalendarStatusDeliveredBrush}" VerticalAlignment="Center" /><TextBlock Text="已返图" Style="{StaticResource CaptionText}" Margin="4,0,0,0" /></StackPanel>
         </WrapPanel>
         <Grid Grid.Row="2" Margin="0,2,0,2">
-            <Button x:Name="PreviousMonthButton" Content="‹" Style="{StaticResource GhostButton}" Width="30" Height="30" MinWidth="30" MinHeight="30" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding PreviousCommand}" AutomationProperties.Name="上个月" />
+            <Button x:Name="PreviousMonthButton"  Style="{StaticResource GhostButton}" Width="30" Height="30" MinWidth="30" MinHeight="30" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding PreviousCommand}" AutomationProperties.Name="上个月" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Back}"/></Button>
             <Button Content="{Binding DisplayPeriod}" Style="{StaticResource GhostButton}" HorizontalAlignment="Center" Command="{Binding TodayCommand}" ToolTip="返回今天" AutomationProperties.Name="返回今天" />
-            <Button x:Name="NextMonthButton" Content="›" Style="{StaticResource GhostButton}" Width="30" Height="30" MinWidth="30" MinHeight="30" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding NextCommand}" AutomationProperties.Name="下个月" />
+            <Button x:Name="NextMonthButton"  Style="{StaticResource GhostButton}" Width="30" Height="30" MinWidth="30" MinHeight="30" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding NextCommand}" AutomationProperties.Name="下个月" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Forward}"/></Button>
         </Grid>
         <UniformGrid Grid.Row="3" Columns="7" VerticalAlignment="Center">
             <TextBlock Text="一" HorizontalAlignment="Center" Style="{StaticResource CaptionText}" /><TextBlock Text="二" HorizontalAlignment="Center" Style="{StaticResource CaptionText}" />
@@ -74,7 +74,7 @@
                                     <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.Delivered}"><Setter Property="Background" Value="{DynamicResource CalendarStatusDeliveredBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource CalendarStatusDeliveredForegroundBrush}" /></DataTrigger>
                                     <DataTrigger Binding="{Binding IsToday}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource CalendarTodayOutlineBrush}" /></DataTrigger>
                                 </Style.Triggers></Style></Border.Style>
-                                <TextBlock x:Name="DayNumberText" Text="{Binding DayNumber}" FontSize="12" FontWeight="SemiBold" LineHeight="16" LineStackingStrategy="BlockLineHeight" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock x:Name="DayNumberText" Text="{Binding DayNumber}" FontSize="{DynamicResource Type.Caption.FontSize}" FontWeight="SemiBold" LineHeight="16" LineStackingStrategy="BlockLineHeight" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusFreeForegroundBrush}" /><Style.Triggers>
                                         <DataTrigger Binding="{Binding HasBookings}" Value="True"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusScheduledForegroundBrush}" /></DataTrigger>
                                         <DataTrigger Binding="{Binding PrimaryWorkflowStatus}" Value="{x:Static models:CalendarWorkflowStatus.PendingDelivery}"><Setter Property="Foreground" Value="{DynamicResource CalendarStatusPendingDeliveryForegroundBrush}" /></DataTrigger>
@@ -83,10 +83,10 @@
                                 </TextBlock>
                             </Border>
                             <Border CornerRadius="5" MinWidth="18" Height="18" Padding="3,1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{DynamicResource SurfaceSecondaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" Visibility="{Binding HasMultipleBookings, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <TextBlock Text="{Binding BookingCountBadgeText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="9" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding BookingCountBadgeText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="{DynamicResource Type.Calendar.Badge.FontSize}" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
-                            <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10" />
-                            <TextBlock Text="{Binding WeatherGlyph}" FontSize="9" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                            <TextBlock Text="{Binding ConflictGlyph}" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{DynamicResource Type.Calendar.Compact.FontSize}" />
+                            <TextBlock Text="{Binding WeatherGlyph}" FontSize="{DynamicResource Type.Calendar.Badge.FontSize}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                             <Path Width="10" Height="10" Stretch="Uniform" Stroke="{DynamicResource WarningBrush}" StrokeThickness="1.5" HorizontalAlignment="Right" VerticalAlignment="Top" Data="M5,10 L5,7 C5,3 11,3 11,7 L11,10 M3,10 L13,10 13,17 3,17 Z" Visibility="{Binding IsClosed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </Grid>
                     </Border>
@@ -95,14 +95,14 @@
         </ItemsControl>
         <Grid x:Name="DayDetailsHeader" Grid.Row="5" Margin="0,16,0,4">
             <TextBlock Text="{Binding DaySchedule.Title}" FontWeight="SemiBold" VerticalAlignment="Center" />
-            <Button Content="＋ 新建拍摄" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="5,2" MinHeight="26" Command="{Binding NewBookingCommand}" AutomationProperties.Name="为选中日期新建拍摄排期" />
+            <Button Content="新建拍摄" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Padding="5,2" MinHeight="26" Command="{Binding NewBookingCommand}" AutomationProperties.Name="为选中日期新建拍摄排期" />
         </Grid>
         <Grid Grid.Row="6">
             <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <TextBlock Text="当天暂无排期，双击日期或点击“新建拍摄”。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DaySchedule.Bookings.Count, Converter={StaticResource ZeroIntToVisibilityConverter}}" />
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><ItemsControl ItemsSource="{Binding DaySchedule.VisibleBookings}"><ItemsControl.ItemTemplate><DataTemplate>
                 <Button Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Padding="7,5" Margin="0,0,0,3" Command="{Binding DataContext.DaySchedule.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" AutomationProperties.Name="{Binding AccessibilityName}">
-                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="52" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="{Binding TimeText}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="11" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="2" Text="{Binding StatusGlyph}" Margin="4,0,0,0" /></Grid>
+                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="52" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="{Binding TimeText}" FontSize="{DynamicResource Type.Micro.FontSize}" Foreground="{DynamicResource TextSecondaryBrush}" /><TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="{DynamicResource Type.Micro.FontSize}" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="2" Text="{Binding StatusGlyph}" Margin="4,0,0,0" /></Grid>
                 </Button>
             </DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
             <Button Grid.Row="1" Content="{Binding DaySchedule.OverflowText}" Style="{StaticResource GhostButton}" Padding="2" HorizontalAlignment="Left" Click="OpenSelectedDayDetails_Click" Visibility="{Binding DaySchedule.OverflowCount, Converter={StaticResource ZeroIntToVisibilityConverter}}" AutomationProperties.Name="查看选中日期的完整排期" />

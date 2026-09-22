@@ -16,10 +16,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Margin="0,0,0,14">
-            <TextBlock Text="{Binding OriginalInput, StringFormat=格式匹配明细：{0}}" Style="{StaticResource SectionTitleText}" FontSize="18" />
+            <TextBlock Text="{Binding OriginalInput, StringFormat=格式匹配明细：{0}}" Style="{StaticResource SectionTitleText}" FontSize="{DynamicResource Type.SectionTitle.FontSize}" />
             <TextBlock x:Name="DetailsExplanation" Text="JPG 质量信息仅用于风险提示和推荐排序，不能单独证明文件是原图；冲突和智能备用均需手动确认。" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0" />
         </StackPanel>
-        <DataGrid x:Name="DetailsGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+        <DataGrid Style="{StaticResource PixelTart.DataGrid}" x:Name="DetailsGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="DetailsGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="类别" Binding="{Binding CategoryText}" Width="70" />

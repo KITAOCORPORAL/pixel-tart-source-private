@@ -1,0 +1,3221 @@
+{
+  "Source": "4c7eaa8fbd870ac2fa67584609fe84deb5e29b28",
+  "Scope": "MainWindow + formal Views (module-owned views retain separate baseline tests)",
+  "RuntimePassClaim": false,
+  "Rows": [
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查询"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看"
+        },
+        {
+          "AutomationName": "{Binding Title, StringFormat=恢复排期 {0}}",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "加载更多"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ArchivedBookingsView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片（可多选）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择独立输出目录"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "停止"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始压缩"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "检查资料状态",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "检查资料状态"
+        },
+        {
+          "AutomationName": "按当前方式添加资料",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding DisplayName, StringFormat=预览资料 {0}}",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "预览"
+        },
+        {
+          "AutomationName": "{Binding DisplayName, StringFormat=打开资料 {0}}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开"
+        },
+        {
+          "AutomationName": "预览上一份资料",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上一份"
+        },
+        {
+          "AutomationName": "预览下一份资料",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下一份"
+        },
+        {
+          "AutomationName": "预览适应窗口",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "适应"
+        },
+        {
+          "AutomationName": "预览百分之百",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "100%"
+        },
+        {
+          "AutomationName": "缩小预览",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "放大预览",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "PDF上一页",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上一页"
+        },
+        {
+          "AutomationName": "PDF下一页",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下一页"
+        },
+        {
+          "AutomationName": "切换文本自动换行",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding PreviewTextWrapLabel}"
+        },
+        {
+          "AutomationName": "添加拍摄资料",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "重试保存文档关联",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重试保存关联"
+        },
+        {
+          "AutomationName": "打开文档复制输出目录",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开输出目录"
+        },
+        {
+          "AutomationName": "安全撤销本次文档复制",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "安全撤销本次复制"
+        },
+        {
+          "AutomationName": "保留文件但放弃文档关联",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保留文件但放弃关联"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 2,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "Menu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 6,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 4,
+      "LegacyBorderReferencesBefore": 4,
+      "File": "src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "刷新排期提醒",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "刷新"
+        },
+        {
+          "AutomationName": "保存排期提醒",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding SaveButtonText}"
+        },
+        {
+          "AutomationName": "取消编辑提醒",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消编辑"
+        },
+        {
+          "AutomationName": "编辑提醒",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "编辑"
+        },
+        {
+          "AutomationName": "切换提醒状态",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "启用/关闭"
+        },
+        {
+          "AutomationName": "移除提醒记录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 1,
+      "File": "src/RAWSelectionAssistant/Views/BookingRemindersPanel.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "重试当前位置",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重试当前位置"
+        },
+        {
+          "AutomationName": "打开Windows位置隐私设置",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开位置设置"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "搜索地点"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "确认地点"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "手动刷新"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 3,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 1,
+      "File": "src/RAWSelectionAssistant/Views/BookingWeatherPanel.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "在文件资源管理器中显示"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "确认选择"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/CandidateSelectionWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "客户收藏按钮",
+          "Style": "Implicit dark RoundedButtonTemplate",
+          "Classification": "Studio-compatible",
+          "Label": "客户收藏"
+        },
+        {
+          "AutomationName": "清空客户备注",
+          "Style": "Implicit dark RoundedButtonTemplate",
+          "Classification": "Studio-compatible",
+          "Label": "清空"
+        },
+        {
+          "AutomationName": "保存客户备注",
+          "Style": "Implicit dark RoundedButtonTemplate",
+          "Classification": "Studio-compatible",
+          "Label": "保存备注"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ClientMonitorWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Secondary}",
+          "Classification": "Studio-compatible",
+          "Label": "导入照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "适合窗口"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Primary}",
+          "Classification": "Studio-compatible",
+          "Label": "导出"
+        },
+        {
+          "AutomationName": "更多拼图操作",
+          "Style": "{StaticResource PixelTart.Button.Icon}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "向左交换"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "向右交换"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "替换"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "旋转 90°"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "水平翻转"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "垂直翻转"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重置"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "删除"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 4,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "ContextMenu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 4,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 3,
+      "File": "src/RAWSelectionAssistant/Views/CollageView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding Label, StringFormat=在 {0} 新建排期}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding Label}"
+        },
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/DayCalendarView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding OverflowText}"
+        },
+        {
+          "AutomationName": "创建当天拍摄任务",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 2,
+      "LegacyBorderReferencesBefore": 2,
+      "File": "src/RAWSelectionAssistant/Views/DaySchedulePanel.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "仅关联原位置",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "仅关联原位置（默认）"
+        },
+        {
+          "AutomationName": "复制到项目资料目录并关联",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制到项目资料目录并关联"
+        },
+        {
+          "AutomationName": "取消添加文档",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 1,
+      "File": "src/RAWSelectionAssistant/Views/DocumentDropChoiceWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "复制邮箱",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制邮箱"
+        },
+        {
+          "AutomationName": "关闭反馈窗口",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭"
+        },
+        {
+          "AutomationName": "撰写反馈邮件",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "撰写邮件"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 1,
+      "File": "src/RAWSelectionAssistant/Views/FeedbackDialog.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "新建收入",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建收入"
+        },
+        {
+          "AutomationName": "新建支出",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建支出"
+        },
+        {
+          "AutomationName": "主动导出筛选后的收支CSV",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出 CSV"
+        },
+        {
+          "AutomationName": "上个月",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "返回本月",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "今天"
+        },
+        {
+          "AutomationName": "下个月",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建收入"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建支出"
+        },
+        {
+          "AutomationName": "编辑所选收支记录",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "编辑"
+        },
+        {
+          "AutomationName": "复制所选收支记录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制"
+        },
+        {
+          "AutomationName": "删除所选收支记录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "删除"
+        },
+        {
+          "AutomationName": "添加收支附件引用",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加附件"
+        },
+        {
+          "AutomationName": "移除收支附件引用",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除引用"
+        },
+        {
+          "AutomationName": "保存收支记录",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存"
+        },
+        {
+          "AutomationName": "取消编辑收支记录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 12,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 10,
+      "File": "src/RAWSelectionAssistant/Views/FinanceView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新查看完整教程"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重置教程演示数据"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "删除教程演示数据"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/HelpWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "在文件资源管理器中显示"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "设为所选格式文件"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/MediaDetailsWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "Inline based on {StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 2,
+          "Type": "ContextMenu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 13,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/MonthCalendarView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "创建选片项目",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "创建选片项目"
+        },
+        {
+          "AutomationName": "刷新在线选片项目",
+          "Style": "{StaticResource Av2GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "刷新"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding Label}"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "发布项目"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "同步归片工作区"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出 TXT（准备中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出 CSV（准备中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "创建并导入照片",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "创建并导入照片"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加文件夹"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "更新分组"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建组"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "合并"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "拆分"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "排序"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移动所选到当前组"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "设为封面"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "预览整理结果"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始整理"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "排除所选照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "撤销移动整理"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出 CSV / JSON / TXT 报告"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "停止"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 3,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "Menu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 3,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 4,
+      "File": "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "新建策划",
+          "Style": "{StaticResource Av2IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "关联档期",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关联档期"
+        },
+        {
+          "AutomationName": "预览策划案",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "预览"
+        },
+        {
+          "AutomationName": "导出策划案 PDF",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出"
+        },
+        {
+          "AutomationName": "更多策划操作",
+          "Style": "{StaticResource Av2IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "关闭参考大图",
+          "Style": "{StaticResource Av2IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "图片水印"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "文字水印"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复原色"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上一张"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下一张"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "刷新预览"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加成片文件夹"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择输出目录"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存当前预设"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始发布"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 2,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 1,
+      "LegacyBorderReferencesBefore": 6,
+      "File": "src/RAWSelectionAssistant/Views/PublishingExportView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "保存并继续完整拍摄策划",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding ContinuePlanningText}"
+        },
+        {
+          "AutomationName": "创建或保存拍摄",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding QuickPrimarySaveText}"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 2,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/QuickBookingEditorView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复默认"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 2,
+      "LegacyBorderReferencesBefore": 2,
+      "File": "src/RAWSelectionAssistant/Views/QuickToolsManagerWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加 RAW（可多选）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择输出目录"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "停止"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource Av2PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始转换"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/RawToJpegModal.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ReferenceAdjustmentSaveDialog.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "专注看图"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "上下文"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复已保存方案"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新生成纹理"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存为色彩方案"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出 3D LUT（65³）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "生成高质量预览"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重试"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "↑"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "↓"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "移除"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Secondary}",
+          "Classification": "Studio-compatible",
+          "Label": "添加参考图片 / 色彩方案"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.Button.Ghost}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding Label}"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "从本地导入参考图"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "稍后查看提醒",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "稍后查看"
+        },
+        {
+          "AutomationName": "确认拍摄提醒",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "知道了"
+        },
+        {
+          "AutomationName": "打开提醒对应排期",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开排期"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ReminderNotificationHost.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看全部素材"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看项目素材"
+        },
+        {
+          "AutomationName": "切换金额显示",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding AmountVisibilityText}"
+        },
+        {
+          "AutomationName": "查看当前排期收支",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看收支"
+        },
+        {
+          "AutomationName": "为当前排期添加收入",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "为当前排期添加支出",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "归档排期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "归档"
+        },
+        {
+          "AutomationName": "标记拍摄完成",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "标记拍摄完成"
+        },
+        {
+          "AutomationName": "快速编辑排期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "快速编辑"
+        },
+        {
+          "AutomationName": "打开完整拍摄策划",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "完整拍摄策划"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 5,
+      "LegacyBorderReferencesBefore": 5,
+      "File": "src/RAWSelectionAssistant/Views/ShootBookingDetailsView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "打开冲突排期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开冲突排期"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "返回修改"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "仍然保存"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "标记允许重叠并保存"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "上移工作人员",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "下移工作人员",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上一步"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下一步"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存草稿"
+        },
+        {
+          "AutomationName": "创建或保存排期",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding PrimarySaveText}"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 5,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 2,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 5,
+      "LegacyBorderReferencesBefore": 5,
+      "File": "src/RAWSelectionAssistant/Views/ShootBookingEditorView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "添加准备项",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "准备项上移",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "准备项下移",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "移除准备项",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ShootRequirementsPanel.xaml"
+    },
+    {
+      "Buttons": [],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ShotReferenceWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "{Binding AutomationName, ElementName=Root}",
+          "Style": "Inline based on {StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml"
+    },
+    {
+      "Buttons": [],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/SurfaceHeader.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "刷新RGB直方图",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "刷新"
+        },
+        {
+          "AutomationName": "影调分区零",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "0"
+        },
+        {
+          "AutomationName": "影调分区一",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "I"
+        },
+        {
+          "AutomationName": "影调分区二",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "II"
+        },
+        {
+          "AutomationName": "影调分区三",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "III"
+        },
+        {
+          "AutomationName": "影调分区四",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "IV"
+        },
+        {
+          "AutomationName": "影调分区五",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "V"
+        },
+        {
+          "AutomationName": "影调分区六",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "VI"
+        },
+        {
+          "AutomationName": "影调分区七",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "VII"
+        },
+        {
+          "AutomationName": "影调分区八",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "VIII"
+        },
+        {
+          "AutomationName": "影调分区九",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "IX"
+        },
+        {
+          "AutomationName": "影调分区十",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "X"
+        },
+        {
+          "AutomationName": "打开参考来源选择器",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择参考来源"
+        },
+        {
+          "AutomationName": "导入外部参考图",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导入本地参考图"
+        },
+        {
+          "AutomationName": "上移参考",
+          "Style": "{StaticResource IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "下移参考",
+          "Style": "{StaticResource IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "移除参考引用",
+          "Style": "{StaticResource IconButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "执行参考仿色",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "参考仿色"
+        },
+        {
+          "AutomationName": "打开完整参考仿色",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开完整参考仿色"
+        },
+        {
+          "AutomationName": "重新读取项目色彩方案",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新读取色彩方案"
+        },
+        {
+          "AutomationName": "恢复色彩方案",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复色彩方案"
+        },
+        {
+          "AutomationName": "保存当前调整为色彩方案",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存当前调整为色彩方案"
+        },
+        {
+          "AutomationName": "返回当前项目策划",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "返回策划"
+        },
+        {
+          "AutomationName": "上一个拍摄段落",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "下一个拍摄段落",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "查看灯位参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "灯位"
+        },
+        {
+          "AutomationName": "查看姿势参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "姿势"
+        },
+        {
+          "AutomationName": "查看分镜参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "分镜"
+        },
+        {
+          "AutomationName": "查看造型参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "造型"
+        },
+        {
+          "AutomationName": "快速预览拍摄参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "预览"
+        },
+        {
+          "AutomationName": "标记姿势已拍",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "已拍"
+        },
+        {
+          "AutomationName": "固定或取消参考",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "固定"
+        },
+        {
+          "AutomationName": "打开第二屏拍摄参考窗口",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开拍摄参考窗口"
+        },
+        {
+          "AutomationName": "明确启动或恢复看守",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding StartButtonText}"
+        },
+        {
+          "AutomationName": "停止看守文件夹会话",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "停止"
+        },
+        {
+          "AutomationName": "重新核对看守文件夹顶层",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "顶层核对"
+        },
+        {
+          "AutomationName": "显示或隐藏完整路径",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "显示 / 隐藏完整路径"
+        },
+        {
+          "AutomationName": "开始并排比较",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "并排比较"
+        },
+        {
+          "AutomationName": "开始重叠比较",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重叠比较"
+        },
+        {
+          "AutomationName": "退出照片比较",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "退出比较"
+        },
+        {
+          "AutomationName": "选择参考图",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择参考图"
+        },
+        {
+          "AutomationName": "重新定位参考图",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新定位"
+        },
+        {
+          "AutomationName": "清除参考图引用",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "清除引用"
+        },
+        {
+          "AutomationName": "清除星级",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "0"
+        },
+        {
+          "AutomationName": "设置一星",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "★1"
+        },
+        {
+          "AutomationName": "设置二星",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "★2"
+        },
+        {
+          "AutomationName": "设置三星",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "★3"
+        },
+        {
+          "AutomationName": "设置四星",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "★4"
+        },
+        {
+          "AutomationName": "设置五星",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "★5"
+        },
+        {
+          "AutomationName": "保存颜色标签",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存颜色标签"
+        },
+        {
+          "AutomationName": "保存联机照片备注",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存备注"
+        },
+        {
+          "AutomationName": "切换客户收藏",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "客户收藏"
+        },
+        {
+          "AutomationName": "切换快速拒绝标记",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "快速拒绝 / 取消"
+        },
+        {
+          "AutomationName": "导入Cube LUT",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导入 .cube"
+        },
+        {
+          "AutomationName": "切换LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding ColorSettings.LutToggleText}"
+        },
+        {
+          "AutomationName": "查看LUT前后对比",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding ColorSettings.BeforeAfterText}"
+        },
+        {
+          "AutomationName": "LUT分屏对比",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding ColorSettings.SplitViewText}"
+        },
+        {
+          "AutomationName": "收藏或取消收藏LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "收藏LUT"
+        },
+        {
+          "AutomationName": "设为当前会话默认LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "会话默认"
+        },
+        {
+          "AutomationName": "设为当前项目默认LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "项目默认"
+        },
+        {
+          "AutomationName": "打开LUT所在位置",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开所在位置"
+        },
+        {
+          "AutomationName": "重新验证LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新验证"
+        },
+        {
+          "AutomationName": "重新定位LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新定位"
+        },
+        {
+          "AutomationName": "移除LUT引用",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移除引用"
+        },
+        {
+          "AutomationName": "开启客户监看窗口",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开启客户监看"
+        },
+        {
+          "AutomationName": "关闭客户监看窗口",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭客户监看"
+        },
+        {
+          "AutomationName": "选择看守文件夹目录",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择目录"
+        },
+        {
+          "AutomationName": "预览已有文件数量",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "预览数量"
+        },
+        {
+          "AutomationName": "选择项目复制目标目录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "选择备份复制目标目录",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "选择下一张拍摄目标文件夹",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "显示或隐藏照片浏览器",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "照片浏览器"
+        },
+        {
+          "AutomationName": "锁定或解锁当前照片",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding LockButtonText}"
+        },
+        {
+          "AutomationName": "切换LUT",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "LUT"
+        },
+        {
+          "AutomationName": "开启客户监看窗口",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "客户监看"
+        },
+        {
+          "AutomationName": "显示或隐藏现场监看检查器",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "检查器"
+        },
+        {
+          "AutomationName": "打开任务中心",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "任务中心"
+        },
+        {
+          "AutomationName": "更多联机监看工具",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "更多 ▾"
+        },
+        {
+          "AutomationName": "全屏监看",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding FullScreenButtonText}"
+        },
+        {
+          "AutomationName": "返回当前项目策划",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "返回策划"
+        },
+        {
+          "AutomationName": "选择看守文件夹",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择看守文件夹"
+        },
+        {
+          "AutomationName": "开始联机会话",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始联机会话"
+        },
+        {
+          "AutomationName": "将照片加入比较",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "加入比较"
+        },
+        {
+          "AutomationName": "上一张联机照片",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上一张"
+        },
+        {
+          "AutomationName": "下一张联机照片",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下一张"
+        },
+        {
+          "AutomationName": "适合窗口查看",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "适合窗口"
+        },
+        {
+          "AutomationName": "填满窗口查看",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "填满窗口"
+        },
+        {
+          "AutomationName": "百分之百查看",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "100%"
+        },
+        {
+          "AutomationName": "重置监看视图",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重置视图"
+        },
+        {
+          "AutomationName": "选择看守文件夹",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择看守文件夹"
+        },
+        {
+          "AutomationName": "开始联机会话",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始联机会话"
+        },
+        {
+          "AutomationName": "关闭拍摄参考快速预览",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭"
+        },
+        {
+          "AutomationName": "关闭现场监看检查器",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭检查器"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 12,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "ContextMenu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 4,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 6,
+      "LegacyBorderReferencesBefore": 6,
+      "File": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制错误摘要"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开日志位置"
+        },
+        {
+          "AutomationName": "取消",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消"
+        },
+        {
+          "AutomationName": "确定",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "确定"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/ThemedMessageDialog.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "稍后在帮助中查看"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "立即体验教程"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "{Binding Header}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding Header}"
+        },
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding Label, StringFormat=在 {0} 新建排期}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding Label}"
+        },
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/WeekCalendarView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "打开完整工作日历",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开完整日历"
+        },
+        {
+          "AutomationName": "新建拍摄排期",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "上个月",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "返回今天",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding DisplayPeriod}"
+        },
+        {
+          "AutomationName": "下个月",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "为选中日期新建拍摄排期",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建拍摄"
+        },
+        {
+          "AutomationName": "{Binding AccessibilityName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "查看选中日期的完整排期",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding DaySchedule.OverflowText}"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 1,
+          "Type": "ContextMenu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 2,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml"
+    },
+    {
+      "Buttons": [],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 0,
+      "File": "src/RAWSelectionAssistant/Views/WorkbenchCalendarSummaryView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "查看今日拍摄",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding TodayCountText}"
+        },
+        {
+          "AutomationName": "查看未来七天拍摄",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding FutureCountText}"
+        },
+        {
+          "AutomationName": "打开工作日历查看全部排期",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看全部"
+        },
+        {
+          "AutomationName": "刷新近期拍摄",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "刷新"
+        },
+        {
+          "AutomationName": "{Binding Title}",
+          "Style": "{StaticResource ToolEntryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "从空状态打开工作日历",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开工作日历"
+        },
+        {
+          "AutomationName": "{Binding Title}",
+          "Style": "{StaticResource ToolEntryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 1,
+      "File": "src/RAWSelectionAssistant/Views/WorkbenchScheduleView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "查看已归档排期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "已归档"
+        },
+        {
+          "AutomationName": "新建拍摄排期",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建排期"
+        },
+        {
+          "AutomationName": "上一个周期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "下一个周期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "回到今天",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "今天"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "月"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "周"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "日"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding Title}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "加载更多未归档排期",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "加载更多"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 6,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "DatePicker",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 0,
+      "LegacyBorderReferencesBefore": 7,
+      "File": "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml"
+    },
+    {
+      "Buttons": [
+        {
+          "AutomationName": "工作台",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "工作台"
+        },
+        {
+          "AutomationName": "素材库",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "素材库"
+        },
+        {
+          "AutomationName": "归片工作区",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "归片工作区"
+        },
+        {
+          "AutomationName": "工作日历",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "工作日历"
+        },
+        {
+          "AutomationName": "策划中心",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "策划中心"
+        },
+        {
+          "AutomationName": "联机拍摄",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "联机拍摄"
+        },
+        {
+          "AutomationName": "在线选片",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "在线选片"
+        },
+        {
+          "AutomationName": "摄影收支",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "摄影收支"
+        },
+        {
+          "AutomationName": "项目历史",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "项目历史"
+        },
+        {
+          "AutomationName": "{Binding ToolboxEntry.DisplayName}",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding ToolboxEntry.DisplayName}"
+        },
+        {
+          "AutomationName": "授权与版本",
+          "Style": "{StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "授权与版本"
+        },
+        {
+          "AutomationName": "设置",
+          "Style": "{StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "设置"
+        },
+        {
+          "AutomationName": "帮助",
+          "Style": "{StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": "帮助"
+        },
+        {
+          "AutomationName": "查看授权与版本",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "升级"
+        },
+        {
+          "AutomationName": "",
+          "Style": "Inline based on {StaticResource SidebarNavButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.WorkflowStep}",
+          "Classification": "Studio-compatible",
+          "Label": "1  来源与索引"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.WorkflowStep}",
+          "Classification": "Studio-compatible",
+          "Label": "2  导入选片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.WorkflowStep}",
+          "Classification": "Studio-compatible",
+          "Label": "3  匹配检查"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PixelTart.WorkflowStep}",
+          "Classification": "Studio-compatible",
+          "Label": "4  输出交付"
+        },
+        {
+          "AutomationName": "添加照片来源目录",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加"
+        },
+        {
+          "AutomationName": "删除来源目录",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "删除"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "清空"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上移"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "下移"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "扫描照片文件"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "粘贴编号"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "解析编号"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "清空选片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始匹配"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制已匹配文件"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出报告"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开输出文件夹"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存项目"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "取消当前任务"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "清空任务"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择照片来源"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导入 TXT / JPG"
+        },
+        {
+          "AutomationName": "查看匹配明细",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看明细"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看完整明细"
+        },
+        {
+          "AutomationName": "开始本地分片",
+          "Style": "{StaticResource LocalSplitHeroButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "本地分片说明",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "?"
+        },
+        {
+          "AutomationName": "{Binding DisplayName}",
+          "Style": "{StaticResource QuickActionButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "更多快捷工具",
+          "Style": "{StaticResource QuickActionButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding DisplayName}",
+          "Style": "{StaticResource ToolEntryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding ToolboxEntry.DisplayName}",
+          "Style": "{StaticResource QuickActionButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding DisplayName}",
+          "Style": "{StaticResource ToolEntryButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding PinAutomationName}",
+          "Style": "Inline based on {StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "管理快捷工具",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "管理快捷工具"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看全部"
+        },
+        {
+          "AutomationName": "查看任务历史",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看全部"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "最近项目"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "本地分片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "归片项目"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "已完成"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看全部"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "继续处理"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "创建本地分片任务"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "新建任务"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看任务历史"
+        },
+        {
+          "AutomationName": "重试失败项",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重试失败项"
+        },
+        {
+          "AutomationName": "查看任务详细信息",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看详细信息"
+        },
+        {
+          "AutomationName": "暂停任务",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "暂停"
+        },
+        {
+          "AutomationName": "继续任务",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "继续"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制诊断"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看详细信息"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开任务历史"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "任务中心"
+        },
+        {
+          "AutomationName": "{Binding DisplayName}",
+          "Style": "Inline based on {StaticResource ToolCatalogCard}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "{Binding PinAutomationName}",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": ""
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加来源并扫描"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导入 TXT / JPG"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开归片工作区"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "粘贴编号"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "解析编号"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "进入归片工作区"
+        },
+        {
+          "AutomationName": "添加水印预览照片",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "批量水印导出",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "导出功能开发中"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加照片"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "移到回收站（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "批量删除（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "选择"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "测试连接（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "上传（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "批量执行（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "添加源文件"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "开始转换（开发中）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "批量处理项目（专业版）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开"
+        },
+        {
+          "AutomationName": "打开项目策划",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "策划"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "激活"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "立即验证"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource DangerButton}",
+          "Classification": "Studio-compatible",
+          "Label": "停用本机授权"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开购买页面"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "恢复默认外观"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "保存当前输出预设（专业版）"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开帮助与教程"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "建议与问题反馈"
+        },
+        {
+          "AutomationName": "复制输入诊断编号",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "复制输入诊断编号"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开日志文件夹"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "打开工具箱"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "查看授权与版本"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "完成"
+        },
+        {
+          "AutomationName": "关闭通知",
+          "Style": "{StaticResource GhostButton}",
+          "Classification": "Studio-compatible",
+          "Label": "关闭"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重试当前步骤"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "重新创建教程数据"
+        },
+        {
+          "AutomationName": "{Binding TutorialPrimaryActionLabel}",
+          "Style": "{StaticResource PrimaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "{Binding TutorialPrimaryActionLabel}"
+        },
+        {
+          "AutomationName": "",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "返回上一步"
+        },
+        {
+          "AutomationName": "退出教程",
+          "Style": "{StaticResource SecondaryButton}",
+          "Classification": "Studio-compatible",
+          "Label": "退出教程"
+        }
+      ],
+      "NumericFontSizeCount": 0,
+      "Popups": [
+        {
+          "Count": 24,
+          "Type": "ComboBox",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "ContextMenu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 3,
+          "Type": "Menu",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 45,
+          "Type": "MenuItem",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        },
+        {
+          "Count": 1,
+          "Type": "ToolTip",
+          "Theme": "Application dark implicit or explicit production resource; runtime review separate"
+        }
+      ],
+      "LegacyBorderReferencesAfter": 4,
+      "LegacyBorderReferencesBefore": 44,
+      "File": "src/RAWSelectionAssistant/MainWindow.xaml"
+    }
+  ]
+}

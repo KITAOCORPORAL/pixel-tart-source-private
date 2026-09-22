@@ -213,7 +213,7 @@ internal static class StudioVisualEvidence
     }
     internal static async Task Dpi(Window window,RAWSelectionAssistant.ViewModels.MainViewModel vm,string output) {
         var findings=new List<object>();var captures=new List<object>();int textCount=0;
-        foreach(var route in new[]{"AssetLibrary","Planning","ReferenceColor","Tether"}) {
+        foreach(var route in Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1" ? new[]{"Workbench","Workflow","Finance","WorkCalendar","Publishing","PhotoGrouping","Collage","AssetLibrary","Planning","ReferenceColor","Tether"} : new[]{"AssetLibrary","Planning","ReferenceColor","Tether"}) {
             vm.NavigateCommand.Execute(route);
             if(route=="Planning")vm.PlanningPage!.ContentPage="文字";
             foreach(var (width,height,scale) in new[]{(1920,1080,1d),(1920,1080,1.25),(1920,1080,1.5),(1920,1080,2d),(2560,1440,1d),(3840,2160,1d)}) {
@@ -230,6 +230,9 @@ internal static class StudioVisualEvidence
                 var path=Path.Combine(output,"dpi",route+"-"+width+"x"+height+"-"+(int)(scale*100)+".png");Png(root,path,scale);
                 AssertNoShellCloseCollision(root, route + "/" + width + "x" + height + "/" + (int)(scale * 100), output);
                 AuditGeometry(root, route + "/" + width + "x" + height, scale, output);
+                if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1") StudioGlobalRolloutEvidence.AuditControlText(root, route + "/" + width + "x" + height + "/" + scale, output);
+                if (Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1" && scale == 2)
+                    await StudioGlobalRolloutEvidence.ScrollAndGeometry(root, route + "-200", output);
                 captures.Add(new{Route=route,RequestedPixels=new[]{width,height},LogicalScale=scale,ActualDip=new[]{root.ActualWidth,root.ActualHeight},Filename=Path.GetRelativePath(output,path)});
                 foreach(var text in Walk<TextBlock>(root).Where(t=>t.IsVisible && t.ActualWidth>0 && !string.IsNullOrWhiteSpace(t.Text))) {
                     textCount++;
@@ -240,7 +243,7 @@ internal static class StudioVisualEvidence
                 }
             }
         }
-        File.WriteAllText(Path.Combine(output,"TEXT_OVERFLOW_GEOMETRY_AUDIT.json"),JsonSerializer.Serialize(new{ProductSourceSha=Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA")??"UNFROZEN_WORKTREE",Status=findings.Count==0?"PASS_RECORDED_UNWRAPPED_TEXT":"FAIL",PhysicalDpi="NOT_TESTED",Scope="Four core pages; visible unwrapped non-ellipsized TextBlocks only. Not all popups or control content.",Inspected=textCount,Findings=findings,Captures=captures},new JsonSerializerOptions{WriteIndented=true}));
+        File.WriteAllText(Path.Combine(output,"TEXT_OVERFLOW_GEOMETRY_AUDIT.json"),JsonSerializer.Serialize(new{ProductSourceSha=Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA")??"UNFROZEN_WORKTREE",Status=findings.Count==0?"PASS_RECORDED_UNWRAPPED_TEXT":"FAIL",PhysicalDpi="NOT_TESTED",Scope=Environment.GetEnvironmentVariable("PIXEL_TART_GLOBAL_ROLLOUT") == "1" ? "Eleven routes across six logical sizes. Separate global-control-text inventory includes template-rendered control text; physical DPI not tested." : "Four core pages; visible unwrapped non-ellipsized TextBlocks only.",Inspected=textCount,Findings=findings,Captures=captures},new JsonSerializerOptions{WriteIndented=true}));
         ((FrameworkElement)window.Content).Width=double.NaN;
         ((FrameworkElement)window.Content).Height=double.NaN;
         window.Width=1920;window.Height=1080;

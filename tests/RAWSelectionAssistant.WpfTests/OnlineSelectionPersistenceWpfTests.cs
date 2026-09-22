@@ -85,7 +85,7 @@ public sealed class OnlineSelectionPersistenceWpfTests
         var view = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Views", "OnlineSelectionView.xaml"));
         StringAssert.Contains(view, "Text=\"{Binding StatusText}\"");
         StringAssert.Contains(view, "Source=\"{Binding Thumbnail}\"");
-        StringAssert.Contains(view, "CardSurface");
+        StringAssert.Contains(view, "PixelTart.Panel");
         StringAssert.Contains(view, "Av2PrimaryButton");
         StringAssert.Contains(view, "Spacing12Thickness");
         Assert.IsFalse(view.Contains("FontSize=\"", StringComparison.Ordinal));

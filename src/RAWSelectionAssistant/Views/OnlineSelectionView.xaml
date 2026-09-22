@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:RAWSelectionAssistant.ViewModels"
              xmlns:local="clr-namespace:RAWSelectionAssistant.Views"
+             xmlns:studio="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary"
              AutomationProperties.Name="在线选片">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <local:EnumEqualsVisibilityConverter x:Key="EnumToVisibilityConverter" />
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisibility" />
         <DataTemplate DataType="{x:Type vm:OnlineSelectionAssetViewModel}">
-            <Border Style="{StaticResource CardSurface}" Width="260" Padding="{DynamicResource Spacing12Thickness}" Margin="{DynamicResource CardSpacing}">
+            <Border Style="{StaticResource PixelTart.Panel}" Width="260" Padding="{DynamicResource Spacing12Thickness}" Margin="{DynamicResource CardSpacing}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="156" />
@@ -51,9 +52,9 @@
     <Border Style="{StaticResource WorkspaceSurface}" Margin="{DynamicResource PagePadding}">
     <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
-        <Grid>
+        <local:StudioPageHeader Style="{StaticResource PixelTart.PageHeader}">
             <StackPanel>
-                <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" />
+                <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" /><ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/>
                 <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -61,11 +62,11 @@
                 <Button Content="创建选片项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
                 <Button Content="刷新" Style="{StaticResource Av2GhostButton}" Command="{Binding RefreshCommand}" Margin="{DynamicResource SpacingHorizontal8}" AutomationProperties.Name="刷新在线选片项目" />
             </StackPanel>
-        </Grid>
+        </local:StudioPageHeader>
 
         <Grid Grid.Row="1" Margin="{DynamicResource SpacingVertical24}">
             <Grid.ColumnDefinitions><ColumnDefinition Width="300" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Style="{StaticResource PanelSurface}" Padding="{DynamicResource Spacing16Thickness}">
+            <Border Grid.Column="0" Style="{StaticResource PixelTart.Panel}" Padding="{DynamicResource Spacing16Thickness}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Text="选片项目" Style="{StaticResource SectionTitleText}" Margin="{DynamicResource SpacingVertical12}" />
                     <TextBox DockPanel.Dock="Top" Text="{Binding ProjectSearch,UpdateSourceTrigger=PropertyChanged}" ToolTip="搜索项目或客户" AutomationProperties.Name="搜索选片项目"/>
@@ -94,18 +95,18 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Column="2" Style="{StaticResource PanelSurface}" Padding="{DynamicResource Spacing16Thickness}">
+            <Border Grid.Column="2" Style="{StaticResource PixelTart.Panel}" Padding="{DynamicResource Spacing16Thickness}">
                 <Grid DataContext="{Binding ProjectPage}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Grid>
                         <StackPanel>
                             <TextBlock Text="{Binding Project.Name, TargetNullValue=在线选片项目}" Style="{StaticResource SectionTitleText}" />
-                            <TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
+                            <ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/><TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
                         </StackPanel>
                         <TextBlock Text="{Binding ProjectStatusText}" HorizontalAlignment="Right" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center" />
                     </Grid>
 
-                    <Grid Grid.Row="1" Margin="{DynamicResource SpacingVertical16}">
+                    <local:StudioPageHeader Grid.Row="1" Margin="{DynamicResource SpacingVertical16}">
                         <ItemsControl ItemsSource="{Binding Tabs}">
                             <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
@@ -118,7 +119,7 @@
                             <Button Content="添加照片" Style="{StaticResource Av2SecondaryButton}" Command="{Binding AddAssetsCommand}" />
                             <Button Content="发布项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding PublishCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
                         </StackPanel>
-                    </Grid>
+                    </local:StudioPageHeader>
 
                     <Grid Grid.Row="2">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding SelectedTab, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Photos}">

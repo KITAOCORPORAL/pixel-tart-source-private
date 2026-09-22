@@ -8,6 +8,16 @@ namespace RAWSelectionAssistant.Views;
 
 public partial class CollageView : UserControl
 {
+    private void OpenStudioMoreMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { ContextMenu: { } menu } button)
+        {
+            menu.DataContext = DataContext;
+            menu.PlacementTarget = button;
+            menu.IsOpen = true;
+        }
+    }
+
     private readonly DispatcherTimer _previewTimer;
     private readonly CollageExportService _renderer = new();
     private CollageViewModel? _viewModel;

@@ -57,12 +57,8 @@ public partial class WorkCalendarView : UserControl
         CalendarFilterSearchGroup.HorizontalAlignment = compact ? HorizontalAlignment.Left : HorizontalAlignment.Right;
         CalendarFilterSearchGroup.Margin = compact ? new Thickness(0, 12, 0, 0) : new Thickness(0);
         CalendarDateNavigationGroup.MinWidth = compact ? 360 : 392;
-        SearchBox.Width = width switch
-        {
-            < 1050 => 150,
-            < 1400 => 170,
-            _ => 210
-        };
+        // The placeholder and input share the same Grid width.
+        SearchBox.Width = double.NaN;
     }
 
     private void ViewModel_SearchFocusRequested(object? sender, EventArgs e)

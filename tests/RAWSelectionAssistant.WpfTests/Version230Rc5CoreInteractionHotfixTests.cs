@@ -148,7 +148,7 @@ public sealed class Version230Rc5CoreInteractionHotfixTests
     public void Workbench_UpcomingCardsMakeProjectNameProminent()
     {
         var source = Text("src/RAWSelectionAssistant/Views/WorkbenchScheduleView.xaml") + Text("src/RAWSelectionAssistant/ViewModels/StageDViewModels.cs");
-        StringAssert.Contains(source, "Text=\"{Binding Title}\" FontSize=\"14\" FontWeight=\"SemiBold\"");
+        StringAssert.Contains(source, "Text=\"{Binding Title}\" FontSize=\"{DynamicResource Type.Body.FontSize}\" FontWeight=\"SemiBold\"");
         StringAssert.Contains(source, "项目名称：{Title}");
     }
 

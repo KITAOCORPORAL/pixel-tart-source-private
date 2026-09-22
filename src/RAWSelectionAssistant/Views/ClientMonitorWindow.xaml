@@ -7,7 +7,7 @@
     <Grid>
         <Image Source="{Binding DisplayImage}" Stretch="Uniform" SnapsToDevicePixels="True" />
         <Border VerticalAlignment="Top" Background="#CC11161D" Padding="16,10">
-            <Grid><TextBlock Text="像素蛋挞 · 客户监看" FontSize="18" FontWeight="SemiBold" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><TextBlock Text="{Binding FollowModeText}" /><TextBlock Text="  ·  " /><TextBlock Text="{Binding StatusText}" /></StackPanel></Grid>
+            <Grid><TextBlock Text="像素蛋挞 · 客户监看" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><TextBlock Text="{Binding FollowModeText}" /><TextBlock Text="  ·  " /><TextBlock Text="{Binding StatusText}" /></StackPanel></Grid>
         </Border>
         <Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,92" Background="#CC11161D" Padding="12,8" CornerRadius="5">
             <StackPanel><TextBlock Text="{Binding SimplifiedFileNumber}" Visibility="{Binding ShowIdentifier, Converter={StaticResource BooleanToVisibilityConverter}}" /><TextBlock Text="{Binding TechnicalSummary}" Visibility="{Binding ShowTechnicalMetadata, Converter={StaticResource BooleanToVisibilityConverter}}" /><TextBlock Text="{Binding RatingText}" Visibility="{Binding ShowRating, Converter={StaticResource BooleanToVisibilityConverter}}" /><TextBlock Text="{Binding LutName}" Foreground="#AEB8C6" /></StackPanel>

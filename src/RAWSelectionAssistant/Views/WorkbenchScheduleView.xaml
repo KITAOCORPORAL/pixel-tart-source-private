@@ -5,7 +5,7 @@
              AutomationProperties.Name="近期拍摄">
     <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
     <Grid>
-        <Border Style="{StaticResource DashboardPanelCard}">
+        <Border Style="{StaticResource PixelTart.SectionSurface}">
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                 <Grid>
@@ -29,8 +29,8 @@
                                         ToolTip="{Binding ScheduleTooltipText}"
                                         AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="从工作台打开拍摄排期详情">
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                        <TextBlock Text="{Binding SecondaryLineText}" FontSize="12" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding Title}" FontSize="{DynamicResource Type.Body.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding SecondaryLineText}" FontSize="{DynamicResource Type.Caption.FontSize}" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
                                         <TextBlock Text="{Binding TertiaryLineText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis" Visibility="{Binding HasTertiaryLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     </StackPanel>
                                 </Button>
@@ -51,8 +51,8 @@
                                                 Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
                                                 ToolTip="{Binding ScheduleTooltipText}" AutomationProperties.Name="{Binding Title}">
                                             <StackPanel>
-                                                <Grid><TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,0,74,0" /><TextBlock Text="{Binding DistanceText}" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid>
-                                                <TextBlock Text="{Binding SecondaryLineText}" FontSize="12" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+                                                <Grid><TextBlock Text="{Binding Title}" FontSize="{DynamicResource Type.Body.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,0,74,0" /><TextBlock Text="{Binding DistanceText}" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" /></Grid>
+                                                <TextBlock Text="{Binding SecondaryLineText}" FontSize="{DynamicResource Type.Caption.FontSize}" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
                                                 <TextBlock Text="{Binding TertiaryLineText}" Style="{StaticResource CaptionText}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis" Visibility="{Binding HasTertiaryLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                             </StackPanel>
                                         </Button>

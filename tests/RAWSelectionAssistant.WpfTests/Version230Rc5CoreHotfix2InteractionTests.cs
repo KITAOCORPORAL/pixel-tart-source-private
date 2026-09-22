@@ -340,7 +340,7 @@ public sealed class Version230Rc5CoreHotfix2InteractionTests
     [DataRow("11.5 13,11.5 13,20 12,22 11,20")]
     [DataRow("Width=\"32\" Height=\"32\"")]
     [DataRow("Width=\"20\" Height=\"20\"")]
-    [DataRow("#FFFFC44D")]
+    [DataRow("{DynamicResource AccentBrush}")]
     [DataRow("Text=\"已固定\"")]
     public void Toolbox_PinHasRecognizableVectorAndDistinctPinnedState(string token) => Contains(Toolbox(), token);
 

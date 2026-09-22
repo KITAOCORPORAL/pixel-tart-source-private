@@ -1,0 +1,868 @@
+{
+  "ProductSourceSha": "1c22ee20f893f3cfcfab43740a9aa015fe6ada0b",
+  "Status": "PASS_RECORDED_UNWRAPPED_TEXT",
+  "PhysicalDpi": "NOT_TESTED",
+  "Scope": "Eleven routes across six logical sizes. Separate global-control-text inventory includes template-rendered control text; physical DPI not tested.",
+  "Inspected": 4960,
+  "Findings": [],
+  "Captures": [
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Workbench-1920x1080-100.png"
+    },
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Workbench-1920x1080-125.png"
+    },
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Workbench-1920x1080-150.png"
+    },
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Workbench-1920x1080-200.png"
+    },
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Workbench-2560x1440-100.png"
+    },
+    {
+      "Route": "Workbench",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Workbench-3840x2160-100.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Workflow-1920x1080-100.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Workflow-1920x1080-125.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Workflow-1920x1080-150.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Workflow-1920x1080-200.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Workflow-2560x1440-100.png"
+    },
+    {
+      "Route": "Workflow",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Workflow-3840x2160-100.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Finance-1920x1080-100.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Finance-1920x1080-125.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Finance-1920x1080-150.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Finance-1920x1080-200.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Finance-2560x1440-100.png"
+    },
+    {
+      "Route": "Finance",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Finance-3840x2160-100.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\WorkCalendar-1920x1080-100.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\WorkCalendar-1920x1080-125.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\WorkCalendar-1920x1080-150.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\WorkCalendar-1920x1080-200.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\WorkCalendar-2560x1440-100.png"
+    },
+    {
+      "Route": "WorkCalendar",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\WorkCalendar-3840x2160-100.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Publishing-1920x1080-100.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Publishing-1920x1080-125.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Publishing-1920x1080-150.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Publishing-1920x1080-200.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Publishing-2560x1440-100.png"
+    },
+    {
+      "Route": "Publishing",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Publishing-3840x2160-100.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\PhotoGrouping-1920x1080-100.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\PhotoGrouping-1920x1080-125.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\PhotoGrouping-1920x1080-150.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\PhotoGrouping-1920x1080-200.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\PhotoGrouping-2560x1440-100.png"
+    },
+    {
+      "Route": "PhotoGrouping",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\PhotoGrouping-3840x2160-100.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Collage-1920x1080-100.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Collage-1920x1080-125.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Collage-1920x1080-150.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Collage-1920x1080-200.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Collage-2560x1440-100.png"
+    },
+    {
+      "Route": "Collage",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Collage-3840x2160-100.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\AssetLibrary-1920x1080-100.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\AssetLibrary-1920x1080-125.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\AssetLibrary-1920x1080-150.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\AssetLibrary-1920x1080-200.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\AssetLibrary-2560x1440-100.png"
+    },
+    {
+      "Route": "AssetLibrary",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\AssetLibrary-3840x2160-100.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Planning-1920x1080-100.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Planning-1920x1080-125.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Planning-1920x1080-150.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Planning-1920x1080-200.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Planning-2560x1440-100.png"
+    },
+    {
+      "Route": "Planning",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Planning-3840x2160-100.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\ReferenceColor-1920x1080-100.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\ReferenceColor-1920x1080-125.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\ReferenceColor-1920x1080-150.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\ReferenceColor-1920x1080-200.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\ReferenceColor-2560x1440-100.png"
+    },
+    {
+      "Route": "ReferenceColor",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\ReferenceColor-3840x2160-100.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        1920,
+        1080
+      ],
+      "Filename": "dpi\\Tether-1920x1080-100.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.25,
+      "ActualDip": [
+        1536,
+        864
+      ],
+      "Filename": "dpi\\Tether-1920x1080-125.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 1.5,
+      "ActualDip": [
+        1280,
+        720
+      ],
+      "Filename": "dpi\\Tether-1920x1080-150.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        1920,
+        1080
+      ],
+      "LogicalScale": 2,
+      "ActualDip": [
+        960,
+        540
+      ],
+      "Filename": "dpi\\Tether-1920x1080-200.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        2560,
+        1440
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        2560,
+        1440
+      ],
+      "Filename": "dpi\\Tether-2560x1440-100.png"
+    },
+    {
+      "Route": "Tether",
+      "RequestedPixels": [
+        3840,
+        2160
+      ],
+      "LogicalScale": 1,
+      "ActualDip": [
+        3840,
+        2160
+      ],
+      "Filename": "dpi\\Tether-3840x2160-100.png"
+    }
+  ]
+}

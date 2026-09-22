@@ -32,8 +32,8 @@ public sealed class Version230StageCLiveMonitorWpfTests
     [DataRow("Content=\"100%\"")]
     [DataRow("MouseWheel=\"PreviewViewport_MouseWheel\"")]
     [DataRow("PreviewImage_MouseLeftButtonDown")]
-    [DataRow("Content=\"上一张  ←\"")]
-    [DataRow("Content=\"下一张  →\"")]
+    [DataRow("AutomationProperties.Name=\"上一张联机照片\"")]
+    [DataRow("AutomationProperties.Name=\"下一张联机照片\"")]
     [DataRow("AutomationProperties.Name=\"全屏监看\"")]
     public void Workspace_XamlContainsPreviewNavigationContract(string token) => StringAssert.Contains(TetherXaml(), token);
 

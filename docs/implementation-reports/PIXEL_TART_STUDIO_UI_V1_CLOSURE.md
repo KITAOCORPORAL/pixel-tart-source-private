@@ -1,3 +1,6 @@
+> Historical freeze: continued by [Studio UI Global Rollout](PIXEL_TART_STUDIO_UI_GLOBAL_ROLLOUT.md).
+> See [source reconciliation](STUDIO_UI_SOURCE_RECONCILIATION.md) for later Reference/Film/Close closures. The original status and test figures below remain historical.
+
 # Pixel Tart Studio UI v1 — BLOCKED
 
 This is a partial implementation and source-bound evidence handoff, not a release or

@@ -95,7 +95,7 @@ public sealed class Version230Rc5CalendarTaskCenterLayoutTests
         var xaml = Read("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml");
         var code = Read("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml.cs");
         Contains(xaml, "CalendarViewGroup", "CalendarDateNavigationGroup", "CalendarFilterSearchGroup", "Width=\"24\"", "DisplayYear", "DisplayMonth", "Margin=\"16,0,0,0\"");
-        Contains(code, "width < 1180", "Grid.SetRow(CalendarFilterSearchGroup", "Grid.SetColumnSpan(CalendarFilterSearchGroup", "< 1050 => 150", "< 1400 => 170", "_ => 210");
+        Contains(code, "width < 1180", "Grid.SetRow(CalendarFilterSearchGroup", "Grid.SetColumnSpan(CalendarFilterSearchGroup", "CalendarDateNavigationGroup.MinWidth = compact ? 360 : 392", "SearchBox.Width = double.NaN");
         CollectionAssert.Contains(new[] { 1280, 1440, 1600, 1920 }, width);
     }
 

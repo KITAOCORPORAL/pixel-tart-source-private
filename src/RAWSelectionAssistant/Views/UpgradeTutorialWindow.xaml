@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="全新的交互式新手教程" FontSize="21" FontWeight="SemiBold" />
+        <TextBlock Text="全新的交互式新手教程" FontSize="{DynamicResource Type.PageTitle.FontSize}" FontWeight="SemiBold" />
         <TextBlock Grid.Row="1" Margin="0,16,0,0" TextWrapping="Wrap" LineHeight="23"
                    Foreground="{DynamicResource TextSecondaryBrush}"
                    Text="像素蛋挞已经加入完整归片演示。教程只使用内置示例文件，不会读取或修改你的真实照片；稍后也可随时从帮助中查看。" />
