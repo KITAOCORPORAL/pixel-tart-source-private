@@ -9,6 +9,7 @@ using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Photos;
 using RAWSelectionAssistant.Core.Services.Tethering;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -33,6 +34,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly ITetherDisplaySettingsStore _displaySettingsStore;
     private readonly IProjectRepository? _projectRepository;
     private readonly TetherZonePreviewService _zonePreview = new();
+    private readonly PhotoMetadataProvider _photoMetadataProvider = new();
+    private PhotoMetadata? _photoMetadata;
+    private long _photoMetadataRevision;
     private readonly NextCaptureRuleStore _nextCaptureStore = new();
     private readonly LiveSelectionCoordinator _selectionCoordinator = new();
     private readonly CancellationTokenSource _lifetime = new();
@@ -337,6 +341,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public BitmapSource? ReferenceImage { get => _referenceImage; private set => SetProperty(ref _referenceImage, value); }
     public TetherHistogramData? Histogram { get => _histogram; private set => SetProperty(ref _histogram, value); }
     public TetherExifInfo? ExifInfo { get => _exifInfo; private set => SetProperty(ref _exifInfo, value); }
+    public PhotoMetadata? PhotoMetadata { get => _photoMetadata; private set => SetProperty(ref _photoMetadata, value); }
     public bool IsPreviewLoading { get => _isPreviewLoading; private set { if (SetProperty(ref _isPreviewLoading, value)) RefreshCommands(); } }
     public double PreviewProgress { get => _previewProgress; private set => SetProperty(ref _previewProgress, value); }
     public string PreviewStatus { get => _previewStatus; private set => SetProperty(ref _previewStatus, value); }
@@ -734,7 +739,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         var request = _requestCoordinator.Begin(item.Record.Id, cancellationToken);
         _fullResolutionLoader.ReleaseExcept(null);
         IsPreviewLoading = true; PreviewProgress = 10; PreviewStatus = "正在加载监看代理图…";
-        CurrentImage = null; ClippingOverlay = null; Histogram = null; ExifInfo = TetherExifInfo.Unavailable(item.Record);
+        CurrentImage = null; ClippingOverlay = null; Histogram = null; ExifInfo = TetherExifInfo.Unavailable(item.Record); PhotoMetadata = null;
         ApplyAnnotationToEditor(item.Annotation);
         try
         {
@@ -749,6 +754,13 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             PreviewProgress = 65;
             PreviewStatus = result.Image is null ? result.Message ?? "预览不可用。" : result.UsedPairedPreview ? "RAW使用配对JPG进行监看。" : "监看代理图 · 最长边2048";
             ExifInfo = await exifTask;
+            var metadataRevision = Interlocked.Increment(ref _photoMetadataRevision);
+            try
+            {
+                var metadata = await _photoMetadataProvider.ReadAsync(item.Record.SourcePath, request.Token);
+                if (metadataRevision == Volatile.Read(ref _photoMetadataRevision) && _requestCoordinator.IsCurrent(item.Record.Id, request.Version)) PhotoMetadata = metadata;
+            }
+            catch (OperationCanceledException) { }
             if (result.Image is not null)
             {
                 var histogramTask = _histogramService.CalculateAsync(result.Image, true, request.Token); var zoneTask = _zonePreview.BuildAsync(result.Image, request.Token);

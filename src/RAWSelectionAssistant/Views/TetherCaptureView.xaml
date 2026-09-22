@@ -102,6 +102,7 @@
 
                     <Expander Style="{StaticResource PixelTart.Section}" x:Name="ExifGroup" Header="拍摄信息" IsExpanded="False" AutomationProperties.Name="拍摄信息工具组">
                         <StackPanel Margin="0,8,0,10">
+                    <views:PhotoMetadataInspector DataContext="{Binding PhotoMetadata}" Margin="0,0,0,10" />
                     <TextBlock Text="EXIF 与文件" Style="{StaticResource SectionTitleText}" />
                     <Grid Margin="0,8,0,0">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="108" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
