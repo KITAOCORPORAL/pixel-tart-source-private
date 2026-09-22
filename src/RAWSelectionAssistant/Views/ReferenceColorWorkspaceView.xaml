@@ -79,24 +79,27 @@
   </Grid>
   <Border Grid.Row="2" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="8" Padding="8,6" Margin="0,10,0,0">
    <DockPanel LastChildFill="True">
-    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
      <Button Content="同步到所选" Command="{Binding SyncSelectedCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
      <Button Content="同步到全部照片" Command="{Binding SyncAllCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
+     <Button Content="导出所选" Command="{Binding ExportSelectedCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
+     <Button Content="导出全部" Command="{Binding ExportAllCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
+     <Button Content="停止导出" Command="{Binding StopExportCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" Visibility="{Binding IsExporting, Converter={StaticResource BoolVisibility}}"/>
     </StackPanel>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-     <ItemsControl ItemsSource="{Binding Targets}">
-      <ItemsControl.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-      <ItemsControl.ItemTemplate><DataTemplate>
+     <ListBox ItemsSource="{Binding Targets}" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
+      <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ListBox.ItemsPanel>
+      <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem"><Setter Property="Padding" Value="0"/><Setter Property="Margin" Value="0"/><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/></Style></ListBox.ItemContainerStyle>
+       <ListBox.ItemTemplate><DataTemplate>
        <Border Width="132" Height="76" Margin="0,0,8,0" Padding="4" CornerRadius="6" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="1">
         <Border.Style><Style TargetType="Border"><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/><Style.Triggers><DataTrigger Binding="{Binding IsActive}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource FilmstripActiveBorderBrush}"/></DataTrigger></Style.Triggers></Style></Border.Style>
         <Button Command="{Binding DataContext.ActivateTargetCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0" Padding="0">
          <StackPanel Orientation="Horizontal"><Image Source="{Binding Thumbnail}" Width="52" Height="52" Stretch="UniformToFill"/><StackPanel Margin="7,0,0,0" VerticalAlignment="Center"><TextBlock Text="{Binding FileName}" TextTrimming="CharacterEllipsis" Width="60"/><TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" Margin="0,4,0,0"/></StackPanel></StackPanel>
         </Button>
        </Border>
-      </DataTemplate></ItemsControl.ItemTemplate>
-     </ItemsControl>
-    </ScrollViewer>
-   </DockPanel>
+       </DataTemplate></ListBox.ItemTemplate>
+     </ListBox>
+    <TextBlock DockPanel.Dock="Bottom" Text="{Binding ExportStatus}" Style="{StaticResource CaptionText}" Margin="8,6,0,0"/>
+    </DockPanel>
   </Border>
  </Grid>
 </UserControl>

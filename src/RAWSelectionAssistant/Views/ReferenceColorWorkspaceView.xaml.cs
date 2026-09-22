@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Views;
@@ -10,6 +11,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private TetherReferenceModeViewModel? _editor;
     private bool _wasCompact;
     private double _lastResponsiveWidth = -1;
+    private int _selectionAnchor = -1;
 
     public ReferenceColorWorkspaceView()
     {
@@ -22,6 +24,24 @@ public partial class ReferenceColorWorkspaceView : UserControl
             if (Math.Abs(width - _lastResponsiveWidth) > .5) UpdateResponsiveLayout();
         };
         DataContextChanged += OnDataContextChanged;
+        PreviewKeyDown += OnFilmstripKeyDown;
+    }
+
+    private void OnFilmstripKeyDown(object sender, KeyEventArgs e)
+    {
+        if (_editor is null || DataContext is not ReferenceColorWorkspaceViewModel workspace || workspace.Targets.Count == 0) return;
+        var index = workspace.ActiveTarget is null ? 0 : workspace.Targets.IndexOf(workspace.ActiveTarget);
+        if (e.Key == Key.Escape) { foreach (var target in workspace.Targets) target.IsSelected = false; if (workspace.ActiveTarget is not null) workspace.ActiveTarget.IsSelected = true; e.Handled = true; return; }
+        if (e.Key == Key.A && Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) { foreach (var target in workspace.Targets) target.IsSelected = true; e.Handled = true; return; }
+        var delta = e.Key == Key.Left ? -1 : e.Key == Key.Right ? 1 : 0;
+        if (delta == 0) return;
+        var next = Math.Clamp(index + delta, 0, workspace.Targets.Count - 1); var targetAt = workspace.Targets[next];
+        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) && _selectionAnchor >= 0)
+        {
+            var start = Math.Min(_selectionAnchor, next); var end = Math.Max(_selectionAnchor, next); foreach (var target in workspace.Targets) target.IsSelected = false; for (var i = start; i <= end; i++) workspace.Targets[i].IsSelected = true;
+        }
+        else if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) { foreach (var target in workspace.Targets) target.IsSelected = false; targetAt.IsSelected = true; _selectionAnchor = next; }
+        workspace.ActivateTargetCommand.Execute(targetAt); e.Handled = true;
     }
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
