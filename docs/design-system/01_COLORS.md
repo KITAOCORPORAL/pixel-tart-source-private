@@ -4,3 +4,7 @@
 
 实施资源：`src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Controls.xaml`、`Studio.Symbols.xaml` 及现有兼容字典。
 状态：v1 实施中，用户确认待完成。全应用推广为 PARTIAL；本文件不是验收 PASS。
+
+## Studio v2 prototype
+
+The three prototype pages use the warm-neutral ladder documented in `25_DARK_TONAL_HIERARCHY.md`. Muted Violet `#9471C1` is the review default; Emerald remains available only for the required A/B decision. This is a token evolution in the same merged resource chain, not a parallel theme.

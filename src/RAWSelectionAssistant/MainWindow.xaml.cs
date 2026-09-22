@@ -134,6 +134,13 @@ public partial class MainWindow : Window
 
     private const uint MonitorDefaultToNearest = 2;
 
+    private void WindowMinimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void WindowMaximizeRestore_Click(object sender, RoutedEventArgs e) =>
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
+    private void WindowClose_Click(object sender, RoutedEventArgs e) => Close();
+
     [DllImport("user32.dll")]
     private static extern IntPtr MonitorFromWindow(IntPtr window, uint flags);
 
@@ -427,8 +434,8 @@ public partial class MainWindow : Window
     private void SetAssetLibraryShellChrome(bool focused)
     {
         if (RootGrid.RowDefinitions.Count < 3) return;
-        RootGrid.RowDefinitions[0].Height = focused ? new GridLength(0) : new GridLength(36);
-        RootGrid.RowDefinitions[2].Height = focused ? new GridLength(0) : new GridLength(34);
+        RootGrid.RowDefinitions[0].Height = focused ? new GridLength(0) : new GridLength(52);
+        RootGrid.RowDefinitions[2].Height = focused ? new GridLength(0) : new GridLength(28);
         TopMenu.Visibility = focused ? Visibility.Collapsed : Visibility.Visible;
     }
 

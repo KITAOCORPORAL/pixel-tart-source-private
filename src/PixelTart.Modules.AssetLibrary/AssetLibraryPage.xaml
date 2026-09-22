@@ -336,7 +336,7 @@
             </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource Brush.Background}">
+    <Grid Background="{DynamicResource Brush.Background}" Margin="8,6,8,8">
       <Grid x:Name="LibraryWorkspace">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -355,9 +355,9 @@
                 </Grid>
             </Border>
         </Popup>
-        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="12,0"
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="10,0"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
-        <Grid Margin="0,8" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+        <Grid Margin="0,6,0,10" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="300" />
@@ -479,10 +479,10 @@
                                   MaxWidth="{DynamicResource Size.Inspector.MaxWidth}" />
             </Grid.ColumnDefinitions>
 
-            <Border Style="{DynamicResource PixelTart.Surface.Panel}"
+            <Border Style="{DynamicResource PixelTart.Surface.Panel}" Background="{DynamicResource InspectorBackgroundBrush}"
                     IsEnabled="{Binding IsReady}"
                     Visibility="{Binding IsOrganizationPaneVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    BorderThickness="0,0,1,0"
+                    BorderThickness="0"
                     AutomationProperties.AutomationId="AssetOrganizationPane">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
@@ -650,7 +650,7 @@
                 </ScrollViewer>
             </Border>
 
-            <GridSplitter Grid.Column="1" Width="6" Background="{DynamicResource Brush.Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <GridSplitter Grid.Column="1" Width="8" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
                           DragCompleted="OnPaneSplitterDragCompleted"
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"
@@ -659,7 +659,7 @@
                           AutomationProperties.Name="调整组织栏宽度"
                           Focusable="True" IsTabStop="True" />
 
-            <Border Grid.Column="2" Style="{DynamicResource PixelTart.Surface.Panel}" AutomationProperties.AutomationId="AssetCollectionPane">
+            <Border Grid.Column="2" Style="{DynamicResource PixelTart.Surface.Panel}" Background="Transparent" Padding="18,14" AutomationProperties.AutomationId="AssetCollectionPane">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -817,7 +817,7 @@
                 </Grid>
             </Border>
 
-            <GridSplitter Grid.Column="3" Width="6" Background="{DynamicResource Brush.Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <GridSplitter Grid.Column="3" Width="8" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                           ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ShowsPreview="True"
                           DragCompleted="OnPaneSplitterDragCompleted"
                           PreviewKeyUp="OnPaneSplitterPreviewKeyUp"

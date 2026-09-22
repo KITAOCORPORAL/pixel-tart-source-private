@@ -57,8 +57,9 @@
     </Style>
 
     <Style TargetType="ScrollBar">
-        <Setter Property="Width" Value="10" />
-        <Setter Property="MinWidth" Value="10" />
+        <!-- The hit target stays usable while the painted thumb remains quiet. -->
+        <Setter Property="Width" Value="8" />
+        <Setter Property="MinWidth" Value="8" />
         <Setter Property="Background" Value="{DynamicResource ScrollBarTrackBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ScrollBarThumbBrush}" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -66,7 +67,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ScrollBar">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="7" SnapsToDevicePixels="True">
+                    <Border Background="Transparent" Padding="2,0" CornerRadius="4" SnapsToDevicePixels="True">
                         <Track x:Name="PART_Track"
                                IsDirectionReversed="True"
                                Maximum="{TemplateBinding Maximum}"
@@ -91,12 +92,12 @@
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
-                <Setter Property="Height" Value="14" />
-                <Setter Property="MinHeight" Value="14" />
+                <Setter Property="Height" Value="8" />
+                <Setter Property="MinHeight" Value="8" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ScrollBar">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="7" SnapsToDevicePixels="True">
+                            <Border Background="Transparent" Padding="0,2" CornerRadius="4" SnapsToDevicePixels="True">
                                 <Track x:Name="PART_Track"
                                        IsDirectionReversed="False"
                                        Maximum="{TemplateBinding Maximum}"

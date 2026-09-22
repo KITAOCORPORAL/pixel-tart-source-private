@@ -20,11 +20,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
+                    <Grid>
+                    <Border x:Name="SelectedMarker" Width="2" Height="22" Background="{TemplateBinding BorderBrush}" CornerRadius="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border x:Name="ButtonSurface"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="6"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            Margin="4,0,0,0"
+                            CornerRadius="7"
                             UseLayoutRounding="True"
                             SnapsToDevicePixels="True">
                         <Grid ClipToBounds="False">
@@ -62,6 +65,7 @@
                                     IsHitTestVisible="False" />
                         </Grid>
                     </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
                             <Setter TargetName="ExpandedContent" Property="Visibility" Value="Collapsed" />
@@ -80,16 +84,16 @@
     </Style>
     <Style x:Key="SelectedNavButton" TargetType="Button" BasedOn="{StaticResource SidebarNavButton}">
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="3,0,0,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" /><Setter Property="BorderThickness" Value="2,0,0,0" />
     </Style>
     <Style x:Key="WorkflowStepButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="MinWidth" Value="122" /><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
     <Style x:Key="SidebarSectionLabel" TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource TextTertiaryBrush}" /><Setter Property="FontSize" Value="11" /><Setter Property="Margin" Value="16,10,0,4" /></Style>
     <Style x:Key="SidebarIcon" TargetType="Path"><Setter Property="Width" Value="18" /><Setter Property="Height" Value="18" /><Setter Property="Stretch" Value="Uniform" /><Setter Property="Fill" Value="Transparent" /><Setter Property="Stroke" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="StrokeThickness" Value="1.6" /><Setter Property="StrokeLineJoin" Value="Round" /><Setter Property="StrokeStartLineCap" Value="Round" /><Setter Property="StrokeEndLineCap" Value="Round" /><Setter Property="SnapsToDevicePixels" Value="True" /><Setter Property="Margin" Value="0" /></Style>
-    <Style x:Key="QuickActionButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Height" Value="106" /><Setter Property="MinHeight" Value="106" /><Setter Property="MinWidth" Value="104" /><Setter Property="Margin" Value="5,0" /><Setter Property="Padding" Value="12" /><Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" /><Setter Property="BorderThickness" Value="0" /></Style>
+    <Style x:Key="QuickActionButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Height" Value="102" /><Setter Property="MinHeight" Value="102" /><Setter Property="MinWidth" Value="104" /><Setter Property="Margin" Value="5,0" /><Setter Property="Padding" Value="12" /><Setter Property="Background" Value="{DynamicResource WorkbenchCardBrush}" /><Setter Property="BorderBrush" Value="Transparent" /><Setter Property="BorderThickness" Value="0" /></Style>
     <Style x:Key="QuickActionIcon" TargetType="Path" BasedOn="{StaticResource SidebarIcon}"><Setter Property="Width" Value="24" /><Setter Property="Height" Value="24" /><Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Margin" Value="0,0,0,10" /></Style>
     <Style x:Key="ToolEntryButton" TargetType="Button" BasedOn="{StaticResource GhostButton}"><Setter Property="Width" Value="124" /><Setter Property="Height" Value="94" /><Setter Property="Padding" Value="10" /><Setter Property="Margin" Value="5" /><Setter Property="Background" Value="{DynamicResource ToolTileBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" /><Setter Property="BorderThickness" Value="0" /></Style>
     <Style x:Key="ToolEntryIcon" TargetType="Path" BasedOn="{StaticResource SidebarIcon}"><Setter Property="Width" Value="24" /><Setter Property="Height" Value="24" /><Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Margin" Value="0,0,0,9" /></Style>
-    <Style x:Key="PopupSurfaceBorder" TargetType="Border"><Setter Property="Background" Value="{DynamicResource SurfaceSecondaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /><Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="8" /></Style>
+    <Style x:Key="PopupSurfaceBorder" TargetType="Border"><Setter Property="Background" Value="{DynamicResource SurfaceElevatedBrush}" /><Setter Property="BorderBrush" Value="#26FFFFFF" /><Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="11" /><Setter Property="Effect"><Setter.Value><DropShadowEffect Color="#000000" BlurRadius="18" ShadowDepth="5" Opacity=".34" /></Setter.Value></Setter></Style>
     <Style x:Key="ToolCatalogCard" TargetType="Button" BasedOn="{StaticResource GhostButton}">
         <Setter Property="Height" Value="128" /><Setter Property="MinWidth" Value="250" /><Setter Property="Margin" Value="0,0,20,20" />
         <Setter Property="Padding" Value="18" /><Setter Property="HorizontalContentAlignment" Value="Stretch" /><Setter Property="VerticalContentAlignment" Value="Stretch" />

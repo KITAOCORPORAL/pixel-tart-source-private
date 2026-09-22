@@ -7,11 +7,16 @@
         xmlns:services="clr-namespace:RAWSelectionAssistant.Services"
         xmlns:views="clr-namespace:RAWSelectionAssistant.Views"
         xmlns:studio="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         mc:Ignorable="d" Title="像素蛋挞" Icon="Assets/AppIcon.ico"
         Width="1600" Height="920" MinWidth="1180" MinHeight="720"
         WindowStartupLocation="CenterScreen" Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
+        WindowStyle="None" ResizeMode="CanResize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         AllowDrop="True" Closing="Window_Closing" PreviewKeyDown="Window_PreviewKeyDown"
         DragOver="Window_DragOver" Drop="Window_Drop">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="52" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="10" UseAeroCaptionButtons="False" />
+    </shell:WindowChrome.WindowChrome>
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveProjectCommand}" />
@@ -40,7 +45,13 @@
                 <DataTrigger Binding="{Binding ElementName=BookingEditorOverlay, Path=Visibility}" Value="Visible"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="WorkbenchMenuStyle" TargetType="Menu"><Setter Property="Background" Value="{DynamicResource ShellTopBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Style>
+        <Style x:Key="WorkbenchMenuStyle" TargetType="Menu"><Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="Padding" Value="0" /><Setter Property="Height" Value="34" />
+            <Style.Resources>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="MinWidth" Value="48" /><Setter Property="MinHeight" Value="30" /><Setter Property="Padding" Value="8,5" /><Setter Property="FontSize" Value="12" /><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="LocalSplitHeroButton" TargetType="Button" BasedOn="{StaticResource QuickActionButton}">
             <Setter Property="Background" Value="{DynamicResource WorkbenchHeroBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
@@ -90,12 +101,24 @@
 
     <Grid x:Name="RootGrid" Background="{DynamicResource ContentBackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="36" />
+            <RowDefinition Height="{DynamicResource StudioV2.CommandBarHeight}" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="34" />
+            <RowDefinition Height="{DynamicResource StudioV2.StatusBarHeight}" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="TopMenu" Grid.Row="0" Style="{StaticResource WorkbenchMenuStyle}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
+        <Border Grid.Row="0" Background="{DynamicResource ShellTopBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="16,0,10,0" VerticalAlignment="Center">
+                <Border Width="24" Height="24" CornerRadius="7" Background="{DynamicResource AccentSoftBrush}" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1">
+                    <TextBlock Text="PT" FontFamily="Segoe UI Variable, Segoe UI" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource AccentValueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="PIXEL TART" FontFamily="Segoe UI Variable, Segoe UI" FontSize="11" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding CurrentPage, StringFormat=当前工作区 · {0}}" FontSize="10" Foreground="{DynamicResource TextTertiaryBrush}" />
+                </StackPanel>
+            </StackPanel>
+        <Menu x:Name="TopMenu" Grid.Column="1" Style="{StaticResource WorkbenchMenuStyle}" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" shell:WindowChrome.IsHitTestVisibleInChrome="True">
             <MenuItem Header="文件(_F)">
                 <MenuItem Header="新建本地分片任务" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit" />
                 <MenuItem Header="新建归片项目" InputGestureText="Ctrl+N" Command="{Binding NewProjectCommand}" />
@@ -152,6 +175,18 @@
                 <MenuItem Header="关于像素蛋挞" Command="{Binding NavigateCommand}" CommandParameter="Help" />
             </MenuItem>
         </Menu>
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,8,0" VerticalAlignment="Center" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                <Button Content="新建" Style="{StaticResource PixelTart.Button.Ghost}" Command="{Binding NewProjectCommand}" ToolTip="新建项目" />
+                <Button Content="导入照片" Style="{StaticResource PixelTart.Button.Secondary}" Command="{Binding NavigateCommand}" CommandParameter="AssetLibrary" Margin="6,0,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Stretch" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                <Button Content="—" Style="{StaticResource StudioV2.WindowButton}" Click="WindowMinimize_Click" AutomationProperties.Name="最小化窗口" />
+                <Button Content="□" Style="{StaticResource StudioV2.WindowButton}" Click="WindowMaximizeRestore_Click" AutomationProperties.Name="最大化或还原窗口" />
+                <Button Content="×" Style="{StaticResource StudioV2.CloseButton}" Click="WindowClose_Click" AutomationProperties.Name="关闭窗口" />
+            </StackPanel>
+            <Button Grid.Column="2" Background="Transparent" BorderThickness="0" Focusable="False" shell:WindowChrome.IsHitTestVisibleInChrome="False" />
+          </Grid>
+        </Border>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -178,7 +213,7 @@
             <Border x:Name="SidebarContainer" Width="{Binding SidebarWidth}"
                     MinWidth="{DynamicResource SidebarCollapsedWidth}"
                     Background="{DynamicResource SidebarBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}"
-                    BorderThickness="0,0,1,0" Padding="0,5,0,8" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                    BorderThickness="0" Padding="0,7,0,8" UseLayoutRounding="True" SnapsToDevicePixels="True">
                 <Grid x:Name="SidebarLayout">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10" />
@@ -413,8 +448,8 @@
                     <views:AutomationLandmark Grid.ColumnSpan="2" Panel.ZIndex="-1"
                                               AutomationProperties.AutomationId="WorkbenchRoot"
                                               AutomationProperties.Name="工作台根区域" />
-                    <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><Grid Margin="22,20,20,18" MinHeight="850">
-                        <Grid.RowDefinitions><RowDefinition Height="106" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchOverviewRow" Height="230" /><RowDefinition Height="16" /><RowDefinition x:Name="WorkbenchScheduleRow" Height="170" /><RowDefinition Height="16" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                    <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><Grid Margin="28,24,24,22" MinHeight="830">
+                        <Grid.RowDefinitions><RowDefinition Height="102" /><RowDefinition Height="24" /><RowDefinition x:Name="WorkbenchOverviewRow" Height="206" /><RowDefinition Height="24" /><RowDefinition x:Name="WorkbenchScheduleRow" Height="164" /><RowDefinition Height="26" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                         <Grid x:Name="WorkbenchQuickActions"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /><ColumnDefinition Width="116" /></Grid.ColumnDefinitions>
                             <Grid Margin="0,0,5,0">
                                 <Button x:Name="StartLocalSplitCard" Style="{StaticResource LocalSplitHeroButton}" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit"
@@ -530,7 +565,7 @@
                         </Grid>
                     </Grid>
                     </ScrollViewer>
-                    <Border x:Name="TaskCenterPanel" Grid.Column="1" Panel.ZIndex="5" Background="{DynamicResource TaskCenterBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1,0,0,0" Padding="20,18">
+                    <Border x:Name="TaskCenterPanel" Grid.Column="1" Panel.ZIndex="5" Background="{DynamicResource TaskCenterBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0" Padding="24,22">
                         <Grid>
                             <Grid.RowDefinitions><RowDefinition Height="52*" /><RowDefinition Height="18" /><RowDefinition Height="48*" MinHeight="320" /></Grid.RowDefinitions>
                             <views:WorkbenchCalendarPanel DataContext="{Binding WorkCalendarPage}" />

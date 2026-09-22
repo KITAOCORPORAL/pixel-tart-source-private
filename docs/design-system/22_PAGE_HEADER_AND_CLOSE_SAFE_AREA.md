@@ -11,3 +11,7 @@ Keyboard/accessibility: close retains AutomationId, AutomationName, HelpText, to
 Do: reserve layout space at the shell, measure runtime rectangles, preserve one close authority. Don't: float a high-Z close over route content, shrink its hit target, globally reduce text, or patch every page with a right margin.
 
 Implementation: `MainWindow.xaml`, `SurfaceCloseButton.xaml`, `GlobalCloseSafeAreaTests`.
+
+## Studio v2 prototype
+
+Custom WindowChrome does not replace this contract. The native window controls occupy a dedicated right-hand command-bar group, while closable route surfaces keep their existing structural close reservation. Runtime collision evidence remains mandatory at 100–200% logical scale.

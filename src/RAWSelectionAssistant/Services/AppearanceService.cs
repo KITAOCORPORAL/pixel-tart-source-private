@@ -67,13 +67,25 @@ public sealed class AppearanceService : IAppearanceService
     {
         // Pixel Tart A-v2 owns the runtime primary action color. User presets remain
         // readable for migration, but no longer repaint product semantics.
-        var color = highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x18, 0xA8, 0x8C);
+        var color = highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x94, 0x71, 0xC1);
         var resources = Application.Current.Resources;
         resources["AccentBrush"] = AccentColorService.Brush(color);
         resources["AccentHoverBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.12));
         resources["AccentPressedBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.22));
         resources["AccentSoftBrush"] = AccentColorService.BlendBrush(color, highContrast ? SystemColors.WindowColor : GetThemeColor("SurfacePrimaryColor"), 0.14);
         resources["AccentForegroundBrush"] = AccentColorService.Brush(AccentColorService.GetReadableForeground(color));
+        // Canonical Studio resources share the same runtime accent. Keeping both APIs
+        // synchronized prevents module-local emerald remnants during the v2 prototype.
+        resources["PrimaryBrush"] = AccentColorService.Brush(color);
+        resources["PrimaryHoverBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, 0.06));
+        resources["PrimaryPressedBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.08));
+        resources["ToolAccentBrush"] = AccentColorService.Brush(color);
+        resources["AccentValueBrush"] = AccentColorService.Brush(Color.FromRgb(0xC4, 0xA7, 0xE3));
+        resources["Brush.Accent"] = AccentColorService.Brush(color);
+        resources["Brush.Accent.Hover"] = AccentColorService.Brush(AccentColorService.Adjust(color, 0.06));
+        resources["Brush.Accent.Active"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.08));
+        resources["Brush.Accent.Subtle"] = AccentColorService.BlendBrush(color, highContrast ? SystemColors.WindowColor : GetThemeColor("SurfacePrimaryColor"), 0.12);
+        resources["Brush.OnAccent"] = AccentColorService.Brush(Colors.White);
     }
 
     private static Color GetThemeColor(string key) => Application.Current.TryFindResource(key) is Color color ? color : Colors.White;

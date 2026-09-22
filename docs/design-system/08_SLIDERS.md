@@ -4,3 +4,7 @@ PixelTart.Slider 继承 4 DIP 轨道与 14 DIP Thumb，暗轨、Accent 活跃段
 
 实施资源：`src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Controls.xaml`、`Studio.Symbols.xaml` 及现有兼容字典。
 状态：v1 实施中，用户确认待完成。全应用推广为 PARTIAL；本文件不是验收 PASS。
+
+## Slider v3 prototype
+
+The track remains 4 DIP; the neutral thumb is 20 DIP with no visible idle border. Muted Violet marks the active track and focus. Values sit in the label row rather than at the end of the track. Keyboard and automation behavior remain native to Slider.

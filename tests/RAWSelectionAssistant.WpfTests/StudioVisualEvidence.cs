@@ -177,17 +177,32 @@ internal static class StudioVisualEvidence
         var keys = new[] { "AccentBrush", "ToolAccentBrush", "AccentValueBrush", "PrimaryBrush", "Brush.Accent", "Brush.Accent.Hover", "Brush.Accent.Active", "Brush.Accent.Subtle" };
         var original = keys.ToDictionary(key => key, key => resources.Contains(key) ? resources[key] : Application.Current.TryFindResource(key));
         var directory = Path.Combine(output, "accent-ab"); Directory.CreateDirectory(directory);
-        var emerald = Path.Combine(directory, "A_EMERALD.png"); Png(root, emerald);
+        static Dictionary<string, Brush> Palette(Color accent, Color hover, Color active, Color value) => new()
+        {
+            ["AccentBrush"] = new SolidColorBrush(accent), ["ToolAccentBrush"] = new SolidColorBrush(accent),
+            ["AccentValueBrush"] = new SolidColorBrush(value), ["PrimaryBrush"] = new SolidColorBrush(accent),
+            ["Brush.Accent"] = new SolidColorBrush(accent), ["Brush.Accent.Hover"] = new SolidColorBrush(hover),
+            ["Brush.Accent.Active"] = new SolidColorBrush(active), ["Brush.Accent.Subtle"] = new SolidColorBrush(Color.FromArgb(42, accent.R, accent.G, accent.B))
+        };
+        static void Apply(ResourceDictionary resources, Dictionary<string, Brush> palette)
+        {
+            foreach (var item in palette) { item.Value.Freeze(); resources[item.Key] = item.Value; }
+        }
+        var emeraldPalette = Palette(Color.FromRgb(24, 168, 140), Color.FromRgb(38, 183, 154), Color.FromRgb(18, 139, 116), Color.FromRgb(139, 229, 212));
         var violet = new Dictionary<string, Brush>
         {
-            ["AccentBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)), ["ToolAccentBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)),
-            ["AccentValueBrush"] = new SolidColorBrush(Color.FromRgb(190, 168, 214)), ["PrimaryBrush"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)),
-            ["Brush.Accent"] = new SolidColorBrush(Color.FromRgb(132, 108, 162)), ["Brush.Accent.Hover"] = new SolidColorBrush(Color.FromRgb(148, 124, 178)),
-            ["Brush.Accent.Active"] = new SolidColorBrush(Color.FromRgb(112, 91, 139)), ["Brush.Accent.Subtle"] = new SolidColorBrush(Color.FromArgb(42, 132, 108, 162))
+            ["AccentBrush"] = new SolidColorBrush(Color.FromRgb(148, 113, 193)), ["ToolAccentBrush"] = new SolidColorBrush(Color.FromRgb(148, 113, 193)),
+            ["AccentValueBrush"] = new SolidColorBrush(Color.FromRgb(196, 167, 227)), ["PrimaryBrush"] = new SolidColorBrush(Color.FromRgb(148, 113, 193)),
+            ["Brush.Accent"] = new SolidColorBrush(Color.FromRgb(148, 113, 193)), ["Brush.Accent.Hover"] = new SolidColorBrush(Color.FromRgb(160, 125, 204)),
+            ["Brush.Accent.Active"] = new SolidColorBrush(Color.FromRgb(132, 98, 175)), ["Brush.Accent.Subtle"] = new SolidColorBrush(Color.FromArgb(42, 148, 113, 193))
         };
+        var emerald = Path.Combine(directory, "A_EMERALD.png");
         try
         {
-            foreach (var item in violet) { item.Value.Freeze(); resources[item.Key] = item.Value; }
+            Apply(resources, emeraldPalette);
+            await root.Dispatcher.InvokeAsync(root.UpdateLayout, DispatcherPriority.ApplicationIdle); await Task.Delay(120);
+            Png(root, emerald);
+            Apply(resources, violet);
             await root.Dispatcher.InvokeAsync(root.UpdateLayout, DispatcherPriority.ApplicationIdle); await Task.Delay(120);
             Png(root, Path.Combine(directory, "B_MUTED_VIOLET.png"));
         }

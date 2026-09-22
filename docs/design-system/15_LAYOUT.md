@@ -4,3 +4,7 @@
 
 实施资源：`src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Controls.xaml`、`Studio.Symbols.xaml` 及现有兼容字典。
 状态：v1 实施中，用户确认待完成。全应用推广为 PARTIAL；本文件不是验收 PASS。
+
+## Studio v2 prototype
+
+The shell uses 52 DIP command, 178/56 DIP navigation, and 28 DIP status metrics. Reference Color allocates 63% of the desktop workspace to the center canvas, with 19% controls and 18% context; below 1440 logical width the context rail becomes an overlay/drawer and below 980 the left rail yields to the canvas.
