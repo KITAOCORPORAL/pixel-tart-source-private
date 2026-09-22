@@ -82,6 +82,21 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         if (film is not null) CopyFilm(film with { });
         _ = DebouncedRenderAsync();
     }
+    public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token)
+    {
+        var source = await Task.Run(() =>
+        {
+            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); return image;
+        }, token);
+        var look = snapshot ?? SelectedLook;
+        if (look is null) return source;
+        var rendered = await _preview.RenderWithResultAsync(source, look, token);
+        var output = rendered.Image;
+        var settings = film ?? FilmSettings;
+        if (settings.Enabled) output = await _preview.ApplyFilmAsync(output, settings, token);
+        if (PostProcessor is not null) output = await PostProcessor(output, token);
+        return output;
+    }
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
     public IReadOnlyList<PixelTartFilmProfile> FilmProfiles => PixelTartFilmProfiles.All;

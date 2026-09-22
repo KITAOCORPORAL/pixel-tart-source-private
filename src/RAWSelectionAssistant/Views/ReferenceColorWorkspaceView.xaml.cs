@@ -12,6 +12,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private bool _wasCompact;
     private double _lastResponsiveWidth = -1;
     private int _selectionAnchor = -1;
+    private Point _filmstripDownPoint;
 
     public ReferenceColorWorkspaceView()
     {
@@ -25,7 +26,25 @@ public partial class ReferenceColorWorkspaceView : UserControl
         };
         DataContextChanged += OnDataContextChanged;
         PreviewKeyDown += OnFilmstripKeyDown;
+        AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(OnFilmstripMouseDown), true);
     }
+
+    private void OnFilmstripMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
+        if (e.OriginalSource is not DependencyObject source) return;
+        var item = ItemsControl.ContainerFromElement(FindFilmstrip(), source) as ListBoxItem;
+        if (item?.DataContext is not ReferenceTargetItem target) return;
+        var index = workspace.Targets.IndexOf(target); _filmstripDownPoint = e.GetPosition(this);
+        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) && _selectionAnchor >= 0)
+        {
+            var start = Math.Min(_selectionAnchor, index); var end = Math.Max(_selectionAnchor, index); foreach (var entry in workspace.Targets) entry.IsSelected = false; for (var i = start; i <= end; i++) workspace.Targets[i].IsSelected = true;
+        }
+        else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) target.IsSelected = !target.IsSelected;
+        else { foreach (var entry in workspace.Targets) entry.IsSelected = false; target.IsSelected = true; }
+        _selectionAnchor = index; workspace.ActivateTargetCommand.Execute(target); e.Handled = true;
+    }
+    private ListBox? FindFilmstrip() => FindName("Filmstrip") as ListBox;
 
     private void OnFilmstripKeyDown(object sender, KeyEventArgs e)
     {

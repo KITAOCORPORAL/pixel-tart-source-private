@@ -148,14 +148,15 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         if (items.Count == 0 || IsExporting) return;
         var directory = _dialogs.ChooseFolder("选择批量导出目录", null);
         if (directory is null) return;
-        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = items.Count; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
+        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null)).ToArray();
+        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
         try
         {
-            foreach (var item in items)
+            foreach (var frozenItem in frozen)
             {
-                _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
+                var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + "_仿色.jpg"); var temp = output + ".tmp";
-                try { await Task.Run(() => EncodeJpeg(item.Path, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
+                try { var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
                 catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
@@ -165,9 +166,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         catch (OperationCanceledException) { ExportStatus = $"已停止 · {ExportCompleted} / {ExportTotal}"; StatusText = "已停止导出；已完成文件保留，未完成文件已清理。"; }
         finally { _exportCancellation.Dispose(); _exportCancellation = null; RaiseExportCommands(); }
     }
-    private static void EncodeJpeg(string input, string output, CancellationToken token)
+    private static void EncodeJpeg(BitmapSource image, string output, CancellationToken token)
     {
-        token.ThrowIfCancellationRequested(); var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(input); image.EndInit(); image.Freeze(); var encoder = new JpegBitmapEncoder { QualityLevel = 95 }; encoder.Frames.Add(BitmapFrame.Create(image)); using var stream = File.Create(output); encoder.Save(stream); token.ThrowIfCancellationRequested();
+        token.ThrowIfCancellationRequested(); var encoder = new JpegBitmapEncoder { QualityLevel = 95 }; encoder.Frames.Add(BitmapFrame.Create(image)); using var stream = File.Create(output); encoder.Save(stream); token.ThrowIfCancellationRequested();
     }
     private static void TryDelete(string path) { try { if (File.Exists(path)) File.Delete(path); } catch { } }
     private void RaiseExportCommands() { ExportSelectedCommand.RaiseCanExecuteChanged(); ExportAllCommand.RaiseCanExecuteChanged(); StopExportCommand.RaiseCanExecuteChanged(); }

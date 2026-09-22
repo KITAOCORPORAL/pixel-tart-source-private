@@ -86,7 +86,7 @@
      <Button Content="导出全部" Command="{Binding ExportAllCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
      <Button Content="停止导出" Command="{Binding StopExportCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" Visibility="{Binding IsExporting, Converter={StaticResource BoolVisibility}}"/>
     </StackPanel>
-     <ListBox ItemsSource="{Binding Targets}" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
+     <ListBox x:Name="Filmstrip" ItemsSource="{Binding Targets}" BorderThickness="0" Background="Transparent" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
       <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ListBox.ItemsPanel>
       <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem"><Setter Property="Padding" Value="0"/><Setter Property="Margin" Value="0"/><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/></Style></ListBox.ItemContainerStyle>
        <ListBox.ItemTemplate><DataTemplate>
