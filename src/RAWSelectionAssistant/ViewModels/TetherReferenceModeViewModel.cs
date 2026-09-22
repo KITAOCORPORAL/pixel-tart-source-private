@@ -42,14 +42,18 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private string _workspaceSection = "仿色";
     private bool _focusView;
     private bool _contextRailOpen = true;
+    public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
+    private ProcessingState _processingState;
+    public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); } } }
+    public bool IsCancelling => State == ProcessingState.Cancelling;
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
-    public bool IsBusy => _busyOperations > 0;
-    private void BeginBusy() { _busyOperations++; OnPropertyChanged(nameof(IsBusy)); }
-    private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); OnPropertyChanged(nameof(IsBusy)); }
+    public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
+    private void BeginBusy() { _busyOperations++; State = ProcessingState.RenderingHighQuality; }
+    private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); if (_busyOperations == 0 && State is not ProcessingState.Failed) State = ProcessingState.Idle; }
     public void StopProcessing()
     {
         if (!IsBusy) return;
-        StatusText = "正在停止…";
+        State = ProcessingState.Cancelling; StatusText = "正在停止…";
         _render?.Cancel();
         Interlocked.Increment(ref _revision);
     }
@@ -61,8 +65,22 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         {
             target.AppliedLookSnapshot = snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
             target.FilmSettingsSnapshot = FilmSettings with { };
-            target.Status = "已同步仿色参数";
+            target.Status = ReferenceTargetStatus.Synced;
         }
+    }
+    public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film)
+    {
+        if (look is not null)
+        {
+            _selectedLook = look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
+            _persistedLook = _selectedLook;
+            CopyParameters(_selectedLook.Parameters);
+            RefreshReferenceSources();
+            OnPropertyChanged(nameof(SelectedLook));
+            OnPropertyChanged(nameof(CurrentLookText));
+        }
+        if (film is not null) CopyFilm(film with { });
+        _ = DebouncedRenderAsync();
     }
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
@@ -353,8 +371,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
             MatchedImage = image; StatusText = rendered.DifferenceWarning ?? "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
-        catch (OperationCanceledException) { }
-        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { HasError = true; MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
+        catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
+        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = null; StatusText = "仿色未完成，继续显示原片；接片不受影响。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
     }
     private static BitmapSource CreateInteractiveProxy(BitmapSource source, int maximumEdge)

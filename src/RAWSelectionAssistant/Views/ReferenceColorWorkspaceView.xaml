@@ -90,7 +90,7 @@
        <Border Width="132" Height="76" Margin="0,0,8,0" Padding="4" CornerRadius="6" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="1">
         <Border.Style><Style TargetType="Border"><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/><Style.Triggers><DataTrigger Binding="{Binding IsActive}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource FilmstripActiveBorderBrush}"/></DataTrigger></Style.Triggers></Style></Border.Style>
         <Button Command="{Binding DataContext.ActivateTargetCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0" Padding="0">
-         <StackPanel Orientation="Horizontal"><Image Source="{Binding Thumbnail}" Width="52" Height="52" Stretch="UniformToFill"/><StackPanel Margin="7,0,0,0" VerticalAlignment="Center"><TextBlock Text="{Binding FileName}" TextTrimming="CharacterEllipsis" Width="60"/><CheckBox Content="选中" IsChecked="{Binding IsSelected}" Margin="0,4,0,0"/></StackPanel></StackPanel>
+         <StackPanel Orientation="Horizontal"><Image Source="{Binding Thumbnail}" Width="52" Height="52" Stretch="UniformToFill"/><StackPanel Margin="7,0,0,0" VerticalAlignment="Center"><TextBlock Text="{Binding FileName}" TextTrimming="CharacterEllipsis" Width="60"/><TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" Margin="0,4,0,0"/></StackPanel></StackPanel>
         </Button>
        </Border>
       </DataTemplate></ItemsControl.ItemTemplate>
