@@ -34,18 +34,18 @@
     <SolidColorBrush x:Key="BrandDeepBrush" Color="#D79A32" />
     <SolidColorBrush x:Key="BrandSoftBrush" Color="#171B20" />
     <SolidColorBrush x:Key="BrandForegroundBrush" Color="#F2F4F6" />
-    <SolidColorBrush x:Key="ToolAccentBrush" Color="#9471C1" />
+    <SolidColorBrush x:Key="ToolAccentBrush" Color="#6E9B91" />
     <SolidColorBrush x:Key="ShellTopBrush" Color="#111016" />
     <SolidColorBrush x:Key="TaskCenterBackgroundBrush" Color="#121116" />
     <SolidColorBrush x:Key="ToolTileBrush" Color="#1A181F" />
     <SolidColorBrush x:Key="WorkbenchCardBrush" Color="#141318" />
-    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#211F27" />
-    <SolidColorBrush x:Key="InputBorderBrush" Color="#2B2931" />
-    <SolidColorBrush x:Key="InputForegroundBrush" Color="#ECEAED" />
-    <SolidColorBrush x:Key="DropdownBackgroundBrush" Color="#2B2832" />
-    <SolidColorBrush x:Key="DropdownHoverBrush" Color="#332F3A" />
-    <SolidColorBrush x:Key="DropdownSelectedBrush" Color="#2D2439" />
-    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="#2B2832" />
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#2B2F2C" />
+    <SolidColorBrush x:Key="InputBorderBrush" Color="#343936" />
+    <SolidColorBrush x:Key="InputForegroundBrush" Color="#E7E5E1" />
+    <SolidColorBrush x:Key="DropdownBackgroundBrush" Color="#353A36" />
+    <SolidColorBrush x:Key="DropdownHoverBrush" Color="#414842" />
+    <SolidColorBrush x:Key="DropdownSelectedBrush" Color="#30433E" />
+    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="#353A36" />
     <SolidColorBrush x:Key="CalendarStatusFreeBrush" Color="#59616B" />
     <SolidColorBrush x:Key="CalendarStatusScheduledBrush" Color="#E05252" />
     <SolidColorBrush x:Key="CalendarStatusShotBrush" Color="#3DB879" />
@@ -59,10 +59,10 @@
     <SolidColorBrush x:Key="CalendarTodayOutlineBrush" Color="#F2F4F6" />
     <SolidColorBrush x:Key="WorkbenchHeroBrush" Color="#211F27" />
     <!-- Reference Color / Film workspace semantic surfaces. -->
-    <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="#0B0A0E" />
-    <SolidColorBrush x:Key="InspectorBackgroundBrush" Color="#141318" />
-    <SolidColorBrush x:Key="ControlTrackBrush" Color="#3A3740" />
+    <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="#0D0F0E" />
+    <SolidColorBrush x:Key="InspectorBackgroundBrush" Color="#191B19" />
+    <SolidColorBrush x:Key="ControlTrackBrush" Color="#414842" />
     <SolidColorBrush x:Key="ControlThumbBrush" Color="#E5E4E7" />
-    <SolidColorBrush x:Key="AccentValueBrush" Color="#C4A7E3" />
-    <SolidColorBrush x:Key="FilmTileBackgroundBrush" Color="#1A181F" />
+    <SolidColorBrush x:Key="AccentValueBrush" Color="#C8BEAD" />
+    <SolidColorBrush x:Key="FilmTileBackgroundBrush" Color="#222522" />
 </ResourceDictionary>

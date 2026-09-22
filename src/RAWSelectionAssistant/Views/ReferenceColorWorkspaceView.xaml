@@ -21,7 +21,7 @@
     <ListBox Style="{StaticResource PixelTart.Segmented}" ItemsSource="{Binding Editor.WorkspaceModes}" SelectedItem="{Binding Editor.WorkspaceMode}" AutomationProperties.Name="简洁或专业模式"/>
     <Button Content="专注看图" Command="{Binding Editor.ToggleFocusViewCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
     <Button x:Name="ContextRailButton" Content="上下文" Command="{Binding Editor.ToggleContextRailCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
-    <Button Content="选择照片" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0"/>
+    <Button Content="导入照片" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0"/>
    </StackPanel>
   </Grid>
   <Grid x:Name="WorkspaceGrid" Grid.Row="1">
@@ -37,9 +37,9 @@
       </StackPanel>
       <StackPanel Visibility="{Binding Editor.WorkspaceSection, Converter={StaticResource SectionVisibility}, ConverterParameter=仿色}">
        <TextBlock Text="参考仿色 · 核心调整" Style="{StaticResource SectionTitleText}" Margin="0,0,0,12"/>
-       <Grid><TextBlock Text="仿色强度" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.MatchStrength, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.MatchStrength}"/>
-       <Grid Margin="0,22,0,0"><TextBlock Text="影调匹配" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.ToneStrength, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.ToneStrength}"/>
-       <Grid Margin="0,22,0,0"><TextBlock Text="颜色匹配" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.ColorStrength, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.ColorStrength}"/>
+       <Grid><TextBlock Text="仿色强度" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.MatchStrength, StringFormat={}{0:0}%}" Foreground="{DynamicResource TextValueBrush}" FontWeight="Medium" HorizontalAlignment="Right"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.MatchStrength}"/>
+       <Grid Margin="0,22,0,0"><TextBlock Text="影调匹配" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.ToneStrength, StringFormat={}{0:0}%}" Foreground="{DynamicResource TextValueBrush}" FontWeight="Medium" HorizontalAlignment="Right"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.ToneStrength}"/>
+       <Grid Margin="0,22,0,0"><TextBlock Text="颜色匹配" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.ColorStrength, StringFormat={}{0:0}%}" Foreground="{DynamicResource TextValueBrush}" FontWeight="Medium" HorizontalAlignment="Right"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.ColorStrength}"/>
        <Expander Header="高级调整 · 保护" IsExpanded="True" Style="{StaticResource PixelTart.Section}" Margin="0,26,0,0"><StackPanel>
         <Grid><TextBlock Text="肤色保护" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.SkinProtection, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.SkinProtection}"/>
         <StackPanel Visibility="{Binding Editor.IsProMode, Converter={StaticResource BoolVisibility}}"><Grid Margin="0,14,0,0"><TextBlock Text="高光保护" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.HighlightProtection, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.HighlightProtection}"/><Grid Margin="0,14,0,0"><TextBlock Text="中性保护" Style="{StaticResource ParameterLabel}"/><TextBlock Text="{Binding Editor.NeutralProtection, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}"/></Grid><Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.NeutralProtection}"/></StackPanel>
@@ -67,7 +67,7 @@
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
     <Grid Grid.Row="0" Margin="12,10"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="{Binding Editor.StatusText}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis"/><ProgressBar Height="2" IsIndeterminate="True" Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding Editor.IsBusy}"/></StackPanel><ListBox Grid.Column="1" Style="{StaticResource PixelTart.Segmented}" ItemsSource="{Binding Editor.ViewModes}" SelectedItem="{Binding Editor.ViewMode}" AutomationProperties.Name="预览模式"/></Grid>
     <Grid Grid.Row="1" Background="{DynamicResource CanvasBackgroundBrush}"><Image Source="{Binding Editor.SourceImage}" Stretch="Uniform" Visibility="{Binding Editor.ShowOriginal, Converter={StaticResource BoolVisibility}}"/><Image Source="{Binding Editor.MatchedImage}" Stretch="Uniform" Visibility="{Binding Editor.ShowMatched, Converter={StaticResource BoolVisibility}}"/><views:TetherReferenceSplitView Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" SplitPosition="{Binding Editor.SplitPosition}" Visibility="{Binding Editor.ShowSplit, Converter={StaticResource BoolVisibility}}"/><Grid Visibility="{Binding Editor.ShowSideBySide, Converter={StaticResource BoolVisibility}}"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="1"/><ColumnDefinition/></Grid.ColumnDefinitions><Image Source="{Binding Editor.SourceImage}" Stretch="Uniform"/><Border Grid.Column="1" Background="{DynamicResource DividerBrush}"/><Image Grid.Column="2" Source="{Binding Editor.MatchedImage}" Stretch="Uniform"/></Grid><StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding HasTarget, Converter={StaticResource InverseBoolVisibility}}"><TextBlock Text="待调色照片" Style="{StaticResource PageTitleText}" HorizontalAlignment="Center"/><TextBlock Text="选择照片后，原片始终保持只读。" Style="{StaticResource CaptionText}" Margin="0,8,0,0"/><Button Content="选择照片" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0"/></StackPanel></Grid>
-    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="12,10"><Button Content="生成高质量预览" Command="{Binding Editor.ApplyCommand}" Style="{StaticResource PrimaryButton}"/><Button Content="重试" Command="{Binding Editor.ApplyCommand}" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0" Visibility="{Binding Editor.HasError, Converter={StaticResource BoolVisibility}}"/><TextBlock Text="{Binding Editor.SessionAdjustmentText}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="12,0,0,0"/></StackPanel>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="12,10"><Button Content="生成高质量预览" Command="{Binding Editor.ApplyCommand}" Style="{StaticResource PrimaryButton}"/><Button Content="停止处理" Command="{Binding StopProcessingCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" Visibility="{Binding Editor.IsBusy, Converter={StaticResource BoolVisibility}}" AutomationProperties.Name="停止处理"/><Button Content="重试" Command="{Binding Editor.ApplyCommand}" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0" Visibility="{Binding Editor.HasError, Converter={StaticResource BoolVisibility}}"/><TextBlock Text="{Binding Editor.SessionAdjustmentText}" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="12,0,0,0"/></StackPanel>
    </Grid></Border>
    <ScrollViewer x:Name="RightRail" Grid.Column="2" VerticalScrollBarVisibility="Auto" Margin="14,0,0,0" Visibility="{Binding Editor.IsContextVisible, Converter={StaticResource BoolVisibility}}"><StackPanel>
     <TextBlock Text="参考图片" Style="{StaticResource SectionTitleText}" Margin="0,0,0,12"/>
@@ -77,7 +77,27 @@
     <Expander Header="输出说明" IsExpanded="True" Style="{StaticResource PixelTart.Section}" Margin="0,14,0,0"><TextBlock Text="预览使用 33³ LUT，导出使用 65³ LUT。胶片像素效果不会伪装成 3D LUT。" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/></Expander>
    </StackPanel></ScrollViewer>
   </Grid>
-  <TextBlock Grid.Row="2" Text="仅在本机处理 · 原片只读 · 胶片参数可关闭" Style="{StaticResource CaptionText}" Margin="0,10,0,0"/>
+  <Border Grid.Row="2" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="8" Padding="8,6" Margin="0,10,0,0">
+   <DockPanel LastChildFill="True">
+    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+     <Button Content="同步到所选" Command="{Binding SyncSelectedCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
+     <Button Content="同步到全部照片" Command="{Binding SyncAllCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0"/>
+    </StackPanel>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+     <ItemsControl ItemsSource="{Binding Targets}">
+      <ItemsControl.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate><DataTemplate>
+       <Border Width="132" Height="76" Margin="0,0,8,0" Padding="4" CornerRadius="6" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="1">
+        <Border.Style><Style TargetType="Border"><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/><Style.Triggers><DataTrigger Binding="{Binding IsActive}" Value="True"><Setter Property="BorderBrush" Value="{DynamicResource FilmstripActiveBorderBrush}"/></DataTrigger></Style.Triggers></Style></Border.Style>
+        <Button Command="{Binding DataContext.ActivateTargetCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Background="Transparent" BorderThickness="0" Padding="0">
+         <StackPanel Orientation="Horizontal"><Image Source="{Binding Thumbnail}" Width="52" Height="52" Stretch="UniformToFill"/><StackPanel Margin="7,0,0,0" VerticalAlignment="Center"><TextBlock Text="{Binding FileName}" TextTrimming="CharacterEllipsis" Width="60"/><CheckBox Content="选中" IsChecked="{Binding IsSelected}" Margin="0,4,0,0"/></StackPanel></StackPanel>
+        </Button>
+       </Border>
+      </DataTemplate></ItemsControl.ItemTemplate>
+     </ItemsControl>
+    </ScrollViewer>
+   </DockPanel>
+  </Border>
  </Grid>
 </UserControl>
 

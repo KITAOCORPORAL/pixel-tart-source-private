@@ -1,22 +1,21 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Pixel Tart A-v2 locked dark palette. Legacy aliases remain in Theme.Dark.xaml. -->
-    <!-- Studio v2 premium tonal ladder: neutral-warm violet blacks, never pure black. -->
-    <Color x:Key="AppBackgroundColor">#0E0D12</Color>
-    <Color x:Key="Surface01Color">#141318</Color>
-    <Color x:Key="Surface02Color">#1A181F</Color>
-    <Color x:Key="Surface03Color">#211F27</Color>
-    <Color x:Key="SurfaceElevatedColor">#2B2832</Color>
-    <Color x:Key="BorderSubtleColor">#2B2931</Color>
-    <Color x:Key="BorderStrongColor">#45414E</Color>
-    <Color x:Key="TextPrimaryColor">#ECEAED</Color>
-    <Color x:Key="TextSecondaryColor">#AAA6AF</Color>
-    <Color x:Key="TextMutedColor">#77727E</Color>
-    <Color x:Key="TextDisabledColor">#55515B</Color>
-    <!-- Pixel Tart Muted Violet v2; emerald remains available to the A/B harness. -->
-    <Color x:Key="PrimaryColor">#9471C1</Color>
-    <Color x:Key="PrimaryHoverColor">#A07DCC</Color>
-    <Color x:Key="PrimaryPressedColor">#8462AF</Color>
-    <Color x:Key="PhotographyGoldColor">#D79A32</Color>
+    <!-- Pixel Tart Original Palette: graphite, mineral, oxidized copper and warm silver. -->
+    <Color x:Key="AppBackgroundColor">#111312</Color>
+    <Color x:Key="Surface01Color">#191B19</Color>
+    <Color x:Key="Surface02Color">#222522</Color>
+    <Color x:Key="Surface03Color">#2B2F2C</Color>
+    <Color x:Key="SurfaceElevatedColor">#353A36</Color>
+    <Color x:Key="BorderSubtleColor">#343936</Color>
+    <Color x:Key="BorderStrongColor">#555C56</Color>
+    <Color x:Key="TextPrimaryColor">#E7E5E1</Color>
+    <Color x:Key="TextSecondaryColor">#A8A49F</Color>
+    <Color x:Key="TextMutedColor">#77736F</Color>
+    <Color x:Key="TextDisabledColor">#5D625E</Color>
+    <Color x:Key="PrimaryColor">#6E9B91</Color>
+    <Color x:Key="PrimaryHoverColor">#86B0A5</Color>
+    <Color x:Key="PrimaryPressedColor">#567B73</Color>
+    <Color x:Key="PhotographyGoldColor">#C79B5B</Color>
     <Color x:Key="SuccessColor">#42B883</Color>
     <Color x:Key="WarningColor">#E0AD43</Color>
     <Color x:Key="DangerColor">#D85A5A</Color>
@@ -38,6 +37,22 @@
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
     <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMutedColor}" />
     <SolidColorBrush x:Key="TextDisabledBrush" Color="{StaticResource TextDisabledColor}" />
+    <Color x:Key="TextValueColor">#C8BEAD</Color>
+    <Color x:Key="TextValueStrongColor">#DDD2BE</Color>
+    <Color x:Key="RatingEmptyColor">#55514E</Color>
+    <Color x:Key="RatingPreviewColor">#BA9659</Color>
+    <Color x:Key="RatingCommittedColor">#D1AB6A</Color>
+    <Color x:Key="MetadataValueSurfaceColor">#211F27</Color>
+    <Color x:Key="FilmstripActiveBorderColor">#86B0A5</Color>
+    <Color x:Key="FilmstripSelectedBorderColor">#52756E</Color>
+    <SolidColorBrush x:Key="TextValueBrush" Color="{StaticResource TextValueColor}" />
+    <SolidColorBrush x:Key="TextValueStrongBrush" Color="{StaticResource TextValueStrongColor}" />
+    <SolidColorBrush x:Key="RatingEmptyBrush" Color="{StaticResource RatingEmptyColor}" />
+    <SolidColorBrush x:Key="RatingPreviewBrush" Color="{StaticResource RatingPreviewColor}" />
+    <SolidColorBrush x:Key="RatingCommittedBrush" Color="{StaticResource RatingCommittedColor}" />
+    <SolidColorBrush x:Key="MetadataValueSurfaceBrush" Color="{StaticResource MetadataValueSurfaceColor}" />
+    <SolidColorBrush x:Key="FilmstripActiveBorderBrush" Color="{StaticResource FilmstripActiveBorderColor}" />
+    <SolidColorBrush x:Key="FilmstripSelectedBorderBrush" Color="{StaticResource FilmstripSelectedBorderColor}" />
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
     <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
     <SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryPressedColor}" />

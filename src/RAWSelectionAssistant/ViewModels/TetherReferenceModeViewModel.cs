@@ -46,6 +46,24 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public bool IsBusy => _busyOperations > 0;
     private void BeginBusy() { _busyOperations++; OnPropertyChanged(nameof(IsBusy)); }
     private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); OnPropertyChanged(nameof(IsBusy)); }
+    public void StopProcessing()
+    {
+        if (!IsBusy) return;
+        StatusText = "正在停止…";
+        _render?.Cancel();
+        Interlocked.Increment(ref _revision);
+    }
+    public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
+    {
+        var snapshot = SelectedLook?.Normalize();
+        if (snapshot is null) return;
+        foreach (var target in targets)
+        {
+            target.AppliedLookSnapshot = snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
+            target.FilmSettingsSnapshot = FilmSettings with { };
+            target.Status = "已同步仿色参数";
+        }
+    }
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
     public IReadOnlyList<PixelTartFilmProfile> FilmProfiles => PixelTartFilmProfiles.All;
@@ -219,7 +237,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             var look = new ReferenceLook(Guid.NewGuid(), Path.GetFileNameWithoutExtension(path), _projectId, [source], new(), now, now);
             await _store.SaveAsync(look, token: _lifetime.Token); Looks.Insert(0, look); SelectedLook = look; StatusText = "参考图已安全关联；原文件未复制、未修改。";
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException) { StatusText = "已停止；已恢复最后有效预览。"; }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or FileFormatException)
         { StatusText = "参考图无法读取；现有色彩方案保持不变。"; }
         finally { EndBusy(); }
