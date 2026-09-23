@@ -1,0 +1,16 @@
+{
+  "run_id": "photo-closure-20260923-b37ab5a3",
+  "product_source_sha": "b37ab5a3224907fc352f8d6f0697c9082d922839",
+  "outputs": [
+    { "id": "inactive-target-export", "result": "PASS", "artifact": "batch-export-processed-pixels" },
+    { "id": "per-target-snapshot", "result": "PASS", "artifact": "batch-export-processed-pixels" },
+    { "id": "preview-export-parity", "result": "PASS", "max_channel_delta": 0 },
+    { "id": "metadata", "result": "PASS", "switches": 30 },
+    { "id": "filmstrip", "result": "PASS", "targets": 500, "realized_containers": 21 },
+    { "id": "rating", "result": "PASS", "surfaces": ["Asset", "Tether", "Reference"] },
+    { "id": "match-v3", "result": "PASS" },
+    { "id": "reference-cache", "result": "PASS", "hits": 2, "misses": 2, "executions": 2 },
+    { "id": "dpi-logical", "result": "PASS", "scales": [100, 125, 150, 200] },
+    { "id": "performance-baseline", "result": "PASS_WITH_BASELINE" }
+  ]
+}

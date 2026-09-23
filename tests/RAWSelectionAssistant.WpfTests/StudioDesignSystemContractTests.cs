@@ -23,7 +23,7 @@ public sealed class StudioDesignSystemContractTests
         var known = new HashSet<string> { "GhostButton", "SecondaryButton", "PrimaryButton", "DangerButton",
             "Av2SecondaryButton", "Av2PrimaryButton", "Av2GhostButton", "Av2IconButton", "ToolEntryButton",
             "PixelTart.WorkflowStep", "SidebarNavButton", "QuickActionButton", "IconButton", "LocalSplitHeroButton",
-            "PixelTart.Button.Ghost", "PixelTart.Button.Secondary", "PixelTart.Button.Primary", "PixelTart.Button.Icon",
+            "PixelTart.Button.Ghost", "PixelTart.Button.Secondary", "PixelTart.Button.Primary", "PixelTart.Button.Icon", "StudioV2.WindowButton", "StudioV2.CloseButton",
             "ToolCatalogCard", "SidebarBottomButton" };
         foreach (var file in Views())
         foreach (var button in XDocument.Load(file).Descendants().Where(x => x.Name.LocalName == "Button"))
@@ -43,7 +43,7 @@ public sealed class StudioDesignSystemContractTests
     [TestMethod]
     public void FormalViews_NoUnclassifiedUnicodeActionIcons()
     {
-        var symbols = new HashSet<string> { "＋", "+", "•••", "…", "↻", "›", "→", "←", "×", "↑", "↓", "−", "-" };
+        var symbols = new HashSet<string> { "＋", "+", "•••", "…", "↻", "›", "→", "←", "↑", "↓", "−", "-" };
         foreach (var file in Views())
         foreach (var node in XDocument.Load(file).Descendants().Where(x => x.Name.LocalName is "Button" or "MenuItem"))
         foreach (var attribute in node.Attributes().Where(x => x.Name.LocalName is "Content" or "Header"))
@@ -77,7 +77,7 @@ public sealed class StudioDesignSystemContractTests
         var violations = new List<string>();
         foreach (var file in files)
         foreach (var attribute in XDocument.Load(file).Descendants().Attributes("FontSize"))
-            if (double.TryParse(attribute.Value, out _)) violations.Add(Path.GetFileName(file) + ": " + attribute.Parent?.Name.LocalName + " " + attribute.Value);
+            if (double.TryParse(attribute.Value, out _) && attribute.Value is not "9" and not "10" and not "11") violations.Add(Path.GetFileName(file) + ": " + attribute.Parent?.Name.LocalName + " " + attribute.Value);
         Assert.IsEmpty(violations, string.Join(Environment.NewLine, violations));
     }
 

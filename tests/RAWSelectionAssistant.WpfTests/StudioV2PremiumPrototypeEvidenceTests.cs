@@ -16,7 +16,10 @@ public sealed class StudioV2PremiumPrototypeEvidenceTests
     public void PremiumPrototype_ThreeRealPages_RenderReviewSet()
     {
         if (Environment.GetEnvironmentVariable("PIXEL_TART_STUDIO_V2_EVIDENCE") != "1")
-            Assert.Inconclusive("Set PIXEL_TART_STUDIO_V2_EVIDENCE=1 to render the premium prototype evidence.");
+        {
+            Assert.Inconclusive("Opt-in visual evidence is not enabled in this bounded regression run.");
+            return;
+        }
 
         Exception? failure = null;
         var complete = false;

@@ -13,7 +13,11 @@ public sealed class ReferenceFilmPerformanceTests
     public void FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested()
     {
         var output = Environment.GetEnvironmentVariable("PIXEL_TART_PERFORMANCE_EVIDENCE");
-        if (string.IsNullOrWhiteSpace(output)) Assert.Inconclusive("Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.");
+        if (string.IsNullOrWhiteSpace(output))
+        {
+            Assert.Inconclusive("Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.");
+            return;
+        }
         Directory.CreateDirectory(output!);
         var rows = new List<object>();
         Measure(1600, 1067, "1600px interactive proxy");

@@ -3,7 +3,7 @@ namespace RAWSelectionAssistant.Tests;
 [TestClass]
 public sealed class UiSimplification144Tests
 {
-    [TestMethod] public void RootLayout_RetainsNativeMenuContentAndStatusRows() => Contains(MainXaml(), "<RowDefinition Height=\"36\" />", "<RowDefinition Height=\"*\" />", "<RowDefinition Height=\"34\" />");
+    [TestMethod] public void RootLayout_RetainsNativeMenuContentAndStatusRows() => Contains(MainXaml(), "<RowDefinition Height=\"{DynamicResource StudioV2.CommandBarHeight}\" />", "<RowDefinition Height=\"*\" />", "<RowDefinition Height=\"{DynamicResource StudioV2.StatusBarHeight}\" />");
     [TestMethod] public void GlobalBrandImage_IsNotRepeatedAsLargeContentLogo() => DoesNotContain(MainXaml(), "<Image Source=\"Assets/AppIcon.ico\"");
     [TestMethod] public void GlobalIndexBadge_IsRemoved() => DoesNotContain(MainXaml(), "Style=\"{StaticResource TopBarBadge}\"");
     [TestMethod] public void CancelTask_IsAvailableInsideWorkflowActions() => Contains(MainXaml(), "x:Name=\"CancelButton\" Content=\"取消当前任务\"", "Command=\"{Binding CancelCommand}\"");
@@ -11,7 +11,7 @@ public sealed class UiSimplification144Tests
     [TestMethod] public void WorkbenchPrimaryAction_UsesDeepGradient() => Contains(MainXaml(), "x:Name=\"StartLocalSplitCard\"", "WorkbenchHeroBrush", "Content=\"?\"");
     [TestMethod] public void WorkbenchPrimaryAction_HasExplicitTextAndIconColumns() => Contains(MainXaml(), "<ColumnDefinition Width=\"48\" />", "开始本地分片", "IconLocalSplit");
     [TestMethod] public void RecentProjectTile_UsesCoverAndInformationPanel() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "<RowDefinition Height=\"190\" />", "继续处理");
-    [TestMethod] public void Workbench_UsesBalancedModuleSpacing() => Contains(MainXaml(), "Margin=\"22,20,20,18\"", "<RowDefinition Height=\"16\" />", "Grid.Column=\"2\" Style=\"{StaticResource PixelTart.SectionSurface}\"");
+    [TestMethod] public void Workbench_UsesBalancedModuleSpacing() => Contains(MainXaml(), "Margin=\"28,24,24,22\"", "<RowDefinition Height=\"24\" />", "Grid.Column=\"2\" Style=\"{StaticResource PixelTart.SectionSurface}\"");
     [TestMethod] public void Version_Is230() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.3.0\"");
     [TestMethod] public void Installer_IsNamedFor230() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64");
     [TestMethod] public void Release_RemainsWinExeSelfContainedX64() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");

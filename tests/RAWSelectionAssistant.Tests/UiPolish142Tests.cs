@@ -7,11 +7,11 @@ public sealed class UiPolish142Tests
     [TestMethod] public void Sidebar_NavigationScrollsWithoutVisualScrollbar() => Contains(MainXaml(), "x:Name=\"SidebarNavigationScroll\"", "VerticalScrollBarVisibility=\"Hidden\"", "HorizontalScrollBarVisibility=\"Disabled\"");
     [TestMethod] public void Sidebar_EditionCardIsCompact() => Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Status.xaml"), "SidebarEditionCard", "Padding\" Value=\"10", "Margin\" Value=\"6,5", "Height\" Value=\"40");
     [TestMethod] public void Sidebar_DoesNotRepeatBrand() { DoesNotContain(MainXaml(), "<Image Source=\"Assets/AppIcon.ico\"", "本地摄影工具箱"); Contains(MainXaml(), "Title=\"像素蛋挞\""); }
-    [TestMethod] public void GlobalStatusBar_IsIndependentFixedRow() => Contains(MainXaml(), "<RowDefinition Height=\"34\" />", "Grid.Row=\"2\" Height=\"34\"", "BorderThickness=\"0,1,0,0\"");
+    [TestMethod] public void GlobalStatusBar_IsIndependentFixedRow() => Contains(MainXaml(), "<RowDefinition Height=\"{DynamicResource StudioV2.StatusBarHeight}\" />", "x:Name=\"BottomStatusBar\" Grid.Row=\"2\"", "BorderThickness=\"0,1,0,0\"");
     [TestMethod] public void Workbench_HasBalancedThreeColumnShell() => Contains(MainXaml(), "x:Name=\"WorkbenchShell\"", "MinWidth=\"760\"", "x:Name=\"WorkbenchTaskColumn\" Width=\"320\"");
     [TestMethod] public void Workbench_UsesDenseVerticalRhythm()
     {
-        Contains(MainXaml(), "<RowDefinition Height=\"106\" />", "x:Name=\"WorkbenchOverviewRow\" Height=\"230\"", "x:Name=\"WorkbenchScheduleRow\" Height=\"170\"", "x:Name=\"RecentProjectsArea\"");
+        Contains(MainXaml(), "<RowDefinition Height=\"102\" />", "x:Name=\"WorkbenchOverviewRow\" Height=\"206\"", "x:Name=\"WorkbenchScheduleRow\" Height=\"164\"", "x:Name=\"RecentProjectsArea\"");
         Contains(Text("src/RAWSelectionAssistant/MainWindow.xaml.cs"), "shortWorkbench", "veryShortWorkbench", "WorkbenchOverviewRow.Height", "WorkbenchScheduleRow.Height");
     }
     [TestMethod] public void EditionUpgrade_IsInsideSidebarFooter() => Contains(MainXaml(), "x:Name=\"EditionStatusArea\"", "Content=\"升级\"", "CommandParameter=\"Activation\"");

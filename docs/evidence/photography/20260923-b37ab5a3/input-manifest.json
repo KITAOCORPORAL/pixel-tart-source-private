@@ -1,0 +1,12 @@
+{
+  "run_id": "photo-closure-20260923-b37ab5a3",
+  "product_source_sha": "b37ab5a3224907fc352f8d6f0697c9082d922839",
+  "fixture_version": "synthetic-reference-v1",
+  "inputs": [
+    { "id": "reference-neutral", "kind": "synthetic-reference", "profile": "sRGB", "dimensions": "1180x720" },
+    { "id": "reference-warm", "kind": "synthetic-reference", "profile": "sRGB", "dimensions": "1180x720" },
+    { "id": "reference-cool", "kind": "synthetic-reference", "profile": "sRGB", "dimensions": "1180x720" },
+    { "id": "workload-film-24mp", "kind": "synthetic-performance", "dimensions": "6000x4000" },
+    { "id": "workload-filmstrip-500", "kind": "synthetic-performance", "targets": 500 }
+  ]
+}

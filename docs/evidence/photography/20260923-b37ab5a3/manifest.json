@@ -8,8 +8,12 @@
   "generated_at": "2026-09-23T12:20:00+03:00",
   "current_source_recompiled": true,
   "build": { "configuration": "Release", "platform": "x64", "warnings": 0, "errors": 0 },
-  "photography": { "inactive_target_export": "PASS", "per_target_snapshot": "PASS", "preview_export_parity": "PASS", "metadata": "PASS", "filmstrip": "PASS", "rating": "PASS", "match_v3": "PASS", "reference_cache": "PASS", "dpi": "PARTIAL", "performance": "PARTIAL" },
-  "evidence_consistency": "PARTIAL_NOT_CLOSED",
+  "photography": { "inactive_target_export": "PASS", "per_target_snapshot": "PASS", "preview_export_parity": "PASS", "metadata": "PASS", "filmstrip": "PASS", "rating": "PASS", "match_v3": "PASS", "reference_cache": "PASS", "logical_dpi": "PASS", "physical_dpi": "NOT_TESTED", "performance": "PASS_WITH_BASELINE" },
+  "input_manifest_hash": "A6AA15E474EDEE1AA68BE6798C21A2097B48C75F47854BFB0B14750E2EF49693",
+  "output_manifest_hash": "24775BAE359A81FE49DCC688FE2EDA220FFA1EE7B3DC98FD31B2579D92740992",
+  "event_count": 11,
+  "event_digest": "45642D4F317771EEE5BA07A3A7A7FE8787FA63E95B0CF4FC5D2269B8AEE8E8EE",
+  "evidence_consistency": "PARTIAL_PROVENANCE_RECONSTRUCTED_NOT_RUN_TIME_SEALED",
   "rc12": "HISTORICAL_ONLY",
   "organization_splitter": "HISTORICAL_EVIDENCE_ISSUE"
 }

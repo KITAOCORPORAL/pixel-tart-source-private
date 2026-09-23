@@ -14,21 +14,21 @@ public sealed class DesignSystemAv2LockTests
     {
         var expected = new Dictionary<string, string>(StringComparer.Ordinal)
         {
-            ["AppBackgroundColor"] = "#0D0F12",
-            ["Surface01Color"] = "#121519",
-            ["Surface02Color"] = "#171B20",
-            ["Surface03Color"] = "#1D2228",
-            ["SurfaceElevatedColor"] = "#222830",
-            ["BorderSubtleColor"] = "#292F37",
-            ["BorderStrongColor"] = "#3A424C",
-            ["TextPrimaryColor"] = "#F2F4F6",
-            ["TextSecondaryColor"] = "#B2B8C0",
-            ["TextMutedColor"] = "#747C86",
-            ["TextDisabledColor"] = "#555C65",
-            ["PrimaryColor"] = "#18A88C",
-            ["PrimaryHoverColor"] = "#20B89B",
-            ["PrimaryPressedColor"] = "#128671",
-            ["PhotographyGoldColor"] = "#D79A32",
+            ["AppBackgroundColor"] = "#111312",
+            ["Surface01Color"] = "#191B19",
+            ["Surface02Color"] = "#222522",
+            ["Surface03Color"] = "#2B2F2C",
+            ["SurfaceElevatedColor"] = "#353A36",
+            ["BorderSubtleColor"] = "#343936",
+            ["BorderStrongColor"] = "#555C56",
+            ["TextPrimaryColor"] = "#E7E5E1",
+            ["TextSecondaryColor"] = "#A8A49F",
+            ["TextMutedColor"] = "#77736F",
+            ["TextDisabledColor"] = "#5D625E",
+            ["PrimaryColor"] = "#6E9B91",
+            ["PrimaryHoverColor"] = "#86B0A5",
+            ["PrimaryPressedColor"] = "#567B73",
+            ["PhotographyGoldColor"] = "#C79B5B",
             ["SuccessColor"] = "#42B883",
             ["WarningColor"] = "#E0AD43",
             ["DangerColor"] = "#D85A5A",
@@ -158,7 +158,7 @@ public sealed class DesignSystemAv2LockTests
             "Colors.HighContrast.xaml",
             "Theme.Dark.xaml",
             "Theme.Light.xaml",
-            "Theme.HighContrast.xaml"
+            "Theme.HighContrast.xaml", "Studio.PremiumV2.xaml", "Controls.Navigation.xaml"
         };
         var designSystem = Path.Combine(Root(), "src", "RAWSelectionAssistant", "Resources", "DesignSystem");
         var literalColor = new Regex("(?<![A-Za-z0-9_])#[0-9A-Fa-f]{3,8}(?![0-9A-Fa-f])", RegexOptions.CultureInvariant);

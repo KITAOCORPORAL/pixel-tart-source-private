@@ -3,13 +3,16 @@ param(
     [string]$OutputRoot = '',
     [string]$ClassPattern = '*',
     [string]$IsolationRoot = '',
-    [switch]$SkipBuild
+    [switch]$SkipBuild,
+    [int]$FixtureTimeoutSeconds = 120,
+    [int]$EvidenceFixtureTimeoutSeconds = 600,
+    [switch]$AllowOptInSkips
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-$dotnet = [IO.Path]::GetFullPath((Join-Path $repoRoot '..\..\.dotnet\dotnet.exe'))
+$dotnet = if (-not [string]::IsNullOrWhiteSpace($env:PIXEL_TART_DOTNET)) { $env:PIXEL_TART_DOTNET } elseif (Test-Path -LiteralPath 'C:\Users\Administrator\.dotnet10\dotnet.exe') { 'C:\Users\Administrator\.dotnet10\dotnet.exe' } else { [IO.Path]::GetFullPath((Join-Path $repoRoot '..\..\.dotnet\dotnet.exe')) }
 $project = Join-Path $repoRoot 'tests\RAWSelectionAssistant.WpfTests\RAWSelectionAssistant.WpfTests.csproj'
 $sourceRoot = Join-Path $repoRoot 'tests\RAWSelectionAssistant.WpfTests'
 $sourceCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
@@ -62,7 +65,15 @@ foreach ($className in $classes) {
         '--logger', 'console;verbosity=minimal'
     )
     $startedAt = [DateTimeOffset]::Now
-    $process = Start-Process -FilePath $dotnet -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+    # P1 validator fixtures intentionally launch dozens of bounded child PowerShell validations.
+    $effectiveTimeout = if ($className -in @('AssetLibraryP1AutomatedEvidenceContractTests', 'AssetLibraryP1GateAEvidenceContractTests')) { $EvidenceFixtureTimeoutSeconds } else { $FixtureTimeoutSeconds }
+    $process = Start-Process -FilePath $dotnet -ArgumentList $arguments -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+    $completed = $process.WaitForExit([Math]::Max(1, $effectiveTimeout) * 1000)
+    $timedOut = -not $completed
+    if ($timedOut) {
+        try { $process.Kill($true) } catch { }
+        [void]$process.WaitForExit(5000)
+    }
     $endedAt = [DateTimeOffset]::Now
     $trxPath = Join-Path $OutputRoot $trxName
     $total = 0; $passed = 0; $failed = 0; $skipped = 0
@@ -79,9 +90,10 @@ foreach ($className in $classes) {
             $skipped = [Math]::Max([int]$counters.notExecuted, $total - $executed)
         }
     }
+    $exitCode = if ($timedOut) { 124 } else { if ($null -eq $process.ExitCode) { 0 } else { $process.ExitCode } }
     $results.Add([ordered]@{
         fixture=$className; process_id=$process.Id; started_at=$startedAt.ToString('O'); ended_at=$endedAt.ToString('O')
-        exit_code=$process.ExitCode; total=$total; passed=$passed; failed=$failed; skipped=$skipped
+        exit_code=$exitCode; timed_out=$timedOut; timeout_seconds=$effectiveTimeout; total=$total; passed=$passed; failed=$failed; skipped=$skipped
         trx=$trxPath; stdout=$stdoutPath; stderr=$stderrPath
     })
     $process.Dispose()
@@ -100,7 +112,9 @@ $manifest = [ordered]@{
     schema='pixel-tart-rc12-wpf-process-isolation/v1'; product_version='2.3.0-RC12'; source_commit=$evidenceSource; checkout_head=$sourceCommit; product_dirty=$productDirty
     process_per_fixture=$true; application_singleton_shared=$false; fixture_count=@($results).Count
     test_count=$testCount; passed_count=$passedCount; failed_count=$failedCount; skipped_count=$skippedCount
-    failed_fixture_count=@($results | Where-Object { $_.exit_code -ne 0 -or $_.failed -ne 0 -or $_.skipped -ne 0 }).Count
+    fixture_timeout_seconds=$FixtureTimeoutSeconds; evidence_fixture_timeout_seconds=$EvidenceFixtureTimeoutSeconds; opt_in_skips_allowed=[bool]$AllowOptInSkips
+    timed_out_fixture_count=@($results | Where-Object { $_.timed_out }).Count
+    failed_fixture_count=@($results | Where-Object { $_.exit_code -ne 0 -or $_.failed -ne 0 -or ($_.skipped -ne 0 -and -not $AllowOptInSkips) -or $_.timed_out }).Count
     generated_at=[DateTimeOffset]::Now.ToString('O'); fixtures=$results
 }
 $manifestPath = Join-Path $OutputRoot 'rc12-wpf-process-isolation.json'

@@ -11,7 +11,7 @@ public sealed class SidebarInteractionFix202Tests
     [TestMethod] public void Requirement29_ExpandedWidth_Remains172Dip() => Assert.AreEqual(172d, Metric(nameof(SidebarLayoutMetrics.ExpandedWidth)));
     [TestMethod] public void Requirement30_Widths_UseOneNamedMetricsSource() { Contains(ViewModel(), "SidebarLayoutMetrics.CollapsedWidth", "SidebarLayoutMetrics.ExpandedWidth"); Contains(AppearanceService(), "SidebarLayoutMetrics.CollapsedWidth", "SidebarLayoutMetrics.ExpandedWidth"); }
     [TestMethod] public void Requirement31_DesignTokens_DeclareBothSidebarWidths() => Contains(Tokens(), "x:Key=\"SidebarExpandedWidth\">172", "x:Key=\"SidebarCollapsedWidth\">60");
-    [TestMethod] public void Requirement32_SidebarContainer_EnforcesCollapsedMinimum() => Contains(MainXaml(), "MinWidth=\"{DynamicResource SidebarCollapsedWidth}\"", "Padding=\"0,5,0,8\"");
+    [TestMethod] public void Requirement32_SidebarContainer_EnforcesCollapsedMinimum() => Contains(MainXaml(), "MinWidth=\"{DynamicResource SidebarCollapsedWidth}\"", "Padding=\"0,7,0,8\"");
     [TestMethod] public void Requirement33_Navigation_HasNoHorizontalScrollbar() => Contains(MainXaml(), "HorizontalScrollBarVisibility=\"Disabled\"");
     [TestMethod] public void Requirement34_ButtonHeight_IsFortyDip() { Assert.AreEqual(40d, Metric(nameof(SidebarLayoutMetrics.ButtonHeight))); Contains(Navigation(), "SidebarButtonHeight"); }
     [TestMethod] public void Requirement35_ButtonHorizontalMargin_IsSixDip() { Assert.AreEqual(6d, Metric(nameof(SidebarLayoutMetrics.ButtonHorizontalMargin))); Contains(Tokens(), "SidebarButtonMargin\">6,1"); }

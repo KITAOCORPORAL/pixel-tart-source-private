@@ -831,7 +831,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 var workspace = FindVisualByAutomationId<Grid>(page, "AssetLibraryThreePaneWorkspace");
                 var collection = FindVisualByAutomationId<Border>(page, "AssetCollectionPane");
                 var search = FindVisualByAutomationId<TextBox>(page, "AssetLibrarySearch");
-                Assert.AreEqual(contentWidth, workspace.ActualWidth, 1d);
+                Assert.AreEqual(contentWidth - 16d, workspace.ActualWidth, 1d);
                 Assert.IsGreaterThanOrEqualTo(360d, collection.ActualWidth,
                     $"Collection became unusable at {physicalWidth}x{physicalHeight} / {scale:P0}.");
                 Assert.IsGreaterThanOrEqualTo(120d, search.ActualWidth,

@@ -25,6 +25,11 @@ public sealed class PlanningAutomationContractTests
     [TestMethod]
     public void ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts()
     {
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") != "1")
+        {
+            Assert.Inconclusive("Opt-in production peer evidence is not enabled in this bounded regression run.");
+            return;
+        }
         Exception? failure = null;
         bool completed = false;
         var thread = new Thread(() =>

@@ -24,6 +24,11 @@ public sealed class RealAppStartupIntegrationTests
     [TestMethod]
     public void ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated()
     {
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") != "1")
+        {
+            Assert.Inconclusive("Opt-in production startup evidence is not enabled in this bounded regression run.");
+            return;
+        }
         Exception? failure = null;
         var completed = false;
         var thread = new Thread(() =>

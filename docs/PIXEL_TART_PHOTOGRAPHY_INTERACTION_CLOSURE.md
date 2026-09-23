@@ -7,6 +7,7 @@
 - FixtureVersion: `synthetic-reference-v1`
 - GeneratedAt: `2026-09-23T12:20:00+03:00`
 - RC12: **HISTORICAL ONLY**
+- This sealed-label record describes the earlier `b37ab5a3` source. The regression below was run against the subsequently checked-out `cad0b312` plus uncommitted gate fixes; its numbers are not silently relabeled as the older run.
 
 ## Toolchain and source build
 
@@ -33,7 +34,7 @@
 | Match v3 | **PASS** | P05/P50/P95, neutral, skin-like, highlight, shadow, warm, cool, cast and saturation fixtures |
 | Reference Cache | **PASS** | Same reference: 2 hits, 2 misses, 2 executions; timestamp change invalidates cache |
 | DPI | **PARTIAL** | In-process 100/125/150/200% renders at 1180x720; physical-display validation is not claimed |
-| Performance | **PARTIAL** | Current-source measurements recorded for import, film, batch export, cancel, filmstrip virtualization and rapid switching; production-size acceptance remains open |
+| Performance | **PASS WITH BASELINE** | Current-source measurements recorded for import, film, batch export, cancel, filmstrip virtualization and rapid switching; 30 higher-resolution processed exports extend the baseline |
 
 ## Measured evidence
 
@@ -43,17 +44,24 @@
 - Filmstrip 500 targets: `148.0 ms`; `21` realized containers; process peak `110.68 MB`.
 - Rapid 30 target switches: `46.4 ms`.
 - Reference cache analysis time across two misses: `1751.67 ms`.
+- Color Studio processed export: 30 synthetic 2400x1600 fixtures, `60,955 ms` total, process peak `827.7 MB` (cold fixture creation excluded). This is a baseline, not a speed target or memory optimization claim.
 
 ## Evidence consistency
 
-**PARTIAL / NOT CLOSED.** This run's automation, reports and provenance use the RunId and ProductSourceSha above. The old `organization-splitter` and related RC12 evidence were not regenerated; they are a **HISTORICAL EVIDENCE ISSUE** and are intentionally separated from current Photography evidence. No unified event digest or Input/Output Manifest hash is claimed.
+**ARTIFACT INTEGRITY PASS; SAME-RUN PROVENANCE PARTIAL.** The RunId, ProductSourceSha, input/output hashes, 11-event digest and artifact hashes are checked by automated tests. These fields were assembled retrospectively, not captured by a run-time sealed producer. They therefore establish file integrity and consistent labels, but cannot prove that every result was generated in one original execution. The old `organization-splitter` and related RC12 evidence remain a separate **HISTORICAL EVIDENCE ISSUE**.
 
 ## Remaining blockers
 
-- Full Core suite has 1,381 passed, 10 legacy UI literal-assertion failures, and 1 skipped test.
-- Full WPF suite was bounded and stopped after a no-output hang; it is not reported as PASS.
-- Physical display DPI and a unified event-digest evidence run remain open.
+- Core full regression: **1,400 passed, 0 failed, 1 skipped** (`FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested` requires an explicit evidence output path). The legacy literal assertions were updated to current product resources rather than reverting product text.
+- WPF final isolated full regression: **143 classes, 1,308 passed, 0 failed, 4 justified opt-in visual/production-evidence skips, 0 timed out**. Each class ran in its own bounded test process; the two historical P1 validator classes need longer, still bounded budgets because they launch dozens of PowerShell validations. Earlier 45-second timeouts were class-budget exhaustion, not a demonstrated Dispatcher deadlock. Manifest: local ignored `artifacts/photo-wpf-final-20260923/rc12-wpf-process-isolation.json` (not sealed Photography evidence).
+- Physical display DPI remains **NOT TESTED**. The in-process 100/125/150/200% renders passed and do not claim a physical monitor change.
+- Photography evidence same-run sealing remains open; artifact integrity is not equivalent to provenance closure.
 
 ## Packaging
 
 Installer: **NOT GENERATED**
+
+## Gate separation
+
+- Product Development Gate: **FAIL / PENDING SAME-RUN EVIDENCE PROVENANCE** (test behavior and performance baseline pass; the historical Photography RunId is not a sealed current-source run)
+- Release Hardware Gate: **PENDING** (physical DPI is intentionally not tested here)

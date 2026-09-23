@@ -100,8 +100,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var colors = File.ReadAllText(DarkColorsPath);
         foreach (var token in new[] { "TextPrimaryColor", "TextSecondaryColor", "TextDisabledColor", "PrimaryColor", "PrimaryHoverColor", "PrimaryPressedColor" })
             StringAssert.Contains(colors, token);
-        Assert.IsTrue(colors.Contains("#F2F4F6", StringComparison.OrdinalIgnoreCase));
-        Assert.IsTrue(colors.Contains("#07100E", StringComparison.OrdinalIgnoreCase));
+        Assert.IsTrue(colors.Contains("#E7E5E1", StringComparison.OrdinalIgnoreCase));
+        Assert.IsTrue(colors.Contains("#F8F5FA", StringComparison.OrdinalIgnoreCase));
     }
 
     private static string Attribute(XElement element, string name) => element.Attribute(name)?.Value ?? string.Empty;

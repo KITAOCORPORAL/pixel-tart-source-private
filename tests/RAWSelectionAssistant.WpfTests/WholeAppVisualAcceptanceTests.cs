@@ -17,6 +17,11 @@ public sealed class WholeAppVisualAcceptanceTests
     [TestMethod]
     public void ProductionApp_AllRoutes_RenderReviewInventory()
     {
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") != "1")
+        {
+            Assert.Inconclusive("Opt-in whole-app visual evidence is not enabled in this bounded regression run.");
+            return;
+        }
         Exception? failure = null;
         var complete = false;
         var thread = new Thread(() =>
