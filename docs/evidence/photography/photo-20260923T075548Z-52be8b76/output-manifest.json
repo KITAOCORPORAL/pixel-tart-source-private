@@ -1,15 +1,9 @@
 {
-  "schema": "pixel-tart-photography-acceptance/v1",
   "run_id": "photo-20260923T075548Z-52be8b76",
   "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-  "branch": "integration/pixel-tart-developer-preview",
-  "sdk_version": "10.0.401",
-  "fixture_version": "synthetic-reference-v2",
-  "started_at": "2026-09-23T15:55:48.6726473+08:00",
-  "completed_at": "2026-09-23T16:30:21.9489254+08:00",
-  "machine_class": "Windows-native-WPF-development",
-  "architecture": "X64",
-  "commands": [
+  "generated_at": "2026-09-23T08:36:06.7566171+00:00",
+  "producer": "Seal-PhotographyAcceptanceRun.ps1",
+  "suites": [
     {
       "name": "build",
       "command": "C:\\Users\\Administrator\\.dotnet10\\dotnet.exe build RAWSelectionAssistant.sln -c Release -p:Platform=x64 --no-restore -warnaserror -v:q",
@@ -76,77 +70,6 @@
       "status": "PASS"
     }
   ],
-  "exit_codes": [
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "input_manifest_hash": "935BD79975E07A79F236AAC5390283FD5DF4188C9D77F65470CB1759489949C4",
-  "output_manifest_hash": "369E4DE6515EF8AB4EAE2EE5A79C36D2AA92F86C41313932896376A897E1B018",
-  "artifact_manifest_hash": "C667A36EFFFC6BC713C3E86FA7712DC10F4BBFE9DA9517FCAD21B191962455DF",
-  "artifact_count": 6,
-  "first_event_sequence": 1,
-  "last_event_sequence": 14,
-  "event_count": 14,
-  "event_digest": "08D61D84E4FEDBEFF7EEF4FF5EBE259AEF60F7CFFFF7B6AA885E49EF854B8B84",
-  "artifacts": [
-    {
-      "path": "input-manifest.json",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7655480+00:00",
-      "producer": "photography-acceptance-runner",
-      "artifact_sha256": "935BD79975E07A79F236AAC5390283FD5DF4188C9D77F65470CB1759489949C4",
-      "bytes": 425
-    },
-    {
-      "path": "output-manifest.json",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7678349+00:00",
-      "producer": "photography-acceptance-runner",
-      "artifact_sha256": "369E4DE6515EF8AB4EAE2EE5A79C36D2AA92F86C41313932896376A897E1B018",
-      "bytes": 4373
-    },
-    {
-      "path": "events.jsonl",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7685714+00:00",
-      "producer": "photography-acceptance-runner",
-      "artifact_sha256": "08D61D84E4FEDBEFF7EEF4FF5EBE259AEF60F7CFFFF7B6AA885E49EF854B8B84",
-      "bytes": 3406
-    },
-    {
-      "path": "wpf-summary.json",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7692163+00:00",
-      "producer": "bounded-wpf-runner",
-      "artifact_sha256": "8DE0CC3E773DFBD72C0F143C08D380627E136A15306771ABC30425A3D576F8B6",
-      "bytes": 28000
-    },
-    {
-      "path": "dpi-summary.json",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7698626+00:00",
-      "producer": "photography-acceptance-runner",
-      "artifact_sha256": "8C26A64A942ADB9667924DBF0E5EFF4D2B69DF632B2C72B79666C30F2B553DF0",
-      "bytes": 1000
-    },
-    {
-      "path": "failure.json",
-      "run_id": "photo-20260923T075548Z-52be8b76",
-      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
-      "generated_at": "2026-09-23T08:36:06.7707317+00:00",
-      "producer": "photography-acceptance-runner",
-      "artifact_sha256": "D4CAE96F2FE6729A958269EE44793E045DFEE9C26BC3D073BF13A62A0AE9F6EF",
-      "bytes": 4570
-    }
-  ],
   "performance": {
     "targets": 30,
     "dimensions": "2400x1600",
@@ -158,15 +81,5 @@
   "logical_dpi": "PASS",
   "physical_dpi": "NOT_TESTED",
   "historical_rc12": "EXCLUDED",
-  "known_exceptions": [
-    "Core diagnostic opt-in skip",
-    "Four WPF production/visual opt-in skips",
-    "Physical-display DPI not tested",
-    "Historical RC12 excluded",
-    "Manifest postprocessing failure recorded at sequence 12 and recovered without suite rerun",
-    "Raw TRX and PNG capture bytes are local-only; portable run summaries and raw hashes are committed"
-  ],
-  "evidence_consistency": "PASS_WITH_DOCUMENTED_SEAL_RECOVERY",
-  "product_development_gate": "PASS",
-  "release_hardware_gate": "PENDING"
+  "seal_recovery": "RECORDED_POSTPROCESSING_FAILURE_RECOVERED"
 }

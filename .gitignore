@@ -75,3 +75,10 @@ AppData/
 *.userosscache
 *.sln.docstates
 .idea/
+
+# Same-run local raw evidence; portable summaries and digests remain versioned
+docs/evidence/photography/photo-20260923T075548Z-52be8b76/dpi/
+docs/evidence/photography/photo-20260923T075548Z-52be8b76/wpf/
+docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.stdout.txt
+docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.stderr.txt
+docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.trx

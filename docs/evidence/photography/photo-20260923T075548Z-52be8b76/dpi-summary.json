@@ -1,0 +1,30 @@
+{
+  "run_id": "photo-20260923T075548Z-52be8b76",
+  "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+  "generated_at": "2026-09-23T08:36:06.7464217+00:00",
+  "producer": "ReferenceWorkspaceDpiEvidenceTests",
+  "result": "PASS",
+  "physical_display": "NOT_TESTED",
+  "captures": [
+    {
+      "name": "ReferenceBatch-1180x720-100.png",
+      "sha256": "6A0FE5445C9668697FF8DA65365B613107E6027D8A124ED50EEBA7D7CB062663",
+      "bytes": 59888
+    },
+    {
+      "name": "ReferenceBatch-1180x720-125.png",
+      "sha256": "FC60D6C2EDC07F6EEC9F2037032BCF76FF82C14A25342CC33506772CD0518823",
+      "bytes": 90547
+    },
+    {
+      "name": "ReferenceBatch-1180x720-150.png",
+      "sha256": "32EC0A71158456EFBC5E379913CA67B8C7F905A3331E84C6F166A5F4EC3E14F9",
+      "bytes": 75117
+    },
+    {
+      "name": "ReferenceBatch-1180x720-200.png",
+      "sha256": "1F17C80DABFAD2E780662125F9E4773FC2685FF8ADB745E1DD924AEFFF74C8BB",
+      "bytes": 194249
+    }
+  ]
+}

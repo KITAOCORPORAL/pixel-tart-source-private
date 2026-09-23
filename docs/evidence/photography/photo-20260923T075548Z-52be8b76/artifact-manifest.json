@@ -1,0 +1,88 @@
+{
+  "run_id": "photo-20260923T075548Z-52be8b76",
+  "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+  "generated_at": "2026-09-23T08:36:06.7878347+00:00",
+  "producer": "Seal-PhotographyAcceptanceRun.ps1",
+  "artifacts": [
+    {
+      "path": "input-manifest.json",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7655480+00:00",
+      "producer": "photography-acceptance-runner",
+      "artifact_sha256": "935BD79975E07A79F236AAC5390283FD5DF4188C9D77F65470CB1759489949C4",
+      "bytes": 425
+    },
+    {
+      "path": "output-manifest.json",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7678349+00:00",
+      "producer": "photography-acceptance-runner",
+      "artifact_sha256": "369E4DE6515EF8AB4EAE2EE5A79C36D2AA92F86C41313932896376A897E1B018",
+      "bytes": 4373
+    },
+    {
+      "path": "events.jsonl",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7685714+00:00",
+      "producer": "photography-acceptance-runner",
+      "artifact_sha256": "08D61D84E4FEDBEFF7EEF4FF5EBE259AEF60F7CFFFF7B6AA885E49EF854B8B84",
+      "bytes": 3406
+    },
+    {
+      "path": "wpf-summary.json",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7692163+00:00",
+      "producer": "bounded-wpf-runner",
+      "artifact_sha256": "8DE0CC3E773DFBD72C0F143C08D380627E136A15306771ABC30425A3D576F8B6",
+      "bytes": 28000
+    },
+    {
+      "path": "dpi-summary.json",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7698626+00:00",
+      "producer": "photography-acceptance-runner",
+      "artifact_sha256": "8C26A64A942ADB9667924DBF0E5EFF4D2B69DF632B2C72B79666C30F2B553DF0",
+      "bytes": 1000
+    },
+    {
+      "path": "failure.json",
+      "run_id": "photo-20260923T075548Z-52be8b76",
+      "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+      "generated_at": "2026-09-23T08:36:06.7707317+00:00",
+      "producer": "photography-acceptance-runner",
+      "artifact_sha256": "D4CAE96F2FE6729A958269EE44793E045DFEE9C26BC3D073BF13A62A0AE9F6EF",
+      "bytes": 4570
+    }
+  ],
+  "raw_local_result_hashes": [
+    {
+      "path": "core.trx",
+      "sha256": "1C2E818115FBBF7D8AAF62C4A0C16F954CE535927137EB6AFC1F94C3F7C7BFA6",
+      "bytes": 1926621,
+      "local_only": true
+    },
+    {
+      "path": "photography-dedicated.trx",
+      "sha256": "87A9E2C2773CEE68C7C88188402CD586F93DB822582CA1705A9FD6742F7A02C6",
+      "bytes": 28849,
+      "local_only": true
+    },
+    {
+      "path": "logical-dpi.trx",
+      "sha256": "87332E4F86B86AF38ECA1658F50AC9C46D321845E9E26878FC4F9E7885C66FB8",
+      "bytes": 2844,
+      "local_only": true
+    },
+    {
+      "path": "wpf/rc12-wpf-process-isolation.json",
+      "sha256": "DCE5AA9B1EC5290DFF63F461444A0CBE515FD53A7492A2EA46E2B5AF1C0BDDC6",
+      "bytes": 179240,
+      "local_only": true
+    }
+  ]
+}

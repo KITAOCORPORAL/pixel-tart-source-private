@@ -1,0 +1,1301 @@
+{
+  "run_id": "photo-20260923T075548Z-52be8b76",
+  "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+  "generated_at": "2026-09-23T08:36:06.7230967+00:00",
+  "producer": "RC12WpfProcessIsolation (bounded class processes)",
+  "fixture_count": 143,
+  "test_count": 1312,
+  "passed": 1308,
+  "failed": 0,
+  "skipped": 4,
+  "timed_out": 0,
+  "fixtures": [
+    {
+      "name": "AssetCollectionCountTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetContextMenuVisualTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetFolderTreeLayoutTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetFullPreviewResolutionTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryButtonReadabilityContractTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryContextMenuEndToEndTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryEagleLayoutReconstructionTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryExifMetadataTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryLoadMoreHardeningTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1AutomatedAcceptanceSeamTests",
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1AutomatedEvidenceContractTests",
+      "total": 42,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1EvidenceToolContractTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1GateAEvidenceContractTests",
+      "total": 79,
+      "passed": 79,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1LoadStateAcceptanceTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1ManualPacketV2ContractTests",
+      "total": 19,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP1StateSeamContractTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2AutomatedAcceptanceSeamTests",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2AutomatedEvidenceContractTests",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2BrowserWpfTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2DragDropHardeningTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2KeyboardSelectionWpfTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP2LayoutBoundsContractTests",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP35FocusAcceptanceTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP36ContextMenuContractTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3AccessibilityTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3AutomatedAcceptanceDriverDisposalContractTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3AutomatedAcceptanceSeamTests",
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3AutomatedEvidenceContractTests",
+      "total": 24,
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3AutomatedRunSetContractTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3DatabaseEvidenceBehaviorTests",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3RunSealContractTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3ScopeBehaviorTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryP3WpfTests",
+      "total": 32,
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryProductRelationEndToEndTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryProductRelationUiTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryRecentLibrarySwitcherEndToEndTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibrarySmartFolderEditorWpfTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetLibraryVisualPhase2Tests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetNoLetterboxTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetQuickLoupeTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetResolutionLabelTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetThumbnailProviderTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "AssetViewerWindowTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "BatchExportProcessedPixelsTests",
+      "total": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "BookingCalendarSafetyClosureTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "BookingContinuePlanningAndResponsiveToolsTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasCropTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasFlipTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasGroupTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasInspirationBoardLinkTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasLockTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasMultiSelectionTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasObjectTransformTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasOfflinePreviewTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasProjectLinkTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasRotationTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasSourceSafetyTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasSurfaceInteractionTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasUndoRedoTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CanvasZOrderTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ClickRoutingFixFocusedTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CollageCommandStateTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "CollageExportTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "DesignSystemAv2LockTests",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "DuplicateImportDecisionTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "EmbeddedAssetLibraryWpfTests",
+      "total": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "FirstTimePhotographerUXTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "GlobalCloseSafeAreaTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "GlobalSurfaceCloseSmokeTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "InputRoutingHitTestSmokeTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "InspectorButtonContrastTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "InspectorStarRatingTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "InspirationBoardUnifiedUxTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ModalCloseSmokeTests",
+      "total": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ModularHarnessEmbeddedEvidenceContractTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ModuleWorkspaceHostTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "NavigationWorkbenchClosureTests",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "OnlineSelectionPersistenceWpfTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "OnlineSelectionProxyClosureWpfTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "OnlineSelectionV1WpfTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "OrganizeCommandStateTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PaletteCanvasObjectTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PhysicalPointerDiagnosticContractTests",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PlanningAutomationContractTests",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PlanningWorkspaceLayoutTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ProductLanguageLeakTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ProductQuickToolsRuntimeTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ProductRedesignEvidenceTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ProductToolboxWpfTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PublishingNinePositionPickerTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "PublishingRenderingTests",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "RawTaskCancellationViewModelTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "RawToJpegWpfTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "RealAppStartupIntegrationTests",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "RealLayoutRegressionTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ReferenceColorRefreshTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ReferenceWorkspaceWideRatioTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "SingleCloseAuthorityTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StageIVReferenceWorkflowTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StageV2StartupCompatibilityTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioButtonStateTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioColorsTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioDesignSystemContractTests",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioFocusTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioIconButtonTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioLoadingTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioNoWhiteSurfaceLeakTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioPageHeaderTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioPopupTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioRadiusTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioSegmentedTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioSliderTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioSymbolTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioToggleTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "StudioV2PremiumPrototypeEvidenceTests",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "TaskCenterConsistencyTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "TetherSplitCompareTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "ToolProgressBindingSafetyTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "UnifiedFilterColorPickerTests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "UserFacingChineseLanguageTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "UXSimplificationRegressionTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version220CalendarUiTests",
+      "total": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version220DocumentPanelViewModelTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version220StageDUiTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version220WeatherUiTests",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc2CalendarTetherTests",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc2NavigationTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc2VisibleFeatureAuditTests",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc3RuntimeUiTests",
+      "total": 143,
+      "passed": 143,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc4RuntimeWorkflowUiTests",
+      "total": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5CalendarTaskCenterLayoutTests",
+      "total": 27,
+      "passed": 27,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5CoreHotfix2InteractionTests",
+      "total": 96,
+      "passed": 96,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5CoreInteractionHotfixTests",
+      "total": 73,
+      "passed": 73,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5MiniCalendarHotfixLayoutTests",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5RuntimePolishTests",
+      "total": 24,
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc5RuntimeUiPolishRound2Tests",
+      "total": 70,
+      "passed": 70,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230Rc6RegressionContractTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230StageCLiveMonitorWpfTests",
+      "total": 57,
+      "passed": 57,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230StageDColorWpfTests",
+      "total": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230StageEAccessibilityTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "Version230TetherUiTests",
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "WholeAppVisualAcceptanceTests",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "exit_code": 0,
+      "timed_out": false
+    },
+    {
+      "name": "WorkbenchOverviewClosureTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "timed_out": false
+    }
+  ]
+}
