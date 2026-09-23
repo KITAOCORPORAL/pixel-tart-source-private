@@ -1,4 +1,6 @@
 using System.IO;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.ViewModels;
@@ -147,6 +149,24 @@ public sealed class ColorStudioStateClosureTests
     });
 
     [TestMethod]
+    public void DuplicateNodeKeepsSingleReferenceAndFilmAndIsolatesParametersTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.SelectedLook = Look(); editor.WorkspaceMode = "专业";
+        editor.SelectedAdjustmentNode = editor.AdjustmentNodes.Single(node => node.Type == ColorStudioNodeType.ReferenceMatch);
+        Assert.IsFalse(editor.DuplicateAdjustmentNodeCommand.CanExecute(null));
+        editor.SelectedAdjustmentNode = editor.AdjustmentNodes.Single(node => node.Type == ColorStudioNodeType.Film);
+        Assert.IsFalse(editor.DuplicateAdjustmentNodeCommand.CanExecute(null));
+        editor.SelectedAdjustmentNode = editor.AdjustmentNodes.Single(node => node.Type == ColorStudioNodeType.ColorRange);
+        editor.RangeHue = 14;
+        editor.DuplicateAdjustmentNodeCommand.Execute(null);
+        var ranges = editor.AdjustmentNodes.Where(node => node.Type == ColorStudioNodeType.ColorRange).ToArray();
+        Assert.HasCount(2, ranges);
+        Assert.AreNotSame(ranges[0].NumericParameters, ranges[1].NumericParameters);
+        editor.RangeHue = 36;
+        Assert.AreEqual(14, ranges[0].NumericParameters["hue"]);
+    });
+
+    [TestMethod]
     public void SliderDragSingleUndoTransactionTests() => Sta(() =>
     {
         using var editor = Editor(); editor.WorkspaceMode = "专业";
@@ -194,6 +214,80 @@ public sealed class ColorStudioStateClosureTests
         }
         finally { if (Directory.Exists(folder)) Directory.Delete(folder, true); }
     });
+
+    [TestMethod]
+    public void StopProcessingEndsAfterJobExitsAndKeepsLastValidFrameTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.SelectedLook = Look();
+        var source = SolidBitmap(110);
+        editor.SetSourceAsync(Guid.NewGuid(), source).GetAwaiter().GetResult();
+        editor.Enabled = true;
+        Assert.IsTrue(SpinWait.SpinUntil(() => editor.MatchedImage is not null, TimeSpan.FromSeconds(10)));
+        var validFrame = editor.MatchedImage;
+        var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        editor.PostProcessor = async (image, token) =>
+        {
+            started.TrySetResult();
+            try { await release.Task.WaitAsync(token); }
+            finally { await release.Task; }
+            token.ThrowIfCancellationRequested();
+            return image;
+        };
+        var render = editor.ApplyCommand.ExecuteAsync(null);
+        try
+        {
+            started.Task.WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+            editor.StopProcessing();
+            Assert.AreEqual(TetherReferenceModeViewModel.ProcessingState.Cancelling, editor.State);
+            Assert.AreEqual("正在停止…", editor.StatusText);
+            Assert.AreSame(validFrame, editor.MatchedImage);
+        }
+        finally { release.TrySetResult(); }
+        render.WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+        Assert.AreEqual(TetherReferenceModeViewModel.ProcessingState.Cancelled, editor.State);
+        Assert.AreEqual("已停止处理。", editor.StatusText);
+        Assert.AreSame(validFrame, editor.MatchedImage);
+    });
+
+    [TestMethod]
+    public void CancelledJobCannotOverwriteNewTargetTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.SelectedLook = Look();
+        editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(40)).GetAwaiter().GetResult();
+        var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var oldFrame = SolidBitmap(22); var newFrame = SolidBitmap(77);
+        var calls = 0;
+        editor.PostProcessor = async (_, _) =>
+        {
+            if (Interlocked.Increment(ref calls) == 1)
+            {
+                started.TrySetResult();
+                await release.Task;
+                return oldFrame;
+            }
+            return newFrame;
+        };
+        var oldRender = editor.ApplyCommand.ExecuteAsync(null);
+        try
+        {
+            started.Task.WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+            editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(80)).GetAwaiter().GetResult();
+            editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+            Assert.AreSame(newFrame, editor.MatchedImage);
+        }
+        finally { release.TrySetResult(); }
+        oldRender.WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+        Assert.AreSame(newFrame, editor.MatchedImage);
+    });
+
+    private static BitmapSource SolidBitmap(byte value)
+    {
+        var pixels = Enumerable.Repeat(new byte[] { value, value, value, 255 }, 16 * 16).SelectMany(x => x).ToArray();
+        var image = BitmapSource.Create(16, 16, 96, 96, PixelFormats.Bgra32, null, pixels, 16 * 4);
+        image.Freeze(); return image;
+    }
 
     private static TetherReferenceModeViewModel Editor() => new(new ReferenceLookStore(Path.Combine(Path.GetTempPath(), "pixel-tart-state-test-" + Guid.NewGuid().ToString("N"))));
     private static ReferenceLook Look()

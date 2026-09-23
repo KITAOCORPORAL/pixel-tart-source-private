@@ -65,14 +65,19 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
     private void BeginBusy() { _busyOperations++; State = ProcessingState.RenderingHighQuality; }
-    private void EndBusy() { _busyOperations = Math.Max(0, _busyOperations - 1); if (_busyOperations == 0 && State is not ProcessingState.Failed) State = ProcessingState.Idle; }
+    private void EndBusy()
+    {
+        _busyOperations = Math.Max(0, _busyOperations - 1);
+        if (_busyOperations != 0) return;
+        if (State == ProcessingState.Cancelling) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; }
+        else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
+    }
     public void StopProcessing()
     {
         if (!IsBusy) return;
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
         _render?.Cancel();
         Interlocked.Increment(ref _revision);
-        State = ProcessingState.Cancelled; StatusText = "已停止处理。";
     }
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
@@ -243,7 +248,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         AddAdjustmentNodeCommand = new RelayCommand(value => AddAdjustmentNode(value as string ?? "ColorRange"));
         ToggleAddAdjustmentCommand = new RelayCommand(_ => { AddAdjustmentOpen = !AddAdjustmentOpen; OnPropertyChanged(nameof(AddAdjustmentOpen)); });
         DeleteAdjustmentNodeCommand = new RelayCommand(_ => DeleteSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null && AdjustmentStack.Nodes.Count > 1);
-        DuplicateAdjustmentNodeCommand = new RelayCommand(_ => DuplicateSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
+        DuplicateAdjustmentNodeCommand = new RelayCommand(_ => DuplicateSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film });
         MoveAdjustmentNodeUpCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(-1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) > 0);
         MoveAdjustmentNodeDownCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) < AdjustmentStack.Nodes.Count - 1);
         ResetAdjustmentNodeCommand = new RelayCommand(_ => ResetSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
@@ -342,7 +347,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         ChangeStack(nodes => [.. nodes, node]); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
     private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
-    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) { var copy = selected with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
+    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
     private void MoveSelectedAdjustmentNode(int delta) { if (SelectedAdjustmentNode is not { } selected) return; ChangeStack(nodes => { var list = nodes.ToList(); var index = list.FindIndex(node => node.Id == selected.Id); var next = Math.Clamp(index + delta, 0, list.Count - 1); (list[index], list[next]) = (list[next], list[index]); return list; }); }
     public void MoveAdjustmentNode(Guid sourceId, Guid destinationId)
     {
