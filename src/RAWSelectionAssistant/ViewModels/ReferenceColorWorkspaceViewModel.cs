@@ -148,7 +148,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             if (revision != Volatile.Read(ref _activationRevision)) return;
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
-            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot);
+            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
             await Editor.SetSourceAsync(target.AssetId, image);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;

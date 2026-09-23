@@ -14,20 +14,24 @@ public sealed record ColorAdjustmentStackNode(
     bool Enabled = true,
     IReadOnlyDictionary<string, double>? NumericParameters = null,
     IReadOnlyList<VisualRgb24>? Samples = null,
-    PixelTartFilmSettings? FilmSettings = null)
+    PixelTartFilmSettings? FilmSettings = null,
+    IReadOnlyList<VisualRgb24>? NegativeSamples = null)
 {
     public IReadOnlyDictionary<string, double> NumericParameters { get; init; } = NumericParameters ?? new Dictionary<string, double>();
     public IReadOnlyList<VisualRgb24> Samples { get; init; } = Samples ?? Array.Empty<VisualRgb24>();
+    public IReadOnlyList<VisualRgb24> NegativeSamples { get; init; } = NegativeSamples ?? Array.Empty<VisualRgb24>();
 
     public ColorAdjustmentStackNode Normalize()
     {
         if (Id == Guid.Empty || string.IsNullOrWhiteSpace(Name)) throw new ArgumentException("Color Studio nodes require an id and name.");
         if (NumericParameters.Any(item => string.IsNullOrWhiteSpace(item.Key) || !double.IsFinite(item.Value))) throw new ArgumentException("Color Studio node parameters must be finite.");
         FilmSettings?.Validate();
-        return this with { Name = Name.Trim(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray() };
+        return this with { Name = Name.Trim(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
     }
 
     public ColorAdjustmentStackNode AddSample(VisualRgb24 sample) => this with { Samples = [.. Samples, sample] };
+
+    public ColorAdjustmentStackNode AddNegativeSample(VisualRgb24 sample) => this with { NegativeSamples = [.. NegativeSamples, sample] };
 
     public ColorAdjustmentStackNode RemoveSampleAt(int index)
     {

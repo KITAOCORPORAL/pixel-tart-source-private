@@ -4,6 +4,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using System.Windows.Media.Imaging;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
+using RAWSelectionAssistant.Services;
 using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.ViewModels;
 
@@ -30,6 +34,29 @@ public partial class ReferenceColorWorkspaceView : UserControl
         DataContextChanged += OnDataContextChanged;
         PreviewKeyDown += OnFilmstripKeyDown;
         AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(OnFilmstripMouseDown), true);
+        PreviewKeyDown += OnSamplingKeyDown;
+    }
+
+    private void OnSamplingKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape && _editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
+    }
+
+    private void OnPreviewCanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (_editor?.IsSampling != true || _editor.SourceImage is not BitmapSource image) return;
+        var point = e.GetPosition(PreviewCanvas);
+        var scale = Math.Min(PreviewCanvas.ActualWidth / image.PixelWidth, PreviewCanvas.ActualHeight / image.PixelHeight);
+        if (scale <= 0) return;
+        var offsetX = (PreviewCanvas.ActualWidth - image.PixelWidth * scale) / 2;
+        var offsetY = (PreviewCanvas.ActualHeight - image.PixelHeight * scale) / 2;
+        var x = (int)Math.Clamp((point.X - offsetX) / scale, 0, image.PixelWidth - 1);
+        var y = (int)Math.Clamp((point.Y - offsetY) / scale, 0, image.PixelHeight - 1);
+        var pixels = new byte[image.PixelWidth * image.PixelHeight * 4];
+        var bgra = HistogramService.EnsureBgra32(image); bgra.CopyPixels(pixels, image.PixelWidth * 4, 0);
+        var index = (y * image.PixelWidth + x) * 4;
+        _editor.CompleteDisplayedSample(new VisualRgb24(pixels[index + 2], pixels[index + 1], pixels[index]));
+        e.Handled = true;
     }
 
     private void OnFilmstripMouseDown(object sender, MouseButtonEventArgs e)

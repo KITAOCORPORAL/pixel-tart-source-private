@@ -78,7 +78,15 @@ public sealed class ColorStudioRenderPipeline
     {
         if (node.Samples.Count == 0) return 0;
         var range = Math.Max(.001, Parameter(node, "range", .12)); var softness = Math.Max(.001, Parameter(node, "softness", .08));
-        var distance = node.Samples.Min(sample => { var lab = OklabColorSpace.FromSrgb(sample); return Math.Sqrt(Math.Pow(color.A - lab.A, 2) + Math.Pow(color.B - lab.B, 2)); });
+        var positive = node.Samples.Count == 0 ? 0 : node.Samples.Max(sample => Weight(color, sample, range, softness));
+        var negative = node.NegativeSamples.Count == 0 ? 0 : node.NegativeSamples.Max(sample => Weight(color, sample, range, softness));
+        return Math.Clamp(positive * (1 - negative), 0, 1);
+    }
+
+    private static double Weight(OklabColor color, VisualRgb24 sample, double range, double softness)
+    {
+        var lab = OklabColorSpace.FromSrgb(sample);
+        var distance = Math.Sqrt(Math.Pow(color.A - lab.A, 2) + Math.Pow(color.B - lab.B, 2));
         var t = Math.Clamp((distance - range) / softness, 0, 1);
         return 1 - t * t * (3 - 2 * t);
     }
