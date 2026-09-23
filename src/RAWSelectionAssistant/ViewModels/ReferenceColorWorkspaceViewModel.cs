@@ -57,7 +57,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         foreach (var target in targets)
             target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } stack
                 ? stack.SyncSelectedFrom(source, selectedNodeIds)
-                : new ColorAdjustmentStack(selected).Normalize();
+                : new ColorAdjustmentStack(selected).DeepClone();
     }
     public AsyncRelayCommand ActivateTargetCommand { get; }
     public AsyncRelayCommand ExportSelectedCommand { get; }
@@ -151,7 +151,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
             await Editor.SetSourceAsync(target.AssetId, image);
             if (revision != Volatile.Read(ref _activationRevision)) return;
-            target.Status = target.AppliedLookSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
+            target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException)

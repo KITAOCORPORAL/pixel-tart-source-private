@@ -52,7 +52,9 @@ public sealed class ColorStudioRenderPipeline
         {
             MatchStrength = Parameter(node, "match_strength", reference.Parameters.MatchStrength), ToneStrength = Parameter(node, "tone_strength", reference.Parameters.ToneStrength),
             ColorStrength = Parameter(node, "color_strength", reference.Parameters.ColorStrength), ContrastStrength = Parameter(node, "contrast_strength", reference.Parameters.ContrastStrength),
-            SaturationStrength = Parameter(node, "saturation_strength", reference.Parameters.SaturationStrength), KeepOriginalTone = Parameter(node, "keep_original_tone", reference.Parameters.KeepOriginalTone ? 1 : 0) >= .5
+            SaturationStrength = Parameter(node, "saturation_strength", reference.Parameters.SaturationStrength), KeepOriginalTone = Parameter(node, "keep_original_tone", reference.Parameters.KeepOriginalTone ? 1 : 0) >= .5,
+            SkinProtection = Parameter(node, "skin_protection", reference.Parameters.SkinProtection), HighlightProtection = Parameter(node, "highlight_protection", reference.Parameters.HighlightProtection),
+            NeutralProtection = Parameter(node, "neutral_protection", reference.Parameters.NeutralProtection)
         };
         return _matcher.Match(source, analysis, reference with { Parameters = p }, token).Preview;
     }

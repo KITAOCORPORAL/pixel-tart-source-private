@@ -33,6 +33,12 @@ public sealed record ColorAdjustmentStackNode(
 
     public ColorAdjustmentStackNode AddNegativeSample(VisualRgb24 sample) => this with { NegativeSamples = [.. NegativeSamples, sample] };
 
+    public ColorAdjustmentStackNode RemoveNegativeSampleAt(int index)
+    {
+        if ((uint)index >= (uint)NegativeSamples.Count) throw new ArgumentOutOfRangeException(nameof(index));
+        return this with { NegativeSamples = NegativeSamples.Where((_, position) => position != index).ToArray() };
+    }
+
     public ColorAdjustmentStackNode RemoveSampleAt(int index)
     {
         if ((uint)index >= (uint)Samples.Count) throw new ArgumentOutOfRangeException(nameof(index));
@@ -50,16 +56,18 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
         return this with { Nodes = nodes };
     }
 
+    public ColorAdjustmentStack DeepClone() => Normalize();
+
     /// <summary>Replace only chosen nodes; preserve each target's unselected nodes and their order.</summary>
     public ColorAdjustmentStack SyncSelectedFrom(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedIds)
     {
         var target = Normalize(); var incoming = source.Normalize();
-        var selected = incoming.Nodes.Where(node => selectedIds.Contains(node.Id)).ToArray();
+        var selected = incoming.Nodes.Where(node => selectedIds.Contains(node.Id)).Select(node => node.Normalize()).ToArray();
         var replacements = selected.ToDictionary(node => node.Id);
         var existing = target.Nodes.Select(node => replacements.GetValueOrDefault(node.Id, node)).ToList();
         var known = existing.Select(node => node.Id).ToHashSet();
         foreach (var node in selected) if (known.Add(node.Id)) existing.Add(node);
-        return target with { Nodes = existing };
+        return (target with { Nodes = existing }).Normalize();
     }
 }
 
@@ -80,6 +88,8 @@ public static class ColorStudioLegacyMigration
                 ["match_strength"] = look.Parameters.MatchStrength, ["tone_strength"] = look.Parameters.ToneStrength,
                 ["color_strength"] = look.Parameters.ColorStrength, ["contrast_strength"] = look.Parameters.ContrastStrength,
                 ["saturation_strength"] = look.Parameters.SaturationStrength, ["keep_original_tone"] = look.Parameters.KeepOriginalTone ? 1 : 0
+                , ["skin_protection"] = look.Parameters.SkinProtection, ["highlight_protection"] = look.Parameters.HighlightProtection,
+                ["neutral_protection"] = look.Parameters.NeutralProtection
             })
         };
         if (look.Film is not null) nodes.Add(new(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", look.Film.Enabled, new Dictionary<string, double>
