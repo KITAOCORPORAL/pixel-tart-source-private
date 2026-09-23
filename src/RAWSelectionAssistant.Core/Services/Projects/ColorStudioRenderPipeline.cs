@@ -2,7 +2,8 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public sealed record ColorStudioRenderResult(VisualPixelBuffer Pixels, IReadOnlyList<VisualPixelBuffer> NodeOutputs, ColorPipelineDescriptor Pipeline);
+public sealed record ColorStudioRenderResult(VisualPixelBuffer Pixels, IReadOnlyList<VisualPixelBuffer> NodeOutputs, ColorPipelineDescriptor Pipeline,
+    IReadOnlyDictionary<Guid, VisualPixelBuffer>? NodeInputs = null);
 
 /// <summary>Headless linear Color Studio renderer. Export callers can use this same chain; no second WPF renderer is introduced.</summary>
 public sealed class ColorStudioRenderPipeline
@@ -13,9 +14,11 @@ public sealed class ColorStudioRenderPipeline
     {
         var normalized = stack.Normalize(); var current = new VisualPixelBuffer(source.Width, source.Height, source.Rgb24.ToArray());
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count);
+        var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         foreach (var node in normalized.Nodes.Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested();
+            inputs[node.Id] = current;
             current = node.Type switch
             {
                 ColorStudioNodeType.ReferenceMatch when reference is not null => ApplyReference(current, analysis, reference, node, token),
@@ -26,7 +29,7 @@ public sealed class ColorStudioRenderPipeline
             };
             outputs.Add(current);
         }
-        return new(current, outputs, new(WorkingRepresentation: normalized.WorkingSpace));
+        return new(current, outputs, new(WorkingRepresentation: normalized.WorkingSpace), inputs);
     }
 
     /// <summary>Diagnostic selection preview only; callers must export Render(...).Pixels.</summary>

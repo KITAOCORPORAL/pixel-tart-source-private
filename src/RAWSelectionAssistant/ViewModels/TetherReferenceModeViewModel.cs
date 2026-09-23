@@ -11,6 +11,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 {
     private readonly ReferenceLookStore _store;
+    private readonly ColorStudioSchemeStore _schemeStore;
     private readonly IDialogService? _dialogs;
     private readonly IReferenceRenderBackend _preview;
     private readonly CancellationTokenSource _lifetime = new();
@@ -50,6 +51,9 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private bool _isSampling;
     private readonly Stack<ColorAdjustmentStack> _undoStacks = new();
     private readonly Stack<ColorAdjustmentStack> _redoStacks = new();
+    private ColorAdjustmentStack? _persistedStack;
+    private ColorStudioSchemeV2? _selectedColorScheme;
+    private ColorAdjustmentStack? _editTransactionBefore;
     private bool _syncingStack;
     public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
     private ProcessingState _processingState;
@@ -65,6 +69,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
         _render?.Cancel();
         Interlocked.Increment(ref _revision);
+        State = ProcessingState.Cancelled; StatusText = "已停止处理。";
     }
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
@@ -152,11 +157,20 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public RelayCommand RenameAdjustmentNodeCommand { get; }
     public RelayCommand UndoAdjustmentCommand { get; }
     public RelayCommand RedoAdjustmentCommand { get; }
+    public RelayCommand BeginEditTransactionCommand { get; }
+    public RelayCommand CommitEditTransactionCommand { get; }
     public RelayCommand AddSampleCommand { get; }
     public RelayCommand SubtractSampleCommand { get; }
     public RelayCommand ClearSamplesCommand { get; }
     public RelayCommand StartSamplingCommand { get; }
     public RelayCommand CancelSamplingCommand { get; }
+    public AsyncRelayCommand SaveColorSchemeCommand { get; }
+    public AsyncRelayCommand SaveColorSchemeAsCommand { get; }
+    public AsyncRelayCommand DeleteColorSchemeCommand { get; }
+    public RelayCommand ApplyColorSchemeCommand { get; }
+    public ObservableCollection<ColorStudioSchemeV2> ColorSchemes { get; } = [];
+    public ColorStudioSchemeV2? SelectedColorScheme { get => _selectedColorScheme; set { if (SetProperty(ref _selectedColorScheme, value)) { if (value is not null) { ColorSchemeName = value.Name; OnPropertyChanged(nameof(ColorSchemeName)); } ApplyColorSchemeCommand?.RaiseCanExecuteChanged(); DeleteColorSchemeCommand?.RaiseCanExecuteChanged(); } } }
+    public string ColorSchemeName { get; set; } = "新色彩方案";
     public IReadOnlyList<string> WorkspaceModes { get; } = ["简洁", "专业"];
     public IReadOnlyList<string> WorkspaceSections { get; } = ["调色", "仿色", "预设", "胶片", "输出"];
     public string WorkspaceSection { get => _workspaceSection; set => SetProperty(ref _workspaceSection, value); }
@@ -167,21 +181,40 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
     public bool IsContextVisible => !FocusView && ContextRailOpen;
     public bool IsLeftRailVisible => !FocusView;
-    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); } } }
+    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public IReadOnlyList<ColorAdjustmentStackNode> AdjustmentNodes => AdjustmentStack.Nodes;
     public ColorAdjustmentStackNode? SelectedAdjustmentNode { get => AdjustmentStack.Nodes.FirstOrDefault(node => node.Id == _selectedAdjustmentNodeId); set { _selectedAdjustmentNodeId = value?.Id; OnPropertyChanged(); RaiseAdjustmentCommands(); } }
     public bool SelectedNodeEnabled { get => SelectedAdjustmentNode?.Enabled == true; set { if (SelectedAdjustmentNode is { } selected && value != selected.Enabled) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Enabled = value } : node).ToArray()); OnPropertyChanged(); } }
     public string SelectedNodeName { get => SelectedAdjustmentNode?.Name ?? string.Empty; set { if (!string.Equals(value, SelectedNodeName, StringComparison.Ordinal)) RenameSelectedAdjustmentNode(value); } }
+    public bool IsRenamingNode { get; set; }
+    public string PendingNodeName { get; set; } = "";
+    public RelayCommand StartNodeRenameCommand { get; }
+    public RelayCommand CommitNodeRenameCommand { get; }
+    public RelayCommand CancelNodeRenameCommand { get; }
     public bool KeepOriginalLuminance { get => SelectedAdjustmentNode?.NumericParameters.TryGetValue("keep_original_luminance", out var value) == true && value >= .5; set { if (SelectedAdjustmentNode is { Type: ColorStudioNodeType.ColorRange } selected) SetSelectedNumeric("keep_original_luminance", value ? 1 : 0); OnPropertyChanged(); } }
+    public double RangeStrength { get => SelectedNumeric("strength", 100); set => SetSelectedNumeric("strength", value); }
+    public double RangeRadius { get => SelectedNumeric("range", .12) * 100; set => SetSelectedNumeric("range", value / 100); }
+    public double RangeSoftness { get => SelectedNumeric("softness", .08) * 100; set => SetSelectedNumeric("softness", value / 100); }
+    public double RangeHue { get => SelectedNumeric("hue", 0); set => SetSelectedNumeric("hue", value); }
+    public double RangeSaturation { get => SelectedNumeric("saturation", 0); set => SetSelectedNumeric("saturation", value); }
+    public double RangeChroma { get => SelectedNumeric("chroma", 0); set => SetSelectedNumeric("chroma", value); }
+    public double RangeLightness { get => SelectedNumeric("lightness", 0); set => SetSelectedNumeric("lightness", value); }
+    public double TransitionAmount { get => SelectedNumeric("amount", .25) * 100; set => SetSelectedNumeric("amount", value / 100); }
+    public IReadOnlyList<VisualRgb24> PositiveSamples => SelectedAdjustmentNode?.Samples ?? [];
+    public IReadOnlyList<VisualRgb24> NegativeSamples => SelectedAdjustmentNode?.NegativeSamples ?? [];
+    public RelayCommand RemovePositiveSampleCommand { get; }
+    public RelayCommand RemoveNegativeSampleCommand { get; }
+    private double SelectedNumeric(string key, double fallback) => SelectedAdjustmentNode?.NumericParameters.TryGetValue(key, out var value) == true ? value : fallback;
     public bool ShowSelection { get => _showSelection; set { if (SetProperty(ref _showSelection, value)) { OnPropertyChanged(); _ = RenderAsync(); } } }
     public IReadOnlyList<string> SampleModes { get; } = ["普通取样", "增加取样", "减少取样"];
     public string SampleMode { get => _sampleMode; set => SetProperty(ref _sampleMode, value); }
     public bool IsSampling { get => _isSampling; private set => SetProperty(ref _isSampling, value); }
 
     public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null, bool allowReferenceManagement = false,
-        IReferenceRenderBackend? renderBackend = null)
+        IReferenceRenderBackend? renderBackend = null, ColorStudioSchemeStore? schemeStore = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
+        _schemeStore = schemeStore ?? new ColorStudioSchemeStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _dialogs = dialogs;
         _preview = renderBackend ?? new ReferenceLookPreviewService();
         _allowReferenceManagement = allowReferenceManagement;
@@ -203,20 +236,31 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         ToggleFocusViewCommand = new RelayCommand(_ => FocusView = !FocusView);
         ToggleContextRailCommand = new RelayCommand(_ => ContextRailOpen = !ContextRailOpen);
         AddAdjustmentNodeCommand = new RelayCommand(value => AddAdjustmentNode(value as string ?? "ColorRange"));
-        DeleteAdjustmentNodeCommand = new RelayCommand(_ => DeleteSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
+        DeleteAdjustmentNodeCommand = new RelayCommand(_ => DeleteSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null && AdjustmentStack.Nodes.Count > 1);
         DuplicateAdjustmentNodeCommand = new RelayCommand(_ => DuplicateSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
-        MoveAdjustmentNodeUpCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(-1), _ => SelectedAdjustmentNode is not null);
-        MoveAdjustmentNodeDownCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(1), _ => SelectedAdjustmentNode is not null);
+        MoveAdjustmentNodeUpCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(-1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) > 0);
+        MoveAdjustmentNodeDownCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) < AdjustmentStack.Nodes.Count - 1);
         ResetAdjustmentNodeCommand = new RelayCommand(_ => ResetSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
         ToggleAdjustmentNodeCommand = new RelayCommand(_ => SelectedNodeEnabled = !SelectedNodeEnabled, _ => SelectedAdjustmentNode is not null);
         RenameAdjustmentNodeCommand = new RelayCommand(value => RenameSelectedAdjustmentNode(value as string ?? SelectedNodeName), _ => SelectedAdjustmentNode is not null);
+        StartNodeRenameCommand = new RelayCommand(_ => { PendingNodeName = SelectedNodeName; IsRenamingNode = true; OnPropertyChanged(nameof(PendingNodeName)); OnPropertyChanged(nameof(IsRenamingNode)); });
+        CommitNodeRenameCommand = new RelayCommand(_ => { RenameSelectedAdjustmentNode(PendingNodeName); IsRenamingNode = false; OnPropertyChanged(nameof(IsRenamingNode)); });
+        CancelNodeRenameCommand = new RelayCommand(_ => { IsRenamingNode = false; OnPropertyChanged(nameof(IsRenamingNode)); });
         UndoAdjustmentCommand = new RelayCommand(_ => UndoAdjustment(), _ => _undoStacks.Count > 0);
         RedoAdjustmentCommand = new RelayCommand(_ => RedoAdjustment(), _ => _redoStacks.Count > 0);
+        BeginEditTransactionCommand = new RelayCommand(_ => BeginEditTransaction());
+        CommitEditTransactionCommand = new RelayCommand(_ => CommitEditTransaction());
         AddSampleCommand = new RelayCommand(value => SampleMode = value as string ?? "增加取样");
         SubtractSampleCommand = new RelayCommand(_ => SampleMode = "减少取样");
         ClearSamplesCommand = new RelayCommand(_ => ClearSamples(), _ => SelectedAdjustmentNode is { } node && (node.Samples.Count > 0 || node.NegativeSamples.Count > 0));
+        RemovePositiveSampleCommand = new RelayCommand(value => RemoveSample(value, false));
+        RemoveNegativeSampleCommand = new RelayCommand(value => RemoveSample(value, true));
         StartSamplingCommand = new RelayCommand(value => { SampleMode = value as string ?? "普通取样"; IsSampling = true; StatusText = "正在取样；点击照片取色，按 Esc 退出。"; });
         CancelSamplingCommand = new RelayCommand(_ => { IsSampling = false; StatusText = "已退出取样。"; });
+        SaveColorSchemeCommand = new AsyncRelayCommand(_ => SaveColorSchemeAsync(false));
+        SaveColorSchemeAsCommand = new AsyncRelayCommand(_ => SaveColorSchemeAsync(true));
+        DeleteColorSchemeCommand = new AsyncRelayCommand(_ => DeleteColorSchemeAsync(), _ => SelectedColorScheme is not null);
+        ApplyColorSchemeCommand = new RelayCommand(_ => ApplyColorScheme(), _ => SelectedColorScheme is not null);
     }
     private void EnsureProfessionalStack()
     {
@@ -228,11 +272,54 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         nodes.Add(new(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", FilmSettings.Enabled, FilmSettings: FilmSettings));
         AdjustmentStack = new ColorAdjustmentStack(nodes).Normalize(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes[0].Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
+    private async Task SaveColorSchemeAsync(bool saveAs)
+    {
+        if (AdjustmentStack.Nodes.Count == 0) EnsureProfessionalStack();
+        var name = string.IsNullOrWhiteSpace(ColorSchemeName) ? "新色彩方案" : ColorSchemeName.Trim();
+        var scheme = new ColorStudioSchemeV2(saveAs || SelectedColorScheme is null ? Guid.NewGuid() : SelectedColorScheme.Id,
+            name, AdjustmentStack.DeepClone(), DateTimeOffset.UtcNow);
+        try
+        {
+            await _schemeStore.SaveAsync(scheme, _lifetime.Token);
+            var old = ColorSchemes.FirstOrDefault(item => item.Id == scheme.Id); if (old is not null) ColorSchemes.Remove(old);
+            ColorSchemes.Insert(0, scheme); SelectedColorScheme = scheme; _persistedStack = scheme.Stack.DeepClone();
+            StatusText = "色彩方案已保存。";
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException)
+        { HasError = true; StatusText = "色彩方案未能保存；原文件已保留。"; }
+    }
+    private async Task DeleteColorSchemeAsync()
+    {
+        if (SelectedColorScheme is not { } scheme) return;
+        try
+        {
+            await _schemeStore.DeleteAsync(scheme.Id, _lifetime.Token);
+            ColorSchemes.Remove(scheme); SelectedColorScheme = null; StatusText = "色彩方案已删除。";
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+        { HasError = true; StatusText = "删除失败；原色彩方案已保留。"; }
+    }
+    private void ApplyColorScheme()
+    {
+        if (SelectedColorScheme is not { } scheme) return;
+        AdjustmentStack = scheme.Stack.DeepClone(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id;
+        _persistedStack = scheme.Stack.DeepClone(); ColorSchemeName = scheme.Name; OnPropertyChanged(nameof(SelectedAdjustmentNode));
+        _ = RenderAsync(); StatusText = "色彩方案已应用。";
+    }
     private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change)
     {
         var previous = AdjustmentStack; var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
         if (previous.Nodes.SequenceEqual(nodes)) return;
-        _undoStacks.Push(previous); _redoStacks.Clear(); AdjustmentStack = (previous with { Nodes = nodes }).Normalize(); _ = RenderAsync();
+        if (_editTransactionBefore is null) _undoStacks.Push(previous);
+        _redoStacks.Clear(); AdjustmentStack = (previous with { Nodes = nodes }).Normalize(); _ = RenderAsync();
+    }
+    public void BeginEditTransaction() => _editTransactionBefore ??= AdjustmentStack.DeepClone();
+    public void CommitEditTransaction()
+    {
+        if (_editTransactionBefore is not { } before) return;
+        _editTransactionBefore = null;
+        if (!before.Nodes.SequenceEqual(AdjustmentStack.Nodes)) _undoStacks.Push(before);
+        RaiseAdjustmentCommands();
     }
     private void AddAdjustmentNode(string type)
     {
@@ -240,11 +327,28 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
         ChangeStack(nodes => [.. nodes, node]); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
-    private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
+    private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
     private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) { var copy = selected with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
     private void MoveSelectedAdjustmentNode(int delta) { if (SelectedAdjustmentNode is not { } selected) return; ChangeStack(nodes => { var list = nodes.ToList(); var index = list.FindIndex(node => node.Id == selected.Id); var next = Math.Clamp(index + delta, 0, list.Count - 1); (list[index], list[next]) = (list[next], list[index]); return list; }); }
+    public void MoveAdjustmentNode(Guid sourceId, Guid destinationId)
+    {
+        if (sourceId == destinationId) return;
+        ChangeStack(nodes =>
+        {
+            var list = nodes.ToList(); var from = list.FindIndex(node => node.Id == sourceId); var to = list.FindIndex(node => node.Id == destinationId);
+            if (from < 0 || to < 0) return nodes;
+            var moving = list[from]; list.RemoveAt(from); list.Insert(to, moving); return list;
+        });
+    }
     private void ResetSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? selected with { NumericParameters = new Dictionary<string, double>(), Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>(), FilmSettings = selected.Type == ColorStudioNodeType.Film ? new PixelTartFilmSettings() : null } : node).ToArray()); }
     private void ClearSamples() { if (SelectedAdjustmentNode is { Type: ColorStudioNodeType.ColorRange } selected) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>() } : node).ToArray()); }
+    private void RemoveSample(object? value, bool negative)
+    {
+        if (SelectedAdjustmentNode is not { Type: ColorStudioNodeType.ColorRange } selected || value is not VisualRgb24 sample) return;
+        var samples = negative ? selected.NegativeSamples : selected.Samples;
+        var index = Array.FindIndex(samples.ToArray(), item => item.Equals(sample)); if (index < 0) return;
+        ChangeStack(nodes => nodes.Select(node => node.Id != selected.Id ? node : negative ? node.RemoveNegativeSampleAt(index) : node.RemoveSampleAt(index)).ToArray());
+    }
     public void AddDisplayedSample(VisualRgb24 sample)
     {
         if (SelectedAdjustmentNode is not { Type: ColorStudioNodeType.ColorRange } selected) return;
@@ -260,8 +364,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         IsSampling = SampleMode != "普通取样";
         StatusText = "取样已加入当前颜色范围节点。";
     }
-    private void UndoAdjustment() { if (_undoStacks.Count == 0) return; _redoStacks.Push(AdjustmentStack); AdjustmentStack = _undoStacks.Pop(); _ = RenderAsync(); }
-    private void RedoAdjustment() { if (_redoStacks.Count == 0) return; _undoStacks.Push(AdjustmentStack); AdjustmentStack = _redoStacks.Pop(); _ = RenderAsync(); }
+    private void UndoAdjustment() { if (_undoStacks.Count == 0) return; _redoStacks.Push(AdjustmentStack); AdjustmentStack = _undoStacks.Pop(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes.Any(node => node.Id == _selectedAdjustmentNodeId) ? _selectedAdjustmentNodeId : AdjustmentStack.Nodes.FirstOrDefault()?.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
+    private void RedoAdjustment() { if (_redoStacks.Count == 0) return; _undoStacks.Push(AdjustmentStack); AdjustmentStack = _redoStacks.Pop(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes.Any(node => node.Id == _selectedAdjustmentNodeId) ? _selectedAdjustmentNodeId : AdjustmentStack.Nodes.FirstOrDefault()?.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
     private void SetSelectedNumeric(string key, double value)
     {
         if (SelectedAdjustmentNode is not { } selected) return;
@@ -318,7 +422,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         if (SelectedAdjustmentNode is not { } selected || string.IsNullOrWhiteSpace(name)) return;
         ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Name = name.Trim() } : node).ToArray());
     }
-    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(KeepOriginalLuminance)); }
+    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
@@ -343,8 +447,11 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
     public BitmapSource? SourceImage => _source;
-    public bool HasSessionAdjustment => _persistedLook is not null && _selectedLook is not null &&
-        (!_selectedLook.Parameters.Equals(_persistedLook.Parameters) || !FilmSettings.Equals(_persistedLook.Film ?? new()));
+    public bool HasSessionAdjustment => (_persistedLook is not null && _selectedLook is not null &&
+        (!_selectedLook.Parameters.Equals(_persistedLook.Parameters) || !FilmSettings.Equals(_persistedLook.Film ?? new()))) ||
+        (AdjustmentStack.Nodes.Count > 0 && (_persistedStack is null ||
+            ColorStudioSchemeSerializer.ComputeHash(new ColorStudioSchemeV2(Guid.Empty, "session", AdjustmentStack, DateTimeOffset.UnixEpoch)) !=
+            ColorStudioSchemeSerializer.ComputeHash(new ColorStudioSchemeV2(Guid.Empty, "session", _persistedStack, DateTimeOffset.UnixEpoch))));
     public string SessionAdjustmentText => HasSessionAdjustment ? "本次拍摄已调整" : string.Empty;
     public bool Enabled { get => _enabled; set { if (SetProperty(ref _enabled, value)) _ = RenderAsync(); } }
     public bool ApplyToFollowing { get => _applyToFollowing; set => SetProperty(ref _applyToFollowing, value); }
@@ -373,6 +480,13 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
 
     public async Task LoadAsync(CancellationToken token = default)
     {
+        try
+        {
+            var schemes = await _schemeStore.LoadAsync(token);
+            ColorSchemes.Clear(); foreach (var scheme in schemes.OrderByDescending(item => item.UpdatedAtUtc)) ColorSchemes.Add(scheme);
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidDataException)
+        { StatusText = "色彩方案未能加载；原文件已保留。"; }
         var selected = SelectedLook?.ReferenceLookId ?? _sessionLookId;
         ReferenceLookCatalog catalog;
         try { catalog = await _store.LoadAsync(token); }
@@ -506,8 +620,9 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     }
     private void RestoreScheme()
     {
-        if (_persistedLook is null) return;
-        _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); CopyFilm(_persistedLook.Film ?? new()); OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();
+        if (_persistedLook is not null) { _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); CopyFilm(_persistedLook.Film ?? new()); OnPropertyChanged(nameof(SelectedLook)); }
+        if (_persistedStack is not null) AdjustmentStack = _persistedStack.DeepClone();
+        OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();
     }
     private void RaiseReferenceCommands() { RemoveReferenceCommand.RaiseCanExecuteChanged(); MoveReferenceUpCommand.RaiseCanExecuteChanged(); MoveReferenceDownCommand.RaiseCanExecuteChanged(); }
     private async Task ExportCubeAsync()
@@ -556,7 +671,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
                 if (ShowSelection && SelectedAdjustmentNode is { Type: ColorStudioNodeType.ColorRange } selected)
                 {
                     StatusText = "正在显示选区…";
-                    image = await Task.Run(() => ColorStudioBitmapRenderer.ShowSelection(image, selected, renderToken), renderToken);
+                    image = await Task.Run(() => ColorStudioBitmapRenderer.RenderSelection(source, AdjustmentStack, look, selected, renderToken), renderToken);
                 }
             }
             else

@@ -40,6 +40,24 @@ public sealed class ColorStudioStackTests
         Assert.AreNotSame(first.Nodes[0].Samples, second.Nodes[0].Samples);
         Assert.AreNotSame(first.Nodes[0].NegativeSamples, second.Nodes[0].NegativeSamples);
     }
+
+    [TestMethod]
+    public void SelectionPreviewUsesActualNodeInputTests()
+    {
+        var source = new VisualPixelBuffer(1, 1, new byte[] { 210, 120, 70 });
+        var analysis = VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), "node-input", source));
+        var transition = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.TransitionBlend, "过渡", true,
+            new Dictionary<string, double> { ["amount"] = 1 });
+        var range = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "选区", true,
+            new Dictionary<string, double> { ["range"] = .01, ["softness"] = .01 }, [new(210, 120, 70)]);
+        var renderer = new ColorStudioRenderPipeline();
+        var result = renderer.Render(source, analysis, null, new ColorAdjustmentStack([transition, range]));
+        Assert.IsNotNull(result.NodeInputs);
+        CollectionAssert.AreEqual(result.NodeOutputs[0].Rgb24.ToArray(), result.NodeInputs[range.Id].Rgb24.ToArray());
+        CollectionAssert.AreNotEqual(source.Rgb24.ToArray(), result.NodeInputs[range.Id].Rgb24.ToArray());
+        var overlay = renderer.ShowSelection(result.NodeInputs[range.Id], range);
+        CollectionAssert.AreNotEqual(result.Pixels.Rgb24.ToArray(), overlay.Rgb24.ToArray());
+    }
     [TestMethod]
     public void SchemeV2_RoundTripsOrderedNodesAndHash()
     {

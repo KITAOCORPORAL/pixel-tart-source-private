@@ -23,6 +23,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private int _exportCompleted;
     private int _exportTotal;
     private string _exportStatus = "";
+    private bool _nodeSyncOpen;
+    private readonly HashSet<Guid> _nodeSyncSelection = [];
+    private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null)
     {
@@ -35,6 +38,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
         SyncSelectedCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(SelectedTargets), _ => SelectedTargets.Any());
         SyncAllCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(Targets), _ => Targets.Count > 0);
+        OpenNodeSyncCommand = new RelayCommand(_ => { _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in Editor.AdjustmentNodes) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; OnPropertyChanged(nameof(SelectedTargetCount)); }, _ => SelectedTargets.Any() && Editor.AdjustmentNodes.Count > 0);
+        ToggleNodeSyncCommand = new RelayCommand(value => { if (value is not NodeSyncChoice choice) return; choice.Selected = !choice.Selected; if (choice.Selected) _nodeSyncSelection.Add(choice.Id); else _nodeSyncSelection.Remove(choice.Id); });
+        ConfirmNodeSyncCommand = new RelayCommand(_ => { var selected = _nodeSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Id).ToHashSet(); if (selected.Count > 0) SyncSelectedColorNodes(Editor.AdjustmentStack, selected, SelectedTargets); NodeSyncOpen = false; });
         ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask);
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
@@ -50,6 +56,12 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public RelayCommand StopProcessingCommand { get; }
     public RelayCommand SyncSelectedCommand { get; }
     public RelayCommand SyncAllCommand { get; }
+    public RelayCommand OpenNodeSyncCommand { get; }
+    public RelayCommand ToggleNodeSyncCommand { get; }
+    public RelayCommand ConfirmNodeSyncCommand { get; }
+    public bool NodeSyncOpen { get => _nodeSyncOpen; set => SetProperty(ref _nodeSyncOpen, value); }
+    public ObservableCollection<NodeSyncChoice> NodeSyncChoices => _nodeSyncChoices;
+    public int SelectedTargetCount => SelectedTargets.Count();
     public void SyncSelectedColorNodes(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedNodeIds, IEnumerable<ReferenceTargetItem> targets)
     {
         var selected = source.Normalize().Nodes.Where(node => selectedNodeIds.Contains(node.Id)).ToArray();
@@ -209,6 +221,13 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 }
 
 public enum ReferenceTargetStatus { Pending, Processing, Synced, Adjusted, Exported, Failed }
+public sealed class NodeSyncChoice(Guid id, string name, bool selected) : ObservableObject
+{
+    private bool _selected = selected;
+    public Guid Id { get; } = id;
+    public string Name { get; } = name;
+    public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
+}
 public enum ReferenceExportStatus { None, Queued, Exporting, Succeeded, Failed, Cancelled }
 
 public sealed class ReferenceTargetItem : ObservableObject
