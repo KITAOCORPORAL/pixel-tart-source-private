@@ -1,0 +1,30 @@
+{
+  "schema": "pixel-tart-photography-acceptance/v1",
+  "run_id": "photo-20260923T075548Z-52be8b76",
+  "product_source_sha": "52be8b76e738c1defae504e0941cb843e0caa695",
+  "branch": "integration/pixel-tart-developer-preview",
+  "sdk_version": "10.0.401",
+  "fixture_version": "synthetic-reference-v2",
+  "started_at": "2026-09-23T07:55:48Z",
+  "completed_at": "2026-09-23T08:11:30.2265454+00:00",
+  "machine_class": "Windows-native-WPF-development",
+  "architecture": "X64",
+  "logical_dpi": "PASS",
+  "physical_dpi": "NOT_TESTED",
+  "performance": {
+    "targets": 30,
+    "dimensions": "2400x1600",
+    "elapsed_ms": 59718,
+    "process_peak_mb": 771.5,
+    "status": "PASS_WITH_BASELINE"
+  },
+  "suites": {
+    "wpf": "1308 passed / 0 failed / 4 opt-in skips",
+    "photography_dedicated": "PASS",
+    "logical_dpi": "PASS",
+    "core": "PASS"
+  },
+  "historical_rc12": "EXCLUDED",
+  "product_development_gate": "PASS",
+  "release_hardware_gate": "PENDING"
+}

@@ -67,7 +67,7 @@ try {
     $batchTrx = Get-ChildItem -LiteralPath (Join-Path $root 'wpf') -Filter '*-BatchExportProcessedPixelsTests.trx' | Select-Object -First 1
     if (-not $batchTrx) { throw 'Same-run batch/performance fixture is missing.' }
     [xml]$batchXml = Get-Content -LiteralPath $batchTrx.FullName -Raw
-    $batchText = $batchXml.InnerText
+    $batchText = [System.Net.WebUtility]::HtmlDecode($batchXml.InnerText)
     if ($batchText -notmatch 'color_studio_batch_targets=30; dimensions=2400x1600; elapsed_ms=(\d+); working_set_before_mb=([\d.]+); process_peak_mb=([\d.]+)') { throw 'Same-run 30-target performance baseline is missing.' }
     $performance=[ordered]@{ targets=30; dimensions='2400x1600'; elapsed_ms=[int]$Matches[1]; working_set_before_mb=[double]$Matches[2]; process_peak_mb=[double]$Matches[3]; status='PASS_WITH_BASELINE'; producer='BatchExportProcessedPixelsTests' }
     $output=[ordered]@{ run_id=$runId; product_source_sha=$source; generated_at=[DateTimeOffset]::UtcNow.ToString('O'); suites=$suites; logical_dpi='PASS'; physical_dpi='NOT_TESTED'; performance=$performance; historical_rc12='EXCLUDED' }
