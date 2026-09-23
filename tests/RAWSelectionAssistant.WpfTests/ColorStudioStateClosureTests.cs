@@ -125,6 +125,17 @@ public sealed class ColorStudioStateClosureTests
     });
 
     [TestMethod]
+    public void UndoRestoresSelectedNodeTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        var selected = editor.AdjustmentNodes.Single(node => node.Type == ColorStudioNodeType.ColorRange);
+        editor.SelectedAdjustmentNode = selected;
+        editor.DeleteAdjustmentNodeCommand.Execute(null);
+        editor.UndoAdjustmentCommand.Execute(null);
+        Assert.AreEqual(selected.Id, editor.SelectedAdjustmentNode?.Id);
+    });
+
+    [TestMethod]
     public void NodeDragReorderTests() => Sta(() =>
     {
         using var editor = Editor(); editor.WorkspaceMode = "专业";
