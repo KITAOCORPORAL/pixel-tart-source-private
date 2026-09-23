@@ -79,6 +79,70 @@ public sealed class BatchExportProcessedPixelsTests
     }
 
     [TestMethod]
+    public async Task ColorStudioInactiveTargetUsesFrozenStackAndSamePreviewRenderer()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ColorStack-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var source = CreatePng(root, "source", 180, 90, 60);
+            var output = Path.Combine(root, "output"); Directory.CreateDirectory(output);
+            var nodeId = Guid.NewGuid();
+            var stack = new ColorAdjustmentStack([new(nodeId, ColorStudioNodeType.ColorRange, "warm", true,
+                new Dictionary<string, double> { ["hue"] = 70, ["saturation"] = 45, ["range"] = .1 }, [new(180, 90, 60)])]);
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(output));
+            var inactive = new ReferenceTargetItem(source) { IsSelected = true, ColorAdjustmentStackSnapshot = stack };
+            workspace.Targets.Add(inactive);
+            var preview = await workspace.Editor.PreviewColorStudioAsync(Load(source), stack, null);
+            await workspace.ExportAllCommand.ExecuteAsync(null);
+            Assert.AreEqual(ReferenceExportStatus.Succeeded, inactive.ExportStatus);
+            Assert.IsFalse(inactive.IsActive);
+            var exported = Pixels(Load(inactive.OutputPath!)); var expected = Pixels(preview);
+            Assert.IsGreaterThan(10, Math.Abs(exported[2] - 180) + Math.Abs(exported[1] - 90) + Math.Abs(exported[0] - 60));
+            Assert.IsLessThanOrEqualTo(6, exported.Zip(expected, (a, b) => Math.Abs(a - b)).Max());
+        }
+        finally { Directory.Delete(root, recursive: true); }
+    }
+
+    [TestMethod]
+    public async Task ColorStudioThirtyHighResolutionTargetsRecordProcessedExportBaseline()
+    {
+        const int width = 2400, height = 1600, count = 30;
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ColorBaseline-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var output = Path.Combine(root, "output"); Directory.CreateDirectory(output);
+            var pixels = new byte[width * height * 4];
+            for (var y = 0; y < height; y++) for (var x = 0; x < width; x++)
+            {
+                var offset = (y * width + x) * 4; pixels[offset] = (byte)(35 + x % 120); pixels[offset + 1] = (byte)(55 + y % 130); pixels[offset + 2] = (byte)(100 + (x + y) % 110); pixels[offset + 3] = 255;
+            }
+            var image = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, pixels, width * 4);
+            var path = Path.Combine(root, "fixture.png");
+            var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(image));
+            using (var stream = File.Create(path)) encoder.Save(stream);
+            var stack = new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Film, "film", true,
+                new Dictionary<string, double> { ["profile_amount"] = 40 })]);
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(output));
+            for (var index = 0; index < count; index++)
+            {
+                var targetPath = Path.Combine(root, $"fixture-{index:00}.png"); File.Copy(path, targetPath);
+                workspace.Targets.Add(new ReferenceTargetItem(targetPath) { IsSelected = true, ColorAdjustmentStackSnapshot = stack });
+            }
+            GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
+            var before = Process.GetCurrentProcess().WorkingSet64; var watch = Stopwatch.StartNew();
+            await workspace.ExportAllCommand.ExecuteAsync(null);
+            watch.Stop();
+            Assert.AreEqual(count, workspace.ExportCompleted);
+            Assert.IsTrue(workspace.Targets.All(target => target.ExportStatus == ReferenceExportStatus.Succeeded));
+            Assert.HasCount(count, Directory.GetFiles(output, "*_仿色.jpg"));
+            TestContext?.WriteLine($"color_studio_batch_targets={count}; dimensions={width}x{height}; elapsed_ms={watch.Elapsed.TotalMilliseconds:F0}; working_set_before_mb={before / 1048576d:F1}; process_peak_mb={Process.GetCurrentProcess().PeakWorkingSet64 / 1048576d:F1}");
+        }
+        finally { Directory.Delete(root, recursive: true); }
+    }
+
+    [TestMethod]
     public void FilmstripSelectionDoesNotRequireActiveState()
     {
         var target = new ReferenceTargetItem("a.jpg") { IsSelected = true, IsActive = false };

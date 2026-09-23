@@ -83,7 +83,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         CopyFilm(film is not null ? film with { } : look?.Film ?? new PixelTartFilmSettings());
         _ = DebouncedRenderAsync();
     }
-    public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token)
+    public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null)
     {
         var source = await Task.Run(() =>
         {
@@ -91,6 +91,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         }, token);
         // Batch export is driven by each target's frozen snapshot, never by the
         // currently active editor (which may belong to a different target).
+        if (stack is not null) return await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, snapshot, token), token);
         var look = snapshot;
         if (look is null) return source;
         var rendered = await _preview.RenderWithResultAsync(source, look, token);
@@ -100,6 +101,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         if (PostProcessor is not null) output = await PostProcessor(output, token);
         return output;
     }
+    public Task<BitmapSource> PreviewColorStudioAsync(BitmapSource source, ColorAdjustmentStack stack, ReferenceLook? reference, CancellationToken token = default) =>
+        Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, reference, token), token);
     public event EventHandler? FullEditorRequested;
     public Func<BitmapSource, CancellationToken, Task<BitmapSource>>? PostProcessor { get; set; }
     public IReadOnlyList<PixelTartFilmProfile> FilmProfiles => PixelTartFilmProfiles.All;

@@ -50,6 +50,15 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public RelayCommand StopProcessingCommand { get; }
     public RelayCommand SyncSelectedCommand { get; }
     public RelayCommand SyncAllCommand { get; }
+    public void SyncSelectedColorNodes(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedNodeIds, IEnumerable<ReferenceTargetItem> targets)
+    {
+        var selected = source.Normalize().Nodes.Where(node => selectedNodeIds.Contains(node.Id)).ToArray();
+        if (selected.Length == 0) return;
+        foreach (var target in targets)
+            target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } stack
+                ? stack.SyncSelectedFrom(source, selectedNodeIds)
+                : new ColorAdjustmentStack(selected).Normalize();
+    }
     public AsyncRelayCommand ActivateTargetCommand { get; }
     public AsyncRelayCommand ExportSelectedCommand { get; }
     public AsyncRelayCommand ExportAllCommand { get; }
@@ -173,7 +182,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         var directory = _dialogs.ChooseFolder("选择批量导出目录", null);
         if (directory is null) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
-        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null)).ToArray();
+        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize())).ToArray();
         _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
         try
         {
@@ -181,7 +190,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + "_仿色.jpg"); var temp = output + ".tmp";
-                try { var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
+                try { var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
                 catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
@@ -226,6 +235,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public string? Error { get; set; }
     public ReferenceLook? AppliedLookSnapshot { get; set; }
     public PixelTartFilmSettings? FilmSettingsSnapshot { get; set; }
+    public ColorAdjustmentStack? ColorAdjustmentStackSnapshot { get; set; }
     public string? OutputPath { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }
 }
