@@ -7,6 +7,40 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ColorStudioStackTests
 {
     [TestMethod]
+    public async Task SchemeV2PersistenceTests()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "pixel-tart-scheme-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var store = new ColorStudioSchemeStore(folder);
+            var node = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "暖橙", true,
+                new Dictionary<string, double> { ["hue"] = 17, ["keep_original_luminance"] = 1 },
+                [new(220, 145, 90)], NegativeSamples: [new(30, 80, 120)]);
+            var scheme = new ColorStudioSchemeV2(Guid.NewGuid(), "照片方案", new ColorAdjustmentStack([node]), DateTimeOffset.UtcNow);
+            await store.SaveAsync(scheme);
+            var restarted = new ColorStudioSchemeStore(folder);
+            var restored = (await restarted.LoadAsync()).Single();
+            Assert.AreEqual(ColorStudioSchemeSerializer.ComputeHash(scheme), ColorStudioSchemeSerializer.ComputeHash(restored));
+            await restarted.SaveAsync(restored with { Name = "更新方案" });
+            Assert.AreEqual("更新方案", (await store.LoadAsync()).Single().Name);
+            await store.DeleteAsync(scheme.Id);
+            Assert.HasCount(0, await restarted.LoadAsync());
+        }
+        finally { if (Directory.Exists(folder)) Directory.Delete(folder, true); }
+    }
+
+    [TestMethod]
+    public void TargetStackDeepCloneTests()
+    {
+        var stack = new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "范围", true,
+            new Dictionary<string, double> { ["strength"] = 71 }, [new(100, 80, 60)], NegativeSamples: [new(4, 5, 6)])]);
+        var first = stack.DeepClone(); var second = stack.DeepClone();
+        Assert.AreNotSame(first.Nodes, second.Nodes);
+        Assert.AreNotSame(first.Nodes[0].NumericParameters, second.Nodes[0].NumericParameters);
+        Assert.AreNotSame(first.Nodes[0].Samples, second.Nodes[0].Samples);
+        Assert.AreNotSame(first.Nodes[0].NegativeSamples, second.Nodes[0].NegativeSamples);
+    }
+    [TestMethod]
     public void SchemeV2_RoundTripsOrderedNodesAndHash()
     {
         var scheme = new ColorStudioSchemeV2(Guid.NewGuid(), "Studio", new ColorAdjustmentStack([
