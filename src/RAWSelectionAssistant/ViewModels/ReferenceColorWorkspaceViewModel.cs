@@ -17,16 +17,19 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private string _statusText = "选择待调色照片，再添加希望借用色彩与影调的参考图片。源照片始终只读。";
     private bool _isLoading;
     private ReferenceTargetItem? _activeTarget;
+    private long _activationRevision;
+    private int _loadingActivations;
     private CancellationTokenSource? _exportCancellation;
     private int _exportCompleted;
     private int _exportTotal;
     private string _exportStatus = "";
 
-    public ReferenceColorWorkspaceViewModel(IDialogService dialogs)
+    public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null)
     {
         _dialogs = dialogs;
         Editor = new TetherReferenceModeViewModel(
-            new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true);
+            new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
+            renderBackend: renderBackend);
         Editor.Enabled = true;
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
@@ -53,6 +56,19 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public RelayCommand StopExportCommand { get; }
     public ObservableCollection<ReferenceTargetItem> Targets { get; } = [];
     public IEnumerable<ReferenceTargetItem> SelectedTargets => Targets.Where(item => item.IsSelected);
+    public int SelectFilmstripTarget(int index, int anchor, bool shift, bool control)
+    {
+        if (index < 0 || index >= Targets.Count) return anchor;
+        if (shift && anchor >= 0 && anchor < Targets.Count)
+        {
+            if (!control) foreach (var item in Targets) item.IsSelected = false;
+            for (var i = Math.Min(anchor, index); i <= Math.Max(anchor, index); i++) Targets[i].IsSelected = true;
+            return anchor;
+        }
+        if (control) Targets[index].IsSelected = !Targets[index].IsSelected;
+        else { foreach (var item in Targets) item.IsSelected = false; Targets[index].IsSelected = true; }
+        return index;
+    }
     public ReferenceTargetItem? ActiveTarget { get => _activeTarget; private set => SetProperty(ref _activeTarget, value); }
     public BitmapSource? TargetImage { get => _targetImage; private set { if (SetProperty(ref _targetImage, value)) OnPropertyChanged(nameof(HasTarget)); } }
     public bool HasTarget => TargetImage is not null;
@@ -78,7 +94,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     public async Task LoadTargetAsync(string path)
     {
-        await ActivateTargetAsync(GetOrCreateTarget(path));
+        var target = GetOrCreateTarget(path);
+        target.IsSelected = true;
+        await ActivateTargetAsync(target);
     }
 
     private ReferenceTargetItem GetOrCreateTarget(string path)
@@ -107,23 +125,29 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        var revision = Interlocked.Increment(ref _activationRevision);
+        if (ActiveTarget is { } previous && !ReferenceEquals(previous, target))
+            Editor.CopyCurrentLookTo([previous]);
         try
         {
             Editor.StopProcessing();
-            IsLoading = true; StatusText = "正在载入活动预览…";
+            Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
             var image = await Task.Run(() =>
             {
                 var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.UriSource = new Uri(target.Path); decoded.EndInit(); decoded.Freeze(); return decoded;
             });
-            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true; target.IsSelected = true;
+            if (revision != Volatile.Read(ref _activationRevision)) return;
+            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot);
             await Editor.SetSourceAsync(target.AssetId, image);
+            if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException) { target.Status = ReferenceTargetStatus.Failed; target.Error = "照片无法读取"; StatusText = "待调色照片无法读取；现有色彩方案保持不变。"; }
-        finally { IsLoading = false; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException)
+        { target.Status = ReferenceTargetStatus.Failed; target.Error = "照片无法读取"; if (revision == Volatile.Read(ref _activationRevision)) StatusText = "待调色照片无法读取；现有色彩方案保持不变。"; }
+        finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
     }
 
     public void Dispose() { _exportCancellation?.Cancel(); _exportCancellation?.Dispose(); Editor.Dispose(); }
@@ -138,7 +162,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             var items = paths.Distinct(StringComparer.OrdinalIgnoreCase).Select(GetOrCreateTarget).ToArray();
             using var gate = new SemaphoreSlim(3, 3);
             await Task.WhenAll(items.Select(async item => { await gate.WaitAsync(); try { await LoadThumbnailAsync(item, CancellationToken.None); } finally { gate.Release(); } }));
-            if (items.Length > 0) await ActivateTargetAsync(items[0]);
+            if (items.Length > 0) { items[0].IsSelected = true; await ActivateTargetAsync(items[0]); }
         }
         finally { IsLoading = false; }
     }
@@ -148,6 +172,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         if (items.Count == 0 || IsExporting) return;
         var directory = _dialogs.ChooseFolder("选择批量导出目录", null);
         if (directory is null) return;
+        if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null)).ToArray();
         _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
         try
@@ -191,7 +216,8 @@ public sealed class ReferenceTargetItem : ObservableObject
     public int PixelWidth { get; set; }
     public int PixelHeight { get; set; }
     public long FileSize => File.Exists(Path) ? new FileInfo(Path).Length : 0;
-    public int Rating { get; set; }
+    private int _rating;
+    public int Rating { get => _rating; set => SetProperty(ref _rating, Math.Clamp(value, 0, 5)); }
     public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value); }
     public bool IsActive { get => _isActive; set => SetProperty(ref _isActive, value); }
     public ReferenceTargetStatus Status { get => _status; set { if (SetProperty(ref _status, value)) OnPropertyChanged(nameof(StatusText)); } }

@@ -152,6 +152,55 @@ public sealed class StageIVReferenceResolutionTests
 }
 
 [TestClass]
+public sealed class MatchV3MeasuredFixtureTests
+{
+    [TestMethod]
+    public void TenColorAndToneFixturesRecordQuantilesDriftClippingAndParity()
+    {
+        var samples = new (string Name, VisualRgb24 Color)[]
+        {
+            ("P05", new(13, 13, 13)), ("P50", new(128, 128, 128)), ("P95", new(242, 242, 242)),
+            ("Neutral", new(110, 110, 110)), ("Skin-like", new(204, 151, 123)),
+            ("Highlight", new(250, 242, 223)), ("Shadow", new(22, 30, 40)),
+            ("Warm", new(210, 129, 64)), ("Cool", new(55, 132, 209)),
+            ("Strong Cast", new(38, 205, 72)), ("High Saturation", new(245, 29, 174))
+        };
+        var sourceBytes = Enumerable.Range(0, 16 * 16).SelectMany(index =>
+        {
+            var color = samples[index % samples.Length].Color; return new[] { color.R, color.G, color.B };
+        }).ToArray();
+        var source = new VisualPixelBuffer(16, 16, sourceBytes);
+        var sourceAnalysis = VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), "match-v3-source", source));
+        var (baseLook, _, _) = ColorFixtures.Look();
+        var look = baseLook with { Parameters = baseLook.Parameters with { NeutralProtection = 80, HighlightProtection = 80, SkinProtection = 70 } };
+        var matcher = new ReferenceLookMatcher();
+        var matched = matcher.Match(source, sourceAnalysis, look).Preview;
+        var transform = matcher.BuildTransform(source, sourceAnalysis, look);
+        var cube = ReferenceCubeLutBuilder.Build(33, transform.Apply, transform.Pipeline);
+        var observed = new List<(string Name, double NeutralDrift, double HighlightChromaDrift, int ClippedChannels, int PreviewExportDelta)>();
+        for (var index = 0; index < samples.Length; index++)
+        {
+            var (name, color) = samples[index];
+            var offset = index * 3;
+            var preview = new VisualRgb24(matched.Rgb24.Span[offset], matched.Rgb24.Span[offset + 1], matched.Rgb24.Span[offset + 2]);
+            var encoded = cube.Sample(color.R / 255d, color.G / 255d, color.B / 255d);
+            var delta = new[] { Math.Abs(preview.R - encoded.R * 255), Math.Abs(preview.G - encoded.G * 255), Math.Abs(preview.B - encoded.B * 255) }.Max();
+            var neutralDrift = name == "Neutral" ? OklabColorSpace.FromSrgb(preview).Chroma : 0;
+            var highlightDrift = name == "Highlight" ? Math.Abs(OklabColorSpace.FromSrgb(preview).Chroma - OklabColorSpace.FromSrgb(color).Chroma) : 0;
+            observed.Add((name, neutralDrift, highlightDrift, new byte[] { preview.R, preview.G, preview.B }.Count(channel => channel is 0 or 255), (int)Math.Ceiling(delta)));
+        }
+        Assert.HasCount(samples.Length, observed);
+        foreach (var row in observed) Assert.IsLessThanOrEqualTo(5, row.PreviewExportDelta, $"{row.Name}: delta {row.PreviewExportDelta}, clipping {row.ClippedChannels}, neutral {row.NeutralDrift:F4}, highlight {row.HighlightChromaDrift:F4}");
+        Assert.IsLessThan(.04, observed.Single(row => row.Name == "Neutral").NeutralDrift);
+        Assert.IsLessThan(.08, observed.Single(row => row.Name == "Highlight").HighlightChromaDrift);
+        var clipped = observed.Where(row => row.Name is not "P05" and not "P95" && row.ClippedChannels > 0).ToArray();
+        TestContext?.WriteLine(string.Join(Environment.NewLine, observed.Select(row => $"{row.Name}: neutral={row.NeutralDrift:F5}, highlight-chroma={row.HighlightChromaDrift:F5}, clipped={row.ClippedChannels}, preview-export={row.PreviewExportDelta}")));
+        Assert.IsLessThanOrEqualTo(1, clipped.Sum(row => row.ClippedChannels), "Gamut boundary channels: " + string.Join(", ", clipped.Select(row => row.Name)));
+    }
+    public TestContext? TestContext { get; set; }
+}
+
+[TestClass]
 public sealed class NextCaptureRuleTests
 {
     [TestMethod]

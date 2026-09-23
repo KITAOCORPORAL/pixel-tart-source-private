@@ -34,7 +34,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly ITetherDisplaySettingsStore _displaySettingsStore;
     private readonly IProjectRepository? _projectRepository;
     private readonly TetherZonePreviewService _zonePreview = new();
-    private readonly PhotoMetadataProvider _photoMetadataProvider = new();
+    private readonly IPhotoMetadataProvider _photoMetadataProvider;
     private PhotoMetadata? _photoMetadata;
     private long _photoMetadataRevision;
     private readonly NextCaptureRuleStore _nextCaptureStore = new();
@@ -144,7 +144,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ITetherDisplaySettingsStore? displaySettingsStore = null,
         IPreviewMemoryManager? memoryManager = null,
         TetherColorViewModel? color = null,
-        IProjectRepository? projectRepository = null)
+        IProjectRepository? projectRepository = null,
+        IPhotoMetadataProvider? photoMetadataProvider = null)
     {
         _adapter = adapter;
         _sessionRepository = sessionRepository;
@@ -161,6 +162,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _exifService = exifService ?? new TetherExifService();
         _displaySettingsStore = displaySettingsStore ?? new JsonTetherDisplaySettingsStore();
         _projectRepository = projectRepository;
+        _photoMetadataProvider = photoMetadataProvider ?? new PhotoMetadataProvider();
         ColorSettings = color ?? new TetherColorViewModel(dialogs);
         ReferenceMode = new TetherReferenceModeViewModel(dialogs: dialogs);
         ReferenceMode.PostProcessor = ColorSettings.RenderAfterReferenceLookAsync;
@@ -740,6 +742,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _fullResolutionLoader.ReleaseExcept(null);
         IsPreviewLoading = true; PreviewProgress = 10; PreviewStatus = "正在加载监看代理图…";
         CurrentImage = null; ClippingOverlay = null; Histogram = null; ExifInfo = TetherExifInfo.Unavailable(item.Record); PhotoMetadata = null;
+        var metadataRevision = Interlocked.Increment(ref _photoMetadataRevision);
+        var metadataTask = _photoMetadataProvider.ReadAsync(item.Record.SourcePath, request.Token);
         ApplyAnnotationToEditor(item.Annotation);
         try
         {
@@ -754,10 +758,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             PreviewProgress = 65;
             PreviewStatus = result.Image is null ? result.Message ?? "预览不可用。" : result.UsedPairedPreview ? "RAW使用配对JPG进行监看。" : "监看代理图 · 最长边2048";
             ExifInfo = await exifTask;
-            var metadataRevision = Interlocked.Increment(ref _photoMetadataRevision);
             try
             {
-                var metadata = await _photoMetadataProvider.ReadAsync(item.Record.SourcePath, request.Token);
+                var metadata = await metadataTask;
                 if (metadataRevision == Volatile.Read(ref _photoMetadataRevision) && _requestCoordinator.IsCurrent(item.Record.Id, request.Version)) PhotoMetadata = metadata;
             }
             catch (OperationCanceledException) { }

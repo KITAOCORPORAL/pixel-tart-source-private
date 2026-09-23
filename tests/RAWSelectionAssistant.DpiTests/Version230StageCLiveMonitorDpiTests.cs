@@ -54,7 +54,9 @@ public sealed class Version230StageCLiveMonitorDpiTests
     public void StarsColorsAndNotesRemainThemeAwareAndComplete()
     {
         var xaml = Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
-        foreach (var star in new[] { "CommandParameter=\"0\"", "CommandParameter=\"1\"", "CommandParameter=\"2\"", "CommandParameter=\"3\"", "CommandParameter=\"4\"", "CommandParameter=\"5\"" }) StringAssert.Contains(xaml, star);
+        StringAssert.Contains(xaml, "PixelTartRatingControl Rating=\"{Binding CurrentRating, Mode=TwoWay}\" Command=\"{Binding SetRatingCommand}\"");
+        var control = Text("src/PixelTart.Modules.AssetLibrary/PixelTartRatingControl.cs");
+        foreach (var key in new[] { "Key.D0", "Key.D1", "Key.D2", "Key.D3", "Key.D4", "Key.D5", "Key.Left", "Key.Right", "Key.Enter" }) StringAssert.Contains(control, key);
         StringAssert.Contains(xaml, "AutomationProperties.Name=\"颜色标签\""); StringAssert.Contains(xaml, "AutomationProperties.Name=\"摄影师备注\""); StringAssert.Contains(xaml, "AutomationProperties.Name=\"客户备注\"");
     }
 

@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.Tethering;
+using RAWSelectionAssistant.Core.Services.Photos;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.ViewModels;
 
@@ -13,6 +14,47 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class Version230StageCLiveMonitorWpfTests
 {
+    [TestMethod]
+    public Task RapidThirtyPhotoMetadataSwitchKeepsOnlyFinalFields() => RunSta(async () =>
+    {
+        var provider = new DelayedMetadataProvider();
+        await using var viewModel = CreateViewModel(new PreviewLoaderStub(), provider);
+        var assets = Enumerable.Range(0, 30).Select(index => Asset($"META_{index:00}.jpg", id: Guid.NewGuid())).ToArray();
+        viewModel.ApplyReviewState("TetherAssets", assets);
+        viewModel.OnActivated();
+        foreach (var asset in assets) viewModel.SelectedAsset = viewModel.Assets.Single(item => item.Record.Id == asset.Id);
+        var final = assets[^1];
+        await WaitUntilAsync(() => provider.Requests.ContainsKey(final.SourcePath), TimeSpan.FromSeconds(10));
+        provider.Complete(final.SourcePath);
+        await WaitUntilAsync(() => viewModel.PhotoMetadata?.Path == final.SourcePath, TimeSpan.FromSeconds(10));
+        foreach (var path in provider.Requests.Keys.Where(path => path != final.SourcePath)) provider.Complete(path);
+        await Task.Delay(100);
+        var metadata = viewModel.PhotoMetadata;
+        Assert.IsNotNull(metadata);
+        Assert.AreEqual(final.SourcePath, metadata.Path);
+        Assert.AreEqual(final.FileName, metadata.FileName);
+        Assert.AreEqual("30 × 20", metadata.Dimensions);
+        Assert.AreEqual("Camera 29", metadata.Make);
+        Assert.AreEqual("Lens 29", metadata.LensModel);
+        Assert.AreEqual("129", metadata.Iso);
+        Assert.AreEqual("1/30", metadata.Shutter);
+    });
+
+    private static async Task WaitUntilAsync(Func<bool> condition, TimeSpan timeout)
+    { using var cancellation = new CancellationTokenSource(timeout); while (!condition()) { cancellation.Token.ThrowIfCancellationRequested(); await Task.Delay(10, cancellation.Token); } }
+
+    private sealed class DelayedMetadataProvider : IPhotoMetadataProvider
+    {
+        public System.Collections.Concurrent.ConcurrentDictionary<string, TaskCompletionSource<PhotoMetadata>> Requests { get; } = new();
+        public Task<PhotoMetadata> ReadAsync(string path, CancellationToken cancellationToken = default) =>
+            Requests.GetOrAdd(path, _ => new(TaskCreationOptions.RunContinuationsAsynchronously)).Task;
+        public void Complete(string path)
+        {
+            var index = int.Parse(Path.GetFileNameWithoutExtension(path).Split('_')[1]);
+            Requests[path].TrySetResult(PhotoMetadata.Unavailable(path) with
+            { Dimensions = "30 × 20", Make = $"Camera {index}", LensModel = $"Lens {index}", Iso = $"{100 + index}", Shutter = "1/30" });
+        }
+    }
     [TestMethod]
     [DataRow("Grid.ColumnDefinitions")]
     [DataRow("ThumbnailColumn")]
@@ -224,11 +266,11 @@ public sealed class Version230StageCLiveMonitorWpfTests
         Assert.DoesNotContain("TetherProxies", log, StringComparison.OrdinalIgnoreCase); Assert.DoesNotContain("TetherFullResolution", log, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static TetherCaptureViewModel CreateViewModel(IPreviewImageLoader preview)
+    private static TetherCaptureViewModel CreateViewModel(IPreviewImageLoader preview, IPhotoMetadataProvider? metadataProvider = null)
     {
         var assets = new AssetRepositoryStub(); var memory = new PreviewMemoryManager();
         return new(null!, new SessionRepositoryStub(), assets, new ProxyCacheStub(), new DialogStub(), new AnnotationServiceStub(), preview,
-            new FullResolutionImageLoader(assets, memory), new HistogramService(), new ClippingOverlayService(), new PreviewRequestCoordinator(), new ExifServiceStub(), new DisplayStoreStub(), memory);
+            new FullResolutionImageLoader(assets, memory), new HistogramService(), new ClippingOverlayService(), new PreviewRequestCoordinator(), new ExifServiceStub(), new DisplayStoreStub(), memory, photoMetadataProvider: metadataProvider);
     }
 
     private static BitmapSource SolidBitmap(int width, int height, byte blue, byte green, byte red)

@@ -2,6 +2,9 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Media3D;
+using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.Views;
@@ -33,16 +36,16 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
         if (e.OriginalSource is not DependencyObject source) return;
+        for (DependencyObject? ancestor = source; ancestor is not null;
+             ancestor = ancestor is Visual or Visual3D ? VisualTreeHelper.GetParent(ancestor) : LogicalTreeHelper.GetParent(ancestor))
+            if (ancestor is PixelTartRatingControl) return;
         var item = ItemsControl.ContainerFromElement(FindFilmstrip(), source) as ListBoxItem;
         if (item?.DataContext is not ReferenceTargetItem target) return;
         var index = workspace.Targets.IndexOf(target); _filmstripDownPoint = e.GetPosition(this);
-        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) && _selectionAnchor >= 0)
-        {
-            var start = Math.Min(_selectionAnchor, index); var end = Math.Max(_selectionAnchor, index); foreach (var entry in workspace.Targets) entry.IsSelected = false; for (var i = start; i <= end; i++) workspace.Targets[i].IsSelected = true;
-        }
-        else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) target.IsSelected = !target.IsSelected;
-        else { foreach (var entry in workspace.Targets) entry.IsSelected = false; target.IsSelected = true; }
-        _selectionAnchor = index; workspace.ActivateTargetCommand.Execute(target); e.Handled = true;
+        var modifiers = Keyboard.Modifiers;
+        _selectionAnchor = workspace.SelectFilmstripTarget(index, _selectionAnchor,
+            modifiers.HasFlag(ModifierKeys.Shift), modifiers.HasFlag(ModifierKeys.Control));
+        workspace.ActivateTargetCommand.Execute(target); e.Handled = true;
     }
     private ListBox? FindFilmstrip() => FindName("Filmstrip") as ListBox;
 
@@ -55,11 +58,10 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var delta = e.Key == Key.Left ? -1 : e.Key == Key.Right ? 1 : 0;
         if (delta == 0) return;
         var next = Math.Clamp(index + delta, 0, workspace.Targets.Count - 1); var targetAt = workspace.Targets[next];
-        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) && _selectionAnchor >= 0)
-        {
-            var start = Math.Min(_selectionAnchor, next); var end = Math.Max(_selectionAnchor, next); foreach (var target in workspace.Targets) target.IsSelected = false; for (var i = start; i <= end; i++) workspace.Targets[i].IsSelected = true;
-        }
-        else if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) { foreach (var target in workspace.Targets) target.IsSelected = false; targetAt.IsSelected = true; _selectionAnchor = next; }
+        var modifiers = Keyboard.Modifiers;
+        if (modifiers.HasFlag(ModifierKeys.Shift) || !modifiers.HasFlag(ModifierKeys.Control))
+            _selectionAnchor = workspace.SelectFilmstripTarget(next, _selectionAnchor,
+                modifiers.HasFlag(ModifierKeys.Shift), modifiers.HasFlag(ModifierKeys.Control));
         workspace.ActivateTargetCommand.Execute(targetAt); e.Handled = true;
     }
 
@@ -89,9 +91,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (compact && !_wasCompact) _editor?.SetResponsiveContext(true);
         _wasCompact = compact;
 
-        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 212 : 240;
+        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 300 : 240;
         RightColumn.MinWidth = focus || compact ? 0 : 224;
-        LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(compact ? .24 : .19, GridUnitType.Star);
+        LeftColumn.Width = focus || narrow ? new GridLength(0) : compact ? new GridLength(300) : new GridLength(.19, GridUnitType.Star);
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
         RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
         if (compact)

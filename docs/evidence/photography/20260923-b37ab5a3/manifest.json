@@ -1,0 +1,15 @@
+{
+  "schema": "pixel-tart-photography-closure/v1",
+  "run_id": "photo-closure-20260923-b37ab5a3",
+  "product_source_sha": "b37ab5a3224907fc352f8d6f0697c9082d922839",
+  "sdk_version": "10.0.401",
+  "sdk_path": "user-local-dotnet10",
+  "fixture_version": "synthetic-reference-v1",
+  "generated_at": "2026-09-23T12:20:00+03:00",
+  "current_source_recompiled": true,
+  "build": { "configuration": "Release", "platform": "x64", "warnings": 0, "errors": 0 },
+  "photography": { "inactive_target_export": "PASS", "per_target_snapshot": "PASS", "preview_export_parity": "PASS", "metadata": "PASS", "filmstrip": "PASS", "rating": "PASS", "match_v3": "PASS", "reference_cache": "PASS", "dpi": "PARTIAL", "performance": "PARTIAL" },
+  "evidence_consistency": "PARTIAL_NOT_CLOSED",
+  "rc12": "HISTORICAL_ONLY",
+  "organization_splitter": "HISTORICAL_EVIDENCE_ISSUE"
+}

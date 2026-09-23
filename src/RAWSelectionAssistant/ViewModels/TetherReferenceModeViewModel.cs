@@ -79,7 +79,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             OnPropertyChanged(nameof(SelectedLook));
             OnPropertyChanged(nameof(CurrentLookText));
         }
-        if (film is not null) CopyFilm(film with { });
+        else SelectedLook = null;
+        CopyFilm(film is not null ? film with { } : look?.Film ?? new PixelTartFilmSettings());
         _ = DebouncedRenderAsync();
     }
     public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token)
@@ -88,11 +89,13 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         {
             var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); return image;
         }, token);
-        var look = snapshot ?? SelectedLook;
+        // Batch export is driven by each target's frozen snapshot, never by the
+        // currently active editor (which may belong to a different target).
+        var look = snapshot;
         if (look is null) return source;
         var rendered = await _preview.RenderWithResultAsync(source, look, token);
         var output = rendered.Image;
-        var settings = film ?? FilmSettings;
+        var settings = film ?? look.Film ?? new PixelTartFilmSettings();
         if (settings.Enabled) output = await _preview.ApplyFilmAsync(output, settings, token);
         if (PostProcessor is not null) output = await PostProcessor(output, token);
         return output;

@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
@@ -17,6 +19,11 @@ public interface IReferenceRenderBackend
 public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
 {
     private readonly ReferenceLookMatcher _matcher = new();
+    private readonly ConcurrentDictionary<ReferenceFileIdentity, Lazy<Task<ReferenceLookSource>>> _referenceAnalysis = new();
+    private long _referenceHits, _referenceMisses, _referenceExecutions, _referenceAnalysisTicks;
+    public ReferenceAnalysisCacheStats ReferenceCacheStats => new(
+        Interlocked.Read(ref _referenceHits), Interlocked.Read(ref _referenceMisses),
+        Interlocked.Read(ref _referenceExecutions), TimeSpan.FromTicks(Interlocked.Read(ref _referenceAnalysisTicks)));
     public async Task<BitmapSource> RenderAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default) =>
         (await RenderWithResultAsync(source, look, token).ConfigureAwait(false)).Image;
     public Task<ReferenceLookPreviewRenderResult> RenderWithResultAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default) => Task.Run(() =>
@@ -63,14 +70,36 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
 
     public async Task<ReferenceLookSource> AnalyzeExternalReferenceAsync(string path, CancellationToken token = default)
     {
-        var image = await BitmapFileLoader.LoadAsync(path, 2048, token).ConfigureAwait(false);
-        return await Task.Run(() =>
-        {
-            token.ThrowIfCancellationRequested(); var (_, _, _, buffer, analysis) = Prepare(image);
-            return new ReferenceLookSource(Guid.Empty, analysis.AssetId, Path.GetFileNameWithoutExtension(path), Path.GetFullPath(path),
-                VisualAnalysisFingerprint.Compute(buffer), 1, analysis, "External");
-        }, token).ConfigureAwait(false);
+        token.ThrowIfCancellationRequested();
+        var fullPath = Path.GetFullPath(path); var file = new FileInfo(fullPath);
+        var identity = new ReferenceFileIdentity(fullPath, file.Length, file.LastWriteTimeUtc.Ticks);
+        var candidate = new Lazy<Task<ReferenceLookSource>>(() => AnalyzeReferenceUncachedAsync(fullPath));
+        var cached = _referenceAnalysis.GetOrAdd(identity, candidate);
+        if (ReferenceEquals(candidate, cached)) Interlocked.Increment(ref _referenceMisses);
+        else Interlocked.Increment(ref _referenceHits);
+        try { return await cached.Value.WaitAsync(token).ConfigureAwait(false); }
+        catch when (cached.IsValueCreated && cached.Value.IsFaulted)
+        { _referenceAnalysis.TryRemove(new KeyValuePair<ReferenceFileIdentity, Lazy<Task<ReferenceLookSource>>>(identity, cached)); throw; }
     }
+
+    private async Task<ReferenceLookSource> AnalyzeReferenceUncachedAsync(string path)
+    {
+        Interlocked.Increment(ref _referenceExecutions);
+        var watch = Stopwatch.StartNew();
+        try
+        {
+            var image = await BitmapFileLoader.LoadAsync(path, 2048, CancellationToken.None).ConfigureAwait(false);
+            return await Task.Run(() =>
+            {
+                var (_, _, _, buffer, analysis) = Prepare(image);
+                return new ReferenceLookSource(Guid.Empty, analysis.AssetId, Path.GetFileNameWithoutExtension(path), path,
+                    VisualAnalysisFingerprint.Compute(buffer), 1, analysis, "External");
+            }).ConfigureAwait(false);
+        }
+        finally { Interlocked.Add(ref _referenceAnalysisTicks, watch.Elapsed.Ticks); }
+    }
+
+    private readonly record struct ReferenceFileIdentity(string Path, long Length, long ModifiedTicks);
 
     private static (BitmapSource Input, byte[] Bgra, int Stride, VisualPixelBuffer Buffer, AssetVisualAnalysisResult Analysis) Prepare(BitmapSource source)
     {
@@ -85,4 +114,5 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
 
     private static byte ToByte(double value) => (byte)Math.Clamp(Math.Round(value * 255), 0, 255);
 }
+public sealed record ReferenceAnalysisCacheStats(long Hits, long Misses, long Executions, TimeSpan AnalysisTime);
 public sealed record ReferenceLookPreviewRenderResult(BitmapSource Image, string? DifferenceWarning);

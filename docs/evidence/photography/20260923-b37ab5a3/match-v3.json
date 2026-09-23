@@ -1,0 +1,12 @@
+{
+  "run_id": "photo-closure-20260923-b37ab5a3",
+  "product_source_sha": "b37ab5a3224907fc352f8d6f0697c9082d922839",
+  "sdk_version": "10.0.401",
+  "fixture_version": "synthetic-reference-v1",
+  "fixtures": ["P05", "P50", "P95", "Neutral", "Skin-like", "Highlight", "Shadow", "Warm", "Cool", "Strong Cast", "High Saturation"],
+  "neutral_drift": 0.00689,
+  "highlight_chroma_drift": 0.00103,
+  "preview_export_max_channel_delta": 2,
+  "gamut_boundary_channels": 1,
+  "status": "PASS"
+}

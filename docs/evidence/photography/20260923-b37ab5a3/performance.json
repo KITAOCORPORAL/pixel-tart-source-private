@@ -1,0 +1,11 @@
+{
+  "run_id": "photo-closure-20260923-b37ab5a3",
+  "product_source_sha": "b37ab5a3224907fc352f8d6f0697c9082d922839",
+  "sdk_version": "10.0.401",
+  "fixture_version": "synthetic-reference-v1",
+  "film": { "interactive_proxy_ms": 574.98, "proxy_2048_ms": 965.48, "settled_1080p_ms": 687.49, "final_24mp_ms": 9387.18, "cancel_latency_ms": 0.85 },
+  "import": { "targets_100_ms": 73.4, "targets_500_ms": 104.3 },
+  "batch_export": { "targets_100_ms": 197.6, "process_peak_mb": 81.15 },
+  "filmstrip": { "targets": 500, "layout_ms": 148.0, "realized_containers": 21, "process_peak_mb": 110.68 },
+  "rapid_target_switch": { "targets": 30, "elapsed_ms": 46.4 }
+}
