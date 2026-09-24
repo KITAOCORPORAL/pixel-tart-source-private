@@ -75,8 +75,8 @@ public static class ColorStudioAcceptanceFixture
             ViewMode = editor.EffectiveViewMode, Target = workspace.TargetName, HasTarget = workspace.HasTarget,
             Stack = editor.AdjustmentNodes.Select(n => new { n.Name, Type = n.Type.ToString(), n.Enabled }),
             SourcePixelSize = new[] { editor.SourceImage!.PixelWidth, editor.SourceImage.PixelHeight },
-            ProcessingStatus = editor.StatusText
-            ,MainWindowHandle = new System.Windows.Interop.WindowInteropHelper(window).Handle.ToInt64()
+            ProcessingStatus = editor.StatusText,
+            MainWindowHandle = new System.Windows.Interop.WindowInteropHelper(window).Handle.ToInt64()
         }, new JsonSerializerOptions { WriteIndented = true }));
         await File.WriteAllTextAsync(Path.Combine(folder, "ready.txt"), $"{Id}\n{Environment.ProcessId}\n{window.Width}x{window.Height}");
     }
@@ -108,8 +108,23 @@ public static class ColorStudioAcceptanceFixture
                 window.Width = 1800; window.Height = 1200;
                 if (window.Content is FrameworkElement root) root.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
                 break;
+            case "19":
+                editor.WorkspaceSection = "预设"; editor.RangeHue = 23;
+                editor.RequestApplySchemeCommand.Execute(null); break;
+            case "20":
+                editor.WorkspaceSection = "预设"; editor.RequestDeleteSchemeCommand.Execute(null); break;
+            case "21":
+                workspace.OpenNodeSyncCommand.Execute(null);
+                workspace.NodeSyncChoices[2].Selected = false;
+                workspace.ConfirmNodeSyncCommand.Execute(null); break;
+            case "22":
+                editor.ViewMode = "并排对比"; break;
+            case "23":
+                window.Width = 1800; window.Height = 1200;
+                if (window.Content is FrameworkElement dpiRoot) dpiRoot.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
+                workspace.OpenNodeSyncCommand.Execute(null); break;
         }
-        await Task.Delay(700);
+        await Task.Delay(1200); // Let delayed interactive/full-quality jobs start before checking idle.
         var deadline = Stopwatch.StartNew();
         while (editor.IsBusy && deadline.Elapsed < TimeSpan.FromSeconds(25)) await Task.Delay(50);
         if (editor.IsBusy) throw new TimeoutException("Fixture preview did not settle.");
@@ -120,6 +135,21 @@ public static class ColorStudioAcceptanceFixture
         }
         if (scenario == "13")
             foreach (var text in Descendants<TextBlock>(window).Where(x => x.IsVisible && x.Text == "当前色彩方案")) text.BringIntoView();
+        if (scenario is "06" or "08" or "10")
+        {
+            var rail = Descendants<FrameworkElement>(window).First(x => x.Name == "LeftRail");
+            Descendants<ScrollViewer>(rail).First().ScrollToEnd();
+        }
+        if (scenario == "22")
+        {
+            var viewport = Descendants<ColorStudioImageViewport>(window).Single();
+            viewport.State.SetZoom(1.25); viewport.State.PanBy(new Vector(60, -30));
+        }
+        if (scenario == "24")
+        {
+            var row = Descendants<ListBoxItem>(window).First(x => x.DataContext is ColorAdjustmentStackNode n && n.Type == ColorStudioNodeType.ColorRange);
+            Descendants<Button>(row).Single(x => x.ContextMenu is not null).RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+        }
     }
     private static IEnumerable<T> Descendants<T>(DependencyObject root) where T : DependencyObject
     {
