@@ -7,6 +7,45 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ColorSpaceProxyTests
 {
     [TestMethod]
+    public void CameraHasStablePhotographicDefaultAndBoundedInteraction()
+    {
+        var camera = new ColorSpaceCameraState();
+        Assert.AreEqual(ColorSpaceCameraState.DefaultYaw, camera.Yaw);
+        Assert.AreEqual(ColorSpaceCameraState.DefaultPitch, camera.Pitch);
+        Assert.AreEqual(ColorSpaceCameraState.DefaultDistance, camera.Distance);
+        camera.Orbit(900, 200); camera.Zoom(100);
+        Assert.IsTrue(camera.Yaw is >= -180 and <= 180);
+        Assert.AreEqual(89, camera.Pitch);
+        Assert.AreEqual(0.5, camera.Distance);
+        camera.Reset();
+        Assert.AreEqual(ColorSpaceCameraState.DefaultYaw, camera.Yaw);
+        Assert.AreEqual(ColorSpaceCameraState.DefaultPitch, camera.Pitch);
+    }
+
+    [TestMethod]
+    public void LabProjectionUsesNormalizedAxes()
+    {
+        var coordinate = ColorSpaceCoordinate.FromLab(new OklabColor(.75, .2, -.1));
+        Assert.AreEqual(.5, coordinate.X, 1e-12);
+        Assert.AreEqual(.5, coordinate.Y, 1e-12);
+        Assert.AreEqual(-.25, coordinate.Z, 1e-12);
+    }
+
+    [TestMethod]
+    public void LinkingFindsNearestPointAndSeparatesSampleMarkers()
+    {
+        var source = new VisualPixelBuffer(2, 1, new byte[] { 255, 0, 0, 0, 0, 255 });
+        var cloud = ColorSpaceProxyBuilder.Build(source, new(16));
+        var redIndex = ColorSpaceLinking.FindNearest(cloud, OklabColorSpace.FromSrgb(new(255, 0, 0)));
+        var blueIndex = ColorSpaceLinking.FindNearest(cloud, OklabColorSpace.FromSrgb(new(0, 0, 255)));
+        Assert.AreNotEqual(redIndex, blueIndex);
+        var markers = ColorSpaceLinking.MarkSamples(cloud, [new(255, 0, 0)], [new(0, 0, 255)]);
+        Assert.IsTrue(markers.Any(marker => marker.Kind == ColorSpaceMarkerKind.PositiveSample && marker.PointIndex == redIndex));
+        Assert.IsTrue(markers.Any(marker => marker.Kind == ColorSpaceMarkerKind.NegativeSample && marker.PointIndex == blueIndex));
+        Assert.IsTrue(ColorSpaceLinking.SelectCluster(cloud, redIndex, .001).Contains(redIndex));
+    }
+
+    [TestMethod]
     public void ProxyIsDeterministicBoundedAndRetainsSourceRelationship()
     {
         var source = Fixture(320, 180);

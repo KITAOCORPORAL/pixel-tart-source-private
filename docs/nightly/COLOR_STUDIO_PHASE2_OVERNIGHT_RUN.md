@@ -16,9 +16,9 @@
 
 | Stage | Status | Evidence / note |
 |---|---|---|
-| P2.1 3D Color Space Core | IN PROGRESS | deterministic OKLab proxy, cancellation and bounded cache |
-| P2.2 Visualization | BLOCKED | requires Phase 1 gate and P2.1 contract |
-| P2.3 Canvas ↔ 3D Link | BLOCKED | requires visualization state and Phase 1 mapping integration |
+| P2.1 3D Color Space Core | PASS | deterministic OKLab proxy, cancellation and bounded cache; checkpoint `c95a3bc` |
+| P2.2 Visualization | PARTIAL | framework-neutral camera/projection state added and tested; WPF production view not integrated because Phase 1 gate remains open |
+| P2.3 Canvas ↔ 3D Link | PARTIAL | framework-neutral nearest-point/sample/cluster linking added and tested; Canvas/WPF integration remains gated |
 | P2.4 Workflow/performance/polish | BLOCKED | follows P2.1–P2.3 |
 
 This document records only verified outcomes; it is not a claim that Phase 2 is complete.
