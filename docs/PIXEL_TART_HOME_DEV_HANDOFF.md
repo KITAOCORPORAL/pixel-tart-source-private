@@ -6,8 +6,8 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: `07e03a824c475d4d9b132dab375ab4097181ba3c`
-- Last product/evidence commit: `07e03a8 test(color): close production ux gate evidence`. The final handoff commit is tracked separately in the manifest and final office report.
+- Product SHA at handoff: `9345d22211b338ae370a8ded1059fa2e9b920401`
+- Last audited product commit: `9345d22`. Native pointer evidence is mixed-source and does not close the remaining node drag/drop gate.
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 
@@ -18,10 +18,11 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 - Completed: shared zoom/pan model and sampling mapping, professional node stack, scheme persistence/migration, selected-node batch sync, switching/cancellation/retry paths, shared preview/export pipeline, targeted regression and portable evidence records.
 - Remaining Phase 1 gate: native node drag insertion/drop and final processing-order verification. `scripts/verify-color-studio-pointer.ps1` now records Win32 SendInput evidence for wheel, fit, 100%, pan, sampling, compare, Esc, and rapid interaction paths. Physical DPI remains a release-hardware gate.
 - Phase 2: 3D Color Space and cluster visualization are `DEFERRED_TO_PHASE_2`.
+- Phase 2 planning documents exist under `docs/color-studio/`, but production implementation is **BLOCKED BY PHASE 1 REGRESSION**.
 
 ## C. Next product task
 
-Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The Win32 SendInput runner has verified native wheel cursor-centred zoom, Fit, 100%, middle-pan, boundary clamping, compare modes, eyedropper after zoom/pan, Esc sampling exit, and rapid interaction. The remaining native walkthrough task is an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order. Fix only issues found by that walkthrough, then decide whether Phase 1 is `READY FOR COLOR STUDIO PHASE 1 UX REVIEW` or remains `BLOCKED`. Hooks and state-driven screenshots cannot substitute for the drag gesture. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or 01–38 fixture work.
+Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The remaining task is an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order on the current source SHA. Hooks and state-driven screenshots cannot substitute for the drag gesture. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or fixture work. After closure, begin only the P2.1 planning slice in `docs/color-studio/COLOR_STUDIO_PHASE2_IMPLEMENTATION_PLAN.md`.
 
 ## D. Deferred / later
 
