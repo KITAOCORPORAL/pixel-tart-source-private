@@ -1,6 +1,6 @@
 # Color Studio Phase 1 — product UX closure
 
-**Status: BLOCKED.** Implementation and targeted regression are substantially complete. Remaining product/visual gates below are not replaced by test counts or screenshot existence.
+**Status: BLOCKED.** Implementation and targeted regression are substantially complete. A repeatable Win32 native pointer runner now verifies the production zoom, fit, pan, sampling, compare, cancellation, and rapid-interaction paths. Native node drag insertion/drop remains unverified, so the remaining product gate is still open.
 
 ## Source and build
 
@@ -16,7 +16,7 @@
 
 | Gate | Actual result |
 |---|---|
-| Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Native pointer walkthrough unverified. |
+| Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Win32 SendInput walkthrough verified wheel, fit, 100%, middle-pan, boundary, split, and side-by-side paths. |
 | Eyedropper | Inverse displayed-rect mapping, zoom/pan, split, linked side-by-side, proxy resolution and letterbox rejection PASS in tests. |
 | Node row | 36 DIP row, inline enable, disabled opacity, original nonemoji type symbols, name/strength, selection wash, overflow/rename implemented; bottom button wall removed. Production-view toggle/selection/menu tests PASS. |
 | Drag feedback | Insertion border implemented, reorder/history commands tested. **PARTIAL:** 25 is a production routed `DragOver` hook (`DRAG_OVER_HOOK`); native pointer walkthrough is unavailable and is not claimed. |
@@ -78,7 +78,7 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 
 ## Open product gates
 
-1. Native pointer walkthrough remains unavailable: 25/29 are explicitly hook/state evidence, while 26–28 are production state-driven gesture fixtures.
+1. Native pointer walkthrough is now available through `scripts/verify-color-studio-pointer.ps1`; wheel, fit, 100%, pan, sampling, compare, Esc, and rapid interaction passed on the production window. Native node drag threshold, insertion-line, drop, and final processing-order verification remain open. The PowerShell run produced state evidence; PrintWindow screenshot output remains unavailable in this host because `System.Drawing.Common` cannot load into PowerShell 7.
 The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence. Physical display-DPI certification is a separate release-hardware gate, not a Phase 1 product blocker; logical 200% fixture/layout evidence is development coverage.
 
 P0: none observed in targeted runs, not a global absence guarantee.

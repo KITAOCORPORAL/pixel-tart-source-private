@@ -16,12 +16,12 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 - Photography Product Development Gate: **PASS**. See `docs/PIXEL_TART_PHOTOGRAPHY_INTERACTION_CLOSURE.md`; physical DPI remains a release hardware gate.
 - Color Studio Phase 1: **BLOCKED / substantial implementation complete**. See `docs/COLOR_STUDIO_PHASE1_CLOSURE.md` and `docs/COLOR_STUDIO_PHASE1_NATIVE_PIXEL_QA.md`. Do not relabel this as READY.
 - Completed: shared zoom/pan model and sampling mapping, professional node stack, scheme persistence/migration, selected-node batch sync, switching/cancellation/retry paths, shared preview/export pipeline, targeted regression and portable evidence records.
-- Remaining Phase 1 gate: native pointer walkthrough (25/29 are explicitly hook/state evidence; 26–28 are state-driven production fixtures). Physical DPI remains a release-hardware gate.
+- Remaining Phase 1 gate: native node drag insertion/drop and final processing-order verification. `scripts/verify-color-studio-pointer.ps1` now records Win32 SendInput evidence for wheel, fit, 100%, pan, sampling, compare, Esc, and rapid interaction paths. Physical DPI remains a release-hardware gate.
 - Phase 2: 3D Color Space and cluster visualization are `DEFERRED_TO_PHASE_2`.
 
 ## C. Next product task
 
-Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The current office automation has no reliable native pointer input; `NATIVE POINTER WALKTHROUGH: PENDING`. In the home environment, verify an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order; native wheel cursor-centred zoom, middle or Space-left pan, Fit and 100% across compare modes; and a real eyedropper click after zoom/pan against the pixel under the cursor. Fix only issues found by that walkthrough, then decide whether Phase 1 is `READY FOR COLOR STUDIO PHASE 1 UX REVIEW` or remains `BLOCKED`. Hooks and state-driven screenshots cannot substitute for these gestures. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or 01–38 fixture work.
+Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The Win32 SendInput runner has verified native wheel cursor-centred zoom, Fit, 100%, middle-pan, boundary clamping, compare modes, eyedropper after zoom/pan, Esc sampling exit, and rapid interaction. The remaining native walkthrough task is an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order. Fix only issues found by that walkthrough, then decide whether Phase 1 is `READY FOR COLOR STUDIO PHASE 1 UX REVIEW` or remains `BLOCKED`. Hooks and state-driven screenshots cannot substitute for the drag gesture. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or 01–38 fixture work.
 
 ## D. Deferred / later
 

@@ -16,6 +16,9 @@
   "handoffDocument": "docs/PIXEL_TART_HOME_DEV_HANDOFF.md",
   "resumePrompt": "docs/CODEX_RESUME_PROMPT.md",
   "cleanCloneVerification": "PASS",
-  "currentProductPhase": "Color Studio Phase 1 BLOCKED: native pointer final UX review pending",
-  "nextProductTask": "Native node drag insertion/drop, pointer zoom/pan/Fit/100%, and eyedropper after zoom/pan; then decide Phase 1 UX-review readiness"
+  "currentProductPhase": "Color Studio Phase 1 BLOCKED: native node drag insertion/drop and final UX review pending",
+  "nativePointerRunner": "scripts/verify-color-studio-pointer.ps1",
+  "nativePointerEvidence": "artifacts/color-studio-pointer/POINTER_WALKTHROUGH_MANIFEST.json",
+  "nativePointerVerified": "Win32 SendInput wheel, fit, 100%, pan, boundary, sampling, compare, Esc, rapid interaction",
+  "nextProductTask": "Native node drag insertion/drop and final processing-order walkthrough; then decide Phase 1 UX-review readiness"
 }
