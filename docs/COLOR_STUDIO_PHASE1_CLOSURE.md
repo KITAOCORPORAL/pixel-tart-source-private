@@ -1,6 +1,6 @@
 # Color Studio Phase 1 — product UX closure
 
-**Status: BLOCKED.** Implementation and targeted regression are substantially complete. A repeatable Win32 native pointer runner now verifies the production zoom, fit, pan, sampling, compare, cancellation, and rapid-interaction paths. Native node drag insertion/drop remains unverified, so the remaining product gate is still open.
+**Status: BLOCKED.** Implementation and targeted regression are substantially complete. A repeatable Win32 native pointer runner now verifies the production zoom, fit, pan, sampling, compare, cancellation, rapid-interaction, and same-source node drag paths. The node drag matrix is complete; the remaining gate is native visual confirmation because this host cannot produce valid PrintWindow screenshots.
 
 ## Source and build
 
@@ -19,7 +19,7 @@
 | Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Win32 SendInput walkthrough verified wheel, fit, 100%, middle-pan, boundary, split, and side-by-side paths. |
 | Eyedropper | Inverse displayed-rect mapping, zoom/pan, split, linked side-by-side, proxy resolution and letterbox rejection PASS in tests. |
 | Node row | 36 DIP row, inline enable, disabled opacity, original nonemoji type symbols, name/strength, selection wash, overflow/rename implemented; bottom button wall removed. Production-view toggle/selection/menu tests PASS. |
-| Drag feedback | Insertion border implemented, reorder/history commands tested. **PARTIAL:** 25 is a production routed `DragOver` hook (`DRAG_OVER_HOOK`); native pointer walkthrough is unavailable and is not claimed. |
+| Drag feedback | Insertion border implemented, reorder/history commands tested. Same-source Win32 `SendInput` matrix completed: 6 scenarios × 3 repetitions, threshold-before-order stability, real Drop reorder, No-op stability, processing hashes, and Ctrl+Z/Ctrl+Y order. Native visual screenshot remains unavailable on this host. |
 | Scheme | Cards, select then apply, save/update/save-as, unsaved save/discard/cancel, delete confirmation, restart persistence PASS in command/store regression. Captures 13/19/20 show real view/popups. Updated-scheme deletion fixed by stable ID. Native click-through QA remains PARTIAL. |
 | Batch sync | Choice popup/count, selected-node versus whole-adjustment actions, toast and isolation implemented; regression PASS. Captures 12/21/23 show popup/toast/logical DPI. |
 | Rapid switching | Bounded reference A–E and scheme A–D last-wins tests PASS. Target activation reserves order before asynchronous thumbnail completion. |
@@ -78,7 +78,7 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 
 ## Open product gates
 
-1. Native pointer walkthrough is now available through `scripts/verify-color-studio-pointer.ps1`; wheel, fit, 100%, pan, sampling, compare, Esc, and rapid interaction passed on the production window. Native node drag threshold, insertion-line, drop, and final processing-order verification remain open. The PowerShell run produced state evidence; PrintWindow screenshot output remains unavailable in this host because `System.Drawing.Common` cannot load into PowerShell 7.
+1. Native pointer walkthrough is available through `scripts/verify-color-studio-pointer.ps1`; wheel, fit, 100%, pan, sampling, compare, Esc, rapid interaction, and same-source node drag passed on the production window. The node matrix records 6 scenarios × 3 repetitions, threshold-before-order stability, DragOver/Drop coordinates, final order, processing hashes, and Ctrl+Z/Ctrl+Y. The PowerShell run produced state evidence; PrintWindow screenshot output remains unavailable in this host because `System.Drawing.Common` cannot load into PowerShell 7. Native visual confirmation therefore remains open.
 The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence. Physical display-DPI certification is a separate release-hardware gate, not a Phase 1 product blocker; logical 200% fixture/layout evidence is development coverage.
 
 P0: none observed in targeted runs, not a global absence guarantee.

@@ -6,8 +6,8 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: `822093f762d31bd8393c9aac07081aede825c74c`
-- Last audited product commit: `822093f`. Native pointer evidence is mixed-source and does not close the remaining node drag/drop gate.
+- Product SHA at handoff: `8e8f16cab28930cc2ba5456ceac08445c32835f5`
+- Last audited product commit: `8e8f16c`. Same-source native node drag evidence is complete; native visual screenshot confirmation remains unavailable on this host.
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 
@@ -16,13 +16,13 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 - Photography Product Development Gate: **PASS**. See `docs/PIXEL_TART_PHOTOGRAPHY_INTERACTION_CLOSURE.md`; physical DPI remains a release hardware gate.
 - Color Studio Phase 1: **BLOCKED / substantial implementation complete**. See `docs/COLOR_STUDIO_PHASE1_CLOSURE.md` and `docs/COLOR_STUDIO_PHASE1_NATIVE_PIXEL_QA.md`. Do not relabel this as READY.
 - Completed: shared zoom/pan model and sampling mapping, professional node stack, scheme persistence/migration, selected-node batch sync, switching/cancellation/retry paths, shared preview/export pipeline, targeted regression and portable evidence records.
-- Remaining Phase 1 gate: native node drag insertion/drop and final processing-order verification. `scripts/verify-color-studio-pointer.ps1` now records Win32 SendInput evidence for wheel, fit, 100%, pan, sampling, compare, Esc, and rapid interaction paths. Physical DPI remains a release-hardware gate.
+- Remaining Phase 1 gate: native visual confirmation of the node drag insertion/drop frame. `scripts/verify-color-studio-pointer.ps1` records same-source Win32 SendInput evidence for wheel, fit, 100%, pan, sampling, compare, Esc, rapid interaction, and a 6-scenario × 3-repetition node drag matrix with processing hashes and undo/redo order. Physical DPI remains a release-hardware gate.
 - Phase 2: 3D Color Space core is **PARTIAL**; WPF visualization and production Canvas ↔ 3D integration remain deferred.
 - Phase 2 is **PARTIAL CORE IMPLEMENTATION / BLOCKED BY PHASE 1 REGRESSION**. P2.1 proxy/cache core, camera state, and framework-neutral sample/cluster linking are under `docs/color-studio/`; WPF visualization is not integrated.
 
 ## C. Next product task
 
-Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The remaining task is an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order on the current source SHA. Hooks and state-driven screenshots cannot substitute for the drag gesture. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or fixture work. After closure, integrate the existing Phase 2 core into a bounded WPF visualization using the Phase 2 rendering options and test plan.
+Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The actual mouse-down/threshold/drag-over/insertion-line/drop and final node order are recorded on the current source SHA; obtain native visual confirmation on a host where PrintWindow capture works. Do not relabel Phase 1 READY from state evidence alone. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or fixture work. After closure, integrate the existing Phase 2 core into a bounded WPF visualization using the Phase 2 rendering options and test plan.
 
 ## D. Deferred / later
 

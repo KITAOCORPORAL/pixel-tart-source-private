@@ -2,7 +2,7 @@
 
 **Final status: COLOR STUDIO PHASE 2 PARTIAL.**
 
-P2.1 core and framework-neutral portions of P2.2/P2.3 are implemented and tested. Production WPF visualization, Canvas ↔ 3D event integration, visual QA, and physical DPI evidence are not complete. Work is intentionally stopped at the real Phase 1 P1 gate: same-source native node drag threshold/insertion/drop/order is still unverified.
+P2.1 core and framework-neutral portions of P2.2/P2.3 are implemented and tested. Production WPF visualization, Canvas ↔ 3D event integration, visual QA, and physical DPI evidence are not complete. Work is intentionally stopped at the remaining Phase 1 visual-evidence gate: same-source native node drag threshold/insertion/drop/order is verified by Win32 state evidence, but native visual confirmation is unavailable on this host.
 
 ## Implemented
 
@@ -17,7 +17,7 @@ P2.1 core and framework-neutral portions of P2.2/P2.3 are implemented and tested
 
 ## Gate status
 
-- Phase 1: **BLOCKED** by native node drag/drop/order evidence.
+- Phase 1: **BLOCKED** pending native visual confirmation; same-source node drag/drop/order state evidence is complete.
 - Photography: **PASS**, regression frozen.
 - Logical DPI: existing Phase 1 logical evidence remains valid; Phase 2 WPF layout not claimed.
 - Physical DPI: **RELEASE HARDWARE GATE PENDING**.

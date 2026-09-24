@@ -1,12 +1,12 @@
 # Color Studio Phase 1 — Native-pixel QA record
 
-Run: `color-studio-phase1-ux-gates-20260924`
+Run: `color-studio-phase1-ux-gates-20260924`; native drag evidence source SHA: `8e8f16cab28930cc2ba5456ceac08445c32835f5`.
 
 The source PNGs were inspected at their native dimensions using the repository image viewer with `original` detail. No resampling or derived contact sheet was used for the checks below. This is a bounded evidence review, not a physical-DPI certification.
 
 | Evidence | Native size | Regions reviewed | Result | Limits |
 |---|---:|---|---|---|
-| 25 drag insertion | 2400×1500 | node rail, selected row, insertion border | PARTIAL | routed DragOver hook; native pointer walkthrough unavailable |
+| 25 drag insertion | 2400×1500 | node rail, selected row, insertion border | PARTIAL | visual frame remains unavailable; same-source Win32 matrix is recorded separately in `artifacts/color-studio-pointer/NODE_DRAG_WALKTHROUGH_MANIFEST.json` |
 | 26 cursor zoom | 2400×1500 | canvas, zoom controls, rails, filmstrip | PASS (fixture) | state-driven zoom, not native wheel input |
 | 27 linked compare pan | 2400×1500 | split canvas alignment, rails | PASS (fixture) | state-driven pan, not native middle-drag input |
 | 28 fit after pan | 2400×1500 | full canvas restoration, controls | PASS (fixture) | state-driven Fit |
@@ -21,4 +21,4 @@ The source PNGs were inspected at their native dimensions using the repository i
 | 37 node overflow at logical 200% | 2700×1800 + popup 300×348 | node menu, popup bounds, labels | PASS (logical) | simulated logical DPI |
 | 38 compact popup | 1770×1080 + popup 420×403 | compact popup, close-safe area, labels | PASS (fixture) | host capture is 1180×720 at 150% physical DPI |
 
-Global visual notes: graphite/mineral surfaces, warm-silver values, oxidized-copper accent, Chinese labels, and themed popups are present in the reviewed frames. Physical DPI remains a release-hardware gate. Native pointer evidence is explicitly unavailable in this run and is not inferred from screenshots.
+Global visual notes: graphite/mineral surfaces, warm-silver values, oxidized-copper accent, Chinese labels, and themed popups are present in the reviewed frames. Physical DPI remains a release-hardware gate. Native node drag behavior is verified by same-source Win32 state/ordering evidence, but native visual confirmation is explicitly unavailable in this host and is not inferred from state evidence.
