@@ -7,7 +7,7 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
 - Product SHA at handoff: `07e03a824c475d4d9b132dab375ab4097181ba3c`
-- Last commit: `07e03a8 test(color): close production ux gate evidence`
+- Last product/evidence commit: `07e03a8 test(color): close production ux gate evidence`. The final handoff commit is tracked separately in the manifest and final office report.
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 
@@ -19,16 +19,9 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 - Remaining Phase 1 gate: native pointer walkthrough (25/29 are explicitly hook/state evidence; 26–28 are state-driven production fixtures). Physical DPI remains a release-hardware gate.
 - Phase 2: 3D Color Space and cluster visualization are `DEFERRED_TO_PHASE_2`.
 
-## C. Next task
+## C. Next product task
 
-Continue **Color Studio Phase 1 Final UX Closure**. Do not restart product analysis. Priority order:
-
-1. Shared Zoom / Pan and eyedropper under Zoom/Pan.
-2. Professional Node Row, Scheme product UX, and selected-node batch sync UI.
-3. Undo / Redo final closure, rapid Reference/Scheme switching, and processing-error recovery.
-4. Close the 18 production screenshot set with full-size visual QA at 1180x720, 200% logical DPI, Chinese UI, and themed popups.
-
-The acceptance target is `READY FOR COLOR STUDIO PHASE 1 UX REVIEW`, then Phase 2 may begin.
+Continue **Color Studio Phase 1 Native Interaction / Final UX Review Gate** only. The current office automation has no reliable native pointer input; `NATIVE POINTER WALKTHROUGH: PENDING`. In the home environment, verify an actual mouse-down/threshold/drag-over/insertion-line/drop and final node order; native wheel cursor-centred zoom, middle or Space-left pan, Fit and 100% across compare modes; and a real eyedropper click after zoom/pan against the pixel under the cursor. Fix only issues found by that walkthrough, then decide whether Phase 1 is `READY FOR COLOR STUDIO PHASE 1 UX REVIEW` or remains `BLOCKED`. Hooks and state-driven screenshots cannot substitute for these gestures. Do not redo the implemented stack, scheme, batch-sync, undo, recovery, or 01–38 fixture work.
 
 ## D. Deferred / later
 
@@ -56,9 +49,19 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 ## H. Known issues
 
 - P0: none observed in targeted runs (not a whole-app absence guarantee).
-- P1: the three Color Studio UX/visual verification groups listed in `COLOR_STUDIO_PHASE1_CLOSURE.md` remain open.
+- P1: native pointer interaction and final UX review remain open; physical DPI is a separate release-hardware gate.
 - P2: controlled performance comparison/optimization follow-up.
 
 ## I. Environment and handoff rules
 
 Read `docs/DEV_ENVIRONMENT_WINDOWS.md`. Run the bootstrap and bounded verification scripts after cloning. There are no submodules and no current Git LFS payloads. Do not rely on stash, old `bin/obj`, local DLLs, copied packages, company paths, real photos, customer data, credentials, or hidden machine state. Runtime user data belongs under `%LocalAppData%` at runtime; repository fixtures are synthetic and safe.
+
+## J. Home first run
+
+1. Open Codex on the home Windows PC and authorize access to the private GitHub repository; Git Credential Manager or browser OAuth is sufficient. `gh auth login` is optional if GitHub CLI is already installed. Never put a PAT in a URL, script, manifest, or repository file.
+2. Clone `https://github.com/KITAOCORPORAL/pixel-tart-source-private.git` and check out `integration/pixel-tart-developer-preview` (or pull with `--ff-only` if already cloned).
+3. Run `powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap-home.ps1` from the repository.
+4. Run `powershell -ExecutionPolicy Bypass -File .\scripts\verify-home-dev.ps1`; it checks remote parity before building.
+5. Ask Codex to read `docs/CODEX_RESUME_PROMPT.md` and continue only the next product task above after verification passes.
+
+Minimum SDK: 10.0.302 with `latestFeature` roll-forward in `global.json`; 10.0.401 was verified here. A compatible newer .NET 10 feature band is allowed.

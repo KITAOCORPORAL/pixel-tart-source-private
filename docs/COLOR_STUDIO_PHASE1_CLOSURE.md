@@ -79,12 +79,11 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 ## Open product gates
 
 1. Native pointer walkthrough remains unavailable: 25/29 are explicitly hook/state evidence, while 26–28 are production state-driven gesture fixtures.
-2. Physical display-DPI certification remains pending; logical 200% fixture/layout evidence is present for scheme/error/node-overflow.
-3. The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence; full native pointer automation is still a product-review gate.
+The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence. Physical display-DPI certification is a separate release-hardware gate, not a Phase 1 product blocker; logical 200% fixture/layout evidence is development coverage.
 
 P0: none observed in targeted runs, not a global absence guarantee.
 
-P1: the three verification gates above; product/verification gaps, not SDK/cursor infrastructure blockers. Dedicated failure retry is closed by `c175ebe`.
+P1: native pointer interaction/final UX review above, not an SDK blocker. Dedicated failure retry is closed by `c175ebe`.
 
 P2: controlled performance follow-up/optimization. No testing work assigned to the user.
 

@@ -5,7 +5,7 @@ This repository is a Windows WPF/.NET 10 application. The normal development pat
 ## Required
 
 - Windows 10 19045 or newer (Windows Desktop target: `net10.0-windows10.0.19041.0`).
-- .NET SDK 10.0.302 or a later 10.0 feature band. `global.json` pins the minimum feature band without a machine-specific path and permits a newer compatible feature band.
+- .NET SDK 10.0.302 baseline or a compatible later 10.0 feature band. `global.json` sets `rollForward: latestFeature` without a machine-specific path. SDK 10.0.401 has been verified.
 - Windows Desktop runtime/SDK support for WPF.
 - Git for Windows.
 - PowerShell 5.1 or PowerShell 7+.
@@ -31,6 +31,6 @@ Run `powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap-home.ps1` afte
 
 Ordinary development: restore, Release x64 build, focused Color Studio and Photography regressions, and logical-DPI checks.
 
-Release gate: full product/release evidence, physical DPI hardware validation, and any explicitly scoped installer/package acceptance. The current Color Studio Phase 1 closure remains BLOCKED by documented native interaction and full-size visual-QA gates; the Photography development gate is PASS.
+Release gate: full product/release evidence, physical DPI hardware validation, and any explicitly scoped installer/package acceptance. The current Color Studio Phase 1 closure remains BLOCKED by native pointer interaction/final UX review only; the Photography development gate is PASS.
 
 No WSL, Ubuntu, Docker, VM, administrator install, or reboot is needed for this workflow.

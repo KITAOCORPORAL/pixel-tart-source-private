@@ -17,8 +17,17 @@ Gate 'Windows and .NET 10 SDK' {
   Write-Host "SDK $v"
 }
 Gate 'Git identity and clean state' {
-  Write-Host "Branch $((git branch --show-current).Trim())"
-  Write-Host "HEAD $((git rev-parse HEAD).Trim())"
+  $branch = (git branch --show-current).Trim()
+  if ($branch -ne 'integration/pixel-tart-developer-preview') { throw "Unexpected branch: $branch" }
+  $origin = (git remote get-url origin).Trim()
+  if ($LASTEXITCODE -ne 0 -or $origin -notmatch '^(?:https://github\.com/|git@github\.com:|ssh://git@github\.com/)KITAOCORPORAL/pixel-tart-source-private(?:\.git)?$') { throw 'Origin must be the Pixel Tart private GitHub repository without embedded credentials.' }
+  git fetch origin --prune
+  if ($LASTEXITCODE -ne 0) { throw 'Could not fetch origin; verify private repository access.' }
+  $localHead = (git rev-parse HEAD).Trim()
+  $remoteHead = (git rev-parse origin/integration/pixel-tart-developer-preview).Trim()
+  if ($LASTEXITCODE -ne 0 -or $localHead -ne $remoteHead) { throw "Local HEAD $localHead differs from origin/integration/pixel-tart-developer-preview $remoteHead" }
+  Write-Host "Branch $branch"
+  Write-Host "HEAD $localHead (matches origin)"
   $status = git status --short
   if ($status) { Write-Host $status; throw 'Working tree is not clean.' }
 }

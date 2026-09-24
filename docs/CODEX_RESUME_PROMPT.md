@@ -1,14 +1,5 @@
-Read these files before changing anything:
+You are resuming Pixel Tart development on a different Windows PC. First confirm the current directory is the `pixel-tart-source-private` Git repository. If not, locate it or clone `KITAOCORPORAL/pixel-tart-source-private` from GitHub after private-repository access is authorized; do not put credentials in the repository or URL. In the repository, run `git fetch --all --prune`, `git checkout integration/pixel-tart-developer-preview`, and `git pull --ff-only`. Confirm `git rev-parse HEAD` equals `git rev-parse origin/integration/pixel-tart-developer-preview`; stop and diagnose if not.
 
-1. `docs/PIXEL_TART_HOME_DEV_HANDOFF.md`
-2. `docs/COLOR_STUDIO_PHASE1_CLOSURE.md`
-3. `docs/COLOR_STUDIO_CURRENT_IMPLEMENTATION_MAP.md`
-4. the latest 20 commits on the current branch
+Read `docs/PIXEL_TART_HOME_DEV_HANDOFF.md`, `docs/COLOR_STUDIO_PHASE1_CLOSURE.md`, `docs/COLOR_STUDIO_CURRENT_IMPLEMENTATION_MAP.md`, and the latest 20 commits. Then run `powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap-home.ps1` and `powershell -ExecutionPolicy Bypass -File .\scripts\verify-home-dev.ps1`. Only after both PASS, continue the handoff document's **Next product task**: Color Studio Phase 1 native pointer interaction / final UX review. Validate real node drag insertion/drop, real wheel/pan/Fit/100% gestures and compare alignment, and real eyedropper sampling after zoom/pan. Fix only findings from that walkthrough; then decide READY FOR UX REVIEW or remain BLOCKED. The existing hook/fixture screenshots are not native pointer proof.
 
-Then inspect the current branch, HEAD, working tree, .NET SDK, and restore state. Run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-home-dev.ps1
-```
-
-Continue **Color Studio Phase 1 Final UX Closure** from the current source. Do not re-plan the whole product, do not start from old RC12, do not redo Photography, do not enter 3D Color Space, and do not install WSL, Ubuntu, Docker, or a VM. Preserve the canonical shared Simple/Professional state, per-target isolation, existing renderer, scheme migration, cancellation/revision/last-wins semantics, and the Pixel Tart palette. Treat the current Color Studio status as BLOCKED until its documented UX and visual gates are actually closed; only then report `READY FOR COLOR STUDIO PHASE 1 UX REVIEW`.
+Do not re-plan Pixel Tart, redo Photography or completed Color Studio Phase 1 features, revisit historical RC12, enter Phase 2 before formal Phase 1 closure, or install WSL, Ubuntu, Docker, or a VM. Preserve the shared Simple/Professional state, per-target isolation, existing renderer, scheme migration, cancellation/revision/last-wins behavior, and Pixel Tart palette. Physical display DPI remains a separate release-hardware gate; do not conflate it with the native interaction gate.
