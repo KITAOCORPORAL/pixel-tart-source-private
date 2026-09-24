@@ -60,6 +60,7 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        ColorStudioAcceptanceFixture.ValidateIsolation();
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
         if (!TryAcquireSingleInstance())
         {
@@ -151,6 +152,12 @@ public partial class App : Application
             var settingsService = new SettingsService(_logService, settingsPath);
             StartupStage("03 Settings");
             var startupSettings = await settingsService.LoadAsync();
+            if (ColorStudioAcceptanceFixture.Requested)
+            {
+                startupSettings.OnboardingLegacyUser = true;
+                startupSettings.OnboardingUpgradeOfferShown = true;
+                await settingsService.SaveAsync(startupSettings);
+            }
 #if PLANNING_HUMAN_ACCEPTANCE
             if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") == "1")
                 await PlanningHumanAcceptanceDemoSeeder.SeedAsync(settingsService);
@@ -353,6 +360,7 @@ public partial class App : Application
             }
 #endif
             window.Show();
+            await ColorStudioAcceptanceFixture.LoadAsync(_mainViewModel, window);
             await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
             _logService.Info($"STARTUP_OK BuildId={StartupDiagnostics.BuildId} ProductSourceSha={StartupDiagnostics.ProductSourceSha} Windows={Environment.OSVersion.VersionString} DataRoot=AppData-or-explicit-override LibraryRoot=user-managed LastWorkspace={_mainViewModel.Settings.LastPrimaryPage}");
@@ -535,6 +543,8 @@ public partial class App : Application
     private bool TryAcquireSingleInstance()
     {
         var assemblyName = typeof(App).Assembly.GetName().Name ?? "RAWSelectionAssistant";
+        if (ColorStudioAcceptanceFixture.Requested)
+            assemblyName += "-ColorStudio-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(AppDataPaths.Root)))[..16];
 #if PLANNING_HUMAN_ACCEPTANCE
         // Explicit isolated acceptance runs must never activate or close a user's running app.
         if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") == "1")
