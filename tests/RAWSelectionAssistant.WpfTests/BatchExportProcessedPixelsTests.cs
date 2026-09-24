@@ -53,14 +53,21 @@ public sealed class BatchExportProcessedPixelsTests
             await workspace.LoadTargetAsync(corrupt).WaitAsync(TimeSpan.FromSeconds(8));
             Assert.AreSame(frame, workspace.Editor.MatchedImage); Assert.AreEqual(good, workspace.ActiveTarget!.Path);
             Assert.IsFalse(workspace.IsLoading);
+            Assert.AreSame(workspace.Targets.Single(t => t.Path == corrupt), workspace.FailedTarget);
+            Assert.IsTrue(workspace.RetryFailedTargetCommand.CanExecute(null));
             await workspace.ExportAllCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
             Assert.IsFalse(workspace.IsExporting); Assert.AreSame(frame, workspace.Editor.MatchedImage);
             Assert.AreEqual(ReferenceExportStatus.Failed, workspace.Targets.Single(t => t.Path == corrupt).ExportStatus);
             Assert.AreEqual(ReferenceExportStatus.Succeeded, workspace.Targets.Single(t => t.Path == good).ExportStatus);
+            StringAssert.Contains(workspace.ExportFailureSummary, "失败 1 张");
+            Assert.IsTrue(workspace.RetryFailedExportCommand.CanExecute(null));
             Assert.IsFalse(Directory.EnumerateFiles(root, "*.tmp").Any());
             File.Copy(good, corrupt, true);
-            await workspace.LoadTargetAsync(corrupt).WaitAsync(TimeSpan.FromSeconds(8));
+            await workspace.RetryFailedTargetCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
             Assert.AreEqual(corrupt, workspace.ActiveTarget!.Path); Assert.IsFalse(workspace.IsLoading);
+            await workspace.RetryFailedExportCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.AreEqual(ReferenceExportStatus.Succeeded, workspace.Targets.Single(t => t.Path == corrupt).ExportStatus);
+            Assert.IsEmpty(workspace.ExportFailureSummary);
         }
         finally { Directory.Delete(root, true); }
     }

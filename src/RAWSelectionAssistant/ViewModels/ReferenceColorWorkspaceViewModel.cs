@@ -23,6 +23,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private int _exportCompleted;
     private int _exportTotal;
     private string _exportStatus = "";
+    private string _exportFailureSummary = "";
+    private string? _lastExportDirectory;
+    private ReferenceTargetItem? _failedTarget;
     private bool _nodeSyncOpen;
     private string _syncFeedback = "";
     private long _syncFeedbackRevision;
@@ -56,6 +59,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
         StopExportCommand = new RelayCommand(_ => _exportCancellation?.Cancel(), _ => IsExporting);
+        RetryFailedTargetCommand = new AsyncRelayCommand(_ => FailedTarget is null ? Task.CompletedTask : ActivateTargetAsync(FailedTarget), _ => FailedTarget is not null && !IsLoading);
+        RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
@@ -114,6 +119,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public AsyncRelayCommand ExportSelectedCommand { get; }
     public AsyncRelayCommand ExportAllCommand { get; }
     public RelayCommand StopExportCommand { get; }
+    public AsyncRelayCommand RetryFailedTargetCommand { get; }
+    public AsyncRelayCommand RetryFailedExportCommand { get; }
     public ObservableCollection<ReferenceTargetItem> Targets { get; } = [];
     public IEnumerable<ReferenceTargetItem> SelectedTargets => Targets.Where(item => item.IsSelected);
     public int SelectFilmstripTarget(int index, int anchor, bool shift, bool control)
@@ -139,6 +146,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public int ExportCompleted { get => _exportCompleted; private set => SetProperty(ref _exportCompleted, value); }
     public int ExportTotal { get => _exportTotal; private set => SetProperty(ref _exportTotal, value); }
     public string ExportStatus { get => _exportStatus; private set => SetProperty(ref _exportStatus, value); }
+    public string ExportFailureSummary { get => _exportFailureSummary; private set => SetProperty(ref _exportFailureSummary, value); }
+    public ReferenceTargetItem? FailedTarget { get => _failedTarget; private set { if (SetProperty(ref _failedTarget, value)) { OnPropertyChanged(nameof(HasFailedTarget)); RetryFailedTargetCommand.RaiseCanExecuteChanged(); } } }
+    public bool HasFailedTarget => FailedTarget is not null;
+    public bool CanRetryFailedExport => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory);
 
     public async Task InitializeAsync(CancellationToken token = default) => await Editor.LoadAsync(token);
 
@@ -207,9 +218,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
+            if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException)
-        { target.Status = ReferenceTargetStatus.Failed; target.Error = "照片无法读取"; if (revision == Volatile.Read(ref _activationRevision)) StatusText = "待调色照片无法读取；现有色彩方案保持不变。"; }
+        { target.Status = ReferenceTargetStatus.Failed; target.Error = "照片无法读取"; FailedTarget = target; if (revision == Volatile.Read(ref _activationRevision)) StatusText = "待调色照片无法读取；现有色彩方案保持不变。请重试。"; }
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
     }
 
@@ -230,14 +242,16 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         finally { IsLoading = false; }
     }
 
-    private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items)
+    private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
         if (items.Count == 0 || IsExporting) return;
-        var directory = _dialogs.ChooseFolder("选择批量导出目录", null);
+        var directory = retryDirectory ?? _dialogs.ChooseFolder("选择批量导出目录", null);
         if (directory is null) return;
+        _lastExportDirectory = directory;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize())).ToArray();
-        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
+        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
+        var failed = new List<string>();
         try
         {
             foreach (var frozenItem in frozen)
@@ -246,20 +260,27 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + "_仿色.jpg"); var temp = output + ".tmp";
                 try { var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
-                catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; }
+                catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
             }
-            StatusText = "批量导出已完成。";
+            ExportFailureSummary = failed.Count == 0 ? "" : $"失败 {failed.Count} 张：{string.Join("、", failed)}";
+            StatusText = failed.Count == 0 ? "批量导出已完成。" : $"批量导出已完成；成功 {ExportCompleted - failed.Count} 张，失败 {failed.Count} 张。";
         }
         catch (OperationCanceledException) { ExportStatus = $"已停止 · {ExportCompleted} / {ExportTotal}"; StatusText = "已停止导出；已完成文件保留，未完成文件已清理。"; }
         finally { _exportCancellation.Dispose(); _exportCancellation = null; RaiseExportCommands(); }
+    }
+    private async Task RetryFailedExportsAsync()
+    {
+        var failed = Targets.Where(item => item.ExportStatus == ReferenceExportStatus.Failed).ToArray();
+        if (failed.Length == 0 || string.IsNullOrWhiteSpace(_lastExportDirectory)) return;
+        await ExportAsync(failed, _lastExportDirectory);
     }
     private static void EncodeJpeg(BitmapSource image, string output, CancellationToken token)
     {
         token.ThrowIfCancellationRequested(); var encoder = new JpegBitmapEncoder { QualityLevel = 95 }; encoder.Frames.Add(BitmapFrame.Create(image)); using var stream = File.Create(output); encoder.Save(stream); token.ThrowIfCancellationRequested();
     }
     private static void TryDelete(string path) { try { if (File.Exists(path)) File.Delete(path); } catch { } }
-    private void RaiseExportCommands() { ExportSelectedCommand.RaiseCanExecuteChanged(); ExportAllCommand.RaiseCanExecuteChanged(); StopExportCommand.RaiseCanExecuteChanged(); }
+    private void RaiseExportCommands() { OnPropertyChanged(nameof(CanRetryFailedExport)); ExportSelectedCommand.RaiseCanExecuteChanged(); ExportAllCommand.RaiseCanExecuteChanged(); StopExportCommand.RaiseCanExecuteChanged(); RetryFailedExportCommand.RaiseCanExecuteChanged(); }
 }
 
 public enum ReferenceTargetStatus { Pending, Processing, Synced, Adjusted, Exported, Failed }
