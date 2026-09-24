@@ -2,10 +2,10 @@
   "repository": "KITAOCORPORAL/pixel-tart-source-private",
   "branch": "integration/pixel-tart-developer-preview",
   "productSha": "07e03a824c475d4d9b132dab375ab4097181ba3c",
-  "handoffContentSha": "PENDING_HANDOFF_CONTENT_COMMIT",
-  "cleanCloneVerifiedSha": null,
+  "handoffContentSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
+  "cleanCloneVerifiedSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
   "createdAtUtc": "2026-09-24T06:32:29.9022153Z",
-  "verifiedAtUtc": null,
+  "verifiedAtUtc": "2026-09-24T06:40:22.4207123Z",
   "dotnetSdkMinimum": "10.0.302",
   "dotnetSdkRollForward": "latestFeature",
   "dotnetSdkVerified": "10.0.401",
@@ -15,7 +15,7 @@
   "verificationScript": "scripts/verify-home-dev.ps1",
   "handoffDocument": "docs/PIXEL_TART_HOME_DEV_HANDOFF.md",
   "resumePrompt": "docs/CODEX_RESUME_PROMPT.md",
-  "cleanCloneVerification": "PENDING",
+  "cleanCloneVerification": "PASS",
   "currentProductPhase": "Color Studio Phase 1 BLOCKED: native pointer final UX review pending",
   "nextProductTask": "Native node drag insertion/drop, pointer zoom/pan/Fit/100%, and eyedropper after zoom/pan; then decide Phase 1 UX-review readiness"
 }
