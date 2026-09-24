@@ -1,0 +1,1742 @@
+[
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "01",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 42976,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 9446596,
+    "CapturedAtUtc": "2026-09-24T03:03:46.6901054Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 9446596,
+    "Height": 1500,
+    "file": "01_PROFESSIONAL_MODE.png",
+    "SHA256": "D3AD66B88760C89B44351E2947196234BE1F92B389D2E87DC5E8807FAD9B633E",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "02",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 26272,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ReferenceMatch",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 26412952,
+    "CapturedAtUtc": "2026-09-24T03:03:57.1475235Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 26412952,
+    "Height": 1500,
+    "file": "02_ADJUSTMENT_STACK.png",
+    "SHA256": "BF76D6705B156B8C2E0F9C891FABA595323C50A98F45B895962238A1D11268E4",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "03",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 55952,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ReferenceMatch",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 22216852,
+    "CapturedAtUtc": "2026-09-24T03:04:07.3466027Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 22216852,
+    "Height": 1500,
+    "file": "03_REFERENCE_NODE.png",
+    "SHA256": "BF76D6705B156B8C2E0F9C891FABA595323C50A98F45B895962238A1D11268E4",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "04",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 47596,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 42468968,
+    "CapturedAtUtc": "2026-09-24T03:04:17.7800739Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 42468968,
+    "Height": 1500,
+    "file": "04_COLOR_RANGE_NODE.png",
+    "SHA256": "D3AD66B88760C89B44351E2947196234BE1F92B389D2E87DC5E8807FAD9B633E",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "05",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 51468,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 42600040,
+    "CapturedAtUtc": "2026-09-24T03:04:28.1984853Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 42600040,
+    "Height": 1500,
+    "file": "05_EYEDROPPER_ACTIVE.png",
+    "SHA256": "A2E19F659472D97E518DD01C0597DEC66F62DA310C5CA3C1D74018CAB907DF07",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "06",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 8744,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 42665576,
+    "CapturedAtUtc": "2026-09-24T03:04:40.3195988Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 42665576,
+    "Height": 1500,
+    "file": "06_POSITIVE_NEGATIVE_SAMPLES.png",
+    "SHA256": "6B43D310576327C509E21CC68AFF557CA16F9B84A57E2F6D70EDD971A5D1BAE0",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "07",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 51148,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 42796648,
+    "CapturedAtUtc": "2026-09-24T03:04:56.1252998Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 42796648,
+    "Height": 1500,
+    "file": "07_SHOW_SELECTION.png",
+    "SHA256": "786707047873AA36976F1A480ABB2C7ED6F6EBF7925D5586C1C316824E1AB936",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "08",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 58624,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 26871704,
+    "CapturedAtUtc": "2026-09-24T03:05:07.141876Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 26871704,
+    "Height": 1500,
+    "file": "08_KEEP_ORIGINAL_LUMINANCE.png",
+    "SHA256": "61B3F183AC91496710E0F9247FD0D174963516B5793DAC0142503344BB242ABC",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "09",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 35504,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 27002776,
+    "CapturedAtUtc": "2026-09-24T03:05:17.9600491Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 27002776,
+    "Height": 1500,
+    "file": "09_NODE_REORDER.png",
+    "SHA256": "5648FF0FF70CBE6C2F664A11E63C98E9F687A3AC2EC70087DF047A73FA2E4AD9",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Post-reorder only; native drag insertion feedback remains unverified."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "10",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 47520,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43058792,
+    "CapturedAtUtc": "2026-09-24T03:05:30.1083454Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43058792,
+    "Height": 1500,
+    "file": "10_UNDO_REDO.png",
+    "SHA256": "501864D66AB60335245C3BE89E2A221076EA019A94EC60A15C0CA1CD98EDB779",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Undo result/control state; not a recording of keyboard or pointer interaction."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "11",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 43232,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ReferenceMatch",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43189864,
+    "CapturedAtUtc": "2026-09-24T03:05:41.1448561Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43189864,
+    "Height": 1500,
+    "file": "11_SIMPLE_PRO_ROUNDTRIP.png",
+    "SHA256": "6EB0F3490CBB93ABFD7F7C1D1E86EF3EACC045B792273AD8D00AFB1F893966DE",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Captured UI shows processing although earlier state snapshot was idle; settled rendering is not proven."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "12",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 9904,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43320936,
+    "CapturedAtUtc": "2026-09-24T03:05:51.052758Z",
+    "Width": 420,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 10167492,
+    "Height": 403,
+    "file": "12_BATCH_SYNC_SELECTED_NODES-popup-10167492.png",
+    "SHA256": "6BC81631DEE16A0D6D205A381F762B8B24809EDCE3740DE83D72DD07EA4A3764",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "12",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 9904,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43320936,
+    "CapturedAtUtc": "2026-09-24T03:05:51.1224361Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43320936,
+    "Height": 1500,
+    "file": "12_BATCH_SYNC_SELECTED_NODES.png",
+    "SHA256": "D3AD66B88760C89B44351E2947196234BE1F92B389D2E87DC5E8807FAD9B633E",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "13",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 45488,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43452008,
+    "CapturedAtUtc": "2026-09-24T03:06:03.9245063Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43452008,
+    "Height": 1500,
+    "file": "13_SCHEME_SAVE_APPLY.png",
+    "SHA256": "FECC2F52AB243791B5E5E4832289ED75092FD1344A9E8A5C7FFD05240772780D",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "14",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 57648,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "原片",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "已停止处理。",
+    "MainWindowHandle": 43583080,
+    "CapturedAtUtc": "2026-09-24T03:06:11.4379771Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43583080,
+    "Height": 1500,
+    "file": "14_PROCESSING_CANCEL.png",
+    "SHA256": "0081A44BFBB44644AF57A28C6375F7814C9EFE1343F3D6AD44C28616DF1081A8",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Post-cancellation valid frame; not an in-progress stop-button capture."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "15",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 56816,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "左右对比",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43714152,
+    "CapturedAtUtc": "2026-09-24T03:06:21.3883823Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43714152,
+    "Height": 1500,
+    "file": "15_SPLIT_COMPARE.png",
+    "SHA256": "0355139454B3FDB7877B64EEE01773937F19A6A8E615E8D797E85922F3C2D871",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "16",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 2688,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43845224,
+    "CapturedAtUtc": "2026-09-24T03:06:31.3496251Z",
+    "Width": 240,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 58076056,
+    "Height": 220,
+    "file": "16_POPUP_MENU-popup-58076056.png",
+    "SHA256": "41906A3983E546B1D9326BFB4E821EC117AD1FCBDB39024FAF1E06301FD62B39",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "16",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 2688,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43845224,
+    "CapturedAtUtc": "2026-09-24T03:06:31.4282867Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43845224,
+    "Height": 1500,
+    "file": "16_POPUP_MENU.png",
+    "SHA256": "D3AD66B88760C89B44351E2947196234BE1F92B389D2E87DC5E8807FAD9B633E",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "17",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 29476,
+    "WindowSize": [
+      1180,
+      720
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 43976296,
+    "CapturedAtUtc": "2026-09-24T03:06:41.2360833Z",
+    "Width": 1770,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 43976296,
+    "Height": 1080,
+    "file": "17_COLOR_STUDIO_1180x720.png",
+    "SHA256": "010131CF7818B69B0CC9E88C44F2DFF79E7E96A6A6E38FCA1A9F8F861D46207C",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "18",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 47040,
+    "WindowSize": [
+      1800,
+      1200
+    ],
+    "LogicalDpi": 192,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": true,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 21562534,
+    "CapturedAtUtc": "2026-09-24T03:06:53.1358086Z",
+    "Width": 2700,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 21562534,
+    "Height": 1800,
+    "file": "18_COLOR_STUDIO_200_DPI_LOGICAL.png",
+    "SHA256": "3D69395909A0CBC09A99B3C9AA7CDEE68024DD9E11A54DC7EB382C0A71530C8B",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Loaded-target logical 200% simulation; not physical-display DPI certification."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "19",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 7080,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 44172904,
+    "CapturedAtUtc": "2026-09-24T03:07:04.1812189Z",
+    "Width": 435,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 58338200,
+    "Height": 214,
+    "file": "19_SCHEME_UNSAVED-popup-58338200.png",
+    "SHA256": "F9261DCEA97E84362CD34DD71E641D937C4F067913E73856F6CD69430C961181",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "19",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 7080,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 44172904,
+    "CapturedAtUtc": "2026-09-24T03:07:04.2522074Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 44172904,
+    "Height": 1500,
+    "file": "19_SCHEME_UNSAVED.png",
+    "SHA256": "EA5B9DF6021D85DCB0594257F51FB91580F4C59E51A65DE390E8AB985FFC91C2",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "20",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 37884,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 27789208,
+    "CapturedAtUtc": "2026-09-24T03:07:14.229973Z",
+    "Width": 360,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 58403736,
+    "Height": 166,
+    "file": "20_SCHEME_DELETE_CONFIRM-popup-58403736.png",
+    "SHA256": "579D917637E28CF4328256DC212B29CF892DCC49C124C45B80C32C2208FF8582",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "20",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 37884,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 27789208,
+    "CapturedAtUtc": "2026-09-24T03:07:14.30392Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 27789208,
+    "Height": 1500,
+    "file": "20_SCHEME_DELETE_CONFIRM.png",
+    "SHA256": "063AAB50FDE3C3DECBDE77FBC2CD492CA47D3A752E67F79DCA8E6A3E3EFD17BB",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "21",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 44908,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 27920280,
+    "CapturedAtUtc": "2026-09-24T03:07:24.3195017Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 27920280,
+    "Height": 1500,
+    "file": "21_BATCH_SYNC_TOAST.png",
+    "SHA256": "460AD96556EAE0E89CDA7E862112D1A2F60585F4F5C9D17CB078FD9B9CFB6D11",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "22",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 14268,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "并排对比",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 44435048,
+    "CapturedAtUtc": "2026-09-24T03:07:34.3365621Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 44435048,
+    "Height": 1500,
+    "file": "22_LINKED_ZOOM_PAN.png",
+    "SHA256": "8FDE423144908E359C2D188B656E6E6F8F048A68B9E0802DC902DD41EAF69F70",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "23",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 32560,
+    "WindowSize": [
+      1800,
+      1200
+    ],
+    "LogicalDpi": 192,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": true,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 21955750,
+    "CapturedAtUtc": "2026-09-24T03:07:44.314446Z",
+    "Width": 560,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 20191238,
+    "Height": 537,
+    "file": "23_BATCH_SYNC_200_DPI_LOGICAL-popup-20191238.png",
+    "SHA256": "E306C3BAE93D90DBBA167A83C385C5CC1C8F674D286D503D949B78A172AA0107",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Loaded-target logical 200% simulation, including separate popup HWND."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "23",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 32560,
+    "WindowSize": [
+      1800,
+      1200
+    ],
+    "LogicalDpi": 192,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": true,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 21955750,
+    "CapturedAtUtc": "2026-09-24T03:07:44.4022279Z",
+    "Width": 2700,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 21955750,
+    "Height": 1800,
+    "file": "23_BATCH_SYNC_200_DPI_LOGICAL.png",
+    "SHA256": "71F75DC12FE89D0A25603C4E55D40FE2006A7E242108DDA45484AC25E257A6D0",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Loaded-target logical 200% simulation, including separate popup HWND."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "24",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 47684,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 44631656,
+    "CapturedAtUtc": "2026-09-24T03:07:54.544409Z",
+    "Width": 300,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 4858806,
+    "Height": 348,
+    "file": "24_NODE_OVERFLOW-popup-4858806.png",
+    "SHA256": "82F6FF356949D54476339E7AF84E7F2CCE8C723667360D771CC4DE190D4D83C7",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  },
+  {
+    "FixtureId": "color-studio-still-life-v1",
+    "Scenario": "24",
+    "ProductSourceSha": "7bddb78db242345fc2b47c3cbbb14fa5bd135ee5",
+    "AppVersion": "2.3.0.0",
+    "ProcessId": 47684,
+    "WindowSize": [
+      1600,
+      1000
+    ],
+    "LogicalDpi": 144,
+    "PhysicalDpi": 144,
+    "LogicalDpiSimulation": false,
+    "WorkspaceMode": "专业",
+    "SelectedNodeType": "ColorRange",
+    "ViewMode": "仿色结果",
+    "Target": "静物-1.png",
+    "HasTarget": true,
+    "Stack": [
+      {
+        "Name": "参考仿色",
+        "Type": "ReferenceMatch",
+        "Enabled": true
+      },
+      {
+        "Name": "暖橙",
+        "Type": "ColorRange",
+        "Enabled": true
+      },
+      {
+        "Name": "色彩过渡",
+        "Type": "TransitionBlend",
+        "Enabled": true
+      },
+      {
+        "Name": "胶片",
+        "Type": "Film",
+        "Enabled": true
+      }
+    ],
+    "SourcePixelSize": [
+      1200,
+      800
+    ],
+    "ProcessingStatus": "现场监看仿色已更新；RAW/JPEG 源文件未修改。",
+    "MainWindowHandle": 44631656,
+    "CapturedAtUtc": "2026-09-24T03:07:54.6159873Z",
+    "Width": 2400,
+    "CaptureMethod": "PrintWindow(PW_RENDERFULLCONTENT)",
+    "CursorAccess": false,
+    "HWND": 44631656,
+    "Height": 1500,
+    "file": "24_NODE_OVERFLOW.png",
+    "SHA256": "D3AD66B88760C89B44351E2947196234BE1F92B389D2E87DC5E8807FAD9B633E",
+    "FullSizeReview": "INDIVIDUALLY_REVIEWED; viewer downscaled large frames; native-pixel QA remains PARTIAL",
+    "ClosureRunId": "color-studio-phase1-20260924T032038Z",
+    "ReviewNote": "Visual state reviewed; command/model regression is recorded separately."
+  }
+]

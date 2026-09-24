@@ -1,30 +1,97 @@
-# Color Studio Phase 1 closure — current development state
+# Color Studio Phase 1 — product UX closure
 
-## Verified
+**Status: BLOCKED.** Implementation and targeted regression are substantially complete. Remaining product/visual gates below are not replaced by test counts or screenshot existence.
 
-- Windows-native .NET 10 SDK 10.0.401, Release x64 build: 0 warnings, 0 errors.
-- Per-target stack isolation and null-stack reset, stack-only target snapshot, simple/professional reference and film parameter synchronization: targeted WPF tests pass.
-- Color Range positive/negative samples, negative-only clear, node reset, continuous sampling, rename/reorder, slider edit transaction and undo/redo: targeted tests pass. Reference/Film duplication is disabled; duplicated Color Range parameters are isolated.
-- Four-mode displayed-image coordinate mapping and letterbox rejection: targeted tests pass. Zoom/pan is not yet implemented.
-- Scheme catalog uses atomic replacement; serializer, restart read, update and delete tests pass. Legacy `ReferenceLookStore` remains unchanged.
-- Selection mask uses the selected node's captured input buffer; selection overlay remains editor presentation only. Export uses the shared `Render(...).Pixels` chain.
-- Photography-critical targeted WPF regression (including inactive export) passed 42/42; Color Studio Core passed 9/9. Stop-processing waits for actual job exit before reporting completion, preserves the last valid frame, and a superseded job cannot overwrite the new target in bounded tests. Logical DPI 100/125/150/200% test passed, but the captured state had no loaded target photo and is **not** accepted as Phase 1 production screenshot evidence.
-- The production-app desktop automation attempt failed with Windows cursor access denied (`0x80070005`); no 18-image production screenshot set or full-size visual review is claimed.
-- 30 × 2400×1600 processed batch export passed in approximately 61 seconds; previous baseline 59.7 seconds / 771.5 MB. This run did not report a comparable peak-memory value.
+## Source and build
 
-## Open product gates (Phase 1)
+- Start: `139ff521a79ee5e099b1d46f92e13b904a51e4de`.
+- Latest compiled/tested product: `1324ce012058151b19fc2501746adb872c0083e5`.
+- Screenshot/performance binary: `7bddb78db242345fc2b47c3cbbb14fa5bd135ee5`.
+- Later delta: fix removal of an updated scheme by stable ID and extend scheme regression. No screenshot layout change, but captures are **not relabelled** as the newer binary.
+- Windows-native .NET SDK **10.0.401**, Release x64 **PASS, 0 warnings, 0 errors**. Verified assembly product version `2.3.0+1324ce012058151b19fc2501746adb872c0083e5`.
+- Production project `RAWSelectionAssistant.csproj` configures executable `KitaoPhotoSelector.exe`; captures use its normal MainWindow/XAML/ViewModel/renderer, not a separate acceptance window.
+- No WSL, Docker, VM, administrator installation or system DPI changes. The following evidence-only commit is not claimed as the source of earlier binaries.
 
-- Production app scenarios and the requested 18 full-size screenshots have not been captured or visually reviewed. Empty-target DPI renders are not substituted.
-- Professional node inspector now binds all existing Reference and Film fields, but its complete interaction and density remain unverified in a running production app.
-- Node list still needs a visually verified enable toggle/type icon/overflow menu; current command buttons, row name/strength and drag behavior are functional but do not satisfy the complete row UX contract.
-- Batch sync popup and Scheme UI need production interaction QA; the model/commands and persistence tests do not prove their visual behavior.
-- Shared zoom/pan comparison is not implemented; this also limits eyedropper testing under zoom/pan.
-- Rapid reference/scheme switching and processing error recovery need dedicated bounded regression beyond the cancellation and target-overwrite tests.
+## Implementation and regression
+
+| Gate | Actual result |
+|---|---|
+| Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Native pointer walkthrough unverified. |
+| Eyedropper | Inverse displayed-rect mapping, zoom/pan, split, linked side-by-side, proxy resolution and letterbox rejection PASS in tests. |
+| Node row | 36 DIP row, inline enable, disabled opacity, original nonemoji type symbols, name/strength, selection wash, overflow/rename implemented; bottom button wall removed. Production-view toggle/selection/menu tests PASS. |
+| Drag feedback | Insertion border implemented, reorder/history commands tested. **PARTIAL:** no native drag-over/drop observation; 09 shows result, not insertion line. Model reorder does not prove DragEvent routing. |
+| Scheme | Cards, select then apply, save/update/save-as, unsaved save/discard/cancel, delete confirmation, restart persistence PASS in command/store regression. Captures 13/19/20 show real view/popups. Updated-scheme deletion fixed by stable ID. Native click-through QA remains PARTIAL. |
+| Batch sync | Choice popup/count, selected-node versus whole-adjustment actions, toast and isolation implemented; regression PASS. Captures 12/21/23 show popup/toast/logical DPI. |
+| Rapid switching | Bounded reference A–E and scheme A–D last-wins tests PASS. Target activation reserves order before asynchronous thumbnail completion. |
+| Render recovery | Injected post-processing exception preserves valid frame; render retry clears error/new revision; stale failed job cannot overwrite later success. Tests PASS. Production error/retry visual walkthrough absent. |
+| Other failure recovery | Reference load/corrupt target/export tests preserve preview and recover after repair/reimport. **PARTIAL:** dedicated retry interaction for those operations remains incomplete; render retry is not a substitute. Export completion summary lacks a named failure summary. |
+
+Existing renderer, per-target snapshot model and scheme store remain. No second pipeline or Phase 2 feature.
+
+## Production visual evidence
+
+[Screenshot manifest](evidence/color-studio-phase1/final-ux/COLOR_STUDIO_PHASE1_SCREENSHOT_MANIFEST.json): **24 main images + 6 independent popup images**; required 01–18 all have loaded synthetic targets, real parameters/nodes.
+
+Cursor-free **PrintWindow(PW_RENDERFULLCONTENT)** records PID/HWND, popup HWND, source, app version, fixture, DPI, UTC time and SHA256. No compositing/mock/cursor access. Fixture `color-studio-still-life-v1` generates safe repository-defined 1200×800 still-life PNGs inside an explicitly isolated runtime; no customer photos.
+
+All 18 required frames were opened individually, not just a contact sheet; supplemental popups and changed frames were also inspected. Large frames were downscaled by the viewer (e.g. 2400×1500 to 1996×1248), so **strict native-pixel full-size QA is PARTIAL**. Visible text, spacing, sliders/toggles, nodes, canvas, zoom controls, filmstrip, rails, selection, popups and toast were reviewed; no obvious overlap/white popup was found in reviewed states.
+
+| Image | Review / limit |
+|---|---|
+| 01 Professional | Loaded target, four nodes and inspector. |
+| 02 Stack | Reference selection and ordered rows. |
+| 03 Reference | Production parameters. |
+| 04 Color Range | Production inspector. |
+| 05 Eyedropper | Active sampling state, not native click proof. |
+| 06 Samples | Positive/negative samples after inspector scroll. |
+| 07 Selection | Selection presentation visible. |
+| 08 Luminance | Option in scrollable inspector. |
+| 09 Reorder | Result only; insertion feedback unverified. |
+| 10 History | Controls/result; command regression covers history. |
+| 11 Roundtrip | Synchronized 48% parameter, but UI shows processing although prior state JSON reports idle. **PARTIAL** settled-frame proof; capture/state are not atomic. |
+| 12 Batch | Real independent popup, readable choices/count. |
+| 13 Scheme | Current/my schemes and actions. |
+| 14 Cancel | Post-cancel valid frame, not in-progress stop capture. |
+| 15 Split | Shared source/matched geometry. |
+| 16 Add | Real independently captured popup. |
+| 17 1180×720 | Loaded target, usable canvas/filmstrip and scrollable compact inspector. 1770×1080 physical pixels at 150% host DPI. |
+| 18 Logical 200% | Loaded-target layout simulation; not physical certification. |
+| 19–24 | Unsaved/delete popups, sync toast, linked zoom/pan, 200% batch popup, node overflow. |
+
+Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, not an exhaustive whole-app claim. Graphite/mineral/warm-silver/copper palette, themed popups and `TextValueBrush` values checked. Logical 200% scheme/error variants are not exhaustively captured.
+
+## Tests and performance
+
+[CLOSURE_RUN.json](evidence/color-studio-phase1/CLOSURE_RUN.json) commits portable test names/outcomes, timestamps, original run IDs and raw TRX digests; machine-specific raw results/deployment outputs remain local.
+
+- Latest product source: **Core 23/23; WPF targeted 72/72; failures 0; skips 0**. These are targeted suites, not all solution tests.
+- Coverage: Color Studio stack/film, mapping, history, real view geometry/controls, scheme persistence, switching, cancellation, processed batch pixels, snapshot isolation, parity, cache, filmstrip, metadata-related photography-critical regression and logical DPI. No separate fresh rating test result is claimed by this targeted selection.
+- Model/static-XAML checks are distinguished from tests instantiating real WPF views/routed clicks; no full native gesture automation claim.
+- Empty-target logical DPI core tests are not substituted for loaded production captures 17/18/23.
+- 30 × 2400×1600 processed export: **1/1 PASS, 64.986 s, peak working set 857.0 MB**, initial 83.6 MB. Historical baseline 59.7 s / 771.5 MB: **+8.85% time, +11.08% peak**.
+- Performance comparison **PARTIAL**: screenshot workload was concurrent; not a controlled same-host historical comparison or threshold verdict. Optimization remains P2/nonblocker.
+- Test hang guards and screenshot startup/settling deadlines are bounded.
+
+## Evidence consistency
+
+**TRACEABLE_MULTI_REVISION / NOT SINGLE_BINARY_SIGNOFF.** Common closure RunId groups actual evidence, preserving original test-run IDs and source SHAs. Every PNG hash verified. This does not invent one historical run or conceal mixed binary revisions. Image 11 state/capture timing mismatch remains explicit. Historical RC12/organization-splitter evidence is not used for this signoff.
+
+## Open product gates
+
+1. Native drag insertion feedback and final zoom/pan gesture walkthrough unverified.
+2. Dedicated reference/corrupt-input/export retry interaction and production failure/retry visual QA incomplete; render retry alone does not close it.
+3. Strict native-pixel visual QA, settled roundtrip capture, full scheme/error logical-200% coverage and remaining native interaction QA partial.
+
+P0: none observed in targeted runs, not a global absence guarantee.
+
+P1: three open product gates above; product/verification gaps, not SDK/cursor infrastructure blockers.
+
+P2: controlled performance follow-up/optimization. No testing work assigned to the user.
 
 ## Separate gates
 
-- 3D Color Space: **DEFERRED_TO_PHASE_2**.
-- Physical-display DPI: **RELEASE HARDWARE GATE PENDING**.
-- Performance optimization: **P2**, not a Phase 1 speed target.
+- 3D COLOR SPACE: **DEFERRED_TO_PHASE_2**.
+- PHYSICAL DPI: **PENDING**, release hardware only, not a Phase 1 blocker.
+- RC12: **HISTORICAL ONLY / NOT USED**.
 
-**COLOR STUDIO PHASE 1: BLOCKED** by the open product gates above, not by physical DPI, 3D space or historical RC12 evidence.
+**COLOR STUDIO PHASE 1: BLOCKED.** Do not advertise READY until the open product gates are closed.
