@@ -27,6 +27,7 @@ try {
    Start-Sleep -Milliseconds 400
    $name=$scenario+'_'+$names[[int]$scenario-1]
    $state=Get-Content -Raw (Join-Path $runtime 'ColorStudioFixture/state.json') | ConvertFrom-Json
+   if($state.ProductSourceSha -notmatch '^[0-9a-f]{40}$'){throw 'Production binary has no source SHA. Build with -p:IncludeSourceRevisionInInformationalVersion=true before capture.'}
    $capture=& (Join-Path $PSScriptRoot 'Capture-ColorStudioWindow.ps1') -TargetProcessId $process.Id -OutputDirectory $OutputDirectory -Name $name -MainWindowHandle $state.MainWindowHandle | ConvertFrom-Json
    foreach($item in @($capture)) {
     $record=[ordered]@{}

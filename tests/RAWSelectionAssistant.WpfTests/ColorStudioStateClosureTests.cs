@@ -412,6 +412,10 @@ public sealed class ColorStudioStateClosureTests
             var first = editor.SelectedColorScheme!;
             editor.ColorSchemeName = "B"; editor.SaveColorSchemeAsCommand.ExecuteAsync(null).GetAwaiter().GetResult();
             var second = editor.SelectedColorScheme!;
+            Assert.IsFalse(editor.HasUnsavedSchemeChanges);
+            editor.SelectedColorScheme = first; editor.RequestApplySchemeCommand.Execute(null);
+            Assert.IsFalse(editor.SchemeSwitchOpen); Assert.AreEqual("A", editor.CurrentColorSchemeName);
+            editor.SelectedColorScheme = second; editor.RequestApplySchemeCommand.Execute(null);
             editor.SelectedAdjustmentNode = editor.AdjustmentNodes.First(); editor.RangeHue = 25;
             editor.SelectedColorScheme = first; editor.RequestApplySchemeCommand.Execute(null);
             Assert.IsTrue(editor.SchemeSwitchOpen); Assert.AreEqual(25, editor.RangeHue);

@@ -69,8 +69,8 @@ public static class ColorStudioAcceptanceFixture
         {
             FixtureId = Id, Scenario = scenario, ProductSourceSha = StartupDiagnostics.ProductSourceSha,
             AppVersion = typeof(App).Assembly.GetName().Version?.ToString(), ProcessId = Environment.ProcessId,
-            WindowSize = new[] { window.Width, window.Height }, LogicalDpi = scenario == "18" ? 192 : dpi.PixelsPerInchX,
-            PhysicalDpi = dpi.PixelsPerInchX, LogicalDpiSimulation = scenario == "18",
+            WindowSize = new[] { window.Width, window.Height }, LogicalDpi = scenario is "18" or "23" ? 192 : dpi.PixelsPerInchX,
+            PhysicalDpi = dpi.PixelsPerInchX, LogicalDpiSimulation = scenario is "18" or "23",
             WorkspaceMode = editor.WorkspaceMode, SelectedNodeType = editor.SelectedAdjustmentNode?.Type.ToString(),
             ViewMode = editor.EffectiveViewMode, Target = workspace.TargetName, HasTarget = workspace.HasTarget,
             Stack = editor.AdjustmentNodes.Select(n => new { n.Name, Type = n.Type.ToString(), n.Enabled }),
@@ -122,7 +122,10 @@ public static class ColorStudioAcceptanceFixture
             case "23":
                 window.Width = 1800; window.Height = 1200;
                 if (window.Content is FrameworkElement dpiRoot) dpiRoot.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
-                workspace.OpenNodeSyncCommand.Execute(null); break;
+                workspace.OpenNodeSyncCommand.Execute(null);
+                foreach (var popup in Descendants<System.Windows.Controls.Primitives.Popup>(window).Where(p => p.IsOpen))
+                    if (popup.Child is FrameworkElement child) child.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
+                break;
         }
         await Task.Delay(1200); // Let delayed interactive/full-quality jobs start before checking idle.
         var deadline = Stopwatch.StartNew();

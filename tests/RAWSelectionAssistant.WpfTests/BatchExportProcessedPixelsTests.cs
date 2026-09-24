@@ -14,6 +14,33 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public async Task CorruptTargetAndFailedExportKeepFrameAndRecoverTests()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-Recovery-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var good = CreatePng(root, "good", 80, 90, 100);
+            var corrupt = Path.Combine(root, "corrupt.png"); await File.WriteAllTextAsync(corrupt, "not an image");
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(root));
+            await workspace.LoadTargetAsync(good); workspace.Editor.WorkspaceMode = "专业";
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            var frame = workspace.Editor.MatchedImage; Assert.IsNotNull(frame);
+            await workspace.LoadTargetAsync(corrupt).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.AreSame(frame, workspace.Editor.MatchedImage); Assert.AreEqual(good, workspace.ActiveTarget!.Path);
+            Assert.IsFalse(workspace.IsLoading);
+            await workspace.ExportAllCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.IsFalse(workspace.IsExporting); Assert.AreSame(frame, workspace.Editor.MatchedImage);
+            Assert.AreEqual(ReferenceExportStatus.Failed, workspace.Targets.Single(t => t.Path == corrupt).ExportStatus);
+            Assert.AreEqual(ReferenceExportStatus.Succeeded, workspace.Targets.Single(t => t.Path == good).ExportStatus);
+            Assert.IsFalse(Directory.EnumerateFiles(root, "*.tmp").Any());
+            File.Copy(good, corrupt, true);
+            await workspace.LoadTargetAsync(corrupt).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.AreEqual(corrupt, workspace.ActiveTarget!.Path); Assert.IsFalse(workspace.IsLoading);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [TestMethod]
     public void BatchSyncSelectionToastAndIsolationTests()
     {
         using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()));
