@@ -1,7 +1,7 @@
 {
-  "RunId": "color-studio-phase1-20260924T032038Z",
-  "GeneratedAt": "2026-09-24T03:20:38.2277114Z",
-  "ProductSourceSha": "1324ce012058151b19fc2501746adb872c0083e5",
+  "RunId": "color-studio-phase1-20260924T040412Z",
+  "GeneratedAt": "2026-09-24T04:04:12.4976593Z",
+  "ProductSourceSha": "c175ebe2c2c94fc78da4bce0bd94f90a977a6310",
   "SDKVersion": "10.0.401",
   "FixtureVersion": "color-studio-still-life-v1",
   "FinalStatus": "BLOCKED",
@@ -12,13 +12,13 @@
   "ScreenshotCount": 30,
   "ScreenshotHashes": "PASS",
   "FullSizeReview": "PARTIAL: individual review completed, large images downscaled by viewer",
-  "ScreenshotManifestSHA256": "1B4C01658775A2A9E395C428975EC056CB489AC56049EA80B0CAD817E1A72AF4",
+  "ScreenshotManifestSHA256": "84A751518A31C9CFC69B205B2C3B95668ADEE01660F60238C924864B2A3C5BDA",
   "Build": {
     "Configuration": "Release x64",
     "Result": "PASS",
     "Warnings": 0,
     "Errors": 0,
-    "ProductVersion": "2.3.0+1324ce012058151b19fc2501746adb872c0083e5",
+    "ProductVersion": "2.3.0+c175ebe2c2c94fc78da4bce0bd94f90a977a6310",
     "Command": "dotnet build src/RAWSelectionAssistant/RAWSelectionAssistant.csproj -c Release -p:Platform=x64 -p:IncludeSourceRevisionInInformationalVersion=true --no-restore -v:minimal",
     "RecordedFrom": "Observed build output in this closure; not a rebuilt evidence commit"
   },
@@ -617,6 +617,302 @@
           "Name": "RapidReferenceSwitchLastWinsTests",
           "Outcome": "Passed",
           "Duration": "00:00:00.3315450",
+          "Output": ""
+        }
+      ]
+    },
+    {
+      "File": "phase1-recovery-c175ebe.trx",
+      "ProductSourceSha": "c175ebe2c2c94fc78da4bce0bd94f90a977a6310",
+      "OriginalRunId": "0c3d7662-d439-4cec-875b-20dd7cea6fc3",
+      "SHA256": "94DF9A499430064B236F478F2AC8935C8A8060DF4689B9E12BD8D4908FC05E0E",
+      "Start": "2026-09-24T11:56:32.1764991+08:00",
+      "Finish": "2026-09-24T11:57:39.2514476+08:00",
+      "Total": 47,
+      "Passed": 47,
+      "Failed": 0,
+      "Skipped": 0,
+      "Tests": [
+        {
+          "Name": "RapidSchemeSwitchLastWinsTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.1003393",
+          "Output": ""
+        },
+        {
+          "Name": "StopProcessingEndsAfterJobExitsAndKeepsLastValidFrameTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0775296",
+          "Output": ""
+        },
+        {
+          "Name": "StackOnlyTargetPersistsWithoutReferenceLookTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0018911",
+          "Output": ""
+        },
+        {
+          "Name": "FilmstripSelectionDoesNotRequireActiveState",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0001433",
+          "Output": ""
+        },
+        {
+          "Name": "CorruptTargetAndFailedExportKeepFrameAndRecoverTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0292305",
+          "Output": ""
+        },
+        {
+          "Name": "NodeEnableOverflowAndInsertionTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0036206",
+          "Output": ""
+        },
+        {
+          "Name": "ActiveTargetCurrentEditsFreezeWhenExportStarts",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0090930",
+          "Output": ""
+        },
+        {
+          "Name": "ContinuousNegativeSamplingTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0021833",
+          "Output": ""
+        },
+        {
+          "Name": "ColorStudioThirtyHighResolutionTargetsRecordProcessedExportBaseline",
+          "Outcome": "Passed",
+          "Duration": "00:01:00.8812330",
+          "Output": "TestContext 消息:\r\ncolor_studio_batch_targets=30; dimensions=2400x1600; elapsed_ms=60730; working_set_before_mb=180.6; process_peak_mb=870.7"
+        },
+        {
+          "Name": "UndoRestoresSelectedNodeTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0026857",
+          "Output": ""
+        },
+        {
+          "Name": "NodeDragReorderTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0021322",
+          "Output": ""
+        },
+        {
+          "Name": "RapidThirtyTargetActivationsKeepLastPreviewAndActiveState",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0410319",
+          "Output": "TestContext 消息:\r\nrapid30_target_switch_ms=13.0"
+        },
+        {
+          "Name": "HundredTargetBatchExportMeasuresCompletionAndPeakManagedMemory",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.2666014",
+          "Output": "TestContext 消息:\r\nbatch100_ms=149.7; managed_before_mb=118.34; managed_after_mb=121.13; process_peak_mb=870.67"
+        },
+        {
+          "Name": "BatchSyncTargetIsolationTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0031043",
+          "Output": ""
+        },
+        {
+          "Name": "ColorStudioProductionNodeControlsAndSchemeNavigationTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.8911244",
+          "Output": ""
+        },
+        {
+          "Name": "InactiveTargetsExportTheirFrozenProcessedPixelsNotActiveEditorPixels",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0288194",
+          "Output": ""
+        },
+        {
+          "Name": "CancelledJobCannotOverwriteNewTargetTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0690941",
+          "Output": ""
+        },
+        {
+          "Name": "FullResolutionPreviewAndExportProduceTheSamePixels",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0966266",
+          "Output": ""
+        },
+        {
+          "Name": "CompactLayoutCollapsesContextUntilUserOpensIt",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0009356",
+          "Output": ""
+        },
+        {
+          "Name": "TargetWithNoStackDoesNotInheritPreviousStackTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0029282",
+          "Output": ""
+        },
+        {
+          "Name": "BatchSyncSelectionToastAndIsolationTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0067286",
+          "Output": ""
+        },
+        {
+          "Name": "RealCpuRendererProcessesActiveAndTwoNeverActivatedTargets",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.2122828",
+          "Output": ""
+        },
+        {
+          "Name": "FilmSurfaceUsesChineseTextureGridAndProfiles",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0008734",
+          "Output": ""
+        },
+        {
+          "Name": "FilmstripClickModifiersKeepAnchorSelectionAndActiveIndependent",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0042193",
+          "Output": ""
+        },
+        {
+          "Name": "ActivatingUnsyncedTargetClearsPreviousPreviewLookAndFilm",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0006219",
+          "Output": ""
+        },
+        {
+          "Name": "RuntimeGeometry_UsesWideRatioAndResponsiveRails",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.1736170",
+          "Output": ""
+        },
+        {
+          "Name": "ProcessingErrorKeepsFrameAndRetryRecoversTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0033512",
+          "Output": ""
+        },
+        {
+          "Name": "ReferenceAnalysisCacheSharesSameFileAcrossTargetsAndInvalidatesChangedFile",
+          "Outcome": "Passed",
+          "Duration": "00:00:01.2299526",
+          "Output": "TestContext 消息:\r\nreference_cache_hits=2; misses=2; executions=2; analysis_ms=1224.83"
+        },
+        {
+          "Name": "NegativeOnlySamplesCanBeClearedTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0043226",
+          "Output": ""
+        },
+        {
+          "Name": "SchemeUnsavedApplyCancelDeleteAndRestartTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0234073",
+          "Output": ""
+        },
+        {
+          "Name": "ImportHundredThenFiveHundredTargetsMeasuresFreshSource",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.4285640",
+          "Output": "TestContext 消息:\r\nimport100_ms=23.6; import500_total_ms=90.1; process_peak_mb=870.67"
+        },
+        {
+          "Name": "DuplicateNodeKeepsSingleReferenceAndFilmAndIsolatesParametersTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0036270",
+          "Output": ""
+        },
+        {
+          "Name": "SelectedNodeSurvivesItemsSourceReplacementTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0021942",
+          "Output": ""
+        },
+        {
+          "Name": "ColorStudioInactiveTargetUsesFrozenStackAndSamePreviewRenderer",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0159878",
+          "Output": ""
+        },
+        {
+          "Name": "WideLayoutKeepsTwentyOneSixtyOneEighteenColumns",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0008313",
+          "Output": ""
+        },
+        {
+          "Name": "TargetSwitchRestoresOwnStackTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0036996",
+          "Output": ""
+        },
+        {
+          "Name": "NodeRenameUiTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0030299",
+          "Output": ""
+        },
+        {
+          "Name": "CancelBatchKeepsCompletedFileAndCleansUnfinishedFile",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0115360",
+          "Output": "TestContext 消息:\r\ncancel_latency_ms=0.86"
+        },
+        {
+          "Name": "MissingReferenceImportKeepsValidFrameTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:01.0171751",
+          "Output": ""
+        },
+        {
+          "Name": "SimpleProfessionalRoundTripPreservesFilmStateTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0047708",
+          "Output": ""
+        },
+        {
+          "Name": "FailedJobCannotOverwriteLaterSuccessTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0232716",
+          "Output": ""
+        },
+        {
+          "Name": "SliderDragSingleUndoTransactionTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0022052",
+          "Output": ""
+        },
+        {
+          "Name": "RapidReferenceSwitchLastWinsTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.2576382",
+          "Output": ""
+        },
+        {
+          "Name": "SimpleProfessionalRoundTripPreservesReferenceStateTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0052884",
+          "Output": ""
+        },
+        {
+          "Name": "SchemeV2RestartRoundTripTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0316787",
+          "Output": ""
+        },
+        {
+          "Name": "NodeResetClearsNegativeSamplesTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0029349",
+          "Output": ""
+        },
+        {
+          "Name": "NodeBoundaryCommandStateTests",
+          "Outcome": "Passed",
+          "Duration": "00:00:00.0028500",
           "Output": ""
         }
       ]

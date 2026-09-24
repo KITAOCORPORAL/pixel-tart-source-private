@@ -7,8 +7,8 @@ $repo=Split-Path $PSScriptRoot -Parent
 Push-Location $repo
 try {
  $source=(git rev-parse HEAD).Trim()
- if($source -ne '1324ce012058151b19fc2501746adb872c0083e5') {
-  throw 'This closure annotation is bound to source 1324ce0. Re-audit build, test provenance and visual reviews before recording a different source.'
+ if($source -ne 'c175ebe2c2c94fc78da4bce0bd94f90a977a6310') {
+  throw 'This closure annotation is bound to the current recovery source c175ebe. Re-audit build, test provenance and visual reviews before recording a different source.'
  }
  $runId='color-studio-phase1-'+[DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ')
  $manifestPath=Join-Path $EvidenceDirectory 'final-ux/COLOR_STUDIO_PHASE1_SCREENSHOT_MANIFEST.json'
@@ -38,8 +38,9 @@ try {
  $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $manifestPath -Encoding utf8
  $runs=@()
  foreach($entry in @(
-  @{File='core-closure.trx';Source=$source},
-  @{File='wpf-closure.trx';Source=$source},
+  @{File='core-closure.trx';Source='1324ce012058151b19fc2501746adb872c0083e5'},
+  @{File='wpf-closure.trx';Source='1324ce012058151b19fc2501746adb872c0083e5'},
+  @{File='phase1-recovery-c175ebe.trx';Source=$source},
   @{File='performance-final.trx';Source='7bddb78db242345fc2b47c3cbbb14fa5bd135ee5'}
  )) {
   $path=Join-Path $ResultsDirectory $entry.File

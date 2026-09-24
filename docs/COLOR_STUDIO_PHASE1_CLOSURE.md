@@ -5,10 +5,10 @@
 ## Source and build
 
 - Start: `139ff521a79ee5e099b1d46f92e13b904a51e4de`.
-- Latest compiled/tested product: `1324ce012058151b19fc2501746adb872c0083e5`.
+- Latest compiled/tested product: `c175ebe` (`feat(color): add retry paths for failed targets and exports`).
 - Screenshot/performance binary: `7bddb78db242345fc2b47c3cbbb14fa5bd135ee5`.
 - Later delta: fix removal of an updated scheme by stable ID and extend scheme regression. No screenshot layout change, but captures are **not relabelled** as the newer binary.
-- Windows-native .NET SDK **10.0.401**, Release x64 **PASS, 0 warnings, 0 errors**. Verified assembly product version `2.3.0+1324ce012058151b19fc2501746adb872c0083e5`.
+- Windows-native .NET SDK **10.0.401**, Release x64 **PASS, 0 warnings, 0 errors**. Recovery-source build was rebuilt after commit `c175ebe`.
 - Production project `RAWSelectionAssistant.csproj` configures executable `KitaoPhotoSelector.exe`; captures use its normal MainWindow/XAML/ViewModel/renderer, not a separate acceptance window.
 - No WSL, Docker, VM, administrator installation or system DPI changes. The following evidence-only commit is not claimed as the source of earlier binaries.
 
@@ -24,7 +24,7 @@
 | Batch sync | Choice popup/count, selected-node versus whole-adjustment actions, toast and isolation implemented; regression PASS. Captures 12/21/23 show popup/toast/logical DPI. |
 | Rapid switching | Bounded reference A–E and scheme A–D last-wins tests PASS. Target activation reserves order before asynchronous thumbnail completion. |
 | Render recovery | Injected post-processing exception preserves valid frame; render retry clears error/new revision; stale failed job cannot overwrite later success. Tests PASS. Production error/retry visual walkthrough absent. |
-| Other failure recovery | Reference load/corrupt target/export tests preserve preview and recover after repair/reimport. **PARTIAL:** dedicated retry interaction for those operations remains incomplete; render retry is not a substitute. Export completion summary lacks a named failure summary. |
+| Other failure recovery | Reference load/corrupt target/export tests preserve preview and recover after repair/reimport. **PASS:** corrupt target exposes `重试载入`; failed exports expose a named success/failure summary and `重试失败导出` using the same output directory. |
 
 Existing renderer, per-target snapshot model and scheme store remain. No second pipeline or Phase 2 feature.
 
@@ -79,12 +79,12 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 ## Open product gates
 
 1. Native drag insertion feedback and final zoom/pan gesture walkthrough unverified.
-2. Dedicated reference/corrupt-input/export retry interaction and production failure/retry visual QA incomplete; render retry alone does not close it.
-3. Strict native-pixel visual QA, settled roundtrip capture, full scheme/error logical-200% coverage and remaining native interaction QA partial.
+2. Dedicated reference/corrupt-input/export retry interaction is implemented and covered by the current 47-test recovery run; production failure/retry visual walkthrough remains unverified.
+3. Strict native-pixel visual QA, settled roundtrip capture, full scheme/error logical-200% coverage and remaining native interaction QA remain partial.
 
 P0: none observed in targeted runs, not a global absence guarantee.
 
-P1: three open product gates above; product/verification gaps, not SDK/cursor infrastructure blockers.
+P1: the three verification gates above; product/verification gaps, not SDK/cursor infrastructure blockers. Dedicated failure retry is closed by `c175ebe`.
 
 P2: controlled performance follow-up/optimization. No testing work assigned to the user.
 
