@@ -5,7 +5,7 @@ This repository is a Windows WPF/.NET 10 application. The normal development pat
 ## Required
 
 - Windows 10 19045 or newer (Windows Desktop target: `net10.0-windows10.0.19041.0`).
-- .NET SDK 10.0.302 or a later patch in the 10.0 feature band. `global.json` pins the band without a machine-specific path.
+- .NET SDK 10.0.302 or a later 10.0 feature band. `global.json` pins the minimum feature band without a machine-specific path and permits a newer compatible feature band.
 - Windows Desktop runtime/SDK support for WPF.
 - Git for Windows.
 - PowerShell 5.1 or PowerShell 7+.

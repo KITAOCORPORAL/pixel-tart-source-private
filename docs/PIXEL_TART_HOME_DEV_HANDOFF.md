@@ -6,8 +6,8 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: `be4779bc7e83c7b1046a7fd1e99aea63b9587a80`
-- Last commit: `be4779b test(color): record retry recovery closure provenance`
+- Product SHA at handoff: `d7848d1e3b9b3f218f0434278305fddfec59f006`
+- Last commit: `d7848d1 docs(dev): record final verification commit`
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 
@@ -49,7 +49,7 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 ## G. Known test state
 
 - Core and targeted WPF Color Studio/Photography suites are recorded in the current evidence documents and latest commits.
-- Release x64 product build was verified from this source with .NET SDK 10.0.302: 0 warnings, 0 errors.
+- Release x64 product build was verified from this source with .NET SDK 10.0.401 (compatible with the 10.0.302 minimum feature band): 0 warnings, 0 errors.
 - Logical DPI coverage is development evidence; physical-display validation is not claimed.
 - Performance follow-up is P2 and non-blocking; historical baselines are not silently treated as current.
 

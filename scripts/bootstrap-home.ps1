@@ -16,6 +16,7 @@ if ($LASTEXITCODE -ne 0 -or $sdkText -notmatch '^10\.0\.') {
 }
 Write-Host "Git: $((git --version).Trim())"
 Write-Host "SDK: $sdkText"
+if ((git branch --show-current).Trim() -ne 'integration/pixel-tart-developer-preview') { throw 'Checkout integration/pixel-tart-developer-preview before bootstrapping.' }
 dotnet restore RAWSelectionAssistant.sln --nologo
 
 $required = @('RAWSelectionAssistant.sln','src/RAWSelectionAssistant/RAWSelectionAssistant.csproj','tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj','tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj','docs/PIXEL_TART_HOME_DEV_HANDOFF.md','scripts/verify-home-dev.ps1')
