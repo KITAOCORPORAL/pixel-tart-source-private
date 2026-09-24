@@ -19,12 +19,12 @@
 | Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Native pointer walkthrough unverified. |
 | Eyedropper | Inverse displayed-rect mapping, zoom/pan, split, linked side-by-side, proxy resolution and letterbox rejection PASS in tests. |
 | Node row | 36 DIP row, inline enable, disabled opacity, original nonemoji type symbols, name/strength, selection wash, overflow/rename implemented; bottom button wall removed. Production-view toggle/selection/menu tests PASS. |
-| Drag feedback | Insertion border implemented, reorder/history commands tested. **PARTIAL:** no native drag-over/drop observation; 09 shows result, not insertion line. Model reorder does not prove DragEvent routing. |
+| Drag feedback | Insertion border implemented, reorder/history commands tested. **PARTIAL:** 25 is a production routed `DragOver` hook (`DRAG_OVER_HOOK`); native pointer walkthrough is unavailable and is not claimed. |
 | Scheme | Cards, select then apply, save/update/save-as, unsaved save/discard/cancel, delete confirmation, restart persistence PASS in command/store regression. Captures 13/19/20 show real view/popups. Updated-scheme deletion fixed by stable ID. Native click-through QA remains PARTIAL. |
 | Batch sync | Choice popup/count, selected-node versus whole-adjustment actions, toast and isolation implemented; regression PASS. Captures 12/21/23 show popup/toast/logical DPI. |
 | Rapid switching | Bounded reference A–E and scheme A–D last-wins tests PASS. Target activation reserves order before asynchronous thumbnail completion. |
-| Render recovery | Injected post-processing exception preserves valid frame; render retry clears error/new revision; stale failed job cannot overwrite later success. Tests PASS. Production error/retry visual walkthrough absent. |
-| Other failure recovery | Reference load/corrupt target/export tests preserve preview and recover after repair/reimport. **PASS:** corrupt target exposes `重试载入`; failed exports expose a named success/failure summary and `重试失败导出` using the same output directory. |
+| Render recovery | Injected post-processing exception preserves valid frame; render retry clears error/new revision; stale failed job cannot overwrite later success. 30/31 production fixture frames now show the failure and executed retry recovery. |
+| Other failure recovery | Reference load/corrupt target/export tests preserve preview and recover after repair/reimport. 32 executes repair + `重试载入`; 33 executes one controlled failure + `重试失败导出` in the same output directory and records 1/1 success. |
 
 Existing renderer, per-target snapshot model and scheme store remain. No second pipeline or Phase 2 feature.
 
@@ -34,7 +34,7 @@ Existing renderer, per-target snapshot model and scheme store remain. No second 
 
 Cursor-free **PrintWindow(PW_RENDERFULLCONTENT)** records PID/HWND, popup HWND, source, app version, fixture, DPI, UTC time and SHA256. No compositing/mock/cursor access. Fixture `color-studio-still-life-v1` generates safe repository-defined 1200×800 still-life PNGs inside an explicitly isolated runtime; no customer photos.
 
-All 18 required frames were opened individually, not just a contact sheet; supplemental popups and changed frames were also inspected. Large frames were downscaled by the viewer (e.g. 2400×1500 to 1996×1248), so **strict native-pixel full-size QA is PARTIAL**. Visible text, spacing, sliders/toggles, nodes, canvas, zoom controls, filmstrip, rails, selection, popups and toast were reviewed; no obvious overlap/white popup was found in reviewed states.
+All 18 required frames were opened individually, not just a contact sheet; supplemental popups and changed frames were also inspected. Refreshed 25–38 evidence was reviewed at native image dimensions. The bounded record is in [`COLOR_STUDIO_PHASE1_NATIVE_PIXEL_QA.md`](COLOR_STUDIO_PHASE1_NATIVE_PIXEL_QA.md); 25/29 remain PARTIAL because native pointer input is unavailable, and logical-200% remains simulation only.
 
 | Image | Review / limit |
 |---|---|
@@ -46,19 +46,19 @@ All 18 required frames were opened individually, not just a contact sheet; suppl
 | 06 Samples | Positive/negative samples after inspector scroll. |
 | 07 Selection | Selection presentation visible. |
 | 08 Luminance | Option in scrollable inspector. |
-| 09 Reorder | Result only; insertion feedback unverified. |
+| 09 Reorder | Result only; 25 adds a routed DragOver insertion-border hook; native pointer input remains unverified. |
 | 10 History | Controls/result; command regression covers history. |
-| 11 Roundtrip | Synchronized 48% parameter, but UI shows processing although prior state JSON reports idle. **PARTIAL** settled-frame proof; capture/state are not atomic. |
+| 11 Roundtrip | Historical frame had a processing/idle timing mismatch. Refreshed 34 records `SETTLED_ROUNDTRIP` and `Settled=true` from the same fixture state. |
 | 12 Batch | Real independent popup, readable choices/count. |
 | 13 Scheme | Current/my schemes and actions. |
 | 14 Cancel | Post-cancel valid frame, not in-progress stop capture. |
 | 15 Split | Shared source/matched geometry. |
 | 16 Add | Real independently captured popup. |
 | 17 1180×720 | Loaded target, usable canvas/filmstrip and scrollable compact inspector. 1770×1080 physical pixels at 150% host DPI. |
-| 18 Logical 200% | Loaded-target layout simulation; not physical certification. |
+| 18 Logical 200% | Loaded-target layout simulation; not physical certification. Refreshed 35–37 cover scheme, error and node-overflow states at logical 200%. |
 | 19–24 | Unsaved/delete popups, sync toast, linked zoom/pan, 200% batch popup, node overflow. |
 
-Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, not an exhaustive whole-app claim. Graphite/mineral/warm-silver/copper palette, themed popups and `TextValueBrush` values checked. Logical 200% scheme/error variants are not exhaustively captured.
+Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, not an exhaustive whole-app claim. Graphite/mineral/warm-silver/copper palette, themed popups and `TextValueBrush` values checked. Refreshed logical-200% scheme/error/node-overflow evidence is recorded in the native-pixel QA report.
 
 ## Tests and performance
 
@@ -78,9 +78,9 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 
 ## Open product gates
 
-1. Native drag insertion feedback and final zoom/pan gesture walkthrough unverified.
-2. Dedicated reference/corrupt-input/export retry interaction is implemented and covered by the current 47-test recovery run; production failure/retry visual walkthrough remains unverified.
-3. Strict native-pixel visual QA, settled roundtrip capture, full scheme/error logical-200% coverage and remaining native interaction QA remain partial.
+1. Native pointer walkthrough remains unavailable: 25/29 are explicitly hook/state evidence, while 26–28 are production state-driven gesture fixtures.
+2. Physical display-DPI certification remains pending; logical 200% fixture/layout evidence is present for scheme/error/node-overflow.
+3. The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence; full native pointer automation is still a product-review gate.
 
 P0: none observed in targeted runs, not a global absence guarantee.
 

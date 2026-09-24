@@ -20,6 +20,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private BitmapSource? _interactiveSource;
     private Guid? _assetId;
     private long _revision;
+    private int _pendingDebounceWork;
     private ReferenceLook? _selectedLook;
     private ReferenceLook? _persistedLook;
     private BitmapSource? _matchedImage;
@@ -60,16 +61,18 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private bool _syncingStack;
     public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
     private ProcessingState _processingState;
-    public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); } } }
+    public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); OnPropertyChanged(nameof(IsSettled)); } } }
     public bool IsCancelling => State == ProcessingState.Cancelling;
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
-    private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; }
+    public bool IsSettled => State == ProcessingState.Idle && !IsBusy && Volatile.Read(ref _pendingDebounceWork) == 0;
+    private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; OnPropertyChanged(nameof(IsSettled)); }
     private void EndBusy()
     {
         if (Interlocked.Decrement(ref _busyOperations) != 0) return;
         if (State == ProcessingState.Cancelling) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; }
         else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
+        OnPropertyChanged(nameof(IsSettled));
     }
     public void StopProcessing()
     {
@@ -690,10 +693,15 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection;_neutral=value.NeutralProtection;_keepOriginalTone=value.KeepOriginalTone; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection),nameof(NeutralProtection),nameof(KeepOriginalTone)})OnPropertyChanged(name); }
     private async Task DebouncedRenderAsync()
     {
-        var revision = Interlocked.Increment(ref _revision); await Task.Delay(100);
-        if (revision == Volatile.Read(ref _revision)) await RenderAsync(interactive: true);
-        await Task.Delay(300);
-        if (revision + 1 == Volatile.Read(ref _revision)) await RenderAsync(interactive: false);
+        Interlocked.Increment(ref _pendingDebounceWork);
+        try
+        {
+            var revision = Interlocked.Increment(ref _revision); await Task.Delay(100);
+            if (revision == Volatile.Read(ref _revision)) await RenderAsync(interactive: true);
+            await Task.Delay(300);
+            if (revision + 1 == Volatile.Read(ref _revision)) await RenderAsync(interactive: false);
+        }
+        finally { Interlocked.Decrement(ref _pendingDebounceWork); OnPropertyChanged(nameof(IsSettled)); }
     }
     private async Task RenderAsync(CancellationToken outer = default, bool interactive = false)
     {

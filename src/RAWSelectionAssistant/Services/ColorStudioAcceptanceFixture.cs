@@ -68,9 +68,18 @@ public static class ColorStudioAcceptanceFixture
         await File.WriteAllTextAsync(Path.Combine(folder, "state.json"), JsonSerializer.Serialize(new
         {
             FixtureId = Id, Scenario = scenario, ProductSourceSha = StartupDiagnostics.ProductSourceSha,
+            CaptureState = scenario switch { "25" => "DRAG_OVER_HOOK", "29" => "EYEDROPPER_MAPPING_HOOK", "30" or "36" => "ERROR", "31" => "RETRY_SUCCESS", "32" => "CORRUPT_TARGET_RETRY_SUCCESS", "33" => "EXPORT_RETRY_SUCCESS", "34" => "SETTLED_ROUNDTRIP", _ => "SETTLED" },
+            NativePointerEvidence = scenario is "25" or "29" ? "UNAVAILABLE_COMPUTER_USE_API" : "NOT_REQUIRED",
+            Settled = editor.IsSettled,
+            HasError = editor.HasError,
+            FailedTarget = workspace.FailedTarget?.FileName,
+            RetryCommandExecuted = scenario is "31" or "32" or "33",
+            ExportCompleted = workspace.ExportCompleted,
+            ExportTotal = workspace.ExportTotal,
+            ExportFailureSummary = workspace.ExportFailureSummary,
             AppVersion = typeof(App).Assembly.GetName().Version?.ToString(), ProcessId = Environment.ProcessId,
-            WindowSize = new[] { window.Width, window.Height }, LogicalDpi = scenario is "18" or "23" ? 192 : dpi.PixelsPerInchX,
-            PhysicalDpi = dpi.PixelsPerInchX, LogicalDpiSimulation = scenario is "18" or "23",
+            WindowSize = new[] { window.Width, window.Height }, LogicalDpi = scenario is "18" or "23" or "35" or "36" or "37" ? 192 : dpi.PixelsPerInchX,
+            PhysicalDpi = dpi.PixelsPerInchX, LogicalDpiSimulation = scenario is "18" or "23" or "35" or "36" or "37",
             WorkspaceMode = editor.WorkspaceMode, SelectedNodeType = editor.SelectedAdjustmentNode?.Type.ToString(),
             ViewMode = editor.EffectiveViewMode, Target = workspace.TargetName, HasTarget = workspace.HasTarget,
             Stack = editor.AdjustmentNodes.Select(n => new { n.Name, Type = n.Type.ToString(), n.Enabled }),
@@ -126,8 +135,59 @@ public static class ColorStudioAcceptanceFixture
                 foreach (var popup in Descendants<System.Windows.Controls.Primitives.Popup>(window).Where(p => p.IsOpen))
                     if (popup.Child is FrameworkElement child) child.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
                 break;
+            case "25":
+                var dragRow = Descendants<ListBoxItem>(window).First(x => x.DataContext is ColorAdjustmentStackNode n && n.Type == ColorStudioNodeType.ColorRange);
+                var dragData = new DataObject(typeof(ColorAdjustmentStackNode), editor.AdjustmentNodes.First());
+                var dragArgs = (DragEventArgs)Activator.CreateInstance(typeof(DragEventArgs), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null,
+                    [dragData, DragDropKeyStates.LeftMouseButton, DragDropEffects.Move, dragRow, new Point(12, 4)], null)!;
+                dragArgs.RoutedEvent = DragDrop.DragOverEvent; dragRow.RaiseEvent(dragArgs);
+                break;
+            case "26": { var viewport = Descendants<ColorStudioImageViewport>(window).Single(); viewport.State.SetZoom(1.75); viewport.State.ZoomAbout(new Point(780, 410), 1.18); break; }
+            case "27": { editor.ViewMode = "左右对比"; var viewport = Descendants<ColorStudioImageViewport>(window).Single(); viewport.State.SetZoom(1.6); viewport.State.PanBy(new Vector(72, -38)); break; }
+            case "28": { var viewport = Descendants<ColorStudioImageViewport>(window).Single(); viewport.State.SetZoom(1.85); viewport.State.PanBy(new Vector(85, -52)); viewport.State.Fit(); break; }
+            case "29": { var viewport = Descendants<ColorStudioImageViewport>(window).Single(); viewport.State.SetZoom(1.6); viewport.State.PanBy(new Vector(58, -34)); editor.StartSamplingCommand.Execute("增加取样"); break; }
+            case "30": editor.PostProcessor = (_, _) => throw new IOException("Synthetic production render failure"); await editor.ApplyCommand.ExecuteAsync(null); break;
+            case "31":
+                editor.PostProcessor = (_, _) => throw new IOException("Synthetic production render failure");
+                await editor.ApplyCommand.ExecuteAsync(null);
+                editor.PostProcessor = null;
+                await editor.ApplyCommand.ExecuteAsync(null);
+                break;
+            case "32":
+            {
+                var folder = Path.Combine(AppDataPaths.Root, "ColorStudioFixture");
+                var corrupt = Path.Combine(folder, "corrupt-target.png");
+                await File.WriteAllTextAsync(corrupt, "not an image"); await workspace.LoadTargetAsync(corrupt);
+                File.Copy(Path.Combine(folder, "静物-1.png"), corrupt, overwrite: true);
+                await workspace.RetryFailedTargetCommand.ExecuteAsync(null);
+                break;
+            }
+            case "33":
+            {
+                var folder = Path.Combine(AppDataPaths.Root, "ColorStudioFixture");
+                var exportRoot = Path.Combine(folder, "export-retry"); Directory.CreateDirectory(exportRoot);
+                var previousExportRoot = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
+                Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY", exportRoot);
+                try
+                {
+                    Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE", "1");
+                    await workspace.ExportSelectedCommand.ExecuteAsync(null);
+                    await workspace.RetryFailedExportCommand.ExecuteAsync(null);
+                }
+                finally
+                {
+                    Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY", previousExportRoot);
+                    Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE", null);
+                }
+                break;
+            }
+            case "34": editor.WorkspaceMode = "简洁"; editor.MatchStrength = 48; editor.WorkspaceMode = "专业"; break;
+            case "35": ApplyLogical200(window); editor.WorkspaceSection = "预设"; editor.ColorSchemeName = "暖调静物-改"; editor.RequestApplySchemeCommand.Execute(null); break;
+            case "36": ApplyLogical200(window); editor.PostProcessor = (_, _) => throw new IOException("Synthetic production render failure"); await editor.ApplyCommand.ExecuteAsync(null); break;
+            case "37": ApplyLogical200(window); OpenNodeOverflow(window); break;
+            case "38": window.Width = 1180; window.Height = 720; workspace.OpenNodeSyncCommand.Execute(null); break;
         }
-        await Task.Delay(1200); // Let delayed interactive/full-quality jobs start before checking idle.
+        await WaitForSettledAsync(editor, window, scenario is "30" or "36", scenario is "32" or "33");
         var deadline = Stopwatch.StartNew();
         while (editor.IsBusy && deadline.Elapsed < TimeSpan.FromSeconds(25)) await Task.Delay(50);
         if (editor.IsBusy) throw new TimeoutException("Fixture preview did not settle.");
@@ -153,6 +213,29 @@ public static class ColorStudioAcceptanceFixture
             var row = Descendants<ListBoxItem>(window).First(x => x.DataContext is ColorAdjustmentStackNode n && n.Type == ColorStudioNodeType.ColorRange);
             Descendants<Button>(row).Single(x => x.ContextMenu is not null).RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
         }
+    }
+    private static void ApplyLogical200(Window window)
+    {
+        window.Width = 1800; window.Height = 1200;
+        if (window.Content is FrameworkElement root)
+            root.LayoutTransform = new ScaleTransform(192 / VisualTreeHelper.GetDpi(window).PixelsPerInchX, 192 / VisualTreeHelper.GetDpi(window).PixelsPerInchY);
+    }
+    private static void OpenNodeOverflow(Window window)
+    {
+        var row = Descendants<ListBoxItem>(window).First(x => x.DataContext is ColorAdjustmentStackNode n && n.Type == ColorStudioNodeType.ColorRange);
+        Descendants<Button>(row).Single(x => x.ContextMenu is not null).RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+    }
+    private static async Task WaitForSettledAsync(TetherReferenceModeViewModel editor, Window window, bool allowFailed, bool targetLoadFailure)
+    {
+        var deadline = Stopwatch.StartNew(); var stable = 0;
+        while (deadline.Elapsed < TimeSpan.FromSeconds(30))
+        {
+            await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.Render);
+            var terminal = targetLoadFailure ? !editor.IsBusy && window.IsLoaded : editor.IsSettled || (allowFailed && editor.State == TetherReferenceModeViewModel.ProcessingState.Failed && !editor.IsBusy);
+            if (terminal) { if (++stable >= 3) return; } else stable = 0;
+            await Task.Delay(75);
+        }
+        throw new TimeoutException("Production fixture did not reach a settled processing state.");
     }
     private static IEnumerable<T> Descendants<T>(DependencyObject root) where T : DependencyObject
     {

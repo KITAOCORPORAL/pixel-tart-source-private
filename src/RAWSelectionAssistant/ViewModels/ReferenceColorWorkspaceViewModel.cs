@@ -245,7 +245,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
         if (items.Count == 0 || IsExporting) return;
-        var directory = retryDirectory ?? _dialogs.ChooseFolder("选择批量导出目录", null);
+        var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
+        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder("选择批量导出目录", null) : acceptanceDirectory);
         if (directory is null) return;
         _lastExportDirectory = directory;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
@@ -258,7 +259,15 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + "_仿色.jpg"); var temp = output + ".tmp";
-                try { var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported; }
+                try
+                {
+                    if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
+                    {
+                        Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE", "done");
+                        throw new IOException("Synthetic production export failure");
+                    }
+                    var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
+                }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
                 catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
