@@ -422,6 +422,14 @@ public sealed class ColorStudioStateClosureTests
             editor.CancelSchemeSwitchCommand.Execute(null); Assert.AreEqual(25, editor.RangeHue);
             editor.RequestApplySchemeCommand.Execute(null); editor.DiscardAndApplySchemeCommand.Execute(null);
             Assert.AreEqual("A", editor.CurrentColorSchemeName); Assert.AreEqual(0, editor.RangeHue);
+            editor.SelectedAdjustmentNode = editor.AdjustmentNodes.First(); editor.RangeHue = 17;
+            editor.SelectedColorScheme = second; editor.RequestApplySchemeCommand.Execute(null);
+            editor.SaveAndApplySchemeCommand.ExecuteAsync(null).GetAwaiter().GetResult();
+            Assert.AreEqual("B", editor.CurrentColorSchemeName); Assert.IsFalse(editor.SchemeSwitchOpen);
+            var savedA = store.LoadAsync().GetAwaiter().GetResult().Single(s => s.Id == first.Id);
+            Assert.AreEqual("A", savedA.Name); Assert.AreEqual(17, savedA.Stack.Nodes.First().NumericParameters["hue"]);
+            editor.ColorSchemeName = "B 更新"; editor.UpdateColorSchemeCommand.ExecuteAsync(null).GetAwaiter().GetResult();
+            Assert.HasCount(2, editor.ColorSchemes); Assert.AreEqual(second.Id, editor.SelectedColorScheme!.Id);
             editor.SelectedColorScheme = second; editor.RequestDeleteSchemeCommand.Execute(null);
             Assert.HasCount(2, editor.ColorSchemes);
             editor.CancelDeleteSchemeCommand.Execute(null); Assert.HasCount(2, editor.ColorSchemes);

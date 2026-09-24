@@ -8,6 +8,21 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class StageIVReferenceWorkflowTests
 {
     [TestMethod]
+    public void ColorStudioChineseUiAndPopupThemeTests()
+    {
+        var doc = System.Xml.Linq.XDocument.Load(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml"));
+        var visible = doc.Descendants().SelectMany(e => e.Attributes()).Where(a => new[] { "Text", "Content", "Header", "ToolTip" }.Contains(a.Name.LocalName))
+            .Select(a => a.Value).Where(v => !v.StartsWith('{'));
+        foreach (var value in visible)
+            Assert.IsFalse(Regex.IsMatch(value, @"\b(Scheme|Legacy|Serializer|Catalog|JSON|Professional|Zoom|Fit)\b"), value);
+        var popups = doc.Descendants().Where(e => e.Name.LocalName == "Popup").ToArray();
+        Assert.IsGreaterThanOrEqualTo(4, popups.Length);
+        foreach (var popup in popups)
+            Assert.AreEqual("{StaticResource PixelTart.Popup.V2}", popup.Elements().First().Attribute("Style")?.Value);
+        var parameter = doc.Descendants().Single(e => e.Name.LocalName == "Style" && e.Attributes().Any(a => a.Name.LocalName == "Key" && a.Value == "ParameterValue"));
+        Assert.IsTrue(parameter.Elements().Any(e => e.Attribute("Property")?.Value == "Foreground" && e.Attribute("Value")?.Value == "{DynamicResource TextValueBrush}"));
+    }
+    [TestMethod]
     public async Task AccordionAndInspectorWidthSurviveStoreReopen()
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-StageIV",Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);var path=Path.Combine(root,"preferences.json");

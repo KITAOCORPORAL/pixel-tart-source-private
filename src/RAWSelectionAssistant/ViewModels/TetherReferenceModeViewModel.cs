@@ -315,7 +315,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         try
         {
             await _schemeStore.DeleteAsync(scheme.Id, _lifetime.Token);
-            ColorSchemes.Remove(scheme); SelectedColorScheme = null; StatusText = "色彩方案已删除。";
+            var current = ColorSchemes.FirstOrDefault(item => item.Id == scheme.Id);
+            if (current is not null) ColorSchemes.Remove(current);
+            SelectedColorScheme = null; StatusText = "色彩方案已删除。";
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException)
         { HasError = true; StatusText = "删除失败；原色彩方案已保留。"; }

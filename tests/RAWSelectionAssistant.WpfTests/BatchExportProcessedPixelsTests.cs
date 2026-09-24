@@ -14,6 +14,30 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public async Task MissingReferenceImportKeepsValidFrameTests()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ReferenceFailure-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var good = CreatePng(root, "good", 90, 100, 120);
+            var dialogs = new FolderDialog(root) { Paths = [Path.Combine(root, "missing.png")] };
+            using var workspace = new ReferenceColorWorkspaceViewModel(dialogs);
+            await workspace.LoadTargetAsync(good); workspace.Editor.WorkspaceMode = "专业";
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            var frame = workspace.Editor.MatchedImage; Assert.IsNotNull(frame);
+            await workspace.Editor.ImportExternalReferenceCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.AreSame(frame, workspace.Editor.MatchedImage); Assert.IsFalse(workspace.Editor.IsBusy);
+            StringAssert.Contains(workspace.Editor.StatusText, "参考图无法读取");
+            dialogs.Paths = [good];
+            await workspace.Editor.ImportExternalReferenceCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.IsNotNull(workspace.Editor.SelectedLook);
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8));
+            Assert.IsFalse(workspace.Editor.HasError); Assert.IsFalse(workspace.Editor.IsBusy);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [TestMethod]
     public async Task CorruptTargetAndFailedExportKeepFrameAndRecoverTests()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-Recovery-" + Guid.NewGuid().ToString("N"));
