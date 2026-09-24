@@ -1,6 +1,6 @@
 # Color Studio Phase 2 Rendering Options
 
-**Status: PLANNED — BLOCKED BY PHASE 1 REGRESSION.**
+**Status: DECISION RECORDED — PROTOTYPE NOT YET INTEGRATED; BLOCKED BY PHASE 1 REGRESSION.**
 
 | Option | Complexity | Performance | Interaction | DPI / packaging | Maintenance / dependency cost |
 |---|---|---|---|---|---|
@@ -10,3 +10,4 @@
 
 Decision for planning: start with **existing WPF 3D only if a bounded prototype meets the proxy/performance gate**; otherwise use a projected 2D diagnostic fallback rather than adding a large framework. DirectX and Skia routes are not implemented in the repository today.
 
+No rendering option is claimed as production-ready in this run because no WPF scene or visual evidence was implemented.

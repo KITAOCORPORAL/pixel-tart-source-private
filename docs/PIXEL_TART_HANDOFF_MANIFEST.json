@@ -1,7 +1,7 @@
 {
   "repository": "KITAOCORPORAL/pixel-tart-source-private",
   "branch": "integration/pixel-tart-developer-preview",
-  "productSha": "07e03a824c475d4d9b132dab375ab4097181ba3c",
+  "productSha": "822093f762d31bd8393c9aac07081aede825c74c",
   "handoffContentSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
   "cleanCloneVerifiedSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
   "createdAtUtc": "2026-09-24T06:32:29.9022153Z",
@@ -16,9 +16,9 @@
   "handoffDocument": "docs/PIXEL_TART_HOME_DEV_HANDOFF.md",
   "resumePrompt": "docs/CODEX_RESUME_PROMPT.md",
   "cleanCloneVerification": "PASS",
-  "currentProductPhase": "Color Studio Phase 1 BLOCKED: native node drag insertion/drop and final UX review pending",
+  "currentProductPhase": "Color Studio Phase 1 BLOCKED; Phase 2 PARTIAL CORE: bounded OKLab proxy, cache, camera state, and sample/cluster linking complete; WPF visualization pending",
   "nativePointerRunner": "scripts/verify-color-studio-pointer.ps1",
   "nativePointerEvidence": "artifacts/color-studio-pointer/POINTER_WALKTHROUGH_MANIFEST.json",
   "nativePointerVerified": "Win32 SendInput wheel, fit, 100%, pan, boundary, sampling, compare, Esc, rapid interaction",
-  "nextProductTask": "Native node drag insertion/drop and final processing-order walkthrough; then decide Phase 1 UX-review readiness"
+  "nextProductTask": "Run same-source native node drag insertion/drop and final processing-order walkthrough; after Phase 1 closure integrate the existing Phase 2 core into a bounded WPF visualization"
 }

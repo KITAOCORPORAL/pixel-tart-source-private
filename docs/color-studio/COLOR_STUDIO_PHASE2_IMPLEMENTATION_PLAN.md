@@ -1,14 +1,14 @@
 # Color Studio Phase 2 Implementation Plan
 
-**Status: PLANNED ONLY — BLOCKED BY PHASE 1 REGRESSION. Do not start production implementation until the Phase 1 native node drag/drop gate closes.**
+**Status: CORE PARTIAL — PRODUCTION UI IMPLEMENTATION BLOCKED BY PHASE 1 REGRESSION.**
 
 ## P2.1 — bounded color-space projection
 
 - Goal: define a deterministic proxy/reduction contract over `VisualPixelBuffer` and `OklabColorSpace`.
-- Files: new phase-2 core files only after approval; existing `ReferenceColorCoreV2.cs` and `VisualPixelBuffer` are inputs.
+- Files implemented: `ColorStudioColorSpace.cs`, `ColorSpaceCamera.cs`; existing `ReferenceColorCoreV2.cs` and `VisualPixelBuffer` remain the inputs.
 - Tests: `ColorSpaceProjectionTests`, `OKLabPointMappingTests`, `ColorSpaceSamplingDeterminismTests`.
 - Evidence: source SHA, proxy size, point count, deterministic digest.
-- Exit gate: no UI integration; cancellation and memory bound pass.
+- Exit gate: no UI integration; cancellation, determinism, cache bounds, and large synthetic proxy bounds pass.
 
 ## P2.2 — canvas/sample linking
 
@@ -16,7 +16,7 @@
 - Files: `ReferenceColorWorkspaceView.xaml(.cs)`, `TetherReferenceModeViewModel`, new link state only if required.
 - Tests: canvas/link, zoom-pan, split/side-by-side, positive/negative sample tests.
 - Evidence: native or bounded interaction trace at current source SHA.
-- Exit gate: no duplicate coordinate transform and no mutation of final stack.
+- Exit gate: core linking has no duplicate coordinate transform and no stack mutation; WPF integration remains blocked.
 
 ## P2.3 — selection visualization
 
@@ -33,4 +33,3 @@
 - Tests: logical DPI, proxy performance, cancellation, accessibility/hit-target checks.
 - Evidence: 1180×720 plus wide layout, source SHA, timings and peak working set.
 - Exit gate: image remains primary, no meaningful preview stall, and release review approves scope.
-

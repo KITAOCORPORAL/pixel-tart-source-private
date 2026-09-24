@@ -46,6 +46,18 @@ public sealed class ColorSpaceProxyTests
     }
 
     [TestMethod]
+    public void LargeSyntheticProxiesStayBounded()
+    {
+        foreach (var (width, height) in new[] { (6000, 4000), (7680, 5760), (9500, 6316) })
+        {
+            var source = new VisualPixelBuffer(width, height, new byte[checked(width * height * 3)]);
+            var cloud = ColorSpaceProxyBuilder.Build(source, new(2048));
+            Assert.IsLessThanOrEqualTo(2048, cloud.Count);
+            Assert.AreEqual(checked(width * height), cloud.SourcePixelCount);
+        }
+    }
+
+    [TestMethod]
     public void ProxyIsDeterministicBoundedAndRetainsSourceRelationship()
     {
         var source = Fixture(320, 180);
