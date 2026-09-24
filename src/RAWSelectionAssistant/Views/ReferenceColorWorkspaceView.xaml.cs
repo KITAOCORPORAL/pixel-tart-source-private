@@ -31,6 +31,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private Guid? _dropDestination;
     private bool _dropAfter;
     private bool _refreshingNodeSelection;
+    private string[]? _nativeDragBeforeOrder;
+    private string? _nativeDragBeforeHash;
 
     public ReferenceColorWorkspaceView()
     {
@@ -133,6 +135,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (e.OriginalSource is DependencyObject source && (FindAncestor<Button>(source) is not null || FindAncestor<CheckBox>(source) is not null)) { _draggedNode = null; return; }
         _nodeDragPoint = e.GetPosition(AdjustmentNodeList);
         _draggedNode = (ItemsControl.ContainerFromElement(AdjustmentNodeList, e.OriginalSource as DependencyObject) as ListBoxItem)?.DataContext as ColorAdjustmentStackNode;
+        if (_draggedNode is not null && ColorStudioAcceptanceFixture.Requested)
+        {
+            _nativeDragBeforeOrder = _editor?.AdjustmentNodes.Select(node => node.Name).ToArray();
+            _nativeDragBeforeHash = ColorStudioAcceptanceFixture.HashImage(_editor?.MatchedImage);
+        }
     }
     private void OnNodeDragMove(object sender, MouseEventArgs e)
     {
@@ -164,6 +171,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var destination = (ItemsControl.ContainerFromElement(AdjustmentNodeList, e.OriginalSource as DependencyObject) as ListBoxItem)?.DataContext as ColorAdjustmentStackNode;
         if (destination is null) return;
         _editor.InsertAdjustmentNode(source.Id, _dropDestination ?? destination.Id, _dropAfter); ClearInsertion(); e.Handled = true;
+        if (ColorStudioAcceptanceFixture.Requested)
+            _ = ColorStudioAcceptanceFixture.RecordNativeNodeDragAsync(_editor, _nativeDragBeforeOrder ?? [], _nativeDragBeforeHash, source.Name, destination.Name, _dropAfter);
+        _nativeDragBeforeOrder = null; _nativeDragBeforeHash = null;
     }
     private void OnRenameKeyDown(object sender, KeyEventArgs e)
     {

@@ -104,6 +104,47 @@ function Snapshot($label) {
   $cursor = New-Object PixelTartNativeInput+POINT; $cursorText = if([PixelTartNativeInput]::GetCursorPos([ref]$cursor)){"$($cursor.X),$($cursor.Y)"}else{''}
   return [pscustomobject]@{Label=$label;ZoomText=if($zoom){$zoom.Current.Name}else{''};SamplingVisible=($null -ne $sampling);Foreground=[PixelTartNativeInput]::GetForegroundWindow().ToInt64();Cursor=$cursorText;FitButton=if($fit){Get-Rect $fit}else{$null};ActualButton=if($actual){Get-Rect $actual}else{$null};CapturedAtUtc=[DateTime]::UtcNow.ToString('o')}
 }
+function Get-NodeRows {
+  $list = Get-Element '调整节点列表'
+  if (-not $list) { return @() }
+  $condition = New-Object System.Windows.Automation.PropertyCondition([System.Windows.Automation.AutomationElement]::ControlTypeProperty,[System.Windows.Automation.ControlType]::ListItem)
+  $items = $list.FindAll([System.Windows.Automation.TreeScope]::Children,$condition)
+  return @($items)
+}
+function Get-NodeRowSnapshot {
+  $rows = Get-NodeRows; $result = [System.Collections.Generic.List[object]]::new()
+  for ($index = 0; $index -lt $rows.Count; $index++) {
+    $row = $rows[$index]; $r = Get-Rect $row
+    $texts = @($row.FindAll([System.Windows.Automation.TreeScope]::Descendants,(New-Object System.Windows.Automation.PropertyCondition([System.Windows.Automation.AutomationElement]::ControlTypeProperty,[System.Windows.Automation.ControlType]::Text))) | ForEach-Object { $_.Current.Name } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    $result.Add([pscustomobject]@{Index=$index;Name=$row.Current.Name;Rect=$r;Texts=$texts})
+  }
+  return $result
+}
+function Get-NodeNames {
+  return @(Get-NodeRowSnapshot | ForEach-Object {
+    if ($_.Name -match 'Name = ([^,]+), Enabled') { $Matches[1].Trim() } else { ($_.Texts | Where-Object { $_ -notin @('≡','◎','◌','≋','▣','⋯') } | Select-Object -First 1) }
+  })
+}
+function Press-Modified([uint16]$modifier,[uint16]$key) {
+  [PixelTartNativeInput]::Key($modifier) | Out-Null; Start-Sleep -Milliseconds 80
+  [PixelTartNativeInput]::Key($key) | Out-Null; Start-Sleep -Milliseconds 80
+  [PixelTartNativeInput]::Key($key,$true) | Out-Null; Start-Sleep -Milliseconds 80
+  [PixelTartNativeInput]::Key($modifier,$true) | Out-Null; Start-Sleep -Milliseconds 400
+}
+function Drag-Node([int]$sourceIndex,[int]$destinationIndex,[bool]$after,[string]$id) {
+  $beforeRows = @(Get-NodeRowSnapshot); if ($beforeRows.Count -lt 4) { throw "Expected at least four visible node rows, found $($beforeRows.Count)." }
+  $source = $beforeRows[$sourceIndex]; $destination = $beforeRows[$destinationIndex]
+  $sx=[int]($source.Rect.X+$source.Rect.W/2); $sy=[int]($source.Rect.Y+$source.Rect.H/2)
+  $tx=[int]($destination.Rect.X+$destination.Rect.W/2); $fraction = if($after){.78}else{.22}; $ty=[int]($destination.Rect.Y+($destination.Rect.H * $fraction))
+  Move-To $sx $sy; [PixelTartNativeInput]::Mouse([PixelTartNativeInput]::MOUSEEVENTF_LEFTDOWN) | Out-Null; Start-Sleep -Milliseconds 120
+  [PixelTartNativeInput]::Move($sx+2,$sy+2) | Out-Null; Start-Sleep -Milliseconds 180
+  $belowThreshold = @(Get-NodeNames)
+  [PixelTartNativeInput]::Move($tx,$ty) | Out-Null; Start-Sleep -Milliseconds 220
+  $during = Snapshot "$id-during"; $duringRows = @(Get-NodeRowSnapshot); $duringShot = Capture "NODE_${id}_DURING"
+  [PixelTartNativeInput]::Mouse([PixelTartNativeInput]::MOUSEEVENTF_LEFTUP) | Out-Null; Start-Sleep -Milliseconds 600
+  $afterNames = @(Get-NodeNames); $afterShot = Capture "NODE_${id}_AFTER"
+  [pscustomobject]@{TestId=$id;SourceIndex=$sourceIndex;DestinationIndex=$destinationIndex;After=$after;Start=@{X=$sx;Y=$sy};Threshold=@{X=$sx+2;Y=$sy+2};DragOver=@{X=$tx;Y=$ty};Drop=@{X=$tx;Y=$ty};BeforeOrder=@($beforeRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });BelowThresholdOrder=$belowThreshold;DuringOrder=@($duringRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });During=$during;AfterOrder=$afterNames;DuringScreenshot=$duringShot;AfterScreenshot=$afterShot}
+}
 
 $started=[DateTime]::UtcNow
 $p=Start-Process -FilePath $exe -ArgumentList '--acceptance-color-studio','--studio-scenario=01' -PassThru
@@ -119,6 +160,43 @@ $wr=Get-Rect $workspace; $fitAnchor=Get-Button '适合'; if(-not $fitAnchor){thr
 # The central canvas is the production panel above the zoom toolbar. Its left edge
 # is aligned with the toolbar and its right edge ends before the right inspector.
 $canvas=[pscustomobject]@{X=$fr.X;Y=$wr.Y+110;W=1100;H=[math]::Max(300,$fr.Y-($wr.Y+110))}; $cx=[int]($canvas.X+$canvas.W/2);$cy=[int]($canvas.Y+$canvas.H/2)
+if ($Scenario -eq 2) {
+  $nodeSnapshot = Get-NodeRowSnapshot
+  $nodeSnapshot | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $artifactRoot 'NODE_UIA_DIAGNOSTIC.json') -Encoding UTF8
+  if(-not $KeepApp){Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue}
+  Write-Host "Node UIA diagnostic written to $artifactRoot"
+  exit 0
+}
+if ($Scenario -eq 3) {
+  $dragCases = @(
+    [pscustomobject]@{Id='N1-N2';Source=0;Destination=1;After=$true},
+    [pscustomobject]@{Id='N1-N3';Source=0;Destination=2;After=$false},
+    [pscustomobject]@{Id='LAST-FIRST';Source=3;Destination=0;After=$false},
+    [pscustomobject]@{Id='MIDDLE-LAST';Source=1;Destination=3;After=$true},
+    [pscustomobject]@{Id='ADJACENT';Source=1;Destination=2;After=$true},
+    [pscustomobject]@{Id='NOOP';Source=1;Destination=1;After=$false}
+  )
+  $dragResults=[System.Collections.Generic.List[object]]::new()
+  foreach($case in $dragCases){
+    foreach($repeat in 1..3){
+      $result=Drag-Node $case.Source $case.Destination $case.After "$($case.Id)-$repeat"
+      $result | Add-Member -NotePropertyName Repetition -NotePropertyValue $repeat
+      $dragResults.Add($result)
+      if($case.Id -eq 'N1-N2' -and $repeat -eq 1){
+        Press-Modified 0x11 0x5A; $result | Add-Member -NotePropertyName UndoOrder -NotePropertyValue @((Get-NodeNames))
+        Press-Modified 0x11 0x59; $result | Add-Member -NotePropertyName RedoOrder -NotePropertyValue @((Get-NodeNames))
+      }
+      Press-Modified 0x11 0x5A
+      Start-Sleep -Milliseconds 400
+    }
+  }
+  $dragReport=[pscustomobject]@{ProductSourceSha=(git rev-parse HEAD).Trim();InputMethod='Win32 SendInput';ProductionWindow=$hwnd;FixtureId=$state.FixtureId;StartedAtUtc=$started.ToString('o');CompletedAtUtc=[DateTime]::UtcNow.ToString('o');ThresholdPixels=2;Cases=$dragResults}
+  $dragReport | ConvertTo-Json -Depth 20 | Set-Content (Join-Path $artifactRoot 'NODE_DRAG_WALKTHROUGH_MANIFEST.json') -Encoding UTF8
+  @('# Native Node Drag Walkthrough','',"ProductSourceSha: $($dragReport.ProductSourceSha)","Input method: Win32 SendInput",'',($dragResults | ForEach-Object { "- $($_.TestId): before=$($_.BeforeOrder -join ' → '); after=$($_.AfterOrder -join ' → '); belowThreshold=$($_.BelowThresholdOrder -join ' → '); duringScreenshot=$($_.DuringScreenshot)" })) | Set-Content (Join-Path $artifactRoot 'NODE_DRAG_WALKTHROUGH_REPORT.md') -Encoding UTF8
+  if(-not $KeepApp){Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue}
+  Write-Host "Node drag evidence written to $artifactRoot"
+  exit 0
+}
 $records=[System.Collections.Generic.List[object]]::new()
 function Run-Test($id,$label,[scriptblock]$action,[string]$evidence='') { [PixelTartNativeInput]::Activate([IntPtr]$hwnd)|Out-Null; $before=Snapshot "$id-before"; & $action; $after=Snapshot "$id-after"; $result='PASS'; if($id -eq 'A-WHEEL' -and $script:wheelMid.ZoomText -eq $before.ZoomText){$result='BLOCKED'}; if($id -match 'EYEDROPPER|NEGATIVE' -and -not $after.SamplingVisible -and $id -ne 'M-ESC'){$result='BLOCKED'}; $records.Add([pscustomobject]@{TestId=$id;InputSequence=$label;BeforeState=$before;DuringState=$script:wheelMid;AfterState=$after;Result=$result;EvidenceFile=$evidence}) }
 Run-Test 'A-WHEEL' 'move canvas; wheel up; inspect; wheel down' { Move-To $cx $cy; Wheel 120; $script:wheelMid=Snapshot 'A-WHEEL-mid'; $shot=Capture '01_WHEEL_ZOOM_AFTER'; Wheel -120; $script:lastShot=$shot } $script:lastShot

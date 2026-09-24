@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Text.Json;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace RAWSelectionAssistant.Services;
 
@@ -83,11 +84,41 @@ public static class ColorStudioAcceptanceFixture
             WorkspaceMode = editor.WorkspaceMode, SelectedNodeType = editor.SelectedAdjustmentNode?.Type.ToString(),
             ViewMode = editor.EffectiveViewMode, Target = workspace.TargetName, HasTarget = workspace.HasTarget,
             Stack = editor.AdjustmentNodes.Select(n => new { n.Name, Type = n.Type.ToString(), n.Enabled }),
+            MatchedImageSha256 = HashImage(editor.MatchedImage),
             SourcePixelSize = new[] { editor.SourceImage!.PixelWidth, editor.SourceImage.PixelHeight },
             ProcessingStatus = editor.StatusText,
             MainWindowHandle = new System.Windows.Interop.WindowInteropHelper(window).Handle.ToInt64()
         }, new JsonSerializerOptions { WriteIndented = true }));
         await File.WriteAllTextAsync(Path.Combine(folder, "ready.txt"), $"{Id}\n{Environment.ProcessId}\n{window.Width}x{window.Height}");
+    }
+    public static string? HashImage(BitmapSource? image)
+    {
+        if (image is null) return null;
+        var bgra = HistogramService.EnsureBgra32(image); var bytes = new byte[bgra.PixelWidth * bgra.PixelHeight * 4];
+        bgra.CopyPixels(bytes, bgra.PixelWidth * 4, 0); return Convert.ToHexString(SHA256.HashData(bytes));
+    }
+    public static async Task RecordNativeNodeDragAsync(TetherReferenceModeViewModel editor, IReadOnlyList<string> beforeOrder, string? beforeHash, string sourceName, string destinationName, bool after)
+    {
+        if (!Requested) return;
+        var deadline = Stopwatch.StartNew();
+        while (deadline.Elapsed < TimeSpan.FromSeconds(20) && !editor.IsSettled) await Task.Delay(75).ConfigureAwait(true);
+        var root = Path.Combine(AppDataPaths.Root, "ColorStudioFixture"); Directory.CreateDirectory(root);
+        var path = Path.Combine(root, "native-node-drag-events.jsonl");
+        var entry = new
+        {
+            ProductSourceSha = StartupDiagnostics.ProductSourceSha,
+            RecordedAtUtc = DateTimeOffset.UtcNow,
+            SourceNode = sourceName,
+            DestinationNode = destinationName,
+            DropAfter = after,
+            BeforeOrder = beforeOrder,
+            BeforeOutputSha256 = beforeHash,
+            AfterOrder = editor.AdjustmentNodes.Select(node => node.Name).ToArray(),
+            AfterOutputSha256 = HashImage(editor.MatchedImage),
+            Settled = editor.IsSettled,
+            Status = editor.StatusText
+        };
+        await File.AppendAllTextAsync(path, JsonSerializer.Serialize(entry) + Environment.NewLine).ConfigureAwait(true);
     }
     private static async Task PrepareScenarioAsync(ReferenceColorWorkspaceViewModel workspace, Window window)
     {
