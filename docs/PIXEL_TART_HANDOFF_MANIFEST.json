@@ -1,0 +1,17 @@
+{
+  "repository": "KITAOCORPORAL/pixel-tart-source-private",
+  "branch": "integration/pixel-tart-developer-preview",
+  "productSha": "be4779bc7e83c7b1046a7fd1e99aea63b9587a80",
+  "handoffSha": "TO_BE_REPLACED_AFTER_COMMIT",
+  "createdAtUtc": "2026-09-24T12:00:00Z",
+  "dotnetSdk": "10.0.302 (global.json; latestPatch in 10.0.302 band)",
+  "targetFramework": "net10.0; net10.0-windows10.0.19041.0",
+  "runtimeIdentifier": "win-x64",
+  "os": "Windows 10 19045+",
+  "bootstrapScript": "scripts/bootstrap-home.ps1",
+  "verificationScript": "scripts/verify-home-dev.ps1",
+  "handoffDocument": "docs/PIXEL_TART_HOME_DEV_HANDOFF.md",
+  "resumePrompt": "docs/CODEX_RESUME_PROMPT.md",
+  "cleanCloneVerification": "TO_BE_REPLACED_AFTER_CLEAN_CLONE",
+  "nextPhase": "Color Studio Phase 1 Final UX Closure"
+}

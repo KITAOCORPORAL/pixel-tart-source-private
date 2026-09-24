@@ -1,11 +1,12 @@
 param(
-    [string]$Dotnet = 'D:\AI AGENT\.dotnet\dotnet.exe',
+    [string]$Dotnet = '',
     [string]$Poppler = 'C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\poppler',
     [string]$Destination,
     [string]$CandidateGate,
     [Parameter(Mandatory)][string]$Installer,
     [Parameter(Mandatory)][string]$OldInstaller
 )
+if (-not $Dotnet) { $Dotnet = (Get-Command dotnet -ErrorAction Stop).Source }
 $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if (!$CandidateGate -or !(Test-Path -LiteralPath $CandidateGate)) { throw 'Candidate Gate evidence required. No further user debug kit may be built.' }

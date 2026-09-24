@@ -1,6 +1,6 @@
 param()
 $ErrorActionPreference = 'Stop'
-$dotnet = 'D:\AI AGENT\.dotnet\dotnet.exe'
+$dotnet = (Get-Command dotnet -ErrorAction Stop).Source
 $publishDirectory = Join-Path $PSScriptRoot 'artifacts\releases\2.3.0\publish\rc8-win-x64'
 if (Test-Path -LiteralPath $publishDirectory) { Remove-Item -LiteralPath $publishDirectory -Recurse -Force }
 & $dotnet publish "$PSScriptRoot\src\RAWSelectionAssistant\RAWSelectionAssistant.csproj" -c Release -r win-x64 --self-contained true -p:Platform=x64 -p:PublishSingleFile=false -p:DebugType=None -p:DebugSymbols=false -o $publishDirectory --no-restore

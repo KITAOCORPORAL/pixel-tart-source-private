@@ -1,4 +1,5 @@
-param([Parameter(Mandatory)][string]$Destination,[Parameter(Mandatory)][string]$Installer,[Parameter(Mandatory)][string]$OldInstaller,[Parameter(Mandatory)][string]$PopplerDirectory,[string]$Dotnet='D:\AI AGENT\.dotnet\dotnet.exe')
+param([Parameter(Mandatory)][string]$Destination,[Parameter(Mandatory)][string]$Installer,[Parameter(Mandatory)][string]$OldInstaller,[Parameter(Mandatory)][string]$PopplerDirectory,[string]$Dotnet='')
+if (-not $Dotnet) { $Dotnet = (Get-Command dotnet -ErrorAction Stop).Source }
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $Destination=[IO.Path]::GetFullPath($Destination)

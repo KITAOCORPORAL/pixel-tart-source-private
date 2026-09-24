@@ -2,12 +2,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath($PSScriptRoot)
-$dotnetCandidates = @(
-    'D:\AI AGENT\.dotnet\dotnet.exe',
-    (Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet-sdk-10\dotnet.exe')
-)
-$dotnet = $dotnetCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
-if (-not $dotnet) { $dotnet = (Get-Command dotnet -ErrorAction Stop).Source }
+$dotnet = (Get-Command dotnet -ErrorAction Stop).Source
 
 $publishRoot = [IO.Path]::GetFullPath((Join-Path $repoRoot 'artifacts\releases\2.3.0\publish'))
 $publishDirectory = [IO.Path]::GetFullPath((Join-Path $publishRoot 'rc12-win-x64'))

@@ -1,8 +1,7 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath($PSScriptRoot)
-$dotnet = 'D:\AI AGENT\.dotnet\dotnet.exe'
-if (-not (Test-Path -LiteralPath $dotnet)) { $dotnet = (Get-Command dotnet -ErrorAction Stop).Source }
+$dotnet = (Get-Command dotnet -ErrorAction Stop).Source
 $productSourceSha = (& git -C $repoRoot rev-parse HEAD).Trim()
 $buildId = '2.3.0-dev.' + $productSourceSha.Substring(0,7)
 if (@(& git -C $repoRoot status --porcelain -- src tests installer build_stage_v2_installable.ps1).Count -gt 0) { throw 'Product, tests and packaging must be committed before packaging.' }

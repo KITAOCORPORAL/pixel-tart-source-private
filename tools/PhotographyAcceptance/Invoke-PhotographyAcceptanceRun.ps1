@@ -4,7 +4,7 @@ param([string]$OutputRoot = '', [string]$Dotnet = '', [int]$CoreTimeoutSeconds =
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-if (-not $Dotnet) { $Dotnet = if ($env:PIXEL_TART_DOTNET) { $env:PIXEL_TART_DOTNET } else { 'C:UsersAdministrator/.dotnet10/dotnet.exe' } }
+if (-not $Dotnet) { $Dotnet = if ($env:PIXEL_TART_DOTNET) { $env:PIXEL_TART_DOTNET } else { (Get-Command dotnet -ErrorAction Stop).Source } }
 if (-not (Test-Path -LiteralPath $Dotnet)) { throw "SDK executable missing: $Dotnet" }
 $source = (& git -C $repo rev-parse HEAD).Trim()
 $branch = (& git -C $repo branch --show-current).Trim()
