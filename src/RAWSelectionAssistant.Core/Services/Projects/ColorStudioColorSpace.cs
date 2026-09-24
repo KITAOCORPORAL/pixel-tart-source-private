@@ -34,6 +34,51 @@ public sealed record ColorSpaceCloud(
     public int Count => Points.Count;
 }
 
+public enum ColorSpaceMarkerKind { None, PositiveSample, NegativeSample, SelectedCluster }
+
+public readonly record struct ColorSpaceSelection(ColorSpaceMarkerKind Kind, int PointIndex)
+{
+    public static ColorSpaceSelection None => new(ColorSpaceMarkerKind.None, -1);
+}
+
+/// <summary>Links an already-mapped working color to a cloud point without owning canvas coordinates.</summary>
+public static class ColorSpaceLinking
+{
+    public static int FindNearest(ColorSpaceCloud cloud, OklabColor color)
+    {
+        ArgumentNullException.ThrowIfNull(cloud);
+        if (cloud.Points.Count == 0) return -1;
+        var best = 0; var distance = double.PositiveInfinity;
+        for (var index = 0; index < cloud.Points.Count; index++)
+        {
+            var point = cloud.Points[index].Lab;
+            var candidate = SquaredDistance(point, color);
+            if (candidate < distance) { distance = candidate; best = index; }
+        }
+        return best;
+    }
+
+    public static IReadOnlyList<ColorSpaceSelection> MarkSamples(ColorSpaceCloud cloud, IEnumerable<VisualRgb24> positive, IEnumerable<VisualRgb24> negative)
+    {
+        ArgumentNullException.ThrowIfNull(cloud); ArgumentNullException.ThrowIfNull(positive); ArgumentNullException.ThrowIfNull(negative);
+        var markers = new List<ColorSpaceSelection>();
+        foreach (var sample in positive) { var index = FindNearest(cloud, OklabColorSpace.FromSrgb(sample)); if (index >= 0) markers.Add(new(ColorSpaceMarkerKind.PositiveSample, index)); }
+        foreach (var sample in negative) { var index = FindNearest(cloud, OklabColorSpace.FromSrgb(sample)); if (index >= 0) markers.Add(new(ColorSpaceMarkerKind.NegativeSample, index)); }
+        return markers;
+    }
+
+    public static IReadOnlyList<int> SelectCluster(ColorSpaceCloud cloud, int pointIndex, double radius = .06)
+    {
+        ArgumentNullException.ThrowIfNull(cloud);
+        if (pointIndex < 0 || pointIndex >= cloud.Points.Count || !double.IsFinite(radius) || radius < 0) return [];
+        var center = cloud.Points[pointIndex].Lab; var squared = radius * radius;
+        return cloud.Points.Select((point, index) => (point, index)).Where(item => SquaredDistance(item.point.Lab, center) <= squared).Select(item => item.index).ToArray();
+    }
+
+    private static double SquaredDistance(OklabColor left, OklabColor right) =>
+        Math.Pow(left.L - right.L, 2) + Math.Pow(left.A - right.A, 2) + Math.Pow(left.B - right.B, 2);
+}
+
 public readonly record struct ColorSpaceProxyCacheKey(
     string AssetIdentity,
     string ImageVersion,
