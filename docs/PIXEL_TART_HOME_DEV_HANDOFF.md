@@ -6,17 +6,17 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: `d7848d1e3b9b3f218f0434278305fddfec59f006`
-- Last commit: `d7848d1 docs(dev): record final verification commit`
+- Product SHA at handoff: `07e03a824c475d4d9b132dab375ab4097181ba3c`
+- Last commit: `07e03a8 test(color): close production ux gate evidence`
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 
 ## B. Current development phase
 
 - Photography Product Development Gate: **PASS**. See `docs/PIXEL_TART_PHOTOGRAPHY_INTERACTION_CLOSURE.md`; physical DPI remains a release hardware gate.
-- Color Studio Phase 1: **BLOCKED / substantial implementation complete**. See `docs/COLOR_STUDIO_PHASE1_CLOSURE.md`. Do not relabel this as READY.
+- Color Studio Phase 1: **BLOCKED / substantial implementation complete**. See `docs/COLOR_STUDIO_PHASE1_CLOSURE.md` and `docs/COLOR_STUDIO_PHASE1_NATIVE_PIXEL_QA.md`. Do not relabel this as READY.
 - Completed: shared zoom/pan model and sampling mapping, professional node stack, scheme persistence/migration, selected-node batch sync, switching/cancellation/retry paths, shared preview/export pipeline, targeted regression and portable evidence records.
-- Remaining Phase 1 gates: native drag insertion and final zoom/pan walkthrough; production failure/retry visual walkthrough; strict native-pixel/full-size QA, settled roundtrip capture, and remaining logical-200% scheme/error coverage.
+- Remaining Phase 1 gate: native pointer walkthrough (25/29 are explicitly hook/state evidence; 26–28 are state-driven production fixtures). Physical DPI remains a release-hardware gate.
 - Phase 2: 3D Color Space and cluster visualization are `DEFERRED_TO_PHASE_2`.
 
 ## C. Next task
@@ -50,7 +50,7 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 
 - Core and targeted WPF Color Studio/Photography suites are recorded in the current evidence documents and latest commits.
 - Release x64 product build was verified from this source with .NET SDK 10.0.401 (compatible with the 10.0.302 minimum feature band): 0 warnings, 0 errors.
-- Logical DPI coverage is development evidence; physical-display validation is not claimed.
+- Logical DPI coverage is development evidence; refreshed scheme/error/node-overflow states are recorded, but physical-display validation is not claimed.
 - Performance follow-up is P2 and non-blocking; historical baselines are not silently treated as current.
 
 ## H. Known issues
