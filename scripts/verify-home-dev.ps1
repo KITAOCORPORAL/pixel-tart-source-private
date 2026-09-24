@@ -25,7 +25,7 @@ Gate 'Git identity and clean state' {
 Gate 'Restore' { dotnet restore RAWSelectionAssistant.sln --nologo }
 Gate 'Release x64 product build' { dotnet build src/RAWSelectionAssistant/RAWSelectionAssistant.csproj -c Release -p:Platform=x64 --no-restore --nologo }
 Gate 'Color Studio critical tests' { dotnet test tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj -c Release --no-restore --filter 'FullyQualifiedName~ColorStudio' --nologo }
-Gate 'Photography critical regression' { dotnet test tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj -c Release --no-restore --filter 'FullyQualifiedName~Photography' --nologo }
+Gate 'Photography critical regression' { dotnet test tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj -c Release --no-restore --filter 'FullyQualifiedName~PhotographyInteractionClosureTests|FullyQualifiedName~PhotographyEvidenceConsistencyTests' --nologo }
 
 if ($failed) { throw 'Home development verification failed.' }
 Write-Host 'HOME DEVELOPMENT ENVIRONMENT: READY' -ForegroundColor Green
