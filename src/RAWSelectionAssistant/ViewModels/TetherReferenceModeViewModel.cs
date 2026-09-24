@@ -8,7 +8,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
+public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDisposable
 {
     private readonly ReferenceLookStore _store;
     private readonly ColorStudioSchemeStore _schemeStore;
@@ -64,11 +64,10 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public bool IsCancelling => State == ProcessingState.Cancelling;
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
-    private void BeginBusy() { _busyOperations++; State = ProcessingState.RenderingHighQuality; }
+    private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; }
     private void EndBusy()
     {
-        _busyOperations = Math.Max(0, _busyOperations - 1);
-        if (_busyOperations != 0) return;
+        if (Interlocked.Decrement(ref _busyOperations) != 0) return;
         if (State == ProcessingState.Cancelling) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; }
         else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
     }
@@ -181,17 +180,27 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public string ColorSchemeName { get; set; } = "新色彩方案";
     public IReadOnlyList<string> WorkspaceModes { get; } = ["简洁", "专业"];
     public IReadOnlyList<string> WorkspaceSections { get; } = ["调色", "仿色", "预设", "胶片", "输出"];
-    public string WorkspaceSection { get => _workspaceSection; set => SetProperty(ref _workspaceSection, value); }
+    public string WorkspaceSection { get => _workspaceSection; set { if (SetProperty(ref _workspaceSection, value)) OnPropertyChanged(nameof(IsNodeSection)); } }
     public string WorkspaceMode { get => _workspaceMode; set { if (SetProperty(ref _workspaceMode, value)) { if (value == "专业") EnsureProfessionalStack(); OnPropertyChanged(nameof(IsSimpleMode)); OnPropertyChanged(nameof(IsProMode)); } } }
     public bool IsSimpleMode => WorkspaceMode == "简洁";
     public bool IsProMode => WorkspaceMode == "专业";
+    public bool IsNodeSection => WorkspaceSection is "调色" or "仿色";
     public bool FocusView { get => _focusView; set { if (SetProperty(ref _focusView, value)) { OnPropertyChanged(nameof(IsContextVisible)); OnPropertyChanged(nameof(IsLeftRailVisible)); } } }
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
     public bool IsContextVisible => !FocusView && ContextRailOpen;
     public bool IsLeftRailVisible => !FocusView;
     public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public IReadOnlyList<ColorAdjustmentStackNode> AdjustmentNodes => AdjustmentStack.Nodes;
-    public ColorAdjustmentStackNode? SelectedAdjustmentNode { get => AdjustmentStack.Nodes.FirstOrDefault(node => node.Id == _selectedAdjustmentNodeId); set { _selectedAdjustmentNodeId = value?.Id; OnPropertyChanged(); RaiseAdjustmentCommands(); } }
+    public ColorAdjustmentStackNode? SelectedAdjustmentNode
+    {
+        get => AdjustmentStack.Nodes.FirstOrDefault(node => node.Id == _selectedAdjustmentNodeId);
+        set
+        {
+            // ItemsSource replacement transiently clears WPF selection. Keep the canonical ID when it still exists.
+            if (value is null && AdjustmentStack.Nodes.Any(node => node.Id == _selectedAdjustmentNodeId)) return;
+            _selectedAdjustmentNodeId = value?.Id; OnPropertyChanged(); RaiseAdjustmentCommands();
+        }
+    }
     public bool SelectedNodeEnabled { get => SelectedAdjustmentNode?.Enabled == true; set { if (SelectedAdjustmentNode is { } selected && value != selected.Enabled) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Enabled = value } : node).ToArray()); OnPropertyChanged(); } }
     public string SelectedNodeName { get => SelectedAdjustmentNode?.Name ?? string.Empty; set { if (!string.Equals(value, SelectedNodeName, StringComparison.Ordinal)) RenameSelectedAdjustmentNode(value); } }
     public bool IsRenamingNode { get; set; }
@@ -272,6 +281,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         SaveColorSchemeAsCommand = new AsyncRelayCommand(_ => SaveColorSchemeAsync(true));
         DeleteColorSchemeCommand = new AsyncRelayCommand(_ => DeleteColorSchemeAsync(), _ => SelectedColorScheme is not null);
         ApplyColorSchemeCommand = new RelayCommand(_ => ApplyColorScheme(), _ => SelectedColorScheme is not null);
+        InitializeSchemeInteractions();
     }
     private void EnsureProfessionalStack()
     {
@@ -287,14 +297,14 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     {
         if (AdjustmentStack.Nodes.Count == 0) EnsureProfessionalStack();
         var name = string.IsNullOrWhiteSpace(ColorSchemeName) ? "新色彩方案" : ColorSchemeName.Trim();
-        var scheme = new ColorStudioSchemeV2(saveAs || SelectedColorScheme is null ? Guid.NewGuid() : SelectedColorScheme.Id,
+        var scheme = new ColorStudioSchemeV2(saveAs || _appliedColorScheme is null ? Guid.NewGuid() : _appliedColorScheme.Id,
             name, AdjustmentStack.DeepClone(), DateTimeOffset.UtcNow);
         try
         {
             await _schemeStore.SaveAsync(scheme, _lifetime.Token);
             var old = ColorSchemes.FirstOrDefault(item => item.Id == scheme.Id); if (old is not null) ColorSchemes.Remove(old);
             ColorSchemes.Insert(0, scheme); SelectedColorScheme = scheme; _persistedStack = scheme.Stack.DeepClone();
-            StatusText = "色彩方案已保存。";
+            _appliedColorScheme = scheme; HasError = false; NotifySchemeState(); StatusText = "色彩方案已保存。";
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException)
         { HasError = true; StatusText = "色彩方案未能保存；原文件已保留。"; }
@@ -315,6 +325,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         if (SelectedColorScheme is not { } scheme) return;
         AdjustmentStack = scheme.Stack.DeepClone(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id;
         _persistedStack = scheme.Stack.DeepClone(); ColorSchemeName = scheme.Name; OnPropertyChanged(nameof(SelectedAdjustmentNode));
+        _appliedColorScheme = scheme; NotifySchemeState();
         _ = RenderAsync(); StatusText = "色彩方案已应用。";
     }
     private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change)
@@ -357,6 +368,18 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             var list = nodes.ToList(); var from = list.FindIndex(node => node.Id == sourceId); var to = list.FindIndex(node => node.Id == destinationId);
             if (from < 0 || to < 0) return nodes;
             var moving = list[from]; list.RemoveAt(from); list.Insert(to, moving); return list;
+        });
+    }
+    public void InsertAdjustmentNode(Guid sourceId, Guid destinationId, bool after)
+    {
+        if (sourceId == destinationId) return;
+        ChangeStack(nodes =>
+        {
+            var list = nodes.ToList(); var source = list.Find(node => node.Id == sourceId);
+            if (source is null || list.All(node => node.Id != destinationId)) return nodes;
+            list.Remove(source);
+            var index = list.FindIndex(node => node.Id == destinationId);
+            list.Insert(index + (after ? 1 : 0), source); return list;
         });
     }
     private void ResetSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? selected with { NumericParameters = new Dictionary<string, double>(), Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>(), FilmSettings = selected.Type == ColorStudioNodeType.Film ? new PixelTartFilmSettings() : null } : node).ToArray()); }
@@ -464,7 +487,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public ReferenceSourceCategory SelectedSourceCategory { get => _selectedSourceCategory; set { if (SetProperty(ref _selectedSourceCategory, value)) RefreshSourceChoices(); } }
     public ReferenceLook? SelectedLook { get => _selectedLook; set { if (_refreshingLookChoices && value is null) return; if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); CopyFilm(value?.Film ?? new()); if (AdjustmentStack.Nodes.Count > 0 && value is not null) SyncStackFromSimple(); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
-    public BitmapSource? MatchedImage { get => _matchedImage; private set => SetProperty(ref _matchedImage, value); }
+    public BitmapSource? MatchedImage { get => _matchedImage; private set { if (SetProperty(ref _matchedImage, value)) OnPropertyChanged(nameof(EffectiveViewMode)); } }
     public BitmapSource? SourceImage => _source;
     public bool HasSessionAdjustment => (_persistedLook is not null && _selectedLook is not null &&
         (!_selectedLook.Parameters.Equals(_persistedLook.Parameters) || !FilmSettings.Equals(_persistedLook.Film ?? new()))) ||
@@ -483,6 +506,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     public bool ShowMatched => !_originalHeld && Enabled && MatchedImage is not null && (ViewMode == "仿色" || ViewMode == "仿色结果");
     public bool ShowSplit => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "左右对比";
     public bool ShowSideBySide => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "并排对比";
+    public string EffectiveViewMode => ShowOriginal ? "原片" : ViewMode;
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
 
     public double MatchStrength { get => SelectedLook?.Parameters.MatchStrength ?? _match; set => SetParameter(value, p => p with { MatchStrength = value }, ref _match, "match_strength"); }
@@ -672,6 +696,8 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
     private async Task RenderAsync(CancellationToken outer = default, bool interactive = false)
     {
         var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
+        var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
+        var selection = ShowSelection ? SelectedAdjustmentNode : null;
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);
         if (!Enabled || source is null || (look is null && AdjustmentStack.Nodes.Count == 0)) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
@@ -683,14 +709,14 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         try
         {
             BitmapSource image;
-            if (AdjustmentStack.Nodes.Count > 0)
+            if (stack.Nodes.Count > 0)
             {
                 StatusText = "正在应用调整节点…";
-                image = await Task.Run(() => ColorStudioBitmapRenderer.Render(source, AdjustmentStack, look, renderToken), renderToken);
-                if (ShowSelection && SelectedAdjustmentNode is { Type: ColorStudioNodeType.ColorRange } selected)
+                image = await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, look, renderToken), renderToken);
+                if (selection is { Type: ColorStudioNodeType.ColorRange } selected)
                 {
                     StatusText = "正在显示选区…";
-                    image = await Task.Run(() => ColorStudioBitmapRenderer.RenderSelection(source, AdjustmentStack, look, selected, renderToken), renderToken);
+                    image = await Task.Run(() => ColorStudioBitmapRenderer.RenderSelection(source, stack, look, selected, renderToken), renderToken);
                 }
             }
             else
@@ -703,7 +729,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
-        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "仿色未完成，保留上一张有效预览。"; RaiseViewProperties(); } }
+        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
     }
     private static BitmapSource CreateInteractiveProxy(BitmapSource source, int maximumEdge)
@@ -726,7 +752,7 @@ public sealed class TetherReferenceModeViewModel : ObservableObject, IDisposable
         FilmSettings = value;
         foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed) }) OnPropertyChanged(name);
     }
-    private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide)})OnPropertyChanged(name);}
+    private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide),nameof(EffectiveViewMode)})OnPropertyChanged(name);}
     public void Dispose(){_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();}
 }
 

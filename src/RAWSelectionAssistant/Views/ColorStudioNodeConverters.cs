@@ -26,9 +26,24 @@ public sealed class ColorStudioNodeStrengthConverter : IValueConverter
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }
 
+public sealed class ColorStudioNodeIconConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is ColorAdjustmentStackNode node
+        ? node.Type switch { ColorStudioNodeType.ReferenceMatch => "◎", ColorStudioNodeType.ColorRange => "◌", ColorStudioNodeType.TransitionBlend => "≋", ColorStudioNodeType.Film => "▣", _ => "•" }
+        : "•";
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
+}
+
 public sealed class ColorStudioSampleBrushConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         value is VisualRgb24 rgb ? new SolidColorBrush(Color.FromRgb(rgb.R, rgb.G, rgb.B)) : Brushes.Transparent;
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
+}
+
+public sealed class ColorStudioSchemeSummaryConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        value is IEnumerable<ColorAdjustmentStackNode> nodes ? string.Join(" · ", nodes.Select(node => node.Name)) : "";
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }

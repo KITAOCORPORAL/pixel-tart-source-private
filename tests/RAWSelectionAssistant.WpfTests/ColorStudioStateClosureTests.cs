@@ -289,6 +289,160 @@ public sealed class ColorStudioStateClosureTests
         image.Freeze(); return image;
     }
 
+    [TestMethod]
+    public void RapidSchemeSwitchLastWinsTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(55)).GetAwaiter().GetResult(); editor.Enabled = true;
+        Assert.IsTrue(SpinWait.SpinUntil(() => !editor.IsBusy, TimeSpan.FromSeconds(5)));
+        var started = new System.Collections.Concurrent.ConcurrentQueue<TaskCompletionSource>();
+        var frames = new System.Collections.Concurrent.ConcurrentQueue<BitmapSource>();
+        editor.PostProcessor = async (image, _) =>
+        {
+            var gate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            frames.Enqueue(image); started.Enqueue(gate); await gate.Task; return image;
+        };
+        var schemes = Enumerable.Range(0, 4).Select(i => new ColorStudioSchemeV2(Guid.NewGuid(), $"方案-{i}",
+            new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.ColorRange, $"范围-{i}", NumericParameters: new Dictionary<string, double> { ["hue"] = i * 10 })]),
+            DateTimeOffset.UtcNow)).ToArray();
+        try
+        {
+            foreach (var scheme in schemes)
+            {
+                editor.SelectedColorScheme = scheme; editor.ApplyColorSchemeCommand.Execute(null);
+                var expected = Array.IndexOf(schemes, scheme) + 1;
+                Assert.IsTrue(SpinWait.SpinUntil(() => started.Count >= expected, TimeSpan.FromSeconds(5)));
+            }
+            started.Last().TrySetResult();
+            Assert.IsTrue(SpinWait.SpinUntil(() => ReferenceEquals(editor.MatchedImage, frames.Last()), TimeSpan.FromSeconds(5)));
+        }
+        finally { foreach (var gate in started) gate.TrySetResult(); }
+        Assert.IsTrue(SpinWait.SpinUntil(() => !editor.IsBusy, TimeSpan.FromSeconds(5)));
+        Assert.AreEqual("范围-3", editor.AdjustmentNodes.Single().Name);
+        Assert.AreSame(frames.Last(), editor.MatchedImage);
+    });
+
+    [TestMethod]
+    public void SelectedNodeSurvivesItemsSourceReplacementTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        editor.SelectedAdjustmentNode = editor.AdjustmentNodes[0];
+        var id = editor.SelectedAdjustmentNode.Id;
+        editor.RangeHue = 9; editor.SelectedAdjustmentNode = null;
+        Assert.AreEqual(id, editor.SelectedAdjustmentNode?.Id);
+        editor.RangeStrength = 72;
+        Assert.AreEqual(72, editor.RangeStrength);
+    });
+
+    [TestMethod]
+    public void ProcessingErrorKeepsFrameAndRetryRecoversTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(60)).GetAwaiter().GetResult();
+        editor.Enabled = true;
+        editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8)).GetAwaiter().GetResult();
+        var previous = editor.MatchedImage; Assert.IsNotNull(previous);
+        editor.PostProcessor = (_, _) => throw new IOException("fixture failure");
+        editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8)).GetAwaiter().GetResult();
+        Assert.IsTrue(editor.HasError); Assert.IsFalse(editor.IsBusy); Assert.AreSame(previous, editor.MatchedImage);
+        editor.PostProcessor = null;
+        editor.ApplyCommand.ExecuteAsync(null).WaitAsync(TimeSpan.FromSeconds(8)).GetAwaiter().GetResult();
+        Assert.IsFalse(editor.HasError); Assert.IsFalse(editor.IsBusy); Assert.IsNotNull(editor.MatchedImage);
+    });
+
+    [TestMethod]
+    public void FailedJobCannotOverwriteLaterSuccessTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(70)).GetAwaiter().GetResult(); editor.Enabled = true;
+        Assert.IsTrue(SpinWait.SpinUntil(() => !editor.IsBusy, TimeSpan.FromSeconds(5)));
+        var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        editor.PostProcessor = async (_, _) => { started.TrySetResult(); await release.Task; throw new IOException("stale failure"); };
+        var old = editor.ApplyCommand.ExecuteAsync(null);
+        try
+        {
+            started.Task.WaitAsync(TimeSpan.FromSeconds(8)).GetAwaiter().GetResult();
+            editor.PostProcessor = null;
+            editor.SelectedLook = Look();
+            Assert.IsTrue(SpinWait.SpinUntil(() => editor.StatusText.Contains("已更新"), TimeSpan.FromSeconds(5)));
+        }
+        finally { release.TrySetResult(); }
+        old.WaitAsync(TimeSpan.FromSeconds(8)).GetAwaiter().GetResult();
+        Assert.IsFalse(editor.HasError); Assert.IsNotNull(editor.MatchedImage);
+    });
+
+    [TestMethod]
+    public void RapidReferenceSwitchLastWinsTests() => Sta(() =>
+    {
+        using var editor = Editor();
+        editor.SetSourceAsync(Guid.NewGuid(), SolidBitmap(70)).GetAwaiter().GetResult(); editor.Enabled = true;
+        var releases = new List<TaskCompletionSource>(); var frames = new List<BitmapSource>();
+        editor.PostProcessor = async (_, _) =>
+        {
+            var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var frame = SolidBitmap((byte)(30 + frames.Count)); frames.Add(frame); releases.Add(release);
+            await release.Task; return frame;
+        };
+        for (var i = 0; i < 5; i++)
+        {
+            editor.SelectedLook = Look() with { Name = $"fixture-{i}" };
+            Assert.IsTrue(SpinWait.SpinUntil(() => releases.Count > i, TimeSpan.FromSeconds(5)));
+        }
+        try
+        {
+            releases[^1].TrySetResult();
+            Assert.IsTrue(SpinWait.SpinUntil(() => ReferenceEquals(editor.MatchedImage, frames[^1]), TimeSpan.FromSeconds(5)));
+        }
+        finally { foreach (var release in releases) release.TrySetResult(); }
+        Assert.IsTrue(SpinWait.SpinUntil(() => !editor.IsBusy, TimeSpan.FromSeconds(5)));
+        Assert.AreSame(frames[^1], editor.MatchedImage); Assert.AreEqual("fixture-4", editor.SelectedLook!.Name);
+    });
+
+    [TestMethod]
+    public void SchemeUnsavedApplyCancelDeleteAndRestartTests() => Sta(() =>
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "pixel-tart-scheme-flow-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var store = new ColorStudioSchemeStore(folder);
+            using var editor = new TetherReferenceModeViewModel(new ReferenceLookStore(folder), schemeStore: store);
+            editor.WorkspaceMode = "专业"; editor.ColorSchemeName = "A";
+            editor.SaveColorSchemeAsCommand.ExecuteAsync(null).GetAwaiter().GetResult();
+            var first = editor.SelectedColorScheme!;
+            editor.ColorSchemeName = "B"; editor.SaveColorSchemeAsCommand.ExecuteAsync(null).GetAwaiter().GetResult();
+            var second = editor.SelectedColorScheme!;
+            editor.SelectedAdjustmentNode = editor.AdjustmentNodes.First(); editor.RangeHue = 25;
+            editor.SelectedColorScheme = first; editor.RequestApplySchemeCommand.Execute(null);
+            Assert.IsTrue(editor.SchemeSwitchOpen); Assert.AreEqual(25, editor.RangeHue);
+            editor.CancelSchemeSwitchCommand.Execute(null); Assert.AreEqual(25, editor.RangeHue);
+            editor.RequestApplySchemeCommand.Execute(null); editor.DiscardAndApplySchemeCommand.Execute(null);
+            Assert.AreEqual("A", editor.CurrentColorSchemeName); Assert.AreEqual(0, editor.RangeHue);
+            editor.SelectedColorScheme = second; editor.RequestDeleteSchemeCommand.Execute(null);
+            Assert.HasCount(2, editor.ColorSchemes);
+            editor.CancelDeleteSchemeCommand.Execute(null); Assert.HasCount(2, editor.ColorSchemes);
+            editor.RequestDeleteSchemeCommand.Execute(null); editor.ConfirmDeleteSchemeCommand.ExecuteAsync(null).GetAwaiter().GetResult();
+            Assert.HasCount(1, editor.ColorSchemes);
+            using var restarted = new TetherReferenceModeViewModel(new ReferenceLookStore(folder), schemeStore: store);
+            restarted.LoadAsync().GetAwaiter().GetResult(); Assert.HasCount(1, restarted.ColorSchemes);
+        }
+        finally { if (Directory.Exists(folder)) Directory.Delete(folder, true); }
+    });
+
+    [TestMethod]
+    public void NodeEnableOverflowAndInsertionTests() => Sta(() =>
+    {
+        using var editor = Editor(); editor.WorkspaceMode = "专业";
+        var first = editor.AdjustmentNodes[0]; var last = editor.AdjustmentNodes[^1];
+        editor.SelectedAdjustmentNode = first; editor.ToggleAdjustmentNodeCommand.Execute(null);
+        Assert.IsFalse(editor.SelectedAdjustmentNode!.Enabled);
+        editor.UndoAdjustmentCommand.Execute(null); Assert.IsTrue(editor.SelectedAdjustmentNode!.Enabled);
+        editor.InsertAdjustmentNode(first.Id, last.Id, true); Assert.AreEqual(first.Id, editor.AdjustmentNodes[^1].Id);
+        Assert.IsFalse(editor.MoveAdjustmentNodeDownCommand.CanExecute(null));
+        editor.InsertAdjustmentNode(first.Id, last.Id, false);
+        Assert.AreEqual(first.Id, editor.AdjustmentNodes[^2].Id);
+    });
+
     private static TetherReferenceModeViewModel Editor() => new(new ReferenceLookStore(Path.Combine(Path.GetTempPath(), "pixel-tart-state-test-" + Guid.NewGuid().ToString("N"))));
     private static ReferenceLook Look()
     {

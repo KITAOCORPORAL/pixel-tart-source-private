@@ -67,7 +67,7 @@ public sealed class AppearanceService : IAppearanceService
     {
         // Pixel Tart A-v2 owns the runtime primary action color. User presets remain
         // readable for migration, but no longer repaint product semantics.
-        var color = highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x94, 0x71, 0xC1);
+        var color = highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x6E, 0x9B, 0x91);
         var resources = Application.Current.Resources;
         resources["AccentBrush"] = AccentColorService.Brush(color);
         resources["AccentHoverBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.12));
@@ -80,7 +80,9 @@ public sealed class AppearanceService : IAppearanceService
         resources["PrimaryHoverBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, 0.06));
         resources["PrimaryPressedBrush"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.08));
         resources["ToolAccentBrush"] = AccentColorService.Brush(color);
-        resources["AccentValueBrush"] = AccentColorService.Brush(Color.FromRgb(0xC4, 0xA7, 0xE3));
+        resources["AccentValueBrush"] = AccentColorService.Brush(highContrast ? SystemColors.HighlightColor : Color.FromRgb(0x86, 0xB0, 0xA5));
+        resources["MenuItemHoverBrush"] = AccentColorService.Brush(Color.FromRgb(0x30, 0x36, 0x33));
+        resources["MenuItemOpenedBrush"] = AccentColorService.Brush(Color.FromRgb(0x36, 0x3E, 0x39));
         resources["Brush.Accent"] = AccentColorService.Brush(color);
         resources["Brush.Accent.Hover"] = AccentColorService.Brush(AccentColorService.Adjust(color, 0.06));
         resources["Brush.Accent.Active"] = AccentColorService.Brush(AccentColorService.Adjust(color, -0.08));

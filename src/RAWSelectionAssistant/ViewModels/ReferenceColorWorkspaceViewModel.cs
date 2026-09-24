@@ -24,6 +24,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private int _exportTotal;
     private string _exportStatus = "";
     private bool _nodeSyncOpen;
+    private string _syncFeedback = "";
+    private long _syncFeedbackRevision;
     private readonly HashSet<Guid> _nodeSyncSelection = [];
     private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
 
@@ -38,9 +40,18 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
         SyncSelectedCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(SelectedTargets), _ => SelectedTargets.Any());
         SyncAllCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(Targets), _ => Targets.Count > 0);
-        OpenNodeSyncCommand = new RelayCommand(_ => { _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in Editor.AdjustmentNodes) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; OnPropertyChanged(nameof(SelectedTargetCount)); }, _ => SelectedTargets.Any() && Editor.AdjustmentNodes.Count > 0);
+        OpenNodeSyncCommand = new RelayCommand(_ => { _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in Editor.AdjustmentNodes) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; OnPropertyChanged(nameof(SelectedTargetCount)); }, _ => CanSyncSelectedNodes);
         ToggleNodeSyncCommand = new RelayCommand(value => { if (value is not NodeSyncChoice choice) return; choice.Selected = !choice.Selected; if (choice.Selected) _nodeSyncSelection.Add(choice.Id); else _nodeSyncSelection.Remove(choice.Id); });
-        ConfirmNodeSyncCommand = new RelayCommand(_ => { var selected = _nodeSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Id).ToHashSet(); if (selected.Count > 0) SyncSelectedColorNodes(Editor.AdjustmentStack, selected, SelectedTargets); NodeSyncOpen = false; });
+        ConfirmNodeSyncCommand = new RelayCommand(_ =>
+        {
+            var selected = _nodeSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Id).ToHashSet();
+            if (selected.Count == 0) return;
+            var targets = SelectedTargets.ToArray();
+            SyncSelectedColorNodes(Editor.AdjustmentStack, selected, targets);
+            NodeSyncOpen = false;
+            _ = ShowSyncFeedbackAsync($"已同步 {selected.Count} 个调整到 {targets.Length} 张照片。");
+        });
+        CancelNodeSyncCommand = new RelayCommand(_ => NodeSyncOpen = false);
         ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask);
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
@@ -48,6 +59,13 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         Editor.PropertyChanged += (_, args) =>
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
+        };
+        Targets.CollectionChanged += (_, args) =>
+        {
+            if (args.NewItems is not null) foreach (ReferenceTargetItem target in args.NewItems) target.PropertyChanged += OnTargetSelectionChanged;
+            if (args.OldItems is not null) foreach (ReferenceTargetItem target in args.OldItems) target.PropertyChanged -= OnTargetSelectionChanged;
+            RefreshSyncAvailability();
         };
     }
 
@@ -59,6 +77,24 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public RelayCommand OpenNodeSyncCommand { get; }
     public RelayCommand ToggleNodeSyncCommand { get; }
     public RelayCommand ConfirmNodeSyncCommand { get; }
+    public RelayCommand CancelNodeSyncCommand { get; }
+    public bool CanSyncSelectedNodes => Editor.IsProMode && SelectedTargetCount > 1 && Editor.AdjustmentNodes.Count > 0;
+    public string SyncFeedback { get => _syncFeedback; private set { if (SetProperty(ref _syncFeedback, value)) OnPropertyChanged(nameof(HasSyncFeedback)); } }
+    public bool HasSyncFeedback => !string.IsNullOrEmpty(SyncFeedback);
+    private async Task ShowSyncFeedbackAsync(string message)
+    {
+        var revision = ++_syncFeedbackRevision; SyncFeedback = message;
+        await Task.Delay(5000);
+        if (revision == _syncFeedbackRevision) SyncFeedback = "";
+    }
+    private void OnTargetSelectionChanged(object? sender, PropertyChangedEventArgs e)
+    { if (e.PropertyName == nameof(ReferenceTargetItem.IsSelected)) RefreshSyncAvailability(); }
+    private void RefreshSyncAvailability()
+    {
+        OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
+        OpenNodeSyncCommand?.RaiseCanExecuteChanged(); SyncSelectedCommand?.RaiseCanExecuteChanged(); SyncAllCommand?.RaiseCanExecuteChanged();
+        ExportSelectedCommand?.RaiseCanExecuteChanged(); ExportAllCommand?.RaiseCanExecuteChanged();
+    }
     public bool NodeSyncOpen { get => _nodeSyncOpen; set => SetProperty(ref _nodeSyncOpen, value); }
     public ObservableCollection<NodeSyncChoice> NodeSyncChoices => _nodeSyncChoices;
     public int SelectedTargetCount => SelectedTargets.Count();
@@ -67,9 +103,12 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         var selected = source.Normalize().Nodes.Where(node => selectedNodeIds.Contains(node.Id)).ToArray();
         if (selected.Length == 0) return;
         foreach (var target in targets)
+        {
             target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } stack
                 ? stack.SyncSelectedFrom(source, selectedNodeIds)
                 : new ColorAdjustmentStack(selected).DeepClone();
+            target.Status = ReferenceTargetStatus.Synced;
+        }
     }
     public AsyncRelayCommand ActivateTargetCommand { get; }
     public AsyncRelayCommand ExportSelectedCommand { get; }
@@ -117,7 +156,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         var target = GetOrCreateTarget(path);
         target.IsSelected = true;
-        await ActivateTargetAsync(target);
+        // Reserve activation order before asynchronous thumbnail work can complete out of order.
+        var activation = ActivateTargetAsync(target);
+        var thumbnail = target.Thumbnail is null ? LoadThumbnailAsync(target, CancellationToken.None) : Task.CompletedTask;
+        await Task.WhenAll(activation, thumbnail);
     }
 
     private ReferenceTargetItem GetOrCreateTarget(string path)
@@ -240,7 +282,8 @@ public sealed class ReferenceTargetItem : ObservableObject
     public Guid? AssetId { get; set; }
     public string Path { get; }
     public string FileName { get; }
-    public BitmapSource? Thumbnail { get; set; }
+    private BitmapSource? _thumbnail;
+    public BitmapSource? Thumbnail { get => _thumbnail; set => SetProperty(ref _thumbnail, value); }
     public int PixelWidth { get; set; }
     public int PixelHeight { get; set; }
     public long FileSize => File.Exists(Path) ? new FileInfo(Path).Length : 0;

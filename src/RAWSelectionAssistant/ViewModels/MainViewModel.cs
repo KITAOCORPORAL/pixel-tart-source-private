@@ -471,6 +471,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         {
             var previousPage = _currentPage;
             if (!SetProperty(ref _currentPage, value)) return;
+            OnPropertyChanged(nameof(CurrentWorkspaceLabel));
             OnPropertyChanged(nameof(IsWorkbenchPage));
             OnPropertyChanged(nameof(IsProjectCenterPage));
             OnPropertyChanged(nameof(IsLocalSplitPage));
@@ -539,6 +540,12 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public bool IsBatchCompressPage => CurrentPage == "BatchCompress";
     public bool IsPublishingPage => CurrentPage == "Publishing";
     public bool IsReferenceColorPage => CurrentPage == "ReferenceColor";
+    public string CurrentWorkspaceLabel => CurrentPage == "ReferenceColor" ? "色彩工作室" : CurrentPage switch
+    {
+        "Workbench" => "工作台", "AssetLibrary" => "素材库", "Workflow" => "归片工作区",
+        "WorkCalendar" => "工作日历", "Planning" => "策划中心", "Tether" => "联机拍摄",
+        "OnlineSelection" => "在线选片", "Toolbox" => "工具箱", _ => "工作区"
+    };
     public bool IsWatermarkPage => CurrentPage == "Watermark";
     public bool IsDeleteRejectsPage => CurrentPage == "DeleteRejects";
     public bool IsFtpToolPage => CurrentPage == "FtpTool";

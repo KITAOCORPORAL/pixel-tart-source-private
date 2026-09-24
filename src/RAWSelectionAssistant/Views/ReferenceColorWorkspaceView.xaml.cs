@@ -23,10 +23,21 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private Point _filmstripDownPoint;
     private Point _nodeDragPoint;
     private ColorAdjustmentStackNode? _draggedNode;
+    private ColorStudioZoomPanState _zoomPan => ImageViewport.State;
+    private Point _panStart;
+    private bool _panning;
+    private bool _draggingDivider;
+    private ListBoxItem? _dropIndicator;
+    private Guid? _dropDestination;
+    private bool _dropAfter;
+    private bool _refreshingNodeSelection;
 
     public ReferenceColorWorkspaceView()
     {
         InitializeComponent();
+        _zoomPan.Changed += (_, _) => ZoomLabel.Text = $"{_zoomPan.Zoom:P0}";
+        AdjustmentNodeList.DragOver += OnNodeDragOver;
+        AdjustmentNodeList.DragLeave += (_, _) => ClearInsertion();
         SizeChanged += (_, _) => UpdateResponsiveLayout();
         Loaded += (_, _) => UpdateResponsiveLayout();
         LayoutUpdated += (_, _) =>
@@ -67,8 +78,59 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (e.Key == Key.Escape && _editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
     }
+
+    private void OnPreviewCanvasMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        var point = e.GetPosition(PreviewCanvas);
+        if (_editor?.EffectiveViewMode == "并排对比" && point.X >= PreviewCanvas.ActualWidth / 2) point.X -= (PreviewCanvas.ActualWidth + 1) / 2;
+        _zoomPan.ZoomAbout(point, e.Delta > 0 ? 1.12 : 1 / 1.12); e.Handled = true;
+    }
+    private void OnPreviewCanvasMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (!_panning && !_draggingDivider) return;
+        _panning = _draggingDivider = false; PreviewCanvas.ReleaseMouseCapture(); e.Handled = true;
+    }
+    private void OnPreviewCanvasMouseMove(object sender, MouseEventArgs e)
+    {
+        if (_draggingDivider && _editor is not null) { _editor.SplitPosition = e.GetPosition(PreviewCanvas).X / Math.Max(1, PreviewCanvas.ActualWidth); e.Handled = true; return; }
+        if (!_panning || (e.LeftButton != MouseButtonState.Pressed && e.MiddleButton != MouseButtonState.Pressed)) return;
+        var current = e.GetPosition(PreviewCanvas); _zoomPan.PanBy(current - _panStart); _panStart = current; e.Handled = true;
+    }
+    private void OnPreviewCanvasMouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (_editor?.IsSampling == true) return;
+        _zoomPan.Fit(); e.Handled = true;
+    }
+    private void OnPreviewLostCapture(object sender, MouseEventArgs e) => _panning = _draggingDivider = false;
+    private void OnFitClick(object sender, RoutedEventArgs e) => _zoomPan.Fit();
+    private void OnActualSizeClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(1);
+    private void OnZoomInClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(_zoomPan.Zoom * 1.25);
+    private void OnZoomOutClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(_zoomPan.Zoom / 1.25);
+    private void OnNodeEnableClick(object sender, RoutedEventArgs e)
+    {
+        if (_editor is null || sender is not CheckBox { DataContext: ColorAdjustmentStackNode node }) return;
+        _editor.SelectedAdjustmentNode = node; _editor.ToggleAdjustmentNodeCommand.Execute(null); e.Handled = true;
+    }
+    private System.Windows.Input.ICommand? NodeCommand(string? key) => key switch
+    {
+        "rename" => _editor?.StartNodeRenameCommand, "duplicate" => _editor?.DuplicateAdjustmentNodeCommand,
+        "reset" => _editor?.ResetAdjustmentNodeCommand, "up" => _editor?.MoveAdjustmentNodeUpCommand,
+        "down" => _editor?.MoveAdjustmentNodeDownCommand, "delete" => _editor?.DeleteAdjustmentNodeCommand, _ => null
+    };
+    private void OnNodeOverflowClick(object sender, RoutedEventArgs e)
+    {
+        if (_editor is null || sender is not Button { DataContext: ColorAdjustmentStackNode node, ContextMenu: { } menu } button) return;
+        _editor.SelectedAdjustmentNode = node;
+        foreach (var item in menu.Items.OfType<MenuItem>()) item.IsEnabled = NodeCommand(item.Tag as string)?.CanExecute(null) == true;
+        menu.PlacementTarget = button; menu.IsOpen = true; e.Handled = true;
+    }
+    private void OnNodeMenuClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuItem item && NodeCommand(item.Tag as string) is { } command && command.CanExecute(null)) command.Execute(null);
+    }
     private void OnNodeDragStart(object sender, MouseButtonEventArgs e)
     {
+        if (e.OriginalSource is DependencyObject source && (FindAncestor<Button>(source) is not null || FindAncestor<CheckBox>(source) is not null)) { _draggedNode = null; return; }
         _nodeDragPoint = e.GetPosition(AdjustmentNodeList);
         _draggedNode = (ItemsControl.ContainerFromElement(AdjustmentNodeList, e.OriginalSource as DependencyObject) as ListBoxItem)?.DataContext as ColorAdjustmentStackNode;
     }
@@ -77,14 +139,31 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (_draggedNode is null || e.LeftButton != MouseButtonState.Pressed ||
             (e.GetPosition(AdjustmentNodeList) - _nodeDragPoint).Length < SystemParameters.MinimumVerticalDragDistance) return;
         var node = _draggedNode; _draggedNode = null;
-        DragDrop.DoDragDrop(AdjustmentNodeList, node, DragDropEffects.Move);
+        try { DragDrop.DoDragDrop(AdjustmentNodeList, node, DragDropEffects.Move); }
+        finally { ClearInsertion(); }
+    }
+    private void ClearInsertion()
+    {
+        if (_dropIndicator is not null) { _dropIndicator.ClearValue(Control.BorderBrushProperty); _dropIndicator.ClearValue(Control.BorderThicknessProperty); }
+        _dropIndicator = null; _dropDestination = null;
+    }
+    private void OnNodeDragOver(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(typeof(ColorAdjustmentStackNode))) return;
+        var item = ItemsControl.ContainerFromElement(AdjustmentNodeList, e.OriginalSource as DependencyObject) as ListBoxItem;
+        ClearInsertion();
+        if (item?.DataContext is not ColorAdjustmentStackNode node) return;
+        _dropIndicator = item; _dropDestination = node.Id; _dropAfter = e.GetPosition(item).Y >= item.ActualHeight / 2;
+        item.SetResourceReference(Control.BorderBrushProperty, "AccentValueBrush");
+        item.BorderThickness = _dropAfter ? new Thickness(0, 0, 0, 2) : new Thickness(0, 2, 0, 0);
+        e.Effects = DragDropEffects.Move; e.Handled = true;
     }
     private void OnNodeDrop(object sender, DragEventArgs e)
     {
         if (_editor is null || e.Data.GetData(typeof(ColorAdjustmentStackNode)) is not ColorAdjustmentStackNode source) return;
         var destination = (ItemsControl.ContainerFromElement(AdjustmentNodeList, e.OriginalSource as DependencyObject) as ListBoxItem)?.DataContext as ColorAdjustmentStackNode;
         if (destination is null) return;
-        _editor.MoveAdjustmentNode(source.Id, destination.Id); e.Handled = true;
+        _editor.InsertAdjustmentNode(source.Id, _dropDestination ?? destination.Id, _dropAfter); ClearInsertion(); e.Handled = true;
     }
     private void OnRenameKeyDown(object sender, KeyEventArgs e)
     {
@@ -95,9 +174,17 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void OnPreviewCanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        if (_editor?.IsSampling != true) return;
+        if (e.ClickCount == 2 && _editor?.IsSampling != true) { _zoomPan.Fit(); e.Handled = true; return; }
+        if ((e.ChangedButton == MouseButton.Left && Keyboard.IsKeyDown(Key.Space)) || e.ChangedButton == MouseButton.Middle)
+        { _panning = true; _panStart = e.GetPosition(PreviewCanvas); PreviewCanvas.CaptureMouse(); e.Handled = true; return; }
+        if (_editor?.IsSampling != true)
+        {
+            if (_editor?.EffectiveViewMode == "左右对比" && Math.Abs(e.GetPosition(PreviewCanvas).X - PreviewCanvas.ActualWidth * _editor.SplitPosition) < 10)
+            { _draggingDivider = true; PreviewCanvas.CaptureMouse(); e.Handled = true; }
+            return;
+        }
         var mapped = ColorStudioSampleMapping.Map(e.GetPosition(PreviewCanvas), new Size(PreviewCanvas.ActualWidth, PreviewCanvas.ActualHeight),
-            _editor.ViewMode, _editor.SplitPosition, _editor.SourceImage, _editor.MatchedImage);
+            _editor.EffectiveViewMode, _editor.SplitPosition, _editor.SourceImage, _editor.MatchedImage, _zoomPan);
         if (mapped is not { } sample) return;
         var (image, x, y) = sample;
         var pixels = new byte[image.PixelWidth * image.PixelHeight * 4];
@@ -128,6 +215,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void OnFilmstripKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Handled || Keyboard.FocusedElement is not DependencyObject focus || FindAncestor<ListBoxItem>(focus) is not { } item || ItemsControl.ItemsControlFromItemContainer(item) != FindFilmstrip()) return;
         if (_editor is null || DataContext is not ReferenceColorWorkspaceViewModel workspace || workspace.Targets.Count == 0) return;
         var index = workspace.ActiveTarget is null ? 0 : workspace.Targets.IndexOf(workspace.ActiveTarget);
         if (e.Key == Key.Escape) { foreach (var target in workspace.Targets) target.IsSelected = false; if (workspace.ActiveTarget is not null) workspace.ActiveTarget.IsSelected = true; e.Handled = true; return; }
@@ -152,6 +240,21 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        if (!_refreshingNodeSelection && args.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentNodes) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode))
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.DataBind, () =>
+            {
+                if (_editor?.SelectedAdjustmentNode is not { } selected) return;
+                var index = _editor.AdjustmentNodes.ToList().FindIndex(n => n.Id == selected.Id);
+                if (index < 0 || AdjustmentNodeList.ItemContainerGenerator.ContainerFromIndex(index) is ListBoxItem { IsSelected: true }) return;
+                _refreshingNodeSelection = true;
+                try
+                {
+                    AdjustmentNodeList.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, -1);
+                    AdjustmentNodeList.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, index);
+                }
+                finally { _refreshingNodeSelection = false; }
+            });
+        if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsSampling)) PreviewCanvas.Cursor = _editor?.IsSampling == true ? Cursors.Cross : null;
         if (args.PropertyName is nameof(TetherReferenceModeViewModel.FocusView) or nameof(TetherReferenceModeViewModel.ContextRailOpen))
             UpdateResponsiveLayout();
     }
@@ -163,14 +266,15 @@ public partial class ReferenceColorWorkspaceView : UserControl
         _lastResponsiveWidth = availableWidth;
         var focus = _editor?.FocusView == true;
         var compact = availableWidth is > 0 and < 1440;
-        var narrow = availableWidth is > 0 and < 980;
+        var narrow = availableWidth is > 0 and < 740;
 
         if (compact && !_wasCompact) _editor?.SetResponsiveContext(true);
         _wasCompact = compact;
 
         LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 300 : 240;
         RightColumn.MinWidth = focus || compact ? 0 : 224;
-        LeftColumn.Width = focus || narrow ? new GridLength(0) : compact ? new GridLength(300) : new GridLength(.19, GridUnitType.Star);
+        LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(320);
+        CenterColumn.MinWidth = compact ? 240 : 520;
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
         RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
         if (compact)

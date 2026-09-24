@@ -115,7 +115,7 @@
                 </Border>
                 <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                     <TextBlock Text="PIXEL TART" FontFamily="Segoe UI Variable, Segoe UI" FontSize="11" FontWeight="SemiBold" />
-                    <TextBlock Text="{Binding CurrentPage, StringFormat=当前工作区 · {0}}" FontSize="10" Foreground="{DynamicResource TextTertiaryBrush}" />
+                    <TextBlock Text="{Binding CurrentWorkspaceLabel, StringFormat=当前工作区 · {0}}" FontSize="10" Foreground="{DynamicResource TextTertiaryBrush}" />
                 </StackPanel>
             </StackPanel>
         <Menu x:Name="TopMenu" Grid.Column="1" Style="{StaticResource WorkbenchMenuStyle}" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" shell:WindowChrome.IsHitTestVisibleInChrome="True">

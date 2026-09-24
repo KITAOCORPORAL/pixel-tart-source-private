@@ -14,6 +14,24 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public void BatchSyncSelectionToastAndIsolationTests()
+    {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()));
+        workspace.Editor.WorkspaceMode = "专业";
+        var existing = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "保留", NumericParameters: new Dictionary<string, double> { ["hue"] = 19 });
+        var a = new ReferenceTargetItem("a.jpg") { IsSelected = true, ColorAdjustmentStackSnapshot = new ColorAdjustmentStack([existing]) };
+        var b = new ReferenceTargetItem("b.jpg") { IsSelected = true, ColorAdjustmentStackSnapshot = new ColorAdjustmentStack([existing]) };
+        workspace.Targets.Add(a); workspace.Targets.Add(b);
+        Assert.IsTrue(workspace.CanSyncSelectedNodes);
+        workspace.OpenNodeSyncCommand.Execute(null);
+        foreach (var choice in workspace.NodeSyncChoices.Skip(1)) choice.Selected = false;
+        workspace.ConfirmNodeSyncCommand.Execute(null);
+        Assert.IsFalse(workspace.NodeSyncOpen); StringAssert.Contains(workspace.SyncFeedback, "1 个调整到 2 张照片");
+        Assert.AreEqual(19, a.ColorAdjustmentStackSnapshot!.Nodes[0].NumericParameters["hue"]);
+        Assert.AreNotSame(a.ColorAdjustmentStackSnapshot.Nodes[1].NumericParameters, b.ColorAdjustmentStackSnapshot!.Nodes[1].NumericParameters);
+        b.IsSelected = false; Assert.IsFalse(workspace.CanSyncSelectedNodes);
+    }
+    [TestMethod]
     public async Task InactiveTargetsExportTheirFrozenProcessedPixelsNotActiveEditorPixels()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-BatchPixels-" + Guid.NewGuid().ToString("N"));
