@@ -66,6 +66,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
     public bool IsSettled => State == ProcessingState.Idle && !IsBusy && Volatile.Read(ref _pendingDebounceWork) == 0;
+    internal string[] NativeRenderedOrder { get; private set; } = [];
+    internal int NativeUndoCount => _undoStacks.Count;
+    internal int NativeRedoCount => _redoStacks.Count;
     private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; OnPropertyChanged(nameof(IsSettled)); }
     private void EndBusy()
     {
@@ -736,6 +739,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             }
             if (PostProcessor is not null) image = await PostProcessor(image, renderToken);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
+            if (ColorStudioAcceptanceFixture.Requested) NativeRenderedOrder = stack.Nodes.Select(node => node.Name).ToArray();
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }

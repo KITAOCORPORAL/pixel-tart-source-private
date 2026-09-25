@@ -125,6 +125,16 @@ function Get-NodeNames {
     if ($_.Name -match 'Name = ([^,]+), Enabled') { $Matches[1].Trim() } else { ($_.Texts | Where-Object { $_ -notin @('≡','◎','◌','≋','▣','⋯') } | Select-Object -First 1) }
   })
 }
+function Request-NativeEvidence([string]$label) {
+  $folder=Join-Path $runtimeRoot 'ColorStudioFixture'
+  $nonce=[guid]::NewGuid().ToString(); $request=Join-Path $folder 'native-observe-request.txt'; $response=Join-Path $folder 'native-observe-response.json'
+  Set-Content $request $nonce -Encoding ASCII; $deadline=(Get-Date).AddSeconds(3)
+  while((Get-Date)-lt $deadline) {
+    if(Test-Path $response) { try { $obj=Get-Content -Raw $response|ConvertFrom-Json; if($obj.Nonce -eq $nonce){return $obj} } catch {} }
+    Start-Sleep -Milliseconds 60
+  }
+  return [pscustomobject]@{Nonce=$nonce;Label=$label;Timeout=$true}
+}
 function Press-Modified([uint16]$modifier,[uint16]$key) {
   [PixelTartNativeInput]::Key($modifier) | Out-Null; Start-Sleep -Milliseconds 80
   [PixelTartNativeInput]::Key($key) | Out-Null; Start-Sleep -Milliseconds 80
@@ -136,18 +146,19 @@ function Drag-Node([int]$sourceIndex,[int]$destinationIndex,[bool]$after,[string
   $source = $beforeRows[$sourceIndex]; $destination = $beforeRows[$destinationIndex]
   $sx=[int]($source.Rect.X+$source.Rect.W/2); $sy=[int]($source.Rect.Y+$source.Rect.H/2)
   $tx=[int]($destination.Rect.X+$destination.Rect.W/2); $fraction = if($after){.78}else{.22}; $ty=[int]($destination.Rect.Y+($destination.Rect.H * $fraction))
+  $beforeShot=Capture ("NODE_{0}_01_BEFORE" -f $id); $beforeEvidence=Request-NativeEvidence ("{0}-before" -f $id)
   Move-To $sx $sy; [PixelTartNativeInput]::Mouse([PixelTartNativeInput]::MOUSEEVENTF_LEFTDOWN) | Out-Null; Start-Sleep -Milliseconds 120
   [PixelTartNativeInput]::Move($sx+2,$sy+2) | Out-Null; Start-Sleep -Milliseconds 180
-  $belowThreshold = @(Get-NodeNames)
+  $belowThreshold = @(Get-NodeNames); $thresholdShot=Capture ("NODE_{0}_02_THRESHOLD" -f $id); $thresholdEvidence=Request-NativeEvidence ("{0}-threshold" -f $id)
   [PixelTartNativeInput]::Move($tx,$ty) | Out-Null; Start-Sleep -Milliseconds 220
-  $during = Snapshot "$id-during"; $duringRows = @(Get-NodeRowSnapshot); $duringShot = Capture "NODE_${id}_DURING"
+  $during = Snapshot "$id-during"; $duringRows = @(Get-NodeRowSnapshot); $duringShot = Capture ("NODE_{0}_03_INSERTION" -f $id); $duringEvidence=Request-NativeEvidence ("{0}-insertion" -f $id)
   [PixelTartNativeInput]::Mouse([PixelTartNativeInput]::MOUSEEVENTF_LEFTUP) | Out-Null; Start-Sleep -Milliseconds 600
-  $afterNames = @(Get-NodeNames); $afterShot = Capture "NODE_${id}_AFTER"
-  [pscustomobject]@{TestId=$id;SourceIndex=$sourceIndex;DestinationIndex=$destinationIndex;After=$after;Start=@{X=$sx;Y=$sy};Threshold=@{X=$sx+2;Y=$sy+2};DragOver=@{X=$tx;Y=$ty};Drop=@{X=$tx;Y=$ty};BeforeOrder=@($beforeRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });BelowThresholdOrder=$belowThreshold;DuringOrder=@($duringRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });During=$during;AfterOrder=$afterNames;DuringScreenshot=$duringShot;AfterScreenshot=$afterShot}
+  $afterNames = @(Get-NodeNames); $dropShot=Capture ("NODE_{0}_04_DROP" -f $id); $afterShot = Capture ("NODE_{0}_05_FINAL" -f $id); $afterEvidence=Request-NativeEvidence ("{0}-final" -f $id)
+  [pscustomobject]@{TestId=$id;SourceIndex=$sourceIndex;DestinationIndex=$destinationIndex;After=$after;Start=@{X=$sx;Y=$sy};Threshold=@{X=$sx+2;Y=$sy+2};DragOver=@{X=$tx;Y=$ty};Drop=@{X=$tx;Y=$ty};BeforeOrder=@($beforeRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });BelowThresholdOrder=$belowThreshold;DuringOrder=@($duringRows | ForEach-Object { if ($_.Name -match 'Name = ([^,]+), Enabled') {$Matches[1].Trim()} });During=$during;AfterOrder=$afterNames;BeforeScreenshot=$beforeShot;ThresholdScreenshot=$thresholdShot;DuringScreenshot=$duringShot;DropScreenshot=$dropShot;AfterScreenshot=$afterShot;BeforeNative=$beforeEvidence;ThresholdNative=$thresholdEvidence;InsertionNative=$duringEvidence;FinalNative=$afterEvidence}
 }
 
 $started=[DateTime]::UtcNow
-$p=Start-Process -FilePath $exe -ArgumentList '--acceptance-color-studio','--studio-scenario=01' -PassThru
+$p=Start-Process -FilePath $exe -ArgumentList '--acceptance-color-studio','--studio-scenario=01','--native-evidence-observer' -PassThru
 $ready=Join-Path $runtimeRoot 'ColorStudioFixture\ready.txt'; $statePath=Join-Path $runtimeRoot 'ColorStudioFixture\state.json'; $deadline=(Get-Date).AddSeconds(45)
 while((Get-Date)-lt $deadline -and -not(Test-Path $ready)){Start-Sleep -Milliseconds 250}
 if(-not(Test-Path $statePath)){throw 'Production fixture did not become ready.'}

@@ -90,6 +90,49 @@ public static class ColorStudioAcceptanceFixture
             MainWindowHandle = new System.Windows.Interop.WindowInteropHelper(window).Handle.ToInt64()
         }, new JsonSerializerOptions { WriteIndented = true }));
         await File.WriteAllTextAsync(Path.Combine(folder, "ready.txt"), $"{Id}\n{Environment.ProcessId}\n{window.Width}x{window.Height}");
+        StartNativeObserver(window, editor, folder);
+    }
+    // Read-only, opt-in observer. Requests never invoke product commands or change the view.
+    private static void StartNativeObserver(Window window, TetherReferenceModeViewModel editor, string folder)
+    {
+        if (!Environment.GetCommandLineArgs().Contains("--native-evidence-observer")) return;
+        var timer = new DispatcherTimer(DispatcherPriority.Background, window.Dispatcher) { Interval = TimeSpan.FromMilliseconds(50) };
+        string? last = null;
+        timer.Tick += (_, _) =>
+        {
+            var request = Path.Combine(folder, "native-observe-request.txt");
+            if (!File.Exists(request)) return;
+            try
+            {
+                var nonce = File.ReadAllText(request).Trim();
+                if (!Guid.TryParse(nonce, out _) || nonce == last) return;
+                var view = FindNativeView(window);
+                if (view is null) return;
+                var response = JsonSerializer.Serialize(new
+                {
+                    Nonce = nonce, Timestamp = DateTimeOffset.UtcNow, ProductSourceSha = StartupDiagnostics.ProductSourceSha,
+                    Settled = editor.IsSettled, editor.HasError,
+                    UiOrder = editor.AdjustmentNodes.Select(node => node.Name).ToArray(),
+                    ProcessingOrder = editor.NativeRenderedOrder, PixelHash = HashImage(editor.MatchedImage),
+                    UndoCount = editor.NativeUndoCount, RedoCount = editor.NativeRedoCount,
+                    Drag = view.ReadNativeDragEvidence()
+                });
+                var path = Path.Combine(folder, "native-observe-response.json");
+                File.WriteAllText(path + ".tmp", response);
+                File.Move(path + ".tmp", path, true);
+                last = nonce;
+            }
+            catch (IOException) { /* A concurrently written request is retried at the next tick. */ }
+        };
+        window.Closed += (_, _) => timer.Stop();
+        timer.Start();
+    }
+    private static ReferenceColorWorkspaceView? FindNativeView(DependencyObject parent)
+    {
+        if (parent is ReferenceColorWorkspaceView found) return found;
+        for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            if (FindNativeView(VisualTreeHelper.GetChild(parent, i)) is { } child) return child;
+        return null;
     }
     public static string? HashImage(BitmapSource? image)
     {

@@ -33,6 +33,27 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private bool _refreshingNodeSelection;
     private string[]? _nativeDragBeforeOrder;
     private string? _nativeDragBeforeHash;
+    private bool _nativeDragActive;
+
+    internal object ReadNativeDragEvidence() => new
+    {
+        Active = _nativeDragActive,
+        Pending = _draggedNode is not null,
+        Destination = _dropDestination,
+        After = _dropAfter,
+        ThresholdDip = SystemParameters.MinimumVerticalDragDistance,
+        Rows = AdjustmentNodeList.Items.Cast<ColorAdjustmentStackNode>().Select(node =>
+        {
+            var row = (ListBoxItem)AdjustmentNodeList.ItemContainerGenerator.ContainerFromItem(node);
+            var screen = row.PointToScreen(new Point());
+            var dpi = VisualTreeHelper.GetDpi(row);
+            return new { node.Id, node.Name, X = screen.X, Y = screen.Y,
+                Width = row.ActualWidth * dpi.DpiScaleX, Height = row.ActualHeight * dpi.DpiScaleY,
+                Insertion = ReferenceEquals(row, _dropIndicator),
+                Top = row.BorderThickness.Top, Bottom = row.BorderThickness.Bottom,
+                Brush = row.BorderBrush?.ToString() };
+        }).ToArray()
+    };
 
     public ReferenceColorWorkspaceView()
     {
@@ -146,8 +167,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (_draggedNode is null || e.LeftButton != MouseButtonState.Pressed ||
             (e.GetPosition(AdjustmentNodeList) - _nodeDragPoint).Length < SystemParameters.MinimumVerticalDragDistance) return;
         var node = _draggedNode; _draggedNode = null;
-        try { DragDrop.DoDragDrop(AdjustmentNodeList, node, DragDropEffects.Move); }
-        finally { ClearInsertion(); }
+        try { _nativeDragActive = true; DragDrop.DoDragDrop(AdjustmentNodeList, node, DragDropEffects.Move); }
+        finally { _nativeDragActive = false; ClearInsertion(); }
     }
     private void ClearInsertion()
     {
