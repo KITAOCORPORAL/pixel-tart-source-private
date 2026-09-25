@@ -17,7 +17,7 @@ The CPU implementation bounds samples to 16–2048, Sinkhorn iterations to 1–1
 
 ## Backend contract
 
-`IColorMatchComputeBackend` defines semantic parity. `CpuColorMatchComputeBackend` is production-usable and deterministic. `GpuColorMatchComputeBackend` is an explicit unavailable seam until a supported DirectML/ComputeSharp implementation is validated; selecting GPU therefore falls back safely to CPU and records that fallback.
+`IColorMatchComputeBackend` defines semantic parity. `CpuColorMatchComputeBackend` is production-usable and deterministic. `GpuColorMatchComputeBackend` uses ComputeSharp 3.2.0 and a DX12 pairwise OT kernel after device creation and smoke readback. CPU Sinkhorn, residual and pixel application remain shared stages. Device or dispatch failures fall back safely to CPU and record the failure.
 
 ## Cache and cancellation
 

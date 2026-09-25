@@ -60,6 +60,13 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 - GPU hardware is detected, but the backend is **AUDIT / DEFERRED**. The engine has an explicit unavailable GPU seam and records CPU fallback; no GPU acceleration claim is made.
 - Capability detection, memory tiers, quality presets, failure metadata and synthetic 12MP/24MP/45MP/60MP CPU benchmark fixtures are now implemented. The benchmark confirms CPU completion at all four sizes; it does not establish GPU speed or parity.
 
+## L. Professional RAW and TIFF Stage 2 audit
+
+- Existing LibRaw decoding remains the canonical RAW path and is documented as `BACKEND_SUPPORTED_NOT_VERIFIED` without vendor fixtures.
+- A bounded uncompressed RGB TIFF writer now supports 8-bit/16-bit samples, optional ICC payloads and cancellation. It does not claim high-bit-depth RAW preservation or full RAW-to-TIFF release closure.
+- Stage 2 is **PARTIAL / BLOCKED** by missing legal vendor fixtures and the current decoder's 8-bit output contract. Stage 3 presets and Stage 4 live hover remain gated.
+- GPU implementation decision and third-party preset boundaries are recorded in `docs/color-studio/GPU_BACKEND_IMPLEMENTATION_DECISION.md`, `docs/THIRD_PARTY_PRESET_ARCHITECTURE.md` and the related compatibility documents. ComputeSharp-DX12 hardware smoke and eight-scene parity now pass; full V4 GPU execution remains PARTIAL. Stage 3 and Stage 4 remain **NOT STARTED**.
+
 ## I. Environment and handoff rules
 
 Read `docs/DEV_ENVIRONMENT_WINDOWS.md`. Run the bootstrap and bounded verification scripts after cloning. There are no submodules and no current Git LFS payloads. Do not rely on stash, old `bin/obj`, local DLLs, copied packages, company paths, real photos, customer data, credentials, or hidden machine state. Runtime user data belongs under `%LocalAppData%` at runtime; repository fixtures are synthetic and safe.

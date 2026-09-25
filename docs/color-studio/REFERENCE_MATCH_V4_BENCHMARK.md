@@ -9,7 +9,7 @@ This foundation uses synthetic RGB fixtures only. No customer photographs or ext
 - 1024×768 tile plan at 256 px with 8 px overlap: multiple tiles and overlap metadata, PASS.
 - Cancellation before a match: `OperationCanceledException`, no partial result returned, PASS.
 
-The four requested production timing baselines are now measured on synthetic 12MP, 24MP, 45MP and 60MP buffers, three runs per size. See `REFERENCE_MATCH_V4_GPU_PERFORMANCE.md`. GPU time, peak VRAM and utilization remain unavailable because capability detection found no validated compute backend.
+The four requested production timing baselines are measured on synthetic 12MP, 24MP, 45MP and 60MP buffers, three CPU and three GPU runs per size. See `REFERENCE_MATCH_V4_GPU_PERFORMANCE.md`. GPU timing covers the current pairwise kernel path; peak VRAM and utilization are not instrumented.
 
 ## Quality dimensions to measure next
 

@@ -14,7 +14,7 @@ Implemented in `src/RAWSelectionAssistant.Core/Services/Projects/ReferenceMatchV
 | cancellation | IMPLEMENTED |
 | tile overlap planner | IMPLEMENTED metadata/helper |
 | shared Preview/Export integration | REUSED existing pipeline; no UI integration this phase |
-| GPU compute | DEFERRED; unavailable seam + CPU fallback implemented |
+| GPU compute | PARTIAL: ComputeSharp-DX12 pairwise OT kernel + hardware smoke + CPU fallback |
 | semantic/AI matching | DEFERRED to V5/V6 |
 
-The implementation deliberately avoids a second renderer, large model weights and an NVIDIA-only dependency. Production UI integration remains gated by the unresolved Phase 1 native drag visual evidence.
+The implementation deliberately avoids a second renderer, large model weights and an NVIDIA-only dependency. ComputeSharp is MIT licensed and the package is used for Windows DX12 compute; AMD, Intel and NVIDIA compatibility still depends on the adapter's DX12 support. Production UI integration remains gated by the unresolved Phase 1 native drag visual evidence.
