@@ -28,6 +28,7 @@ public sealed class ReferenceMatchV4Tests
         Assert.IsTrue(result.UsedCpuFallback);
         StringAssert.Contains(result.CacheKey, "a|b|v4|");
         Assert.AreNotEqual(result.CacheKey, ReferenceMatchV4Cache.CreateKey("a", "b", settings with { TileSize = 256 }));
+        Assert.AreNotEqual(result.CacheKey, ReferenceMatchV4Cache.CreateKey("a", "b", settings with { ComputeQuality = ReferenceMatchV4ComputeQuality.High }));
     }
 
     [TestMethod]
@@ -47,6 +48,27 @@ public sealed class ReferenceMatchV4Tests
         Assert.IsTrue(result.Pixels.Rgb24.ToArray().All(value => value <= 255));
         Assert.IsLessThanOrEqualTo(2, result.ResidualIterations);
         Assert.HasCount(32 * 32 * 3, result.Pixels.Rgb24.ToArray());
+    }
+
+    [TestMethod]
+    public void CapabilityDetectionNeverClaimsSmokeSuccessWithoutBackend()
+    {
+        var capability = GpuCapabilityDetector.Detect();
+        Assert.IsFalse(capability.BackendAvailable);
+        Assert.IsFalse(capability.DeviceCreated);
+        Assert.IsFalse(capability.SmokeTestPassed);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(capability.FailureReason));
+    }
+
+    [TestMethod]
+    public void MemoryTiersOnlyChangeBudgetNotAlgorithmSemantics()
+    {
+        var low = GpuMemoryBudget.FromBytes(8L * 1024 * 1024 * 1024 - 1);
+        var ultra = GpuMemoryBudget.FromBytes(16L * 1024 * 1024 * 1024);
+        Assert.AreEqual("STANDARD", low.Tier);
+        Assert.AreEqual("ULTRA", ultra.Tier);
+        Assert.IsGreaterThan(low.RepresentativeSampleBudget, ultra.RepresentativeSampleBudget);
+        Assert.AreEqual(ReferenceMatchV4ComputeQuality.Ultra, ReferenceMatchV4Settings.ForQuality(ReferenceMatchV4ComputeQuality.Ultra, ultra).ComputeQuality);
     }
 
     private static VisualPixelBuffer Fixture(int width, int height, byte r, byte g, byte b)
