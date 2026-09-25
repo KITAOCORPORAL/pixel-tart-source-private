@@ -53,6 +53,12 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 - P1: native pointer interaction and final UX review remain open; physical DPI is a separate release-hardware gate.
 - P2: controlled performance comparison/optimization follow-up; Phase 2 visual polish and memory telemetry.
 
+## K. Reference Match V4 foundation (2026-09-25)
+
+- V4 is **PARTIAL**: bounded OKLab representative samples, regularized CPU Sinkhorn transport, soft luminance-band local blending, protection hooks, gamut mapping, bounded residual correction, cancellation and cache-key revisioning are implemented in Core.
+- The existing Match v3 and shared Preview/Export pipeline remain the canonical path; no second renderer or WPF V4 integration was added while Phase 1 native drag evidence is still blocked.
+- GPU hardware is detected, but the backend is **AUDIT / DEFERRED**. The engine has an explicit unavailable GPU seam and records CPU fallback; no GPU acceleration claim is made.
+
 ## I. Environment and handoff rules
 
 Read `docs/DEV_ENVIRONMENT_WINDOWS.md`. Run the bootstrap and bounded verification scripts after cloning. There are no submodules and no current Git LFS payloads. Do not rely on stash, old `bin/obj`, local DLLs, copied packages, company paths, real photos, customer data, credentials, or hidden machine state. Runtime user data belongs under `%LocalAppData%` at runtime; repository fixtures are synthetic and safe.

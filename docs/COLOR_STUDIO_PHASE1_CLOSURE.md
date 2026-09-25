@@ -78,6 +78,10 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 
 ## Open product gates
 
+## V4 continuation boundary
+
+Reference Match V4 Core foundation may proceed independently as **PARTIAL**, but this does not close Phase 1. The native capture run remains diagnostic because observer timeouts/order mismatches were observed. Physical DPI remains a separate release hardware gate.
+
 1. Native capture is available through `scripts/verify-color-studio-native-capture.ps1`. PrintWindow(0), client/full-content PrintWindow, window BitBlt, and desktop-region BitBlt were diagnosed; `PRINTWINDOW_0` was selected and reached 100/100 valid frames. The first full synchronized drag run generated 195 real Production WPF PNGs, but intermittent observer timeouts and ordering mismatches remain. Native visual closure is still open.
 The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence. Physical display-DPI certification is a separate release-hardware gate, not a Phase 1 product blocker; logical 200% fixture/layout evidence is development coverage.
 
