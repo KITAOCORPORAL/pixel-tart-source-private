@@ -14,4 +14,4 @@ The current `GpuColorMatchComputeBackend` intentionally reports unavailable. A r
 
 Future GPU work must treat unavailable adapter, device reset/loss, unsupported shader, allocation failure and out-of-memory as a task failure followed by safe CPU retry. Tile overlap and bounded representative samples limit working-set growth. VRAM changes throughput, concurrency and analysis size—not image-quality semantics.
 
-Status: **AUDIT COMPLETE / GPU IMPLEMENTATION DEFERRED**.
+Status: **AUDIT COMPLETE / GPU IMPLEMENTATION BLOCKED**. Capability and memory policy are implemented, but device creation and smoke execution remain unavailable until a real backend dependency is selected and validated.

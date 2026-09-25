@@ -58,6 +58,7 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 - V4 is **PARTIAL**: bounded OKLab representative samples, regularized CPU Sinkhorn transport, soft luminance-band local blending, protection hooks, gamut mapping, bounded residual correction, cancellation and cache-key revisioning are implemented in Core.
 - The existing Match v3 and shared Preview/Export pipeline remain the canonical path; no second renderer or WPF V4 integration was added while Phase 1 native drag evidence is still blocked.
 - GPU hardware is detected, but the backend is **AUDIT / DEFERRED**. The engine has an explicit unavailable GPU seam and records CPU fallback; no GPU acceleration claim is made.
+- Capability detection, memory tiers, quality presets, failure metadata and synthetic 12MP/24MP/45MP/60MP CPU benchmark fixtures are now implemented. The benchmark confirms CPU completion at all four sizes; it does not establish GPU speed or parity.
 
 ## I. Environment and handoff rules
 
