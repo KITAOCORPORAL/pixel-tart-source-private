@@ -59,14 +59,17 @@ public sealed class ReferenceMatchV4BenchmarkTests
             {
                 var target = Fixture(width, height, repeat + width); var reference = Fixture(width, height, repeat + width + 100);
                 var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 256, SinkhornIterations: 16, ResidualIterations: 0, TileSize: 1024, TileOverlap: 16);
-                var before = GC.GetTotalMemory(true); var timer = Stopwatch.StartNew();
-                var output = new ReferenceMatchV4Engine().Match(target, reference, name, $"{name}-reference", settings, preferGpu: false);
-                timer.Stop(); var after = GC.GetTotalMemory(false);
-                results.Add(new { resolution = name, width, height, repeat, elapsedMs = timer.Elapsed.TotalMilliseconds, allocatedWorkingSetBytes = Math.Max(0, after - before), representativeSamples = output.RepresentativeSourceCount, tileCount = ColorMatchTilePlanner.Plan(width, height, settings).Count, backend = output.Backend.ToString(), usedCpuFallback = output.UsedCpuFallback });
+                foreach (var preferGpu in new[] { false, true })
+                {
+                    var before = GC.GetTotalMemory(true); var timer = Stopwatch.StartNew();
+                    var output = new ReferenceMatchV4Engine().Match(target, reference, name, $"{name}-reference", settings, preferGpu);
+                    timer.Stop(); var after = GC.GetTotalMemory(false);
+                    results.Add(new { resolution = name, width, height, repeat, elapsedMs = timer.Elapsed.TotalMilliseconds, allocatedWorkingSetBytes = Math.Max(0, after - before), representativeSamples = output.RepresentativeSourceCount, tileCount = ColorMatchTilePlanner.Plan(width, height, settings).Count, backend = output.Backend.ToString(), usedCpuFallback = output.UsedCpuFallback });
+                }
             }
         }
         File.WriteAllText(Path.Combine(root, "REFERENCE_MATCH_V4_GPU_PERFORMANCE.json"), JsonSerializer.Serialize(new { generatedUtc = DateTimeOffset.UtcNow, gpu = GpuCapabilityDetector.Detect(), results }, new JsonSerializerOptions { WriteIndented = true }));
-        Assert.HasCount(12, results);
+        Assert.HasCount(24, results);
     }
 
     private static VisualPixelBuffer Fixture(int width, int height, int seed)

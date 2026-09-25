@@ -1,7 +1,4 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -89,22 +86,32 @@ public static class GpuCapabilityDetector
 {
     public static GpuCapabilityInfo Detect(CancellationToken token = default)
     {
+        token.ThrowIfCancellationRequested();
         var budget = GpuMemoryBudget.FromBytes(0);
         if (!OperatingSystem.IsWindows()) return new("Unavailable", 0, 0, string.Empty, string.Empty, "None", false, false, false, "Windows GPU APIs unavailable", budget);
         try
         {
-            using var process = Process.Start(new ProcessStartInfo("nvidia-smi", "--query-gpu=name,memory.total,driver_version --format=csv,noheader,nounits") { CreateNoWindow = true, UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true });
-            if (process is null) return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, "Capability process unavailable", budget);
-            var line = process.StandardOutput.ReadLine(); process.WaitForExit(1500); token.ThrowIfCancellationRequested();
-            if (string.IsNullOrWhiteSpace(line)) return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, "No adapter reported", budget);
-            var fields = line.Split(',', StringSplitOptions.TrimEntries); var name = fields.ElementAtOrDefault(0) ?? "Unknown adapter";
-            _ = long.TryParse(fields.ElementAtOrDefault(1), NumberStyles.Integer, CultureInfo.InvariantCulture, out var mib); var driver = fields.ElementAtOrDefault(2) ?? string.Empty;
-            budget = GpuMemoryBudget.FromBytes(mib * 1024L * 1024L);
-            return new(name, budget.DedicatedBytes, 0, driver, "12_2+ (reported by host audit)", "None", false, false, false, "No validated DirectML/ComputeSharp backend", budget);
+            if (!OperatingSystem.IsWindowsVersionAtLeast(6, 2))
+                return new("Unavailable", 0, 0, string.Empty, string.Empty, "None", false, false, false, "DirectX 12 compute requires Windows 8 or newer", budget);
+            var smokePassed = TryGpuSmoke(out var smokeFailure);
+            if (!smokePassed) return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, smokeFailure, budget);
+            token.ThrowIfCancellationRequested();
+            var info = ReadGpuInfo();
+            budget = GpuMemoryBudget.FromBytes(info.DedicatedBytes, info.SharedBytes);
+            var available = info.Hardware;
+            return new(info.Name, info.DedicatedBytes, info.SharedBytes, string.Empty,
+                "DX12 device created; exact feature level not queried", available ? "ComputeSharp-DX12" : "None",
+                available, true, true, available ? null : "Default compute device is software emulation", budget);
         }
-        catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException)
-        { return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, ex.Message, budget); }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        { return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, ex.GetType().Name + ": " + ex.Message, budget); }
     }
+
+    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
+    private static bool TryGpuSmoke(out string? failure) => GpuColorMatchCompute.TrySmoke(out failure);
+
+    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
+    private static (string Name, long DedicatedBytes, long SharedBytes, bool Hardware) ReadGpuInfo() => GpuColorMatchCompute.DeviceInfo();
 }
 
 public sealed record ReferenceLookDecomposition(
@@ -202,10 +209,13 @@ public sealed class CpuColorMatchComputeBackend : IColorMatchComputeBackend
 public sealed class GpuColorMatchComputeBackend : IColorMatchComputeBackend
 {
     public ReferenceMatchV4BackendKind Kind => ReferenceMatchV4BackendKind.Gpu;
-    public bool IsAvailable => false;
+    private readonly Lazy<bool> _availability = new(() => OperatingSystem.IsWindowsVersionAtLeast(6, 2) &&
+        GpuColorMatchCompute.TrySmoke(out _) && GpuColorMatchCompute.DeviceInfo().Hardware);
+    public bool IsAvailable => _availability.Value;
+    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
     public IReadOnlyList<OklabColor> Map(IReadOnlyList<OklabColor> source, IReadOnlyList<OklabColor> reference,
         ReferenceMatchV4Settings settings, CancellationToken token = default) =>
-        throw new NotSupportedException("GPU backend is not available on this build; use the CPU fallback.");
+        !IsAvailable ? throw new NotSupportedException("GPU backend is not available; use the CPU fallback.") : GpuColorMatchCompute.Map(source, reference, settings, token);
 }
 
 public static class ReferenceMatchV4Cache
