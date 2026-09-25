@@ -22,3 +22,7 @@ The source PNGs were inspected at their native dimensions using the repository i
 | 38 compact popup | 1770×1080 + popup 420×403 | compact popup, close-safe area, labels | PASS (fixture) | host capture is 1180×720 at 150% physical DPI |
 
 Global visual notes: graphite/mineral surfaces, warm-silver values, oxidized-copper accent, Chinese labels, and themed popups are present in the reviewed frames. Physical DPI remains a release-hardware gate. Native node drag behavior is verified by same-source Win32 state/ordering evidence, but native visual confirmation is explicitly unavailable in this host and is not inferred from state evidence.
+
+## Native production capture diagnostic
+
+Run `native-capture-20260925-052506`, source SHA `d00df6ab75437e05cd0f696db8d53975a65275ed`. The validator accepted 100/100 stability frames; the run contains 195 real Production WPF PNGs. `PRINTWINDOW_0` was selected after testing three PrintWindow flags, window BitBlt, and desktop-region BitBlt. The drag sequence is diagnostic only: 18 cases contain intermittent observer timeout or ordering mismatch, so this run does not close Phase 1.

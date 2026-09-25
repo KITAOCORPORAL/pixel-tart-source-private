@@ -1,6 +1,6 @@
 # Color Studio Phase 1 — product UX closure
 
-**Status: BLOCKED.** Implementation and targeted regression are substantially complete. A repeatable Win32 native pointer runner now verifies the production zoom, fit, pan, sampling, compare, cancellation, rapid-interaction, and same-source node drag paths. The node drag matrix is complete; the remaining gate is native visual confirmation because this host cannot produce valid PrintWindow screenshots.
+**Status: BLOCKED.** Implementation and targeted regression are substantially complete. A validated native capture pipeline now produces real Production WPF pixels and rejects blank, black, stale-looking, transparent, and flat frames. The remaining gate is a clean synchronized native drag run: the current 18-case visual run exposed intermittent observer timeouts and ordering mismatches, so the evidence is retained as diagnostic and is not a closure signoff.
 
 ## Source and build
 
@@ -19,7 +19,7 @@
 | Shared zoom/pan | Implemented 25–400%, fit, 100% logical image pixels, cursor-centred wheel, space-left/middle drag, double-click fit, clamp. Four compare modes share one state. Six mapping/state tests PASS; production linked view capture 22. Win32 SendInput walkthrough verified wheel, fit, 100%, middle-pan, boundary, split, and side-by-side paths. |
 | Eyedropper | Inverse displayed-rect mapping, zoom/pan, split, linked side-by-side, proxy resolution and letterbox rejection PASS in tests. |
 | Node row | 36 DIP row, inline enable, disabled opacity, original nonemoji type symbols, name/strength, selection wash, overflow/rename implemented; bottom button wall removed. Production-view toggle/selection/menu tests PASS. |
-| Drag feedback | Insertion border implemented, reorder/history commands tested. Same-source Win32 `SendInput` matrix completed: 6 scenarios × 3 repetitions, threshold-before-order stability, real Drop reorder, No-op stability, processing hashes, and Ctrl+Z/Ctrl+Y order. Native visual screenshot remains unavailable on this host. |
+| Drag feedback | Insertion border implemented, reorder/history commands tested. State matrix remains available in `artifacts/color-studio-pointer`; the new native capture run produced 195 real Production WPF PNGs and 100/100 stable captures, but 18 visual cases still contain intermittent observer timeouts/order mismatches and remain diagnostic. |
 | Scheme | Cards, select then apply, save/update/save-as, unsaved save/discard/cancel, delete confirmation, restart persistence PASS in command/store regression. Captures 13/19/20 show real view/popups. Updated-scheme deletion fixed by stable ID. Native click-through QA remains PARTIAL. |
 | Batch sync | Choice popup/count, selected-node versus whole-adjustment actions, toast and isolation implemented; regression PASS. Captures 12/21/23 show popup/toast/logical DPI. |
 | Rapid switching | Bounded reference A–E and scheme A–D last-wins tests PASS. Target activation reserves order before asynchronous thumbnail completion. |
@@ -78,7 +78,7 @@ Scoped Color Studio Chinese scan/review: **0 known unapproved English leaks**, n
 
 ## Open product gates
 
-1. Native pointer walkthrough is available through `scripts/verify-color-studio-pointer.ps1`; wheel, fit, 100%, pan, sampling, compare, Esc, rapid interaction, and same-source node drag passed on the production window. The node matrix records 6 scenarios × 3 repetitions, threshold-before-order stability, DragOver/Drop coordinates, final order, processing hashes, and Ctrl+Z/Ctrl+Y. The PowerShell run produced state evidence; PrintWindow screenshot output remains unavailable in this host because `System.Drawing.Common` cannot load into PowerShell 7. Native visual confirmation therefore remains open.
+1. Native capture is available through `scripts/verify-color-studio-native-capture.ps1`. PrintWindow(0), client/full-content PrintWindow, window BitBlt, and desktop-region BitBlt were diagnosed; `PRINTWINDOW_0` was selected and reached 100/100 valid frames. The first full synchronized drag run generated 195 real Production WPF PNGs, but intermittent observer timeouts and ordering mismatches remain. Native visual closure is still open.
 The refreshed 30–34 recovery/settled frames and 35–38 layout frames are production-fixture evidence. Physical display-DPI certification is a separate release-hardware gate, not a Phase 1 product blocker; logical 200% fixture/layout evidence is development coverage.
 
 P0: none observed in targeted runs, not a global absence guarantee.
