@@ -31,6 +31,14 @@ public static class TiffReadBack
         for (var i = 0; i < samples.Length; i++) samples[i] = BinaryPrimitives.ReadUInt16LittleEndian(sourceSamples[(i * 2)..]);
         byte[] icc = [];
         if (tags.TryGetValue(34675, out var iccTag) && iccTag.Count > 0) icc = data.AsSpan(checked((int)iccTag.Value), checked((int)iccTag.Count)).ToArray();
-        return new(width, height, bits, samplesPerPixel, samples, icc);
+        var orientation = tags.TryGetValue(274, out var orientationTag) ? checked((int)(orientationTag.Value & 0xFFFF)) : 1;
+        var dpi = 72;
+        if (tags.TryGetValue(282, out var xResolution) && xResolution.Value + 8 <= data.Length)
+        {
+            var numerator = BinaryPrimitives.ReadUInt32LittleEndian(data.AsSpan(checked((int)xResolution.Value), 4));
+            var denominator = BinaryPrimitives.ReadUInt32LittleEndian(data.AsSpan(checked((int)xResolution.Value + 4), 4));
+            if (denominator != 0) dpi = checked((int)Math.Round(numerator / (double)denominator));
+        }
+        return new(width, height, bits, samplesPerPixel, samples, icc, orientation, dpi);
     }
 }

@@ -26,9 +26,11 @@ compatibility: no legal camera RAW fixture is checked in.
 
 The decoder boundary is now verified in source: `FastPreview` requests 8-bit and
 `ProfessionalDecode` requests 16-bit and reads `ushort` RGB when LibRaw returns 16 bits.
-However, the current `ColorStudioRenderPipeline` still accepts `VisualPixelBuffer` and therefore
-quantizes before Color Studio/V4/Preset/Film. The end-to-end professional chain is **PARTIAL**;
-RGB48 decoder capability must not be reported as full pipeline completion. See
+The professional `ColorStudioRenderPipeline` overload now consumes `HighBitDepthImageBuffer`
+directly, and its Reference Match, Preset, Transition and Color Range stages remain float.
+The V4 engine also has a float CPU entry point. The end-to-end professional chain is still
+**PARTIAL** because not every WPF/export caller is migrated, Film feature parity and vendor
+fixtures are incomplete, and GPU per-pixel stages remain CPU. See
 `docs/imaging/RAW16_TRUTH_AUDIT.md`.
 
 ### Photography context and browser increment
@@ -92,12 +94,12 @@ Color Studio remain PARTIAL.
 | Sony / Canon / Nikon / Fujifilm / Panasonic / OM / Leica / Pentax / Hasselblad / Phase One / Sigma / DJI | PARTIAL or UNSUPPORTED | Matrix records backend candidate status only; no full-decode product claim. DJI is not represented in the current candidate extension set. |
 | Embedded preview | NOT IMPLEMENTED as a verified product path | No fixture-driven preview evidence. |
 | Full decode | PARTIAL | Full LibRaw processing path exists, but current contract is 8-bit RGB sRGB and vendor decode is unverified. |
-| Bit depth | BLOCKED for professional RAW | `LibRawDecoder` explicitly sets `OutputBps = 8`. |
+| Bit depth | PARTIAL / decoder verified | `FastPreview` sets `OutputBps = 8`; `ProfessionalDecode` sets `OutputBps = 16` and reads RGB48. |
 | Working color space | PARTIAL | Decoder outputs sRGB; Color Studio stack declares OKLabD65 internally. No native wide-gamut RAW working path. |
 | ICC | PARTIAL | TIFF ICC payload validation/embedding exists; RAW camera ICC/colorimetric round trip is not verified. |
 | Camera metadata | PARTIAL | Make/model, timestamp and orientation fallback are read; complete metadata carry-through is not implemented. |
-| HighBitDepthImageBuffer | IMPLEMENTED foundation | Shared float RGB buffer and RGB48 adapter exist, but currently ingest from 8-bit decoded RGB. |
-| 16-bit pipeline | PARTIAL | Buffer and TIFF writer exist; RAW-native precision is not preserved end to end. |
+| HighBitDepthImageBuffer | IMPLEMENTED foundation | Shared float RGB buffer and RGB48 adapter preserve native 16-bit samples at the decoder boundary. |
+| 16-bit pipeline | PARTIAL | Professional core Color Studio/V4 path and RGB48 TIFF writer are wired; WPF/export migration, Film parity and vendor fixtures remain open. |
 
 ### Export
 
@@ -106,7 +108,7 @@ Color Studio remain PARTIAL.
 | JPEG | IMPLEMENTED | Existing WPF publishing renderer. |
 | PNG | IMPLEMENTED | Existing WPF publishing renderer. |
 | TIFF 8-bit | PARTIAL | Publishing selection and bounded uncompressed writer exist; production round-trip coverage is limited. |
-| TIFF 16-bit | PARTIAL | RGB48 writer and tests exist; source precision is only as good as the input buffer. |
+| TIFF 16-bit | PARTIAL | RGB48 writer, atomic validation, ICC, DPI and Orientation read-back tests exist; metadata/compression/batch production closure remains open. |
 | ICC embedding | PARTIAL | Validated ICC payload support exists; colorimetric round trip is not verified. |
 | Metadata preservation | PARTIAL | WPF encoder attempts metadata clone; complete TIFF EXIF/orientation carry-through is not proven. |
 | Batch Export | IMPLEMENTED | Existing publishing task service, cancellation, naming safety and batch tests. |

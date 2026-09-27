@@ -27,4 +27,16 @@ public sealed class TiffReadBackTests
         using var stream = new MemoryStream(); TiffExport.WriteRgb48(stream, new HighBitDepthImageBuffer(1, 1, new ushort[] { 1, 2, 3 }), new(TiffBitDepth.Sixteen, icc)); stream.Position = 0;
         CollectionAssert.AreEqual(icc, TiffReadBack.Read(stream).IccProfile.ToArray());
     }
+
+    [TestMethod]
+    public void WriterRoundTripsDpiAndCanonicalOrientation()
+    {
+        using var stream = new MemoryStream();
+        TiffExport.WriteRgb48(stream, new HighBitDepthImageBuffer(2, 1, new ushort[] { 1, 2, 3, 400, 500, 600 }),
+            new(TiffBitDepth.Sixteen, default, "Pixel Tart", 300, 1));
+        stream.Position = 0;
+        var result = TiffReadBack.Read(stream);
+        Assert.AreEqual(300, result.Dpi);
+        Assert.AreEqual(1, result.Orientation);
+    }
 }
