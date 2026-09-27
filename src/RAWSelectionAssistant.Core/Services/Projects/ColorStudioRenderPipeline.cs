@@ -1,14 +1,78 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
 public sealed record ColorStudioRenderResult(VisualPixelBuffer Pixels, IReadOnlyList<VisualPixelBuffer> NodeOutputs, ColorPipelineDescriptor Pipeline,
-    IReadOnlyDictionary<Guid, VisualPixelBuffer>? NodeInputs = null);
+    IReadOnlyDictionary<Guid, VisualPixelBuffer>? NodeInputs = null, HighBitDepthImageBuffer? ProcessingPixels = null,
+    PrecisionTrace? Precision = null);
 
 /// <summary>Headless linear Color Studio renderer. Export callers can use this same chain; no second WPF renderer is introduced.</summary>
 public sealed class ColorStudioRenderPipeline
 {
     private readonly ReferenceLookMatcher _matcher = new();
+
+    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default)
+    {
+        ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
+        var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
+        foreach (var node in normalized.Nodes.Where(item => item.Enabled))
+        {
+            token.ThrowIfCancellationRequested(); inputs[node.Id] = current.ToVisualRgb24();
+            current = ApplyHighPrecision(current, node, reference, analysis, token);
+            outputs.Add(current.ToVisualRgb24());
+        }
+        var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
+        return new(current.ToVisualRgb24(), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
+    }
+
+    private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token)
+    {
+        var values = source.Rgb32.ToArray();
+        if (node.Type == ColorStudioNodeType.ReferenceMatch && reference is not null)
+        {
+            var p = reference.Parameters with
+            {
+                MatchStrength = Parameter(node, "match_strength", reference.Parameters.MatchStrength),
+                ToneStrength = Parameter(node, "tone_strength", reference.Parameters.ToneStrength),
+                ColorStrength = Parameter(node, "color_strength", reference.Parameters.ColorStrength),
+                ContrastStrength = Parameter(node, "contrast_strength", reference.Parameters.ContrastStrength),
+                SaturationStrength = Parameter(node, "saturation_strength", reference.Parameters.SaturationStrength),
+                KeepOriginalTone = Parameter(node, "keep_original_tone", reference.Parameters.KeepOriginalTone ? 1 : 0) >= .5,
+                SkinProtection = Parameter(node, "skin_protection", reference.Parameters.SkinProtection),
+                HighlightProtection = Parameter(node, "highlight_protection", reference.Parameters.HighlightProtection),
+                NeutralProtection = Parameter(node, "neutral_protection", reference.Parameters.NeutralProtection)
+            };
+            var transform = _matcher.BuildTransform(source, analysis, reference with { Parameters = p });
+            for (var i = 0; i < values.Length; i += 3)
+            {
+                if ((i & 2047) == 0) token.ThrowIfCancellationRequested();
+                var mapped = transform.ApplyFloat(values[i], values[i + 1], values[i + 2]);
+                values[i] = mapped.R; values[i + 1] = mapped.G; values[i + 2] = mapped.B;
+            }
+        }
+        else if (node.Type == ColorStudioNodeType.Preset)
+        {
+            var strength = Math.Clamp(Parameter(node, "preset_strength", 1), 0, 1); var exposure = Parameter(node, "exposure", 0) * strength; var contrast = Parameter(node, "contrast", 0) * strength; var saturation = Parameter(node, "saturation", 0) * strength; var scale = Math.Pow(2, exposure);
+            for (var i = 0; i < values.Length; i += 3) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = OklabColorSpace.FromSrgb(values[i], values[i + 1], values[i + 2]); var l = Math.Clamp((lab.L - .5) * (1 + contrast / 100) + .5, 0, 1) * scale; var rgb = OklabColorSpace.ToSrgbLinear(new(l, lab.A * (1 + saturation / 100), lab.B * (1 + saturation / 100))); values[i] = (float)rgb.R; values[i + 1] = (float)rgb.G; values[i + 2] = (float)rgb.B; }
+        }
+        else if (node.Type == ColorStudioNodeType.TransitionBlend)
+        {
+            var amount = Math.Clamp(Parameter(node, "amount", .25), 0, 1); for (var i = 0; i < values.Length; i += 3) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = OklabColorSpace.FromSrgb(values[i], values[i + 1], values[i + 2]); var rgb = OklabColorSpace.ToSrgbLinear(new(lab.L, lab.A * (1 - amount * .12), lab.B * (1 - amount * .12))); values[i] = (float)rgb.R; values[i + 1] = (float)rgb.G; values[i + 2] = (float)rgb.B; }
+        }
+        else if (node.Type == ColorStudioNodeType.ColorRange)
+        {
+            var amount = Math.Clamp(Parameter(node, "strength", 100) / 100, 0, 1); var keepL = Parameter(node, "keep_original_luminance", 0) >= .5; var hue = Parameter(node, "hue", 0) * Math.PI / 180; var saturation = Math.Max(0, 1 + Parameter(node, "saturation", 0) / 100); var chroma = Math.Max(0, 1 + Parameter(node, "chroma", 0) / 100); var lightness = Parameter(node, "lightness", 0) / 100;
+            for (var i = 0; i < values.Length; i += 3) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = OklabColorSpace.FromSrgb(values[i], values[i + 1], values[i + 2]); var angle = hue * amount; var cos = Math.Cos(angle); var sin = Math.Sin(angle); var scale = 1 + (chroma * saturation - 1) * amount; var a = (lab.A * cos - lab.B * sin) * scale; var b = (lab.A * sin + lab.B * cos) * scale; var rgb = OklabColorSpace.ToSrgbLinear(new(keepL ? lab.L : Math.Clamp(lab.L + lightness * amount, 0, 1), a, b)); values[i] = (float)rgb.R; values[i + 1] = (float)rgb.G; values[i + 2] = (float)rgb.B; }
+        }
+        else if (node.Type == ColorStudioNodeType.Film && node.FilmSettings is { Enabled: true } film)
+        {
+            for (var pixel = 0; pixel < source.PixelCount; pixel++) { if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var i = pixel * 3; var profile = film.ProfileId switch { "PT-W01" => (.018, .004, -.012), "PT-C01" => (-.008, .002, .018), _ => (0d, 0d, 0d) }; var amount = film.ProfileAmount / 100; var grain = film.GrainAmount == 0 ? 0 : DeterministicNoise(i, pixel, film.Seed) * film.GrainAmount / 100d * .042; values[i] = (float)Math.Clamp(values[i] + profile.Item1 * amount + grain, 0, 1); values[i + 1] = (float)Math.Clamp(values[i + 1] + profile.Item2 * amount + grain, 0, 1); values[i + 2] = (float)Math.Clamp(values[i + 2] + profile.Item3 * amount + grain, 0, 1); }
+        }
+        return new(source.Width, source.Height, values, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
+    }
+
+    private static double DeterministicNoise(int x, int y, int seed) { unchecked { var n = x * 374761393 + y * 668265263 + seed * 1442695041; n = (n ^ (n >> 13)) * 1274126177; return ((n ^ (n >> 16)) & 0xFFFF) / 32767.5 - 1; } }
 
     public ColorStudioRenderResult Render(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default)
     {

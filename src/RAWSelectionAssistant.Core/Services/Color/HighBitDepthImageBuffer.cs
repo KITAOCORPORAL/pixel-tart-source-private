@@ -6,11 +6,11 @@ namespace RAWSelectionAssistant.Core.Services.Color;
 /// <summary>Shared linear-ish RGB working storage for RAW, Color Studio and export adapters.</summary>
 public sealed class HighBitDepthImageBuffer
 {
-    public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<float> rgb32)
+    public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<float> rgb32, string sourceBitDepth = "32f", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
     {
         if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (rgb32.Length != checked(width * height * 3)) throw new ArgumentException("RGB float buffer length does not match dimensions.", nameof(rgb32));
-        Width = width; Height = height; Rgb32 = rgb32;
+        Width = width; Height = height; Rgb32 = rgb32; SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace; Orientation = orientation; Metadata = metadata;
     }
 
     public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<ushort> rgb48, string sourceBitDepth = "16", string workingColorSpace = "sRGB")
@@ -25,13 +25,15 @@ public sealed class HighBitDepthImageBuffer
     public ReadOnlyMemory<float> Rgb32 { get; }
     public string SourceBitDepth { get; } = "32f";
     public string WorkingColorSpace { get; } = "sRGB";
+    public ushort Orientation { get; } = 1;
+    public RawImageMetadata? Metadata { get; }
     public int PixelCount => Width * Height;
 
     public static HighBitDepthImageBuffer FromRgb24(RawDecodedImage image)
     {
         var output = new float[image.Width * image.Height * 3];
         for (var i = 0; i < output.Length; i++) output[i] = image.Rgb24Pixels[i] / 255f;
-        return new(image.Width, image.Height, output);
+        return new(image.Width, image.Height, output, image.BitsPerChannel.ToString(), image.Metadata.ColorSpace, image.Metadata.Orientation, image.Metadata);
     }
 
     public static HighBitDepthImageBuffer FromRaw(RawDecodedImage image)
@@ -46,7 +48,7 @@ public sealed class HighBitDepthImageBuffer
     {
         var output = new float[image.Rgb24.Length];
         for (var i = 0; i < output.Length; i++) output[i] = image.Rgb24.Span[i] / 255f;
-        return new(image.Width, image.Height, output);
+        return new(image.Width, image.Height, output, "8", "sRGB");
     }
 
     public VisualPixelBuffer ToVisualRgb24()
@@ -55,6 +57,8 @@ public sealed class HighBitDepthImageBuffer
         for (var i = 0; i < output.Length; i++) output[i] = (byte)Math.Clamp(Math.Round(Rgb32.Span[i] * 255), 0, 255);
         return new(Width, Height, output);
     }
+
+    public HighBitDepthImageBuffer Clone() => new(Width, Height, Rgb32.ToArray(), SourceBitDepth, WorkingColorSpace, Orientation, Metadata);
 
     public ushort[] ToRgb48()
     {

@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -135,6 +136,18 @@ public sealed record ReferenceMatchV4Result(
     int ResidualIterations,
     double ResidualError,
     ReferenceLookDecomposition Decomposition,
+    string CacheKey,
+    GpuFailureReason? GpuFailure = null,
+    GpuFallbackStage FallbackStage = GpuFallbackStage.None);
+
+public sealed record ReferenceMatchV4HighPrecisionResult(
+    HighBitDepthImageBuffer Pixels,
+    ReferenceMatchV4BackendKind Backend,
+    bool UsedCpuFallback,
+    int RepresentativeSourceCount,
+    int RepresentativeReferenceCount,
+    int ResidualIterations,
+    double ResidualError,
     string CacheKey,
     GpuFailureReason? GpuFailure = null,
     GpuFallbackStage FallbackStage = GpuFallbackStage.None);
@@ -300,6 +313,60 @@ public sealed class ReferenceMatchV4Engine
             completedResidual, residual, decomposition, ReferenceMatchV4Cache.CreateKey(sourceIdentity, referenceIdentity, settings), gpuFailure, fallbackStage);
     }
 
+    /// <summary>Float processing entry point for professional RAW/TIFF buffers.</summary>
+    /// <remarks>
+    /// Sampling and pixel application stay in float sRGB. The display adapter is
+    /// intentionally not involved; only the returned <see cref="HighBitDepthImageBuffer"/>
+    /// can be used as the next processing stage.
+    /// </remarks>
+    public ReferenceMatchV4HighPrecisionResult Match(HighBitDepthImageBuffer source, HighBitDepthImageBuffer reference,
+        string sourceIdentity = "source", string referenceIdentity = "reference", ReferenceMatchV4Settings? settings = null,
+        bool preferGpu = true, CancellationToken token = default)
+    {
+        ArgumentNullException.ThrowIfNull(source); ArgumentNullException.ThrowIfNull(reference);
+        settings ??= new(); settings.Validate();
+        var sourceSamples = Sample(source, settings.MaximumRepresentativeSamples, token);
+        var referenceSamples = Sample(reference, settings.MaximumRepresentativeSamples, token);
+        var backend = _cpu; GpuFailureReason? gpuFailure = null; var fallbackStage = GpuFallbackStage.None;
+        if (preferGpu && _gpu.IsAvailable) backend = _gpu;
+        else if (preferGpu) { gpuFailure = GpuFailureReason.BackendUnavailable; fallbackStage = GpuFallbackStage.Initialization; }
+        IReadOnlyList<OklabColor> mapped;
+        try { mapped = backend.Map(sourceSamples, referenceSamples, settings, token); }
+        catch (OperationCanceledException) { throw; }
+        catch (OutOfMemoryException) when (backend.Kind == ReferenceMatchV4BackendKind.Gpu)
+        { gpuFailure = GpuFailureReason.OutOfMemory; fallbackStage = GpuFallbackStage.Dispatch; backend = _cpu; mapped = backend.Map(sourceSamples, referenceSamples, settings, token); }
+        catch (Exception) when (backend.Kind == ReferenceMatchV4BackendKind.Gpu)
+        { gpuFailure = GpuFailureReason.ExecutionFailure; fallbackStage = GpuFallbackStage.Dispatch; backend = _cpu; mapped = backend.Map(sourceSamples, referenceSamples, settings, token); }
+
+        var global = WeightedDelta(sourceSamples, mapped);
+        var regionDeltas = BuildRegionDeltas(sourceSamples, mapped);
+        var output = source.Rgb32.ToArray(); var residual = 0d; var completedResidual = 0;
+        for (var iteration = 0; iteration <= settings.ResidualIterations; iteration++)
+        {
+            token.ThrowIfCancellationRequested(); var sumError = 0d;
+            for (var index = 0; index < source.PixelCount; index++)
+            {
+                if ((index & 1023) == 0) token.ThrowIfCancellationRequested();
+                var offset = index * 3; var lab = OklabColorSpace.FromSrgb(output[offset], output[offset + 1], output[offset + 2]);
+                var zone = Math.Clamp((int)(lab.L * 3), 0, 2); var delta = BlendDelta(global, regionDeltas[zone], SmoothRegionWeight(lab.L, zone));
+                var protection = Protection(lab, settings);
+                var l = Math.Clamp(lab.L + Math.Clamp(delta.L, -settings.MaximumLuminanceDisplacement, settings.MaximumLuminanceDisplacement) * protection, 0, 1);
+                var a = lab.A + Math.Clamp(delta.A, -settings.MaximumChromaDisplacement, settings.MaximumChromaDisplacement) * protection;
+                var b = lab.B + Math.Clamp(delta.B, -settings.MaximumChromaDisplacement, settings.MaximumChromaDisplacement) * protection;
+                var rgb = OklabColorSpace.ToSrgbLinear(new(l, a, b)); output[offset] = (float)rgb.R; output[offset + 1] = (float)rgb.G; output[offset + 2] = (float)rgb.B;
+                sumError += Math.Abs(delta.L) + Math.Sqrt(delta.A * delta.A + delta.B * delta.B);
+            }
+            residual = sumError / Math.Max(1, source.PixelCount); completedResidual = iteration;
+            if (iteration == settings.ResidualIterations || residual <= settings.ResidualStopThreshold) break;
+            global = new(global.L * .35, global.A * .35, global.B * .35);
+            regionDeltas = regionDeltas.Select(delta => new OklabColor(delta.L * .35, delta.A * .35, delta.B * .35)).ToArray();
+        }
+        var result = new HighBitDepthImageBuffer(source.Width, source.Height, output, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
+        return new(result, backend.Kind, preferGpu && backend.Kind == ReferenceMatchV4BackendKind.Cpu && gpuFailure is not null,
+            sourceSamples.Count, referenceSamples.Count, completedResidual, residual,
+            ReferenceMatchV4Cache.CreateKey(sourceIdentity, referenceIdentity, settings), gpuFailure, fallbackStage);
+    }
+
     private static List<OklabColor> Sample(VisualPixelBuffer pixels, int maximum, CancellationToken token)
     {
         var count = Math.Min(maximum, pixels.PixelCount); var result = new List<OklabColor>(count);
@@ -307,6 +374,16 @@ public sealed class ReferenceMatchV4Engine
         for (var y = 0; y < pixels.Height && result.Count < maximum; y += step)
             for (var x = 0; x < pixels.Width && result.Count < maximum; x += step)
             { token.ThrowIfCancellationRequested(); var i = (y * pixels.Width + x) * 3; result.Add(OklabColorSpace.FromSrgb(new(pixels.Rgb24.Span[i], pixels.Rgb24.Span[i + 1], pixels.Rgb24.Span[i + 2]))); }
+        return result;
+    }
+
+    private static List<OklabColor> Sample(HighBitDepthImageBuffer pixels, int maximum, CancellationToken token)
+    {
+        var count = Math.Min(maximum, pixels.PixelCount); var result = new List<OklabColor>(count);
+        var step = Math.Max(1, (int)Math.Ceiling(Math.Sqrt((double)pixels.PixelCount / count))); var span = pixels.Rgb32.Span;
+        for (var y = 0; y < pixels.Height && result.Count < maximum; y += step)
+            for (var x = 0; x < pixels.Width && result.Count < maximum; x += step)
+            { token.ThrowIfCancellationRequested(); var i = (y * pixels.Width + x) * 3; result.Add(OklabColorSpace.FromSrgb(span[i], span[i + 1], span[i + 2])); }
         return result;
     }
     private static OklabColor WeightedDelta(IReadOnlyList<OklabColor> source, IReadOnlyList<OklabColor> mapped) =>

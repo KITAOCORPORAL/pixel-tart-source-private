@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -55,11 +56,20 @@ public sealed class ReferenceLookTransform
     public ColorPipelineDescriptor Pipeline { get; }
     public IReadOnlyList<double> ToneCurve => _toneCurve;
 
-    public VisualRgb24 Apply(VisualRgb24 rgb)
+    public VisualRgb24 Apply(VisualRgb24 rgb) => OklabColorSpace.ToSrgbGamutMapped(ApplyCore(OklabColorSpace.FromSrgb(rgb)));
+
+    /// <summary>Applies the same look directly to an encoded float RGB sample.</summary>
+    /// <remarks>The values are sRGB-encoded floats in the canonical processing buffer. This overload never constructs a VisualRgb24, so professional RAW processing does not quantize through an 8-bit display adapter.</remarks>
+    public (float R, float G, float B) ApplyFloat(float r, float g, float b)
+    {
+        var transformed = OklabColorSpace.ToSrgbLinear(ApplyCore(OklabColorSpace.FromSrgb(r, g, b)));
+        return ((float)transformed.R, (float)transformed.G, (float)transformed.B);
+    }
+
+    private OklabColor ApplyCore(OklabColor perceptual)
     {
         var p = _parameters;
-        if (p.MatchStrength == 0 || (p.ToneStrength == 0 && p.ColorStrength == 0)) return rgb;
-        var perceptual = OklabColorSpace.FromSrgb(rgb);
+        if (p.MatchStrength == 0 || (p.ToneStrength == 0 && p.ColorStrength == 0)) return perceptual;
         var bin = Math.Clamp((int)Math.Round(perceptual.L * 255), 0, 255); var effectiveTone = p.KeepOriginalTone ? 0 : p.ToneStrength;
         var mappedL = perceptual.L + (_toneCurve[bin] - perceptual.L) * effectiveTone / 100;
         mappedL += (mappedL - .5) * (_contrast - 1) * p.ContrastStrength / 100 * effectiveTone / 100;
@@ -80,9 +90,9 @@ public sealed class ReferenceLookTransform
         protection *= 1 - Math.Clamp((perceptual.L - .78) / .22, 0, 1) * p.HighlightProtection / 100;
         var strength = p.MatchStrength / 100 * protection;
         var chromaScale = 1 + (_saturation - 1) * p.SaturationStrength / 100 * p.ColorStrength / 100;
-        return OklabColorSpace.ToSrgbGamutMapped(new(perceptual.L + (mappedL - perceptual.L) * strength,
+        return new(perceptual.L + (mappedL - perceptual.L) * strength,
             perceptual.A + ((perceptual.A + da * p.ColorStrength / 100) * chromaScale - perceptual.A) * strength,
-            perceptual.B + ((perceptual.B + db * p.ColorStrength / 100) * chromaScale - perceptual.B) * strength));
+            perceptual.B + ((perceptual.B + db * p.ColorStrength / 100) * chromaScale - perceptual.B) * strength);
     }
 }
 
@@ -103,6 +113,21 @@ public sealed class ReferenceLookMatcher
         var targetSaturation = look.ReferenceSources.Sum(reference => reference.Weight * reference.Analysis.AverageSaturation);
         var saturation = Math.Clamp(targetSaturation / Math.Max(.08, analysis.AverageSaturation), .7, 1.3);
         return new(look.Parameters, sourceTarget, target, curve, contrast, saturation, new());
+    }
+
+    public ReferenceLookTransform BuildTransform(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look)
+    {
+        look = look.Normalize();
+        var targetHistogram = Enumerable.Range(0, 256).Select(bin => look.ReferenceSources.Sum(reference =>
+            reference.Weight * reference.Analysis.HistogramLuma[bin] / Math.Max(1d, reference.Analysis.HistogramLuma.Sum(value => (double)value)))).ToArray();
+        var curve = ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma, targetHistogram);
+        var sourceTarget = ReferenceColorTargetBuilder.FromPixels(source); var target = ReferenceColorTargetBuilder.FromLook(look);
+        var sourceSpan = Math.Max(.06, analysis.ContrastMetric);
+        var targetSpan = look.ReferenceSources.Sum(reference => reference.Weight * reference.Analysis.ContrastMetric);
+        var contrast = Math.Clamp(targetSpan / sourceSpan, .8, 1.2);
+        var targetSaturation = look.ReferenceSources.Sum(reference => reference.Weight * reference.Analysis.AverageSaturation);
+        var saturation = Math.Clamp(targetSaturation / Math.Max(.08, analysis.AverageSaturation), .7, 1.3);
+        return new(look.Parameters, sourceTarget, target, curve, contrast, saturation, new("HighPrecision sRGB", "OKLabD65", "sRGB float"));
     }
 
     public ReferenceMatchResult Match(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look, CancellationToken token = default)

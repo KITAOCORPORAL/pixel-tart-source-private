@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -17,6 +18,18 @@ public readonly record struct OklabColor(double L, double A, double B)
 /// <summary>Public OKLab definition (D65) plus perceptual chroma compression for sRGB output.</summary>
 public static class OklabColorSpace
 {
+    public static OklabColor FromSrgb(float r, float g, float b)
+    {
+        var value = FromLinear(Decode(r), Decode(g), Decode(b));
+        return new(value.R, value.G, value.B);
+    }
+
+    public static (double R, double G, double B) ToSrgbLinear(OklabColor value)
+    {
+        var linear = ToLinear(value);
+        return (EncodeFloat(linear.R), EncodeFloat(linear.G), EncodeFloat(linear.B));
+    }
+
     public static OklabColor FromSrgb(VisualRgb24 value)
     {
         var r = Decode(value.R / 255d); var g = Decode(value.G / 255d); var b = Decode(value.B / 255d);
@@ -57,6 +70,13 @@ public static class OklabColorSpace
 
     private static bool InGamut((double R, double G, double B) value) => value.R is >= 0 and <= 1 && value.G is >= 0 and <= 1 && value.B is >= 0 and <= 1;
     private static double Decode(double value) => value <= .04045 ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4);
+    private static (double R, double G, double B) FromLinear(double r, double g, double b)
+    {
+        var l = .4122214708 * r + .5363325363 * g + .0514459929 * b; var m = .2119034982 * r + .6806995451 * g + .1073969566 * b; var s = .0883024619 * r + .2817188376 * g + .6299787005 * b;
+        var l3 = Math.Cbrt(l); var m3 = Math.Cbrt(m); var s3 = Math.Cbrt(s);
+        return (.2104542553 * l3 + .7936177850 * m3 - .0040720468 * s3, 1.9779984951 * l3 - 2.4285922052 * m3 + .4505937099 * s3, .0259040371 * l3 + .7827717662 * m3 - .8086757660 * s3);
+    }
+    private static double EncodeFloat(double linear) => Math.Clamp(linear <= .0031308 ? 12.92 * linear : 1.055 * Math.Pow(Math.Max(0, linear), 1 / 2.4) - .055, 0, 1);
     private static VisualRgb24 Encode((double R, double G, double B) value)
     {
         static byte Channel(double linear)
@@ -110,6 +130,18 @@ public static class ReferenceColorTargetBuilder
         for (var pixel = 0; pixel < pixels.PixelCount; pixel++)
         {
             var offset = pixel * 3; samples.Add((OklabColorSpace.FromSrgb(new(pixels.Rgb24.Span[offset], pixels.Rgb24.Span[offset + 1], pixels.Rgb24.Span[offset + 2])), 1));
+        }
+        return new(Build(samples, null), Enumerable.Range(0, 3).Select(zone => Build(samples, zone)).ToArray(), samples.Average(sample => sample.Color.L));
+    }
+
+    public static ReferenceColorTarget FromPixels(HighBitDepthImageBuffer pixels)
+    {
+        var samples = new List<(OklabColor Color, double Weight)>(pixels.PixelCount);
+        var span = pixels.Rgb32.Span;
+        for (var pixel = 0; pixel < pixels.PixelCount; pixel++)
+        {
+            var offset = pixel * 3;
+            samples.Add((OklabColorSpace.FromSrgb(span[offset], span[offset + 1], span[offset + 2]), 1));
         }
         return new(Build(samples, null), Enumerable.Range(0, 3).Select(zone => Build(samples, zone)).ToArray(), samples.Average(sample => sample.Color.L));
     }
