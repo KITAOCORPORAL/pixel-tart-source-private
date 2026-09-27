@@ -5,8 +5,8 @@ This file is a repository-derived baseline for the next development task. It was
 ## Git
 
 - `START_HEAD`: `d06b800f6f9c76423b9a1bace08accd8ae34e755`
-- `FINAL_HEAD`: `ccaf4a81743eefd8749ec3e4461fb7415717da07`
-- `REMOTE_HEAD`: `ccaf4a81743eefd8749ec3e4461fb7415717da07`
+- `FINAL_HEAD`: `420456bcb73d0ffcc11c8b08cd03e4d73beef3a9`
+- `REMOTE_HEAD`: `420456bcb73d0ffcc11c8b08cd03e4d73beef3a9`
 - Final verification: `LOCAL_HEAD == REMOTE_HEAD`; working tree clean after push.
 - Branch: `integration/pixel-tart-developer-preview`
 - Before this baseline: `LOCAL_HEAD == REMOTE_HEAD`, working tree clean.
