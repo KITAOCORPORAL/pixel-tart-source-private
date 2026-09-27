@@ -196,6 +196,15 @@ Latest baseline verification:
 - Phase 2 3D Color Space WPF visualization and native gestures.
 - Broader preset semantics, search/category/favorites and dedicated batch browser UX.
 
+## Current continuation delivery
+
+Commit `9da1080` adds the canonical Photography Context reducer, explicit Asset Library
+active/batch semantics, lazy preset catalog with latest-preview cancellation, V4 telemetry/tile
+policy, and deterministic TIFF16 read-back tests for RGB48 dimensions, tonal levels and ICC.
+Release build is 0 warnings/0 errors. Core regression is 1453 passed / 2 skipped with one
+pre-existing theme evidence assertion failure; WPF targeted evidence has the same historical
+live-theme drift.
+
 ## Next development, in dependency order
 
 1. **ALREADY IMPLEMENTED:** Color Studio stack, processing order, schemes, undo/redo, batch sync, preview/export parity and targeted regressions. Keep them stable; do not re-architect.
