@@ -1,4 +1,5 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Export;
 
@@ -21,6 +22,20 @@ public sealed record TiffExportResult(int Width, int Height, TiffBitDepth BitDep
 /// </summary>
 public static class TiffExport
 {
+    public static TiffExportResult WriteRgb48(Stream destination, HighBitDepthImageBuffer pixels, TiffExportOptions? options = null,
+        CancellationToken token = default)
+    {
+        ArgumentNullException.ThrowIfNull(destination); ArgumentNullException.ThrowIfNull(pixels);
+        if (!destination.CanWrite) throw new ArgumentException("The destination stream must be writable.", nameof(destination));
+        options ??= new();
+        if (options.BitDepth != TiffBitDepth.Sixteen) throw new ArgumentException("High bit-depth export requires 16-bit TIFF.", nameof(options));
+        if (options.IccProfile.Length > 16 * 1024 * 1024) throw new ArgumentOutOfRangeException(nameof(options), "ICC profile is too large.");
+        if (options.IccProfile.Length > 0 && !IsValidIcc(options.IccProfile.Span)) throw new ArgumentException("ICC profile is invalid.", nameof(options));
+        var bytes = new byte[pixels.Rgb32.Length * 2]; var samples = pixels.ToRgb48();
+        Buffer.BlockCopy(samples, 0, bytes, 0, bytes.Length);
+        return WriteRgb16Samples(destination, pixels.Width, pixels.Height, bytes, options, token);
+    }
+
     public static TiffExportResult WriteRgb24(Stream destination, VisualPixelBuffer pixels, TiffExportOptions? options = null,
         CancellationToken token = default)
     {
@@ -50,6 +65,17 @@ public static class TiffExport
             for (var index = 0; index < pixels.PixelCount; index++) { if ((index & 4095) == 0) token.ThrowIfCancellationRequested(); var offset = index * 3; writer.Write((ushort)(pixels.Rgb24.Span[offset] * 257)); writer.Write((ushort)(pixels.Rgb24.Span[offset + 1] * 257)); writer.Write((ushort)(pixels.Rgb24.Span[offset + 2] * 257)); }
         }
         writer.Flush(); return new(pixels.Width, pixels.Height, options.BitDepth, TiffCompression.None, destination.Position, options.IccProfile.Length > 0);
+    }
+
+    private static TiffExportResult WriteRgb16Samples(Stream destination, int width, int height, byte[] samples, TiffExportOptions options, CancellationToken token)
+    {
+        using var writer = new BinaryWriter(destination, System.Text.Encoding.ASCII, leaveOpen: true);
+        var entries = BuildEntries(new VisualPixelBuffer(width, height, new byte[width * height * 3]), options, out var bitsOffset, out var xResolutionOffset, out var yResolutionOffset, out var softwareOffset, out var iccOffset, out var pixelOffset);
+        writer.Write((byte)'I'); writer.Write((byte)'I'); writer.Write((ushort)42); writer.Write((uint)8); writer.Write((ushort)entries.Count);
+        foreach (var entry in entries) { writer.Write(entry.Tag); writer.Write(entry.Type); writer.Write(entry.Count); writer.Write(entry.InlineValue); }
+        writer.Write((uint)0); PadTo(writer, bitsOffset); writer.Write((ushort)16); writer.Write((ushort)16); writer.Write((ushort)16); PadTo(writer, xResolutionOffset); writer.Write((uint)72); writer.Write((uint)1); PadTo(writer, yResolutionOffset); writer.Write((uint)72); writer.Write((uint)1); PadTo(writer, softwareOffset); writer.Write(System.Text.Encoding.ASCII.GetBytes(options.Software + "\0")); if (iccOffset > 0) { PadTo(writer, iccOffset); writer.Write(options.IccProfile.Span); } PadTo(writer, pixelOffset);
+        for (var i = 0; i < samples.Length; i++) { if ((i & 4095) == 0) token.ThrowIfCancellationRequested(); writer.Write(samples[i]); }
+        writer.Flush(); return new(width, height, TiffBitDepth.Sixteen, TiffCompression.None, destination.Position, options.IccProfile.Length > 0);
     }
 
     private sealed record Entry(ushort Tag, ushort Type, uint Count, uint InlineValue);

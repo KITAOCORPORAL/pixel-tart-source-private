@@ -41,7 +41,12 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
         {
             try { metadata = original.Clone() as BitmapMetadata; } catch (Exception error) when (error is NotSupportedException or InvalidOperationException) { }
         }
-        BitmapEncoder encoder = options.OutputFormat == PublishingOutputFormat.Png ? new PngBitmapEncoder() : new JpegBitmapEncoder { QualityLevel = options.EffectiveDimensions.JpegQuality };
+        BitmapEncoder encoder = options.OutputFormat switch
+        {
+            PublishingOutputFormat.Png => new PngBitmapEncoder(),
+            PublishingOutputFormat.Tiff => new TiffBitmapEncoder { Compression = TiffCompressOption.Lzw },
+            _ => new JpegBitmapEncoder { QualityLevel = options.EffectiveDimensions.JpegQuality }
+        };
         encoder.Frames.Add(BitmapFrame.Create(bitmap, null, metadata, frame.ColorContexts));
         using var output = new FileStream(destinationPath, FileMode.CreateNew, FileAccess.Write, FileShare.None); encoder.Save(output); output.Flush(true);
     }

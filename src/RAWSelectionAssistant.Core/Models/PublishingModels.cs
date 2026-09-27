@@ -5,11 +5,11 @@ public static class PublishingDefaults
     public const string TaskType = "PublishingExport";
     public const string DefaultSuffix = "_social";
     public const int MaximumInputCount = 5000;
-    public static IReadOnlySet<string> SupportedExtensions { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".jpg", ".jpeg", ".png" };
+    public static IReadOnlySet<string> SupportedExtensions { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".jpg", ".jpeg", ".png", ".tif", ".tiff" };
 }
 
 public enum PublishingSizeMode { Original, LongestEdge, Exact }
-public enum PublishingOutputFormat { Jpeg, Png }
+public enum PublishingOutputFormat { Jpeg, Png, Tiff }
 public enum WatermarkLayerType { Image, Text }
 public enum WatermarkPosition { TopLeft, TopCenter, TopRight, MiddleLeft, Center, MiddleRight, BottomLeft, BottomCenter, BottomRight }
 

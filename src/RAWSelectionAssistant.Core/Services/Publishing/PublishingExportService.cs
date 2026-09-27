@@ -30,7 +30,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (!File.Exists(source)) throw new FileNotFoundException("照片不可用。", source);
-                if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG。");
+                if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG、TIFF。");
                 var before = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                 var destination = ResolveDestination(source, request.DestinationDirectory, request.Options, reserved);
                 reserved.Add(destination);
@@ -71,7 +71,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         var destinationRoot = Path.GetFullPath(destinationDirectory);
         var suffix = options.Suffix ?? string.Empty;
         if (string.Equals(sourceDirectory.TrimEnd(Path.DirectorySeparatorChar), destinationRoot.TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(suffix)) suffix = PublishingDefaults.DefaultSuffix;
-        var extension = options.OutputFormat == PublishingOutputFormat.Png ? ".png" : ".jpg";
+        var extension = options.OutputFormat switch { PublishingOutputFormat.Png => ".png", PublishingOutputFormat.Tiff => ".tif", _ => ".jpg" };
         var stem = Path.GetFileNameWithoutExtension(sourcePath) + suffix;
         var desired = Path.Combine(destinationRoot, stem + extension);
         var candidate = desired; var number = 2;

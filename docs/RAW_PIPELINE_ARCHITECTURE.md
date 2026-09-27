@@ -12,4 +12,6 @@ The decoder currently requests `OutputBps = 8`; therefore it is not yet a high b
 
 The existing decoder package and licenses are retained. No Bayer or X-Trans decoder is implemented in Pixel Tart.
 
+`HighBitDepthImageBuffer` now provides a shared float working representation for decoded RGB buffers and 16-bit export adapters. The existing LibRaw binding still emits 8-bit sRGB, so this removes the export contract bottleneck without claiming sensor precision that the decoder does not provide yet.
+
 Stage 1 GPU progress does not change this RAW gate. Reference Match V4 GPU currently accelerates the pairwise transport kernel after a full RGB buffer exists; it does not provide a RAW decoder or high-bit-depth sensor path.
