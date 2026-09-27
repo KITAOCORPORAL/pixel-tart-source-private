@@ -8,10 +8,15 @@ Current flow:
 
 `RAW file → LibRaw unpack/demosaic → camera white balance or auto white balance → camera matrix → sRGB 8-bit RGB24 → existing Color Studio pipeline`.
 
-The decoder currently requests `OutputBps = 8`; therefore it is not yet a high bit depth working pipeline. Embedded preview reuse, full decode cache, complete camera metadata preservation and RAW-to-16-bit-TIFF integration remain open release work. No camera format is marked verified without a repository fixture.
+`FastPreview` requests `OutputBps = 8`, while `ProfessionalDecode` requests `OutputBps = 16`
+and reads native ushort RGB48 when LibRaw returns 16-bit data. Embedded preview reuse, full
+decode cache, complete camera metadata preservation and legal vendor fixtures remain open
+release work. No camera format is marked verified without a repository fixture.
 
 The existing decoder package and licenses are retained. No Bayer or X-Trans decoder is implemented in Pixel Tart.
 
-`HighBitDepthImageBuffer` now provides a shared float working representation for decoded RGB buffers and 16-bit export adapters. The existing LibRaw binding still emits 8-bit sRGB, so this removes the export contract bottleneck without claiming sensor precision that the decoder does not provide yet.
+`HighBitDepthImageBuffer` provides a shared float working representation for RGB48-decoded
+buffers and 16-bit export adapters. The display `VisualPixelBuffer` remains a presentation
+adapter; professional Color Studio/V4 callers use the float representation directly.
 
 Stage 1 GPU progress does not change this RAW gate. Reference Match V4 GPU currently accelerates the pairwise transport kernel after a full RGB buffer exists; it does not provide a RAW decoder or high-bit-depth sensor path.

@@ -151,11 +151,12 @@ Real implementation is substantial and targeted regression is green. The phase r
 
 ## High Bit Depth and professional RAW chain
 
-The current actual chain is still:
-
-`RAW → LibRaw 8-bit sRGB → HighBitDepthImageBuffer(float) → Color Studio`.
-
-The float buffer prevents later components from requiring byte storage, but it cannot restore sensor precision already discarded by `OutputBps = 8`. The target chain `RAW native precision → high precision working buffer → Color Studio → V4 → Preset → Film → 16-bit TIFF` is therefore **NOT YET CLOSED**.
+The decoder has two explicit chains: `FastPreview → LibRaw 8-bit sRGB` and
+`ProfessionalDecode → LibRaw 16-bit ushort RGB48 → HighBitDepthImageBuffer(float)`.
+The professional core Color Studio/V4/preset path now consumes the latter without an RGB8
+round-trip. The target `RAW native precision → high precision working buffer → Color Studio →
+V4 → Preset → Film → 16-bit TIFF` remains **PARTIAL** until all production callers, full Film
+parity and legal vendor fixtures are closed.
 
 ## GPU
 
