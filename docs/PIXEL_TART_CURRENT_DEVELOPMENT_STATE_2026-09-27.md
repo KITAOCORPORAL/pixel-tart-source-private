@@ -31,6 +31,15 @@ quantizes before Color Studio/V4/Preset/Film. The end-to-end professional chain 
 RGB48 decoder capability must not be reported as full pipeline completion. See
 `docs/imaging/RAW16_TRUTH_AUDIT.md`.
 
+### Photography context and browser increment
+
+The core now contains a canonical `PhotographyContextSnapshot` reducer separating active asset,
+selected assets, rating, preview preset, applied preset and explicit batch scope. Asset Library
+keeps its existing selection persistence and now exposes active/batch-target semantics without
+breaking the legacy API. A provider-neutral lazy preset catalog and cancellable latest-preview
+coordinator were added. WPF Viewer integration, full hover-leave UX and end-to-end high-precision
+Color Studio remain PARTIAL.
+
 ## Capability matrix
 
 ### Color Studio
