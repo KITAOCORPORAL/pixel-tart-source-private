@@ -5,8 +5,9 @@ This file is a repository-derived baseline for the next development task. It was
 ## Git
 
 - `START_HEAD`: `d06b800f6f9c76423b9a1bace08accd8ae34e755`
-- `FINAL_HEAD`: pending this baseline commit
-- `REMOTE_HEAD`: pending this baseline push
+- `FINAL_HEAD`: `ccaf4a81743eefd8749ec3e4461fb7415717da07`
+- `REMOTE_HEAD`: `ccaf4a81743eefd8749ec3e4461fb7415717da07`
+- Final verification: `LOCAL_HEAD == REMOTE_HEAD`; working tree clean after push.
 - Branch: `integration/pixel-tart-developer-preview`
 - Before this baseline: `LOCAL_HEAD == REMOTE_HEAD`, working tree clean.
 - No reset, force push, merge-main, user-data deletion or generated binary artifacts were used.
@@ -178,4 +179,3 @@ Latest baseline verification:
 7. **P2:** Capture One compatible subset only after legal fixtures and semantics are defined.
 8. **P2:** Integrate Phase 2 3D Color Space WPF visualization only after the Phase 1 native closure gate.
 9. **P2:** Add RAM/VRAM telemetry and adaptive quality/concurrency policy.
-
