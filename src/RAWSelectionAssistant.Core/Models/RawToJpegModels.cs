@@ -11,7 +11,7 @@ public static class RawToJpegDefaults
     public static IReadOnlySet<string> CandidateRawExtensions { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         ".ARW", ".CR2", ".CR3", ".NEF", ".NRW", ".RAF", ".DNG", ".RW2",
-        ".ORF", ".ORI", ".PEF", ".3FR", ".FFF", ".IIQ", ".SRW", ".RWL"
+        ".ORF", ".ORI", ".PEF", ".3FR", ".FFF", ".IIQ", ".SRW", ".RWL", ".X3F"
     };
 }
 
@@ -21,7 +21,8 @@ public sealed record RawToJpegOptions(
     bool UseCameraWhiteBalance = true,
     bool VerifySha256 = true,
     bool PreserveExif = true,
-    bool AutoRotate = true)
+    bool AutoRotate = true,
+    RawDecodeMode DecodeMode = RawDecodeMode.FastPreview)
 {
     public RawToJpegOptions Validate()
     {
@@ -40,6 +41,12 @@ public sealed record RawImageMetadata(
     ushort Orientation,
     string ColorSpace);
 
+public enum RawDecodeMode
+{
+    FastPreview,
+    ProfessionalDecode
+}
+
 public sealed record RawDecodedImage(
     int Width,
     int Height,
@@ -48,6 +55,22 @@ public sealed record RawDecodedImage(
     RawImageMetadata Metadata)
 {
     public int RequiredByteCount => checked(Stride * Height);
+    public ushort[]? Rgb48Pixels { get; init; }
+    public int BitsPerChannel { get; init; } = 8;
+    public int Channels { get; init; } = 3;
+    public string PixelFormat { get; init; } = "RGB24";
+    public bool IsProfessionalPrecision => Rgb48Pixels is not null && BitsPerChannel >= 16;
+
+    public static RawDecodedImage FromRgb48(int width, int height, int stride, ushort[] pixels, RawImageMetadata metadata)
+    {
+        ArgumentNullException.ThrowIfNull(pixels);
+        if (width <= 0 || height <= 0 || stride < width * 6 || pixels.Length < checked(width * height * 3))
+            throw new ArgumentOutOfRangeException(nameof(width), "RGB48 dimensions or stride are invalid.");
+        return new RawDecodedImage(width, height, stride, Array.Empty<byte>(), metadata)
+        {
+            Rgb48Pixels = pixels, BitsPerChannel = 16, PixelFormat = "RGB48"
+        };
+    }
 }
 
 public sealed record RawDecoderCapability(

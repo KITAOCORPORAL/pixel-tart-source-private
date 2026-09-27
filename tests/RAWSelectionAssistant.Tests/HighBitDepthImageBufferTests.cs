@@ -24,4 +24,24 @@ public sealed class HighBitDepthImageBufferTests
         var result = TiffExport.WriteRgb48(stream, buffer);
         Assert.AreEqual(TiffBitDepth.Sixteen, result.BitDepth); Assert.IsGreaterThan(6, stream.Length); Assert.AreEqual(1, result.Width);
     }
+
+    [TestMethod]
+    public void RawRgb48PreservesMoreThan256TonalLevels()
+    {
+        var samples = new ushort[300 * 3];
+        for (var i = 0; i < 300; i++) samples[i * 3] = (ushort)(i * 200);
+        var raw = RawDecodedImage.FromRgb48(300, 1, 300 * 6, samples, new(null, null, null, 1, "sRGB"));
+        var buffer = HighBitDepthImageBuffer.FromRaw(raw);
+        var unique = buffer.ToRgb48().Where((_, i) => i % 3 == 0).Distinct().Count();
+        Assert.IsGreaterThan(256, unique);
+        Assert.AreEqual("16", buffer.SourceBitDepth);
+    }
+
+    [TestMethod]
+    public void FastPreviewRemainsExplicitly8Bit()
+    {
+        var raw = new RawDecodedImage(1, 1, 3, [1, 2, 3], new(null, null, null, 1, "sRGB"));
+        Assert.IsFalse(raw.IsProfessionalPrecision);
+        Assert.AreEqual(8, raw.BitsPerChannel);
+    }
 }

@@ -82,3 +82,21 @@ docs/evidence/photography/photo-20260923T075548Z-52be8b76/wpf/
 docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.stdout.txt
 docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.stderr.txt
 docs/evidence/photography/photo-20260923T075548Z-52be8b76/*.trx
+# Local RAW fixtures are intentionally never committed.
+tests/fixtures-local/raw/*.ARW
+tests/fixtures-local/raw/*.CR2
+tests/fixtures-local/raw/*.CR3
+tests/fixtures-local/raw/*.NEF
+tests/fixtures-local/raw/*.NRW
+tests/fixtures-local/raw/*.RAF
+tests/fixtures-local/raw/*.RW2
+tests/fixtures-local/raw/*.ORF
+tests/fixtures-local/raw/*.ORI
+tests/fixtures-local/raw/*.DNG
+tests/fixtures-local/raw/*.PEF
+tests/fixtures-local/raw/*.3FR
+tests/fixtures-local/raw/*.FFF
+tests/fixtures-local/raw/*.IIQ
+tests/fixtures-local/raw/*.SRW
+tests/fixtures-local/raw/*.RWL
+tests/fixtures-local/raw/*.X3F

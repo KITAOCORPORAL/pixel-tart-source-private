@@ -60,6 +60,7 @@ public sealed class LibRawDecoder : IRawDecoder
             var sourceOrientation = ReadOrientation(sourcePath);
             context.Unpack();
             cancellationToken.ThrowIfCancellationRequested();
+            var professional = options.DecodeMode == RawDecodeMode.ProfessionalDecode;
             context.DcrawProcess(output =>
             {
                 output.HalfSize = false;
@@ -67,22 +68,34 @@ public sealed class LibRawDecoder : IRawDecoder
                 output.UseAutoWb = !options.UseCameraWhiteBalance;
                 output.UseCameraMatrix = true;
                 output.OutputColor = LibRawColorSpace.SRGB;
-                output.OutputBps = 8;
+                output.OutputBps = professional ? 16 : 8;
                 output.OutputTiff = false;
                 output.Interpolation = true;
                 if (!options.AutoRotate) output.UserFlip = 0;
             });
             cancellationToken.ThrowIfCancellationRequested();
             using var processed = context.MakeDcrawMemoryImage();
-            if (processed.ImageType != ProcessedImageType.Bitmap || processed.Bits != 8 || processed.Channels != 3)
-                throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The decoder did not return an 8-bit RGB bitmap.");
+            if (processed.ImageType != ProcessedImageType.Bitmap || processed.Channels != 3 || (processed.Bits != 8 && processed.Bits != 16))
+                throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The decoder did not return an RGB bitmap with a supported bit depth.");
 
-            var stride = checked(processed.Width * processed.Channels);
+            var bytesPerSample = processed.Bits / 8;
+            var stride = checked(processed.Width * processed.Channels * bytesPerSample);
             var required = checked(stride * processed.Height);
             if (processed.Width <= 0 || processed.Height <= 0 || processed.DataSize < required)
                 throw new RawDecodeException(ErrorCodeCatalog.CorruptedImage, "The decoded bitmap is incomplete.");
 
-            var pixels = processed.AsSpan<byte>()[..required].ToArray();
+            byte[] pixels;
+            ushort[]? pixels48 = null;
+            if (processed.Bits == 16)
+            {
+                var samples = checked(processed.Width * processed.Height * processed.Channels);
+                pixels48 = processed.AsSpan<ushort>()[..samples].ToArray();
+                pixels = Array.Empty<byte>();
+            }
+            else
+            {
+                pixels = processed.AsSpan<byte>()[..required].ToArray();
+            }
             DateTimeOffset? capturedAt = otherParams.Timestamp > 0
                 ? DateTimeOffset.FromUnixTimeSeconds(otherParams.Timestamp)
                 : null;
@@ -95,7 +108,11 @@ public sealed class LibRawDecoder : IRawDecoder
                 throw new RawDecodeException(ErrorCodeCatalog.SourceChanged, "The RAW source changed during decoding.");
 
             _verifiedExtensions.TryAdd(extension.ToUpperInvariant(), 0);
-            return new(processed.Width, processed.Height, stride, pixels, metadata);
+            return new RawDecodedImage(processed.Width, processed.Height, stride, pixels, metadata)
+            {
+                Rgb48Pixels = pixels48, BitsPerChannel = processed.Bits,
+                PixelFormat = processed.Bits == 16 ? "RGB48" : "RGB24"
+            };
         }
         catch (OperationCanceledException) { throw; }
         catch (RawDecodeException) { throw; }

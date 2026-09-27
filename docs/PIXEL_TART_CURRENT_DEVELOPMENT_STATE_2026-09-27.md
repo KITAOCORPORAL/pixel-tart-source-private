@@ -14,6 +14,14 @@ This file is a repository-derived baseline for the next development task. It was
 - Before this baseline: `LOCAL_HEAD == REMOTE_HEAD`, working tree clean.
 - No reset, force push, merge-main, user-data deletion or generated binary artifacts were used.
 
+### 2026-09-27 professional imaging increment
+
+The RAW contract now distinguishes `FastPreview` from `ProfessionalDecode`. The latter requests
+LibRaw 16-bit output and carries RGB48 samples when the native processed image reports 16 bits;
+the existing 8-bit path is unchanged for JPEG/thumbnail safety. A local fixture manifest and
+gitignore boundary were added. This is an implementation increment, not a claim of vendor
+compatibility: no legal camera RAW fixture is checked in.
+
 ## Capability matrix
 
 ### Color Studio
