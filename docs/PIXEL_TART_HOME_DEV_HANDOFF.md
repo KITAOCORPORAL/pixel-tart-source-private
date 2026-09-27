@@ -65,7 +65,7 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 - Existing LibRaw decoding remains the canonical RAW path and is documented as `BACKEND_SUPPORTED_NOT_VERIFIED` without vendor fixtures.
 - A bounded uncompressed RGB TIFF writer now supports 8-bit/16-bit samples, optional ICC payloads and cancellation. It does not claim high-bit-depth RAW preservation or full RAW-to-TIFF release closure.
 - Stage 2 is **PARTIAL / BLOCKED** by missing legal vendor fixtures and the current decoder's 8-bit output contract. A shared float working buffer and TIFF publishing path now exist; RAW sensor precision and RAW→TIFF integration remain open.
-- Adobe XMP Stage 3 foundation is **PARTIAL**: parser, compatibility states, source hashing, persistent storage and cancellable batch import are implemented. Capture One, preset browser, live hover and strength UI remain open.
+- Adobe XMP Stage 3 foundation is **PARTIAL**: parser, compatibility states, source hashing, persistent storage, cancellable batch import, Color Studio preset node, hover/selection preview, strength control and commit/cancel with Adjustment Stack undo are implemented. Capture One and full third-party semantic coverage remain open.
 - GPU implementation decision and third-party preset boundaries are recorded in `docs/color-studio/GPU_BACKEND_IMPLEMENTATION_DECISION.md`, `docs/THIRD_PARTY_PRESET_ARCHITECTURE.md` and the related compatibility documents. ComputeSharp-DX12 hardware smoke and eight-scene parity now pass; full V4 GPU execution remains PARTIAL. Stage 3 and Stage 4 remain **NOT STARTED**.
 
 ## I. Environment and handoff rules
