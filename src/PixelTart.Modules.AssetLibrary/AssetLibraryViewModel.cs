@@ -575,6 +575,10 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     public double MaximumVisualValue { get => _maximumVisualValue; set => SetProperty(ref _maximumVisualValue, Math.Clamp(value, 0, 1)); }
     public AssetLibraryUndoToken? LastUndoToken { get; private set; }
     public AssetItem? SelectedAsset { get => _selectedAsset; set { if (SetProperty(ref _selectedAsset, value)) SyncSelection(value is null ? [] : [value]); } }
+    /// <summary>Canonical active photo; selection remains independently persisted in SelectedAssetIds.</summary>
+    public AssetItem? ActiveAsset => SelectedAssets.Count == 1 ? SelectedAssets[0] : null;
+    public IReadOnlySet<Guid> SelectedAssetSet => _workspaceSettings.SelectedAssetIds.ToHashSet();
+    public string BatchTargetSummary => SelectionCount == 0 ? "未选择批处理目标" : $"将应用到 {SelectionCount} 张照片";
     private string _inspectorAssetOrigin = "未指定";
     private string _inspectorWorkflowStatus = "未处理";
     private string _inspectorProject = "未关联";
