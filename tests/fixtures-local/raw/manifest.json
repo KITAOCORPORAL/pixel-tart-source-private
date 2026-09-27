@@ -1,4 +1,6 @@
 {
-  "status": "INFRASTRUCTURE READY",
+  "status": "FIXTURE_PENDING",
+  "schema": "RAW_FIXTURE_MANIFEST",
+  "fields": ["vendor", "camera", "format", "file", "sha256", "width", "height", "expectedBits", "expectedOrientation", "expectedMetadata"],
   "fixtures": []
 }
