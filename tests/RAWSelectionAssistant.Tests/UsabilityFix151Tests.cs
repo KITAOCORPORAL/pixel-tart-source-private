@@ -12,7 +12,7 @@ public sealed class UsabilityFix151Tests
     [TestMethod] public void ContextMenu_UsesSameThemeResources() => Contains(Menu(), "TargetType=\"ContextMenu\"", "MenuPopupBackgroundBrush", "MenuPopupBorderBrush", "ItemsPresenter");
     [TestMethod] public void Separator_UsesLowContrastThemeBrush() => Contains(Menu(), "TargetType=\"Separator\"", "MenuSeparatorBrush", "Height=\"1\"");
 
-    [TestMethod] public void DarkTheme_DefinesNonWhiteMenuPopupPalette() { var text = Theme("Dark"); Contains(text, "MenuPopupBackgroundBrush\" Color=\"#2B2832", "MenuItemHoverBrush\" Color=\"#332F3A", "MenuShortcutBrush\" Color=\"#77727E"); DoesNotContain(text, "MenuPopupBackgroundBrush\" Color=\"#FFFFFF"); }
+    [TestMethod] public void DarkTheme_DefinesNonWhiteMenuPopupPalette() { var text = Theme("Dark"); Contains(text, "MenuPopupBackgroundBrush\" Color=\"#353A36", "MenuItemHoverBrush\" Color=\"#303633", "MenuShortcutBrush\" Color=\"#77736F"); DoesNotContain(text, "MenuPopupBackgroundBrush\" Color=\"#FFFFFF"); }
     [TestMethod] public void LightTheme_DefinesMenuPopupPalette() => Contains(Theme("Light"), "MenuPopupBackgroundBrush\" Color=\"#FFFFFF", "MenuPopupBorderBrush", "MenuItemHoverBrush", "MenuShortcutBrush");
     [TestMethod] public void HighContrastTheme_UsesSystemMenuColors() => Contains(Theme("HighContrast"), "SystemColors.MenuColor", "SystemColors.MenuTextColor", "SystemColors.HighlightColor");
     [TestMethod] public void AppearanceService_ReplacesThemeDictionaryImmediately() => Contains(Text("src/RAWSelectionAssistant/Services/AppearanceService.cs"), "ReplaceThemeDictionary(effectiveTheme)", "UserPreferenceChanged", "Application.Current.Dispatcher.BeginInvoke");

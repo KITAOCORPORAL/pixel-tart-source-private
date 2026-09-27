@@ -45,10 +45,10 @@ public sealed class PublishingPresetTests
 public sealed class PublishingFolderInputTests
 {
     [TestMethod]
-    public void ScansJpegAndPngAndExplicitlyExcludesTiff()
+    public void ScansJpegPngAndTiffAndExcludesUnknownFiles()
     {
-        using var temp=new TempDirectory();temp.CreateFile("a.jpg");temp.CreateFile("b.JPEG");temp.CreateFile("c.png");temp.CreateFile("not-supported.tiff");temp.CreateFile("notes.txt");
-        var result=PublishingFolderInput.Scan(temp.Path);Assert.HasCount(3,result);Assert.IsFalse(result.Any(path=>Path.GetExtension(path).Equals(".tiff",StringComparison.OrdinalIgnoreCase)));
+        using var temp=new TempDirectory();temp.CreateFile("a.jpg");temp.CreateFile("b.JPEG");temp.CreateFile("c.png");temp.CreateFile("supported.tiff");temp.CreateFile("notes.txt");
+        var result=PublishingFolderInput.Scan(temp.Path);Assert.HasCount(4,result);Assert.IsTrue(result.Any(path=>Path.GetExtension(path).Equals(".tiff",StringComparison.OrdinalIgnoreCase)));Assert.IsFalse(result.Any(path=>Path.GetExtension(path).Equals(".txt",StringComparison.OrdinalIgnoreCase)));
     }
 }
 
