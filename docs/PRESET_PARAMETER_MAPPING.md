@@ -1,3 +1,9 @@
-# Preset parameter mapping
+# Adobe XMP parameter mapping
 
-Adobe XMP mapping foundation is implemented. Exposure, Contrast, Highlights, Shadows, Whites and Blacks are marked EXACT; Temperature, Tint, Texture, Clarity, Dehaze, Vibrance, Saturation, Grain and Vignette are APPROXIMATE; Tone Curve, Color Grading, Calibration and LUT profile references are UNSUPPORTED until their semantics are implemented. Capture One remains unimplemented.
+| Parameter | Status |
+|---|---|
+| Exposure, Contrast, Highlights, Shadows, Whites, Blacks | EXACT |
+| Temperature, Tint, Texture, Clarity, Dehaze, Vibrance, Saturation, Grain, Vignette | APPROXIMATE |
+| Tone Curve, HSL, Color Grading, Calibration, LUT/Profile | UNSUPPORTED |
+
+Unsupported fields are retained as diagnostics and are not silently reported as fully imported.

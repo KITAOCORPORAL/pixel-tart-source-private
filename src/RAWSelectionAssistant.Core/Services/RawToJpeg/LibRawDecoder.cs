@@ -31,6 +31,38 @@ public sealed class LibRawDecoder : IRawDecoder
         }
     }
 
+    /// <summary>Best-effort embedded preview. Failure returns null so professional decode can continue.</summary>
+    public Task<RawDecodedImage?> TryDecodeEmbeddedPreviewAsync(string sourcePath, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(sourcePath);
+        return Task.Run(() => TryDecodeEmbeddedPreviewCore(Path.GetFullPath(sourcePath), cancellationToken), cancellationToken);
+    }
+
+    private static RawDecodedImage? TryDecodeEmbeddedPreviewCore(string sourcePath, CancellationToken token)
+    {
+        try
+        {
+            token.ThrowIfCancellationRequested();
+            using var context = RawContext.OpenFile(sourcePath);
+            context.UnpackThumbnail(0);
+            token.ThrowIfCancellationRequested();
+            using var preview = context.MakeDcrawMemoryThumbnail();
+            if (preview.ImageType != ProcessedImageType.Bitmap || preview.Bits != 8 || preview.Channels != 3 || preview.Width <= 0 || preview.Height <= 0)
+                return null;
+            var stride = checked(preview.Width * 3);
+            var count = checked(stride * preview.Height);
+            if (preview.DataSize < count) return null;
+            var pixels = preview.AsSpan<byte>()[..count].ToArray();
+            var parameters = context.ImageParams;
+            return new RawDecodedImage(preview.Width, preview.Height, stride, pixels,
+                new RawImageMetadata(string.IsNullOrWhiteSpace(parameters.Make) ? null : parameters.Make.Trim(),
+                    string.IsNullOrWhiteSpace(parameters.Model) ? null : parameters.Model.Trim(), null, 1, "sRGB"));
+        }
+        catch (OperationCanceledException) { throw; }
+        catch (Exception ex) when (ex is LibRawException or IOException or InvalidDataException or DllNotFoundException or BadImageFormatException)
+        { return null; }
+    }
+
     public Task<RawDecodedImage> DecodeAsync(string sourcePath, RawToJpegOptions options, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(sourcePath);

@@ -22,6 +22,15 @@ the existing 8-bit path is unchanged for JPEG/thumbnail safety. A local fixture 
 gitignore boundary were added. This is an implementation increment, not a claim of vendor
 compatibility: no legal camera RAW fixture is checked in.
 
+### RAW16 truth audit correction
+
+The decoder boundary is now verified in source: `FastPreview` requests 8-bit and
+`ProfessionalDecode` requests 16-bit and reads `ushort` RGB when LibRaw returns 16 bits.
+However, the current `ColorStudioRenderPipeline` still accepts `VisualPixelBuffer` and therefore
+quantizes before Color Studio/V4/Preset/Film. The end-to-end professional chain is **PARTIAL**;
+RGB48 decoder capability must not be reported as full pipeline completion. See
+`docs/imaging/RAW16_TRUTH_AUDIT.md`.
+
 ## Capability matrix
 
 ### Color Studio
