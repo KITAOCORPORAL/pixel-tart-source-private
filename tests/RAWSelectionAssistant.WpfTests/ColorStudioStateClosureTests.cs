@@ -3,6 +3,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Presets;
 using RAWSelectionAssistant.ViewModels;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -10,6 +11,21 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class ColorStudioStateClosureTests
 {
+    [TestMethod]
+    public void AdobePresetHoverStrengthCommitAndUndoTests() => Sta(() =>
+    {
+        using var editor = Editor();
+        var preset = AdobeXmpPresetParser.Parse("warm.xmp", System.Text.Encoding.UTF8.GetBytes("<root Exposure2012=\"1\" Contrast2012=\"20\" />"));
+        editor.PresetStrengthPercent = 50;
+        editor.HoverPreset(preset);
+        Assert.IsTrue(editor.IsPresetPreviewing);
+        editor.CommitPresetCommand.Execute(null);
+        var node = editor.AdjustmentNodes.Single(item => item.Type == ColorStudioNodeType.Preset);
+        Assert.AreEqual(.5, node.NumericParameters["preset_strength"], .0001);
+        Assert.IsTrue(editor.UndoAdjustmentCommand.CanExecute(null));
+        editor.UndoAdjustmentCommand.Execute(null);
+        Assert.IsEmpty(editor.AdjustmentNodes);
+    });
     [TestMethod]
     public void SimpleProfessionalRoundTripPreservesReferenceStateTests() => Sta(() =>
     {

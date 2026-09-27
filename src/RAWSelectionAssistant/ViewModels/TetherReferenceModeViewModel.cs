@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Presets;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -59,6 +60,11 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private ColorAdjustmentStack? _editTransactionBefore;
     private Guid? _editTransactionSelection;
     private bool _syncingStack;
+    private readonly AdobeXmpPresetStore _xmpStore;
+    private readonly AdobeXmpImportService _xmpImportService;
+    private AdobeXmpPreset? _selectedAdobeXmpPreset;
+    private ColorAdjustmentStackNode? _presetPreviewNode;
+    private int _presetStrengthPercent = 100;
     public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
     private ProcessingState _processingState;
     public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); OnPropertyChanged(nameof(IsSettled)); } } }
@@ -98,6 +104,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film, ColorAdjustmentStack? stack = null)
     {
+        CancelPresetPreview();
         if (look is not null)
         {
             _selectedLook = look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
@@ -181,7 +188,16 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public AsyncRelayCommand SaveColorSchemeAsCommand { get; }
     public AsyncRelayCommand DeleteColorSchemeCommand { get; }
     public RelayCommand ApplyColorSchemeCommand { get; }
+    public AsyncRelayCommand ImportAdobeXmpCommand { get; }
+    public RelayCommand PreviewPresetCommand { get; }
+    public RelayCommand CommitPresetCommand { get; }
+    public RelayCommand CancelPresetCommand { get; }
     public ObservableCollection<ColorStudioSchemeV2> ColorSchemes { get; } = [];
+    public ObservableCollection<AdobeXmpPreset> AdobeXmpPresets { get; } = [];
+    public AdobeXmpPreset? SelectedAdobeXmpPreset { get => _selectedAdobeXmpPreset; set { if (SetProperty(ref _selectedAdobeXmpPreset, value)) PreviewSelectedPreset(); } }
+    public int PresetStrengthPercent { get => _presetStrengthPercent; set { var bounded = Math.Clamp(value, 0, 100); if (SetProperty(ref _presetStrengthPercent, bounded)) UpdatePresetPreview(); } }
+    public bool IsPresetPreviewing => _presetPreviewNode is not null;
+    public double SelectedPresetStrength { get => SelectedNumeric("preset_strength", 1) * 100; set { if (SelectedAdjustmentNode?.Type == ColorStudioNodeType.Preset) SetSelectedNumeric("preset_strength", Math.Clamp(value, 0, 100) / 100); } }
     public ColorStudioSchemeV2? SelectedColorScheme { get => _selectedColorScheme; set { if (SetProperty(ref _selectedColorScheme, value)) { if (value is not null) { ColorSchemeName = value.Name; OnPropertyChanged(nameof(ColorSchemeName)); } ApplyColorSchemeCommand?.RaiseCanExecuteChanged(); DeleteColorSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public string ColorSchemeName { get; set; } = "新色彩方案";
     public IReadOnlyList<string> WorkspaceModes { get; } = ["简洁", "专业"];
@@ -240,6 +256,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _schemeStore = schemeStore ?? new ColorStudioSchemeStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
+        _xmpStore = new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals", "adobe-xmp"));
+        _xmpImportService = new(_xmpStore);
         _dialogs = dialogs;
         _preview = renderBackend ?? new ReferenceLookPreviewService();
         _allowReferenceManagement = allowReferenceManagement;
@@ -287,6 +305,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         SaveColorSchemeAsCommand = new AsyncRelayCommand(_ => SaveColorSchemeAsync(true));
         DeleteColorSchemeCommand = new AsyncRelayCommand(_ => DeleteColorSchemeAsync(), _ => SelectedColorScheme is not null);
         ApplyColorSchemeCommand = new RelayCommand(_ => ApplyColorScheme(), _ => SelectedColorScheme is not null);
+        ImportAdobeXmpCommand = new AsyncRelayCommand(_ => ImportAdobeXmpAsync(), _ => _dialogs is not null);
+        PreviewPresetCommand = new RelayCommand(_ => PreviewSelectedPreset(), _ => SelectedAdobeXmpPreset is not null);
+        CommitPresetCommand = new RelayCommand(_ => CommitPresetPreview(), _ => IsPresetPreviewing);
+        CancelPresetCommand = new RelayCommand(_ => CancelPresetPreview(), _ => IsPresetPreviewing);
         InitializeSchemeInteractions();
     }
     private void EnsureProfessionalStack()
@@ -338,6 +360,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change)
     {
+        _presetPreviewNode = null; NotifyPresetPreview();
         var previous = AdjustmentStack; var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
         if (previous.Nodes.SequenceEqual(nodes)) return;
         if (_editTransactionBefore is null) { _undoStacks.Push(previous); _undoSelections.Push(_selectedAdjustmentNodeId); }
@@ -345,7 +368,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     public void BeginEditTransaction()
     {
-        if (_editTransactionBefore is not null) return;
+        if (_editTransactionBefore is not null || IsPresetPreviewing || AdjustmentStack.Nodes.Count == 0) return;
         _editTransactionBefore = AdjustmentStack.DeepClone(); _editTransactionSelection = _selectedAdjustmentNodeId;
     }
     public void CommitEditTransaction()
@@ -535,6 +558,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         {
             var schemes = await _schemeStore.LoadAsync(token);
             ColorSchemes.Clear(); foreach (var scheme in schemes.OrderByDescending(item => item.UpdatedAtUtc)) ColorSchemes.Add(scheme);
+            AdobeXmpPresets.Clear(); foreach (var preset in await _xmpStore.LoadAsync(token)) AdobeXmpPresets.Add(preset);
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidDataException)
         { StatusText = "色彩方案未能加载；原文件已保留。"; }
@@ -561,6 +585,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) { SelectedLook = null; _sessionLookId = null; } _projectId = projectId; await LoadAsync(token); }
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
+        _presetPreviewNode = null; NotifyPresetPreview();
         _render?.Cancel(); Interlocked.Increment(ref _revision);
         _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 1600); OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         RaiseViewProperties();
@@ -578,6 +603,65 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         SelectedLook = Looks.FirstOrDefault(look => look.ReferenceLookId == lookId) ?? SelectedLook;
     }
     public void ResetSplit() => SplitPosition = .5;
+
+    private async Task ImportAdobeXmpAsync()
+    {
+        if (_dialogs is null) return;
+        var paths = _dialogs.ChooseFiles("导入 Adobe XMP 预设", "Adobe XMP|*.xmp|所有文件|*.*", true);
+        if (paths.Count == 0) return;
+        try
+        {
+            var imported = await _xmpImportService.ImportAsync(paths, token: _lifetime.Token);
+            foreach (var preset in imported) { AdobeXmpPresets.Remove(AdobeXmpPresets.FirstOrDefault(item => item.SourceHash == preset.SourceHash)!); AdobeXmpPresets.Insert(0, preset); }
+            if (imported.Count > 0) SelectedAdobeXmpPreset = imported[0];
+            StatusText = imported.Count == paths.Count ? $"已导入 {imported.Count} 个 Adobe XMP 预设。" : $"已导入 {imported.Count}/{paths.Count} 个 Adobe XMP 预设。";
+        }
+        catch (OperationCanceledException) { StatusText = "已停止导入预设。"; }
+        catch (Exception) { StatusText = "Adobe XMP 导入失败；已有预设保持不变。"; }
+    }
+
+    private void PreviewSelectedPreset()
+    {
+        if (SelectedAdobeXmpPreset is not { } preset) return;
+        HoverPreset(preset);
+    }
+
+    public void HoverPreset(AdobeXmpPreset preset)
+    {
+        _presetPreviewNode = CreatePresetNode(preset, PresetStrengthPercent / 100d);
+        NotifyPresetPreview(); _ = DebouncedRenderAsync();
+    }
+
+    private void UpdatePresetPreview()
+    {
+        if (_presetPreviewNode is not { } node) { PreviewSelectedPreset(); return; }
+        _presetPreviewNode = node with { NumericParameters = new Dictionary<string, double>(node.NumericParameters) { ["preset_strength"] = PresetStrengthPercent / 100d } };
+        _ = DebouncedRenderAsync();
+    }
+
+    private static ColorAdjustmentStackNode CreatePresetNode(AdobeXmpPreset preset, double strength)
+    {
+        var parameters = preset.NumericParameters.ToDictionary(item => item.Key, item => item.Value, StringComparer.OrdinalIgnoreCase);
+        parameters["preset_strength"] = strength;
+        return new(Guid.NewGuid(), ColorStudioNodeType.Preset, preset.Name, true, parameters);
+    }
+
+    private void CommitPresetPreview()
+    {
+        if (_presetPreviewNode is not { } node) return;
+        ChangeStack(nodes => [.. nodes, node]); SelectedAdjustmentNode = node; Enabled = true;
+    }
+
+    public void CancelPresetPreview()
+    {
+        if (_presetPreviewNode is null) return;
+        _presetPreviewNode = null; NotifyPresetPreview(); _ = RenderAsync();
+    }
+    private void NotifyPresetPreview()
+    {
+        OnPropertyChanged(nameof(IsPresetPreviewing));
+        CommitPresetCommand?.RaiseCanExecuteChanged(); CancelPresetCommand?.RaiseCanExecuteChanged(); PreviewPresetCommand?.RaiseCanExecuteChanged();
+    }
     public void HoldOriginal(bool held) { if (_originalHeld == held) return; _originalHeld = held; RaiseViewProperties(); }
     private void SetParameter(double value, Func<ReferenceLookParameters, ReferenceLookParameters> update, ref double fallback, string nodeKey)
     {
@@ -710,10 +794,11 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
         var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
+        if (_presetPreviewNode is { } presetPreview) stack = new ColorAdjustmentStack([.. stack.Nodes, presetPreview]);
         var selection = ShowSelection ? SelectedAdjustmentNode : null;
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);
-        if (!Enabled || source is null || (look is null && AdjustmentStack.Nodes.Count == 0)) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
+        if (!Enabled || source is null || (look is null && stack.Nodes.Count == 0)) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
         _render?.Dispose(); _render = CancellationTokenSource.CreateLinkedTokenSource(outer, _lifetime.Token);
         var renderToken = _render.Token;
         HasError = false; StatusText = interactive ? "正在生成快速预览…" : "正在生成高质量预览…";

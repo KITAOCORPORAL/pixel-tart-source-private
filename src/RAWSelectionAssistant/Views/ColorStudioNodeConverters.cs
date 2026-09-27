@@ -16,12 +16,13 @@ public sealed class ColorStudioNodeStrengthConverter : IValueConverter
             ColorStudioNodeType.ReferenceMatch => "match_strength",
             ColorStudioNodeType.ColorRange => "strength",
             ColorStudioNodeType.TransitionBlend => "amount",
+            ColorStudioNodeType.Preset => "preset_strength",
             _ => "profile_amount"
         };
-        var fallback = node.Type == ColorStudioNodeType.TransitionBlend ? .25 : 100d;
+        var fallback = node.Type == ColorStudioNodeType.TransitionBlend ? .25 : node.Type == ColorStudioNodeType.Preset ? 1d : 100d;
         var amount = node.NumericParameters.TryGetValue(key, out var number) ? number :
             node.Type == ColorStudioNodeType.Film ? node.FilmSettings?.ProfileAmount ?? fallback : fallback;
-        return $"{amount * (node.Type == ColorStudioNodeType.TransitionBlend ? 100 : 1):0}%";
+        return $"{amount * (node.Type is ColorStudioNodeType.TransitionBlend or ColorStudioNodeType.Preset ? 100 : 1):0}%";
     }
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }
@@ -29,7 +30,7 @@ public sealed class ColorStudioNodeStrengthConverter : IValueConverter
 public sealed class ColorStudioNodeIconConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is ColorAdjustmentStackNode node
-        ? node.Type switch { ColorStudioNodeType.ReferenceMatch => "◎", ColorStudioNodeType.ColorRange => "◌", ColorStudioNodeType.TransitionBlend => "≋", ColorStudioNodeType.Film => "▣", _ => "•" }
+        ? node.Type switch { ColorStudioNodeType.ReferenceMatch => "◎", ColorStudioNodeType.ColorRange => "◌", ColorStudioNodeType.TransitionBlend => "≋", ColorStudioNodeType.Film => "▣", ColorStudioNodeType.Preset => "✦", _ => "•" }
         : "•";
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }

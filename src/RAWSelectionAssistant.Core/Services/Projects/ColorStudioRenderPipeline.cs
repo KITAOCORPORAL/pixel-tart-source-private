@@ -25,6 +25,7 @@ public sealed class ColorStudioRenderPipeline
                 ColorStudioNodeType.ColorRange => ApplyColorRange(current, node, token),
                 ColorStudioNodeType.Film => ApplyFilm(current, node, token),
                 ColorStudioNodeType.TransitionBlend => ApplyTransition(current, node, token),
+                ColorStudioNodeType.Preset => ApplyPreset(current, node, token),
                 _ => current
             };
             outputs.Add(current);
@@ -106,6 +107,28 @@ public sealed class ColorStudioRenderPipeline
     {
         var amount = Math.Clamp(Parameter(node, "amount", .25), 0, 1); var output = source.Rgb24.ToArray();
         for (var pixel = 0; pixel < source.PixelCount; pixel++) { if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3; var lab = OklabColorSpace.FromSrgb(new(output[offset], output[offset + 1], output[offset + 2])); var result = OklabColorSpace.ToSrgbGamutMapped(new(lab.L, lab.A * (1 - amount * .12), lab.B * (1 - amount * .12))); output[offset] = result.R; output[offset + 1] = result.G; output[offset + 2] = result.B; }
+        return new(source.Width, source.Height, output);
+    }
+
+    private static VisualPixelBuffer ApplyPreset(VisualPixelBuffer source, ColorAdjustmentStackNode node, CancellationToken token)
+    {
+        var strength = Math.Clamp(Parameter(node, "preset_strength", 1), 0, 1);
+        var exposure = Parameter(node, "exposure", 0) * strength;
+        var contrast = Parameter(node, "contrast", 0) * strength;
+        var saturation = Parameter(node, "saturation", 0) * strength;
+        var output = source.Rgb24.ToArray();
+        var exposureScale = Math.Pow(2, exposure);
+        for (var pixel = 0; pixel < source.PixelCount; pixel++)
+        {
+            if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested();
+            var offset = pixel * 3;
+            var lab = OklabColorSpace.FromSrgb(new(output[offset], output[offset + 1], output[offset + 2]));
+            var l = Math.Clamp((lab.L - .5) * (1 + contrast / 100) + .5, 0, 1);
+            l = Math.Clamp(l * exposureScale, 0, 1);
+            var chroma = Math.Max(0, 1 + saturation / 100);
+            var result = OklabColorSpace.ToSrgbGamutMapped(new(l, lab.A * chroma, lab.B * chroma));
+            output[offset] = result.R; output[offset + 1] = result.G; output[offset + 2] = result.B;
+        }
         return new(source.Width, source.Height, output);
     }
 

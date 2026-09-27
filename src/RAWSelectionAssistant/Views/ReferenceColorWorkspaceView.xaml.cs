@@ -9,6 +9,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Presets;
 using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.ViewModels;
 
@@ -82,6 +83,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (_editor?.IsProMode != true || Keyboard.Modifiers != ModifierKeys.Control) return;
         if (e.Key == Key.Z && _editor.UndoAdjustmentCommand.CanExecute(null)) { _editor.UndoAdjustmentCommand.Execute(null); e.Handled = true; }
         else if (e.Key == Key.Y && _editor.RedoAdjustmentCommand.CanExecute(null)) { _editor.RedoAdjustmentCommand.Execute(null); e.Handled = true; }
+    }
+    private void OnPresetMouseEnter(object sender, MouseEventArgs e)
+    {
+        if (_editor is not null && sender is FrameworkElement element && element.DataContext is AdobeXmpPreset preset)
+            _editor.HoverPreset(preset);
     }
     private void OnSliderDragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
     {

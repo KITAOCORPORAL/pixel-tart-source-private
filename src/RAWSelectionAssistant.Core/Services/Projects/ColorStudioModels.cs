@@ -5,7 +5,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend }
+public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset }
 
 public sealed record ColorAdjustmentStackNode(
     Guid Id,
