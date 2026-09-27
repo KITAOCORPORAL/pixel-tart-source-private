@@ -5,9 +5,11 @@ This file is a repository-derived baseline for the next development task. It was
 ## Git
 
 - `START_HEAD`: `d06b800f6f9c76423b9a1bace08accd8ae34e755`
-- `FINAL_HEAD`: `420456bcb73d0ffcc11c8b08cd03e4d73beef3a9`
-- `REMOTE_HEAD`: `420456bcb73d0ffcc11c8b08cd03e4d73beef3a9`
-- Final verification: `LOCAL_HEAD == REMOTE_HEAD`; working tree clean after push.
+- Last verified local and remote HEAD before this documentation-only clarification: `d496feb9623febaf7e8d126eb92403cd3ad43c95`.
+- `FINAL_HEAD`: resolve with `git rev-parse HEAD` after the report commit; the exact result is recorded in the accompanying delivery response.
+- `REMOTE_HEAD`: resolve with `git rev-parse origin/integration/pixel-tart-developer-preview` after `git fetch origin`; the exact result is recorded in the accompanying delivery response.
+- A committed document cannot contain its own commit hash. The historical verification above is not presented as the hash of the commit containing this clarification.
+- Last completed verification before this clarification: `LOCAL_HEAD == REMOTE_HEAD`; working tree clean after push.
 - Branch: `integration/pixel-tart-developer-preview`
 - Before this baseline: `LOCAL_HEAD == REMOTE_HEAD`, working tree clean.
 - No reset, force push, merge-main, user-data deletion or generated binary artifacts were used.
