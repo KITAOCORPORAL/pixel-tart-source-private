@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
@@ -12,6 +13,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDisposable
 {
     private readonly IDialogService _dialogs;
+    private readonly RawMatchTiff16ProductPipeline _rawPipeline;
     private BitmapSource? _targetImage;
     private string _targetName = "尚未选择待调色照片";
     private string _statusText = "选择待调色照片，再添加希望借用色彩与影调的参考图片。源照片始终只读。";
@@ -32,9 +34,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private readonly HashSet<Guid> _nodeSyncSelection = [];
     private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
 
-    public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null)
+    public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null)
     {
         _dialogs = dialogs;
+        _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? new LibRawDecoder());
         Editor = new TetherReferenceModeViewModel(
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
             renderBackend: renderBackend);
@@ -186,6 +189,14 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         try
         {
+            if (RawMatchTiff16ProductPipeline.IsRaw(item.Path))
+            {
+                var master = await _rawPipeline.DecodeMasterAsync(item.Path, token);
+                var pixels = _rawPipeline.DisplaySource(master, 320, token);
+                item.Thumbnail = RawDisplayBitmapAdapter.ToBitmap(pixels);
+                item.PixelWidth = master.Width; item.PixelHeight = master.Height; item.Status = ReferenceTargetStatus.Pending;
+                return;
+            }
             await Task.Run(() =>
             {
                 var decoded = new BitmapImage();
@@ -194,7 +205,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             }, token);
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException) { item.Status = ReferenceTargetStatus.Failed; item.Error = "缩略图无法读取"; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
     }
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
@@ -206,7 +217,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         {
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
-            var image = await Task.Run(() =>
+            var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
+            var rawMaster = isRaw ? await _rawPipeline.DecodeMasterAsync(target.Path) : null;
+            var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster);
+            var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await Task.Run(() =>
             {
                 var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.UriSource = new Uri(target.Path); decoded.EndInit(); decoded.Freeze(); return decoded;
             });
@@ -214,14 +228,14 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
-            await Editor.SetSourceAsync(target.AssetId, image);
+            await Editor.SetSourceAsync(target.AssetId, image, rawPreviewMaster: rawProxy);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or System.IO.FileFormatException)
-        { target.Status = ReferenceTargetStatus.Failed; target.Error = "照片无法读取"; FailedTarget = target; if (revision == Volatile.Read(ref _activationRevision)) StatusText = "待调色照片无法读取；现有色彩方案保持不变。请重试。"; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+        { target.Status = ReferenceTargetStatus.Failed; target.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "照片无法读取"; FailedTarget = target; if (revision == Volatile.Read(ref _activationRevision)) StatusText = target.Error + "；现有色彩方案保持不变。请重试。"; }
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
     }
 
@@ -229,7 +243,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     private async Task ChooseTargetAsync()
     {
-        var paths = _dialogs.ChooseFiles("导入待调色照片（源文件只读）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", true);
+        var paths = _dialogs.ChooseFiles("导入待调色照片（源文件只读）", "图片与 RAW|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.cr2;*.cr3;*.nef;*.arw;*.raf;*.rw2;*.orf;*.dng;*.pef;*.nrw;*.ori;*.3fr;*.fff;*.iiq;*.srw;*.rwl;*.x3f", true);
         if (paths.Count == 0) return;
         IsLoading = true;
         try
@@ -258,7 +272,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             foreach (var frozenItem in frozen)
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
-                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + "_仿色.jpg"); var temp = output + ".tmp";
+                var isRaw = RawMatchTiff16ProductPipeline.IsRaw(item.Path);
+                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + (isRaw ? "_仿色.tif" : "_仿色.jpg")); var temp = output + ".tmp";
                 try
                 {
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
@@ -266,13 +281,25 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                         Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE", "done");
                         throw new IOException("Synthetic production export failure");
                     }
-                    var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack); await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token); File.Move(temp, output, overwrite: false); item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
+                    if (isRaw)
+                    {
+                        // AtomicTiffWriter validates the temporary TIFF before the destination becomes visible.
+                        await _rawPipeline.ExportAsync(item.Path, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
+                    }
+                    else
+                    {
+                        var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
+                        await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token);
+                        File.Move(temp, output, overwrite: false);
+                    }
+                    item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
-                catch { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+                { TryDelete(temp); item.Error = ex is NotSupportedException ? "当前 RAW 高精度导出仅支持 Match v3，尚不支持此调整节点" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
             }
-            ExportFailureSummary = failed.Count == 0 ? "" : $"失败 {failed.Count} 张：{string.Join("、", failed)}";
+            ExportFailureSummary = failed.Count == 0 ? "" : $"失败 {failed.Count} 张：{string.Join("、", frozen.Where(entry => entry.Item.ExportStatus == ReferenceExportStatus.Failed).Select(entry => entry.Item.FileName + "（" + entry.Item.Error + "）"))}";
             StatusText = failed.Count == 0 ? "批量导出已完成。" : $"批量导出已完成；成功 {ExportCompleted - failed.Count} 张，失败 {failed.Count} 张。";
         }
         catch (OperationCanceledException) { ExportStatus = $"已停止 · {ExportCompleted} / {ExportTotal}"; StatusText = "已停止导出；已完成文件保留，未完成文件已清理。"; }

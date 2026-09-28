@@ -3,7 +3,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Color;
 
-/// <summary>Shared linear-ish RGB working storage for RAW, Color Studio and export adapters.</summary>
+/// <summary>Display-referred, nonlinear sRGB float RGB (0..1); three channels, no alpha. RAW metadata owns orientation.</summary>
 public sealed class HighBitDepthImageBuffer
 {
     public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<float> rgb32, string sourceBitDepth = "32f", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
@@ -13,11 +13,11 @@ public sealed class HighBitDepthImageBuffer
         Width = width; Height = height; Rgb32 = rgb32; SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace; Orientation = orientation; Metadata = metadata;
     }
 
-    public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<ushort> rgb48, string sourceBitDepth = "16", string workingColorSpace = "sRGB")
+    public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<ushort> rgb48, string sourceBitDepth = "16", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
     {
         if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (rgb48.Length != checked(width * height * 3)) throw new ArgumentException("RGB48 buffer length does not match dimensions.", nameof(rgb48));
-        Width = width; Height = height; Rgb32 = ToFloat(rgb48); SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace;
+        Width = width; Height = height; Rgb32 = ToFloat(rgb48); SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace; Orientation = orientation; Metadata = metadata;
     }
 
     public int Width { get; }
@@ -40,7 +40,7 @@ public sealed class HighBitDepthImageBuffer
     {
         ArgumentNullException.ThrowIfNull(image);
         if (image.Rgb48Pixels is { } rgb48 && image.BitsPerChannel >= 16)
-            return new(image.Width, image.Height, rgb48, image.BitsPerChannel.ToString(), image.Metadata.ColorSpace);
+            return new(image.Width, image.Height, rgb48, image.BitsPerChannel.ToString(), image.Metadata.ColorSpace, image.Metadata.Orientation, image.Metadata);
         return FromRgb24(image);
     }
 

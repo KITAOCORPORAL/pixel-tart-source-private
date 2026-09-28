@@ -3,6 +3,7 @@ using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Services.Presets;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
@@ -18,6 +19,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private readonly CancellationTokenSource _lifetime = new();
     private CancellationTokenSource? _render;
     private BitmapSource? _source;
+    private HighBitDepthImageBuffer? _rawPreviewMaster;
     private BitmapSource? _interactiveSource;
     private Guid? _assetId;
     private long _revision;
@@ -583,8 +585,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         RefreshSourceChoices();
     }
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) { SelectedLook = null; _sessionLookId = null; } _projectId = projectId; await LoadAsync(token); }
-    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default)
+    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null)
     {
+        _rawPreviewMaster = rawPreviewMaster;
         _presetPreviewNode = null; NotifyPresetPreview();
         _render?.Cancel(); Interlocked.Increment(ref _revision);
         _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 1600); OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
@@ -807,7 +810,14 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         try
         {
             BitmapSource image;
-            if (stack.Nodes.Count > 0)
+            if (_rawPreviewMaster is { } raw)
+            {
+                // The proxy remains float RGB. Both preview and export consume this same frozen look/stack contract.
+                var rendered = await Task.Run(() => new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder())
+                    .Render(raw, look, stack, token: renderToken, film: FilmSettings).Pixels, renderToken);
+                image = RawDisplayBitmapAdapter.ToBitmap(rendered);
+            }
+            else if (stack.Nodes.Count > 0)
             {
                 StatusText = "正在应用调整节点…";
                 image = await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, look, renderToken), renderToken);
@@ -828,6 +838,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
+        catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "RAW 高精度预览目前仅支持 Match v3；此调整节点尚未接通。"; RaiseViewProperties(); } }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
     }
