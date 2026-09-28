@@ -60,4 +60,20 @@ public sealed class PhotographerWorkflowFoundationTests
         Assert.IsTrue(result.Conflicts.Single().RequiresResolution);
         Assert.IsTrue(SyncConflictPolicy.Apply(incoming, incoming).Duplicate);
     }
+
+    [TestMethod]
+    public async Task ExportRecipeStorePersistsCustomRecipeAndDeletesIt()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "pixel-tart-recipe-test", Guid.NewGuid().ToString("N"));
+        var store = new ExportRecipeStore(Path.Combine(root, "recipes.json"));
+        var recipe = ExportRecipeStore.BuiltIns[0] with { Id = Guid.NewGuid(), Name = "Test Recipe" };
+        try
+        {
+            await store.SaveAsync(recipe);
+            Assert.IsTrue((await store.LoadAsync()).Any(item => item.Id == recipe.Id));
+            await store.DeleteAsync(recipe.Id);
+            Assert.IsFalse((await store.LoadAsync()).Any(item => item.Id == recipe.Id));
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
 }

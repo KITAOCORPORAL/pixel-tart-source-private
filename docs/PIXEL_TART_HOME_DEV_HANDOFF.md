@@ -107,3 +107,9 @@ Minimum SDK: 10.0.302 with `latestFeature` roll-forward in `global.json`; 10.0.4
 - Added Booking schema v6 and repository/service persistence for buffers, HOLD expiry, PaymentState, Revision, DeviceId, DeletedAtUtc; editor fields are visible in the existing booking workflow.
 - Core combined Face Lock transform test and 5 foundation tests pass; Release x64 WPF build passes with 0 warnings/errors.
 - Partial: production face detector, WPF transform overlay, ExportRecipe manager/multi-recipe UI, Windows 3D renderer, native pointer/screenshots.
+
+## Phase 1C follow-up
+
+- ExportRecipeStore is now connected to the existing Publishing WPF page with load/select/save/delete controls.
+- Existing PublishingExportService remains the execution path; no second exporter was introduced.
+- Recipe persistence test added; full multi-select and TIFF16-specific UI remain partial.

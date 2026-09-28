@@ -17,3 +17,8 @@ Planning Center、RAW/TIFF/Match v3/v4 与现有产品线保留，不在本轮�
 - **Implemented in persistence**: Booking schema v6 stores pre/post buffers, HOLD expiry, payment state, revision, device id, and tombstone; repository round trips these fields and service increments revision.
 - **Partial**: Face Lock UI toggle and fallback status are wired, but no production detector/landmarks are available; ordinary synchronized compare remains the safe path. Recipe UI still uses existing Publishing presets; new ExportRecipe manager/multi-recipe execution is not yet wired.
 - **Not run**: Native pointer walkthrough, production screenshots, full WPF/3D visual evidence.
+
+## Phase 1C implementation status (2026-09-28)
+
+- **Implemented**: Existing Publishing WPF page now loads and applies `ExportRecipeStore` recipes; users can save and delete custom recipes without creating a second export surface.
+- **Partial**: Recipe selection is currently single-select. Multi-recipe task orchestration, per-recipe progress/cancel UI, and a true TIFF16-specific WPF encoder remain open.

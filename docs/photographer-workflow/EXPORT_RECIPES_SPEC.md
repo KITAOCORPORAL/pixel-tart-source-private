@@ -7,3 +7,9 @@
 ## Phase 1B status
 
 The existing WPF Publishing page remains the production export entry and persists its existing publishing presets. The newer `ExportRecipe` Core model/store is not yet connected to a multi-select recipe manager or one-click multi-recipe task; this remains PARTIAL.
+
+## Phase 1C status
+
+The existing WPF Publishing page now loads the `ExportRecipeStore`, exposes a Recipe selector, saves custom recipes, and deletes custom recipes. Production export still runs through the existing Publishing task coordinator. Full multi-select UI and TIFF16-specific encoder integration remain partial and are reported as such.
+
+The current selector is single-select and acts as a safe apply-to-editor operation. Multi-select execution is intentionally not claimed until the existing task coordinator exposes a per-recipe progress contract.

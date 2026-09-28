@@ -50,19 +50,24 @@ public sealed class ExportRecipeStore(string filePath)
     ];
     public async Task<IReadOnlyList<ExportRecipe>> LoadAsync(CancellationToken token = default)
     {
-        if (!File.Exists(FilePath)) return BuiltIns;
-        var custom = JsonSerializer.Deserialize<ExportRecipe[]>(await File.ReadAllTextAsync(FilePath, token).ConfigureAwait(false)) ?? [];
-        return BuiltIns.Concat(custom).GroupBy(item => item.Id).Select(group => group.Last()).ToArray();
+        return await LoadCoreAsync(token).ConfigureAwait(false);
     }
     public async Task SaveAsync(ExportRecipe recipe, CancellationToken token = default)
     {
         recipe.Validate(); await _gate.WaitAsync(token).ConfigureAwait(false);
-        try { var values = (await LoadAsync(token).ConfigureAwait(false)).Where(item => !BuiltIns.Any(b => b.Id == item.Id && item.Id != recipe.Id)).Where(item => item.Id != recipe.Id).Append(recipe).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); var tmp = FilePath + ".tmp"; await File.WriteAllTextAsync(tmp, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); File.Move(tmp, FilePath, true); }
+        try { var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != recipe.Id).Append(recipe).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); var tmp = FilePath + ".tmp"; await File.WriteAllTextAsync(tmp, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); File.Move(tmp, FilePath, true); }
         finally { _gate.Release(); }
     }
     public async Task DeleteAsync(Guid id, CancellationToken token = default)
     {
         if (BuiltIns.Any(item => item.Id == id)) throw new InvalidOperationException("Built-in recipes are editable copies and cannot be deleted.");
-        await _gate.WaitAsync(token).ConfigureAwait(false); try { var values = (await LoadAsync(token).ConfigureAwait(false)).Where(item => item.Id != id).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); await File.WriteAllTextAsync(FilePath, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); } finally { _gate.Release(); }
+        await _gate.WaitAsync(token).ConfigureAwait(false); try { var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != id).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); await File.WriteAllTextAsync(FilePath, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); } finally { _gate.Release(); }
+    }
+
+    private async Task<IReadOnlyList<ExportRecipe>> LoadCoreAsync(CancellationToken token)
+    {
+        if (!File.Exists(FilePath)) return BuiltIns;
+        var custom = JsonSerializer.Deserialize<ExportRecipe[]>(await File.ReadAllTextAsync(FilePath, token).ConfigureAwait(false)) ?? [];
+        return BuiltIns.Concat(custom).GroupBy(item => item.Id).Select(group => group.Last()).ToArray();
     }
 }
