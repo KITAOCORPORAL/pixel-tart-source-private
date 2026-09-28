@@ -74,6 +74,7 @@ public enum BookingConflictResolution { None, SaveAnyway, MarkAllowOverlap }
 public enum BookingSaveStatus { Saved, NeedsAttention, ValidationFailed, NotFound }
 public enum BookingEditorSaveStatus { DraftSaved, Created, NeedsDocumentAttention, ValidationFailed, DatabaseFailed, FileOperationFailed }
 public enum BookingMoneyDisplayKind { Unknown, Receivable, Settled, Overpaid }
+public enum BookingPaymentState { Unknown, Unpaid, DepositPaid, PartiallyPaid, Paid, Refunded }
 
 public sealed record ShootBooking
 {

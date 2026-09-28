@@ -9,3 +9,7 @@ Latest staged professional pipeline audit: V4 has CPU foundation and a validated
 ## Current home acceptance checkpoint (2026-09-28)
 
 The RTX 5060 Ti home run and external multi-vendor corpus baseline are recorded in `docs/color-studio/match-v4/MATCH_V4_HOME_RTX5060TI_ACCEPTANCE.md` and `docs/color-studio/raw-compatibility/`. Keep Stable Match v3 as default; treat Match V4 as guarded beta. Do not infer vendor-wide support from fixture folders. The four listed home fixtures now have FULL_RES_PARITY_CLOSED and TIFF16_PARITY_PASS evidence; keep Match V4 guarded beta and expand hardware/camera coverage before production promotion.
+
+## Resume 2026-09-28
+
+Continue from the photographer workflow foundation. Preserve Match v3 stable default and guarded Match v4 parity. Next implementation is WPF wiring for Face Lock/2-Up, Rapid Compare, and multi-recipe ExportRecipe UI, followed by native 3D renderer and full regression. Do not upload RAW/JPEG or implement cloud RAW sync.

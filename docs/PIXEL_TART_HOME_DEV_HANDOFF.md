@@ -90,3 +90,12 @@ Minimum SDK: 10.0.302 with `latestFeature` roll-forward in `global.json`; 10.0.4
 - Stable Match v3 remains default. Match V4 is guarded beta and is not a production completion claim. Native pointer walkthrough, OOM/device-loss injection, peak VRAM telemetry, complete ICC/EXIF propagation, and WPF 3D renderer remain open.
 - External corpus and TIFF outputs remain outside Git; only hashes, metadata, results, source, tests, and reports are committed.
 - Final home V4 rerun: Canon EOS R6 CR3, both Fuji X-T5 RAF fixtures, and Fuji GFX100S 102MP pass full-resolution GPU parity in three repeats; all four reach TIFF16 export and CPU/GPU TIFF16 readback max code delta 1.
+
+## 2026-09-28 Photographer Workflow Foundation
+
+- Implemented: Core Face Lock geometry, stable 2-Up state contract, ExportRecipe model/store, Booking buffered conflict rules, sync envelope/idempotency/high-risk conflict policy, 3D camera/renderer contract.
+- Existing verified: Tether culling annotations, proxy-first preview, filtering/sorting, compare modes, PublishingExportService and preset persistence.
+- Partial: WPF Face Lock detector/visual overlay, Rapid Compare UI, multi-recipe export UI, production Windows 3D renderer.
+- Spec only: Pocket/cloud provider, Online Selection cloud gallery, Browser Extension, AI Culling, Skin Studio, Look DNA.
+- Tests: `PhotographerWorkflowFoundationTests` 5/5; Core Release build 0 errors.
+- Next: wire contracts into Photography WPF surfaces and run full Core/WPF/Photography/Calendar/Match regression.

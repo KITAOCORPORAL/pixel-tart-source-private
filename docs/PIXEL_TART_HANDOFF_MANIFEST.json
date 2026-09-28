@@ -20,5 +20,24 @@
   "nativePointerRunner": "scripts/verify-color-studio-pointer.ps1",
   "nativePointerEvidence": "artifacts/color-studio-native-capture/native-capture-20260925-052506/COLOR_STUDIO_PHASE1_NATIVE_CAPTURE_MANIFEST.json",
   "nativePointerVerified": "Validated real Production WPF capture chain, 100/100 stable frames; drag visual run diagnostic with intermittent observer/order mismatches",
-  "nextProductTask": "Expand Match V4 GPU/RAW coverage and complete real OOM/device-loss telemetry before production integration"
+  "nextProductTask": "Expand Match V4 GPU/RAW coverage and complete real OOM/device-loss telemetry before production integration",
+  "PhotographerWorkflow": {
+    "Implemented": [
+      "FaceLockCore",
+      "ExportRecipeCore",
+      "BookingConflictRules",
+      "SyncSemantics",
+      "ColorSpaceRendererContract"
+    ],
+    "Partial": [
+      "WpfFaceLock",
+      "RapidCompareUi",
+      "MultiRecipeExportUi",
+      "Windows3DRenderer"
+    ],
+    "Tests": [
+      "PhotographerWorkflowFoundationTests:5/5",
+      "CoreRelease:0 errors"
+    ]
+  }
 }
