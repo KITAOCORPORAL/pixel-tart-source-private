@@ -111,7 +111,7 @@ public sealed class RealCameraProductAcceptanceTests
                 row.Tiff16 = tiff.Width == row.Width && tiff.Height == row.Height && tiff.BitsPerSample == 16 && tiff.SamplesPerPixel == 3;
                 row.Orientation = tiff.Orientation;
                 row.Parity = Compare(workspace.Editor.MatchedImage, tiff);
-                row.Status = row.Tiff16 && row.Parity.Mean <= MeanLimit && row.Parity.P95 <= TailLimit && row.Parity.Max <= TailLimit
+                row.Status = row.Tiff16 && row.Parity.Canonical.Mean <= MeanLimit && row.Parity.Canonical.P95 <= TailLimit && row.Parity.Canonical.Max <= TailLimit
                     ? "REAL_CAMERA_PRODUCT_PASS" : "PARTIAL";
             }
             catch (Exception ex) { row.Status = "FAILED"; row.Error = ex.GetType().Name + ": " + ex.Message; }
@@ -132,14 +132,15 @@ public sealed class RealCameraProductAcceptanceTests
         return false;
     }
 
-    private static ParityResult Compare(BitmapSource preview, TiffReadBackResult tiff)
+    private static ParityComparison Compare(BitmapSource preview, TiffReadBackResult tiff)
     {
         var bitmap = new FormatConvertedBitmap(preview, PixelFormats.Bgra32, null, 0);
         var bgra = new byte[bitmap.PixelWidth * bitmap.PixelHeight * 4];
         bitmap.CopyPixels(bgra, bitmap.PixelWidth * 4, 0);
-        var deltas = new double[bitmap.PixelWidth * bitmap.PixelHeight];
+        var legacy = new double[bitmap.PixelWidth * bitmap.PixelHeight];
+        var canonical = new double[legacy.Length];
         var samples = tiff.Rgb48Samples.Span;
-        for (var i = 0; i < deltas.Length; i++)
+        for (var i = 0; i < legacy.Length; i++)
         {
             var x = i % bitmap.PixelWidth; var y = i / bitmap.PixelWidth;
             var sx = Math.Min(tiff.Width - 1, (int)((x + .5) * tiff.Width / bitmap.PixelWidth));
@@ -147,13 +148,26 @@ public sealed class RealCameraProductAcceptanceTests
             var source = (sy * tiff.Width + sx) * 3; var display = i * 4;
             var a = OklabColorSpace.FromSrgb(new VisualRgb24(bgra[display + 2], bgra[display + 1], bgra[display]));
             var b = OklabColorSpace.FromSrgb(samples[source] / 65535f, samples[source + 1] / 65535f, samples[source + 2] / 65535f);
-            deltas[i] = Math.Sqrt(Math.Pow(a.L - b.L, 2) + Math.Pow(a.A - b.A, 2) + Math.Pow(a.B - b.B, 2));
+            legacy[i] = Distance(a, b);
+            // Both operands must use the same nearest-center spatial kernel and RGB24 display encoding.
+            // This never feeds an 8-bit value back into the product's TIFF16 export.
+            byte Display(ushort value) => (byte)Math.Clamp(Math.Round(value * 255d / 65535d), 0, 255);
+            var encoded = OklabColorSpace.FromSrgb(new VisualRgb24(Display(samples[source]), Display(samples[source + 1]), Display(samples[source + 2])));
+            canonical[i] = Distance(a, encoded);
         }
-        Array.Sort(deltas);
-        return new(deltas.Average(), deltas[(int)Math.Round((deltas.Length - 1) * .95)], deltas[^1]);
+        return new(Summarize(legacy), Summarize(canonical), legacy.Count(value => value > TailLimit), canonical.Count(value => value > TailLimit));
+
+        static double Distance(OklabColor a, OklabColor b) =>
+            Math.Sqrt(Math.Pow(a.L - b.L, 2) + Math.Pow(a.A - b.A, 2) + Math.Pow(a.B - b.B, 2));
+        static ParityResult Summarize(double[] distances)
+        {
+            Array.Sort(distances);
+            return new(distances.Average(), distances[(int)Math.Round((distances.Length - 1) * .95)], distances[^1]);
+        }
     }
 
     private sealed record ParityResult(double Mean, double P95, double Max);
+    private sealed record ParityComparison(ParityResult Legacy, ParityResult Canonical, int LegacyOutliers, int CanonicalOutliers);
     private sealed class GateRow(string file, string sha256)
     {
         public string File { get; } = file;
@@ -169,7 +183,7 @@ public sealed class RealCameraProductAcceptanceTests
         public double DecodeMs { get; set; }
         public double PreviewMs { get; set; }
         public double ExportMs { get; set; }
-        public ParityResult? Parity { get; set; }
+        public ParityComparison? Parity { get; set; }
     }
 
     private sealed class LocalDialogs(string folder, string source) : IDialogService

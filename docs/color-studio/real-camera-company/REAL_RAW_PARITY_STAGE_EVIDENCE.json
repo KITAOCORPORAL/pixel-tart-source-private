@@ -1,0 +1,11 @@
+{
+  "sourceBaseline": "3dab1b4f75dd696ba64ecfb431a28ce2fd933673",
+  "threshold": { "mean": 0.003, "p95": 0.012, "max": 0.012 },
+  "fixtures": {
+    "company-02": { "legacy": { "mean": 0.001570024, "p95": 0.004176068, "max": 0.048300411 }, "canonical": { "mean": 0.000001909, "p95": 0.0, "max": 0.010271384 }, "rawSameBufferMax": 0.0, "rawSeparateDecodeMax": 0.038586159, "outliers": { "legacyOver012": 2582, "legacyOver02": 1444, "legacyOver03": 1260, "legacyOver04": 520, "legacyOver05": 0, "canonicalOver012": 0 }, "fullDecodeChangedPixels": 5538, "fullDecodeMaxOklab": 0.044277734 },
+    "company-03": { "legacy": { "mean": 0.001250, "p95": 0.002220, "max": 0.036945 }, "canonical": { "mean": 0.000009, "p95": 0.0, "max": 0.008307 }, "rawSameBufferMax": 0.0, "rawSeparateDecodeMax": 0.029715, "outliers": { "legacyOver012": 728, "legacyOver02": 375, "legacyOver03": 199, "legacyOver04": 0, "legacyOver05": 0, "canonicalOver012": 0 } },
+    "company-04": { "legacy": { "mean": 0.001062, "p95": 0.001882, "max": 0.004804 }, "canonical": { "mean": 0.000055, "p95": 0.0, "max": 0.007007 }, "rawSameBufferMax": 0.0, "rawSeparateDecodeMax": 0.0, "outliers": { "legacyOver012": 0, "legacyOver02": 0, "legacyOver03": 0, "legacyOver04": 0, "legacyOver05": 0, "canonicalOver012": 0 } },
+    "company-05": { "legacy": { "mean": 0.001357, "p95": 0.003148, "max": 0.050767 }, "canonical": { "mean": 0.000017, "p95": 0.0, "max": 0.011149 }, "rawSameBufferMax": 0.0, "rawSeparateDecodeMax": 0.0, "outliers": { "legacyOver012": 1155, "legacyOver02": 672, "legacyOver03": 373, "legacyOver04": 129, "legacyOver05": 10, "canonicalOver012": 0 } }
+  },
+  "interpretation": { "legacyRootCause": "PROVEN: non-equivalent RGB24 display versus RGB48/full-resolution comparison", "crossDecodeFuji": "OBSERVED NON_DETERMINISTIC", "productionParityFullyClosed": false }
+}
