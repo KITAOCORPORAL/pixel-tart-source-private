@@ -105,7 +105,13 @@ public sealed record ShootBooking
     public DateTimeOffset CreatedAtUtc { get; init; } = DateTimeOffset.UtcNow;
     public DateTimeOffset UpdatedAtUtc { get; init; } = DateTimeOffset.UtcNow;
     public bool IsArchived { get; init; }
-    public DateTimeOffset? ArchivedAtUtc { get; init; }
+    public DateTimeOffset? ArchivedAtUtc { get; init; }    public int PreBufferMinutes { get; init; }
+    public int PostBufferMinutes { get; init; }
+    public DateTimeOffset? HoldExpiresAtUtc { get; init; }
+    public BookingPaymentState PaymentState { get; init; } = BookingPaymentState.Unknown;
+    public long Revision { get; init; } = 1;
+    public string DeviceId { get; init; } = "desktop";
+    public DateTimeOffset? DeletedAtUtc { get; init; }
 }
 
 public sealed record ShootBookingDraft
@@ -245,3 +251,4 @@ public sealed record BookingSaveResult(
     public static BookingSaveResult ValidationFailed(BookingMoneySummary money, IReadOnlyList<string> errors) =>
         new(BookingSaveStatus.ValidationFailed, null, money, [], errors);
 }
+
