@@ -58,12 +58,12 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
                     Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,
                     ShotCompletedAtUtc,
                     ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,
-                    ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc)
+                    ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc,PreBufferMinutes,PostBufferMinutes,HoldExpiresAtUtc,PaymentState,Revision,DeviceId,DeletedAtUtc)
                 VALUES(
                     $id,$project,$title,$client,$start,$end,$zone,$allDay,$status,$location,$type,
                     $shotCompletedAt,
                     $requirements,$preparation,$total,$deposit,$paid,$currency,$scale,
-                    $contact,$phone,$overlap,$override,$notes,$created,$updated,$archived,$archivedAt)
+                    $contact,$phone,$overlap,$override,$notes,$created,$updated,$archived,$archivedAt,$preBuffer,$postBuffer,$holdExpires,$paymentState,$revision,$deviceId,$deletedAt)
                 ON CONFLICT(Id) DO UPDATE SET
                     ProjectId=excluded.ProjectId,Title=excluded.Title,ClientDisplayName=excluded.ClientDisplayName,
                     StartAtUtc=excluded.StartAtUtc,EndAtUtc=excluded.EndAtUtc,TimeZoneId=excluded.TimeZoneId,
@@ -73,7 +73,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
                     TotalAmountMinor=excluded.TotalAmountMinor,DepositAmountMinor=excluded.DepositAmountMinor,PaidAmountMinor=excluded.PaidAmountMinor,
                     CurrencyCode=excluded.CurrencyCode,CurrencyScale=excluded.CurrencyScale,ContactName=excluded.ContactName,ContactPhone=excluded.ContactPhone,
                     AllowOverlap=excluded.AllowOverlap,ConflictOverride=excluded.ConflictOverride,Notes=excluded.Notes,
-                    UpdatedAtUtc=excluded.UpdatedAtUtc,IsArchived=excluded.IsArchived,ArchivedAtUtc=excluded.ArchivedAtUtc;
+                    UpdatedAtUtc=excluded.UpdatedAtUtc,IsArchived=excluded.IsArchived,ArchivedAtUtc=excluded.ArchivedAtUtc,PreBufferMinutes=excluded.PreBufferMinutes,PostBufferMinutes=excluded.PostBufferMinutes,HoldExpiresAtUtc=excluded.HoldExpiresAtUtc,PaymentState=excluded.PaymentState,Revision=excluded.Revision,DeviceId=excluded.DeviceId,DeletedAtUtc=excluded.DeletedAtUtc;
                 """;
             AddBookingParameters(command, booking);
             await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
@@ -372,6 +372,13 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         command.Parameters.AddWithValue("$updated", Utc(booking.UpdatedAtUtc));
         command.Parameters.AddWithValue("$archived", booking.IsArchived ? 1 : 0);
         command.Parameters.AddWithValue("$archivedAt", Db(booking.ArchivedAtUtc));
+        command.Parameters.AddWithValue("$preBuffer", booking.PreBufferMinutes);
+        command.Parameters.AddWithValue("$postBuffer", booking.PostBufferMinutes);
+        command.Parameters.AddWithValue("$holdExpires", Db(booking.HoldExpiresAtUtc));
+        command.Parameters.AddWithValue("$paymentState", booking.PaymentState.ToString());
+        command.Parameters.AddWithValue("$revision", booking.Revision);
+        command.Parameters.AddWithValue("$deviceId", booking.DeviceId);
+        command.Parameters.AddWithValue("$deletedAt", Db(booking.DeletedAtUtc));
     }
 
     private static ShootBooking ReadBooking(SqliteDataReader reader) => new()
@@ -382,7 +389,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         ShotCompletedAtUtc = DateOrNull(reader, 11), ShootingRequirements = TextOrNull(reader, 12), PreparationNotes = TextOrNull(reader, 13), TotalAmountMinor = LongOrNull(reader, 14), DepositAmountMinor = LongOrNull(reader, 15),
         PaidAmountMinor = LongOrNull(reader, 16), CurrencyCode = reader.GetString(17), CurrencyScale = reader.GetInt32(18), ContactName = TextOrNull(reader, 19), ContactPhone = TextOrNull(reader, 20),
         AllowOverlap = reader.GetInt32(21) != 0, ConflictOverride = reader.GetInt32(22) != 0, Notes = TextOrNull(reader, 23), CreatedAtUtc = ParseUtc(reader.GetString(24)),
-        UpdatedAtUtc = ParseUtc(reader.GetString(25)), IsArchived = reader.GetInt32(26) != 0, ArchivedAtUtc = DateOrNull(reader, 27)
+        UpdatedAtUtc = ParseUtc(reader.GetString(25)), IsArchived = reader.GetInt32(26) != 0, ArchivedAtUtc = DateOrNull(reader, 27), PreBufferMinutes = reader.GetInt32(28), PostBufferMinutes = reader.GetInt32(29), HoldExpiresAtUtc = DateOrNull(reader, 30), PaymentState = EnumValue(reader.GetString(31), BookingPaymentState.Unknown), Revision = reader.GetInt64(32), DeviceId = reader.GetString(33), DeletedAtUtc = DateOrNull(reader, 34)
     };
 
     private static ShootBookingSummary ReadSummary(SqliteDataReader reader) => new(
@@ -396,7 +403,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         CreatedAtUtc = ParseUtc(reader.GetString(7)), UpdatedAtUtc = ParseUtc(reader.GetString(8))
     };
 
-    private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShotCompletedAtUtc,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc FROM ShootBookings";
+    private const string BookingSelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,ShotCompletedAtUtc,ShootingRequirements,PreparationNotes,TotalAmountMinor,DepositAmountMinor,PaidAmountMinor,CurrencyCode,CurrencyScale,ContactName,ContactPhone,AllowOverlap,ConflictOverride,Notes,CreatedAtUtc,UpdatedAtUtc,IsArchived,ArchivedAtUtc,PreBufferMinutes,PostBufferMinutes,HoldExpiresAtUtc,PaymentState,Revision,DeviceId,DeletedAtUtc FROM ShootBookings";
     private const string SummarySelect = "SELECT Id,ProjectId,Title,ClientDisplayName,StartAtUtc,EndAtUtc,TimeZoneId,IsAllDay,Status,Location,ShootingType,AllowOverlap,IsArchived,CreatedAtUtc FROM ShootBookings";
     private static string Utc(DateTimeOffset value) => value.ToUniversalTime().ToString("O");
     private static DateTimeOffset ParseUtc(string value) => DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind).ToUniversalTime();

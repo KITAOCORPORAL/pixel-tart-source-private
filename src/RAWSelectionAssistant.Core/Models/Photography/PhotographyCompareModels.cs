@@ -1,3 +1,5 @@
+using RAWSelectionAssistant.Core.Models;
+
 namespace RAWSelectionAssistant.Core.Models.Photography;
 
 public readonly record struct FacePoint(double X, double Y, double Confidence = 1);
@@ -19,6 +21,17 @@ public enum FaceLockFallback { None, NoFace, LowConfidence, Ambiguous }
 public sealed record FaceLockTransform(double TranslateX, double TranslateY, double Scale, double RollDegrees, FaceLockFallback Fallback = FaceLockFallback.None)
 {
     public static FaceLockTransform Identity(FaceLockFallback fallback = FaceLockFallback.None) => new(0, 0, 1, 0, fallback);
+
+    /// <summary>Scale, then rotate about the origin, then translate (WPF TransformGroup order).</summary>
+    public FacePoint Apply(FacePoint point)
+    {
+        var radians = RollDegrees * Math.PI / 180;
+        var x = point.X * Scale;
+        var y = point.Y * Scale;
+        return new(x * Math.Cos(radians) - y * Math.Sin(radians) + TranslateX,
+            x * Math.Sin(radians) + y * Math.Cos(radians) + TranslateY,
+            point.Confidence);
+    }
 }
 
 public static class FaceLockPlanner
@@ -37,7 +50,11 @@ public static class FaceLockPlanner
         var sourceDistance = source.EyeDistance > 1e-6 ? source.EyeDistance : Math.Max(source.Width, source.Height);
         var targetDistance = target.EyeDistance > 1e-6 ? target.EyeDistance : Math.Max(target.Width, target.Height);
         if (sourceDistance <= 1e-6 || targetDistance <= 1e-6) return FaceLockTransform.Identity(FaceLockFallback.LowConfidence);
-        return new(targetPoint.X - sourcePoint.X, targetPoint.Y - sourcePoint.Y, targetDistance / sourceDistance, target.RollDegrees - source.RollDegrees);
+        var scale = targetDistance / sourceDistance;
+        var roll = target.RollDegrees - source.RollDegrees;
+        var radians = roll * Math.PI / 180;
+        return new(targetPoint.X - scale * (sourcePoint.X * Math.Cos(radians) - sourcePoint.Y * Math.Sin(radians)),
+            targetPoint.Y - scale * (sourcePoint.X * Math.Sin(radians) + sourcePoint.Y * Math.Cos(radians)), scale, roll);
     }
 }
 
@@ -54,4 +71,19 @@ public sealed record TwoUpCompareState(Guid PrimaryId, Guid ChallengerId, Compar
 public sealed record RapidCompareState(Guid BestId, Guid ChallengerId)
 {
     public RapidCompareState PromoteChallenger(Guid nextChallenger) => new(ChallengerId, nextChallenger);
+}
+
+/// <summary>Platform adapter boundary. A missing detector must remain observable by the product UI.</summary>
+public interface IFaceObservationProvider
+{
+    bool IsAvailable { get; }
+    string Status { get; }
+    Task<IReadOnlyList<FaceObservation>> DetectAsync(string imageIdentity, CancellationToken cancellationToken = default);
+}
+
+public sealed class UnavailableFaceObservationProvider : IFaceObservationProvider
+{
+    public bool IsAvailable => false;
+    public string Status => "FACE DETECTOR NOT AVAILABLE";
+    public Task<IReadOnlyList<FaceObservation>> DetectAsync(string imageIdentity, CancellationToken cancellationToken = default) => Task.FromResult<IReadOnlyList<FaceObservation>>([]);
 }

@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Models.Photography;
 using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Services.Database;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -102,6 +103,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private double _referenceOffsetY;
     private bool _referenceFlipHorizontal;
     private bool _referenceLocked;
+    private bool _faceLockEnabled;
+    private string _faceLockStatus = "人脸锁定未启用。";
+    private RapidCompareState? _rapidCompare;
     private string? _referencePath;
     private string _referenceStatus = "未选择参考图。";
     private TetherGuideMode _guideMode;
@@ -213,6 +217,15 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ClearReferenceCommand = new AsyncRelayCommand(_ => ClearReferenceAsync(), _ => ReferenceImage is not null || !string.IsNullOrWhiteSpace(ReferencePath));
         RefreshAnalysisCommand = new AsyncRelayCommand(_ => RefreshAnalysisAsync(), _ => CurrentImage is not null && !IsPreviewLoading);
         TogglePathCommand = new RelayCommand(_ => ShowFullPath = !ShowFullPath);
+        SetFitZoomCommand = new RelayCommand(_ => Zoom = 1, _ => CompareMode != TetherCompareMode.None);
+        Set100ZoomCommand = new RelayCommand(_ => Zoom = 1, _ => CompareMode != TetherCompareMode.None);
+        Set200ZoomCommand = new RelayCommand(_ => Zoom = 2, _ => CompareMode != TetherCompareMode.None);
+        ToggleFaceLockCommand = new RelayCommand(_ => ToggleFaceLock(), _ => CompareMode != TetherCompareMode.None);
+        StartRapidCompareCommand = new RelayCommand(_ => StartRapidCompare(), _ => SelectedAsset is not null && CompareCandidate is not null);
+        KeepChampionCommand = new RelayCommand(_ => KeepChampion(), _ => _rapidCompare is not null);
+        PromoteChallengerCommand = new RelayCommand(_ => PromoteChallenger(), _ => _rapidCompare is not null);
+        PreviousChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(1), _ => _rapidCompare is not null);
+        NextChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(-1), _ => _rapidCompare is not null);
     }
 
     public ObservableCollection<TetherAssetItemViewModel> Assets { get; } = [];
@@ -280,6 +293,15 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public AsyncRelayCommand RefreshAnalysisCommand { get; }
     public RelayCommand TogglePathCommand { get; }
     public RelayCommand ChooseNextCaptureFolderCommand { get; }
+    public RelayCommand SetFitZoomCommand { get; }
+    public RelayCommand Set100ZoomCommand { get; }
+    public RelayCommand Set200ZoomCommand { get; }
+    public RelayCommand ToggleFaceLockCommand { get; }
+    public RelayCommand StartRapidCompareCommand { get; }
+    public RelayCommand KeepChampionCommand { get; }
+    public RelayCommand PromoteChallengerCommand { get; }
+    public RelayCommand PreviousChallengerCommand { get; }
+    public RelayCommand NextChallengerCommand { get; }
 
     public string WatchDirectory { get => _watchDirectory; set { if (SetProperty(ref _watchDirectory, value)) { ExistingCandidateCount = 0; RefreshCommands(); } } }
     public string ProjectDestination { get => _projectDestination; set { if (SetProperty(ref _projectDestination, value)) RefreshCommands(); } }
@@ -335,6 +357,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         : Assets.Count == 0 ? "联机会话正在运行，等待新照片写入。" : "请选择一张已就绪照片开始监看。";
     public TetherAssetItemViewModel? CompareCandidate { get => _compareCandidate; private set { if (SetProperty(ref _compareCandidate, value)) { OnPropertyChanged(nameof(CompareCandidateText)); RefreshCommands(); } } }
     public string CompareCandidateText => CompareCandidate is null ? "尚未选择第二张" : $"第二张：{CompareCandidate.FileName}";
+    public bool FaceLockEnabled { get => _faceLockEnabled; private set => SetProperty(ref _faceLockEnabled, value); }
+    public string FaceLockStatus { get => _faceLockStatus; private set => SetProperty(ref _faceLockStatus, value); }
+    public bool IsRapidCompare => _rapidCompare is not null;
+    public string RapidCompareStatus => _rapidCompare is null ? "快速比较未启动" : $"冠军：{Assets.FirstOrDefault(item => item.Record.Id == _rapidCompare.BestId)?.FileName ?? "未知"} · 挑战者：{Assets.FirstOrDefault(item => item.Record.Id == _rapidCompare.ChallengerId)?.FileName ?? "未知"}";
     public BitmapSource? CurrentImage { get => _currentImage; private set => SetProperty(ref _currentImage, value); }
     public BitmapSource? ComparisonPrimaryImage { get => _comparisonPrimaryImage; private set => SetProperty(ref _comparisonPrimaryImage, value); }
     public BitmapSource? ComparisonSecondaryImage { get => _comparisonSecondaryImage; private set => SetProperty(ref _comparisonSecondaryImage, value); }
@@ -974,6 +1000,43 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         return result.Image;
     }
 
+    private void ToggleFaceLock()
+    {
+        FaceLockEnabled = !FaceLockEnabled;
+        FaceLockStatus = FaceLockEnabled ? "FACE DETECTOR NOT AVAILABLE · 普通同步比较继续" : "人脸锁定已关闭。";
+    }
+
+    private void StartRapidCompare()
+    {
+        if (SelectedAsset is null || CompareCandidate is null) return;
+        _rapidCompare = new RapidCompareState(SelectedAsset.Record.Id, CompareCandidate.Record.Id);
+        OnPropertyChanged(nameof(IsRapidCompare)); OnPropertyChanged(nameof(RapidCompareStatus)); RefreshCommands();
+        Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
+    }
+
+    private void KeepChampion() => OnPropertyChanged(nameof(RapidCompareStatus));
+
+    private void PromoteChallenger()
+    {
+        if (_rapidCompare is null) return;
+        var items = AssetsView.Cast<TetherAssetItemViewModel>().ToArray();
+        var index = Array.FindIndex(items, item => item.Record.Id == _rapidCompare.ChallengerId);
+        var next = index >= 0 && index + 1 < items.Length ? items[index + 1] : null;
+        if (next is null) { FaceLockStatus = "快速比较已到达末尾。"; return; }
+        _rapidCompare = _rapidCompare.PromoteChallenger(next.Record.Id);
+        CompareCandidate = next; OnPropertyChanged(nameof(RapidCompareStatus)); Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
+    }
+
+    private void MoveRapidChallenger(int delta)
+    {
+        if (_rapidCompare is null) return;
+        var items = AssetsView.Cast<TetherAssetItemViewModel>().ToArray();
+        var index = Array.FindIndex(items, item => item.Record.Id == _rapidCompare.ChallengerId);
+        var nextIndex = Math.Clamp(index + delta, 0, Math.Max(0, items.Length - 1));
+        var next = items.ElementAtOrDefault(nextIndex);
+        if (next is null || next.Record.Id == _rapidCompare.BestId) return;
+        CompareCandidate = next; OnPropertyChanged(nameof(RapidCompareStatus)); Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
+    }
     private void SetCompareCandidate(TetherAssetItemViewModel? item)
     {
         if (item is null || item == SelectedAsset) return;
@@ -1140,7 +1203,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         StartCommand.RaiseCanExecuteChanged(); StopCommand.RaiseCanExecuteChanged(); ReconcileCommand.RaiseCanExecuteChanged(); ClearProxyCacheCommand.RaiseCanExecuteChanged();
         PreviousCommand.RaiseCanExecuteChanged(); NextCommand.RaiseCanExecuteChanged(); ActualSizeCommand.RaiseCanExecuteChanged(); ToggleLockCommand.RaiseCanExecuteChanged(); UnlockLatestCommand.RaiseCanExecuteChanged(); ToggleFullScreenCommand.RaiseCanExecuteChanged();
         SetRatingCommand.RaiseCanExecuteChanged(); SetColorLabelCommand.RaiseCanExecuteChanged(); SaveNotesCommand.RaiseCanExecuteChanged(); ToggleFavoriteCommand.RaiseCanExecuteChanged(); ToggleRejectedCommand.RaiseCanExecuteChanged();
-        StartSideBySideCommand.RaiseCanExecuteChanged(); StartOverlayCommand.RaiseCanExecuteChanged(); ExitComparisonCommand.RaiseCanExecuteChanged(); SwapComparisonCommand.RaiseCanExecuteChanged(); UseCompareCandidateAsPrimaryCommand.RaiseCanExecuteChanged(); ClearReferenceCommand.RaiseCanExecuteChanged(); RefreshAnalysisCommand.RaiseCanExecuteChanged();
+        StartSideBySideCommand.RaiseCanExecuteChanged(); StartOverlayCommand.RaiseCanExecuteChanged(); ExitComparisonCommand.RaiseCanExecuteChanged(); SwapComparisonCommand.RaiseCanExecuteChanged(); UseCompareCandidateAsPrimaryCommand.RaiseCanExecuteChanged(); ClearReferenceCommand.RaiseCanExecuteChanged(); RefreshAnalysisCommand.RaiseCanExecuteChanged(); SetFitZoomCommand.RaiseCanExecuteChanged(); Set100ZoomCommand.RaiseCanExecuteChanged(); Set200ZoomCommand.RaiseCanExecuteChanged(); ToggleFaceLockCommand.RaiseCanExecuteChanged(); StartRapidCompareCommand.RaiseCanExecuteChanged(); KeepChampionCommand.RaiseCanExecuteChanged(); PromoteChallengerCommand.RaiseCanExecuteChanged(); PreviousChallengerCommand.RaiseCanExecuteChanged(); NextChallengerCommand.RaiseCanExecuteChanged();
     }
 
     private void NotifyCounts()

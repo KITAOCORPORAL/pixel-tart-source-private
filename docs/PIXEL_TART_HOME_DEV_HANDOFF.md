@@ -99,3 +99,11 @@ Minimum SDK: 10.0.302 with `latestFeature` roll-forward in `global.json`; 10.0.4
 - Spec only: Pocket/cloud provider, Online Selection cloud gallery, Browser Extension, AI Culling, Skin Studio, Look DNA.
 - Tests: `PhotographerWorkflowFoundationTests` 5/5; Core Release build 0 errors.
 - Next: wire contracts into Photography WPF surfaces and run full Core/WPF/Photography/Calendar/Match regression.
+
+## Phase 1B follow-up (2026-09-28)
+
+- Implemented WPF compare toolbar controls and rapid compare keyboard routing in Tether.
+- Face Lock toggle is explicit about missing detector; no fake landmarks are used.
+- Added Booking schema v6 and repository/service persistence for buffers, HOLD expiry, PaymentState, Revision, DeviceId, DeletedAtUtc; editor fields are visible in the existing booking workflow.
+- Core combined Face Lock transform test and 5 foundation tests pass; Release x64 WPF build passes with 0 warnings/errors.
+- Partial: production face detector, WPF transform overlay, ExportRecipe manager/multi-recipe UI, Windows 3D renderer, native pointer/screenshots.

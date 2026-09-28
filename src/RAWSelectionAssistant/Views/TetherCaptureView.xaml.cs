@@ -241,6 +241,18 @@ public partial class TetherCaptureView : UserControl
                 if (clientCommand.CanExecute(null)) clientCommand.Execute(null);
                 e.Handled = true;
                 break;
+            case Key.J:
+                if (viewModel.KeepChampionCommand.CanExecute(null)) viewModel.KeepChampionCommand.Execute(null);
+                e.Handled = true; break;
+            case Key.N:
+                if (viewModel.PromoteChallengerCommand.CanExecute(null)) viewModel.PromoteChallengerCommand.Execute(null);
+                e.Handled = true; break;
+            case Key.PageUp:
+                if (viewModel.PreviousChallengerCommand.CanExecute(null)) viewModel.PreviousChallengerCommand.Execute(null);
+                e.Handled = true; break;
+            case Key.PageDown:
+                if (viewModel.NextChallengerCommand.CanExecute(null)) viewModel.NextChallengerCommand.Execute(null);
+                e.Handled = true; break;
             case Key.B:
                 if (viewModel.ReferenceMode.Enabled) viewModel.ReferenceMode.HoldOriginal(true);
                 else viewModel.ColorSettings.ShowBefore = true;

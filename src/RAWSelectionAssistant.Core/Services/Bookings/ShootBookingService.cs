@@ -61,7 +61,14 @@ public sealed class ShootBookingService(
             CreatedAtUtc = previous?.CreatedAtUtc ?? now,
             UpdatedAtUtc = now,
             IsArchived = false,
-            ArchivedAtUtc = null
+            ArchivedAtUtc = null,
+            PreBufferMinutes = Math.Clamp(draft.PreBufferMinutes, 0, 1440),
+            PostBufferMinutes = Math.Clamp(draft.PostBufferMinutes, 0, 1440),
+            HoldExpiresAtUtc = draft.HoldExpiresAtUtc,
+            PaymentState = draft.PaymentState,
+            Revision = (previous?.Revision ?? 0) + 1,
+            DeviceId = previous?.DeviceId ?? "desktop",
+            DeletedAtUtc = null
         };
         var requirements = draft.Requirements.Select((item, index) => item with
         {

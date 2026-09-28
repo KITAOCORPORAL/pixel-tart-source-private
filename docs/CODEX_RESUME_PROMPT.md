@@ -13,3 +13,7 @@ The RTX 5060 Ti home run and external multi-vendor corpus baseline are recorded 
 ## Resume 2026-09-28
 
 Continue from the photographer workflow foundation. Preserve Match v3 stable default and guarded Match v4 parity. Next implementation is WPF wiring for Face Lock/2-Up, Rapid Compare, and multi-recipe ExportRecipe UI, followed by native 3D renderer and full regression. Do not upload RAW/JPEG or implement cloud RAW sync.
+
+## Phase 1B resume
+
+Continue from c9668f2 plus the Phase 1B WPF compare and booking persistence changes. Keep Face Lock detector status explicit; do not add fake landmarks. Next priority is real platform face detector or a user-selected local detector, then ExportRecipe manager/multi-recipe publishing and Windows 3D renderer.

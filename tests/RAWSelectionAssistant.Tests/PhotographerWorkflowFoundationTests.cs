@@ -16,8 +16,8 @@ public sealed class PhotographerWorkflowFoundationTests
         var target = new FaceObservation(30, 40, 200, 240, new(100, 130), new(180, 140), .98, "b");
         var plan = FaceLockPlanner.Plan(source, target);
         Assert.AreEqual(2, plan.Scale, .0001);
-        Assert.AreEqual(80, plan.TranslateX, .0001);
-        Assert.AreEqual(77.5, plan.TranslateY, .0001);
+        Assert.AreEqual(20, plan.TranslateX, .0001);
+        Assert.AreEqual(20, plan.TranslateY, .0001);
         Assert.AreEqual(FaceLockFallback.None, plan.Fallback);
         Assert.AreSame(source, FaceLockPlanner.SelectPrimary([source]));
     }
@@ -61,5 +61,3 @@ public sealed class PhotographerWorkflowFoundationTests
         Assert.IsTrue(SyncConflictPolicy.Apply(incoming, incoming).Duplicate);
     }
 }
-
-

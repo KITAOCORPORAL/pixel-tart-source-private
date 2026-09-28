@@ -489,6 +489,10 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     private ProjectOption? _selectedProject;
     private bool _allowOverlap;
     private string _notes = string.Empty;
+    private int _preBufferMinutes;
+    private int _postBufferMinutes;
+    private string _holdExpiresAtText = string.Empty;
+    private BookingPaymentState _paymentState = BookingPaymentState.Unknown;
     private string _validationText = string.Empty;
     private bool _isBusy;
     private bool _isConflictVisible;
@@ -636,6 +640,12 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     public ProjectOption? SelectedProject { get => _selectedProject; set => SetProperty(ref _selectedProject, value); }
     public bool AllowOverlap { get => _allowOverlap; set => SetProperty(ref _allowOverlap, value); }
     public string Notes { get => _notes; set => SetProperty(ref _notes, value ?? string.Empty); }
+    public int PreBufferMinutes { get => _preBufferMinutes; set => SetProperty(ref _preBufferMinutes, Math.Clamp(value, 0, 1440)); }
+    public int PostBufferMinutes { get => _postBufferMinutes; set => SetProperty(ref _postBufferMinutes, Math.Clamp(value, 0, 1440)); }
+    public string HoldExpiresAtText { get => _holdExpiresAtText; set => SetProperty(ref _holdExpiresAtText, value ?? string.Empty); }
+    public IReadOnlyList<BookingPaymentState> PaymentStates { get; } = Enum.GetValues<BookingPaymentState>();
+    public BookingPaymentState PaymentState { get => _paymentState; set { if(SetProperty(ref _paymentState, value)) OnPropertyChanged(nameof(IsHold)); } }
+    public bool IsHold => SelectedStatus?.Value == ShootBookingStatus.Tentative;
     public int CurrentStep { get => _currentStep; set { var next = Math.Clamp(value, 1, 4); if (!SetProperty(ref _currentStep, next)) return; OnPropertyChanged(nameof(CurrentStepIndex)); OnPropertyChanged(nameof(StepTitle)); OnPropertyChanged(nameof(CanGoPrevious)); OnPropertyChanged(nameof(CanGoNext)); OnPropertyChanged(nameof(IsFinalStep)); foreach (var name in new[] { nameof(Step1State), nameof(Step2State), nameof(Step3State), nameof(Step4State), nameof(Step1Glyph), nameof(Step2Glyph), nameof(Step3Glyph), nameof(Step4Glyph) }) OnPropertyChanged(name); (NextStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); (PreviousStepCommand as RelayCommand)?.RaiseCanExecuteChanged(); if (next == 2) _ = LoadWeatherPreviewAsync(); } }
     public int CurrentStepIndex { get => CurrentStep - 1; set => CurrentStep = value + 1; }
     public string StepTitle => CurrentStep switch { 1 => "1 基础信息", 2 => "2 时间、天气与提醒", 3 => "3 策划资料", _ => "4 人员与收支" };
@@ -692,6 +702,10 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         SelectedProject = ProjectOptions.FirstOrDefault(option => option.Id == booking.ProjectId) ?? ProjectOptions[0];
         AllowOverlap = booking.AllowOverlap;
         Notes = booking.Notes ?? string.Empty;
+        PreBufferMinutes = booking.PreBufferMinutes;
+        PostBufferMinutes = booking.PostBufferMinutes;
+        HoldExpiresAtText = booking.HoldExpiresAtUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? string.Empty;
+        PaymentState = booking.PaymentState;
         Requirements.Load(await _service.GetRequirementsAsync(booking.Id).ConfigureAwait(true));
         if (_peopleService is not null)
         {
@@ -936,6 +950,10 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             CurrencyScale = 2,
             AllowOverlap = AllowOverlap,
             Notes = Notes,
+            PreBufferMinutes = PreBufferMinutes,
+            PostBufferMinutes = PostBufferMinutes,
+            HoldExpiresAtUtc = ParseHoldExpiry(HoldExpiresAtText),
+            PaymentState = PaymentState,
             Requirements = requirements,
             EditorSessionId = _editorSessionId,
             CreateIfMissing = !_bookingId.HasValue,
@@ -946,6 +964,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         validation = string.Empty;
         return true;
     }
+
+    private static DateTimeOffset? ParseHoldExpiry(string text) => DateTimeOffset.TryParse(text, CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out var value) ? value.ToUniversalTime() : null;
 
     private bool TryBuildRange(string timeZoneId, out DateTimeOffset start, out DateTimeOffset end, out string error)
     {
