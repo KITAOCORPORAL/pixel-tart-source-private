@@ -1,5 +1,7 @@
 # Pixel Tart current development state — 2026-09-27
 
+> 2026-09-28 company-machine increment: Color Studio now has a synthetic-tested RAW professional decode → float Match v3 preview → atomic TIFF16 product route. It rejects unsupported high-precision nodes and 8-bit fallback. Real-camera product PASS remains 0 because the home corpus is unavailable here. The narrowly scoped gate update is 14/28; see [integration](color-studio/RAW_MATCH_TIFF16_PRODUCT_INTEGRATION.md) and [current Color Match state](color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md). Historical statements below describe the 2026-09-27 baseline, not this increment.
+
 This file is a repository-derived baseline for the next development task. It was generated from branch `integration/pixel-tart-developer-preview` after fetching and fast-forward pulling `origin`; source, XAML, ViewModel, service, tests, scripts and committed evidence were cross-checked. It does not promote partial evidence to product completion.
 
 ## Git
