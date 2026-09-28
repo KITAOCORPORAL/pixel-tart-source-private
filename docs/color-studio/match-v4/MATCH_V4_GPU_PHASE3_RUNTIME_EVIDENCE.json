@@ -1,0 +1,17 @@
+{
+  "schema": "match-v4-gpu-phase3-runtime-v1",
+  "generatedUtc": "2026-09-28T06:54:53Z",
+  "source": "synthetic deterministic float32 256x192",
+  "adapter": "NVIDIA GeForce GTX 1650",
+  "dedicatedMemoryBytes": 4126146560,
+  "backend": "ComputeSharp-DX12",
+  "cpuGpuFloat32": {
+    "mean": 1.735277057910187e-7,
+    "p95": 5.662441253662109e-7,
+    "p99": 1.266598701049805e-6,
+    "max": 6.707385182380676e-6
+  },
+  "wholeVs64EdgeTiled": { "mean": 0.0, "p95": 0.0, "p99": 0.0, "max": 0.0 },
+  "cancellationObserved": true,
+  "productGate": "NOT_CLOSED_SYNTHETIC_ADAPTER_ONLY"
+}

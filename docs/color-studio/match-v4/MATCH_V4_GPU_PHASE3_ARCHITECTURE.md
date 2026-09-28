@@ -9,3 +9,5 @@ The DX12 adapter now accepts a float32 `HighBitDepthImageBuffer`, applies the re
 The existing V4 analysis path is intentionally unchanged: representative sampling, Sinkhorn, barycentric mapping, and residual analysis remain CPU oracle work. This phase does not claim a fully GPU-resident analysis pipeline.
 
 The DX12 adapter is not currently wired into the WPF Color Studio engine selector or TIFF16 product command. Therefore the classification remains `GPU_FULL_PIXEL_EXECUTION` for the isolated adapter and `MATCH_V4_GPU_EXPERIMENTAL / PARTIAL` for the product.
+
+Runtime smoke evidence was obtained on an NVIDIA GeForce GTX 1650 (4,126,146,560 dedicated bytes): DX12 device creation passed, CPU/GPU float32 max absolute channel error was `6.71e-6`, whole-image versus 64-edge tiled output was exactly equal for the 256x192 synthetic corpus, and cancellation was observed before publication. This is synthetic adapter evidence, not a Color Studio product gate.

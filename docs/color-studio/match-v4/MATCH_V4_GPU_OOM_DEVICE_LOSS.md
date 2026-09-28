@@ -5,9 +5,9 @@ The Core `MatchV4PixelExecutor` retains the same transform hash and processing g
 Acceptance status:
 
 - CPU fallback identity: PASS — focused test;
-- DX12 allocation shrink on real hardware: NOT RUN;
+- DX12 allocation shrink on real hardware: NOT RUN — no injected allocation failure;
 - device-lost injection: NOT RUN;
-- partial-result publication: source result is only returned after all tiles complete;
+- partial-result publication: PASS by construction — source result is only returned after all tiles complete;
 - WPF recovery: NOT RUN.
 
 This is safe infrastructure, not a claim of complete production fault-injection coverage.
