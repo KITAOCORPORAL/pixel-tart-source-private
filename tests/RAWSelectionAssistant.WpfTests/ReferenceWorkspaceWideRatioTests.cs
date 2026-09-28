@@ -1,6 +1,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.ViewModels;
 using RAWSelectionAssistant.Views;
 
@@ -54,6 +55,20 @@ public sealed class ReferenceWorkspaceWideRatioTests
         thread.SetApartmentState(ApartmentState.STA); thread.Start();
         Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(20)), "Bounded UI integration test.");
         if (failure is not null) throw failure;
+    }
+
+    [TestMethod]
+    public void MatchV4ProductSelectorDefaultsToStableAndExposesAutoCpu()
+    {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var editor = workspace.Editor;
+        Assert.AreEqual(ColorStudioMatchEngine.Stable, editor.MatchEngine);
+        CollectionAssert.Contains(editor.MatchEngines.ToArray(), ColorStudioMatchEngine.MatchV4Beta);
+        CollectionAssert.Contains(editor.MatchV4ExecutionModes.ToArray(), MatchV4ExecutionMode.Auto);
+        CollectionAssert.Contains(editor.MatchV4ExecutionModes.ToArray(), MatchV4ExecutionMode.Cpu);
+        editor.MatchEngine = ColorStudioMatchEngine.MatchV4Beta;
+        Assert.IsTrue(editor.IsMatchV4Beta);
+        StringAssert.Contains(editor.MatchV4Status, "CPU");
     }
     private static IEnumerable<T> Descendants<T>(DependencyObject root) where T : DependencyObject
     {

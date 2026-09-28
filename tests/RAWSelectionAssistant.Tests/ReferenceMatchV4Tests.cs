@@ -3,6 +3,7 @@ using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Color;
+using RAWSelectionAssistant.Core.Services.Export;
 
 namespace RAWSelectionAssistant.Tests;
 
@@ -40,6 +41,33 @@ public sealed class ReferenceMatchV4Tests
             Assert.IsTrue(result.UsedCpuFallback);
             Assert.AreEqual(master.ProcessingGenerationId, result.ProcessingGenerationId);
             Assert.IsFalse(string.IsNullOrWhiteSpace(result.TransformHash));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
+    [TestMethod]
+    public async Task ProductSessionReusesOneTransformAndGenerationForPreviewAndExport()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-MatchV4-Session-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var path = Path.Combine(root, "source.cr3"); await File.WriteAllTextAsync(path, "stable source");
+            var master = await new RawMatchTiff16ProductPipeline(new FrozenMasterTestDecoder()).DecodeFrozenMasterAsync(path);
+            var reference = new HighBitDepthImageBuffer(8, 8, Enumerable.Repeat(.45f, 8 * 8 * 3).ToArray(), "32f", "sRGB", master.Orientation);
+            var executor = new MatchV4ProductExecutor(new ReferenceMatchV4Engine(gpu: new UnavailableGpu()));
+            var session = executor.CreateSession(master, reference, "reference-sha", new(MaximumRepresentativeSamples: 32, SinkhornIterations: 4), MatchV4ExecutionMode.Auto);
+            var preview = await session.PreviewAsync(master.Image, .5, false, MatchV4ExecutionMode.Auto);
+            var output = Path.Combine(root, "v4.tif");
+            var exported = await session.ExportTiff16Async(output, .5, false, MatchV4ExecutionMode.Auto);
+            Assert.AreEqual(master.DecodeGenerationId, session.DecodeGenerationId);
+            Assert.AreEqual(master.ProcessingGenerationId, preview.ProcessingGenerationId);
+            Assert.AreEqual(master.ProcessingGenerationId, exported.Match.ProcessingGenerationId);
+            Assert.AreEqual(preview.TransformHash, exported.Match.TransformHash);
+            Assert.IsTrue(preview.UsedCpuFallback);
+            Assert.IsTrue(File.Exists(output));
+            using var stream = File.OpenRead(output); var readBack = TiffReadBack.Read(stream);
+            Assert.AreEqual(16, readBack.BitsPerSample); Assert.AreEqual(3, readBack.SamplesPerPixel);
         }
         finally { Directory.Delete(root, true); }
     }

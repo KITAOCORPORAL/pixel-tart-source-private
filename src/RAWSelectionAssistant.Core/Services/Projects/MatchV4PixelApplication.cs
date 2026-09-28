@@ -11,6 +11,15 @@ public sealed record MatchV4ResolvedTransform(
     double Strength = 1,
     bool KeepLuminance = false)
 {
+    public MatchV4ResolvedTransform WithExecution(double strength, bool keepLuminance)
+    {
+        if (!double.IsFinite(strength) || strength is < 0 or > 1) throw new ArgumentOutOfRangeException(nameof(strength));
+        var executionText = $"{TransformHash}|strength={strength:R}|keep-luminance={keepLuminance}";
+        var executionHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(executionText)));
+        return this with { Strength = strength, KeepLuminance = keepLuminance, TransformHash = executionHash };
+    }
+
     public MatchV4ResolvedTransform Normalize()
     {
         Settings.Validate();
@@ -20,6 +29,17 @@ public sealed record MatchV4ResolvedTransform(
         return this;
     }
 }
+
+public sealed record MatchV4ResolvedAnalysis(
+    MatchV4ResolvedTransform Transform,
+    int RepresentativeSourceCount,
+    int RepresentativeReferenceCount,
+    ReferenceMatchV4BackendKind Backend,
+    bool UsedCpuFallback,
+    GpuFailureReason? Failure,
+    GpuFallbackStage FailureStage,
+    string CacheKey,
+    ReferenceLookDecomposition Decomposition);
 
 public sealed record MatchV4PixelExecutionResult(
     HighBitDepthImageBuffer Pixels,

@@ -245,6 +245,27 @@ public sealed class ReferenceMatchV4Engine
     public ReferenceMatchV4Engine(IColorMatchComputeBackend? cpu = null, IColorMatchComputeBackend? gpu = null)
     { _cpu = cpu ?? new CpuColorMatchComputeBackend(); _gpu = gpu ?? new GpuColorMatchComputeBackend(); }
 
+    /// <summary>Resolves one immutable V4 analysis without applying pixels. Product preview and export can reuse this exact transform.</summary>
+    public MatchV4ResolvedAnalysis ResolveHighPrecision(
+        HighBitDepthImageBuffer source, HighBitDepthImageBuffer reference,
+        string sourceIdentity = "source", string referenceIdentity = "reference",
+        ReferenceMatchV4Settings? settings = null, bool preferGpu = true,
+        CancellationToken token = default)
+    {
+        ArgumentNullException.ThrowIfNull(source); ArgumentNullException.ThrowIfNull(reference);
+        settings ??= new(); settings.Validate();
+        var transformIdentity = new MatchTransformV4(sourceIdentity, referenceIdentity, settings).Normalize();
+        var sourceSamples = Sample(source, settings.MaximumRepresentativeSamples, token);
+        var referenceSamples = Sample(reference, settings.MaximumRepresentativeSamples, token);
+        var (mapped, backend, usedCpuFallback, failure, stage) = MapSamples(sourceSamples, referenceSamples, settings, preferGpu, token);
+        var global = WeightedDelta(sourceSamples, mapped);
+        var regions = BuildRegionDeltas(sourceSamples, mapped);
+        var resolved = new MatchV4ResolvedTransform(global, regions, settings, transformIdentity.Hash,
+            Strength: 1, KeepLuminance: false).Normalize();
+        return new(resolved, sourceSamples.Count, referenceSamples.Count, backend, usedCpuFallback, failure, stage,
+            ReferenceMatchV4Cache.CreateKey(sourceIdentity, referenceIdentity, settings), Decompose(sourceSamples, referenceSamples));
+    }
+
     public ReferenceMatchV4Result Match(VisualPixelBuffer source, VisualPixelBuffer reference,
         string sourceIdentity = "source", string referenceIdentity = "reference", ReferenceMatchV4Settings? settings = null,
         bool preferGpu = true, CancellationToken token = default, Guid? processingGenerationId = null)
@@ -347,6 +368,24 @@ public sealed class ReferenceMatchV4Engine
         return new(result, backend.Kind, preferGpu && backend.Kind == ReferenceMatchV4BackendKind.Cpu && gpuFailure is not null,
             sourceSamples.Count, referenceSamples.Count, completedResidual, residual,
             transform.CanonicalText, gpuFailure, fallbackStage, transform.Hash, processingGenerationId);
+    }
+
+    private (IReadOnlyList<OklabColor> Mapped, ReferenceMatchV4BackendKind Backend, bool UsedCpuFallback,
+        GpuFailureReason? Failure, GpuFallbackStage FailureStage) MapSamples(
+        IReadOnlyList<OklabColor> sourceSamples, IReadOnlyList<OklabColor> referenceSamples,
+        ReferenceMatchV4Settings settings, bool preferGpu, CancellationToken token)
+    {
+        var backend = _cpu; GpuFailureReason? failure = null; var stage = GpuFallbackStage.None;
+        if (preferGpu && _gpu.IsAvailable) backend = _gpu;
+        else if (preferGpu) { failure = GpuFailureReason.BackendUnavailable; stage = GpuFallbackStage.Initialization; }
+        try { return (backend.Map(sourceSamples, referenceSamples, settings, token), backend.Kind,
+            preferGpu && backend.Kind == ReferenceMatchV4BackendKind.Cpu && failure is not null,
+            failure, stage); }
+        catch (OperationCanceledException) { throw; }
+        catch (OutOfMemoryException) when (backend.Kind == ReferenceMatchV4BackendKind.Gpu)
+        { failure = GpuFailureReason.OutOfMemory; stage = GpuFallbackStage.Dispatch; return (_cpu.Map(sourceSamples, referenceSamples, settings, token), ReferenceMatchV4BackendKind.Cpu, true, failure, stage); }
+        catch when (backend.Kind == ReferenceMatchV4BackendKind.Gpu)
+        { failure = GpuFailureReason.ExecutionFailure; stage = GpuFallbackStage.Dispatch; return (_cpu.Map(sourceSamples, referenceSamples, settings, token), ReferenceMatchV4BackendKind.Cpu, true, failure, stage); }
     }
 
     private static List<OklabColor> Sample(VisualPixelBuffer pixels, int maximum, CancellationToken token)

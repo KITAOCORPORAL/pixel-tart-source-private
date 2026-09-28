@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.Export;
 using RAWSelectionAssistant.Core.Services.Presets;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Color;
@@ -67,6 +69,12 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private AdobeXmpPreset? _selectedAdobeXmpPreset;
     private ColorAdjustmentStackNode? _presetPreviewNode;
     private int _presetStrengthPercent = 100;
+    private readonly MatchV4ProductExecutor? _matchV4Executor;
+    private FrozenRawMaster? _frozenRawMaster;
+    private MatchV4ProductSession? _matchV4Session;
+    private string? _matchV4SessionKey;
+    private ColorStudioMatchEngine _matchEngine = ColorStudioMatchEngine.Stable;
+    private MatchV4ExecutionMode _matchV4ExecutionMode = MatchV4ExecutionMode.Auto;
     public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
     private ProcessingState _processingState;
     public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); OnPropertyChanged(nameof(IsSettled)); } } }
@@ -74,6 +82,12 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
     public bool IsBusy => _busyOperations > 0 || State is not ProcessingState.Idle and not ProcessingState.Cancelled and not ProcessingState.Failed;
     public bool IsSettled => State == ProcessingState.Idle && !IsBusy && Volatile.Read(ref _pendingDebounceWork) == 0;
+    public IReadOnlyList<ColorStudioMatchEngine> MatchEngines { get; } = [ColorStudioMatchEngine.Stable, ColorStudioMatchEngine.MatchV4Beta];
+    public IReadOnlyList<MatchV4ExecutionMode> MatchV4ExecutionModes { get; } = [MatchV4ExecutionMode.Auto, MatchV4ExecutionMode.Cpu];
+    public ColorStudioMatchEngine MatchEngine { get => _matchEngine; set { if (SetProperty(ref _matchEngine, value)) { _render?.Cancel(); Interlocked.Increment(ref _revision); _matchV4Session = null; _matchV4SessionKey = null; OnPropertyChanged(nameof(IsMatchV4Beta)); OnPropertyChanged(nameof(MatchV4Status)); _ = DebouncedRenderAsync(); } } }
+    public MatchV4ExecutionMode MatchV4ExecutionMode { get => _matchV4ExecutionMode; set { if (SetProperty(ref _matchV4ExecutionMode, value)) { _render?.Cancel(); Interlocked.Increment(ref _revision); OnPropertyChanged(nameof(MatchV4Status)); _ = DebouncedRenderAsync(); } } }
+    public bool IsMatchV4Beta => MatchEngine == ColorStudioMatchEngine.MatchV4Beta;
+    public string MatchV4Status => !IsMatchV4Beta ? "稳定引擎 · Match v3" : MatchV4ExecutionMode == MatchV4ExecutionMode.Cpu ? "CPU · V4 Beta" : _matchV4Executor?.Capability.BackendAvailable == true ? $"GPU 可用 · {_matchV4Executor.Capability.AdapterName}" : "GPU 不可用 · 自动使用 CPU";
     internal string[] NativeRenderedOrder { get; private set; } = [];
     internal int NativeUndoCount => _undoStacks.Count;
     internal int NativeRedoCount => _redoStacks.Count;
@@ -254,7 +268,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool IsSampling { get => _isSampling; private set => SetProperty(ref _isSampling, value); }
 
     public TetherReferenceModeViewModel(ReferenceLookStore? store = null, IDialogService? dialogs = null, bool allowReferenceManagement = false,
-        IReferenceRenderBackend? renderBackend = null, ColorStudioSchemeStore? schemeStore = null)
+        IReferenceRenderBackend? renderBackend = null, ColorStudioSchemeStore? schemeStore = null,
+        MatchV4ProductExecutor? matchV4Executor = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _schemeStore = schemeStore ?? new ColorStudioSchemeStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
@@ -262,6 +277,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _xmpImportService = new(_xmpStore);
         _dialogs = dialogs;
         _preview = renderBackend ?? new ReferenceLookPreviewService();
+        _matchV4Executor = matchV4Executor;
         _allowReferenceManagement = allowReferenceManagement;
         ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => (SelectedLook is not null || AdjustmentStack.Nodes.Count > 0) && _source is not null);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
@@ -585,9 +601,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         RefreshSourceChoices();
     }
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) { SelectedLook = null; _sessionLookId = null; } _projectId = projectId; await LoadAsync(token); }
-    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null)
+    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null, FrozenRawMaster? frozenRawMaster = null)
     {
         _rawPreviewMaster = rawPreviewMaster;
+        if (!ReferenceEquals(_frozenRawMaster, frozenRawMaster)) { _frozenRawMaster = frozenRawMaster; _matchV4Session = null; _matchV4SessionKey = null; }
         _presetPreviewNode = null; NotifyPresetPreview();
         _render?.Cancel(); Interlocked.Increment(ref _revision);
         _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 1600); OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
@@ -810,7 +827,14 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         try
         {
             BitmapSource image;
-            if (_rawPreviewMaster is { } raw)
+            if (IsMatchV4Beta && _frozenRawMaster is { } frozen && _matchV4Executor is not null)
+            {
+                var session = await EnsureMatchV4SessionAsync(frozen, look, renderToken);
+                var input = _rawPreviewMaster ?? frozen.Image;
+                var result = await Task.Run(() => session.PreviewAsync(input, MatchStrength / 100d, KeepOriginalTone, MatchV4ExecutionMode, renderToken), renderToken);
+                image = RawDisplayBitmapAdapter.ToBitmap(result.Pixels.ToVisualRgb24());
+            }
+            else if (_rawPreviewMaster is { } raw)
             {
                 // The proxy remains float RGB. Both preview and export consume this same frozen look/stack contract.
                 var rendered = await Task.Run(() => new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder())
@@ -838,7 +862,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
-        catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "RAW 高精度预览目前仅支持 Match v3；此调整节点尚未接通。"; RaiseViewProperties(); } }
+        catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "当前 V4 Beta 需要可用的高精度源与参考图；已保留上一张有效预览。"; RaiseViewProperties(); } }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
         finally { EndBusy(); }
     }
@@ -846,6 +870,59 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var edge = Math.Max(source.PixelWidth, source.PixelHeight); if (edge <= maximumEdge) return source;
         var scale = maximumEdge / (double)edge; var transformed = new TransformedBitmap(source, new System.Windows.Media.ScaleTransform(scale, scale)); transformed.Freeze(); return transformed;
+    }
+
+    public void SetFrozenRawMaster(FrozenRawMaster? master)
+    {
+        if (ReferenceEquals(_frozenRawMaster, master)) return;
+        _frozenRawMaster = master; _matchV4Session = null; _matchV4SessionKey = null;
+    }
+
+    public async Task<TiffExportResult> ExportRawV4Async(FrozenRawMaster master, string destination, ReferenceLook? look,
+        CancellationToken token = default)
+    {
+        if (_matchV4Executor is null || look is null) throw new NotSupportedException("Match v4 product executor is not available.");
+        var session = await EnsureMatchV4SessionAsync(master, look, token).ConfigureAwait(false);
+        var result = await session.ExportTiff16Async(destination, look.Parameters.MatchStrength / 100d,
+            look.Parameters.KeepOriginalTone, MatchV4ExecutionMode, token).ConfigureAwait(false);
+        return result.Export;
+    }
+
+    private async Task<MatchV4ProductSession> EnsureMatchV4SessionAsync(FrozenRawMaster master, ReferenceLook? look, CancellationToken token)
+    {
+        if (_matchV4Executor is null || look is null || look.ReferenceSources.Count != 1)
+            throw new NotSupportedException("V4 requires a product reference image.");
+        var reference = look.Normalize().ReferenceSources.FirstOrDefault(item => File.Exists(item.SourcePath));
+        if (reference is null) throw new NotSupportedException("V4 reference image is offline.");
+        var key = $"{master.DecodeGenerationId:N}|{look.ReferenceLookId:N}|{reference.ContentHash}|{look.Parameters.SkinProtection:R}|{look.Parameters.HighlightProtection:R}|{look.Parameters.NeutralProtection:R}";
+        if (_matchV4Session is not null && string.Equals(_matchV4SessionKey, key, StringComparison.Ordinal)) return _matchV4Session;
+        var referenceBuffer = await LoadHighPrecisionReferenceAsync(reference.SourcePath, token).ConfigureAwait(false);
+        var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 256, SinkhornIterations: 24)
+        {
+            SkinProtection = look.Parameters.SkinProtection / 100d,
+            HighlightProtection = look.Parameters.HighlightProtection / 100d,
+            NeutralProtection = look.Parameters.NeutralProtection / 100d,
+            ComputeQuality = ReferenceMatchV4ComputeQuality.Auto
+        };
+        _matchV4Session = await Task.Run(() => _matchV4Executor.CreateSession(master, referenceBuffer, reference.ContentHash,
+            settings, MatchV4ExecutionMode, token), token);
+        _matchV4SessionKey = key;
+        return _matchV4Session;
+    }
+
+    private static async Task<HighBitDepthImageBuffer> LoadHighPrecisionReferenceAsync(string path, CancellationToken token)
+    {
+        if (RawMatchTiff16ProductPipeline.IsRaw(path))
+            return await new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).DecodeMasterAsync(path, token).ConfigureAwait(false);
+        var bitmap = await Task.Run(() =>
+        {
+            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); return image;
+        }, token).ConfigureAwait(false);
+        var converted = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0); converted.Freeze();
+        var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 4]; converted.CopyPixels(bytes, converted.PixelWidth * 4, 0);
+        var rgb = new float[converted.PixelWidth * converted.PixelHeight * 3];
+        for (var i = 0; i < converted.PixelWidth * converted.PixelHeight; i++) { rgb[i * 3] = bytes[i * 4 + 2] / 255f; rgb[i * 3 + 1] = bytes[i * 4 + 1] / 255f; rgb[i * 3 + 2] = bytes[i * 4] / 255f; }
+        return new HighBitDepthImageBuffer(converted.PixelWidth, converted.PixelHeight, rgb, "8", "sRGB");
     }
     private void SetFilm(PixelTartFilmSettings value)
     {

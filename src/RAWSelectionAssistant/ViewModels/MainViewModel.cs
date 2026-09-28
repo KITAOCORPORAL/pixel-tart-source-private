@@ -7,6 +7,7 @@ using RAWSelectionAssistant.Core.Services;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Core.Services.Tasks;
 using RAWSelectionAssistant.Core.Services.Database;
+using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Utilities;
 
@@ -147,7 +148,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         OnlineSelectionViewModel? onlineSelectionPage = null,
         RawToJpegViewModel? rawToJpegPage = null,
         BatchCompressionViewModel? batchCompressionPage = null,
-        PublishingExportViewModel? publishingPage = null)
+        PublishingExportViewModel? publishingPage = null,
+        MatchV4ProductExecutor? matchV4Executor = null)
     {
         _normalizer = normalizer;
         _inputParser = inputParser;
@@ -186,7 +188,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         RawToJpegPage = rawToJpegPage;
         BatchCompressionPage = batchCompressionPage;
         PublishingPage = publishingPage;
-        ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService);
+        ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService, matchV4Executor: matchV4Executor);
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {
             await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, TetherPage.SelectedAsset?.Record.Id, TetherPage.CurrentImage).ConfigureAwait(true);

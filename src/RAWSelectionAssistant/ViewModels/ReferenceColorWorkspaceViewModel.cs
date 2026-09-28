@@ -14,6 +14,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 {
     private readonly IDialogService _dialogs;
     private readonly RawMatchTiff16ProductPipeline _rawPipeline;
+    private readonly MatchV4ProductExecutor? _matchV4Executor;
     private BitmapSource? _targetImage;
     private string _targetName = "尚未选择待调色照片";
     private string _statusText = "选择待调色照片，再添加希望借用色彩与影调的参考图片。源照片始终只读。";
@@ -34,13 +35,15 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private readonly HashSet<Guid> _nodeSyncSelection = [];
     private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
 
-    public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null)
+    public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
+        MatchV4ProductExecutor? matchV4Executor = null)
     {
         _dialogs = dialogs;
+        _matchV4Executor = matchV4Executor;
         _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? new LibRawDecoder());
         Editor = new TetherReferenceModeViewModel(
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
-            renderBackend: renderBackend);
+            renderBackend: renderBackend, matchV4Executor: matchV4Executor);
         Editor.Enabled = true;
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
@@ -239,7 +242,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
-            await Editor.SetSourceAsync(target.AssetId, image, rawPreviewMaster: rawProxy);
+            await Editor.SetSourceAsync(target.AssetId, image, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
@@ -296,7 +299,13 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                     {
                         // AtomicTiffWriter validates the temporary TIFF before the destination becomes visible.
                         var master = item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Path, _exportCancellation.Token);
-                        await _rawPipeline.ExportAsync(master, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
+                        if (Editor.IsMatchV4Beta && _matchV4Executor is not null && frozenItem.Look is not null && frozenItem.Stack is null && frozenItem.Film?.Enabled != true)
+                        {
+                            Editor.SetFrozenRawMaster(master);
+                            await Editor.ExportRawV4Async(master, output, frozenItem.Look, _exportCancellation.Token);
+                        }
+                        else
+                            await _rawPipeline.ExportAsync(master, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
                     }
                     else
                     {

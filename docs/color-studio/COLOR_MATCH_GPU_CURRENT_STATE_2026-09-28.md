@@ -11,6 +11,21 @@ Every other gate is unchanged, in particular 13–21 (Match v4/GPU production), 
 
 The company machine lacks the home RAW corpus; `CORPUS RERUN = NOT RUN`. Product full pipeline is 1 synthetic PASS and 0 real-camera PASS. Real Canon/Fuji parity and complete metadata/ICC acceptance are not closed by this percentage.
 
+## Match V4 GPU Phase 4 product route
+
+The guarded product route is now wired into the real Color Studio Professional workspace. The
+engine selector defaults to `Stable` (Match v3) and offers `MatchV4Beta`; V4 exposes `AUTO` and
+`CPU` execution modes and a concise GPU/CPU status. AUTO uses the validated DX12 backend when the
+smoke test succeeds, otherwise the pixel stage falls back to CPU. A `MatchV4ProductSession` fixes
+the FrozenRawMaster decode/processing generation and resolved transform across preview and atomic
+TIFF16 export, so fallback does not re-analyze or decode a second master.
+
+Focused evidence: Core Release build 0/0, WPF Release build 0/0, V4/RAW focused tests 14 passed
+and 2 GPU-dependent skipped, RAW/WPF product tests 6 passed. This is opt-in Beta evidence only;
+it does not close the real-camera V4/GFX100S 102MP telemetry gate, ICC/EXIF gates, or Color Range/
+Film high-precision integration. `3D Color Space / 3D Color Map` remains **REQUIRED** and
+`DEFERRED_TO_COLOR_STUDIO_PRO_PHASE`; see `docs/color-studio/3d-color-space/`.
+
 ## Match V4 GPU Phase 3 runtime evidence
 
 The Windows adapter now performs complete float32 pixel tiles, not only pairwise sampling. On the available NVIDIA GeForce GTX 1650 (4,126,146,560 dedicated bytes), a 256x192 synthetic runtime probe reported CPU/GPU mean absolute channel error `1.7353e-7`, P95 `5.6624e-7`, P99 `1.2666e-6`, max `6.7074e-6`; whole-image versus 64-edge tiled output was exactly equal; pre-dispatch cancellation was observed. This is adapter-level evidence only.

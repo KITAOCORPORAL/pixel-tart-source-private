@@ -301,7 +301,8 @@ public partial class App : Application
                 onlineSelectionPage: onlineSelectionPage,
                 rawToJpegPage: new RawToJpegViewModel(_compositionRoot.RawToJpegCoordinator, dialogService),
                 batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService),
-                publishingPage: new PublishingExportViewModel(_compositionRoot.PublishingCoordinator, new Services.Publishing.WpfPublishingRenderer(), dialogService));
+                publishingPage: new PublishingExportViewModel(_compositionRoot.PublishingCoordinator, new Services.Publishing.WpfPublishingRenderer(), dialogService),
+                matchV4Executor: new MatchV4BackendResolver().Executor);
             var planningPage = new PlanningCenterViewModel(
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService,
