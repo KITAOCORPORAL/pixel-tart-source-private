@@ -28,8 +28,9 @@ public sealed record PhotographyEvidenceManifest(
             if (string.IsNullOrWhiteSpace(artifact.RelativePath) || Path.IsPathRooted(artifact.RelativePath) || artifact.RelativePath.Split('/', '\\').Contains("..")) throw new InvalidDataException("Invalid photography evidence artifact path.");
             var path = Path.Combine(root, artifact.RelativePath.Replace('/', Path.DirectorySeparatorChar));
             if (!File.Exists(path)) throw new FileNotFoundException($"Missing photography evidence artifact: {artifact.RelativePath}", path);
-            var bytes = new FileInfo(path).Length;
-            var hash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
+            var canonical = CanonicalEvidenceBytes(path);
+            var bytes = canonical.Length;
+            var hash = Convert.ToHexString(SHA256.HashData(canonical));
             if (bytes != artifact.Bytes || !string.Equals(hash, artifact.Sha256, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException($"Photography evidence artifact hash mismatch: {artifact.RelativePath}");
         }
         Verify("input-manifest.json", InputManifestHash);
@@ -50,7 +51,18 @@ public sealed record PhotographyEvidenceManifest(
         }
     }
 
-    public static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
+    // Historical manifests hash UTF-8/LF Git blob bytes; Windows checkout may expand LF to CRLF.
+    // Canonicalize text only. Binary artifacts, if introduced, retain exact byte hashing.
+    public static byte[] CanonicalEvidenceBytes(string path)
+    {
+        var bytes = File.ReadAllBytes(path);
+        if (!path.EndsWith(".json", StringComparison.OrdinalIgnoreCase) &&
+            !path.EndsWith(".jsonl", StringComparison.OrdinalIgnoreCase) &&
+            !path.EndsWith(".md", StringComparison.OrdinalIgnoreCase)) return bytes;
+        var text = new UTF8Encoding(false, true).GetString(bytes);
+        return Encoding.UTF8.GetBytes(text.Replace("\r\n", "\n", StringComparison.Ordinal));
+    }
+    public static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(CanonicalEvidenceBytes(path)));
     public static string HashText(string text) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text)));
     public static PhotographyEvidenceManifest Deserialize(string json) => JsonSerializer.Deserialize<PhotographyEvidenceManifest>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web)) ?? throw new InvalidDataException("Photography evidence manifest is empty.");
 }

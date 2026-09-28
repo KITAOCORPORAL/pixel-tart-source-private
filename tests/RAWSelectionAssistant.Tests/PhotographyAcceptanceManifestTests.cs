@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text.Json;
+using RAWSelectionAssistant.Core.Services.Projects;
 
 namespace RAWSelectionAssistant.Tests;
 
@@ -93,7 +94,7 @@ public sealed class PhotographyAcceptanceManifestTests
     }
 
     private static JsonDocument Read(string relative) => JsonDocument.Parse(File.ReadAllText(Path.Combine(Root(), relative)));
-    private static string Hash(string relative) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(Root(), relative))));
+    private static string Hash(string relative) => PhotographyEvidenceManifest.HashFile(Path.Combine(Root(), relative));
 
     private static string Root()
     {
