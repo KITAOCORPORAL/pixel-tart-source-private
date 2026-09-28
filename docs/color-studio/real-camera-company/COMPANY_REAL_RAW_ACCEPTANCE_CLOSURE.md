@@ -7,3 +7,15 @@ No production decoder setting or dependency was changed. The legacy parity root 
 Color Match 28-gate: **before 14/28, after 14/28**. Gate 22 (legal-camera decode across required scope), 23 (camera/format coverage), 24 (already credited on synthetic route), and 28 (already credited on synthetic parity) do not earn a *new* point merely from one passing real sample. Gate 25 ICC, 26 complete EXIF and 27 performance stay open. Under the canonical diagnostic contract: **3 real fixtures PASS, 1 PARTIAL, 1 DECODE_BLOCKED**; the immutable legacy baseline remains 1 PASS / 3 PARTIAL / 1 blocked. Next main task: make RAF product processing deterministic (frozen master handoff or native lifecycle fix), then evaluate Sony ARW support with a side-by-side LibRaw upgrade probe; rerun all five after each proven fix. Match v4 GPU remains separate and NOT Production.
 
 RAW/TIFF/PNG binaries and private full run output are not tracked. Release x64 product and WPF test builds: 0 warnings, 0 errors. Full Core: 1,465 PASS / 1 existing dark-theme resource assertion FAIL / 2 SKIP. Focused Core RAW/TIFF/Match/Photography/evidence: 76 PASS / 2 opt-in SKIP. Focused WPF RAW product tests: 2 PASS; RAW import/cancellation/product subset: 9 PASS; reference-color/evidence subset: 5 PASS; ordinary CI real-camera gate: 1 NOT RUN. Photography batch functional subset (excluding the large load case): 16 PASS. The broad Photography/Match WPF selection stalled; the `ColorStudioThirtyHighResolutionTargetsRecordProcessedExportBaseline` load test later aborted under bounded hang diagnosis, so whole-WPF/performance regression is **NOT PASS**. No test was deleted or threshold relaxed. The opt-in real-camera gate was also started with actual private files but stopped after first X-T5 PARTIAL during a long run; the immutable full five-fixture baseline above is the acceptance evidence, not the interrupted gate run.
+
+## Deterministic RAW master follow-up
+
+The product session now owns a `FrozenRawMaster` containing the high-precision decode, source
+SHA-256, decode generation, and processing generation. Reference Color Studio thumbnail, preview,
+Match, and TIFF16 export reuse that master; export rejects a changed source instead of silently
+re-decoding it. Focused Core/WPF tests cover the one-decode and mutation-safety contract.
+
+LibRaw modernization remains **BLOCKED / candidate unavailable**: the isolated probe records the
+current `Sdcb.LibRaw 0.21.1.7` graph and accepts an external candidate process, but no newer
+Windows x64 runtime was found and no production DLL was replaced. Sony ARW remains blocked and
+X-T5 native non-determinism remains an open native/root-cause issue.

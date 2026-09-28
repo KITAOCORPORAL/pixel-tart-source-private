@@ -61,7 +61,7 @@ public sealed class RawMatchTiff16ProductWpfTests
             Assert.IsLessThanOrEqualTo(.012, distances[(int)Math.Round((distances.Length - 1) * .95)]);
             Assert.IsLessThanOrEqualTo(.012, distances[^1]);
             Assert.IsTrue(decoder.AllProfessional);
-            Assert.IsGreaterThanOrEqualTo(3, decoder.Count);
+            Assert.AreEqual(1, decoder.Count);
         }
         finally { Directory.Delete(root, true); }
     }

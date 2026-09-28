@@ -19,7 +19,8 @@ public sealed class RawMatchTiff16ProductPipelineTests
             var input = Path.Combine(root, "synthetic.cr3");
             await File.WriteAllTextAsync(input, "repository-owned fake-decoder fixture");
             var decoder = new FakeDecoder(); var pipeline = new RawMatchTiff16ProductPipeline(decoder);
-            var master = await pipeline.DecodeMasterAsync(input);
+            var frozenMaster = await pipeline.DecodeFrozenMasterAsync(input);
+            var master = frozenMaster.Image;
             Assert.AreEqual("16", master.SourceBitDepth);
             Assert.AreEqual("sRGB", master.WorkingColorSpace);
             Assert.AreEqual((ushort)6, master.Orientation);
@@ -37,8 +38,8 @@ public sealed class RawMatchTiff16ProductPipelineTests
             Assert.AreEqual("16", rendered.ProcessingPixels.SourceBitDepth);
             var preview = rendered.Pixels;
             var destination = Path.Combine(root, "result.tif");
-            await pipeline.ExportAsync(input, destination, look, stack);
-            Assert.AreEqual(2, decoder.DecodeCount); // original RAW is decoded again for full-resolution export
+            await pipeline.ExportAsync(frozenMaster, destination, look, stack);
+            Assert.AreEqual(1, decoder.DecodeCount); // the session-owned RAW master is reused for export
             Assert.IsTrue(decoder.AllProfessional);
             TiffReadBackResult readBack;
             using (var stream = File.OpenRead(destination)) readBack = TiffReadBack.Read(stream);
@@ -58,6 +59,28 @@ public sealed class RawMatchTiff16ProductPipelineTests
             Assert.IsLessThanOrEqualTo(.003, errors.Average());
             Assert.IsLessThanOrEqualTo(.012, errors[^1]);
             Assert.IsLessThanOrEqualTo(.012, errors[(int)Math.Round((errors.Length - 1) * .95)]);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
+    [TestMethod]
+    public async Task FrozenMasterRejectsSourceMutationBeforeExport()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ProductRaw-Mutation-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var input = Path.Combine(root, "synthetic.cr3");
+            var destination = Path.Combine(root, "result.tif");
+            await File.WriteAllTextAsync(input, "original source");
+            var decoder = new FakeDecoder();
+            var pipeline = new RawMatchTiff16ProductPipeline(decoder);
+            var master = await pipeline.DecodeFrozenMasterAsync(input);
+            await File.WriteAllTextAsync(input, "changed source");
+
+            await Assert.ThrowsExactlyAsync<IOException>(async () => await pipeline.ExportAsync(master, destination, null, null));
+            Assert.AreEqual(1, decoder.DecodeCount);
+            Assert.IsFalse(File.Exists(destination));
         }
         finally { Directory.Delete(root, true); }
     }
@@ -86,9 +109,11 @@ public sealed class RawMatchTiff16ProductPipelineTests
         try
         {
             var destination = Path.Combine(root, "protected.tif");
+            var source = Path.Combine(root, "source.cr3");
+            await File.WriteAllTextAsync(source, "source fixture");
             await File.WriteAllTextAsync(destination, "previous successful user export");
             var pipeline = new RawMatchTiff16ProductPipeline(new FakeDecoder());
-            await Assert.ThrowsExactlyAsync<IOException>(async () => await pipeline.ExportAsync(Path.Combine(root, "source.cr3"), destination, null, null));
+            await Assert.ThrowsExactlyAsync<IOException>(async () => await pipeline.ExportAsync(source, destination, null, null));
             Assert.AreEqual("previous successful user export", await File.ReadAllTextAsync(destination));
             Assert.IsEmpty(Directory.EnumerateFiles(root, "*.tmp", SearchOption.AllDirectories));
         }

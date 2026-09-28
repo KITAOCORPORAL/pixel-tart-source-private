@@ -18,3 +18,12 @@ The company obtained five real RAW files outside Git; see [company real-camera c
 ### Parity diagnostic clarification
 
 The immutable legacy maxima remain historical BEFORE evidence. A staged diagnostic proved the legacy comparison was not equivalent: WPF/display RGB24 was compared against a nearest-sampled full-resolution RGB48 value. When both sides use the same center-nearest and RGB24 display encoding, maxima for the four decoded fixtures were `.010271` (X-T5 #1), `.008307` (X-T5 #2), `.007007` (GFX100S) and `.011149` (EOS R6), with zero canonical outliers over `.012`. This does not close the product gate by itself: separate ProfessionalDecode calls for the X-T5 RAF are non-deterministic, and the product cross-decode run left X-T5 #1 canonical max `.033891`. The parity root cause is **PROVEN for the legacy metric**, while RAF decode determinism is **OBSERVED / NOT ROOT-CAUSED**. Color Match remains **14/28**; no new gate is credited.
+
+### LibRaw and frozen-master follow-up
+
+Production remains on `Sdcb.LibRaw 0.21.1.7` / native `0.21.1`; no candidate Windows x64 runtime
+was available for a safe side-by-side upgrade. The new isolated probe records this explicitly.
+The product session now uses a `FrozenRawMaster` with source SHA, decode generation, and
+processing generation shared by RAW preview, Match, and TIFF16 export. This improves session
+determinism but does not claim that native X-T5 decoding is intrinsically deterministic or that
+Sony ARW is supported. Match v4/GPU remains **not ready**.

@@ -15,3 +15,8 @@ Fixture: `DSC09916.ARW`, 24,563,712 bytes, SHA256 `6F596BB234EE5DE206C66594BC842
 Classification: **PROVEN native LibRaw rejection of this file; NOT PROVEN whether the cause is an unsupported ARW compression/variant or malformed/nonstandard file structure.** The path is not the root cause. The model being present in the capability list is not a successful decode claim. No fallback JPEG was used and no production dependency was upgraded.
 
 The generic metadata `Compression=JPEG` / JPEG-coded CFA strip is recorded, but is not enough to claim the exact Sony RAW compression. A LibRaw upgrade requires an impact audit first; see [LIBRAW_UPGRADE_IMPACT_AUDIT.md](LIBRAW_UPGRADE_IMPACT_AUDIT.md).
+
+Modernization status: the isolated compatibility probe is now committed, but no newer
+`Sdcb.LibRaw` Windows x64 runtime or pinned candidate native DLL is available in this checkout.
+Sony therefore remains **BLOCKED / candidate not run**, rather than being treated as fixed by a
+source-version lookup.

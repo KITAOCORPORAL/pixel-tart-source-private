@@ -3,6 +3,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Export;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
+using System.Security.Cryptography;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -20,6 +21,14 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         if (!string.Equals(decoded.Metadata.ColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The RAW output color space is not supported by Color Studio.");
         return HighBitDepthImageBuffer.FromRaw(decoded);
+    }
+
+    public async Task<FrozenRawMaster> DecodeFrozenMasterAsync(string path, CancellationToken token = default)
+    {
+        var image = await DecodeMasterAsync(path, token).ConfigureAwait(false);
+        await using var stream = new FileStream(Path.GetFullPath(path), FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 1024, FileOptions.SequentialScan);
+        var sourceSha256 = Convert.ToHexString(await SHA256.HashDataAsync(stream, token).ConfigureAwait(false));
+        return new FrozenRawMaster(path, sourceSha256, Guid.NewGuid(), image);
     }
 
     public ColorStudioRenderResult Render(HighBitDepthImageBuffer master, ReferenceLook? look, ColorAdjustmentStack? stack, int maximumEdge = 0, CancellationToken token = default, PixelTartFilmSettings? film = null)
@@ -51,8 +60,15 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
 
     public async Task<TiffExportResult> ExportAsync(string sourcePath, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null)
     {
-        var master = await DecodeMasterAsync(sourcePath, token).ConfigureAwait(false);
-        var output = Render(master, look, stack, token: token, film: film).ProcessingPixels!;
+        var master = await DecodeFrozenMasterAsync(sourcePath, token).ConfigureAwait(false);
+        return await ExportAsync(master, destinationPath, look, stack, token, film).ConfigureAwait(false);
+    }
+
+    public async Task<TiffExportResult> ExportAsync(FrozenRawMaster master, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null)
+    {
+        ArgumentNullException.ThrowIfNull(master);
+        await master.ValidateSourceAsync(token).ConfigureAwait(false);
+        var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
         return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
             new(TiffBitDepth.Sixteen, Software: "Pixel Tart", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
     }

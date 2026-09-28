@@ -10,3 +10,8 @@ External runner: `CompanyProductProbe`, source product baseline `3dab1b4f75dd696
 Classification: **NON_DETERMINISTIC**, observed for both instance strategies. The controlled pairs differ in sparse pixels; representative coordinates include `(4128,1497,channel=2)` for company-02 and `(7456,1001,channel=2)` for company-03. Canon repeated decode was byte-identical; GFX was byte-identical in the controlled pair. This makes managed dictionary reuse an insufficient explanation. Native decoder lifecycle/threading/RAF processing remains a hypothesis requiring a minimized LibRaw reproduction.
 
 No production decoder setting was changed. Do not certify X-T5 RAF parity until a stable master or deterministic decoder contract is established and all four camera fixtures are rerun.
+
+The committed `tools/LibRawCompatibilityProbe` is the thin reproduction for the next run. It
+extends the matrix to 20 serial observations per lifetime strategy; the current committed
+10-run evidence remains immutable. A candidate binary was not available, so no native upgrade
+was attempted.

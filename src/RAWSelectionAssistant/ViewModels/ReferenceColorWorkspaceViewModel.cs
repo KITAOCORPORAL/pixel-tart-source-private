@@ -170,6 +170,17 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         var target = GetOrCreateTarget(path);
         target.IsSelected = true;
+        // RAW thumbnail and activation must share one session-owned master.  Starting both
+        // operations concurrently would allow the ??= assignment below to race and decode
+        // the same nondeterministic source twice.
+        if (RawMatchTiff16ProductPipeline.IsRaw(target.Path))
+        {
+            if (target.Thumbnail is null)
+                await LoadThumbnailAsync(target, CancellationToken.None);
+            await ActivateTargetAsync(target);
+            return;
+        }
+
         // Reserve activation order before asynchronous thumbnail work can complete out of order.
         var activation = ActivateTargetAsync(target);
         var thumbnail = target.Thumbnail is null ? LoadThumbnailAsync(target, CancellationToken.None) : Task.CompletedTask;
@@ -191,8 +202,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         {
             if (RawMatchTiff16ProductPipeline.IsRaw(item.Path))
             {
-                var master = await _rawPipeline.DecodeMasterAsync(item.Path, token);
-                var pixels = _rawPipeline.DisplaySource(master, 320, token);
+                var master = item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Path, token);
+                var pixels = _rawPipeline.DisplaySource(master.Image, 320, token);
                 item.Thumbnail = RawDisplayBitmapAdapter.ToBitmap(pixels);
                 item.PixelWidth = master.Width; item.PixelHeight = master.Height; item.Status = ReferenceTargetStatus.Pending;
                 return;
@@ -218,8 +229,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
-            var rawMaster = isRaw ? await _rawPipeline.DecodeMasterAsync(target.Path) : null;
-            var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster);
+            var rawMaster = isRaw ? target.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(target.Path) : null;
+            var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
             var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await Task.Run(() =>
             {
                 var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.UriSource = new Uri(target.Path); decoded.EndInit(); decoded.Freeze(); return decoded;
@@ -284,7 +295,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                     if (isRaw)
                     {
                         // AtomicTiffWriter validates the temporary TIFF before the destination becomes visible.
-                        await _rawPipeline.ExportAsync(item.Path, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
+                        var master = item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Path, _exportCancellation.Token);
+                        await _rawPipeline.ExportAsync(master, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
                     }
                     else
                     {
@@ -356,5 +368,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public PixelTartFilmSettings? FilmSettingsSnapshot { get; set; }
     public ColorAdjustmentStack? ColorAdjustmentStackSnapshot { get; set; }
     public string? OutputPath { get; set; }
+    /// <summary>Session-owned RAW master shared by thumbnail, preview, Match and TIFF export.</summary>
+    public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }
 }
