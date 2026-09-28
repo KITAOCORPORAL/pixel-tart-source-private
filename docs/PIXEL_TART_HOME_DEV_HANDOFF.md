@@ -85,8 +85,8 @@ Minimum SDK: 10.0.302 with `latestFeature` roll-forward in `global.json`; 10.0.4
 ## M. Phase 4 home RTX 5060 Ti and RAW corpus acceptance (2026-09-28)
 
 - Home GPU probe: NVIDIA GeForce RTX 5060 Ti, 16GB dedicated VRAM, ComputeSharp-DX12, DX12 available, ULTRA tier, 1024 tile, four parallel tiles.
-- Real external V4 run reached the GPU pixel executor for Canon EOS R6 CR3, Fuji X-T5 RAF, and Fuji GFX100S RAF. One X-T5 sample passed CPU/GPU parity; the second X-T5 and 102MP GFX100S remain PARTIAL because rare maximum-pixel divergence exceeds the unchanged threshold. TIFF16 export completed for all four targets.
+- Real external V4 run reached the GPU pixel executor for Canon EOS R6 CR3, Fuji X-T5 RAF, and Fuji GFX100S RAF. The four listed home fixtures now pass CPU/GPU full-resolution parity after canonical protection decision-key unification; TIFF16 export and pixel readback parity also pass with max one code value.
 - Corpus baseline: 387 files, 350 RAW candidates, 269 LibRaw ProfessionalDecode PASS, 10 FAIL, 70 UNSUPPORTED, 159 isolated Core pixel-path PASS and 110 PARTIAL; no complete product-level full pipeline PASS. Details are in `docs/color-studio/raw-compatibility/`.
 - Stable Match v3 remains default. Match V4 is guarded beta and is not a production completion claim. Native pointer walkthrough, OOM/device-loss injection, peak VRAM telemetry, complete ICC/EXIF propagation, and WPF 3D renderer remain open.
 - External corpus and TIFF outputs remain outside Git; only hashes, metadata, results, source, tests, and reports are committed.
-- Final home V4 rerun after runner rebuild: Canon EOS R6 CR3 and one Fuji X-T5 RAF passed GPU parity; the second X-T5 RAF and Fuji GFX100S 102MP remain PARTIAL due max-pixel divergence. All four targets decoded and reached TIFF16 export.
+- Final home V4 rerun: Canon EOS R6 CR3, both Fuji X-T5 RAF fixtures, and Fuji GFX100S 102MP pass full-resolution GPU parity in three repeats; all four reach TIFF16 export and CPU/GPU TIFF16 readback max code delta 1.

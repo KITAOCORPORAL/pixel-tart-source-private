@@ -1,0 +1,210 @@
+[
+  {
+    "fixture": "TNAN8886.CR3",
+    "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "dimensions": {
+      "width": 5496,
+      "height": 3670
+    },
+    "fullResolution": true,
+    "repeatStable": true,
+    "metrics": {
+      "Pass": true,
+      "Mean": 9.308491011953582E-08,
+      "P95": 2.980232238769531E-07,
+      "P99": 4.76837158203125E-07,
+      "Max": 2.0049046725034714E-06,
+      "Counts": [
+        1900,
+        0,
+        0,
+        0,
+        0
+      ],
+      "MaxX": 935,
+      "MaxY": 2183,
+      "NonFinite": 0
+    },
+    "tiff16PixelParity": {
+      "pass": true,
+      "gate": "max code delta <= 1; orientation and ICC identical",
+      "exactPixelRatio": 0.9818598316734687,
+      "withinOneCodeRatio": 1,
+      "maxCodeDelta": 1,
+      "meanRgbCodeDelta": 0.006100118061257002,
+      "meanOklabDeltaE": 1.44541995233618E-07,
+      "maxOklabDeltaE": 5.761091449842297E-05,
+      "orientationEqual": true,
+      "iccEqual": true,
+      "BitsPerSample": 16,
+      "SamplesPerPixel": 3
+    },
+    "gpuRoute": {
+      "backend": null,
+      "cpuFallback": null
+    },
+    "performance": {
+      "classificationMs": 187.9173,
+      "uploadMs": 384.7719,
+      "computeMs": 20.8726,
+      "readbackMs": 147.5958,
+      "TileCount": 24
+    }
+  },
+  {
+    "fixture": "DSCF0347.RAF",
+    "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "dimensions": {
+      "width": 7752,
+      "height": 5184
+    },
+    "fullResolution": true,
+    "repeatStable": true,
+    "metrics": {
+      "Pass": true,
+      "Mean": 5.337483807929263E-08,
+      "P95": 1.7881393432617188E-07,
+      "P99": 2.980232238769531E-07,
+      "Max": 1.3113021850585938E-06,
+      "Counts": [
+        138,
+        0,
+        0,
+        0,
+        0
+      ],
+      "MaxX": 2290,
+      "MaxY": 202,
+      "NonFinite": 0
+    },
+    "tiff16PixelParity": {
+      "pass": true,
+      "gate": "max code delta <= 1; orientation and ICC identical",
+      "exactPixelRatio": 0.9894445798137319,
+      "withinOneCodeRatio": 1,
+      "maxCodeDelta": 1,
+      "meanRgbCodeDelta": 0.0035361327834685964,
+      "meanOklabDeltaE": 9.221310301582497E-08,
+      "maxOklabDeltaE": 2.3961162677375056E-05,
+      "orientationEqual": true,
+      "iccEqual": true,
+      "BitsPerSample": 16,
+      "SamplesPerPixel": 3
+    },
+    "gpuRoute": {
+      "backend": null,
+      "cpuFallback": null
+    },
+    "performance": {
+      "classificationMs": 292.3078,
+      "uploadMs": 497.7934,
+      "computeMs": 53.4242,
+      "readbackMs": 206.6946,
+      "TileCount": 48
+    }
+  },
+  {
+    "fixture": "DSCF0370.RAF",
+    "sourceSha256": "7D82D011ED47CC8859988A562EA693BE8A28A1770C652A8CAE520D086ABB65A2",
+    "dimensions": {
+      "width": 7752,
+      "height": 5184
+    },
+    "fullResolution": true,
+    "repeatStable": true,
+    "metrics": {
+      "Pass": true,
+      "Mean": 6.755827553467579E-08,
+      "P95": 2.086162567138672E-07,
+      "P99": 3.5762786865234375E-07,
+      "Max": 1.1920928955078125E-06,
+      "Counts": [
+        79,
+        0,
+        0,
+        0,
+        0
+      ],
+      "MaxX": 5252,
+      "MaxY": 675,
+      "NonFinite": 0
+    },
+    "tiff16PixelParity": {
+      "pass": true,
+      "gate": "max code delta <= 1; orientation and ICC identical",
+      "exactPixelRatio": 0.9866542306087477,
+      "withinOneCodeRatio": 1,
+      "maxCodeDelta": 1,
+      "meanRgbCodeDelta": 0.004473316258223021,
+      "meanOklabDeltaE": 1.1242692346354332E-07,
+      "maxOklabDeltaE": 3.5717673690061965E-05,
+      "orientationEqual": true,
+      "iccEqual": true,
+      "BitsPerSample": 16,
+      "SamplesPerPixel": 3
+    },
+    "gpuRoute": {
+      "backend": null,
+      "cpuFallback": null
+    },
+    "performance": {
+      "classificationMs": 314.4155,
+      "uploadMs": 563.2806,
+      "computeMs": 46.2373,
+      "readbackMs": 235.8451,
+      "TileCount": 48
+    }
+  },
+  {
+    "fixture": "LMAN1714.RAF",
+    "sourceSha256": "AE1414F77B8A18BB003C275AB2B30BBBA9A1D6A27F569268C3503F12C9B5D644",
+    "dimensions": {
+      "width": 11662,
+      "height": 8752
+    },
+    "fullResolution": true,
+    "repeatStable": true,
+    "metrics": {
+      "Pass": true,
+      "Mean": 1.0735534702264145E-07,
+      "P95": 3.5762786865234375E-07,
+      "P99": 5.960464477539062E-07,
+      "Max": 1.7434358596801758E-06,
+      "Counts": [
+        55515,
+        0,
+        0,
+        0,
+        0
+      ],
+      "MaxX": 5628,
+      "MaxY": 8748,
+      "NonFinite": 0
+    },
+    "tiff16PixelParity": {
+      "pass": true,
+      "gate": "max code delta <= 1; orientation and ICC identical",
+      "exactPixelRatio": 0.9794090919209156,
+      "withinOneCodeRatio": 1,
+      "maxCodeDelta": 1,
+      "meanRgbCodeDelta": 0.006925929159859295,
+      "meanOklabDeltaE": 1.4891607044727829E-07,
+      "maxOklabDeltaE": 3.1321496904304535E-05,
+      "orientationEqual": true,
+      "iccEqual": true,
+      "BitsPerSample": 16,
+      "SamplesPerPixel": 3
+    },
+    "gpuRoute": {
+      "backend": null,
+      "cpuFallback": null
+    },
+    "performance": {
+      "classificationMs": 764.1898,
+      "uploadMs": 737.9666,
+      "computeMs": 39.6533,
+      "readbackMs": 275.5307,
+      "TileCount": 108
+    }
+  }
+]

@@ -71,6 +71,32 @@ public sealed class MatchV4Phase2ContractTests
         Assert.AreEqual(generation, result.ProcessingGenerationId);
     }
 
+    [TestMethod]
+    public async Task PixelExecutorMapsOutOfMemoryToCpuFallback()
+    {
+        var source = new HighBitDepthImageBuffer(4, 4, Enumerable.Repeat(.4f, 4 * 4 * 3).ToArray());
+        var transform = new MatchV4ResolvedTransform(new(.01, .01, .01), [new(.01, .01, .01), new(.01, .01, .01), new(.01, .01, .01)], new(), "oom-transform");
+        var result = await new MatchV4PixelExecutor(new MatchV4CpuPixelBackend(), new ThrowingOutOfMemoryBackend()).ExecuteAsync(source, transform, preferGpu: true);
+        Assert.AreEqual(ReferenceMatchV4BackendKind.Cpu, result.Backend);
+        Assert.IsTrue(result.UsedCpuFallback);
+        Assert.AreEqual(GpuFailureReason.OutOfMemory, result.Failure);
+    }
+
+    [TestMethod]
+    public async Task PixelExecutorHonorsCancellationBeforeGpuDispatch()
+    {
+        var source = new HighBitDepthImageBuffer(4, 4, Enumerable.Repeat(.4f, 4 * 4 * 3).ToArray());
+        var transform = new MatchV4ResolvedTransform(new(.01, .01, .01), [new(.01, .01, .01), new(.01, .01, .01), new(.01, .01, .01)], new(), "cancel-transform");
+        using var cancellation = new CancellationTokenSource(); cancellation.Cancel();
+        await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => new MatchV4PixelExecutor(new MatchV4CpuPixelBackend(), new ThrowingPixelBackend()).ExecuteAsync(source, transform, preferGpu: true, token: cancellation.Token));
+    }
+
+    private sealed class ThrowingOutOfMemoryBackend : IMatchV4PixelBackend
+    {
+        public ReferenceMatchV4BackendKind Kind => ReferenceMatchV4BackendKind.Gpu;
+        public bool IsAvailable => true;
+        public Task<MatchV4PixelExecutionResult> ExecuteAsync(HighBitDepthImageBuffer source, MatchV4ResolvedTransform transform, CancellationToken token = default) => throw new OutOfMemoryException("injected allocation failure");
+    }
     private sealed class ThrowingPixelBackend : IMatchV4PixelBackend
     {
         public ReferenceMatchV4BackendKind Kind => ReferenceMatchV4BackendKind.Gpu;

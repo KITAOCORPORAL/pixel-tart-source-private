@@ -48,7 +48,10 @@ public sealed record MatchV4PixelExecutionResult(
     TimeSpan ReadbackTime,
     ReferenceMatchV4BackendKind Backend,
     GpuFailureReason? Failure = null,
-    int TileCount = 0);
+    int TileCount = 0)
+{
+    public TimeSpan ClassificationTime { get; init; }
+}
 
 public interface IMatchV4PixelBackend
 {
@@ -82,7 +85,7 @@ public sealed class MatchV4CpuPixelBackend : IMatchV4PixelBackend
 public static class MatchV4NumericalContract
 {
     // Float GPU and double CPU share this guard around hard protection boundaries.
-    public const double ProtectionBoundaryEpsilon = 1e-4;
+    public const double ProtectionBoundaryEpsilon = ProtectionClassifierContract.Epsilon;
 }
 
 public static class MatchV4PixelApplication
@@ -96,7 +99,7 @@ public static class MatchV4PixelApplication
             if ((index & 1023) == 0) token.ThrowIfCancellationRequested();
             var offset = index * 3;
             var lab = OklabColorSpace.FromSrgb(values[offset], values[offset + 1], values[offset + 2]);
-            var zone = Math.Clamp((int)(lab.L * 3), 0, 2);
+            var zone = ProtectionClassifierContract.Classify(lab) & ProtectionClassifierContract.ZoneMask;
             var local = transform.RegionDeltas[zone];
             var weight = zone switch { 0 => 1 - Math.Clamp((lab.L - .2) / .2, 0, 1), 2 => Math.Clamp((lab.L - .6) / .2, 0, 1), _ => 1d };
             var delta = new OklabColor(
@@ -116,9 +119,8 @@ public static class MatchV4PixelApplication
     private static double Protection(OklabColor c, ReferenceMatchV4Settings settings)
     {
         var neutral = Math.Clamp(1 - c.Chroma / .08, 0, 1);
-        var hue = Math.Atan2(c.B, c.A) * 180 / Math.PI; if (hue < 0) hue += 360;
-        var e = MatchV4NumericalContract.ProtectionBoundaryEpsilon;
-        var skin = c.L > .28 + e && c.L < .9 - e && hue > 25 + e && hue < 80 - e && c.Chroma > .025 + e && c.Chroma < .22 - e;
+
+        var skin = (ProtectionClassifierContract.Classify(c) & ProtectionClassifierContract.SkinBit) != 0;
         var highlight = Math.Clamp((c.L - .82) / .18, 0, 1);
         var shadow = Math.Clamp((.2 - c.L) / .2, 0, 1);
         return Math.Clamp(1 - neutral * settings.NeutralProtection - (skin ? settings.SkinProtection : 0) - highlight * settings.HighlightProtection - shadow * Math.Clamp(c.Chroma / .1, 0, 1) * settings.ShadowProtection, .08, 1);

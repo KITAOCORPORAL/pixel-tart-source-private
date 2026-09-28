@@ -4,7 +4,7 @@
 
 | Hardware | Backend | Real RAW fixtures | GPU route | Result |
 |---|---|---:|---|---|
-| RTX 5060 Ti 16GB | ComputeSharp-DX12 | 4 | Reached GPU, no fallback | 2 parity PASS, 2 parity PARTIAL |
+| RTX 5060 Ti 16GB | ComputeSharp-DX12 | 4 | Reached GPU, no fallback | 4 full-resolution parity PASS; cross-hardware comparison NOT RUN |
 
 The repository contains no second hardware run in this acceptance. Synthetic parity and historical CPU evidence are not substituted for a cross-hardware benchmark. No claim is made for CUDA, ONNX Runtime, DirectML, or another backend.
 

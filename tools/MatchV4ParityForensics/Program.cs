@@ -10,7 +10,7 @@ var root = Get("--root") ?? Environment.GetEnvironmentVariable("PIXEL_TART_RAW_C
 var output = Path.GetFullPath(Get("--output") ?? Path.Combine(Path.GetTempPath(), "PixelTart-ParityForensics-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")));
 if (string.IsNullOrWhiteSpace(root) || !Directory.Exists(root)) { Console.Error.WriteLine("Set --root or PIXEL_TART_RAW_CORPUS_ROOT."); return 2; }
 Directory.CreateDirectory(output);
-var names = new[] { "DSCF0347.RAF", "LMAN1714.RAF" };
+var names = new[] { "TNAN8886.CR3", "DSCF0347.RAF", "DSCF0370.RAF", "LMAN1714.RAF" };
 var paths = names.Select(name => Find(Path.GetFullPath(root), name)).Where(p => p is not null).Cast<string>().ToArray();
 var decoder = new LibRawDecoder();
 var decoded = new List<(string Path, FrozenRawMaster Master)>();
@@ -21,7 +21,7 @@ foreach (var (path, master) in decoded)
     var reference = decoded.Select(x => x.Master).FirstOrDefault(x => x.SourceSha256 != master.SourceSha256);
     if (reference is null) continue;
     var proxy = HasFlag("--full") ? master.Image : new RawMatchTiff16ProductPipeline(decoder).PreviewMaster(master.Image, 1600);
-    foreach (var tile in new[] { 256, 512, 1024, 2048 })
+    foreach (var tile in new[] { 1024 })
     {
         var backend = new Dx12ColorMatchComputeBackend(tile);
         var executor = new MatchV4ProductExecutor(new ReferenceMatchV4Engine(gpu: new MatchV4BackendAdapter(backend)), new MatchV4PixelExecutor(new MatchV4CpuPixelBackend(), backend), backend.Capability);
@@ -29,12 +29,12 @@ foreach (var (path, master) in decoded)
         var session = executor.CreateSession(master, reference.Image, reference.SourceSha256, settings, MatchV4ExecutionMode.Auto);
         var cpu = await session.PreviewAsync(proxy, .72, false, MatchV4ExecutionMode.Cpu);
         var gpu = await session.PreviewAsync(proxy, .72, false, MatchV4ExecutionMode.Auto);
-        rows.Add(Analyze(Path.GetFileName(path), master, proxy, cpu.Pixels, gpu.Pixels, tile, session.TransformHash, backend.Capability));
+        rows.Add(new { referenceIdentity = reference.SourceSha256, analysis = executor.Resolve(master, reference.Image, reference.SourceSha256, settings), gpuBackend = gpu.Backend, gpu.UsedCpuFallback, gpu.GpuFailure, metrics = Analyze(Path.GetFileName(path), master, proxy, cpu.Pixels, gpu.Pixels, tile, session.TransformHash, backend.Capability) });
     }
 }
 var json = Path.Combine(output, "MATCH_V4_GPU_OUTLIER_FORENSICS.json");
 await File.WriteAllTextAsync(json, JsonSerializer.Serialize(new { generatedUtc = DateTimeOffset.UtcNow, thresholds = new { oneE6 = 1e-6, oneE5 = 1e-5, oneE4 = 1e-4, oneE3 = 1e-3, oneE2 = 1e-2 }, rows }, new JsonSerializerOptions { WriteIndented = true }));
-Console.WriteLine(File.ReadAllText(json));
+Console.WriteLine(json);
 return 0;
 
 static object Analyze(string file, FrozenRawMaster master, HighBitDepthImageBuffer source, HighBitDepthImageBuffer cpu, HighBitDepthImageBuffer gpu, int tile, string transformHash, GpuCapabilityInfo capability)

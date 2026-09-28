@@ -35,7 +35,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
         var edge = Math.Min(transform.Settings.TileSize, _maximumTileEdge ?? Capability.MemoryBudget.TileSize);
         var values = new float[source.Rgb32.Length];
         var upload = TimeSpan.Zero; var compute = TimeSpan.Zero; var readback = TimeSpan.Zero;
-        var tiles = 0;
+        var tiles = 0; var classificationTime = TimeSpan.Zero;
         for (var y = 0; y < source.Height;)
         {
             var height = Math.Min(edge, source.Height - y);
@@ -53,12 +53,24 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
                         for (var row = 0; row < height; row++)
                             source.Rgb32.Span.Slice(((y + row) * source.Width + x) * 3, width * 3)
                                 .CopyTo(input.AsSpan(row * width * 3));
+                        var prepare = Stopwatch.StartNew();
+                        var keys = new int[width * height];
+                        Parallel.For(0, height, new ParallelOptions { CancellationToken = token }, row =>
+                        {
+                            for (var col = 0; col < width; col++)
+                            {
+                                var p = row * width + col; var i = p * 3;
+                                keys[p] = ProtectionClassifierContract.Classify(input[i], input[i + 1], input[i + 2]);
+                            }
+                        });
+                        classificationTime += prepare.Elapsed;
                         var watch = Stopwatch.StartNew();
                         using var sourceBuffer = device.AllocateReadOnlyBuffer(input);
+                        using var decisions = device.AllocateReadOnlyBuffer(keys);
                         using var outputBuffer = device.AllocateReadWriteBuffer<float>(input.Length);
                         upload += watch.Elapsed;
                         watch.Restart();
-                        var shader = new PixelTransformShader(sourceBuffer, outputBuffer,
+                        var shader = new PixelTransformShader(sourceBuffer, outputBuffer, decisions,
                             (float)transform.GlobalDelta.L, (float)transform.GlobalDelta.A, (float)transform.GlobalDelta.B,
                             (float)transform.RegionDeltas[0].L, (float)transform.RegionDeltas[0].A, (float)transform.RegionDeltas[0].B,
                             (float)transform.RegionDeltas[1].L, (float)transform.RegionDeltas[1].A, (float)transform.RegionDeltas[1].B,
@@ -66,7 +78,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
                             (float)transform.Strength, transform.KeepLuminance,
                             (float)transform.Settings.MaximumLuminanceDisplacement, (float)transform.Settings.MaximumChromaDisplacement,
                             (float)transform.Settings.NeutralProtection, (float)transform.Settings.SkinProtection,
-                            (float)transform.Settings.HighlightProtection, (float)transform.Settings.ShadowProtection, (float)MatchV4NumericalContract.ProtectionBoundaryEpsilon);
+                            (float)transform.Settings.HighlightProtection, (float)transform.Settings.ShadowProtection);
                         device.For(width * height, shader);
                         compute += watch.Elapsed;
                         token.ThrowIfCancellationRequested();
@@ -92,7 +104,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
         }
         var result = new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.Width, source.Height, values,
             source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
-        return Task.FromResult(new MatchV4PixelExecutionResult(result, upload, compute, readback, ReferenceMatchV4BackendKind.Gpu, TileCount: tiles));
+        return Task.FromResult(new MatchV4PixelExecutionResult(result, upload, compute, readback, ReferenceMatchV4BackendKind.Gpu, TileCount: tiles) { ClassificationTime = classificationTime });
     }
 
     public IReadOnlyList<OklabColor> Map(IReadOnlyList<OklabColor> source, IReadOnlyList<OklabColor> reference,
@@ -148,13 +160,13 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
     [ThreadGroupSize(DefaultThreadGroupSizes.X)]
     [GeneratedComputeShaderDescriptor]
     public readonly partial struct PixelTransformShader(
-        ReadOnlyBuffer<float> source, ReadWriteBuffer<float> output,
+        ReadOnlyBuffer<float> source, ReadWriteBuffer<float> output, ReadOnlyBuffer<int> decisions,
         float globalL, float globalA, float globalB,
         float shadowL, float shadowA, float shadowB,
         float midL, float midA, float midB,
         float highlightL, float highlightA, float highlightB,
         float strength, bool keepLuminance, float maxLuma, float maxChroma,
-        float neutralProtection, float skinProtection, float highlightProtection, float shadowProtection, float protectionBoundaryEpsilon) : IComputeShader
+        float neutralProtection, float skinProtection, float highlightProtection, float shadowProtection) : IComputeShader
     {
         public void Execute()
         {
@@ -167,7 +179,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
             var L = .2104542553f * l + .7936177850f * m - .0040720468f * s;
             var A = 1.9779984951f * l - 2.4285922050f * m + .4505937099f * s;
             var B = .0259040371f * l + .7827717662f * m - .8086757660f * s;
-            var zone = L < .3333333f ? 0 : L < .6666667f ? 1 : 2;
+            var zone = decisions[pixel] & ProtectionClassifierContract.ZoneMask;
             var localL = zone == 0 ? shadowL : zone == 1 ? midL : highlightL;
             var localA = zone == 0 ? shadowA : zone == 1 ? midA : highlightA;
             var localB = zone == 0 ? shadowB : zone == 1 ? midB : highlightB;
@@ -177,8 +189,8 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
             var dB = globalB * (1 - weight) + localB * weight;
             var chroma = Hlsl.Sqrt(A * A + B * B);
             var neutral = Hlsl.Clamp(1 - chroma / .08f, 0, 1);
-            var hue = Hlsl.Atan2(B, A) * 57.2957795f; if (hue < 0) hue += 360;
-            var skin = L > .28f + protectionBoundaryEpsilon && L < .9f - protectionBoundaryEpsilon && hue > 25f + protectionBoundaryEpsilon && hue < 80f - protectionBoundaryEpsilon && chroma > .025f + protectionBoundaryEpsilon && chroma < .22f - protectionBoundaryEpsilon;
+
+            var skin = (decisions[pixel] & ProtectionClassifierContract.SkinBit) != 0;
             var hi = Hlsl.Clamp((L - .82f) / .18f, 0, 1);
             var sh = Hlsl.Clamp((.2f - L) / .2f, 0, 1);
             var protection = Hlsl.Clamp(1 - neutral * neutralProtection - (skin ? skinProtection : 0) - hi * highlightProtection - sh * Hlsl.Clamp(chroma / .1f, 0, 1) * shadowProtection, .08f, 1);
