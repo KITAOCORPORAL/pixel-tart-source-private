@@ -13,4 +13,9 @@ public partial class PublishingExportView : UserControl
         if (DataContext is not PublishingExportViewModel viewModel || !e.Data.GetDataPresent(DataFormats.FileDrop)) return;
         foreach (var path in (string[])e.Data.GetData(DataFormats.FileDrop)!) { if (Directory.Exists(path)) viewModel.AddFolder(path); else viewModel.AddFiles([path]); }
     }
+    private void OnRecipeSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (DataContext is PublishingExportViewModel viewModel && sender is ListBox list)
+            viewModel.SetSelectedRecipes(list.SelectedItems.Cast<object>());
+    }
 }

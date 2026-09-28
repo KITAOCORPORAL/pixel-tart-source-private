@@ -35,7 +35,7 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
             if (options.WatermarksEnabled)
                 foreach (var layer in options.EffectiveWatermarkLayers.Where(layer => layer.Enabled)) DrawLayer(context, layer, width, height, cancellationToken);
         }
-        var bitmap = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32); bitmap.Render(drawing); bitmap.Freeze();
+        var bitmap = new RenderTargetBitmap(width, height, options.EffectiveDimensions.Dpi, options.EffectiveDimensions.Dpi, PixelFormats.Pbgra32); bitmap.Render(drawing); bitmap.Freeze();
         BitmapMetadata? metadata = null;
         if (options.EffectiveDimensions.PreserveMetadata && frame.Metadata is BitmapMetadata original)
         {
@@ -60,6 +60,11 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
             // into another aspect ratio merely to fill that box.
             var fit = Math.Min(options.Width / (double)sourceWidth, options.Height / (double)sourceHeight);
             return (Math.Max(1, (int)Math.Round(sourceWidth * fit)), Math.Max(1, (int)Math.Round(sourceHeight * fit)));
+        }
+        if (options.Mode == PublishingSizeMode.ShortestEdge)
+        {
+            var shortEdgeScale = Math.Min(1, options.LongestEdge / (double)Math.Min(sourceWidth, sourceHeight));
+            return (Math.Max(1, (int)Math.Round(sourceWidth * shortEdgeScale)), Math.Max(1, (int)Math.Round(sourceHeight * shortEdgeScale)));
         }
         var scale = Math.Min(1, options.LongestEdge / (double)Math.Max(sourceWidth, sourceHeight));
         return (Math.Max(1, (int)Math.Round(sourceWidth * scale)), Math.Max(1, (int)Math.Round(sourceHeight * scale)));

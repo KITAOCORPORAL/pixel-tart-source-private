@@ -8,7 +8,7 @@ public static class PublishingDefaults
     public static IReadOnlySet<string> SupportedExtensions { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".jpg", ".jpeg", ".png", ".tif", ".tiff" };
 }
 
-public enum PublishingSizeMode { Original, LongestEdge, Exact }
+public enum PublishingSizeMode { Original, LongestEdge, ShortestEdge, Exact }
 public enum PublishingOutputFormat { Jpeg, Png, Tiff }
 public enum WatermarkLayerType { Image, Text }
 public enum WatermarkPosition { TopLeft, TopCenter, TopRight, MiddleLeft, Center, MiddleRight, BottomLeft, BottomCenter, BottomRight }
@@ -20,12 +20,14 @@ public sealed record PublishingDimensions(
     int Width = 1920,
     int Height = 1080,
     int JpegQuality = 88,
-    bool PreserveMetadata = true)
+    bool PreserveMetadata = true,
+    int Dpi = 96)
 {
     public PublishingDimensions Validate()
     {
         if (LongestEdge is < 320 or > 30000 || Width is < 1 or > 30000 || Height is < 1 or > 30000) throw new ArgumentOutOfRangeException(nameof(LongestEdge));
         if (JpegQuality is < 40 or > 100) throw new ArgumentOutOfRangeException(nameof(JpegQuality));
+        if (Dpi is < 1 or > 2400) throw new ArgumentOutOfRangeException(nameof(Dpi));
         return this;
     }
 }
@@ -92,7 +94,8 @@ public sealed record PublishingExportRequest(
     IReadOnlyList<string> SourceFiles,
     string DestinationDirectory,
     PublishingOptions Options,
-    Guid? ProjectId = null)
+    Guid? ProjectId = null,
+    IReadOnlyList<RAWSelectionAssistant.Core.Services.Publishing.ExportRecipe>? Recipes = null)
 {
     public PublishingExportRequest Validate()
     {
@@ -100,6 +103,8 @@ public sealed record PublishingExportRequest(
         if (SourceFiles.Any(path => string.IsNullOrWhiteSpace(path) || !Path.IsPathFullyQualified(path))) throw new ArgumentException("输入路径必须为绝对路径。", nameof(SourceFiles));
         if (string.IsNullOrWhiteSpace(DestinationDirectory) || !Path.IsPathFullyQualified(DestinationDirectory)) throw new ArgumentException("输出目录必须为绝对路径。", nameof(DestinationDirectory));
         Options.Validate();
+        if (Recipes is not null)
+            foreach (var recipe in Recipes) recipe.Validate();
         return this;
     }
 }

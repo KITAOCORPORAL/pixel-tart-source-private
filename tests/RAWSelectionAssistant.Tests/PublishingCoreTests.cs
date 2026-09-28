@@ -56,6 +56,26 @@ public sealed class PublishingFolderInputTests
 public sealed class PublishingSourceSafetyTests
 {
     [TestMethod]
+    public async Task MultiRecipePlanProducesOneSafeOutputPerAssetAndRecipe()
+    {
+        using var temp = new TempDirectory();
+        var source = temp.CreateFile("source.png", [1, 2, 3]);
+        var output = temp.Combine("multi");
+        var recipes = new[]
+        {
+            ExportRecipeStore.BuiltIns[0],
+            ExportRecipeStore.BuiltIns[1]
+        };
+        var result = await new PublishingExportService(new CopyRenderer()).ExportAsync(Guid.NewGuid(),
+            new([source], output, new(new(false), false, []), Recipes: recipes));
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        Assert.HasCount(2, result.Items);
+        Assert.IsTrue(result.Items.All(item => item.State == PublishingItemState.Completed));
+        Assert.AreEqual(2, Directory.EnumerateFiles(output, "*", SearchOption.AllDirectories).Count());
+        Assert.AreEqual(2, result.Items.Select(item => item.DestinationPath).Distinct(StringComparer.OrdinalIgnoreCase).Count());
+    }
+
+    [TestMethod]
     public async Task CompressionWatermarkAndCombinedFlowsNeverMutateSource()
     {
         using var temp=new TempDirectory();var source=temp.CreateFile("source.png",[1,2,3,4,5]);var before=SHA256.HashData(await File.ReadAllBytesAsync(source));

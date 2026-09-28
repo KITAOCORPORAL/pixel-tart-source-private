@@ -6,7 +6,7 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: `8e8f16cab28930cc2ba5456ceac08445c32835f5`
+- Product SHA at handoff: updated at the end of this task after the multi-recipe export and compare semantics changes.
 - Last audited product commit: `8e8f16c`. Same-source native node drag evidence is complete; native visual screenshot confirmation remains unavailable on this host.
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
@@ -52,6 +52,13 @@ Use the Pixel Tart palette: Graphite, Mineral, Warm Silver, Oxidized Copper, and
 - P0: none observed in targeted runs (not a whole-app absence guarantee).
 - P1: native pointer interaction and final UX review remain open; physical DPI is a separate release-hardware gate.
 - P2: controlled performance comparison/optimization follow-up; Phase 2 visual polish and memory telemetry.
+
+## M. Overnight workflow update
+
+- Export Recipes: **PARTIAL / production multi-recipe execution implemented**. The WPF Publishing entry now allows multi-select and submits an asset × recipe execution plan with safe recipe folders, filename templates, collision numbering, atomic files, cancellation propagation, and aggregate task progress. TIFF16 remains limited by the existing WPF encoder and metadata/ICC support.
+- Compare: **PARTIAL**. Fit, Actual Pixels (100%) and Custom (200%) now have distinct view-model semantics; normalized pan and DPI-aware viewport work remain open.
+- Face Lock: **PARTIAL**; production detector remains unavailable and UI explicitly reports the fallback.
+- Rapid Compare: **PARTIAL**; state and keyboard contracts exist, but full champion annotation persistence remains open.
 
 ## K. Reference Match V4 foundation (2026-09-25)
 

@@ -55,7 +55,7 @@ public sealed class ExportRecipeStore(string filePath)
     public async Task SaveAsync(ExportRecipe recipe, CancellationToken token = default)
     {
         recipe.Validate(); await _gate.WaitAsync(token).ConfigureAwait(false);
-        try { var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != recipe.Id).Append(recipe).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); var tmp = FilePath + ".tmp"; await File.WriteAllTextAsync(tmp, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); File.Move(tmp, FilePath, true); }
+        try { if (BuiltIns.Any(item => item.Id == recipe.Id)) throw new InvalidOperationException("Built-in recipes must be saved as a custom copy."); var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != recipe.Id).Append(recipe).Where(item => !BuiltIns.Any(builtin => builtin.Id == item.Id)).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); var tmp = FilePath + ".tmp"; await File.WriteAllTextAsync(tmp, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); File.Move(tmp, FilePath, true); }
         finally { _gate.Release(); }
     }
     public async Task DeleteAsync(Guid id, CancellationToken token = default)
@@ -67,7 +67,16 @@ public sealed class ExportRecipeStore(string filePath)
     private async Task<IReadOnlyList<ExportRecipe>> LoadCoreAsync(CancellationToken token)
     {
         if (!File.Exists(FilePath)) return BuiltIns;
-        var custom = JsonSerializer.Deserialize<ExportRecipe[]>(await File.ReadAllTextAsync(FilePath, token).ConfigureAwait(false)) ?? [];
-        return BuiltIns.Concat(custom).GroupBy(item => item.Id).Select(group => group.Last()).ToArray();
+        try
+        {
+            var custom = JsonSerializer.Deserialize<ExportRecipe[]>(await File.ReadAllTextAsync(FilePath, token).ConfigureAwait(false)) ?? [];
+            return BuiltIns.Concat(custom).GroupBy(item => item.Id).Select(group => group.Last()).ToArray();
+        }
+        catch (JsonException)
+        {
+            var backup = FilePath + ".corrupt-" + DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss");
+            try { File.Move(FilePath, backup, true); } catch { }
+            return BuiltIns;
+        }
     }
 }

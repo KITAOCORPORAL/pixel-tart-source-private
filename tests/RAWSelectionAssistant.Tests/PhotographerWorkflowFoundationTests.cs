@@ -30,6 +30,15 @@ public sealed class PhotographerWorkflowFoundationTests
         var swapped = state.Swap();
         Assert.AreEqual(state.Viewport, swapped.Viewport);
         Assert.AreEqual(2, swapped.Viewport.Zoom);
+        Assert.AreEqual(CompareZoomMode.Fit, swapped.Viewport.Mode);
+    }
+
+    [TestMethod]
+    public void CompareViewportKeepsFitAndActualPixelSemanticsDistinct()
+    {
+        Assert.AreEqual(CompareZoomMode.Fit, CompareViewport.FitViewport().Mode);
+        Assert.AreEqual(CompareZoomMode.ActualPixels, CompareViewport.ActualPixels(1.5).Mode);
+        Assert.AreEqual(CompareZoomMode.Custom, CompareViewport.Custom(2).Mode);
     }
 
     [TestMethod]
@@ -75,5 +84,20 @@ public sealed class PhotographerWorkflowFoundationTests
             Assert.IsFalse((await store.LoadAsync()).Any(item => item.Id == recipe.Id));
         }
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+
+    [TestMethod]
+    public async Task ExportRecipeStoreRecoversCorruptJsonAndKeepsBuiltIns()
+    {
+        using var temp = new TempDirectory();
+        var path = temp.Combine("recipes.json");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        await File.WriteAllTextAsync(path, "{not-json");
+        var store = new ExportRecipeStore(path);
+        var loaded = await store.LoadAsync();
+        Assert.HasCount(4, loaded);
+        Assert.IsFalse(File.Exists(path));
+        Assert.IsTrue(Directory.EnumerateFiles(Path.GetDirectoryName(path)!, "recipes.json.corrupt-*").Any());
+        await Assert.ThrowsExactlyAsync<InvalidOperationException>(() => store.SaveAsync(ExportRecipeStore.BuiltIns[0]));
     }
 }

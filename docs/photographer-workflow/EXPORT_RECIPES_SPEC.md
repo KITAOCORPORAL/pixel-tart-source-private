@@ -6,10 +6,10 @@
 
 ## Phase 1B status
 
-The existing WPF Publishing page remains the production export entry and persists its existing publishing presets. The newer `ExportRecipe` Core model/store is not yet connected to a multi-select recipe manager or one-click multi-recipe task; this remains PARTIAL.
+The existing WPF Publishing page remains the production export entry and persists its existing publishing presets. `ExportRecipe` is now carried on `PublishingExportRequest`; the service expands the asset × recipe plan, applies format/resize/metadata settings, creates recipe subfolders, uses filename templates and reports aggregate progress.
 
 ## Phase 1C status
 
-The existing WPF Publishing page now loads the `ExportRecipeStore`, exposes a Recipe selector, saves custom recipes, and deletes custom recipes. Production export still runs through the existing Publishing task coordinator. Full multi-select UI and TIFF16-specific encoder integration remain partial and are reported as such.
+The existing WPF Publishing page now loads the `ExportRecipeStore`, exposes a multi-select Recipe list, saves custom recipes, and deletes custom recipes. Production export still runs through the existing Publishing task coordinator and preserves atomic output/collision safety. TIFF16 uses the existing WPF TIFF encoder and remains subject to the existing metadata/ICC limitations.
 
-The current selector is single-select and acts as a safe apply-to-editor operation. Multi-select execution is intentionally not claimed until the existing task coordinator exposes a per-recipe progress contract.
+The UI submits all selected recipes as one task. Built-in recipes cannot be overwritten through custom Save; create a new identity for customized copies. Corrupt recipe JSON is moved to a timestamped `.corrupt-*` backup and BuiltIns are restored.

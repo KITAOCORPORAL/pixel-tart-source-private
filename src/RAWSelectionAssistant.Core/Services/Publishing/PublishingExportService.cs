@@ -21,23 +21,30 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         request.Validate();
         Directory.CreateDirectory(request.DestinationDirectory);
         var sourceFiles = request.SourceFiles.Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-        var results = new List<PublishingItemResult>(sourceFiles.Length);
+        IReadOnlyList<ExportRecipe?> recipes = request.Recipes is { Count: > 0 } ? request.Recipes.Cast<ExportRecipe?>().ToArray() : [null];
+        var total = sourceFiles.Length * recipes.Count;
+        var results = new List<PublishingItemResult>(total);
         var reserved = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        for (var index = 0; index < sourceFiles.Length; index++)
+        var sequence = 0;
+        foreach (var recipe in recipes)
         {
-            var source = sourceFiles[index];
+            var recipeOptions = recipe is null ? request.Options : RecipeOptions(recipe, request.Options);
+            for (var sourceIndex = 0; sourceIndex < sourceFiles.Length; sourceIndex++)
+            {
+            var source = sourceFiles[sourceIndex];
+            var index = sequence++;
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (!File.Exists(source)) throw new FileNotFoundException("照片不可用。", source);
                 if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG、TIFF。");
                 var before = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
-                var destination = ResolveDestination(source, request.DestinationDirectory, request.Options, reserved);
+                var destination = ResolveDestination(source, request.DestinationDirectory, recipeOptions, reserved, recipe?.FilenameTemplate, recipe?.Destination);
                 reserved.Add(destination);
                 var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".publishing";
                 try
                 {
-                    await renderer.RenderAsync(source, temporary, request.Options, cancellationToken).ConfigureAwait(false);
+                    await renderer.RenderAsync(source, temporary, recipeOptions, cancellationToken).ConfigureAwait(false);
                     await renderer.VerifyAsync(temporary, cancellationToken).ConfigureAwait(false);
                     var after = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                     if (!CryptographicOperations.FixedTimeEquals(before, after)) throw new IOException("源照片在发布处理期间发生变化，已停止输出。");
@@ -48,35 +55,54 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             }
             catch (OperationCanceledException)
             {
-                for (var pending = index; pending < sourceFiles.Length; pending++) results.Add(new(pending, PublishingItemState.Cancelled, sourceFiles[pending], null, 0));
+                for (var pending = sourceIndex; pending < sourceFiles.Length; pending++) results.Add(new(sequence++, PublishingItemState.Cancelled, sourceFiles[pending], null, 0));
                 break;
             }
             catch (Exception error)
             {
                 results.Add(new(index, PublishingItemState.Failed, source, null, 0, UserMessage(error)));
             }
-            var summary = Summarize(sourceFiles.Length, results);
-            progress?.Report((results.Count * 100d / sourceFiles.Length, Path.GetFileName(source), summary));
+            var summary = Summarize(total, results);
+            progress?.Report((results.Count * 100d / total, recipe is null ? Path.GetFileName(source) : $"{recipe.Name} · {Path.GetFileName(source)}", summary));
+            }
+            if (results.Any(item => item.State == PublishingItemState.Cancelled)) break;
         }
-        var finalSummary = Summarize(sourceFiles.Length, results);
-        var state = finalSummary.Succeeded == sourceFiles.Length ? TaskLifecycleState.Completed
+        var finalSummary = Summarize(total, results);
+        var state = finalSummary.Succeeded == total ? TaskLifecycleState.Completed
             : finalSummary.Succeeded > 0 ? TaskLifecycleState.PartiallyCompleted
             : finalSummary.Cancelled > 0 && finalSummary.Failed == 0 ? TaskLifecycleState.Cancelled : TaskLifecycleState.Failed;
         return new(taskId, state, finalSummary, results.OrderBy(item => item.Sequence).ToArray());
     }
 
-    public static string ResolveDestination(string sourcePath, string destinationDirectory, PublishingOptions options, ISet<string>? reserved = null)
+    public static string ResolveDestination(string sourcePath, string destinationDirectory, PublishingOptions options, ISet<string>? reserved = null, string? filenameTemplate = null, string? recipeDestination = null)
     {
         var sourceDirectory = Path.GetDirectoryName(Path.GetFullPath(sourcePath))!;
         var destinationRoot = Path.GetFullPath(destinationDirectory);
+        if (!string.IsNullOrWhiteSpace(recipeDestination)) destinationRoot = Path.Combine(destinationRoot, recipeDestination);
+        Directory.CreateDirectory(destinationRoot);
         var suffix = options.Suffix ?? string.Empty;
         if (string.Equals(sourceDirectory.TrimEnd(Path.DirectorySeparatorChar), destinationRoot.TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(suffix)) suffix = PublishingDefaults.DefaultSuffix;
         var extension = options.OutputFormat switch { PublishingOutputFormat.Png => ".png", PublishingOutputFormat.Tiff => ".tif", _ => ".jpg" };
-        var stem = Path.GetFileNameWithoutExtension(sourcePath) + suffix;
+        var recipeName = string.IsNullOrWhiteSpace(recipeDestination) ? string.Empty : Path.GetFileName(recipeDestination);
+        var template = string.IsNullOrWhiteSpace(filenameTemplate) ? "{name}" : filenameTemplate;
+        var stem = template.Replace("{name}", Path.GetFileNameWithoutExtension(sourcePath), StringComparison.OrdinalIgnoreCase)
+            .Replace("{recipe}", recipeName, StringComparison.OrdinalIgnoreCase) + suffix;
         var desired = Path.Combine(destinationRoot, stem + extension);
         var candidate = desired; var number = 2;
         while (File.Exists(candidate) || reserved?.Contains(candidate) == true) candidate = Path.Combine(destinationRoot, $"{stem}_{number++}{extension}");
         return candidate;
+    }
+
+    private static PublishingOptions RecipeOptions(ExportRecipe recipe, PublishingOptions fallback)
+    {
+        var dimensions = recipe.ResizeMode switch
+        {
+            ExportRecipeResizeMode.LongEdge => new PublishingDimensions(true, PublishingSizeMode.LongestEdge, recipe.LongEdge ?? 1, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi),
+            ExportRecipeResizeMode.ShortEdge => new PublishingDimensions(true, PublishingSizeMode.ShortestEdge, recipe.ShortEdge ?? 1, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi),
+            ExportRecipeResizeMode.Exact => new PublishingDimensions(true, PublishingSizeMode.Exact, Width: recipe.Width ?? 1, Height: recipe.Height ?? 1, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi),
+            _ => new PublishingDimensions(false, PublishingSizeMode.Original, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi)
+        };
+        return fallback with { Dimensions = dimensions, OutputFormat = recipe.Format switch { ExportRecipeFormat.Png => PublishingOutputFormat.Png, ExportRecipeFormat.Tiff => PublishingOutputFormat.Tiff, _ => PublishingOutputFormat.Jpeg }, Suffix = string.Empty };
     }
 
     private static async Task<byte[]> ComputeHashAsync(string path, CancellationToken cancellationToken)
