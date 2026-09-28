@@ -1,5 +1,8 @@
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.RawToJpeg;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Tests;
 
@@ -7,6 +10,40 @@ namespace RAWSelectionAssistant.Tests;
 [DoNotParallelize]
 public sealed class ReferenceMatchV4Tests
 {
+    [TestMethod]
+    public void TransformContractIsStableAndSettingsSensitive()
+    {
+        var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 64, SinkhornIterations: 8);
+        var first = new MatchTransformV4("source-sha", "reference-sha", settings).Normalize();
+        var second = new MatchTransformV4("source-sha", "reference-sha", settings).Normalize();
+        Assert.AreEqual(first.Hash, second.Hash);
+        Assert.AreEqual(first.CanonicalText, second.CanonicalText);
+        Assert.AreNotEqual(first.Hash, (first with { ReferenceIdentity = "other" }).Normalize().Hash);
+        Assert.AreNotEqual(first.Hash, (first with { Settings = settings with { TileSize = 1024 } }).Normalize().Hash);
+    }
+
+    [TestMethod]
+    public async Task ProductExecutorCarriesFrozenGenerationIntoHighPrecisionV4()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-MatchV4-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var path = Path.Combine(root, "source.cr3");
+            await File.WriteAllTextAsync(path, "stable source");
+            var decoder = new FrozenMasterTestDecoder();
+            var master = await new RawMatchTiff16ProductPipeline(decoder).DecodeFrozenMasterAsync(path);
+            var reference = new HighBitDepthImageBuffer(8, 8, Enumerable.Repeat(0.45f, 8 * 8 * 3).ToArray());
+            var result = await new MatchV4ProductExecutor(new ReferenceMatchV4Engine(gpu: new UnavailableGpu()))
+                .ExecuteAsync(master, reference, "reference-sha", new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 32, SinkhornIterations: 4), preferGpu: true);
+            Assert.AreEqual(ReferenceMatchV4BackendKind.Cpu, result.Backend);
+            Assert.IsTrue(result.UsedCpuFallback);
+            Assert.AreEqual(master.ProcessingGenerationId, result.ProcessingGenerationId);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(result.TransformHash));
+        }
+        finally { Directory.Delete(root, true); }
+    }
+
     [TestMethod]
     public void CpuFoundationIsDeterministicAndUsesBoundedSamples()
     {
@@ -155,5 +192,12 @@ public sealed class ReferenceMatchV4Tests
         public ReferenceMatchV4BackendKind Kind => ReferenceMatchV4BackendKind.Gpu;
         public bool IsAvailable => true;
         public IReadOnlyList<OklabColor> Map(IReadOnlyList<OklabColor> source, IReadOnlyList<OklabColor> reference, ReferenceMatchV4Settings settings, CancellationToken token = default) => throw new InvalidOperationException("synthetic device lost");
+    }
+
+    private sealed class FrozenMasterTestDecoder : IRawDecoder
+    {
+        public RawDecoderCapability GetCapability() => new(true, "test", "1", [".CR3"], [".CR3"]);
+        public Task<RawDecodedImage> DecodeAsync(string path, RawToJpegOptions options, CancellationToken token = default) =>
+            Task.FromResult(RawDecodedImage.FromRgb48(8, 8, 48, Enumerable.Repeat(new ushort[] { 1000, 2000, 3000 }, 64).SelectMany(x => x).ToArray(), new("test", "test", null, 1, "sRGB")));
     }
 }

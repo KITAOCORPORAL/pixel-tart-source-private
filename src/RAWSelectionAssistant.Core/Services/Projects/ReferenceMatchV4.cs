@@ -138,7 +138,9 @@ public sealed record ReferenceMatchV4Result(
     ReferenceLookDecomposition Decomposition,
     string CacheKey,
     GpuFailureReason? GpuFailure = null,
-    GpuFallbackStage FallbackStage = GpuFallbackStage.None);
+    GpuFallbackStage FallbackStage = GpuFallbackStage.None,
+    string? TransformHash = null,
+    Guid? ProcessingGenerationId = null);
 
 public sealed record ReferenceMatchV4HighPrecisionResult(
     HighBitDepthImageBuffer Pixels,
@@ -150,7 +152,9 @@ public sealed record ReferenceMatchV4HighPrecisionResult(
     double ResidualError,
     string CacheKey,
     GpuFailureReason? GpuFailure = null,
-    GpuFallbackStage FallbackStage = GpuFallbackStage.None);
+    GpuFallbackStage FallbackStage = GpuFallbackStage.None,
+    string? TransformHash = null,
+    Guid? ProcessingGenerationId = null);
 
 /// <summary>Small compute seam. GPU implementations must preserve CPU semantics.</summary>
 public interface IColorMatchComputeBackend
@@ -267,9 +271,10 @@ public sealed class ReferenceMatchV4Engine
 
     public ReferenceMatchV4Result Match(VisualPixelBuffer source, VisualPixelBuffer reference,
         string sourceIdentity = "source", string referenceIdentity = "reference", ReferenceMatchV4Settings? settings = null,
-        bool preferGpu = true, CancellationToken token = default)
+        bool preferGpu = true, CancellationToken token = default, Guid? processingGenerationId = null)
     {
         settings ??= new(); settings.Validate();
+        var transform = new MatchTransformV4(sourceIdentity, referenceIdentity, settings).Normalize();
         var sourceSamples = Sample(source, settings.MaximumRepresentativeSamples, token);
         var referenceSamples = Sample(reference, settings.MaximumRepresentativeSamples, token);
         var backend = _cpu; GpuFailureReason? gpuFailure = null; var fallbackStage = GpuFallbackStage.None;
@@ -310,7 +315,7 @@ public sealed class ReferenceMatchV4Engine
         }
         var decomposition = Decompose(sourceSamples, referenceSamples);
         return new(new(source.Width, source.Height, output), backend.Kind, fallback, sourceSamples.Count, referenceSamples.Count,
-            completedResidual, residual, decomposition, ReferenceMatchV4Cache.CreateKey(sourceIdentity, referenceIdentity, settings), gpuFailure, fallbackStage);
+            completedResidual, residual, decomposition, transform.CanonicalText, gpuFailure, fallbackStage, transform.Hash, processingGenerationId);
     }
 
     /// <summary>Float processing entry point for professional RAW/TIFF buffers.</summary>
@@ -321,10 +326,11 @@ public sealed class ReferenceMatchV4Engine
     /// </remarks>
     public ReferenceMatchV4HighPrecisionResult Match(HighBitDepthImageBuffer source, HighBitDepthImageBuffer reference,
         string sourceIdentity = "source", string referenceIdentity = "reference", ReferenceMatchV4Settings? settings = null,
-        bool preferGpu = true, CancellationToken token = default)
+        bool preferGpu = true, CancellationToken token = default, Guid? processingGenerationId = null)
     {
         ArgumentNullException.ThrowIfNull(source); ArgumentNullException.ThrowIfNull(reference);
         settings ??= new(); settings.Validate();
+        var transform = new MatchTransformV4(sourceIdentity, referenceIdentity, settings).Normalize();
         var sourceSamples = Sample(source, settings.MaximumRepresentativeSamples, token);
         var referenceSamples = Sample(reference, settings.MaximumRepresentativeSamples, token);
         var backend = _cpu; GpuFailureReason? gpuFailure = null; var fallbackStage = GpuFallbackStage.None;
@@ -364,7 +370,7 @@ public sealed class ReferenceMatchV4Engine
         var result = new HighBitDepthImageBuffer(source.Width, source.Height, output, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
         return new(result, backend.Kind, preferGpu && backend.Kind == ReferenceMatchV4BackendKind.Cpu && gpuFailure is not null,
             sourceSamples.Count, referenceSamples.Count, completedResidual, residual,
-            ReferenceMatchV4Cache.CreateKey(sourceIdentity, referenceIdentity, settings), gpuFailure, fallbackStage);
+            transform.CanonicalText, gpuFailure, fallbackStage, transform.Hash, processingGenerationId);
     }
 
     private static List<OklabColor> Sample(VisualPixelBuffer pixels, int maximum, CancellationToken token)
