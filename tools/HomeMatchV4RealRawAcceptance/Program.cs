@@ -73,6 +73,9 @@ static async Task<(object Result, FrozenRawMaster? Master)> RunAsync(string path
     var cpuClock = Stopwatch.StartNew(); var cpu = await session.PreviewAsync(proxy, .72, false, MatchV4ExecutionMode.Cpu); cpuClock.Stop();
     var gpuClock = Stopwatch.StartNew(); var gpu = await session.PreviewAsync(proxy, .72, false, MatchV4ExecutionMode.Auto); gpuClock.Stop();
     var parity = Metrics(cpu.Pixels, gpu.Pixels);
+    var fullCpuClock = Stopwatch.StartNew(); var fullCpu = await session.ProcessFullResolutionAsync(.72, false, MatchV4ExecutionMode.Cpu); fullCpuClock.Stop();
+    var fullGpuClock = Stopwatch.StartNew(); var fullGpu = await session.ProcessFullResolutionAsync(.72, false, MatchV4ExecutionMode.Auto); fullGpuClock.Stop();
+    var fullParity = Metrics(fullCpu.Pixels, fullGpu.Pixels);
     var destination = Path.Combine(output, Id(path, sha) + "-v4.tif");
     var exportClock = Stopwatch.StartNew(); var exported = await session.ExportTiff16Async(destination, .72, false, MatchV4ExecutionMode.Auto); exportClock.Stop();
     return (new
@@ -80,9 +83,9 @@ static async Task<(object Result, FrozenRawMaster? Master)> RunAsync(string path
         fixtureId = Id(path, sha), file = file.Name, sha256 = sha, cameraModel = master.Image.Metadata?.CameraModel,
         dimensions = new { master.Width, master.Height }, megapixels = master.Width * master.Height / 1_000_000d,
         decodeMs = decodeClock.Elapsed.TotalMilliseconds, resolveMs = resolveClock.Elapsed.TotalMilliseconds,
-        preview = new { cpuMs = cpuClock.Elapsed.TotalMilliseconds, gpuMs = gpuClock.Elapsed.TotalMilliseconds, cpuBackend = cpu.Backend, gpuBackend = gpu.Backend, parity, gpu.UsedCpuFallback, gpuFailure = gpu.GpuFailure },
+        preview = new { cpuMs = cpuClock.Elapsed.TotalMilliseconds, gpuMs = gpuClock.Elapsed.TotalMilliseconds, cpuBackend = cpu.Backend, gpuBackend = gpu.Backend, parity, fullCpuMs = fullCpuClock.Elapsed.TotalMilliseconds, fullGpuMs = fullGpuClock.Elapsed.TotalMilliseconds, fullParity, gpu.UsedCpuFallback, gpuFailure = gpu.GpuFailure },
         export = new { path = "EXTERNAL_ONLY/" + Path.GetFileName(destination), ms = exportClock.Elapsed.TotalMilliseconds, backend = exported.Item1.Backend, usedCpuFallback = exported.Item1.UsedCpuFallback, transformHash = exported.Item1.TransformHash, decodeGeneration = session.DecodeGenerationId, processingGeneration = session.ProcessingGenerationId, tiff16 = exported.Export.BitDepth == TiffBitDepth.Sixteen },
-        workingSetMb = Process.GetCurrentProcess().WorkingSet64 / (1024d * 1024d), status = gpu.UsedCpuFallback || !parity.Pass ? "PARTIAL" : "PASS"
+        workingSetMb = Process.GetCurrentProcess().WorkingSet64 / (1024d * 1024d), status = gpu.UsedCpuFallback || !fullParity.Pass ? "PARTIAL" : "PASS"
     }, master);
 }
 

@@ -17,17 +17,22 @@ External real files only; corpus remains outside Git. This report records the gu
 
 | Fixture | Camera | Format | Resolution | Decode | GPU preview | Parity | TIFF16 |
 |---|---|---|---:|---|---|---|---|
-| tnan8886-b7d358517db0cd5b | Canon EOS R6 | CR3 | 20.17 MP | PASS | GPU, no fallback | PASS (mean 9.31e-8, p95 2.98e-7, max 1.44e-6) | PASS |
-| dscf0347-52d054ed9a90306d | Fuji X-T5 | RAF | 40.19 MP | PASS | GPU, no fallback | PARTIAL (mean 8.46e-8, p95 1.79e-7, max 3.33e-2) | PASS |
-| dscf0370-7d82d011ed47cc88 | Fuji X-T5 | RAF | 40.19 MP | PASS | GPU, no fallback | PASS (mean 6.76e-8, p95 2.09e-7, max 1.07e-6) | PASS |
-| lman1714-ae1414f77b8a18bb | Fuji GFX100S | RAF | 102.07 MP | PASS | GPU, no fallback | PARTIAL (mean 1.24e-7, p95 3.58e-7, max 3.85e-2) | PASS |
+| tnan8886-b7d358517db0cd5b | Canon EOS R6 | CR3 | 20.17 MP | PASS | GPU, no fallback | Proxy PASS; full PARTIAL (max 3.69e-2) | PARTIAL |
+| dscf0347-52d054ed9a90306d | Fuji X-T5 | RAF | 40.19 MP | PASS | GPU, no fallback | Proxy PASS; full PARTIAL (max 3.90e-2) | PARTIAL |
+| dscf0370-7d82d011ed47cc88 | Fuji X-T5 | RAF | 40.19 MP | PASS | GPU, no fallback | Proxy PASS; full PARTIAL (max 4.70e-2) | PARTIAL |
+| lman1714-ae1414f77b8a18bb | Fuji GFX100S | RAF | 102.07 MP | PASS | GPU, no fallback | Proxy PASS; full PARTIAL (max 3.61e-2) | PARTIAL |
 
 Threshold retained: mean <= 1e-5, P95 <= 3e-5, P99 <= 5e-5, max <= 1e-4. Partial rows remain partial.
 
 ## Interpretation
 
-Real 40MP and 102MP RAW files reached the GPU pixel executor and TIFF16 writer. One X-T5 sample passed CPU/GPU parity; another X-T5 and GFX100S show rare maximum-pixel divergence while aggregate errors remain small. The final runner predecodes all four selected candidates and chooses a distinct reference per target. All four rows reached Match V4; the Canon EOS R6 and one X-T5 sample passed, while the other X-T5 and GFX100S remain parity PARTIAL. This is guarded beta evidence and does not close production Match v4, prove all Canon/Fuji support, or claim WPF visual parity. Native pointer walkthrough is NOT RUN under the current environment. OOM/device-loss injection and peak VRAM telemetry remain open.
+Real 40MP and 102MP RAW files reached the GPU pixel executor and TIFF16 writer. The pre-fix run showed rare maximum-pixel divergence on one X-T5 and GFX100S. After the shared protection-boundary fix, all four fixtures pass the unchanged parity gate. The final runner predecodes all four selected candidates and chooses a distinct reference per target. All four rows reached Match V4; all four fixtures pass the unchanged parity gate. This is guarded beta evidence and does not close production Match v4, prove all Canon/Fuji support, or claim WPF visual parity. Native pointer walkthrough is NOT RUN under the current environment. OOM/device-loss injection and peak VRAM telemetry remain open.
 
 ## Reproduction
 
 dotnet run --project tools/HomeMatchV4RealRawAcceptance/HomeMatchV4RealRawAcceptance.csproj -c Release -- --root <external-corpus-root> --output <external-output>
+
+
+## Full-resolution correction
+
+The later full-resolution rerun found maxima of 0.0369 (Canon), 0.0390 and 0.0470 (X-T5), and 0.0361 (GFX100S). These exceed the unchanged 1e-4 max gate, so the acceptance is PARTIAL until the remaining boundary divergence is fixed.

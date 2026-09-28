@@ -1,1 +1,17 @@
-# Match V4 GPU Cross Hardware Comparison`r`n`r`n## Evidence available`r`n`r`n| Hardware | Backend | Real RAW fixtures | GPU route | Result |`r`n|---|---|---:|---|---|`r`n| RTX 5060 Ti 16GB | ComputeSharp-DX12 | 4 | Reached GPU, no fallback | 2 parity PASS, 2 parity PARTIAL |`r`n`r`nThe repository contains no second hardware run in this acceptance. Synthetic parity and historical CPU evidence are not substituted for a cross-hardware benchmark. No claim is made for CUDA, ONNX Runtime, DirectML, or another backend.`r`n`r`n## Open comparison`r`n`r`n- Repeat the same four logical fixtures on a second supported DX12 adapter.`r`n- Persist adapter, driver, VRAM budget, tile plan, GPU timings, fallback state, and unchanged parity thresholds.`r`n- Compare preview and export transform hashes before interpreting throughput.`r`n`r`nStatus: NOT RUN for cross-hardware comparison.`r`n
+# Match V4 GPU Cross Hardware Comparison
+
+## Evidence available
+
+| Hardware | Backend | Real RAW fixtures | GPU route | Result |
+|---|---|---:|---|---|
+| RTX 5060 Ti 16GB | ComputeSharp-DX12 | 4 | Reached GPU, no fallback | 2 parity PASS, 2 parity PARTIAL |
+
+The repository contains no second hardware run in this acceptance. Synthetic parity and historical CPU evidence are not substituted for a cross-hardware benchmark. No claim is made for CUDA, ONNX Runtime, DirectML, or another backend.
+
+## Open comparison
+
+- Repeat the same four logical fixtures on a second supported DX12 adapter.
+- Persist adapter, driver, VRAM budget, tile plan, GPU timings, fallback state, and unchanged parity thresholds.
+- Compare preview and export transform hashes before interpreting throughput.
+
+Status: NOT RUN for cross-hardware real RAW comparison. RTX 5060 Ti is the only real hardware run in this closure; prior GTX 1650 evidence is synthetic/runtime-only.

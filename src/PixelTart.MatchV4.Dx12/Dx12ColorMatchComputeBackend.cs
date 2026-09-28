@@ -66,7 +66,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
                             (float)transform.Strength, transform.KeepLuminance,
                             (float)transform.Settings.MaximumLuminanceDisplacement, (float)transform.Settings.MaximumChromaDisplacement,
                             (float)transform.Settings.NeutralProtection, (float)transform.Settings.SkinProtection,
-                            (float)transform.Settings.HighlightProtection, (float)transform.Settings.ShadowProtection);
+                            (float)transform.Settings.HighlightProtection, (float)transform.Settings.ShadowProtection, (float)MatchV4NumericalContract.ProtectionBoundaryEpsilon);
                         device.For(width * height, shader);
                         compute += watch.Elapsed;
                         token.ThrowIfCancellationRequested();
@@ -154,7 +154,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
         float midL, float midA, float midB,
         float highlightL, float highlightA, float highlightB,
         float strength, bool keepLuminance, float maxLuma, float maxChroma,
-        float neutralProtection, float skinProtection, float highlightProtection, float shadowProtection) : IComputeShader
+        float neutralProtection, float skinProtection, float highlightProtection, float shadowProtection, float protectionBoundaryEpsilon) : IComputeShader
     {
         public void Execute()
         {
@@ -178,7 +178,7 @@ public sealed partial class Dx12ColorMatchComputeBackend : IColorMatchComputeBac
             var chroma = Hlsl.Sqrt(A * A + B * B);
             var neutral = Hlsl.Clamp(1 - chroma / .08f, 0, 1);
             var hue = Hlsl.Atan2(B, A) * 57.2957795f; if (hue < 0) hue += 360;
-            var skin = L > .28f && L < .9f && hue > 25 && hue < 80 && chroma > .025f && chroma < .22f;
+            var skin = L > .28f + protectionBoundaryEpsilon && L < .9f - protectionBoundaryEpsilon && hue > 25f + protectionBoundaryEpsilon && hue < 80f - protectionBoundaryEpsilon && chroma > .025f + protectionBoundaryEpsilon && chroma < .22f - protectionBoundaryEpsilon;
             var hi = Hlsl.Clamp((L - .82f) / .18f, 0, 1);
             var sh = Hlsl.Clamp((.2f - L) / .2f, 0, 1);
             var protection = Hlsl.Clamp(1 - neutral * neutralProtection - (skin ? skinProtection : 0) - hi * highlightProtection - sh * Hlsl.Clamp(chroma / .1f, 0, 1) * shadowProtection, .08f, 1);

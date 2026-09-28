@@ -1,1 +1,5 @@
-# 3D Color Space Match Vectors`r`n`r`nMigration vectors are generated from source samples and the canonical resolved Match V4 transform. Strength zero produces zero migration vectors. Protection states classify neutral, skin, highlight, and shadow regions for later UI treatment.`r`n`r`nStatus: PARTIAL. This is a data contract; interactive vector editing and a renderer are not implemented.`r`n
+# 3D Color Space Match Vectors
+
+Migration vectors are generated from source samples and the canonical resolved Match V4 transform. Strength zero produces zero migration vectors. Protection states classify neutral, skin, highlight, and shadow regions for later UI treatment.
+
+Status: PARTIAL. This is a data contract; interactive vector editing and a renderer are not implemented.

@@ -79,6 +79,12 @@ public sealed class MatchV4CpuPixelBackend : IMatchV4PixelBackend
     }
 }
 
+public static class MatchV4NumericalContract
+{
+    // Float GPU and double CPU share this guard around hard protection boundaries.
+    public const double ProtectionBoundaryEpsilon = 1e-4;
+}
+
 public static class MatchV4PixelApplication
 {
     public static void Apply(Span<float> values, MatchV4ResolvedTransform transform, CancellationToken token = default)
@@ -111,7 +117,8 @@ public static class MatchV4PixelApplication
     {
         var neutral = Math.Clamp(1 - c.Chroma / .08, 0, 1);
         var hue = Math.Atan2(c.B, c.A) * 180 / Math.PI; if (hue < 0) hue += 360;
-        var skin = c.L is > .28 and < .9 && hue is > 25 and < 80 && c.Chroma is > .025 and < .22;
+        var e = MatchV4NumericalContract.ProtectionBoundaryEpsilon;
+        var skin = c.L > .28 + e && c.L < .9 - e && hue > 25 + e && hue < 80 - e && c.Chroma > .025 + e && c.Chroma < .22 - e;
         var highlight = Math.Clamp((c.L - .82) / .18, 0, 1);
         var shadow = Math.Clamp((.2 - c.L) / .2, 0, 1);
         return Math.Clamp(1 - neutral * settings.NeutralProtection - (skin ? settings.SkinProtection : 0) - highlight * settings.HighlightProtection - shadow * Math.Clamp(c.Chroma / .1, 0, 1) * settings.ShadowProtection, .08, 1);
