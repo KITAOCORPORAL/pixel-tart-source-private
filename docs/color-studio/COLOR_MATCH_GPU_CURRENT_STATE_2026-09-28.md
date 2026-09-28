@@ -27,3 +27,12 @@ The product session now uses a `FrozenRawMaster` with source SHA, decode generat
 processing generation shared by RAW preview, Match, and TIFF16 export. This improves session
 determinism but does not claim that native X-T5 decoding is intrinsically deterministic or that
 Sony ARW is supported. Match v4/GPU remains **not ready**.
+
+## Match V4 GPU Phase 2 boundary update
+
+Core no longer references ComputeSharp/DX12. The platform-neutral `IMatchV4ComputeBackend` and
+CPU oracle remain in Core; the Windows adapter is isolated in `PixelTart.MatchV4.Dx12`. A
+backend-neutral tile executor and VRAM-tier contract are covered by focused tests. This is an
+architecture and execution-boundary improvement, not full GPU productization: pairwise cost is
+GPU-backed, while Sinkhorn mapping, residual/protection, full pixel application and TIFF16 remain
+CPU. Color Studio still uses Match v3 and the gate remains **14/28**.

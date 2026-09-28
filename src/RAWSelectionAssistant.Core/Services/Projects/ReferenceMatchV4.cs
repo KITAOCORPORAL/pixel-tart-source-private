@@ -89,30 +89,9 @@ public static class GpuCapabilityDetector
     {
         token.ThrowIfCancellationRequested();
         var budget = GpuMemoryBudget.FromBytes(0);
-        if (!OperatingSystem.IsWindows()) return new("Unavailable", 0, 0, string.Empty, string.Empty, "None", false, false, false, "Windows GPU APIs unavailable", budget);
-        try
-        {
-            if (!OperatingSystem.IsWindowsVersionAtLeast(6, 2))
-                return new("Unavailable", 0, 0, string.Empty, string.Empty, "None", false, false, false, "DirectX 12 compute requires Windows 8 or newer", budget);
-            var smokePassed = TryGpuSmoke(out var smokeFailure);
-            if (!smokePassed) return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, smokeFailure, budget);
-            token.ThrowIfCancellationRequested();
-            var info = ReadGpuInfo();
-            budget = GpuMemoryBudget.FromBytes(info.DedicatedBytes, info.SharedBytes);
-            var available = info.Hardware;
-            return new(info.Name, info.DedicatedBytes, info.SharedBytes, string.Empty,
-                "DX12 device created; exact feature level not queried", available ? "ComputeSharp-DX12" : "None",
-                available, true, true, available ? null : "Default compute device is software emulation", budget);
-        }
-        catch (Exception ex) when (ex is not OperationCanceledException)
-        { return new("Unknown adapter", 0, 0, string.Empty, string.Empty, "None", false, false, false, ex.GetType().Name + ": " + ex.Message, budget); }
+        return new("Unavailable", 0, 0, string.Empty, string.Empty, "None", false, false, false,
+            "No platform backend is registered. Inject a Windows DX12 or future Metal backend.", budget);
     }
-
-    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
-    private static bool TryGpuSmoke(out string? failure) => GpuColorMatchCompute.TrySmoke(out failure);
-
-    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
-    private static (string Name, long DedicatedBytes, long SharedBytes, bool Hardware) ReadGpuInfo() => GpuColorMatchCompute.DeviceInfo();
 }
 
 public sealed record ReferenceLookDecomposition(
@@ -222,17 +201,14 @@ public sealed class CpuColorMatchComputeBackend : IColorMatchComputeBackend
     }
 }
 
-/// <summary>Explicit seam for a future DirectML/ComputeSharp implementation; never silently claims GPU use.</summary>
+/// <summary>Core-safe placeholder. Platform projects provide the real GPU backend.</summary>
 public sealed class GpuColorMatchComputeBackend : IColorMatchComputeBackend
 {
     public ReferenceMatchV4BackendKind Kind => ReferenceMatchV4BackendKind.Gpu;
-    private readonly Lazy<bool> _availability = new(() => OperatingSystem.IsWindowsVersionAtLeast(6, 2) &&
-        GpuColorMatchCompute.TrySmoke(out _) && GpuColorMatchCompute.DeviceInfo().Hardware);
-    public bool IsAvailable => _availability.Value;
-    [System.Runtime.Versioning.SupportedOSPlatform("windows6.2")]
+    public bool IsAvailable => false;
     public IReadOnlyList<OklabColor> Map(IReadOnlyList<OklabColor> source, IReadOnlyList<OklabColor> reference,
         ReferenceMatchV4Settings settings, CancellationToken token = default) =>
-        !IsAvailable ? throw new NotSupportedException("GPU backend is not available; use the CPU fallback.") : GpuColorMatchCompute.Map(source, reference, settings, token);
+        throw new NotSupportedException("No platform GPU backend is registered; use the CPU fallback.");
 }
 
 public static class ReferenceMatchV4Cache
