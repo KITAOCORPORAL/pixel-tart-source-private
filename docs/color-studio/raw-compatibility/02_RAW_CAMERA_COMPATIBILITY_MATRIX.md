@@ -1,0 +1,276 @@
+# RAW Camera Compatibility Matrix
+
+Camera-level status is based only on decoded metadata; filename-derived model names are not promoted. UNKNOWN groups do not constitute a verified camera model. Status denotes isolated Core pixel-path parity, not complete product support.
+
+| Vendor | Camera | Format | Samples | Decode | Precision | Metadata | Match v3 | TIFF16 | Reopen | Core status | Support level |
+|---|---|---|---:|---|---|---|---|---|---|---|---|
+| canon | UNKNOWN | CRW | 33 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| canon | EOS-1D Mark II N | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS-1D Mark II | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS-1D Mark III | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS-1Ds Mark II | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS-1Ds Mark III | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 20D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 30D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 350D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 400D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 40D | CR2 | 5 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 2 |
+| canon | EOS 450D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 50D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 5D Mark II | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 5D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G10 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G9 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 1000D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 6D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS M | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS M3 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 1200D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 650D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 70D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 750D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 100D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 1100D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS-1D Mark IV | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS-1D X | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 550D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 5D Mark III | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 5DS | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 600D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 60D | CR2 | 2 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 700D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | EOS 760D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS 7D | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G1 X Mark II | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot G7 X | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot A3200 IS | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot G11 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G12 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot G15 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G16 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot G1 X | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot G5 X | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot S120 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot SD450 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX100 IS | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot SX110 IS | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX130 IS | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX1 IS | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX260 HS | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX50 HS | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot SX510 HS | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| canon | PowerShot SX60 HS | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | PowerShot S90 | CR2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| canon | EOS R6 | CR3 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| epson | UNKNOWN | ERF | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| fuji | X-T5 | RAF | 2 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | E550 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | E900 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | F700 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | GFX100S | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | X-E2 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | HS20EXR | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X-T1 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X100S | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | F600EXR | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | HS10 HS11 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | S200EXR | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | X100 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | F900EXR | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | S9600 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X-A2 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X-E1 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X-T10 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | X10 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X100T | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X20 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | X30 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | X-Pro1 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | XQ1 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | XQ2 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | S2Pro | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | S3Pro | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | S5000 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| fuji | S5600 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | S5Pro | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | S6500fd | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| fuji | S9500 | RAF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| hasselblad | CFV-16 | 3FR | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| hasselblad | H3DII-39 | 3FR | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| hasselblad | CF-22 | 3FR | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| kodak | UNKNOWN | KDC | 5 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| kodak | UNKNOWN | DCR | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| kodak | UNKNOWN | RAW | 3 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| leaf | UNKNOWN | MOS | 2 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| leica | UNKNOWN | RAW | 3 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| leica | M8 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| leica | UNKNOWN | DNG | 1 | FAIL | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | FAIL | LEVEL 0 |
+| mamiya | UNKNOWN | MEF | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| minolta | UNKNOWN | MRW | 9 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| minolta | UNKNOWN | MDC | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| nikon | D100 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D1X | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D1 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D200 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D2X | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D300 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D3X | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D3 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D40 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D50 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D60 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D700 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D70 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D80 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D90 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | E5400 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | E5700 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | COOLPIX P6000 | NRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | 1 V1 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | 1 S2 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | COOLPIX P340 | NRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | COOLPIX P7100 | NRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D300S | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D3100 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D3200 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D3300 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D4S | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D5000 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D5100 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D5200 | NEF | 2 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 2 |
+| nikon | D5300 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D5500 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D600 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D610 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D7000 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D70s | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D7100 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D7200 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| nikon | D750 | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | D800 | NEF | 9 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 2 |
+| nikon | Df | NEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| nikon | COOLPIX P7000 | NRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | C5050Z | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | C8080WZ | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-20,E-20N,E-20P | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-300 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-3 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-410 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-500 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-510 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | C5060WZ | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-330 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-450 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-M10 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-M10MarkII | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-M5MarkII | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-PL6 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-PL7 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-PM1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-30 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-420 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-5 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-520 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-600 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-M1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-M5 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-P1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-P2 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-P3 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-PL1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | E-PL3 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | E-PL5 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | TG-4 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| olympus | XZ-2 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | XZ-1 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | SP350 | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| olympus | SP500UZ | ORF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | UNKNOWN | RAW | 8 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| panasonic | DMC-FZ28 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-G1 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-LX3 | RW2 | 2 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 2 |
+| panasonic | DMC-G3 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-GF1 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-GH4 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-LX5 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-TZ70 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-FZ1000 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-FZ150 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-FZ38 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-FZ70 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-FZ72 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-LF1 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| panasonic | DMC-LX7 | RW2 | 2 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-TZ60 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-GX1 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| panasonic | DMC-GH2 | RW2 | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K100D Super | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K10D | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K10D | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | K200D | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K20D | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | UNKNOWN | RAW | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| pentax | K-3 II | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-7 | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | K-m | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | K-r | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-S1 | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | K100D | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-3 | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-30 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-5 | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | K-50 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-5 II s | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | K-x | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | *ist DL2 | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | *ist DS | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| pentax | *ist DL | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| pentax | *ist D | PEF | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| phones | Lumia 1020 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| phones | One A0001 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| polaroid | UNKNOWN | X3F | 1 | FAIL | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | FAIL | LEVEL 0 |
+| ricoh | GR DIGITAL 2 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| ricoh | GR | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | WB2000 | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | EX2F | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| samsung | GX20 | DNG | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | NX100 | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | NX300 | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | NX300M | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| samsung | NX500 | SRW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| samsung | UNKNOWN | SRW | 1 | FAIL | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | FAIL | LEVEL 0 |
+| sigma | UNKNOWN | X3F | 7 | FAIL | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | FAIL | LEVEL 0 |
+| sony | DSLR-A100 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A200 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A300 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A350 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | DSLR-A700 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A900 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | UNKNOWN | SR2 | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| sony | DSLR-A330 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A550 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | DSLR-A580 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSLR-A850 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | UNKNOWN | SRF | 1 | UNSUPPORTED | NOT RUN | PARTIAL | NOT RUN | NOT RUN | NOT RUN | UNSUPPORTED | LEVEL 0 |
+| sony | DSC-RX100M2 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | ILCE-6000 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | ILCA-77M2 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | ILCE-7M2 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | ILCE-7RM2 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | NEX-5R | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | NEX-6 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | NEX-3 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | NEX-3N | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | NEX-7 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSC-RX10 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSC-RX100 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | DSC-RX100M3 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSC-RX100M4 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | DSC-RX10M2 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | SLT-A35 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | SLT-A58 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PASS | LEVEL 1 |
+| sony | SLT-A77 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | SLT-A99 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | SLT-A55 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |
+| sony | SLT-A65 | ARW | 1 | PASS | PASS | PARTIAL | PASS | PASS | PASS | PARTIAL | LEVEL 0 |

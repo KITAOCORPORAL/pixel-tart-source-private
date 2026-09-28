@@ -1,0 +1,356 @@
+# RAW Metadata Results
+
+| Fixture | Make | Model | Orientation | Capture time | Metadata status |
+|---|---|---|---:|---|---|
+| canon-crw-633eb623ca925843 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-ad2fee73dd121bd2 | Canon | EOS-1D Mark II N | 1 | 2007-03-18T03:56:05.0000000+00:00 | PARTIAL |
+| canon-cr2-aa27b723cbf885ac | Canon | EOS-1D Mark II | 1 | 2005-10-29T08:14:44.0000000+00:00 | PARTIAL |
+| canon-cr2-864e1e36a2c8bc6f | Canon | EOS-1D Mark III | 8 | 2007-07-14T10:02:56.0000000+00:00 | PARTIAL |
+| canon-cr2-2b0caf37f2d9c661 | Canon | EOS-1Ds Mark II | 8 | 2004-11-13T15:02:21.0000000+00:00 | PARTIAL |
+| canon-cr2-834a4761f4471de6 | Canon | EOS-1Ds Mark III | 1 | 2007-10-18T05:44:32.0000000+00:00 | PARTIAL |
+| canon-cr2-dc3dcc6e640b630c | Canon | EOS 20D | 1 | 2005-06-18T03:43:54.0000000+00:00 | PARTIAL |
+| canon-crw-f222388e97f38a77 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-034585802284654c | Canon | EOS 30D | 1 | 2007-03-31T01:54:09.0000000+00:00 | PARTIAL |
+| canon-cr2-e496788ece326162 | Canon | EOS 350D | 1 | 2005-04-04T08:58:39.0000000+00:00 | PARTIAL |
+| canon-cr2-7a0e62aad23900cf | Canon | EOS 400D | 1 | 2007-02-21T10:24:36.0000000+00:00 | PARTIAL |
+| canon-cr2-b2079d0b03140872 | Canon | EOS 40D | 1 | 2007-09-14T03:32:59.0000000+00:00 | PARTIAL |
+| canon-cr2-4805563f6c9a5399 | Canon | EOS 40D | 1 | 2007-11-06T03:24:20.0000000+00:00 | PARTIAL |
+| canon-cr2-627d3c630693783e | Canon | EOS 40D | 1 | 2007-12-23T12:32:28.0000000+00:00 | PARTIAL |
+| canon-cr2-4e7cf987604b4254 | Canon | EOS 40D | 1 | 2007-11-16T05:00:47.0000000+00:00 | PARTIAL |
+| canon-cr2-152382ce4dbf6448 | Canon | EOS 40D | 1 | 2007-09-14T03:32:02.0000000+00:00 | PARTIAL |
+| canon-cr2-e7954e768d85bdb0 | Canon | EOS 450D | 1 | 2008-04-04T07:58:18.0000000+00:00 | PARTIAL |
+| canon-cr2-990d870c38e548b3 | Canon | EOS 50D | 8 | 2008-09-17T07:13:40.0000000+00:00 | PARTIAL |
+| canon-cr2-0da28f6f2718ea82 | Canon | EOS 5D Mark II | 1 | 2008-10-29T12:05:00.0000000+00:00 | PARTIAL |
+| canon-cr2-34f4ac1ae1ae7246 | Canon | EOS 5D | 1 | 2006-01-15T11:04:48.0000000+00:00 | PARTIAL |
+| canon-crw-7ba4e905304887ea | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-9bc8e8e513516181 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-30f0b020c7e3f57b | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-d7b3b3258002ac1f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-85236abaab2c2737 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-5ebd89b0693d983a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-6a58e2cda297b370 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-044cdad1c933e666 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-207717b321988279 | Canon | PowerShot G10 | 1 | 2008-12-30T06:56:02.0000000+00:00 | PARTIAL |
+| canon-crw-116a24e0994621c4 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-05bdd52c725dcd1a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-2c6a006cb7948877 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-fd2461643e9f4fb9 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-008f340e02753bd7 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-a9d00f6a2ade249c | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-1992337cb6157664 | Canon | PowerShot G9 | 6 | 2007-10-17T11:55:27.0000000+00:00 | PARTIAL |
+| canon-crw-d4a11e5b861f93f1 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-3e583286dd5e63b0 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-0feb8741ae98e85d | Canon | EOS 1000D | 8 | 2010-07-23T03:00:15.0000000+00:00 | PARTIAL |
+| canon-cr2-fec7395a77d608a2 | Canon | EOS 6D | 8 | 2014-12-31T08:08:56.0000000+00:00 | PARTIAL |
+| canon-cr2-da0dc26e27962d31 | Canon | EOS M | 1 | 2015-07-25T21:53:10.0000000+00:00 | PARTIAL |
+| canon-cr2-d0ff0a238478194b | Canon | EOS M3 | 1 | 2015-08-29T03:49:20.0000000+00:00 | PARTIAL |
+| canon-cr2-6381a6bb85656664 | Canon | EOS 1200D | 1 | 2015-10-17T01:13:48.0000000+00:00 | PARTIAL |
+| canon-cr2-361ae9ea933b0971 | Canon | EOS 650D | 1 | 2015-10-11T06:02:54.0000000+00:00 | PARTIAL |
+| canon-cr2-7d47ce87acc40791 | Canon | EOS 70D | 6 | 2014-08-13T04:05:21.0000000+00:00 | PARTIAL |
+| canon-cr2-eb88d2f5cfe177f5 | Canon | EOS 750D | 8 | 2016-01-07T09:04:53.0000000+00:00 | PARTIAL |
+| canon-cr2-55fe671f374dfdf9 | Canon | EOS 100D | 8 | 2015-04-20T11:21:15.0000000+00:00 | PARTIAL |
+| canon-cr2-702e1d486d84caee | Canon | EOS 1100D | 1 | 2012-12-15T11:02:01.0000000+00:00 | PARTIAL |
+| canon-cr2-932d31bf86ddbad7 | Canon | EOS-1D Mark IV | 1 | 2009-12-29T08:45:53.0000000+00:00 | PARTIAL |
+| canon-cr2-a9bc228ad9a00832 | Canon | EOS-1D X | 1 | 2012-09-05T23:48:25.0000000+00:00 | PARTIAL |
+| canon-crw-b0efda644b071111 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-0ba80a47818b46f2 | Canon | EOS 550D | 1 | 2010-03-03T13:50:57.0000000+00:00 | PARTIAL |
+| canon-cr2-09fee3ebb29da5f2 | Canon | EOS 5D Mark III | 1 | 2012-03-08T08:08:39.0000000+00:00 | PARTIAL |
+| canon-cr2-8d24674dc6845efd | Canon | EOS 5DS | 1 | 2015-07-23T08:52:30.0000000+00:00 | PARTIAL |
+| canon-cr2-9a91ae88d13d7401 | Canon | EOS 600D | 1 | 2011-07-14T11:38:47.0000000+00:00 | PARTIAL |
+| canon-cr2-32515b5411b949d5 | Canon | EOS 60D | 1 | 2011-03-19T19:38:10.0000000+00:00 | PARTIAL |
+| canon-cr2-674d9290fb68c210 | Canon | EOS 60D | 8 | 2011-03-19T19:39:09.0000000+00:00 | PARTIAL |
+| canon-cr2-22eb74ebb844a234 | Canon | EOS 700D | 8 | 2013-12-18T03:32:12.0000000+00:00 | PARTIAL |
+| canon-cr2-0f8b518c78853108 | Canon | EOS 760D | 1 | 2015-10-27T01:42:25.0000000+00:00 | PARTIAL |
+| canon-cr2-6ec272be7c5b264c | Canon | EOS 7D | 1 | 2009-10-09T06:18:45.0000000+00:00 | PARTIAL |
+| canon-cr2-ff7990d38e566695 | Canon | PowerShot G1 X Mark II | 1 | 2015-11-02T05:25:10.0000000+00:00 | PARTIAL |
+| canon-cr2-54f7f68f0c0e0938 | Canon | PowerShot G7 X | 1 | 2015-04-17T06:47:35.0000000+00:00 | PARTIAL |
+| canon-dng-b24f3539d585a5dd | Canon | PowerShot A3200 IS | 1 | 2012-07-11T05:29:29.0000000+00:00 | PARTIAL |
+| canon-crw-e0c8ae8fb8583694 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-96d336b0e55f96f3 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr2-f127573f45ff1a77 | Canon | PowerShot G11 | 1 | 2010-06-27T07:34:54.0000000+00:00 | PARTIAL |
+| canon-cr2-98258b315977c271 | Canon | PowerShot G12 | 1 | 2011-02-21T06:09:39.0000000+00:00 | PARTIAL |
+| canon-cr2-943b64c409f9e395 | Canon | PowerShot G15 | 6 | 2015-03-18T04:10:12.0000000+00:00 | PARTIAL |
+| canon-cr2-d9689e5e481c102f | Canon | PowerShot G16 | 1 | 2015-12-29T08:06:21.0000000+00:00 | PARTIAL |
+| canon-cr2-9fbb95c9d0a557f8 | Canon | PowerShot G1 X | 1 | 2013-11-23T08:23:30.0000000+00:00 | PARTIAL |
+| canon-cr2-bf279f42d37fa86c | Canon | PowerShot G5 X | 1 | 2015-11-15T15:15:18.0000000+00:00 | PARTIAL |
+| canon-cr2-bd29083c348ad821 | Canon | PowerShot S120 | 1 | 2014-07-06T08:47:00.0000000+00:00 | PARTIAL |
+| canon-dng-32357c5a870bcd26 | Canon | PowerShot SD450 | 1 | 2009-03-30T11:25:18.0000000+00:00 | PARTIAL |
+| canon-dng-014e81325eb30bea | Canon | PowerShot SX100 IS | 1 | 2009-07-30T04:49:15.0000000+00:00 | PARTIAL |
+| canon-cr2-1d74671f9f28ab6f | Canon | PowerShot SX110 IS | 1 | UNKNOWN | PARTIAL |
+| canon-crw-53410ca021580c2b | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-dng-020ec32282005c93 | Canon | PowerShot SX130 IS | 1 | 2015-09-07T11:56:00.0000000+00:00 | PARTIAL |
+| canon-cr2-012ec01ed2165d04 | Canon | PowerShot SX1 IS | 1 | 2009-07-30T06:06:09.0000000+00:00 | PARTIAL |
+| canon-dng-ff867ab86a7f563c | Canon | PowerShot SX260 HS | 1 | 2014-04-18T07:25:32.0000000+00:00 | PARTIAL |
+| canon-cr2-c800a9971ec7aec1 | Canon | PowerShot SX50 HS | 1 | 2014-08-30T01:44:46.0000000+00:00 | PARTIAL |
+| canon-dng-b44b837385a45ba0 | Canon | PowerShot SX510 HS | 1 | 2015-09-08T09:16:34.0000000+00:00 | PARTIAL |
+| canon-cr2-9204cae52cc8a252 | Canon | PowerShot SX60 HS | 1 | 2015-07-09T03:53:44.0000000+00:00 | PARTIAL |
+| canon-cr2-aff72063aacf6efb | Canon | PowerShot S90 | 1 | 2011-08-24T06:41:04.0000000+00:00 | PARTIAL |
+| canon-crw-df1c5fc1b1ea1361 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-585e9317b0804743 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-4946a2dcc321865f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-9922aa8a49ef2961 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-6e7395e3adb1a334 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-db4d0e077f88949a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-55e0ebb0bcf6adeb | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-f168bb5642e67d09 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-8015f91a4f6d549f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-8fff7b8e186c8a85 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-ab537c3a4f140924 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-crw-96d336b0e55f96f3-duplicate | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| canon-cr3-b7d358517db0cd5b | Canon | EOS R6 | 1 | 2023-11-26T10:36:56.0000000+00:00 | PARTIAL |
+| epson-erf-af6b40f4f58db87a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| fuji-raf-52d054ed9a90306d | Fujifilm | X-T5 | 1 | 2026-09-27T11:20:32.0000000+00:00 | PARTIAL |
+| fuji-raf-7d82d011ed47cc88 | Fujifilm | X-T5 | 8 | 2026-09-27T11:25:11.0000000+00:00 | PARTIAL |
+| fuji-raf-82d1010a1eb8cdf4 | Fujifilm | E550 | 1 | 2008-06-01T06:29:52.0000000+00:00 | PARTIAL |
+| fuji-raf-07adee4a49ae922c | Fujifilm | E900 | 1 | 2007-05-20T03:26:08.0000000+00:00 | PARTIAL |
+| fuji-raf-c3686a66f9159043 | Fujifilm | F700 | 1 | 2007-01-06T06:20:22.0000000+00:00 | PARTIAL |
+| fuji-raf-ae1414f77b8a18bb | Fujifilm | GFX100S | 8 | 2026-09-26T07:45:33.0000000+00:00 | PARTIAL |
+| fuji-raf-7b1086d592d4ff83 | Fujifilm | X-E2 | 8 | 2014-10-12T09:28:29.0000000+00:00 | PARTIAL |
+| fuji-raf-860ca30714a7dd71 | Fujifilm | HS20EXR | 1 | 2015-09-26T08:37:50.0000000+00:00 | PARTIAL |
+| fuji-raf-89f46d0b227601e6 | Fujifilm | X-T1 | 1 | 2015-09-18T06:19:21.0000000+00:00 | PARTIAL |
+| fuji-raf-360cc1f90654ce26 | Fujifilm | X100S | 1 | 2015-05-30T06:37:20.0000000+00:00 | PARTIAL |
+| fuji-raf-229295351ad9777b | Fujifilm | F600EXR | 1 | 2014-06-01T02:43:59.0000000+00:00 | PARTIAL |
+| fuji-raf-dbdd459e33beadd6 | Fujifilm | HS10 HS11 | 1 | 2010-07-16T01:43:55.0000000+00:00 | PARTIAL |
+| fuji-raf-3730062a3658cbce | Fujifilm | S200EXR | 1 | 2010-07-06T21:12:03.0000000+00:00 | PARTIAL |
+| fuji-raf-daa85cf3fd10dd37 | Fujifilm | X100 | 1 | 2011-05-23T03:51:28.0000000+00:00 | PARTIAL |
+| fuji-raf-48e13e0d4b0ced91 | Fujifilm | F900EXR | 1 | 2013-11-22T03:16:17.0000000+00:00 | PARTIAL |
+| fuji-raf-095825ddcaabd36a | Fujifilm | S9600 | 1 | 2009-06-14T01:35:18.0000000+00:00 | PARTIAL |
+| fuji-raf-6341419405fc8439 | Fujifilm | X-A2 | 1 | 2015-07-19T04:54:32.0000000+00:00 | PARTIAL |
+| fuji-raf-792dd0afa95b3daa | Fujifilm | X-E1 | 8 | 2014-01-11T07:40:05.0000000+00:00 | PARTIAL |
+| fuji-raf-ea5e47daf705fd39 | Fujifilm | X-T10 | 1 | 2015-06-24T08:32:05.0000000+00:00 | PARTIAL |
+| fuji-raf-3296bdcaeb3fb20a | Fujifilm | X10 | 1 | 2014-11-08T04:58:29.0000000+00:00 | PARTIAL |
+| fuji-raf-9b7072f0c5aeacf8 | Fujifilm | X100T | 8 | 2015-12-22T03:00:37.0000000+00:00 | PARTIAL |
+| fuji-raf-ac043f0581967800 | Fujifilm | X20 | 1 | 2014-06-30T09:41:41.0000000+00:00 | PARTIAL |
+| fuji-raf-2d640fe8493f5a2d | Fujifilm | X30 | 1 | 2015-10-04T04:14:32.0000000+00:00 | PARTIAL |
+| fuji-raf-fc0cef097fb7019a | Fujifilm | X-Pro1 | 1 | 2014-09-08T02:15:45.0000000+00:00 | PARTIAL |
+| fuji-raf-a642f7415cf4aa94 | Fujifilm | XQ1 | 1 | 2015-07-25T00:59:13.0000000+00:00 | PARTIAL |
+| fuji-raf-4d0b3150a3dc80d3 | Fujifilm | XQ2 | 1 | 2015-01-04T01:23:30.0000000+00:00 | PARTIAL |
+| fuji-raf-3803f0fa98fdc452 | Fujifilm | S2Pro | 1 | 2004-03-06T08:28:37.0000000+00:00 | PARTIAL |
+| fuji-raf-e19c88a74226f22a | Fujifilm | S3Pro | 1 | 2007-06-03T10:28:41.0000000+00:00 | PARTIAL |
+| fuji-raf-a069dd0244039f1f | Fujifilm | S5000 | 1 | 2008-06-21T19:48:05.0000000+00:00 | PARTIAL |
+| fuji-raf-8d24ac05af61c8af | Fujifilm | S5600 | 1 | 2007-04-22T02:47:03.0000000+00:00 | PARTIAL |
+| fuji-raf-e75dabee0093a99b | Fujifilm | S5Pro | 1 | 2007-05-27T05:55:17.0000000+00:00 | PARTIAL |
+| fuji-raf-b3612251b71676cc | Fujifilm | S6500fd | 1 | 2007-06-11T11:56:35.0000000+00:00 | PARTIAL |
+| fuji-raf-6deb020e391edf73 | Fujifilm | S9500 | 1 | 2006-12-31T03:42:35.0000000+00:00 | PARTIAL |
+| hasselblad-3fr-f7c0f941bd542ec6 | Hasselblad | CFV-16 | 6 | 2007-06-03T04:22:55.0000000+00:00 | PARTIAL |
+| hasselblad-3fr-c3e148896399a4cb | Hasselblad | H3DII-39 | 1 | 2007-11-07T05:43:13.0000000+00:00 | PARTIAL |
+| hasselblad-3fr-f859bc7f68692a93 | Hasselblad | CF-22 | 6 | 2013-05-29T11:53:16.0000000+00:00 | PARTIAL |
+| kodak-kdc-021bfd67147207de | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-kdc-83d6888375aad486 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-kdc-37e290dbd0053f00 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-dcr-fe4d749779c981c4 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-kdc-f4d7ca5921753624 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-raw-89803afa81c763ba | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-raw-d3c945dff5f0f20f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-raw-2559fe48b49fedb0 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| kodak-kdc-e169de008dd708e9 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leaf-mos-f92bd9eef32e6665 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leaf-mos-d6bee434c5f85f84 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leica-raw-73d792eaf9df9c6f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leica-raw-5d622b0480037c32 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leica-dng-081bc2378ad24e36 | Leica | M8 | 1 | 2007-08-02T14:13:49.0000000+00:00 | PARTIAL |
+| leica-dng-c4c4617dc7035b9d | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| leica-raw-6ec19030c8d86584 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| mamiya-mef-bcd63507c3c4cc3e | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-0b09b8e800af101a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-a544712a3dacb1c5 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-2919a05757197a54 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-689db1544408760b | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-bde1e2cd788e49c9 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-6e4b6ba51f67324c | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-4c5d4274bebb548f | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-2a95f6af2168e536 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mrw-bdb7c245062a40bf | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| minolta-mdc-b8ccf94644cb1996 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| nikon-nef-013b73e9dfcd6c07 | Nikon | D100 | 1 | 2007-09-22T02:36:36.0000000+00:00 | PARTIAL |
+| nikon-nef-9c60cfeb40aa6132 | Nikon | D1X | 1 | 2006-12-31T02:32:29.0000000+00:00 | PARTIAL |
+| nikon-nef-7886d8b0e1257897 | Nikon | D1 | 1 | 2000-11-19T05:01:50.0000000+00:00 | PARTIAL |
+| nikon-nef-ec815a846017413b | Nikon | D200 | 1 | 2007-04-01T11:31:17.0000000+00:00 | PARTIAL |
+| nikon-nef-0b56421e38150914 | Nikon | D2X | 1 | 2005-05-13T15:26:25.0000000+00:00 | PARTIAL |
+| nikon-nef-119728b0d1aa1d15 | Nikon | D300 | 1 | 2007-09-22T04:02:39.0000000+00:00 | PARTIAL |
+| nikon-nef-f52cf0aa29e65218 | Nikon | D3X | 8 | 2008-12-01T06:52:13.0000000+00:00 | PARTIAL |
+| nikon-nef-3cf36d631d55540c | Nikon | D3 | 1 | 2008-01-24T06:00:59.0000000+00:00 | PARTIAL |
+| nikon-nef-7ad000210f00246a | Nikon | D40 | 1 | 2007-04-01T09:02:53.0000000+00:00 | PARTIAL |
+| nikon-nef-5f46deac60a47dc4 | Nikon | D50 | 1 | 2007-07-15T03:48:21.0000000+00:00 | PARTIAL |
+| nikon-nef-e475c416621f774d | Nikon | D60 | 1 | 2008-03-26T03:46:09.0000000+00:00 | PARTIAL |
+| nikon-nef-b5820cbc60863f49 | Nikon | D700 | 8 | 2008-10-25T06:41:48.0000000+00:00 | PARTIAL |
+| nikon-nef-18e287009b15b20f | Nikon | D70 | 8 | 2004-06-26T06:16:26.0000000+00:00 | PARTIAL |
+| nikon-nef-276223fb4af702ff | Nikon | D80 | 8 | 2007-02-06T07:09:00.0000000+00:00 | PARTIAL |
+| nikon-nef-56fab62c37d10905 | Nikon | D90 | 1 | 2009-02-10T11:47:07.0000000+00:00 | PARTIAL |
+| nikon-nef-0bc1b12855d1f15a | Nikon | E5400 | 1 | 2007-07-04T11:02:37.0000000+00:00 | PARTIAL |
+| nikon-nef-232a78df1610ca39 | Nikon | E5700 | 1 | 2004-10-26T04:36:00.0000000+00:00 | PARTIAL |
+| nikon-nrw-652d96bf6fc6979a | Nikon | COOLPIX P6000 | 1 | 2008-12-14T05:55:22.0000000+00:00 | PARTIAL |
+| nikon-nef-1258c3a789d55ffd | Nikon | 1 V1 | 1 | 2015-06-26T08:12:36.0000000+00:00 | PARTIAL |
+| nikon-nef-c9a3eac53afb6ff3 | Nikon | 1 S2 | 6 | 2015-01-03T01:27:59.0000000+00:00 | PARTIAL |
+| nikon-nrw-ee99efe160b5a20a | Nikon | COOLPIX P340 | 1 | 2014-05-26T06:36:54.0000000+00:00 | PARTIAL |
+| nikon-nrw-3cbb4ac4be80226c | Nikon | COOLPIX P7100 | 1 | 2010-12-31T16:51:56.0000000+00:00 | PARTIAL |
+| nikon-nef-b3f4e4fbeadded7c | Nikon | D300S | 1 | 2009-12-16T13:07:45.0000000+00:00 | PARTIAL |
+| nikon-nef-4963736386e135b7 | Nikon | D3100 | 1 | 2014-07-28T12:40:46.0000000+00:00 | PARTIAL |
+| nikon-nef-8fd21aa3ce6c4137 | Nikon | D3200 | 1 | 2013-09-04T05:11:48.0000000+00:00 | PARTIAL |
+| nikon-nef-7fd8c3506ac131ad | Nikon | D3300 | 1 | 2014-12-31T02:56:32.0000000+00:00 | PARTIAL |
+| nikon-nef-ea9ef84155a99f79 | Nikon | D4S | 1 | 2015-11-18T01:45:16.0000000+00:00 | PARTIAL |
+| nikon-nef-49e8883d09a2d42d | Nikon | D5000 | 1 | 2009-05-23T05:32:40.0000000+00:00 | PARTIAL |
+| nikon-nef-abe9f7783bdf77a3 | Nikon | D5100 | 1 | 2012-05-04T08:27:29.0000000+00:00 | PARTIAL |
+| nikon-nef-a2a37522fb8cf92d | Nikon | D5200 | 1 | 2013-11-27T01:21:07.0000000+00:00 | PARTIAL |
+| nikon-nef-cd4b893af1b3abc4 | Nikon | D5300 | 1 | 2014-04-02T03:39:52.0000000+00:00 | PARTIAL |
+| nikon-nef-cf51da24fb6dabf5 | Nikon | D5500 | 1 | 2015-09-15T04:51:47.0000000+00:00 | PARTIAL |
+| nikon-nef-5ef1fc9fd0098855 | Nikon | D600 | 1 | 2015-08-08T21:22:17.0000000+00:00 | PARTIAL |
+| nikon-nef-288936ce8f7ad4a9 | Nikon | D610 | 1 | 2014-04-01T08:33:29.0000000+00:00 | PARTIAL |
+| nikon-nef-3380be65d45dc664 | Nikon | D7000 | 1 | 2011-06-22T00:52:10.0000000+00:00 | PARTIAL |
+| nikon-nef-8b90a35bc7aad103 | Nikon | D70s | 1 | 2010-07-19T04:41:48.0000000+00:00 | PARTIAL |
+| nikon-nef-b0c11c43f199d8de | Nikon | D7100 | 1 | 2013-09-03T01:45:16.0000000+00:00 | PARTIAL |
+| nikon-nef-b9edf1d77e748653 | Nikon | D7200 | 1 | 2015-03-23T00:01:46.0000000+00:00 | PARTIAL |
+| nikon-nef-3de7203023000985 | Nikon | D750 | 1 | 2015-06-02T01:56:01.0000000+00:00 | PARTIAL |
+| nikon-nef-3a0c1672abda62cc | Nikon | D800 | 1 | 2014-08-15T02:31:54.0000000+00:00 | PARTIAL |
+| nikon-nef-81ea8a46b6d5e8f9 | Nikon | D800 | 1 | 2014-08-15T02:32:27.0000000+00:00 | PARTIAL |
+| nikon-nef-d7df224b3535427a | Nikon | D800 | 1 | 2014-08-15T02:31:13.0000000+00:00 | PARTIAL |
+| nikon-nef-a5b767a1258b09ea | Nikon | D800 | 1 | 2014-08-15T02:35:34.0000000+00:00 | PARTIAL |
+| nikon-nef-66e5dcd6678ec2ae | Nikon | D800 | 1 | 2014-08-15T02:38:04.0000000+00:00 | PARTIAL |
+| nikon-nef-9f8ffeae3db182b0 | Nikon | D800 | 1 | 2014-08-15T02:37:47.0000000+00:00 | PARTIAL |
+| nikon-nef-593e1b0ee73ef7e6 | Nikon | D800 | 1 | 2014-08-15T02:24:26.0000000+00:00 | PARTIAL |
+| nikon-nef-b42bad3a95380591 | Nikon | D800 | 1 | 2014-08-15T02:27:35.0000000+00:00 | PARTIAL |
+| nikon-nef-facc58382573ddad | Nikon | D800 | 1 | 2014-08-15T02:27:14.0000000+00:00 | PARTIAL |
+| nikon-nef-060098b8bae6e6c3 | Nikon | Df | 1 | 2015-11-19T10:07:01.0000000+00:00 | PARTIAL |
+| nikon-nef-fe523125ce03e28a | Nikon | D5200 | 1 | 2013-06-19T12:31:15.0000000+00:00 | PARTIAL |
+| nikon-nrw-09165ec1031b36e6 | Nikon | COOLPIX P7000 | 1 | 2014-08-08T13:56:44.0000000+00:00 | PARTIAL |
+| olympus-orf-f4b013e78204ebaa | Olympus | C5050Z | 8 | 2005-05-29T03:50:06.0000000+00:00 | PARTIAL |
+| olympus-orf-d7bbb0740fd55a6c | Olympus | C8080WZ | 1 | 2007-06-06T03:53:09.0000000+00:00 | PARTIAL |
+| olympus-orf-e07d4a7f2cefe6be | Olympus | E-1 | 1 | 2006-11-24T12:50:51.0000000+00:00 | PARTIAL |
+| olympus-orf-888e84a03f4174be | Olympus | E-20,E-20N,E-20P | 1 | 2005-01-06T10:21:08.0000000+00:00 | PARTIAL |
+| olympus-orf-38ce618311387cd0 | Olympus | E-300 | 1 | 2006-08-06T06:45:09.0000000+00:00 | PARTIAL |
+| olympus-orf-1b6b7bc8ed608359 | Olympus | E-3 | 1 | 2008-12-19T04:29:40.0000000+00:00 | PARTIAL |
+| olympus-orf-eddec17828e47938 | Olympus | E-410 | 1 | 2008-01-13T04:56:22.0000000+00:00 | PARTIAL |
+| olympus-orf-87cfedd49e0115cf | Olympus | E-500 | 1 | 2007-06-07T05:46:05.0000000+00:00 | PARTIAL |
+| olympus-orf-93ba141f0ad3c18f | Olympus | E-510 | 1 | 2009-01-08T07:24:53.0000000+00:00 | PARTIAL |
+| olympus-orf-1c657d52775c2b5e | Olympus | C5060WZ | 1 | 2009-05-20T19:26:18.0000000+00:00 | PARTIAL |
+| olympus-orf-0c7f93f694532699 | Olympus | E-330 | 1 | 2015-02-18T04:51:02.0000000+00:00 | PARTIAL |
+| olympus-orf-d3773651808a516d | Olympus | E-450 | 1 | 2015-01-24T08:21:02.0000000+00:00 | PARTIAL |
+| olympus-orf-dbd4ff013554a3b7 | Olympus | E-M10 | 1 | 2015-07-23T06:16:32.0000000+00:00 | PARTIAL |
+| olympus-orf-af9f70149eac2411 | Olympus | E-M10MarkII | 1 | 2015-10-06T02:08:45.0000000+00:00 | PARTIAL |
+| olympus-orf-02228ce8179c9593 | Olympus | E-M5MarkII | 1 | 2015-08-18T08:13:44.0000000+00:00 | PARTIAL |
+| olympus-orf-111d1b6a19120177 | Olympus | E-PL6 | 1 | 2015-03-10T07:01:40.0000000+00:00 | PARTIAL |
+| olympus-orf-f0379c73032e7674 | Olympus | E-PL7 | 1 | 2015-04-12T02:44:35.0000000+00:00 | PARTIAL |
+| olympus-orf-2e708ca35068faab | Olympus | E-PM1 | 1 | 2013-12-26T09:52:03.0000000+00:00 | PARTIAL |
+| olympus-orf-08f1bac42d04b983 | Olympus | E-30 | 8 | 2008-12-20T08:35:34.0000000+00:00 | PARTIAL |
+| olympus-orf-a60d52b7ec091b2b | Olympus | E-420 | 1 | 2010-05-16T04:08:41.0000000+00:00 | PARTIAL |
+| olympus-orf-78170c91bac60c3a | Olympus | E-5 | 1 | 2011-05-08T02:33:28.0000000+00:00 | PARTIAL |
+| olympus-orf-b86244e49fd73335 | Olympus | E-520 | 1 | 2009-02-21T03:20:00.0000000+00:00 | PARTIAL |
+| olympus-orf-dce748356047091c | Olympus | E-600 | 1 | 2010-04-18T09:43:07.0000000+00:00 | PARTIAL |
+| olympus-orf-f3713e392da00a66 | Olympus | E-M1 | 1 | 2014-07-29T03:58:59.0000000+00:00 | PARTIAL |
+| olympus-orf-44dd85802388526b | Olympus | E-M5 | 1 | 2013-07-26T02:58:16.0000000+00:00 | PARTIAL |
+| olympus-orf-071d37cf5751182e | Olympus | E-P1 | 1 | 2009-09-09T09:08:26.0000000+00:00 | PARTIAL |
+| olympus-orf-a0149caa93ea1dbd | Olympus | E-P2 | 1 | 2010-09-06T07:02:05.0000000+00:00 | PARTIAL |
+| olympus-orf-540edabdd9d4e6ef | Olympus | E-P3 | 1 | 2013-09-18T01:26:26.0000000+00:00 | PARTIAL |
+| olympus-orf-abe4a3908e0a4714 | Olympus | E-PL1 | 1 | 2010-12-09T06:40:52.0000000+00:00 | PARTIAL |
+| olympus-orf-2c20d2c3937c552e | Olympus | E-PL3 | 1 | 2014-11-02T03:53:17.0000000+00:00 | PARTIAL |
+| olympus-orf-010373569d6d0969 | Olympus | E-PL5 | 1 | 2014-01-07T08:22:45.0000000+00:00 | PARTIAL |
+| olympus-orf-8ec957575ce1f087 | Olympus | TG-4 | 1 | 2015-07-29T04:11:10.0000000+00:00 | PARTIAL |
+| olympus-orf-8511b2c5b6fc1f34 | Olympus | XZ-2 | 1 | 2015-02-10T06:06:17.0000000+00:00 | PARTIAL |
+| olympus-orf-d3a90788ca8137d7 | Olympus | XZ-1 | 1 | 2014-12-28T07:50:57.0000000+00:00 | PARTIAL |
+| olympus-orf-37dca153cbb42e52 | Olympus | SP350 | 1 | 2008-01-05T03:32:18.0000000+00:00 | PARTIAL |
+| olympus-orf-076d1a979bba1cfb | Olympus | SP500UZ | 1 | 2007-10-14T07:02:51.0000000+00:00 | PARTIAL |
+| panasonic-raw-46309063503689a9 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-rw2-9ecd3c98c5aaa12f | Panasonic | DMC-FZ28 | 1 | 2013-08-31T13:56:24.0000000+00:00 | PARTIAL |
+| panasonic-raw-b4efb9ee0398b968 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-raw-71c4b5e49a4bdf90 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-raw-1f32f1bbbb32e08b | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-rw2-aa3b92d6592744a8 | Panasonic | DMC-G1 | 1 | 2008-12-10T07:06:33.0000000+00:00 | PARTIAL |
+| panasonic-raw-c7c4ed9dd5d2d9d5 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-raw-ef7cabf0e23e4adb | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-raw-12ea3b97c87375f2 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| panasonic-rw2-53feae9e055d8387 | Panasonic | DMC-LX3 | 1 | 2009-01-01T07:45:11.0000000+00:00 | PARTIAL |
+| panasonic-rw2-dc6dc92ee0e21465 | Panasonic | DMC-G3 | 1 | 2014-10-27T09:58:04.0000000+00:00 | PARTIAL |
+| panasonic-rw2-cedd2564dd059479 | Panasonic | DMC-GF1 | 1 | 2010-04-29T03:38:25.0000000+00:00 | PARTIAL |
+| panasonic-rw2-852bb3d03c11e9e4 | Panasonic | DMC-GH4 | 1 | 2014-07-23T04:56:02.0000000+00:00 | PARTIAL |
+| panasonic-rw2-69aca1a1946753a8 | Panasonic | DMC-LX5 | 1 | 2010-12-31T04:46:00.0000000+00:00 | PARTIAL |
+| panasonic-rw2-f270650ada53fd87 | Panasonic | DMC-TZ70 | 1 | 2015-08-11T05:43:42.0000000+00:00 | PARTIAL |
+| panasonic-rw2-819f5c7b3d5165db | Panasonic | DMC-FZ1000 | 1 | 2014-12-21T07:30:24.0000000+00:00 | PARTIAL |
+| panasonic-rw2-11bf5e3704eaa894 | Panasonic | DMC-FZ150 | 8 | 2012-08-26T05:49:41.0000000+00:00 | PARTIAL |
+| panasonic-rw2-536aaa0047527a5e | Panasonic | DMC-FZ38 | 1 | 2013-06-16T03:28:46.0000000+00:00 | PARTIAL |
+| panasonic-rw2-2d1b2699db153e2f | Panasonic | DMC-FZ70 | 1 | 2015-07-16T00:58:44.0000000+00:00 | PARTIAL |
+| panasonic-rw2-a485cafb03ac56ed | Panasonic | DMC-FZ72 | 1 | 2015-04-04T09:05:48.0000000+00:00 | PARTIAL |
+| panasonic-rw2-1b6e76addace2ce1 | Panasonic | DMC-LF1 | 1 | 2015-02-17T15:13:14.0000000+00:00 | PARTIAL |
+| panasonic-rw2-821e5440da1cc24a | Panasonic | DMC-LX3 | 1 | 2009-01-01T07:45:11.0000000+00:00 | PARTIAL |
+| panasonic-rw2-58f5a3464044da84 | Panasonic | DMC-LX7 | 1 | 2014-10-03T10:11:51.0000000+00:00 | PARTIAL |
+| panasonic-rw2-98389e172cc5d782 | Panasonic | DMC-TZ60 | 1 | 2015-01-23T03:04:01.0000000+00:00 | PARTIAL |
+| panasonic-rw2-8c0406cf4078b9a0 | Panasonic | DMC-GX1 | 1 | 2013-03-03T06:00:51.0000000+00:00 | PARTIAL |
+| panasonic-rw2-cede7859807653eb | Panasonic | DMC-GH2 | 1 | 2012-05-02T10:19:39.0000000+00:00 | PARTIAL |
+| panasonic-rw2-b2ac62842617e2a1 | Panasonic | DMC-LX7 | 1 | 2014-06-24T11:56:47.0000000+00:00 | PARTIAL |
+| panasonic-raw-8090d5889881a5fc | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| pentax-pef-4aca9b86e2c14c94 | Pentax | K100D Super | 1 | 2007-12-19T05:10:43.0000000+00:00 | PARTIAL |
+| pentax-dng-fe4416a68f702b0c | Pentax | K10D | 1 | 2007-02-03T01:47:06.0000000+00:00 | PARTIAL |
+| pentax-pef-54977e4079c349e3 | Pentax | K10D | 1 | 2006-12-27T02:59:50.0000000+00:00 | PARTIAL |
+| pentax-pef-956c43997b2a33df | Pentax | K200D | 8 | 2008-08-02T08:46:42.0000000+00:00 | PARTIAL |
+| pentax-pef-76c12ada9ab29f82 | Pentax | K20D | 1 | 2008-05-08T12:14:50.0000000+00:00 | PARTIAL |
+| pentax-raw-1dd0b5c28574589d | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| pentax-pef-249bc4261214a0f4 | Pentax | K-3 II | 1 | 2015-06-03T10:25:27.0000000+00:00 | PARTIAL |
+| pentax-pef-e5a0458ecb10abef | Pentax | K-7 | 1 | 2015-05-17T07:37:10.0000000+00:00 | PARTIAL |
+| pentax-pef-a73eff4e48795bf2 | Pentax | K-m | 1 | 2009-03-14T05:09:43.0000000+00:00 | PARTIAL |
+| pentax-dng-873690e35f7809e8 | Pentax | K-r | 1 | 2015-02-07T05:59:12.0000000+00:00 | PARTIAL |
+| pentax-pef-aeb7b1e83ead65cd | Pentax | K-S1 | 8 | 2015-09-29T02:22:10.0000000+00:00 | PARTIAL |
+| pentax-pef-89faf5ee8acb58ae | Pentax | K100D | 1 | 2009-12-05T05:26:11.0000000+00:00 | PARTIAL |
+| pentax-pef-d41f70af10c0b9dc | Pentax | K-3 | 1 | 2016-01-02T06:21:35.0000000+00:00 | PARTIAL |
+| pentax-dng-0074b1ec6165f703 | Pentax | K-30 | 1 | 2012-07-31T00:56:59.0000000+00:00 | PARTIAL |
+| pentax-pef-299285e3be61c3f9 | Pentax | K-5 | 1 | 2010-11-12T13:22:31.0000000+00:00 | PARTIAL |
+| pentax-dng-d5144bf42624f158 | Pentax | K-50 | 1 | 2014-07-25T08:46:44.0000000+00:00 | PARTIAL |
+| pentax-pef-04a738904a642abe | Pentax | K-5 II s | 6 | 2014-08-02T10:47:33.0000000+00:00 | PARTIAL |
+| pentax-pef-679d89517997a5a9 | Pentax | K-x | 1 | 2010-11-12T13:28:26.0000000+00:00 | PARTIAL |
+| pentax-pef-cd63b472d272fb3d | Pentax | *ist DL2 | 1 | 2009-06-11T03:11:51.0000000+00:00 | PARTIAL |
+| pentax-pef-407d46c1551ce4da | Pentax | *ist DS | 1 | 2005-07-30T04:22:24.0000000+00:00 | PARTIAL |
+| pentax-pef-7a1fb767d46bd7b6 | Pentax | *ist DL | 1 | 2006-10-02T10:47:35.0000000+00:00 | PARTIAL |
+| pentax-pef-2593204dafd91937 | Pentax | *ist D | 1 | 2006-08-02T08:14:23.0000000+00:00 | PARTIAL |
+| phones-dng-0a5bc55096c0d4b4 | Nokia | Lumia 1020 | 1 | 2015-07-24T09:43:11.0000000+00:00 | PARTIAL |
+| phones-dng-2c5ff77dab3db88f | OnePlus | One A0001 | 6 | 2015-08-18T11:50:44.0000000+00:00 | PARTIAL |
+| polaroid-x3f-151b4411058b768a | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| ricoh-dng-43d6b45c9e05c0d5 | Ricoh | GR DIGITAL 2 | 1 | 2007-11-25T06:25:25.0000000+00:00 | PARTIAL |
+| ricoh-dng-378498b4363cbdec | Ricoh | GR | 1 | 2015-03-14T12:09:43.0000000+00:00 | PARTIAL |
+| samsung-srw-b26c7d5c88e59b6f | Samsung | WB2000 | 1 | 2011-03-03T10:54:55.0000000+00:00 | PARTIAL |
+| samsung-srw-04a3a1063b968256 | Samsung | EX2F | 1 | 2014-08-21T14:00:02.0000000+00:00 | PARTIAL |
+| samsung-dng-8e17abb17babfacc | Samsung | GX20 | 8 | 2012-10-02T09:46:17.0000000+00:00 | PARTIAL |
+| samsung-srw-3149a901d154cc37 | Samsung | NX100 | 1 | 2012-05-17T07:02:01.0000000+00:00 | PARTIAL |
+| samsung-srw-b4208c33befd1782 | Samsung | NX300 | 6 | 2015-07-26T03:26:30.0000000+00:00 | PARTIAL |
+| samsung-srw-48223789de821ed9 | Samsung | NX300M | 1 | 2015-05-19T12:34:19.0000000+00:00 | PARTIAL |
+| samsung-srw-c67460e043420bd3 | Samsung | NX500 | 1 | 2015-05-03T08:43:18.0000000+00:00 | PARTIAL |
+| samsung-srw-32839e110591a454 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-b7b326de857806c6 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-dc667efc0c931412 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-9dfb36a2a770a9f2 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-1bade5d74d697ea1 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-ea436ba459a7478d | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-5b9512853384ceea | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sigma-x3f-9faed9efe3bb53f3 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sony-arw-40ac6d96421f62b3 | Sony | DSLR-A100 | 1 | 2007-04-08T09:41:18.0000000+00:00 | PARTIAL |
+| sony-arw-8c70c020d0fdec94 | Sony | DSLR-A200 | 6 | 2008-03-11T15:17:21.0000000+00:00 | PARTIAL |
+| sony-arw-daaa25127006b117 | Sony | DSLR-A300 | 1 | 2008-08-10T15:16:11.0000000+00:00 | PARTIAL |
+| sony-arw-30f443f9f127877f | Sony | DSLR-A350 | 1 | 2007-12-31T17:31:06.0000000+00:00 | PARTIAL |
+| sony-arw-af64d1d52b3cc4f5 | Sony | DSLR-A700 | 1 | 2008-01-01T07:29:46.0000000+00:00 | PARTIAL |
+| sony-arw-0908bcf3532709b6 | Sony | DSLR-A900 | 1 | 2008-12-22T08:37:58.0000000+00:00 | PARTIAL |
+| sony-sr2-529cdcbe90a067e4 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sony-arw-e5737fc8debb5dde | Sony | DSLR-A330 | 1 | 2009-11-13T05:33:25.0000000+00:00 | PARTIAL |
+| sony-arw-5f1f9b5b7899d983 | Sony | DSLR-A550 | 1 | 2010-07-06T13:45:36.0000000+00:00 | PARTIAL |
+| sony-arw-5b0924d39151239d | Sony | DSLR-A580 | 1 | 2014-07-20T02:49:27.0000000+00:00 | PARTIAL |
+| sony-arw-b33cba6cd1315891 | Sony | DSLR-A850 | 1 | 2010-06-09T12:18:14.0000000+00:00 | PARTIAL |
+| sony-srf-9f7a71381f540507 | UNKNOWN | UNKNOWN | 0 | UNKNOWN | PARTIAL |
+| sony-arw-6c487794bd238246 | Sony | DSC-RX100M2 | 6 | 2014-10-04T08:15:36.0000000+00:00 | PARTIAL |
+| sony-arw-0cbd81eeb9a45d42 | Sony | ILCE-6000 | 1 | 2015-04-05T02:20:47.0000000+00:00 | PARTIAL |
+| sony-arw-0c1521bf9798abef | Sony | ILCA-77M2 | 1 | 2014-10-28T08:32:41.0000000+00:00 | PARTIAL |
+| sony-arw-45417f17a78d85c6 | Sony | ILCE-7M2 | 1 | 2015-08-15T08:11:57.0000000+00:00 | PARTIAL |
+| sony-arw-6347bc46ffb1c05b | Sony | ILCE-7RM2 | 1 | 2015-09-07T09:43:08.0000000+00:00 | PARTIAL |
+| sony-arw-2cafaca4c03567a8 | Sony | NEX-5R | 1 | 2013-07-01T10:34:12.0000000+00:00 | PARTIAL |
+| sony-arw-6f5dee8e4dcf1b43 | Sony | NEX-6 | 1 | 2015-09-26T03:56:05.0000000+00:00 | PARTIAL |
+| sony-arw-eeaaa6f8c246021c | Sony | NEX-3 | 1 | 2011-09-06T09:29:03.0000000+00:00 | PARTIAL |
+| sony-arw-029309d4b60bafa1 | Sony | NEX-3N | 8 | 2016-01-09T06:25:50.0000000+00:00 | PARTIAL |
+| sony-arw-520543bb362a03b9 | Sony | NEX-7 | 1 | 2012-10-21T06:55:41.0000000+00:00 | PARTIAL |
+| sony-arw-fc161003bbe4baf0 | Sony | DSC-RX10 | 1 | 2015-12-20T06:36:22.0000000+00:00 | PARTIAL |
+| sony-arw-df9010ae163f4009 | Sony | DSC-RX100 | 1 | 2013-12-13T02:15:46.0000000+00:00 | PARTIAL |
+| sony-arw-ee5da0eb567e5f2e | Sony | DSC-RX100M3 | 1 | 2014-10-26T03:06:39.0000000+00:00 | PARTIAL |
+| sony-arw-65cc4c4c0271e14e | Sony | DSC-RX100M4 | 1 | 2015-10-14T08:02:33.0000000+00:00 | PARTIAL |
+| sony-arw-a82f287e78d85739 | Sony | DSC-RX10M2 | 1 | 2015-10-26T08:58:39.0000000+00:00 | PARTIAL |
+| sony-arw-ebd5eef5aa96217e | Sony | SLT-A35 | 1 | 2013-06-28T02:36:55.0000000+00:00 | PARTIAL |
+| sony-arw-f2a878932d0575d6 | Sony | SLT-A58 | 1 | 2015-08-13T03:24:28.0000000+00:00 | PARTIAL |
+| sony-arw-3ead95d4c081691c | Sony | SLT-A77 | 1 | 2013-03-25T05:06:04.0000000+00:00 | PARTIAL |
+| sony-arw-ae36c6127ed2d816 | Sony | SLT-A99 | 3 | 2014-11-12T07:58:24.0000000+00:00 | PARTIAL |
+| sony-arw-5ad6fc710f77e5db | Sony | SLT-A55 | 1 | 2011-01-28T10:42:41.0000000+00:00 | PARTIAL |
+| sony-arw-c2cf7826d61a1082 | Sony | SLT-A65 | 1 | 2012-01-04T10:54:48.0000000+00:00 | PARTIAL |
+
+Lens, ISO, shutter, aperture, focal length, CFA, black/white level, WB and camera matrix are `UNKNOWN` unless the current decoder exposes them; this runner never guesses from filenames. RAW to TIFF16 preservation: dimensions are transformed into output dimensions; orientation is requested on write but not independently asserted per fixture; make/model/capture time/lens/exposure are DROPPED; absent source fields are UNAVAILABLE.
