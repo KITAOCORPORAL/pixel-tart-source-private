@@ -1,11 +1,11 @@
 {
   "repository": "KITAOCORPORAL/pixel-tart-source-private",
   "branch": "integration/pixel-tart-developer-preview",
-  "productSha": "d00df6ab75437e05cd0f696db8d53975a65275ed",
+  "productSha": "9fe6846d90b3e05af72fe854bf0620ba3aaf32a4",
   "handoffContentSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
   "cleanCloneVerifiedSha": "24f1cd72e4e012751982d8a75203fe4d2d91079f",
   "createdAtUtc": "2026-09-24T06:32:29.9022153Z",
-  "verifiedAtUtc": "2026-09-24T06:40:22.4207123Z",
+  "verifiedAtUtc": "2026-09-28T13:30:00Z",
   "dotnetSdkMinimum": "10.0.302",
   "dotnetSdkRollForward": "latestFeature",
   "dotnetSdkVerified": "10.0.401",
@@ -16,9 +16,9 @@
   "handoffDocument": "docs/PIXEL_TART_HOME_DEV_HANDOFF.md",
   "resumePrompt": "docs/CODEX_RESUME_PROMPT.md",
   "cleanCloneVerification": "PASS",
-  "currentProductPhase": "Color Studio Phase 1 BLOCKED pending a clean synchronized native visual drag run; validated capture pipeline reached 100/100 stable frames but first 18-case drag run has observer/order mismatches; Phase 2 PARTIAL CORE: bounded OKLab proxy, cache, camera state, and sample/cluster linking complete; WPF visualization pending",
+  "currentProductPhase": "Color Studio Phase 1 BLOCKED; Match V4 guarded beta on RTX 5060 Ti; external RAW corpus baseline PARTIAL; 3D Color Space PARTIAL CORE",
   "nativePointerRunner": "scripts/verify-color-studio-pointer.ps1",
   "nativePointerEvidence": "artifacts/color-studio-native-capture/native-capture-20260925-052506/COLOR_STUDIO_PHASE1_NATIVE_CAPTURE_MANIFEST.json",
   "nativePointerVerified": "Validated real Production WPF capture chain, 100/100 stable frames; drag visual run diagnostic with intermittent observer/order mismatches",
-  "nextProductTask": "Resolve synchronized native drag observer/order mismatches and obtain one clean 6-scenario × 3-repetition visual run; after Phase 1 closure integrate the existing Phase 2 core into a bounded WPF visualization"
+  "nextProductTask": "Investigate real RAW GPU parity PARTIAL rows and close P0 RAW compatibility gaps before Match V4 production integration"
 }

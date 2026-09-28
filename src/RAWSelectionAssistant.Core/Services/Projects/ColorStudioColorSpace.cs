@@ -36,6 +36,60 @@ public sealed record ColorSpaceCloud(
 
 public enum ColorSpaceMarkerKind { None, PositiveSample, NegativeSample, SelectedCluster }
 
+public enum ColorCloudMode { Source, Reference, Matched, Overlay, Migration }
+
+public enum ColorProtectionState { None, Neutral, Skin, Highlight, Shadow }
+
+public enum ColorSpaceSamplingTier { Preview, Standard, Dense }
+
+public enum ColorSliceAxis { Lightness, A, B }
+
+public readonly record struct ColorSlice(ColorSliceAxis Axis, double Position, double Thickness = .04)
+{
+    public bool Contains(OklabColor color)
+    {
+        if (!double.IsFinite(Position) || !double.IsFinite(Thickness) || Thickness < 0) return false;
+        var value = Axis switch { ColorSliceAxis.Lightness => color.L, ColorSliceAxis.A => color.A, _ => color.B };
+        return Math.Abs(value - Position) <= Thickness;
+    }
+}
+
+/// <summary>Photo-to-cloud identity used by eyedropper and future range interactions.</summary>
+public sealed record ColorSelection(
+    ColorSpaceSelection Selection,
+    int SourcePixelIndex,
+    OklabColor SampledColor,
+    IReadOnlyList<int> PointMembership)
+{
+    public static ColorSelection None => new(ColorSpaceSelection.None, -1, new OklabColor(0, 0, 0), []);
+}
+
+public readonly record struct ColorMigrationVector(
+    ColorSpacePoint Source,
+    ColorSpacePoint Matched,
+    OklabColor Delta,
+    double Distance,
+    double Weight,
+    ColorProtectionState Protection);
+
+public sealed record ColorSpaceVisualizationModel(
+    ColorSpaceCloud Source,
+    ColorSpaceCloud Reference,
+    ColorSpaceCloud Matched,
+    IReadOnlyList<ColorMigrationVector> MigrationVectors,
+    ColorCloudMode Mode,
+    ColorSpaceSamplingTier SamplingTier,
+    string TransformHash)
+{
+    public IReadOnlyList<ColorSpaceCloud> VisibleClouds => Mode switch
+    {
+        ColorCloudMode.Source => [Source],
+        ColorCloudMode.Reference => [Reference],
+        ColorCloudMode.Matched => [Matched],
+        _ => [Source, Reference, Matched]
+    };
+}
+
 public readonly record struct ColorSpaceSelection(ColorSpaceMarkerKind Kind, int PointIndex)
 {
     public static ColorSpaceSelection None => new(ColorSpaceMarkerKind.None, -1);
@@ -67,6 +121,33 @@ public static class ColorSpaceLinking
         return markers;
     }
 
+    public static ColorSelection FromPixel(ColorSpaceCloud cloud, int x, int y, VisualPixelBuffer source, double radius = .06)
+    {
+        ArgumentNullException.ThrowIfNull(cloud); ArgumentNullException.ThrowIfNull(source);
+        if (x < 0 || y < 0 || x >= source.Width || y >= source.Height) return ColorSelection.None;
+        var pixel = checked(y * source.Width + x);
+        var offset = checked(pixel * 3);
+        var color = new VisualRgb24(source.Rgb24.Span[offset], source.Rgb24.Span[offset + 1], source.Rgb24.Span[offset + 2]);
+        var lab = OklabColorSpace.FromSrgb(color);
+        var point = FindNearest(cloud, lab);
+        return new(new(ColorSpaceMarkerKind.SelectedCluster, point), pixel, lab, SelectCluster(cloud, point, radius));
+    }
+
+    public static IReadOnlyList<int> ToPixelMembership(ColorSpaceCloud cloud, VisualPixelBuffer source, int pointIndex, double radius = .06)
+    {
+        ArgumentNullException.ThrowIfNull(cloud); ArgumentNullException.ThrowIfNull(source);
+        if (pointIndex < 0 || pointIndex >= cloud.Points.Count) return [];
+        var center = cloud.Points[pointIndex].Lab;
+        var result = new List<int>();
+        for (var pixel = 0; pixel < source.PixelCount; pixel++)
+        {
+            var offset = pixel * 3;
+            var lab = OklabColorSpace.FromSrgb(new VisualRgb24(source.Rgb24.Span[offset], source.Rgb24.Span[offset + 1], source.Rgb24.Span[offset + 2]));
+            if (SquaredDistance(center, lab) <= radius * radius) result.Add(pixel);
+        }
+        return result;
+    }
+
     public static IReadOnlyList<int> SelectCluster(ColorSpaceCloud cloud, int pointIndex, double radius = .06)
     {
         ArgumentNullException.ThrowIfNull(cloud);
@@ -77,6 +158,63 @@ public static class ColorSpaceLinking
 
     private static double SquaredDistance(OklabColor left, OklabColor right) =>
         Math.Pow(left.L - right.L, 2) + Math.Pow(left.A - right.A, 2) + Math.Pow(left.B - right.B, 2);
+}
+
+public static class ColorSpaceSampling
+{
+    public static ColorSpaceProxySettings Settings(ColorSpaceSamplingTier tier) => tier switch
+    {
+        ColorSpaceSamplingTier.Preview => new(1024),
+        ColorSpaceSamplingTier.Dense => new(16_384),
+        _ => new(4096)
+    };
+}
+
+public static class ColorSpaceProtection
+{
+    public static ColorProtectionState Classify(OklabColor color, ReferenceMatchV4Settings settings)
+    {
+        if (color.Chroma <= .08 * Math.Max(.01, settings.NeutralProtection)) return ColorProtectionState.Neutral;
+        var hue = Math.Atan2(color.B, color.A) * 180 / Math.PI; if (hue < 0) hue += 360;
+        if (color.L is > .28 and < .9 && hue is > 25 and < 80 && color.Chroma is > .025 and < .22) return ColorProtectionState.Skin;
+        if (color.L >= .82) return ColorProtectionState.Highlight;
+        if (color.L <= .2) return ColorProtectionState.Shadow;
+        return ColorProtectionState.None;
+    }
+}
+
+/// <summary>Builds bounded visualization data from the same Core OKLab and V4 pixel semantics.</summary>
+public static class ColorSpaceVisualizationBuilder
+{
+    public static ColorSpaceVisualizationModel Build(
+        VisualPixelBuffer source, VisualPixelBuffer reference,
+        MatchV4ResolvedTransform transform,
+        ColorSpaceSamplingTier tier = ColorSpaceSamplingTier.Standard,
+        CancellationToken token = default)
+    {
+        ArgumentNullException.ThrowIfNull(source); ArgumentNullException.ThrowIfNull(reference);
+        ArgumentNullException.ThrowIfNull(transform);
+        transform = transform.Normalize();
+        var sourceCloud = ColorSpaceProxyBuilder.Build(source, ColorSpaceSampling.Settings(tier), token);
+        var referenceCloud = ColorSpaceProxyBuilder.Build(reference, ColorSpaceSampling.Settings(tier), token);
+        var values = new float[checked(source.PixelCount * 3)];
+        for (var i = 0; i < values.Length; i++) values[i] = source.Rgb24.Span[i] / 255f;
+        MatchV4PixelApplication.Apply(values, transform, token);
+        var matchedPixels = new byte[values.Length];
+        for (var i = 0; i < values.Length; i++) matchedPixels[i] = (byte)Math.Clamp(Math.Round(values[i] * 255), 0, 255);
+        var matchedCloud = ColorSpaceProxyBuilder.Build(new VisualPixelBuffer(source.Width, source.Height, matchedPixels), ColorSpaceSampling.Settings(tier), token);
+        var vectors = new List<ColorMigrationVector>(sourceCloud.Points.Count);
+        var settings = transform.Settings;
+        for (var i = 0; i < sourceCloud.Points.Count; i++)
+        {
+            token.ThrowIfCancellationRequested();
+            var original = sourceCloud.Points[i];
+            var matched = matchedCloud.Points[i];
+            var delta = new OklabColor(matched.Lab.L - original.Lab.L, matched.Lab.A - original.Lab.A, matched.Lab.B - original.Lab.B);
+            vectors.Add(new(original, matched, delta, Math.Sqrt(delta.L * delta.L + delta.A * delta.A + delta.B * delta.B), 1, ColorSpaceProtection.Classify(original.Lab, settings)));
+        }
+        return new(sourceCloud, referenceCloud, matchedCloud, vectors, ColorCloudMode.Overlay, tier, transform.TransformHash);
+    }
 }
 
 public readonly record struct ColorSpaceProxyCacheKey(
