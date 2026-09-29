@@ -6,9 +6,11 @@ namespace RAWSelectionAssistant.Core.Services.Publishing;
 
 public interface IPublishingTaskCoordinator : ITaskCompletionStateProvider
 {
+    event EventHandler<TaskProgressSnapshot>? SnapshotChanged;
     Task<Guid> StartAsync(PublishingExportRequest request, CancellationToken cancellationToken = default);
     Task WaitForCompletionAsync(Guid taskId, CancellationToken cancellationToken = default);
     Task CancelAsync(Guid taskId, CancellationToken cancellationToken = default);
+    TaskProgressSnapshot? TryGetSnapshot(Guid taskId);
 }
 
 public sealed class PublishingRequestStore
@@ -33,8 +35,25 @@ public sealed class PublishingTaskHandler(PublishingRequestStore requests, IPubl
     public Task OnTerminalStatePersistedAsync(Guid taskId, TaskLifecycleState terminalState, CancellationToken cancellationToken = default) { requests.Remove(taskId); return Task.CompletedTask; }
 }
 
-public sealed class PublishingTaskCoordinator(ITaskEngine engine, PublishingRequestStore requests) : IPublishingTaskCoordinator
+public sealed class PublishingTaskCoordinator : IPublishingTaskCoordinator
 {
+    private readonly ITaskEngine engine;
+    private readonly PublishingRequestStore requests;
+    public event EventHandler<TaskProgressSnapshot>? SnapshotChanged;
+    public PublishingTaskCoordinator(ITaskEngine engine, PublishingRequestStore requests)
+    {
+        this.engine = engine;
+        this.requests = requests;
+        engine.SnapshotChanged += Engine_SnapshotChanged;
+    }
+
+    private void Engine_SnapshotChanged(object? sender, TaskProgressSnapshot snapshot)
+    {
+        if (requests.TryGet(snapshot.TaskId, out _)) SnapshotChanged?.Invoke(this, snapshot);
+    }
+
+    public TaskProgressSnapshot? TryGetSnapshot(Guid taskId) => engine.Current.FirstOrDefault(item => item.TaskId == taskId);
+
     public async Task<Guid> StartAsync(PublishingExportRequest request, CancellationToken cancellationToken = default)
     {
         request.Validate(); var taskId = Guid.NewGuid(); requests.Register(taskId, request);

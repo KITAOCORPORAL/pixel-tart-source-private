@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Threading;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Publishing;
 using RAWSelectionAssistant.Core.Utilities;
@@ -45,7 +46,8 @@ public sealed record PublishingChoice<T>(T Value, string Name);
 public sealed class PublishingExportViewModel : ObservableObject
 {
     private readonly IPublishingTaskCoordinator _coordinator; private readonly IPublishingRenderer _renderer; private readonly IDialogService _dialogs;
-    private string _destinationDirectory = ""; private bool _dimensionsEnabled = true; private PublishingSizeMode _sizeMode = PublishingSizeMode.LongestEdge; private int _longestEdge = 2400; private int _exactWidth = 1920; private int _exactHeight = 1080; private int _jpegQuality = 88; private bool _preserveMetadata = true; private bool _watermarksEnabled = true; private string _suffix = PublishingDefaults.DefaultSuffix; private string _presetName = ""; private Guid? _activeProjectId; private int _previewIndex; private int _previewRevision; private CancellationTokenSource? _previewCancellation; private BitmapImage? _previewImage; private bool _isPreviewing; private bool _isBusy; private string _statusText = "添加成片，设置发布版本；源照片不会被覆盖。"; private string _executionStatus = ""; private double _executionProgress; private Guid? _activeTaskId; private PublishingPreset? _selectedPreset; private PublishingOutputFormat _outputFormat = PublishingOutputFormat.Jpeg; private ExportRecipe? _selectedRecipe; private string _recipeName = "";
+    private readonly SynchronizationContext? _uiContext = SynchronizationContext.Current;
+    private string _destinationDirectory = ""; private bool _dimensionsEnabled = true; private PublishingSizeMode _sizeMode = PublishingSizeMode.LongestEdge; private int _longestEdge = 2400; private int _exactWidth = 1920; private int _exactHeight = 1080; private int _jpegQuality = 88; private bool _preserveMetadata = true; private bool _watermarksEnabled = true; private string _suffix = PublishingDefaults.DefaultSuffix; private string _presetName = ""; private Guid? _activeProjectId; private int _previewIndex; private int _previewRevision; private CancellationTokenSource? _previewCancellation; private BitmapImage? _previewImage; private bool _isPreviewing; private bool _isBusy; private string _statusText = "添加成片，设置发布版本；源照片不会被覆盖。"; private string _executionStatus = ""; private double _executionProgress; private string _executionCurrentFile = ""; private int _executionCompleted; private int _executionFailed; private int _executionCancelled; private int _executionTotal; private Guid? _activeTaskId; private PublishingPreset? _selectedPreset; private PublishingOutputFormat _outputFormat = PublishingOutputFormat.Jpeg; private ExportRecipe? _selectedRecipe; private string _recipeName = "";
     public PublishingExportViewModel(IPublishingTaskCoordinator coordinator, IPublishingRenderer renderer, IDialogService dialogs)
     {
         _coordinator=coordinator;_renderer=renderer;_dialogs=dialogs;
@@ -60,6 +62,12 @@ public sealed class PublishingExportViewModel : ObservableObject
     public string DestinationDirectory { get=>_destinationDirectory; set{if(SetProperty(ref _destinationDirectory,value??""))RaiseCommands();} }
     public string ExecutionStatus { get => _executionStatus; private set => SetProperty(ref _executionStatus, value); }
     public double ExecutionProgress { get => _executionProgress; private set => SetProperty(ref _executionProgress, Math.Clamp(value, 0, 100)); }
+    public string ExecutionCurrentFile { get => _executionCurrentFile; private set => SetProperty(ref _executionCurrentFile, value); }
+    public int ExecutionCompleted { get => _executionCompleted; private set => SetProperty(ref _executionCompleted, value); }
+    public int ExecutionFailed { get => _executionFailed; private set => SetProperty(ref _executionFailed, value); }
+    public int ExecutionCancelled { get => _executionCancelled; private set => SetProperty(ref _executionCancelled, value); }
+    public int ExecutionTotal { get => _executionTotal; private set => SetProperty(ref _executionTotal, value); }
+    public string ExecutionCountsText => $"成功：{ExecutionCompleted} · 失败：{ExecutionFailed} · 取消：{ExecutionCancelled} · 共：{ExecutionTotal}";
     public bool IsExecutionActive => IsBusy && _activeTaskId.HasValue;
     public ICommand CancelCommand => _cancelCommand ??= new AsyncRelayCommand(_ => CancelAsync(), _ => IsExecutionActive);
     private ICommand? _cancelCommand;
@@ -141,8 +149,22 @@ public sealed class PublishingExportViewModel : ObservableObject
         OnPropertyChanged(nameof(SelectedRecipeSummary));
     }
     public string SelectedRecipeSummary => SelectedRecipes.Count == 0 ? "未选择导出 Recipe" : $"已选择 {SelectedRecipes.Count} 套 Recipe";
-    private async Task StartAsync(){if(!CanStart)return;IsBusy=true;ExecutionProgress=0;ExecutionStatus="准备发布…";try{IReadOnlyList<ExportRecipe>? recipes=SelectedRecipes.Count>0?SelectedRecipes.ToArray():SelectedRecipe is null?null:new[]{SelectedRecipe};var outputCount=SourceFiles.Count*(recipes?.Count??1);var id=await _coordinator.StartAsync(new(SourceFiles.ToArray(),DestinationDirectory,Options(),Recipes:recipes));_activeTaskId=id;OnPropertyChanged(nameof(IsExecutionActive));(CancelCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();StatusText=recipes is null?$"发布任务已进入任务中心（{SourceFiles.Count:N0} 张）。":$"发布任务已进入任务中心（{outputCount:N0} 个输出）。";ExecutionStatus="正在渲染与写入…";await _coordinator.WaitForCompletionAsync(id);var state=await _coordinator.GetTaskStateAsync(id);ExecutionProgress=state?.Progress??100;ExecutionStatus=state?.CurrentStep??"已完成";StatusText=state?.State==TaskLifecycleState.Completed?$"已生成 {outputCount:N0} 个发布版本。":$"发布任务未全部完成，请在任务中心查看原因。";}catch{ExecutionStatus="发布任务未完成";StatusText="发布任务提交失败，请检查输出目录。";}finally{_activeTaskId=null;IsBusy=false;OnPropertyChanged(nameof(IsExecutionActive));(CancelCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();}}
+    private async Task StartAsync(){if(!CanStart)return;IsBusy=true;ExecutionProgress=0;ExecutionCompleted=ExecutionFailed=ExecutionCancelled=0;ExecutionCurrentFile="";ExecutionStatus="准备发布…";try{IReadOnlyList<ExportRecipe>? recipes=SelectedRecipes.Count>0?SelectedRecipes.ToArray():SelectedRecipe is null?null:new[]{SelectedRecipe};var outputCount=SourceFiles.Count*(recipes?.Count??1);ExecutionTotal=outputCount;var id=await _coordinator.StartAsync(new(SourceFiles.ToArray(),DestinationDirectory,Options(),Recipes:recipes));_activeTaskId=id;_coordinator.SnapshotChanged+=Coordinator_SnapshotChanged;ApplySnapshot(_coordinator.TryGetSnapshot(id));OnPropertyChanged(nameof(IsExecutionActive));(CancelCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();StatusText=recipes is null?$"发布任务已进入任务中心（{SourceFiles.Count:N0} 张）。":$"发布任务已进入任务中心（{outputCount:N0} 个输出）。";ExecutionStatus="正在渲染与写入…";await _coordinator.WaitForCompletionAsync(id);var state=await _coordinator.GetTaskStateAsync(id);if(state is not null) ApplySnapshot(new TaskProgressSnapshot(id,state.Definition.ProjectId,state.Definition.DisplayName,state.State,state.Progress,state.CurrentStep,state.CurrentFile,state.ResultSummary,null,null,state.LastErrorCode,state.LastErrorMessage,state.LastUpdatedAt));StatusText=state?.State==TaskLifecycleState.Completed?$"已生成 {outputCount:N0} 个发布版本。":$"发布任务未全部完成，请在任务中心查看原因。";}catch{ExecutionStatus="发布任务未完成";StatusText="发布任务提交失败，请检查输出目录。";}finally{_coordinator.SnapshotChanged-=Coordinator_SnapshotChanged;_activeTaskId=null;IsBusy=false;OnPropertyChanged(nameof(IsExecutionActive));(CancelCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();}}
     private async Task CancelAsync(){if(_activeTaskId is not Guid taskId)return;ExecutionStatus="正在取消…";await _coordinator.CancelAsync(taskId);}
+    private void Coordinator_SnapshotChanged(object? sender, TaskProgressSnapshot snapshot)
+    {
+        if (_activeTaskId != snapshot.TaskId) return;
+        void Apply() => ApplySnapshot(snapshot);
+        if (_uiContext is { } context && SynchronizationContext.Current != context) context.Post(_ => Apply(), null); else Apply();
+    }
+
+    private void ApplySnapshot(TaskProgressSnapshot? snapshot)
+    {
+        if (snapshot is null || _activeTaskId != snapshot.TaskId) return;
+        ExecutionProgress = snapshot.Progress; ExecutionStatus = snapshot.State switch { TaskLifecycleState.Cancelling => "正在取消…", TaskLifecycleState.Completed => "已完成", TaskLifecycleState.Cancelled => "已取消", TaskLifecycleState.Failed => "发布失败", TaskLifecycleState.PartiallyCompleted => "部分完成", _ => snapshot.CurrentStep };
+        ExecutionCurrentFile = snapshot.CurrentFile ?? string.Empty; ExecutionCompleted = snapshot.Summary.Succeeded; ExecutionFailed = snapshot.Summary.Failed; ExecutionCancelled = snapshot.Summary.Cancelled; ExecutionTotal = snapshot.Summary.Total > 0 ? snapshot.Summary.Total : ExecutionTotal;
+        OnPropertyChanged(nameof(ExecutionCountsText));
+    }
     private PublishingPresetStore PresetStore()=>new(Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"Publishing","presets.json"));
     private ProjectPublishingDefaultStore ProjectPresetStore()=>new(Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"Publishing","project-defaults.json"));
     public async Task ActivateProjectAsync(Guid projectId)

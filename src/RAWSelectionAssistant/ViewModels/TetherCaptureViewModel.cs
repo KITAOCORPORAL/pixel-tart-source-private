@@ -98,6 +98,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private bool _comparisonSyncPan = true;
     private double _comparisonOpacity = .5;
     private bool _comparisonBlink;
+    private CompareSide _activeCompareSide = CompareSide.Primary;
     private bool _blinkVisible = true;
     private bool _referenceVisible;
     private double _referenceOpacity = .45;
@@ -368,6 +369,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public BitmapSource? CurrentImage { get => _currentImage; private set => SetProperty(ref _currentImage, value); }
     public BitmapSource? ComparisonPrimaryImage { get => _comparisonPrimaryImage; private set => SetProperty(ref _comparisonPrimaryImage, value); }
     public BitmapSource? ComparisonSecondaryImage { get => _comparisonSecondaryImage; private set => SetProperty(ref _comparisonSecondaryImage, value); }
+    public CompareSide ActiveCompareSide { get => _activeCompareSide; private set { if (SetProperty(ref _activeCompareSide, value)) OnPropertyChanged(nameof(ActiveCompareSideLabel)); } }
+    public string ActiveCompareSideLabel => ActiveCompareSide == CompareSide.Primary ? "A · 主图" : "B · 对比图";
+    public TetherAssetItemViewModel? ActiveCompareAsset => ActiveCompareSide == CompareSide.Primary ? SelectedAsset : CompareCandidate;
     public BitmapSource? ClippingOverlay { get => _clippingOverlay; private set => SetProperty(ref _clippingOverlay, value); }
     public BitmapSource? ZoneHoverImage { get => _zoneHoverImage; private set => SetProperty(ref _zoneHoverImage, value); }
     public BitmapSource? ReferenceImage { get => _referenceImage; private set => SetProperty(ref _referenceImage, value); }
@@ -980,7 +984,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     private async Task SaveAnnotationAsync()
     {
-        var item = SelectedAsset;
+        var item = ActiveCompareAsset ?? SelectedAsset;
         if (item is null) return;
         IsAnnotationSaving = true;
         try
@@ -1032,6 +1036,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         if (SelectedAsset is null || CompareCandidate is null) return;
         _rapidCompare = new RapidCompareState(SelectedAsset.Record.Id, CompareCandidate.Record.Id);
+        ActiveCompareSide = CompareSide.Primary;
         OnPropertyChanged(nameof(IsRapidCompare)); OnPropertyChanged(nameof(RapidCompareStatus)); RefreshCommands();
         Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
     }
@@ -1093,6 +1098,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         if (CompareMode == TetherCompareMode.None) _selectionBeforeCompare = SelectedAsset;
         _selectionCoordinator.IsComparing = true;
         CompareMode = mode;
+        ActiveCompareSide = CompareSide.Primary;
         var left = SelectedAsset!; var right = CompareCandidate!;
         var leftTask = CompareZoomMode == CompareZoomMode.Fit ? _previewLoader.LoadAsync(left.Record, 2048, _lifetime.Token) : _fullResolutionLoader.LoadAsync(left.Record, _lifetime.Token);
         var rightTask = CompareZoomMode == CompareZoomMode.Fit ? _previewLoader.LoadAsync(right.Record, 2048, _lifetime.Token) : _fullResolutionLoader.LoadAsync(right.Record, _lifetime.Token);
@@ -1112,14 +1118,32 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         _rapidCompare = null; OnPropertyChanged(nameof(IsRapidCompare)); OnPropertyChanged(nameof(RapidCompareStatus)); RefreshCommands();
     }
 
-    private void SwapComparison() => (ComparisonPrimaryImage, ComparisonSecondaryImage) = (ComparisonSecondaryImage, ComparisonPrimaryImage);
+    public void SetActiveCompareSide(CompareSide side)
+    {
+        if (CompareMode == TetherCompareMode.None) return;
+        ActiveCompareSide = side;
+        if (ActiveCompareAsset?.Annotation is { } annotation) ApplyAnnotationToEditor(annotation);
+    }
+
+    private void SwapComparison()
+    {
+        if (SelectedAsset is { } primary && CompareCandidate is { } secondary)
+        {
+            SetSelected(secondary, true);
+            CompareCandidate = primary;
+        }
+        (ComparisonPrimaryImage, ComparisonSecondaryImage) = (ComparisonSecondaryImage, ComparisonPrimaryImage);
+        ActiveCompareSide = ActiveCompareSide == CompareSide.Primary ? CompareSide.Secondary : CompareSide.Primary;
+        OnPropertyChanged(nameof(ActiveCompareAsset));
+    }
 
     private void UseCompareCandidateAsPrimary()
     {
         if (CompareCandidate is null) return;
-        var previous = SelectedAsset;
-        SetSelected(CompareCandidate, true);
-        CompareCandidate = previous;
+        // SwapComparison is the single source of truth for exchanging the two
+        // compare slots (assets, rendered images and active-side semantics).
+        // Pre-selecting the candidate here used to perform the exchange twice,
+        // leaving the original asset selected after the command completed.
         SwapComparison();
     }
 

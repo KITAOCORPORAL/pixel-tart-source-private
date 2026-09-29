@@ -217,8 +217,8 @@ public partial class TetherCaptureView : UserControl
         if (e.OriginalSource is TextBox or PasswordBox or ComboBox) return;
         if (viewModel.IsRapidCompare)
         {
-            if (e.Key is Key.Left or Key.PageUp) { if (viewModel.PreviousChallengerCommand.CanExecute(null)) viewModel.PreviousChallengerCommand.Execute(null); e.Handled = true; return; }
-            if (e.Key is Key.Right or Key.PageDown) { if (viewModel.NextChallengerCommand.CanExecute(null)) viewModel.NextChallengerCommand.Execute(null); e.Handled = true; return; }
+            if ((e.Key is Key.Left or Key.PageUp) && viewModel.PreviousChallengerCommand.CanExecute(null)) { viewModel.PreviousChallengerCommand.Execute(null); e.Handled = true; return; }
+            if ((e.Key is Key.Right or Key.PageDown) && viewModel.NextChallengerCommand.CanExecute(null)) { viewModel.NextChallengerCommand.Execute(null); e.Handled = true; return; }
         }
         switch (e.Key)
         {
@@ -247,17 +247,17 @@ public partial class TetherCaptureView : UserControl
                 e.Handled = true;
                 break;
             case Key.J:
-                if (viewModel.KeepChampionCommand.CanExecute(null)) viewModel.KeepChampionCommand.Execute(null);
-                e.Handled = true; break;
+                if (!viewModel.IsRapidCompare || !viewModel.KeepChampionCommand.CanExecute(null)) break;
+                viewModel.KeepChampionCommand.Execute(null); e.Handled = true; break;
             case Key.N:
-                if (viewModel.PromoteChallengerCommand.CanExecute(null)) viewModel.PromoteChallengerCommand.Execute(null);
-                e.Handled = true; break;
+                if (!viewModel.IsRapidCompare || !viewModel.PromoteChallengerCommand.CanExecute(null)) break;
+                viewModel.PromoteChallengerCommand.Execute(null); e.Handled = true; break;
             case Key.PageUp:
-                if (viewModel.PreviousChallengerCommand.CanExecute(null)) viewModel.PreviousChallengerCommand.Execute(null);
-                e.Handled = true; break;
+                if (!viewModel.IsRapidCompare || !viewModel.PreviousChallengerCommand.CanExecute(null)) break;
+                viewModel.PreviousChallengerCommand.Execute(null); e.Handled = true; break;
             case Key.PageDown:
-                if (viewModel.NextChallengerCommand.CanExecute(null)) viewModel.NextChallengerCommand.Execute(null);
-                e.Handled = true; break;
+                if (!viewModel.IsRapidCompare || !viewModel.NextChallengerCommand.CanExecute(null)) break;
+                viewModel.NextChallengerCommand.Execute(null); e.Handled = true; break;
             case Key.B:
                 if (viewModel.ReferenceMode.Enabled) viewModel.ReferenceMode.HoldOriginal(true);
                 else viewModel.ColorSettings.ShowBefore = true;
@@ -280,6 +280,16 @@ public partial class TetherCaptureView : UserControl
     {
         ViewModel?.AdjustZoom(e.Delta);
         e.Handled = true;
+    }
+
+    private void ComparePrimary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        ViewModel?.SetActiveCompareSide(Core.Models.Photography.CompareSide.Primary);
+    }
+
+    private void CompareSecondary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        ViewModel?.SetActiveCompareSide(Core.Models.Photography.CompareSide.Secondary);
     }
 
     private void PreviewViewport_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

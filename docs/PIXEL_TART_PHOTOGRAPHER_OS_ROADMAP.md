@@ -1,12 +1,12 @@
 # Pixel Tart Photographer OS Roadmap
 
-更新时间：2026-09-28。以源码、测试和可运行 Core 为准。
+更新时间：2026-09-29。以 `docs/current/PIXEL_TART_CURRENT_CAPABILITIES.json` 生成的能力清单为当前状态；本路线图保留产品方向和历史上下文。
 
 ## 本轮状态
 
 - **Implemented**：Tether 选片已有 0–5 星、Color Label、Pick/Favorite、Reject、前后导航、Fit/Fill/实际尺寸、筛选/排序、代理缓存优先；2-Up/Overlay 状态、同步缩放/平移、Swap、评分/挑选/拒绝命令已存在。
 - **Implemented foundation**：Face Lock 几何契约、ExportRecipe 持久化模型、Booking 缓冲冲突规则、同步 envelope/幂等/高风险冲突、3D camera/renderer contract。
-- **Partial**：WPF Face Lock/2-Up 视觉控件接线、Rapid Compare UI、Recipe 批量 UI、真实 Windows 3D renderer。
+- **Partial**：WPF Face Lock/2-Up 视觉控件接线、Rapid Compare UI、真实 Windows 3D renderer；Compare 的完整独立视口/动作目标闭环仍未完成。
 - **Spec only**：Pocket、真实云服务、Online Selection 云图库、Browser Extension、AI Culling、Skin Studio、Look DNA、Tether 新功能。
 
 Planning Center、RAW/TIFF/Match v3/v4 与现有产品线保留，不在本轮重写。
@@ -21,4 +21,4 @@ Planning Center、RAW/TIFF/Match v3/v4 与现有产品线保留，不在本轮�
 ## Phase 1C implementation status (2026-09-28)
 
 - **Implemented**: Existing Publishing WPF page now loads and applies `ExportRecipeStore` recipes; users can save and delete custom recipes without creating a second export surface.
-- **Partial**: Recipe selection is currently single-select. Multi-recipe task orchestration, per-recipe progress/cancel UI, and a true TIFF16-specific WPF encoder remain open.
+- **Partial**: Recipe selection and multi-recipe orchestration exist; live snapshot progress is now wired through TaskEngine, while native visual confirmation and true TIFF16-specific WPF encoder closure remain open.

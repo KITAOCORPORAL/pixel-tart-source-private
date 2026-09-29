@@ -2,6 +2,8 @@
 
 ## Contract
 
+The export workspace now reuses the existing `TaskEngine.SnapshotChanged` stream through `IPublishingTaskCoordinator`. It does not poll history or run a second progress engine. The view model filters snapshots by its active TaskId, posts updates through the captured UI synchronization context, and unsubscribes in `finally` after completion, failure, or cancellation.
+
 For every source/recipe item the publishing service reports these bounded stages:
 
 | Stage | Item fraction |
@@ -17,6 +19,7 @@ The task engine still aggregates item completion across all source/recipe pairs.
 
 - `PublishingSourceSafetyTests.ReportsPreparationRenderAndVerificationProgressBeforeCompletion` verifies ordered stage labels, stage fractions, and the final 100% report.
 - `PublishingSourceSafetyTests.MultiRecipeCancellationAccountsForCurrentAndEveryPendingItem` verifies that a cancelled multi-recipe job accounts for every pending output and leaves no temporary publishing file.
+- `IPublishingTaskCoordinator.SnapshotChanged` is the only publishing progress subscription surface; `TryGetSnapshot` is used only for the initial race-free state read after enqueue.
 - Release x64 solution build: PASS, 0 warnings, 0 errors.
 
 ## Preview latest-wins behavior

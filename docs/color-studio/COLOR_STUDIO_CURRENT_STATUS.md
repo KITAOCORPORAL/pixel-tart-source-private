@@ -1,5 +1,7 @@
 # Color Studio current status
 
+> Current capability source of truth: `docs/current/PIXEL_TART_CURRENT_CAPABILITIES.json` and `docs/current/PIXEL_TART_CURRENT_STATE.md`. This document remains the Color Studio-specific historical/current-status note.
+
 ## Implemented and tested
 
 - Existing Match v3 and guarded Match v4 Core contracts remain in place.

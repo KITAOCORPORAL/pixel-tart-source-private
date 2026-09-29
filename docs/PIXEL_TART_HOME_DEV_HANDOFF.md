@@ -6,8 +6,8 @@ This is the source-of-truth handoff for `KITAOCORPORAL/pixel-tart-source-private
 
 - Repository: `KITAOCORPORAL/pixel-tart-source-private`
 - Branch: `integration/pixel-tart-developer-preview`
-- Product SHA at handoff: updated at the end of this task after the multi-recipe export and compare semantics changes.
-- Last audited product commit: `8e8f16c`. Same-source native node drag evidence is complete; native visual screenshot confirmation remains unavailable on this host.
+- Product SHA at handoff: see generated `docs/current/PIXEL_TART_CURRENT_CAPABILITIES.json`; this handoff remains historical context.
+- Last audited product commit: historical `8e8f16c`; current capability state is generated from the checked-out HEAD and explicit mapping.
 - Project path: repository-relative; the production project is `src/RAWSelectionAssistant/RAWSelectionAssistant.csproj`.
 - Starting reference SHA from the original brief (`139ff52`) is historical only; the remote had advanced and this handoff uses the newer remote HEAD.
 

@@ -26,7 +26,7 @@ public sealed class PhotographerWorkflowFoundationTests
     public void FaceLockFallsBackWithoutFaceAndCompareKeepsViewportOnSwap()
     {
         Assert.AreEqual(FaceLockFallback.NoFace, FaceLockPlanner.Plan(null, null).Fallback);
-        var state = new TwoUpCompareState(Guid.NewGuid(), Guid.NewGuid(), new CompareViewport(2, 4, -3), true);
+        var state = new TwoUpCompareState(Guid.NewGuid(), Guid.NewGuid(), new CompareViewport(2, 4, -3), FaceLockEnabled: true);
         var swapped = state.Swap();
         Assert.AreEqual(state.Viewport, swapped.Viewport);
         Assert.AreEqual(2, swapped.Viewport.Zoom);
@@ -39,6 +39,27 @@ public sealed class PhotographerWorkflowFoundationTests
         Assert.AreEqual(CompareZoomMode.Fit, CompareViewport.FitViewport().Mode);
         Assert.AreEqual(CompareZoomMode.ActualPixels, CompareViewport.ActualPixels(1.5).Mode);
         Assert.AreEqual(CompareZoomMode.Custom, CompareViewport.Custom(2).Mode);
+    }
+
+    [TestMethod]
+    public void CompareStateKeepsIndependentViewportsAndSwapsTheirSemantics()
+    {
+        var a = Guid.NewGuid(); var b = Guid.NewGuid();
+        var state = new TwoUpCompareState(a, b, CompareViewport.Custom(2, .2, -.1), CompareViewport.Custom(1.5, -.3, .4));
+        var swapped = state.Swap();
+        Assert.AreEqual(b, swapped.PrimaryId);
+        Assert.AreEqual(a, swapped.ChallengerId);
+        Assert.AreEqual(1.5, swapped.PrimaryViewport.Zoom);
+        Assert.AreEqual(2, swapped.EffectiveSecondaryViewport.Zoom);
+    }
+
+    [TestMethod]
+    public void ActualPixelsUsesSourceDpiAndPhysicalDeviceScale()
+    {
+        var scale = ActualPixelScaleCalculator.Calculate(144, 144, 1.5, 1.5);
+        Assert.AreEqual(2.25, scale.ScaleX, 1e-12);
+        Assert.AreEqual(2.25, scale.ScaleY, 1e-12);
+        Assert.AreEqual(2.25, ActualPixelScaleCalculator.ActualPixelZoom(144, 1.5), 1e-12);
     }
 
     [TestMethod]

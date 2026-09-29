@@ -60,6 +60,7 @@ public static class FaceLockPlanner
 
 public enum CompareAction { Rating, Pick, Reject }
 public enum CompareZoomMode { Fit, ActualPixels, Custom }
+public enum CompareSide { Primary, Secondary }
 public sealed record CompareViewport(double Zoom = 1, double PanX = 0, double PanY = 0, CompareZoomMode Mode = CompareZoomMode.Fit)
 {
     public CompareViewport Normalize() => new(Math.Clamp(Zoom, 0.01, 16), PanX, PanY, Mode);
@@ -67,10 +68,24 @@ public sealed record CompareViewport(double Zoom = 1, double PanX = 0, double Pa
     public static CompareViewport ActualPixels(double scale = 1) => new(Math.Max(.01, scale), 0, 0, CompareZoomMode.ActualPixels);
     public static CompareViewport Custom(double zoom, double panX = 0, double panY = 0) => new(zoom, panX, panY, CompareZoomMode.Custom);
 }
-public sealed record TwoUpCompareState(Guid PrimaryId, Guid ChallengerId, CompareViewport Viewport, bool FaceLockEnabled = false, bool IsSwapped = false)
+public sealed record TwoUpCompareState(Guid PrimaryId, Guid ChallengerId, CompareViewport PrimaryViewport, CompareViewport? SecondaryViewport = null, CompareSide ActiveSide = CompareSide.Primary, bool FaceLockEnabled = false, bool IsSwapped = false)
 {
-    public TwoUpCompareState Swap() => this with { PrimaryId = ChallengerId, ChallengerId = PrimaryId, IsSwapped = !IsSwapped };
-    public TwoUpCompareState WithViewport(CompareViewport viewport) => this with { Viewport = viewport.Normalize() };
+    public CompareViewport EffectiveSecondaryViewport => (SecondaryViewport ?? PrimaryViewport).Normalize();
+    public CompareViewport Viewport => PrimaryViewport;
+    public TwoUpCompareState Swap() => this with { PrimaryId = ChallengerId, ChallengerId = PrimaryId, PrimaryViewport = EffectiveSecondaryViewport, SecondaryViewport = PrimaryViewport, ActiveSide = ActiveSide == CompareSide.Primary ? CompareSide.Secondary : CompareSide.Primary, IsSwapped = !IsSwapped };
+    public TwoUpCompareState WithViewport(CompareViewport viewport) => WithViewport(ActiveSide, viewport);
+    public TwoUpCompareState WithViewport(CompareSide side, CompareViewport viewport)
+    {
+        viewport = viewport.Normalize();
+        return side == CompareSide.Primary ? this with { PrimaryViewport = viewport } : this with { SecondaryViewport = viewport };
+    }
+    public TwoUpCompareState SetActiveSide(CompareSide side) => this with { ActiveSide = side };
+    public TwoUpCompareState WithNormalizedSync(CompareSide side, double normalizedZoom, double centerX, double centerY)
+    {
+        var current = side == CompareSide.Primary ? PrimaryViewport : EffectiveSecondaryViewport;
+        var updated = current with { Zoom = Math.Clamp(normalizedZoom, .01, 16), PanX = Math.Clamp(centerX, -1, 1), PanY = Math.Clamp(centerY, -1, 1), Mode = CompareZoomMode.Custom };
+        return WithViewport(side, updated);
+    }
 }
 public sealed record RapidCompareState(Guid BestId, Guid ChallengerId)
 {
