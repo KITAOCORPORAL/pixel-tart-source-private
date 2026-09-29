@@ -27,7 +27,8 @@ public sealed class PublishingTaskHandler(PublishingRequestStore requests, IPubl
     public async Task<TaskExecutionResult> ExecuteAsync(TaskExecutionContext context, CancellationToken cancellationToken)
     {
         if (!requests.TryGet(context.Definition.Id, out var request)) return new(TaskLifecycleState.Failed, TaskResultSummary.Empty, "PUBLISHING_REQUEST_MISSING", "发布任务资料不可用，请重新提交。");
-        var progress = new Progress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(value => _ = context.ReportProgressAsync(value.Progress, "发布导出", value.CurrentFile, value.Summary, CancellationToken.None));
+        var progress = new OrderedAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(
+            (value, token) => new(context.ReportProgressAsync(value.Progress, "发布导出", value.CurrentFile, value.Summary, token)));
         var result = await publishing.ExportAsync(context.Definition.Id, request, progress, cancellationToken).ConfigureAwait(false);
         var failure = result.Items.FirstOrDefault(item => item.State == PublishingItemState.Failed)?.ErrorMessage;
         return new(result.State, result.Summary, failure is null ? null : "PUBLISHING_ITEM_FAILED", failure);

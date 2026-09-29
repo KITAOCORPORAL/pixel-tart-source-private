@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.Tasks;
 
 namespace RAWSelectionAssistant.Core.Services.Publishing;
 
@@ -11,12 +12,15 @@ public interface IPublishingRenderer
 
 public interface IPublishingExportService
 {
-    Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default);
+    Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default);
 }
 
 public sealed class PublishingExportService(IPublishingRenderer renderer) : IPublishingExportService
 {
-    public async Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default)
+    public Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress, CancellationToken cancellationToken = default)
+        => ExportAsync(taskId, request, progress is null ? null : new OrderedAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>((value, _) => { progress.Report(value); return ValueTask.CompletedTask; }), cancellationToken);
+
+    public async Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default)
     {
         request.Validate();
         Directory.CreateDirectory(request.DestinationDirectory);
@@ -40,16 +44,16 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
                 cancellationToken.ThrowIfCancellationRequested();
                 if (!File.Exists(source)) throw new FileNotFoundException("照片不可用。", source);
                 if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG、TIFF。");
-                ReportProgress(progress, total, results, itemLabel, 0.05, "准备");
+                await ReportProgressAsync(progress, total, results, itemLabel, 0.05, "准备", cancellationToken).ConfigureAwait(false);
                 var before = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                 var destination = ResolveDestination(source, request.DestinationDirectory, recipeOptions, reserved, recipe?.FilenameTemplate, recipe?.Destination);
                 reserved.Add(destination);
                 var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".publishing";
                 try
                 {
-                    ReportProgress(progress, total, results, itemLabel, 0.2, "渲染");
+                    await ReportProgressAsync(progress, total, results, itemLabel, 0.2, "渲染", cancellationToken).ConfigureAwait(false);
                     await renderer.RenderAsync(source, temporary, recipeOptions, cancellationToken).ConfigureAwait(false);
-                    ReportProgress(progress, total, results, itemLabel, 0.65, "验证");
+                    await ReportProgressAsync(progress, total, results, itemLabel, 0.65, "验证", cancellationToken).ConfigureAwait(false);
                     await renderer.VerifyAsync(temporary, cancellationToken).ConfigureAwait(false);
                     var after = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                     if (!CryptographicOperations.FixedTimeEquals(before, after)) throw new IOException("源照片在发布处理期间发生变化，已停止输出。");
@@ -74,7 +78,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
                 results.Add(new(index, PublishingItemState.Failed, source, null, 0, UserMessage(error)));
             }
             var summary = Summarize(total, results);
-            progress?.Report((results.Count * 100d / total, itemLabel, summary));
+            if (progress is not null) await progress.ReportAsync((results.Count * 100d / total, itemLabel, summary), cancellationToken).ConfigureAwait(false);
             }
             if (results.Any(item => item.State == PublishingItemState.Cancelled)) break;
         }
@@ -163,11 +167,11 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 128, FileOptions.Asynchronous | FileOptions.SequentialScan);
         return await SHA256.HashDataAsync(stream, cancellationToken).ConfigureAwait(false);
     }
-    private static void ReportProgress(IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress, int total, IReadOnlyCollection<PublishingItemResult> results, string currentFile, double itemFraction, string stage)
+    private static ValueTask ReportProgressAsync(IAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress, int total, IReadOnlyCollection<PublishingItemResult> results, string currentFile, double itemFraction, string stage, CancellationToken cancellationToken)
     {
-        if (progress is null) return;
+        if (progress is null) return ValueTask.CompletedTask;
         var completed = Math.Clamp(results.Count + itemFraction, 0, total);
-        progress.Report((completed * 100d / total, $"{stage}：{currentFile}", Summarize(total, results)));
+        return progress.ReportAsync((completed * 100d / total, $"{stage}：{currentFile}", Summarize(total, results)), cancellationToken);
     }
 
     private static TaskResultSummary Summarize(int total, IReadOnlyCollection<PublishingItemResult> results) => new(total, results.Count(item => item.State == PublishingItemState.Completed), results.Count(item => item.State == PublishingItemState.Failed), 0, results.Count(item => item.State == PublishingItemState.Cancelled), 0, 0, results.Sum(item => item.BytesWritten));
