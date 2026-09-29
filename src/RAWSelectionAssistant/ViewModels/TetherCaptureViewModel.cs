@@ -83,6 +83,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private double _comparisonSecondaryZoom = 1;
     private double _comparisonSecondaryPanX;
     private double _comparisonSecondaryPanY;
+    private double _comparePrimaryCenterX = .5;
+    private double _comparePrimaryCenterY = .5;
+    private double _compareSecondaryCenterX = .5;
+    private double _compareSecondaryCenterY = .5;
     private bool _autoLatest = true;
     private bool _isCurrentLocked;
     private bool _isFullScreen;
@@ -1138,16 +1142,52 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     }
 
     public (double X, double Y) GetComparePan(CompareSide side) => side == CompareSide.Primary ? (PanX, PanY) : (_comparisonSecondaryPanX, _comparisonSecondaryPanY);
+    public (double X, double Y) GetCompareNormalizedCenter(CompareSide side)
+        => side == CompareSide.Primary ? (_comparePrimaryCenterX, _comparePrimaryCenterY) : (_compareSecondaryCenterX, _compareSecondaryCenterY);
+    public void SetCompareNormalizedCenter(CompareSide side, double x, double y)
+    {
+        x = Math.Clamp(x, 0, 1); y = Math.Clamp(y, 0, 1); SetActiveCompareSide(side);
+        if (side == CompareSide.Primary) { _comparePrimaryCenterX = x; _comparePrimaryCenterY = y; }
+        else { _compareSecondaryCenterX = x; _compareSecondaryCenterY = y; }
+        if (ComparisonSyncPan)
+        {
+            if (side == CompareSide.Primary) { _compareSecondaryCenterX = x; _compareSecondaryCenterY = y; }
+            else { _comparePrimaryCenterX = x; _comparePrimaryCenterY = y; }
+        }
+        OnPropertyChanged(nameof(ComparisonNormalizedCenter));
+    }
+    public (double PrimaryX, double PrimaryY, double SecondaryX, double SecondaryY) ComparisonNormalizedCenter
+        => (_comparePrimaryCenterX, _comparePrimaryCenterY, _compareSecondaryCenterX, _compareSecondaryCenterY);
     public void SetComparePan(CompareSide side, double x, double y)
     {
         if (CompareMode == TetherCompareMode.None) return;
         SetActiveCompareSide(side);
-        if (side == CompareSide.Primary) { PanX = x; PanY = y; }
-        else SetSecondaryComparePan(x, y);
+        var image = side == CompareSide.Primary ? ComparisonPrimaryImage : ComparisonSecondaryImage;
+        if (image is null) return;
+        var zoom = side == CompareSide.Primary ? Zoom : _comparisonSecondaryZoom;
+        var width = Math.Max(1, image.PixelWidth * 96d / image.DpiX * zoom);
+        var height = Math.Max(1, image.PixelHeight * 96d / image.DpiY * zoom);
+        var centerX = Math.Clamp(.5 - x / width, 0, 1);
+        var centerY = Math.Clamp(.5 - y / height, 0, 1);
+        SetCompareNormalizedCenter(side, centerX, centerY);
+        ApplyNormalizedCenter(side);
         if (ComparisonSyncPan)
         {
-            if (side == CompareSide.Primary) SetSecondaryComparePan(x, y); else { PanX = x; PanY = y; }
+            var other = side == CompareSide.Primary ? CompareSide.Secondary : CompareSide.Primary;
+            ApplyNormalizedCenter(other);
         }
+    }
+
+    private void ApplyNormalizedCenter(CompareSide side)
+    {
+        var image = side == CompareSide.Primary ? ComparisonPrimaryImage : ComparisonSecondaryImage;
+        if (image is null) return;
+        var zoom = side == CompareSide.Primary ? Zoom : _comparisonSecondaryZoom;
+        var width = Math.Max(1, image.PixelWidth * 96d / image.DpiX * zoom);
+        var height = Math.Max(1, image.PixelHeight * 96d / image.DpiY * zoom);
+        var center = GetCompareNormalizedCenter(side);
+        var x = (.5 - center.X) * width; var y = (.5 - center.Y) * height;
+        if (side == CompareSide.Primary) { PanX = x; PanY = y; } else SetSecondaryComparePan(x, y);
     }
 
     public void SetCompareActualPixels(CompareSide side, double sourceDpi, double devicePixelsPerDip)

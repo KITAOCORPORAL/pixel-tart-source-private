@@ -63,10 +63,34 @@ public enum CompareZoomMode { Fit, ActualPixels, Custom }
 public enum CompareSide { Primary, Secondary }
 public sealed record CompareViewport(double Zoom = 1, double PanX = 0, double PanY = 0, CompareZoomMode Mode = CompareZoomMode.Fit)
 {
-    public CompareViewport Normalize() => new(Math.Clamp(Zoom, 0.01, 16), PanX, PanY, Mode);
+    /// <summary>Normalized image coordinate at the viewport center (0..1).</summary>
+    public double NormalizedCenterX { get; init; } = .5;
+    public double NormalizedCenterY { get; init; } = .5;
+    public CompareViewport Normalize() => this with { Zoom = Math.Clamp(Zoom, 0.01, 16), NormalizedCenterX = Math.Clamp(NormalizedCenterX, 0, 1), NormalizedCenterY = Math.Clamp(NormalizedCenterY, 0, 1) };
     public static CompareViewport FitViewport() => new(1, 0, 0, CompareZoomMode.Fit);
     public static CompareViewport ActualPixels(double scale = 1) => new(Math.Max(.01, scale), 0, 0, CompareZoomMode.ActualPixels);
     public static CompareViewport Custom(double zoom, double panX = 0, double panY = 0) => new(zoom, panX, panY, CompareZoomMode.Custom);
+    public CompareViewport WithNormalizedCenter(double x, double y) => this with { NormalizedCenterX = Math.Clamp(x, 0, 1), NormalizedCenterY = Math.Clamp(y, 0, 1) };
+}
+public static class CompareViewportGeometry
+{
+    /// <summary>Translate from normalized image-center coordinates to WPF DIP pan.</summary>
+    public static (double X, double Y) PanForCenter(CompareViewport viewport, ImagePixelGeometry image, double paneWidthDip, double paneHeightDip, double devicePixelsPerDip)
+    {
+        if (paneWidthDip <= 0 || paneHeightDip <= 0) throw new ArgumentOutOfRangeException(nameof(paneWidthDip));
+        var actual = ActualPixelScaleCalculator.Calculate(image.DpiX, image.DpiY, devicePixelsPerDip, devicePixelsPerDip);
+        var renderedWidth = image.NaturalWidthDip * actual.ScaleX * viewport.Zoom;
+        var renderedHeight = image.NaturalHeightDip * actual.ScaleY * viewport.Zoom;
+        return ((.5 - viewport.NormalizedCenterX) * renderedWidth, (.5 - viewport.NormalizedCenterY) * renderedHeight);
+    }
+
+    public static CompareViewport Drag(CompareViewport viewport, double deltaX, double deltaY, ImagePixelGeometry image, double devicePixelsPerDip)
+    {
+        var actual = ActualPixelScaleCalculator.Calculate(image.DpiX, image.DpiY, devicePixelsPerDip, devicePixelsPerDip);
+        var width = image.NaturalWidthDip * actual.ScaleX * viewport.Zoom;
+        var height = image.NaturalHeightDip * actual.ScaleY * viewport.Zoom;
+        return viewport.WithNormalizedCenter(viewport.NormalizedCenterX - deltaX / width, viewport.NormalizedCenterY - deltaY / height);
+    }
 }
 public sealed record TwoUpCompareState(Guid PrimaryId, Guid ChallengerId, CompareViewport PrimaryViewport, CompareViewport? SecondaryViewport = null, CompareSide ActiveSide = CompareSide.Primary, bool FaceLockEnabled = false, bool IsSwapped = false)
 {
@@ -83,7 +107,7 @@ public sealed record TwoUpCompareState(Guid PrimaryId, Guid ChallengerId, Compar
     public TwoUpCompareState WithNormalizedSync(CompareSide side, double normalizedZoom, double centerX, double centerY)
     {
         var current = side == CompareSide.Primary ? PrimaryViewport : EffectiveSecondaryViewport;
-        var updated = current with { Zoom = Math.Clamp(normalizedZoom, .01, 16), PanX = Math.Clamp(centerX, -1, 1), PanY = Math.Clamp(centerY, -1, 1), Mode = CompareZoomMode.Custom };
+        var updated = current with { Zoom = Math.Clamp(normalizedZoom, .01, 16), NormalizedCenterX = Math.Clamp(centerX, 0, 1), NormalizedCenterY = Math.Clamp(centerY, 0, 1), Mode = CompareZoomMode.Custom };
         return WithViewport(side, updated);
     }
 }

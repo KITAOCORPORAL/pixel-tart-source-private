@@ -77,6 +77,21 @@ public sealed class PhotographerWorkflowFoundationTests
     }
 
     [TestMethod]
+    public void CompareViewportUsesNormalizedCenterForDifferentResolutionSync()
+    {
+        var a = new CompareViewport(2).WithNormalizedCenter(.25, .75);
+        var geometry = ImagePixelGeometry.Create(6000, 4000, 300, 300);
+        var pan = CompareViewportGeometry.PanForCenter(a, geometry, 1200, 800, 1.5);
+        Assert.IsGreaterThan(0, pan.X);
+        Assert.IsLessThan(0, pan.Y);
+        var dragged = CompareViewportGeometry.Drag(a, 120, -80, geometry, 1.5);
+        Assert.IsLessThan(a.NormalizedCenterX, dragged.NormalizedCenterX);
+        Assert.IsGreaterThan(a.NormalizedCenterY, dragged.NormalizedCenterY);
+        Assert.IsInRange(dragged.NormalizedCenterX, 0, 1);
+        Assert.IsInRange(dragged.NormalizedCenterY, 0, 1);
+    }
+
+    [TestMethod]
     public void ExportRecipesValidateTiff16AndProvideFourBuiltIns()
     {
         Assert.HasCount(4, ExportRecipeStore.BuiltIns);
