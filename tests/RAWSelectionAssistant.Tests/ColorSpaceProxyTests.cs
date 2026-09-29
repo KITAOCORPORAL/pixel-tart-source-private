@@ -7,6 +7,18 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ColorSpaceProxyTests
 {
     [TestMethod]
+    public void ProjectionIsBoundedDeterministicAndHitTestPrefersNearestDepth()
+    {
+        var source = Fixture(32, 24);
+        var cloud = ColorSpaceProxyBuilder.Build(source, new(256));
+        var camera = new ColorSpaceCamera(-35, 18, 2.4, 0, 0);
+        var first = ColorSpaceProjection.Project(cloud, camera, 800, 500);
+        var second = ColorSpaceProjection.Project(cloud, camera, 800, 500);
+        CollectionAssert.AreEqual(first.ToArray(), second.ToArray());
+        Assert.IsTrue(first.All(point => point.X is >= -100 and <= 900 && point.Y is >= -100 and <= 600));
+        Assert.AreEqual(first[0].PointIndex, ColorSpaceProjection.HitTest(first, first[0].X, first[0].Y, 20));
+    }
+    [TestMethod]
     public void CameraHasStablePhotographicDefaultAndBoundedInteraction()
     {
         var camera = new ColorSpaceCameraState();
