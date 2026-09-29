@@ -1,0 +1,21 @@
+{
+  "productSourceSha": "9386b67b50bdb199b2e4784e8ba86359c211b04c",
+  "status": "READY_FOR_USER_UI_REVIEW",
+  "staticXaml": "PASS",
+  "runtimeGeometry": "HARD_GATE_AVAILABLE",
+  "textClip": "MODELED",
+  "overlap": "MODELED_WITH_PEER_POLICY",
+  "hitTarget": "MODELED",
+  "workspaceRatio": "NOT_RUN",
+  "brightness": "NOT_RUN",
+  "contrast": "NOT_RUN",
+  "visualRegression": "BASELINE_MISSING",
+  "baselineGuard": "PASS_GUARDED",
+  "desktopAutomation": "NOT_RUN",
+  "findings": { "p0": [], "p1": ["runtime-only hit target and workspace checks pending real UI capture"], "p2": ["contrast and luminance require real rendered surface review"] },
+  "screenshots": { "wholeAppContactSheet": "NOT_RUN", "colorStudio3dContactSheet": "NOT_RUN", "1180": "NOT_RUN", "1600": "NOT_RUN", "1920": "NOT_RUN", "wholeAppCaptureRun": "FAIL_EXPECTED_DPI_FOLDER_MISSING" },
+  "renderer": "PARTIAL",
+  "approvedBaseline": false,
+  "nativePointer": "NOT_RUN",
+  "nextExactTask": "USER_UI_GUARDIAN_AND_3D_VISUAL_REVIEW"
+}

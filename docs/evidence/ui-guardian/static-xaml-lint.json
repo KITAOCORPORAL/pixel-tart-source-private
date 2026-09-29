@@ -1,0 +1,296 @@
+[
+  {
+    "Severity": "P1",
+    "Kind": "CANVAS_IN_PAGE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
+    "Line": 766,
+    "Source": "\u003CCanvas x:Name=\u0022AssetSelectionMarqueeLayer\u0022 Grid.Row=\u00222\u0022 Panel.ZIndex=\u00226\u0022"
+  },
+  {
+    "Severity": "P1",
+    "Kind": "CANVAS_IN_PAGE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetQueryComposerView.xaml",
+    "Line": 95,
+    "Source": "\u003CCanvas IsHitTestVisible=\u0022False\u0022\u003E\u003CEllipse x:Name=\u0022ColorPlaneCursor\u0022 Width=\u002212\u0022 Height=\u002212\u0022 Stroke=\u0022{DynamicResource Brush.Text.Primary}\u0022 StrokeThickness=\u00222\u0022 /\u003E\u003C/Canvas\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 27,
+    "Source": "Foreground=\u0022#F2F6F7\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 51,
+    "Source": "\u003CTextBlock Text=\u0022\u540D\u79F0\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 58,
+    "Source": "\u003CTextBlock Text=\u0022\u8BF4\u660E\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 67,
+    "Source": "\u003CTextBlock Text=\u0022\u6392\u5E8F\u0022 Foreground=\u0022#CBD5DA\u0022 VerticalAlignment=\u0022Center\u0022 Margin=\u00220,0,5,0\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 82,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreservedScopeAndSearch}\u0022 Foreground=\u0022#ADB8C0\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 102,
+    "Source": "\u003CTextBlock Text=\u0022\u5339\u914D\u7167\u7247\u0022 FontWeight=\u0022SemiBold\u0022 Foreground=\u0022#F2F6F7\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 108,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreviewStatus}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,5,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 115,
+    "Source": "\u003CTextBlock Text=\u0022{Binding DisplayName}\u0022 Foreground=\u0022#F2F6F7\u0022 TextTrimming=\u0022CharacterEllipsis\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
+    "Line": 127,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderValidationMessage}\u0022 Foreground=\u0022#FFCBC5\u0022 TextWrapping=\u0022Wrap\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 35,
+    "Source": "\u003CTextBlock Text=\u0022\u6807\u7B7E\u7BA1\u7406\u5668\u0022 Foreground=\u0022#F2F6F7\u0022 FontSize=\u002216\u0022 FontWeight=\u0022SemiBold\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 56,
+    "Source": "\u003CTextBlock Text=\u0022\u6807\u7B7E\u7EC4\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 82,
+    "Source": "\u003CTextBlock Text=\u0022\u6807\u7B7E\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 123,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3TagMergePreviewSummary}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,5,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 127,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3TagManagerStatus}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,6,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 135,
+    "Source": "\u003CTextBlock Text=\u0022\u6279\u91CF\u5143\u6570\u636E\u0022 Foreground=\u0022#F2F6F7\u0022 FontSize=\u002216\u0022 FontWeight=\u0022SemiBold\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 136,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3BatchSelectionState}\u0022 Foreground=\u0022#8FE7D1\u0022 Margin=\u00220,4,0,0\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 138,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3BatchCommonState}\u0022 Foreground=\u0022#CBD5DA\u0022 TextWrapping=\u0022Wrap\u0022 Margin=\u00220,3,0,5\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 163,
+    "Source": "\u003CTextBlock Grid.Row=\u00224\u0022 Text=\u0022\u5F52\u6863\u72B6\u6001\u0022 Foreground=\u0022#CBD5DA\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 166,
+    "Source": "\u003CTextBlock Grid.Row=\u00225\u0022 Text=\u0022\u7F3A\u5931\u72B6\u6001\u0022 Foreground=\u0022#CBD5DA\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 171,
+    "Source": "\u003CTextBlock Text=\u0022{Binding P3BatchPreviewSummary}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,7,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetTagManagerView.xaml",
+    "Line": 183,
+    "Source": "\u003CTextBlock Text=\u0022\u53EA\u4FEE\u6539\u7D20\u6750\u5E93\u5143\u6570\u636E\uFF1B\u4E0D\u4F1A\u79FB\u52A8\u3001\u6539\u540D\u6216\u5220\u9664\u6E90\u6587\u4EF6\u3002\u0022 Foreground=\u0022#ADB8C0\u0022 Margin=\u00220,6,0,0\u0022 TextWrapping=\u0022Wrap\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_SMALL_FONTSIZE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 114,
+    "Source": "\u003CTextBlock Text=\u0022PT\u0022 FontFamily=\u0022Segoe UI Variable, Segoe UI\u0022 FontSize=\u00229\u0022 FontWeight=\u0022Bold\u0022 Foreground=\u0022{DynamicResource AccentValueBrush}\u0022 HorizontalAlignment=\u0022Center\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_SMALL_FONTSIZE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 117,
+    "Source": "\u003CTextBlock Text=\u0022PIXEL TART\u0022 FontFamily=\u0022Segoe UI Variable, Segoe UI\u0022 FontSize=\u002211\u0022 FontWeight=\u0022SemiBold\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_SMALL_FONTSIZE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 118,
+    "Source": "\u003CTextBlock Text=\u0022{Binding CurrentWorkspaceLabel, StringFormat=\u5F53\u524D\u5DE5\u4F5C\u533A \u00B7 {0}}\u0022 FontSize=\u002210\u0022 Foreground=\u0022{DynamicResource TextTertiaryBrush}\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 460,
+    "Source": "\u003CBorder Width=\u002238\u0022 Height=\u002238\u0022 Background=\u0022#22FFFFFF\u0022 CornerRadius=\u00228\u0022 VerticalAlignment=\u0022Center\u0022 IsHitTestVisible=\u0022False\u0022\u003E\u003CPath Width=\u002220\u0022 Height=\u002220\u0022 Stretch=\u0022Uniform\u0022 Stroke=\u0022{DynamicResource TextPrimaryBrush}\u0022 StrokeThickness=\u00221.8\u0022 Data=\u0022{StaticResource ToolIconLocalSplit}\u0022 /\u003E\u003C/Border\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 538,
+    "Source": "\u003CTextBlock Text=\u0022\u5DF2\u56FA\u5B9A\u0022 FontSize=\u0022{DynamicResource Type.Calendar.Compact.FontSize}\u0022 Foreground=\u0022#FF17120A\u0022 FontWeight=\u0022Bold\u0022 /\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\MainWindow.xaml",
+    "Line": 564,
+    "Source": "\u003CGrid Grid.Row=\u00221\u0022\u003E\u003CScrollViewer x:Name=\u0022RecentProjectsScroll\u0022 HorizontalScrollBarVisibility=\u0022Auto\u0022 VerticalScrollBarVisibility=\u0022Disabled\u0022\u003E\u003CItemsControl ItemsSource=\u0022{Binding ProjectHistory}\u0022\u003E\u003CItemsControl.ItemsPanel\u003E\u003CItemsPanelTemplate\u003E\u003CStackPanel Orientation=\u0022Horizontal\u0022 /\u003E\u003C/ItemsPanelTemplate\u003E\u003C/ItemsControl.ItemsPanel\u003E\u003CItemsControl.ItemTemplate\u003E\u003CDataTemplate\u003E\u003CBorder Style=\u0022{StaticResource RecentProjectTile}\u0022\u003E\u003CGrid\u003E\u003CGrid.RowDefinitions\u003E\u003CRowDefinition Height=\u0022190\u0022 /\u003E\u003CRowDefinition Height=\u0022*\u0022 /\u003E\u003C/Grid.RowDefinitions\u003E\u003CBorder Background=\u0022{DynamicResource WorkbenchHeroBrush}\u0022 CornerRadius=\u00229,9,0,0\u0022\u003E\u003CGrid\u003E\u003CImage Source=\u0022Assets/WorkbenchProjectCover.png\u0022 Stretch=\u0022UniformToFill\u0022 /\u003E\u003CBorder Background=\u0022#66000000\u0022 VerticalAlignment=\u0022Bottom\u0022 Height=\u002234\u0022\u003E\u003CTextBlock Text=\u0022\u672C\u5730\u6444\u5F71\u9879\u76EE\u0022 Foreground=\u0022#E8FFFFFF\u0022 Margin=\u002212,0\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E\u003C/Border\u003E\u003C/Grid\u003E\u003C/Border\u003E\u003CStackPanel Grid.Row=\u00221\u0022 Margin=\u002214,12\u0022\u003E\u003CGrid\u003E\u003CTextBlock Text=\u0022{Binding Name, TargetNullValue=\u672A\u547D\u540D\u9879\u76EE}\u0022 FontSize=\u0022{DynamicResource Type.Body.FontSize}\u0022 FontWeight=\u0022SemiBold\u0022 TextTrimming=\u0022CharacterEllipsis\u0022 /\u003E\u003C/Grid\u003E\u003CStackPanel Orientation=\u0022Horizontal\u0022 Margin=\u00220,10,0,0\u0022\u003E\u003CBorder Background=\u0022{DynamicResource AccentSoftBrush}\u0022 CornerRadius=\u00224\u0022 Padding=\u00226,2\u0022\u003E\u003CTextBlock Text=\u0022{Binding Status, Converter={StaticResource StatusToTextConverter}}\u0022 Foreground=\u0022{DynamicResource AccentBrush}\u0022 FontSize=\u0022{DynamicResource Type.Micro.FontSize}\u0022 /\u003E\u003C/Border\u003E\u003CTextBlock Text=\u0022{Binding MatchedFileCount, StringFormat={}{0} \u4E2A\u6587\u4EF6}\u0022 Style=\u0022{StaticResource CaptionText}\u0022 Margin=\u002210,2,0,0\u0022 /\u003E\u003C/StackPanel\u003E\u003CTextBlock Text=\u0022{Binding UpdatedAt, StringFormat=\u66F4\u65B0\u4E8E {0:MM-dd HH:mm}}\u0022 Style=\u0022{StaticResource CaptionText}\u0022 Margin=\u00220,12,0,0\u0022 /\u003E\u003CButton Content=\u0022\u7EE7\u7EED\u5904\u7406\u0022 Style=\u0022{StaticResource GhostButton}\u0022 HorizontalAlignment=\u0022Left\u0022 Padding=\u00220,4\u0022 MinHeight=\u002224\u0022 Command=\u0022{Binding DataContext.ContinueProjectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}\u0022 CommandParameter=\u0022{Binding}\u0022 /\u003E\u003C/StackPanel\u003E\u003C/Grid\u003E\u003C/Border\u003E\u003C/DataTemplate\u003E\u003C/ItemsControl.ItemTemplate\u003E\u003C/ItemsControl\u003E\u003C/ScrollViewer\u003E\u003CBorder x:Name=\u0022RecentProjectsEmptyState\u0022 Background=\u0022{DynamicResource WorkbenchCardBrush}\u0022 BorderBrush=\u0022{DynamicResource DividerBrush}\u0022 BorderThickness=\u00220\u0022 CornerRadius=\u002210\u0022 Visibility=\u0022{Binding ProjectHistory.Count, Converter={StaticResource ZeroIntToVisibilityConverter}}\u0022\u003E\u003CStackPanel HorizontalAlignment=\u0022Center\u0022 VerticalAlignment=\u0022Center\u0022\u003E\u003CPath Width=\u002252\u0022 Height=\u002252\u0022 Stretch=\u0022Uniform\u0022 Stroke=\u0022{DynamicResource TextTertiaryBrush}\u0022 StrokeThickness=\u00221.2\u0022 Data=\u0022{StaticResource IconLocalSplit}\u0022 /\u003E\u003CTextBlock Text=\u0022\u8FD8\u6CA1\u6709\u672C\u5730\u9879\u76EE\u0022 FontSize=\u0022{DynamicResource Type.SectionTitle.FontSize}\u0022 FontWeight=\u0022SemiBold\u0022 Margin=\u00220,14,0,0\u0022 /\u003E\u003CTextBlock Text=\u0022\u521B\u5EFA\u7B2C\u4E00\u4E2A\u672C\u5730\u5206\u7247\u4EFB\u52A1\uFF0C\u9879\u76EE\u4F1A\u4FDD\u5B58\u5728\u5F53\u524D\u7535\u8111\u0022 Style=\u0022{StaticResource CaptionText}\u0022 Margin=\u00220,6,0,14\u0022 /\u003E\u003CButton Content=\u0022\u521B\u5EFA\u672C\u5730\u5206\u7247\u4EFB\u52A1\u0022 Style=\u0022{StaticResource PrimaryButton}\u0022 Command=\u0022{Binding NavigateCommand}\u0022 CommandParameter=\u0022LocalSplit\u0022 /\u003E\u003C/StackPanel\u003E\u003C/Border\u003E\u003CBorder x:Name=\u0022CompletedProjectsEmptyState\u0022 Background=\u0022{DynamicResource WorkbenchCardBrush}\u0022 BorderBrush=\u0022{DynamicResource DividerBrush}\u0022 BorderThickness=\u00220\u0022 CornerRadius=\u002210\u0022 Visibility=\u0022Collapsed\u0022\u003E\u003CStackPanel HorizontalAlignment=\u0022Center\u0022 VerticalAlignment=\u0022Center\u0022\u003E\u003CPath Width=\u002252\u0022 Height=\u002252\u0022 Stretch=\u0022Uniform\u0022 Stroke=\u0022{DynamicResource TextTertiaryBrush}\u0022 StrokeThickness=\u00221.2\u0022 Data=\u0022{StaticResource IconHistory}\u0022 /\u003E\u003CTextBlock Text=\u0022\u6682\u65E0\u5DF2\u5B8C\u6210\u9879\u76EE\u0022 FontSize=\u0022{DynamicResource Type.SectionTitle.FontSize}\u0022 FontWeight=\u0022SemiBold\u0022 Margin=\u00220,14,0,0\u0022 /\u003E\u003CTextBlock Text=\u0022\u5B8C\u6210\u5F52\u7247\u6216\u5206\u7247\u540E\uFF0C\u53EF\u5728\u8FD9\u91CC\u5FEB\u901F\u56DE\u770B\u0022 Style=\u0022{StaticResource CaptionText}\u0022 Margin=\u00220,6,0,0\u0022 /\u003E\u003C/StackPanel\u003E\u003C/Border\u003E\u003C/Grid\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 4,
+    "Source": "Title=\u0022\u50CF\u7D20\u86CB\u631E \u00B7 \u5BA2\u6237\u76D1\u770B\u0022 WindowStyle=\u0022None\u0022 ResizeMode=\u0022CanResize\u0022 Background=\u0022#080A0D\u0022 Foreground=\u0022White\u0022"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 9,
+    "Source": "\u003CBorder VerticalAlignment=\u0022Top\u0022 Background=\u0022#CC11161D\u0022 Padding=\u002216,10\u0022\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 12,
+    "Source": "\u003CBorder HorizontalAlignment=\u0022Left\u0022 VerticalAlignment=\u0022Bottom\u0022 Margin=\u002216,0,0,92\u0022 Background=\u0022#CC11161D\u0022 Padding=\u002212,8\u0022 CornerRadius=\u00225\u0022\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 13,
+    "Source": "\u003CStackPanel\u003E\u003CTextBlock Text=\u0022{Binding SimplifiedFileNumber}\u0022 Visibility=\u0022{Binding ShowIdentifier, Converter={StaticResource BooleanToVisibilityConverter}}\u0022 /\u003E\u003CTextBlock Text=\u0022{Binding TechnicalSummary}\u0022 Visibility=\u0022{Binding ShowTechnicalMetadata, Converter={StaticResource BooleanToVisibilityConverter}}\u0022 /\u003E\u003CTextBlock Text=\u0022{Binding RatingText}\u0022 Visibility=\u0022{Binding ShowRating, Converter={StaticResource BooleanToVisibilityConverter}}\u0022 /\u003E\u003CTextBlock Text=\u0022{Binding LutName}\u0022 Foreground=\u0022#AEB8C6\u0022 /\u003E\u003C/StackPanel\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 15,
+    "Source": "\u003CBorder VerticalAlignment=\u0022Bottom\u0022 Background=\u0022#DD11161D\u0022 Padding=\u002216\u0022 Visibility=\u0022{Binding ShowClientControls, Converter={StaticResource BooleanToVisibilityConverter}}\u0022\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ClientMonitorWindow.xaml",
+    "Line": 22,
+    "Source": "\u003CBorder HorizontalAlignment=\u0022Right\u0022 VerticalAlignment=\u0022Top\u0022 Margin=\u00220,58,16,0\u0022 Background=\u0022#CC11161D\u0022 Padding=\u002210\u0022\u003E\u003CTextBlock Text=\u0022{Binding NewAssetText}\u0022 Foreground=\u0022#F2B84B\u0022 /\u003E\u003C/Border\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_SMALL_FONTSIZE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ReferenceColorWorkspaceView.xaml",
+    "Line": 22,
+    "Source": "\u003CBorder Background=\u0022{DynamicResource SurfaceSecondaryBrush}\u0022 CornerRadius=\u00228\u0022 Padding=\u00228,5\u0022 Margin=\u00220,0,8,0\u0022 MinWidth=\u0022270\u0022\u003E\u003CStackPanel Orientation=\u0022Horizontal\u0022\u003E\u003CBorder Width=\u002222\u0022 Height=\u002222\u0022 CornerRadius=\u00225\u0022 Background=\u0022{DynamicResource SurfaceTertiaryBrush}\u0022 Margin=\u00220,0,8,0\u0022\u003E\u003CTextBlock Text=\u0022\u539F\u0022 FontSize=\u002210\u0022 Foreground=\u0022{DynamicResource TextSecondaryBrush}\u0022 HorizontalAlignment=\u0022Center\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003C/Border\u003E\u003CTextBlock Text=\u0022\u539F\u7247\u0022 Style=\u0022{StaticResource CaptionText}\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003CTextBlock Text=\u0022  \u0022 /\u003E\u003CTextBlock Text=\u0022{Binding TargetName}\u0022 TextTrimming=\u0022CharacterEllipsis\u0022 MaxWidth=\u0022210\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003C/StackPanel\u003E\u003C/Border\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_SMALL_FONTSIZE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ReferenceColorWorkspaceView.xaml",
+    "Line": 23,
+    "Source": "\u003CBorder Background=\u0022{DynamicResource SurfaceSecondaryBrush}\u0022 CornerRadius=\u00228\u0022 Padding=\u00228,5\u0022 MinWidth=\u0022300\u0022\u003E\u003CStackPanel Orientation=\u0022Horizontal\u0022\u003E\u003CBorder Width=\u002222\u0022 Height=\u002222\u0022 CornerRadius=\u00225\u0022 Background=\u0022{DynamicResource AccentSoftBrush}\u0022 Margin=\u00220,0,8,0\u0022\u003E\u003CTextBlock Text=\u0022\u53C2\u0022 FontSize=\u002210\u0022 Foreground=\u0022{DynamicResource AccentValueBrush}\u0022 HorizontalAlignment=\u0022Center\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003C/Border\u003E\u003CTextBlock Text=\u0022\u53C2\u8003\u98CE\u683C\u0022 Style=\u0022{StaticResource CaptionText}\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003CTextBlock Text=\u0022  \u0022 /\u003E\u003CTextBlock Text=\u0022{Binding Editor.CurrentLookText}\u0022 TextTrimming=\u0022CharacterEllipsis\u0022 MaxWidth=\u0022220\u0022 VerticalAlignment=\u0022Center\u0022/\u003E\u003C/StackPanel\u003E\u003C/Border\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\ShootBookingDetailsView.xaml",
+    "Line": 52,
+    "Source": "\u003CItemsControl ItemsSource=\u0022{Binding AssetThumbnails}\u0022 AutomationProperties.AutomationId=\u0022BookingAssetThumbnailStrip\u0022\u003E\u003CItemsControl.ItemsPanel\u003E\u003CItemsPanelTemplate\u003E\u003CStackPanel Orientation=\u0022Horizontal\u0022 /\u003E\u003C/ItemsPanelTemplate\u003E\u003C/ItemsControl.ItemsPanel\u003E\u003CItemsControl.ItemTemplate\u003E\u003CDataTemplate\u003E\u003CBorder Width=\u002296\u0022 Height=\u0022100\u0022 Margin=\u00220,0,6,0\u0022 Background=\u0022{DynamicResource SurfaceSecondaryBrush}\u0022\u003E\u003CGrid\u003E\u003CImage Stretch=\u0022UniformToFill\u0022 asset:AsyncThumbnail.SourcePath=\u0022{Binding ThumbnailPath}\u0022 asset:AsyncThumbnail.DecodeWidth=\u0022192\u0022 /\u003E\u003CTextBlock Text=\u0022{Binding WorkflowLabel}\u0022 VerticalAlignment=\u0022Bottom\u0022 Background=\u0022#CC171A20\u0022 Foreground=\u0022White\u0022 FontSize=\u0022{DynamicResource Type.Micro.FontSize}\u0022 Padding=\u00224,2\u0022 /\u003E\u003CTextBlock Text=\u0022\u79BB\u7EBF\u0022 HorizontalAlignment=\u0022Right\u0022 VerticalAlignment=\u0022Top\u0022 Background=\u0022#CC171A20\u0022 Foreground=\u0022White\u0022 FontSize=\u0022{DynamicResource Type.Micro.FontSize}\u0022 Padding=\u00223\u0022 Visibility=\u0022{Binding IsOffline, Converter={StaticResource BooleanToVisibilityConverter}}\u0022 /\u003E\u003C/Grid\u003E\u003C/Border\u003E\u003C/DataTemplate\u003E\u003C/ItemsControl.ItemTemplate\u003E\u003C/ItemsControl\u003E"
+  },
+  {
+    "Severity": "P1",
+    "Kind": "PAGE_SCALE_TRANSFORM",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\TetherCaptureView.xaml",
+    "Line": 332,
+    "Source": "\u003CGrid.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding Zoom}\u0022 ScaleY=\u0022{Binding Zoom}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding PanX}\u0022 Y=\u0022{Binding PanY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Grid.RenderTransform\u003E"
+  },
+  {
+    "Severity": "P1",
+    "Kind": "PAGE_SCALE_TRANSFORM",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\TetherCaptureView.xaml",
+    "Line": 352,
+    "Source": "\u003CImage Source=\u0022{Binding ReferenceImage}\u0022 Stretch=\u0022Uniform\u0022 Opacity=\u0022{Binding ReferenceOpacity}\u0022 Visibility=\u0022{Binding ReferenceVisible, Converter={StaticResource BooleanToVisibilityConverter}}\u0022 IsHitTestVisible=\u0022False\u0022\u003E\u003CImage.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding ReferenceScaleX}\u0022 ScaleY=\u0022{Binding ReferenceScale}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding ReferenceOffsetX}\u0022 Y=\u0022{Binding ReferenceOffsetY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Image.RenderTransform\u003E\u003C/Image\u003E"
+  },
+  {
+    "Severity": "P1",
+    "Kind": "PAGE_SCALE_TRANSFORM",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\TetherCaptureView.xaml",
+    "Line": 355,
+    "Source": "\u003CGrid Visibility=\u0022{Binding IsSideBySide, Converter={StaticResource BooleanToVisibilityConverter}}\u0022\u003E\u003CGrid.ColumnDefinitions\u003E\u003CColumnDefinition Width=\u0022*\u0022 /\u003E\u003CColumnDefinition Width=\u00221\u0022 /\u003E\u003CColumnDefinition Width=\u0022*\u0022 /\u003E\u003C/Grid.ColumnDefinitions\u003E\u003CGrid MouseLeftButtonDown=\u0022ComparePrimary_MouseLeftButtonDown\u0022\u003E\u003CImage Source=\u0022{Binding ComparisonPrimaryImage}\u0022 Stretch=\u0022{Binding ComparisonImageStretch}\u0022\u003E\u003CImage.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding Zoom}\u0022 ScaleY=\u0022{Binding Zoom}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding PanX}\u0022 Y=\u0022{Binding PanY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Image.RenderTransform\u003E\u003C/Image\u003E\u003CBorder VerticalAlignment=\u0022Bottom\u0022 Background=\u0022{DynamicResource OverlayBrush}\u0022 Padding=\u00228\u0022\u003E\u003CTextBlock Text=\u0022A \u00B7 \u4E3B\u56FE\u0022 /\u003E\u003C/Border\u003E\u003C/Grid\u003E\u003CBorder Grid.Column=\u00221\u0022 Background=\u0022{DynamicResource DividerBrush}\u0022 /\u003E\u003CGrid Grid.Column=\u00222\u0022 MouseLeftButtonDown=\u0022CompareSecondary_MouseLeftButtonDown\u0022\u003E\u003CImage Source=\u0022{Binding ComparisonSecondaryImage}\u0022 Stretch=\u0022{Binding ComparisonImageStretch}\u0022\u003E\u003CImage.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding ComparisonSecondaryZoom}\u0022 ScaleY=\u0022{Binding ComparisonSecondaryZoom}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding ComparisonSecondaryPanX}\u0022 Y=\u0022{Binding ComparisonSecondaryPanY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Image.RenderTransform\u003E\u003C/Image\u003E\u003CBorder VerticalAlignment=\u0022Bottom\u0022 Background=\u0022{DynamicResource OverlayBrush}\u0022 Padding=\u00228\u0022\u003E\u003CTextBlock Text=\u0022B \u00B7 \u5BF9\u6BD4\u56FE\u0022 /\u003E\u003C/Border\u003E\u003C/Grid\u003E\u003C/Grid\u003E"
+  },
+  {
+    "Severity": "P1",
+    "Kind": "PAGE_SCALE_TRANSFORM",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\RAWSelectionAssistant\\Views\\TetherCaptureView.xaml",
+    "Line": 356,
+    "Source": "\u003CGrid Visibility=\u0022{Binding IsOverlayCompare, Converter={StaticResource BooleanToVisibilityConverter}}\u0022\u003E\u003CImage Source=\u0022{Binding ComparisonPrimaryImage}\u0022 Stretch=\u0022{Binding ComparisonImageStretch}\u0022\u003E\u003CImage.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding Zoom}\u0022 ScaleY=\u0022{Binding Zoom}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding PanX}\u0022 Y=\u0022{Binding PanY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Image.RenderTransform\u003E\u003C/Image\u003E\u003CImage Source=\u0022{Binding ComparisonSecondaryImage}\u0022 Stretch=\u0022{Binding ComparisonImageStretch}\u0022 Opacity=\u0022{Binding ComparisonSecondaryOpacity}\u0022\u003E\u003CImage.RenderTransform\u003E\u003CTransformGroup\u003E\u003CScaleTransform ScaleX=\u0022{Binding ComparisonSecondaryZoom}\u0022 ScaleY=\u0022{Binding ComparisonSecondaryZoom}\u0022 /\u003E\u003CTranslateTransform X=\u0022{Binding ComparisonSecondaryPanX}\u0022 Y=\u0022{Binding ComparisonSecondaryPanY}\u0022 /\u003E\u003C/TransformGroup\u003E\u003C/Image.RenderTransform\u003E\u003C/Image\u003E\u003CTextBlock Text=\u0022\u91CD\u53E0\u6BD4\u8F83 \u00B7 \u4E2D\u5FC3\u5BF9\u9F50\u0022 Foreground=\u0022{DynamicResource TextPrimaryBrush}\u0022 Background=\u0022{DynamicResource OverlayBrush}\u0022 Padding=\u00228\u0022 HorizontalAlignment=\u0022Left\u0022 VerticalAlignment=\u0022Top\u0022 Margin=\u002210\u0022 /\u003E\u003C/Grid\u003E"
+  }
+]

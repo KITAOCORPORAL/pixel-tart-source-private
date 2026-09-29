@@ -15,6 +15,111 @@ namespace RAWSelectionAssistant.WpfTests;
 // DEV-only gallery and software layout audit. Never registered in product navigation.
 internal static class StudioVisualEvidence
 {
+    internal enum GeometryViolationKind
+    {
+        TextClipped,
+        TextOverflow,
+        ControlOverlap,
+        OutsideRoot,
+        HeaderCollision,
+        ButtonTooSmall,
+        InputTooSmall,
+        PopupClipped,
+        CanvasStarved
+    }
+
+    internal sealed record GeometryViolation(
+        GeometryViolationKind Kind,
+        string Severity,
+        string Element,
+        string? AutomationId,
+        string Detail,
+        Rect Bounds);
+
+    internal static IReadOnlyList<GeometryViolation> FindGeometryViolations(FrameworkElement root)
+    {
+        var result = new List<GeometryViolation>();
+        var elements = Walk<FrameworkElement>(root)
+            .Where(e => e.IsVisible && e.ActualWidth > 0 && e.ActualHeight > 0)
+            .ToArray();
+        foreach (var element in elements)
+        {
+            Rect bounds;
+            try { bounds = element.TransformToAncestor(root).TransformBounds(new Rect(element.RenderSize)); }
+            catch (InvalidOperationException) { continue; }
+            var id = AutomationProperties.GetAutomationId(element);
+            if (bounds.Left < -2 || bounds.Top < -2 || bounds.Right > root.ActualWidth + 2 || bounds.Bottom > root.ActualHeight + 2)
+                result.Add(new(GeometryViolationKind.OutsideRoot, "P0", element.GetType().Name, id, "visible bounds leave the root", bounds));
+            if (element is ButtonBase button && (button.ActualWidth < 36 || button.ActualHeight < 36))
+                result.Add(new(GeometryViolationKind.ButtonTooSmall, "P1", element.GetType().Name, id, $"{button.ActualWidth:0.#}x{button.ActualHeight:0.#} DIP", bounds));
+            if (element is TextBoxBase input && (input.ActualWidth < 120 || input.ActualHeight < 36))
+                result.Add(new(GeometryViolationKind.InputTooSmall, "P1", element.GetType().Name, id, $"{input.ActualWidth:0.#}x{input.ActualHeight:0.#} DIP", bounds));
+            if (element is TextBlock text && !string.IsNullOrWhiteSpace(text.Text))
+            {
+                var available = Math.Max(1, text.ActualWidth - text.Padding.Left - text.Padding.Right);
+                var measured = new FormattedText(text.Text, System.Globalization.CultureInfo.CurrentCulture, text.FlowDirection,
+                    new Typeface(text.FontFamily, text.FontStyle, text.FontWeight, text.FontStretch), text.FontSize, Brushes.Black, 1);
+                if (text.TextWrapping == TextWrapping.NoWrap && text.TextTrimming == TextTrimming.None && measured.WidthIncludingTrailingWhitespace > available + 2)
+                    result.Add(new(GeometryViolationKind.TextOverflow, "P0", element.GetType().Name, id, $"desired width {measured.WidthIncludingTrailingWhitespace:0.#} > {available:0.#}", bounds));
+                if (text.ClipToBounds && (bounds.Width < measured.WidthIncludingTrailingWhitespace || bounds.Height < measured.Height))
+                    result.Add(new(GeometryViolationKind.TextClipped, "P0", element.GetType().Name, id, "text is clipped by its own bounds", bounds));
+            }
+        }
+
+        // Pairwise overlap is intentionally restricted to peer controls. Parent/child,
+        // adorners, badges and icon content are valid composition patterns.
+        for (var i = 0; i < elements.Length; i++)
+        for (var j = i + 1; j < elements.Length; j++)
+        {
+            var left = elements[i]; var right = elements[j];
+            if (!IsPeerControl(left, right) || IsIntentionalOverlay(left, right)) continue;
+            Rect a, b;
+            try { a = left.TransformToAncestor(root).TransformBounds(new Rect(left.RenderSize)); b = right.TransformToAncestor(root).TransformBounds(new Rect(right.RenderSize)); }
+            catch (InvalidOperationException) { continue; }
+            var intersection = Rect.Intersect(a, b);
+            if (!intersection.IsEmpty && intersection.Width > 2 && intersection.Height > 2)
+                result.Add(new(GeometryViolationKind.ControlOverlap, "P0", left.GetType().Name + " ↔ " + right.GetType().Name,
+                    AutomationProperties.GetAutomationId(left), $"peer bounds intersect ({intersection.Width:0.#}x{intersection.Height:0.#})", intersection));
+        }
+        return result;
+
+        static bool IsPeerControl(FrameworkElement a, FrameworkElement b)
+        {
+            var aControl = a is ButtonBase or TextBoxBase or Selector or ToolBar;
+            var bControl = b is ButtonBase or TextBoxBase or Selector or ToolBar;
+            if (!aControl || !bControl) return false;
+            if (ReferenceEquals(VisualTreeHelper.GetParent(a), VisualTreeHelper.GetParent(b))) return true;
+            return a is ToolBar && b is ToolBar;
+        }
+        static bool IsIntentionalOverlay(FrameworkElement a, FrameworkElement b)
+        {
+            if (IsDescendant(a, b) || IsDescendant(b, a)) return true;
+            if (a is ButtonBase && b is TextBlock || b is ButtonBase && a is TextBlock) return true;
+            var aid = AutomationProperties.GetAutomationId(a); var bid = AutomationProperties.GetAutomationId(b);
+            return (aid?.Contains("Badge", StringComparison.OrdinalIgnoreCase) ?? false) || (bid?.Contains("Badge", StringComparison.OrdinalIgnoreCase) ?? false);
+        }
+        static bool IsDescendant(DependencyObject child, DependencyObject ancestor)
+        {
+            for (var current = VisualTreeHelper.GetParent(child); current is not null; current = VisualTreeHelper.GetParent(current))
+                if (ReferenceEquals(current, ancestor)) return true;
+            return false;
+        }
+    }
+
+    internal static void AssertNoP0GeometryViolations(FrameworkElement root, string state, string output)
+    {
+        var violations = FindGeometryViolations(root);
+        Directory.CreateDirectory(output);
+        File.AppendAllText(Path.Combine(output, "geometry-violations.jsonl"), JsonSerializer.Serialize(new
+        {
+            ProductSourceSha = Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA") ?? "UNFROZEN_WORKTREE",
+            State = state,
+            Violations = violations
+        }) + Environment.NewLine);
+        var p0 = violations.Where(v => v.Severity == "P0").ToArray();
+        if (p0.Length > 0) throw new InvalidOperationException($"UI Guardian P0 geometry violations at {state}: {JsonSerializer.Serialize(p0)}");
+    }
+
     internal static void AssertNoShellCloseCollision(FrameworkElement root, string state, string output)
     {
         var close = Walk<SurfaceCloseButton>(root).FirstOrDefault(element =>
@@ -93,6 +198,8 @@ internal static class StudioVisualEvidence
         }
         Directory.CreateDirectory(output);
         File.AppendAllText(Path.Combine(output, "geometry-observations.jsonl"), JsonSerializer.Serialize(new { ProductSourceSha = Environment.GetEnvironmentVariable("PIXEL_TART_PRODUCT_SOURCE_SHA") ?? "UNFROZEN_WORKTREE", State = state, Rows = rows }) + Environment.NewLine);
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_UI_GUARDIAN_HARD_GATE") == "1")
+            AssertNoP0GeometryViolations(root, state, output);
     }
     internal static async Task MeasureOperation(string output, string name, Func<Task> action, Func<bool> feedback, FrameworkElement? visualRoot = null)
     {
