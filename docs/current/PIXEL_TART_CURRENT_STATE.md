@@ -1,7 +1,7 @@
 # Pixel Tart current capability state
 
-Generated: 2026-09-29T08:50:52.4953669+00:00
-Generated from source HEAD: cf60ee685cedfe241c24ab4d84852ea4c86ef929
+Generated: 2026-09-29T18:03:31.5422440+00:00
+Generated from source HEAD: a1cde36d82bc65d211ae85e6a8fbf60baadd5d92
 Branch: integration/pixel-tart-developer-preview
 
 | Capability | Implementation | Verification | Evidence | Next gate |
@@ -21,7 +21,7 @@ Branch: integration/pixel-tart-developer-preview
 | CubeLutPreset | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Tethering/LutServices.cs<br>tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs | Product browser consolidation |
 | CaptureOnePreset | SPEC_ONLY | NOT_APPLICABLE | src/RAWSelectionAssistant.Core/Services/RawToJpeg/CaptureOnePresetImporter.cs | Legal fixture adapter verification |
 | 3DColorSpaceCore | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs<br>tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs | Windows renderer |
-| 3DColorSpaceRenderer | PARTIAL | PASS (bounded WPF surface) | src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs | Native pointer/screenshot/performance gate |
+| 3DColorSpaceRenderer | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs<br>tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs | Native 3D pointer, extended capability and final visual review |
 | GPUFullPixel | PARTIAL | NOT_RUN | src/PixelTart.MatchV4.Dx12/<br>docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md | Full product integration |
 | ICCRegistry | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs<br>docs/color-studio/ICC_PIPELINE_AUDIT.md | Validated conversion |
 | ICCConversion | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs | Pixel conversion validation |

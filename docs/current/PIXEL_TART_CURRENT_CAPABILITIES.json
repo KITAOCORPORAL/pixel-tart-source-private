@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-29T08:50:52.4953669+00:00",
-  "generated_from_head": "cf60ee685cedfe241c24ab4d84852ea4c86ef929",
+  "generated_at": "2026-09-29T18:03:31.5422440+00:00",
+  "generated_from_head": "a1cde36d82bc65d211ae85e6a8fbf60baadd5d92",
   "branch": "integration/pixel-tart-developer-preview",
   "capabilities": [
     {
@@ -243,14 +243,20 @@
     {
       "id": "3DColorSpaceRenderer",
       "module": "ColorStudio",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "implementation_status": "PARTIAL",
       "verification_status": "NOT_RUN",
-      "evidence": [],
-      "required_tests": [],
+      "evidence": [
+        "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
+        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs"
+      ],
       "acceptance_artifacts": [
+        "docs/evidence/ui-guardian/3D_MODEL_CAPTURE_STATE_TRACE.md",
         "docs/current/PIXEL_TART_CURRENT_STATE.md"
       ],
-      "next_gate": "3D_COLOR_SPACE_WINDOWS_RENDERER"
+      "next_gate": "Native 3D pointer, extended capability and final visual review"
     },
     {
       "id": "GPUFullPixel",
