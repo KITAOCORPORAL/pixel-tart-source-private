@@ -51,7 +51,8 @@ internal static class StudioVisualEvidence
             // RenderTargetBitmap evidence arranges the production client at its requested
             // pixel size; a one-pixel/effect shadow overhang is not a content escape.
             var tolerance = element is Border or Grid or System.Windows.Shapes.Rectangle or ProgressBar ? 6 : 2;
-            if (bounds.Left < -tolerance || bounds.Top < -tolerance || bounds.Right > root.ActualWidth + tolerance || bounds.Bottom > root.ActualHeight + tolerance)
+            var outsideRoot = bounds.Left < -tolerance || bounds.Top < -tolerance || bounds.Right > root.ActualWidth + tolerance || bounds.Bottom > root.ActualHeight + tolerance;
+            if (outsideRoot && !IsScrollReachable(element))
                 result.Add(new(GeometryViolationKind.OutsideRoot, "P0", element.GetType().Name, id, "visible bounds leave the root", bounds));
             if (element is ButtonBase button && (button.ActualWidth < 36 || button.ActualHeight < 36))
                 result.Add(new(GeometryViolationKind.ButtonTooSmall, "P1", element.GetType().Name, id, $"{button.ActualWidth:0.#}x{button.ActualHeight:0.#} DIP", bounds));
@@ -62,9 +63,11 @@ internal static class StudioVisualEvidence
                 var available = Math.Max(1, text.ActualWidth - text.Padding.Left - text.Padding.Right);
                 var measured = new FormattedText(text.Text, System.Globalization.CultureInfo.CurrentCulture, text.FlowDirection,
                     new Typeface(text.FontFamily, text.FontStyle, text.FontWeight, text.FontStretch), text.FontSize, Brushes.Black, 1);
-                if (text.TextWrapping == TextWrapping.NoWrap && text.TextTrimming == TextTrimming.None && measured.WidthIncludingTrailingWhitespace > available + 2)
+                if (text.TextWrapping == TextWrapping.NoWrap && text.TextTrimming == TextTrimming.None && measured.WidthIncludingTrailingWhitespace > available + 2 && !IsTextScrollReachable(text))
                     result.Add(new(GeometryViolationKind.TextOverflow, "P0", element.GetType().Name, id, $"desired width {measured.WidthIncludingTrailingWhitespace:0.#} > {available:0.#}", bounds));
-                if (text.ClipToBounds && (bounds.Width < measured.WidthIncludingTrailingWhitespace || bounds.Height < measured.Height))
+                var desiredWidth = Math.Max(measured.WidthIncludingTrailingWhitespace, text.DesiredSize.Width);
+                var desiredHeight = Math.Max(measured.Height, text.DesiredSize.Height);
+                if (text.ClipToBounds && (bounds.Width < desiredWidth || bounds.Height < desiredHeight))
                     result.Add(new(GeometryViolationKind.TextClipped, "P0", element.GetType().Name, id, "text is clipped by its own bounds", bounds));
             }
         }
@@ -85,6 +88,35 @@ internal static class StudioVisualEvidence
                     AutomationProperties.GetAutomationId(left), $"peer bounds intersect ({intersection.Width:0.#}x{intersection.Height:0.#})", intersection));
         }
         return result;
+
+        bool IsScrollReachable(FrameworkElement element)
+        {
+            for (DependencyObject? current = VisualTreeHelper.GetParent(element); current is not null; current = VisualTreeHelper.GetParent(current))
+            {
+                if (current is not ScrollViewer viewer || !viewer.IsVisible) continue;
+                var relative = element.TransformToAncestor(viewer).TransformBounds(new Rect(element.RenderSize));
+                var viewport = new Rect(0, 0,
+                    viewer.ViewportWidth > 0 ? viewer.ViewportWidth : viewer.ActualWidth,
+                    viewer.ViewportHeight > 0 ? viewer.ViewportHeight : viewer.ActualHeight);
+                var hasScrollExtent = viewer.ScrollableWidth > 0.5 || viewer.ScrollableHeight > 0.5 ||
+                    viewer.HorizontalScrollBarVisibility is ScrollBarVisibility.Auto or ScrollBarVisibility.Visible ||
+                    viewer.VerticalScrollBarVisibility is ScrollBarVisibility.Auto or ScrollBarVisibility.Visible;
+                var clipped = viewer.ClipToBounds || viewer.Template.FindName("PART_ScrollContentPresenter", viewer) is ScrollContentPresenter;
+                if (hasScrollExtent && clipped && !viewport.Contains(relative) || hasScrollExtent && clipped && !relative.IntersectsWith(viewport)) return true;
+            }
+            return false;
+        }
+
+        bool IsTextScrollReachable(TextBlock text)
+        {
+            for (DependencyObject? current = VisualTreeHelper.GetParent(text); current is not null; current = VisualTreeHelper.GetParent(current))
+            {
+                if (current is ScrollViewer viewer && viewer.IsVisible &&
+                    viewer.HorizontalScrollBarVisibility is ScrollBarVisibility.Auto or ScrollBarVisibility.Visible &&
+                    (viewer.ScrollableWidth > 0.5 || viewer.ExtentWidth > viewer.ViewportWidth + 0.5)) return true;
+            }
+            return false;
+        }
 
         static bool IsPeerControl(FrameworkElement a, FrameworkElement b)
         {

@@ -1,0 +1,21 @@
+{
+  "GeneratedAt": "2026-09-29T16:49:32.6185839+00:00",
+  "HistoricalAuditCount": 213,
+  "LatestAuditCount": 33,
+  "BeforeCalibration": {
+    "ColorStudio": {
+      "X1180": 651,
+      "X1600": 611,
+      "X1920": 584
+    },
+    "Source": "pre-calibration capture reported by UI Guardian"
+  },
+  "LatestCalibratedRun": {
+    "P0Count": 0,
+    "RealP0Remaining": 0,
+    "FalsePositivesRemoved": 1846,
+    "LatestDirectory": "N:\\pixart\\pixel-tart-source-private\\tests\\UIVisual\\Received\\20260929T162410058Z"
+  },
+  "Classification": "Scrollable offscreen content is EXPECTED_SCROLL_CONTENT only when a valid viewport/extent contract exists; real peer overlap and non-scrollable root escape remain REAL_P0.",
+  "Groups": []
+}

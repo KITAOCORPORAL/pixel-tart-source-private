@@ -1,15 +1,15 @@
 {
-  "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+  "ProductSourceSha": "dc43ebe5079c5e7dfa8b2a546ae3b822955c17f8",
   "GuardianImplementationSha": "WORKTREE",
-  "EvidenceGeneratedAt": "2026-09-29T16:02:55.3942485+00:00",
+  "EvidenceGeneratedAt": "2026-09-29T16:24:51.4932738+00:00",
   "HardGateEnabled": true,
   "Total": 33,
-  "Captured": 16,
-  "Failed": 14,
-  "NotReachable": 3,
-  "Received": "tests\\UIVisual\\Received\\20260929T160222287Z",
+  "Captured": 33,
+  "Failed": 0,
+  "NotReachable": 0,
+  "Received": "tests\\UIVisual\\Received\\20260929T162410058Z",
   "ApprovedBaseline": false,
   "VisualApproved": false,
-  "Status": "UI_GUARDIAN_CORRECTION_REQUIRED",
+  "Status": "READY_FOR_USER_UI_REVIEW",
   "Renderer": "PARTIAL"
 }

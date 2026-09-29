@@ -1,0 +1,6 @@
+# 3D model capture state trace
+
+- `{"Step":"before-context","SourceImage":true,"ReferenceImage":true,"MatchedImage":true,"CanExecute":true,"WorkspaceMode":"\u4E13\u4E1A","CurrentTarget":"demo-shot-01.png","Status":"\u73B0\u573A\u76D1\u770B\u4EFF\u8272\u5DF2\u66F4\u65B0\uFF1BRAW/JPEG \u6E90\u6587\u4EF6\u672A\u4FEE\u6539\u3002"}`
+- `{"Step":"after-load-target","SourceImage":true,"ReferenceImage":false,"MatchedImage":false,"CanExecute":false,"WorkspaceMode":"\u4E13\u4E1A","CurrentTarget":"demo-shot-01.png","Status":"\u8BF7\u6DFB\u52A0\u53C2\u8003\u56FE\u7247\u6216\u9009\u62E9\u8272\u5F69\u65B9\u6848\u3002"}`
+- `{"Step":"after-context","SourceImage":true,"ReferenceImage":true,"MatchedImage":true,"CanExecute":true,"WorkspaceMode":"\u4E13\u4E1A","CurrentTarget":"demo-shot-01.png","Status":"\u73B0\u573A\u76D1\u770B\u4EFF\u8272\u5DF2\u66F4\u65B0\uFF1BRAW/JPEG \u6E90\u6587\u4EF6\u672A\u4FEE\u6539\u3002"}`
+- `{"Step":"after-apply","SourceImage":true,"ReferenceImage":true,"MatchedImage":true,"CanExecute":true,"WorkspaceMode":"\u4E13\u4E1A","CurrentTarget":"demo-shot-01.png","Status":"\u73B0\u573A\u76D1\u770B\u4EFF\u8272\u5DF2\u66F4\u65B0\uFF1BRAW/JPEG \u6E90\u6587\u4EF6\u672A\u4FEE\u6539\u3002"}`
