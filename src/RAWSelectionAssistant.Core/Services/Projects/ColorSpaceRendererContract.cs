@@ -4,11 +4,12 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 
 public readonly record struct ColorSpaceCamera(double Yaw, double Pitch, double Distance, double PanX, double PanY)
 {
-    public static ColorSpaceCamera Default => new(0, 0, 1, 0, 0);
-    public ColorSpaceCamera Rotate(double yawDelta, double pitchDelta) => this with { Yaw = Yaw + yawDelta, Pitch = Math.Clamp(Pitch + pitchDelta, -89, 89) };
+    public static ColorSpaceCamera Default => new(ColorSpaceCameraState.DefaultYaw, ColorSpaceCameraState.DefaultPitch, ColorSpaceCameraState.DefaultDistance, 0, 0);
+    public ColorSpaceCamera Rotate(double yawDelta, double pitchDelta) => this with { Yaw = WrapDegrees(Yaw + yawDelta), Pitch = Math.Clamp(Pitch + pitchDelta, -89, 89) };
     public ColorSpaceCamera Pan(double x, double y) => this with { PanX = PanX + x, PanY = PanY + y };
     public ColorSpaceCamera Zoom(double factor) => this with { Distance = Math.Clamp(Distance / Math.Max(.01, factor), .1, 10) };
     public ColorSpaceCamera Reset() => Default;
+    private static double WrapDegrees(double value) { value %= 360; return value <= -180 ? value + 360 : value > 180 ? value - 360 : value; }
 }
 public sealed record ColorSpaceRendererState(ColorSpaceVisualizationModel Model, ColorSpaceCamera Camera, ColorCloudMode Mode, bool ShowMigrationVectors, bool IsFit)
 {
