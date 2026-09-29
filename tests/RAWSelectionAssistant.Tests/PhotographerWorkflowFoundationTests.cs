@@ -57,9 +57,23 @@ public sealed class PhotographerWorkflowFoundationTests
     public void ActualPixelsUsesSourceDpiAndPhysicalDeviceScale()
     {
         var scale = ActualPixelScaleCalculator.Calculate(144, 144, 1.5, 1.5);
-        Assert.AreEqual(2.25, scale.ScaleX, 1e-12);
-        Assert.AreEqual(2.25, scale.ScaleY, 1e-12);
-        Assert.AreEqual(2.25, ActualPixelScaleCalculator.ActualPixelZoom(144, 1.5), 1e-12);
+        Assert.AreEqual(1, scale.ScaleX * 1.5 * 96 / 144, 1e-12);
+        Assert.AreEqual(1, scale.ScaleY * 1.5 * 96 / 144, 1e-12);
+        Assert.AreEqual(1, ActualPixelScaleCalculator.ActualPixelZoom(144, 1.5), 1e-12);
+    }
+
+    [TestMethod]
+    public void ActualPixelsIgnoresPrintDpiSemanticsAcrossWindowsScalingMatrix()
+    {
+        foreach (var windowsScale in new[] { 1d, 1.25, 1.5, 1.75, 2d })
+        foreach (var dpi in new[] { 72d, 96d, 300d })
+        foreach (var pixels in new[] { (6000, 4000), (4000, 6000), (9504, 6336), (11648, 8736) })
+        {
+            var geometry = ImagePixelGeometry.Create(pixels.Item1, pixels.Item2, dpi, dpi);
+            var scale = ActualPixelScaleCalculator.Calculate(dpi, dpi, windowsScale, windowsScale);
+            var physicalRatio = geometry.NaturalWidthDip * windowsScale * scale.ScaleX / pixels.Item1;
+            Assert.AreEqual(1, physicalRatio, 1e-12, $"{pixels} at {windowsScale:P0}/{dpi} DPI");
+        }
     }
 
     [TestMethod]

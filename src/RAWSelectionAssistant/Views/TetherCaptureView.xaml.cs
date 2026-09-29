@@ -18,6 +18,7 @@ public partial class TetherCaptureView : UserControl
     private double _panStartX;
     private double _panStartY;
     private bool _isDragging;
+    private Core.Models.Photography.CompareSide _dragCompareSide;
     private bool _isBrowserCollapsed;
     private readonly Services.TetherWorkspacePreferenceStore _workspacePreferences = new();
     private bool _preferencesLoaded;
@@ -278,7 +279,13 @@ public partial class TetherCaptureView : UserControl
 
     private void PreviewViewport_MouseWheel(object sender, MouseWheelEventArgs e)
     {
-        ViewModel?.AdjustZoom(e.Delta);
+        if (ViewModel is { IsSideBySide: true } viewModel)
+        {
+            var point = e.GetPosition(PreviewViewport);
+            var side = point.X <= PreviewViewport.ActualWidth / 2 ? Core.Models.Photography.CompareSide.Primary : Core.Models.Photography.CompareSide.Secondary;
+            viewModel.AdjustCompareZoom(side, e.Delta);
+        }
+        else ViewModel?.AdjustZoom(e.Delta);
         e.Handled = true;
     }
 
@@ -295,7 +302,11 @@ public partial class TetherCaptureView : UserControl
     private void PreviewViewport_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (ViewModel is null || e.ClickCount > 1) return;
-        _isDragging = true; _dragStart = e.GetPosition(PreviewViewport); _panStartX = ViewModel.PanX; _panStartY = ViewModel.PanY;
+        _dragCompareSide = ViewModel.IsSideBySide && e.GetPosition(PreviewViewport).X > PreviewViewport.ActualWidth / 2
+            ? Core.Models.Photography.CompareSide.Secondary : Core.Models.Photography.CompareSide.Primary;
+        ViewModel.SetActiveCompareSide(_dragCompareSide);
+        (double X, double Y) pan = ViewModel.IsSideBySide ? ViewModel.GetComparePan(_dragCompareSide) : (ViewModel.PanX, ViewModel.PanY);
+        _isDragging = true; _dragStart = e.GetPosition(PreviewViewport); _panStartX = pan.X; _panStartY = pan.Y;
         PreviewViewport.CaptureMouse(); e.Handled = true;
     }
 
@@ -308,7 +319,8 @@ public partial class TetherCaptureView : UserControl
     {
         if (!_isDragging || ViewModel is null || e.LeftButton != MouseButtonState.Pressed) return;
         var current = e.GetPosition(PreviewViewport);
-        ViewModel.SetPan(_panStartX + current.X - _dragStart.X, _panStartY + current.Y - _dragStart.Y);
+        if (ViewModel.IsSideBySide) ViewModel.SetComparePan(_dragCompareSide, _panStartX + current.X - _dragStart.X, _panStartY + current.Y - _dragStart.Y);
+        else ViewModel.SetPan(_panStartX + current.X - _dragStart.X, _panStartY + current.Y - _dragStart.Y);
     }
 
     private void PreviewViewport_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) => EndDrag();

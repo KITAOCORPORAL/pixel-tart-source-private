@@ -1124,6 +1124,38 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ActiveCompareSide = side;
         if (ActiveCompareAsset?.Annotation is { } annotation) ApplyAnnotationToEditor(annotation);
     }
+    public void AdjustCompareZoom(CompareSide side, double delta)
+    {
+        if (CompareMode == TetherCompareMode.None) return;
+        SetActiveCompareSide(side);
+        var current = side == CompareSide.Primary ? Zoom : _comparisonSecondaryZoom;
+        var next = Math.Clamp(current * (delta > 0 ? 1.12 : .89), .1, 16);
+        if (side == CompareSide.Primary) Zoom = next; else SetSecondaryCompareZoom(next);
+        if (ComparisonSyncZoom)
+        {
+            if (side == CompareSide.Primary) SetSecondaryCompareZoom(next); else Zoom = next;
+        }
+    }
+
+    public (double X, double Y) GetComparePan(CompareSide side) => side == CompareSide.Primary ? (PanX, PanY) : (_comparisonSecondaryPanX, _comparisonSecondaryPanY);
+    public void SetComparePan(CompareSide side, double x, double y)
+    {
+        if (CompareMode == TetherCompareMode.None) return;
+        SetActiveCompareSide(side);
+        if (side == CompareSide.Primary) { PanX = x; PanY = y; }
+        else SetSecondaryComparePan(x, y);
+        if (ComparisonSyncPan)
+        {
+            if (side == CompareSide.Primary) SetSecondaryComparePan(x, y); else { PanX = x; PanY = y; }
+        }
+    }
+
+    public void SetCompareActualPixels(CompareSide side, double sourceDpi, double devicePixelsPerDip)
+    {
+        var zoom = ActualPixelScaleCalculator.ActualPixelZoom(sourceDpi, devicePixelsPerDip);
+        if (side == CompareSide.Primary) SetCompareZoom(CompareZoomMode.ActualPixels, zoom);
+        else { SetActiveCompareSide(side); SetSecondaryCompareZoom(zoom); }
+    }
 
     private void SwapComparison()
     {
