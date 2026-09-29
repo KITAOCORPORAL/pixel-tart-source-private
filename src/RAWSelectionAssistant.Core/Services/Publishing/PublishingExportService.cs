@@ -34,18 +34,22 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             {
             var source = sourceFiles[sourceIndex];
             var index = sequence++;
+            var itemLabel = recipe is null ? Path.GetFileName(source) : $"{recipe.Name} · {Path.GetFileName(source)}";
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (!File.Exists(source)) throw new FileNotFoundException("照片不可用。", source);
                 if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG、TIFF。");
+                ReportProgress(progress, total, results, itemLabel, 0.05, "准备");
                 var before = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                 var destination = ResolveDestination(source, request.DestinationDirectory, recipeOptions, reserved, recipe?.FilenameTemplate, recipe?.Destination);
                 reserved.Add(destination);
                 var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".publishing";
                 try
                 {
+                    ReportProgress(progress, total, results, itemLabel, 0.2, "渲染");
                     await renderer.RenderAsync(source, temporary, recipeOptions, cancellationToken).ConfigureAwait(false);
+                    ReportProgress(progress, total, results, itemLabel, 0.65, "验证");
                     await renderer.VerifyAsync(temporary, cancellationToken).ConfigureAwait(false);
                     var after = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                     if (!CryptographicOperations.FixedTimeEquals(before, after)) throw new IOException("源照片在发布处理期间发生变化，已停止输出。");
@@ -70,7 +74,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
                 results.Add(new(index, PublishingItemState.Failed, source, null, 0, UserMessage(error)));
             }
             var summary = Summarize(total, results);
-            progress?.Report((results.Count * 100d / total, recipe is null ? Path.GetFileName(source) : $"{recipe.Name} · {Path.GetFileName(source)}", summary));
+            progress?.Report((results.Count * 100d / total, itemLabel, summary));
             }
             if (results.Any(item => item.State == PublishingItemState.Cancelled)) break;
         }
@@ -159,6 +163,13 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 128, FileOptions.Asynchronous | FileOptions.SequentialScan);
         return await SHA256.HashDataAsync(stream, cancellationToken).ConfigureAwait(false);
     }
+    private static void ReportProgress(IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress, int total, IReadOnlyCollection<PublishingItemResult> results, string currentFile, double itemFraction, string stage)
+    {
+        if (progress is null) return;
+        var completed = Math.Clamp(results.Count + itemFraction, 0, total);
+        progress.Report((completed * 100d / total, $"{stage}：{currentFile}", Summarize(total, results)));
+    }
+
     private static TaskResultSummary Summarize(int total, IReadOnlyCollection<PublishingItemResult> results) => new(total, results.Count(item => item.State == PublishingItemState.Completed), results.Count(item => item.State == PublishingItemState.Failed), 0, results.Count(item => item.State == PublishingItemState.Cancelled), 0, 0, results.Sum(item => item.BytesWritten));
     private static string UserMessage(Exception error) => error switch { FileNotFoundException => "源照片不可用。", UnauthorizedAccessException => "无法写入输出目录。", InvalidDataException invalid => invalid.Message, _ => "发布输出失败，请检查照片和输出目录。" };
     private static void TryDelete(string path) { try { if (File.Exists(path)) File.Delete(path); } catch { } }

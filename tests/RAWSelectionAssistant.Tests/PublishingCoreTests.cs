@@ -56,6 +56,23 @@ public sealed class PublishingFolderInputTests
 public sealed class PublishingSourceSafetyTests
 {
     [TestMethod]
+    public async Task ReportsPreparationRenderAndVerificationProgressBeforeCompletion()
+    {
+        using var temp = new TempDirectory();
+        var source = temp.CreateFile("source.png", [1, 2, 3]);
+        var updates = new List<(double Progress, string CurrentFile, TaskResultSummary Summary)>();
+        var result = await new PublishingExportService(new CopyRenderer()).ExportAsync(
+            Guid.NewGuid(), new([source], temp.Combine("progress"), new(new(false), false, [])),
+            new SynchronousProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>(updates.Add));
+
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State);
+        Assert.IsGreaterThanOrEqualTo(4, updates.Count, "Progress should expose preparation, render, verification, and completion.");
+        CollectionAssert.AreEqual(new[] { "准备", "渲染", "验证" }, updates.Take(3).Select(item => item.CurrentFile.Split('：')[0]).ToArray());
+        CollectionAssert.AreEqual(new[] { 5d, 20d, 65d }, updates.Take(3).Select(item => item.Progress).ToArray());
+        Assert.AreEqual(100d, updates[^1].Progress, 0.001);
+    }
+
+    [TestMethod]
     public async Task MultiRecipeCancellationAccountsForCurrentAndEveryPendingItem()
     {
         using var temp = new TempDirectory();
@@ -127,6 +144,11 @@ public sealed class PublishingSourceSafetyTests
         public Task RenderAsync(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken = default)
             => throw new OperationCanceledException();
         public Task VerifyAsync(string imagePath, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    }
+
+    private sealed class SynchronousProgress<T>(Action<T> callback) : IProgress<T>
+    {
+        public void Report(T value) => callback(value);
     }
 }
 

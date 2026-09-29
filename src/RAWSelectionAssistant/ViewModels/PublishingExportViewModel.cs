@@ -45,7 +45,7 @@ public sealed record PublishingChoice<T>(T Value, string Name);
 public sealed class PublishingExportViewModel : ObservableObject
 {
     private readonly IPublishingTaskCoordinator _coordinator; private readonly IPublishingRenderer _renderer; private readonly IDialogService _dialogs;
-    private string _destinationDirectory = ""; private bool _dimensionsEnabled = true; private PublishingSizeMode _sizeMode = PublishingSizeMode.LongestEdge; private int _longestEdge = 2400; private int _exactWidth = 1920; private int _exactHeight = 1080; private int _jpegQuality = 88; private bool _preserveMetadata = true; private bool _watermarksEnabled = true; private string _suffix = PublishingDefaults.DefaultSuffix; private string _presetName = ""; private Guid? _activeProjectId; private int _previewIndex; private int _previewRevision; private BitmapImage? _previewImage; private bool _isPreviewing; private bool _isBusy; private string _statusText = "添加成片，设置发布版本；源照片不会被覆盖。"; private string _executionStatus = ""; private double _executionProgress; private Guid? _activeTaskId; private PublishingPreset? _selectedPreset; private PublishingOutputFormat _outputFormat = PublishingOutputFormat.Jpeg; private ExportRecipe? _selectedRecipe; private string _recipeName = "";
+    private string _destinationDirectory = ""; private bool _dimensionsEnabled = true; private PublishingSizeMode _sizeMode = PublishingSizeMode.LongestEdge; private int _longestEdge = 2400; private int _exactWidth = 1920; private int _exactHeight = 1080; private int _jpegQuality = 88; private bool _preserveMetadata = true; private bool _watermarksEnabled = true; private string _suffix = PublishingDefaults.DefaultSuffix; private string _presetName = ""; private Guid? _activeProjectId; private int _previewIndex; private int _previewRevision; private CancellationTokenSource? _previewCancellation; private BitmapImage? _previewImage; private bool _isPreviewing; private bool _isBusy; private string _statusText = "添加成片，设置发布版本；源照片不会被覆盖。"; private string _executionStatus = ""; private double _executionProgress; private Guid? _activeTaskId; private PublishingPreset? _selectedPreset; private PublishingOutputFormat _outputFormat = PublishingOutputFormat.Jpeg; private ExportRecipe? _selectedRecipe; private string _recipeName = "";
     public PublishingExportViewModel(IPublishingTaskCoordinator coordinator, IPublishingRenderer renderer, IDialogService dialogs)
     {
         _coordinator=coordinator;_renderer=renderer;_dialogs=dialogs;
@@ -76,7 +76,51 @@ public sealed class PublishingExportViewModel : ObservableObject
     private void Wire(PublishingWatermarkLayerViewModel layer)=>layer.PropertyChanged+=(_,_)=>_=RefreshPreviewAsync();
     private async Task MovePreviewAsync(int offset){if(SourceFiles.Count==0)return;_previewIndex=(_previewIndex+offset+SourceFiles.Count)%SourceFiles.Count;OnPropertyChanged(nameof(PreviewCounter));await RefreshPreviewAsync();}
     private PublishingOptions Options()=>new(new(DimensionsEnabled,SizeMode,LongestEdge,ExactWidth,ExactHeight,JpegQuality,PreserveMetadata),WatermarksEnabled,WatermarkLayers.Select(layer=>layer.ToModel()).ToArray(),OutputFormat,Suffix,OutputFormat==PublishingOutputFormat.Tiff?PublishingOutputBitDepth.Sixteen:PublishingOutputBitDepth.Eight,"sRGB",PreserveMetadata?ExportRecipeMetadataPolicy.Preserve:ExportRecipeMetadataPolicy.Strip);
-    private async Task RefreshPreviewAsync(){var requested=++_previewRevision;if(SourceFiles.Count==0||IsPreviewing)return;IsPreviewing=true;try{do{requested=_previewRevision;string? temporary=null;try{var recipe=SelectedRecipe;var previewOptions=recipe is null?Options():BuildPreviewOptions(recipe);temporary=Path.Combine(Path.GetTempPath(),"PixelTartPublishingPreview",Guid.NewGuid().ToString("N")+(previewOptions.OutputFormat==PublishingOutputFormat.Tiff?".tif":previewOptions.OutputFormat==PublishingOutputFormat.Png?".png":".jpg"));Directory.CreateDirectory(Path.GetDirectoryName(temporary)!);await _renderer.RenderAsync(SourceFiles[_previewIndex],temporary,previewOptions);if(requested==_previewRevision){var image=new BitmapImage();image.BeginInit();image.CacheOption=BitmapCacheOption.OnLoad;image.UriSource=new Uri(temporary);image.EndInit();image.Freeze();PreviewImage=image;StatusText=recipe is null?"当前预览：发布设置":$"当前预览：{recipe.Name}";}}catch{if(requested==_previewRevision)StatusText="预览暂时不可用，请检查照片或水印文件。";}finally{if(temporary is not null)try{File.Delete(temporary);}catch{}}}while(requested!=_previewRevision&&SourceFiles.Count>0);}finally{IsPreviewing=false;}}
+    private async Task RefreshPreviewAsync()
+    {
+        var requested = ++_previewRevision;
+        _previewCancellation?.Cancel();
+        _previewCancellation?.Dispose();
+        _previewCancellation = new CancellationTokenSource();
+        var token = _previewCancellation.Token;
+        if (SourceFiles.Count == 0) return;
+        if (IsPreviewing) return;
+        IsPreviewing = true;
+        try
+        {
+            do
+            {
+                requested = _previewRevision;
+                token.ThrowIfCancellationRequested();
+                string? temporary = null;
+                try
+                {
+                    var recipe = SelectedRecipe;
+                    var previewOptions = recipe is null ? Options() : BuildPreviewOptions(recipe);
+                    var source = SourceFiles[Math.Clamp(_previewIndex, 0, SourceFiles.Count - 1)];
+                    temporary = Path.Combine(Path.GetTempPath(), "PixelTartPublishingPreview", Guid.NewGuid().ToString("N") + (previewOptions.OutputFormat == PublishingOutputFormat.Tiff ? ".tif" : previewOptions.OutputFormat == PublishingOutputFormat.Png ? ".png" : ".jpg"));
+                    Directory.CreateDirectory(Path.GetDirectoryName(temporary)!);
+                    await _renderer.RenderAsync(source, temporary, previewOptions, token);
+                    token.ThrowIfCancellationRequested();
+                    if (requested == _previewRevision)
+                    {
+                        var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(temporary); image.EndInit(); image.Freeze();
+                        PreviewImage = image; StatusText = recipe is null ? "当前预览：发布设置" : $"当前预览：{recipe.Name}";
+                    }
+                }
+                catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+                catch { if (requested == _previewRevision) StatusText = "预览暂时不可用，请检查照片或水印文件。"; }
+                finally { if (temporary is not null) try { File.Delete(temporary); } catch { } }
+            }
+            while (requested != _previewRevision && SourceFiles.Count > 0 && !token.IsCancellationRequested);
+        }
+        finally
+        {
+            IsPreviewing = false;
+            if (requested != _previewRevision && SourceFiles.Count > 0)
+                _ = RefreshPreviewAsync();
+        }
+    }
 
     private PublishingOptions BuildPreviewOptions(ExportRecipe recipe)
     {
