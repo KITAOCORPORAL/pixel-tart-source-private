@@ -179,6 +179,10 @@ public sealed class TaskEngine : ITaskEngine, ITaskCompletionStateProvider
     private async Task ReportProgressAsync(ExecutionControl control, TaskProgressSnapshot snapshot, CancellationToken cancellationToken)
     {
         var runtime = control.Runtime;
+        // A queued progress callback must never mutate a terminal task. This
+        // protects the final snapshot even when an external handler reports
+        // after cancellation/failure has already been persisted.
+        if (TaskStateMachine.IsTerminal(runtime.State)) return;
         runtime.Progress = Math.Clamp(snapshot.Progress, 0, 100);
         runtime.CurrentStep = snapshot.CurrentStep;
         runtime.CurrentFile = snapshot.CurrentFile;

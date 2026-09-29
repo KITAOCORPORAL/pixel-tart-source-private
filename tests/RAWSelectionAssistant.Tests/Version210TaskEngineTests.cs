@@ -73,6 +73,22 @@ public sealed class Version210TaskEngineTests
     }
 
     [TestMethod]
+    public async Task Engine_IgnoresProgressAfterTerminalSnapshot()
+    {
+        using var setup = await SetupAsync(new DelegateTaskHandler("late", async (ctx, token) =>
+        {
+            await ctx.ReportProgressAsync(42, "running", "before", new(1, 0, 0, 0, 0, 0, 0, 0), token);
+            return TaskExecutionResult.Completed(new(1, 1, 0, 0, 0, 0, 1, 1));
+        }));
+        var definition = Definition("late"); var snapshots = new List<TaskProgressSnapshot>();
+        setup.Engine.SnapshotChanged += (_, snapshot) => snapshots.Add(snapshot);
+        await setup.Engine.EnqueueAsync(definition); await WaitForAsync(setup.Repository, definition.Id, TaskLifecycleState.Completed);
+        var terminal = snapshots.Last(snapshot => snapshot.TaskId == definition.Id && TaskStateMachine.IsTerminal(snapshot.State));
+        Assert.AreEqual(TaskLifecycleState.Completed, terminal.State);
+        Assert.AreEqual(100, terminal.Progress);
+    }
+
+    [TestMethod]
     public async Task Engine_PauseAndResumeAtSafeBoundary()
     {
         using var setup=await SetupAsync(new DelegateTaskHandler("pause",async(ctx,token)=>{for(var i=0;i<8;i++){await Task.Delay(40,token);await ctx.SafeBoundaryAsync("loop",i,cancellationToken:token);}return TaskExecutionResult.Completed(new(8,8,0,0,0,0,8,8));}));var definition=Definition("pause");await setup.Engine.EnqueueAsync(definition);await WaitUntilAsync(async()=> (await setup.Repository.GetAsync(definition.Id))?.State==TaskLifecycleState.Running);await setup.Engine.PauseAsync(definition.Id);await WaitForAsync(setup.Repository,definition.Id,TaskLifecycleState.Paused);await setup.Engine.ResumeAsync(definition.Id);await WaitForAsync(setup.Repository,definition.Id,TaskLifecycleState.Completed);
