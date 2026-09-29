@@ -15,6 +15,9 @@ artifacts/**
 !artifacts/releases/**/
 !artifacts/releases/**/release-manifest.json
 artifacts/acceptance/
+tests/UIVisual/Received/**
+tests/UIVisual/Diff/**
+tests/UIVisual/Reports/**
 artifacts/publish/
 artifacts/installer/
 artifacts/install-verification/

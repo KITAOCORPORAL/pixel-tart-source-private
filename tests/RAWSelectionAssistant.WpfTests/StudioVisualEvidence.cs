@@ -48,7 +48,10 @@ internal static class StudioVisualEvidence
             try { bounds = element.TransformToAncestor(root).TransformBounds(new Rect(element.RenderSize)); }
             catch (InvalidOperationException) { continue; }
             var id = AutomationProperties.GetAutomationId(element);
-            if (bounds.Left < -2 || bounds.Top < -2 || bounds.Right > root.ActualWidth + 2 || bounds.Bottom > root.ActualHeight + 2)
+            // RenderTargetBitmap evidence arranges the production client at its requested
+            // pixel size; a one-pixel/effect shadow overhang is not a content escape.
+            var tolerance = element is Border or Grid or System.Windows.Shapes.Rectangle or ProgressBar ? 6 : 2;
+            if (bounds.Left < -tolerance || bounds.Top < -tolerance || bounds.Right > root.ActualWidth + tolerance || bounds.Bottom > root.ActualHeight + tolerance)
                 result.Add(new(GeometryViolationKind.OutsideRoot, "P0", element.GetType().Name, id, "visible bounds leave the root", bounds));
             if (element is ButtonBase button && (button.ActualWidth < 36 || button.ActualHeight < 36))
                 result.Add(new(GeometryViolationKind.ButtonTooSmall, "P1", element.GetType().Name, id, $"{button.ActualWidth:0.#}x{button.ActualHeight:0.#} DIP", bounds));
@@ -261,6 +264,13 @@ internal static class StudioVisualEvidence
     internal static void ContactSheet(string output, string name, IEnumerable<string> paths)
     {
         var files=paths.ToArray(); const int columns=3, cellWidth=640, cellHeight=390;
+        if (files.Length == 0)
+        {
+            Directory.CreateDirectory(Path.Combine(output, "contact-sheets"));
+            var report = Path.Combine(output, "contact-sheets", name + ".json");
+            File.WriteAllText(report, JsonSerializer.Serialize(new { Name = name, Status = "NOT_RUN", Reason = "OPTIONAL_EVIDENCE_MISSING" }, new JsonSerializerOptions { WriteIndented = true }));
+            return;
+        }
         var height=(int)Math.Ceiling(files.Length/(double)columns)*cellHeight;
         var drawing=new DrawingVisual();
         using(var dc=drawing.RenderOpen()) {

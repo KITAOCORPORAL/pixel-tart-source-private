@@ -15,6 +15,20 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class WholeAppVisualAcceptanceTests
 {
     [TestMethod]
+    public void WholeAppEvidence_MissingOptionalDpiFolder_DoesNotDestroyCompletedCapture()
+    {
+        var output = Path.Combine(Path.GetTempPath(), "PixelTart-OptionalDpi-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            Directory.CreateDirectory(output);
+            StudioVisualEvidence.ContactSheet(output, "07_DPI_100_200", Array.Empty<string>());
+            var status = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "contact-sheets", "07_DPI_100_200.json")));
+            Assert.AreEqual("NOT_RUN", status.RootElement.GetProperty("Status").GetString());
+        }
+        finally { if (Directory.Exists(output)) Directory.Delete(output, true); }
+    }
+
+    [TestMethod]
     public void ProductionApp_AllRoutes_RenderReviewInventory()
     {
         if (Environment.GetEnvironmentVariable("PIXEL_TART_HUMAN_ACCEPTANCE") != "1")
@@ -70,6 +84,12 @@ public sealed class WholeAppVisualAcceptanceTests
                             Title = "秋日窗光｜身体与留白", Subtitle = "用克制的暖色，记录安静的身体轮廓。", Body = "# 创作方向\n让窗光成为画面中的叙述者。\n保留真实构图，观察光线与肌理的关系。", Status = "进行中",
                             References = Enumerable.Range(0, 6).Select(i => new RAWSelectionAssistant.Core.Services.Projects.PlanningDocumentReference(new RAWSelectionAssistant.Core.Services.Projects.ProjectShotReference(Guid.NewGuid(), RAWSelectionAssistant.Core.Services.Projects.ShotReferenceKind.Pose, ExternalReference: Path.Combine(fixtureDirectory, $"demo-shot-{i + 1:00}.png"), Title: $"合成布局参考 {i + 1:00}"), "主视觉", IsHero: i < 3, IsMoodboard: true)).ToArray()
                         } });
+                        if (Environment.GetEnvironmentVariable("PIXEL_TART_UI_GUARDIAN_CAPTURE") == "1")
+                        {
+                            await UiGuardianCapture.Run(window, vm, fixtureDirectory, output);
+                            complete = true;
+                            return;
+                        }
                         window.WindowState = WindowState.Normal; window.Width = 1920; window.Height = 1080;
                         var rows = new List<object>();
                         var images = new List<(string Module, string State, string Path)>();
@@ -117,6 +137,10 @@ public sealed class WholeAppVisualAcceptanceTests
                                 window.Width = 1180; window.Height = 720;
                                 await Capture(module, "minimum-1180");
                                 await StudioGlobalRolloutEvidence.ScrollAndGeometry((FrameworkElement)window.Content, module + "-minimum", output);
+                                window.Width = 1600; window.Height = 920;
+                                await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
+                                await Task.Delay(180);
+                                await Capture(module, "medium-1600");
                                 window.Width = 1920; window.Height = 1080;
                                 await window.Dispatcher.InvokeAsync(window.UpdateLayout, DispatcherPriority.ApplicationIdle);
                             }
@@ -311,6 +335,13 @@ public sealed class WholeAppVisualAcceptanceTests
                             await StudioVisualEvidence.Gallery(window, output);
                             await StudioVisualEvidence.Dpi(window, vm, output);
                         }
+                        // The DPI inventory is optional. When the run does not request it,
+                        // keep the contact-sheet contract explicit instead of dereferencing a
+                        // directory that was never created.
+                        var dpiDirectory = Path.Combine(output, "dpi");
+                        var dpiFiles = Directory.Exists(dpiDirectory)
+                            ? Directory.GetFiles(dpiDirectory, "*.png").Where(x => x.EndsWith("-100.png") || x.EndsWith("-125.png") || x.EndsWith("-150.png") || x.EndsWith("-200.png"))
+                            : Array.Empty<string>();
                         var sheetCount = (int)Math.Ceiling(images.Count / 9d);
                         var sheetSize = (int)Math.Ceiling(images.Count / (double)sheetCount);
                         for (var start = 0; start < images.Count; start += sheetSize)
@@ -362,7 +393,7 @@ public sealed class WholeAppVisualAcceptanceTests
                             StudioVisualEvidence.ContactSheet(output, "04_SYSTEM_PAGES", images.Where(x => (x.Module is "16_settings" or "17_license" or "18_help") && (x.State == "default" || x.State.StartsWith("tab-"))).Take(10).Select(x => x.Path));
                             StudioVisualEvidence.ContactSheet(output, "05_POPUPS_MENUS", images.Where(x => x.Module == "18_global-popups").Take(10).Select(x => x.Path));
                             StudioVisualEvidence.ContactSheet(output, "06_LOADING_EMPTY_ERROR", images.Where(x => x.State is "empty-library" or "loading" or "error" or "recovered" or "session-stopped" or "content").Take(10).Select(x => x.Path));
-                            StudioVisualEvidence.ContactSheet(output, "07_DPI_100_200", Directory.GetFiles(Path.Combine(output, "dpi"), "*.png").Where(x => x.EndsWith("-100.png") || x.EndsWith("-125.png") || x.EndsWith("-150.png") || x.EndsWith("-200.png")).Take(10));
+                            StudioVisualEvidence.ContactSheet(output, "07_DPI_100_200", dpiFiles.Take(10));
                             StudioVisualEvidence.ContactSheet(output, "08_CLOSE_HEADERS", images.Where(x => x.State is "default" or "minimum-1180").Take(10).Select(x => x.Path));
                         }
                         complete = true;

@@ -38,11 +38,15 @@ public sealed class UiDesignLintTests
             {
                 lineNumber++;
                 var isDesignSystem = file.Contains(Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar + "DesignSystem" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
-                if (!isDesignSystem && (line.Contains("Margin=\"-", StringComparison.OrdinalIgnoreCase) || line.Contains("Padding=\"-", StringComparison.OrdinalIgnoreCase)))
+                var canvasAllowlisted = file.EndsWith("AssetLibraryPage.xaml", StringComparison.OrdinalIgnoreCase) && line.Contains("AssetSelectionMarqueeLayer", StringComparison.OrdinalIgnoreCase)
+                    || file.EndsWith("AssetQueryComposerView.xaml", StringComparison.OrdinalIgnoreCase) && line.Contains("ColorPlaneCursor", StringComparison.OrdinalIgnoreCase);
+                if (canvasAllowlisted)
+                    results.Add(new("EXEMPT", "INTENTIONAL_DRAWING_SURFACE", file, lineNumber, line.Trim()));
+                if (!isDesignSystem && !canvasAllowlisted && (line.Contains("Margin=\"-", StringComparison.OrdinalIgnoreCase) || line.Contains("Padding=\"-", StringComparison.OrdinalIgnoreCase)))
                     results.Add(new("P0", "NEGATIVE_SPACING", file, lineNumber, line.Trim()));
                 if (line.Contains("ScaleTransform", StringComparison.OrdinalIgnoreCase) && !file.Contains("DesignSystem", StringComparison.OrdinalIgnoreCase))
                     results.Add(new("P1", "PAGE_SCALE_TRANSFORM", file, lineNumber, line.Trim()));
-                if (line.Contains("<Canvas", StringComparison.OrdinalIgnoreCase) && !file.EndsWith("MainWindow.xaml", StringComparison.OrdinalIgnoreCase))
+                if (line.Contains("<Canvas", StringComparison.OrdinalIgnoreCase) && !file.EndsWith("MainWindow.xaml", StringComparison.OrdinalIgnoreCase) && !canvasAllowlisted)
                     results.Add(new("P1", "CANVAS_IN_PAGE", file, lineNumber, line.Trim()));
                 if (System.Text.RegularExpressions.Regex.IsMatch(line, "FontSize=\\\"(?:[0-9]|1[0-3])(?:\\\"|\\.)", System.Text.RegularExpressions.RegexOptions.IgnoreCase) && !file.Contains("DesignSystem", StringComparison.OrdinalIgnoreCase))
                     results.Add(new("P2", "HARDCODED_SMALL_FONTSIZE", file, lineNumber, line.Trim()));
