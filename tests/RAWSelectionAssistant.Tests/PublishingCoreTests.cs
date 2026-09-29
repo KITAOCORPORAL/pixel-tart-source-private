@@ -56,6 +56,32 @@ public sealed class PublishingFolderInputTests
 public sealed class PublishingSourceSafetyTests
 {
     [TestMethod]
+    public async Task MultiRecipeCancellationAccountsForCurrentAndEveryPendingItem()
+    {
+        using var temp = new TempDirectory();
+        var sources = Enumerable.Range(0, 3).Select(i => temp.CreateFile($"source-{i}.png", [1, 2, 3])).ToArray();
+        var recipes = ExportRecipeStore.BuiltIns.Take(2).ToArray();
+        var result = await new PublishingExportService(new CancelRenderer()).ExportAsync(Guid.NewGuid(),
+            new(sources, temp.Combine("cancelled"), new(new(false), false, []), Recipes: recipes));
+        Assert.AreEqual(TaskLifecycleState.Cancelled, result.State);
+        Assert.AreEqual(6, result.Summary.Total);
+        Assert.AreEqual(6, result.Summary.Cancelled);
+        Assert.HasCount(6, result.Items);
+        Assert.IsTrue(result.Items.All(item => item.State == PublishingItemState.Cancelled));
+        Assert.IsFalse(Directory.EnumerateFiles(temp.Combine("cancelled"), "*.publishing", SearchOption.AllDirectories).Any());
+    }
+
+    [TestMethod]
+    public void RecipeRejectsPathTraversalAndUnknownFilenameTokens()
+    {
+        var recipe = ExportRecipeStore.BuiltIns[0];
+        foreach (var path in new[] { "../escape", @"nested\..\escape", @"C:\escape", @"\\server\share" })
+            Assert.ThrowsExactly<ArgumentException>(() => (recipe with { Destination = path }).Validate());
+        foreach (var name in new[] { @"..\evil", "foo/bar", "{unknown}", "CON" })
+            Assert.ThrowsExactly<ArgumentException>(() => (recipe with { FilenameTemplate = name }).Validate());
+    }
+
+    [TestMethod]
     public async Task MultiRecipePlanProducesOneSafeOutputPerAssetAndRecipe()
     {
         using var temp = new TempDirectory();
@@ -95,6 +121,12 @@ public sealed class PublishingSourceSafetyTests
     {
         public Task RenderAsync(string sourcePath,string destinationPath,PublishingOptions options,CancellationToken cancellationToken=default)=>File.WriteAllBytesAsync(destinationPath,File.ReadAllBytes(sourcePath),cancellationToken);
         public Task VerifyAsync(string imagePath,CancellationToken cancellationToken=default){Assert.IsGreaterThan(0,new FileInfo(imagePath).Length);return Task.CompletedTask;}
+    }
+    private sealed class CancelRenderer : IPublishingRenderer
+    {
+        public Task RenderAsync(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken = default)
+            => throw new OperationCanceledException();
+        public Task VerifyAsync(string imagePath, CancellationToken cancellationToken = default) => Task.CompletedTask;
     }
 }
 

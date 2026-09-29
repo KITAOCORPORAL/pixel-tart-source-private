@@ -4,6 +4,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Publishing;
+using RAWSelectionAssistant.Core.Services.Color;
+using RAWSelectionAssistant.Core.Services.Export;
 using RAWSelectionAssistant.Services.Publishing;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -11,6 +13,69 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class PublishingRenderingTests
 {
+    [TestMethod]
+    public async Task PublishingTiff16PreservesMoreThanEightBitLevelsAfterResizeAndEmbedsOutputIcc()
+    {
+        using var temp = new TemporaryDirectory();
+        var samples = new ushort[800 * 3];
+        for (var i = 0; i < 800; i++) samples[i * 3] = (ushort)(i * 80);
+        var source = temp.File("source.tif");
+        using (var stream = File.Create(source)) TiffExport.WriteRgb48(stream, new HighBitDepthImageBuffer(800, 1, samples));
+        var output = temp.File("out.tif");
+        var options = new PublishingOptions(new(true, PublishingSizeMode.LongestEdge, 400, Dpi: 240), false, [], PublishingOutputFormat.Tiff, OutputBitDepth: PublishingOutputBitDepth.Sixteen, MetadataPolicy: ExportRecipeMetadataPolicy.Strip);
+        await new WpfPublishingRenderer().RenderAsync(source, output, options);
+        using var readStream = File.OpenRead(output);
+        var result = TiffReadBack.Read(readStream);
+        Assert.AreEqual(400, result.Width);
+        Assert.AreEqual(1, result.Height);
+        Assert.AreEqual(16, result.BitsPerSample);
+        Assert.AreEqual(3, result.SamplesPerPixel);
+        Assert.AreEqual(240, result.Dpi);
+        Assert.IsGreaterThan(128, result.IccProfile.Length);
+        Assert.IsGreaterThan(256, Enumerable.Range(0, result.Width).Select(i => result.Rgb48Samples.Span[i * 3]).Distinct().Count());
+    }
+
+    [TestMethod]
+    public async Task PublishingTiff16DoesNotQuantizeWatermarksToEightBits()
+    {
+        using var temp = new TemporaryDirectory();
+        var source = temp.File("source.tif");
+        using (var stream = File.Create(source)) TiffExport.WriteRgb48(stream, new HighBitDepthImageBuffer(1, 1, new ushort[] { 1, 256, 65535 }));
+        var output = temp.File("out.tif");
+        var options = new PublishingOptions(new(false), true, [new(Guid.NewGuid(), WatermarkLayerType.Text, Text: "Mark")], PublishingOutputFormat.Tiff, OutputBitDepth: PublishingOutputBitDepth.Sixteen);
+        await Assert.ThrowsExactlyAsync<NotSupportedException>(() => new WpfPublishingRenderer().RenderAsync(source, output, options));
+        Assert.IsFalse(File.Exists(output));
+    }
+
+    [TestMethod]
+    public async Task MultiRecipeUsesRealEncodersAndKeepsSourceUnchanged()
+    {
+        using var temp = new TemporaryDirectory();
+        var source = temp.File("source.tif");
+        var samples = new ushort[800 * 3];
+        for (var i = 0; i < 800; i++) { samples[i * 3] = (ushort)(i * 80); samples[i * 3 + 1] = 32000; samples[i * 3 + 2] = 42000; }
+        using (var stream = File.Create(source)) TiffExport.WriteRgb48(stream, new HighBitDepthImageBuffer(800, 1, samples));
+        var before = SHA256.HashData(File.ReadAllBytes(source));
+        await new WpfPublishingRenderer().RenderAsync(source, temp.File("direct.jpg"),
+            new(new(false), false, [], PublishingOutputFormat.Jpeg));
+        var recipes = new[]
+        {
+            new ExportRecipe(Guid.NewGuid(), "Web", Destination: "Web", FilenameTemplate: "{name}"),
+            new ExportRecipe(Guid.NewGuid(), "Client", Destination: "Client", FilenameTemplate: "{name}"),
+            new ExportRecipe(Guid.NewGuid(), "PNG", ExportRecipeFormat.Png, Destination: "Png", FilenameTemplate: "{name}"),
+            new ExportRecipe(Guid.NewGuid(), "TIFF16", ExportRecipeFormat.Tiff, ExportRecipeBitDepth.Sixteen, Destination: "Retouch", FilenameTemplate: "{name}")
+        };
+        var result = await new PublishingExportService(new WpfPublishingRenderer()).ExportAsync(Guid.NewGuid(),
+            new([source], temp.File("exports"), new(new(false), false, []), Recipes: recipes));
+        Assert.AreEqual(TaskLifecycleState.Completed, result.State, string.Join("; ", result.Items.Select(item => item.ErrorMessage)));
+        Assert.HasCount(4, result.Items);
+        Assert.IsTrue(result.Items.All(item => item.DestinationPath is not null && File.Exists(item.DestinationPath)));
+        Assert.AreEqual(2, result.Items.Count(item => Path.GetExtension(item.DestinationPath!).Equals(".jpg", StringComparison.OrdinalIgnoreCase)));
+        Assert.AreEqual(1, result.Items.Count(item => Path.GetExtension(item.DestinationPath!).Equals(".png", StringComparison.OrdinalIgnoreCase)));
+        using var tiff = File.OpenRead(result.Items.Single(item => Path.GetExtension(item.DestinationPath!) == ".tif").DestinationPath!);
+        Assert.AreEqual(16, TiffReadBack.Read(tiff).BitsPerSample);
+        CollectionAssert.AreEqual(before, SHA256.HashData(File.ReadAllBytes(source)));
+    }
     [TestMethod] public async Task PublishingCompressionTests(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),800,600);var output=temp.File("out.jpg");await new WpfPublishingRenderer().RenderAsync(source,output,new(new(true,PublishingSizeMode.LongestEdge,400),false,[]));var size=ReadSize(output);Assert.AreEqual((400,300),size);}
     [TestMethod] public async Task PublishingImageWatermarkTests(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),640,480);var logo=CreateLogo(temp.File("logo.png"));var output=temp.File("out.png");await new WpfPublishingRenderer().RenderAsync(source,output,new(new(false),true,[new(Guid.NewGuid(),WatermarkLayerType.Image,ImagePath:logo,WidthPercent:20,Opacity:.8)],PublishingOutputFormat.Png));Assert.IsGreaterThan(new FileInfo(logo).Length,new FileInfo(output).Length);}
     [TestMethod] public async Task PublishingTextWatermarkTests(){using var temp=new TemporaryDirectory();var source=CreateImage(temp.File("source.png"),640,480);var plain=temp.File("plain.png");var marked=temp.File("marked.png");var renderer=new WpfPublishingRenderer();await renderer.RenderAsync(source,plain,new(new(false),false,[],PublishingOutputFormat.Png));await renderer.RenderAsync(source,marked,new(new(false),true,[new(Guid.NewGuid(),WatermarkLayerType.Text,Text:"Kitao Soma",Position:WatermarkPosition.Center)],PublishingOutputFormat.Png));CollectionAssert.AreNotEqual(SHA256.HashData(File.ReadAllBytes(plain)),SHA256.HashData(File.ReadAllBytes(marked)));}

@@ -32,8 +32,44 @@ public sealed record ExportRecipe(
         if (ResizeMode == ExportRecipeResizeMode.LongEdge && LongEdge is not > 0) throw new ArgumentException("Long edge is required.");
         if (ResizeMode == ExportRecipeResizeMode.ShortEdge && ShortEdge is not > 0) throw new ArgumentException("Short edge is required.");
         if (ResizeMode == ExportRecipeResizeMode.Exact && (Width is not > 0 || Height is not > 0)) throw new ArgumentException("Exact dimensions are required.");
-        if (string.IsNullOrWhiteSpace(Destination) || Path.IsPathRooted(Destination)) throw new ArgumentException("Destination is a relative export folder.");
+        if (!IsSafeRelativeComponent(Destination)) throw new ArgumentException("Destination is a relative export folder.");
+        if (!IsSafeFilenameTemplate(FilenameTemplate)) throw new ArgumentException("FilenameTemplate 只能生成文件名，不能包含路径或未知 token。", nameof(FilenameTemplate));
         return this;
+    }
+
+    private static bool IsSafeRelativeComponent(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value) || Path.IsPathRooted(value) || value.Contains(':') || value.IndexOfAny(Path.GetInvalidPathChars()) >= 0) return false;
+        var normalized = value.Replace('\\', '/');
+        if (normalized.Contains("//", StringComparison.Ordinal) || normalized.StartsWith('/')) return false;
+        if (normalized.Split('/').Any(part => part is "" or "." or "..")) return false;
+        return normalized.Split('/', StringSplitOptions.RemoveEmptyEntries).All(part => part.Length > 0 && part.TrimEnd(' ', '.') == part && !ReservedWindowsName(part));
+    }
+
+    private static bool IsSafeFilenameTemplate(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value) || value.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || value.Contains('/') || value.Contains('\\') || value.Contains(':') || value.TrimEnd(' ', '.') != value) return false;
+        var tokens = new[] { "{name}", "{recipe}" };
+        for (var index = 0; index < value.Length; index++)
+        {
+            if (value[index] != '{') continue;
+            var end = value.IndexOf('}', index + 1);
+            if (end < 0 || !tokens.Contains(value[index..(end + 1)], StringComparer.OrdinalIgnoreCase)) return false;
+            index = end;
+        }
+        if (value.Contains('}'))
+        {
+            var withoutTokens = value.Replace("{name}", "", StringComparison.OrdinalIgnoreCase).Replace("{recipe}", "", StringComparison.OrdinalIgnoreCase);
+            if (withoutTokens.IndexOfAny(['{', '}']) >= 0) return false;
+        }
+        return !ReservedWindowsName(value.Replace("{name}", "name", StringComparison.OrdinalIgnoreCase).Replace("{recipe}", "recipe", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static bool ReservedWindowsName(string value)
+    {
+        var stem = Path.GetFileNameWithoutExtension(value).TrimEnd(' ', '.');
+        return new[] { "CON", "PRN", "AUX", "NUL" }.Contains(stem, StringComparer.OrdinalIgnoreCase)
+            || (stem.Length == 4 && (stem.StartsWith("COM", StringComparison.OrdinalIgnoreCase) || stem.StartsWith("LPT", StringComparison.OrdinalIgnoreCase)) && stem[3] is >= '1' and <= '9');
     }
 }
 
@@ -61,7 +97,7 @@ public sealed class ExportRecipeStore(string filePath)
     public async Task DeleteAsync(Guid id, CancellationToken token = default)
     {
         if (BuiltIns.Any(item => item.Id == id)) throw new InvalidOperationException("Built-in recipes are editable copies and cannot be deleted.");
-        await _gate.WaitAsync(token).ConfigureAwait(false); try { var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != id).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); await File.WriteAllTextAsync(FilePath, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); } finally { _gate.Release(); }
+        await _gate.WaitAsync(token).ConfigureAwait(false); try { var values = (await LoadCoreAsync(token).ConfigureAwait(false)).Where(item => item.Id != id).Where(item => !BuiltIns.Any(builtin => builtin.Id == item.Id)).ToArray(); Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!); var tmp = FilePath + ".tmp"; try { await File.WriteAllTextAsync(tmp, JsonSerializer.Serialize(values, new JsonSerializerOptions { WriteIndented = true }), token).ConfigureAwait(false); File.Move(tmp, FilePath, true); } finally { if (File.Exists(tmp)) File.Delete(tmp); } } finally { _gate.Release(); }
     }
 
     private async Task<IReadOnlyList<ExportRecipe>> LoadCoreAsync(CancellationToken token)

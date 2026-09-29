@@ -26,8 +26,9 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         var results = new List<PublishingItemResult>(total);
         var reserved = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var sequence = 0;
-        foreach (var recipe in recipes)
+        for (var recipeIndex = 0; recipeIndex < recipes.Count; recipeIndex++)
         {
+            var recipe = recipes[recipeIndex];
             var recipeOptions = recipe is null ? request.Options : RecipeOptions(recipe, request.Options);
             for (var sourceIndex = 0; sourceIndex < sourceFiles.Length; sourceIndex++)
             {
@@ -55,7 +56,13 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             }
             catch (OperationCanceledException)
             {
-                for (var pending = sourceIndex; pending < sourceFiles.Length; pending++) results.Add(new(sequence++, PublishingItemState.Cancelled, sourceFiles[pending], null, 0));
+                results.Add(new(index, PublishingItemState.Cancelled, source, null, 0));
+                for (var pendingRecipe = recipeIndex; pendingRecipe < recipes.Count; pendingRecipe++)
+                {
+                    var firstSource = pendingRecipe == recipeIndex ? sourceIndex + 1 : 0;
+                    for (var pending = firstSource; pending < sourceFiles.Length; pending++)
+                        results.Add(new(sequence++, PublishingItemState.Cancelled, sourceFiles[pending], null, 0));
+                }
                 break;
             }
             catch (Exception error)
@@ -77,16 +84,26 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
     public static string ResolveDestination(string sourcePath, string destinationDirectory, PublishingOptions options, ISet<string>? reserved = null, string? filenameTemplate = null, string? recipeDestination = null)
     {
         var sourceDirectory = Path.GetDirectoryName(Path.GetFullPath(sourcePath))!;
-        var destinationRoot = Path.GetFullPath(destinationDirectory);
-        if (!string.IsNullOrWhiteSpace(recipeDestination)) destinationRoot = Path.Combine(destinationRoot, recipeDestination);
+        var root = Path.GetFullPath(destinationDirectory).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+        var destinationRoot = root.TrimEnd(Path.DirectorySeparatorChar);
+        if (!string.IsNullOrWhiteSpace(recipeDestination))
+        {
+            if (!IsSafeRecipePath(recipeDestination)) throw new ArgumentException("Recipe destination cannot escape the export root.", nameof(recipeDestination));
+            destinationRoot = Path.GetFullPath(Path.Combine(destinationRoot, recipeDestination));
+            if (!destinationRoot.StartsWith(root, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Recipe destination cannot escape the export root.", nameof(recipeDestination));
+        }
         Directory.CreateDirectory(destinationRoot);
         var suffix = options.Suffix ?? string.Empty;
         if (string.Equals(sourceDirectory.TrimEnd(Path.DirectorySeparatorChar), destinationRoot.TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(suffix)) suffix = PublishingDefaults.DefaultSuffix;
         var extension = options.OutputFormat switch { PublishingOutputFormat.Png => ".png", PublishingOutputFormat.Tiff => ".tif", _ => ".jpg" };
         var recipeName = string.IsNullOrWhiteSpace(recipeDestination) ? string.Empty : Path.GetFileName(recipeDestination);
         var template = string.IsNullOrWhiteSpace(filenameTemplate) ? "{name}" : filenameTemplate;
+        if (template.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || template.Contains('/') || template.Contains('\\') || template.Contains("..", StringComparison.Ordinal)
+            || System.Text.RegularExpressions.Regex.Replace(template, "\\{name\\}|\\{recipe\\}", "", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IndexOfAny(['{', '}']) >= 0)
+            throw new ArgumentException("FilenameTemplate must be a filename, not a path.", nameof(filenameTemplate));
         var stem = template.Replace("{name}", Path.GetFileNameWithoutExtension(sourcePath), StringComparison.OrdinalIgnoreCase)
             .Replace("{recipe}", recipeName, StringComparison.OrdinalIgnoreCase) + suffix;
+        stem = SanitizeFilename(stem);
         var desired = Path.Combine(destinationRoot, stem + extension);
         var candidate = desired; var number = 2;
         while (File.Exists(candidate) || reserved?.Contains(candidate) == true) candidate = Path.Combine(destinationRoot, $"{stem}_{number++}{extension}");
@@ -102,7 +119,39 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             ExportRecipeResizeMode.Exact => new PublishingDimensions(true, PublishingSizeMode.Exact, Width: recipe.Width ?? 1, Height: recipe.Height ?? 1, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi),
             _ => new PublishingDimensions(false, PublishingSizeMode.Original, JpegQuality: recipe.Quality, PreserveMetadata: recipe.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve, Dpi: recipe.Dpi)
         };
-        return fallback with { Dimensions = dimensions, OutputFormat = recipe.Format switch { ExportRecipeFormat.Png => PublishingOutputFormat.Png, ExportRecipeFormat.Tiff => PublishingOutputFormat.Tiff, _ => PublishingOutputFormat.Jpeg }, Suffix = string.Empty };
+        return fallback with
+        {
+            Dimensions = dimensions,
+            OutputFormat = recipe.Format switch { ExportRecipeFormat.Png => PublishingOutputFormat.Png, ExportRecipeFormat.Tiff => PublishingOutputFormat.Tiff, _ => PublishingOutputFormat.Jpeg },
+            Suffix = string.Empty,
+            OutputBitDepth = recipe.BitDepth == ExportRecipeBitDepth.Sixteen ? PublishingOutputBitDepth.Sixteen : PublishingOutputBitDepth.Eight,
+            ColorSpaceProfile = recipe.ColorSpaceProfile,
+            MetadataPolicy = recipe.MetadataPolicy
+        };
+    }
+
+    private static bool IsSafeRecipePath(string value)
+    {
+        if (Path.IsPathRooted(value) || value.Contains(':') || value.IndexOfAny(Path.GetInvalidPathChars()) >= 0) return false;
+        var normalized = value.Replace('\\', '/');
+        return !normalized.StartsWith('/') && !normalized.Contains("//", StringComparison.Ordinal)
+            && normalized.Split('/').All(part => part.Length > 0 && part is not ("." or "..") && part.TrimEnd(' ', '.') == part && !IsReservedWindowsName(part));
+    }
+
+    private static string SanitizeFilename(string value)
+    {
+        var invalid = Path.GetInvalidFileNameChars();
+        var safe = new string(value.Select(ch => invalid.Contains(ch) || ch is '/' or '\\' ? '_' : ch).ToArray()).TrimEnd(' ', '.');
+        if (string.IsNullOrWhiteSpace(safe)) safe = "export";
+        if (IsReservedWindowsName(safe)) safe = "_" + safe;
+        return safe;
+    }
+
+    private static bool IsReservedWindowsName(string value)
+    {
+        var stem = Path.GetFileNameWithoutExtension(value).TrimEnd(' ', '.');
+        return new[] { "CON", "PRN", "AUX", "NUL" }.Contains(stem, StringComparer.OrdinalIgnoreCase)
+            || (stem.Length == 4 && (stem.StartsWith("COM", StringComparison.OrdinalIgnoreCase) || stem.StartsWith("LPT", StringComparison.OrdinalIgnoreCase)) && stem[3] is >= '1' and <= '9');
     }
 
     private static async Task<byte[]> ComputeHashAsync(string path, CancellationToken cancellationToken)

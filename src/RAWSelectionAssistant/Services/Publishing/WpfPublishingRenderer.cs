@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.Color;
+using RAWSelectionAssistant.Core.Services.Export;
 using RAWSelectionAssistant.Core.Services.Publishing;
 
 namespace RAWSelectionAssistant.Services.Publishing;
@@ -26,7 +29,14 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
     private static void Render(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken)
     {
         var decoder = BitmapDecoder.Create(new Uri(Path.GetFullPath(sourcePath)), BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-        var frame = decoder.Frames[0];
+        var originalFrame = decoder.Frames[0];
+        BitmapSource frame = originalFrame;
+        if (options.OutputFormat == PublishingOutputFormat.Tiff && options.OutputBitDepth == PublishingOutputBitDepth.Sixteen)
+        {
+            WriteTiff16(sourcePath, originalFrame, destinationPath, options, cancellationToken);
+            return;
+        }
+        frame = ApplyRequestedProfile(frame, options.ColorSpaceProfile, PixelFormats.Rgb24);
         var (width, height) = OutputSize(frame.PixelWidth, frame.PixelHeight, options.EffectiveDimensions);
         var drawing = new DrawingVisual();
         using (var context = drawing.RenderOpen())
@@ -36,20 +46,149 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
                 foreach (var layer in options.EffectiveWatermarkLayers.Where(layer => layer.Enabled)) DrawLayer(context, layer, width, height, cancellationToken);
         }
         var bitmap = new RenderTargetBitmap(width, height, options.EffectiveDimensions.Dpi, options.EffectiveDimensions.Dpi, PixelFormats.Pbgra32); bitmap.Render(drawing); bitmap.Freeze();
-        BitmapMetadata? metadata = null;
-        if (options.EffectiveDimensions.PreserveMetadata && frame.Metadata is BitmapMetadata original)
-        {
-            try { metadata = original.Clone() as BitmapMetadata; } catch (Exception error) when (error is NotSupportedException or InvalidOperationException) { }
-        }
+        var metadata = CreateOutputMetadata(originalFrame, options);
         BitmapEncoder encoder = options.OutputFormat switch
         {
             PublishingOutputFormat.Png => new PngBitmapEncoder(),
             PublishingOutputFormat.Tiff => new TiffBitmapEncoder { Compression = TiffCompressOption.Lzw },
             _ => new JpegBitmapEncoder { QualityLevel = options.EffectiveDimensions.JpegQuality }
         };
-        encoder.Frames.Add(BitmapFrame.Create(bitmap, null, metadata, frame.ColorContexts));
+        var profilePath = ResolveProfilePath(options.ColorSpaceProfile)
+            ?? throw new InvalidDataException($"未找到请求的输出 ICC 配置：{options.ColorSpaceProfile}");
+        encoder.Frames.Add(BitmapFrame.Create(bitmap, null, metadata, [new System.Windows.Media.ColorContext(new Uri(profilePath))]));
         using var output = new FileStream(destinationPath, FileMode.CreateNew, FileAccess.Write, FileShare.None); encoder.Save(output); output.Flush(true);
     }
+
+    private static void WriteTiff16(string sourcePath, BitmapFrame frame, string destinationPath, PublishingOptions options, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        var sourceIsHighPrecision = frame.Format == PixelFormats.Rgb48 || frame.Format == PixelFormats.Rgba64 || frame.Format == PixelFormats.Prgba64 || frame.Format == PixelFormats.Bgr101010;
+        var orientation = ReadOrientation(frame);
+        var convertedFrame = ApplyRequestedProfile(frame, options.ColorSpaceProfile, PixelFormats.Rgb48);
+        var dimensions = options.EffectiveDimensions;
+        if (options.WatermarksEnabled && options.EffectiveWatermarkLayers.Any(layer => layer.Enabled))
+            throw new NotSupportedException("TIFF16 水印的高精度合成尚未接入；已停止输出以避免 8-bit 量化。");
+        var pixels = ToHighBitDepth(convertedFrame, token);
+        if (!sourceIsHighPrecision)
+            pixels = new HighBitDepthImageBuffer(pixels.Width, pixels.Height, pixels.Rgb32, "8-bit source promoted", pixels.WorkingColorSpace, orientation);
+        var (width, height) = OutputSize(convertedFrame.PixelWidth, convertedFrame.PixelHeight, dimensions);
+        if (width != pixels.Width || height != pixels.Height) pixels = ResizeRgb48(pixels, width, height, token);
+
+        // ICC describes the output pixels, not personal metadata. Strip must not remove it.
+        var icc = ProfileBytes(options.ColorSpaceProfile);
+        var tiffOptions = new TiffExportOptions(
+            TiffBitDepth.Sixteen,
+            icc,
+            Dpi: dimensions.Dpi,
+            Orientation: orientation,
+            RequireHighBitDepthSource: sourceIsHighPrecision);
+        using var output = new FileStream(destinationPath, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+        TiffExport.WriteRgb48(output, pixels, tiffOptions, token);
+        output.Flush(true);
+    }
+
+    private static HighBitDepthImageBuffer ResizeRgb48(HighBitDepthImageBuffer source, int width, int height, CancellationToken token)
+    {
+        var input = source.Rgb32.Span;
+        var output = new float[checked(width * height * 3)];
+        for (var y = 0; y < height; y++)
+        {
+            token.ThrowIfCancellationRequested();
+            var sy = Math.Clamp((y + .5) * source.Height / height - .5, 0, source.Height - 1);
+            var y0 = (int)sy; var y1 = Math.Min(y0 + 1, source.Height - 1); var fy = (float)(sy - y0);
+            for (var x = 0; x < width; x++)
+            {
+                var sx = Math.Clamp((x + .5) * source.Width / width - .5, 0, source.Width - 1);
+                var x0 = (int)sx; var x1 = Math.Min(x0 + 1, source.Width - 1); var fx = (float)(sx - x0);
+                for (var channel = 0; channel < 3; channel++)
+                {
+                    var top = input[(y0 * source.Width + x0) * 3 + channel] * (1 - fx) + input[(y0 * source.Width + x1) * 3 + channel] * fx;
+                    var bottom = input[(y1 * source.Width + x0) * 3 + channel] * (1 - fx) + input[(y1 * source.Width + x1) * 3 + channel] * fx;
+                    output[(y * width + x) * 3 + channel] = top * (1 - fy) + bottom * fy;
+                }
+            }
+        }
+        return new(width, height, output, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
+    }
+
+    private static HighBitDepthImageBuffer ToHighBitDepth(BitmapSource frame, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        if (frame.Format == PixelFormats.Rgb48 || frame.Format == PixelFormats.Rgba64 || frame.Format == PixelFormats.Prgba64 || frame.Format == PixelFormats.Bgr101010)
+        {
+            var converted = frame.Format == PixelFormats.Rgb48 ? frame : new FormatConvertedBitmap(frame, PixelFormats.Rgb48, null, 0);
+            converted.Freeze();
+            var stride = converted.PixelWidth * 6; var bytes = new byte[stride * converted.PixelHeight]; converted.CopyPixels(bytes, stride, 0);
+            var values = new ushort[converted.PixelWidth * converted.PixelHeight * 3]; Buffer.BlockCopy(bytes, 0, values, 0, bytes.Length);
+            return new HighBitDepthImageBuffer(converted.PixelWidth, converted.PixelHeight, values, "16", "sRGB");
+        }
+        throw new NotSupportedException("TIFF16 需要高精度源像素；8-bit 源不能冒充高精度 TIFF16。");
+    }
+
+    private static VisualPixelBuffer ToVisualBuffer(BitmapSource source, CancellationToken token)
+    {
+        var converted = new FormatConvertedBitmap(source, PixelFormats.Bgr24, null, 0); converted.Freeze();
+        var stride = converted.PixelWidth * 3; var bgr = new byte[stride * converted.PixelHeight]; converted.CopyPixels(bgr, stride, 0);
+        var rgb = new byte[bgr.Length];
+        for (var i = 0; i < bgr.Length; i += 3) { if ((i & 0x7fff) == 0) token.ThrowIfCancellationRequested(); rgb[i] = bgr[i + 2]; rgb[i + 1] = bgr[i + 1]; rgb[i + 2] = bgr[i]; }
+        return new VisualPixelBuffer(converted.PixelWidth, converted.PixelHeight, rgb);
+    }
+
+    private static BitmapSource ApplyRequestedProfile(BitmapSource frame, string requestedProfile, PixelFormat? outputFormat = null)
+    {
+        var target = ResolveProfilePath(requestedProfile);
+        if (target is null) throw new InvalidDataException($"未找到请求的输出 ICC 配置：{requestedProfile}");
+        var targetFormat = outputFormat ?? PixelFormats.Pbgra32;
+        if (frame.Format == PixelFormats.Rgb48 && targetFormat != PixelFormats.Rgb48)
+        {
+            // WIC does not accept RGB48 -> RGB24/Pbgra32 as one ColorConvertedBitmap operation.
+            // Convert in RGB48, then quantize only for the explicitly 8-bit JPEG/PNG output.
+            var highPrecision = ApplyRequestedProfile(frame, requestedProfile, PixelFormats.Rgb48);
+            var display = new FormatConvertedBitmap(highPrecision, targetFormat, null, 0);
+            display.Freeze();
+            return display;
+        }
+        var source = frame is BitmapFrame bitmapFrame && bitmapFrame.ColorContexts is { Count: > 0 } contexts
+            ? contexts[0]
+            : new System.Windows.Media.ColorContext(new Uri(ProfilePath("sRGB")));
+        var converted = new ColorConvertedBitmap(frame, source, new System.Windows.Media.ColorContext(new Uri(target)), targetFormat);
+        converted.Freeze();
+        return converted;
+    }
+
+    private static BitmapMetadata? CreateOutputMetadata(BitmapSource frame, PublishingOptions options)
+    {
+        if (options.MetadataPolicy == ExportRecipeMetadataPolicy.Strip || frame.Metadata is not BitmapMetadata original) return null;
+        try
+        {
+            if (options.MetadataPolicy == ExportRecipeMetadataPolicy.Preserve) return original.Clone() as BitmapMetadata;
+            var format = frame is BitmapFrame bitmapFrame ? bitmapFrame.Decoder.CodecInfo.FileExtensions.TrimStart('.') : "png";
+            var metadata = new BitmapMetadata(format.Equals("jpg", StringComparison.OrdinalIgnoreCase) || format.Equals("jpeg", StringComparison.OrdinalIgnoreCase) ? "jpg" : "png");
+            if (!string.IsNullOrWhiteSpace(original.Copyright)) metadata.Copyright = original.Copyright;
+            if (original.Author is { Count: > 0 }) metadata.Author = new System.Collections.ObjectModel.ReadOnlyCollection<string>(original.Author.ToArray());
+            if (!string.IsNullOrWhiteSpace(original.Comment)) metadata.Comment = original.Comment;
+            return metadata;
+        }
+        catch (Exception error) when (error is NotSupportedException or InvalidOperationException or ArgumentException) { return null; }
+    }
+
+    private static ReadOnlyMemory<byte> ProfileBytes(string requestedProfile)
+    {
+        var path = ResolveProfilePath(requestedProfile);
+        return path is null ? ReadOnlyMemory<byte>.Empty : File.ReadAllBytes(path);
+    }
+
+    private static string? ResolveProfilePath(string requested) => requested switch
+    {
+        "sRGB" or "sRGB IEC61966-2.1" => ProfilePath("sRGB"),
+        "Adobe RGB (1998)" or "AdobeRGB" => new[] { @"C:\Program Files (x86)\Common Files\Adobe\Color\Profiles\Recommended\AdobeRGB1998.icc", @"C:\Program Files\Capture One\Capture One\Color Profiles\Common\Adobe RGB (1998).icm" }.FirstOrDefault(File.Exists),
+        _ => null
+    };
+
+    private static string ProfilePath(string name) => name == "sRGB" ? @"C:\Windows\System32\spool\drivers\color\sRGB Color Space Profile.icm" : name;
+
+    private static ushort ReadOrientation(BitmapFrame frame) => frame.Metadata is BitmapMetadata metadata && metadata.ContainsQuery("/app1/ifd/{ushort=274}")
+        ? Convert.ToUInt16(metadata.GetQuery("/app1/ifd/{ushort=274}"), CultureInfo.InvariantCulture) : (ushort)1;
 
     private static (int Width, int Height) OutputSize(int sourceWidth, int sourceHeight, PublishingDimensions options)
     {

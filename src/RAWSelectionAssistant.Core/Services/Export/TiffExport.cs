@@ -13,7 +13,8 @@ public sealed record TiffExportOptions(
     string Software = "Pixel Tart",
     int Dpi = 72,
     ushort Orientation = 1,
-    IReadOnlyDictionary<ushort, string>? Metadata = null);
+    IReadOnlyDictionary<ushort, string>? Metadata = null,
+    bool RequireHighBitDepthSource = false);
 
 public sealed record TiffExportResult(int Width, int Height, TiffBitDepth BitDepth, TiffCompression Compression,
     long BytesWritten, bool IccEmbedded);
@@ -32,6 +33,8 @@ public static class TiffExport
         if (!destination.CanWrite) throw new ArgumentException("The destination stream must be writable.", nameof(destination));
         options ??= new();
         ValidateOptions(options);
+        if (options.RequireHighBitDepthSource && pixels.SourceBitDepth is not ("16" or "32f"))
+            throw new InvalidOperationException("16-bit TIFF requested without a proven high-precision source; source precision was not preserved.");
         if (options.BitDepth != TiffBitDepth.Sixteen) throw new ArgumentException("High bit-depth export requires 16-bit TIFF.", nameof(options));
         if (options.IccProfile.Length > 16 * 1024 * 1024) throw new ArgumentOutOfRangeException(nameof(options), "ICC profile is too large.");
         if (options.IccProfile.Length > 0 && !IsValidIcc(options.IccProfile.Span)) throw new ArgumentException("ICC profile is invalid.", nameof(options));

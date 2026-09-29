@@ -214,7 +214,12 @@ public partial class TetherCaptureView : UserControl
             else return;
             e.Handled = true; return;
         }
-        if (e.OriginalSource is TextBox) return;
+        if (e.OriginalSource is TextBox or PasswordBox or ComboBox) return;
+        if (viewModel.IsRapidCompare)
+        {
+            if (e.Key is Key.Left or Key.PageUp) { if (viewModel.PreviousChallengerCommand.CanExecute(null)) viewModel.PreviousChallengerCommand.Execute(null); e.Handled = true; return; }
+            if (e.Key is Key.Right or Key.PageDown) { if (viewModel.NextChallengerCommand.CanExecute(null)) viewModel.NextChallengerCommand.Execute(null); e.Handled = true; return; }
+        }
         switch (e.Key)
         {
             case Key.Left: case Key.Up: viewModel.SelectPrevious(); e.Handled = true; break;

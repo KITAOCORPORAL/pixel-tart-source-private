@@ -80,6 +80,9 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private double _zoom = 1;
     private double _panX;
     private double _panY;
+    private double _comparisonSecondaryZoom = 1;
+    private double _comparisonSecondaryPanX;
+    private double _comparisonSecondaryPanY;
     private bool _autoLatest = true;
     private bool _isCurrentLocked;
     private bool _isFullScreen;
@@ -106,6 +109,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private bool _faceLockEnabled;
     private string _faceLockStatus = "人脸锁定未启用。";
     private RapidCompareState? _rapidCompare;
+    private int _comparisonRevision;
     private string? _referencePath;
     private string _referenceStatus = "未选择参考图。";
     private TetherGuideMode _guideMode;
@@ -224,8 +228,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         StartRapidCompareCommand = new RelayCommand(_ => StartRapidCompare(), _ => SelectedAsset is not null && CompareCandidate is not null);
         KeepChampionCommand = new RelayCommand(_ => KeepChampion(), _ => _rapidCompare is not null);
         PromoteChallengerCommand = new RelayCommand(_ => PromoteChallenger(), _ => _rapidCompare is not null);
-        PreviousChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(1), _ => _rapidCompare is not null);
-        NextChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(-1), _ => _rapidCompare is not null);
+        PreviousChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(-1), _ => _rapidCompare is not null);
+        NextChallengerCommand = new RelayCommand(_ => MoveRapidChallenger(1), _ => _rapidCompare is not null);
     }
 
     public ObservableCollection<TetherAssetItemViewModel> Assets { get; } = [];
@@ -378,6 +382,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool IsActualSize => PreviewMode == TetherPreviewMode.ActualSize;
     public double Zoom { get => _zoom; set { if (SetProperty(ref _zoom, Math.Clamp(value, .1, 16))) OnPropertyChanged(nameof(ComparisonSecondaryZoom)); } }
     public CompareZoomMode CompareZoomMode { get; private set; } = CompareZoomMode.Fit;
+    public Stretch ComparisonImageStretch => CompareZoomMode == CompareZoomMode.Fit ? Stretch.Uniform : Stretch.None;
     public double PanX { get => _panX; set { if (SetProperty(ref _panX, value)) OnPropertyChanged(nameof(ComparisonSecondaryPanX)); } }
     public double PanY { get => _panY; set { if (SetProperty(ref _panY, value)) OnPropertyChanged(nameof(ComparisonSecondaryPanY)); } }
     public bool AutoLatest { get => _autoLatest; set { if (SetProperty(ref _autoLatest, value)) { _selectionCoordinator.AutoLatest = value; Track(SaveDisplaySettingsAsync()); } } }
@@ -399,11 +404,13 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public bool IsNormalPreview => CompareMode == TetherCompareMode.None;
     public bool IsSideBySide => CompareMode == TetherCompareMode.SideBySide;
     public bool IsOverlayCompare => CompareMode == TetherCompareMode.Overlay;
-    public bool ComparisonSyncZoom { get => _comparisonSyncZoom; set { if (SetProperty(ref _comparisonSyncZoom, value)) OnPropertyChanged(nameof(ComparisonSecondaryZoom)); } }
-    public bool ComparisonSyncPan { get => _comparisonSyncPan; set { if (SetProperty(ref _comparisonSyncPan, value)) { OnPropertyChanged(nameof(ComparisonSecondaryPanX)); OnPropertyChanged(nameof(ComparisonSecondaryPanY)); } } }
-    public double ComparisonSecondaryZoom => ComparisonSyncZoom ? Zoom : 1;
-    public double ComparisonSecondaryPanX => ComparisonSyncPan ? PanX : 0;
-    public double ComparisonSecondaryPanY => ComparisonSyncPan ? PanY : 0;
+    public bool ComparisonSyncZoom { get => _comparisonSyncZoom; set { if (SetProperty(ref _comparisonSyncZoom, value)) { if (!value) _comparisonSecondaryZoom = Zoom; OnPropertyChanged(nameof(ComparisonSecondaryZoom)); } } }
+    public bool ComparisonSyncPan { get => _comparisonSyncPan; set { if (SetProperty(ref _comparisonSyncPan, value)) { if (!value) { _comparisonSecondaryPanX = PanX; _comparisonSecondaryPanY = PanY; } OnPropertyChanged(nameof(ComparisonSecondaryPanX)); OnPropertyChanged(nameof(ComparisonSecondaryPanY)); } } }
+    public void SetSecondaryCompareZoom(double value) { _comparisonSecondaryZoom = Math.Clamp(value, .1, 16); OnPropertyChanged(nameof(ComparisonSecondaryZoom)); }
+    public void SetSecondaryComparePan(double x, double y) { _comparisonSecondaryPanX = x; _comparisonSecondaryPanY = y; OnPropertyChanged(nameof(ComparisonSecondaryPanX)); OnPropertyChanged(nameof(ComparisonSecondaryPanY)); }
+    public double ComparisonSecondaryZoom => ComparisonSyncZoom ? Zoom : _comparisonSecondaryZoom;
+    public double ComparisonSecondaryPanX => ComparisonSyncPan ? PanX : _comparisonSecondaryPanX;
+    public double ComparisonSecondaryPanY => ComparisonSyncPan ? PanY : _comparisonSecondaryPanY;
     public double ComparisonOpacity { get => _comparisonOpacity; set { if (SetProperty(ref _comparisonOpacity, Math.Clamp(value, 0, 1))) OnPropertyChanged(nameof(ComparisonSecondaryOpacity)); } }
     public bool ComparisonBlink { get => _comparisonBlink; set { if (!SetProperty(ref _comparisonBlink, value)) return; if (value) _blinkTimer.Start(); else { _blinkTimer.Stop(); _blinkVisible = true; } OnPropertyChanged(nameof(ComparisonSecondaryOpacity)); } }
     public double ComparisonSecondaryOpacity => ComparisonBlink ? (_blinkVisible ? 1 : 0) : ComparisonOpacity;
@@ -896,8 +903,15 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         CompareZoomMode = mode;
         OnPropertyChanged(nameof(CompareZoomMode));
+        OnPropertyChanged(nameof(ComparisonImageStretch));
         Zoom = zoom;
         PanX = PanY = 0;
+        _comparisonSecondaryZoom = zoom;
+        _comparisonSecondaryPanX = _comparisonSecondaryPanY = 0;
+        OnPropertyChanged(nameof(ComparisonSecondaryZoom));
+        OnPropertyChanged(nameof(ComparisonSecondaryPanX));
+        OnPropertyChanged(nameof(ComparisonSecondaryPanY));
+        if (CompareMode != TetherCompareMode.None) Track(StartComparisonCoreAsync(CompareMode));
     }
     private void ResetView() { SetCompareZoom(CompareZoomMode.Fit, 1); if (PreviewMode == TetherPreviewMode.Free) PreviewMode = TetherPreviewMode.Fit; }
 
@@ -1034,9 +1048,10 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         var items = AssetsView.Cast<TetherAssetItemViewModel>().ToArray();
         var index = Array.FindIndex(items, item => item.Record.Id == _rapidCompare.ChallengerId);
         var next = index >= 0 && index + 1 < items.Length ? items[index + 1] : null;
-        if (next is null) { FaceLockStatus = "快速比较已到达末尾。"; return; }
         var promoted = CompareCandidate;
-        if (promoted is not null) SelectedAsset = promoted;
+        if (promoted is null) return;
+        SelectedAsset = promoted;
+        if (next is null) { _rapidCompare = null; CompareCandidate = null; _selectionBeforeCompare = null; ExitComparison(); FaceLockStatus = "快速比较已结束；挑战者已成为冠军。"; return; }
         _rapidCompare = _rapidCompare.PromoteChallenger(next.Record.Id);
         CompareCandidate = next; OnPropertyChanged(nameof(RapidCompareStatus)); Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
     }
@@ -1046,9 +1061,11 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         if (_rapidCompare is null) return;
         var items = AssetsView.Cast<TetherAssetItemViewModel>().ToArray();
         var index = Array.FindIndex(items, item => item.Record.Id == _rapidCompare.ChallengerId);
+        if (index < 0) { FaceLockStatus = "挑战者不在当前筛选结果中。"; return; }
         var nextIndex = Math.Clamp(index + delta, 0, Math.Max(0, items.Length - 1));
         var next = items.ElementAtOrDefault(nextIndex);
         if (next is null || next.Record.Id == _rapidCompare.BestId) return;
+        _rapidCompare = _rapidCompare with { ChallengerId = next.Record.Id };
         CompareCandidate = next; OnPropertyChanged(nameof(RapidCompareStatus)); Track(StartComparisonCoreAsync(TetherCompareMode.SideBySide));
     }
     private void SetCompareCandidate(TetherAssetItemViewModel? item)
@@ -1072,22 +1089,27 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
     private async Task StartComparisonCoreAsync(TetherCompareMode mode)
     {
-        _selectionBeforeCompare = SelectedAsset;
+        var revision = ++_comparisonRevision;
+        if (CompareMode == TetherCompareMode.None) _selectionBeforeCompare = SelectedAsset;
         _selectionCoordinator.IsComparing = true;
         CompareMode = mode;
         var left = SelectedAsset!; var right = CompareCandidate!;
-        var leftResult = await _previewLoader.LoadAsync(left.Record, 2048, _lifetime.Token);
-        var rightResult = await _previewLoader.LoadAsync(right.Record, 2048, _lifetime.Token);
+        var leftTask = CompareZoomMode == CompareZoomMode.Fit ? _previewLoader.LoadAsync(left.Record, 2048, _lifetime.Token) : _fullResolutionLoader.LoadAsync(left.Record, _lifetime.Token);
+        var rightTask = CompareZoomMode == CompareZoomMode.Fit ? _previewLoader.LoadAsync(right.Record, 2048, _lifetime.Token) : _fullResolutionLoader.LoadAsync(right.Record, _lifetime.Token);
+        var leftResult = await leftTask; var rightResult = await rightTask;
+        if (revision != _comparisonRevision || CompareMode == TetherCompareMode.None) return;
         ComparisonPrimaryImage = leftResult.Image; ComparisonSecondaryImage = rightResult.Image;
         PreviewStatus = mode == TetherCompareMode.SideBySide ? "并排比较 · 新照片不会打断" : "重叠比较 · 新照片不会打断";
     }
 
     private void ExitComparison()
     {
+        ++_comparisonRevision;
         ComparisonBlink = false; CompareMode = TetherCompareMode.None; ComparisonPrimaryImage = ComparisonSecondaryImage = null;
         _selectionCoordinator.IsComparing = false;
-        if (_selectionBeforeCompare is not null) SetSelected(_selectionBeforeCompare, false);
+        if (_rapidCompare is null && _selectionBeforeCompare is not null) SetSelected(_selectionBeforeCompare, false);
         _selectionBeforeCompare = null;
+        _rapidCompare = null; OnPropertyChanged(nameof(IsRapidCompare)); OnPropertyChanged(nameof(RapidCompareStatus)); RefreshCommands();
     }
 
     private void SwapComparison() => (ComparisonPrimaryImage, ComparisonSecondaryImage) = (ComparisonSecondaryImage, ComparisonPrimaryImage);

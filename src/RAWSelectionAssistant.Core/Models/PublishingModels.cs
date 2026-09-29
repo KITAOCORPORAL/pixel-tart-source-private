@@ -10,6 +10,7 @@ public static class PublishingDefaults
 
 public enum PublishingSizeMode { Original, LongestEdge, ShortestEdge, Exact }
 public enum PublishingOutputFormat { Jpeg, Png, Tiff }
+public enum PublishingOutputBitDepth { Eight = 8, Sixteen = 16 }
 public enum WatermarkLayerType { Image, Text }
 public enum WatermarkPosition { TopLeft, TopCenter, TopRight, MiddleLeft, Center, MiddleRight, BottomLeft, BottomCenter, BottomRight }
 
@@ -77,7 +78,10 @@ public sealed record PublishingOptions(
     bool WatermarksEnabled = true,
     IReadOnlyList<WatermarkLayer>? WatermarkLayers = null,
     PublishingOutputFormat OutputFormat = PublishingOutputFormat.Jpeg,
-    string Suffix = PublishingDefaults.DefaultSuffix)
+    string Suffix = PublishingDefaults.DefaultSuffix,
+    PublishingOutputBitDepth OutputBitDepth = PublishingOutputBitDepth.Eight,
+    string ColorSpaceProfile = "sRGB",
+    RAWSelectionAssistant.Core.Services.Publishing.ExportRecipeMetadataPolicy MetadataPolicy = RAWSelectionAssistant.Core.Services.Publishing.ExportRecipeMetadataPolicy.Preserve)
 {
     public PublishingDimensions EffectiveDimensions => Dimensions ?? new();
     public IReadOnlyList<WatermarkLayer> EffectiveWatermarkLayers => WatermarkLayers ?? [];
@@ -86,6 +90,9 @@ public sealed record PublishingOptions(
         EffectiveDimensions.Validate();
         if (WatermarksEnabled) foreach (var layer in EffectiveWatermarkLayers.Where(layer => layer.Enabled)) layer.Validate();
         if (Suffix.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0) throw new ArgumentException("文件名后缀包含无效字符。", nameof(Suffix));
+        if (OutputFormat == PublishingOutputFormat.Tiff && OutputBitDepth != PublishingOutputBitDepth.Sixteen)
+            throw new ArgumentException("TIFF 发布必须使用 16-bit 输出。", nameof(OutputBitDepth));
+        if (string.IsNullOrWhiteSpace(ColorSpaceProfile)) throw new ArgumentException("输出色彩配置不能为空。", nameof(ColorSpaceProfile));
         return this;
     }
 }
