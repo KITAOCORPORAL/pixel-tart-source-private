@@ -87,8 +87,8 @@ public sealed class PhotographerWorkflowFoundationTests
         var dragged = CompareViewportGeometry.Drag(a, 120, -80, geometry, 1.5);
         Assert.IsLessThan(a.NormalizedCenterX, dragged.NormalizedCenterX);
         Assert.IsGreaterThan(a.NormalizedCenterY, dragged.NormalizedCenterY);
-        Assert.IsInRange(dragged.NormalizedCenterX, 0, 1);
-        Assert.IsInRange(dragged.NormalizedCenterY, 0, 1);
+        Assert.IsTrue(dragged.NormalizedCenterX is >= 0 and <= 1);
+        Assert.IsTrue(dragged.NormalizedCenterY is >= 0 and <= 1);
     }
 
     [TestMethod]
