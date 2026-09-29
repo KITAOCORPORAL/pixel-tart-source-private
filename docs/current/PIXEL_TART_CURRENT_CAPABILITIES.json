@@ -1,150 +1,150 @@
 {
-  "generated_at": "2026-09-29T07:06:27.1839774+00:00",
-  "git_sha": "57ced0c87952046ff1d7f71024ea513171c70082",
+  "generated_at": "2026-09-29T07:09:53.4936882+00:00",
+  "git_sha": "ae2c3b4970de545bd084077ca25dfb961a96830a",
   "branch": "integration/pixel-tart-developer-preview",
   "modules": {
     "Photography": {
-      "nextGate": "Native 2-Up walkthrough and action-target closure",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
         "tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Native 2-Up walkthrough and action-target closure"
     },
     "AssetLibrary": {
-      "nextGate": "Existing acceptance maintenance",
-      "status": "IMPLEMENTED",
       "evidence": [
         "src/PixelTart.Modules.AssetLibrary/",
         "tests/PixelTart.ModularHarness.Tests/"
-      ]
+      ],
+      "status": "IMPLEMENTED",
+      "nextGate": "Existing acceptance maintenance"
     },
     "Tether": {
-      "nextGate": "Native WPF review",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
         "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Native WPF review"
     },
     "Compare": {
-      "nextGate": "Independent viewport/action integration",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Models/Photography/PhotographyCompareModels.cs",
         "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
         "tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Independent viewport/action integration"
     },
     "Publishing": {
-      "nextGate": "Live snapshot UI acceptance",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Publishing/",
         "src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs",
         "tests/RAWSelectionAssistant.Tests/PublishingCoreTests.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Live snapshot UI acceptance"
     },
     "ColorStudio": {
-      "nextGate": "Historical closure gates",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
         "docs/color-studio/COLOR_STUDIO_CURRENT_STATUS.md"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Historical closure gates"
     },
     "MatchV3": {
-      "nextGate": "No new gate in this phase",
-      "status": "IMPLEMENTED",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Projects/",
         "docs/color-studio/"
-      ]
+      ],
+      "status": "IMPLEMENTED",
+      "nextGate": "No new gate in this phase"
     },
     "MatchV4": {
-      "nextGate": "Product correctness closure",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Projects/",
         "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Product correctness closure"
     },
     "GPU": {
-      "nextGate": "Full product integration",
-      "status": "PARTIAL",
       "evidence": [
         "src/PixelTart.MatchV4.Dx12/",
         "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Full product integration"
     },
     "RAW": {
-      "nextGate": "Modern LibRaw and real corpus",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/RawToJpeg/",
         "src/RAWSelectionAssistant.Core/Services/Raw/"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Modern LibRaw and real corpus"
     },
     "TIFF16": {
-      "nextGate": "ICC/metadata/read-back closure",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
         "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "ICC/metadata/read-back closure"
     },
     "Preset": {
-      "nextGate": "Preset product consolidation",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Publishing/",
         "src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Preset product consolidation"
     },
     "Film": {
-      "nextGate": "Film Lab architecture",
-      "status": "SPEC_ONLY",
       "evidence": [
         "docs/design-system/19_FILM_CONTROLS.md",
         "docs/research/OPEN_SOURCE_COLOR_ENGINE_PHASE0.md"
-      ]
+      ],
+      "status": "SPEC_ONLY",
+      "nextGate": "Film Lab architecture"
     },
     "ICC": {
-      "nextGate": "Validated profile conversion",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs",
         "docs/color-studio/ICC_PIPELINE_AUDIT.md"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Validated profile conversion"
     },
     "3DColorSpace": {
-      "nextGate": "WPF renderer acceptance",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs",
         "tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "WPF renderer acceptance"
     },
     "Planning": {
-      "nextGate": "Roadmap maintenance",
-      "status": "IMPLEMENTED",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs"
-      ]
+      ],
+      "status": "IMPLEMENTED",
+      "nextGate": "Roadmap maintenance"
     },
     "OnlineSelection": {
-      "nextGate": "Product closure",
-      "status": "PARTIAL",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs"
-      ]
+      ],
+      "status": "PARTIAL",
+      "nextGate": "Product closure"
     },
     "BrowserExtension": {
-      "nextGate": "Deferred by workflow correctness phase",
-      "status": "DEFERRED",
       "evidence": [
         "docs/PIXEL_TART_PHOTOGRAPHER_OS_ROADMAP.md"
-      ]
+      ],
+      "status": "DEFERRED",
+      "nextGate": "Deferred by workflow correctness phase"
     }
   }
 }
