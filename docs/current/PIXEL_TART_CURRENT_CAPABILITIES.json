@@ -1,150 +1,224 @@
 {
-  "generated_at": "2026-09-29T07:13:14.5262996+00:00",
-  "git_sha": "8885dff6d0c3e6d9d3aac3a6cfbd6b8252c89967",
+  "generated_at": "2026-09-29T07:55:48.4418559+00:00",
+  "generated_from_head": "27d2ae1e92ac1964fa62aed7c9e768d8a49c8437",
   "branch": "integration/pixel-tart-developer-preview",
-  "modules": {
-    "Photography": {
-      "status": "PARTIAL",
-      "nextGate": "Native 2-Up walkthrough and action-target closure",
+  "capabilities": [
+    {
+      "id": "Photography",
+      "module": "Photography",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
       "evidence": [
         "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
         "tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs"
-      ]
-    },
-    "AssetLibrary": {
-      "status": "IMPLEMENTED",
-      "nextGate": "Existing acceptance maintenance",
-      "evidence": [
-        "src/PixelTart.Modules.AssetLibrary/",
-        "tests/PixelTart.ModularHarness.Tests/"
-      ]
-    },
-    "Tether": {
-      "status": "PARTIAL",
-      "nextGate": "Native WPF review",
-      "evidence": [
-        "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
-        "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml"
-      ]
-    },
-    "Compare": {
-      "status": "PARTIAL",
-      "nextGate": "Independent viewport/action integration",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Models/Photography/PhotographyCompareModels.cs",
-        "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+      ],
+      "required_tests": [
         "tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs"
-      ]
+      ],
+      "acceptance_artifacts": [
+        "docs/audits/WORKFLOW_CORRECTNESS_AUDIT.md"
+      ],
+      "next_gate": "Native 2-Up walkthrough and action-target closure"
     },
-    "Publishing": {
-      "status": "PARTIAL",
-      "nextGate": "Live snapshot UI acceptance",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/Publishing/",
-        "src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs",
-        "tests/RAWSelectionAssistant.Tests/PublishingCoreTests.cs"
-      ]
-    },
-    "ColorStudio": {
-      "status": "PARTIAL",
-      "nextGate": "Historical closure gates",
-      "evidence": [
-        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
-        "docs/color-studio/COLOR_STUDIO_CURRENT_STATUS.md"
-      ]
-    },
-    "MatchV3": {
-      "status": "IMPLEMENTED",
-      "nextGate": "No new gate in this phase",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/Projects/",
-        "docs/color-studio/"
-      ]
-    },
-    "MatchV4": {
-      "status": "PARTIAL",
-      "nextGate": "Product correctness closure",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/Projects/",
-        "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
-      ]
-    },
-    "GPU": {
-      "status": "PARTIAL",
-      "nextGate": "Full product integration",
-      "evidence": [
-        "src/PixelTart.MatchV4.Dx12/",
-        "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
-      ]
-    },
-    "RAW": {
-      "status": "PARTIAL",
-      "nextGate": "Modern LibRaw and real corpus",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/RawToJpeg/",
-        "src/RAWSelectionAssistant.Core/Services/Raw/"
-      ]
-    },
-    "TIFF16": {
-      "status": "PARTIAL",
-      "nextGate": "ICC/metadata/read-back closure",
-      "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
-        "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs"
-      ]
-    },
-    "Preset": {
-      "status": "PARTIAL",
-      "nextGate": "Preset product consolidation",
+    {
+      "id": "Publishing",
+      "module": "Publishing",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Publishing/",
         "src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs"
-      ]
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/PublishingCoreTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/publishing/PUBLISHING_PROGRESS_CANCELLATION_VALIDATION.md"
+      ],
+      "next_gate": "Live snapshot UI acceptance"
     },
-    "Film": {
-      "status": "SPEC_ONLY",
-      "nextGate": "Film Lab architecture",
+    {
+      "id": "Compare",
+      "module": "Compare",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
       "evidence": [
-        "docs/design-system/19_FILM_CONTROLS.md",
+        "src/RAWSelectionAssistant.Core/Models/Photography/PhotographyCompareModels.cs",
+        "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/audits/WORKFLOW_CORRECTNESS_AUDIT.md"
+      ],
+      "next_gate": "Native physical-pixel walkthrough"
+    },
+    {
+      "id": "CreativeFilm",
+      "module": "Film",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+        "tests/RAWSelectionAssistant.Tests/PixelTartFilmTests.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/PixelTartFilmTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/reports/REFERENCE_FILM_QUALITY_CLOSURE.md"
+      ],
+      "next_gate": "Color architecture integration"
+    },
+    {
+      "id": "SpectralFilm",
+      "module": "Film",
+      "implementation_status": "SPEC_ONLY",
+      "verification_status": "NOT_RUN",
+      "evidence": [
         "docs/research/OPEN_SOURCE_COLOR_ENGINE_PHASE0.md"
-      ]
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/research/OPEN_SOURCE_COLOR_ENGINE_PHASE0.md"
+      ],
+      "next_gate": "Film Lab Phase 1"
     },
-    "ICC": {
-      "status": "PARTIAL",
-      "nextGate": "Validated profile conversion",
+    {
+      "id": "InstantFilm",
+      "module": "Film",
+      "implementation_status": "SPEC_ONLY",
+      "verification_status": "NOT_RUN",
       "evidence": [
-        "src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs",
-        "docs/color-studio/ICC_PIPELINE_AUDIT.md"
-      ]
+        "docs/PIXEL_TART_PHOTOGRAPHER_OS_ROADMAP.md"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/PIXEL_TART_PHOTOGRAPHER_OS_ROADMAP.md"
+      ],
+      "next_gate": "Future characterization study"
     },
-    "3DColorSpace": {
-      "status": "PARTIAL",
-      "nextGate": "WPF renderer acceptance",
+    {
+      "id": "AdobeXmpPreset",
+      "module": "Preset",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Presets/AdobeXmpPresets.cs",
+        "tests/RAWSelectionAssistant.Tests/AdobeXmpPresetTests.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/AdobeXmpPresetTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/THIRD_PARTY_PRESET_ARCHITECTURE.md"
+      ],
+      "next_gate": "Full semantic coverage"
+    },
+    {
+      "id": "CubeLutPreset",
+      "module": "Preset",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Tethering/LutServices.cs",
+        "tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/PRESET_BROWSER_ARCHITECTURE.md"
+      ],
+      "next_gate": "Product browser consolidation"
+    },
+    {
+      "id": "CaptureOnePreset",
+      "module": "Preset",
+      "implementation_status": "SPEC_ONLY",
+      "verification_status": "NOT_APPLICABLE",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/RawToJpeg/CaptureOnePresetImporter.cs"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/THIRD_PARTY_PRESET_COMPATIBILITY.md"
+      ],
+      "next_gate": "Legal fixture adapter verification"
+    },
+    {
+      "id": "3DColorSpaceCore",
+      "module": "ColorStudio",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
       "evidence": [
         "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs",
         "tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs"
-      ]
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/current/PIXEL_TART_CURRENT_STATE.md"
+      ],
+      "next_gate": "Windows renderer"
     },
-    "Planning": {
-      "status": "IMPLEMENTED",
-      "nextGate": "Roadmap maintenance",
-      "evidence": [
-        "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs"
-      ]
+    {
+      "id": "3DColorSpaceRenderer",
+      "module": "ColorStudio",
+      "implementation_status": "NOT_IMPLEMENTED",
+      "verification_status": "NOT_RUN",
+      "evidence": [],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/current/PIXEL_TART_CURRENT_STATE.md"
+      ],
+      "next_gate": "3D_COLOR_SPACE_WINDOWS_RENDERER"
     },
-    "OnlineSelection": {
-      "status": "PARTIAL",
-      "nextGate": "Product closure",
+    {
+      "id": "GPUFullPixel",
+      "module": "GPU",
+      "implementation_status": "PARTIAL",
+      "verification_status": "NOT_RUN",
       "evidence": [
-        "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs"
-      ]
+        "src/PixelTart.MatchV4.Dx12/",
+        "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
+      ],
+      "next_gate": "Full product integration"
     },
-    "BrowserExtension": {
-      "status": "DEFERRED",
-      "nextGate": "Deferred by workflow correctness phase",
+    {
+      "id": "ICCRegistry",
+      "module": "ICC",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
       "evidence": [
-        "docs/PIXEL_TART_PHOTOGRAPHER_OS_ROADMAP.md"
-      ]
+        "src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs",
+        "docs/color-studio/ICC_PIPELINE_AUDIT.md"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-studio/ICC_PIPELINE_AUDIT.md"
+      ],
+      "next_gate": "Validated conversion"
+    },
+    {
+      "id": "ICCConversion",
+      "module": "ICC",
+      "implementation_status": "PARTIAL",
+      "verification_status": "NOT_RUN",
+      "evidence": [
+        "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-studio/ICC_PIPELINE_AUDIT.md"
+      ],
+      "next_gate": "Pixel conversion validation"
     }
-  }
+  ]
 }
