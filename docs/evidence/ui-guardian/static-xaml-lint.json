@@ -1,14 +1,21 @@
 [
   {
-    "Severity": "P1",
-    "Kind": "CANVAS_IN_PAGE",
+    "Severity": "EXEMPT",
+    "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
     "Line": 766,
     "Source": "\u003CCanvas x:Name=\u0022AssetSelectionMarqueeLayer\u0022 Grid.Row=\u00222\u0022 Panel.ZIndex=\u00226\u0022"
   },
   {
-    "Severity": "P1",
-    "Kind": "CANVAS_IN_PAGE",
+    "Severity": "EXEMPT",
+    "Kind": "INTENTIONAL_DRAWING_SURFACE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
+    "Line": 768,
+    "Source": "AutomationProperties.AutomationId=\u0022AssetSelectionMarqueeLayer\u0022\u003E"
+  },
+  {
+    "Severity": "EXEMPT",
+    "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetQueryComposerView.xaml",
     "Line": 95,
     "Source": "\u003CCanvas IsHitTestVisible=\u0022False\u0022\u003E\u003CEllipse x:Name=\u0022ColorPlaneCursor\u0022 Width=\u002212\u0022 Height=\u002212\u0022 Stroke=\u0022{DynamicResource Brush.Text.Primary}\u0022 StrokeThickness=\u00222\u0022 /\u003E\u003C/Canvas\u003E"

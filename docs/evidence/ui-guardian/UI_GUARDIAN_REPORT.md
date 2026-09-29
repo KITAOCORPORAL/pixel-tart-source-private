@@ -2,7 +2,7 @@
 
 ## Scope
 
-This report covers the UI Guardian foundation at `9386b67b50bdb199b2e4784e8ba86359c211b04c`.
+This report covers the UI Guardian capture run against product source `5920ed935d7a298cdadef9857eb619ec85dff462`.
 It reuses the existing WPF evidence harness and does not modify the Color Studio 3D product surface.
 
 ## Findings
@@ -23,9 +23,9 @@ Overlap checks are peer-control checks. Parent/child composition, button content
 
 ## Visual regression
 
-Status: **BASELINE_MISSING**. No baseline is approved or committed. Baselines may only be written by an explicit human run with `PIXEL_TART_APPROVE_VISUAL_BASELINE=1`; the default test never sets that variable.
+Status: **BASELINE_MISSING**. No baseline is approved or committed. Baselines may only be written by an explicit human run with `PIXEL_TART_APPROVE_VISUAL_BASELINE=1`; the default test never sets that variable. The real run generated Received PNGs and per-state audit JSON; no baseline was written.
 
-The required 33-screen matrix (11 views × 3 sizes) is declared in `SCREENSHOT_MATRIX.json`; capture status is `NOT_RUN` in this headless environment. Production screenshots and the current Color Studio 3D contact sheet therefore remain pending user UI review and are not represented by synthetic images.
+The required 33-screen matrix (11 views × 3 sizes) was executed with `PIXEL_TART_UI_GUARDIAN_HARD_GATE=1`: 16 captured, 14 failed on real P0 geometry violations, and 3 were not reachable because the seeded product chain did not expose `SourceImage + MatchedImage` for model generation. Generated PNGs remain in the ignored Received tree. Current-state contact sheets were produced; the 3D model states are absent and cannot be called complete.
 
 ## 3D current state
 
@@ -36,6 +36,6 @@ The required 33-screen matrix (11 views × 3 sizes) is declared in `SCREENSHOT_M
 - `UiDesignLintTests`: PASS
 - `UiGeometryGuardianTests`: PASS
 - `UiVisualRegressionTests`: 1 PASS, 1 INCONCLUSIVE (`BASELINE_MISSING`)
-- Whole-app capture: FAIL in existing harness after the route pass because the opt-in run did not create the expected `dpi` folder; no screenshot is claimed from that run.
+- Whole-app capture: executed; optional DPI folder handling now records `NOT_RUN` JSON when absent.
 - FlaUI desktop automation: NOT RUN; no compatible test-only FlaUI setup is present
 - Native pointer walkthrough: NOT RUN

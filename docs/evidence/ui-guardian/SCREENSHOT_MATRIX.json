@@ -2,166 +2,463 @@
   {
     "View": "Workbench",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1180x720.png",
+    "SHA256": "200F5681018839BB816FE3E324667CBC029150C7C24E7013319F81BB498A6FD9",
+    "GeometryStatus": "FAIL",
+    "P0Count": 22,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "AssetLibrary",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1180x720.png",
+    "SHA256": "CF5EB9AC2CC50761BC8EE32A7731AB8527681DEEF09504647062CD8202FAD90C",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "Tether",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Tether-1180x720.png",
+    "SHA256": "1C182B517AD43116FA970E7BD732C54A81525F0E7BEE968EC0C91F867C2FC258",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Tether-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "Planning",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Planning-1180x720.png",
+    "SHA256": "A23BEE5B7E9E9BFAB00677B5087102D131F00125F8AE6430B4C1050739B376CA",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Planning-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "OnlineSelection",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1180x720.png",
+    "SHA256": "FC84D0D644E58D3DCCCB5350C458620994BB85FE28D6C6BE5D2BDCC597049E70",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "ColorStudio",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1180x720.png",
+    "SHA256": "DEEF2153C45EE12249F7EC83E42D0D2024C176A5185E20F83E0DF2E3C3617936",
+    "GeometryStatus": "FAIL",
+    "P0Count": 651,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "Publishing",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1180x720.png",
+    "SHA256": "742E27546C77A37A5B45B7A703AB06CF3ECF8F0CE611B98B316577B965549F29",
+    "GeometryStatus": "FAIL",
+    "P0Count": 50,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "Settings",
     "Size": "1180x720",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-closed",
-    "Size": "1180x720",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-open",
-    "Size": "1180x720",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-model",
-    "Size": "1180x720",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Settings-1180x720.png",
+    "SHA256": "3C153C1D7569BFF5251068173E725C4FEB414C7072D8ADE91D89FFB0726D9B11",
+    "GeometryStatus": "FAIL",
+    "P0Count": 50,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Settings-1180x720.audit.json",
+    "Error": null
   },
   {
     "View": "Workbench",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1600x920.png",
+    "SHA256": "B81BC0E04A55BC0A7791C4AC89A94356815E506DCCEB8A070B5CFB2BD26B0A6D",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "AssetLibrary",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1600x920.png",
+    "SHA256": "846BC625A2D7213C091ABCA8F45012F43470A231A03A29F9EC0D332DD2AC7CB3",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "Tether",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Tether-1600x920.png",
+    "SHA256": "8AD8F64C1FE6A659BA7B9310AA70EECF670E07C2309892DE34039039F1252A39",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Tether-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "Planning",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Planning-1600x920.png",
+    "SHA256": "6736AD609B699DD7CCF1FEEF94F0DC2F27A1CFC2D6686F65A8A025C97F1D839A",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Planning-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "OnlineSelection",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1600x920.png",
+    "SHA256": "6328722C840EB5C16031EA0B78C1A52950F7BFD21A331BBE8ACB9B13B1BD4515",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "ColorStudio",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1600x920.png",
+    "SHA256": "93E3169F212A88BD068ABEDB1F19EC280B065ADF3DAA4B8103E38ADEE26E75D4",
+    "GeometryStatus": "FAIL",
+    "P0Count": 611,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "Publishing",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1600x920.png",
+    "SHA256": "23735C2EE5D87A1CF7757B420F1537E3C6CB28B5D9600594EF1B2B7E74A0DBDE",
+    "GeometryStatus": "FAIL",
+    "P0Count": 25,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "Settings",
     "Size": "1600x920",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-closed",
-    "Size": "1600x920",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-open",
-    "Size": "1600x920",
-    "Status": "NOT_RUN"
-  },
-  {
-    "View": "ColorStudio-3D-model",
-    "Size": "1600x920",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Settings-1600x920.png",
+    "SHA256": "B0D0288C2D0E8E21428061F33EF30FF3C78FC97F01AD0CCB063526EAF65B5D48",
+    "GeometryStatus": "FAIL",
+    "P0Count": 25,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Settings-1600x920.audit.json",
+    "Error": null
   },
   {
     "View": "Workbench",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1920x1080.png",
+    "SHA256": "7759396682B8D8FBAA14E85027C827D976FCBC8C605567416B12C040C2B65877",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Workbench-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "AssetLibrary",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1920x1080.png",
+    "SHA256": "3BBC391B8D0CB5F0635B00E68005FE526CF2EEAF209CDA1E320CF4626C856B24",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/AssetLibrary-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "Tether",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Tether-1920x1080.png",
+    "SHA256": "814A5206EDB19735343D9F73707A0AE166E34461C595ABD1A0EADCD67003F286",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Tether-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "Planning",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Planning-1920x1080.png",
+    "SHA256": "7D0B03B7BE7313C5724675967B19D1B30DE99B9045CD762243D54437CC3BDF0E",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Planning-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "OnlineSelection",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1920x1080.png",
+    "SHA256": "AB3FAAAA4A31898310D0022B8E4C05FCB7750251C5F5AC637D2A265D467B41EA",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/OnlineSelection-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "ColorStudio",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1920x1080.png",
+    "SHA256": "E7658BEEFC4F8FD92BE45115834D0B10D86DE739BD6A62AC591D81014F5E7C2A",
+    "GeometryStatus": "FAIL",
+    "P0Count": 584,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "Publishing",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1920x1080.png",
+    "SHA256": "FA9A34841A5A43FE98624990142112EFF6828430B03FCD855C06C1EAC76DF9B1",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Publishing-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "Settings",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "CAPTURED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/Settings-1920x1080.png",
+    "SHA256": "135DAAAED1D2C05FA7FD002B4E0428C9A3565F8E7C00D6C303EC3040B1E2653B",
+    "GeometryStatus": "PASS",
+    "P0Count": 0,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/Settings-1920x1080.audit.json",
+    "Error": null
+  },
+  {
+    "View": "ColorStudio-3D-closed",
+    "Size": "1180x720",
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1180x720.png",
+    "SHA256": "DEEF2153C45EE12249F7EC83E42D0D2024C176A5185E20F83E0DF2E3C3617936",
+    "GeometryStatus": "FAIL",
+    "P0Count": 651,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1180x720.audit.json",
+    "Error": null
+  },
+  {
+    "View": "ColorStudio-3D-open",
+    "Size": "1180x720",
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1180x720.png",
+    "SHA256": "8FA7E065FFCCF65E75AC62C7868A280F254883009B972DF6D8AFF75B73A78596",
+    "GeometryStatus": "FAIL",
+    "P0Count": 651,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1180x720.audit.json",
+    "Error": null
+  },
+  {
+    "View": "ColorStudio-3D-model",
+    "Size": "1180x720",
+    "Status": "NOT_REACHABLE",
+    "Path": null,
+    "SHA256": null,
+    "GeometryStatus": "NOT_RUN",
+    "P0Count": null,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "NOT_RUN",
+    "AuditPath": null,
+    "Error": "System.InvalidOperationException: SourceImage/MatchedImage unavailable; model command disabled\r\n   at RAWSelectionAssistant.WpfTests.UiGuardianCapture.Run(Window window, MainViewModel vm, String fixtures, String output)"
+  },
+  {
+    "View": "ColorStudio-3D-closed",
+    "Size": "1600x920",
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1600x920.png",
+    "SHA256": "93E3169F212A88BD068ABEDB1F19EC280B065ADF3DAA4B8103E38ADEE26E75D4",
+    "GeometryStatus": "FAIL",
+    "P0Count": 611,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1600x920.audit.json",
+    "Error": null
+  },
+  {
+    "View": "ColorStudio-3D-open",
+    "Size": "1600x920",
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1600x920.png",
+    "SHA256": "71C24B4FA432175B6261132E5C6670D440FB0AC465D6C14E896436DB46547233",
+    "GeometryStatus": "FAIL",
+    "P0Count": 611,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1600x920.audit.json",
+    "Error": null
+  },
+  {
+    "View": "ColorStudio-3D-model",
+    "Size": "1600x920",
+    "Status": "NOT_REACHABLE",
+    "Path": null,
+    "SHA256": null,
+    "GeometryStatus": "NOT_RUN",
+    "P0Count": null,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "NOT_RUN",
+    "AuditPath": null,
+    "Error": "System.InvalidOperationException: SourceImage/MatchedImage unavailable; model command disabled\r\n   at RAWSelectionAssistant.WpfTests.UiGuardianCapture.Run(Window window, MainViewModel vm, String fixtures, String output)"
   },
   {
     "View": "ColorStudio-3D-closed",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1920x1080.png",
+    "SHA256": "E7658BEEFC4F8FD92BE45115834D0B10D86DE739BD6A62AC591D81014F5E7C2A",
+    "GeometryStatus": "FAIL",
+    "P0Count": 584,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-closed-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "ColorStudio-3D-open",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "FAILED",
+    "Path": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1920x1080.png",
+    "SHA256": "2245A7AEA1EBB13DAC79F26AD471471300C2B17A1A4663C46C21F7067A4D4310",
+    "GeometryStatus": "FAIL",
+    "P0Count": 584,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "BASELINE_MISSING",
+    "AuditPath": "tests/UIVisual/Received/20260929T160222287Z/ColorStudio-3D-open-1920x1080.audit.json",
+    "Error": null
   },
   {
     "View": "ColorStudio-3D-model",
     "Size": "1920x1080",
-    "Status": "NOT_RUN"
+    "Status": "NOT_REACHABLE",
+    "Path": null,
+    "SHA256": null,
+    "GeometryStatus": "NOT_RUN",
+    "P0Count": null,
+    "CaptureKind": "IN_PROCESS_WPF_RENDER",
+    "ProductSourceSha": "5920ed935d7a298cdadef9857eb619ec85dff462",
+    "VisualRegression": "NOT_RUN",
+    "AuditPath": null,
+    "Error": "System.InvalidOperationException: SourceImage/MatchedImage unavailable; model command disabled\r\n   at RAWSelectionAssistant.WpfTests.UiGuardianCapture.Run(Window window, MainViewModel vm, String fixtures, String output)"
   }
 ]
