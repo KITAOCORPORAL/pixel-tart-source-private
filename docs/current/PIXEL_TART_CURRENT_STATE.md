@@ -1,7 +1,7 @@
 # Pixel Tart current capability state
 
-Generated: 2026-09-29T18:03:31.5422440+00:00
-Generated from source HEAD: a1cde36d82bc65d211ae85e6a8fbf60baadd5d92
+Generated: 2026-09-29T18:04:57.9294309+00:00
+Generated from source HEAD: e6831c6d9a3b4b3bfc657fbe2ec498ffa2fe2bb7
 Branch: integration/pixel-tart-developer-preview
 
 | Capability | Implementation | Verification | Evidence | Next gate |
