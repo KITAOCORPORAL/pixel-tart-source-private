@@ -270,9 +270,16 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
     {
         if (_editor is not null) _editor.PropertyChanged -= EditorOnPropertyChanged;
+        if (args.OldValue is ReferenceColorWorkspaceViewModel oldWorkspace) oldWorkspace.PropertyChanged -= WorkspaceOnPropertyChanged;
+        if (args.NewValue is ReferenceColorWorkspaceViewModel newWorkspace) newWorkspace.PropertyChanged += WorkspaceOnPropertyChanged;
         _editor = (args.NewValue as ReferenceColorWorkspaceViewModel)?.Editor;
         if (_editor is not null) _editor.PropertyChanged += EditorOnPropertyChanged;
         UpdateResponsiveLayout();
+    }
+    private void WorkspaceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
+    {
+        if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
+            ColorSpaceViewport.State = workspace.ColorSpaceModel is { } model ? ColorSpaceRendererContract.Create(model) : null;
     }
 
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
@@ -367,4 +374,6 @@ public partial class ReferenceColorWorkspaceView : UserControl
         }
         return width;
     }
+    private void OnColorSpaceReset(object sender, RoutedEventArgs e) => ColorSpaceViewport.ResetCamera();
+    private void OnColorSpaceFit(object sender, RoutedEventArgs e) => ColorSpaceViewport.FitCamera();
 }

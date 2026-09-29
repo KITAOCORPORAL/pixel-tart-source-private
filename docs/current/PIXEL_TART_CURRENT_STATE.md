@@ -21,7 +21,7 @@ Branch: integration/pixel-tart-developer-preview
 | CubeLutPreset | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Tethering/LutServices.cs<br>tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs | Product browser consolidation |
 | CaptureOnePreset | SPEC_ONLY | NOT_APPLICABLE | src/RAWSelectionAssistant.Core/Services/RawToJpeg/CaptureOnePresetImporter.cs | Legal fixture adapter verification |
 | 3DColorSpaceCore | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs<br>tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs | Windows renderer |
-| 3DColorSpaceRenderer | NOT_IMPLEMENTED | NOT_RUN |  | 3D_COLOR_SPACE_WINDOWS_RENDERER |
+| 3DColorSpaceRenderer | PARTIAL | PASS (bounded WPF surface) | src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs | Native pointer/screenshot/performance gate |
 | GPUFullPixel | PARTIAL | NOT_RUN | src/PixelTart.MatchV4.Dx12/<br>docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md | Full product integration |
 | ICCRegistry | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs<br>docs/color-studio/ICC_PIPELINE_AUDIT.md | Validated conversion |
 | ICCConversion | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs | Pixel conversion validation |

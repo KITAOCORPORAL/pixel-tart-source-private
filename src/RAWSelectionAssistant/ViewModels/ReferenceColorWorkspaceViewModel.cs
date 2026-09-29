@@ -1,8 +1,10 @@
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Services;
@@ -34,6 +36,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private long _syncFeedbackRevision;
     private readonly HashSet<Guid> _nodeSyncSelection = [];
     private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
+    private ColorSpaceVisualizationModel? _colorSpaceModel;
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
         MatchV4ProductExecutor? matchV4Executor = null)
@@ -45,6 +48,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
             renderBackend: renderBackend, matchV4Executor: matchV4Executor);
         Editor.Enabled = true;
+        BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null && Editor.MatchedImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
         SyncSelectedCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(SelectedTargets), _ => SelectedTargets.Any());
@@ -71,6 +75,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage)) BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
         };
         Targets.CollectionChanged += (_, args) =>
         {
@@ -81,6 +86,22 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     }
 
     public TetherReferenceModeViewModel Editor { get; }
+    public AsyncRelayCommand BuildColorSpaceModelCommand { get; }
+    public ColorSpaceVisualizationModel? ColorSpaceModel { get => _colorSpaceModel; private set => SetProperty(ref _colorSpaceModel, value); }
+    public bool HasColorSpaceModel => ColorSpaceModel is not null;
+    public async Task BuildColorSpaceModelAsync(CancellationToken token = default)
+    {
+        if (Editor.SourceImage is null || Editor.MatchedImage is null) return;
+        var source = await Task.Run(() => ToVisualBuffer(Editor.SourceImage), token);
+        var matched = await Task.Run(() => ToVisualBuffer(Editor.MatchedImage), token);
+        var transform = new MatchV4ResolvedTransform(new(0, 0, 0), [new(0, 0, 0), new(0, 0, 0), new(0, 0, 0)], new(), "workspace-preview");
+        ColorSpaceModel = await Task.Run(() => ColorSpaceVisualizationBuilder.Build(source, matched, transform, ColorSpaceSamplingTier.Preview, token), token);
+        OnPropertyChanged(nameof(HasColorSpaceModel));
+    }
+    private static VisualPixelBuffer ToVisualBuffer(BitmapSource source)
+    {
+        var converted = new FormatConvertedBitmap(source, PixelFormats.Rgb24, null, 0); var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 3]; converted.CopyPixels(bytes, converted.PixelWidth * 3, 0); return new(converted.PixelWidth, converted.PixelHeight, bytes);
+    }
     public AsyncRelayCommand ChooseTargetCommand { get; }
     public RelayCommand StopProcessingCommand { get; }
     public RelayCommand SyncSelectedCommand { get; }
