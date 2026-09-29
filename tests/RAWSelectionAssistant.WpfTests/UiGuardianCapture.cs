@@ -62,14 +62,19 @@ internal static class UiGuardianCapture
             var workspace = vm.ReferenceColorPage;
             try
             {
+                var trace = new List<object>();
+                void Trace(string step) => trace.Add(new { Step = step, SourceImage = workspace.Editor.SourceImage is not null, ReferenceImage = workspace.Editor.ReferenceSources.Count > 0, MatchedImage = workspace.Editor.MatchedImage is not null, CanExecute = workspace.BuildColorSpaceModelCommand.CanExecute(null), WorkspaceMode = workspace.Editor.WorkspaceMode, CurrentTarget = workspace.ActiveTarget?.FileName, Status = workspace.Editor.StatusText });
+                Trace("before-context");
                 var contextImage = new System.Windows.Media.Imaging.BitmapImage();
                 contextImage.BeginInit(); contextImage.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad; contextImage.UriSource = new Uri(Path.GetFullPath(Path.Combine(fixtures, "demo-shot-01.png"))); contextImage.EndInit(); contextImage.Freeze();
-                await workspace.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, contextImage);
                 await workspace.LoadTargetAsync(Path.Combine(fixtures, "demo-shot-01.png"));
+                Trace("after-load-target");
+                await workspace.AcceptContextAsync(RAWSelectionAssistant.Services.PlanningHumanAcceptanceDemoSeeder.ProjectId, null, contextImage);
+                Trace("after-context");
                 if (workspace.Editor.SourceImage is null) throw new InvalidOperationException("SourceImage unavailable after product preview load");
                 await workspace.Editor.ApplyCommand.ExecuteAsync(null);
-                await workspace.LoadTargetAsync(Path.Combine(fixtures, "demo-shot-01.png"));
-                await workspace.Editor.ApplyCommand.ExecuteAsync(null);
+                Trace("after-apply");
+                File.WriteAllText(Path.Combine(report, "3D_MODEL_CAPTURE_STATE_TRACE.md"), "# 3D model capture state trace\n\n" + string.Join("\n", trace.Select(row => $"- `{JsonSerializer.Serialize(row)}`")));
                 workspace.Editor.WorkspaceMode = "专业";
                 await SizeWindow(size);
                 workspace.Editor.ContextRailOpen = true;
