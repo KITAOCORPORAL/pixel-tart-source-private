@@ -1,11 +1,16 @@
 # Pixel Tart current capability state
 
-Generated: 2026-09-29T08:02:44.0691474+00:00
-Generated from source HEAD: 798c89da6a562447b74907efcf071be5257caacb
+Generated: 2026-09-29T08:50:52.4953669+00:00
+Generated from source HEAD: cf60ee685cedfe241c24ab4d84852ea4c86ef929
 Branch: integration/pixel-tart-developer-preview
 
 | Capability | Implementation | Verification | Evidence | Next gate |
 |---|---|---|---|---|
+| ReferenceMatchV3 | IMPLEMENTED | PASS | src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs | Existing acceptance maintenance |
+| ReferenceMatchV4 | PARTIAL | NOT_RUN | src/RAWSelectionAssistant.Core/Services/Projects/ReferenceMatchV4.cs | Product correctness closure |
+| RawHighPrecision | PARTIAL | NOT_RUN | src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs<br>src/RAWSelectionAssistant.Core/Services/Projects/FrozenRawMaster.cs | Real corpus and decoder compatibility |
+| Tiff16Publishing | PARTIAL | NOT_RUN | src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs<br>src/RAWSelectionAssistant.Core/Services/Export/AtomicTiffWriter.cs | ICC/metadata/read-back closure |
+| ColorPipelineSnapshot | SPEC_ONLY | NOT_RUN | docs/color-architecture/COLOR_STAGE_SNAPSHOT_PROPOSAL.md | Canonical snapshot contract |
 | Photography | PARTIAL | PASS | src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs<br>tests/RAWSelectionAssistant.Tests/PhotographerWorkflowFoundationTests.cs | Native 2-Up walkthrough and action-target closure |
 | Publishing | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Publishing/<br>src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs | Live snapshot UI acceptance |
 | Compare | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Models/Photography/PhotographyCompareModels.cs<br>src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs | Native physical-pixel walkthrough |

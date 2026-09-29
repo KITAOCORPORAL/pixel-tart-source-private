@@ -1,8 +1,84 @@
 {
-  "generated_at": "2026-09-29T08:02:44.0691474+00:00",
-  "generated_from_head": "798c89da6a562447b74907efcf071be5257caacb",
+  "generated_at": "2026-09-29T08:50:52.4953669+00:00",
+  "generated_from_head": "cf60ee685cedfe241c24ab4d84852ea4c86ef929",
   "branch": "integration/pixel-tart-developer-preview",
   "capabilities": [
+    {
+      "id": "ReferenceMatchV3",
+      "module": "ColorStudio",
+      "implementation_status": "IMPLEMENTED",
+      "verification_status": "PASS",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.WpfTests/ColorStudioStateClosureTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/color-studio/COLOR_STUDIO_CURRENT_STATUS.md"
+      ],
+      "next_gate": "Existing acceptance maintenance"
+    },
+    {
+      "id": "ReferenceMatchV4",
+      "module": "ColorStudio",
+      "implementation_status": "PARTIAL",
+      "verification_status": "NOT_RUN",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceMatchV4.cs"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"
+      ],
+      "next_gate": "Product correctness closure"
+    },
+    {
+      "id": "RawHighPrecision",
+      "module": "RAW",
+      "implementation_status": "PARTIAL",
+      "verification_status": "NOT_RUN",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/FrozenRawMaster.cs"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-studio/COLOR_STUDIO_CURRENT_STATUS.md"
+      ],
+      "next_gate": "Real corpus and decoder compatibility"
+    },
+    {
+      "id": "Tiff16Publishing",
+      "module": "TIFF16",
+      "implementation_status": "PARTIAL",
+      "verification_status": "NOT_RUN",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+        "src/RAWSelectionAssistant.Core/Services/Export/AtomicTiffWriter.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.Tests/PublishingTiffAndXmpBatchTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/publishing/PUBLISHING_PRODUCTION_ACCEPTANCE.md"
+      ],
+      "next_gate": "ICC/metadata/read-back closure"
+    },
+    {
+      "id": "ColorPipelineSnapshot",
+      "module": "ColorStudio",
+      "implementation_status": "SPEC_ONLY",
+      "verification_status": "NOT_RUN",
+      "evidence": [
+        "docs/color-architecture/COLOR_STAGE_SNAPSHOT_PROPOSAL.md"
+      ],
+      "required_tests": [],
+      "acceptance_artifacts": [
+        "docs/color-architecture/COLOR_STAGE_SNAPSHOT_PROPOSAL.md"
+      ],
+      "next_gate": "Canonical snapshot contract"
+    },
     {
       "id": "Photography",
       "module": "Photography",
