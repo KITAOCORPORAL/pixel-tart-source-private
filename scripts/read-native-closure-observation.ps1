@@ -18,7 +18,12 @@ while ($clock.Elapsed.TotalSeconds -lt $TimeoutSeconds) {
     [IO.File]::WriteAllText($request, $nonce)
     do {
         if (Test-Path -LiteralPath $response) {
-            try { $last = Get-Content -LiteralPath $response -Raw | ConvertFrom-Json } catch [System.IO.IOException] { }
+            try {
+                $stream = [IO.FileStream]::new($response, [IO.FileMode]::Open, [IO.FileAccess]::Read,
+                    [IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete)
+                $reader = [IO.StreamReader]::new($stream)
+                try { $last = $reader.ReadToEnd() | ConvertFrom-Json } finally { $reader.Dispose() }
+            } catch [System.IO.IOException] { } catch [System.UnauthorizedAccessException] { }
             if ($last.Nonce -eq $nonce) { break }
         }
         # Bounded protocol polling, not a sleep-based acceptance condition.

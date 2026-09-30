@@ -136,21 +136,35 @@ public static class ColorStudioAcceptanceFixture
                     Events = events.ToArray()
                 });
                 var path = Path.Combine(folder, "native-observe-response.json");
-                File.WriteAllText(path + ".tmp", response);
-                File.Move(path + ".tmp", path, true);
-                last = nonce;
+                if (TryPublishNativeObservation(path, response)) last = nonce;
             }
-            catch (IOException) { /* A concurrently written request is retried at the next tick. */ }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+            { /* A concurrently read/written request is retried; observation never opens a product error dialog. */ }
             catch (InvalidOperationException error)
             {
                 // A temporarily detached visual must fail observation, not crash production or be claimed ready.
                 var path = Path.Combine(folder, "native-observe-error.json");
                 try { File.WriteAllText(path, JsonSerializer.Serialize(new { Timestamp = DateTimeOffset.UtcNow, Error = error.Message })); }
-                catch (IOException) { }
+                catch (Exception writeError) when (writeError is IOException or UnauthorizedAccessException) { }
             }
         };
         window.Closed += (_, _) => { timer.Stop(); editor.PropertyChanged -= handler; };
         timer.Start();
+    }
+    internal static bool TryPublishNativeObservation(string path, string response)
+    {
+        try
+        {
+            File.WriteAllText(path + ".tmp", response);
+            File.Move(path + ".tmp", path, true);
+            return true;
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+        {
+            // Windows readers without FILE_SHARE_DELETE can transiently deny atomic replacement.
+            // Keep the previous complete response and retry the same nonce on the next observer tick.
+            return false;
+        }
     }
     private static ReferenceColorWorkspaceView? FindNativeView(DependencyObject parent)
     {

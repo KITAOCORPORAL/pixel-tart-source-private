@@ -15,6 +15,29 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class NativeClosureObservationTests
 {
     [TestMethod]
+    public void LockedObserverResponsePreservesPreviousEvidenceAndRetriesWithoutThrowing()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "pixel-tart-observer-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        var path = Path.Combine(directory, "response.json");
+        var method = typeof(RAWSelectionAssistant.Services.ColorStudioAcceptanceFixture)
+            .GetMethod("TryPublishNativeObservation", BindingFlags.NonPublic | BindingFlags.Static)!;
+        try
+        {
+            File.WriteAllText(path, "{\"Nonce\":\"before\"}");
+            using (var held = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                Assert.IsFalse((bool)method.Invoke(null, [path, "{\"Nonce\":\"after\"}"])!);
+                Assert.AreEqual("{\"Nonce\":\"before\"}", File.ReadAllText(path));
+            }
+            Assert.IsTrue((bool)method.Invoke(null, [path, "{\"Nonce\":\"after\"}"])!);
+            Assert.AreEqual("{\"Nonce\":\"after\"}", File.ReadAllText(path));
+            Assert.IsFalse(File.Exists(path + ".tmp"));
+        }
+        finally { Directory.Delete(directory, true); }
+    }
+
+    [TestMethod]
     public void ThreeDObservationIsReadOnlyAndReportsRealRenderWork() => Sta(() =>
     {
         var cloud = new ColorSpaceCloud(1, 1, 1, 1, [new(new(.5, 0, 0), new VisualRgb24(128, 128, 128), 0, 0)], "fixture", new());
