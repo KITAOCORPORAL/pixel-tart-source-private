@@ -1,0 +1,182 @@
+{
+  "generated_at": "2026-09-30T01:58:23.7565829Z",
+  "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+  "status": "BLOCKED",
+  "blocker": "Windows Computer Use capture fails: SetIsBorderRequired failed: 不支持此接口 (0x80004002); text-only observation works but native click fails: coordinate input geometry is unavailable.",
+  "baseline_approved": false,
+  "visual_approved": false,
+  "user_verified": false,
+  "implementation": "PARTIAL",
+  "verification": "NOT_RUN",
+  "steps": [
+    {
+      "name": "Open",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Load real model",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Orbit",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Pan",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Zoom in",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Zoom out",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Reset",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Fit",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Resize",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Smaller window",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Larger window",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Inspector collapse/expand",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Rapid orbit/pan/zoom",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    },
+    {
+      "name": "Escape/focus recovery",
+      "status": "NOT_RUN",
+      "camera_before": null,
+      "native_input": null,
+      "camera_after": null,
+      "viewport": null,
+      "render_success": null,
+      "exception_state": "NOT_OBSERVED",
+      "screenshot": null
+    }
+  ],
+  "performance": {
+    "hardware": "Windows 10 Pro 10.0.19045",
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "driver": "32.0.15.7270",
+    "renderer": "WPF DrawingContext / CPU projection (source audit)",
+    "model_samples": null,
+    "viewport": null,
+    "cpu_usage": "NOT_MEASURED",
+    "gpu_usage": "NOT_MEASURED",
+    "vram_usage": "NOT_MEASURED",
+    "fps": "NOT_MEASURED",
+    "frame_time": "NOT_MEASURED",
+    "note": "OnRender CPU duration instrumentation is not presentation frame time/FPS."
+  },
+  "known_fit_gap": "ColorSpaceRendererState.Fit resets default camera; no model-bounds fit calculation. Not repaired without native validation."
+}

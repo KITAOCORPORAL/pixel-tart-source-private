@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-09-30T01:58:23.7565829Z",
+  "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+  "status": "BLOCKED",
+  "blocker": "Windows Computer Use capture fails: SetIsBorderRequired failed: 不支持此接口 (0x80004002); text-only observation works but native click fails: coordinate input geometry is unavailable.",
+  "baseline_approved": false,
+  "visual_approved": false,
+  "user_verified": false,
+  "cases": [
+    {
+      "sequence": 1,
+      "case": "First to last",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 2,
+      "case": "Last to first",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 3,
+      "case": "Middle forward",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 4,
+      "case": "Middle backward",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 5,
+      "case": "Two consecutive drags",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 6,
+      "case": "Drag then Undo",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 7,
+      "case": "Undo then Redo",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 8,
+      "case": "Boundary drop",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 9,
+      "case": "Invalid drop/cancel",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    },
+    {
+      "sequence": 10,
+      "case": "Escape during drag",
+      "status": "NOT_RUN",
+      "before": null,
+      "input": null,
+      "after": null,
+      "undo": null,
+      "redo": null
+    }
+  ],
+  "observer_smoke": {
+    "status": "PASS",
+    "claim": "Read-only observation only, NOT Native Drag",
+    "requests": 20,
+    "unique_nonces": 20,
+    "unique_pixel_hashes": 1,
+    "all_model_visual_render_ids_synchronized": true,
+    "has_error": false,
+    "start": "2026-09-30T09:56:42.1639781+08:00",
+    "end": "2026-09-30T09:56:43.49599+08:00"
+  },
+  "root_cause": {
+    "native_drag": "NOT PROVEN",
+    "observer_read_contention": "PROVEN AND FIXED",
+    "visual_order_evidence": "Previously Items enumeration; now screen-Y sorted realized containers"
+  }
+}

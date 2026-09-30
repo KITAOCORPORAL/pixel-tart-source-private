@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-09-30T01:58:23.7565829Z",
+  "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+  "status": "BLOCKED",
+  "blocker": "Windows Computer Use capture fails: SetIsBorderRequired failed: 不支持此接口 (0x80004002); text-only observation works but native click fails: coordinate input geometry is unavailable.",
+  "baseline_approved": false,
+  "visual_approved": false,
+  "user_verified": false,
+  "input_backend": "Computer Use Win32 native pointer; attempt rejected before injection",
+  "native_sample_count": 0,
+  "tests": [
+    {
+      "name": "Enable in Fit",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Click image",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Read sampling state",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Read coordinates",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Read RGB",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Zoom",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Pan",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Zoom+Pan mapping",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Boundary",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Outside image rejection",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Escape",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    },
+    {
+      "name": "Outside click never accepted",
+      "status": "NOT_RUN",
+      "input": null,
+      "sample": null
+    }
+  ],
+  "observer_support": "IsSampling, samples, input/screen/viewport/image coordinates, image rect, zoom/pan, valid flag, RGB, timestamp, sequence; not yet native-validated"
+}

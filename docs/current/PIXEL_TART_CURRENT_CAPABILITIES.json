@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-29T18:09:11.4462755+00:00",
-  "generated_from_head": "2db882dcc58ae54be4c18db42008dbd4e1891acb",
+  "generated_at": "2026-09-30T02:02:36.9077694+00:00",
+  "generated_from_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
   "branch": "integration/pixel-tart-developer-preview",
   "capabilities": [
     {
@@ -247,16 +247,19 @@
       "verification_status": "NOT_RUN",
       "evidence": [
         "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
-        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs"
+        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs"
       ],
       "required_tests": [
-        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs"
+        "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs"
       ],
       "acceptance_artifacts": [
         "docs/evidence/ui-guardian/3D_MODEL_CAPTURE_STATE_TRACE.md",
-        "docs/current/PIXEL_TART_CURRENT_STATE.md"
+        "docs/evidence/ui-guardian/3D_NATIVE_POINTER_ACCEPTANCE.md",
+        "docs/evidence/ui-guardian/FINAL_NATIVE_CLOSURE_REPORT.md"
       ],
-      "next_gate": "Native 3D pointer, extended capability and final visual review"
+      "next_gate": "Recover native capture/input; close model-bounds Fit and native pointer/resize gates; user visual review"
     },
     {
       "id": "GPUFullPixel",

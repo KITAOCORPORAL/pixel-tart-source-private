@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-09-30T01:58:23.7565829Z",
+  "updated_after_final_tests": "2026-09-30T10:01:08.0036023+08:00",
+  "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+  "status": "BLOCKED",
+  "blocker": "Windows Computer Use capture fails: SetIsBorderRequired failed: 不支持此接口 (0x80004002); text-only observation works but native click fails: coordinate input geometry is unavailable.",
+  "baseline_approved": false,
+  "visual_approved": false,
+  "user_verified": false,
+  "attempts": [
+    {
+      "operation": "sky.get_window_state screenshot+text",
+      "result": "FAIL",
+      "error": "SetIsBorderRequired failed: 不支持此接口 (0x80004002)"
+    },
+    {
+      "operation": "reselect unique production window; retry screenshot+text",
+      "result": "FAIL",
+      "error": "SetIsBorderRequired failed: 不支持此接口 (0x80004002)"
+    },
+    {
+      "operation": "sky.get_window_state text-only",
+      "result": "PASS",
+      "scope": "Accessibility observation only, not Native acceptance"
+    },
+    {
+      "operation": "sky.click observed 增加取样 element",
+      "result": "FAIL",
+      "error": "coordinate input geometry is unavailable",
+      "sample_attempts": 0
+    }
+  ],
+  "no_policy_or_system_changes": true,
+  "observer_before": {
+    "source_head": "d7ca23b36f72e8e6cc0d932ca4edb02e5dce2874",
+    "at": "2026-09-30T09:53:20.278+08:00",
+    "exception": "System.UnauthorizedAccessException: Access to the path is denied.",
+    "call": "System.IO.FileSystem.MoveFile -> ColorStudioAcceptanceFixture.StartNativeObserver DispatcherTimer",
+    "outcome": "Uncaught UI exception; bounded observation timed out. Historical run retained locally."
+  },
+  "observer_after": {
+    "status": "PASS",
+    "claim": "Read-only observation only, NOT Native Drag",
+    "requests": 20,
+    "unique_nonces": 20,
+    "unique_pixel_hashes": 1,
+    "all_model_visual_render_ids_synchronized": true,
+    "has_error": false,
+    "start": "2026-09-30T09:56:42.1639781+08:00",
+    "end": "2026-09-30T09:56:43.49599+08:00"
+  },
+  "production": {
+    "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+    "process_id": 28696,
+    "startup_ok": "2026-09-30T09:56:21.925+08:00",
+    "exe_sha256": "C2E8AA8B83C88A0DBDF6EE1D3CA1B8484AD2728888415D38FB4878137F78CA1D",
+    "dll_sha256": "D9EAAFB640CC20BD082CDC5BECB5AB71124713BEC058C3722D2CC693377BB5C4",
+    "runtime_relative": "artifacts/native-closure/committed-a28f4d3"
+  },
+  "regression": {
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0,
+    "duration_display": "2 s",
+    "trx_start": "2026-09-30T10:01:04.4304235+08:00",
+    "trx_finish": "2026-09-30T10:01:08.0036023+08:00",
+    "trx": "artifacts/native-closure/20260930T014410Z/tests/native-closure-final.trx",
+    "trx_sha256": "F9ADAE19A90555D052E3B12CF0E3EEC04E29D1492A3B145C0205737EB091D648",
+    "source": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+    "earlier_lock_fix_trx_sha256": "8309417A4B9F6D60CFFE1D30C8A92AA1486EFEB999C2C8B5E6DD1BE4CFF80C19",
+    "suites": {
+      "NativeClosureObservationTests": 4,
+      "CapabilityConsistencyTests": 1,
+      "UiGeometryGuardianTests": 10,
+      "ColorStudioSampleMappingTests": 6,
+      "ColorStudioZoomPanTests": 6,
+      "ColorStudioStateClosureTests": 26,
+      "ColorSpace3DViewportTests": 1,
+      "ReferenceWorkspaceWideRatioTests": 6
+    }
+  },
+  "build": {
+    "source_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+    "configuration": "Release x64",
+    "sdk": "10.0.302",
+    "warnings": 0,
+    "errors": 0,
+    "result": "PASS",
+    "duration_seconds": 12.97
+  }
+}
