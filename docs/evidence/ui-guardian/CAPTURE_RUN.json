@@ -1,7 +1,7 @@
 {
-  "ProductSourceSha": "dc43ebe5079c5e7dfa8b2a546ae3b822955c17f8",
-  "GuardianImplementationSha": "WORKTREE",
-  "EvidenceGeneratedAt": "2026-09-29T16:24:51.4932738+00:00",
+  "ProductSourceSha": "bb88db920422325f94d25ec433c00ed671c36a7c",
+  "GuardianImplementationSha": "bb88db920422325f94d25ec433c00ed671c36a7c",
+  "EvidenceGeneratedAt": "2026-09-30T15:36:34.4442281Z",
   "HardGateEnabled": true,
   "Total": 33,
   "Captured": 33,
@@ -11,5 +11,8 @@
   "ApprovedBaseline": false,
   "VisualApproved": false,
   "Status": "READY_FOR_USER_VISUAL_REVIEW",
-  "Renderer": "PARTIAL"
+  "Renderer": "PARTIAL",
+  "HomeRuntime": "PASS",
+  "HomeRuntimeScreenshotCount": 16,
+  "DpiSuite": "FAIL_74_PASS_16_FAIL_MISSING_RC12_EVIDENCE"
 }

@@ -1,22 +1,49 @@
 {
-  "productSourceSha": "dc43ebe5079c5e7dfa8b2a546ae3b822955c17f8",
-  "status": "READY_FOR_USER_UI_REVIEW",
+  "productSourceSha": "bb88db920422325f94d25ec433c00ed671c36a7c",
+  "guardianImplementationSha": "bb88db920422325f94d25ec433c00ed671c36a7c",
+  "evidenceGeneratedAt": "2026-09-30T15:36:34.4442281Z",
+  "status": "READY_FOR_USER_VISUAL_REVIEW",
   "staticXaml": "PASS",
   "runtimeGeometry": "CALIBRATED_HARD_GATE_PASS",
   "textClip": "MODELED",
   "overlap": "MODELED_WITH_PEER_POLICY",
   "hitTarget": "MODELED",
-  "workspaceRatio": "REVIEW_REQUIRED_PER_CAPTURE_AUDIT",
-  "brightness": "REVIEW_REQUIRED_PER_CAPTURE_AUDIT",
-  "contrast": "REVIEW_REQUIRED_PER_CAPTURE_AUDIT",
+  "workspaceRatio": "REVIEW_REQUIRED",
+  "brightness": "REVIEW_REQUIRED",
+  "contrast": "REVIEW_REQUIRED",
   "visualRegression": "BASELINE_MISSING",
   "baselineGuard": "PASS_GUARDED",
   "desktopAutomation": "NOT_RUN",
-  "findings": { "p0": [], "p1": ["hit target and workspace ratio remain review metrics"], "p2": ["contrast and luminance remain review metrics"], "falsePositivesRemoved": 1846, "realP0Remaining": 0 },
-  "screenshots": { "wholeAppContactSheet": "CAPTURED_CURRENT_STATE", "colorStudio3dContactSheet": "CAPTURED_CURRENT_STATE", "1180": "CAPTURED", "1600": "CAPTURED", "1920": "CAPTURED", "wholeAppCaptureRun": "EXECUTED" },
-  "capture": { "matrixTotal": 33, "captured": 33, "failed": 0, "notReachable": 0, "hardGateEnabled": true, "productSourceSha": "dc43ebe5079c5e7dfa8b2a546ae3b822955c17f8", "approvedBaseline": false, "visualApproved": false },
+  "findings": {
+    "p0": [],
+    "p1": [
+      "hit target and workspace ratio remain review metrics"
+    ],
+    "p2": [
+      "contrast and luminance remain review metrics"
+    ],
+    "falsePositivesRemoved": 1846,
+    "realP0Remaining": 0
+  },
+  "screenshots": {
+    "wholeAppContactSheet": "CAPTURED_CURRENT_STATE",
+    "colorStudio3dContactSheet": "CAPTURED_CURRENT_STATE",
+    "runtimeValidation": "16_PRODUCTION_SCREENSHOTS",
+    "wholeAppCaptureRun": "EXECUTED"
+  },
+  "capture": {
+    "matrixTotal": 33,
+    "captured": 33,
+    "failed": 0,
+    "notReachable": 0,
+    "hardGateEnabled": true,
+    "productSourceSha": "bb88db920422325f94d25ec433c00ed671c36a7c",
+    "approvedBaseline": false,
+    "visualApproved": false
+  },
   "renderer": "PARTIAL",
   "approvedBaseline": false,
-  "nativePointer": "NOT_RUN",
+  "visualApproved": false,
+  "nativePointer": "BLOCKED",
   "nextExactTask": "USER_VISUAL_REVIEW"
 }

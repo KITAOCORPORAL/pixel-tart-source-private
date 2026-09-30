@@ -3,14 +3,14 @@
     "Severity": "EXEMPT",
     "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
-    "Line": 766,
+    "Line": 771,
     "Source": "\u003CCanvas x:Name=\u0022AssetSelectionMarqueeLayer\u0022 Grid.Row=\u00222\u0022 Panel.ZIndex=\u00226\u0022"
   },
   {
     "Severity": "EXEMPT",
     "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
-    "Line": 768,
+    "Line": 773,
     "Source": "AutomationProperties.AutomationId=\u0022AssetSelectionMarqueeLayer\u0022\u003E"
   },
   {
@@ -24,63 +24,63 @@
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 27,
+    "Line": 39,
     "Source": "Foreground=\u0022#F2F6F7\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 51,
+    "Line": 63,
     "Source": "\u003CTextBlock Text=\u0022\u540D\u79F0\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 58,
+    "Line": 70,
     "Source": "\u003CTextBlock Text=\u0022\u8BF4\u660E\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 67,
+    "Line": 79,
     "Source": "\u003CTextBlock Text=\u0022\u6392\u5E8F\u0022 Foreground=\u0022#CBD5DA\u0022 VerticalAlignment=\u0022Center\u0022 Margin=\u00220,0,5,0\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 82,
+    "Line": 94,
     "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreservedScopeAndSearch}\u0022 Foreground=\u0022#ADB8C0\u0022"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 102,
+    "Line": 114,
     "Source": "\u003CTextBlock Text=\u0022\u5339\u914D\u7167\u7247\u0022 FontWeight=\u0022SemiBold\u0022 Foreground=\u0022#F2F6F7\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 108,
+    "Line": 120,
     "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreviewStatus}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,5,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 115,
+    "Line": 127,
     "Source": "\u003CTextBlock Text=\u0022{Binding DisplayName}\u0022 Foreground=\u0022#F2F6F7\u0022 TextTrimming=\u0022CharacterEllipsis\u0022"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 127,
+    "Line": 139,
     "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderValidationMessage}\u0022 Foreground=\u0022#FFCBC5\u0022 TextWrapping=\u0022Wrap\u0022"
   },
   {
