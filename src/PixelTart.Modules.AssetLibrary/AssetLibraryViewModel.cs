@@ -827,6 +827,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             RecordLoadState("repository-initialization-entered", attempt);
             await _repository.InitializeAsync(lifetimeToken);
             await _inspirationTray.InitializeAsync(lifetimeToken);
+            _ = RunDimensionBackfillAsync(lifetimeToken);
             if (_loadStateController is not null)
                 await CaptureRepositoryIdentityAndSchemaAsync(lifetimeToken);
             RecordLoadState("repository-initialized", attempt);
@@ -869,6 +870,23 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             if (gateEntered) _initializationGate.Release();
             RaiseWorkspaceCommandStates();
         }
+    }
+
+    private async Task RunDimensionBackfillAsync(CancellationToken token)
+    {
+        try
+        {
+            var result = await _repository.BackfillMissingDimensionsAsync(token);
+            if (result.Updated > 0)
+            {
+                Status = $"已回填素材尺寸 {result.Updated} 项";
+                if (IsReady) await RefreshAsync();
+            }
+            if (result.Failed > 0) Status = $"尺寸回填完成：成功 {result.Updated}，失败 {result.Failed}";
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested) { }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or Microsoft.Data.Sqlite.SqliteException)
+        { Status = $"尺寸回填失败：{exception.Message}"; }
     }
 
     private Task RetryLoadAsync() => IsReady ? RefreshAsync() : InitializeAsync();
