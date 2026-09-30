@@ -1,7 +1,7 @@
 # Pixel Tart current capability state
 
-Generated: 2026-09-30T02:02:36.9077694+00:00
-Generated from source HEAD: a28f4d39ab701c02dcaa4c7ce792b989a549bf3d
+Generated: 2026-09-30T02:48:45.9532271+00:00
+Generated from source HEAD: 68cf45bfc557d616682de01dc416c8a1efaf04a9
 Branch: integration/pixel-tart-developer-preview
 
 | Capability | Implementation | Verification | Evidence | Next gate |
@@ -21,7 +21,7 @@ Branch: integration/pixel-tart-developer-preview
 | CubeLutPreset | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Tethering/LutServices.cs<br>tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs | Product browser consolidation |
 | CaptureOnePreset | SPEC_ONLY | NOT_APPLICABLE | src/RAWSelectionAssistant.Core/Services/RawToJpeg/CaptureOnePresetImporter.cs | Legal fixture adapter verification |
 | 3DColorSpaceCore | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs<br>tests/RAWSelectionAssistant.Tests/ColorSpaceDataModelTests.cs | Windows renderer |
-| 3DColorSpaceRenderer | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs<br>tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs<br>tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs | Recover native capture/input; close model-bounds Fit and native pointer/resize gates; user visual review |
+| 3DColorSpaceRenderer | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs<br>tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs<br>tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs<br>src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceRendererContract.cs<br>tests/RAWSelectionAssistant.Tests/ColorSpaceBoundsFitTests.cs | Bounds-aware Fit automated PASS; native pointer/resize gates require permitted input/capture environment; user visual review |
 | GPUFullPixel | PARTIAL | NOT_RUN | src/PixelTart.MatchV4.Dx12/<br>docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md | Full product integration |
 | ICCRegistry | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs<br>docs/color-studio/ICC_PIPELINE_AUDIT.md | Validated conversion |
 | ICCConversion | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs | Pixel conversion validation |

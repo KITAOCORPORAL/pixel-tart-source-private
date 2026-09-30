@@ -1,0 +1,43 @@
+{
+  "generated_date": "2026-09-30",
+  "start_head": "59c8ef89f0266178c54b832159a2d47c952e8650",
+  "source_equivalent_head": "68cf45bfc557d616682de01dc416c8a1efaf04a9",
+  "build_from_head": "68cf45bfc557d616682de01dc416c8a1efaf04a9",
+  "initial_working_tree": "DIRTY_RELEVANT_WORK_PRESERVED",
+  "status": "ENVIRONMENT_POLICY_BLOCKED",
+  "native_input_executed": false,
+  "native_capture_executed": false,
+  "current_native_p0": null,
+  "current_native_p1": null,
+  "baseline_approved": false,
+  "visual_approved": false,
+  "user_verified": false,
+  "build": {
+    "configuration": "Release x64",
+    "sdk": "10.0.302",
+    "warnings": 0,
+    "errors": 0,
+    "elapsed_seconds": 7.90,
+    "log": "artifacts/native-harness-policy-20260930/release-build-committed.log"
+  },
+  "tests": [
+    { "scope": "Core ColorSpace relevant", "passed": 36, "failed": 0, "skipped": 0, "trx_envelope_seconds": 1.2145846, "path": "artifacts/native-harness-policy-20260930/core-fit.trx", "sha256": "AA439D247E0E86402149FD3984E764493D2280D9F37E56208B6DFCAB7683E74E" },
+    { "scope": "WPF relevant", "passed": 55, "failed": 0, "skipped": 0, "trx_envelope_seconds": 2.9856130, "path": "artifacts/native-harness-policy-20260930/wpf-final.trx", "sha256": "B96D305775C84E5A55E0978EB7877A836F9BFE0638C1E69C33187F6C21F636CC" },
+    { "scope": "Native harness PURE contracts only", "passed": 19, "failed": 0, "skipped": 0, "trx_envelope_seconds": 0.9907626, "path": "artifacts/native-harness-policy-20260930/harness-contracts.trx", "sha256": "9B112513BCDAF2AFC606EC6AC6437820531A23116D858814F907B3C40A83385B" }
+  ],
+  "capability_after_generation": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "path": "artifacts/native-harness-policy-20260930/capability-final.trx",
+    "sha256": "9F06856C295AE3F57CBAFE3F3E7CABE5B541EDC48B7720B4259A89F7F2BCD7E0"
+  },
+  "binary_root": "src/RAWSelectionAssistant/bin/x64/Release/net10.0-windows10.0.19041.0/win-x64",
+  "binary_sha256": {
+    "KitaoPhotoSelector.exe": "BB1162B354D7BDBB609042F38CA787879DBF79586F0A15957E50436ADEFC7BC5",
+    "KitaoPhotoSelector.dll": "89EBED2CE7A8F4C90FBDAC16BBB1AFFB3090C0C870E1E9CFAF8AC41B9E484918",
+    "RAWSelectionAssistant.Core.dll": "36631A5EFB34E0D82FB5E4193AC58AD1D5EAECAF9B49FCD3A38DFE31D3AFED93"
+  },
+  "native_gates": { "eyedropper": "NOT_RUN", "node_drag": "NOT_RUN", "whole_app": "NOT_RUN", "3d_pointer": "NOT_RUN" },
+  "performance": { "cpu_onrender_distribution": "NOT_MEASURED", "input_to_render": "NOT_MEASURED", "working_set": "NOT_MEASURED", "private_memory": "NOT_MEASURED", "gpu": "NOT_MEASURED", "vram": "NOT_MEASURED", "fps": "NOT_MEASURED" }
+}

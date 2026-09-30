@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T02:02:36.9077694+00:00",
-  "generated_from_head": "a28f4d39ab701c02dcaa4c7ce792b989a549bf3d",
+  "generated_at": "2026-09-30T02:48:45.9532271+00:00",
+  "generated_from_head": "68cf45bfc557d616682de01dc416c8a1efaf04a9",
   "branch": "integration/pixel-tart-developer-preview",
   "capabilities": [
     {
@@ -248,18 +248,23 @@
       "evidence": [
         "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
         "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs",
-        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs"
+        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceRendererContract.cs",
+        "tests/RAWSelectionAssistant.Tests/ColorSpaceBoundsFitTests.cs"
       ],
       "required_tests": [
         "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs",
-        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs"
+        "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs",
+        "tests/RAWSelectionAssistant.Tests/ColorSpaceBoundsFitTests.cs"
       ],
       "acceptance_artifacts": [
         "docs/evidence/ui-guardian/3D_MODEL_CAPTURE_STATE_TRACE.md",
         "docs/evidence/ui-guardian/3D_NATIVE_POINTER_ACCEPTANCE.md",
-        "docs/evidence/ui-guardian/FINAL_NATIVE_CLOSURE_REPORT.md"
+        "docs/evidence/ui-guardian/FINAL_NATIVE_CLOSURE_REPORT.md",
+        "docs/evidence/ui-guardian/BOUNDS_AWARE_3D_FIT_VALIDATION.md",
+        "docs/evidence/ui-guardian/NATIVE_HARNESS_CLOSURE_REPORT.md"
       ],
-      "next_gate": "Recover native capture/input; close model-bounds Fit and native pointer/resize gates; user visual review"
+      "next_gate": "Bounds-aware Fit automated PASS; native pointer/resize gates require permitted input/capture environment; user visual review"
     },
     {
       "id": "GPUFullPixel",
