@@ -19,6 +19,7 @@ public static class ColorStudioAcceptanceFixture
 {
     public const string Id = "color-studio-still-life-v1";
     public static bool Requested => Environment.GetCommandLineArgs().Contains("--acceptance-color-studio");
+    public static bool NativeObserverRequested => Requested && Environment.GetCommandLineArgs().Contains("--native-evidence-observer");
     public static void ValidateIsolation()
     {
         if (!Requested) return;
@@ -90,12 +91,22 @@ public static class ColorStudioAcceptanceFixture
             MainWindowHandle = new System.Windows.Interop.WindowInteropHelper(window).Handle.ToInt64()
         }, new JsonSerializerOptions { WriteIndented = true }));
         await File.WriteAllTextAsync(Path.Combine(folder, "ready.txt"), $"{Id}\n{Environment.ProcessId}\n{window.Width}x{window.Height}");
-        StartNativeObserver(window, editor, folder);
+        StartNativeObserver(window, main, editor, folder);
     }
     // Read-only, opt-in observer. Requests never invoke product commands or change the view.
-    private static void StartNativeObserver(Window window, TetherReferenceModeViewModel editor, string folder)
+    private static void StartNativeObserver(Window window, MainViewModel main, TetherReferenceModeViewModel editor, string folder)
     {
-        if (!Environment.GetCommandLineArgs().Contains("--native-evidence-observer")) return;
+        if (!NativeObserverRequested) return;
+        var events = new List<object>();
+        long sequence = 0;
+        System.ComponentModel.PropertyChangedEventHandler handler = (_, args) =>
+        {
+            if (args.PropertyName is not (nameof(editor.AdjustmentNodes) or nameof(editor.SelectedAdjustmentNode) or nameof(editor.IsSettled))) return;
+            events.Add(new { Sequence = ++sequence, Timestamp = DateTimeOffset.UtcNow, Property = args.PropertyName,
+                ModelIds = editor.AdjustmentNodes.Select(n => n.Id).ToArray(), SelectedId = editor.SelectedAdjustmentNode?.Id, editor.IsSettled });
+            if (events.Count > 256) events.RemoveAt(0);
+        };
+        editor.PropertyChanged += handler;
         var timer = new DispatcherTimer(DispatcherPriority.Background, window.Dispatcher) { Interval = TimeSpan.FromMilliseconds(50) };
         string? last = null;
         timer.Tick += (_, _) =>
@@ -107,15 +118,22 @@ public static class ColorStudioAcceptanceFixture
                 var nonce = File.ReadAllText(request).Trim();
                 if (!Guid.TryParse(nonce, out _) || nonce == last) return;
                 var view = FindNativeView(window);
-                if (view is null) return;
                 var response = JsonSerializer.Serialize(new
                 {
                     Nonce = nonce, Timestamp = DateTimeOffset.UtcNow, ProductSourceSha = StartupDiagnostics.ProductSourceSha,
+                    main.CurrentPage, main.IsSettingsModalOpen,
+                    Window = ReferenceColorWorkspaceView.NativeBounds(window),
                     Settled = editor.IsSettled, editor.HasError,
                     UiOrder = editor.AdjustmentNodes.Select(node => node.Name).ToArray(),
+                    ModelIds = editor.AdjustmentNodes.Select(node => node.Id).ToArray(),
+                    SelectedNode = editor.SelectedAdjustmentNode?.Id,
                     ProcessingOrder = editor.NativeRenderedOrder, PixelHash = HashImage(editor.MatchedImage),
+                    RenderedNodeIds = editor.NativeRenderedNodeIds,
+                    ModelRenderSynchronized = editor.IsSettled && !editor.HasError &&
+                        editor.AdjustmentNodes.Select(node => node.Id).SequenceEqual(editor.NativeRenderedNodeIds),
                     UndoCount = editor.NativeUndoCount, RedoCount = editor.NativeRedoCount,
-                    Drag = view.ReadNativeDragEvidence()
+                    Drag = view?.ReadNativeDragEvidence(), Viewport = view?.ReadNativeViewportEvidence(),
+                    Events = events.ToArray()
                 });
                 var path = Path.Combine(folder, "native-observe-response.json");
                 File.WriteAllText(path + ".tmp", response);
@@ -123,8 +141,15 @@ public static class ColorStudioAcceptanceFixture
                 last = nonce;
             }
             catch (IOException) { /* A concurrently written request is retried at the next tick. */ }
+            catch (InvalidOperationException error)
+            {
+                // A temporarily detached visual must fail observation, not crash production or be claimed ready.
+                var path = Path.Combine(folder, "native-observe-error.json");
+                try { File.WriteAllText(path, JsonSerializer.Serialize(new { Timestamp = DateTimeOffset.UtcNow, Error = error.Message })); }
+                catch (IOException) { }
+            }
         };
-        window.Closed += (_, _) => timer.Stop();
+        window.Closed += (_, _) => { timer.Stop(); editor.PropertyChanged -= handler; };
         timer.Start();
     }
     private static ReferenceColorWorkspaceView? FindNativeView(DependencyObject parent)

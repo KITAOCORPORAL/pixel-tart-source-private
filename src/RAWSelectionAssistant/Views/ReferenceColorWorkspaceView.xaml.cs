@@ -45,7 +45,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
         ThresholdDip = SystemParameters.MinimumVerticalDragDistance,
         Rows = AdjustmentNodeList.Items.Cast<ColorAdjustmentStackNode>().Select(node =>
         {
-            var row = (ListBoxItem)AdjustmentNodeList.ItemContainerGenerator.ContainerFromItem(node);
+            var row = AdjustmentNodeList.ItemContainerGenerator.ContainerFromItem(node) as ListBoxItem;
+            if (row is null || !row.IsVisible) return null;
             var screen = row.PointToScreen(new Point());
             var dpi = VisualTreeHelper.GetDpi(row);
             return new { node.Id, node.Name, X = screen.X, Y = screen.Y,
@@ -53,7 +54,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
                 Insertion = ReferenceEquals(row, _dropIndicator),
                 Top = row.BorderThickness.Top, Bottom = row.BorderThickness.Bottom,
                 Brush = row.BorderBrush?.ToString() };
-        }).ToArray()
+        }).Where(row => row is not null).OrderBy(row => row!.Y).ToArray()
     };
 
     public ReferenceColorWorkspaceView()
@@ -222,14 +223,16 @@ public partial class ReferenceColorWorkspaceView : UserControl
         }
         var mapped = ColorStudioSampleMapping.Map(e.GetPosition(PreviewCanvas), new Size(PreviewCanvas.ActualWidth, PreviewCanvas.ActualHeight),
             _editor.EffectiveViewMode, _editor.SplitPosition, _editor.SourceImage, _editor.MatchedImage, _zoomPan);
-        if (mapped is not { } sample) return;
+        if (mapped is not { } sample) { RecordNativeSample(e, null, null); return; }
         var (image, x, y) = sample;
         var pixels = new byte[image.PixelWidth * image.PixelHeight * 4];
         var bgra = HistogramService.EnsureBgra32(image); bgra.CopyPixels(pixels, image.PixelWidth * 4, 0);
         var index = (y * image.PixelWidth + x) * 4;
         var mode = Keyboard.Modifiers.HasFlag(ModifierKeys.Alt) ? "减少取样" : Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) ? "增加取样" : _editor.SampleMode;
         _editor.SampleMode = mode;
-        _editor.CompleteDisplayedSample(new VisualRgb24(pixels[index + 2], pixels[index + 1], pixels[index]));
+        var value = new VisualRgb24(pixels[index + 2], pixels[index + 1], pixels[index]);
+        RecordNativeSample(e, new Point(x, y), value);
+        _editor.CompleteDisplayedSample(value);
         e.Handled = true;
     }
 

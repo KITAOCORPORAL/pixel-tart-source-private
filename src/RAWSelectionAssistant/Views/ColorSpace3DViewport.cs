@@ -10,6 +10,21 @@ public sealed class ColorSpace3DViewport : FrameworkElement
 {
     private Point? _pointer;
     private ColorSpaceRendererState? _state;
+    private long _renderCount;
+    private double _lastRenderMilliseconds;
+    internal object ReadNativeEvidence() => new
+    {
+        Bounds = ReferenceColorWorkspaceView.NativeBounds(this), State?.Camera, State?.IsFit,
+        ModelLoaded = State is not null, SampleCount = State?.Model.VisibleClouds.Sum(c => c.Points.Count) ?? 0,
+        RenderCount = _renderCount, LastRenderMilliseconds = _lastRenderMilliseconds,
+        Backend = "WPF DrawingContext / CPU point projection", IsMouseCaptured,
+        ProjectedBounds = State is null ? null : ProjectedModelBounds()
+    };
+    private object? ProjectedModelBounds()
+    {
+        var points = State!.Model.VisibleClouds.SelectMany(c => ColorSpaceProjection.Project(c, State.Camera, ActualWidth, ActualHeight)).ToArray();
+        return points.Length == 0 ? null : new { MinX = points.Min(p => p.X), MaxX = points.Max(p => p.X), MinY = points.Min(p => p.Y), MaxY = points.Max(p => p.Y) };
+    }
     public ColorSpaceRendererState? State { get => _state; set { _state = value; InvalidateVisual(); } }
     public ColorCloudMode Mode => State?.Mode ?? ColorCloudMode.Overlay;
     public bool IsAvailable => State is not null;
@@ -19,6 +34,8 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     public void FitCamera() { if (State is not null) State = State.Fit(); }
     protected override void OnRender(DrawingContext drawing)
     {
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        _renderCount++;
         base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
         if (State is null) { DrawLabel(drawing, "3D 色彩空间 · 等待真实 ColorSpaceVisualizationModel", new Point(18, 18)); return; }
@@ -29,6 +46,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         if (State.ShowMigrationVectors && State.Mode is ColorCloudMode.Migration or ColorCloudMode.Overlay)
             foreach (var vector in State.Model.MigrationVectors.Take(512)) DrawVector(drawing, vector);
         DrawLabel(drawing, $"L*  a*  b*   {State.Mode}   ·   左键旋转 / Shift+左键平移 / 滚轮缩放", new Point(12, Math.Max(12, ActualHeight - 28)));
+        _lastRenderMilliseconds = clock.Elapsed.TotalMilliseconds;
     }
     private void DrawAxes(DrawingContext drawing) { var center = new Point(ActualWidth / 2, ActualHeight / 2); var pen = new Pen(TryFindResource("DividerBrush") as Brush ?? Brushes.Gray, 1); drawing.DrawLine(pen, new Point(12, center.Y), new Point(Math.Max(12, ActualWidth - 12), center.Y)); drawing.DrawLine(pen, new Point(center.X, 12), new Point(center.X, Math.Max(12, ActualHeight - 12))); DrawLabel(drawing, "a*", new Point(Math.Max(12, ActualWidth - 32), center.Y + 4)); DrawLabel(drawing, "L*", new Point(center.X + 6, 12)); DrawLabel(drawing, "b*", new Point(center.X + 6, Math.Max(12, ActualHeight - 24))); }
     private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }

@@ -89,6 +89,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool IsMatchV4Beta => MatchEngine == ColorStudioMatchEngine.MatchV4Beta;
     public string MatchV4Status => !IsMatchV4Beta ? "稳定引擎 · Match v3" : MatchV4ExecutionMode == MatchV4ExecutionMode.Cpu ? "CPU · V4 Beta" : _matchV4Executor?.Capability.BackendAvailable == true ? $"GPU 可用 · {_matchV4Executor.Capability.AdapterName}" : "GPU 不可用 · 自动使用 CPU";
     internal string[] NativeRenderedOrder { get; private set; } = [];
+    internal Guid[] NativeRenderedNodeIds { get; private set; } = [];
     internal int NativeUndoCount => _undoStacks.Count;
     internal int NativeRedoCount => _redoStacks.Count;
     private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; OnPropertyChanged(nameof(IsSettled)); }
@@ -858,7 +859,11 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             }
             if (PostProcessor is not null) image = await PostProcessor(image, renderToken);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
-            if (ColorStudioAcceptanceFixture.Requested) NativeRenderedOrder = stack.Nodes.Select(node => node.Name).ToArray();
+            if (ColorStudioAcceptanceFixture.NativeObserverRequested)
+            {
+                NativeRenderedOrder = stack.Nodes.Select(node => node.Name).ToArray();
+                NativeRenderedNodeIds = stack.Nodes.Select(node => node.Id).ToArray();
+            }
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
