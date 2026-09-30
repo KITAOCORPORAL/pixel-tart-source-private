@@ -108,10 +108,12 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 page.InitializeForSessionAsync().CompleteOnDispatcher();
                 page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
                 using var source = AttachToPresentationSource(page, 2400, 1350);
-                page.Measure(new Size(1600, 900));
-                page.Arrange(new Rect(0, 0, 1600, 900));
-                page.UpdateLayout();
-                page.OpenQuickLoupeForProductHarnessAsync().CompleteOnDispatcher();
+                ArrangePage(page, 1600, 900);
+                Assert.IsTrue(PumpDispatcherUntil(
+                    () => page.ViewModel.IsReady && page.ViewModel.HasAssetCards,
+                    TimeSpan.FromSeconds(5)),
+                    "The real Asset Library query did not publish an item before Quick Preview opened.");
+                Assert.IsTrue(page.OpenQuickLoupeForProductHarnessAsync().CompleteOnDispatcher());
                 var popup = page.GetQuickLoupeContentForProductHarness();
                 Assert.IsNotNull(popup);
                 var preview = FindVisualByAutomationId<Image>(popup, "AssetQuickLoupeImage");

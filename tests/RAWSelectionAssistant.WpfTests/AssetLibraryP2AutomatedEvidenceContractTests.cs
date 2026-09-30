@@ -265,6 +265,11 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
             RedirectStandardOutput = true,
             RedirectStandardError = true
         };
+        // The repository contract invokes generated validation scripts. Make the
+        // test independent of a machine-wide execution-policy default while
+        // keeping the script and its arguments under test unchanged.
+        start.ArgumentList.Add("-ExecutionPolicy");
+        start.ArgumentList.Add("Bypass");
         foreach (var argument in arguments) start.ArgumentList.Add(argument);
         if (environment is not null)
             foreach (var pair in environment) start.Environment[pair.Key] = pair.Value;

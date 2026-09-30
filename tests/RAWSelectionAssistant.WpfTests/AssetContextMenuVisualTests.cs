@@ -41,8 +41,8 @@ public sealed class AssetContextMenuVisualTests
 
         var theme = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Theme.Dark.xaml"));
         StringAssert.Contains(theme, "MenuItemHoverBrush\" Color=\"#303633");
-        StringAssert.Contains(theme, "MenuItemOpenedBrush\" Color=\"#3A3444");
-        StringAssert.Contains(theme, "MenuShortcutBrush\" Color=\"#77727E");
+        StringAssert.Contains(theme, "MenuItemOpenedBrush\" Color=\"#363E39");
+        StringAssert.Contains(theme, "MenuShortcutBrush\" Color=\"#77736F");
 
         var template = File.ReadAllText(Path.Combine(root, "src", "RAWSelectionAssistant", "Resources", "DesignSystem", "Components.Foundation.xaml"));
         StringAssert.Contains(template, "ContentSource=\"Icon\"");

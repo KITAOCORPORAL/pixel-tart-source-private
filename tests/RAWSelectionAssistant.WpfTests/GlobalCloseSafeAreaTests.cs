@@ -24,7 +24,7 @@ public sealed class GlobalCloseSafeAreaTests
         {
             try
             {
-                var app = new App(); app.InitializeComponent();
+                if (Application.Current is null) { var app = new App(); app.InitializeComponent(); }
                 foreach (var width in new[] { 1180d, 1366d, 1600d, 1920d, 2560d }) foreach (var scale in new[] { 1d, 1.25, 1.5, 2d })
                 {
                     var host = new Grid { Width = width / scale, Height = 720 / scale };

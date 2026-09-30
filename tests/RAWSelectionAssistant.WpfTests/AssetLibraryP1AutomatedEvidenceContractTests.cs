@@ -1046,7 +1046,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             var systemWindowHex = $"#{systemWindow.R:X2}{systemWindow.G:X2}{systemWindow.B:X2}";
             var surfaces = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal)
             {
-                ["dark"] = new(StringComparer.Ordinal) { ["ContentBackgroundBrush"] = "#0E0D12", ["WorkbenchCardBrush"] = "#141318" },
+                ["dark"] = new(StringComparer.Ordinal) { ["ContentBackgroundBrush"] = "#101211", ["WorkbenchCardBrush"] = "#191B19" },
                 ["light"] = new(StringComparer.Ordinal) { ["ContentBackgroundBrush"] = "#F4F6F8", ["WorkbenchCardBrush"] = "#FFFFFF" },
                 ["high-contrast"] = new(StringComparer.Ordinal) { ["ContentBackgroundBrush"] = systemWindowHex, ["WorkbenchCardBrush"] = systemWindowHex },
             };
