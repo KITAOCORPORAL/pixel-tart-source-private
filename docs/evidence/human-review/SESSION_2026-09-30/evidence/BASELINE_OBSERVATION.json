@@ -1,0 +1,171 @@
+{
+  "Classification": "AUTOMATED_FIXTURE_SETUP_NOT_HUMAN_INPUT",
+  "State": {
+    "Nonce": "1ca2bd33-39c5-4085-8e8e-8085a51a862f",
+    "Timestamp": "2026-09-30T10:56:34.5725852+08:00",
+    "ProductSourceSha": "1a5bf7d9b8f0d92aae8df8d87a4aed4953811a63",
+    "CurrentPage": "ReferenceColor",
+    "IsSettingsModalOpen": false,
+    "Window": {
+      "X": 720,
+      "Y": 360,
+      "Width": 2400,
+      "Height": 1500,
+      "IsVisible": true,
+      "DipWidth": 1600,
+      "DipHeight": 1000,
+      "DpiScaleX": 1.5,
+      "DpiScaleY": 1.5
+    },
+    "Settled": true,
+    "HasError": false,
+    "UiOrder": [
+      "参考仿色",
+      "暖橙",
+      "色彩过渡",
+      "胶片"
+    ],
+    "ModelIds": [
+      "72e0e376-022e-468e-9569-934f06368a49",
+      "2023a0c3-bce0-4995-868c-388a939e268a",
+      "c1475ca3-1bfd-4dff-be42-9e30cf0e23a7",
+      "510fee7f-57a5-45e7-a89c-635713d077e1"
+    ],
+    "SelectedNode": "2023a0c3-bce0-4995-868c-388a939e268a",
+    "ProcessingOrder": [
+      "参考仿色",
+      "暖橙",
+      "色彩过渡",
+      "胶片"
+    ],
+    "PixelHash": "1D5D709500099B6EDFF5852B8272DD609F4C68722A27DB403D75801DA683D25C",
+    "RenderedNodeIds": [
+      "72e0e376-022e-468e-9569-934f06368a49",
+      "2023a0c3-bce0-4995-868c-388a939e268a",
+      "c1475ca3-1bfd-4dff-be42-9e30cf0e23a7",
+      "510fee7f-57a5-45e7-a89c-635713d077e1"
+    ],
+    "ModelRenderSynchronized": true,
+    "UndoCount": 7,
+    "RedoCount": 0,
+    "Drag": {
+      "Active": false,
+      "Pending": false,
+      "Destination": null,
+      "After": false,
+      "ThresholdDip": 2.6666666666666665,
+      "Rows": [
+        {
+          "Id": "72e0e376-022e-468e-9569-934f06368a49",
+          "Name": "参考仿色",
+          "X": 1031,
+          "Y": 765,
+          "Width": 402,
+          "Height": 64,
+          "Insertion": false,
+          "Top": 1,
+          "Bottom": 1,
+          "Brush": "#00FFFFFF"
+        },
+        {
+          "Id": "2023a0c3-bce0-4995-868c-388a939e268a",
+          "Name": "暖橙",
+          "X": 1031,
+          "Y": 829,
+          "Width": 402,
+          "Height": 64,
+          "Insertion": false,
+          "Top": 1,
+          "Bottom": 1,
+          "Brush": "#00FFFFFF"
+        },
+        {
+          "Id": "c1475ca3-1bfd-4dff-be42-9e30cf0e23a7",
+          "Name": "色彩过渡",
+          "X": 1031,
+          "Y": 893,
+          "Width": 402,
+          "Height": 64,
+          "Insertion": false,
+          "Top": 1,
+          "Bottom": 1,
+          "Brush": "#00FFFFFF"
+        },
+        {
+          "Id": "510fee7f-57a5-45e7-a89c-635713d077e1",
+          "Name": "胶片",
+          "X": 1031,
+          "Y": 957,
+          "Width": 402,
+          "Height": 64,
+          "Insertion": false,
+          "Top": 1,
+          "Bottom": 1,
+          "Brush": "#00FFFFFF"
+        }
+      ]
+    },
+    "Viewport": {
+      "IsSampling": false,
+      "Mode": "增加取样",
+      "PositiveSamples": [
+        {
+          "R": 191,
+          "G": 103,
+          "B": 56
+        }
+      ],
+      "NegativeSamples": [
+        {
+          "R": 65,
+          "G": 105,
+          "B": 113
+        }
+      ],
+      "Canvas": {
+        "X": 1488,
+        "Y": 682,
+        "Width": 1518,
+        "Height": 803,
+        "IsVisible": true,
+        "DipWidth": 1012,
+        "DipHeight": 535.3333333333334,
+        "DpiScaleX": 1.5,
+        "DpiScaleY": 1.5
+      },
+      "Zoom": 0.6691666666666667,
+      "PanX": 0,
+      "PanY": 0,
+      "IsFit": true,
+      "ImageSize": {
+        "Width": 1200,
+        "Height": 800
+      },
+      "Samples": [],
+      "ColorSpace": {
+        "Bounds": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0,
+          "IsVisible": false,
+          "DipWidth": 0,
+          "DipHeight": 0,
+          "DpiScaleX": 1.5,
+          "DpiScaleY": 1.5
+        },
+        "Camera": null,
+        "IsFit": null,
+        "ModelLoaded": false,
+        "SampleCount": 0,
+        "RenderCount": 0,
+        "LastRenderMilliseconds": 0,
+        "Backend": "WPF DrawingContext / CPU point projection",
+        "IsMouseCaptured": false,
+        "ProjectedBounds": null
+      }
+    },
+    "Events": [],
+    "VisualModelSynchronized": true
+  }
+}

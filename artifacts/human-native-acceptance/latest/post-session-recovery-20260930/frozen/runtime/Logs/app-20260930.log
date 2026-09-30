@@ -1,0 +1,34 @@
+2026-09-30 10:56:25.153 [INFO] STARTUP_STAGE=02 Logging
+2026-09-30 10:56:25.168 [INFO] STARTUP_STAGE=04 Database and composition
+2026-09-30 10:56:25.305 [INFO] STARTUP_STAGE=05 Services and modules
+2026-09-30 10:56:25.325 [INFO] STARTUP_STAGE=03 Settings
+2026-09-30 10:56:25.439 [INFO] STARTUP_STAGE=06 Theme
+2026-09-30 10:56:25.734 [INFO] STARTUP_STAGE=08 Workspace
+2026-09-30 10:56:25.823 [INFO] STARTUP_STAGE=09 Restore Session
+2026-09-30 10:56:25.826 [INFO] STARTUP_STAGE=07 MainWindow
+2026-09-30 10:56:28.023 [INFO] 导航请求[3e671221bde54d2ea185dded02bf0698]：Workbench -> ReferenceColor
+2026-09-30 10:56:34.460 [INFO] 像素蛋挞已启动。
+2026-09-30 10:56:34.460 [INFO] STARTUP_OK BuildId=2.3.0-dev.1a5bf7d ProductSourceSha=1a5bf7d9b8f0d92aae8df8d87a4aed4953811a63 Windows=Microsoft Windows NT 10.0.19045.0 DataRoot=AppData-or-explicit-override LibraryRoot=user-managed LastWorkspace=Workbench
+2026-09-30 11:02:27.218 [INFO] 导航请求[38298e3d4b9643c49b9c51228eb13c6d]：ReferenceColor -> Workflow
+2026-09-30 11:02:34.857 [INFO] 导航请求[d469b0863187414b8fd2f08e8fcd9034]：Workflow -> Tether
+2026-09-30 11:02:39.081 [INFO] 导航请求[504ff176c37a40c5b2edeeb32fa12ae6]：Tether -> OnlineSelection
+2026-09-30 11:02:40.376 [INFO] 导航请求[8d6e6ee79b724500924568252fbf37a2]：OnlineSelection -> History
+2026-09-30 11:02:41.168 [INFO] 导航请求[be7172bacc234ec19b03cf370b13c638]：History -> Finance
+2026-09-30 11:02:41.984 [INFO] 导航请求[c665bcb97e3046c3862abe8b0960cbbe]：Finance -> Workbench
+2026-09-30 11:02:47.666 [INFO] 导航请求[ff9e5f1a254a41efaf28a9d4fc3fb646]：Workbench -> ReferenceColor
+2026-09-30 11:04:14.280 [INFO] 导航请求[3dd75ffa488c4954b5eaad932b73d878]：ReferenceColor -> Tether
+2026-09-30 11:04:16.016 [INFO] 导航请求[cc01f3cfa1214c1da9d1e40d5e2f1d65]：Tether -> OnlineSelection
+2026-09-30 11:04:17.416 [INFO] 导航请求[1d3f82a3459f4aeb89709991d24b18ee]：OnlineSelection -> Finance
+2026-09-30 11:04:19.304 [INFO] 导航请求[afa0d16f45344361a1a4b972abccc85e]：Finance -> History
+2026-09-30 11:04:20.488 [INFO] 导航请求[9ed55841ded64d2a8f6663aa3203713f]：History -> Workbench
+2026-09-30 11:04:26.737 [INFO] 导航请求[fa907c84e4c142c8bd63cd7930bb8642]：Workbench -> AssetLibrary
+2026-09-30 11:04:30.344 [INFO] 导航请求[d4b8d379852d49e08e30d1c6d44f2c48]：AssetLibrary -> WorkCalendar
+2026-09-30 11:04:33.184 [INFO] 导航请求[349a6e33f68942dbbc4306bc5667ea66]：WorkCalendar -> Planning
+2026-09-30 11:04:39.865 [INFO] 导航请求[6c3428d12f7c454d85c2f9ebf5a0bfe7]：Planning -> Workbench
+2026-09-30 11:04:44.816 [INFO] 导航请求[d126bcd64a3d4df6bf3d493b4d2154dd]：Workbench -> Toolbox
+2026-09-30 11:04:52.097 [INFO] 导航请求[8f2728665ef44a699d2d15a8444b528a]：Toolbox -> ReferenceColor
+2026-09-30 11:05:35.793 [INFO] 导航请求[2564a67ef037444992fbf47c7c8b7117]：Toolbox -> Publishing
+2026-09-30 11:06:00.569 [INFO] 导航请求[284de0c29a3545cdb0825224b2f9feab]：Publishing -> Toolbox
+2026-09-30 11:06:08.384 [INFO] 导航请求[ddde259d57c6456e9f8b2ba60bfa3835]：Toolbox -> ReferenceColor
+2026-09-30 11:06:12.960 [INFO] 导航请求[520484054b684a2d8db0a412b3d80e78]：Toolbox -> ReferenceColor
+2026-09-30 11:06:16.289 [INFO] 导航请求[9dc140d907a943e5a1e57c4a35d0e4cf]：Toolbox -> ReferenceColor

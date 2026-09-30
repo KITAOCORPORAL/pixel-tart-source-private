@@ -1,0 +1,135 @@
+{
+  "Appearance": {
+    "Theme": 2,
+    "Accent": 1,
+    "CustomAccentColor": "#18A88C",
+    "Density": 0,
+    "Sidebar": 2,
+    "SidebarCollapsed": false,
+    "Motion": 0,
+    "FontScale": 0
+  },
+  "Weather": {
+    "Enabled": true,
+    "AutoRefreshEnabled": true,
+    "Provider": "OpenMeteo",
+    "WeatherApiBaseUrl": "https://api.open-meteo.com/v1/forecast",
+    "GeocodingApiBaseUrl": "https://geocoding-api.open-meteo.com/v1/search",
+    "ApiKey": "",
+    "BookingLocations": {},
+    "BookingLocationModes": {}
+  },
+  "reportSettings": {
+    "defaultExportEnabled": false,
+    "defaultExportCsv": true,
+    "defaultExportJson": false,
+    "defaultExportLog": false
+  },
+  "PinnedQuickTools": [
+    "Workflow",
+    "PhotoOrganize",
+    "BatchCompress"
+  ],
+  "QuickToolLayout": {
+    "SchemaVersion": "1.0",
+    "OrderedToolIds": [
+      "Workflow",
+      "PhotoOrganize",
+      "BatchCompress"
+    ]
+  },
+  "ProductQuickToolLayout": {
+    "SchemaVersion": "1.0",
+    "OrderedToolIds": [
+      "PhotoOrganize",
+      "RawToJpeg",
+      "BatchCompress",
+      "Collage"
+    ]
+  },
+  "LastPrimaryPage": "Workbench",
+  "LastPlanningProjectId": null,
+  "LastPlanningShotId": null,
+  "AssetLibraryWorkspace": {
+    "OrganizationPaneWidth": 220,
+    "InspectorPaneWidth": 320,
+    "OrganizationPaneCollapsed": false,
+    "InspectorPaneCollapsed": false,
+    "InspectorPinned": false,
+    "ThumbnailWidth": 180,
+    "SearchText": "",
+    "SelectedFolderId": null,
+    "SelectedTagId": null,
+    "SelectedSmartFolderId": null,
+    "SelectedAssetId": null,
+    "ViewMode": 1,
+    "SortField": 0,
+    "SortDirection": 1,
+    "ActiveCollection": 0,
+    "ExpandedFolderIds": [],
+    "ExpandedTagGroupIds": [],
+    "SelectedAssetIds": [],
+    "ScrollAnchors": {},
+    "QueryScope": 0,
+    "QueryDocumentJson": null,
+    "QueryHistory": []
+  },
+  "AssetLibraryPortable": {
+    "Version": 1,
+    "CurrentContainerPath": "",
+    "RecentLibraries": [],
+    "AutoFocusWorkspace": true,
+    "FocusRestorePending": false,
+    "FocusPreviousWindowState": 2,
+    "FocusPreviousLeft": 602,
+    "FocusPreviousTop": 159.33333333333331,
+    "FocusPreviousWidth": 1600,
+    "FocusPreviousHeight": 1000,
+    "FocusPreviousSidebarCollapsed": false
+  },
+  "RecentRawDirectories": [],
+  "RecentOutputDirectory": "",
+  "OutputMode": 2,
+  "CustomRawExtensions": [],
+  "DefaultCollectionCategory": 2,
+  "EnabledJpegExtensions": [
+    ".JPG",
+    ".JPEG"
+  ],
+  "EnabledRawExtensions": [
+    ".ARW",
+    ".CR2",
+    ".CR3",
+    ".NEF",
+    ".NRW",
+    ".RAF",
+    ".DNG",
+    ".RW2",
+    ".ORF",
+    ".ORI",
+    ".PEF",
+    ".3FR",
+    ".FFF",
+    ".IIQ",
+    ".SRW",
+    ".RWL"
+  ],
+  "CustomExtensions": [],
+  "AllowCustomerJpegFallback": false,
+  "CustomerJpegMode": 0,
+  "SourceDirectories": [],
+  "WindowWidth": 2573.3333333333335,
+  "WindowHeight": 1453.3333333333333,
+  "WindowLeft": 602,
+  "WindowTop": 159.33333333333331,
+  "AutoOpenOutputDirectory": false,
+  "RecentProjectName": "",
+  "onboardingCompleted": false,
+  "onboardingVersion": "2.3.0",
+  "onboardingCompletedAt": null,
+  "onboardingCurrentStep": 1,
+  "onboardingLegacyUser": true,
+  "onboardingUpgradeOfferShown": true,
+  "onboardingCompletionProof": "",
+  "onboardingTutorialOutputDirectory": ""
+}

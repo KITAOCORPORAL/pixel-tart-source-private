@@ -1,0 +1,57 @@
+{
+  "FixtureId": "color-studio-still-life-v1",
+  "Scenario": "01",
+  "ProductSourceSha": "1a5bf7d9b8f0d92aae8df8d87a4aed4953811a63",
+  "CaptureState": "SETTLED",
+  "NativePointerEvidence": "NOT_REQUIRED",
+  "Settled": true,
+  "HasError": false,
+  "FailedTarget": null,
+  "RetryCommandExecuted": false,
+  "ExportCompleted": 0,
+  "ExportTotal": 0,
+  "ExportFailureSummary": "",
+  "AppVersion": "2.3.0.0",
+  "ProcessId": 20052,
+  "WindowSize": [
+    1600,
+    1000
+  ],
+  "LogicalDpi": 144,
+  "PhysicalDpi": 144,
+  "LogicalDpiSimulation": false,
+  "WorkspaceMode": "\u4E13\u4E1A",
+  "SelectedNodeType": "ColorRange",
+  "ViewMode": "\u4EFF\u8272\u7ED3\u679C",
+  "Target": "\u9759\u7269-1.png",
+  "HasTarget": true,
+  "Stack": [
+    {
+      "Name": "\u53C2\u8003\u4EFF\u8272",
+      "Type": "ReferenceMatch",
+      "Enabled": true
+    },
+    {
+      "Name": "\u6696\u6A59",
+      "Type": "ColorRange",
+      "Enabled": true
+    },
+    {
+      "Name": "\u8272\u5F69\u8FC7\u6E21",
+      "Type": "TransitionBlend",
+      "Enabled": true
+    },
+    {
+      "Name": "\u80F6\u7247",
+      "Type": "Film",
+      "Enabled": true
+    }
+  ],
+  "MatchedImageSha256": "1D5D709500099B6EDFF5852B8272DD609F4C68722A27DB403D75801DA683D25C",
+  "SourcePixelSize": [
+    1200,
+    800
+  ],
+  "ProcessingStatus": "\u73B0\u573A\u76D1\u770B\u4EFF\u8272\u5DF2\u66F4\u65B0\uFF1BRAW/JPEG \u6E90\u6587\u4EF6\u672A\u4FEE\u6539\u3002",
+  "MainWindowHandle": 6950308
+}

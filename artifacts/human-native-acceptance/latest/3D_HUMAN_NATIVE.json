@@ -1,0 +1,41 @@
+{
+  "Transitions": [
+    {
+      "FitPaddingPredicate": null,
+      "Observation": 1,
+      "GateStatus": "UNASSESSED",
+      "Timestamp": "2026-09-30T10:56:34.713554+08:00",
+      "After": {
+        "Bounds": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0,
+          "IsVisible": false,
+          "DipWidth": 0,
+          "DipHeight": 0,
+          "DpiScaleX": 1.5,
+          "DpiScaleY": 1.5
+        },
+        "Camera": null,
+        "IsFit": null,
+        "ModelLoaded": false,
+        "SampleCount": 0,
+        "RenderCount": 0,
+        "LastRenderMilliseconds": 0,
+        "Backend": "WPF DrawingContext / CPU point projection",
+        "IsMouseCaptured": false,
+        "ProjectedBounds": null
+      },
+      "BeforeCamera": null,
+      "WorkingSet": 954974208,
+      "PrivateMemory": 966852608
+    }
+  ],
+  "SessionId": "3005e060-fd05-454a-a973-d32af16d62e3",
+  "SourceHead": "1a5bf7d9b8f0d92aae8df8d87a4aed4953811a63",
+  "InputSource": "HUMAN",
+  "ObservationOnly": true,
+  "OnRenderIsNotPresentationFrameTime": true,
+  "GateStatus": "PENDING_HUMAN_ACTION_AND_REVIEW"
+}
