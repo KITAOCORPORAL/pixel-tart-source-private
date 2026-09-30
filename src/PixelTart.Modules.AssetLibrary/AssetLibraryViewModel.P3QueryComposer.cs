@@ -171,6 +171,19 @@ public sealed partial class AssetLibraryViewModel
         ClosePrimaryAuxiliarySurfacesExceptQuery();
     }
 
+    public async Task SetQuickFilterAsync(AssetQueryField field, AssetQueryOperator op, params string[] values)
+    {
+        if (P3ShutdownStarted) return;
+        var root = P3QueryRoot.ToModel();
+        // Quick controls edit the same canonical query used by the advanced editor.
+        var children = root.Children.Where(node => node.Field != field || node.Locked).ToList();
+        if (values.Length > 0) children.Add(AssetQueryNode.Rule(field, op, values));
+        P3QueryRoot = P3QueryNodeView.FromModel(root with { Children = children }, OnP3QueryTreeChanged);
+        StopSearchDebounce();
+        CommitP3QueryDocument(scheduleRefresh: false);
+        if (P3QueryIsValid && IsReady) await RefreshAsync();
+    }
+
     private void InitializeP3QueryComposer()
     {
         _p3QueryScope = Enum.IsDefined(_workspaceSettings.QueryScope) ? _workspaceSettings.QueryScope : AssetQueryScope.Current;

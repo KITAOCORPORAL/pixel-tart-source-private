@@ -537,7 +537,7 @@ public sealed class P3QueryNodeView : ObservableObject
     public static string FieldLabel(AssetQueryField value) => value switch
     {
         AssetQueryField.FileName => "文件名", AssetQueryField.Extension => "扩展名", AssetQueryField.MediaType => "媒体类型",
-        AssetQueryField.Folder => "文件夹", AssetQueryField.Tag => "标签", AssetQueryField.Rating => "评分",
+        AssetQueryField.Folder => "文件夹", AssetQueryField.Tag => "标签", AssetQueryField.Rating => "评分", AssetQueryField.ColorLabel => "颜色标记",
         AssetQueryField.Comment => "备注", AssetQueryField.AddedAt => "导入日期", AssetQueryField.CaptureTime => "拍摄日期",
         AssetQueryField.FileSize => "文件大小", AssetQueryField.Width => "宽度", AssetQueryField.Height => "高度",
         AssetQueryField.LongEdge => "长边", AssetQueryField.ShortEdge => "短边", AssetQueryField.PixelCount => "像素总数",

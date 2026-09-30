@@ -14,6 +14,7 @@ internal static class AssetLibrarySchema
         var statements = new[]
         {
             "CREATE TABLE IF NOT EXISTS AssetLibrarySchemaInfo(Version INTEGER NOT NULL PRIMARY KEY, AppliedAt TEXT NOT NULL);",
+            "CREATE TABLE IF NOT EXISTS AssetPresentationMetadata(AssetId TEXT PRIMARY KEY,Url TEXT NOT NULL DEFAULT '',Color TEXT NOT NULL DEFAULT '');",
             """
             CREATE TABLE IF NOT EXISTS AssetItems(
                 AssetId TEXT NOT NULL PRIMARY KEY,

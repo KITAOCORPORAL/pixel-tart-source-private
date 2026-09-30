@@ -23,6 +23,52 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public async Task RatingAndColorPersistAcrossPageRestartAndDriveCanonicalQuery()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-HomeRating", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            await RunSta(() =>
+            {
+                WriteSyntheticJpeg(Path.Combine(root, "asset.jpg"));
+                var database = Path.Combine(root, "assets.db");
+                var page = new AssetLibraryPage(database, new TaskOperationBridge(), []);
+                page.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
+                var id = page.ViewModel.AssetCards.Single().Asset.AssetId;
+                page.ViewModel.SyncSelection([page.ViewModel.AssetCards.Single().Asset]);
+                page.ViewModel.RateCommand.Execute(4);
+                page.ViewModel.RateCommand.ExecutionTask.CompleteOnDispatcher();
+                Assert.AreEqual(4, page.ViewModel.SelectedAsset!.Rating);
+                Assert.AreEqual(4, page.ViewModel.AssetCards.Single().Asset.Rating);
+                page.ViewModel.InspectorColor = "红";
+                page.ViewModel.ApplyInspectorColorCommand.Execute(null);
+                page.ViewModel.ApplyInspectorColorCommand.ExecutionTask.CompleteOnDispatcher();
+                Assert.AreEqual("红", page.ViewModel.AssetCards.Single().Asset.ColorLabel);
+                page.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
+
+                var reopened = new AssetLibraryPage(database, new TaskOperationBridge(), []);
+                reopened.ViewModel.InitializeAsync().CompleteOnDispatcher();
+                reopened.ViewModel.SyncSelection([reopened.ViewModel.AssetCards.Single(card => card.Asset.AssetId == id).Asset]);
+                Assert.AreEqual(4, reopened.ViewModel.SelectedAsset!.Rating);
+                Assert.AreEqual("红", reopened.ViewModel.SelectedAsset.ColorLabel);
+                reopened.ViewModel.SetQuickFilterAsync(RAWSelectionAssistant.Core.Models.AssetQueryField.ColorLabel,
+                    RAWSelectionAssistant.Core.Models.AssetQueryOperator.Equals, "红").CompleteOnDispatcher();
+                Assert.HasCount(1, reopened.ViewModel.AssetCards);
+                reopened.ViewModel.RateCommand.Execute(0);
+                reopened.ViewModel.RateCommand.ExecutionTask.CompleteOnDispatcher();
+                Assert.AreEqual(0, reopened.ViewModel.AssetCards.Single().Asset.Rating);
+                reopened.ViewModel.SetQuickFilterAsync(RAWSelectionAssistant.Core.Models.AssetQueryField.Rating,
+                    RAWSelectionAssistant.Core.Models.AssetQueryOperator.GreaterThanOrEqual, "4").CompleteOnDispatcher();
+                Assert.HasCount(0, reopened.ViewModel.AssetCards);
+                reopened.ViewModel.DisposeAsync().AsTask().CompleteOnDispatcher();
+            });
+        }
+        finally { Directory.Delete(root, recursive: true); }
+    }
+
+    [TestMethod]
     public Task IconComposedToolbarButtonsRealizeAfterInitializationAndOpenMenus()=>RunSta(()=>
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-IconClosure",Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);

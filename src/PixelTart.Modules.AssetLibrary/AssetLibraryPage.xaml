@@ -246,7 +246,7 @@
                             </Button>
                         </Grid>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal"><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}"/><TextBlock Text="{Binding Asset.ColorLabel}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="颜色标记"/></StackPanel></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -269,7 +269,7 @@
                             </Button>
                         </Grid>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal"><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}"/><TextBlock Text="{Binding Asset.ColorLabel}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="颜色标记"/></StackPanel></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -292,7 +292,7 @@
                             </Button>
                         </Grid>
                     </Grid></Border>
-                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /></StackPanel>
+                    <StackPanel Grid.Row="1" Margin="4,3,4,0"><TextBlock Text="{Binding Asset.DisplayName}" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal"><TextBlock Text="{Binding DimensionsText}" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="素材分辨率" /><TextBlock Text="{Binding Asset.Rating, StringFormat=★ {0}}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" Visibility="{Binding HasRating, Converter={StaticResource BooleanToVisibilityConverter}}"/><TextBlock Text="{Binding Asset.ColorLabel}" Margin="8,0,0,0" Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.Name="颜色标记"/></StackPanel></StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>

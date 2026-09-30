@@ -69,8 +69,11 @@ public sealed class PixelTartRatingControl : Control
         // write the bound Rating first: the async command refreshes the asset
         // card/inspector after persistence. Writing here would make a click on
         // an already-selected star look like a second toggle and clear it.
-        if (Command?.CanExecute(value) == true) Command.Execute(value);
-        else Rating = value;
+        if (Command is { } command)
+        {
+            if (command.CanExecute(value)) command.Execute(value);
+        }
+        else SetCurrentValue(RatingProperty, value);
         HoverRating = null;
     }
     private Brush Brush(string key, Color fallback) => TryFindResource(key) as Brush ?? new SolidColorBrush(fallback);

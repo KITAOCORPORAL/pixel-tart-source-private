@@ -409,6 +409,7 @@ public sealed partial class SqliteAssetLibraryRepository
             AssetQueryField.Extension => "a.Extension",
             AssetQueryField.MediaType => "a.MediaType",
             AssetQueryField.Comment => "a.Comment",
+            AssetQueryField.ColorLabel => "COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),'')",
             AssetQueryField.AddedAt => "a.AddedAt",
             AssetQueryField.CaptureTime => "a.CaptureTime",
             AssetQueryField.FileSize => "a.FileSize",
@@ -575,7 +576,7 @@ public sealed partial class SqliteAssetLibraryRepository
     }
 
     private static bool IsP3TextField(AssetQueryField field) => field is
-        AssetQueryField.FileName or AssetQueryField.Extension or AssetQueryField.MediaType or AssetQueryField.Comment or AssetQueryField.Orientation or
+        AssetQueryField.FileName or AssetQueryField.Extension or AssetQueryField.MediaType or AssetQueryField.Comment or AssetQueryField.ColorLabel or AssetQueryField.Orientation or
         AssetQueryField.Camera or AssetQueryField.Lens;
 
     private static bool IsP3NumericField(AssetQueryField field) => field is

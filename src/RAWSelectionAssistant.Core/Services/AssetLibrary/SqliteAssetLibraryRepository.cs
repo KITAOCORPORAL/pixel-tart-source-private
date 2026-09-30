@@ -858,7 +858,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 
     private static AssetItem ReadAsset(SqliteDataReader reader)
     {
-        return new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18));
+        return new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18)) { ColorLabel = reader.GetString(19) };
     }
 
     private static AssetFolder ReadFolder(SqliteDataReader reader)
@@ -866,7 +866,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         return new(Guid.Parse(reader.GetString(0)), reader.IsDBNull(1) ? null : Guid.Parse(reader.GetString(1)), reader.GetString(2), reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), reader.IsDBNull(5) ? null : reader.GetString(5), reader.GetInt32(6), DateTimeOffset.Parse(reader.GetString(7)), DateTimeOffset.Parse(reader.GetString(8)), reader.GetInt32(9) != 0, reader.GetInt32(10) != 0, []);
     }
 
-    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath FROM AssetItems a";
+    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),'') FROM AssetItems a";
 
     private static string NormalizePath(string path) => OperatingSystem.IsWindows() ? path.ToUpperInvariant() : path;
     private static string NormalizeExtension(string extension) => string.IsNullOrWhiteSpace(extension) ? string.Empty : (extension.StartsWith('.') ? extension : "." + extension).ToUpperInvariant();

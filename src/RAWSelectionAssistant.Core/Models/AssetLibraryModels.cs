@@ -26,6 +26,7 @@ public sealed record AssetItem(
     AssetImportMode ImportMode = AssetImportMode.Reference,
     string? ManagedCopyPath = null)
 {
+    public string ColorLabel { get; init; } = "";
     public string FileName => Path.GetFileName(SourcePath);
     public string OriginalStem => Path.GetFileNameWithoutExtension(DisplayName);
 }

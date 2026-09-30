@@ -43,6 +43,11 @@ public sealed class InspectorStarRatingTests
                 control.HoverRating = 5;
                 Assert.AreEqual(3, control.Rating);
                 Assert.AreEqual(5, control.PreviewRating);
+                control.Command = new AssetCommand(() => Assert.Fail("Disabled command must not execute."), () => false);
+                control.RaiseEvent(new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice, 0, System.Windows.Input.MouseButton.Left)
+                    { RoutedEvent = UIElement.MouseLeftButtonUpEvent });
+                Assert.AreEqual(3, control.Rating, "Disabled persistence must not mutate the bound rating locally.");
+                Assert.IsNull(control.PreviewRating);
                 control.RaiseEvent(new System.Windows.Input.MouseEventArgs(System.Windows.Input.Mouse.PrimaryDevice, 0) { RoutedEvent = UIElement.MouseLeaveEvent });
                 Assert.IsNull(control.PreviewRating);
                 Assert.AreEqual(3, control.Rating);

@@ -69,7 +69,8 @@ public enum AssetQueryField
     VisualShadowRatio,
     VisualHighlightRatio,
     VisualBlackClipRatio,
-    VisualWhiteClipRatio
+    VisualWhiteClipRatio,
+    ColorLabel
 }
 
 public enum AssetQueryOperator

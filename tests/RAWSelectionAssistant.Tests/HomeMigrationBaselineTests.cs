@@ -50,7 +50,7 @@ public sealed class HomeMigrationBaselineTests
             Assert.AreEqual("preserve me|project|0|1", await command.ExecuteScalarAsync());
         }
         await assets.RestartAsync();
-        Assert.AreEqual(assetBefore, await assets.Repository.GetAssetAsync(assets.B));
+        Assert.AreEqual(assetBefore! with { ColorLabel = "红" }, await assets.Repository.GetAssetAsync(assets.B));
         Assert.AreEqual("红", (await annotations.GetAsync(assets.B)).Color);
         Assert.AreEqual(assets.B, (await assets.Repository.QueryAsync(new(TagId: tags.Single().TagId))).Items.Single().AssetId);
         Assert.HasCount(1, await assets.Repository.ListProjectAssetLinksAsync(assetId: assets.B, projectId: project));

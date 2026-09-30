@@ -34,7 +34,8 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
         f.Harmony,f.ToneKey,f.Contrast,f.LuminanceSpan,f.Saturation,f.WarmCool,f.DominantHue,f.SecondaryHue,f.AverageHue,
         f.AverageLuma,f.MedianLuma,f.ContrastMetric,f.LumaSpreadMetric,f.AverageSaturation,f.MedianSaturation,f.AverageLightness,
         f.WarmCoolMetric,f.DeepShadowRatio,f.ShadowRatio,f.MidtoneRatio,f.HighlightRatio,f.SpecularRatio,f.BlackClipRatio,
-        f.WhiteClipRatio,f.HistogramLumaSignature,f.PaletteSignature,f.CreatedAt,f.UpdatedAt,f.ResultJson
+        f.WhiteClipRatio,f.HistogramLumaSignature,f.PaletteSignature,f.CreatedAt,f.UpdatedAt,f.ResultJson,
+        COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),'') AS ColorLabel
         """;
 
     private const string CurrentFeatureJoin = "LEFT JOIN AssetVisualFeatures f ON f.AssetId=a.AssetId AND f.AnalysisVersion=$visualVersion";
@@ -384,7 +385,7 @@ public sealed class SqliteVisualAssetQueryService(AssetLibraryDatabase database,
 
     private static VisualAssetMatch ReadMatch(SqliteDataReader reader)
     {
-        var asset = new AssetItem(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18));
+        var asset = new AssetItem(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18)) { ColorLabel = reader.GetString(reader.GetOrdinal("ColorLabel")) };
         var state = Enum.TryParse<AssetVisualFeatureState>(reader.GetString(19), true, out var parsed) ? parsed : AssetVisualFeatureState.Stale;
         if (reader.IsDBNull(20)) return new(asset, SqliteAssetVisualAnalysisCache.NotAnalyzed(asset.AssetId) with { State = state });
         double? Number(int index) => reader.IsDBNull(index) ? null : reader.GetDouble(index);
