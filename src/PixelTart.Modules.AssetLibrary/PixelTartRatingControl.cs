@@ -62,7 +62,17 @@ public sealed class PixelTartRatingControl : Control
         else if (e.Key == Key.Escape) { _keyboardPreview = null; HoverRating = null; InvalidateVisual(); RaiseAutomation(); e.Handled = true; }
     }
     private int Hit(double x) => Math.Clamp((int)Math.Floor(x / Math.Max(1, HitTarget)) + 1, 1, 5);
-    private void Commit(int value) { _keyboardPreview = null; Rating = value; if (Command?.CanExecute(value) == true) Command.Execute(value); HoverRating = null; }
+    private void Commit(int value)
+    {
+        _keyboardPreview = null;
+        // When a command is supplied it is the single source of truth. Do not
+        // write the bound Rating first: the async command refreshes the asset
+        // card/inspector after persistence. Writing here would make a click on
+        // an already-selected star look like a second toggle and clear it.
+        if (Command?.CanExecute(value) == true) Command.Execute(value);
+        else Rating = value;
+        HoverRating = null;
+    }
     private Brush Brush(string key, Color fallback) => TryFindResource(key) as Brush ?? new SolidColorBrush(fallback);
     private static object CoerceRating(DependencyObject d, object value) => Math.Clamp((int)value, 0, 5);
     private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e) { ((PixelTartRatingControl)d).InvalidateVisual(); ((PixelTartRatingControl)d).RaiseAutomation(); }

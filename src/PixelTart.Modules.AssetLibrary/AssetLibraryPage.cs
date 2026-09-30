@@ -621,6 +621,30 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             }
         }
         Apply(menu);
+        foreach (var item in menu.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(item);
+    }
+
+    private void AttachContextSubmenuPlacement(MenuItem item)
+    {
+        item.SubmenuOpened -= ContextSubmenu_Opened;
+        item.SubmenuOpened += ContextSubmenu_Opened;
+        foreach (var child in item.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(child);
+    }
+
+    private static void ContextSubmenu_Opened(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuItem item) return;
+        item.ApplyTemplate();
+        if (item.Template.FindName("PART_Popup", item) is not Popup popup || PresentationSource.FromVisual(item) is null) return;
+        popup.Child?.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        var width = popup.Child?.DesiredSize.Width > 0 ? popup.Child.DesiredSize.Width : popup.ActualWidth;
+        var height = popup.Child?.DesiredSize.Height > 0 ? popup.Child.DesiredSize.Height : popup.ActualHeight;
+        if (width <= 0 || height <= 0) return;
+        var origin = item.PointToScreen(new Point(0, 0));
+        var workArea = SystemParameters.WorkArea;
+        var result = ContextMenuPlacement.Calculate(new Rect(origin.X, origin.Y, item.ActualWidth, item.ActualHeight), new Size(width, height), workArea);
+        popup.HorizontalOffset = result.OpensLeft ? -width - item.ActualWidth : 0;
+        popup.VerticalOffset = result.Top - origin.Y;
     }
 
     public ContextMenu? OpenContextSubmenuForProductHarness(string header)
