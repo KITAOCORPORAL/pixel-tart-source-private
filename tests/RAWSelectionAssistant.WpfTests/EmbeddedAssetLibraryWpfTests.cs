@@ -23,6 +23,35 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public async Task ToolbarPopupsSeparateRatingColorAndToggleMutually()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-HomePopup", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        await RunSta(() =>
+        {
+            var page = new AssetLibraryPage(Path.Combine(root, "assets.db"), new TaskOperationBridge(), []);
+            page.ViewModel.InitializeAsync().CompleteOnDispatcher();
+            using var source = AttachToPresentationSource(page, 1920, 1080);
+            ArrangePage(page, 1920, 1080);
+            void Click(string id) => FindVisualByAutomationId<Button>(page, id).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            Click("AssetLibraryRatingFilter");
+            Assert.AreEqual("Rating", page.ActiveToolbarPopup);
+            Click("AssetLibraryColorFilter");
+            Assert.AreEqual("Color", page.ActiveToolbarPopup);
+            Assert.IsFalse(page.ViewModel.P3QueryPanelOpen);
+            Click("AssetLibraryColorFilter");
+            Assert.IsNull(page.ActiveToolbarPopup);
+            Click("AssetLibraryDateFilter");
+            Assert.AreEqual("Date", page.ActiveToolbarPopup);
+            Click("AssetLibrarySortMenu");
+            Assert.AreEqual("Sort", page.ActiveToolbarPopup);
+            Click("AssetLibraryViewMenu");
+            Assert.AreEqual("View", page.ActiveToolbarPopup);
+            page.DisposeAsync().AsTask().CompleteOnDispatcher();
+        });
+    }
+
+    [TestMethod]
     public async Task RatingAndColorPersistAcrossPageRestartAndDriveCanonicalQuery()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-HomeRating", Guid.NewGuid().ToString("N"));

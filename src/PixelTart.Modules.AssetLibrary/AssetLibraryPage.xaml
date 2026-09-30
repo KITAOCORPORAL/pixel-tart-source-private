@@ -444,7 +444,7 @@
         </Grid>
         </ScrollViewer>
 
-        <Border Grid.Row="0" Grid.RowSpan="3" Panel.ZIndex="60" Width="360" MaxHeight="440" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <Border Grid.Row="0" Grid.RowSpan="3" Panel.ZIndex="60" x:Name="AssetFilterPopover" Width="680" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" MaxHeight="440" HorizontalAlignment="Right" VerticalAlignment="Top"
                 Margin="12,50,12,0" Padding="8" Background="{DynamicResource Brush.Surface.Elevated}"
                 Style="{DynamicResource PixelTart.Surface.Border}"
                 Visibility="{Binding P3QuerySurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"

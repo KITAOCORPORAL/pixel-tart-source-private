@@ -105,6 +105,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         TextCompositionManager.AddPreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.AddTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
         DataContext = _viewModel;
+        PreviewMouseDown += PopupOutsideClick;
     }
 
     public AssetLibraryViewModel ViewModel => _viewModel;
@@ -184,6 +185,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         if (_canvas is not null && !await _canvas.FlushAsync()) throw new IOException("画布未能保存，无法释放工作区。");
         if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
         _disposed = true;
+        CloseToolbarPopups();
+        PreviewMouseDown -= PopupOutsideClick;
         _visualRevision++;
         _visualToastTimer?.Stop();
         _duplicateImportCompletion?.TrySetResult(RAWSelectionAssistant.Core.Services.AssetLibrary.Duplicates.DuplicateImportChoice.Skip);
@@ -245,22 +248,22 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private void Filter_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.ToggleP3QueryPanelCommand.Execute(null);
+        if (sender is Button button) OpenColorPopup(button);
     }
 
     private void TagFilter_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.OpenFilterPanel();
+        if (sender is Button button) OpenTagPopup(button);
     }
 
     private void RatingFilter_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.OpenFilterPanel();
+        if (sender is Button button) OpenRatingPopup(button);
     }
 
     private void DateFilter_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.OpenFilterPanel();
+        if (sender is Button button) OpenDatePopup(button);
     }
 
     private void More_Click(object sender, RoutedEventArgs e)
@@ -271,6 +274,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem(_viewModel.OrganizationPaneToggleLabel, _viewModel.ToggleOrganizationPaneCommand));
             menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
             menu.Items.Add(CreateMoreItem("打开灵感板", _viewModel.OpenCollectionsCommand));
+            menu.Items.Add(PopupAction("高级筛选", "AssetAdvancedFilter", () => { OpenAdvancedFilter(); return Task.CompletedTask; }));
             var savedCanvases=new MenuItem { Header="打开已保存画布" };
             savedCanvases.Click+=async(_,_)=>await OpenSavedCanvasMenuAsync(button);
             menu.Items.Add(savedCanvases);
@@ -282,7 +286,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem("重做", _viewModel.P2RedoCommand));
             menu.PlacementTarget = button;
             menu.Placement = PlacementMode.Bottom;
-            menu.IsOpen = true;
+            OpenToolbarPopup(button, "More", menu);
         }
     }
 
@@ -299,7 +303,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             AutomationProperties.SetAutomationId(item, $"AssetView{pair.Item2}");
             menu.Items.Add(item);
         }
-        menu.IsOpen = true;
+        OpenToolbarPopup(button, "View", menu);
     }
 
     private void SortMenu_Click(object sender, RoutedEventArgs e)
@@ -311,7 +315,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(new MenuItem { Header = pair.Item1, Command = _viewModel.SortBrowserCommand, CommandParameter = pair.Item2 });
         menu.Items.Add(new Separator());
         menu.Items.Add(new MenuItem { Header = _viewModel.SortDirectionLabel, Command = _viewModel.ToggleSortDirectionCommand });
-        menu.IsOpen = true;
+        OpenToolbarPopup(button, "Sort", menu);
     }
 
     private void AssetGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -640,11 +644,21 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         var width = popup.Child?.DesiredSize.Width > 0 ? popup.Child.DesiredSize.Width : popup.ActualWidth;
         var height = popup.Child?.DesiredSize.Height > 0 ? popup.Child.DesiredSize.Height : popup.ActualHeight;
         if (width <= 0 || height <= 0) return;
-        var origin = item.PointToScreen(new Point(0, 0));
-        var workArea = SystemParameters.WorkArea;
-        var result = ContextMenuPlacement.Calculate(new Rect(origin.X, origin.Y, item.ActualWidth, item.ActualHeight), new Size(width, height), workArea);
-        popup.HorizontalOffset = result.OpensLeft ? -width - item.ActualWidth : 0;
-        popup.VerticalOffset = result.Top - origin.Y;
+        popup.HorizontalOffset = 0;
+        popup.VerticalOffset = 0;
+        popup.PlacementTarget = item;
+        popup.CustomPopupPlacementCallback = (size, _, _) =>
+        {
+            var origin = item.PointToScreen(new Point());
+            var dpi = VisualTreeHelper.GetDpi(item);
+            // PointToScreen and the monitor work area are physical pixels.
+            var result = ContextMenuPlacement.Calculate(
+                new Rect(origin.X, origin.Y, item.ActualWidth * dpi.DpiScaleX, item.ActualHeight * dpi.DpiScaleY),
+                new Size(size.Width * dpi.DpiScaleX, size.Height * dpi.DpiScaleY), ContextMenuMonitor.WorkArea(origin));
+            return [new CustomPopupPlacement(new Point((result.Left - origin.X) / dpi.DpiScaleX,
+                (result.Top - origin.Y) / dpi.DpiScaleY), PopupPrimaryAxis.None)];
+        };
+        popup.Placement = PlacementMode.Custom;
     }
 
     public ContextMenu? OpenContextSubmenuForProductHarness(string header)
@@ -854,6 +868,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key == Key.Escape && (_activeToolbarPopup is not null || _viewModel.P3QuerySurfaceVisible))
+        { CloseToolbarPopups(); e.Handled = true; return; }
         if (_canvas is not null) return;
         if (e.Key is Key.ImeProcessed or Key.DeadCharProcessed || IsTextInputContext(e.OriginalSource)) return;
         if (_isMarqueeSelecting && e.Key == Key.Escape)

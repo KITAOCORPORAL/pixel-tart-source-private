@@ -171,6 +171,8 @@ public sealed partial class AssetLibraryViewModel
         ClosePrimaryAuxiliarySurfacesExceptQuery();
     }
 
+    public void DismissP3Suggestions() => P3SuggestionsVisible = false;
+
     public async Task SetQuickFilterAsync(AssetQueryField field, AssetQueryOperator op, params string[] values)
     {
         if (P3ShutdownStarted) return;
