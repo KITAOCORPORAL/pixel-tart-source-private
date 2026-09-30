@@ -17,7 +17,9 @@ public static class AssetLayoutEngine
         double thumbnailWidth)
     {
         var width = double.IsFinite(viewportWidth) ? Math.Max(120d, viewportWidth) : 120d;
-        var target = Math.Clamp(double.IsFinite(thumbnailWidth) ? thumbnailWidth : 180d, 120d, 280d);
+        var target = Math.Clamp(double.IsFinite(thumbnailWidth) ? thumbnailWidth : 180d, 120d, width);
+        if (mode != AssetLibraryViewMode.List && target >= width - 32)
+            return ArrangeGrid(aspectRatios, width, width);
         return mode switch
         {
             AssetLibraryViewMode.Masonry => ArrangeMasonry(aspectRatios, width, target),

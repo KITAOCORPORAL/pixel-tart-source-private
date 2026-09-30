@@ -41,7 +41,7 @@ public sealed class AssetLibraryWorkspaceSettings
     {
         OrganizationPaneWidth = NormalizeFinite(OrganizationPaneWidth, DefaultOrganizationPaneWidth, 180d, 420d);
         InspectorPaneWidth = NormalizeFinite(InspectorPaneWidth, DefaultInspectorPaneWidth, 260d, 520d);
-        ThumbnailWidth = NormalizeFinite(ThumbnailWidth, DefaultThumbnailWidth, 120d, 280d);
+        ThumbnailWidth = NormalizeFinite(ThumbnailWidth, DefaultThumbnailWidth, 120d, 4096d);
         if (InspectorPinned) InspectorPaneCollapsed = false;
         SearchText = (SearchText ?? string.Empty).Trim();
         if (SearchText.Length > 500) SearchText = SearchText[..500];

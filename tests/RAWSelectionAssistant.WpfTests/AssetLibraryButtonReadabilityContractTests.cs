@@ -18,13 +18,13 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var document = XDocument.Load(PagePath);
         var buttons = document.Descendants(Presentation + "Button").ToArray();
 
-        Assert.HasCount(100, buttons, "Update the contextual-inspector, visual-analysis and duplicate-action inventory when a product action changes.");
+        Assert.HasCount(101, buttons, "Includes the tag-group query action alongside the contextual inspector, visual analysis and duplicate actions.");
         Assert.IsTrue(buttons.All(button =>
             Attribute(button, "Style") is "{DynamicResource PixelTart.Button.Ghost}"
                 or "{DynamicResource PixelTart.Button.Primary}"
                 or "{DynamicResource PixelTart.Button.Secondary}"));
         // Export is a low-frequency ghost action inside the source-information section.
-        Assert.AreEqual(73, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
+        Assert.AreEqual(74, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
         Assert.AreEqual(23, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
         Assert.AreEqual(4, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Primary}"));
         Assert.IsFalse(buttons.Any(button => Attribute(button, "Style").Contains("AssetLibrary", StringComparison.Ordinal)),

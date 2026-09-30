@@ -21,7 +21,7 @@ public sealed partial class PlanningCenterViewModel
     private readonly Dictionary<Guid, ProjectShot> _pendingShots = [];
     private string _referenceCategory = "全部";
     private PlanningReferenceItem? _selectedDocumentReference;
-    public static IReadOnlyList<string> ContentPages { get; } = ["文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件"];
+    public static IReadOnlyList<string> ContentPages { get; } = ["文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "自定义"];
     public IReadOnlyList<string> ReferenceCategories { get; } = ["全部", "主视觉", "场景", "姿势", "造型", "灯光", "色彩", "其他"];
     public IReadOnlyList<string> ProposalStatuses { get; } = ["进行中", "草稿", "已完成"];
     public IReadOnlyList<string> MoodGroups { get; } = ["整体氛围", "材质", "身体姿势", "灯光", "色彩"];
@@ -48,6 +48,7 @@ public sealed partial class PlanningCenterViewModel
     public string DocumentTitle { get => string.IsNullOrWhiteSpace(_document.Title) ? ProjectName : _document.Title; set => UpdateDocument(_document with { Title = value }); }
     public string DocumentSubtitle { get => _document.Subtitle; set => UpdateDocument(_document with { Subtitle = value }); }
     public string DocumentBody { get => _document.Body; set => UpdateDocument(_document with { Body = value }); }
+    public string DocumentCustomBody { get => _document.CustomBody; set => UpdateDocument(_document with { CustomBody = value }); }
     public string DocumentPeople { get => _document.People; set => UpdateDocument(_document with { People = value }); }
     public string ProposalStatus { get => _document.Status; set => UpdateDocument(_document with { Status = value }); }
     public string DocumentLocation { get => _booking?.Location ?? _document.Location; set => UpdateDocument(_document with { Location = value }); }

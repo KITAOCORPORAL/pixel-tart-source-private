@@ -857,6 +857,7 @@ public sealed partial class AssetLibraryViewModel
 
     private async Task ToggleInspirationTrayAsync()
     {
+        if (!IsCollectionPanelOpen && HasUnsavedSmartFolderChanges) { RequestSmartFolderClose(() => ToggleInspirationTrayCommand.Execute(null)); return; }
         IsCollectionPanelOpen = !IsCollectionPanelOpen;
         IsInspirationTrayOpen = IsCollectionPanelOpen;
         if (IsInspirationTrayOpen)

@@ -6,6 +6,7 @@ public sealed record PlanningDocument
     public string Title { get; init; } = "";
     public string Subtitle { get; init; } = "";
     public string Body { get; init; } = "";
+    public string CustomBody { get; init; } = "";
     public string Status { get; init; } = "草稿";
     public string Location { get; init; } = "";
     public string People { get; init; } = "";

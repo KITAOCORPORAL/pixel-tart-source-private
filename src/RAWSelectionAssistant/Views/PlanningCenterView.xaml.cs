@@ -65,8 +65,9 @@ public partial class PlanningCenterView : UserControl
     {
         var box = new TextBox { AcceptsReturn = lines > 1, TextWrapping = TextWrapping.Wrap, MinHeight = lines > 1 ? lines * 24 : 38, Margin = new Thickness(0, 5, 0, 16) };
         box.SetBinding(TextBox.TextProperty, new Binding(property) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+        AutomationProperties.SetAutomationId(box, "PlanningEditor" + property);
         AutomationProperties.SetName(box, property switch {
-            "DocumentTitle" => "策划案标题", "DocumentBody" => "策划正文", "DocumentSubtitle" => "副标题",
+            "DocumentTitle" => "策划案标题", "DocumentBody" => "策划正文", "DocumentCustomBody" => "自定义策划内容", "DocumentSubtitle" => "副标题",
             "DocumentPeople" => "参与人物", "DocumentLocation" or "NewLocation" => "拍摄地点", "NewPlanningName" => "新策划名称",
             "ShootGoal" => "拍摄目标", "Keywords" => "视觉关键词", "ClientRequirements" => "客户要求", "MustCapture" => "必拍内容",
             "PlanningNotes" => "注意事项", "OutputPurpose" => "交付用途", "ShotTitle" => "构图与镜头名称", "ShotNotes" => "人物动作与备注",
@@ -93,7 +94,7 @@ public partial class PlanningCenterView : UserControl
             {
                 "参考图" => "PlanningReferencesSurface", "情绪板" => "PlanningMoodboardSurface",
                 "镜头清单" => "PlanningShotListSurface", "灯光图" => "PlanningLightingSurface",
-                "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", _ => "PlanningTextSurface"
+                "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", "自定义" => "PlanningCustomSurface", _ => "PlanningTextSurface"
             });
             DocumentListColumn.Width = new GridLength(preview ? 0 : 280);
             DocumentListPane.Visibility = EditorHeader.Visibility = ContentNavigationBorder.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
@@ -127,6 +128,12 @@ public partial class PlanningCenterView : UserControl
                 case "文字": RenderText(_vm.IsDocumentEditing); break;
                 case "镜头清单": RenderShots(true); break;
                 case "文件": RenderFiles(); break;
+                case "自定义":
+                    Heading(DocumentContent, "自定义");
+                    DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
+                    DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
+                    DocumentContent.Children.Add(AsyncAction("保存", () => _vm.FlushAsync()));
+                    break;
                 default: RenderImages(_vm.ContentPage, true); break;
             }
         }
@@ -144,12 +151,12 @@ public partial class PlanningCenterView : UserControl
             StatusChips.Children.Add(chip);
         }
         ContentNavigation.Children.Clear();
-        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link" };
+        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link", "PixelTart.Symbol.Planning" };
         for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
         {
             var page = PlanningCenterViewModel.ContentPages[i];
             var button = Action(page, () => { _vm.ContentPage = page; DocumentScroll.ScrollToTop(); });
-            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files" }[i]);
+            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files", "Custom" }[i]);
             button.Padding = new Thickness(5, 12, 5, 12); button.MinWidth = 0;
             var content = new StackPanel { Orientation = Orientation.Horizontal };
             content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource(icons[i]), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
@@ -463,7 +470,9 @@ public partial class PlanningCenterView : UserControl
             var project = new ComboBox { ItemsSource = _vm.AvailableProjects, DisplayMemberPath = "Name", Margin = new Thickness(0, 8, 0, 16) }; project.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.NewLinkedProject))); AutomationProperties.SetName(project, "关联已有项目"); ModalContent.Children.Add(project);
             ModalContent.Children.Add(Text("拍摄日期", 13)); var date = new DatePicker { Style = (Style)FindResource("ProposalDatePicker"), Margin = new Thickness(0, 6, 0, 14) }; date.SetBinding(DatePicker.SelectedDateProperty, new Binding(nameof(_vm.NewShootDate))); AutomationProperties.SetName(date, "拍摄日期"); ModalContent.Children.Add(date);
             ModalContent.Children.Add(Text("地点", 13)); ModalContent.Children.Add(Editor(nameof(_vm.NewLocation)));
-            ModalContent.Children.Add(AsyncAction("新建策划", async () => { await _vm.CreatePlanningCommand.ExecuteAsync(null); Render(); RenderModal(); }, "PrimaryButton"));
+            var create = AsyncAction("新建策划", async () => { await _vm.CreatePlanningCommand.ExecuteAsync(null); Render(); RenderModal(); }, "PrimaryButton");
+            AutomationProperties.SetAutomationId(create, "PlanningCreateConfirm");
+            ModalContent.Children.Add(create);
         }
         if (_vm.IsBookingOpen)
         {

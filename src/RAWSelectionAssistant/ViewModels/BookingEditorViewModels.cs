@@ -671,7 +671,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             var start = _suggestedStart ?? DateTime.Today.AddHours(9);
             StartDate = start.Date;
             StartTimeText = start.ToString("HH:mm");
-            EndDate = start.Date;
+            EndDate = start.AddHours(1).Date;
             EndTimeText = start.AddHours(1).ToString("HH:mm");
             Documents?.BeginDraft(_stableBookingId, SelectedProject?.Id);
             _initialSignature = BuildEditSignature();

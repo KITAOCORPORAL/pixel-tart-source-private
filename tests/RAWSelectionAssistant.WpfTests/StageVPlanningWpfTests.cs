@@ -24,9 +24,9 @@ public sealed class PlanningWorkspaceLayoutTests
         Assert.DoesNotContain("TabControl", xaml, StringComparison.Ordinal);
     }
     [TestMethod]
-    public void SevenContentModulesHaveFixedChineseOrder()
+    public void ContentModulesRetainChineseOrderAndAppendCustom()
     {
-        CollectionAssert.AreEqual(new[] { "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件" }, PlanningCenterViewModel.ContentPages.ToArray());
+        CollectionAssert.AreEqual(new[] { "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "自定义" }, PlanningCenterViewModel.ContentPages.ToArray());
     }
     [TestMethod]
     public void DocumentPresentationUsesReadingWidthUniformImagesAndOptInEditing()

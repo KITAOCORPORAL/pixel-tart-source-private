@@ -101,6 +101,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.LostMouseCapture += AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown += AssetGrid_PreviewMouseRightButtonDown;
         AssetGrid.MouseDoubleClick += AssetGrid_MouseDoubleClick;
+        AssetGrid.SizeChanged += ThumbnailViewportChanged;
         TextCompositionManager.AddPreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.AddPreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.AddTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -204,6 +205,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetGrid.LostMouseCapture -= AssetGrid_LostMouseCapture;
         AssetGrid.PreviewMouseRightButtonDown -= AssetGrid_PreviewMouseRightButtonDown;
         AssetGrid.MouseDoubleClick -= AssetGrid_MouseDoubleClick;
+        AssetGrid.SizeChanged -= ThumbnailViewportChanged;
         TextCompositionManager.RemovePreviewTextInputStartHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionStarted);
         TextCompositionManager.RemovePreviewTextInputUpdateHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_CompositionUpdated);
         TextCompositionManager.RemoveTextInputHandler(AssetLibrarySearchBox, AssetLibrarySearchBox_TextInputCompleted);
@@ -651,12 +653,13 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         {
             var origin = item.PointToScreen(new Point());
             var dpi = VisualTreeHelper.GetDpi(item);
-            // PointToScreen and the monitor work area are physical pixels.
+            // WPF Popup.UpdatePosition supplies device-space bounds and adds the
+            // returned point directly to the device-space target origin.
             var result = ContextMenuPlacement.Calculate(
                 new Rect(origin.X, origin.Y, item.ActualWidth * dpi.DpiScaleX, item.ActualHeight * dpi.DpiScaleY),
-                new Size(size.Width * dpi.DpiScaleX, size.Height * dpi.DpiScaleY), ContextMenuMonitor.WorkArea(origin));
-            return [new CustomPopupPlacement(new Point((result.Left - origin.X) / dpi.DpiScaleX,
-                (result.Top - origin.Y) / dpi.DpiScaleY), PopupPrimaryAxis.None)];
+                size, ContextMenuMonitor.WorkArea(origin));
+            return [new CustomPopupPlacement(new Point(result.Left - origin.X,
+                result.Top - origin.Y), PopupPrimaryAxis.None)];
         };
         popup.Placement = PlacementMode.Custom;
     }
@@ -807,6 +810,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     }
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e) => _viewModel.UpdateViewportWidth(e.NewSize.Width);
+    private void ThumbnailViewportChanged(object sender, SizeChangedEventArgs e) => _viewModel.UpdateThumbnailViewport(e.NewSize.Width);
 
     private void OnPaneSplitterDragCompleted(object sender, DragCompletedEventArgs e) => SchedulePaneWidthCommit();
 
@@ -868,6 +872,13 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key == Key.Escape && _viewModel.P3SmartFolderOpen)
+        {
+            if (_viewModel.SmartFolderUnsavedGuardOpen) _viewModel.KeepEditingSmartFolderCommand.Execute(null);
+            else _viewModel.RequestSmartFolderClose();
+            e.Handled = true;
+            return;
+        }
         if (e.Key == Key.Escape && (_activeToolbarPopup is not null || _viewModel.P3QuerySurfaceVisible))
         { CloseToolbarPopups(); e.Handled = true; return; }
         if (_canvas is not null) return;

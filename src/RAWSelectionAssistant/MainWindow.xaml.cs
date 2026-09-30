@@ -193,6 +193,12 @@ public partial class MainWindow : Window
     private bool _tetherCloseDisposing;
     private async void Window_Closing(object? sender, CancelEventArgs e)
     {
+        if (AssetLibraryWorkspace is not null && GetHostedAssetLibraryPage()?.ViewModel is { HasUnsavedSmartFolderChanges: true } library)
+        {
+            e.Cancel = true;
+            library.RequestSmartFolderClose(() => _ = Dispatcher.BeginInvoke(new Action(Close)));
+            return;
+        }
         if (!_planningCloseFlushed && _viewModel?.PlanningPage is { } planning)
         {
             e.Cancel = true;
@@ -604,7 +610,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private PixelTart.Modules.AssetLibrary.AssetLibraryPage? GetHostedAssetLibraryPage() => AssetLibraryWorkspace.Content switch
+    private PixelTart.Modules.AssetLibrary.AssetLibraryPage? GetHostedAssetLibraryPage() => AssetLibraryWorkspace?.Content switch
     {
         PixelTart.Modules.AssetLibrary.AssetLibraryPage page => page,
         PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host => host.CurrentPage,

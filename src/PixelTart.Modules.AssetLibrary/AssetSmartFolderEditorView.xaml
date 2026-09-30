@@ -22,6 +22,18 @@
     <Border Margin="0,7,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
             Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
         <StackPanel>
+            <Border Padding="12" Margin="0,0,0,10" Style="{StaticResource AssetLibraryP3PopupSurface}"
+                    Visibility="{Binding SmartFolderUnsavedGuardOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}"
+                    AutomationProperties.AutomationId="SmartFolderUnsavedGuard">
+                <StackPanel>
+                    <TextBlock Text="智能文件夹有未保存的修改" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}" />
+                    <WrapPanel>
+                        <Button Content="保存" Command="{Binding SaveSmartFolderChangesAndContinueCommand}" AutomationProperties.AutomationId="SmartFolderGuardSave" AutomationProperties.Name="保存修改并继续" Style="{StaticResource AssetLibraryP3PrimaryButton}" />
+                        <Button Content="放弃" Command="{Binding DiscardSmartFolderChangesCommand}" AutomationProperties.AutomationId="SmartFolderGuardDiscard" AutomationProperties.Name="放弃修改并继续" Style="{StaticResource AssetLibraryP3SecondaryButton}" />
+                        <Button Content="取消" Command="{Binding KeepEditingSmartFolderCommand}" AutomationProperties.AutomationId="SmartFolderGuardCancel" AutomationProperties.Name="取消关闭并继续编辑" Style="{StaticResource AssetLibraryP3SecondaryButton}" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
             <DockPanel>
                 <TextBlock Text="{Binding P3SmartFolderTitle}" FontSize="16" FontWeight="SemiBold"
                            Foreground="#F2F6F7" VerticalAlignment="Center" />

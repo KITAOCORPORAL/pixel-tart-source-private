@@ -34,35 +34,42 @@ internal static class NativeScreenshotValidator
 
 internal sealed class NativeWindowCapture(PixelTartProcessHost host)
 {
-    public NativeCaptureResult Capture(string name)
+    public NativeCaptureResult Capture(string name, nint? ownedWindow = null)
     {
         if (name != Path.GetFileName(name) || name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0) throw new ArgumentException("Evidence filename only.");
         using var dpi = new PhysicalDpiScope();
-        var target = host.Validate(); var w = checked((int)target.Bounds.Width); var h = checked((int)target.Bounds.Height);
+        var target = host.Validate(captureOnly: true);
+        var hwnd = ownedWindow ?? host.Hwnd;
+        Win32.GetWindowThreadProcessId(hwnd, out var pid);
+        if (pid != host.Pid || !Win32.IsWindow(hwnd) || !Win32.GetWindowRect(hwnd, out var bounds))
+            throw new InvalidOperationException("Capture requires an observed window of the owned process.");
+        var w = checked((int)bounds.Bounds.Width); var h = checked((int)bounds.Bounds.Height);
         if (w > 8192 || h > 8192) throw new InvalidOperationException("Bounded screenshot dimensions exceeded.");
         foreach (var method in new[] { "PrintWindow", "BitBlt-WindowDC" })
         {
-            host.Validate();
+            host.Validate(captureOnly: true);
             var path = Path.Combine(host.RuntimeRoot, $"{name}-{Guid.NewGuid():N}-{method}.png");
-            if (!TryCapture(method, path, w, h)) continue;
+            if (!TryCapture(hwnd, method, path, w, h)) continue;
             var validation = NativeScreenshotValidator.Validate(path, w, h);
             File.AppendAllText(Path.Combine(host.RuntimeRoot, "native-capture.jsonl"), System.Text.Json.JsonSerializer.Serialize(new
-                { Timestamp = DateTimeOffset.UtcNow, target.TargetPid, target.TargetHwnd, Method = method, Path = path, Validation = validation }) + Environment.NewLine);
+                { Timestamp = DateTimeOffset.UtcNow, target.TargetPid, TargetHwnd = hwnd.ToInt64(), Method = method, Path = path, Validation = validation }) + Environment.NewLine);
             if (validation.Valid) return new(path, method, validation);
             // Invalid images remain local failure evidence. Never replace/label as PASS.
         }
         throw new InvalidOperationException("Both native screenshot methods failed validation.");
     }
-    private bool TryCapture(string method, string path, int width, int height)
+    private bool TryCapture(nint hwnd, string method, string path, int width, int height)
     {
-        var source = Win32.GetWindowDC(host.Hwnd); if (source == 0) return false;
+        var source = Win32.GetWindowDC(hwnd); if (source == 0) return false;
         var dc = Win32.CreateCompatibleDC(source); var bitmap = Win32.CreateCompatibleBitmap(source, width, height); nint old = 0;
         try
         {
             if (dc == 0 || bitmap == 0) return false;
             old = Win32.SelectObject(dc, bitmap);
-            host.Validate();
-            var ok = method == "PrintWindow" ? Win32.PrintWindow(host.Hwnd, dc, 2) : Win32.BitBlt(dc, 0, 0, width, height, source, 0, 0, 0x00CC0020);
+            host.Validate(captureOnly: true);
+            Win32.GetWindowThreadProcessId(hwnd, out var pid);
+            if (pid != host.Pid) throw new InvalidOperationException("Capture window ownership changed.");
+            var ok = method == "PrintWindow" ? Win32.PrintWindow(hwnd, dc, 2) : Win32.BitBlt(dc, 0, 0, width, height, source, 0, 0, 0x00CC0020);
             if (!ok) return false;
             Win32.SelectObject(dc, old); old = 0;
             var bytes = new byte[checked(width * height * 4)];
@@ -79,7 +86,7 @@ internal sealed class NativeWindowCapture(PixelTartProcessHost host)
             if (old != 0) Win32.SelectObject(dc, old);
             if (bitmap != 0) Win32.DeleteObject(bitmap);
             if (dc != 0) Win32.DeleteDC(dc);
-            Win32.ReleaseDC(host.Hwnd, source);
+            Win32.ReleaseDC(hwnd, source);
         }
     }
 }

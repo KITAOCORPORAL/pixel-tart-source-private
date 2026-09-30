@@ -17,8 +17,9 @@ public sealed class PlanningDocumentPersistenceTests
         var capture = new ShotCaptureRelation(Guid.NewGuid(), Guid.NewGuid(), shot, id, booking, DateTimeOffset.UtcNow, 1);
         await store.AddCaptureRelationAsync(capture);
         var reference = new ProjectShotReference(Guid.NewGuid(), ShotReferenceKind.General, ExternalReference: temp.Combine("original.jpg"));
-        await store.UpdateDocumentAsync(id, new() { Title = "新策划", Body = "正文", References = [new(reference, IsMoodboard: true)] }, new("编辑目标"));
-        var restored = await store.LoadAsync(id);
+        await store.UpdateDocumentAsync(id, new() { Title = "新策划", Body = "正文", CustomBody = "自定义拍摄要求", References = [new(reference, IsMoodboard: true)] }, new("编辑目标"));
+        var restored = await new PlanningProjectStore(temp.Combine("planning")).LoadAsync(id);
+        Assert.AreEqual("自定义拍摄要求", restored.Document!.CustomBody);
         Assert.AreEqual(booking, restored.BookingId); Assert.AreEqual(shot, restored.CurrentShotId);
         Assert.HasCount(1, restored.CapturedAssets!); Assert.HasCount(1, restored.VisualLinks!);
         Assert.AreEqual("正文", restored.Document!.Body); Assert.AreEqual(1, restored.Version);

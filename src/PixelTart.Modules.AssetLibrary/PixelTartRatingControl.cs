@@ -62,7 +62,7 @@ public sealed class PixelTartRatingControl : Control
         else if (e.Key == Key.Escape) { _keyboardPreview = null; HoverRating = null; InvalidateVisual(); RaiseAutomation(); e.Handled = true; }
     }
     private int Hit(double x) => Math.Clamp((int)Math.Floor(x / Math.Max(1, HitTarget)) + 1, 1, 5);
-    private void Commit(int value)
+    internal void Commit(int value)
     {
         _keyboardPreview = null;
         // When a command is supplied it is the single source of truth. Do not
@@ -76,6 +76,7 @@ public sealed class PixelTartRatingControl : Control
         else SetCurrentValue(RatingProperty, value);
         HoverRating = null;
     }
+    protected override System.Windows.Automation.Peers.AutomationPeer OnCreateAutomationPeer() => new RatingAutomationPeer(this);
     private Brush Brush(string key, Color fallback) => TryFindResource(key) as Brush ?? new SolidColorBrush(fallback);
     private static object CoerceRating(DependencyObject d, object value) => Math.Clamp((int)value, 0, 5);
     private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e) { ((PixelTartRatingControl)d).InvalidateVisual(); ((PixelTartRatingControl)d).RaiseAutomation(); }

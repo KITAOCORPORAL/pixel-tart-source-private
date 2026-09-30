@@ -37,6 +37,11 @@ public partial class AssetLibraryPage
         var store=new CanvasDocumentStore(_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
         _canvas=canvas;
+        var createCanvas = new Button { Content = "新建画布", Margin = new Thickness(4) };
+        createCanvas.SetResourceReference(StyleProperty, "PixelTart.Button.Ghost");
+        System.Windows.Automation.AutomationProperties.SetAutomationId(createCanvas, "ContextNewCanvas");
+        createCanvas.Click += async (_, _) => await ShowCanvasAsync(new CanvasDocument());
+        canvas.HeaderPanel.Children.Add(createCanvas);
         canvas.SourceLoader=(source,search)=>_viewModel.LoadCanvasSourcesAsync(source,search,editor.Document.ProjectId);
         canvas.SaveBoard=(objects,target)=>_viewModel.SaveCanvasBoardAsync(objects,target,editor.Document.ProjectId);
         canvas.BoardLoader=_viewModel.CanvasBoardsAsync;

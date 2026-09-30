@@ -15,6 +15,8 @@ public partial class AssetLibraryPage
 
     private void OpenToolbarPopup(Button anchor, string name, ContextMenu menu)
     {
+        if (_viewModel.HasUnsavedSmartFolderChanges) { _viewModel.RequestSmartFolderClose(() => OpenToolbarPopup(anchor, name, menu)); return; }
+        if (_viewModel.P3SmartFolderOpen) _viewModel.RequestSmartFolderClose();
         var toggleOff = ReferenceEquals(_activeToolbarPopup?.PlacementTarget, anchor) || ReferenceEquals(_dismissedPopupAnchor, anchor);
         _dismissedPopupAnchor = null;
         CloseToolbarPopups();
@@ -102,7 +104,7 @@ public partial class AssetLibraryPage
     {
         var menu = new ContextMenu();
         menu.Items.Add(PopupAction("不限标签", "AssetFilterTagAll", () => _viewModel.SetQuickFilterAsync(AssetQueryField.Tag, AssetQueryOperator.AnyOf)));
-        foreach (var tag in _viewModel.Tags.Where(tag => !tag.IsArchived))
+        foreach (var tag in _viewModel.Tags.Where(tag => !tag.IsArchived && (tag.TagGroupId is null || _viewModel.TagGroups.Any(group => group.TagGroupId == tag.TagGroupId && !group.IsArchived))))
             menu.Items.Add(PopupAction(tag.Name, "AssetFilterTag" + tag.TagId.ToString("N"),
                 () => _viewModel.SetQuickFilterAsync(AssetQueryField.Tag, AssetQueryOperator.AnyOf, "id:" + tag.TagId.ToString("D"))));
         OpenToolbarPopup(anchor, "Tag", menu);

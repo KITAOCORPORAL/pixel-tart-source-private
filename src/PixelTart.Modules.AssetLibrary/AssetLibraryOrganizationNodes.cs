@@ -179,6 +179,8 @@ public sealed class AssetLibraryTagGroupNodeView : ObservableObject
         Name = group?.Name ?? "未分组标签";
         AutomationId = group is null ? "AssetTagGroup_Ungrouped" : $"AssetTagGroup_{group.TagGroupId:N}";
         Children = new(tags);
+        SelectCommand = new(() => owner.SetQuickFilterAsync(AssetQueryField.Tag, AssetQueryOperator.AnyOf,
+            Children.Select(child => "id:" + child.Tag.TagId.ToString("D")).ToArray()), () => Children.Count > 0);
         _isExpanded = group is null || owner.IsTagGroupExpanded(group.TagGroupId);
     }
 
@@ -187,6 +189,8 @@ public sealed class AssetLibraryTagGroupNodeView : ObservableObject
     public string AutomationId { get; }
     public string AccessibleName => $"标签组 {Name}，{Children.Count} 个标签";
     public ObservableCollection<AssetLibraryTagNodeView> Children { get; }
+    public AsyncCommand SelectCommand { get; }
+    public string FilterAutomationId => AutomationId + "Filter";
     public bool IsExpanded
     {
         get => _isExpanded;

@@ -157,6 +157,7 @@ public sealed partial class AssetLibraryViewModel
         ToggleP3TagManagerCommand = new(() =>
         {
             if (P3ShutdownStarted) return;
+            if (!P3TagManagerOpen && HasUnsavedSmartFolderChanges) { RequestSmartFolderClose(() => ToggleP3TagManagerCommand.Execute(null)); return; }
             P3TagManagerOpen = !P3TagManagerOpen;
             if (P3TagManagerOpen)
             {

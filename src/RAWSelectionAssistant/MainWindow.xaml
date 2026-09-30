@@ -176,8 +176,8 @@
             </MenuItem>
         </Menu>
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,8,0" VerticalAlignment="Center" shell:WindowChrome.IsHitTestVisibleInChrome="True">
-                <Button Content="新建" Style="{StaticResource PixelTart.Button.Ghost}" Command="{Binding NewProjectCommand}" ToolTip="新建项目" />
-                <Button Content="导入照片" Style="{StaticResource PixelTart.Button.Secondary}" Command="{Binding NavigateCommand}" CommandParameter="AssetLibrary" Margin="6,0,0,0" />
+                <Button Content="新建策划" Style="{StaticResource PixelTart.Button.Ghost}" Command="{Binding PlanningPage.ShowCreatePlanningCommand}"
+                        AutomationProperties.AutomationId="ContextNewPlanning" Visibility="{Binding IsPlanningPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </StackPanel>
             <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Stretch" shell:WindowChrome.IsHitTestVisibleInChrome="True">
                 <Button Content="—" Style="{StaticResource StudioV2.WindowButton}" Click="WindowMinimize_Click" AutomationProperties.Name="最小化窗口" />

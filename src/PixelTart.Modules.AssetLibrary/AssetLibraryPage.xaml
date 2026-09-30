@@ -627,9 +627,14 @@
                             <ItemsControl ItemsSource="{Binding OrganizationTagGroups}" AutomationProperties.AutomationId="AssetTags">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                        <Expander Header="{Binding Name}" IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                        <Expander IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
                                                   AutomationProperties.AutomationId="{Binding AutomationId}"
                                                   AutomationProperties.Name="{Binding AccessibleName}">
+                                            <Expander.Header>
+                                                <Button Content="{Binding Name}" Command="{Binding SelectCommand}"
+                                                        Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left"
+                                                        ToolTip="筛选这个组中的任意标签" AutomationProperties.AutomationId="{Binding FilterAutomationId}" />
+                                            </Expander.Header>
                                             <ItemsControl ItemsSource="{Binding Children}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -674,7 +679,7 @@
                             <TextBlock Text="{Binding CurrentViewLabel, StringFormat={}素材{0}}" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
                             <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Inline.Start.1}" VerticalAlignment="Center" />
                         </StackPanel>
-                        <Slider Grid.Column="1" Minimum="120" Maximum="280" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
+                        <Slider Grid.Column="1" Minimum="120" Maximum="{Binding ThumbnailMaximumWidth}" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />

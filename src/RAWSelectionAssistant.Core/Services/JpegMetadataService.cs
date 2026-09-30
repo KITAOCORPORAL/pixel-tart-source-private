@@ -2,6 +2,7 @@ using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using MetadataExtractor.Formats.Icc;
 using MetadataExtractor.Formats.Jpeg;
+using MetadataExtractor.Formats.Png;
 using RAWSelectionAssistant.Core.Models;
 
 namespace RAWSelectionAssistant.Core.Services;
@@ -40,6 +41,9 @@ public sealed class JpegMetadataService(ILogService? logService = null) : IJpegM
             }
 
             var ifd0 = directories.OfType<ExifIfd0Directory>().FirstOrDefault();
+            var png = directories.OfType<PngDirectory>().FirstOrDefault(directory => directory.ContainsTag(PngDirectory.TagImageWidth));
+            result.PixelWidth ??= ReadPositiveInt32(png, PngDirectory.TagImageWidth);
+            result.PixelHeight ??= ReadPositiveInt32(png, PngDirectory.TagImageHeight);
             var subIfd = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
             result.PixelWidth ??= ReadPositiveInt32(subIfd, 0xA002) ?? ReadPositiveInt32(ifd0, 0x0100);
             result.PixelHeight ??= ReadPositiveInt32(subIfd, 0xA003) ?? ReadPositiveInt32(ifd0, 0x0101);

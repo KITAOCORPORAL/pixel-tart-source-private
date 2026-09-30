@@ -167,6 +167,7 @@ public sealed partial class AssetLibraryViewModel
     public void OpenFilterPanel()
     {
         if (P3ShutdownStarted) return;
+        if (HasUnsavedSmartFolderChanges) { RequestSmartFolderClose(OpenFilterPanel); return; }
         P3QueryPanelOpen = true;
         ClosePrimaryAuxiliarySurfacesExceptQuery();
     }
@@ -202,6 +203,7 @@ public sealed partial class AssetLibraryViewModel
         ToggleP3QueryPanelCommand = new(() =>
         {
             if (P3ShutdownStarted) return;
+            if (!P3QueryPanelOpen && HasUnsavedSmartFolderChanges) { RequestSmartFolderClose(OpenFilterPanel); return; }
             P3QueryPanelOpen = !P3QueryPanelOpen;
             if (P3QueryPanelOpen) ClosePrimaryAuxiliarySurfacesExceptQuery();
         });

@@ -15,16 +15,23 @@ internal sealed class PixelTartProcessHost : IDisposable
     private PixelTartProcessHost(Process process, string path, string runtime)
     { _process = process; _startTicks = process.StartTime.ToUniversalTime().Ticks; ExpectedProcessPath = path; RuntimeRoot = runtime; }
 
-    public static async Task<PixelTartProcessHost> StartAsync(string repository, CancellationToken token)
+    public static async Task<PixelTartProcessHost> StartAsync(string repository, CancellationToken token, bool homeValidation = false, Func<string, Task>? prepareRuntime = null, string? existingRuntime = null)
     {
         var root = Path.GetFullPath(repository);
         if (!File.Exists(Path.Combine(root, "RAWSelectionAssistant.sln"))) throw new DirectoryNotFoundException("Pixel Tart repository required.");
         var exe = Path.Combine(root, "src", "RAWSelectionAssistant", "bin", "x64", "Release", "net10.0-windows10.0.19041.0", "win-x64", "KitaoPhotoSelector.exe");
         if (!File.Exists(exe) || !File.Exists(Path.ChangeExtension(exe, ".dll"))) throw new FileNotFoundException("Build Production Release x64 first.", exe);
-        var runtime = Path.Combine(root, "artifacts", "native-harness", Guid.NewGuid().ToString("N"));
+        var runtimeBase = Path.GetFullPath(Path.Combine(root, "artifacts", homeValidation ? "runtime-validation/2026-09-30-home/runtime" : "native-harness"));
+        var runtime = existingRuntime is null ? Path.Combine(runtimeBase, Guid.NewGuid().ToString("N")) : Path.GetFullPath(existingRuntime);
+        if (!runtime.StartsWith(runtimeBase + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException("Only an isolated acceptance runtime can be reopened.");
         Directory.CreateDirectory(runtime);
+        if (prepareRuntime is not null) await prepareRuntime(runtime);
         var start = new ProcessStartInfo(exe) { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe)! };
-        start.ArgumentList.Add("--acceptance-color-studio"); start.ArgumentList.Add("--studio-scenario=01"); start.ArgumentList.Add("--native-evidence-observer");
+        if (!homeValidation)
+        {
+            start.ArgumentList.Add("--acceptance-color-studio"); start.ArgumentList.Add("--studio-scenario=01"); start.ArgumentList.Add("--native-evidence-observer");
+        }
         start.Environment["PIXEL_TART_ISOLATED_RUNTIME"] = "1"; start.Environment["PIXEL_TART_ISOLATED_RUNTIME_ROOT"] = runtime;
         var host = new PixelTartProcessHost(Process.Start(start) ?? throw new InvalidOperationException("Production process did not start."), exe, runtime);
         try
@@ -38,7 +45,15 @@ internal sealed class PixelTartProcessHost : IDisposable
         }
         catch { host.Dispose(); throw; }
     }
-    public TargetIdentity Validate(ScreenPoint? point = null)
+    public async Task CloseAsync()
+    {
+        Validate(captureOnly: true);
+        if (!_process.CloseMainWindow()) throw new InvalidOperationException("Production main window rejected close.");
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+        await _process.WaitForExitAsync(timeout.Token);
+        if (_process.ExitCode != 0) throw new InvalidOperationException($"Production shutdown exit code: {_process.ExitCode}");
+    }
+    public TargetIdentity Validate(ScreenPoint? point = null, bool captureOnly = false)
     {
         _process.Refresh();
         Win32.GetWindowThreadProcessId(Hwnd, out var windowPid);
@@ -46,7 +61,8 @@ internal sealed class PixelTartProcessHost : IDisposable
         var snapshot = new TargetIdentity(Pid, Hwnd.ToInt64(), ExpectedProcessPath, _process.MainModule?.FileName ?? "",
             checked((int)windowPid), _process.StartTime.ToUniversalTime().Ticks, _startTicks, !_process.HasExited && Win32.IsWindow(Hwnd),
             Win32.GetForegroundWindow() == Hwnd, Win32.GetDpiForWindow(Hwnd), bounds.Bounds);
-        TargetGuard.Validate(snapshot, point);
+        if (captureOnly && point is null) TargetGuard.ValidateOwnership(snapshot);
+        else TargetGuard.Validate(snapshot, point);
         if (point is { } p)
         {
             var hit = Win32.WindowFromPoint(new(p.X, p.Y));

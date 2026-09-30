@@ -40,7 +40,13 @@ internal static class TargetGuard
 {
     public static void Validate(TargetIdentity target, ScreenPoint? point = null)
     {
-        if (!target.Alive || !target.Foreground || target.TargetPid <= 0 || target.TargetHwnd == 0 || target.WindowPid != target.TargetPid ||
+        ValidateOwnership(target, point);
+        if (!target.Foreground) throw new InvalidOperationException("Input requires the owned Pixel Tart window in foreground.");
+    }
+
+    public static void ValidateOwnership(TargetIdentity target, ScreenPoint? point = null)
+    {
+        if (!target.Alive || target.TargetPid <= 0 || target.TargetHwnd == 0 || target.WindowPid != target.TargetPid ||
             target.ProcessStartTicks != target.ExpectedStartTicks || target.Dpi == 0 || !target.Bounds.Valid ||
             !Path.GetFileName(target.ExpectedProcessPath).Equals("KitaoPhotoSelector.exe", StringComparison.OrdinalIgnoreCase) ||
             !Path.GetFullPath(target.ExpectedProcessPath).Equals(Path.GetFullPath(target.ActualProcessPath), StringComparison.OrdinalIgnoreCase) ||

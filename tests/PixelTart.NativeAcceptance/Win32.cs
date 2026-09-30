@@ -4,6 +4,9 @@ namespace PixelTart.NativeAcceptance;
 
 internal static class Win32
 {
+    internal delegate bool EnumWindowCallback(nint hwnd, nint parameter);
+    [DllImport("user32.dll")] internal static extern bool EnumWindows(EnumWindowCallback callback, nint parameter);
+    [DllImport("user32.dll")] internal static extern bool IsWindowVisible(nint hwnd);
     [StructLayout(LayoutKind.Sequential)] internal readonly record struct POINT(int X, int Y);
     [StructLayout(LayoutKind.Sequential)] internal struct RECT { internal int Left, Top, Right, Bottom; internal readonly ScreenBounds Bounds => new(Left, Top, Right - Left, Bottom - Top); }
     [StructLayout(LayoutKind.Explicit, Size = 40)] internal struct INPUT
@@ -16,6 +19,12 @@ internal static class Win32
     [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool IsWindow(nint hwnd);
     [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool GetWindowRect(nint hwnd, out RECT bounds);
     [DllImport("user32.dll")] internal static extern nint GetForegroundWindow();
+    [DllImport("user32.dll")] internal static extern bool SetForegroundWindow(nint hwnd);
+    [DllImport("user32.dll")] internal static extern bool ShowWindow(nint hwnd, int command);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)] internal static extern nint SendMessageTimeout(nint hwnd, uint message, nint wParam, string text, uint flags, uint timeout, out nint result);
+    [DllImport("user32.dll", EntryPoint = "SendMessageTimeoutW", SetLastError = true)] internal static extern nint SendMessageValue(nint hwnd, uint message, nint wParam, nint lParam, uint flags, uint timeout, out nint result);
+    [DllImport("user32.dll")] internal static extern bool SetWindowPos(nint hwnd, nint after, int x, int y, int width, int height, uint flags);
+    [DllImport("user32.dll")] internal static extern bool ScreenToClient(nint hwnd, ref POINT point);
     [DllImport("user32.dll")] internal static extern nint WindowFromPoint(POINT point);
     [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] internal static extern bool GetCursorPos(out POINT point);
     [DllImport("user32.dll")] internal static extern nint GetAncestor(nint hwnd, uint flags);

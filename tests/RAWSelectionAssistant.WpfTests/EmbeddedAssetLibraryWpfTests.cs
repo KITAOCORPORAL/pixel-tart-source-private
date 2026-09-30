@@ -23,6 +23,42 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public Task SmartFolderDraftGuardCancelsDiscardsAndSavesBeforePopupTransition() => RunSta(() =>
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-DraftGuard", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var page = new AssetLibraryPage(Path.Combine(root, "assets.db"), new TaskOperationBridge(), []);
+        try
+        {
+            var vm = page.ViewModel;
+            vm.InitializeAsync().CompleteOnDispatcher();
+            vm.NewP3SmartFolderCommand.Execute(null);
+            Assert.IsFalse(vm.HasUnsavedSmartFolderChanges);
+            vm.P3SmartFolderName = "kept draft";
+            vm.OpenFilterPanel();
+            Assert.IsTrue(vm.SmartFolderUnsavedGuardOpen);
+            Assert.IsFalse(vm.P3QueryPanelOpen);
+            vm.KeepEditingSmartFolderCommand.Execute(null);
+            Assert.IsTrue(vm.P3SmartFolderOpen);
+            Assert.AreEqual("kept draft", vm.P3SmartFolderName);
+            vm.OpenFilterPanel();
+            vm.DiscardSmartFolderChangesCommand.Execute(null);
+            Assert.IsTrue(vm.P3QueryPanelOpen);
+            Assert.IsFalse(vm.P3SmartFolderOpen);
+            Assert.HasCount(0, vm.SmartFolders);
+            vm.NewP3SmartFolderCommand.Execute(null);
+            vm.P3SmartFolderName = "saved draft";
+            vm.OpenFilterPanel();
+            vm.SaveSmartFolderChangesAndContinueCommand.Execute(null);
+            vm.SaveSmartFolderChangesAndContinueCommand.ExecutionTask.CompleteOnDispatcher();
+            Assert.IsTrue(vm.P3QueryPanelOpen);
+            Assert.IsFalse(vm.P3SmartFolderOpen);
+            Assert.AreEqual("saved draft", vm.SmartFolders.Single().Name);
+        }
+        finally { page.DisposeAsync().AsTask().CompleteOnDispatcher(); }
+    });
+
+    [TestMethod]
     public async Task ToolbarPopupsSeparateRatingColorAndToggleMutually()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-HomePopup", Guid.NewGuid().ToString("N"));
@@ -33,6 +69,11 @@ public sealed class EmbeddedAssetLibraryWpfTests
             page.ViewModel.InitializeAsync().CompleteOnDispatcher();
             using var source = AttachToPresentationSource(page, 1920, 1080);
             ArrangePage(page, 1920, 1080);
+            var thumbnail = FindVisualByAutomationId<Slider>(page, "AssetThumbnailSizeSlider");
+            var thumbnailPeer = new System.Windows.Automation.Peers.SliderAutomationPeer(thumbnail);
+            var range = (System.Windows.Automation.Provider.IRangeValueProvider)thumbnailPeer.GetPattern(System.Windows.Automation.Peers.PatternInterface.RangeValue);
+            range.SetValue(range.Maximum);
+            Assert.AreEqual(page.ViewModel.ThumbnailMaximumWidth, page.ViewModel.ThumbnailWidth, .01);
             void Click(string id) => FindVisualByAutomationId<Button>(page, id).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Click("AssetLibraryRatingFilter");
             Assert.AreEqual("Rating", page.ActiveToolbarPopup);

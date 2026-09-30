@@ -511,13 +511,23 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         get => _thumbnailWidth;
         set
         {
-            var normalized = Math.Clamp(value, 120, 280);
+            var normalized = Math.Clamp(double.IsFinite(value) ? value : 180, 120, ThumbnailMaximumWidth);
             if (!SetProperty(ref _thumbnailWidth, normalized)) return;
             _workspaceSettings.ThumbnailWidth = normalized;
             OnPropertyChanged(nameof(ThumbnailItemWidth));
             OnPropertyChanged(nameof(ThumbnailItemHeight));
             OnPropertyChanged(nameof(ThumbnailCardHeight));
         }
+    }
+    private double _thumbnailMaximumWidth = 4096;
+    public double ThumbnailMaximumWidth => _thumbnailMaximumWidth;
+    public void UpdateThumbnailViewport(double width)
+    {
+        if (!double.IsFinite(width) || width <= 0) return;
+        var followMaximum = Math.Abs(ThumbnailWidth - ThumbnailMaximumWidth) < 1;
+        _thumbnailMaximumWidth = Math.Max(120, Math.Min(4096, width - 24));
+        OnPropertyChanged(nameof(ThumbnailMaximumWidth));
+        ThumbnailWidth = followMaximum ? ThumbnailMaximumWidth : Math.Min(ThumbnailWidth, ThumbnailMaximumWidth);
     }
     public double ThumbnailItemWidth => ThumbnailWidth + 8d;
     public double ThumbnailItemHeight => ThumbnailWidth + 44d;

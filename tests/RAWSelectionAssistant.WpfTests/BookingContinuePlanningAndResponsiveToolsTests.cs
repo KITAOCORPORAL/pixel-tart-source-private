@@ -11,6 +11,14 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BookingContinuePlanningAndResponsiveToolsTests
 {
     [TestMethod]
+    public async Task NewBookingLateAtNightKeepsEndDateAfterStart()
+    {
+        var editor = new ShootBookingEditorViewModel(new SuccessfulBookingService(), new EmptyProjectRepository(), suggestedStart: new DateTime(2026, 9, 30, 23, 0, 0));
+        await editor.InitializeAsync();
+        Assert.AreEqual(new DateTime(2026, 10, 1), editor.EndDate);
+        Assert.AreEqual("00:00", editor.EndTimeText);
+    }
+    [TestMethod]
     public async Task QuickCreate_ContinuePlanningAwaitsReplacementAndKeepsOneBookingId()
     {
         using var setup = await BookingSetup.CreateAsync();
@@ -76,6 +84,7 @@ public sealed class BookingContinuePlanningAndResponsiveToolsTests
             setup.Projects,
             availabilityStore: new InMemoryAvailabilityStore());
         await calendar.InitializeAsync();
+        calendar.SelectedDate = new DateTime(2026, 9, 8);
         var requests = new List<BookingEditorRequestEventArgs>();
         var fullPlanningReady = new TaskCompletionSource<BookingEditorRequestEventArgs>(TaskCreationOptions.RunContinuationsAsynchronously);
         calendar.EditorRequested += (_, request) =>
@@ -142,6 +151,7 @@ public sealed class BookingContinuePlanningAndResponsiveToolsTests
         try
         {
             command.Execute(null);
+            Assert.IsTrue(sawBusy, editor.ValidationText);
             await completion.Task.WaitAsync(TimeSpan.FromSeconds(5));
         }
         finally { editor.PropertyChanged -= handler; }

@@ -6,6 +6,41 @@ namespace PixelTart.Modules.AssetLibrary;
 
 public sealed partial class AssetLibraryViewModel
 {
+    private string _smartFolderSavedState = "";
+    private Action? _afterSmartFolderClose;
+    private bool _smartFolderUnsavedGuardOpen;
+    public bool SmartFolderUnsavedGuardOpen { get => _smartFolderUnsavedGuardOpen; private set => SetProperty(ref _smartFolderUnsavedGuardOpen, value); }
+    private string SmartFolderEditState() => System.Text.Json.JsonSerializer.Serialize(new
+    {
+        P3SmartFolderName, P3SmartFolderDescription, Root = P3SmartFolderRoot.ToModel(),
+        P3SmartFolderSortField, P3SmartFolderSortDirection, P3SmartFolderIncludeArchived
+    });
+    public bool HasUnsavedSmartFolderChanges => P3SmartFolderOpen && !P3SmartFolderLoading && _smartFolderSavedState != SmartFolderEditState();
+    public AssetCommand DiscardSmartFolderChangesCommand { get; private set; } = null!;
+    public AssetCommand KeepEditingSmartFolderCommand { get; private set; } = null!;
+    public AsyncCommand SaveSmartFolderChangesAndContinueCommand { get; private set; } = null!;
+
+    public bool RequestSmartFolderClose(Action? afterClose = null)
+    {
+        if (HasUnsavedSmartFolderChanges)
+        {
+            _afterSmartFolderClose = afterClose;
+            SmartFolderUnsavedGuardOpen = true;
+            return false;
+        }
+        CloseP3SmartFolderEditorCore();
+        afterClose?.Invoke();
+        return true;
+    }
+
+    private void CompleteSmartFolderClose()
+    {
+        var next = _afterSmartFolderClose;
+        _afterSmartFolderClose = null;
+        SmartFolderUnsavedGuardOpen = false;
+        CloseP3SmartFolderEditorCore();
+        next?.Invoke();
+    }
     private CancellationTokenSource? _p3SmartFolderLoadCancellation;
     private CancellationTokenSource? _p3SmartFolderPreviewCancellation;
     private long _p3SmartFolderLoadGeneration;
@@ -148,6 +183,15 @@ public sealed partial class AssetLibraryViewModel
 
     private void InitializeP3SmartFolderEditor()
     {
+        DiscardSmartFolderChangesCommand = new(CompleteSmartFolderClose);
+        KeepEditingSmartFolderCommand = new(() => { SmartFolderUnsavedGuardOpen = false; _afterSmartFolderClose = null; });
+        SaveSmartFolderChangesAndContinueCommand = new(async () =>
+        {
+            if (!SaveP3SmartFolderCommand.CanExecute(null)) return;
+            SaveP3SmartFolderCommand.Execute(null);
+            await SaveP3SmartFolderCommand.ExecutionTask;
+            if (!HasUnsavedSmartFolderChanges) CompleteSmartFolderClose();
+        });
         P3SmartFolderRoot = P3QueryNodeView.CreateRoot(OnP3SmartFolderTreeChanged, "SmartFolder");
         NewP3SmartFolderCommand = new(() => { if (!P3ShutdownStarted) OpenP3SmartFolderEditor(null); });
         SaveP3SmartFolderCommand = new(() => RunTrackedP3OperationAsync(SaveP3SmartFolderAsync),
@@ -164,6 +208,7 @@ public sealed partial class AssetLibraryViewModel
     internal void OpenP3SmartFolderEditor(SmartFolder? folder)
     {
         if (P3ShutdownStarted) return;
+        if (HasUnsavedSmartFolderChanges) { RequestSmartFolderClose(() => OpenP3SmartFolderEditor(folder)); return; }
         ClosePrimaryAuxiliarySurfacesExceptSmartFolder();
         CancelP3SmartFolderWork();
         P3SmartFolderOpen = true;
@@ -189,6 +234,7 @@ public sealed partial class AssetLibraryViewModel
         if (folder is null)
         {
             ReplaceP3SmartFolderRoot(AssetQueryNode.Group(AssetQueryLogic.All));
+            _smartFolderSavedState = SmartFolderEditState();
             ValidateAndScheduleP3SmartFolderPreview();
             return;
         }
@@ -218,6 +264,7 @@ public sealed partial class AssetLibraryViewModel
             }
             SetP3SmartFolderDocument(saved.Document);
             ReplaceP3SmartFolderRoot(saved.Document.RootGroup);
+            _smartFolderSavedState = SmartFolderEditState();
             P3SmartFolderValidationMessage = string.Empty;
             P3SmartFolderIsValid = true;
             ValidateAndScheduleP3SmartFolderPreview();
@@ -376,6 +423,7 @@ public sealed partial class AssetLibraryViewModel
     private async Task SaveP3SmartFolderAsync()
     {
         if (!ValidateP3SmartFolderDocument(out var document)) return;
+        var savedEditState = SmartFolderEditState();
         var repositorySaveCompleted = false;
         try
         {
@@ -395,6 +443,7 @@ public sealed partial class AssetLibraryViewModel
             _p3SmartFolderSnapshot = saved;
             _p3SmartFolderDocument = document;
             await RefreshFilterListsAsync(_lifetimeCancellation.Token);
+            _smartFolderSavedState = savedEditState;
             Status = $"已保存智能文件夹：{saved.Name}";
             P3SmartFolderValidationMessage = string.Empty;
             OnPropertyChanged(nameof(P3SmartFolderIsEditing));
@@ -465,6 +514,12 @@ public sealed partial class AssetLibraryViewModel
 
     private void CloseP3SmartFolderEditor()
     {
+        RequestSmartFolderClose();
+    }
+
+    private void CloseP3SmartFolderEditorCore()
+    {
+        SmartFolderUnsavedGuardOpen = false;
         P3SmartFolderOpen = false;
         CancelP3SmartFolderWork();
         P3SmartFolderPreviewItems.Clear();
