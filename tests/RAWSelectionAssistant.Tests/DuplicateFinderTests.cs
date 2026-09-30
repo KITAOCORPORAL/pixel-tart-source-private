@@ -124,6 +124,7 @@ public sealed class DuplicateReferenceProtectionTests
         public Task InitializeAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
         public Task<AssetLibraryMetadataIndexResult> ImportAsync(IEnumerable<AssetImportRequest> requests, CancellationToken cancellationToken = default, IProgress<int>? progress = null) => throw new NotSupportedException();
         public Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+        public Task<AssetDimensionBackfillResult> BackfillMissingDimensionsAsync(CancellationToken cancellationToken = default, IProgress<int>? progress = null) => throw new NotSupportedException();
         public Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<IReadOnlyList<AssetQueryValidationIssue>> ValidateQueryReferencesAsync(AssetQueryDocument document, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<IReadOnlyList<AssetQuerySuggestion>> GetQuerySuggestionsAsync(string text, int limit = 20, CancellationToken cancellationToken = default) => throw new NotSupportedException();

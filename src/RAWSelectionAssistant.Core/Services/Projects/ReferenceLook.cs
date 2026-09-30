@@ -62,6 +62,7 @@ public sealed class ReferenceLookTransform
     /// <remarks>The values are sRGB-encoded floats in the canonical processing buffer. This overload never constructs a VisualRgb24, so professional RAW processing does not quantize through an 8-bit display adapter.</remarks>
     public (float R, float G, float B) ApplyFloat(float r, float g, float b)
     {
+        if (_parameters.MatchStrength == 0) return (r, g, b);
         var transformed = OklabColorSpace.ToSrgbLinear(ApplyCore(OklabColorSpace.FromSrgb(r, g, b)));
         return ((float)transformed.R, (float)transformed.G, (float)transformed.B);
     }

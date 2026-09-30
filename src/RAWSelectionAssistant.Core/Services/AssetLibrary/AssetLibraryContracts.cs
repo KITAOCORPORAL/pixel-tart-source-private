@@ -25,6 +25,9 @@ public sealed record AssetLibraryStableReference
     public string ContentHash { get; }
 }
 
+public sealed record AssetDimensionBackfillResult(int Scanned, int Updated, int Skipped, int Failed, bool Cancelled,
+    IReadOnlyList<string> Warnings);
+
 public interface IAssetLibraryRepository : IAsyncDisposable
 {
     string DatabasePath { get; }
@@ -36,6 +39,7 @@ public interface IAssetLibraryRepository : IAsyncDisposable
         IProgress<int>? progress = null);
 
     Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default);
+    Task<AssetDimensionBackfillResult> BackfillMissingDimensionsAsync(CancellationToken cancellationToken = default, IProgress<int>? progress = null);
     Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetQueryValidationIssue>> ValidateQueryReferencesAsync(AssetQueryDocument document, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetQuerySuggestion>> GetQuerySuggestionsAsync(string text, int limit = 20, CancellationToken cancellationToken = default);

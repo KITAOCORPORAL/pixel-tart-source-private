@@ -93,6 +93,8 @@ public static class MatchV4PixelApplication
     public static void Apply(Span<float> values, MatchV4ResolvedTransform transform, CancellationToken token = default)
     {
         transform = transform.Normalize();
+        token.ThrowIfCancellationRequested();
+        if (transform.Strength == 0) return;
         var settings = transform.Settings;
         for (var index = 0; index < values.Length / 3; index++)
         {

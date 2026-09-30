@@ -43,6 +43,8 @@ public sealed class ColorStudioRenderPipeline
                 HighlightProtection = Parameter(node, "highlight_protection", reference.Parameters.HighlightProtection),
                 NeutralProtection = Parameter(node, "neutral_protection", reference.Parameters.NeutralProtection)
             };
+            if (p.MatchStrength == 0)
+                return source.Clone();
             var transform = _matcher.BuildTransform(source, analysis, reference with { Parameters = p });
             for (var i = 0; i < values.Length; i += 3)
             {

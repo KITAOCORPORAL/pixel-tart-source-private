@@ -12,6 +12,16 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ReferenceMatchV4Tests
 {
     [TestMethod]
+    public void MatchV4_StrengthZero_PreservesFloatSamplesExactly()
+    {
+        var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 16);
+        var transform = new MatchV4ResolvedTransform(new(0.2, 0.01, -0.02), [new(0.1, 0, 0), new(0, 0, 0), new(-0.1, 0, 0)], settings, "identity", Strength: 0).Normalize();
+        var values = new[] { 0.1234567f, 0.654321f, 0.9876543f };
+        var expected = values.ToArray();
+        MatchV4PixelApplication.Apply(values, transform);
+        CollectionAssert.AreEqual(expected, values);
+    }
+    [TestMethod]
     public void TransformContractIsStableAndSettingsSensitive()
     {
         var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 64, SinkhornIterations: 8);

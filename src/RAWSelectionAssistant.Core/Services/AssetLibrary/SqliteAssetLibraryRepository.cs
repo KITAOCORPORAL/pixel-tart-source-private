@@ -163,6 +163,44 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         return await reader.ReadAsync(cancellationToken).ConfigureAwait(false) ? ReadAsset(reader) : null;
     }
 
+    public async Task<AssetDimensionBackfillResult> BackfillMissingDimensionsAsync(CancellationToken cancellationToken = default, IProgress<int>? progress = null)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        var warnings = new List<string>();
+        var candidates = new List<(Guid Id, string Path)>();
+        await using (var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+        await using (var command = connection.CreateCommand())
+        {
+            command.CommandText = "SELECT AssetId,SourcePath FROM AssetItems WHERE (Width IS NULL OR Width<=0 OR Height IS NULL OR Height<=0) AND IsArchived=0;";
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+            while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) candidates.Add((Guid.Parse(reader.GetString(0)), reader.GetString(1)));
+        }
+
+        var updated = 0; var skipped = 0; var failed = 0;
+        for (var index = 0; index < candidates.Count; index++)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var (id, sourcePath) = candidates[index];
+                if (!File.Exists(sourcePath)) { skipped++; warnings.Add($"Missing source: {Path.GetFileName(sourcePath)}"); progress?.Report(index + 1); continue; }
+                var metadata = new RAWSelectionAssistant.Core.Services.JpegMetadataService().Read(sourcePath);
+                if (metadata.PixelWidth is not > 0 || metadata.PixelHeight is not > 0) { failed++; warnings.Add($"Dimensions unavailable: {Path.GetFileName(sourcePath)}"); progress?.Report(index + 1); continue; }
+                await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+                await using var update = connection.CreateCommand();
+                update.CommandText = "UPDATE AssetItems SET Width=$width,Height=$height,ModifiedAt=$modified WHERE AssetId=$id AND (Width IS NULL OR Width<=0 OR Height IS NULL OR Height<=0);";
+                update.Parameters.AddWithValue("$width", metadata.PixelWidth.Value); update.Parameters.AddWithValue("$height", metadata.PixelHeight.Value);
+                update.Parameters.AddWithValue("$modified", DateTimeOffset.UtcNow.ToString("O")); update.Parameters.AddWithValue("$id", id.ToString("D"));
+                updated += await update.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException) { return new(candidates.Count, updated, skipped, failed, true, warnings); }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+            { failed++; warnings.Add($"{Path.GetFileName(candidates[index].Path)}: {ex.Message}"); }
+            finally { progress?.Report(index + 1); }
+        }
+        return new(candidates.Count, updated, skipped, failed, false, warnings);
+    }
+
     public async Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default)
     {
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
