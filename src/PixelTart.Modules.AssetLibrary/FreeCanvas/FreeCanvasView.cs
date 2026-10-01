@@ -22,7 +22,7 @@ public sealed class FreeCanvasView : UserControl
     private readonly ListBox _sources = new() { SelectionMode=SelectionMode.Extended };
     private readonly ComboBox _sourceKind = new() { ItemsSource=new[] { "素材库","灵感板","临时收集","当前项目","最近使用" },SelectedIndex=0,Margin=new(0,6,0,6) };
     private readonly TextBox _sourceSearch = new() { ToolTip="搜索素材",Margin=new(0,4,0,6) };
-    private readonly TextBlock _zoom = new() { VerticalAlignment=VerticalAlignment.Center,Margin=new(6,0,6,0) };
+    private readonly Button _zoomButton = new() { Padding=new(8,5,8,5),Margin=new(2) };
     private readonly TextBox _name = new() { Width=160,Margin=new(8,2,8,2) };
     private Point? _sourceDrag;
     public FreeCanvasView(CanvasEditor editor, IAssetPreviewProvider provider, CanvasDocumentStore store)
@@ -41,15 +41,20 @@ public sealed class FreeCanvasView : UserControl
         var root=new DockPanel();Content=root;
         var bar=new WrapPanel { Margin=new(8,6,8,6) };DockPanel.SetDock(bar,Dock.Top);root.Children.Add(bar);
         _name.Text=editor.Document.Name;_name.LostKeyboardFocus+=(_,_)=>editor.Rename(_name.Text);bar.Children.Add(_name);
-        foreach(var tool in new[]{"选择","移动画布","文本"})bar.Children.Add(Button(tool,()=>{Surface.Tool=tool;Surface.Focus();}));
-        bar.Children.Add(Button("素材",()=>{_drawer.Visibility=_drawer.IsVisible?Visibility.Collapsed:Visibility.Visible;if(_drawer.IsVisible)_=RefreshSourcesAsync();}));
-        bar.Children.Add(Button("撤销",editor.Undo));bar.Children.Add(Button("重做",editor.Redo));
-        bar.Children.Add(Button("适合全部",()=>Surface.Fit()));bar.Children.Add(Button("100%",Surface.ActualSize));bar.Children.Add(Button("聚焦选择",()=>Surface.Fit(true)));bar.Children.Add(_zoom);
+        var toolsGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; toolsGroup.Children.Add(GroupLabel("TOOLS"));
+        foreach(var tool in new[]{"选择","移动画布","文本"})toolsGroup.Children.Add(Button(tool,()=>{Surface.Tool=tool;Surface.Focus();}));
+        toolsGroup.Children.Add(Button("素材",()=>{_drawer.Visibility=_drawer.IsVisible?Visibility.Collapsed:Visibility.Visible;if(_drawer.IsVisible)_=RefreshSourcesAsync();})); bar.Children.Add(toolsGroup);
+        var editGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; editGroup.Children.Add(GroupLabel("EDIT")); editGroup.Children.Add(Button("撤销",editor.Undo)); editGroup.Children.Add(Button("重做",editor.Redo)); bar.Children.Add(editGroup);
+        var viewGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; viewGroup.Children.Add(GroupLabel("VIEW")); viewGroup.Children.Add(Button("适合",()=>Surface.Fit()));
+        _zoomButton.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");
+        _zoomButton.Click += (_,_) => OpenZoomMenu();
+        viewGroup.Children.Add(_zoomButton); bar.Children.Add(viewGroup);
         void Arrange(string mode){var all=editor.Selected.Count==0;if(all)editor.SelectAll();editor.Arrange(mode);if(all)editor.Select(null);Surface.Fit();}
-        bar.Children.Add(MenuButton("自动整理",new[]{("横向排列",(Action)(()=>Arrange("horizontal"))),("网格排列",()=>Arrange("grid")),("紧凑排列",()=>Arrange("compact"))}));
+        var canvasGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; canvasGroup.Children.Add(GroupLabel("CANVAS")); canvasGroup.Children.Add(MenuButton("自动整理",new[]{("横向排列",(Action)(()=>Arrange("horizontal"))),("网格排列",()=>Arrange("grid")),("紧凑排列",()=>Arrange("compact"))}));
         bar.Children.Add(Button("整个画布存为灵感板",()=>_=SaveBoardAsync(false)));
-        bar.Children.Add(Button("打开画布",()=>_=OpenSavedAsync()));
-        bar.Children.Add(Button("关闭画布",()=>_=CloseAsync()));
+        canvasGroup.Children.Add(Button("更多",OpenMoreMenu)); bar.Children.Add(canvasGroup);
+        var projectGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; projectGroup.Children.Add(GroupLabel("PROJECT")); bar.Children.Add(projectGroup);
+        TextBlock GroupLabel(string label) => new() { Text=label, FontSize=10, FontWeight=FontWeights.SemiBold, VerticalAlignment=VerticalAlignment.Center, Margin=new(2,0,4,0) };
         DockPanel.SetDock(_status,Dock.Bottom);root.Children.Add(_status);
         _drawer.SetResourceReference(BackgroundProperty,"Brush.Panel");DockPanel.SetDock(_drawer,Dock.Left);root.Children.Add(_drawer);
         var drawerPanel=new DockPanel();_drawer.Child=drawerPanel;
@@ -98,6 +103,20 @@ public sealed class FreeCanvasView : UserControl
         finally{_saveGate.Release();}
     }
     public async Task CloseAsync() { if(!await FlushAsync()){MessageBox.Show(Window.GetWindow(this),"画布保存失败，请检查存储位置后重试。画布将保持打开。","无法关闭画布",MessageBoxButton.OK,MessageBoxImage.Warning);return;}if(CloseRequested is not null)await CloseRequested(); }
+    private void OpenZoomMenu()
+    {
+        var menu=new ContextMenu { PlacementTarget=_zoomButton };
+        void Add(string header, Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
+        Add("适合",()=>Surface.Fit()); foreach(var zoom in new[]{.5,.75,1d,1.25,1.5,2d}){var value=zoom;Add($"{value:P0}",()=>Surface.SetZoom(value));} menu.IsOpen=true;
+    }
+    private void OpenMoreMenu()
+    {
+        var anchor=_zoomButton; var menu=new ContextMenu{PlacementTarget=anchor};
+        void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
+        void Arrange(string mode){var all=Editor.Selected.Count==0;if(all)Editor.SelectAll();Editor.Arrange(mode);if(all)Editor.Select(null);Surface.Fit();}
+        Add("自动整理 · 横向",()=>Arrange("horizontal")); Add("自动整理 · 网格",()=>Arrange("grid")); Add("自动整理 · 紧凑",()=>Arrange("compact")); menu.Items.Add(new Separator());
+        Add("保存到灵感板",()=>_=SaveBoardAsync(false)); Add("打开画布",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync()); menu.IsOpen=true;
+    }
     private async Task OpenSavedAsync()
     {
         if(!await FlushAsync())return;
@@ -118,7 +137,7 @@ public sealed class FreeCanvasView : UserControl
     }
     private void UpdateTools()
     {
-        _zoom.Text=$"{Surface.Zoom:P0}";_floating.Children.Clear();_floatingBorder.Visibility=Editor.Selected.Count==0?Visibility.Collapsed:Visibility.Visible;
+        _zoomButton.Content=$"{Surface.Zoom:P0} ▼";_floating.Children.Clear();_floatingBorder.Visibility=Editor.Selected.Count==0?Visibility.Collapsed:Visibility.Visible;
         if(Editor.Selected.Count==0)return;
         var bounds=Editor.Bounds();var top=Surface.WorldToScreen(new(bounds.X,bounds.Y));_floatingBorder.Margin=new(Math.Clamp(top.X,8,Math.Max(8,Surface.ActualWidth-580)),Math.Clamp(top.Y-48,8,Math.Max(8,Surface.ActualHeight-44)),0,0);
         if(Surface.CropMode)

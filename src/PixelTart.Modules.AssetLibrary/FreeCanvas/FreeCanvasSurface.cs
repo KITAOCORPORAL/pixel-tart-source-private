@@ -208,6 +208,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var b=Editor.Bounds(selection);_zoom=Math.Clamp(Math.Min(Math.Max(100,ActualWidth-140)/b.Width,Math.Max(100,ActualHeight-140)/b.Height),.03,2);_pan=new((ActualWidth-b.Width*_zoom)/2-b.X*_zoom,(ActualHeight-b.Height*_zoom)/2-b.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();
     }
     public void ActualSize() { _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync(); }
+    public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); _=LoadPreviewsAsync(); }
     public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||!Editor.Selected[0].IsImage)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     public void FinishCrop(bool apply) { if(!CropMode)return;if(apply)Editor.Crop(PendingCrop);CropMode=false;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     protected override void OnKeyUp(KeyEventArgs e) { base.OnKeyUp(e);if(e.Key==Key.Space)_space=false; }
