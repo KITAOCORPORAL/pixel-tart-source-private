@@ -1,7 +1,7 @@
 # Pixel Tart Round 3 Final User Retest
 
 Release EXE: `artifacts/releases/round3-final/publish/win-x64/KitaoPhotoSelector.exe`
-SourceHead: `978b31d30bc9af3aaf22ac7e3f812451767299bf`
+SourceHead: `a4ade0f23d3705040428380a58e77c92b7985dd4`
 
 Release x64 user visual approval checklist. Please open the Release EXE and mark each item yourself after checking the stated workflow. `VisualApproved=false` and `UserVerified=false` until you do so.
 
@@ -18,3 +18,4 @@ Release x64 user visual approval checklist. Please open the Release EXE and mark
 The Release EXE is the only approval surface. Keep `VisualApproved=false` and `UserVerified=false` until you personally finish the retest.
 
 Known automated limitations to retest: preview/export parity is proven on the documented deterministic fixture, not every source/profile; physical camera tethering is `WAITING_FOR_HARDWARE`; GPU remains `DEFERRED`.
+
