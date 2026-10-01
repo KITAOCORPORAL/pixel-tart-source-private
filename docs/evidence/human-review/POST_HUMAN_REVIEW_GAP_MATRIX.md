@@ -1,8 +1,8 @@
 # Pixel Tart Human Review Gap Matrix — Round 3
 
 Source branch: `integration/pixel-tart-developer-preview`
-Source head audited: `fb8bda8c5af335de390369bb3ec371a327b439fc`
-Working tree source changes are uncommitted at audit time; visual evidence is therefore labeled current-run evidence, not pristine HEAD evidence. `VisualApproved=false` and `UserVerified=false` remain until a photographer completes the retest.
+Source head audited: `b71d74d4731f9b49bbe0ff93d70a564387cd0ae6`
+The audited changes are committed at the source head. Visual evidence is current-run evidence generated from that head. `VisualApproved=false` and `UserVerified=false` remain until a photographer completes the retest.
 
 Status values are limited to `CLOSED_IN_CODE`, `NEEDS_RUNTIME_VERIFY`, `PARTIAL`, `NOT_IMPLEMENTED`, `REGRESSION`, and `BLOCKED`.
 
