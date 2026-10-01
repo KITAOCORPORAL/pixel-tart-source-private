@@ -1,7 +1,7 @@
 # Pixel Tart Human Review Gap Matrix — Round 3
 
 Source branch: `integration/pixel-tart-developer-preview`
-Source head audited: `bec2b0f6b91052762af87538f64399de6b946ba9`
+Source head audited: `b3ad8ad1ba73622ea005fa29a2f827043887f5d8`
 The audited changes are committed at the source head. Visual evidence is current-run evidence generated from that head. `VisualApproved=false` and `UserVerified=false` remain until a photographer completes the retest.
 
 Status values are limited to `CLOSED_IN_CODE`, `NEEDS_RUNTIME_VERIFY`, `PARTIAL`, `NOT_IMPLEMENTED`, `REGRESSION`, and `BLOCKED`.
@@ -67,4 +67,5 @@ Status values are limited to `CLOSED_IN_CODE`, `NEEDS_RUNTIME_VERIFY`, `PARTIAL`
 - DPI suite: **91 passed, 0 failed, 0 skipped** in `tests/RAWSelectionAssistant.DpiTests/TestResults/round3-dpi-final.trx`.
 - Current-run DPI evidence validator: **106 captures, 32 DPI states, passed**. This evidence is not a substitute for user visual approval at physical 150% scaling.
 - Preview/export parity fixture evidence: `artifacts/round3-gates/preview-export-parity/README.md`; dedicated proxy/full-resolution corpus parity remains a user/corpus verification item.
+
 

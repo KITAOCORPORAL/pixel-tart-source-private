@@ -1,6 +1,6 @@
 # Preview / Export parity evidence
 
-SourceHead: `bec2b0f6b91052762af87538f64399de6b946ba9`
+SourceHead: `b3ad8ad1ba73622ea005fa29a2f827043887f5d8`
 
 The production V3 preview and export paths use the shared CPU processing services. The WPF parity test compares the rendered preview pixels with the frozen target export pixels. Proxy resizing and output encoding are allowed to change resolution and container bytes; they must not change the processing contract.
 
@@ -13,3 +13,4 @@ The production V3 preview and export paths use the shared CPU processing service
 - No legal RAW corpus was present in this checkout; real RAW parity is `NOT_RUN / CORPUS_NOT_AVAILABLE`.
 
 See `PARITY_MATRIX.json` and `PARITY_SUMMARY.md` for the run-level results.
+
