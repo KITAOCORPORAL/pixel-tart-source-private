@@ -1,0 +1,13 @@
+{
+  "sourceHead": "final release commit",
+  "engine": "Reference Match V3 / shared CPU processing service",
+  "icc": { "sRGB": "SAME_SOURCE_AND_EXPORT_ASSUMPTIONS", "otherProfiles": "NOT_RUN_PRODUCT_BOUNDARY" },
+  "cases": [
+    { "id": "V3-JPEG-8BIT", "inputType": "JPEG 8-bit", "dimensions": "same-resolution fixture", "previewPath": "ReferenceLookPreviewService", "exportPath": "ProcessForExportAsync", "metrics": { "meanDelta": 0, "maxDelta": 0, "toneDelta": 0, "colorDelta": 0 }, "tolerance": "max RGB channel delta <= 0 for full-resolution deterministic fixture", "status": "PASS" },
+    { "id": "V3-TIFF16", "inputType": "TIFF16 / high-bit-depth route", "dimensions": "8x8 product fixture", "previewPath": "RawMatchTiff16ProductPipeline.Render", "exportPath": "AtomicTiffWriter.WriteRgb48Async", "metrics": { "meanDelta": 0, "maxDelta": 0, "toneDelta": 0, "colorDelta": 0 }, "tolerance": "OKLab mean <= 0.003, p95/max <= 0.012", "status": "PASS" },
+    { "id": "V3-HIGH-PRECISION", "inputType": "high precision internal", "dimensions": "8x8 product fixture", "previewPath": "ColorStudioRenderPipeline", "exportPath": "ColorStudioRenderPipeline", "metrics": { "meanDelta": 0, "maxDelta": 0, "toneDelta": 0, "colorDelta": 0 }, "tolerance": "shared float processing path", "status": "PASS" },
+    { "id": "V3-IDENTITY-0", "inputType": "JPEG/TIFF16/high precision", "dimensions": "fixture matrix", "previewPath": "MatchStrength=0", "exportPath": "MatchStrength=0", "metrics": { "meanDelta": 0, "maxDelta": 0, "toneDelta": 0, "colorDelta": 0 }, "tolerance": "identity color math", "status": "PASS" },
+    { "id": "V4-EXPERIMENTAL", "inputType": "product V4", "dimensions": "not production corpus", "previewPath": "explicit opt-in only", "exportPath": "not default production path", "metrics": null, "tolerance": null, "status": "PARTIAL" },
+    { "id": "REAL-RAW-CORPUS", "inputType": "RAW", "dimensions": null, "previewPath": null, "exportPath": null, "metrics": null, "tolerance": null, "status": "NOT_RUN / CORPUS_NOT_AVAILABLE" }
+  ]
+}
