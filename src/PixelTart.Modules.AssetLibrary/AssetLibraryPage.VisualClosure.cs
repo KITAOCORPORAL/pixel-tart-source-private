@@ -23,6 +23,10 @@ public partial class AssetLibraryPage
         try { Clipboard.SetText(value); ShowVisualToast("已复制 " + value); }
         catch (System.Runtime.InteropServices.ExternalException) { ShowVisualToast("剪贴板暂时不可用，请重试。"); }
     }
+    private void CopyInspectorHsl_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { Tag: DominantColor color }) CopyPaletteValue(PaletteClipboardText.Hsl(color));
+    }
     private void ShowVisualToast(string message)
     {
         VisualCopyToast.Text = message; VisualCopyToast.Visibility = Visibility.Visible;

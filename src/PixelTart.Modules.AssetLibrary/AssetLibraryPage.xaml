@@ -931,14 +931,39 @@
                                     <ItemsControl ItemsSource="{Binding Analysis.Palette}">
                                         <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate><DataTemplate>
-                                            <Border Width="40" Height="34" Margin="2" Background="{Binding Hex, Converter={StaticResource HexToBrushConverter}}" AutomationProperties.AutomationId="VisualPaletteSwatch" ToolTip="{Binding Hex}" />
+                                            <StackPanel Width="112" Margin="2" AutomationProperties.AutomationId="VisualPaletteCard">
+                                                <Border Height="42" Background="{Binding Hex, Converter={StaticResource HexToBrushConverter}}" AutomationProperties.AutomationId="VisualPaletteSwatch" ToolTip="{Binding Hex}" />
+                                                <TextBlock Text="{Binding Hex}" FontWeight="SemiBold" Margin="0,3,0,0" />
+                                                <TextBlock Text="{Binding Hue, StringFormat=H: {0:F0}°}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                                <TextBlock Text="{Binding Saturation, StringFormat=S: {0:P0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                                <TextBlock Text="{Binding Lightness, StringFormat=L: {0:P0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                                <TextBlock Text="{Binding Weight, StringFormat=占比：{0:P1}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                                <Button Content="复制 HSL" Tag="{Binding}" Click="CopyInspectorHsl_Click" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,2" />
+                                            </StackPanel>
                                         </DataTemplate></ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                     <Button Content="查找相似配色" Command="{Binding FindPaletteSimilarCommand}" Style="{DynamicResource PixelTart.Button.Secondary}" AutomationProperties.AutomationId="FindSimilarPalette" />
                                 </StackPanel>
                             </TabItem>
                             <TabItem Header="直方图" AutomationProperties.AutomationId="VisualHistogramTab">
-                                <local:HistogramDrawing Height="90" Analysis="{Binding Analysis}" AutomationProperties.AutomationId="VisualHistogramPanel" Margin="0,6" />
+                                <StackPanel Margin="0,6">
+                                    <local:HistogramDrawing Height="90" Analysis="{Binding Analysis}" AutomationProperties.AutomationId="VisualHistogramPanel" />
+                                    <TextBlock Text="Zone Distribution" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,3" />
+                                    <Grid>
+                                        <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                        <TextBlock Text="0"/><ProgressBar Grid.Column="1" Grid.Row="0" Value="{Binding Analysis.ZoneDistribution.Ratios[0], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="I" Grid.Row="1"/><ProgressBar Grid.Column="1" Grid.Row="1" Value="{Binding Analysis.ZoneDistribution.Ratios[1], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="II" Grid.Row="2"/><ProgressBar Grid.Column="1" Grid.Row="2" Value="{Binding Analysis.ZoneDistribution.Ratios[2], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="III" Grid.Row="3"/><ProgressBar Grid.Column="1" Grid.Row="3" Value="{Binding Analysis.ZoneDistribution.Ratios[3], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="IV" Grid.Row="4"/><ProgressBar Grid.Column="1" Grid.Row="4" Value="{Binding Analysis.ZoneDistribution.Ratios[4], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="V" Grid.Row="5"/><ProgressBar Grid.Column="1" Grid.Row="5" Value="{Binding Analysis.ZoneDistribution.Ratios[5], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="VI" Grid.Row="6"/><ProgressBar Grid.Column="1" Grid.Row="6" Value="{Binding Analysis.ZoneDistribution.Ratios[6], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="VII" Grid.Row="7"/><ProgressBar Grid.Column="1" Grid.Row="7" Value="{Binding Analysis.ZoneDistribution.Ratios[7], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="VIII" Grid.Row="8"/><ProgressBar Grid.Column="1" Grid.Row="8" Value="{Binding Analysis.ZoneDistribution.Ratios[8], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="IX" Grid.Row="9"/><ProgressBar Grid.Column="1" Grid.Row="9" Value="{Binding Analysis.ZoneDistribution.Ratios[9], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                        <TextBlock Text="X" Grid.Row="10"/><ProgressBar Grid.Column="1" Grid.Row="10" Value="{Binding Analysis.ZoneDistribution.Ratios[10], FallbackValue=0}" Maximum="1" Height="6" Margin="18,5,0,0" />
+                                    </Grid>
+                                </StackPanel>
                             </TabItem>
                             <TabItem Header="影调" AutomationProperties.AutomationId="VisualToneTab">
                                 <StackPanel AutomationProperties.AutomationId="VisualTonePanel" Margin="0,6">
@@ -1226,9 +1251,9 @@
         </DockPanel>
       </Grid>
       <ContentControl x:Name="CanvasWorkspace" Panel.ZIndex="100" Visibility="Collapsed" AutomationProperties.AutomationId="FreeCanvasWorkspace" />
-      <Border x:Name="DuplicateImportSurface" Panel.ZIndex="120" Visibility="Collapsed" Width="760" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="8" Padding="22" AutomationProperties.Name="发现完全重复素材">
+      <Border x:Name="DuplicateImportSurface" Panel.ZIndex="120" Visibility="Collapsed" Width="1000" MinWidth="760" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="8" Padding="22" AutomationProperties.Name="发现完全重复素材">
           <StackPanel><TextBlock Text="发现完全重复素材" Style="{DynamicResource PixelTart.Type.SectionTitle}" /><TextBlock x:Name="DuplicateImportName" Margin="0,8" /><TextBlock Text="内容与已有素材一致。默认跳过，不修改原照片。" Style="{DynamicResource PixelTart.Type.Metadata}" />
-              <Grid x:Name="DuplicateImportComparison" Visibility="Collapsed" Margin="0,16"><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions><StackPanel><Image x:Name="DuplicateIncomingImage" Height="240" Stretch="Uniform" /><TextBlock x:Name="DuplicateIncomingName" TextTrimming="CharacterEllipsis" /></StackPanel><StackPanel Grid.Column="1" Margin="12,0,0,0"><Image x:Name="DuplicateExistingImage" Height="240" Stretch="Uniform" /><TextBlock x:Name="DuplicateExistingName" TextTrimming="CharacterEllipsis" /></StackPanel></Grid>
+              <Grid x:Name="DuplicateImportComparison" Visibility="Collapsed" Margin="0,16"><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions><StackPanel><Image x:Name="DuplicateIncomingImage" Height="320" Stretch="Uniform" /><TextBlock x:Name="DuplicateIncomingName" TextTrimming="CharacterEllipsis" /></StackPanel><StackPanel Grid.Column="1" Margin="18,0,0,0"><Image x:Name="DuplicateExistingImage" Height="320" Stretch="Uniform" /><TextBlock x:Name="DuplicateExistingName" TextTrimming="CharacterEllipsis" /></StackPanel></Grid>
               <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0"><Button x:Name="DuplicateSkipButton" Content="跳过" IsDefault="True" Click="DuplicateSkip_Click" Style="{DynamicResource PixelTart.Button.Primary}" /><Button Content="查看重复" Click="DuplicateView_Click" Style="{DynamicResource PixelTart.Button.Secondary}" Margin="8,0" /><Button Content="仍然导入" Click="DuplicateAnyway_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></StackPanel>
           </StackPanel>
       </Border>

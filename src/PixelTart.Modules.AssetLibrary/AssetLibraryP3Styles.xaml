@@ -440,17 +440,21 @@
         <Border Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="{DynamicResource RadiusControl}" Padding="{DynamicResource Space.Inset.2}" MinWidth="0">
             <Grid>
                 <StackPanel Visibility="{Binding IsGroup, Converter={StaticResource P3BooleanToVisibilityConverter}}">
-                    <WrapPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="105" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
                         <TextBlock Text="满足：" FontWeight="SemiBold" VerticalAlignment="Center" Margin="{DynamicResource Space.Inline.End.1}" />
-                        <ComboBox ItemsSource="{Binding LogicOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Logic, Mode=TwoWay}"
-                                  Style="{StaticResource AssetLibraryP3ComboBox}" Width="105"
+                        <ComboBox Grid.Column="1" ItemsSource="{Binding LogicOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Logic, Mode=TwoWay}"
+                                  Style="{StaticResource AssetLibraryP3ComboBox}"
                                   AutomationProperties.AutomationId="{Binding LogicAutomationId}"
                                   AutomationProperties.Name="选择需要满足哪些条件" />
-                        <Button Content="＋ 添加条件" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="添加条件" />
-                        <Button Content="添加条件组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="添加一组条件" />
-                    </WrapPanel>
+                        <WrapPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,0" HorizontalAlignment="Left">
+                            <Button Content="＋ 添加条件" Command="{Binding AddRuleCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                    AutomationProperties.AutomationId="{Binding AddRuleAutomationId}" AutomationProperties.Name="添加条件" />
+                            <Button Content="添加条件组" Command="{Binding AddGroupCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                                    AutomationProperties.AutomationId="{Binding AddGroupAutomationId}" AutomationProperties.Name="添加一组条件" />
+                        </WrapPanel>
+                    </Grid>
                     <Expander Header="更多" Margin="0,5,0,0" Visibility="{Binding IsNested, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                         <WrapPanel Margin="0,5,0,0">
                             <ToggleButton Content="暂不使用" IsChecked="{Binding IsDisabled, Mode=TwoWay}" Style="{StaticResource AssetLibraryP3Toggle}" AutomationProperties.AutomationId="{Binding EnabledAutomationId}" AutomationProperties.Name="暂时不使用这组条件" />

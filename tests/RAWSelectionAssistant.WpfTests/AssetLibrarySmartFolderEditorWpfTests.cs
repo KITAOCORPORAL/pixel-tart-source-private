@@ -221,6 +221,18 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
             StringAssert.Contains(text, id);
     }
 
+    [TestMethod]
+    public void SmartFolderConditionHeadersUseStackedLayoutAtNarrowWidths()
+    {
+        var stylesPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryP3Styles.xaml");
+        var styles = File.ReadAllText(stylesPath);
+        StringAssert.Contains(styles, "<Grid.ColumnDefinitions><ColumnDefinition Width=\"Auto\" /><ColumnDefinition Width=\"105\" />");
+        StringAssert.Contains(styles, "<WrapPanel Grid.Row=\"1\" Grid.ColumnSpan=\"3\"");
+        var editorPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetSmartFolderEditorView.xaml");
+        var editor = File.ReadAllText(editorPath);
+        StringAssert.Contains(editor, "HorizontalScrollBarVisibility=\"Disabled\" VerticalScrollBarVisibility=\"Auto\"");
+    }
+
     private static SmartFolder SeedSmartFolder(string databasePath, SmartFolder folder, IEnumerable<SmartFolderRule> rules)
     {
         var repository = OpenRepository(databasePath);

@@ -99,7 +99,7 @@
 
             <Grid Margin="0,7,0,0">
                 <Grid.ColumnDefinitions><ColumnDefinition Width="2*" /><ColumnDefinition Width="10" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="330">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="330">
                     <TreeView ItemsSource="{Binding P3SmartFolderRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
                               ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
                               Style="{StaticResource AssetLibraryP3Tree}"
