@@ -1,44 +1,70 @@
-# Post-human-review gap matrix
+# Pixel Tart Human Review Gap Matrix — Round 3
 
-Baseline: `4e4f22c15bba7d13a72fb27f0960c2699605e598` (`integration/pixel-tart-developer-preview`)
+Source branch: `integration/pixel-tart-developer-preview`
+Source head audited: `fb8bda8c5af335de390369bb3ec371a327b439fc`
+Working tree source changes are uncommitted at audit time; visual evidence is therefore labeled current-run evidence, not pristine HEAD evidence. `VisualApproved=false` and `UserVerified=false` remain until a photographer completes the retest.
 
-This matrix records code evidence separately from runtime evidence. `CLOSED_IN_CODE` means the contract and implementation are present in the current tree; it does not claim a fresh human runtime pass.
+Status values are limited to `CLOSED_IN_CODE`, `NEEDS_RUNTIME_VERIFY`, `PARTIAL`, `NOT_IMPLEMENTED`, `REGRESSION`, and `BLOCKED`.
 
-| Issue | Current implementation | Commit that addressed it | Still reproducible? | Status |
-|---|---|---|---|---|
-| HR-001 Dimension import | Import decodes source dimensions into `AssetItems.Width/Height`; import acceptance covers JPEG/PNG/TIFF. | `7a87d3b`, `bb88db9` | Fresh 6000x4000 and EXIF 6/8 runtime check is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-002 Old dimension backfill | Backfill repository and lifecycle scheduling update missing dimensions asynchronously. | `15b8f1c` | Existing home smoke covered missing dimensions; this round's fresh run is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-003 Rating click | `PixelTartRatingControl` is bound to the shared rating command and supports hover/click semantics. | `371dba0`, `bb88db9` | Full 0→1→3→5→clear sequence needs runtime verification. | NEEDS_RUNTIME_VERIFY |
-| HR-004 Rating persistence | Rating is persisted in repository and shared by inspector, grid, popup, and query state. | `371dba0` | Restart sequence needs fresh runtime evidence. | NEEDS_RUNTIME_VERIFY |
-| HR-005 Color/rating popup separation | Filter popup commands and views keep color, rating, tag, and date responsibilities separate. | `a8e801f` | No new regression observed in code; fresh UI run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-006 Popup mutual exclusion | Shared popup coordination closes the active popup before opening another. | `a8e801f`, `bb88db9` | Fresh click-through at multiple DPIs pending. | NEEDS_RUNTIME_VERIFY |
-| HR-007 Popup overflow | Smart Folder group headers now use a stacked Grid, buttons wrap on a second row, and the rule tree has vertical-only scrolling. | This round | Fresh 100/125/150/200% runtime matrix is still pending. | NEEDS_RUNTIME_VERIFY |
-| HR-008 Context submenu collision | `ContextMenuPlacement` and submenu monitor-aware placement are implemented and covered by placement tests. | `15b8f1c`, `a8e801f` | Native two-level menu run is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-009 Thumbnail max scale | Thumbnail sizing derives target item width from viewport and preserves `Stretch=Uniform`. | `bb88db9` | Fresh min/middle/max UI run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-010 Smart Folder click | Smart Folder selection updates query state and gallery; unsaved guard is present. | `bb88db9` | Fresh runtime click-through pending. | NEEDS_RUNTIME_VERIFY |
-| HR-011 Tag Group click | Tag Group command updates query state and selected organization node. | `bb88db9` | Fresh runtime click-through pending. | NEEDS_RUNTIME_VERIFY |
-| HR-012 Folder text clipping | Organization rows have trimming in several templates, but a complete folder-row geometry contract is not present. | `bb88db9` | Long-name clipping at scaled layouts is not closed. | PARTIAL |
-| HR-013 Duplicate dialog size | Duplicate Finder remains 1080px wide; duplicate import comparison is now 1000px wide with 320px image panes and uniform aspect rendering. | This round | Fresh native comparison run is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-014 Visual similarity explanation | Similarity query and visual fingerprint expose real color/aspect/composition data; no person detector score is fabricated. | Existing visual-analysis commits | UI explanation dimensions are not fully surfaced. | PARTIAL |
-| HR-015 Quick Loupe | Magnifier-only hover/click handlers open a centered popup; leave closes it; ordinary card hover does not call the opener. | `bb88db9` | Fresh native interaction run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-016 Inspector Export | Inspector has a real `ExportSelectedOriginalCommand` button and shares publishing/export commands. | `bb88db9` | Fresh file export run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-017 HSL card layout | Inspector palette cards now show HEX, H (degrees), S/L (percent), percentage, and a real Copy HSL button sourced from `DominantColor`. | This round | Fresh visual runtime check is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-018 RGB histogram | `HistogramR/G/B/Luma` are computed from real pixel buffers and drawn by `HistogramDrawing`. | Existing visual-analysis commits | Inspector default/composite presentation needs runtime verification. | NEEDS_RUNTIME_VERIFY |
-| HR-019 Tone zone distribution | Inspector histogram tab now renders RGB histogram followed by 0–X zone distribution bars bound to `Analysis.ZoneDistribution.Ratios`; tone/contrast remain supporting text. | This round | Fresh visual runtime check is pending. | NEEDS_RUNTIME_VERIFY |
-| HR-020 Header New context | Header actions are route-aware for Asset Library/Planning/Canvas; no universal New action remains in Asset Library. | `bb88db9` | Full route matrix runtime run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-021 Header Import context | Import action is owned by Asset Library context; other routes are not supposed to expose a generic import. | `bb88db9` | Full route matrix runtime run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-022 Planning custom item | Planning uses existing document/block persistence and supports custom planning documents. | `bb88db9` | Fresh create/edit/save/reopen run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-023 Color Studio professional-only | No active Simple/Professional branch was found in the current source; legacy preference migration is not documented. | Existing Color Studio commits | Product layout still needs audit. | PARTIAL |
-| HR-024 Reference Navigator | Color Studio has image viewport and zoom/pan state, but a dedicated larger navigator contract was not found. | Existing Color Studio commits | Navigator remains unverified/not closed. | NOT_IMPLEMENTED |
-| HR-025 Duplicate Target/Reference label | Match workflows expose target/reference metadata in multiple surfaces; duplicate-label cleanup has no explicit contract. | Existing Color Studio commits | Duplicate label risk remains. | PARTIAL |
-| HR-026 Match 0% identity | Strength zero path returns identity semantics and is covered by core tests. | `7a87d3b` | JPEG/TIFF16/high-precision preview/export parity run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-027 Filmstrip | Color Studio/selection foundations exist, but multi-select filmstrip behavior is not covered by a current end-to-end contract. | Existing Color Studio commits | Not closed. | PARTIAL |
-| HR-028 Sync selected | Batch sync services exist, but selected-target UI flow and field protection need verification. | Existing batch workflow commits | Runtime flow not proven this round. | NEEDS_RUNTIME_VERIFY |
-| HR-029 Batch export | Publishing pipeline exists; cancellation and per-item failure reporting are not covered by this round's evidence. | Existing publishing commits | Runtime flow not proven. | NEEDS_RUNTIME_VERIFY |
-| HR-030 Preview/export parity | Shared render pipeline foundations exist, but parity tolerances across proxy/full resolution are not currently evidenced. | Existing Reference Match commits | Not closed. | PARTIAL |
-| HR-031 3D image→cloud link | 3D viewport and sample mapping foundation exist; preview highlight link is not wired as a verified product interaction. | Existing Color Studio commits | Not proven. | NOT_IMPLEMENTED |
-| HR-032 3D cloud→image link | Sample mapping foundation exists; reverse image highlight is not wired as a verified product interaction. | Existing Color Studio commits | Not proven. | NOT_IMPLEMENTED |
-| HR-033 Free Canvas toolbar | Free Canvas v1 tools, edit, view, canvas, and project actions are present in `FreeCanvasView`. | Existing Free Canvas commits | Fresh toolbar runtime run pending. | NEEDS_RUNTIME_VERIFY |
-| HR-034 Free Canvas single zoom | `FreeCanvasSurface.Zoom` is a single state and toolbar renders it; duplicate display audit is pending. | Existing Free Canvas commits | Fresh run needed to verify no duplicate zoom labels. | NEEDS_RUNTIME_VERIFY |
-| HR-035 Free Canvas aspect ratio | Canvas document/editor preserve image object geometry in core; explicit multi-ratio regression coverage is not present. | Existing Free Canvas commits | 3:2/4:3/1:1/16:9/portrait/tall runtime suite pending. | PARTIAL |
+| ID | Issue | Current implementation | Commit / source evidence | CODE | TEST | RUNTIME | Status |
+|---|---|---|---|---|---|---|---|
+| HR-001 | New asset dimensions | Import and metadata paths persist stored pixel width/height. | `7a87d3b`, current import tests | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-002 | Missing-dimension backfill | Background backfill schedules missing dimensions and updates the asset model. | `15b8f1c` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-003 | Rating click | Shared rating control updates the persisted asset model and query state. | `371dba0`, `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-004 | Rating persistence | Rating survives refresh/restart through the shared store. | `371dba0` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-005 | Color/rating popup separation | Toolbar popup builders keep color and rating responsibilities separate. | `a8e801f` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-006 | Popup mutual exclusion | Shared toolbar popup manager closes the previous popup before opening another. | `a8e801f` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-007 | Popup overflow | Current-run visual harness covers logical DPI/resolution layout; native 150% run remains user work. | `fb8bda8`, current-run harness | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-008 | Context submenu collision | Existing monitor-aware placement is reused for nested context menus. | `a8e801f`, `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-009 | Thumbnail max scale | Slider maps target size to viewport width and retains source aspect ratio. | `bb88db9`, `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-010 | Smart Folder click | Smart-folder command updates the shared query and selected state. | `bb88db9` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-011 | Tag Group click | Tag-group filter command updates the shared query and gallery. | `bb88db9` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-012 | Folder text clipping | Folder rows use trimming/tooltip behavior in the organization pane. | `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-013 | Duplicate dialog size | Duplicate finder has a larger comparison surface and resizable shell contract. | existing duplicate commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-014 | Similarity explanation | Visual embedding, palette/color, aspect ratio, and composition summaries are available; person detection is not fabricated. | existing visual analysis | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-015 | Quick Loupe | Loupe opens from its explicit affordance and double click remains viewer navigation. | `bb88db9` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-016 | Inspector export | Inspector export action routes through Publishing/export services. | existing publishing commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-017 | Palette runtime | Palette cards show HEX, H°, S/L%, percentage, and copy-HSL actions. | `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-018 | RGB histogram | Histogram drawing consumes real visual analysis pixels and exposes RGB/luma rendering. | existing visual analysis | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-019 | Tone/zone distribution | Zone bars 0–X and hover map are present below histogram. | `fb8bda8` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-020 | Header New context | Route-aware header action mapping exists; no universal business action is assumed. | existing shell commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-021 | Header Import context | Import is exposed only on routes with an import contract. | existing shell commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-022 | Planning custom item | Planning has a real `自定义` document surface backed by existing document content fields. | existing planning commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-023 | Color Studio professional-only | UI now exposes one professional workspace; legacy mode values migrate in memory and the compatibility property remains for old automation. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-024 | Reference Navigator | Dedicated read-only navigator supports source preview, fit, 100%, zoom, and pan. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-025 | Target/reference label duplication | Target/reference identity bars are distinct; filename/source details remain in their relevant panel. | existing studio source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-026 | Match 0% identity | Zero-strength identity semantics exist for preview/export paths. | existing match commits | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-027 | Filmstrip | Filmstrip supports active item, rating/color control, processing status, and source aspect-preserving thumbnails. | existing studio source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-028 | Sync selected | Batch sync copies look/adjustment state to selected targets and leaves asset fields untouched. | existing studio source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-029 | Batch export partial failure | Export reports per-item status, cancellation, and a failure summary; retry failed export exists. | existing studio source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-030 | Preview/export parity | Shared processing services and a deterministic full-resolution parity fixture exist; proxy/full-resolution corpus and ICC/V4 coverage remain open. | `artifacts/round3-gates/preview-export-parity/README.md`, `BatchExportProcessedPixelsTests` | CLOSED_IN_CODE | PARTIAL | PARTIAL | PARTIAL |
+| HR-031 | Image → cloud highlight | Image sample maps through OKLab to a nearest cloud point and updates a preview selection. | current Round 3 source, `ColorSpaceLinking` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-032 | Cloud → image highlight | Cloud hit testing maps a selected point to source-pixel membership and renders a temporary overlay. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-033 | Free Canvas toolbar | Existing toolbar provides tools/edit/view/canvas/project actions; low-frequency canvas actions remain in More. | existing Free Canvas source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-034 | Free Canvas single zoom | Surface owns one zoom state and fit/percentage controls. | existing Free Canvas source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-035 | Free Canvas aspect ratio | Core image objects preserve geometry through move, resize, save, and reopen across eight landscape/portrait/tall/wide ratios. | `CanvasAspectRatioRegressionTests` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-036 | Professional context menu grouping | Asset menu has View/Open/Create/Visual/Organize/Workflow/Export/Manage groupings and only real actions. | current `AssetLibraryPage.xaml` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-037 | Context submenu hierarchy | Folder, tag, rating, export, workflow, and inspiration choices use child menu items. | current `AssetLibraryPage.xaml` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-038 | Context disabled states | File/open/copy/export/rating/trash commands now expose selection/file predicates and raise state changes. | current `AssetLibraryViewModel.P2Browser.cs` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-039 | Context keyboard hints | Rating choices expose 0–5 gesture hints matching the page rating contract. | current `AssetLibraryPage.xaml` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-040 | Multi-select right click | Shared policy keeps an existing selected set when the target is already selected. | `AssetLibraryContextSelectionPolicy` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-041 | Filmstrip rating/color display | Filmstrip displays rating directly and a shared color swatch with accessible name; persistent Asset Library metadata hydration for `AssetId` is still a product integration gap. | current studio XAML/VM, `FilmstripColorSwatch` test | PARTIAL | CLOSED_IN_CODE | PARTIAL | PARTIAL |
+| HR-042 | Copy Adjustments | Category picker copies only selected adjustment node types and protects rating, color label, tags, folders, filename, EXIF, and project relationship. | `SyncSelectedByTypeFrom`, `CopyApplyAdjustmentsUsesSelectedCategoriesAndProtectsAssetFields` | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-043 | Apply Adjustments | Selected-target sync applies adjustment stack snapshots with protected asset fields. | current studio VM | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-044 | Reference Navigator zoom/pan | Dedicated read-only navigator is implemented and bound to the first available reference source. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-045 | Color Studio layout | Left module rail, central target image, right reference/analysis/3D rail, and bottom filmstrip exist; responsive collapse is implemented. | existing studio source + current navigator | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-046 | Filmstrip selection contract | Single, Ctrl multi, Shift range, current target, and selected count are implemented. | existing studio VM/view | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-047 | Batch export partial failure | Per-item failed/succeeded/cancelled state and failure summary are implemented. | existing studio VM | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-048 | Image → 3D cloud highlight | OKLab nearest-point selection is connected to the image sampling path. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-049 | 3D cloud → image highlight | Projected hit test and source-pixel membership overlay are connected to the cloud click path. | current Round 3 source | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+| HR-050 | Overlay no-layout-shift | Context/popup/rating surfaces update as overlays; logical visual harness passed without layout overflow. | `fb8bda8`, current-run harness | CLOSED_IN_CODE | CLOSED_IN_CODE | NEEDS_RUNTIME_VERIFY | NEEDS_RUNTIME_VERIFY |
+
+## Evidence summary
+
+- Focused Round 3 WPF set: **61 passed, 0 failed** after the navigator/3D/browser code; Copy/Apply adjustment protection adds **2 passed, 0 failed**.
+- Full serial WPF gate: **1,393 passed, 0 failed, 11 skipped** in `artifacts/round3-gates/wpf-full-round3-final2/round3-wpf-full-final2.trx`.
+- Full Core baseline: **1,528 passed, 0 failed, 4 skipped** in `artifacts/round3-gates/core-full-round3-final2/round3-core-full-final2.trx`.
+- DPI suite: **91 passed, 0 failed, 0 skipped** in `tests/RAWSelectionAssistant.DpiTests/TestResults/round3-dpi-final.trx`.
+- Current-run DPI evidence validator: **106 captures, 32 DPI states, passed**. This evidence is not a substitute for user visual approval at physical 150% scaling.
+- Preview/export parity fixture evidence: `artifacts/round3-gates/preview-export-parity/README.md`; dedicated proxy/full-resolution corpus parity remains a user/corpus verification item.
 
