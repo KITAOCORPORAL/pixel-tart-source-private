@@ -36,7 +36,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private long _syncFeedbackRevision;
     private readonly HashSet<Guid> _nodeSyncSelection = [];
     private readonly ObservableCollection<NodeSyncChoice> _nodeSyncChoices = [];
+    private readonly ObservableCollection<AdjustmentSyncChoice> _adjustmentSyncChoices = [];
     private ColorSpaceVisualizationModel? _colorSpaceModel;
+    private VisualPixelBuffer? _colorSpaceSourceBuffer;
+    private IReadOnlyList<int> _highlightedPixels = [];
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
         MatchV4ProductExecutor? matchV4Executor = null)
@@ -65,6 +68,23 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             _ = ShowSyncFeedbackAsync($"已同步 {selected.Count} 个调整到 {targets.Length} 张照片。");
         });
         CancelNodeSyncCommand = new RelayCommand(_ => NodeSyncOpen = false);
+        OpenAdjustmentCopyCommand = new RelayCommand(_ =>
+        {
+            _adjustmentSyncChoices.Clear();
+            foreach (var type in Enum.GetValues<ColorStudioNodeType>())
+                _adjustmentSyncChoices.Add(new AdjustmentSyncChoice(type, AdjustmentTypeName(type), true));
+            AdjustmentCopyOpen = true;
+        }, _ => CanSyncSelectedNodes);
+        ConfirmAdjustmentCopyCommand = new RelayCommand(_ =>
+        {
+            var selected = _adjustmentSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Type).ToHashSet();
+            if (selected.Count == 0) return;
+            var targets = SelectedTargets.ToArray();
+            ApplySelectedAdjustments(selected, targets);
+            AdjustmentCopyOpen = false;
+            _ = ShowSyncFeedbackAsync($"已应用 {selected.Count} 类调整到 {targets.Length} 张照片。 ");
+        }, _ => CanSyncSelectedNodes && _adjustmentSyncChoices.Any(choice => choice.Selected));
+        CancelAdjustmentCopyCommand = new RelayCommand(_ => AdjustmentCopyOpen = false);
         ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask);
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
@@ -89,15 +109,38 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public AsyncRelayCommand BuildColorSpaceModelCommand { get; }
     public ColorSpaceVisualizationModel? ColorSpaceModel { get => _colorSpaceModel; private set => SetProperty(ref _colorSpaceModel, value); }
     public bool HasColorSpaceModel => ColorSpaceModel is not null;
+    public IReadOnlyList<int> HighlightedPixels { get => _highlightedPixels; private set => SetProperty(ref _highlightedPixels, value); }
+    public int HighlightImageWidth => _colorSpaceSourceBuffer?.Width ?? 0;
+    public int HighlightImageHeight => _colorSpaceSourceBuffer?.Height ?? 0;
     public async Task BuildColorSpaceModelAsync(CancellationToken token = default)
     {
         if (Editor.SourceImage is null || Editor.MatchedImage is null) return;
         var source = await Task.Run(() => ToVisualBuffer(Editor.SourceImage), token);
         var matched = await Task.Run(() => ToVisualBuffer(Editor.MatchedImage), token);
+        _colorSpaceSourceBuffer = source;
         var transform = new MatchV4ResolvedTransform(new(0, 0, 0), [new(0, 0, 0), new(0, 0, 0), new(0, 0, 0)], new(), "workspace-preview");
         ColorSpaceModel = await Task.Run(() => ColorSpaceVisualizationBuilder.Build(source, matched, transform, ColorSpaceSamplingTier.Preview, token), token);
         OnPropertyChanged(nameof(HasColorSpaceModel));
+        OnPropertyChanged(nameof(HighlightImageWidth)); OnPropertyChanged(nameof(HighlightImageHeight));
     }
+    public void HighlightImageSample(VisualRgb24 sample)
+    {
+        if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null) return;
+        var index = ColorSpaceLinking.FindNearest(model.Source, OklabColorSpace.FromSrgb(sample));
+        if (index < 0) return;
+        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, index);
+        OnPropertyChanged(nameof(HighlightedPixels));
+        ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, index));
+    }
+    public void HighlightCloudSelection(int pointIndex)
+    {
+        if (pointIndex < 0) { ClearColorSpaceHighlight(); return; }
+        if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null || pointIndex >= model.Source.Points.Count) return;
+        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, pointIndex);
+        OnPropertyChanged(nameof(HighlightedPixels));
+    }
+    public void ClearColorSpaceHighlight() { HighlightedPixels = []; OnPropertyChanged(nameof(HighlightedPixels)); }
+    public event EventHandler<ColorSpaceSelection>? ColorSpaceSelectionChanged;
     private static VisualPixelBuffer ToVisualBuffer(BitmapSource source)
     {
         var converted = new FormatConvertedBitmap(source, PixelFormats.Rgb24, null, 0); var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 3]; converted.CopyPixels(bytes, converted.PixelWidth * 3, 0); return new(converted.PixelWidth, converted.PixelHeight, bytes);
@@ -110,6 +153,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public RelayCommand ToggleNodeSyncCommand { get; }
     public RelayCommand ConfirmNodeSyncCommand { get; }
     public RelayCommand CancelNodeSyncCommand { get; }
+    public RelayCommand OpenAdjustmentCopyCommand { get; }
+    public RelayCommand ConfirmAdjustmentCopyCommand { get; }
+    public RelayCommand CancelAdjustmentCopyCommand { get; }
     public bool CanSyncSelectedNodes => Editor.IsProMode && SelectedTargetCount > 1 && Editor.AdjustmentNodes.Count > 0;
     public string SyncFeedback { get => _syncFeedback; private set { if (SetProperty(ref _syncFeedback, value)) OnPropertyChanged(nameof(HasSyncFeedback)); } }
     public bool HasSyncFeedback => !string.IsNullOrEmpty(SyncFeedback);
@@ -125,10 +171,14 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
         OpenNodeSyncCommand?.RaiseCanExecuteChanged(); SyncSelectedCommand?.RaiseCanExecuteChanged(); SyncAllCommand?.RaiseCanExecuteChanged();
+        OpenAdjustmentCopyCommand?.RaiseCanExecuteChanged(); ConfirmAdjustmentCopyCommand?.RaiseCanExecuteChanged();
         ExportSelectedCommand?.RaiseCanExecuteChanged(); ExportAllCommand?.RaiseCanExecuteChanged();
     }
     public bool NodeSyncOpen { get => _nodeSyncOpen; set => SetProperty(ref _nodeSyncOpen, value); }
     public ObservableCollection<NodeSyncChoice> NodeSyncChoices => _nodeSyncChoices;
+    public ObservableCollection<AdjustmentSyncChoice> AdjustmentSyncChoices => _adjustmentSyncChoices;
+    public bool AdjustmentCopyOpen { get => _adjustmentCopyOpen; set => SetProperty(ref _adjustmentCopyOpen, value); }
+    private bool _adjustmentCopyOpen;
     public int SelectedTargetCount => SelectedTargets.Count();
     public void SyncSelectedColorNodes(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedNodeIds, IEnumerable<ReferenceTargetItem> targets)
     {
@@ -142,6 +192,32 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             target.Status = ReferenceTargetStatus.Synced;
         }
     }
+    private void ApplySelectedAdjustments(IReadOnlySet<ColorStudioNodeType> selectedTypes, IEnumerable<ReferenceTargetItem> targets)
+    {
+        var sourceStack = Editor.AdjustmentStack;
+        var look = Editor.SelectedLook?.Normalize();
+        foreach (var target in targets)
+        {
+            target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } existing
+                ? existing.SyncSelectedByTypeFrom(sourceStack, selectedTypes)
+                : sourceStack.Nodes.Where(node => selectedTypes.Contains(node.Type)).Select(node => node.Normalize()).ToArray() is { Length: > 0 } selected
+                    ? new ColorAdjustmentStack(selected).Normalize()
+                    : null;
+            if (selectedTypes.Contains(ColorStudioNodeType.ReferenceMatch) && look is not null)
+                target.AppliedLookSnapshot = look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
+            if (selectedTypes.Contains(ColorStudioNodeType.Film)) target.FilmSettingsSnapshot = Editor.FilmSettings with { };
+            target.Status = ReferenceTargetStatus.Synced;
+        }
+    }
+    private static string AdjustmentTypeName(ColorStudioNodeType type) => type switch
+    {
+        ColorStudioNodeType.ReferenceMatch => "参考仿色",
+        ColorStudioNodeType.ColorRange => "颜色范围",
+        ColorStudioNodeType.Film => "胶片",
+        ColorStudioNodeType.TransitionBlend => "色彩过渡",
+        ColorStudioNodeType.Preset => "预设",
+        _ => type.ToString()
+    };
     public AsyncRelayCommand ActivateTargetCommand { get; }
     public AsyncRelayCommand ExportSelectedCommand { get; }
     public AsyncRelayCommand ExportAllCommand { get; }
@@ -369,6 +445,13 @@ public sealed class NodeSyncChoice(Guid id, string name, bool selected) : Observ
     public string Name { get; } = name;
     public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
 }
+public sealed class AdjustmentSyncChoice(ColorStudioNodeType type, string name, bool selected) : ObservableObject
+{
+    private bool _selected = selected;
+    public ColorStudioNodeType Type { get; } = type;
+    public string Name { get; } = name;
+    public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
+}
 public enum ReferenceExportStatus { None, Queued, Exporting, Succeeded, Failed, Cancelled }
 
 public sealed class ReferenceTargetItem : ObservableObject
@@ -387,7 +470,30 @@ public sealed class ReferenceTargetItem : ObservableObject
     public int PixelHeight { get; set; }
     public long FileSize => File.Exists(Path) ? new FileInfo(Path).Length : 0;
     private int _rating;
+    private string? _colorLabel;
     public int Rating { get => _rating; set => SetProperty(ref _rating, Math.Clamp(value, 0, 5)); }
+    /// <summary>Session-level color marker shown in the professional filmstrip. The asset model remains the source of truth when an AssetId is present.</summary>
+    public string? ColorLabel
+    {
+        get => _colorLabel;
+        set
+        {
+            var normalized = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            if (!SetProperty(ref _colorLabel, normalized)) return;
+            OnPropertyChanged(nameof(ColorLabelBrush));
+            OnPropertyChanged(nameof(ColorLabelAccessibleName));
+        }
+    }
+    public Brush ColorLabelBrush => ColorLabel switch
+    {
+        "红" => new SolidColorBrush(Color.FromRgb(0xD9, 0x5C, 0x5C)),
+        "黄" => new SolidColorBrush(Color.FromRgb(0xD9, 0xB4, 0x4A)),
+        "绿" => new SolidColorBrush(Color.FromRgb(0x62, 0xB8, 0x7A)),
+        "蓝" => new SolidColorBrush(Color.FromRgb(0x5E, 0x93, 0xD6)),
+        "紫" => new SolidColorBrush(Color.FromRgb(0xA4, 0x76, 0xC8)),
+        _ => new SolidColorBrush(Color.FromArgb(0, 0, 0, 0))
+    };
+    public string ColorLabelAccessibleName => string.IsNullOrWhiteSpace(ColorLabel) ? "无颜色标记" : $"颜色标记：{ColorLabel}";
     public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value); }
     public bool IsActive { get => _isActive; set => SetProperty(ref _isActive, value); }
     public ReferenceTargetStatus Status { get => _status; set { if (SetProperty(ref _status, value)) OnPropertyChanged(nameof(StatusText)); } }

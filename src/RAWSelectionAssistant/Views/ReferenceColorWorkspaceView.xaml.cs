@@ -60,6 +60,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     public ReferenceColorWorkspaceView()
     {
         InitializeComponent();
+        ColorSpaceViewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
+        ImageViewport.State.Changed += (_, _) => { HighlightOverlay.ViewState = ImageViewport.State; HighlightOverlay.InvalidateVisual(); };
         _zoomPan.Changed += (_, _) => ZoomLabel.Text = $"{_zoomPan.Zoom:P0}";
         AdjustmentNodeList.DragOver += OnNodeDragOver;
         AdjustmentNodeList.DragLeave += (_, _) => ClearInsertion();
@@ -71,6 +73,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
             if (Math.Abs(width - _lastResponsiveWidth) > .5) UpdateResponsiveLayout();
         };
         DataContextChanged += OnDataContextChanged;
+        HighlightOverlay.ViewState = ImageViewport.State;
         PreviewKeyDown += OnFilmstripKeyDown;
         AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(OnFilmstripMouseDown), true);
         PreviewKeyDown += OnSamplingKeyDown;
@@ -106,7 +109,14 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void OnSamplingKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Escape && _editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
+        if (e.Key != Key.Escape) return;
+        if (_editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
+        if (DataContext is ReferenceColorWorkspaceViewModel workspace)
+        {
+            workspace.ClearColorSpaceHighlight();
+            if (ColorSpaceViewport.State is { } state) ColorSpaceViewport.State = state with { Selection = ColorSpaceSelection.None };
+            e.Handled = true;
+        }
     }
 
     private void OnPreviewCanvasMouseWheel(object sender, MouseWheelEventArgs e)
@@ -232,6 +242,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         _editor.SampleMode = mode;
         var value = new VisualRgb24(pixels[index + 2], pixels[index + 1], pixels[index]);
         RecordNativeSample(e, new Point(x, y), value);
+        if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightImageSample(value);
         _editor.CompleteDisplayedSample(value);
         e.Handled = true;
     }
@@ -282,7 +293,20 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private void WorkspaceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
         if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
+        {
             ColorSpaceViewport.State = workspace.ColorSpaceModel is { } model ? ColorSpaceRendererContract.Create(model) : null;
+            workspace.ColorSpaceSelectionChanged -= WorkspaceColorSpaceSelectionChanged;
+            workspace.ColorSpaceSelectionChanged += WorkspaceColorSpaceSelectionChanged;
+        }
+    }
+    private void WorkspaceColorSpaceSelectionChanged(object? sender, ColorSpaceSelection selection)
+    {
+        if (ColorSpaceViewport.State is { } state) ColorSpaceViewport.State = state with { Selection = selection };
+    }
+    private void ColorSpaceViewport_SelectionChanged(object? sender, ColorSpaceSelection selection)
+    {
+        if (DataContext is ReferenceColorWorkspaceViewModel workspace)
+            workspace.HighlightCloudSelection(selection.PointIndex);
     }
 
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)

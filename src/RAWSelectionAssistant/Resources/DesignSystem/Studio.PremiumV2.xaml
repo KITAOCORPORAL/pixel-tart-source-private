@@ -4,7 +4,10 @@
     <!-- Studio v2 evolves the existing semantic API. This dictionary is intentionally
          merged last so product pages keep one theme vocabulary while the prototype is reviewed. -->
     <GridLength x:Key="StudioV2.CommandBarHeight">52</GridLength>
-    <GridLength x:Key="StudioV2.StatusBarHeight">28</GridLength>
+    <!-- Keep the semantic row in sync with MainWindow.BottomStatusBar's 34 DIP
+         surface.  A shorter row leaves the border and progress indicator outside
+         the inspected viewport at every DPI scale. -->
+    <GridLength x:Key="StudioV2.StatusBarHeight">34</GridLength>
     <sys:Double x:Key="Size.Control.Default">32</sys:Double>
     <sys:Double x:Key="ControlHeight">32</sys:Double>
     <sys:Double x:Key="Size.MenuItem.Default">34</sys:Double>

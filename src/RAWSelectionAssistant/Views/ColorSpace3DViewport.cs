@@ -12,6 +12,8 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     private ColorSpaceRendererState? _state;
     private long _renderCount;
     private double _lastRenderMilliseconds;
+    private Point? _clickStart;
+    public event EventHandler<ColorSpaceSelection>? SelectionChanged;
     internal object ReadNativeEvidence() => new
     {
         Bounds = ReferenceColorWorkspaceView.NativeBounds(this), State?.Camera, State?.IsFit,
@@ -49,7 +51,10 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         DrawAxes(drawing);
         foreach (var cloud in State.VisibleClouds)
             foreach (var point in ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight, 1))
-                drawing.DrawEllipse(new SolidColorBrush(Color.FromRgb(point.Color.R, point.Color.G, point.Color.B)), null, new Point(point.X, point.Y), 2.2, 2.2);
+            {
+                var selected = State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster && State.Selection.PointIndex == point.PointIndex;
+                drawing.DrawEllipse(new SolidColorBrush(Color.FromRgb(point.Color.R, point.Color.G, point.Color.B)), selected ? new Pen(Brushes.White, 2) : null, new Point(point.X, point.Y), selected ? 5 : 2.2, selected ? 5 : 2.2);
+            }
         if (State.ShowMigrationVectors && State.Mode is ColorCloudMode.Migration or ColorCloudMode.Overlay)
             foreach (var vector in State.Model.MigrationVectors.Take(512)) DrawVector(drawing, vector);
         DrawLabel(drawing, $"L*  a*  b*   {State.Mode}   ·   左键旋转 / Shift+左键平移 / 滚轮缩放", new Point(12, Math.Max(12, ActualHeight - 28)));
@@ -58,8 +63,16 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     private void DrawAxes(DrawingContext drawing) { var center = new Point(ActualWidth / 2, ActualHeight / 2); var pen = new Pen(TryFindResource("DividerBrush") as Brush ?? Brushes.Gray, 1); drawing.DrawLine(pen, new Point(12, center.Y), new Point(Math.Max(12, ActualWidth - 12), center.Y)); drawing.DrawLine(pen, new Point(center.X, 12), new Point(center.X, Math.Max(12, ActualHeight - 12))); DrawLabel(drawing, "a*", new Point(Math.Max(12, ActualWidth - 32), center.Y + 4)); DrawLabel(drawing, "L*", new Point(center.X + 6, 12)); DrawLabel(drawing, "b*", new Point(center.X + 6, Math.Max(12, ActualHeight - 24))); }
     private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }
     private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, 1), origin); }
-    private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = e.GetPosition(this); CaptureMouse(); }
+    private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = _clickStart = e.GetPosition(this); CaptureMouse(); }
     private void OnMouseMove(object sender, MouseEventArgs e) { if (_pointer is not { } previous || State is null || e.LeftButton != MouseButtonState.Pressed) return; var current = e.GetPosition(this); var delta = current - previous; _pointer = current; var camera = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) ? ColorSpaceProjection.PanByDisplayDelta(State.Camera, delta.X, delta.Y, ActualWidth, ActualHeight) : State.Camera.Rotate(delta.X * .35, -delta.Y * .35); State = State with { Camera = camera, IsFit = false }; }
-    private void OnMouseUp(object sender, MouseButtonEventArgs e) { _pointer = null; ReleaseMouseCapture(); }
+    private void OnMouseUp(object sender, MouseButtonEventArgs e)
+    {
+        var start = _clickStart; _pointer = null; _clickStart = null; ReleaseMouseCapture();
+        if (State is null || start is not { } point || (e.GetPosition(this) - point).Length > SystemParameters.MinimumHorizontalDragDistance) return;
+        var projected = State.VisibleClouds.SelectMany(cloud => ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight)).ToArray();
+        var index = ColorSpaceProjection.HitTest(projected, point.X, point.Y);
+        State = State with { Selection = index >= 0 ? new(ColorSpaceMarkerKind.SelectedCluster, index) : ColorSpaceSelection.None };
+        SelectionChanged?.Invoke(this, State.Selection);
+    }
     private void OnMouseWheel(object sender, MouseWheelEventArgs e) { if (State is null) return; State = State with { Camera = State.Camera.Zoom(e.Delta > 0 ? 1.12 : .89), IsFit = false }; }
 }

@@ -16,6 +16,7 @@ public readonly record struct ColorSpaceCamera(double Yaw, double Pitch, double 
 }
 public sealed record ColorSpaceRendererState(ColorSpaceVisualizationModel Model, ColorSpaceCamera Camera, ColorCloudMode Mode, bool ShowMigrationVectors, bool IsFit)
 {
+    public ColorSpaceSelection Selection { get; init; } = ColorSpaceSelection.None;
     public IReadOnlyList<ColorSpaceCloud> VisibleClouds => (Model with { Mode = Mode }).VisibleClouds;
     public ColorSpaceRendererState WithMode(ColorCloudMode mode) => this with { Model = Model with { Mode = mode }, Mode = mode, IsFit = false };
     public ColorSpaceRendererState Fit(double viewportWidth, double viewportHeight) =>

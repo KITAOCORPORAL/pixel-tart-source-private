@@ -46,7 +46,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private bool _refreshingLookChoices;
     private bool _hasError;
     private PixelTartFilmSettings _filmSettings = new();
-    private string _workspaceMode = "简洁";
+    private string _workspaceMode = "专业";
     private string _workspaceSection = "仿色";
     private bool _focusView;
     private bool _contextRailOpen = true;
@@ -217,12 +217,14 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public double SelectedPresetStrength { get => SelectedNumeric("preset_strength", 1) * 100; set { if (SelectedAdjustmentNode?.Type == ColorStudioNodeType.Preset) SetSelectedNumeric("preset_strength", Math.Clamp(value, 0, 100) / 100); } }
     public ColorStudioSchemeV2? SelectedColorScheme { get => _selectedColorScheme; set { if (SetProperty(ref _selectedColorScheme, value)) { if (value is not null) { ColorSchemeName = value.Name; OnPropertyChanged(nameof(ColorSchemeName)); } ApplyColorSchemeCommand?.RaiseCanExecuteChanged(); DeleteColorSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public string ColorSchemeName { get; set; } = "新色彩方案";
-    public IReadOnlyList<string> WorkspaceModes { get; } = ["简洁", "专业"];
+    public IReadOnlyList<string> WorkspaceModes { get; } = ["专业"];
     public IReadOnlyList<string> WorkspaceSections { get; } = ["调色", "仿色", "预设", "胶片", "输出"];
     public string WorkspaceSection { get => _workspaceSection; set { if (SetProperty(ref _workspaceSection, value)) OnPropertyChanged(nameof(IsNodeSection)); } }
-    public string WorkspaceMode { get => _workspaceMode; set { if (SetProperty(ref _workspaceMode, value)) { if (value == "专业") EnsureProfessionalStack(); OnPropertyChanged(nameof(IsSimpleMode)); OnPropertyChanged(nameof(IsProMode)); } } }
-    public bool IsSimpleMode => WorkspaceMode == "简洁";
-    public bool IsProMode => WorkspaceMode == "专业";
+    // Kept as a compatibility property for persisted sessions and old automation. The
+    // product surface is professional-only; legacy "简洁" values migrate in memory.
+    public string WorkspaceMode { get => _workspaceMode; set { var changed = SetProperty(ref _workspaceMode, "专业"); EnsureProfessionalStack(); if (changed) { OnPropertyChanged(nameof(IsSimpleMode)); OnPropertyChanged(nameof(IsProMode)); } } }
+    public bool IsSimpleMode => false;
+    public bool IsProMode => true;
     public bool IsNodeSection => WorkspaceSection is "调色" or "仿色";
     public bool FocusView { get => _focusView; set { if (SetProperty(ref _focusView, value)) { OnPropertyChanged(nameof(IsContextVisible)); OnPropertyChanged(nameof(IsLeftRailVisible)); } } }
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
@@ -518,6 +520,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
+    public string CurrentReferencePath => ReferenceSources.FirstOrDefault()?.Source.SourcePath ?? string.Empty;
     public IReadOnlyList<ReferenceSourceCategory> SourceCategories { get; }
     public IReadOnlyList<string> ViewModes { get; } = ["原片", "仿色结果", "左右对比", "并排对比"];
     public AsyncRelayCommand ApplyCommand { get; }
@@ -728,9 +731,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     private void RefreshReferenceSources()
     {
-        ReferenceSources.Clear(); if (SelectedLook is null) return;
+        ReferenceSources.Clear(); OnPropertyChanged(nameof(CurrentReferencePath)); if (SelectedLook is null) return;
         foreach (var source in SelectedLook.Normalize().ReferenceSources)
             ReferenceSources.Add(new(source, source.Weight * 100, UpdateReferenceWeightAsync));
+        OnPropertyChanged(nameof(CurrentReferencePath));
         RaiseReferenceCommands();
     }
 
