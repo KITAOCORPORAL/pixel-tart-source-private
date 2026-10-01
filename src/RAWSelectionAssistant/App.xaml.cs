@@ -302,7 +302,8 @@ public partial class App : Application
                 rawToJpegPage: new RawToJpegViewModel(_compositionRoot.RawToJpegCoordinator, dialogService),
                 batchCompressionPage: new BatchCompressionViewModel(_compositionRoot.BatchCompressionCoordinator, dialogService),
                 publishingPage: new PublishingExportViewModel(_compositionRoot.PublishingCoordinator, new Services.Publishing.WpfPublishingRenderer(), dialogService),
-                matchV4Executor: new MatchV4BackendResolver().Executor);
+                matchV4Executor: new MatchV4BackendResolver().Executor,
+                assetRepositoryFactory: CreateCurrentAssetRepository);
             var planningPage = new PlanningCenterViewModel(
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService,

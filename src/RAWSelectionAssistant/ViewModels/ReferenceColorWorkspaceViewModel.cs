@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Utilities;
@@ -40,12 +41,19 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private ColorSpaceVisualizationModel? _colorSpaceModel;
     private VisualPixelBuffer? _colorSpaceSourceBuffer;
     private IReadOnlyList<int> _highlightedPixels = [];
+    private readonly Func<IAssetLibraryRepository?>? _assetRepositoryFactory;
+    private readonly HashSet<Guid> _hydratingMetadata = [];
+    private readonly HashSet<ReferenceTargetItem> _observedTargets = [];
+    private Task _metadataWork = Task.CompletedTask;
+    private bool _disposed;
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
-        MatchV4ProductExecutor? matchV4Executor = null)
+        MatchV4ProductExecutor? matchV4Executor = null,
+        Func<IAssetLibraryRepository?>? assetRepositoryFactory = null)
     {
         _dialogs = dialogs;
         _matchV4Executor = matchV4Executor;
+        _assetRepositoryFactory = assetRepositoryFactory;
         _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? new LibRawDecoder());
         Editor = new TetherReferenceModeViewModel(
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
@@ -99,8 +107,19 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         };
         Targets.CollectionChanged += (_, args) =>
         {
-            if (args.NewItems is not null) foreach (ReferenceTargetItem target in args.NewItems) target.PropertyChanged += OnTargetSelectionChanged;
-            if (args.OldItems is not null) foreach (ReferenceTargetItem target in args.OldItems) target.PropertyChanged -= OnTargetSelectionChanged;
+            foreach (var removed in _observedTargets.Where(item => !Targets.Contains(item)).ToArray())
+            {
+                removed.PropertyChanged -= OnTargetSelectionChanged;
+                removed.PropertyChanged -= OnTargetMetadataChanged;
+                _observedTargets.Remove(removed);
+            }
+            if (args.NewItems is not null) foreach (ReferenceTargetItem target in args.NewItems)
+            {
+                _observedTargets.Add(target);
+                target.PropertyChanged += OnTargetSelectionChanged;
+                target.PropertyChanged += OnTargetMetadataChanged;
+                QueueMetadata(() => HydrateAssetMetadataAsync(target));
+            }
             RefreshSyncAvailability();
         };
     }
@@ -167,6 +186,80 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     }
     private void OnTargetSelectionChanged(object? sender, PropertyChangedEventArgs e)
     { if (e.PropertyName == nameof(ReferenceTargetItem.IsSelected)) RefreshSyncAvailability(); }
+    private void OnTargetMetadataChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (_disposed || sender is not ReferenceTargetItem target || _hydratingMetadata.Contains(target.Id)) return;
+        if (e.PropertyName == nameof(ReferenceTargetItem.AssetId))
+        {
+            target.MetadataDatabasePath = null;
+            QueueMetadata(() => HydrateAssetMetadataAsync(target));
+            return;
+        }
+        if (target.AssetId is not Guid assetId) return;
+        // Capture each requested value before yielding. Rating and color writes share a FIFO,
+        // so neither a later click nor a refresh can overtake an earlier database mutation.
+        if (e.PropertyName == nameof(ReferenceTargetItem.Rating))
+        {
+            var rating = target.Rating;
+            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, rating, null));
+        }
+        else if (e.PropertyName == nameof(ReferenceTargetItem.ColorLabel))
+        {
+            var color = target.ColorLabel ?? "";
+            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, null, color));
+        }
+    }
+    public Func<string, Task>? AssetMetadataSaved { get; set; }
+    public Task FlushMetadataAsync() => _metadataWork;
+    private void QueueMetadata(Func<Task> operation) => _metadataWork = RunMetadataAsync(_metadataWork, operation);
+    private async Task RunMetadataAsync(Task previous, Func<Task> operation)
+    {
+        try
+        {
+            await previous;
+            await operation();
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException or Microsoft.Data.Sqlite.SqliteException)
+        { StatusText = "素材库标记未能保存或读取，请重试。"; }
+    }
+    private IAssetLibraryRepository? OpenMetadataRepository(ReferenceTargetItem target) =>
+        target.MetadataDatabasePath is { } path ? new SqliteAssetLibraryRepository(path) : _assetRepositoryFactory?.Invoke();
+    private async Task PersistAssetMetadataAsync(ReferenceTargetItem target, Guid assetId, int? rating, string? color)
+    {
+        if (target.AssetId != assetId) return;
+        await using var repository = OpenMetadataRepository(target);
+        if (repository is null) { target.MetadataStatus = "素材库不可用，尚未保存"; return; }
+        await repository.InitializeAsync();
+        if (await repository.GetAssetAsync(assetId) is null)
+        {
+            target.MetadataStatus = "素材库中未找到此照片，尚未保存";
+            return;
+        }
+        target.MetadataDatabasePath = repository.DatabasePath;
+        if (rating is not null) await repository.UpdateAssetMetadataAsync(assetId, rating: rating);
+        if (color is not null) await new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).SaveAsync([assetId], color: color);
+        target.MetadataStatus = "已保存到素材库";
+        if (AssetMetadataSaved is { } refresh) await refresh(repository.DatabasePath);
+    }
+    private async Task HydrateAssetMetadataAsync(ReferenceTargetItem target)
+    {
+        if (target.AssetId is not Guid assetId) { target.MetadataStatus = "仅本次会话 · 未加入素材库"; return; }
+        try
+        {
+            await using var repository = OpenMetadataRepository(target);
+            if (repository is null) { target.MetadataStatus = "素材库不可用"; return; }
+            await repository.InitializeAsync();
+            var asset = await repository.GetAssetAsync(assetId);
+            if (target.AssetId != assetId) return;
+            if (asset is null) { target.MetadataStatus = "素材库中未找到此照片"; return; }
+            target.MetadataDatabasePath = repository.DatabasePath;
+            _hydratingMetadata.Add(target.Id);
+            target.Rating = asset.Rating;
+            target.ColorLabel = string.IsNullOrWhiteSpace(asset.ColorLabel) ? null : asset.ColorLabel;
+            target.MetadataStatus = "素材库标记";
+        }
+        finally { _hydratingMetadata.Remove(target.Id); }
+    }
     private void RefreshSyncAvailability()
     {
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
@@ -254,7 +347,12 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public bool HasFailedTarget => FailedTarget is not null;
     public bool CanRetryFailedExport => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory);
 
-    public async Task InitializeAsync(CancellationToken token = default) => await Editor.LoadAsync(token);
+    public async Task InitializeAsync(CancellationToken token = default)
+    {
+        await Editor.LoadAsync(token);
+        foreach (var target in Targets) QueueMetadata(() => HydrateAssetMetadataAsync(target));
+        await FlushMetadataAsync();
+    }
 
     public async Task AcceptContextAsync(Guid? projectId, Guid? assetId, BitmapSource? source, CancellationToken token = default)
     {
@@ -266,9 +364,10 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         StatusText = "已从联机拍摄带入当前照片和色彩方案；取消或返回不会改写方案。";
     }
 
-    public async Task LoadTargetAsync(string path)
+    public async Task LoadTargetAsync(string path, Guid? assetId = null)
     {
         var target = GetOrCreateTarget(path);
+        if (assetId is not null) target.AssetId = assetId;
         target.IsSelected = true;
         // RAW thumbnail and activation must share one session-owned master.  Starting both
         // operations concurrently would allow the ??= assignment below to race and decode
@@ -338,6 +437,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             if (revision != Volatile.Read(ref _activationRevision)) return;
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
+            QueueMetadata(() => HydrateAssetMetadataAsync(target));
+            await FlushMetadataAsync();
+            if (revision != Volatile.Read(ref _activationRevision)) return;
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
             await Editor.SetSourceAsync(target.AssetId, image, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
             if (revision != Volatile.Read(ref _activationRevision)) return;
@@ -350,7 +452,17 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
     }
 
-    public void Dispose() { _exportCancellation?.Cancel(); _exportCancellation?.Dispose(); Editor.Dispose(); }
+    public void Dispose()
+    {
+        _disposed = true;
+        foreach (var target in _observedTargets)
+        {
+            target.PropertyChanged -= OnTargetMetadataChanged;
+            target.PropertyChanged -= OnTargetSelectionChanged;
+        }
+        _observedTargets.Clear();
+        _exportCancellation?.Cancel(); _exportCancellation?.Dispose(); Editor.Dispose();
+    }
 
     private async Task ChooseTargetAsync()
     {
@@ -461,7 +573,11 @@ public sealed class ReferenceTargetItem : ObservableObject
     private ReferenceTargetStatus _status = ReferenceTargetStatus.Pending;
     public ReferenceTargetItem(string path) { Id = Guid.NewGuid(); Path = path; FileName = System.IO.Path.GetFileName(path); }
     public Guid Id { get; }
-    public Guid? AssetId { get; set; }
+    private Guid? _assetId;
+    public Guid? AssetId { get => _assetId; set => SetProperty(ref _assetId, value); }
+    internal string? MetadataDatabasePath { get; set; }
+    private string _metadataStatus = "仅本次会话 · 未加入素材库";
+    public string MetadataStatus { get => _metadataStatus; internal set => SetProperty(ref _metadataStatus, value); }
     public string Path { get; }
     public string FileName { get; }
     private BitmapSource? _thumbnail;
@@ -487,6 +603,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public Brush ColorLabelBrush => ColorLabel switch
     {
         "红" => new SolidColorBrush(Color.FromRgb(0xD9, 0x5C, 0x5C)),
+        "橙" => new SolidColorBrush(Color.FromRgb(0xD9, 0x89, 0x4A)),
         "黄" => new SolidColorBrush(Color.FromRgb(0xD9, 0xB4, 0x4A)),
         "绿" => new SolidColorBrush(Color.FromRgb(0x62, 0xB8, 0x7A)),
         "蓝" => new SolidColorBrush(Color.FromRgb(0x5E, 0x93, 0xD6)),

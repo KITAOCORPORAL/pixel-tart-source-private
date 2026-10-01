@@ -1,10 +1,13 @@
 using System.IO;
+using RAWSelectionAssistant.Core.Models;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Services.Presets;
 using RAWSelectionAssistant.ViewModels;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.WpfTests;
 
@@ -95,6 +98,39 @@ public sealed class ColorStudioStateClosureTests
         Assert.AreNotEqual((byte)0, ((System.Windows.Media.SolidColorBrush)target.ColorLabelBrush).Color.A);
         target.ColorLabel = null;
         Assert.AreEqual("无颜色标记", target.ColorLabelAccessibleName);
+    });
+
+    [TestMethod]
+    public void FilmstripHydratesAndPersistsAssetLibraryMetadata() => Sta(() =>
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-FilmstripMetadata-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var sourcePath = Path.Combine(root, "target.png");
+            var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(SolidBitmap(80))); using (var stream = File.Create(sourcePath)) encoder.Save(stream);
+            var repository = new SqliteAssetLibraryRepository(Path.Combine(root, "asset-library.db"));
+            repository.InitializeAsync().GetAwaiter().GetResult();
+            var imported = repository.ImportAsync([new AssetImportRequest(sourcePath)]).GetAwaiter().GetResult();
+            var asset = repository.QueryAsync(new AssetLibraryQuery()).GetAwaiter().GetResult().Items.Single();
+            repository.UpdateAssetMetadataAsync(asset.AssetId, rating: 4).GetAwaiter().GetResult();
+            new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).SaveAsync([asset.AssetId], color: "蓝").GetAwaiter().GetResult();
+            using var workspace = new ReferenceColorWorkspaceViewModel(new MetadataDialog(root), assetRepositoryFactory: () => new SqliteAssetLibraryRepository(repository.DatabasePath));
+            var target = new ReferenceTargetItem(sourcePath) { AssetId = asset.AssetId, IsSelected = true };
+            workspace.Targets.Add(target);
+            workspace.LoadTargetAsync(sourcePath).GetAwaiter().GetResult();
+            Assert.AreEqual(4, target.Rating); Assert.AreEqual("蓝", target.ColorLabel);
+            target.Rating = 2; target.ColorLabel = "红";
+            SpinWait.SpinUntil(() => repository.GetAssetAsync(asset.AssetId).GetAwaiter().GetResult()?.Rating == 2 &&
+                new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).GetAsync(asset.AssetId).GetAwaiter().GetResult().Color == "红", TimeSpan.FromSeconds(5));
+            Assert.AreEqual(2, repository.GetAssetAsync(asset.AssetId).GetAwaiter().GetResult()!.Rating);
+            Assert.AreEqual("红", new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).GetAsync(asset.AssetId).GetAwaiter().GetResult().Color);
+            var sessionOnly = new ReferenceTargetItem(sourcePath) { Rating = 5, ColorLabel = "绿" };
+            workspace.Targets.Add(sessionOnly);
+            Assert.IsNull(sessionOnly.AssetId);
+            repository.DisposeAsync().GetAwaiter().GetResult();
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     });
 
     [TestMethod]
@@ -482,6 +518,17 @@ public sealed class ColorStudioStateClosureTests
     });
 
     private static TetherReferenceModeViewModel Editor() => new(new ReferenceLookStore(Path.Combine(Path.GetTempPath(), "pixel-tart-state-test-" + Guid.NewGuid().ToString("N"))));
+    private sealed class MetadataDialog(string folder) : IDialogService
+    {
+        public IReadOnlyList<string> ChooseFiles(string title, string filter, bool multiselect = true) => [];
+        public string? ChooseFolder(string title, string? initialDirectory = null) => folder;
+        public string? ChooseSaveFile(string title, string filter, string defaultExtension, string? suggestedFileName = null) => null;
+        public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> currentToolIds) => null;
+        public void ShowInfo(string message) { } public void ShowError(string message) { }
+        public bool Confirm(string message, string title) => false; public HelpAction ShowHelp() => HelpAction.None; public void ShowFeedback() { }
+        public RawFileEntry? ChooseRawCandidate(IReadOnlyList<RawFileEntry> candidates) => null;
+        public bool ShowMediaDetails(MediaSelectionItem item, bool showAdvancedDetails) => false; public void RevealFile(string path) { }
+    }
     private static ReferenceLook Look()
     {
         var pixels = new VisualPixelBuffer(16, 16, Enumerable.Repeat(new byte[] { 100, 110, 120 }, 256).SelectMany(pixel => pixel).ToArray());

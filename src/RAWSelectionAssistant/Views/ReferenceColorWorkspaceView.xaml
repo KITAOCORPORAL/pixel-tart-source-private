@@ -182,7 +182,7 @@
        </Border>
        </DataTemplate></ListBox.ItemTemplate>
      </ListBox>
-    <StackPanel DockPanel.Dock="Bottom" Margin="8,6,0,0"><TextBlock Text="{Binding ExportStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding ExportFailureSummary}" Style="{StaticResource CaptionText}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap"/></StackPanel>
+    <StackPanel DockPanel.Dock="Bottom" Margin="8,6,0,0"><TextBlock Text="{Binding ExportStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding ExportFailureSummary}" Style="{StaticResource CaptionText}" Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap"/><TextBlock Text="{Binding ActiveTarget.MetadataStatus}" Style="{StaticResource CaptionText}"/></StackPanel>
     </DockPanel>
   </Border>
  </Grid>
