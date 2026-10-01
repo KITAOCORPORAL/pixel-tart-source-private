@@ -1,6 +1,6 @@
 # Preview / Export parity evidence
 
-SourceHead: `978b31d30bc9af3aaf22ac7e3f812451767299bf`
+SourceHead: `bec2b0f6b91052762af87538f64399de6b946ba9`
 
 The production V3 preview and export paths use the shared CPU processing services. The WPF parity test compares the rendered preview pixels with the frozen target export pixels. Proxy resizing and output encoding are allowed to change resolution and container bytes; they must not change the processing contract.
 
