@@ -86,6 +86,16 @@ public sealed class ColorStudioStateClosureTests
         Assert.AreNotSame(firstNode.NumericParameters, secondNode.NumericParameters);
         Assert.AreNotSame(first.ColorAdjustmentStackSnapshot.Nodes, second.ColorAdjustmentStackSnapshot.Nodes);
     });
+    [TestMethod]
+    public void FilmstripColorLabelUsesSharedCanonicalStateAndAccessibleSwatch() => Sta(() =>
+    {
+        var target = new ReferenceTargetItem("label.jpg") { ColorLabel = "蓝", Rating = 4 };
+        Assert.AreEqual("蓝", target.ColorLabel);
+        Assert.AreEqual("颜色标记：蓝", target.ColorLabelAccessibleName);
+        Assert.AreNotEqual((byte)0, ((System.Windows.Media.SolidColorBrush)target.ColorLabelBrush).Color.A);
+        target.ColorLabel = null;
+        Assert.AreEqual("无颜色标记", target.ColorLabelAccessibleName);
+    });
 
     [TestMethod]
     public void TargetWithNoStackDoesNotInheritPreviousStackTests() => Sta(() =>
