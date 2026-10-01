@@ -1,7 +1,7 @@
 # Pixel Tart Round 3 Final User Retest
 
-Release EXE: `artifacts/releases/round3-final/KitaoPhotoSelector.exe`
-SourceHead: `de4c91a67c9146b5272bf20e10360172c4bf6189`
+Release EXE: `artifacts/releases/round3-final/publish/win-x64/KitaoPhotoSelector.exe`
+SourceHead: `978b31d30bc9af3aaf22ac7e3f812451767299bf`
 
 Release x64 user visual approval checklist. Please open the Release EXE and mark each item yourself after checking the stated workflow. `VisualApproved=false` and `UserVerified=false` until you do so.
 
