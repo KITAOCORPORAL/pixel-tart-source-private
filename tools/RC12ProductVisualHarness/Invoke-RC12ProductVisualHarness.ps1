@@ -9,10 +9,14 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $dotnet = [IO.Path]::GetFullPath((Join-Path $repoRoot '..\..\.dotnet\dotnet.exe'))
+if (-not (Test-Path -LiteralPath $dotnet -PathType Leaf)) {
+    $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
+    if ($null -ne $dotnetCommand) { $dotnet = $dotnetCommand.Source }
+}
 $project = Join-Path $repoRoot 'src\RAWSelectionAssistant\RAWSelectionAssistant.csproj'
 $executable = Join-Path $repoRoot 'src\RAWSelectionAssistant\bin\x64\Release\net10.0-windows10.0.19041.0\win-x64\KitaoPhotoSelector.UiReview.exe'
 $sourceCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
-if ([string]::IsNullOrWhiteSpace($OutputRoot)) { $OutputRoot = Join-Path $repoRoot 'artifacts\rc12-product-visual' }
+if ([string]::IsNullOrWhiteSpace($OutputRoot)) { $OutputRoot = Join-Path $repoRoot 'artifacts\current-run-visual' }
 $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
 $screenshotsRoot = Join-Path $OutputRoot 'screenshots'
 $dpiRoot = Join-Path $OutputRoot 'dpi-current'
@@ -26,7 +30,7 @@ foreach ($path in @($OutputRoot,$screenshotsRoot,$dpiRoot,$resolutionRoot,$closu
 }
 
 $baselinePath = Join-Path $ratioRoot 'before_previous_head.png'
-$previousManifestPath = Join-Path $OutputRoot 'rc12-product-visual-evidence.json'
+$previousManifestPath = Join-Path $OutputRoot 'current-run-visual-evidence.json'
 $previousGridPath = Join-Path $screenshotsRoot '01_asset_library_grid.png'
 $baselineCommit = $null
 if (-not (Test-Path -LiteralPath $baselinePath) -and (Test-Path -LiteralPath $previousManifestPath) -and (Test-Path -LiteralPath $previousGridPath)) {
@@ -254,7 +258,7 @@ $sourceSafe = ($sourceBefore | ConvertTo-Json -Compress) -ceq ($sourceAfter | Co
 $allExited = @($script:captures | Where-Object { -not $_.process_exited_before_next }).Count -eq 0
 $uniquePids = @($script:captures.process_id | Sort-Object -Unique).Count -eq $script:captures.Count
 $manifest = [ordered]@{
-    schema='pixel-tart-rc12-product-visual/v1'; product_version='2.3.0-RC12'; source_commit=$sourceCommit
+    schema='pixel-tart-current-run-visual/v1'; product_version='2.3.0'; source_commit=$sourceCommit
     real_app_xaml=$true; real_main_window=$true; pixel_tart_dark_theme=$true; synthetic_assets_only=$true
     process_per_fixture=$true; application_singleton_shared=$false; source_files_unchanged=$sourceSafe
     required_product_screenshot_count=12; product_screenshot_count=@($script:captures | Where-Object group -eq 'product-screenshot').Count
@@ -272,7 +276,7 @@ $manifest = [ordered]@{
     executable_sha256=(Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash
     generated_at=[DateTimeOffset]::Now.ToString('O'); captures=$script:captures; source_before=$sourceBefore; source_after=$sourceAfter
 }
-$manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'rc12-product-visual-evidence.json') -Encoding UTF8
+$manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'current-run-visual-evidence.json') -Encoding UTF8
 if (-not $sourceSafe) { throw 'Synthetic source assets changed during the RC12 visual run.' }
 if (-not $allExited) { throw 'Process-per-fixture lifecycle isolation was not proven.' }
 if ($StatePattern -eq '*' -and ($manifest.canvas_capture_count -ne 10 -or $manifest.contextual_inspector_capture_count -ne 2)) { throw 'Creative workflow evidence set is incomplete.' }

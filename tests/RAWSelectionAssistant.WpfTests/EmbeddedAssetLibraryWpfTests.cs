@@ -551,7 +551,9 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsFalse(visualDetails.IsExpanded,"Optional visual detail stays collapsed until requested.");
                 visualDetails.IsExpanded=true;page.UpdateLayout();
                 var paletteSwatches = FindVisualChildren<Border>(page)
-                    .Where(border => border.DataContext is DominantColor && border.Height == 34)
+                    .Where(border => border.DataContext is DominantColor &&
+                                     AutomationProperties.GetAutomationId(border) == "VisualPaletteSwatch" &&
+                                     border.ActualHeight > 0)
                     .ToArray();
                 Assert.HasCount(page.ViewModel.Analysis.Palette.Count, paletteSwatches);
                 foreach (var swatch in paletteSwatches)

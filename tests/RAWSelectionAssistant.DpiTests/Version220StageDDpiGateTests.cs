@@ -20,7 +20,7 @@ public sealed class Version220StageDDpiGateTests
 
     [TestMethod] public void PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation()
     {
-        var metadata = Directory.GetFiles(Path.Combine(Root, "artifacts", "rc12-product-visual", "dpi-current"), "*.png.json").First();
+        var metadata = Directory.GetFiles(Path.Combine(Root, "artifacts", "current-run-visual", "dpi-current"), "*.png.json").First();
         var existing = File.ReadAllText(metadata);
         StringAssert.Contains(existing, "\"physicalDpiManuallyTested\": false");
         StringAssert.Contains(existing, "\"validationMode\": \"automated-logical-simulation\"");

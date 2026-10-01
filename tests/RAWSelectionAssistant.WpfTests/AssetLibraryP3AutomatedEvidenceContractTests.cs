@@ -524,7 +524,9 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
             var harness = runner[..executionMarker] + $$"""
                 function Require-Harness([bool]$Condition, [string]$Message) { if (-not $Condition) { throw "HARNESS: $Message" } }
                 $harnessRoot = '{{escapedTemp}}'
-                $powershellPath = [IO.Path]::GetFullPath((Get-Process -Id $PID).Path)
+                # Resolve Windows PowerShell 5.1 without calling Get-Process or
+                # relying on PSHOME, both of which are exercised/mocked later.
+                $powershellPath = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
                 function Start-HarnessProcess([string]$Body) {
                     $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($Body))
                     Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-EncodedCommand',$encoded) -PassThru -WindowStyle Hidden
@@ -923,16 +925,24 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                     $body = @"
                 `$stream = [IO.FileStream]::new('$escapedPath',[IO.FileMode]::Open,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
                 try {
+                    Write-Output 'locker-start'
                     [IO.File]::WriteAllText('$escapedMarker','locked',[Text.UTF8Encoding]::new(`$false))
                     [Threading.Thread]::Sleep($HoldMilliseconds)
                 } finally { `$stream.Dispose() }
                 [Threading.Thread]::Sleep($AfterReleaseMilliseconds)
                 exit 0
                 "@
-                    $process = Start-HarnessProcess $body
+                    $stdoutPath = "$Marker.stdout"
+                    $stderrPath = "$Marker.stderr"
+                    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($body))
+                    $process = Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-EncodedCommand',$encoded) -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru -WindowStyle Hidden
                     $deadline = [DateTimeOffset]::UtcNow.AddSeconds(5)
                     while (-not [IO.File]::Exists($Marker) -and [DateTimeOffset]::UtcNow -lt $deadline) {
-                        if ($process.HasExited) { throw 'file-lock harness exited before acquiring its lock' }
+                        if ($process.HasExited) {
+                            $stderr = if ([IO.File]::Exists($stderrPath)) { [IO.File]::ReadAllText($stderrPath) } else { '' }
+                            $stdout = if ([IO.File]::Exists($stdoutPath)) { [IO.File]::ReadAllText($stdoutPath) } else { '' }
+                            throw "file-lock harness exited before acquiring its lock (code=$($process.ExitCode); stdout=$stdout; stderr=$stderr; body=$body)"
+                        }
                         [Threading.Thread]::Sleep(10)
                     }
                     Require-Harness ([IO.File]::Exists($Marker)) 'file-lock harness did not acquire its lock'

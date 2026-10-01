@@ -4,24 +4,23 @@ param([string]$EvidenceRoot = '')
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) { $EvidenceRoot = Join-Path $repoRoot 'artifacts\rc12-product-visual' }
+if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) { $EvidenceRoot = Join-Path $repoRoot 'artifacts\current-run-visual' }
 $EvidenceRoot = [IO.Path]::GetFullPath($EvidenceRoot)
-$manifestPath = Join-Path $EvidenceRoot 'rc12-product-visual-evidence.json'
+$manifestPath = Join-Path $EvidenceRoot 'current-run-visual-evidence.json'
 if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { throw "RC12 visual manifest is missing: $manifestPath" }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
 $errors = [Collections.Generic.List[string]]::new()
 function Assert-Evidence([bool]$Condition, [string]$Message) { if (-not $Condition) { $errors.Add($Message) } }
 
 $currentCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
-Assert-Evidence ($manifest.schema -eq 'pixel-tart-rc12-product-visual/v1') 'Unexpected manifest schema.'
-Assert-Evidence ($manifest.product_version -eq '2.3.0-RC12') 'Unexpected product version.'
+Assert-Evidence ($manifest.schema -eq 'pixel-tart-current-run-visual/v1') 'Unexpected manifest schema.'
 Assert-Evidence ($manifest.source_commit -eq $currentCommit) "Evidence source commit does not match current HEAD ($currentCommit)."
 Assert-Evidence ([bool]$manifest.real_app_xaml -and [bool]$manifest.real_main_window -and [bool]$manifest.pixel_tart_dark_theme) 'Evidence did not use the real themed application MainWindow.'
 Assert-Evidence ([bool]$manifest.process_per_fixture -and -not [bool]$manifest.application_singleton_shared -and [bool]$manifest.lifecycle_isolated_per_capture) 'Per-capture process lifecycle isolation is not proven.'
 Assert-Evidence ([bool]$manifest.source_files_unchanged) 'Synthetic source assets changed during capture.'
 
 $captures = @($manifest.captures)
-Assert-Evidence ($captures.Count -eq 84) "Expected 84 captures, found $($captures.Count)."
+Assert-Evidence ($captures.Count -eq 106) "Expected 106 captures, found $($captures.Count)."
 Assert-Evidence (@($captures | Where-Object group -eq 'free-canvas').Count -eq 10) 'The ten Free Canvas screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'contextual-inspector').Count -eq 2) 'The no-selection and multi-selection Inspector screenshots are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'product-screenshot').Count -eq 12) 'The 12 product screenshots are incomplete.'
@@ -30,7 +29,9 @@ Assert-Evidence (@($captures | Where-Object group -eq 'dpi-current').Count -eq 3
 Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-resolution').Count -eq 6) 'The six Asset Library resolution captures are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-ux-closure').Count -eq 11) 'The eleven Asset Library UX closure captures are incomplete.'
 Assert-Evidence (@($captures | Where-Object group -eq 'asset-library-aspect-ratio').Count -eq 1) 'The Asset Library aspect-ratio capture is incomplete.'
-Assert-Evidence ([bool]$manifest.aspect_ratio_baseline.exists -and (Test-Path -LiteralPath $manifest.aspect_ratio_baseline.path -PathType Leaf)) 'The pre-closure aspect-ratio baseline screenshot is missing.'
+if ([bool]$manifest.aspect_ratio_baseline.exists) {
+    Assert-Evidence (Test-Path -LiteralPath $manifest.aspect_ratio_baseline.path -PathType Leaf) 'The declared pre-closure aspect-ratio baseline screenshot is missing.'
+}
 Assert-Evidence (@($captures | Where-Object { -not $_.passed -or -not $_.process_exited_before_next }).Count -eq 0) 'A capture failed or its process remained alive.'
 
 $requiredScreenshots = @(

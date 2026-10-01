@@ -216,37 +216,37 @@ public sealed partial class AssetLibraryViewModel
         ToggleSortDirectionCommand = new(ToggleSortDirectionAsync);
         CopySelectedPathCommand = new(CopySelectedPathAsync, () => SelectedAsset is not null);
         ExportSelectedOriginalCommand = new(ExportSelectedOriginalAsync, () => SelectedAsset is not null);
-        CopyContextPathCommand = new(CopyContextPathAsync);
-        CopyContextFileCommand = new(CopyContextFileAsync);
+        CopyContextPathCommand = new(CopyContextPathAsync, CanContextAsset);
+        CopyContextFileCommand = new(CopyContextFileAsync, CanContextFile);
         AddContextFolderCommand = new(card => AddContextFolderAsync(card), _ => SelectedFolder is not null);
         RemoveContextFolderCommand = new(card => RemoveContextFolderAsync(card), _ => SelectedFolder is not null);
         AddContextTagCommand = new(card => AddContextTagAsync(card), _ => SelectedTag is not null);
         RemoveContextTagCommand = new(card => RemoveContextTagAsync(card), _ => SelectedTag is not null);
-        RateContextZeroCommand = new(card => RateContextAsync(card, 0));
-        RateContextOneCommand = new(card => RateContextAsync(card, 1));
-        RateContextTwoCommand = new(card => RateContextAsync(card, 2));
-        RateContextThreeCommand = new(card => RateContextAsync(card, 3));
-        RateContextFourCommand = new(card => RateContextAsync(card, 4));
-        RateContextFiveCommand = new(card => RateContextAsync(card, 5));
+        RateContextZeroCommand = new(card => RateContextAsync(card, 0), CanContextAsset);
+        RateContextOneCommand = new(card => RateContextAsync(card, 1), CanContextAsset);
+        RateContextTwoCommand = new(card => RateContextAsync(card, 2), CanContextAsset);
+        RateContextThreeCommand = new(card => RateContextAsync(card, 3), CanContextAsset);
+        RateContextFourCommand = new(card => RateContextAsync(card, 4), CanContextAsset);
+        RateContextFiveCommand = new(card => RateContextAsync(card, 5), CanContextAsset);
         MarkContextMissingCommand = new(card => SetContextMissingAsync(card, true));
         ClearContextMissingCommand = new(card => SetContextMissingAsync(card, false));
         ArchiveContextCommand = new(card => SetContextArchivedAsync(card, true));
         RestoreContextCommand = new(card => SetContextArchivedAsync(card, false));
-        TrashContextCommand = new(card => SetContextTrashedAsync(card, true));
-        RestoreTrashContextCommand = new(card => SetContextTrashedAsync(card, false));
+        TrashContextCommand = new(card => SetContextTrashedAsync(card, true), CanContextAsset);
+        RestoreTrashContextCommand = new(card => SetContextTrashedAsync(card, false), CanContextAsset);
         WorkflowUnprocessedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Unprocessed));
         WorkflowClientSelectedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.ClientSelected));
         WorkflowPendingRetouchCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.PendingRetouch));
         WorkflowRetouchedCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Retouched));
         WorkflowDeliveredCommand = new(card => SetContextWorkflowAsync(card, AssetWorkflowStatus.Delivered));
-        ExportOriginalContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: false));
-        ExportManagedContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: true));
-        ExportMetadataContextCommand = new(ExportContextMetadataAsync);
+        ExportOriginalContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: false), CanContextSelection);
+        ExportManagedContextCommand = new(card => ExportContextFilesAsync(card, preferManagedCopy: true), CanContextSelection);
+        ExportMetadataContextCommand = new(ExportContextMetadataAsync, CanContextSelection);
         RemoveContextFromViewCommand = new(RemoveContextFromViewAsync, _ => SelectedFolder is not null || SelectedTag is not null);
         ShowContextInfoCommand = new(ShowContextInfoAsync);
-        OpenContextViewerCommand = new(OpenContextViewerAsync);
-        OpenContextExternalCommand = new(OpenContextExternalAsync);
-        RevealContextCommand = new(RevealContextAsync);
+        OpenContextViewerCommand = new(OpenContextViewerAsync, CanContextAsset);
+        OpenContextExternalCommand = new(OpenContextExternalAsync, CanContextFile);
+        RevealContextCommand = new(RevealContextAsync, CanContextFile);
         AddToInspirationTrayCommand = new(AddToInspirationTrayAsync, _ => IsReady && SelectedAssets.Count > 0);
         ToggleInspirationTrayCommand = new(ToggleInspirationTrayAsync, () => IsReady);
         OpenTemporaryInspirationCommand = new(OpenTemporaryInspirationAsync, () => IsReady);
@@ -1805,6 +1805,20 @@ public sealed partial class AssetLibraryViewModel
         AddContextFolderCommand.RaiseCanExecuteChanged(); RemoveContextFolderCommand.RaiseCanExecuteChanged();
         AddContextTagCommand.RaiseCanExecuteChanged(); RemoveContextTagCommand.RaiseCanExecuteChanged();
         RemoveContextFromViewCommand.RaiseCanExecuteChanged(); P2UndoCommand.RaiseCanExecuteChanged(); P2RedoCommand.RaiseCanExecuteChanged();
+        CopyContextPathCommand.RaiseCanExecuteChanged(); CopyContextFileCommand.RaiseCanExecuteChanged();
+        RateContextZeroCommand.RaiseCanExecuteChanged(); RateContextOneCommand.RaiseCanExecuteChanged(); RateContextTwoCommand.RaiseCanExecuteChanged();
+        RateContextThreeCommand.RaiseCanExecuteChanged(); RateContextFourCommand.RaiseCanExecuteChanged(); RateContextFiveCommand.RaiseCanExecuteChanged();
+        TrashContextCommand.RaiseCanExecuteChanged(); RestoreTrashContextCommand.RaiseCanExecuteChanged();
+        ExportOriginalContextCommand.RaiseCanExecuteChanged(); ExportManagedContextCommand.RaiseCanExecuteChanged(); ExportMetadataContextCommand.RaiseCanExecuteChanged();
+        OpenContextViewerCommand.RaiseCanExecuteChanged(); OpenContextExternalCommand.RaiseCanExecuteChanged(); RevealContextCommand.RaiseCanExecuteChanged();
+    }
+
+    private bool CanContextAsset(AssetVisualMatchView? card) => card is not null && ContextIds(card).Count > 0;
+    private bool CanContextSelection(AssetVisualMatchView? card) => CanContextAsset(card);
+    private bool CanContextFile(AssetVisualMatchView? card)
+    {
+        if (!CanContextAsset(card)) return false;
+        return ContextAssets(card).Any(asset => File.Exists(GetDisplaySourcePath(asset)));
     }
     private void NotifyP2BrowserView()
     {

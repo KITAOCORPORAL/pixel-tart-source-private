@@ -146,12 +146,12 @@
             </MenuItem>
             <MenuItem Header="评分" AutomationProperties.AutomationId="AssetContextRating">
                 <MenuItem.Icon><Path Data="{StaticResource AssetAction.Rating}" Style="{StaticResource AssetActionIcon}" /></MenuItem.Icon>
-                    <MenuItem Header="0 星" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
-                    <MenuItem Header="1 星" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
-                    <MenuItem Header="2 星" Command="{Binding Owner.RateContextTwoCommand}" CommandParameter="{Binding}" />
-                    <MenuItem Header="3 星" Command="{Binding Owner.RateContextThreeCommand}" CommandParameter="{Binding}" />
-                    <MenuItem Header="4 星" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
-                    <MenuItem Header="5 星" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="0 星" InputGestureText="0" Command="{Binding Owner.RateContextZeroCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="1 星" InputGestureText="1" Command="{Binding Owner.RateContextOneCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="2 星" InputGestureText="2" Command="{Binding Owner.RateContextTwoCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="3 星" InputGestureText="3" Command="{Binding Owner.RateContextThreeCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="4 星" InputGestureText="4" Command="{Binding Owner.RateContextFourCommand}" CommandParameter="{Binding}" />
+                    <MenuItem Header="5 星" InputGestureText="5" Command="{Binding Owner.RateContextFiveCommand}" CommandParameter="{Binding}" />
             </MenuItem>
 
             <MenuItem Header="工作流" AutomationProperties.AutomationId="AssetContextProjectGroup">

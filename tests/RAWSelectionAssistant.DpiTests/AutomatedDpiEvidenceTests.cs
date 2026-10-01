@@ -7,8 +7,8 @@ namespace RAWSelectionAssistant.DpiTests;
 public sealed class AutomatedDpiEvidenceTests
 {
     private static readonly string RepositoryRoot = FindRepositoryRoot();
-    private static readonly string EvidenceRoot = Path.Combine(RepositoryRoot, "artifacts", "rc12-product-visual");
-    private static readonly string ManifestPath = Path.Combine(EvidenceRoot, "rc12-product-visual-evidence.json");
+    private static readonly string EvidenceRoot = Path.Combine(RepositoryRoot, "artifacts", "current-run-visual");
+    private static readonly string ManifestPath = Path.Combine(EvidenceRoot, "current-run-visual-evidence.json");
 
     [TestMethod]
     [DataRow(100)]
@@ -50,8 +50,7 @@ public sealed class AutomatedDpiEvidenceTests
     {
         using var manifest = LoadManifest();
         var root = manifest.RootElement;
-        Assert.AreEqual("pixel-tart-rc12-product-visual/v1", root.GetProperty("schema").GetString());
-        Assert.AreEqual("2.3.0-RC12", root.GetProperty("product_version").GetString());
+        Assert.AreEqual("pixel-tart-current-run-visual/v1", root.GetProperty("schema").GetString());
         Assert.IsTrue(root.GetProperty("real_app_xaml").GetBoolean());
         Assert.IsTrue(root.GetProperty("real_main_window").GetBoolean());
         Assert.IsTrue(root.GetProperty("pixel_tart_dark_theme").GetBoolean());
@@ -87,6 +86,20 @@ public sealed class AutomatedDpiEvidenceTests
     }
 
     [TestMethod]
+    public void CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract()
+    {
+        using var manifest = LoadManifest();
+        Assert.HasCount(106, Captures(manifest));
+        Assert.AreEqual(12, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "product-screenshot"));
+        Assert.AreEqual(10, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "ux-simplification"));
+        Assert.AreEqual(32, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "dpi-current"));
+        Assert.AreEqual(6, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "asset-library-resolution"));
+        Assert.AreEqual(11, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "asset-library-ux-closure"));
+        Assert.AreEqual(10, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "free-canvas"));
+        Assert.AreEqual(2, Captures(manifest).Count(row => row.GetProperty("group").GetString() == "contextual-inspector"));
+    }
+
+    [TestMethod]
     public void IsolatedSyntheticSourceImagesRemainByteIdentical()
     {
         using var manifest = LoadManifest();
@@ -99,10 +112,10 @@ public sealed class AutomatedDpiEvidenceTests
     }
 
     [TestMethod]
-    public void Historical204EvidenceIsNotPartOfTheCurrentProductGate()
+    public void HistoricalReleaseEvidenceIsNotPartOfTheCurrentProductGate()
     {
-        Assert.DoesNotContain(Path.Combine("automated-dpi-review", "2.0.4"), ManifestPath, StringComparison.OrdinalIgnoreCase);
-        Assert.IsTrue(ManifestPath.EndsWith(Path.Combine("rc12-product-visual", "rc12-product-visual-evidence.json"), StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain("rc12", ManifestPath, StringComparison.OrdinalIgnoreCase);
+        Assert.IsTrue(ManifestPath.EndsWith(Path.Combine("current-run-visual", "current-run-visual-evidence.json"), StringComparison.OrdinalIgnoreCase));
     }
 
     private static JsonDocument LoadManifest() => JsonDocument.Parse(File.ReadAllText(ManifestPath));

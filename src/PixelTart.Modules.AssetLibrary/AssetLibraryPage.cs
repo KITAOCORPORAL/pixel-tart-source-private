@@ -627,6 +627,38 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             }
         }
         Apply(menu);
+        if (menu.Items.OfType<MenuItem>().FirstOrDefault(item => AutomationProperties.GetAutomationId(item) == "AssetContextColor") is { } colorMenu)
+        {
+            colorMenu.Items.Clear();
+            foreach (var color in _viewModel.InspectorColors)
+            {
+                var value = color;
+                var swatch = new Border
+                {
+                    Width = 34, Height = 16, Margin = new Thickness(2, 0, 10, 0),
+                    CornerRadius = new CornerRadius(3),
+                    Background = value switch
+                    {
+                        "红" => Brushes.IndianRed, "橙" => Brushes.DarkOrange, "黄" => Brushes.Gold,
+                        "绿" => Brushes.SeaGreen, "蓝" => Brushes.SteelBlue, "紫" => Brushes.MediumPurple,
+                        _ => Brushes.Transparent
+                    }, BorderBrush = Brushes.Gray, BorderThickness = new Thickness(1),
+                    ToolTip = value.Length == 0 ? "清除颜色" : value
+                };
+                var item = new MenuItem { Header = swatch, ToolTip = value.Length == 0 ? "清除颜色" : value,
+                    IsEnabled = _viewModel.HasSelection, Style = style };
+                if (template is not null) item.Template = template;
+                AutomationProperties.SetName(item, value.Length == 0 ? "清除颜色" : value + "颜色标记");
+                item.Click += async (_, args) =>
+                {
+                    args.Handled = true;
+                    _viewModel.InspectorColor = value;
+                    _viewModel.ApplyInspectorColorCommand.Execute(null);
+                    await _viewModel.ApplyInspectorColorCommand.ExecutionTask;
+                };
+                colorMenu.Items.Add(item);
+            }
+        }
         foreach (var item in menu.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(item);
     }
 
