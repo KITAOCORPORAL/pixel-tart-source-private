@@ -89,6 +89,24 @@ public sealed class BatchExportProcessedPixelsTests
         Assert.AreNotSame(a.ColorAdjustmentStackSnapshot.Nodes[1].NumericParameters, b.ColorAdjustmentStackSnapshot!.Nodes[1].NumericParameters);
         b.IsSelected = false; Assert.IsFalse(workspace.CanSyncSelectedNodes);
     }
+
+    [TestMethod]
+    public void CopyApplyAdjustmentsUsesSelectedCategoriesAndProtectsAssetFields()
+    {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()));
+        workspace.Editor.WorkspaceMode = "专业";
+        var first = new ReferenceTargetItem("first.jpg") { IsSelected = true, Rating = 5, ColorLabel = "红", ColorAdjustmentStackSnapshot = workspace.Editor.AdjustmentStack.DeepClone() };
+        var second = new ReferenceTargetItem("second.jpg") { IsSelected = true, Rating = 2, ColorLabel = "蓝", ColorAdjustmentStackSnapshot = workspace.Editor.AdjustmentStack.DeepClone() };
+        workspace.Targets.Add(first); workspace.Targets.Add(second);
+        workspace.Editor.SelectedAdjustmentNode = workspace.Editor.AdjustmentNodes.Single(node => node.Type == ColorStudioNodeType.ColorRange);
+        workspace.Editor.RangeHue = 77;
+        workspace.OpenAdjustmentCopyCommand.Execute(null);
+        foreach (var choice in workspace.AdjustmentSyncChoices) choice.Selected = choice.Type == ColorStudioNodeType.ColorRange;
+        workspace.ConfirmAdjustmentCopyCommand.Execute(null);
+        Assert.AreEqual(5, first.Rating); Assert.AreEqual("红", first.ColorLabel);
+        Assert.AreEqual(2, second.Rating); Assert.AreEqual("蓝", second.ColorLabel);
+        Assert.AreEqual(77, second.ColorAdjustmentStackSnapshot!.Nodes.Single(node => node.Type == ColorStudioNodeType.ColorRange).NumericParameters["hue"]);
+    }
     [TestMethod]
     public async Task InactiveTargetsExportTheirFrozenProcessedPixelsNotActiveEditorPixels()
     {

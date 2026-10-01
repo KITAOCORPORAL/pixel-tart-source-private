@@ -69,6 +69,29 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
         foreach (var node in selected) if (known.Add(node.Id)) existing.Add(node);
         return (target with { Nodes = existing }).Normalize();
     }
+
+    /// <summary>Copy selected adjustment categories while preserving the target's other nodes and order.</summary>
+    public ColorAdjustmentStack SyncSelectedByTypeFrom(ColorAdjustmentStack source, IReadOnlySet<ColorStudioNodeType> selectedTypes)
+    {
+        var target = Normalize(); var incoming = source.Normalize();
+        var selected = incoming.Nodes.Where(node => selectedTypes.Contains(node.Type)).Select(node => node.Normalize()).ToArray();
+        if (selected.Length == 0) return target;
+        var remaining = selected.ToDictionary(node => node.Type);
+        var replaced = new List<ColorAdjustmentStackNode>(target.Nodes.Count + selected.Length);
+        var seen = new HashSet<ColorStudioNodeType>();
+        foreach (var node in target.Nodes)
+        {
+            if (remaining.TryGetValue(node.Type, out var replacement))
+            {
+                replaced.Add(replacement);
+                seen.Add(node.Type);
+            }
+            else replaced.Add(node);
+        }
+        foreach (var node in selected)
+            if (seen.Add(node.Type)) replaced.Add(node);
+        return (target with { Nodes = replaced }).Normalize();
+    }
 }
 
 public sealed record ColorStudioSchemeV2(Guid Id, string Name, ColorAdjustmentStack Stack, DateTimeOffset UpdatedAtUtc, int Version = 2)

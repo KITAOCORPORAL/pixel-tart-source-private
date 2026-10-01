@@ -117,6 +117,21 @@ public sealed class ColorStudioStackTests
     }
 
     [TestMethod]
+    public void SelectedTypeSync_CopiesOnlyRequestedAdjustmentCategories()
+    {
+        var targetRange = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "target range", true,
+            new Dictionary<string, double> { ["hue"] = 2 });
+        var targetFilm = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.Film, "target film", true,
+            new Dictionary<string, double> { ["profile_amount"] = 10 });
+        var incomingRange = targetRange with { NumericParameters = new Dictionary<string, double> { ["hue"] = 88 } };
+        var incomingFilm = targetFilm with { NumericParameters = new Dictionary<string, double> { ["profile_amount"] = 72 } };
+        var result = new ColorAdjustmentStack([targetRange, targetFilm]).SyncSelectedByTypeFrom(
+            new ColorAdjustmentStack([incomingRange, incomingFilm]), new HashSet<ColorStudioNodeType> { ColorStudioNodeType.ColorRange });
+        Assert.AreEqual(88, result.Nodes.Single(node => node.Type == ColorStudioNodeType.ColorRange).NumericParameters["hue"]);
+        Assert.AreEqual(10, result.Nodes.Single(node => node.Type == ColorStudioNodeType.Film).NumericParameters["profile_amount"]);
+    }
+
+    [TestMethod]
     public void TransitionBlend_DoesNotBlurTextureBetweenAdjacentPixels()
     {
         var source = new VisualPixelBuffer(2, 1, new byte[] { 0, 0, 0, 255, 255, 255 });
