@@ -1255,8 +1255,23 @@ public sealed partial class AssetLibraryViewModel
         _ = RunTrackedP3OperationAsync(RefreshCollectionSizeAsync);
     }
 
+    private void RefreshOrganizationSelection()
+    {
+        foreach (var folder in OrganizationSmartFolders) folder.RefreshSelection();
+        foreach (var group in OrganizationTagGroups) group.RefreshSelection();
+    }
+
+    internal bool IsTagGroupQuerySelected(AssetLibraryTagGroupNodeView group)
+    {
+        if (group.Children.Count == 0 || P3QueryRoot is null) return false;
+        var ids = group.Children.Select(tag => "id:" + tag.Tag.TagId.ToString("D")).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return P3QueryRoot.ToModel().Children.Any(rule => rule.Enabled && !rule.Negated &&
+            rule.Field == AssetQueryField.Tag && rule.Operator == AssetQueryOperator.AnyOf && ids.SetEquals(rule.Values));
+    }
+
     private void UpdateP2QueryDescription()
     {
+        RefreshOrganizationSelection();
         P2QueryDescription = _relationshipFilterDescription
             ?? SelectedFolder?.Name
             ?? SelectedTag?.Name

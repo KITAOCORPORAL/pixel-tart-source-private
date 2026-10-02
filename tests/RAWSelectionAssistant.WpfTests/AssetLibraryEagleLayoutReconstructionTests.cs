@@ -76,8 +76,8 @@ public sealed class AssetLibraryEagleLayoutReconstructionTests
         var popup = AutomationElement(document, "AssetQuickLoupePopup");
         Assert.AreEqual("Center", (string?)popup.Attribute("Placement"));
         var code = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryPage.cs"));
-        StringAssert.Contains(code, "ActualWidth * 0.5d");
-        StringAssert.Contains(code, "ActualHeight * 0.55d");
+        StringAssert.Contains(code, "QuickLoupeImage.Width = bitmap.PixelWidth * scale");
+        StringAssert.Contains(code, "QuickLoupeImage.Height = bitmap.PixelHeight * scale");
         StringAssert.Contains(code, "ContextQuickPreview_Click");
         StringAssert.Contains(code, "QuickLoupePopup_MouseLeave");
 

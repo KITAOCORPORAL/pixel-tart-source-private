@@ -129,10 +129,14 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
     }
 }
 
-public sealed class AssetLibrarySmartFolderNodeView
+public sealed class AssetLibrarySmartFolderNodeView : ObservableObject
 {
+    private readonly AssetLibraryViewModel _owner;
+    public bool IsSelected => _owner.SelectedSmartFolder?.SmartFolderId == Folder.SmartFolderId;
+    internal void RefreshSelection() => OnPropertyChanged(nameof(IsSelected));
     internal AssetLibrarySmartFolderNodeView(AssetLibraryViewModel owner, SmartFolder folder)
     {
+        _owner = owner;
         Folder = folder;
         SelectCommand = new(() => owner.SelectSmartFolderNode(this));
         EditCommand = new(() => owner.EditSmartFolder(this));
@@ -147,7 +151,7 @@ public sealed class AssetLibrarySmartFolderNodeView
     public AssetCommand EditCommand { get; }
 }
 
-public sealed class AssetLibraryTagNodeView
+public sealed class AssetLibraryTagNodeView : ObservableObject
 {
     private readonly AssetLibraryViewModel _owner;
     internal AssetLibraryTagNodeView(AssetLibraryViewModel owner, AssetTag tag)
@@ -157,6 +161,8 @@ public sealed class AssetLibraryTagNodeView
         SelectCommand = new(() => owner.SelectTagNode(this));
     }
 
+    public bool IsSelected => _owner.SelectedTag?.TagId == Tag.TagId;
+    internal void RefreshSelection() => OnPropertyChanged(nameof(IsSelected));
     public AssetTag Tag { get; }
     internal AssetLibraryViewModel Owner => _owner;
     public string Name => Tag.Name;
@@ -184,6 +190,8 @@ public sealed class AssetLibraryTagGroupNodeView : ObservableObject
         _isExpanded = group is null || owner.IsTagGroupExpanded(group.TagGroupId);
     }
 
+    public bool IsSelected => _owner.IsTagGroupQuerySelected(this);
+    internal void RefreshSelection() { OnPropertyChanged(nameof(IsSelected)); foreach (var tag in Children) tag.RefreshSelection(); }
     public TagGroup? Group { get; }
     public string Name { get; }
     public string AutomationId { get; }

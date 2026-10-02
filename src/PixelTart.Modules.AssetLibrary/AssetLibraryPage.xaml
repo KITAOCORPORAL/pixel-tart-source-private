@@ -21,6 +21,7 @@
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
         <local:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
         <local:RatingAtLeastConverter x:Key="RatingAtLeastConverter" />
+        <DataTemplate x:Key="OrganizationNameTemplate"><Border x:Name="OrganizationSelection" CornerRadius="3" Padding="2,0"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="22"/><ColumnDefinition/></Grid.ColumnDefinitions><Path Data="{StaticResource AssetAction.Folder}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15"/><TextBlock Grid.Column="1" Text="{Binding}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" /></Grid></Border><DataTemplate.Triggers><DataTrigger Binding="{Binding DataContext.IsSelected, RelativeSource={RelativeSource AncestorType=Button}}" Value="True"><Setter TargetName="OrganizationSelection" Property="Background" Value="{DynamicResource AccentSoftBrush}"/></DataTrigger></DataTemplate.Triggers></DataTemplate>
         <Style x:Key="QuickLoupeRevealHost" TargetType="Grid">
             <Setter Property="Opacity" Value="0" />
             <Setter Property="IsHitTestVisible" Value="False" />
@@ -347,12 +348,12 @@
         </Grid.RowDefinitions>
         <Popup x:Name="AssetQuickLoupePopup" Placement="Center" AllowsTransparency="True" StaysOpen="False"
                AutomationProperties.AutomationId="AssetQuickLoupePopup" AutomationProperties.Name="素材高清速览">
-            <Border x:Name="QuickLoupeContainer" MinWidth="420" MaxWidth="860" MinHeight="300" MaxHeight="680" Padding="10"
-                    Background="{DynamicResource Brush.Surface.Elevated}" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1" CornerRadius="8"
+            <Border x:Name="QuickLoupeContainer" MaxWidth="860" MaxHeight="680" Padding="0"
+                    Background="Transparent" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1"
                     MouseLeave="QuickLoupePopup_MouseLeave">
-                <Grid><Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                    <Image x:Name="QuickLoupeImage" MaxHeight="620" Stretch="Uniform" AutomationProperties.AutomationId="AssetQuickLoupeImage" />
-                    <TextBlock x:Name="QuickLoupeTitle" Grid.Row="1" Margin="2,6,2,1" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />
+                <Grid>
+                    <Image x:Name="QuickLoupeImage" Stretch="Uniform" AutomationProperties.AutomationId="AssetQuickLoupeImage" />
+                    <TextBlock x:Name="QuickLoupeTitle" MaxWidth="320" Padding="8" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource Brush.Surface.Elevated}" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />
                 </Grid>
             </Border>
         </Popup>
@@ -545,6 +546,51 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Expander>
+                            <TextBlock Text="智能文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
+                            <ItemsControl ItemsSource="{Binding OrganizationSmartFolders}" AutomationProperties.AutomationId="SmartFolders">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel ToolTip="{Binding Description}">
+                                            <Button DockPanel.Dock="Right" Content="编辑" Command="{Binding EditCommand}" Margin="{DynamicResource Space.Inline.Start.1}"
+                                                    Style="{DynamicResource PixelTart.Button.Ghost}" MinHeight="30" Padding="4,2" FontSize="{DynamicResource Type.Body.FontSize}" AutomationProperties.Name="编辑智能文件夹条件" />
+                                            <Button Content="{Binding Name}" ContentTemplate="{StaticResource OrganizationNameTemplate}" ToolTip="{Binding Name}" Command="{Binding SelectCommand}" HorizontalContentAlignment="Stretch"
+                                                    Style="{DynamicResource PixelTart.Button.Ghost}" MinHeight="30" Padding="4,2" FontSize="{DynamicResource Type.Body.FontSize}"
+                                                    AutomationProperties.AutomationId="{Binding AutomationId}"
+                                                    AutomationProperties.Name="{Binding AccessibleName}" />
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Text="标签分组" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
+                            <ItemsControl ItemsSource="{Binding OrganizationTagGroups}" AutomationProperties.AutomationId="AssetTags">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                        <Expander IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                                                  AutomationProperties.AutomationId="{Binding AutomationId}"
+                                                  AutomationProperties.Name="{Binding AccessibleName}">
+                                            <Expander.Header>
+                                                <Button Content="{Binding Name}" ContentTemplate="{StaticResource OrganizationNameTemplate}" ToolTip="{Binding Name}" Command="{Binding SelectCommand}"
+                                                        Style="{DynamicResource PixelTart.Button.Ghost}" MinHeight="30" Padding="4,2" FontSize="{DynamicResource Type.Body.FontSize}" HorizontalContentAlignment="Stretch"
+                                                        AutomationProperties.AutomationId="{Binding FilterAutomationId}" />
+                                            </Expander.Header>
+                                            <ItemsControl ItemsSource="{Binding Children}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Command="{Binding SelectCommand}" HorizontalContentAlignment="Stretch"
+                                                                Style="{DynamicResource PixelTart.Button.Ghost}" MinHeight="30" Padding="4,2" FontSize="{DynamicResource Type.Body.FontSize}"
+                                                                AutomationProperties.AutomationId="{Binding AutomationId}"
+                                                                AutomationProperties.Name="{Binding AccessibleName}"
+                                                                local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}">
+                                                            <DockPanel><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,0,0" /><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" /></DockPanel>
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Expander>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        <Separator Margin="0,8" />
                         <DockPanel>
                             <TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
                             <Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}"
@@ -562,7 +608,7 @@
                                        Visibility="{Binding IsOrganizationEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationEmptyState" />
                             <TreeView BorderThickness="0" Background="Transparent" ItemsSource="{Binding OrganizationFolders}"
-                                      AutomationProperties.AutomationId="AssetFolderTree" MaxHeight="260">
+                                      AutomationProperties.AutomationId="AssetFolderTree" MaxHeight="260" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <TreeView.Resources>
                                     <Style TargetType="TreeViewItem">
                                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
@@ -572,12 +618,14 @@
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                         <Setter Property="IsTabStop" Value="True" />
+                                        <Setter Property="FontSize" Value="{DynamicResource Type.Body.FontSize}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
                                         <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}" />
                                         <Setter Property="AutomationProperties.Name" Value="{Binding AccessibleName}" />
                                         <Setter Property="local:AssetLibraryDragDropBehavior.DropTarget" Value="{Binding DropTarget}" />
                                     </Style>
                                     <HierarchicalDataTemplate DataType="{x:Type local:AssetLibraryFolderNodeView}" ItemsSource="{Binding Children}">
-                                        <Grid MinWidth="150" MinHeight="30" ToolTip="{Binding Path}">
+                                        <Grid MinHeight="30" ToolTip="{Binding Name}">
                                             <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                                             <Path Data="{StaticResource AssetAction.Folder}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" VerticalAlignment="Center" />
                                             <TextBlock x:Name="FolderNameText" Grid.Column="1" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
@@ -608,50 +656,6 @@
                                     </HierarchicalDataTemplate>
                                 </TreeView.Resources>
                             </TreeView>
-                            <TextBlock Text="智能文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
-                            <ItemsControl ItemsSource="{Binding OrganizationSmartFolders}" AutomationProperties.AutomationId="SmartFolders">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel ToolTip="{Binding Description}">
-                                            <Button DockPanel.Dock="Right" Content="编辑" Command="{Binding EditCommand}" Margin="{DynamicResource Space.Inline.Start.1}"
-                                                    Style="{DynamicResource PixelTart.Button.Ghost}" AutomationProperties.Name="编辑智能文件夹条件" />
-                                            <Button Content="{Binding Name}" Command="{Binding SelectCommand}" HorizontalContentAlignment="Left"
-                                                    Style="{DynamicResource PixelTart.Button.Ghost}"
-                                                    AutomationProperties.AutomationId="{Binding AutomationId}"
-                                                    AutomationProperties.Name="{Binding AccessibleName}" />
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <TextBlock Text="标签分组" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
-                            <ItemsControl ItemsSource="{Binding OrganizationTagGroups}" AutomationProperties.AutomationId="AssetTags">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                        <Expander IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
-                                                  AutomationProperties.AutomationId="{Binding AutomationId}"
-                                                  AutomationProperties.Name="{Binding AccessibleName}">
-                                            <Expander.Header>
-                                                <Button Content="{Binding Name}" Command="{Binding SelectCommand}"
-                                                        Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalContentAlignment="Left"
-                                                        ToolTip="筛选这个组中的任意标签" AutomationProperties.AutomationId="{Binding FilterAutomationId}" />
-                                            </Expander.Header>
-                                            <ItemsControl ItemsSource="{Binding Children}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Button Command="{Binding SelectCommand}" HorizontalContentAlignment="Left"
-                                                                Style="{DynamicResource PixelTart.Button.Ghost}"
-                                                                AutomationProperties.AutomationId="{Binding AutomationId}"
-                                                                AutomationProperties.Name="{Binding AccessibleName}"
-                                                                local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}">
-                                                            <DockPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,0,0" /></DockPanel>
-                                                        </Button>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </Expander>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
@@ -675,10 +679,6 @@
                     </Grid.RowDefinitions>
                     <Grid Margin="0,0,0,8" IsEnabled="{Binding IsReady}">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="176" /></Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CurrentViewLabel, StringFormat={}素材{0}}" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
-                            <TextBlock Text="{Binding VisibleCount, StringFormat= · {0} 项}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="{DynamicResource Space.Inline.Start.1}" VerticalAlignment="Center" />
-                        </StackPanel>
                         <Slider Grid.Column="1" Minimum="120" Maximum="{Binding ThumbnailMaximumWidth}" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
@@ -864,7 +864,7 @@
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
                         <Expander Header="图片信息" IsExpanded="True" AutomationProperties.AutomationId="AssetInspectorImageInformation"><StackPanel>
                         <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
-                            <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" />
+                            <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" /><Run Text=" px" />
                         </TextBlock>
                         <TextBlock Text="{Binding InspectorFormat, StringFormat=格式：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding InspectorFileSize, StringFormat=大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
@@ -947,7 +947,7 @@
                             </TabItem>
                             <TabItem Header="直方图" AutomationProperties.AutomationId="VisualHistogramTab">
                                 <StackPanel Margin="0,6">
-                                    <local:HistogramDrawing Height="90" Analysis="{Binding Analysis}" AutomationProperties.AutomationId="VisualHistogramPanel" />
+                                    <TextBlock Text="RGB · 白线为 Luma" Style="{DynamicResource PixelTart.Type.Metadata}"/><local:HistogramDrawing Height="90" Analysis="{Binding Analysis}" AutomationProperties.AutomationId="VisualHistogramPanel" />
                                     <TextBlock Text="Zone Distribution" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,3" />
                                     <Grid>
                                         <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
@@ -967,8 +967,12 @@
                             </TabItem>
                             <TabItem Header="影调" AutomationProperties.AutomationId="VisualToneTab">
                                 <StackPanel AutomationProperties.AutomationId="VisualTonePanel" Margin="0,6">
-                                    <TextBlock Text="{Binding Analysis.ToneKey, StringFormat=影调倾向：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
-                                    <TextBlock Text="{Binding Analysis.Contrast, StringFormat=对比度：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
+                                    <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="118"/><ColumnDefinition/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions><TextBlock Text="黑场 / Black" Style="{DynamicResource PixelTart.Type.Metadata}"/><ProgressBar Grid.Column="1" Maximum="1" Value="{Binding Analysis.ToneZones.DeepShadow}" Height="6" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Analysis.ToneZones.DeepShadow, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Type.Metadata}"/></Grid>
+                                    <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="118"/><ColumnDefinition/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions><TextBlock Text="阴影 / Shadow" Style="{DynamicResource PixelTart.Type.Metadata}"/><ProgressBar Grid.Column="1" Maximum="1" Value="{Binding Analysis.ToneZones.Shadow}" Height="6" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Analysis.ToneZones.Shadow, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Type.Metadata}"/></Grid>
+                                    <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="118"/><ColumnDefinition/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions><TextBlock Text="中间调 / Midtone" Style="{DynamicResource PixelTart.Type.Metadata}"/><ProgressBar Grid.Column="1" Maximum="1" Value="{Binding Analysis.ToneZones.Midtone}" Height="6" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Analysis.ToneZones.Midtone, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Type.Metadata}"/></Grid>
+                                    <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="118"/><ColumnDefinition/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions><TextBlock Text="高光 / Highlight" Style="{DynamicResource PixelTart.Type.Metadata}"/><ProgressBar Grid.Column="1" Maximum="1" Value="{Binding Analysis.ToneZones.Highlight}" Height="6" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Analysis.ToneZones.Highlight, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Type.Metadata}"/></Grid>
+                                    <Grid Margin="0,3"><Grid.ColumnDefinitions><ColumnDefinition Width="118"/><ColumnDefinition/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions><TextBlock Text="白场 / White" Style="{DynamicResource PixelTart.Type.Metadata}"/><ProgressBar Grid.Column="1" Maximum="1" Value="{Binding Analysis.ToneZones.Specular}" Height="6" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Analysis.ToneZones.Specular, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Style="{DynamicResource PixelTart.Type.Metadata}"/></Grid>
+                                    <TextBlock Text="{Binding Analysis.ContrastMetric, StringFormat=对比度 / Contrast：{0:P0}}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,8,0,0"/>
                                 </StackPanel>
                             </TabItem>
                         </TabControl>
@@ -1222,7 +1226,7 @@
                 <TabControl x:Name="VisualAnalysisContextTabs" Background="Transparent" BorderBrush="{DynamicResource Brush.Border}" ItemContainerStyle="{StaticResource AssetInspectorTabItem}">
                     <TabItem Header="配色"><ScrollViewer><StackPanel Margin="12"><WrapPanel x:Name="VisualAnalysisPaletteSwatches" /><TextBlock x:Name="VisualAnalysisPaletteSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" TextWrapping="Wrap" /><WrapPanel><Button Content="3 色" Click="VisualPalette3_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="5 色" Click="VisualPalette5_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /><Button Content="7 色" Click="VisualPalette7_Click" Style="{DynamicResource PixelTart.Button.Ghost}" /></WrapPanel></StackPanel></ScrollViewer></TabItem>
                     <TabItem Header="黑白"><Grid Margin="12"><Image x:Name="VisualMonochromeImage" Stretch="Uniform" /><TextBlock VerticalAlignment="Bottom" Text="用于观察明暗结构、主体分离与视觉重心；不写入源文件。" Background="{DynamicResource Brush.Surface.Elevated}" Style="{DynamicResource PixelTart.Type.Metadata}" Padding="8" /></Grid></TabItem>
-                    <TabItem Header="直方图"><StackPanel Margin="12"><local:HistogramDrawing x:Name="VisualContextHistogram" Height="220" /><TextBlock x:Name="VisualHistogramSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" /></StackPanel></TabItem>
+                    <TabItem Header="直方图"><StackPanel Margin="12"><TextBlock Text="RGB · 白线为 Luma" Style="{DynamicResource PixelTart.Type.Metadata}"/><local:HistogramDrawing x:Name="VisualContextHistogram" Height="220" /><TextBlock x:Name="VisualHistogramSummary" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,10" /></StackPanel></TabItem>
                     <TabItem Header="影调分区"><ScrollViewer><StackPanel Margin="12"><Image x:Name="VisualZoneMapImage" Height="340" Stretch="Uniform" /><TextBlock Text="悬停分区查看对应区域 · 基于当前图像" Style="{DynamicResource PixelTart.Type.Metadata}" /><ItemsControl x:Name="VisualZoneRows" Margin="0,10"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel></ItemsControl><TextBlock x:Name="VisualZoneSummary" Style="{DynamicResource PixelTart.Type.Metadata}" /></StackPanel></ScrollViewer></TabItem>
                 </TabControl>
             </DockPanel>

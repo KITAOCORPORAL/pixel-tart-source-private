@@ -17,17 +17,19 @@ public sealed class HistogramDrawing : FrameworkElement
         DrawChannel(drawingContext, Analysis.HistogramR, Color.FromArgb(160, 236, 90, 80));
         DrawChannel(drawingContext, Analysis.HistogramG, Color.FromArgb(150, 90, 210, 120));
         DrawChannel(drawingContext, Analysis.HistogramB, Color.FromArgb(150, 80, 135, 240));
+        DrawChannel(drawingContext, Analysis.HistogramLuma, Color.FromRgb(225, 225, 225), outline: true);
     }
 
-    private void DrawChannel(DrawingContext context, IReadOnlyList<uint> bins, Color color)
+    private void DrawChannel(DrawingContext context, IReadOnlyList<uint> bins, Color color, bool outline = false)
     {
         var max = Math.Max(1u, bins.Max()); var geometry = new StreamGeometry();
         using (var stream = geometry.Open())
         {
-            stream.BeginFigure(new(0, RenderSize.Height), true, true);
+            stream.BeginFigure(new(0, RenderSize.Height), !outline, !outline);
             for (var index = 0; index < 256; index++) stream.LineTo(new(index / 255d * RenderSize.Width, RenderSize.Height - bins[index] / (double)max * RenderSize.Height), true, false);
-            stream.LineTo(new(RenderSize.Width, RenderSize.Height), true, false);
+            if (!outline) stream.LineTo(new(RenderSize.Width, RenderSize.Height), true, false);
         }
-        geometry.Freeze(); context.DrawGeometry(new SolidColorBrush(color), null, geometry);
+        geometry.Freeze(); var brush = new SolidColorBrush(color);
+        context.DrawGeometry(outline ? null : brush, outline ? new Pen(brush, 1.5) : null, geometry);
     }
 }

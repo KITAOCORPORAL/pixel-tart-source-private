@@ -270,6 +270,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void CommitP3QueryDocument(bool scheduleRefresh)
     {
+        RefreshOrganizationSelection();
         var preservedClauses = string.Equals(
             SearchText,
             _p3CurrentQueryDocument.Text,

@@ -41,6 +41,25 @@ public partial class AssetLibraryPage
     private void PopulateZoneRows(CombinedVisualAnalysisResult result)
     {
         VisualZoneRows.Items.Clear();
+        if (_visualPayload is { } payload)
+        {
+            var zones = payload.Items.Select(item => item.Analysis.ToneZones).ToArray();
+            foreach (var (name, ratio) in new[]
+            {
+                ("Black / 黑场", zones.Average(value => value.DeepShadow)),
+                ("Shadow / 阴影", zones.Average(value => value.Shadow)),
+                ("Midtone / 中间调", zones.Average(value => value.Midtone)),
+                ("Highlight / 高光", zones.Average(value => value.Highlight)),
+                ("White / 白场", zones.Average(value => value.Specular))
+            })
+            {
+                var panel = new StackPanel { Width = 120, Margin = new Thickness(4) };
+                panel.Children.Add(new TextBlock { Text = $"{name} {ratio:P0}" });
+                panel.Children.Add(new ProgressBar { Maximum = 1, Value = ratio, Height = 6, Margin = new Thickness(0, 6, 0, 10) });
+                VisualZoneRows.Items.Add(panel);
+            }
+            VisualZoneRows.Items.Add(new TextBlock { Text = $"Contrast / 对比度 {payload.Items.Average(item => item.Analysis.ContrastMetric):P0}", Margin = new Thickness(4) });
+        }
         for (var zone = 0; zone <= 10; zone++)
         {
             var selected = zone;

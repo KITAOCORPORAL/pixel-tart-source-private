@@ -123,6 +123,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     public async Task RefreshForSessionAsync()
     {
+        await _viewModel.RefreshCommand.ExecutionTask;
         if (!_viewModel.RefreshCommand.CanExecute(null)) return;
         _viewModel.RefreshCommand.Execute(null);
         await _viewModel.RefreshCommand.ExecutionTask;
@@ -779,8 +780,10 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         AssetQuickLoupePopup.Placement = PlacementMode.Center;
         AssetQuickLoupePopup.HorizontalOffset = 0;
         AssetQuickLoupePopup.VerticalOffset = 0;
-        QuickLoupeContainer.Width = Math.Clamp(ActualWidth * 0.5d, 420d, 860d);
-        QuickLoupeContainer.Height = Math.Clamp(ActualHeight * 0.55d, 300d, 680d);
+        QuickLoupeContainer.Width = double.NaN;
+        QuickLoupeContainer.Height = double.NaN;
+        QuickLoupeContainer.MaxWidth = Math.Max(1, Math.Min(860, ActualWidth * .8));
+        QuickLoupeContainer.MaxHeight = Math.Max(1, Math.Min(680, ActualHeight * .8));
     }
 
     private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) =>
@@ -798,7 +801,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _quickLoupeCancellation = new CancellationTokenSource();
         var token = _quickLoupeCancellation.Token;
         QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 正在载入高清预览…";
+        QuickLoupeTitle.Visibility = Visibility.Visible;
         QuickLoupeImage.Source = null;
+        QuickLoupeImage.Width = double.NaN; QuickLoupeImage.Height = double.NaN;
         AssetQuickLoupePopup.IsOpen = true;
         try
         {
@@ -814,7 +819,12 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             if (!result.IsAvailable || result.Bitmap is null) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; return; }
             var bitmap = result.Bitmap;
             QuickLoupeImage.Source = bitmap;
-            QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · {bitmap.PixelWidth} × {bitmap.PixelHeight}";
+            var scale = Math.Min(1, Math.Min((QuickLoupeContainer.MaxWidth - 2) / bitmap.PixelWidth,
+                (QuickLoupeContainer.MaxHeight - 2) / bitmap.PixelHeight));
+            QuickLoupeImage.Width = bitmap.PixelWidth * scale;
+            QuickLoupeImage.Height = bitmap.PixelHeight * scale;
+            QuickLoupeTitle.Visibility = Visibility.Collapsed;
+            QuickLoupeImage.ToolTip = card.Asset.DisplayName;
         }
         catch (OperationCanceledException) { }
         catch (IOException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }

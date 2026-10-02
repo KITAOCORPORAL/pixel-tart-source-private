@@ -23,6 +23,66 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EmbeddedAssetLibraryWpfTests
 {
     [TestMethod]
+    public Task ImportDimensionsReachRepositoryQueryInspectorAndBackfill() => RunSta(() =>
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-DimensionChain-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var database = Path.Combine(root, "assets.db");
+        var page = new AssetLibraryPage(database, new TaskOperationBridge(), []);
+        try
+        {
+            const int width = 6000, height = 4000;
+            var bitmap = BitmapSource.Create(width, height, 96, 96, PixelFormats.Rgb24, null, new byte[width * height * 3], width * 3);
+            foreach (var (extension, orientation) in new[] { ("jpg", 1), ("jpg", 6), ("jpg", 8), ("png", 1), ("tiff", 1) })
+            {
+                BitmapEncoder encoder = extension switch { "jpg" => new JpegBitmapEncoder(), "png" => new PngBitmapEncoder(), _ => new TiffBitmapEncoder() };
+                BitmapMetadata? metadata = null;
+                if (extension == "jpg") { metadata = new BitmapMetadata("jpg"); metadata.SetQuery("/app1/ifd/{ushort=274}", (ushort)orientation); }
+                encoder.Frames.Add(BitmapFrame.Create(bitmap, null, metadata, null));
+                using var stream = File.Create(Path.Combine(root, $"dimensions-{orientation}.{extension}")); encoder.Save(stream);
+            }
+            page.InitializeForSessionAsync().CompleteOnDispatcher();
+            page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
+            using var source = AttachToPresentationSource(page, 1600, 920);
+            ArrangePage(page, 1600, 920);
+            var repository = new SqliteAssetLibraryRepository(database);
+            try
+            {
+                var assets = repository.QueryAsync(new()).CompleteOnDispatcher().Items;
+                Assert.HasCount(5, assets);
+                foreach (var asset in assets)
+                {
+                    Assert.AreEqual(width, asset.Width); Assert.AreEqual(height, asset.Height);
+                    var saved = repository.GetAssetAsync(asset.AssetId).CompleteOnDispatcher();
+                    Assert.AreEqual(width, saved!.Width); Assert.AreEqual(height, saved.Height);
+                    page.ViewModel.SelectedAsset = asset;
+                    ArrangePage(page, 1600, 920);
+                    var dimensions = FindVisualByAutomationId<TextBlock>(page, "AssetInspectorDimensions");
+                    StringAssert.Contains(new TextRange(dimensions.ContentStart, dimensions.ContentEnd).Text, "6000 × 4000 px");
+                }
+                Assert.AreEqual("顺时针 90°", assets.Single(asset => asset.DisplayName == "dimensions-6.jpg").Orientation);
+                Assert.AreEqual("逆时针 90°", assets.Single(asset => asset.DisplayName == "dimensions-8.jpg").Orientation);
+                using (var connection = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={database};Pooling=False"))
+                {
+                    connection.Open(); using var command = connection.CreateCommand();
+                    command.CommandText = "UPDATE AssetItems SET Width=NULL,Height=NULL"; command.ExecuteNonQuery();
+                }
+                var backfill = repository.BackfillMissingDimensionsAsync().CompleteOnDispatcher();
+                Assert.AreEqual(5, backfill.Updated); Assert.AreEqual(0, backfill.Failed);
+                foreach (var asset in repository.QueryAsync(new()).CompleteOnDispatcher().Items)
+                { Assert.AreEqual(width, asset.Width); Assert.AreEqual(height, asset.Height); }
+            }
+            finally { repository.DisposeAsync().AsTask().CompleteOnDispatcher(); }
+        }
+        finally
+        {
+            page.DisposeAsync().AsTask().CompleteOnDispatcher();
+            try { Directory.Delete(root, true); }
+            catch (IOException error) { System.Diagnostics.Trace.WriteLine($"WPF decoder retained temporary fixture {root}: {error.Message}"); }
+        }
+    });
+
+    [TestMethod]
     public Task SmartFolderDraftGuardCancelsDiscardsAndSavesBeforePopupTransition() => RunSta(() =>
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-DraftGuard", Guid.NewGuid().ToString("N"));
@@ -235,6 +295,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 var preview = FindVisualByAutomationId<Image>(popup, "AssetQuickLoupeImage");
                 Assert.IsInstanceOfType<BitmapSource>(preview.Source);
                 Assert.IsGreaterThan(420, ((BitmapSource)preview.Source).PixelWidth);
+                Assert.AreEqual(((BitmapSource)preview.Source).PixelWidth / (double)((BitmapSource)preview.Source).PixelHeight,
+                    preview.Width / preview.Height, .0001, "Loupe uses image aspect ratio, not a fixed gray card.");
+                Assert.AreEqual(new Thickness(0), ((Border)popup).Padding);
+                Assert.AreEqual(0, popup.MinWidth); Assert.AreEqual(0, popup.MinHeight);
                 Assert.IsTrue(page.LeaveQuickLoupeForProductHarness());
                 Assert.IsNull(page.GetQuickLoupeContentForProductHarness());
                 page.DisposeAsync().AsTask().CompleteOnDispatcher();
