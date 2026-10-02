@@ -335,6 +335,35 @@
                 </ContentControl.Style>
             </ContentControl>
         </DataTemplate>
+        <DataTemplate x:Key="InspectorRelationChipTemplate">
+            <Border CornerRadius="4" Background="{DynamicResource Brush.Surface.Hover}" Margin="0,0,4,4" Padding="6,1">
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" Content="×" Command="{Binding RemoveCommand}" Padding="4,0" MinHeight="24"
+                            Style="{DynamicResource PixelTart.Button.Ghost}" ToolTip="{Binding RemoveLabel}" AutomationProperties.Name="{Binding RemoveLabel}" />
+                    <TextBlock Text="{Binding Label}" MaxWidth="180" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" VerticalAlignment="Center" />
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="InspectorMembershipEditor">
+            <StackPanel IsEnabled="{Binding CanEditInspectorRelations}" Margin="0,8,0,4">
+                <TextBlock Text="标签" Foreground="{DynamicResource Brush.Text.Muted}" Margin="0,0,0,4" />
+                <ItemsControl ItemsSource="{Binding InspectorTagChips}" ItemTemplate="{StaticResource InspectorRelationChipTemplate}"
+                              AutomationProperties.AutomationId="AssetInspectorTags">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Button Content="＋ 添加标签" Click="InspectorTagPicker_Click" HorizontalAlignment="Left"
+                        Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,2" AutomationProperties.AutomationId="AssetInspectorAddTag" />
+                <TextBlock Text="文件夹" Foreground="{DynamicResource Brush.Text.Muted}" Margin="0,8,0,4" />
+                <ItemsControl ItemsSource="{Binding InspectorFolderChips}" ItemTemplate="{StaticResource InspectorRelationChipTemplate}"
+                              AutomationProperties.AutomationId="AssetInspectorFolderSummary">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <DockPanel Margin="0,4,0,0">
+                    <Button DockPanel.Dock="Right" Content="＋ 添加" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" Style="{DynamicResource PixelTart.Button.Ghost}" />
+                    <ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
             </ResourceDictionary>
     </UserControl.Resources>
 
@@ -362,7 +391,7 @@
         <Grid Margin="0,6,0,10" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="300" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -377,7 +406,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" MinWidth="300" Margin="0,0,8,0">
+            <Grid Grid.Row="0" Grid.Column="0" Width="260" MinWidth="200" MaxWidth="320" Margin="0,0,8,0">
                 <TextBox x:Name="AssetLibrarySearchBox" Padding="30,0,8,0"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          PreviewKeyDown="AssetLibrarySearchBox_PreviewKeyDown"
@@ -591,13 +620,17 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         <Separator Margin="0,8" />
-                        <DockPanel>
-                            <TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
-                            <Button Content="+" HorizontalAlignment="Right" Command="{Binding NewFolderCommand}"
-                                    Style="{DynamicResource PixelTart.Button.Ghost}"
-                                    ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
-                        </DockPanel>
-                        <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" ToolTip="新文件夹名称" Margin="{DynamicResource Space.Stack.1}" />
+                        <TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                        <TextBox Text="{Binding OrganizationFolderSearch, UpdateSourceTrigger=PropertyChanged}" Height="30" MinHeight="30" Margin="0,6,0,4"
+                                 ToolTip="按文件夹名称搜索" AutomationProperties.Name="搜索文件夹名称" AutomationProperties.AutomationId="AssetFolderNameSearch" />
+                        <Grid Height="30" Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="30" /></Grid.ColumnDefinitions>
+                            <Path Data="{StaticResource AssetAction.Folder}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" VerticalAlignment="Center" />
+                            <TextBox Grid.Column="1" Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" Height="30" MinHeight="30" Padding="4,0"
+                                     ToolTip="新文件夹名称" AutomationProperties.Name="新文件夹名称" />
+                            <Button Grid.Column="2" Content="+" Command="{Binding NewFolderCommand}" Height="30" MinHeight="30" Padding="2"
+                                    Style="{DynamicResource PixelTart.Button.Ghost}" ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
+                        </Grid>
                             <TextBlock Text="正在加载组织栏…" Style="{DynamicResource PixelTart.Type.Metadata}"
                                        Visibility="{Binding IsOrganizationLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationLoadingState" />
@@ -612,6 +645,7 @@
                                 <TreeView.Resources>
                                     <Style TargetType="TreeViewItem">
                                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                                         <Setter Property="MinHeight" Value="30" />
                                         <Setter Property="Padding" Value="0" />
@@ -623,6 +657,35 @@
                                         <Setter Property="AutomationProperties.AutomationId" Value="{Binding AutomationId}" />
                                         <Setter Property="AutomationProperties.Name" Value="{Binding AccessibleName}" />
                                         <Setter Property="local:AssetLibraryDragDropBehavior.DropTarget" Value="{Binding DropTarget}" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TreeViewItem">
+                                                    <StackPanel>
+                                                        <Border x:Name="FolderRow" Background="Transparent" MinHeight="30" CornerRadius="3" BorderThickness="3,0,0,0" BorderBrush="Transparent">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions><ColumnDefinition Width="18" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                                                <ToggleButton x:Name="FolderExpander" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                              Focusable="False" Width="18" Height="30" MinWidth="0" MinHeight="0" Padding="0">
+                                                                    <ToggleButton.Template><ControlTemplate TargetType="ToggleButton">
+                                                                        <Border Background="Transparent"><Path x:Name="Arrow" Data="M0,0 L4,4 L0,8" Stroke="{DynamicResource Brush.Text.Muted}" StrokeThickness="1.5" Width="5" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" /></Border>
+                                                                        <ControlTemplate.Triggers><Trigger Property="IsChecked" Value="True"><Setter TargetName="Arrow" Property="RenderTransform"><Setter.Value><RotateTransform Angle="90" /></Setter.Value></Setter></Trigger></ControlTemplate.Triggers>
+                                                                    </ControlTemplate></ToggleButton.Template>
+                                                                </ToggleButton>
+                                                                <ContentPresenter x:Name="PART_Header" Grid.Column="1" ContentSource="Header" HorizontalAlignment="Stretch" />
+                                                            </Grid>
+                                                        </Border>
+                                                        <ItemsPresenter x:Name="FolderChildren" Margin="18,0,0,0" />
+                                                    </StackPanel>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsExpanded" Value="False"><Setter TargetName="FolderChildren" Property="Visibility" Value="Collapsed" /></Trigger>
+                                                        <Trigger Property="HasItems" Value="False"><Setter TargetName="FolderExpander" Property="Visibility" Value="Hidden" /></Trigger>
+                                                        <Trigger SourceName="FolderRow" Property="IsMouseOver" Value="True"><Setter TargetName="FolderRow" Property="Background" Value="{DynamicResource Brush.Surface.Hover}" /></Trigger>
+                                                        <Trigger Property="IsSelected" Value="True"><Setter TargetName="FolderRow" Property="Background" Value="{DynamicResource Brush.Accent.Subtle}" /><Setter TargetName="FolderRow" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" /><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" /></Trigger>
+                                                        <Trigger Property="IsEnabled" Value="False"><Setter TargetName="FolderRow" Property="Opacity" Value="0.45" /></Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Style>
                                     <HierarchicalDataTemplate DataType="{x:Type local:AssetLibraryFolderNodeView}" ItemsSource="{Binding Children}">
                                         <Grid MinHeight="30" ToolTip="{Binding Name}">
@@ -895,12 +958,7 @@
                             <TextBox Text="{Binding InspectorUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto" AutomationProperties.AutomationId="AssetInspectorUrl" />
                         </DockPanel>
                         </StackPanel></Expander>
-                        <TextBlock Text="{Binding SingleTagSummary, StringFormat=标签：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,8,0,0"
-                                   AutomationProperties.AutomationId="AssetInspectorTags" AutomationProperties.Name="标签" />
-<DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
-                        <TextBlock Text="{Binding SingleFolderSummary, StringFormat=文件夹：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="0,4,0,0"
-                                   AutomationProperties.AutomationId="AssetInspectorFolderSummary" AutomationProperties.Name="文件夹" />
-<DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
+                        <ContentControl Content="{Binding}" ContentTemplate="{StaticResource InspectorMembershipEditor}" />
                         <Button Content="{Binding InspectorWorkflowStatus, StringFormat=处理状态：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Left" Padding="8,4" Margin="0,6,0,4" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
                             <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
                                 <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
@@ -1031,8 +1089,7 @@
 <ItemsControl.ItemTemplate><DataTemplate><Image Width="64" Height="64" Margin="2" Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding ThumbnailPath}" local:AsyncThumbnail.AssetId="{Binding Asset.AssetId}" local:AsyncThumbnail.ContentHash="{Binding Asset.ContentHash}" local:AsyncThumbnail.DecodeWidth="128" /></DataTemplate></ItemsControl.ItemTemplate>
 </ItemsControl>
 <TextBlock Text="{Binding InspectorSelectionSize}" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="0,6" />
-<TextBlock Text="批量标签" Margin="0,10,0,0" /><DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加标签" Command="{Binding AddInspectorTagsCommand}" Padding="6,2" /><TextBox Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}" ToolTip="输入标签，逗号分隔" /></DockPanel>
-<TextBlock Text="批量文件夹" /><DockPanel Margin="0,6,0,8"><Button Style="{DynamicResource PixelTart.Button.Ghost}" DockPanel.Dock="Right" Content="＋ 添加文件夹" Command="{Binding AddInspectorFolderCommand}" Padding="6,2" /><ComboBox ItemsSource="{Binding Folders}" SelectedItem="{Binding InspectorFolderTarget}" DisplayMemberPath="Name" ToolTip="选择素材库文件夹" /></DockPanel>
+<ContentControl Content="{Binding}" ContentTemplate="{StaticResource InspectorMembershipEditor}" />
 <TextBlock Text="批量评分" /><UniformGrid Columns="6">
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="清除" Command="{Binding RateCommand}" CommandParameter="0" Padding="1" />
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="1 ★" Command="{Binding RateCommand}" CommandParameter="1" Padding="1" />

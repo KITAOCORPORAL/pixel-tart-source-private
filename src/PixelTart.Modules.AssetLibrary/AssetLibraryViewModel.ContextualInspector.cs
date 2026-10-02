@@ -27,6 +27,7 @@ public sealed partial class AssetLibraryViewModel
     private void InitializeContextualInspector()
     {
         InitializeQuickTools();
+        InitializeInspectorRelations();
         SaveInspectorDetailsCommand = new(() => InspectorMutationAsync(async () =>
         {
             if (SelectedAsset is not { } asset) return;
@@ -35,25 +36,30 @@ public sealed partial class AssetLibraryViewModel
             await new AssetPresentationMetadataStore(_database).SaveAsync([asset.AssetId], url: url, token: _lifetimeCancellation.Token);
         }), () => IsReady && HasSingleSelection);
         ApplyInspectorColorCommand = new(() => InspectorMutationAsync(() => new AssetPresentationMetadataStore(_database).SaveAsync(SelectedAssetIds.ToArray(), color: InspectorColor, token: _lifetimeCancellation.Token)), () => IsReady && HasSelection);
-        AddInspectorFolderCommand = new(() => InspectorMutationAsync(async () =>
+        AddInspectorFolderCommand = new(() =>
         {
-            if (InspectorFolderTarget is { } folder) RememberBrowserMutationResult(await _browserCommands.AddToFolderAsync(SelectedAssetIds.ToArray(), folder.FolderId, _lifetimeCancellation.Token));
-        }), () => IsReady && HasSelection && InspectorFolderTarget is not null);
+            var ids = SelectedAssetIds.ToArray();
+            var folder = InspectorFolderTarget!;
+            return MutateInspectorRelationsAsync(ids, async () =>
+                RememberBrowserMutationResult(await _browserCommands.AddToFolderAsync(ids, folder.FolderId, _lifetimeCancellation.Token)));
+        }, () => CanEditInspectorRelations && InspectorFolderTarget is not null);
         AddInspectorTagsCommand = new(() => InspectorMutationAsync(async () =>
         {
             var ids = SelectedAssetIds.ToArray();
             var tags = await _repository.BatchCreateTagsAsync(TagInput, cancellationToken: _lifetimeCancellation.Token);
-            RememberBrowserMutationResult(await _repository.AddTagsAsync(ids, tags.Select(tag => tag.TagId), _lifetimeCancellation.Token));
+            foreach (var tag in tags) RememberBrowserMutationResult(await _browserCommands.AddTagAsync(ids, tag.TagId, _lifetimeCancellation.Token));
             TagInput = "";
-        }), () => IsReady && HasSelection);
+        }, refreshOrganizations: true), () => IsReady && HasSelection);
     }
 
-    private async Task InspectorMutationAsync(Func<Task> action)
+    private async Task InspectorMutationAsync(Func<Task> action, bool refreshOrganizations = false)
     {
         try
         {
             await action();
+            if (refreshOrganizations) await RefreshFilterListsAsync(_lifetimeCancellation.Token);
             await RefreshAsync();
+            if (refreshOrganizations) OnP2SelectionChanged(SelectedAssets.ToArray());
             await _p2InspectorTask;
             Status = "已保存素材库信息，源文件未更改。";
         }
@@ -63,6 +69,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void NotifyContextualInspector()
     {
+        ClearInspectorRelations();
         OpenProjectPickerCommand.RaiseCanExecuteChanged(); OpenBookingPickerCommand.RaiseCanExecuteChanged();
         SelectionToolCommand.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(QuickCompressLabel)); OnPropertyChanged(nameof(QuickExportLabel));

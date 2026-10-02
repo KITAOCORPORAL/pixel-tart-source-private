@@ -432,7 +432,7 @@ public sealed partial class AssetLibraryViewModel
                 .Where(entry => string.IsNullOrWhiteSpace(text) || entry.Text.Contains(text, StringComparison.OrdinalIgnoreCase))
                 .Take(5)
                 .Select(entry => new AssetQuerySuggestion("history", entry.Text, entry.Text, "搜索历史"));
-            var merged = history.Concat(repositorySuggestions)
+            var merged = history.Concat(repositorySuggestions.Where(item => item.Kind != "field"))
                 .DistinctBy(item => (item.Kind, item.Value))
                 .Take(25)
                 .ToArray();
@@ -464,33 +464,9 @@ public sealed partial class AssetLibraryViewModel
     private async Task ApplyP3SuggestionAsync(AssetQuerySuggestion? suggestion)
     {
         if (suggestion is null) return;
-        if (suggestion.Kind is "history" or "file")
-        {
-            SearchText = suggestion.Label;
-            await SubmitP3SearchAsync();
-            return;
-        }
-
-        AssetQueryField? field = suggestion.Kind switch
-        {
-            "folder" => AssetQueryField.Folder,
-            "tag" => AssetQueryField.Tag,
-            "extension" => AssetQueryField.Extension,
-            _ => null
-        };
-        if (field is null)
-        {
-            P3QueryPanelOpen = true;
-            return;
-        }
-        var operation = field is AssetQueryField.Folder or AssetQueryField.Tag ? AssetQueryOperator.AnyOf : AssetQueryOperator.Equals;
-        var value = field is AssetQueryField.Folder or AssetQueryField.Tag ? suggestion.Value : suggestion.Label;
-        var model = P3QueryRoot.ToModel();
-        model = model with { Children = model.Children.Concat([AssetQueryNode.Rule(field.Value, operation, [value])]).ToArray() };
-        P3QueryRoot = P3QueryNodeView.FromModel(model, OnP3QueryTreeChanged);
-        P3QueryPanelOpen = true;
-        CommitP3QueryDocument(scheduleRefresh: true);
-        P3SuggestionsVisible = false;
+        // Suggestions complete indexed text. Structured filters stay in the filter UI.
+        SearchText = suggestion.Label;
+        await SubmitP3SearchAsync();
     }
 
     private async Task ApplyP3HistoryAsync(AssetQueryHistoryEntry? entry)

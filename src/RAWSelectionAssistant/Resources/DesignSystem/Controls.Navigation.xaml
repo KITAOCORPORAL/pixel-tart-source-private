@@ -17,6 +17,7 @@
         <Setter Property="ToolTipService.ShowDuration" Value="10000" />
     </Style>
     <Style x:Key="SidebarNavButton" TargetType="Button" BasedOn="{StaticResource NavButton}">
+        <Setter Property="ToolTipService.IsEnabled" Value="{Binding IsSidebarCollapsed}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

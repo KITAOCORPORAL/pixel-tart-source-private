@@ -16,7 +16,8 @@ public sealed class AssetLibraryButtonReadabilityContractTests
     public void EveryAssetLibraryButtonUsesOneExplicitCanonicalRole()
     {
         var document = XDocument.Load(PagePath);
-        var buttons = document.Descendants(Presentation + "Button").ToArray();
+        var picker = XDocument.Load(Path.Combine(Path.GetDirectoryName(PagePath)!, "AssetInspectorTagPicker.xaml"));
+        var buttons = document.Descendants(Presentation + "Button").Concat(picker.Descendants(Presentation + "Button")).ToArray();
 
         Assert.HasCount(102, buttons, "Includes the HSL copy action alongside the tag-group query, contextual inspector, visual analysis and duplicate actions.");
         Assert.IsTrue(buttons.All(button =>

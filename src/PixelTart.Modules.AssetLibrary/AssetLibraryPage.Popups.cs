@@ -110,6 +110,16 @@ public partial class AssetLibraryPage
         OpenToolbarPopup(anchor, "Tag", menu);
     }
 
+    private void InspectorTagPicker_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button anchor || !_viewModel.CanEditInspectorRelations) return;
+        _viewModel.InspectorTagSearch = "";
+        var menu = new ContextMenu();
+        // Content is hosted by the existing single-active overlay manager.
+        menu.Items.Add(new MenuItem { Header = new AssetInspectorTagPicker { DataContext = _viewModel }, StaysOpenOnClick = true });
+        OpenToolbarPopup(anchor, "InspectorTags", menu);
+    }
+
     private void OpenDatePopup(Button anchor)
     {
         var menu = new ContextMenu();

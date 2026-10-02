@@ -55,6 +55,7 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
     private bool _isSelected;
     private bool _isRenaming;
     private string _editName;
+    private bool _isVisible = true, _searchActive, _searchExpanded;
 
     internal AssetLibraryFolderNodeView(AssetLibraryViewModel owner, AssetFolderTreeItem item)
     {
@@ -93,12 +94,27 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
 
     public bool IsExpanded
     {
-        get => _isExpanded;
+        get => _searchActive ? _searchExpanded : _isExpanded;
         set
         {
+            if (_searchActive) { if (SetProperty(ref _searchExpanded, value)) OnPropertyChanged(); return; }
             if (!SetProperty(ref _isExpanded, value)) return;
             _owner.RememberFolderExpanded(FolderId, value);
         }
+    }
+
+    public bool IsVisible { get => _isVisible; private set => SetProperty(ref _isVisible, value); }
+
+    internal bool ApplyNameFilter(string text, bool ancestorMatches = false)
+    {
+        _searchActive = text.Length > 0;
+        var matches = ancestorMatches || Name.Contains(text, StringComparison.OrdinalIgnoreCase);
+        var childMatches = false;
+        foreach (var child in Children) childMatches |= child.ApplyNameFilter(text, matches);
+        IsVisible = !_searchActive || matches || childMatches;
+        _searchExpanded = _searchActive && childMatches;
+        OnPropertyChanged(nameof(IsExpanded));
+        return IsVisible;
     }
 
     public bool IsSelected

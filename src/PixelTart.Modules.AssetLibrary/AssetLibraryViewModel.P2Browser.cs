@@ -1175,6 +1175,7 @@ public sealed partial class AssetLibraryViewModel
             cancellationToken.ThrowIfCancellationRequested();
             var tree = data.Tree;
             OrganizationFolders.Clear(); foreach (var node in tree) OrganizationFolders.Add(new(this, node));
+            FilterOrganizationFolderNames();
             OrganizationSmartFolders.Clear(); foreach (var folder in SmartFolders) OrganizationSmartFolders.Add(new(this, folder));
             OrganizationTagGroups.Clear();
             var tagViews = Tags.Select(tag => new AssetLibraryTagNodeView(this, tag)).ToArray();
@@ -1326,6 +1327,7 @@ public sealed partial class AssetLibraryViewModel
             var folderMemberships = memberships.Folders;
             var tagMemberships = memberships.Tags;
             if (generation != Volatile.Read(ref _inspectorGeneration)) return;
+            PublishInspectorRelations(ids, folderMemberships, tagMemberships);
             if (selected.Count == 1)
             {
                 var id = selected[0].AssetId;
