@@ -47,7 +47,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         _renderCount++;
         base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
-        if (State is null) { DrawLabel(drawing, "3D 色彩空间 · 等待真实 ColorSpaceVisualizationModel", new Point(18, 18)); return; }
+        if (State is null) { DrawLabel(drawing, "点击“生成当前模型”查看色彩分布", new Point(18, 18)); return; }
         DrawAxes(drawing);
         foreach (var cloud in State.VisibleClouds)
             foreach (var point in ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight, 1))
@@ -57,6 +57,15 @@ public sealed class ColorSpace3DViewport : FrameworkElement
             }
         if (State.ShowMigrationVectors && State.Mode is ColorCloudMode.Migration or ColorCloudMode.Overlay)
             foreach (var vector in State.Model.MigrationVectors.Take(512)) DrawVector(drawing, vector);
+        // Draw the selection last so dense clouds cannot cover the picked point.
+        if (State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster)
+            foreach (var point in State.VisibleClouds.SelectMany(cloud => ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight))
+                .Where(point => point.PointIndex == State.Selection.PointIndex))
+            {
+                var center = new Point(point.X, point.Y);
+                drawing.DrawEllipse(null, new Pen(Brushes.Black, 5), center, 9, 9);
+                drawing.DrawEllipse(null, new Pen(Brushes.White, 2), center, 9, 9);
+            }
         DrawLabel(drawing, $"L*  a*  b*   {State.Mode}   ·   左键旋转 / Shift+左键平移 / 滚轮缩放", new Point(12, Math.Max(12, ActualHeight - 28)));
         _lastRenderMilliseconds = clock.Elapsed.TotalMilliseconds;
     }

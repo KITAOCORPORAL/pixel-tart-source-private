@@ -7,7 +7,7 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class AssetLibraryP1SettingsTests
 {
     [TestMethod]
-    public void PrimaryNavigationPolicy_HasTheExactNinePagesAndSafeAliases()
+    public void PrimaryNavigationPolicy_HasTheExactTenPagesAndSafeAliases()
     {
         CollectionAssert.AreEqual(
             new[]
@@ -18,6 +18,7 @@ public sealed class AssetLibraryP1SettingsTests
                 "WorkCalendar",
                 "Planning",
                 "Tether",
+                "ReferenceColor",
                 "OnlineSelection",
                 "Finance",
                 "History"

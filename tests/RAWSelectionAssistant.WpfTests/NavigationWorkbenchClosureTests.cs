@@ -7,7 +7,7 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class NavigationWorkbenchClosureTests
 {
     [TestMethod]
-    public void Sidebar_HasTheExactNinePrimaryPagesInProductOrder()
+    public void Sidebar_HasTheExactTenPrimaryPagesInProductOrder()
     {
         var source = Read("src/RAWSelectionAssistant/MainWindow.xaml");
         var document = XDocument.Parse(source);
@@ -15,7 +15,7 @@ public sealed class NavigationWorkbenchClosureTests
         var primaryGroup = sidebar.Descendants().Single(element => Attribute(element, "Name") == "PrimaryNavigationGroup");
         var primaryKeys = new HashSet<string>(StringComparer.Ordinal)
         {
-            "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "OnlineSelection", "Finance", "History"
+            "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "ReferenceColor", "OnlineSelection", "Finance", "History"
         };
         var primaryButtons = primaryGroup.Descendants()
             .Where(element => element.Name.LocalName == "Button")
@@ -23,10 +23,10 @@ public sealed class NavigationWorkbenchClosureTests
             .ToArray();
 
         CollectionAssert.AreEqual(
-            new[] { "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "OnlineSelection", "Finance", "History" },
+            new[] { "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "ReferenceColor", "OnlineSelection", "Finance", "History" },
             primaryButtons.Select(element => Attribute(element, "CommandParameter")).ToArray());
         CollectionAssert.AreEqual(
-            new[] { "工作台", "素材库", "归片工作区", "工作日历", "策划中心", "联机拍摄", "在线选片", "摄影收支", "项目历史" },
+            new[] { "工作台", "素材库", "归片工作区", "工作日历", "策划中心", "联机拍摄", "参考仿色", "在线选片", "摄影收支", "项目历史" },
             primaryButtons.Select(element => Attribute(element, "Content")).ToArray());
         Assert.AreEqual("AssetLibraryNavigationButton", Attribute(primaryButtons[1], "AutomationProperties.AutomationId"));
         Assert.AreEqual(1, sidebar.Descendants().Count(element => Attribute(element, "CommandParameter") == "AssetLibrary"));

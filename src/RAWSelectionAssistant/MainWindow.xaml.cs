@@ -242,6 +242,7 @@ public partial class MainWindow : Window
     {
         if (_viewModel is not null)
         {
+            _viewModel.ReferenceColorPage.AssetMetadataSaved = null;
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
             _viewModel.PageChanged -= ViewModel_PageChanged;
@@ -252,6 +253,10 @@ public partial class MainWindow : Window
         _shellEscapeService = e.NewValue as IShellEscapeService;
         if (_viewModel is not null)
         {
+            _viewModel.ReferenceColorPage.AssetMetadataSaved = async _ =>
+            {
+                if (GetHostedAssetLibraryPage() is { } page) await page.RefreshForSessionAsync();
+            };
             if (_viewModel.PlanningPage is { } planning)
             {
                 planning.ReferenceSourceLoader = async (source, search, project) =>

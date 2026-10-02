@@ -15,6 +15,48 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ReferenceWorkspaceDpiEvidenceTests
 {
     [TestMethod]
+    public void FilmstripActiveAndSelectionRemainDistinctAcrossLogicalViewportSizes()
+    {
+        Exception? failure = null;
+        var thread = new Thread(() =>
+        {
+            try
+            {
+                if (Application.Current is null) { var app = new App(); app.InitializeComponent(); }
+                using var workspace = new ReferenceColorWorkspaceViewModel(new EvidenceDialogs());
+                foreach (var index in Enumerable.Range(0, 6)) workspace.Targets.Add(new ReferenceTargetItem($"{index}.jpg"));
+                workspace.Targets[0].IsActive = true;
+                var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+                var filmstrip = (ListBox)view.FindName("Filmstrip");
+                foreach (var (width, height) in new[] { (1180, 720), (1600, 920), (1920, 1080) })
+                foreach (var scale in new[] { 1d, 1.25, 1.5, 2d })
+                {
+                    var logical = new Size(width / scale, height / scale);
+                    view.Width = logical.Width; view.Height = logical.Height;
+                    view.Measure(logical); view.Arrange(new Rect(logical)); view.UpdateLayout();
+                    var anchor = workspace.SelectFilmstripTarget(0, -1, false, false);
+                    workspace.SelectFilmstripTarget(2, anchor, true, false);
+                    view.UpdateLayout();
+                    Assert.HasCount(3, workspace.SelectedTargets.ToArray());
+                    Assert.IsTrue(workspace.Targets[0].IsActive); Assert.IsFalse(workspace.Targets[2].IsActive);
+                    var before = filmstrip.ActualHeight;
+                    workspace.Targets[0].Rating = 5; workspace.Targets[0].ColorLabel = "蓝";
+                    workspace.Targets[0].IsActive = false; workspace.Targets[1].IsActive = true;
+                    view.UpdateLayout();
+                    Assert.AreEqual(before, filmstrip.ActualHeight, .01, $"{width}x{height} at {scale}");
+                    workspace.SelectFilmstripTarget(1, anchor, false, true);
+                    view.UpdateLayout();
+                    Assert.IsFalse(workspace.Targets[1].IsSelected); Assert.IsTrue(workspace.Targets[1].IsActive);
+                    Assert.HasCount(2, workspace.SelectedTargets.ToArray());
+                    workspace.Targets[1].IsActive = false; workspace.Targets[0].IsActive = true;
+                }
+            }
+            catch (Exception error) { failure = error; }
+        });
+        thread.SetApartmentState(ApartmentState.STA); thread.Start(); Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(30)));
+        if (failure is not null) throw failure;
+    }
+    [TestMethod]
     public void FiveHundredTargetsRealizeOnlyVisibleFilmstripContainers()
     {
         Exception? error = null;

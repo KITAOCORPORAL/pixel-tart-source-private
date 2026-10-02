@@ -14,6 +14,127 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public async Task AsyncCommandStillRejectsReentryByDefault()
+    {
+        var release = new TaskCompletionSource(); var calls = 0;
+        var command = new RAWSelectionAssistant.Utilities.AsyncRelayCommand(async _ => { calls++; await release.Task; });
+        var running = command.ExecuteAsync(null);
+        Assert.IsFalse(command.CanExecute(null));
+        await command.ExecuteAsync(null); Assert.AreEqual(1, calls);
+        release.SetResult(); await running;
+        Assert.IsTrue(command.CanExecute(null));
+    }
+    [TestMethod]
+    public async Task FilmstripRapidActivationKeepsLatestClickAndReusesUnchangedPreview()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-Activation-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        try
+        {
+            var backend = new PixelBackend();
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder), backend);
+            var first = new ReferenceTargetItem(CreatePng(folder, "first", 70, 80, 90)) { AppliedLookSnapshot = Look("red") };
+            var second = new ReferenceTargetItem(CreatePng(folder, "second", 30, 90, 120)) { AppliedLookSnapshot = Look("blue") };
+            workspace.Targets.Add(first); workspace.Targets.Add(second);
+            await workspace.ActivateTargetCommand.ExecuteAsync(first);
+            var firstImage = workspace.Editor.SourceImage;
+            var firstFrame = workspace.Editor.MatchedImage;
+            var firstRenderCount = backend.RenderedLooks.Count;
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null);
+            Assert.HasCount(firstRenderCount, backend.RenderedLooks, "Unchanged preview must use its cached result.");
+            Assert.AreSame(firstFrame, workspace.Editor.MatchedImage);
+            backend.BlockAfterFirstRender = true;
+            var secondActivation = workspace.ActivateTargetCommand.ExecuteAsync(second);
+            await backend.SecondRenderStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.IsTrue(workspace.ActivateTargetCommand.CanExecute(first), "An in-flight render must not disable target selection.");
+            var latestActivation = workspace.ActivateTargetCommand.ExecuteAsync(first);
+            await Task.WhenAll(secondActivation, latestActivation).WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.AreSame(first, workspace.ActiveTarget);
+            Assert.AreSame(firstImage, workspace.Editor.SourceImage);
+            Assert.AreSame(firstFrame, workspace.Editor.MatchedImage);
+            Assert.IsTrue(first.IsActive); Assert.IsFalse(second.IsActive);
+            Assert.IsFalse(workspace.IsLoading); Assert.IsFalse(workspace.Editor.IsBusy);
+        }
+        finally { Directory.Delete(folder, true); }
+    }
+
+    [TestMethod]
+    public async Task CachedCurrentFrameDoesNotStayBusyWhileCancelledRenderUnwinds()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-RetiredPreview-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        var backend = new PixelBackend { DelayCancelledRenderExit = true };
+        try
+        {
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder), backend);
+            var first = new ReferenceTargetItem(CreatePng(folder, "first", 30, 40, 50)) { AppliedLookSnapshot = Look("red") };
+            var second = new ReferenceTargetItem(CreatePng(folder, "second", 70, 80, 90)) { AppliedLookSnapshot = Look("blue") };
+            workspace.Targets.Add(first); workspace.Targets.Add(second);
+            await workspace.ActivateTargetCommand.ExecuteAsync(first);
+            var frame = workspace.Editor.MatchedImage;
+            backend.BlockAfterFirstRender = true;
+            var retired = workspace.ActivateTargetCommand.ExecuteAsync(second);
+            await backend.SecondRenderStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            await workspace.ActivateTargetCommand.ExecuteAsync(first).WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.AreSame(frame, workspace.Editor.MatchedImage);
+            Assert.IsFalse(workspace.Editor.IsBusy, "The displayed cached frame is ready even while retired work unwinds.");
+            Assert.IsFalse(retired.IsCompleted);
+            backend.ReleaseCancelledRender.TrySetResult();
+            await retired.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.AreSame(frame, workspace.Editor.MatchedImage);
+            Assert.IsFalse(workspace.Editor.IsBusy);
+        }
+        finally { backend.ReleaseCancelledRender.TrySetResult(); Directory.Delete(folder, true); }
+    }
+
+    [TestMethod]
+    public async Task PreviewCacheInvalidatesWhenReferenceFileChanges()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-ReferenceCache-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        try
+        {
+            var backend = new PixelBackend();
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder), backend);
+            var referencePath = CreatePng(folder, "reference", 80, 90, 100);
+            var look = Look("red");
+            look = look with { ReferenceSources = [look.ReferenceSources[0] with { SourcePath = referencePath }] };
+            var target = new ReferenceTargetItem(CreatePng(folder, "target", 40, 50, 60)) { AppliedLookSnapshot = look };
+            workspace.Targets.Add(target);
+            await workspace.ActivateTargetCommand.ExecuteAsync(target);
+            var before = backend.RenderedLooks.Count;
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null);
+            Assert.HasCount(before, backend.RenderedLooks);
+            File.SetLastWriteTimeUtc(referencePath, File.GetLastWriteTimeUtc(referencePath).AddMinutes(1));
+            await workspace.Editor.ApplyCommand.ExecuteAsync(null);
+            Assert.HasCount(before + 1, backend.RenderedLooks, "A changed reference must not reuse the cached frame.");
+        }
+        finally { Directory.Delete(folder, true); }
+    }
+
+    [TestMethod]
+    public async Task ColorInspectionOnlyChangesPreviewAndClearsOnTargetSwitch()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-Inspection-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        try
+        {
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder));
+            await workspace.LoadTargetAsync(CreatePng(folder, "red", 170, 30, 30));
+            var stack = workspace.Editor.AdjustmentStack;
+            await workspace.BuildColorSpaceModelAsync();
+            workspace.HighlightImageSample(new VisualRgb24(170, 30, 30));
+            Assert.IsNotEmpty(workspace.HighlightedPixels);
+            Assert.AreSame(stack, workspace.Editor.AdjustmentStack);
+            workspace.ClearColorSpaceHighlight(); Assert.IsEmpty(workspace.HighlightedPixels);
+            workspace.HighlightCloudSelection(0); Assert.IsNotEmpty(workspace.HighlightedPixels);
+            await workspace.LoadTargetAsync(CreatePng(folder, "blue", 30, 30, 170));
+            Assert.IsNull(workspace.ColorSpaceModel); Assert.IsEmpty(workspace.HighlightedPixels);
+        }
+        finally { Directory.Delete(folder, true); }
+    }
+
+    [TestMethod]
     public async Task MissingReferenceImportKeepsValidFrameTests()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-ReferenceFailure-" + Guid.NewGuid().ToString("N"));
@@ -342,6 +463,7 @@ public sealed class BatchExportProcessedPixelsTests
             var preview = (await backend.RenderWithResultAsync(source, look)).Image;
             var export = await new TetherReferenceModeViewModel(renderBackend: backend).ProcessForExportAsync(sourcePath, look, null, CancellationToken.None);
             var rgbDelta = CompareBytes(Pixels(preview), Pixels(export));
+            Assert.AreEqual(0, rgbDelta.Max, "This fixture compares identical-resolution service outputs.");
 
             var identity = look with { Parameters = look.Parameters with { MatchStrength = 0 } };
             var identityPreview = (await backend.RenderWithResultAsync(source, identity)).Image;
@@ -350,23 +472,24 @@ public sealed class BatchExportProcessedPixelsTests
             Assert.AreEqual(0, identityDelta.Max);
             Assert.AreEqual(0, CompareBytes(Pixels(identityPreview), Pixels(identityExport)).Max);
 
-            var evidence = Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "round3-final", "preview-export-parity");
+            var evidence = Path.Combine(TestContext!.ResultsDirectory!, "synthetic-jpeg-service-parity");
             Directory.CreateDirectory(evidence);
             var matrix = new
             {
-                sourceHead = "de4c91a67c9146b5272bf20e10360172c4bf6189",
+                sourceHead = Environment.GetEnvironmentVariable("PIXEL_TART_TEST_SOURCE_HEAD") ?? "UNRECORDED",
+                scope = "Synthetic constant JPEG, equal-resolution service comparison only; not corpus/proxy parity",
                 cases = new object[]
                 {
-                    new { id = "V3-JPEG-8BIT", inputType = "JPEG 8-bit", meanDelta = rgbDelta.Mean, maxDelta = rgbDelta.Max, toneDelta = rgbDelta.Mean, colorDelta = rgbDelta.Mean, tolerance = "max RGB channel delta <= 0", status = "PASS" },
-                    new { id = "V3-TIFF16", inputType = "TIFF16 product fixture", meanDelta = 0d, maxDelta = 0d, toneDelta = 0d, colorDelta = 0d, tolerance = "OKLab mean <= 0.003; p95/max <= 0.012", status = "PASS" },
-                    new { id = "V3-HIGH-PRECISION", inputType = "high precision internal", meanDelta = rgbDelta.Mean, maxDelta = rgbDelta.Max, toneDelta = rgbDelta.Mean, colorDelta = rgbDelta.Mean, tolerance = "shared processing service", status = "PASS" },
-                    new { id = "V3-IDENTITY-0", inputType = "8-bit identity", meanDelta = identityDelta.Mean, maxDelta = identityDelta.Max, toneDelta = identityDelta.Mean, colorDelta = identityDelta.Mean, tolerance = "zero color math delta", status = "PASS" },
-                    new { id = "V4-EXPERIMENTAL", inputType = "V4", meanDelta = 0d, maxDelta = 0d, toneDelta = 0d, colorDelta = 0d, tolerance = "explicit opt-in", status = "PARTIAL" },
-                    new { id = "REAL-RAW-CORPUS", inputType = "RAW", meanDelta = 0d, maxDelta = 0d, toneDelta = 0d, colorDelta = 0d, tolerance = "corpus unavailable", status = "NOT_RUN / CORPUS_NOT_AVAILABLE" }
+                    new { id = "V3-JPEG-8BIT", inputType = "JPEG 8-bit", meanDelta = rgbDelta.Mean, maxDelta = rgbDelta.Max,  tolerance = "max RGB channel delta <= 0", status = "PASS" },
+                    new { id = "V3-TIFF16", status = "NOT_RUN", reason = "Not exercised by this fixture" },
+                    new { id = "V3-HIGH-PRECISION", status = "NOT_RUN", reason = "Not exercised by this fixture" },
+                    new { id = "V3-IDENTITY-0", inputType = "8-bit identity", meanDelta = identityDelta.Mean, maxDelta = identityDelta.Max,  tolerance = "zero color math delta", status = "PASS" },
+                    new { id = "V4-EXPERIMENTAL", status = "NOT_RUN", reason = "Not exercised by this fixture" },
+                    new { id = "REAL-RAW-CORPUS", status = "NOT_RUN", reason = "CORPUS_NOT_AVAILABLE" }
                 }
             };
             await File.WriteAllTextAsync(Path.Combine(evidence, "PARITY_MATRIX.json"), System.Text.Json.JsonSerializer.Serialize(matrix, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
-            await File.WriteAllTextAsync(Path.Combine(evidence, "PARITY_SUMMARY.md"), $"V3 production parity matrix passed. JPEG service max delta={rgbDelta.Max}; 0% identity max delta={identityDelta.Max}. TIFF16 and high precision use the shared product pipeline. V4 remains experimental; real RAW corpus unavailable.");
+            await File.WriteAllTextAsync(Path.Combine(evidence, "PARITY_SUMMARY.md"), $"Synthetic JPEG equal-resolution service comparison: max channel delta={rgbDelta.Max}; 0% identity max delta={identityDelta.Max}. This test does not measure tone/color delta, TIFF16, high precision, ICC, proxy/full resolution, V4, or real RAW. Those cases are NOT_RUN here.");
             TestContext?.WriteLine($"parity_mean_delta={rgbDelta.Mean:F6}; parity_max_delta={rgbDelta.Max}; identity_mean_delta={identityDelta.Mean:F6}; identity_max_delta={identityDelta.Max}");
         }
         finally { Directory.Delete(root, true); }
@@ -551,6 +674,8 @@ public sealed class BatchExportProcessedPixelsTests
     {
         public Action? FirstRender { get; set; }
         public bool BlockAfterFirstRender { get; set; }
+        public bool DelayCancelledRenderExit { get; set; }
+        public TaskCompletionSource ReleaseCancelledRender { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public TaskCompletionSource SecondRenderStarted { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public List<string> RenderedLooks { get; } = [];
         public List<string> AppliedFilms { get; } = [];
@@ -559,7 +684,12 @@ public sealed class BatchExportProcessedPixelsTests
             RenderedLooks.Add($"{look.Name}:{look.Parameters.MatchStrength:0}");
             if (RenderedLooks.Count == 1) FirstRender?.Invoke();
             if (BlockAfterFirstRender && RenderedLooks.Count == 2)
-            { SecondRenderStarted.TrySetResult(); await Task.Delay(Timeout.InfiniteTimeSpan, token); }
+            {
+                SecondRenderStarted.TrySetResult();
+                try { await Task.Delay(Timeout.InfiniteTimeSpan, token); }
+                catch (OperationCanceledException) when (DelayCancelledRenderExit)
+                { await ReleaseCancelledRender.Task; throw; }
+            }
             var color = look.Name switch { "red" => (R: (byte)220, G: (byte)20, B: (byte)20), "green" => (R: (byte)20, G: (byte)220, B: (byte)20), "blue" => (R: (byte)20, G: (byte)20, B: (byte)220), _ => (R: (byte)220, G: (byte)220, B: (byte)20) };
             var pixels = Enumerable.Range(0, 16 * 16).SelectMany(_ => new byte[] { color.B, color.G, color.R, 255 }).ToArray();
             var result = BitmapSource.Create(16, 16, 96, 96, PixelFormats.Bgra32, null, pixels, 16 * 4); result.Freeze();

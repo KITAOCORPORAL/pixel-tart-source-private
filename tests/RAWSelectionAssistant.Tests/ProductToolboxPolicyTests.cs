@@ -8,15 +8,24 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ProductToolboxPolicyTests
 {
     [TestMethod]
+    public void ReferenceColorRestoresAsPrimaryRouteAndMigratesOutOfToolboxPins()
+    {
+        Assert.AreEqual("ReferenceColor", PrimaryNavigationPolicy.Normalize("ReferenceColor"));
+        Assert.IsTrue(PrimaryNavigationPolicy.IsPrimaryPage("ReferenceColor"));
+        Assert.IsFalse(ProductToolboxPolicy.Catalog.Any(item => item.Id == ToolId.ReferenceColor));
+        CollectionAssert.AreEqual(new[] { "Publishing" }, ProductToolboxPolicy.Normalize(["ReferenceColor", "Publishing"]));
+        Assert.AreEqual("ReferenceColor", ProductToolboxPolicy.Get(ToolId.ReferenceColor).TargetPageKey);
+    }
+    [TestMethod]
     public void ProductionCatalog_IncludesPublishingWithoutChangingFourDefaultPins()
     {
         CollectionAssert.AreEqual(new[]
         {
-            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Publishing, ToolId.ReferenceColor, ToolId.Collage
+            ToolId.PhotoOrganize, ToolId.RawToJpeg, ToolId.BatchCompress, ToolId.Publishing, ToolId.Collage
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.Id).ToArray());
         CollectionAssert.AreEqual(new[]
         {
-            "整理图片", "RAW 转 JPG", "批量压缩", "发布导出", "参考仿色", "拼图"
+            "整理图片", "RAW 转 JPG", "批量压缩", "发布导出", "拼图"
         }, ProductToolboxPolicy.ProductionCatalog.Select(item => item.DisplayName).ToArray());
     }
 

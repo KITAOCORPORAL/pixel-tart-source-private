@@ -29,6 +29,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private ReferenceLook? _selectedLook;
     private ReferenceLook? _persistedLook;
     private BitmapSource? _matchedImage;
+    private readonly LinkedList<(BitmapSource Source, string Key, BitmapSource Result)> _previewCache = new();
     private bool _enabled;
     private bool _applyToFollowing;
     private bool _advancedExpanded;
@@ -77,6 +78,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private MatchV4ExecutionMode _matchV4ExecutionMode = MatchV4ExecutionMode.Auto;
     public enum ProcessingState { Idle, Preparing, Analyzing, Matching, RenderingPreview, RenderingHighQuality, ApplyingFilm, BatchProcessing, Exporting, Cancelling, Cancelled, Failed }
     private ProcessingState _processingState;
+    private long _busyRenderRevision;
     public ProcessingState State { get => _processingState; private set { if (SetProperty(ref _processingState, value)) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsCancelling)); OnPropertyChanged(nameof(IsSettled)); } } }
     public bool IsCancelling => State == ProcessingState.Cancelling;
     public bool HasError { get => _hasError; private set => SetProperty(ref _hasError, value); }
@@ -92,20 +94,20 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     internal Guid[] NativeRenderedNodeIds { get; private set; } = [];
     internal int NativeUndoCount => _undoStacks.Count;
     internal int NativeRedoCount => _redoStacks.Count;
-    private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; OnPropertyChanged(nameof(IsSettled)); }
+    private void BeginBusy() { Interlocked.Increment(ref _busyOperations); State = ProcessingState.RenderingHighQuality; OnPropertyChanged(nameof(IsSettled)); OnPropertyChanged(nameof(IsBusy)); }
     private void EndBusy()
     {
-        if (Interlocked.Decrement(ref _busyOperations) != 0) return;
+        if (Interlocked.Decrement(ref _busyOperations) != 0 || Volatile.Read(ref _busyRenderRevision) != 0) return;
         if (State == ProcessingState.Cancelling) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; }
         else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
-        OnPropertyChanged(nameof(IsSettled));
+        OnPropertyChanged(nameof(IsSettled)); OnPropertyChanged(nameof(IsBusy));
     }
     public void StopProcessing()
     {
+        Interlocked.Increment(ref _revision);
         if (!IsBusy) return;
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
         _render?.Cancel();
-        Interlocked.Increment(ref _revision);
     }
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
@@ -119,9 +121,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             target.Status = ReferenceTargetStatus.Synced;
         }
     }
-    public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film, ColorAdjustmentStack? stack = null)
+    public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film, ColorAdjustmentStack? stack = null, bool render = true)
     {
-        CancelPresetPreview();
+        _presetPreviewNode = null; NotifyPresetPreview();
         if (look is not null)
         {
             _selectedLook = look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
@@ -131,11 +133,15 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             OnPropertyChanged(nameof(SelectedLook));
             OnPropertyChanged(nameof(CurrentLookText));
         }
-        else SelectedLook = null;
+        else
+        {
+            _selectedLook = null; _persistedLook = null; CopyParameters(new()); RefreshReferenceSources();
+            OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(CurrentLookText));
+        }
         CopyFilm(film is not null ? film with { } : look?.Film ?? new PixelTartFilmSettings());
         AdjustmentStack = stack?.DeepClone() ?? new ColorAdjustmentStack(Array.Empty<ColorAdjustmentStackNode>());
         _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
-        _ = DebouncedRenderAsync();
+        if (render) _ = DebouncedRenderAsync();
     }
     public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null)
     {
@@ -379,13 +385,13 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _appliedColorScheme = scheme; NotifySchemeState();
         _ = RenderAsync(); StatusText = "色彩方案已应用。";
     }
-    private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change)
+    private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change, bool render = true)
     {
         _presetPreviewNode = null; NotifyPresetPreview();
         var previous = AdjustmentStack; var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
         if (previous.Nodes.SequenceEqual(nodes)) return;
         if (_editTransactionBefore is null) { _undoStacks.Push(previous); _undoSelections.Push(_selectedAdjustmentNodeId); }
-        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes }).Normalize(); _ = RenderAsync();
+        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes }).Normalize(); if (render) _ = RenderAsync();
     }
     public void BeginEditTransaction()
     {
@@ -483,7 +489,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             ColorStudioNodeType.ReferenceMatch => node with { NumericParameters = new Dictionary<string, double>(migrated) },
             ColorStudioNodeType.Film => node with { FilmSettings = FilmSettings },
             _ => node
-        }).ToArray());
+        }).ToArray(), render: false);
     }
     private void SyncSimpleFromStack()
     {
@@ -805,6 +811,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection;_neutral=value.NeutralProtection;_keepOriginalTone=value.KeepOriginalTone; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection),nameof(NeutralProtection),nameof(KeepOriginalTone)})OnPropertyChanged(name); }
     private async Task DebouncedRenderAsync()
     {
+        _render?.Cancel();
         Interlocked.Increment(ref _pendingDebounceWork);
         try
         {
@@ -821,13 +828,33 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
         if (_presetPreviewNode is { } presetPreview) stack = new ColorAdjustmentStack([.. stack.Nodes, presetPreview]);
         var selection = ShowSelection ? SelectedAdjustmentNode : null;
+        var film = FilmSettings with { };
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);
-        if (!Enabled || source is null || (look is null && stack.Nodes.Count == 0)) { MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
+        if (!Enabled || source is null || (look is null && stack.Nodes.Count == 0)) { Interlocked.Exchange(ref _busyRenderRevision, 0); State = ProcessingState.Idle; MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
+        // Reference bitmap identity plus the complete frozen processing inputs prevents stale reuse.
+        // Custom postprocessors and mutable/high-precision masters are deliberately not cached here.
+        var cacheKey = PostProcessor is null && _rawPreviewMaster is null && !IsMatchV4Beta
+            ? System.Text.Json.JsonSerializer.Serialize(new
+            {
+                look, stack, film, selection, MatchEngine,
+                References = look?.ReferenceSources.Select(reference => new
+                {
+                    reference.SourcePath,
+                    Modified = string.IsNullOrWhiteSpace(reference.SourcePath) ? 0 : File.GetLastWriteTimeUtc(reference.SourcePath).Ticks
+                }).ToArray()
+            }) : null;
+        var cached = cacheKey is null ? default : _previewCache.FirstOrDefault(item => ReferenceEquals(item.Source, source) && item.Key == cacheKey);
+        if (cached.Result is not null)
+        {
+            Interlocked.Exchange(ref _busyRenderRevision, 0);
+            MatchedImage = cached.Result; HasError = false; State = ProcessingState.Idle; StatusText = "预览已就绪。"; RaiseViewProperties(); return;
+        }
         _render?.Dispose(); _render = CancellationTokenSource.CreateLinkedTokenSource(outer, _lifetime.Token);
         var renderToken = _render.Token;
         HasError = false; StatusText = interactive ? "正在生成快速预览…" : "正在生成高质量预览…";
-        BeginBusy();
+        Interlocked.Exchange(ref _busyRenderRevision, revision);
+        State = ProcessingState.RenderingHighQuality;
         var previousFrame = MatchedImage;
         try
         {
@@ -843,7 +870,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             {
                 // The proxy remains float RGB. Both preview and export consume this same frozen look/stack contract.
                 var rendered = await Task.Run(() => new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder())
-                    .Render(raw, look, stack, token: renderToken, film: FilmSettings).Pixels, renderToken);
+                    .Render(raw, look, stack, token: renderToken, film: film).Pixels, renderToken);
                 image = RawDisplayBitmapAdapter.ToBitmap(rendered);
             }
             else if (stack.Nodes.Count > 0)
@@ -859,10 +886,16 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             else
             {
                 var rendered = await _preview.RenderWithResultAsync(source, look!, renderToken); image = rendered.Image;
-                if (FilmSettings.Enabled) { StatusText = "正在应用胶片质感…"; image = await _preview.ApplyFilmAsync(image, FilmSettings, renderToken); }
+                if (film.Enabled) { StatusText = "正在应用胶片质感…"; image = await _preview.ApplyFilmAsync(image, film, renderToken); }
             }
             if (PostProcessor is not null) image = await PostProcessor(image, renderToken);
             if (revision != Volatile.Read(ref _revision) || asset != _assetId) return;
+            if (cacheKey is not null)
+            {
+                _previewCache.AddFirst((source, cacheKey, image));
+                while (_previewCache.Count > 4 || (_previewCache.Count > 1 && _previewCache.Sum(item => (long)item.Result.PixelWidth * item.Result.PixelHeight * 4) > 128L * 1024 * 1024))
+                    _previewCache.RemoveLast();
+            }
             if (ColorStudioAcceptanceFixture.NativeObserverRequested)
             {
                 NativeRenderedOrder = stack.Nodes.Select(node => node.Name).ToArray();
@@ -873,7 +906,17 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
         catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "当前 V4 Beta 需要可用的高精度源与参考图；已保留上一张有效预览。"; RaiseViewProperties(); } }
         catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
-        finally { EndBusy(); }
+        finally
+        {
+            // Retired renders may finish after the current image. Only the current job
+            // owns its processing indicator; imports/exports retain their own busy count.
+            if (Interlocked.CompareExchange(ref _busyRenderRevision, 0, revision) == revision && _busyOperations == 0)
+            {
+                if (State == ProcessingState.Cancelling) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; }
+                else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
+                OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(IsSettled));
+            }
+        }
     }
     private static BitmapSource CreateInteractiveProxy(BitmapSource source, int maximumEdge)
     {
@@ -949,7 +992,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed) }) OnPropertyChanged(name);
     }
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide),nameof(EffectiveViewMode)})OnPropertyChanged(name);}
-    public void Dispose(){_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();}
+    public void Dispose(){Interlocked.Increment(ref _revision);_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();_previewCache.Clear();}
 }
 
 public sealed record ReferenceSourceCategory(string Label, string? Kind);

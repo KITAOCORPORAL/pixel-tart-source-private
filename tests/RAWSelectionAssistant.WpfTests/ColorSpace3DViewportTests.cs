@@ -8,6 +8,31 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorSpace3DViewportTests
 {
     [TestMethod]
+    public void PreviewMaskIncludesMatchesBeyondTwelveThousandAndClears()
+    {
+        Exception? failure = null;
+        var thread = new Thread(() =>
+        {
+            try
+            {
+                var overlay = new ImageHighlightOverlay { ImageWidth = 200, ImageHeight = 100,
+                    PixelIndices = Enumerable.Range(0, 20000).ToArray(), Width = 200, Height = 100 };
+                overlay.Measure(new System.Windows.Size(200, 100)); overlay.Arrange(new System.Windows.Rect(0, 0, 200, 100));
+                var rendered = new System.Windows.Media.Imaging.RenderTargetBitmap(200, 100, 96, 96, System.Windows.Media.PixelFormats.Pbgra32);
+                rendered.Render(overlay);
+                var pixel = new byte[4]; rendered.CopyPixels(new System.Windows.Int32Rect(190, 90, 1, 1), pixel, 4, 0);
+                Assert.IsGreaterThan(0, pixel[3], "A matching pixel beyond index 12000 must remain visible.");
+                overlay.PixelIndices = []; overlay.UpdateLayout();
+                rendered = new System.Windows.Media.Imaging.RenderTargetBitmap(200, 100, 96, 96, System.Windows.Media.PixelFormats.Pbgra32);
+                rendered.Render(overlay); rendered.CopyPixels(new System.Windows.Int32Rect(190, 90, 1, 1), pixel, 4, 0);
+                Assert.AreEqual(0, pixel[3]);
+            }
+            catch (Exception error) { failure = error; }
+        });
+        thread.SetApartmentState(ApartmentState.STA); thread.Start(); Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(10)));
+        if (failure is not null) throw failure;
+    }
+    [TestMethod]
     public void BoundsFitReframesOnResizeAndResetRemainsDistinct()
     {
         Exception? failure = null;

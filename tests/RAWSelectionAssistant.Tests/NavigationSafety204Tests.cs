@@ -82,8 +82,10 @@ public sealed class NavigationSafety204Tests
     public void AsyncCommandsHaveBuiltInReentryProtection()
     {
         var source = Text("src/RAWSelectionAssistant/Utilities/RelayCommand.cs");
-        StringAssert.Contains(source, "private bool _isExecuting;");
-        StringAssert.Contains(source, "public bool CanExecute(object? parameter) => !_isExecuting");
+        StringAssert.Contains(source, "bool allowConcurrent = false");
+        StringAssert.Contains(source, "allowConcurrent || _executions == 0");
+        StringAssert.Contains(source, "_executions++;");
+        StringAssert.Contains(source, "_executions--;");
     }
 
     [TestMethod]

@@ -27,6 +27,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private ColorStudioZoomPanState _zoomPan => ImageViewport.State;
     private Point _panStart;
     private bool _panning;
+    private bool _inspectingImageColor;
+    private ColorSpace3DViewport? _expandedCloud;
     private bool _draggingDivider;
     private ListBoxItem? _dropIndicator;
     private Guid? _dropDestination;
@@ -110,6 +112,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private void OnSamplingKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Escape) return;
+        _inspectingImageColor = false;
+        ColorInspectionHint.Visibility = Visibility.Collapsed; PreviewCanvas.Cursor = Cursors.Arrow;
         if (_editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
         if (DataContext is ReferenceColorWorkspaceViewModel workspace)
         {
@@ -225,30 +229,34 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (e.ClickCount == 2 && _editor?.IsSampling != true) { _zoomPan.Fit(); e.Handled = true; return; }
         if ((e.ChangedButton == MouseButton.Left && Keyboard.IsKeyDown(Key.Space)) || e.ChangedButton == MouseButton.Middle)
         { _panning = true; _panStart = e.GetPosition(PreviewCanvas); PreviewCanvas.CaptureMouse(); e.Handled = true; return; }
-        if (_editor?.IsSampling != true)
+        if (_editor?.IsSampling != true && !_inspectingImageColor)
         {
+            if (DataContext is ReferenceColorWorkspaceViewModel previewWorkspace) previewWorkspace.ClearColorSpaceHighlight();
             if (_editor?.EffectiveViewMode == "左右对比" && Math.Abs(e.GetPosition(PreviewCanvas).X - PreviewCanvas.ActualWidth * _editor.SplitPosition) < 10)
             { _draggingDivider = true; PreviewCanvas.CaptureMouse(); e.Handled = true; }
             return;
         }
+        if (_editor is null || e.ChangedButton != MouseButton.Left) return;
         var mapped = ColorStudioSampleMapping.Map(e.GetPosition(PreviewCanvas), new Size(PreviewCanvas.ActualWidth, PreviewCanvas.ActualHeight),
-            _editor.EffectiveViewMode, _editor.SplitPosition, _editor.SourceImage, _editor.MatchedImage, _zoomPan);
+            _editor.EffectiveViewMode, _editor.SplitPosition, _editor.SourceImage,
+            _inspectingImageColor ? _editor.SourceImage : _editor.MatchedImage, _zoomPan);
         if (mapped is not { } sample) { RecordNativeSample(e, null, null); return; }
         var (image, x, y) = sample;
-        var pixels = new byte[image.PixelWidth * image.PixelHeight * 4];
-        var bgra = HistogramService.EnsureBgra32(image); bgra.CopyPixels(pixels, image.PixelWidth * 4, 0);
-        var index = (y * image.PixelWidth + x) * 4;
+        var pixels = new byte[4];
+        var bgra = HistogramService.EnsureBgra32(image); bgra.CopyPixels(new Int32Rect(x, y, 1, 1), pixels, 4, 0);
+        const int index = 0;
         var mode = Keyboard.Modifiers.HasFlag(ModifierKeys.Alt) ? "减少取样" : Keyboard.Modifiers.HasFlag(ModifierKeys.Shift) ? "增加取样" : _editor.SampleMode;
-        _editor.SampleMode = mode;
+        if (!_inspectingImageColor) _editor.SampleMode = mode;
         var value = new VisualRgb24(pixels[index + 2], pixels[index + 1], pixels[index]);
         RecordNativeSample(e, new Point(x, y), value);
         if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightImageSample(value);
-        _editor.CompleteDisplayedSample(value);
+        if (!_inspectingImageColor) _editor.CompleteDisplayedSample(value);
         e.Handled = true;
     }
 
     private void OnFilmstripMouseDown(object sender, MouseButtonEventArgs e)
     {
+        if (e.ChangedButton != MouseButton.Left) return;
         if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
         if (e.OriginalSource is not DependencyObject source) return;
         for (DependencyObject? ancestor = source; ancestor is not null;
@@ -260,13 +268,16 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var modifiers = Keyboard.Modifiers;
         _selectionAnchor = workspace.SelectFilmstripTarget(index, _selectionAnchor,
             modifiers.HasFlag(ModifierKeys.Shift), modifiers.HasFlag(ModifierKeys.Control));
-        workspace.ActivateTargetCommand.Execute(target); e.Handled = true;
+        if (target.IsSelected) item.Focus(); else Filmstrip.Focus();
+        if (!ReferenceEquals(workspace.ActiveTarget, target) || workspace.IsLoading) workspace.ActivateTargetCommand.Execute(target);
+        e.Handled = true;
     }
     private ListBox? FindFilmstrip() => FindName("Filmstrip") as ListBox;
 
     private void OnFilmstripKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Handled || Keyboard.FocusedElement is not DependencyObject focus || FindAncestor<ListBoxItem>(focus) is not { } item || ItemsControl.ItemsControlFromItemContainer(item) != FindFilmstrip()) return;
+        if (e.Handled || !Filmstrip.IsKeyboardFocusWithin) return;
+        if (Keyboard.FocusedElement is DependencyObject focus && FindAncestor<PixelTartRatingControl>(focus) is not null) return;
         if (_editor is null || DataContext is not ReferenceColorWorkspaceViewModel workspace || workspace.Targets.Count == 0) return;
         var index = workspace.ActiveTarget is null ? 0 : workspace.Targets.IndexOf(workspace.ActiveTarget);
         if (e.Key == Key.Escape) { foreach (var target in workspace.Targets) target.IsSelected = false; if (workspace.ActiveTarget is not null) workspace.ActiveTarget.IsSelected = true; e.Handled = true; return; }
@@ -284,8 +295,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
     {
         if (_editor is not null) _editor.PropertyChanged -= EditorOnPropertyChanged;
-        if (args.OldValue is ReferenceColorWorkspaceViewModel oldWorkspace) oldWorkspace.PropertyChanged -= WorkspaceOnPropertyChanged;
-        if (args.NewValue is ReferenceColorWorkspaceViewModel newWorkspace) newWorkspace.PropertyChanged += WorkspaceOnPropertyChanged;
+        if (args.OldValue is ReferenceColorWorkspaceViewModel oldWorkspace) { oldWorkspace.PropertyChanged -= WorkspaceOnPropertyChanged; oldWorkspace.ColorSpaceSelectionChanged -= WorkspaceColorSpaceSelectionChanged; }
+        if (args.NewValue is ReferenceColorWorkspaceViewModel newWorkspace) { newWorkspace.PropertyChanged += WorkspaceOnPropertyChanged; newWorkspace.ColorSpaceSelectionChanged += WorkspaceColorSpaceSelectionChanged; }
         _editor = (args.NewValue as ReferenceColorWorkspaceViewModel)?.Editor;
         if (_editor is not null) _editor.PropertyChanged += EditorOnPropertyChanged;
         UpdateResponsiveLayout();
@@ -294,23 +305,32 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
         {
-            ColorSpaceViewport.State = workspace.ColorSpaceModel is { } model ? ColorSpaceRendererContract.Create(model) : null;
-            workspace.ColorSpaceSelectionChanged -= WorkspaceColorSpaceSelectionChanged;
-            workspace.ColorSpaceSelectionChanged += WorkspaceColorSpaceSelectionChanged;
+            if (workspace.ColorSpaceModel is null)
+            {
+                _inspectingImageColor = false; ColorInspectionHint.Visibility = Visibility.Collapsed; PreviewCanvas.Cursor = Cursors.Arrow;
+            }
+            ColorSpaceViewport.State = workspace.ColorSpaceModel is { } model ? ColorSpaceRendererContract.Create(model).WithMode(ColorCloudMode.Source) : null;
+            if (_expandedCloud is not null) _expandedCloud.State = ColorSpaceViewport.State;
         }
     }
     private void WorkspaceColorSpaceSelectionChanged(object? sender, ColorSpaceSelection selection)
     {
         if (ColorSpaceViewport.State is { } state) ColorSpaceViewport.State = state with { Selection = selection };
+        if (_expandedCloud?.State is { } expanded) _expandedCloud.State = expanded with { Selection = selection };
     }
     private void ColorSpaceViewport_SelectionChanged(object? sender, ColorSpaceSelection selection)
     {
         if (DataContext is ReferenceColorWorkspaceViewModel workspace)
+        {
+            if (selection.PointIndex >= 0) workspace.Editor.ViewMode = "原片";
             workspace.HighlightCloudSelection(selection.PointIndex);
+        }
     }
 
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        HighlightOverlay.ViewMode = _editor?.EffectiveViewMode ?? "原片";
+        HighlightOverlay.InvalidateVisual();
         if (!_refreshingNodeSelection && args.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentNodes) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode))
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.DataBind, () =>
             {
@@ -336,6 +356,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var availableWidth = GetAvailableWidth();
         _lastResponsiveWidth = availableWidth;
         var focus = _editor?.FocusView == true;
+        var hideContext = focus || _editor?.IsContextVisible == false;
         var compact = availableWidth is > 0 and < 1440;
         var narrow = availableWidth is > 0 and < 740;
 
@@ -343,11 +364,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         _wasCompact = compact;
 
         LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 300 : 240;
-        RightColumn.MinWidth = focus || compact ? 0 : 224;
+        RightColumn.MinWidth = hideContext || compact ? 0 : 224;
         LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(320);
         CenterColumn.MinWidth = compact ? 240 : 520;
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
-        RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
+        RightColumn.Width = hideContext || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
         if (compact)
         {
             Grid.SetColumn(RightRail, 1);
@@ -403,4 +424,51 @@ public partial class ReferenceColorWorkspaceView : UserControl
     }
     private void OnColorSpaceReset(object sender, RoutedEventArgs e) => ColorSpaceViewport.ResetCamera();
     private void OnColorSpaceFit(object sender, RoutedEventArgs e) => ColorSpaceViewport.FitCamera();
+
+    private void OnExpandReference(object sender, RoutedEventArgs e)
+    {
+        if (_editor is null) return;
+        var navigator = new ReferenceNavigator { SourcePath = _editor.CurrentReferencePath };
+        CreateInspectionWindow("参考图片 · " + Path.GetFileName(_editor.CurrentReferencePath), navigator).Show();
+    }
+
+    private void OnExpandColorSpace(object sender, RoutedEventArgs e)
+    {
+        if (_expandedCloud is not null) { Window.GetWindow(_expandedCloud)?.Activate(); return; }
+        var viewport = new ColorSpace3DViewport { State = ColorSpaceViewport.State };
+        _expandedCloud = viewport;
+        viewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
+        var panel = new DockPanel(); var actions = new StackPanel { Orientation = Orientation.Horizontal };
+        void Add(string text, Action action) { var button = new Button { Content = text, Margin = new Thickness(4) }; button.Click += (_, _) => action(); actions.Children.Add(button); }
+        Add("重置", viewport.ResetCamera); Add("适合", viewport.FitCamera);
+        Add("清除高亮", () => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.ClearColorSpaceHighlight(); });
+        DockPanel.SetDock(actions, Dock.Top); panel.Children.Add(actions); panel.Children.Add(viewport);
+        var window = CreateInspectionWindow("3D 色彩空间 · 点击取色 / 拖动旋转 / Shift 拖动平移", panel);
+        window.PreviewKeyDown += OnSamplingKeyDown;
+        window.Closed += (_, _) => { viewport.SelectionChanged -= ColorSpaceViewport_SelectionChanged; _expandedCloud = null; };
+        window.Show();
+    }
+
+    private async void OnInspectImageColor(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
+        try { await workspace.BuildColorSpaceModelAsync(); _inspectingImageColor = workspace.HasColorSpaceModel; }
+        catch (OperationCanceledException) { return; }
+        catch (Exception error) when (error is InvalidOperationException or ArgumentException or NotSupportedException)
+        { _inspectingImageColor = false; return; }
+        if (_inspectingImageColor)
+        {
+            // The linked cloud contains source colors; display the same source while picking.
+            workspace.Editor.ViewMode = "原片";
+            ColorSpaceViewport.FitCamera(); PreviewCanvas.Cursor = Cursors.Cross;
+            ColorInspectionHint.Visibility = Visibility.Visible; Focus();
+        }
+    }
+
+    private Window CreateInspectionWindow(string title, FrameworkElement content) => new()
+    {
+        Title = title, Owner = Window.GetWindow(this), Content = content,
+        Width = Math.Min(1000, SystemParameters.WorkArea.Width * .85), Height = Math.Min(780, SystemParameters.WorkArea.Height * .85),
+        Background = (Brush)FindResource("CanvasBackgroundBrush"), WindowStartupLocation = WindowStartupLocation.CenterOwner
+    };
 }

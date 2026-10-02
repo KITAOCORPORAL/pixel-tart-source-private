@@ -24,6 +24,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private bool _isLoading;
     private ReferenceTargetItem? _activeTarget;
     private long _activationRevision;
+    private CancellationTokenSource? _activationCancellation;
+    private readonly LinkedList<(string Path, long Stamp, BitmapSource Image)> _sourceCache = new();
     private int _loadingActivations;
     private CancellationTokenSource? _exportCancellation;
     private int _exportCompleted;
@@ -40,6 +42,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private readonly ObservableCollection<AdjustmentSyncChoice> _adjustmentSyncChoices = [];
     private ColorSpaceVisualizationModel? _colorSpaceModel;
     private VisualPixelBuffer? _colorSpaceSourceBuffer;
+    private long _colorSpaceRevision;
     private IReadOnlyList<int> _highlightedPixels = [];
     private readonly Func<IAssetLibraryRepository?>? _assetRepositoryFactory;
     private readonly HashSet<Guid> _hydratingMetadata = [];
@@ -59,7 +62,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
             renderBackend: renderBackend, matchV4Executor: matchV4Executor);
         Editor.Enabled = true;
-        BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null && Editor.MatchedImage is not null);
+        BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
         SyncSelectedCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(SelectedTargets), _ => SelectedTargets.Any());
@@ -93,7 +96,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             _ = ShowSyncFeedbackAsync($"已应用 {selected.Count} 类调整到 {targets.Length} 张照片。 ");
         }, _ => CanSyncSelectedNodes && _adjustmentSyncChoices.Any(choice => choice.Selected));
         CancelAdjustmentCopyCommand = new RelayCommand(_ => AdjustmentCopyOpen = false);
-        ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask);
+        ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask, allowConcurrent: true);
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
         StopExportCommand = new RelayCommand(_ => _exportCancellation?.Cancel(), _ => IsExporting);
@@ -103,7 +106,11 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
-            if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage)) BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage))
+            {
+                Interlocked.Increment(ref _colorSpaceRevision); ColorSpaceModel = null; _colorSpaceSourceBuffer = null;
+                ClearColorSpaceHighlight(); BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
+            }
         };
         Targets.CollectionChanged += (_, args) =>
         {
@@ -126,19 +133,26 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
 
     public TetherReferenceModeViewModel Editor { get; }
     public AsyncRelayCommand BuildColorSpaceModelCommand { get; }
-    public ColorSpaceVisualizationModel? ColorSpaceModel { get => _colorSpaceModel; private set => SetProperty(ref _colorSpaceModel, value); }
+    public ColorSpaceVisualizationModel? ColorSpaceModel
+    {
+        get => _colorSpaceModel;
+        private set { if (SetProperty(ref _colorSpaceModel, value)) OnPropertyChanged(nameof(HasColorSpaceModel)); }
+    }
     public bool HasColorSpaceModel => ColorSpaceModel is not null;
     public IReadOnlyList<int> HighlightedPixels { get => _highlightedPixels; private set => SetProperty(ref _highlightedPixels, value); }
     public int HighlightImageWidth => _colorSpaceSourceBuffer?.Width ?? 0;
     public int HighlightImageHeight => _colorSpaceSourceBuffer?.Height ?? 0;
     public async Task BuildColorSpaceModelAsync(CancellationToken token = default)
     {
-        if (Editor.SourceImage is null || Editor.MatchedImage is null) return;
-        var source = await Task.Run(() => ToVisualBuffer(Editor.SourceImage), token);
-        var matched = await Task.Run(() => ToVisualBuffer(Editor.MatchedImage), token);
-        _colorSpaceSourceBuffer = source;
+        if (Editor.SourceImage is not { } sourceImage) return;
+        var revision = Interlocked.Increment(ref _colorSpaceRevision);
+        var matchedImage = Editor.MatchedImage ?? sourceImage;
+        var source = await Task.Run(() => ToVisualBuffer(sourceImage), token);
+        var matched = await Task.Run(() => ToVisualBuffer(matchedImage), token);
         var transform = new MatchV4ResolvedTransform(new(0, 0, 0), [new(0, 0, 0), new(0, 0, 0), new(0, 0, 0)], new(), "workspace-preview");
-        ColorSpaceModel = await Task.Run(() => ColorSpaceVisualizationBuilder.Build(source, matched, transform, ColorSpaceSamplingTier.Preview, token), token);
+        var model = await Task.Run(() => ColorSpaceVisualizationBuilder.Build(source, matched, transform, ColorSpaceSamplingTier.Preview, token), token);
+        if (revision != Volatile.Read(ref _colorSpaceRevision)) return;
+        _colorSpaceSourceBuffer = source; ColorSpaceModel = model;
         OnPropertyChanged(nameof(HasColorSpaceModel));
         OnPropertyChanged(nameof(HighlightImageWidth)); OnPropertyChanged(nameof(HighlightImageHeight));
     }
@@ -157,12 +171,19 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null || pointIndex >= model.Source.Points.Count) return;
         HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, pointIndex);
         OnPropertyChanged(nameof(HighlightedPixels));
+        ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, pointIndex));
     }
-    public void ClearColorSpaceHighlight() { HighlightedPixels = []; OnPropertyChanged(nameof(HighlightedPixels)); }
+    public void ClearColorSpaceHighlight() { HighlightedPixels = []; OnPropertyChanged(nameof(HighlightedPixels)); ColorSpaceSelectionChanged?.Invoke(this, ColorSpaceSelection.None); }
     public event EventHandler<ColorSpaceSelection>? ColorSpaceSelectionChanged;
     private static VisualPixelBuffer ToVisualBuffer(BitmapSource source)
     {
-        var converted = new FormatConvertedBitmap(source, PixelFormats.Rgb24, null, 0); var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 3]; converted.CopyPixels(bytes, converted.PixelWidth * 3, 0); return new(converted.PixelWidth, converted.PixelHeight, bytes);
+        // Preview-only mask/model stays bounded; never mutate or resample export input.
+        var edge = Math.Max(source.PixelWidth, source.PixelHeight);
+        if (edge > 768) source = new TransformedBitmap(source, new ScaleTransform(768d / edge, 768d / edge));
+        var converted = new FormatConvertedBitmap(source, PixelFormats.Rgb24, null, 0);
+        var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 3];
+        converted.CopyPixels(bytes, converted.PixelWidth * 3, 0);
+        return new(converted.PixelWidth, converted.PixelHeight, bytes);
     }
     public AsyncRelayCommand ChooseTargetCommand { get; }
     public RelayCommand StopProcessingCommand { get; }
@@ -421,6 +442,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
         var revision = Interlocked.Increment(ref _activationRevision);
+        _activationCancellation?.Cancel(); _activationCancellation?.Dispose();
+        _activationCancellation = new CancellationTokenSource();
+        var token = _activationCancellation.Token;
         if (ActiveTarget is { } previous && !ReferenceEquals(previous, target))
             Editor.CopyCurrentLookTo([previous]);
         try
@@ -428,33 +452,51 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
-            var rawMaster = isRaw ? target.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(target.Path) : null;
+            var rawMaster = isRaw ? target.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
-            var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await Task.Run(() =>
-            {
-                var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.UriSource = new Uri(target.Path); decoded.EndInit(); decoded.Freeze(); return decoded;
-            });
+            var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, token);
             if (revision != Volatile.Read(ref _activationRevision)) return;
-            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
-            foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             QueueMetadata(() => HydrateAssetMetadataAsync(target));
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
-            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot);
-            await Editor.SetSourceAsync(target.AssetId, image, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
+            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false);
+            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
+            foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
+            await Editor.SetSourceAsync(target.AssetId, image, token, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
             StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
+        catch (OperationCanceledException) { }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
-        { target.Status = ReferenceTargetStatus.Failed; target.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "照片无法读取"; FailedTarget = target; if (revision == Volatile.Read(ref _activationRevision)) StatusText = target.Error + "；现有色彩方案保持不变。请重试。"; }
+        { target.Status = ReferenceTargetStatus.Failed; target.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "照片无法读取"; if (revision == Volatile.Read(ref _activationRevision)) { FailedTarget = target; StatusText = target.Error + "；现有色彩方案保持不变。请重试。"; } }
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
+    }
+
+    private async Task<BitmapSource> LoadSourcePreviewAsync(string path, CancellationToken token)
+    {
+        var stamp = File.GetLastWriteTimeUtc(path).Ticks;
+        var cached = _sourceCache.FirstOrDefault(item => item.Path == path && item.Stamp == stamp);
+        if (cached.Image is not null) return cached.Image;
+        var image = await Task.Run(() =>
+        {
+            token.ThrowIfCancellationRequested();
+            var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad;
+            decoded.UriSource = new Uri(path); decoded.EndInit(); decoded.Freeze();
+            token.ThrowIfCancellationRequested(); return decoded;
+        }, token);
+        _sourceCache.AddFirst((path, stamp, image));
+        // Bound cached decoded sources. Exports continue to use frozen target inputs.
+        while (_sourceCache.Count > 3 || (_sourceCache.Count > 1 && _sourceCache.Sum(item => (long)item.Image.PixelWidth * item.Image.PixelHeight * 4) > 128L * 1024 * 1024))
+            _sourceCache.RemoveLast();
+        return image;
     }
 
     public void Dispose()
     {
         _disposed = true;
+        _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {
             target.PropertyChanged -= OnTargetMetadataChanged;
