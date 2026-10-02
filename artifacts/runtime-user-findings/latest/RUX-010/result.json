@@ -1,0 +1,18 @@
+{
+  "id": "RUX-010",
+  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "dpi": null,
+  "resolution": null,
+  "steps": [
+    "对同一素材连续添加两个标签，确认两个独立 chips。",
+    "移除其中一条，只删该关系；刷新/重启，另一条仍在。",
+    "多选有不同标签的素材，检查成员数量与批量行为。"
+  ],
+  "result": "BLOCKED",
+  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
+  "beforeEvidence": null,
+  "afterEvidence": null,
+  "USER_APPROVED": false,
+  "codeStatus": "FIXED_IN_CODE"
+}

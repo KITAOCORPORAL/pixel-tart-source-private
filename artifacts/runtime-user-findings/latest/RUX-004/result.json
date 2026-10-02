@@ -1,0 +1,17 @@
+{
+  "id": "RUX-004",
+  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "dpi": null,
+  "resolution": null,
+  "steps": [
+    "输入已有文件名、标签名、备注，各自执行文本查询。",
+    "点击文本建议；不应自动打开高级筛选，也不应进入视觉相似或颜色搜索。"
+  ],
+  "result": "BLOCKED",
+  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
+  "beforeEvidence": null,
+  "afterEvidence": null,
+  "USER_APPROVED": false,
+  "codeStatus": "FIXED_IN_CODE"
+}

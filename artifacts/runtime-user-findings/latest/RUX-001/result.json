@@ -1,0 +1,16 @@
+{
+  "id": "RUX-001",
+  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "dpi": null,
+  "resolution": null,
+  "steps": [
+    "展开侧栏，在“素材库”等带名称入口上悬停，不应显示同名 tooltip；折叠侧栏后纯图标仍有提示。"
+  ],
+  "result": "BLOCKED",
+  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
+  "beforeEvidence": null,
+  "afterEvidence": null,
+  "USER_APPROVED": false,
+  "codeStatus": "FIXED_IN_CODE"
+}

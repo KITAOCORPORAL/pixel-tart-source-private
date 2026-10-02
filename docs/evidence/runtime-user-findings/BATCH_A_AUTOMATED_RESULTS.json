@@ -1,0 +1,26 @@
+{
+  "SourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "Runs": [
+    {
+      "Path": "artifacts/runtime-user-findings/latest/tests/batch-a-core.trx",
+      "Sha256": "12F6805FDB4A3CFD423BDFBEED21E01D9082D31FD8A3F4BB22D97088DADEA937",
+      "Counters": [],
+      "Start": "2026-10-02T18:35:45.1322815+08:00",
+      "Finish": "2026-10-02T18:36:00.0226695+08:00"
+    },
+    {
+      "Path": "artifacts/runtime-user-findings/latest/tests/batch-a-final.trx",
+      "Sha256": "4A53297C3EF154D32308EC8FD517DD44D3C7B49ABDC7AC8D5F979B4003CFA976",
+      "Counters": [],
+      "Start": "2026-10-02T18:39:43.7899422+08:00",
+      "Finish": "2026-10-02T18:39:50.3192160+08:00"
+    }
+  ],
+  "Build": "Release x64 / publish succeeded",
+  "Dpi": "Layout-only: 100/125/150/200; 1180x720,1600x920,1920x1080. No OS scaling changed. No runtime captures.",
+  "InitialRegression": "71 PASS / 1 FAIL: fixed main-XAML button count excluded extracted tag picker. Test now includes picker; original counts/style assertions preserved.",
+  "Guardian": "1 contract test passed; full window/capture suite deferred to runtime gate",
+  "FullRegression": "NOT_RUN: scheduled Batch G after per-batch runtime gates",
+  "VisualApproved": false,
+  "UserVerified": false
+}

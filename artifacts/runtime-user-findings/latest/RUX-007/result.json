@@ -1,0 +1,17 @@
+{
+  "id": "RUX-007",
+  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "dpi": null,
+  "resolution": null,
+  "steps": [
+    "创建父/子文件夹，展开/收起，检查箭头、图标、名称、计数、缩进。",
+    "悬停与选中有明确反馈；长名称省略并能通过 tooltip 看全；新建行与普通行密度一致。"
+  ],
+  "result": "BLOCKED",
+  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
+  "beforeEvidence": null,
+  "afterEvidence": null,
+  "USER_APPROVED": false,
+  "codeStatus": "FIXED_IN_CODE"
+}

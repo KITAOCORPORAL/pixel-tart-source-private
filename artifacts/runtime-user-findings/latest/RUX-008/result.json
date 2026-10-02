@@ -1,0 +1,18 @@
+{
+  "id": "RUX-008",
+  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "dpi": null,
+  "resolution": null,
+  "steps": [
+    "搜索一个深层子文件夹名称，匹配子项及其祖先保留，其他无关树分支隐藏。",
+    "观察 Gallery 与当前筛选没有被文件夹名称搜索改变。",
+    "清空文件夹搜索，确认恢复之前的展开状态。"
+  ],
+  "result": "BLOCKED",
+  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
+  "beforeEvidence": null,
+  "afterEvidence": null,
+  "USER_APPROVED": false,
+  "codeStatus": "FIXED_IN_CODE"
+}
