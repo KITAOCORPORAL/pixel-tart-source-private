@@ -1,5 +1,7 @@
 # Preview / Export parity evidence
 
+> INVALIDATED by the runtime correction audit. This historical package does not establish production corpus parity. The former generating fixture hardcoded TIFF16/high-precision PASS rows and zero tone/color metrics without measuring them. See `docs/evidence/human-review/POST_VIDEO_RUNTIME_REVIEW_MATRIX.md`; the historical source head below is not the corrected build.
+
 SourceHead: `b3ad8ad1ba73622ea005fa29a2f827043887f5d8`
 
 The production V3 preview and export paths use the shared CPU processing services. The WPF parity test compares the rendered preview pixels with the frozen target export pixels. Proxy resizing and output encoding are allowed to change resolution and container bytes; they must not change the processing contract.

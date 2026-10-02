@@ -1,7 +1,10 @@
-# Pixel Tart Round 3 Final User Retest
+# Pixel Tart Runtime UX Correction — User Retest
 
-Release EXE: `artifacts/releases/round3-final/publish/win-x64/KitaoPhotoSelector.exe`
-SourceHead: `b3ad8ad1ba73622ea005fa29a2f827043887f5d8`
+Release EXE: `artifacts/releases/runtime-ux-correction/publish/win-x64/KitaoPhotoSelector.exe`
+SourceHead: `d497e9b207e98c5a907485dfd85555e33e157a4a`
+Manifest: `artifacts/releases/runtime-ux-correction/release-manifest.json` (EXE, actual application DLL and all publish-file hashes).
+
+This build contains the supplied runtime corrections, not a claim that the original handoff is complete. The required DOCX, latest recording and instructions after section 25 are still unavailable. The reopened matrix is `docs/evidence/human-review/POST_VIDEO_RUNTIME_REVIEW_MATRIX.md`.
 
 Release x64 user visual approval checklist. Please open the Release EXE and mark each item yourself after checking the stated workflow. `VisualApproved=false` and `UserVerified=false` until you do so.
 
@@ -17,6 +20,6 @@ Release x64 user visual approval checklist. Please open the Release EXE and mark
 
 The Release EXE is the only approval surface. Keep `VisualApproved=false` and `UserVerified=false` until you personally finish the retest.
 
-Known automated limitations to retest: preview/export parity is proven on the documented deterministic fixture, not every source/profile; physical camera tethering is `WAITING_FOR_HARDWARE`; GPU remains `DEFERRED`.
+Known automated limitations: the old full parity closure was invalidated; current synthetic equal-resolution JPEG comparison does not establish TIFF16/high precision, ICC or proxy/full-resolution corpus parity. Existing DPI artifact tests refer to older captures, not this build. Physical camera tethering is `WAITING_FOR_HARDWARE`; GPU remains `DEFERRED`.
 
 

@@ -1,0 +1,42 @@
+{
+  "Baseline": "1857cb7608125f7144963365ab45fceaf07fd81e",
+  "SourceHead": "d497e9b207e98c5a907485dfd85555e33e157a4a",
+  "Runs": [
+    {
+      "Path": "artifacts/runtime-ux-tests/runtime-ux-core-final.trx",
+      "Sha256": "17043EF37F0B1DF243DA19459C2BC9EB98CBDF841AC6A6A4BD942D64EB4C2E51",
+      "Total": 1533,
+      "Passed": 1529,
+      "Failed": 0,
+      "Skipped": 4,
+      "Started": "2026-10-02T15:45:35.1154589+08:00",
+      "Finished": "2026-10-02T15:47:00.3846305+08:00"
+    },
+    {
+      "Path": "artifacts/runtime-ux-tests/runtime-ux-wpf-full-final.trx",
+      "Sha256": "8407650C7830C165A2B75C2DE042FE83037C064C44B4655D2E59C672070C8F94",
+      "Total": 1414,
+      "Passed": 1403,
+      "Failed": 0,
+      "Skipped": 11,
+      "Started": "2026-10-02T15:37:01.6616695+08:00",
+      "Finished": "2026-10-02T15:48:25.5867036+08:00"
+    },
+    {
+      "Path": "artifacts/runtime-ux-tests/runtime-ux-dpi-contract.trx",
+      "Sha256": "6051A32B2CC16B7B1F6DFCA3E14648A170F0BBCD4757281FAFCFE71F1F5B2996",
+      "Total": 91,
+      "Passed": 91,
+      "Failed": 0,
+      "Skipped": 0,
+      "Started": "2026-10-02T15:39:03.9796043+08:00",
+      "Finished": "2026-10-02T15:39:04.4721048+08:00"
+    }
+  ],
+  "RunProvenance": "Tests ran on the correction working tree later committed in cfdd0b3/bf1aa29/d497e9b; final Core rerun used unchanged already-built Core/test assemblies.",
+  "DpiScope": "Existing artifact contract plus source tests; captures refer to de4c91a, NOT current correction visual evidence",
+  "Release": "artifacts/releases/runtime-ux-correction/release-manifest.json",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "UserAcceptance": "NOT_APPROVED"
+}

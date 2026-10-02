@@ -1,3 +1,5 @@
+> HISTORICAL / SUPERSEDED: user recording reopened this review. See [POST_VIDEO_RUNTIME_REVIEW_MATRIX.md](POST_VIDEO_RUNTIME_REVIEW_MATRIX.md). CLOSED_IN_CODE and old test counts below are not runtime or user approval. The former parity fixture contained unexecuted TIFF16/high-precision PASS entries; do not rely on those entries.
+
 # Pixel Tart Human Review Gap Matrix — Round 3
 
 Source branch: `integration/pixel-tart-developer-preview`
