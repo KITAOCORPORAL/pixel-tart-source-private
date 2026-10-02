@@ -528,8 +528,9 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 # relying on PSHOME, both of which are exercised/mocked later.
                 $powershellPath = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
                 function Start-HarnessProcess([string]$Body) {
-                    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($Body))
-                    Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-EncodedCommand',$encoded) -PassThru -WindowStyle Hidden
+                    $childPath = Join-Path $harnessRoot ("child-$([guid]::NewGuid().ToString('N')).ps1")
+                    [IO.File]::WriteAllText($childPath, $Body, [Text.UTF8Encoding]::new($false))
+                    Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"' + $childPath + '"')) -PassThru -WindowStyle Hidden
                 }
                 function New-HarnessIdentity([Diagnostics.Process]$Process) {
                     [pscustomobject][ordered]@{
@@ -934,18 +935,27 @@ public sealed class AssetLibraryP3AutomatedEvidenceContractTests
                 "@
                     $stdoutPath = "$Marker.stdout"
                     $stderrPath = "$Marker.stderr"
-                    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($body))
-                    $process = Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-EncodedCommand',$encoded) -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru -WindowStyle Hidden
+                    # Execute the literal script file: the multiline encoded-command child can
+                    # stall before running its first statement on Windows PowerShell 5.1.
+                    # The lock, deadline and stage assertions remain identical.
+                    $childPath = "$Marker.ps1"
+                    [IO.File]::WriteAllText($childPath, $body, [Text.UTF8Encoding]::new($false))
+                    $process = Start-Process -FilePath $powershellPath -ArgumentList @('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"' + $childPath + '"')) -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru -WindowStyle Hidden
                     $deadline = [DateTimeOffset]::UtcNow.AddSeconds(5)
                     while (-not [IO.File]::Exists($Marker) -and [DateTimeOffset]::UtcNow -lt $deadline) {
                         if ($process.HasExited) {
                             $stderr = if ([IO.File]::Exists($stderrPath)) { [IO.File]::ReadAllText($stderrPath) } else { '' }
                             $stdout = if ([IO.File]::Exists($stdoutPath)) { [IO.File]::ReadAllText($stdoutPath) } else { '' }
-                            throw "file-lock harness exited before acquiring its lock (code=$($process.ExitCode); stdout=$stdout; stderr=$stderr; body=$body)"
+                            throw "file-lock harness exited before acquiring its lock (code=$($process.ExitCode); stdout=$stdout; stderr=$stderr)"
                         }
                         [Threading.Thread]::Sleep(10)
                     }
-                    Require-Harness ([IO.File]::Exists($Marker)) 'file-lock harness did not acquire its lock'
+                    if (-not [IO.File]::Exists($Marker)) {
+                        $stdout = if (Test-Path -LiteralPath $stdoutPath) { Get-Content -LiteralPath $stdoutPath -Raw } else { '' }
+                        $stderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -LiteralPath $stderrPath -Raw } else { '' }
+                        if (-not $process.HasExited) { $process.Kill(); [void]$process.WaitForExit(5000) }
+                        throw "file-lock harness did not acquire its lock (stdout=$stdout; stderr=$stderr)"
+                    }
                     return $process
                 }
 
