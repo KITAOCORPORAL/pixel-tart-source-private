@@ -112,7 +112,6 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
         var snapshot = SelectedLook?.Normalize();
-        if (snapshot is null && AdjustmentStack.Nodes.Count == 0) return;
         foreach (var target in targets)
         {
             target.AppliedLookSnapshot = snapshot is null ? null : snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };

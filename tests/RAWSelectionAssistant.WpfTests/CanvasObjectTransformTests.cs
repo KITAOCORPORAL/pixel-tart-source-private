@@ -6,6 +6,19 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class CanvasObjectTransformTests
 {
     [TestMethod]
+    public void StepLayerMovesSelectionOneLevelAndUndoRestoresOrder()
+    {
+        var editor = CanvasFixtures.Create(3);
+        var before = editor.Document.Objects.OrderBy(item => item.ZIndex).Select(item => item.ObjectId).ToArray();
+        editor.Select(before[0]); editor.StepLayer(true);
+        CollectionAssert.AreEqual(new[] { before[1], before[0], before[2] }, editor.Document.Objects.OrderBy(item => item.ZIndex).Select(item => item.ObjectId).ToArray());
+        editor.Undo();
+        CollectionAssert.AreEqual(before, editor.Document.Objects.OrderBy(item => item.ZIndex).Select(item => item.ObjectId).ToArray());
+        editor.SetLocked(true); var locked = editor.Document;
+        editor.StepLayer(true); Assert.AreSame(locked, editor.Document);
+    }
+
+    [TestMethod]
     public void AddMoveScaleDuplicateAndRemoveOnlyChangeObjects()
     {
         var editor = new CanvasEditor(new());

@@ -191,7 +191,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         PublishingPage = publishingPage;
         ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService, matchV4Executor: matchV4Executor,
             assetRepositoryFactory: assetRepositoryFactory);
-        ReferenceColorPage.OpenPublishing = paths => { if (PublishingPage is null) return; PublishingPage.AddFiles(paths); Navigate("Publishing"); };
+        if (PublishingPage is not null) ReferenceColorPage.OpenPublishing = paths => { PublishingPage.AddFiles(paths); Navigate("Publishing"); };
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {
             await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, TetherPage.SelectedAsset?.Record.Id, TetherPage.CurrentImage).ConfigureAwait(true);

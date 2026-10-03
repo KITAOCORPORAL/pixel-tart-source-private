@@ -8,6 +8,24 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class AssetLibraryP3IntegrityTests
 {
     [TestMethod]
+    public async Task DeleteSmartFolderDefinitionPreservesAssetsAcrossRestart()
+    {
+        await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
+        var before = await setup.Repository.QueryAsync(new(PageSize: 100));
+        var folder = await setup.Repository.SaveSmartFolderQueryDocumentAsync(new(Guid.NewGuid(), "仅删除定义"), DocumentWithFileName("after"));
+        var other = await setup.Repository.SaveSmartFolderQueryDocumentAsync(new(Guid.NewGuid(), "保留定义"), DocumentWithFileName("before"));
+        Assert.AreEqual(1, await setup.Repository.DeleteSmartFolderDefinitionAsync(folder.SmartFolderId));
+        await setup.RestartAsync();
+        Assert.IsFalse((await setup.Repository.ListSmartFoldersAsync(true)).Any(x => x.SmartFolderId == folder.SmartFolderId));
+        Assert.IsNull(await setup.Repository.GetSmartFolderQueryDocumentAsync(folder.SmartFolderId));
+        Assert.HasCount(0, await setup.Repository.ListSmartFolderRulesAsync(folder.SmartFolderId));
+        Assert.IsNotNull(await setup.Repository.GetSmartFolderQueryDocumentAsync(other.SmartFolderId));
+        var after = await setup.Repository.QueryAsync(new(PageSize: 100));
+        CollectionAssert.AreEquivalent(before.Items.ToArray(), after.Items.ToArray());
+        Assert.AreEqual(0, await setup.Repository.DeleteSmartFolderDefinitionAsync(folder.SmartFolderId));
+    }
+
+    [TestMethod]
     public async Task QueryReferenceResolutionMapsActiveNamesToStableIdsAcrossNestedGroups()
     {
         await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();

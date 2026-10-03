@@ -11,7 +11,15 @@ public sealed class UiSimplification144Tests
     [TestMethod] public void WorkbenchPrimaryAction_UsesDeepGradient() => Contains(MainXaml(), "x:Name=\"StartLocalSplitCard\"", "WorkbenchHeroBrush", "Content=\"?\"");
     [TestMethod] public void WorkbenchPrimaryAction_HasExplicitTextAndIconColumns() => Contains(MainXaml(), "<ColumnDefinition Width=\"48\" />", "开始本地分片", "IconLocalSplit");
     [TestMethod] public void RecentProjectTile_UsesCoverAndInformationPanel() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "<RowDefinition Height=\"190\" />", "继续处理");
-    [TestMethod] public void Workbench_UsesBalancedModuleSpacing() => Contains(MainXaml(), "Margin=\"28,24,24,22\"", "<RowDefinition Height=\"24\" />", "Grid.Column=\"2\" Style=\"{StaticResource PixelTart.SectionSurface}\"");
+    [TestMethod] public void Workbench_UsesBalancedModuleSpacing()
+    {
+        Contains(MainXaml(), "Margin=\"28,24,24,22\"", "<RowDefinition Height=\"24\" />");
+        var document = System.Xml.Linq.XDocument.Parse(MainXaml());
+        var card = document.Descendants().Single(node => (string?)node.Attribute(System.Xml.Linq.XName.Get("Name", "http://schemas.microsoft.com/winfx/2006/xaml")) == "ProcessingTasksCard");
+        Assert.AreEqual("2", (string?)card.Attribute("Grid.Column"));
+        Assert.AreEqual("{DynamicResource SurfaceSecondaryBrush}", (string?)card.Attribute("Background"));
+        Assert.AreEqual("14,12", (string?)card.Attribute("Padding"));
+    }
     [TestMethod] public void Version_Is230() => Contains(Text("src/RAWSelectionAssistant.Core/Models/Branding.cs"), "ProductVersion = \"2.3.0\"");
     [TestMethod] public void Installer_IsNamedFor230() => Contains(Text("installer/RAWSelectionAssistant.iss"), "MyAppVersion \"2.3.0\"", "像素蛋挞_Setup_2.3.0_RC1_x64");
     [TestMethod] public void Release_RemainsWinExeSelfContainedX64() => Contains(Text("src/RAWSelectionAssistant/RAWSelectionAssistant.csproj"), "<OutputType>WinExe</OutputType>", "<SelfContained>true</SelfContained>", "<RuntimeIdentifier>win-x64</RuntimeIdentifier>");

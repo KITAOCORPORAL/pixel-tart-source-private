@@ -771,6 +771,18 @@ public sealed partial class SqliteAssetLibraryRepository
         return await SaveSmartFolderQueryDocumentAsync(copy, document.Document, cancellationToken).ConfigureAwait(false);
     }
 
+    /// <summary>Deletes only the saved query definition. Asset rows and source files are never touched.</summary>
+    public async Task<int> DeleteSmartFolderDefinitionAsync(Guid smartFolderId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM SmartFolders WHERE SmartFolderId=$id;";
+        command.Parameters.AddWithValue("$id", smartFolderId.ToString("D"));
+        // Existing foreign keys cascade only to this definition's rules and query document.
+        return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+    }
+
     public async Task<AssetLibraryBatchResult> SetSmartFolderArchivedAsync(
         Guid smartFolderId,
         bool isArchived,

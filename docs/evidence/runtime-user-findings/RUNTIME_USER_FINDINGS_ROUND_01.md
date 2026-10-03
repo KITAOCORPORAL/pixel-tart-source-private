@@ -1,6 +1,8 @@
 # Runtime User Findings — Round 01
 
-StartHead: 11e6eddd5e5974ce73de8ab9cdf1702bd6284c18
+OriginalRoundStartHead: 11e6eddd5e5974ce73de8ab9cdf1702bd6284c18
+
+ScreenshotCorrectionStartHead: 0cb14a21e82e882f60cf2e1be28b0d868b222456
 
 USER_APPROVED: false
 VisualApproved: false
@@ -435,13 +437,13 @@ UserVerified: false
 | ID | RUX-027 |
 | User Finding | Smart Folder Persistence；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 既有创建、查询、重载、条件回填和仅定义归档保留；永久删除定义尚无 repository contract，未伪装为已实现。 |
+| Root Cause | 保留创建/查询/重载/条件回填；新增确认后只删除查询定义，FK只级联规则文档，不触碰Asset/source。仓库重启回归通过。 |
 | Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
 | Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
-| Status | IN_PROGRESS |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-028 — 发布导出全面中文化
@@ -787,6 +789,6 @@ UserVerified: false
 - Core Asset 143 PASS / 0 FAIL；WPF 73 PASS / 0 FAIL / 0 SKIP（含 5 个新行为测试和 1 个 Guardian contract）。
 - 发布 manifest: artifacts/releases/runtime-user-findings-batch-a/release-manifest.json；包含全部发布文件 hash。
 - 启动真实 Release；仅检查进程与主窗口句柄，不操作页面。启动成功不代表任一 RUX runtime 通过。
-- Batch A runtime BLOCKED：未收到 16 页截图与操作方式确认；before.png / after.png 均未伪造。
-- 尚未开始 Batch B–G；不得将 OPEN 解释为已实现或已通过。
+- 历史 Batch A 当时未收到截图。现已收到25张；用户改为各批Build/Test后统一人工验收，所有Runtime保持NOT_RUN。
+- 上述为历史 checkpoint；本次已继续B–F修复及G自动回归。
 - 全部 USER_APPROVED=false；VisualApproved=false；UserVerified=false。

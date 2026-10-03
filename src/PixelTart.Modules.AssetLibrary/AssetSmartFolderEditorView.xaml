@@ -95,6 +95,9 @@
                             Style="{StaticResource AssetLibraryP3DangerButton}"
                             AutomationProperties.AutomationId="P3SmartFolderArchiveToggle"
                             AutomationProperties.Name="归档或恢复当前智能文件夹" />
+                    <Button Content="删除定义…" Click="DeleteDefinition_Click" IsEnabled="{Binding P3SmartFolderIsEditing}"
+                            Style="{StaticResource AssetLibraryP3DangerButton}" AutomationProperties.AutomationId="P3SmartFolderDelete" AutomationProperties.Name="仅删除智能文件夹定义"
+                            ToolTip="仅删除保存的查询，不删除照片" />
                 </WrapPanel><Button Content="重新查找" Command="{Binding RetryP3SmartFolderPreviewCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="P3SmartFolderPreviewRetry" AutomationProperties.Name="重新查找符合条件的照片" HorizontalAlignment="Left" />
 <ItemsControl ItemsSource="{Binding P3SmartFolderPreviewItems}" AutomationProperties.AutomationId="P3SmartFolderPreviewItems"><ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" /></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
 </StackPanel></Expander>            <StackPanel Margin="0,10,0,0" AutomationProperties.AutomationId="P3SmartFolderPreview" AutomationProperties.Name="智能文件夹实时预览">

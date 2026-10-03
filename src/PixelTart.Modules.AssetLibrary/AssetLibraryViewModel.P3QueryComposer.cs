@@ -20,8 +20,13 @@ public sealed partial class AssetLibraryViewModel
     private AssetQueryDocument _p3CurrentQueryDocument = new();
     private P3QueryNodeView _p3QueryRoot = null!;
 
-    public IReadOnlyList<P3QueryOption<AssetQueryField>> PinnedFilters => _workspaceSettings.PinnedFilterFields
-        .Select(queryField => new P3QueryOption<AssetQueryField>(queryField, queryField == AssetQueryField.VisualDominantColor ? "图片颜色" : P3QueryNodeView.FieldLabel(queryField))).ToArray();
+    public sealed record PinnedFilterOption(AssetQueryField Value, string Label)
+    {
+        public string AutomationId => Value switch { AssetQueryField.VisualDominantColor => "AssetLibraryColorFilter", AssetQueryField.AddedAt => "AssetLibraryDateFilter", _ => $"AssetLibrary{Value}Filter" };
+    }
+
+    public IReadOnlyList<PinnedFilterOption> PinnedFilters => _workspaceSettings.PinnedFilterFields
+        .Select(queryField => new PinnedFilterOption(queryField, queryField == AssetQueryField.VisualDominantColor ? "图片颜色" : P3QueryNodeView.FieldLabel(queryField))).ToArray();
 
     public void SetFilterPinned(AssetQueryField field, bool pinned)
     {

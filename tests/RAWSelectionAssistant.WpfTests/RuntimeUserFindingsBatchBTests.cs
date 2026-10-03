@@ -13,6 +13,19 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class RuntimeUserFindingsBatchBTests
 {
     [TestMethod]
+    public Task InteractivePopupContentRetainsEditorWithoutMenuChrome() => RunSta(async () =>
+    {
+        var editor = new TextBox { Text = "标签" };
+        var host = PixelTart.Modules.AssetLibrary.AssetLibraryPage.PopupContent(editor);
+        Assert.IsTrue(host.StaysOpenOnClick);
+        Assert.IsFalse(host.Focusable);
+        Assert.AreSame(editor, host.Header);
+        host.ApplyTemplate(); host.Measure(new Size(400, 600));
+        Assert.IsLessThan(100d, host.DesiredSize.Width);
+        await Task.CompletedTask;
+    });
+
+    [TestMethod]
     public Task QuickFilterPinsSurviveReloadWithoutChangingTheQuery() => RunSta(async () =>
     {
         var root = await Fixture();
@@ -49,6 +62,6 @@ public sealed class RuntimeUserFindingsBatchBTests
         var converter = new HexToBrushConverter();
         foreach (var value in new[] { "", "#", "#12", "#GGGGGG" })
             Assert.AreSame(Brushes.Transparent, converter.Convert(value, typeof(Brush), null, CultureInfo.InvariantCulture));
-        Assert.IsTrue(picker.DesiredSize.Width <= 248);
+        Assert.IsLessThanOrEqualTo(248d, picker.DesiredSize.Width);
     });
 }

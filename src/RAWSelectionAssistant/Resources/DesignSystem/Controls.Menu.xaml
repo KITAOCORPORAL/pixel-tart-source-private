@@ -60,7 +60,7 @@
                                 Padding="{TemplateBinding Padding}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
@@ -73,7 +73,6 @@
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   ContentSource="Icon"
-                                                  Visibility="Collapsed"
                                                   SnapsToDevicePixels="True" />
                                 <Path x:Name="CheckMark"
                                       Grid.Column="0"
@@ -143,6 +142,7 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="{x:Null}"><Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" /></Trigger>
                         <Trigger Property="InputGestureText" Value=""><Setter TargetName="ShortcutText" Property="Visibility" Value="Collapsed" /></Trigger>
                         <Trigger Property="Role" Value="TopLevelHeader">
                             <Setter TargetName="PART_Popup" Property="Placement" Value="Bottom" />

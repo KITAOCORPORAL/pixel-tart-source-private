@@ -14,6 +14,39 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public void PublishingSettingsAreNotSilentlyOverriddenByAnUnselectedRecipe()
+    {
+        var vm = new PublishingExportViewModel(null!, null!, new FolderDialog(Path.GetTempPath()));
+        var recipe = new RAWSelectionAssistant.Core.Services.Publishing.ExportRecipe(Guid.NewGuid(), "固定配方", RAWSelectionAssistant.Core.Services.Publishing.ExportRecipeFormat.Tiff, RAWSelectionAssistant.Core.Services.Publishing.ExportRecipeBitDepth.Sixteen);
+        vm.SelectedRecipe = recipe;
+        Assert.IsFalse(vm.UseRecipes);
+        Assert.IsTrue(vm.CanEditOutputSettings);
+        vm.OutputFormat = PublishingOutputFormat.Png;
+        Assert.AreEqual("8 位", vm.OutputBitDepthLabel);
+        vm.SetSelectedRecipes([recipe]);
+        Assert.IsTrue(vm.UseRecipes);
+        Assert.IsFalse(vm.CanEditOutputSettings);
+        Assert.AreEqual("16 位（当前配方）", vm.OutputBitDepthLabel);
+        vm.SetSelectedRecipes([]);
+        Assert.IsFalse(vm.UseRecipes);
+        Assert.IsNull(vm.SelectedRecipe);
+        Assert.IsTrue(vm.CanEditOutputSettings);
+    }
+
+    [TestMethod]
+    public void ClearingAdjustmentsRemovesOldFrozenLookWithoutChangingMetadata()
+    {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()), new PixelBackend());
+        var target = new ReferenceTargetItem("test.png") { AppliedLookSnapshot = Look("red"), Rating = 4, ColorLabel = "蓝" };
+        workspace.Editor.ApplyTargetSnapshot(null, null, null, render: false);
+        workspace.Editor.CopyCurrentLookTo([target]);
+        Assert.IsNull(target.AppliedLookSnapshot);
+        Assert.IsNull(target.ColorAdjustmentStackSnapshot);
+        Assert.AreEqual(4, target.Rating);
+        Assert.AreEqual("蓝", target.ColorLabel);
+    }
+
+    [TestMethod]
     public async Task CopiedAdjustmentsRemainFrozenAndProtectFilmstripMetadata()
     {
         var folder = Path.Combine(Path.GetTempPath(), "PixelTart-RUX-D-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(folder);
@@ -46,6 +79,7 @@ public sealed class BatchExportProcessedPixelsTests
         Assert.IsNotNull(paths); Assert.HasCount(2, paths);
         Assert.IsTrue(paths.All(path => File.Exists(path) && path != first.Path && path != second.Path));
         Assert.IsFalse(workspace.IsExporting);
+        CollectionAssert.AreEquivalent(new[] { "first.png", "second.png" }, paths.Select(Path.GetFileName).ToArray());
     }
 
     [TestMethod]

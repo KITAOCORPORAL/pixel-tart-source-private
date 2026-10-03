@@ -13,6 +13,28 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class CanvasSurfaceInteractionTests
 {
     [TestMethod]
+    public Task DocumentChangeSaveDiscardCancelPreserveExpectedVersion()=>AssetLibraryP3PerformanceDiagnosticsTests.RunSta(async()=>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"PixelTart-CanvasChoice",Guid.NewGuid().ToString("N"));
+        var editor=CanvasFixtures.Create(); var store=new CanvasDocumentStore(root);
+        var view=new FreeCanvasView(editor,new WpfAssetThumbnailProvider(),store);
+        try
+        {
+            Assert.IsTrue(await view.FlushAsync());
+            editor.Rename("未保存");
+            Assert.IsFalse(await view.PrepareDocumentChangeAsync(()=>MessageBoxResult.Cancel));
+            Assert.AreEqual("未保存",editor.Document.Name);
+            Assert.IsTrue(await view.PrepareDocumentChangeAsync(()=>MessageBoxResult.Yes));
+            Assert.AreEqual("未保存",(await store.LoadAsync(editor.Document.CanvasId))!.Name);
+            editor.Rename("放弃的修改");
+            Assert.IsTrue(await view.PrepareDocumentChangeAsync(()=>MessageBoxResult.No));
+            Assert.IsTrue(await view.FlushAsync());
+            Assert.AreEqual("未保存",(await store.LoadAsync(editor.Document.CanvasId))!.Name);
+        }
+        finally{if(Directory.Exists(root))Directory.Delete(root,true);}
+    });
+
+    [TestMethod]
     public Task RealSurfaceRoutesDeleteAndRestoresSavedObjects()=>AssetLibraryP3PerformanceDiagnosticsTests.RunSta(async()=>
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-CanvasSurface",Guid.NewGuid().ToString("N"));

@@ -135,6 +135,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                     <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Margin="1,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Icon" />
+                    <Path x:Name="CheckMark" Grid.Column="0" Margin="1,0,5,0" Width="12" Height="9" Data="M 0 4 L 4 8 L 11 0" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.8" Visibility="Collapsed" />
                     <ContentPresenter Grid.Column="1" Margin="3,0,3,0" VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" />
                     <TextBlock x:Name="ShortcutText" Grid.Column="2" Margin="18,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource MenuShortcutBrush}" Text="{TemplateBinding InputGestureText}" />
                     <Path x:Name="SubmenuArrow" Margin="10,0,2,0" Grid.Column="3" Width="6" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 5 5 L 0 10" Fill="Transparent" Stroke="{DynamicResource MenuShortcutBrush}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
@@ -147,6 +148,7 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True"><Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" /><Setter TargetName="CheckMark" Property="Visibility" Value="Visible" /></Trigger>
             <Trigger Property="Icon" Value="{x:Null}"><Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" /></Trigger>
             <Trigger Property="InputGestureText" Value=""><Setter TargetName="ShortcutText" Property="Visibility" Value="Collapsed" /></Trigger>
             <Trigger Property="Role" Value="TopLevelHeader"><Setter TargetName="PART_Popup" Property="Placement" Value="Bottom" /><Setter TargetName="PART_Popup" Property="HorizontalOffset" Value="0" /><Setter TargetName="PART_Popup" Property="VerticalOffset" Value="-1" /><Setter TargetName="SubmenuArrow" Property="Visibility" Value="Collapsed" /></Trigger>

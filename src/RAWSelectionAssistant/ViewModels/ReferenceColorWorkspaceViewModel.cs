@@ -114,7 +114,9 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                 try
                 {
                     var raw = RawMatchTiff16ProductPipeline.IsRaw(item.Item.Path);
-                    var path = Path.Combine(directory, item.Item.Id + (raw ? ".tif" : ".png"));
+                    var itemDirectory = Path.Combine(directory, item.Item.Id.ToString());
+                    Directory.CreateDirectory(itemDirectory);
+                    var path = Path.Combine(itemDirectory, Path.GetFileNameWithoutExtension(item.Item.Path) + (raw ? ".tif" : ".png"));
                     if (raw)
                     {
                         var master = item.Item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Item.Path, _exportCancellation.Token);
@@ -131,6 +133,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
                 { failures.Add(item.Item.FileName); }
             }
             ExportFailureSummary = failures.Count == 0 ? "" : "未能准备：" + string.Join("、", failures);
+            ExportStatus = $"已准备 {paths.Count} / {items.Length}；失败 {failures.Count}";
+            if (failures.Count > 0) _dialogs.ShowInfo(ExportStatus + "\n" + ExportFailureSummary);
             if (paths.Count > 0) OpenPublishing(paths);
         }
         catch (OperationCanceledException) { ExportStatus = "已停止准备发布"; }

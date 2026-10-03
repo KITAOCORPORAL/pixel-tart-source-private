@@ -33,6 +33,7 @@ public partial class AssetLibraryPage
     }
     public async Task ShowCanvasAsync(CanvasDocument document)
     {
+        var projects=await _viewModel.CanvasProjectsAsync();
         if(_canvas is not null&&!await _canvas.PrepareDocumentChangeAsync())return;
         var store=new CanvasDocumentStore(_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
@@ -44,7 +45,6 @@ public partial class AssetLibraryPage
         canvas.RevealAsset=async item=>{if(await canvas.FlushAsync()){await _viewModel.RevealCanvasAssetAsync(item);HideCanvas();}};
         canvas.AnalyzePalette=_viewModel.AnalyzeCanvasPaletteAsync;
         canvas.CloseRequested=()=>{HideCanvas();return Task.CompletedTask;};canvas.OpenDocument=ShowCanvasAsync;
-        var projects=await _viewModel.CanvasProjectsAsync();
         var picker=new ComboBox{Width=220,Margin=new(8,2,8,2),ItemsSource=projects.Select(item=>new CanvasProjectChoice(item.Id,item.Name)).ToArray(),DisplayMemberPath=nameof(CanvasProjectChoice.Name),SelectedValuePath=nameof(CanvasProjectChoice.Id),ToolTip="关联项目"};
         picker.SelectedItem=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==document.ProjectId)??picker.Items[0];
         picker.SelectionChanged+=(_,_)=>{if(picker.SelectedItem is CanvasProjectChoice item)editor.SetProject(item.Id);};canvas.ProjectPanel.Children.Add(picker);
@@ -74,7 +74,7 @@ public partial class AssetLibraryPage
     {
         if(_allowCanvasOwnerClose||_canvas is null)return;e.Cancel=true;
         if(await _canvas.PrepareDocumentChangeAsync()){_allowCanvasOwnerClose=true;_canvasOwner?.Close();}
-        else MessageBox.Show(_canvasOwner,"画布尚未保存成功，请检查存储位置后重试。","画布保存失败",MessageBoxButton.OK,MessageBoxImage.Warning);
+
     }
     private void CanvasBoardSelectionChanged(object sender,SelectionChangedEventArgs e)
     {

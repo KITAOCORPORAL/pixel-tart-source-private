@@ -35,6 +35,7 @@ public partial class AssetLibraryPage
             _activeToolbarPopup = null;
             ActiveToolbarPopup = null;
         };
+        foreach (var item in menu.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(item);
         menu.IsOpen = true;
     }
 
@@ -74,10 +75,22 @@ public partial class AssetLibraryPage
         OpenToolbarPopup(anchor, "Rating", menu);
     }
 
+    internal static MenuItem PopupContent(FrameworkElement content)
+    {
+        // A content-only menu container keeps interactive editors open and removes menu row chrome.
+        var template = (ControlTemplate)System.Windows.Markup.XamlReader.Parse("""
+            <ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" TargetType="MenuItem">
+                <ContentPresenter ContentSource="Header" />
+            </ControlTemplate>
+            """);
+        return new MenuItem { Header = content, StaysOpenOnClick = true, Template = template,
+            Focusable = false, Padding = new Thickness(0), MinWidth = 0, MinHeight = 0 };
+    }
+
     private void OpenColorPopup(Button anchor)
     {
         var menu = new ContextMenu();
-        menu.Items.Add(new AssetColorFilterPicker { DataContext = _viewModel });
+        menu.Items.Add(PopupContent(new AssetColorFilterPicker { DataContext = _viewModel }));
         OpenToolbarPopup(anchor, "Color", menu);
     }
 
@@ -97,7 +110,7 @@ public partial class AssetLibraryPage
         _viewModel.InspectorTagSearch = "";
         var menu = new ContextMenu();
         // Content is hosted by the existing single-active overlay manager.
-        menu.Items.Add(new AssetInspectorTagPicker { DataContext = _viewModel });
+        menu.Items.Add(PopupContent(new AssetInspectorTagPicker { DataContext = _viewModel }));
         OpenToolbarPopup(anchor, "InspectorTags", menu);
     }
 
@@ -133,7 +146,7 @@ public partial class AssetLibraryPage
         {
             var current = field;
             var group = new MenuItem { Header = field == AssetQueryField.VisualDominantColor ? "图片颜色" : P3QueryNodeView.FieldLabel(field) };
-            group.Items.Add(PopupAction("编辑条件", "QuickFilterEdit" + field, () => { _dismissedPopupAnchor = null; CloseToolbarPopups(); OpenQuickFilter(anchor, current); return Task.CompletedTask; }));
+            group.Items.Add(PopupAction("编辑条件", "QuickFilterEdit" + field, () => { _dismissedPopupAnchor = null; CloseToolbarPopups(); Dispatcher.BeginInvoke(new Action(() => OpenQuickFilter(anchor, current))); return Task.CompletedTask; }));
             var pinned = _viewModel.PinnedFilters.Any(item => item.Value == field);
             group.Items.Add(PopupAction(pinned ? "取消固定" : "固定到顶部", "QuickFilterPin" + field,
                 () => { _viewModel.SetFilterPinned(current, !pinned); return Task.CompletedTask; }));

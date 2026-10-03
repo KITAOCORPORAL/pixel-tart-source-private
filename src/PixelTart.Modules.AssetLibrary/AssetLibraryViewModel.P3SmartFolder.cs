@@ -489,6 +489,26 @@ public sealed partial class AssetLibraryViewModel
         }
     }
 
+    public async Task DeleteP3SmartFolderDefinitionAsync()
+    {
+        if (_p3SmartFolderId is not Guid id || P3SmartFolderLoading || !IsReady) return;
+        await RunTrackedP3OperationAsync(async () =>
+        {
+            try
+            {
+                await _repository.DeleteSmartFolderDefinitionAsync(id, _lifetimeCancellation.Token);
+                _smartFolderSavedState = SmartFolderEditState();
+                CloseP3SmartFolderEditorCore();
+                if (SelectedSmartFolder?.SmartFolderId == id) SelectedSmartFolder = null;
+                await RefreshFilterListsAsync(_lifetimeCancellation.Token);
+                await RefreshAsync();
+                Status = "已删除智能文件夹定义；照片、标签和源文件均保留。";
+            }
+            catch (OperationCanceledException) when (_lifetimeCancellation.IsCancellationRequested) { }
+            catch (Exception exception) { P3SmartFolderValidationMessage = $"删除失败：{exception.Message}"; }
+        });
+    }
+
     private async Task ToggleArchiveP3SmartFolderAsync()
     {
         if (_p3SmartFolderId is not Guid id || _p3SmartFolderSnapshot is null) return;

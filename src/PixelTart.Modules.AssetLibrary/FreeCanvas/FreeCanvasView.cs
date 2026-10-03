@@ -112,12 +112,14 @@ public sealed class FreeCanvasView : UserControl
         catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){_status.Text=$"保存失败：{exception.Message}";return false;}
         finally{_saveGate.Release();}
     }
-    public async Task<bool> PrepareDocumentChangeAsync()
+    public Task<bool> PrepareDocumentChangeAsync() => PrepareDocumentChangeAsync(() => MessageBox.Show(Window.GetWindow(this),
+        "保存当前画布的未保存修改？\n是：保存；否：放弃；取消：继续编辑。", "未保存的画布", MessageBoxButton.YesNoCancel, MessageBoxImage.Question));
+    internal async Task<bool> PrepareDocumentChangeAsync(Func<MessageBoxResult> prompt)
     {
         _saveTimer.Stop();
         await _saveGate.WaitAsync(); _saveGate.Release();
         if(_discardPending || ReferenceEquals(_saved,Editor.Document))return true;
-        var choice=MessageBox.Show(Window.GetWindow(this),"保存当前画布的未保存修改？\n是：保存；否：放弃；取消：继续编辑。","未保存的画布",MessageBoxButton.YesNoCancel,MessageBoxImage.Question);
+        var choice=prompt();
         if(choice==MessageBoxResult.Cancel){_saveTimer.Start();return false;}
         if(choice==MessageBoxResult.Yes)return await FlushAsync();
         _discardPending=true;return true;
@@ -139,7 +141,7 @@ public sealed class FreeCanvasView : UserControl
     }
     private async Task OpenSavedAsync()
     {
-        var menu=new ContextMenu();foreach(var document in await _store.ListAsync()){var item=new MenuItem{Header=document.Name};item.Click+=async(_,_)=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(document);};menu.Items.Add(item);}if(menu.Items.Count==0)menu.Items.Add(new MenuItem{Header="暂无已保存画布",IsEnabled=false});menu.PlacementTarget=this;menu.IsOpen=true;
+        var menu=new ContextMenu();foreach(var document in await _store.ListAsync()){var item=new MenuItem{Header=document.Name};item.Click+=async(_,_)=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(await _store.LoadAsync(document.CanvasId) ?? document);};menu.Items.Add(item);}if(menu.Items.Count==0)menu.Items.Add(new MenuItem{Header="暂无已保存画布",IsEnabled=false});menu.PlacementTarget=this;menu.IsOpen=true;
     }
     private async Task RefreshSourcesAsync()
     {

@@ -95,6 +95,7 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetLibraryBatchResult> ReorderTagGroupsAsync(IEnumerable<Guid> orderedTagGroupIds, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> ReorderTagsAsync(Guid? tagGroupId, IEnumerable<Guid> orderedTagIds, CancellationToken cancellationToken = default);
 
+    Task<int> DeleteSmartFolderDefinitionAsync(Guid smartFolderId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<SmartFolder>> ListSmartFoldersAsync(bool includeArchived = false, CancellationToken cancellationToken = default);
     Task<SmartFolder> SaveSmartFolderAsync(SmartFolder folder, IEnumerable<SmartFolderRule> rules, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<SmartFolderRule>> ListSmartFolderRulesAsync(Guid smartFolderId, CancellationToken cancellationToken = default);

@@ -176,6 +176,7 @@ public sealed class DuplicateReferenceProtectionTests
         public Task<AssetLibraryBatchResult> SetTagGroupArchivedAsync(Guid tagGroupId, bool isArchived, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<AssetLibraryBatchResult> ReorderTagGroupsAsync(IEnumerable<Guid> orderedTagGroupIds, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<AssetLibraryBatchResult> ReorderTagsAsync(Guid? tagGroupId, IEnumerable<Guid> orderedTagIds, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+        public Task<int> DeleteSmartFolderDefinitionAsync(Guid smartFolderId, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<IReadOnlyList<SmartFolder>> ListSmartFoldersAsync(bool includeArchived = false, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<SmartFolder> SaveSmartFolderAsync(SmartFolder folder, IEnumerable<SmartFolderRule> rules, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public Task<IReadOnlyList<SmartFolderRule>> ListSmartFolderRulesAsync(Guid smartFolderId, CancellationToken cancellationToken = default) => throw new NotSupportedException();

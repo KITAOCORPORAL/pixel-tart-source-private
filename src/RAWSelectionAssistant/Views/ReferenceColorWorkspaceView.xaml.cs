@@ -308,6 +308,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         menu.Items.Add(new Separator());
         var remove = new MenuItem { Header = "从当前批次移除", IsEnabled = !workspace.IsExporting };
         remove.Click += async (_, _) => await workspace.RemoveSelectedFromBatchAsync(); menu.Items.Add(remove);
+        foreach (var item in menu.Items.OfType<MenuItem>()) AssetLibraryPage.AttachContextSubmenuPlacement(item);
         menu.IsOpen = true;
     }
 

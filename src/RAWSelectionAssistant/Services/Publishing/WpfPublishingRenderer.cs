@@ -183,6 +183,9 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
         return path is null ? ReadOnlyMemory<byte>.Empty : File.ReadAllBytes(path);
     }
 
+    public static IReadOnlyList<string> AvailableOutputProfiles => new[] { "sRGB", "Adobe RGB (1998)" }
+        .Where(profile => ResolveProfilePath(profile) is { } path && File.Exists(path)).ToArray();
+
     private static string? ResolveProfilePath(string requested) => requested switch
     {
         "sRGB" or "sRGB IEC61966-2.1" => ProfilePath("sRGB"),

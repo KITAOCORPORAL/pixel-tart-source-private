@@ -663,7 +663,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         foreach (var item in menu.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(item);
     }
 
-    private void AttachContextSubmenuPlacement(MenuItem item)
+    public static void AttachContextSubmenuPlacement(MenuItem item)
     {
         item.SubmenuOpened -= ContextSubmenu_Opened;
         item.SubmenuOpened += ContextSubmenu_Opened;

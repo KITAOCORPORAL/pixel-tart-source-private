@@ -15,6 +15,7 @@ using PixelTart.Modules.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Tasks;
+using AssetQueryField = RAWSelectionAssistant.Core.Models.AssetQueryField;
 using SmartFolderField = RAWSelectionAssistant.Core.Models.SmartFolderField;
 
 namespace RAWSelectionAssistant.WpfTests;
@@ -134,6 +135,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
             var range = (System.Windows.Automation.Provider.IRangeValueProvider)thumbnailPeer.GetPattern(System.Windows.Automation.Peers.PatternInterface.RangeValue);
             range.SetValue(range.Maximum);
             Assert.AreEqual(page.ViewModel.ThumbnailMaximumWidth, page.ViewModel.ThumbnailWidth, .01);
+            foreach (var field in new[] { AssetQueryField.VisualDominantColor, AssetQueryField.AddedAt }) page.ViewModel.SetFilterPinned(field, true);
+            ArrangePage(page, 1600, 920);
             void Click(string id) => FindVisualByAutomationId<Button>(page, id).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Click("AssetLibraryRatingFilter");
             Assert.AreEqual("Rating", page.ActiveToolbarPopup);
@@ -209,12 +212,16 @@ public sealed class EmbeddedAssetLibraryWpfTests
             using var source=AttachToPresentationSource(page,1600,900);
             ArrangePage(page,1600,900);
             Assert.IsTrue(PumpDispatcherUntil(()=>page.ViewModel.IsReady,TimeSpan.FromSeconds(1)));
-            foreach(var id in new[]{"AssetLibraryColorFilter","AssetLibraryTagFilter","AssetLibraryRatingFilter","AssetLibraryDateFilter","AssetLibrarySortMenu","AssetLibraryViewMenu","AssetLibraryImport","AssetLibraryMore"})
+            foreach(var id in new[]{"AssetLibrarySortMenu","AssetLibraryViewMenu","AssetLibraryImport","AssetLibraryMore"})
             {
                 var button=FindVisualByAutomationId<Button>(page,id);Assert.IsTrue(button.IsEnabled,id);
                 Assert.IsInstanceOfType<System.Windows.Shapes.Path>(button.Content);
                 var icon=(System.Windows.Shapes.Path)button.Content;Assert.IsNotNull(icon.Data);Assert.IsGreaterThan(0d,icon.ActualWidth,id);Assert.IsGreaterThan(0d,icon.ActualHeight,id);
             }
+            foreach (var field in new[] { AssetQueryField.VisualDominantColor, AssetQueryField.AddedAt }) page.ViewModel.SetFilterPinned(field, true);
+            ArrangePage(page,1600,900);
+            foreach (var id in new[] { "AssetLibraryRatingFilter", "AssetLibraryTagFilter", "AssetLibraryColorFilter", "AssetLibraryDateFilter" })
+            { var filter = FindVisualByAutomationId<Button>(page,id); Assert.IsTrue(filter.IsEnabled); Assert.IsFalse(string.IsNullOrWhiteSpace(filter.Content?.ToString())); }
             var more=FindVisualByAutomationId<Button>(page,"AssetLibraryMore");more.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Assert.IsTrue(more.ContextMenu!.IsOpen);Assert.IsTrue(more.ContextMenu.Items.OfType<MenuItem>().Any(item=>Equals(item.Header,"打开已保存画布")));more.ContextMenu.IsOpen=false;
         }
@@ -1166,7 +1173,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     OrganizationPaneWidth = 286,
                     InspectorPaneWidth = 414,
                     ThumbnailWidth = 196,
-                    InspectorPinned = false
+                    InspectorPinned = false,
+                    PinnedFilterFields = [AssetQueryField.VisualDominantColor, AssetQueryField.Tag, AssetQueryField.Rating, AssetQueryField.AddedAt]
                 };
                 var page = new AssetLibraryPage(
                     Path.Combine(root, "asset-library.db"),
@@ -1206,10 +1214,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 ];
                 var expectedNames = new[]
                 {
-                    "颜色筛选",
-                    "标签筛选",
-                    "评分筛选",
-                    "日期筛选",
+                    "图片颜色",
+                    P3QueryNodeView.FieldLabel(AssetQueryField.Tag),
+                    P3QueryNodeView.FieldLabel(AssetQueryField.Rating),
+                    P3QueryNodeView.FieldLabel(AssetQueryField.AddedAt),
                     "选择素材排序",
                     "选择素材布局",
                     "导入素材",
@@ -1300,8 +1308,10 @@ public sealed class EmbeddedAssetLibraryWpfTests
         StringAssert.Contains(thumbnail, "dispatcher.InvokeAsync(");
         StringAssert.Contains(xaml, "<local:HexToBrushConverter x:Key=\"HexToBrushConverter\" />");
         StringAssert.Contains(xaml, "Background=\"{Binding Hex, Converter={StaticResource HexToBrushConverter}}\"");
-        StringAssert.Contains(hexBrushConverter, "ColorConverter.ConvertFromString(hex)");
-        StringAssert.Contains(hexBrushConverter, "new SolidColorBrush(color)");
+        var converter = new HexToBrushConverter();
+        var valid = (SolidColorBrush)converter.Convert("#123456", typeof(Brush), null, System.Globalization.CultureInfo.InvariantCulture);
+        Assert.AreEqual(Color.FromRgb(0x12,0x34,0x56), valid.Color);
+        Assert.AreSame(Brushes.Transparent, converter.Convert("#12", typeof(Brush), null, System.Globalization.CultureInfo.InvariantCulture));
         Assert.DoesNotContain("previous.Cancel(); previous.Dispose();", thumbnail, StringComparison.Ordinal);
         Assert.DoesNotContain("cancellation.Cancel(); cancellation.Dispose();", thumbnail, StringComparison.Ordinal);
     }
