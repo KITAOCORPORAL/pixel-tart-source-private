@@ -72,6 +72,7 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
         MoveUpCommand = new(() => owner.MoveFolderInSiblingOrderAsync(this, -1));
         MoveDownCommand = new(() => owner.MoveFolderInSiblingOrderAsync(this, 1));
         PromoteCommand = new(() => owner.PromoteFolderAsync(this));
+        DeleteCommand = new(() => owner.DeleteFolderDefinitionAsync(this), () => !Folder.IsSystem);
         ToggleArchiveCommand = new(() => owner.SetFolderArchivedAsync(this, !IsArchived));
     }
 
@@ -129,6 +130,7 @@ public sealed class AssetLibraryFolderNodeView : ObservableObject
 
     public bool IsRenaming { get => _isRenaming; set => SetProperty(ref _isRenaming, value); }
     public string EditName { get => _editName; set => SetProperty(ref _editName, value ?? string.Empty); }
+    public AsyncCommand DeleteCommand { get; }
     public AssetCommand BeginRenameCommand { get; }
     public AsyncCommand CommitRenameCommand { get; }
     public AssetCommand CancelRenameCommand { get; }

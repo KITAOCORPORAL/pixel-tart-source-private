@@ -612,6 +612,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private void AssetContextMenu_Opened(object sender, RoutedEventArgs e)
     {
         if (sender is not ContextMenu menu) return;
+        if (menu.DataContext is AssetVisualMatchView card)
+            ConfigureTrashContextActions(menu, card);
         var style = TryFindResource("PixelTart.Menu.Item") as Style;
         if (style is null) return;
         var template = TryFindResource("PixelTart.Menu.Item.Template") as ControlTemplate;
@@ -664,6 +666,37 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         foreach (var item in menu.Items.OfType<MenuItem>()) AttachContextSubmenuPlacement(item);
     }
 
+    internal void ConfigureTrashContextActions(ContextMenu menu, AssetVisualMatchView card)
+    {
+        var trash = _viewModel.ActiveCollection == RAWSelectionAssistant.Core.Models.AssetLibrarySystemCollection.RecycleBin;
+        foreach (var entry in menu.Items.OfType<UIElement>())
+            entry.Visibility = trash ? Visibility.Collapsed : Visibility.Visible;
+
+        // The normal restore action is nested inside Management. A trash-only menu
+        // needs its own top-level entry because that entire group is hidden here.
+        var restore = menu.Items.OfType<MenuItem>().FirstOrDefault(item => item.Tag as string == "RestoreTrashRecords");
+        if (restore is null)
+        {
+            restore = new MenuItem { Header = "恢复", Tag = "RestoreTrashRecords", Command = _viewModel.RestoreTrashContextCommand };
+            menu.Items.Add(restore);
+        }
+        restore.CommandParameter = card;
+        restore.Visibility = trash ? Visibility.Visible : Visibility.Collapsed;
+
+        var remove = menu.Items.OfType<MenuItem>().FirstOrDefault(item => item.Tag as string == "DeleteTrashRecords");
+        if (remove is null)
+        {
+            remove = new MenuItem { Header = "彻底删除素材库记录…", Tag = "DeleteTrashRecords", ToolTip = "磁盘原件保留；需二次确认" };
+            remove.Click += async (_, _) =>
+            {
+                if (menu.DataContext is AssetVisualMatchView current)
+                    await _viewModel.DeleteTrashRecordsAsync(current);
+            };
+            menu.Items.Add(remove);
+        }
+        remove.Visibility = trash ? Visibility.Visible : Visibility.Collapsed;
+    }
+
     public static void AttachContextSubmenuPlacement(MenuItem item)
     {
         item.SubmenuOpened -= ContextSubmenu_Opened;
@@ -673,9 +706,20 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private static void ContextSubmenu_Opened(object sender, RoutedEventArgs e)
     {
-        if (sender is not MenuItem item) return;
+        if (sender is not MenuItem item || !ReferenceEquals(e.OriginalSource, item) || item.Role == MenuItemRole.TopLevelHeader) return;
         item.ApplyTemplate();
         if (item.Template.FindName("PART_Popup", item) is not Popup popup || PresentationSource.FromVisual(item) is null) return;
+        var anchorOrigin=item.PointToScreen(new Point());
+        var anchorDpi=VisualTreeHelper.GetDpi(item);
+        var workArea=ContextMenuMonitor.WorkArea(anchorOrigin);
+        if(popup.Child is FrameworkElement content)
+        {
+            // Bound the scrollable popup before placement; clamping an oversized popup
+            // after layout would put it on top of its parent text.
+            content.MaxHeight=workArea.Height/anchorDpi.DpiScaleY;
+            content.MaxWidth=Math.Max(1,Math.Max(anchorOrigin.X-workArea.Left,
+                workArea.Right-anchorOrigin.X-item.ActualWidth*anchorDpi.DpiScaleX)/anchorDpi.DpiScaleX);
+        }
         popup.Child?.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
         var width = popup.Child?.DesiredSize.Width > 0 ? popup.Child.DesiredSize.Width : popup.ActualWidth;
         var height = popup.Child?.DesiredSize.Height > 0 ? popup.Child.DesiredSize.Height : popup.ActualHeight;

@@ -62,6 +62,21 @@ public partial class AssetLibraryPage
         return item;
     }
 
+    private void SmartFolderCollection_Click(object sender, RoutedEventArgs e)
+    {
+        if(sender is not Button anchor)return;
+        var menu=new ContextMenu();
+        if(_viewModel.OrganizationSmartFolders.Count==0)menu.Items.Add(new MenuItem{Header="还没有智能文件夹",IsEnabled=false});
+        foreach(var folder in _viewModel.OrganizationSmartFolders)
+        {
+            var group=new MenuItem{Header=folder.Name};
+            group.Items.Add(new MenuItem{Header="查看匹配素材",Command=folder.SelectCommand});
+            group.Items.Add(new MenuItem{Header="编辑规则…",Command=folder.EditCommand});menu.Items.Add(group);
+        }
+        menu.Items.Add(new Separator());menu.Items.Add(new MenuItem{Header="新建智能文件夹…",Command=_viewModel.NewP3SmartFolderCommand});
+        OpenToolbarPopup(anchor,"SmartFolders",menu);
+    }
+
     private void OpenRatingPopup(Button anchor)
     {
         var menu = new ContextMenu();

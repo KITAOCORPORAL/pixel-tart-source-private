@@ -127,6 +127,7 @@ public sealed partial class SqliteAssetLibraryRepository
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         var before = new List<AssetTrashState>();
+        var warnings = new List<string>();
         var operationId = Guid.NewGuid();
         foreach (var id in ids)
         {
@@ -140,16 +141,28 @@ public sealed partial class SqliteAssetLibraryRepository
             if (trashed == isTrashed) continue;
             before.Add(new(id, trashed, previousArchived));
             if (isTrashed)
+            {
+                await ExecuteAsync(connection, transaction, "DELETE FROM AssetTrashFolderOrigins WHERE AssetId=$id; INSERT OR REPLACE INTO AssetTrashFolderOrigins SELECT m.AssetId,m.FolderId,f.Name FROM AssetFolderMemberships m JOIN AssetFolders f ON f.FolderId=m.FolderId WHERE m.AssetId=$id;", cancellationToken, ("$id", id.ToString("D"))).ConfigureAwait(false);
                 await ExecuteAsync(connection, transaction, "INSERT INTO AssetTrashEntries(AssetId,TrashedAtUtc,OperationId,PreviousArchived) VALUES($id,$at,$operation,$archived);", cancellationToken, ("$id", id.ToString("D")), ("$at", DateTimeOffset.UtcNow.ToString("O")), ("$operation", operationId.ToString("D")), ("$archived", archived ? 1 : 0)).ConfigureAwait(false);
+            }
             else
+            {
+                await using var missing = connection.CreateCommand(); missing.Transaction = transaction;
+                missing.CommandText = "SELECT o.FolderName FROM AssetTrashFolderOrigins o LEFT JOIN AssetFolders f ON f.FolderId=o.FolderId WHERE o.AssetId=$id AND f.FolderId IS NULL;";
+                missing.Parameters.AddWithValue("$id", id.ToString("D"));
+                await using var names = await missing.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+                while (await names.ReadAsync(cancellationToken).ConfigureAwait(false)) warnings.Add($"原文件夹“{names.GetString(0)}”已删除；照片已恢复到全部素材，仍保留其他有效归属；无其他归属时可在未分类查看。");
+                await names.DisposeAsync().ConfigureAwait(false);
                 await ExecuteAsync(connection, transaction, "DELETE FROM AssetTrashEntries WHERE AssetId=$id; UPDATE AssetItems SET IsArchived=$archived WHERE AssetId=$id;", cancellationToken, ("$id", id.ToString("D")), ("$archived", previousArchived ? 1 : 0)).ConfigureAwait(false);
+                // Keep origin evidence through restore so journal undo/redo retains the same provenance.
+            }
         }
         if (before.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, []); }
         var token = CreateUndoToken(isTrashed ? "Move assets to recoverable trash" : "Restore assets from trash");
         var after = before.Select(item => item with { IsTrashed = isTrashed }).ToArray();
         await WriteUndoJournalAsync(connection, transaction, token, "asset-trash-state-v2", new AssetTrashChange(before.ToArray(), after), cancellationToken, journalVersion: 2).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-        return new(before.Count, token, []);
+        return new(before.Count, token, warnings);
     }
 
     private async Task<AssetLibraryBatchResult> SetAssetFlagAsync(

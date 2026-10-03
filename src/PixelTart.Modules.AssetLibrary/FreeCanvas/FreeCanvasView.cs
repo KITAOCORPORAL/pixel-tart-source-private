@@ -27,6 +27,7 @@ public sealed class FreeCanvasView : UserControl
     private Point? _sourceDrag;
     private bool _discardPending;
     private readonly Button _undoButton, _redoButton;
+    private readonly Button _moreButton;
     public Panel ProjectPanel { get; private set; } = null!;
     public FreeCanvasView(CanvasEditor editor, IAssetPreviewProvider provider, CanvasDocumentStore store)
     {
@@ -44,26 +45,22 @@ public sealed class FreeCanvasView : UserControl
         var root=new DockPanel();Content=root;
         var bar=new WrapPanel { Margin=new(8,6,8,6) };DockPanel.SetDock(bar,Dock.Top);root.Children.Add(bar);
         _name.Text=editor.Document.Name;_name.LostKeyboardFocus+=(_,_)=>editor.Rename(_name.Text);bar.Children.Add(_name);
-        var lifecycle = new StackPanel { Orientation = Orientation.Horizontal, Margin = new(6,0,0,0) };
-        lifecycle.Children.Add(GroupLabel("画布"));
         var create = Button("新建", async () => { if (await PrepareDocumentChangeAsync() && OpenDocument is not null) await OpenDocument(new CanvasDocument()); });
         System.Windows.Automation.AutomationProperties.SetAutomationId(create, "ContextNewCanvas");
-        lifecycle.Children.Add(create); lifecycle.Children.Add(Button("打开", () => _ = OpenSavedAsync())); lifecycle.Children.Add(Button("关闭", () => _ = CloseAsync())); bar.Children.Add(lifecycle);
-        var toolsGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; toolsGroup.Children.Add(GroupLabel("工具"));
+
+        var toolsGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; toolsGroup.Children.Add(GroupLabel("工具"));
         foreach(var tool in new[]{"选择","移动画布","文本"})toolsGroup.Children.Add(Button(tool,()=>{Surface.Tool=tool;Surface.Focus();}));
         toolsGroup.Children.Add(Button("素材",()=>{_drawer.Visibility=_drawer.IsVisible?Visibility.Collapsed:Visibility.Visible;if(_drawer.IsVisible)_=RefreshSourcesAsync();})); bar.Children.Add(toolsGroup);
-        var editGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; editGroup.Children.Add(GroupLabel("编辑")); _undoButton=Button("撤销",editor.Undo); _redoButton=Button("重做",editor.Redo); editGroup.Children.Add(_undoButton); editGroup.Children.Add(_redoButton); bar.Children.Add(editGroup);
-        var viewGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; viewGroup.Children.Add(GroupLabel("视图")); viewGroup.Children.Add(Button("适合",()=>Surface.Fit()));
+        var editGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; editGroup.Children.Add(GroupLabel("编辑")); _undoButton=Button("撤销",editor.Undo); _redoButton=Button("重做",editor.Redo); editGroup.Children.Add(_undoButton); editGroup.Children.Add(_redoButton); bar.Children.Add(editGroup);
+        var viewGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; viewGroup.Children.Add(GroupLabel("视图")); viewGroup.Children.Add(Button("适合",()=>Surface.Fit()));
         _zoomButton.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");
         _zoomButton.Click += (_,_) => OpenZoomMenu();
         viewGroup.Children.Add(_zoomButton); bar.Children.Add(viewGroup);
         void Arrange(string mode){var all=editor.Selected.Count==0;if(all)editor.SelectAll();editor.Arrange(mode);if(all)editor.Select(null);Surface.Fit();}
-        var canvasGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; canvasGroup.Children.Add(GroupLabel("排列")); canvasGroup.Children.Add(MenuButton("自动整理",new[]{("横向排列",(Action)(()=>Arrange("horizontal"))),("网格排列",()=>Arrange("grid")),("紧凑排列",()=>Arrange("compact"))}));
-        canvasGroup.Children.Add(Button("前移",()=>editor.StepLayer(true))); canvasGroup.Children.Add(Button("后移",()=>editor.StepLayer(false)));
-        canvasGroup.Children.Add(Button("置顶",()=>editor.Layer(true))); canvasGroup.Children.Add(Button("置底",()=>editor.Layer(false)));
-        canvasGroup.Children.Add(Button("更多",OpenMoreMenu)); bar.Children.Add(canvasGroup);
-        var projectGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(6,0,0,0) }; projectGroup.Children.Add(GroupLabel("项目")); bar.Children.Add(projectGroup); ProjectPanel=projectGroup;
-        TextBlock GroupLabel(string label) => new() { Text=label, FontSize=10, FontWeight=FontWeights.SemiBold, VerticalAlignment=VerticalAlignment.Center, Margin=new(2,0,4,0) };
+        var canvasGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; canvasGroup.Children.Add(GroupLabel("画布")); canvasGroup.Children.Add(create); canvasGroup.Children.Add(MenuButton("自动整理",new[]{("横向排列",(Action)(()=>Arrange("horizontal"))),("网格排列",()=>Arrange("grid")),("紧凑排列",()=>Arrange("compact"))}));
+        _moreButton=Button("更多",OpenMoreMenu); canvasGroup.Children.Add(_moreButton); bar.Children.Add(canvasGroup);
+        var projectGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; projectGroup.Children.Add(GroupLabel("项目")); bar.Children.Add(projectGroup); ProjectPanel=projectGroup;
+        TextBlock GroupLabel(string label) => new() { Text=label, FontSize=11, FontWeight=FontWeights.SemiBold, VerticalAlignment=VerticalAlignment.Center, Margin=new(2,0,4,0) };
         DockPanel.SetDock(_status,Dock.Bottom);root.Children.Add(_status);
         _drawer.SetResourceReference(BackgroundProperty,"Brush.Panel");DockPanel.SetDock(_drawer,Dock.Left);root.Children.Add(_drawer);
         var drawerPanel=new DockPanel();_drawer.Child=drawerPanel;
@@ -133,10 +130,12 @@ public sealed class FreeCanvasView : UserControl
     }
     private void OpenMoreMenu()
     {
-        var anchor=_zoomButton; var menu=new ContextMenu{PlacementTarget=anchor};
+        var anchor=_moreButton; var menu=new ContextMenu{PlacementTarget=anchor};
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
         void Arrange(string mode){var all=Editor.Selected.Count==0;if(all)Editor.SelectAll();Editor.Arrange(mode);if(all)Editor.Select(null);Surface.Fit();}
         Add("自动整理 · 横向",()=>Arrange("horizontal")); Add("自动整理 · 网格",()=>Arrange("grid")); Add("自动整理 · 紧凑",()=>Arrange("compact")); menu.Items.Add(new Separator());
+        Add("前移一层",()=>Editor.StepLayer(true)); Add("后移一层",()=>Editor.StepLayer(false));
+        Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
         Add("保存到灵感板",()=>_=SaveBoardAsync(false)); menu.IsOpen=true;
     }
     private async Task OpenSavedAsync()
@@ -208,7 +207,7 @@ public sealed class FreeCanvasView : UserControl
         Submenu("镜像",[("水平翻转",()=>Editor.Flip(true)),("垂直翻转",()=>Editor.Flip(false))]);
         Submenu("层级",[("置于顶层",()=>Editor.Layer(true)),("置于底层",()=>Editor.Layer(false))]);
         Add("组合",Editor.Group);Add("解除组合",Editor.Ungroup);Add(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked)));
-        menu.Items.Add(new Separator());Add("移出画布",Editor.Remove);menu.PlacementTarget=Surface;menu.IsOpen=true;
+        menu.Items.Add(new Separator());Add("移出画布",Editor.Remove);menu.PlacementTarget=Surface;foreach(var item in menu.Items.OfType<MenuItem>())AssetLibraryPage.AttachContextSubmenuPlacement(item);menu.IsOpen=true;
     }
     private async Task AddAnalyzedPaletteAsync(int count)
     {

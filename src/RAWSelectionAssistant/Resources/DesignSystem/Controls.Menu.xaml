@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:asset="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary">
     <Style TargetType="Menu">
         <Setter Property="Background" Value="{DynamicResource SurfacePrimaryBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
@@ -36,6 +36,7 @@
     </Style>
 
     <Style TargetType="MenuItem">
+        <Setter Property="asset:ContextMenuPlacement.Enabled" Value="True" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="Padding" Value="10,7" />
@@ -121,11 +122,11 @@
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="True"
                                Focusable="False"
-                               HorizontalOffset="-3"
+                               HorizontalOffset="0"
                                IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                Placement="Right"
                                PlacementTarget="{Binding ElementName=ItemBorder}"
-                               VerticalOffset="-5">
+                               VerticalOffset="0">
                             <Border MinWidth="0"
                                     Background="{DynamicResource MenuPopupBackgroundBrush}"
                                     BorderBrush="{DynamicResource MenuPopupBorderBrush}"
@@ -198,6 +199,8 @@
     <Style TargetType="TabItem"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /><Setter Property="Padding" Value="10,7" /><Setter Property="MinHeight" Value="34" /><Style.Triggers><Trigger Property="IsSelected" Value="True"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource MenuItemHoverBrush}" /></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55" /></Trigger></Style.Triggers></Style>
 
     <Style TargetType="Separator">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="6,4" />
         <Setter Property="Template">
             <Setter.Value>
@@ -207,4 +210,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator" BasedOn="{StaticResource {x:Type Separator}}" />
 </ResourceDictionary>

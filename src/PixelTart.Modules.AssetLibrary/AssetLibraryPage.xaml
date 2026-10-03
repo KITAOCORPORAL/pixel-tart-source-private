@@ -17,8 +17,17 @@
             <ResourceDictionary Source="AssetLibraryThumbnail.xaml" />
             <ResourceDictionary Source="AssetActionIcons.xaml" />
         </ResourceDictionary.MergedDictionaries>
-        <local:AssetColorLabelBrushConverter x:Key="AssetColorLabelBrush" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <DataTemplate x:Key="InspectorQuickToolsTemplate"><StackPanel><TextBlock Text="查看" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel>
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[View]}" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Collage]}" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
+</WrapPanel><TextBlock Text="转换 / 处理" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[RawToJpeg]}" Padding="8,4" Margin="2" />
+<Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[BatchCompress]}" Padding="8,4" Margin="2" />
+</WrapPanel><TextBlock Text="输出" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Content="发布配方…" AutomationProperties.AutomationId="AssetInspectorExport" Style="{DynamicResource PixelTart.Button.Primary}" Command="{Binding SelectionToolCommand}" CommandParameter="Publishing" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Publishing]}" Padding="8,4" Margin="2" />
+<Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Export]}" Padding="8,4" Margin="2" />
+</WrapPanel><TextBlock Text="创作" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Canvas]}" Padding="8,4" Margin="2" />
+</WrapPanel></StackPanel></DataTemplate>
+        <local:AssetColorLabelBrushConverter x:Key="AssetColorLabelBrush" />
         <local:HexToBrushConverter x:Key="HexToBrushConverter" />
         <local:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
         <local:RatingAtLeastConverter x:Key="RatingAtLeastConverter" />
@@ -388,8 +397,8 @@
         </Popup>
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="10,0"
                       AutomationProperties.AutomationId="AssetBrowserToolbar">
-        <Grid Margin="0,6,0,10" MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-            <Grid.RowDefinitions><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <Grid Margin="0,6,0,10" Width="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -414,15 +423,15 @@
                          AutomationProperties.AutomationId="AssetLibrarySearch" VerticalAlignment="Center" />
                 <Path Data="{StaticResource AssetAction.Search}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" Margin="9,0,0,0" HorizontalAlignment="Left" IsHitTestVisible="False" />
             </Grid>
-            <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <DockPanel Grid.Row="1" Grid.ColumnSpan="16" Margin="0,4,0,0" IsEnabled="{Binding IsReady}">
+                <Button DockPanel.Dock="Right" Content="＋ 筛选" Click="AddQuickFilter_Click" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,3" VerticalAlignment="Top" AutomationProperties.Name="添加或固定筛选条件" AutomationProperties.AutomationId="AssetAddQuickFilter" />
                 <ItemsControl ItemsSource="{Binding PinnedFilters}">
-                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate><DataTemplate>
                         <Button Content="{Binding Label}" Tag="{Binding Value}" Click="PinnedFilter_Click" Style="{DynamicResource PixelTart.Button.Ghost}" Margin="2,0" Padding="6,3" AutomationProperties.Name="{Binding Label}" AutomationProperties.AutomationId="{Binding AutomationId}" />
                     </DataTemplate></ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Button Content="＋ 筛选" Click="AddQuickFilter_Click" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="6,3" AutomationProperties.Name="添加或固定筛选条件" AutomationProperties.AutomationId="AssetAddQuickFilter" />
-            </StackPanel>
+            </DockPanel>
             <Button Grid.Row="0" Grid.Column="5" Click="SortMenu_Click" ToolTip="排序" Width="36" Height="34" Padding="8"
                      Margin="{DynamicResource Space.Inline.Start.1}" Style="{DynamicResource PixelTart.Button.Ghost}"
                      AutomationProperties.AutomationId="AssetLibrarySortMenu" AutomationProperties.Name="选择素材排序"><Path Data="{StaticResource AssetAction.Sort}" Style="{StaticResource AssetActionIcon}" /></Button>
@@ -560,7 +569,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Expander>
-                            <TextBlock Text="智能文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,12,0,4" />
+                            <Button Click="SmartFolderCollection_Click" HorizontalContentAlignment="Left" Style="{DynamicResource PixelTart.Button.Ghost}" Margin="0,8,0,2" ToolTip="查看、新建或编辑智能文件夹" AutomationProperties.Name="智能文件夹"><StackPanel Orientation="Horizontal"><TextBlock Text="智能文件夹"/><TextBlock Text="  ▾"/></StackPanel></Button>
                             <ItemsControl ItemsSource="{Binding OrganizationSmartFolders}" AutomationProperties.AutomationId="SmartFolders">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -605,17 +614,10 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         <Separator Margin="0,8" />
-                        <TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" />
+                        <DockPanel><Button DockPanel.Dock="Right" Content="＋ 新建" Command="{Binding NewFolderCommand}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,2"/><TextBlock Text="文件夹" Style="{DynamicResource PixelTart.Type.SectionTitle}" VerticalAlignment="Center"/></DockPanel>
                         <TextBox Text="{Binding OrganizationFolderSearch, UpdateSourceTrigger=PropertyChanged}" Height="30" MinHeight="30" Margin="0,6,0,4"
                                  ToolTip="按文件夹名称搜索" AutomationProperties.Name="搜索文件夹名称" AutomationProperties.AutomationId="AssetFolderNameSearch" />
-                        <Grid Height="30" Margin="0,0,0,4">
-                            <Grid.ColumnDefinitions><ColumnDefinition Width="22" /><ColumnDefinition Width="*" /><ColumnDefinition Width="30" /></Grid.ColumnDefinitions>
-                            <Path Data="{StaticResource AssetAction.Folder}" Style="{StaticResource AssetActionIcon}" Width="15" Height="15" VerticalAlignment="Center" />
-                            <TextBox Grid.Column="1" Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" Height="30" MinHeight="30" Padding="4,0"
-                                     ToolTip="新文件夹名称" AutomationProperties.Name="新文件夹名称" />
-                            <Button Grid.Column="2" Content="+" Command="{Binding NewFolderCommand}" Height="30" MinHeight="30" Padding="2"
-                                    Style="{DynamicResource PixelTart.Button.Ghost}" ToolTip="新建文件夹" AutomationProperties.Name="新建文件夹" />
-                        </Grid>
+
                             <TextBlock Text="正在加载组织栏…" Style="{DynamicResource PixelTart.Type.Metadata}"
                                        Visibility="{Binding IsOrganizationLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        AutomationProperties.AutomationId="AssetOrganizationLoadingState" />
@@ -691,7 +693,7 @@
                                                     <MenuItem Header="向下移动" Command="{Binding MoveDownCommand}" AutomationProperties.AutomationId="AssetFolderMoveDown" />
                                                     <MenuItem Header="提升一级" Command="{Binding PromoteCommand}" AutomationProperties.AutomationId="AssetFolderPromote" />
                                                     <Separator />
-                                                    <MenuItem Header="归档或恢复" Command="{Binding ToggleArchiveCommand}" />
+                                                    <MenuItem Header="归档或恢复" Command="{Binding ToggleArchiveCommand}" /><MenuItem Header="删除文件夹…" Command="{Binding DeleteCommand}" />
                                                 </ContextMenu>
                                             </Grid.ContextMenu>
                                         </Grid>
@@ -727,7 +729,7 @@
                     </Grid.RowDefinitions>
                     <Grid Margin="0,0,0,8" IsEnabled="{Binding IsReady}">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="176" /></Grid.ColumnDefinitions>
-                        <Slider Grid.Column="1" Minimum="120" Maximum="{Binding ThumbnailMaximumWidth}" Value="{Binding ThumbnailWidth}" ToolTip="缩略图大小"
+                        <Slider Grid.Column="1" Minimum="120" Maximum="{Binding ThumbnailMaximumWidth}" Value="{Binding ThumbnailWidth, UpdateSourceTrigger=PropertyChanged}" IsMoveToPointEnabled="True" SmallChange="8" LargeChange="48" ToolTip="缩略图大小"
                                 AutomationProperties.AutomationId="AssetThumbnailSizeSlider"
                                 AutomationProperties.Name="缩略图大小"
                                 Focusable="True" IsTabStop="True" />
@@ -795,7 +797,8 @@
                             <ItemsPanelTemplate>
                                 <local:VirtualizingAssetPanel
                                     ViewMode="{Binding DataContext.ViewMode, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                    ThumbnailWidth="{Binding DataContext.ThumbnailWidth, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                                    ThumbnailWidth="{Binding DataContext.ThumbnailWidth, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                    ThumbnailMaximumWidth="{Binding DataContext.ThumbnailMaximumWidth, RelativeSource={RelativeSource AncestorType=ListBox}}" />
                              </ItemsPanelTemplate>
                          </ListBox.ItemsPanel>
                       </local:AssetLibrarySelectionListBox>
@@ -910,6 +913,7 @@
                             </Grid>
                         </Border>
                         <TextBlock Text="{Binding SelectedAsset.DisplayName, TargetNullValue=请选择素材}" Style="{DynamicResource PixelTart.Type.SectionTitle}" TextTrimming="CharacterEllipsis" />
+                        <local:InspectorSectionPanel Settings="{Binding InspectorLayoutSettings}">
                         <Expander BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Brush.Border}" Padding="0,8,0,4" Header="图片信息" IsExpanded="True" AutomationProperties.AutomationId="AssetInspectorImageInformation"><StackPanel>
                         <TextBlock Style="{DynamicResource PixelTart.Type.Metadata}" AutomationProperties.AutomationId="AssetInspectorDimensions" AutomationProperties.Name="素材尺寸">
                             <Run Text="尺寸：" /><Run Text="{Binding SelectedAsset.Width, TargetNullValue=未知}" /><Run Text=" × " /><Run Text="{Binding SelectedAsset.Height, TargetNullValue=未知}" /><Run Text=" px" />
@@ -945,7 +949,7 @@
                         </DockPanel>
                         </StackPanel></Expander>
                         <Expander Header="标签 / 文件夹" IsExpanded="True" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Brush.Border}" Padding="0,8,0,4"><ContentControl Content="{Binding}" ContentTemplate="{StaticResource InspectorMembershipEditor}" /></Expander>
-                        <Button Content="{Binding InspectorWorkflowStatus, StringFormat=处理状态：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Left" Padding="8,4" Margin="0,6,0,4" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
+<Expander Header="处理状态" IsExpanded="True">                        <Button Content="{Binding InspectorWorkflowStatus, StringFormat=处理状态：{0}  ▾}" Click="OpenButtonContextMenu_Click" Style="{DynamicResource PixelTart.Button.Secondary}" HorizontalContentAlignment="Left" Padding="8,4" Margin="0,6,0,4" AutomationProperties.AutomationId="AssetInspectorWorkflowPicker">
                             <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Style="{DynamicResource PixelTart.Menu.Context}">
                                 <MenuItem Header="未处理" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="未处理" />
                                 <MenuItem Header="客户选择" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="客户选择" />
@@ -953,7 +957,7 @@
                                 <MenuItem Header="已精修" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已精修" />
                                 <MenuItem Header="已交付" Command="{Binding SetInspectorWorkflowCommand}" CommandParameter="已交付" />
                             </ContextMenu></Button.ContextMenu>
-                        </Button>
+                        </Button></Expander>
                         <Expander BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Brush.Border}" Padding="0,8,0,4" Header="项目关系" AutomationProperties.AutomationId="AssetInspectorRelations" Margin="0,12,0,8"><Expander.Style><Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}"><Setter Property="IsExpanded" Value="True"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding InspectorProjectLinks.Count}" Value="0"/><Condition Binding="{Binding InspectorBookingLinks.Count}" Value="0"/></MultiDataTrigger.Conditions><Setter Property="IsExpanded" Value="False"/></MultiDataTrigger></Style.Triggers></Style></Expander.Style><StackPanel>
                         <TextBlock Text="项目" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <ItemsControl ItemsSource="{Binding InspectorProjectLinks}"><ItemsControl.ItemTemplate><DataTemplate><DockPanel Margin="0,2"><TextBlock Text="{Binding Name}" Style="{DynamicResource PixelTart.Type.Metadata}" /><Button DockPanel.Dock="Right" Content="×" Command="{Binding DataContext.RemoveProjectRelationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Style="{DynamicResource PixelTart.Button.Ghost}" Padding="4,0" /></DockPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
@@ -1052,6 +1056,10 @@
 
                             </StackPanel>
                         </Expander>
+<Expander Header="快速工具" IsExpanded="True" Margin="0,8,0,4" Visibility="{Binding HasSelection, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="AssetInspectorQuickTools">
+
+<ContentControl Content="{Binding}" ContentTemplate="{StaticResource InspectorQuickToolsTemplate}" /></Expander>
+                        </local:InspectorSectionPanel>
                         </StackPanel>
                         <Expander AutomationProperties.AutomationId="VisualSmartFolderBuilder"
                                   Visibility="{Binding IsVisualSmartFolderSurfaceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -1102,20 +1110,11 @@
                                         </ContextMenu></Button.ContextMenu>
                                     </Button>
                                 </WrapPanel>
-                                <TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource SpacingVertical8}" />
+                                <Expander Header="快速工具" IsExpanded="True"><ContentControl Content="{Binding}" ContentTemplate="{StaticResource InspectorQuickToolsTemplate}" /></Expander>
+<TextBlock Text="批量操作只更新素材库元数据，不会修改、移动或删除源文件。" Style="{DynamicResource PixelTart.Type.Metadata}" TextWrapping="Wrap" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </Border>
-<StackPanel Margin="0,14,0,6" Visibility="{Binding HasSelection, Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.AutomationId="AssetInspectorQuickTools">
-<TextBlock Text="快速工具" Style="{DynamicResource PixelTart.Type.SectionTitle}" Margin="0,0,0,6" />
-<WrapPanel>
-<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
-<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
-<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" Padding="8,4" Margin="2" />
-<Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" Padding="8,4" Margin="2" />
-<Button Content="导出图片" AutomationProperties.AutomationId="AssetInspectorExport" Style="{DynamicResource PixelTart.Button.Primary}" Command="{Binding SelectionToolCommand}" CommandParameter="Publishing" Padding="8,4" Margin="2" />
-<Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" Padding="8,4" Margin="2" />
-<Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="自由画布" Command="{Binding SelectionToolCommand}" CommandParameter="Canvas" Padding="8,4" Margin="2" />
-</WrapPanel></StackPanel>
+
                     </StackPanel>
                 </ScrollViewer>
             </Border>

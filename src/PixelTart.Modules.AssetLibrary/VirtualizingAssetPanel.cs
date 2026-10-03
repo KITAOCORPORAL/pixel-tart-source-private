@@ -16,6 +16,11 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
         nameof(ThumbnailWidth), typeof(double), typeof(VirtualizingAssetPanel),
         new FrameworkPropertyMetadata(180d, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
+    public static readonly DependencyProperty ThumbnailMaximumWidthProperty = DependencyProperty.Register(
+        nameof(ThumbnailMaximumWidth), typeof(double), typeof(VirtualizingAssetPanel),
+        new FrameworkPropertyMetadata(double.NaN, FrameworkPropertyMetadataOptions.AffectsMeasure));
+    public double ThumbnailMaximumWidth { get => (double)GetValue(ThumbnailMaximumWidthProperty); set => SetValue(ThumbnailMaximumWidthProperty, value); }
+
     private AssetLayoutResult _layout = new([], default);
     private Size _viewport;
     private Point _offset;
@@ -33,7 +38,7 @@ public sealed class VirtualizingAssetPanel : VirtualizingPanel, IScrollInfo
         var width = double.IsInfinity(availableSize.Width) ? Math.Max(120d, ActualWidth) : Math.Max(120d, availableSize.Width);
         var height = double.IsInfinity(availableSize.Height) ? Math.Max(120d, ActualHeight) : Math.Max(0d, availableSize.Height);
         var ratios = owner?.Items.Cast<object>().Select(item => item is AssetVisualMatchView card ? card.AspectRatio : 1.5d).ToArray() ?? [];
-        _layout = AssetLayoutEngine.Arrange(ViewMode, ratios, width, ThumbnailWidth);
+        _layout = AssetLayoutEngine.Arrange(ViewMode, ratios, width, ThumbnailWidth, ThumbnailMaximumWidth);
         _viewport = new(width, height);
         ClampOffset();
         ScrollOwner?.InvalidateScrollInfo();

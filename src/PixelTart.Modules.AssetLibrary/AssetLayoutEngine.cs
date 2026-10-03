@@ -14,12 +14,17 @@ public static class AssetLayoutEngine
         AssetLibraryViewMode mode,
         IReadOnlyList<double> aspectRatios,
         double viewportWidth,
-        double thumbnailWidth)
+        double thumbnailWidth,
+        double? thumbnailMaximumWidth = null)
     {
         var width = double.IsFinite(viewportWidth) ? Math.Max(120d, viewportWidth) : 120d;
         var target = Math.Clamp(double.IsFinite(thumbnailWidth) ? thumbnailWidth : 180d, 120d, width);
-        if (mode != AssetLibraryViewMode.List && target >= width - 32)
-            return ArrangeGrid(aspectRatios, width, width);
+        // The slider belongs to the outer gallery; the content viewport can lose
+        // width to its scrollbar. Normalize against the actual slider endpoint.
+        var maximum = thumbnailMaximumWidth is > 120 && double.IsFinite(thumbnailMaximumWidth.Value)
+            ? thumbnailMaximumWidth.Value : Math.Max(120, width - 24);
+        var progress = Math.Clamp((thumbnailWidth - 120) / Math.Max(1, maximum - 120), 0, 1);
+        target = double.IsFinite(progress) ? 120 + progress * (width - 120) : target;
         return mode switch
         {
             AssetLibraryViewMode.Masonry => ArrangeMasonry(aspectRatios, width, target),
@@ -32,7 +37,7 @@ public static class AssetLayoutEngine
     private static AssetLayoutResult ArrangeGrid(IReadOnlyList<double> ratios, double width, double target)
     {
         var columns = Math.Max(1, (int)Math.Floor((width + Gap) / (target + Gap)));
-        var itemWidth = Math.Max(96d, (width - Gap * (columns - 1)) / columns);
+        var itemWidth = target;
         var items = new Rect[ratios.Count];
         var y = 0d;
         for (var rowStart = 0; rowStart < ratios.Count; rowStart += columns)
@@ -53,7 +58,7 @@ public static class AssetLayoutEngine
     private static AssetLayoutResult ArrangeMasonry(IReadOnlyList<double> ratios, double width, double target)
     {
         var columns = Math.Max(1, (int)Math.Floor((width + Gap) / (target + Gap)));
-        var itemWidth = Math.Max(96d, (width - Gap * (columns - 1)) / columns);
+        var itemWidth = target;
         var heights = new double[columns];
         var items = new Rect[ratios.Count];
         for (var index = 0; index < ratios.Count; index++)
@@ -62,7 +67,7 @@ public static class AssetLayoutEngine
             for (var candidate = 1; candidate < columns; candidate++)
                 if (heights[candidate] < heights[column]) column = candidate;
             var ratio = NormalizeRatio(ratios[index]);
-            var itemHeight = Math.Clamp(itemWidth / ratio, 72d, itemWidth * 2.5d) + CaptionHeight;
+            var itemHeight = itemWidth / ratio + CaptionHeight;
             items[index] = new(column * (itemWidth + Gap), heights[column], itemWidth, itemHeight);
             heights[column] += itemHeight + Gap;
         }
@@ -72,38 +77,25 @@ public static class AssetLayoutEngine
     private static AssetLayoutResult ArrangeJustified(IReadOnlyList<double> ratios, double width, double target)
     {
         var items = new Rect[ratios.Count];
-        var targetImageHeight = Math.Clamp(target * 0.72d, 92d, 210d);
-        var rowStart = 0;
+        // Blend equal-height small previews into a full-width inspection card.
+        // No integer column rounding or fixed height cap may consume slider travel.
+        var largestRatio = ratios.Select(NormalizeRatio).DefaultIfEmpty(1.5d).Max();
+        var progress = Math.Clamp((target - 120) / Math.Max(1, width - 120), 0, 1);
+        var x = 0d;
         var y = 0d;
-        while (rowStart < ratios.Count)
+        var rowHeight = 0d;
+        for (var index = 0; index < ratios.Count; index++)
         {
-            var ratioSum = 0d;
-            var rowEnd = rowStart;
-            while (rowEnd < ratios.Count)
-            {
-                ratioSum += NormalizeRatio(ratios[rowEnd]);
-                rowEnd++;
-                if (ratioSum * targetImageHeight + Gap * (rowEnd - rowStart - 1) >= width) break;
-            }
-            var itemCount = rowEnd - rowStart;
-            var isLast = rowEnd == ratios.Count;
-            var imageHeight = isLast
-                ? Math.Min(targetImageHeight, (width - Gap * (itemCount - 1)) / Math.Max(0.2d, ratioSum))
-                : (width - Gap * (itemCount - 1)) / Math.Max(0.2d, ratioSum);
-            imageHeight = Math.Clamp(imageHeight, 72d, targetImageHeight * 1.45d);
-            var x = 0d;
-            for (var index = rowStart; index < rowEnd; index++)
-            {
-                var remaining = width - x;
-                var itemWidth = index == rowEnd - 1 && !isLast
-                    ? remaining
-                    : Math.Min(remaining, NormalizeRatio(ratios[index]) * imageHeight);
-                items[index] = new(x, y, Math.Max(1d, itemWidth), imageHeight + CaptionHeight);
-                x += itemWidth + Gap;
-            }
-            y += imageHeight + CaptionHeight + Gap;
-            rowStart = rowEnd;
+            var ratio = NormalizeRatio(ratios[index]);
+            var minimum = 120 * ratio / largestRatio;
+            var itemWidth = minimum + (width - minimum) * progress;
+            var height = itemWidth / ratio + CaptionHeight;
+            if (x > 0 && x + itemWidth > width + .001) { x = 0; y += rowHeight + Gap; rowHeight = 0; }
+            items[index] = new(x, y, itemWidth, height);
+            rowHeight = Math.Max(rowHeight, height);
+            x += itemWidth + Gap;
         }
+        if (ratios.Count > 0) y += rowHeight + Gap;
         return new(items, new(width, Math.Max(0d, y - Gap)));
     }
 
@@ -115,5 +107,5 @@ public static class AssetLayoutEngine
         return new(items, new(width, count * rowHeight));
     }
 
-    private static double NormalizeRatio(double ratio) => double.IsFinite(ratio) ? Math.Clamp(ratio, 0.2d, 5d) : 1.5d;
+    private static double NormalizeRatio(double ratio) => double.IsFinite(ratio) ? Math.Clamp(ratio, 0.01d, 100d) : 1.5d;
 }

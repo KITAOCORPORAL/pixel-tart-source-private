@@ -20,7 +20,9 @@ public sealed class AssetLibraryWorkspaceSettings
     public bool InspectorPaneCollapsed { get; set; }
     public bool InspectorPinned { get; set; }
     public double ThumbnailWidth { get; set; } = DefaultThumbnailWidth;
-    public List<AssetQueryField> PinnedFilterFields { get; set; } = [AssetQueryField.Rating, AssetQueryField.Tag];
+    public List<AssetQueryField> PinnedFilterFields { get; set; } = [AssetQueryField.VisualDominantColor, AssetQueryField.Tag, AssetQueryField.Folder, AssetQueryField.Orientation, AssetQueryField.Rating, AssetQueryField.Extension];
+    public List<string> InspectorSectionOrder { get; set; } = [];
+    public Dictionary<string, bool> InspectorSectionExpanded { get; set; } = [];
     public string SearchText { get; set; } = string.Empty;
     public Guid? SelectedFolderId { get; set; }
     public Guid? SelectedTagId { get; set; }
@@ -45,6 +47,8 @@ public sealed class AssetLibraryWorkspaceSettings
         ThumbnailWidth = NormalizeFinite(ThumbnailWidth, DefaultThumbnailWidth, 120d, 4096d);
         if (InspectorPinned) InspectorPaneCollapsed = false;
         PinnedFilterFields = (PinnedFilterFields ?? []).Where(field => Enum.IsDefined(field)).Distinct().Take(12).ToList();
+        InspectorSectionOrder = (InspectorSectionOrder ?? []).Where(key => !string.IsNullOrWhiteSpace(key)).Distinct().Take(20).ToList();
+        InspectorSectionExpanded ??= [];
         SearchText = (SearchText ?? string.Empty).Trim();
         if (SearchText.Length > 500) SearchText = SearchText[..500];
         if (!Enum.IsDefined(ViewMode)) ViewMode = AssetLibraryViewMode.Masonry;

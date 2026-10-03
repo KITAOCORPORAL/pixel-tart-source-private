@@ -156,6 +156,8 @@ internal static class AssetLibrarySchema
                 FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE
             );
             """,
+            "CREATE TABLE IF NOT EXISTS AssetTrashFolderOrigins(AssetId TEXT NOT NULL,FolderId TEXT NOT NULL,FolderName TEXT NOT NULL,PRIMARY KEY(AssetId,FolderId),FOREIGN KEY(AssetId) REFERENCES AssetItems(AssetId) ON DELETE CASCADE);",
+
             """
             CREATE TABLE IF NOT EXISTS ProjectAssetLinks(
                 ProjectId TEXT NOT NULL, AssetId TEXT NOT NULL, Role TEXT NOT NULL DEFAULT 'Original', AddedAtUtc TEXT NOT NULL,

@@ -6,6 +6,15 @@ public readonly record struct ContextMenuPlacementResult(double Left, double Top
 
 public static class ContextMenuPlacement
 {
+    public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
+        "Enabled", typeof(bool), typeof(ContextMenuPlacement), new PropertyMetadata(false, (d, e) =>
+        {
+            if (d is System.Windows.Controls.MenuItem item && e.NewValue is true)
+                AssetLibraryPage.AttachContextSubmenuPlacement(item);
+        }));
+    public static void SetEnabled(DependencyObject element, bool value) => element.SetValue(EnabledProperty, value);
+    public static bool GetEnabled(DependencyObject element) => (bool)element.GetValue(EnabledProperty);
+
     public static ContextMenuPlacementResult Calculate(Rect parent, Size submenu, Rect workArea)
     {
         var opensLeft = parent.Right + submenu.Width > workArea.Right && parent.Left - submenu.Width >= workArea.Left;

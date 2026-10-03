@@ -1355,8 +1355,26 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         .GroupBy(path => Path.GetExtension(path).ToLowerInvariant())
         .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
 
-    private async Task NewFolderAsync() { var name = string.IsNullOrWhiteSpace(NewFolderName) ? UniqueName("新建文件夹", Folders.Select(x => x.Name)) : NewFolderName.Trim(); await _repository.SaveFolderAsync(new(Guid.NewGuid(), null, name)); NewFolderName = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建文件夹：{name}"; }
-    private async Task NewSubfolderAsync() { var name = string.IsNullOrWhiteSpace(NewFolderName) ? UniqueName("子文件夹", Folders.Where(x => x.ParentFolderId == SelectedFolder!.FolderId).Select(x => x.Name)) : NewFolderName.Trim(); await _repository.SaveFolderAsync(new(Guid.NewGuid(), SelectedFolder!.FolderId, name)); NewFolderName = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建子文件夹：{SelectedFolder.Name} / {name}"; }
+    private async Task NewFolderAsync()
+    {
+        var name = UniqueName(string.IsNullOrWhiteSpace(NewFolderName) ? "新建文件夹" : NewFolderName.Trim(), Folders.Where(x => x.ParentFolderId is null).Select(x => x.Name));
+        var id = Guid.NewGuid();
+        await _repository.SaveFolderAsync(new(id, null, name));
+        NewFolderName = string.Empty; OrganizationFolderSearch = string.Empty;
+        await RefreshFilterListsAsync(); SelectedFolder = Folders.First(folder => folder.FolderId == id);
+        await RefreshAsync(); Status = $"已创建并选中文件夹：{name}；右键可重命名、移动或删除。";
+    }
+    private async Task NewSubfolderAsync()
+    {
+        if (SelectedFolder is not { } parent) return;
+        var name = UniqueName(string.IsNullOrWhiteSpace(NewFolderName) ? "子文件夹" : NewFolderName.Trim(), Folders.Where(x => x.ParentFolderId == parent.FolderId).Select(x => x.Name));
+        var id = Guid.NewGuid();
+        await _repository.SaveFolderAsync(new(id, parent.FolderId, name));
+        RememberFolderExpanded(parent.FolderId, true);
+        NewFolderName = string.Empty; OrganizationFolderSearch = string.Empty;
+        await RefreshFilterListsAsync(); SelectedFolder = Folders.First(folder => folder.FolderId == id);
+        await RefreshAsync(); Status = $"已创建并选中子文件夹：{parent.Name} / {name}";
+    }
     private async Task BatchFolderAsync() { var result = await _repository.BatchCreateFoldersAsync("人体/身体\n人体/宗教\n参考/白棚\n参考/黑色\n灯光/硬光"); await RefreshFilterListsAsync(); Status = $"批量创建 {result.Created.Count} 个层级文件夹"; }
     private async Task NewTagAsync() { var tags = await _repository.BatchCreateTagsAsync(string.IsNullOrWhiteSpace(TagInput) ? "新标签" : TagInput); TagInput = string.Empty; await RefreshFilterListsAsync(); Status = $"已创建/找到 {tags.Count} 个标签"; }
     private async Task ApplyTagsAsync() { var tags = await _repository.BatchCreateTagsAsync(TagInput); var result = await _repository.AddTagsAsync(SelectedAssets.Select(x => x.AssetId), tags.Select(x => x.TagId)); RememberBrowserMutationResult(result); Status = $"已为 {SelectionCount} 项添加 {tags.Count} 个标签"; TagInput = string.Empty; await RefreshFilterListsAsync(); await RefreshSelectionSummaryAsync(); RaiseActions(); }
@@ -1884,7 +1902,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
         RaiseP3TagCommands();
         PreviewP3BatchMetadataCommand?.RaiseCanExecuteChanged();
         OpenProjectPickerCommand?.RaiseCanExecuteChanged(); OpenBookingPickerCommand?.RaiseCanExecuteChanged();
-        SelectionToolCommand?.RaiseCanExecuteChanged(); SaveInspectorDetailsCommand?.RaiseCanExecuteChanged();
+        SelectionToolCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(QuickToolHints)); SaveInspectorDetailsCommand?.RaiseCanExecuteChanged();
         ApplyInspectorColorCommand?.RaiseCanExecuteChanged(); AddInspectorFolderCommand?.RaiseCanExecuteChanged(); AddInspectorTagsCommand?.RaiseCanExecuteChanged();
     }
 

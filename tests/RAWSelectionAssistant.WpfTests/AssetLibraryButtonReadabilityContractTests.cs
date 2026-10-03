@@ -19,13 +19,13 @@ public sealed class AssetLibraryButtonReadabilityContractTests
         var picker = XDocument.Load(Path.Combine(Path.GetDirectoryName(PagePath)!, "AssetInspectorTagPicker.xaml"));
         var buttons = document.Descendants(Presentation + "Button").Concat(picker.Descendants(Presentation + "Button")).ToArray();
 
-        Assert.HasCount(99, buttons, "RUX: fixed filters become two dynamic controls; Inspector color apply becomes one swatch template; duplicate export is removed.");
+        Assert.HasCount(100, buttons, "Manual acceptance: Smart Folder heading is now a real collection action; shared Quick Tools template is counted once.");
         Assert.IsTrue(buttons.All(button =>
             Attribute(button, "Style") is "{DynamicResource PixelTart.Button.Ghost}"
                 or "{DynamicResource PixelTart.Button.Primary}"
                 or "{DynamicResource PixelTart.Button.Secondary}"));
         // Publishing export is a primary quick action; source metadata contains no export button.
-        Assert.AreEqual(72, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
+        Assert.AreEqual(73, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Ghost}"));
         Assert.AreEqual(22, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Secondary}"));
         Assert.AreEqual(5, buttons.Count(button => Attribute(button, "Style") == "{DynamicResource PixelTart.Button.Primary}"));
         Assert.IsFalse(buttons.Any(button => Attribute(button, "Style").Contains("AssetLibrary", StringComparison.Ordinal)),

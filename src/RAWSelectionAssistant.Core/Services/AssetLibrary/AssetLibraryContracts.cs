@@ -48,6 +48,8 @@ public interface IAssetLibraryRepository : IAsyncDisposable
     Task<AssetLibraryBatchResult> UpdateAssetsMetadataAsync(IEnumerable<Guid> assetIds, int? rating = null, string? comment = null, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> SetAssetsArchivedAsync(IEnumerable<Guid> assetIds, bool isArchived, CancellationToken cancellationToken = default);
     Task<AssetLibraryBatchResult> SetAssetsTrashedAsync(IEnumerable<Guid> assetIds, bool isTrashed, CancellationToken cancellationToken = default);
+    Task<int> DeleteFolderDefinitionAsync(Guid folderId, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+    Task<int> DeleteTrashedAssetRecordsAsync(IEnumerable<Guid> assetIds, CancellationToken cancellationToken = default) => throw new NotSupportedException();
     Task<IReadOnlyList<AssetTrashEntry>> ListTrashEntriesAsync(CancellationToken cancellationToken = default);
     Task SaveProjectAssetLinkAsync(ProjectAssetLink link, CancellationToken cancellationToken = default);
     Task<int> RemoveProjectAssetLinkAsync(Guid projectId, Guid assetId, CancellationToken cancellationToken = default);

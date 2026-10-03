@@ -1102,10 +1102,34 @@ public sealed partial class AssetLibraryViewModel
         var parentId = child ? node.FolderId : node.Folder.ParentFolderId;
         var seed = string.IsNullOrWhiteSpace(NewFolderName) ? (child ? "新建子文件夹" : "新建文件夹") : NewFolderName.Trim();
         var name = UniqueName(seed, Folders.Where(folder => folder.ParentFolderId == parentId).Select(folder => folder.Name));
-        await _repository.SaveFolderAsync(new(Guid.NewGuid(), parentId, name), _lifetimeCancellation.Token);
+        var id = Guid.NewGuid();
+        await _repository.SaveFolderAsync(new(id, parentId, name), _lifetimeCancellation.Token);
+        if(parentId is Guid parent) RememberFolderExpanded(parent,true);
+        OrganizationFolderSearch=string.Empty;
         NewFolderName = string.Empty;
         await RefreshFilterListsAsync(_lifetimeCancellation.Token);
-        Status = $"已创建文件夹：{name}";
+        SelectedFolder=Folders.First(folder=>folder.FolderId==id);
+        await RefreshAsync(); Status = $"已创建并选中文件夹：{name}";
+    }
+
+    internal async Task DeleteFolderDefinitionAsync(AssetLibraryFolderNodeView node)
+    {
+        var message=$"删除文件夹“{node.Name}”？\n将移除该文件夹的 {node.DirectAssetCount} 个素材归属；{node.Children.Count} 个子文件夹上移一级。\n素材记录、其他文件夹归属和磁盘原件均保留；无其他归属的素材可在未分类查看。此操作不可撤销。";
+        if(MessageBox.Show(message,"删除文件夹",MessageBoxButton.OKCancel,MessageBoxImage.Warning)!=MessageBoxResult.OK)return;
+        await _repository.DeleteFolderDefinitionAsync(node.FolderId,_lifetimeCancellation.Token);
+        if(SelectedFolder?.FolderId==node.FolderId)SelectedFolder=null;
+        await RefreshFilterListsAsync();await RefreshAsync();
+        Status=$"已删除文件夹“{node.Name}”；照片保留。";
+    }
+
+    public async Task DeleteTrashRecordsAsync(AssetVisualMatchView card)
+    {
+        var ids=ContextIds(card).ToArray();
+        var names=AssetCards.Where(item=>ids.Contains(item.Asset.AssetId)).Select(item=>item.Asset.DisplayName).ToArray();
+        if(MessageBox.Show($"彻底删除 {ids.Length} 条回收站素材记录？\n{string.Join("\n",names)}\n\n仅删除本素材库记录、评分、标签和库内关系。磁盘原件、外部项目文件均保留。", "删除范围确认",MessageBoxButton.OKCancel,MessageBoxImage.Warning)!=MessageBoxResult.OK)return;
+        if(MessageBox.Show("再次确认：这些素材库记录无法恢复。磁盘原件不会删除。", "彻底删除确认",MessageBoxButton.YesNo,MessageBoxImage.Warning)!=MessageBoxResult.Yes)return;
+        var changed=await _repository.DeleteTrashedAssetRecordsAsync(ids,_lifetimeCancellation.Token);
+        RemoveSelectedIds(ids);await RefreshAsync();Status=$"已彻底删除 {changed} 条素材库记录；磁盘原件保留。";
     }
 
     internal async Task SetFolderArchivedAsync(AssetLibraryFolderNodeView node, bool archived)
@@ -1758,7 +1782,7 @@ public sealed partial class AssetLibraryViewModel
         var ids = ContextIds(card);
         var result = await _browserCommands.SetTrashedAsync(ids, trashed, _lifetimeCancellation.Token);
         RemoveSelectedIds(ids);
-        Status = trashed ? $"已将 {result.ChangedCount} 项移入可恢复回收站；源文件未删除。" : $"已恢复 {result.ChangedCount} 项，并保留原归档状态。";
+        Status = trashed ? $"已将 {result.ChangedCount} 项移入可恢复回收站；源文件未删除。" : $"已恢复 {result.ChangedCount} 项，保留原文件夹、排序和归档状态。{string.Join("；", result.Warnings)}";
         RaiseP2CommandStates(); await RefreshAsync();
     }
 

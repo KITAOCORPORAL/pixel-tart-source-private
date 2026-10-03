@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:asset="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary">
     <!-- Canonical Button API. Loading is an explicit, layout-stable style. -->
     <ControlTemplate x:Key="PixelTart.Button.Template" TargetType="Button">
         <Grid SnapsToDevicePixels="True">
@@ -141,7 +141,7 @@
                     <Path x:Name="SubmenuArrow" Margin="10,0,2,0" Grid.Column="3" Width="6" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 5 5 L 0 10" Fill="Transparent" Stroke="{DynamicResource MenuShortcutBrush}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
                 </Grid>
             </Border>
-            <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-3" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" PlacementTarget="{Binding ElementName=ItemSurface}" VerticalOffset="-5">
+            <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="0" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" PlacementTarget="{Binding ElementName=ItemSurface}" VerticalOffset="0">
                 <Border MinWidth="0" Background="{DynamicResource MenuPopupBackgroundBrush}" BorderBrush="{DynamicResource MenuPopupBorderBrush}" BorderThickness="1" CornerRadius="{DynamicResource RadiusPopup}" Padding="4">
                     <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" /></ScrollViewer>
                 </Border>
