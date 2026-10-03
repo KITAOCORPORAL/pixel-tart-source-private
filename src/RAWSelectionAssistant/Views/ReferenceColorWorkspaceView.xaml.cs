@@ -303,8 +303,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
         menu.Items.Add(Action("复制当前调整", workspace.CopyAdjustmentsCommand));
         menu.Items.Add(Action("应用已复制调整", workspace.ApplyAdjustmentsCommand));
         menu.Items.Add(Action("同步到所选", workspace.SyncSelectedCommand));
-        menu.Items.Add(new Separator()); menu.Items.Add(Action("导出所选", workspace.ExportSelectedCommand));
-        menu.Items.Add(Action("发布配方…", workspace.PreparePublishingCommand));
+        menu.Items.Add(new Separator()); menu.Items.Add(Action("快速导出所选（JPEG / RAW→TIFF）", workspace.ExportSelectedCommand));
+        menu.Items.Add(Action("通过发布配方导出…", workspace.PreparePublishingCommand));
         menu.Items.Add(new Separator());
         var remove = new MenuItem { Header = "从当前批次移除", IsEnabled = !workspace.IsExporting };
         remove.Click += async (_, _) => await workspace.RemoveSelectedFromBatchAsync(); menu.Items.Add(remove);
@@ -396,7 +396,6 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var availableWidth = GetAvailableWidth();
         _lastResponsiveWidth = availableWidth;
         var focus = _editor?.FocusView == true;
-        var hideContext = focus || _editor?.IsContextVisible == false;
         var compact = availableWidth is > 0 and < 1440;
         var narrow = availableWidth is > 0 and < 740;
 
@@ -404,11 +403,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         _wasCompact = compact;
 
         LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 300 : 240;
-        RightColumn.MinWidth = hideContext || compact ? 0 : 224;
+        RightColumn.MinWidth = focus || compact ? 0 : 280;
         LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(320);
         CenterColumn.MinWidth = compact ? 240 : 520;
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
-        RightColumn.Width = hideContext || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
+        RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
         if (compact)
         {
             Grid.SetColumn(RightRail, 1);

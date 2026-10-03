@@ -125,6 +125,11 @@ public sealed class ReferenceWorkspaceWideRatioTests
                 if (Application.Current is null) { var app = new App(); app.InitializeComponent(); }
                 using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
                 Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(320, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
+                var targetWidth = columns[1];
+                editor.ContextRailOpen = false; Arrange(view, 1920, 900);
+                Assert.AreEqual(targetWidth, FindColumns(view)[1], .5, "Hiding reference must not resize the target image viewport.");
+                editor.ContextRailOpen = true; Arrange(view, 1920, 900);
+                Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
                 Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "RightRail"); Assert.IsFalse(right.IsVisible);
                 editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340, $"drawer width {right.ActualWidth}");
                 Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "LeftRail"); Assert.IsFalse(left.IsVisible);

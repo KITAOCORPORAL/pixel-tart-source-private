@@ -49,6 +49,8 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
         if (State is null) { DrawLabel(drawing, "点击“生成当前模型”查看色彩分布", new Point(18, 18)); return; }
         DrawAxes(drawing);
+        DrawLabel(drawing, "L 明度 0–1 · a 绿↔红 · b 蓝↔黄", new Point(10, 8));
+        if (ActualHeight >= 260) DrawLabel(drawing, "离中性轴越远，色度越高 · 点色＝原片采样", new Point(10, 26));
         foreach (var cloud in State.VisibleClouds)
             foreach (var point in ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight, 1))
             {
@@ -82,9 +84,21 @@ public sealed class ColorSpace3DViewport : FrameworkElement
             drawing.DrawLine(pen, new Point(points[start].X, points[start].Y), new Point(points[end].X, points[end].Y));
             DrawLabel(drawing, label, new Point(Math.Clamp(points[end].X, 4, Math.Max(4, ActualWidth - 18)), Math.Clamp(points[end].Y, 4, Math.Max(4, ActualHeight - 38))));
         }
+        if (ActualWidth >= 300 && ActualHeight >= 260)
+        {
+            foreach (var axis in new[]{0,1,2})
+            foreach (var value in axis==0 ? new[]{0d,.25,.5,.75,1d} : new[]{-.4,-.2,0,.2,.4})
+            {
+                var marker = axis==0 ? Point(value,0,0) : axis==1 ? Point(.5,value,0) : Point(.5,0,value);
+                var tick=ColorSpaceProjection.Project(axes with { Points=[marker] },State!.Camera,ActualWidth,ActualHeight)[0];
+                if(tick.X<6 || tick.X>ActualWidth-38 || tick.Y<48 || tick.Y>ActualHeight-44)continue;
+                drawing.DrawEllipse(Brushes.Gray,null,new Point(tick.X,tick.Y),1.8,1.8);
+                DrawLabel(drawing,value.ToString("0.##",System.Globalization.CultureInfo.InvariantCulture),new Point(tick.X+4,tick.Y));
+            }
+        }
     }
     private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }
-    private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, 1), origin); }
+    private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, VisualTreeHelper.GetDpi(this).PixelsPerDip), origin); }
     private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = _clickStart = e.GetPosition(this); CaptureMouse(); }
     private void OnMouseMove(object sender, MouseEventArgs e) { if (_pointer is not { } previous || State is null || e.LeftButton != MouseButtonState.Pressed) return; var current = e.GetPosition(this); var delta = current - previous; _pointer = current; var camera = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) ? ColorSpaceProjection.PanByDisplayDelta(State.Camera, delta.X, delta.Y, ActualWidth, ActualHeight) : State.Camera.Rotate(delta.X * .35, -delta.Y * .35); State = State with { Camera = camera, IsFit = false }; }
     private void OnMouseUp(object sender, MouseButtonEventArgs e)
