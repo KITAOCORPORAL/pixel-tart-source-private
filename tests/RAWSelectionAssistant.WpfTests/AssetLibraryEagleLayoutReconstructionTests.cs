@@ -82,7 +82,10 @@ public sealed class AssetLibraryEagleLayoutReconstructionTests
         StringAssert.Contains(code, "QuickLoupeImage.Width = bitmap.PixelWidth * scale");
         StringAssert.Contains(code, "QuickLoupeImage.Height = bitmap.PixelHeight * scale");
         StringAssert.Contains(code, "ContextQuickPreview_Click");
-        StringAssert.Contains(code, "QuickLoupePopup_MouseLeave");
+        Assert.IsNull(document.Descendants().Single(node => (string?)node.Attribute(XNamespace.Get("http://schemas.microsoft.com/winfx/2006/xaml") + "Name") == "QuickLoupeContainer").Attribute("MouseLeave"),
+            "The noninteractive preview surface must not dismiss itself during resize.");
+        StringAssert.Contains(code, "ReferenceEquals(sender, _quickLoupeHoverAnchor)");
+        StringAssert.Contains(code, "e.Key == Key.Escape && AssetQuickLoupePopup.IsOpen");
 
         var viewModel = File.ReadAllText(Path.Combine(root, "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryViewModel.cs"));
         StringAssert.Contains(viewModel, "singleMaterialized is not null && IsInspectorPaneCollapsed");
