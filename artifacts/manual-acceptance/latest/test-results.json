@@ -1,0 +1,81 @@
+{
+  "SourceHead": "8457e9022ac8278df5401c6c1842f70a39c98129",
+  "Runs": [
+    {
+      "file": "core-frozen-source.trx",
+      "sha256": "E6F60D6AE94F4DBE011365B2A0974AD2B469A5889BF9237B88A4909B7ADCEE18",
+      "pass": 1533,
+      "fail": 0,
+      "skip": 4
+    },
+    {
+      "file": "wpf-frozen-source.trx",
+      "sha256": "FD93121591FCD70C2A1E208821E5164BABFE44CB9BBBA09D20BC5DD449DE0E94",
+      "pass": 1429,
+      "fail": 0,
+      "skip": 11
+    },
+    {
+      "file": "dpi-final.trx",
+      "sha256": "B1200119A086843366DB22588F2A02011A066BFB5430DE5804EC6E1EC3C089CA",
+      "pass": 91,
+      "fail": 0,
+      "skip": 0
+    }
+  ],
+  "SubjectSubsets": [
+    {
+      "name": "Asset Library",
+      "passed": 543,
+      "failed": 0,
+      "skipped": 2,
+      "testCount": 545,
+      "selector": "AssetLibrary|EmbeddedAsset|ManualAcceptance|HomeThumbnail|RuntimeUserFindingsBatchA|RuntimeUserFindingsBatchB"
+    },
+    {
+      "name": "Color Studio",
+      "passed": 88,
+      "failed": 0,
+      "skipped": 1,
+      "testCount": 89,
+      "selector": "ColorStudio|ReferenceWorkspace|Filmstrip|BatchExport|BatchSync|CopyApply"
+    },
+    {
+      "name": "Reference Match",
+      "passed": 203,
+      "failed": 0,
+      "skipped": 8,
+      "testCount": 211,
+      "selector": "Reference|Match|BatchExportProcessedPixels"
+    },
+    {
+      "name": "3D",
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 39,
+      "selector": "ColorSpace|ColorCloud"
+    },
+    {
+      "name": "Free Canvas",
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 24,
+      "selector": "Canvas"
+    },
+    {
+      "name": "Guardian",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 10,
+      "selector": "Guardian"
+    }
+  ],
+  "SubsetNote": "Overlapping regex subsets from the complete TRX runs; not extra runs.",
+  "DpiEvidenceSourceHead": "de4c91a67c9146b5272bf20e10360172c4bf6189",
+  "CurrentReleaseDpiRuntime": "NOT_RUN",
+  "VisualApproved": false,
+  "UserVerified": false
+}

@@ -1,3 +1,5 @@
+> 本轮人工截图重新打开相关缺陷，最新状态见 [MANUAL_ACCEPTANCE_DEFECT_CLOSURE_2026-10-03.md](MANUAL_ACCEPTANCE_DEFECT_CLOSURE_2026-10-03.md)。不得从历史CODE/TEST推导Runtime通过。
+
 # Post-video runtime review — reopened
 
 Baseline: `1857cb7608125f7144963365ab45fceaf07fd81e` on `integration/pixel-tart-developer-preview`. Correction Release source: `d497e9b207e98c5a907485dfd85555e33e157a4a` (asset `cfdd0b3`, studio `bf1aa29`, test infrastructure `d497e9b`). Subsequent documentation commits do not change that product source. The previous frozen Round 3 Release does not contain these corrections.

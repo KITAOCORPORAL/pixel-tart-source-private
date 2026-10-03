@@ -1,3 +1,5 @@
+> 本轮人工截图重新打开相关缺陷，最新状态见 [MANUAL_ACCEPTANCE_DEFECT_CLOSURE_2026-10-03.md](MANUAL_ACCEPTANCE_DEFECT_CLOSURE_2026-10-03.md)。不得从历史CODE/TEST推导Runtime通过。
+
 > HISTORICAL / SUPERSEDED: user recording reopened this review. See [POST_VIDEO_RUNTIME_REVIEW_MATRIX.md](POST_VIDEO_RUNTIME_REVIEW_MATRIX.md). CLOSED_IN_CODE and old test counts below are not runtime or user approval. The former parity fixture contained unexecuted TIFF16/high-precision PASS entries; do not rely on those entries.
 
 # Pixel Tart Human Review Gap Matrix — Round 3
