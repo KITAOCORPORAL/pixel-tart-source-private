@@ -643,13 +643,13 @@ UserVerified: false
 | ID | RUX-040 |
 | User Finding | 3D 点云视觉；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 固定屏幕十字轴不随3D camera，文字混入内部mode；改为与真实采样同camera投影的OKLab三轴。灰图仍保持真实灰轴分布。 |
+| Files Changed | ColorSpace3DViewport / ReferenceColorWorkspaceView |
+| Automated Test | Batch E Release x64 0 errors; focused WPF 4 PASS / 0 FAIL; full core follows |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-041 — Image → 3D
@@ -659,13 +659,13 @@ UserVerified: false
 | ID | RUX-041 |
 | User Finding | Image → 3D；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 保留真实OKLab nearest sample和置顶双圈高亮；图片取色打开3D折叠区，避免反馈藏在折叠栏。 |
+| Files Changed | ColorSpace3DViewport / ReferenceColorWorkspaceView |
+| Automated Test | Batch E Release x64 0 errors; focused WPF 4 PASS / 0 FAIL; full core follows |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-042 — 3D → Image
@@ -675,13 +675,13 @@ UserVerified: false
 | ID | RUX-042 |
 | User Finding | 3D → Image；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 保留完整像素membership mask、同一zoom/pan映射及Esc/click-away清除；只读overlay不进入导出。 |
+| Files Changed | ColorSpace3DViewport / ReferenceColorWorkspaceView |
+| Automated Test | Batch E Release x64 0 errors; focused WPF 4 PASS / 0 FAIL; full core follows |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-043 — 3D Expand
@@ -691,13 +691,13 @@ UserVerified: false
 | ID | RUX-043 |
 | User Finding | 3D Expand；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 复用大inspection窗、orbit/pan/zoom/reset/fit；展开后立即 bounds-aware fit。 |
+| Files Changed | ColorSpace3DViewport / ReferenceColorWorkspaceView |
+| Automated Test | Batch E Release x64 0 errors; focused WPF 4 PASS / 0 FAIL; full core follows |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-044 — Toolbar 重做

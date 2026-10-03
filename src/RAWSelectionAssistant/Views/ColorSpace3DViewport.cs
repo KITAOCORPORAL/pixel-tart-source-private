@@ -66,10 +66,23 @@ public sealed class ColorSpace3DViewport : FrameworkElement
                 drawing.DrawEllipse(null, new Pen(Brushes.Black, 5), center, 9, 9);
                 drawing.DrawEllipse(null, new Pen(Brushes.White, 2), center, 9, 9);
             }
-        DrawLabel(drawing, $"L*  a*  b*   {State.Mode}   ·   左键旋转 / Shift+左键平移 / 滚轮缩放", new Point(12, Math.Max(12, ActualHeight - 28)));
+        DrawLabel(drawing, "OKLab · 拖动旋转 / Shift 平移", new Point(12, Math.Max(12, ActualHeight - 22)));
         _lastRenderMilliseconds = clock.Elapsed.TotalMilliseconds;
     }
-    private void DrawAxes(DrawingContext drawing) { var center = new Point(ActualWidth / 2, ActualHeight / 2); var pen = new Pen(TryFindResource("DividerBrush") as Brush ?? Brushes.Gray, 1); drawing.DrawLine(pen, new Point(12, center.Y), new Point(Math.Max(12, ActualWidth - 12), center.Y)); drawing.DrawLine(pen, new Point(center.X, 12), new Point(center.X, Math.Max(12, ActualHeight - 12))); DrawLabel(drawing, "a*", new Point(Math.Max(12, ActualWidth - 32), center.Y + 4)); DrawLabel(drawing, "L*", new Point(center.X + 6, 12)); DrawLabel(drawing, "b*", new Point(center.X + 6, Math.Max(12, ActualHeight - 24))); }
+    private void DrawAxes(DrawingContext drawing)
+    {
+        // Project the coordinate guides with the same camera as the real color samples.
+        var neutral = new RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualRgb24(150, 150, 150);
+        ColorSpacePoint Point(double l, double a, double b) => new(new(l, a, b), neutral, 0, 0);
+        var axes = new ColorSpaceCloud(1, 1, 1, 1, [Point(.5, -.4, 0), Point(.5, .4, 0), Point(0, 0, 0), Point(1, 0, 0), Point(.5, 0, -.4), Point(.5, 0, .4)], "axes", new());
+        var points = ColorSpaceProjection.Project(axes, State!.Camera, ActualWidth, ActualHeight);
+        var pen = new Pen(TryFindResource("DividerBrush") as Brush ?? Brushes.Gray, 1);
+        foreach (var (start, end, label) in new[] { (0, 1, "a"), (2, 3, "L"), (4, 5, "b") })
+        {
+            drawing.DrawLine(pen, new Point(points[start].X, points[start].Y), new Point(points[end].X, points[end].Y));
+            DrawLabel(drawing, label, new Point(Math.Clamp(points[end].X, 4, Math.Max(4, ActualWidth - 18)), Math.Clamp(points[end].Y, 4, Math.Max(4, ActualHeight - 38))));
+        }
+    }
     private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }
     private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, 1), origin); }
     private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = _clickStart = e.GetPosition(this); CaptureMouse(); }

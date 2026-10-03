@@ -485,7 +485,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var window = CreateInspectionWindow("3D 色彩空间 · 点击取色 / 拖动旋转 / Shift 拖动平移", panel);
         window.PreviewKeyDown += OnSamplingKeyDown;
         window.Closed += (_, _) => { viewport.SelectionChanged -= ColorSpaceViewport_SelectionChanged; _expandedCloud = null; };
-        window.Show();
+        window.Show(); viewport.FitCamera();
     }
 
     private async void OnInspectImageColor(object sender, RoutedEventArgs e)
@@ -499,7 +499,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
         {
             // The linked cloud contains source colors; display the same source while picking.
             workspace.Editor.ViewMode = "原片";
-            ColorSpaceViewport.FitCamera(); PreviewCanvas.Cursor = Cursors.Cross;
+            ColorSpaceViewport.FitCamera();
+            ColorSpaceSection.IsExpanded = true;
+            PreviewCanvas.Cursor = Cursors.Cross;
             ColorInspectionHint.Visibility = Visibility.Visible; Focus();
         }
     }
