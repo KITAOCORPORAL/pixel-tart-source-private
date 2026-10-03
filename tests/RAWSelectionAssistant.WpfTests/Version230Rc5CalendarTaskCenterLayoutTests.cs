@@ -100,10 +100,11 @@ public sealed class Version230Rc5CalendarTaskCenterLayoutTests
     }
 
     [TestMethod]
-    public void FullCalendar_MonthGridKeepsToolbarLegendWeekdayAndCellsApart()
+    public void FullCalendar_KeepsToolbarWeekdayAndCellsWithoutRedundantLegend()
     {
-        Contains(Read("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml"), "Margin=\"0,14,0,18\"", "Margin=\"0,0,0,12\"");
+        Contains(Read("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml"), "Margin=\"0,14,0,18\"");
         Contains(Read("src/RAWSelectionAssistant/Views/MonthCalendarView.xaml"), "Height=\"36\"", "Margin=\"0,10,0,0\"");
+        Assert.DoesNotContain("四态工作流图例", Read("src/RAWSelectionAssistant/Views/WorkCalendarView.xaml"), StringComparison.Ordinal);
     }
 
     [TestMethod]

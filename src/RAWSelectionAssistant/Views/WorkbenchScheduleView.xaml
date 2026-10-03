@@ -5,7 +5,7 @@
              AutomationProperties.Name="近期拍摄">
     <UserControl.Resources><BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /></UserControl.Resources>
     <Grid>
-        <Border Style="{StaticResource PixelTart.SectionSurface}">
+        <Border Style="{StaticResource PixelTart.SectionSurface}" Background="{DynamicResource SurfaceSecondaryBrush}">
             <Grid>
                 <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                 <Grid>

@@ -35,13 +35,13 @@ UserVerified: false
 | ID | RUX-002 |
 | User Finding | 工作台区域层级不清；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 工作台SectionSurface透明导致区域混在背景；项目/任务/近期安排采用轻微明度差并统一内距，未加粗描边。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/2.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-003 — 素材库顶部搜索框过长
@@ -707,13 +707,13 @@ UserVerified: false
 | ID | RUX-044 |
 | User Finding | Toolbar 重做；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 原toolbar英文标签、项目控件散落末尾；中文画布/工具/编辑/排列/视图/项目分组，project picker归入项目组。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-045 — 新建 / 打开 / 关闭画布
@@ -723,13 +723,13 @@ UserVerified: false
 | ID | RUX-045 |
 | User Finding | 新建 / 打开 / 关闭画布；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 打开/关闭隐藏More，new外挂尾部；生命周期置首组，未保存切换执行保存/放弃/取消，已有自动保存保留。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/22.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-046 — Toolbar 中文化
@@ -739,13 +739,13 @@ UserVerified: false
 | ID | RUX-046 |
 | User Finding | Toolbar 中文化；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | TOOLS/EDIT/VIEW/CANVAS/PROJECT改中文显示，内部类和enum不变。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-047 — Zoom
@@ -755,13 +755,13 @@ UserVerified: false
 | ID | RUX-047 |
 | User Finding | Zoom；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 继续使用Surface.Zoom和唯一_zoomButton，撤销/重做根据editor状态禁用。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-048 — 工作日历顶部冗余
@@ -771,13 +771,13 @@ UserVerified: false
 | ID | RUX-048 |
 | User Finding | 工作日历顶部冗余；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 四态工作流图例独占标题和一行图例；删除该冗余区，日期/筛选/创建与engine保持。 |
+| Files Changed | FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView |
+| Automated Test | Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/17.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 

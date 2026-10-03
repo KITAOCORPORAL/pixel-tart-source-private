@@ -33,15 +33,10 @@ public partial class AssetLibraryPage
     }
     public async Task ShowCanvasAsync(CanvasDocument document)
     {
-        if(_canvas is not null&&!await _canvas.FlushAsync())return;
+        if(_canvas is not null&&!await _canvas.PrepareDocumentChangeAsync())return;
         var store=new CanvasDocumentStore(_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
         _canvas=canvas;
-        var createCanvas = new Button { Content = "新建画布", Margin = new Thickness(4) };
-        createCanvas.SetResourceReference(StyleProperty, "PixelTart.Button.Ghost");
-        System.Windows.Automation.AutomationProperties.SetAutomationId(createCanvas, "ContextNewCanvas");
-        createCanvas.Click += async (_, _) => await ShowCanvasAsync(new CanvasDocument());
-        canvas.HeaderPanel.Children.Add(createCanvas);
         canvas.SourceLoader=(source,search)=>_viewModel.LoadCanvasSourcesAsync(source,search,editor.Document.ProjectId);
         canvas.SaveBoard=(objects,target)=>_viewModel.SaveCanvasBoardAsync(objects,target,editor.Document.ProjectId);
         canvas.BoardLoader=_viewModel.CanvasBoardsAsync;
@@ -52,7 +47,7 @@ public partial class AssetLibraryPage
         var projects=await _viewModel.CanvasProjectsAsync();
         var picker=new ComboBox{Width=220,Margin=new(8,2,8,2),ItemsSource=projects.Select(item=>new CanvasProjectChoice(item.Id,item.Name)).ToArray(),DisplayMemberPath=nameof(CanvasProjectChoice.Name),SelectedValuePath=nameof(CanvasProjectChoice.Id),ToolTip="关联项目"};
         picker.SelectedItem=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==document.ProjectId)??picker.Items[0];
-        picker.SelectionChanged+=(_,_)=>{if(picker.SelectedItem is CanvasProjectChoice item)editor.SetProject(item.Id);};canvas.HeaderPanel.Children.Add(picker);
+        picker.SelectionChanged+=(_,_)=>{if(picker.SelectedItem is CanvasProjectChoice item)editor.SetProject(item.Id);};canvas.ProjectPanel.Children.Add(picker);
         var analyzeProject = new Button { Content="保存配色 / 影调到项目", Margin=new(4), ToolTip="分析选中的照片并保存项目视觉参考" };
         analyzeProject.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");
         analyzeProject.Click += async (_,_) =>
@@ -67,7 +62,7 @@ public partial class AssetLibraryPage
             VisualProjectPicker.SelectedItem=VisualProjectPicker.Items.Cast<VisualProjectChoice>().FirstOrDefault(item=>item.Id==editor.Document.ProjectId);
             LibraryWorkspace.Visibility=Visibility.Visible;CanvasWorkspace.Visibility=Visibility.Collapsed;VisualAnalysisSurface.Visibility=Visibility.Visible;
         };
-        canvas.HeaderPanel.Children.Add(analyzeProject);
+        canvas.ProjectPanel.Children.Add(analyzeProject);
         editor.Changed+=(_,_)=>{var choice=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==editor.Document.ProjectId);if(choice is not null&&!Equals(choice,picker.SelectedItem))picker.SelectedItem=choice;};
         LibraryWorkspace.Visibility=Visibility.Collapsed;
         CanvasWorkspace.Content=canvas;CanvasWorkspace.Visibility=Visibility.Visible;
@@ -78,7 +73,7 @@ public partial class AssetLibraryPage
     private async void CanvasOwnerClosing(object? sender,System.ComponentModel.CancelEventArgs e)
     {
         if(_allowCanvasOwnerClose||_canvas is null)return;e.Cancel=true;
-        if(await _canvas.FlushAsync()){_allowCanvasOwnerClose=true;_canvasOwner?.Close();}
+        if(await _canvas.PrepareDocumentChangeAsync()){_allowCanvasOwnerClose=true;_canvasOwner?.Close();}
         else MessageBox.Show(_canvasOwner,"画布尚未保存成功，请检查存储位置后重试。","画布保存失败",MessageBoxButton.OK,MessageBoxImage.Warning);
     }
     private void CanvasBoardSelectionChanged(object sender,SelectionChangedEventArgs e)

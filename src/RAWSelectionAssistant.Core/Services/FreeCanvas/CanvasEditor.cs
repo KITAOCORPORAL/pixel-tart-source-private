@@ -134,6 +134,24 @@ public sealed class CanvasEditor
     {
         if (Selected.Count > 0) Commit(Document with { Objects = Document.Objects.Select(item => Selection.Contains(item.ObjectId) ? item with { Locked = locked } : item).ToArray() });
     }
+    public void StepLayer(bool forward)
+    {
+        var ordered = Document.Objects.OrderBy(item => item.ZIndex).ToList();
+        var changed = false;
+        if (forward)
+        {
+            for (var i = ordered.Count - 2; i >= 0; i--)
+                if (Editable(ordered[i]) && !Selection.Contains(ordered[i + 1].ObjectId))
+                { (ordered[i], ordered[i + 1]) = (ordered[i + 1], ordered[i]); changed = true; }
+        }
+        else
+        {
+            for (var i = 1; i < ordered.Count; i++)
+                if (Editable(ordered[i]) && !Selection.Contains(ordered[i - 1].ObjectId))
+                { (ordered[i], ordered[i - 1]) = (ordered[i - 1], ordered[i]); changed = true; }
+        }
+        if (changed) Commit(Document with { Objects = ordered.Select((item, index) => item with { ZIndex = index }).ToArray() });
+    }
     public void Layer(bool top)
     {
         var ordered = Document.Objects.OrderBy(item => item.ZIndex).ToArray();
