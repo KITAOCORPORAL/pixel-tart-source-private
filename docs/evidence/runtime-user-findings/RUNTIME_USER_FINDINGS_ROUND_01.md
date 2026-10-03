@@ -451,13 +451,13 @@ UserVerified: false
 | ID | RUX-028 |
 | User Finding | 发布导出全面中文化；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 发布面板和内置配方显示英文；加入中文显示名，保持内部 ID/文件命名 contract。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/3.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-029 — 发布预览黑边
@@ -467,13 +467,13 @@ UserVerified: false
 | ID | RUX-029 |
 | User Finding | 发布预览黑边；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | WPF DrawImage 用像素坐标但 RenderTargetBitmap 用输出 DPI，72 DPI 时只覆盖75%宽高。按96/DPI缩放绘制坐标，水印同链。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/3.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-030 — Publishing 面板
@@ -483,13 +483,13 @@ UserVerified: false
 | ID | RUX-030 |
 | User Finding | Publishing 面板；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | Studio 输出只暴露 Look/LUT；新增已调整图片送入既有 Publishing 的入口，冻结各 target stack/look/film，保留取消和失败摘要。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/3.png, user-before/18.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-031 — 左右布局交换
@@ -499,13 +499,13 @@ UserVerified: false
 | ID | RUX-031 |
 | User Finding | 左右布局交换；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 当前已 LEFT 工具/CENTER 图片/RIGHT 参考/BOTTOM filmstrip；遵照文字目标保留分工，不因箭头反向改动。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-032 — Main Image 仍然最大
@@ -515,13 +515,13 @@ UserVerified: false
 | ID | RUX-032 |
 | User Finding | Main Image 仍然最大；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 既有右栏折叠/窄窗 overlay 与展开参考视图保留；选中 filmstrip 背景明确，边框厚度固定避免移动。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-033 — Reference Navigator
@@ -531,13 +531,13 @@ UserVerified: false
 | ID | RUX-033 |
 | User Finding | Reference Navigator；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 复用300 DIP navigator、Fit/100%/zoom/pan及独立展开窗，无第二套 viewport。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | 文字反馈；无独立截图 |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-034 — 去重复标签
@@ -547,13 +547,13 @@ UserVerified: false
 | ID | RUX-034 |
 | User Finding | 去重复标签；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 参考列表重复显示48px缩略图；移除重复图像，保留一份名称/来源/权重。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/18.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-035 — Stable / MatchV4Beta 中文化
@@ -563,13 +563,13 @@ UserVerified: false
 | ID | RUX-035 |
 | User Finding | Stable / MatchV4Beta 中文化；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | ComboBox 直接绑定 enum；使用中文显示 converter，内部 enum不变。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/21.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-036 — Filmstrip Context Menu
@@ -579,13 +579,13 @@ UserVerified: false
 | ID | RUX-036 |
 | User Finding | Filmstrip Context Menu；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | Filmstrip 只响应左键，没有右键菜单。接入真实评分/颜色/复制应用/同步/导出/移出，已选右键保留多选。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-037 — Filmstrip Selection
@@ -595,13 +595,13 @@ UserVerified: false
 | ID | RUX-037 |
 | User Finding | Filmstrip Selection；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 复用单/Ctrl/Shift选择与active独立模型；强调正在编辑标签及背景，固定边框尺寸。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-038 — Filmstrip Sync Buttons
@@ -611,13 +611,13 @@ UserVerified: false
 | ID | RUX-038 |
 | User Finding | Filmstrip Sync Buttons；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 新增明确复制当前调整和应用已复制调整；同步所选/全部保留原engine，metadata不复制。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-039 — 高质量预览任务
@@ -627,13 +627,13 @@ UserVerified: false
 | ID | RUX-039 |
 | User Finding | 高质量预览任务；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 保留已有source/frame cache、latest activation/cancel/idle所有权；界面补可见停止预览按钮。 |
+| Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
+| Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | 文字反馈；无独立截图 |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-040 — 3D 点云视觉

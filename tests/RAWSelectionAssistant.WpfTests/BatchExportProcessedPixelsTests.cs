@@ -14,6 +14,41 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class BatchExportProcessedPixelsTests
 {
     [TestMethod]
+    public async Task CopiedAdjustmentsRemainFrozenAndProtectFilmstripMetadata()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-RUX-D-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(folder);
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder), new PixelBackend());
+        var first = new ReferenceTargetItem(CreatePng(folder, "first", 70, 80, 90)) { AppliedLookSnapshot = Look("red"), IsSelected = true };
+        var second = new ReferenceTargetItem(CreatePng(folder, "second", 30, 90, 120)) { AppliedLookSnapshot = Look("blue"), Rating = 4, ColorLabel = "蓝" };
+        workspace.Targets.Add(first); workspace.Targets.Add(second);
+        await workspace.ActivateTargetCommand.ExecuteAsync(first);
+        Assert.IsTrue(workspace.CopyAdjustmentsCommand.CanExecute(null));
+        workspace.CopyCurrentAdjustments();
+        first.IsSelected = false; second.IsSelected = true;
+        await workspace.ActivateTargetCommand.ExecuteAsync(second);
+        workspace.ApplyCopiedAdjustments();
+        Assert.AreEqual("red", second.AppliedLookSnapshot!.Name);
+        Assert.AreEqual(4, second.Rating); Assert.AreEqual("蓝", second.ColorLabel);
+        Assert.AreEqual("red", workspace.Editor.SelectedLook!.Name);
+    }
+
+    [TestMethod]
+    public async Task PublishingReceivesProcessedFrozenTargetsInsteadOfOriginalFiles()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "PixelTart-RUX-D-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(folder);
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(folder), new PixelBackend());
+        var first = new ReferenceTargetItem(CreatePng(folder, "first", 70, 80, 90)) { AppliedLookSnapshot = Look("red"), IsSelected = true };
+        var second = new ReferenceTargetItem(CreatePng(folder, "second", 30, 90, 120)) { AppliedLookSnapshot = Look("blue"), IsSelected = true };
+        workspace.Targets.Add(first); workspace.Targets.Add(second);
+        IReadOnlyList<string>? paths = null;
+        workspace.OpenPublishing = values => paths = values;
+        await workspace.PreparePublishingCommand.ExecuteAsync(null);
+        Assert.IsNotNull(paths); Assert.HasCount(2, paths);
+        Assert.IsTrue(paths.All(path => File.Exists(path) && path != first.Path && path != second.Path));
+        Assert.IsFalse(workspace.IsExporting);
+    }
+
+    [TestMethod]
     public async Task AsyncCommandStillRejectsReentryByDefault()
     {
         var release = new TaskCompletionSource(); var calls = 0;

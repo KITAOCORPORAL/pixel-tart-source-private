@@ -14,6 +14,27 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class PublishingRenderingTests
 {
     [TestMethod]
+    [DataRow(72)] [DataRow(96)] [DataRow(150)] [DataRow(300)]
+    public async Task PortraitExportFillsPixelBoundsAtEveryOutputDpi(int dpi)
+    {
+        using var temp = new TemporaryDirectory();
+        var source = temp.File("portrait.png");
+        var pixels = Enumerable.Repeat((byte)170, 80 * 120 * 3).ToArray();
+        var image = BitmapSource.Create(80, 120, 96, 96, PixelFormats.Rgb24, null, pixels, 80 * 3);
+        var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(image));
+        using (var file = File.Create(source)) encoder.Save(file);
+        var output = temp.File("out.png");
+        await new WpfPublishingRenderer().RenderAsync(source, output,
+            new(new(false, Dpi: dpi), false, [], PublishingOutputFormat.Png));
+        using var stream = File.OpenRead(output);
+        var frame = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad).Frames[0];
+        Assert.AreEqual(80, frame.PixelWidth); Assert.AreEqual(120, frame.PixelHeight);
+        var rgb = new FormatConvertedBitmap(frame, PixelFormats.Rgb24, null, 0);
+        var actual = new byte[pixels.Length]; rgb.CopyPixels(actual, 240, 0);
+        Assert.IsTrue(actual.All(channel => channel >= 165 && channel <= 175), "DPI metadata must not crop or add unpainted borders to the photograph.");
+    }
+
+    [TestMethod]
     public async Task PublishingTiff16PreservesMoreThanEightBitLevelsAfterResizeAndEmbedsOutputIcc()
     {
         using var temp = new TemporaryDirectory();

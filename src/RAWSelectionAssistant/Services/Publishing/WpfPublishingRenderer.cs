@@ -41,9 +41,14 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer
         var drawing = new DrawingVisual();
         using (var context = drawing.RenderOpen())
         {
+            // Drawing coordinates are output pixels. WPF drawing units are 1/96 inch;
+            // compensate for output metadata DPI so the entire bitmap is covered.
+            var pixelToDip = 96d / options.EffectiveDimensions.Dpi;
+            context.PushTransform(new ScaleTransform(pixelToDip, pixelToDip));
             context.DrawImage(frame, new Rect(0, 0, width, height));
             if (options.WatermarksEnabled)
                 foreach (var layer in options.EffectiveWatermarkLayers.Where(layer => layer.Enabled)) DrawLayer(context, layer, width, height, cancellationToken);
+            context.Pop();
         }
         var bitmap = new RenderTargetBitmap(width, height, options.EffectiveDimensions.Dpi, options.EffectiveDimensions.Dpi, PixelFormats.Pbgra32); bitmap.Render(drawing); bitmap.Freeze();
         var metadata = CreateOutputMetadata(originalFrame, options);

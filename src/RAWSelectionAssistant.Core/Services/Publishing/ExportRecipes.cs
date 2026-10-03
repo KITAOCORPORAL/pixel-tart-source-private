@@ -24,6 +24,15 @@ public sealed record ExportRecipe(
     string FilenameTemplate = "{name}_{recipe}",
     string Destination = "Exports")
 {
+    public string DisplayName => Id.ToString() switch
+    {
+        "5cf7c4f6-e1a1-4a56-9cb2-1e4f0b70b8b1" when Name == "Web / Social" => "网络 / 社交媒体",
+        "f7e4fce4-8d43-49fd-9f4c-1f7e44ce4f31" when Name == "Client Full Resolution" => "客户交付 · 全分辨率",
+        "15c14a24-86d3-46d8-b5c1-2f4a927ad4bd" when Name == "TIFF16 Retouch" => "TIFF16 精修",
+        "a9eb7c84-bb3d-4e0d-a1f4-53d6e8a0db2d" when Name == "Print" => "打印",
+        _ => Name
+    };
+
     public ExportRecipe Validate()
     {
         if (Id == Guid.Empty || string.IsNullOrWhiteSpace(Name)) throw new ArgumentException("Export recipe identity and name are required.");

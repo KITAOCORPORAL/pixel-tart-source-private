@@ -256,7 +256,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void OnFilmstripMouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton != MouseButton.Left) return;
+        if (e.ChangedButton is not (MouseButton.Left or MouseButton.Right)) return;
         if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
         if (e.OriginalSource is not DependencyObject source) return;
         for (DependencyObject? ancestor = source; ancestor is not null;
@@ -264,6 +264,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
             if (ancestor is PixelTartRatingControl) return;
         var item = ItemsControl.ContainerFromElement(FindFilmstrip(), source) as ListBoxItem;
         if (item?.DataContext is not ReferenceTargetItem target) return;
+        if (e.ChangedButton == MouseButton.Right)
+        {
+            if (!target.IsSelected) foreach (var photo in workspace.Targets) photo.IsSelected = ReferenceEquals(photo, target);
+            OpenFilmstripMenu(item, target, workspace); e.Handled = true; return;
+        }
         var index = workspace.Targets.IndexOf(target); _filmstripDownPoint = e.GetPosition(this);
         var modifiers = Keyboard.Modifiers;
         _selectionAnchor = workspace.SelectFilmstripTarget(index, _selectionAnchor,
@@ -272,6 +277,40 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (!ReferenceEquals(workspace.ActiveTarget, target) || workspace.IsLoading) workspace.ActivateTargetCommand.Execute(target);
         e.Handled = true;
     }
+    private void OpenFilmstripMenu(ListBoxItem anchor, ReferenceTargetItem target, ReferenceColorWorkspaceViewModel workspace)
+    {
+        var menu = new ContextMenu { PlacementTarget = anchor, Style = (Style)FindResource("PixelTart.Menu.Context") };
+        MenuItem Action(string title, System.Windows.Input.ICommand command, object? parameter = null) => new() { Header = title, Command = command, CommandParameter = parameter, Style = (Style)FindResource("PixelTart.Menu.Item") };
+        menu.Items.Add(Action("查看 / 设为当前图", workspace.ActivateTargetCommand, target));
+        var rating = new MenuItem { Header = "评分" };
+        for (var value = 0; value <= 5; value++)
+        {
+            var current = value; var choice = new MenuItem { Header = value == 0 ? "清除评分" : new string('★', value) };
+            choice.Click += (_, _) => { foreach (var photo in workspace.SelectedTargets.ToArray()) photo.Rating = current; };
+            rating.Items.Add(choice);
+        }
+        menu.Items.Add(rating);
+        var color = new MenuItem { Header = "颜色标记" };
+        foreach (var name in new[] { "", "红", "橙", "黄", "绿", "蓝", "紫" })
+        {
+            var current = name; var preview = new ReferenceTargetItem("") { ColorLabel = name };
+            var choice = new MenuItem { Header = new Border { Width = 30, Height = 16, Background = preview.ColorLabelBrush, BorderBrush = Brushes.Gray, BorderThickness = new Thickness(1), CornerRadius = new CornerRadius(3) }, ToolTip = preview.ColorLabelAccessibleName };
+            System.Windows.Automation.AutomationProperties.SetName(choice, preview.ColorLabelAccessibleName);
+            choice.Click += (_, _) => { foreach (var photo in workspace.SelectedTargets.ToArray()) photo.ColorLabel = current; };
+            color.Items.Add(choice);
+        }
+        menu.Items.Add(color); menu.Items.Add(new Separator());
+        menu.Items.Add(Action("复制当前调整", workspace.CopyAdjustmentsCommand));
+        menu.Items.Add(Action("应用已复制调整", workspace.ApplyAdjustmentsCommand));
+        menu.Items.Add(Action("同步到所选", workspace.SyncSelectedCommand));
+        menu.Items.Add(new Separator()); menu.Items.Add(Action("导出所选", workspace.ExportSelectedCommand));
+        menu.Items.Add(Action("发布配方…", workspace.PreparePublishingCommand));
+        menu.Items.Add(new Separator());
+        var remove = new MenuItem { Header = "从当前批次移除", IsEnabled = !workspace.IsExporting };
+        remove.Click += async (_, _) => await workspace.RemoveSelectedFromBatchAsync(); menu.Items.Add(remove);
+        menu.IsOpen = true;
+    }
+
     private ListBox? FindFilmstrip() => FindName("Filmstrip") as ListBox;
 
     private void OnFilmstripKeyDown(object sender, KeyEventArgs e)
@@ -471,4 +510,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         Width = Math.Min(1000, SystemParameters.WorkArea.Width * .85), Height = Math.Min(780, SystemParameters.WorkArea.Height * .85),
         Background = (Brush)FindResource("CanvasBackgroundBrush"), WindowStartupLocation = WindowStartupLocation.CenterOwner
     };
+}
+
+public sealed class MatchEngineLabelConverter : System.Windows.Data.IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => value.ToString() switch
+    { "Stable" => "稳定版", "MatchV4Beta" => "V4 匹配实验版", _ => value.ToString() ?? "" };
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => DependencyProperty.UnsetValue;
 }
