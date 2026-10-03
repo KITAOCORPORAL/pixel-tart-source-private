@@ -1,7 +1,7 @@
-# RUX-010
+# RUX-010 — 标签允许多个
 
-1. 对同一素材连续添加两个标签，确认两个独立 chips。
-2. 移除其中一条，只删该关系；刷新/重启，另一条仍在。
-3. 多选有不同标签的素材，检查成员数量与批量行为。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-状态：NOT_RUN；待对照用户原始截图。请保留 Windows 当前缩放，优先 150%。before.png / after.png 尚未采集。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

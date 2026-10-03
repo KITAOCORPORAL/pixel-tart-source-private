@@ -1,14 +1,13 @@
-# Color Studio checklist
+# 参考仿色（约 5 分钟）
 
-- [ ] Open 参考仿色 directly from the left primary navigation; selected route/title are clear and Toolbox has no duplicate card.
-- [ ] Reference Navigator is usable at Fit/100%/zoom/pan; Expand opens a larger reference while preserving target space.
-- [ ] Confirm the workspace opens in one professional layout; no Simple/Professional switch is needed.
-- [ ] Main target image remains the largest visual surface.
-- [ ] Reference, Analysis, and 3D areas have clear ownership; Filmstrip remains at the bottom.
-- [ ] Switch filmstrip image with a single click; Ctrl multi-select; Shift range select; verify selected count.
-- [ ] Switch quickly between two targets while rendering. The latest click wins, the current target says “正在编辑”, and the finished preview stops showing a processing state.
-- [ ] Confirm rating, color label, processing state, and original aspect ratio are visible in the filmstrip.
-- [ ] Adjust the current image, select multiple targets, and run Sync To Selected.
-- [ ] Open Copy / Apply Adjustments, select only the needed categories, and confirm protected asset fields are unchanged.
-- [ ] Confirm sync changes look/match parameters only; rating, label, tags, folders, metadata, filename, and project relationship stay unchanged.
-- [ ] Run a batch export and verify progress, cancel, per-item state, and partial failure reporting.
+- [ ] 一级导航“参考仿色”进入正确页面；左工具、中主图、右参考、底部Filmstrip。
+- [ ] 参考图 Fit / 100% / 缩放 / 拖动 / 展开可看细节；右栏折叠后主图扩大。
+- [ ] 点击前两张，主图真实切换；Ctrl多选、Shift连选；当前编辑图与其他选中图容易区分。
+- [ ] Filmstrip右键评分/颜色、复制/应用、同步、导出、移出批次均明确；评分颜色回素材库一致。
+- [ ] 复制当前调整后切图再应用；同步所选不改变评分、颜色、标签与文件夹。
+- [ ] 快速切图、停止预览，状态能恢复；未改参数再次切回不一直计算。
+- [ ] “发布配方…”接收选中图片的各自调整；图片名保留；出现失败时有逐项摘要。
+- [ ] 发布页为中文，竖图预览和导出没有被写进图片的黑边。
+- [ ] 不勾选“按所选配方输出”时按当前格式/尺寸/ICC；勾选后按明确所选配方。位深显示符合格式。
+
+当前位深：JPEG/PNG 8位，TIFF16位。ICC只列出本机现有支持配置；不代表全ICC链路已完成验收。

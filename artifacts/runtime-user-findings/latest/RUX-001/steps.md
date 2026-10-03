@@ -1,5 +1,7 @@
-# RUX-001
+# RUX-001 — 一级导航重复 Tooltip
 
-1. 展开侧栏，在“素材库”等带名称入口上悬停，不应显示同名 tooltip；折叠侧栏后纯图标仍有提示。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-状态：NOT_RUN；待对照用户原始截图。请保留 Windows 当前缩放，优先 150%。before.png / after.png 尚未采集。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

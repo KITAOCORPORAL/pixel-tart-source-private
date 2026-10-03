@@ -1,0 +1,131 @@
+{
+  "releaseSourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "testHead": "d195fb1cc6a439dab2e20bafaf03d29b07bedc80",
+  "runtime": "NOT_RUN",
+  "visualApproved": false,
+  "userVerified": false,
+  "testhost": "EXIT_0_NO_CRASH",
+  "suites": {
+    "Core": {
+      "file": "core-closure.trx",
+      "counts": {
+        "total": "1534",
+        "executed": "1530",
+        "passed": "1530",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "sha256": "9e51f0ef9014548800800e57cf9e5c2800ff700eaa66c95fff478d5524d6a1c5"
+    },
+    "WPF": {
+      "file": "wpf-final-green.trx",
+      "counts": {
+        "total": "1432",
+        "executed": "1421",
+        "passed": "1421",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "sha256": "e0dc087dd63d43dc8f7e866ba75e67e536b9b9cbbfd2f83f2a7539b2d048c900"
+    },
+    "DPI": {
+      "file": "dpi-closure.trx",
+      "counts": {
+        "total": "91",
+        "executed": "91",
+        "passed": "91",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "sha256": "991d65e95fb01329b5de09cec7767af95330e1d757d31151830bebbf1d05c0af"
+    }
+  },
+  "subsets": {
+    "Asset": {
+      "passed": 520,
+      "failed": 0,
+      "skipped": 2,
+      "testCount": 522
+    },
+    "ColorStudio": {
+      "passed": 118,
+      "failed": 0,
+      "skipped": 1,
+      "testCount": 119
+    },
+    "ReferenceMatch": {
+      "passed": 51,
+      "failed": 0,
+      "skipped": 3,
+      "testCount": 54
+    },
+    "3D": {
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 39
+    },
+    "FreeCanvas": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 23
+    },
+    "Guardian": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "testCount": 10
+    }
+  },
+  "subsetNote": "Overlapping subsets of full suites; counts must not be added to totals.",
+  "dpiEvidenceBoundary": {
+    "artifactSourceHead": "de4c91a67c9146b5272bf20e10360172c4bf6189",
+    "currentReleaseAfterCaptures": 0,
+    "logicalScales": [
+      100,
+      125,
+      150,
+      200
+    ],
+    "logicalResolutions": [
+      "1180x720",
+      "1600x920",
+      "1920x1080"
+    ],
+    "physicalDpi": "NOT_RUN"
+  }
+}

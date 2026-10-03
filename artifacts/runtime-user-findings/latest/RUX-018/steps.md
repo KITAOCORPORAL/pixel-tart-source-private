@@ -1,7 +1,7 @@
 # RUX-018 — Inspector Export
 
-1. 使用本批真实 Release，按用户截图相同路径操作。
-2. 优先 Windows 150%，记录实际窗口分辨率。
-3. 保存真实 before.png / after.png，填写观察到的结果。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-当前：NOT_RUN。截图未提供，操作路径待对照；禁止把自动测试结果作为 runtime 结果。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

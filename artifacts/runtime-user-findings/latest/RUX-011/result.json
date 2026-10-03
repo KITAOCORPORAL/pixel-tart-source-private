@@ -1,7 +1,7 @@
 {
   "id": "RUX-011",
-  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
-  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "sourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-final/publish/win-x64/KitaoPhotoSelector.exe",
   "dpi": null,
   "resolution": null,
   "steps": [
@@ -9,10 +9,29 @@
     "检查“已选标签/可用标签”；混合多选显示部分选中。",
     "Esc 或点击外部关闭；打开其他 popup 时仅保留一个；Gallery 不移动。"
   ],
-  "result": "BLOCKED",
-  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
-  "beforeEvidence": null,
+  "result": "FIXED_IN_CODE",
+  "reason": "根据25张用户截图修复/核对既有实现；Build/Test与实机验收分开。等待用户统一实机验收。",
+  "beforeEvidence": [
+    "user-before/8.png",
+    "user-before/9.png",
+    "user-before/10.png"
+  ],
   "afterEvidence": null,
   "USER_APPROVED": false,
-  "codeStatus": "FIXED_IN_CODE"
+  "codeStatus": "FIXED_IN_CODE",
+  "runtimeTest": "NOT_RUN",
+  "userApproved": false,
+  "visualApproved": false,
+  "userVerified": false,
+  "runtimePolicy": "用户统一实机验收，自动化只执行 Build/Test",
+  "rootCause": "缺少选中素材的搜索/已选/可用/勾选/新建标签选择器。现借用现有 single-active ContextMenu manager，stale-selection guard 防止误写。",
+  "code": "AssetInspectorTagPicker.xaml(.cs) / AssetLibraryPage.Popups.cs / InspectorRelations.cs",
+  "automatedTest": "标签创建/搜索/选中切换/空选择禁用/过期操作保护通过；Overlay 鼠标与键盘待 runtime。",
+  "userAcceptance": "NOT_APPROVED",
+  "automatedGate": {
+    "summary": "tests/TEST_SUMMARY.json",
+    "core": "1530 PASS / 0 FAIL / 4 SKIP",
+    "wpf": "1421 PASS / 0 FAIL / 11 SKIP",
+    "dpi": "91 PASS (historical artifact boundary documented)"
+  }
 }

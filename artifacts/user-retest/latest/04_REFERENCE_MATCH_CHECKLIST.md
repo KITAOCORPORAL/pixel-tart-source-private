@@ -1,7 +1,7 @@
-# Reference Match checklist
+# 参考仿色结果（约 2 分钟）
 
-- [ ] Confirm V3 remains the production engine.
-- [ ] If V4 is available, choose it explicitly and verify EngineVersion is visible in edit state.
-- [ ] Verify Strength 0% produces identity color mathematics for JPEG, TIFF16, and high precision sources in Preview and Export.
-- [ ] Compare Preview Proxy and Full Resolution Export using the same Source, Reference, Settings, EngineVersion, and ICC intent; accept only documented mean/max/tone/color tolerances.
-- [ ] Confirm Preview does not silently use a different operation order from Export.
+- [ ] 使用稳定V3，Strength设为0%时画面恢复原色。
+- [ ] 改参数看预览，导出后由你检查效果是否一致。
+- [ ] 两张图片使用不同调整，批量导出应分别使用各自参数。
+
+旧TIFF16/高精度完整parity结论已被撤回，不能用这份清单或单张肉眼比较替代测量证据。V4仍实验性；不要求本轮验收它。

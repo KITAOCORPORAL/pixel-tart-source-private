@@ -1,6 +1,7 @@
-# RUX-006
+# RUX-006 — 左侧组织区顺序
 
-1. 确认组织顺序为智能文件夹、标签分组、分隔线、文件夹。
-2. 分别点击智能文件夹和标签组，观察 Gallery 按真实条件变化。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-状态：NOT_RUN；待对照用户原始截图。请保留 Windows 当前缩放，优先 150%。before.png / after.png 尚未采集。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

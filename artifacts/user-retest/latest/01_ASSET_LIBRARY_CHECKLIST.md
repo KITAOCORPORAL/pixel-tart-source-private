@@ -1,18 +1,10 @@
-# Asset Library checklist
+# 素材库（约 4 分钟）
 
-- [ ] Gallery no longer has a persistent “素材网格 / 素材瀑布流 · XX项” title. Smart Folders and Tag Groups appear above Folders and still filter the gallery.
-- [ ] Import JPG, PNG, and TIFF; confirm stored and Inspector dimensions agree, including EXIF orientation 1/6/8.
-- [ ] Backfill an existing missing-dimension asset.
-- [ ] Verify rating 0 → 1 → 3 → 5 → clear in thumbnail, Inspector, query, popup, and after restart.
-- [ ] Verify Color, Tag, Rating, Date, Sort, View, More, and Advanced Filter popup separation.
-- [ ] Check context menu at center, edges, and bottom; open a two-level submenu.
-- [ ] Confirm right-click preserves a selected multi-selection when the target is selected.
-- [ ] Check min, middle, and max thumbnail size; max should approach one-image layout without stretching.
-- [ ] Click Folder, Smart Folder, Tag Group, and Tag; confirm query, gallery, and selected state.
-- [ ] Check long folder names for ellipsis and tooltip.
-- [ ] Open Duplicate Finder and compare at least two images side by side.
-- [ ] Check similarity explanation uses available color, aspect, and composition data only.
-- [ ] Confirm ordinary hover does not open Quick Loupe; magnifier does; Leave closes; double-click opens Viewer.
-- [ ] Quick Loupe fits the image without a large gray padded card. Compare remains a separate workspace.
-- [ ] Open Visual Analysis: inspect Palette, RGB + Luma histogram, and five tone-zone ratios with contrast. Judge readability yourself.
-- [ ] Confirm Inspector Export is a real export action.
+- [ ] 搜索框紧凑；普通搜索只搜文字；智能文件夹、标签分组排在文件夹上方。
+- [ ] 长文件夹名省略且有提示；只按名称查找文件夹。
+- [ ] 导入 JPG / PNG / TIFF，Inspector 显示原图尺寸。评分、颜色切换后回到素材库一致。
+- [ ] 顶部“＋ 筛选”固定/取消固定；颜色筛选可拖色板，标签选择可连续勾选，浮层不挤动图片。
+- [ ] 悬停放大镜显示图片，移开立即关闭；双击是完整查看器。
+- [ ] Inspector 分组清楚，标签可搜索/新建/增删，快速工具中能导出图片。
+- [ ] 智能文件夹改条件出现真实数量；保存重开条件保留；删除定义后照片仍在。
+- [ ] 缩略图滑块最小/中间/最大符合预期；打开调色板、RGB/Luma直方图和影调分析。

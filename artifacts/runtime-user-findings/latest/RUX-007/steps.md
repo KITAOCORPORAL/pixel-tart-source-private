@@ -1,6 +1,7 @@
-# RUX-007
+# RUX-007 — 文件夹树重新设计
 
-1. 创建父/子文件夹，展开/收起，检查箭头、图标、名称、计数、缩进。
-2. 悬停与选中有明确反馈；长名称省略并能通过 tooltip 看全；新建行与普通行密度一致。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-状态：NOT_RUN；待对照用户原始截图。请保留 Windows 当前缩放，优先 150%。before.png / after.png 尚未采集。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

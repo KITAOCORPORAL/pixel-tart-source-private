@@ -1,8 +1,6 @@
-# Context menu checklist
+# 右键菜单（约 2 分钟）
 
-- [ ] Menu answers actions for the selected photo set and uses grouped View, Open, Create/Use, Organize, Visual, Adjustment, Export, File, and Destructive sections.
-- [ ] Unavailable actions are visibly disabled and do not silently no-op.
-- [ ] Existing shortcut hints match the application shortcut contract.
-- [ ] Right click a selected photo keeps the current multi-selection; right click an unselected photo follows the single-selection policy.
-- [ ] Rating, color, folder, and Open With children remain menus rather than dashboard popups.
-- [ ] Check submenu placement at 100%, 125%, 150%, and 200% DPI near every screen edge.
+- [ ] 多选后右键其中一张，多选保留；右键未选图片切成该图。
+- [ ] 颜色子菜单以色块为主，没有巨大空背景；评分显示星星/清除评分。
+- [ ] 在屏幕边缘展开两级菜单，不挡父菜单文字，不出屏，不误关闭。
+- [ ] 菜单/标签浮层打开关闭时 Gallery、Inspector 没有跳动。

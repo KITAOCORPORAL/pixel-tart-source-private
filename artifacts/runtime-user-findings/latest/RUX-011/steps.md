@@ -1,7 +1,7 @@
-# RUX-011
+# RUX-011 — 标签选择器
 
-1. 点击“添加标签”，在同一选择器内搜索、勾选、取消勾选、新建一条，再添加另一条。
-2. 检查“已选标签/可用标签”；混合多选显示部分选中。
-3. Esc 或点击外部关闭；打开其他 popup 时仅保留一个；Gallery 不移动。
+1. 使用本轮Release，按user-before中对应截图与复测清单操作。
+2. 推荐保持当前Windows150%环境，不要求切换DPI或填写技术日志。
+3. 发现问题，截图 + 一句话即可。
 
-状态：NOT_RUN；待对照用户原始截图。请保留 Windows 当前缩放，优先 150%。before.png / after.png 尚未采集。
+Runtime=NOT_RUN；UserAcceptance=NOT_APPROVED。你提供的Before截图已保留；未自动生成After截图，不替你勾选通过。

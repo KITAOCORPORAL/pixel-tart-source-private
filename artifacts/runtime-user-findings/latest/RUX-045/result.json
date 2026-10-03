@@ -1,15 +1,32 @@
 {
   "id": "RUX-045",
-  "sourceHead": "11e6eddd5e5974ce73de8ab9cdf1702bd6284c18",
-  "runtimeExe": null,
+  "sourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-final/publish/win-x64/KitaoPhotoSelector.exe",
   "dpi": null,
   "resolution": null,
   "steps": [
     "按用户截图路径复测：新建 / 打开 / 关闭画布"
   ],
-  "result": "BLOCKED",
-  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
-  "beforeEvidence": null,
+  "result": "FIXED_IN_CODE",
+  "reason": "根据25张用户截图修复/核对既有实现；Build/Test与实机验收分开。等待用户统一实机验收。",
+  "beforeEvidence": [
+    "user-before/22.png"
+  ],
   "afterEvidence": null,
-  "USER_APPROVED": false
+  "USER_APPROVED": false,
+  "runtimeTest": "NOT_RUN",
+  "userApproved": false,
+  "visualApproved": false,
+  "userVerified": false,
+  "runtimePolicy": "用户统一实机验收，自动化只执行 Build/Test",
+  "rootCause": "打开/关闭隐藏More，new外挂尾部；生命周期置首组，未保存切换执行保存/放弃/取消，已有自动保存保留。",
+  "code": "FreeCanvasView / AssetLibraryPage.Canvas / CanvasEditor / WorkCalendarView / MainWindow / WorkbenchScheduleView",
+  "automatedTest": "Batch F Release x64 0 errors; WPF Calendar/Workbench 249 PASS / 0 FAIL; Canvas tests included in full gate",
+  "userAcceptance": "NOT_APPROVED",
+  "automatedGate": {
+    "summary": "tests/TEST_SUMMARY.json",
+    "core": "1530 PASS / 0 FAIL / 4 SKIP",
+    "wpf": "1421 PASS / 0 FAIL / 11 SKIP",
+    "dpi": "91 PASS (historical artifact boundary documented)"
+  }
 }

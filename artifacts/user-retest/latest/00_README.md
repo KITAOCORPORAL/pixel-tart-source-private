@@ -1,25 +1,31 @@
-# Pixel Tart Runtime UX Correction — User Retest
+# Pixel Tart 截图问题修正版
 
-Release EXE: `artifacts/releases/runtime-ux-correction/publish/win-x64/KitaoPhotoSelector.exe`
-SourceHead: `d497e9b207e98c5a907485dfd85555e33e157a4a`
-Manifest: `artifacts/releases/runtime-ux-correction/release-manifest.json` (EXE, actual application DLL and all publish-file hashes).
+Release SourceHead: `8f9a28f3c21bcf41e24e700024d14a8648fde5b5`
 
-This build contains the supplied runtime corrections, not a claim that the original handoff is complete. The required DOCX, latest recording and instructions after section 25 are still unavailable. The reopened matrix is `docs/evidence/human-review/POST_VIDEO_RUNTIME_REVIEW_MATRIX.md`.
+EXE：`N:\pixart\pixel-tart-source-private\artifacts\releases\runtime-user-findings-final\publish\win-x64\KitaoPhotoSelector.exe`
 
-Release x64 user visual approval checklist. Please open the Release EXE and mark each item yourself after checking the stated workflow. `VisualApproved=false` and `UserVerified=false` until you do so.
+Manifest：`artifacts/releases/runtime-user-findings-final/release-manifest.json`。记录 EXE、实际应用 DLL 和全部 287 个发布文件 SHA256。后续仅文档/证据提交不改变此 SourceHead。
 
-- Start at 150% Windows scaling. The other DPI states are optional.
-- If something looks wrong, take a screenshot and add one sentence describing it. No technical log is required.
+本次根据 G:/UI问题/ 的25张截图及完整RUX-001～048指令修正。按你的确认，各批Build/Test完成后由你统一实机验收。所有RUX Runtime仍为NOT_RUN，VisualApproved=false，UserVerified=false。
 
-## Order (15–20 minutes)
+## 15～20分钟顺序
 
-1. Asset Library: import one JPG/PNG/TIFF, rate it, open the context menu, and check one edge submenu.
-2. Color Studio: open a target and reference, inspect Navigator Fit/100%/zoom/pan, select two filmstrip targets, sync, then run a small export.
-3. 3D: build the cloud, sample image → cloud and cloud → image, then press Esc to clear the preview overlay.
-4. Free Canvas: import one landscape and one portrait image, use Fit and the zoom menu, save, close, and reopen.
+1. 素材库、智能文件夹和右键菜单（6分钟）。
+2. 参考仿色、Filmstrip、发布导出（5分钟）。
+3. 参考仿色预览/导出（2分钟）。
+4. 3D双向反馈（2分钟）。
+5. 自由画布与工作台/日历（3分钟）。
 
-The Release EXE is the only approval surface. Keep `VisualApproved=false` and `UserVerified=false` until you personally finish the retest.
+建议优先使用当前150%环境。不需要技术日志，反馈“截图 + 一句话”即可。Observer、Recorder、自动操作关闭。
 
-Known automated limitations: the old full parity closure was invalidated; current synthetic equal-resolution JPEG comparison does not establish TIFF16/high precision, ICC or proxy/full-resolution corpus parity. Existing DPI artifact tests refer to older captures, not this build. Physical camera tethering is `WAITING_FOR_HARDWARE`; GPU remains `DEFERRED`.
+## 证据边界
 
+- 修复账本：`docs/evidence/runtime-user-findings/RUNTIME_USER_FINDINGS_ROUND_01.md`。25张原始截图的hash见user-before/manifest.json；原截图版本和DPI未知。
+- 没有本轮自动After截图；历史DPI截图不能代表新Release。DPI测试中的artifact校验仍读取de4c91a旧证据。
+- 原始DOCX和录屏未找到，不声称看过；这次使用你提供的25张截图和完整RUX文字。
+- 旧TIFF16/高精度完整parity结论已撤回；本轮发布像素覆盖测试、调整隔离测试不构成完整ICC/RAW语料parity。
+- V4仍实验性；GPU/Variant/Film路线不扩展。Physical Tether=WAITING_FOR_HARDWARE。
 
+请从00_START_HERE.md开始，清单不预勾PASS。
+
+自动门：Core1530/0/4，WPF1421/0/11，DPI91/0。Release已启动，主窗口可见，无立即崩溃；实机体验仍由你验收。

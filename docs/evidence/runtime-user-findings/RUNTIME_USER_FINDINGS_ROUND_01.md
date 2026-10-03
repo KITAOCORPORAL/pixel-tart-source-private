@@ -10,7 +10,7 @@ UserVerified: false
 
 本账本独立于历史 HR 矩阵。用户文字反馈是重新打开问题的依据；现已读取 G:/UI问题/ 的 25 张截图（证据清单见 artifacts/runtime-user-findings/latest/user-before/manifest.json）；截图源版本和 DPI 未知。测试通过不代表 Runtime 或用户通过。
 
-执行门：A → B → C → D → E → F → G。用户最新确认：逐批修复并 Build/Test，全部完成后由用户统一实机验收。Batch A 已完成代码和自动测试；后续按顺序推进。禁止自动截图、Computer Use 或修改 DPI。
+执行门：A → B → C → D → E → F → G。用户最新确认：逐批修复并 Build/Test，全部完成后由用户统一实机验收。Batch A–F已完成代码修正和分批Build/Test；G执行最终回归。禁止自动截图、Computer Use 或修改 DPI。
 
 状态范围：OPEN / IN_PROGRESS / FIXED_IN_CODE / RUNTIME_PASS / RUNTIME_FAIL / BLOCKED。
 
@@ -229,7 +229,7 @@ UserVerified: false
 | ID | RUX-014 |
 | User Finding | Quick Loupe；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | MouseLeave 把 popup 自身作为悬停保留条件。现 trigger 离开即取消加载并关闭，预览不截获鼠标。 |
+| Root Cause | 原先鼠标离开入口后预览仍保留；修复中又暴露popup自身尺寸变化误关。现悬停入口管理生命周期：入口离开即取消；菜单预览由Esc/外部点击关闭，不由非交互popup的MouseLeave关闭。 |
 | Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
 | Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
@@ -438,8 +438,8 @@ UserVerified: false
 | User Finding | Smart Folder Persistence；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
 | Root Cause | 保留创建/查询/重载/条件回填；新增确认后只删除查询定义，FK只级联规则文档，不触碰Asset/source。仓库重启回归通过。 |
-| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
-| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
+| Files Changed | AssetLibraryContracts.cs / SqliteAssetLibraryRepository.P3.cs / P3SmartFolder.cs / AssetSmartFolderEditorView.xaml(.cs) |
+| Automated Test | smart-delete.trx：13 PASS；删除定义/重启/其他定义保留/素材记录不变；其余见final test summary |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
@@ -485,7 +485,7 @@ UserVerified: false
 | ID | RUX-030 |
 | User Finding | Publishing 面板；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | Studio 输出只暴露 Look/LUT；新增已调整图片送入既有 Publishing 的入口，冻结各 target stack/look/film，保留取消和失败摘要。 |
+| Root Cause | Studio 输出只暴露 Look/LUT；接入既有Publishing，冻结各target调整，保留文件名/取消/失败摘要。发布页明确当前设置与配方模式，位深随格式，ICC只显示可用配置。 |
 | Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
 | Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
@@ -613,7 +613,7 @@ UserVerified: false
 | ID | RUX-038 |
 | User Finding | Filmstrip Sync Buttons；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 新增明确复制当前调整和应用已复制调整；同步所选/全部保留原engine，metadata不复制。 |
+| Root Cause | 新增明确复制当前调整和应用已复制调整；同步沿用原engine，metadata不复制；空调整也更新快照，避免旧Look残留。 |
 | Files Changed | ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes |
 | Automated Test | Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例） |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
@@ -792,3 +792,18 @@ UserVerified: false
 - 历史 Batch A 当时未收到截图。现已收到25张；用户改为各批Build/Test后统一人工验收，所有Runtime保持NOT_RUN。
 - 上述为历史 checkpoint；本次已继续B–F修复及G自动回归。
 - 全部 USER_APPROVED=false；VisualApproved=false；UserVerified=false。
+
+
+## Final automated closure (2026-10-03)
+
+- Release SourceHead: 8f9a28f3c21bcf41e24e700024d14a8648fde5b5; final test contract: d195fb1cc6a439dab2e20bafaf03d29b07bedc80 (production unchanged).
+- Clean Release x64 / self-contained win-x64 publish: PASS. Manifest hashes all287 files; no installer.
+- Core full:1530 PASS /0 FAIL /4 SKIP. WPF full serial:1421 PASS /0 FAIL /11 SKIP; stable exit0, no testhost crash. DPI:91 PASS /0 FAIL.
+- Full tests include Asset Library, Publishing, Reference Match/Color Studio,3D,FreeCanvas,Guardian. Subset counts/hashes: artifacts/runtime-user-findings/latest/tests/TEST_SUMMARY.json.
+- Earlier failed runs retained; fixes listed in tests/FAILURE_HISTORY.md and INITIAL_FAILURES.json. No failure rewritten as PASS.
+- DPI artifact tests read old de4c91a evidence. Current logical layout coverage is not physical-DPI/visual approval; new After capture count0.
+- RUX001–048 FIXED_IN_CODE means implementation ready to review, not UX accepted. All Runtime NOT_RUN / USER_ACCEPTANCE NOT_APPROVED.
+- Original DOCX/video unavailable;25 user screenshots and complete pasted RUX instructions read. Screenshot hashes verified. Raw images remain local; Git includes manifest.
+- Old TIFF16/highprecision complete parity claim remains invalidated and is not reinstated by this UX round. Physical Tether WAITING_FOR_HARDWARE; roadmap remains deferred.
+
+- 启动检查：PID31316，MainWindowVisible=true，无立即崩溃；仅进程/窗口只读检查，不代表任何RUX Runtime通过。

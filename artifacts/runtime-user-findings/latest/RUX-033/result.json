@@ -1,15 +1,30 @@
 {
   "id": "RUX-033",
-  "sourceHead": "11e6eddd5e5974ce73de8ab9cdf1702bd6284c18",
-  "runtimeExe": null,
+  "sourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-final/publish/win-x64/KitaoPhotoSelector.exe",
   "dpi": null,
   "resolution": null,
   "steps": [
     "按用户截图路径复测：Reference Navigator"
   ],
-  "result": "BLOCKED",
-  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
-  "beforeEvidence": null,
+  "result": "FIXED_IN_CODE",
+  "reason": "根据25张用户截图修复/核对既有实现；Build/Test与实机验收分开。等待用户统一实机验收。",
+  "beforeEvidence": [],
   "afterEvidence": null,
-  "USER_APPROVED": false
+  "USER_APPROVED": false,
+  "runtimeTest": "NOT_RUN",
+  "userApproved": false,
+  "visualApproved": false,
+  "userVerified": false,
+  "runtimePolicy": "用户统一实机验收，自动化只执行 Build/Test",
+  "rootCause": "复用300 DIP navigator、Fit/100%/zoom/pan及独立展开窗，无第二套 viewport。",
+  "code": "ReferenceColorWorkspaceView/ViewModel; MainViewModel; PublishingExportView/ViewModel; WpfPublishingRenderer; ExportRecipes",
+  "automatedTest": "Release x64 0 errors; Batch D 88 PASS; targeted behavior 41 PASS / 0 FAIL（包含新增6例）",
+  "userAcceptance": "NOT_APPROVED",
+  "automatedGate": {
+    "summary": "tests/TEST_SUMMARY.json",
+    "core": "1530 PASS / 0 FAIL / 4 SKIP",
+    "wpf": "1421 PASS / 0 FAIL / 11 SKIP",
+    "dpi": "91 PASS (historical artifact boundary documented)"
+  }
 }

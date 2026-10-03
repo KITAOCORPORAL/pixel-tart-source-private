@@ -1,17 +1,34 @@
 {
   "id": "RUX-007",
-  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
-  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "sourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-final/publish/win-x64/KitaoPhotoSelector.exe",
   "dpi": null,
   "resolution": null,
   "steps": [
     "创建父/子文件夹，展开/收起，检查箭头、图标、名称、计数、缩进。",
     "悬停与选中有明确反馈；长名称省略并能通过 tooltip 看全；新建行与普通行密度一致。"
   ],
-  "result": "BLOCKED",
-  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
-  "beforeEvidence": null,
+  "result": "FIXED_IN_CODE",
+  "reason": "根据25张用户截图修复/核对既有实现；Build/Test与实机验收分开。等待用户统一实机验收。",
+  "beforeEvidence": [
+    "user-before/5.png"
+  ],
   "afterEvidence": null,
   "USER_APPROVED": false,
-  "codeStatus": "FIXED_IN_CODE"
+  "codeStatus": "FIXED_IN_CODE",
+  "runtimeTest": "NOT_RUN",
+  "userApproved": false,
+  "visualApproved": false,
+  "userVerified": false,
+  "runtimePolicy": "用户统一实机验收，自动化只执行 Build/Test",
+  "rootCause": "TreeView 使用默认模板，新建输入行尺寸不同。现明确箭头/层级缩进/图标/计数/hover/selected，30 DIP 行与新建行一致。",
+  "code": "AssetLibraryPage.xaml / AssetLibraryOrganizationNodes.cs",
+  "automatedTest": "AssetFolderTreeLayout + 布局构造回归通过；实际外观/hover 未验。",
+  "userAcceptance": "NOT_APPROVED",
+  "automatedGate": {
+    "summary": "tests/TEST_SUMMARY.json",
+    "core": "1530 PASS / 0 FAIL / 4 SKIP",
+    "wpf": "1421 PASS / 0 FAIL / 11 SKIP",
+    "dpi": "91 PASS (historical artifact boundary documented)"
+  }
 }

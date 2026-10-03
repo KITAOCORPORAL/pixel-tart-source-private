@@ -1,7 +1,7 @@
-# Free Canvas checklist
+# 自由画布、工作台、日历（约 3 分钟）
 
-- [ ] Toolbar groups read TOOLS, EDIT, VIEW, CANVAS, and PROJECT.
-- [ ] Open Canvas and Close Canvas are in More.
-- [ ] Confirm one zoom state only; test Fit, 50, 75, 100, 125, 150, and 200 percent.
-- [ ] Import 3:2 landscape/portrait, 4:3, 1:1, 16:9, 9:16, very tall, and very wide images.
-- [ ] Move, resize, save, close, and reopen each image; confirm aspect ratio is unchanged unless Crop was explicitly used.
+- [ ] 新建/打开/关闭入口明显；工具栏中文分组；撤销重做状态正确。
+- [ ] 导入横图/竖图，移动、缩放、Fit、存储重开保持比例；只有一个Zoom值。
+- [ ] 前移/后移只移动一层，置顶/置底和撤销正常。
+- [ ] 未保存切换时保存/放弃/取消语义正确；取消不会提示保存失败。
+- [ ] 工作台项目/任务/近期安排有层级；日历顶部没有重复四态图例。

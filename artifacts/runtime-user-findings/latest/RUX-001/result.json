@@ -1,16 +1,33 @@
 {
   "id": "RUX-001",
-  "sourceHead": "fea716c17d5018e51fb6ede9c0d3317953c2de42",
-  "runtimeExe": "artifacts/releases/runtime-user-findings-batch-a/publish/win-x64/KitaoPhotoSelector.exe",
+  "sourceHead": "8f9a28f3c21bcf41e24e700024d14a8648fde5b5",
+  "runtimeExe": "artifacts/releases/runtime-user-findings-final/publish/win-x64/KitaoPhotoSelector.exe",
   "dpi": null,
   "resolution": null,
   "steps": [
     "展开侧栏，在“素材库”等带名称入口上悬停，不应显示同名 tooltip；折叠侧栏后纯图标仍有提示。"
   ],
-  "result": "BLOCKED",
-  "reason": "未提供所述截图；实机操作方式待确认。未启动自动操作。",
-  "beforeEvidence": null,
+  "result": "FIXED_IN_CODE",
+  "reason": "根据25张用户截图修复/核对既有实现；Build/Test与实机验收分开。等待用户统一实机验收。",
+  "beforeEvidence": [
+    "user-before/1.png"
+  ],
   "afterEvidence": null,
   "USER_APPROVED": false,
-  "codeStatus": "FIXED_IN_CODE"
+  "codeStatus": "FIXED_IN_CODE",
+  "runtimeTest": "NOT_RUN",
+  "userApproved": false,
+  "visualApproved": false,
+  "userVerified": false,
+  "runtimePolicy": "用户统一实机验收，自动化只执行 Build/Test",
+  "rootCause": "导航按钮已显示文本，但 Tooltip 始终启用。现按 IsSidebarCollapsed 开关 tooltip，保留 Automation Name。",
+  "code": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Navigation.xaml",
+  "automatedTest": "NavigationWorkbenchClosure / Version230Rc2Navigation 回归通过；tooltip 动态显示待 runtime。",
+  "userAcceptance": "NOT_APPROVED",
+  "automatedGate": {
+    "summary": "tests/TEST_SUMMARY.json",
+    "core": "1530 PASS / 0 FAIL / 4 SKIP",
+    "wpf": "1421 PASS / 0 FAIL / 11 SKIP",
+    "dpi": "91 PASS (historical artifact boundary documented)"
+  }
 }
