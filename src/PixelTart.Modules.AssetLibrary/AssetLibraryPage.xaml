@@ -379,8 +379,7 @@
         <Popup x:Name="AssetQuickLoupePopup" IsHitTestVisible="False" Placement="Center" AllowsTransparency="True" StaysOpen="False"
                AutomationProperties.AutomationId="AssetQuickLoupePopup" AutomationProperties.Name="素材高清速览">
             <Border x:Name="QuickLoupeContainer" MaxWidth="860" MaxHeight="680" Padding="0"
-                    Background="Transparent" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1"
-                    MouseLeave="QuickLoupePopup_MouseLeave">
+                    Background="Transparent" BorderBrush="{DynamicResource Brush.Border.Strong}" BorderThickness="1">
                 <Grid>
                     <Image x:Name="QuickLoupeImage" Stretch="Uniform" AutomationProperties.AutomationId="AssetQuickLoupeImage" />
                     <TextBlock x:Name="QuickLoupeTitle" MaxWidth="320" Padding="8" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource Brush.Surface.Elevated}" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />

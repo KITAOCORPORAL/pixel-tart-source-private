@@ -42,6 +42,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private readonly IAssetPreviewProvider _previewProvider;
     private CancellationTokenSource? _quickLoupeCancellation;
     private AssetVisualMatchView? _quickLoupeCard;
+    private FrameworkElement? _quickLoupeHoverAnchor;
 
     public AssetLibraryPage()
         : this(
@@ -731,7 +732,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     public bool LeaveQuickLoupeForProductHarness()
     {
-        QuickLoupeContainer.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseLeaveEvent });
+        HideQuickLoupe();
         return !AssetQuickLoupePopup.IsOpen;
     }
 
@@ -751,6 +752,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void QuickLoupeButton_MouseEnter(object sender, MouseEventArgs e)
     {
         if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        _quickLoupeHoverAnchor = (FrameworkElement)sender;
         ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
@@ -759,6 +761,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void QuickLoupeButton_Click(object sender, RoutedEventArgs e)
     {
         if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        _quickLoupeHoverAnchor = (FrameworkElement)sender;
         ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
@@ -768,6 +771,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async void ContextQuickPreview_Click(object sender, RoutedEventArgs e)
     {
         if (_disposed || sender is not FrameworkElement { DataContext: AssetVisualMatchView card }) return;
+        _quickLoupeHoverAnchor = null;
         ConfigureCenteredQuickLoupe();
         _quickLoupeCard = card;
         await ShowQuickLoupeAsync(card);
@@ -786,9 +790,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         QuickLoupeContainer.MaxHeight = Math.Max(1, Math.Min(680, ActualHeight * .8));
     }
 
-    private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
+    private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e)
+    { if (ReferenceEquals(sender, _quickLoupeHoverAnchor)) HideQuickLoupe(); }
 
-    private void QuickLoupePopup_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
 
     private async Task ShowQuickLoupeAsync(AssetVisualMatchView card)
     {
@@ -800,6 +804,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         QuickLoupeTitle.Visibility = Visibility.Visible;
         QuickLoupeImage.Source = null;
         QuickLoupeImage.Width = double.NaN; QuickLoupeImage.Height = double.NaN;
+        AssetQuickLoupePopup.StaysOpen = _quickLoupeHoverAnchor is not null;
         AssetQuickLoupePopup.IsOpen = true;
         try
         {
@@ -828,7 +833,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         catch (ArgumentException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }
     }
 
-    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
+    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e)
+    { if (_quickLoupeHoverAnchor is not null) HideQuickLoupe(); }
 
     private void HideQuickLoupe()
     {
@@ -836,6 +842,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         _quickLoupeCancellation?.Dispose();
         _quickLoupeCancellation = null;
         _quickLoupeCard = null;
+        _quickLoupeHoverAnchor = null;
         if (AssetQuickLoupePopup is not null) AssetQuickLoupePopup.IsOpen = false;
     }
 
@@ -902,6 +909,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
 
     private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key == Key.Escape && AssetQuickLoupePopup.IsOpen)
+        { HideQuickLoupe(); e.Handled = true; return; }
         if (e.Key == Key.Escape && _viewModel.P3SmartFolderOpen)
         {
             if (_viewModel.SmartFolderUnsavedGuardOpen) _viewModel.KeepEditingSmartFolderCommand.Execute(null);

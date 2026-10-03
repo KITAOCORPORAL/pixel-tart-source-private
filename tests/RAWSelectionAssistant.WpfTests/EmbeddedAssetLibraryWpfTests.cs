@@ -278,7 +278,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     [TestMethod]
-    public async Task RealQuickPreviewLoadsHighQualityAndClosesOnPointerLeave()
+    public async Task RealQuickPreviewLoadsHighQualityAndClosesOnDismiss()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-LoupeClosure", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -298,6 +298,8 @@ public sealed class EmbeddedAssetLibraryWpfTests
                     "The real Asset Library query did not publish an item before Quick Preview opened.");
                 Assert.IsTrue(page.OpenQuickLoupeForProductHarnessAsync().CompleteOnDispatcher());
                 var popup = page.GetQuickLoupeContentForProductHarness();
+                popup?.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseLeaveEvent });
+                Assert.IsNotNull(page.GetQuickLoupeContentForProductHarness(), "A noninteractive popup resizing must not dismiss a click/menu preview.");
                 Assert.IsNotNull(popup);
                 var preview = FindVisualByAutomationId<Image>(popup, "AssetQuickLoupeImage");
                 Assert.IsInstanceOfType<BitmapSource>(preview.Source);
@@ -308,6 +310,11 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.AreEqual(0, popup.MinWidth); Assert.AreEqual(0, popup.MinHeight);
                 Assert.IsTrue(page.LeaveQuickLoupeForProductHarness());
                 Assert.IsNull(page.GetQuickLoupeContentForProductHarness());
+                var trigger = FindVisualByAutomationId<Button>(page, "AssetMasonryQuickLoupeButton");
+                trigger.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseEnterEvent });
+                Assert.IsTrue(PumpDispatcherUntil(() => page.GetQuickLoupeContentForProductHarness() is not null, TimeSpan.FromSeconds(3)));
+                trigger.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseLeaveEvent });
+                Assert.IsNull(page.GetQuickLoupeContentForProductHarness(), "Leaving the actual magnifier cancels the hover preview immediately.");
                 page.DisposeAsync().AsTask().CompleteOnDispatcher();
             });
         }
