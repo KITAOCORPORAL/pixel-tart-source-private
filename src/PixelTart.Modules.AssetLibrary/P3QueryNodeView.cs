@@ -527,7 +527,7 @@ public sealed class P3QueryNodeView : ObservableObject
 
     private static IReadOnlyList<P3QueryOption<AssetQueryOperator>> GetOperatorOptions(AssetQueryField field) =>
         AssetQueryDocumentCodec.GetSupportedOperators(field)
-            .Select(value => new P3QueryOption<AssetQueryOperator>(value, OperatorLabel(value)))
+            .Select(value => new P3QueryOption<AssetQueryOperator>(value, field is AssetQueryField.AddedAt or AssetQueryField.CaptureTime ? value switch { AssetQueryOperator.LessThan => "早于", AssetQueryOperator.GreaterThan => "晚于", AssetQueryOperator.Equals => "当天", AssetQueryOperator.Between => "日期区间", _ => OperatorLabel(value) } : OperatorLabel(value)))
             .ToArray();
 
     private static readonly IReadOnlyList<P3QueryOption<AssetQueryField>> QueryFieldOptions = Enum.GetValues<AssetQueryField>()

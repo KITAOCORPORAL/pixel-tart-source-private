@@ -371,13 +371,13 @@ UserVerified: false
 | ID | RUX-023 |
 | User Finding | Smart Folder Query Builder；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 主流程与说明/排序/复制/归档/预览列表平铺；名称、条件树和结果/保存取消置主层，其余收进更多选项。 |
+| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
+| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-024 — Smart Folder Fields
@@ -387,13 +387,13 @@ UserVerified: false
 | ID | RUX-024 |
 | User Finding | Smart Folder Fields；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 字段来自现有 AssetQueryField/codec：文件名、格式、标签、文件夹、评分、颜色、备注、导入/拍摄日期、尺寸/比例等。修改日期/创建日期/时长/链接没有正式 query 字段，不伪造入口。 |
+| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
+| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/24.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-025 — Operators By Field Type
@@ -403,13 +403,13 @@ UserVerified: false
 | ID | RUX-025 |
 | User Finding | Operators By Field Type；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 复用 codec 支持的按类型 operators；日期文案改早于/晚于/当天/日期区间；String/Number/Reference 保留真实 operators。 |
+| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
+| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/25.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-026 — Real-time Result Count
@@ -419,13 +419,13 @@ UserVerified: false
 | ID | RUX-026 |
 | User Finding | Real-time Result Count；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 既有 debounce+cancellation+repository query 实时计数继续使用；移到主流程底部，不添加固定数字。 |
+| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
+| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-027 — Smart Folder Persistence
@@ -435,13 +435,13 @@ UserVerified: false
 | ID | RUX-027 |
 | User Finding | Smart Folder Persistence；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
+| Root Cause | 既有创建、查询、重载、条件回填和仅定义归档保留；永久删除定义尚无 repository contract，未伪装为已实现。 |
+| Files Changed | AssetSmartFolderEditorView.xaml / P3SmartFolder.cs / P3QueryNodeView.cs |
+| Automated Test | Batch C Release x64 0 errors; WPF 37 PASS / 0 FAIL；tests/batch-c.trx |
 | Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
 | Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | IN_PROGRESS |
 | USER_APPROVED | false |
 
 ## RUX-028 — 发布导出全面中文化

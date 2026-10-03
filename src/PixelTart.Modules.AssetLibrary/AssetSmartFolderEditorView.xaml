@@ -37,36 +37,25 @@
             <DockPanel>
                 <TextBlock Text="{Binding P3SmartFolderTitle}" FontSize="16" FontWeight="SemiBold"
                            Foreground="#F2F6F7" VerticalAlignment="Center" />
-                <WrapPanel DockPanel.Dock="Right">
-                    <Button Content="复制" Command="{Binding CopyP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderCopy"
-                            AutomationProperties.Name="复制当前智能文件夹" />
-                    <Button Content="{Binding P3SmartFolderArchiveLabel}" Command="{Binding ToggleArchiveP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3DangerButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderArchiveToggle"
-                            AutomationProperties.Name="归档或恢复当前智能文件夹" />
-                    <Button Content="取消" Command="{Binding CancelP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderCancel"
-                            AutomationProperties.Name="取消编辑且不保存" />
-                    <Button Content="保存智能文件夹" Command="{Binding SaveP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3PrimaryButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderSave"
-                            AutomationProperties.Name="保存智能文件夹" />
-                </WrapPanel>
+
             </DockPanel>
 
-            <Grid Margin="0,7,0,0">
-                <Grid.ColumnDefinitions><ColumnDefinition Width="230" /><ColumnDefinition Width="10" /><ColumnDefinition /></Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock Text="名称" Foreground="#CBD5DA" />
                     <TextBox Text="{Binding P3SmartFolderName, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource AssetLibraryP3TextBox}"
                              AutomationProperties.AutomationId="P3SmartFolderName"
                              AutomationProperties.Name="智能文件夹名称" />
-                </StackPanel>
-                <StackPanel Grid.Column="2">
+                </StackPanel>                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="260">
+                    <TreeView ItemsSource="{Binding P3SmartFolderRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
+                              ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
+                              Style="{StaticResource AssetLibraryP3Tree}"
+                              AutomationProperties.AutomationId="P3SmartFolderRuleTree"
+                              AutomationProperties.Name="智能文件夹条件" />
+                </ScrollViewer><Expander Header="更多选项" Margin="0,8"><StackPanel>            <Grid Margin="0,7,0,0">
+                <Grid.ColumnDefinitions><ColumnDefinition /></Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
                     <TextBlock Text="说明" Foreground="#CBD5DA" />
                     <TextBox Text="{Binding P3SmartFolderDescription, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource AssetLibraryP3TextBox}"
@@ -97,43 +86,29 @@
                            AutomationProperties.Name="智能文件夹保留的范围与搜索条件" />
             </WrapPanel>
 
-            <Grid Margin="0,7,0,0">
-                <Grid.ColumnDefinitions><ColumnDefinition Width="2*" /><ColumnDefinition Width="10" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="330">
-                    <TreeView ItemsSource="{Binding P3SmartFolderRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
-                              ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
-                              Style="{StaticResource AssetLibraryP3Tree}"
-                              AutomationProperties.AutomationId="P3SmartFolderRuleTree"
-                              AutomationProperties.Name="智能文件夹条件" />
-                </ScrollViewer>
-                <Border Grid.Column="2" Style="{StaticResource AssetLibraryP3PopupSurface}"
-                        AutomationProperties.AutomationId="P3SmartFolderPreview"
-                        AutomationProperties.Name="智能文件夹实时预览">
-                    <StackPanel>
-                        <DockPanel>
-                            <TextBlock Text="匹配照片" FontWeight="SemiBold" Foreground="#F2F6F7" />
-                            <Button DockPanel.Dock="Right" Content="重新查找" Command="{Binding RetryP3SmartFolderPreviewCommand}"
-                                    Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                                    AutomationProperties.AutomationId="P3SmartFolderPreviewRetry"
-                                    AutomationProperties.Name="重新查找符合条件的照片" />
-                        </DockPanel>
-                        <TextBlock Text="{Binding P3SmartFolderPreviewStatus}" Foreground="#CBD5DA" Margin="0,5,0,0" TextWrapping="Wrap"
-                                   AutomationProperties.AutomationId="P3SmartFolderPreviewStatus"
-                                   AutomationProperties.Name="符合条件的照片数量" />
-                        <ItemsControl ItemsSource="{Binding P3SmartFolderPreviewItems}" Margin="0,5,0,0"
-                                      AutomationProperties.AutomationId="P3SmartFolderPreviewItems">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DisplayName}" Foreground="#F2F6F7" TextTrimming="CharacterEllipsis"
-                                               ToolTip="{Binding DisplayName}"
-                                               AutomationProperties.Name="{Binding DisplayName, StringFormat=预览素材 {0}}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
-            </Grid>
-
+                <WrapPanel >
+                    <Button Content="复制" Command="{Binding CopyP3SmartFolderCommand}"
+                            Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                            AutomationProperties.AutomationId="P3SmartFolderCopy"
+                            AutomationProperties.Name="复制当前智能文件夹" />
+                    <Button Content="{Binding P3SmartFolderArchiveLabel}" Command="{Binding ToggleArchiveP3SmartFolderCommand}"
+                            Style="{StaticResource AssetLibraryP3DangerButton}"
+                            AutomationProperties.AutomationId="P3SmartFolderArchiveToggle"
+                            AutomationProperties.Name="归档或恢复当前智能文件夹" />
+                </WrapPanel><Button Content="重新查找" Command="{Binding RetryP3SmartFolderPreviewCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="P3SmartFolderPreviewRetry" AutomationProperties.Name="重新查找符合条件的照片" HorizontalAlignment="Left" />
+<ItemsControl ItemsSource="{Binding P3SmartFolderPreviewItems}" AutomationProperties.AutomationId="P3SmartFolderPreviewItems"><ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" /></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+</StackPanel></Expander>            <StackPanel Margin="0,10,0,0" AutomationProperties.AutomationId="P3SmartFolderPreview" AutomationProperties.Name="智能文件夹实时预览">
+                <DockPanel><TextBlock Text="{Binding P3SmartFolderPreviewStatus}" AutomationProperties.AutomationId="P3SmartFolderPreviewStatus" AutomationProperties.Name="符合条件的照片数量" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource Brush.Text.Secondary}" />
+                <WrapPanel HorizontalAlignment="Right">                    <Button Content="取消" Command="{Binding CancelP3SmartFolderCommand}"
+                            Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                            AutomationProperties.AutomationId="P3SmartFolderCancel"
+                            AutomationProperties.Name="取消编辑且不保存" />
+                    <Button Content="{Binding P3SmartFolderSaveLabel}" Command="{Binding SaveP3SmartFolderCommand}"
+                            Style="{StaticResource AssetLibraryP3PrimaryButton}"
+                            AutomationProperties.AutomationId="P3SmartFolderSave"
+                            AutomationProperties.Name="保存智能文件夹" />
+</WrapPanel></DockPanel>
+            </StackPanel>
             <Border Margin="0,6,0,0" Style="{StaticResource AssetLibraryP3ErrorSurface}"
                     Visibility="{Binding P3SmartFolderHasError, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                 <TextBlock Text="{Binding P3SmartFolderValidationMessage}" Foreground="#FFCBC5" TextWrapping="Wrap"

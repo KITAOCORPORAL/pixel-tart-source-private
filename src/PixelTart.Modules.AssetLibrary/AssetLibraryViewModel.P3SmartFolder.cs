@@ -93,6 +93,7 @@ public sealed partial class AssetLibraryViewModel
     public bool P3SmartFolderIsEditing => _p3SmartFolderId is not null;
     public bool P3SmartFolderIsArchived => _p3SmartFolderSnapshot?.IsArchived == true;
     public string P3SmartFolderArchiveLabel => P3SmartFolderIsArchived ? "恢复" : "归档";
+    public string P3SmartFolderSaveLabel => P3SmartFolderIsEditing ? "保存修改" : "创建智能文件夹";
     public string P3SmartFolderTitle => P3SmartFolderIsEditing ? "编辑智能文件夹" : "新建智能文件夹";
 
     public string P3SmartFolderName
@@ -226,6 +227,7 @@ public sealed partial class AssetLibraryViewModel
         P3SmartFolderPreviewCount = 0;
         P3SmartFolderPreviewMilliseconds = 0;
         OnPropertyChanged(nameof(P3SmartFolderIsEditing));
+        OnPropertyChanged(nameof(P3SmartFolderSaveLabel));
         OnPropertyChanged(nameof(P3SmartFolderIsArchived));
         OnPropertyChanged(nameof(P3SmartFolderArchiveLabel));
         OnPropertyChanged(nameof(P3SmartFolderTitle));
@@ -391,7 +393,7 @@ public sealed partial class AssetLibraryViewModel
                 P3SmartFolderValidationMessage = page.RegexError;
                 P3SmartFolderPreviewStatus = "预览失败，未修改正式智能文件夹。";
             }
-            else P3SmartFolderPreviewStatus = $"找到 {page.TotalCount:N0} 张照片";
+            else P3SmartFolderPreviewStatus = $"符合 {page.TotalCount:N0} 张图片";
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
         catch (Exception exception) when (IsCurrentP3SmartFolderPreview(generation, cancellation))
@@ -447,6 +449,7 @@ public sealed partial class AssetLibraryViewModel
             Status = $"已保存智能文件夹：{saved.Name}";
             P3SmartFolderValidationMessage = string.Empty;
             OnPropertyChanged(nameof(P3SmartFolderIsEditing));
+        OnPropertyChanged(nameof(P3SmartFolderSaveLabel));
             OnPropertyChanged(nameof(P3SmartFolderTitle));
             RaiseP3SmartFolderCommands();
         }
