@@ -18,9 +18,12 @@ public sealed class AssetLibraryEagleLayoutReconstructionTests
         Assert.IsNotNull(AutomationElement(document, "AssetCollectionPane"));
         Assert.IsNotNull(AutomationElement(document, "AssetInspectorPane"));
 
+        var addFilter = AutomationElement(document, "AssetAddQuickFilter");
+        Assert.AreEqual("AddQuickFilter_Click", (string?)addFilter.Attribute("Click"));
+        Assert.IsTrue(document.Descendants(Presentation + "ItemsControl").Any(node => (string?)node.Attribute("ItemsSource") == "{Binding PinnedFilters}"));
+
         foreach (var id in new[]
         {
-            "AssetLibraryColorFilter", "AssetLibraryTagFilter", "AssetLibraryRatingFilter", "AssetLibraryDateFilter",
             "AssetLibrarySortMenu", "AssetLibraryImport", "AssetLibraryMore"
         })
         {

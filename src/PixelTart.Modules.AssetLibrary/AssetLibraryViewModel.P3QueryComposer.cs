@@ -20,6 +20,27 @@ public sealed partial class AssetLibraryViewModel
     private AssetQueryDocument _p3CurrentQueryDocument = new();
     private P3QueryNodeView _p3QueryRoot = null!;
 
+    public IReadOnlyList<P3QueryOption<AssetQueryField>> PinnedFilters => _workspaceSettings.PinnedFilterFields
+        .Select(queryField => new P3QueryOption<AssetQueryField>(queryField, queryField == AssetQueryField.VisualDominantColor ? "图片颜色" : P3QueryNodeView.FieldLabel(queryField))).ToArray();
+
+    public void SetFilterPinned(AssetQueryField field, bool pinned)
+    {
+        if (!Enum.IsDefined(field)) return;
+        if (pinned && !_workspaceSettings.PinnedFilterFields.Contains(field)) _workspaceSettings.PinnedFilterFields.Add(field);
+        if (!pinned) _workspaceSettings.PinnedFilterFields.Remove(field);
+        _workspaceSettings.Normalize();
+        OnPropertyChanged(nameof(PinnedFilters));
+    }
+
+    public void EditQuickFilter(AssetQueryField field)
+    {
+        OpenFilterPanel();
+        if (P3QueryRoot.DescendantsAndSelf().Any(node => node.IsRule && node.Field == field)) return;
+        P3QueryRoot.AddRuleCommand.Execute(null);
+        P3QueryRoot.Children.Last().Field = field;
+        P3QueryRoot.Children.Last().ValueText = string.Empty;
+    }
+
     public ObservableCollection<AssetQuerySuggestion> P3QuerySuggestions { get; } = [];
     public ObservableCollection<AssetQueryHistoryEntry> P3QueryHistory { get; } = [];
     public ObservableCollection<P3QueryChipView> P3QueryChips { get; } = [];

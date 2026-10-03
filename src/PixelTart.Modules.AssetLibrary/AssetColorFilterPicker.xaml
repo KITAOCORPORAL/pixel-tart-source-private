@@ -1,0 +1,47 @@
+<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetColorFilterPicker" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary" Width="248">
+<UserControl.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><ResourceDictionary Source="AssetLibraryP3Styles.xaml" /></ResourceDictionary.MergedDictionaries><local:HueToBrushConverter x:Key="HueToBrushConverter"/><local:HexToBrushConverter x:Key="HexToBrushConverter"/></ResourceDictionary></UserControl.Resources>
+                <Border Margin="0,0,0,4" Padding="4" Background="{DynamicResource Brush.Panel}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="4"
+                        AutomationProperties.AutomationId="AssetFilterColorPicker">
+                    <StackPanel>
+                        <TextBlock Text="图片颜色" Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" />
+                        <TextBlock Text="拖动色板实时筛选" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,2,0,6" />
+                        <Grid x:Name="ColorPlane" Height="180" Background="{Binding ColorHue, Converter={StaticResource HueToBrushConverter}}" Cursor="Cross"
+                              MouseLeftButtonDown="ColorPlane_MouseLeftButtonDown" MouseMove="ColorPlane_MouseMove" MouseLeftButtonUp="ColorPlane_MouseLeftButtonUp"
+                              AutomationProperties.AutomationId="AssetFilterColorPlane" AutomationProperties.Name="二维颜色选择区">
+                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="White" Offset="0" /><GradientStop Color="Transparent" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
+                            <Rectangle IsHitTestVisible="False"><Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="Transparent" Offset="0" /><GradientStop Color="Black" Offset="1" /></LinearGradientBrush></Rectangle.Fill></Rectangle>
+                            <Canvas IsHitTestVisible="False"><Ellipse x:Name="ColorPlaneCursor" Width="12" Height="12" Stroke="{DynamicResource Brush.Text.Primary}" StrokeThickness="2" /></Canvas>
+                        </Grid>
+                        <TextBlock Text="色相" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,7,0,2" />
+                        <Border Height="4" CornerRadius="2" Background="{Binding ElementName=HueSlider, Path=Background}" />
+                        <Slider x:Name="HueSlider" Minimum="0" Maximum="360" Value="{Binding ColorHue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="18"
+                                AutomationProperties.AutomationId="AssetFilterHueSlider" AutomationProperties.Name="色相">
+                            <Slider.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#FFFF0000" Offset="0" /><GradientStop Color="#FFFFFF00" Offset="0.166" /><GradientStop Color="#FF00FF00" Offset="0.333" /><GradientStop Color="#FF00FFFF" Offset="0.5" /><GradientStop Color="#FF0000FF" Offset="0.666" /><GradientStop Color="#FFFF00FF" Offset="0.833" /><GradientStop Color="#FFFF0000" Offset="1" /></LinearGradientBrush></Slider.Background>
+                        </Slider>
+                        <UniformGrid Columns="7">
+                            <UniformGrid.Resources>
+                                <Style x:Key="AssetLibraryP3SecondaryButton" TargetType="Button" BasedOn="{StaticResource AssetLibraryP3SecondaryButton}">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0" />
+                                    <Setter Property="MinWidth" Value="0" />
+                                    <Setter Property="FontSize" Value="11" />
+                                </Style>
+                            </UniformGrid.Resources>
+                            <Button ToolTip="红" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D75A45" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorRed" AutomationProperties.Name="筛选红色"><Border Width="20" Height="16" Background="#D75A45" CornerRadius="2" /></Button>
+                            <Button ToolTip="橙" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D9822B" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorOrange" AutomationProperties.Name="筛选橙色"><Border Width="20" Height="16" Background="#D9822B" CornerRadius="2" /></Button>
+                            <Button ToolTip="黄" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#D6B94C" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorYellow" AutomationProperties.Name="筛选黄色"><Border Width="20" Height="16" Background="#D6B94C" CornerRadius="2" /></Button>
+                            <Button ToolTip="绿" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#3E9B68" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorGreen" AutomationProperties.Name="筛选绿色"><Border Width="20" Height="16" Background="#3E9B68" CornerRadius="2" /></Button>
+                            <Button ToolTip="蓝" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#467DC2" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorBlue" AutomationProperties.Name="筛选蓝色"><Border Width="20" Height="16" Background="#467DC2" CornerRadius="2" /></Button>
+                            <Button ToolTip="紫" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#8A65B8" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorPurple" AutomationProperties.Name="筛选紫色"><Border Width="20" Height="16" Background="#8A65B8" CornerRadius="2" /></Button>
+                            <Button ToolTip="黑白" Command="{Binding SearchPaletteColorCommand}" CommandParameter="#808080" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="AssetFilterColorNeutral" AutomationProperties.Name="筛选黑白灰"><Border Width="20" Height="16" Background="#808080" CornerRadius="2" /></Button>
+                        </UniformGrid>
+                        <DockPanel Margin="0,6,0,0">
+                            <TextBox Text="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}" Width="110" Style="{StaticResource AssetLibraryP3TextBox}" AutomationProperties.AutomationId="AssetFilterColorValue" AutomationProperties.Name="颜色值" />
+                            <Border Width="34" Height="24" Margin="6,0,0,0" Background="{Binding TargetColor, Converter={StaticResource HexToBrushConverter}}" />
+                        </DockPanel>
+                        <TextBlock Text="颜色范围" Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,7,0,2" />
+                        <Slider Minimum="1" Maximum="100" Value="{Binding ColorTolerance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                AutomationProperties.AutomationId="AssetFilterColorRange" AutomationProperties.Name="颜色范围" />
+                    </StackPanel>
+                </Border>
+</UserControl>

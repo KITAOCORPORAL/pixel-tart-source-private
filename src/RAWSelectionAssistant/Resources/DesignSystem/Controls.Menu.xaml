@@ -63,7 +63,7 @@
                                     <ColumnDefinition Width="0" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="16" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter x:Name="IconPresenter"
                                                   Grid.Column="0"
@@ -91,7 +91,7 @@
                                       Visibility="Collapsed" />
                                 <ContentPresenter x:Name="HeaderPresenter"
                                                   Grid.Column="1"
-                                                  Margin="2,0,18,0"
+                                                  Margin="2,0,3,0"
                                                   VerticalAlignment="Center"
                                                   ContentSource="Header"
                                                   RecognizesAccessKey="True"
@@ -103,7 +103,7 @@
                                            Foreground="{DynamicResource MenuShortcutBrush}"
                                            FontSize="12"
                                            Text="{TemplateBinding InputGestureText}" />
-                                <Path x:Name="SubmenuArrow"
+                                <Path x:Name="SubmenuArrow" Margin="10,0,2,0"
                                       Grid.Column="3"
                                       Width="6"
                                       Height="10"
@@ -127,7 +127,7 @@
                                Placement="Right"
                                PlacementTarget="{Binding ElementName=ItemBorder}"
                                VerticalOffset="-5">
-                            <Border MinWidth="220"
+                            <Border MinWidth="0"
                                     Background="{DynamicResource MenuPopupBackgroundBrush}"
                                     BorderBrush="{DynamicResource MenuPopupBorderBrush}"
                                     BorderThickness="1"
@@ -143,6 +143,7 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="InputGestureText" Value=""><Setter TargetName="ShortcutText" Property="Visibility" Value="Collapsed" /></Trigger>
                         <Trigger Property="Role" Value="TopLevelHeader">
                             <Setter TargetName="PART_Popup" Property="Placement" Value="Bottom" />
                             <Setter TargetName="PART_Popup" Property="HorizontalOffset" Value="0" />

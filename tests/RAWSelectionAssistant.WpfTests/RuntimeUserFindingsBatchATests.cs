@@ -144,10 +144,10 @@ public sealed class RuntimeUserFindingsBatchATests
         // Layout-only evidence; deliberately no screenshot and no runtime PASS claim.
     });
 
-    private static AssetLibraryViewModel ViewModel(string root) => new(Path.Combine(root, "assets.db"), new TaskOperationBridge(),
+    internal static AssetLibraryViewModel ViewModel(string root) => new(Path.Combine(root, "assets.db"), new TaskOperationBridge(),
         productDatabasePath: Path.Combine(root, "product.db"), onlineSelectionWorkspaceFile: Path.Combine(root, "online.json"), inspirationTrayDatabasePath: Path.Combine(root, "tray.db"));
 
-    private static async Task<string> Fixture()
+    internal static async Task<string> Fixture()
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-RUX-A", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -181,7 +181,7 @@ public sealed class RuntimeUserFindingsBatchATests
     {
         Assert.IsTrue(command.CanExecute(null)); command.Execute(null); await command.ExecutionTask;
     }
-    private static Task RunSta(Func<Task> action)
+    internal static Task RunSta(Func<Task> action)
     {
         var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var thread = new Thread(() =>

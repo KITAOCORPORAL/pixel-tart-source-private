@@ -64,39 +64,20 @@ public partial class AssetLibraryPage
     private void OpenRatingPopup(Button anchor)
     {
         var menu = new ContextMenu();
-        var edit = new MenuItem { Header = "评分" };
-        var filter = new MenuItem { Header = "评分筛选" };
         for (var rating = 0; rating <= 5; rating++)
         {
             var value = rating;
-            edit.Items.Add(PopupAction(value == 0 ? "清除评分" : $"{value} 星", $"AssetSetRating{value}",
-                () => _viewModel.RateSelectedAsync(value), _viewModel.HasSelection));
-            filter.Items.Add(PopupAction(value == 0 ? "不限评分" : $"至少 {value} 星", $"AssetFilterRating{value}",
+            menu.Items.Add(PopupAction(value == 0 ? "不限评分" : "至少 " + new string('★', value), $"AssetFilterRating{value}",
                 () => _viewModel.SetQuickFilterAsync(AssetQueryField.Rating, AssetQueryOperator.GreaterThanOrEqual,
                     value == 0 ? [] : [value.ToString()])));
         }
-        menu.Items.Add(edit); menu.Items.Add(filter);
         OpenToolbarPopup(anchor, "Rating", menu);
     }
 
     private void OpenColorPopup(Button anchor)
     {
         var menu = new ContextMenu();
-        var edit = new MenuItem { Header = "颜色标记" };
-        var filter = new MenuItem { Header = "颜色标记筛选" };
-        foreach (var color in _viewModel.InspectorColors)
-        {
-            var value = color;
-            edit.Items.Add(PopupAction(value.Length == 0 ? "清除颜色" : value, "AssetSetColor" + value, async () =>
-            {
-                _viewModel.InspectorColor = value;
-                _viewModel.ApplyInspectorColorCommand.Execute(null);
-                await _viewModel.ApplyInspectorColorCommand.ExecutionTask;
-            }, _viewModel.HasSelection));
-            filter.Items.Add(PopupAction(value.Length == 0 ? "不限颜色" : value, "AssetFilterColorLabel" + value,
-                () => _viewModel.SetQuickFilterAsync(AssetQueryField.ColorLabel, AssetQueryOperator.Equals, value.Length == 0 ? [] : [value])));
-        }
-        menu.Items.Add(edit); menu.Items.Add(filter);
+        menu.Items.Add(new AssetColorFilterPicker { DataContext = _viewModel });
         OpenToolbarPopup(anchor, "Color", menu);
     }
 
@@ -116,8 +97,49 @@ public partial class AssetLibraryPage
         _viewModel.InspectorTagSearch = "";
         var menu = new ContextMenu();
         // Content is hosted by the existing single-active overlay manager.
-        menu.Items.Add(new MenuItem { Header = new AssetInspectorTagPicker { DataContext = _viewModel }, StaysOpenOnClick = true });
+        menu.Items.Add(new AssetInspectorTagPicker { DataContext = _viewModel });
         OpenToolbarPopup(anchor, "InspectorTags", menu);
+    }
+
+    private async void InspectorColorSwatch_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { DataContext: string color }) return;
+        _viewModel.InspectorColor = color;
+        _viewModel.ApplyInspectorColorCommand.Execute(null);
+        await _viewModel.ApplyInspectorColorCommand.ExecutionTask;
+    }
+
+    private void PinnedFilter_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { Tag: AssetQueryField field } anchor) OpenQuickFilter(anchor, field);
+    }
+
+    private void OpenQuickFilter(Button anchor, AssetQueryField field)
+    {
+        if (field == AssetQueryField.Rating) OpenRatingPopup(anchor);
+        else if (field == AssetQueryField.VisualDominantColor) OpenColorPopup(anchor);
+        else if (field == AssetQueryField.Tag) OpenTagPopup(anchor);
+        else if (field == AssetQueryField.AddedAt) OpenDatePopup(anchor);
+        else { CloseToolbarPopups(); _viewModel.EditQuickFilter(field); ActiveToolbarPopup = "AdvancedFilter"; }
+    }
+
+    private void AddQuickFilter_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button anchor) return;
+        var menu = new ContextMenu();
+        foreach (var field in new[] { AssetQueryField.Rating, AssetQueryField.VisualDominantColor, AssetQueryField.ColorLabel,
+            AssetQueryField.Tag, AssetQueryField.Folder, AssetQueryField.Extension, AssetQueryField.AddedAt,
+            AssetQueryField.CaptureTime, AssetQueryField.AspectRatio, AssetQueryField.Width, AssetQueryField.Height, AssetQueryField.FileSize })
+        {
+            var current = field;
+            var group = new MenuItem { Header = field == AssetQueryField.VisualDominantColor ? "图片颜色" : P3QueryNodeView.FieldLabel(field) };
+            group.Items.Add(PopupAction("编辑条件", "QuickFilterEdit" + field, () => { _dismissedPopupAnchor = null; CloseToolbarPopups(); OpenQuickFilter(anchor, current); return Task.CompletedTask; }));
+            var pinned = _viewModel.PinnedFilters.Any(item => item.Value == field);
+            group.Items.Add(PopupAction(pinned ? "取消固定" : "固定到顶部", "QuickFilterPin" + field,
+                () => { _viewModel.SetFilterPinned(current, !pinned); return Task.CompletedTask; }));
+            menu.Items.Add(group);
+        }
+        OpenToolbarPopup(anchor, "AddFilter", menu);
     }
 
     private void OpenDatePopup(Button anchor)

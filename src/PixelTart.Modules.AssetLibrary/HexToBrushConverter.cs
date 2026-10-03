@@ -9,9 +9,9 @@ public sealed class HexToBrushConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is string hex && ColorConverter.ConvertFromString(hex) is Color color)
+        if (value is string { Length: 7 } hex && hex[0] == '#' && int.TryParse(hex[1..], System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var rgb))
         {
-            var brush = new SolidColorBrush(color);
+            var brush = new SolidColorBrush(Color.FromRgb((byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb));
             brush.Freeze();
             return brush;
         }
@@ -47,5 +47,16 @@ public sealed class HueToBrushConverter : IValueConverter
 public sealed class BooleanToOpacityConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is true ? 1d : 0d;
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => DependencyProperty.UnsetValue;
+}
+
+public sealed class AssetColorLabelBrushConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => (value as string) switch
+    {
+        "红" => Brushes.IndianRed, "橙" => Brushes.DarkOrange, "黄" => Brushes.Gold,
+        "绿" => Brushes.SeaGreen, "蓝" => Brushes.SteelBlue, "紫" => Brushes.MediumPurple,
+        _ => Brushes.Transparent
+    };
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => DependencyProperty.UnsetValue;
 }

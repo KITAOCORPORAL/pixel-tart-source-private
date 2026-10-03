@@ -20,6 +20,7 @@ public sealed class AssetLibraryWorkspaceSettings
     public bool InspectorPaneCollapsed { get; set; }
     public bool InspectorPinned { get; set; }
     public double ThumbnailWidth { get; set; } = DefaultThumbnailWidth;
+    public List<AssetQueryField> PinnedFilterFields { get; set; } = [AssetQueryField.Rating, AssetQueryField.Tag];
     public string SearchText { get; set; } = string.Empty;
     public Guid? SelectedFolderId { get; set; }
     public Guid? SelectedTagId { get; set; }
@@ -43,6 +44,7 @@ public sealed class AssetLibraryWorkspaceSettings
         InspectorPaneWidth = NormalizeFinite(InspectorPaneWidth, DefaultInspectorPaneWidth, 260d, 520d);
         ThumbnailWidth = NormalizeFinite(ThumbnailWidth, DefaultThumbnailWidth, 120d, 4096d);
         if (InspectorPinned) InspectorPaneCollapsed = false;
+        PinnedFilterFields = (PinnedFilterFields ?? []).Where(field => Enum.IsDefined(field)).Distinct().Take(12).ToList();
         SearchText = (SearchText ?? string.Empty).Trim();
         if (SearchText.Length > 500) SearchText = SearchText[..500];
         if (!Enum.IsDefined(ViewMode)) ViewMode = AssetLibraryViewMode.Masonry;

@@ -786,11 +786,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         QuickLoupeContainer.MaxHeight = Math.Max(1, Math.Min(680, ActualHeight * .8));
     }
 
-    private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) =>
-        _ = Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
-        {
-            if (!AssetQuickLoupePopup.IsMouseOver) HideQuickLoupe();
-        }));
+    private void QuickLoupeButton_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
 
     private void QuickLoupePopup_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
 
@@ -832,15 +828,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         catch (ArgumentException) { QuickLoupeTitle.Text = $"{card.Asset.DisplayName} · 高清预览不可用"; }
     }
 
-    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e)
-    {
-        // A centered popup can receive the pointer directly from the gallery.
-        // Let that transition finish before deciding whether the preview was left.
-        Dispatcher.BeginInvoke(DispatcherPriority.Input, () =>
-        {
-            if (!AssetQuickLoupePopup.IsMouseOver) HideQuickLoupe();
-        });
-    }
+    private void AssetGrid_MouseLeave(object sender, MouseEventArgs e) => HideQuickLoupe();
 
     private void HideQuickLoupe()
     {

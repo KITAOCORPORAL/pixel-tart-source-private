@@ -6,9 +6,9 @@ USER_APPROVED: false
 VisualApproved: false
 UserVerified: false
 
-本账本独立于历史 HR 矩阵。用户文字反馈是重新打开问题的依据；尚未收到所述 16 页截图，未观看其实际操作路径。测试通过不代表 Runtime 或用户通过。
+本账本独立于历史 HR 矩阵。用户文字反馈是重新打开问题的依据；现已读取 G:/UI问题/ 的 25 张截图（证据清单见 artifacts/runtime-user-findings/latest/user-before/manifest.json）；截图源版本和 DPI 未知。测试通过不代表 Runtime 或用户通过。
 
-执行门：A → B → C → D → E → F → G。每批 Build/Test/真实 Release 操作/After 截图齐备后再进入下一批。当前处于 Batch A；后续批次 OPEN，未承接旧 CLOSED。
+执行门：A → B → C → D → E → F → G。用户最新确认：逐批修复并 Build/Test，全部完成后由用户统一实机验收。Batch A 已完成代码和自动测试；后续按顺序推进。禁止自动截图、Computer Use 或修改 DPI。
 
 状态范围：OPEN / IN_PROGRESS / FIXED_IN_CODE / RUNTIME_PASS / RUNTIME_FAIL / BLOCKED。
 
@@ -22,8 +22,8 @@ UserVerified: false
 | Root Cause | 导航按钮已显示文本，但 Tooltip 始终启用。现按 IsSidebarCollapsed 开关 tooltip，保留 Automation Name。 |
 | Files Changed | src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Navigation.xaml |
 | Automated Test | NavigationWorkbenchClosure / Version230Rc2Navigation 回归通过；tooltip 动态显示待 runtime。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/1.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -38,8 +38,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/2.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -54,8 +54,8 @@ UserVerified: false
 | Root Cause | 顶部搜索所在列 Width=* 且 MinWidth=300，无上限。现为 260 DIP，范围 200–320。 |
 | Files Changed | src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml |
 | Automated Test | SearchWidthAndFolderRowsRemainBoundedAcrossLogicalDpiSizes：12 组合通过（未截图）。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png, user-before/14.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -70,8 +70,8 @@ UserVerified: false
 | Root Cause | 普通搜索建议会追加结构化 query rule 并打开 Advanced Filter。现建议仅补全文本，字段建议留给筛选入口。 |
 | Files Changed | AssetLibraryViewModel.P3QueryComposer.cs |
 | Automated Test | TextSuggestionDoesNotOpenAdvancedFilters + P3 搜索/建议回归通过。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -86,8 +86,8 @@ UserVerified: false
 | Root Cause | 上一轮 cfdd0b3 已删除 Gallery 大标题；本轮核对当前 XAML，保留原改动，尚无本轮 runtime 证据。 |
 | Files Changed | 无重复修改；现有 AssetLibraryPage.xaml |
 | Automated Test | AssetLibraryEagleLayoutReconstruction / P2LayoutBounds 回归通过。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | 文字反馈；无独立截图 |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -102,8 +102,8 @@ UserVerified: false
 | Root Cause | 上一轮 cfdd0b3 已调整智能文件夹→标签分组→分隔线→文件夹；本轮保留，查询命令继续使用原实现。 |
 | Files Changed | 无重复修改；现有 AssetLibraryPage.xaml / P2Browser |
 | Automated Test | P2Browser / P3Wpf 查询与布局回归通过。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -118,8 +118,8 @@ UserVerified: false
 | Root Cause | TreeView 使用默认模板，新建输入行尺寸不同。现明确箭头/层级缩进/图标/计数/hover/selected，30 DIP 行与新建行一致。 |
 | Files Changed | AssetLibraryPage.xaml / AssetLibraryOrganizationNodes.cs |
 | Automated Test | AssetFolderTreeLayout + 布局构造回归通过；实际外观/hover 未验。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -134,8 +134,8 @@ UserVerified: false
 | Root Cause | 已有 FolderSearch 只过滤分类器列表，侧栏树没有搜索入口。现新增名称过滤投影，保留祖先，搜索展开不写入持久化状态。 |
 | Files Changed | AssetLibraryOrganizationNodes.cs / AssetLibraryViewModel.InspectorRelations.cs / P2Browser |
 | Automated Test | FolderNameSearchKeepsAncestorsExpansionAndAssetQuery 通过。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -150,8 +150,8 @@ UserVerified: false
 | Root Cause | Inspector 仅添加关系；关系修改后未统一刷新组织列表、计数与 query。现通过既有 browser command service 写入并刷新各投影，支持移除及 durable undo。 |
 | Files Changed | AssetLibraryViewModel.ContextualInspector.cs / InspectorRelations.cs / P2Browser |
 | Automated Test | InspectorRelationsPersistRefreshQueryAndSurviveReload / MixedSelectionAndStalePickerNeverWriteWrongAssets 通过；Core Asset 143 PASS。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/8.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -166,8 +166,8 @@ UserVerified: false
 | Root Cause | Inspector 只有标签摘要与固定输入框，无逐条关系删除。现单/多选共用 0..N chips，多选显示成员计数。 |
 | Files Changed | AssetLibraryPage.xaml / AssetLibraryViewModel.InspectorRelations.cs |
 | Automated Test | 两标签增删/重载/混合选中/Undo 通过。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/8.png, user-before/9.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -182,8 +182,8 @@ UserVerified: false
 | Root Cause | 缺少选中素材的搜索/已选/可用/勾选/新建标签选择器。现借用现有 single-active ContextMenu manager，stale-selection guard 防止误写。 |
 | Files Changed | AssetInspectorTagPicker.xaml(.cs) / AssetLibraryPage.Popups.cs / InspectorRelations.cs |
 | Automated Test | 标签创建/搜索/选中切换/空选择禁用/过期操作保护通过；Overlay 鼠标与键盘待 runtime。 |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/8.png, user-before/9.png, user-before/10.png |
 | After Evidence | 未采集 |
 | Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
@@ -195,13 +195,13 @@ UserVerified: false
 | ID | RUX-012 |
 | User Finding | Color Filter Popup；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 二维色板藏在高级面板，顶部颜色入口混入 metadata 编辑。提取原色板及 HSV 查询绑定到独立浮层。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/6.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-013 — 可配置顶部筛选
@@ -211,13 +211,13 @@ UserVerified: false
 | ID | RUX-013 |
 | User Finding | 可配置顶部筛选；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 顶部四个筛选永久固定；新增真实字段的编辑/固定菜单，固定列表保存到原 WorkspaceSettings。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/5.png, user-before/7.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-014 — Quick Loupe
@@ -227,13 +227,13 @@ UserVerified: false
 | ID | RUX-014 |
 | User Finding | Quick Loupe；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | MouseLeave 把 popup 自身作为悬停保留条件。现 trigger 离开即取消加载并关闭，预览不截获鼠标。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/4.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-015 — Quick Loupe / Viewer / Compare 职责
@@ -243,13 +243,13 @@ UserVerified: false
 | ID | RUX-015 |
 | User Finding | Quick Loupe / Viewer / Compare 职责；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 保留 magnifier→loupe / double click→viewer / compare→workspace 既有命令，不更换职责。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/4.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-016 — Inspector Preview 背景
@@ -259,13 +259,13 @@ UserVerified: false
 | ID | RUX-016 |
 | User Finding | Inspector Preview 背景；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 固定 240 高带背景的图片容器造成灰块；改透明且按图片自适应，上限240。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/15.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-017 — Inspector Sections
@@ -275,13 +275,13 @@ UserVerified: false
 | ID | RUX-017 |
 | User Finding | Inspector Sections；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 评分与颜色未分区、来源标题重复。增加统一分隔与折叠分组，第二来源改为 EXIF。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/11.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-018 — Inspector Export
@@ -291,13 +291,13 @@ UserVerified: false
 | ID | RUX-018 |
 | User Finding | Inspector Export；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 来源信息内重复 ghost 导出按钮；移到快速工具，用现有 Publishing 命令。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/11.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-019 — 所有二级菜单宽度
@@ -307,13 +307,13 @@ UserVerified: false
 | ID | RUX-019 |
 | User Finding | 所有二级菜单宽度；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | submenu 固定 MinWidth220，空图标和快捷键列仍占宽；移除固定下限并折叠空列。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/12.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-020 — Color Label Menu
@@ -323,13 +323,13 @@ UserVerified: false
 | ID | RUX-020 |
 | User Finding | Color Label Menu；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 复用现有色块菜单，内容宽度跟随 swatch；Inspector 也改为同一元数据的直接色块操作。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/12.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-021 — Rating Menu
@@ -339,13 +339,13 @@ UserVerified: false
 | ID | RUX-021 |
 | User Finding | Rating Menu；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 菜单同时使用数字星级文本与数字快捷键；改清除评分/★，快捷键不变。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/13.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-022 — Context Menu Visual Contract
@@ -355,13 +355,13 @@ UserVerified: false
 | ID | RUX-022 |
 | User Finding | Context Menu Visual Contract；详见用户本轮完整指令 |
 | Current Runtime State | 用户报告未满足；本轮 NOT_RUN |
-| Root Cause | 待当前源码逐项核查 |
-| Files Changed | 未完成 |
-| Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Root Cause | 修共享 canonical/implicit 菜单模板空列，保持 ContextMenuPlacement/Monitor。 |
+| Files Changed | AssetLibraryPage/Popups; AssetColorFilterPicker; WorkspaceSettings; shared menu templates（见本批 git diff） |
+| Automated Test | Batch B Release x64 0 errors; WPF 60 PASS / 0 FAIL；日志 tests/batch-b.trx |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/12.png |
 | After Evidence | 未采集 |
-| Status | OPEN |
+| Status | FIXED_IN_CODE |
 | USER_APPROVED | false |
 
 ## RUX-023 — Smart Folder Query Builder
@@ -374,8 +374,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -390,8 +390,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/24.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -406,8 +406,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/25.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -422,8 +422,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -438,8 +438,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/23.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -454,8 +454,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/3.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -470,8 +470,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/3.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -486,8 +486,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/3.png, user-before/18.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -502,8 +502,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -518,8 +518,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -534,8 +534,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | 文字反馈；无独立截图 |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -550,8 +550,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/18.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -566,8 +566,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/21.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -582,8 +582,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -598,8 +598,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -614,8 +614,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/20.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -630,8 +630,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | 文字反馈；无独立截图 |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -646,8 +646,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -662,8 +662,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -678,8 +678,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -694,8 +694,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/19.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -710,8 +710,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -726,8 +726,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/22.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -742,8 +742,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -758,8 +758,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/16.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
@@ -774,8 +774,8 @@ UserVerified: false
 | Root Cause | 待当前源码逐项核查 |
 | Files Changed | 未完成 |
 | Automated Test | NOT_RUN（本轮） |
-| Runtime Test | BLOCKED：缺用户截图与本轮实机操作方式确认 |
-| Before Evidence | 未提供；不生成替代截图 |
+| Runtime Test | NOT_RUN：按用户确认，完成全部批次后统一人工验收 |
+| Before Evidence | user-before/17.png |
 | After Evidence | 未采集 |
 | Status | OPEN |
 | USER_APPROVED | false |
