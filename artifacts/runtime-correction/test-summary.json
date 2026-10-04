@@ -1,0 +1,93 @@
+{
+  "SourceHead": "dc2ba3d47e9937e6ab41395a589ae1c44a2b1ed7",
+  "Runs": [
+    {
+      "Name": "Core full",
+      "SourceHead": "4315bc9007c6087b185d214917fd8ef36daea545",
+      "Passed": 1537,
+      "Failed": 0,
+      "Skipped": 4,
+      "Total": 1541,
+      "Outcome": "Completed",
+      "Note": "Core unchanged since 4315bc9; final production source dc2ba3d",
+      "Path": "N:\\pixart\\pixel-tart-source-private\\artifacts\\runtime-correction\\tests\\core-final.trx",
+      "Sha256": "1A645B7F15D614D205F5030269CBA00EF4916D91B36B34A11B20DB7B270CB74D"
+    },
+    {
+      "Name": "WPF full serial",
+      "SourceHead": "dc2ba3d47e9937e6ab41395a589ae1c44a2b1ed7",
+      "Passed": 1439,
+      "Failed": 0,
+      "Skipped": 11,
+      "Total": 1450,
+      "Outcome": "Completed",
+      "Note": "Final full serial regression; 8m23s; normal testhost exit",
+      "Path": "N:\\pixart\\pixel-tart-source-private\\artifacts\\runtime-correction\\tests\\wpf-r9.trx",
+      "Sha256": "AF200947E5AC7DD96671BA605E31C9830D16439FE55EB5AED9E8BC1DDEDFF70F"
+    },
+    {
+      "Name": "DPI",
+      "SourceHead": "4315bc9007c6087b185d214917fd8ef36daea545",
+      "Passed": 91,
+      "Failed": 0,
+      "Skipped": 0,
+      "Total": 91,
+      "Outcome": "Completed",
+      "Note": "Automated contract only; old current-run-visual SourceHead de4c91a, not final runtime proof",
+      "Path": "N:\\pixart\\pixel-tart-source-private\\artifacts\\runtime-correction\\tests\\dpi-final.trx",
+      "Sha256": "769D1D87A0002527EAD88E5BD0D55E24F23D5EF328D4B086C5E358917266E4DF"
+    }
+  ],
+  "Categories": [
+    {
+      "Name": "Asset Library",
+      "Pattern": "AssetLibrary|OrganizationRename|SidebarRename",
+      "Passed": 522,
+      "Failed": 0,
+      "Skipped": 2,
+      "Note": "Overlapping subset of full runs, not additive"
+    },
+    {
+      "Name": "Color Studio",
+      "Pattern": "ColorStudio|ReferenceWorkspace|RuntimeCorrectionWpf",
+      "Passed": 71,
+      "Failed": 0,
+      "Skipped": 1,
+      "Note": "Overlapping subset of full runs, not additive"
+    },
+    {
+      "Name": "Reference Match",
+      "Pattern": "ReferenceMatch|MatchV[34]|ReferenceColor|BatchExport",
+      "Passed": 61,
+      "Failed": 0,
+      "Skipped": 3,
+      "Note": "Overlapping subset of full runs, not additive"
+    },
+    {
+      "Name": "3D",
+      "Pattern": "ColorSpace|Cloud|Oklab|Mapping",
+      "Passed": 57,
+      "Failed": 0,
+      "Skipped": 0,
+      "Note": "Overlapping subset of full runs, not additive"
+    },
+    {
+      "Name": "Free Canvas",
+      "Pattern": "Canvas",
+      "Passed": 26,
+      "Failed": 0,
+      "Skipped": 0,
+      "Note": "Overlapping subset of full runs, not additive"
+    },
+    {
+      "Name": "Guardian",
+      "Pattern": "Guardian",
+      "Passed": 10,
+      "Failed": 0,
+      "Skipped": 0,
+      "Note": "Overlapping subset of full runs, not additive"
+    }
+  ],
+  "VisualApproved": false,
+  "UserVerified": false
+}

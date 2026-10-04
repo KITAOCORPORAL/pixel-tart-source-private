@@ -1,0 +1,10 @@
+6f8e86f7299a8dd77cf56e4aef2b3a493989add0 fix(ux): correct studio inspection, organization rename and canvas menus
+674bed802cfc5803f8d8ae3bcff2b8812c4b5b9a fix(studio): make short inspection panels accessible and preserve source encoding
+8b3cb6d06b15127e29795169ae39cb640f3a3846 fix(studio): clear inspection before shell escape navigation
+4315bc9007c6087b185d214917fd8ef36daea545 fix(studio): keep image visible during cloud inspection
+206051ebd63b2b34b45520f7fcbea4e3d9954471 fix(canvas): defer owner close after document save
+b839cc10d51c60e7526a701506c076665d1bc75c test(canvas): isolate shutdown regression from foreign application STA
+20fb6957a3236d46b24dfe5cf29ac38f622098af fix(studio): keep inspection on the owner display
+4687b37e28fe9ea4a771973f39319ebeaa17612f fix(studio): keep compact inspection clear of target viewport
+64eec3b1cf3dfba502a4dad5926e0a0a909b67f2 fix(studio): retain readable edit controls in compact layout
+dc2ba3d47e9937e6ab41395a589ae1c44a2b1ed7 fix(studio): balance compact editing rail and image space

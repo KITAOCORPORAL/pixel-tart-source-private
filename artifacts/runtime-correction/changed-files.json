@@ -1,0 +1,142 @@
+[
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryOrganizationNodes.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.OrganizationRename.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+    "Type": "Production layout and bindings"
+  },
+  {
+    "Change": "A",
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.OrganizationRename.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/ContextMenuMonitor.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/PixelTart.Modules.AssetLibrary/HistogramDrawing.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "src/PixelTart.Modules.AssetLibrary/ToneZoneDrawing.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisEngine.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualHistogram.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasEditor.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Analysis.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "src/RAWSelectionAssistant/Views/CloudInspectionControls.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/Views/ImageHighlightOverlay.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+    "Type": "Production layout and bindings"
+  },
+  {
+    "Change": "M",
+    "Path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+    "Type": "Production behavior"
+  },
+  {
+    "Change": "A",
+    "Path": "tests/RAWSelectionAssistant.Tests/RuntimeCorrectionCoreTests.cs",
+    "Type": "Behavioral regression test"
+  },
+  {
+    "Change": "M",
+    "Path": "tests/RAWSelectionAssistant.WpfTests/ContextMenuPlacementTests.cs",
+    "Type": "Behavioral regression test"
+  },
+  {
+    "Change": "M",
+    "Path": "tests/RAWSelectionAssistant.WpfTests/ReferenceWorkspaceWideRatioTests.cs",
+    "Type": "Behavioral regression test"
+  },
+  {
+    "Change": "A",
+    "Path": "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs",
+    "Type": "Behavioral regression test"
+  }
+]

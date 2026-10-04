@@ -1,4 +1,11 @@
-# Pixel Tart · 人工验收缺陷修正版
+# Pixel Tart · 四组人工验收返工候选
+
+当前 Release：`N:/pixart/pixel-tart-source-private/artifacts/releases/runtime-correction-2026-10-04-r9/publish/win-x64/KitaoPhotoSelector.exe`。
+Production SourceHead：`dc2ba3d47e9937e6ab41395a589ae1c44a2b1ed7`。
+先读 `00_START_HERE.md` 和 `docs/evidence/human-review/RUNTIME_CORRECTION_2026-10-04.md`。
+本轮已授权并执行受限桌面操作；After按实际EXE分别存放，四组仍未全部实机通过。VisualApproved=false；UserVerified=false；NOT_READY_FOR_USER_RETEST。
+
+## 以下为上一轮历史记录
 
 Release SourceHead: `8457e9022ac8278df5401c6c1842f70a39c98129`
 
