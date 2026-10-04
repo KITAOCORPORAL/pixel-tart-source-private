@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Xml.Linq;
 using System.Security.Cryptography;
 using System.Windows;
@@ -17,41 +17,12 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class AssetLibraryVisualPhase2Tests
 {
     [TestMethod]
-    public async Task ThemeImportBrowseAndResolutionMatrix()
+    public Task ThemeImportBrowseAndResolutionMatrix() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
-        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var thread = new Thread(() =>
-        {
-            var dispatcher = Dispatcher.CurrentDispatcher;
-            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(dispatcher));
-            async Task Run()
-            {
-                // Load the actual application resources without invoking application startup/services.
-                var app = new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
-                var repositoryRoot = new DirectoryInfo(AppContext.BaseDirectory);
-                while (repositoryRoot is not null && !Directory.Exists(Path.Combine(repositoryRoot.FullName, "src")))
-                    repositoryRoot = repositoryRoot.Parent;
-                var sourceRoot = Path.Combine(repositoryRoot!.FullName, "src", "RAWSelectionAssistant");
-                // Testhost owns ResourceAssembly. Expand the actual aggregate entries and load each
-                // leaf from the product assembly so root-relative URIs retain production meaning.
-                void LoadResources(string relative)
-                {
-                    var document = System.Xml.Linq.XDocument.Load(Path.Combine(sourceRoot, relative));
-                    if (relative.EndsWith("App.xaml") || relative.EndsWith("PixelTart.Theme.xaml") || relative.EndsWith("PixelTart.Components.xaml"))
-                    {
-                        foreach (var source in document.Descendants().Attributes("Source"))
-                        {
-                            var nested = source.Value.TrimStart('/', '\\');
-                            LoadResources(nested.StartsWith("Resources/", StringComparison.OrdinalIgnoreCase)
-                                ? nested
-                                : "Resources/DesignSystem/" + nested);
-                        }
-                    }
-                    else
-                        app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(
-                            new Uri("/" + typeof(App).Assembly.GetName().Name + ";component/" + relative, UriKind.Relative)));
-                }
-                LoadResources("App.xaml");
+                // Use the suite dispatcher and shared Application. Never create or shut down
+                // a second WPF singleton in a testhost already containing product controls.
+                RuntimeCorrectionWpfTests.EnsureTestApplication();
+                var app = Application.Current;
                 var root = Path.Combine(Path.GetTempPath(), "PixelTart-VisualPhase2", Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(root);
                 var sources = Path.Combine(root, "sources");
@@ -139,17 +110,7 @@ public sealed class AssetLibraryVisualPhase2Tests
                 }
                 foreach (var pair in hashes) CollectionAssert.AreEqual(pair.Value, SHA256.HashData(File.ReadAllBytes(pair.Key)));
                 File.WriteAllText(Path.Combine(output, "results.json"), System.Text.Json.JsonSerializer.Serialize(records, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
-            }
-            var task = Run();
-            _ = task.ContinueWith(_ => dispatcher.BeginInvokeShutdown(DispatcherPriority.Background));
-            Dispatcher.Run();
-            try { task.GetAwaiter().GetResult(); completion.SetResult(); }
-            catch (Exception ex) { completion.SetException(ex); }
-        });
-        thread.SetApartmentState(ApartmentState.STA);
-        thread.Start();
-        await completion.Task;
-    }
+    });
 
     private static IEnumerable<T> Descendants<T>(DependencyObject root) where T : DependencyObject
     {
