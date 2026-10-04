@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
@@ -965,6 +965,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         if (e.Key == Key.Escape && (_activeToolbarPopup is not null || _viewModel.P3QuerySurfaceVisible))
         { CloseToolbarPopups(); e.Handled = true; return; }
         if (_canvas is not null) return;
+        if (e.Key == Key.F2 && !IsTextInputContext(e.OriginalSource) &&
+            FindOrganizationNode(e.OriginalSource as DependencyObject) is { } organization)
+        { e.Handled = true; ShowOrganizationRename(organization); return; }
         if (e.Key is Key.ImeProcessed or Key.DeadCharProcessed || IsTextInputContext(e.OriginalSource)) return;
         if (_isMarqueeSelecting && e.Key == Key.Escape)
         {

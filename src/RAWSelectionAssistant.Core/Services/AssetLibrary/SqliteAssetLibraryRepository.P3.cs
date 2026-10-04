@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
@@ -916,6 +916,11 @@ public sealed partial class SqliteAssetLibraryRepository
         if (table == "AssetTags")
         {
             command.CommandText = $"SELECT {idColumn},Name FROM {table} WHERE (($group IS NULL AND TagGroupId IS NULL) OR TagGroupId=$group);";
+            command.Parameters.AddWithValue("$group", (object?)groupId?.ToString("D") ?? DBNull.Value);
+        }
+        else if (table == "AssetFolders")
+        {
+            command.CommandText = $"SELECT {idColumn},Name FROM {table} WHERE (($group IS NULL AND ParentFolderId IS NULL) OR ParentFolderId=$group);";
             command.Parameters.AddWithValue("$group", (object?)groupId?.ToString("D") ?? DBNull.Value);
         }
         else command.CommandText = $"SELECT {idColumn},Name FROM {table};";

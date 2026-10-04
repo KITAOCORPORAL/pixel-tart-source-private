@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -136,7 +136,7 @@ public static class ColorSpaceLinking
     public static IReadOnlyList<int> ToPixelMembership(ColorSpaceCloud cloud, VisualPixelBuffer source, int pointIndex, double radius = .06)
     {
         ArgumentNullException.ThrowIfNull(cloud); ArgumentNullException.ThrowIfNull(source);
-        if (pointIndex < 0 || pointIndex >= cloud.Points.Count) return [];
+        if (pointIndex < 0 || pointIndex >= cloud.Points.Count || !double.IsFinite(radius) || radius < 0) return [];
         var center = cloud.Points[pointIndex].Lab;
         var result = new List<int>();
         for (var pixel = 0; pixel < source.PixelCount; pixel++)

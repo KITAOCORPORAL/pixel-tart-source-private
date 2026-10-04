@@ -1,4 +1,4 @@
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
@@ -6,14 +6,31 @@ public static class VisualAnalysisEngine
 {
     private const int PaletteSampleLimit = 16_384;
 
+    /// <summary>Live-preview subset; no palette clustering or sorting. RGB is encoded sRGB;
+    /// luminance is linear sRGB Y, divided into eleven equal intervals (not exposure stops).</summary>
+    public static VisualHistogram AnalyzeHistogram(VisualPixelBuffer pixels, CancellationToken cancellationToken = default)
+    {
+        var r = new uint[256]; var g = new uint[256]; var b = new uint[256]; var y = new uint[256];
+        var zones = new long[11]; var bytes = pixels.Rgb24.Span;
+        for (var index = 0; index < pixels.PixelCount; index++)
+        {
+            if ((index & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
+            var offset = index * 3; var red = bytes[offset]; var green = bytes[offset + 1]; var blue = bytes[offset + 2];
+            r[red]++; g[green]++; b[blue]++;
+            var luma = LuminanceBin(red, green, blue); y[luma]++; zones[Math.Min(10, luma * 11 / 256)]++;
+        }
+        return new(r, g, b, y, new(zones.Select(value => value / (double)pixels.PixelCount).ToArray()));
+    }
+    private static byte LuminanceBin(byte r, byte g, byte b) => (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(r, g, b)), 0, 255);
+
     public static AssetVisualAnalysisResult Analyze(AssetVisualAnalysisRequest request, CancellationToken cancellationToken = default)
     {
         if (request.PaletteSize is not (3 or 5 or 7)) throw new ArgumentOutOfRangeException(nameof(request.PaletteSize));
         if (!request.PixelsConvertedToAnalysisProfile) throw new InvalidOperationException("Pixel buffer must be converted to the declared analysis profile before analysis.");
         var bytes = request.Pixels.Rgb24.Span;
-        var histR = new uint[256]; var histG = new uint[256]; var histB = new uint[256]; var histLuma = new uint[256];
+        var histogram = AnalyzeHistogram(request.Pixels, cancellationToken);
+        var histR = histogram.R; var histG = histogram.G; var histB = histogram.B; var histLuma = histogram.Luma;
         var zoneCounts = new long[5];
-        var elevenZoneCounts = new long[11];
         var lumaValues = new byte[request.Pixels.PixelCount];
         var saturationValues = new double[request.Pixels.PixelCount];
         double lumaSum = 0; double saturationSum = 0; double lightnessSum = 0; double warmCoolSum = 0; double warmCoolWeight = 0; double hueX = 0; double hueY = 0; double hueWeight = 0;
@@ -21,11 +38,9 @@ public static class VisualAnalysisEngine
         {
             if ((pixel & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
             var offset = pixel * 3; var r = bytes[offset]; var g = bytes[offset + 1]; var b = bytes[offset + 2];
-            histR[r]++; histG[g]++; histB[b]++;
-            var luma = (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(r, g, b)), 0, 255);
-            histLuma[luma]++; lumaValues[pixel] = luma; lumaSum += luma;
+            var luma = LuminanceBin(r, g, b);
+            lumaValues[pixel] = luma; lumaSum += luma;
             zoneCounts[luma < 32 ? 0 : luma < 80 ? 1 : luma < 176 ? 2 : luma < 224 ? 3 : 4]++;
-            elevenZoneCounts[Math.Min(10, luma * 11 / 256)]++;
             var hsl = RgbToHsl(r, g, b); saturationValues[pixel] = hsl.S; saturationSum += hsl.S; lightnessSum += hsl.L;
             if (hsl.S >= 0.08)
             {
@@ -80,7 +95,7 @@ public static class VisualAnalysisEngine
             HistogramLumaSignature = HistogramSignature(histLuma),
             PaletteSignature = string.Join("|", palette.Select(color => $"{color.Hex}:{color.Weight:F6}")),
             HasDominantChromaticColor = materialPalette.Length > 0,
-            ZoneDistribution = new(elevenZoneCounts.Select(value => value / denominator).ToArray()),
+            ZoneDistribution = histogram.Zones,
             SimilaritySignatures = CreateSimilaritySignatures(request.Pixels)
         };
     }

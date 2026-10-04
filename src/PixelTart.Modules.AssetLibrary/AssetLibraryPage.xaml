@@ -1,4 +1,4 @@
-<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetLibraryPage"
+﻿<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetLibraryPage"
              x:Name="AssetLibraryRoot"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -594,7 +594,7 @@
                                             <Expander.Header>
                                                 <Button Content="{Binding Name}" ContentTemplate="{StaticResource OrganizationNameTemplate}" ToolTip="{Binding Name}" Command="{Binding SelectCommand}"
                                                         Style="{DynamicResource PixelTart.Button.Ghost}" MinHeight="30" Padding="4,2" FontSize="{DynamicResource Type.Body.FontSize}" HorizontalContentAlignment="Stretch"
-                                                        AutomationProperties.AutomationId="{Binding FilterAutomationId}" />
+                                                        AutomationProperties.AutomationId="{Binding FilterAutomationId}"><Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"><MenuItem Header="重命名…" InputGestureText="F2" Click="RenameOrganization_Click" IsEnabled="{Binding CanRename}" /></ContextMenu></Button.ContextMenu></Button>
                                             </Expander.Header>
                                             <ItemsControl ItemsSource="{Binding Children}">
                                                 <ItemsControl.ItemTemplate>
@@ -604,7 +604,7 @@
                                                                 AutomationProperties.AutomationId="{Binding AutomationId}"
                                                                 AutomationProperties.Name="{Binding AccessibleName}"
                                                                 local:AssetLibraryDragDropBehavior.DropTarget="{Binding DropTarget}">
-                                                            <DockPanel><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,0,0" /><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" /></DockPanel>
+                                                            <Button.ContextMenu><ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"><MenuItem Header="重命名…" InputGestureText="F2" Click="RenameOrganization_Click" /></ContextMenu></Button.ContextMenu><DockPanel><TextBlock Text="{Binding UsageCount}" DockPanel.Dock="Right" Style="{DynamicResource PixelTart.Type.Metadata}" Margin="6,0,0,0" /><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" /></DockPanel>
                                                         </Button>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
@@ -684,8 +684,7 @@
                                             <TextBlock Grid.Column="2" Text="{Binding CountText}" Style="{DynamicResource PixelTart.Type.Metadata}" Foreground="{DynamicResource Brush.Text.Muted}" Margin="8,0,2,0" VerticalAlignment="Center" />
                                             <Grid.ContextMenu>
                                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                                                    <MenuItem Header="重命名" Command="{Binding BeginRenameCommand}" />
-                                                    <MenuItem Header="完成重命名" Command="{Binding CommitRenameCommand}" />
+                                                    <MenuItem Header="重命名…" InputGestureText="F2" Click="RenameOrganization_Click" />
                                                     <MenuItem Header="创建同级文件夹" Command="{Binding CreateSiblingCommand}" />
                                                     <MenuItem Header="创建子文件夹" Command="{Binding CreateChildCommand}" />
                                                     <Separator />

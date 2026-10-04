@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -8,6 +8,12 @@ namespace RAWSelectionAssistant.Views;
 /// <summary>Windows surface for the platform-neutral ColorSpaceVisualizationModel.</summary>
 public sealed class ColorSpace3DViewport : FrameworkElement
 {
+    public static readonly DependencyProperty PointSizeProperty = DependencyProperty.Register(nameof(PointSize), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(2.6, FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty PointOpacityProperty = DependencyProperty.Register(nameof(PointOpacity), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(.7, FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty SelectionToleranceProperty = DependencyProperty.Register(nameof(SelectionTolerance), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(.06, FrameworkPropertyMetadataOptions.AffectsRender));
+    public double PointSize { get => (double)GetValue(PointSizeProperty); set => SetValue(PointSizeProperty, value); }
+    public double PointOpacity { get => (double)GetValue(PointOpacityProperty); set => SetValue(PointOpacityProperty, value); }
+    public double SelectionTolerance { get => (double)GetValue(SelectionToleranceProperty); set => SetValue(SelectionToleranceProperty, value); }
     private Point? _pointer;
     private ColorSpaceRendererState? _state;
     private long _renderCount;
@@ -47,16 +53,20 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         _renderCount++;
         base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
-        if (State is null) { DrawLabel(drawing, "点击“生成当前模型”查看色彩分布", new Point(18, 18)); return; }
+        if (State is null) { DrawLabel(drawing, "载入目标图像后显示真实采样", new Point(18, 18)); return; }
         DrawAxes(drawing);
         DrawLabel(drawing, "L 明度 0–1 · a 绿↔红 · b 蓝↔黄", new Point(10, 8));
-        if (ActualHeight >= 260) DrawLabel(drawing, "离中性轴越远，色度越高 · 点色＝原片采样", new Point(10, 26));
+        if (ActualHeight >= 260) DrawLabel(drawing, "离中性轴越远，色度越高 · 点色＝当前分析图像", new Point(10, 26));
         foreach (var cloud in State.VisibleClouds)
+        {
+            var cluster = State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster
+                ? ColorSpaceLinking.SelectCluster(cloud, State.Selection.PointIndex, SelectionTolerance).ToHashSet() : [];
             foreach (var point in ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight, 1))
             {
-                var selected = State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster && State.Selection.PointIndex == point.PointIndex;
-                drawing.DrawEllipse(new SolidColorBrush(Color.FromRgb(point.Color.R, point.Color.G, point.Color.B)), selected ? new Pen(Brushes.White, 2) : null, new Point(point.X, point.Y), selected ? 5 : 2.2, selected ? 5 : 2.2);
+                var selected = cluster.Contains(point.PointIndex);
+                drawing.DrawEllipse(new SolidColorBrush(Color.FromArgb((byte)(Math.Clamp(PointOpacity, .15, 1) * 255), point.Color.R, point.Color.G, point.Color.B)), selected ? new Pen(Brushes.White, 1) : null, new Point(point.X, point.Y), selected ? PointSize + 2 : PointSize, selected ? PointSize + 2 : PointSize);
             }
+        }
         if (State.ShowMigrationVectors && State.Mode is ColorCloudMode.Migration or ColorCloudMode.Overlay)
             foreach (var vector in State.Model.MigrationVectors.Take(512)) DrawVector(drawing, vector);
         // Draw the selection last so dense clouds cannot cover the picked point.
@@ -110,5 +120,5 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         State = State with { Selection = index >= 0 ? new(ColorSpaceMarkerKind.SelectedCluster, index) : ColorSpaceSelection.None };
         SelectionChanged?.Invoke(this, State.Selection);
     }
-    private void OnMouseWheel(object sender, MouseWheelEventArgs e) { if (State is null) return; State = State with { Camera = State.Camera.Zoom(e.Delta > 0 ? 1.12 : .89), IsFit = false }; }
+    private void OnMouseWheel(object sender, MouseWheelEventArgs e) { if (State is null) return; e.Handled = true; State = State with { Camera = State.Camera.Zoom(e.Delta > 0 ? 1.12 : .89), IsFit = false }; }
 }

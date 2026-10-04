@@ -1,4 +1,4 @@
-namespace RAWSelectionAssistant.Core.Services.FreeCanvas;
+﻿namespace RAWSelectionAssistant.Core.Services.FreeCanvas;
 
 public readonly record struct CanvasBounds(double X, double Y, double Width, double Height);
 
@@ -84,6 +84,7 @@ public sealed class CanvasEditor
         Transform(item => item with { X = x + (item.X - x) * factor, Y = y + (item.Y - y) * factor, Width = Math.Max(1, item.Width * factor), Height = Math.Max(1, item.Height * factor), FontSize = item.IsText ? Math.Max(1, item.FontSize * factor) : item.FontSize });
     }
     public void Remove() { var ids = Document.Objects.Where(Editable).Select(item => item.ObjectId).ToHashSet(); if (ids.Count > 0) Commit(Document with { Objects = Document.Objects.Where(item => !ids.Contains(item.ObjectId)).ToArray() }); }
+    public bool CanPaste => _clipboard.Length > 0;
     public void Copy() => _clipboard = Selected.ToArray();
     public void Paste()
     {

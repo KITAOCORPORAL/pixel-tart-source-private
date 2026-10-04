@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text;
 using System.Globalization;
 using System.Security.Cryptography;
@@ -822,6 +822,7 @@ public sealed partial class SqliteAssetLibraryRepository
         var next = previous with { Name = trimmed };
         var token = await MutateAndJournalAsync("Rename folder", "folder-restore", previous, async (connection, transaction, ct) =>
         {
+            await EnsureUniqueEntityNameAsync(connection, transaction, "AssetFolders", "FolderId", folderId, previous.ParentFolderId, trimmed, ct).ConfigureAwait(false);
             await ResolveP3NameReferencesInAllDocumentsAsync(connection, transaction, ct).ConfigureAwait(false);
             await ExecuteAsync(connection, transaction, "UPDATE AssetFolders SET Name=$name,UpdatedAt=$updated WHERE FolderId=$id;", ct, ("$name", next.Name), ("$updated", DateTimeOffset.UtcNow.ToString("O")), ("$id", folderId.ToString("D"))).ConfigureAwait(false);
         }, ct => SaveFolderAsync(previous, ct), cancellationToken).ConfigureAwait(false);

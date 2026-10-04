@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -15,6 +15,8 @@ public sealed class ImageHighlightOverlay : FrameworkElement
     public int ImageHeight { get => (int)GetValue(ImageHeightProperty); set => SetValue(ImageHeightProperty, value); }
     public ColorStudioZoomPanState? ViewState { get; set; }
     public string ViewMode { get; set; } = "原片";
+    public bool IsOriginal { get; set; } = true;
+    public double SplitPosition { get; set; } = .5;
     public bool IsPreviewOnly => true;
     private static void InvalidateMask(DependencyObject sender, DependencyPropertyChangedEventArgs args) => ((ImageHighlightOverlay)sender)._mask = null;
     protected override void OnRender(DrawingContext dc)
@@ -33,10 +35,14 @@ public sealed class ImageHighlightOverlay : FrameworkElement
             _mask.Freeze();
         }
         // Source membership uses the same viewport geometry as the original image.
-        var viewport = ColorStudioSampleMapping.Viewport(RenderSize, ViewMode == "并排对比", false);
+        var viewport = ColorStudioSampleMapping.Viewport(RenderSize, ViewMode == "并排对比", !IsOriginal);
         var imageRect = ViewState is null ? viewport : ViewState.ImageRect(viewport);
         dc.PushClip(new RectangleGeometry(viewport));
+        if (ViewMode == "左右对比") dc.PushClip(new RectangleGeometry(IsOriginal
+            ? new Rect(0, 0, RenderSize.Width * SplitPosition, RenderSize.Height)
+            : new Rect(RenderSize.Width * SplitPosition, 0, RenderSize.Width * (1 - SplitPosition), RenderSize.Height)));
         dc.DrawImage(_mask, imageRect);
+        if (ViewMode == "左右对比") dc.Pop();
         dc.Pop();
     }
 }

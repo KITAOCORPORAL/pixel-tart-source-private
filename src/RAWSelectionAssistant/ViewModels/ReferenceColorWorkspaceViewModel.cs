@@ -1,4 +1,4 @@
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDisposable
+public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject, IDisposable
 {
     private readonly IDialogService _dialogs;
     private readonly RawMatchTiff16ProductPipeline _rawPipeline;
@@ -200,11 +200,8 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
-            if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage))
-            {
-                Interlocked.Increment(ref _colorSpaceRevision); ColorSpaceModel = null; _colorSpaceSourceBuffer = null;
-                ClearColorSpaceHighlight(); BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
-            }
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
+                SchedulePreviewAnalysis();
         };
         Targets.CollectionChanged += (_, args) =>
         {
@@ -238,24 +235,15 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public int HighlightImageHeight => _colorSpaceSourceBuffer?.Height ?? 0;
     public async Task BuildColorSpaceModelAsync(CancellationToken token = default)
     {
-        if (Editor.SourceImage is not { } sourceImage) return;
-        var revision = Interlocked.Increment(ref _colorSpaceRevision);
-        var matchedImage = Editor.MatchedImage ?? sourceImage;
-        var source = await Task.Run(() => ToVisualBuffer(sourceImage), token);
-        var matched = await Task.Run(() => ToVisualBuffer(matchedImage), token);
-        var transform = new MatchV4ResolvedTransform(new(0, 0, 0), [new(0, 0, 0), new(0, 0, 0), new(0, 0, 0)], new(), "workspace-preview");
-        var model = await Task.Run(() => ColorSpaceVisualizationBuilder.Build(source, matched, transform, ColorSpaceSamplingTier.Preview, token), token);
-        if (revision != Volatile.Read(ref _colorSpaceRevision)) return;
-        _colorSpaceSourceBuffer = source; ColorSpaceModel = model;
-        OnPropertyChanged(nameof(HasColorSpaceModel));
-        OnPropertyChanged(nameof(HighlightImageWidth)); OnPropertyChanged(nameof(HighlightImageHeight));
+        await RefreshPreviewAnalysisAsync(token);
     }
+
     public void HighlightImageSample(VisualRgb24 sample)
     {
         if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null) return;
         var index = ColorSpaceLinking.FindNearest(model.Source, OklabColorSpace.FromSrgb(sample));
         if (index < 0) return;
-        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, index);
+        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, index, SelectionTolerance);
         OnPropertyChanged(nameof(HighlightedPixels));
         ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, index));
     }
@@ -263,7 +251,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     {
         if (pointIndex < 0) { ClearColorSpaceHighlight(); return; }
         if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null || pointIndex >= model.Source.Points.Count) return;
-        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, pointIndex);
+        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, pointIndex, SelectionTolerance);
         OnPropertyChanged(nameof(HighlightedPixels));
         ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, pointIndex));
     }
@@ -591,6 +579,7 @@ public sealed class ReferenceColorWorkspaceViewModel : ObservableObject, IDispos
     public void Dispose()
     {
         _disposed = true;
+        _analysisCancellation?.Cancel(); _analysisCache.Clear();
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {

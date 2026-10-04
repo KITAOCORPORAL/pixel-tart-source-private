@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Utilities;
@@ -211,6 +211,7 @@ public sealed class AssetLibraryTagGroupNodeView : ObservableObject
     public bool IsSelected => _owner.IsTagGroupQuerySelected(this);
     internal void RefreshSelection() { OnPropertyChanged(nameof(IsSelected)); foreach (var tag in Children) tag.RefreshSelection(); }
     public TagGroup? Group { get; }
+    public bool CanRename => Group is not null;
     public string Name { get; }
     public string AutomationId { get; }
     public string AccessibleName => $"标签组 {Name}，{Children.Count} 个标签";

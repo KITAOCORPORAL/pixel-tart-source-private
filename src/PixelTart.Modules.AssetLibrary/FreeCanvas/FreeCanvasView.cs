@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -45,22 +45,27 @@ public sealed class FreeCanvasView : UserControl
         var root=new DockPanel();Content=root;
         var bar=new WrapPanel { Margin=new(8,6,8,6) };DockPanel.SetDock(bar,Dock.Top);root.Children.Add(bar);
         _name.Text=editor.Document.Name;_name.LostKeyboardFocus+=(_,_)=>editor.Rename(_name.Text);bar.Children.Add(_name);
-        var create = Button("新建", async () => { if (await PrepareDocumentChangeAsync() && OpenDocument is not null) await OpenDocument(new CanvasDocument()); });
-        System.Windows.Automation.AutomationProperties.SetAutomationId(create, "ContextNewCanvas");
-
-        var toolsGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; toolsGroup.Children.Add(GroupLabel("工具"));
-        foreach(var tool in new[]{"选择","移动画布","文本"})toolsGroup.Children.Add(Button(tool,()=>{Surface.Tool=tool;Surface.Focus();}));
-        toolsGroup.Children.Add(Button("素材",()=>{_drawer.Visibility=_drawer.IsVisible?Visibility.Collapsed:Visibility.Visible;if(_drawer.IsVisible)_=RefreshSourcesAsync();})); bar.Children.Add(toolsGroup);
-        var editGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; editGroup.Children.Add(GroupLabel("编辑")); _undoButton=Button("撤销",editor.Undo); _redoButton=Button("重做",editor.Redo); editGroup.Children.Add(_undoButton); editGroup.Children.Add(_redoButton); bar.Children.Add(editGroup);
-        var viewGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; viewGroup.Children.Add(GroupLabel("视图")); viewGroup.Children.Add(Button("适合",()=>Surface.Fit()));
+        // Primary actions stay in one compact row; secondary actions live in contextual menus.
+        bar.Children.Add(Button("选择",()=>{Surface.Tool="选择";Surface.Focus();}));
+        bar.Children.Add(Button("平移",()=>{Surface.Tool="移动画布";Surface.Focus();}));
+        _undoButton=Button("撤销",editor.Undo); _redoButton=Button("重做",editor.Redo);
+        bar.Children.Add(_undoButton); bar.Children.Add(_redoButton);
+        bar.Children.Add(Button("Fit",()=>Surface.Fit()));
+        bar.Children.Add(MenuButton("工具",new[]{("文字",(Action)(()=>{Surface.Tool="文本";Surface.Focus();})),
+            ("素材",()=>{_drawer.Visibility=_drawer.IsVisible?Visibility.Collapsed:Visibility.Visible;if(_drawer.IsVisible)_=RefreshSourcesAsync();})}));
+        var edit=Button("编辑",()=>{}); edit.Click+=(_,_)=>OpenEditMenu(edit); bar.Children.Add(edit);
         _zoomButton.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");
-        _zoomButton.Click += (_,_) => OpenZoomMenu();
-        viewGroup.Children.Add(_zoomButton); bar.Children.Add(viewGroup);
-        void Arrange(string mode){var all=editor.Selected.Count==0;if(all)editor.SelectAll();editor.Arrange(mode);if(all)editor.Select(null);Surface.Fit();}
-        var canvasGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; canvasGroup.Children.Add(GroupLabel("画布")); canvasGroup.Children.Add(create); canvasGroup.Children.Add(MenuButton("自动整理",new[]{("横向排列",(Action)(()=>Arrange("horizontal"))),("网格排列",()=>Arrange("grid")),("紧凑排列",()=>Arrange("compact"))}));
-        _moreButton=Button("更多",OpenMoreMenu); canvasGroup.Children.Add(_moreButton); bar.Children.Add(canvasGroup);
-        var projectGroup = new StackPanel { Orientation=Orientation.Horizontal, Margin=new(12,2,0,2) }; projectGroup.Children.Add(GroupLabel("项目")); bar.Children.Add(projectGroup); ProjectPanel=projectGroup;
-        TextBlock GroupLabel(string label) => new() { Text=label, FontSize=11, FontWeight=FontWeights.SemiBold, VerticalAlignment=VerticalAlignment.Center, Margin=new(2,0,4,0) };
+        _zoomButton.Click+=(_,_)=>OpenZoomMenu(); bar.Children.Add(_zoomButton);
+        var arrange=Button("排列",()=>{}); arrange.Click+=(_,_)=>OpenArrangeMenu(arrange); bar.Children.Add(arrange);
+        _moreButton=Button("画布",OpenMoreMenu); bar.Children.Add(_moreButton);
+        ProjectPanel=new StackPanel { Margin=new Thickness(8) };
+        var project=Button("项目",()=>{}); project.Click+=(_,_)=>
+        {
+            if(ProjectPanel.Parent is MenuItem previous) previous.Header=null;
+            var menu=new ContextMenu { Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=project };
+            menu.Items.Add(new MenuItem { Header=ProjectPanel, StaysOpenOnClick=true });
+            menu.IsOpen=true;
+        }; bar.Children.Add(project);
         DockPanel.SetDock(_status,Dock.Bottom);root.Children.Add(_status);
         _drawer.SetResourceReference(BackgroundProperty,"Brush.Panel");DockPanel.SetDock(_drawer,Dock.Left);root.Children.Add(_drawer);
         var drawerPanel=new DockPanel();_drawer.Child=drawerPanel;
@@ -124,20 +129,44 @@ public sealed class FreeCanvasView : UserControl
     public async Task CloseAsync() { if(await PrepareDocumentChangeAsync() && CloseRequested is not null)await CloseRequested(); }
     private void OpenZoomMenu()
     {
-        var menu=new ContextMenu { PlacementTarget=_zoomButton };
+        var menu=new ContextMenu { Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=_zoomButton };
         void Add(string header, Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
-        Add("适合",()=>Surface.Fit()); foreach(var zoom in new[]{.5,.75,1d,1.25,1.5,2d}){var value=zoom;Add($"{value:P0}",()=>Surface.SetZoom(value));} menu.IsOpen=true;
+        foreach(var zoom in new[]{.5,.75,1d,1.25,1.5,2d}){var value=zoom;Add($"{value:P0}",()=>Surface.SetZoom(value));} menu.IsOpen=true;
     }
     private void OpenMoreMenu()
     {
-        var anchor=_moreButton; var menu=new ContextMenu{PlacementTarget=anchor};
+        var anchor=_moreButton; var menu=new ContextMenu{Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor};
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
-        void Arrange(string mode){var all=Editor.Selected.Count==0;if(all)Editor.SelectAll();Editor.Arrange(mode);if(all)Editor.Select(null);Surface.Fit();}
-        Add("自动整理 · 横向",()=>Arrange("horizontal")); Add("自动整理 · 网格",()=>Arrange("grid")); Add("自动整理 · 紧凑",()=>Arrange("compact")); menu.Items.Add(new Separator());
-        Add("前移一层",()=>Editor.StepLayer(true)); Add("后移一层",()=>Editor.StepLayer(false));
+        Add("新建画布",async ()=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(new CanvasDocument());});
         Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
         Add("保存到灵感板",()=>_=SaveBoardAsync(false)); menu.IsOpen=true;
     }
+    private void OpenEditMenu(Button anchor)
+    {
+        var menu=new ContextMenu { Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor };
+        AddMenuAction(menu,"复制",Editor.Copy,Editor.Selected.Count>0,"Ctrl+C");
+        AddMenuAction(menu,"粘贴",Editor.Paste,Editor.CanPaste,"Ctrl+V");
+        AddMenuAction(menu,"创建副本",Editor.Duplicate,Editor.Selected.Count>0,"Ctrl+D");
+        AddMenuAction(menu,"组合",Editor.Group,Editor.Selected.Count>1,"Ctrl+G");
+        AddMenuAction(menu,"解除组合",Editor.Ungroup,Editor.Selected.Any(x=>x.GroupId is not null),"Ctrl+Shift+G");
+        AddMenuAction(menu,"移出画布",Editor.Remove,Editor.Selected.Count>0,"Del"); menu.IsOpen=true;
+    }
+    private void OpenArrangeMenu(Button anchor)
+    {
+        var menu=new ContextMenu { Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor }; var selected=Editor.Selected.Count>0;
+        AddMenuAction(menu,"前移",()=>Editor.StepLayer(true),selected); AddMenuAction(menu,"后移",()=>Editor.StepLayer(false),selected);
+        AddMenuAction(menu,"置顶",()=>Editor.Layer(true),selected); AddMenuAction(menu,"置底",()=>Editor.Layer(false),selected);
+        var alignment=new MenuItem { Header="对齐",IsEnabled=Editor.Selected.Count>1 };
+        foreach(var (label,mode) in new[]{("左对齐","left"),("顶对齐","top"),("居中","center")})
+        {var item=new MenuItem { Header=label };item.Click+=(_,_)=>Editor.Align(mode);alignment.Items.Add(item);}
+        menu.Items.Add(alignment);
+        var automatic=new MenuItem { Header="自动整理",IsEnabled=Editor.Document.Objects.Count>0 };
+        foreach(var (label,mode) in new[]{("横向","horizontal"),("网格","grid"),("紧凑","compact")})
+        {var item=new MenuItem { Header=label }; item.Click+=(_,_)=>{var all=Editor.Selected.Count==0;if(all)Editor.SelectAll();Editor.Arrange(mode);if(all)Editor.Select(null);Surface.Fit();};automatic.Items.Add(item);}
+        menu.Items.Add(automatic);foreach(var item in menu.Items.OfType<MenuItem>())AssetLibraryPage.AttachContextSubmenuPlacement(item);menu.IsOpen=true;
+    }
+    private static void AddMenuAction(ContextMenu menu,string label,Action action,bool enabled,string gesture="")
+    {var item=new MenuItem { Header=label,IsEnabled=enabled,InputGestureText=gesture };item.Click+=(_,_)=>action();menu.Items.Add(item);}
     private async Task OpenSavedAsync()
     {
         var menu=new ContextMenu();foreach(var document in await _store.ListAsync()){var item=new MenuItem{Header=document.Name};item.Click+=async(_,_)=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(await _store.LoadAsync(document.CanvasId) ?? document);};menu.Items.Add(item);}if(menu.Items.Count==0)menu.Items.Add(new MenuItem{Header="暂无已保存画布",IsEnabled=false});menu.PlacementTarget=this;menu.IsOpen=true;
@@ -158,7 +187,7 @@ public sealed class FreeCanvasView : UserControl
     private void UpdateTools()
     {
         _undoButton.IsEnabled=Editor.CanUndo; _redoButton.IsEnabled=Editor.CanRedo;
-        _zoomButton.Content=$"{Surface.Zoom:P0} ▼";_floating.Children.Clear();_floatingBorder.Visibility=Editor.Selected.Count==0?Visibility.Collapsed:Visibility.Visible;
+        _zoomButton.Content=$"视图 · {Surface.Zoom:P0} ▾";_floating.Children.Clear();_floatingBorder.Visibility=Editor.Selected.Count==0?Visibility.Collapsed:Visibility.Visible;
         if(Editor.Selected.Count==0)return;
         var bounds=Editor.Bounds();var top=Surface.WorldToScreen(new(bounds.X,bounds.Y));_floatingBorder.Margin=new(Math.Clamp(top.X,8,Math.Max(8,Surface.ActualWidth-580)),Math.Clamp(top.Y-48,8,Math.Max(8,Surface.ActualHeight-44)),0,0);
         if(Surface.CropMode)
@@ -171,8 +200,8 @@ public sealed class FreeCanvasView : UserControl
             if(Editor.Selected[0].IsText)_floating.Children.Add(Button("编辑文字",EditText));else if(Editor.Selected[0].IsImage)_floating.Children.Add(Button("裁切",Surface.BeginCrop));
             _floating.Children.Add(MenuButton("旋转",RotationActions()));_floating.Children.Add(MenuButton("镜像",new[]{("水平翻转",(Action)(()=>Editor.Flip(true))),("垂直翻转",()=>Editor.Flip(false))}));
         }
-        else{_floating.Children.Add(Button("组合",Editor.Group));_floating.Children.Add(Button("解组",Editor.Ungroup));_floating.Children.Add(MenuButton("对齐",new[]{("左对齐",(Action)(()=>Editor.Align("left"))),("顶对齐",()=>Editor.Align("top")),("居中",()=>Editor.Align("center"))}));}
-        _floating.Children.Add(MenuButton("层级",new[]{("置顶",(Action)(()=>Editor.Layer(true))),("置底",()=>Editor.Layer(false))}));
+
+
         _floating.Children.Add(Button(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked))));
         if(Editor.Selected.Count>1)_floating.Children.Add(Button("移出画布",Editor.Remove));
         _floating.Children.Add(Button("更多",OpenContextMenu));
@@ -216,5 +245,5 @@ public sealed class FreeCanvasView : UserControl
         catch(Exception exception)when(exception is IOException or InvalidOperationException or NotSupportedException){_status.Text=$"视觉分析暂不可用：{exception.Message}";}
     }
     public static Button Button(string label,Action action){var b=new Button{Content=label,Padding=new(8,5,8,5),Margin=new(2)};b.SetResourceReference(StyleProperty,"PixelTart.Button.Ghost");b.Click+=(_,_)=>action();return b;}
-    private static Button MenuButton(string label,IEnumerable<(string,Action)> actions){var b=Button(label,()=>{});b.Click+=(_,_)=>{var menu=new ContextMenu{PlacementTarget=b};foreach(var(title,action)in actions){var item=new MenuItem{Header=title};item.Click+=(_,_)=>action();menu.Items.Add(item);}menu.IsOpen=true;};return b;}
+    private static Button MenuButton(string label,IEnumerable<(string,Action)> actions){var b=Button(label,()=>{});b.Click+=(_,_)=>{var menu=new ContextMenu{Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=b};foreach(var(title,action)in actions){var item=new MenuItem{Header=title};item.Click+=(_,_)=>action();menu.Items.Add(item);}menu.IsOpen=true;};return b;}
 }
