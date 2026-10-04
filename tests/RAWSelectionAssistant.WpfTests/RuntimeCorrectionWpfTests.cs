@@ -174,7 +174,14 @@ public sealed class RuntimeCorrectionWpfTests
         var root = await Fixture();
         await using var page = new AssetLibraryPage(System.IO.Path.Combine(root, "assets.db"), new RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge(), []);
         await page.InitializeForSessionAsync();
-        var owner = new Window { Content = page, Width = 1180, Height = 720, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
+        var owner = new Window { Width = 1180, Height = 720, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
+        // Exercise the actual closing handler and saved canvas against a real HWND.
+        // Keep the page disconnected: the suite's process-wide Application belongs to
+        // another STA, and page Unloaded has a separate shell/Application dependency.
+        var handler = (System.ComponentModel.CancelEventHandler)Delegate.CreateDelegate(
+            typeof(System.ComponentModel.CancelEventHandler), page,
+            typeof(AssetLibraryPage).GetMethod("CanvasOwnerClosing", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!);
+        owner.Closing += handler;
         var closed = false;
         Exception? unhandled = null;
         System.Windows.Threading.DispatcherUnhandledExceptionEventHandler capture = (_, e) => { unhandled = e.Exception; e.Handled = true; };
@@ -191,7 +198,7 @@ public sealed class RuntimeCorrectionWpfTests
             Assert.IsNull(unhandled, unhandled?.ToString());
             Assert.IsTrue(closed, "A saved canvas must allow the owner to close without prompting or crashing.");
         }
-        finally { owner.Dispatcher.UnhandledException -= capture; }
+        finally { owner.Dispatcher.UnhandledException -= capture; owner.Closing -= handler; }
     });
 
     // permanently ends the process-wide WPF lifecycle and poisons later tests.
