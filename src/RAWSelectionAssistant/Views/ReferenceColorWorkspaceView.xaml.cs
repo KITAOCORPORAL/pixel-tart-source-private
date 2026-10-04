@@ -407,7 +407,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         _lastResponsiveWidth = availableWidth;
         var focus = _editor?.FocusView == true;
         var compact = availableWidth is > 0 and < 1440;
-        var narrow = availableWidth is > 0 and < 740;
+        var narrow = availableWidth is > 0 and < 900;
 
         if (compact && !_wasCompact) _editor?.SetResponsiveContext(true);
         _wasCompact = compact;
@@ -418,10 +418,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
         LeftRail.HorizontalAlignment = narrow ? HorizontalAlignment.Left : HorizontalAlignment.Stretch;
         LeftRail.Visibility = !focus && (!narrow || _editRailOpen) ? Visibility.Visible : Visibility.Collapsed;
         EditRailButton.Visibility = !focus && narrow ? Visibility.Visible : Visibility.Collapsed;
-        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 206 : 240;
+        LeftColumn.MinWidth = focus || narrow ? 0 : 320;
         RightColumn.MinWidth = focus ? 0 : compact ? 294 : 280;
-        LeftColumn.Width = focus || narrow ? new GridLength(0) : compact
-            ? new GridLength(Math.Clamp(availableWidth * .24, 220, 320)) : new GridLength(320);
+        LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(320);
         CenterColumn.MinWidth = compact ? 240 : 520;
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
         // Reserve inspection space even while collapsed. An overlay used to cover
