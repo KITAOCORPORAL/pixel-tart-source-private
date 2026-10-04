@@ -139,7 +139,7 @@ public sealed class FreeCanvasView : UserControl
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
         Add("新建画布",async ()=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(new CanvasDocument());});
         Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
-        Add("保存到灵感板",()=>_=SaveBoardAsync(false)); menu.IsOpen=true;
+        AddMenuAction(menu,"保存到灵感板",()=>_=SaveBoardAsync(false),SaveBoard is not null && Editor.Document.Objects.Any(item=>item.IsImage)); menu.IsOpen=true;
     }
     private void OpenEditMenu(Button anchor)
     {

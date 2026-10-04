@@ -14,6 +14,7 @@ public partial class AssetLibraryPage
     public FreeCanvasView? ActiveCanvas => _canvas;
     private Window? _canvasOwner;
     private bool _allowCanvasOwnerClose;
+    private bool _canvasOwnerClosePending;
     private async Task OpenSavedCanvasMenuAsync(FrameworkElement target)
     {
         var menu=new ContextMenu { PlacementTarget=target };
@@ -72,9 +73,21 @@ public partial class AssetLibraryPage
     private void HideCanvas(){CanvasWorkspace.Visibility=Visibility.Collapsed;CanvasWorkspace.Content=null;_canvas=null;LibraryWorkspace.Visibility=Visibility.Visible;}
     private async void CanvasOwnerClosing(object? sender,System.ComponentModel.CancelEventArgs e)
     {
-        if(_allowCanvasOwnerClose||_canvas is null)return;e.Cancel=true;
-        if(await _canvas.PrepareDocumentChangeAsync()){_allowCanvasOwnerClose=true;_canvasOwner?.Close();}
-
+        if (_allowCanvasOwnerClose || _canvas is null) return;
+        e.Cancel = true;
+        if (_canvasOwnerClosePending || sender is not Window owner) return;
+        _canvasOwnerClosePending = true;
+        try
+        {
+            // A saved document completes preparation synchronously. Leave the original
+            // Closing event before prompting or calling Close again (WPF forbids reentry).
+            await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.Background);
+            if (_disposed || _canvas is null || !await _canvas.PrepareDocumentChangeAsync()) return;
+            _allowCanvasOwnerClose = true;
+            try { owner.Close(); }
+            finally { _allowCanvasOwnerClose = false; }
+        }
+        finally { _canvasOwnerClosePending = false; }
     }
     private void CanvasBoardSelectionChanged(object sender,SelectionChangedEventArgs e)
     {

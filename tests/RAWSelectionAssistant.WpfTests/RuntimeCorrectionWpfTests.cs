@@ -167,6 +167,33 @@ public sealed class RuntimeCorrectionWpfTests
     });
 
     // Keep the class dispatcher alive: shutting down an STA that owns Application
+    [TestMethod]
+    public Task ClosingOwnerWithSavedCanvasDefersCloseAndCoalescesRequests() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        var root = await Fixture();
+        await using var page = new AssetLibraryPage(System.IO.Path.Combine(root, "assets.db"), new RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge(), []);
+        await page.InitializeForSessionAsync();
+        var owner = new Window { Content = page, Width = 1180, Height = 720, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
+        var closed = false;
+        Exception? unhandled = null;
+        System.Windows.Threading.DispatcherUnhandledExceptionEventHandler capture = (_, e) => { unhandled = e.Exception; e.Handled = true; };
+        owner.Dispatcher.UnhandledException += capture;
+        owner.Closed += (_, _) => closed = true;
+        try
+        {
+            owner.Show();
+            await page.ShowCanvasAsync(new RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument());
+            Assert.IsTrue(await page.ActiveCanvas!.FlushAsync());
+            owner.Close(); owner.Close();
+            Assert.IsFalse(closed, "Closing must leave the initial WPF Closing stack before retrying.");
+            for (var i = 0; !closed && unhandled is null && i < 100; i++) await Task.Delay(20);
+            Assert.IsNull(unhandled, unhandled?.ToString());
+            Assert.IsTrue(closed, "A saved canvas must allow the owner to close without prompting or crashing.");
+        }
+        finally { owner.Dispatcher.UnhandledException -= capture; }
+    });
+
     // permanently ends the process-wide WPF lifecycle and poisons later tests.
     private static readonly Lazy<System.Windows.Threading.Dispatcher> UiDispatcher = new(() =>
     {
