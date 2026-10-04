@@ -33,6 +33,11 @@ public sealed class EveningFeedbackWpfTests
         {
             shell.Show();
             await shell.Dispatcher.InvokeAsync(() => {}, DispatcherPriority.ApplicationIdle);
+            var loupe = (System.Windows.Controls.Primitives.Popup)page.FindName("AssetQuickLoupePopup");
+            loupe.IsOpen = true;
+            Assert.IsTrue(loupe.IsOpen);
+            Escape();
+            Assert.IsFalse(loupe.IsOpen, "Shell Escape must dismiss the loupe before navigation.");
             page.ViewModel.OpenFilterPanel();
             Assert.IsTrue(page.ViewModel.P3QueryPanelOpen);
             Escape();
