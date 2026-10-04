@@ -418,20 +418,25 @@ public partial class ReferenceColorWorkspaceView : UserControl
         LeftRail.HorizontalAlignment = narrow ? HorizontalAlignment.Left : HorizontalAlignment.Stretch;
         LeftRail.Visibility = !focus && (!narrow || _editRailOpen) ? Visibility.Visible : Visibility.Collapsed;
         EditRailButton.Visibility = !focus && narrow ? Visibility.Visible : Visibility.Collapsed;
-        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 280 : 240;
-        RightColumn.MinWidth = focus || compact ? 0 : 280;
-        LeftColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(320);
+        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 206 : 240;
+        RightColumn.MinWidth = focus ? 0 : compact ? 294 : 280;
+        LeftColumn.Width = focus || narrow ? new GridLength(0) : compact
+            ? new GridLength(Math.Clamp(availableWidth * .24, 220, 320)) : new GridLength(320);
         CenterColumn.MinWidth = compact ? 240 : 520;
         CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
-        RightColumn.Width = focus || compact ? new GridLength(0) : new GridLength(.18, GridUnitType.Star);
+        // Reserve inspection space even while collapsed. An overlay used to cover
+        // the fitted image at 1180px and hid the preview toolbar underneath it.
+        RightColumn.Width = focus ? new GridLength(0) : compact
+            ? new GridLength(Math.Min(340, Math.Max(280, availableWidth * .3)) + 14)
+            : new GridLength(.18, GridUnitType.Star);
         if (compact)
         {
-            Grid.SetColumn(RightRail, 1);
-            Panel.SetZIndex(RightRail, 20);
-            RightRail.Width = Math.Min(340, Math.Max(280, ActualWidth * .3));
-            RightRail.HorizontalAlignment = HorizontalAlignment.Right;
+            Grid.SetColumn(RightRail, 2);
+            Panel.SetZIndex(RightRail, 0);
+            RightRail.Width = double.NaN;
+            RightRail.HorizontalAlignment = HorizontalAlignment.Stretch;
             RightRail.Background = (System.Windows.Media.Brush)FindResource("SurfacePrimaryBrush");
-            RightRail.Padding = new Thickness(14);
+            RightRail.Padding = new Thickness(0);
         }
         else
         {

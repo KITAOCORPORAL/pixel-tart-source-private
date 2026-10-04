@@ -11,51 +11,41 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ReferenceWorkspaceWideRatioTests
 {
     [TestMethod]
-    public void ColorStudioProductionNodeControlsAndSchemeNavigationTests()
+    public Task ColorStudioProductionNodeControlsAndSchemeNavigationTests() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
-        Exception? failure = null;
-        var thread = new Thread(() =>
-        {
-            try
-            {
-                if (Application.Current is null) { var app = new App(); app.InitializeComponent(); }
-                using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
-                var editor = workspace.Editor; editor.WorkspaceMode = "专业";
-                var view = new ReferenceColorWorkspaceView { DataContext = workspace };
-                Arrange(view, 1180, 720);
-                var list = (System.Windows.Controls.ListBox)view.FindName("AdjustmentNodeList");
-                var first = editor.AdjustmentNodes[0]; list.SelectedItem = first;
-                var row = (System.Windows.Controls.ListBoxItem)list.ItemContainerGenerator.ContainerFromIndex(0);
-                var toggle = Descendants<System.Windows.Controls.CheckBox>(row).Single();
-                toggle.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-                Drain(); Arrange(view, 1180, 720);
-                Assert.IsFalse(editor.AdjustmentNodes[0].Enabled);
-                Assert.AreEqual(editor.SelectedAdjustmentNode, list.SelectedItem);
-                row = (System.Windows.Controls.ListBoxItem)list.ItemContainerGenerator.ContainerFromIndex(0);
-                var overflow = Descendants<System.Windows.Controls.Button>(row).Single();
-                overflow.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-                var menu = overflow.ContextMenu!;
-                Assert.IsTrue(menu.IsOpen);
-                Assert.IsFalse(menu.Items.OfType<System.Windows.Controls.MenuItem>().Single(i => Equals(i.Tag, "up")).IsEnabled);
-                Assert.IsTrue(menu.Items.OfType<System.Windows.Controls.MenuItem>().Single(i => Equals(i.Tag, "down")).IsEnabled);
-                Assert.AreSame(view.FindResource("PixelTart.Menu.Context"), menu.Style);
-                menu.IsOpen = false;
-                var border = Descendants<System.Windows.Controls.Border>(row).Single(x => x.Name == "NodeRow");
-                Assert.AreEqual(36, border.Height); Assert.AreEqual(.48, border.Opacity);
-                Assert.IsTrue(row.IsSelected, "Selection must survive replacing the stack.");
-                Assert.IsNotNull(row.Background, "Selection wash must be present after replacing the stack.");
-                editor.WorkspaceSection = "预设"; Arrange(view, 1180, 720);
-                Assert.AreEqual(Visibility.Collapsed, ((FrameworkElement)list.Parent).Visibility);
-                Assert.IsFalse(editor.IsNodeSection);
-                foreach (var label in new[] { "当前色彩方案", "我的方案" })
-                    Assert.IsTrue(Descendants<System.Windows.Controls.TextBlock>(view).Any(t => t.Text == label));
-            }
-            catch (Exception error) { failure = error; }
-        });
-        thread.SetApartmentState(ApartmentState.STA); thread.Start();
-        Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(20)), "Bounded UI integration test.");
-        if (failure is not null) throw failure;
-    }
+        RuntimeCorrectionWpfTests.EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var editor = workspace.Editor; editor.WorkspaceMode = "专业";
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        Arrange(view, 1180, 720);
+        var list = (System.Windows.Controls.ListBox)view.FindName("AdjustmentNodeList");
+        var first = editor.AdjustmentNodes[0]; list.SelectedItem = first;
+        var row = (System.Windows.Controls.ListBoxItem)list.ItemContainerGenerator.ContainerFromIndex(0);
+        var toggle = Descendants<System.Windows.Controls.CheckBox>(row).Single();
+        toggle.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+        Drain(); Arrange(view, 1180, 720);
+        Assert.IsFalse(editor.AdjustmentNodes[0].Enabled);
+        Assert.AreEqual(editor.SelectedAdjustmentNode, list.SelectedItem);
+        row = (System.Windows.Controls.ListBoxItem)list.ItemContainerGenerator.ContainerFromIndex(0);
+        var overflow = Descendants<System.Windows.Controls.Button>(row).Single();
+        overflow.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+        var menu = overflow.ContextMenu!;
+        Assert.IsTrue(menu.IsOpen);
+        Assert.IsFalse(menu.Items.OfType<System.Windows.Controls.MenuItem>().Single(i => Equals(i.Tag, "up")).IsEnabled);
+        Assert.IsTrue(menu.Items.OfType<System.Windows.Controls.MenuItem>().Single(i => Equals(i.Tag, "down")).IsEnabled);
+        Assert.AreSame(view.FindResource("PixelTart.Menu.Context"), menu.Style);
+        menu.IsOpen = false;
+        var border = Descendants<System.Windows.Controls.Border>(row).Single(x => x.Name == "NodeRow");
+        Assert.AreEqual(36, border.Height); Assert.AreEqual(.48, border.Opacity);
+        Assert.IsTrue(row.IsSelected, "Selection must survive replacing the stack.");
+        Assert.IsNotNull(row.Background, "Selection wash must be present after replacing the stack.");
+        editor.WorkspaceSection = "预设"; Arrange(view, 1180, 720);
+        Assert.AreEqual(Visibility.Collapsed, ((FrameworkElement)list.Parent).Visibility);
+        Assert.IsFalse(editor.IsNodeSection);
+        foreach (var label in new[] { "当前色彩方案", "我的方案" })
+            Assert.IsTrue(Descendants<System.Windows.Controls.TextBlock>(view).Any(t => t.Text == label));
+        await Task.CompletedTask;
+    });
 
     [TestMethod]
     public void MatchV4ProductSelectorDefaultsToStableAndExposesAutoCpu()
@@ -116,30 +106,24 @@ public sealed class ReferenceWorkspaceWideRatioTests
     }
 
     [TestMethod]
-    public void RuntimeGeometry_UsesWideRatioAndResponsiveRails()
+    public Task RuntimeGeometry_UsesWideRatioAndResponsiveRails() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
-        Exception? failure = null; var thread = new Thread(() =>
-        {
-            try
-            {
-                if (Application.Current is null) { var app = new App(); app.InitializeComponent(); }
-                using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
-                Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(320, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
-                var targetWidth = columns[1];
-                editor.ContextRailOpen = false; Arrange(view, 1920, 900);
-                Assert.AreEqual(targetWidth, FindColumns(view)[1], .5, "Hiding reference must not resize the target image viewport.");
-                editor.ContextRailOpen = true; Arrange(view, 1920, 900);
-                Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
-                Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "RightRail"); Assert.IsFalse(right.IsVisible);
-                editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340, $"drawer width {right.ActualWidth}");
-                Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "LeftRail"); Assert.IsFalse(left.IsVisible);
-                Arrange(view, 1180, 720); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340);
-                Assert.IsLessThanOrEqualTo(1180, FindNamed<FrameworkElement>(view, "WorkspaceGrid").ActualWidth);
-                editor.FocusView = true; Arrange(view, 1600, 900); Assert.IsFalse(left.IsVisible); Assert.IsFalse(right.IsVisible);
-            }
-            catch (Exception ex) { failure = ex; }
-        }); thread.SetApartmentState(ApartmentState.STA); thread.Start(); Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(20))); if (failure is not null) throw failure;
-    }
+        RuntimeCorrectionWpfTests.EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(320, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
+        var targetWidth = columns[1];
+        editor.ContextRailOpen = false; Arrange(view, 1920, 900);
+        Assert.AreEqual(targetWidth, FindColumns(view)[1], .5, "Hiding reference must not resize the target image viewport.");
+        editor.ContextRailOpen = true; Arrange(view, 1920, 900);
+        Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
+        Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "RightRail"); Assert.IsFalse(right.IsVisible);
+        editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340, $"drawer width {right.ActualWidth}");
+        Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "LeftRail"); Assert.IsFalse(left.IsVisible);
+        Arrange(view, 1180, 720); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340);
+        Assert.IsLessThanOrEqualTo(1180, FindNamed<FrameworkElement>(view, "WorkspaceGrid").ActualWidth);
+        editor.FocusView = true; Arrange(view, 1600, 900); Assert.IsFalse(left.IsVisible); Assert.IsFalse(right.IsVisible);
+        await Task.CompletedTask;
+    });
 
     private static void Arrange(FrameworkElement view, double width, double height) { view.Width = width; view.Height = height; view.Measure(new Size(width, height)); view.Arrange(new Rect(0, 0, width, height)); view.UpdateLayout(); }
     private static double[] FindColumns(ReferenceColorWorkspaceView view) { var grid = FindNamed<System.Windows.Controls.Grid>(view, "WorkspaceGrid"); return grid.ColumnDefinitions.Select(x => x.ActualWidth).ToArray(); }

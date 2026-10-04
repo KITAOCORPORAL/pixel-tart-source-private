@@ -71,6 +71,28 @@ public sealed class RuntimeCorrectionWpfTests
     });
 
     [TestMethod]
+    public Task CompactInspectionNeverCoversTargetAndToggleKeepsViewportStable() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        await workspace.Editor.SetSourceAsync(null, Image(255, 0, 0));
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        foreach (var width in new[] { 590d, 912d, 1332d, 1652d })
+        {
+            void Arrange() { view.Width = width; view.Height = 720; view.Measure(new Size(width, 720)); view.Arrange(new Rect(0, 0, width, 720)); view.UpdateLayout(); }
+            Arrange(); workspace.Editor.ContextRailOpen = true; Arrange();
+            var target = (FrameworkElement)view.FindName("PreviewCanvas");
+            var right = (FrameworkElement)view.FindName("RightRail");
+            var targetBounds = target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize));
+            var rightBounds = right.TransformToAncestor(view).TransformBounds(new Rect(right.RenderSize));
+            Assert.IsTrue(targetBounds.Right <= rightBounds.Left, $"Inspection covers target at {width}: {targetBounds} / {rightBounds}");
+            Assert.IsTrue(rightBounds.Right <= width + .01);
+            workspace.Editor.ContextRailOpen = false; Arrange();
+            Assert.AreEqual(targetBounds, target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize)), "Hiding inspection must not jump the target viewport.");
+        }
+    });
+
+    [TestMethod]
     public Task SidebarRenameRefreshesTreeInspectorAndSameSelectedTagQuery() => RunSta(async()=>
     {
         var root=await Fixture();await using var vm=ViewModel(root);await vm.InitializeAsync();
@@ -115,12 +137,12 @@ public sealed class RuntimeCorrectionWpfTests
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
         await Task.Delay(30);
         menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
-            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().LastOrDefault();
+            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().LastOrDefault(x => x.IsOpen && ReferenceEquals(x.PlacementTarget, edit));
         Assert.IsNotNull(menu);Assert.IsFalse(menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴")).IsEnabled);menu.IsOpen=false;
         editor.AddText(0,0,"测试文字");editor.Copy();
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));await Task.Delay(30);
         menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
-            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().Last();
+            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().Last(x => x.IsOpen && ReferenceEquals(x.PlacementTarget, edit));
         var paste=menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴"));Assert.IsTrue(paste.IsEnabled);
         paste.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));Assert.HasCount(2,editor.Document.Objects);menu.IsOpen=false;
         view.Surface.SetZoom(1.5);
@@ -216,7 +238,7 @@ public sealed class RuntimeCorrectionWpfTests
         thread.Start();
         return ready.Task.GetAwaiter().GetResult();
     });
-    private static void EnsureTestApplication()
+    internal static void EnsureTestApplication()
     {
         if (Application.Current is not null) return;
         var app = new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
@@ -227,7 +249,7 @@ public sealed class RuntimeCorrectionWpfTests
             app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(new Uri("/KitaoPhotoSelector;component/" + source.Value, UriKind.Relative)));
     }
 
-    private static Task RunSta(Func<Task> action) => UiDispatcher.Value.InvokeAsync(action).Task.Unwrap();
+    internal static Task RunSta(Func<Task> action) => UiDispatcher.Value.InvokeAsync(action).Task.Unwrap();
 
     private static BitmapSource Image(byte r,byte g,byte b)
     {var pixels=Enumerable.Range(0,64).SelectMany(_=>new[]{r,g,b}).ToArray();var image=BitmapSource.Create(8,8,96,96,PixelFormats.Rgb24,null,pixels,24);image.Freeze();return image;}
