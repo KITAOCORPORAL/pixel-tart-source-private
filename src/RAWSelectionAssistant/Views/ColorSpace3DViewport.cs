@@ -14,6 +14,8 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     public double PointSize { get => (double)GetValue(PointSizeProperty); set => SetValue(PointSizeProperty, value); }
     public double PointOpacity { get => (double)GetValue(PointOpacityProperty); set => SetValue(PointOpacityProperty, value); }
     public double SelectionTolerance { get => (double)GetValue(SelectionToleranceProperty); set => SetValue(SelectionToleranceProperty, value); }
+    public static readonly DependencyProperty IsPanModeProperty = DependencyProperty.Register(nameof(IsPanMode), typeof(bool), typeof(ColorSpace3DViewport), new PropertyMetadata(false));
+    public bool IsPanMode { get => (bool)GetValue(IsPanModeProperty); set => SetValue(IsPanModeProperty, value); }
     private Point? _pointer;
     private ColorSpaceRendererState? _state;
     private long _renderCount;
@@ -110,7 +112,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }
     private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, VisualTreeHelper.GetDpi(this).PixelsPerDip), origin); }
     private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = _clickStart = e.GetPosition(this); CaptureMouse(); }
-    private void OnMouseMove(object sender, MouseEventArgs e) { if (_pointer is not { } previous || State is null || e.LeftButton != MouseButtonState.Pressed) return; var current = e.GetPosition(this); var delta = current - previous; _pointer = current; var camera = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) ? ColorSpaceProjection.PanByDisplayDelta(State.Camera, delta.X, delta.Y, ActualWidth, ActualHeight) : State.Camera.Rotate(delta.X * .35, -delta.Y * .35); State = State with { Camera = camera, IsFit = false }; }
+    private void OnMouseMove(object sender, MouseEventArgs e) { if (_pointer is not { } previous || State is null || e.LeftButton != MouseButtonState.Pressed) return; var current = e.GetPosition(this); var delta = current - previous; _pointer = current; var camera = IsPanMode || Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) ? ColorSpaceProjection.PanByDisplayDelta(State.Camera, delta.X, delta.Y, ActualWidth, ActualHeight) : State.Camera.Rotate(delta.X * .35, -delta.Y * .35); State = State with { Camera = camera, IsFit = false }; }
     private void OnMouseUp(object sender, MouseButtonEventArgs e)
     {
         var start = _clickStart; _pointer = null; _clickStart = null; ReleaseMouseCapture();

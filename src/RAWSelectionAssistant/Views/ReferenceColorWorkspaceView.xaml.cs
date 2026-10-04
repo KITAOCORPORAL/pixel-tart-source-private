@@ -491,17 +491,27 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (_expandedCloud is not null) { Window.GetWindow(_expandedCloud)?.Activate(); return; }
         var viewport = new ColorSpace3DViewport { State = ColorSpaceViewport.State, DataContext = DataContext };
-        foreach (var (property, path) in new[] { (ColorSpace3DViewport.PointSizeProperty, "CloudPointSize"), (ColorSpace3DViewport.PointOpacityProperty, "CloudPointOpacity"), (ColorSpace3DViewport.SelectionToleranceProperty, "SelectionTolerance") })
+        foreach (var (property, path) in new[] { (ColorSpace3DViewport.IsPanModeProperty, "CloudPanMode"), (ColorSpace3DViewport.PointSizeProperty, "CloudPointSize"), (ColorSpace3DViewport.PointOpacityProperty, "CloudPointOpacity"), (ColorSpace3DViewport.SelectionToleranceProperty, "SelectionTolerance") })
             viewport.SetBinding(property, new System.Windows.Data.Binding(path));
         _expandedCloud = viewport;
         viewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
-        var panel = new DockPanel(); var actions = new StackPanel { Orientation = Orientation.Horizontal };
+        var panel = new DockPanel(); var actions = new WrapPanel();
         void Add(string text, Action action) { var button = new Button { Content = text, Margin = new Thickness(4) }; button.Click += (_, _) => action(); actions.Children.Add(button); }
         Add("重置", viewport.ResetCamera); Add("适合", viewport.FitCamera);
         Add("清除高亮", () => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.ClearColorSpaceHighlight(); });
+        var pan = new CheckBox { Content = "平移模式", Margin = new Thickness(8), VerticalAlignment = VerticalAlignment.Center };
+        pan.SetBinding(System.Windows.Controls.Primitives.ToggleButton.IsCheckedProperty, new System.Windows.Data.Binding("CloudPanMode") { Mode = System.Windows.Data.BindingMode.TwoWay });
+        pan.DataContext = DataContext; actions.Children.Add(pan);
         DockPanel.SetDock(actions, Dock.Top); panel.Children.Add(actions);
         var controls = new CloudInspectionControls { DataContext = DataContext }; DockPanel.SetDock(controls, Dock.Top); panel.Children.Add(controls); panel.Children.Add(viewport);
         var window = CreateInspectionWindow("3D 色彩空间 · 点击取色 / 拖动旋转 / Shift 拖动平移", panel);
+        var owner = Window.GetWindow(this);
+        var work = SystemParameters.WorkArea;
+        window.Width = Math.Min(620, work.Width * .45);
+        window.Height = Math.Min(700, work.Height * .85);
+        window.WindowStartupLocation = WindowStartupLocation.Manual;
+        window.Left = Math.Clamp((owner?.Left ?? work.Left) + (owner?.ActualWidth ?? work.Width) - window.Width - 16, work.Left, Math.Max(work.Left, work.Right - window.Width));
+        window.Top = Math.Clamp((owner?.Top ?? work.Top) + 100, work.Top, Math.Max(work.Top, work.Bottom - window.Height));
         window.PreviewKeyDown += OnSamplingKeyDown;
         window.Closed += (_, _) => { viewport.SelectionChanged -= ColorSpaceViewport_SelectionChanged; _expandedCloud = null; };
         window.Show(); viewport.FitCamera();

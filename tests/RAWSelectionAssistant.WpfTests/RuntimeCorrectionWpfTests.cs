@@ -145,6 +145,27 @@ public sealed class RuntimeCorrectionWpfTests
         Assert.IsFalse(view.TryClearTransientInspection());
     });
 
+    [TestMethod]
+    public Task CloudInspectionControlsShareTransientSettings() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var controls = new CloudInspectionControls { DataContext = workspace, IsExpanded = true };
+        var window = new Window { Content = controls, Width = 500, Height = 400, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
+        window.Show();
+        await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind);
+        var sliders = Descendants(controls).OfType<Slider>().ToArray();
+        Assert.HasCount(3, sliders);
+        sliders.Single(x => System.Windows.Automation.AutomationProperties.GetName(x) == "点大小").Value = 4;
+        sliders.Single(x => System.Windows.Automation.AutomationProperties.GetName(x) == "不透明度").Value = .4;
+        sliders.Single(x => System.Windows.Automation.AutomationProperties.GetName(x) == "颜色容差").Value = .03;
+        Assert.AreEqual(4d, workspace.CloudPointSize);
+        Assert.AreEqual(.4, workspace.CloudPointOpacity);
+        Assert.AreEqual(.03, workspace.SelectionTolerance);
+        Assert.IsEmpty(workspace.Editor.AdjustmentNodes);
+        window.Close();
+    });
+
     // Keep the class dispatcher alive: shutting down an STA that owns Application
     // permanently ends the process-wide WPF lifecycle and poisons later tests.
     private static readonly Lazy<System.Windows.Threading.Dispatcher> UiDispatcher = new(() =>

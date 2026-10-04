@@ -12,7 +12,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private string _analysisLabel = "尚无目标图像";
     private ColorSpaceSamplingTier _samplingTier = ColorSpaceSamplingTier.Standard;
     private double _pointSize = 2.6, _pointOpacity = .7, _selectionTolerance = .06;
-    private bool _showAnalysisLuma = true;
+    private bool _showAnalysisLuma = true, _cloudPanMode;
+    public bool CloudPanMode { get => _cloudPanMode; set => SetProperty(ref _cloudPanMode, value); }
     private BitmapSource? _analysisImage;
     public Task AnalysisWork { get; private set; } = Task.CompletedTask;
     public VisualHistogram? PreviewHistogram { get => _previewHistogram; private set => SetProperty(ref _previewHistogram, value); }
