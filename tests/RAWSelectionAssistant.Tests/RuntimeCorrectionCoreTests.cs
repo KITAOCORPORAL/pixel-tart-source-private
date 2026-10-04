@@ -1,4 +1,4 @@
-﻿using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 

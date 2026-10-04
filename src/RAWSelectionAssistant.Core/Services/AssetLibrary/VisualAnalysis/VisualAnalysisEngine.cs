@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 

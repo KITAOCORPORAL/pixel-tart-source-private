@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Utilities;

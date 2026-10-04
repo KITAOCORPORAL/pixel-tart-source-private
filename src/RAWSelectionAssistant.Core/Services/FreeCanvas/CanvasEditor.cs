@@ -1,4 +1,4 @@
-﻿namespace RAWSelectionAssistant.Core.Services.FreeCanvas;
+namespace RAWSelectionAssistant.Core.Services.FreeCanvas;
 
 public readonly record struct CanvasBounds(double X, double Y, double Width, double Height);
 

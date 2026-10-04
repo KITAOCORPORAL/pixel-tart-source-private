@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -107,18 +107,18 @@ public sealed class RuntimeCorrectionWpfTests
         var edit=Descendants(view.HeaderPanel).OfType<Button>().Single(b=>Equals(b.Content,"编辑"));
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
         // Discover the real popup created by the click, not source-text assertions.
-        var menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>()
+        var menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
             .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().FirstOrDefault();
         // A disconnected view may not host a popup HWND: use a real host for behavior below.
         var window=new Window { Content=view,Width=1180,Height=720,ShowInTaskbar=false };window.Show();
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
         await Task.Delay(30);
-        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>()
+        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
             .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().LastOrDefault();
         Assert.IsNotNull(menu);Assert.IsFalse(menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴")).IsEnabled);menu.IsOpen=false;
         editor.AddText(0,0,"测试文字");editor.Copy();
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));await Task.Delay(30);
-        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>()
+        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
             .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().Last();
         var paste=menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴"));Assert.IsTrue(paste.IsEnabled);
         paste.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));Assert.HasCount(2,editor.Document.Objects);menu.IsOpen=false;

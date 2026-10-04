@@ -1,4 +1,4 @@
-﻿namespace PixelTart.Modules.AssetLibrary;
+namespace PixelTart.Modules.AssetLibrary;
 
 public partial class AssetLibraryViewModel
 {

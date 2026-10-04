@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
