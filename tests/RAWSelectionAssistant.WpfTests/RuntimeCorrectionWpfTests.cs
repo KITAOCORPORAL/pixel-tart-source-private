@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -51,7 +52,7 @@ public sealed class RuntimeCorrectionWpfTests
     [TestMethod]
     public Task LeftEditingControlsAndRightAnalysisRemainBoundedAcrossViewportSizes() => RunSta(async()=>
     {
-        if(Application.Current is null){var app=new App();app.InitializeComponent();}
+        EnsureTestApplication();
         using var workspace=new ReferenceColorWorkspaceViewModel(new TestDialogs());
         var view=new ReferenceColorWorkspaceView { DataContext=workspace };
         foreach(var scale in new[]{1d,1.25,1.5,2d})
@@ -89,7 +90,7 @@ public sealed class RuntimeCorrectionWpfTests
     [TestMethod]
     public Task CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes() => RunSta(async()=>
     {
-        if(Application.Current is null){var app=new App();app.InitializeComponent();}
+        EnsureTestApplication();
         var editor=new RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor(new());
         var store=new RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore(System.IO.Path.Combine(System.IO.Path.GetTempPath(),"canvas-menu-test",Guid.NewGuid().ToString("N")));
         var view=new PixelTart.Modules.AssetLibrary.FreeCanvas.FreeCanvasView(editor,new WpfAssetThumbnailProvider(),store);
@@ -126,6 +127,53 @@ public sealed class RuntimeCorrectionWpfTests
         Assert.HasCount(1,Descendants(view.HeaderPanel).OfType<Button>().Where(x=>x.Content?.ToString()?.Contains("150%") == true).ToArray());
         await view.FlushAsync();window.Close();
     });
+    [TestMethod]
+    public Task EscapeClearsTransientInspectionBeforeShellNavigation() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        await workspace.Editor.SetSourceAsync(null, Image(255, 0, 0));
+        await workspace.RefreshPreviewAnalysisAsync();
+        workspace.HighlightImageSample(new(255, 0, 0));
+        var source = workspace.Editor.SourceImage;
+        var stack = workspace.Editor.AdjustmentStack;
+        Assert.IsTrue(view.TryClearTransientInspection());
+        Assert.IsEmpty(workspace.HighlightedPixels);
+        Assert.AreSame(source, workspace.Editor.SourceImage);
+        Assert.AreSame(stack, workspace.Editor.AdjustmentStack);
+        Assert.IsFalse(view.TryClearTransientInspection());
+    });
+
+    // Keep the class dispatcher alive: shutting down an STA that owns Application
+    // permanently ends the process-wide WPF lifecycle and poisons later tests.
+    private static readonly Lazy<System.Windows.Threading.Dispatcher> UiDispatcher = new(() =>
+    {
+        var ready = new TaskCompletionSource<System.Windows.Threading.Dispatcher>();
+        var thread = new Thread(() =>
+        {
+            var dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
+            SynchronizationContext.SetSynchronizationContext(new System.Windows.Threading.DispatcherSynchronizationContext(dispatcher));
+            ready.SetResult(dispatcher);
+            System.Windows.Threading.Dispatcher.Run();
+        }) { IsBackground = true };
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+        return ready.Task.GetAwaiter().GetResult();
+    });
+    private static void EnsureTestApplication()
+    {
+        if (Application.Current is not null) return;
+        var app = new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
+        var root = new System.IO.DirectoryInfo(AppContext.BaseDirectory);
+        while (root is not null && !System.IO.File.Exists(System.IO.Path.Combine(root.FullName, "RAWSelectionAssistant.sln"))) root = root.Parent;
+        var document = System.Xml.Linq.XDocument.Load(System.IO.Path.Combine(root!.FullName, "src/RAWSelectionAssistant/App.xaml"));
+        foreach (var source in document.Descendants().Attributes("Source"))
+            app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(new Uri("/KitaoPhotoSelector;component/" + source.Value, UriKind.Relative)));
+    }
+
+    private static Task RunSta(Func<Task> action) => UiDispatcher.Value.InvokeAsync(action).Task.Unwrap();
+
     private static BitmapSource Image(byte r,byte g,byte b)
     {var pixels=Enumerable.Range(0,64).SelectMany(_=>new[]{r,g,b}).ToArray();var image=BitmapSource.Create(8,8,96,96,PixelFormats.Rgb24,null,pixels,24);image.Freeze();return image;}
     private static bool IsDescendant(DependencyObject element,DependencyObject parent)

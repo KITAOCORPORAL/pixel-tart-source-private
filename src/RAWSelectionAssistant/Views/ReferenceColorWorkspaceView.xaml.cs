@@ -109,18 +109,24 @@ public partial class ReferenceColorWorkspaceView : UserControl
         return null;
     }
 
+    // The shell tunnels Escape before child controls. It asks the visible workspace
+    // to clear transient inspection before interpreting Escape as route navigation.
+    public bool TryClearTransientInspection()
+    {
+        var workspace = DataContext as ReferenceColorWorkspaceViewModel;
+        if (!_inspectingImageColor && _editor?.IsSampling != true && workspace?.HighlightedPixels.Count is not > 0)
+            return false;
+        _inspectingImageColor = false;
+        ColorInspectionHint.Visibility = Visibility.Collapsed;
+        PreviewCanvas.Cursor = Cursors.Arrow;
+        if (_editor?.IsSampling == true) _editor.CancelSamplingCommand.Execute(null);
+        workspace?.ClearColorSpaceHighlight();
+        return true;
+    }
+
     private void OnSamplingKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key != Key.Escape) return;
-        _inspectingImageColor = false;
-        ColorInspectionHint.Visibility = Visibility.Collapsed; PreviewCanvas.Cursor = Cursors.Arrow;
-        if (_editor?.IsSampling == true) { _editor.CancelSamplingCommand.Execute(null); e.Handled = true; }
-        if (DataContext is ReferenceColorWorkspaceViewModel workspace)
-        {
-            workspace.ClearColorSpaceHighlight();
-            if (ColorSpaceViewport.State is { } state) ColorSpaceViewport.State = state with { Selection = ColorSpaceSelection.None };
-            e.Handled = true;
-        }
+        if (e.Key == Key.Escape && TryClearTransientInspection()) e.Handled = true;
     }
 
     private void OnPreviewCanvasMouseWheel(object sender, MouseWheelEventArgs e)

@@ -566,6 +566,13 @@ public partial class MainWindow : Window
                 return;
             }
 
+            var studio = FindVisualChild<RAWSelectionAssistant.Views.ReferenceColorWorkspaceView>(RootGrid);
+            if (studio?.IsVisible == true && studio.TryClearTransientInspection())
+            {
+                e.Handled = true;
+                return;
+            }
+
             e.Handled = true;
             await RequestEscapeCloseAsync();
             return;
