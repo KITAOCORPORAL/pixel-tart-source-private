@@ -1,0 +1,162 @@
+[
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+    "Type": "WPF布局与绑定"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetQueryComposerView.xaml",
+    "Type": "WPF布局与绑定"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml",
+    "Type": "WPF布局与绑定"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/HistogramDrawing.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/NestedScrollBehavior.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/PixelTart.Modules.AssetLibrary/ToneZoneDrawing.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisEngine.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceRendererContract.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioModels.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceColorCoreV2.cs",
+    "Type": "处理数学/数据契约"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Services/ColorStudioAcceptanceFixture.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Services/ColorStudioBitmapRenderer.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Services/ReferenceLookPreviewService.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Analysis.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.Develop.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+    "Type": "WPF布局与绑定"
+  },
+  {
+    "Path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+    "Type": "交互/渲染/处理适配"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.Tests/EveningFeedbackCoreTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.Tests/RawMatchTiff16ProductPipelineTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryEagleLayoutReconstructionTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/AssetLibrarySmartFolderEditorWpfTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryVisualPhase2Tests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/BatchExportProcessedPixelsTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/EmbeddedAssetLibraryWpfTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/EveningFeedbackWpfTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/ReferenceWorkspaceWideRatioTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs",
+    "Type": "行为/回归测试"
+  },
+  {
+    "Path": "tools/AssetLibraryP1AutomatedAcceptance/Test-P1AssetLibraryAutomatedEvidence.ps1",
+    "Type": "证据验证工具"
+  }
+]

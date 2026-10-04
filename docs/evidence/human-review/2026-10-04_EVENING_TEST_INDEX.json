@@ -1,0 +1,160 @@
+{
+  "ProductionSourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+  "TestHead": "1485e6d1c835d676fadcab425a7fc33d46512825",
+  "Tests": [
+    {
+      "Path": "artifacts/evening-feedback/tests/core-full-r4-built.trx",
+      "Purpose": "Current rebuilt Core full",
+      "Sha256": "27ADA289C95E9A4151089C9EC066CBDB467BF4C803938414349B8DE8C6BBEEB6",
+      "Total": 1545,
+      "Passed": 1541,
+      "Failed": 0,
+      "Skipped": 4,
+      "Start": "2026-10-05T03:58:14.5081952+08:00",
+      "Finish": "2026-10-05T03:59:12.2462121+08:00"
+    },
+    {
+      "Path": "artifacts/evening-feedback/tests/wpf-full-r4-final.trx",
+      "Purpose": "Current WPF full serial; normal exit",
+      "Sha256": "CABF839936669A69075D234E5CC1A608022321FF986745E6A74EB5477AB85288",
+      "Total": 1460,
+      "Passed": 1449,
+      "Failed": 0,
+      "Skipped": 11,
+      "Start": "2026-10-05T04:09:53.6243455+08:00",
+      "Finish": "2026-10-05T04:18:18.0174579+08:00"
+    },
+    {
+      "Path": "artifacts/evening-feedback/tests/dpi-r4.trx",
+      "Purpose": "Current-run visual evidence contracts; not physical desktop DPI approval",
+      "Sha256": "FD35F5CBD91D461EEBEEE7B29D24B5C9ED88F78F18065321CCF22CEF0490BF06",
+      "Total": 91,
+      "Passed": 91,
+      "Failed": 0,
+      "Skipped": 0,
+      "Start": "2026-10-05T04:10:36.5056505+08:00",
+      "Finish": "2026-10-05T04:10:37.0297129+08:00"
+    },
+    {
+      "Path": "artifacts/evening-feedback/tests/escape-r4-final.trx",
+      "Purpose": "Shell Escape behavior and updated shared entry contract",
+      "Sha256": "04467E688579A898E81A54676A0215A36E07E0F2B64EBBA1ED5E2303E5591559",
+      "Total": 2,
+      "Passed": 2,
+      "Failed": 0,
+      "Skipped": 0,
+      "Start": "2026-10-05T04:06:36.9074602+08:00",
+      "Finish": "2026-10-05T04:06:39.8431986+08:00"
+    }
+  ],
+  "WpfClassGroups": [
+    {
+      "Group": "Asset",
+      "ClassNameRegex": "Asset",
+      "Passed": 385,
+      "Failed": 0,
+      "Skipped": 2
+    },
+    {
+      "Group": "ColorStudio",
+      "ClassNameRegex": "Color|Studio",
+      "Passed": 98,
+      "Failed": 0,
+      "Skipped": 1
+    },
+    {
+      "Group": "ReferenceMatch",
+      "ClassNameRegex": "Reference|Match",
+      "Passed": 22,
+      "Failed": 0,
+      "Skipped": 3
+    },
+    {
+      "Group": "ColorSpace3D",
+      "ClassNameRegex": "ColorSpace3D",
+      "Passed": 3,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Group": "FreeCanvas",
+      "ClassNameRegex": "Canvas",
+      "Passed": 23,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Group": "Guardian",
+      "ClassNameRegex": "Guardian",
+      "Passed": 10,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Group": "EveningFeedback",
+      "ClassNameRegex": "EveningFeedback",
+      "Passed": 10,
+      "Failed": 0,
+      "Skipped": 0
+    }
+  ],
+  "GroupCountsMayOverlap": true,
+  "HistoricalOrExcluded": [
+    {
+      "Path": "artifacts/evening-feedback/tests/wpf-full-r4.trx",
+      "Purpose": "Historical failure: old Escape source assertion; retained, fixed by test-only 1485e6d",
+      "Sha256": "006C0AB894534566EF2EEC0DAD7635DE6B24B3730762BE49EE9CAC2E144551BB",
+      "Total": 1460,
+      "Passed": 1448,
+      "Failed": 1,
+      "Skipped": 11,
+      "Start": "2026-10-05T03:56:17.8748246+08:00",
+      "Finish": "2026-10-05T04:05:17.6085832+08:00"
+    },
+    {
+      "Path": "artifacts/evening-feedback/tests/core-full-r4.trx",
+      "Purpose": "Excluded: stale --no-build output; use core-full-r4-built",
+      "Sha256": "E68563C34E3765A825E696FE54B72010E96B13AAEB65411D6BB9F94BD383F024",
+      "Total": 1541,
+      "Passed": 1537,
+      "Failed": 0,
+      "Skipped": 4,
+      "Start": "2026-10-05T03:56:17.8612699+08:00",
+      "Finish": "2026-10-05T03:57:14.4656533+08:00"
+    }
+  ],
+  "CurrentRunVisual": {
+    "DpiStates": 32,
+    "CaptureMethod": "UiReview process-per-fixture logical scaling; NOT Production After",
+    "Sha256": "DA9CEEAFAD10A9A47A13271E7B4A213DE3FA6CD50B86C16EDA8AFAA2DC6A5C97",
+    "Path": "artifacts/r12x/current-run-visual-evidence.json",
+    "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+    "DpiPercentages": [
+      100,
+      125,
+      150,
+      200
+    ],
+    "CaptureCount": 106
+  },
+  "GuardianStatic": {
+    "Clean": false,
+    "Exempt": 2,
+    "P1": 5,
+    "P2": 37
+  },
+  "UserAcceptance": "NOT_APPROVED",
+  "ReleaseBuild": {
+    "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+    "Result": "SUCCESS",
+    "CleanLog": {
+      "Path": "artifacts/evening-r4-clean.log",
+      "Sha256": "FD8D425E2E48293B3541DA4DB007C8A51E490BC960ADC374FE0611C066A70578"
+    },
+    "PublishLog": {
+      "Path": "artifacts/evening-r4-publish.log",
+      "Sha256": "F9331D3519417F0E9608BE6601126A349636E81FE862904B0A4735A9A9D49419"
+    },
+    "ProductionDiffFromSourceToTestHead": []
+  }
+}

@@ -1,3 +1,13 @@
+# Pixel Tart · 晚间12图修复候选
+
+以 `00_START_HERE.md` 为当前 Release 入口。
+本轮只处理 R01–R12；图8/9/10为参考界面。
+详细记录：`docs/evidence/human-review/2026-10-04_EVENING_FEEDBACK_REPAIR.md`。
+当前未完成同一候选的完整实机验证，NOT_READY_FOR_USER_RETEST；用户未批准。
+
+---
+
+## 以下整体为历史记录，不作为本轮结论
 # Pixel Tart · 四组人工验收返工候选
 
 当前 Release：`N:/pixart/pixel-tart-source-private/artifacts/releases/runtime-correction-2026-10-04-r9/publish/win-x64/KitaoPhotoSelector.exe`。

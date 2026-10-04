@@ -1,86 +1,107 @@
 [
   {
+    "Severity": "P1",
+    "Kind": "CANVAS_IN_PAGE",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 13,
+    "Source": "\u003CCanvas IsHitTestVisible=\u0022False\u0022\u003E\u003CEllipse x:Name=\u0022ColorPlaneCursor\u0022 Width=\u002212\u0022 Height=\u002212\u0022 Stroke=\u0022{DynamicResource Brush.Text.Primary}\u0022 StrokeThickness=\u00222\u0022 /\u003E\u003C/Canvas\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 30,
+    "Source": "\u003CButton ToolTip=\u0022\u7EA2\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#D75A45\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorRed\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u7EA2\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#D75A45\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 31,
+    "Source": "\u003CButton ToolTip=\u0022\u6A59\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#D9822B\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorOrange\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u6A59\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#D9822B\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 32,
+    "Source": "\u003CButton ToolTip=\u0022\u9EC4\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#D6B94C\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorYellow\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u9EC4\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#D6B94C\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 33,
+    "Source": "\u003CButton ToolTip=\u0022\u7EFF\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#3E9B68\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorGreen\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u7EFF\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#3E9B68\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 34,
+    "Source": "\u003CButton ToolTip=\u0022\u84DD\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#467DC2\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorBlue\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u84DD\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#467DC2\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 35,
+    "Source": "\u003CButton ToolTip=\u0022\u7D2B\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#8A65B8\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorPurple\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u7D2B\u8272\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#8A65B8\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
+    "Severity": "P2",
+    "Kind": "HARDCODED_UI_COLOR",
+    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetColorFilterPicker.xaml",
+    "Line": 36,
+    "Source": "\u003CButton ToolTip=\u0022\u9ED1\u767D\u0022 Command=\u0022{Binding SearchPaletteColorCommand}\u0022 CommandParameter=\u0022#808080\u0022 Style=\u0022{StaticResource AssetLibraryP3SecondaryButton}\u0022 AutomationProperties.AutomationId=\u0022AssetFilterColorNeutral\u0022 AutomationProperties.Name=\u0022\u7B5B\u9009\u9ED1\u767D\u7070\u0022\u003E\u003CBorder Width=\u002220\u0022 Height=\u002216\u0022 Background=\u0022#808080\u0022 CornerRadius=\u00222\u0022 /\u003E\u003C/Button\u003E"
+  },
+  {
     "Severity": "EXEMPT",
     "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
-    "Line": 771,
+    "Line": 821,
     "Source": "\u003CCanvas x:Name=\u0022AssetSelectionMarqueeLayer\u0022 Grid.Row=\u00222\u0022 Panel.ZIndex=\u00226\u0022"
   },
   {
     "Severity": "EXEMPT",
     "Kind": "INTENTIONAL_DRAWING_SURFACE",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetLibraryPage.xaml",
-    "Line": 773,
+    "Line": 823,
     "Source": "AutomationProperties.AutomationId=\u0022AssetSelectionMarqueeLayer\u0022\u003E"
-  },
-  {
-    "Severity": "EXEMPT",
-    "Kind": "INTENTIONAL_DRAWING_SURFACE",
-    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetQueryComposerView.xaml",
-    "Line": 95,
-    "Source": "\u003CCanvas IsHitTestVisible=\u0022False\u0022\u003E\u003CEllipse x:Name=\u0022ColorPlaneCursor\u0022 Width=\u002212\u0022 Height=\u002212\u0022 Stroke=\u0022{DynamicResource Brush.Text.Primary}\u0022 StrokeThickness=\u00222\u0022 /\u003E\u003C/Canvas\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
     "Line": 39,
-    "Source": "Foreground=\u0022#F2F6F7\u0022 VerticalAlignment=\u0022Center\u0022 /\u003E"
-  },
-  {
-    "Severity": "P2",
-    "Kind": "HARDCODED_UI_COLOR",
-    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 63,
     "Source": "\u003CTextBlock Text=\u0022\u540D\u79F0\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 70,
+    "Line": 54,
     "Source": "\u003CTextBlock Text=\u0022\u8BF4\u660E\u0022 Foreground=\u0022#CBD5DA\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 79,
+    "Line": 63,
     "Source": "\u003CTextBlock Text=\u0022\u6392\u5E8F\u0022 Foreground=\u0022#CBD5DA\u0022 VerticalAlignment=\u0022Center\u0022 Margin=\u00220,0,5,0\u0022 /\u003E"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 94,
+    "Line": 78,
     "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreservedScopeAndSearch}\u0022 Foreground=\u0022#ADB8C0\u0022"
   },
   {
     "Severity": "P2",
     "Kind": "HARDCODED_UI_COLOR",
     "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 114,
-    "Source": "\u003CTextBlock Text=\u0022\u5339\u914D\u7167\u7247\u0022 FontWeight=\u0022SemiBold\u0022 Foreground=\u0022#F2F6F7\u0022 /\u003E"
-  },
-  {
-    "Severity": "P2",
-    "Kind": "HARDCODED_UI_COLOR",
-    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 120,
-    "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderPreviewStatus}\u0022 Foreground=\u0022#CBD5DA\u0022 Margin=\u00220,5,0,0\u0022 TextWrapping=\u0022Wrap\u0022"
-  },
-  {
-    "Severity": "P2",
-    "Kind": "HARDCODED_UI_COLOR",
-    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 127,
-    "Source": "\u003CTextBlock Text=\u0022{Binding DisplayName}\u0022 Foreground=\u0022#F2F6F7\u0022 TextTrimming=\u0022CharacterEllipsis\u0022"
-  },
-  {
-    "Severity": "P2",
-    "Kind": "HARDCODED_UI_COLOR",
-    "File": "N:\\pixart\\pixel-tart-source-private\\src\\PixelTart.Modules.AssetLibrary\\AssetSmartFolderEditorView.xaml",
-    "Line": 139,
+    "Line": 100,
     "Source": "\u003CTextBlock Text=\u0022{Binding P3SmartFolderValidationMessage}\u0022 Foreground=\u0022#FFCBC5\u0022 TextWrapping=\u0022Wrap\u0022"
   },
   {

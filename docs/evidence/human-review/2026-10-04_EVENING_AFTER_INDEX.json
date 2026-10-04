@@ -1,0 +1,440 @@
+{
+  "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+  "EvidenceStatus": "CURRENT_R4_PARTIAL",
+  "Exe": "N:\\pixart\\pixel-tart-source-private\\artifacts\\releases\\evening-feedback-2026-10-04-r4\\publish\\win-x64\\KitaoPhotoSelector.exe",
+  "ExeSha256": "6476D024DA74E2754A88C39304214BD8E8F428BEFD841247B06AC8E31E2C373F",
+  "DllSha256": "6B4F4CFFA8EE6C5E97C498EFC6C1E5B7717C0381B3DAF6C5A8A8CD90B0F9FA49",
+  "ProductVersion": "2.3.0",
+  "ReleaseManifest": {
+    "MismatchCount": 0,
+    "VerifiedFileCount": 287,
+    "Path": "artifacts/releases/evening-feedback-2026-10-04-r4/release-manifest.json",
+    "Sha256": "E5CF9D2264256B48448E346825E630FD8B39312750D7B8566EB21F05DA28E071"
+  },
+  "CaptureMethod": "sky get_window_state, real Production Release r4, isolated test library",
+  "PhysicalDpi": {
+    "Scope": "Fit diagnostic directly measured 150%; no OS scaling changes; other frames are not individually measured",
+    "OtherPhysicalScales": "NOT_RUN",
+    "Evidence": "artifacts/evening-feedback/fit-runtime-r4.jsonl",
+    "ConfirmedScale": 1.5
+  },
+  "RawCaptureLocation": "artifacts/evening-feedback/after-r4/",
+  "CaptureCount": 31,
+  "CaptureDimensionsAreNotPhysicalScreenSize": true,
+  "UserAcceptance": "NOT_APPROVED",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "Captures": [
+    {
+      "Capture": "R01-Escape-draft-guard.png",
+      "Sha256": "68FA0E16D8B24F787ADF71F89A61222B6143708F053778EA7AB99DC1FD8C3AFE",
+      "MetadataSha256": "B5305FA6DDBC3988E708819BFC189AD550D8E84750B7C4E71123BB5B065A8C0F",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r4 Escape opens unsaved smart-folder guard and stays in editor; save/discard/cancel visible.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R01-Escape-preserves-draft.png",
+      "Sha256": "0B400273FEE547F14C18398BA7AA8E2AC54ECF488C80134641BF2779C1BFAAC9",
+      "MetadataSha256": "AB8EA38A0DF3AFB26BE21770ECD083C0E3B1D081F67051443ED396A1D862EE1D",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Second Escape cancels close guard and retains unsaved nested draft.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R01-nested-scroll-footer.png",
+      "Sha256": "13B232C8BFE2F2E6C839692E778118B9BB727CC2399BBC13833CD33AA5091875",
+      "MetadataSha256": "760C39C33F8457BB130018D6E5442A98630EFBA8589AF495520EC06B52A771B5",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r4 nested smart-folder tree scrolls to final options; fixed title Close and bottom Save/Cancel remain visible.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R02-Escape-closes-filter.png",
+      "Sha256": "63B3BCAB5FBB867D5E973881AC2CEB9DB0CEC27E53A99F84ED9A94F90B25410B",
+      "MetadataSha256": "BE214BC4EF61C660BFE53D6E48A88AEB9BC976B340B5FF3CAD288054F79A6114",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r4 Escape closes extension filter and remains Asset Library; r3 navigation bug no longer reproduced.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R02-wheel-bottom.png",
+      "Sha256": "549868E005DCBC6ACEF8E4BB56594DB6BBD5C0E15522D312AA1399CB1E225E7E",
+      "MetadataSha256": "DA0DBA9FF94D60324483F05171823DB7D21DBEA631016246E9C6ED49E7B62AC7",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r4 condition-tree wheel reaches save-smart-folder and final search-history area.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R03-reverse-select-two.png",
+      "Sha256": "8EC612A9BACAD925CB8932EDC7A7D04CB1CFF4ACB6A099882E2EF034B275104C",
+      "MetadataSha256": "D866B7C49CC5286EF3551BC5EB5EC3A250B685C1B7D129A76B3ABD4AA329607D",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Reverse marquee selects two synthetic photos. Mid-drag alpha not captured; this is released selection only.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R04-after-Fit-275.png",
+      "Sha256": "10A48A25172707C6AAA54C4BB0ACB32640EAC3FB170D0094F02B7CE6BC8136C8",
+      "MetadataSha256": "1C749142F3A6998841E268A6DE8776AAB472C8646FE5187D9F40A10D29F78AFC",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Actual Fit433%→275%, three object bounds inside viewport; diagnostics fit-runtime-r4.jsonl.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R04-before-Fit-433-pan.png",
+      "Sha256": "504063E2885195676D01327DFB088B6EF20056003BEC06CBCE9A3496D801559D",
+      "MetadataSha256": "436F455CA97FF2472510698E0F72140E01B5A5A432236CCAABF342594AE010E7",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Three objects, zoom433%, pan moved.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R05-R06-folder-search-focused.png",
+      "Sha256": "647037F00260E2441926110FAB11489EF4890FE2DDEC5D83CA0FD3E4F30D1BB4",
+      "MetadataSha256": "E59F1FC75C5CB8D89EE7864F9DD469E78D1B87E4F9E6A676872B57C3D51194C0",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Three section headings and local folder search, Chinese/English full text visible under focused border.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R06-search-unfocused.png",
+      "Sha256": "A4F8126F531408A29A99E95A51266219446B463D2D03DE034DD979E00A7CDB54",
+      "MetadataSha256": "123A1AA473CE857D2BB39BCB0D2E07D50F500080A527B82F175AAB546D9AA9CB",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Local folder search retains complete Chinese/English text without focused border.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R07-context-collapsed.png",
+      "Sha256": "324456C3BF1A3E22F17F846B328BE0C9D68049A0A9E4644B826B6FE648DB7BB4",
+      "MetadataSha256": "83886A2B47F9D2B60F622B02C148164DD787D2A7309A410B0D2D8A69E023398B",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "左侧上下文栏收起后中央区域向左扩展，右侧实际编辑参数保留。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R07-R08-layout-original.png",
+      "Sha256": "271D2934781E3A439736EC522145BFC09AB53626D402D1E70D768C39364E55C1",
+      "MetadataSha256": "AEFDF2302C49C2045716195173CB65906C75FD86A4D9015C666C881CFA5253F6",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "r4 loaded PNG; real context left, editing right, histogram above central target; original label matches source.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R07-short-window-context-collapsed.png",
+      "Sha256": "2B816434B993D0A13E6967D6525CFBE9DE6536171AA09F674C5CA88AE73FEDC1",
+      "MetadataSha256": "D77EE09C0904ACC2858B85062C29043222E0B4071F3B15047F58D86D5BCAD97A",
+      "Width": 1182,
+      "Height": 722,
+      "Note": "r4 工具截图1182×722：主图与右编辑可见，分析已收起；不能把工具截图尺寸当作物理屏幕像素。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R07-short-window-filmstrip-collapsed.png",
+      "Sha256": "DE7833B40DC49930489A87C775D0FE1A4842E74057A17FC55525DC9E823D8929",
+      "MetadataSha256": "D07E0FBB70A0749308F4B5240661BE1AF585AEFA35C71B74D6861B3C541C8452",
+      "Width": 1182,
+      "Height": 722,
+      "Note": "1182×722工具截图中收起胶片条，主图从77%Fit增加到134%，右编辑可用高度增加。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R07-short-window-three-rails.png",
+      "Sha256": "372B3A9543E772BC53333BD9FCCDAE2106E68DEF14494F8362715F5BC7471E14",
+      "MetadataSha256": "86A63DC8F19C1AB5E96FF627ADD3106B5505A6A36966E1ADB8089331A26D17FE",
+      "Width": 1182,
+      "Height": 722,
+      "Note": "小窗口左参考上下文、中央照片、右编辑；左右内容可滚动，主图仍可见。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-analysis-collapsed.png",
+      "Sha256": "BA2878685F763490EDB4D754FBFC3EC3F3CE2C9BE10291E2583F5F482ACCE02B",
+      "MetadataSha256": "28E33865EB21B49C2AE88A6782B50037689D2CEC1F2CD042DD6994C6771A295E",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "分析组收起后主图可用高度增加，Fit倍率从343%变为452%；临时高亮已清除。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-channel-B.png",
+      "Sha256": "48B2908159144328E677CDA706B7497BB6CFEC8CB11396AD1D785826B0D16270",
+      "MetadataSha256": "CEEB8BD8523FBE0C16E09F7DEE1CFA067EEB6A93E9D63AAD616321A77014EAB9",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "TIFF16 蓝色通道直方图。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-channel-G.png",
+      "Sha256": "E1C8303D33FD512B759B331038AD700B4D4F99C52FD663C89F46CF0281012C56",
+      "MetadataSha256": "4B4ECD038B84A19EB385ECFDAFB7B2F66A76F12F029D59F68623EBC2E3F36416",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "TIFF16 绿色通道直方图。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-channel-luma.png",
+      "Sha256": "1CACAB0CCCF49C9ACF2822935912DB8287CF3B9C5A79FAF3AA7F14FE99F2DC19",
+      "MetadataSha256": "F208ACA2DD5CE4BF98F9E243574FB66B17770FF6762B0A44E2D2260A7B977700",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "TIFF16 亮度单通道，可读通道状态与网格。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-channel-R.png",
+      "Sha256": "549FBA21DE0EA49BA823A5EC2974F9A2087AC5C3163655222F9742A39770592D",
+      "MetadataSha256": "2B97022A50D3B4A068FD6CAE175E7EF81467408F97816D45DF4D2B72EC0A1B67",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "TIFF16 红色通道直方图。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-R09-bottom-X-TIFF-mapping.png",
+      "Sha256": "EFC1123B66413CEC59C00EE199F76C9BB9E639E89958BC697DC5C1AE37B6AA25",
+      "MetadataSha256": "85790CE5FA2294ECEE5C24E1FC97A55476202B7745BEF677CA809DBA24DFD4FD",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "滚轮到分析末端，X可见；悬停VII映射到TIFF原图对应线性Y区域。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R08-TIFF-original-RGB.png",
+      "Sha256": "0F23B5F4141F64590FBA22B50F8D681723BC1F9C62DB649798221FAAD9E52BF9",
+      "MetadataSha256": "14E9E4418D47EEB905898D69F8D92CFD6769139B067911A64F67E9FFE2E27F5D",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "切换到 TIFF16 目标：主图、RGB叠加直方图、影调比例和真实点云同步刷新；标识目标原片。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R09-Esc-cleared.png",
+      "Sha256": "E6D09D87A2799425F1B6447B67C36843804314D0CF6C5C1B09C8770DA04C6A26",
+      "MetadataSha256": "4283B218AB4B0E81759904E1414C566A7B16201E6B9BB5B675F6BEB0CD54E2FC",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Esc clears tone overlay without leaving Studio or changing exposure0.71.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R09-zone-IV-preview.png",
+      "Sha256": "096C2D957BE036D771DF3D5176DB511960F2604858115A17DAD5E7F7FE892176",
+      "MetadataSha256": "30A19140C50BD20B2D2E9EE88605C32D13CA176B875333E61AC4F4A32FA30221",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Hover IV highlights only pixels of same quantized linear-Y bin in current processed preview.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R10-exposure-preview.png",
+      "Sha256": "D4CEA81CCF0EA74EBC8DC1378112398CB35A957CC0CC9773AB0B11D2D45A561B",
+      "MetadataSha256": "B21DE822EEB7367B9A32DF9E9E68A42EF424C629F323352CEF73D6CEFB7F3FF1",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Exposure0→0.71 updates pixels, histogram and3D; completed state, no processing error.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R11-export-all-format-count.png",
+      "Sha256": "BCA3F31B85056FE82BF07CE86B4B6C891F2A5645071862DB06549AA6C71BED70",
+      "MetadataSha256": "6FE4420117F456E3858D6A546CF97E5632BC8927D5280A1E684C56FB543DE60E",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Export-all chooser shows3 photos PNG/JPG/TIF.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R11-three-formats-completed.png",
+      "Sha256": "2EABB47C5831E0B0AF3DFA3FBC66C61E687D7EF17B636975804C1F0FF62B559A",
+      "MetadataSha256": "9A6AEFF81F36C7F1047803CB15215F508BF18F73C5D423C8561A1D1A85F230A4",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "r4 快速导出全部 3/3，PNG/JPEG/TIFF 保持源格式，底部显示输出目录。",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R12-cloud-to-image-rotated.png",
+      "Sha256": "3CA29BA79A4FD5FF991B54E032BA79032B7EBA35F3FA0474B398FEDE33B7374B",
+      "MetadataSha256": "10D9C8B45DD572DE6224BB64CD801B34960E32B082F4EE48917CD875FD2ADD16",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Rotated expanded OKLab cloud cyan point selected; both clouds ring and corresponding image region overlay.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R12-Esc-cleared.png",
+      "Sha256": "62FD3903A7DAFC80CFEAF0839FA98E7600AD8A68A7F3597C9565B8F20E2218A2",
+      "MetadataSha256": "EB96A00E8FA8B2D4DFA13F003033144DFAECE2D026D4669F5BB99949612F61DF",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Esc clears image and cloud overlays, retains current render and exposure.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R12-image-to-cloud.png",
+      "Sha256": "C7A2EE843BBB3D9E52147AFAE184678AB3711917DB7331AD243C9388624E2FCE",
+      "MetadataSha256": "CD5DAA2AC22E63450D9ED82636C0E11DA0F58E5480597A03B67922E1AC3B3859",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Main image yellow sample highlights nearest true OKLab samples in mini/expanded clouds and temporary image color-distance region.",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    },
+    {
+      "Capture": "R12-reset-after-pan-zoom-fit.png",
+      "Sha256": "11FDC8FBBFBA42255C67BD93171A1D30607E930E460B73BC04F1EB3C28C9AE4F",
+      "MetadataSha256": "CF0C3AA2DB9AFB9D7B49B0A29A3449F55DF650AF0739D908EF120344B69051EA",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Expanded orbit, pan, wheel zoom and Fit observed; Reset restores default orientation/scale (different from Fit).",
+      "SourceHead": "63cd21e6cd13e4d2982be1b45676fefa68226c6f",
+      "PhysicalDpi": "NOT_MEASURED"
+    }
+  ],
+  "Fit": {
+    "Path": "artifacts/evening-feedback/fit-runtime-r4.jsonl",
+    "Records": [
+      {
+        "Event": "CanvasFit",
+        "Utc": "2026-10-05T04:12:04.9768289+08:00",
+        "Before": {
+          "Zoom": 1,
+          "PanX": 80,
+          "PanY": 70
+        },
+        "Zoom": 2.754074074074074,
+        "PanX": 389.3955555555556,
+        "PanY": 40,
+        "ActualWidth": 2497.3333333333335,
+        "ActualHeight": 1319.3333333333333,
+        "Bounds": {
+          "X": 0,
+          "Y": 0,
+          "Width": 624,
+          "Height": 450
+        },
+        "VisibleTopLeft": {
+          "X": 389.3955555555556,
+          "Y": 40
+        },
+        "VisibleBottomRight": {
+          "X": 2107.937777777778,
+          "Y": 1279.3333333333333
+        },
+        "Dpi": 1.5
+      },
+      {
+        "Event": "CanvasFit",
+        "Utc": "2026-10-05T04:13:56.6319807+08:00",
+        "Before": {
+          "Zoom": 4.333588874429632,
+          "PanX": -51.73276519537853,
+          "PanY": -129.2874700800004
+        },
+        "Zoom": 2.754074074074074,
+        "PanX": 356.3466666666667,
+        "PanY": 40,
+        "ActualWidth": 2497.3333333333335,
+        "ActualHeight": 1319.3333333333333,
+        "Bounds": {
+          "X": 0,
+          "Y": 0,
+          "Width": 648,
+          "Height": 450
+        },
+        "VisibleTopLeft": {
+          "X": 356.3466666666667,
+          "Y": 40
+        },
+        "VisibleBottomRight": {
+          "X": 2140.9866666666667,
+          "Y": 1279.3333333333333
+        },
+        "Dpi": 1.5
+      }
+    ],
+    "Sha256": "F9C08A88076648417B5CFA633E1531A88E91EEA47FD33EEEE74271686025333D"
+  },
+  "ExportVerification": {
+    "Inputs": "Explicit synthetic PNG/JPEG/TIFF16; no real RAW or non-sRGB corpus claim",
+    "Files": [
+      {
+        "File": "tone-jpeg_仿色.jpg",
+        "Bytes": 74443,
+        "Width": 1200,
+        "Height": 800,
+        "PixelFormat": "Bgr24",
+        "BitsPerPixel": 24,
+        "ColorContexts": 1,
+        "Sha256": "0897A7084C7988E8B267CA677CBE7CBEFB252550AD1B872E54FAEA12ECC66610"
+      },
+      {
+        "File": "tone-landscape_仿色.png",
+        "Bytes": 41343,
+        "Width": 1200,
+        "Height": 800,
+        "PixelFormat": "Bgra32",
+        "BitsPerPixel": 32,
+        "ColorContexts": 1,
+        "Sha256": "F4A484870B88E56FFC9DAB59988B720BF4C088B34D377E028BB7F13CA6F6B5EA"
+      },
+      {
+        "File": "tone-tiff16_仿色.tif",
+        "Bytes": 252078,
+        "Width": 256,
+        "Height": 192,
+        "PixelFormat": "Rgb48",
+        "BitsPerPixel": 48,
+        "ColorContexts": 1,
+        "Sha256": "4057EE860587A50FEE971D6D7C4453C58C4A6CD3DA5156C09482B8E6DC55A876"
+      }
+    ],
+    "Path": "artifacts/evening-feedback/runtime-export-formats-r4/verification.json",
+    "Sha256": "4FECFD6CA1942951D999492ABDE8C84748265CB4EBFEB0D6C019381439E9D858"
+  }
+}

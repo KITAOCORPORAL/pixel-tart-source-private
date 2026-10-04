@@ -1,0 +1,388 @@
+{
+  "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f",
+  "ExeSha256": "3F95B98BF1F5B9DEFB7F7CF110CCA5F7857B3A660A837AF23AF14D304486F8E1",
+  "ProductVersion": "2.3.0+6a52e83ab1d424bf93f2e38a7727ae5366278b3f",
+  "CaptureMethod": "sky get_window_state, Production Release r3",
+  "PhysicalDpi": {
+    "ConfirmedScale": 1.5,
+    "Evidence": "artifacts/evening-feedback/fit-runtime-r3.jsonl",
+    "Scope": "Fit operations measured directly; no OS scale changes in session; prior captures not individually measured"
+  },
+  "RawCaptureLocation": "artifacts/evening-feedback/after-r3/",
+  "CaptureCount": 46,
+  "UserAcceptance": "NOT_APPROVED",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "Captures": [
+    {
+      "Capture": "R01-draft-close-guard.png",
+      "Sha256": "FE8CCA9189D99344968EDA2E397452FD36C07374F6C6836576F00707C9548388",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r3 点击关闭后显示未保存修改提示，保存/放弃/取消可见，底部操作仍固定。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R01-reopen-nested-editor.png",
+      "Sha256": "E14EB47BF9D427A88A6FC59641C9CC3EE5C903DEF5C4EECBF9CBF683271AA16C",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r3 reopened persisted nested smart folder; bounded panel with fixed close and save/cancel.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R01-short-window-nested-scroll.png",
+      "Sha256": "E467484C61E399386C0F305D14DF5741A34E16C9D183122B2CAE9085F1D0CE6D",
+      "Width": 1173,
+      "Height": 722,
+      "Note": "r3 capture1173x722; tree wheel reaches final More options; close/save/cancel remain fixed. Physical DPI not measured.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R02-before-Escape.png",
+      "Sha256": "5C5219C03CC5D954DBDE204A2589EFDE5C714F53EDE89F970EB9C304164790E7",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r3 extension filter open, focus within filter surface before Escape.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R02-Escape-FAIL.png",
+      "Sha256": "ECF5734CCE49C5C8B140012F1BCA3051C91E3749FC0D517E3A2FB110E38B150D",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r3 FAILED: Escape from focused extension filter navigates back to Studio instead of closing filter. MainWindow preview key handler preempts page handler.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R02-keyboard-bottom.png",
+      "Sha256": "F178C0BA8C55A3C4F62F55B8563FFE397934872BE6D69CAE6EDBB9512AE95BE0",
+      "Width": 1173,
+      "Height": 722,
+      "Note": "r3 Ctrl+End from focused tree reaches final save/history; tree-wheel and blank-wheel separately replayed.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R02-tree-wheel-bottom.png",
+      "Sha256": "C6BC7DD386D60C1092C7CEA3A4EF530F85E390A2959CA71CC2054BB8017698AB",
+      "Width": 1173,
+      "Height": 722,
+      "Note": "r3 wheel from condition tree reaches save smart folder and search history; narrow row remains horizontally scrollable.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R03-reverse-selection.png",
+      "Sha256": "1A754F0622E04761CABC68C4A3A8DEBAA5B7897C194BE1B06A379FDD59516F56",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Reverse drag selected the two synthetic assets. Pointer-up capture only; drag-fill transparency not captured.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R04-after-fit-275.png",
+      "Sha256": "D43C422E2C4DDF7285DE3047BB1F9CD380F0E6161C5232DD316369FFB8E22029",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Fit after 433 percent zoom/pan; all three synthetic image objects visible at 275 percent.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R04-before-fit-433.png",
+      "Sha256": "30BF375715AA1B4319AC748C4D8C3E7F3DFDBF04693C76BCC755234CB65670AA",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Three image objects after copy/paste; zoom 433 percent and panned beyond viewport.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R04-empty-fit.png",
+      "Sha256": "06EF940927AE3F19BE0FC13480DCC2005A2F0097A60B70FBCC9E1B78A56F6821",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "New empty canvas Fit at100%, repeat remained stable, finite pan; actual diagnostic Dpi1.5.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R04-resize-fit.png",
+      "Sha256": "236B9556E8A4B74C10D6857411FE143E017D0383C904C0647E8F33AA6AD06E98",
+      "Width": 1173,
+      "Height": 722,
+      "Note": "Window resize to screenshot 1173x722; all rotated object bounds remain visible; toolbar zoom 100 percent. DPI measured by real Fit diagnostic 1.5.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R04-rotated-fit.png",
+      "Sha256": "03BEDD54F0A988BB5F8636EE4A2A0DF7BFB0651BA19EF531980BCC9FEB69B40E",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "Fit includes rotated object corners; zoom 245 percent.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R05-R06-sidebar-search-focused.png",
+      "Sha256": "101831E7CA2983C5F6DB17C44D8D6E17675DCBFE985F371D5CCD37B77B120372",
+      "Width": 2560,
+      "Height": 1440,
+      "Note": "r3 unified smart folder/tag group/folder headings; local folder search Chinese-English text visibly has full glyph height at current physical scale.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R07-context-rail-collapsed.png",
+      "Sha256": "C250BA345DFEC9E361F85BB643E508C38D3AEEF39D97949C969F1EB093465750",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "r3 reference and analysis rail collapses fully; released horizontal area belongs to central target, editing values unchanged.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R07-R08-R10-before-exposure.png",
+      "Sha256": "58894B0AD5151A4BF2AD080C57BF09FBB37EC8ECC380A37F6F3B7E56B6228E9F",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3: left context, central original RGB/Y analysis, right real develop controls; synthetic PNG at exposure 0.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R07-reference-100-pan.png",
+      "Sha256": "E352A6FC281291ADF247A67A1C483828EB36F326AEB50CE732D58C159F0C8D81",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "参考 Navigator 23%→100%，拖动后可见内容平移；右侧已恢复参数未改变。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R08-analysis-collapsed.png",
+      "Sha256": "BE611A9D0C7F88CDF908ACF5ACD0305DDA95C46E67CB59F23C21010FC242B884",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "r3 collapse central analysis returns vertical area to central image; 100 percent image remains readable.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R08-analysis-scroll-to-X.png",
+      "Sha256": "86646FE6145066666203C3E0CB6275698C101CE1CA26D9CCD8BB844E4E8B7D10",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "滚轮在中央分析组内使底部 X 分区、百分比和直方图底边可达；不覆盖目标图。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R08-original-analysis.png",
+      "Sha256": "D119B21BA0B1896A00DC7053A13B200FAFC0396464181BF38840B2D0EB3021C3",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Switch result to original: label, histogram, zones and cloud change; exposure remains 0.5.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R08-TIFF16-luma.png",
+      "Sha256": "4EEF507DDF5A2844B9B90245DFB892E4442B26D227A29511484D337393B58D4C",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "R/G/B/luma keyboard selection changes plotted channel.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R08-TIFF16-R.png",
+      "Sha256": "75E8D6D159B16FCFDB5E5BD5906D9052ADCBF3BADEFE7C49E2C73F728D48C137",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Single R channel selected, clipping spike visible at 255; linear plot makes remaining distribution low.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R09-Escape-cleared.png",
+      "Sha256": "D90B4687AE3B8DD25C16F37F61BEAFEA7598A6818DCCA51D0AEEC41BF4B27420",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 Esc clears temporary tone overlay without leaving Studio or changing +1 EV.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R09-leave-clears.png",
+      "Sha256": "F944FEE0A11076219A517FFB88412A533E3E39A1EE2FD9F35B7531B7FC8E9039",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Moving off tone drawing cleared preview overlay; exposure remains 0.5.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R09-original-TIFF-zone-IV.png",
+      "Sha256": "D7F320F01ECC589183F911318AD0B471FD79E5BF23C3F8769E53220AB5182CEA",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Original TIFF16 zone IV highlights matching curved brightness band; parameter unchanged.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R09-result-zone-IV.png",
+      "Sha256": "D629F90A7244828B7CBCEF3654C0AC7F41021AD9BBB716CD7AC3E4E440F5BA90",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 full processed result +1 EV; hover/click IV swatch highlights corresponding processed linear-Y membership.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R09-zone-IV-at-100.png",
+      "Sha256": "C964397ABF18725126C4223D40038D56E05ECE0459D2A6076BE829BEAB698D64",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "目标100%下 IV 高亮仍贴合真实灰带与彩色亮度成员；普通左拖不平移，主图平移需 Space+拖或中键，当前工具无按住修饰键/中键drag接口，未声称平移验证通过。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-contrast-preview.png",
+      "Sha256": "2BC91E38E58C084AB938D772EC880B07EB81C68D4FE15095A5668B16508D13BD",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Contrast slider 0 to 54.74 visibly darkens shadows and updates analysis.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-exposure-preview-success.png",
+      "Sha256": "FDC99861907D5143399F92D492B5B1F7993528132F103E6BB86228628B71B415",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 exposure 0 to +1 EV through real UI, processed preview visibly brighter, histogram and cloud changed, no processing failure.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-group-reset.png",
+      "Sha256": "F817CE76EFB2E46D44EE3E16D775CA7C5403F07A1AB13298AABC14E8FD526AD3",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Actual 明度 group reset returned exposure 0.5 to zero.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-restart-parameters-restored.png",
+      "Sha256": "851A56D33C7E449A920E2B602152B8F35A4741705EF7E58CEEBA65F09D44D9B8",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "正常退出并重启同一 r3 EXE，选择并应用 R10-r3-重启验证，读回对比54.74、结构56.37、曝光0，同一影调与细节节点。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-scheme-saved.png",
+      "Sha256": "47B01DC46CE34B06D6BC6D418A27B3351089A32F3D45849B56C8003C17320A56",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Saved R10-r3 verification scheme containing actual Develop contrast and structure parameters.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-structure-settled.png",
+      "Sha256": "C408008A6A9655CDC9AEECEBF8E0FE8FFED4A6E6B6E67582C4EF0C086D9C0B02",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Structure56.37 completed with changed edge contrast and zone ratios; no stuck progress.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-sync-selected-JPEG.png",
+      "Sha256": "EEFEBA8C5C488B3C963FB477EA6BE47203B5CB9E349E73839FD104B241FC9698",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Sync from TIFF to selected 3, activate JPEG: contrast54.74 and exposure0 restored; main target and analysis change.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R10-TIFF16-exposure-preview.png",
+      "Sha256": "822080BF2F02FC0CC36BCBA61792F610D79B0ACB9BE16C8F75A16779FFEA51E8",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "TIFF16 exposure 0.5 applied in r3; preview and cloud updated.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R11-PNG-export-completed.png",
+      "Sha256": "A14DD57A45A67940470DCD66FB25D73CE3FA99BF27C06D8BE9DC16EE92EE065C",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 top Quick Export completed 1/1 PNG to dedicated runtime-export-r3 directory, +1 EV frozen target.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R11-quick-export-format-count.png",
+      "Sha256": "2CD9E01A284DC0E2C8B43FD004492DBAA45B0861147257462B1FCD7FAB94D2B6",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 top Quick Export opens directory chooser explicitly showing 1 photo and PNG.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R11-three-formats-completed.png",
+      "Sha256": "194D9D4AC4AEC52C30CB8C4504EDC1470F8BF596E0A10573C06256516A58DB1F",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Same r3 Release completed selected PNG/JPEG/TIFF batch 3/3.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R11-three-formats-directory.png",
+      "Sha256": "DBED358A888B26D6153BC7AB54D4A2CC314265C9F3ADCDE92A3B48D2C0500C82",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "Folder dialog reports 3 PNG/JPG/TIF with chosen fresh folder.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-camera-reset-after-pan-zoom-fit.png",
+      "Sha256": "CC5B59F1CF6BF57EABCD36BA65E29245DE1715A9A2F29B4BE0035009A3FE5C41",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 expanded orbit, pan, wheel zoom, Fit and Reset performed; Fit recenters sphere bounds.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-cloud-to-image-rotated.png",
+      "Sha256": "9050FDCB7CF85E212299ED4C20052FF2C4DAB9C3E1FE387636A74AEFFB982C14",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 rotated expanded cloud picked a cyan sample; matching processed image color region overlay and mini-view pick ring updated.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-density-point-opacity.png",
+      "Sha256": "5AC07D37D7D2F8217F28D17F96137B36BF641D38EFA22A562FAA80E636EBDAC7",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "r3 density Standard to Dense, point size 2.6 to 5.0, opacity 70 to 33 percent; actual mini cloud updated, render settings only.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-expanded-sphere.png",
+      "Sha256": "2DF832C2610410D5603C59CA0C177232974408EFB604AD47A7ADD134ED6497F1",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 expanded OKLab sphere reference structure, original normalized sample coordinates, readable axes; main target remains visible.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-image-to-cloud.png",
+      "Sha256": "41998C83E27882853434F22461B51D3BADD98A00A276DCD6CEC0CA9607EE9C96",
+      "Width": 2541,
+      "Height": 1392,
+      "Note": "r3 image picker on yellow pixels updates selected rings in both cloud views and matching color region overlay.",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-mini-orbit-pan-zoom.png",
+      "Sha256": "7A5BE84A6938D6BB2DB072E745C0267731585518FCECEFC1814DB679BE8CD6BF",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Mini 球形视图左拖旋转、勾选平移后左拖、滚轮缩放均产生可见相机变化。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    },
+    {
+      "Capture": "R12-mini-reset.png",
+      "Sha256": "1B588D4F3AAFB309364EAFEC762C03C94D6897AB902A6C641D8EC1089BC73475",
+      "Width": 2560,
+      "Height": 1392,
+      "Note": "Mini Fit 后恢复完整球形边界；Reset 恢复默认角度与倍率，倍率比 Fit 大。",
+      "SourceHead": "6a52e83ab1d424bf93f2e38a7727ae5366278b3f"
+    }
+  ],
+  "EvidenceRole": "HISTORICAL_R3_DIAGNOSTIC_NOT_R4_AFTER",
+  "EvidenceStatus": "HISTORICAL_R3_NOT_CURRENT_AFTER"
+}
