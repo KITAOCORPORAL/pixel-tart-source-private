@@ -506,12 +506,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var controls = new CloudInspectionControls { DataContext = DataContext }; DockPanel.SetDock(controls, Dock.Top); panel.Children.Add(controls); panel.Children.Add(viewport);
         var window = CreateInspectionWindow("3D 色彩空间 · 点击取色 / 拖动旋转 / Shift 拖动平移", panel);
         var owner = Window.GetWindow(this);
-        var work = SystemParameters.WorkArea;
-        window.Width = Math.Min(620, work.Width * .45);
-        window.Height = Math.Min(700, work.Height * .85);
-        window.WindowStartupLocation = WindowStartupLocation.Manual;
-        window.Left = Math.Clamp((owner?.Left ?? work.Left) + (owner?.ActualWidth ?? work.Width) - window.Width - 16, work.Left, Math.Max(work.Left, work.Right - window.Width));
-        window.Top = Math.Clamp((owner?.Top ?? work.Top) + 100, work.Top, Math.Max(work.Top, work.Bottom - window.Height));
+        PlaceInspectionWindow(window, owner, new Size(620, 700), .45);
         window.PreviewKeyDown += OnSamplingKeyDown;
         window.Closed += (_, _) => { viewport.SelectionChanged -= ColorSpaceViewport_SelectionChanged; _expandedCloud = null; };
         window.Show(); viewport.FitCamera();
@@ -533,12 +528,32 @@ public partial class ReferenceColorWorkspaceView : UserControl
         }
     }
 
-    private Window CreateInspectionWindow(string title, FrameworkElement content) => new()
+    private Window CreateInspectionWindow(string title, FrameworkElement content)
     {
-        Title = title, Owner = Window.GetWindow(this), Content = content,
-        Width = Math.Min(1000, SystemParameters.WorkArea.Width * .85), Height = Math.Min(780, SystemParameters.WorkArea.Height * .85),
-        Background = (Brush)FindResource("CanvasBackgroundBrush"), WindowStartupLocation = WindowStartupLocation.CenterOwner
-    };
+        var owner = Window.GetWindow(this);
+        var window = new Window { Title = title, Owner = owner, Content = content,
+            Background = (Brush)FindResource("CanvasBackgroundBrush") };
+        PlaceInspectionWindow(window, owner, new Size(1000, 780), .85);
+        return window;
+    }
+
+    private static void PlaceInspectionWindow(Window window, Window? owner, Size preferred, double widthFraction)
+    {
+        // WorkArea is monitor-specific; SystemParameters.WorkArea always uses the primary display.
+        var work = owner is null ? SystemParameters.WorkArea : ContextMenuMonitor.OwnerWorkArea(owner);
+        var bounds = work;
+        if (owner is not null)
+        {
+            var topLeft = owner.PointToScreen(new Point());
+            var transform = PresentationSource.FromVisual(owner)?.CompositionTarget?.TransformFromDevice ?? Matrix.Identity;
+            bounds = new Rect(transform.Transform(topLeft), new Size(owner.ActualWidth, owner.ActualHeight));
+        }
+        var placement = ContextMenuMonitor.InspectionBounds(bounds, work,
+            new Size(Math.Min(preferred.Width, work.Width * widthFraction), Math.Min(preferred.Height, work.Height * .85)));
+        window.WindowStartupLocation = WindowStartupLocation.Manual;
+        window.Left = placement.Left; window.Top = placement.Top;
+        window.Width = placement.Width; window.Height = placement.Height;
+    }
 }
 
 public sealed class MatchEngineLabelConverter : System.Windows.Data.IValueConverter

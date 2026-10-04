@@ -8,6 +8,21 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ContextMenuPlacementTests
 {
     [TestMethod]
+    public void InspectionStaysWithOwnerOnNegativeOriginMonitorAtEveryDpi()
+    {
+        foreach (var dpi in new[] { 1d, 1.25, 1.5, 2d })
+        {
+            var work = new Rect(-2560 / dpi, 80 / dpi, 2560 / dpi, 1360 / dpi);
+            var owner = new Rect(-2400 / dpi, 120 / dpi, 1600 / dpi, 920 / dpi);
+            var result = ContextMenuMonitor.InspectionBounds(owner, work, new Size(620, 700));
+            Assert.IsTrue(work.Contains(result), $"Inspection escaped the owner's monitor at {dpi}");
+            Assert.IsLessThan(0d, result.Right);
+            Assert.IsTrue(result.IntersectsWith(owner));
+            var oversized = ContextMenuMonitor.InspectionBounds(owner, work, new Size(4000, 4000));
+            Assert.AreEqual(work, oversized);
+        }
+    }
+    [TestMethod]
     public void PlacementClampsOversizedMenuAndSupportsNegativeMonitorOrigins()
     {
         var result = ContextMenuPlacement.Calculate(new Rect(-90, -20, 80, 30), new Size(240, 180), new Rect(-1000, 0, 1000, 700));
