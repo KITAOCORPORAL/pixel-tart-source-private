@@ -19,6 +19,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
 {
     private TetherReferenceModeViewModel? _editor;
     private bool _wasCompact;
+    private bool _wasShort;
+    private bool _wasLowWindow;
     private double _lastResponsiveWidth = -1;
     private int _selectionAnchor = -1;
     private Point _filmstripDownPoint;
@@ -70,6 +72,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         AdjustmentNodeList.DragLeave += (_, _) => ClearInsertion();
         SizeChanged += (_, _) => UpdateResponsiveLayout();
         Loaded += (_, _) => UpdateResponsiveLayout();
+        WorkspaceGrid.SizeChanged += (_, _) => UpdateAnalysisSpace();
         LayoutUpdated += (_, _) =>
         {
             var width = GetAvailableWidth();
@@ -409,6 +412,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var availableWidth = GetAvailableWidth();
         _lastResponsiveWidth = availableWidth;
         var focus = _editor?.FocusView == true;
+        var lowWindow = ActualHeight > 0 && ActualHeight < 560;
+        if (lowWindow && !_wasLowWindow) FilmstripExpander.IsExpanded = false;
+        _wasLowWindow = lowWindow;
         var compact = availableWidth is > 0 and < 1440;
         var narrow = availableWidth is > 0 and < 900;
 
@@ -423,7 +429,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         EditRailButton.Visibility = !focus && narrow ? Visibility.Visible : Visibility.Collapsed;
         var contextWidth = narrow ? Math.Min(220, availableWidth * .32) : compact ? 280 : 310;
         LeftColumn.MinWidth = 0; RightColumn.MinWidth = 0;
-        LeftColumn.Width = focus ? new GridLength(0) : new GridLength(contextWidth);
+        LeftColumn.Width = focus || _editor?.IsContextVisible != true ? new GridLength(0) : new GridLength(contextWidth);
         RightColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(compact ? 300 : 320);
         CenterColumn.MinWidth = 0;
         CenterColumn.Width = new GridLength(1, GridUnitType.Star);
@@ -450,6 +456,19 @@ public partial class ReferenceColorWorkspaceView : UserControl
             Grid.SetColumnSpan(SourceBars, 1);
         }
         ContextRailButton.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
+        UpdateAnalysisSpace();
+    }
+
+    private void UpdateAnalysisSpace()
+    {
+        var height = WorkspaceGrid.ActualHeight;
+        if (height <= 0) return;
+        // The analysis stays above the photograph. On a short workspace it starts
+        // collapsed; explicit expansion scrolls within its share of the viewport.
+        var shortWorkspace = height < 440;
+        if (shortWorkspace && !_wasShort) CentralAnalysis.IsExpanded = false;
+        _wasShort = shortWorkspace;
+        AnalysisScroll.MaxHeight = Math.Max(24, Math.Min(200, height - 250));
     }
 
     private double GetAvailableWidth()

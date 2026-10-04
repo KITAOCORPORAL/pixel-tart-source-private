@@ -72,7 +72,7 @@ public sealed class RuntimeCorrectionWpfTests
     });
 
     [TestMethod]
-    public Task CompactInspectionNeverCoversTargetAndToggleKeepsViewportStable() => RunSta(async () =>
+    public Task CompactInspectionNeverCoversTargetAndCollapseReclaimsSpace() => RunSta(async () =>
     {
         EnsureTestApplication();
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
@@ -89,7 +89,9 @@ public sealed class RuntimeCorrectionWpfTests
             Assert.IsTrue(rightBounds.Right <= targetBounds.Left, $"Inspection covers target at {width}: {targetBounds} / {rightBounds}");
             Assert.IsTrue(rightBounds.Right <= width + .01);
             workspace.Editor.ContextRailOpen = false; Arrange();
-            Assert.AreEqual(targetBounds, target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize)), "Hiding inspection must not jump the target viewport.");
+            var collapsedBounds = target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize));
+            Assert.IsTrue(collapsedBounds.Width > targetBounds.Width, "A collapsed context rail must return its width to the photograph.");
+            Assert.IsGreaterThanOrEqualTo(targetBounds.Height, collapsedBounds.Height);
         }
     });
 

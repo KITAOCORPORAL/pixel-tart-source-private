@@ -128,6 +128,33 @@ public sealed class EveningFeedbackWpfTests
         }
         finally{Directory.Delete(root,true);}
     });
+    [TestMethod]
+    public Task LoadedTargetRemainsVisibleInShortStudioAndAnalysisCanReclaimSpace() => RunSta(async () =>
+    {
+        EnsureTestApplication(); using var workspace = new ReferenceColorWorkspaceViewModel(new NoDialogs());
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-ShortStudio-"+Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            var path=Path.Combine(root,"source.png");
+            StudioQuickExport.Encode(BitmapSource.Create(120,80,96,96,PixelFormats.Rgb24,null,new byte[120*80*3],360),path,path);
+            await workspace.LoadTargetAsync(path);
+            var view = new ReferenceColorWorkspaceView { DataContext=workspace };
+            foreach(var size in new[]{new Size(1008,632),new Size(740,520),new Size(600,440)})
+            {
+                void Arrange(){view.Width=size.Width;view.Height=size.Height;view.Measure(size);view.Arrange(new Rect(size));view.UpdateLayout();}
+                Arrange();
+                var canvas=(FrameworkElement)view.FindName("PreviewCanvas");
+                var analysis=(Expander)view.FindName("CentralAnalysis");
+                Assert.IsTrue(canvas.ActualHeight>=100,$"Target height {canvas.ActualHeight} at {size}; workspace={((FrameworkElement)view.FindName("WorkspaceGrid")).ActualHeight}, header={((FrameworkElement)view.FindName("SourceHeader")).ActualHeight}, film={((FrameworkElement)view.FindName("FilmstripPanel")).ActualHeight}, analysis={analysis.ActualHeight}/{analysis.IsExpanded}, filmopen={((Expander)view.FindName("FilmstripExpander")).IsExpanded}");
+                var collapsed=canvas.ActualHeight;
+                analysis.IsExpanded=true;Arrange();
+                Assert.IsTrue(canvas.ActualHeight>=70,$"Expanded analysis starves photograph at {size}: {canvas.ActualHeight}");
+                analysis.IsExpanded=false;Arrange();Assert.IsTrue(canvas.ActualHeight>=collapsed);
+            }
+        }
+        finally{Directory.Delete(root,true);}
+    });
+
     private sealed class NoDialogs : IDialogService
     {
         public IReadOnlyList<string> ChooseFiles(string title,string filter,bool multiselect)=>[];

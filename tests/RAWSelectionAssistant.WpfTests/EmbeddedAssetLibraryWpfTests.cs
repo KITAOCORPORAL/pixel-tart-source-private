@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation;
@@ -284,14 +284,19 @@ public sealed class EmbeddedAssetLibraryWpfTests
         Directory.CreateDirectory(root);
         try
         {
-            await RunSta(() =>
+            await RuntimeCorrectionWpfTests.RunSta(() =>
             {
+                RuntimeCorrectionWpfTests.EnsureTestApplication();
                 WriteSyntheticJpeg(Path.Combine(root, "preview.jpg"));
                 var page = new AssetLibraryPage(Path.Combine(root, "library.db"), new TaskOperationBridge(), []);
                 page.InitializeForSessionAsync().CompleteOnDispatcher();
                 page.ViewModel.ImportDemoDirectoryAsync(root).CompleteOnDispatcher();
-                using var source = AttachToPresentationSource(page, 2400, 1350);
-                ArrangePage(page, 1600, 900);
+                // A StaysOpen=false popup relies on a real active HWND mouse capture.
+                // An offscreen, invisible HwndSource cannot provide that lifecycle reliably.
+                var window = new Window { Content=page, Width=1600, Height=900, ShowInTaskbar=false };
+                window.Show(); window.Activate();
+                try
+                {
                 Assert.IsTrue(PumpDispatcherUntil(
                     () => page.ViewModel.IsReady && page.ViewModel.HasAssetCards,
                     TimeSpan.FromSeconds(5)),
@@ -315,7 +320,9 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 Assert.IsTrue(PumpDispatcherUntil(() => page.GetQuickLoupeContentForProductHarness() is not null, TimeSpan.FromSeconds(3)));
                 trigger.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, Environment.TickCount) { RoutedEvent = Mouse.MouseLeaveEvent });
                 Assert.IsNull(page.GetQuickLoupeContentForProductHarness(), "Leaving the actual magnifier cancels the hover preview immediately.");
-                page.DisposeAsync().AsTask().CompleteOnDispatcher();
+                }
+                finally { window.Close(); page.DisposeAsync().AsTask().CompleteOnDispatcher(); }
+                return Task.CompletedTask;
             });
         }
         finally { try { Directory.Delete(root, true); } catch { } }

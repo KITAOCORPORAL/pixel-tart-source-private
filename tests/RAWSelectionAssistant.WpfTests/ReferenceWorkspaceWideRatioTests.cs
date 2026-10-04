@@ -121,7 +121,7 @@ public sealed class ReferenceWorkspaceWideRatioTests
         Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(310, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
         var targetWidth = columns[1];
         editor.ContextRailOpen = false; Arrange(view, 1920, 900);
-        Assert.AreEqual(targetWidth, FindColumns(view)[1], .5, "Hiding reference must not resize the target image viewport.");
+        Assert.IsGreaterThan(targetWidth, FindColumns(view)[1], "Hiding reference must reclaim space for the target photograph.");
         editor.ContextRailOpen = true; Arrange(view, 1920, 900);
         Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
         Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "ContextRail"); Assert.IsFalse(right.IsVisible);
