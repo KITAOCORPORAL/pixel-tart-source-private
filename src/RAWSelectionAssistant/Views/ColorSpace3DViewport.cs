@@ -60,6 +60,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
         if (State is null) { DrawLabel(drawing, "载入目标图像后显示真实采样", new Point(18, 18)); return; }
+        if (ActualWidth <= 0 || ActualHeight <= 0) return;
         DrawSphere(drawing);
         DrawAxes(drawing);
         DrawLabel(drawing, "L 明度 0–1 · a 绿↔红 · b 蓝↔黄", new Point(10, 8));

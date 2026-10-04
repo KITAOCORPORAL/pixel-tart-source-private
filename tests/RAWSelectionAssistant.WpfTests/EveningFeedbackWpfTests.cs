@@ -19,6 +19,31 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EveningFeedbackWpfTests
 {
     [TestMethod]
+    public Task LoadedPngDevelopRendersThroughBoundWorkspace() => RunSta(async () =>
+    {
+        EnsureTestApplication(); using var workspace = new ReferenceColorWorkspaceViewModel(new NoDialogs());
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-LiveDevelop-"+Guid.NewGuid()); Directory.CreateDirectory(root);
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        var window = new Window { Content=view, Width=1180, Height=720, ShowInTaskbar=false };
+        try
+        {
+            var path=Path.Combine(root,"source.png");
+            StudioQuickExport.Encode(BitmapSource.Create(1200,800,96,96,PixelFormats.Rgb24,null,Enumerable.Repeat((byte)80,1200*800*3).ToArray(),3600),path,path);
+            window.Show(); await workspace.LoadTargetAsync(path); workspace.Editor.WorkspaceSection="调色";
+            workspace.Editor.ContextRailOpen=true;
+            ((Expander)view.FindName("CentralAnalysis")).IsExpanded=true;
+            await workspace.RefreshPreviewAnalysisAsync();
+            var slider=Walk(view).OfType<Slider>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="曝光 EV");
+            slider.Value=1;
+            for(var i=0;i<150 && !workspace.Editor.IsSettled && !workspace.Editor.HasError;i++) await Task.Delay(40);
+            Assert.IsFalse(workspace.Editor.HasError, typeof(TetherReferenceModeViewModel).GetProperty("LastRenderFailure",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)?.GetValue(workspace.Editor)?.ToString());
+            Assert.IsNotNull(workspace.Editor.MatchedImage);
+            var pixel=new byte[4]; workspace.Editor.MatchedImage.CopyPixels(new Int32Rect(0,0,1,1),pixel,4,0);
+            Assert.IsGreaterThan((byte)80,pixel[0]);
+        }
+        finally { window.Close(); Directory.Delete(root,true); }
+    });
+    [TestMethod]
     public Task LoadedThemeCannotMakeMarqueeOpaqueAndFolderInputHasTextRoom()=>RunSta(async()=>
     {
         EnsureTestApplication();

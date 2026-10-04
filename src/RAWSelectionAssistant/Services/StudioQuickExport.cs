@@ -38,7 +38,15 @@ public static class StudioQuickExport
                 else result = new ColorConvertedBitmap(frame,frame.ColorContexts[0],srgb,PixelFormats.Bgra32);
             }
         }
-        result.Freeze();return result;
+        // A frozen BitmapFrame can still retain a decoder owned by the decoding
+        // thread. Later FormatConvertedBitmap.Freeze walks that decoder and fails
+        // on the preview worker. Publish detached pixels, including palette/alpha.
+        var stride = checked((result.PixelWidth * result.Format.BitsPerPixel + 7) / 8);
+        var pixels = new byte[checked(stride * result.PixelHeight)];
+        result.CopyPixels(pixels, stride, 0);
+        var detached = BitmapSource.Create(result.PixelWidth, result.PixelHeight,
+            result.DpiX, result.DpiY, result.Format, result.Palette, pixels, stride);
+        detached.Freeze(); return detached;
     }
     public static void Encode(BitmapSource image,string sourcePath,string destination,CancellationToken token=default)
     {

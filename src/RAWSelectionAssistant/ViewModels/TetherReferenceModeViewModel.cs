@@ -91,6 +91,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool IsMatchV4Beta => MatchEngine == ColorStudioMatchEngine.MatchV4Beta;
     public string MatchV4Status => !IsMatchV4Beta ? "稳定引擎 · Match v3" : MatchV4ExecutionMode == MatchV4ExecutionMode.Cpu ? "CPU · V4 Beta" : _matchV4Executor?.Capability.BackendAvailable == true ? $"GPU 可用 · {_matchV4Executor.Capability.AdapterName}" : "GPU 不可用 · 自动使用 CPU";
     internal string[] NativeRenderedOrder { get; private set; } = [];
+    internal Exception? LastRenderFailure { get; private set; }
     internal Guid[] NativeRenderedNodeIds { get; private set; } = [];
     internal int NativeUndoCount => _undoStacks.Count;
     internal int NativeRedoCount => _redoStacks.Count;
@@ -851,6 +852,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         }
         _render?.Dispose(); _render = CancellationTokenSource.CreateLinkedTokenSource(outer, _lifetime.Token);
         var renderToken = _render.Token;
+        LastRenderFailure = null;
         HasError = false; StatusText = interactive ? "正在生成快速预览…" : "正在生成高质量预览…";
         Interlocked.Exchange(ref _busyRenderRevision, revision);
         State = ProcessingState.RenderingHighQuality;
@@ -904,7 +906,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
         catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "当前 V4 Beta 需要可用的高精度源与参考图；已保留上一张有效预览。"; RaiseViewProperties(); } }
-        catch (Exception) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
+        catch (Exception error) { if (revision == Volatile.Read(ref _revision)) { LastRenderFailure = error; State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
         finally
         {
             // Retired renders may finish after the current image. Only the current job
