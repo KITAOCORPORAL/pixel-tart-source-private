@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -313,7 +313,7 @@ public static class ColorStudioAcceptanceFixture
             foreach (var text in Descendants<TextBlock>(window).Where(x => x.IsVisible && x.Text == "当前色彩方案")) text.BringIntoView();
         if (scenario is "06" or "08" or "10")
         {
-            var rail = Descendants<FrameworkElement>(window).First(x => x.Name == "LeftRail");
+            var rail = Descendants<FrameworkElement>(window).First(x => x.Name == "EditingRail");
             Descendants<ScrollViewer>(rail).First().ScrollToEnd();
         }
         if (scenario == "22")

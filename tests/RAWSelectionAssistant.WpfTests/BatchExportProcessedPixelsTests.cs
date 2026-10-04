@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -420,7 +420,7 @@ public sealed class BatchExportProcessedPixelsTests
             watch.Stop();
             Assert.AreEqual(count, workspace.ExportCompleted);
             Assert.IsTrue(workspace.Targets.All(target => target.ExportStatus == ReferenceExportStatus.Succeeded));
-            Assert.HasCount(count, Directory.GetFiles(output, "*_仿色.jpg"));
+            Assert.HasCount(count, Directory.GetFiles(output, "*_仿色.png"));
             TestContext?.WriteLine($"color_studio_batch_targets={count}; dimensions={width}x{height}; elapsed_ms={watch.Elapsed.TotalMilliseconds:F0}; working_set_before_mb={before / 1048576d:F1}; process_peak_mb={Process.GetCurrentProcess().PeakWorkingSet64 / 1048576d:F1}");
         }
         finally { Directory.Delete(root, recursive: true); }
@@ -614,7 +614,7 @@ public sealed class BatchExportProcessedPixelsTests
             clock.Stop();
             var managedPeak = GC.GetTotalMemory(false);
             Assert.AreEqual(100, workspace.ExportCompleted);
-            Assert.HasCount(100, Directory.GetFiles(output, "*_仿色.jpg"));
+            Assert.HasCount(100, Directory.GetFiles(output, "*_仿色.png"));
             Assert.IsTrue(workspace.Targets.All(item => item.ExportStatus == ReferenceExportStatus.Succeeded));
             TestContext?.WriteLine($"batch100_ms={clock.Elapsed.TotalMilliseconds:F1}; managed_before_mb={before / 1048576d:F2}; managed_after_mb={managedPeak / 1048576d:F2}; process_peak_mb={Process.GetCurrentProcess().PeakWorkingSet64 / 1048576d:F2}");
         }

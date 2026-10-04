@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Views;
 
@@ -51,7 +51,10 @@ public sealed class ColorSpace3DViewportTests
                 view.State = view.State! with { Camera = new(0, 0, 2.4, .3, .2) };
                 Arrange(900, 300); view.FitCamera();
                 var first = view.State!.Camera; Assert.IsTrue(view.State.IsFit); AssertBounds();
-                Arrange(300, 900); AssertBounds(); Assert.AreNotEqual(first.Distance, view.State.Camera.Distance);
+                Arrange(300, 900); AssertBounds();
+                // A sphere is isotropic: swapping equal short edges keeps its fit distance.
+                Assert.AreEqual(first.Distance, view.State.Camera.Distance, 1e-8);
+                Assert.AreSame(model, view.State.Model, "The reference sphere must not rewrite sample coordinates.");
                 Assert.AreEqual(0d, view.State.Camera.Yaw);
                 view.ResetCamera(); Assert.IsFalse(view.State.IsFit); Assert.AreEqual(ColorSpaceCamera.Default, view.State.Camera);
                 var reset = view.State.Camera; Arrange(700, 500); Assert.AreEqual(reset, view.State.Camera);

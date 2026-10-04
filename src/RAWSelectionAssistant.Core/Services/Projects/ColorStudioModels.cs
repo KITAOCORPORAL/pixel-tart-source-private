@@ -1,11 +1,11 @@
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset }
+public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset, Develop }
 
 public sealed record ColorAdjustmentStackNode(
     Guid Id,

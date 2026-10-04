@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
@@ -55,6 +55,22 @@ public static class OklabColorSpace
             if (InGamut(ToLinear(value with { A = value.A * scale, B = value.B * scale }))) low = scale; else high = scale;
         }
         return Encode(ToLinear(value with { A = value.A * low, B = value.B * low }));
+    }
+
+    public static (double R, double G, double B) ToSrgbGamutMappedFloat(OklabColor value)
+    {
+        var linear = ToLinear(value);
+        if (!InGamut(linear))
+        {
+            var low = 0d; var high = 1d;
+            for (var iteration = 0; iteration < 22; iteration++)
+            {
+                var scale = (low + high) / 2;
+                if (InGamut(ToLinear(value with { A = value.A * scale, B = value.B * scale }))) low = scale; else high = scale;
+            }
+            linear = ToLinear(value with { A = value.A * low, B = value.B * low });
+        }
+        return (EncodeFloat(linear.R), EncodeFloat(linear.G), EncodeFloat(linear.B));
     }
 
     public static (double R, double G, double B) ToLinear(OklabColor value)

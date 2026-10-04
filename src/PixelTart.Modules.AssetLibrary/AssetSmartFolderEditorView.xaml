@@ -1,4 +1,4 @@
-<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetSmartFolderEditorView"
+﻿<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetSmartFolderEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              AutomationProperties.AutomationId="P3SmartFolderEditor"
@@ -11,17 +11,14 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                  MaxHeight="430" ClipToBounds="True">
-    <StackPanel>
-        <Button Content="新建智能文件夹" Command="{Binding NewP3SmartFolderCommand}" HorizontalAlignment="Left" Margin="0,7,0,0"
-                Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                Visibility="{Binding P3SmartFolderClosed, Converter={StaticResource P3BooleanToVisibilityConverter}}"
-                AutomationProperties.AutomationId="P3SmartFolderNew"
-                AutomationProperties.Name="新建智能文件夹" />
-    <Border Margin="0,7,0,0" Style="{StaticResource AssetLibraryP3PopupSurface}"
-            Visibility="{Binding P3SmartFolderOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}">
-        <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <DockPanel Margin="0,0,0,10">
+                <Button DockPanel.Dock="Right" Content="×" Command="{Binding CancelP3SmartFolderCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}"
+                        AutomationProperties.AutomationId="P3SmartFolderClose" AutomationProperties.Name="关闭智能文件夹编辑器" ToolTip="关闭；未保存的修改将询问处理方式"/>
+                <TextBlock Text="{Binding P3SmartFolderTitle}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </DockPanel>
             <Border Padding="12" Margin="0,0,0,10" Style="{StaticResource AssetLibraryP3PopupSurface}"
                     Visibility="{Binding SmartFolderUnsavedGuardOpen, Converter={StaticResource P3BooleanToVisibilityConverter}}"
                     AutomationProperties.AutomationId="SmartFolderUnsavedGuard">
@@ -34,25 +31,23 @@
                     </WrapPanel>
                 </StackPanel>
             </Border>
-            <DockPanel>
-                <TextBlock Text="{Binding P3SmartFolderTitle}" FontSize="16" FontWeight="SemiBold"
-                           Foreground="#F2F6F7" VerticalAlignment="Center" />
-
-            </DockPanel>
-
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" x:Name="EditorScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      local:NestedScrollBehavior.IsEnabled="True" xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary">
+            <StackPanel>
                 <StackPanel>
                     <TextBlock Text="名称" Foreground="#CBD5DA" />
                     <TextBox Text="{Binding P3SmartFolderName, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource AssetLibraryP3TextBox}"
                              AutomationProperties.AutomationId="P3SmartFolderName"
                              AutomationProperties.Name="智能文件夹名称" />
-                </StackPanel>                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="260">
+                </StackPanel>                <Border>
                     <TreeView ItemsSource="{Binding P3SmartFolderRoots}" ItemTemplate="{StaticResource AssetLibraryP3QueryNodeTemplate}"
                               ItemContainerStyle="{StaticResource AssetLibraryP3TreeItem}"
-                              Style="{StaticResource AssetLibraryP3Tree}"
+                              Style="{StaticResource AssetLibraryP3Tree}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               AutomationProperties.AutomationId="P3SmartFolderRuleTree"
                               AutomationProperties.Name="智能文件夹条件" />
-                </ScrollViewer><Expander Header="更多选项" Margin="0,8"><StackPanel>            <Grid Margin="0,7,0,0">
+                </Border><Expander Header="更多选项" Margin="0,8"><StackPanel>            <Grid Margin="0,7,0,0">
                 <Grid.ColumnDefinitions><ColumnDefinition /></Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
@@ -100,26 +95,20 @@
                             ToolTip="仅删除保存的查询，不删除照片" />
                 </WrapPanel><Button Content="重新查找" Command="{Binding RetryP3SmartFolderPreviewCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="P3SmartFolderPreviewRetry" AutomationProperties.Name="重新查找符合条件的照片" HorizontalAlignment="Left" />
 <ItemsControl ItemsSource="{Binding P3SmartFolderPreviewItems}" AutomationProperties.AutomationId="P3SmartFolderPreviewItems"><ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" /></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
-</StackPanel></Expander>            <StackPanel Margin="0,10,0,0" AutomationProperties.AutomationId="P3SmartFolderPreview" AutomationProperties.Name="智能文件夹实时预览">
-                <DockPanel><TextBlock Text="{Binding P3SmartFolderPreviewStatus}" AutomationProperties.AutomationId="P3SmartFolderPreviewStatus" AutomationProperties.Name="符合条件的照片数量" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource Brush.Text.Secondary}" />
-                <WrapPanel HorizontalAlignment="Right">                    <Button Content="取消" Command="{Binding CancelP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3SecondaryButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderCancel"
-                            AutomationProperties.Name="取消编辑且不保存" />
-                    <Button Content="{Binding P3SmartFolderSaveLabel}" Command="{Binding SaveP3SmartFolderCommand}"
-                            Style="{StaticResource AssetLibraryP3PrimaryButton}"
-                            AutomationProperties.AutomationId="P3SmartFolderSave"
-                            AutomationProperties.Name="保存智能文件夹" />
-</WrapPanel></DockPanel>
-            </StackPanel>
-            <Border Margin="0,6,0,0" Style="{StaticResource AssetLibraryP3ErrorSurface}"
+</StackPanel></Expander>            <Border Margin="0,6,0,0" Style="{StaticResource AssetLibraryP3ErrorSurface}"
                     Visibility="{Binding P3SmartFolderHasError, Converter={StaticResource P3BooleanToVisibilityConverter}}">
                 <TextBlock Text="{Binding P3SmartFolderValidationMessage}" Foreground="#FFCBC5" TextWrapping="Wrap"
                            AutomationProperties.AutomationId="P3SmartFolderValidationError"
                            AutomationProperties.Name="智能文件夹规则错误" />
             </Border>
-        </StackPanel>
-    </Border>
-    </StackPanel>
-    </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+        <DockPanel Grid.Row="2" Margin="0,10,0,0" LastChildFill="True" AutomationProperties.AutomationId="P3SmartFolderPreview">
+            <WrapPanel DockPanel.Dock="Right">
+                <Button Content="取消" Command="{Binding CancelP3SmartFolderCommand}" Style="{StaticResource AssetLibraryP3SecondaryButton}" AutomationProperties.AutomationId="P3SmartFolderCancel" AutomationProperties.Name="取消智能文件夹编辑"/>
+                <Button Content="{Binding P3SmartFolderSaveLabel}" Command="{Binding SaveP3SmartFolderCommand}" Style="{StaticResource AssetLibraryP3PrimaryButton}" AutomationProperties.AutomationId="P3SmartFolderSave" AutomationProperties.Name="保存智能文件夹"/>
+            </WrapPanel>
+            <TextBlock Text="{Binding P3SmartFolderPreviewStatus}" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource Brush.Text.Secondary}" AutomationProperties.AutomationId="P3SmartFolderPreviewStatus"/>
+        </DockPanel>
+    </Grid>
 </UserControl>

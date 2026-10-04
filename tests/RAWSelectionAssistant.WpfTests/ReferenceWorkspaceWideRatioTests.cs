@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -76,14 +76,22 @@ public sealed class ReferenceWorkspaceWideRatioTests
         System.Windows.Threading.Dispatcher.PushFrame(frame);
     }
     [TestMethod]
-    public void WideLayoutKeepsTwentyOneSixtyOneEighteenColumns()
+    public Task AnalysisIsLeftEditingIsRightAndHistogramAboveTarget() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
-        var source = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs"));
-        StringAssert.Contains(source, "new GridLength(320)");
-        StringAssert.Contains(source, "new GridLength(.63, GridUnitType.Star)");
-        StringAssert.Contains(source, "new GridLength(.18, GridUnitType.Star)");
-        Assert.IsFalse(source.Contains("CenterColumn.Width = new GridLength(1, GridUnitType.Star)", StringComparison.Ordinal));
-    }
+        RuntimeCorrectionWpfTests.EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        Arrange(view, 1920, 1080);
+        var context = (FrameworkElement)view.FindName("ContextRail");
+        var editing = (FrameworkElement)view.FindName("EditingRail");
+        var analysis = (FrameworkElement)view.FindName("CentralAnalysis");
+        Assert.AreEqual(0, System.Windows.Controls.Grid.GetColumn(context));
+        Assert.AreEqual(2, System.Windows.Controls.Grid.GetColumn(editing));
+        Assert.IsTrue(context.TranslatePoint(new Point(),view).X < analysis.TranslatePoint(new Point(),view).X);
+        Assert.IsTrue(analysis.TranslatePoint(new Point(),view).X < editing.TranslatePoint(new Point(),view).X);
+        Assert.IsTrue(analysis.ActualWidth > editing.ActualWidth);
+        await Task.CompletedTask;
+    });
 
     [TestMethod]
     public void CompactLayoutCollapsesContextUntilUserOpensIt()
@@ -110,16 +118,16 @@ public sealed class ReferenceWorkspaceWideRatioTests
     {
         RuntimeCorrectionWpfTests.EnsureTestApplication();
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
-        Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(320, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
+        Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(310, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
         var targetWidth = columns[1];
         editor.ContextRailOpen = false; Arrange(view, 1920, 900);
         Assert.AreEqual(targetWidth, FindColumns(view)[1], .5, "Hiding reference must not resize the target image viewport.");
         editor.ContextRailOpen = true; Arrange(view, 1920, 900);
         Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
-        Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "RightRail"); Assert.IsFalse(right.IsVisible);
-        editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340, $"drawer width {right.ActualWidth}");
-        Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "LeftRail"); Assert.IsFalse(left.IsVisible);
-        Arrange(view, 1180, 720); Assert.IsTrue(right.ActualWidth is >= 280 and <= 340);
+        Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "ContextRail"); Assert.IsFalse(right.IsVisible);
+        editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 260 and <= 340, $"drawer width {right.ActualWidth}");
+        Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "EditingRail"); Assert.IsFalse(left.IsVisible);
+        Arrange(view, 1180, 720); Assert.IsTrue(right.ActualWidth is >= 260 and <= 340);
         Assert.IsLessThanOrEqualTo(1180, FindNamed<FrameworkElement>(view, "WorkspaceGrid").ActualWidth);
         editor.FocusView = true; Arrange(view, 1600, 900); Assert.IsFalse(left.IsVisible); Assert.IsFalse(right.IsVisible);
         await Task.CompletedTask;

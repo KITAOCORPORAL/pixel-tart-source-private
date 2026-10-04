@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -19,6 +19,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
     private string? _gesture;
     private CanvasBounds? _marquee;
     private double _zoom = 1;
+    private bool _isFit;
+    private bool _fitSelection;
+    public Vector Pan => _pan;
+    public bool IsFit => _isFit;
     private Vector _pan = new(80, 70);
     private bool _space;
     private double _rotationTotal, _rotationApplied;
@@ -28,7 +32,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
     {
         Editor = editor; _provider = provider; Focusable = true; ClipToBounds = true; AllowDrop = true;
         Editor.Changed += (_, _) => { InvalidateVisual(); _ = LoadPreviewsAsync(); };
-        SizeChanged += (_, _) => InvalidateVisual();
+        SizeChanged += (_, _) => { if (_isFit) Fit(_fitSelection); else InvalidateVisual(); };
     }
     public CanvasEditor Editor { get; }
     public string Tool { get; set; } = "选择";
@@ -183,7 +187,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var screen=e.GetPosition(this); var world=ScreenToWorld(screen); var delta=(screen-_last)/_zoom;
         switch(_gesture)
         {
-            case "pan": _pan+=screen-_last; ViewChanged?.Invoke(this,EventArgs.Empty);break;
+            case "pan": _isFit=false; _pan+=screen-_last; ViewChanged?.Invoke(this,EventArgs.Empty);break;
             case "move":Editor.Move(delta.X,delta.Y);break;
             case "resize":var vector=world-_resizeAnchor;var factor=Math.Max(.02,Vector.Multiply(vector,_resizeVector)/Math.Max(1,_resizeVector.LengthSquared));Editor.Scale(factor,_resizeAnchor.X,_resizeAnchor.Y);_resizeVector*=factor;break;
             case "rotate":var bounds=Editor.Bounds();var center=WorldToScreen(new(bounds.X+bounds.Width/2,bounds.Y+bounds.Height/2));var from=_last-center;var to=screen-center;_rotationTotal+=Vector.AngleBetween(from,to);var target=(Keyboard.Modifiers&ModifierKeys.Shift)!=0?Math.Round(_rotationTotal/15)*15:_rotationTotal;Editor.Rotate(target-_rotationApplied);_rotationApplied=target;break;
@@ -201,14 +205,44 @@ public sealed class FreeCanvasSurface : FrameworkElement
     protected override void OnLostMouseCapture(MouseEventArgs e) { base.OnLostMouseCapture(e);_gesture=null;_marquee=null;Editor.EndGesture(); }
     protected override void OnMouseWheel(MouseWheelEventArgs e)
     {
-        var p=e.GetPosition(this);var world=ScreenToWorld(p);_zoom=Math.Clamp(_zoom*Math.Pow(1.12,e.Delta/120d),.03,8);_pan=new(p.X-world.X*_zoom,p.Y-world.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();e.Handled=true;
+        _isFit=false; var p=e.GetPosition(this);var world=ScreenToWorld(p);_zoom=Math.Clamp(_zoom*Math.Pow(1.12,e.Delta/120d),.03,8);_pan=new(p.X-world.X*_zoom,p.Y-world.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();e.Handled=true;
     }
     public void Fit(bool selection=false)
     {
-        var b=Editor.Bounds(selection);_zoom=Math.Clamp(Math.Min(Math.Max(100,ActualWidth-140)/b.Width,Math.Max(100,ActualHeight-140)/b.Height),.03,2);_pan=new((ActualWidth-b.Width*_zoom)/2-b.X*_zoom,(ActualHeight-b.Height*_zoom)/2-b.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();
+        _isFit = true; _fitSelection = selection;
+        if (ActualWidth <= 0 || ActualHeight <= 0) return; // Loaded can precede the final viewport arrange.
+        var bounds = GetFitBounds(selection);
+        var before = new { Zoom = _zoom, PanX = _pan.X, PanY = _pan.Y };
+        if (Editor.Document.Objects.Count == 0) { _zoom = 1; _pan = new(ActualWidth / 2, ActualHeight / 2); }
+        else
+        {
+            var padding = Math.Min(40, Math.Min(ActualWidth, ActualHeight) / 8);
+            _zoom = Math.Min((ActualWidth - 2 * padding) / Math.Max(.001, bounds.Width), (ActualHeight - 2 * padding) / Math.Max(.001, bounds.Height));
+            _zoom = Math.Min(8, Math.Max(double.Epsilon, _zoom));
+            _pan = new((ActualWidth - bounds.Width * _zoom) / 2 - bounds.X * _zoom, (ActualHeight - bounds.Height * _zoom) / 2 - bounds.Y * _zoom);
+        }
+        var diagnostic = System.Text.Json.JsonSerializer.Serialize(new { Event = "CanvasFit", Utc = DateTimeOffset.UtcNow, Before = before, Zoom = _zoom, PanX = _pan.X, PanY = _pan.Y, ActualWidth, ActualHeight, Bounds = bounds,
+            VisibleTopLeft = WorldToScreen(new(bounds.X, bounds.Y)), VisibleBottomRight = WorldToScreen(new(bounds.X + bounds.Width, bounds.Y + bounds.Height)), Dpi = VisualTreeHelper.GetDpi(this).DpiScaleX });
+        System.Diagnostics.Trace.WriteLine(diagnostic);
+        // Opt-in readback of the actual button operation, with no input injection or periodic observer.
+        if (Environment.GetEnvironmentVariable("PIXEL_TART_FIT_DIAGNOSTICS") is { Length: > 0 } diagnosticPath)
+            try { System.IO.File.AppendAllText(diagnosticPath, diagnostic + Environment.NewLine); } catch (System.IO.IOException) { } catch (UnauthorizedAccessException) { }
+        InvalidateVisual(); ViewChanged?.Invoke(this, EventArgs.Empty); _ = LoadPreviewsAsync();
     }
-    public void ActualSize() { _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync(); }
-    public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); _=LoadPreviewsAsync(); }
+    public CanvasBounds GetFitBounds(bool selection = false)
+    {
+        var objects = (selection ? Editor.Selected : Editor.Document.Objects).ToArray();
+        if (objects.Length == 0) return new(0, 0, 1, 1);
+        var points = objects.SelectMany(item =>
+        {
+            var radians = item.Rotation * Math.PI / 180; var c = Math.Cos(radians); var s = Math.Sin(radians);
+            var cx = item.X + item.Width / 2; var cy = item.Y + item.Height / 2;
+            return new[] { (-.5,-.5), (.5,-.5), (.5,.5), (-.5,.5) }.Select(p => new Point(cx + item.Width*p.Item1*c - item.Height*p.Item2*s, cy + item.Width*p.Item1*s + item.Height*p.Item2*c));
+        }).ToArray();
+        return new(points.Min(p=>p.X), points.Min(p=>p.Y), points.Max(p=>p.X)-points.Min(p=>p.X), points.Max(p=>p.Y)-points.Min(p=>p.Y));
+    }
+    public void ActualSize() { _isFit=false; _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync(); }
+    public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _isFit=false; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); _=LoadPreviewsAsync(); }
     public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||!Editor.Selected[0].IsImage)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     public void FinishCrop(bool apply) { if(!CropMode)return;if(apply)Editor.Crop(PendingCrop);CropMode=false;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     protected override void OnKeyUp(KeyEventArgs e) { base.OnKeyUp(e);if(e.Key==Key.Space)_space=false; }

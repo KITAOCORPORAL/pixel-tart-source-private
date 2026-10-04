@@ -1,4 +1,4 @@
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
@@ -17,9 +17,23 @@ public static class VisualAnalysisEngine
             if ((index & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
             var offset = index * 3; var red = bytes[offset]; var green = bytes[offset + 1]; var blue = bytes[offset + 2];
             r[red]++; g[green]++; b[blue]++;
-            var luma = LuminanceBin(red, green, blue); y[luma]++; zones[Math.Min(10, luma * 11 / 256)]++;
+            var luma = LuminanceBin(red, green, blue); y[luma]++; zones[ZoneFromLuminanceBin(luma)]++;
         }
         return new(r, g, b, y, new(zones.Select(value => value / (double)pixels.PixelCount).ToArray()));
+    }
+    public static int ToneZoneIndex(byte r, byte g, byte b) => ZoneFromLuminanceBin(LuminanceBin(r, g, b));
+    private static int ZoneFromLuminanceBin(byte luma) => Math.Min(10, luma * 11 / 256);
+
+    public static IReadOnlyList<int> ToneZoneMembers(VisualPixelBuffer pixels, int zone, CancellationToken token = default)
+    {
+        if (zone is < 0 or > 10) return Array.Empty<int>();
+        var members = new List<int>(); var bytes = pixels.Rgb24.Span;
+        for (var p = 0; p < pixels.PixelCount; p++)
+        {
+            if ((p & 4095) == 0) token.ThrowIfCancellationRequested();
+            if (ToneZoneIndex(bytes[p*3], bytes[p*3+1], bytes[p*3+2]) == zone) members.Add(p);
+        }
+        return members;
     }
     private static byte LuminanceBin(byte r, byte g, byte b) => (byte)Math.Clamp((int)Math.Round(255 * LinearLuma(r, g, b)), 0, 255);
 

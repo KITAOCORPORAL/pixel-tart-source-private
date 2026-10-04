@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -146,7 +146,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var source = await Task.Run(() =>
         {
-            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); return image;
+            return StudioQuickExport.Load(path);
         }, token);
         // Batch export is driven by each target's frozen snapshot, never by the
         // currently active editor (which may belong to a different target).
@@ -235,7 +235,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
     public bool IsContextVisible => !FocusView && ContextRailOpen;
     public bool IsLeftRailVisible => !FocusView;
-    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
+    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); NotifyDevelop(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public IReadOnlyList<ColorAdjustmentStackNode> AdjustmentNodes => AdjustmentStack.Nodes;
     public ColorAdjustmentStackNode? SelectedAdjustmentNode
     {
@@ -307,7 +307,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         AddAdjustmentNodeCommand = new RelayCommand(value => AddAdjustmentNode(value as string ?? "ColorRange"));
         ToggleAddAdjustmentCommand = new RelayCommand(_ => { AddAdjustmentOpen = !AddAdjustmentOpen; OnPropertyChanged(nameof(AddAdjustmentOpen)); });
         DeleteAdjustmentNodeCommand = new RelayCommand(_ => DeleteSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null && AdjustmentStack.Nodes.Count > 1);
-        DuplicateAdjustmentNodeCommand = new RelayCommand(_ => DuplicateSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film });
+        DuplicateAdjustmentNodeCommand = new RelayCommand(_ => DuplicateSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop });
         MoveAdjustmentNodeUpCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(-1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) > 0);
         MoveAdjustmentNodeDownCommand = new RelayCommand(_ => MoveSelectedAdjustmentNode(1), _ => SelectedAdjustmentNode is { } node && AdjustmentStack.Nodes.ToList().IndexOf(node) < AdjustmentStack.Nodes.Count - 1);
         ResetAdjustmentNodeCommand = new RelayCommand(_ => ResetSelectedAdjustmentNode(), _ => SelectedAdjustmentNode is not null);
@@ -415,7 +415,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         ChangeStack(nodes => [.. nodes, node]); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
     private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
-    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
+    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
     private void MoveSelectedAdjustmentNode(int delta) { if (SelectedAdjustmentNode is not { } selected) return; ChangeStack(nodes => { var list = nodes.ToList(); var index = list.FindIndex(node => node.Id == selected.Id); var next = Math.Clamp(index + delta, 0, list.Count - 1); (list[index], list[next]) = (list[next], list[index]); return list; }); }
     public void MoveAdjustmentNode(Guid sourceId, Guid destinationId)
     {
@@ -967,7 +967,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             return await new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).DecodeMasterAsync(path, token).ConfigureAwait(false);
         var bitmap = await Task.Run(() =>
         {
-            var image = new BitmapImage(); image.BeginInit(); image.CacheOption = BitmapCacheOption.OnLoad; image.UriSource = new Uri(path); image.EndInit(); image.Freeze(); return image;
+            return StudioQuickExport.Load(path);
         }, token).ConfigureAwait(false);
         var converted = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0); converted.Freeze();
         var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 4]; converted.CopyPixels(bytes, converted.PixelWidth * 4, 0);

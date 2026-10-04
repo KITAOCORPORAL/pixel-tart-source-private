@@ -1,4 +1,4 @@
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -50,7 +50,7 @@ public sealed class RuntimeCorrectionWpfTests
     });
 
     [TestMethod]
-    public Task LeftEditingControlsAndRightAnalysisRemainBoundedAcrossViewportSizes() => RunSta(async()=>
+    public Task RightEditingAndCentralHistogramRemainBoundedAcrossViewportSizes() => RunSta(async()=>
     {
         EnsureTestApplication();
         using var workspace=new ReferenceColorWorkspaceViewModel(new TestDialogs());
@@ -60,10 +60,11 @@ public sealed class RuntimeCorrectionWpfTests
         {
             var logical=new Size(size.Width/scale,size.Height/scale);view.Width=logical.Width;view.Height=logical.Height;
             view.Measure(logical);view.Arrange(new Rect(logical));view.UpdateLayout();
-            var left=(FrameworkElement)view.FindName("LeftRail");var right=(FrameworkElement)view.FindName("RightRail");
+            var left=(FrameworkElement)view.FindName("EditingRail");var right=(FrameworkElement)view.FindName("ContextRail");
             var picker=(FrameworkElement)view.FindName("SourcePickerAnchor");
             Assert.IsTrue(IsDescendant(picker,left));
-            Assert.IsTrue(Descendants(right).OfType<HistogramDrawing>().Any());
+            Assert.IsTrue(Descendants((FrameworkElement)view.FindName("CentralAnalysis")).OfType<HistogramDrawing>().Any());
+            Assert.AreEqual(0,Grid.GetColumn(right));
             Assert.IsFalse(Descendants(right).OfType<Slider>().Any(x=>System.Windows.Data.BindingOperations.GetBindingExpression(x,Slider.ValueProperty)?.ParentBinding.Path?.Path=="WeightPercent"));
             Assert.IsLessThanOrEqualTo(logical.Width+.01,((FrameworkElement)view.FindName("WorkspaceGrid")).ActualWidth);
         }
@@ -82,10 +83,10 @@ public sealed class RuntimeCorrectionWpfTests
             void Arrange() { view.Width = width; view.Height = 720; view.Measure(new Size(width, 720)); view.Arrange(new Rect(0, 0, width, 720)); view.UpdateLayout(); }
             Arrange(); workspace.Editor.ContextRailOpen = true; Arrange();
             var target = (FrameworkElement)view.FindName("PreviewCanvas");
-            var right = (FrameworkElement)view.FindName("RightRail");
+            var right = (FrameworkElement)view.FindName("ContextRail");
             var targetBounds = target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize));
             var rightBounds = right.TransformToAncestor(view).TransformBounds(new Rect(right.RenderSize));
-            Assert.IsTrue(targetBounds.Right <= rightBounds.Left, $"Inspection covers target at {width}: {targetBounds} / {rightBounds}");
+            Assert.IsTrue(rightBounds.Right <= targetBounds.Left, $"Inspection covers target at {width}: {targetBounds} / {rightBounds}");
             Assert.IsTrue(rightBounds.Right <= width + .01);
             workspace.Editor.ContextRailOpen = false; Arrange();
             Assert.AreEqual(targetBounds, target.TransformToAncestor(view).TransformBounds(new Rect(target.RenderSize)), "Hiding inspection must not jump the target viewport.");

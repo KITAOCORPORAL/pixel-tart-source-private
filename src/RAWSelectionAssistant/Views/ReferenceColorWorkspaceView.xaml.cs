@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -63,6 +63,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         InitializeComponent();
         ColorSpaceViewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
+        ToneZones.ZoneHovered += (_, zone) => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightToneZone(zone); };
         ImageViewport.State.Changed += (_, _) => { HighlightOverlay.ViewState = ImageViewport.State; HighlightOverlay.InvalidateVisual(); };
         _zoomPan.Changed += (_, _) => ZoomLabel.Text = $"{_zoomPan.Zoom:P0}";
         AdjustmentNodeList.DragOver += OnNodeDragOver;
@@ -84,6 +85,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
         AddHandler(System.Windows.Controls.Primitives.Thumb.DragCompletedEvent, new System.Windows.Controls.Primitives.DragCompletedEventHandler(OnSliderDragCompleted), true);
     }
 
+    private void OnResetDevelopGroup(object sender, RoutedEventArgs e) { if (sender is Button { Tag: string group } && DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.Editor.ResetDevelopGroup(group); }
+    private void OnAddLocalAdjustment(object sender, RoutedEventArgs e) { if (DataContext is ReferenceColorWorkspaceViewModel workspace) { workspace.Editor.AddAdjustmentNodeCommand.Execute("ColorRange"); workspace.Editor.WorkspaceSection="仿色"; } }
     private void OnColorHistoryKeyDown(object sender, KeyEventArgs e)
     {
         if (_editor?.IsProMode != true || Keyboard.Modifiers != ModifierKeys.Control) return;
@@ -97,11 +100,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
     }
     private void OnSliderDragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
     {
-        if (_editor?.IsProMode == true && e.OriginalSource is System.Windows.Controls.Primitives.Thumb thumb && FindAncestor<Slider>(thumb) is { } slider && LeftRail.IsAncestorOf(slider)) _editor.BeginEditTransaction();
+        if (_editor?.IsProMode == true && e.OriginalSource is System.Windows.Controls.Primitives.Thumb thumb && FindAncestor<Slider>(thumb) is { } slider && EditingRail.IsAncestorOf(slider)) _editor.BeginEditTransaction();
     }
     private void OnSliderDragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
     {
-        if (_editor?.IsProMode == true && e.OriginalSource is DependencyObject control && LeftRail.IsAncestorOf(control)) _editor.CommitEditTransaction();
+        if (_editor?.IsProMode == true && e.OriginalSource is DependencyObject control && EditingRail.IsAncestorOf(control)) _editor.CommitEditTransaction();
     }
     private static T? FindAncestor<T>(DependencyObject source) where T : DependencyObject
     {
@@ -120,7 +123,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         ColorInspectionHint.Visibility = Visibility.Collapsed;
         PreviewCanvas.Cursor = Cursors.Arrow;
         if (_editor?.IsSampling == true) _editor.CancelSamplingCommand.Execute(null);
-        workspace?.ClearColorSpaceHighlight();
+        workspace?.ClearColorSpaceHighlight(); ToneZones.ClearHover();
         return true;
     }
 
@@ -349,7 +352,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     }
     private void WorkspaceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        if (sender is ReferenceColorWorkspaceViewModel analysis) HighlightOverlay.IsOriginal = analysis.AnalysisIsOriginal;
+        if (sender is ReferenceColorWorkspaceViewModel analysis) { HighlightOverlay.IsOriginal = analysis.AnalysisIsOriginal; if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram)) ToneZones.ClearHover(); }
         if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
         {
             if (workspace.ColorSpaceModel is null)
@@ -412,40 +415,22 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (compact && !_wasCompact) _editor?.SetResponsiveContext(true);
         _wasCompact = compact;
 
-        Grid.SetColumn(LeftRail, narrow ? 1 : 0);
-        Panel.SetZIndex(LeftRail, narrow ? 21 : 0);
-        LeftRail.Width = narrow ? Math.Min(300, Math.Max(220, availableWidth - 40)) : double.NaN;
-        LeftRail.HorizontalAlignment = narrow ? HorizontalAlignment.Left : HorizontalAlignment.Stretch;
-        LeftRail.Visibility = !focus && (!narrow || _editRailOpen) ? Visibility.Visible : Visibility.Collapsed;
+        Grid.SetColumn(EditingRail, narrow ? 1 : 2);
+        Panel.SetZIndex(EditingRail, narrow ? 21 : 0);
+        EditingRail.Width = narrow ? Math.Min(300, Math.Max(220, availableWidth - 40)) : double.NaN;
+        EditingRail.HorizontalAlignment = narrow ? HorizontalAlignment.Right : HorizontalAlignment.Stretch;
+        EditingRail.Visibility = !focus && (!narrow || _editRailOpen) ? Visibility.Visible : Visibility.Collapsed;
         EditRailButton.Visibility = !focus && narrow ? Visibility.Visible : Visibility.Collapsed;
-        LeftColumn.MinWidth = focus || narrow ? 0 : compact ? 300 : 320;
-        RightColumn.MinWidth = focus ? 0 : compact ? 294 : 280;
-        LeftColumn.Width = focus || narrow ? new GridLength(0) : compact ? new GridLength(300) : new GridLength(320);
-        CenterColumn.MinWidth = compact ? 240 : 520;
-        CenterColumn.Width = focus || compact ? new GridLength(1, GridUnitType.Star) : new GridLength(.63, GridUnitType.Star);
-        // Reserve inspection space even while collapsed. An overlay used to cover
-        // the fitted image at 1180px and hid the preview toolbar underneath it.
-        RightColumn.Width = focus ? new GridLength(0) : compact
-            ? new GridLength(Math.Min(340, Math.Max(280, availableWidth * .3)) + 14)
-            : new GridLength(.18, GridUnitType.Star);
-        if (compact)
-        {
-            Grid.SetColumn(RightRail, 2);
-            Panel.SetZIndex(RightRail, 0);
-            RightRail.Width = double.NaN;
-            RightRail.HorizontalAlignment = HorizontalAlignment.Stretch;
-            RightRail.Background = (System.Windows.Media.Brush)FindResource("SurfacePrimaryBrush");
-            RightRail.Padding = new Thickness(0);
-        }
-        else
-        {
-            Grid.SetColumn(RightRail, 2);
-            Panel.SetZIndex(RightRail, 0);
-            RightRail.Width = double.NaN;
-            RightRail.HorizontalAlignment = HorizontalAlignment.Stretch;
-            RightRail.Background = null;
-            RightRail.Padding = new Thickness(0);
-        }
+        var contextWidth = narrow ? Math.Min(220, availableWidth * .32) : compact ? 280 : 310;
+        LeftColumn.MinWidth = 0; RightColumn.MinWidth = 0;
+        LeftColumn.Width = focus ? new GridLength(0) : new GridLength(contextWidth);
+        RightColumn.Width = focus || narrow ? new GridLength(0) : new GridLength(compact ? 300 : 320);
+        CenterColumn.MinWidth = 0;
+        CenterColumn.Width = new GridLength(1, GridUnitType.Star);
+        Grid.SetColumn(ContextRail, 0); Panel.SetZIndex(ContextRail, 0);
+        ContextRail.Width = double.NaN; ContextRail.HorizontalAlignment = HorizontalAlignment.Stretch;
+        ContextRail.Padding = new Thickness(0);
+        CentralAnalysis.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         if (compact)
         {
             Grid.SetRow(HeaderActions, 1);

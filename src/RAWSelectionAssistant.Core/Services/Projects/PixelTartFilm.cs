@@ -1,5 +1,6 @@
-using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using System.Buffers;
+using RAWSelectionAssistant.Core.Services.Color;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -49,11 +50,14 @@ public static class PixelTartFilmTextures
 
 public static class PixelTartFilmPipeline
 {
-    public static VisualPixelBuffer Apply(VisualPixelBuffer input, PixelTartFilmSettings settings, CancellationToken token = default)
+    public static VisualPixelBuffer Apply(VisualPixelBuffer input, PixelTartFilmSettings settings, CancellationToken token = default) =>
+        Apply(HighBitDepthImageBuffer.FromVisualRgb24(input), settings, token).ToVisualRgb24();
+
+    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer input, PixelTartFilmSettings settings, CancellationToken token = default)
     {
         settings.Validate();
-        if (!settings.Enabled || IsIdentity(settings)) return new(input.Width, input.Height, input.Rgb24.ToArray());
-        var output = input.Rgb24.ToArray();
+        if (!settings.Enabled || IsIdentity(settings)) return input.Clone();
+        var output = input.Rgb32.ToArray();
         var pool = ArrayPool<float>.Shared;
         var luminance = pool.Rent(input.PixelCount); var highlightMask = pool.Rent(input.PixelCount);
         var bloomSpread = pool.Rent(input.PixelCount); var halationSpread = pool.Rent(input.PixelCount); var scratch = pool.Rent(input.PixelCount);
@@ -62,7 +66,7 @@ public static class PixelTartFilmPipeline
             for (var pixel = 0; pixel < input.PixelCount; pixel++)
             {
                 if ((pixel & 8191) == 0) token.ThrowIfCancellationRequested();
-                var offset = pixel * 3; var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d);
+                var offset = pixel * 3; var r = SrgbToLinear(output[offset]); var g = SrgbToLinear(output[offset + 1]); var b = SrgbToLinear(output[offset + 2]);
                 luminance[pixel] = (float)(.2126 * r + .7152 * g + .0722 * b);
                 highlightMask[pixel] = Math.Clamp((luminance[pixel] - .62f) / .38f, 0, 1);
             }
@@ -72,7 +76,7 @@ public static class PixelTartFilmPipeline
             for (var y = 0; y < input.Height; y++) for (var x = 0; x < input.Width; x++)
             {
                 var pixel = y * input.Width + x; if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3;
-                var r = SrgbToLinear(output[offset] / 255d); var g = SrgbToLinear(output[offset + 1] / 255d); var b = SrgbToLinear(output[offset + 2] / 255d); var luma = luminance[pixel];
+                var r = SrgbToLinear(output[offset]); var g = SrgbToLinear(output[offset + 1]); var b = SrgbToLinear(output[offset + 2]); var luma = luminance[pixel];
                 var profile = settings.ProfileId switch { "PT-W01" => (r: .018, g: .004, b: -.012), "PT-C01" => (r: -.008, g: .002, b: .018), _ => (r: 0d, g: 0d, b: 0d) }; var profileAmount = settings.ProfileAmount / 100;
                 r += profile.r * profileAmount; g += profile.g * profileAmount; b += profile.b * profileAmount;
                 var halo = Math.Clamp(halationSpread[pixel] - highlightMask[pixel] * .72f, 0, 1) * settings.HalationAmount / 100d; var edge = halo * Math.Clamp((luma - .12f) / .7f, 0, 1); r += edge * .12; g += edge * .020;
@@ -80,9 +84,9 @@ public static class PixelTartFilmPipeline
                 var nx = (x + .5) / input.Width * 2 - 1; var ny = (y + .5) / input.Height * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
                 var grainScale = 1d + settings.GrainSize / 24d * 5d; var high = DeterministicNoise(x, y, settings.Seed); var low = SmoothNoise(x / grainScale, y / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
                 var surface = Surface(settings.TextureId, x, y, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06; r += surface; g += surface; b += surface;
-                output[offset] = Channel(r); output[offset + 1] = Channel(g); output[offset + 2] = Channel(b);
+                output[offset] = (float)Math.Clamp(LinearToSrgb(r), 0, 1); output[offset + 1] = (float)Math.Clamp(LinearToSrgb(g), 0, 1); output[offset + 2] = (float)Math.Clamp(LinearToSrgb(b), 0, 1);
             }
-            return new(input.Width, input.Height, output);
+            return new(input.Width, input.Height, output, input.SourceBitDepth, input.WorkingColorSpace, input.Orientation, input.Metadata);
         }
         finally
         {

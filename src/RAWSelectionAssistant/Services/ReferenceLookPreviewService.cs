@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -62,7 +62,7 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
         var rgb = new byte[input.PixelWidth * input.PixelHeight * 3];
         for (var pixel = 0; pixel < input.PixelWidth * input.PixelHeight; pixel++)
         { var offset = pixel * 4; var rgbOffset = pixel * 3; rgb[rgbOffset] = bgra[offset + 2]; rgb[rgbOffset + 1] = bgra[offset + 1]; rgb[rgbOffset + 2] = bgra[offset]; }
-        var result = PixelTartFilmPipeline.Apply(new(input.PixelWidth, input.PixelHeight, rgb), settings, token);
+        var result = PixelTartFilmPipeline.Apply(new VisualPixelBuffer(input.PixelWidth, input.PixelHeight, rgb), settings, token);
         for (var pixel = 0; pixel < result.PixelCount; pixel++)
         { var offset = pixel * 4; var rgbOffset = pixel * 3; bgra[offset] = result.Rgb24.Span[rgbOffset + 2]; bgra[offset + 1] = result.Rgb24.Span[rgbOffset + 1]; bgra[offset + 2] = result.Rgb24.Span[rgbOffset]; bgra[offset + 3] = 255; }
         var output = BitmapSource.Create(input.PixelWidth, input.PixelHeight, input.DpiX, input.DpiY, PixelFormats.Bgra32, null, bgra, stride); output.Freeze(); return output;

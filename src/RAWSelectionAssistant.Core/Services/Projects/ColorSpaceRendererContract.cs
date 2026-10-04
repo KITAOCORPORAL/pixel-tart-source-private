@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
@@ -44,9 +44,9 @@ public static class ColorSpaceProjection
 
     // Models hold OKLab (L roughly 0..1, a/b roughly -0.4..0.4), not display coordinates.
     // This is the same normalization and orientation path used by Project and Fit.
-    private static ColorSpaceCoordinate ViewCoordinate(OklabColor lab, ColorSpaceCamera camera)
+    private static ColorSpaceCoordinate ViewCoordinate(OklabColor lab, ColorSpaceCamera camera, bool guide = false)
     {
-        var p = ColorSpaceCoordinate.FromLab(lab);
+        var p = guide ? new ColorSpaceCoordinate(lab.A/.4,(lab.L-.5)*2,lab.B/.4) : ColorSpaceCoordinate.FromLab(lab);
         var yaw = camera.Yaw * Math.PI / 180; var pitch = camera.Pitch * Math.PI / 180;
         var x = p.X * Math.Cos(yaw) - p.Z * Math.Sin(yaw);
         var z = p.X * Math.Sin(yaw) + p.Z * Math.Cos(yaw);
@@ -72,13 +72,13 @@ public static class ColorSpaceProjection
         return scale > 0 && double.IsFinite(scale) ? camera.Pan(deltaX / scale, -deltaY / scale) : camera;
     }
 
-    public static ColorSpaceCamera Fit(ColorSpaceVisualizationModel model, ColorSpaceCamera camera, double width, double height)
+    public static ColorSpaceCamera Fit(ColorSpaceVisualizationModel model, ColorSpaceCamera camera, double width, double height, bool guide = false)
     {
         ArgumentNullException.ThrowIfNull(model);
         camera = Sanitize(camera);
         if (!ValidViewport(width, height)) return camera;
         var points = model.VisibleClouds.SelectMany(c => c.Points).Where(p => IsFinite(p.Lab))
-            .Select(p => ViewCoordinate(p.Lab, camera)).ToArray();
+            .Select(p => ViewCoordinate(p.Lab, camera, guide)).ToArray();
         if (points.Length == 0) return camera with { PanX = 0, PanY = 0 };
         var minX = points.Min(p => p.X); var maxX = points.Max(p => p.X);
         var minY = points.Min(p => p.Y); var maxY = points.Max(p => p.Y);
@@ -96,7 +96,7 @@ public static class ColorSpaceProjection
             Distance = requiredDistance < 1e-12 ? ColorSpaceCamera.Default.Distance : Math.Clamp(requiredDistance, MinimumDistance, MaximumDistance) };
     }
 
-    public static IReadOnlyList<ColorSpaceProjectedPoint> Project(ColorSpaceCloud cloud, ColorSpaceCamera camera, double width, double height, double pointScale = 1)
+    public static IReadOnlyList<ColorSpaceProjectedPoint> Project(ColorSpaceCloud cloud, ColorSpaceCamera camera, double width, double height, double pointScale = 1, bool guide = false)
     {
         ArgumentNullException.ThrowIfNull(cloud);
         if (!ValidViewport(width, height)) return [];
@@ -107,13 +107,15 @@ public static class ColorSpaceProjection
         for (var index = 0; index < cloud.Points.Count; index++)
         {
             if (!IsFinite(cloud.Points[index].Lab)) continue;
-            var p = ViewCoordinate(cloud.Points[index].Lab, camera);
+            var p = ViewCoordinate(cloud.Points[index].Lab, camera, guide);
             result.Add(new(index, width / 2 + (p.X + camera.PanX) * scale,
                 height / 2 - (p.Y + camera.PanY) * scale, p.Z, cloud.Points[index].PreviewRgb));
         }
         return result;
     }
 
+    public static IReadOnlyList<ColorSpaceProjectedPoint> ProjectUnclampedGuide(ColorSpaceCloud cloud, ColorSpaceCamera camera, double width, double height) => Project(cloud,camera,width,height,guide:true);
+    public static ColorSpaceCamera FitGuide(ColorSpaceVisualizationModel model,ColorSpaceCamera camera,double width,double height)=>Fit(model,camera,width,height,guide:true);
     public static int HitTest(IReadOnlyList<ColorSpaceProjectedPoint> points, double x, double y, double tolerance = 12)
     {
         if (!double.IsFinite(x) || !double.IsFinite(y) || tolerance <= 0) return -1;

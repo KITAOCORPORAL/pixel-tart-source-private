@@ -1,4 +1,4 @@
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -413,6 +413,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         ColorStudioNodeType.Film => "胶片",
         ColorStudioNodeType.TransitionBlend => "色彩过渡",
         ColorStudioNodeType.Preset => "预设",
+        ColorStudioNodeType.Develop => "影调与细节",
         _ => type.ToString()
     };
     public AsyncRelayCommand ActivateTargetCommand { get; }
@@ -565,8 +566,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         var image = await Task.Run(() =>
         {
             token.ThrowIfCancellationRequested();
-            var decoded = new BitmapImage(); decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad;
-            decoded.UriSource = new Uri(path); decoded.EndInit(); decoded.Freeze();
+            var decoded = StudioQuickExport.Load(path);
             token.ThrowIfCancellationRequested(); return decoded;
         }, token);
         _sourceCache.AddFirst((path, stamp, image));
@@ -609,12 +609,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     {
         if (items.Count == 0 || IsExporting) return;
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
-        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder("选择批量导出目录", null) : acceptanceDirectory);
+        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder( $"快速导出 {items.Count} 张 · {string.Join(" / ", items.Select(x => RawMatchTiff16ProductPipeline.IsRaw(x.Path) ? "RAW → TIFF16" : StudioQuickExport.Extension(x.Path).TrimStart('.').ToUpperInvariant()).Distinct())}", null) : acceptanceDirectory);
         if (directory is null) return;
         _lastExportDirectory = directory;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize())).ToArray();
-        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal}"; RaiseExportCommands();
+        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · 源格式（RAW → TIFF16）"; RaiseExportCommands();
         var failed = new List<string>();
         try
         {
@@ -622,7 +622,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var isRaw = RawMatchTiff16ProductPipeline.IsRaw(item.Path);
-                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + (isRaw ? "_仿色.tif" : "_仿色.jpg")); var temp = output + ".tmp";
+                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + (isRaw ? ".tif" : StudioQuickExport.Extension(item.Path)))); var temp = output + ".tmp";
                 try
                 {
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
@@ -645,15 +645,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     else
                     {
                         var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
-                        await Task.Run(() => EncodeJpeg(processed, temp, _exportCancellation.Token), _exportCancellation.Token);
+                        await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, _exportCancellation.Token), _exportCancellation.Token);
                         File.Move(temp, output, overwrite: false);
                     }
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
-                { TryDelete(temp); item.Error = ex is NotSupportedException ? "当前 RAW 高精度导出仅支持 Match v3，尚不支持此调整节点" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
-                ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal}";
+                { TryDelete(temp); item.Error = ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
+                ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {directory} · {Path.GetExtension(output).ToUpperInvariant()}";
             }
             ExportFailureSummary = failed.Count == 0 ? "" : $"失败 {failed.Count} 张：{string.Join("、", frozen.Where(entry => entry.Item.ExportStatus == ReferenceExportStatus.Failed).Select(entry => entry.Item.FileName + "（" + entry.Item.Error + "）"))}";
             StatusText = failed.Count == 0 ? "批量导出已完成。" : $"批量导出已完成；成功 {ExportCompleted - failed.Count} 张，失败 {failed.Count} 张。";

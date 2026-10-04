@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -41,6 +41,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     public ColorSpace3DViewport()
     {
         Focusable = true; ClipToBounds = true;
+        ToolTip = "球形网格为方向参考：中心 L=0.5、a=b=0；显示轴 x=a/0.4、y=2(L−0.5)、z=b/0.4。样本保留 OKLab 坐标及颜色距离，不投射到球壳。拖动旋转，Shift 拖动平移，滚轮缩放。";
         MouseLeftButtonDown += OnMouseDown; MouseMove += OnMouseMove; MouseLeftButtonUp += OnMouseUp; MouseWheel += OnMouseWheel;
         SizeChanged += (_, _) => { if (State?.IsFit == true) FitCamera(); else InvalidateVisual(); };
         LostMouseCapture += (_, _) => _pointer = null;
@@ -48,7 +49,10 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     }
     public void SetModel(ColorSpaceVisualizationModel model) => State = ColorSpaceRendererContract.Create(model);
     public void ResetCamera() { if (State is not null) State = State with { Camera = State.Camera.Reset(), IsFit = false }; }
-    public void FitCamera() { if (State is not null) State = State.Fit(ActualWidth, ActualHeight); }
+    public void FitCamera() { if (State is not null) {
+        var guides=SphereGuide();var model=State.Model with { Source=State.Model.Source with { Points=[..State.Model.Source.Points,..guides.Points] }, Mode=ColorCloudMode.Source };
+        State=State with { Camera=ColorSpaceProjection.FitGuide(model,State.Camera,ActualWidth,ActualHeight),IsFit=true };
+    } }
     protected override void OnRender(DrawingContext drawing)
     {
         var clock = System.Diagnostics.Stopwatch.StartNew();
@@ -56,6 +60,7 @@ public sealed class ColorSpace3DViewport : FrameworkElement
         base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
         if (State is null) { DrawLabel(drawing, "载入目标图像后显示真实采样", new Point(18, 18)); return; }
+        DrawSphere(drawing);
         DrawAxes(drawing);
         DrawLabel(drawing, "L 明度 0–1 · a 绿↔红 · b 蓝↔黄", new Point(10, 8));
         if (ActualHeight >= 260) DrawLabel(drawing, "离中性轴越远，色度越高 · 点色＝当前分析图像", new Point(10, 26));
@@ -80,8 +85,40 @@ public sealed class ColorSpace3DViewport : FrameworkElement
                 drawing.DrawEllipse(null, new Pen(Brushes.Black, 5), center, 9, 9);
                 drawing.DrawEllipse(null, new Pen(Brushes.White, 2), center, 9, 9);
             }
-        DrawLabel(drawing, "OKLab · 拖动旋转 / Shift 平移", new Point(12, Math.Max(12, ActualHeight - 22)));
+        DrawLabel(drawing, "OKLab 球形参考空间 · 样本坐标不变", new Point(12, Math.Max(12, ActualHeight - 22)));
         _lastRenderMilliseconds = clock.Elapsed.TotalMilliseconds;
+    }
+    // Wire sphere is a display reference in normalized OKLab coordinates. Samples never move.
+    private ColorSpaceCloud SphereGuide()
+    {
+        var points = new List<ColorSpacePoint>();
+        // Radius encloses the normalized [-1,1]^3 sample bounds, without radial projection.
+        var radius = Math.Sqrt(3);
+        for (var latitude = -60; latitude <= 60; latitude += 30)
+        for (var angle = 0; angle <= 360; angle += 6)
+        {
+            var phi=latitude*Math.PI/180;var theta=angle*Math.PI/180;
+            points.Add(Guide(radius*Math.Cos(phi)*Math.Cos(theta),radius*Math.Sin(phi),radius*Math.Cos(phi)*Math.Sin(theta)));
+        }
+        for(var meridian=0;meridian<180;meridian+=30)
+        for(var angle=0;angle<=360;angle+=6)
+        {
+            var phi=angle*Math.PI/180;var theta=meridian*Math.PI/180;
+            points.Add(Guide(radius*Math.Cos(phi)*Math.Cos(theta),radius*Math.Sin(phi),radius*Math.Cos(phi)*Math.Sin(theta)));
+        }
+        return new(1,1,1,1,points,"sphere-guide",new());
+        static ColorSpacePoint Guide(double x,double y,double z)=>new(new(.5+y/2,x*.4,z*.4),new(100,140,140),0,0);
+    }
+    private void DrawSphere(DrawingContext dc)
+    {
+        var projected = ColorSpaceProjection.ProjectUnclampedGuide(SphereGuide(), State!.Camera, ActualWidth, ActualHeight);
+        for(var i=1;i<projected.Count;i++)
+        {
+            if(i%61==0) continue;
+            var a=projected[i-1];var b=projected[i];
+            var front=(a.Depth+b.Depth)>0;
+            dc.DrawLine(new Pen(new SolidColorBrush(Color.FromArgb(front?(byte)110:(byte)40,100,175,169)),front?1:.6),new(a.X,a.Y),new(b.X,b.Y));
+        }
     }
     private void DrawAxes(DrawingContext drawing)
     {

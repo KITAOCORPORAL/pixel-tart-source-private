@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Models;
+﻿using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Export;
@@ -40,13 +40,6 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         var state = stack is { Nodes.Count: > 0 } ? stack.DeepClone() : look is not null
             ? ColorStudioLegacyMigration.Migrate(look with { Film = film ?? look.Film }).Stack
             : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]);
-        // The float renderer does not yet reproduce every display-only Film/ColorRange effect.
-        // Refuse those nodes rather than export a silently different professional result.
-        if (state.Nodes.Any(node => node.Enabled && node.Type != ColorStudioNodeType.ReferenceMatch &&
-            (node.Type != ColorStudioNodeType.Preset || node.NumericParameters.Count != 0)) ||
-            (stack is null && film is { Enabled: true }) ||
-            (stack is { Nodes.Count: > 0 } && film is { Enabled: true }))
-            throw new NotSupportedException("RAW TIFF16 export currently supports Match v3 only; this adjustment needs a high-precision implementation.");
         var display = working.ToVisualRgb24();
         var analysis = VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), VisualAnalysisFingerprint.Compute(display), display), token);
         return new ColorStudioRenderPipeline().Render(working, analysis, look, state, token);

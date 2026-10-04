@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Linq;
@@ -222,15 +222,13 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
     }
 
     [TestMethod]
-    public void SmartFolderConditionHeadersUseStackedLayoutAtNarrowWidths()
+    public async Task SmartFolderConditionHeadersUseStackedLayoutAtNarrowWidths()
     {
         var stylesPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetLibraryP3Styles.xaml");
         var styles = File.ReadAllText(stylesPath);
         StringAssert.Contains(styles, "<Grid.ColumnDefinitions><ColumnDefinition Width=\"Auto\" /><ColumnDefinition Width=\"105\" />");
         StringAssert.Contains(styles, "<WrapPanel Grid.Row=\"1\" Grid.ColumnSpan=\"3\"");
-        var editorPath = FindRepositoryFile("src", "PixelTart.Modules.AssetLibrary", "AssetSmartFolderEditorView.xaml");
-        var editor = File.ReadAllText(editorPath);
-        StringAssert.Contains(editor, "HorizontalScrollBarVisibility=\"Disabled\" VerticalScrollBarVisibility=\"Auto\"");
+        await new EveningFeedbackWpfTests().SmartEditorPinsControlsOutsideScrollableRules();
     }
 
     private static SmartFolder SeedSmartFolder(string databasePath, SmartFolder folder, IEnumerable<SmartFolderRule> rules)

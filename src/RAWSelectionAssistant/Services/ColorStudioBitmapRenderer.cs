@@ -1,4 +1,4 @@
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -10,6 +10,7 @@ public static class ColorStudioBitmapRenderer
 {
     public static BitmapSource Render(BitmapSource source, ColorAdjustmentStack stack, ReferenceLook? reference, CancellationToken token = default)
     {
+        if(source.Format.BitsPerPixel>32) return RenderHighPrecision(source,stack,reference,token);
         var input = HistogramService.EnsureBgra32(source);
         var bgra = new byte[input.PixelWidth * input.PixelHeight * 4];
         input.CopyPixels(bgra, input.PixelWidth * 4, 0);
@@ -32,6 +33,17 @@ public static class ColorStudioBitmapRenderer
         return output;
     }
 
+    private static BitmapSource RenderHighPrecision(BitmapSource source,ColorAdjustmentStack stack,ReferenceLook? reference,CancellationToken token)
+    {
+        var rgba=new FormatConvertedBitmap(source,PixelFormats.Rgba64,null,0);var bytes=new byte[rgba.PixelWidth*rgba.PixelHeight*8];rgba.CopyPixels(bytes,rgba.PixelWidth*8,0);
+        var samples=new ushort[bytes.Length/2];Buffer.BlockCopy(bytes,0,samples,0,bytes.Length);var rgb=new ushort[samples.Length/4*3];
+        for(var p=0;p<rgb.Length/3;p++)for(var c=0;c<3;c++)rgb[p*3+c]=samples[p*4+c];
+        var master=new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.PixelWidth,source.PixelHeight,rgb,"16","sRGB");
+        var display=master.ToVisualRgb24();var analysis=VisualAnalysisEngine.Analyze(new(Guid.NewGuid(),VisualAnalysisFingerprint.Compute(display),display),token);
+        var result=new ColorStudioRenderPipeline().Render(master,analysis,reference,stack,token).ProcessingPixels!.ToRgb48();
+        for(var p=0;p<result.Length/3;p++)for(var c=0;c<3;c++)samples[p*4+c]=result[p*3+c];
+        Buffer.BlockCopy(samples,0,bytes,0,bytes.Length);var output=BitmapSource.Create(source.PixelWidth,source.PixelHeight,source.DpiX,source.DpiY,PixelFormats.Rgba64,null,bytes,source.PixelWidth*8);output.Freeze();return output;
+    }
     public static BitmapSource ShowSelection(BitmapSource source, ColorAdjustmentStackNode node, CancellationToken token = default)
     {
         var input = HistogramService.EnsureBgra32(source);

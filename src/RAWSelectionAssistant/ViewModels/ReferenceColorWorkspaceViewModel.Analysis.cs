@@ -1,4 +1,4 @@
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 
@@ -82,5 +82,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if (!ReferenceEquals(image, _analysisImage)) await RefreshPreviewAnalysisAsync(inspectedImage: image);
         if (ReferenceEquals(image, _analysisImage)) HighlightImageSample(sample);
     }
+    public void HighlightToneZone(int zone)
+    {
+        ClearColorSpaceHighlight();
+        if (_colorSpaceSourceBuffer is null || zone is < 0 or > 10) return;
+        HighlightedPixels = VisualAnalysisEngine.ToneZoneMembers(_colorSpaceSourceBuffer, zone);
+    }
+    public IReadOnlyList<string> HistogramChannels { get; } = ["RGB", "R", "G", "B", "亮度"];
+    private string _histogramChannel = "RGB";
+    public string HistogramChannel { get => _histogramChannel; set => SetProperty(ref _histogramChannel, value); }
     private sealed record PreviewAnalysisEntry(BitmapSource Image, ColorSpaceSamplingTier Tier, VisualPixelBuffer Pixels, VisualHistogram Histogram, ColorSpaceVisualizationModel Model);
 }

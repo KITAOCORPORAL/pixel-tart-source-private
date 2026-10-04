@@ -1,4 +1,4 @@
-using RAWSelectionAssistant.Core.Models;
+﻿using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Export;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -121,12 +121,12 @@ public sealed class RawMatchTiff16ProductPipelineTests
     }
 
     [TestMethod]
-    public async Task UnsupportedDisplayOnlyNodeFailsInsteadOfSilentPrecisionDivergence()
+    public async Task HighPrecisionColorRangeWithoutSamplesIsExactIdentity()
     {
         var pipeline = new RawMatchTiff16ProductPipeline(new FakeDecoder());
         var master = await pipeline.DecodeMasterAsync("synthetic.nef");
         var stack = new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "Color range")]);
-        Assert.ThrowsExactly<NotSupportedException>(() => pipeline.Render(master, null, stack));
+        CollectionAssert.AreEqual(master.Rgb32.ToArray(), pipeline.Render(master, null, stack).ProcessingPixels!.Rgb32.ToArray());
     }
 
     private sealed class FakeDecoder(bool EightBit = false) : IRawDecoder
