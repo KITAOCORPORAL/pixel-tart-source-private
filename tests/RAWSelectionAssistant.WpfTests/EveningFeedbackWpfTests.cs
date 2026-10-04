@@ -19,6 +19,46 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class EveningFeedbackWpfTests
 {
     [TestMethod]
+    public Task ShellEscapeClosesAssetFilterAndPreservesUnsavedSmartFolder() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        var root = await RuntimeUserFindingsBatchATests.Fixture();
+        await using var page = new AssetLibraryPage(Path.Combine(root, "assets.db"), new RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge(), []);
+        await page.InitializeForSessionAsync();
+        var shell = new MainWindow { ShowInTaskbar = false, Left = -32000 };
+        var host = (ModuleWorkspaceHost)shell.FindName("AssetLibraryWorkspace");
+        host.Content = page;
+        host.Visibility = Visibility.Visible;
+        try
+        {
+            shell.Show();
+            await shell.Dispatcher.InvokeAsync(() => {}, DispatcherPriority.ApplicationIdle);
+            page.ViewModel.OpenFilterPanel();
+            Assert.IsTrue(page.ViewModel.P3QueryPanelOpen);
+            Escape();
+            Assert.IsFalse(page.ViewModel.P3QueryPanelOpen, "Window tunneling must close the filter before shell navigation.");
+            page.ViewModel.NewP3SmartFolderCommand.Execute(null);
+            page.ViewModel.P3SmartFolderName = "draft survives Escape";
+            Escape();
+            Assert.IsTrue(page.ViewModel.SmartFolderUnsavedGuardOpen);
+            Assert.IsTrue(page.ViewModel.P3SmartFolderOpen);
+            Escape();
+            Assert.IsFalse(page.ViewModel.SmartFolderUnsavedGuardOpen);
+            Assert.IsTrue(page.ViewModel.P3SmartFolderOpen);
+            Assert.AreEqual("draft survives Escape", page.ViewModel.P3SmartFolderName);
+        }
+        finally { host.Content = null; shell.Close(); }
+
+        void Escape()
+        {
+            var e = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(shell), 0, Key.Escape)
+                { RoutedEvent = UIElement.PreviewKeyDownEvent };
+            shell.RaiseEvent(e);
+            Assert.IsTrue(e.Handled);
+        }
+    });
+
+    [TestMethod]
     public Task LoadedPngDevelopRendersThroughBoundWorkspace() => RunSta(async () =>
     {
         EnsureTestApplication(); using var workspace = new ReferenceColorWorkspaceViewModel(new NoDialogs());

@@ -655,10 +655,14 @@ public partial class MainWindow : Window
         }
 
         var openDatePicker = FindVisualChildren<DatePicker>(RootGrid).FirstOrDefault(picker => picker.IsDropDownOpen);
-        if (openDatePicker is null) return false;
-        openDatePicker.IsDropDownOpen = false;
-        openDatePicker.Focus();
-        return true;
+        if (openDatePicker is not null)
+        {
+            openDatePicker.IsDropDownOpen = false;
+            openDatePicker.Focus();
+            return true;
+        }
+
+        return GetHostedAssetLibraryPage() is { IsVisible: true } page && page.TryCloseTransientSurface();
     }
 
     private async Task RequestEscapeCloseAsync()

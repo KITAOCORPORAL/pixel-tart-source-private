@@ -951,19 +951,27 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             await _viewModel.ExecuteVisualContextActionAsync(card.Asset, VisualContextAction.Analyze);
     }
 
-    private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
+    // The shell sees tunneled keys before the page. Let it close the same local
+    // surface before it considers navigating away from the workspace.
+    public bool TryCloseTransientSurface()
     {
-        if (e.Key == Key.Escape && AssetQuickLoupePopup.IsOpen)
-        { HideQuickLoupe(); e.Handled = true; return; }
-        if (e.Key == Key.Escape && _viewModel.P3SmartFolderOpen)
+        if (AssetQuickLoupePopup.IsOpen)
+        { HideQuickLoupe(); return true; }
+        if (_viewModel.P3SmartFolderOpen)
         {
             if (_viewModel.SmartFolderUnsavedGuardOpen) _viewModel.KeepEditingSmartFolderCommand.Execute(null);
             else _viewModel.RequestSmartFolderClose();
-            e.Handled = true;
-            return;
+            return true;
         }
-        if (e.Key == Key.Escape && (_activeToolbarPopup is not null || _viewModel.P3QuerySurfaceVisible))
-        { CloseToolbarPopups(); e.Handled = true; return; }
+        if (_activeToolbarPopup is not null || _viewModel.P3QuerySurfaceVisible)
+        { CloseToolbarPopups(); return true; }
+        return false;
+    }
+
+    private async void OnPreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape && TryCloseTransientSurface())
+        { e.Handled = true; return; }
         if (_canvas is not null) return;
         if (e.Key == Key.F2 && !IsTextInputContext(e.OriginalSource) &&
             FindOrganizationNode(e.OriginalSource as DependencyObject) is { } organization)
