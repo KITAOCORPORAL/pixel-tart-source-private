@@ -1,0 +1,189 @@
+{
+  "SchemaVersion": 1,
+  "RecordedAt": "2026-10-05T13:33:24.6555634+08:00",
+  "OverallStatus": "NOT_READY_FOR_USER_RETEST",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "UserVisualReview": "NOT_APPROVED",
+  "EvidencePolicy": "本索引登记本地证据和身份，不上传照片/二进制。Final、开发候选模块、C1研究三类独立，不拼接为同版运行通过。截图存在仅证明文件可核对，局部操作范围见RELEASE_RUNTIME_REPLAY.md。",
+  "ReferenceImage": {
+    "Name": "codex-clipboard-c5b9b11b-eeb1-4fb7-85bf-6a72b040a9ea.png",
+    "UserLayoutName": "image(20261005-022726).png",
+    "Sha256": "82A1EAB8C4DEBDC278AAF2D6086A7FD6527C7362B9613AEBE9B6F4D24E34AC0E",
+    "HashSource": "REHASHED_LOCAL_ATTACHMENT",
+    "ImageWidthPixels": 1672,
+    "ImageHeightPixels": 941,
+    "Role": "LATEST_LAYOUT_REFERENCE_ONLY"
+  },
+  "FinalRelease": {
+    "ReleaseId": "color-studio-rebuild-2026-10-05-r1",
+    "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+    "Executable": "artifacts/releases/color-studio-rebuild-2026-10-05-r1/publish/win-x64/KitaoPhotoSelector.exe",
+    "ExecutableSha256": "C9841FB530ABF0E209B8E9BB9B6870C917D54DED985702B2EF41F36EE6DB28CA",
+    "ApplicationProductVersion": "2.3.0+31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+    "ApplicationDllSha256": "DD5BFB88219EC853DD328AA00743BE4519C0A259E19C2016467239948420BCD3",
+    "Manifest": "artifacts/releases/color-studio-rebuild-2026-10-05-r1/release-manifest.json",
+    "ManifestSha256": "DDFE6381BD897F2BF7A997144E71E143A10CD26ED2F3CA38A10D4BAA7A9BAE21",
+    "PublishedFileCount": 287,
+    "Session": {
+      "Pid": 36892,
+      "StartedAt": "2026-10-05T13:08:50.5696117+08:00",
+      "RecordPath": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-session.json",
+      "WindowWidth": 1600,
+      "WindowHeight": 920,
+      "WindowMeasurementSource": "RELEASE_RUNTIME_REPLAY.md recorded full-window size",
+      "ActualWindowsDpi": null,
+      "ActualWindowsScalePercent": null,
+      "DpiStatus": "UNKNOWN_NOT_MEASURED",
+      "DpiInferenceProhibited": "Do not infer Windows DPI from JPEG dimensions, image resolution metadata or automated WPF scaling."
+    },
+    "ReplayDocument": "docs/evidence/color-studio-rebuild-2026-10-05/RELEASE_RUNTIME_REPLAY.md",
+    "CaptureSetStatus": "PARTIAL_RUNTIME_OBSERVATION",
+    "Screenshots": [
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-evidence/01-layout-restored-exposure.jpg",
+        "Sha256": "ECF35BA64BD5AF8B22752EDBA2441478F7F00EE72B16851991CE8E6FA239F6D3",
+        "SizeBytes": 198290,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920,
+        "Scope": "r1启动及既有3图批次重开；曝光EV1.127为恢复状态，不是本次拖动曝光证据",
+        "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+        "SessionPid": 36892,
+        "FullRequirementStatus": "PARTIAL"
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-evidence/02-wb-warm-histograms.jpg",
+        "Sha256": "96B4EBA60CB62A6920F2216E93FFBBF94A2C3806D3ED4749B27022496215E351",
+        "SizeBytes": 202017,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920,
+        "Scope": "冷暖偏移25.199后照片及双直方图更新；后续Ctrl+Z恢复来自操作记录",
+        "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+        "SessionPid": 36892,
+        "FullRequirementStatus": "PARTIAL"
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-evidence/03-curve-midpoint-0654.jpg",
+        "Sha256": "BBA9C6B81E2EB0318CBA08A820A252AF0AD9B0F1126ABE344A1CFDBC7FD163BC",
+        "SizeBytes": 210399,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920,
+        "Scope": "RGB曲线输入0.496至输出0.654；单通道和删点未覆盖",
+        "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+        "SessionPid": 36892,
+        "FullRequirementStatus": "PARTIAL"
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-evidence/04-levels-gamma-1448.jpg",
+        "Sha256": "BC8C91A7D5FFF1C94DD42EBDBF633E692B130D88064FD07F31B6FB7B0280FA61",
+        "SizeBytes": 202561,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920,
+        "Scope": "RGB色阶gamma1.448；R/G/B单通道未覆盖",
+        "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+        "SessionPid": 36892,
+        "FullRequirementStatus": "PARTIAL"
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/final-runtime-evidence/05-clarity-37275.jpg",
+        "Sha256": "A0B5C960256739F505F0CDF144E2FD4E29BFCB206F89A6B8710E26142A10E3F5",
+        "SizeBytes": 204886,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920,
+        "Scope": "清晰度37.275计算结束、状态恢复正常；从既有截图缓冲保存，无新的桌面重放",
+        "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+        "SessionPid": 36892,
+        "FullRequirementStatus": "PARTIAL"
+      }
+    ]
+  },
+  "ModuleCandidates": {
+    "Classification": "PRE_FINAL_DEVELOPMENT_CANDIDATES",
+    "Builds": [
+      "fifth",
+      "eleventh"
+    ],
+    "SourceIdentity": "5427406c4ef3c805ef56fbb814251df69365032d plus worktree at each candidate; not r1",
+    "Status": "PARTIAL_OBSERVATION_NOT_FINAL_RELEASE_PROOF",
+    "Document": "docs/evidence/color-studio-rebuild-2026-10-05/MODULE_RUNTIME_OBSERVATIONS.md",
+    "Files": [
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/module-runtime-evidence/compact-filmstrip-exposure.jpg",
+        "Sha256": "49565BA3B72ED630AB933F52F0685ED3281D55BF5CF629FE6ABE1C66109D4756",
+        "SizeBytes": 197848,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/module-runtime-evidence/sphere-to-image.jpg",
+        "Sha256": "FD806E303435BC2CC70C750C6D705E9AE932938332B245B4A9725DD9936BF10D",
+        "SizeBytes": 183996,
+        "ImageWidthPixels": 1600,
+        "ImageHeightPixels": 920
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/module-runtime-evidence/studio-batch.ptstudio.json",
+        "Sha256": "63D2C1D0966D406B228D304328B22CA5F66C093E2E50A8C928AD388B14C58527",
+        "SizeBytes": 2071
+      }
+    ]
+  },
+  "CaptureOneResearch": {
+    "Classification": "REFERENCE_SOFTWARE_OBSERVATION_ONLY",
+    "ApplicationVersion": "16.6.1.2962",
+    "Status": "PARTIAL_RESEARCH_NOT_PIXEL_TART_RUNTIME_PROOF",
+    "Document": "docs/evidence/color-studio-rebuild-2026-10-05/C1_FEATURE_BEHAVIOR_MATRIX.md",
+    "FilePresenceDoesNotAssignObservationPass": true,
+    "Files": [
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-curve-raised.jpg",
+        "Sha256": "43DB269E6F0756A330CBE70160655EC8934D64EF7BDC7F64CBD442CA735404F4",
+        "SizeBytes": 338115,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-export-recipe-settings.jpg",
+        "Sha256": "1F2E73D2CF61C335072584162A288331D2048F57F269762E1DA925154100F505",
+        "SizeBytes": 322995,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-exposure-1_8.jpg",
+        "Sha256": "C2702E45D561DEE987DDEF86096696FDF67F029FD6117E48B47E73691F7533C2",
+        "SizeBytes": 380412,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-levels-midpoint-0_2.jpg",
+        "Sha256": "64813A0ECB05E851B5839B6727DF353DB07B8B9CF96542CE3642A7B4F7615C78",
+        "SizeBytes": 329577,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-neutral.jpg",
+        "Sha256": "F55CD604BCDA652267BB79976549C9464A671152DA8F9B5092F0D0A4B9837A63",
+        "SizeBytes": 286957,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-shadows-69.jpg",
+        "Sha256": "27962FAA04714CE5A6525C4413383925163C90F9D6D0B0F0D0A0549CF14FD9D2",
+        "SizeBytes": 381495,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      },
+      {
+        "Path": "artifacts/color-studio-rebuild-2026-10-05/c1/DSC04831-skin-hue-uniformity-77.jpg",
+        "Sha256": "85AA67323FFFCD40317F032F130773F820106D0F67638BF0CD76FEC2A3822273",
+        "SizeBytes": 295518,
+        "ImageWidthPixels": 2560,
+        "ImageHeightPixels": 1392
+      }
+    ]
+  }
+}
