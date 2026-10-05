@@ -69,4 +69,3 @@ public partial class ReferenceColorWorkspaceView
         menu.IsOpen = true;
     }
 }
-

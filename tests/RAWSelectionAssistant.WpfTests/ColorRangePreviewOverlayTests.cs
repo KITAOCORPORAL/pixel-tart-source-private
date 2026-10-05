@@ -93,4 +93,3 @@ public sealed class ColorRangePreviewOverlayTests
         public void RevealFile(string path) { }
     }
 }
-

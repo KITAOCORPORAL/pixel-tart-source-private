@@ -97,4 +97,3 @@ public sealed partial class TetherReferenceModeViewModel
         return result;
     }
 }
-

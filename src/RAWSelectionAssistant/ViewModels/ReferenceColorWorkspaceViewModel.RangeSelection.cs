@@ -155,4 +155,3 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         Editor.PropertyChanged -= OnRangeSelectionStateChanged; _rangeSelectionCancellation?.Cancel(); Interlocked.Increment(ref _rangeSelectionRevision);
     }
 }
-
