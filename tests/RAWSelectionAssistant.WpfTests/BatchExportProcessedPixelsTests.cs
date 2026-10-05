@@ -262,9 +262,13 @@ public sealed class BatchExportProcessedPixelsTests
         finally { Directory.Delete(root, true); }
     }
     [TestMethod]
-    public void BatchSyncSelectionToastAndIsolationTests()
+    public async Task BatchSyncSelectionToastAndIsolationTests()
     {
-        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()));
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-SyncSource-" + Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(root));
+        await workspace.LoadTargetAsync(CreatePng(root, "source", 80, 90, 100));
         workspace.Editor.WorkspaceMode = "专业";
         var existing = new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.ColorRange, "保留", NumericParameters: new Dictionary<string, double> { ["hue"] = 19 });
         var a = new ReferenceTargetItem("a.jpg") { IsSelected = true, ColorAdjustmentStackSnapshot = new ColorAdjustmentStack([existing]) };
@@ -277,13 +281,19 @@ public sealed class BatchExportProcessedPixelsTests
         Assert.IsFalse(workspace.NodeSyncOpen); StringAssert.Contains(workspace.SyncFeedback, "1 个调整到 2 张照片");
         Assert.AreEqual(19, a.ColorAdjustmentStackSnapshot!.Nodes[0].NumericParameters["hue"]);
         Assert.AreNotSame(a.ColorAdjustmentStackSnapshot.Nodes[1].NumericParameters, b.ColorAdjustmentStackSnapshot!.Nodes[1].NumericParameters);
-        b.IsSelected = false; Assert.IsFalse(workspace.CanSyncSelectedNodes);
+        b.IsSelected = false; a.IsSelected = false; Assert.IsFalse(workspace.CanSyncSelectedNodes);
+        }
+        finally { Directory.Delete(root, true); }
     }
 
     [TestMethod]
-    public void CopyApplyAdjustmentsUsesSelectedCategoriesAndProtectsAssetFields()
+    public async Task CopyApplyAdjustmentsUsesSelectedCategoriesAndProtectsAssetFields()
     {
-        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(Path.GetTempPath()));
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-CopySource-" + Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+        using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(root));
+        await workspace.LoadTargetAsync(CreatePng(root, "source", 80, 90, 100));
         workspace.Editor.WorkspaceMode = "专业";
         var first = new ReferenceTargetItem("first.jpg") { IsSelected = true, Rating = 5, ColorLabel = "红", ColorAdjustmentStackSnapshot = workspace.Editor.AdjustmentStack.DeepClone() };
         var second = new ReferenceTargetItem("second.jpg") { IsSelected = true, Rating = 2, ColorLabel = "蓝", ColorAdjustmentStackSnapshot = workspace.Editor.AdjustmentStack.DeepClone() };
@@ -296,6 +306,8 @@ public sealed class BatchExportProcessedPixelsTests
         Assert.AreEqual(5, first.Rating); Assert.AreEqual("红", first.ColorLabel);
         Assert.AreEqual(2, second.Rating); Assert.AreEqual("蓝", second.ColorLabel);
         Assert.AreEqual(77, second.ColorAdjustmentStackSnapshot!.Nodes.Single(node => node.Type == ColorStudioNodeType.ColorRange).NumericParameters["hue"]);
+        }
+        finally { Directory.Delete(root, true); }
     }
     [TestMethod]
     public async Task InactiveTargetsExportTheirFrozenProcessedPixelsNotActiveEditorPixels()
@@ -306,12 +318,25 @@ public sealed class BatchExportProcessedPixelsTests
         {
             var source = Path.Combine(root, "source"); var output = Path.Combine(root, "output");
             Directory.CreateDirectory(source); Directory.CreateDirectory(output);
-            var red = new ReferenceTargetItem(CreatePng(source, "active", 40, 60, 80)) { IsSelected = true, IsActive = true, AppliedLookSnapshot = Look("red", 10), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "red-film") };
-            var green = new ReferenceTargetItem(CreatePng(source, "inactive-b", 40, 60, 80)) { IsSelected = true, AppliedLookSnapshot = Look("green", 20), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "green-film") };
-            var blue = new ReferenceTargetItem(CreatePng(source, "inactive-c", 40, 60, 80)) { IsSelected = true, AppliedLookSnapshot = Look("blue", 30), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "blue-film") };
+            var red = new ReferenceTargetItem(CreatePng(source, "active", 40, 60, 80)) { IsSelected = true, IsActive = true, AppliedLookSnapshot = Look("red", 65, 220, 80, 50), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "PT-W01") };
+            var green = new ReferenceTargetItem(CreatePng(source, "inactive-b", 40, 60, 80)) { IsSelected = true, AppliedLookSnapshot = Look("green", 80, 50, 210, 80), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "PT-N01", VignetteAmount: 35) };
+            var blue = new ReferenceTargetItem(CreatePng(source, "inactive-c", 40, 60, 80)) { IsSelected = true, AppliedLookSnapshot = Look("blue", 90, 50, 90, 220), FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "PT-C01") };
             var untouched = new ReferenceTargetItem(CreatePng(source, "unsynced", 40, 60, 80)) { IsSelected = true };
-            var backend = new PixelBackend { FirstRender = () => { green.AppliedLookSnapshot = Look("yellow", 99); blue.FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "wrong-film"); } };
-            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(output), backend);
+            var frozenPixels = new[] { red, green, blue }.ToDictionary(item => item.Id, item =>
+            {
+                var look = item.AppliedLookSnapshot! with { Film = item.FilmSettingsSnapshot };
+                var stack = ColorStudioLegacyMigration.Migrate(look).Stack;
+                return Pixels(ColorStudioBitmapRenderer.Render(StudioQuickExport.Load(item.Path), stack, look));
+            });
+            var changedAfterFreeze = false;
+            red.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName != nameof(ReferenceTargetItem.Status) || red.Status != ReferenceTargetStatus.Processing) return;
+                changedAfterFreeze = true;
+                green.AppliedLookSnapshot = Look("yellow", 99, 230, 230, 10);
+                blue.FilmSettingsSnapshot = new PixelTartFilmSettings(Enabled: true, ProfileId: "PT-W01", GrainAmount: 60);
+            };
+            using var workspace = new ReferenceColorWorkspaceViewModel(new FolderDialog(output));
             workspace.Targets.Add(red); workspace.Targets.Add(green); workspace.Targets.Add(blue); workspace.Targets.Add(untouched);
             workspace.Editor.SelectedLook = Look("yellow", 99); // The active editor must not leak into other targets.
 
@@ -322,12 +347,14 @@ public sealed class BatchExportProcessedPixelsTests
             Assert.AreEqual(ReferenceExportStatus.Succeeded, green.ExportStatus);
             Assert.AreEqual(ReferenceExportStatus.Succeeded, blue.ExportStatus);
             Assert.AreEqual(ReferenceExportStatus.Succeeded, untouched.ExportStatus);
-            AssertRgb(red.OutputPath!, 220, 20, 20);
-            AssertRgb(green.OutputPath!, 20, 220, 20);
-            AssertRgb(blue.OutputPath!, 20, 20, 220);
+            foreach (var item in new[] { red, green, blue })
+                CollectionAssert.AreEqual(frozenPixels[item.Id], Pixels(StudioQuickExport.Load(item.OutputPath!)), item.FileName);
             AssertRgb(untouched.OutputPath!, 40, 60, 80);
-            CollectionAssert.AreEqual(new[] { "red:10", "green:20", "blue:30" }, backend.RenderedLooks);
-            CollectionAssert.AreEqual(new[] { "red-film", "green-film", "blue-film" }, backend.AppliedFilms);
+            Assert.IsTrue(changedAfterFreeze, "The mutation must occur after all target snapshots have been frozen.");
+            Assert.AreEqual("yellow", green.AppliedLookSnapshot!.Name);
+            Assert.AreEqual("PT-W01", blue.FilmSettingsSnapshot!.ProfileId);
+            Assert.IsFalse(frozenPixels[red.Id].SequenceEqual(frozenPixels[green.Id]));
+            Assert.IsFalse(frozenPixels[green.Id].SequenceEqual(frozenPixels[blue.Id]));
             Assert.IsTrue(red.IsActive); Assert.IsFalse(green.IsActive); Assert.IsFalse(blue.IsActive);
         }
         finally { Directory.Delete(root, recursive: true); }
@@ -449,12 +476,15 @@ public sealed class BatchExportProcessedPixelsTests
             workspace.Editor.SelectedLook = Look("red", 10);
             workspace.Editor.MatchStrength = 73;
             workspace.Editor.FilmEnabled = true;
-            workspace.Editor.FilmProfileId = "active-film";
+            workspace.Editor.FilmProfileId = "PT-W01";
+            var frozenStack = workspace.Editor.AdjustmentStack.DeepClone();
+            var frozenLook = workspace.Editor.SelectedLook!.Normalize();
+            var expected = ColorStudioBitmapRenderer.Render(StudioQuickExport.Load(source), frozenStack, frozenLook);
             await workspace.ExportAllCommand.ExecuteAsync(null);
-            AssertRgb(workspace.ActiveTarget!.OutputPath!, 220, 20, 20);
-            CollectionAssert.Contains(backend.RenderedLooks, "red:73");
-            CollectionAssert.Contains(backend.AppliedFilms, "active-film");
+            CollectionAssert.AreEqual(Pixels(expected), Pixels(StudioQuickExport.Load(workspace.ActiveTarget!.OutputPath!)), "Export must use the effective full stack after the legacy look/film was promoted to nodes.");
             Assert.AreEqual(73d, workspace.ActiveTarget.AppliedLookSnapshot!.Parameters.MatchStrength);
+            Assert.AreEqual("PT-W01", workspace.ActiveTarget.ColorAdjustmentStackSnapshot!.Nodes.Single(n => n.Type == ColorStudioNodeType.Film).FilmSettings!.ProfileId);
+            CollectionAssert.AreEqual(frozenStack.Nodes.Select(n => n.Id).ToArray(), workspace.ActiveTarget.ColorAdjustmentStackSnapshot.Nodes.Select(n => n.Id).ToArray());
         }
         finally { Directory.Delete(root, recursive: true); }
     }

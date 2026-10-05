@@ -28,7 +28,7 @@ public sealed class HistogramDrawing : FrameworkElement
         if (Channel is "RGB" or "R") DrawChannel(drawingContext, Histogram?.R ?? Analysis!.HistogramR, Color.FromArgb(160, 236, 90, 80));
         if (Channel is "RGB" or "G") DrawChannel(drawingContext, Histogram?.G ?? Analysis!.HistogramG, Color.FromArgb(150, 90, 210, 120));
         if (Channel is "RGB" or "B") DrawChannel(drawingContext, Histogram?.B ?? Analysis!.HistogramB, Color.FromArgb(150, 80, 135, 240));
-        if (Channel == "亮度" || (Channel == "RGB" && ShowLuma)) DrawChannel(drawingContext, Histogram?.Luma ?? Analysis!.HistogramLuma, Color.FromRgb(225, 225, 225), outline: true);
+        if (Channel == "亮度" || (Channel == "RGB" && ShowLuma)) DrawChannel(drawingContext, Histogram?.Luma ?? Analysis!.HistogramLuma, Color.FromRgb(185, 189, 192), outline: Channel != "亮度");
     }
 
     private void DrawChannel(DrawingContext context, IReadOnlyList<uint> bins, Color color, bool outline = false)

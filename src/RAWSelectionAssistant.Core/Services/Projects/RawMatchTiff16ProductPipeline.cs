@@ -37,12 +37,12 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         if (master.SourceBitDepth != "16" || !string.Equals(master.WorkingColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
             throw new InvalidDataException("RAW processing requires 16-bit decoded sRGB input.");
         var working = maximumEdge > 0 ? CreateProxy(master, maximumEdge, token) : master;
-        var state = stack is { Nodes.Count: > 0 } ? stack.DeepClone() : look is not null
+        var state = ColorStudioEffectiveState.Resolve(look, stack, film) ?? (look is not null
             ? ColorStudioLegacyMigration.Migrate(look with { Film = film ?? look.Film }).Stack
-            : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]);
+            : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]));
         var display = working.ToVisualRgb24();
-        var analysis = VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), VisualAnalysisFingerprint.Compute(display), display), token);
-        return new ColorStudioRenderPipeline().Render(working, analysis, look, state, token);
+        var analysis = ColorStudioProcessingAnalysis.Create(display, state, look, token);
+        return new ColorStudioRenderPipeline().Render(working, analysis, look, state, token, captureNodeDiagnostics: false);
     }
 
     public VisualPixelBuffer DisplaySource(HighBitDepthImageBuffer master, int maximumEdge, CancellationToken token = default) =>
@@ -51,19 +51,19 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
     public HighBitDepthImageBuffer PreviewMaster(HighBitDepthImageBuffer master, int maximumEdge = 1600, CancellationToken token = default) =>
         CreateProxy(master, maximumEdge, token);
 
-    public async Task<TiffExportResult> ExportAsync(string sourcePath, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null)
+    public async Task<TiffExportResult> ExportAsync(string sourcePath, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null, ReadOnlyMemory<byte> outputIcc = default)
     {
         var master = await DecodeFrozenMasterAsync(sourcePath, token).ConfigureAwait(false);
-        return await ExportAsync(master, destinationPath, look, stack, token, film).ConfigureAwait(false);
+        return await ExportAsync(master, destinationPath, look, stack, token, film, outputIcc).ConfigureAwait(false);
     }
 
-    public async Task<TiffExportResult> ExportAsync(FrozenRawMaster master, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null)
+    public async Task<TiffExportResult> ExportAsync(FrozenRawMaster master, string destinationPath, ReferenceLook? look, ColorAdjustmentStack? stack, CancellationToken token = default, PixelTartFilmSettings? film = null, ReadOnlyMemory<byte> outputIcc = default)
     {
         ArgumentNullException.ThrowIfNull(master);
         await master.ValidateSourceAsync(token).ConfigureAwait(false);
         var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
         return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
-            new(TiffBitDepth.Sixteen, Software: "Pixel Tart", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
+            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "Pixel Tart", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
     }
 
     private static HighBitDepthImageBuffer CreateProxy(HighBitDepthImageBuffer source, int maximumEdge, CancellationToken token)

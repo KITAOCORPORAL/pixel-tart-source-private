@@ -7,6 +7,8 @@ namespace RAWSelectionAssistant.Views;
 /// <summary>Displays processed bitmaps; color processing remains in the existing renderer.</summary>
 public sealed class ColorStudioImageViewport : FrameworkElement
 {
+    public static readonly DependencyProperty SourcePixelSizeProperty = DependencyProperty.Register(nameof(SourcePixelSize), typeof(Size), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(Size.Empty, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
+    public Size SourcePixelSize { get => (Size)GetValue(SourcePixelSizeProperty); set => SetValue(SourcePixelSizeProperty, value); }
     public static readonly DependencyProperty OriginalProperty = DependencyProperty.Register(nameof(Original), typeof(BitmapSource), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
     public static readonly DependencyProperty MatchedProperty = DependencyProperty.Register(nameof(Matched), typeof(BitmapSource), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
     public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(string), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata("原片", FrameworkPropertyMetadataOptions.AffectsRender, Changed));
@@ -18,7 +20,7 @@ public sealed class ColorStudioImageViewport : FrameworkElement
     public ColorStudioZoomPanState State { get; } = new();
     public ColorStudioImageViewport() { ClipToBounds = true; SizeChanged += (_, _) => Configure(); State.Changed += (_, _) => InvalidateVisual(); }
     private static void Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e) => ((ColorStudioImageViewport)sender).Configure();
-    public void Configure() { if (Original is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, new Size(image.PixelWidth, image.PixelHeight)); }
+    public void Configure() { if (Original is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, SourcePixelSize.IsEmpty ? new Size(image.PixelWidth, image.PixelHeight) : SourcePixelSize); }
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);

@@ -90,7 +90,7 @@ public sealed record ColorSpaceVisualizationModel(
     };
 }
 
-public readonly record struct ColorSpaceSelection(ColorSpaceMarkerKind Kind, int PointIndex)
+public readonly record struct ColorSpaceSelection(ColorSpaceMarkerKind Kind, int PointIndex, OklabColor? Color = null)
 {
     public static ColorSpaceSelection None => new(ColorSpaceMarkerKind.None, -1);
 }
@@ -141,6 +141,7 @@ public static class ColorSpaceLinking
         var result = new List<int>();
         for (var pixel = 0; pixel < source.PixelCount; pixel++)
         {
+            if (!source.Alpha.IsEmpty && source.Alpha.Span[pixel] == 0) continue;
             var offset = pixel * 3;
             var lab = OklabColorSpace.FromSrgb(new VisualRgb24(source.Rgb24.Span[offset], source.Rgb24.Span[offset + 1], source.Rgb24.Span[offset + 2]));
             if (SquaredDistance(center, lab) <= radius * radius) result.Add(pixel);
@@ -202,7 +203,7 @@ public static class ColorSpaceVisualizationBuilder
         MatchV4PixelApplication.Apply(values, transform, token);
         var matchedPixels = new byte[values.Length];
         for (var i = 0; i < values.Length; i++) matchedPixels[i] = (byte)Math.Clamp(Math.Round(values[i] * 255), 0, 255);
-        var matchedCloud = ColorSpaceProxyBuilder.Build(new VisualPixelBuffer(source.Width, source.Height, matchedPixels), ColorSpaceSampling.Settings(tier), token);
+        var matchedCloud = ColorSpaceProxyBuilder.Build(new VisualPixelBuffer(source.Width, source.Height, matchedPixels, source.Alpha), ColorSpaceSampling.Settings(tier), token);
         var vectors = new List<ColorMigrationVector>(sourceCloud.Points.Count);
         var settings = transform.Settings;
         for (var i = 0; i < sourceCloud.Points.Count; i++)
@@ -254,6 +255,7 @@ public static class ColorSpaceProxyBuilder
                 if ((column & 127) == 0) token.ThrowIfCancellationRequested();
                 var x = Math.Min(source.Width - 1, (int)(((column + .5) * source.Width) / columns));
                 var offset = checked((y * source.Width + x) * 3);
+                if (!source.Alpha.IsEmpty && source.Alpha.Span[y * source.Width + x] == 0) continue;
                 var rgb = new VisualRgb24(source.Rgb24.Span[offset], source.Rgb24.Span[offset + 1], source.Rgb24.Span[offset + 2]);
                 points.Add(new(OklabColorSpace.FromSrgb(rgb), rgb, x, y));
             }

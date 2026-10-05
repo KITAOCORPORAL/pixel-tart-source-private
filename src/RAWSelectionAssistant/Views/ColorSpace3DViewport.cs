@@ -1,164 +1,183 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.Views;
 
-/// <summary>Windows surface for the platform-neutral ColorSpaceVisualizationModel.</summary>
+/// <summary>CPU-rendered, pickable color surface and real sample cloud. Inspection only.</summary>
 public sealed class ColorSpace3DViewport : FrameworkElement
 {
-    public static readonly DependencyProperty PointSizeProperty = DependencyProperty.Register(nameof(PointSize), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(2.6, FrameworkPropertyMetadataOptions.AffectsRender));
-    public static readonly DependencyProperty PointOpacityProperty = DependencyProperty.Register(nameof(PointOpacity), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(.7, FrameworkPropertyMetadataOptions.AffectsRender));
-    public static readonly DependencyProperty SelectionToleranceProperty = DependencyProperty.Register(nameof(SelectionTolerance), typeof(double), typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(.06, FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty PointSizeProperty = DP(nameof(PointSize), typeof(double), 2.6);
+    public static readonly DependencyProperty PointOpacityProperty = DP(nameof(PointOpacity), typeof(double), .7);
+    public static readonly DependencyProperty SelectionToleranceProperty = DP(nameof(SelectionTolerance), typeof(double), .06);
+    public static readonly DependencyProperty ViewSettingsProperty = DP(nameof(ViewSettings), typeof(ColorSpaceViewSettings), new ColorSpaceViewSettings());
+    public static readonly DependencyProperty IsPanModeProperty = DP(nameof(IsPanMode), typeof(bool), false);
+    private static DependencyProperty DP(string name, Type type, object value) => DependencyProperty.Register(name, type, typeof(ColorSpace3DViewport), new FrameworkPropertyMetadata(value, FrameworkPropertyMetadataOptions.AffectsRender));
     public double PointSize { get => (double)GetValue(PointSizeProperty); set => SetValue(PointSizeProperty, value); }
     public double PointOpacity { get => (double)GetValue(PointOpacityProperty); set => SetValue(PointOpacityProperty, value); }
     public double SelectionTolerance { get => (double)GetValue(SelectionToleranceProperty); set => SetValue(SelectionToleranceProperty, value); }
-    public static readonly DependencyProperty IsPanModeProperty = DependencyProperty.Register(nameof(IsPanMode), typeof(bool), typeof(ColorSpace3DViewport), new PropertyMetadata(false));
+    public ColorSpaceViewSettings ViewSettings { get => (ColorSpaceViewSettings)GetValue(ViewSettingsProperty); set => SetValue(ViewSettingsProperty, value); }
     public bool IsPanMode { get => (bool)GetValue(IsPanModeProperty); set => SetValue(IsPanModeProperty, value); }
-    private Point? _pointer;
+    private Point? _pointer, _clickStart;
     private ColorSpaceRendererState? _state;
+    private ColorSpaceCamera _emptyCamera = ColorSpaceCamera.Default;
     private long _renderCount;
     private double _lastRenderMilliseconds;
-    private Point? _clickStart;
+    private BitmapSource? _surface;
+    private ColorSpaceCloud? _cachedCloud;
+    private (ColorSpacePoint Point, int Index, ColorSpaceCoordinate Sphere, double Chroma)[] _samples = [];
+    private (ColorSpaceCamera, ColorSpaceViewSettings, Size, int)? _surfaceKey;
+    private static readonly Lazy<double[,]> GamutTable = new(() =>
+    {
+        var table = new double[129, 361];
+        for (var l = 0; l <= 128; l++) for (var h = 0; h <= 360; h++) table[l, h] = ColorSpaceSurface.MaximumChroma(l / 128d, h * Math.PI / 180);
+        return table;
+    });
     public event EventHandler<ColorSpaceSelection>? SelectionChanged;
-    internal object ReadNativeEvidence() => new
-    {
-        Bounds = ReferenceColorWorkspaceView.NativeBounds(this), State?.Camera, State?.IsFit,
-        ModelLoaded = State is not null, SampleCount = State?.VisibleClouds.Sum(c => c.Points.Count) ?? 0,
-        RenderCount = _renderCount, LastRenderMilliseconds = _lastRenderMilliseconds,
-        Backend = "WPF DrawingContext / CPU point projection", IsMouseCaptured,
-        ProjectedBounds = State is null ? null : ProjectedModelBounds()
-    };
-    private object? ProjectedModelBounds()
-    {
-        var points = State!.VisibleClouds.SelectMany(c => ColorSpaceProjection.Project(c, State.Camera, ActualWidth, ActualHeight)).ToArray();
-        return points.Length == 0 ? null : new { MinX = points.Min(p => p.X), MaxX = points.Max(p => p.X), MinY = points.Min(p => p.Y), MaxY = points.Max(p => p.Y) };
-    }
+    public event EventHandler<OklabColor>? SurfaceSelectionChanged;
     public ColorSpaceRendererState? State { get => _state; set { _state = value; InvalidateVisual(); } }
-    public ColorCloudMode Mode => State?.Mode ?? ColorCloudMode.Overlay;
+    public ColorCloudMode Mode => State?.Mode ?? ColorCloudMode.Source;
     public bool IsAvailable => State is not null;
+    private ColorSpaceCamera Camera => State?.Camera ?? _emptyCamera;
+    private void CameraChanged(ColorSpaceCamera value, bool fit = false) { _emptyCamera = value; if (State is not null) State = State with { Camera = value, IsFit = fit }; else InvalidateVisual(); }
+    internal object ReadNativeEvidence() => new { Bounds = ReferenceColorWorkspaceView.NativeBounds(this), Camera, State?.IsFit, ModelLoaded = State is not null, SampleCount = State?.Model.Source.Count ?? 0, RenderCount = _renderCount, LastRenderMilliseconds = _lastRenderMilliseconds, Backend = "CPU analytic OKLab gamut sphere / real sampled cloud", ViewSettings, IsMouseCaptured };
     public ColorSpace3DViewport()
     {
         Focusable = true; ClipToBounds = true;
-        ToolTip = "球形网格为方向参考：中心 L=0.5、a=b=0；显示轴 x=a/0.4、y=2(L−0.5)、z=b/0.4。样本保留 OKLab 坐标及颜色距离，不投射到球壳。拖动旋转，Shift 拖动平移，滚轮缩放。";
+        System.ComponentModel.PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current,OnLanguageChanged,"Language");
+        ToolTip = "OKLab D65 · sRGB 色域归一化球形显示（非线性）。L 沿竖轴，±a/±b 为颜色方向；真实样本与距离仍为 OKLab。拖动旋转，Shift 拖动平移，滚轮缩放；点击点或球面仅高亮预览。";
         MouseLeftButtonDown += OnMouseDown; MouseMove += OnMouseMove; MouseLeftButtonUp += OnMouseUp; MouseWheel += OnMouseWheel;
         SizeChanged += (_, _) => { if (State?.IsFit == true) FitCamera(); else InvalidateVisual(); };
-        LostMouseCapture += (_, _) => _pointer = null;
+        LostMouseCapture += (_, _) => { _pointer = null; InvalidateVisual(); };
         PreviewKeyDown += (_, e) => { if (e.Key == Key.Escape && _pointer is not null) { _pointer = null; ReleaseMouseCapture(); e.Handled = true; } };
     }
     public void SetModel(ColorSpaceVisualizationModel model) => State = ColorSpaceRendererContract.Create(model);
-    public void ResetCamera() { if (State is not null) State = State with { Camera = State.Camera.Reset(), IsFit = false }; }
-    public void FitCamera() { if (State is not null) {
-        var guides=SphereGuide();var model=State.Model with { Source=State.Model.Source with { Points=[..State.Model.Source.Points,..guides.Points] }, Mode=ColorCloudMode.Source };
-        State=State with { Camera=ColorSpaceProjection.FitGuide(model,State.Camera,ActualWidth,ActualHeight),IsFit=true };
-    } }
-    protected override void OnRender(DrawingContext drawing)
+    private void OnLanguageChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e) { if(Dispatcher.CheckAccess())InvalidateVisual();else Dispatcher.BeginInvoke(InvalidateVisual); }
+    public void ResetCamera() => CameraChanged(ColorSpaceCamera.Default);
+    public void FitCamera()
     {
-        var clock = System.Diagnostics.Stopwatch.StartNew();
-        _renderCount++;
-        base.OnRender(drawing); drawing.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
-        var background = TryFindResource("CanvasBackgroundBrush") as Brush ?? new SolidColorBrush(Color.FromRgb(25, 25, 25)); drawing.DrawRectangle(background, null, new Rect(RenderSize));
-        if (State is null) { DrawLabel(drawing, "载入目标图像后显示真实采样", new Point(18, 18)); return; }
+        if (!ColorSpaceProjection.ValidViewport(ActualWidth, ActualHeight)) return;
+        var settings = ViewSettings.Normalize(); var points = VisiblePoints(settings).Select(p => ColorSpaceSurface.Rotate(settings.IsSpherical ? p.Sphere : new(p.Point.Lab.A / .4, 2 * (p.Point.Lab.L - .5), p.Point.Lab.B / .4), Camera, settings)).ToList();
+        if (settings.IsSpherical) { points.Add(new(-1,-1,0)); points.Add(new(1,1,0)); }
+        if (points.Count == 0) { CameraChanged(Camera with { PanX = 0, PanY = 0 }, true); return; }
+        var minX = points.Min(p => p.X); var maxX = points.Max(p => p.X); var minY = points.Min(p => p.Y); var maxY = points.Max(p => p.Y);
+        var distance = .42 * 1.8 / .8 * Math.Max((maxX-minX) * Math.Min(ActualWidth,ActualHeight)/ActualWidth, (maxY-minY)*Math.Min(ActualWidth,ActualHeight)/ActualHeight);
+        CameraChanged(Camera with { PanX = -(minX+maxX)/2, PanY=-(minY+maxY)/2, Distance=Math.Clamp(distance < 1e-9 ? 2.4 : distance, .5, 10) }, true);
+    }
+    private IEnumerable<(ColorSpacePoint Point, int Index, ColorSpaceCoordinate Sphere, double Chroma)> VisiblePoints(ColorSpaceViewSettings settings)
+    {
+        if(!ReferenceEquals(_cachedCloud,State?.Model.Source))
+        {
+            _cachedCloud=State?.Model.Source;
+            _samples=_cachedCloud?.Points.Select((p,i)=>(p,i,ColorSpaceSurface.ToSphere(p.Lab),ColorSpaceSurface.RelativeChroma(p.Lab))).ToArray()??[];
+        }
+        return _samples.Where(p=>p.Chroma>=settings.ChromaMin-1e-8&&p.Chroma<=settings.ChromaMax+1e-8&&(!settings.SliceEnabled||Math.Abs(p.Point.Lab.L-settings.SliceCenter)<=settings.SliceThickness/2));
+    }
+    private IReadOnlyList<ColorSpaceProjectedPoint> Projected(ColorSpaceViewSettings settings)
+    {
+        if(settings.SurfaceMode==2)return [];
+        var scale=ColorSpaceSurface.Scale(Camera,ActualWidth,ActualHeight);
+        return VisiblePoints(settings).Select(item=>
+        {
+            var lab=item.Point.Lab;var p=ColorSpaceSurface.Rotate(settings.IsSpherical?item.Sphere:new(lab.A/.4,(lab.L-.5)*2,lab.B/.4),Camera,settings);
+            return new ColorSpaceProjectedPoint(item.Index,ActualWidth/2+(p.X+Camera.PanX)*scale,ActualHeight/2-(p.Y+Camera.PanY)*scale,p.Z,item.Point.PreviewRgb);
+        }).ToArray();
+    }
+    protected override void OnRender(DrawingContext dc)
+    {
+        var clock = System.Diagnostics.Stopwatch.StartNew(); _renderCount++; base.OnRender(dc);
         if (ActualWidth <= 0 || ActualHeight <= 0) return;
-        DrawSphere(drawing);
-        DrawAxes(drawing);
-        DrawLabel(drawing, "L 明度 0–1 · a 绿↔红 · b 蓝↔黄", new Point(10, 8));
-        if (ActualHeight >= 260) DrawLabel(drawing, "离中性轴越远，色度越高 · 点色＝当前分析图像", new Point(10, 26));
-        foreach (var cloud in State.VisibleClouds)
+        var settings=ViewSettings.Normalize();
+        dc.DrawRectangle(new SolidColorBrush(settings.Background switch { 1=>Color.FromRgb(75,75,75),2=>Color.FromRgb(190,190,190),_=>Color.FromRgb(13,17,19)}),null,new Rect(RenderSize));
+        if (settings.IsSpherical && settings.SurfaceOpacity > 0) DrawSurface(dc,settings);
+        if(settings.ShowGrid) DrawGrid(dc,settings);
+        if(settings.ShowGamut) DrawGamut(dc,settings);
+        if(settings.ShowAxes) DrawAxes(dc,settings);
+        var points=Projected(settings).OrderBy(p=>p.Depth).ToArray();
+        var selected = State?.Selection.Color is { } selectedColor
+            ? State.Model.Source.Points.Select((p,i)=>(p,i)).Where(item=>ColorSpaceSurface.SelectionWeight(item.p.Lab,selectedColor,SelectionTolerance,0)>0).Select(item=>item.i).ToHashSet()
+            : State?.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster && State.Selection.PointIndex >= 0
+                ? ColorSpaceLinking.SelectCluster(State.Model.Source,State.Selection.PointIndex,SelectionTolerance).ToHashSet() : [];
+        foreach(var point in points)
         {
-            var cluster = State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster
-                ? ColorSpaceLinking.SelectCluster(cloud, State.Selection.PointIndex, SelectionTolerance).ToHashSet() : [];
-            foreach (var point in ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight, 1))
+            var radius=double.IsFinite(PointSize)?Math.Clamp(PointSize,1,6):2.6;
+            // Reference surface is translucent; rear samples remain visible with reduced opacity.
+            var depthOpacity = settings.IsSpherical && point.Depth < 0 ? 1-settings.SurfaceOpacity*.65 : 1;
+            dc.DrawEllipse(new SolidColorBrush(Color.FromArgb((byte)(Math.Clamp(double.IsFinite(PointOpacity)?PointOpacity:.7,0,1)*255*depthOpacity),point.Color.R,point.Color.G,point.Color.B)),selected.Contains(point.PointIndex)?new Pen(Brushes.White,1):null,new(point.X,point.Y),radius,radius);
+        }
+        if(State?.Selection.Kind==ColorSpaceMarkerKind.SelectedCluster && State.Selection.Color is null)
+            foreach(var p in points.Where(p=>p.PointIndex==State.Selection.PointIndex)) { dc.DrawEllipse(null,new Pen(Brushes.Black,5),new(p.X,p.Y),8,8);dc.DrawEllipse(null,new Pen(Brushes.White,2),new(p.X,p.Y),8,8); }
+        if(State?.Selection.Color is { } exact)
+        {
+            var p=ColorSpaceSurface.Project(exact,OklabColorSpace.ToSrgb(exact),-1,Camera,settings,ActualWidth,ActualHeight);
+            dc.DrawEllipse(null,new Pen(Brushes.Black,5),new(p.X,p.Y),11,11);dc.DrawEllipse(null,new Pen(Brushes.Cyan,2),new(p.X,p.Y),11,11);
+        }
+        var strings=StudioLocalizationService.Current;
+        DrawLabel(dc,strings[settings.IsSpherical ? "SphereLabel" : "AffineLabel"],new(8,6));
+        DrawLabel(dc, State is null ? strings["EmptySphere"] : $"{strings["RealSamples"]} {points.Length} · {strings["ObserveOnly"]}",new(8,Math.Max(24,ActualHeight-22)));
+        _lastRenderMilliseconds=clock.Elapsed.TotalMilliseconds;
+    }
+    private void DrawSurface(DrawingContext dc,ColorSpaceViewSettings settings)
+    {
+        var edge=_pointer is null ? 320 : 160;
+        var key=(Camera,settings,RenderSize,edge);
+        if(_surfaceKey!=key)
+        {
+            var width=Math.Max(1,(int)(ActualWidth/Math.Max(ActualWidth,ActualHeight)*edge));var height=Math.Max(1,(int)(ActualHeight/Math.Max(ActualWidth,ActualHeight)*edge));
+            var bytes=new byte[width*height*4];var scale=ColorSpaceSurface.Scale(Camera,ActualWidth,ActualHeight);var table=GamutTable.Value;
+            for(var y=0;y<height;y++)for(var x=0;x<width;x++)
             {
-                var selected = cluster.Contains(point.PointIndex);
-                drawing.DrawEllipse(new SolidColorBrush(Color.FromArgb((byte)(Math.Clamp(PointOpacity, .15, 1) * 255), point.Color.R, point.Color.G, point.Color.B)), selected ? new Pen(Brushes.White, 1) : null, new Point(point.X, point.Y), selected ? PointSize + 2 : PointSize, selected ? PointSize + 2 : PointSize);
+                var px=((x+.5)*ActualWidth/width-ActualWidth/2)/scale-Camera.PanX;var py=-((y+.5)*ActualHeight/height-ActualHeight/2)/scale-Camera.PanY;
+                var depth=1-px*px-py*py;if(depth<0)continue;
+                var p=ColorSpaceSurface.Rotate(new(px,py,Math.Sqrt(depth)),Camera,settings,inverse:true);
+                var l=Math.Clamp((p.Y+1)/2,0,1);var hue=Math.Atan2(p.Z,p.X);if(hue<0)hue+=2*Math.PI;
+                var li=l*128;var hi=hue*180/Math.PI;var il=Math.Min(127,(int)li);var ih=Math.Min(359,(int)hi);
+                var c0=table[il,ih]*(1-(hi-ih))+table[il,ih+1]*(hi-ih);var c1=table[il+1,ih]*(1-(hi-ih))+table[il+1,ih+1]*(hi-ih);var chroma=c0*(1-(li-il))+c1*(li-il);
+                var lab=new OklabColor(l,chroma*Math.Cos(hue),chroma*Math.Sin(hue));
+                if(settings.ChromaMax<.999 || settings.SliceEnabled&&Math.Abs(l-settings.SliceCenter)>settings.SliceThickness/2)continue;
+                var rgb=OklabColorSpace.ToSrgb(lab);var offset=(y*width+x)*4;
+                bytes[offset]=rgb.B;bytes[offset+1]=rgb.G;bytes[offset+2]=rgb.R;bytes[offset+3]=(byte)(settings.SurfaceOpacity*255);
             }
+            _surface=BitmapSource.Create(width,height,96,96,PixelFormats.Bgra32,null,bytes,width*4);_surface.Freeze();_surfaceKey=key;
         }
-        if (State.ShowMigrationVectors && State.Mode is ColorCloudMode.Migration or ColorCloudMode.Overlay)
-            foreach (var vector in State.Model.MigrationVectors.Take(512)) DrawVector(drawing, vector);
-        // Draw the selection last so dense clouds cannot cover the picked point.
-        if (State.Selection.Kind == ColorSpaceMarkerKind.SelectedCluster)
-            foreach (var point in State.VisibleClouds.SelectMany(cloud => ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight))
-                .Where(point => point.PointIndex == State.Selection.PointIndex))
-            {
-                var center = new Point(point.X, point.Y);
-                drawing.DrawEllipse(null, new Pen(Brushes.Black, 5), center, 9, 9);
-                drawing.DrawEllipse(null, new Pen(Brushes.White, 2), center, 9, 9);
-            }
-        DrawLabel(drawing, "OKLab 球形参考空间 · 样本坐标不变", new Point(12, Math.Max(12, ActualHeight - 22)));
-        _lastRenderMilliseconds = clock.Elapsed.TotalMilliseconds;
+        dc.DrawImage(_surface,new Rect(RenderSize));
     }
-    // Wire sphere is a display reference in normalized OKLab coordinates. Samples never move.
-    private ColorSpaceCloud SphereGuide()
+    private Point ProjectCoordinate(ColorSpaceCoordinate p,ColorSpaceViewSettings settings)
+    {p=ColorSpaceSurface.Rotate(p,Camera,settings);var scale=ColorSpaceSurface.Scale(Camera,ActualWidth,ActualHeight);return new(ActualWidth/2+(p.X+Camera.PanX)*scale,ActualHeight/2-(p.Y+Camera.PanY)*scale);}
+    private void DrawGrid(DrawingContext dc,ColorSpaceViewSettings settings)
     {
-        var points = new List<ColorSpacePoint>();
-        // Radius encloses the normalized [-1,1]^3 sample bounds, without radial projection.
-        var radius = Math.Sqrt(3);
-        for (var latitude = -60; latitude <= 60; latitude += 30)
-        for (var angle = 0; angle <= 360; angle += 6)
-        {
-            var phi=latitude*Math.PI/180;var theta=angle*Math.PI/180;
-            points.Add(Guide(radius*Math.Cos(phi)*Math.Cos(theta),radius*Math.Sin(phi),radius*Math.Cos(phi)*Math.Sin(theta)));
-        }
-        for(var meridian=0;meridian<180;meridian+=30)
-        for(var angle=0;angle<=360;angle+=6)
-        {
-            var phi=angle*Math.PI/180;var theta=meridian*Math.PI/180;
-            points.Add(Guide(radius*Math.Cos(phi)*Math.Cos(theta),radius*Math.Sin(phi),radius*Math.Cos(phi)*Math.Sin(theta)));
-        }
-        return new(1,1,1,1,points,"sphere-guide",new());
-        static ColorSpacePoint Guide(double x,double y,double z)=>new(new(.5+y/2,x*.4,z*.4),new(100,140,140),0,0);
+        var pen=new Pen(new SolidColorBrush(Color.FromArgb(90,175,205,205)),.6);
+        for(var lat=-60;lat<=60;lat+=30)Ring(a=>new(Math.Cos(lat*Math.PI/180)*Math.Cos(a),Math.Sin(lat*Math.PI/180),Math.Cos(lat*Math.PI/180)*Math.Sin(a)));
+        for(var mer=0;mer<180;mer+=30){var phi=mer*Math.PI/180;Ring(a=>new(Math.Cos(a)*Math.Cos(phi),Math.Sin(a),Math.Cos(a)*Math.Sin(phi)));}
+        void Ring(Func<double,ColorSpaceCoordinate> point){Point? previous=null;for(var i=0;i<=120;i++){var current=ProjectCoordinate(point(i*Math.PI/60),settings);if(previous is { } p)dc.DrawLine(pen,p,current);previous=current;}}
     }
-    private void DrawSphere(DrawingContext dc)
+    private void DrawGamut(DrawingContext dc,ColorSpaceViewSettings settings)
     {
-        var projected = ColorSpaceProjection.ProjectUnclampedGuide(SphereGuide(), State!.Camera, ActualWidth, ActualHeight);
-        for(var i=1;i<projected.Count;i++)
-        {
-            if(i%61==0) continue;
-            var a=projected[i-1];var b=projected[i];
-            var front=(a.Depth+b.Depth)>0;
-            dc.DrawLine(new Pen(new SolidColorBrush(Color.FromArgb(front?(byte)110:(byte)40,100,175,169)),front?1:.6),new(a.X,a.Y),new(b.X,b.Y));
-        }
+        var pen=new Pen(Brushes.Teal,1.4);
+        foreach(var l in new[]{.2,.4,.6,.8}){Point? previous=null;for(var h=0;h<=360;h+=3){var hue=h*Math.PI/180;var c=ColorSpaceSurface.MaximumChroma(l,hue);var lab=new OklabColor(l,c*Math.Cos(hue),c*Math.Sin(hue));var p=ColorSpaceSurface.Project(lab,new(0,0,0),0,Camera,settings,ActualWidth,ActualHeight);var current=new Point(p.X,p.Y);if(previous is { } old)dc.DrawLine(pen,old,current);previous=current;}}
     }
-    private void DrawAxes(DrawingContext drawing)
+    private void DrawAxes(DrawingContext dc,ColorSpaceViewSettings settings)
     {
-        // Project the coordinate guides with the same camera as the real color samples.
-        var neutral = new RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualRgb24(150, 150, 150);
-        ColorSpacePoint Point(double l, double a, double b) => new(new(l, a, b), neutral, 0, 0);
-        var axes = new ColorSpaceCloud(1, 1, 1, 1, [Point(.5, -.4, 0), Point(.5, .4, 0), Point(0, 0, 0), Point(1, 0, 0), Point(.5, 0, -.4), Point(.5, 0, .4)], "axes", new());
-        var points = ColorSpaceProjection.Project(axes, State!.Camera, ActualWidth, ActualHeight);
-        var pen = new Pen(TryFindResource("DividerBrush") as Brush ?? Brushes.Gray, 1);
-        foreach (var (start, end, label) in new[] { (0, 1, "a"), (2, 3, "L"), (4, 5, "b") })
-        {
-            drawing.DrawLine(pen, new Point(points[start].X, points[start].Y), new Point(points[end].X, points[end].Y));
-            DrawLabel(drawing, label, new Point(Math.Clamp(points[end].X, 4, Math.Max(4, ActualWidth - 18)), Math.Clamp(points[end].Y, 4, Math.Max(4, ActualHeight - 38))));
-        }
-        if (ActualWidth >= 300 && ActualHeight >= 260)
-        {
-            foreach (var axis in new[]{0,1,2})
-            foreach (var value in axis==0 ? new[]{0d,.25,.5,.75,1d} : new[]{-.4,-.2,0,.2,.4})
-            {
-                var marker = axis==0 ? Point(value,0,0) : axis==1 ? Point(.5,value,0) : Point(.5,0,value);
-                var tick=ColorSpaceProjection.Project(axes with { Points=[marker] },State!.Camera,ActualWidth,ActualHeight)[0];
-                if(tick.X<6 || tick.X>ActualWidth-38 || tick.Y<48 || tick.Y>ActualHeight-44)continue;
-                drawing.DrawEllipse(Brushes.Gray,null,new Point(tick.X,tick.Y),1.8,1.8);
-                DrawLabel(drawing,value.ToString("0.##",System.Globalization.CultureInfo.InvariantCulture),new Point(tick.X+4,tick.Y));
-            }
-        }
+        var pen=new Pen(new SolidColorBrush(Color.FromArgb(175,180,195,195)),1);
+        foreach(var (a,b,labelA,labelB) in new[]{(new ColorSpaceCoordinate(-1.12,0,0),new ColorSpaceCoordinate(1.12,0,0),"−a","+a"),(new ColorSpaceCoordinate(0,-1.12,0),new ColorSpaceCoordinate(0,1.12,0),"L0","L1"),(new ColorSpaceCoordinate(0,0,-1.12),new ColorSpaceCoordinate(0,0,1.12),"−b","+b")})
+        {var start=ProjectCoordinate(a,settings);var end=ProjectCoordinate(b,settings);dc.DrawLine(pen,start,end);DrawLabel(dc,labelA,Safe(start));DrawLabel(dc,labelB,Safe(end));}
+        Point Safe(Point p)=>new(Math.Clamp(p.X,4,Math.Max(4,ActualWidth-25)),Math.Clamp(p.Y,26,Math.Max(26,ActualHeight-42)));
     }
-    private void DrawVector(DrawingContext drawing, ColorMigrationVector vector) { var cloud = new ColorSpaceCloud(1, 1, 1, 1, [vector.Source], "", new()); var source = ColorSpaceProjection.Project(cloud, State!.Camera, ActualWidth, ActualHeight).Single(); cloud = cloud with { Points = [vector.Matched] }; var matched = ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight).Single(); drawing.DrawLine(new Pen(Brushes.White, .7), new Point(source.X, source.Y), new Point(matched.X, matched.Y)); }
-    private void DrawLabel(DrawingContext drawing, string text, Point origin) { var brush = TryFindResource("TextSecondaryBrush") as Brush ?? Brushes.LightGray; drawing.DrawText(new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 12, brush, VisualTreeHelper.GetDpi(this).PixelsPerDip), origin); }
-    private void OnMouseDown(object sender, MouseButtonEventArgs e) { Focus(); _pointer = _clickStart = e.GetPosition(this); CaptureMouse(); }
-    private void OnMouseMove(object sender, MouseEventArgs e) { if (_pointer is not { } previous || State is null || e.LeftButton != MouseButtonState.Pressed) return; var current = e.GetPosition(this); var delta = current - previous; _pointer = current; var camera = IsPanMode || Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) ? ColorSpaceProjection.PanByDisplayDelta(State.Camera, delta.X, delta.Y, ActualWidth, ActualHeight) : State.Camera.Rotate(delta.X * .35, -delta.Y * .35); State = State with { Camera = camera, IsFit = false }; }
-    private void OnMouseUp(object sender, MouseButtonEventArgs e)
+    private void DrawLabel(DrawingContext dc,string text,Point p)=>dc.DrawText(new FormattedText(text,System.Globalization.CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Segoe UI"),10.5,TryFindResource("TextSecondaryBrush") as Brush??Brushes.LightGray,VisualTreeHelper.GetDpi(this).PixelsPerDip),p);
+    private void OnMouseDown(object sender,MouseButtonEventArgs e){Focus();_pointer=_clickStart=e.GetPosition(this);CaptureMouse();}
+    private void OnMouseMove(object sender,MouseEventArgs e){if(_pointer is not { } previous||e.LeftButton!=MouseButtonState.Pressed)return;var current=e.GetPosition(this);var delta=current-previous;_pointer=current;CameraChanged(IsPanMode||Keyboard.Modifiers.HasFlag(ModifierKeys.Shift)?ColorSpaceProjection.PanByDisplayDelta(Camera,delta.X,delta.Y,ActualWidth,ActualHeight):Camera.Rotate(delta.X*.35,-delta.Y*.35));}
+    private void OnMouseUp(object sender,MouseButtonEventArgs e)
     {
-        var start = _clickStart; _pointer = null; _clickStart = null; ReleaseMouseCapture();
-        if (State is null || start is not { } point || (e.GetPosition(this) - point).Length > SystemParameters.MinimumHorizontalDragDistance) return;
-        var projected = State.VisibleClouds.SelectMany(cloud => ColorSpaceProjection.Project(cloud, State.Camera, ActualWidth, ActualHeight)).ToArray();
-        var index = ColorSpaceProjection.HitTest(projected, point.X, point.Y);
-        State = State with { Selection = index >= 0 ? new(ColorSpaceMarkerKind.SelectedCluster, index) : ColorSpaceSelection.None };
-        SelectionChanged?.Invoke(this, State.Selection);
+        var start=_clickStart;_pointer=null;_clickStart=null;ReleaseMouseCapture();InvalidateVisual();
+        if(start is not { } point||(e.GetPosition(this)-point).Length>SystemParameters.MinimumHorizontalDragDistance)return;
+        var settings=ViewSettings.Normalize();var index=ColorSpaceProjection.HitTest(Projected(settings),point.X,point.Y);
+        if(index>=0&&State is not null){State=State with{Selection=new(ColorSpaceMarkerKind.SelectedCluster,index)};SelectionChanged?.Invoke(this,State.Selection);}
+        else if(ColorSpaceSurface.PickSurface(point.X,point.Y,ActualWidth,ActualHeight,Camera,settings) is { } lab)SurfaceSelectionChanged?.Invoke(this,lab);
+        else SelectionChanged?.Invoke(this,ColorSpaceSelection.None);
     }
-    private void OnMouseWheel(object sender, MouseWheelEventArgs e) { if (State is null) return; e.Handled = true; State = State with { Camera = State.Camera.Zoom(e.Delta > 0 ? 1.12 : .89), IsFit = false }; }
+    private void OnMouseWheel(object sender,MouseWheelEventArgs e){e.Handled=true;CameraChanged(Camera.Zoom(e.Delta>0?1.12:.89));}
 }

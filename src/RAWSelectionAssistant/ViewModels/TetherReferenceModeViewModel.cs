@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -22,6 +22,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private CancellationTokenSource? _render;
     private BitmapSource? _source;
     private HighBitDepthImageBuffer? _rawPreviewMaster;
+    private HighBitDepthImageBuffer? _interactiveRawMaster;
     private BitmapSource? _interactiveSource;
     private Guid? _assetId;
     private long _revision;
@@ -33,7 +34,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private bool _enabled;
     private bool _applyToFollowing;
     private bool _advancedExpanded;
-    private string _viewMode = "左右对比";
+    private string _viewMode = "仿色结果";
     private double _splitPosition = .5;
     private string _statusText = "选择项目色彩方案后可进行现场监看仿色。";
     private bool _originalHeld;
@@ -105,6 +106,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     public void StopProcessing()
     {
+        CancelDetailPreviewRequest();
         Interlocked.Increment(ref _revision);
         if (!IsBusy) return;
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
@@ -118,11 +120,15 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             target.AppliedLookSnapshot = snapshot is null ? null : snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
             target.FilmSettingsSnapshot = FilmSettings with { };
             target.ColorAdjustmentStackSnapshot = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : null;
+            target.EngineSnapshot = MatchEngine;
+            target.ExecutionModeSnapshot = MatchV4ExecutionMode;
             target.Status = ReferenceTargetStatus.Synced;
         }
     }
-    public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film, ColorAdjustmentStack? stack = null, bool render = true)
+    public void ApplyTargetSnapshot(ReferenceLook? look, PixelTartFilmSettings? film, ColorAdjustmentStack? stack = null, bool render = true, Guid? targetIdentity = null)
     {
+        var switchingHistory = targetIdentity is Guid historyId && _historyTarget != historyId;
+        if (switchingHistory) BeginTargetHistory(targetIdentity!.Value);
         _presetPreviewNode = null; NotifyPresetPreview();
         if (look is not null)
         {
@@ -138,13 +144,24 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             _selectedLook = null; _persistedLook = null; CopyParameters(new()); RefreshReferenceSources();
             OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(CurrentLookText));
         }
-        CopyFilm(film is not null ? film with { } : look?.Film ?? new PixelTartFilmSettings());
-        AdjustmentStack = stack?.DeepClone() ?? new ColorAdjustmentStack(Array.Empty<ColorAdjustmentStackNode>());
+        var loadedFilm = film is not null ? film with { } : look?.Film ?? new PixelTartFilmSettings();
+        CopyFilm(loadedFilm);
+        var loadedStack = CloneHistoryStack(stack) ?? new ColorAdjustmentStack(Array.Empty<ColorAdjustmentStackNode>());
+        // Legacy sessions may carry film next to a stack. Bring that effective operation
+        // into the stack once so new controls, history, thumbnails and output agree.
+        if (loadedFilm.Enabled && loadedStack.Nodes.All(n => n.Type != ColorStudioNodeType.Film))
+            loadedStack = loadedStack.Nodes.Count == 0 && look is not null
+                ? ColorStudioLegacyMigration.Migrate(look with { Film = loadedFilm }).Stack
+                : loadedStack with { Nodes = [.. loadedStack.Nodes, new(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", FilmSettings: loadedFilm)] };
+        AdjustmentStack = loadedStack;
+        if (loadedStack.Nodes.Count == 0) CopyFilm(loadedFilm);
         _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
+        if (switchingHistory) RestoreTargetHistory(targetIdentity!.Value);
         if (render) _ = DebouncedRenderAsync();
     }
     public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null)
     {
+        stack = ColorStudioEffectiveState.Resolve(snapshot, stack, film);
         var source = await Task.Run(() =>
         {
             return StudioQuickExport.Load(path);
@@ -163,6 +180,15 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     public Task<BitmapSource> PreviewColorStudioAsync(BitmapSource source, ColorAdjustmentStack stack, ReferenceLook? reference, CancellationToken token = default) =>
         Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, reference, token), token);
+    internal async Task<BitmapSource> RenderFrozenThumbnailAsync(BitmapSource source, ReferenceLook? look, ColorAdjustmentStack? stack, PixelTartFilmSettings? film, CancellationToken token)
+    {
+        stack = ColorStudioEffectiveState.Resolve(look, stack, film);
+        if (stack is { Nodes.Count: > 0 }) return await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, look, token), token);
+        if (look is null) return source;
+        var result = await _preview.RenderWithResultAsync(source, look, token);
+        var settings = film ?? look.Film;
+        return settings?.Enabled == true ? await _preview.ApplyFilmAsync(result.Image, settings, token) : result.Image;
+    }
     public Task<BitmapSource> PreviewSelectionAsync(BitmapSource source, CancellationToken token = default)
     {
         var node = SelectedAdjustmentNode;
@@ -271,7 +297,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public RelayCommand RemovePositiveSampleCommand { get; }
     public RelayCommand RemoveNegativeSampleCommand { get; }
     private double SelectedNumeric(string key, double fallback) => SelectedAdjustmentNode?.NumericParameters.TryGetValue(key, out var value) == true ? value : fallback;
-    public bool ShowSelection { get => _showSelection; set { if (SetProperty(ref _showSelection, value)) { OnPropertyChanged(); _ = RenderAsync(); } } }
+    public bool ShowSelection { get => _showSelection; set => SetProperty(ref _showSelection, value); }
     public IReadOnlyList<string> SampleModes { get; } = ["普通取样", "增加取样", "减少取样"];
     public string SampleMode { get => _sampleMode; set => SetProperty(ref _sampleMode, value); }
     public bool IsSampling { get => _isSampling; private set => SetProperty(ref _isSampling, value); }
@@ -380,23 +406,26 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private void ApplyColorScheme()
     {
         if (SelectedColorScheme is not { } scheme) return;
+        CommitEditTransaction();
+        _undoStacks.Push(CloneHistoryStack(EffectiveEditingStack())!); _undoSelections.Push(_selectedAdjustmentNodeId);
+        _redoStacks.Clear(); _redoSelections.Clear();
         AdjustmentStack = scheme.Stack.DeepClone(); _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id;
         _persistedStack = scheme.Stack.DeepClone(); ColorSchemeName = scheme.Name; OnPropertyChanged(nameof(SelectedAdjustmentNode));
         _appliedColorScheme = scheme; NotifySchemeState();
         _ = RenderAsync(); StatusText = "色彩方案已应用。";
     }
-    private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change, bool render = true)
+    private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change, bool render = true, int? processingVersion = null)
     {
         _presetPreviewNode = null; NotifyPresetPreview();
-        var previous = AdjustmentStack; var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
+        var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
         if (previous.Nodes.SequenceEqual(nodes)) return;
         if (_editTransactionBefore is null) { _undoStacks.Push(previous); _undoSelections.Push(_selectedAdjustmentNodeId); }
-        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes }).Normalize(); if (render) _ = RenderAsync();
+        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes, ProcessingVersion = processingVersion ?? previous.ProcessingVersion }).Normalize(); if (render) _ = DebouncedRenderAsync();
     }
     public void BeginEditTransaction()
     {
-        if (_editTransactionBefore is not null || IsPresetPreviewing || AdjustmentStack.Nodes.Count == 0) return;
-        _editTransactionBefore = AdjustmentStack.DeepClone(); _editTransactionSelection = _selectedAdjustmentNodeId;
+        if (_editTransactionBefore is not null || IsPresetPreviewing) return;
+        _editTransactionBefore = CloneHistoryStack(EffectiveEditingStack()); _editTransactionSelection = _selectedAdjustmentNodeId;
     }
     public void CommitEditTransaction()
     {
@@ -413,7 +442,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (nodeType is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Film && AdjustmentStack.Nodes.Any(node => node.Type == nodeType)) return;
         if (nodeType == ColorStudioNodeType.ReferenceMatch && SelectedLook is null) return;
         var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
-        ChangeStack(nodes => [.. nodes, node]); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
+        if (nodeType == ColorStudioNodeType.ColorRange) node = node with { NumericParameters = new Dictionary<string, double> { ["range_version"] = 2 } };
+        ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
     private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
     private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
@@ -440,7 +470,18 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             list.Insert(index + (after ? 1 : 0), source); return list;
         });
     }
-    private void ResetSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? selected with { NumericParameters = new Dictionary<string, double>(), Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>(), FilmSettings = selected.Type == ColorStudioNodeType.Film ? new PixelTartFilmSettings() : null } : node).ToArray()); }
+    private void ResetSelectedAdjustmentNode()
+    {
+        if (SelectedAdjustmentNode is not { } selected) return;
+        var neutral = new Dictionary<string, double>();
+        if (selected.Type == ColorStudioNodeType.ColorRange && selected.NumericParameters.TryGetValue("range_version", out var version))
+            neutral["range_version"] = version;
+        ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? selected with
+        {
+            NumericParameters = neutral, Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>(),
+            FilmSettings = selected.Type == ColorStudioNodeType.Film ? new PixelTartFilmSettings() : null
+        } : node).ToArray());
+    }
     private void ClearSamples() { if (SelectedAdjustmentNode is { Type: ColorStudioNodeType.ColorRange } selected) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Samples = Array.Empty<VisualRgb24>(), NegativeSamples = Array.Empty<VisualRgb24>() } : node).ToArray()); }
     private void RemoveSample(object? value, bool negative)
     {
@@ -469,6 +510,16 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private void SetSelectedNumeric(string key, double value)
     {
         if (SelectedAdjustmentNode is not { } selected) return;
+        if (!double.IsFinite(value)) throw new ArgumentException("参数必须为有限数值。");
+        value = key switch
+        {
+            "strength" => Math.Clamp(value, 0, 100),
+            "range" or "softness" => Math.Clamp(value, 0, .5),
+            "hue" => Math.Clamp(value, -180, 180),
+            "saturation" or "chroma" or "lightness" => Math.Clamp(value, -100, 100),
+            "amount" or "preset_strength" or "keep_original_luminance" => Math.Clamp(value, 0, 1),
+            _ => value
+        };
         ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { NumericParameters = new Dictionary<string, double>(node.NumericParameters) { [key] = value } } : node).ToArray());
     }
     private void SetNodeNumeric(ColorStudioNodeType type, string key, double value)
@@ -483,17 +534,27 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private void SyncStackFromSimple()
     {
         if (_syncingStack || SelectedLook is null || AdjustmentStack.Nodes.Count == 0) return;
-        var migrated = ColorStudioLegacyMigration.Migrate(SelectedLook).Stack.Nodes[0].NumericParameters;
-        ChangeStack(nodes => nodes.Select(node => node.Type switch
+        var reference = ColorStudioLegacyMigration.Migrate(SelectedLook).Stack.Nodes[0];
+        var migrated = reference.NumericParameters;
+        var filmSettings = FilmSettings;
+        ChangeStack(nodes =>
         {
-            ColorStudioNodeType.ReferenceMatch => node with { NumericParameters = new Dictionary<string, double>(migrated) },
-            ColorStudioNodeType.Film => node with { FilmSettings = FilmSettings },
-            _ => node
-        }).ToArray(), render: false);
+            var updated = nodes.Select(node => node.Type switch
+            {
+                ColorStudioNodeType.ReferenceMatch => node with { NumericParameters = new Dictionary<string, double>(migrated) },
+                ColorStudioNodeType.Film => node with { FilmSettings = filmSettings, Enabled = filmSettings.Enabled },
+                _ => node
+            }).ToArray();
+            IReadOnlyList<ColorAdjustmentStackNode> result = updated.Any(n => n.Type == ColorStudioNodeType.ReferenceMatch)
+                ? updated : InsertToolInDefaultOrder(updated, reference);
+            if (filmSettings.Enabled && result.All(n => n.Type != ColorStudioNodeType.Film))
+                result = [.. result, new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", FilmSettings: filmSettings)];
+            return result;
+        }, render: false);
     }
     private void SyncSimpleFromStack()
     {
-        if (_syncingStack || AdjustmentStack.Nodes.Count == 0) return;
+        if (_syncingStack) return;
         _syncingStack = true;
         try
         {
@@ -513,7 +574,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
                 CopyParameters(_selectedLook.Parameters); OnPropertyChanged(nameof(SelectedLook));
             }
             var film = AdjustmentStack.Nodes.FirstOrDefault(node => node.Type == ColorStudioNodeType.Film);
-            if (film?.FilmSettings is { } settings) { CopyFilm(settings); if (_selectedLook is not null) _selectedLook = _selectedLook with { Film = settings }; }
+            var settings = film?.FilmSettings is { } savedFilm ? savedFilm with { Enabled = film.Enabled } : new PixelTartFilmSettings();
+            CopyFilm(settings); if (_selectedLook is not null) _selectedLook = _selectedLook with { Film = settings };
         }
         finally { _syncingStack = false; }
     }
@@ -614,10 +676,12 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null, FrozenRawMaster? frozenRawMaster = null)
     {
         _rawPreviewMaster = rawPreviewMaster;
+        _interactiveRawMaster = rawPreviewMaster is null ? null : new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).PreviewMaster(rawPreviewMaster, 800, token);
         if (!ReferenceEquals(_frozenRawMaster, frozenRawMaster)) { _frozenRawMaster = frozenRawMaster; _matchV4Session = null; _matchV4SessionKey = null; }
+        ResetDetailPreview();
         _presetPreviewNode = null; NotifyPresetPreview();
         _render?.Cancel(); Interlocked.Increment(ref _revision);
-        _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 1600); OnPropertyChanged(nameof(SourceImage)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
+        _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 800); OnPropertyChanged(nameof(SourceImage)); OnPropertyChanged(nameof(SourcePixelSize)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         RaiseViewProperties();
         if ((_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
     }
@@ -695,6 +759,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public void HoldOriginal(bool held) { if (_originalHeld == held) return; _originalHeld = held; RaiseViewProperties(); }
     private void SetParameter(double value, Func<ReferenceLookParameters, ReferenceLookParameters> update, ref double fallback, string nodeKey)
     {
+        if (!double.IsFinite(value)) throw new ArgumentException("参数必须为有限数值。");
         value = Math.Clamp(value, 0, 100); fallback = value;
         if (SelectedLook is not null)
         {
@@ -826,18 +891,19 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
         var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
-        if (_presetPreviewNode is { } presetPreview) stack = new ColorAdjustmentStack([.. stack.Nodes, presetPreview]);
-        var selection = ShowSelection ? SelectedAdjustmentNode : null;
+        if (_presetPreviewNode is { } presetPreview) stack = stack with { Nodes = [.. stack.Nodes, presetPreview] };
         var film = FilmSettings with { };
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);
         if (!Enabled || source is null || (look is null && stack.Nodes.Count == 0)) { Interlocked.Exchange(ref _busyRenderRevision, 0); State = ProcessingState.Idle; MatchedImage = null; StatusText = !Enabled ? "现场监看仿色未开启。" : source is null ? "请选择待调色照片。" : "请添加参考图片或选择色彩方案。"; RaiseViewProperties(); return; }
         // Reference bitmap identity plus the complete frozen processing inputs prevents stale reuse.
         // Custom postprocessors and mutable/high-precision masters are deliberately not cached here.
-        var cacheKey = PostProcessor is null && _rawPreviewMaster is null && !IsMatchV4Beta
+        var cacheKey = PostProcessor is null && !IsMatchV4Beta
             ? System.Text.Json.JsonSerializer.Serialize(new
             {
-                look, stack, film, selection, MatchEngine,
+                look, stack, film, MatchEngine,
+                RawGeneration = _frozenRawMaster?.DecodeGenerationId,
+                RawWidth = RawRenderInput(interactive)?.Width,
                 References = look?.ReferenceSources.Select(reference => new
                 {
                     reference.SourcePath,
@@ -855,34 +921,38 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         LastRenderFailure = null;
         HasError = false; StatusText = interactive ? "正在生成快速预览…" : "正在生成高质量预览…";
         Interlocked.Exchange(ref _busyRenderRevision, revision);
-        State = ProcessingState.RenderingHighQuality;
+        State = interactive ? ProcessingState.RenderingPreview : ProcessingState.RenderingHighQuality;
         var previousFrame = MatchedImage;
         try
         {
             BitmapSource image;
+            if (IsMatchV4Beta && (_frozenRawMaster is null || _matchV4Executor is null))
+                throw new NotSupportedException("V4 Beta 需要可用的 RAW 高精度源与执行器。");
             if (IsMatchV4Beta && _frozenRawMaster is { } frozen && _matchV4Executor is not null)
             {
-                var session = await EnsureMatchV4SessionAsync(frozen, look, renderToken);
-                var input = _rawPreviewMaster ?? frozen.Image;
-                var result = await Task.Run(() => session.PreviewAsync(input, MatchStrength / 100d, KeepOriginalTone, MatchV4ExecutionMode, renderToken), renderToken);
-                image = RawDisplayBitmapAdapter.ToBitmap(result.Pixels.ToVisualRgb24());
+                if (!SupportsExperimentalV4Stack(stack, film)) throw new NotSupportedException("V4 Beta 尚不支持完整调整栈，请切换稳定 V3 引擎。");
+                var input = RawRenderInput(interactive) ?? frozen.Image;
+                var effectiveLook = ResolveExperimentalV4Look(look, stack);
+                if (effectiveLook is null) image = RawDisplayBitmapAdapter.ToBitmap(input.ToVisualRgb24());
+                else
+                {
+                    var session = await EnsureMatchV4SessionAsync(frozen, effectiveLook, renderToken);
+                    var result = await Task.Run(() => session.PreviewAsync(input, effectiveLook.Parameters.MatchStrength / 100d, effectiveLook.Parameters.KeepOriginalTone, MatchV4ExecutionMode, renderToken), renderToken);
+                    image = RawDisplayBitmapAdapter.ToBitmap(result.Pixels.ToVisualRgb24());
+                }
             }
             else if (_rawPreviewMaster is { } raw)
             {
                 // The proxy remains float RGB. Both preview and export consume this same frozen look/stack contract.
+                var input = RawRenderInput(interactive) ?? raw;
                 var rendered = await Task.Run(() => new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder())
-                    .Render(raw, look, stack, token: renderToken, film: film).Pixels, renderToken);
+                    .Render(input, look, stack, token: renderToken, film: film).Pixels, renderToken);
                 image = RawDisplayBitmapAdapter.ToBitmap(rendered);
             }
             else if (stack.Nodes.Count > 0)
             {
                 StatusText = "正在应用调整节点…";
                 image = await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, look, renderToken), renderToken);
-                if (selection is { Type: ColorStudioNodeType.ColorRange } selected)
-                {
-                    StatusText = "正在显示选区…";
-                    image = await Task.Run(() => ColorStudioBitmapRenderer.RenderSelection(source, stack, look, selected, renderToken), renderToken);
-                }
             }
             else
             {
@@ -894,7 +964,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             if (cacheKey is not null)
             {
                 _previewCache.AddFirst((source, cacheKey, image));
-                while (_previewCache.Count > 4 || (_previewCache.Count > 1 && _previewCache.Sum(item => (long)item.Result.PixelWidth * item.Result.PixelHeight * 4) > 128L * 1024 * 1024))
+                var frameBudget = _rawPreviewMaster is null ? 128L * 1024 * 1024 : 256L * 1024 * 1024;
+                while (_previewCache.Count > 4 || (_previewCache.Count > 1 && _previewCache.Sum(item => (long)item.Result.PixelWidth * item.Result.PixelHeight * 4) > frameBudget))
                     _previewCache.RemoveLast();
             }
             if (ColorStudioAcceptanceFixture.NativeObserverRequested)
@@ -905,7 +976,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             MatchedImage = image; StatusText = "现场监看仿色已更新；RAW/JPEG 源文件未修改。"; RaiseViewProperties();
         }
         catch (OperationCanceledException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Cancelled; StatusText = "已停止处理。"; } }
-        catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "当前 V4 Beta 需要可用的高精度源与参考图；已保留上一张有效预览。"; RaiseViewProperties(); } }
+        catch (NotSupportedException) { if (revision == Volatile.Read(ref _revision)) { State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = IsMatchV4Beta && !SupportsExperimentalV4Stack(stack, film) ? "V4 Beta 尚不支持完整调整栈，请切换稳定 V3 引擎；已保留上一张有效预览。" : "当前 V4 Beta 需要可用的高精度源与参考图；已保留上一张有效预览。"; RaiseViewProperties(); } }
         catch (Exception error) { if (revision == Volatile.Read(ref _revision)) { LastRenderFailure = error; State = ProcessingState.Failed; HasError = true; MatchedImage = previousFrame; StatusText = "处理失败，请重试。已保留上一张有效预览。"; RaiseViewProperties(); } }
         finally
         {
@@ -932,22 +1003,31 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
 
     public async Task<TiffExportResult> ExportRawV4Async(FrozenRawMaster master, string destination, ReferenceLook? look,
-        CancellationToken token = default)
+        CancellationToken token = default, MatchV4ExecutionMode? frozenExecutionMode = null)
     {
         if (_matchV4Executor is null || look is null) throw new NotSupportedException("Match v4 product executor is not available.");
-        var session = await EnsureMatchV4SessionAsync(master, look, token).ConfigureAwait(false);
+        var session = await EnsureMatchV4SessionAsync(master, look, token, frozenExecutionMode).ConfigureAwait(false);
         var result = await session.ExportTiff16Async(destination, look.Parameters.MatchStrength / 100d,
-            look.Parameters.KeepOriginalTone, MatchV4ExecutionMode, token).ConfigureAwait(false);
+            look.Parameters.KeepOriginalTone, frozenExecutionMode ?? MatchV4ExecutionMode, token, StudioQuickExport.SrgbProfileBytes()).ConfigureAwait(false);
         return result.Export;
     }
 
-    private async Task<MatchV4ProductSession> EnsureMatchV4SessionAsync(FrozenRawMaster master, ReferenceLook? look, CancellationToken token)
+    internal async Task<BitmapSource> RenderFrozenV4ThumbnailAsync(FrozenRawMaster master, ReferenceLook? look, MatchV4ExecutionMode mode, CancellationToken token)
+    {
+        var input = new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).PreviewMaster(master.Image, 320, token);
+        if (look is null) return RawDisplayBitmapAdapter.ToBitmap(input.ToVisualRgb24());
+        if (_matchV4Executor is null) throw new NotSupportedException("V4 执行器不可用。");
+        var session = await EnsureMatchV4SessionAsync(master, look, token, mode);
+        var result = await Task.Run(() => session.PreviewAsync(input, look.Parameters.MatchStrength / 100d, look.Parameters.KeepOriginalTone, mode, token), token);
+        return RawDisplayBitmapAdapter.ToBitmap(result.Pixels.ToVisualRgb24());
+    }
+    private async Task<MatchV4ProductSession> EnsureMatchV4SessionAsync(FrozenRawMaster master, ReferenceLook? look, CancellationToken token, MatchV4ExecutionMode? frozenExecutionMode = null)
     {
         if (_matchV4Executor is null || look is null || look.ReferenceSources.Count != 1)
             throw new NotSupportedException("V4 requires a product reference image.");
         var reference = look.Normalize().ReferenceSources.FirstOrDefault(item => File.Exists(item.SourcePath));
         if (reference is null) throw new NotSupportedException("V4 reference image is offline.");
-        var key = $"{master.DecodeGenerationId:N}|{look.ReferenceLookId:N}|{reference.ContentHash}|{look.Parameters.SkinProtection:R}|{look.Parameters.HighlightProtection:R}|{look.Parameters.NeutralProtection:R}";
+        var key = $"{master.DecodeGenerationId:N}|{look.ReferenceLookId:N}|{reference.ContentHash}|{look.Parameters.SkinProtection:R}|{look.Parameters.HighlightProtection:R}|{look.Parameters.NeutralProtection:R}|{frozenExecutionMode ?? MatchV4ExecutionMode}";
         if (_matchV4Session is not null && string.Equals(_matchV4SessionKey, key, StringComparison.Ordinal)) return _matchV4Session;
         var referenceBuffer = await LoadHighPrecisionReferenceAsync(reference.SourcePath, token).ConfigureAwait(false);
         var settings = new ReferenceMatchV4Settings(MaximumRepresentativeSamples: 256, SinkhornIterations: 24)
@@ -957,10 +1037,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             NeutralProtection = look.Parameters.NeutralProtection / 100d,
             ComputeQuality = ReferenceMatchV4ComputeQuality.Auto
         };
-        _matchV4Session = await Task.Run(() => _matchV4Executor.CreateSession(master, referenceBuffer, reference.ContentHash,
-            settings, MatchV4ExecutionMode, token), token);
-        _matchV4SessionKey = key;
-        return _matchV4Session;
+        var session = await Task.Run(() => _matchV4Executor.CreateSession(master, referenceBuffer, reference.ContentHash,
+            settings, frozenExecutionMode ?? MatchV4ExecutionMode, token), token);
+        _matchV4Session = session; _matchV4SessionKey = key;
+        return session;
     }
 
     private static async Task<HighBitDepthImageBuffer> LoadHighPrecisionReferenceAsync(string path, CancellationToken token)
@@ -979,12 +1059,17 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void SetFilm(PixelTartFilmSettings value)
     {
-        value.Validate(); FilmSettings = value;
+        if (!_syncingStack) value = value with { SpatialVersion = 2 };
+        value.Validate();
+        if (!_syncingStack)
+            ChangeStack(nodes => nodes.Any(node => node.Type == ColorStudioNodeType.Film)
+                ? nodes.Select(node => node.Type == ColorStudioNodeType.Film ? node with { FilmSettings = value, Enabled = value.Enabled } : node).ToArray()
+                : [.. nodes, new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", Enabled: value.Enabled, FilmSettings: value)], render: false);
+        FilmSettings = value;
+        if (value.Enabled) Enabled = true;
         if (_selectedLook is not null) _selectedLook = _selectedLook with { Film = value, UpdatedAt = DateTimeOffset.UtcNow };
         foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed), nameof(HasSessionAdjustment), nameof(SessionAdjustmentText) }) OnPropertyChanged(name);
         SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged();
-        if (!_syncingStack && AdjustmentStack.Nodes.Count > 0)
-            ChangeStack(nodes => nodes.Select(node => node.Type == ColorStudioNodeType.Film ? node with { FilmSettings = value, Enabled = value.Enabled } : node).ToArray());
         _ = DebouncedRenderAsync();
     }
     private void CopyFilm(PixelTartFilmSettings value)

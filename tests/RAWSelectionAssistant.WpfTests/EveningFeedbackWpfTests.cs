@@ -78,7 +78,7 @@ public sealed class EveningFeedbackWpfTests
             workspace.Editor.ContextRailOpen=true;
             ((Expander)view.FindName("CentralAnalysis")).IsExpanded=true;
             await workspace.RefreshPreviewAnalysisAsync();
-            var slider=Walk(view).OfType<Slider>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="曝光 EV");
+            var slider=Walk(view).OfType<Slider>().Single(x=>System.Windows.Automation.AutomationProperties.GetName(x)=="曝光");
             slider.Value=1;
             for(var i=0;i<150 && !workspace.Editor.IsSettled && !workspace.Editor.HasError;i++) await Task.Delay(40);
             Assert.IsFalse(workspace.Editor.HasError, typeof(TetherReferenceModeViewModel).GetProperty("LastRenderFailure",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)?.GetValue(workspace.Editor)?.ToString());
@@ -215,14 +215,69 @@ public sealed class EveningFeedbackWpfTests
                 Arrange();
                 var canvas=(FrameworkElement)view.FindName("PreviewCanvas");
                 var analysis=(Expander)view.FindName("CentralAnalysis");
-                Assert.IsTrue(canvas.ActualHeight>=100,$"Target height {canvas.ActualHeight} at {size}; workspace={((FrameworkElement)view.FindName("WorkspaceGrid")).ActualHeight}, header={((FrameworkElement)view.FindName("SourceHeader")).ActualHeight}, film={((FrameworkElement)view.FindName("FilmstripPanel")).ActualHeight}, analysis={analysis.ActualHeight}/{analysis.IsExpanded}, filmopen={((Expander)view.FindName("FilmstripExpander")).IsExpanded}");
+                Assert.IsTrue(canvas.ActualHeight>=100,$"Target height {canvas.ActualHeight} at {size}; workspace={((FrameworkElement)view.FindName("WorkspaceGrid")).ActualHeight}, header={((FrameworkElement)view.FindName("SourceHeader")).ActualHeight}, film={((FrameworkElement)view.FindName("FilmstripPanel")).ActualHeight}, analysis={analysis.ActualHeight}/{analysis.IsExpanded}");
                 var collapsed=canvas.ActualHeight;
                 analysis.IsExpanded=true;Arrange();
                 Assert.IsTrue(canvas.ActualHeight>=70,$"Expanded analysis starves photograph at {size}: {canvas.ActualHeight}");
-                analysis.IsExpanded=false;Arrange();Assert.IsTrue(canvas.ActualHeight>=collapsed);
+                analysis.IsExpanded=false;Arrange();Assert.AreEqual(collapsed,canvas.ActualHeight,.5,"Right analysis expansion must not consume target photo height.");
             }
         }
         finally{Directory.Delete(root,true);}
+    });
+
+    [TestMethod]
+    public Task ProcessingStopButtonDoesNotMoveFittedPhotograph() => RunSta(async () =>
+    {
+        EnsureTestApplication(); using var workspace = new ReferenceColorWorkspaceViewModel(new NoDialogs());
+        var source = BitmapSource.Create(120, 80, 96, 96, PixelFormats.Rgb24, null, Enumerable.Repeat((byte)90, 120 * 80 * 3).ToArray(), 360); source.Freeze();
+        await workspace.Editor.SetSourceAsync(null, source);
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        var size = new Size(1600, 920);
+        void Arrange() { view.Width = size.Width; view.Height = size.Height; view.Measure(size); view.Arrange(new Rect(size)); view.UpdateLayout(); }
+        Arrange();
+        var viewport = (ColorStudioImageViewport)view.FindName("ImageViewport"); viewport.State.Fit();
+        var beforeSize = viewport.RenderSize; var beforeRect = viewport.State.ImageRect(new Rect(beforeSize)); var beforeZoom = viewport.State.Zoom;
+        var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        workspace.Editor.PostProcessor = async (image, token) => { started.TrySetResult(); await release.Task.WaitAsync(token); return image; };
+        try
+        {
+            workspace.Editor.SetToolParameter(ColorStudioToolCatalog.GetParameters(ColorStudioNodeType.WhiteBalance).Single(p => p.Key == "temperature"), 20);
+            await started.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind); Arrange();
+            Assert.IsTrue(workspace.Editor.IsBusy);
+            Assert.AreEqual(beforeSize, viewport.RenderSize, "Showing Stop must not take height from the photograph.");
+            Assert.AreEqual(beforeRect, viewport.State.ImageRect(new Rect(viewport.RenderSize)));
+            Assert.AreEqual(beforeZoom, viewport.State.Zoom);
+            release.TrySetResult();
+            var deadline = DateTime.UtcNow.AddSeconds(10);
+            while (!workspace.Editor.IsSettled && DateTime.UtcNow < deadline) await Task.Delay(10);
+            Assert.IsTrue(workspace.Editor.IsSettled);
+            await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind); Arrange();
+            Assert.AreEqual(beforeSize, viewport.RenderSize); Assert.AreEqual(beforeRect, viewport.State.ImageRect(new Rect(viewport.RenderSize)));
+            Assert.AreEqual(beforeZoom, viewport.State.Zoom);
+        }
+        finally { release.TrySetResult(); workspace.Editor.StopProcessing(); }
+    });
+
+    [TestMethod]
+    public Task FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage() => RunSta(async () =>
+    {
+        EnsureTestApplication(); using var workspace = new ReferenceColorWorkspaceViewModel(new NoDialogs());
+        var source = BitmapSource.Create(120, 80, 96, 96, PixelFormats.Rgb24, null, new byte[120 * 80 * 3], 360); source.Freeze();
+        await workspace.Editor.SetSourceAsync(null, source);
+        for (var i = 0; i < 12; i++) workspace.Targets.Add(new ReferenceTargetItem(i + ".jpg") { Thumbnail = source, IsSelected = i < 3 });
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        var film = (FrameworkElement)view.FindName("FilmstripPanel"); var expander = (Expander)view.FindName("FilmstripExpander"); var image = (FrameworkElement)view.FindName("PreviewCanvas");
+        foreach (var size in new[] { new Size(1180, 720), new Size(1600, 920), new Size(1920, 1080) })
+        {
+            void Arrange() { view.Width = size.Width; view.Height = size.Height; view.Measure(size); view.Arrange(new Rect(size)); view.UpdateLayout(); }
+            expander.IsExpanded = true; Arrange();
+            Assert.IsTrue(film.ActualHeight <= 150, $"Filmstrip height {film.ActualHeight:F1} at {size}.");
+            Assert.IsTrue(image.ActualHeight > size.Height * .55, $"Image area {image.ActualHeight:F1} at {size}.");
+            var expandedImageHeight = image.ActualHeight;
+            expander.IsExpanded = false; Arrange(); Assert.IsTrue(image.ActualHeight > expandedImageHeight + 50);
+        }
     });
 
     private sealed class NoDialogs : IDialogService

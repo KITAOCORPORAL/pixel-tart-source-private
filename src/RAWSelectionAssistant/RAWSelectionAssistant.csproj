@@ -73,6 +73,10 @@
     <Resource Include="Assets\Brand\*.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Studio\*.json" LogicalName="RAWSelectionAssistant.Resources.Studio.%(Filename)%(Extension)" WithCulture="false" />
+  </ItemGroup>
+
   <Target Name="ValidateProductVersion" BeforeTargets="BeforeBuild">
     <Error Condition="'$(PixelTartVersion)' != '2.3.0'" Text="PixelTartVersion 必须为 2.3.0。" />
     <Error Condition="'$(Version)' != '$(PixelTartVersion)'" Text="项目 Version 与统一版本不一致。" />

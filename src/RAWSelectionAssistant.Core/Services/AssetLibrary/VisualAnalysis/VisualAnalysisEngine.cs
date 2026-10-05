@@ -11,15 +11,17 @@ public static class VisualAnalysisEngine
     public static VisualHistogram AnalyzeHistogram(VisualPixelBuffer pixels, CancellationToken cancellationToken = default)
     {
         var r = new uint[256]; var g = new uint[256]; var b = new uint[256]; var y = new uint[256];
-        var zones = new long[11]; var bytes = pixels.Rgb24.Span;
+        var zones = new long[11]; var bytes = pixels.Rgb24.Span; var alpha = pixels.Alpha.Span; var visible = 0;
         for (var index = 0; index < pixels.PixelCount; index++)
         {
             if ((index & 0x3fff) == 0) cancellationToken.ThrowIfCancellationRequested();
+            if (!alpha.IsEmpty && alpha[index] == 0) continue;
+            visible++;
             var offset = index * 3; var red = bytes[offset]; var green = bytes[offset + 1]; var blue = bytes[offset + 2];
             r[red]++; g[green]++; b[blue]++;
             var luma = LuminanceBin(red, green, blue); y[luma]++; zones[ZoneFromLuminanceBin(luma)]++;
         }
-        return new(r, g, b, y, new(zones.Select(value => value / (double)pixels.PixelCount).ToArray()));
+        return new(r, g, b, y, new(zones.Select(value => value / (double)Math.Max(1, visible)).ToArray()));
     }
     public static int ToneZoneIndex(byte r, byte g, byte b) => ZoneFromLuminanceBin(LuminanceBin(r, g, b));
     private static int ZoneFromLuminanceBin(byte luma) => Math.Min(10, luma * 11 / 256);
@@ -31,6 +33,7 @@ public static class VisualAnalysisEngine
         for (var p = 0; p < pixels.PixelCount; p++)
         {
             if ((p & 4095) == 0) token.ThrowIfCancellationRequested();
+            if (!pixels.Alpha.IsEmpty && pixels.Alpha.Span[p] == 0) continue;
             if (ToneZoneIndex(bytes[p*3], bytes[p*3+1], bytes[p*3+2]) == zone) members.Add(p);
         }
         return members;

@@ -545,7 +545,9 @@ public partial class App : Application
     private bool TryAcquireSingleInstance()
     {
         var assemblyName = typeof(App).Assembly.GetName().Name ?? "RAWSelectionAssistant";
-        if (ColorStudioAcceptanceFixture.Requested)
+        if (ColorStudioAcceptanceFixture.Requested ||
+            (Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME") == "1" &&
+             Path.IsPathFullyQualified(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT") ?? "")))
             assemblyName += "-ColorStudio-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(AppDataPaths.Root)))[..16];
 #if PLANNING_HUMAN_ACCEPTANCE
         // Explicit isolated acceptance runs must never activate or close a user's running app.

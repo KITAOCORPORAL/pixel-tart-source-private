@@ -11,6 +11,7 @@ public sealed class CloudInspectionControls : Expander
     public CloudInspectionControls()
     {
         Header = "点云显示与容差";
+        StudioTextExtension.Bind(this,HeaderProperty,"CloudSettings");
         IsExpanded = false;
         Content = _body;
         Margin = new Thickness(0, 4, 0, 4);
@@ -28,6 +29,7 @@ public sealed class CloudInspectionControls : Expander
     private void AddSlider(string label, string property, double min, double max, string format)
     {
         var row = new DockPanel(); var title = new TextBlock { Text = label, Width = 68, VerticalAlignment = VerticalAlignment.Center };
+        StudioTextExtension.Bind(title,TextBlock.TextProperty,property switch{"CloudPointSize"=>"PointSize","CloudPointOpacity"=>"PointOpacity",_=>"SelectionTolerance"});
         row.Children.Add(title); var value = new TextBlock { Width = 42, TextAlignment = TextAlignment.Right, VerticalAlignment = VerticalAlignment.Center };
         value.SetBinding(TextBlock.TextProperty, new Binding(property) { StringFormat = "{0:" + format + "}" }); DockPanel.SetDock(value, Dock.Right); row.Children.Add(value);
         var slider = new Slider { Minimum = min, Maximum = max, Margin = new Thickness(4) };

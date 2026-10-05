@@ -6,21 +6,28 @@ public readonly record struct VisualRgb24(byte R, byte G, byte B);
 
 public sealed class VisualPixelBuffer
 {
-    public VisualPixelBuffer(int width, int height, ReadOnlyMemory<byte> rgb24)
+    public VisualPixelBuffer(int width, int height, ReadOnlyMemory<byte> rgb24, ReadOnlyMemory<byte> alpha = default)
     {
         if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (rgb24.Length != checked(width * height * 3)) throw new ArgumentException("RGB24 buffer length does not match dimensions.", nameof(rgb24));
-        Width = width; Height = height; Rgb24 = rgb24;
+        if (!alpha.IsEmpty && alpha.Length != checked(width * height)) throw new ArgumentException("Alpha buffer length does not match dimensions.", nameof(alpha));
+        Width = width; Height = height; Rgb24 = rgb24; Alpha = alpha;
     }
 
     public int Width { get; }
     public int Height { get; }
     public ReadOnlyMemory<byte> Rgb24 { get; }
+    public ReadOnlyMemory<byte> Alpha { get; }
     public int PixelCount => Width * Height;
 }
 public static class VisualAnalysisFingerprint
 {
-    public static string Compute(VisualPixelBuffer pixels) => Convert.ToHexString(SHA256.HashData(pixels.Rgb24.Span));
+    public static string Compute(VisualPixelBuffer pixels)
+    {
+        if (pixels.Alpha.IsEmpty) return Convert.ToHexString(SHA256.HashData(pixels.Rgb24.Span));
+        using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        hash.AppendData(pixels.Rgb24.Span);hash.AppendData(pixels.Alpha.Span);return Convert.ToHexString(hash.GetHashAndReset());
+    }
 }
 
 public readonly record struct VisualLab(double L, double A, double B);

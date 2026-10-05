@@ -5,7 +5,8 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset, Develop }
+// Append only: persisted Version 2 schemes serialize these enum values as integers.
+public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset, Develop, WhiteBalance, BasicTone, ColorBalance, Levels, Curve, Details, SkinTone }
 
 public sealed record ColorAdjustmentStackNode(
     Guid Id,
@@ -24,6 +25,7 @@ public sealed record ColorAdjustmentStackNode(
     public ColorAdjustmentStackNode Normalize()
     {
         if (Id == Guid.Empty || string.IsNullOrWhiteSpace(Name)) throw new ArgumentException("Color Studio nodes require an id and name.");
+        if (!Enum.IsDefined(Type)) throw new ArgumentException("不支持此调整节点类型；请保留方案文件并使用支持该版本的软件打开。");
         if (NumericParameters.Any(item => string.IsNullOrWhiteSpace(item.Key) || !double.IsFinite(item.Value))) throw new ArgumentException("Color Studio node parameters must be finite.");
         FilmSettings?.Validate();
         return this with { Name = Name.Trim(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
@@ -46,11 +48,12 @@ public sealed record ColorAdjustmentStackNode(
     }
 }
 
-public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode> Nodes, int Version = 2, string WorkingSpace = "OKLabD65")
+public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode> Nodes, int Version = 2, string WorkingSpace = "OKLabD65", int ProcessingVersion = 1)
 {
     public ColorAdjustmentStack Normalize()
     {
         if (Version != 2 || !string.Equals(WorkingSpace, "OKLabD65", StringComparison.Ordinal)) throw new ArgumentException("Unsupported Color Studio stack version.");
+        if (ProcessingVersion is not (1 or 2)) throw new ArgumentException("Unsupported Color Studio processing version.");
         var nodes = (Nodes ?? Array.Empty<ColorAdjustmentStackNode>()).Select(node => node.Normalize()).ToArray();
         if (nodes.Length == 0 || nodes.Select(node => node.Id).Distinct().Count() != nodes.Length) throw new ArgumentException("Color Studio stack must contain unique nodes.");
         return this with { Nodes = nodes };
@@ -67,7 +70,7 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
         var existing = target.Nodes.Select(node => replacements.GetValueOrDefault(node.Id, node)).ToList();
         var known = existing.Select(node => node.Id).ToHashSet();
         foreach (var node in selected) if (known.Add(node.Id)) existing.Add(node);
-        return (target with { Nodes = existing }).Normalize();
+        return (target with { Nodes = existing, ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
     }
 
     /// <summary>Copy selected adjustment categories while preserving the target's other nodes and order.</summary>
@@ -76,21 +79,22 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
         var target = Normalize(); var incoming = source.Normalize();
         var selected = incoming.Nodes.Where(node => selectedTypes.Contains(node.Type)).Select(node => node.Normalize()).ToArray();
         if (selected.Length == 0) return target;
-        var remaining = selected.ToDictionary(node => node.Type);
+        // A category can legitimately contain several color ranges/curves. Replace
+        // that category once, as an ordered group, instead of duplicating one id.
+        var groups = selected.GroupBy(node => node.Type).ToDictionary(group => group.Key, group => group.ToArray());
         var replaced = new List<ColorAdjustmentStackNode>(target.Nodes.Count + selected.Length);
         var seen = new HashSet<ColorStudioNodeType>();
         foreach (var node in target.Nodes)
         {
-            if (remaining.TryGetValue(node.Type, out var replacement))
+            if (groups.TryGetValue(node.Type, out var replacements))
             {
-                replaced.Add(replacement);
-                seen.Add(node.Type);
+                if (seen.Add(node.Type)) replaced.AddRange(replacements);
             }
             else replaced.Add(node);
         }
-        foreach (var node in selected)
-            if (seen.Add(node.Type)) replaced.Add(node);
-        return (target with { Nodes = replaced }).Normalize();
+        foreach (var group in selected.GroupBy(node => node.Type))
+            if (seen.Add(group.Key)) replaced.AddRange(group);
+        return (target with { Nodes = replaced, ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
     }
 }
 

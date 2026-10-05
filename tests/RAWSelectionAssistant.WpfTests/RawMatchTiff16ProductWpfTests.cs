@@ -43,7 +43,7 @@ public sealed class RawMatchTiff16ProductWpfTests
             using var stream = File.OpenRead(output); var tiff = TiffReadBack.Read(stream);
             Assert.AreEqual(16, tiff.BitsPerSample); Assert.AreEqual(3, tiff.SamplesPerPixel);
             Assert.AreEqual(8, tiff.Width); Assert.AreEqual(8, tiff.Height);
-            Assert.AreEqual(3, tiff.Orientation);
+            Assert.AreEqual(1, tiff.Orientation); // Studio has physically normalized the source once.
             var preview = new FormatConvertedBitmap(workspace.Editor.MatchedImage!, PixelFormats.Bgra32, null, 0);
             var bgra = new byte[preview.PixelWidth * preview.PixelHeight * 4];
             preview.CopyPixels(bgra, preview.PixelWidth * 4, 0);
@@ -64,6 +64,29 @@ public sealed class RawMatchTiff16ProductWpfTests
             Assert.AreEqual(1, decoder.Count);
         }
         finally { Directory.Delete(root, true); }
+    }
+
+    [TestMethod]
+    public async Task FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-RawEngine-" + Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            var path = Path.Combine(root, "source.cr3"); await File.WriteAllTextAsync(path, "synthetic decoder contract; not a real RAW corpus");
+            var dialogs = new FakeDialogs(root, path); using var workspace = new ReferenceColorWorkspaceViewModel(dialogs, rawDecoder: new FakeDecoder());
+            var target = new ReferenceTargetItem(path) { IsSelected = true, EngineSnapshot = ColorStudioMatchEngine.Stable,
+                ColorAdjustmentStackSnapshot = new([new(Guid.NewGuid(), ColorStudioNodeType.Develop, "曝光", NumericParameters: new Dictionary<string,double> { ["exposure"] = .5 })]) };
+            workspace.Targets.Add(target);
+            workspace.Editor.MatchEngine = ColorStudioMatchEngine.MatchV4Beta;
+            await workspace.ExportSelectedCommand.ExecuteAsync(null);
+            Assert.AreEqual(ReferenceExportStatus.Succeeded, target.ExportStatus, "An inactive V3 target must not follow the active editor's V4 setting.");
+            File.Delete(target.OutputPath!); target.EngineSnapshot = ColorStudioMatchEngine.MatchV4Beta;
+            workspace.Editor.MatchEngine = ColorStudioMatchEngine.Stable;
+            await workspace.ExportSelectedCommand.ExecuteAsync(null);
+            Assert.AreEqual(ReferenceExportStatus.Failed, target.ExportStatus, "Unsupported V4+Develop must report failure, never export a different V3 chain.");
+            Assert.IsEmpty(Directory.GetFiles(root,"*.tif"));
+        }
+        finally { Directory.Delete(root,true); }
     }
 
     [TestMethod]

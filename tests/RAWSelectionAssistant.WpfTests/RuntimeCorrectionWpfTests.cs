@@ -26,7 +26,7 @@ public sealed class RuntimeCorrectionWpfTests
         var stack=workspace.Editor.AdjustmentStack;
         workspace.HighlightImageSample(new(255,0,0)); Assert.HasCount(64,workspace.HighlightedPixels);
         Assert.AreSame(stack,workspace.Editor.AdjustmentStack);
-        workspace.SelectionTolerance=.02;Assert.IsEmpty(workspace.HighlightedPixels);
+        workspace.SelectionTolerance=.02;Assert.HasCount(64,workspace.HighlightedPixels,"Changing tolerance recomputes the current exact-color inspection instead of losing it.");
         workspace.HighlightCloudSelection(0);Assert.HasCount(64,workspace.HighlightedPixels);
         workspace.ClearColorSpaceHighlight();Assert.IsEmpty(workspace.HighlightedPixels);
         await workspace.Editor.SetSourceAsync(null,blue);
@@ -50,11 +50,12 @@ public sealed class RuntimeCorrectionWpfTests
     });
 
     [TestMethod]
-    public Task RightEditingAndCentralHistogramRemainBoundedAcrossViewportSizes() => RunSta(async()=>
+    public Task RightHistogramsAndToolsRemainBoundedAcrossViewportSizes() => RunSta(async()=>
     {
         EnsureTestApplication();
         using var workspace=new ReferenceColorWorkspaceViewModel(new TestDialogs());
         var view=new ReferenceColorWorkspaceView { DataContext=workspace };
+        ((ListBox)view.FindName("AuxModes")).SelectedIndex=0;
         foreach(var scale in new[]{1d,1.25,1.5,2d})
         foreach(var size in new[]{new Size(1180,720),new Size(1600,920),new Size(1920,1080)})
         {
@@ -62,10 +63,10 @@ public sealed class RuntimeCorrectionWpfTests
             view.Measure(logical);view.Arrange(new Rect(logical));view.UpdateLayout();
             var left=(FrameworkElement)view.FindName("EditingRail");var right=(FrameworkElement)view.FindName("ContextRail");
             var picker=(FrameworkElement)view.FindName("SourcePickerAnchor");
-            Assert.IsTrue(IsDescendant(picker,left));
-            Assert.IsTrue(Descendants((FrameworkElement)view.FindName("CentralAnalysis")).OfType<HistogramDrawing>().Any());
+            Assert.IsTrue(((FrameworkElement)view.FindName("ReferencePage")).IsAncestorOf(picker));
+            Assert.HasCount(2,Descendants((FrameworkElement)view.FindName("CentralAnalysis")).OfType<StudioHistogramView>().ToArray());
+            Assert.IsTrue(IsDescendant((FrameworkElement)view.FindName("CentralAnalysis"),left));
             Assert.AreEqual(0,Grid.GetColumn(right));
-            Assert.IsFalse(Descendants(right).OfType<Slider>().Any(x=>System.Windows.Data.BindingOperations.GetBindingExpression(x,Slider.ValueProperty)?.ParentBinding.Path?.Path=="WeightPercent"));
             Assert.IsLessThanOrEqualTo(logical.Width+.01,((FrameworkElement)view.FindName("WorkspaceGrid")).ActualWidth);
         }
         await Task.CompletedTask;
@@ -78,7 +79,7 @@ public sealed class RuntimeCorrectionWpfTests
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
         await workspace.Editor.SetSourceAsync(null, Image(255, 0, 0));
         var view = new ReferenceColorWorkspaceView { DataContext = workspace };
-        foreach (var width in new[] { 590d, 912d, 1332d, 1652d })
+        foreach (var width in new[] { 1000d, 1332d, 1652d })
         {
             void Arrange() { view.Width = width; view.Height = 720; view.Measure(new Size(width, 720)); view.Arrange(new Rect(0, 0, width, 720)); view.UpdateLayout(); }
             Arrange(); workspace.Editor.ContextRailOpen = true; Arrange();

@@ -1,4 +1,4 @@
-﻿using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using System.Buffers;
 using RAWSelectionAssistant.Core.Services.Color;
 
@@ -17,13 +17,15 @@ public sealed record PixelTartFilmSettings(
     double SurfaceAmount = 0,
     string TextureId = "None",
     double TextureAmount = 0,
-    int Seed = 17)
+    int Seed = 17,
+    int SpatialVersion = 1)
 {
     public void Validate()
     {
         foreach (var value in new[] { ProfileAmount, GrainAmount, GrainSize, HalationAmount, BloomAmount, VignetteAmount, SurfaceAmount, TextureAmount })
             if (!double.IsFinite(value) || value is < 0 or > 100) throw new ArgumentOutOfRangeException(nameof(value));
         if (Seed < 0) throw new ArgumentOutOfRangeException(nameof(Seed));
+        if (SpatialVersion is not (1 or 2)) throw new ArgumentOutOfRangeException(nameof(SpatialVersion));
     }
 }
 
@@ -71,8 +73,20 @@ public static class PixelTartFilmPipeline
                 highlightMask[pixel] = Math.Clamp((luminance[pixel] - .62f) / .38f, 0, 1);
             }
             var minDimension = Math.Min(input.Width, input.Height); var bloomRadius = Math.Clamp(minDimension / 320, 2, 8);
-            Blur(highlightMask, bloomSpread, scratch, input.Width, input.Height, bloomRadius, token);
-            Blur(highlightMask, halationSpread, scratch, input.Width, input.Height, Math.Max(2, bloomRadius / 2), token);
+            if (settings.SpatialVersion == 2)
+            {
+                // Stable fractional image scale, with no full-resolution 8-pixel cap.
+                if (settings.BloomAmount > 0) BlurScaled(highlightMask, bloomSpread, scratch, input.Width, input.Height, minDimension / 320d * .55, token);
+                else Array.Clear(bloomSpread, 0, input.PixelCount);
+                if (settings.HalationAmount > 0) BlurScaled(highlightMask, halationSpread, scratch, input.Width, input.Height, minDimension / 640d * .55, token);
+                else Array.Clear(halationSpread, 0, input.PixelCount);
+            }
+            else
+            {
+                Blur(highlightMask, bloomSpread, scratch, input.Width, input.Height, bloomRadius, token);
+                Blur(highlightMask, halationSpread, scratch, input.Width, input.Height, Math.Max(2, bloomRadius / 2), token);
+            }
+            var referenceScale = 1600d / Math.Max(input.Width, input.Height);
             for (var y = 0; y < input.Height; y++) for (var x = 0; x < input.Width; x++)
             {
                 var pixel = y * input.Width + x; if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3;
@@ -82,8 +96,14 @@ public static class PixelTartFilmPipeline
                 var halo = Math.Clamp(halationSpread[pixel] - highlightMask[pixel] * .72f, 0, 1) * settings.HalationAmount / 100d; var edge = halo * Math.Clamp((luma - .12f) / .7f, 0, 1); r += edge * .12; g += edge * .020;
                 var bloom = bloomSpread[pixel] * settings.BloomAmount / 100d * .14; r += bloom; g += bloom; b += bloom;
                 var nx = (x + .5) / input.Width * 2 - 1; var ny = (y + .5) / input.Height * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
-                var grainScale = 1d + settings.GrainSize / 24d * 5d; var high = DeterministicNoise(x, y, settings.Seed); var low = SmoothNoise(x / grainScale, y / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
-                var surface = Surface(settings.TextureId, x, y, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06; r += surface; g += surface; b += surface;
+                var gx = settings.SpatialVersion == 2 ? (x + .5) * referenceScale - .5 : x;
+                var gy = settings.SpatialVersion == 2 ? (y + .5) * referenceScale - .5 : y;
+                var grainScale = 1d + settings.GrainSize / 24d * 5d;
+                var high = settings.SpatialVersion == 2 ? SmoothNoise(gx, gy, settings.Seed) : DeterministicNoise(x, y, settings.Seed);
+                var low = SmoothNoise(gx / grainScale, gy / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
+                var surface = Surface(settings.TextureId, gx, gy, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06;
+                if (settings.SpatialVersion == 2) surface *= Math.Clamp(luma + .02, 0, 1); // Keep deep shadows from flipping between clipped black and bright paper.
+                r += surface; g += surface; b += surface;
                 output[offset] = (float)Math.Clamp(LinearToSrgb(r), 0, 1); output[offset + 1] = (float)Math.Clamp(LinearToSrgb(g), 0, 1); output[offset + 2] = (float)Math.Clamp(LinearToSrgb(b), 0, 1);
             }
             return new(input.Width, input.Height, output, input.SourceBitDepth, input.WorkingColorSpace, input.Orientation, input.Metadata);
@@ -102,8 +122,17 @@ public static class PixelTartFilmPipeline
         for (var y = 0; y < height; y++) { if ((y & 15) == 0) token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += source[y * width + Math.Clamp(x + k, 0, width - 1)] * kernel[k + radius]; horizontal[y * width + x] = (float)value; } }
         for (var y = 0; y < height; y++) { if ((y & 15) == 0) token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += horizontal[Math.Clamp(y + k, 0, height - 1) * width + x] * kernel[k + radius]; output[y * width + x] = (float)value; } }
     }
+    private static void BlurScaled(float[] source, float[] output, float[] horizontal, int width, int height, double sigma, CancellationToken token)
+    {
+        sigma = Math.Max(.25, sigma); var radius = Math.Max(1, (int)Math.Ceiling(sigma * 3));
+        var kernel = new double[radius * 2 + 1]; double total = 0;
+        for (var k = -radius; k <= radius; k++) { var weight = Math.Exp(-k * k / (2 * sigma * sigma)); kernel[k + radius] = weight; total += weight; }
+        for (var k = 0; k < kernel.Length; k++) kernel[k] /= total;
+        for (var y = 0; y < height; y++) { token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += source[y * width + Math.Clamp(x + k, 0, width - 1)] * kernel[k + radius]; horizontal[y * width + x] = (float)value; } }
+        for (var y = 0; y < height; y++) { token.ThrowIfCancellationRequested(); for (var x = 0; x < width; x++) { double value = 0; for (var k = -radius; k <= radius; k++) value += horizontal[Math.Clamp(y + k, 0, height - 1) * width + x] * kernel[k + radius]; output[y * width + x] = (float)value; } }
+    }
     private static double DeterministicNoise(int x, int y, int seed) { unchecked { var n = x * 374761393 + y * 668265263 + seed * 1442695041; n = (n ^ (n >> 13)) * 1274126177; return ((n ^ (n >> 16)) & 0xFFFF) / 32767.5 - 1; } }
     private static double SmoothNoise(double x, double y, int seed) { var x0 = (int)Math.Floor(x); var y0 = (int)Math.Floor(y); var tx = x - x0; var ty = y - y0; var sx = tx * tx * (3 - 2 * tx); var sy = ty * ty * (3 - 2 * ty); var a = DeterministicNoise(x0, y0, seed); var b = DeterministicNoise(x0 + 1, y0, seed); var c = DeterministicNoise(x0, y0 + 1, seed); var d = DeterministicNoise(x0 + 1, y0 + 1, seed); var ab = a + (b - a) * sx; return ab + ((c + (d - c) * sx) - ab) * sy; }
-    private static double Surface(string texture, int x, int y, int seed) => texture switch { "FineFiber" => SmoothNoise((x * .18) + Math.Sin(y * .03) * 1.7, y * .045, seed + 11) * .7 + SmoothNoise(x * .52, y * .11, seed + 19) * .3, "Paper" => SmoothNoise(x * .06 + Math.Sin(y * .021), y * .06 + Math.Cos(x * .017), seed + 23) * .7 + SmoothNoise(x * .18, y * .16, seed + 29) * .3, "SoftMist" => SmoothNoise(x * .022 + Math.Sin(y * .009), y * .022 + Math.Cos(x * .011), seed + 31), "Scanline" => SmoothNoise(x * .04, y * .19 + Math.Sin(x * .027) * 1.4, seed + 37) * .7 + SmoothNoise(x * .12, y * .035, seed + 41) * .3, _ => 0 };
+    private static double Surface(string texture, double x, double y, int seed) => texture switch { "FineFiber" => SmoothNoise((x * .18) + Math.Sin(y * .03) * 1.7, y * .045, seed + 11) * .7 + SmoothNoise(x * .52, y * .11, seed + 19) * .3, "Paper" => SmoothNoise(x * .06 + Math.Sin(y * .021), y * .06 + Math.Cos(x * .017), seed + 23) * .7 + SmoothNoise(x * .18, y * .16, seed + 29) * .3, "SoftMist" => SmoothNoise(x * .022 + Math.Sin(y * .009), y * .022 + Math.Cos(x * .011), seed + 31), "Scanline" => SmoothNoise(x * .04, y * .19 + Math.Sin(x * .027) * 1.4, seed + 37) * .7 + SmoothNoise(x * .12, y * .035, seed + 41) * .3, _ => 0 };
     private static byte Channel(double value) => (byte)Math.Clamp(Math.Round(LinearToSrgb(value) * 255), 0, 255);
 }

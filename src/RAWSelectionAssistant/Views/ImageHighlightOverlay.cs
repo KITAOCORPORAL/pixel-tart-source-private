@@ -11,6 +11,8 @@ public sealed class ImageHighlightOverlay : FrameworkElement
     public static readonly DependencyProperty ImageWidthProperty = DependencyProperty.Register(nameof(ImageWidth), typeof(int), typeof(ImageHighlightOverlay), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender, InvalidateMask));
     public static readonly DependencyProperty ImageHeightProperty = DependencyProperty.Register(nameof(ImageHeight), typeof(int), typeof(ImageHighlightOverlay), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender, InvalidateMask));
     public IReadOnlyList<int> PixelIndices { get => (IReadOnlyList<int>)GetValue(PixelIndicesProperty); set => SetValue(PixelIndicesProperty, value); }
+    public static readonly DependencyProperty PixelWeightsProperty = DependencyProperty.Register(nameof(PixelWeights), typeof(byte[]), typeof(ImageHighlightOverlay), new FrameworkPropertyMetadata(Array.Empty<byte>(), FrameworkPropertyMetadataOptions.AffectsRender, InvalidateMask));
+    public byte[] PixelWeights { get => (byte[])GetValue(PixelWeightsProperty); set => SetValue(PixelWeightsProperty, value); }
     public int ImageWidth { get => (int)GetValue(ImageWidthProperty); set => SetValue(ImageWidthProperty, value); }
     public int ImageHeight { get => (int)GetValue(ImageHeightProperty); set => SetValue(ImageHeightProperty, value); }
     public ColorStudioZoomPanState? ViewState { get; set; }
@@ -29,7 +31,7 @@ public sealed class ImageHighlightOverlay : FrameworkElement
             {
                 if (index < 0 || index >= pixels.Length / 4) continue;
                 var offset = index * 4;
-                pixels[offset] = 190; pixels[offset + 1] = 214; pixels[offset + 2] = 42; pixels[offset + 3] = 150;
+                pixels[offset] = 190; pixels[offset + 1] = 214; pixels[offset + 2] = 42; pixels[offset + 3] = PixelWeights.Length == pixels.Length / 4 ? (byte)(PixelWeights[index] * 150 / 255) : (byte)150;
             }
             _mask = BitmapSource.Create(ImageWidth, ImageHeight, 96, 96, PixelFormats.Bgra32, null, pixels, ImageWidth * 4);
             _mask.Freeze();

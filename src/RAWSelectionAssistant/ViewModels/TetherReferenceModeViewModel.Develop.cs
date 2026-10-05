@@ -5,6 +5,7 @@ public sealed partial class TetherReferenceModeViewModel
     private double DevelopValue(string key) => AdjustmentStack.Nodes.FirstOrDefault(x=>x.Type==ColorStudioNodeType.Develop)?.NumericParameters.GetValueOrDefault(key) ?? 0;
     private void SetDevelop(string key,double value)
     {
+        if (!double.IsFinite(value)) throw new ArgumentException("参数必须为有限数值。");
         if (DevelopValue(key)==value) return;
         var node=AdjustmentStack.Nodes.FirstOrDefault(x=>x.Type==ColorStudioNodeType.Develop) ?? new ColorAdjustmentStackNode(Guid.NewGuid(),ColorStudioNodeType.Develop,"影调与细节");
         var changed=node with { NumericParameters=new Dictionary<string,double>(node.NumericParameters){[key]=value} };

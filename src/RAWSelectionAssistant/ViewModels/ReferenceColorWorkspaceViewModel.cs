@@ -1,4 +1,4 @@
-﻿using System.Windows.Media.Imaging;
+using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -70,15 +70,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public void ApplyCopiedAdjustments()
     {
         if (_copiedAdjustments is not { } source) return;
-        foreach (var item in SelectedTargets.ToArray())
+        var destinations = SelectedTargets.ToArray();
+        RememberBatchAdjustment(destinations);
+        foreach (var item in destinations)
         {
             item.AppliedLookSnapshot = source.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(reference => reference with { }).ToArray() } : null;
             item.ColorAdjustmentStackSnapshot = source.ColorAdjustmentStackSnapshot?.DeepClone();
             item.FilmSettingsSnapshot = source.FilmSettingsSnapshot is { } film ? film with { } : null;
+            item.EngineSnapshot = source.EngineSnapshot; item.ExecutionModeSnapshot = source.ExecutionModeSnapshot;
             item.Status = ReferenceTargetStatus.Synced;
         }
-        if (ActiveTarget is { IsSelected: true } active)
-            Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot, active.FilmSettingsSnapshot, active.ColorAdjustmentStackSnapshot, render: true);
+        RefreshActiveSnapshot(destinations);
     }
 
     public async Task RemoveSelectedFromBatchAsync()
@@ -101,7 +103,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (OpenPublishing is null || IsExporting) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
-        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot)).ToArray();
+        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot, Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
         var directory = Path.Combine(Path.GetTempPath(), "PixelTartPublishing", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
@@ -119,11 +121,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     var path = Path.Combine(itemDirectory, Path.GetFileNameWithoutExtension(item.Item.Path) + (raw ? ".tif" : ".png"));
                     if (raw)
                     {
-                        var master = item.Item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Item.Path, _exportCancellation.Token);
-                        await _rawPipeline.ExportAsync(master, path, item.Look, item.Stack, _exportCancellation.Token, item.Film);
+                        var master = item.Item.RawMaster ??= await DecodeStudioRawAsync(item.Item.Path, _exportCancellation.Token);
+                        await ExportFrozenRawAsync(master, path, item.Look, item.Stack, item.Film, item.Engine, item.Mode, _exportCancellation.Token);
                     }
                     else
                     {
+                        if (item.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
                         var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack);
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
@@ -149,25 +152,29 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _matchV4Executor = matchV4Executor;
         _assetRepositoryFactory = assetRepositoryFactory;
         _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? new LibRawDecoder());
+        InitializeFilmstrip();
+        InitializeSessionCommands();
         Editor = new TetherReferenceModeViewModel(
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
             renderBackend: renderBackend, matchV4Executor: matchV4Executor);
         Editor.Enabled = true;
+        InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
         StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting);
-        SyncSelectedCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(SelectedTargets), _ => SelectedTargets.Any());
-        SyncAllCommand = new RelayCommand(_ => Editor.CopyCurrentLookTo(Targets), _ => Targets.Count > 0);
+        SyncSelectedCommand = new RelayCommand(_ => SyncCurrentTo(SyncDestinationTargets), _ => ActiveTarget is not null && SyncDestinationTargets.Count > 0 && !IsLoading);
+        SyncAllCommand = new RelayCommand(_ => SyncCurrentTo(VisibleTargets.Where(x => !ReferenceEquals(x, ActiveTarget)).ToArray()), _ => ActiveTarget is not null && VisibleTargets.Any(x => !ReferenceEquals(x, ActiveTarget)) && !IsLoading);
         OpenNodeSyncCommand = new RelayCommand(_ => { _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in Editor.AdjustmentNodes) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; OnPropertyChanged(nameof(SelectedTargetCount)); }, _ => CanSyncSelectedNodes);
         ToggleNodeSyncCommand = new RelayCommand(value => { if (value is not NodeSyncChoice choice) return; choice.Selected = !choice.Selected; if (choice.Selected) _nodeSyncSelection.Add(choice.Id); else _nodeSyncSelection.Remove(choice.Id); });
         ConfirmNodeSyncCommand = new RelayCommand(_ =>
         {
+            if (!CanSyncSelectedNodes) return;
             var selected = _nodeSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Id).ToHashSet();
             if (selected.Count == 0) return;
-            var targets = SelectedTargets.ToArray();
+            var targets = SyncDestinationTargets.ToArray();
             SyncSelectedColorNodes(Editor.AdjustmentStack, selected, targets);
             NodeSyncOpen = false;
             _ = ShowSyncFeedbackAsync($"已同步 {selected.Count} 个调整到 {targets.Length} 张照片。");
@@ -182,9 +189,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         }, _ => CanSyncSelectedNodes);
         ConfirmAdjustmentCopyCommand = new RelayCommand(_ =>
         {
+            if (!CanSyncSelectedNodes) return;
             var selected = _adjustmentSyncChoices.Where(choice => choice.Selected).Select(choice => choice.Type).ToHashSet();
             if (selected.Count == 0) return;
-            var targets = SelectedTargets.ToArray();
+            var targets = SyncDestinationTargets.ToArray();
             ApplySelectedAdjustments(selected, targets);
             AdjustmentCopyOpen = false;
             _ = ShowSyncFeedbackAsync($"已应用 {selected.Count} 类调整到 {targets.Length} 张照片。 ");
@@ -192,7 +200,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         CancelAdjustmentCopyCommand = new RelayCommand(_ => AdjustmentCopyOpen = false);
         ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask, allowConcurrent: true);
         ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
-        ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(Targets.ToArray()), _ => Targets.Count > 0 && !IsExporting);
+        ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(VisibleTargets.ToArray()), _ => VisibleTargets.Count > 0 && !IsExporting);
         StopExportCommand = new RelayCommand(_ => _exportCancellation?.Cancel(), _ => IsExporting);
         RetryFailedTargetCommand = new AsyncRelayCommand(_ => FailedTarget is null ? Task.CompletedTask : ActivateTargetAsync(FailedTarget), _ => FailedTarget is not null && !IsLoading);
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
@@ -202,6 +210,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
                 SchedulePreviewAnalysis();
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.AdjustmentStack)
+                or nameof(TetherReferenceModeViewModel.SelectedLook) or nameof(TetherReferenceModeViewModel.FilmSettings)
+                or nameof(TetherReferenceModeViewModel.MatchEngine) or nameof(TetherReferenceModeViewModel.MatchV4ExecutionMode)
+                && !IsLoading && !_applyingActiveSnapshot && ActiveTarget is { } thumbnailTarget)
+            {
+                Editor.CopyCurrentLookTo([thumbnailTarget]);
+                thumbnailTarget.Status = ReferenceTargetStatus.Adjusted;
+                ScheduleTargetThumbnail(thumbnailTarget);
+            }
         };
         Targets.CollectionChanged += (_, args) =>
         {
@@ -209,6 +226,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             {
                 removed.PropertyChanged -= OnTargetSelectionChanged;
                 removed.PropertyChanged -= OnTargetMetadataChanged;
+                removed.PropertyChanged -= OnTargetAdjustmentChanged;
+                CancelTargetThumbnail(removed.Id);
                 _observedTargets.Remove(removed);
             }
             if (args.NewItems is not null) foreach (ReferenceTargetItem target in args.NewItems)
@@ -216,9 +235,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 _observedTargets.Add(target);
                 target.PropertyChanged += OnTargetSelectionChanged;
                 target.PropertyChanged += OnTargetMetadataChanged;
+                target.PropertyChanged += OnTargetAdjustmentChanged;
                 QueueMetadata(() => HydrateAssetMetadataAsync(target));
             }
-            RefreshSyncAvailability();
+            RefreshFilmstrip();
         };
     }
 
@@ -240,32 +260,27 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void HighlightImageSample(VisualRgb24 sample)
     {
-        if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null) return;
-        var index = ColorSpaceLinking.FindNearest(model.Source, OklabColorSpace.FromSrgb(sample));
-        if (index < 0) return;
-        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, index, SelectionTolerance);
-        OnPropertyChanged(nameof(HighlightedPixels));
-        ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, index));
+        HighlightColor(OklabColorSpace.FromSrgb(sample));
     }
     public void HighlightCloudSelection(int pointIndex)
     {
         if (pointIndex < 0) { ClearColorSpaceHighlight(); return; }
         if (ColorSpaceModel is not { } model || _colorSpaceSourceBuffer is null || pointIndex >= model.Source.Points.Count) return;
-        HighlightedPixels = ColorSpaceLinking.ToPixelMembership(model.Source, _colorSpaceSourceBuffer, pointIndex, SelectionTolerance);
-        OnPropertyChanged(nameof(HighlightedPixels));
-        ColorSpaceSelectionChanged?.Invoke(this, new(ColorSpaceMarkerKind.SelectedCluster, pointIndex));
+        HighlightColor(model.Source.Points[pointIndex].Lab);
     }
-    public void ClearColorSpaceHighlight() { HighlightedPixels = []; OnPropertyChanged(nameof(HighlightedPixels)); ColorSpaceSelectionChanged?.Invoke(this, ColorSpaceSelection.None); }
+    public void ClearColorSpaceHighlight() { _selectedInspectionColor = null; HighlightedPixels = []; HighlightWeights = []; OnPropertyChanged(nameof(HighlightedPixels)); ColorSpaceSelectionChanged?.Invoke(this, ColorSpaceSelection.None); }
     public event EventHandler<ColorSpaceSelection>? ColorSpaceSelectionChanged;
     private static VisualPixelBuffer ToVisualBuffer(BitmapSource source)
     {
         // Preview-only mask/model stays bounded; never mutate or resample export input.
         var edge = Math.Max(source.PixelWidth, source.PixelHeight);
         if (edge > 768) source = new TransformedBitmap(source, new ScaleTransform(768d / edge, 768d / edge));
-        var converted = new FormatConvertedBitmap(source, PixelFormats.Rgb24, null, 0);
-        var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 3];
-        converted.CopyPixels(bytes, converted.PixelWidth * 3, 0);
-        return new(converted.PixelWidth, converted.PixelHeight, bytes);
+        var converted = new FormatConvertedBitmap(source, PixelFormats.Bgra32, null, 0);
+        var bytes = new byte[converted.PixelWidth * converted.PixelHeight * 4];
+        converted.CopyPixels(bytes, converted.PixelWidth * 4, 0);
+        var rgb = new byte[converted.PixelWidth * converted.PixelHeight * 3]; var alpha = new byte[rgb.Length / 3];
+        for (var i = 0; i < alpha.Length; i++) { rgb[i*3]=bytes[i*4+2]; rgb[i*3+1]=bytes[i*4+1]; rgb[i*3+2]=bytes[i*4]; alpha[i]=bytes[i*4+3]; }
+        return new(converted.PixelWidth, converted.PixelHeight, rgb, alpha);
     }
     public AsyncRelayCommand ChooseTargetCommand { get; }
     public RelayCommand StopProcessingCommand { get; }
@@ -278,7 +293,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public RelayCommand OpenAdjustmentCopyCommand { get; }
     public RelayCommand ConfirmAdjustmentCopyCommand { get; }
     public RelayCommand CancelAdjustmentCopyCommand { get; }
-    public bool CanSyncSelectedNodes => Editor.IsProMode && SelectedTargetCount > 1 && Editor.AdjustmentNodes.Count > 0;
+    public bool CanSyncSelectedNodes => Editor.IsProMode && ActiveTarget is not null && SyncDestinationTargets.Count > 0 && Editor.AdjustmentNodes.Count > 0 && !IsLoading;
     public string SyncFeedback { get => _syncFeedback; private set { if (SetProperty(ref _syncFeedback, value)) OnPropertyChanged(nameof(HasSyncFeedback)); } }
     public bool HasSyncFeedback => !string.IsNullOrEmpty(SyncFeedback);
     private async Task ShowSyncFeedbackAsync(string message)
@@ -288,7 +303,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (revision == _syncFeedbackRevision) SyncFeedback = "";
     }
     private void OnTargetSelectionChanged(object? sender, PropertyChangedEventArgs e)
-    { if (e.PropertyName == nameof(ReferenceTargetItem.IsSelected)) RefreshSyncAvailability(); }
+    { if (e.PropertyName is nameof(ReferenceTargetItem.IsSelected) or nameof(ReferenceTargetItem.Rating) or nameof(ReferenceTargetItem.ColorLabel)) RefreshFilmstrip(); }
     private void OnTargetMetadataChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_disposed || sender is not ReferenceTargetItem target || _hydratingMetadata.Contains(target.Id)) return;
@@ -366,6 +381,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     private void RefreshSyncAvailability()
     {
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
+        OnPropertyChanged(nameof(VisibleTargetCount)); OnPropertyChanged(nameof(HiddenSelectedTargetCount)); OnPropertyChanged(nameof(FilmstripSummary)); OnPropertyChanged(nameof(SyncSummary));
+        SetSelectedRatingCommand?.RaiseCanExecuteChanged(); SetSelectedColorLabelCommand?.RaiseCanExecuteChanged();
+        SaveSessionCommand?.RaiseCanExecuteChanged(); OpenSessionCommand?.RaiseCanExecuteChanged(); RaiseBatchHistory();
         OpenNodeSyncCommand?.RaiseCanExecuteChanged(); SyncSelectedCommand?.RaiseCanExecuteChanged(); SyncAllCommand?.RaiseCanExecuteChanged();
         CopyAdjustmentsCommand?.RaiseCanExecuteChanged(); ApplyAdjustmentsCommand?.RaiseCanExecuteChanged(); PreparePublishingCommand?.RaiseCanExecuteChanged();
         OpenAdjustmentCopyCommand?.RaiseCanExecuteChanged(); ConfirmAdjustmentCopyCommand?.RaiseCanExecuteChanged();
@@ -379,32 +397,48 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public int SelectedTargetCount => SelectedTargets.Count();
     public void SyncSelectedColorNodes(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedNodeIds, IEnumerable<ReferenceTargetItem> targets)
     {
+        var destinations = targets.ToArray();
         var selected = source.Normalize().Nodes.Where(node => selectedNodeIds.Contains(node.Id)).ToArray();
         if (selected.Length == 0) return;
-        foreach (var target in targets)
+        RememberBatchAdjustment(destinations);
+        foreach (var target in destinations)
         {
             target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } stack
                 ? stack.SyncSelectedFrom(source, selectedNodeIds)
-                : new ColorAdjustmentStack(selected).DeepClone();
+                : (source with { Nodes = selected }).DeepClone();
+            if (selected.Any(x => x.Type == ColorStudioNodeType.ReferenceMatch))
+            {
+                var look = Editor.SelectedLook?.Normalize();
+                target.AppliedLookSnapshot = look is null ? null : look with { ReferenceSources = look.ReferenceSources.Select(x => x with { }).ToArray() };
+                target.EngineSnapshot = Editor.MatchEngine; target.ExecutionModeSnapshot = Editor.MatchV4ExecutionMode;
+            }
+            if (selected.Any(x => x.Type == ColorStudioNodeType.Film)) target.FilmSettingsSnapshot = Editor.FilmSettings with { };
             target.Status = ReferenceTargetStatus.Synced;
         }
+        RefreshActiveSnapshot(destinations);
     }
     private void ApplySelectedAdjustments(IReadOnlySet<ColorStudioNodeType> selectedTypes, IEnumerable<ReferenceTargetItem> targets)
     {
         var sourceStack = Editor.AdjustmentStack;
+        var destinations = targets.ToArray();
+        RememberBatchAdjustment(destinations);
         var look = Editor.SelectedLook?.Normalize();
-        foreach (var target in targets)
+        foreach (var target in destinations)
         {
             target.ColorAdjustmentStackSnapshot = target.ColorAdjustmentStackSnapshot is { } existing
                 ? existing.SyncSelectedByTypeFrom(sourceStack, selectedTypes)
                 : sourceStack.Nodes.Where(node => selectedTypes.Contains(node.Type)).Select(node => node.Normalize()).ToArray() is { Length: > 0 } selected
-                    ? new ColorAdjustmentStack(selected).Normalize()
+                    ? (sourceStack with { Nodes = selected }).Normalize()
                     : null;
-            if (selectedTypes.Contains(ColorStudioNodeType.ReferenceMatch) && look is not null)
-                target.AppliedLookSnapshot = look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
+            if (selectedTypes.Contains(ColorStudioNodeType.ReferenceMatch))
+            {
+                target.AppliedLookSnapshot = look is null ? null : look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() };
+                target.EngineSnapshot = Editor.MatchEngine; target.ExecutionModeSnapshot = Editor.MatchV4ExecutionMode;
+            }
             if (selectedTypes.Contains(ColorStudioNodeType.Film)) target.FilmSettingsSnapshot = Editor.FilmSettings with { };
             target.Status = ReferenceTargetStatus.Synced;
         }
+        RefreshActiveSnapshot(destinations);
     }
     private static string AdjustmentTypeName(ColorStudioNodeType type) => type switch
     {
@@ -414,6 +448,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         ColorStudioNodeType.TransitionBlend => "色彩过渡",
         ColorStudioNodeType.Preset => "预设",
         ColorStudioNodeType.Develop => "影调与细节",
+        ColorStudioNodeType.WhiteBalance => "白平衡",
+        ColorStudioNodeType.BasicTone => "基础与 HDR 影调",
+        ColorStudioNodeType.ColorBalance => "色彩平衡",
+        ColorStudioNodeType.Levels => "色阶",
+        ColorStudioNodeType.Curve => "曲线",
+        ColorStudioNodeType.Details => "细节",
+        ColorStudioNodeType.SkinTone => "肤色均匀化",
         _ => type.ToString()
     };
     public AsyncRelayCommand ActivateTargetCommand { get; }
@@ -423,26 +464,18 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public AsyncRelayCommand RetryFailedTargetCommand { get; }
     public AsyncRelayCommand RetryFailedExportCommand { get; }
     public ObservableCollection<ReferenceTargetItem> Targets { get; } = [];
-    public IEnumerable<ReferenceTargetItem> SelectedTargets => Targets.Where(item => item.IsSelected);
+    public IEnumerable<ReferenceTargetItem> SelectedTargets => VisibleTargets.Where(item => item.IsSelected);
     public int SelectFilmstripTarget(int index, int anchor, bool shift, bool control)
     {
-        if (index < 0 || index >= Targets.Count) return anchor;
-        if (shift && anchor >= 0 && anchor < Targets.Count)
-        {
-            if (!control) foreach (var item in Targets) item.IsSelected = false;
-            for (var i = Math.Min(anchor, index); i <= Math.Max(anchor, index); i++) Targets[i].IsSelected = true;
-            return anchor;
-        }
-        if (control) Targets[index].IsSelected = !Targets[index].IsSelected;
-        else { foreach (var item in Targets) item.IsSelected = false; Targets[index].IsSelected = true; }
-        return index;
+        if (anchor >= 0 && anchor < VisibleTargets.Count) _selectionAnchorId = VisibleTargets[anchor].Id;
+        return SelectVisibleFilmstripTarget(index, shift, control);
     }
-    public ReferenceTargetItem? ActiveTarget { get => _activeTarget; private set => SetProperty(ref _activeTarget, value); }
+    public ReferenceTargetItem? ActiveTarget { get => _activeTarget; private set { if (SetProperty(ref _activeTarget, value)) RefreshSyncAvailability(); } }
     public BitmapSource? TargetImage { get => _targetImage; private set { if (SetProperty(ref _targetImage, value)) OnPropertyChanged(nameof(HasTarget)); } }
     public bool HasTarget => TargetImage is not null;
     public string TargetName { get => _targetName; private set => SetProperty(ref _targetName, value); }
     public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
-    public bool IsLoading { get => _isLoading; private set { if (SetProperty(ref _isLoading, value)) RefreshSyncAvailability(); } }
+    public bool IsLoading { get => _isLoading || _sessionLoading; private set { if (SetProperty(ref _isLoading, value)) RefreshSyncAvailability(); } }
     public bool IsExporting => _exportCancellation is not null;
     public int ExportCompleted { get => _exportCompleted; private set => SetProperty(ref _exportCompleted, value); }
     public int ExportTotal { get => _exportTotal; private set => SetProperty(ref _exportTotal, value); }
@@ -506,9 +539,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         {
             if (RawMatchTiff16ProductPipeline.IsRaw(item.Path))
             {
-                var master = item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Path, token);
+                var master = item.RawMaster ??= await DecodeStudioRawAsync(item.Path, token);
                 var pixels = _rawPipeline.DisplaySource(master.Image, 320, token);
-                item.Thumbnail = RawDisplayBitmapAdapter.ToBitmap(pixels);
+                item.SourceThumbnail = RawDisplayBitmapAdapter.ToBitmap(pixels); item.Thumbnail = item.SourceThumbnail; ScheduleTargetThumbnail(item);
                 item.PixelWidth = master.Width; item.PixelHeight = master.Height; item.Status = ReferenceTargetStatus.Pending;
                 return;
             }
@@ -516,8 +549,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             {
                 var decoded = new BitmapImage();
                 decoded.BeginInit(); decoded.CacheOption = BitmapCacheOption.OnLoad; decoded.DecodePixelWidth = 320; decoded.UriSource = new Uri(item.Path); decoded.EndInit(); decoded.Freeze();
-                item.Thumbnail = decoded; item.PixelWidth = decoded.PixelWidth; item.PixelHeight = decoded.PixelHeight; item.Status = ReferenceTargetStatus.Pending;
+                item.SourceThumbnail = decoded; item.Thumbnail = decoded; item.PixelWidth = decoded.PixelWidth; item.PixelHeight = decoded.PixelHeight; item.Status = ReferenceTargetStatus.Pending;
             }, token);
+            ScheduleTargetThumbnail(item);
         }
         catch (OperationCanceledException) { }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
@@ -536,20 +570,24 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
-            var rawMaster = isRaw ? target.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(target.Path, token) : null;
+            var rawMaster = isRaw ? target.RawMaster ??= await DecodeStudioRawAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
             var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, token);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             QueueMetadata(() => HydrateAssetMetadataAsync(target));
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
-            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false);
+            Editor.RestoreTargetEngine(target.EngineSnapshot, target.ExecutionModeSnapshot);
+            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false, targetIdentity: target.Id);
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             await Editor.SetSourceAsync(target.AssetId, image, token, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
-            StatusText = "待调色照片已载入。左侧原片与仿色结果对比，参考图片显示在独立区域。";
+            StatusText = "待调色照片已载入。中央显示目标照片；参考图片位于独立辅助栏。";
+            Editor.CopyCurrentLookTo([target]);
+            target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
+            ScheduleTargetThumbnail(target);
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
         catch (OperationCanceledException) { }
@@ -579,14 +617,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public void Dispose()
     {
         _disposed = true;
+        CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {
             target.PropertyChanged -= OnTargetMetadataChanged;
             target.PropertyChanged -= OnTargetSelectionChanged;
+            target.PropertyChanged -= OnTargetAdjustmentChanged;
         }
         _observedTargets.Clear();
+        foreach (var id in _thumbnailJobs.Keys.ToArray()) CancelTargetThumbnail(id);
         _exportCancellation?.Cancel(); _exportCancellation?.Dispose(); Editor.Dispose();
     }
 
@@ -608,13 +649,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
         if (items.Count == 0 || IsExporting) return;
+        var format=retryDirectory is null ? QuickExportFormat : _lastExportFormat;
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
-        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder( $"快速导出 {items.Count} 张 · {string.Join(" / ", items.Select(x => RawMatchTiff16ProductPipeline.IsRaw(x.Path) ? "RAW → TIFF16" : StudioQuickExport.Extension(x.Path).TrimStart('.').ToUpperInvariant()).Distinct())}", null) : acceptanceDirectory);
+        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder( $"快速导出 {items.Count} 张 · {string.Join(" / ", items.Select(x => StudioQuickExport.Extension(x.Path,format).TrimStart('.').ToUpperInvariant()).Distinct())} · sRGB", null) : acceptanceDirectory);
         if (directory is null) return;
         _lastExportDirectory = directory;
+        _lastExportFormat = format;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
-        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize())).ToArray();
-        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · 源格式（RAW → TIFF16）"; RaiseExportCommands();
+        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize(), Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
+        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · {format} · sRGB"; RaiseExportCommands();
         var failed = new List<string>();
         try
         {
@@ -622,7 +665,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var isRaw = RawMatchTiff16ProductPipeline.IsRaw(item.Path);
-                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + (isRaw ? ".tif" : StudioQuickExport.Extension(item.Path)))); var temp = output + ".tmp";
+                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
                 try
                 {
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
@@ -633,19 +676,26 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     if (isRaw)
                     {
                         // AtomicTiffWriter validates the temporary TIFF before the destination becomes visible.
-                        var master = item.RawMaster ??= await _rawPipeline.DecodeFrozenMasterAsync(item.Path, _exportCancellation.Token);
-                        if (Editor.IsMatchV4Beta && _matchV4Executor is not null && frozenItem.Look is not null && frozenItem.Stack is null && frozenItem.Film?.Enabled != true)
-                        {
-                            Editor.SetFrozenRawMaster(master);
-                            await Editor.ExportRawV4Async(master, output, frozenItem.Look, _exportCancellation.Token);
-                        }
+                        var master = item.RawMaster ??= await DecodeStudioRawAsync(item.Path, _exportCancellation.Token);
+                        if(StudioQuickExport.Extension(item.Path,format)==".tif")
+                            await ExportFrozenRawAsync(master, output, frozenItem.Look, frozenItem.Stack, frozenItem.Film, frozenItem.Engine, frozenItem.Mode, _exportCancellation.Token);
                         else
-                            await _rawPipeline.ExportAsync(master, output, frozenItem.Look, frozenItem.Stack, _exportCancellation.Token, frozenItem.Film);
+                        {
+                            var intermediate=temp+".rendered.tif";
+                            try
+                            {
+                                await ExportFrozenRawAsync(master, intermediate, frozenItem.Look, frozenItem.Stack, frozenItem.Film, frozenItem.Engine, frozenItem.Mode, _exportCancellation.Token);
+                                await Task.Run(()=>StudioQuickExport.Encode(StudioQuickExport.Load(intermediate),item.Path,temp,format,_exportCancellation.Token),_exportCancellation.Token);
+                                File.Move(temp,output,overwrite:false);
+                            }
+                            finally { TryDelete(intermediate); }
+                        }
                     }
                     else
                     {
+                        if (frozenItem.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
                         var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
-                        await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, _exportCancellation.Token), _exportCancellation.Token);
+                        await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
                         File.Move(temp, output, overwrite: false);
                     }
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
@@ -672,7 +722,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         token.ThrowIfCancellationRequested(); var encoder = new JpegBitmapEncoder { QualityLevel = 95 }; encoder.Frames.Add(BitmapFrame.Create(image)); using var stream = File.Create(output); encoder.Save(stream); token.ThrowIfCancellationRequested();
     }
     private static void TryDelete(string path) { try { if (File.Exists(path)) File.Delete(path); } catch { } }
-    private void RaiseExportCommands() { PreparePublishingCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(CanRetryFailedExport)); ExportSelectedCommand.RaiseCanExecuteChanged(); ExportAllCommand.RaiseCanExecuteChanged(); StopExportCommand.RaiseCanExecuteChanged(); RetryFailedExportCommand.RaiseCanExecuteChanged(); }
+    private void RaiseExportCommands() { OnPropertyChanged(nameof(IsExporting)); RefreshSyncAvailability(); OnPropertyChanged(nameof(CanRetryFailedExport)); StopExportCommand.RaiseCanExecuteChanged(); RetryFailedExportCommand.RaiseCanExecuteChanged(); }
 }
 
 public enum ReferenceTargetStatus { Pending, Processing, Synced, Adjusted, Exported, Failed }
@@ -697,7 +747,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     private bool _isSelected;
     private bool _isActive;
     private ReferenceTargetStatus _status = ReferenceTargetStatus.Pending;
-    public ReferenceTargetItem(string path) { Id = Guid.NewGuid(); Path = path; FileName = System.IO.Path.GetFileName(path); }
+    public ReferenceTargetItem(string path, Guid? id = null) { Id = id ?? Guid.NewGuid(); Path = path; FileName = System.IO.Path.GetFileName(path); }
     public Guid Id { get; }
     private Guid? _assetId;
     public Guid? AssetId { get => _assetId; set => SetProperty(ref _assetId, value); }
@@ -708,6 +758,9 @@ public sealed class ReferenceTargetItem : ObservableObject
     public string FileName { get; }
     private BitmapSource? _thumbnail;
     public BitmapSource? Thumbnail { get => _thumbnail; set => SetProperty(ref _thumbnail, value); }
+    internal BitmapSource? SourceThumbnail { get; set; }
+    private string _thumbnailStatus = "原图缩略预览";
+    public string ThumbnailStatus { get => _thumbnailStatus; internal set => SetProperty(ref _thumbnailStatus, value); }
     public int PixelWidth { get; set; }
     public int PixelHeight { get; set; }
     public long FileSize => File.Exists(Path) ? new FileInfo(Path).Length : 0;
@@ -743,9 +796,16 @@ public sealed class ReferenceTargetItem : ObservableObject
     public string StatusText => Status switch { ReferenceTargetStatus.Synced => "已同步", ReferenceTargetStatus.Adjusted => "已调整", ReferenceTargetStatus.Processing => "正在处理", ReferenceTargetStatus.Exported => "已导出", ReferenceTargetStatus.Failed => "失败", _ => "待处理" };
     public double? Progress { get; set; }
     public string? Error { get; set; }
-    public ReferenceLook? AppliedLookSnapshot { get; set; }
-    public PixelTartFilmSettings? FilmSettingsSnapshot { get; set; }
-    public ColorAdjustmentStack? ColorAdjustmentStackSnapshot { get; set; }
+    private ReferenceLook? _appliedLookSnapshot;
+    private PixelTartFilmSettings? _filmSettingsSnapshot;
+    private ColorAdjustmentStack? _colorAdjustmentStackSnapshot;
+    private ColorStudioMatchEngine _engineSnapshot;
+    private MatchV4ExecutionMode _executionModeSnapshot;
+    public ReferenceLook? AppliedLookSnapshot { get => _appliedLookSnapshot; set => SetProperty(ref _appliedLookSnapshot, value); }
+    public PixelTartFilmSettings? FilmSettingsSnapshot { get => _filmSettingsSnapshot; set => SetProperty(ref _filmSettingsSnapshot, value); }
+    public ColorAdjustmentStack? ColorAdjustmentStackSnapshot { get => _colorAdjustmentStackSnapshot; set => SetProperty(ref _colorAdjustmentStackSnapshot, value); }
+    public ColorStudioMatchEngine EngineSnapshot { get => _engineSnapshot; set => SetProperty(ref _engineSnapshot, value); }
+    public MatchV4ExecutionMode ExecutionModeSnapshot { get => _executionModeSnapshot; set => SetProperty(ref _executionModeSnapshot, value); }
     public string? OutputPath { get; set; }
     /// <summary>Session-owned RAW master shared by thumbnail, preview, Match and TIFF export.</summary>
     public FrozenRawMaster? RawMaster { get; set; }

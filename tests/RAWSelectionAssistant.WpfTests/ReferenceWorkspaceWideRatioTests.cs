@@ -17,6 +17,8 @@ public sealed class ReferenceWorkspaceWideRatioTests
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
         var editor = workspace.Editor; editor.WorkspaceMode = "专业";
         var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        editor.ContextRailOpen = true;
+        ((System.Windows.Controls.ListBox)view.FindName("AuxModes")).SelectedIndex = 3;
         Arrange(view, 1180, 720);
         var list = (System.Windows.Controls.ListBox)view.FindName("AdjustmentNodeList");
         var first = editor.AdjustmentNodes[0]; list.SelectedItem = first;
@@ -39,9 +41,9 @@ public sealed class ReferenceWorkspaceWideRatioTests
         Assert.AreEqual(36, border.Height); Assert.AreEqual(.48, border.Opacity);
         Assert.IsTrue(row.IsSelected, "Selection must survive replacing the stack.");
         Assert.IsNotNull(row.Background, "Selection wash must be present after replacing the stack.");
-        editor.WorkspaceSection = "预设"; Arrange(view, 1180, 720);
-        Assert.AreEqual(Visibility.Collapsed, ((FrameworkElement)list.Parent).Visibility);
-        Assert.IsFalse(editor.IsNodeSection);
+        ((System.Windows.Controls.ListBox)view.FindName("AuxModes")).SelectedIndex = 2; Arrange(view, 1180, 720);
+        Assert.AreEqual(Visibility.Collapsed, ((FrameworkElement)view.FindName("NodesPage")).Visibility);
+        Assert.AreEqual(Visibility.Visible, ((FrameworkElement)view.FindName("PresetsPage")).Visibility);
         foreach (var label in new[] { "当前色彩方案", "我的方案" })
             Assert.IsTrue(Descendants<System.Windows.Controls.TextBlock>(view).Any(t => t.Text == label));
         await Task.CompletedTask;
@@ -76,32 +78,56 @@ public sealed class ReferenceWorkspaceWideRatioTests
         System.Windows.Threading.Dispatcher.PushFrame(frame);
     }
     [TestMethod]
-    public Task AnalysisIsLeftEditingIsRightAndHistogramAboveTarget() => RuntimeCorrectionWpfTests.RunSta(async () =>
+    public Task ReferenceIsLeftAndTwoHistogramsStayAboveRightTools() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
         RuntimeCorrectionWpfTests.EnsureTestApplication();
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
         var view = new ReferenceColorWorkspaceView { DataContext = workspace };
         Arrange(view, 1920, 1080);
+        workspace.Editor.ContextRailOpen = true; Arrange(view,1920,1080);
         var context = (FrameworkElement)view.FindName("ContextRail");
         var editing = (FrameworkElement)view.FindName("EditingRail");
         var analysis = (FrameworkElement)view.FindName("CentralAnalysis");
+        var photo = (FrameworkElement)view.FindName("PreviewCanvas");
+        var rgb = (FrameworkElement)view.FindName("RgbHistogram");
+        var luma = (FrameworkElement)view.FindName("LumaHistogram");
+        var tools = (System.Windows.Controls.ListBox)view.FindName("ToolModes");
+        var aux = (System.Windows.Controls.ListBox)view.FindName("AuxModes");
         Assert.AreEqual(0, System.Windows.Controls.Grid.GetColumn(context));
         Assert.AreEqual(2, System.Windows.Controls.Grid.GetColumn(editing));
-        Assert.IsTrue(context.TranslatePoint(new Point(),view).X < analysis.TranslatePoint(new Point(),view).X);
-        Assert.IsTrue(analysis.TranslatePoint(new Point(),view).X < editing.TranslatePoint(new Point(),view).X);
-        Assert.IsTrue(analysis.ActualWidth > editing.ActualWidth);
+        Assert.IsTrue(context.TranslatePoint(new Point(),view).X < photo.TranslatePoint(new Point(),view).X);
+        Assert.IsTrue(photo.TranslatePoint(new Point(photo.ActualWidth,0),view).X <= analysis.TranslatePoint(new Point(),view).X);
+        Assert.IsTrue(analysis.ActualWidth <= editing.ActualWidth);
+        Assert.IsTrue(rgb.TranslatePoint(new Point(0,rgb.ActualHeight),view).Y <= luma.TranslatePoint(new Point(),view).Y);
+        Assert.IsTrue(luma.TranslatePoint(new Point(0,luma.ActualHeight),view).Y <= tools.TranslatePoint(new Point(),view).Y);
+        Assert.HasCount(4, aux.Items); Assert.HasCount(7, tools.Items);
+        foreach (var (id, page) in new[] { (0,"ReferencePage"), (1,"SpacePage"), (2,"PresetsPage"), (3,"NodesPage") })
+        { aux.SelectedIndex=id; Arrange(view,1920,1080); Assert.AreEqual(Visibility.Visible,((FrameworkElement)view.FindName(page)).Visibility); }
+        foreach (var (id, page) in new[] { (0,"SpaceToolPage"), (1,"ColorToolPage"), (2,"LevelsToolPage"), (3,"CurveToolPage"), (4,"DetailsToolPage"), (5,"FilmToolPage"), (6,"CreativeToolPage") })
+        { tools.SelectedIndex=id; Arrange(view,1920,1080); Assert.AreEqual(Visibility.Visible,((FrameworkElement)view.FindName(page)).Visibility); Assert.IsTrue(((FrameworkElement)view.FindName(page)).ActualHeight>0); }
         await Task.CompletedTask;
     });
 
     [TestMethod]
-    public void CompactLayoutCollapsesContextUntilUserOpensIt()
+    public Task CompactLayoutCollapsesContextUntilUserOpensIt() => RuntimeCorrectionWpfTests.RunSta(async () =>
     {
-        var viewModel = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs"));
-        var code = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs"));
-        StringAssert.Contains(viewModel, "SetResponsiveContext(bool compact)");
-        StringAssert.Contains(code, "if (compact && !_wasCompact) _editor?.SetResponsiveContext(true)");
-        StringAssert.Contains(viewModel, "private bool _contextRailOpen = true");
-    }
+        RuntimeCorrectionWpfTests.EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        var window = new Window { Content = view, Width = 1600, Height = 920, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
+        try
+        {
+            window.Show(); Drain(); window.UpdateLayout();
+            Assert.IsTrue(workspace.Editor.ContextRailOpen);
+            window.Width = 1050; Drain(); window.UpdateLayout();
+            Assert.IsFalse(workspace.Editor.ContextRailOpen);
+            workspace.Editor.ContextRailOpen = true; Drain(); window.UpdateLayout();
+            Assert.AreEqual(Visibility.Visible, ((FrameworkElement)view.FindName("ContextRail")).Visibility);
+            Assert.IsTrue(((FrameworkElement)view.FindName("PreviewCanvas")).ActualWidth > 350);
+        }
+        finally { window.Close(); }
+        await Task.CompletedTask;
+    });
 
     [TestMethod]
     public void FilmSurfaceUsesChineseTextureGridAndProfiles()
@@ -118,18 +144,19 @@ public sealed class ReferenceWorkspaceWideRatioTests
     {
         RuntimeCorrectionWpfTests.EnsureTestApplication();
         using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs()); var editor = workspace.Editor; var view = new ReferenceColorWorkspaceView { DataContext = workspace };
-        Arrange(view, 1920, 900); var columns = FindColumns(view); Assert.AreEqual(310, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
+        Arrange(view, 1920, 900); editor.ContextRailOpen=true; Arrange(view,1920,900); var columns = FindColumns(view); Assert.AreEqual(290, columns[0], .5); Assert.IsGreaterThan(columns[0] * 2, columns[1]); Assert.IsGreaterThanOrEqualTo(224, columns[2]);
         var targetWidth = columns[1];
         editor.ContextRailOpen = false; Arrange(view, 1920, 900);
         Assert.IsGreaterThan(targetWidth, FindColumns(view)[1], "Hiding reference must reclaim space for the target photograph.");
         editor.ContextRailOpen = true; Arrange(view, 1920, 900);
         Assert.AreEqual(targetWidth, FindColumns(view)[1], .5);
-        Arrange(view, 1439, 900); Assert.IsFalse(editor.ContextRailOpen); var right = FindNamed<FrameworkElement>(view, "ContextRail"); Assert.IsFalse(right.IsVisible);
-        editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, right.Visibility); Assert.IsTrue(right.ActualWidth is >= 260 and <= 340, $"drawer width {right.ActualWidth}");
-        Arrange(view, 739, 760); var left = FindNamed<FrameworkElement>(view, "EditingRail"); Assert.IsFalse(left.IsVisible);
-        Arrange(view, 1180, 720); Assert.IsTrue(right.ActualWidth is >= 260 and <= 340);
+        // Loaded-window automatic collapse is exercised separately above. Here measure both explicit rail states.
+        editor.ContextRailOpen = false; Arrange(view, 1000, 900); var context = FindNamed<FrameworkElement>(view, "ContextRail"); Assert.AreEqual(Visibility.Collapsed, context.Visibility);
+        editor.ContextRailOpen = true; Arrange(view, 1200, 800); Assert.AreEqual(Visibility.Visible, context.Visibility); Assert.IsTrue(context.ActualWidth is >= 230 and <= 300, $"rail width {context.ActualWidth}");
+        Arrange(view, 739, 760); var edit = FindNamed<FrameworkElement>(view, "EditingRail"); Assert.AreEqual(Visibility.Visible, edit.Visibility); Assert.AreEqual(Visibility.Collapsed, context.Visibility);
+        Arrange(view, 1180, 720); Assert.IsTrue(FindNamed<FrameworkElement>(view,"PreviewCanvas").ActualWidth>400);
         Assert.IsLessThanOrEqualTo(1180, FindNamed<FrameworkElement>(view, "WorkspaceGrid").ActualWidth);
-        editor.FocusView = true; Arrange(view, 1600, 900); Assert.IsFalse(left.IsVisible); Assert.IsFalse(right.IsVisible);
+        editor.FocusView = true; Arrange(view, 1600, 900); Assert.AreEqual(Visibility.Collapsed, edit.Visibility); Assert.AreEqual(Visibility.Collapsed, context.Visibility);
         await Task.CompletedTask;
     });
 
