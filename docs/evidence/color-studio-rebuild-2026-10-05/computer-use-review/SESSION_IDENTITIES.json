@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "sessions": [
+    {
+      "id": "s01",
+      "pid": 6356,
+      "recordedAtUtc": "2026-10-07T06:47:22.4936173+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": null,
+      "physicalWindowPixels": null
+    },
+    {
+      "id": "s02",
+      "pid": 29660,
+      "recordedAtUtc": "2026-10-07T08:33:13.9514350Z",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 96,
+      "physicalWindowPixels": [
+        1600,
+        920
+      ]
+    },
+    {
+      "id": "s03",
+      "pid": 37120,
+      "recordedAtUtc": "2026-10-07T09:22:39.6430884+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 120,
+      "physicalWindowPixels": [
+        2000,
+        1150
+      ]
+    },
+    {
+      "id": "s04",
+      "pid": 33708,
+      "recordedAtUtc": "2026-10-07T09:45:51.4115221+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 192,
+      "physicalWindowPixels": [
+        2360,
+        1440
+      ]
+    },
+    {
+      "id": "s05",
+      "pid": 33756,
+      "recordedAtUtc": "2026-10-07T09:55:06.4166318+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 144,
+      "physicalWindowPixels": [
+        1770,
+        1080
+      ]
+    },
+    {
+      "id": "s06",
+      "pid": 52772,
+      "recordedAtUtc": "2026-10-07T10:11:08.1925643+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 144,
+      "physicalWindowPixels": [
+        2880,
+        1620
+      ]
+    },
+    {
+      "id": "s07",
+      "pid": 28700,
+      "recordedAtUtc": "2026-10-07T10:59:43.5660764+00:00",
+      "sourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+      "dpi": 144,
+      "physicalWindowPixels": [
+        2880,
+        1620
+      ]
+    }
+  ],
+  "corrections": [
+    "s01 early inferred96 withdrawn;033 actual144/2400x1380",
+    "s03 narrow112+ actual1475x900",
+    "s05 maximized124/125 actual3860x2180; session initial1770x1080 differs",
+    "329/330 capture changed and truncated; excluded from public full-window evidence",
+    "301 log saysHome but screenshot remainsStudio; actualHome303",
+    "127-244 legacyRT11 labels are not authoritative; see checklist and reviewed corrections"
+  ]
+}

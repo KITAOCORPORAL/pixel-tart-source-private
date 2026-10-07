@@ -1,0 +1,166 @@
+{
+  "SchemaVersion": 1,
+  "ReviewDate": "2026-10-07",
+  "ReviewTimeZone": "Europe/Berlin",
+  "ObservedAt": "2026-10-07T14:47:50.2103072+08:00",
+  "ObservedAtUtc": "2026-10-07T14:47:50.2103072+08:00",
+  "MachineTimeZoneOffset": "+08:00",
+  "Scope": "同一 r1 Release 的 Computer Use 实机巡检与公开证据归档；不是用户批准",
+  "Repository": "KITAOCORPORAL/pixel-tart-source-private",
+  "RepositoryRoot": "<REPOSITORY_ROOT>",
+  "Branch": "integration/pixel-tart-developer-preview",
+  "SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+  "CurrentBranchHead": "e16c084184e5453718c84306be44740eb0b0a96e",
+  "EntryWorkingTree": "本轮开始时仅有本目录未跟踪证据；生产源码和测试未修改",
+  "ChangesSinceSourceHead": [
+    "artifacts/releases/color-studio-rebuild-2026-10-05-r1/release-manifest.json",
+    "docs/evidence/color-studio-rebuild-2026-10-05/00_START_HERE.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/C1_FEATURE_BEHAVIOR_MATRIX.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/COLOR_STUDIO_DESIGN_SPEC.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/EVIDENCE_INDEX.json",
+    "docs/evidence/color-studio-rebuild-2026-10-05/FILE_CHANGE_LIST.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/IMPLEMENTATION_MATRIX.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/LOCALIZATION_SCOPE.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/MODULE_RUNTIME_OBSERVATIONS.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/OPEN_ISSUES.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/PARAMETER_CONTRACT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/PIPELINE_AUDIT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/PROCESSING_IMPLEMENTATION.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/QUICK_EXPORT_FORMAT_CONTRACT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/RAW_PREVIEW_COORDINATE_CONTRACT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/RELEASE_IDENTITY.json",
+    "docs/evidence/color-studio-rebuild-2026-10-05/RELEASE_RUNTIME_REPLAY.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/SPACE_AUDIT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/SPACE_IMPLEMENTATION.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/SPATIAL_SCALE_VERIFICATION.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/START_STATE.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/TEST_RESULTS.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/WORKSPACE_AUDIT.md",
+    "docs/evidence/color-studio-rebuild-2026-10-05/WORKSPACE_STATE_IMPLEMENTATION.md"
+  ],
+  "ProductionOrTestsChangedSinceSourceHead": false,
+  "EvidenceOnlySinceSourceHead": true,
+  "CommitsSinceSourceHead": [
+    "e16c084184e5453718c84306be44740eb0b0a96e docs(studio): record r1 release identity and incomplete runtime acceptance"
+  ],
+  "Release": {
+    "Name": "color-studio-rebuild-2026-10-05-r1",
+    "BuiltAt": "2026-10-05T13:08:11.6769967+08:00",
+    "Configuration": "Release",
+    "Platform": "x64",
+    "Runtime": "win-x64",
+    "SelfContained": true,
+    "Exe": "artifacts/releases/color-studio-rebuild-2026-10-05-r1/publish/win-x64/KitaoPhotoSelector.exe",
+    "ExeSha256": "C9841FB530ABF0E209B8E9BB9B6870C917D54DED985702B2EF41F36EE6DB28CA",
+    "ApplicationDll": "artifacts/releases/color-studio-rebuild-2026-10-05-r1/publish/win-x64/KitaoPhotoSelector.dll",
+    "ApplicationDllSha256": "DD5BFB88219EC853DD328AA00743BE4519C0A259E19C2016467239948420BCD3",
+    "ApplicationProductVersion": "2.3.0+31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+    "CoreDllSha256": "82BE5ACCF6A42CD9D9CD9B4BD4DDFB45A9847E92837132E9AE818105B34CC3A9",
+    "CoreProductVersion": "2.3.0+31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+    "Manifest": "artifacts/releases/color-studio-rebuild-2026-10-05-r1/release-manifest.json",
+    "ManifestSha256": "DDFE6381BD897F2BF7A997144E71E143A10CD26ED2F3CA38A10D4BAA7A9BAE21"
+  },
+  "FileVerification": {
+    "ManifestFileCount": 287,
+    "ActualFileCount": 287,
+    "MissingCount": 0,
+    "LengthOrHashMismatchCount": 0,
+    "UnlistedFileCount": 0,
+    "DetailedLocalReport": "artifacts/computer-use-review-2026-10-07/identity/publish-file-verification.json"
+  },
+  "Verifier": {
+    "Path": "artifacts/color-studio-rebuild-2026-10-05/verify-runtime-export/bin/Release/net10.0-windows10.0.19041.0/VerifyRuntimeExport.dll",
+    "Sha256": "5DFFCF37A3F80D0793840AC5C28476A54889EEDDBAF18186F59CE498FAD2702B",
+    "ExpectedSha256": "5DFFCF37A3F80D0793840AC5C28476A54889EEDDBAF18186F59CE498FAD2702B",
+    "HashMatch": true,
+    "ReadyForSavedSessionAndActualExport": true,
+    "SupportedEngine": "Stable V3",
+    "SupportedFormats": [
+      "JPEG8 quality95",
+      "PNG8/16",
+      "TIFF16"
+    ],
+    "CreateActualInThisReview": false,
+    "ReleaseRuntime": "NOT_EVALUATED"
+  },
+  "HistoricalTestEvidence": [
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/core-full-final-upright.trx",
+      "ExecutedAt": "2026-10-05T12:45:44.7520243+08:00",
+      "Passed": 1572,
+      "Failed": 0,
+      "Skipped": 6,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/studio-wpf-full-final.trx",
+      "ExecutedAt": "2026-10-05T12:47:29.9118744+08:00",
+      "Passed": 1486,
+      "Failed": 0,
+      "Skipped": 12,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/studio-p2-verified.trx",
+      "ExecutedAt": "2026-10-05T13:05:44.0120655+08:00",
+      "Passed": 50,
+      "Failed": 0,
+      "Skipped": 1,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/core-final-effective-state.trx",
+      "ExecutedAt": "2026-10-05T12:55:23.0679385+08:00",
+      "Passed": 9,
+      "Failed": 0,
+      "Skipped": 0,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/real-raw-all-final.trx",
+      "ExecutedAt": "2026-10-05T12:14:15.2835994+08:00",
+      "Passed": 1,
+      "Failed": 0,
+      "Skipped": 0,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/real-jpeg-tools-final.trx",
+      "ExecutedAt": "2026-10-05T12:10:35.7901732+08:00",
+      "Passed": 1,
+      "Failed": 0,
+      "Skipped": 0,
+      "ReexecutedThisReview": false
+    },
+    {
+      "Path": "artifacts/color-studio-rebuild-2026-10-05/tests/spatial-final-gate.trx",
+      "ExecutedAt": "2026-10-05T12:28:20.0499742+08:00",
+      "Passed": 34,
+      "Failed": 0,
+      "Skipped": 0,
+      "ReexecutedThisReview": false
+    }
+  ],
+  "TestScopeNote": "完整Core/WPF早于最后4项P2；后续Core9与WPF50分别补证。真实语料/空间量测仍为2026-10-05程序化证据，不重命名成本轮实机结果。",
+  "Readback": {
+    "AgFile": "仓库未找到AGENTS.md；遵守当前用户与父任务规则",
+    "Files": [
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioEffectiveState.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawExport.cs",
+      "artifacts/color-studio-rebuild-2026-10-05/verify-runtime-export/Program.cs",
+      "docs/evidence/color-studio-rebuild-2026-10-05/TEST_RESULTS.md",
+      "docs/evidence/color-studio-rebuild-2026-10-05/RAW_PREVIEW_COORDINATE_CONTRACT.md",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.DetailPreview.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs"
+    ]
+  },
+  "IdentityCheck": "MATCH",
+  "ReleaseRuntime": "PARTIAL_WITH_RECORDED_FAILS",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "UserVisualReview": "NOT_APPROVED"
+}

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "verifierSha256": "5DFFCF37A3F80D0793840AC5C28476A54889EEDDBAF18186F59CE498FAD2702B",
+  "notAReplacementForUiExport": true,
+  "reports": [
+    {
+      "id": "s02-ui-png",
+      "sourceSha256": "1BFD875AA5799F0F4167A4943287F14FDD9E61D77DEE52A8AAE53156226987F8",
+      "actual": {
+        "sha256": "D382AE8EAFF833ADC35302CC3384D0BCA55743BDD5793B63F35185F6FB754BC0",
+        "PixelWidth": 1600,
+        "PixelHeight": 1000,
+        "pixelFormat": "Bgra32",
+        "orientation": 1,
+        "srgbIccMatch": true
+      },
+      "comparison": {
+        "dimensionsMatch": true,
+        "bitDepthMatch": true,
+        "requiredBits": 8,
+        "actualBits": 8,
+        "codecMatch": true,
+        "units": "byte 0..255",
+        "method": "Lossless expected complete-stack pixels including alpha",
+        "metrics": {
+          "Mean": 0,
+          "Max": 0,
+          "DifferentChannels": 0,
+          "ChannelCount": 6400000
+        },
+        "jpegLossyDeltaFromProcessing": null
+      },
+      "sessionSha256": "A5125F626EF945E5C2E01AB1562A560B2D7B98B7D648C2481D67FB3627487743",
+      "frozenStateSha256": "A0C85794B6CE236ED7D921C188154B1221557E7493E9566C95934C32C76D8D40",
+      "sourceUnchanged": true,
+      "sessionUnchanged": true,
+      "smokeCreatedActual": false,
+      "programmaticStatus": "PASS_PROGRAMMATIC_EXPORT_COMPARISON",
+      "programmaticReleaseRuntime": "NOT_EVALUATED",
+      "userVisualReview": "NOT_APPROVED"
+    },
+    {
+      "id": "s02-ui-jpeg",
+      "sourceSha256": "1BFD875AA5799F0F4167A4943287F14FDD9E61D77DEE52A8AAE53156226987F8",
+      "actual": {
+        "sha256": "B921E34378291F05469CF0F6E2106B8D04F7FA22780804BCB0860151295CC86C",
+        "PixelWidth": 1600,
+        "PixelHeight": 1000,
+        "pixelFormat": "Bgr24",
+        "orientation": 1,
+        "srgbIccMatch": true
+      },
+      "comparison": {
+        "dimensionsMatch": true,
+        "bitDepthMatch": true,
+        "requiredBits": 8,
+        "actualBits": 8,
+        "codecMatch": true,
+        "units": "byte 0..255",
+        "method": "Independent WIC JPEG quality95 decoded oracle, explicit white alpha composite",
+        "metrics": {
+          "Mean": 0,
+          "Max": 0,
+          "DifferentChannels": 0,
+          "ChannelCount": 6400000
+        },
+        "jpegLossyDeltaFromProcessing": {
+          "Mean": 0.3506090625,
+          "Max": 136,
+          "DifferentChannels": 1460199,
+          "ChannelCount": 6400000
+        }
+      },
+      "sessionSha256": "A5125F626EF945E5C2E01AB1562A560B2D7B98B7D648C2481D67FB3627487743",
+      "frozenStateSha256": "A0C85794B6CE236ED7D921C188154B1221557E7493E9566C95934C32C76D8D40",
+      "sourceUnchanged": true,
+      "sessionUnchanged": true,
+      "smokeCreatedActual": false,
+      "programmaticStatus": "PASS_PROGRAMMATIC_EXPORT_COMPARISON",
+      "programmaticReleaseRuntime": "NOT_EVALUATED",
+      "userVisualReview": "NOT_APPROVED"
+    },
+    {
+      "id": "s02-ui-tiff",
+      "sourceSha256": "1BFD875AA5799F0F4167A4943287F14FDD9E61D77DEE52A8AAE53156226987F8",
+      "actual": {
+        "sha256": "F44F0EEA65E69D2AC4494C39B44FBE3171A8A6C4F9E6F2EF44826E1A3CD141AB",
+        "PixelWidth": 1600,
+        "PixelHeight": 1000,
+        "pixelFormat": "Rgba64",
+        "orientation": 1,
+        "srgbIccMatch": true
+      },
+      "comparison": {
+        "dimensionsMatch": true,
+        "bitDepthMatch": true,
+        "requiredBits": 16,
+        "actualBits": 16,
+        "codecMatch": true,
+        "units": "ushort 0..65535",
+        "method": "Lossless expected complete-stack pixels including alpha",
+        "metrics": {
+          "Mean": 0,
+          "Max": 0,
+          "DifferentChannels": 0,
+          "ChannelCount": 6400000
+        },
+        "jpegLossyDeltaFromProcessing": null
+      },
+      "sessionSha256": "A5125F626EF945E5C2E01AB1562A560B2D7B98B7D648C2481D67FB3627487743",
+      "frozenStateSha256": "A0C85794B6CE236ED7D921C188154B1221557E7493E9566C95934C32C76D8D40",
+      "sourceUnchanged": true,
+      "sessionUnchanged": true,
+      "smokeCreatedActual": false,
+      "programmaticStatus": "PASS_PROGRAMMATIC_EXPORT_COMPARISON",
+      "programmaticReleaseRuntime": "NOT_EVALUATED",
+      "userVisualReview": "NOT_APPROVED"
+    },
+    {
+      "id": "s06-ui-alpha",
+      "sourceSha256": "592A8AD27D646D4780B04758B95676BD2AA325AFA19DB2E42B69A409DFC449E4",
+      "actual": {
+        "sha256": "BA23F42654324F8A0294D9073BB35AFD0473E84D5B00792733E433974AF76D55",
+        "PixelWidth": 1000,
+        "PixelHeight": 1000,
+        "pixelFormat": "Bgra32",
+        "orientation": 1,
+        "srgbIccMatch": true
+      },
+      "comparison": {
+        "dimensionsMatch": true,
+        "bitDepthMatch": true,
+        "requiredBits": 8,
+        "actualBits": 8,
+        "codecMatch": true,
+        "units": "byte 0..255",
+        "method": "Lossless expected complete-stack pixels including alpha",
+        "metrics": {
+          "Mean": 0,
+          "Max": 0,
+          "DifferentChannels": 0,
+          "ChannelCount": 4000000
+        },
+        "jpegLossyDeltaFromProcessing": null
+      },
+      "sessionSha256": "6BC01B04CD1CE0D75FD8769E53D76F5070361C332AF6252F0E04FD2C1A609688",
+      "frozenStateSha256": "28D2F87BE5BED8E7CD0266735345E190B85D1E7A16E3DE8B2C9E044FF8478B21",
+      "sourceUnchanged": true,
+      "sessionUnchanged": true,
+      "smokeCreatedActual": false,
+      "programmaticStatus": "PASS_PROGRAMMATIC_EXPORT_COMPARISON",
+      "programmaticReleaseRuntime": "NOT_EVALUATED",
+      "userVisualReview": "NOT_APPROVED"
+    },
+    {
+      "id": "s07-ui-raw-tiff",
+      "sourceSha256": "558DA0141BBF67D153D3DA5523EBBD2CC4C304FF239061F94F97FE2BC5D4C6F3",
+      "actual": {
+        "sha256": "042EC7C4A540D5795DE12898E5F329214FBE6AA182231D2DEACEA04BE37BF72F",
+        "PixelWidth": 7028,
+        "PixelHeight": 4688,
+        "pixelFormat": "Rgb48",
+        "orientation": 1,
+        "srgbIccMatch": true
+      },
+      "comparison": {
+        "dimensionsMatch": true,
+        "bitDepthMatch": true,
+        "requiredBits": 16,
+        "actualBits": 16,
+        "codecMatch": true,
+        "units": "ushort 0..65535",
+        "method": "Lossless expected complete-stack pixels including alpha",
+        "metrics": {
+          "Mean": 0,
+          "Max": 0,
+          "DifferentChannels": 0,
+          "ChannelCount": 131789056
+        },
+        "jpegLossyDeltaFromProcessing": null
+      },
+      "sessionSha256": "E2E73DA34CA7A294A89EAF2159FB007673D809D509EF534D5F1FCDB4B09C8971",
+      "frozenStateSha256": "CF588AA0F5B701B8BF0ABA02E293FB320C3D24BAC0CDA654587D217DBC725B4C",
+      "sourceUnchanged": true,
+      "sessionUnchanged": true,
+      "smokeCreatedActual": false,
+      "programmaticStatus": "PASS_PROGRAMMATIC_EXPORT_COMPARISON",
+      "programmaticReleaseRuntime": "NOT_EVALUATED",
+      "userVisualReview": "NOT_APPROVED"
+    }
+  ],
+  "overlayIsolation": {
+    "normalAndOverlayOutputSha256": "BA23F42654324F8A0294D9073BB35AFD0473E84D5B00792733E433974AF76D55",
+    "sameBytes": true
+  },
+  "persistence": {
+    "sourceFileSha256": "9254BAB8F9E9A73A30A4AB2C9C95CB8E8D1B30DBE134CEAAA8903448061483CB",
+    "reopenedFileSha256": "9254BAB8F9E9A73A30A4AB2C9C95CB8E8D1B30DBE134CEAAA8903448061483CB",
+    "normalizedJsonEqual": true,
+    "targets": 10,
+    "selected": 2,
+    "colorLabelFilter": "红",
+    "ratings": [
+      5,
+      5,
+      5
+    ],
+    "userVisualReview": "NOT_APPROVED"
+  }
+}
