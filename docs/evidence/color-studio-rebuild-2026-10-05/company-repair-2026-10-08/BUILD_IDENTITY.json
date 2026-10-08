@@ -1,0 +1,57 @@
+{
+  "Status": "NOT_READY_FOR_USER_RETEST",
+  "VisualApproved": false,
+  "UserVerified": false,
+  "CompanyStartHead": "8f9d30310af1b0c8a66a933accc48459328b12e6",
+  "SyncedHead": "a9f61bab4d6fa048f6ed9412aa4341db7c3e61fc",
+  "HomeR1SourceHead": "31d3ac3ae56d6ccd1d9b4c608bf522dbb735d591",
+  "ReleaseSourceHead": "1a9a53913665490298e6de1b5656a33d0efc934b",
+  "ProductionProject": "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+  "PublishDirectory": "artifacts/releases/company-repair-2026-10-08/publish/win-x64",
+  "ProductVersion": "2.3.0+1a9a53913665490298e6de1b5656a33d0efc934b",
+  "FileVersion": "2.3.0.0",
+  "SDK": "10.0.302",
+  "Runtime": "10.0.10",
+  "Target": "net10.0-windows10.0.19041.0 / win-x64 self-contained",
+  "GlobalJsonChanged": false,
+  "InstallerCreated": false,
+  "AcceptanceArguments": [],
+  "Executable": {
+    "Path": "KitaoPhotoSelector.exe",
+    "Bytes": 179200,
+    "SHA256": "AB2AD1AE2DF42DC137C5025AF7708666AC8A631A99A312F799B6840AEE13BC32"
+  },
+  "Assembly": {
+    "Path": "KitaoPhotoSelector.dll",
+    "Bytes": 2686976,
+    "SHA256": "661971A05701EB38E69400EBF5C89EE725C0DDE63EBCDE51EB8336E9CC3EA581"
+  },
+  "Manifest": "RELEASE_MANIFEST.json",
+  "ManifestFiles": 287,
+  "AppManifestSha256": "910B8FCD4A83347C6CE791863D52A18E620AEAFE9696A68BEF76401D0CE39BE1",
+  "Startup": {
+    "ProcessId": 45896,
+    "WindowHandle": 18154890,
+    "Result": "STARTUP_OK",
+    "ExceptionObserved": false,
+    "ActualDpi": 144,
+    "PhysicalPixels": [
+      2400,
+      1380
+    ],
+    "DIP": [
+      1600,
+      920
+    ],
+    "RuntimeRoot": "artifacts/company-repair-2026-10-08/repaired-runtime"
+  },
+  "Launcher": "tools/Start-CompanyStudioReview.ps1",
+  "Shortcut": {
+    "NewDedicatedReviewShortcutCreated": true,
+    "Target": "PowerShell -NoProfile -NonInteractive -WindowStyle Hidden -File tools/Start-CompanyStudioReview.ps1 (absolute local path)",
+    "ResolvedTargetVerified": true,
+    "NewShortcutClickVerified": false,
+    "ExistingUserShortcut": "Historical test installation; retained unchanged, NOT the new Release"
+  },
+  "PublicRemote": true
+}

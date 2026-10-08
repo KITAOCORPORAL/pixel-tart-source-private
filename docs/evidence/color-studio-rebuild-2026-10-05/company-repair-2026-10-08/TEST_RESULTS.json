@@ -1,0 +1,287 @@
+{
+  "RawTrxLocation": "artifacts/company-repair-2026-10-08/tests (local only, contains machine paths)",
+  "RuntimeAcceptance": false,
+  "Runs": [
+    {
+      "File": "company-release-source-wpf-full.trx",
+      "SHA256": "B51CB3AFBE6FF0AD4471AE1EEC35FEF1ECFA3C463E8AF42DB4CA4B6190CFD9EF",
+      "Total": 1510,
+      "Passed": 1499,
+      "Failed": 0,
+      "Skipped": 11,
+      "SkippedTests": [
+        "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+        "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "ProductionApp_AllRoutes_RenderReviewInventory",
+        "BaselineGuard_RequiresExplicitApproval",
+        "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "CompanyRealRawProductAcceptanceGate"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-baseline-core.trx",
+      "SHA256": "D2C6560E2CBB3BE13B3C553374C36E53274A053C21A698C7C23C76D444E4C9BF",
+      "Total": 80,
+      "Passed": 78,
+      "Failed": 0,
+      "Skipped": 2,
+      "SkippedTests": [
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-baseline-studio.trx",
+      "SHA256": "88461C7F5FEF9CABFDA76FAFA50F022651CC666C96974C5BF746E31C172F319A",
+      "Total": 100,
+      "Passed": 98,
+      "Failed": 0,
+      "Skipped": 2,
+      "SkippedTests": [
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-release-source-regression.trx",
+      "SHA256": "F8D41980247D1749C2B5ECE6EEFB9A919C3A1D525A0D10B885C3F597424E91CC",
+      "Total": 126,
+      "Passed": 123,
+      "Failed": 0,
+      "Skipped": 3,
+      "SkippedTests": [
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-cancel.trx",
+      "SHA256": "001DB7E71F31EA610F5AE0AA32A50432D10DB3CF329EE96083C173916388DF3C",
+      "Total": 7,
+      "Passed": 7,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-core-full.trx",
+      "SHA256": "C658F625A1F56277230D439221E51E25A072678EA7737C73C182B9CCEE5ADCDE",
+      "Total": 1579,
+      "Passed": 1573,
+      "Failed": 0,
+      "Skipped": 6,
+      "SkippedTests": [
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "CpuGpuParityOnSyntheticScene"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-core.trx",
+      "SHA256": "DD4725AE504837CB86053FC352AD7CD733423AC25ACD3C4300EB0809CE7AC219",
+      "Total": 80,
+      "Passed": 78,
+      "Failed": 0,
+      "Skipped": 2,
+      "SkippedTests": [
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-final-layout.trx",
+      "SHA256": "73F59613FDB2B459C92942C80A8A309DCF5C2630E095A83A5B0D9466DC2E695C",
+      "Total": 12,
+      "Passed": 12,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-layout-locale-2.trx",
+      "SHA256": "BA0F509363351AB6D3F80421A8D2CBDF76A0A8395C567E32D50232FF42CE7762",
+      "Total": 10,
+      "Passed": 10,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-layout-locale.trx",
+      "SHA256": "4E00B44C348E82FF4DD43A95AAFC881728A553A458C5832EE48A4436B59CE4EB",
+      "Total": 10,
+      "Passed": 8,
+      "Failed": 2,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": [
+        "ExpandedCloudUsesSameViewportInsideNonOverlappingColumns",
+        "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage"
+      ]
+    },
+    {
+      "File": "company-repair-modular.trx",
+      "SHA256": "D65281A43CCFD7CE14E2236630F96D1121501CA3EFA3CA5E95BBF32E4674262D",
+      "Total": 14,
+      "Passed": 14,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-regression-1.trx",
+      "SHA256": "B95C5439DF949DA89FF3153125FB6168FB226C39BD8347366282947672352E67",
+      "Total": 121,
+      "Passed": 118,
+      "Failed": 0,
+      "Skipped": 3,
+      "SkippedTests": [
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-regression-2.trx",
+      "SHA256": "B42C02C72BBAC85BE2582187874AE3F0548714917B3DBC6A8650609ABB94D05C",
+      "Total": 124,
+      "Passed": 121,
+      "Failed": 0,
+      "Skipped": 3,
+      "SkippedTests": [
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-regression-3.trx",
+      "SHA256": "C29D301255B6D804995B2FFE235896F6E247026BF68AC85ACCBE8701A4B3818E",
+      "Total": 126,
+      "Passed": 123,
+      "Failed": 0,
+      "Skipped": 3,
+      "SkippedTests": [
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-target-draft.trx",
+      "SHA256": "DBB195CCD7C0C18367AAF30AB2292A6874786565727F45068769FBC61B4363BC",
+      "Total": 11,
+      "Passed": 11,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "company-repair-wpf-full.trx",
+      "SHA256": "378C4FB718769D376900D60970B5B7F92557D89395BF5759E25CA112BEF6E3BA",
+      "Total": 1510,
+      "Passed": 1499,
+      "Failed": 0,
+      "Skipped": 11,
+      "SkippedTests": [
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+        "ProductionApp_AllRoutes_RenderReviewInventory",
+        "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "BaselineGuard_RequiresExplicitApproval",
+        "CompanyRealRawProductAcceptanceGate"
+      ],
+      "FailedTests": []
+    },
+    {
+      "File": "cu01-after.trx",
+      "SHA256": "407EB624359ED6BA282A627A2B22AD9AB62C817A1886C1849D5B5A6B076AA5EC",
+      "Total": 2,
+      "Passed": 2,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "cu01-before.trx",
+      "SHA256": "78CCBADAB50B142480F65807596DD3A24FF790B37100D07B1D2B2FDFF56A1055",
+      "Total": 1,
+      "Passed": 0,
+      "Failed": 1,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": [
+        "EditingRailFitsItsActualColumnIncludingInspectorStyleMinimum"
+      ]
+    },
+    {
+      "File": "cu02-cu03-after.trx",
+      "SHA256": "05156F98C3A188462A9035B7FCEE4E3AFAD4548231DC2BCB28C83F5777D5D808",
+      "Total": 10,
+      "Passed": 10,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "cu02-cu03-freeze.trx",
+      "SHA256": "26C7172D8F2964290403AB54D70F81AA8910A0F555E1DFBE2CF31E9DFDD61DAB",
+      "Total": 4,
+      "Passed": 4,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "cu04-strings.trx",
+      "SHA256": "71F420F4792580AD775E4B0C6B3AA1C24EE2D67723B7159C04710430E01FA12E",
+      "Total": 7,
+      "Passed": 7,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    },
+    {
+      "File": "cu05-after.trx",
+      "SHA256": "286034DC53A18DF04B064D86E2BD65DEE14DEC03CD14E73992E7F159E7983FA5",
+      "Total": 7,
+      "Passed": 7,
+      "Failed": 0,
+      "Skipped": 0,
+      "SkippedTests": [],
+      "FailedTests": []
+    }
+  ]
+}
