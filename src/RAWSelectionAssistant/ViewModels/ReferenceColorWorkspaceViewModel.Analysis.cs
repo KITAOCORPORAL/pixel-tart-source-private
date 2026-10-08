@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.ViewModels;
 
@@ -19,7 +20,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private OklabColor? _selectedInspectionColor;
     public Task AnalysisWork { get; private set; } = Task.CompletedTask;
     public VisualHistogram? PreviewHistogram { get => _previewHistogram; private set => SetProperty(ref _previewHistogram, value); }
-    public string AnalysisLabel { get => _analysisLabel; private set => SetProperty(ref _analysisLabel, value); }
+    public string AnalysisLabel
+    {
+        get => _colorSpaceSourceBuffer is { } buffer
+            ? StudioLocalizationService.Current.Format("AnalysisSource", StudioLocalizationService.Current[AnalysisIsOriginal ? "TargetOriginal" : "AdjustedPreview"], buffer.Width, buffer.Height)
+            : StudioLocalizationService.Current[_analysisLabel];
+        private set => SetProperty(ref _analysisLabel, value);
+    }
     public bool ShowAnalysisLuma { get => _showAnalysisLuma; set => SetProperty(ref _showAnalysisLuma, value); }
     public IReadOnlyList<ColorSpaceSamplingTier> SamplingTiers { get; } = Enum.GetValues<ColorSpaceSamplingTier>();
     public ColorSpaceSamplingTier SamplingTier { get => _samplingTier; set { if (SetProperty(ref _samplingTier, value)) SchedulePreviewAnalysis(); } }

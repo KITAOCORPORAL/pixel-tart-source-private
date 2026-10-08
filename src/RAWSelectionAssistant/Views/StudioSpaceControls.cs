@@ -29,7 +29,7 @@ public class StudioSpaceControls : StackPanel
         var slider = new Slider { Minimum = min, Maximum = max, SmallChange = (max - min) / 100, IsMoveToPointEnabled = true, Margin = new Thickness(0, 3, 0, 3) };
         slider.SetBinding(Slider.ValueProperty, new Binding(path) { Mode = BindingMode.TwoWay });
         slider.SetResourceReference(StyleProperty, "PixelTart.Slider");
-        System.Windows.Automation.AutomationProperties.SetName(slider, title); parent.Children.Add(slider);
+        StudioTextExtension.Bind(slider, System.Windows.Automation.AutomationProperties.NameProperty, Key(path)); parent.Children.Add(slider);
     }
     internal static void AddToggle(Panel parent, string title, string path)
     {

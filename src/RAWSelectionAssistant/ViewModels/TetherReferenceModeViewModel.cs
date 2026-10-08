@@ -64,6 +64,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private ColorAdjustmentStack? _persistedStack;
     private ColorStudioSchemeV2? _selectedColorScheme;
     private ColorAdjustmentStack? _editTransactionBefore;
+    private ColorAdjustmentStack[] _transactionRedo = [];
+    private Guid?[] _transactionRedoSelections = [];
     private Guid? _editTransactionSelection;
     private bool _syncingStack;
     private readonly AdobeXmpPresetStore _xmpStore;
@@ -157,8 +159,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (loadedStack.Nodes.Count == 0) CopyFilm(loadedFilm);
         _selectedAdjustmentNodeId = AdjustmentStack.Nodes.FirstOrDefault()?.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
         if (switchingHistory) RestoreTargetHistory(targetIdentity!.Value);
+        OnPropertyChanged(nameof(EditTargetIdentity));
         if (render) _ = DebouncedRenderAsync();
     }
+    internal Guid? EditTargetIdentity => _historyTarget;
     public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null)
     {
         stack = ColorStudioEffectiveState.Resolve(snapshot, stack, film);
@@ -426,6 +430,16 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         if (_editTransactionBefore is not null || IsPresetPreviewing) return;
         _editTransactionBefore = CloneHistoryStack(EffectiveEditingStack()); _editTransactionSelection = _selectedAdjustmentNodeId;
+        _transactionRedo = _redoStacks.ToArray(); _transactionRedoSelections = _redoSelections.ToArray();
+    }
+    internal bool CancelEditTransaction()
+    {
+        if (_editTransactionBefore is not { } before) return false;
+        _editTransactionBefore = null; _selectedAdjustmentNodeId = _editTransactionSelection; _editTransactionSelection = null;
+        _redoStacks.Clear(); foreach (var stack in _transactionRedo.Reverse()) _redoStacks.Push(stack);
+        _redoSelections.Clear(); foreach (var selection in _transactionRedoSelections.Reverse()) _redoSelections.Push(selection);
+        _transactionRedo = []; _transactionRedoSelections = [];
+        AdjustmentStack = before; OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); _ = RenderAsync(); return true;
     }
     public void CommitEditTransaction()
     {
@@ -433,6 +447,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _editTransactionBefore = null;
         if (!before.Nodes.SequenceEqual(AdjustmentStack.Nodes)) { _undoStacks.Push(before); _undoSelections.Push(_editTransactionSelection); }
         _editTransactionSelection = null;
+        _transactionRedo = []; _transactionRedoSelections = [];
         RaiseAdjustmentCommands();
     }
     private void AddAdjustmentNode(string type)
@@ -701,7 +716,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private async Task ImportAdobeXmpAsync()
     {
         if (_dialogs is null) return;
-        var paths = _dialogs.ChooseFiles("导入 Adobe XMP 预设", "Adobe XMP|*.xmp|所有文件|*.*", true);
+        var paths = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入 Adobe XMP 预设"], "Adobe XMP|*.xmp|" + StudioLocalizationService.Current["所有文件"] + "|*.*", true);
         if (paths.Count == 0) return;
         try
         {
@@ -773,7 +788,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private async Task EnableAndRenderAsync() { if (!Enabled) { Enabled = true; return; } await RenderAsync(); }
     private async Task ImportExternalReferenceAsync()
     {
-        if (_dialogs is null) return; var path = _dialogs.ChooseFiles("导入参考图（仅关联原位置）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault(); if (path is null) return;
+        if (_dialogs is null) return; var path = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入参考图（仅关联原位置）"], StudioLocalizationService.Current["图片"] + "|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault(); if (path is null) return;
         BeginBusy();
         try
         {
@@ -860,7 +875,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var source = _source; var look = SelectedLook; if (source is null || look is null || _dialogs is null) return;
         var safeName = string.Concat(look.Name.Select(character => Path.GetInvalidFileNameChars().Contains(character) ? '_' : character));
-        var path = _dialogs.ChooseSaveFile("导出 3D LUT", "Cube LUT|*.cube", ".cube", $"{safeName}_65.cube"); if (path is null) return;
+        var path = _dialogs.ChooseSaveFile(StudioLocalizationService.Current["导出 3D LUT"], "Cube LUT|*.cube", ".cube", $"{safeName}_65.cube"); if (path is null) return;
         BeginBusy();
         try
         {

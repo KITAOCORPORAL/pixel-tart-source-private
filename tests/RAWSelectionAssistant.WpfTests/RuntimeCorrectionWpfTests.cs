@@ -168,7 +168,9 @@ public sealed class RuntimeCorrectionWpfTests
         Assert.IsEmpty(workspace.HighlightedPixels);
         Assert.AreSame(source, workspace.Editor.SourceImage);
         Assert.AreSame(stack, workspace.Editor.AdjustmentStack);
-        Assert.IsFalse(view.TryClearTransientInspection());
+        Assert.IsTrue(view.TryClearTransientInspection(), "An idle Escape remains inside Studio; navigation uses the explicit Back action.");
+        Assert.AreSame(source, workspace.Editor.SourceImage);
+        Assert.AreSame(stack, workspace.Editor.AdjustmentStack);
     });
 
     [TestMethod]

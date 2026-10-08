@@ -13,6 +13,7 @@ namespace RAWSelectionAssistant.Views;
 public sealed class StudioCurveEditor : StackPanel
 {
     private readonly CurveSurface _surface;
+    internal bool CancelPointerGesture() => _surface.CancelPointerGesture();
     public StudioCurveEditor()
     {
         var channels = new ComboBox { ItemsSource = new[] { "RGB", "R", "G", "B" }, SelectedIndex = 0, Margin = new Thickness(0, 6, 0, 6) };
@@ -40,7 +41,14 @@ public sealed class StudioCurveEditor : StackPanel
             Unloaded += (_, _) => { if (_editor is not null) _editor.PropertyChanged -= Changed; _editor = null; PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, LanguageChanged, nameof(StudioLocalizationService.Language)); };
             MouseLeftButtonDown += Down; MouseMove += Move; MouseLeftButtonUp += (_, _) => Finish();
             LostMouseCapture += (_, _) => { _editor?.CommitEditTransaction(); _before = null; };
-            KeyDown += (_, e) => { if (e.Key == Key.Delete) { DeletePoint(); e.Handled = true; } else if (e.Key == Key.Escape && _before is { } before) { _editor?.SetCurvePoints(Channel, before); Finish(); e.Handled = true; } };
+            KeyDown += (_, e) => { if (e.Key == Key.Delete) { DeletePoint(); e.Handled = true; } else if (e.Key == Key.Escape && CancelPointerGesture()) e.Handled = true; };
+        }
+        internal bool CancelPointerGesture()
+        {
+            if (_before is null) return false;
+            _editor?.CancelEditTransaction(); _before = null;
+            if (IsMouseCaptured) ReleaseMouseCapture();
+            InvalidateVisual(); return true;
         }
         private void LanguageChanged(object? sender, PropertyChangedEventArgs e) => InvalidateVisual();
         private void Attach()

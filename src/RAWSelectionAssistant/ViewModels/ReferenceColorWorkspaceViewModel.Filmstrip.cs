@@ -2,10 +2,14 @@ using System.Collections.ObjectModel;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Utilities;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.ViewModels;
 
-public sealed record StudioFilterChoice(string Id, string Label);
+public sealed record StudioFilterChoice(string Id, string LabelKey)
+{
+    public string Label => StudioLocalizationService.Current[LabelKey];
+}
 
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
@@ -23,9 +27,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public IEnumerable<ReferenceTargetItem> AllSelectedTargets => Targets.Where(item => item.IsSelected);
     public int HiddenSelectedTargetCount => AllSelectedTargets.Count(item => !VisibleTargets.Contains(item));
     public int VisibleTargetCount => VisibleTargets.Count;
-    public string FilmstripSummary => $"{VisibleTargets.Count} / {Targets.Count} 张 · 已选 {SelectedTargetCount}" + (HiddenSelectedTargetCount > 0 ? $" · 隐藏已选 {HiddenSelectedTargetCount}（不参与本次操作）" : "");
+    public string FilmstripSummary => StudioLocalizationService.Current.Format("FilmstripCounts", VisibleTargets.Count, Targets.Count, SelectedTargetCount, HiddenSelectedTargetCount);
     public IReadOnlyList<ReferenceTargetItem> SyncDestinationTargets => SelectedTargets.Where(item => !ReferenceEquals(item, ActiveTarget)).ToArray();
-    public string SyncSummary => ActiveTarget is null ? "先选择当前源照片" : $"源：{ActiveTarget.FileName} → {SyncDestinationTargets.Count} 张可见所选照片";
+    public string SyncSummary => ActiveTarget is null ? StudioLocalizationService.Current["SelectSyncSource"] : StudioLocalizationService.Current.Format("SyncSourceCounts", ActiveTarget.FileName, SyncDestinationTargets.Count);
     public RelayCommand SetSelectedRatingCommand { get; private set; } = null!;
     public RelayCommand SetSelectedColorLabelCommand { get; private set; } = null!;
     public RelayCommand ClearFilmstripFiltersCommand { get; private set; } = null!;

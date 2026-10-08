@@ -54,15 +54,28 @@ public partial class ReferenceColorWorkspaceView
         if (sender is not Button button || DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
         var menu = new ContextMenu { PlacementTarget = button };
         void Add(string title, System.Windows.Input.ICommand command, object? parameter = null)
-            => menu.Items.Add(new MenuItem { Header = title, Command = command, CommandParameter = parameter });
+        {
+            var item = new MenuItem { Command = command, CommandParameter = parameter };
+            StudioTextExtension.Bind(item, HeaderedItemsControl.HeaderProperty, title); menu.Items.Add(item);
+        }
         Add("复制当前调整", workspace.CopyAdjustmentsCommand); Add("应用已复制调整", workspace.ApplyAdjustmentsCommand);
         Add("撤销批量调整", workspace.UndoBatchAdjustmentCommand); Add("重做批量调整", workspace.RedoBatchAdjustmentCommand);
         menu.Items.Add(new Separator());
         var rating = new MenuItem { Header = "为所选评分" };
-        for (var i = 0; i <= 5; i++) rating.Items.Add(new MenuItem { Header = i == 0 ? "清除评分" : new string('★', i), Command = workspace.SetSelectedRatingCommand, CommandParameter = i });
+        StudioTextExtension.Bind(rating, HeaderedItemsControl.HeaderProperty, "为所选评分");
+        for (var i = 0; i <= 5; i++)
+        {
+            var item = new MenuItem { Header = new string('★', i), Command = workspace.SetSelectedRatingCommand, CommandParameter = i };
+            if (i == 0) StudioTextExtension.Bind(item, HeaderedItemsControl.HeaderProperty, "清除评分"); rating.Items.Add(item);
+        }
         menu.Items.Add(rating);
         var colors = new MenuItem { Header = "为所选设置色标" };
-        foreach (var color in new[] { "", "红", "橙", "黄", "绿", "蓝", "紫" }) colors.Items.Add(new MenuItem { Header = color == "" ? "清除色标" : color, Command = workspace.SetSelectedColorLabelCommand, CommandParameter = color });
+        StudioTextExtension.Bind(colors, HeaderedItemsControl.HeaderProperty, "为所选设置色标");
+        foreach (var color in new[] { "", "红", "橙", "黄", "绿", "蓝", "紫" })
+        {
+            var item = new MenuItem { Command = workspace.SetSelectedColorLabelCommand, CommandParameter = color };
+            StudioTextExtension.Bind(item, HeaderedItemsControl.HeaderProperty, color == "" ? "清除色标" : color + "色标"); colors.Items.Add(item);
+        }
         menu.Items.Add(colors); menu.Items.Add(new Separator());
         Add("快速导出所选", workspace.ExportSelectedCommand); Add("快速导出可见照片", workspace.ExportAllCommand);
         Add("通过发布配方导出…", workspace.PreparePublishingCommand); Add("重试失败导出", workspace.RetryFailedExportCommand);

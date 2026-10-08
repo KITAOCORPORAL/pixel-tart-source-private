@@ -16,6 +16,25 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class StudioLocalizationTests
 {
     [TestMethod]
+    public void ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage()
+    {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
+        while (directory is not null && !Directory.Exists(Path.Combine(directory.FullName, "src", "RAWSelectionAssistant"))) directory = directory.Parent;
+        Assert.IsNotNull(directory);
+        var source = File.ReadAllText(Path.Combine(directory.FullName, "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml"));
+        Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(source, "(?:Text|Content|Header|ToolTip|AutomationProperties.Name)=\"[^\"{]*[\\u4e00-\\u9fff][^\"{]*\""), "Product literals must use resources, not hard-coded Chinese.");
+        var keys = System.Text.RegularExpressions.Regex.Matches(source, @"\{views:StudioText (?:Key=')?([^}']+)'?\}").Select(m => m.Groups[1].Value).Distinct();
+        var service = new StudioLocalizationService(null);
+        foreach (var language in service.Languages)
+        {
+            foreach (var key in keys) Assert.IsTrue(service.HasTranslation(language.Code, key), $"Missing {language.Code}/{key}");
+            using var stream = typeof(StudioLocalizationService).Assembly.GetManifestResourceStream($"RAWSelectionAssistant.Resources.Studio.{language.Code}.json");
+            using var json = System.Text.Json.JsonDocument.Parse(stream!);
+            var names = json.RootElement.EnumerateObject().Select(p => p.Name).ToArray();
+            Assert.AreEqual(names.Length, names.Distinct().Count(), $"Duplicate keys in {language.Code}");
+        }
+    }
+    [TestMethod]
     public void StudioLanguagePersistsAndDoesNotChangeStableIdentifiers()
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-Locale-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);

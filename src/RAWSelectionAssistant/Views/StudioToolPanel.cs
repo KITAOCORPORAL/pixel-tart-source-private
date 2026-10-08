@@ -30,7 +30,7 @@ public sealed class StudioToolPanel : StackPanel
     public string NodeTypes { get => (string)GetValue(NodeTypesProperty); set => SetValue(NodeTypesProperty, value); }
     private TetherReferenceModeViewModel? _editor;
     private bool _refreshing;
-    private readonly List<(ColorStudioToolParameter Parameter, Slider Slider, TextBox Number)> _fields = [];
+    private readonly List<(ColorStudioToolParameter Parameter, Slider Slider, StudioNumericEditor Number)> _fields = [];
     private readonly List<(ColorStudioNodeType Type, CheckBox Toggle)> _toggles = [];
     private readonly Dictionary<string, bool> _expanded = [];
     public StudioToolPanel()
@@ -51,6 +51,8 @@ public sealed class StudioToolPanel : StackPanel
     private static void Rebuild(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((StudioToolPanel)d).Build();
     private void Changed(object? sender, PropertyChangedEventArgs e)
     {
+        if (e.PropertyName == nameof(TetherReferenceModeViewModel.EditTargetIdentity))
+            foreach (var field in _fields) field.Number.RestoreCommitted();
         if (e.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) Refresh();
     }
     private void Build()
@@ -86,11 +88,14 @@ public sealed class StudioToolPanel : StackPanel
                 foreach (var parameter in group)
                 {
                     var row = new DockPanel { Margin = new Thickness(0, 1, 0, 0) };
-                    var number = new TextBox { Width = 68, Height = 25, MinHeight = 25, Padding = new Thickness(4, 1, 4, 1), TextAlignment = TextAlignment.Right, Tag = parameter.Key };
+                    var number = new StudioNumericEditor(
+                        () => _editor?.ToolValue(parameter) ?? parameter.DefaultValue,
+                        value => _editor?.SetToolParameter(parameter, value), parameter.Minimum, parameter.Maximum, () => _editor?.EditTargetIdentity)
+                        { Width = 68, Height = 25, MinHeight = 25, Padding = new Thickness(4, 1, 4, 1), TextAlignment = TextAlignment.Right, Tag = parameter.Key };
                     Text(number, ToolTipProperty, "Enter 保存，Esc 取消", $"{parameter.Minimum}–{parameter.Maximum} {parameter.Unit} · {{0}}");
                     Text(number, System.Windows.Automation.AutomationProperties.NameProperty, parameter.Label);
                     DockPanel.SetDock(number, Dock.Right); row.Children.Add(number);
-                    var label = new TextBlock { VerticalAlignment = VerticalAlignment.Center };
+                    var label = new TextBlock { VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap };
                     Text(label, TextBlock.TextProperty, parameter.Label, "{0}" + (parameter.Unit.Length > 0 ? " · " + parameter.Unit : "")); row.Children.Add(label);
                     body.Children.Add(row);
                     var slider = new Slider { Minimum = parameter.Minimum, Maximum = parameter.Maximum, SmallChange = parameter.Step, LargeChange = parameter.Step * 10, Value = parameter.DefaultValue, Margin = new Thickness(0, 0, 0, 1), IsMoveToPointEnabled = true };
@@ -103,22 +108,6 @@ public sealed class StudioToolPanel : StackPanel
                         catch (ArgumentException error) { slider.ToolTip = error.Message; Refresh(); }
                     };
                     slider.MouseDoubleClick += (_, e) => { _editor?.SetToolParameter(parameter, parameter.DefaultValue); e.Handled = true; };
-                    number.KeyDown += (_, e) =>
-                    {
-                        if (e.Key == Key.Escape) { Refresh(); Keyboard.ClearFocus(); e.Handled = true; }
-                        else if (e.Key == Key.Enter) { CommitNumber(); Keyboard.ClearFocus(); e.Handled = true; }
-                    };
-                    number.LostKeyboardFocus += (_, _) => CommitNumber();
-                    void CommitNumber()
-                    {
-                        if (_refreshing) return;
-                        if (double.TryParse(number.Text, NumberStyles.Float, CultureInfo.CurrentCulture, out var value) && double.IsFinite(value))
-                        {
-                            try { _editor?.SetToolParameter(parameter, value); number.ClearValue(Border.BorderBrushProperty); Refresh(); }
-                            catch (ArgumentException error) { number.BorderBrush = Brushes.OrangeRed; number.ToolTip = error.Message; }
-                        }
-                        else { number.BorderBrush = Brushes.OrangeRed; number.ToolTip = StudioLocalizationService.Current["请输入有限数值；Esc 恢复当前参数。"]; }
-                    }
                     body.Children.Add(slider); _fields.Add((parameter, slider, number));
                 }
             }
@@ -152,7 +141,7 @@ public sealed class StudioToolPanel : StackPanel
             {
                 var value = _editor?.ToolValue(field.Parameter) ?? field.Parameter.DefaultValue;
                 field.Slider.Value = value;
-                if (!field.Number.IsKeyboardFocusWithin) field.Number.Text = value.ToString("0.###", CultureInfo.CurrentCulture);
+                field.Number.RefreshCommitted();
             }
             foreach (var (type, toggle) in _toggles) toggle.IsChecked = _editor?.ToolNode(type)?.Enabled != false;
         }

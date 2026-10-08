@@ -49,11 +49,16 @@ public sealed class ColorSpace3DViewport : FrameworkElement
     {
         Focusable = true; ClipToBounds = true;
         System.ComponentModel.PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current,OnLanguageChanged,"Language");
-        ToolTip = "OKLab D65 · sRGB 色域归一化球形显示（非线性）。L 沿竖轴，±a/±b 为颜色方向；真实样本与距离仍为 OKLab。拖动旋转，Shift 拖动平移，滚轮缩放；点击点或球面仅高亮预览。";
+        StudioTextExtension.Bind(this, ToolTipProperty, "CloudHelp");
         MouseLeftButtonDown += OnMouseDown; MouseMove += OnMouseMove; MouseLeftButtonUp += OnMouseUp; MouseWheel += OnMouseWheel;
         SizeChanged += (_, _) => { if (State?.IsFit == true) FitCamera(); else InvalidateVisual(); };
-        LostMouseCapture += (_, _) => { _pointer = null; InvalidateVisual(); };
-        PreviewKeyDown += (_, e) => { if (e.Key == Key.Escape && _pointer is not null) { _pointer = null; ReleaseMouseCapture(); e.Handled = true; } };
+        LostMouseCapture += (_, _) => { _pointer = null; _clickStart = null; InvalidateVisual(); };
+        PreviewKeyDown += (_, e) => { if (e.Key == Key.Escape && CancelPointerGesture()) e.Handled = true; };
+    }
+    internal bool CancelPointerGesture()
+    {
+        if (_pointer is null && _clickStart is null) return false;
+        _pointer = null; _clickStart = null; ReleaseMouseCapture(); InvalidateVisual(); return true;
     }
     public void SetModel(ColorSpaceVisualizationModel model) => State = ColorSpaceRendererContract.Create(model);
     private void OnLanguageChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e) { if(Dispatcher.CheckAccess())InvalidateVisual();else Dispatcher.BeginInvoke(InvalidateVisual); }

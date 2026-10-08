@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][int]$TargetProcessId, [Parameter(Mandatory=$true)][string]$OutputDirectory, [string]$Name='window', [long]$MainWindowHandle=0)
+param([Parameter(Mandatory=$true)][int]$TargetProcessId, [Parameter(Mandatory=$true)][string]$OutputDirectory, [string]$Name='window', [long]$MainWindowHandle=0, [switch]$IncludeNativeDialogs)
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
 Add-Type @'
@@ -10,6 +10,7 @@ public static class StudioWindowCapture {
  [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h,out Rect r);
  [DllImport("user32.dll",SetLastError=true)] public static extern bool PrintWindow(IntPtr h,IntPtr dc,uint flags);
  [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
+ [DllImport("user32.dll")] public static extern uint GetDpiForWindow(IntPtr h);
  [DllImport("user32.dll")] private static extern bool EnumWindows(EnumProc p,IntPtr l);
  [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr h,out uint p);
  [DllImport("user32.dll")] private static extern bool IsWindowVisible(IntPtr h);
@@ -46,7 +47,7 @@ foreach($handle in $windows) {
  if($width -le 1 -or $height -le 1){continue}
  # Process.MainWindowHandle may point at an active WPF popup. Ownership is stable.
  $owner=[StudioWindowCapture]::GetWindow($handle,4)
- if($handle -ne $mainHandle -and [StudioWindowCapture]::ClassName($handle) -notlike 'HwndWrapper*'){continue} # Ignore IME/tool windows, retain WPF popups without an owner.
+ if($handle -ne $mainHandle -and [StudioWindowCapture]::ClassName($handle) -notlike 'HwndWrapper*' -and -not ($IncludeNativeDialogs -and [StudioWindowCapture]::ClassName($handle) -eq '#32770')){continue} # Retain only app-owned WPF windows and opt-in native dialogs, never other processes.
  $file=if($handle -eq $mainHandle){"$Name.png"}else{"$Name-popup-$($handle.ToInt64()).png"}
  $bitmap=New-Object System.Drawing.Bitmap $width,$height
  $graphics=[System.Drawing.Graphics]::FromImage($bitmap)
@@ -55,6 +56,7 @@ foreach($handle in $windows) {
  finally{$graphics.ReleaseHdc($dc)}
  try{$bitmap.Save((Join-Path $OutputDirectory $file),[System.Drawing.Imaging.ImageFormat]::Png)}
  finally{$graphics.Dispose();$bitmap.Dispose()}
- $records+=@{file=$file;HWND=$handle.ToInt64();Width=$width;Height=$height;CaptureMethod='PrintWindow(PW_RENDERFULLCONTENT)';CursorAccess=$false;CapturedAtUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$TargetProcessId}
+ $dpi=[StudioWindowCapture]::GetDpiForWindow($handle)
+ $records+=@{file=$file;HWND=$handle.ToInt64();Width=$width;Height=$height;ActualDpi=$dpi;WidthDip=($width*96.0/$dpi);HeightDip=($height*96.0/$dpi);CaptureMethod='PrintWindow(PW_RENDERFULLCONTENT)';CursorAccess=$false;CapturedAtUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$TargetProcessId}
 }
 $records | ConvertTo-Json -Depth 4

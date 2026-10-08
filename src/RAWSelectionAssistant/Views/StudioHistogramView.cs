@@ -25,7 +25,7 @@ public sealed class StudioHistogramView : Grid
         _drawing.MouseMove += (_, e) => { var x=e.GetPosition(_drawing).X; UpdateReadout(Math.Clamp((int)Math.Round(x/Math.Max(1,_drawing.ActualWidth)*255),0,255)); };
         _drawing.MouseLeave += (_, _) => UpdateReadout(null);
         System.ComponentModel.PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnLanguageChanged,"Language");
-        ToolTip = "RGB 横轴为 sRGB 编码值 0–255；亮度为线性 sRGB Y 0–1。纵轴为可见代理像素数，透明像素不计。";
+        StudioTextExtension.Bind(this, ToolTipProperty, "HistogramHelp");
         UpdateReadout(null);
     }
     private static void Changed(DependencyObject target, DependencyPropertyChangedEventArgs _) { var view=(StudioHistogramView)target;view._drawing.Histogram=view.Histogram;view._drawing.Channel=view.Channel;view.UpdateReadout(null); }

@@ -560,13 +560,18 @@ public partial class MainWindow : Window
         }
         if (e.Key == Key.Escape)
         {
+            var studio = FindVisualChild<RAWSelectionAssistant.Views.ReferenceColorWorkspaceView>(RootGrid);
+            if (studio?.IsVisible == true && studio.TryCancelNumericDraft())
+            {
+                e.Handled = true;
+                return;
+            }
             if (TryCloseActiveInputPopup())
             {
                 e.Handled = true;
                 return;
             }
 
-            var studio = FindVisualChild<RAWSelectionAssistant.Views.ReferenceColorWorkspaceView>(RootGrid);
             if (studio?.IsVisible == true && studio.TryClearTransientInspection())
             {
                 e.Handled = true;

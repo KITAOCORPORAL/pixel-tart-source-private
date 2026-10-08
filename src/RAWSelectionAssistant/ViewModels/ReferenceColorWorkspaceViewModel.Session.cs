@@ -1,6 +1,7 @@
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Core.Utilities;
 using RAWSelectionAssistant.Utilities;
+using RAWSelectionAssistant.Services;
 
 namespace RAWSelectionAssistant.ViewModels;
 
@@ -16,16 +17,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         RedoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(true), _ => _batchRedo.Count > 0 && !IsLoading && !IsExporting);
         SaveSessionCommand = new AsyncRelayCommand(async _ =>
         {
-            var path = _dialogs.ChooseSaveFile("保存 Color Studio 工作文件", "Color Studio 工作文件|*.ptstudio.json", ".ptstudio.json", "色彩工作文件.ptstudio.json");
+            var path = _dialogs.ChooseSaveFile(StudioLocalizationService.Current["SessionSaveTitle"], StudioLocalizationService.Current["SessionFilter"] + "|*.ptstudio.json", ".ptstudio.json", "ColorStudio.ptstudio.json");
             if (path is null) return;
-            try { await SaveSessionAsync(path); } catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException) { StatusText = "保存未完成：" + error.Message; }
+            try { await SaveSessionAsync(path); } catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException) { StatusText = StudioLocalizationService.Current.Format("SessionSaveFailed", error.Message); }
         }, _ => Targets.Count > 0 && !IsLoading && !IsExporting);
         OpenSessionCommand = new AsyncRelayCommand(async _ =>
         {
-            var path = _dialogs.ChooseFiles("打开 Color Studio 工作文件", "Color Studio 工作文件|*.ptstudio.json|JSON|*.json", false).FirstOrDefault();
+            var path = _dialogs.ChooseFiles(StudioLocalizationService.Current["SessionOpenTitle"], StudioLocalizationService.Current["SessionFilter"] + "|*.ptstudio.json|JSON|*.json", false).FirstOrDefault();
             if (path is null) return;
-            if (Targets.Count > 0 && !_dialogs.Confirm("打开工作文件将替换当前批次。请先保存尚需保留的调整。源文件和素材库标记不会改变。", "打开工作文件")) return;
-            try { await LoadSessionAsync(path); } catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException) { StatusText = "工作文件未能打开：" + error.Message; }
+            if (Targets.Count > 0 && !_dialogs.Confirm(StudioLocalizationService.Current["SessionReplace"], StudioLocalizationService.Current["SessionOpenTitle"])) return;
+            try { await LoadSessionAsync(path); } catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException) { StatusText = StudioLocalizationService.Current.Format("SessionOpenFailed", error.Message); }
         }, _ => !IsLoading && !IsExporting);
     }
     public async Task SaveSessionAsync(string path, CancellationToken token = default)
@@ -36,7 +37,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter);
         await ColorStudioSessionStore.SaveAsync(path, document, token);
-        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "工作文件已保存；原片保持只读。";
+        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
@@ -67,7 +68,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if (active is not null) await ActivateTargetAsync(active);
         else { TargetImage = null; TargetName = "尚未选择待调色照片"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }
         RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));
-        StatusText = $"已恢复 {restored.Length} 张照片的工作文件" + (missing > 0 ? $"；{missing} 个源文件暂不可用，调整已保留。" : "。");
+        SetStatus("SessionRestored", restored.Length, missing);
         }
         finally { _sessionLoading = false; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability(); }
     }

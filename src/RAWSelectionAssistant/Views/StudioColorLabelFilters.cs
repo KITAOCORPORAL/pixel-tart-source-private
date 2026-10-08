@@ -19,10 +19,11 @@ public sealed class StudioColorLabelFilters : StackPanel
             var label = id == "All" ? "所有色标" : id == "None" ? "无色标" : id + "色标";
             var color = id is "All" or "None" ? Brushes.Transparent : new ReferenceTargetItem("filter") { ColorLabel = id }.ColorLabelBrush;
             var swatch = new Border { Width = 15, Height = 15, CornerRadius = new CornerRadius(3), Background = color, BorderThickness = new Thickness(1), BorderBrush = Brushes.Gray };
-            if (id == "All") swatch.Child = new TextBlock { Text = "全", FontSize = 10, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+            if (id == "All") swatch.Child = new TextBlock { Text = "∀", FontSize = 10, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
             var button = new Button { Content = swatch, Width = 24, Height = 27, Padding = new Thickness(2), ToolTip = label };
             button.SetResourceReference(StyleProperty, "PixelTart.Button.Ghost");
-            System.Windows.Automation.AutomationProperties.SetName(button, label);
+            StudioTextExtension.Bind(button, ToolTipProperty, label);
+            StudioTextExtension.Bind(button, System.Windows.Automation.AutomationProperties.NameProperty, label);
             button.Click += (_, _) => { if (_workspace is not null) _workspace.ColorLabelFilter = id; };
             Children.Add(button); _swatches.Add((id, swatch));
         }

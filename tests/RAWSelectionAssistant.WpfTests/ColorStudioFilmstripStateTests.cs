@@ -13,6 +13,37 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges() => RunSta(async () =>
+    {
+        var root = Path.Combine(Path.GetTempPath(), "PixelTart-FrozenSync-" + Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            using var workspace = new ReferenceColorWorkspaceViewModel(new Dialogs());
+            await workspace.LoadTargetAsync(SaveImage(root, "source.png", 100));
+            var source = workspace.ActiveTarget!; source.Rating = 5; workspace.Editor.Exposure = .75;
+            Assert.IsFalse(workspace.OpenAdjustmentCopyCommand.CanExecute(null), "Only the source selected means zero destinations.");
+            var target = new ReferenceTargetItem(SaveImage(root, "target.png", 120)) { IsSelected = true, Rating = 5 };
+            var hidden = new ReferenceTargetItem(SaveImage(root, "hidden.png", 140)) { IsSelected = true, Rating = 1 };
+            workspace.Targets.Add(target); workspace.Targets.Add(hidden); workspace.MinimumRating = 4;
+            workspace.OpenAdjustmentCopyCommand.Execute(null);
+            var summary = workspace.PendingSyncSummary;
+            Assert.AreEqual(1, workspace.PendingSyncTargetCount);
+            target.IsSelected = false; workspace.MinimumRating = 0;
+            await workspace.LoadTargetAsync(hidden.Path); workspace.Editor.Exposure = -1;
+            Assert.AreEqual(summary, workspace.PendingSyncSummary);
+            workspace.ConfirmAdjustmentCopyCommand.Execute(null);
+            Assert.AreEqual(.75, target.ColorAdjustmentStackSnapshot!.Nodes.Single(x => x.Type == ColorStudioNodeType.Develop).NumericParameters["exposure"]);
+            Assert.AreEqual(-1, workspace.Editor.Exposure, "The new current photograph must not become the sync source or destination.");
+            Assert.AreEqual(5, target.Rating);
+            await workspace.LoadTargetAsync(source.Path);
+            source.IsSelected = false; target.IsSelected = true; hidden.IsSelected = false;
+            workspace.OpenNodeSyncCommand.Execute(null);
+            Assert.AreEqual(1, workspace.PendingSyncTargetCount, "Source need not be selected.");
+            workspace.CancelNodeSyncCommand.Execute(null);
+        }
+        finally { Directory.Delete(root, true); }
+    });
+    [TestMethod]
     public Task FilteredSelectionRangeAndHiddenTargetsUseOneVisibleOrder() => RunSta(async () =>
     {
         using var workspace = new ReferenceColorWorkspaceViewModel(new Dialogs());

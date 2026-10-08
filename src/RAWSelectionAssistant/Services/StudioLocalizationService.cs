@@ -33,6 +33,7 @@ public sealed class StudioLocalizationService : INotifyPropertyChanged
         }
     }
     public string this[string key] => _catalogs[_language].TryGetValue(key,out var value) ? value : _catalogs["zh-CN"].TryGetValue(key,out var chinese) ? chinese : key;
+    public string Format(string key, params object?[] values) => string.Format(System.Globalization.CultureInfo.CurrentCulture, this[key], values);
     public bool SetLanguage(string language, bool persist = true)
     {
         if(!_catalogs.ContainsKey(language))return false;
