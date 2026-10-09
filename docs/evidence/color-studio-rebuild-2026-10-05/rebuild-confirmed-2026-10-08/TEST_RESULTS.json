@@ -1,0 +1,562 @@
+[
+  {
+    "File": "batch1-fixed.trx",
+    "SHA256": "E6263CBA94DEC8BAA9A1485713147B8B1857C5978167B9FDE214BE3016946D6E",
+    "Passed": 22,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:31:38.3594054+08:00",
+    "FinishedUtc": "2026-10-08T16:31:45.1626524+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "batch2-final.trx",
+    "SHA256": "92C4C6EBE2E9E642BD382A9BA5873AF6A7399A336334A098E11EF1C613AB71F1",
+    "Passed": 26,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:37:39.4466802+08:00",
+    "FinishedUtc": "2026-10-08T16:37:46.9159501+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "controls-batch.trx",
+    "SHA256": "880FD6E631E5953C3AB59C6C84724A9B3CAD1B57E48E023238328308CD6047F7",
+    "Passed": 12,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:44:27.0760520+08:00",
+    "FinishedUtc": "2026-10-08T16:44:30.0077761+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "controls-final.trx",
+    "SHA256": "BEB2CB8944F4D2FCF3BA2B8551641A19634ADD4F8C764CA49BA844CA4159B3B7",
+    "Passed": 11,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:50:00.0463208+08:00",
+    "FinishedUtc": "2026-10-08T16:50:02.9124807+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "core-final.trx",
+    "SHA256": "29B67D7FCB221F39C2D98226356B38FC266699CBF5795CDEB5F33A598A4F1E52",
+    "Passed": 1578,
+    "Failed": 0,
+    "Skipped": 6,
+    "StartedUtc": "2026-10-08T17:48:58.2641546+08:00",
+    "FinishedUtc": "2026-10-08T17:49:45.8450725+08:00",
+    "Failures": [],
+    "Skips": [
+      "CpuGpuParityAcrossEightSceneClasses",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "CpuGpuParityOnSyntheticScene",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16"
+    ]
+  },
+  {
+    "File": "core-full.trx",
+    "SHA256": "00251E74BC61784756E8424EC11DE4C373E67215F81CD2C65E2FFC2EED8A0772",
+    "Passed": 1574,
+    "Failed": 0,
+    "Skipped": 6,
+    "StartedUtc": "2026-10-08T17:31:44.9148439+08:00",
+    "FinishedUtc": "2026-10-08T17:32:40.5820723+08:00",
+    "Failures": [],
+    "Skips": [
+      "CpuGpuParityAcrossEightSceneClasses",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "CpuGpuParityOnSyntheticScene",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+    ]
+  },
+  {
+    "File": "core-post-review-final.trx",
+    "SHA256": "DEB18912502CEFB7432706534CDD688FF81A7AED43AA6CCFEEAFF886E2A262C5",
+    "Passed": 1578,
+    "Failed": 0,
+    "Skipped": 6,
+    "StartedUtc": "2026-10-08T18:34:23.5442512+08:00",
+    "FinishedUtc": "2026-10-08T18:35:10.5346497+08:00",
+    "Failures": [],
+    "Skips": [
+      "CpuGpuParityAcrossEightSceneClasses",
+      "CpuGpuParityOnSyntheticScene",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested"
+    ]
+  },
+  {
+    "File": "corrected-match-fixed.trx",
+    "SHA256": "D418BB67DC7B9F9D643B893C38AE2C5A823866DD7A2A000E89EE334754E23560",
+    "Passed": 10,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:47:02.7027872+08:00",
+    "FinishedUtc": "2026-10-08T17:47:03.5246917+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "curve-baseline.trx",
+    "SHA256": "FCDDB1425F105044674ECA1A586C15E1CFCE9241BF398E81F8C5CDC4D55D39A2",
+    "Passed": 0,
+    "Failed": 1,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:33:28.3167169+08:00",
+    "FinishedUtc": "2026-10-08T16:33:30.1476070+08:00",
+    "Failures": [
+      "ContinuousCurveGesturePublishesProxyFramesBeforeReleaseAndSettlesAtLatestFullFrame"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "dpi-full.trx",
+    "SHA256": "AEB1ABCECEE26C93BE4AFC38F99E4B378D68EC07FB8EC30A61258A5FA2AC9C9A",
+    "Passed": 74,
+    "Failed": 17,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:52:47.0453048+08:00",
+    "FinishedUtc": "2026-10-08T17:52:47.7143213+08:00",
+    "Failures": [
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetViewer\")",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetContextMenu\")",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"MainWindow\")",
+      "CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetLibraryGrid\")",
+      "EachCurrentDpiHasEightPassingProductStates (200)",
+      "IsolatedSyntheticSourceImagesRemainByteIdentical",
+      "EachCurrentDpiHasEightPassingProductStates (150)",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"CalendarBookingAssets\")",
+      "EachCurrentDpiHasEightPassingProductStates (125)",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetRecentLibraries\")",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetInspirationCollection\")",
+      "EachCurrentDpiHasEightPassingProductStates (100)",
+      "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetFilter\")",
+      "PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation",
+      "CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation",
+      "DpiScreenshotsAndMetadataAreCompleteAndByteValid"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "dpi-with-generated-evidence.trx",
+    "SHA256": "A98D11E722E807267D97CF62957BB80616421A9EB7FF93808F0D49234BCDC67B",
+    "Passed": 91,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:33:47.5813279+08:00",
+    "FinishedUtc": "2026-10-08T18:33:48.2445167+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "export-parent-verified.trx",
+    "SHA256": "27EC67C4F69731DD3267F830EB5E8DEABB1A0CE2961F84B3F7C9DFC6E5E34BD0",
+    "Passed": 11,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:11:35.9929143+08:00",
+    "FinishedUtc": "2026-10-08T17:11:39.3705999+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "filmstrip-layout-retry.trx",
+    "SHA256": "8E38AD63C0F603600D34DEFB3BF548392D809F30134048C1D25DC9287637BF17",
+    "Passed": 6,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:41:41.0127316+08:00",
+    "FinishedUtc": "2026-10-08T17:41:42.7893140+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "filmstrip-regression-final.trx",
+    "SHA256": "75B8E38B8E690E0FE71E43AF9E1F9727B959B46BC1BE3D669A5EE8B13C6784CA",
+    "Passed": 8,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:05:04.1147418+08:00",
+    "FinishedUtc": "2026-10-08T18:05:06.0435154+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "filmstrip-regression-fixed.trx",
+    "SHA256": "D2DB5638955B6BB29B41C09202EC9407088ACF91CB8936F1E978B9527D16E75A",
+    "Passed": 7,
+    "Failed": 1,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:03:41.8867435+08:00",
+    "FinishedUtc": "2026-10-08T18:03:44.1050326+08:00",
+    "Failures": [
+      "FormalViews_NoUnclassifiedUnicodeActionIcons"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "final-source-regression.trx",
+    "SHA256": "D99B6C7636A6B2193167DBBFE9CF03A8E6D79A8EAFD1DDB0E84BF9CF742CCC29",
+    "Passed": 166,
+    "Failed": 0,
+    "Skipped": 6,
+    "StartedUtc": "2026-10-08T18:37:30.7273422+08:00",
+    "FinishedUtc": "2026-10-08T18:38:29.0952579+08:00",
+    "Failures": [],
+    "Skips": [
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+    ]
+  },
+  {
+    "File": "five-categories-fixed.trx",
+    "SHA256": "70D9ED1DA5D9942F1FC5A6A5BBC9841AEC0C2A4D6B191428B7526CBA9972089C",
+    "Passed": 16,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:55:42.6145706+08:00",
+    "FinishedUtc": "2026-10-08T16:55:49.4316125+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "five-categories.trx",
+    "SHA256": "A8403F987CBA611A5D6B317A9631C1B90E5D5A2DDDB1D0E00F57B326FBA2EB09",
+    "Passed": 15,
+    "Failed": 1,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:54:02.2127849+08:00",
+    "FinishedUtc": "2026-10-08T16:54:07.0120838+08:00",
+    "Failures": [
+      "ReferenceIsLeftAndTwoHistogramsStayAboveRightTools"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "graphical-controls.trx",
+    "SHA256": "EA9344C361161D9E5932B11B13EAEF20FAD859614D03C14E510A1BF75F831567",
+    "Passed": 9,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:06:11.5975427+08:00",
+    "FinishedUtc": "2026-10-08T17:06:14.3258618+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "interactive-fixed.trx",
+    "SHA256": "AB8EB24C2497648F6E36A1512E6F8CDA97015C581612CAC686CA2BB43B5D0DA3",
+    "Passed": 43,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:34:40.5843972+08:00",
+    "FinishedUtc": "2026-10-08T16:36:18.3196170+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "layout-panel.trx",
+    "SHA256": "036A2D7EBC23A8CD0F4D45D6A37230F0D3507D8E5C234F91E5BEEDBCB853F48C",
+    "Passed": 18,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:25:02.0999707+08:00",
+    "FinishedUtc": "2026-10-08T17:25:07.7220537+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "layout-store.trx",
+    "SHA256": "8160859FC5FA70EEF12A1F0F424FDFC84881F635394E25861A13415ADD133E56",
+    "Passed": 4,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:24:54.2668307+08:00",
+    "FinishedUtc": "2026-10-08T17:24:55.0567214+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "levels-graph.trx",
+    "SHA256": "6EBABC8D1387EFC3B1438C498B242E5F01318A2606B10C8816B6C71598DAE573",
+    "Passed": 9,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:08:33.5643339+08:00",
+    "FinishedUtc": "2026-10-08T17:08:38.4469154+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "locale-visual-final-expanded.trx",
+    "SHA256": "3C9EC26A668B2607423B2945BA7011CCD82EC746FDC1648D04A65EAEB5F3C031",
+    "Passed": 6,
+    "Failed": 1,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-09T09:35:44.4542722+08:00",
+    "FinishedUtc": "2026-10-09T09:35:46.2231348+08:00",
+    "Failures": [
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "locale-visual-final-settled.trx",
+    "SHA256": "B86B63D7DDC808F851D26B3657C6E2136070C8B3FF90496CFAB24803D23BC857",
+    "Passed": 7,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-09T09:36:02.2133140+08:00",
+    "FinishedUtc": "2026-10-09T09:36:12.0101635+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "locale-visual-final.trx",
+    "SHA256": "B8177166E77A76C65AB7C50F6B03634F6FEB9A407A04D0F2811EB795D34BA807",
+    "Passed": 7,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-09T09:34:09.9058358+08:00",
+    "FinishedUtc": "2026-10-09T09:34:19.7915043+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "modular-full.trx",
+    "SHA256": "15CF7F07B5D20896D74DF50476EBCBF1A357077C656FFD25A7274DC9EB6752BC",
+    "Passed": 14,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:35:32.0566067+08:00",
+    "FinishedUtc": "2026-10-08T17:35:33.5666521+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "modular-post-review.trx",
+    "SHA256": "FAEFE64BAAAE5C81DD62F5E767A4B267ACC24A16452446DF2C267C564EA8E533",
+    "Passed": 14,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:37:12.4741876+08:00",
+    "FinishedUtc": "2026-10-08T18:37:13.9283619+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "native-gate-final.trx",
+    "SHA256": "C560A2939BA2440B0672F9CA42A1671D7D6BFF77B2FC8CA0B82533DF84E2195C",
+    "Passed": 19,
+    "Failed": 0,
+    "Skipped": 1,
+    "StartedUtc": "2026-10-09T09:34:09.9543562+08:00",
+    "FinishedUtc": "2026-10-09T09:34:10.9051439+08:00",
+    "Failures": [],
+    "Skips": [
+      "RealReleaseAppStartsAndOpensLibrary"
+    ]
+  },
+  {
+    "File": "post-review-regression.trx",
+    "SHA256": "BEC8250435F080A11A1656863F80DB07BB976E8BA392EE2C7ED49BC4515F9826",
+    "Passed": 56,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:33:46.3890742+08:00",
+    "FinishedUtc": "2026-10-08T18:33:53.9350564+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "reference-baseline-corrected.trx",
+    "SHA256": "9A02D47751CC8853E24826FD63734F80A983E11D6EAD7DF581B0FD3AC154DDC2",
+    "Passed": 1,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:30:41.2939481+08:00",
+    "FinishedUtc": "2026-10-08T16:30:42.3753855+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "reference-final-recheck.trx",
+    "SHA256": "4F9DEE7C66B2807DA2AB769F10A3EFA2B41A238221ACB4F059CC1D44C7DEB755",
+    "Passed": 12,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T18:28:25.1576489+08:00",
+    "FinishedUtc": "2026-10-08T18:28:25.9912558+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "reference-histogram-baseline.trx",
+    "SHA256": "34D11E206D03A01CE503E5F54F85F83E823DE65965A2792CC94692B7D1D2C403",
+    "Passed": 0,
+    "Failed": 2,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:29:58.9522210+08:00",
+    "FinishedUtc": "2026-10-08T16:30:00.0845928+08:00",
+    "Failures": [
+      "HistogramRgbSpikesRemainVisibleForKnownSingleColorInput",
+      "ValidMissingCorruptAndReaddedReferencesShowTruthfulState"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "resume-regression.trx",
+    "SHA256": "0851FCFFDC36B3C255254CC032E59C9FE54AAD756372E2BE508800C9E87168FB",
+    "Passed": 51,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T17:16:32.6758735+08:00",
+    "FinishedUtc": "2026-10-08T17:16:44.1910179+08:00",
+    "Failures": [],
+    "Skips": []
+  },
+  {
+    "File": "source-44ec69d-final-regression.trx",
+    "SHA256": "643841C365D06B987EEFFAF4E7D532138863236BCF8F40DFA9045366A84865B1",
+    "Passed": 168,
+    "Failed": 0,
+    "Skipped": 6,
+    "StartedUtc": "2026-10-09T09:38:29.6487714+08:00",
+    "FinishedUtc": "2026-10-09T09:40:29.6514511+08:00",
+    "Failures": [],
+    "Skips": [
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts"
+    ]
+  },
+  {
+    "File": "wpf-final-source-full.trx",
+    "SHA256": "D419D6A391EE34B39EA89D2DD0F760960820A0B3D51BEEF3461158F966D303A8",
+    "Passed": 1509,
+    "Failed": 0,
+    "Skipped": 11,
+    "StartedUtc": "2026-10-09T09:22:20.0276084+08:00",
+    "FinishedUtc": "2026-10-09T09:30:58.4935568+08:00",
+    "Failures": [],
+    "Skips": [
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "CompanyRealRawProductAcceptanceGate",
+      "BaselineGuard_RequiresExplicitApproval",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels"
+    ]
+  },
+  {
+    "File": "wpf-full-diagnosed.trx",
+    "SHA256": "E15DC1DA6D6166C54385F011EC70A732BA4255B0E9D3BA5AC53AEE3C6F924C82",
+    "Passed": 370,
+    "Failed": 0,
+    "Skipped": 1,
+    "StartedUtc": "2026-10-08T17:42:14.1132593+08:00",
+    "FinishedUtc": "2026-10-08T17:50:19.8174738+08:00",
+    "Failures": [],
+    "Skips": [
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture"
+    ]
+  },
+  {
+    "File": "wpf-full-repaired.trx",
+    "SHA256": "FF1E795C0B5FF1C81FB5FD03F2D10B9667C1E0B7E6DD50A1CE79768E5282614E",
+    "Passed": 1507,
+    "Failed": 0,
+    "Skipped": 11,
+    "StartedUtc": "2026-10-08T18:08:57.7866440+08:00",
+    "FinishedUtc": "2026-10-08T18:16:56.3627588+08:00",
+    "Failures": [],
+    "Skips": [
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "BaselineGuard_RequiresExplicitApproval",
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "CompanyRealRawProductAcceptanceGate",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet"
+    ]
+  },
+  {
+    "File": "wpf-without-long-benchmark.trx",
+    "SHA256": "7FB5A087B78A1373A968130620A4205FE435AA167160B246E5D212BBB6A82C51",
+    "Passed": 1504,
+    "Failed": 2,
+    "Skipped": 11,
+    "StartedUtc": "2026-10-08T17:52:46.4529593+08:00",
+    "FinishedUtc": "2026-10-08T18:00:02.2977368+08:00",
+    "Failures": [
+      "FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+      "FormalViews_NoUnclassifiedUnicodeActionIcons"
+    ],
+    "Skips": [
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "CompanyRealRawProductAcceptanceGate",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "BaselineGuard_RequiresExplicitApproval",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts"
+    ]
+  },
+  {
+    "File": "zoom-baseline.trx",
+    "SHA256": "48179AA15B63B29A787CB94BAEDC99929A1A8F12162B45E2F2BC67E7836D78FE",
+    "Passed": 6,
+    "Failed": 1,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:26:41.5445640+08:00",
+    "FinishedUtc": "2026-10-08T16:26:42.5364449+08:00",
+    "Failures": [
+      "LargeSourceWheelZoomDoesNotJumpToTwentyFivePercentOrStickThere"
+    ],
+    "Skips": []
+  },
+  {
+    "File": "zoom-fixed.trx",
+    "SHA256": "096A33684E36C037CDA70E74B40B766B790E9B9A647E23C44BC2B8ACDBB40B59",
+    "Passed": 7,
+    "Failed": 0,
+    "Skipped": 0,
+    "StartedUtc": "2026-10-08T16:28:11.1106530+08:00",
+    "FinishedUtc": "2026-10-08T16:28:11.8016065+08:00",
+    "Failures": [],
+    "Skips": []
+  }
+]
