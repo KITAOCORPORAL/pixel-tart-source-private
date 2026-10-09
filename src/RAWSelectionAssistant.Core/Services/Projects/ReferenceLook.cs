@@ -15,16 +15,21 @@ public sealed record ReferenceLookParameters(double MatchStrength = 100, double 
     }
 }
 public sealed record ReferenceLookSource(Guid LibraryId, Guid? AssetId, string Name, string SourcePath,
-    string ContentHash, double Weight, AssetVisualAnalysisResult Analysis, string Kind = "Asset", Guid? ContainerId = null);
+    string ContentHash, double Weight, AssetVisualAnalysisResult Analysis, string Kind = "Asset", Guid? ContainerId = null,
+    ReferencePixelStatistics? PixelStatistics = null);
 public sealed record ReferenceLook(Guid ReferenceLookId, string Name, Guid? ProjectId,
     IReadOnlyList<ReferenceLookSource> ReferenceSources, ReferenceLookParameters Parameters,
     DateTimeOffset CreatedAt, DateTimeOffset UpdatedAt, int Version = 1,
-    PixelTartFilmSettings? Film = null)
+    PixelTartFilmSettings? Film = null, int AlgorithmVersion = 1)
 {
     public ReferenceLook Normalize()
     {
         Parameters.Validate();
         Film?.Validate();
+        if (AlgorithmVersion is not (1 or 2)) throw new ArgumentException("Unsupported reference algorithm version.");
+        if (AlgorithmVersion == 2)
+            foreach (var source in ReferenceSources.Where(x => x.Weight > 0))
+                (source.PixelStatistics ?? throw new ArgumentException("Pixel statistics are required for the corrected reference algorithm.")).Validate();
         if (ReferenceLookId == Guid.Empty || string.IsNullOrWhiteSpace(Name) || Version != 1 || ReferenceSources.Count == 0 ||
             ReferenceSources.Any(source => !double.IsFinite(source.Weight) || source.Weight < 0 || source.Analysis.Palette.Count == 0 ||
                 source.Analysis.HistogramLuma.Length != 256)) throw new ArgumentException("Look identity, references and weights must be valid.");
@@ -45,25 +50,30 @@ public sealed class ReferenceLookTransform
     private readonly double[] _toneCurve;
     private readonly double _contrast;
     private readonly double _saturation;
+    private readonly int _algorithmVersion;
 
     internal ReferenceLookTransform(ReferenceLookParameters parameters, ReferenceColorTarget source, ReferenceColorTarget target,
-        double[] toneCurve, double contrast, double saturation, ColorPipelineDescriptor pipeline)
+        double[] toneCurve, double contrast, double saturation, ColorPipelineDescriptor pipeline, int algorithmVersion = 1)
     {
         _parameters = parameters; _source = source; _target = target; _toneCurve = toneCurve;
         _contrast = contrast; _saturation = saturation; Pipeline = pipeline;
+        _algorithmVersion = algorithmVersion;
     }
 
     public ColorPipelineDescriptor Pipeline { get; }
     public IReadOnlyList<double> ToneCurve => _toneCurve;
 
-    public VisualRgb24 Apply(VisualRgb24 rgb) => OklabColorSpace.ToSrgbGamutMapped(ApplyCore(OklabColorSpace.FromSrgb(rgb)));
+    public VisualRgb24 Apply(VisualRgb24 rgb) => _parameters.MatchStrength == 0
+        ? rgb : OklabColorSpace.ToSrgbGamutMapped(ApplyCore(OklabColorSpace.FromSrgb(rgb)));
 
     /// <summary>Applies the same look directly to an encoded float RGB sample.</summary>
     /// <remarks>The values are sRGB-encoded floats in the canonical processing buffer. This overload never constructs a VisualRgb24, so professional RAW processing does not quantize through an 8-bit display adapter.</remarks>
     public (float R, float G, float B) ApplyFloat(float r, float g, float b)
     {
         if (_parameters.MatchStrength == 0) return (r, g, b);
-        var transformed = OklabColorSpace.ToSrgbLinear(ApplyCore(OklabColorSpace.FromSrgb(r, g, b)));
+        var transformed = _algorithmVersion == 2
+            ? OklabColorSpace.ToSrgbGamutMappedFloat(ApplyCore(OklabColorSpace.FromSrgb(r, g, b)))
+            : OklabColorSpace.ToSrgbLinear(ApplyCore(OklabColorSpace.FromSrgb(r, g, b)));
         return ((float)transformed.R, (float)transformed.G, (float)transformed.B);
     }
 
@@ -86,12 +96,13 @@ public sealed class ReferenceLookTransform
         var hue = Math.Atan2(perceptual.B, perceptual.A) * 180 / Math.PI; if (hue < 0) hue += 360;
         var skinCandidate = perceptual.L is > .28 and < .9 && hue is > 25 and < 80 && perceptual.Chroma is > .025 and < .22;
         var neutralCandidate = Math.Clamp(1 - perceptual.Chroma / .09, 0, 1);
-        var protection = 1 - (skinCandidate ? p.SkinProtection / 100 * .75 : 0);
+        var protection = 1 - (_algorithmVersion == 2 ? ReferencePixelStatistics.SkinColorWeight(perceptual) * p.SkinProtection / 100 * .75 : skinCandidate ? p.SkinProtection / 100 * .75 : 0);
         protection *= 1 - neutralCandidate * p.NeutralProtection / 100 * .9;
         protection *= 1 - Math.Clamp((perceptual.L - .78) / .22, 0, 1) * p.HighlightProtection / 100;
         var strength = p.MatchStrength / 100 * protection;
+        var toneStrength = _algorithmVersion == 2 ? p.MatchStrength / 100 * (1 - Math.Clamp((perceptual.L - .78) / .22, 0, 1) * p.HighlightProtection / 100) : strength;
         var chromaScale = 1 + (_saturation - 1) * p.SaturationStrength / 100 * p.ColorStrength / 100;
-        return new(perceptual.L + (mappedL - perceptual.L) * strength,
+        return new(perceptual.L + (mappedL - perceptual.L) * toneStrength,
             perceptual.A + ((perceptual.A + da * p.ColorStrength / 100) * chromaScale - perceptual.A) * strength,
             perceptual.B + ((perceptual.B + db * p.ColorStrength / 100) * chromaScale - perceptual.B) * strength);
     }
@@ -101,9 +112,10 @@ public sealed class ReferenceLookTransform
 /// monitoring pixels. No file IO, sensor rendering, or semantic skin claims.</summary>
 public sealed class ReferenceLookMatcher
 {
-    public ReferenceLookTransform BuildTransform(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look)
+    public ReferenceLookTransform BuildTransform(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look, CancellationToken token = default)
     {
         look = look.Normalize();
+        if (look.AlgorithmVersion == 2) return BuildCorrectedTransform(ReferencePixelStatistics.FromPixels(source, token), look);
         var targetHistogram = Enumerable.Range(0, 256).Select(bin => look.ReferenceSources.Sum(reference =>
             reference.Weight * reference.Analysis.HistogramLuma[bin] / Math.Max(1d, reference.Analysis.HistogramLuma.Sum(value => (double)value)))).ToArray();
         var curve = ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma, targetHistogram);
@@ -116,9 +128,10 @@ public sealed class ReferenceLookMatcher
         return new(look.Parameters, sourceTarget, target, curve, contrast, saturation, new());
     }
 
-    public ReferenceLookTransform BuildTransform(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look)
+    public ReferenceLookTransform BuildTransform(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look, CancellationToken token = default, ReadOnlyMemory<byte> alpha = default)
     {
         look = look.Normalize();
+        if (look.AlgorithmVersion == 2) return BuildCorrectedTransform(ReferencePixelStatistics.FromPixels(source, token, alpha), look);
         var targetHistogram = Enumerable.Range(0, 256).Select(bin => look.ReferenceSources.Sum(reference =>
             reference.Weight * reference.Analysis.HistogramLuma[bin] / Math.Max(1d, reference.Analysis.HistogramLuma.Sum(value => (double)value)))).ToArray();
         var curve = ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma, targetHistogram);
@@ -134,22 +147,42 @@ public sealed class ReferenceLookMatcher
     public ReferenceMatchResult Match(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look, CancellationToken token = default)
     {
         look = look.Normalize(); var p = look.Parameters;
+        // Identity must not depend on analyzable target pixels (e.g. transparent
+        // inputs). Do not enter tone/color/statistical processing at zero strength.
+        if (look.AlgorithmVersion == 2 && (p.MatchStrength == 0 || (p.ToneStrength == 0 && p.ColorStrength == 0)))
+            return new(new(source.Width, source.Height, source.Rgb24.ToArray(), source.Alpha), p,
+                new(Enumerable.Range(0, 256).Select(bin => bin / 255d).ToArray()),
+                Pipeline: new("DisplayReferred sRGB", "OKLabD65", "sRGB", Version: 2));
         var targetHistogram = Enumerable.Range(0, 256).Select(bin => look.ReferenceSources.Sum(reference =>
             reference.Weight * reference.Analysis.HistogramLuma[bin] / Math.Max(1d, reference.Analysis.HistogramLuma.Sum(value => (double)value)))).ToArray();
-        var curve = ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma, targetHistogram);
+        var corrected = look.AlgorithmVersion == 2 ? BuildTransform(source, analysis, look, token) : null;
+        var curve = corrected is not null
+            ? corrected.ToneCurve
+            : ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma, targetHistogram);
         var output = source.Rgb24.ToArray();
         if (p.MatchStrength == 0 || (p.ToneStrength == 0 && p.ColorStrength == 0))
-            return new(new(source.Width, source.Height, output), p, new(curve), Pipeline: new());
+            return new(new(source.Width, source.Height, output, source.Alpha), p, new(curve), Pipeline: new());
         var sourceTarget = ReferenceColorTargetBuilder.FromPixels(source); var target = ReferenceColorTargetBuilder.FromLook(look);
         var warning = ReferenceDifferenceAnalyzer.Compare(sourceTarget, target);
-        var transform = BuildTransform(source, analysis, look);
+        var transform = corrected ?? BuildTransform(source, analysis, look, token);
         for (var pixel = 0; pixel < source.PixelCount; pixel++)
         {
             if ((pixel & 1023) == 0) token.ThrowIfCancellationRequested();
             var i = pixel * 3; var transformed = transform.Apply(new(output[i], output[i + 1], output[i + 2]));
             output[i] = transformed.R; output[i + 1] = transformed.G; output[i + 2] = transformed.B;
         }
-        return new(new(source.Width, source.Height, output), p, new(curve), warning, transform.Pipeline);
+        return new(new(source.Width, source.Height, output, source.Alpha), p, new(transform.ToneCurve), warning, transform.Pipeline);
+    }
+    private static ReferenceLookTransform BuildCorrectedTransform(ReferencePixelStatistics source, ReferenceLook look)
+    {
+        var target = ReferencePixelStatistics.Combine(look);
+        // Same OKLab L domain at statistics, curve construction and application. Keep
+        // the established bounded shift until real-photo comparisons justify a change.
+        var sourceCounts = source.LightnessHistogram.Select(x => (uint)Math.Round(x * 65536 / source.LightnessHistogram.Sum())).ToArray();
+        var curve = ReferenceToneMapper.BuildMonotonicQuantileCurve(sourceCounts, target.LightnessHistogram);
+        var contrast = Math.Clamp(target.Span() / Math.Max(.06, source.Span()), .8, 1.2);
+        var saturation = Math.Clamp(target.Colors.Global.Center.Chroma / Math.Max(.08, source.Colors.Global.Center.Chroma), .7, 1.3);
+        return new(look.Parameters, source.Colors, target.Colors, curve, contrast, saturation, new("DisplayReferred sRGB", "OKLabD65", "sRGB", Version: 2), 2);
     }
     public static VisualRgb24 FromLab(VisualLab lab)
     {

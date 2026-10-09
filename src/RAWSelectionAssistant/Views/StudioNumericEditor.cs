@@ -20,6 +20,9 @@ internal sealed class StudioNumericEditor : TextBox
     {
         _read = read; _commit = commit; _minimum = minimum; _maximum = maximum;
         _identity = identity;
+        SetResourceReference(StyleProperty, "Av2TextBox");
+        SetResourceReference(BackgroundProperty, "Surface02Brush");
+        SetResourceReference(ForegroundProperty, "TextPrimaryBrush");
         GotKeyboardFocus += (_, _) => _draftIdentity = _identity?.Invoke();
         LostKeyboardFocus += (_, _) => { if (!CommitDraft()) RestoreCommitted(); };
         PreviewKeyDown += (_, e) =>

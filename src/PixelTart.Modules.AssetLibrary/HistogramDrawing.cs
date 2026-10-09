@@ -37,7 +37,16 @@ public sealed class HistogramDrawing : FrameworkElement
         using (var stream = geometry.Open())
         {
             stream.BeginFigure(new(0, RenderSize.Height), !outline, !outline);
-            for (var index = 0; index < 256; index++) stream.LineTo(new(index / 255d * RenderSize.Width, RenderSize.Height - bins[index] / (double)max * RenderSize.Height), true, false);
+            // Each quantized bin owns 1/256 of the axis. Connecting only bin
+            // centers made isolated end-bin peaks subpixel triangles and
+            // nearly invisible, despite correct counts. Preserve counts and
+            // normalization; draw their actual intervals as a step histogram.
+            for (var index = 0; index < 256; index++)
+            {
+                var y = RenderSize.Height - bins[index] / (double)max * RenderSize.Height;
+                stream.LineTo(new(index / 256d * RenderSize.Width, y), true, false);
+                stream.LineTo(new((index + 1) / 256d * RenderSize.Width, y), true, false);
+            }
             if (!outline) stream.LineTo(new(RenderSize.Width, RenderSize.Height), true, false);
         }
         geometry.Freeze(); var brush = new SolidColorBrush(color);

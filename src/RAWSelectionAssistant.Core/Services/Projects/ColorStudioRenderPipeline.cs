@@ -12,21 +12,21 @@ public sealed class ColorStudioRenderPipeline
 {
     private readonly ReferenceLookMatcher _matcher = new();
 
-    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true)
+    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default)
     {
         ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         foreach (var node in normalized.Nodes.Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current.ToVisualRgb24();
-            current = ApplyHighPrecision(current, node, reference, analysis, token);
+            current = ApplyHighPrecision(current, node, reference, analysis, token, alpha);
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
         return new(current.ToVisualRgb24(), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
     }
 
-    private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token)
+    private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token, ReadOnlyMemory<byte> alpha)
     {
         if (ColorStudioToolCatalog.IsTool(node.Type)) return ColorStudioToolProcessor.Apply(source, node, token);
         if (node.Type == ColorStudioNodeType.Develop) return ColorStudioDevelop.Apply(source, node, token);
@@ -47,7 +47,7 @@ public sealed class ColorStudioRenderPipeline
             };
             if (p.MatchStrength == 0)
                 return source.Clone();
-            var transform = _matcher.BuildTransform(source, analysis, reference with { Parameters = p });
+            var transform = _matcher.BuildTransform(source, analysis, reference with { Parameters = p }, token, alpha);
             for (var i = 0; i < values.Length; i += 3)
             {
                 if ((i & 2047) == 0) token.ThrowIfCancellationRequested();
@@ -101,7 +101,7 @@ public sealed class ColorStudioRenderPipeline
     {
         var normalized = stack.Normalize();
         if (normalized.ProcessingVersion == 2 || normalized.Nodes.Any(node => ColorStudioToolCatalog.IsTool(node.Type) || Parameter(node, "range_version", 1) >= 2))
-            return Render(HighBitDepthImageBuffer.FromVisualRgb24(source), analysis, reference, normalized, token, captureNodeDiagnostics);
+            return Render(HighBitDepthImageBuffer.FromVisualRgb24(source), analysis, reference, normalized, token, captureNodeDiagnostics, source.Alpha);
         // Version 1 keeps the historical per-node RGB24 quantization of saved JPEG/PNG schemes.
         // New precision is explicit state, so merely opening an old project cannot alter its pixels.
         var current = new VisualPixelBuffer(source.Width, source.Height, source.Rgb24.ToArray());

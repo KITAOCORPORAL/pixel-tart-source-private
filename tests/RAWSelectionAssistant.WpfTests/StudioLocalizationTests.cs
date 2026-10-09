@@ -75,7 +75,7 @@ public sealed class StudioLocalizationTests
             aux.SelectedIndex=1;tools.SelectedIndex=2;
             Assert.AreEqual(System.Windows.Visibility.Visible,((System.Windows.FrameworkElement)view.FindName("LevelsToolPage")).Visibility);
             strings.SetLanguage("zh-TW",persist:false);await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind);
-            Assert.AreEqual("參考圖片",((ListBoxItem)aux.Items[0]).Content);Assert.AreEqual("色階",((ListBoxItem)tools.Items[2]).Content);
+            Assert.AreEqual("參考圖片",((ListBoxItem)aux.Items[0]).Content);Assert.AreEqual("影調",((ListBoxItem)tools.Items[2]).Content);
         }
         finally { strings.SetLanguage(original,persist:false); }
     });

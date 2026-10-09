@@ -53,6 +53,27 @@ public sealed class ColorSpaceSurfaceWpfTests
         return Task.CompletedTask;
     });
     [TestMethod]
+    public Task HistogramRgbSpikesRemainVisibleForKnownSingleColorInput() => RunSta(() =>
+    {
+        var histogram = VisualAnalysisEngine.AnalyzeHistogram(new(1, 1, new byte[] { 255, 0, 0 }));
+        var drawing = new PixelTart.Modules.AssetLibrary.HistogramDrawing { Histogram = histogram, ShowLuma = false };
+        drawing.Measure(new Size(256, 80)); drawing.Arrange(new Rect(0, 0, 256, 80)); drawing.UpdateLayout();
+        var bitmap = new RenderTargetBitmap(256, 80, 96, 96, PixelFormats.Pbgra32);
+        bitmap.Render(drawing);
+        var pixels = new byte[256 * 80 * 4]; bitmap.CopyPixels(pixels, 256 * 4, 0);
+        // A single occupied end bin is still a full-height spike, not a
+        // subpixel triangle which disappears against the background.
+        var colored = 0;
+        for (var y = 2; y < 70; y++)
+            for (var x = 0; x < 3; x++)
+            {
+                var p = (y * 256 + x) * 4;
+                if (pixels[p] > 70 || pixels[p + 1] > 70 || pixels[p + 2] > 70) colored++;
+            }
+        Assert.IsGreaterThan(60, colored);
+        return Task.CompletedTask;
+    });
+    [TestMethod]
     public Task InspectionViewSettingsDoNotChangeStackAndStaySynchronizedInBothPanels() => RunSta(async()=>
     {
         EnsureTestApplication();using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs());

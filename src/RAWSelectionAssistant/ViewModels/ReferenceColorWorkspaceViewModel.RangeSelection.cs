@@ -57,11 +57,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if (_colorSpaceSourceBuffer is null || result.Length != _colorSpaceSourceBuffer.PixelCount) return;
             HighlightWeights = result; HighlightedPixels = result.Select((weight, pixel) => (weight, pixel)).Where(p => p.weight > 0).Select(p => p.pixel).ToArray();
             _rangeSelectionOwnsOverlay = true;
-            RangeSelectionStage = "颜色选区 · 所选节点输入（取样代理）；直方图仍为当前显示图像"; OnPropertyChanged(nameof(RangeSelectionStage));
+            RangeSelectionStage = "RangeNodeInputStage"; OnPropertyChanged(nameof(RangeSelectionStage));
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
         catch (Exception error) when (error is InvalidOperationException or NotSupportedException or ArgumentException)
-        { if (revision == Volatile.Read(ref _rangeSelectionRevision)) { RangeSelectionStage = "颜色选区未完成：" + error.Message; OnPropertyChanged(nameof(RangeSelectionStage)); } }
+        { if (revision == Volatile.Read(ref _rangeSelectionRevision)) { RangeSelectionStage = "RangeSelectionFailed"; OnPropertyChanged(nameof(RangeSelectionStage)); } }
         finally { if (ReferenceEquals(_rangeSelectionCancellation, cancellation)) _rangeSelectionCancellation = null; }
     }
     private sealed record RangeNodeInputResult(VisualPixelBuffer Pixels, HighBitDepthImageBuffer? Processing);

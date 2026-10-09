@@ -33,6 +33,7 @@ public sealed class StudioToolPanel : StackPanel
     private readonly List<(ColorStudioToolParameter Parameter, Slider Slider, StudioNumericEditor Number)> _fields = [];
     private readonly List<(ColorStudioNodeType Type, CheckBox Toggle)> _toggles = [];
     private readonly Dictionary<string, bool> _expanded = [];
+    private readonly List<FrameworkElement> _graphics = [];
     public StudioToolPanel()
     {
         DataContextChanged += (_, _) => BindEditor();
@@ -57,7 +58,7 @@ public sealed class StudioToolPanel : StackPanel
     }
     private void Build()
     {
-        Children.Clear(); _fields.Clear(); _toggles.Clear();
+        Children.Clear(); _fields.Clear(); _toggles.Clear(); _graphics.Clear();
         foreach (var id in NodeTypes.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
             if (!Enum.TryParse<ColorStudioNodeType>(id, out var type)) continue;
@@ -73,8 +74,23 @@ public sealed class StudioToolPanel : StackPanel
             foreach (var group in groups)
             {
                 var body = new StackPanel { Margin = new Thickness(2, 1, 2, 3) };
+                if (type == ColorStudioNodeType.ColorBalance)
+                {
+                    var wheel = new StudioColorBalanceWheel(() => _editor, group.Single(p => p.Key.EndsWith("_hue")), group.Single(p => p.Key.EndsWith("_amount")));
+                    body.Children.Add(wheel); _graphics.Add(wheel);
+                }
+                if (type == ColorStudioNodeType.Levels)
+                {
+                    var channel = group.First().Key.Split('_')[0];
+                    var graph = new StudioLevelsGraph(() => _editor, channel);
+                    body.Children.Add(graph); _graphics.Add(graph);
+                }
                 var reset = new Button { Height = 24, MinHeight = 24, HorizontalAlignment = HorizontalAlignment.Right, Padding = new Thickness(5, 1, 5, 1), Margin = new Thickness(6, 0, 0, 0), Focusable = true };
-                Text(reset, ContentControl.ContentProperty, "复位本组");
+                reset.Content = new System.Windows.Shapes.Path { Data = Geometry.Parse("M 7,4 L 3,8 L 7,12 M 3,8 L 12,8 C 19,8 19,17 12,17"),
+                    StrokeThickness = 1.5, Width = 18, Height = 18, Stretch = Stretch.Uniform };
+                ((System.Windows.Shapes.Path)reset.Content).SetResourceReference(System.Windows.Shapes.Shape.StrokeProperty, "TextSecondaryBrush");
+                Text(reset, ToolTipProperty, "复位本组");
+                Text(reset, System.Windows.Automation.AutomationProperties.NameProperty, "复位本组");
                 reset.SetResourceReference(StyleProperty, "PixelTart.Button.Ghost");
                 reset.Click += (_, _) => _editor?.ResetToolGroup(type, group.Key);
                 DockPanel.SetDock(reset, Dock.Right);
@@ -100,6 +116,24 @@ public sealed class StudioToolPanel : StackPanel
                     body.Children.Add(row);
                     var slider = new Slider { Minimum = parameter.Minimum, Maximum = parameter.Maximum, SmallChange = parameter.Step, LargeChange = parameter.Step * 10, Value = parameter.DefaultValue, Margin = new Thickness(0, 0, 0, 1), IsMoveToPointEnabled = true };
                     slider.SetResourceReference(StyleProperty, "PixelTart.Slider");
+                    if (type == ColorStudioNodeType.WhiteBalance)
+                    {
+                        var gradient = new LinearGradientBrush();
+                        gradient.StartPoint = new Point(0, .5); gradient.EndPoint = new Point(1, .5);
+                        gradient.GradientStops.Add(new GradientStop(parameter.Key == "temperature" ? Color.FromRgb(66, 123, 218) : Color.FromRgb(74, 168, 92), 0));
+                        gradient.GradientStops.Add(new GradientStop(Color.FromRgb(143, 147, 144), .5));
+                        gradient.GradientStops.Add(new GradientStop(parameter.Key == "temperature" ? Color.FromRgb(231, 163, 66) : Color.FromRgb(201, 92, 168), 1));
+                        gradient.Freeze(); slider.Background = gradient;
+                        slider.Template = (ControlTemplate)XamlReader.Parse("""
+                            <ControlTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" TargetType="Slider">
+                             <Grid Height="28"><Border Height="6" Background="{TemplateBinding Background}" CornerRadius="3"/>
+                              <Track x:Name="PART_Track" VerticalAlignment="Center"><Track.DecreaseRepeatButton><RepeatButton Command="{x:Static Slider.DecreaseLarge}" Opacity="0"/></Track.DecreaseRepeatButton>
+                               <Track.Thumb><Thumb Width="14" Height="20"><Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="{DynamicResource ControlThumbBrush}" BorderBrush="{DynamicResource TextPrimaryBrush}" BorderThickness="1" CornerRadius="3"/></ControlTemplate></Thumb.Template></Thumb></Track.Thumb>
+                               <Track.IncreaseRepeatButton><RepeatButton Command="{x:Static Slider.IncreaseLarge}" Opacity="0"/></Track.IncreaseRepeatButton></Track>
+                             </Grid><ControlTemplate.Triggers><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value=".45"/></Trigger></ControlTemplate.Triggers>
+                            </ControlTemplate>
+                            """);
+                    }
                     slider.Tag = parameter.Key; Text(slider, System.Windows.Automation.AutomationProperties.NameProperty, parameter.Label);
                     slider.ValueChanged += (_, _) =>
                     {
@@ -144,6 +178,7 @@ public sealed class StudioToolPanel : StackPanel
                 field.Number.RefreshCommitted();
             }
             foreach (var (type, toggle) in _toggles) toggle.IsChecked = _editor?.ToolNode(type)?.Enabled != false;
+            foreach (var graphic in _graphics) graphic.InvalidateVisual();
         }
         finally { _refreshing = false; }
     }

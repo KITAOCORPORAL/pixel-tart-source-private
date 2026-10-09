@@ -20,6 +20,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private TetherReferenceModeViewModel? _editor;
     private bool _wasCompact;
     private bool _wasLowWindow;
+    private bool _restoringLayout;
 
 
     private double _lastResponsiveWidth = -1;
@@ -66,6 +67,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     public ReferenceColorWorkspaceView()
     {
         InitializeComponent();
+        InitializeFilmstripLayout();
         ColorSpaceViewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
         ColorSpaceViewport.SurfaceSelectionChanged += OnSurfaceSelection;
         ToneZones.ZoneHovered += (_, zone) => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightToneZone(zone); };
@@ -127,6 +129,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (TryCancelNumericDraft()) return true;
         if (Keyboard.FocusedElement is DependencyObject focused && FindAncestor<StudioCurveEditor>(focused)?.CancelPointerGesture() == true) return true;
+        if (Keyboard.FocusedElement is StudioColorBalanceWheel wheel && wheel.CancelPointerGesture()) return true;
+        if (Keyboard.FocusedElement is StudioLevelsGraph levels && levels.CancelPointerGesture()) return true;
         if (ColorSpaceViewport.CancelPointerGesture()) return true;
         if (_panning || _draggingDivider) { _panning = _draggingDivider = false; PreviewCanvas.ReleaseMouseCapture(); return true; }
         var workspace = DataContext as ReferenceColorWorkspaceViewModel;
@@ -372,10 +376,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         if (args.NewValue is ReferenceColorWorkspaceViewModel newWorkspace) { newWorkspace.PropertyChanged += WorkspaceOnPropertyChanged; newWorkspace.ColorSpaceSelectionChanged += WorkspaceColorSpaceSelectionChanged; }
         _editor = (args.NewValue as ReferenceColorWorkspaceViewModel)?.Editor;
         if (_editor is not null) _editor.PropertyChanged += EditorOnPropertyChanged;
-        UpdateResponsiveLayout();
+        RestoreLayout(); UpdateResponsiveLayout();
     }
     private void WorkspaceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.Layout)) { RestoreLayout(); UpdateResponsiveLayout(); }
         if (sender is ReferenceColorWorkspaceViewModel analysis) { HighlightOverlay.IsOriginal = analysis.AnalysisIsOriginal; if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram)) ToneZones.ClearHover(); }
         if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
         {
@@ -428,13 +433,35 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private bool _editRailOpen = true;
 
-    private void OnToggleEditRail(object sender, RoutedEventArgs e) { _editRailOpen = !_editRailOpen; UpdateResponsiveLayout(); }
+    private void RestoreLayout()
+    {
+        if (DataContext is not ReferenceColorWorkspaceViewModel workspace) return;
+        _restoringLayout = true;
+        try { _editRailOpen = workspace.Layout.EditingOpen; AuxModes.SelectedIndex = workspace.Layout.AuxiliaryMode; ToolModes.SelectedIndex = workspace.Layout.ToolMode; ApplyFilmstripLayout(); }
+        finally { _restoringLayout = false; }
+    }
+    private void OnToggleEditRail(object sender, RoutedEventArgs e)
+    {
+        _editRailOpen = !_editRailOpen;
+        if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.Layout = workspace.Layout with { EditingOpen = _editRailOpen };
+        UpdateResponsiveLayout();
+    }
+    private void OnRailResize(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+    {
+        if (DataContext is not ReferenceColorWorkspaceViewModel workspace || sender is not System.Windows.Controls.Primitives.Thumb thumb) return;
+        workspace.Layout = Equals(thumb.Tag, "Left")
+            ? workspace.Layout with { AuxiliaryWidth = workspace.Layout.AuxiliaryWidth + e.HorizontalChange }
+            : workspace.Layout with { EditingWidth = workspace.Layout.EditingWidth - e.HorizontalChange };
+        e.Handled = true;
+    }
     private void UpdateResponsiveLayout()
     {
         if (LeftColumn is null || RightColumn is null || CenterColumn is null) return;
         var width = GetAvailableWidth();
         if (width <= 0) return;
         _lastResponsiveWidth = width;
+        if (DataContext is ReferenceColorWorkspaceViewModel { Layout.FilmstripDock: "Right" })
+            width = Math.Max(1, width - FilmstripDockColumn.Width.Value);
         var focus = _editor?.FocusView == true;
         var compact = width < 1100;
         if (compact && !_wasCompact && IsLoaded) _editor?.SetResponsiveContext(true);
@@ -446,10 +473,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         var rail = Math.Clamp(width * .21, 250, 320);
         var bottomDock = _cloudExpanded && left && width < 1050;
         LeftColumn.MinWidth = RightColumn.MinWidth = CenterColumn.MinWidth = 0;
-        LeftColumn.Width = new GridLength(left && !bottomDock ? (_cloudExpanded ? Math.Clamp(width * .3, 280, 440) : Math.Min(290, rail)) : 0);
+        var layout = (DataContext as ReferenceColorWorkspaceViewModel)?.Layout ?? new ColorStudioLayout();
+        LeftColumn.Width = new GridLength(left && !bottomDock ? (_cloudExpanded ? Math.Clamp(width * .3, 280, 440) : Math.Min(layout.AuxiliaryWidth, Math.Max(240, width * .3))) : 0);
         // Include the rail margin in the column allocation. The shared Inspector style
         // previously forced 280 DIP into a 250 DIP column, pushing editors off screen.
-        RightColumn.Width = new GridLength(right ? Math.Clamp(width * .25, 312, 368) : 0);
+        RightColumn.Width = new GridLength(right ? Math.Min(layout.EditingWidth, Math.Max(312, width * .35)) : 0);
         CenterColumn.Width = new GridLength(1, GridUnitType.Star);
         Grid.SetColumn(EditingRail, 2); Grid.SetColumn(ContextRail, 0);
         Grid.SetRow(ContextRail, bottomDock ? 1 : 0);
@@ -460,6 +488,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
         EditingRail.HorizontalAlignment = ContextRail.HorizontalAlignment = HorizontalAlignment.Stretch;
         EditingRail.Visibility = right ? Visibility.Visible : Visibility.Collapsed;
         ContextRail.Visibility = left ? Visibility.Visible : Visibility.Collapsed;
+        LeftResize.Visibility = left && !bottomDock ? Visibility.Visible : Visibility.Collapsed;
+        RightResize.Visibility = right ? Visibility.Visible : Visibility.Collapsed;
         EditRailButton.Visibility = ContextRailButton.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         CentralAnalysis.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         ToneZonesExpander.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
@@ -499,7 +529,18 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         if (_editor is null) return;
         var navigator = new ReferenceNavigator { SourcePath = _editor.CurrentReferencePath };
-        CreateInspectionWindow("参考图片 · " + Path.GetFileName(_editor.CurrentReferencePath), navigator).Show();
+        var panel = new DockPanel();
+        var link = new CheckBox { Margin = new Thickness(8), IsChecked = false };
+        StudioTextExtension.Bind(link, ContentControl.ContentProperty, "ReferenceLinkTarget");
+        StudioTextExtension.Bind(link, ToolTipProperty, "ReferenceLinkTargetHelp");
+        link.Checked += (_, _) => navigator.LinkedState = ImageViewport.State;
+        link.Unchecked += (_, _) => navigator.LinkedState = null;
+        DockPanel.SetDock(link, Dock.Bottom); panel.Children.Add(link); panel.Children.Add(navigator);
+        var window = CreateInspectionWindow(string.Empty, panel);
+        window.SetBinding(Window.TitleProperty, new System.Windows.Data.Binding("[Reference]")
+        { Source = StudioLocalizationService.Current, StringFormat = "{0} · " + Path.GetFileName(_editor.CurrentReferencePath).Replace("{", "{{").Replace("}", "}}") });
+        window.Closed += (_, _) => navigator.LinkedState = null;
+        window.Show();
     }
 
     private void OnExpandColorSpace(object sender, RoutedEventArgs e) => ToggleCloudDock();

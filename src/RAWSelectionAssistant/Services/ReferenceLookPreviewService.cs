@@ -33,7 +33,7 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
         var target = ReferenceColorTargetBuilder.FromLook(look); var current = ReferenceColorTargetBuilder.FromPixels(buffer);
         if (look.Parameters.MatchStrength > 0 && (look.Parameters.ToneStrength > 0 || look.Parameters.ColorStrength > 0))
         {
-            var transform = _matcher.BuildTransform(buffer, analysis, look);
+            var transform = _matcher.BuildTransform(buffer, analysis, look, token);
             var previewLut = ReferenceCubeLutBuilder.Build(33, transform.Apply, transform.Pipeline);
             for (var pixel = 0; pixel < buffer.PixelCount; pixel++)
             {
@@ -49,7 +49,7 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
     public Task<ReferenceCubeLut> BuildExportLutAsync(BitmapSource source, ReferenceLook look, CancellationToken token = default) => Task.Run(() =>
     {
         token.ThrowIfCancellationRequested(); var (_, _, _, buffer, analysis) = Prepare(source);
-        var transform = _matcher.BuildTransform(buffer, analysis, look);
+        var transform = _matcher.BuildTransform(buffer, analysis, look, token);
         return ReferenceCubeLutBuilder.Build(65, transform.Apply, transform.Pipeline);
     }, token);
 
@@ -75,6 +75,8 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
         var identity = new ReferenceFileIdentity(fullPath, file.Length, file.LastWriteTimeUtc.Ticks);
         var candidate = new Lazy<Task<ReferenceLookSource>>(() => AnalyzeReferenceUncachedAsync(fullPath));
         var cached = _referenceAnalysis.GetOrAdd(identity, candidate);
+        if (_referenceAnalysis.Count > 32)
+            foreach (var old in _referenceAnalysis.Keys.Where(x => x != identity).Take(_referenceAnalysis.Count - 32)) _referenceAnalysis.TryRemove(old, out _);
         if (ReferenceEquals(candidate, cached)) Interlocked.Increment(ref _referenceMisses);
         else Interlocked.Increment(ref _referenceHits);
         try { return await cached.Value.WaitAsync(token).ConfigureAwait(false); }
@@ -88,12 +90,14 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
         var watch = Stopwatch.StartNew();
         try
         {
-            var image = await BitmapFileLoader.LoadAsync(path, 2048, CancellationToken.None).ConfigureAwait(false);
+            // Analysis and visible references use the same ICC/orientation boundary.
+            // Limit the normalized proxy by its longest edge (portrait included).
+            var image = await Task.Run(() => StudioQuickExport.Load(path, 2048)).ConfigureAwait(false);
             return await Task.Run(() =>
             {
                 var (_, _, _, buffer, analysis) = Prepare(image);
                 return new ReferenceLookSource(Guid.Empty, analysis.AssetId, Path.GetFileNameWithoutExtension(path), path,
-                    VisualAnalysisFingerprint.Compute(buffer), 1, analysis, "External");
+                    VisualAnalysisFingerprint.Compute(buffer), 1, analysis, "External", PixelStatistics: ReferencePixelStatistics.FromPixels(buffer));
             }).ConfigureAwait(false);
         }
         finally { Interlocked.Add(ref _referenceAnalysisTicks, watch.Elapsed.Ticks); }
@@ -108,8 +112,11 @@ public sealed class ReferenceLookPreviewService : IReferenceRenderBackend
         var rgb = new byte[input.PixelWidth * input.PixelHeight * 3];
         for (var pixel = 0; pixel < input.PixelWidth * input.PixelHeight; pixel++)
         { rgb[pixel * 3] = bgra[pixel * 4 + 2]; rgb[pixel * 3 + 1] = bgra[pixel * 4 + 1]; rgb[pixel * 3 + 2] = bgra[pixel * 4]; }
-        var buffer = new VisualPixelBuffer(input.PixelWidth, input.PixelHeight, rgb);
-        return (input, bgra, stride, buffer, VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), VisualAnalysisFingerprint.Compute(buffer), buffer)));
+        var alpha = Enumerable.Range(0, input.PixelWidth * input.PixelHeight).Select(i => bgra[i * 4 + 3]).ToArray();
+        var buffer = new VisualPixelBuffer(input.PixelWidth, input.PixelHeight, rgb, alpha);
+        // Keep historical v1 analysis unchanged; v2 uses the alpha-aware pixel statistics above.
+        var legacy = new VisualPixelBuffer(input.PixelWidth, input.PixelHeight, rgb);
+        return (input, bgra, stride, buffer, VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), VisualAnalysisFingerprint.Compute(legacy), legacy)));
     }
 
     private static byte ToByte(double value) => (byte)Math.Clamp(Math.Round(value * 255), 0, 255);

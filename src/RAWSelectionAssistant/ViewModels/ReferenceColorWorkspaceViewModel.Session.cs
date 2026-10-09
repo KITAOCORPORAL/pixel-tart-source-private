@@ -11,6 +11,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand OpenSessionCommand { get; private set; } = null!;
     public string? SessionPath { get; private set; }
     private bool _sessionLoading;
+    private ColorStudioLayout _layout = new();
+    public ColorStudioLayout Layout { get => _layout; set => SetProperty(ref _layout, value.Normalize()); }
     private void InitializeSessionCommands()
     {
         UndoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(false), _ => _batchUndo.Count > 0 && !IsLoading && !IsExporting);
@@ -35,7 +37,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         await FlushMetadataAsync();
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
-            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter);
+            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
+            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
         await ColorStudioSessionStore.SaveAsync(path, document, token);
         SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
     }
@@ -56,6 +59,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         await FlushMetadataAsync(); ActiveTarget = null; Editor.ClearTargetHistories(); Targets.Clear(); _batchUndo.Clear(); _batchRedo.Clear(); RaiseBatchHistory();
         foreach (var target in restored) Targets.Add(target);
         FilterScope = document.FilterScope; MinimumRating = document.MinimumRating; ColorLabelFilter = document.ColorLabelFilter;
+        Layout = document.Layout ?? new(); Editor.ContextRailOpen = Layout.AuxiliaryOpen;
         var missing = 0;
         foreach (var target in restored)
         {

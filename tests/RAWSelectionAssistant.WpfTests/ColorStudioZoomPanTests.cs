@@ -8,6 +8,21 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class ColorStudioZoomPanTests
 {
+    [TestMethod]
+    public void ReferenceFollowUsesExistingViewportAndClampsToOwnBounds()
+    {
+        var target = new ColorStudioZoomPanState();
+        target.Configure(new Size(400, 300), new Size(1600, 1000));
+        target.SetZoom(1); target.PanBy(new Vector(100, 80));
+        var reference = new ColorStudioZoomPanState();
+        reference.Configure(new Size(400, 300), new Size(1000, 1600));
+        reference.Follow(target);
+        Assert.AreEqual(1, reference.Zoom);
+        Assert.AreEqual(100, reference.PanX); Assert.AreEqual(80, reference.PanY);
+        target.Fit(); reference.Follow(target);
+        Assert.IsTrue(reference.IsFit);
+        Assert.AreEqual(.1875, reference.Zoom, 1e-12);
+    }
     private static BitmapSource Image(int width = 1000, int height = 800)
     {
         var image = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, new byte[width * height * 4], width * 4);
@@ -24,6 +39,32 @@ public sealed class ColorStudioZoomPanTests
         Assert.AreEqual(0, state.PanX); Assert.AreEqual(0, state.PanY); Assert.IsTrue(state.IsFit);
         state.SetZoom(9); Assert.AreEqual(4, state.Zoom);
         state.SetZoom(.1); Assert.AreEqual(.25, state.Zoom);
+    }
+    [TestMethod]
+    public void LargeSourceWheelZoomDoesNotJumpToTwentyFivePercentOrStickThere()
+    {
+        var state = new ColorStudioZoomPanState();
+        state.Configure(new Size(800, 600), new Size(10000, 7500));
+        Assert.AreEqual(.08, state.Zoom, 1e-12);
+        var cursor = new Point(400, 300);
+        state.ZoomAbout(cursor, 1.12);
+        Assert.AreEqual(.0896, state.Zoom, 1e-12);
+        state.ZoomAbout(cursor, 1 / 1.12);
+        Assert.AreEqual(.08, state.Zoom, 1e-12);
+        state.ZoomAbout(cursor, 1 / 1.12);
+        Assert.IsLessThan(.08, state.Zoom);
+        for (var i = 0; i < 50; i++) state.ZoomAbout(cursor, 1.12);
+        Assert.IsTrue(double.IsFinite(state.Zoom));
+        state.SetZoom(.25);
+        state.ZoomAbout(cursor, 1 / 1.12);
+        Assert.IsLessThan(.25, state.Zoom);
+        var before = state.Zoom;
+        state.ZoomAbout(new Point(double.NaN, 20), 2);
+        Assert.AreEqual(before, state.Zoom);
+        Assert.IsTrue(double.IsFinite(state.PanX));
+        state.SetZoom(double.NaN); state.SetZoom(double.PositiveInfinity);
+        Assert.AreEqual(before, state.Zoom);
+        state.Fit(); Assert.AreEqual(.08, state.Zoom, 1e-12);
     }
     [TestMethod]
     public void ZoomAboutCursorPreservesImageCoordinateTests()

@@ -27,6 +27,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private Guid? _assetId;
     private long _revision;
     private int _pendingDebounceWork;
+    private long _scheduledEditRevision;
+    private long _stoppedEditRevision;
+    private Task? _interactivePump;
     private ReferenceLook? _selectedLook;
     private ReferenceLook? _persistedLook;
     private BitmapSource? _matchedImage;
@@ -109,6 +112,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public void StopProcessing()
     {
         CancelDetailPreviewRequest();
+        _stoppedEditRevision = _scheduledEditRevision;
         Interlocked.Increment(ref _revision);
         if (!IsBusy) return;
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
@@ -643,7 +647,10 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool ShowSplit => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "左右对比";
     public bool ShowSideBySide => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "并排对比";
     public string EffectiveViewMode => ShowOriginal ? "原片" : ViewMode;
-    public string StatusText { get => _statusText; private set => SetProperty(ref _statusText, value); }
+    private (int Imported, int Requested)? _xmpImportCounts;
+    public string StatusText { get => _statusText == "XmpImportSummary" && _xmpImportCounts is { } counts
+        ? StudioLocalizationService.Current.Format("XmpImportSummary", counts.Imported, counts.Requested) : _statusText;
+        private set => SetProperty(ref _statusText, value); }
 
     public double MatchStrength { get => SelectedLook?.Parameters.MatchStrength ?? _match; set => SetParameter(value, p => p with { MatchStrength = value }, ref _match, "match_strength"); }
     public double ToneStrength { get => SelectedLook?.Parameters.ToneStrength ?? _tone; set => SetParameter(value, p => p with { ToneStrength = value }, ref _tone, "tone_strength"); }
@@ -723,7 +730,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             var imported = await _xmpImportService.ImportAsync(paths, token: _lifetime.Token);
             foreach (var preset in imported) { AdobeXmpPresets.Remove(AdobeXmpPresets.FirstOrDefault(item => item.SourceHash == preset.SourceHash)!); AdobeXmpPresets.Insert(0, preset); }
             if (imported.Count > 0) SelectedAdobeXmpPreset = imported[0];
-            StatusText = imported.Count == paths.Count ? $"已导入 {imported.Count} 个 Adobe XMP 预设。" : $"已导入 {imported.Count}/{paths.Count} 个 Adobe XMP 预设。";
+            _xmpImportCounts = (imported.Count, paths.Count); StatusText = "XmpImportSummary";
+            OnPropertyChanged(nameof(StatusText));
         }
         catch (OperationCanceledException) { StatusText = "已停止导入预设。"; }
         catch (Exception) { StatusText = "Adobe XMP 导入失败；已有预设保持不变。"; }
@@ -793,7 +801,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         try
         {
             StatusText = "正在分析参考图…"; var source = await _preview.AnalyzeExternalReferenceAsync(path, _lifetime.Token); var now = DateTimeOffset.UtcNow;
-            var look = new ReferenceLook(Guid.NewGuid(), Path.GetFileNameWithoutExtension(path), _projectId, [source], new(), now, now);
+            var look = new ReferenceLook(Guid.NewGuid(), Path.GetFileNameWithoutExtension(path), _projectId, [source], new(), now, now, AlgorithmVersion: source.PixelStatistics is null ? 1 : 2);
             await _store.SaveAsync(look, token: _lifetime.Token); Looks.Insert(0, look); SelectedLook = look; StatusText = "参考图已安全关联；原文件未复制、未修改。";
         }
         catch (OperationCanceledException) { StatusText = "已停止；已恢复最后有效预览。"; }
@@ -889,17 +897,42 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void CopyParameters(ReferenceLookParameters value)
     { _match=value.MatchStrength;_tone=value.ToneStrength;_color=value.ColorStrength;_contrast=value.ContrastStrength;_saturation=value.SaturationStrength;_skin=value.SkinProtection;_highlight=value.HighlightProtection;_neutral=value.NeutralProtection;_keepOriginalTone=value.KeepOriginalTone; foreach(var name in new[]{nameof(MatchStrength),nameof(ToneStrength),nameof(ColorStrength),nameof(ContrastStrength),nameof(SaturationStrength),nameof(SkinProtection),nameof(HighlightProtection),nameof(NeutralProtection),nameof(KeepOriginalTone)})OnPropertyChanged(name); }
-    private async Task DebouncedRenderAsync()
+    private Task DebouncedRenderAsync()
     {
-        _render?.Cancel();
+        Interlocked.Increment(ref _scheduledEditRevision);
+        // During a pointer transaction serial proxy frames are useful even if
+        // another movement has been queued; no newer frame can be overwritten.
+        // Discrete edits and high-quality work invalidate/cancel immediately.
+        if (_editTransactionBefore is null || State == ProcessingState.RenderingHighQuality)
+        { Interlocked.Increment(ref _revision); _render?.Cancel(); }
+        // One serial, latest-input pump. Restarting a debounce on every mouse
+        // movement starved preview during a continuous curve/slider gesture.
+        // Coalesce pending edits while a proxy frame is computing; do not
+        // launch a worker for each event or let old workers publish out of order.
+        return _interactivePump is { IsCompleted: false } ? _interactivePump :
+            _interactivePump = PumpInteractiveEditsAsync();
+    }
+    private async Task PumpInteractiveEditsAsync()
+    {
         Interlocked.Increment(ref _pendingDebounceWork);
         try
         {
-            var revision = Interlocked.Increment(ref _revision); await Task.Delay(100);
-            if (revision == Volatile.Read(ref _revision)) await RenderAsync(interactive: true);
-            await Task.Delay(300);
-            if (revision + 1 == Volatile.Read(ref _revision)) await RenderAsync(interactive: false);
+            while (!_lifetime.IsCancellationRequested)
+            {
+                await Task.Delay(80, _lifetime.Token);
+                var request = Volatile.Read(ref _scheduledEditRevision);
+                if (request <= _stoppedEditRevision) return;
+                await RenderAsync(interactive: true);
+                if (request <= _stoppedEditRevision) return;
+                if (request != Volatile.Read(ref _scheduledEditRevision)) continue;
+                await Task.Delay(300, _lifetime.Token);
+                if (request <= _stoppedEditRevision) return;
+                if (request != Volatile.Read(ref _scheduledEditRevision)) continue;
+                await RenderAsync(interactive: false);
+                if (request == Volatile.Read(ref _scheduledEditRevision)) return;
+            }
         }
+        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested) { }
         finally { Interlocked.Decrement(ref _pendingDebounceWork); OnPropertyChanged(nameof(IsSettled)); }
     }
     private async Task RenderAsync(CancellationToken outer = default, bool interactive = false)

@@ -35,7 +35,7 @@ public static class StudioQuickExport
         };
         var transformed=new TransformedBitmap(image,new MatrixTransform(matrix));transformed.Freeze();return transformed;
     }
-    public static BitmapSource Load(string path)
+    public static BitmapSource Load(string path, int? maximumPixelEdge = null)
     {
         using var file=File.OpenRead(path);
         var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
@@ -68,6 +68,11 @@ public static class StudioQuickExport
         // Normalize the raster, not only its dimensions. Detachment below deliberately
         // discards source metadata, so orientation must be applied before that boundary.
         result=ApplyOrientation(result,orientation);
+        if (maximumPixelEdge is > 0 && Math.Max(result.PixelWidth, result.PixelHeight) > maximumPixelEdge.Value)
+        {
+            var scale = maximumPixelEdge.Value / (double)Math.Max(result.PixelWidth, result.PixelHeight);
+            result = new TransformedBitmap(result, new ScaleTransform(scale, scale));
+        }
         // A frozen BitmapFrame can still retain a decoder owned by the decoding
         // thread. Later FormatConvertedBitmap.Freeze walks that decoder and fails
         // on the preview worker. Publish detached pixels, including palette/alpha.

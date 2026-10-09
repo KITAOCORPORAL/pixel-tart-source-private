@@ -59,12 +59,13 @@
   </Style>
  </UserControl.Resources>
  <Grid Background="{DynamicResource CanvasBackgroundBrush}" Margin="8,6">
+  <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition x:Name="FilmstripDockColumn" Width="0"/></Grid.ColumnDefinitions>
   <Grid.RowDefinitions>
    <RowDefinition Height="Auto" />
    <RowDefinition Height="*" />
    <RowDefinition Height="Auto" />
   </Grid.RowDefinitions>
-  <Grid x:Name="SourceHeader" Grid.Row="0" Margin="0,0,0,6">
+  <Grid x:Name="SourceHeader" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,6">
    <Grid.RowDefinitions>
     <RowDefinition Height="Auto" />
     <RowDefinition Height="Auto" />
@@ -78,14 +79,12 @@
     <TextBlock Text="{Binding TargetName}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" MaxWidth="310" HorizontalAlignment="Left" ToolTip="{Binding TargetName}" Visibility="Collapsed" />
    </StackPanel>
    <WrapPanel x:Name="HeaderActions" Grid.Column="1">
-    <views:StudioLanguageSelector Margin="0,0,6,0" />
     <Button Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText SaveBatch}" Command="{Binding SaveSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText FocusImage}" Command="{Binding Editor.ToggleFocusViewCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <Button x:Name="EditRailButton" Content="{views:StudioText EditPanel}" Click="OnToggleEditRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <Button x:Name="ContextRailButton" Content="{views:StudioText AuxPanel}" Click="OnToggleAuxRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
-    <views:StudioExportFormatSelector Margin="6,0,0,0" />
-    <Button Content="{views:StudioText QuickExport}" Command="{Binding ExportSelectedCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" AutomationProperties.Name="{views:StudioText Key='快速导出所选照片'}" />
+    <views:StudioExportMenu Margin="8,0,0,0" />
     <Button Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
    </WrapPanel>
   </Grid>
@@ -96,6 +95,8 @@
     <ColumnDefinition x:Name="CenterColumn" Width="0.63*" MinWidth="520" />
     <ColumnDefinition x:Name="RightColumn" Width="0.18*" MinWidth="224" />
    </Grid.ColumnDefinitions>
+   <Thumb x:Name="LeftResize" Tag="Left" Grid.Column="0" Width="7" HorizontalAlignment="Right" Cursor="SizeWE" DragDelta="OnRailResize" Panel.ZIndex="5" Background="Transparent"><Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="{TemplateBinding Background}" /></ControlTemplate></Thumb.Template></Thumb>
+   <Thumb x:Name="RightResize" Tag="Right" Grid.Column="2" Width="7" HorizontalAlignment="Left" Cursor="SizeWE" DragDelta="OnRailResize" Panel.ZIndex="5" Background="Transparent"><Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="{TemplateBinding Background}" /></ControlTemplate></Thumb.Template></Thumb>
    <Border x:Name="EditingRail" Grid.Column="2" Style="{StaticResource PixelTart.Inspector}" MinWidth="0" MaxWidth="Infinity" Margin="8,0,0,0" Padding="8,8" Visibility="{Binding Editor.IsLeftRailVisible, Converter={StaticResource BoolVisibility}}">
     <Border.Resources>
      <DataTemplate x:Key="RailActionText"><TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center" /></DataTemplate>
@@ -137,30 +138,26 @@
         <WrapPanel />
        </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
-      <ListBoxItem Content="{views:StudioText SpaceShort}" Tag="Space" />
+      <ListBoxItem Content="{views:StudioText Basic}" Tag="Basic" />
       <ListBoxItem Content="{views:StudioText Color}" Tag="Color" />
-      <ListBoxItem Content="{views:StudioText Levels}" Tag="Levels" />
-      <ListBoxItem Content="{views:StudioText Curve}" Tag="Curve" />
+      <ListBoxItem Content="{views:StudioText Tone}" Tag="Tone" />
       <ListBoxItem Content="{views:StudioText Details}" Tag="Details" />
-      <ListBoxItem Content="{views:StudioText Film}" Tag="Film" />
-      <ListBoxItem Content="{views:StudioText Creative}" Tag="Creative" />
+      <ListBoxItem Content="{views:StudioText Stylized}" Tag="Stylized" />
      </ListBox>
      <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
       <StackPanel x:Name="ToolPages">
-       <StackPanel x:Name="SpaceToolPage" Visibility="Collapsed">
-        <TextBlock Text="{views:StudioText SpaceTitle}" Style="{StaticResource SectionTitleText}" Margin="0,10,0,4" />
-        <TextBlock Text="{views:StudioText SpaceExplanation}" TextWrapping="Wrap" Style="{StaticResource CaptionText}" />
-        <views:StudioSpaceControls />
+       <StackPanel x:Name="BasicToolPage" Visibility="Collapsed">
+        <views:StudioToolPanel NodeTypes="WhiteBalance,BasicTone" />
        </StackPanel>
        <StackPanel x:Name="ColorToolPage">
-        <views:StudioToolPanel NodeTypes="WhiteBalance,BasicTone" />
         <Expander Header="{views:StudioText ColorRange}" IsExpanded="False" Style="{StaticResource PixelTart.Section}">
          <StackPanel>
           <WrapPanel>
            <Button Content="{views:StudioText CustomRange}" Click="OnAddLocalAdjustment" Style="{StaticResource PixelTart.Button.Ghost}" />
-           <Button Content="{views:StudioText Red}" Tag="Red" Click="OnBasicColorRange" Style="{StaticResource PixelTart.Button.Ghost}" />
-           <Button Content="{views:StudioText Green}" Tag="Green" Click="OnBasicColorRange" Style="{StaticResource PixelTart.Button.Ghost}" />
-           <Button Content="{views:StudioText Blue}" Tag="Blue" Click="OnBasicColorRange" Style="{StaticResource PixelTart.Button.Ghost}" />
+           <Button Tag="Red" Click="OnBasicColorRange" ToolTip="{views:StudioText Red}" AutomationProperties.Name="{views:StudioText Red}" Style="{StaticResource PixelTart.Button.Ghost}"><Border Background="#DC322D" Width="24" Height="20" CornerRadius="3" /></Button>
+           <Button Tag="Green" Click="OnBasicColorRange" ToolTip="{views:StudioText Green}" AutomationProperties.Name="{views:StudioText Green}" Style="{StaticResource PixelTart.Button.Ghost}"><Border Background="#37A03C" Width="24" Height="20" CornerRadius="3" /></Button>
+           <Button Tag="Blue" Click="OnBasicColorRange" ToolTip="{views:StudioText Blue}" AutomationProperties.Name="{views:StudioText Blue}" Style="{StaticResource PixelTart.Button.Ghost}"><Border Background="#2350DC" Width="24" Height="20" CornerRadius="3" /></Button>
+           <Button Content="{views:StudioText Key='吸管'}" Click="OnStartRangeSampling" Style="{StaticResource PixelTart.Button.Ghost}" />
           </WrapPanel>
           <StackPanel Margin="0,12,0,0">
            <TextBlock Text="{views:StudioText Key='选中节点参数'}" Style="{StaticResource SectionTitleText}" />
@@ -202,7 +199,7 @@
             </Grid>
             <Slider Style="{StaticResource PixelTart.Slider}" Minimum="-100" Maximum="100" Value="{Binding Editor.RangeLightness}" />
             <CheckBox Content="{views:StudioText Key='显示选区'}" Style="{StaticResource PixelTart.Toggle}" IsChecked="{Binding Editor.ShowSelection}" />
-            <TextBlock Text="{Binding RangeSelectionStage}" Style="{StaticResource OptionalStatus}" TextWrapping="Wrap" />
+            <TextBlock Text="{views:StudioProductText RangeSelectionStage}" Style="{StaticResource OptionalStatus}" TextWrapping="Wrap" />
             <CheckBox Content="{views:StudioText Key='保持原始明度'}" ToolTip="{views:StudioText Key='在调整颜色时尽量保留该区域原本的视觉明暗关系。'}" Style="{StaticResource PixelTart.Toggle}" IsChecked="{Binding Editor.KeepOriginalLuminance}" Margin="0,10,0,4" />
             <WrapPanel>
              <Button Content="{views:StudioText Key='吸管'}" Command="{Binding Editor.StartSamplingCommand}" CommandParameter="普通取样" Style="{StaticResource PixelTart.Button.Ghost}" />
@@ -330,16 +327,19 @@
         </Expander>
         <views:StudioToolPanel NodeTypes="SkinTone,ColorBalance" />
        </StackPanel>
-       <StackPanel x:Name="LevelsToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="ToneToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="LevelsToolPage">
         <views:StudioToolPanel NodeTypes="Levels" />
        </StackPanel>
-       <StackPanel x:Name="CurveToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="CurveToolPage">
         <views:StudioCurveEditor />
+       </StackPanel>
        </StackPanel>
        <StackPanel x:Name="DetailsToolPage" Visibility="Collapsed">
         <views:StudioToolPanel NodeTypes="Details" />
        </StackPanel>
-       <StackPanel x:Name="FilmToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="StylizedToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="FilmToolPage">
         <TextBlock Text="{views:StudioText Key='Pixel Tart 胶片'}" Style="{StaticResource SectionTitleText}" Margin="0,0,0,12" />
         <CheckBox Content="{views:StudioText Key='启用胶片质感'}" Style="{StaticResource PixelTart.Toggle}" IsChecked="{Binding Editor.FilmEnabled}" />
         <TextBlock Text="{views:StudioText Key='胶片方案'}" Style="{StaticResource ParameterLabel}" Margin="0,16,0,0" />
@@ -399,7 +399,7 @@
         <Slider Style="{StaticResource PixelTart.Slider}" Minimum="0" Maximum="100" Value="{Binding Editor.FilmTextureAmount}" />
         <Button Content="{views:StudioText Key='重新生成纹理'}" Command="{Binding Editor.RegenerateFilmCommand}" Style="{StaticResource SecondaryButton}" Margin="0,12,0,0" />
        </StackPanel>
-       <StackPanel x:Name="CreativeToolPage" Visibility="Collapsed">
+       <StackPanel x:Name="CreativeToolPage">
         <Expander Header="{views:StudioText Key='色彩过渡'}" IsExpanded="True" Style="{StaticResource PixelTart.Section}">
          <StackPanel>
           <TextBlock Text="{views:StudioText Key='轻微降低全局色度，保持明度与色相；作为独立节点进入调整栈。'}" TextWrapping="Wrap" Style="{StaticResource CaptionText}" />
@@ -425,19 +425,20 @@
          <Button Content="{views:StudioText Key='导出参考仿色 3D LUT（65³）'}" ContentTemplate="{StaticResource RailActionText}" Command="{Binding Editor.ExportCubeCommand}" Style="{StaticResource SecondaryButton}" Margin="0,8,0,0" />
         </StackPanel>
        </StackPanel>
+       </StackPanel>
       </StackPanel>
      </ScrollViewer>
     </Grid>
    </Border>
    <Border Grid.Column="1" Background="{DynamicResource SurfacePrimaryBrush}" CornerRadius="{DynamicResource RadiusPanel}" ClipToBounds="True">
     <DockPanel>
-     <Grid>
+     <Grid x:Name="PhotoWorkspace">
       <Grid.RowDefinitions>
-       <RowDefinition Height="Auto" />
        <RowDefinition />
        <RowDefinition Height="Auto" />
+       <RowDefinition Height="Auto" />
       </Grid.RowDefinitions>
-      <Grid x:Name="PreviewCanvas" Grid.Row="1" Background="{DynamicResource CanvasBackgroundBrush}" ClipToBounds="True" PreviewMouseDown="OnPreviewCanvasMouseLeftButtonDown" MouseWheel="OnPreviewCanvasMouseWheel" MouseMove="OnPreviewCanvasMouseMove" MouseUp="OnPreviewCanvasMouseLeftButtonUp" LostMouseCapture="OnPreviewLostCapture">
+      <Grid x:Name="PreviewCanvas" Grid.Row="0" Background="{DynamicResource CanvasBackgroundBrush}" ClipToBounds="True" PreviewMouseDown="OnPreviewCanvasMouseLeftButtonDown" MouseWheel="OnPreviewCanvasMouseWheel" MouseMove="OnPreviewCanvasMouseMove" MouseUp="OnPreviewCanvasMouseLeftButtonUp" LostMouseCapture="OnPreviewLostCapture">
        <Border x:Name="ColorInspectionHint" Visibility="Collapsed" Panel.ZIndex="2" Background="{DynamicResource SurfaceElevatedBrush}" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" IsHitTestVisible="False">
         <TextBlock Text="{views:StudioText Key='点选当前显示图像 → 点云高亮 · Esc 退出'}" />
        </Border>
@@ -455,10 +456,10 @@
         <Button Content="{views:StudioText Key='选择照片'}" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0" />
        </StackPanel>
       </Grid>
-      <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-       <StackPanel Orientation="Horizontal" Margin="5,3">
-        <Button Content="{views:StudioText Fit}" Click="OnFitClick" Style="{StaticResource PixelTart.Button.Ghost}" />
-        <Button Content="{views:StudioText ActualSize}" Click="OnActualSizeClick" Style="{StaticResource PixelTart.Button.Ghost}" />
+      <ScrollViewer x:Name="PhotoToolsBand" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Right">
+       <StackPanel Orientation="Horizontal" Margin="5,3" HorizontalAlignment="Right">
+        <Button Click="OnFitClick" Style="{StaticResource PixelTart.Button.Icon}" ToolTip="{views:StudioText Fit}" AutomationProperties.Name="{views:StudioText Fit}"><Path Style="{StaticResource Icon20}" Data="M 3,8 L 3,3 8,3 M 12,3 L 17,3 17,8 M 17,12 L 17,17 12,17 M 8,17 L 3,17 3,12" /></Button>
+        <Button Content="1:1" Click="OnActualSizeClick" Style="{StaticResource PixelTart.Button.Icon}" ToolTip="{views:StudioText ActualSize}" AutomationProperties.Name="{views:StudioText ActualSize}" Padding="2" />
         <Button Click="OnZoomOutClick" Style="{StaticResource PixelTart.Button.Icon}" ToolTip="{views:StudioText Key='缩小'}" AutomationProperties.Name="{views:StudioText Key='缩小'}"><Path Style="{StaticResource Icon20}" Data="M 4,10 L 16,10" /></Button>
         <TextBlock x:Name="ZoomLabel" Text="{views:StudioText Fit}" VerticalAlignment="Center" Margin="5,0" />
         <Button Click="OnZoomInClick" Style="{StaticResource PixelTart.Button.Icon}" ToolTip="{views:StudioText Key='放大'}" AutomationProperties.Name="{views:StudioText Key='放大'}"><Path Style="{StaticResource Icon20}" Data="M 4,10 L 16,10 M 10,4 L 10,16" /></Button>
@@ -506,6 +507,7 @@
          </StackPanel>
         </Expander>
         <StackPanel>
+         <Expander Header="{views:StudioText Key='高级'}" IsExpanded="False" Style="{StaticResource PixelTart.Section}"><StackPanel>
          <ComboBox ItemsSource="{Binding Editor.MatchV4ExecutionModes}" SelectedItem="{Binding Editor.MatchV4ExecutionMode}" Width="76" Margin="8,0,0,0" Visibility="{Binding Editor.IsMatchV4Beta, Converter={StaticResource BoolVisibility}}" AutomationProperties.Name="{views:StudioText Key='V4 执行模式'}" />
          <ComboBox ItemsSource="{Binding Editor.MatchEngines}" SelectedItem="{Binding Editor.MatchEngine}" Width="142" Margin="8,0,0,0" AutomationProperties.Name="{views:StudioText Key='匹配引擎'}">
           <ComboBox.ItemTemplate>
@@ -514,6 +516,7 @@
            </DataTemplate>
           </ComboBox.ItemTemplate>
          </ComboBox>
+         </StackPanel></Expander>
          <ItemsControl ItemsSource="{Binding Editor.ReferenceSources}">
           <ItemsControl.ItemTemplate>
            <DataTemplate>
@@ -521,17 +524,20 @@
              <StackPanel>
               <Grid>
                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64" />
                 <ColumnDefinition />
                </Grid.ColumnDefinitions>
-               <StackPanel>
-                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+               <views:ReferenceNavigator SourcePath="{Binding Source.SourcePath}" IsThumbnail="True" Height="64" Margin="0,0,6,0" />
+               <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" ToolTip="{Binding Name}" />
                 <TextBlock Text="{views:StudioProductText SourceLabel}" Style="{StaticResource CaptionText}" />
                 <TextBlock Text="{views:StudioProductText AvailabilityText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" />
                </StackPanel>
               </Grid>
               <Grid Margin="0,12,0,0">
-               <TextBlock Text="{views:StudioText Key='权重'}" Style="{StaticResource ParameterLabel}" />
-               <TextBlock Text="{Binding WeightPercent, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}" />
+               <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+               <TextBlock Text="{views:StudioText Key='权重'}" Style="{StaticResource ParameterLabel}" TextWrapping="Wrap" />
+               <TextBlock Grid.Column="1" Text="{Binding WeightPercent, StringFormat={}{0:0}%}" Style="{StaticResource ParameterValue}" Margin="8,0,0,0" />
               </Grid>
               <Slider Style="{StaticResource PixelTart.Slider}" Minimum="0.1" Maximum="100" Value="{Binding WeightPercent}" />
               <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
@@ -628,6 +634,9 @@
          </StackPanel>
         </Expander>
         <views:StudioSpaceAppearanceControls />
+        <TextBlock Text="{views:StudioText SpaceTitle}" Style="{StaticResource SectionTitleText}" Margin="0,10,0,4" />
+        <TextBlock Text="{views:StudioText SpaceExplanation}" TextWrapping="Wrap" Style="{StaticResource CaptionText}" />
+        <views:StudioSpaceControls />
        </StackPanel>
        <StackPanel x:Name="PresetsPage" Visibility="Collapsed">
         <Expander Header="{views:StudioText FilmPreset}" IsExpanded="True" Style="{StaticResource PixelTart.Section}">
@@ -799,7 +808,7 @@
     </Grid>
    </Border>
   </Grid>
-  <Border x:Name="FilmstripPanel" Grid.Row="2" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="8" Padding="4" Margin="0,6,0,0">
+  <Border x:Name="FilmstripPanel" Grid.Row="2" Grid.ColumnSpan="2" Background="{DynamicResource SurfaceSecondaryBrush}" CornerRadius="8" Padding="4" Margin="0,6,0,0">
    <Expander x:Name="FilmstripExpander" Margin="0" Header="{views:StudioText Photos}" IsExpanded="True" Style="{StaticResource PixelTart.Section}" Padding="0">
     <Expander.Template>
      <ControlTemplate TargetType="Expander">
@@ -815,7 +824,11 @@
     </Expander.Template>
     <DockPanel LastChildFill="True">
      <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-      <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+      <WrapPanel x:Name="FilmstripActions" Margin="0,0,0,3">
+       <Button Content="{views:StudioText FilmstripLayout}" Click="OnFilmstripLayoutMenu" Style="{StaticResource PixelTart.Button.Ghost}" />
+       <Button x:Name="SlideshowPrevious" ToolTip="{views:StudioText PreviousPhoto}" AutomationProperties.Name="{views:StudioText PreviousPhoto}" Click="OnSlideshowPrevious" Visibility="Collapsed" Style="{StaticResource PixelTart.Button.Ghost}"><Path Data="M 12,3 L 5,10 L 12,17" Style="{StaticResource Icon20}" /></Button>
+       <Button x:Name="SlideshowPlay" Content="{views:StudioText PlaySlideshow}" Click="OnSlideshowPlay" Visibility="Collapsed" Style="{StaticResource PixelTart.Button.Ghost}" />
+       <Button x:Name="SlideshowNext" ToolTip="{views:StudioText NextPhoto}" AutomationProperties.Name="{views:StudioText NextPhoto}" Click="OnSlideshowNext" Visibility="Collapsed" Style="{StaticResource PixelTart.Button.Ghost}"><Path Data="M 5,3 L 12,10 L 5,17" Style="{StaticResource Icon20}" /></Button>
        <ComboBox MinWidth="98" MaxWidth="160" ItemsSource="{Binding FilterScopes}" SelectedValuePath="Id" SelectedValue="{Binding FilterScope}" AutomationProperties.Name="{views:StudioText Key='照片范围'}">
         <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{views:StudioProductText LabelKey}" /></DataTemplate></ComboBox.ItemTemplate>
        </ComboBox>
@@ -863,7 +876,7 @@
          </StackPanel>
         </Border>
        </Popup>
-      </StackPanel>
+      </WrapPanel>
      </ScrollViewer>
      <StackPanel DockPanel.Dock="Bottom" Margin="8,2,0,0">
       <TextBlock Text="{views:StudioProductText ExportStatus}" Style="{StaticResource OptionalStatus}" />
@@ -886,25 +899,34 @@
       </ListBox.ItemContainerStyle>
       <ListBox.ItemTemplate>
        <DataTemplate>
-        <Border Width="102" Height="72" Margin="2,0" Padding="2" BorderThickness="3">
+        <Border Margin="2,0" Padding="2" BorderThickness="3">
          <Border.ToolTip><StackPanel><TextBlock Text="{Binding FileName}" /><TextBlock Text="{views:StudioProductText ThumbnailStatus}" /></StackPanel></Border.ToolTip>
          <Border.Style>
           <Style TargetType="Border">
            <Setter Property="BorderBrush" Value="Transparent" />
+           <Setter Property="Width" Value="102" />
+           <Setter Property="Height" Value="72" />
            <Setter Property="Background" Value="{DynamicResource SurfacePrimaryBrush}" />
            <Style.Triggers>
             <DataTrigger Binding="{Binding IsSelected}" Value="True">
              <Setter Property="BorderBrush" Value="{DynamicResource TextSecondaryBrush}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding IsActive}" Value="True">
+           <DataTrigger Binding="{Binding IsActive}" Value="True">
              <Setter Property="BorderBrush" Value="{DynamicResource AccentValueBrush}" />
              <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
-            </DataTrigger>
+           </DataTrigger>
+           <DataTrigger Binding="{Binding DataContext.Layout.FilmstripView, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="List">
+            <Setter Property="Width" Value="260"/><Setter Property="Height" Value="72"/>
+           </DataTrigger>
            </Style.Triggers>
           </Style>
          </Border.Style>
          <Grid>
-          <Image Source="{Binding Thumbnail}" Stretch="Uniform" />
+          <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
+          <Image Source="{Binding Thumbnail}" Stretch="Uniform" Width="90" />
+          <TextBlock Grid.Column="1" Text="{Binding FileName}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="6,0">
+           <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding DataContext.Layout.FilmstripView, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="List"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+          </TextBlock>
           <Border Width="9" Height="9" Background="{Binding ColorLabelBrush}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
           <Border Background="#A0000000" HorizontalAlignment="Left" VerticalAlignment="Bottom">
            <TextBlock Text="{Binding Rating, StringFormat=★ {0}}" FontSize="10" Foreground="White" Padding="2,0" />

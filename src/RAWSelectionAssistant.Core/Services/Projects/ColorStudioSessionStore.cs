@@ -8,8 +8,23 @@ public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetI
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
     int? SessionRating = null, string? SessionColorLabel = null);
 
+public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
+    bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
+    string FilmstripDock = "Bottom", string FilmstripView = "Grid", bool FilmstripOpen = true)
+{
+    public ColorStudioLayout Normalize() => this with
+    {
+        AuxiliaryWidth = double.IsFinite(AuxiliaryWidth) ? Math.Clamp(AuxiliaryWidth, 240, 440) : 290,
+        EditingWidth = double.IsFinite(EditingWidth) ? Math.Clamp(EditingWidth, 312, 440) : 340,
+        AuxiliaryMode = Math.Clamp(AuxiliaryMode, 0, 3), ToolMode = Math.Clamp(ToolMode, 0, 4),
+        FilmstripDock = FilmstripDock == "Right" ? "Right" : "Bottom",
+        FilmstripView = FilmstripView is "List" or "Slideshow" ? FilmstripView : "Grid"
+    };
+}
+
 public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSessionTarget> Targets, Guid? ActiveTargetId,
-    string FilterScope = "All", int MinimumRating = 0, string ColorLabelFilter = "All", int Version = 1)
+    string FilterScope = "All", int MinimumRating = 0, string ColorLabelFilter = "All", int Version = 1,
+    ColorStudioLayout? Layout = null)
 {
     public ColorStudioSessionDocument Normalize()
     {
@@ -26,7 +41,7 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
             ExecutionMode = Enum.IsDefined(x.ExecutionMode) ? x.ExecutionMode : throw new InvalidDataException("不支持的执行模式。")
         }).ToArray();
         foreach (var target in targets) target.Film?.Validate();
-        return this with { Targets = targets, MinimumRating = Math.Clamp(MinimumRating, 0, 5) };
+        return this with { Targets = targets, MinimumRating = Math.Clamp(MinimumRating, 0, 5), Layout = Layout?.Normalize() };
     }
 }
 

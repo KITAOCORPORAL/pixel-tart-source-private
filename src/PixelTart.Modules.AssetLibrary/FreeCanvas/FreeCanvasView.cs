@@ -217,12 +217,26 @@ public sealed class FreeCanvasView : UserControl
     }
     private async void OpenContextMenu()
     {
-        if(Editor.Selected.Count==0)return;var menu=new ContextMenu();menu.SetResourceReference(StyleProperty,"PixelTart.Menu.Context");
+        var menu = await CreateSelectionMenuAsync();
+        if (menu.Items.Count == 0) return;
+        menu.PlacementTarget = Surface;
+        foreach (var item in menu.Items.OfType<MenuItem>()) AssetLibraryPage.AttachContextSubmenuPlacement(item);
+        menu.IsOpen = true;
+    }
+    internal async Task<ContextMenu> CreateSelectionMenuAsync()
+    {
+        var menu=new ContextMenu();menu.SetResourceReference(StyleProperty,"PixelTart.Menu.Context");
+        if(Editor.Selected.Count==0)return menu;
         void Add(string title,Action action){var entry=new MenuItem{Header=title};entry.Click+=(_,_)=>action();menu.Items.Add(entry);}
-        if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage){var item=Editor.Selected[0];Add("查看大图",()=>{if(ViewAsset is not null)_=ViewAsset(item);});Add("在素材库中显示",()=>{if(RevealAsset is not null)_=RevealAsset(item);});}
-        var boards=new MenuItem{Header="加入灵感板"};menu.Items.Add(boards);
-        if(BoardLoader is not null)foreach(var board in await BoardLoader()){var entry=new MenuItem{Header=board.Name};entry.Click+=async(_,_)=>await SaveBoardAsync(true,board.Id);boards.Items.Add(entry);}
-        Add("保存为灵感板",()=>_=SaveBoardAsync(true));menu.Items.Add(new Separator());
+        if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage){var item=Editor.Selected[0];if(ViewAsset is not null)Add("查看大图",()=>_=ViewAsset(item));if(RevealAsset is not null)Add("在素材库中显示",()=>_=RevealAsset(item));}
+        if (SaveBoard is not null && Editor.Selected.Any(item => item.IsImage))
+        {
+            var boards=new MenuItem{Header="灵感板"};
+            if(BoardLoader is not null)
+                foreach(var board in await BoardLoader()){var entry=new MenuItem{Header=board.Name};entry.Click+=async(_,_)=>await SaveBoardAsync(true,board.Id);boards.Items.Add(entry);}
+            var save=new MenuItem{Header="保存为新灵感板"};save.Click+=(_,_)=>_=SaveBoardAsync(true);boards.Items.Add(save);menu.Items.Add(boards);
+        }
+        if(menu.Items.Count>0)menu.Items.Add(new Separator());
         void Submenu(string label,IEnumerable<(string,Action)> actions){var parent=new MenuItem{Header=label};foreach(var(title,action)in actions){var child=new MenuItem{Header=title};child.Click+=(_,_)=>action();parent.Items.Add(child);}menu.Items.Add(parent);}
         if(Editor.Selected.Any(item=>item.IsImage)&&AnalyzePalette is not null)
         {
@@ -231,12 +245,18 @@ public sealed class FreeCanvasView : UserControl
             if(Editor.Selected.Count==1){var monochrome=new MenuItem{Header="创建黑白参考副本"};monochrome.Click+=(_,_)=>{var selected=Editor.Selected[0];Editor.Add([selected with{X=selected.X+32,Y=selected.Y+32,Monochrome=true,Locked=false,GroupId=null,Name=selected.Name+" · 黑白"}]);};visual.Items.Add(monochrome);}
             menu.Items.Add(visual);
         }
-        Add("复制",Editor.Duplicate);if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage)Add("裁切",Surface.BeginCrop);
-        Submenu("旋转",RotationActions());
-        Submenu("镜像",[("水平翻转",()=>Editor.Flip(true)),("垂直翻转",()=>Editor.Flip(false))]);
-        Submenu("层级",[("置于顶层",()=>Editor.Layer(true)),("置于底层",()=>Editor.Layer(false))]);
-        Add("组合",Editor.Group);Add("解除组合",Editor.Ungroup);Add(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked)));
-        menu.Items.Add(new Separator());Add("移出画布",Editor.Remove);menu.PlacementTarget=Surface;foreach(var item in menu.Items.OfType<MenuItem>())AssetLibraryPage.AttachContextSubmenuPlacement(item);menu.IsOpen=true;
+        // Use the same clipboard and duplicate commands as the editing toolbar.
+        AddMenuAction(menu,"复制",Editor.Copy,true,"Ctrl+C");
+        AddMenuAction(menu,"粘贴",Editor.Paste,Editor.CanPaste,"Ctrl+V");
+        AddMenuAction(menu,"创建副本",Editor.Duplicate,true,"Ctrl+D");
+        if(Editor.Selected.Count==1&&Editor.Selected[0].IsImage&&!Editor.Selected[0].Locked)Add("裁切",Surface.BeginCrop);
+        Submenu("变换",RotationActions().Concat(new (string,Action)[]{("水平翻转",()=>Editor.Flip(true)),("垂直翻转",()=>Editor.Flip(false))}));
+        Submenu("排列",[("前移",()=>Editor.StepLayer(true)),("后移",()=>Editor.StepLayer(false)),("置于顶层",()=>Editor.Layer(true)),("置于底层",()=>Editor.Layer(false))]);
+        AddMenuAction(menu,"组合",Editor.Group,Editor.Selected.Count>1,"Ctrl+G");
+        AddMenuAction(menu,"解除组合",Editor.Ungroup,Editor.Selected.Any(item=>item.GroupId is not null),"Ctrl+Shift+G");
+        Add(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked)));
+        menu.Items.Add(new Separator());AddMenuAction(menu,"移出画布",Editor.Remove,true,"Del");
+        return menu;
     }
     private async Task AddAnalyzedPaletteAsync(int count)
     {

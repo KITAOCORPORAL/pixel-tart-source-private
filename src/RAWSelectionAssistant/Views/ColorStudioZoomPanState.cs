@@ -29,8 +29,16 @@ public sealed class ColorStudioZoomPanState
     public void ZoomAbout(Point cursor, double factor) => ZoomAt(cursor, Zoom * factor);
     private void ZoomAt(Point cursor, double value)
     {
-        if (!double.IsFinite(value) || value <= 0 || Zoom <= 0) return;
-        var next = Math.Clamp(value, .25, 4);
+        if (!double.IsFinite(value) || value <= 0 || !double.IsFinite(cursor.X) ||
+            !double.IsFinite(cursor.Y) || !double.IsFinite(Zoom) || Zoom <= 0) return;
+        // Large sources commonly fit at 8–17%. A fixed 25% floor made the
+        // first wheel tick jump and prevented zooming back out without Fit.
+        // Retain the existing floor for ordinary images; allow four steps of
+        // headroom below Fit for large images, using source pixels, not proxies.
+        var fit = ImageSize.Width > 0 && ImageSize.Height > 0
+            ? Math.Min(ViewportSize.Width / ImageSize.Width, ViewportSize.Height / ImageSize.Height) : .25;
+        var minimum = double.IsFinite(fit) && fit > 0 && fit < .25 ? fit / 4 : .25;
+        var next = Math.Clamp(value, minimum, 4);
         var cx = ViewportSize.Width / 2; var cy = ViewportSize.Height / 2;
         PanX = cursor.X - cx - (cursor.X - cx - PanX) * next / Zoom;
         PanY = cursor.Y - cy - (cursor.Y - cy - PanY) * next / Zoom;
@@ -40,6 +48,14 @@ public sealed class ColorStudioZoomPanState
     {
         if (!double.IsFinite(delta.X) || !double.IsFinite(delta.Y)) return;
         PanX += delta.X; PanY += delta.Y; Clamp(); Changed?.Invoke(this, EventArgs.Empty);
+    }
+    public void Follow(ColorStudioZoomPanState other)
+    {
+        if (ReferenceEquals(other, this)) return;
+        if (other.IsFit) { Fit(); return; }
+        SetZoom(other.Zoom);
+        PanX = other.PanX; PanY = other.PanY; Clamp();
+        Changed?.Invoke(this, EventArgs.Empty);
     }
     private void Clamp()
     {

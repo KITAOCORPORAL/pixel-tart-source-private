@@ -19,6 +19,8 @@ public partial class ReferenceColorWorkspaceView
         var wasVisible = ContextRail.Visibility == Visibility.Visible;
         _editor.ContextRailOpen = !wasVisible;
         if (!wasVisible && GetAvailableWidth() < 950) _editRailOpen = false;
+        if (DataContext is ReferenceColorWorkspaceViewModel workspace)
+            workspace.Layout = workspace.Layout with { AuxiliaryOpen = _editor.ContextRailOpen, EditingOpen = _editRailOpen };
         UpdateResponsiveLayout();
     }
     private void OnAuxModeChanged(object sender, SelectionChangedEventArgs e)
@@ -27,27 +29,42 @@ public partial class ReferenceColorWorkspaceView
         var id = selected.Tag?.ToString();
         foreach (var (page, mode) in new[] { (ReferencePage, "Reference"), (SpacePage, "Space"), (PresetsPage, "Presets"), (NodesPage, "Nodes") })
             page.Visibility = id == mode ? Visibility.Visible : Visibility.Collapsed;
+        if (!_restoringLayout && DataContext is ReferenceColorWorkspaceViewModel workspace)
+            workspace.Layout = workspace.Layout with { AuxiliaryMode = AuxModes.SelectedIndex };
     }
     private void OnToolModeChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ToolPages is null || ToolModes.SelectedItem is not ListBoxItem selected) return;
         var id = selected.Tag?.ToString();
-        foreach (var (page, mode) in new[] { (SpaceToolPage, "Space"), (ColorToolPage, "Color"), (LevelsToolPage, "Levels"), (CurveToolPage, "Curve"), (DetailsToolPage, "Details"), (FilmToolPage, "Film"), (CreativeToolPage, "Creative") })
+        foreach (var (page, mode) in new[] { (BasicToolPage, "Basic"), (ColorToolPage, "Color"), (ToneToolPage, "Tone"), (DetailsToolPage, "Details"), (StylizedToolPage, "Stylized") })
             page.Visibility = id == mode ? Visibility.Visible : Visibility.Collapsed;
+        if (!_restoringLayout && DataContext is ReferenceColorWorkspaceViewModel workspace)
+            workspace.Layout = workspace.Layout with { ToolMode = ToolModes.SelectedIndex };
     }
     private void OnSurfaceSelection(object? sender, OklabColor color)
     { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightColor(color); }
     private void OnBasicColorRange(object sender, RoutedEventArgs e)
     {
         if (_editor is null || sender is not Button button) return;
-        _editor.AddAdjustmentNodeCommand.Execute("ColorRange");
         var sample = button.Tag?.ToString() switch { "Red" => new VisualRgb24(220, 50, 45), "Green" => new VisualRgb24(55, 160, 60), _ => new VisualRgb24(35, 80, 220) };
+        var existing = _editor.AdjustmentStack.Nodes.FirstOrDefault(node => node.Type == ColorStudioNodeType.ColorRange && node.Samples.Count == 1 && node.Samples[0] == sample);
+        if (existing is not null) { _editor.SelectedAdjustmentNode = existing; return; }
+        _editor.BeginEditTransaction();
+        _editor.AddAdjustmentNodeCommand.Execute("ColorRange");
         _editor.AddDisplayedSample(sample); AuxModes.SelectedIndex = 3;
+        _editor.CommitEditTransaction();
+    }
+    private void OnStartRangeSampling(object sender, RoutedEventArgs e)
+    {
+        if (_editor is null) return;
+        if (_editor.SelectedAdjustmentNode?.Type != ColorStudioNodeType.ColorRange)
+            _editor.AddAdjustmentNodeCommand.Execute("ColorRange");
+        _editor.StartSamplingCommand.Execute("普通取样");
     }
     private void OnFilmPresetSelected(object sender, SelectionChangedEventArgs e)
     {
         if (_editor is null || sender is not ListBox { SelectedItem: PixelTartFilmProfile profile }) return;
-        _editor.FilmProfileId = profile.Id; _editor.FilmEnabled = true; ToolModes.SelectedIndex = 5;
+        _editor.FilmProfileId = profile.Id; _editor.FilmEnabled = true; ToolModes.SelectedIndex = 4;
     }
     private void OnFilmstripMore(object sender, RoutedEventArgs e)
     {

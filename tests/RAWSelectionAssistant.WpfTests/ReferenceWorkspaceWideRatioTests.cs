@@ -100,11 +100,27 @@ public sealed class ReferenceWorkspaceWideRatioTests
         Assert.IsTrue(analysis.ActualWidth <= editing.ActualWidth);
         Assert.IsTrue(rgb.TranslatePoint(new Point(0,rgb.ActualHeight),view).Y <= luma.TranslatePoint(new Point(),view).Y);
         Assert.IsTrue(luma.TranslatePoint(new Point(0,luma.ActualHeight),view).Y <= tools.TranslatePoint(new Point(),view).Y);
-        Assert.HasCount(4, aux.Items); Assert.HasCount(7, tools.Items);
+        Assert.HasCount(4, aux.Items); Assert.HasCount(5, tools.Items);
         foreach (var (id, page) in new[] { (0,"ReferencePage"), (1,"SpacePage"), (2,"PresetsPage"), (3,"NodesPage") })
         { aux.SelectedIndex=id; Arrange(view,1920,1080); Assert.AreEqual(Visibility.Visible,((FrameworkElement)view.FindName(page)).Visibility); }
-        foreach (var (id, page) in new[] { (0,"SpaceToolPage"), (1,"ColorToolPage"), (2,"LevelsToolPage"), (3,"CurveToolPage"), (4,"DetailsToolPage"), (5,"FilmToolPage"), (6,"CreativeToolPage") })
+        foreach (var (id, page) in new[] { (0,"BasicToolPage"), (1,"ColorToolPage"), (2,"ToneToolPage"), (3,"DetailsToolPage"), (4,"StylizedToolPage") })
         { tools.SelectedIndex=id; Arrange(view,1920,1080); Assert.AreEqual(Visibility.Visible,((FrameworkElement)view.FindName(page)).Visibility); Assert.IsTrue(((FrameworkElement)view.FindName(page)).ActualHeight>0); }
+        tools.SelectedIndex=2; Arrange(view,1920,1080);
+        foreach (var page in new[] { "LevelsToolPage", "CurveToolPage" })
+        {
+            var child = (FrameworkElement)view.FindName(page);
+            Assert.AreEqual(Visibility.Visible, child.Visibility, page);
+            Assert.AreSame(view.FindName("ToneToolPage"), child.Parent, page);
+            Assert.IsTrue(child.ActualHeight > 0, page);
+        }
+        tools.SelectedIndex=4; Arrange(view,1920,1080);
+        foreach (var page in new[] { "FilmToolPage", "CreativeToolPage" })
+        {
+            var child = (FrameworkElement)view.FindName(page);
+            Assert.AreEqual(Visibility.Visible, child.Visibility, page);
+            Assert.AreSame(view.FindName("StylizedToolPage"), child.Parent, page);
+            Assert.IsTrue(child.ActualHeight > 0, page);
+        }
         await Task.CompletedTask;
     });
 
@@ -157,6 +173,34 @@ public sealed class ReferenceWorkspaceWideRatioTests
         Arrange(view, 1180, 720); Assert.IsTrue(FindNamed<FrameworkElement>(view,"PreviewCanvas").ActualWidth>400);
         Assert.IsLessThanOrEqualTo(1180, FindNamed<FrameworkElement>(view, "WorkspaceGrid").ActualWidth);
         editor.FocusView = true; Arrange(view, 1600, 900); Assert.AreEqual(Visibility.Collapsed, edit.Visibility); Assert.AreEqual(Visibility.Collapsed, context.Visibility);
+        await Task.CompletedTask;
+    });
+
+    [TestMethod]
+    public Task DockingAndRailResizeKeepOneSelectionAndPersistLayout() => RuntimeCorrectionWpfTests.RunSta(async () =>
+    {
+        RuntimeCorrectionWpfTests.EnsureTestApplication();
+        using var workspace = new ReferenceColorWorkspaceViewModel(new TestDialogs());
+        var view = new ReferenceColorWorkspaceView { DataContext = workspace };
+        Arrange(view, 1600, 920);
+        var filmstrip = (System.Windows.Controls.ListBox)view.FindName("Filmstrip");
+        var items = filmstrip.ItemsSource;
+        var left = (System.Windows.Controls.Primitives.Thumb)view.FindName("LeftResize");
+        left.RaiseEvent(new System.Windows.Controls.Primitives.DragDeltaEventArgs(50, 0));
+        Assert.AreEqual(340, workspace.Layout.AuxiliaryWidth);
+        workspace.Layout = workspace.Layout with { FilmstripDock = "Right", FilmstripView = "List" };
+        Arrange(view, 1600, 920);
+        var panel = (FrameworkElement)view.FindName("FilmstripPanel");
+        Assert.AreEqual(1, System.Windows.Controls.Grid.GetColumn(panel));
+        Assert.AreEqual(1, System.Windows.Controls.Grid.GetRow(panel));
+        Assert.AreSame(items, filmstrip.ItemsSource);
+        Assert.IsGreaterThan(350, ((FrameworkElement)view.FindName("PreviewCanvas")).ActualWidth);
+        workspace.Layout = workspace.Layout with { FilmstripDock = "Bottom", FilmstripView = "Slideshow" };
+        Arrange(view, 1600, 920);
+        Assert.AreEqual(2, System.Windows.Controls.Grid.GetRow(panel));
+        Assert.AreEqual(Visibility.Visible, ((FrameworkElement)view.FindName("SlideshowPlay")).Visibility);
+        Assert.AreEqual(Visibility.Visible, ((FrameworkElement)view.FindName("SlideshowNext")).Visibility);
+        Assert.AreSame(items, filmstrip.ItemsSource);
         await Task.CompletedTask;
     });
 

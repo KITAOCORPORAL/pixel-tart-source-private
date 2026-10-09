@@ -6,6 +6,26 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class ColorStudioSessionStateTests
 {
     [TestMethod]
+    public async Task LayoutRoundTripPreservesWidthsModesAndOldFilesRemainCompatible()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "Studio-layout-" + Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            var path = Path.Combine(root, "layout.ptstudio.json");
+            var layout = new ColorStudioLayout(330, 410, false, false, 2, 4, "Right", "Slideshow", false);
+            await ColorStudioSessionStore.SaveAsync(path, new([], null, Layout: layout));
+            Assert.AreEqual(layout, (await ColorStudioSessionStore.LoadAsync(path)).Layout);
+            await File.WriteAllTextAsync(path, "{\"targets\":[],\"activeTargetId\":null,\"version\":1}");
+            Assert.IsNull((await ColorStudioSessionStore.LoadAsync(path)).Layout);
+            var invalid = new ColorStudioLayout(double.NaN, double.PositiveInfinity, AuxiliaryMode: 99, ToolMode: -2).Normalize();
+            Assert.AreEqual(290, invalid.AuxiliaryWidth); Assert.AreEqual(340, invalid.EditingWidth);
+            Assert.AreEqual(3, invalid.AuxiliaryMode); Assert.AreEqual(0, invalid.ToolMode);
+            Assert.AreEqual("Bottom", (new ColorStudioLayout(FilmstripDock: "Unknown")).Normalize().FilmstripDock);
+            Assert.AreEqual("Grid", (new ColorStudioLayout(FilmstripView: "Unknown")).Normalize().FilmstripView);
+        }
+        finally { Directory.Delete(root, true); }
+    }
+    [TestMethod]
     public void CategorySyncPreservesMultipleRangesAndUnselectedNodesWithoutDuplicateIds()
     {
         ColorAdjustmentStackNode Node(ColorStudioNodeType type, string name) => new(Guid.NewGuid(), type, name);

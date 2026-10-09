@@ -132,6 +132,7 @@ public static class ReferenceColorTargetBuilder
     public static ReferenceColorTarget FromLook(ReferenceLook look)
     {
         look = look.Normalize();
+        if (look.AlgorithmVersion == 2) return ReferencePixelStatistics.Combine(look).Colors;
         var samples = look.ReferenceSources.SelectMany(reference => reference.Analysis.Palette.Select(color =>
             (Color: OklabColorSpace.FromSrgb(color.Rgb), Weight: reference.Weight * color.Weight))).ToArray();
         var zones = Enumerable.Range(0, 3).Select(zone => Build(samples, zone)).ToArray();
