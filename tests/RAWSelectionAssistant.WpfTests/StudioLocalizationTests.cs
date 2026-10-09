@@ -23,7 +23,7 @@ public sealed class StudioLocalizationTests
         Assert.IsNotNull(directory);
         var source = File.ReadAllText(Path.Combine(directory.FullName, "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml"));
         Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(source, "(?:Text|Content|Header|ToolTip|AutomationProperties.Name)=\"[^\"{]*[\\u4e00-\\u9fff][^\"{]*\""), "Product literals must use resources, not hard-coded Chinese.");
-        var keys = System.Text.RegularExpressions.Regex.Matches(source, @"\{views:StudioText (?:Key=')?([^}']+)'?\}").Select(m => m.Groups[1].Value).Distinct();
+        var keys = System.Text.RegularExpressions.Regex.Matches(source, @"\{views:StudioText (?:Key=')?([^}']+)'?\}").Select(m => m.Groups[1].Value).Append("Export").Distinct();
         var service = new StudioLocalizationService(null);
         foreach (var language in service.Languages)
         {
@@ -107,6 +107,25 @@ public sealed class StudioLocalizationTests
             foreach (var language in strings.Languages)
                 foreach (var parameter in ColorStudioToolCatalog.Parameters)
                 { Assert.IsTrue(strings.HasTranslation(language.Code, parameter.Label), parameter.Label); Assert.IsTrue(strings.HasTranslation(language.Code, parameter.Group), parameter.Group); }
+        }
+        finally { strings.SetLanguage(original, persist: false); }
+    });
+    [TestMethod]
+    public Task ComposedImportSummaryRefreshesAfterLanguageSwitchWithoutReimport() => RunSta(async () =>
+    {
+        var strings = StudioLocalizationService.Current; var original = strings.Language;
+        using var editor = new TetherReferenceModeViewModel();
+        var label = new TextBlock();
+        label.SetBinding(TextBlock.TextProperty, new Binding(nameof(editor.StatusText)) { Source = editor });
+        try
+        {
+            editor.SetXmpImportSummary(2, 3);
+            foreach (var language in new[] { "zh-CN", "en-US", "zh-TW", "zh-CN" })
+            {
+                strings.SetLanguage(language, persist: false);
+                await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind);
+                Assert.AreEqual(strings.Format("XmpImportSummary", 2, 3), label.Text);
+            }
         }
         finally { strings.SetLanguage(original, persist: false); }
     });

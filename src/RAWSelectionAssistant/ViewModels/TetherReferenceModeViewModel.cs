@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -315,6 +317,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         MatchV4ProductExecutor? matchV4Executor = null)
     {
         _store = store ?? new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
+        PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnLanguageChanged, nameof(StudioLocalizationService.Language));
         _schemeStore = schemeStore ?? new ColorStudioSchemeStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals"));
         _xmpStore = new(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals", "adobe-xmp"));
         _xmpImportService = new(_xmpStore);
@@ -730,8 +733,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             var imported = await _xmpImportService.ImportAsync(paths, token: _lifetime.Token);
             foreach (var preset in imported) { AdobeXmpPresets.Remove(AdobeXmpPresets.FirstOrDefault(item => item.SourceHash == preset.SourceHash)!); AdobeXmpPresets.Insert(0, preset); }
             if (imported.Count > 0) SelectedAdobeXmpPreset = imported[0];
-            _xmpImportCounts = (imported.Count, paths.Count); StatusText = "XmpImportSummary";
-            OnPropertyChanged(nameof(StatusText));
+            SetXmpImportSummary(imported.Count, paths.Count);
         }
         catch (OperationCanceledException) { StatusText = "已停止导入预设。"; }
         catch (Exception) { StatusText = "Adobe XMP 导入失败；已有预设保持不变。"; }
@@ -1126,7 +1128,13 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         foreach (var name in new[] { nameof(FilmEnabled), nameof(FilmProfileId), nameof(FilmProfileAmount), nameof(FilmGrainAmount), nameof(FilmGrainSize), nameof(FilmHalationAmount), nameof(FilmBloomAmount), nameof(FilmVignetteAmount), nameof(FilmSurfaceAmount), nameof(FilmTextureId), nameof(FilmTextureAmount), nameof(FilmSeed) }) OnPropertyChanged(name);
     }
     private void RaiseViewProperties(){foreach(var name in new[]{nameof(ShowOriginal),nameof(ShowMatched),nameof(ShowSplit),nameof(ShowSideBySide),nameof(EffectiveViewMode)})OnPropertyChanged(name);}
-    public void Dispose(){Interlocked.Increment(ref _revision);_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();_previewCache.Clear();}
+    internal void SetXmpImportSummary(int imported, int requested)
+    {
+        _xmpImportCounts = (imported, requested); StatusText = "XmpImportSummary";
+        OnPropertyChanged(nameof(StatusText));
+    }
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs args) => OnPropertyChanged(nameof(StatusText));
+    public void Dispose(){PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnLanguageChanged, nameof(StudioLocalizationService.Language));Interlocked.Increment(ref _revision);_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();_previewCache.Clear();}
 }
 
 public sealed record ReferenceSourceCategory(string Label, string? Kind);
