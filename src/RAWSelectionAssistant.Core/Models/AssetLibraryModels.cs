@@ -44,6 +44,28 @@ public sealed record AssetImportRequest(
     bool ComputeContentHash = false,
     AssetDuplicateBehavior DuplicateBehavior = AssetDuplicateBehavior.Skip);
 
+public enum AssetImportIdentityDisposition
+{
+    Imported,
+    ExistingPath,
+    ExistingContent,
+    Ambiguous,
+    Missing
+}
+
+public sealed record AssetImportIdentity(
+    Guid AssetId,
+    string SourcePath,
+    string? ContentHash,
+    AssetImportIdentityDisposition Disposition,
+    bool IsMissing);
+
+public sealed record AssetImportIdentityResult(
+    IReadOnlyList<AssetImportIdentity> Items,
+    bool Cancelled,
+    TimeSpan Elapsed,
+    IReadOnlyList<string> Warnings);
+
 public enum AssetDuplicateBehavior
 {
     Skip,

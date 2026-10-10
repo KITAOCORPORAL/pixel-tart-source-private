@@ -25,6 +25,30 @@ public sealed record AssetLibraryStableReference
     public string ContentHash { get; }
 }
 
+public enum AssetResolutionStatus
+{
+    Available,
+    Offline,
+    Changed,
+    Ambiguous,
+    Missing
+}
+
+public sealed record AssetResolutionRequest(Guid LibraryId, Guid AssetId, string? ExpectedContentHash = null)
+{
+    public string? NormalizedExpectedContentHash => string.IsNullOrWhiteSpace(ExpectedContentHash)
+        ? null
+        : ExpectedContentHash.Trim().ToLowerInvariant();
+}
+
+public sealed record AssetResolutionResult(
+    AssetResolutionStatus Status,
+    Guid LibraryId,
+    Guid AssetId,
+    string? ResolvedPath = null,
+    string? ActualContentHash = null,
+    string? Message = null);
+
 public sealed record AssetDimensionBackfillResult(int Scanned, int Updated, int Skipped, int Failed, bool Cancelled,
     IReadOnlyList<string> Warnings);
 
@@ -37,6 +61,12 @@ public interface IAssetLibraryRepository : IAsyncDisposable
         IEnumerable<AssetImportRequest> requests,
         CancellationToken cancellationToken = default,
         IProgress<int>? progress = null);
+
+    Task<AssetImportIdentityResult> ImportWithIdentitiesAsync(
+        IEnumerable<AssetImportRequest> requests,
+        CancellationToken cancellationToken = default,
+        IProgress<int>? progress = null) =>
+        throw new NotSupportedException("此素材库仓储尚未提供带身份的导入结果。");
 
     Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default);
     Task<AssetDimensionBackfillResult> BackfillMissingDimensionsAsync(CancellationToken cancellationToken = default, IProgress<int>? progress = null);

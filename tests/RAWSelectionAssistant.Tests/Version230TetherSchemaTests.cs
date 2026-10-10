@@ -9,13 +9,13 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class Version230TetherSchemaTests
 {
     [TestMethod]
-    public async Task DefaultMigration_RecordsSchemaVersionFour()
+    public async Task DefaultMigration_RecordsCurrentSchemaVersion()
     {
         using var setup = await SetupAsync();
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(6L, (long)(await command.ExecuteScalarAsync())!);
+        Assert.AreEqual(7L, (long)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
@@ -34,7 +34,7 @@ public sealed class Version230TetherSchemaTests
         using var setup = await SetupAsync();
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
-        command.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'Tether%' ORDER BY name;";
+        command.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('TetherSessions','TetherAssets','TetherAnnotations') ORDER BY name;";
         var names = new List<string>();
         await using var reader = await command.ExecuteReaderAsync();
         while (await reader.ReadAsync()) names.Add(reader.GetString(0));
@@ -56,7 +56,7 @@ public sealed class Version230TetherSchemaTests
         var migrator = new DatabaseMigrator(setup.Database, new DatabaseBackupService(setup.Database, setup.Temp.Combine("second-backups")));
         var second = await migrator.MigrateAsync();
         Assert.IsTrue(second.Success);
-        Assert.AreEqual(6, second.CurrentVersion);
+        Assert.AreEqual(7, second.CurrentVersion);
         Assert.HasCount(0, second.AppliedMigrations);
         await using var connection = await setup.Database.OpenConnectionAsync(); await using var command = connection.CreateCommand(); command.CommandText = "PRAGMA integrity_check;";
         Assert.AreEqual("ok", Convert.ToString(await command.ExecuteScalarAsync()));
@@ -135,7 +135,7 @@ public sealed class Version230TetherSchemaTests
         var result = await new DatabaseMigrator(database, backup).MigrateAsync();
         Assert.IsTrue(result.Success);
         Assert.AreEqual(2, result.PreviousVersion);
-        Assert.AreEqual(6, result.CurrentVersion);
+        Assert.AreEqual(7, result.CurrentVersion);
         Assert.IsNotNull(result.BackupPath);
         Assert.IsTrue(File.Exists(result.BackupPath));
         Assert.AreEqual(1L, await CountAsync(database, "SELECT COUNT(*) FROM ShootBookings;"));

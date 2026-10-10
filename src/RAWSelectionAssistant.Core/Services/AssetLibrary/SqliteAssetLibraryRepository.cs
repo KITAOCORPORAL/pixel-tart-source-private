@@ -84,11 +84,23 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         CancellationToken cancellationToken = default,
         IProgress<int>? progress = null)
     {
+        var result = await ImportWithIdentitiesAsync(requests, cancellationToken, progress).ConfigureAwait(false);
+        if (result.Cancelled)
+            return new(0, 0, 0, true, result.Elapsed, result.Warnings);
+        var imported = result.Items.Count(item => item.Disposition is AssetImportIdentityDisposition.Imported or AssetImportIdentityDisposition.Missing);
+        var skipped = result.Items.Count(item => item.Disposition is AssetImportIdentityDisposition.ExistingPath or AssetImportIdentityDisposition.ExistingContent or AssetImportIdentityDisposition.Ambiguous);
+        var missing = result.Items.Count(item => item.IsMissing);
+        return new(imported, skipped, missing, false, result.Elapsed, result.Warnings);
+    }
+
+    public async Task<AssetImportIdentityResult> ImportWithIdentitiesAsync(
+        IEnumerable<AssetImportRequest> requests,
+        CancellationToken cancellationToken = default,
+        IProgress<int>? progress = null)
+    {
         var started = DateTimeOffset.UtcNow;
-        var imported = 0;
-        var skipped = 0;
-        var missing = 0;
         var warnings = new List<string>();
+        var identities = new List<AssetImportIdentity>();
         var createdManagedCopies = new List<string>();
         var materialized = requests.Where(x => !string.IsNullOrWhiteSpace(x.SourcePath)).ToArray();
         try
@@ -103,23 +115,36 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
                 var sourcePath = Path.GetFullPath(request.SourcePath);
                 var normalized = NormalizePath(sourcePath);
                 var duplicateDiscriminator = request.DuplicateBehavior == AssetDuplicateBehavior.ImportIndependentRecord ? Guid.NewGuid().ToString("N") : string.Empty;
+                var existingId = request.DuplicateBehavior == AssetDuplicateBehavior.Skip ? await FindAssetIdAsync(connection, transaction, normalized, cancellationToken).ConfigureAwait(false) : null;
                 var info = new FileInfo(sourcePath);
                 if (!info.Exists)
                 {
-                    missing++;
                     warnings.Add($"Missing source: {Path.GetFileName(sourcePath)}");
-                    await UpsertAssetAsync(connection, transaction, Guid.NewGuid(), sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath: null, precomputedContentHash: null, cancellationToken).ConfigureAwait(false);
-                    imported++;
+                    var missingAssetId = existingId ?? Guid.NewGuid();
+                    await UpsertAssetAsync(connection, transaction, missingAssetId, sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath: null, precomputedContentHash: null, cancellationToken).ConfigureAwait(false);
+                    identities.Add(new(missingAssetId, sourcePath, null, AssetImportIdentityDisposition.Missing, true));
                     progress?.Report(index + 1);
                     continue;
                 }
 
-                var existingId = request.DuplicateBehavior == AssetDuplicateBehavior.Skip ? await FindAssetIdAsync(connection, transaction, normalized, cancellationToken).ConfigureAwait(false) : null;
                 var contentHash = request.ComputeContentHash ? await ComputeHashAsync(sourcePath, cancellationToken).ConfigureAwait(false) : null;
                 if (request.DuplicateBehavior == AssetDuplicateBehavior.Skip && contentHash is not null)
                 {
-                    var hashMatch = await FindAssetIdByContentHashAsync(connection, transaction, contentHash, cancellationToken).ConfigureAwait(false);
-                    if (hashMatch is not null && hashMatch != existingId) { skipped++; progress?.Report(index + 1); continue; }
+                    var hashMatches = await FindAssetIdsByContentHashAsync(connection, transaction, contentHash, cancellationToken).ConfigureAwait(false);
+                    if (hashMatches.Count > 1 && (existingId is null || !hashMatches.Contains(existingId.Value)))
+                    {
+                        warnings.Add($"Ambiguous content identity: {Path.GetFileName(sourcePath)}");
+                        identities.Add(new(Guid.Empty, sourcePath, contentHash, AssetImportIdentityDisposition.Ambiguous, false));
+                        progress?.Report(index + 1);
+                        continue;
+                    }
+                    var hashMatch = hashMatches.Count == 1 ? hashMatches[0] : existingId;
+                    if (hashMatch is not null && hashMatch != existingId)
+                    {
+                        identities.Add(new(hashMatch.Value, sourcePath, contentHash, AssetImportIdentityDisposition.ExistingContent, false));
+                        progress?.Report(index + 1);
+                        continue;
+                    }
                 }
                 var assetId = existingId ?? Guid.NewGuid();
                 string? managedCopyPath = null;
@@ -133,7 +158,8 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
                 }
 
                 await UpsertAssetAsync(connection, transaction, assetId, sourcePath, normalized, duplicateDiscriminator, info, request, managedCopyPath, contentHash, cancellationToken).ConfigureAwait(false);
-                if (existingId is null) imported++; else skipped++;
+                identities.Add(new(assetId, sourcePath, contentHash,
+                    existingId is null ? AssetImportIdentityDisposition.Imported : AssetImportIdentityDisposition.ExistingPath, false));
                 progress?.Report(index + 1);
             }
             await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
@@ -141,7 +167,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         catch (OperationCanceledException)
         {
             DeleteManagedCopies(createdManagedCopies);
-            return new(0, 0, 0, true, DateTimeOffset.UtcNow - started, warnings);
+            return new([], true, DateTimeOffset.UtcNow - started, warnings);
         }
         catch
         {
@@ -149,7 +175,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
             throw;
         }
 
-        return new(imported, skipped, missing, false, DateTimeOffset.UtcNow - started, warnings);
+        return new(identities, false, DateTimeOffset.UtcNow - started, warnings);
     }
 
     public async Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default)
@@ -807,9 +833,17 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = "SELECT AssetId FROM AssetItems WHERE NormalizedSourcePath=$path AND DuplicateDiscriminator='' LIMIT 1;"; command.Parameters.AddWithValue("$path", normalized); var value = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false); return value is string id && Guid.TryParse(id, out var parsed) ? parsed : null;
     }
 
-    private static async Task<Guid?> FindAssetIdByContentHashAsync(SqliteConnection connection, SqliteTransaction transaction, string contentHash, CancellationToken cancellationToken)
+    private static async Task<IReadOnlyList<Guid>> FindAssetIdsByContentHashAsync(SqliteConnection connection, SqliteTransaction transaction, string contentHash, CancellationToken cancellationToken)
     {
-        await using var command = connection.CreateCommand(); command.Transaction = transaction; command.CommandText = "SELECT AssetId FROM AssetItems WHERE ContentHash=$hash LIMIT 1;"; command.Parameters.AddWithValue("$hash", contentHash); var value = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false); return value is string id && Guid.TryParse(id, out var parsed) ? parsed : null;
+        var result = new List<Guid>();
+        await using var command = connection.CreateCommand();
+        command.Transaction = transaction;
+        command.CommandText = "SELECT AssetId FROM AssetItems WHERE ContentHash=$hash ORDER BY AssetId;";
+        command.Parameters.AddWithValue("$hash", contentHash);
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+            if (Guid.TryParse(reader.GetString(0), out var parsed)) result.Add(parsed);
+        return result;
     }
 
     private static async Task UpsertAssetAsync(SqliteConnection connection, SqliteTransaction transaction, Guid assetId, string sourcePath, string normalized, string duplicateDiscriminator, FileInfo info, AssetImportRequest request, string? managedCopyPath, string? precomputedContentHash, CancellationToken cancellationToken)
