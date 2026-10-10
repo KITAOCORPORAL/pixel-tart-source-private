@@ -30,4 +30,4 @@
 
 自动测试和 Release 构建通过。由于实机未运行、用户未验收、第二批与第三批明确未实施，本批结论为 `NOT_READY_FOR_USER_RETEST`，`USER_ACCEPTANCE=NOT_APPROVED`。
 
-推送分支和最终 SHA 见 `GIT_PUSH_VERIFICATION.md` 及最终交付回复。
+已推送分支：`feature/pixel-tart-integrated-workflow-color-docs`。首次完整代码与文档推送 SHA 为 `d962737b841679d38ad0925ecf41da5714a9996d`；最终核验提交 SHA 见最终交付回复。

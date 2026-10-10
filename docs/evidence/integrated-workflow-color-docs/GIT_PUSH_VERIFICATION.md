@@ -10,6 +10,11 @@
 
 ## 推送状态
 
-本文件创建时，文档提交和远端推送尚未执行。完成敏感信息扫描、明确路径暂存和推送后，将以单独的验证提交更新本文件。最终远端 SHA 以该更新和交付回复中的 `git ls-remote` 结果为准。
+- 分支：`feature/pixel-tart-integrated-workflow-color-docs`
+- 首次完整代码与文档推送 SHA：`d962737b841679d38ad0925ecf41da5714a9996d`
+- 核验：`git rev-parse HEAD` 与 `git ls-remote origin refs/heads/feature/pixel-tart-integrated-workflow-color-docs` 一致。
+- 首次推送后工作区：clean。
 
-禁止操作均未发生：未 force push、未向 main 提交、未重写集成分支历史。
+本文件的核验更新以单独提交推送。该最终提交的本地/远端一致性由推送后的命令再次确认，并记录在最终交付回复。
+
+禁止操作均未发生：未 force push、未向 main 提交、未重写集成分支历史。PUSH=PASS。
