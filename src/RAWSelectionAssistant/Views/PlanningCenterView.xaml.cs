@@ -74,6 +74,33 @@ public partial class PlanningCenterView : UserControl
             "ShotScene" => "场景", "ShotEstimatedMinutes" => "预计分钟", "SourceSearch" => "搜索视觉资料", _ => "编辑内容" });
         return box;
     }
+    private WrapPanel DocumentFormattingToolbar(TextBox editor)
+    {
+        var panel = new WrapPanel { Margin = new Thickness(0, 10, 0, 4) };
+        void Apply(PlanningTextCommand command)
+        {
+            var edit = PlanningDocumentTextEditing.Apply(editor.Text, editor.SelectionStart, editor.SelectionLength, command);
+            editor.Text = edit.Text; editor.Focus(); editor.Select(edit.SelectionStart, edit.SelectionLength);
+        }
+        void Add(string label, PlanningTextCommand command)
+        {
+            var button = Action(label, () => Apply(command)); button.Margin = new Thickness(0, 0, 6, 6);
+            AutomationProperties.SetAutomationId(button, "PlanningFormat" + command); panel.Children.Add(button);
+        }
+        Add("标题 1", PlanningTextCommand.Heading1); Add("标题 2", PlanningTextCommand.Heading2);
+        Add("粗体", PlanningTextCommand.Bold); Add("斜体", PlanningTextCommand.Italic);
+        Add("项目符号", PlanningTextCommand.BulletedList); Add("编号", PlanningTextCommand.NumberedList);
+        Add("引用", PlanningTextCommand.Quote); Add("分隔线", PlanningTextCommand.Divider);
+        var undo = Action("撤销", () => { if (editor.CanUndo) editor.Undo(); }); undo.Margin = new Thickness(8, 0, 6, 6); panel.Children.Add(undo);
+        var redo = Action("重做", () => { if (editor.CanRedo) editor.Redo(); }); redo.Margin = new Thickness(0, 0, 6, 6); panel.Children.Add(redo);
+        editor.PreviewKeyDown += (_, args) =>
+        {
+            if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) return;
+            if (args.Key == Key.B) { Apply(PlanningTextCommand.Bold); args.Handled = true; }
+            else if (args.Key == Key.I) { Apply(PlanningTextCommand.Italic); args.Handled = true; }
+        };
+        return panel;
+    }
     private void PresentationChanged(object? sender, EventArgs e) => Render();
     private void ViewModelChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -217,8 +244,10 @@ public partial class PlanningCenterView : UserControl
             var status = new ComboBox { ItemsSource = _vm.ProposalStatuses, Width = 140, HorizontalAlignment = HorizontalAlignment.Left };
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
-            DocumentContent.Children.Add(Text("支持 # 标题、- 列表、> 引用、**粗体** 与 --- 分隔线。", 12));
-            DocumentContent.Children.Add(Editor(nameof(_vm.DocumentBody), 8));
+            DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
+            var bodyEditor = Editor(nameof(_vm.DocumentBody), 12);
+            DocumentContent.Children.Add(DocumentFormattingToolbar(bodyEditor));
+            DocumentContent.Children.Add(bodyEditor);
         }
         else
         {
