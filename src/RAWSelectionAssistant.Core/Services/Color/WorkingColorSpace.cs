@@ -8,5 +8,6 @@ public enum WorkingColorSpace
     LinearSRgb,
     DisplayP3,
     AdobeRgb,
-    ProPhotoRgb
+    ProPhotoRgb,
+    AcesCg
 }
