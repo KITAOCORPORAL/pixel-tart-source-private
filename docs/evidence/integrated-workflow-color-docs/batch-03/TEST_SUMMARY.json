@@ -1,0 +1,194 @@
+[
+  {
+    "file": "concurrency-recheck.trx",
+    "sha256": "69F2C3B6AA507DF836086D09C6EBDCDD7CB22EACFA955FF53E423ED9DFB23A80",
+    "total": 58,
+    "passed": 58,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-delivery.trx",
+    "sha256": "ACFE8A86C4CDF03101E2F9587C6BF6FDD9A7B3EAE9BBCE915CDAB6DECBEA053D",
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-final.trx",
+    "sha256": "53062387C0BB6E24BD977F26C7E6481DDD7AE45FAE664814C7289B35B5DD0E20",
+    "total": 1618,
+    "passed": 1611,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "core-focused.trx",
+    "sha256": "611301F3A33956650DC3C8FC32B8F2B44CD8C50A09C22E1B56A7A89986C72BFE",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-full.trx",
+    "sha256": "3B2ACC066C6E1945CEF4D0ABA7604230379E288AB0A69CF9F3B814769C8711C0",
+    "total": 1616,
+    "passed": 1609,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "core-last.trx",
+    "sha256": "AE99EFBF5CF69CF936D02DD8FFFBAA98A109F7F7A6E0BC7503EDAD36C7B59F21",
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-verified.trx",
+    "sha256": "9DF50D3B632308D399B12EEE1ADA7F7BF51940D54176809BC746E6035CE75164",
+    "total": 1619,
+    "passed": 1613,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "document-fixed.trx",
+    "sha256": "32A23520EE4C1FBB4117D77D2EE68D3807254AA02685D6C088BE258BCDC21B55",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "documents-versions.trx",
+    "sha256": "95098AAAB256D0F97D4D4D0B71B90E6924873ED3F57B3E696925B4A0301DC9B6",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "docx-schema-fixed.trx",
+    "sha256": "8376E33DF8D889D18B935ED6ADD9031D752A5B1A5CC44AD0D4525F2FA7AC068F",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "failure-recovery.trx",
+    "sha256": "0A5094B73ECD83B29DB08560FFDAAFCBB0B36182069CBBF6D333ABCBD3172802",
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "focused-final.trx",
+    "sha256": "2383A546CFF21E178C71289208B5B1905432EB7CD1B4182B9758F4721444EC69",
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "identity-cas.trx",
+    "sha256": "F175585C3268E35D40FC65EF7E6EF1DE706721EC02A6EE77312C4F0C9F02902C",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "identity-recheck.trx",
+    "sha256": "53A256EFB80C7B4B7DFF5FFC29AAB475BFFE7E8D795373A218897532C549083A",
+    "total": 44,
+    "passed": 44,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "identity.trx",
+    "sha256": "3666742F4C038A96029EB2583DB0231B36156CD5E80E67955D3AAA8DEA4191E9",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "postreview.trx",
+    "sha256": "6009CEBD273F13BD4474940B50F261557454E6C5D7DE340B043F11A70D620AE6",
+    "total": 60,
+    "passed": 58,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "release-checked.trx",
+    "sha256": "200567A2EA35B37B4E1851F079F7BEC0876887CBA0DFE22DF166253CDFA6ABED",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "release-focused.trx",
+    "sha256": "F7E143A02C47DD20CEE1BDC5C277FDA4DFB8FB17650F7E678434D067B945A105",
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-affected-final.trx",
+    "sha256": "5F34A7A8D24E068FCA674ECF7E3432F1CF78DEDCD4D47C003FF3F8EE390B178C",
+    "total": 47,
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-delivery.trx",
+    "sha256": "B170D5A53E016028B3F8599DBBE24DC76BDAD086AE896C03BBD004CB9F9E29AC",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-final.trx",
+    "sha256": "A3658A471806CDC67C07518384B22C9225CB33C3F160C91C768231E0E00B6BCB",
+    "total": 1527,
+    "passed": 1514,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-full.trx",
+    "sha256": "3DC0C32DE138CAD663910DCAA24BCFE7DADCACB9F7096931830403C3B543B21B",
+    "total": 1527,
+    "passed": 1511,
+    "failed": 3,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-release.trx",
+    "sha256": "1E2F735EE2DA631925D9412A813C8D7734AE9F5B7F262F84B9EC29A8AB857832",
+    "total": 66,
+    "passed": 65,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-verified.trx",
+    "sha256": "F952B055E6DF68BBAD91AFC9FF08430D82C571ABF3C9600739F40A0D8599CF16",
+    "total": 1527,
+    "passed": 1514,
+    "failed": 0,
+    "skipped": 0
+  }
+]
