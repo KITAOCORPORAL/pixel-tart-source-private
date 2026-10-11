@@ -12,6 +12,20 @@ public sealed class StudioVersionRepository(string directory)
     }
     public static Guid DefaultVersionId(string identity)=>new(SHA256.HashData(Encoding.UTF8.GetBytes("default:"+identity)).AsSpan(0,16));
     public static bool SameContent(StudioVersionCatalog catalog,IReadOnlyList<StudioEditVersion> versions,Guid? selected)=>catalog.SelectedId==selected&&JsonSerializer.Serialize(catalog.Versions)==JsonSerializer.Serialize(versions);
+    public async Task<StudioVersionCatalog> CopySelectedAsync(string sourceIdentity,Guid versionId,StudioVersionCatalog target,Guid targetLibrary,Guid targetAsset,string verifiedHash,CancellationToken token=default)
+    {
+        var source=await LoadAsync(sourceIdentity,token);var version=source.Versions.Single(v=>v.Id==versionId);
+        if(!string.Equals(version.SourceHash,verifiedHash,StringComparison.OrdinalIgnoreCase)||Identity(targetLibrary,targetAsset,verifiedHash)!=target.Identity)throw new InvalidDataException("跨库版本源内容不一致。");
+        var existing=target.Versions.FirstOrDefault(v=>v.OriginIdentity==sourceIdentity&&v.OriginVersionId==versionId);
+        if(existing is not null)return target;
+        var copied=version with{Id=Guid.NewGuid(),LibraryId=targetLibrary,AssetId=targetAsset,SourceHash=verifiedHash,OriginIdentity=sourceIdentity,OriginVersionId=versionId,CreatedAt=DateTimeOffset.UtcNow,Name=version.Name+" · 跨库副本"};
+        return await SaveAsync(target,target.Versions.Append(copied).ToArray(),copied.Archived?target.SelectedId:copied.Id,token);
+    }
+    public async Task<string> SaveRecoveryAsync(StudioVersionConflict conflict,CancellationToken token=default)
+    {
+        Directory.CreateDirectory(directory);var path=PathFor(conflict.Repository.Identity)+".recovery-"+Guid.NewGuid().ToString("N")+".json";
+        await using var stream=new FileStream(path,FileMode.CreateNew,FileAccess.Write,FileShare.None);await JsonSerializer.SerializeAsync(stream,conflict,cancellationToken:token);await stream.FlushAsync(token);stream.Flush(true);return path;
+    }
     private string PathFor(string identity)=>Path.Combine(directory,Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(identity)))+".json");
     public async Task<StudioVersionCatalog> LoadAsync(string identity,CancellationToken token=default)
     {

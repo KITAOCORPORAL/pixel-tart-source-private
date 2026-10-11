@@ -267,6 +267,7 @@ public partial class MainWindow : Window
                     if(link is null)return;
                     await RelocateSharedAssetAsync(link.LibraryId,link.AssetId,link.SourceContentHash);
                 };
+            _viewModel.ReferenceColorPage.ResolveVersionConflict=conflict=>{var dialog=new RAWSelectionAssistant.Views.StudioVersionConflictDialog(conflict){Owner=this};dialog.ShowDialog();return Task.FromResult(dialog.Choice);};
             _viewModel.ReferenceColorPage.AssetMetadataSaved = async _ =>
             {
                 if (GetHostedAssetLibraryPage() is { } page) await page.RefreshForSessionAsync();
@@ -319,7 +320,8 @@ public partial class MainWindow : Window
             await page.InitializeForSessionAsync();await page.ViewModel.RelocateAssetAsync(library,asset,hash);
         }
         catch(Exception error)when(error is IOException or InvalidOperationException){RAWSelectionAssistant.Views.ThemedMessageDialog.Show(this,"重新定位未完成",error.Message,RAWSelectionAssistant.Views.ThemedMessageKind.Error);}
-    }    private async void ViewModel_AssetLibraryFilterRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
+    }
+    private async void ViewModel_AssetLibraryFilterRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
     {
         await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Loaded);
         if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host)

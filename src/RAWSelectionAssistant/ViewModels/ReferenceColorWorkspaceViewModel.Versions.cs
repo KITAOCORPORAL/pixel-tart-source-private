@@ -3,6 +3,30 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
+    public AsyncRelayCommand CopyVersionToLibraryCommand {get;private set;}=null!;
+    public Func<StudioVersionConflict,Task<string>>? ResolveVersionConflict {get;set;}
+    private async Task<bool> ResolveConflictAsync(ReferenceTargetItem target,StudioVersionCatalog repository,string reason,CancellationToken token)
+    {
+        var local=System.Text.Json.JsonSerializer.Deserialize<StudioEditVersion[]>(System.Text.Json.JsonSerializer.Serialize(target.EditVersions.ToArray()))!;
+        var conflict=new StudioVersionConflict(repository,local,target.ActiveEditVersionId,reason);
+        await _versionRepository!.SaveRecoveryAsync(conflict,token);
+        var choice=ResolveVersionConflict is null?"Cancel":await ResolveVersionConflict(conflict);
+        if(choice=="Cancel")return false;
+        var latest=await _versionRepository!.LoadAsync(repository.Identity,token);
+        if(latest.Revision!=repository.Revision)throw new IOException("处理界面打开后仓储又发生改变，请重新处理。");
+        StudioVersionCatalog resolved;
+        if(choice=="KeepLocal")
+        {
+            var versions=StudioVersionConflictResolution.PreserveLocalAsNew(conflict);var selected=versions.LastOrDefault(v=>!v.Archived)?.Id;
+            resolved=await _versionRepository.SaveAsync(repository,versions,selected,token);
+        }
+        else if(choice=="Reload")resolved=await _versionRepository.SaveAsync(repository,repository.Versions,repository.SelectedId,token);
+        else return false;
+        target.EditVersions.Clear();foreach(var version in resolved.Versions)target.EditVersions.Add(version);
+        target.VersionCatalog=resolved;target.LoadedCatalogRevision=resolved.Revision;target.ActiveEditVersionId=resolved.SelectedId;
+        if(resolved.Versions.FirstOrDefault(v=>v.Id==resolved.SelectedId) is {} active){target.AppliedLookSnapshot=active.Look;target.ColorAdjustmentStackSnapshot=active.Stack?.DeepClone();target.FilmSettingsSnapshot=active.Film;target.EngineSnapshot=active.Engine;target.ExecutionModeSnapshot=active.Mode;}
+        return true;
+    }
     private readonly StudioVersionRepository? _versionRepository;
     public RelayCommand RenameEditVersionCommand { get; private set; }=null!;
     public AsyncRelayCommand ArchiveEditVersionCommand { get; private set; }=null!;
@@ -15,8 +39,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_versionRepository is null||target.SourceHash is null||target.VersionCatalog is not null)return;
         var key=StudioVersionRepository.Identity(target.LibraryId,target.AssetId,target.SourceHash);
         var catalog=await _versionRepository.LoadAsync(key,token);
-        if(target.LoadedCatalogRevision is long sessionRevision && catalog.Revision!=sessionRevision && target.EditVersions.Count>0 && !StudioVersionRepository.SameContent(catalog,target.EditVersions.ToArray(),target.ActiveEditVersionId))throw new IOException("会话版本与目录修订不同，保留当前会话；请另存后处理冲突。");
-        if(target.RestoredSession && target.LoadedCatalogRevision is null && target.EditVersions.Any(v=>catalog.Versions.Any(c=>c.Id==v.Id&&System.Text.Json.JsonSerializer.Serialize(c)!=System.Text.Json.JsonSerializer.Serialize(v))))throw new IOException("旧会话与目录同名版本内容冲突，未覆盖任何参数。");
+        if(target.LoadedCatalogRevision is long sessionRevision && catalog.Revision!=sessionRevision && target.EditVersions.Count>0 && !StudioVersionRepository.SameContent(catalog,target.EditVersions.ToArray(),target.ActiveEditVersionId)){if(!await ResolveConflictAsync(target,catalog,"会话与仓储修订不同",token))throw new IOException("已取消，恢复快照保留。");return;}
+        if(target.RestoredSession && target.LoadedCatalogRevision is null && target.EditVersions.Any(v=>catalog.Versions.Any(c=>c.Id==v.Id&&System.Text.Json.JsonSerializer.Serialize(c)!=System.Text.Json.JsonSerializer.Serialize(v)))){if(!await ResolveConflictAsync(target,catalog,"旧会话与同 ID 仓储版本不同",token))throw new IOException("已取消，旧快照保留。");return;}
         target.VersionCatalog=catalog;
         if(catalog.Versions.Count==0){if(target.EditVersions.Count==0)target.ActiveEditVersionId=StudioVersionRepository.DefaultVersionId(key);CaptureEditVersion(target);return;}
         if(target.RestoredSession && target.EditVersions.Count==0)CaptureEditVersion(target);
@@ -34,7 +58,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         foreach(var target in Targets.Where(t=>t.SourceHash is not null))
         {
             await LoadPersistentVersionsAsync(target,token);CaptureEditVersion(target);
-            target.VersionCatalog=await _versionRepository.SaveAsync(target.VersionCatalog!,target.EditVersions.ToArray(),target.ActiveEditVersionId,token);target.LoadedCatalogRevision=target.VersionCatalog.Revision;
+            try{target.VersionCatalog=await _versionRepository.SaveAsync(target.VersionCatalog!,target.EditVersions.ToArray(),target.ActiveEditVersionId,token);target.LoadedCatalogRevision=target.VersionCatalog.Revision;}catch(InvalidOperationException){var remote=await _versionRepository.LoadAsync(target.VersionCatalog!.Identity,token);if(!await ResolveConflictAsync(target,remote,"保存期间其他工作区已修改",token))throw new IOException("已取消，当前参数保留。");if(ReferenceEquals(target,ActiveTarget))await ActivateTargetAsync(target);}
         }
         StatusText="编辑版本目录已保存";
     }
@@ -47,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         target.ActiveEditVersionId ??= target.Id; // deterministic default migration for old v1 sessions
         var existing=target.EditVersions.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId);
         var snapshot=new StudioEditVersion(target.ActiveEditVersionId.Value,existing?.Name??"默认版本",existing?.CreatedAt??DateTimeOffset.UtcNow,
-            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){Archived=existing?.Archived??false};
+            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity};
         if(existing is null)target.EditVersions.Add(snapshot);else target.EditVersions[target.EditVersions.IndexOf(existing)]=snapshot;
     }
     public void CreateEditVersion()
@@ -71,6 +95,27 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     private void InitializeVersionCommands()
     {
+        CopyVersionToLibraryCommand=new AsyncRelayCommand(async _=>
+        {
+            if(_versionRepository is null||ActiveTarget is not {} target||target.SourceHash is null)return;if(!await ValidateTargetIdentityAsync(target,CancellationToken.None)){StatusText=target.Error??"源身份验证失败";return;}CaptureEditVersion(target);
+            var root=_dialogs.ChooseFolder("明确选择目标 .ptlibrary",null);if(root is null)return;
+            try
+            {
+                var library=await new RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryContainerService().OpenAsync(root);
+                await using var repository=new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(library.DatabasePath);
+                var candidates=new List<RAWSelectionAssistant.Core.Models.AssetItem>();string? cursor=null;
+                do{var page=await repository.QueryAsync(new(PageSize:500,Cursor:cursor));candidates.AddRange(page.Items.Where(a=>string.Equals(a.ContentHash,target.SourceHash,StringComparison.OrdinalIgnoreCase)));cursor=page.NextCursor;}while(cursor is not null);
+                if(candidates.Count!=1){StatusText="目标库内容身份缺失或歧义，请先确认目标素材";return;}
+                var asset=candidates[0];var resolved=await new RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryIdentityResolver(library,repository).ResolveAsync(new(library.LibraryId,asset.AssetId,target.SourceHash));
+                if(resolved.Status!=RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Available){StatusText=resolved.Message??"目标不可用";return;}
+                if(!_dialogs.Confirm($"复制当前版本到库 {library.DisplayName}，素材 {asset.AssetId:D}？原目录和历史保留。","跨库版本复制"))return;
+                if(!await ValidateTargetIdentityAsync(target,CancellationToken.None))throw new IOException("源内容在确认期间改变。");
+                var confirmed=await new RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryIdentityResolver(library,repository).ResolveAsync(new(library.LibraryId,asset.AssetId,target.SourceHash));if(confirmed.Status!=RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Available)throw new IOException("目标内容在确认期间改变。");
+                await SaveEditVersionsAsync();var key=StudioVersionRepository.Identity(library.LibraryId,asset.AssetId,target.SourceHash);var destination=await _versionRepository.LoadAsync(key);
+                await _versionRepository.CopySelectedAsync(target.VersionCatalog!.Identity,target.ActiveEditVersionId!.Value,destination,library.LibraryId,asset.AssetId,target.SourceHash);StatusText="已复制选中版本，来源记录保留";
+            }
+            catch(Exception e)when(e is IOException or InvalidOperationException or ArgumentException){StatusText="版本复制未完成："+e.Message;}
+        });
         SelectEditVersionCommand=new AsyncRelayCommand(async _=>{if(SelectedCatalogVersion is {} v && !v.Archived)await SwitchEditVersionAsync(v.Id);});
         SaveEditVersionsCommand=new AsyncRelayCommand(async _=>{try{await SaveEditVersionsAsync();}catch(Exception e)when(e is IOException or InvalidOperationException){StatusText="版本保存未完成："+e.Message;}});
         RenameEditVersionCommand=new RelayCommand(_=>{if(ActiveTarget is not {} target||string.IsNullOrWhiteSpace(EditVersionName))return;CaptureEditVersion(target);var index=target.EditVersions.ToList().FindIndex(v=>v.Id==target.ActiveEditVersionId);target.EditVersions[index]=target.EditVersions[index] with{Name=EditVersionName.Trim()};});

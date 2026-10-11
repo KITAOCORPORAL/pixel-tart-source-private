@@ -13,6 +13,21 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate() => RunSta(async()=>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"Kitao-Conflict-"+Guid.NewGuid());Directory.CreateDirectory(root);
+        try
+        {
+            var image=SaveImage(root,"a.png",97);var directory=Path.Combine(root,"versions");var repo=new StudioVersionRepository(directory);
+            using var first=new ReferenceColorWorkspaceViewModel(new Dialogs(),versionRepository:repo);await first.LoadTargetAsync(image);await first.SaveEditVersionsAsync();
+            using var second=new ReferenceColorWorkspaceViewModel(new Dialogs(),versionRepository:new StudioVersionRepository(directory));await second.LoadTargetAsync(image);
+            first.Editor.Exposure=.4;await first.SaveEditVersionsAsync();second.Editor.Exposure=1.2;second.EditVersionName="local rename";second.RenameEditVersionCommand.Execute(null);
+            second.ResolveVersionConflict=conflict=>Task.FromResult("KeepLocal");await second.SaveEditVersionsAsync();Assert.AreEqual(1.2,second.Editor.Exposure);Assert.IsTrue(second.ActiveTarget!.EditVersions.Any(v=>v.Name.Contains("local rename")));
+            var active=second.ActiveTarget;var catalog=active.VersionCatalog!;await repo.SaveAsync(catalog,catalog.Versions.Select(v=>v with{Name=v.Name+" remote"}).ToArray(),catalog.SelectedId);
+            second.ResolveVersionConflict=async conflict=>{await repo.SaveAsync(conflict.Repository,conflict.Repository.Versions.Select(v=>v with{Name=v.Name+" later"}).ToArray(),conflict.Repository.SelectedId);return "KeepLocal";};
+            await Assert.ThrowsAsync<IOException>(()=>second.SaveEditVersionsAsync());Assert.IsTrue(Directory.EnumerateFiles(directory,"*.recovery-*.json").Any());
+        }finally{Directory.Delete(root,true);}
+    });    [TestMethod]
     public Task ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity() => RunSta(async()=>
     {
         var root=Path.Combine(Path.GetTempPath(),"Kitao-CrossSession-"+Guid.NewGuid());Directory.CreateDirectory(root);

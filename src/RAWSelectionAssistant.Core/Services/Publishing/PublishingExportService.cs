@@ -55,12 +55,10 @@ public sealed class PublishingExportService(IPublishingRenderer renderer,Action<
                 var versionId=upstream?.EditVersionId??new Guid(before.AsSpan(0,16));
                 var sourceHash=upstream?.SourceHash??Convert.ToHexString(before);
                 var recovered=false;
-                foreach(var pending in Directory.EnumerateFiles(request.DestinationDirectory,"*.kitao-export.pending.json",SearchOption.AllDirectories))
+                foreach(var candidate in await ExportRecovery.FindRecoverableAsync(request.DestinationDirectory,cancellationToken))
                 {
-                    var candidate=await ExportRecovery.ReadAsync(pending,cancellationToken);
-                    var expectedOutput=pending[..^".kitao-export.pending.json".Length];
-                    if(!string.Equals(Path.GetFullPath(candidate.OutputPath),Path.GetFullPath(expectedOutput),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("恢复清单路径不属于该输出。");
-                    if(candidate.EditVersionId!=versionId||candidate.SourceHash!=sourceHash||System.Text.Json.JsonSerializer.Serialize(candidate.RecipeSnapshot is {} savedRecipe?savedRecipe with{OutputWidth=null,OutputHeight=null}:null)!=System.Text.Json.JsonSerializer.Serialize(structured))continue;
+                    var expectedRoot=Path.GetFullPath(request.DestinationDirectory).TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar;
+                    if(!Path.GetFullPath(candidate.OutputPath).StartsWith(expectedRoot,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("恢复目标越界。");                    if(candidate.EditVersionId!=versionId||candidate.SourceHash!=sourceHash||System.Text.Json.JsonSerializer.Serialize(candidate.RecipeSnapshot is {} savedRecipe?savedRecipe with{OutputWidth=null,OutputHeight=null}:null)!=System.Text.Json.JsonSerializer.Serialize(structured))continue;
                     var recovery=await ExportRecovery.RecoverAsync(candidate.OutputPath,versionId,sourceHash,cancellationToken);
                     if(recovery.State!="Completed")throw new IOException(recovery.Error);
                     results.Add(new(index,PublishingItemState.Completed,source,candidate.OutputPath,new FileInfo(candidate.OutputPath).Length));recovered=true;break;

@@ -114,7 +114,7 @@ public sealed class PublishingSourceSafetyTests
         Assert.AreEqual(TaskLifecycleState.Completed, result.State);
         Assert.HasCount(2, result.Items);
         Assert.IsTrue(result.Items.All(item => item.State == PublishingItemState.Completed));
-        Assert.AreEqual(2, Directory.EnumerateFiles(output, "*", SearchOption.AllDirectories).Count(x=>!x.EndsWith(".json",StringComparison.OrdinalIgnoreCase)));
+        Assert.AreEqual(2, Directory.EnumerateFiles(output, "*", SearchOption.AllDirectories).Count(x=>new[]{".jpg",".png",".tif"}.Contains(Path.GetExtension(x))));
         Assert.AreEqual(2, result.Items.Select(item => item.DestinationPath).Distinct(StringComparer.OrdinalIgnoreCase).Count());
     }
 

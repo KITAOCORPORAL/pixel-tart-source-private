@@ -114,7 +114,7 @@ public sealed class ColorStudioStateClosureTests
             var imported = repository.ImportAsync([new AssetImportRequest(sourcePath)]).GetAwaiter().GetResult();
             var asset = repository.QueryAsync(new AssetLibraryQuery()).GetAwaiter().GetResult().Items.Single();
             repository.UpdateAssetMetadataAsync(asset.AssetId, rating: 4).GetAwaiter().GetResult();
-            new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).SaveAsync([asset.AssetId], color: "蓝").GetAwaiter().GetResult();
+            var annotationStore=new PhotographerAnnotationStore(new AssetLibraryDatabase(repository.DatabasePath));var expected=annotationStore.ReadAsync(asset.AssetId).GetAwaiter().GetResult();annotationStore.CompareExchangeAsync(expected,expected with{Color="蓝"}).GetAwaiter().GetResult();
             using var workspace = new ReferenceColorWorkspaceViewModel(new MetadataDialog(root), assetRepositoryFactory: () => new SqliteAssetLibraryRepository(repository.DatabasePath));
             var target = new ReferenceTargetItem(sourcePath) { AssetId = asset.AssetId, IsSelected = true };
             workspace.Targets.Add(target);

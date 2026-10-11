@@ -391,6 +391,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if(capturedExpected is not {} expected){target.MetadataStatus="标注未读取，请刷新后重试";return;}
         while(target.OwnAnnotationWrites.TryGetValue(expected.Revision,out var own)&&own.Revision>expected.Revision)expected=own;
         var written=await new PhotographerAnnotationStore(new AssetLibraryDatabase(repository.DatabasePath)).CompareExchangeAsync(expected,expected with{Rating=rating??expected.Rating,Color=color??expected.Color});
+        if(written.UndoToken is {} undo){_annotationUndo.Push((repository.DatabasePath,undo));_annotationRedo.Clear();}
         if(written.Applied)target.OwnAnnotationWrites[expected.Revision]=written.Current;
         target.AnnotationSnapshot=written.Current;
         target.MetadataStatus=written.Applied?"已保存到素材库":"标注冲突，已刷新权威状态";
@@ -721,11 +722,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
                 try
                 {
-                    if(!File.Exists(output)&&(File.Exists(output+".kitao-export.json")||File.Exists(output+".kitao-export.pending.json")))throw new IOException("清单已存在而输出缺失，未覆盖。");
-                    if(File.Exists(output))
-                    {
-                        var pendingReceipt=File.Exists(output+".kitao-export.pending.json")?await ExportRecovery.ReadAsync(output+".kitao-export.pending.json",_exportCancellation.Token):null;
-                        var adjustmentHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(new{frozenItem.Look,frozenItem.Stack,frozenItem.Film}))));
+                    var pendingReceipt=(await ExportRecovery.FindRecoverableAsync(directory,_exportCancellation.Token)).FirstOrDefault(x=>string.Equals(x.OutputPath,Path.GetFullPath(output),StringComparison.OrdinalIgnoreCase));
+                    if(File.Exists(output)||pendingReceipt is not null)
+                    {                        var adjustmentHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(new{frozenItem.Look,frozenItem.Stack,frozenItem.Film}))));
                         if(pendingReceipt?.RecipeSnapshot?.AdjustmentFingerprint!=adjustmentHash)throw new IOException("调整参数已变化，不能恢复旧成片清单。");
                         var recovery=await ExportRecovery.RecoverAsync(output,frozenItem.VersionId,frozenItem.SourceHash,_exportCancellation.Token);
                         if(recovery.State=="Completed"){item.OutputPath=output;item.ExportStatus=ReferenceExportStatus.Succeeded;item.Status=ReferenceTargetStatus.Exported;ExportCompleted++;continue;}

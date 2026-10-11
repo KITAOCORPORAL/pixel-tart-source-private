@@ -15,7 +15,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public ColorStudioLayout Layout { get => _layout; set => SetProperty(ref _layout, value.Normalize()); }
     private void InitializeSessionCommands()
     {
-        InitializeVersionCommands();
+        InitializeVersionCommands();InitializeAnnotationUndo();
         UndoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(false), _ => _batchUndo.Count > 0 && !IsLoading && !IsExporting);
         RedoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(true), _ => _batchRedo.Count > 0 && !IsLoading && !IsExporting);
         SaveSessionCommand = new AsyncRelayCommand(async _ =>
@@ -43,7 +43,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
         await ColorStudioSessionStore.SaveAsync(path, document, token);
         await SaveEditVersionsAsync(token);
-        document=document with{Targets=document.Targets.Select(t=>t with{CatalogRevision=Targets.First(x=>x.Id==t.Id).VersionCatalog?.Revision}).ToArray()};
+        document=document with{Targets=Targets.Select(item=>new ColorStudioSessionTarget(item.Id,item.Path,item.AssetId,item.IsSelected,item.AppliedLookSnapshot,item.ColorAdjustmentStackSnapshot,item.FilmSettingsSnapshot,item.EngineSnapshot,item.ExecutionModeSnapshot,item.AssetId is null?item.Rating:null,item.AssetId is null?item.ColorLabel:null,item.LibraryId,item.SourceHash,item.EditVersions.ToArray(),item.ActiveEditVersionId,item.VersionCatalog?.Revision)).ToArray()};
         await ColorStudioSessionStore.SaveAsync(path,document,token);
         SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
     }
